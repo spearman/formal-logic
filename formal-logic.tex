@@ -326,7 +326,14 @@ grammar, covering all possible formal grammars.
 
     A popular notation for $Context$-$free$ $Grammars$ is
     $Backus$-$Naur$ $form$ ($BNF$). The term used in $Linguistics$ for
-    $Context$-$free$ $Grammars$ is $Phrase$ $Structure$ $Grammar$.
+    $Context$-$free$ $Grammar$ is $Phrase$ $Structure$ $Grammar$ which
+    is also called $constituency$ $grammar$ due to the
+    one-to-one-or-many correspondence between the $Productions$
+    (ultimately rooted in the $subject$-$predicate$ clause deriving
+    from $Term$ $Logic$). The alternative is $Dependency$ $Grammar$ in
+    which the $Verb$ is the root and there is a one-to-one
+    correspondence between $Symbols$ and nodes in the syntax
+    structure.
 
     The $Context$-$free$ $Grammar$ is equivalent to
     $Non$-$deterministic$ $Pushdown$ $Automata$.
@@ -425,9 +432,98 @@ grammar, covering all possible formal grammars.
     $Langauges$ by the $Aperiodic$ $Finite$-$state$ $Automaton$, and
     $Linear$ $Temporal$ $Logic$.
 
+\subsubsection{Affix Grammars}
+
+    $Affix$ $Grammars$ are those of a $Context$-$free$ $Grammar$ with
+    a subset of the $Non$-$terminals$ used as $affix$ $arguments$. If
+    the same $affix$ appears multiple places in a $Production$, the
+    $value$ must be the same.
+
+    \paragraph{Two-Level Grammars}
+    Allowing the $values$ for $affixes$ to be described by a
+    $Context$-$free$ $Grammar$ results in a $Two$-$Level$ $Grammar$.
+
+    $Two$-$Level$ $Grammars$ are $Grammar$ generators that may
+    generate $Grammars$ with infinite rules.
+
+    \begin{description}
+    \item[W-grammar] $Van$ $Wijngaarden$ $Grammar$
+    Consists of a finite set of $meta$-$rules$ used to derive a
+    possibly infinite set of $Production$ rules from a finite set of
+    $hyper$-$rules$.
+    \item[Extended Affix Grammar]
+    A restricted $W-grammar$.
+    \end{description}
+
+    \paragraph{Attribute Grammars}
+    $Attribute$ $Grammars$ allows $affixes$ from arbitrary domains and
+    allows functions calculate values of $affixes$.
+
 \subsubsection{Analytic Grammars}
 
+    $Analytic$ $Grammars$ are used in $Parsing$ (see next section).
+
+    \begin{description}
+    \item[Top-Down Parsing Language] Formal representation of a
+      $Recursive$ $Descent$ $Parser$. $Production$ rules of the form
+    \[
+        A \leftarrow \varepsilon
+    \]\[
+        A \leftarrow f
+    \]\[
+        A \leftarrow a
+    \]\[
+        A \leftarrow BC/D
+    \]
+    \item[Parsing Expression Generator]
+    A more generalized $Top$-$Down$ $Parsing$ $Language$.
+    \item[Link Grammar]
+    $Dependency$ $Grammar$ with directionality between $Symbols$.
+    \end{description}
+
 \subsubsection{Automata}
+
+\subsubsection{Parsers}
+
+    A $Parser$ analyzes an $Expression$ according to the rules of a
+    $Formal$ $Grammar$ generating a $Data$ $Structure$ describing the
+    $Syntax$ of the input.
+
+    \paragraph{Lexical Analysis}
+    A $Parser$ may be preceded by a $Lexical$ $Analyzer$ which creates
+    $Tokens$ ($Symbols$) from a string of input
+    $Glyphs$. $Expressions$ of $Tokens$ are referred to as
+    $Phrases$. A $Lexical$ $Analyzer$ is a $Parser$ itself and usually
+    the $Lexical$ $Grammar$ is a $Regular$ $Language$ (other methods
+    are $flags$, $delimiters$, or $dictionary$) and the $Tokens$ are
+    parsed as a $Context$-$free$ or $Attribute$ $Phrase$ $Syntax$.
+
+    Prior to $Scanning$, a $Lexer$ may perform its own $Tokenization$.
+    The $Scanning$ stage first recognizes the $Token$ strings as
+    $Lexemes$, usually achieved by a $Finite$ $State$ $Machine$.
+
+    $Lexemes$ are resolved into $Tokens$ by an $Evaluator$ which
+    assigns values where needed-- this results in $Tokens$ that are
+    either a $Type$-$Value$ pair, or just a $Type$.
+
+    \paragraph{Syntactic Analysis}
+
+    The $Parser$ determines if and how the input can be derived from
+    the $Start$ $Symbol$ of the $Grammar$.
+
+    $Parsing$ can proceed in two directions:
+
+    \begin{description}
+    \item[Top-down Parsing]
+    starts with the highest level of the $Parse$ $Tree$. Proceeds
+    greedily and may be $Exponential$ with $Backtracking$.
+    \item[Bottom-up Parsing]
+    starts with the lowest level of the $Parse$ $Tree$.
+    \end{description}
+
+    Further $Semantic$ $Parsing$ may be performed after these
+    steps. An example of this would be the in the $Compiler$ of a
+    $Programming$ $Language$.
 
 \subsection{Deductive Apparatus}
 
