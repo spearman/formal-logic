@@ -112,7 +112,7 @@ Two special $Symbols$ are recognized:
 
     \begin{description}
 
-    \item[Empty Symbol ($\varepsilon$)] \hfill \\
+    \item[Empty Symbol ($\epsilon$)] \hfill \\
     the $Symbol$ of zero length and a $Terminal$ $Symbol$
 
     \item[Start Symbol ($S$)] \hfill \\
@@ -166,11 +166,11 @@ Let:
         : L \subseteq \Sigma^*
     \]
 
-    \item Existence of the $Empty$ $Symbol$, $\varepsilon$:
+    \item Existence of the $Empty$ $Symbol$, $\epsilon$:
     \[
         \forall \: \Sigma^* \in \mathcal{V} \:
-        \exists ! \: \varepsilon \in \Sigma^*
-        : |\varepsilon|=0
+        \exists ! \: \epsilon \in \Sigma^*
+        : |\epsilon|=0
     \]
 
     \end{description}
@@ -199,7 +199,7 @@ grammar, covering all possible formal grammars.
         \alpha \rightarrow \beta
     \]
     where $\alpha$ and $\beta$ are $Expressions$ of $N \cup T$ and
-    $\alpha \neq \varepsilon$.
+    $\alpha \neq \epsilon$.
 
     A completely unrestricted $Grammar$ is called $recursively$
     $enumerable$ or $Semi$-$decidable$. This means membership of the
@@ -241,7 +241,7 @@ grammar, covering all possible formal grammars.
     Requiring that $S$ does not appear on the right of any
     $Production$ and allowing the rule
     \[
-        S \rightarrow \varepsilon
+        S \rightarrow \epsilon
     \]
     makes the $Context$-$sensitive$ $Languages$ a proper superset of the
     $Context$-$free$ $Languages$.
@@ -353,7 +353,7 @@ grammar, covering all possible formal grammars.
     where $V^0$ and $V^1$ are disjoint sets of $Non$-$terminals$ and
     there are three kinds of $Production$ rules:
     \[
-        X \rightarrow \varepsilon
+        X \rightarrow \epsilon
     \]\[
         X \rightarrow aY
     \]\[
@@ -376,7 +376,7 @@ grammar, covering all possible formal grammars.
     \]\[
         A \rightarrow Bw
     \]\[
-        A \rightarrow \varepsilon
+        A \rightarrow \epsilon
     \]
     $Left:$
     \[
@@ -384,7 +384,7 @@ grammar, covering all possible formal grammars.
     \]\[
         A \rightarrow Bw
     \]\[
-        A \rightarrow \varepsilon
+        A \rightarrow \epsilon
     \]
     where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
     only $Non$-$terminal$ characters.
@@ -399,7 +399,7 @@ grammar, covering all possible formal grammars.
     \]\[
         B \rightarrow aC
     \]\[
-        B \rightarrow \varepsilon
+        B \rightarrow \epsilon
     \]
     $Left:$
     \[
@@ -407,7 +407,7 @@ grammar, covering all possible formal grammars.
     \]\[
         A \rightarrow Ba
     \]\[
-        A \rightarrow \varepsilon
+        A \rightarrow \epsilon
     \]
     where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
     only $Non$-$terminal$ characters.
@@ -420,6 +420,21 @@ grammar, covering all possible formal grammars.
     $Expression$ within a $Regular$ $Language$ may be repeated an
     arbitrary number of times to produce another $Expression$ in that
     same $Language$.
+
+    \subparagraph{k-Testable}
+    A $K$-$Testable$ $Language$ is one where membership of an
+    $Expression$ depends on the first and last symbol and a set of
+    factors of length $k$. An example is a $Local$ $Language$ which is
+    a $2$-$Testable$ $Language$ described by the regular expression:
+    \[
+        (R\Sigma^* \cap \Sigma^*S)\\\Sigma^*F\Sigma^*
+    \]
+    where $R,S \subseteq \Sigma$ and $F \subseteq \Sigma \times
+    \Sigma$. This requires for a $Word$ ($Expression$), $w$, that is a
+    member of a $Local$ $Language$ to have its first $Symbol$ in $R$,
+    and its second $Symbol$ in $S$, and no factor of $w$ of length 2
+    is in $F$. A $Local$ $Language$ is recognized by a $Local$
+    $Automaton$.
 
     \subparagraph{Star-free}
     A $Star$-$free$ $Language$ is one having a $Generalized$ $Star$
@@ -451,8 +466,7 @@ grammar, covering all possible formal grammars.
     Consists of a finite set of $meta$-$rules$ used to derive a
     possibly infinite set of $Production$ rules from a finite set of
     $hyper$-$rules$.
-    \item[Extended Affix Grammar]
-    A restricted $W-grammar$.
+    \item[Extended Affix Grammar] is a restricted $W$-$grammar$.
     \end{description}
 
     \paragraph{Attribute Grammars}
@@ -467,7 +481,7 @@ grammar, covering all possible formal grammars.
     \item[Top-Down Parsing Language] Formal representation of a
       $Recursive$ $Descent$ $Parser$. $Production$ rules of the form
     \[
-        A \leftarrow \varepsilon
+        A \leftarrow \epsilon
     \]\[
         A \leftarrow f
     \]\[
@@ -483,8 +497,10 @@ grammar, covering all possible formal grammars.
 
 \subsubsection{Automata}
     An $Automaton$ reads input strings, $Words$ ($Expressions$), and
-    either accepts or rejects depending on whether that $Word$ is a
-    member of the $Language$ recognized by that $Automaton$.
+    either accepts or rejects depending on whether a $Word$ is a
+    member of the $Language$ recognized by that $Automaton$. By
+    convention the $Vocabulary$ of $Symbols$ will be re-cast as an
+    $Alphabet$, $\Sigma$.
 
     $Automata$ may be arranged in a hierarchy according to increasing power:
     \[
@@ -508,7 +524,10 @@ grammar, covering all possible formal grammars.
     \item $MDTM$ = $Multidimensional$ $Turing$ $Machine$
     \end{itemize}
 
-    \paragraph{Deterministic Finite Automata}
+    \paragraph{Deterministic Finite Automata} is a $Finite$ $State$
+    $Machine$ and works on finite input strings with only one unique
+    computation per input.
+
     Representation of a $Deterministic$ $Finite$ $Automaton$ as a 5-tuple:
     \[
         (Q,\Sigma,\delta,q_0,F)
@@ -523,10 +542,67 @@ grammar, covering all possible formal grammars.
     \item $F \subseteq Q$ is the set of $Accept$ $States$.
     \end{itemize}
 
-    Running for a given input $w = a_1,a_2, \cdots , a_n \in \Sigma*$
+    Running for a given input $w = a_1,a_2, \cdots , a_n \in \Sigma^*$
     produces a sequence of $States$ $q_0,q_1,q_2,\cdots , q_n$ where
     $q_i \in Q$ such that $q_i = \delta (q_{i-1},a_i)$ and $w$ is
     accepted if $q_n \in F$.
+
+    $Deterministic$ $Finite$ $Automata$ recognize $Regular$ $Languages$.
+
+    A recursive definition using composition of $transition$ $functions$
+    \[
+        \widehat{\delta}(q,\epsilon) = q
+    \]\[
+        \widehat{\delta}(q,wa) = \delta_a(\widehat{\delta}(q,w))
+    \]
+    where $w \in \Sigma^*$, $a \in \Sigma$ and $q \in Q$. Repeated
+    application describes the $Transition$ $Monoid$ or
+    $Transformation$ $Semigroup$.
+
+    A kind of $Deterministic$ $Finite$ $Automata$ that recognizes
+    $Local$ $Languages$ is called a $Local$ $Automata$.
+
+    \paragraph{Nondeterministic Finite Automata} are $Finite$ $State$
+    $Machines$ that may transition from one $State$ to a number of
+    different states, given as an element of the powerset of $Q$,
+    $P(Q)$.
+
+    Representation of a $Nondeterministic$ $Finite$ $Automaton$ as a 5-tuple:
+    \[
+        (Q,\Sigma,\Delta,q_0,F)
+    \]
+    where
+    \begin{itemize}
+    \item $Q$ is a finite set of $States$
+    \item $\Sigma$ is the $Alphabet$
+    \item $\Delta$ is a $transition$ $relation$ $\Delta: Q \times
+      \Sigma \rightarrow P(Q)$
+    \item $q_0 \in Q$ is the initial $State$
+    \item $F \subseteq Q$ is the set of $Accept$ $States$.
+    \end{itemize}
+
+    A $Word$, $w=a_1,a_2,\cdots,a_n$, is accepted when there exists a
+    sequence of $States$, $r_0,r_1,\cdots,r_n$ such that
+    \begin{enumerate}
+    \item $r_0 = q_0$
+    \item $r_{i+1} \in \Delta(r_i, a_{i+1})$, for $i = 0, \cdots, n-1$
+    \item $r_n \in F$
+    \end{enumerate}
+
+    A $DFA$ may bee seen as a $NFA$ which restricts transitions to
+    allow only one $State$, and can be constructed from a $NFA$ with
+    $n$ $States$ using $powerset$ $construction$, requiring up to
+    $2^n$ $States$. Both types recognize the same $Regular$
+    $Languages$.
+
+    \subparagraph{NFA-$\epsilon$} is a $NFA$ that allows transitions
+    without consuming input $Symbols$. A transition that changes state
+    without consuming input is an $\epsilon$ $move$. Each $State$ $q$
+    defines an $\epsilon$-$closure$, $E(q)$, which is the set of
+    $States$ that are reachable by $\epsilon$ $moves$.
+
+    The $Languages$ recognized by $NFA$-$\epsilon$ are the same as
+    $NFA$/$DFA$.
 
 \subsubsection{Parsers}
 
