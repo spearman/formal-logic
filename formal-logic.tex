@@ -482,6 +482,51 @@ grammar, covering all possible formal grammars.
     \end{description}
 
 \subsubsection{Automata}
+    An $Automaton$ reads input strings, $Words$ ($Expressions$), and
+    either accepts or rejects depending on whether that $Word$ is a
+    member of the $Language$ recognized by that $Automaton$.
+
+    $Automata$ may be arranged in a hierarchy according to increasing power:
+    \[
+        DFA = NFA \subset DPDA-I \subset NPDA-I \subset LBA \subset DPDA-II =
+    \]\[
+        = NPDA-II = DTM = NTM = PTM = MTM = MDTM
+    \]
+    where
+    \begin{itemize}
+    \item $DFA$ = $Deterministic$ $Finite$ $Automata$
+    \item $NFA$ = $Non$-$deterministic$ $Finite$ $Automata$
+    \item $DPDA$ = $Deterministic$ $Push$ $Down$ $Automata$ with 1
+      or 2 $push$-$down$ $stores$
+    \item $NPDA$ = $Non$-$deterministic$ $Push$ $Down$ $Automata$
+      with 1 or 2 $push$-$down$ $stores$
+    \item $LBA$ = $Linear$ $Bounded$ $Automata$
+    \item $DTM$ = $Deterministic$ $Turing$ $Machine$
+    \item $NTM$ = $Non$-$deterministic$ $Turing$ $Machine$
+    \item $PTM$ = $Probabilistic$ $Turing$ $Machine$
+    \item $MTM$ = $Multitape$ $Turing$ $Machine$
+    \item $MDTM$ = $Multidimensional$ $Turing$ $Machine$
+    \end{itemize}
+
+    \paragraph{Deterministic Finite Automata}
+    Representation of a $Deterministic$ $Finite$ $Automaton$ as a 5-tuple:
+    \[
+        (Q,\Sigma,\delta,q_0,F)
+    \]
+    where
+    \begin{itemize}
+    \item $Q$ is a finite set of $States$
+    \item $\Sigma$ is the $Alphabet$
+    \item $\delta$ is the $transition$ $function$ $\delta: Q \times
+      \Sigma \rightarrow Q$
+    \item $q_0 \in Q$ is the initial $State$
+    \item $F \subseteq Q$ is the set of $Accept$ $States$.
+    \end{itemize}
+
+    Running for a given input $w = a_1,a_2, \cdots , a_n \in \Sigma*$
+    produces a sequence of $States$ $q_0,q_1,q_2,\cdots , q_n$ where
+    $q_i \in Q$ such that $q_i = \delta (q_{i-1},a_i)$ and $w$ is
+    accepted if $q_n \in F$.
 
 \subsubsection{Parsers}
 
