@@ -23,6 +23,22 @@
 
 \part{Formal Systems}
 
+\section{Abstract Reduction Systems}
+The following definitions of $Grammars$ and $Automata$ may be
+abstracted as $Reduction$ or $rewrite$ systems.
+
+This is simply
+    \[(A,\rightarrow)\]
+where $A$ is a set of objects and $\rightarrow \subseteq A \times
+A$. This is equivalent to an $unlabeled$ $State$ $Transition$ $System$
+(see section on $Automata$).
+
+An $Indexed$ $Abstract$ $Reduction$ $System$ differentiates classes of
+$Reductions$ so that $\rightarrow$ is the indexed union of these
+relations
+    \[(A, \rightarrow_1, \rightarrow_2, \cdots)\]
+This is identical to a $Labeled$ $Transition$ $System$.
+
 \section{Formal Language Syntax}
 
 The $Syntactic$ structure of a $Language$ as defined by a $Grammar$ is
@@ -495,7 +511,46 @@ grammar, covering all possible formal grammars.
     $Dependency$ $Grammar$ with directionality between $Symbols$.
     \end{description}
 
-\subsubsection{Automata}
+\subsubsection{Automata Theory}
+
+    \paragraph{State Transition Systems}
+    A $State$ $Transition$ $System$ can have an infinite numbe of
+    $States$ and $Transitions$, represented as the pair
+    \[
+        (S,\rightarrow)
+    \]
+    where $S$ is a set of $States$ and $\rightarrow \subseteq S \times
+    S$. This is identical to an $un$-$indexed$ $Abstract$ $Rewriting$
+    $System$.
+
+    $Finite$ $Automata$ may be seen as $State$ $Transition$ $Systems$
+    with an initial $State$ and a number of final $Accept$ states
+    indicating $Word$ membership for a $Language$.
+
+    $Labeled$ $State$ $Transition$ $Systems$ have an additional set of
+    $Labels$, $\Lambda$
+    \[(S,\Lambda,\rightarrow)\]
+    and $\rightarrow \subseteq S \times \Lambda \times S$.
+
+    $Action$ $Programming$ $Languages$ add a set of $Fluents$, $F$,
+    and $Values$, $V$ and a function mapping $F \times S$ to $V$.
+
+    \paragraph{Semiautomata}
+    A $State$ $Transition$ $System$ may be formulated as a $Semiautomata$
+    \[
+        (Q,\Sigma,T)
+    \]
+    where $\Sigma$ is a non-empty $input$ $Symbols$, $Q$ is the set of
+    $States$ and $T$ is a $transition$ $function$ $T:Q \times \Sigma
+    \rightarrow Q$.
+
+    A $Semiautomaton$ induces a $Monoid$ called the $input$ $Monoid$:
+    \[
+        M(Q,\Sigma,T) = \{T_w | w \in \Sigma^*\}
+    \]
+
+    \paragraph{Automata}
+
     An $Automaton$ reads input strings, $Words$ ($Expressions$), and
     either accepts or rejects depending on whether a $Word$ is a
     member of the $Language$ recognized by that $Automaton$. By
