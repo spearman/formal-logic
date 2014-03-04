@@ -20,8 +20,10 @@
 \tableofcontents
 
 % --------------------------------------------------------------------
-
 \part{Formal Systems}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 
 \section{Abstract Reduction Systems}
 The following definitions of $Grammars$ and $Automata$ may be
@@ -38,6 +40,8 @@ $Reductions$ so that $\rightarrow$ is the indexed union of these
 relations
     \[(A, \rightarrow_1, \rightarrow_2, \cdots)\]
 This is identical to a $Labeled$ $Transition$ $System$.
+
+% --------------------------------------------------------------------
 
 \section{Formal Language Syntax}
 
@@ -94,13 +98,13 @@ whether they are $Terminal$ or $Non$-$terminal$ $Symbols$.
 The definition of a $Non$-$terminal$ $Symbol$ is one for which a
 $Production$ rule exists in the $Grammar$ with that $Symbol$ as the
 input $Expression$ to the $Production$. Thus a $Grammar$ is specified
-by a finite set of $Productions$, $P$, a finite set of $Non$-$terminal$
-$Symbols$, $N$, and a finite set of $Terminal$ $Symbols$,
-$T$. Additionally, in certain $Grammars$ it is allowed for multiple
-$Non$-$terminals$ to appear in an $Expression$, that is one or more
-$Symbols$ taken together. However, since the $Vocabulary$ is a closed
-set under string concatenation, the set of $Symbols$ and $Expressions$
-will be identical by members.
+by a finite set of $Productions$, $P$, a finite set of
+$Non$-$terminal$ $Symbols$, $N$, and a finite set of $Terminal$
+$Symbols$, $T$. Additionally, in certain $Grammars$ it is allowed for
+multiple $Non$-$terminals$ to appear in an $Expression$, that is one
+or more $Symbols$ taken together. However, since the $Vocabulary$ is a
+closed set under string concatenation, the set of $Symbols$ and
+$Expressions$ will be identical by members.
 
     \begin{description}
 
@@ -136,8 +140,8 @@ Two special $Symbols$ are recognized:
 
     \end{description}
 
-A $Grammar$ $generates$ a $Language$ by the repeated application
-of its $Production$ $Rules$ beginning with the $Start$ $Symbol$. A
+A $Grammar$ $generates$ a $Language$ by the repeated application of
+its $Production$ $Rules$ beginning with the $Start$ $Symbol$. A
 sequence of rule applications is a $Derivation$.
 
 Formal definition of a $Grammar$ as a 4-tuple:
@@ -204,626 +208,628 @@ grammar, covering all possible formal grammars.
     Type-0 \supset Type-1 \supset Type-2 \supset Type-3
 \]
 
- These different levels in the hierarchy are also $Recognizable$ by
- different formulations of $Automata$ described in the next section.
+These different levels in the hierarchy are also $Recognizable$ by
+different formulations of $Automata$ described in the next section.
 
 \subsubsection{Type-0: Unrestricted}
 
-    \paragraph{Semi-decidable}
-    $Production$ $rules$ of an $Unrestricted$ $Grammar$ have the form
-    \[
-        \alpha \rightarrow \beta
-    \]
-    where $\alpha$ and $\beta$ are $Expressions$ of $N \cup T$ and
-    $\alpha \neq \epsilon$.
+\paragraph{Semi-decidable}
+$Production$ $rules$ of an $Unrestricted$ $Grammar$ have the form
+\[
+    \alpha \rightarrow \beta
+\]
+where $\alpha$ and $\beta$ are $Expressions$ of $N \cup T$ and $\alpha
+\neq \epsilon$.
 
-    A completely unrestricted $Grammar$ is called $recursively$
-    $enumerable$ or $Semi$-$decidable$. This means membership of the
-    $Language$ can be decided by an algorithm, but non-membership
-    cannot, and the class of $Languages$ having this property is
-    called $\mathsf{RE}$. Members of this class are also $Diophantine$
-    sets and the lattice of $\mathsf{RE}$ sets under inclusion is
-    written $\mathcal{E}$.
+A completely unrestricted $Grammar$ is called $recursively$
+$enumerable$ or $Semi$-$decidable$. This means membership of the
+$Language$ can be decided by an algorithm, but non-membership cannot,
+and the class of $Languages$ having this property is called
+$\mathsf{RE}$. Members of this class are also $Diophantine$ sets and
+the lattice of $\mathsf{RE}$ sets under inclusion is written
+$\mathcal{E}$.
 
-    The complement of $\mathsf{RE}$ is the class of $Languages$ for
-    which an algorithm may decide non-membership only and is termed
-    $\mathsf{coRE}$. The class of automata capable of implementing
-    these algorithms is the $Turing$ $Machine$.
+The complement of $\mathsf{RE}$ is the class of $Languages$ for which
+an algorithm may decide non-membership only and is termed
+$\mathsf{coRE}$. The class of automata capable of implementing these
+algorithms is the $Turing$ $Machine$.
 
-    \paragraph{Decidable}
-    A $recursive$ (as opposed to $recursively$ $enumerable$) or
-    $Decidable$ $Language$ is defined as the intersection of
-    $\mathsf{RE}$ and $\mathsf{coRE}$:
-    \[
-        \mathsf{R} = \mathsf{RE} \cap \mathsf{coRE}
-    \]
-    That is, it can be decided whether a $Symbol$ is a member or not
-    by a $total$ $computable$ $function$ (one which returns $True$ or
-    $False$ depending on membership). $Decidable$ $Languages$ are
-    recognizable by a $decider$ or $Total$ $Turing$ $Machine$.
+\paragraph{Decidable}
+A $recursive$ (as opposed to $recursively$ $enumerable$) or
+$Decidable$ $Language$ is defined as the intersection of $\mathsf{RE}$
+and $\mathsf{coRE}$:
+\[
+    \mathsf{R} = \mathsf{RE} \cap \mathsf{coRE}
+\]
+That is, it can be decided whether a $Symbol$ is a member or not by a
+$total$ $computable$ $function$ (one which returns $True$ or $False$
+depending on membership). $Decidable$ $Languages$ are recognizable by
+a $decider$ or $Total$ $Turing$ $Machine$.
 
 \subsubsection{Type-1: Context-sensitive}
 
-    \paragraph{Context-sensitive}
-    $Context$-$sensitive$ $Grammars$ have the restriction that the
-    result of a $Production$ is not shorter than the input. Formally
-    stated $Productions$ are of the form
-    \[
-        \alpha A \beta \rightarrow \alpha \gamma \beta
-    \]
-    where $|A| => |\gamma|$. In this formulation $\alpha$ and $\beta$
-    form the $Context$ of $A$.
+\paragraph{Context-sensitive}
+$Context$-$sensitive$ $Grammars$ have the restriction that the result
+of a $Production$ is not shorter than the input. Formally stated
+$Productions$ are of the form
+\[
+    \alpha A \beta \rightarrow \alpha \gamma \beta
+\]
+where $|A| => |\gamma|$. In this formulation $\alpha$ and $\beta$ form
+the $Context$ of $A$.
 
-    Requiring that $S$ does not appear on the right of any
-    $Production$ and allowing the rule
-    \[
-        S \rightarrow \epsilon
-    \]
-    makes the $Context$-$sensitive$ $Languages$ a proper superset of the
-    $Context$-$free$ $Languages$.
+Requiring that $S$ does not appear on the right of any $Production$
+and allowing the rule
+\[
+    S \rightarrow \epsilon
+\]
+makes the $Context$-$sensitive$ $Languages$ a proper superset of the
+$Context$-$free$ $Languages$.
 
-    $Context$-$sensitive$ $Languages$ are equivalent to a $Linear$
-    $Bounded$ $Automaton$ (a linear bounded non-deterministic $Turing$
-    $Machine$).
+$Context$-$sensitive$ $Languages$ are equivalent to a $Linear$
+$Bounded$ $Automaton$ (a linear bounded non-deterministic $Turing$
+$Machine$).
 
-    \paragraph{Indexed}
+\paragraph{Indexed}
 
-    An $Indexed$ $Grammar$ has an extra set of $Symbols$ $F$, the
-    $Indexed$ $Symbols$. $Productions$ are of three possible forms,
-    \[
-        A[\sigma] \rightarrow \alpha[\sigma]
-    \]\[
-        A[\sigma] \rightarrow B[f\sigma]
-    \]\[
-        A[f\sigma] \rightarrow \alpha[\sigma]
-    \]
-    where $f \in F$ and $\sigma$ is a string of $Index$ $Symbols$.
+An $Indexed$ $Grammar$ has an extra set of $Symbols$ $F$, the
+$Indexed$ $Symbols$. $Productions$ are of three possible forms,
+\[
+    A[\sigma] \rightarrow \alpha[\sigma]
+\]\[
+    A[\sigma] \rightarrow B[f\sigma]
+\]\[
+    A[f\sigma] \rightarrow \alpha[\sigma]
+\]
+where $f \in F$ and $\sigma$ is a string of $Index$ $Symbols$.
 
-    In effect these are used to form a $stack$ by the $Production$
-    rules where $Indices$ are either pushed or popped from the stack.
+In effect these are used to form a $stack$ by the $Production$ rules
+where $Indices$ are either pushed or popped from the stack.
 
-    A $Indexed$ $Language$ can be recognized by a $Nested$ $Stack$
-    $Automaton$.
+A $Indexed$ $Language$ can be recognized by a $Nested$ $Stack$
+$Automaton$.
 
-    \paragraph{Generalized Contex-free}
-    A $Generalized$ $Context$-$free$ $Grammar$ adds to the rewrite rules
-    of a $Context$-$free$ $Grammar$ a set of non-context-free
-    $composition$ $functions$ that combine tuples of symbols:
-    \[
-        f(\langle x_1,\cdots,x_m\rangle,\cdots,\langle
-        y_1,\cdots,y_n\rangle)=\gamma
-    \]
-    where $\gamma$ is a single tuple or another composition function
-    that reduces to a single tuple.
+\paragraph{Generalized Contex-free}
+A $Generalized$ $Context$-$free$ $Grammar$ adds to the rewrite rules
+of a $Context$-$free$ $Grammar$ a set of non-context-free
+$composition$ $functions$ that combine tuples of symbols:
+\[
+    f(\langle x_1,\cdots,x_m\rangle,\cdots,\langle
+    y_1,\cdots,y_n\rangle)=\gamma
+\]
+where $\gamma$ is a single tuple or another composition function that
+reduces to a single tuple.
 
-    Rules are of the form:
-    \[
-        A \rightarrow f(X,Y,\cdots)
-    \]
-    where $X$,$Y$,$\cdots$ are string tuples or $Non$-$terminal$ $Symbols$.
+Rules are of the form:
+\[
+    A \rightarrow f(X,Y,\cdots)
+\]
+where $X$,$Y$,$\cdots$ are string tuples or $Non$-$terminal$
+$Symbols$.
 
-    There are several weakly equivalent to the composition formulation.
+There are several weakly equivalent to the composition formulation.
 
-    \begin{description}
-    \item[Linear context-free rewriting system]
-    Weakly equivalent to $multi$-$component$ $Tree$-$adjoining$ $Grammars$
-    where composition functions are both $linear$ and $regular$. Can
-    be recognized by $Thread$ $Automata$.
-    \item[Tree-adjoining]
+\begin{description}
+\item[Linear context-free rewriting system]
+
+    Weakly equivalent to $multi$-$component$ $Tree$-$adjoining$
+    $Grammars$ where composition functions are both $linear$ and
+    $regular$. Can be recognized by $Thread$ $Automata$.
+
+\item[Tree-adjoining]
+
     Elementary rewriting unit is a tree rather than a $Symbol$. Can be
     recognized by $Embedded$ $pushdown$ $automata$.
-    \item[Linear indexed grammar]
-    A modified $Indexed$ $Grammar$ where only one symbol receives the stack.
-    \item[Combinatory Categorical Grammar]
-    A type of $shrase$ $Structure$ $Grammar$ using $Combinatory$ $Logic$.
-    \item[Head grammar]
-    A subset of the $Linear$ $context$-$free$ $rewriting$ $system$ and a
-    $Phrase$ $Structure$ $Grammar$.
-    \end{description}
+
+\item[Linear indexed grammar]
+
+    A modified $Indexed$ $Grammar$ where only one symbol receives the
+    stack.
+
+\item[Combinatory Categorical Grammar]
+
+    A type of $shrase$ $Structure$ $Grammar$ using $Combinatory$
+    $Logic$.
+
+\item[Head grammar]
+
+    A subset of the $Linear$ $context$-$free$ $rewriting$ $system$ and
+    a $Phrase$ $Structure$ $Grammar$.
+
+\end{description}
 
 \subsubsection{Type-2: Context-free}
 
-    \paragraph{Context-free}
-    $Context$-$free$ $Grammars$ have production rules of the form
-    \[
-        V \rightarrow w
-    \]
-    where $V$ is a single $Non$-$terminal$ and $w$ is a string of
-    $Terminals$ and/or $Non$-$terminals$ (or empty). Because $V$ is
-    required to be a single $Non$-$terminal$, the $Production$ rules
-    can be applied regardless of $Context$. Each $Non$-$terminal$ in a
-    $Context$-$free$ $Grammar$, $G$, is said to form a
-    $Sub$-$Language$ of the $language$ defined by $G$.
+\paragraph{Context-free}
+$Context$-$free$ $Grammars$ have production rules of the form
+\[
+    V \rightarrow w
+\]
+where $V$ is a single $Non$-$terminal$ and $w$ is a string of
+$Terminals$ and/or $Non$-$terminals$ (or empty). Because $V$ is
+required to be a single $Non$-$terminal$, the $Production$ rules can
+be applied regardless of $Context$. Each $Non$-$terminal$ in a
+$Context$-$free$ $Grammar$, $G$, is said to form a $Sub$-$Language$ of
+the $language$ defined by $G$.
 
-    Multiple $Context$-$free$ $Grammars$ may generate the same
-    $Language$, so properties of $CFG$s may be termed $extrinsic$
-    while $Language$ properties are $intrinsic$. The question of
-    equality between $CFG$s is undecidable.
+Multiple $Context$-$free$ $Grammars$ may generate the same $Language$,
+so properties of $CFG$s may be termed $extrinsic$ while $Language$
+properties are $intrinsic$. The question of equality between $CFG$s is
+undecidable.
 
-    A popular notation for $Context$-$free$ $Grammars$ is
-    $Backus$-$Naur$ $form$ ($BNF$). The term used in $Linguistics$ for
-    $Context$-$free$ $Grammar$ is $Phrase$ $Structure$ $Grammar$ which
-    is also called $constituency$ $grammar$ due to the
-    one-to-one-or-many correspondence between the $Productions$
-    (ultimately rooted in the $subject$-$predicate$ clause deriving
-    from $Term$ $Logic$). The alternative is $Dependency$ $Grammar$ in
-    which the $Verb$ is the root and there is a one-to-one
-    correspondence between $Symbols$ and nodes in the syntax
-    structure.
+A popular notation for $Context$-$free$ $Grammars$ is $Backus$-$Naur$
+$form$ ($BNF$). The term used in $Linguistics$ for $Context$-$free$
+$Grammar$ is $Phrase$ $Structure$ $Grammar$ which is also called
+$constituency$ $grammar$ due to the one-to-one-or-many correspondence
+between the $Productions$ (ultimately rooted in the
+$subject$-$predicate$ clause deriving from $Term$ $Logic$). The
+alternative is $Dependency$ $Grammar$ in which the $Verb$ is the root
+and there is a one-to-one correspondence between $Symbols$ and nodes
+in the syntax structure.
 
-    The $Context$-$free$ $Grammar$ is equivalent to
-    $Non$-$deterministic$ $Pushdown$ $Automata$.
+The $Context$-$free$ $Grammar$ is equivalent to $Non$-$deterministic$
+$Pushdown$ $Automata$.
 
-    \paragraph{Deterministic}
-    $Deterministic$ $Context$-$free$ $Grammars$ are derived from
-    $Deterministic$ $Pushdown$ $Automata$ and are always
-    $unambiguous$. They can be parsed in linear time and a parser can
-    be automatically generated from the $Grammar$ by a
-    $parser$-$generator$.
+\paragraph{Deterministic}
+$Deterministic$ $Context$-$free$ $Grammars$ are derived from
+$Deterministic$ $Pushdown$ $Automata$ and are always
+$unambiguous$. They can be parsed in linear time and a parser can be
+automatically generated from the $Grammar$ by a $parser$-$generator$.
 
-    \paragraph{Visibly Pushdown}
-    $Visibly$ $Pushdown$ $Grammars$ are described by the 4-tuple
-    \[
-        G = (V=V^0 \cup V^1,T,P,S)
-    \]
-    where $V^0$ and $V^1$ are disjoint sets of $Non$-$terminals$ and
-    there are three kinds of $Production$ rules:
-    \[
-        X \rightarrow \epsilon
-    \]\[
-        X \rightarrow aY
-    \]\[
-        X \rightarrow \langle aZb \rangle Y
-    \]
-    where $Z \in V^0$ and if $X \in V^0$ then $Y \in V^0$
+\paragraph{Visibly Pushdown}
+$Visibly$ $Pushdown$ $Grammars$ are described by the 4-tuple
+\[
+    G = (V=V^0 \cup V^1,T,P,S)
+\]
+where $V^0$ and $V^1$ are disjoint sets of $Non$-$terminals$ and there
+are three kinds of $Production$ rules:
+\[
+    X \rightarrow \epsilon
+\]\[
+    X \rightarrow aY
+\]\[
+    X \rightarrow \langle aZb \rangle Y
+\]
+where $Z \in V^0$ and if $X \in V^0$ then $Y \in V^0$
 
-    The resulting $Language$ is a $Regular$ $Language$ with $nested$
-    $words$, described by a $Monadic$ $Second$-$order$ $Logic$.
+The resulting $Language$ is a $Regular$ $Language$ with $nested$
+$words$, described by a $Monadic$ $Second$-$order$ $Logic$.
 
 \subsubsection{Type-3: Regular}
 
-    \paragraph{Extended Regular}
-    $Extended$ $Regular$ $Grammars$ have $Productions$ of either
-    $right$ $Regular$ or $left$ $Regular$ form.
+\paragraph{Extended Regular}
+$Extended$ $Regular$ $Grammars$ have $Productions$ of either $right$
+$Regular$ or $left$ $Regular$ form.
 
-    $Right:$
-    \[
-        B \rightarrow a
-    \]\[
-        A \rightarrow Bw
-    \]\[
-        A \rightarrow \epsilon
-    \]
-    $Left:$
-    \[
-        A \rightarrow a
-    \]\[
-        A \rightarrow Bw
-    \]\[
-        A \rightarrow \epsilon
-    \]
-    where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
-    only $Non$-$terminal$ characters.
+$Right:$
+\[
+    B \rightarrow a
+\]\[
+    A \rightarrow Bw
+\]\[
+    A \rightarrow \epsilon
+\]
+$Left:$
+\[
+    A \rightarrow a
+\]\[
+    A \rightarrow Bw
+\]\[
+    A \rightarrow \epsilon
+\]
+where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
+only $Non$-$terminal$ characters.
 
-    \paragraph{Strictly Regular}
-    $Strictly$ $Regular$ $Grammars$ also have $Productions$ of either
-    $right$ $Regular$ or $left$ $Regular$ form.
+\paragraph{Strictly Regular}
+$Strictly$ $Regular$ $Grammars$ also have $Productions$ of either
+$right$ $Regular$ or $left$ $Regular$ form.
 
-    $Right:$
-    \[
-        B \rightarrow a
-    \]\[
-        B \rightarrow aC
-    \]\[
-        B \rightarrow \epsilon
-    \]
-    $Left:$
-    \[
-        A \rightarrow a
-    \]\[
-        A \rightarrow Ba
-    \]\[
-        A \rightarrow \epsilon
-    \]
-    where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
-    only $Non$-$terminal$ characters.
+$Right:$
+\[
+    B \rightarrow a
+\]\[
+    B \rightarrow aC
+\]\[
+    B \rightarrow \epsilon
+\]
+$Left:$
+\[
+    A \rightarrow a
+\]\[
+    A \rightarrow Ba
+\]\[
+    A \rightarrow \epsilon
+\]
+where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
+only $Non$-$terminal$ characters.
 
-    There is a one-to-one correspondence between the rules of a
-    $Strictly$ $Left$ $Regular$ $Grammar$ and those of a
-    $Non$-$deterministic$ $Finite$ $Automaton$.
+There is a one-to-one correspondence between the rules of a $Strictly$
+$Left$ $Regular$ $Grammar$ and those of a $Non$-$deterministic$
+$Finite$ $Automaton$.
 
-    The $pumping$ $lemma$ states that the middle section of an
-    $Expression$ within a $Regular$ $Language$ may be repeated an
-    arbitrary number of times to produce another $Expression$ in that
-    same $Language$.
+The $pumping$ $lemma$ states that the middle section of an
+$Expression$ within a $Regular$ $Language$ may be repeated an
+arbitrary number of times to produce another $Expression$ in that same
+$Language$.
 
-    \paragraph{k-Testable}
-    A $K$-$Testable$ $Language$ is one where membership of an
-    $Expression$ depends on the first and last symbol and a set of
-    factors of length $k$. An example is a $Local$ $Language$ which is
-    a $2$-$Testable$ $Language$ described by the regular expression:
-    \[
-        (R\Sigma^* \cap \Sigma^*S)\setminus\Sigma^*F\Sigma^*
-    \]
-    where $R,S \subseteq \Sigma$ and $F \subseteq \Sigma \times
-    \Sigma$. This requires for a $Word$ ($Expression$), $w$, that is a
-    member of a $Local$ $Language$ to have its first $Symbol$ in $R$,
-    and its second $Symbol$ in $S$, and no factor of $w$ of length 2
-    is in $F$. A $Local$ $Language$ is recognized by a $Local$
-    $Automaton$.
+\paragraph{k-Testable}
+A $K$-$Testable$ $Language$ is one where membership of an $Expression$
+depends on the first and last symbol and a set of factors of length
+$k$. An example is a $Local$ $Language$ which is a $2$-$Testable$
+$Language$ described by the regular expression:
+\[
+    (R\Sigma^* \cap \Sigma^*S)\setminus\Sigma^*F\Sigma^*
+\]
+where $R,S \subseteq \Sigma$ and $F \subseteq \Sigma \times
+\Sigma$. This requires for a $Word$ ($Expression$), $w$, that is a
+member of a $Local$ $Language$ to have its first $Symbol$ in $R$, and
+its second $Symbol$ in $S$, and no factor of $w$ of length 2 is in
+$F$. A $Local$ $Language$ is recognized by a $Local$ $Automaton$.
 
-    \paragraph{Star-free}
-    A $Star$-$free$ $Language$ is one having a $Generalized$ $Star$
-    $Height$ equal to $Zero$, that is, the minimal $Star$ $Height$ of
-    all $Expressions$ in the $Language$ with the $Star$ $Height$ of an
-    $Expression$ $compliment$ being equal.
+\paragraph{Star-free}
+A $Star$-$free$ $Language$ is one having a $Generalized$ $Star$
+$Height$ equal to $Zero$, that is, the minimal $Star$ $Height$ of all
+$Expressions$ in the $Language$ with the $Star$ $Height$ of an
+$Expression$ $compliment$ being equal.
 
-    $Star$-$free$ $Languages$ are characterized as those with
-    $Aperiodic$ $Syntactic$ $Monoids$. Also as the $Counter$-$free$
-    $Langauges$ by the $Aperiodic$ $Finite$-$state$ $Automaton$, and
-    $Linear$ $Temporal$ $Logic$.
+$Star$-$free$ $Languages$ are characterized as those with $Aperiodic$
+$Syntactic$ $Monoids$. Also as the $Counter$-$free$ $Langauges$ by the
+$Aperiodic$ $Finite$-$state$ $Automaton$, and $Linear$ $Temporal$
+$Logic$.
 
 \subsubsection{Affix Grammars}
 
-    $Affix$ $Grammars$ are those of a $Context$-$free$ $Grammar$ with
-    a subset of the $Non$-$terminals$ used as $affix$ $arguments$. If
-    the same $affix$ appears multiple places in a $Production$, the
-    $value$ must be the same.
+$Affix$ $Grammars$ are those of a $Context$-$free$ $Grammar$ with a
+subset of the $Non$-$terminals$ used as $affix$ $arguments$. If the
+same $affix$ appears multiple places in a $Production$, the $value$
+must be the same.
 
-    \paragraph{Two-Level Grammars}
-    Allowing the $values$ for $affixes$ to be described by a
-    $Context$-$free$ $Grammar$ results in a $Two$-$Level$ $Grammar$.
+\paragraph{Two-Level Grammars}
+Allowing the $values$ for $affixes$ to be described by a
+$Context$-$free$ $Grammar$ results in a $Two$-$Level$ $Grammar$.
 
-    $Two$-$Level$ $Grammars$ are $Grammar$ generators that may
-    generate $Grammars$ with infinite rules.
+$Two$-$Level$ $Grammars$ are $Grammar$ generators that may generate
+$Grammars$ with infinite rules.
 
-    \begin{description}
-    \item[W-grammar] $Van$ $Wijngaarden$ $Grammar$
-    Consists of a finite set of $meta$-$rules$ used to derive a
-    possibly infinite set of $Production$ rules from a finite set of
-    $hyper$-$rules$.
-    \item[Extended Affix Grammar] is a restricted $W$-$grammar$.
-    \end{description}
+\begin{description}
+\item[W-grammar] $Van$ $Wijngaarden$ $Grammar$ Consists of a finite
+  set of $meta$-$rules$ used to derive a possibly infinite set of
+  $Production$ rules from a finite set of $hyper$-$rules$.
+\item[Extended Affix Grammar] is a restricted $W$-$grammar$.
+\end{description}
 
-    \paragraph{Attribute Grammars}
-    $Attribute$ $Grammars$ allows $affixes$ from arbitrary domains and
-    allows functions calculate values of $affixes$.
+\paragraph{Attribute Grammars}
+$Attribute$ $Grammars$ allows $affixes$ from arbitrary domains and
+allows functions calculate values of $affixes$.
 
 \subsubsection{Analytic Grammars}
 
-    $Analytic$ $Grammars$ are used in $Parsing$ (see next section).
+$Analytic$ $Grammars$ are used in $Parsing$ (see next section).
 
-    \begin{description}
-    \item[Top-Down Parsing Language] Formal representation of a
-      $Recursive$ $Descent$ $Parser$. $Production$ rules of the form
-    \[
-        A \leftarrow \epsilon
-    \]\[
-        A \leftarrow f
-    \]\[
-        A \leftarrow a
-    \]\[
-        A \leftarrow BC/D
-    \]
-    \item[Parsing Expression Generator]
-    A more generalized $Top$-$Down$ $Parsing$ $Language$.
-    \item[Link Grammar]
-    $Dependency$ $Grammar$ with directionality between $Symbols$.
-    \end{description}
+\begin{description}
+\item[Top-Down Parsing Language] Formal representation of a
+  $Recursive$ $Descent$ $Parser$. $Production$ rules of the form
+\[
+    A \leftarrow \epsilon
+\]\[
+    A \leftarrow f
+\]\[
+    A \leftarrow a
+\]\[
+    A \leftarrow BC/D
+\]
+\item[Parsing Expression Generator]
+A more generalized $Top$-$Down$ $Parsing$ $Language$.
+\item[Link Grammar]
+$Dependency$ $Grammar$ with directionality between $Symbols$.
+\end{description}
 
 \subsubsection{Parsers}
 
-    A $Parser$ analyzes an $Expression$ according to the rules of a
-    $Formal$ $Grammar$ generating a $Data$ $Structure$ describing the
-    $Syntax$ of the input.
+A $Parser$ analyzes an $Expression$ according to the rules of a
+$Formal$ $Grammar$ generating a $Data$ $Structure$ describing the
+$Syntax$ of the input.
 
-    \paragraph{Lexical Analysis}
-    A $Parser$ may be preceded by a $Lexical$ $Analyzer$ which creates
-    $Tokens$ ($Symbols$) from a string of input
-    $Glyphs$. $Expressions$ of $Tokens$ are referred to as
-    $Phrases$. A $Lexical$ $Analyzer$ is a $Parser$ itself and usually
-    the $Lexical$ $Grammar$ is a $Regular$ $Language$ (other methods
-    are $flags$, $delimiters$, or $dictionary$) and the $Tokens$ are
-    parsed as a $Context$-$free$ or $Attribute$ $Phrase$ $Syntax$.
+\paragraph{Lexical Analysis}
+A $Parser$ may be preceded by a $Lexical$ $Analyzer$ which creates
+$Tokens$ ($Symbols$) from a string of input $Glyphs$. $Expressions$ of
+$Tokens$ are referred to as $Phrases$. A $Lexical$ $Analyzer$ is a
+$Parser$ itself and usually the $Lexical$ $Grammar$ is a $Regular$
+$Language$ (other methods are $flags$, $delimiters$, or $dictionary$)
+and the $Tokens$ are parsed as a $Context$-$free$ or $Attribute$
+$Phrase$ $Syntax$.
 
-    Prior to $Scanning$, a $Lexer$ may perform its own $Tokenization$.
-    The $Scanning$ stage first recognizes the $Token$ strings as
-    $Lexemes$, usually achieved by a $Finite$ $State$ $Machine$.
+Prior to $Scanning$, a $Lexer$ may perform its own $Tokenization$.
+The $Scanning$ stage first recognizes the $Token$ strings as
+$Lexemes$, usually achieved by a $Finite$ $State$ $Machine$.
 
-    $Lexemes$ are resolved into $Tokens$ by an $Evaluator$ which
-    assigns values where needed-- this results in $Tokens$ that are
-    either a $Type$-$Value$ pair, or just a $Type$.
+$Lexemes$ are resolved into $Tokens$ by an $Evaluator$ which assigns
+values where needed-- this results in $Tokens$ that are either a
+$Type$-$Value$ pair, or just a $Type$.
 
-    \paragraph{Syntactic Analysis}
+\paragraph{Syntactic Analysis}
 
-    The $Parser$ determines if and how the input can be derived from
-    the $Start$ $Symbol$ of the $Grammar$.
+The $Parser$ determines if and how the input can be derived from the
+$Start$ $Symbol$ of the $Grammar$.
 
-    $Parsing$ can proceed in two directions:
+$Parsing$ can proceed in two directions:
 
-    \begin{description}
+\begin{description}
     \item[Top-down Parsing]
-    starts with the highest level of the $Parse$ $Tree$. Proceeds
-    greedily and may be $Exponential$ with $Backtracking$.
+    starts with the highest level of the $Parse$ $Tree$. Proceeds greedily
+    and may be $Exponential$ with $Backtracking$.
     \item[Bottom-up Parsing]
     starts with the lowest level of the $Parse$ $Tree$.
-    \end{description}
+\end{description}
 
-    Further $Semantic$ $Parsing$ may be performed after these
-    steps. An example of this would be the in the $Compiler$ of a
-    $Programming$ $Language$.
+Further $Semantic$ $Parsing$ may be performed after these steps. An
+example of this would be the in the $Compiler$ of a $Programming$
+$Language$.
 
 
 \subsection{Automata Theory}
 
-    \subsubsection{State Transition Systems}
-    A $State$ $Transition$ $System$ can have an infinite numbe of
-    $States$ and $Transitions$, represented as the pair
+\subsubsection{State Transition Systems}
+A $State$ $Transition$ $System$ can have an infinite numbe of $States$
+and $Transitions$, represented as the pair
+\[
+    (S,\rightarrow)
+\]
+where $S$ is a set of $States$ and $\rightarrow \subseteq S \times
+S$. This is identical to an $un$-$indexed$ $Abstract$ $Rewriting$
+$System$.
+
+$Finite$ $Automata$ may be seen as $State$ $Transition$ $Systems$ with
+an initial $State$ and a number of final $Accept$ states indicating
+$Word$ membership for a $Language$.
+
+$Labeled$ $State$ $Transition$ $Systems$ have an additional set of
+$Labels$, $\Lambda$
+\[(S,\Lambda,\rightarrow)\]
+and $\rightarrow \subseteq S \times \Lambda \times S$.
+
+$Action$ $Programming$ $Languages$ add a set of $Fluents$, $F$, and
+$Values$, $V$ and a function mapping $F \times S$ to $V$.
+
+\subsubsection{Semiautomata}
+A $State$ $Transition$ $System$ may be formulated as a $Semiautomata$
+\[
+    (Q,\Sigma,T)
+\]
+where $\Sigma$ is a non-empty $input$ $Symbols$, $Q$ is the set of
+$States$ and $T$ is a $transition$ $function$ $T:Q \times \Sigma
+\rightarrow Q$.
+
+A $Semiautomaton$ induces a $Monoid$ called the $input$ $Monoid$:
+\[
+    M(Q,\Sigma,T) = \{T_w | w \in \Sigma^*\}
+\]
+
+\subsubsection*{Automata}
+
+An $Automaton$ reads input strings, $Words$ ($Expressions$), and
+either accepts or rejects depending on whether a $Word$ is a member of
+the $Language$ recognized by that $Automaton$. By convention the
+$Vocabulary$ of $Symbols$ will be re-cast as an $Alphabet$, $\Sigma$.
+
+$Automata$ may be arranged in a hierarchy according to increasing
+power:
+\[
+    DFA = NFA \subset DPDA-I \subset NPDA-I \subset LBA \subset DPDA-II =
+\]\[
+    = NPDA-II = DTM = NTM = PTM = MDTM
+\]
+where
+\begin{itemize}
+\item $DFA$ = $Deterministic$ $Finite$ $Automata$
+\item $NFA$ = $Non$-$deterministic$ $Finite$ $Automata$
+\item $DPDA$ = $Deterministic$ $Push$ $Down$ $Automata$ with 1
+  or 2 $push$-$down$ $stores$
+\item $NPDA$ = $Non$-$deterministic$ $Push$ $Down$ $Automata$
+  with 1 or 2 $push$-$down$ $stores$
+\item $LBA$ = $Linear$ $Bounded$ $Automata$
+\item $DTM$ = $Deterministic$ $Turing$ $Machine$
+\item $NTM$ = $Non$-$deterministic$ $Turing$ $Machine$
+\item $PTM$ = $Probabilistic$ $Turing$ $Machine$
+\item $MDTM$ = $Multidimensional$ $Turing$ $Machine$
+\end{itemize}
+
+\subsubsection{Finite Automata} are $Finite$ $State$
+$Machine$ and which takes a finite input string of $Symbols$ and
+either accepts or rejects the input depending on the final $State$ of
+the computation. $Finite$ $Automata$ are able to recognize $Refular$
+$Languages$.
+
+\paragraph{Deterministic Finite Automata} have the restriction
+that an input $Symbol$ has a $transition$ $function$ to a single
+$State$.
+
+Representation of a $Deterministic$ $Finite$ $Automaton$ as a 5-tuple:
+\[
+    (Q,\Sigma,\delta,q_0,F)
+\]
+where
+\begin{itemize}
+\item $Q$ is a finite set of $States$
+\item $\Sigma$ is the $Alphabet$
+\item $\delta$ is the $transition$ $function$ $\delta: Q \times
+  \Sigma \rightarrow Q$
+\item $q_0 \in Q$ is the initial $State$
+\item $F \subseteq Q$ is the set of final $Accept$ $States$.
+\end{itemize}
+
+Running for a given input $w = a_1,a_2, \cdots , a_n \in \Sigma^*$
+produces a sequence of $States$ $q_0,q_1,q_2,\cdots , q_n$ where $q_i
+\in Q$ such that $q_i = \delta (q_{i-1},a_i)$ and $w$ is accepted if
+$q_n \in F$.
+
+$Deterministic$ $Finite$ $Automata$ recognize $Regular$ $Languages$.
+
+A recursive definition using composition of $transition$ $functions$
+\[
+    \widehat{\delta}(q,\epsilon) = q
+\]\[
+    \widehat{\delta}(q,wa) = \delta_a(\widehat{\delta}(q,w))
+\]
+where $w \in \Sigma^*$, $a \in \Sigma$ and $q \in Q$. Repeated
+application describes the $Transition$ $Monoid$ or $Transformation$
+$Semigroup$.
+
+A kind of $Deterministic$ $Finite$ $Automata$ that recognizes $Local$
+$Languages$ is called a $Local$ $Automata$.
+
+\paragraph{Nondeterministic Finite Automata} are $Finite$ $State$
+$Machines$ that may transition from one $State$ to a number of
+different states, given as an element of the powerset of $Q$,
+$\mathcal{P}(Q)$.
+
+Representation of a $Nondeterministic$ $Finite$ $Automaton$ as a
+5-tuple:
+\[
+    (Q,\Sigma,\Delta,q_0,F)
+\]
+where
+\begin{itemize}
+\item $Q$ is a finite set of $States$
+\item $\Sigma$ is the $Alphabet$
+\item $\Delta$ is a $transition$ $relation$ $\Delta: Q \times
+  \Sigma \rightarrow \mathcal{P}(Q)$
+\item $q_0 \in Q$ is the initial $State$
+\item $F \subseteq Q$ is the set of final $Accept$ $States$.
+\end{itemize}
+
+A $Word$, $w=a_1,a_2,\cdots,a_n$, is accepted when there exists a
+sequence of $States$, $r_0,r_1,\cdots,r_n$ such that
+\begin{enumerate}
+\item $r_0 = q_0$
+\item $r_{i+1} \in \Delta(r_i, a_{i+1})$, for $i = 0, \cdots, n-1$
+\item $r_n \in F$
+\end{enumerate}
+
+A $DFA$ may bee seen as a $NFA$ which restricts transitions to allow
+only one $State$, and can be constructed from a $NFA$ with $n$
+$States$ using $powerset$ $construction$, requiring up to $2^n$
+$States$. Both types recognize the same $Regular$ $Languages$.
+
+\subparagraph{NFA-$\epsilon$} is a $NFA$ that allows transitions
+without consuming input $Symbols$. A transition that changes state
+without consuming input is an $\epsilon$ $move$. Each $State$ $q$
+defines an $\epsilon$-$closure$, $E(q)$, which is the set of $States$
+that are reachable by $\epsilon$ $moves$.
+
+The $Languages$ recognized by $NFA$-$\epsilon$ are the same as
+$NFA$/$DFA$.
+
+\subsubsection{Pushdown Automata} add a $Stack$ as a parameter for
+choice of $States$ and can recognize $Context$-$free$ $Languages$.
+
+Adding a second $Stack$ makes a $Pushdown$ $Automata$ equal in power
+to a $Turing$ $Machine$.
+
+Unlike $Finite$ $Automata$, $Deterministic$ $PDA$ are not equivalent
+to $Nondeterministic$.
+
+The general representation for a $PDA$ is
+\[
+    M = (Q, \Sigma, \Gamma, q_0, Z_0, F, \delta)
+\]
+where
+\begin{itemize}
+\item $Q$ is a finite set of $States$
+\item $\Sigma$ is a finite set of $input$ $Symbols$
+\item $\Gamma$ is a finite set of $Stack$ $Symbols$
+\item $q_0 \in Q$ is the initial $State$
+\item $Z_0 \in \Gamma$ is the initial $Stack$ $Symbol$
+\item $F \subseteq Q$ is the set of final $Accept$ $States$
+\item $\delta$ is the $transition$ $function$ $\delta:
+(Q \times (\Sigma \cup \{\epsilon\}) \times \Gamma) \rightarrow
+\mathcal{P}(Q \times \Gamma^*)$
+\end{itemize}
+
+An element $(p,a,Z,q,\alpha)\in\delta$, with $M$ in $State$ $p \in Q$,
+input $a \in \Sigma \cup \{\epsilon\}$, and top stack $Symbol$ $Z \in
+\Gamma$ results in the following:
+\begin{enumerate}
+\item read $a$
+\item change state to $q$
+\item pop $Z$
+\item push $\alpha \in \Gamma^*$
+\end{enumerate}
+
+\paragraph{Deterministic Pushdown Automata} have the
+restriction of only one derivation per accepted input $Word$. This
+allows recognition of a subset of $Context$-$free$ $Languages$ termed
+$Deterministic$. Such $Languages$ can be parsed in linear time and
+$Parsers$ for such $Languages$ can be generated automatically.
+
+A $Pushdown$ $Automata$ is $Deterministic$ iff both
+\begin{enumerate}
+\item $\forall q \in Q, a \in \Sigma \cup {\epsilon}, x \in
+  \Gamma \vdash |\delta(q,a,x)| \leq 1$
+\item $\forall q \in Q, x in \Gamma \vdash |\delta(q,\epsilon,x)|
+  \neq 0 \Rightarrow \forall a \in \Sigma \vdash |\delta(q,a,x)|=0$
+\end{enumerate}
+
+\subsubsection{Linear Bounded Automata} are $Turing$ $Machines$
+restricted to an input of finite length and are acceptors for
+$Context$-$sensitive$ $Languages$ which require that $Production$
+rules do not increase the size of the $Expression$ as a result;
+therefore the size of the input is sufficient for calculation.
+
+\subsubsection{Turing Machines}
+A $Turing$ $Machine$ operates on an infinite $storage$ $tape$, which
+acts as the read input as well as write storage. The $Pushdown$
+$Automata$ with 2 $Stacks$ are equivalent to $Turing$ $Machines$.
+
+\paragraph{Non-deterministic Turing Machines} ($NTM$s) can be defined
+as
     \[
-        (S,\rightarrow)
+        M = (Q, \Sigma, q_0, \sqcup, A, \delta)
     \]
-    where $S$ is a set of $States$ and $\rightarrow \subseteq S \times
-    S$. This is identical to an $un$-$indexed$ $Abstract$ $Rewriting$
-    $System$.
+where
+\begin{itemize}
+\item $Q$ is a finite set of $States$
+\item $\Sigma$ is the finite $Alphabet$
+\item $q_0 \in Q$ is the initial $State$
+\item $\sqcup \in \Sigma$ is the blank $Symbol$
+\item $F \subseteq Q$ is the set of final $Accept$ $States$.
+\item $\delta \subseteq (Q \setminus F \times \Sigma) \times (Q \times
+  \Sigma \times \{L,R\})$ and $L$ and $R$ are left and right shift.
+\end{itemize}
+The operation of $M$ in $State$ $q_i$ and current read input $a_j$ is
+a $transition$ $function$, $q_i a_j \rightarrow q_{i1} a_{j1}
+d_k$. Note that for an $NTM$, $\delta$ is a relation and more than one
+function can exist for each possible $input$/$State$ combination. The
+result is to write the new $Symbol$ $a_{j1}$ in the current position
+and shift the storage left or right as specified by $d_k$, afterwards
+assuming $State$ $q_{i1}$.
 
-    $Finite$ $Automata$ may be seen as $State$ $Transition$ $Systems$
-    with an initial $State$ and a number of final $Accept$ states
-    indicating $Word$ membership for a $Language$.
+\paragraph{Deterministic Turing Machines} ($DTM$s) limits one possible
+output $transition$ per unique $input$/$State$ combination, thus
+$\delta$ is a $partial$ $function$ rather than a $relation$:
+\[
+    \delta : Q \setminus F \times \Sigma \rightarrow Q \times
+    \Sigma \times {L,R}
+\]
+The computational power of $DTM$s and $NTM$s is equivalent (they can
+solve the same problems) as $NTM$s include $DTM$s as a special
+case. An equivalent accepting computation in a $DTM$ is generally
+exponential to the length of the shortest accepting computation of a
+$NTM$.
 
-    $Labeled$ $State$ $Transition$ $Systems$ have an additional set of
-    $Labels$, $\Lambda$
-    \[(S,\Lambda,\rightarrow)\]
-    and $\rightarrow \subseteq S \times \Lambda \times S$.
+\paragraph{Probabilistic Turing Machines} add a probability
+distribution to transitions (or a tape with random $Symbols$). It is
+an open question whether this is more powerful than a $DTM$
+($\mathsf{BPP}=\mathsf{P}$ ?) but it is useful in the definition of
+$interactive$ $proof$ $systems$.
 
-    $Action$ $Programming$ $Languages$ add a set of $Fluents$, $F$,
-    and $Values$, $V$ and a function mapping $F \times S$ to $V$.
+\paragraph{Multidimensional Turing Machines} allow for tapes of
+varying topologies. This requires additional shift directions (ie
+$\{L, R, U, D\}$ for a 2-dimensional tape) but does not increase the
+computing power; even an $\infty$-$dimensional$ $Turing$ $Machine$ can
+be simulated by a $DTM$.
 
-    \subsubsection{Semiautomata}
-    A $State$ $Transition$ $System$ may be formulated as a $Semiautomata$
-    \[
-        (Q,\Sigma,T)
-    \]
-    where $\Sigma$ is a non-empty $input$ $Symbols$, $Q$ is the set of
-    $States$ and $T$ is a $transition$ $function$ $T:Q \times \Sigma
-    \rightarrow Q$.
-
-    A $Semiautomaton$ induces a $Monoid$ called the $input$ $Monoid$:
-    \[
-        M(Q,\Sigma,T) = \{T_w | w \in \Sigma^*\}
-    \]
-
-    \subsubsection*{Automata}
-
-    An $Automaton$ reads input strings, $Words$ ($Expressions$), and
-    either accepts or rejects depending on whether a $Word$ is a
-    member of the $Language$ recognized by that $Automaton$. By
-    convention the $Vocabulary$ of $Symbols$ will be re-cast as an
-    $Alphabet$, $\Sigma$.
-
-    $Automata$ may be arranged in a hierarchy according to increasing power:
-    \[
-        DFA = NFA \subset DPDA-I \subset NPDA-I \subset LBA \subset DPDA-II =
-    \]\[
-        = NPDA-II = DTM = NTM = PTM = MDTM
-    \]
-    where
-    \begin{itemize}
-    \item $DFA$ = $Deterministic$ $Finite$ $Automata$
-    \item $NFA$ = $Non$-$deterministic$ $Finite$ $Automata$
-    \item $DPDA$ = $Deterministic$ $Push$ $Down$ $Automata$ with 1
-      or 2 $push$-$down$ $stores$
-    \item $NPDA$ = $Non$-$deterministic$ $Push$ $Down$ $Automata$
-      with 1 or 2 $push$-$down$ $stores$
-    \item $LBA$ = $Linear$ $Bounded$ $Automata$
-    \item $DTM$ = $Deterministic$ $Turing$ $Machine$
-    \item $NTM$ = $Non$-$deterministic$ $Turing$ $Machine$
-    \item $PTM$ = $Probabilistic$ $Turing$ $Machine$
-    \item $MDTM$ = $Multidimensional$ $Turing$ $Machine$
-    \end{itemize}
-
-    \subsubsection{Finite Automata} are $Finite$ $State$
-    $Machine$ and which takes a finite input string of $Symbols$ and
-    either accepts or rejects the input depending on the final $State$
-    of the computation. $Finite$ $Automata$ are able to recognize
-    $Refular$ $Languages$.
-
-    \paragraph{Deterministic Finite Automata} have the restriction
-    that an input $Symbol$ has a $transition$ $function$ to a single
-    $State$.
-
-    Representation of a $Deterministic$ $Finite$ $Automaton$ as a 5-tuple:
-    \[
-        (Q,\Sigma,\delta,q_0,F)
-    \]
-    where
-    \begin{itemize}
-    \item $Q$ is a finite set of $States$
-    \item $\Sigma$ is the $Alphabet$
-    \item $\delta$ is the $transition$ $function$ $\delta: Q \times
-      \Sigma \rightarrow Q$
-    \item $q_0 \in Q$ is the initial $State$
-    \item $F \subseteq Q$ is the set of final $Accept$ $States$.
-    \end{itemize}
-
-    Running for a given input $w = a_1,a_2, \cdots , a_n \in \Sigma^*$
-    produces a sequence of $States$ $q_0,q_1,q_2,\cdots , q_n$ where
-    $q_i \in Q$ such that $q_i = \delta (q_{i-1},a_i)$ and $w$ is
-    accepted if $q_n \in F$.
-
-    $Deterministic$ $Finite$ $Automata$ recognize $Regular$ $Languages$.
-
-    A recursive definition using composition of $transition$ $functions$
-    \[
-        \widehat{\delta}(q,\epsilon) = q
-    \]\[
-        \widehat{\delta}(q,wa) = \delta_a(\widehat{\delta}(q,w))
-    \]
-    where $w \in \Sigma^*$, $a \in \Sigma$ and $q \in Q$. Repeated
-    application describes the $Transition$ $Monoid$ or
-    $Transformation$ $Semigroup$.
-
-    A kind of $Deterministic$ $Finite$ $Automata$ that recognizes
-    $Local$ $Languages$ is called a $Local$ $Automata$.
-
-    \paragraph{Nondeterministic Finite Automata} are $Finite$ $State$
-    $Machines$ that may transition from one $State$ to a number of
-    different states, given as an element of the powerset of $Q$,
-    $\mathcal{P}(Q)$.
-
-    Representation of a $Nondeterministic$ $Finite$ $Automaton$ as a 5-tuple:
-    \[
-        (Q,\Sigma,\Delta,q_0,F)
-    \]
-    where
-    \begin{itemize}
-    \item $Q$ is a finite set of $States$
-    \item $\Sigma$ is the $Alphabet$
-    \item $\Delta$ is a $transition$ $relation$ $\Delta: Q \times
-      \Sigma \rightarrow \mathcal{P}(Q)$
-    \item $q_0 \in Q$ is the initial $State$
-    \item $F \subseteq Q$ is the set of final $Accept$ $States$.
-    \end{itemize}
-
-    A $Word$, $w=a_1,a_2,\cdots,a_n$, is accepted when there exists a
-    sequence of $States$, $r_0,r_1,\cdots,r_n$ such that
-    \begin{enumerate}
-    \item $r_0 = q_0$
-    \item $r_{i+1} \in \Delta(r_i, a_{i+1})$, for $i = 0, \cdots, n-1$
-    \item $r_n \in F$
-    \end{enumerate}
-
-    A $DFA$ may bee seen as a $NFA$ which restricts transitions to
-    allow only one $State$, and can be constructed from a $NFA$ with
-    $n$ $States$ using $powerset$ $construction$, requiring up to
-    $2^n$ $States$. Both types recognize the same $Regular$
-    $Languages$.
-
-    \subparagraph{NFA-$\epsilon$} is a $NFA$ that allows transitions
-    without consuming input $Symbols$. A transition that changes state
-    without consuming input is an $\epsilon$ $move$. Each $State$ $q$
-    defines an $\epsilon$-$closure$, $E(q)$, which is the set of
-    $States$ that are reachable by $\epsilon$ $moves$.
-
-    The $Languages$ recognized by $NFA$-$\epsilon$ are the same as
-    $NFA$/$DFA$.
-
-    \subsubsection{Pushdown Automata} add a $Stack$ as a parameter for
-    choice of $States$ and can recognize $Context$-$free$ $Languages$.
-
-    Adding a second $Stack$ makes a $Pushdown$ $Automata$ equal in
-    power to a $Turing$ $Machine$.
-
-    Unlike $Finite$ $Automata$, $Deterministic$ $PDA$ are not
-    equivalent to $Nondeterministic$.
-
-    The general representation for a $PDA$ is
-    \[
-        M = (Q, \Sigma, \Gamma, q_0, Z_0, F, \delta)
-    \]
-    where
-    \begin{itemize}
-    \item $Q$ is a finite set of $States$
-    \item $\Sigma$ is a finite set of $input$ $Symbols$
-    \item $\Gamma$ is a finite set of $Stack$ $Symbols$
-    \item $q_0 \in Q$ is the initial $State$
-    \item $Z_0 \in \Gamma$ is the initial $Stack$ $Symbol$
-    \item $F \subseteq Q$ is the set of final $Accept$ $States$
-    \item $\delta$ is the $transition$ $function$ $\delta:
-    (Q \times (\Sigma \cup \{\epsilon\}) \times \Gamma) \rightarrow
-    \mathcal{P}(Q \times \Gamma^*)$
-    \end{itemize}
-
-    An element $(p,a,Z,q,\alpha)\in\delta$, with $M$ in $State$ $p \in
-    Q$, input $a \in \Sigma \cup \{\epsilon\}$, and top stack $Symbol$
-    $Z \in \Gamma$ results in the following:
-    \begin{enumerate}
-    \item read $a$
-    \item change state to $q$
-    \item pop $Z$
-    \item push $\alpha \in \Gamma^*$
-    \end{enumerate}
-
-    \paragraph{Deterministic Pushdown Automata} have the
-    restriction of only one derivation per accepted input $Word$. This
-    allows recognition of a subset of $Context$-$free$ $Languages$
-    termed $Deterministic$. Such $Languages$ can be parsed in linear
-    time and $Parsers$ for such $Languages$ can be generated
-    automatically.
-
-    A $Pushdown$ $Automata$ is $Deterministic$ iff both
-    \begin{enumerate}
-    \item $\forall q \in Q, a \in \Sigma \cup {\epsilon}, x \in
-      \Gamma \vdash |\delta(q,a,x)| \leq 1$
-    \item $\forall q \in Q, x in \Gamma \vdash |\delta(q,\epsilon,x)|
-      \neq 0 \Rightarrow \forall a \in \Sigma \vdash |\delta(q,a,x)|=0$
-    \end{enumerate}
-
-    \subsubsection{Linear Bounded Automata} are $Turing$ $Machines$
-    restricted to an input of finite length and are acceptors for
-    $Context$-$sensitive$ $Languages$ which require that $Production$
-    rules do not increase the size of the $Expression$ as a result;
-    therefore the size of the input is sufficient for calculation.
-
-    \subsubsection{Turing Machines}
-    A $Turing$ $Machine$ operates on an infinite $storage$ $tape$,
-    which acts as the read input as well as write storage. The
-    $Pushdown$ $Automata$ with 2 $Stacks$ are equivalent to $Turing$
-    $Machines$.
-
-    \paragraph{Non-deterministic Turing Machines} ($NTM$s) can be defined
-    as
-        \[
-            M = (Q, \Sigma, q_0, \sqcup, A, \delta)
-        \]
-    where
-    \begin{itemize}
-    \item $Q$ is a finite set of $States$
-    \item $\Sigma$ is the finite $Alphabet$
-    \item $q_0 \in Q$ is the initial $State$
-    \item $\sqcup \in \Sigma$ is the blank $Symbol$
-    \item $F \subseteq Q$ is the set of final $Accept$ $States$.
-    \item $\delta \subseteq (Q \setminus F \times \Sigma) \times (Q \times
-      \Sigma \times \{L,R\})$ and $L$ and $R$ are left and right shift.
-    \end{itemize}
-    The operation of $M$ in $State$ $q_i$ and current read input $a_j$
-    is a $transition$ $function$, $q_i a_j \rightarrow q_{i1} a_{j1}
-    d_k$. Note that for an $NTM$, $\delta$ is a relation and more than
-    one function can exist for each possible $input$/$State$
-    combination. The result is to write the new $Symbol$ $a_{j1}$ in
-    the current position and shift the storage left or right as
-    specified by $d_k$, afterwards assuming $State$ $q_{i1}$.
-
-    \paragraph{Deterministic Turing Machines} ($DTM$s) limits one possible
-    output $transition$ per unique $input$/$State$ combination, thus
-    $\delta$ is a $partial$ $function$ rather than a $relation$:
-    \[
-        \delta : Q \setminus F \times \Sigma \rightarrow Q \times
-        \Sigma \times {L,R}
-    \]
-    The computational power of $DTM$s and $NTM$s is equivalent (they
-    can solve the same problems) as $NTM$s include $DTM$s as a special
-    case. An equivalent accepting computation in a $DTM$ is generally
-    exponential to the length of the shortest accepting computation of
-    a $NTM$.
-
-    \paragraph{Probabilistic Turing Machines} add a probability
-    distribution to transitions (or a tape with random $Symbols$). It
-    is an open question whether this is more powerful than a $DTM$
-    ($\mathsf{BPP}=\mathsf{P}$ ?) but it is useful in the definition of
-    $interactive$ $proof$ $systems$.
-
-    \paragraph{Multidimensional Turing Machines} allow for tapes of
-    varying topologies. This requires additional shift directions (ie
-    $\{L, R, U, D\}$ for a 2-dimensional tape) but does not increase
-    the computing power; even an $\infty$-$dimensional$ $Turing$
-    $Machine$ can be simulated by a $DTM$.
-
-\section{Complexity Theory}
-
-\subsection{Algorithms}
-    An $Algorithm$ may be formalized as a sequence of operations that
-    can be simulated by a $Turing$-$complete$ system and any function
-    that is computable by $Algorithm$ is a $computable$ $function$.
+% --------------------------------------------------------------------
 
 \section{Logic Systems}
 
@@ -846,33 +852,40 @@ gives rise to a $Logic$ $System$.
 
 \subsection{Algebraic Logic}
 
-
 % --------------------------------------------------------------------
 
+\section{Complexity Theory}
+
+\subsection{Algorithms}
+    An $Algorithm$ may be formalized as a sequence of operations that
+    can be simulated by a $Turing$-$complete$ system and any function
+    that is computable by $Algorithm$ is a $computable$ $function$.
+
+% --------------------------------------------------------------------
 \part{Proof Theory}
-
 % --------------------------------------------------------------------
 
+
+% --------------------------------------------------------------------
 \part{Model Theory}
-
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
 \part{Formal Semantics}
+% --------------------------------------------------------------------
 
 \section{Denotational Semantics}
 
 % --------------------------------------------------------------------
-
 \part{Set Theory}
-
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
 \part{Graph Theory}
-
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
 \part{Category Theory}
-
 % --------------------------------------------------------------------
 
 \end{document}
