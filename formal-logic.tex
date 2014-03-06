@@ -144,8 +144,7 @@ $Expressions$ will be identical by members.
 
     \end{description}
 
-\paragraph{Special Symbols}
-
+\subsubsection{Special Symbols}
 Two special $Symbols$ are recognized:
 
     \begin{description}
@@ -232,7 +231,7 @@ different formulations of $Automata$ (subsection \ref{subsec:automata})
 
 \subsubsection{Type-0: Unrestricted}
 
-\paragraph{Semi-decidable}
+\paragraph{Semi-decidable} \hfill \\
 $Production$ $rules$ of an $Unrestricted$ $Grammar$ have the form
 \[
     \alpha \rightarrow \beta
@@ -254,29 +253,31 @@ an algorithm may decide non-membership only and is termed
 $\mathsf{coRE}$. The class of automata capable of implementing these
 algorithms is the $Turing$ $Machine$.
 
-\paragraph{Decidable}
-A $recursive$ (as opposed to $recursively$ $enumerable$) or
-$Decidable$ $Language$ is defined as the intersection of $\mathsf{RE}$
-and $\mathsf{coRE}$:
+\paragraph{Decidable} \hfill \\
+A $Decidable$ or $recursive$ $Language$ (as opposed to $recursively$
+$enumerable$) is defined as the intersection of
+$\mathsf{RE}$ and $\mathsf{coRE}$:
 \[
     \mathsf{R} = \mathsf{RE} \cap \mathsf{coRE}
 \]
 That is, it can be decided whether a $Symbol$ is a member or not by a
 $total$ $computable$ $function$ (one which returns $True$ or $False$
 depending on membership). $Decidable$ $Languages$ are recognizable by
-a $decider$ or $Total$ $Turing$ $Machine$.
+a $decider$ or $Total$ $Turing$ $Machine$ (however determining whether
+an arbitrary $Turing$ $Machine$ gives an answer for every input is an
+undecidable decision problem)\cite{kozen97}.
 
 \subsubsection{Type-1: Context-sensitive}
 
-\paragraph{Context-sensitive}
+\paragraph{Context-sensitive} \hfill \\
 $Context$-$sensitive$ $Grammars$ have the restriction that the result
 of a $Production$ is not shorter than the input. Formally stated
 $Productions$ are of the form
 \[
-    \alpha A \beta \rightarrow \alpha \gamma \beta
+    \alpha \Gamma \beta \rightarrow \alpha \gamma \beta
 \]
-where $|A| => |\gamma|$. In this formulation $\alpha$ and $\beta$ form
-the $Context$ of $A$.
+where $|\Gamma| \leq |\gamma|$. In this formulation $\alpha$ and $\beta$ form
+the $Context$ of $\Gamma$.
 
 Requiring that $S$ does not appear on the right of any $Production$
 and allowing the rule
@@ -287,13 +288,11 @@ makes the $Context$-$sensitive$ $Languages$ a proper superset of the
 $Context$-$free$ $Languages$.
 
 $Context$-$sensitive$ $Languages$ are equivalent to a $Linear$
-$Bounded$ $Automaton$ (a linear bounded non-deterministic $Turing$
-$Machine$).
+$Bounded$ $Automaton$ (\ref{subsec:linear_bounded_automata}).
 
-\paragraph{Indexed}
-
-An $Indexed$ $Grammar$ has an extra set of $Symbols$ $F$, the
-$Indexed$ $Symbols$. $Productions$ are of three possible forms,
+\paragraph{Indexed} \hfill \\
+An $Indexed$ $Grammar$ has an extra set of $Symbols$, $F$, the $Index$
+$Symbols$ with $Productions$ of three possible forms,
 \[
     A[\sigma] \rightarrow \alpha[\sigma]
 \]\[
@@ -301,15 +300,14 @@ $Indexed$ $Symbols$. $Productions$ are of three possible forms,
 \]\[
     A[f\sigma] \rightarrow \alpha[\sigma]
 \]
-where $f \in F$ and $\sigma$ is a string of $Index$ $Symbols$.
-
-In effect these are used to form a $stack$ by the $Production$ rules
+where $f \in F$ and $\sigma$ is a string of $Index$ $Symbols$. The
+$Index$ $Symbols$ are used to form a $stack$ by the $Production$ rules
 where $Indices$ are either pushed or popped from the stack.
 
-A $Indexed$ $Language$ can be recognized by a $Nested$ $Stack$
-$Automaton$.
+An $Indexed$ $Language$ can be recognized by a $Nested$ $Stack$
+$Automaton$\cite{aho69}.
 
-\paragraph{Generalized Contex-free}
+\paragraph{Generalized Contex-free} \hfill \\
 A $Generalized$ $Context$-$free$ $Grammar$ adds to the rewrite rules
 of a $Context$-$free$ $Grammar$ a set of non-context-free
 $composition$ $functions$ that combine tuples of symbols:
@@ -327,32 +325,27 @@ Rules are of the form:
 where $X$,$Y$,$\cdots$ are string tuples or $Non$-$terminal$
 $Symbols$.
 
-There are several weakly equivalent to the composition formulation.
+There are several weakly equivalent $Grammars$ to the composition formulation:
 
 \begin{description}
-\item[Linear context-free rewriting system]
-
+\item[Linear context-free rewriting system] \hfill \\
     Weakly equivalent to $multi$-$component$ $Tree$-$adjoining$
     $Grammars$ where composition functions are both $linear$ and
-    $regular$. Can be recognized by $Thread$ $Automata$.
+    $regular$. Can be recognized by $Thread$ $Automata$\cite{villemonte02}.
 
-\item[Tree-adjoining]
-
+\item[Tree-adjoining] \hfill \\
     Elementary rewriting unit is a tree rather than a $Symbol$. Can be
-    recognized by $Embedded$ $pushdown$ $automata$.
+    recognized by $Embedded$ $Pushdown$ $Automata$\cite{vijayashanker88}.
 
-\item[Linear indexed grammar]
-
+\item[Linear indexed grammar] \hfill \\
     A modified $Indexed$ $Grammar$ where only one symbol receives the
     stack.
 
-\item[Combinatory Categorical Grammar]
-
+\item[Combinatory Categorical Grammar] \hfill \\
     A type of $shrase$ $Structure$ $Grammar$ using $Combinatory$
     $Logic$.
 
-\item[Head grammar]
-
+\item[Head grammar] \hfill \\
     A subset of the $Linear$ $context$-$free$ $rewriting$ $system$ and
     a $Phrase$ $Structure$ $Grammar$.
 
@@ -360,8 +353,8 @@ There are several weakly equivalent to the composition formulation.
 
 \subsubsection{Type-2: Context-free}
 
-\paragraph{Context-free}
-$Context$-$free$ $Grammars$ have production rules of the form
+\paragraph{Context-free} \hfill \\
+$Context$-$free$ $Grammars$ ($CFG$s) have production rules of the form
 \[
     V \rightarrow w
 \]
@@ -390,13 +383,13 @@ in the syntax structure.
 The $Context$-$free$ $Grammar$ is equivalent to $Non$-$deterministic$
 $Pushdown$ $Automata$.
 
-\paragraph{Deterministic}
+\paragraph{Deterministic} \hfill \\
 $Deterministic$ $Context$-$free$ $Grammars$ are derived from
 $Deterministic$ $Pushdown$ $Automata$ and are always
 $unambiguous$. They can be parsed in linear time and a parser can be
 automatically generated from the $Grammar$ by a $parser$-$generator$.
 
-\paragraph{Visibly Pushdown}
+\paragraph{Visibly Pushdown} \hfill \\
 $Visibly$ $Pushdown$ $Grammars$ are described by the 4-tuple
 \[
     G = (V=V^0 \cup V^1,T,P,S)
@@ -417,7 +410,7 @@ $words$, described by a $Monadic$ $Second$-$order$ $Logic$.
 
 \subsubsection{Type-3: Regular}
 
-\paragraph{Extended Regular}
+\paragraph{Extended Regular} \hfill \\
 $Extended$ $Regular$ $Grammars$ have $Productions$ of either $right$
 $Regular$ or $left$ $Regular$ form.
 
@@ -429,6 +422,7 @@ $Right:$
 \]\[
     A \rightarrow \epsilon
 \]
+
 $Left:$
 \[
     A \rightarrow a
@@ -440,7 +434,7 @@ $Left:$
 where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
 only $Non$-$terminal$ characters.
 
-\paragraph{Strictly Regular}
+\paragraph{Strictly Regular} \hfill \\
 $Strictly$ $Regular$ $Grammars$ also have $Productions$ of either
 $right$ $Regular$ or $left$ $Regular$ form.
 
@@ -452,6 +446,7 @@ $Right:$
 \]\[
     B \rightarrow \epsilon
 \]
+
 $Left:$
 \[
     A \rightarrow a
@@ -472,7 +467,7 @@ $Expression$ within a $Regular$ $Language$ may be repeated an
 arbitrary number of times to produce another $Expression$ in that same
 $Language$.
 
-\paragraph{k-Testable}
+\paragraph{k-Testable} \hfill \\
 A $K$-$Testable$ $Language$ is one where membership of an $Expression$
 depends on the first and last symbol and a set of factors of length
 $k$. An example is a $Local$ $Language$ which is a $2$-$Testable$
@@ -486,7 +481,7 @@ member of a $Local$ $Language$ to have its first $Symbol$ in $R$, and
 its second $Symbol$ in $S$, and no factor of $w$ of length 2 is in
 $F$. A $Local$ $Language$ is recognized by a $Local$ $Automaton$.
 
-\paragraph{Star-free}
+\paragraph{Star-free} \hfill \\
 A $Star$-$free$ $Language$ is one having a $Generalized$ $Star$
 $Height$ equal to $Zero$, that is, the minimal $Star$ $Height$ of all
 $Expressions$ in the $Language$ with the $Star$ $Height$ of an
@@ -499,12 +494,12 @@ $Logic$.
 
 \subsubsection{Affix Grammars}
 
-$Affix$ $Grammars$ are those of a $Context$-$free$ $Grammar$ with a
+\emph{Affix Grammars} are those of a $Context$-$free$ $Grammar$ with a
 subset of the $Non$-$terminals$ used as $affix$ $arguments$. If the
 same $affix$ appears multiple places in a $Production$, the $value$
 must be the same.
 
-\paragraph{Two-Level Grammars}
+\paragraph{Two-Level Grammars} \hfill \\
 Allowing the $values$ for $affixes$ to be described by a
 $Context$-$free$ $Grammar$ results in a $Two$-$Level$ $Grammar$.
 
@@ -518,7 +513,7 @@ $Grammars$ with infinite rules.
 \item[Extended Affix Grammar] is a restricted $W$-$grammar$.
 \end{description}
 
-\paragraph{Attribute Grammars}
+\paragraph{Attribute Grammars} \hfill \\
 $Attribute$ $Grammars$ allows $affixes$ from arbitrary domains and
 allows functions calculate values of $affixes$.
 
@@ -527,8 +522,9 @@ allows functions calculate values of $affixes$.
 $Analytic$ $Grammars$ are used in $Parsing$ (see next section).
 
 \begin{description}
-\item[Top-Down Parsing Language] Formal representation of a
-  $Recursive$ $Descent$ $Parser$. $Production$ rules of the form
+\item[Top-Down Parsing Language] \hfill \\
+Formal representation of a $Recursive$ $Descent$
+$Parser$. $Production$ rules of the form
 \[
     A \leftarrow \epsilon
 \]\[
@@ -538,9 +534,9 @@ $Analytic$ $Grammars$ are used in $Parsing$ (see next section).
 \]\[
     A \leftarrow BC/D
 \]
-\item[Parsing Expression Generator]
+\item[Parsing Expression Generator] \hfill \\
 A more generalized $Top$-$Down$ $Parsing$ $Language$.
-\item[Link Grammar]
+\item[Link Grammar] \hfill \\
 $Dependency$ $Grammar$ with directionality between $Symbols$.
 \end{description}
 
@@ -550,7 +546,7 @@ A $Parser$ analyzes an $Expression$ according to the rules of a
 $Formal$ $Grammar$ generating a $Data$ $Structure$ describing the
 $Syntax$ of the input.
 
-\paragraph{Lexical Analysis}
+\paragraph{Lexical Analysis} \hfill \\
 A $Parser$ may be preceded by a $Lexical$ $Analyzer$ which creates
 $Tokens$ ($Symbols$) from a string of input $Glyphs$. $Expressions$ of
 $Tokens$ are referred to as $Phrases$. A $Lexical$ $Analyzer$ is a
@@ -567,8 +563,7 @@ $Lexemes$ are resolved into $Tokens$ by an $Evaluator$ which assigns
 values where needed-- this results in $Tokens$ that are either a
 $Type$-$Value$ pair, or just a $Type$.
 
-\paragraph{Syntactic Analysis}
-
+\paragraph{Syntactic Analysis} \hfill \\
 The $Parser$ determines if and how the input can be derived from the
 $Start$ $Symbol$ of the $Grammar$.
 
@@ -587,7 +582,6 @@ example of this would be the in the $Compiler$ of a $Programming$
 $Language$.
 
 \subsection{Automata Theory}
-\label{subsec:automata}
 
 \subsubsection{State Transition Systems}
 A $State$ $Transition$ $System$ can have an infinite numbe of $States$
@@ -626,6 +620,7 @@ A $Semiautomaton$ induces a $Monoid$ called the $input$ $Monoid$:
 \]
 
 \subsubsection*{Automata}
+\label{subsec:automata}
 
 An $Automaton$ reads input strings, $Words$ ($Expressions$), and
 either accepts or rejects depending on whether a $Word$ is a member of
@@ -657,7 +652,7 @@ where
 \subsubsection{Finite Automata} are $Finite$ $State$
 $Machine$ and which takes a finite input string of $Symbols$ and
 either accepts or rejects the input depending on the final $State$ of
-the computation. $Finite$ $Automata$ are able to recognize $Refular$
+the computation. $Finite$ $Automata$ are able to recognize $Regular$
 $Languages$.
 
 \paragraph{Deterministic Finite Automata} have the restriction
@@ -790,11 +785,12 @@ A $Pushdown$ $Automata$ is $Deterministic$ iff both
   \neq 0 \Rightarrow \forall a \in \Sigma \vdash |\delta(q,a,x)|=0$
 \end{enumerate}
 
-\subsubsection{Linear Bounded Automata} are $Turing$ $Machines$
-restricted to an input of finite length and are acceptors for
-$Context$-$sensitive$ $Languages$ which require that $Production$
-rules do not increase the size of the $Expression$ as a result;
-therefore the size of the input is sufficient for calculation.
+\subsubsection{Linear Bounded Automata} \label{subsec:linear_bounded_automata}
+$Linear$ $Bounded$ $Automata$ are $Turing$ $Machines$ restricted to an
+input of finite length and are acceptors for $Context$-$sensitive$
+$Languages$ which require that $Production$ rules do not increase the
+size of the $Expression$ as a result; therefore the size of the input
+is sufficient for calculation.
 
 \subsubsection{Turing Machines}
 A $Turing$ $Machine$ operates on an infinite $storage$ $tape$, which
@@ -1000,6 +996,30 @@ Material Consequence
     \emph{Systems of Logic Based on Ordinals}
     Princeton,
     1938.
+
+\bibitem{kozen97}
+    Dexter C. Kozen,
+    \emph{Automata and Computability}
+    Springer,
+    1997
+
+\bibitem{aho69}
+    Alfred V. Aho,
+    \emph{Nested stack automata}
+    Journal of the ACM,
+    1969
+
+\bibitem{villemonte02}
+    Éric Villemonte de la Clergerie,
+    \emph{Parsing mildly context-sensitive languages with thread automata}
+    COLING '02 Proceedings,
+    2002
+
+\bibitem{vijayashanker88}
+    K. Vijayashanker,
+    \emph{A study of tree adjoining grammars}
+    University of Pennsylvania,
+    1988
 
 \end{thebibliography}
 % --------------------------------------------------------------------
