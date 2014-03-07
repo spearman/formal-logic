@@ -76,7 +76,7 @@ This is identical to a $Labeled$ $Transition$ $System$.
 
 % --------------------------------------------------------------------
 
-\subsection{Lexical Elements}
+\section{Lexical Elements}
 
 The definition of a $Grammar$ and hence a $Language$ determined by it
 will not involve any units smaller than the $Symbol$ and because of
@@ -100,7 +100,7 @@ $Symbols$).
 
     \end{description}
 
-\subsection{Syntactic Elements}
+\section{Syntactic Elements}
 
 Within a $Language$ defined by a $Grammar$ over a given $Vocabulary$,
 the $Symbols$ will be divided into two disjoint subsets according to
@@ -137,7 +137,7 @@ $Expressions$ will be identical by members.
 
     \end{description}
 
-\subsubsection{Special Symbols}
+\subsection{Special Symbols}
 Two special $Symbols$ are recognized:
 
     \begin{description}
@@ -206,9 +206,9 @@ Let:
 
     \end{description}
 
-\subsection{Formal Grammars}
+\section{Formal Grammars}
 
-\subsubsection{Chomsky Hierarchy}
+\subsection{Chomsky Hierarchy}
 
 $Grammars$ are classified by how restrictive the $Production$ rules
 are. By convention, they may be organized into a hierarchy of sets
@@ -222,9 +222,9 @@ covering all possible formal grammars.
 These different levels in the hierarchy are also $Recognizable$ by
 different formulations of $Automata$ (subsection \ref{subsec:automata})
 
-\subsubsection{Type-0: Unrestricted}
+\subsection{Type-0: Unrestricted}
 
-\paragraph{Semi-decidable} \hfill \\
+\subsubsection{Semi-decidable}
 $Production$ $rules$ of an $Unrestricted$ $Grammar$ have the form
 \[
     \alpha \rightarrow \beta
@@ -246,7 +246,7 @@ an algorithm may decide non-membership only and is termed
 $\mathsf{coRE}$. The class of automata capable of implementing these
 algorithms is the $Turing$ $Machine$.
 
-\paragraph{Decidable} \hfill \\
+\subsubsection{Decidable}
 A $Decidable$ or $recursive$ $Language$ (as opposed to $recursively$
 $enumerable$) is defined as the intersection of
 $\mathsf{RE}$ and $\mathsf{coRE}$:
@@ -260,9 +260,9 @@ a $decider$ or $Total$ $Turing$ $Machine$ (however determining whether
 an arbitrary $Turing$ $Machine$ gives an answer for every input is an
 undecidable decision problem)\cite{kozen97}.
 
-\subsubsection{Type-1: Context-sensitive}
+\subsection{Type-1: Context-sensitive}
 
-\paragraph{Context-sensitive} \hfill \\
+\subsubsection{Context-sensitive} \hfill \\
 $Context$-$sensitive$ $Grammars$ have the restriction that the result
 of a $Production$ is not shorter than the input. Formally stated
 $Productions$ are of the form
@@ -283,7 +283,7 @@ $Context$-$free$ $Languages$.
 $Context$-$sensitive$ $Languages$ are equivalent to a $Linear$
 $Bounded$ $Automaton$ (\ref{subsec:linear_bounded_automata}).
 
-\paragraph{Indexed} \hfill \\
+\subsubsection{Indexed} \hfill \\
 An $Indexed$ $Grammar$ has an extra set of $Symbols$, $F$, the $Index$
 $Symbols$ with $Productions$ of three possible forms,
 \[
@@ -300,7 +300,7 @@ where $Indices$ are either pushed or popped from the stack.
 An $Indexed$ $Language$ can be recognized by a $Nested$ $Stack$
 $Automaton$\cite{aho69}.
 
-\paragraph{Generalized Contex-free} \hfill \\
+\subsubsection{Generalized Contex-free} \hfill \\
 A $Generalized$ $Context$-$free$ $Grammar$ adds to the rewrite rules
 of a $Context$-$free$ $Grammar$ a set of non-context-free
 $composition$ $functions$ that combine tuples of symbols:
@@ -344,9 +344,9 @@ There are several weakly equivalent $Grammars$ to the composition formulation:
 
 \end{description}
 
-\subsubsection{Type-2: Context-free}
+\subsection{Type-2: Context-free}
 
-\paragraph{Context-free} \hfill \\
+\subsubsection{Context-free} \hfill \\
 $Context$-$free$ $Grammars$ ($CFG$s) have production rules of the form
 \[
     V \rightarrow w
@@ -376,13 +376,13 @@ in the syntax structure.
 The $Context$-$free$ $Grammar$ is equivalent to $Non$-$deterministic$
 $Pushdown$ $Automata$.
 
-\paragraph{Deterministic} \hfill \\
+\subsubsection{Deterministic} \hfill \\
 $Deterministic$ $Context$-$free$ $Grammars$ are derived from
 $Deterministic$ $Pushdown$ $Automata$ and are always
 $unambiguous$. They can be parsed in linear time and a parser can be
 automatically generated from the $Grammar$ by a $parser$-$generator$.
 
-\paragraph{Visibly Pushdown} \hfill \\
+\subsubsection{Visibly Pushdown} \hfill \\
 $Visibly$ $Pushdown$ $Grammars$ are described by the 4-tuple
 \[
     G = (V=V^0 \cup V^1,T,P,S)
@@ -401,9 +401,9 @@ where $Z \in V^0$ and if $X \in V^0$ then $Y \in V^0$
 The resulting $Language$ is a $Regular$ $Language$ with $nested$
 $words$, described by a $Monadic$ $Second$-$order$ $Logic$.
 
-\subsubsection{Type-3: Regular}
+\subsection{Type-3: Regular}
 
-\paragraph{Extended Regular} \hfill \\
+\subsubsection{Extended Regular} \hfill \\
 $Extended$ $Regular$ $Grammars$ have $Productions$ of either $right$
 $Regular$ or $left$ $Regular$ form.
 
@@ -427,7 +427,7 @@ $Left:$
 where $a$ is a single $Non$-$terminal$ and $w$ is an expression of
 only $Non$-$terminal$ characters.
 
-\paragraph{Strictly Regular} \hfill \\
+\subsubsection{Strictly Regular} \hfill \\
 $Strictly$ $Regular$ $Grammars$ also have $Productions$ of either
 $right$ $Regular$ or $left$ $Regular$ form.
 
@@ -460,7 +460,7 @@ $Expression$ within a $Regular$ $Language$ may be repeated an
 arbitrary number of times to produce another $Expression$ in that same
 $Language$.
 
-\paragraph{k-Testable} \hfill \\
+\subsubsection{k-Testable} \hfill \\
 A $K$-$Testable$ $Language$ is one where membership of an $Expression$
 depends on the first and last symbol and a set of factors of length
 $k$. An example is a $Local$ $Language$ which is a $2$-$Testable$
@@ -474,7 +474,7 @@ member of a $Local$ $Language$ to have its first $Symbol$ in $R$, and
 its second $Symbol$ in $S$, and no factor of $w$ of length 2 is in
 $F$. A $Local$ $Language$ is recognized by a $Local$ $Automaton$.
 
-\paragraph{Star-free} \hfill \\
+\subsubsection{Star-free} \hfill \\
 A $Star$-$free$ $Language$ is one having a $Generalized$ $Star$
 $Height$ equal to $Zero$, that is, the minimal $Star$ $Height$ of all
 $Expressions$ in the $Language$ with the $Star$ $Height$ of an
@@ -485,14 +485,14 @@ $Syntactic$ $Monoids$. Also as the $Counter$-$free$ $Langauges$ by the
 $Aperiodic$ $Finite$-$state$ $Automaton$, and $Linear$ $Temporal$
 $Logic$.
 
-\subsubsection{Affix Grammars}
+\subsection{Affix Grammars}
 
 \emph{Affix Grammars} are those of a $Context$-$free$ $Grammar$ with a
 subset of the $Non$-$terminals$ used as $affix$ $arguments$. If the
 same $affix$ appears multiple places in a $Production$, the $value$
 must be the same.
 
-\paragraph{Two-Level Grammars} \hfill \\
+\subsection{Two-Level Grammars} \hfill \\
 Allowing the $values$ for $affixes$ to be described by a
 $Context$-$free$ $Grammar$ results in a $Two$-$Level$ $Grammar$.
 
@@ -506,11 +506,11 @@ $Grammars$ with infinite rules.
 \item[Extended Affix Grammar] is a restricted $W$-$grammar$.
 \end{description}
 
-\paragraph{Attribute Grammars} \hfill \\
+\subsection{Attribute Grammars} \hfill \\
 $Attribute$ $Grammars$ allows $affixes$ from arbitrary domains and
 allows functions calculate values of $affixes$.
 
-\subsubsection{Analytic Grammars}
+\subsection{Analytic Grammars}
 
 $Analytic$ $Grammars$ are used in $Parsing$ (see next section).
 
@@ -533,13 +533,13 @@ A more generalized $Top$-$Down$ $Parsing$ $Language$.
 $Dependency$ $Grammar$ with directionality between $Symbols$.
 \end{description}
 
-\subsection{Parsers}
+\section{Parsers}
 
 A $Parser$ analyzes an $Expression$ according to the rules of a
 $Formal$ $Grammar$ generating a $Data$ $Structure$ describing the
 $Syntax$ of the input.
 
-\subsubsection{Lexical Analysis} \hfill \\
+\subsection{Lexical Analysis} \hfill \\
 A $Parser$ may be preceded by a $Lexical$ $Analyzer$ which creates
 $Tokens$ ($Symbols$) from a string of input $Glyphs$. $Expressions$ of
 $Tokens$ are referred to as $Phrases$. A $Lexical$ $Analyzer$ is a
@@ -556,7 +556,7 @@ $Lexemes$ are resolved into $Tokens$ by an $Evaluator$ which assigns
 values where needed-- this results in $Tokens$ that are either a
 $Type$-$Value$ pair, or just a $Type$.
 
-\subsubsection{Syntactic Analysis} \hfill \\
+\subsection{Syntactic Analysis} \hfill \\
 The $Parser$ determines if and how the input can be derived from the
 $Start$ $Symbol$ of the $Grammar$.
 
@@ -840,11 +840,12 @@ $\{L, R, U, D\}$ for a 2-dimensional tape) but does not increase the
 computing power; even an $\infty$-$dimensional$ $Turing$ $Machine$ can
 be simulated by a $DTM$.
 
+
+% --------------------------------------------------------------------
+\part{Symbolic Logic}
 % --------------------------------------------------------------------
 
-\section{Symbolic Logic}
-
-\subsection{Systems of Logic}
+\section{Systems of Logic}
 
 A $Formal$ $Language$ (described by a $Formal$ $Grammar$) in combination
 with a $Deductive$ $Apparatus$ gives rise to a $System$ $of$ $Logic$. Here,
@@ -932,17 +933,8 @@ Alan Turing's PhD Thesis \cite{turing38}
 \subsection{Algebraic Logic}
 
 % --------------------------------------------------------------------
-
-\section{Complexity Theory}
-
-\subsection{Algorithms}
-
-An $Algorithm$ may be formalized as a sequence of operations that
-can be simulated by a $Turing$-$complete$ system and any function
-that is computable by $Algorithm$ is a $computable$ $function$.
-
-% --------------------------------------------------------------------
 \part{Proof Theory}
+% --------------------------------------------------------------------
 
 Syntactic Consequence of a Logic System
 
@@ -955,6 +947,7 @@ Synthesis
 
 % --------------------------------------------------------------------
 \part{Model Theory}
+% --------------------------------------------------------------------
 
 Semantic Consequence of a Logic System
 % --------------------------------------------------------------------
@@ -982,6 +975,16 @@ Material Consequence
 % --------------------------------------------------------------------
 \part{Category Theory}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\part{Complexity Theory}
+% --------------------------------------------------------------------
+
+\section{Algorithms}
+
+An $Algorithm$ may be formalized as a sequence of operations that
+can be simulated by a $Turing$-$complete$ system and any function
+that is computable by $Algorithm$ is a $computable$ $function$.
 
 % --------------------------------------------------------------------
 \begin{thebibliography}{9}
