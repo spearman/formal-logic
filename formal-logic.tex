@@ -938,25 +938,25 @@ from existing rules.
 
 \subsection{Zeroth-order - Propositional}
 
-\emph{0-th Order}, \emph{Propositional Logic} (also called
-\emph{sentential} or \emph{statement logic}) is represented by a
-Formal Language with WFF consisting only of \emph{Operators}
-(\emph{logical connectives}) and \emph{Primitive Symbols} representing
-\emph{Propositions}.
+\emph{Propositional Logic} (also called \emph{sentential} or
+\emph{statement logic}) is represented by a Formal Language with WFF
+consisting only of \emph{Operators} (\emph{logical connectives}) and
+\emph{Primitive Symbols} representing \emph{Propositions}.
 
 Propositions are WFF that are assigned a truth value. An \emph{Atomic
   Proposition} contains no Operators. A \emph{Composite Proposition}
 is composed by recursive application of Operators to Propositions by a
-corresponding \emph{Concatenation Rule}.
+corresponding \emph{Concatenation Rule} that assigns a new truth value
+to the Composite string.
 
 Primitive Symbols are usually divided into three different categories:
 \begin{description}
 \item[Propositional Constants] \hfill \\
-Represent particular Propositions: $A$, $B$, $C$
+Represent particular Propositions: $A$, $B$, $C$, $\ldots$
 \item[Propositional Variables] \hfill \\
-Range over set of all Atomic Propositions: $p$, $q$, $r$
+Range over set of all Atomic Propositions: $p$, $q$, $r$, $\ldots$
 \item[Schematic Variables] \hfill \\
-Range over set of all propositions: $\varphi$, $\psi$, $\chi$
+Range over set of all propositions: $\varphi$, $\psi$, $\chi$, $\ldots$
 \end{description}
 
 Formal definition of a \emph{Propositional Calculus}:
@@ -973,7 +973,9 @@ where
 \item $\mathbf{I}$ is a finite set of Axioms
 \end{itemize}
 % FIXME: ref Induction? (proof theory)
-$\mathcal{L}$ is then \emph{Inductively} defined as follows:
+$\mathcal{L}$ is then \emph{Inductively} defined as follows, where
+$\mathbf{\Omega_j}$ is the partition of $\mathbf{\Omega}$ containing
+Operators of arity $\mathbf{j}$:
 \begin{enumerate}
 \item Any element of $\mathbf{A}$ is a formula of $\mathcal{L}$
 \item For formulas $p_1, p_2, \cdots, p_j$ and $f \in
@@ -988,23 +990,47 @@ Logic are termed \emph{Theorems}. Allowing for Axiom Schema (an
 infinite number of axioms) extends Propositional Logic; an example of
 such a system is \emph{Skolem Arithmetic}\cite{skolem23}.
 
-Inference Rules of a Propositional Logic define valid
-\emph{Argument Forms}. The simplest Argument Form that is both
-necessary and sufficient to define all other Argument Forms is
-\emph{Modus Ponens}, shown here Schematicized:
+Inference Rules of a Propositional Logic define valid \emph{Argument
+  Forms}. The simplest Argument Form that is both necessary (and given
+a complete set of Axioms is sufficient to define all other Argument
+Forms) is \emph{Modus Ponens}, shown here Schematicized:
 
 $\textrm{1. }\varphi \rightarrow \psi$
 
 $\textrm{2. }\varphi$
 
 $\therefore\textrm{ }\psi$
+\\
+where lines one and two are Premises and line three is the Conclusion
+(the symbol $\therefore$ is read as \emph{therefore}).
 
+The minimal set of primitive operators is the \emph{negation} symbol
+($\neg$) plus a \emph{sole sufficient} Operator of either $\land$,
+$\lor$ or $\rightarrow$. Choosing one of these Operators, the other
+two, and any other Operator, can be defined in terms of it and
+negation. It is also possible to construct functionally complete sets
+of one element: $\mathbf{\Omega} = \{NAND\}$ or $\mathbf{\Omega} =
+\{NOR\}$.\\
+\\
+Example simple Axiom system:
 
--Argument
--only modus ponens needed for a complete system
--1. phi -> psi
--2. phi
--C. psi
+$\mathbf{\Omega} = \mathbf{\Omega_1} \cup \mathbf{\Omega_2}$
+
+$\mathbf{\Omega_1} = \{\neg\}$
+
+$\mathbf{\Omega_2} = \{\rightarrow\}$
+
+$\mathbf{I} = \{ (p \rightarrow (q \rightarrow p)),$
+
+$\qquad((p \rightarrow (q \rightarrow r)) \rightarrow
+(( p \rightarrow q) \rightarrow (p \rightarrow r))),$
+
+$\qquad(( \neg p \rightarrow \neg q ) \rightarrow (q \rightarrow p )) \}$\\
+with Modus Ponens as the sole inference rule.
+
+Another possible system is the \emph{Natural Deduction
+  System}\cite{jaskowski34} which has no Axioms
+($\mathbf{I}=\varnothing$) and ten Inference Rules.
 
 \subsection{First-order - Predicate}
 
@@ -1126,6 +1152,15 @@ that is computable by Algorithm is a \emph{computable function}.
     trans. Jean van Heijenoort,
     \emph{From Frege to G\"odel: A Source Book in Mathematical Logic, 1879-1931},
     Harvard Univ. Press,
+    1967
+
+\bibitem{jaskowski34}
+    Stanislaw Ja\'skowski,
+    \emph{On the Rules of Suppositions in Formal Logic},
+    1934,
+    ed. Storrs McCall,
+    \emph{Polish logic 1920-39},
+    Oxford,
     1967
 
 \end{thebibliography}
