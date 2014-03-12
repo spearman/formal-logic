@@ -116,7 +116,7 @@ Two special Symbols are recognized:
 
     \begin{description}
 
-    \item[Empty Symbol ($\epsilon$)] \hfill \\
+    \item[Empty Symbol ($\varepsilon$)] \hfill \\
     the Symbol of zero length and a Terminal Symbol
 
     \item[Start Symbol ($S$)] \hfill \\
@@ -169,11 +169,11 @@ lowercase ($a,b,c,\cdots$), and expressions by Greek letters
         : L \subseteq \Sigma^*
     \]
 
-    \item Existence of the Empty Symbol, $\epsilon$:
+    \item Existence of the Empty Symbol, $\varepsilon$:
     \[
         \forall \: \Sigma^* \in \mathcal{V} \:
-        \exists ! \: \epsilon \in \Sigma^*
-        : |\epsilon|=0
+        \exists ! \: \varepsilon \in \Sigma^*
+        : |\varepsilon|=0
     \]
 
     \end{description}
@@ -202,7 +202,7 @@ Production rules of an \emph{Unrestricted} Grammar have the form
     \alpha \rightarrow \beta
 \]
 where $\alpha$ and $\beta$ are Expressions of $N \cup T$ and $\alpha
-\neq \epsilon$.
+\neq \varepsilon$.
 
 A completely unrestricted Grammar is called \emph{recursively
   enumerable} or \emph{Semi-decidable}. This means membership of the
@@ -248,7 +248,7 @@ the \emph{Context} of $\Gamma$.
 Requiring that $S$ does not appear on the right of any Production
 and allowing the rule
 \[
-    S \rightarrow \epsilon
+    S \rightarrow \varepsilon
 \]
 makes the Context-sensitive Languages a proper superset of the
 \emph{Context-free Languages}.
@@ -368,7 +368,7 @@ and a \emph{Parser} can be automatically generated from the Grammar by a
 where $V^0$ and $V^1$ are disjoint sets of Non-terminals and there
 are three kinds of Production rules:
 \[
-    X \rightarrow \epsilon
+    X \rightarrow \varepsilon
 \]\[
     X \rightarrow aY
 \]\[
@@ -417,7 +417,7 @@ Right:
 \]\[
     A \rightarrow B \nu
 \]\[
-    A \rightarrow \epsilon
+    A \rightarrow \varepsilon
 \]
 
 Left:
@@ -426,7 +426,7 @@ Left:
 \]\[
     A \rightarrow B \nu
 \]\[
-    A \rightarrow \epsilon
+    A \rightarrow \varepsilon
 \]
 where $a$ is a single Non-terminal and $\nu$ is an expression of only
 Non-terminal characters.
@@ -441,7 +441,7 @@ Right:
 \]\[
     B \rightarrow aC
 \]\[
-    B \rightarrow \epsilon
+    B \rightarrow \varepsilon
 \]
 
 Left:
@@ -450,7 +450,7 @@ Left:
 \]\[
     A \rightarrow Ba
 \]\[
-    A \rightarrow \epsilon
+    A \rightarrow \varepsilon
 \]
 where $a$ is a single Non-terminal.
 
@@ -522,7 +522,7 @@ allows functions calculate values of affixes.
 Formal representation of \emph{Recursive Descent Parser}. Production
 rules of the form
 \[
-    A \leftarrow \epsilon
+    A \leftarrow \varepsilon
 \]\[
     A \leftarrow f
 \]\[
@@ -686,7 +686,7 @@ $q_n \in F$.
 A recursive definition using \emph{composition} of transition
 functions
 \[
-    \widehat{\delta}(q,\epsilon) = q
+    \widehat{\delta}(q,\varepsilon) = q
 \]\[
     \widehat{\delta}(q,wa) = \delta_a(\widehat{\delta}(q,w))
 \]
@@ -730,13 +730,13 @@ one State, and can be constructed from a NFA with $n$ States using
 \emph{powerset construction}, requiring up to $2^n$ States. Both types
 recognize the same Regular Languages(\ref{subsec:regular_language}).
 
-\paragraph{NFA-$\epsilon$} is a NFA that allows transitions
+\paragraph{NFA-$\varepsilon$} is a NFA that allows transitions
 without consuming input Symbols. A transition that changes state
-without consuming input is an $\epsilon$ $move$. Each State $q$
-defines an $\epsilon$-\emph{closure}, $E(q)$, which is the set of
-States that are reachable by $\epsilon$ moves.
+without consuming input is an $\varepsilon$ $move$. Each State $q$
+defines an $\varepsilon$-\emph{closure}, $E(q)$, which is the set of
+States that are reachable by $\varepsilon$ moves.
 
-The Languages recognized by NFA-$\epsilon$ are the same as NFA/DFA.
+The Languages recognized by NFA-$\varepsilon$ are the same as NFA/DFA.
 
 \subsection{Pushdown Automata}\label{subsec:pushdown_automata}
 \emph{Pushdown Automata} add to Finite Automata a \emph{Stack} as a
@@ -760,12 +760,12 @@ where
 \item $Z_0 \in \Gamma$ is the initial Stack Symbol
 \item $F \subseteq Q$ is the set of final Accept States
 \item $\delta$ is the transition function $\delta: (Q \times (\Sigma
-  \cup \{\epsilon\}) \times \Gamma) \rightarrow \mathcal{P}(Q \times
+  \cup \{\varepsilon\}) \times \Gamma) \rightarrow \mathcal{P}(Q \times
   \Gamma^*)$
 \end{itemize}
 
 An element $(p,a,Z,q,\alpha)\in\delta$, with $M$ in State $p \in Q$,
-input $a \in \Sigma \cup \{\epsilon\}$, and top stack Symbol $Z \in
+input $a \in \Sigma \cup \{\varepsilon\}$, and top stack Symbol $Z \in
 \Gamma$ results in the following:
 \begin{enumerate}
 \item read $a$
@@ -784,9 +784,9 @@ automatically(\ref{subsec:parser_generator}).
 
 A Pushdown Automata is Deterministic iff both
 \begin{enumerate}
-\item $\forall q \in Q, a \in \Sigma \cup {\epsilon}, x \in
+\item $\forall q \in Q, a \in \Sigma \cup {\varepsilon}, x \in
   \Gamma \vdash |\delta(q,a,x)| \leq 1$
-\item $\forall q \in Q, x \in \Gamma \vdash |\delta(q,\epsilon,x)|
+\item $\forall q \in Q, x \in \Gamma \vdash |\delta(q,\varepsilon,x)|
   \neq 0 \Rightarrow \forall a \in \Sigma \vdash |\delta(q,a,x)|=0$
 \end{enumerate}
 
@@ -940,39 +940,55 @@ from existing rules.
 \emph{0-th Order}, \emph{Propositional Logic} (also called
 \emph{sentential} or \emph{statement logic}) is represented by a
 Formal Language with WFF consisting only of \emph{Operators}
-(\emph{logical connectives}) and \emph{Propositional
-  Constants}.
+(\emph{logical connectives}) and \emph{Primitive Symbols} representing
+\emph{Propositions}.
 
-Propositional Constants are either \emph{Atomic} or
-\emph{Composite}. A Composite Proposition is composed by recursive
-application of Operators to Propositions by a corresponding
-\emph{Concatenation Rule}.
+Propositions are WFF that are assigned a truth value. An \emph{Atomic
+  Proposition} contains no Operators. A \emph{Composite Proposition}
+is composed by recursive application of Operators to Propositions by a
+corresponding \emph{Concatenation Rule}.
+
+Primitive Symbols are usually divided into three different categories:
+\begin{description}
+\item[Propositional Constants] \hfill \\
+Represent particular Propositions: $A$, $B$, $C$
+\item[Propositional Variables] \hfill \\
+Range over set of all Atomic Propositions: $p$, $q$, $r$
+\item[Schematic Variables] \hfill \\
+Range over set of all propositions: $\varphi$, $\psi$, $\chi$
+\end{description}
+
+Formal definition of a \emph{Propositional Calculus}:
+\[
+    \mathcal{L} = (\mathbf{A},\mathbf{\Omega},\mathbf{Z},\mathbf{I})
+\]
+where
+\begin{itemize}
+\item $\mathbf{A}$ is a finite set of Proposition symbols ($p$, $q$,
+  $r$, $\ldots$)
+\item $\mathbf{\Omega}$ is a finite set of Operator symbols ($\neg$,
+  $\wedge$, $\vee$, $\ldots$)
+\item $\mathbf{Z}$ is a finite set of Inference Rules
+\item $\mathbf{I}$ is a finite set of Axioms
+\end{itemize}
+
+-L is 'inductively defined' set of WFF
+-closure under operations
+-truth-value propositional logic
 
 Formulas derived by the Axioms and Inference Rules of a Propositional
 Logic are termed \emph{Theorems}. Allowing for Axiom Schema (an
 infinite number of axioms) extends Propositional Logic; an example of
 such a system is \emph{Skolem Arithmetic}\cite{skolem23}.
 
--logical equivalence (binary relation)
-
--propositional constants A, B, C: particular proposition
--propositional variables P, Q, R: range over set of all atomic propositions
--schemata phi, psi, chi: range over set of all propositions
-
--closure under operations
--truth-value propositional logic
+Inference Rules of a Propositional Logic define valid
+\emph{Arguments}.
 
 -Argument
 -only modus ponens needed for a complete system
 -1. phi -> psi
 -2. phi
 -C. psi
-
-Formal definition of a \emph{Propositional Calculus}:
-\[
-    \mathcal{L} = (A,\Omega,Z,I)
-\]
--L is 'inductively defined' set of WFF
 
 \subsection{First-order - Predicate}
 
