@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass{article}
+\usepackage{amssymb}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -971,10 +972,16 @@ where
 \item $\mathbf{Z}$ is a finite set of Inference Rules
 \item $\mathbf{I}$ is a finite set of Axioms
 \end{itemize}
-
--L is 'inductively defined' set of WFF
--closure under operations
--truth-value propositional logic
+% FIXME: ref Induction? (proof theory)
+$\mathcal{L}$ is then \emph{Inductively} defined as follows:
+\begin{enumerate}
+\item Any element of $\mathbf{A}$ is a formula of $\mathcal{L}$
+\item For formulas $p_1, p_2, \cdots, p_j$ and $f \in
+  \mathbf{\Omega_j}$ then $f(p_1, p_2, \cdots, p_j)$ is a formula
+\end{enumerate}
+Propositional Logic is closed under truth-functional connectives, so
+the above is sufficient to define all WFF: nothing else is a formula
+of $\mathcal{L}$.
 
 Formulas derived by the Axioms and Inference Rules of a Propositional
 Logic are termed \emph{Theorems}. Allowing for Axiom Schema (an
@@ -982,7 +989,16 @@ infinite number of axioms) extends Propositional Logic; an example of
 such a system is \emph{Skolem Arithmetic}\cite{skolem23}.
 
 Inference Rules of a Propositional Logic define valid
-\emph{Arguments}.
+\emph{Argument Forms}. The simplest Argument Form that is both
+necessary and sufficient to define all other Argument Forms is
+\emph{Modus Ponens}, shown here Schematicized:
+
+$\textrm{1. }\varphi \rightarrow \psi$
+
+$\textrm{2. }\varphi$
+
+$\therefore\textrm{ }\psi$
+
 
 -Argument
 -only modus ponens needed for a complete system
