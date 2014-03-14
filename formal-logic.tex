@@ -862,7 +862,7 @@ simulated by a DTM.
 \section{Terms}
 
 \begin{description}
-\item[Universe] class containing elements of entities (object)
+\item[Universe] class containing elements of entities (objects)
   considered in a particular Logical discourse, also called
   \emph{Domain of Discourse}
 \item[Constant] a named object from the Domain
@@ -898,8 +898,17 @@ A Formal Language (described by a Formal Grammar) in combination with
 a \emph{Deductive Apparatus} gives rise to a \emph{System of
   Logic}. Here, Expressions of Symbols are usually referred to as
 \emph{Forumulas}, and Expressions that belong to the Language are
-called ``\emph{Well-formed Formulas}'' (\emph{WFF}). The Deductive
-Apparatus is described below.
+called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
+
+Symbols may be divided into \emph{Logical} and \emph{Non-Logical
+  Symbols}: Logical Symbols ($\forall$, $\vee$, $\rightarrow$, $\neg$,
+etc., and \emph{Variables} $x_0$, $x_1$, etc.) always have the same
+meaning while Non-Logical Symbols (\emph{Predicates},
+\emph{Functions}, and individual \emph{Constants}) only have meaning
+under \emph{Interpretation} (see Section
+\ref{sec:interpretation}). The set of Non-Logical Symbols used in a
+particular discourse is called the \emph{Signature} of the
+discourse.
 
 \subsubsection{Axioms}
 
@@ -942,12 +951,12 @@ The Conclusion relies on the truth of the Premises; if the Premises
 are left unsatisfied, then the derivation is \emph{hypothetical}. It
 can be said that the Conclusion of a Deducibility Relation is reached
 by \emph{Logical Consequence}. Here the Logical Consequence is
-Syntactic. That is, for a Formal System, $\mathcal{FS}$, of a set of
+Syntactic. That is, for a Formal System, $\mathcal{S}$, of a set of
 Formulas, $\Gamma$, there is a \emph{Syntactic Consequence}, $A$, if
 there is a \emph{Formal Proof} of $A$ from the set $\Gamma$: % FIXME
                                 % reference Formal Proof
 \[
-    \Gamma \vdash_{\mathcal{FS}} A
+    \Gamma \vdash_{\mathcal{S}} A
 \]
 It will suffice for now to say that Syntactic Consequence as
 differentiated from \emph{Material Consequence} should: % FIXME ref
@@ -990,9 +999,15 @@ Metavariables; range over set of all propositions: $\varphi$, $\psi$,
 $\chi$, $\ldots$
 \end{description}
 
+The Domain of a Propositional Calculus is \emph{Truth} and
+\emph{Falsity}, so Variables are not necessarily \emph{Bound} or
+\emph{Free} as in \emph{Predicate Logic}. In fact, a Propositional
+Variable is equivalent to a \emph{Nullary Predicate} in \emph{First
+  Order Logic}.
+
 Formal definition of a \emph{Propositional Calculus}:
 \[
-    \mathcal{FS} = (\mathbf{A},\mathbf{\Omega},\mathbf{Z},\mathbf{I})
+    \mathcal{S} = (\mathbf{A},\mathbf{\Omega},\mathbf{Z},\mathbf{I})
 \]
 where
 \begin{itemize}
@@ -1004,17 +1019,17 @@ where
 \item $\mathbf{I}$ is a finite set of Axioms
 \end{itemize}
 % FIXME: ref Induction? (proof theory)
-$\mathcal{FS}$ is then \emph{Inductively} defined as follows, where
+$\mathcal{S}$ is then \emph{Inductively} defined as follows, where
 $\mathbf{\Omega_j}$ is the partition of $\mathbf{\Omega}$ containing
 Operators of arity $\mathbf{j}$:
 \begin{enumerate}
-\item Any element of $\mathbf{A}$ is a formula of $\mathcal{FS}$
+\item Any element of $\mathbf{A}$ is a formula of $\mathcal{S}$
 \item For formulas $p_1, p_2, \cdots, p_j$ and $f \in
   \mathbf{\Omega_j}$ then $f(p_1, p_2, \cdots, p_j)$ is a formula
 \end{enumerate}
 Propositional Logic is closed under truth-functional connectives, so
 the above is sufficient to define all WFF: nothing else is a formula
-of $\mathcal{FS}$.
+of $\mathcal{S}$.
 
 Formulas derived by the Axioms and Inference Rules of a Propositional
 Logic are termed \emph{Theorems}. Allowing for Axiom Schema (an
@@ -1040,8 +1055,9 @@ The minimal set of primitive operators is the \emph{negation} symbol
 $\lor$ or $\rightarrow$. Choosing one of these Operators, the other
 two, and any other Operator, can be defined in terms of it and
 negation. It is also possible to construct functionally complete sets
-of one element: $\mathbf{\Omega} = \{NAND\}$ or $\mathbf{\Omega} =
-\{NOR\}$.\\
+of one element: $\mathbf{\Omega} = \{\uparrow\}$ or $\mathbf{\Omega} =
+\{\downarrow\}$ ($\uparrow$ and $\downarrow$ being \emph{NAND} and
+\emph{NOR}, respectively).
 \\
 Example simple Axiom system:
 
@@ -1065,12 +1081,52 @@ Another possible system is a \emph{Natural Deduction
 
 \subsection{First-order - Predicate}
 
-Systems of \emph{Predicate Logic} add \emph{Quantifiers} that may be
-applied to Variables.
+Systems of \emph{First-order Predicate Logic} add \emph{Quantifiers}
+that may be applied to Variables, which may be Objects of the Universe
+of discussion, or Relations or Functions. A \emph{Theory} may be
+formed by a system of First-order Logic together with a Domain of
+Discourse over which Variables may range, plus finitely many Functions
+and \emph{Predicates} defined on that Domain, and a recursive set of
+Axioms.
+
+\emph{Higher-order Logic}(\ref{subsec:higher_order}) allows Predicates
+to be applied to other Predicates or Functions, or in which
+Quantifiers may be applied to Predicates or Functions. In First-order
+Logic, Predicates are associated with Sets, in Higher-order Logic,
+with Sets of Sets. First-order Logic may be used to devise Deductive
+Systems with finite Domains that are \emph{Sound} and \emph{Complete},
+but for infinite Domains a system of Higher-order Logic is required.
+
+A Predicate in First-order Logic takes one or more Objects from the
+Domain and returns either True or False. A Predicate taking no Objects
+(a Nullary Predicate) is equivalent to a Proposition in Zeroth-order
+Logic.
+
+A Quantifier limits (\emph{Binds}) a Variable to a certain quantity of
+members of the Domain, the two fundamental Quantifiers being
+\emph{Universal} ($\forall$) and \emph{Existential} ($\exists$).
+\\
+The traditional Signature used in First-order Logic:
+\begin{enumerate}
+\item For $n \geq 0$, $n$-ary Predicate (also called Relation)
+  Symbols: $p^{n}_0, p^{n}_1, p^{n}_2, p^{n}_2, p^{n}_3, \ldots$
+\item For $n \geq 0$, $n$-ary Function Symbols: $f^{n}_0, f^{n}_1,
+  f^{n}_2, f^{n}_2, f^{n}_3, \ldots$
+\end{enumerate}
+The contemporary Signature used:
+\begin{enumerate}
+\item Predicate Symbols denoted by uppercase letters $P$, $Q$, $R$,
+  $\ldots$ with arity ($\geq 0$) specified by the \emph{Valence} of the
+  parenthetical arguments, eg P(x), Q(x,y).
+\item Function Symbols denoted by lowercase letters $f$, $g$, $h$,
+  $\ldots$ with arity specified in the usual way.
+\end{enumerate}
+Here, Functions of Valence 0 are \emph{Constant Symbols} denoted by
+letters $a$, $b$, $c$, $\ldots$.
 
 \subsection{Second-order - Predicate + Plural}
 
-\subsection{Higher-order - Predicate}
+\subsection{Higher-order - Predicate}\label{subsec:higher_order}
 
 \subsection{Many-Sorted - Predicate}
 
@@ -1100,17 +1156,16 @@ Synthesis
 % --------------------------------------------------------------------
 \part{Model Theory}\label{sec:model_theory}
 % --------------------------------------------------------------------
-
+Metalogic
 Semantic Consequence of a Logic System
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \part{Formal Semantics}
-
-Material Consequence
-Interpretation
 % --------------------------------------------------------------------
 
+Material Consequence
+\section{Interpretation}\label{sec:interpretation}
 \section{Denotational Semantics}
 
 % --------------------------------------------------------------------
