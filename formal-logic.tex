@@ -1036,6 +1036,16 @@ Logic are termed \emph{Theorems}. Allowing for Axiom Schema (an
 infinite number of axioms) extends Propositional Logic; an example of
 such a system is \emph{Skolem Arithmetic}\cite{skolem23}.
 
+The set of WFF of a System, $\mathcal{S}$, may be defined inductively:
+\begin{itemize}
+\item Propositional Variables are WFF
+\item If $\varphi$ is a WFF, then $\neg\varphi$ is a WFF
+\item If $\varphi$ and $\psi$ are WFF and $\bullet$ is a binary Operator,
+  then $\varphi \bullet \psi$ is a WFF.
+\end{itemize}
+
+\subsubsection{Argument Forms}
+
 Inference Rules of a Propositional Logic define valid \emph{Argument
   Forms}. The simplest Argument Form that is both necessary (and given
 a complete set of Axioms is sufficient to define all other Argument
@@ -1050,7 +1060,17 @@ $\therefore\textrm{ }\psi$
 where lines one and two are Premises and line three is the Conclusion
 (the symbol $\therefore$ is read as \emph{therefore}).
 
-The minimal set of primitive operators is the \emph{negation} symbol
+The Schematic representation of \emph{Modus Tollens}:
+
+$\textrm{1. }\varphi \rightarrow \psi$
+
+$\textrm{2. }\neg\psi$
+
+$\therefore\textrm{ }\neg\varphi$
+
+\subsubsection{Operators}
+
+The minimal set of primitive Operators is the \emph{negation} symbol
 ($\neg$) plus a \emph{sole sufficient} Operator of either $\land$,
 $\lor$ or $\rightarrow$. Choosing one of these Operators, the other
 two, and any other Operator, can be defined in terms of it and
@@ -1079,14 +1099,6 @@ Another possible system is a \emph{Natural Deduction
   System}\cite{jaskowski34} which has no Axioms
 ($\mathbf{I}=\varnothing$) and ten Inference Rules.
 
-The set of WFF of a System, $\mathcal{S}$, may be defined inductively:
-\begin{itemize}
-\item Propositional Variables are WFF
-\item If $\varphi$ is a WFF, then $\neg\varphi$ is a WFF
-\item If $\varphi$ and $\psi$ are WFF and $\bullet$ is a binary Operator,
-  then $\varphi \bullet \psi$ is a WFF.
-\end{itemize}
-
 \subsection{First-order - Predicate}
 
 Systems of \emph{First-order Predicate Logic} add \emph{Quantifiers}
@@ -1097,22 +1109,18 @@ Discourse over which Variables may range, plus finitely many Functions
 and \emph{Predicates} defined on that Domain, and a recursive set of
 Axioms.
 
-\emph{Higher-order Logic}(\ref{subsec:higher_order}) allows Predicates
-to be applied to other Predicates or Functions, or in which
-Quantifiers may be applied to Predicates or Functions. In First-order
-Logic, Predicates are associated with Sets, in Higher-order Logic,
-with Sets of Sets. First-order Logic may be used to devise Deductive
-Systems with finite Domains that are \emph{Sound} and \emph{Complete},
-but for infinite Domains a system of Higher-order Logic is required.
-
 A Predicate in First-order Logic takes one or more Objects from the
 Domain and returns either True or False. A Predicate taking no Objects
 (a Nullary Predicate) is equivalent to a Proposition in Zeroth-order
 Logic.
 
-A Quantifier limits (\emph{Binds}) a Variable to a certain quantity of
-members of the Domain, the two fundamental Quantifiers being
-\emph{Universal} ($\forall$) and \emph{Existential} ($\exists$).
+\emph{Higher-order Logic}(\ref{subsec:higher_order}) allows Predicates
+to be applied to other Predicates or Functions, or Quantifiers may be
+applied to Predicates or Functions. In First-order Logic, Predicates
+are associated with Sets, in Higher-order Logic, with Sets of
+Sets. First-order Logic may be used to devise Deductive Systems with
+finite Domains that are \emph{Sound} and \emph{Complete}, but for
+infinite Domains a system of Higher-order Logic is required.
 \\
 The traditional Signature used in First-order Logic:
 \begin{enumerate}
@@ -1132,14 +1140,16 @@ The contemporary Signature used:
 Here, Functions of Valence 0 are \emph{Constant Symbols} denoted by
 letters $a$, $b$, $c$, $\ldots$.
 
-Terms are limited to those derived from Variables and a finite number
-of $n$-ary Function applications, but not Expressions involving a
-Predicate Symbol. See Section \ref{sec:terms} for a recursive
-definition of Terms.
+\subsubsection{Formation Rules}
 
 The \emph{Formation Rules} for WFF in a System of First-order Logic
 generally describe a Context-free Grammar with a infinite Alphabet and
 many Start Symbols.
+
+Terms are limited to those derived from Variables and a finite number
+of $n$-ary Function applications, but not Expressions involving a
+Predicate Symbol. See Section \ref{sec:terms} for a recursive
+definition of Terms.
 
 Definition of Atomic Formulas (no Logical Connectives or Quantifiers):
 \begin{enumerate}
@@ -1156,6 +1166,12 @@ Definition of WFF as a finite number of applications of the following rules:
 \item $\exists x \phi$ is a WFF when $x$ is a Variable and $\phi$ is a WFF
 \item $\forall x \phi$ is a WFF when $x$ is a Variable and $\phi$ is a WFF
 \end{enumerate}
+
+\subsubsection{Quantification}
+
+A Quantifier limits (\emph{Binds}) a Variable to a certain quantity of
+members of the Domain, the two fundamental Quantifiers being
+\emph{Universal} ($\forall$) and \emph{Existential} ($\exists$).
 
 Variables are \emph{Free Variables} if they are not Quantified in any
 Formula, and \emph{Bound Variables} when they are Quantified.
@@ -1177,6 +1193,26 @@ Truth values.
 
 \subsubsection{Equality Conventions}
 
+\paragraph{First-order Logic with Equality}
+\\
+Including a primitive Logical Symbol for equality, $=$, interpreted as
+the real equality relation between members of the Domain such that
+``two'' given members are the same member. This adds the following
+Axioms:
+
+\begin{enumerate}
+\item[Reflexivity]
+%FIXME
+
+\item[Substitution for functions]
+
+\item[Substitution for formulas]
+
+\end{enumerate}
+
+\paragraph{First-order Logic without Equality}
+\\
+
 \subsubsection{Many-Sorted First-order Logic}
 
 \subsubsection{Infinitary Logic First-order Logic}
@@ -1185,7 +1221,9 @@ Truth values.
 
 -?
 
-\subsection{Second-order - Plural}
+\subsection{Higher-order - Plural}\label{subsec:higher_order}
+
+\subsubsection{Second-order}
 
 \emph{Second-order Logic} allows for Quantifiers to range over
 Relations and Functions and thus \emph{Sorts} of Variables that range
@@ -1193,14 +1231,13 @@ over $k$-ary Relations and Functions. It is possible to leave out a
 definition of Quantifiers for Functions since $k$-ary Functions can be
 represented by $k+1$-ary Relations.\cite{shapiro00}
 
+\subsubsection{Plural, Monadic Second-order Logic}
+
 An alternative formulation of Second-order Logic is to allow Variables
-to take on \emph{Plural} Values.
+to take on \emph{Plural} Values. It is equi-interpretable with
+\emph{Monadic Second-order Logic}, which restricts Quantification to
+Unary Relations (sets).
 
-\emph{Monadic Second-order Logic} restricts Quantification to Unary
-Relations (sets).
-
-
-\subsection{Higher-order - Predicate}\label{subsec:higher_order}
 
 
 \subsection{Ordinal Logic}
