@@ -12,7 +12,7 @@
 
 % --------------------------------------------------------------------
 
-\title{Mathematical Logic}
+\title{Survey of Mathematical Logic}
 \date{draft 2014}
 \author{Shane Pearman}
 \maketitle
@@ -975,7 +975,7 @@ Inference Rules may be identified as reduntant in two senses. An
   Rule} is a case of an Admissible Rule that has been \emph{Derived}
 from existing rules.
 
-\subsection{Zeroth-order - Propositional}
+\subsection{Zeroth-order - Propositional}\label{subsec:propositional}
 
 \emph{Propositional Logic} (also called \emph{sentential} or
 \emph{statement logic}) is represented by a Formal Language with WFF
@@ -1280,15 +1280,13 @@ to take on \emph{Plural} Values. It is equi-interpretable with
 \emph{Monadic Second-order Logic}, which restricts Quantification to
 Unary Relations (sets).
 
-\subsection{Intensional Logic}
+\subsection{Modal (Intensional) Logic} \label{subsec:modal_logic}
 
 \emph{Intensional Logic} adds to First-order Logic \emph{Sentential
   Functors} (\emph{Intensions}) that range over Terms. An Intension is
 the \emph{Sense} in which a Logical assertion is made, as opposed to
-the \emph{Reference} to which the assertion applies (\emph{Extensional
+the \emph{Reference} to which the assertion applies (\emph{ie Extensional
   Quantification}).
-
-\subsubsection{Modal Logic} \label{subsec:modal_logic}
 
 \emph{Modal Logic} extends Propositional and Predicate Logic to
 include Operators expressing \emph{Modality}. Various meanings for
@@ -1296,19 +1294,18 @@ these Modal Operators include \emph{Alethic Modality}
 (\emph{Necessity} and \emph{Possibility}), \emph{Temporal Modality}
 (qualification in terms of time, eg \emph{always}, \emph{eventually},
 \emph{until}), \emph{Deontic Modality} (\emph{Obligation} and
-\emph{Permission}), \emph{Epistemic Modality} (what is \emph{Known}
-and \emph{Unknown}), and \emph{Doxastic Modality} (Modalities with
+\emph{Permission}), and \emph{Doxastic Modality} (Modalities with
 regards to \emph{Belief}).
 
 An unary \emph{Primitive Modal Operator}, $\square$, defines a Dual
 Operator, $\Diamond$, such that the following analogues of de Morgan's
 laws hold:
+    \[\Diamond P \leftrightarrow \neg \square \neg P\]
+    \[\square P \leftrightarrow \neg \Diamond \neg P\]
+Modal Logic with more than one Primitive Modal Operator, $\square _i,
+i \in \{1, \ldots, n\}$ is \emph{Multimodal Logic}.
 
-    $\Diamond P \leftrightarrow \neg \square \neg P$
-
-    $\square P \leftrightarrow \neg \Diamond \neg P$
-
-\paragraph{Alethic Logic} \hfill \\
+\subsubsection{Alethic Logic}
 
 Most Systems of Alethic Logic are based on an extension of
 Propositional Logic called $\mathbf{K}$ which has:
@@ -1331,8 +1328,7 @@ Adding further Axioms gives rise to a nested hierarchy of Systems of
 \item $S4 := T + \mathbf{4}$
 \item $S5 := S4 + \mathbf{5}$
 \item $D := K + \mathbf{D}$
-\end{itemize}
-
+\end{itemize} \hfill \\
 where
 
 \begin{itemize}
@@ -1344,18 +1340,57 @@ where
 \item $\mathbf{5}$: $\Diamond p \rightarrow \square \Diamond p$
 \end{itemize}
 
-\paragraph{Temporal Logic} \hfill \\
+\subsubsection{Doxastic Logic}
 
-\subparagraph{Tense Logic}
+\emph{Doxastic Logic} uses the unary Modal Operator $\mathcal{B}$ to
+denote \emph{Belief}. Example:
+\[
+    \mathcal{B} x
+\]
+has the meaning ``It is Believed that x is the case''. A set of
+Beliefs is usually denoted
+\[
+    \mathbb{B}: \{ b_1, b_2, \ldots, b_n \}
+\]
+
+\subsubsection{Deontic Logic}
+
+\emph{Standard Deontic Logic} ($\mathbf{SDL}$) adds the following
+Axioms to Propositional Logic (\ref{subsec:propositional}):
+    \[O(A \rightarrow B) \rightarrow (OA \rightarrow OB)\]
+    \[PA \rightarrow \neg O \neg A\]
+with Primitive Operators $O$ (\emph{Obligatory}) and $P$
+(\emph{Permissible}). \emph{Forbidden} is defined as
+    \[FA = O \neg A\]
+or
+    \[FA = \neg P A\]
+Deontic Logic may be extended by Alethic Operators with the Axiom:
+    \[OA \rightarrow \Diamond A\]
+which has the meaning ``ought implies can''.
+
+\subsubsection{Temporal Logic}
+
+\paragraph{Tense Logic} \hfill \\
 
 \emph{Tense Logic} is a 2-modal Logic that adds operators $[F]$ for
 \emph{Future} and $[P]$ for \emph{Past} Modalities.
 
-\subparagraph{Linear Temporal Logic}
+\paragraph{Linear Temporal Logic}
 
-\subparagraph{Computation Tree Logic}
+\paragraph{Computation Tree Logic}
 
-\paragraph{Deontic Logic} \hfill \\
+\paragraph{Interval Temporal Logc}
+
+\paragraph{Modal $\mu$-calculus}
+
+\subsubsection{Dynamic Logic}
+
+\emph{Dynamic Logic} adds Terms denoting \emph{Actions}:
+\[[a]p\]
+where after performing Action $a$ is necessitated that $p$ holds and
+\[\langle a \rangle p\]
+where after performing Action $a$ it is possible that $p$ holds.
+
 
 \subsection{Ordinal Logic}
 
