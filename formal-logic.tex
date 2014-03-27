@@ -901,7 +901,7 @@ Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0 \cup F_1
 \]
 
 % --------------------------------------------------------------------
-\section{Systems of Logic}
+\section{Systems of Logic} \label{sec:formal_systems}
 % --------------------------------------------------------------------
 
 \subsection{Deductive Apparatus}
@@ -942,7 +942,7 @@ Object Language of the system. For a Language with infinitely many
 WFF, an Axiom Schema describes a countably infinite number of
 Axioms. A system without Schema is termed \emph{finitely axiomatized}.
 
-\subsubsection{Inference Rules}
+\subsubsection{Inference Rules} \label{subsec:inference_rules}
 
 An \emph{Inference Rule} is a \emph{transformation rule}: it is the
 \emph{Logical Form} of the \emph{Deduction} of a \emph{Conclusion}
@@ -963,24 +963,8 @@ and Conclusions are \emph{Propositions}.
 The Conclusion relies on the truth of the Premises; if the Premises
 are left unsatisfied, then the derivation is \emph{hypothetical}. It
 can be said that the Conclusion of a Deducibility Relation is reached
-by \emph{Logical Consequence}. Here the Logical Consequence is
-Syntactic. That is, for a Formal System, $\mathcal{S}$, of a set of
-Formulas, $\Gamma$, there is a \emph{Syntactic Consequence}, $A$, if
-there is a \emph{Formal Proof} of $A$ from the set $\Gamma$: % FIXME
-                                % reference Formal Proof
-\[
-    \Gamma \vdash_{\mathcal{S}} A
-\]
-It will suffice for now to say that Syntactic Consequence as
-differentiated from \emph{Material Consequence} should: % FIXME ref
-                                % material consequence
-\begin{enumerate}
-\item Rely on the Logical Form of the Expressions
-\item Be completely \emph{a priori}
-\item Be \emph{Modal}(\ref{subsec:modal_logic})
-\end{enumerate}
-Another form of Logical Consequence, \emph{Semantic Consequence} will
-be described under \emph{Model Theory} (Part \ref{sec:model_theory}).
+by Syntactic \emph{Logical Consequence}. For more information, see
+section on \emph{Formal Proof} (\ref{sec:formal_proof}).
 
 Inference Rules may be identified as reduntant in two senses. An
 \emph{Admissible Rule} is one which does not change the set of
@@ -1221,6 +1205,12 @@ A Formula with no Free Variables in First-order Logic is a
 \emph{First-order Sentence}. First-order Sentences have well-defined
 Truth values.
 
+\subsubsection{Inference Rules}
+
+\paragraph{Universal Generalization}\label{subsec:universal_generalization} \hfill
+\\
+\[P(x) \vdash \forall x P(x)\]
+
 \subsubsection{Equality Conventions}
 
 \paragraph{First-order Logic with Equality}\hfill
@@ -1423,27 +1413,68 @@ Alan Turing's PhD Thesis \cite{turing38}
 \part{Proof Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A \emph{Formal Proof} is a finite sequence of Well-formed Formulas
-that are either Axioms of a Logical System or follow from the
-preceding Formulas by an Inference Rule. The concluding Formula in the
-sequence is a \emph{Theorem}.
+\section{Formal Proof} \label{sec:formal_proof}
+
+A \emph{Formal Proof} is a \emph{Logical Derivation}: a finite
+sequence of Well-formed Formulas of a Formal System that are either
+Axioms of a Logical System or follow from the preceding Formulas by an
+Inference Rule. The concluding Formula in the sequence is a
+\emph{Theorem}.
+
+For Formal System, $\mathcal{S}$, of a set of Formulas, $\Gamma$,
+there is a \emph{Syntactic Consequence}, $A$, if there is a
+Formal Proof of $A$ from the set $\Gamma$: 
+\[
+    \Gamma \vdash_{\mathcal{S}} A
+\]
+It will suffice for now to say that Syntactic Consequence as
+differentiated from \emph{Material Consequence} should: % FIXME ref
+                                % material consequence
+\begin{enumerate}
+\item Rely on the Logical Form (\ref{subsec:inference_rules}) of the Expressions
+\item Be completely \emph{a priori}
+\item Be \emph{Modal} (\ref{subsec:modal_logic})
+\end{enumerate}
+
+Another form of Logical Consequence, \emph{Semantic Consequence} will
+be described under \emph{Model Theory} (Part \ref{sec:model_theory}).
 
 Deduction, Mathematical Induction
+Deduction (Top Down, Reductive)
+Induction (Bottom Up, Implicative)
+Inference (Assumed Premises, Conclusion [Idiomatic])
+Derivation (Formal Proof)
 
-Syntactic Consequence of a Logic System
+
+
+Metatheorem
 
 Effective Method
 
 Consistency
 
-\emph{Proof Calculi}
-
 % --------------------------------------------------------------------
-\section{Hilbert System}
+\section{Proof Calculi}
 % --------------------------------------------------------------------
 
+\emph{Proof Calculi} are families of Formal (Deductive) Systems
+(\ref{sec:formal_systems}), specifying templates for forms of
+\emph{Formal Inference} (Axioms and Inference Rules).
+
 % --------------------------------------------------------------------
-\section{Structural Proof Theory - Analysis}
+\subsection{Hilbert Systems}
+% --------------------------------------------------------------------
+
+\emph{Hilbert Systems} are characterized by having a large number of
+Axiom Schema and few Inference Rules (Modus Ponens for Propositional
+Logics and Universal Generalization for Predicate Logic).
+
+% --------------------------------------------------------------------
+\subsubsection{Hilbert-Ackermann System}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Structural Proof Theory - Analysis}
 % --------------------------------------------------------------------
 
 Studies Proof Calculi that support \emph{Analytic Proof}
@@ -1461,8 +1492,13 @@ Non-commutative Logic (\ref{subsec:noncommutative_logic})
 
 \subsection{Sequent Calculus}
 
+\emph{Sequent Notation}
+
 
 \subsubsection{Natural Deduction}\label{subsec:natural_deduction}
+
+Systems of \emph{Natural Deduction}, contrasted with Hilbert Systems,
+include many Inference Rules but few or no Axioms.
 
 \paragraph{$\mathbf{LK}$ and $\mathbf{LJ}$}
 
