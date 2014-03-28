@@ -315,7 +315,7 @@ formulation:
 
 \item[Combinatory Categorical Grammar] \hfill \\
     A type of \emph{phrase Structure Grammar} using \emph{Combinatory
-      Logic}.
+      Logic}(\ref{subsec:combinatory_logic}).
 
 \item[Head grammar] \hfill \\
     A subset of the Linear context-free rewriting system and a Phrase
@@ -920,8 +920,11 @@ meaning while Non-Logical Symbols (\emph{Predicates},
 \emph{Functions}, and individual \emph{Constants}) only have meaning
 under \emph{Interpretation} (see Section
 \ref{sec:interpretation}). The set of Non-Logical Symbols used in a
-particular discourse is called the \emph{Signature} of the
-discourse.
+particular discourse is called the \emph{Signature} of the discourse.
+
+\emph{Extra-Logical Symbols} are those of a Metalanguage, such as the
+symbol for \emph{Entailment}, $\vdash$, or Metavariables, $\varphi,
+\psi, \ldots$.
 
 \subsubsection{Axioms}
 
@@ -957,14 +960,15 @@ Schematic if they contain Metavariables.
 Inference Rules may be viewed as functions that take Premises and
 return a Conclusion. An alternative formulation for Inference Rules is
 as a \emph{Deducibility Relation}, $\vdash$, that holds between zero
-or more Premises and a Conclusion. Taken individually, both Premises
-and Conclusions are \emph{Propositions}.
+or more Premises and a Conclusion.
 
-The Conclusion relies on the truth of the Premises; if the Premises
-are left unsatisfied, then the derivation is \emph{hypothetical}. It
-can be said that the Conclusion of a Deducibility Relation is reached
-by Syntactic \emph{Logical Consequence}. For more information, see
-section on \emph{Formal Proof} (\ref{sec:formal_proof}).
+Taken individually, both Premises and Conclusions are
+\emph{Propositions}. The Conclusion relies on the truth of the
+Premises; if the Premises are left unsatisfied, then the derivation is
+\emph{hypothetical}. It can be said that the Conclusion of a
+Deducibility Relation is reached by Syntactic \emph{Logical
+  Consequence}. For more information, see section on \emph{Formal
+  Proof} (\ref{sec:formal_proof}).
 
 Inference Rules may be identified as reduntant in two senses. An
 \emph{Admissible Rule} is one which does not change the set of
@@ -1055,8 +1059,9 @@ $\textrm{2. }\varphi$
 $\therefore\textrm{ }\psi$
 \\
 where lines one and two are Premises and line three is the Conclusion
-(the symbol $\therefore$ is read as \emph{therefore}).
-
+(the symbol $\therefore$ is read as \emph{therefore}). This is written in
+\emph{Sequent Notation}(\ref{subsec:sequent_notation}) as
+\[(\varphi \rightarrow \psi), \varphi \vdash \psi\]
 The Schematic representation of \emph{Modus Tollens}:
 
 $\textrm{1. }\varphi \rightarrow \psi$
@@ -1089,8 +1094,17 @@ $\mathbf{I} = \{ (p \rightarrow (q \rightarrow p)),$
 $\qquad((p \rightarrow (q \rightarrow r)) \rightarrow
 (( p \rightarrow q) \rightarrow (p \rightarrow r))),$
 
-$\qquad(( \neg p \rightarrow \neg q ) \rightarrow (q \rightarrow p )) \}$\\
-with Modus Ponens as the sole inference rule.
+$\qquad(( \neg p \rightarrow \neg q ) \rightarrow (q \rightarrow p ))
+\}$\\ with Modus Ponens as the sole inference rule (see Hilbert
+Systems, \ref{subsec:hilbert_systems}).
+
+In Propositional Logic, the Extra-Logical Entailment Symbol, $\vdash$,
+and the Logical \emph{Implication Symbol}, $\rightarrow$, coincide in
+that
+\[(A \vdash B) \leftrightarrow (\vdash A \rightarrow B)\]
+but the difference is that $\vdash$ describes a Deduction, that is a
+relation between Sentences, and $\rightarrow$ is a Logical Connective
+within a Formula.
 
 Another possible system is a \emph{Natural Deduction
   System}\cite{jaskowski34} (see Section \ref{subsec:natural_deduction})
@@ -1202,8 +1216,8 @@ Inductive definition of \emph{Free} and \emph{Bound Variables}:
 \end{enumerate}
 
 A Formula with no Free Variables in First-order Logic is a
-\emph{First-order Sentence}. First-order Sentences have well-defined
-Truth values.
+\emph{First-order Sentence} (also called a \emph{Closed
+  Formula}). First-order Sentences have well-defined Truth values.
 
 \subsubsection{Inference Rules}
 
@@ -1284,13 +1298,37 @@ to take on \emph{Plural} Values. It is equi-interpretable with
 \emph{Monadic Second-order Logic}, which restricts Quantification to
 Unary Relations (sets).
 
+\subsection{Classical Logic} \hfill
+\\ \emph{Classical Logic} is the class of Propositional and
+First-order Systems of Logic characterized by the following Inference
+Rules:
+
+\begin{description}
+
+\item [Tertium non datur] (\emph{Law of excluded middle})
+    \[\vdash(p \vee \neg p)\]
+
+\item [Double Negation]
+    \[p \vdash \neg\neg p\]
+
+\item [Law of Non-contradiction]
+    \[\vdash \neg(p \wedge \neg p)\]
+
+\item [Ex falso quodlibet] (\emph{Principle of explosion},
+  \emph{Principle of Psuedo-Scotus})
+    \[\vdash 0 \rightarrow p\]
+
+%FIXME finish properties and rules
+
+\end{description}
+
 \subsection{Modal (Intensional) Logic} \label{subsec:modal_logic}
 
 \emph{Intensional Logic} adds to First-order Logic \emph{Sentential
   Functors} (\emph{Intensions}) that range over Terms. An Intension is
-the \emph{Sense} in which a Logical assertion is made, as opposed to
-the \emph{Reference} to which the assertion applies (\emph{ie Extensional
-  Quantification}).
+the \emph{Sense} in which a Logical Assertion is made, as opposed to
+the \emph{Reference} to which the Assertion applies (\emph{ie
+  Extensional Quantification}).
 
 \emph{Modal Logic} extends Propositional and Predicate Logic to
 include Operators expressing \emph{Modality}. Various meanings for
@@ -1397,6 +1435,10 @@ where after performing Action $a$ it is possible that $p$ holds.
 
 \subsection{Intuitionistic Logic}
 
+\subsubsection{Minimal Logic}
+
+\subsubsection{Combinatory Logic} \label{subsec:combinatory_logic}
+
 \subsection{Substructural Logic}
 
 \subsubsection{Relevance Logic}
@@ -1423,7 +1465,7 @@ Inference Rule. The concluding Formula in the sequence is a
 
 For Formal System, $\mathcal{S}$, of a set of Formulas, $\Gamma$,
 there is a \emph{Syntactic Consequence}, $A$, if there is a
-Formal Proof of $A$ from the set $\Gamma$: 
+Formal Proof of $A$ from the set $\Gamma$:
 \[
     \Gamma \vdash_{\mathcal{S}} A
 \]
@@ -1440,14 +1482,27 @@ Another form of Logical Consequence, \emph{Semantic Consequence} will
 be described under \emph{Model Theory} (Part \ref{sec:model_theory}).
 
 Deduction, Mathematical Induction
+
 Deduction (Top Down, Reductive)
+
 Induction (Bottom Up, Implicative)
+
 Inference (Assumed Premises, Conclusion [Idiomatic])
+
 Derivation (Formal Proof)
 
 
+Context
+
+Judgement
+
+Tautology
+
+Hypothesis
+
 
 Metatheorem
+
 
 Effective Method
 
@@ -1458,16 +1513,16 @@ Consistency
 % --------------------------------------------------------------------
 
 \emph{Proof Calculi} are families of Formal (Deductive) Systems
-(\ref{sec:formal_systems}), specifying templates for forms of
+(Section \ref{sec:formal_systems}), specifying templates for forms of
 \emph{Formal Inference} (Axioms and Inference Rules).
 
 % --------------------------------------------------------------------
-\subsection{Hilbert Systems}
+\subsection{Hilbert Systems} \label{subsec:hilbert_systems}
 % --------------------------------------------------------------------
 
 \emph{Hilbert Systems} are characterized by having a large number of
-Axiom Schema and few Inference Rules (Modus Ponens for Propositional
-Logics and Universal Generalization for Predicate Logic).
+Axiom Schema and few Inference Rules-- Modus Ponens for Propositional
+Logics and Universal Generalization for Predicate Logic.
 
 % --------------------------------------------------------------------
 \subsubsection{Hilbert-Ackermann System}
@@ -1492,8 +1547,17 @@ Non-commutative Logic (\ref{subsec:noncommutative_logic})
 
 \subsection{Sequent Calculus}
 
-\emph{Sequent Notation}
+\subsubsection{Sequent Notation}\label{subsec:sequent_notation}
 
+A \emph{Sequent} is a specific kind of Judgement of the form
+\[\Gamma \vdash \Sigma \]
+where the \emph{Antecedent}, $\Gamma$, is a Conjunctive sequence of
+Formulas, and the \emph{Succedent}, $\Sigma$, is a Disjunctive
+sequence of Formulas.
+
+A Sequent with no Succedent ($\Gamma \vdash$) is interpreted as
+proving falsity which is inconsistent. A Sequent with no Antecedent
+($\vdash \Sigma$) is a \emph{Logical Assertion}.
 
 \subsubsection{Natural Deduction}\label{subsec:natural_deduction}
 
