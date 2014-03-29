@@ -922,10 +922,14 @@ under \emph{Interpretation} (\S \ref{sec:interpretation}). The set of
 Non-Logical Symbols used in a particular discourse is called the
 \emph{Signature} of the discourse.
 
-\emph{Extra-Logical Symbols} are those of a Metalanguage, such as the
+\emph{Extra-logical Symbols} are those of a Metalanguage, such as the
 symbol for \emph{Logical Consequence} (\emph{Entailment}), $\vdash$,
 (read \emph{yields} or \emph{proves}) or Metavariables, $\varphi,
 \psi, \ldots$.
+
+A particular Formal System is required to be \emph{Consistent}; that
+is the ability to derive only the affirmation or denial of a
+particular statement, not both.
 
 \subsubsection{Axioms}
 
@@ -1099,7 +1103,7 @@ $\qquad(( \neg p \rightarrow \neg q ) \rightarrow (q \rightarrow p ))
 \}$\\ with Modus Ponens as the sole inference rule (see Hilbert
 Systems, \S\ref{subsec:hilbert_systems}).
 
-In Propositional Logic, the Extra-Logical Symbol for Entailment,
+In Propositional Logic, the Extra-logical Symbol for Entailment,
 $\vdash$, and the Logical \emph{Implication Symbol}, $\rightarrow$,
 coincide in that
 \[(A \vdash B) \leftrightarrow (\vdash A \rightarrow B)\]
@@ -1464,10 +1468,11 @@ therefore is expressed as \emph{Metatheory}.
 
 A \emph{Judgement} is an inductively definable assertion in the
 Metatheory of a Logical System. That is, one that includes
-Extra-Logical Symbols, namely that of Logical Consequence,
-$\vdash$. In this way, Axioms are Judgements, and a \emph{Formal
-  Proof} expresses a Judgement with the Premises being a sequence of
-Judgements and the Conclusion also a Judgement.
+Extra-logical Symbols, namely that of Logical Consequence, $\vdash$,
+and commas used in \emph{Sequents}
+(\S\ref{subsec:sequent_notation}). In this way, Axioms are Judgements,
+and a \emph{Formal Proof} expresses a Judgement with the Premises
+being a sequence of Judgements and the Conclusion also a Judgement.
 
 \subsection{Formal Proof} \label{sec:formal_proof}
 
@@ -1495,33 +1500,34 @@ differentiated from \emph{Material Consequence} should: % FIXME ref
 Another form of Logical Consequence, \emph{Semantic Consequence} will
 be described under \emph{Model Theory} (Part \ref{sec:model_theory}).
 
-Proof by Syntactic Consequence is a type of \emph{Deduction}; that is,
-the production of a Theorem is said to be a
-\emph{Derivation}. Deduction proper is the top-down, \emph{Reductive}
-process that starts with general Axioms and Reduces to the specific
-Theorem that is being proved. \emph{Mathematical Induction} is the
-bottom-up, \emph{Implicative} process where a \emph{Base Case} is
-shown to extend to the more general by means of Implication (the
-Inductive step). Note that Mathematical Induction is not Inductive
-Reasoning which is an empirical or probabilistic Inference and not a
-form of Deduction.
+Proof by Syntactic Consequence is a \emph{Deduction}; that is, the
+production of a Theorem is said to be a \emph{Derivation}. Deduction
+proper is the top-down, \emph{Reductive} process that starts with
+general Axioms and Reduces to the specific Theorem that is being
+proved. \emph{Mathematical Induction} is the bottom-up,
+\emph{Implicative} process where a \emph{Base Case} is shown to extend
+to the more general by means of Implication (the Inductive step). Note
+that Mathematical Induction is not \emph{Inductive Reasoning} which is
+an empirical or probabilistic Inference and not a form of Deduction.
 
 \subsubsection{Sequent Notation}\label{subsec:sequent_notation}
 
 A \emph{Sequent} is a specific kind of Judgement of the form
 \[\Gamma \vdash \Sigma \]
 where the \emph{Antecedent}, $\Gamma$, is a Conjunctive sequence of
-Formulas, and the \emph{Succedent}, $\Sigma$, is a Disjunctive
-sequence of Formulas. Together, Antecedents and Succedents are
-\emph{Cedents}. In a Hilbert System, Judgements and Formulas are not
-differentiated, but in a general \emph{Sequent Calculus} they may have
-any number of Formulas on either side
+Formula, and the \emph{Succedent}, $\Sigma$, is a Disjunctive sequence
+of Formulas. Together, Antecedents and Succedents are
+\emph{Cedents}. The Extra-logical Operators, $\vdash$, and $,$
+(comma), are called \emph{Structural Operators}.
+
+In a general \emph{Sequent Calculus} there may be any
+number of Formulas on either side
 \[
     A_1, \ldots, A_n \vdash B_1, \ldots, B_k
 \]
 is equivalent to
 \[
-    \vdash(A_1 \wedge \ldots \wedge A_n) \rightarrow (B_1 \vee \ldots \vee B_k)
+    \vdash(A_1 \wedge \cdots \wedge A_n) \rightarrow (B_1 \vee \cdots \vee B_k)
 \]
 and the dual nature of Judgements and negation can be expressed by the
 dual forms
@@ -1545,8 +1551,6 @@ Tautology
 
 Effective Method
 
-Consistency
-
 % --------------------------------------------------------------------
 \section{Proof Calculi}
 % --------------------------------------------------------------------
@@ -1555,14 +1559,15 @@ Consistency
 (\S\ref{sec:formal_systems}), specifying templates for forms of
 \emph{Formal Inference} (Axioms and Inference Rules).
 
-
 % --------------------------------------------------------------------
 \subsection{Hilbert Systems} \label{subsec:hilbert_systems}
 % --------------------------------------------------------------------
 
 \emph{Hilbert Systems} are characterized by having a large number of
 Axiom Schema and few Inference Rules-- just Modus Ponens for
-Propositional Logics and Universal Generalization for Predicate Logic.
+Propositional Logics and Universal Generalization for Predicate
+Logic. In a Hilbert System, Judgements and Formulas are not
+differentiated.
 
 % --------------------------------------------------------------------
 \subsubsection{Hilbert-Ackermann System}
@@ -1583,6 +1588,7 @@ Studies Proof Calculi that support \emph{Analytic Proof}
 \subsection{Calculus of Structures}
 
 \emph{Deep Inference}
+
 Non-commutative Logic (\S\ref{subsec:noncommutative_logic})
 
 \subsection{Sequent Calculus}
