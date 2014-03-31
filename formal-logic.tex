@@ -904,15 +904,6 @@ Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0 \cup F_1
 \section{Systems of Logic} \label{sec:formal_systems}
 % --------------------------------------------------------------------
 
-\subsection{Deductive Apparatus}
-\label{subsec:deductive_apparatus}
-
-A Formal Language (described by a Formal Grammar) in combination with
-a \emph{Deductive Apparatus} gives rise to a \emph{System of
-  Logic}. Here, Expressions of Symbols are usually referred to as
-\emph{Forumulas}, and Expressions that belong to the Language are
-called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
-
 Symbols may be divided into \emph{Logical} and \emph{Non-Logical
   Symbols}: Logical Symbols ($\forall$, $\vee$, $\rightarrow$, $\neg$,
 etc., and \emph{Variables} $x_0$, $x_1$, etc.) always have the same
@@ -930,6 +921,22 @@ symbol for \emph{Logical Consequence} (\emph{Entailment}), $\vdash$,
 A particular Formal System is required to be \emph{Consistent}; that
 is the ability to derive only the affirmation or denial of a
 particular statement, not both.
+
+\subsection{Deductive Apparatus}
+\label{subsec:deductive_apparatus}
+
+A Formal Language (described by a Formal Grammar) in combination with
+a \emph{Deductive Apparatus} gives rise to a \emph{System of
+  Logic}. Here, Expressions of Symbols are usually referred to as
+\emph{Forumulas}, and Expressions that belong to the Language are
+called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
+
+The Deductive Apparatus is a set of zero or more \emph{Axioms} and one
+or more \emph{Inference Rules}. A System of Logic is termed
+\emph{Effective} (ie Recursively Definable) if the set of Axioms and
+the set of Inference Rules are Decidable or Semi-decidable. The notion
+of \emph{Theorems}, however, is not in general Effective
+(\S\ref{subsec:formal_proof}).
 
 \subsubsection{Axioms}
 
@@ -974,7 +981,7 @@ Premises; if the Premises are left unsatisfied, then the derivation is
 \emph{Hypothetical} and the Premises \emph{Hypotheses}. It can be said
 that the Conclusion of a Deducibility Relation is reached by Syntactic
 \emph{Logical Consequence}. For more information, see section on
-\emph{Formal Proof} (\S\ref{sec:formal_proof}).
+\emph{Formal Proof} (\S\ref{subsec:formal_proof}).
 
 Inference Rules may be identified as reduntant in two senses. An
 \emph{Admissible Rule} is one which does not change the set of
@@ -1303,7 +1310,7 @@ to take on \emph{Plural} Values. It is equi-interpretable with
 \emph{Monadic Second-order Logic}, which restricts Quantification to
 Unary Relations (sets).
 
-\subsection{Classical Logic} \hfill
+\subsection{Classical Logic}\label{subsec:classical_logic} \hfill
 \\ \emph{Classical Logic} is the class of Propositional and
 First-order Systems of Logic characterized by the following Inference
 Rules:
@@ -1438,7 +1445,7 @@ where after performing Action $a$ is necessitated that $p$ holds and
 \[\langle a \rangle p\]
 where after performing Action $a$ it is possible that $p$ holds.
 
-\subsection{Intuitionistic Logic}
+\subsection{Intuitionistic Logic}\label{subsec:intuitionistic_logic}
 
 \subsubsection{Minimal Logic}
 
@@ -1474,7 +1481,7 @@ and commas used in \emph{Sequents}
 and a \emph{Formal Proof} expresses a Judgement with the Premises
 being a sequence of Judgements and the Conclusion also a Judgement.
 
-\subsection{Formal Proof} \label{sec:formal_proof}
+\subsection{Formal Proof} \label{subsec:formal_proof}
 
 A Formal Proof is a \emph{Logical Derivation}: a finite
 sequence of Well-formed Formulas of a Formal System that are either
@@ -1518,7 +1525,9 @@ where the \emph{Antecedent}, $\Gamma$, is a Conjunctive sequence of
 Formula, and the \emph{Succedent}, $\Sigma$, is a Disjunctive sequence
 of Formulas. Together, Antecedents and Succedents are
 \emph{Cedents}. The Extra-logical Operators, $\vdash$, and $,$
-(comma), are called \emph{Structural Operators}.
+(comma), are called \emph{Structural Operators}. A sequence of Cedents
+may be called a \emph{Context}, but \emph{the} Context for a specific
+Judgement is usually meant to be the Antecedent.
 
 In a general \emph{Sequent Calculus} there may be any
 number of Formulas on either side
@@ -1545,12 +1554,6 @@ A Sequent with no Succedent ($\Gamma \vdash$) is interpreted as
 proving falsity which is inconsistent. A Sequent with no Antecedent
 ($\vdash \Sigma$) is a \emph{Logical Assertion}.
 
-Context
-
-Tautology
-
-Effective Method
-
 % --------------------------------------------------------------------
 \section{Proof Calculi}
 % --------------------------------------------------------------------
@@ -1560,7 +1563,11 @@ Effective Method
 \emph{Formal Inference} (Axioms and Inference Rules).
 
 % --------------------------------------------------------------------
-\subsection{Hilbert Systems} \label{subsec:hilbert_systems}
+\subsection{Axiomatic Systems}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Hilbert Systems} \label{subsec:hilbert_systems}
 % --------------------------------------------------------------------
 
 \emph{Hilbert Systems} are characterized by having a large number of
@@ -1570,20 +1577,59 @@ Logic. In a Hilbert System, Judgements and Formulas are not
 differentiated.
 
 % --------------------------------------------------------------------
-\subsubsection{Hilbert-Ackermann System}
+\subsection{Structural Proof Theory}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Structural Proof Theory - Analysis}
-% --------------------------------------------------------------------
+\emph{Structural Proof Theory} studies Proof Calculi that support
+\emph{Analytic Proof}; that is Proofs that are \emph{Cut-free} (they
+do not use the \emph{Cut Rule}) or in \emph{Normal Form}.
 
-Studies Proof Calculi that support \emph{Analytic Proof}
+\subsubsection{Natural Deduction}\label{subsec:natural_deduction} \hfill
+\\
+Systems of \emph{Natural Deduction}\cite{prawitz65}, contrasted with
+Hilbert Systems, include many Inference Rules but few or no Axioms. A
+Natural Deduction System allows Judgements with multiple Antecedents
+and a single Succedent
+\[
+    A_1,\ldots,A_n \vdash B
+\]
+Inference Rules in Natural Deduction have the general notation
+\[
+    {J_1 \quad J_2 \quad \cdots \quad J_n
+    \over J} name
+\]
+where the Rule with name $name$ has Premises of zero or more
+Judgements $J_i$ and the Judgement $J$ is the Conclusion.
 
-\emph{Normal Forms}
+Inference Rules that introduce a Logical Connective in the Conclusion
+are called \emph{Introduction Rules}. Example
+\[
+    {A\;\mathrm{true} \quad B\;\mathrm{true}
+    \over (A \wedge B)\;\mathrm{true}} \wedge_I
+\]
+where $A$ and $B$ are Propositions.
 
-\emph{Cut-free}
+Conversely, Inference Rules that remove Logical Connectives are
+\emph{Elimination Rules}.
+\[
+    {A \wedge B\;\mathrm{true}
+    \over A\;\mathrm{true}} \wedge_E
+\]
 
-\emph{Structural Operators}
+\emph{Hypothetical Derivations} (reasoning from \emph{Assumptions})
+are required for Implication Introduction or Disjunction Elimination.
+
+\emph{Normal Form}
+
+\subsubsection{Sequent Calculus}
+
+\paragraph{$\mathbf{LJ}$} \hfill \\
+
+Formalization of Intuitionistic Logic (\S\ref{subsec:intuitionistic_logic})
+
+\paragraph{$\mathbf{LK}$} \hfill \\
+
+Formalization of Classical Logic (\S\ref{subsec:classical_logic})
 
 \subsection{Calculus of Structures}
 
@@ -1591,23 +1637,10 @@ Studies Proof Calculi that support \emph{Analytic Proof}
 
 Non-commutative Logic (\S\ref{subsec:noncommutative_logic})
 
-\subsection{Sequent Calculus}
-
-\subsubsection{Natural Deduction}\label{subsec:natural_deduction}
-
-Systems of \emph{Natural Deduction}, contrasted with Hilbert Systems,
-include many Inference Rules but few or no Axioms. A Natural Deduction
-System allows Judgements with multiple Antecedents and a single
-Succedent
-\[
-    A_1,\ldots,A_n \vdash B
-\]
-
-\paragraph{$\mathbf{LK}$ and $\mathbf{LJ}$}
-
 \subsection{Analytic Tableau}
 
 Theoretic
+
 Problematic
 
 % --------------------------------------------------------------------
@@ -1618,7 +1651,13 @@ Synthesis
 \part{Model Theory}\label{sec:model_theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Metalogic
+
 Semantic Consequence of a Logic System
+
+Tautology
+
+Interpretation
+
 % --------------------------------------------------------------------
 \section{Algebraic Logic}
 % --------------------------------------------------------------------
@@ -1683,6 +1722,10 @@ Curry-Howard Correspondence
 An \emph{Algorithm} may be formalized as a sequence of operations that
 can be simulated by a Turing-complete system and any function
 that is computable by Algorithm is a \emph{computable function}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Topology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{9}
@@ -1753,6 +1796,12 @@ that is computable by Algorithm is a \emph{computable function}.
     Logic},
     Oxford University Press,
     2000
+
+\bibitem{prawitz65}
+    Dag Prawitz,
+    \emph{Natural Deduction: A proof-theoretical study},
+    Dover,
+    1965
 
 \end{thebibliography}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
