@@ -2,6 +2,7 @@
 
 \documentclass{article}
 \usepackage{amssymb}
+\usepackage{amsmath}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -920,7 +921,8 @@ symbol for \emph{Logical Consequence} (\emph{Entailment}), $\vdash$,
 
 A particular Formal System is required to be \emph{Consistent}; that
 is the ability to derive only the affirmation or denial of a
-particular statement, not both.
+particular statement, not both. Another way of stating Consistency is
+that Falsity is not provable from no Assumptions.
 
 \subsection{Deductive Apparatus}
 \label{subsec:deductive_apparatus}
@@ -1617,9 +1619,76 @@ Conversely, Inference Rules that remove Logical Connectives are
 \]
 
 \emph{Hypothetical Derivations} (reasoning from \emph{Assumptions})
-are required for Implication Introduction or Disjunction Elimination.
+are required for Implication Introduction or Disjunction
+Elimination. The general form of a Hypothetical Derivation with
+Antecedents $D_i$ and Succedent $J$:
+\[
+    D_1 \quad D_2 \cdots D_n
+\]\[
+    \vdots
+\]\[
+    J
+\]
+Introduction Rules for Implication:
+\[
+    {\over A\;\mathrm{true}} u
+\]\[
+    \vdots
+\]\[
+    {B\;\mathrm{true}
+    \over A \rightarrow B\;\mathrm{true}} \rightarrow_{I^u}
+\]
+The Premise $u$ here is considered \emph{discharged} by the Rule
+$I^u$; that is the scope of $u$ does not extend past $I^u$.
+Elimination Rule for Implication (Modus Ponens):
+\[
+    {A \rightarrow B\;\mathrm{true} \quad A\;\mathrm{true}
+    \over B\;\mathrm{true}} \rightarrow_{E}
+\]
+Disjunctive Elimination:
+\[
+    \frac{
+    A \vee B\;\mathrm{true} \quad
+    \begin{matrix}
+        { \over A\;\mathrm{true}}u \\
+        \vdots \\
+        C\;\mathrm{true}
+    \end{matrix}
+    \quad
+    \begin{matrix}
+        { \over B\;\mathrm{true}}w \\
+        \vdots \\
+        C\;\mathrm{true}
+    \end{matrix}
+    }{ C\;\mathrm{true}}\wedge_{E^{u,w}}
+\]
+A Theory is \emph{Locally Consistent} (or \emph{Locally Reducible}) if
+an Introduction of a connective followed by its Elimination can be
+equivalently Derived without these steps.  The dual to Local
+Consistency is \emph{Local Completeness} which states that Elimination
+rules can decompose a connective into the forms of its Introduction
+Rule. These correspond to $\beta$-reduction and $\eta$-conversion in
+$\lambda$-Calculus (\S\ref{sec:lambda_calculus}) where Propositions
+are \emph{Types} and Proofs are \emph{Programs}. If an entire
+Derivation has only Eliminations followed by Introductions, it is said
+to be in \emph{Normal Form}.
 
-\emph{Normal Form}
+In a Formal Proof, the Judgements representing Antecedents are
+presented as Rules with no Premises, named by a \emph{Proof Variable}
+(from a countable set $V$ of variables):
+\[
+    \frac{}{J_1}u_1 \; \frac{}{J_2}u_2 \; \cdots \frac{}{J_n}u_n
+\]\[
+    \vdots
+\]\[
+    J
+\]
+where $u_i \in V$. Written in Sequent Notation:
+\[
+    u_1:J_1, u_2:J_2, \ldots, u_n:J_n \vdash J
+\]
+This convention is sometimes called \emph{Localized Hypotheses}. In
+general, $\pi : A$ may be read ``$\pi$ is a proof of $A$''.
 
 \subsubsection{Sequent Calculus}
 
@@ -1688,7 +1757,7 @@ Semantic Tableau
 Curry-Howard Correspondence
 
 % --------------------------------------------------------------------
-\section{$\lambda$-Calculus}
+\section{$\lambda$-Calculus}\label{sec:lambda_calculus}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -1800,7 +1869,7 @@ that is computable by Algorithm is a \emph{computable function}.
 \bibitem{prawitz65}
     Dag Prawitz,
     \emph{Natural Deduction: A proof-theoretical study},
-    Dover,
+    A\&W Stockholm,
     1965
 
 \end{thebibliography}
