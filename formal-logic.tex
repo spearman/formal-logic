@@ -1627,8 +1627,10 @@ and a single Succedent
 \]
 Inference Rules in Natural Deduction have the general notation
 \[
-    {J_1 \quad J_2 \quad \cdots \quad J_n
-    \over J} name
+    {
+        \frac{J_1 \quad J_2 \quad \cdots \quad J_n}
+        {J}
+    } name
 \]
 where the Rule with name $name$ has Premises of zero or more
 Judgements $J_i$ and the Judgement $J$ is the Conclusion.
@@ -1636,16 +1638,20 @@ Judgements $J_i$ and the Judgement $J$ is the Conclusion.
 Inference Rules that introduce a Logical Connective in the Conclusion
 are called \emph{Introduction Rules}. Example
 \[
-    {A\;\mathrm{true} \quad B\;\mathrm{true}
-    \over (A \wedge B)\;\mathrm{true}} \wedge_I
+    {
+        \frac{A\;\mathrm{true} \quad B\;\mathrm{true}}
+        {(A \wedge B)\;\mathrm{true}}
+    } \wedge_I
 \]
 where $A$ and $B$ are Propositions.
 
 Conversely, Inference Rules that remove Logical Connectives are
 \emph{Elimination Rules}.
 \[
-    {A \wedge B\;\mathrm{true}
-    \over A\;\mathrm{true}} \wedge_E
+    {
+        \frac{A \wedge B\;\mathrm{true}}
+        {A\;\mathrm{true}}
+    } \wedge_E
 \]
 
 \emph{Hypothetical Derivations} (reasoning from \emph{Assumptions})
@@ -1661,32 +1667,45 @@ Antecedents $D_i$ and Succedent $J$:
 \]
 Introduction Rules for Implication:
 \[
-    {\over A\;\mathrm{true}} u
+    {
+        \frac{}
+        {A\;\mathrm{true}}
+    } u
 \]\[
     \vdots
 \]\[
-    {B\;\mathrm{true}
-    \over A \rightarrow B\;\mathrm{true}} \rightarrow_{I^u}
+    {
+        \frac{B\;\mathrm{true}}
+        {A \rightarrow B\;\mathrm{true}}
+    } \rightarrow_{I^u}
 \]
 The Premise $u$ here is considered \emph{discharged} by the Rule
 $I^u$; that is the scope of $u$ does not extend past $I^u$.
 Elimination Rule for Implication (Modus Ponens):
 \[
-    {A \rightarrow B\;\mathrm{true} \quad A\;\mathrm{true}
-    \over B\;\mathrm{true}} \rightarrow_{E}
+    {
+        \frac{A \rightarrow B\;\mathrm{true} \quad A\;\mathrm{true}}
+        {B\;\mathrm{true}}
+    } \rightarrow_{E}
 \]
 Disjunctive Elimination:
 \[
     \frac{
     A \vee B\;\mathrm{true} \quad
     \begin{matrix}
-        { \over A\;\mathrm{true}}u \\
+        {
+            \frac{}
+            {A\;\mathrm{true}}
+        }u \\
         \vdots \\
         C\;\mathrm{true}
     \end{matrix}
     \quad
     \begin{matrix}
-        { \over B\;\mathrm{true}}w \\
+        {
+            \frac{}
+            {B\;\mathrm{true}}
+        }w \\
         \vdots \\
         C\;\mathrm{true}
     \end{matrix}
@@ -1837,24 +1856,28 @@ only Literals that unify with a Literal already on the branch
 (\emph{Strong Connectedness}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Model Theory}\label{sec:model_theory}
+\part{Formal Semantics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Model Theory}\label{sec:model_theory}
+% --------------------------------------------------------------------
 
 When defining a Theory as a set of Sentences in a Formal Language
 (\S\ref{sec:formal_language}), a \emph{Model} is a structure called an
-\emph{Interpretation} that satisfies the Sentences of that
-Theory. Model Theory, Formal Languages, and Formal Systems together
-compose the study of \emph{Metalogic}.
+\emph{Interpretation} (\S\ref{sec:interpretation}) that satisfies the
+Sentences of that Theory. Model Theory, Formal Languages, and Formal
+Systems together compose the study of \emph{Metalogic}.
 
 %FIXME: ref Algebraic Systems?
 One definition of Model Theory is the combination of Formal Logic
 with \emph{Universal Algebra}.
 
 % --------------------------------------------------------------------
-\section{Universal Algebra}
+\subsection{Universal Algebra}
 % --------------------------------------------------------------------
 
-\subsection{Algebraic Structure}
+\subsubsection{Algebraic Structure}
 
 %FIXME: ref Complete Lattices
 Universal Algebra is the study of \emph{Algebraic Structure} (as
@@ -1878,22 +1901,24 @@ elements from an Underlying Set and returns a single element from that
 same Set. An Algebra may be limited by Axioms of \emph{Equational
   Laws} (eg. the Associative Axiom).
 
+% --------------------------------------------------------------------
 \subsection{Varieties}
+% --------------------------------------------------------------------
 
 %FIXME ref Fields, Homomorphism, Subalgebra, Direct Product
-A \emph{Variety of Algebras} is a class defined only by Identities
-that are satisfied by a given Signature
+A \emph{Variety of Algebras} is a \emph{Class} defined only by
+Identities that are satisfied by a given Signature
 (\S\ref{sec:formal_systems}). This is equivalent to saying a Variety
-is the \emph{Class} of Algebraic Structures with the same Signature
-that is closed under \emph{Homomorphic Images}, \emph{Subalgebras},
-and \emph{Direct Products}; a result known as the \emph{HSP Theorem}
-or \emph{Birkhoff's Theorem}\cite{birkhoff35}. This rules out
-Predicate Logic and all Relations besides Equality (thus excluding the
-Class of \emph{Fields}). A \emph{Subvariety} is a Subclass of a
-Variety with the same Signature (eg. the Class of \emph{Abelian
-  Groups} is a Subvariety of the Class of \emph{Groups}). A Class of
-Finite Algebras (Algebras with a finite Underlying Set) is sometimes
-called a \emph{Pseudovariety}.
+is the Class of Algebraic Structures with the same Signature that is
+closed under \emph{Homomorphic Images}, \emph{Subalgebras}, and
+\emph{Direct Products}; a result known as the \emph{HSP Theorem} or
+\emph{Birkhoff's Theorem}\cite{birkhoff35}. This rules out Predicate
+Logic and all Relations besides Equality (thus excluding the Class of
+\emph{Fields}). A \emph{Subvariety} is a Subclass of a Variety with
+the same Signature (eg. the Class of \emph{Abelian Groups} is a
+Subvariety of the Class of \emph{Groups}). A Class of Finite Algebras
+(Algebras with a finite Underlying Set) is sometimes called a
+\emph{Pseudovariety}.
 
 An example of a Variety with Signature $\Omega = (2)$ is the Class of
 all \emph{Semigroups} with an equation defining the Associative Law:
@@ -1915,26 +1940,42 @@ under all the operations of $A$.
 The Product of a set of Algebraic Structures is the \emph{Cartesian
   Product} of the Sets with the Operations defined coordinatewise.
 
-Formal Semantics
+% --------------------------------------------------------------------
+\subsection{Interpretation}\label{sec:interpretation}
+% --------------------------------------------------------------------
 
-Semantic Consequence of a Logic System
+Given two Algebraic Structures, $M$ and $N$, an \emph{Interpretation}
+of $M$ in $N$ is a pair $(n,f)$ where
+\begin{itemize}
+    \item $n \in \mathbb{N}$
+    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
+      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
+      by a First-order Formula is definable in $N$ by a First-order
+      Formula
+\end{itemize}
 
-Tautology
+% --------------------------------------------------------------------
+\subsection{Finite Model Theory}
+% --------------------------------------------------------------------
 
-\emph{Finite Model Theory}
+\emph{Finite Model Theory} (FMT) is a restriction of Model Theory to
+Interpretations of Finite Structures.
 
-\emph{Infinite Model Theory}
-
-Classes of Mathematical Structures
+% --------------------------------------------------------------------
+\subsection{Infinite Model Theory}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Algebraic Logic}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\section{Denotational Semantics}
+% --------------------------------------------------------------------
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Formal Semantics}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Semantic Consequence of a Logic System
+
+Tautology
 
 Material Consequence
 
@@ -1943,13 +1984,6 @@ Proof-theoretic Semantics
 Logical Harmony
 
 Semantic Tableau
-
-% --------------------------------------------------------------------
-\section{Interpretation}\label{sec:interpretation}
-% --------------------------------------------------------------------
-% --------------------------------------------------------------------
-\section{Denotational Semantics}
-% --------------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Type Theory}
