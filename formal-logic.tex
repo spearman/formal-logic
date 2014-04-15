@@ -908,12 +908,19 @@ Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0 \cup F_1
 Symbols may be divided into \emph{Logical} and \emph{Non-Logical
   Symbols}: Logical Symbols ($\forall$, $\vee$, $\rightarrow$, $\neg$,
 etc., and \emph{Variables} $x_0$, $x_1$, etc.) always have the same
-meaning while Non-Logical Symbols (\emph{Predicates},
+meaning while Non-Logical Symbols (\emph{Predicates} (Relations),
 \emph{Functions}, and individual \emph{Constants}) only have meaning
 under \emph{Interpretation} (\S\ref{sec:interpretation}). The set of
 Non-Logical Symbols used in a particular discourse is called the
-\emph{Signature} of the discourse.
-
+\emph{Signature} of the discourse. The Signature may be defined as a
+triple:
+\[
+    \sigma = (S_{func},S_{rel},ar)
+\]
+where
+\[
+    ar: S_{func} \cup S_{rel} \rightarrow \mathbb{N}_0
+\]
 \emph{Extra-logical Symbols} are those of a Metalanguage, such as the
 symbol for \emph{Logical Consequence} (\emph{Entailment}), $\vdash$,
 (read \emph{yields} or \emph{proves}) or Metavariables, $\varphi,
@@ -1136,9 +1143,9 @@ finitely many Functions and \emph{Predicates} defined on that Domain,
 and a recursive set of Axioms.
 
 A Predicate in First-order Logic takes one or more Objects from the
-Domain and returns either True or False. A Predicate taking no Objects
-(a Nullary Predicate) is equivalent to a Proposition in Zeroth-order
-Logic.
+Domain and returns either True or False, that is a Relation on the
+Domain. A Predicate taking no Objects (a Nullary Predicate) is
+equivalent to a Proposition in Zeroth-order Logic.
 
 \emph{Higher-order Logic}(\S\ref{subsec:higher_order}) allows Predicates
 to be applied to other Predicates or Functions, or Quantifiers may be
@@ -1860,6 +1867,30 @@ only Literals that unify with a Literal already on the branch
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % --------------------------------------------------------------------
+\section{Structure}
+% --------------------------------------------------------------------
+
+A \emph{Structure} is composed of an arbitrary Set called a
+\emph{Carrier Set} or \emph{Underlying Set} (or Domain or Universe)
+with one or more \emph{Operators}. Allowing \emph{Infinitary
+  Operators} leads to a Theory of \emph{Complete Lattices}.
+
+The \emph{Signature} or \emph{Vocabulary} of a Structure is the Set of
+Operators (Functions and Relations) that characterize it. The
+Signature is a synonym for the \emph{Type} of the Structure
+(Schematically represented by $\Omega$), and can be written as an
+ordered sequence of Natural Numbers representing the arity of the
+Operators.
+
+The arity, $n$, of a particular Operator symbol, $s$, may be written
+$n=ar(s)$. Formal definition of a Structure:
+\[
+    \mathcal{A} = (A, \sigma, I)
+\]
+with Domain $A$, Signature $\sigma$, and \emph{Interpretation
+Function} $I$.
+
+% --------------------------------------------------------------------
 \section{Model Theory}\label{sec:model_theory}
 % --------------------------------------------------------------------
 
@@ -1877,29 +1908,33 @@ with \emph{Universal Algebra}.
 \subsection{Universal Algebra}
 % --------------------------------------------------------------------
 
-\subsubsection{Algebraic Structure}
-
 %FIXME: ref Complete Lattices
 Universal Algebra is the study of \emph{Algebraic Structure} (as
 opposed to specific instances of Algebraic Systems). Universal Algebra
-together with \emph{Category Theory} (\S\ref{sec:category_theory})
-makes up \emph{Abstract Algebra}.
+together with \emph{Category Theory} (Part \ref{sec:category_theory})
+makes up \emph{Abstract Algebra}. An Algebraic Structure differs from
+a general Mathematical Structure in that its Signature consists of
+only Function Symbols and no Relation Symbols.
 
-An Algebraic Structure is composed of a Set called a \emph{Carrier
-  Set} or \emph{Underlying Set} with one or more
-\emph{Operators}. Allowing \emph{Infinitary Operators} leads to a
-Theory of \emph{Complete Lattices}.
+An Algebra may be limited by Axioms of \emph{Equational Laws} (eg. the
+Associative Axiom).
 
-The \emph{Signature} of an Algebraic Structure is the set of
-Operations that characterize it. The Signature, and thus the
-\emph{Type} of an Algebra (Schematically represented by $\Omega$), can
-be written as an ordered sequence of Natural Numbers representing the
-arity of the Operations.
+% --------------------------------------------------------------------
+\subsection{Interpretation}\label{sec:interpretation}
+% --------------------------------------------------------------------
 
-An \emph{$n$-ary Operator} in an Algebra is a function that takes $n$
-elements from an Underlying Set and returns a single element from that
-same Set. An Algebra may be limited by Axioms of \emph{Equational
-  Laws} (eg. the Associative Axiom).
+An \emph{Interpretation Function} indicates how the Signature is to be
+Interpreted on the Domain.
+
+Given two Algebraic Structures, $M$ and $N$, an \emph{Interpretation}
+of $M$ in $N$ is a pair $(n,f)$ where
+\begin{itemize}
+    \item $n \in \mathbb{N}$
+    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
+      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
+      by a First-order Formula is definable in $N$ by a First-order
+      Formula
+\end{itemize}
 
 % --------------------------------------------------------------------
 \subsection{Varieties}
@@ -1939,20 +1974,6 @@ under all the operations of $A$.
 
 The Product of a set of Algebraic Structures is the \emph{Cartesian
   Product} of the Sets with the Operations defined coordinatewise.
-
-% --------------------------------------------------------------------
-\subsection{Interpretation}\label{sec:interpretation}
-% --------------------------------------------------------------------
-
-Given two Algebraic Structures, $M$ and $N$, an \emph{Interpretation}
-of $M$ in $N$ is a pair $(n,f)$ where
-\begin{itemize}
-    \item $n \in \mathbb{N}$
-    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
-      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
-      by a First-order Formula is definable in $N$ by a First-order
-      Formula
-\end{itemize}
 
 % --------------------------------------------------------------------
 \subsection{Finite Model Theory}
