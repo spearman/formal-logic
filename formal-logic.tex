@@ -988,9 +988,10 @@ Taken individually, both Premises and Conclusions are
 \emph{Propositions}. The Conclusion relies on the truth of the
 Premises; if the Premises are left unsatisfied, then the derivation is
 \emph{Hypothetical} and the Premises \emph{Hypotheses}. It can be said
-that the Conclusion of a Deducibility Relation is reached by Syntactic
-\emph{Logical Consequence}. For more information, see section on
-\emph{Formal Proof} (\S\ref{subsec:formal_proof}).
+that the Conclusion of a Deducibility Relation is reached by
+\emph{Syntactic Consequence}, a form of \emph{Logical
+  Consequence}. For more information, see section on \emph{Formal
+  Proof} (\S\ref{subsec:formal_proof}).
 
 Inference Rules may be identified as reduntant in two senses. An
 \emph{Admissible Rule} is one which does not change the set of
@@ -1137,10 +1138,10 @@ Rules.
 Systems of \emph{First-order Predicate Logic} add \emph{Extensional
   Quantifiers} that may be applied to Variables, which may be Objects
 of the Universe of discussion, or Relations or Functions. A
-\emph{Theory} may be formed by a system of First-order Logic together
-with a Domain of Discourse over which Variables may range, plus
-finitely many Functions and \emph{Predicates} defined on that Domain,
-and a recursive set of Axioms.
+\emph{First-Order Theory} may be formed by a system of First-order
+Logic together with a Domain of Discourse over which Variables may
+range, plus finitely many Functions and \emph{Predicates} defined on
+that Domain, and a recursive set of Axioms.
 
 A Predicate in First-order Logic takes one or more Objects from the
 Domain and returns either True or False, that is a Relation on the
@@ -1494,6 +1495,16 @@ and commas used in \emph{Sequents}
 and a \emph{Formal Proof} expresses a Judgement with the Premises
 being a sequence of Judgements and the Conclusion also a Judgement.
 
+\subsection{Formal Theory}\label{subsec:formal_theory}
+
+A \emph{Formal Theory} is a Set of Sentences in some Formal Language
+(Part \ref{sec:formal_language}). In a Deductive System, a Theory has
+certain Sentences which are Axioms, and any Sentences which are a
+Logical Consequence are also Sentences of that Theory. That is, a
+Theory $\mathcal{T}$ which is an \emph{Inductive Class}. The Sentences
+which are considered for a particular Theory are drawn from a
+\emph{Conceptual Class} of \emph{Elementary Statements}.
+
 \subsection{Formal Proof} \label{subsec:formal_proof}
 
 A Formal Proof is a \emph{Logical Derivation}: a finite sequence of
@@ -1516,7 +1527,7 @@ differentiated from \emph{Material Consequence} should: % FIXME ref
 \item Rely on the Logical Form (\S\ref{subsec:inference_rules}) of the
   Expressions
 \item Be completely \emph{a priori}
-\item Be \emph{Modal} (\S\ref{subsec:modal_logic})
+\item Be \emph{Modal} (\S\ref{subsec:modal_logic}) (ie, Necessary)
 \end{enumerate}
 Another form of Logical Consequence, \emph{Semantic Consequence} will
 be described under \emph{Model Theory} (Part \ref{sec:model_theory}).
@@ -1866,36 +1877,106 @@ only Literals that unify with a Literal already on the branch
 \part{Formal Semantics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\emph{Formal Semantics} is the general study of \emph{Interpretations}
+of \emph{Formal Languages}.
+
 % --------------------------------------------------------------------
 \section{Structure}
 % --------------------------------------------------------------------
 
-A \emph{Structure} is composed of an arbitrary Set called a
-\emph{Carrier Set} or \emph{Underlying Set} (or Domain or Universe)
+A \emph{Mathematical Structure} is composed of an arbitrary Set called
+a \emph{Carrier Set} or \emph{Underlying Set} (or Domain or Universe)
 with one or more \emph{Operators}. Allowing \emph{Infinitary
   Operators} leads to a Theory of \emph{Complete Lattices}.
+
+Formal definition of a Structure:
+\[
+    \mathcal{A} = (A, \sigma, I)
+\]
+with Domain $A$, Signature $\sigma$, and \emph{Interpretation
+  Function} $I$. The Domain of a Structure $\mathcal{A}$ may also be
+written as $|\mathcal{A}|$.
 
 The \emph{Signature} or \emph{Vocabulary} of a Structure is the Set of
 Operators (Functions and Relations) that characterize it. The
 Signature is a synonym for the \emph{Type} of the Structure
 (Schematically represented by $\Omega$), and can be written as an
 ordered sequence of Natural Numbers representing the arity of the
-Operators.
+Operators. The arity, $n$, of a particular Operator symbol, $s$, may
+be written $n=ar(s)$.
 
-The arity, $n$, of a particular Operator symbol, $s$, may be written
-$n=ar(s)$. Formal definition of a Structure:
+A Structure with no Relation Symbols is an \emph{Algebra}
+(\S\ref{subsec:universal_algebra}). A Structure with no Functions may
+be used as the basis for a \emph{Relational Model}
+(\S\ref{sec:relational_model}) in \emph{Database Theory}.
+
+% --------------------------------------------------------------------
+\subsection{Interpretation}\label{sec:interpretation}
+% --------------------------------------------------------------------
+
+The Interpretation Function maps Function and Relation Symbols of the
+Signature to actual Functions and Relations on the Domain:
 \[
-    \mathcal{A} = (A, \sigma, I)
+    f^{\mathcal{A}} = I (f)
 \]
-with Domain $A$, Signature $\sigma$, and \emph{Interpretation
-Function} $I$.
+\[
+    R^{\mathcal{A}} = I (R) \subseteq A^{ar(R)}
+\]
+A Constant (Nullary) Symbol is identified with an Element of the
+Domain:
+\[
+    I(c) \in A
+\]
+
+Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
+$N$ is a pair $(n,f)$ where
+\begin{itemize}
+    \item $n \in \mathbb{N}$
+    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
+      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
+      by a First-order Formula is definable in $N$ by a First-order
+      Formula
+\end{itemize}
+
+Two Structures are \emph{Bi-interpretable} if they can be interpreted
+in each other. This can be used to define an Equivalence Relation
+between Structures.
+
+% --------------------------------------------------------------------
+\subsection{Substructure}
+% --------------------------------------------------------------------
+
+A Structure $\mathcal{A}$ is an \emph{Induced Substructure} of
+Structure $\mathcal{B}$ when
+\begin{itemize}
+\item $\sigma(\mathcal{A}) = \sigma(\mathcal{B})$
+\item $A \subseteq B$
+\item $I_{\mathcal{A}}=I_{\mathcal{B}}$
+\end{itemize}
+denoted by the notation $\mathcal{A} \subseteq \mathcal{B}$.
+
+Induced Substructures (and \emph{Closed Subsets} described in the next
+section) on a Structure form a \emph{Lattice}.
+
+% --------------------------------------------------------------------
+\subsubsection{Closed Subsets}
+% --------------------------------------------------------------------
+
+%FIXME: ref Finitary Closure Operator in Set Theory
+A Subset of a Domain is a \emph{Closed Subset} if it is closed under
+the Operators of the Structure. For any Subset, $B$, of a Domain,
+$|\mathcal{A}|$, there is a \emph{smallest Closed Subset} of
+$|\mathcal{A}|$ that contains $B$ called the \emph{Hull} of $B$
+denoted by $\langle B \rangle$ or $\langle B \rangle_{\mathcal{A}}$,
+which is said to be \emph{generated} by $B$. $\langle \rangle$ is the
+\emph{Finitary Closure Operator}.
 
 % --------------------------------------------------------------------
 \section{Model Theory}\label{sec:model_theory}
 % --------------------------------------------------------------------
 
 When defining a Theory as a set of Sentences in a Formal Language
-(\S\ref{sec:formal_language}), a \emph{Model} is a structure called an
+(Part \ref{sec:formal_language}), a \emph{Model} is an
 \emph{Interpretation} (\S\ref{sec:interpretation}) that satisfies the
 Sentences of that Theory. Model Theory, Formal Languages, and Formal
 Systems together compose the study of \emph{Metalogic}.
@@ -1905,7 +1986,7 @@ One definition of Model Theory is the combination of Formal Logic
 with \emph{Universal Algebra}.
 
 % --------------------------------------------------------------------
-\subsection{Universal Algebra}
+\subsection{Universal Algebra}\label{subsec:universal_algebra}
 % --------------------------------------------------------------------
 
 %FIXME: ref Complete Lattices
@@ -1913,31 +1994,14 @@ Universal Algebra is the study of \emph{Algebraic Structure} (as
 opposed to specific instances of Algebraic Systems). Universal Algebra
 together with \emph{Category Theory} (Part \ref{sec:category_theory})
 makes up \emph{Abstract Algebra}. An Algebraic Structure differs from
-a general Mathematical Structure in that its Signature consists of
-only Function Symbols and no Relation Symbols.
+a general \emph{Mathematical Structure} in that its Signature consists
+of only Function Symbols and no Relation Symbols.
 
 An Algebra may be limited by Axioms of \emph{Equational Laws} (eg. the
 Associative Axiom).
 
 % --------------------------------------------------------------------
-\subsection{Interpretation}\label{sec:interpretation}
-% --------------------------------------------------------------------
-
-An \emph{Interpretation Function} indicates how the Signature is to be
-Interpreted on the Domain.
-
-Given two Algebraic Structures, $M$ and $N$, an \emph{Interpretation}
-of $M$ in $N$ is a pair $(n,f)$ where
-\begin{itemize}
-    \item $n \in \mathbb{N}$
-    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
-      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
-      by a First-order Formula is definable in $N$ by a First-order
-      Formula
-\end{itemize}
-
-% --------------------------------------------------------------------
-\subsection{Varieties}
+\subsubsection{Varieties}
 % --------------------------------------------------------------------
 
 %FIXME ref Fields, Homomorphism, Subalgebra, Direct Product
@@ -1951,9 +2015,9 @@ closed under \emph{Homomorphic Images}, \emph{Subalgebras}, and
 Logic and all Relations besides Equality (thus excluding the Class of
 \emph{Fields}). A \emph{Subvariety} is a Subclass of a Variety with
 the same Signature (eg. the Class of \emph{Abelian Groups} is a
-Subvariety of the Class of \emph{Groups}). A Class of Finite Algebras
-(Algebras with a finite Underlying Set) is sometimes called a
-\emph{Pseudovariety}.
+Subvariety of the Class of \emph{Groups}). Classes of Finite Algebras
+(Algebras with a finite Underlying Set) are sometimes called
+\emph{Pseudovarieties}.
 
 An example of a Variety with Signature $\Omega = (2)$ is the Class of
 all \emph{Semigroups} with an equation defining the Associative Law:
@@ -1976,6 +2040,14 @@ The Product of a set of Algebraic Structures is the \emph{Cartesian
   Product} of the Sets with the Operations defined coordinatewise.
 
 % --------------------------------------------------------------------
+\subsubsection{Term Algebra}\label{subsec:term_algebra}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\paragraph{Quotient Algebra}\label{subsec:quotient_algebra}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Finite Model Theory}
 % --------------------------------------------------------------------
 
@@ -1985,6 +2057,14 @@ Interpretations of Finite Structures.
 % --------------------------------------------------------------------
 \subsection{Infinite Model Theory}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Elementary Class}
+% --------------------------------------------------------------------
+
+A Class of Structures, $K$, with Signature $\sigma$ is an
+\emph{Elementary Class} if there is a First-order Theory, $T$, with
+Signature $\sigma$ such that $K$ contains all Models of $T$.
 
 % --------------------------------------------------------------------
 \section{Algebraic Logic}
@@ -2037,6 +2117,10 @@ Curry-Howard Correspondence
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Topology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Complexity Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2049,8 +2133,13 @@ can be simulated by a Turing-complete system and any function
 that is computable by Algorithm is a \emph{computable function}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Topology}
+\part{Database Theory}\label{sec:database_theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Relational Model}\label{sec:relational_model}
+% --------------------------------------------------------------------
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{99}
