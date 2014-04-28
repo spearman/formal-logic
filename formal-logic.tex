@@ -917,7 +917,7 @@ Symbols may be divided into \emph{Logical} and \emph{Non-Logical
 etc., and \emph{Variables} $x_0$, $x_1$, etc.) always have the same
 meaning while Non-Logical Symbols (\emph{Predicates} (Relations),
 \emph{Functions}, and individual \emph{Constants}) only have meaning
-under \emph{Interpretation} (\S\ref{sec:interpretation}). The set of
+under \emph{Interpretation} (\S\ref{subsec:interpretation}). The set of
 Non-Logical Symbols used in a particular discourse is called the
 \emph{Signature} of the discourse. The Signature may be defined as a
 triple:
@@ -1889,33 +1889,46 @@ only Literals that unify with a Literal already on the branch
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \emph{Formal Semantics} is the general study of \emph{Interpretations}
-of \emph{Formal Languages} (Part \ref{sec:formal_language}).
+(\S\ref{subsec:interpretation}) of \emph{Formal Languages} (Part
+\ref{sec:formal_language}).
 
 % --------------------------------------------------------------------
 \section{Truth}\label{sec:semantic_truth}
 % --------------------------------------------------------------------
 
 \emph{Tarski's Undefinability Theorem} \cite{tarski36} uses the same
-techniques as G\"odel's Theorems to show that Truth cannot be defined
-in an Object Language (\S\ref{sec:metalanguage}). The two related
-conceptions of Truth are the \emph{Correspondence Theory}
-(\S\ref{subsec:correspondence_truth}) and \emph{Deflationary Theory}
-(\S\ref{subsec:deflationary_truth}).
+techniques as G\"odel's Incompleteness Theorems to show that Truth
+cannot be defined in an Object Language
+(\S\ref{sec:metalanguage}). The two related conceptions of Truth are
+the \emph{Correspondence Theory} (\S\ref{subsec:correspondence_truth})
+and \emph{Deflationary Theory} (\S\ref{subsec:deflationary_truth}).
 
-Briefly, the Theorem results in a \emph{Material Adequacy Condition}
-(called \emph{Convention T}) that any Theory of Truth must entail:
+Briefly, the Undefinability Theorem results in a \emph{Material
+  Adequacy Condition} (called \emph{Convention T}) that any Theory of
+Truth must entail:
 \[
     \forall P (\mathrm{True}(S) \leftrightarrow P)
 \]
 where $S$ is the name of the Sentence $P$ in the Metalanguage which is
-an interpretation of $P$ in the Object Language. Tarski considered
-this definition of Truth to be a Correspondence Theory. An example
-sentence in Natural Language where the Object Language is German and
-the Metalanguage is English:
+an Interpretation of $P$ in the Object Language. This is the
+\emph{T-Schema} used in \emph{Tarski's Semantic Theory of Truth} to
+Inductively define Truth, expressed as a First-order Sentence. When a
+Modal Logic is based on the T-Schema it is said to give rise to
+\emph{T-Theory}. Tarski's Semantic Theory of Truth is used as the
+definition for Truth in \emph{Model Theory}
+(\S\ref{sec:model_theory}).
+
+An example sentence conforming to Convention T in Natural Language
+where the Object Language is German and the Metalanguage is English:
 \begin{description}
-\item ``\emph{Schnee ist wei\ss} is True if and only if snow is
+\item ``\emph{Der Schnee ist wei\ss} is True if and only if snow is
   white''.
 \end{description}
+Here the right side of the Biconditional ('snow is white') is the
+\emph{Truth-Condition} of the left side.
+
+Tarski considered this definition of Truth to be a type of
+Correspondence Theory.
 
 % --------------------------------------------------------------------
 \subsection{Correspondence Theory}\label{subsec:correspondence_truth}
@@ -2041,11 +2054,18 @@ Operations and Relations from the Signature. The converse is
 \emph{Expansion}.
 
 % --------------------------------------------------------------------
-\subsection{Interpretation}\label{sec:interpretation}
+\subsection{Interpretation}\label{subsec:interpretation}
 % --------------------------------------------------------------------
 
-The Interpretation Function maps Function and Relation Symbols of the
-Signature to actual Functions and Relations on the Domain:
+Roughly, an \emph{Interpretation} of a Formal Language is an
+assignment of \emph{Meanings} to Symbols and \emph{Truth-Conditions}
+(\S\ref{sec:semantic_truth}) to Sentences. An Interpretation of
+First-order Logic maps Terms to Individuals in the Universe and
+Propositions to Truth Values.
+
+The Interpretation Function in a Mathematical Structure maps Function
+and Relation Symbols of the Signature to actual Functions and
+Relations on the Domain:
 \[
     f^{\mathcal{A}} = I (f)
 \]
@@ -2144,16 +2164,6 @@ Compatible with the Equivalence Classes of the Quotient Set, these
 Classes are \emph{Quotient Algebras}.
 
 % --------------------------------------------------------------------
-\section{Model Theory}\label{sec:model_theory}
-% --------------------------------------------------------------------
-
-\emph{Model Theory}, Formal Language (Part \ref{sec:formal_language}),
-and Formal Systems (Part \ref{sec:formal_systems}) together compose
-the study of \emph{Metalogic}. One definition of Model Theory is the
-combination of Formal Logic with \emph{Universal Algebra}
-(\S\ref{subsec:universal_algebra}).
-
-% --------------------------------------------------------------------
 \subsection{Universal Algebra}\label{subsec:universal_algebra}
 % --------------------------------------------------------------------
 
@@ -2228,14 +2238,36 @@ Elementary Classes are termed \emph{Axiomatizable in First-Order
   Logic} (or simply \emph{Axiomatizable} when implicitly First-Order).
 
 % --------------------------------------------------------------------
+\section{Model Theory}\label{sec:model_theory}
+% --------------------------------------------------------------------
+
+\emph{Model Theory}, Formal Language (Part \ref{sec:formal_language}),
+and Formal Logic (\S\ref{sec:formal_systems}) together compose the
+study of \emph{Metalogic}. One definition of Model Theory is the
+combination of Formal Logic with \emph{Universal Algebra}
+(\S\ref{subsec:universal_algebra}). An alternative view of Model
+Theory equates it with \emph{Algebraic Geometry}
+(\S\ref{subsec:algebraic_geometry}). The broadest definition of Model
+Theory includes four divisions: Classical Model Theory, Model Theory
+of Groups and Fields, Geometric Model Theory, and Computable Model
+Theory (\S\ref{subsec:computable_model_theory}).
+
+\emph{Models} are \emph{Interpretations}
+(\S\ref{subsec:interpretation}) of Theories
+(\S\ref{subsec:formal_theory}) in a Formal Language. Model Theory uses
+Tarski's Semantic Theory of Truth (\S\ref{sec:semantic_truth}) as the
+definition of Truth. Model Theory also forms the foundation of
+\emph{Formal (Truth-conditional) Semantics}-- a reduction of the
+Meaning of Assertions in Natural Languages to their Truth-conditions.
+
+% --------------------------------------------------------------------
 \subsection{Satisfaction}\label{subsec:satisfaction}
 % --------------------------------------------------------------------
 
 When defining a Theory as a set of Sentences in a Formal Language, a
-\emph{Model} is an \emph{Interpretation} (\S\ref{sec:interpretation})
-that \emph{Satisfies} the Sentences of that Theory. For a Formula
-$\phi$ and a Structure $\mathcal{M}$, a \emph{Satisfaction Relation}
-is denoted:
+\emph{Model} is an \emph{Interpretation} that \emph{Satisfies} the
+Sentences of that Theory. For a Formula $\phi$ and a Structure
+$\mathcal{M}$, a \emph{Satisfaction Relation} is denoted:
 \[
     \mathcal{M} \vDash \phi
 \]
@@ -2263,7 +2295,43 @@ Interpretations of Finite Structures.
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Computable Model Theory}\label{subsec:computable_model_theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Classification Theory}
+% --------------------------------------------------------------------
+
+\emph{Stability}
+
+\emph{Geometric Model Theory}
+
+% --------------------------------------------------------------------
+\subsection{Kripke Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Proof-theoretic Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Truth-value Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Game-theoretic Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Probabilistic Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \section{Algebraic Logic}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Algebraic Geometry}\label{subsec:algebraic_geometry}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
