@@ -1252,13 +1252,35 @@ with no Free Variables in First-order Logic is a \emph{First-order
 Sentences have well-defined Truth values. Free Variables are
 implicitly Universally Quantified.
 
+\paragraph{Uniqueness Quantification}\hfill
+\\
+\emph{Unique Existential Quantification}, denoted by $\exists !$,
+is expressed in natural language as ``there is one and only one.'' A
+First-Order System requires the \emph{Equality Relation}
+(\S\ref{subsec:first_order_equality}) in order to be able to express
+Uniqueness Quantification.
+
+\paragraph{Quantifier Rank}\hfill
+\\
+Inductive definition of \emph{Quantifier Rank} function $qr$:
+\begin{itemize}
+\item $qr(\varphi) = 0$ if $\varphi$ is Atomic
+\item $qr(\varphi_1 \wedge \varphi_2) = qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
+\item $qr(\neg \varphi) = qr(\varphi)$
+\item $qr(\exists_x \varphi) = qr(\varphi) + 1$
+\end{itemize}
+
+\paragraph{Quantifier Nesting}\hfill
+\\
+% FIXME
+
 \subsubsection{Inference Rules}
 
 \paragraph{Universal Generalization}\label{subsec:universal_generalization} \hfill
 \\
 \[P(x) \vdash \forall x P(x)\]
 
-\subsubsection{Equality Conventions}
+\subsubsection{Equality Conventions}\label{subsec:first_order_equality}
 
 \paragraph{First-order Logic with Equality}\hfill
 \\ Including a primitive Logical Symbol for equality, $=$, interpreted
@@ -1607,7 +1629,7 @@ and
 
 A Sequent with no Succedent ($\Gamma \vdash$) is a
 \emph{Contradiction} meaning it proves falsity which is
-inconsistent. A Sequent with no Antecedent ($\vdash \Sigma$) is a
+Inconsistent. A Sequent with no Antecedent ($\vdash \Sigma$) is a
 \emph{Logical Assertion} and the Succedent is a
 \emph{Tautology}. Theorems are those of the form $\vdash B$ which are
 the Conclusion of a valid Proof.
@@ -2276,6 +2298,22 @@ For $\mathcal{M}$ to be a Model of a Theory, $T$, it is required that:
 \item The Language of $\mathcal{M}$ is the same as the Language of $T$
 \item Every Sentence in $T$ is Satisfied by $\mathcal{M}$
 \end{itemize}
+%FIXME ref completeness theorem
+By the Completeness Theorem a Consistent Theory is Satisfiable.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abstract Model Theory}
+% --------------------------------------------------------------------
+
+\emph{Abstract Logic}
+
+\emph{Institution}
+
+\emph{Lindstr\"om's Theorem}
+
+Jon Barwise 1974 - Axioms for Abstract Model Theory
 
 % --------------------------------------------------------------------
 \subsection{Finite Model Theory}
@@ -2343,8 +2381,6 @@ Semantic Consequence of a Logic System
 Tautology
 
 Material Consequence
-
-Proof-theoretic Semantics
 
 Logical Harmony
 
