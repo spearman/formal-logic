@@ -1179,7 +1179,7 @@ The contemporary Signature used:
 Here, Functions of Valence 0 are \emph{Constant Symbols} denoted by
 letters $a$, $b$, $c$, $\ldots$.
 
-\subsubsection{Properties}
+\subsubsection{Properties}\label{subsec:first_order_properties}
 
 First-order Logic may be used to devise Deductive Systems with
 finite Domains that are \emph{Sound} and \emph{Complete}, but for
@@ -1536,7 +1536,10 @@ certain Sentences which are Axioms, and any Sentences which are a
 Logical Consequence are also Sentences of that Theory. That is, a
 Theory $\mathcal{T}$ which is an \emph{Inductive Class}. The Sentences
 which are considered for a particular Theory are drawn from a
-\emph{Conceptual Class} of \emph{Elementary Statements}.
+\emph{Conceptual Class} of \emph{Elementary Statements}. A Formal
+Theory is said to be \emph{Complete} if for every Sentence in the
+Language of that Theory, the Theory contains either that Sentence or
+its Negation.
 
 \subsection{Formal Proof} \label{subsec:formal_proof}
 
@@ -2100,22 +2103,8 @@ Domain:
     I(c) \in A
 \]
 
-Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
-$N$ is a pair $(n,f)$ where
-\begin{itemize}
-    \item $n \in \mathbb{N}$
-    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
-      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
-      by a First-order Formula is definable in $N$ by a First-order
-      Formula
-\end{itemize}
-
-Two Structures are \emph{Bi-interpretable} if they can be interpreted
-in each other. This can be used to define an Equivalence Relation
-between Structures.
-
 % --------------------------------------------------------------------
-\subsection{Substructure}
+\subsection{Substructure}\label{subsec:model_substructure}
 % --------------------------------------------------------------------
 
 A Structure $\mathcal{A}$ is an \emph{Induced Substructure} of
@@ -2125,7 +2114,21 @@ Structure $\mathcal{B}$ when
 \item $A \subseteq B$
 \item $I_{\mathcal{A}}=I_{\mathcal{B}}$
 \end{itemize}
-denoted by the notation $\mathcal{A} \subseteq \mathcal{B}$.
+denoted by the notation $\mathcal{A} \subseteq \mathcal{B}$ where
+$\mathcal{B}$ is called the \emph{Extension} or \emph{Superstructure}
+of $\mathcal{A}$.
+
+A Substructure $A$ is an \emph{Elementary Substructure} of $B$ if $A$
+and $B$ both \emph{Satisfy} (\S\ref{subsec:satisfaction}) the same
+Sentences. Here $B$ would be an \emph{Elementary Extension} of $A$.
+
+When a Structure is applied as a \emph{Model}
+(\S\ref{sec:model_theory}) of a particular Theory
+(\S\ref{subsec:formal_theory}), if no extensions of that Structure
+result in Theories that are Consistent, that Theory is termed
+\emph{Complete}. A Theory $T$ is called \emph{Model Complete}
+(\S\ref{subsec:model_completion}) if every Substructure of a Model of
+$T$ is itself a Model of $T$.
 
 Induced Substructures (and \emph{Closed Subsets} described in the next
 section) on a Structure form a \emph{Lattice}.
@@ -2142,6 +2145,24 @@ $|\mathcal{A}|$ that contains $B$ called the \emph{Hull} of $B$
 denoted by $\langle B \rangle$ or $\langle B \rangle_{\mathcal{A}}$,
 which is said to be \emph{generated} by $B$. $\langle \rangle$ is the
 \emph{Finitary Closure Operator}.
+
+% --------------------------------------------------------------------
+\subsubsection{Embedding}\label{subsec:sigma_embedding}
+% --------------------------------------------------------------------
+
+An \emph{$\sigma$-Embedding} of two $\sigma$-Structures $\mathcal{A}$
+and $\mathcal{B}$ is given by an Injective Map $h: A \hookrightarrow
+B$ (the ``hooked arrow'' is used to indicate the Map is an Embedding)
+where
+\begin{itemize}
+\item for every $f_n \in \sigma$ and $a_1, \ldots, a_n \in A^n$,
+  $h(f_{n}^A(a_1,\ldots,a_n)) = f_{n}^B(h(a_1),\ldots,h(a_n))$
+\item for every $R_n \in \sigma$ and $a_1, \ldots, a_n \in A^n$, $A
+  \vDash R(a_1, \ldots, a_n) \leftrightarrow B \vDash R(h(a_1),
+  \ldots, h(a_n))$
+\end{itemize}
+Such an Embedding is an \emph{Elementary Embedding} if $h(A)$ is an
+Elementary Substructure (\S\ref{subsec:model_substructure}) of $B$.
 
 % --------------------------------------------------------------------
 \subsection{Term Algebra}\label{subsec:term_algebra}
@@ -2251,10 +2272,18 @@ The Product of a set of Algebraic Structures is the \emph{Cartesian
 
 A Class of Structures, $K$, with Signature $\sigma$ is an
 \emph{Elementary Class} if there is a First-order Theory, $T$, with
-Signature $\sigma$ such that $K$ contains all Models of $T$. If $T$
-has only a single Sentence, then $K$ is a \emph{Basic Elementary
-  Class}. The Reduct (\S\ref{sec:mathematical_structure}) of an
-Elementary Class is a \emph{Pseudoelementary Class}.
+Signature $\sigma$ such that $K$ contains all Models of $T$.
+Expressed with the \emph{Satisfaction Relation}
+(\S\ref{subsec:satisfaction}):
+\[
+    \mathcal{M} \in \mathcal{E}_T \leftrightarrow \mathcal{M} \vDash T
+\]
+where $\mathcal{E}_T$ is an Elementary Class, $\mathcal{M}$ is a
+Model, and $T$ is a Theory.
+
+If $T$ has only a single Sentence, then $K$ is a \emph{Basic
+  Elementary Class}. The Reduct (\S\ref{sec:mathematical_structure})
+of an Elementary Class is a \emph{Pseudoelementary Class}.
 
 Elementary Classes are termed \emph{Axiomatizable in First-Order
   Logic} (or simply \emph{Axiomatizable} when implicitly First-Order).
@@ -2276,11 +2305,13 @@ Theory (\S\ref{subsec:computable_model_theory}).
 
 \emph{Models} are \emph{Interpretations}
 (\S\ref{subsec:interpretation}) of Theories
-(\S\ref{subsec:formal_theory}) in a Formal Language. Model Theory uses
-Tarski's Semantic Theory of Truth (\S\ref{sec:semantic_truth}) as the
-definition of Truth. Model Theory also forms the foundation of
-\emph{Formal (Truth-conditional) Semantics}-- a reduction of the
-Meaning of Assertions in Natural Languages to their Truth-conditions.
+(\S\ref{subsec:formal_theory}) in a Formal Language. That is, an
+Interpretation is a Model if it assigns Truth values to the Sentences
+of a Theory. Model Theory uses Tarski's Semantic Theory of Truth
+(\S\ref{sec:semantic_truth}) as the definition of Truth. Model Theory
+also forms the foundation of \emph{Formal (Truth-conditional)
+  Semantics}-- a reduction of the Meaning of Assertions in Natural
+Languages to their Truth-conditions.
 
 % --------------------------------------------------------------------
 \subsection{Satisfaction}\label{subsec:satisfaction}
@@ -2299,9 +2330,129 @@ For $\mathcal{M}$ to be a Model of a Theory, $T$, it is required that:
 \item Every Sentence in $T$ is Satisfied by $\mathcal{M}$
 \end{itemize}
 %FIXME ref completeness theorem
-By the Completeness Theorem a Consistent Theory is Satisfiable.
+By the Completeness Theorem a Consistent Theory is Satisfiable, that
+is, a Theory has a Model if and only if it is Consistent.
 
+% --------------------------------------------------------------------
+\subsection{Quantifier Elimination}
+% --------------------------------------------------------------------
 
+Within a Theory $T$, if every First-order Formula $\varphi(x_1,
+\ldots, x_n)$ with Quantifiers is equivalent to a First-order Formula
+$\psi(x_1, \ldots, x_n)$ without Quantifiers, $T$ is said to have the
+property of \emph{Quantifier Elimination}. A Theory without Quantifier
+Elimination may be made to have it by adding Symbols to its Signature.
+
+% --------------------------------------------------------------------
+\subsection{Model Completion}\label{subsec:model_completion}
+% --------------------------------------------------------------------
+
+A First-order Theory $T$ is called \emph{Model Complete} if every
+Embedding (\S\ref{subsec:sigma_embedding}) of Models of $T$ is an
+Elementary Embedding.
+
+A Theory $T^*$ is a \emph{Companion} of another Theory $T$ if every
+Model of $T$ can be Embedded in a Model of $T^*$ and likewise every
+Model of $T^*$ can be Embedded in a Model of $T$. A \emph{Model
+  Companion} is a \emph{Companion} of a Theory that is \emph{Model
+  Complete}.
+
+%FIXME ref Amalgamation Property
+A \emph{Model Completion} is a Model Companion $T^*$ of a Model $T$
+that has the \emph{Amalgamation Property}. This means that every Model
+of $T$ can be uniquiely Embedded in a Model of $T^*$.
+
+% --------------------------------------------------------------------
+\subsection{Categoricity}
+% --------------------------------------------------------------------
+
+%FIXME ref Cardinal, Lowenheim-Skolem
+A Theory is termed \emph{Categorical} if all its Models are
+Isomorphic. With this definition and the L\"owenheim-Skolem Theorem it
+follows that any First-order Theory with a Model of infinite
+Cardinality can't be Categorical.
+
+For a Cardinal $\kappa$, a Theory $T$ is \emph{$\kappa$-Categorical}
+if any two Models of $T$ of Cardinality $\kappa$ are Isomorphic to one
+another. By \emph{Morley's Categoricity Theorem}\cite{morley65} if a
+First-order Theory in a Countable Language is Categorical in an
+Uncountable Cardinal $\kappa$, then it is Categorical in all
+Uncountable Cardinalities. There are three possible cases for
+$\kappa$-Categoricity:
+\begin{description}
+\item[Totally Categorical] $\kappa$-Categorical for all Infinite
+  Cardinals
+\item[Uncountably Categorical] $\kappa$-Categorical if and only if
+  $\kappa$ is an Uncountable Cardinal
+\item[Countably Categorical] $\kappa$-Categorical if and only if
+  $\kappa$ is a Countable Cardinal
+\end{description}
+The special case of $\kappa = \aleph_0$ is called
+\emph{$\omega$-Categorical}.
+
+% --------------------------------------------------------------------
+\subsection{Interpretability}
+% --------------------------------------------------------------------
+
+Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
+$N$ is a pair $(n,f)$ where
+\begin{itemize}
+    \item $n \in \mathbb{N}$
+    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
+      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
+      by a First-order Formula is definable in $N$ by a First-order
+      Formula
+\end{itemize}
+
+Two Structures are \emph{Bi-interpretable} if they can be interpreted
+in each other. This can be used to define an Equivalence Relation
+between Structures.
+
+% --------------------------------------------------------------------
+\subsection{Types}
+% --------------------------------------------------------------------
+
+An \emph{$n$-type} of a Model, $\mathcal{M}$, over a (possibly empty)
+Subset of Constants, $A \in M$, is a set of Formulas,
+$p(x_1,\ldots,x_n) = p(\mathbf{x})$, with at most $n$ Free Variables
+in the Language $L(A)$, formed by adding the members of $A$ to the
+Language of $\mathcal{M}$:
+\[
+    L(A) = L \cup \{ c_a : a \in A \}
+\]
+such that for every Finite Subset $p_0(\mathbf{x}) \subseteq
+p(\mathbf{x})$ there exist Elements $b_1,\ldots,b_n \in M$ with
+$\mathcal{M} \vDash p_0(b_1,\ldots,b_n)$.
+
+A \emph{Complete Type} is \emph{Maximal}
+(\S\ref{subsec:formal_theory})) under Inclusion such that $\forall
+\phi(\mathbf{x}) \in L(A,\mathbf{x})$ either $\phi(\mathbf{x}) \in
+p(\mathbf{x})$ or $\neg \phi(\mathbf{x}) \in p(\mathbf{x})$. A
+non-Complete type is called a \emph{Partial Type}.
+
+An $n$-type is \emph{Realized} in $\mathcal{M}$ if there is an Element
+$\mathbf{b} \in M^n$ such that $\mathcal{M} \vDash
+p(\mathbf{b})$. This is guaranteed by the Compactness Theorem
+(\S\ref{subsec:first_order_properties}) in either $\mathcal{M}$ or an
+Elementary Extension (\S\ref{subsec:model_substructure}) of
+$\mathcal{M}$. This is denoted by $tp_{n}^{\mathcal{M}}(\mathbf{b}/A)$
+which is read as ``the Complete Type of $\mathbf{b}$ over $A$''.
+
+A Type $p(\mathbf{x})$ is \emph{Isolated} by a Formula
+$\varphi(\mathcal{x})$ if $\forall \psi(\mathbf{x}) \in
+p(\mathbf{x})$, $\varphi (\mathbf{x}) \rightarrow
+\psi(\mathbf{x})$. Isolated Types are Realized in every Elementary
+Substructure or Extension.
+
+% --------------------------------------------------------------------
+\subsubsection{Saturation}\label{subsec:model_saturation}
+% --------------------------------------------------------------------
+
+A Model $\mathcal{M}$ is \emph{$\kappa$-saturated} (where $\kappa$ is
+a Cardinal number) if for all $A \subseteq M$ of Cardinality $<
+\kappa$, $M$ Realizes all Complete Types over $A$. A Model is
+\emph{Saturated} if it is $|M|$-saturated where $|M|$ is the
+Cardinality of $M$.
 
 % --------------------------------------------------------------------
 \subsection{Abstract Model Theory}
@@ -2548,6 +2699,12 @@ that is computable by Algorithm is a \emph{computable function}.
     \emph{Facts and Propositions},
     Aristotelian Society Supplementary Volume 7,
     1927
+
+\bibitem{morley65}
+    Michael Morley,
+    \emph{Categoricity in Power},
+    Transactions of the American Mathematical Society, Vol. 114, No. 2,
+    1965
 
 \end{thebibliography}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
