@@ -869,6 +869,11 @@ simulated by a DTM.
 \part{Symbolic Logic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\emph{Formal Logic} applies Formal Language (Part
+\ref{sec:formal_language}) to \emph{Formal Arguments} by means of
+\emph{Inference Rules} (\S\ref{subsec:inference_rules}). A Formal
+Argument is an Ordered Set of \emph{Formulas}.
+
 % --------------------------------------------------------------------
 \section{Terms}\label{sec:terms}
 % --------------------------------------------------------------------
@@ -907,6 +912,8 @@ Given Terms, $T = \{t_0,\ldots,t_n\}$, and Relations, $R = \{r_0,\ldots,r_m\}$:
 \item $t_i = t_j$ is a Formula
 \item $r_k(t_0,\ldots,t_n)$ is a Formula and $r_k$ is an n-ary Relation
 \end{itemize}
+A Formula is \emph{Valid} if and only if it is True under every
+\emph{Interpretation} (\S\ref{subsec:interpretation}).
 
 % --------------------------------------------------------------------
 \section{Systems of Logic} \label{sec:formal_systems}
@@ -983,13 +990,16 @@ and Conclusions being WFF in the Formal Language of the system. Axioms
 are special cases of Inference Rules which have no Premises, only a
 universally held Conclusion. Axioms may be further differentiated from
 Rules by saying that Rules are statements \emph{about} the system,
-Axioms are statements \emph{in} the system. Inference Rules, like
-Axioms, may be Schematic if they contain Metavariables.
+Axioms are statements \emph{in} the system.
 
 Inference Rules may be viewed as functions that take Premises and
 return a Conclusion. An alternative formulation for Inference Rules is
 as a \emph{Deducibility Relation}, $\vdash$, that holds between zero
-or more Premises and a Conclusion.
+or more Premises and a Conclusion. A Formal Argument is \emph{Valid}
+if and only if the Conclusion is Entailed by the Premises. Inference
+Rules, like Axioms, may be Schematic if they contain Metavariables,
+and such an Argument is called an \emph{Argument Form}. Argument Forms
+are Valid if and only if every Argument is Valid.
 
 Taken individually, both Premises and Conclusions are
 \emph{Propositions}. The Conclusion relies on the truth of the
@@ -1076,10 +1086,11 @@ The set of WFF of a System, $\mathcal{S}$, may be defined inductively:
 
 \subsubsection{Argument Forms}
 
-Inference Rules of a Propositional Logic define valid \emph{Argument
-  Forms}. The simplest Argument Form that is both necessary (and given
-a complete set of Axioms is sufficient to define all other Argument
-Forms) is \emph{Modus Ponens}, shown here Schematicized:
+Inference Rules of a Propositional Logic define Valid \emph{Argument
+  Forms} (\S\ref{subsec:inference_rules}). The simplest Argument Form
+that is both necessary (and given a complete set of Axioms is
+sufficient to define all other Argument Forms) is \emph{Modus Ponens},
+shown here Schematicized:
 
 $\textrm{1. }\varphi \rightarrow \psi$
 
@@ -1636,7 +1647,7 @@ A Sequent with no Succedent ($\Gamma \vdash$) is a
 Inconsistent. A Sequent with no Antecedent ($\vdash \Sigma$) is a
 \emph{Logical Assertion} and the Succedent is a
 \emph{Tautology}. Theorems are those of the form $\vdash B$ which are
-the Conclusion of a valid Proof.
+the Conclusion of a Valid Proof.
 
 % --------------------------------------------------------------------
 \section{Proof Calculi}
@@ -1917,6 +1928,18 @@ only Literals that unify with a Literal already on the branch
 \emph{Formal Semantics} is the general study of \emph{Interpretations}
 (\S\ref{subsec:interpretation}) of \emph{Formal Languages} (Part
 \ref{sec:formal_language}).
+
+% --------------------------------------------------------------------
+\section{Soundness}\label{sec:soundness}
+% --------------------------------------------------------------------
+
+An Argument in a System of Logic is \emph{Sound} if and only if the
+Argument is Valid and all of its Premises are True. The Logical System
+itself has the Soundness Property if and only if its Inference Rules
+(\S\ref{subsec:inference_rules}) Prove only Valid Formulas under
+Semantic Interpretation. This usually amounts to the simple
+requirement that the Axioms are Valid and the Inference Rules preserve
+Validity.
 
 % --------------------------------------------------------------------
 \section{Truth}\label{sec:semantic_truth}
@@ -2440,7 +2463,81 @@ in each other. This can be used to define an Equivalence Relation
 between Structures.
 
 % --------------------------------------------------------------------
-\subsection{Types}
+\subsection{Abstract Model Theory}
+% --------------------------------------------------------------------
+
+\subsubsection{Abstract Logic}
+
+An \emph{Abstract Logic} is a Formal System that consists of a Class
+of Sentences with a Satisfaction Relation
+(\S\ref{subsec:satisfaction}).
+
+%FIXME compactness, lowenheim-skolem
+\emph{Lindstr\"om's Theorem} states that First-order Logic is the
+Strongest (\S\ref{subsec:elementary_class}) Logic which has both
+Countable Compactness and the Downward L\"owenheim-Skolem Property.
+
+\subsubsection{Institutional Model Theory}
+
+\emph{Institutional Model Theory} generalizes First-order Model Theory
+to arbitrary Logical Systems formalized as \emph{Institutions}
+(\S\ref{subsec:institution_theory}).
+
+% --------------------------------------------------------------------
+\subsection{Finite Model Theory}
+% --------------------------------------------------------------------
+
+\emph{Finite Model Theory} (FMT) is a restriction of Model Theory to
+Interpretations of Finite Structures.
+
+A Finite Structure can always be described by a single First-order
+Sentence. An example structure of $n$ Elements:
+\[
+    \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
+    \varphi_m )
+\]
+This may be extended to a Finite number of Structures:
+\[
+    \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
+    \varphi_m )
+    \vee
+    \cdots
+    \vee
+    \exists x_1 \cdots \exists x_p ( \psi_1 \wedge \cdots \wedge
+    \psi_q )
+\]
+Note the difference here with Infinite First-order Model Theory in
+which a Model cannot be uniquely determined by a set of First-order
+Sentences because of the Compactness Theorem (For every Infinite Model
+a Non-isomorphic Model exists).
+
+The ability of a Property $P$ to be expressed in First-order Logic may
+be determined by whether two Structures $A \in P$ and $B \notin P$
+satisfy all the same First-order Sentences:
+\[
+    A \vDash \alpha \leftrightarrow B \vDash \alpha
+\]
+
+% --------------------------------------------------------------------
+\subsection{Computable Model Theory}\label{subsec:computable_model_theory}
+% --------------------------------------------------------------------
+
+\cite{harizanov98}
+
+% --------------------------------------------------------------------
+\subsection{Geometric Model Theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Classification Theory}
+% --------------------------------------------------------------------
+
+\emph{Classification Theory} is the division of Theories based on
+their \emph{Stability} which is the ability of the Models of the
+Theory to be \emph{Classified}.
+
+% --------------------------------------------------------------------
+\subsubsection{Types}
 % --------------------------------------------------------------------
 
 An \emph{$n$-type} of a Model, $\mathcal{M}$, over a (possibly empty)
@@ -2475,7 +2572,8 @@ p(\mathbf{x})$, $\varphi (\mathbf{x}) \rightarrow
 \psi(\mathbf{x})$. Isolated Types are Realized in every Elementary
 Substructure or Extension.
 
-\subsubsection{Saturation}\label{subsec:model_saturation}
+\paragraph{Saturation}\label{subsec:model_saturation}\hfill
+\\
 
 A Model $\mathcal{M}$ is \emph{$\kappa$-saturated} (where $\kappa$ is
 a Cardinal number) if for all $A \subseteq M$ of Cardinality $<
@@ -2483,59 +2581,66 @@ a Cardinal number) if for all $A \subseteq M$ of Cardinality $<
 \emph{Saturated} if it is $|M|$-saturated where $|M|$ is the
 Cardinality of $M$.
 
-% --------------------------------------------------------------------
-\subsection{Abstract Model Theory}
-% --------------------------------------------------------------------
+\subsubsection{Stability}\label{subsec:model_stability}
 
-\subsubsection{Abstract Logic}
-
-An \emph{Abstract Logic} is a Formal System that consists of a Class
-of Sentences with a Satisfaction Relation
-(\S\ref{subsec:satisfaction}).
-
-%FIXME compactness, lowenheim-skolem
-\emph{Lindstr\"om's Theorem} states that First-order Logic is the
-Strongest (\S\ref{subsec:elementary_class}) Logic which has both
-Countable Compactness and the Downward L\"owenheim-Skolem Property.
-
-\subsubsection{Institutional Model Theory}
-
-\emph{Institutional Model Theory} generalizes First-order Model Theory
-to arbitrary Logical Systems formalized as \emph{Institutions}
-(\S\ref{subsec:institution_theory}).
+A Theory $T$ is \emph{$\kappa$-stable} for an Infinite Cardinal $\kappa$
+if for every set $A$ such that $|A| = \kappa$, the Set of Complete
+Types over $A$ has Cardinality $\kappa$. Theories are Classified with
+the following terms:
+\begin{description}
+\item [Stable] $\kappa$-stable for some Infinite Cardinal $\kappa$
+\item [Unstable] not $\kappa$-stable for all Infinite Cardinals $\kappa$
+\item [Superstable] $\kappa$-stable for all sufficiently large
+  Cardinals $\kappa$
+\item [Totally Transcendental] \emph{Morley Rank}\cite{morley65} less
+  than $\infty$
+\end{description}
 
 % --------------------------------------------------------------------
-\subsection{Finite Model Theory}
+\section{Kripke Semantics}
 % --------------------------------------------------------------------
 
-\emph{Finite Model Theory} (FMT) is a restriction of Model Theory to
-Interpretations of Finite Structures.
+\emph{Kripke Semantics} is the extension of Model Theory to
+Non-classical Logic Systems, beginning with Modal Logic
+(\S\ref{subsec:modal_logic}).
 
-\subsubsection{$\Delta$-elementary Class}
+\begin{description}
+\item [Kripke Frame] $\langle W,R \rangle$ where $W$ is a Non-empty
+  Set of \emph{Nodes} (\emph{Worlds}) and $R$ is a Binary Relation
+  called the \emph{Accessibility Relation}
+\item [Kripke Model] $\langle W,R,\Vdash \rangle$ where $\Vdash$ is a
+  \emph{Forcing Relation} for Nodes of $W$
+\end{description}
+Accessbility Relation % FIXME describe accessibility
+
+The Forcing Relation $\Vdash$ (read as Satisfies or \emph{Forces}
+(\S\ref{subsec:forcing})) has the following properties:
+\begin{itemize}
+\item $w \Vdash \neg A$ if and only if $w \nVdash A$
+\item $w \Vdash A \rightarrow B$ if and only if $w \nVdash A$ or $w
+  \Vdash B$
+\item $w \Vdash \square A$ if and only if $u \Vdash A$ for all $u$
+  such that $w R u$
+\end{itemize}
+\emph{Validity} of a Proposition is defined for
+\begin{itemize}
+\item Model $\langle W,R, \Vdash \rangle$ if $\forall w \in W,
+  w \Vdash A$
+\item Frame $\langle W,R \rangle$ if Valid in Model $\langle W,R,
+  \Vdash \rangle$ for all choices of $\Vdash$
+\item Classes of Frames or Models if Valid for all Frames or Models of
+  the Class
+\end{itemize}
+$Thm(C)$ is defined as the Set of all Formulas Valid in $C$. For a Set
+of Formulas $X$, $Mod(X)$ is defined as the Class of all Frames which
+Validate every Formula in $X$.
 
 % --------------------------------------------------------------------
-\subsection{Infinitary Model Theory}
+\subsection{Boolean-valued Model}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Higher-order Model Theory}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Computable Model Theory}\label{subsec:computable_model_theory}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Classification Theory}
-% --------------------------------------------------------------------
-
-\emph{Stability}
-
-\emph{Geometric Model Theory}
-
-% --------------------------------------------------------------------
-\subsection{Kripke Semantics}
-% --------------------------------------------------------------------
+\emph{Boolean-valued Models} are related to Heyting Algebras and
+Intuitionistic Logic and is equivalent to the method of Forcing.
 
 % --------------------------------------------------------------------
 \section{Proof-theoretic Semantics}
@@ -2599,11 +2704,23 @@ Curry-Howard Correspondence
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Filters}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Forcing}\label{subsec:forcing}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \section{Order Theory}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Relation Algebra}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Descriptive Set Theory}
 % --------------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2617,6 +2734,16 @@ Curry-Howard Correspondence
 % --------------------------------------------------------------------
 \section{Abstract Algebra}\label{sec:abstract_algebra}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Relation Algebra}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Relational Algebra}
+% --------------------------------------------------------------------
+
+\emph{Domain Relational Calculus}
 
 % --------------------------------------------------------------------
 \subsection{Institution Theory}\label{subsec:institution_theory}
@@ -2761,7 +2888,14 @@ that is computable by Algorithm is a \emph{computable function}.
     Transactions of the American Mathematical Society, Vol. 114, No. 2,
     1965
 
+\bibitem{harizanov98}
+    Valentina Harizanov,
+    \emph{Pure Computable Model Theory},
+    Studies in Logic and the Foundations of Mathematics,
+    1998
+
 \end{thebibliography}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
