@@ -223,7 +223,7 @@ an algorithm may decide non-membership only and is termed
 $\mathsf{coRE}$. The class of Automata capable of implementing these
 algorithms are \emph{Turing Machines}(\S\ref{subsec:turing_machine}).
 
-\subsubsection{Decidable}
+\subsubsection{Decidable}\label{subsec:decidability}
 A \emph{Decidable} or \emph{recursive} Language (as opposed to
 recursively enumerable) is defined as the intersection of
 $\mathsf{RE}$ and $\mathsf{coRE}$:
@@ -875,7 +875,7 @@ simulated by a DTM.
 Argument is an Ordered Set of \emph{Formulas}.
 
 % --------------------------------------------------------------------
-\section{Terms}\label{sec:terms}
+\section{Terminology}\label{sec:logic_terminology}
 % --------------------------------------------------------------------
 
 \begin{description}
@@ -945,8 +945,9 @@ is the ability to derive only the affirmation or denial of a
 particular statement, not both. Another way of stating Consistency is
 that Falsity is not provable from no Assumptions.
 
-\subsection{Deductive Apparatus}
-\label{subsec:deductive_apparatus}
+% --------------------------------------------------------------------
+\subsection{Deductive Apparatus} \label{subsec:deductive_apparatus}
+% --------------------------------------------------------------------
 
 A Formal Language (described by a Formal Grammar) in combination with
 a \emph{Deductive Apparatus} gives rise to a \emph{System of
@@ -961,7 +962,7 @@ the set of Inference Rules are Decidable or Semi-decidable. The notion
 of \emph{Theorems}, however, is not in general Effective
 (\S\ref{subsec:formal_proof}).
 
-\subsubsection{Axioms}
+\subsubsection{Axioms}\label{subsec:axiomatization}
 
 \emph{Axioms} are given as WFFs, the truth value of which are assumed
 for the purpose of performing \emph{analysis} within a System of
@@ -979,7 +980,7 @@ or more \emph{Schematic Variables} (Metavariables, \S
 \ref{sec:metalanguage}) appear, standing for a subformula in the
 Object Language of the system. For a Language with infinitely many
 WFF, an Axiom Schema describes a countably infinite number of
-Axioms. A system without Schema is termed \emph{finitely axiomatized}.
+Axioms. A system without Schema is termed \emph{Finitely Axiomatized}.
 
 \subsubsection{Inference Rules} \label{subsec:inference_rules}
 
@@ -1218,7 +1219,7 @@ many Start Symbols.
 
 Terms are limited to those derived from Variables and a finite number
 of $n$-ary Function applications, but not Expressions involving a
-Predicate Symbol. See Section \ref{sec:terms} for a recursive
+Predicate Symbol. See Section \ref{sec:logic_terminology} for a recursive
 definition of Terms.
 
 Definition of \emph{Atomic Formulas} (no Logical Connectives or Quantifiers):
@@ -1366,6 +1367,10 @@ to take on \emph{Plural} Values. It is equi-interpretable with
 \emph{Monadic Second-order Logic}, which restricts Quantification to
 Unary Relations (sets).
 
+\subsubsection{Independence-friendly Logic}\label{subsec:independence_logic}
+
+\emph{Independence-friendly Logic} has \emph{Branching Quantifiers}.
+
 \subsection{Classical Logic}\label{subsec:classical_logic} \hfill
 \\ \emph{Classical Logic} is the class of Propositional and
 First-order Systems of Logic characterized by the following Inference
@@ -1426,7 +1431,7 @@ Propositional Logic called $\mathbf{K}$ which has:
   Theorem, then $\square p$ is a Theorem.
 \item $\mathbf{K}$, \emph{Distribution Axiom}: $\square(p \rightarrow
   q) \rightarrow (\square p \rightarrow \square q)$ (also called the
-  \emph{Kripke schema})
+  \emph{Kripke schema} (\S\ref{sec:frame_semantics}).
 \end{enumerate}
 
 Adding further Axioms gives rise to a nested hierarchy of Systems of
@@ -1505,11 +1510,13 @@ where after performing Action $a$ it is possible that $p$ holds.
 
 \emph{Intuitionistic Logic} replaces Truth with the concept of
 \emph{Constructive Provability}. Intuitionistic Logic is Modelled by
-\emph{Heyting Algebra}.
+\emph{Heyting Algebra} (\S\ref{subsec:heyting_semantics}).
 
 \subsubsection{Minimal Logic}
 
 \subsubsection{Combinatory Logic}\label{subsec:combinatory_logic}
+
+\subsubsection{Intermediate Logic}
 
 \subsection{Substructural Logic}\label{subsec:substructural_logic}
 
@@ -1522,6 +1529,8 @@ where after performing Action $a$ it is possible that $p$ holds.
 \subsection{Ordinal Logic}
 
 Alan Turing's PhD Thesis \cite{turing38}
+
+\subsection{Hoare Logic}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Proof Theory}
@@ -1571,16 +1580,18 @@ Formal Proof of $A$ from the set $\Gamma$:
     \Gamma \vdash_{\mathcal{S}} A
 \]
 It will suffice for now to say that Syntactic Consequence as
-differentiated from \emph{Material Consequence} should: % FIXME ref
-                                % material consequence
+differentiated from \emph{Material Consequence} ($\rightarrow$)
+should:
+
 \begin{enumerate}
 \item Rely on the Logical Form (\S\ref{subsec:inference_rules}) of the
   Expressions
 \item Be completely \emph{a priori}
 \item Be \emph{Modal} (\S\ref{subsec:modal_logic}) (ie, Necessary)
 \end{enumerate}
-Another form of Logical Consequence, \emph{Semantic Consequence} will
-be described under \emph{Model Theory} (Part \ref{sec:model_theory}).
+Another form of Logical Consequence, \emph{Semantic Consequence}
+(\S\ref{subsec:semantic_consequence}) will be described under
+\emph{Model Theory} (Part \ref{sec:model_theory}).
 
 Proof by Syntactic Consequence is a \emph{Deduction}; that is, the
 production of a Theorem is said to be a \emph{Derivation}. Deduction
@@ -2130,6 +2141,30 @@ Domain:
 \]
 
 % --------------------------------------------------------------------
+\subsection{Semantic Consequence}\label{subsec:semantic_consequence}
+% --------------------------------------------------------------------
+
+\emph{Semantic Consequence} is written as
+\[
+    T \vDash_{\mathcal{S}} \varphi
+\]
+where $T$ is a Theory of a Formal System $\mathcal{S}$ and $\varphi$
+is a Formula that is the Semantic Consequence of that Theory. This
+Relation can only be True if there exists a Structure which
+\emph{Satisfies} (\S\ref{subsec:satisfaction}) both $T$ and
+$\varphi$. A \emph{Tautology} is expressed as
+\[
+    \vDash {\varphi}
+\]
+where a Formula $\varphi$ is the Semantic Consequence of the Empty
+Set.
+
+\subsubsection{Valuation}\label{subsec:model_valuation}
+
+A \emph{Valuation} is the assignment of Values to Variables of a
+Formula.
+
+% --------------------------------------------------------------------
 \subsection{Substructure}\label{subsec:model_substructure}
 % --------------------------------------------------------------------
 
@@ -2390,6 +2425,12 @@ that a Theory has a Model if and only if every Finite Subset of the
 Sentences in that Theory also have Models.
 
 % --------------------------------------------------------------------
+\subsection{Compactness Theorem}
+% --------------------------------------------------------------------
+
+%FIXME
+
+% --------------------------------------------------------------------
 \subsection{Quantifier Elimination}
 % --------------------------------------------------------------------
 
@@ -2520,6 +2561,17 @@ satisfy all the same First-order Sentences:
     A \vDash \alpha \leftrightarrow B \vDash \alpha
 \]
 
+\subsubsection{Finite Model Property}
+
+A System of Logic $S$ has the \emph{Finite Model Property} if there is
+a Class of Models $\mathrm{M}$ such that any non-Theorem of $S$ is
+Falsified by some Finite Model in $\mathrm{M}$. If $fmp(S)$, $A$ is a
+$S$-theorem if and only if $A$ is a Theorem of the Theory of Finite
+Models of $S$.
+
+If $S$ is Finitely Axiomatizable (\S\ref{subsec:axiomatization}) and
+$fmp(S)$ then it is Decidable (\S\ref{subsec:decidability}).
+
 % --------------------------------------------------------------------
 \subsection{Computable Model Theory}\label{subsec:computable_model_theory}
 % --------------------------------------------------------------------
@@ -2599,12 +2651,16 @@ the following terms:
 \end{description}
 
 % --------------------------------------------------------------------
-\section{Kripke Semantics}
+\section{Frame Semantics}\label{sec:frame_semantics}
 % --------------------------------------------------------------------
 
-\emph{Kripke Semantics} is the extension of Model Theory to
+\emph{Frame Semantics} is the extension of Model Theory to
 Non-classical Logic Systems, beginning with Modal Logic
 (\S\ref{subsec:modal_logic}).
+
+% --------------------------------------------------------------------
+\subsection{Kripke Semantics}\label{subsec:kripke_semantics}
+% --------------------------------------------------------------------
 
 \begin{description}
 \item [Kripke Frame] $\langle W,R \rangle$ where $W$ is a Non-empty
@@ -2634,9 +2690,9 @@ The Forcing Relation $\Vdash$ (read as Satisfies or \emph{Forces}
   Models of the Class
 \end{itemize}
 $Thm(C)$ is defined as the Set of all Formulas Valid
-(\S\ref{sec:terms}) in $C$. For a Set of Formulas $X$, $Mod(X)$ is
-defined as the Class of all Frames which Validate every Formula in
-$X$.
+(\S\ref{sec:logic_terminology}) in $C$. For a Set of Formulas $X$,
+$Mod(X)$ is defined as the Class of all Frames which Validate every
+Formula in $X$.
 
 A Modal Theory, $T$, is \emph{Sound} (\S\ref{sec:soundness}) with
 respect to a Class of Frames, $C$, if $T \subseteq Thm(C)$. $T$ is
@@ -2647,14 +2703,50 @@ For any $C$, $Thm(C)$ is a \emph{Normal Modal Logic}
 \emph{Correspond} to $C$ if $C = Mod(L)$.
 
 The \emph{Canonical Model} of a Modal Theory $T$ is a Kripke Model
-$\langle W,R, \vDash \rangle$ where $W$ is the Set of all Maximally
-Consistent $T$ Sets (\S\ref{subsec:formal_theory}) and:
+$\langle W,R, \Vdash \rangle$ where $W$ is the Set of all Maximally
+Consistent Sets for $T$ (\S\ref{subsec:formal_theory}) and:
 \begin{itemize}
 \item $XRY$ if and only if for all Formulae $A$, if $\square A
   \in X$ then $A \in Y$
-\item $X\vDash A$ if and only if $A \in X$
+\item $X\Vdash A$ if and only if $A \in X$
 \end{itemize}
 
+%FIXME
+
+\emph{Unravelling}
+
+\emph{Filtration}
+
+% --------------------------------------------------------------------
+\subsection{General Frame Semantics}
+% --------------------------------------------------------------------
+
+A \emph{Modal General Frame} is defined as a triple $\mathbf{F} =
+\langle W,R,V \rangle$ where $\langle W,R \rangle$ is a Kripke Frame
+and $V$ is a Set of Subsets of $W$ closed under Intersection, Union,
+Complement, and the Operation $\square$ defined as
+\[
+    \square A = \{x \in W; \forall y \in W ( x R y \rightarrow y \in A ) \}
+\]
+
+% --------------------------------------------------------------------
+\subsection{Intuitionistic Semantics}
+% --------------------------------------------------------------------
+
+The Semantics of Intuitionistic Logic
+(\S\ref{subsec:intuitionistic_logic}) is definable as Kripke Semantics
+(\S\ref{subsec:kripke_semantics}) or \emph{Heyting Algebra Semantics}.
+
+\subsubsection{Heyting Algebra Semantics}\label{subsec:heyting_semantics}
+
+Instead of assigning Valuations from a Boolean Algebra, Intuitionistic
+Semantics uses Values from a \emph{Heyting Algebra}
+(\S\ref{subsec:heyting_algebra}). A Formula is Valid if and only if it
+receives the Value of the Top Element for any Valuation.
+
+% --------------------------------------------------------------------
+\subsection{Kripke-Joyal Semantics}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Boolean-valued Model}
@@ -2663,43 +2755,92 @@ Consistent $T$ Sets (\S\ref{subsec:formal_theory}) and:
 \emph{Boolean-valued Models} are related to Heyting Algebras and
 Intuitionistic Logic and is equivalent to the method of Forcing.
 
+%FIXME ref complete boolean algebra
+Instead of limiting Formulas in a System $S$ to True or False, they
+may be assigned values from a fixed \emph{Complete Boolean Algebra}.
+
 % --------------------------------------------------------------------
 \section{Proof-theoretic Semantics}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\section{Truth-value Semantics}
-% --------------------------------------------------------------------
+\emph{Proof-theoretic Semantics} is based on the Propositions and
+Logical Connectives of Systems of Inference (Part
+\ref{sec:formal_systems}). See also \emph{Semantic Tableau}
+(\S\ref{subsec:tableau_calculus}).
 
 % --------------------------------------------------------------------
-\section{Game-theoretic Semantics}
+\subsection{Logical Harmony} \label{subsec:logical_harmony}
 % --------------------------------------------------------------------
+
+\emph{Logical Harmony} refers to constraints required between
+Introduction and Elimination Rules.
 
 % --------------------------------------------------------------------
 \section{Probabilistic Semantics}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Algebraic Geometry}\label{subsec:algebraic_geometry}
+\subsection{Truth-value Semantics}
+% --------------------------------------------------------------------
+
+\emph{Truth-value Semantics} is also called the \emph{Substitution
+  Interpretation} for Quantifiers or \emph{Substitutional
+  Quantification}.
+
+% --------------------------------------------------------------------
+\section{Composition Semantics}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\section{Denotational Semantics}
+\subsection{Game Semantics}
 % --------------------------------------------------------------------
 
-Semantic Consequence of a Logic System
+\emph{Game Semantics} studies the \emph{Dialogical} properties of
+Semantics. It is used in connection with Intuitionistic Logic
+(\S\ref{subsec:intuitionistic_logic}) and Linear Logic
+(\S\ref{subsec:linear_logic}).
 
-Tautology
+% --------------------------------------------------------------------
+\subsection{Independence-friendly Semantics}
+% --------------------------------------------------------------------
 
-Material Consequence
+Semantics of Independence-friendly Logics
+(\S\ref{subsec:independence_logic}) is defined by Game Semantics where
+players have Imperfect Information.
 
-Logical Harmony
+% --------------------------------------------------------------------
+\subsection{Denotational Semantics}
+% --------------------------------------------------------------------
 
-Semantic Tableau
+Phrases in a Programming Language are interpreted as Mathematics
+Objects called \emph{Denotations}.
+
+% --------------------------------------------------------------------
+\section{Operational Semantics}
+% --------------------------------------------------------------------
+
+\emph{Operational Semantics} are used in the interpretation of
+Programming Languages.
+
+% --------------------------------------------------------------------
+\subsection{Structural Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Reduction Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Natural Semantics}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Axiomatic Semantics}
 % --------------------------------------------------------------------
+
+\emph{Axiomatic Semantics} equates Meaning of a Sentence with the
+Logical Formulas that describe it; that is what can be proven about it
+in some System of Logic.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Type Theory}
@@ -2755,6 +2896,18 @@ Curry-Howard Correspondence
 % --------------------------------------------------------------------
 \section{Abstract Algebra}\label{sec:abstract_algebra}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Algebraic Geometry}\label{subsec:algebraic_geometry}
+% --------------------------------------------------------------------
+
+\subsubsection{Universal Algebraic Geometry}
+
+% --------------------------------------------------------------------
+\subsection{Heyting Algebra}\label{subsec:heyting_algebra}
+% --------------------------------------------------------------------
+
+\subsubsection{Boolean Algebra}
 
 % --------------------------------------------------------------------
 \subsection{Relation Algebra}
