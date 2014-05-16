@@ -30,8 +30,9 @@ A \emph{Formal Language}, $L$, is a possibly infinite subset of an
 infinite \emph{Vocabulary}, $\Sigma^*$, that is the set of all
 possible finite \emph{Expressions} (strings) over a possibly infinite
 \emph{Alphabet} of \emph{Symbols}, $\Sigma$. This set $\Sigma^*$ is
-the \emph{Kleene star} or \emph{Free monoid} of $\Sigma$; the smallest
-superset of $\Sigma$ that is closed under string concatenation.
+the \emph{Kleene star} or \emph{Free Monoid} (\S\ref{subsec:monoids})
+of $\Sigma$; the smallest superset of $\Sigma$ that is closed under
+string concatenation.
 
 The \emph{Syntax} is that part of the Language that refers only to the
 literal strings of Symbols of the Language with no regard to their
@@ -155,7 +156,7 @@ lowercase ($a,b,c,\cdots$), and expressions by Greek letters
 
     \begin{description}
 
-    \item Definition of the Kleene star or Free monoid over an
+    \item Definition of the Kleene star over an
       Alphabet where $\circ$ is the operation to \emph{Concatenate} two
       Expressions:
     \[
@@ -214,7 +215,7 @@ A completely unrestricted Grammar is called \emph{recursively
 Language can be decided by an algorithm, but non-membership cannot,
 and the class of Languages having this property is called
 $\mathsf{RE}$. Members of this class are also \emph{Diophantine} sets
-and the lattice of $\mathsf{RE}$ sets under inclusion is written
+and the Lattice of $\mathsf{RE}$ sets under inclusion is written
 $\mathcal{E}$. % FIXME add a reference when sections describing these terms
                % are added
 
@@ -1240,7 +1241,7 @@ Definition of WFF as a finite number of applications of the following rules:
 \item $\forall x \phi$ is a WFF when $x$ is a Variable and $\phi$ is a WFF
 \end{enumerate}
 
-\subsubsection{Quantification}
+\subsubsection{Quantification}\label{subsec:firstorder_quantification}
 
 A Quantifier limits (\emph{Binds}) a Variable to a certain quantity of
 members of the Domain, the two fundamental Quantifiers being
@@ -2376,6 +2377,8 @@ $\alpha$.
 \subsection{Ultraproducts}\label{subsec:ultraproducts}
 % --------------------------------------------------------------------
 
+
+
 % --------------------------------------------------------------------
 \section{Model Theory}\label{sec:model_theory}
 % --------------------------------------------------------------------
@@ -2792,7 +2795,11 @@ Introduction and Elimination Rules.
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Game Semantics}
+\subsection{Linear Semantics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Game Semantics}
 % --------------------------------------------------------------------
 
 \emph{Game Semantics} studies the \emph{Dialogical} properties of
@@ -2860,29 +2867,127 @@ Curry-Howard Correspondence
 \part{Set Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\emph{Predicativity / Impredicativity} - Weyl
+
+% --------------------------------------------------------------------
+\section{Filters}
+% --------------------------------------------------------------------
+
+A \emph{Filter} $\mathcal{F}$ of a set $X$ is a Set of Subsets of $X$
+\[
+    \mathcal{F} \subseteq \mathcal{P}(X)
+\]
+where
+\begin{itemize}
+\item if $A \in \mathcal{F}$ and $B \supseteq A$, then $B \in
+  \mathcal{F}$
+\item if $A \in \mathcal{F}$ and $B \in \mathcal{F}$ then $A \cap B
+  \in \mathcal{F}$
+\item $X \in \mathcal{F}$ and $\emptyset \notin \mathcal{F}$
+\end{itemize}
+An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
+\subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
+
+% --------------------------------------------------------------------
+\section{Forcing}\label{subsec:forcing}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Class}\label{sec:classes}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Functions}\label{sec:set_functions}
+% --------------------------------------------------------------------
+
+A \emph{Function} $f$, defined for all Members of Set $A$ and $range(f)
+\subseteq B$ is written
+\[
+    f : A \rightarrow B
+\]
+The \emph{Input} or \emph{Domain} of $f$ is denoted $dom(f)$ and the
+\emph{Ouptut} or \emph{Co-domain} as $cod(f)$. \emph{Function
+  Equality} is defined such that Equal Functions have the same Output
+for a given Input.
+
+Given a second Function $g : B \rightarrow C$, there is a
+\emph{Composite Function}
+\[
+    g \circ f : A \rightarrow C
+\]
+where $(g \circ f)(a) = g(f(a))$ and $a \in A$. The \emph{Composition
+  Operation} $\circ$ is Associative: $(h \circ g) \circ f = h \circ (g
+\circ f)$. Composition of Functions may be represented with the
+$\circ$ elided: $gf$.
+
+%FIXME ref unit operation?
+\emph{Unit Operations} for the Composition Operation are
+\emph{Identity Functions} on Sets. The Identity Function for a Set $A$
+\[
+    I_A : A \rightarrow A
+\]
+is defined as
+\[
+    I_A(a) = a
+\]
+with the result given the function $f$ above
+\[
+    f \circ I_A = f = I_B \circ f
+\]
+
+\emph{Injective}
+
+\emph{Surjective}
+
+% --------------------------------------------------------------------
+\subsection{Monotonicity}\label{subsec:monotonicity}
+% --------------------------------------------------------------------
+
+A \emph{Monotonic Function} is a Function between \emph{Posets}
+(\S\ref{sec:order_theory}) where the Ordering of Elements of the
+Domain Imply the Ordering of Elements in the Image of those Elements
+under the Function.
+
+% --------------------------------------------------------------------
+\subsection{Pointed Sets}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Relations}\label{sec:set_relations}
+% --------------------------------------------------------------------
+
+\emph{Reflexive}
+
+\emph{Antisymmetric}
+
+\emph{Transitive}
 
 % --------------------------------------------------------------------
 \subsection{Congruence Relation}\label{subsec:congruence_relation}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Filters}
+\section{Order Theory}\label{sec:order_theory}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Forcing}\label{subsec:forcing}
-% --------------------------------------------------------------------
+\emph{Ordering Relations} are Binary Relations on a Set $P$ that are
+Reflexive, Antisymmetric, and Transitive (\S\ref{sec:set_relations}).
+A \emph{Partial Order} is where some pairs of Members are allowed to
+not be included in the Ordering Relation. A \emph{Total Order} (or
+\emph{Linear Order}) adds the requirement of Totality. A Totally
+Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 
-% --------------------------------------------------------------------
-\section{Order Theory}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\section{Relation Algebra}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Descriptive Set Theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Combinatorics}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Permutations}\label{subsec:permutations}
 % --------------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2890,11 +2995,188 @@ Curry-Howard Correspondence
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Category Theory}\label{sec:category_theory}
+\part{Category Theory}\label{sec:category_theory}\cite{awodey06}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A \emph{Category} is an \emph{Algebraic Structure}
+(\S\ref{subsec:universal_algebra}) where Functions are
+\emph{Morphisms} (\S\ref{sec:category_morphisms}) between
+\emph{Objects} and each Object has its own \emph{Identity Morphism}
+and Morphisms are \emph{Associative}.
+
+A Category $\mathbf{C}$ is defined as
+\begin{itemize}
+\item a Class $C_0$ of Objects
+\item a Class $C_1$ of Morphisms (also called \emph{Arrows} or
+  \emph{Maps}) with Identity Morphisms for each Object
+\item a Binary Associative Composition Operation for every three
+  Objects
+\end{itemize}
+$\mathbf{C}$ is considered \emph{Small} (as opposed to \emph{Large})
+if both $C_0$ and $C_1$ can be represented as Sets.
+
+\emph{Locally Small}
+
+Example Categories:
+\begin{itemize}
+\item Sets and Functions
+\item Finite Sets and Injective Functions
+\item Posets and Monotonic Functions
+\item Categories and Functors
+\item Formulae and Deductions
+\end{itemize}
+The Category of all Sets and Set Mappings is denoted $\mathbf{Set}$
+(and is \emph{Dual} to the Category of Complete, Atomic Boolean
+Algebras (\S\ref{subsec:boolean_algebra}).
+
+Preorders and Posets (\S\ref{sec:order_theory}) can
+represent Categories by taking Elements as Objects and Morphisms as
+existing between Pairs of Elements in the Ordering Relation. The
+Category of Posets is denoted $\mathbf{Pos}$. A special case of a
+Poset Category is a \emph{Discrete Category} which is a Set of Objects
+with only Identity Morphisms. A \emph{Monoid} (\S\ref{subsec:monoids})
+is a Category with a single Object and Morphisms for each Element in
+the Monoid such that Composition of the Morphisms is the Binary
+Operation of the Monoid. The Category $\mathbf{Mon}$ is the Category
+of all Monoids and Functions that preserve the Monoid structure.
+
+A \emph{Finite Category} has a Finite number of Morphisms and
+Objects. An Infinite number of Objects Implies and Infinite number of
+Morphisms because each Object has its own Identity Operation. A
+Category such as
+\[
+    A
+    \begin{matrix}
+    \rightarrow^f\\
+    \leftarrow_g
+    \end{matrix}
+    B
+\]
+Induces an Infinite Category because new Morphisms exist wherever the
+Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
+\ldots$ and $fg, fgfg, fgfgfg, \ldots$.
+
+The \emph{Opposite Category} (or \emph{Dual}) of a Category
+$\mathbf{C}$ is denoted $\mathbf{C^{op}}$ and has the same Objects as
+$\mathbf{C}$ but the Domain and Codomain in each Morphism is
+reversed. Objects and Morphisms of a Dual Category may be written with
+over-lines to distinguish them from the original Category:
+$\overline{f}: \overline{C} \rightarrow \overline{D}$.
+
+\emph{Arrow Category}
+
+\emph{Slice Category}
+
+\emph{Free Category}
+
+% --------------------------------------------------------------------
+\section{Morphisms}\label{sec:category_morphisms}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Monomorphism}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Epimorphism}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Isomorphism}\label{subsec:isomorphism}
+% --------------------------------------------------------------------
+
+A Morphism $f$ is an \emph{Isomorphism} if there exists another
+Morphism $g$ such that $g = f^{-1}$. The Existance of an Isomorphism
+between two Objects $A$ and $B$ is denoted $A \cong B$.
+
+% --------------------------------------------------------------------
+\subsection{Automorphism}\label{subsec:automorphism}
+% --------------------------------------------------------------------
+
+An \emph{Automorphism} is an Isomorphism of an Object to itself.
+
+% --------------------------------------------------------------------
+\subsection{Homomorphism}\label{subsec:homomorphism}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Functors}\label{sec:category_functors}
+% --------------------------------------------------------------------
+
+A \emph{Functor} is a \emph{Homomorphism}
+(\S\ref{subsec:homomorphism}) of Categories. A Functor $F$ between
+Categories $\mathbf{C}$ and $\mathbf{D}$
+\[
+    F : \mathbf{C} \rightarrow \mathbf{D}
+\]
+is a Map of Objects and Morphisms of $\mathbf{C}$ to Objects and
+Morphisms of $\mathbf{D}$ with the following Equivalences:
+\begin{itemize}
+\item $F(f : A \rightarrow B) = F(f) : F(A) \rightarrow F(B)$
+\item $F(g \circ f) = F(g) \circ F(f)$
+\item $F(I_A) = I_{F(A)}$
+\end{itemize}
+Every Category has an Identity Functor $I_{\mathbf{C}} : \mathbf{C}
+\rightarrow \mathbf{C}$ and the Category of all Small Categories and
+Functors is denoted $\mathbf{Cat}$.
+
+Functors between Poset Categories are Monotonic Functions
+(\S\ref{subsec:monotonicity}).
+
+% --------------------------------------------------------------------
+\subsection{Natural Transformation}\label{subsec:natural_transformation}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Adjunction}\label{subsec:adjunction}
+% --------------------------------------------------------------------
+
+\emph{Adjoint Functors} is the Categorical analog of the Existential
+Quantifier in Logic (\S\ref{subsec:firstorder_quantification}) and the
+\emph{Image Operation} along a \emph{Continuous Function} in
+\emph{Topology} (Part \ref{sec:topology}).
+
+% --------------------------------------------------------------------
+\section{Category Product}\label{sec:category_product}
+% --------------------------------------------------------------------
+
+A \emph{Product} of two Categories $\mathbf{C}$ and $\mathbf{D}$ is
+denoted
+\[
+    \mathbf{C} \times \mathbf{D}
+\]
+has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
+\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
+: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
+\mathbf{D}$. Composition and Identity are defined as:
+\[
+    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
+\]\[
+    I_{(C,D)} = (I_C, I_D)
+\]
+
+% --------------------------------------------------------------------
+\section{Group Theory}
+% --------------------------------------------------------------------
+
+A \emph{Group} is a Monoid with an Inverse for every Morphism (every
+Morphism is an Isomorphism). A Group may be formed from a Set $X$ by
+adding all Automorphisms (\S\ref{subsec:automorphism}) of $X$:
+$Aut(X)$. \emph{Cayley's Theorem} states that every Group is
+Isomorphic to a Group of Permutations (\S\ref{subsec:permutations}).
+
+% --------------------------------------------------------------------
+\subsection{Monoids}\label{subsec:monoids}
+% --------------------------------------------------------------------
+
+\emph{Free Monoid}
 
 % --------------------------------------------------------------------
 \section{Abstract Algebra}\label{sec:abstract_algebra}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Initial Algebra}\label{subsec:initial_algebra}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -2907,7 +3189,7 @@ Curry-Howard Correspondence
 \subsection{Heyting Algebra}\label{subsec:heyting_algebra}
 % --------------------------------------------------------------------
 
-\subsubsection{Boolean Algebra}
+\subsubsection{Boolean Algebra}\label{subsec:boolean_algebra}
 
 % --------------------------------------------------------------------
 \subsection{Relation Algebra}
@@ -2920,20 +3202,41 @@ Curry-Howard Correspondence
 \emph{Domain Relational Calculus}
 
 % --------------------------------------------------------------------
-\subsection{Institution Theory}\label{subsec:institution_theory}
+\section{Lattices}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Representation Theory}
+\subsection{Quantale}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\section{Initial Algebra}\label{sec:initial_algebra}
+\section{Institution Theory}\label{subsec:institution_theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Representation Theory}
 % --------------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Topology}
+\part{Topology}\label{sec:topology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Continuous Functions}\label{sec:continuous_functions}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Algebraic Topology}\label{sec:algebraic_topology}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Homology Theory}\label{subsec:homology_theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Algebraic Geometry}\label{sec:algebraic_geometry}
+% --------------------------------------------------------------------
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Complexity Theory}
@@ -3067,6 +3370,12 @@ that is computable by Algorithm is a \emph{computable function}.
     \emph{Pure Computable Model Theory},
     Studies in Logic and the Foundations of Mathematics,
     1998
+
+\bibitem{awodey06}
+    Steve Awodey,
+    \emph{Category Theory},
+    Carnegie Mellon,
+    2006
 
 \end{thebibliography}
 
