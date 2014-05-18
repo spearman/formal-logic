@@ -2908,7 +2908,11 @@ A \emph{Function} $f$, defined for all Members of Set $A$ and $range(f)
 The \emph{Input} or \emph{Domain} of $f$ is denoted $dom(f)$ and the
 \emph{Ouptut} or \emph{Co-domain} as $cod(f)$. \emph{Function
   Equality} is defined such that Equal Functions have the same Output
-for a given Input.
+for a given Input. A Function can be seen as a Subset of the Cartesian
+Product of the Domain and Codomain:
+\[
+    f \subseteq A \times B
+\]
 
 Given a second Function $g : B \rightarrow C$, there is a
 \emph{Composite Function}
@@ -2935,9 +2939,22 @@ with the result given the function $f$ above
     f \circ I_A = f = I_B \circ f
 \]
 
-\emph{Injective}
+An \emph{Injective Function} (or \emph{One-to-one Function}) is one
+where the Elements of the Codomain are the Images of at most one
+Elements of the Domain.
 
-\emph{Surjective}
+A \emph{Surjective Function} is one such that the Image is equal to
+the Codomain. Such a Function may be said to be \emph{Onto} but is not
+necessarily \emph{Injective}.
+
+A \emph{Bijective Function} is one that is both Surjective and
+Injective (both One-to-one and Onto).
+
+\subsection{Inverses}\label{subsec:inverse_functions}
+
+\emph{Left Inverse} \emph{Retraction}
+
+\emph{Right Inverse} \emph{Section}
 
 % --------------------------------------------------------------------
 \subsection{Monotonicity}\label{subsec:monotonicity}
@@ -2994,9 +3011,20 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 \part{Graph Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% --------------------------------------------------------------------
+\section{Graphs} \label{sec:graphs}
+% --------------------------------------------------------------------
+
+A \emph{Graph} is a pair of Sets, $E$ and $V$, with two functions: $s:
+E \rightarrow V$ \emph{source} and $t: E \rightarrow V$ \emph{target}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Category Theory}\label{sec:category_theory}\cite{awodey06}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Categories}\label{sec:categories}
+% --------------------------------------------------------------------
 
 A \emph{Category} is an \emph{Algebraic Structure}
 (\S\ref{subsec:universal_algebra}) where Functions are
@@ -3040,6 +3068,10 @@ the Monoid such that Composition of the Morphisms is the Binary
 Operation of the Monoid. The Category $\mathbf{Mon}$ is the Category
 of all Monoids and Functions that preserve the Monoid structure.
 
+% --------------------------------------------------------------------
+\subsection{Finite Categories}\label{subsec:finite_categories}
+% --------------------------------------------------------------------
+
 A \emph{Finite Category} has a Finite number of Morphisms and
 Objects. An Infinite number of Objects Implies and Infinite number of
 Morphisms because each Object has its own Identity Operation. A
@@ -3047,8 +3079,8 @@ Category such as
 \[
     A
     \begin{matrix}
-    \rightarrow^f\\
-    \leftarrow_g
+    \xrightarrow{\;\;f\;\;}\\
+    \xleftarrow[\;\;g\;\;]{}
     \end{matrix}
     B
 \]
@@ -3056,48 +3088,136 @@ Induces an Infinite Category because new Morphisms exist wherever the
 Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
 \ldots$ and $fg, fgfg, fgfgfg, \ldots$.
 
+% --------------------------------------------------------------------
+\subsection{Opposite Categories}\label{subsec:opposite_categories}
+% --------------------------------------------------------------------
+
 The \emph{Opposite Category} (or \emph{Dual}) of a Category
 $\mathbf{C}$ is denoted $\mathbf{C^{op}}$ and has the same Objects as
 $\mathbf{C}$ but the Domain and Codomain in each Morphism is
 reversed. Objects and Morphisms of a Dual Category may be written with
 over-lines to distinguish them from the original Category:
-$\overline{f}: \overline{C} \rightarrow \overline{D}$.
+$\overline{f}: \overline{C} \rightarrow \overline{D}$. With this
+notation the following Equalities may be expressed:
+\[
+    I_{\overline{C}} = \overline{I_C}
+\]\[
+    \overline{f} \circ \overline{g} = \overline{g \circ f}
+\]
 
-\emph{Arrow Category}
+% --------------------------------------------------------------------
+\subsection{Comma Cateories}\label{subsec:comma_categories}
+% --------------------------------------------------------------------
 
-\emph{Slice Category}
+A \emph{Comma Category} is formed from a pair of Functors
+(\S\ref{sec:category_functors}) that share a common Codomain. For
+three Categories, $\mathbf{A}$, $\mathbf{B}$, and $\mathbf{C}$ and
+Functors $S$ (\emph{Source}) and $T$ (\emph{Target}) in the following
+relation:
+\[
+    \mathbf{A} \xrightarrow{\;\; S\;\;} \mathbf{C} \xleftarrow{\;\;
+      T\;\;} \mathbf{B}
+\]
+one can form a Comma Category $(S \downarrow T)$ with Objects as
+Triples $(\alpha, \beta, f)$ where $\alpha$ is an Object in
+$\mathbf{A}$, $\beta$ is an Object in $\mathbf{B}$, and $f : S(\alpha)
+\rightarrow T(\beta)$ is a Morphism in $\mathbf{C}$ and with Morphisms
+between Triples $(\alpha, \beta, f)$ to $(\alpha', \beta', f')$ as
+pairs $(g,h)$ where $g : \alpha \rightarrow \alpha'$ is a Morphism in
+$\mathbf{A}$ and $h : \beta \rightarrow \beta'$ is a Morphism in
+$\mathbf{B}$.
 
-\emph{Free Category}
+% --------------------------------------------------------------------
+\subsubsection{Arrow Categories}\label{subsec:arrow_categories}
+% --------------------------------------------------------------------
+
+An \emph{Arrow Category} of a Category $\mathbf{C}$, written
+$\mathbf{C^{\rightarrow}}$, has for its Objects the Morphisms of
+$\mathbf{C}$ and as Morphisms pairs of Objects such that their
+underlying Morphisms in $\mathbf{C}$ are Composable.
+
+% --------------------------------------------------------------------
+\subsubsection{Slice Categories}\label{subsec:slice_categories}
+% --------------------------------------------------------------------
+
+A \emph{Slice Category} $\mathbf{C}/C$ of a Category $\mathbf{C}$ with
+an Object $C$ has as Objects the Morphisms with Codomain $C$ and as
+Morphisms those Morphisms in $\mathbf{C}$ between the Domains of the
+underlying Morphisms of the Objects of $\mathbf{C}/C$. That is, for
+Objects in the Slice Category corresonding to Morphisms $f$ and $f'$,
+the Morphism in the Slice Category between the two is $g$ such that
+\[
+    f' \circ g = f
+\]
+
+% --------------------------------------------------------------------
+\subsection{Free Categories}\label{subsec:free_categories}
+% --------------------------------------------------------------------
+
+A \emph{Free Category} $\mathbf{C}(G)$ is Generated by a Directed
+Graph (\S\ref{sec:graphs}) $G$ of Vertices and Edges under
+Concatenation of Paths. For a Graph with a single Vertex, the Free
+Category is the Free Monoid on the Edges of the Graph. A Graph with no
+Edges generates a Discrete Category. The Free Category on a Graph with
+two Vertices and one Edge is the Finite Category $\mathbf{2}$.
+
+% --------------------------------------------------------------------
+\subsection{Category Product}\label{subsec:category_product}
+% --------------------------------------------------------------------
+
+A \emph{Product} of two Categories $\mathbf{C}$ and $\mathbf{D}$ is
+denoted
+\[
+    \mathbf{C} \times \mathbf{D}
+\]
+has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
+\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
+: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
+\mathbf{D}$. Composition and Identity are defined as:
+\[
+    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
+\]\[
+    I_{(C,D)} = (I_C, I_D)
+\]
 
 % --------------------------------------------------------------------
 \section{Morphisms}\label{sec:category_morphisms}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Monomorphism}
+\subsection{Homomorphism}\label{subsec:homomorphism}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Epimorphism}
-% --------------------------------------------------------------------
+A \emph{Homomorphism} is a Structure-preserving Morphism between
+Algebraic Structures.
 
-% --------------------------------------------------------------------
-\subsection{Isomorphism}\label{subsec:isomorphism}
-% --------------------------------------------------------------------
+\subsubsection{Monomorphism}
+
+A \emph{Monomorphism} is a Homomorphism that is Injective, a
+Sufficient Condition of which is that the Morphism has a Left Inverse
+(\S\ref{subsec:inverse_functions}).
+
+\subsubsection{Epimorphism}
+
+An \emph{Epimorphism} is a Surjective Homomorphism, a sufficient
+condition of which is that the Morphism has a Right
+Inverse (\S\ref{subsec:inverse_functions}).
+
+\subsubsection{Isomorphism}\label{subsec:isomorphism}
 
 A Morphism $f$ is an \emph{Isomorphism} if there exists another
 Morphism $g$ such that $g = f^{-1}$. The Existance of an Isomorphism
-between two Objects $A$ and $B$ is denoted $A \cong B$.
+between two Objects $A$ and $B$ is denoted $A \cong B$. An Isomorphism
+is a Homomorphism that is both a Monomorphism and an Epimorphism.
 
-% --------------------------------------------------------------------
-\subsection{Automorphism}\label{subsec:automorphism}
-% --------------------------------------------------------------------
+\subsubsection{Endomorphism}
 
-An \emph{Automorphism} is an Isomorphism of an Object to itself.
+An \emph{Endomorphism} is a Homomorphism from an Object to itself.
 
-% --------------------------------------------------------------------
-\subsection{Homomorphism}\label{subsec:homomorphism}
-% --------------------------------------------------------------------
+\subsubsection{Automorphism}\label{subsec:automorphism}
+
+An \emph{Automorphism} is both an Endomorphism and an Isomorphism,
+that is, an Invertible Endomorphism.
 
 % --------------------------------------------------------------------
 \section{Functors}\label{sec:category_functors}
@@ -3123,6 +3243,13 @@ Functors is denoted $\mathbf{Cat}$.
 Functors between Poset Categories are Monotonic Functions
 (\S\ref{subsec:monotonicity}).
 
+\emph{Contravariant Functor}
+
+A \emph{Forgetful Functor} is one that drops some Property of the
+Input Category in the Output Category.
+
+\emph{Faithful Functor}
+
 % --------------------------------------------------------------------
 \subsection{Natural Transformation}\label{subsec:natural_transformation}
 % --------------------------------------------------------------------
@@ -3135,25 +3262,6 @@ Functors between Poset Categories are Monotonic Functions
 Quantifier in Logic (\S\ref{subsec:firstorder_quantification}) and the
 \emph{Image Operation} along a \emph{Continuous Function} in
 \emph{Topology} (Part \ref{sec:topology}).
-
-% --------------------------------------------------------------------
-\section{Category Product}\label{sec:category_product}
-% --------------------------------------------------------------------
-
-A \emph{Product} of two Categories $\mathbf{C}$ and $\mathbf{D}$ is
-denoted
-\[
-    \mathbf{C} \times \mathbf{D}
-\]
-has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
-\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
-: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
-\mathbf{D}$. Composition and Identity are defined as:
-\[
-    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
-\]\[
-    I_{(C,D)} = (I_C, I_D)
-\]
 
 % --------------------------------------------------------------------
 \section{Group Theory}
@@ -3169,11 +3277,22 @@ Isomorphic to a Group of Permutations (\S\ref{subsec:permutations}).
 \subsection{Monoids}\label{subsec:monoids}
 % --------------------------------------------------------------------
 
+The set of all Endomorphisms of an Object $X$ in a Category $C$ is
+defined a Monoid and is denoted $End_C(X)$.
+
 \emph{Free Monoid}
 
 % --------------------------------------------------------------------
 \section{Abstract Algebra}\label{sec:abstract_algebra}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Rings}\label{subsec:rings}
+% --------------------------------------------------------------------
+
+\emph{Ideals}
+
+\emph{Principal Ideals}
 
 % --------------------------------------------------------------------
 \subsection{Initial Algebra}\label{subsec:initial_algebra}
