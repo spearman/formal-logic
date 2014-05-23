@@ -2952,9 +2952,10 @@ Injective (both One-to-one and Onto).
 
 \subsection{Inverses}\label{subsec:inverse_functions}
 
-\emph{Left Inverse} \emph{Retraction}
-
-\emph{Right Inverse} \emph{Section}
+For a Mapping between sets, $f: X \rightarrow Y$, a \emph{Left
+  Inverse} or \emph{Retraction} of $f$ is a Map $g: Y \rightarrow X$
+such that $gf = Id(X)$. A \emph{Right Inverse} or \emph{Section} of
+$f$ would be a Map $h: Y \rightarrow X$ such that $fh = Id(Y)$.
 
 % --------------------------------------------------------------------
 \subsection{Monotonicity}\label{subsec:monotonicity}
@@ -2970,6 +2971,13 @@ under the Function.
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Function Space}\label{subsec:function_space}
+% --------------------------------------------------------------------
+
+The \emph{Function Space} of two Sets $X$ and $Y$ is the set of all
+Functions from $X$ to $Y$ denoted by $Y^X$.
+
+% --------------------------------------------------------------------
 \section{Relations}\label{sec:set_relations}
 % --------------------------------------------------------------------
 
@@ -2978,6 +2986,12 @@ under the Function.
 \emph{Antisymmetric}
 
 \emph{Transitive}
+
+\emph{Equivalence Relation}
+
+\emph{Equivalence Class}
+
+\emph{Quotient Set}
 
 % --------------------------------------------------------------------
 \subsection{Congruence Relation}\label{subsec:congruence_relation}
@@ -3022,15 +3036,33 @@ E \rightarrow V$ \emph{source} and $t: E \rightarrow V$ \emph{target}.
 \part{Category Theory}\label{sec:category_theory}\cite{awodey06}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The Formal System of Category Theory consists of
+\begin{itemize}
+\item two Sorts, \emph{Objects} $A,B,C,\ldots$, and \emph{Arrows}
+  $f,g,h,\ldots$
+\item four Operations: $dom(f)$, $cod(f)$, $I_A$, $\circ$
+\end{itemize}
+and seven Axioms:
+\[
+    dom(I_A) = A,\quad cod(I_A) = A
+\]\[
+    f \circ I_{dom(f)} = f, \quad I_{cod(f)} \circ f = f
+\]\[
+    dom(g\circ f) = dom(f), \quad cod(g \circ f) = cod(g)
+\]\[
+    h \circ (g \circ f) = (h \circ g) \circ f
+\]
+Because the Axioms are Self-dual, if a Sentence can be derived from
+them, so can its Dual.
+
 % --------------------------------------------------------------------
 \section{Categories}\label{sec:categories}
 % --------------------------------------------------------------------
 
 A \emph{Category} is an \emph{Algebraic Structure}
-(\S\ref{subsec:universal_algebra}) where Functions are
-\emph{Morphisms} (\S\ref{sec:category_morphisms}) between
-\emph{Objects} and each Object has its own \emph{Identity Morphism}
-and Morphisms are \emph{Associative}.
+(\S\ref{subsec:universal_algebra}) where Functions are Morphisms
+(\S\ref{sec:category_morphisms}) between Objects and each Object has
+its own \emph{Identity Morphism} and Morphisms are \emph{Associative}.
 
 A Category $\mathbf{C}$ is defined as
 \begin{itemize}
@@ -3052,6 +3084,7 @@ Example Categories:
 \item Posets and Monotonic Functions
 \item Categories and Functors
 \item Formulae and Deductions
+\item Functors and Natural Transformations
 \end{itemize}
 The Category of all Sets and Set Mappings is denoted $\mathbf{Set}$
 (and is \emph{Dual} to the Category of Complete, Atomic Boolean
@@ -3067,6 +3100,114 @@ is a Category with a single Object and Morphisms for each Element in
 the Monoid such that Composition of the Morphisms is the Binary
 Operation of the Monoid. The Category $\mathbf{Mon}$ is the Category
 of all Monoids and Functions that preserve the Monoid structure.
+
+% --------------------------------------------------------------------
+\subsection{List of Categories}\label{subsec:categories_list}
+% --------------------------------------------------------------------
+
+\begin{description}
+\item [0] no Objects or Morphisms
+\item [1] one Object with Identity Morphism
+\item [2] two Objects with Identity Morphisms and one Morphism between
+  them
+\item [3] three Objects with Identity Morphisms in a Commutative
+  Triangle
+\item [Set] all Sets and Functions
+\item [Rel] all Sets and Relations
+\item [Pos] all Posets and Monotonic Functions
+\item [Mag] all Magmas and Homomorphisms of Operations
+\item [Med] all Medial Magmas and Homomorphisms of Operations
+\item [Mon] all Monoids and Monoid Homomorphisms
+\item [Grp] all Groups and Group Homomorphisms
+\item [Ab] all Abelian Groups with Group Homomorphisms
+\item [Cat] all Categories and Functors
+\item [Top] all Topological Spaces and Continuous Maps
+\end{description}
+
+% --------------------------------------------------------------------
+\subsection{Cartesian Closed Categories}\label{subsec:cartesian_category}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Hom-sets}\label{subsec:hom_set}
+% --------------------------------------------------------------------
+
+The collection of all Morphisms between two Objects $X$ and $Y$ in a
+Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
+$Hom(X,Y)$:
+\[
+    Hom(A,B) = {f \in \mathbf{C} | f : A \rightarrow B}
+\]
+Therefore
+\[
+    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
+\]
+
+% --------------------------------------------------------------------
+\subsection{Initial \& Terminal Objects}\label{subsec:initial_terminal}
+% --------------------------------------------------------------------
+
+An Object $0$ is \emph{Initial} if for any other Object $C$ there is a
+unique Morphism $0 \rightarrow C$.
+
+An Object $1$ is \emph{Terminal} if for any other Object $C$ there is
+a unique Morphism $C \rightarrow 1$.
+
+A \emph{Global Element} (also \emph{Point} or \emph{Constant}) of an
+Object is a Morphism from a Terminal Object to that Object. A
+\emph{General Element} (also \emph{Variable}) is a Morphism from an
+arbitrary Domain Object $X$.
+
+\emph{Initial Morphism} \emph{Terminal Morphism}
+
+\emph{Initial Property} \emph{Terminal Property}
+
+\emph{Universal Morphism} \emph{Universal Property}
+
+% --------------------------------------------------------------------
+\subsubsection{Universal Mapping Property}
+\label{subsec:universal_mapping_property}
+% --------------------------------------------------------------------
+
+\emph{Existence}
+
+\emph{Uniqueness}
+
+% --------------------------------------------------------------------
+\subsubsection{Product Diagrams}\label{subsec:product_diagram}
+% --------------------------------------------------------------------
+
+A \emph{Product} of two Objects $A \times B$:
+\[
+    A \xleftarrow{\;\;p_1\;\;} P \xrightarrow{\;\;p_2\;\;} B
+\]
+is a Product of $A$ and $B$ if and only if for any $A
+\xleftarrow{\;\;z_1\;\;} Z \xrightarrow{\;\;z_2\;\;} B$
+\[
+    \exists!u : Z \rightarrow P
+\]
+with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
+\rangle$ as it is uniquely determined by $z_1$ and $z_2$.
+
+Products are unique up to Isomorphism (\S\ref{subsec:isomorphism}).
+
+The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
+is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;} Z
+\xleftarrow{\;\;z_2\;\;} B$
+\[
+    \exists!u : Q \rightarrow Z
+\]
+with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
+and Coprojections $q_i$ may be called \emph{Injections} (although they
+are not necessarily Injective Morphisms).
+
+Disjoint Union %FIXME ref disjoint union
+
+\emph{N-ary Products}
+
+% --------------------------------------------------------------------
+\paragraph{Exponentials}\label{subsec:category_exponential}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Finite Categories}\label{subsec:finite_categories}
@@ -3104,6 +3245,8 @@ notation the following Equalities may be expressed:
 \]\[
     \overline{f} \circ \overline{g} = \overline{g \circ f}
 \]
+A Terminal Object in $\mathbf{C}$ is an Initial Object in
+$\mathbf{C^{op}}$ and vice-versa.
 
 % --------------------------------------------------------------------
 \subsection{Comma Cateories}\label{subsec:comma_categories}
@@ -3150,6 +3293,8 @@ the Morphism in the Slice Category between the two is $g$ such that
     f' \circ g = f
 \]
 
+\emph{Coslice}
+
 % --------------------------------------------------------------------
 \subsection{Free Categories}\label{subsec:free_categories}
 % --------------------------------------------------------------------
@@ -3179,10 +3324,14 @@ has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
 \]\[
     I_{(C,D)} = (I_C, I_D)
 \]
+$\mathbf{C} \times \mathbf{D}$ is a Product
+(\S\ref{subsec:product_diagram}) in $\mathbf{Cat}$.
 
 % --------------------------------------------------------------------
 \section{Morphisms}\label{sec:category_morphisms}
 % --------------------------------------------------------------------
+
+\emph{Zero Morphism}
 
 % --------------------------------------------------------------------
 \subsection{Homomorphism}\label{subsec:homomorphism}
@@ -3191,24 +3340,50 @@ has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
 A \emph{Homomorphism} is a Structure-preserving Morphism between
 Algebraic Structures.
 
+\emph{Kernel}
+
+\emph{Equalizer}
+
+\emph{Coequalizer}
+
 \subsubsection{Monomorphism}
 
 A \emph{Monomorphism} is a Homomorphism that is Injective, a
-Sufficient Condition of which is that the Morphism has a Left Inverse
-(\S\ref{subsec:inverse_functions}).
+sufficient condition of which is that the Morphism has a Left Inverse
+(\S\ref{subsec:inverse_functions}) or \emph{Retraction}. A
+Monomorphism with a Left Inverse is called a \emph{Split
+  Monomorphism}. A Monomorphism $f$ between Objects $A$ and $B$ is
+denoted
+\[
+    f : A \rightarrowtail B
+\]
+and has the property for any two Morphisms $g, h : C \rightarrow A$,
+$fg = fh$ Implies $g = h$.
 
 \subsubsection{Epimorphism}
 
 An \emph{Epimorphism} is a Surjective Homomorphism, a sufficient
-condition of which is that the Morphism has a Right
-Inverse (\S\ref{subsec:inverse_functions}).
+condition of which is that the Morphism has a Right Inverse
+(\S\ref{subsec:inverse_functions}) or \emph{Section}. An Epimorphism
+with a Right Inverse is called a \emph{Split Epimorphism}. An
+Epimorphism $f$ between Objects $A$ and $B$ is denoted
+\[
+    f : A \twoheadrightarrow B
+\]
+and has the property that for any two Morphisms $g, h : B \rightarrow
+C$, $gf = hf$ Implies $g = h$.
+
+An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
+\rightarrow X$ and Morphism $f : P \rightarrow X$, then $\exists
+\overline{f} : P \rightarrow E$ such that $e \circ \overline{f} = f$.
 
 \subsubsection{Isomorphism}\label{subsec:isomorphism}
 
 A Morphism $f$ is an \emph{Isomorphism} if there exists another
 Morphism $g$ such that $g = f^{-1}$. The Existance of an Isomorphism
 between two Objects $A$ and $B$ is denoted $A \cong B$. An Isomorphism
-is a Homomorphism that is both a Monomorphism and an Epimorphism.
+is a Homomorphism that is both a Monomorphism and an Epimorphism. Note
+that a Mono- and Epi-morphism need not be an Isomorphism.
 
 \subsubsection{Endomorphism}
 
@@ -3243,12 +3418,33 @@ Functors is denoted $\mathbf{Cat}$.
 Functors between Poset Categories are Monotonic Functions
 (\S\ref{subsec:monotonicity}).
 
-\emph{Contravariant Functor}
+\emph{Covariant Functor}
+A \emph{Contravariant Functor} is from a Dual Category to another
+Category, eg $F : \mathbf{C^{op}} \rightarrow \mathbf{D}$
 
 A \emph{Forgetful Functor} is one that drops some Property of the
 Input Category in the Output Category.
 
 \emph{Faithful Functor}
+
+\emph{Hom Functor}
+
+A \emph{Covariant Representable Functor} for an Object $A$ in a
+Category $\mathbf{C}$ is defined as a Functor $h^A = Hom(A,-) : \mathbf{C}
+\rightarrow \mathbf{Set}$
+\[
+    Hom(A,-) : Hom(A,X) \xrightarrow{f_*} Hom(A,Y)
+\]
+A \emph{Contravariant Representable Functor} for $A$ is a Functor $h_A
+= Hom(-,A) : \mathbf{C^{op}} \rightarrow \mathbf{Set}$
+\[
+    Hom(-,A) : Hom(X,A) \xrightarrow{f^*} Hom(Y,A)
+\]
+
+
+\emph{Bifunctor} \emph{Multifunctor}
+
+\emph{Product Functor}
 
 % --------------------------------------------------------------------
 \subsection{Natural Transformation}\label{subsec:natural_transformation}
@@ -3286,6 +3482,10 @@ defined a Monoid and is denoted $End_C(X)$.
 \section{Abstract Algebra}\label{sec:abstract_algebra}
 % --------------------------------------------------------------------
 
+\emph{Presentations}: Generators, Relations
+
+\emph{Finitely Presented}
+
 % --------------------------------------------------------------------
 \subsection{Rings}\label{subsec:rings}
 % --------------------------------------------------------------------
@@ -3301,6 +3501,8 @@ defined a Monoid and is denoted $End_C(X)$.
 % --------------------------------------------------------------------
 \subsection{Algebraic Geometry}\label{subsec:algebraic_geometry}
 % --------------------------------------------------------------------
+
+\emph{Hilbert's Nullstellensatz}
 
 \subsubsection{Universal Algebraic Geometry}
 
