@@ -1314,7 +1314,7 @@ Axioms:
   (\varphi \rightarrow \varphi ')$
 \end{enumerate}
 
-Defining a theory with a binary relation $A(x,y)$ that satisfies
+Defining a theory with a Binary Relation $A(x,y)$ that satisfies
 Reflexivity and Leibniz's law is sufficient to derive any other
 equality Theorems.
 
@@ -2870,10 +2870,14 @@ Curry-Howard Correspondence
 \emph{Predicativity / Impredicativity} - Weyl
 
 % --------------------------------------------------------------------
-\section{Filters}
+\section{Sets}\label{sec:sets}
 % --------------------------------------------------------------------
 
-A \emph{Filter} $\mathcal{F}$ of a set $X$ is a Set of Subsets of $X$
+% --------------------------------------------------------------------
+\subsection{Filters}
+% --------------------------------------------------------------------
+
+A \emph{Filter} $\mathcal{F}$ of a Set $X$ is a Set of Subsets of $X$
 \[
     \mathcal{F} \subseteq \mathcal{P}(X)
 \]
@@ -2889,11 +2893,38 @@ An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
 \subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
 
 % --------------------------------------------------------------------
-\section{Forcing}\label{subsec:forcing}
+\subsection{Forcing}\label{subsec:forcing}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\section{Class}\label{sec:classes}
+\subsection{Equalizers}\label{subsec:set_equalizer}
+% --------------------------------------------------------------------
+
+Given two Sets $X,Y$ and Functions $f,g : X \rightarrow Y$, the
+\emph{Equalizer} of $f$ and $g$ is defined as
+\[
+    Eq(f,g) = { x \in X | f(x) = g(x) }
+\]
+
+\emph{Coequalizer}
+
+% --------------------------------------------------------------------
+\subsection{Index Sets}\label{subsec:index_set}
+% --------------------------------------------------------------------
+
+An \emph{Index Set} is one that \emph{Indexes} (or \emph{Labels})
+Members of another Set. Indexing is a Surjective Function
+(\S\ref{sec:set_functions}) from an Index Set onto a target Set.
+
+An \emph{Indexed Family} of Sets is a Function from an Index Set to
+the Class of Sets. For Index Set $J$ and Indexed Set $A$, the Indexed
+Family may be denoted
+\[
+    (A_j)_{j \in J}
+\]
+
+% --------------------------------------------------------------------
+\section{Classes}\label{sec:classes}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -2950,7 +2981,9 @@ necessarily \emph{Injective}.
 A \emph{Bijective Function} is one that is both Surjective and
 Injective (both One-to-one and Onto).
 
+% --------------------------------------------------------------------
 \subsection{Inverses}\label{subsec:inverse_functions}
+% --------------------------------------------------------------------
 
 For a Mapping between sets, $f: X \rightarrow Y$, a \emph{Left
   Inverse} or \emph{Retraction} of $f$ is a Map $g: Y \rightarrow X$
@@ -2981,20 +3014,43 @@ Functions from $X$ to $Y$ denoted by $Y^X$.
 \section{Relations}\label{sec:set_relations}
 % --------------------------------------------------------------------
 
+A \emph{Relation} is a Mapping of Truth Values to Tuples of
+individuals. The general definition for an $n$-ary Relation $L$ over
+Sets $X_1, \ldots, X_n$ is a Subset of the Cartesian Product
+\[
+    L \subseteq X_1 \times \ldots \times X_n
+\]
+The Expression $L x_1 \ldots x_n$ where $x_i \in X_i$ is True when
+$(x_1, \ldots, x_n) \in L$ and False otherwise. Such an $n$-ary Relation may be
+completely specified by an $n + 1$-tuple:
+\[
+    (X_1, \ldots, X_n, G(L))
+\]
+where $G(L) \subseteq X_1 \times \ldots \times X_n$ is the
+\emph{Graph} of $L$.
+
+% --------------------------------------------------------------------
+\subsection{Binary Relations}\label{subsec:binary_relations}
+% --------------------------------------------------------------------
+
 \emph{Reflexive}
 
 \emph{Antisymmetric}
 
 \emph{Transitive}
 
-\emph{Equivalence Relation}
+Functions (\S\ref{sec:set_functions}) are Well-defined Binary Relations.
+
+% --------------------------------------------------------------------
+\subsubsection{Equivalence Relation}\label{subsec:equivalence_relation}
+% --------------------------------------------------------------------
 
 \emph{Equivalence Class}
 
 \emph{Quotient Set}
 
 % --------------------------------------------------------------------
-\subsection{Congruence Relation}\label{subsec:congruence_relation}
+\subsubsection{Congruence Relation}\label{subsec:congruence_relation}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -3012,6 +3068,10 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 % --------------------------------------------------------------------
 \section{Descriptive Set Theory}
 % --------------------------------------------------------------------
+
+\emph{Polish Space}
+
+\emph{Borel Sets}
 
 % --------------------------------------------------------------------
 \section{Combinatorics}
@@ -3136,7 +3196,7 @@ The collection of all Morphisms between two Objects $X$ and $Y$ in a
 Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
 $Hom(X,Y)$:
 \[
-    Hom(A,B) = {f \in \mathbf{C} | f : A \rightarrow B}
+    Hom(A,B) = \{f \in \mathbf{C} | f : A \rightarrow B\}
 \]
 Therefore
 \[
@@ -3147,11 +3207,15 @@ Therefore
 \subsection{Initial \& Terminal Objects}\label{subsec:initial_terminal}
 % --------------------------------------------------------------------
 
-An Object $0$ is \emph{Initial} if for any other Object $C$ there is a
-unique Morphism $0 \rightarrow C$.
+An Object $0$ is \emph{Initial} if for every other Object $C$ there is
+a unique Morphism $0 \rightarrow C$.
 
-An Object $1$ is \emph{Terminal} if for any other Object $C$ there is
-a unique Morphism $C \rightarrow 1$.
+An Object $1$ is \emph{Terminal} if for every other Object $C$ there
+is a unique Morphism $C \rightarrow 1$.
+
+An Object that is both an Initial and a Terminal Object is called a
+\emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
+Object is called a \emph{Pointed Category}.
 
 A \emph{Global Element} (also \emph{Point} or \emph{Constant}) of an
 Object is a Morphism from a Terminal Object to that Object. A
@@ -3165,8 +3229,26 @@ arbitrary Domain Object $X$.
 \emph{Universal Morphism} \emph{Universal Property}
 
 % --------------------------------------------------------------------
-\subsubsection{Universal Mapping Property}
-\label{subsec:universal_mapping_property}
+\section{Diagrams}\label{sec:category_diagram}
+% --------------------------------------------------------------------
+
+A \emph{Diagram} consists of Objects and Morphisms that are Indexed by
+a Category or equivalently a \emph{Functor} from an Index Category to
+another Category. A Diagram is the Category Theory analogue of an
+Indexed Family of Sets (\S\ref{subsec:index_set}).
+
+A Diagram, $D$, with Index Category $\mathbf{J}$ in Category
+$\mathbf{C}$:
+\[
+    D : \mathbf{J} \rightarrow \mathbf{C}
+\]
+
+% --------------------------------------------------------------------
+\section{Abstract Topics}\label{sec:abstract_category}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Universal Mapping Property}\label{subsec:universal_mapping_property}
 % --------------------------------------------------------------------
 
 \emph{Existence}
@@ -3174,7 +3256,13 @@ arbitrary Domain Object $X$.
 \emph{Uniqueness}
 
 % --------------------------------------------------------------------
-\subsubsection{Product Diagrams}\label{subsec:product_diagram}
+\subsection{Limits}\label{subsec:category_limits}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Product Diagrams}\label{subsec:product_diagram}
 % --------------------------------------------------------------------
 
 A \emph{Product} of two Objects $A \times B$:
@@ -3206,7 +3294,7 @@ Disjoint Union %FIXME ref disjoint union
 \emph{N-ary Products}
 
 % --------------------------------------------------------------------
-\paragraph{Exponentials}\label{subsec:category_exponential}
+\subsubsection{Exponentials}\label{subsec:category_exponential}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -3296,6 +3384,42 @@ the Morphism in the Slice Category between the two is $g$ such that
 \emph{Coslice}
 
 % --------------------------------------------------------------------
+\subsection{Congruence Categories}\label{subsec:category_congruence}
+% --------------------------------------------------------------------
+
+\emph{Congruence} on a Category is an Equivalence Relation on
+Morphisms such that for two Morphisms $f,g \in \mathbf{C_1}$, $f \sim
+g$ Implies:
+\begin{itemize}
+\item $dom(f) = dom(g)$
+\item $cod(f) = cod(g)$
+\item $\forall a,b \in \mathbf{C_1}, bfa \sim bga$
+\end{itemize}
+Such a Congruence defines a \emph{Congruence Category}
+$\mathbf{C^{\sim}}$:
+\[
+    (\mathbf{C^{\sim}})_0 = \mathbf{C_0}
+\]\[
+    (\mathbf{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
+\]\[
+    \tilde{I_\mathbf{C}} = \langle I_\mathbf{C}, I_\mathbf{C} \rangle
+\]\[
+    \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
+\]
+
+% --------------------------------------------------------------------
+\subsubsection{Quotient Categories}\label{subsec:category_quotient}
+% --------------------------------------------------------------------
+
+The \emph{Quotient Category} is defined for a Category $\mathbf{C}$
+with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
+\[
+    (\mathbf{C}/\sim)_0 = \mathbf{C_0}
+\]\[
+    (\mathbf{C}/\sim)_1 = (\mathbf{C_1})/\sim
+\]
+
+% --------------------------------------------------------------------
 \subsection{Free Categories}\label{subsec:free_categories}
 % --------------------------------------------------------------------
 
@@ -3331,7 +3455,18 @@ $\mathbf{C} \times \mathbf{D}$ is a Product
 \section{Morphisms}\label{sec:category_morphisms}
 % --------------------------------------------------------------------
 
-\emph{Zero Morphism}
+A Morphism $f : X \rightarrow Y$ is a \emph{Constant Morphism} if for
+any $g, h : W \rightarrow X$, $fg = fh$.
+
+A Morphism $f : X \rightarrow Y$ is a \emph{Co-constant Morphism} if
+for any $g, h : Y \rightarrow Z$, $gf = hf$.
+
+\emph{Zero Morphism} is one that is both Constant and Co-constant.
+
+The \emph{Kernel} of a Morphism $f : X \rightarrow Y$ is the most
+general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
+any Morphism $k' : K' \rightarrow X$ such that $fk' = 0_{K'Y}$, there
+exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
 
 % --------------------------------------------------------------------
 \subsection{Homomorphism}\label{subsec:homomorphism}
@@ -3339,12 +3474,6 @@ $\mathbf{C} \times \mathbf{D}$ is a Product
 
 A \emph{Homomorphism} is a Structure-preserving Morphism between
 Algebraic Structures.
-
-\emph{Kernel}
-
-\emph{Equalizer}
-
-\emph{Coequalizer}
 
 \subsubsection{Monomorphism}
 
@@ -3418,9 +3547,10 @@ Functors is denoted $\mathbf{Cat}$.
 Functors between Poset Categories are Monotonic Functions
 (\S\ref{subsec:monotonicity}).
 
-\emph{Covariant Functor}
 A \emph{Contravariant Functor} is from a Dual Category to another
-Category, eg $F : \mathbf{C^{op}} \rightarrow \mathbf{D}$
+Category, eg $F : \mathbf{C^{op}} \rightarrow \mathbf{D}$ while the
+Dual of a Contravariant Functor, a \emph{Covariant Functor}, is just
+an ordinary Functor.
 
 A \emph{Forgetful Functor} is one that drops some Property of the
 Input Category in the Output Category.
@@ -3469,6 +3599,69 @@ adding all Automorphisms (\S\ref{subsec:automorphism}) of $X$:
 $Aut(X)$. \emph{Cayley's Theorem} states that every Group is
 Isomorphic to a Group of Permutations (\S\ref{subsec:permutations}).
 
+A Group $G$ within a Category $\mathbf{C}$ may be viewed as a Subset
+of the Hom-set of an Object $X$:
+\[
+    G \subseteq Hom_{\mathbf{C}}(X,X)
+\]
+
+% --------------------------------------------------------------------
+\subsection{Group Homomorphism}\label{subsec:group_homomorphism}
+% --------------------------------------------------------------------
+
+A \emph{Group Homomorphism} preserves Group operations.
+
+Taken as Monoidal Categories, two Groups $G, H$ may be related by a
+Functor $f$ which is equivalent to a Group Homomorphism:
+\[
+    f : G \rightarrow H
+\]
+
+% --------------------------------------------------------------------
+\subsection{Group Representations}\label{subsec:group_representation}
+% --------------------------------------------------------------------
+
+Given a Functor $R$ from a Group $G$ to a general Category
+$\mathbf{C}$
+\[
+    R : G \rightarrow \mathbf{C}
+\]
+Such a Functor is termed a \emph{Representation} of $G$ in $\mathbf{C}$.
+
+% --------------------------------------------------------------------
+\subsection{Coset}\label{subsec:group_coset}
+% --------------------------------------------------------------------
+
+The \emph{Coset} of a Subgroup (\S\ref{subsec:subgroup}) $H$ in a Group $G$
+is defined as
+\begin{description}
+\item[Left Coset] $gH = {gh : h \in H}$
+\item[Right Coset] $Hg = {hg : h \in H}$
+\end{description}
+
+% --------------------------------------------------------------------
+\subsection{Subgroup}\label{subsec:subgroup}
+% --------------------------------------------------------------------
+
+A \emph{Subgroup} is a Subset of Group Elements that are still a Group
+under the Group Operation.
+
+Given a Group $G$ and Subgroup $H$, $H$ is a \emph{Normal Subgroup} if
+and only if $\forall g \in G, gH = Hg$.
+
+% --------------------------------------------------------------------
+\subsection{Group Kernel}\label{subsec:group_kernel}
+% --------------------------------------------------------------------
+
+The \emph{Kernel} of a Group Homomorphism, $h : G \rightarrow H$,
+denoted by $ker(h)$ is defined as:
+\[
+    ker(h) = {g \in G : f(g) = e_H}
+\]
+where $e_H$ is an Element of $H$, and so the Kernel is just the
+Preimage of the Singleton Set $\{e_H\}$. Such a Kernel is a Normal
+Subgroup.
+
 % --------------------------------------------------------------------
 \subsection{Monoids}\label{subsec:monoids}
 % --------------------------------------------------------------------
@@ -3485,6 +3678,14 @@ defined a Monoid and is denoted $End_C(X)$.
 \emph{Presentations}: Generators, Relations
 
 \emph{Finitely Presented}
+
+% --------------------------------------------------------------------
+\subsection{Abstract Groups}\label{subsec:abstract_groups}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Operad Theory}\label{subsec:operad_theory}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Rings}\label{subsec:rings}
