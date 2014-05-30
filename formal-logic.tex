@@ -3016,38 +3016,116 @@ Functions from $X$ to $Y$ denoted by $Y^X$.
 
 A \emph{Relation} is a Mapping of Truth Values to Tuples of
 individuals. The general definition for an $n$-ary Relation $L$ over
-Sets $X_1, \ldots, X_n$ is a Subset of the Cartesian Product
+Sets $X_1, \ldots, X_n$ is a Subset of the Cartesian Product $X_1
+\times \ldots \times X_n$ called the \emph{Graph} of $L$:
 \[
-    L \subseteq X_1 \times \ldots \times X_n
+    G(L) \subseteq X_1 \times \ldots \times X_n
 \]
 The Expression $L x_1 \ldots x_n$ where $x_i \in X_i$ is True when
-$(x_1, \ldots, x_n) \in L$ and False otherwise. Such an $n$-ary Relation may be
-completely specified by an $n + 1$-tuple:
+$(x_1, \ldots, x_n) \in G(L)$ and False otherwise. Such an $n$-ary
+Relation may be completely specified by an $n + 1$-tuple called a
+\emph{Correspondence}:
 \[
     (X_1, \ldots, X_n, G(L))
 \]
-where $G(L) \subseteq X_1 \times \ldots \times X_n$ is the
-\emph{Graph} of $L$.
+Such an $n$-ary Relation may also be described by a
+\emph{Characteristic Function} (or \emph{Indicator Function}): %FIXME
+                                %ref indicator function
+\[
+    f_L : X_1 \times \ldots \times X_n \rightarrow \{\top,\bot\}
+\]
 
 % --------------------------------------------------------------------
 \subsection{Binary Relations}\label{subsec:binary_relations}
 % --------------------------------------------------------------------
 
-\emph{Reflexive}
-
-\emph{Antisymmetric}
-
-\emph{Transitive}
+Also \emph{Dyadic Relation}. Given a \emph{Binary Relation} $R$ on a
+Set $X$, $R$ is
+\begin{description}
+\item[Serial] when
+\[
+    \forall a \in X \exists b \in X : aRb
+\]
+\item[Reflexive] when
+\[
+    aRa = \top
+\]
+Reflexive implies Transitive and Serial
+\item[Irreflexive] (also \emph{Strict}) when
+\[
+    aRa = \bot
+\]
+\item[Co-reflexive] when
+\[
+    aRb \rightarrow a = b
+\]
+\item[Transitive] when
+\[
+    aRb \wedge bRc \rightarrow aRc
+\]
+Transitive and Irreflexive if and only if Transitive and Asymmetric
+\item[Symmetric] when
+\[
+    aRb \rightarrow bRa
+\]
+\item[Anti-symmetric] when
+\[
+    aRb \wedge bRa \rightarrow a = b
+\]
+\item[Asymmetric] when both Anti-symmetric and Irreflexive
+\[
+    aRb \rightarrow \neg bRa
+\]
+\item[Total] when
+\[
+    aRb \vee bRa
+\]
+Total implies Reflexive
+\item[Trichotomous] when
+\[
+    aRb \vee bRa \vee a = b
+\]
+Trichotomous implies Irreflexive.
+Trichotomous and Transitive implies Asymmetric.
+A Transitive Trichotomous Relation is a Strict Total Order.
+\item[Right Euclidean] when
+\[
+    aRb \wedge aRc \rightarrow bRc
+\]
+\item[Left Euclidean] when
+\[
+    bRa \wedge cRa \rightarrow bRc
+\]
+\end{description}
+From the above types of Relations, the following Orders are
+distinguished, listed here from most general to most restricted:
+\begin{description}
+\item[Preorder] when Reflexive and Transitive
+  (\S\ref{sec:order_theory}).
+\item[Partial Order] when Reflexive, Transitive, and Anti-symmetric.
+\item[Total Preorder] when Preorder and Total.
+\item[Total Order] when a Partial Order and Total.
+\item[Equivalence] when Reflexive, Symmetric, and Transitive
+  (\S\ref{subsec:equivalence_relation}).
+\end{description}
 
 Functions (\S\ref{sec:set_functions}) are Well-defined Binary Relations.
+
+The Set of all Binary Relations on a Set $X$ is denoted
+$\mathbf{Rel}(X)$ and is the Power Set of $X \times X$: $2^{X \times
+  X}$.
 
 % --------------------------------------------------------------------
 \subsubsection{Equivalence Relation}\label{subsec:equivalence_relation}
 % --------------------------------------------------------------------
 
-\emph{Equivalence Class}
-
-\emph{Quotient Set}
+An \emph{Equivalence Class} of an Element $a$ in a Set $X$ with
+\emph{Equivalence Relation} $\sim$ is defined as
+\[
+    [a] = \{x \in X | a \sim x\}
+\]
+The \emph{Quotient Set} is then the Set of Equivalence Classes of a
+particular Equivalence Relation.
 
 % --------------------------------------------------------------------
 \subsubsection{Congruence Relation}\label{subsec:congruence_relation}
@@ -3064,6 +3142,16 @@ not be included in the Ordering Relation. A \emph{Total Order} (or
 \emph{Linear Order}) adds the requirement of Totality. A Totally
 Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 
+\emph{Weak Ordering}
+
+
+% --------------------------------------------------------------------
+\subsection{Lattices}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Free Lattices}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Descriptive Set Theory}
@@ -3724,10 +3812,6 @@ defined a Monoid and is denoted $End_C(X)$.
 \emph{Domain Relational Calculus}
 
 % --------------------------------------------------------------------
-\section{Lattices}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
 \subsection{Quantale}
 % --------------------------------------------------------------------
 
@@ -3780,6 +3864,13 @@ that is computable by Algorithm is a \emph{computable function}.
 \section{Relational Model}\label{sec:relational_model}
 % --------------------------------------------------------------------
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Information Theory}\label{sec:information_theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Control Theory}\label{sec:control_theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{99}
