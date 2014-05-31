@@ -1210,7 +1210,7 @@ The \emph{Compactness theorem} implies that if a Formula is derived
 from a System of First-order Logic with an infinite set of Axioms,
 then it can be derived from a finite number of those Axioms. This has
 implications for the determination of \emph{Connected Components} of a
-\emph{Directed Graph}. %FIXME ref Graph theory.
+\emph{Directed Graph} (\S\ref{subsec:directed_graph}).
 
 \subsubsection{Formation Rules}\label{subsec:formation_rules}
 
@@ -3097,23 +3097,34 @@ A Transitive Trichotomous Relation is a Strict Total Order.
     bRa \wedge cRa \rightarrow bRc
 \]
 \end{description}
-From the above types of Relations, the following Orders are
-distinguished, listed here from most general to most restricted:
+From the above types of Relations, the following Orders
+(\S\ref{sec:order_theory}) are distinguished, listed here from most
+general to most restricted:
 \begin{description}
-\item[Preorder] when Reflexive and Transitive
-  (\S\ref{sec:order_theory}).
+\item[Preorder] when Reflexive and Transitive.
 \item[Partial Order] when Reflexive, Transitive, and Anti-symmetric.
-\item[Total Preorder] when Preorder and Total.
+\item[Total Preorder] (or Weak Order) when Preorder and Total.
 \item[Total Order] when a Partial Order and Total.
+\item[Partial Equivalence] when Symmetric and Transitive.
 \item[Equivalence] when Reflexive, Symmetric, and Transitive
   (\S\ref{subsec:equivalence_relation}).
 \end{description}
 
-Functions (\S\ref{sec:set_functions}) are Well-defined Binary Relations.
-
 The Set of all Binary Relations on a Set $X$ is denoted
 $\mathbf{Rel}(X)$ and is the Power Set of $X \times X$: $2^{X \times
   X}$.
+
+Functions (\S\ref{sec:set_functions}) are Well-defined Binary Relations.
+
+A Dependency Relation is a Binary Relation that is Symmetric and
+Reflexive.
+
+Undirected Graphs (\S\ref{subsec:undirected_graph}) are Symmetric.
+Any Binary Relation may be a Directed Graph
+(\S\ref{subsec:directed_graph}). A Binary Relation is a Complete Graph
+(\S\ref{subsec:complete_graph}) when $a \neq b \rightarrow aRb$ and
+implies Symmetry. A Binary Relation is a Tournament when $a \neq b
+\rightarrow aRb \vee bRa$ and implies Anti-symmetry.
 
 % --------------------------------------------------------------------
 \subsubsection{Equivalence Relation}\label{subsec:equivalence_relation}
@@ -3124,7 +3135,7 @@ An \emph{Equivalence Class} of an Element $a$ in a Set $X$ with
 \[
     [a] = \{x \in X | a \sim x\}
 \]
-The \emph{Quotient Set} is then the Set of Equivalence Classes of a
+The \emph{Quotient Set} is the Set of Equivalence Classes of a
 particular Equivalence Relation.
 
 % --------------------------------------------------------------------
@@ -3179,6 +3190,18 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 
 A \emph{Graph} is a pair of Sets, $E$ and $V$, with two functions: $s:
 E \rightarrow V$ \emph{source} and $t: E \rightarrow V$ \emph{target}.
+
+% --------------------------------------------------------------------
+\subsection{Undirected Graph} \label{subsec:undirected_graph}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Directed Graph} \label{subsec:directed_graph}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Complete Graph} \label{subsec:complete_graph}
+% --------------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Category Theory}\label{sec:category_theory}\cite{awodey06}
@@ -3317,6 +3340,110 @@ arbitrary Domain Object $X$.
 \emph{Universal Morphism} \emph{Universal Property}
 
 % --------------------------------------------------------------------
+\subsection{Congruence Categories}\label{subsec:category_congruence}
+% --------------------------------------------------------------------
+
+\emph{Congruence} on a Category is an Equivalence Relation on
+Morphisms such that for two Morphisms $f,g \in \mathbf{C_1}$, $f \sim
+g$ Implies:
+\begin{itemize}
+\item $dom(f) = dom(g)$
+\item $cod(f) = cod(g)$
+\item $\forall a,b \in \mathbf{C_1}, bfa \sim bga$
+\end{itemize}
+Such a Congruence defines a \emph{Congruence Category}
+$\mathbf{C^{\sim}}$:
+\[
+    (\mathbf{C^{\sim}})_0 = \mathbf{C_0}
+\]\[
+    (\mathbf{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
+\]\[
+    \tilde{I_\mathbf{C}} = \langle I_\mathbf{C}, I_\mathbf{C} \rangle
+\]\[
+    \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
+\]
+
+% --------------------------------------------------------------------
+\subsubsection{Quotient Categories}\label{subsec:category_quotient}
+% --------------------------------------------------------------------
+
+The \emph{Quotient Category} is defined for a Category $\mathbf{C}$
+with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
+\[
+    (\mathbf{C}/\sim)_0 = \mathbf{C_0}
+\]\[
+    (\mathbf{C}/\sim)_1 = (\mathbf{C_1})/\sim
+\]
+where Morphisms are of the form $[f]$ where $f \in \mathbf{C_1}$.
+
+% --------------------------------------------------------------------
+\subsubsection{Kernel Category}\label{subsec:kernel_category}
+% --------------------------------------------------------------------
+
+Given a Functor $F : \mathbf{C} \rightarrow \mathbf{D}$, a Congruence
+$\sim_F$ on $\mathbf{C}$ is defined as
+\[
+    f \sim_F g \leftrightarrow dom(f) = dom(g) \wedge cod(f) = cod(g)
+    \wedge F(f) = F(g)
+\]
+The \emph{Kernel Category} of $F$ is then defined as the Congruence
+Category of $\sim_F$
+\[
+    ker(F) = C^{\sim_F}
+\]
+
+% --------------------------------------------------------------------
+\subsection{Free Categories}\label{subsec:free_categories}
+% --------------------------------------------------------------------
+
+A \emph{Free Category} $\mathbf{C}(G)$ is Generated by a Directed
+Graph (\S\ref{subsec:directed_graph}) $G$ of Vertices and Edges under
+Concatenation of Paths. For a Graph with a single Vertex, the Free
+Category is the Free Monoid on the Edges of the Graph. A Graph with no
+Edges generates a Discrete Category (\S\ref{sec:categories}). The Free
+Category on a Graph with two Vertices and one Edge is the Finite
+Category $\mathbf{2}$.
+
+% --------------------------------------------------------------------
+\subsubsection{Finitely Presented Category}\label{subsec:finitely_presented}
+% --------------------------------------------------------------------
+
+A \emph{Finitely Presented Category} is given by taking the Quotient
+Category of a Free Category $\mathbf{C}(G)$ with the Congruence
+$\sim_\Sigma$
+\[
+    \mathbf{C}(G) / \sim_{\Sigma} = \mathbf{C}(G,\Sigma)
+\]
+where $\Sigma$ is the finite Set of Relations
+\[
+    (g_1 \circ \ldots \circ g_n) = (g'_1 \circ \ldots \circ g'_m)
+\]
+for all $g_i \in G$ such that $dom(g_n) = dom(g'_m)$ and $cod(g_1) =
+cod(g'_1)$.
+
+
+% --------------------------------------------------------------------
+\subsection{Category Product}\label{subsec:category_product}
+% --------------------------------------------------------------------
+
+A \emph{Product} of two Categories $\mathbf{C}$ and $\mathbf{D}$ is
+denoted
+\[
+    \mathbf{C} \times \mathbf{D}
+\]
+has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
+\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
+: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
+\mathbf{D}$. Composition and Identity are defined as:
+\[
+    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
+\]\[
+    I_{(C,D)} = (I_C, I_D)
+\]
+$\mathbf{C} \times \mathbf{D}$ is a Product
+(\S\ref{subsec:product_diagram}) in $\mathbf{Cat}$.
+
+% --------------------------------------------------------------------
 \section{Diagrams}\label{sec:category_diagram}
 % --------------------------------------------------------------------
 
@@ -3391,7 +3518,7 @@ Disjoint Union %FIXME ref disjoint union
 
 A \emph{Finite Category} has a Finite number of Morphisms and
 Objects. An Infinite number of Objects Implies and Infinite number of
-Morphisms because each Object has its own Identity Operation. A
+Morphisms because each Object has its own Identity Morphism. A
 Category such as
 \[
     A
@@ -3403,7 +3530,8 @@ Category such as
 \]
 Induces an Infinite Category because new Morphisms exist wherever the
 Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
-\ldots$ and $fg, fgfg, fgfgfg, \ldots$.
+\ldots$ and $fg, fgfg, fgfgfg, \ldots$. See \emph{Finitely Presented
+  Categories} \S\ref{subsec:finitely_presented}.
 
 % --------------------------------------------------------------------
 \subsection{Opposite Categories}\label{subsec:opposite_categories}
@@ -3470,74 +3598,6 @@ the Morphism in the Slice Category between the two is $g$ such that
 \]
 
 \emph{Coslice}
-
-% --------------------------------------------------------------------
-\subsection{Congruence Categories}\label{subsec:category_congruence}
-% --------------------------------------------------------------------
-
-\emph{Congruence} on a Category is an Equivalence Relation on
-Morphisms such that for two Morphisms $f,g \in \mathbf{C_1}$, $f \sim
-g$ Implies:
-\begin{itemize}
-\item $dom(f) = dom(g)$
-\item $cod(f) = cod(g)$
-\item $\forall a,b \in \mathbf{C_1}, bfa \sim bga$
-\end{itemize}
-Such a Congruence defines a \emph{Congruence Category}
-$\mathbf{C^{\sim}}$:
-\[
-    (\mathbf{C^{\sim}})_0 = \mathbf{C_0}
-\]\[
-    (\mathbf{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
-\]\[
-    \tilde{I_\mathbf{C}} = \langle I_\mathbf{C}, I_\mathbf{C} \rangle
-\]\[
-    \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
-\]
-
-% --------------------------------------------------------------------
-\subsubsection{Quotient Categories}\label{subsec:category_quotient}
-% --------------------------------------------------------------------
-
-The \emph{Quotient Category} is defined for a Category $\mathbf{C}$
-with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
-\[
-    (\mathbf{C}/\sim)_0 = \mathbf{C_0}
-\]\[
-    (\mathbf{C}/\sim)_1 = (\mathbf{C_1})/\sim
-\]
-
-% --------------------------------------------------------------------
-\subsection{Free Categories}\label{subsec:free_categories}
-% --------------------------------------------------------------------
-
-A \emph{Free Category} $\mathbf{C}(G)$ is Generated by a Directed
-Graph (\S\ref{sec:graphs}) $G$ of Vertices and Edges under
-Concatenation of Paths. For a Graph with a single Vertex, the Free
-Category is the Free Monoid on the Edges of the Graph. A Graph with no
-Edges generates a Discrete Category. The Free Category on a Graph with
-two Vertices and one Edge is the Finite Category $\mathbf{2}$.
-
-% --------------------------------------------------------------------
-\subsection{Category Product}\label{subsec:category_product}
-% --------------------------------------------------------------------
-
-A \emph{Product} of two Categories $\mathbf{C}$ and $\mathbf{D}$ is
-denoted
-\[
-    \mathbf{C} \times \mathbf{D}
-\]
-has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
-\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
-: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
-\mathbf{D}$. Composition and Identity are defined as:
-\[
-    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
-\]\[
-    I_{(C,D)} = (I_C, I_D)
-\]
-$\mathbf{C} \times \mathbf{D}$ is a Product
-(\S\ref{subsec:product_diagram}) in $\mathbf{Cat}$.
 
 % --------------------------------------------------------------------
 \section{Morphisms}\label{sec:category_morphisms}
