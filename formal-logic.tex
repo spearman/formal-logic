@@ -1336,7 +1336,7 @@ Logic with Equality).
 Function symbols. This weaker form of First-order Logic is fully
 Decidable.
 
-\subsubsection{Many-sorted First-order Logic}
+\subsubsection{Many-sorted First-order Logic}\label{subsec:manysorted_logic}
 
 \emph{Many-sorted First-order Logic} allows Variables to be Quantified
 over different Domains, thus giving Variables different
@@ -1516,6 +1516,8 @@ where after performing Action $a$ it is possible that $p$ holds.
 \subsubsection{Minimal Logic}
 
 \subsubsection{Combinatory Logic}\label{subsec:combinatory_logic}
+
+\emph{Combinator}
 
 \subsubsection{Intermediate Logic}
 
@@ -2924,6 +2926,27 @@ Family may be denoted
 \]
 
 % --------------------------------------------------------------------
+\section{Multisets}\label{sec:multi_sets}
+% --------------------------------------------------------------------
+
+A \emph{Multiset} (or \emph{Bag}) is a 2-tuple $(A,m)$ of an
+\emph{Underlying Set}, $A$, together with a \emph{Multiplicity
+  Function} (\S\ref{sec:set_functions}), $m : A \rightarrow
+\mathbb{N}_{\geq 1}$, mapping Elements of $A$ to Positive Natural
+Numbers representing the \emph{Multiplicity} Elements, that is the
+number of times an Element occurs in the Multiset. A Multiset may be
+denoted with square brackets:
+\[
+    [a,a,b]
+\]
+If the Underlying Set is restricted to a Subset of a given
+\emph{Universe}, $U$, the Multiplicity Function may be extended to
+$m_U : U \rightarrow \mathbb{N}$ where $a \in U, a \notin A
+\leftrightarrow m(a)=0$.
+
+\emph{Indicator Function}
+
+% --------------------------------------------------------------------
 \section{Classes}\label{sec:classes}
 % --------------------------------------------------------------------
 
@@ -3066,7 +3089,7 @@ Reflexive implies Transitive and Serial
 Transitive and Irreflexive if and only if Transitive and Asymmetric
 \item[Symmetric] when
 \[
-    aRb \rightarrow bRa
+    aRb \leftrightarrow bRa
 \]
 \item[Anti-symmetric] when
 \[
@@ -3188,12 +3211,44 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 \section{Graphs} \label{sec:graphs}
 % --------------------------------------------------------------------
 
-A \emph{Graph} is a pair of Sets, $E$ and $V$, with two functions: $s:
-E \rightarrow V$ \emph{source} and $t: E \rightarrow V$ \emph{target}.
+A \emph{Graph}, $G$, is an Ordered Pair of Sets, $G = (V,E)$ where:
+\begin{enumerate}
+\item $V$ is the Set of \emph{Vertices} of generic Elements
+\item $E$ is the Set of \emph{Edges} which are a ordered pairs of
+  Vertices, that is $E \subseteq V \times V$
+\end{enumerate}
+The Vertices of an Edge are \emph{Endpoints} of that Edge, and the
+Edge is \emph{Incident} to those Vertices. Two Vertices $A,B$ are
+\emph{Adjacent} when
+\[
+    (A,B) \in E \vee (B,A) \in E
+\]
+A \emph{Self-loop} is an Edge with both Endpoints the same Vertex.
+
+% --------------------------------------------------------------------
+\subsection{Multigraph} \label{subsec:multigraph}
+% --------------------------------------------------------------------
+
+A \emph{Multigraph} (or \emph{Pseudo-graph}) is a Graph where $E$ is a
+Multiset where Edges with Multiplicity $>1$ are called
+\emph{Parallel}.
+
+% --------------------------------------------------------------------
+\subsection{Simple Graph} \label{subsec:simple_graph}
+% --------------------------------------------------------------------
+
+A \emph{Simple Graph} has no Self-loops and no Parallel Edges.
 
 % --------------------------------------------------------------------
 \subsection{Undirected Graph} \label{subsec:undirected_graph}
 % --------------------------------------------------------------------
+
+In an \emph{Undirected Graph}, it is required that for $A,B \in V$:
+\[
+    (A,B) \in E \leftrightarrow (B,A) \in E
+\]
+This is the definition of a Symmetric Relation
+(\S\ref{subsec:binary_relations}) on $V$.
 
 % --------------------------------------------------------------------
 \subsection{Directed Graph} \label{subsec:directed_graph}
@@ -3203,13 +3258,30 @@ E \rightarrow V$ \emph{source} and $t: E \rightarrow V$ \emph{target}.
 \subsection{Complete Graph} \label{subsec:complete_graph}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\subsection{Subgraph} \label{subsec:subgraphs}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Finite Graph} \label{subsec:finite_graph}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Dipole and Cycle Graphs} \label{subsec:dipole_cycle_graph}
+% --------------------------------------------------------------------
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Category Theory}\label{sec:category_theory}\cite{awodey06}
+\part{Category Theory}\label{sec:category_theory}\cite{awodey06}\cite{maclane69}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Meta-categories}\label{sec:meta_category}
+% --------------------------------------------------------------------
 
 The Formal System of Category Theory consists of
 \begin{itemize}
-\item two Sorts, \emph{Objects} $A,B,C,\ldots$, and \emph{Arrows}
+\item two Sorts (\S\ref{subsec:manysorted_logic}), \emph{Objects}
+  $A,B,C,\ldots$, and \emph{Arrows} (corresponding to Morphisms)
   $f,g,h,\ldots$
 \item four Operations: $dom(f)$, $cod(f)$, $I_A$, $\circ$
 \end{itemize}
@@ -3295,24 +3367,6 @@ of all Monoids and Functions that preserve the Monoid structure.
 \item [Top] all Topological Spaces and Continuous Maps
 \end{description}
 
-% --------------------------------------------------------------------
-\subsection{Cartesian Closed Categories}\label{subsec:cartesian_category}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Hom-sets}\label{subsec:hom_set}
-% --------------------------------------------------------------------
-
-The collection of all Morphisms between two Objects $X$ and $Y$ in a
-Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
-$Hom(X,Y)$:
-\[
-    Hom(A,B) = \{f \in \mathbf{C} | f : A \rightarrow B\}
-\]
-Therefore
-\[
-    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
-\]
 
 % --------------------------------------------------------------------
 \subsection{Initial \& Terminal Objects}\label{subsec:initial_terminal}
@@ -3333,7 +3387,11 @@ Object is a Morphism from a Terminal Object to that Object. A
 \emph{General Element} (also \emph{Variable}) is a Morphism from an
 arbitrary Domain Object $X$.
 
-\emph{Initial Morphism} \emph{Terminal Morphism}
+Given a Functor $U: \mathbf{D} \rightarrow \mathbf{C}$, an
+\emph{Initial Morphism} is an Initial Object in the Comma Category $(X
+\downarrow U)$ where $X \in \mathbf{C_0}$.
+
+\emph{Terminal Morphism}
 
 \emph{Initial Property} \emph{Terminal Property}
 
@@ -3475,6 +3533,9 @@ $\mathbf{C}$:
 % --------------------------------------------------------------------
 
 
+% --------------------------------------------------------------------
+\subsection{Pullbacks}\label{subsec:category_pullback}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Product Diagrams}\label{subsec:product_diagram}
@@ -3616,6 +3677,17 @@ general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
 any Morphism $k' : K' \rightarrow X$ such that $fk' = 0_{K'Y}$, there
 exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
 
+The collection of all Morphisms between two Objects $X$ and $Y$ in a
+Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
+$Hom(X,Y)$:
+\[
+    Hom(A,B) = \{f \in \mathbf{C} | f : A \rightarrow B\}
+\]
+Therefore
+\[
+    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
+\]
+
 % --------------------------------------------------------------------
 \subsection{Homomorphism}\label{subsec:homomorphism}
 % --------------------------------------------------------------------
@@ -3672,6 +3744,21 @@ An \emph{Automorphism} is both an Endomorphism and an Isomorphism,
 that is, an Invertible Endomorphism.
 
 % --------------------------------------------------------------------
+\subsection{Subobjects}\label{subsec:category_subobjects}
+% --------------------------------------------------------------------
+
+A \emph{Subobject} of an Object $X$ in $\mathbf{C}$ is a Monomorphism
+into $X$:
+\[
+    m : M \rightarrowtail X
+\]
+A Morphism between two Subobjects is a Morphism in the Quotient
+Category $\mathbf{C}/X$ giving the Category of Subobjects of $X$ in
+$\mathbf{C}$ as $Sub_{\mathbf{C}}(X)$. Because there is at most one
+Morphism between Subobjects, $Sub_{\mathbf{C}}(X)$ is a Preorder
+Category.
+
+% --------------------------------------------------------------------
 \section{Functors}\label{sec:category_functors}
 % --------------------------------------------------------------------
 
@@ -3708,8 +3795,8 @@ Input Category in the Output Category.
 \emph{Hom Functor}
 
 A \emph{Covariant Representable Functor} for an Object $A$ in a
-Category $\mathbf{C}$ is defined as a Functor $h^A = Hom(A,-) : \mathbf{C}
-\rightarrow \mathbf{Set}$
+Category $\mathbf{C}$ is defined as a Functor $h^A = Hom(A,-) :
+\mathbf{C} \rightarrow \mathbf{Set}$
 \[
     Hom(A,-) : Hom(A,X) \xrightarrow{f_*} Hom(A,Y)
 \]
@@ -3718,7 +3805,6 @@ A \emph{Contravariant Representable Functor} for $A$ is a Functor $h_A
 \[
     Hom(-,A) : Hom(X,A) \xrightarrow{f^*} Hom(Y,A)
 \]
-
 
 \emph{Bifunctor} \emph{Multifunctor}
 
@@ -3736,6 +3822,15 @@ A \emph{Contravariant Representable Functor} for $A$ is a Functor $h_A
 Quantifier in Logic (\S\ref{subsec:firstorder_quantification}) and the
 \emph{Image Operation} along a \emph{Continuous Function} in
 \emph{Topology} (Part \ref{sec:topology}).
+
+% --------------------------------------------------------------------
+\section{Curry-Howard Correspondence}\label{sec:curry_howard}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Cartesian Closed Categories}\label{subsec:cartesian_category}
+% --------------------------------------------------------------------
+
 
 % --------------------------------------------------------------------
 \section{Group Theory}
@@ -3774,7 +3869,8 @@ $\mathbf{C}$
 \[
     R : G \rightarrow \mathbf{C}
 \]
-Such a Functor is termed a \emph{Representation} of $G$ in $\mathbf{C}$.
+Such a Functor $R$ is termed a \emph{Representation} of $G$ in
+$\mathbf{C}$.
 
 % --------------------------------------------------------------------
 \subsection{Coset}\label{subsec:group_coset}
@@ -4049,6 +4145,12 @@ that is computable by Algorithm is a \emph{computable function}.
     \emph{Category Theory},
     Carnegie Mellon,
     2006
+
+\bibitem{maclane69}
+    Saunders Mac Lane,
+    \emph{Categories for the Working Mathematician},
+    Springer,
+    1969
 
 \end{thebibliography}
 
