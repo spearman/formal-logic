@@ -1,0 +1,695 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Category Theory}\label{sec:category_theory}\cite{awodey06}\cite{maclane69}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Meta-categories}\label{sec:meta_category}
+% --------------------------------------------------------------------
+
+The Formal System of Category Theory consists of
+\begin{itemize}
+\item two Sorts (\S\ref{subsec:manysorted_logic}), \emph{Objects}
+  $A,B,C,\ldots$, and \emph{Arrows} (corresponding to Morphisms)
+  $f,g,h,\ldots$
+\item four Operations: $dom(f)$, $cod(f)$, $I_A$, $\circ$
+\end{itemize}
+and seven Axioms:
+\[
+    dom(I_A) = A,\quad cod(I_A) = A
+\]\[
+    f \circ I_{dom(f)} = f, \quad I_{cod(f)} \circ f = f
+\]\[
+    dom(g\circ f) = dom(f), \quad cod(g \circ f) = cod(g)
+\]\[
+    h \circ (g \circ f) = (h \circ g) \circ f
+\]
+Because the Axioms are Self-dual, if a Sentence can be derived from
+them, so can its Dual.
+
+% --------------------------------------------------------------------
+\section{Categories}\label{sec:categories}
+% --------------------------------------------------------------------
+
+A \emph{Category} is an \emph{Algebraic Structure}
+(\S\ref{subsec:universal_algebra}) where Functions are Morphisms
+(\S\ref{sec:category_morphisms}) between Objects and each Object has
+its own \emph{Identity Morphism} and Morphisms are \emph{Associative}.
+
+A Category $\mathbf{C}$ is defined as
+\begin{itemize}
+\item a Class $C_0$ of Objects
+\item a Class $C_1$ of Morphisms (also called \emph{Arrows} or
+  \emph{Maps}) with Identity Morphisms for each Object
+\item a Binary Associative Composition Operation for every three
+  Objects
+\end{itemize}
+$\mathbf{C}$ is considered \emph{Small} (as opposed to \emph{Large})
+if both $C_0$ and $C_1$ can be represented as Sets.
+
+\emph{Locally Small}
+
+Example Categories:
+\begin{itemize}
+\item Sets and Functions
+\item Finite Sets and Injective Functions
+\item Posets and Monotonic Functions
+\item Categories and Functors
+\item Formulae and Deductions
+\item Functors and Natural Transformations
+\end{itemize}
+The Category of all Sets and Set Mappings is denoted $\mathbf{Set}$
+(and is \emph{Dual} to the Category of Complete, Atomic Boolean
+Algebras (\S\ref{subsec:boolean_algebra}).
+
+Preorders and Posets (\S\ref{sec:order_theory}) can
+represent Categories by taking Elements as Objects and Morphisms as
+existing between Pairs of Elements in the Ordering Relation. The
+Category of Posets is denoted $\mathbf{Pos}$. A special case of a
+Poset Category is a \emph{Discrete Category} which is a Set of Objects
+with only Identity Morphisms. A \emph{Monoid} (\S\ref{subsec:monoids})
+is a Category with a single Object and Morphisms for each Element in
+the Monoid such that Composition of the Morphisms is the Binary
+Operation of the Monoid. The Category $\mathbf{Mon}$ is the Category
+of all Monoids and Functions that preserve the Monoid structure.
+
+% --------------------------------------------------------------------
+\subsection{List of Categories}\label{subsec:categories_list}
+% --------------------------------------------------------------------
+
+\begin{description}
+\item [0] no Objects or Morphisms
+\item [1] one Object with Identity Morphism
+\item [2] two Objects with Identity Morphisms and one Morphism between
+  them
+\item [3] three Objects with Identity Morphisms in a Commutative
+  Triangle
+\item [Set] all Sets and Functions
+\item [Rel] all Sets and Relations
+\item [Pos] all Posets and Monotonic Functions
+\item [Mag] all Magmas and Homomorphisms of Operations
+\item [Med] all Medial Magmas and Homomorphisms of Operations
+\item [Mon] all Monoids and Monoid Homomorphisms
+\item [Grp] all Groups and Group Homomorphisms
+\item [Ab] all Abelian Groups with Group Homomorphisms
+\item [Cat] all Categories and Functors
+\item [Top] all Topological Spaces and Continuous Maps
+\end{description}
+
+% --------------------------------------------------------------------
+\subsection{Finite Categories}\label{subsec:finite_categories}
+% --------------------------------------------------------------------
+
+A \emph{Finite Category} has a Finite number of Morphisms and
+Objects. An Infinite number of Objects Implies and Infinite number of
+Morphisms because each Object has its own Identity Morphism. A
+Category such as
+\[
+    A
+    \begin{matrix}
+    \xrightarrow{\;\;f\;\;}\\
+    \xleftarrow[\;\;g\;\;]{}
+    \end{matrix}
+    B
+\]
+Induces an Infinite Category because new Morphisms exist wherever the
+Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
+\ldots$ and $fg, fgfg, fgfgfg, \ldots$. See \emph{Finitely Presented
+  Categories} \S\ref{subsec:finitely_presented}.
+
+% --------------------------------------------------------------------
+\subsection{Opposite Categories}\label{subsec:opposite_categories}
+% --------------------------------------------------------------------
+
+The \emph{Opposite Category} (or \emph{Dual}) of a Category
+$\mathbf{C}$ is denoted $\mathbf{C^{op}}$ and has the same Objects as
+$\mathbf{C}$ but the Domain and Codomain in each Morphism is
+reversed. Objects and Morphisms of a Dual Category may be written with
+over-lines to distinguish them from the original Category:
+$\overline{f}: \overline{C} \rightarrow \overline{D}$. With this
+notation the following Equalities may be expressed:
+\[
+    I_{\overline{C}} = \overline{I_C}
+\]\[
+    \overline{f} \circ \overline{g} = \overline{g \circ f}
+\]
+A Terminal Object in $\mathbf{C}$ is an Initial Object in
+$\mathbf{C^{op}}$ and vice-versa.
+
+% --------------------------------------------------------------------
+\subsection{Comma Cateories}\label{subsec:comma_categories}
+% --------------------------------------------------------------------
+
+A \emph{Comma Category} is formed from a pair of Functors
+(\S\ref{sec:category_functor}) that share a common Codomain. For three
+Categories, $\mathbf{A}$, $\mathbf{B}$, and $\mathbf{C}$ and Functors
+$S$ (\emph{Source}) and $T$ (\emph{Target}) in the following relation:
+\[
+    \mathbf{A} \xrightarrow{\;\; S\;\;} \mathbf{C} \xleftarrow{\;\;
+      T\;\;} \mathbf{B}
+\]
+one can form a Comma Category $(S \downarrow T)$ with Objects as
+Triples $(\alpha, \beta, f)$ where $\alpha$ is an Object in
+$\mathbf{A}$, $\beta$ is an Object in $\mathbf{B}$, and $f : S(\alpha)
+\rightarrow T(\beta)$ is a Morphism in $\mathbf{C}$ and with Morphisms
+between Triples $(\alpha, \beta, f)$ to $(\alpha', \beta', f')$ as
+pairs $(g,h)$ where $g : \alpha \rightarrow \alpha'$ is a Morphism in
+$\mathbf{A}$ and $h : \beta \rightarrow \beta'$ is a Morphism in
+$\mathbf{B}$.
+
+% --------------------------------------------------------------------
+\subsubsection{Arrow Categories}\label{subsec:arrow_categories}
+% --------------------------------------------------------------------
+
+An \emph{Arrow Category} of a Category $\mathbf{C}$, written
+$\mathbf{C^{\rightarrow}}$, has for its Objects the Morphisms of
+$\mathbf{C}$ and as Morphisms pairs of Objects such that their
+underlying Morphisms in $\mathbf{C}$ are Composable.
+
+% --------------------------------------------------------------------
+\subsubsection{Slice Categories}\label{subsec:slice_categories}
+% --------------------------------------------------------------------
+
+A \emph{Slice Category} $\mathbf{C}/C$ of a Category $\mathbf{C}$ with
+an Object $C$ has as Objects the Morphisms with Codomain $C$ and as
+Morphisms those Morphisms in $\mathbf{C}$ between the Domains of the
+underlying Morphisms of the Objects of $\mathbf{C}/C$. That is, for
+Objects in the Slice Category corresonding to Morphisms $f$ and $f'$,
+the Morphism in the Slice Category between the two is $g$ such that
+\[
+    f' \circ g = f
+\]
+
+\emph{Coslice}
+
+% --------------------------------------------------------------------
+\subsection{Congruence Categories}\label{subsec:category_congruence}
+% --------------------------------------------------------------------
+
+\emph{Congruence} on a Category is an Equivalence Relation on
+Morphisms such that for two Morphisms $f,g \in \mathbf{C_1}$, $f \sim
+g$ Implies:
+\begin{itemize}
+\item $dom(f) = dom(g)$
+\item $cod(f) = cod(g)$
+\item $\forall a,b \in \mathbf{C_1}, bfa \sim bga$
+\end{itemize}
+Such a Congruence defines a \emph{Congruence Category}
+$\mathbf{C^{\sim}}$:
+\[
+    (\mathbf{C^{\sim}})_0 = \mathbf{C_0}
+\]\[
+    (\mathbf{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
+\]\[
+    \tilde{I_\mathbf{C}} = \langle I_\mathbf{C}, I_\mathbf{C} \rangle
+\]\[
+    \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
+\]
+
+% --------------------------------------------------------------------
+\subsubsection{Quotient Categories}\label{subsec:category_quotient}
+% --------------------------------------------------------------------
+
+The \emph{Quotient Category} is defined for a Category $\mathbf{C}$
+with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
+\[
+    (\mathbf{C}/\sim)_0 = \mathbf{C_0}
+\]\[
+    (\mathbf{C}/\sim)_1 = (\mathbf{C_1})/\sim
+\]
+where Morphisms are of the form $[f]$ where $f \in \mathbf{C_1}$.
+
+% --------------------------------------------------------------------
+\subsubsection{Kernel Category}\label{subsec:kernel_category}
+% --------------------------------------------------------------------
+
+Given a Functor $F : \mathbf{C} \rightarrow \mathbf{D}$, a Congruence
+$\sim_F$ on $\mathbf{C}$ is defined as
+\[
+    f \sim_F g \leftrightarrow dom(f) = dom(g) \wedge cod(f) = cod(g)
+    \wedge F(f) = F(g)
+\]
+The \emph{Kernel Category} of $F$ is then defined as the Congruence
+Category of $\sim_F$
+\[
+    ker(F) = C^{\sim_F}
+\]
+
+% --------------------------------------------------------------------
+\subsection{Free Categories}\label{subsec:free_categories}
+% --------------------------------------------------------------------
+
+A \emph{Free Category} $\mathbf{C}(G)$ is Generated by a Directed
+Graph (\S\ref{subsec:directed_graph}) $G$ of Vertices and Edges under
+Concatenation of Paths. For a Graph with a single Vertex, the Free
+Category is the Free Monoid on the Edges of the Graph. A Graph with no
+Edges generates a Discrete Category (\S\ref{sec:categories}). The Free
+Category on a Graph with two Vertices and one Edge is the Finite
+Category $\mathbf{2}$.
+
+% --------------------------------------------------------------------
+\subsubsection{Finitely Presented Category}\label{subsec:finitely_presented}
+% --------------------------------------------------------------------
+
+A \emph{Finitely Presented Category} is given by taking the Quotient
+Category of a Free Category $\mathbf{C}(G)$ with the Congruence
+$\sim_\Sigma$
+\[
+    \mathbf{C}(G) / \sim_{\Sigma} = \mathbf{C}(G,\Sigma)
+\]
+where $\Sigma$ is the finite Set of Relations
+\[
+    (g_1 \circ \ldots \circ g_n) = (g'_1 \circ \ldots \circ g'_m)
+\]
+for all $g_i \in G$ such that $dom(g_n) = dom(g'_m)$ and $cod(g_1) =
+cod(g'_1)$.
+
+
+% --------------------------------------------------------------------
+\subsection{Category Product}\label{subsec:category_product}
+% --------------------------------------------------------------------
+
+A \emph{Product} of two Categories $\mathbf{C}$ and $\mathbf{D}$ is
+denoted
+\[
+    \mathbf{C} \times \mathbf{D}
+\]
+has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
+\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
+: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
+\mathbf{D}$. Composition and Identity are defined as:
+\[
+    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
+\]\[
+    I_{(C,D)} = (I_C, I_D)
+\]
+$\mathbf{C} \times \mathbf{D}$ is a Product
+(\S\ref{subsec:product_diagram}) in $\mathbf{Cat}$.
+
+% --------------------------------------------------------------------
+\section{Morphisms}\label{sec:category_morphisms}
+% --------------------------------------------------------------------
+
+A Morphism $f : X \rightarrow Y$ is a \emph{Constant Morphism} if for
+any $g, h : W \rightarrow X$, $fg = fh$.
+
+A Morphism $f : X \rightarrow Y$ is a \emph{Co-constant Morphism} if
+for any $g, h : Y \rightarrow Z$, $gf = hf$.
+
+\emph{Zero Morphism} is one that is both Constant and Co-constant.
+
+The \emph{Kernel} of a Morphism $f : X \rightarrow Y$ is the most
+general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
+any Morphism $k' : K' \rightarrow X$ such that $fk' = 0_{K'Y}$, there
+exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
+
+The collection of all Morphisms between two Objects $X$ and $Y$ in a
+Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
+$Hom(X,Y)$:
+\[
+    Hom(A,B) = \{f \in \mathbf{C} | f : A \rightarrow B\}
+\]
+Therefore
+\[
+    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
+\]
+
+% --------------------------------------------------------------------
+\subsection{Homomorphism}\label{subsec:homomorphism}
+% --------------------------------------------------------------------
+
+A \emph{Homomorphism} is a Structure-preserving Morphism between
+Algebraic Structures.
+
+\subsubsection{Monomorphism}
+
+A \emph{Monomorphism} is a Homomorphism that is Injective, a
+sufficient condition of which is that the Morphism has a Left Inverse
+(\S\ref{subsec:inverse_functions}) or \emph{Retraction}. A
+Monomorphism with a Left Inverse is called a \emph{Split
+  Monomorphism}. A Monomorphism $f$ between Objects $A$ and $B$ is
+denoted
+\[
+    f : A \rightarrowtail B
+\]
+and has the property for any two Morphisms $g, h : C \rightarrow A$,
+$fg = fh$ Implies $g = h$.
+
+\subsubsection{Epimorphism}
+
+An \emph{Epimorphism} is a Surjective Homomorphism, a sufficient
+condition of which is that the Morphism has a Right Inverse
+(\S\ref{subsec:inverse_functions}) or \emph{Section}. An Epimorphism
+with a Right Inverse is called a \emph{Split Epimorphism}. An
+Epimorphism $f$ between Objects $A$ and $B$ is denoted
+\[
+    f : A \twoheadrightarrow B
+\]
+and has the property that for any two Morphisms $g, h : B \rightarrow
+C$, $gf = hf$ Implies $g = h$.
+
+An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
+\rightarrow X$ and Morphism $f : P \rightarrow X$, then $\exists
+\overline{f} : P \rightarrow E$ such that $e \circ \overline{f} = f$.
+
+\subsubsection{Isomorphism}\label{subsec:isomorphism}
+
+A Morphism $f$ is an \emph{Isomorphism} if there exists another
+Morphism $g$ such that $g = f^{-1}$. The Existance of an Isomorphism
+between two Objects $A$ and $B$ is denoted $A \cong B$. An Isomorphism
+is a Homomorphism that is both a Monomorphism and an Epimorphism. Note
+that a Mono- and Epi-morphism need not be an Isomorphism.
+
+\subsubsection{Endomorphism}
+
+An \emph{Endomorphism} is a Homomorphism from an Object to itself.
+
+\subsubsection{Automorphism}\label{subsec:automorphism}
+
+An \emph{Automorphism} is both an Endomorphism and an Isomorphism,
+that is, an Invertible Endomorphism.
+
+% --------------------------------------------------------------------
+\subsection{Subobjects}\label{subsec:category_subobjects}
+% --------------------------------------------------------------------
+
+A \emph{Subobject} of an Object $X$ in $\mathbf{C}$ is a Monomorphism
+into $X$:
+\[
+    m : M \rightarrowtail X
+\]
+A Morphism between two Subobjects is a Morphism in the Quotient
+Category $\mathbf{C}/X$ giving the Category of Subobjects of $X$ in
+$\mathbf{C}$ as $Sub_{\mathbf{C}}(X)$. Because there is at most one
+Morphism between Subobjects, $Sub_{\mathbf{C}}(X)$ is a Preorder
+Category.
+
+% --------------------------------------------------------------------
+\section{Functor}\label{sec:category_functor}
+% --------------------------------------------------------------------
+
+A \emph{Functor} is a \emph{Homomorphism}
+(\S\ref{subsec:homomorphism}) of Categories. A Functor $F$ between
+Categories $\mathbf{C}$ and $\mathbf{D}$
+\[
+    F : \mathbf{C} \rightarrow \mathbf{D}
+\]
+is a Map of Objects and Morphisms of $\mathbf{C}$ to Objects and
+Morphisms of $\mathbf{D}$ with the following Equivalences:
+\begin{itemize}
+\item $F(f : A \rightarrow B) = F(f) : F(A) \rightarrow F(B)$
+\item $F(g \circ f) = F(g) \circ F(f)$
+\item $F(I_A) = I_{F(A)}$
+\end{itemize}
+Every Category has an Identity Functor $I_{\mathbf{C}} : \mathbf{C}
+\rightarrow \mathbf{C}$ and the Category of all Small Categories and
+Functors is denoted $\mathbf{Cat}$.
+
+Functors between Poset Categories are Monotonic Functions
+(\S\ref{subsec:monotonicity}).
+
+A \emph{Forgetful Functor} is one that drops some Property of the
+Input Category in the Output Category.
+
+% --------------------------------------------------------------------
+\subsection{Contravariant Functor}\label{subsec:contravariant_functor}
+% --------------------------------------------------------------------
+
+A \emph{Contravariant Functor} is from a Dual Category to another
+Category, eg $F : \mathbf{C^{op}} \rightarrow \mathbf{D}$ while the
+Dual of a Contravariant Functor, a \emph{Covariant Functor}, is just
+an ordinary Functor.
+
+\emph{Faithful Functor}
+
+\emph{Hom Functor}
+
+\emph{Bifunctor} \emph{Multifunctor}
+
+\emph{Product Functor}
+
+% --------------------------------------------------------------------
+\subsection{Representable Functor}\label{subsec:representable_functor}
+% --------------------------------------------------------------------
+
+A \emph{Covariant Representable Functor} for an Object $A$ in a
+Category $\mathbf{C}$ is defined as a Functor $h^A = Hom(A,-) :
+\mathbf{C} \rightarrow \mathbf{Set}$
+\[
+    Hom(A,-) : Hom(A,X) \xrightarrow{f_*} Hom(A,Y)
+\]
+A \emph{Contravariant Representable Functor} for $A$ is a Functor $h_A
+= Hom(-,A) : \mathbf{C^{op}} \rightarrow \mathbf{Set}$
+\[
+    Hom(-,A) : Hom(X,A) \xrightarrow{f^*} Hom(Y,A)
+\]
+
+% --------------------------------------------------------------------
+\subsection{Natural Transformation}\label{subsec:natural_transformation}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Adjunction}\label{subsec:adjunction}
+% --------------------------------------------------------------------
+
+An \emph{Adjoint Functor} is the Categorical analog of the Existential
+Quantifier in Logic (\S\ref{subsec:firstorder_quantification}) and the
+\emph{Image Operation} along a \emph{Continuous Function} in
+\emph{Topology} (Part \ref{sec:topology}).
+
+% --------------------------------------------------------------------
+\section{Constructions}\label{sec:category_construction}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Diagrams}\label{subsec:category_diagram}
+% --------------------------------------------------------------------
+
+A \emph{Diagram} consists of Objects and Morphisms that are Indexed by
+a Category or equivalently a \emph{Functor} from an Index Category to
+another Category. A Diagram is the Category Theory analogue of an
+Indexed Family of Sets (\S\ref{subsec:index_set}).
+
+A Diagram, $D$, with Index Category $\mathbf{J}$ in Category
+$\mathbf{C}$:
+\[
+    D : \mathbf{J} \rightarrow \mathbf{C}
+\]
+
+% --------------------------------------------------------------------
+\subsection{Universal Properties}\label{subsec:universal_property}
+% --------------------------------------------------------------------
+
+An Object $0$ is \emph{Initial} if for every other Object $C$ there is
+a unique Morphism $0 \rightarrow C$.
+
+An Object $1$ is \emph{Terminal} if for every other Object $C$ there
+is a unique Morphism $C \rightarrow 1$.
+
+An Object that is both an Initial and a Terminal Object is called a
+\emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
+Object is called a \emph{Pointed Category}.
+
+A \emph{Global Element} (also \emph{Point} or \emph{Constant}) of an
+Object is a Morphism from a Terminal Object to that Object. A
+\emph{General Element} (also \emph{Variable}) is a Morphism from an
+arbitrary Domain Object $X$.
+
+Given a Functor $U: \mathbf{D} \rightarrow \mathbf{C}$, an
+\emph{Initial Morphism} is an Initial Object in the Comma Category $(X
+\downarrow U)$ where $X \in \mathbf{C_0}$.
+
+\emph{Terminal Morphism}
+
+\emph{Initial Property} \emph{Terminal Property}
+
+\emph{Universal Morphism} \emph{Universal Property}
+
+\subsubsection{Universal Mapping Property}
+\label{subsec:universal_mapping_property}
+
+\emph{Existence}
+
+\emph{Uniqueness}
+
+% --------------------------------------------------------------------
+\subsection{Limits \& Colimits}\label{subsec:category_limits}
+% --------------------------------------------------------------------
+
+
+% --------------------------------------------------------------------
+\subsubsection{Products \& Coproducts}\label{subsec:product_diagram}
+% --------------------------------------------------------------------
+
+A \emph{Product} of two Objects $A \times B$:
+\[
+    A \xleftarrow{\;\;p_1\;\;} P \xrightarrow{\;\;p_2\;\;} B
+\]
+is a Product of $A$ and $B$ if and only if for any $A
+\xleftarrow{\;\;z_1\;\;} Z \xrightarrow{\;\;z_2\;\;} B$
+\[
+    \exists!u : Z \rightarrow P
+\]
+with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
+\rangle$ as it is uniquely determined by $z_1$ and $z_2$.
+
+Products are unique up to Isomorphism (\S\ref{subsec:isomorphism}).
+
+The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
+is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;} Z
+\xleftarrow{\;\;z_2\;\;} B$
+\[
+    \exists!u : Q \rightarrow Z
+\]
+with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
+and Coprojections $q_i$ may be called \emph{Injections} (although they
+are not necessarily Injective Morphisms).
+
+Disjoint Union %FIXME ref disjoint union
+
+\emph{N-ary Products}
+
+% --------------------------------------------------------------------
+\paragraph{Exponentials}\label{subsec:category_exponential}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Pushouts \& Pullbacks}\label{subsec:category_pullback}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Curry-Howard Correspondence}\label{sec:curry_howard}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\subsection{Cartesian Closed Categories}\label{subsec:cartesian_category}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Group Theory}
+% --------------------------------------------------------------------
+
+A \emph{Group} is a Monoid with an Inverse for every Morphism (every
+Morphism is an Isomorphism). A Group may be formed from a Set $X$ by
+adding all Automorphisms (\S\ref{subsec:automorphism}) of $X$:
+$Aut(X)$. \emph{Cayley's Theorem} states that every Group is
+Isomorphic to a Group of Permutations (\S\ref{subsec:permutations}).
+
+A Group $G$ within a Category $\mathbf{C}$ may be viewed as a Subset
+of the Hom-set of an Object $X$:
+\[
+    G \subseteq Hom_{\mathbf{C}}(X,X)
+\]
+
+% --------------------------------------------------------------------
+\subsection{Group Homomorphism}\label{subsec:group_homomorphism}
+% --------------------------------------------------------------------
+
+A \emph{Group Homomorphism} preserves Group operations.
+
+Taken as Monoidal Categories, two Groups $G, H$ may be related by a
+Functor $f$ which is equivalent to a Group Homomorphism:
+\[
+    f : G \rightarrow H
+\]
+
+% --------------------------------------------------------------------
+\subsection{Group Representations}\label{subsec:group_representation}
+% --------------------------------------------------------------------
+
+Given a Functor $R$ from a Group $G$ to a general Category
+$\mathbf{C}$
+\[
+    R : G \rightarrow \mathbf{C}
+\]
+Such a Functor $R$ is termed a \emph{Representation} of $G$ in
+$\mathbf{C}$.
+
+% --------------------------------------------------------------------
+\subsection{Coset}\label{subsec:group_coset}
+% --------------------------------------------------------------------
+
+The \emph{Coset} of a Subgroup (\S\ref{subsec:subgroup}) $H$ in a Group $G$
+is defined as
+\begin{description}
+\item[Left Coset] $gH = {gh : h \in H}$
+\item[Right Coset] $Hg = {hg : h \in H}$
+\end{description}
+
+% --------------------------------------------------------------------
+\subsection{Subgroup}\label{subsec:subgroup}
+% --------------------------------------------------------------------
+
+A \emph{Subgroup} is a Subset of Group Elements that are still a Group
+under the Group Operation.
+
+Given a Group $G$ and Subgroup $H$, $H$ is a \emph{Normal Subgroup} if
+and only if $\forall g \in G, gH = Hg$.
+
+% --------------------------------------------------------------------
+\subsection{Group Kernel}\label{subsec:group_kernel}
+% --------------------------------------------------------------------
+
+The \emph{Kernel} of a Group Homomorphism, $h : G \rightarrow H$,
+denoted by $ker(h)$ is defined as:
+\[
+    ker(h) = {g \in G : f(g) = e_H}
+\]
+where $e_H$ is an Element of $H$, and so the Kernel is just the
+Preimage of the Singleton Set $\{e_H\}$. Such a Kernel is a Normal
+Subgroup.
+
+% --------------------------------------------------------------------
+\subsection{Monoids}\label{subsec:monoids}
+% --------------------------------------------------------------------
+
+The set of all Endomorphisms of an Object $X$ in a Category $C$ is
+defined a Monoid and is denoted $End_C(X)$.
+
+\emph{Free Monoid}
+
+% --------------------------------------------------------------------
+\section{Abstract Algebra}\label{sec:abstract_algebra}
+% --------------------------------------------------------------------
+\emph{Presentations}: Generators, Relations
+
+\emph{Finitely Presented}
+% --------------------------------------------------------------------
+\subsection{Abstract Groups}\label{subsec:abstract_groups}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\subsection{Operad Theory}\label{subsec:operad_theory}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\subsection{Rings}\label{subsec:rings}
+% --------------------------------------------------------------------
+\emph{Ideals}
+
+\emph{Principal Ideals}
+% --------------------------------------------------------------------
+\subsection{Initial Algebra}\label{subsec:initial_algebra}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\subsection{Algebraic Geometry}\label{subsec:algebraic_geometry}
+% --------------------------------------------------------------------
+\emph{Hilbert's Nullstellensatz}
+\subsubsection{Universal Algebraic Geometry}
+% --------------------------------------------------------------------
+\subsection{Heyting Algebra}\label{subsec:heyting_algebra}
+% --------------------------------------------------------------------
+\subsubsection{Boolean Algebra}\label{subsec:boolean_algebra}
+% --------------------------------------------------------------------
+\subsection{Relation Algebra}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\subsection{Relational Algebra}
+% --------------------------------------------------------------------
+\emph{Domain Relational Calculus}
+% --------------------------------------------------------------------
+\subsection{Quantale}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Institution Theory}\label{subsec:institution_theory}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\section{Representation Theory}
+% --------------------------------------------------------------------
