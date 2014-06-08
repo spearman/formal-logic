@@ -11,13 +11,13 @@ The Formal System of Category Theory consists of
 \item two Sorts (\S\ref{subsec:manysorted_logic}), \emph{Objects}
   $A,B,C,\ldots$, and \emph{Arrows} (corresponding to Morphisms)
   $f,g,h,\ldots$
-\item four Operations: $dom(f)$, $cod(f)$, $I_A$, $\circ$
+\item four Operations: $dom(f)$, $cod(f)$, $1_A$, $\circ$
 \end{itemize}
 and seven Axioms:
 \[
-    dom(I_A) = A,\quad cod(I_A) = A
+    dom(1_A) = A,\quad cod(1_A) = A
 \]\[
-    f \circ I_{dom(f)} = f, \quad I_{cod(f)} \circ f = f
+    f \circ 1_{dom(f)} = f, \quad 1_{cod(f)} \circ f = f
 \]\[
     dom(g\circ f) = dom(f), \quad cod(g \circ f) = cod(g)
 \]\[
@@ -47,6 +47,8 @@ $\mathbf{C}$ is considered \emph{Small} (as opposed to \emph{Large})
 if both $C_0$ and $C_1$ can be represented as Sets.
 
 \emph{Locally Small}
+
+\emph{Concrete Category}
 
 Example Categories:
 \begin{itemize}
@@ -128,7 +130,7 @@ over-lines to distinguish them from the original Category:
 $\overline{f}: \overline{C} \rightarrow \overline{D}$. With this
 notation the following Equalities may be expressed:
 \[
-    I_{\overline{C}} = \overline{I_C}
+    1_{\overline{C}} = \overline{1_C}
 \]\[
     \overline{f} \circ \overline{g} = \overline{g \circ f}
 \]
@@ -200,7 +202,7 @@ $\mathbf{C^{\sim}}$:
 \]\[
     (\mathbf{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
 \]\[
-    \tilde{I_\mathbf{C}} = \langle I_\mathbf{C}, I_\mathbf{C} \rangle
+    \tilde{1_\mathbf{C}} = \langle 1_\mathbf{C}, 1_\mathbf{C} \rangle
 \]\[
     \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
 \]
@@ -280,13 +282,17 @@ has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
 \[
     (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
 \]\[
-    I_{(C,D)} = (I_C, I_D)
+    1_{(C,D)} = (1_C, 1_D)
 \]
 $\mathbf{C} \times \mathbf{D}$ is a Product
 (\S\ref{subsec:product_diagram}) in $\mathbf{Cat}$.
 
 % --------------------------------------------------------------------
 \section{Morphisms}\label{sec:category_morphisms}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Constant Morphism}\label{subsec:constant_morphism}
 % --------------------------------------------------------------------
 
 A Morphism $f : X \rightarrow Y$ is a \emph{Constant Morphism} if for
@@ -296,6 +302,10 @@ A Morphism $f : X \rightarrow Y$ is a \emph{Co-constant Morphism} if
 for any $g, h : Y \rightarrow Z$, $gf = hf$.
 
 \emph{Zero Morphism} is one that is both Constant and Co-constant.
+
+% --------------------------------------------------------------------
+\subsection{Kernel}\label{subsec:morphism_kernel}
+% --------------------------------------------------------------------
 
 The \emph{Kernel} of a Morphism $f : X \rightarrow Y$ is the most
 general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
@@ -312,13 +322,20 @@ Therefore
 \[
     Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
 \]
+Note that the Hom-set need not be a Set (it could be a Proper Class).
 
 % --------------------------------------------------------------------
 \subsection{Homomorphism}\label{subsec:homomorphism}
 % --------------------------------------------------------------------
 
 A \emph{Homomorphism} is a Structure-preserving Morphism between
-Algebraic Structures.
+Algebraic Structures (\S\ref{subsec:universal_algebra}). That is, for
+an Homomorphism $f : A \rightarrow B$ where $A$ and $B$ have Operators
+$*$ and $*'$ respectively, for any $a_i \in A$
+\[
+    f(a_1 * a_2) = f(a_1) *' f(a_2)
+\]
+Note that the Operators do not have to be the same.
 
 \subsubsection{Monomorphism}
 
@@ -398,9 +415,9 @@ Morphisms of $\mathbf{D}$ with the following Equivalences:
 \begin{itemize}
 \item $F(f : A \rightarrow B) = F(f) : F(A) \rightarrow F(B)$
 \item $F(g \circ f) = F(g) \circ F(f)$
-\item $F(I_A) = I_{F(A)}$
+\item $F(1_A) = 1_{F(A)}$
 \end{itemize}
-Every Category has an Identity Functor $I_{\mathbf{C}} : \mathbf{C}
+Every Category has an Identity Functor $1_{\mathbf{C}} : \mathbf{C}
 \rightarrow \mathbf{C}$ and the Category of all Small Categories and
 Functors is denoted $\mathbf{Cat}$.
 
@@ -410,6 +427,14 @@ Functors between Poset Categories are Monotonic Functions
 A \emph{Forgetful Functor} is one that drops some Property of the
 Input Category in the Output Category.
 
+\emph{Faithful Functor}
+
+\emph{Hom Functor}
+
+\emph{Bifunctor} \emph{Multifunctor}
+
+\emph{Product Functor}
+
 % --------------------------------------------------------------------
 \subsection{Contravariant Functor}\label{subsec:contravariant_functor}
 % --------------------------------------------------------------------
@@ -418,14 +443,6 @@ A \emph{Contravariant Functor} is from a Dual Category to another
 Category, eg $F : \mathbf{C^{op}} \rightarrow \mathbf{D}$ while the
 Dual of a Contravariant Functor, a \emph{Covariant Functor}, is just
 an ordinary Functor.
-
-\emph{Faithful Functor}
-
-\emph{Hom Functor}
-
-\emph{Bifunctor} \emph{Multifunctor}
-
-\emph{Product Functor}
 
 % --------------------------------------------------------------------
 \subsection{Representable Functor}\label{subsec:representable_functor}
@@ -474,6 +491,16 @@ $\mathbf{C}$:
 \[
     D : \mathbf{J} \rightarrow \mathbf{C}
 \]
+
+% --------------------------------------------------------------------
+\subsubsection{Commutative Diagram}\label{subsec:commutative_diagram}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsubsection{Cones}\label{subsec:category_cone}
+% --------------------------------------------------------------------
+
+\emph{Universal Cone}
 
 % --------------------------------------------------------------------
 \subsection{Universal Properties}\label{subsec:universal_property}
