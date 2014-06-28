@@ -192,7 +192,7 @@ lowercase ($a,b,c,\cdots$), and expressions by Greek letters
 
 \subsection{Chomsky Hierarchy}
 
-Grammars are classified by how restrictive the Production rules
+Grammars are classified by how restrictive the Production Rules
 are. By convention, they may be organized into a hierarchy of sets
 under proper inclusion, where \emph{Type-0} is an unrestricted grammar,
 covering all possible formal grammars.
@@ -207,7 +207,7 @@ different kinds of Automata (\S \ref{subsec:automata})
 \subsubsection{Type-0: Unrestricted}
 
 \paragraph{Semi-decidable}\label{subsec:semidecidable}
-Production rules of an \emph{Unrestricted} Grammar have the form
+Production Rules of an \emph{Unrestricted} Grammar have the form
 \[
     \alpha \rightarrow \beta
 \]
@@ -277,7 +277,7 @@ $F$, with Productions of three possible forms,
     A[f\sigma] \rightarrow \alpha[\sigma]
 \]
 where $f \in F$ and $\sigma$ is a string of Index Symbols. The Index
-Symbols are used to form a \emph{stack} by the Production rules where
+Symbols are used to form a \emph{stack} by the Production Rules where
 Index Symbols are either pushed or popped from the stack.
 
 An Indexed Language can be recognized by a \emph{Nested Stack
@@ -332,13 +332,13 @@ formulation:
 \subsubsection{Type-2: Context-free}\label{subsec:context_free_language}
 
 \paragraph{Context-free}
-\emph{Context-free Grammars} (\emph{CFG}s) have production rules of the form
+\emph{Context-free Grammars} (\emph{CFG}s) have Production Rules of the form
 \[
     V \rightarrow \alpha
 \]
 where $V$ is a single Non-terminal and $\alpha$ is a string of Terminals
 and/or Non-terminals (or empty). Because $V$ is required to be a
-single Non-terminal, the Production rules can be applied regardless of
+single Non-terminal, the Production Rules can be applied regardless of
 Context. Each Non-terminal in a Context-free Grammar, $G$, is said to
 form a \emph{Sub-Language} of the language defined by $G$.
 
@@ -376,7 +376,7 @@ and a \emph{Parser} can be automatically generated from the Grammar by a
     G = (V=V^0 \cup V^1,T,P,S)
 \]
 where $V^0$ and $V^1$ are disjoint sets of Non-terminals and there
-are three kinds of Production rules:
+are three kinds of Production Rules:
 \[
     X \rightarrow \varepsilon
 \]\[
@@ -515,7 +515,7 @@ Grammar.
 \begin{description}
 \item[W-grammar] \emph{Van Wijngaarden Grammar} consists of a finite
   set of \emph{meta-rules} used to derive a possibly infinite set of
-  Production rules from a finite set of \emph{hyper-rules}.
+  Production Rules from a finite set of \emph{hyper-rules}.
 \item[Extended Affix Grammar] is a restricted W-grammar.
 \end{description}
 
@@ -546,6 +546,46 @@ A more generalized Top-Down Parsing Language.
 Dependency Grammar with directionality between Symbols.
 \end{description}
 
+\subsection{Adaptive Grammars}
+\emph{Adaptive Grammars} allow for Production Rules to be manipulated
+within the Grammar, including addition, deletion, and modification of
+Rules.
+
+\subsubsection{Imperative Adaptive Grammar}
+
+Global
+
+Rule changes are based on global state changing over time.
+
+\begin{itemize}
+\item Extensible Context-Free Grammars
+\item Top-down Modifiable Grammars
+\item Bottom-up Modifiable Grammars
+\end{itemize}
+
+\subsubsection{Declarative Adaptive Grammar}
+
+Local
+
+Rule changes only affect the position in the syntax tree of the
+generation of a string.
+
+\begin{itemize}
+\item Christiansen Grammars
+\item Recursive Adaptive Grammars
+\end{itemize}
+
+\subsubsection{Time-space (Hybrid) Adaptive Grammar}
+
+\begin{itemize}
+\item \S-Calculus
+\end{itemize}
+
+\subsubsection{Dynamic Grammars}
+
+Boullier\cite{boullier94}
+
+
 % --------------------------------------------------------------------
 \section{Parsers} \label{sec:parsers}
 % --------------------------------------------------------------------
@@ -554,7 +594,10 @@ A \emph{Parser} analyzes an Expression according to the rules of a Formal
 Grammar, generating a \emph{Data Structure} describing the Syntax of
 the input. An outline of the process follows.
 
+% --------------------------------------------------------------------
 \subsection{Lexical Analysis}
+% --------------------------------------------------------------------
+
 A Parser may be preceded by a \emph{Lexical Analyzer} which creates
 \emph{Tokens} (Symbols) from an input Expression. Strings of Tokens
 are referred to as Phrases. A Lexical Analyzer is a Parser itself and
@@ -572,7 +615,10 @@ Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
 values where needed-- this results in Tokens that are either a
 \emph{Type-Value} pair, or just a \emph{Type}.
 
+% --------------------------------------------------------------------
 \subsection{Syntactic Analysis}
+% --------------------------------------------------------------------
+
 The Parser determines if and how the input can be derived from the
 Start Symbol of the Grammar. Parsing can proceed in two directions:
 
@@ -588,7 +634,39 @@ Further \emph{Semantic} Parsing may be performed after these steps. An
 example of this would be the in the \emph{Compiler} of a
 \emph{Programming Language}.
 
+% --------------------------------------------------------------------
+\subsection{Top-down Parsers}
+% --------------------------------------------------------------------
+
+\subsubsection{Recursive Descent Parser}
+
+\subsubsection{LL Parser}
+
+\subsubsection{Early Parser}
+
+% --------------------------------------------------------------------
+\subsection{Bottom-up Parsers}
+% --------------------------------------------------------------------
+
+\subsubsection{Precedence Parser}
+
+\subsubsection{LR Parser}
+
+\emph{Canonical LR} LR(1)
+
+\paragraph{SLR Parser}
+
+\paragraph{LALR Parser}
+
+\paragraph{GLR Parser}
+
+\subsubsection{CYK Parser}
+
+\subsubsection{Recursive Ascent Parser}
+
+% --------------------------------------------------------------------
 \subsection{Parser Generators}\label{subsec:parser_generator}
+% --------------------------------------------------------------------
 
 A \emph{Parser Generator} takes as a Grammar (for example a BNF
 Grammar) and outputs the source code of a Parser for the Language
@@ -810,7 +888,7 @@ A Pushdown Automata is Deterministic iff both
 \emph{Linear Bounded Automata} are Turing Machines restricted to an
 input of finite length and are acceptors for Context-sensitive
 Languages(\S\ref{subsec:context_sensitive}) which require that
-Production rules do not increase the size of the Expression as a
+Production Rules do not increase the size of the Expression as a
 result; therefore the size of the input is sufficient for calculation.
 
 \subsection{Turing Machines}\label{subsec:turing_machine}
@@ -3448,6 +3526,10 @@ This is the definition of a Symmetric Relation
 \subsection{Dipole and Cycle Graphs} \label{subsec:dipole_cycle_graph}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\section{Trees} \label{sec:trees}
+% --------------------------------------------------------------------
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{tex/category-theory.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3667,6 +3749,12 @@ that is computable by Algorithm is a \emph{computable function}.
     \emph{Categories for the Working Mathematician},
     Springer,
     1969
+
+\bibitem{boullier94}
+    Pierre Boullier,
+    \emph{Dynamic Grammars and Semantic Analysis},
+    INRIA Research Report No. 2322,
+    1994
 
 \end{thebibliography}
 
