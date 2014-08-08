@@ -1499,7 +1499,7 @@ Unary Relations (sets).
 \emph{Independence-friendly Logic} has \emph{Branching Quantifiers}.
 
 % --------------------------------------------------------------------
-\subsection{Classical Logic}\label{subsec:classical_logic} \hfill
+\subsection{Classical Logic}\label{subsec:classical_logic}
 % --------------------------------------------------------------------
 
 \emph{Classical Logic} is the class of Propositional and
@@ -1524,6 +1524,12 @@ Rules:
 %FIXME finish properties and rules
 
 \end{description}
+
+The intended Semantic Interpretation (\S\ref{subsec:interpretation})
+of Classical Logic is subject to the \emph{Principle of Bivalence}
+which says that every Proposition has one Truth-value: True or False.
+Non-classical Logics such as \emph{Intuitionistic Logic}
+(\S\ref{subsec:intuitionistic_logic}) does not have this Property.
 
 % --------------------------------------------------------------------
 \subsection{Modal (Intensional) Logic} \label{subsec:modal_logic}
@@ -1643,9 +1649,11 @@ where after performing Action $a$ it is possible that $p$ holds.
 % --------------------------------------------------------------------
 
 \emph{Intuitionistic Logic} (or \emph{Constructive Logic}) replaces
-Truth with the concept of \emph{Constructive Provability}. Such
-systems are similar to Classical Logic without the Law of the Excluded
-Middle (\S\ref{sec:classical_logic}).
+Truth with the concept of \emph{Constructive Provability}. This is to
+say that Operations in Intuitionistic Logic preserve
+\emph{Justification} rather than Truth-value. Such systems are
+restrictions of Classical Logic without the Law of the Excluded Middle
+or Double Negation Elimination (\S\ref{subsec:classical_logic}).
 
 Whereas First-order Logic (\S\ref{subsec:predicate_logic}) is a
 foundation for Set Theory (Part \ref{sec:set_theory}), Intuitionistic
@@ -1654,11 +1662,34 @@ Logic is used as a foundation for \emph{Type Theory} (Part
 (\S\ref{sec:constructive_set_theory}).
 
 Intuitionistic Logic is \emph{Modelled} by \emph{Heyting Algebra}
-(\S\ref{subsec:heyting_semantics}).
+(\S\ref{subsec:heyting_semantics}) or \emph{Kripke Semantics}
+(\S\ref{subsec:kripke_semantics}) and lacks the Principle of Bivalence
+(\S\ref{subsec:classical_logic}); thus there is no sole-sufficient
+Operator in Intuitionistic Logic. A Formula is Valid if and only if it
+receives the Value of the Top Element for any Valuation on any Heyting
+Algebra.
 
-\emph{Disjunction Property}
+Complete bases are:
+\[
+    \{ \vee, \leftrightarrow, \bot \}
+\]
+and
+\[
+    \{ \vee, \leftrightarrow, \neg \}
+\]
 
-\emph{Existence Property}
+Proofs (Part \ref{sec:proof_theory}) in a Theory
+(\S\ref{subsec:formal_theory}), $\mathcal{T}$, based on Intuitionistic
+Logic have the \emph{Existence Property}:
+\[
+    (\exists x)A(x) \in \mathcal{T} \rightarrow (\exists t)A(t)
+\]
+where $A(x)$ has $x$ as the only Free Variable and $t$ is a Term.
+
+\emph{Disjunction Property}:
+\[
+    A \vee B \in \mathcal{T} \rightarrow A \in \mathcal{T} \vee B \in \mathcal{T}
+\]
 
 \subsubsection{Minimal Logic}
 
@@ -1667,6 +1698,11 @@ Intuitionistic Logic is \emph{Modelled} by \emph{Heyting Algebra}
 \emph{Combinator}
 
 \subsubsection{Intermediate Logic}
+
+\emph{Intermediate Logic} is an extended Intuitionistic Logic
+(\emph{Superintuitionistic Logic}) that is Consistent and still weaker
+than the strongest Consistent Superintuitionistic Logic: Classical
+Logic.
 
 % --------------------------------------------------------------------
 \subsection{Substructural Logic}\label{subsec:substructural_logic}
@@ -1695,7 +1731,7 @@ Alan Turing's PhD Thesis \cite{turing38}
 % --------------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Proof Theory}
+\part{Proof Theory}\label{sec:proof_theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % --------------------------------------------------------------------
@@ -2343,6 +2379,8 @@ Set.
 
 A \emph{Valuation} is the assignment of Values to Variables of a
 Formula.
+
+\emph{Supervaluation}
 
 % --------------------------------------------------------------------
 \subsection{Substructure}\label{subsec:model_substructure}
@@ -3530,6 +3568,8 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 
 \emph{Weak Ordering}
 
+\emph{Top Element}
+
 
 % --------------------------------------------------------------------
 \subsection{Lattices}
@@ -3641,6 +3681,8 @@ This is the definition of a Symmetric Relation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Topology}\label{sec:topology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{Interior}
 
 % --------------------------------------------------------------------
 \section{Metric}\label{sec:metric}
