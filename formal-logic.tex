@@ -3682,19 +3682,52 @@ This is the definition of a Symmetric Relation
 \part{Topology}\label{sec:topology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+A \emph{Topology}, $\tau$, is a collection of Subsets of a
+\emph{Metric Space} (\S\ref{sec:metric_space}), $M$, called \emph{Open
+  Sets} (\S\ref{sec:open_sets}) subject to the following Inductive
+definition:
+\begin{enumerate}
+\item $\varnothing \in \tau, M \in \tau$
+\item $U,V \in \tau \rightarrow U \cap V \in \tau$
+\item $\{U_i\}_{i \in I} \subseteq \tau \rightarrow \bigcup_{i \in I}
+  U_i$
+\end{enumerate}
+A \emph{Topological Space} is a pair consisting of a Metric Space,
+$M$, and a Toplogy, $\tau$ on that Metric Space:
+\[
+    (M,\tau)
+\]
+
+Every Metric Space gives a Topology, but Topologies may exist for
+which there is no definable Metric Space. %FIXME explain
+
+Given a Metric Space $M$, the following Topologies may be described:
+\begin{description}
+\item[Trivial Topology] $\tau = \{\varnothing, M\}$ (Open Sets under
+  any Metric)
+
+\item[Discrete Topology] $\tau = \mathcal{P}(M)$ (Open Sets under
+  Discrete Metric)
+\end{description}
+
 \emph{Interior}
 
 % --------------------------------------------------------------------
-\section{Metric}\label{sec:metric}
+\section{Metric Space}\label{sec:metric_space}
 % --------------------------------------------------------------------
 
-A \emph{Metric} is \emph{Distance Function} between Elements of an
-induced \emph{Metric Space}: that is a Set for which Distances between
-all pairs of Members are defined.
+A \emph{Metric Space} is a Set $M$ for which a \emph{Metric} is
+defined for all Elements of that Set. A Metric is \emph{Distance
+  Function} defined between all Elements or Points of a Metric Space.
 
-A Distance Function $d$ has the form:
+A Metric Space $M$ can then be defined as the pair:
 \[
-    d: X \times X \rightarrow \mathbb{R}^{+}
+    (M,d)
+\]
+where $M$ is a Set of Elements and the Distance Function $d$ has the
+form:
+\[
+    d: M \times M \rightarrow \mathbb{R}^{+}
 \]
 with the following conditions:
 \begin{enumerate}
@@ -3707,20 +3740,32 @@ with the following conditions:
   (\emph{Subadditivity} or \emph{Triangle Inequality})
 \end{enumerate}
 
+\emph{Continuity} of a Function $f : X \rightarrow Y$ between Metric
+Spaces $(X,d)$ and $(Y,d')$ is defined at a Point $c$
+if
+\[
+    \forall \epsilon > 0, \exists \delta > 0 :
+    f (B_{\delta}(c)) \subseteq B_{\epsilon}(f(c))
+\]
+and a Function is likewise a \emph{Continuous Function} if it
+satisfies the above for all $c$.
+
+Alternatively, a Function $f: X \rightarrow Y$ is Continuous if and
+only if for all Open Sets $V \subseteq Y$, $f^{-1}(v)$ is an Open Set
+in $X$.
+
 % --------------------------------------------------------------------
-\subsection{Euclidean Metric}\label{subsec:euclidean_metric}
+\subsection{Metrics}\label{subsec:metrics}
 % --------------------------------------------------------------------
 
+\emph{Euclidean Metric}:
 \[
     d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
 \]\[
     (\mathbf{p},\mathbf{q}) \mapsto \sqrt{\sum_{i=1}^{n}(q_i - p_i)^2}
 \]
 
-% --------------------------------------------------------------------
-\subsection{Discrete Metric}\label{subsec:discrete_metric}
-% --------------------------------------------------------------------
-
+\emph{Discrete Metric}:
 \[
     d: X \times X \rightarrow \mathbb{R}^{+}
 \]\[
@@ -3731,25 +3776,56 @@ with the following conditions:
     \end{array}\right.
 \]
 
-% --------------------------------------------------------------------
-\subsection{Max Metric}\label{subsec:max_metric}
-% --------------------------------------------------------------------
-
+\emph{Max Metric}:
 \[
     d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
 \]\[
     (\mathbf{p},\mathbf{q}) \mapsto max_{1 \leq i \leq n}\{|q_i - p_i|\}
 \]
 
-% --------------------------------------------------------------------
-\subsection{Taxicab Metric}\label{subsec:taxicab_metric}
-% --------------------------------------------------------------------
-
+\emph{Taxicab Metric}:
 \[
     d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
 \]\[
     (\mathbf{p},\mathbf{q}) \mapsto \sum_{i=1}^{n}|q_i - p_i|
 \]
+
+% --------------------------------------------------------------------
+\section{Open Sets}\label{sec:open_sets}
+% --------------------------------------------------------------------
+
+An \emph{Open Set} is a Subset of a Metric Space, defined in terms of
+\emph{Open Balls} (\S\ref{subsec:metric_balls}). For a Metric Space
+$(M,d)$, the Set $U \subseteq M$ is \emph{Open} if
+\[
+    \forall x \in U, \exists r > 0 : B_r(x) \subseteq U
+\]
+where $B_r(x)$ is an Open Ball centered on Point $x$.
+
+Open Sets of a Metric Space $(M,d)$ have the following three
+properties:
+\begin{enumerate}
+\item $\varnothing, M$ are Open Sets
+\item If $U, V \in M$ are Open, then $U \cap V$ is Open in $M$
+\item $\{ U_i \}_{i \in I}$ are Open, then $\bigcup_{i \in I}
+  U_i$ is an Open Set
+\end{enumerate}
+Note that an arbitrary Intersection of Open Sets is not necessarily an
+Open Set.
+
+% --------------------------------------------------------------------
+\subsection{Balls}\label{subsec:metric_balls}
+% --------------------------------------------------------------------
+
+A Metric \emph{Ball} is defined for a Point $p$ in a Metric Space
+$(M,d)$ as the set of all Points (including $p$) within a given Radius
+$r > 0$ as determined by the Distance Function of the Metric Space:
+\[
+    B_r(p) = {x \in M | d(x,p) < r }
+\]
+The above is termed an \emph{Open Ball} because it does not include
+the points where $d(x,p) = r$. Such a Ball including these additional
+Points is called a \emph{Closed Ball}.
 
 % --------------------------------------------------------------------
 \section{Continuous Functions}\label{sec:continuous_functions}
