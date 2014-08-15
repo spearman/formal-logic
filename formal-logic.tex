@@ -498,7 +498,7 @@ Local Language is recognized by a \emph{Local
 A \emph{Star-free Language} is one having a \emph{Generalized Star
   Height} equal to zero, that is, the minimal \emph{Star Height} of
 all Expressions in the Language with the Star Height of an
-Expression's \emph{compliment} being equal.
+Expression's \emph{Complement} being equal.
 
 Star-free Languages are characterized as those with \emph{Aperiodic
   Syntactic Monoids}\cite{schutzenberger65} and also as the
@@ -1552,7 +1552,7 @@ regards to \emph{Belief}).
 
 An unary \emph{Primitive Modal Operator}, $\square$, defines a Dual
 Operator, $\Diamond$, such that the following analogues of de Morgan's
-laws hold:
+Laws (\S\ref{subsec:de_morgan}) hold:
     \[\Diamond P \leftrightarrow \neg \square \neg P\]
     \[\square P \leftrightarrow \neg \Diamond \neg P\]
 Modal Logic with more than one Primitive Modal Operator, $\square _i,
@@ -2000,7 +2000,7 @@ equivalently Derived without these steps.  The dual to Local
 Consistency is \emph{Local Completeness} which states that Elimination
 rules can decompose a Connective into the forms of its Introduction
 Rule. These correspond to $\beta$-reduction and $\eta$-conversion in
-$\lambda$-Calculus (\S\ref{sec:lambda_calculus}) where Propositions
+$\lambda$-Calculus (\S\ref{subsec:lambda_calculus}) where Propositions
 are \emph{Types} and Proofs are \emph{Programs}. If an entire
 Derivation has only Eliminations followed by Introductions, it is said
 to be in \emph{Normal Form}.
@@ -2137,6 +2137,109 @@ expansion of Clause Tableau branches (not the bare root) to contain
 only Literals that unify with a Literal already on the branch
 (\emph{Weak Connectedness}) or a Literal in the current leaf
 (\emph{Strong Connectedness}).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Recursion Theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{Church-Turing}
+
+\emph{Blum Axioms}
+
+% --------------------------------------------------------------------
+\section{Primitive Recursion}\label{subsec:primitive_recursion}
+% --------------------------------------------------------------------
+
+\emph{Primitive Recursive Functions} are given by three Axioms:
+\begin{enumerate}
+    \item The $0$-ary \emph{Constant Function}, $0$, is Primitive
+      Recursive
+    \item The $1$-ary \emph{Successor Function}, $S(k) = k + 1$, is
+      Primitive Recursive
+    \item The $n$-ary \emph{Projection Function}, $P_i^n = k_i$,
+      (returning the $i$th argument) is Primitive Recursive
+\end{enumerate}
+and the Operations:
+\begin{enumerate}
+    \item \emph{Composition}
+    \item \emph{Primitive Recursion}
+\end{enumerate}
+
+% --------------------------------------------------------------------
+\section{Computable Function}\label{sec:computable_function}
+% --------------------------------------------------------------------
+
+\emph{Partial Recursive Function}
+
+\emph{Total Recursive Function}
+
+% --------------------------------------------------------------------
+\section{Models of Computation}\label{sec:computation_model}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{$\mu$-recursive Function}\label{subsec:mu_recursive}
+% --------------------------------------------------------------------
+
+also \emph{Partially Recursive Functions}
+
+% --------------------------------------------------------------------
+\subsection{Turing Machine}
+% --------------------------------------------------------------------
+
+See Part \ref{sec:automata_theory} Automata Theory
+\S\ref{subsec:turing_machine} Turing Machines
+
+\subsubsection{Post-Turing Machine}\label{subsec:post_turing}
+
+% --------------------------------------------------------------------
+\subsection{$\lambda$-Calculus}\label{subsec:lambda_calculus}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Tag System}\label{subsec:tag_system}
+% --------------------------------------------------------------------
+
+also \emph{Post Tag Machine}
+
+% --------------------------------------------------------------------
+\subsection{Register Machine}\label{subsec:register_machine}
+% --------------------------------------------------------------------
+
+\subsubsection{Counter Machine}
+
+\subsubsection{Pointer Machine}
+
+\subsubsection{Random Access Machine}
+
+\subsubsection{Random Access Stored Program Machine}
+
+% --------------------------------------------------------------------
+\section{Complexity Theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Algorithm}
+% --------------------------------------------------------------------
+
+An \emph{Algorithm} may be formalized as a sequence of operations that
+can be simulated by a Turing-complete system and any function that is
+computable by Algorithm is a Computable Function
+(\S\ref{sec:computable_function}).
+
+% --------------------------------------------------------------------
+\subsection{Function Problem}\label{subsec:function_problem}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Complexity Class}\label{subsec:complexity_class}
+% --------------------------------------------------------------------
+
+$\mathbf{PR} \subset \mathbf{R}$
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Formal Semantics}
@@ -3073,6 +3176,9 @@ in some System of Logic.
 \section{Untyped $\lambda$-Calculus}\label{sec:untyped_lambda}
 % --------------------------------------------------------------------
 
+\emph{Untyped $\lambda$-Calculus} describes a Semantics for
+\emph{Computable Functions} (\S\ref{sec:computable_function}).
+
 \emph{Lambda Terms}
 
 \emph{Free Variables}
@@ -3104,6 +3210,8 @@ in some System of Logic.
 % --------------------------------------------------------------------
 \subsection{Normalization \& Confluence}\label{subsec:normalization_confluence}
 % --------------------------------------------------------------------
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Type Theory}\label{sec:type_theory}
@@ -3140,19 +3248,7 @@ consisting of Inference Rules only and no Axioms.
 Context, ordered list of assumptions
 
 % --------------------------------------------------------------------
-\section{Curry-Howard Correspondence}\label{sec:curry_howard}
-% --------------------------------------------------------------------
-
-\begin{tabular}{| l | l |}
-\hline
-\textbf{Type Theory} & \textbf{Logic} \\ \hline \hline
-$A$ (Type) & Proposition \\ \hline
-$a : A$ (Term) & Proof \\
-\hline
-\end{tabular}
-
-% --------------------------------------------------------------------
-\section{Typed $\lambda$-Calculus}\label{sec:lambda_calculus}
+\section{Typed $\lambda$-Calculus}\label{sec:typed_lambda_calculus}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -3166,6 +3262,20 @@ $a : A$ (Term) & Proof \\
 
 \emph{Intuitionistic Type Theory} (also \emph{Constructive Type Theory} or
 \emph{Martin-L\"of Type Theory})
+
+
+
+% --------------------------------------------------------------------
+\section{Curry-Howard Correspondence}\label{sec:curry_howard}
+% --------------------------------------------------------------------
+
+\begin{tabular}{| l | l |}
+\hline
+\textbf{Type Theory} & \textbf{Logic} \\ \hline \hline
+$A$ (Type) & Proposition \\ \hline
+$a : A$ (Term) & Proof \\
+\hline
+\end{tabular}
 
 
 
@@ -3262,10 +3372,16 @@ An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
 \subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
 
 % --------------------------------------------------------------------
-\subsubsection{Difference}
+\subsubsection{Difference}\label{subsec:set_difference}
 % --------------------------------------------------------------------
+
 \emph{Complement}
+
 \emph{Symmetric Difference}
+
+% --------------------------------------------------------------------
+\subsubsection{de Morgan's Law}\label{subsec:de_morgan}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsubsection{Cartesian Product}\label{subsec:set_product}
@@ -3630,6 +3746,10 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 \emph{Borel Sets}
 
 % --------------------------------------------------------------------
+\subsection{Effective Descriptive Set Theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \section{Combinatorics}
 % --------------------------------------------------------------------
 
@@ -3641,6 +3761,244 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 \section{Constructive Set Theory}\label{sec:constructive_set_theory}
 % --------------------------------------------------------------------
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Topology}\label{sec:topology}\cite{ts0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A \emph{Topology}, $\tau$, is a collection of Subsets called
+\emph{Open Sets} (\S\ref{subsec:open_sets}), of a \emph{Metric Space}
+(\S\ref{sec:metric_space}), $M$, subject to the following Inductive
+definition:
+\begin{enumerate}
+\item $\varnothing \in \tau, M \in \tau$
+\item $U,V \in \tau \rightarrow U \cap V \in \tau$
+\item $\{U_i\}_{i \in I} \subseteq \tau \rightarrow \bigcup_{i \in I}
+  U_i \in \tau$
+\end{enumerate}
+A \emph{Topological Space} is a pair consisting of a Metric Space,
+$M$, and a Toplogy, $\tau$ on that Metric Space:
+\[
+    (M,\tau)
+\]
+
+Every Metric Space gives a Topology, but Topologies may exist for
+which there is no definable Metric Space. %FIXME explain
+
+Given a Metric Space $M$, the following Topologies may be described:
+\begin{description}
+\item[Trivial Topology] $\tau = \{\varnothing, M\}$ (Open Sets under
+  any Metric)
+
+\item[Discrete Topology] $\tau = \mathcal{P}(M)$ (Open Sets under
+  Discrete Metric)
+\end{description}
+
+\emph{Interior}
+
+% --------------------------------------------------------------------
+\section{Metric Space}\label{sec:metric_space}
+% --------------------------------------------------------------------
+
+A \emph{Metric Space} is a Set $M$ for which a \emph{Metric}
+(\ref{subsec:metrics}) is defined for all Elements of that Set.
+
+A Metric Space $M$ can then be defined as the pair:
+\[
+    (M,d)
+\]
+where $M$ is a Set of Elements and $d$ is a Distance Function.
+
+% --------------------------------------------------------------------
+\subsection{Metrics}\label{subsec:metrics}
+% --------------------------------------------------------------------
+
+A \emph{Metric} is a \emph{Distance Function} defined between all
+Elements or Points of a Metric Space.
+
+A Distance Function $d$ has the form:
+\[
+    d: M \times M \rightarrow \mathbb{R}^{+}
+\]
+with the following conditions:
+\begin{enumerate}
+\item $d(x_1, x_2) \geq 0$ (\emph{Non-negativity} or \emph{Separation
+  Axiom})
+\item $d(x_1, x_2) = 0 \leftrightarrow x_1 = x_2$ (\emph{Identity of
+  Indiscernables} or \emph{Coincidence Axiom})
+\item $d(x_1, x_2) = d(x_2, x_1)$ (\emph{Symmetry})
+\item $d(x_1, x_3) \leq d(x_1, x_2) + d(x_2, x_3)$
+  (\emph{Subadditivity} or \emph{Triangle Inequality})
+\end{enumerate}
+Two Metrics, $d_1$ and $d_2$, in a Metric Space, $M$, are
+\emph{Metrically Equivalent}, $d_1 \sim d_2$, if for $\tau_1$ Induced
+by $d_1$ and $\tau_2$ Induced by $d_2$, $\tau_1 = \tau_2$. A
+sufficient condition for Metric Equivalence is given by:
+\[
+    \exists k_1, k_2 > 0 : \forall x \in M, \forall r > 0,
+    B^{d1}_{rk_1}(x) \subseteq B^{d2}_r (x) \subseteq B^{d1}_{rk_2}(x)
+\]
+
+\emph{Euclidean Metric}:
+\[
+    d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
+\]\[
+    (\mathbf{p},\mathbf{q}) \mapsto \sqrt{\sum_{i=1}^{n}(q_i - p_i)^2}
+\]
+
+\emph{Discrete Metric}:
+\[
+    d: X \times X \rightarrow \mathbb{R}^{+}
+\]\[
+    (\mathbf{p},\mathbf{q}) \mapsto \left\{
+    \begin{array}{l l}
+        0: \mathbf{p} = \mathbf{q}\\
+        1: \mathbf{p} \neq \mathbf{q}
+    \end{array}\right.
+\]
+
+\emph{Max Metric}:
+\[
+    d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
+\]\[
+    (\mathbf{p},\mathbf{q}) \mapsto max_{1 \leq i \leq n}\{|q_i - p_i|\}
+\]
+
+\emph{Taxicab Metric}:
+\[
+    d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
+\]\[
+    (\mathbf{p},\mathbf{q}) \mapsto \sum_{i=1}^{n}|q_i - p_i|
+\]
+
+% --------------------------------------------------------------------
+\subsection{Balls}\label{subsec:metric_balls}
+% --------------------------------------------------------------------
+
+A Metric \emph{Ball} is defined for a Point $p$ in a Metric Space
+$(M,d)$ as the set of all Points (including $p$) within a given Radius
+$r > 0$ as determined by the Distance Function of the Metric Space:
+\[
+    B_r(p) = {x \in M | d(x,p) < r }
+\]
+The above is termed an \emph{Open Ball} because it does not include
+the points where $d(x,p) = r$. Such a Ball including these additional
+Points is called a \emph{Closed Ball}.
+
+% --------------------------------------------------------------------
+\subsection{Open Sets}\label{subsec:open_sets}
+% --------------------------------------------------------------------
+
+An \emph{Open Set} is a Subset of a Metric Space, defined in terms of
+\emph{Open Balls} (\S\ref{subsec:metric_balls}). For a Metric Space
+$(M,d)$, the Set $U \subseteq M$ is \emph{Open} if
+\[
+    \forall x \in U, \exists r > 0 : B_r(x) \subseteq U
+\]
+where $B_r(x)$ is an Open Ball centered on Point $x$.
+
+Open Sets of a Metric Space $(M,d)$ have the following three
+properties:
+\begin{enumerate}
+\item $\varnothing, M$ are Open Sets
+\item If $U, V \in M$ are Open, then $U \cap V$ is Open in $M$
+\item If $\{ U_i \}_{i \in I}$ are Open, then $\bigcup_{i \in I}
+  U_i$ is an Open Set
+\end{enumerate}
+Note that an arbitrary Intersection of Open Sets is not necessarily an
+Open Set.
+
+% --------------------------------------------------------------------
+\subsection{Closed Set}\label{subsec:closed_set}
+% --------------------------------------------------------------------
+
+A Subset, $X \subseteq M$, of a Metric Space, $M$, is a \emph{Closed
+  Set} if the Relative Complement (\ref{subsec:set_difference}), $M
+\backslash X$, is an Open Set.
+
+The three Properties of Closed Sets:
+\begin{enumerate}
+\item Given Topological Space $(X, \tau)$, if $\varnothing, X \in
+  \tau$ then $\varnothing$ and $X$ are Closed
+\item If $C, D$ are Closed in $X$, then $C \cup D$ is Closed in $X$
+\item If $\{ U_i \}_{i \in I}$ are Closed, then $\bigcap_{i \in I}
+  U_i$ is Closed
+\end{enumerate}
+
+If $C$ is a Closed Set and $f$ is a Continuous Function
+(\S\ref{subsec:topological_continuity}), $f^{-1}(C)$ is a Closed Set.
+
+% --------------------------------------------------------------------
+\section{Point-set Topology}\label{sec:point_set}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Continuity}\label{subsec:topological_continuity}
+% --------------------------------------------------------------------
+
+\emph{Continuity} of a Function $f : X \rightarrow Y$ between Metric
+Spaces $(X,d)$ and $(Y,d')$ is defined at a Point $c$
+if
+\[
+    \forall \epsilon > 0, \exists \delta > 0 :
+    f (B_{\delta}(c)) \subseteq B_{\epsilon}(f(c))
+\]
+and likewise a \emph{Continuous Function} satisfies the above for all
+$c$.
+
+Alternatively, a Function $f: X \rightarrow Y$ is Continuous between
+Metric Spaces if and only if for all Open Sets $V \subseteq Y$,
+$f^{-1}(v)$ is an Open Set in $X$.
+
+Continuity of a Function, $f : X \rightarrow Y$, between Topological
+Spaces, $(X,\tau_1)$ and $(Y,\tau_2)$, is given by:
+\[
+    \forall V \in \tau_2, f^{-1}(V) \in \tau_1
+\]
+The following are Properties of Continuous Functions between
+Topological Spaces:
+\begin{enumerate}
+    \item Any Constant Function is Continuous
+    \item Given two Continuous Functions, $f : X \rightarrow Y$ and $g
+      : Y \rightarrow Z$, the Function $g \circ f : X \rightarrow Z$ is
+      Continuous
+    \item Given $f : (X, \tau)) \rightarrow (Y, \sigma)$, $f$ is
+      Continuous if $\tau = \mathcal{P}(X)$ (Discrete Topology) or $\sigma =
+      \{\varnothing, Y\}$ (Trivial Topology)
+\end{enumerate}
+
+% --------------------------------------------------------------------
+\subsection{Connectedness}\label{subsec:connectedness}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Compactness}\label{subsec:compactness}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Algebraic Topology}\label{sec:algebraic_topology}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\subsection{Homology Theory}\label{subsec:homology_theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Geometric Topology}\label{sec:geometric_topology}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+\subsection{Manifold}\label{subsec:manifold}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Algebraic Geometry}\label{sec:algebraic_geometry}
+% --------------------------------------------------------------------
+
+\emph{Valuation}
+
+% --------------------------------------------------------------------
+\section{Singularity Theory}\label{sec:singularity_theory}
+% --------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Graph Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3716,194 +4074,6 @@ This is the definition of a Symmetric Relation
 \input{tex/category-theory.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Topology}\label{sec:topology}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-A \emph{Topology}, $\tau$, is a collection of Subsets of a
-\emph{Metric Space} (\S\ref{sec:metric_space}), $M$, called \emph{Open
-  Sets} (\S\ref{sec:open_sets}) subject to the following Inductive
-definition:
-\begin{enumerate}
-\item $\varnothing \in \tau, M \in \tau$
-\item $U,V \in \tau \rightarrow U \cap V \in \tau$
-\item $\{U_i\}_{i \in I} \subseteq \tau \rightarrow \bigcup_{i \in I}
-  U_i$
-\end{enumerate}
-A \emph{Topological Space} is a pair consisting of a Metric Space,
-$M$, and a Toplogy, $\tau$ on that Metric Space:
-\[
-    (M,\tau)
-\]
-
-Every Metric Space gives a Topology, but Topologies may exist for
-which there is no definable Metric Space. %FIXME explain
-
-Given a Metric Space $M$, the following Topologies may be described:
-\begin{description}
-\item[Trivial Topology] $\tau = \{\varnothing, M\}$ (Open Sets under
-  any Metric)
-
-\item[Discrete Topology] $\tau = \mathcal{P}(M)$ (Open Sets under
-  Discrete Metric)
-\end{description}
-
-\emph{Interior}
-
-% --------------------------------------------------------------------
-\section{Metric Space}\label{sec:metric_space}
-% --------------------------------------------------------------------
-
-A \emph{Metric Space} is a Set $M$ for which a \emph{Metric} is
-defined for all Elements of that Set. A Metric is \emph{Distance
-  Function} defined between all Elements or Points of a Metric Space.
-
-A Metric Space $M$ can then be defined as the pair:
-\[
-    (M,d)
-\]
-where $M$ is a Set of Elements and the Distance Function $d$ has the
-form:
-\[
-    d: M \times M \rightarrow \mathbb{R}^{+}
-\]
-with the following conditions:
-\begin{enumerate}
-\item $d(x_1, x_2) \geq 0$ (\emph{Non-negativity} or \emph{Separation
-  Axiom})
-\item $d(x_1, x_2) = 0 \leftrightarrow x_1 = x_2$ (\emph{Identity of
-  Indiscernables} or \emph{Coincidence Axiom})
-\item $d(x_1, x_2) = d(x_2, x_1)$ (\emph{Symmetry})
-\item $d(x_1, x_3) \leq d(x_1, x_2) + d(x_2, x_3)$
-  (\emph{Subadditivity} or \emph{Triangle Inequality})
-\end{enumerate}
-
-\emph{Continuity} of a Function $f : X \rightarrow Y$ between Metric
-Spaces $(X,d)$ and $(Y,d')$ is defined at a Point $c$
-if
-\[
-    \forall \epsilon > 0, \exists \delta > 0 :
-    f (B_{\delta}(c)) \subseteq B_{\epsilon}(f(c))
-\]
-and a Function is likewise a \emph{Continuous Function} if it
-satisfies the above for all $c$.
-
-Alternatively, a Function $f: X \rightarrow Y$ is Continuous if and
-only if for all Open Sets $V \subseteq Y$, $f^{-1}(v)$ is an Open Set
-in $X$.
-
-% --------------------------------------------------------------------
-\subsection{Metrics}\label{subsec:metrics}
-% --------------------------------------------------------------------
-
-\emph{Euclidean Metric}:
-\[
-    d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
-\]\[
-    (\mathbf{p},\mathbf{q}) \mapsto \sqrt{\sum_{i=1}^{n}(q_i - p_i)^2}
-\]
-
-\emph{Discrete Metric}:
-\[
-    d: X \times X \rightarrow \mathbb{R}^{+}
-\]\[
-    (\mathbf{p},\mathbf{q}) \mapsto \left\{
-    \begin{array}{l l}
-        0: \mathbf{p} = \mathbf{q}\\
-        1: \mathbf{p} \neq \mathbf{q}
-    \end{array}\right.
-\]
-
-\emph{Max Metric}:
-\[
-    d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
-\]\[
-    (\mathbf{p},\mathbf{q}) \mapsto max_{1 \leq i \leq n}\{|q_i - p_i|\}
-\]
-
-\emph{Taxicab Metric}:
-\[
-    d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
-\]\[
-    (\mathbf{p},\mathbf{q}) \mapsto \sum_{i=1}^{n}|q_i - p_i|
-\]
-
-% --------------------------------------------------------------------
-\section{Open Sets}\label{sec:open_sets}
-% --------------------------------------------------------------------
-
-An \emph{Open Set} is a Subset of a Metric Space, defined in terms of
-\emph{Open Balls} (\S\ref{subsec:metric_balls}). For a Metric Space
-$(M,d)$, the Set $U \subseteq M$ is \emph{Open} if
-\[
-    \forall x \in U, \exists r > 0 : B_r(x) \subseteq U
-\]
-where $B_r(x)$ is an Open Ball centered on Point $x$.
-
-Open Sets of a Metric Space $(M,d)$ have the following three
-properties:
-\begin{enumerate}
-\item $\varnothing, M$ are Open Sets
-\item If $U, V \in M$ are Open, then $U \cap V$ is Open in $M$
-\item $\{ U_i \}_{i \in I}$ are Open, then $\bigcup_{i \in I}
-  U_i$ is an Open Set
-\end{enumerate}
-Note that an arbitrary Intersection of Open Sets is not necessarily an
-Open Set.
-
-% --------------------------------------------------------------------
-\subsection{Balls}\label{subsec:metric_balls}
-% --------------------------------------------------------------------
-
-A Metric \emph{Ball} is defined for a Point $p$ in a Metric Space
-$(M,d)$ as the set of all Points (including $p$) within a given Radius
-$r > 0$ as determined by the Distance Function of the Metric Space:
-\[
-    B_r(p) = {x \in M | d(x,p) < r }
-\]
-The above is termed an \emph{Open Ball} because it does not include
-the points where $d(x,p) = r$. Such a Ball including these additional
-Points is called a \emph{Closed Ball}.
-
-% --------------------------------------------------------------------
-\section{Continuous Functions}\label{sec:continuous_functions}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\section{Algebraic Topology}\label{sec:algebraic_topology}
-% --------------------------------------------------------------------
-% --------------------------------------------------------------------
-\subsection{Homology Theory}\label{subsec:homology_theory}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\section{Geometric Topology}\label{sec:geometric_topology}
-% --------------------------------------------------------------------
-% --------------------------------------------------------------------
-\subsection{Manifold}\label{subsec:manifold}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\section{Algebraic Geometry}\label{sec:algebraic_geometry}
-% --------------------------------------------------------------------
-
-\emph{Valuation}
-
-% --------------------------------------------------------------------
-\section{Singularity Theory}\label{sec:singularity_theory}
-% --------------------------------------------------------------------
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Complexity Theory}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% --------------------------------------------------------------------
-\section{Algorithms}
-% --------------------------------------------------------------------
-
-An \emph{Algorithm} may be formalized as a sequence of operations that
-can be simulated by a Turing-complete system and any function
-that is computable by Algorithm is a \emph{computable function}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Database Theory}\label{sec:database_theory}
@@ -4088,6 +4258,12 @@ that is computable by Algorithm is a \emph{computable function}.
     \emph{Homotopy Type Theory},
     Institude for Advanced Study,
     2013
+
+\bibitem{ts0}
+    Locally Compact,
+    https://www.youtube.com/playlist?list=PLF94A6F65866F3F31,
+    Thought Space Zero,
+    2011
 
 \end{thebibliography}
 
