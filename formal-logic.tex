@@ -1475,6 +1475,8 @@ partition the Domain.
 either Conjunctons and Disjunctions, infinite-arity Relations and
 Functions, or Quantification over infinitely many Variables.
 
+\paragraph{$\Omega$-logic}\label{subsec:omega_logic}
+
 % --------------------------------------------------------------------
 \subsection{Higher-order - Plural}\label{subsec:higher_order}
 % --------------------------------------------------------------------
@@ -2141,16 +2143,37 @@ only Literals that unify with a Literal already on the branch
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Recursion Theory}\cite{czoo14}
+\part{Computability Theory}\cite{czoo14}\label{sec:recursion_theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+also \emph{Recursion Theory}
 
 \emph{Church-Turing}
 
 \emph{Blum Axioms}
 
+\emph{Semidecidable} = \emph{Recursively Enumerable}
+
+\emph{Decidable} = \emph{Recursive} = \emph{Computable}
+
+
 % --------------------------------------------------------------------
 \section{Computable Function}\label{sec:computable_function}
 % --------------------------------------------------------------------
+
+\emph{Computable Function}
+
+Computable Functions are the formalized analogues of \emph{Algorithms}
+(\S\ref{subsec:algorithm}).
+
+There are several equivalent definitions of the class of Computable
+Functions, which have reference to different \emph{Models of
+  Computation} (\S\ref{sec:computation_model}):
+\begin{enumerate}
+\item Turing-computable Functions
+\item $\mu$-recursive Functions
+\item $\lambda$-recursive Functions
+\end{enumerate}
 
 % --------------------------------------------------------------------
 \subsection{Recursive Function}\label{subsec:recursive_function}
@@ -2159,6 +2182,8 @@ only Literals that unify with a Literal already on the branch
 \emph{Partial Recursive Function}
 
 \emph{Total Recursive Function}
+
+\emph{Recursively Enumerable} $\mathbf{coRE}$
 
 % --------------------------------------------------------------------
 \subsubsection{Primitive Recursion}\label{subsec:primitive_recursion}
@@ -3476,7 +3501,7 @@ $m_U : U \rightarrow \mathbb{N}$ where $a \in U, a \notin A
 \emph{Indicator Function}
 
 % --------------------------------------------------------------------
-\section{Classes}\label{sec:classes}
+\section{Class}\label{sec:class}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -3528,6 +3553,10 @@ with the result given the function $f$ above
 \]
 
 \emph{Empty Function}
+
+\emph{Finitary Function}
+
+\emph{Infinitary Function}
 
 % --------------------------------------------------------------------
 \subsection{Injective Function}\label{subsec:injective_function}
@@ -3814,25 +3843,9 @@ definition:
 \item $\{U_i\}_{i \in I} \subseteq \tau \rightarrow \bigcup_{i \in I}
   U_i \in \tau$
 \end{enumerate}
-A \emph{Topological Space} is a pair consisting of a Metric Space,
-$M$, and a Toplogy, $\tau$ on that Metric Space:
-\[
-    (M,\tau)
-\]
 
-Every Metric Space gives a Topology, but Topologies may exist for
-which there is no definable Metric Space. %FIXME explain
-
-Given a Metric Space $M$, the following Topologies may be described:
-\begin{description}
-\item[Trivial Topology] $\tau = \{\varnothing, M\}$ (Open Sets under
-  any Metric)
-
-\item[Discrete Topology] $\tau = \mathcal{P}(M)$ (Open Sets under
-  Discrete Metric)
-\end{description}
-
-\emph{Interior}
+An equivalent definition is possible in terms of \emph{Closed Sets}
+(\S\ref{subsec:closed_sets}).
 
 % --------------------------------------------------------------------
 \section{Metric Space}\label{sec:metric_space}
@@ -3967,8 +3980,73 @@ If $C$ is a Closed Set and $f$ is a Continuous Function
 (\S\ref{subsec:topological_continuity}), $f^{-1}(C)$ is a Closed Set.
 
 % --------------------------------------------------------------------
+\section{Topological Space}\label{sec:topological_space}
+% --------------------------------------------------------------------
+
+A \emph{Topological Space} is a pair consisting of a Metric Space,
+$M$, and a Toplogy, $\tau$ on that Metric Space:
+\[
+    (M,\tau)
+\]
+
+Every Metric Space gives a Topology, but Topologies may exist for
+which there is no definable Metric Space. %FIXME explain
+
+Given a Metric Space $M$, the following Topologies may be described:
+\begin{description}
+\item[Trivial Topology] $\tau = \{\varnothing, M\}$ (Open Sets under
+  any Metric)
+
+\item[Discrete Topology] $\tau = \mathcal{P}(M)$ (Open Sets under
+  Discrete Metric)
+\end{description}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Base}\label{subsec:topological_base}
+% --------------------------------------------------------------------
+
+A \emph{Base}, $B$, is a Subset of a Topology, $\tau$, in a Metric
+Space, $(M,\tau)$, such that:
+\[
+    \forall U \in \tau, \exists \{B_i\}_{i \in I} \subseteq B :
+    \bigcup_{i \in I}B_i = U
+\]
+Properties:
+\begin{enumerate}
+    \item $B$ is a \emph{Covering} of $M$, as stated by:
+\[
+    M \subseteq \bigcup_{i \in I} B_i
+\]
+
+    \item
+\[
+    \forall B_1, B_2 \in B, \forall x \in B_1 \cap B_2,
+    \exists B_3 \in B : x \in B_3 \wedge B_3 \subseteq B_1 \cap B_2
+\]
+
+\end{enumerate}
+An example of a Base is the Set of all Open Balls in a Metric Space.
+
+A Base is not necessarily Unique for a given Topology.
+
+\subsubsection{Subbase}
+
+A \emph{Subbase}, $S$, is a Subset of a Topology, $\tau$, in a Metric
+Space, $(M,\tau)$, such that the Set:
+\[
+    S \subseteq \tau : \{ \bigcap_{j \in J} S_j : |J| < \infty \}
+\]
+is a Base for $\tau$.
+
+There is no unique Subbase for a given Topology.
+
+% --------------------------------------------------------------------
 \section{Point-set Topology}\label{sec:point_set}
 % --------------------------------------------------------------------
+
+\emph{Interior}
 
 % --------------------------------------------------------------------
 \subsection{Continuity}\label{subsec:topological_continuity}
