@@ -2140,6 +2140,10 @@ only Literals that unify with a Literal already on the branch
 (\emph{Weak Connectedness}) or a Literal in the current leaf
 (\emph{Strong Connectedness}).
 
+% --------------------------------------------------------------------
+\section{Reverse Mathematics} \label{sec:reverse_mathematics}
+% --------------------------------------------------------------------
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2156,6 +2160,13 @@ also \emph{Recursion Theory}
 
 \emph{Decidable} = \emph{Recursive} = \emph{Computable}
 
+% --------------------------------------------------------------------
+\section{Uncomputable Function}\label{sec:uncomputable_function}
+% --------------------------------------------------------------------
+
+\emph{Algorithmically Unsolvable}
+
+\emph{Turing Degree}
 
 
 % --------------------------------------------------------------------
@@ -2193,6 +2204,9 @@ Recursively Enumerable.
 
 \emph{Recursively Enumerable} $\mathbf{coRE}$
 
+The Lattice (\S\ref{subsec:lattice}) of $\mathbf{RE}$ Sets under
+Inclusion is denoted $\mathcal{E}$.
+
 % --------------------------------------------------------------------
 \subsection{Total Computable Function}\label{subsec:recursive_function}
 % --------------------------------------------------------------------
@@ -2219,10 +2233,6 @@ and the Operations:
       $m$-ary Primitive Recursive Functions, $g_1, \ldots, g_k$, %FIXME
     \item \emph{Primitive Recursion}:
 \end{enumerate}
-
-% --------------------------------------------------------------------
-\section{$\alpha$-recursion Theory}\label{sec:alpha_recursion}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Models of Computation}\label{sec:computation_model}
@@ -2278,6 +2288,8 @@ can be simulated by a Turing-complete system and any function that is
 computable by Algorithm is a Computable Function
 (\S\ref{sec:computable_function}).
 
+\subsubsection{Algorithmic Randomness}\label{subsec:algorithmic_randomness}
+
 % --------------------------------------------------------------------
 \subsection{Function Problem}\label{subsec:function_problem}
 % --------------------------------------------------------------------
@@ -2317,6 +2329,20 @@ $\mathbf{PR} \subset \mathbf{R} = \mathbf{RE} \cap \mathbf{coRE}$
 \paragraph{Polynomial Hierarchy}
 
 \paragraph{Polynomial Communication Hierarchy}
+
+% --------------------------------------------------------------------
+\section{Hypercomputation}\label{sec:hypercomputation}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{$alpha$-recursion Theory}\label{subsec:alpha_recursion}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Hyperarithmetical Theory}\label{subsec:hyperarithmetical_theory}
+% --------------------------------------------------------------------
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Formal Semantics}
@@ -3288,6 +3314,10 @@ in some System of Logic.
 \subsection{Normalization \& Confluence}\label{subsec:normalization_confluence}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\section{Inner Model Theory}\label{sec:inner_model_theory}
+% --------------------------------------------------------------------
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3371,7 +3401,9 @@ $a : A$ (Term) & Proof \\
 
 \emph{Set Theory} is formulated within First-order Logic
 (\S\ref{subsec:predicate_logic}) and as such the objects of Set Theory
-are Sets and Propositions.
+are Sets and Propositions. See \emph{Axiomatic Set Theory}
+(\S\ref{sec:axiomatic_set_theory}) for specific formulations of Set
+theory.
 
 % --------------------------------------------------------------------
 \section{Definition}\label{sec:set_definition}
@@ -3408,6 +3440,9 @@ and Sets to True or False depending on whether the object is a
 \emph{Member} (or \emph{Element}) of the Set, e.g. $x \in A$ is True
 when the object $x$ is a Member of the Set $A$.
 
+An Element that is specifically not a Set is called an
+\emph{Individual} or \emph{Urelement}.
+
 \emph{Extension}
 
 \emph{Intension}
@@ -3431,6 +3466,16 @@ is denoted $\{\}$ or $\varnothing$. A Set with Cardinality 1 is called a
 % --------------------------------------------------------------------
 \subsubsection{Union}
 % --------------------------------------------------------------------
+
+\emph{Union}
+
+% --------------------------------------------------------------------
+\subsubsection{Infinitary Union}
+% --------------------------------------------------------------------
+
+\[
+    x \in \bigcup S \leftrightarrow \exists y \in S : x \in y
+\]
 
 % --------------------------------------------------------------------
 \subsubsection{Intersection}
@@ -3509,6 +3554,46 @@ Family may be denoted
 % --------------------------------------------------------------------
 
 \subsubsection{Recursively Enumerable Set}\label{subsec:recursively_enumerable}
+
+% --------------------------------------------------------------------
+\section{Axiomatic Set Theory}\label{sec:axiomatic_set_theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Zermelo-Fraenkel (ZFC)}\label{subsec:zermelo_fraenkel}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Kripke-Platek (KP)}\label{subsec:kripke_platek}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Transitive Set}\label{sec:transitive_set}
+% --------------------------------------------------------------------
+
+A Set, $S$, is \emph{Transitive} if and only if
+\[
+    \bigcup S \subseteq S
+\]
+
+For two Transitive Sets, $S$ and $T$, the Set $S \cup T \cup \{S,T\}$
+is Transitive.
+
+A Set, $S$, containing no Urelements is Transitive if and only if $S
+\subset \mathcal{P}(X)$
+
+\emph{Transitive Closure}
+
+% --------------------------------------------------------------------
+\subsection{Admissible Set}\label{subsec:admissible_set}
+% --------------------------------------------------------------------
+
+An \emph{Admissible Set}, $A$, is a Transitive Set such that $\langle
+A, \in \rangle$ is a Model (\S\ref{subsec:model_theory}) of Kripke-Platek Set
+Theory (\S\ref{subsec:kripke_platek}).
+
+The smallest example of an Admissible Set is the Set of
+\emph{Hereditarily Finite Sets}. %FIXME ref hereditarily finite
 
 % --------------------------------------------------------------------
 \section{Multisets}\label{sec:multi_sets}
@@ -3832,11 +3917,11 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 \emph{Lexicographic Order}
 
 % --------------------------------------------------------------------
-\subsection{Lattices}
+\subsection{Lattice}\label{subsec:lattice}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsubsection{Free Lattices}
+\subsubsection{Free Lattice}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -3854,6 +3939,9 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 % --------------------------------------------------------------------
 \subsection{Effective Descriptive Set Theory}
 % --------------------------------------------------------------------
+
+Combination of Descriptive Set Theory with \emph{Recursion Theory}
+(Part \ref{sec:computability_theory}).
 
 % --------------------------------------------------------------------
 \section{Combinatorics}
@@ -4260,7 +4348,19 @@ This is the definition of a Symmetric Relation
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\section{Sieve Theory}\label{sec:sieve_theory}
+\section{Ordinal Number}\label{sec:ordinal_number}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Admissible Number}\label{sec:admissible_ordinal}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Cardinal Number}\label{sec:cardinal_number}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Infinitesimal}\label{sec:infinitesimal}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -4268,6 +4368,30 @@ This is the definition of a Symmetric Relation
 % --------------------------------------------------------------------
 % --------------------------------------------------------------------
 \subsection{Dirichlet L-Series}\label{subsec:l_series}
+% --------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Mathematical Analysis}\label{sec:mathematical_analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Numerical Analysis}\label{sec:numerical_analysis}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Real Analysis}\label{subsec:real_analysis}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Non-standard Analysis}\label{sec:nonstandard_analysis}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Computable Analysis}\label{sec:computable_analysis}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\section{Constructive Analysis}\label{sec:constructive_analysis}
 % --------------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
