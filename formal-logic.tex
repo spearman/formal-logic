@@ -695,7 +695,7 @@ Grammar) and outputs the source code of a Parser for the Language
 specified by the Grammar.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Automata Theory}
+\part{Automata Theory}\label{sec:automata_theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % --------------------------------------------------------------------
@@ -2157,14 +2157,18 @@ also \emph{Recursion Theory}
 \emph{Decidable} = \emph{Recursive} = \emph{Computable}
 
 
+
 % --------------------------------------------------------------------
 \section{Computable Function}\label{sec:computable_function}
 % --------------------------------------------------------------------
 
-\emph{Computable Function}
-
-Computable Functions are the formalized analogues of \emph{Algorithms}
+\emph{Computable Functions} are the formalized analogues of \emph{Algorithms}
 (\S\ref{subsec:algorithm}).
+
+\emph{Computable Functions} may be broadly divided into two Classes by
+whether they are \emph{Partial} or \emph{Total}. A Total Computable
+Function is sometimes called a (Total) \emph{Recursive} or
+\emph{Decidable Function}.
 
 There are several equivalent definitions of the class of Computable
 Functions, which have reference to different \emph{Models of
@@ -2176,14 +2180,24 @@ Functions, which have reference to different \emph{Models of
 \end{enumerate}
 
 % --------------------------------------------------------------------
-\subsection{Recursive Function}\label{subsec:recursive_function}
+\subsection{Partial Computable Function}\label{subsec:partial_recursive}
 % --------------------------------------------------------------------
 
-\emph{Partial Recursive Function}
-
-\emph{Total Recursive Function}
+A \emph{Partial Computable Function} (\emph{Partial Recursive
+  Function}) is also called \emph{Semidecidable} or \emph{Recursively
+  Enumerable} and are the Class of Functions capable of generating
+\emph{Recursively Enumerable Sets}
+(\S\ref{subsec:recursively_enumerable}). A Set, $T$, is
+\emph{Co-recursively Enumerable} if the Compliment $\mathbb{N} \ T$ is
+Recursively Enumerable.
 
 \emph{Recursively Enumerable} $\mathbf{coRE}$
+
+% --------------------------------------------------------------------
+\subsection{Total Computable Function}\label{subsec:recursive_function}
+% --------------------------------------------------------------------
+
+\emph{Total Recursive Function}
 
 % --------------------------------------------------------------------
 \subsubsection{Primitive Recursion}\label{subsec:primitive_recursion}
@@ -2256,7 +2270,7 @@ also \emph{Post Tag Machine}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Algorithm}
+\subsection{Algorithm}\label{subsec:algorithm}
 % --------------------------------------------------------------------
 
 An \emph{Algorithm} may be formalized as a sequence of operations that
@@ -2285,6 +2299,8 @@ $\mathbf{PR} \subset \mathbf{R} = \mathbf{RE} \cap \mathbf{coRE}$
 \paragraph{Arithmetic Hierarchy}
 
 \[
+    \Delta_0 = \Sigma_0 = \Pi_0 = \mathbf{R}
+\]\[
     \Sigma_1^0 \leftrightarrow \mathbf{RE}
 \]\[
     \Pi_1^0 \leftrightarrow \mathbf{coRE}
@@ -3303,7 +3319,7 @@ with a Deductive Apparatus (\S\ref{subsec:deductive_apparatus})
 consisting of Inference Rules only and no Axioms.
 
 % --------------------------------------------------------------------
-\subsection{Context}\label{subsec:type_context}
+\section{Context}\label{subsec:type_context}
 % --------------------------------------------------------------------
 
 Context, ordered list of assumptions
@@ -3323,6 +3339,15 @@ Context, ordered list of assumptions
 
 \emph{Intuitionistic Type Theory} (also \emph{Constructive Type Theory} or
 \emph{Martin-L\"of Type Theory})
+
+% --------------------------------------------------------------------
+\subsection{Intensional \& Extensional Type Theory}
+\label{subsec:intension_extension}
+% --------------------------------------------------------------------
+
+\emph{Canonical Form}
+
+\emph{Normal Form}
 
 
 
@@ -3480,6 +3505,12 @@ Family may be denoted
 \]
 
 % --------------------------------------------------------------------
+\subsection{Recursive Set}\label{subsec:recursive_set}
+% --------------------------------------------------------------------
+
+\subsubsection{Recursively Enumerable Set}\label{subsec:recursively_enumerable}
+
+% --------------------------------------------------------------------
 \section{Multisets}\label{sec:multi_sets}
 % --------------------------------------------------------------------
 
@@ -3516,7 +3547,16 @@ A \emph{Function} $f$, defined for all Members of Set $A$ and $image(f)
 The \emph{Input} or \emph{Domain} of $f$ is denoted $dom(f)$ and the
 \emph{Ouptut} or \emph{Co-domain} as $cod(f)$. The \emph{Image} of the
 Function is the Subset of the Codomain that the Function actually Maps
-to. In the case where $image(f) = cod(f)$, $f$ is known as a
+to, and the Subset of the Domain that Maps to it is called the
+\emph{Preimage}. Each Element of the Preimage Maps to one Element of
+the Image. This Property is expressed as
+\[
+    (a,b) \in f \wedge (a,c) \in f \rightarrow b = c
+\]
+A Relation without this Property is known as a \emph{Multimap}
+(\S\ref{subsec:multimap}).
+
+In the case where $image(f) = cod(f)$, $f$ is known as a
 \emph{Surjective Function} (\S\ref{subsec:surjective_function}).
 
 \emph{Function Equality} is defined such that Equal Functions have the
@@ -3845,7 +3885,7 @@ definition:
 \end{enumerate}
 
 An equivalent definition is possible in terms of \emph{Closed Sets}
-(\S\ref{subsec:closed_sets}).
+(\S\ref{subsec:closed_set}).
 
 % --------------------------------------------------------------------
 \section{Metric Space}\label{sec:metric_space}
