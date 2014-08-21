@@ -1481,13 +1481,15 @@ Functions, or Quantification over infinitely many Variables.
 \subsection{Higher-order - Plural}\label{subsec:higher_order}
 % --------------------------------------------------------------------
 
-\subsubsection{Second-order}
+\subsubsection{Second-order}\label{subsec:second_order}
 
 \emph{Second-order Logic} allows for Quantifiers to range over
 Relations and Functions and thus \emph{Sorts} of Variables that range
 over $k$-ary Relations and Functions. It is possible to leave out a
 definition of Quantifiers for Functions since $k$-ary Functions can be
-represented by $k+1$-ary Relations.\cite{shapiro00}
+represented by $k+1$-ary Relations.\cite{shapiro00} Quantification
+over Functions allows the creation of the \emph{Analytic Hierarchy}
+(\S\ref{subsec:analytic_hierarchy}).
 
 \subsubsection{Plural, Monadic Second-order Logic}
 
@@ -1808,6 +1810,10 @@ proved. \emph{Mathematical Induction} is the bottom-up,
 to the more general by means of Implication (the Inductive step). Note
 that Mathematical Induction is not \emph{Inductive Reasoning} which is
 an empirical or probabilistic Inference and not a form of Deduction.
+The \emph{Principle of Mathematical Induction}
+(\S\ref{subsec:induction_principle}) is an application of Mathematical
+Induction to the \emph{Natural Numbers}
+(\S\ref{sec:natural_number}).
 
 An \emph{Theoretic Analytic Proof} begins with an assumption and
 proceeds to an accepted truth (an Axiom, or contradiction as in
@@ -2147,34 +2153,42 @@ only Literals that unify with a Literal already on the branch
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Computability Theory}\cite{czoo14}\label{sec:recursion_theory}
+\part{Computation Theory}\cite{czoo14}\label{sec:recursion_theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 also \emph{Recursion Theory}
 
 \emph{Church-Turing}
 
-\emph{Blum Axioms}
+% --------------------------------------------------------------------
+\section{Effective Method}\label{sec:effective_method}
+% --------------------------------------------------------------------
 
-\emph{Semidecidable} = \emph{Recursively Enumerable}
-
-\emph{Decidable} = \emph{Recursive} = \emph{Computable}
+An \emph{Effective Method} is a mechanical procedure for solving a
+\emph{Function} (\S\ref{sec:set_function}) or \emph{Decision Problem}
+(\S\ref{subsec:decidability}) of a specific \emph{Complexity Class}
+(\S\ref{sec:complexity_theory}).
 
 % --------------------------------------------------------------------
-\section{Uncomputable Function}\label{sec:uncomputable_function}
+\section{Noncomputable Function}\label{sec:noncomputable_function}
 % --------------------------------------------------------------------
+
+also \emph{Undecidable Function}
 
 \emph{Algorithmically Unsolvable}
 
 \emph{Turing Degree}
 
-
 % --------------------------------------------------------------------
 \section{Computable Function}\label{sec:computable_function}
 % --------------------------------------------------------------------
 
-\emph{Computable Functions} are the formalized analogues of \emph{Algorithms}
-(\S\ref{subsec:algorithm}).
+\emph{Computable Number} (\S\ref{subsec:computable_real})
+
+\emph{Computable Functions} are the formalized analogues of
+\emph{Algorithms} (\S\ref{subsec:algorithm}); that is a Function that
+is \emph{Effectively Calculable} by an Effective Method
+(\S\ref{sec:effective_method}).
 
 \emph{Computable Functions} may be broadly divided into two Classes by
 whether they are \emph{Partial} or \emph{Total}. A Total Computable
@@ -2202,9 +2216,9 @@ A \emph{Partial Computable Function} (\emph{Partial Recursive
 \emph{Co-recursively Enumerable} if the Compliment $\mathbb{N} \ T$ is
 Recursively Enumerable.
 
-\emph{Recursively Enumerable} $\mathbf{coRE}$
+\emph{Recursively Enumerable} $\mathsf{coRE}$
 
-The Lattice (\S\ref{subsec:lattice}) of $\mathbf{RE}$ Sets under
+The Lattice (\S\ref{subsec:lattice}) of $\mathsf{RE}$ Sets under
 Inclusion is denoted $\mathcal{E}$.
 
 % --------------------------------------------------------------------
@@ -2217,7 +2231,7 @@ Inclusion is denoted $\mathcal{E}$.
 \subsubsection{Primitive Recursion}\label{subsec:primitive_recursion}
 % --------------------------------------------------------------------
 
-The Class of \emph{Primitive Recursive Functions}, $\mathbf{PR}$, are
+The Class of \emph{Primitive Recursive Functions}, $\mathsf{PR}$, are
 those given by three Axioms:
 \begin{enumerate}
     \item The $0$-ary \emph{Constant Function}, $0$, is Primitive
@@ -2230,7 +2244,7 @@ those given by three Axioms:
 and the Operations:
 \begin{enumerate}
     \item \emph{Composition}: Given a $k$-ary function, $f$, and $k$
-      $m$-ary Primitive Recursive Functions, $g_1, \ldots, g_k$, %FIXME
+      $m$-ary Primitive Recursive Functions, $g_1, \ldots, g_k$,
     \item \emph{Primitive Recursion}:
 \end{enumerate}
 
@@ -2276,7 +2290,7 @@ also \emph{Post Tag Machine}
 \subsubsection{Random Access Stored Program Machine}
 
 % --------------------------------------------------------------------
-\section{Complexity Theory}
+\section{Complexity Theory}\label{sec:complexity_theory}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -2298,27 +2312,73 @@ computable by Algorithm is a Computable Function
 \subsection{Complexity Class}\label{subsec:complexity_class}
 % --------------------------------------------------------------------
 
-$\mathbf{PR} \subset \mathbf{R} = \mathbf{RE} \cap \mathbf{coRE}$
+$\mathsf{PR} \subset \mathsf{R} = \mathsf{RE} \cap \mathsf{coRE}$
+
+
 
 \subsubsection{Hierarchies}\label{subsec:complexity_hierarchy}
 
 \[
-    \mathbf{AC^0} \subseteq \mathbf{L} \subseteq \mathbf{NC} \subseteq
-    \mathbf{P} \subseteq \mathbf{PSPACE} \subseteq \mathbf{EXP}
-    \subseteq \mathbf{ALL}
+    \mathsf{AC^0} \subseteq \mathsf{L} \subseteq \mathsf{NC} \subseteq
+    \mathsf{P} \subseteq \mathsf{PSPACE} \subseteq \mathsf{EXP}
+    \subseteq \mathsf{ALL}
 \]
 
 \paragraph{Arithmetic Hierarchy}
 
 \[
-    \Delta_0 = \Sigma_0 = \Pi_0 = \mathbf{R}
+    \Delta_0 = \Sigma_0 = \Pi_0 = \mathsf{R}
 \]\[
-    \Sigma_1^0 \leftrightarrow \mathbf{RE}
+    \Sigma_1^0 \leftrightarrow \mathsf{RE}
 \]\[
-    \Pi_1^0 \leftrightarrow \mathbf{coRE}
+    \Pi_1^0 \leftrightarrow \mathsf{coRE}
 \]
 
 \paragraph{Boolean Hierarchy}
+
+\paragraph{Analytic Hierarchy}\label{subsec:analytic_hierarchy}
+\hfill \\
+Classification of Sets of Natural Numbers on the difficulty of
+specifying in \emph{Second-order Arithmetic}
+(\S\ref{subsec:second_order}).
+
+Every Formula in the Language of Second-order Arithmetic is in
+$\Sigma^1_n$ or $\Pi^1_n$ for some $n$.
+
+Second-order Arithmetic with no Function Quantifiers:
+\[
+    \Delta^1_0 = \Sigma^1_0 = \Pi^1_0
+\]
+
+Second-order Arithmetic with Existential Set Quantifiers only:
+\[
+    \Sigma^1_1
+\]
+
+Second-order Arithmetic with Universal Function Quantifiers only:
+\[
+    \Pi^1_1
+\]
+Both $\Sigma^1_1$ and $\Pi^1_1$ are strictly larger than $\Delta^1_0$.
+
+Second-order Arithmetic with both Existential and Universal Function
+Quantifiers-- the class of \emph{Hyperarithmetic Sets}:
+\[
+    \Delta^1_1 = \Sigma^1_1 \cap \Pi^1_1
+\]
+is larger than $\Delta^1_0$.
+
+$\Pi^1_1$ Formulas quantified over by Existential Functional
+Quantifiers results in the Class $\Sigma^1_2$.
+
+$\Sigma^1_1$ Formulas quantified over by Universal Functional
+Quantifiers results in the Class $\Pi^1_2$.
+
+Again, $\Delta^1_2$ is the Intersection of $\Sigma^1_2$ and $\Pi^1_2$
+and Inductively this procedure extends to $\Sigma^1_n$, $\Pi^1_n$, and
+$\Delta^1_n$.
+
+
 
 \paragraph{Counting Hierarchy}
 
@@ -2330,8 +2390,18 @@ $\mathbf{PR} \subset \mathbf{R} = \mathbf{RE} \cap \mathbf{coRE}$
 
 \paragraph{Polynomial Communication Hierarchy}
 
+
+
+\subsubsection{Blum Complexity Measure}
+
+\emph{Blum Axioms}
+
 % --------------------------------------------------------------------
 \section{Hypercomputation}\label{sec:hypercomputation}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Oracle}\label{sec:oracle}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -2622,14 +2692,13 @@ section) on a Structure form a \emph{Lattice}.
 \subsubsection{Closed Subsets}
 % --------------------------------------------------------------------
 
-%FIXME: ref Finitary Closure Operator in Set Theory
 A Subset of a Domain is a \emph{Closed Subset} if it is closed under
 the Operators of the Structure. For any Subset, $B$, of a Domain,
 $|\mathcal{A}|$, there is a \emph{smallest Closed Subset} of
 $|\mathcal{A}|$ that contains $B$ called the \emph{Hull} of $B$
 denoted by $\langle B \rangle$ or $\langle B \rangle_{\mathcal{A}}$,
 which is said to be \emph{generated} by $B$. $\langle \rangle$ is the
-\emph{Finitary Closure Operator}.
+\emph{Finitary Closure Operator} (\S\ref{subsec:finitary_closure}).
 
 % --------------------------------------------------------------------
 \subsubsection{Embedding}\label{subsec:sigma_embedding}
@@ -3428,6 +3497,24 @@ the \emph{Extension} of that Property.
 \emph{Vicious Circle Principle}
 
 % --------------------------------------------------------------------
+\subsection{Recursive Definition}\label{subsec:recursive_definition}
+% --------------------------------------------------------------------
+
+\emph{Recursive} = \emph{Inductive}
+
+\begin{enumerate}
+    \item Base case
+    \item Inductive clause
+    \item Extremal clause
+\end{enumerate}
+
+% --------------------------------------------------------------------
+\subsection{Circular Definition}\label{subsec:circular_definition}
+% --------------------------------------------------------------------
+
+\emph{Homoiconic}
+
+% --------------------------------------------------------------------
 \section{Sets}\label{sec:sets}
 % --------------------------------------------------------------------
 
@@ -3463,27 +3550,25 @@ is denoted $\{\}$ or $\varnothing$. A Set with Cardinality 1 is called a
 \subsection{Binary Set Operators}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
 \subsubsection{Union}
-% --------------------------------------------------------------------
 
 \emph{Union}
 
-% --------------------------------------------------------------------
+
+
 \subsubsection{Infinitary Union}
-% --------------------------------------------------------------------
 
 \[
     x \in \bigcup S \leftrightarrow \exists y \in S : x \in y
 \]
 
-% --------------------------------------------------------------------
-\subsubsection{Intersection}
-% --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+
+\subsubsection{Intersection}
+
+
+
 \subsubsection{Subset}
-% --------------------------------------------------------------------
 
 \paragraph{Filter}
 
@@ -3502,21 +3587,27 @@ where
 An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
 \subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
 
-% --------------------------------------------------------------------
+
+
 \subsubsection{Difference}\label{subsec:set_difference}
-% --------------------------------------------------------------------
 
 \emph{Complement}
 
 \emph{Symmetric Difference}
 
-% --------------------------------------------------------------------
+
+
 \subsubsection{de Morgan's Law}\label{subsec:de_morgan}
-% --------------------------------------------------------------------
+
+\subsubsection{Cartesian Product}\label{subsec:set_product}
+
+
 
 % --------------------------------------------------------------------
-\subsubsection{Cartesian Product}\label{subsec:set_product}
+\subsection{Closure}\label{subsec:set_closure}
 % --------------------------------------------------------------------
+
+\subsubsection{Finitary Closure}\label{subsec:finitary_closure}
 
 % --------------------------------------------------------------------
 \subsection{Forcing}\label{subsec:forcing}
@@ -3540,7 +3631,7 @@ Given two Sets $X,Y$ and Functions $f,g : X \rightarrow Y$, the
 
 An \emph{Index Set} is one that \emph{Indexes} (or \emph{Labels})
 Members of another Set. Indexing is a Surjective Function
-(\S\ref{sec:set_functions}) from an Index Set onto a target Set.
+(\S\ref{sec:set_function}) from an Index Set onto a target Set.
 
 An \emph{Indexed Family} of Sets is a Function from an Index Set to
 the Class of Sets. For Index Set $J$ and Indexed Set $A$, the Indexed
@@ -3554,6 +3645,15 @@ Family may be denoted
 % --------------------------------------------------------------------
 
 \subsubsection{Recursively Enumerable Set}\label{subsec:recursively_enumerable}
+
+% --------------------------------------------------------------------
+\subsection{Hyperarithmetic Set}\label{subsec:hyperarithmetic_set}
+% --------------------------------------------------------------------
+
+\emph{Hyperarithmetic Sets} are the Class of Sets that can be defined
+by a Second-order Formula (\S\ref{subsec:second_order}). The Class is
+denoted as $\Delta^1_1$ in the \emph{Analytic Hierarchy}
+(\S\ref{subsec:analytic_hierarchy}).
 
 % --------------------------------------------------------------------
 \section{Axiomatic Set Theory}\label{sec:axiomatic_set_theory}
@@ -3589,8 +3689,8 @@ A Set, $S$, containing no Urelements is Transitive if and only if $S
 % --------------------------------------------------------------------
 
 An \emph{Admissible Set}, $A$, is a Transitive Set such that $\langle
-A, \in \rangle$ is a Model (\S\ref{subsec:model_theory}) of Kripke-Platek Set
-Theory (\S\ref{subsec:kripke_platek}).
+A, \in \rangle$ is a Model (\S\ref{sec:model_theory}) of Kripke-Platek
+Set Theory (\S\ref{subsec:kripke_platek}).
 
 The smallest example of an Admissible Set is the Set of
 \emph{Hereditarily Finite Sets}. %FIXME ref hereditarily finite
@@ -3601,7 +3701,7 @@ The smallest example of an Admissible Set is the Set of
 
 A \emph{Multiset} (or \emph{Bag}) is a 2-tuple $(A,m)$ of an
 \emph{Underlying Set}, $A$, together with a \emph{Multiplicity
-  Function} (\S\ref{sec:set_functions}), $m : A \rightarrow
+  Function} (\S\ref{sec:set_function}), $m : A \rightarrow
 \mathbb{N}_{\geq 1}$, mapping Elements of $A$ to Positive Natural
 Numbers representing the \emph{Multiplicity} Elements, that is the
 number of times an Element occurs in the Multiset. A Multiset may be
@@ -3620,8 +3720,15 @@ $m_U : U \rightarrow \mathbb{N}$ where $a \in U, a \notin A
 \section{Class}\label{sec:class}
 % --------------------------------------------------------------------
 
+\begin{description}
+    \item [Proper Class] a Class that is not a Set
+    \item [Small Class] a Class that is a Set
+\end{description}
+
+
+
 % --------------------------------------------------------------------
-\section{Functions}\label{sec:set_functions}
+\section{Functions}\label{sec:set_function}
 % --------------------------------------------------------------------
 
 A \emph{Function} $f$, defined for all Members of Set $A$ and $image(f)
@@ -3865,7 +3972,7 @@ The Set of all Binary Relations on a Set $X$ is denoted
 $\mathbf{Rel}(X)$ and is the Power Set of $X \times X$: $2^{X \times
   X}$.
 
-Functions (\S\ref{sec:set_functions}) are Well-defined Binary Relations.
+Functions (\S\ref{sec:set_function}) are Well-defined Binary Relations.
 
 A Dependency Relation is a Binary Relation that is Symmetric and
 Reflexive.
@@ -3932,16 +4039,32 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 \section{Descriptive Set Theory}
 % --------------------------------------------------------------------
 
-\emph{Polish Space}
+\emph{Boldface Borel Hierarchy}
 
-\emph{Borel Sets}
+% --------------------------------------------------------------------
+\subsection{Polish Space}\label{subsec:polish_space}
+% --------------------------------------------------------------------
+
+\subsubsection{Baire Space}
+
+\subsubsection{Cantor Space}
+
+set of Infinite Sequences of Binary Digits
+
+% --------------------------------------------------------------------
+\subsection{Pointclass}\label{subsec:pointclass}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Effective Descriptive Set Theory}
 % --------------------------------------------------------------------
 
 Combination of Descriptive Set Theory with \emph{Recursion Theory}
-(Part \ref{sec:computability_theory}).
+(Part \ref{sec:recursion_theory}).
+
+% --------------------------------------------------------------------
+\subsection{Borel Hierarchy}\label{subsec:borel_hierarchy}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Combinatorics}
@@ -4107,6 +4230,15 @@ The three Properties of Closed Sets:
 If $C$ is a Closed Set and $f$ is a Continuous Function
 (\S\ref{subsec:topological_continuity}), $f^{-1}(C)$ is a Closed Set.
 
+
+
+\subsubsection{Perfect Set}
+
+a Closed Set with no \emph{Isolated Points}
+(\S\ref{subsec:isolated_point})
+
+
+
 % --------------------------------------------------------------------
 \section{Topological Space}\label{sec:topological_space}
 % --------------------------------------------------------------------
@@ -4175,6 +4307,13 @@ There is no unique Subbase for a given Topology.
 % --------------------------------------------------------------------
 
 \emph{Interior}
+
+
+% --------------------------------------------------------------------
+\subsection{Point}\label{subsec:topological_point}
+% --------------------------------------------------------------------
+
+\subsubsection{Isolated Point}\label{subsec:isolated_point}
 
 % --------------------------------------------------------------------
 \subsection{Continuity}\label{subsec:topological_continuity}
@@ -4333,6 +4472,15 @@ This is the definition of a Symmetric Relation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % --------------------------------------------------------------------
+\section{Natural Numbers}\label{sec:natural_number}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Principle of Mathematical Induction}
+\label{subsec:induction_principle}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \section{Integers}\label{sec:integer}
 % --------------------------------------------------------------------
 
@@ -4341,11 +4489,16 @@ This is the definition of a Symmetric Relation
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\section{Reals}\label{sec:real_number}
+\section{Real Numbers}\label{sec:real_number}
 % --------------------------------------------------------------------
+
 % --------------------------------------------------------------------
-\subsection{Diophantine Approximation}\label{subsec:diophantine_approximation}
+\subsection{Computable Numbers}\label{subsec:computable_real}
 % --------------------------------------------------------------------
+
+also \emph{Recursive Numbers} or \emph{Computable Reals}
+
+\emph{Real Closed Field} (\S\ref{subsec:closed_field})
 
 % --------------------------------------------------------------------
 \section{Ordinal Number}\label{sec:ordinal_number}
@@ -4364,6 +4517,10 @@ This is the definition of a Symmetric Relation
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\section{Hyperreal}\label{sec:hyperreal}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \section{Analytic Number Theory}\label{sec:analytic_number_theory}
 % --------------------------------------------------------------------
 % --------------------------------------------------------------------
@@ -4373,6 +4530,10 @@ This is the definition of a Symmetric Relation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Mathematical Analysis}\label{sec:mathematical_analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+\section{Sequence}\label{sec:sequence}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \section{Numerical Analysis}\label{sec:numerical_analysis}
@@ -4405,11 +4566,8 @@ This is the definition of a Symmetric Relation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{99}
 
-\bibitem{turing38}
-    Alan Turing,
-    \emph{Systems of Logic Based on Ordinals},
-    Princeton,
-    1938.
+\bibitem{turing38} Alan Turing, \emph{Systems of Logic Based on
+  Ordinals}, Princeton, 1938.
 
 \bibitem{kozen97}
     Dexter C. Kozen,
