@@ -1169,6 +1169,75 @@ Inference Rules may be identified as reduntant in two senses. An
   Rule} is a case of an Admissible Rule that has been \emph{Derived}
 from existing rules.
 
+
+
+% --------------------------------------------------------------------
+\subsection{Quantification}\label{subsec:firstorder_quantification}
+% --------------------------------------------------------------------
+
+A \emph{Quantifier} limits (\emph{Binds}) a Variable to a certain
+quantity of members of the Domain, the two fundamental Quantifiers
+being \emph{Universal} ($\forall$) and \emph{Existential} ($\exists$).
+
+A \emph{Bound Quantifier} is one with a restricted Range, e.g.
+$\exists x > 0$ or $\forall x \in \mathbb{R}$.
+
+
+
+\subsubsection{Bound \& Free Variables}\label{subsec:bound_free}
+
+Variables are \emph{Free Variables} if they are not Quantified in any
+Formula, and \emph{Bound Variables} when they are Quantified.
+Inductive definition of \emph{Free} and \emph{Bound Variables}:
+\begin{enumerate}
+\item A Variable $x$ is Free in Atomic Formula $\varphi$ if $x$ occurs
+  in $\varphi$ (there are no Bound Variables in Atomic Formulas)
+\item A Variable is Free or Bound in $\varphi \bullet \psi$ if $x$ is
+  Free or Bound in either $\varphi$ or $\psi$, where $\bullet$ is a
+  Binary Connective
+\item A Variable $x$ is Free in $\forall y \varphi$ iff $x$ is Free in
+  $\varphi$ and $x$ is not $y$. Conversely $x$ is Bound in $\forall y
+  \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
+\end{enumerate}
+
+A Term with no Free Variables is a \emph{Ground Term} and a Formula
+with no Free Variables in First-order Logic is a \emph{First-order
+  Sentence} (also called a \emph{Closed Formula}). First-order
+Sentences have well-defined Truth values. Free Variables are
+implicitly Universally Quantified.
+
+\subsubsection{Uniqueness Quantification}\hfill
+
+\emph{Unique Existential Quantification}, denoted by $\exists !$,
+is expressed in natural language as ``there is one and only one.'' A
+First-Order System requires the \emph{Equality Relation}
+(\S\ref{subsec:firstorder_equality}) in order to be able to express
+Uniqueness Quantification.
+
+
+
+\subsubsection{Quantifier Rank}
+
+Inductive definition of \emph{Quantifier Rank} function $qr$:
+\begin{itemize}
+\item $qr(\varphi) = 0$ if $\varphi$ is Atomic
+\item $qr(\varphi_1 \wedge \varphi_2) = qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
+\item $qr(\neg \varphi) = qr(\varphi)$
+\item $qr(\exists_x \varphi) = qr(\varphi) + 1$
+\end{itemize}
+
+
+
+\subsubsection{Quantifier Nesting}
+
+% FIXME
+
+
+
+\subsubsection{Prenex Normal Form}\label{subsec:prenex_normal}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Zeroth-order - Propositional}\label{subsec:propositional}
 % --------------------------------------------------------------------
@@ -1398,60 +1467,6 @@ Definition of WFF as a finite number of applications of the following rules:
 
 
 
-\subsubsection{Quantification}\label{subsec:firstorder_quantification}
-
-A \emph{Quantifier} limits (\emph{Binds}) a Variable to a certain
-quantity of members of the Domain, the two fundamental Quantifiers
-being \emph{Universal} ($\forall$) and \emph{Existential} ($\exists$).
-
-A \emph{Bound Quantifier} is one with a restricted Range, e.g.
-$\exists x > 0$ or $\forall x \in \mathbb{R}$.
-
-
-
-\paragraph{Bound \& Free Variables}\label{subsec:bound_free}
-\hfill \\
-Variables are \emph{Free Variables} if they are not Quantified in any
-Formula, and \emph{Bound Variables} when they are Quantified.
-Inductive definition of \emph{Free} and \emph{Bound Variables}:
-\begin{enumerate}
-\item A Variable $x$ is Free in Atomic Formula $\varphi$ if $x$ occurs
-  in $\varphi$ (there are no Bound Variables in Atomic Formulas)
-\item A Variable is Free or Bound in $\varphi \bullet \psi$ if $x$ is
-  Free or Bound in either $\varphi$ or $\psi$, where $\bullet$ is a
-  Binary Connective
-\item A Variable $x$ is Free in $\forall y \varphi$ iff $x$ is Free in
-  $\varphi$ and $x$ is not $y$. Conversely $x$ is Bound in $\forall y
-  \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
-\end{enumerate}
-
-A Term with no Free Variables is a \emph{Ground Term} and a Formula
-with no Free Variables in First-order Logic is a \emph{First-order
-  Sentence} (also called a \emph{Closed Formula}). First-order
-Sentences have well-defined Truth values. Free Variables are
-implicitly Universally Quantified.
-
-\paragraph{Uniqueness Quantification}\hfill
-\\
-\emph{Unique Existential Quantification}, denoted by $\exists !$,
-is expressed in natural language as ``there is one and only one.'' A
-First-Order System requires the \emph{Equality Relation}
-(\S\ref{subsec:firstorder_equality}) in order to be able to express
-Uniqueness Quantification.
-
-\paragraph{Quantifier Rank}\hfill
-\\
-Inductive definition of \emph{Quantifier Rank} function $qr$:
-\begin{itemize}
-\item $qr(\varphi) = 0$ if $\varphi$ is Atomic
-\item $qr(\varphi_1 \wedge \varphi_2) = qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
-\item $qr(\neg \varphi) = qr(\varphi)$
-\item $qr(\exists_x \varphi) = qr(\varphi) + 1$
-\end{itemize}
-
-\paragraph{Quantifier Nesting}\hfill
-\\
-% FIXME
 
 \subsubsection{Inference Rules}
 
@@ -1704,6 +1719,9 @@ foundation for Set Theory (Part \ref{sec:set_theory}), Intuitionistic
 Logic is used as a foundation for \emph{Type Theory} (Part
 \ref{sec:type_theory}) and \emph{Constructive Set Theory}
 (\S\ref{sec:constructive_set_theory}).
+
+A Formula in Intuitionistic Logic does not necessarily have a Prenex
+Normal Form (\S\ref{subsec:prenex_normal}).
 
 Intuitionistic Logic is \emph{Modelled} by \emph{Heyting Algebra}
 (\S\ref{subsec:heyting_semantics}) or \emph{Kripke Semantics}
@@ -2388,17 +2406,26 @@ computable by Algorithm is a Computable Function
     \subseteq \mathsf{ALL}
 \]
 
+\[
+    \Delta_0 = \Sigma_0 = \Pi_0 = \mathsf{R}
+\]\[
+    \Sigma_1^0 \leftrightarrow \mathsf{RE}
+\]\[
+    \Pi_1^0 \leftrightarrow \mathsf{coRE}
+\]
+
+
 \emph{Lightface} (no \emph{Set Parameters}) %FIXME explain ``set parameters''
 \[
     \Sigma, \Pi, \Delta
 \]
 
-\emph{Boldface}
+\emph{Boldface} (standard hierarchy of Borel Sets)
 \[
     \mathbf{\Sigma}, \mathbf{\Pi}, \mathbf{\Delta}
 \]
 
-\subsubsection{Arithmetic Hierarchy}
+\subsubsection{Arithmetic Hierarchy}\label{subsec:arithmetic_hierarchy}
 
 The \emph{Arithmetic Hierarchy} Classifies the Complexity of Formulas
 in \emph{First-order Arithmetic}
@@ -2407,19 +2434,30 @@ extended by the \emph{Hyperarithmetic} and \emph{Analytic
   Hierarchies}.
 
 Every Formula in the Language of First-order Arithmetic is in
-$\Sigma^0_n$ or $\Pi^0_n$ for $n \in \mathbb{N}$.
+$\Sigma^0_n$ or $\Pi^0_n$ for $n \in \mathbb{N}$. Formulas with only
+\emph{Bounded Quantifiers} (\S\ref{subsec:firstorder_quantification})
+are in $\Sigma^0_0$ or $\Pi^0_0$. $\Sigma^0_n$ and $\Pi^0_n$ are
+defined Inductively for $n \in \mathbb{N}$:
 
-Formulas with only \emph{Bounded Quantifiers}
-(\S\ref{subsec:firstorder_quantification}) are in $\Sigma^0_0$ or
-$\Pi^0_0$.
+\begin{itemize}
+    \item $\phi = \exists x_1 \exists x_2 \cdots \exists x_k\psi, \psi
+      \in \Pi^0_n \rightarrow \phi \in \Sigma^0_{n+1}$
+    \item $\phi = \forall x_1 \forall x_2 \cdots \forall x_k\psi, \psi
+      \in \Sigma^0_n \rightarrow \phi \in \Pi^0_{n+1}$
+\end{itemize}
 
-\[
-    \Delta_0 = \Sigma_0 = \Pi_0 = \mathsf{R}
-\]\[
-    \Sigma_1^0 \leftrightarrow \mathsf{RE}
-\]\[
-    \Pi_1^0 \leftrightarrow \mathsf{coRE}
-\]
+Thus a $\Sigma^0_n$ Formula begins with Existential Quantifiers and
+alternates $n-1$ times between series of Existential and Universal
+Quantifiers. The dual is true for $\Pi^0_n$.
+
+By the addition of redundant Quantifiers, a Formula of $\Sigma^0_n$ or
+$\Pi^0_n$ is also $\Sigma^0_m$ and $\Pi^0_m$ for $m > n$.
+
+Sets of Natural Numbers that are definable in First-order Arithmetic
+are assigned to Classes $\Sigma^0_n$ or $\Pi^0_n$, and to $\Delta^0_n$
+if they are both $\Sigma^0_n$ and $\Pi^0_n$.
+
+\paragraph{Relativized Arithmetical Hierarchies}
 
 
 
@@ -4217,11 +4255,19 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 \subsection{Polish Space}\label{subsec:polish_space}
 % --------------------------------------------------------------------
 
-\subsubsection{Baire Space}
-
 \subsubsection{Cantor Space}
 
-set of Infinite Sequences of Binary Digits
+\emph{Cantor Space}, $2^{\omega}$, is the Set of all Infinite
+Sequences of $0$s and $1$s.
+
+
+
+\subsubsection{Baire Space}
+
+\emph{Baire Space}, $\omega^{\omega}$ or $\mathcal{N}$, is the Set of
+all Infinite Sequences of Natural Numbers.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Pointclass}\label{subsec:pointclass}
