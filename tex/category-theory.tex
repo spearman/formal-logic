@@ -136,6 +136,23 @@ Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
 
 
 % --------------------------------------------------------------------
+\subsection{Subcategory}\label{subsec:subcategory}
+% --------------------------------------------------------------------
+
+A \emph{Subcategory}, $\mathbf{S}$, of a Category, $\mathbf{C}$, is a
+Category whose Objects and Morphisms are in $\mathbf{C}$. There is a
+\emph{Faithful Functor} (\S\ref{subsec:faithful_functor}) called the
+\emph{Inclusion Functor} which Maps Objects and Morphisms to
+themselves:
+\[
+    I : \mathbf{S} \rightarrow \mathbf{C}
+\]
+If $I$ is a \emph{Full Functor}, then $S$ is a \emph{Full
+  Subcategory}.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Opposite Categories}\label{subsec:opposite_categories}
 % --------------------------------------------------------------------
 
@@ -495,6 +512,9 @@ Functors between Poset Categories are Monotonic Functions
 A \emph{Forgetful Functor} is one that drops some Property of the
 Input Category in the Output Category.
 
+An \emph{Inclusion Functor} is a Functor from a Subcategory to its
+containing Category (\S\ref{subsec:subcategory}).
+
 \emph{Hom Functor}
 
 \emph{Bifunctor} \emph{Multifunctor}
@@ -516,6 +536,9 @@ then
     \item $F$ is a \emph{Fully Faithful Functor} if $F_{X,Y}$ is
       Bijective.
 \end{itemize}
+A Faithful Functor may be considered an \emph{Embedding}, e.g. the
+\emph{Inclusion Functor} for a Subcategory
+(\S\ref{subsec:subcategory}).
 
 
 
@@ -549,10 +572,6 @@ A \emph{Contravariant Representable Functor} for $A$ is a Functor $h_A
 
 
 % --------------------------------------------------------------------
-\subsection{Natural Transformation}\label{subsec:natural_transformation}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
 \subsection{Adjunction}\label{subsec:adjunction}
 % --------------------------------------------------------------------
 
@@ -560,6 +579,29 @@ An \emph{Adjoint Functor} is the Categorical analog of the Existential
 Quantifier in Logic (\S\ref{subsec:firstorder_quantification}) and the
 \emph{Image Operation} along a \emph{Continuous Function} in
 \emph{Topology} (Part \ref{sec:topology}).
+
+
+
+% ====================================================================
+\section{Natural Transformation}\label{sec:natural_transformation}
+% ====================================================================
+
+A \emph{Natural Transformation} is a Morphism between Functors with
+two Properties. Given a Natural Transformation, $\tau$, between two
+Functors, $S$ and $T$, between two Categories, $\mathbf{C}$ and
+$\mathbf{D}$:
+\[
+    \tau : S \rightarrow T
+\]
+\begin{enumerate}
+    \item $\forall X \in \mathbf{C},
+        \exists \tau_X : S(X) \rightarrow T(X) \in \mathbf{D}$
+    \item $\forall f : X \rightarrow Y \in \mathbf{C},
+        \tau_Y \circ S(f) = G(f) \circ \tau_X$
+\end{enumerate}
+where the Morphism $\tau_X$ is called the \emph{Component} of $\tau$
+at $X$. When (2) holds, a Commutative Diagram is formed and the
+Morphisms $\tau_X$ are said to be \emph{Natural} in $X$.
 
 
 
