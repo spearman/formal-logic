@@ -369,8 +369,6 @@ $\mathbf{C} \times \mathbf{D}$ is a Product
 \section{Morphisms}\label{sec:category_morphisms}
 % ====================================================================
 
-
-
 % --------------------------------------------------------------------
 \subsection{Homomorphism}\label{subsec:homomorphism}
 % --------------------------------------------------------------------
@@ -386,36 +384,38 @@ Note that the Operators do not have to be the same.
 
 
 
-\subsubsection{Monomorphism}
+\subsubsection{Monomorphism}\label{subsec:monomorphism}
 
 A \emph{Monomorphism} is a Homomorphism that is Injective, a
 sufficient condition of which is that the Morphism has a Left Inverse
 (\S\ref{subsec:inverse_functions}) or \emph{Retraction}. A
-Monomorphism with a Left Inverse is called a \emph{Split
-  Monomorphism}. A Monomorphism $f$ between Objects $A$ and $B$ is
-denoted
+Monomorphism with a Left Inverse is called a \emph{Split Monomorphism}
+and the Retraction a Split Epimorphism. A Monomorphism $f$ between
+Objects $A$ and $B$ is denoted
 \[
     f : A \rightarrowtail B
 \]
 and has the property for any two Morphisms $g, h : C \rightarrow A$,
-$fg = fh$ Implies $g = h$.
+$fg = fh$ Implies $g = h$. If $f$ is a Monomorphism then $gf$ and $hf$
+are Idempotent.
 
 
 
-\subsubsection{Epimorphism}
+\subsubsection{Epimorphism}\label{subsec:epimorphism}
 
 A Homomorphism whose underlying function is Surjective is an
 \emph{Epimorphism}, is a sufficient condition of which is that the
 Morphism has a Right Inverse (\S\ref{subsec:inverse_functions}) or
 \emph{Section}. An Epimorphism with a Right Inverse is called a
-\emph{Split Epimorphism}. An Epimorphism $f$ between Objects $A$ and
-$B$ is denoted
+\emph{Split Epimorphism} and the Section a Split Monomorphism. An
+Epimorphism $f$ between Objects $A$ and $B$ is denoted
 \[
     f : A \twoheadrightarrow B
 \]
 and has the property that for any two Morphisms $g, h : B \rightarrow
 C$, $gf = hf$ Implies $g = h$. Note that being an Epimorphism doesn't
-necessitate the Morphism to be Surjective.
+necessitate the Morphism to be Surjective. If $f$ is an Epimorphism,
+then $fg$ and $fh$ are Idempotent.
 
 An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
 \rightarrow X$ and Morphism $f : P \rightarrow X$, then $\exists
@@ -430,6 +430,11 @@ Morphism $g$ such that $g = f^{-1}$. The Existance of an Isomorphism
 between two Objects $A$ and $B$ is denoted $A \cong B$. An Isomorphism
 is a Homomorphism that is both a Monomorphism and an Epimorphism. Note
 that a Mono- and Epi-morphism need not be an Isomorphism.
+
+The Existence of an \emph{Invertible Morphism}
+(\S\ref{subsec:bijective_function}) between Objects also Implies their
+Isomorphism. A Category in which every Morphism is Invertible is a
+\emph{Groupoid} (\S\ref{subsec:groupoid}).
 
 
 
@@ -684,7 +689,12 @@ other Object $A$ in the Category there is a unique Morphism $A
 
 An Object that is both an Initial and a Terminal Object is called a
 \emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
-Object is called a \emph{Pointed Category}.
+Object is called a \emph{Pointed Category}. For a Zero Object, $Z \in
+\mathbf{C}$, there is a Unique Morphism between any two Objects, $A, B
+\in \mathbf{C}$ called the \emph{Composite} in $Z$:
+\[
+    A \rightarrow Z \rightarrow B
+\]
 
 It follows for any pair of Objects that are both Terminal and/or both
 Initial that an Isomorphism (\S\ref{subsec:isomorphism}) exists
@@ -692,10 +702,13 @@ between them; that is, Universal Objects are always unique up to
 Isomorphism.
 
 As an example, in $\mathbf{Set}$, all Singleton Sets are Terminal, and
-as such they are all Isomorphic to one another. Also in $\mathbf{Set}$
-the Empty Set is Initial as the only mapping from it to any other Set
-is the Empty Function. In $\mathbf{Grp}$, a Trivial Group ${1}$ is a
-Zero Object.
+as such they are all Isomorphic to one another. Given a Set $X$:
+\[
+    |X| = 1 \leftrightarrow \forall Y |Hom_{\mathbf{Sets}}(Y,X)| = 1
+\]
+Also in $\mathbf{Set}$ the Empty Set is Initial as the only mapping
+from it to any other Set is the Empty Function. In $\mathbf{Grp}$, a
+Trivial Group ${1}$ is a Zero Object.
 
 Given a Functor $U: \mathbf{D} \rightarrow \mathbf{C}$, an
 \emph{Initial Morphism} is an Initial Object in the Comma Category $(X
@@ -807,6 +820,14 @@ Subset of the Hom-set of an Object, $X$:
 \emph{Trivial Group} ${1}$
 
 \emph{Semigroup}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Groupoid}\label{subsec:groupoid}
+% --------------------------------------------------------------------
+
+\emph{Fundamental Groupoid}
 
 
 

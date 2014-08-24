@@ -1025,9 +1025,9 @@ Argument is an Ordered Set of \emph{Formulas}.
 % ====================================================================
 
 \begin{description}
-\item[Universe] class containing elements of \emph{objects} (objects)
-  considered in a particular Logical discourse, also called
-  \emph{Domain of Discourse}
+\item[Universe] class containing elements of \emph{objects} considered
+  in a particular Logical discourse, also called \emph{Domain of
+    Discourse}
 \item[Constant] a named object from the Domain
 \item[Variable] a placeholder that ranges over the objects in the
   Domain
@@ -3724,6 +3724,10 @@ the \emph{Extension} of that Property.
     \item Extremal clause
 \end{enumerate}
 
+\emph{Structural Recursion}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Circular Definition}\label{subsec:circular_definition}
 % --------------------------------------------------------------------
@@ -3945,6 +3949,64 @@ $m_U : U \rightarrow \mathbb{N}$ where $a \in U, a \notin A
 
 
 % ====================================================================
+\section{Universe}\label{sec:set_universe}
+% ====================================================================
+
+% FIXME differentiate between Universes
+A \emph{Universe} is a Set, $U$, with the following Closure Properties
+\cite{maclane69}:
+\begin{enumerate}
+\item $x \in A \in U \rightarrow x \in U$
+\item $x \in U \wedge y \in U \rightarrow \{x,y\}, \langle x,y
+  \rangle, x \times y \in U$
+\item $x \in U \rightarrow \mathcal{P}(x) \in U \wedge \bigcup x \in U$
+\item $\omega = \{0,1,2,\ldots\} \in U$
+\item Given a Surjective Function, $f : a \rightarrow b, a \in
+  U, b \subset U \rightarrow b \in U$
+\end{enumerate}
+
+% --------------------------------------------------------------------
+\subsection{Superstructure}\label{subsec:superstructure}
+% --------------------------------------------------------------------
+
+The \emph{Superstructure} over a Set $X$:
+\[
+    \mathbf{S}X := \bigcup^{\infty}_{i=0}\mathbf{S}_i X
+\]
+can be defined by Structural Recursion
+(\S\ref{subsec:recursive_definition}) as follows:
+\begin{itemize}
+
+\item $\mathbf{S}_0 X = X$
+\item $\mathbf{S}_1 X = X \cup \mathcal{P}(X)$
+\item $\mathbf{S}_{n+1} X =
+    \mathbf{S}_n X \cup \mathcal{P}(\mathbf{S}_n X)$
+
+\end{itemize}
+Some Properties of $\mathbf{S}\{\}$ (the Superstructure over the Empty
+Set):
+\begin{itemize}
+
+\item $\mathbb{N} \subset \mathbf{S}\{\}$
+\item $\mathbb{N} \notin \mathbf{S}\{\}$ (Elements of $\mathbf{S}\{\}$
+  are Finite Sets)
+\item $\mathbf{S}\{\}$ contains all of the Hereditarily Finite Sets
+%FIXME ref Hereditarily finite sets
+
+\end{itemize}
+
+The Superstructure over $\mathbb{N}$ is considered the \emph{Universe
+  of Ordinary Mathematics}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Von Neumann Universe}\label{subsec:superstructure}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
 \section{Map}\label{sec:set_map}
 % ====================================================================
 
@@ -4044,7 +4106,7 @@ necessarily \emph{Injective}.
 
 A \emph{Bijective Function} is one that is both Surjective and
 Injective (both One-to-one and Onto). A Function is Bijective if and
-only if it is also \emph{Invertable}.
+only if it is also \emph{Invertible}.
 
 % --------------------------------------------------------------------
 \subsection{Inverses}\label{subsec:inverse_functions}
@@ -4054,6 +4116,12 @@ For a Mapping between sets, $f: X \rightarrow Y$, a \emph{Left
   Inverse} or \emph{Retraction} of $f$ is a Map $g: Y \rightarrow X$
 such that $gf = Id(X)$. A \emph{Right Inverse} or \emph{Section} of
 $f$ would be a Map $h: Y \rightarrow X$ such that $fh = Id(Y)$.
+
+% --------------------------------------------------------------------
+\subsection{Idempotence}\label{subsec:idempotence}
+% --------------------------------------------------------------------
+
+A Function, $f$, is \emph{Idempotent} if $f^2 = f$.
 
 % --------------------------------------------------------------------
 \subsection{Partial Function}\label{subsec:partial_function}
@@ -4254,6 +4322,10 @@ A \emph{Multimap} is a Left-total Relation.
 
 % --------------------------------------------------------------------
 \subsection{Kripke-Platek (KP)}\label{subsec:kripke_platek}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{New Foundations (NF)}\label{subsec:quine_foundations}
 % --------------------------------------------------------------------
 
 
@@ -4736,7 +4808,11 @@ also \emph{Recursive Numbers} or \emph{Computable Reals}
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Admissible Number}\label{sec:admissible_ordinal}
+\subsection{Admissible Number}\label{subsec:admissible_ordinal}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Von Neumann Ordinal}\label{subsec:vonneumann_ordinal}
 % --------------------------------------------------------------------
 
 
