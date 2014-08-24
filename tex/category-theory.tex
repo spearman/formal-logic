@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ====================================================================
-\section{Meta-categories}\label{sec:meta_category}
+\section{Metacategories}\label{sec:metacategory}
 % ====================================================================
 
 The Formal System of Category Theory consists of
@@ -73,13 +73,15 @@ Posets is denoted $\mathbf{Pos}$. A special case of a Poset Category
 is a \emph{Discrete Category} which is a Category of Objects with only
 Identity Morphisms.
 
-A \emph{Monoid} (\S\ref{subsec:monoids}) is a Category with a single
+A \emph{Monoid} (\S\ref{subsec:monoid}) is a Category with a single
 Object and Morphisms for each Element in the Monoid such that
 Composition of the Morphisms is the Binary Operation of the
 Monoid. The Category $\mathbf{Mon}$ is the Category of all Monoids and
 Functions that preserve the Monoid structure.
 
 \emph{Simplicial}
+
+
 
 % --------------------------------------------------------------------
 \subsection{List of Categories}\label{subsec:categories_list}
@@ -108,6 +110,8 @@ Functions that preserve the Monoid structure.
 \item [Top] all Topological Spaces and Continuous Maps
 \end{description}
 
+
+
 % --------------------------------------------------------------------
 \subsection{Finite Categories}\label{subsec:finite_categories}
 % --------------------------------------------------------------------
@@ -129,6 +133,8 @@ Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
 \ldots$ and $fg, fgfg, fgfgfg, \ldots$. See \emph{Finitely Presented
   Categories} \S\ref{subsec:finitely_presented}.
 
+
+
 % --------------------------------------------------------------------
 \subsection{Opposite Categories}\label{subsec:opposite_categories}
 % --------------------------------------------------------------------
@@ -147,6 +153,8 @@ notation the following Equalities may be expressed:
 \]
 A Terminal Object in $\mathbf{C}$ is an Initial Object in
 $\mathbf{C^{op}}$ and vice-versa.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Comma Cateories}\label{subsec:comma_categories}
@@ -169,6 +177,8 @@ pairs $(g,h)$ where $g : \alpha \rightarrow \alpha'$ is a Morphism in
 $\mathbf{A}$ and $h : \beta \rightarrow \beta'$ is a Morphism in
 $\mathbf{B}$.
 
+
+
 % --------------------------------------------------------------------
 \subsubsection{Arrow Categories}\label{subsec:arrow_categories}
 % --------------------------------------------------------------------
@@ -177,6 +187,8 @@ An \emph{Arrow Category} of a Category $\mathbf{C}$, written
 $\mathbf{C^{\rightarrow}}$, has for its Objects the Morphisms of
 $\mathbf{C}$ and as Morphisms pairs of Objects such that their
 underlying Morphisms in $\mathbf{C}$ are Composable.
+
+
 
 % --------------------------------------------------------------------
 \subsubsection{Slice Categories}\label{subsec:slice_categories}
@@ -193,6 +205,8 @@ the Morphism in the Slice Category between the two is $g$ such that
 \]
 
 \emph{Coslice}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Congruence Categories}\label{subsec:category_congruence}
@@ -218,6 +232,8 @@ $\mathbf{C^{\sim}}$:
     \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
 \]
 
+
+
 % --------------------------------------------------------------------
 \subsubsection{Quotient Categories}\label{subsec:category_quotient}
 % --------------------------------------------------------------------
@@ -230,6 +246,8 @@ with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
     (\mathbf{C}/\sim)_1 = (\mathbf{C_1})/\sim
 \]
 where Morphisms are of the form $[f]$ where $f \in \mathbf{C_1}$.
+
+
 
 % --------------------------------------------------------------------
 \subsubsection{Kernel Category}\label{subsec:kernel_category}
@@ -247,6 +265,8 @@ Category of $\sim_F$
     ker(F) = C^{\sim_F}
 \]
 
+
+
 % --------------------------------------------------------------------
 \subsection{Free Categories}\label{subsec:free_categories}
 % --------------------------------------------------------------------
@@ -258,6 +278,8 @@ Category is the Free Monoid on the Edges of the Graph. A Graph with no
 Edges generates a Discrete Category (\S\ref{sec:categories}). The Free
 Category on a Graph with two Vertices and one Edge is the Finite
 Category $\mathbf{2}$.
+
+
 
 % --------------------------------------------------------------------
 \subsubsection{Finitely Presented Category}\label{subsec:finitely_presented}
@@ -275,6 +297,7 @@ where $\Sigma$ is the finite Set of Relations
 \]
 for all $g_i \in G$ such that $dom(g_n) = dom(g'_m)$ and $cod(g_1) =
 cod(g'_1)$.
+
 
 
 % --------------------------------------------------------------------
@@ -304,38 +327,7 @@ $\mathbf{C} \times \mathbf{D}$ is a Product
 \section{Morphisms}\label{sec:category_morphisms}
 % ====================================================================
 
-% --------------------------------------------------------------------
-\subsection{Constant Morphism}\label{subsec:constant_morphism}
-% --------------------------------------------------------------------
 
-A Morphism $f : X \rightarrow Y$ is a \emph{Constant Morphism} if for
-any $g, h : W \rightarrow X$, $fg = fh$.
-
-A Morphism $f : X \rightarrow Y$ is a \emph{Co-constant Morphism} if
-for any $g, h : Y \rightarrow Z$, $gf = hf$.
-
-\emph{Zero Morphism} is one that is both Constant and Co-constant.
-
-% --------------------------------------------------------------------
-\subsection{Kernel}\label{subsec:morphism_kernel}
-% --------------------------------------------------------------------
-
-The \emph{Kernel} of a Morphism $f : X \rightarrow Y$ is the most
-general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
-any Morphism $k' : K' \rightarrow X$ such that $fk' = 0_{K'Y}$, there
-exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
-
-The collection of all Morphisms between two Objects $X$ and $Y$ in a
-Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
-$Hom(X,Y)$:
-\[
-    Hom(A,B) = \{f \in \mathbf{C} | f : A \rightarrow B\}
-\]
-Therefore
-\[
-    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
-\]
-Note that the Hom-set need not be a Set (it could be a Proper Class).
 
 % --------------------------------------------------------------------
 \subsection{Homomorphism}\label{subsec:homomorphism}
@@ -349,6 +341,8 @@ $*$ and $*'$ respectively, for any $a_i \in A$
     f(a_1 * a_2) = f(a_1) *' f(a_2)
 \]
 Note that the Operators do not have to be the same.
+
+
 
 \subsubsection{Monomorphism}
 
@@ -364,22 +358,28 @@ denoted
 and has the property for any two Morphisms $g, h : C \rightarrow A$,
 $fg = fh$ Implies $g = h$.
 
+
+
 \subsubsection{Epimorphism}
 
-An \emph{Epimorphism} is a Surjective Homomorphism, a sufficient
-condition of which is that the Morphism has a Right Inverse
-(\S\ref{subsec:inverse_functions}) or \emph{Section}. An Epimorphism
-with a Right Inverse is called a \emph{Split Epimorphism}. An
-Epimorphism $f$ between Objects $A$ and $B$ is denoted
+A Homomorphism whose underlying function is Surjective is an
+\emph{Epimorphism}, is a sufficient condition of which is that the
+Morphism has a Right Inverse (\S\ref{subsec:inverse_functions}) or
+\emph{Section}. An Epimorphism with a Right Inverse is called a
+\emph{Split Epimorphism}. An Epimorphism $f$ between Objects $A$ and
+$B$ is denoted
 \[
     f : A \twoheadrightarrow B
 \]
 and has the property that for any two Morphisms $g, h : B \rightarrow
-C$, $gf = hf$ Implies $g = h$.
+C$, $gf = hf$ Implies $g = h$. Note that being an Epimorphism doesn't
+necessitate the Morphism to be Surjective.
 
 An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
 \rightarrow X$ and Morphism $f : P \rightarrow X$, then $\exists
 \overline{f} : P \rightarrow E$ such that $e \circ \overline{f} = f$.
+
+
 
 \subsubsection{Isomorphism}\label{subsec:isomorphism}
 
@@ -389,14 +389,63 @@ between two Objects $A$ and $B$ is denoted $A \cong B$. An Isomorphism
 is a Homomorphism that is both a Monomorphism and an Epimorphism. Note
 that a Mono- and Epi-morphism need not be an Isomorphism.
 
+
+
 \subsubsection{Endomorphism}
 
 An \emph{Endomorphism} is a Homomorphism from an Object to itself.
+
+
 
 \subsubsection{Automorphism}\label{subsec:automorphism}
 
 An \emph{Automorphism} is both an Endomorphism and an Isomorphism,
 that is, an Invertible Endomorphism.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Constant Morphism}\label{subsec:constant_morphism}
+% --------------------------------------------------------------------
+
+A Morphism $f : X \rightarrow Y$ is a \emph{Constant Morphism} if for
+any $g, h : W \rightarrow X$, $fg = fh$.
+
+A Morphism $f : X \rightarrow Y$ is a \emph{Co-constant Morphism} if
+for any $g, h : Y \rightarrow Z$, $gf = hf$.
+
+\emph{Zero Morphism} is one that is both Constant and Co-constant.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hom-set}\label{subsec:hom_set}
+% --------------------------------------------------------------------
+
+The collection of all Morphisms between two Objects $X$ and $Y$ in a
+Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
+$Hom(X,Y)$:
+\[
+    Hom(A,B) = \{f \in \mathbf{C} | f : A \rightarrow B\}
+\]
+Therefore
+\[
+    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
+\]
+Note that the Hom-set need not be a Set (it could be a Proper Class).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Kernel}\label{subsec:morphism_kernel}
+% --------------------------------------------------------------------
+
+The \emph{Kernel} of a Morphism $f : X \rightarrow Y$ is the most
+general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
+any Morphism $k' : K' \rightarrow X$ such that $fk' = 0_{K'Y}$, there
+exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Factors}\label{subsec:morphism_factor}
@@ -446,13 +495,29 @@ Functors between Poset Categories are Monotonic Functions
 A \emph{Forgetful Functor} is one that drops some Property of the
 Input Category in the Output Category.
 
-\emph{Faithful Functor}
-
 \emph{Hom Functor}
 
 \emph{Bifunctor} \emph{Multifunctor}
 
 \emph{Product Functor}
+
+% --------------------------------------------------------------------
+\subsection{Faithful \& Full Functor}\label{subsec:faithful_functor}
+% --------------------------------------------------------------------
+
+Given a Functor, $F : C \rightarrow D$, and the Induced Function
+\[
+    F_{X,Y} : \mathrm{Hom}_C(X,Y) \rightarrow \mathrm{Hom}_D(F(X),F(Y))
+\]
+then
+\begin{itemize}
+    \item $F$ is a \emph{Faithful Functor} if $F_{X,Y}$ is Injective
+    \item $F$ is a \emph{Full Functor} if $F_{X,Y}$ is Surjective
+    \item $F$ is a \emph{Fully Faithful Functor} if $F_{X,Y}$ is
+      Bijective.
+\end{itemize}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Contravariant Functor}\label{subsec:contravariant_functor}
@@ -462,6 +527,8 @@ A \emph{Contravariant Functor} is from a Dual Category to another
 Category, eg $F : \mathbf{C^{op}} \rightarrow \mathbf{D}$ while the
 Dual of a Contravariant Functor, a \emph{Covariant Functor}, is just
 an ordinary Functor.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Representable Functor}\label{subsec:representable_functor}
@@ -478,6 +545,8 @@ A \emph{Contravariant Representable Functor} for $A$ is a Functor $h_A
 \[
     Hom(-,A) : Hom(X,A) \xrightarrow{f^*} Hom(Y,A)
 \]
+
+
 
 % --------------------------------------------------------------------
 \subsection{Natural Transformation}\label{subsec:natural_transformation}
@@ -513,15 +582,17 @@ $\mathbf{C}$:
     D : \mathbf{J} \rightarrow \mathbf{C}
 \]
 
-% --------------------------------------------------------------------
-\subsubsection{Commutative Diagram}\label{subsec:commutative_diagram}
-% --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+
+\subsubsection{Commutative Diagram}\label{subsec:commutative_diagram}
+
+
+
 \subsubsection{Cones}\label{subsec:category_cone}
-% --------------------------------------------------------------------
 
 \emph{Universal Cone}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Universal Properties}\label{subsec:universal_property}
@@ -553,11 +624,6 @@ the Empty Set is Initial as the only mapping from it to any other Set
 is the Empty Function. In $\mathbf{Grp}$, a Trivial Group ${1}$ is a
 Zero Object.
 
-A \emph{Global Element} (also \emph{Point} or \emph{Constant}) of an
-Object is a Morphism from a Terminal Object to that Object. A
-\emph{General Element} (also \emph{Variable}) is a Morphism from an
-arbitrary Domain Object $X$.
-
 Given a Functor $U: \mathbf{D} \rightarrow \mathbf{C}$, an
 \emph{Initial Morphism} is an Initial Object in the Comma Category $(X
 \downarrow U)$ where $X \in \mathbf{C_0}$.
@@ -575,14 +641,37 @@ Given a Functor $U: \mathbf{D} \rightarrow \mathbf{C}$, an
 
 \emph{Uniqueness}
 
+
+
+% --------------------------------------------------------------------
+\subsection{Global \& General Elements}\label{subsec:general_element}
+% --------------------------------------------------------------------
+
+A \emph{Global Element}, $a$, (also \emph{Point} or \emph{Constant})
+of an Object, $A$, is a Morphism from a Terminal Object, $1$, to that
+Object
+\[
+    a: 1 \rightarrow A
+\]
+
+A \emph{General Element}, $x$, (also \emph{Variable}) is a Morphism
+from an arbitrary Domain Object, $X$
+\[
+    x: X \rightarrow A
+\]
+
+
+
+
 % --------------------------------------------------------------------
 \subsection{Limits \& Colimits}\label{subsec:category_limits}
 % --------------------------------------------------------------------
 
 
-% --------------------------------------------------------------------
+
+
+
 \subsubsection{Products \& Coproducts}\label{subsec:product_diagram}
-% --------------------------------------------------------------------
 
 A \emph{Product} of two Objects $A \times B$:
 \[
@@ -612,13 +701,13 @@ Disjoint Union %FIXME ref disjoint union
 
 \emph{N-ary Products}
 
-% --------------------------------------------------------------------
 \paragraph{Exponentials}\label{subsec:category_exponential}
-% --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+
+
 \subsubsection{Pushouts \& Pullbacks}\label{subsec:category_pullback}
-% --------------------------------------------------------------------
+
+
 
 % --------------------------------------------------------------------
 \subsection{Cartesian Closed Categories}\label{subsec:cartesian_category}
@@ -636,13 +725,17 @@ adding all Automorphisms (\S\ref{subsec:automorphism}) of $X$:
 $Aut(X)$. \emph{Cayley's Theorem} states that every Group is
 Isomorphic to a Group of Permutations (\S\ref{subsec:permutations}).
 
-A Group $G$ within a Category $\mathbf{C}$ may be viewed as a Subset
-of the Hom-set of an Object $X$:
+A Group, $G$, within a Category, $\mathbf{C}$, may be viewed as a
+Subset of the Hom-set of an Object, $X$:
 \[
     G \subseteq Hom_{\mathbf{C}}(X,X)
 \]
 
 \emph{Trivial Group} ${1}$
+
+\emph{Semigroup}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Group Homomorphism}\label{subsec:group_homomorphism}
@@ -656,6 +749,8 @@ Functor $f$ which is equivalent to a Group Homomorphism:
     f : G \rightarrow H
 \]
 
+
+
 % --------------------------------------------------------------------
 \subsection{Group Representations}\label{subsec:group_representation}
 % --------------------------------------------------------------------
@@ -668,6 +763,8 @@ $\mathbf{C}$
 Such a Functor $R$ is termed a \emph{Representation} of $G$ in
 $\mathbf{C}$.
 
+
+
 % --------------------------------------------------------------------
 \subsection{Coset}\label{subsec:group_coset}
 % --------------------------------------------------------------------
@@ -679,6 +776,8 @@ is defined as
 \item[Right Coset] $Hg = {hg : h \in H}$
 \end{description}
 
+
+
 % --------------------------------------------------------------------
 \subsection{Subgroup}\label{subsec:subgroup}
 % --------------------------------------------------------------------
@@ -688,6 +787,10 @@ under the Group Operation.
 
 Given a Group $G$ and Subgroup $H$, $H$ is a \emph{Normal Subgroup} if
 and only if $\forall g \in G, gH = Hg$.
+
+\emph{Commutator Subgroup}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Group Kernel}\label{subsec:group_kernel}
@@ -702,12 +805,18 @@ where $e_H$ is an Element of $H$, and so the Kernel is just the
 Preimage of the Singleton Set $\{e_H\}$. Such a Kernel is a Normal
 Subgroup.
 
+
+
 % --------------------------------------------------------------------
-\subsection{Monoids}\label{subsec:monoids}
+\subsection{Monoid}\label{subsec:monoid}
 % --------------------------------------------------------------------
 
-The set of all Endomorphisms of an Object $X$ in a Category $C$ is
-defined a Monoid and is denoted $End_C(X)$.
+A \emph{Monoid} is a Semigroup with an Identity Element. The set of
+all Endomorphisms of an Object, $X$, in a Category, $C$,
+\[
+    Hom(X,X)
+\]
+defines a Monoid and is denoted $End_C(X)$.
 
 \emph{Free Monoid}
 
@@ -736,11 +845,15 @@ defined a Monoid and is denoted $End_C(X)$.
 
 \emph{Principal Ideals}
 
+
+
 \subsubsection{Fields}
 
 \paragraph{Total Field}\label{subsec:total_field}
 
 \paragraph{Closed Field}\label{subsec:closed_field}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Initial Algebra}\label{subsec:initial_algebra}
