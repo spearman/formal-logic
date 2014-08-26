@@ -23,8 +23,28 @@ and seven Axioms:
 \]\[
     h \circ (g \circ f) = (h \circ g) \circ f
 \]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abstract Category}\label{subsec:abstract_category}
+% --------------------------------------------------------------------
+
+The \emph{Elementary Theory of Abstract Categories} refers to the
+First-order Formulas (\S\ref{subsec:predicate_logic}) of the Language
+of Metacategories.
+
+A Sentence, $\Sigma$, in the Elementary Theory of Abstract Categories
+can be made into a Dual Sentence, $\Sigma^*$, by replacing instances
+of $cod$ by $dom$ and $dom$ by $cod$, and $h = g \circ f$ with $h = f
+\circ g$. The Double-dual is Idempotent (\S\ref{subsec:idempotence}):
+$\Sigma^** = \Sigma$.
+
 Because the Axioms are Self-dual, if a Sentence can be derived from
-them, so can its Dual.
+them, so can its Dual by the \emph{Duality Principle}
+(\S\ref{subsec:duality_principle}). \emph{Functors}
+(\S\ref{sec:functor}) are Self-dual, and so they are not reversed as
+are Morphisms in Categories.
 
 
 
@@ -34,7 +54,7 @@ them, so can its Dual.
 
 A \emph{Category} is an \emph{Algebraic Structure}
 (\S\ref{subsec:universal_algebra}) where Functions are Morphisms
-(\S\ref{sec:category_morphisms}) between Objects and each Object has
+(\S\ref{sec:morphism}) between Objects and each Object has
 its own \emph{Identity Morphism} and Morphisms are \emph{Associative}.
 
 A Category $\mathbf{C}$ is defined as
@@ -46,11 +66,19 @@ A Category $\mathbf{C}$ is defined as
   Objects
 \end{itemize}
 $\mathbf{C}$ is considered \emph{Small} (as opposed to \emph{Large})
-if both $C_0$ and $C_1$ can be represented as Sets.
+if both $C_0$ and $C_1$ can be represented as Sets. In the context of
+Category Theory, a \emph{Small Set} (not to be confused with a Small
+Category) is a member of a fixed \emph{Universe}
+(\S\ref{sec:set_universe}) of Sets.
+
+An equivalent definition of Categories can be given in terms of
+\emph{Hom-sets} (\S\ref{subsec:hom_set}).
 
 \emph{Locally Small}
 
-\emph{Concrete Category}
+A \emph{Concrete Category} is pair, $\langle \mathbf{C},U \rangle$,
+where $\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
+\mathbf{C} \rightarrow \mathbf{Set}$.
 
 Example Categories:
 \begin{itemize}
@@ -97,6 +125,7 @@ Functions that preserve the Monoid structure.
 \item [$\downarrow\downarrow$] two Objects, no Identity morphisms, and
   two parallel Morphisms between them
 \item [Set] all Small Sets and Functions
+\item [Cls] all Classes and Functions between Classes
 \item [Set$_*$] all Pointed Sets and Base-point preserving Functions
 \item [Rel] all Sets and Relations
 \item [Pos] all Posets and Monotonic Functions
@@ -111,7 +140,11 @@ Functions that preserve the Monoid structure.
 \item [Ab] all Abelian Groups with Group Homomorphisms
 \item [Rng] all Small Rings and Ring Morphisms
 \item [Cat] all Small Categories and Functors
+\item [Cat'] all Large Categories and Functors
 \item [Top] all Topological Spaces and Continuous Maps
+\item [Top$_*$] all Pointed Topological Spaces and Continuous Maps
+\item [Toph] all Topological Spaces and Homotopy Classes of Continuous
+  Maps
 \end{description}
 
 
@@ -174,27 +207,6 @@ themselves:
 \]
 If $I$ is a \emph{Full Functor}, then $S$ is a \emph{Full
   Subcategory}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Opposite Categories}\label{subsec:opposite_categories}
-% --------------------------------------------------------------------
-
-The \emph{Opposite Category} (or \emph{Dual}) of a Category
-$\mathbf{C}$ is denoted $\mathbf{C^{op}}$ and has the same Objects as
-$\mathbf{C}$ but the Domain and Codomain in each Morphism is
-reversed. Objects and Morphisms of a Dual Category may be written with
-over-lines to distinguish them from the original Category:
-$\overline{f}: \overline{C} \rightarrow \overline{D}$. With this
-notation the following Equalities may be expressed:
-\[
-    1_{\overline{C}} = \overline{1_C}
-\]\[
-    \overline{f} \circ \overline{g} = \overline{g \circ f}
-\]
-A Terminal Object in $\mathbf{C}$ is an Initial Object in
-$\mathbf{C^{op}}$ and vice-versa.
 
 
 
@@ -366,7 +378,7 @@ $\mathbf{C} \times \mathbf{D}$ is a Product
 
 
 % ====================================================================
-\section{Morphisms}\label{sec:category_morphisms}
+\section{Morphism}\label{sec:morphism}
 % ====================================================================
 
 % --------------------------------------------------------------------
@@ -397,7 +409,7 @@ Objects $A$ and $B$ is denoted
 \]
 and has the property for any two Morphisms $g, h : C \rightarrow A$,
 $fg = fh$ Implies $g = h$. If $f$ is a Monomorphism then $gf$ and $hf$
-are Idempotent.
+are Idempotent (\S\ref{subsec:idempotence}).
 
 
 
@@ -415,7 +427,7 @@ Epimorphism $f$ between Objects $A$ and $B$ is denoted
 and has the property that for any two Morphisms $g, h : B \rightarrow
 C$, $gf = hf$ Implies $g = h$. Note that being an Epimorphism doesn't
 necessitate the Morphism to be Surjective. If $f$ is an Epimorphism,
-then $fg$ and $fh$ are Idempotent.
+then $fg$ and $fh$ are Idempotent (\S\ref{subsec:idempotence}).
 
 An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
 \rightarrow X$ and Morphism $f : P \rightarrow X$, then $\exists
@@ -473,13 +485,21 @@ The collection of all Morphisms between two Objects $X$ and $Y$ in a
 Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
 $Hom(X,Y)$:
 \[
-    Hom(A,B) = \{f \in \mathbf{C} | f : A \rightarrow B\}
+    Hom(X,Y) = \{f \in \mathbf{C} | f : X \rightarrow Y\}
 \]
 Therefore
 \[
     Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
 \]
 Note that the Hom-set need not be a Set (it could be a Proper Class).
+
+Some Properties of Hom-sets:
+\begin{itemize}
+\item $ \langle X,Y \rangle \neq \langle X',Y' \rangle \rightarrow
+  Hom(X,Y) \cap Hom(X',Y') = \varnothing$
+\end{itemize}
+
+A definition of Categories can be given in terms of Hom-sets. %FIXME
 
 
 
@@ -536,6 +556,12 @@ Every Category has an Identity Functor $1_{\mathbf{C}} : \mathbf{C}
 \rightarrow \mathbf{C}$ and the Category of all Small Categories and
 Functors is denoted $\mathbf{Cat}$.
 
+Functors may also be defined in terms of the Object Mapping and Hom-sets:
+\[
+    F_{A,B} : Hom_{\mathbf{C}}(A,B) \rightarrow Hom_{\mathbf{D}}(F(A),F(B))
+\]
+where $F_{A,A}1_A = 1_{F(A)}$ and Composition is Commutative.
+
 Functors between Poset Categories are Monotonic Functions
 (\S\ref{subsec:monotonicity}).
 
@@ -576,10 +602,16 @@ A Faithful Functor may be considered an \emph{Embedding}, e.g. the
 \subsection{Contravariant Functor}\label{subsec:contravariant_functor}
 % --------------------------------------------------------------------
 
-A \emph{Contravariant Functor} is from a Dual Category to another
-Category, eg $F : \mathbf{C^{op}} \rightarrow \mathbf{D}$ while the
-Dual of a Contravariant Functor, a \emph{Covariant Functor}, is just
-an ordinary Functor.
+A \emph{Contravariant Functor} is from a Dual Category
+(\S\ref{subsec:opposite_category}) to another Category, e.g. $F :
+\mathbf{C^{op}} \rightarrow \mathbf{D}$, but expressed in terms of the
+original Category:
+\[
+    \overline{F} : \mathbf{C} \rightarrow \mathbf{D}
+\]
+
+The Dual (\S\ref{subsec:abstract_category}) of a Contravariant
+Functor, a \emph{Covariant Functor}.
 
 
 
@@ -644,6 +676,35 @@ is a \emph{Natural Isomorphism} (or \emph{Natural Equivalence}), and:
 % ====================================================================
 \section{Constructions}\label{sec:category_construction}
 % ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Opposite Categories}\label{subsec:opposite_category}
+% --------------------------------------------------------------------
+
+The \emph{Opposite} or \emph{Dual} (\S\ref{subsec:abstract_category})
+of a Category $\mathbf{C}$ is denoted $\mathbf{C^{op}}$ or
+$\mathbf{C^*}$ and has the same Objects as $\mathbf{C}$ but the Domain
+and Codomain in each Morphism is reversed. Objects and Morphisms of a
+Dual Category may be written with over-lines to distinguish them from
+the original Category: $\overline{f}: \overline{C} \rightarrow
+\overline{D}$. With this notation the following Equalities may be
+expressed:
+\[
+    1_{\overline{C}} = \overline{1_C}
+\]\[
+    \overline{f} \circ \overline{g} = \overline{g \circ f}
+\]
+A Terminal Object in $\mathbf{C}$ is an Initial Object in
+$\mathbf{C^{op}}$ and vice-versa.
+
+In a Dual Category the following are all Duals of eachother:
+\begin{itemize}
+    \item Monomorphisms and Epimorphisms (\S\ref{sec:morphism})
+    \item Left and Right Inverses (\S\ref{sec:morphism})
+    \item Initial and Terminal Objects (\S\ref{subsec:universal_property})
+\end{itemize}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Diagrams}\label{subsec:category_diagram}
