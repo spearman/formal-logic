@@ -76,8 +76,8 @@ An equivalent definition of Categories can be given in terms of
 
 \emph{Locally Small}
 
-A \emph{Concrete Category} is pair, $\langle \mathbf{C},U \rangle$,
-where $\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
+A \emph{Concrete Category} is pair, $(\mathbf{C},U)$, where
+$\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
 \mathbf{C} \rightarrow \mathbf{Set}$.
 
 Example Categories:
@@ -354,29 +354,6 @@ cod(g'_1)$.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Category Product}\label{subsec:category_product}
-% --------------------------------------------------------------------
-
-A \emph{Product} of two Categories $\mathbf{C}$ and $\mathbf{D}$ is
-denoted
-\[
-    \mathbf{C} \times \mathbf{D}
-\]
-has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
-\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
-: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
-\mathbf{D}$. Composition and Identity are defined as:
-\[
-    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
-\]\[
-    1_{(C,D)} = (1_C, 1_D)
-\]
-$\mathbf{C} \times \mathbf{D}$ is a Product
-(\S\ref{subsec:product_diagram}) in $\mathbf{Cat}$.
-
-
-
 % ====================================================================
 \section{Morphism}\label{sec:morphism}
 % ====================================================================
@@ -495,7 +472,7 @@ Note that the Hom-set need not be a Set (it could be a Proper Class).
 
 Some Properties of Hom-sets:
 \begin{itemize}
-\item $ \langle X,Y \rangle \neq \langle X',Y' \rangle \rightarrow
+\item $ (X,Y) \neq (X',Y') \rightarrow
   Hom(X,Y) \cap Hom(X',Y') = \varnothing$
 \end{itemize}
 
@@ -678,62 +655,6 @@ is a \emph{Natural Isomorphism} (or \emph{Natural Equivalence}), and:
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Opposite Categories}\label{subsec:opposite_category}
-% --------------------------------------------------------------------
-
-The \emph{Opposite} or \emph{Dual} (\S\ref{subsec:abstract_category})
-of a Category $\mathbf{C}$ is denoted $\mathbf{C^{op}}$ or
-$\mathbf{C^*}$ and has the same Objects as $\mathbf{C}$ but the Domain
-and Codomain in each Morphism is reversed. Objects and Morphisms of a
-Dual Category may be written with over-lines to distinguish them from
-the original Category: $\overline{f}: \overline{C} \rightarrow
-\overline{D}$. With this notation the following Equalities may be
-expressed:
-\[
-    1_{\overline{C}} = \overline{1_C}
-\]\[
-    \overline{f} \circ \overline{g} = \overline{g \circ f}
-\]
-A Terminal Object in $\mathbf{C}$ is an Initial Object in
-$\mathbf{C^{op}}$ and vice-versa.
-
-In a Dual Category the following are all Duals of eachother:
-\begin{itemize}
-    \item Monomorphisms and Epimorphisms (\S\ref{sec:morphism})
-    \item Left and Right Inverses (\S\ref{sec:morphism})
-    \item Initial and Terminal Objects (\S\ref{subsec:universal_property})
-\end{itemize}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Diagrams}\label{subsec:category_diagram}
-% --------------------------------------------------------------------
-
-A \emph{Diagram} consists of Objects and Morphisms that are Indexed by
-a Category or equivalently a \emph{Functor} from an Index Category to
-another Category. A Diagram is the Category Theory analogue of an
-Indexed Family of Sets (\S\ref{subsec:index_set}).
-
-A Diagram, $D$, with Index Category $\mathbf{J}$ in Category
-$\mathbf{C}$:
-\[
-    D : \mathbf{J} \rightarrow \mathbf{C}
-\]
-
-
-
-\subsubsection{Commutative Diagram}\label{subsec:commutative_diagram}
-
-
-
-\subsubsection{Cones}\label{subsec:category_cone}
-
-\emph{Universal Cone}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Universal Properties}\label{subsec:universal_property}
 % --------------------------------------------------------------------
 
@@ -806,6 +727,159 @@ from an arbitrary Domain Object, $X$
 \[
     x: X \rightarrow A
 \]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Opposite Categories}\label{subsec:opposite_category}
+% --------------------------------------------------------------------
+
+The \emph{Opposite} or \emph{Dual} (\S\ref{subsec:abstract_category})
+of a Category $\mathbf{C}$ is denoted $\mathbf{C^{op}}$ or
+$\mathbf{C^*}$ and has the same Objects as $\mathbf{C}$ but the Domain
+and Codomain in each Morphism is reversed. Objects and Morphisms of a
+Dual Category may be written with over-lines to distinguish them from
+the original Category: $\overline{f}: \overline{C} \rightarrow
+\overline{D}$. With this notation the following Equalities may be
+expressed:
+\[
+    1_{\overline{C}} = \overline{1_C}
+\]\[
+    \overline{f} \circ \overline{g} = \overline{g \circ f}
+\]
+A Terminal Object in $\mathbf{C}$ is an Initial Object in
+$\mathbf{C^{op}}$ and vice-versa.
+
+In a Dual Category the following are all Duals of eachother:
+\begin{itemize}
+    \item Monomorphisms and Epimorphisms (\S\ref{sec:morphism})
+    \item Left and Right Inverses (\S\ref{sec:morphism})
+    \item Initial and Terminal Objects (\S\ref{subsec:universal_property})
+\end{itemize}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Product}\label{subsec:category_product}
+% --------------------------------------------------------------------
+
+A \emph{Product}, $\times$, is a construction (or more specifically a
+Functor) on Categories or Functors:
+\[
+    \times : \mathbf{Cat} \times \mathbf{Cat} \rightarrow \mathbf{Cat}
+\]
+
+
+
+\subsubsection{Product Category}\label{subsec:product_category}
+
+A \emph{Product Category} can be constructed from two Categories,
+$\mathbf{C}$ and $\mathbf{D}$, and is denoted:
+\[
+    \mathbf{C} \times \mathbf{D}
+\]
+has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
+\mathbf{D}$ and Morphisms $(f,g) : (C,D) \rightarrow (C',D')$ where $f
+: C \rightarrow C' \in \mathbf{C}$ and $g : D \rightarrow D' \in
+\mathbf{D}$. Composition and Identity are defined as:
+\[
+    (f',g') \circ (f,g) = (f' \circ f,g' \circ g)
+\]\[
+    1_{(C,D)} = (1_C, 1_D)
+\]
+$\mathbf{C} \times \mathbf{D}$ is a Product
+(\S\ref{subsec:product_diagram}) in $\mathbf{Cat}$.
+
+
+
+\paragraph{Projection}\label{subsec:projection_functor}
+\hfill \\
+A Product Category has a pair of \emph{Projections} which are Functors
+from the Product Category to the original Categories:
+\[
+    \mathbf{C} \xleftarrow{\;\; P\;\;} \mathbf{C}\times\mathbf{D}
+    \xrightarrow{\;\; Q\;\;} \mathbf{D}
+\]
+such that for $C,f \in \mathbf{C}, D,g \in \mathbf{D}$:
+\[
+    P(C,D) = C, \;\; P(f,g) = f
+\]\[
+    Q(C,D) = D, \;\; Q(f,g) = g
+\]
+Given any other Category, $\mathbf{B}$, there exists a unique Functor:
+\[
+    F : \mathbf{B} \rightarrow \mathbf{C} \times \mathbf{D}
+\]
+with:
+\[
+    PF = R : \mathbf{B} \rightarrow \mathbf{C}
+\]\[
+    QF = T : \mathbf{B} \rightarrow \mathbf{D}
+\]
+giving:
+\[
+    \forall h \in B, F(h) = (Rh,Th)
+\]
+
+
+
+\paragraph{Bifunctor}\label{subsec:bifunctor}
+\hfill \\
+
+A \emph{Bifunctor} is a Functor from a Product Category to
+an arbitrary Category:
+\[
+    S : \mathbf{C} \times \mathbf{D} \rightarrow \mathbf{A}
+\]
+
+% FIXME incomplete
+
+
+
+\subsubsection{Functor Product}\label{subsec:functor_product}
+
+Give two Functors, $U : \mathbf{C} \rightarrow \mathbf{C'}$ and $V :
+\mathbf{D} \rightarrow \mathbf{D'}$, a \emph{Functor Product} is
+defined as:
+\[
+    U \times V : \mathbf{C} \times \mathbf{D}
+    \rightarrow \mathbf{C'} \times \mathbf{D'}
+\]
+where:
+\[
+    (U \times V)(C,D) = (UC,VD), \;\; (U \times V)(f,g) = (Uf,Vg)
+\]
+and $(U \times V)$ is the unique Functor such that:
+\[
+    P'(U \times V) = UP, \;\; Q'(U \times V) = VQ
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Diagrams}\label{subsec:category_diagram}
+% --------------------------------------------------------------------
+
+A \emph{Diagram} consists of Objects and Morphisms that are Indexed by
+a Category or equivalently a \emph{Functor} from an Index Category to
+another Category. A Diagram is the Category Theory analogue of an
+Indexed Family of Sets (\S\ref{subsec:index_set}).
+
+A Diagram, $D$, with Index Category $\mathbf{J}$ in Category
+$\mathbf{C}$:
+\[
+    D : \mathbf{J} \rightarrow \mathbf{C}
+\]
+
+
+
+\subsubsection{Commutative Diagram}\label{subsec:commutative_diagram}
+
+
+
+\subsubsection{Cones}\label{subsec:category_cone}
+
+\emph{Universal Cone}
 
 
 
