@@ -4458,7 +4458,7 @@ Combination of Descriptive Set Theory with \emph{Recursion Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 A \emph{Topology}, $\tau$, is a collection of Subsets called
-\emph{Open Sets} (\S\ref{subsec:open_sets}), of a \emph{Metric Space}
+\emph{Open Sets} (\S\ref{subsec:open_sets}) of a \emph{Metric Space}
 (\S\ref{sec:metric_space}), $M$, subject to the following Inductive
 definition:
 \begin{enumerate}
@@ -4470,6 +4470,10 @@ definition:
 
 An equivalent definition is possible in terms of \emph{Closed Sets}
 (\S\ref{subsec:closed_set}).
+
+Given two Topologies, $\tau_1 \subset \tau_2$, $\tau_1$ is
+\emph{Coarse} relative to $\tau_2$, and $\tau_2$ is \emph{Fine}
+relative to $\tau_1$.
 
 
 
@@ -4485,6 +4489,8 @@ A Metric Space $M$ can then be defined as the pair:
     (M,d)
 \]
 where $M$ is a Set of Elements and $d$ is a Distance Function.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Metrics}\label{subsec:metrics}
@@ -4548,6 +4554,8 @@ sufficient condition for Metric Equivalence is given by:
     (\mathbf{p},\mathbf{q}) \mapsto \sum_{i=1}^{n}|q_i - p_i|
 \]
 
+
+
 % --------------------------------------------------------------------
 \subsection{Balls}\label{subsec:metric_balls}
 % --------------------------------------------------------------------
@@ -4561,6 +4569,8 @@ $r > 0$ as determined by the Distance Function of the Metric Space:
 The above is termed an \emph{Open Ball} because it does not include
 the points where $d(x,p) = r$. Such a Ball including these additional
 Points is called a \emph{Closed Ball}.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Open Sets}\label{subsec:open_sets}
@@ -4584,6 +4594,8 @@ properties:
 \end{enumerate}
 Note that an arbitrary Intersection of Open Sets is not necessarily an
 Open Set.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Closed Set}\label{subsec:closed_set}
@@ -4664,7 +4676,10 @@ Properties:
 \end{enumerate}
 An example of a Base is the Set of all Open Balls in a Metric Space.
 
-A Base is not necessarily Unique for a given Topology.
+A Base is not necessarily Unique for a given Topology. Adding Elements
+to a Base results in another Base.
+
+
 
 \subsubsection{Subbase}
 
@@ -4683,14 +4698,58 @@ There is no unique Subbase for a given Topology.
 \section{Point-set Topology}\label{sec:point_set}
 % ====================================================================
 
-\emph{Interior}
-
-
 % --------------------------------------------------------------------
 \subsection{Point}\label{subsec:topological_point}
 % --------------------------------------------------------------------
 
+\emph{Point}
+
+Two Points that are within the same Open Set of a Topology are said to
+be \emph{Topologically Indistinguishable}.
+
+
+
 \subsubsection{Isolated Point}\label{subsec:isolated_point}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Neighborhood}\label{subsec:neighborhood}
+% --------------------------------------------------------------------
+
+A \emph{Neighborhood} of a Point $x$ in a Topological Space $(M,\tau)$
+is a Set $V \subseteq M$ such that:
+\[
+    \exists U \in \tau : U \subseteq V \wedge x \in U
+\]
+
+
+
+\subsubsection{Neighborhood System}
+
+Given a Point $x$ in any Topological Space, a \emph{Neighbordhood
+  System}, $V(x)$, is the Set of all Neighborhoods of $x$.
+
+
+
+\subsubsection{Neighborhood Base}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Interior}\label{subsec:interior}
+% --------------------------------------------------------------------
+
+For a Subset, $V$, of a Topology, $\tau$, a Point $x \in V$ is in the
+\emph{Interior} of $V$, $V^{\circ}$, if there is a Neighborhood of
+$x$, $N \subset V$. Inductively, for $\{A_i\}_{i \in I} \subseteq \tau
+\wedge \forall i, A_i \subseteq V$:
+\[
+    V^{\circ} = \bigcup_{i \in I} A_i \subseteq \tau
+\]
+Equivalently, the Interior of $V$ is every Open Set within $V$ and is
+itself an Open Set.
+
 
 % --------------------------------------------------------------------
 \subsection{Continuity}\label{subsec:topological_continuity}
@@ -4899,6 +4958,8 @@ Edge is \emph{Incident} to those Vertices. Two Vertices $A,B$ are
 \]
 A \emph{Self-loop} is an Edge with both Endpoints the same Vertex.
 
+
+
 % --------------------------------------------------------------------
 \subsection{Multigraph} \label{subsec:multigraph}
 % --------------------------------------------------------------------
@@ -4907,11 +4968,15 @@ A \emph{Multigraph} (or \emph{Pseudo-graph}) is a Graph where $E$ is a
 Multiset where Edges with Multiplicity $>1$ are called
 \emph{Parallel}.
 
+
+
 % --------------------------------------------------------------------
 \subsection{Simple Graph} \label{subsec:simple_graph}
 % --------------------------------------------------------------------
 
 A \emph{Simple Graph} has no Self-loops and no Parallel Edges.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Undirected Graph} \label{subsec:undirected_graph}
@@ -4923,6 +4988,8 @@ In an \emph{Undirected Graph}, it is required that for $A,B \in V$:
 \]
 This is the definition of a Symmetric Relation
 (\S\ref{subsec:binary_relations}) on $V$.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Directed Graph} \label{subsec:directed_graph}
