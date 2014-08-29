@@ -56,8 +56,13 @@ A \emph{Precategory} (or \emph{Diagram Scheme}), $G$, is a Directed
 Graph (\S\ref{subsec:directed_graph}) in the context of Category
 Theory. A Precategory is used to generate a \emph{Free Category}
 (\S\ref{subsec:free_category}). Here we will use the notation for
-Categories (\S\ref{sec:category}) to equate Vertices with Objects
-$G_0$ and Edges with Morphisms $G_1$.
+\emph{Categories} (\S\ref{sec:category}) to equate Vertices with
+Objects $G_0$ and Edges with Morphisms $G_1$. A Precategory can then
+be described as a pair of Functions, $cod$ and $dom$, from the Set of
+Edges to the Set of Objects:
+\[
+    G = \{G_1 \rightrightarrows G_0\}
+\]
 
 A Morphism $D : G \rightarrow G'$ between Precategories is a pair of
 Functions:
@@ -79,11 +84,17 @@ the set of Composable Morphisms.
 
 A Category can be seen as a Graph, $G$, with two Morphisms:
 \begin{enumerate}
-    \item $c : G \times_{G_0} G \rightarrow G$ Mapping Composable
-      Morphisms to their Composite
-    \item $i: G_0 \rightarrow G_1$ Mapping Objects to their Identity
-      Functions
+    \item Mapping Composable Morphisms to their Composite:
+        \[c : G \times_{G_0} G \rightarrow G\]
+    \item Mapping Objects to their Identity Functions:
+        \[i: G_0 \rightarrow G_1\]
 \end{enumerate}
+The underlying Graph of a Category, $\mathbf{C}$, is denoted
+$U(\mathbf{C})$ where $U$ is the \emph{Underlying Graph Functor}
+(\S\ref{sec:functor}).
+
+For a Morphism of Graphs, $D : G \rightarrow U(\mathbf{B})$, there is
+a corresponding Functor: $D' : \mathbf{C}_G \rightarrow \mathbf{B}$.
 
 The Category of all Small Directed Graphs and Graph Morphisms is
 $\mathbf{Grph}$.
@@ -258,6 +269,32 @@ If $I$ is a \emph{Full Functor}, then $S$ is a \emph{Full
 
 
 
+% --------------------------------------------------------------------
+\subsection{Hom-set}\label{subsec:hom_set}
+% --------------------------------------------------------------------
+
+The collection of all Morphisms between two Objects $X$ and $Y$ in a
+Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
+$Hom(X,Y)$:
+\[
+    Hom(X,Y) = \{f \in \mathbf{C} | f : X \rightarrow Y\}
+\]
+Therefore
+\[
+    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
+\]
+Note that the Hom-set need not be a Set (it could be a Proper Class).
+
+Some Properties of Hom-sets:
+\begin{itemize}
+\item $ (X,Y) \neq (X',Y') \rightarrow
+  Hom(X,Y) \cap Hom(X',Y') = \varnothing$
+\end{itemize}
+
+A definition of Categories can be given in terms of Hom-sets. %FIXME
+
+
+
 % ====================================================================
 \section{Morphism}\label{sec:morphism}
 % ====================================================================
@@ -355,32 +392,6 @@ A Morphism $f : X \rightarrow Y$ is a \emph{Co-constant Morphism} if
 for any $g, h : Y \rightarrow Z$, $gf = hf$.
 
 \emph{Zero Morphism} is one that is both Constant and Co-constant.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Hom-set}\label{subsec:hom_set}
-% --------------------------------------------------------------------
-
-The collection of all Morphisms between two Objects $X$ and $Y$ in a
-Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
-$Hom(X,Y)$:
-\[
-    Hom(X,Y) = \{f \in \mathbf{C} | f : X \rightarrow Y\}
-\]
-Therefore
-\[
-    Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
-\]
-Note that the Hom-set need not be a Set (it could be a Proper Class).
-
-Some Properties of Hom-sets:
-\begin{itemize}
-\item $ (X,Y) \neq (X',Y') \rightarrow
-  Hom(X,Y) \cap Hom(X',Y') = \varnothing$
-\end{itemize}
-
-A definition of Categories can be given in terms of Hom-sets. %FIXME
 
 
 
@@ -564,7 +575,9 @@ G \rightarrow H$ between Functors $F,G,H : \mathbf{C} \rightarrow
 \[
     \epsilon \eta : F \rightarrow H
 \]
-Vertical Composition is Associative and has an Identity.
+Vertical Composition may be explicitly denoted with the $\cdot$
+Operator, $\epsilon \cdot \eta$. Vertical Composition is Associative
+and has an Identity.
 
 
 
@@ -579,8 +592,26 @@ Given Functors $F,G : \mathbf{C} \rightarrow \mathbf{D}$ and $J,K :
 \[
     \eta \epsilon : JF \rightarrow KG
 \]
-Horizontal Composition is Associative and has the same Identity as
-Vertical Composition.
+Horizontal Composition may be explicitly denoted with the $\circ$
+Operator: $\eta \circ \epsilon$. Horizontal Composition is Associative
+and has the same Identity as Vertical Composition.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Interchange Law}\label{subsec:interchange_law}
+% --------------------------------------------------------------------
+
+Given three Categories, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$,
+and six Functors, $P,Q,R : \mathbf{B} \rightarrow \mathbf{C}$ and
+$S,T,U : \mathbf{C} \rightarrow \mathbf{D}$, and four Natural
+Transformations, $\sigma : P \rightarrow Q$, $\tau : Q \rightarrow R$,
+$\sigma' : S \rightarrow T$, and $\tau' : T \rightarrow U$, the
+following \emph{Interchange Law} applies:
+\[
+    (\tau' \cdot \sigma') \circ (\tau \cdot \sigma) =
+    (\tau' \circ \tau) \cdot (\sigma' \circ \sigma)
+\]
 
 
 
@@ -859,7 +890,7 @@ The Hom-set in a Functor Category may be denoted:
 \subsection{Free Category}\label{subsec:free_category}
 % --------------------------------------------------------------------
 
-A \emph{Free Category}, $\mathbf{C}(G)$, is Generated by a Directed
+A \emph{Free Category}, $\mathbf{C}_G$, is Generated by a Directed
 Graph or Precategory (\S\ref{subsec:precategory}), $G$, of Vertices
 and Edges under Concatenation of Paths.
 
@@ -892,6 +923,25 @@ pairs $(g,h)$ where $g : \alpha \rightarrow \alpha'$ is a Morphism in
 $\mathbf{A}$ and $h : \beta \rightarrow \beta'$ is a Morphism in
 $\mathbf{B}$.
 
+When $S$ is a Functor, $\mathbf{1} \xrightarrow{\;\;S\;\;}
+\mathbf{C}$, to a single Object $A \in \mathbf{C}$, the resulting
+Comma Category may be denoted $(A \downarrow \mathbf{C})$ and is
+called the Category of Objects under $A$. Here Objects are Morphisms
+with Domain of $A$, and Morphisms are Commutative triangles with top
+Vertex $A$.
+
+The Category of Objects over $A$ is likewise $(\mathbf{C} \downarrow
+A)$ and has as Objects Morphisms with Codomain $A$ and Morphisms are
+Commutative triangles with a bottom Vertex $A$.
+
+When both $S$ and $T$ are Functors from $\mathbf{1}$ to Objects $A$
+and $B$ respectively, the result is a Discrete Category whose Objects
+are $Hom(A,B)$.
+
+The case where $S = T = 1_\mathbf{C}$, $(\mathbf{C} \downarrow
+\mathbf{C})$, is the Category of all Morphisms of $\mathbf{C}$:
+$\mathbf{C}^\mathbf{2}$.
+
 
 
 \subsubsection{Arrow Categories}\label{subsec:arrow_categories}
@@ -920,8 +970,25 @@ the Morphism in the Slice Category between the two is $g$ such that
 
 
 % --------------------------------------------------------------------
-\subsection{Congruence Category}\label{subsec:congruence_category}
+\subsection{Quotient Category}\label{subsec:quotient_category}
 % --------------------------------------------------------------------
+
+The \emph{Quotient Category} is defined for a Category $\mathbf{C}$
+with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
+\[
+    (\mathbf{C}/\sim)_0 = \mathbf{C_0}
+\]\[
+    (\mathbf{C}/\sim)_1 = (\mathbf{C_1})/\sim
+\]
+where Morphisms are of the form $[f]$ where $f \in \mathbf{C_1}$.
+
+For a Category $\mathbf{C}$ with Graph $G$ and relations $R$,
+$\mathbf{C}/R$ is called the Category with \emph{Generators} $G$ and
+\emph{Relations} $R$.
+
+
+
+\subsubsection{Congruence Category}\label{subsec:congruence_category}
 
 \emph{Congruence} on a Category is an Equivalence Relation on
 Morphisms such that for two Morphisms $f,g \in \mathbf{C_1}$, $f \sim
@@ -934,7 +1001,7 @@ g$ Implies:
 Such a Congruence defines a \emph{Congruence Category}
 $\mathbf{C^{\sim}}$:
 \[
-    (\mathbf{C^{\sim}})_0 = \mathbf{C_0}
+    (\mathbf{C^{\sim}})_0 = \mathbf{C}_0
 \]\[
     (\mathbf{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
 \]\[
@@ -942,19 +1009,6 @@ $\mathbf{C^{\sim}}$:
 \]\[
     \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
 \]
-
-
-
-\subsubsection{Quotient Category}\label{subsec:quotient_category}
-
-The \emph{Quotient Category} is defined for a Category $\mathbf{C}$
-with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
-\[
-    (\mathbf{C}/\sim)_0 = \mathbf{C_0}
-\]\[
-    (\mathbf{C}/\sim)_1 = (\mathbf{C_1})/\sim
-\]
-where Morphisms are of the form $[f]$ where $f \in \mathbf{C_1}$.
 
 
 
