@@ -75,7 +75,7 @@ such that $\forall f \in G_1$:
 \]\[
     D_0(cod(f)) = cod(D_1(f))
 \]
-Give two Graphs, $A$ and $B$, with the same Set of Objects, $O$, the
+Given two Graphs, $A$ and $B$, with the same Set of Objects, $O$, the
 Product $\times_O$ over $O$ is defined as:
 \[
     A \times_O B = \{ (g,f) | dom(g) = cod(f), g \in A, f \in B \}
@@ -89,20 +89,20 @@ A Category can be seen as a Graph, $G$, with two Morphisms:
     \item Mapping Objects to their Identity Functions:
         \[i: G_0 \rightarrow G_1\]
 \end{enumerate}
-The underlying Graph of a Category, $\mathbf{C}$, is denoted
+The \emph{Underlying Graph} of a Category, $\mathbf{C}$, is denoted
 $U(\mathbf{C})$ where $U$ is the \emph{Underlying Graph Functor}
 (\S\ref{sec:functor}).
 
 For a Morphism of Graphs, $D : G \rightarrow U(\mathbf{B})$, there is
-a corresponding Functor: $D' : \mathbf{C}_G \rightarrow \mathbf{B}$.
+a corresponding Functor of Categories: $D' : \mathbf{C}_G \rightarrow
+\mathbf{B}$.
 
 The Category of all Small Directed Graphs and Graph Morphisms is
 $\mathbf{Grph}$.
 
-The Forgetful Functor (\S\ref{sec:functor}) $U : \mathbf{Cat}
-\rightarrow \mathbf{Grph}$ Maps a Categories to their underlying
-Graphs, effectively forgetting which Morphisms are Identities and
-which are Composites.
+The Forgetful Functor $U : \mathbf{Cat} \rightarrow \mathbf{Grph}$
+Maps a Categories to their underlying Graphs, effectively forgetting
+which Morphisms are Identities and which are Composites.
 
 
 
@@ -446,7 +446,10 @@ and Morphisms of $\mathbf{D}$ with the following Equivalences:
 \end{itemize}
 Every Category has an Identity Functor $1_{\mathbf{C}} : \mathbf{C}
 \rightarrow \mathbf{C}$ and the Category of all Small Categories and
-Functors is denoted $\mathbf{Cat}$.
+Functors is denoted $\mathbf{Cat}$. Note that in constructions
+(\S\ref{sec:category_construction}) where a Functor appears, if that
+Functor is an Identity Functor, the Category instead may be
+substituted.
 
 Functors may also be defined in terms of the Object Mapping and Hom-sets:
 \[
@@ -612,128 +615,6 @@ following \emph{Interchange Law} applies:
     (\tau' \cdot \sigma') \circ (\tau \cdot \sigma) =
     (\tau' \circ \tau) \cdot (\sigma' \circ \sigma)
 \]
-
-
-
-% ====================================================================
-\section{Universal Properties}\label{sec:universal_property}
-% ====================================================================
-
-There are two \emph{Universal Properties} of Objects: \emph{Initial}
-and \emph{Final}.
-
-An Object $0$ in a Category $\mathbf{C}$ is Initial if for every other
-Object $A$ in the Category there is a unique Morphism $0 \rightarrow
-A$.
-
-An Object $1$ in a Category $\mathbf{C}$ is Terminal if for every
-other Object $A$ in the Category there is a unique Morphism $A
-\rightarrow 1$.
-
-An Object that is both an Initial and a Terminal Object is called a
-\emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
-Object is called a \emph{Pointed Category}. For a Zero Object, $Z \in
-\mathbf{C}$, there is a Unique Morphism between any two Objects, $A, B
-\in \mathbf{C}$ called the \emph{Composite} in $Z$:
-\[
-    A \rightarrow Z \rightarrow B
-\]
-
-It follows for any pair of Objects that are both Terminal and/or both
-Initial that an Isomorphism (\S\ref{subsec:isomorphism}) exists
-between them; that is, Universal Objects are always unique up to
-Isomorphism.
-
-As an example, in $\mathbf{Set}$, all Singleton Sets are Terminal, and
-as such they are all Isomorphic to one another. Given a Set $X$:
-\[
-    |X| = 1 \leftrightarrow \forall Y, |Hom_{\mathbf{Sets}}(Y,X)| = 1
-\]
-Also in $\mathbf{Set}$ the Empty Set is Initial as the only mapping
-from it to any other Set is the Empty Function. In $\mathbf{Grp}$, a
-Trivial Group ${1}$ is a Zero Object.
-
-Given a Functor $U: \mathbf{D} \rightarrow \mathbf{C}$, an
-\emph{Initial Morphism} is an Initial Object in the Comma Category $(X
-\downarrow U)$ where $X \in \mathbf{C_0}$.
-
-\emph{Terminal Morphism}
-
-\emph{Initial Property} \emph{Terminal Property}
-
-\emph{Universal Morphism}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Universal Mapping Property}
-\label{subsec:universal_mapping_property}
-% --------------------------------------------------------------------
-
-\emph{Existence}
-
-\emph{Uniqueness}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Global \& General Elements}\label{subsec:general_element}
-% --------------------------------------------------------------------
-
-A \emph{Global Element}, $a$, (also \emph{Point} or \emph{Constant})
-of an Object, $A$, is a Morphism from a Terminal Object, $1$, to that
-Object
-\[
-    a: 1 \rightarrow A
-\]
-
-A \emph{General Element}, $x$, (also \emph{Variable}) is a Morphism
-from an arbitrary Domain Object, $X$
-\[
-    x: X \rightarrow A
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Limits \& Colimits}\label{subsec:category_limits}
-% --------------------------------------------------------------------
-
-\subsubsection{Products \& Coproducts}\label{subsec:product_diagram}
-
-A \emph{Product} of two Objects $A \times B$:
-\[
-    A \xleftarrow{\;\;p_1\;\;} P \xrightarrow{\;\;p_2\;\;} B
-\]
-is a Product of $A$ and $B$ if and only if for any $A
-\xleftarrow{\;\;z_1\;\;} Z \xrightarrow{\;\;z_2\;\;} B$
-\[
-    \exists!u : Z \rightarrow P
-\]
-with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
-\rangle$ as it is uniquely determined by $z_1$ and $z_2$.
-
-Products are unique up to Isomorphism (\S\ref{subsec:isomorphism}).
-
-The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
-is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;} Z
-\xleftarrow{\;\;z_2\;\;} B$
-\[
-    \exists!u : Q \rightarrow Z
-\]
-with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
-and Coprojections $q_i$ may be called \emph{Injections} (although they
-are not necessarily Injective Morphisms).
-
-Disjoint Union %FIXME ref disjoint union
-
-\emph{N-ary Products}
-
-\paragraph{Exponentials}\label{subsec:category_exponential}
-
-
-
-\subsubsection{Pushouts \& Pullbacks}\label{subsec:category_pullback}
 
 
 
@@ -973,6 +854,8 @@ the Morphism in the Slice Category between the two is $g$ such that
 \subsection{Quotient Category}\label{subsec:quotient_category}
 % --------------------------------------------------------------------
 
+%FIXME this probably needs a rewrite
+
 The \emph{Quotient Category} is defined for a Category $\mathbf{C}$
 with Congruence Relation $\sim$ as $\mathbf{C}/\sim$:
 \[
@@ -1030,6 +913,7 @@ Category of $\sim_F$
 
 \subsubsection{Finitely Presented Category}\label{subsec:finitely_presented}
 
+% FIXME free category notation?
 A \emph{Finitely Presented Category} is given by taking the Quotient
 Category of a Free Category $\mathbf{C}(G)$ with the Congruence
 $\sim_\Sigma$
@@ -1082,6 +966,176 @@ $\mathbf{C}$:
 \subsubsection{Cartesian Closed Categories}\label{subsec:cartesian_category}
 
 \emph{Simply Typed $\lambda$-calculus} (\S\ref{subsec:simply_typed})
+
+
+
+% ====================================================================
+\section{Universal Properties}\label{sec:universal_property}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Universal Mapping Property}
+\label{subsec:universal_mapping_property}
+% --------------------------------------------------------------------
+
+\emph{Existence}
+
+\emph{Uniqueness}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Initial \& Terminal Objects}\label{subsec:initial_terminal}
+% --------------------------------------------------------------------
+
+There are two Universal Properties of Objects: \emph{Initial} and
+\emph{Terminal}.
+
+An Object $0$ in a Category $\mathbf{C}$ is Initial if for every other
+Object $A$ in the Category there is a unique Morphism $0 \rightarrow
+A$.
+
+An Object $1$ in a Category $\mathbf{C}$ is Terminal if for every
+other Object $A$ in the Category there is a unique Morphism $A
+\rightarrow 1$.
+
+An Object that is both an Initial and a Terminal Object is called a
+\emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
+Object is called a \emph{Pointed Category}. For a Zero Object, $Z \in
+\mathbf{C}$, there is a Unique Morphism between any two Objects, $A, B
+\in \mathbf{C}$ called the \emph{Composite} in $Z$:
+\[
+    A \rightarrow Z \rightarrow B
+\]
+
+It follows for any pair of Objects that are both Terminal and/or both
+Initial that an Isomorphism (\S\ref{subsec:isomorphism}) exists
+between them; that is, Universal Objects are always unique up to
+Isomorphism.
+
+As an example, in $\mathbf{Set}$, all Singleton Sets are Terminal, and
+as such they are all Isomorphic to one another. Given a Set $X$:
+\[
+    |X| = 1 \leftrightarrow \forall Y, |Hom_{\mathbf{Sets}}(Y,X)| = 1
+\]
+Also in $\mathbf{Set}$ the Empty Set is Initial as the only mapping
+from it to any other Set is the Empty Function. In $\mathbf{Grp}$, a
+Trivial Group ${1}$ is a Zero Object.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Universal Morphism}\label{subsec:universal_morphism}
+% --------------------------------------------------------------------
+
+Given a Functor $S: \mathbf{D} \rightarrow \mathbf{C}$, an
+\emph{Universal Morphism} to $S$ or \emph{Initial Morphism}, is an
+Initial Object of the form $(X',u)$ in the Comma Category
+(\S\ref{subsec:comma_category}) $(X \downarrow S)$ where $X \in
+\mathbf{C_0}$, $u : X \rightarrow S(X')$ and $X' \in D$.
+%FIXME is X' initial and/or terminal in D?
+
+The Dual concept of an Initial Morphism, an Universal Morphism from
+$S$ or \emph{Terminal Morphism}, is a Terminal Object of the form
+$(X',v)$ in the Comma Category $(S \downarrow X)$ where $v : S(X')
+\rightarrow X \in \mathbf{C}$.
+
+%FIXME universality in terms of Hom sets
+
+\emph{Initial Property} \emph{Terminal Property}
+
+\emph{Representable Functor} (\S\ref{subsec:representable_functor})
+
+
+
+\subsubsection{Universal Element}\label{subsec:universal_element}
+
+For a Functor $H : \mathbf{D} \rightarrow \mathbf{Set}$, an
+\emph{Universal Element} of $H$ is a pair of Objects $(A,X) \in
+\mathbf{D}_0 \times \mathbf{Set}_0$ such that:
+\[
+    \forall (A',X') \in \mathbf{D}_0 \times \mathbf{Set}_0,
+    \exists! f : A \rightarrow A' \in \mathbf{D} : H(f)(X) = X'
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Global \& General Elements}\label{subsec:general_element}
+% --------------------------------------------------------------------
+
+A \emph{Global Element}, $a$, (also \emph{Point} or \emph{Constant})
+of an Object, $A$, is a Morphism from a Terminal Object, $1$, to that
+Object
+\[
+    a: 1 \rightarrow A
+\]
+
+A \emph{General Element}, $x$, (also \emph{Variable}) is a Morphism
+from an arbitrary Domain Object, $X$
+\[
+    x: X \rightarrow A
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Limits \& Colimits}\label{subsec:category_limits}
+% --------------------------------------------------------------------
+
+\emph{Limit} = \emph{Inverse Limit} = \emph{Projective Limit} =
+\emph{Left Root}
+
+\emph{Colimit} = \emph{Direct Limit} = \emph{Inductive Limit} =
+\emph{Right Root}
+
+
+
+\subsubsection{Products \& Coproducts}\label{subsec:product_diagram}
+
+A \emph{Product} of two Objects $A \times B$:
+\[
+    A \xleftarrow{\;\;p_1\;\;} P \xrightarrow{\;\;p_2\;\;} B
+\]
+is a Product of $A$ and $B$ if and only if for any $A
+\xleftarrow{\;\;z_1\;\;} Z \xrightarrow{\;\;z_2\;\;} B$
+\[
+    \exists!u : Z \rightarrow P
+\]
+with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
+\rangle$ as it is uniquely determined by $z_1$ and $z_2$.
+
+Products are unique up to Isomorphism (\S\ref{subsec:isomorphism}).
+
+The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
+is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;} Z
+\xleftarrow{\;\;z_2\;\;} B$
+\[
+    \exists!u : Q \rightarrow Z
+\]
+with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
+and Coprojections $q_i$ may be called \emph{Injections} (although they
+are not necessarily Injective Morphisms).
+
+Disjoint Union %FIXME ref disjoint union
+
+\emph{N-ary Products}
+
+\paragraph{Exponentials}\label{subsec:category_exponential}
+
+
+
+\subsubsection{Pushouts \& Pullbacks}\label{subsec:category_pullback}
+
+
+
+\subsubsection{Equalizer}\label{subsec:limit_equalizer}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Yoneda Lemma}\label{subsec:yoneda_lemma}
+% --------------------------------------------------------------------
 
 
 
