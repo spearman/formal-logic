@@ -130,9 +130,10 @@ Category) is a member of a fixed \emph{Universe}
 (\S\ref{sec:set_universe}) of Sets.
 
 An equivalent definition of Categories can be given in terms of
-\emph{Hom-sets} (\S\ref{subsec:hom_set}).
-
-\emph{Locally Small}
+\emph{Hom-sets} (\S\ref{subsec:hom_set}). A \emph{Locally Small
+Category} is one for which all Hom-sets are themselves Sets and not
+  Proper Classes.
+% FIXME definition in terms of hom-sets
 
 A \emph{Concrete Category} is pair, $(\mathbf{C},U)$, where
 $\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
@@ -284,6 +285,10 @@ Therefore
     Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
 \]
 Note that the Hom-set need not be a Set (it could be a Proper Class).
+A Category for which all Hom-sets are Sets is called a \emph{Locally
+  Small Category}.
+
+
 
 Some Properties of Hom-sets:
 \begin{itemize}
@@ -466,11 +471,13 @@ Input Category in the Output Category.
 An \emph{Inclusion Functor} is a Functor from a Subcategory to its
 containing Category (\S\ref{subsec:subcategory}).
 
-\emph{Hom Functor}
-
-\emph{Bifunctor} \emph{Multifunctor}
+A Functor on two Categories is a \emph{Bifunctor}
+(\S\ref{subsec:bifunctor}) and generalised to more Categories is a
+\emph{Multifunctor}.
 
 \emph{Product Functor}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Faithful \& Full Functor}\label{subsec:faithful_functor}
@@ -494,7 +501,8 @@ A Faithful Functor may be considered an \emph{Embedding}, e.g. the
 
 
 % --------------------------------------------------------------------
-\subsection{Contravariant Functor}\label{subsec:contravariant_functor}
+\subsection{Contravariant \& Covariant Functor}
+\label{subsec:contravariant_functor}
 % --------------------------------------------------------------------
 
 A \emph{Contravariant Functor} is from a Dual Category
@@ -507,6 +515,47 @@ original Category:
 
 The Dual (\S\ref{subsec:abstract_category}) of a Contravariant
 Functor, a \emph{Covariant Functor}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hom-functor}\label{subsec:hom_functor}
+% --------------------------------------------------------------------
+
+A \emph{Hom-functor} Maps between a given Locally Small Category,
+$\mathbf{C}$, and $\mathbf{Set}$, and has a Covariant and a
+Contravariant definition:
+
+\begin{enumerate}
+    \item \emph{Covariant Hom-functor}, for $A,f : X \rightarrow Y \in
+      \mathbf{C}$:
+\[
+    Hom(A,-) : \mathbf{C} \rightarrow \mathbf{Set}
+\]\[
+    X \mapsto Hom(A,X)
+\]\[
+    f \mapsto Hom(A,f) : Hom(A,X) \rightarrow Hom(A,Y)
+\]
+    where $Hom(A,f)$ is defined for all $g \in Hom(A,X)$ as:
+\[
+    g \mapsto f \circ g
+\]
+
+    \item \emph{Contravariant Hom-functor} (also \emph{Functor of
+      Points}, see \S\ref{subsec:general_element}), for $B,h : X
+      \rightarrow Y \in \mathbf{C}$:
+\[
+    Hom(-,B) : \mathbf{C} \rightarrow \mathbf{Set}
+\]\[
+    X \mapsto Hom(X,B)
+\]\[
+    h \mapsto Hom(h,B) : Hom(Y,B) \rightarrow Hom(X,B)
+\]
+    where $Hom(h,B)$ is defined for all $g \in Hom(Y,B)$ as:
+\[
+    g \mapsto g \circ h
+\]
+\end{enumerate}
 
 
 
@@ -1032,23 +1081,33 @@ Given a Functor $S: \mathbf{D} \rightarrow \mathbf{C}$, an
 \emph{Universal Morphism} to $S$ or \emph{Initial Morphism}, is an
 Initial Object of the form $(X',u)$ in the Comma Category
 (\S\ref{subsec:comma_category}) $(X \downarrow S)$ where $X \in
-\mathbf{C_0}$, $u : X \rightarrow S(X')$ and $X' \in D$.
+\mathbf{C_0}$, $u : X \rightarrow S(X')$ and $X' \in \mathbf{D}$.
 %FIXME is X' initial and/or terminal in D?
+
+$(X', u)$ satisfies the \emph{Initial Property}:
+\[
+    \forall Y' \in \mathbf{D}, \forall f : X \rightarrow S(Y') \in
+    \mathbf{C}, \exists! g : X' \rightarrow Y' : S(g) \circ u = f
+\]
 
 The Dual concept of an Initial Morphism, an Universal Morphism from
 $S$ or \emph{Terminal Morphism}, is a Terminal Object of the form
 $(X',v)$ in the Comma Category $(S \downarrow X)$ where $v : S(X')
 \rightarrow X \in \mathbf{C}$.
 
+$(X',v)$ satisfies the \emph{Terminal Property}:
+\[
+    \forall Y' \in \mathbf{D}, \forall f : S(Y') \rightarrow X \in
+    \mathbf{C}, \exists! g : Y' \rightarrow X' : v \circ S(g) = f
+\]
+
 %FIXME universality in terms of Hom sets
-
-\emph{Initial Property} \emph{Terminal Property}
-
-\emph{Representable Functor} (\S\ref{subsec:representable_functor})
 
 
 
 \subsubsection{Universal Element}\label{subsec:universal_element}
+
+\emph{Representable Functor} (\S\ref{subsec:representable_functor})
 
 For a Functor $H : \mathbf{D} \rightarrow \mathbf{Set}$, an
 \emph{Universal Element} of $H$ is a pair of Objects $(A,X) \in

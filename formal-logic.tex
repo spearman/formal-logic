@@ -1832,6 +1832,11 @@ Language of that Theory, the Theory contains either that Sentence or
 its Negation. Such a Set of Sentences is a \emph{Maximal Consistent
   Set}.
 
+A Formal Theory is \emph{Categorical} if it has just one \emph{Model}
+(Part \ref{sec:model_theory}) up to Isomorphism.
+
+%FIXME connections with stability theory
+
 
 
 \subsubsection{Duality Principle}\label{subsec:duality_principle}
@@ -3680,6 +3685,10 @@ $a : A$ (Term) & Proof \\
 \hline
 \end{tabular}
 
+Propositional Logic - Simple Types
+
+Predicate Logic - Dependent Types
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4694,6 +4703,24 @@ There is no unique Subbase for a given Topology.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Countability Axioms}\label{subsec:countability_axioms}
+% --------------------------------------------------------------------
+
+A Topological Space, $(M,\tau)$, is \emph{First Countable} or $1c$ if
+$\forall X \in M$, there exists a Countable Neighborhood Base
+(\S\ref{subsec:neighborhood_base}).
+
+And the Topological Space is \emph{Second Countable} or $2c$ if $\tau$
+has a Countable Base.
+\[
+    2c \rightarrow 1c
+\]
+
+All Metric Spaces are $1c$.
+
+
+
 % ====================================================================
 \section{Point-set Topology}\label{sec:point_set}
 % ====================================================================
@@ -4714,41 +4741,49 @@ be \emph{Topologically Indistinguishable}.
 
 
 % --------------------------------------------------------------------
-\subsection{Neighborhood}\label{subsec:neighborhood}
+\subsection{Interior}\label{subsec:interior}
 % --------------------------------------------------------------------
+
+For a Subset, $V$, of a Topology, $\tau$, a Point $x \in V$ is in the
+\emph{Interior} of $V$, $V^{\circ}$, if there is a \emph{Neighborhood}
+of $x$, $N \subset V$. Inductively, for $\{A_i\}_{i \in I} \subseteq
+\tau \wedge \forall i, A_i \subseteq V$:
+\[
+    V^{\circ} = \bigcup_{i \in I} A_i \subseteq \tau
+\]
+Equivalently, the Interior of $V$ is every Open Set within $V$ and is
+itself an Open Set.
+
+
+
+\subsubsection{Neighborhood}\label{subsec:neighborhood}
 
 A \emph{Neighborhood} of a Point $x$ in a Topological Space $(M,\tau)$
 is a Set $V \subseteq M$ such that:
 \[
     \exists U \in \tau : U \subseteq V \wedge x \in U
 \]
+That is, $x$ is in the Interior of $V$.
 
 
 
-\subsubsection{Neighborhood System}
+\subsubsection{Neighborhood System}\label{subsec:neighborhood_system}
 
 Given a Point $x$ in any Topological Space, a \emph{Neighbordhood
-  System}, $V(x)$, is the Set of all Neighborhoods of $x$.
+  System} (or \emph{Neighborhood Filter}), $\mathcal{V}(x)$, is the
+Set of all Neighborhoods of $x$.
 
 
 
-\subsubsection{Neighborhood Base}
+\subsubsection{Neighborhood Base}\label{subsec:neighborhood_base}
 
-
-
-% --------------------------------------------------------------------
-\subsection{Interior}\label{subsec:interior}
-% --------------------------------------------------------------------
-
-For a Subset, $V$, of a Topology, $\tau$, a Point $x \in V$ is in the
-\emph{Interior} of $V$, $V^{\circ}$, if there is a Neighborhood of
-$x$, $N \subset V$. Inductively, for $\{A_i\}_{i \in I} \subseteq \tau
-\wedge \forall i, A_i \subseteq V$:
+Given a Neighborhood System, $V(x)$, a \emph{Neighborhood Base} for
+$x$ is defined as a Subset of the Neighborhood System, $\mathcal{B}(x)
+\subseteq \mathcal{V}(x)$, such that:
 \[
-    V^{\circ} = \bigcup_{i \in I} A_i \subseteq \tau
+    \forall v \in V(x), \exists b \in \mathcal{B}(x) : b \subseteq v
 \]
-Equivalently, the Interior of $V$ is every Open Set within $V$ and is
-itself an Open Set.
+
 
 
 % --------------------------------------------------------------------
@@ -4782,9 +4817,11 @@ Topological Spaces:
       : Y \rightarrow Z$, the Function $g \circ f : X \rightarrow Z$ is
       Continuous
     \item Given $f : (X, \tau)) \rightarrow (Y, \sigma)$, $f$ is
-      Continuous if $\tau = \mathcal{P}(X)$ (Discrete Topology) or $\sigma =
-      \{\varnothing, Y\}$ (Trivial Topology)
+      Continuous if $\tau = \mathcal{P}(X)$ (Discrete Topology) or
+      $\sigma = \{\varnothing, Y\}$ (Trivial Topology)
 \end{enumerate}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Connectedness}\label{subsec:connectedness}
@@ -4812,6 +4849,10 @@ Topological Spaces:
 
 % --------------------------------------------------------------------
 \subsection{Manifold}\label{subsec:manifold}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Zariski Geometry}\label{subsec:zariski_geometry}
 % --------------------------------------------------------------------
 
 
