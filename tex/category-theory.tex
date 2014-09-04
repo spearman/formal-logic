@@ -492,7 +492,7 @@ then
     \item $F$ is a \emph{Faithful Functor} if $F_{X,Y}$ is Injective
     \item $F$ is a \emph{Full Functor} if $F_{X,Y}$ is Surjective
     \item $F$ is a \emph{Fully Faithful Functor} if $F_{X,Y}$ is
-      Bijective.
+      Bijective
 \end{itemize}
 A Faithful Functor may be considered an \emph{Embedding}, e.g. the
 \emph{Inclusion Functor} for a Subcategory
@@ -518,19 +518,26 @@ Functor, a \emph{Covariant Functor}.
 
 
 
+\subsubsection{Presheaf}\label{subsec:presheaf}
+
+A \emph{Presheaf} is a Contravariant Functor from an Opposite Category
+to the Category $\mathbf{Set}$.
+
+
+
 % --------------------------------------------------------------------
 \subsection{Hom-functor}\label{subsec:hom_functor}
 % --------------------------------------------------------------------
 
-A \emph{Hom-functor} Maps between a given Locally Small Category,
-$\mathbf{C}$, and $\mathbf{Set}$, and has a Covariant and a
-Contravariant definition:
+A \emph{Hom-functor} is a Functor from a Locally Small Category,
+$\mathbf{C}$, to the Category $\mathbf{Set}$, and has a Covariant and
+a Contravariant definition:
 
 \begin{enumerate}
     \item \emph{Covariant Hom-functor}, for $A,f : X \rightarrow Y \in
       \mathbf{C}$:
 \[
-    Hom(A,-) : \mathbf{C} \rightarrow \mathbf{Set}
+    h^A = Hom(A,-) : \mathbf{C} \rightarrow \mathbf{Set}
 \]\[
     X \mapsto Hom(A,X)
 \]\[
@@ -542,38 +549,128 @@ Contravariant definition:
 \]
 
     \item \emph{Contravariant Hom-functor} (also \emph{Functor of
-      Points}, see \S\ref{subsec:general_element}), for $B,h : X
+      Points}, see \S\ref{subsec:general_element}), for $B,f : X
       \rightarrow Y \in \mathbf{C}$:
 \[
-    Hom(-,B) : \mathbf{C} \rightarrow \mathbf{Set}
+    h_B = Hom(-,B) : \mathbf{C} \rightarrow \mathbf{Set}
 \]\[
     X \mapsto Hom(X,B)
 \]\[
-    h \mapsto Hom(h,B) : Hom(Y,B) \rightarrow Hom(X,B)
+    f \mapsto Hom(f,B) : Hom(Y,B) \rightarrow Hom(X,B)
 \]
-    where $Hom(h,B)$ is defined for all $g \in Hom(Y,B)$ as:
+    where $Hom(f,B)$ is defined for all $g \in Hom(Y,B)$ as:
 \[
-    g \mapsto g \circ h
+    g \mapsto g \circ f
 \]
 \end{enumerate}
 
+The Category of all Hom-functors and \emph{Natural Transformations}
+(\S\ref{sec:natural_transformation}) between them, $\{ h^A | A \in
+\mathbf{C} \}$, is a Subcategory of the Functor Category
+(\S\ref{subsec:functor_category}) $\mathbf{Set^C}$, and is Isomorphic
+to $\mathbf{C^{op}}$ (see \emph{Yoneda Embedding}
+\S\ref{subsec:yoneda_embedding}).
+
+Every Morphism $f : A' \rightarrow A$ determines a pair of Natural
+Transformations:
+\[
+    Hom(f,-) : h^A \rightarrow h^{A'}
+\]\[
+    Hom(-,f) : h_{A'} \rightarrow h_A
+\]
+
+For any pair of Morphisms, $f : A' \rightarrow A$ and $g : B
+\rightarrow B'$:
+\[
+    Hom(A',g) \circ Hom(f,B) = Hom(f,B') \circ Hom(A,g)
+\]
+is a path sending
+\[
+    h : A \rightarrow B
+\]
+to
+\[
+    g \circ h \circ f : A' \rightarrow B'
+\]
+
+The Covariant Bifunctor $Hom_{\mathbf{C}}(-,-) : \mathbf{C^{op}}
+\times \mathbf{C} \rightarrow \mathbf{Set}$ is Contravariant in the
+first argument and Covariant in the second.
 
 
-% --------------------------------------------------------------------
-\subsection{Representable Functor}\label{subsec:representable_functor}
-% --------------------------------------------------------------------
+
+\subsubsection{Internal Hom-functor}\label{subsec:internal_homfunctor}
+
+
+
+\subsubsection{Representable Functor}\label{subsec:representable_functor}
+
+%FIXME definition of 'representation'
+%FIXME ref Naturally Isomorphic
+A Functor $F : \mathbf{C} \rightarrow \mathbf{Set}$ is a
+\emph{Representable Functor} if it is Naturally Isomorphic to the
+Hom-functor for some Object $A \in \mathbf{C}$.
 
 A \emph{Covariant Representable Functor} for an Object $A$ in a
-Category $\mathbf{C}$ is defined as a Functor $h^A = Hom(A,-) :
-\mathbf{C} \rightarrow \mathbf{Set}$
+Category $\mathbf{C}$ is defined as Naturally Isomorphic to the
+Covariant Hom-functor $h^A = Hom(A,-) : \mathbf{C} \rightarrow
+\mathbf{Set}$
 \[
     Hom(A,-) : Hom(A,X) \xrightarrow{f_*} Hom(A,Y)
 \]
-A \emph{Contravariant Representable Functor} for $A$ is a Functor $h_A
-= Hom(-,A) : \mathbf{C^{op}} \rightarrow \mathbf{Set}$
+A \emph{Contravariant Representable Functor} for $A$ is a Functor that
+is Naturally Isomorphic to the Contravariant Hom-functor $h_A =
+Hom(-,A) : \mathbf{C^{op}} \rightarrow \mathbf{Set}$
 \[
     Hom(-,A) : Hom(X,A) \xrightarrow{f^*} Hom(Y,A)
 \]
+
+A \emph{Representation} of a Covariant Representable Functor, $F$, is
+a pair $(A, \Phi)$ with Natural Isomorphism $\Phi : Hom(A,-)
+\rightarrow F$.
+
+
+
+\subsubsection{Yoneda Lemma}\label{subsec:yoneda_lemma}
+
+For an arbitrary Covariant Functor $F : \mathbf{C} \rightarrow
+\mathbf{Set}$:
+\[
+    \forall A \in \mathbf{C}, Nat(h^A,F) \cong F(A)
+\]
+If $F$ is a Covariant Hom-functor $h^B$, then:
+\[
+    \forall A \in \mathbf{C}, Nat(h^A,h^B) \cong Hom(B,A)
+\]
+
+For an arbitrary Contravariant Functor $G : \mathbf{C} \rightarrow
+\mathbf{Set}$:
+\[
+    \forall A \in \mathbf{C}, Nat(h_B,G) \cong G(A)
+\]
+If $F$ is a Contravariant Hom-functor $h_B$, then:
+\[
+    \forall A \in \mathbf{C}, Nat(h_A,h_B) \cong Hom(A,B)
+\]
+
+
+
+\subsubsection{Yoneda Embedding}\label{subsec:yoneda_embedding}
+
+The Fully Faithful Contravariant Functor $h^- : \mathbf{C} \rightarrow
+\mathbf{Set^C}$ which maps each Object $A \in \mathbf{C}_0$ to the
+Hom-functor $h^A$ and each $f \in \mathbf{C}_1$ to the Natural
+Transformation $Hom(f,-)$ can also be interpreted as a Covariant
+Functor $h^- : \mathbf{C^{op}} \rightarrow \mathbf{Set^C}$. Being a
+Faithful Functor means $h^-$ gives an Embedding
+(\S\ref{subsec:faithful_functor}) of $\mathbf{C^{op}}$ in
+$\mathbf{Set^C}$.
+
+By the Contravariant Yoneda's Lemma:
+\[
+    h_-: \mathbf{C} \rightarrow \mathbf{Set^{C^{op}}}
+\]
+called the \emph{Yoneda Embedding}.
 
 
 
@@ -1189,12 +1286,6 @@ Disjoint Union %FIXME ref disjoint union
 
 
 \subsubsection{Equalizer}\label{subsec:limit_equalizer}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Yoneda Lemma}\label{subsec:yoneda_lemma}
-% --------------------------------------------------------------------
 
 
 
