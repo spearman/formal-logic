@@ -101,7 +101,7 @@ The Category of all Small Directed Graphs and Graph Morphisms is
 $\mathbf{Grph}$.
 
 The Forgetful Functor $U : \mathbf{Cat} \rightarrow \mathbf{Grph}$
-Maps a Categories to their underlying Graphs, effectively forgetting
+Maps a Categories to their Underlying Graphs, effectively forgetting
 which Morphisms are Identities and which are Composites.
 
 
@@ -183,11 +183,11 @@ Functions that preserve the Monoid structure.
   Triangle
 \item [$\downarrow\downarrow$] two Objects, no Identity morphisms, and
   two parallel Morphisms between them
-\item [Set] all Small Sets and Functions
+\item [Set] all Small Sets and Functions (Locally Small)
 \item [Cls] all Classes and Functions between Classes
 \item [Set$_*$] all Pointed Sets and Base-point preserving Functions
 \item [Rel] all Sets and Relations
-\item [Pos] all Posets and Monotonic Functions
+\item [Pos] all Posets and Monotonic Functions (Locally Small)
 \item [Finset] all Finite Sets and Functions (Full Subcategory of
   $\mathbf{Set}$)
 \item [Finord] all Finite Ordinal Numbers and Functions between
@@ -195,13 +195,13 @@ Functions that preserve the Monoid structure.
 \item [Mag] all Magmas and Homomorphisms of Operations
 \item [Med] all Medial Magmas and Homomorphisms of Operations
 \item [Mon] all Monoids and Monoid Homomorphisms
-\item [Grp] all Groups and Group Homomorphisms
+\item [Grp] all Groups and Group Homomorphisms (Locally Small)
 \item [Ab] all Abelian Groups with Group Homomorphisms
 \item [Rng] all Small Rings and Ring Morphisms
 \item [Grph] all Small Graphs and Graph Morphisms
 \item [Cat] all Small Categories and Functors
 \item [Cat'] all Large Categories and Functors
-\item [Top] all Topological Spaces and Continuous Maps
+\item [Top] all Topological Spaces and Continuous Maps (Locally Small)
 \item [Top$_*$] all Pointed Topological Spaces and Continuous Maps
 \item [Toph] all Topological Spaces and Homotopy Classes of Continuous
   Maps
@@ -331,8 +331,9 @@ Objects $A$ and $B$ is denoted
     f : A \rightarrowtail B
 \]
 and has the property for any two Morphisms $g, h : C \rightarrow A$,
-$fg = fh$ Implies $g = h$. If $f$ is a Monomorphism then $gf$ and $hf$
-are Idempotent (\S\ref{subsec:idempotence}).
+$fg = fh$ Implies $g = h$ ($f$ is Left Cancellative). If $f$ is a
+Monomorphism then $gf$ and $hf$ are Idempotent
+(\S\ref{subsec:idempotence}).
 
 
 
@@ -348,9 +349,10 @@ Epimorphism $f$ between Objects $A$ and $B$ is denoted
     f : A \twoheadrightarrow B
 \]
 and has the property that for any two Morphisms $g, h : B \rightarrow
-C$, $gf = hf$ Implies $g = h$. Note that being an Epimorphism doesn't
-necessitate the Morphism to be Surjective. If $f$ is an Epimorphism,
-then $fg$ and $fh$ are Idempotent (\S\ref{subsec:idempotence}).
+C$, $gf = hf$ Implies $g = h$ ($f$ is Right Cancellative). Note that
+being an Epimorphism doesn't necessitate the Morphism to be
+Surjective. If $f$ is an Epimorphism, then $fg$ and $fh$ are
+Idempotent (\S\ref{subsec:idempotence}).
 
 An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
 \rightarrow X$ and Morphism $f : P \rightarrow X$, then $\exists
@@ -494,6 +496,11 @@ then
     \item $F$ is a \emph{Fully Faithful Functor} if $F_{X,Y}$ is
       Bijective
 \end{itemize}
+
+
+
+\subsubsection{Embedding}\label{subsec:category_embedding}
+
 A Faithful Functor may be considered an \emph{Embedding}, e.g. the
 \emph{Inclusion Functor} for a Subcategory
 (\S\ref{subsec:subcategory}).
@@ -522,6 +529,12 @@ Functor, a \emph{Covariant Functor}.
 
 A \emph{Presheaf} is a Contravariant Functor from an Opposite Category
 to the Category $\mathbf{Set}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Profunctor}\label{subsec:profunctor}
+% --------------------------------------------------------------------
 
 
 
@@ -609,7 +622,7 @@ first argument and Covariant in the second.
 %FIXME ref Naturally Isomorphic
 A Functor $F : \mathbf{C} \rightarrow \mathbf{Set}$ is a
 \emph{Representable Functor} if it is Naturally Isomorphic to the
-Hom-functor for some Object $A \in \mathbf{C}$.
+Hom-functor $h^A$ or $h_A$ for some Object $A \in \mathbf{C}$.
 
 A \emph{Covariant Representable Functor} for an Object $A$ in a
 Category $\mathbf{C}$ is defined as Naturally Isomorphic to the
@@ -663,7 +676,7 @@ Hom-functor $h^A$ and each $f \in \mathbf{C}_1$ to the Natural
 Transformation $Hom(f,-)$ can also be interpreted as a Covariant
 Functor $h^- : \mathbf{C^{op}} \rightarrow \mathbf{Set^C}$. Being a
 Faithful Functor means $h^-$ gives an Embedding
-(\S\ref{subsec:faithful_functor}) of $\mathbf{C^{op}}$ in
+(\S\ref{subsec:category_embedding}) of $\mathbf{C^{op}}$ in
 $\mathbf{Set^C}$.
 
 By the Contravariant Yoneda's Lemma:
@@ -1176,15 +1189,16 @@ Trivial Group ${1}$ is a Zero Object.
 
 Given a Functor $S: \mathbf{D} \rightarrow \mathbf{C}$, an
 \emph{Universal Morphism} to $S$ or \emph{Initial Morphism}, is an
-Initial Object of the form $(X',u)$ in the Comma Category
+Initial Object of the form $(Y',u)$ in the Comma Category
 (\S\ref{subsec:comma_category}) $(X \downarrow S)$ where $X \in
-\mathbf{C_0}$, $u : X \rightarrow S(X')$ and $X' \in \mathbf{D}$.
+\mathbf{C}_0$, $u : X \rightarrow S(Y') \in \mathbf{C}_1$ and $X' \in
+\mathbf{D}_0$.
 %FIXME is X' initial and/or terminal in D?
 
-$(X', u)$ satisfies the \emph{Initial Property}:
+$(Y', u)$ satisfies the \emph{Initial Property}:
 \[
-    \forall Y' \in \mathbf{D}, \forall f : X \rightarrow S(Y') \in
-    \mathbf{C}, \exists! g : X' \rightarrow Y' : S(g) \circ u = f
+    \forall Z' \in \mathbf{D}, \forall f : X \rightarrow S(Z') \in
+    \mathbf{C}, \exists! g : Y' \rightarrow Z' : S(g) \circ u = f
 \]
 
 The Dual concept of an Initial Morphism, an Universal Morphism from
@@ -1342,30 +1356,6 @@ defines a Monoid and is denoted $End_C(X)$.
 \subsection{Operad Theory}\label{subsec:operad_theory}
 % --------------------------------------------------------------------
 % --------------------------------------------------------------------
-\subsection{Ring}\label{subsec:ring}
-% --------------------------------------------------------------------
-
-\emph{Ideals}
-
-\emph{Principal Ideals}
-
-
-
-\subsubsection{Commutative Ring}
-
-\emph{Determinant}
-
-
-
-\subsubsection{Fields}
-
-\paragraph{Total Field}\label{subsec:total_field}
-
-\paragraph{Closed Field}\label{subsec:closed_field}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Initial Algebra}\label{subsec:initial_algebra}
 % --------------------------------------------------------------------
 
@@ -1402,6 +1392,18 @@ defines a Monoid and is denoted $End_C(X)$.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Invariant Theory}\label{subsec:invariant_theory}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Algebraic Topology}\label{subsec:algebraic_topology}
+% --------------------------------------------------------------------
+
+
+
 % ====================================================================
 \section{Group Theory}
 % ====================================================================
@@ -1425,6 +1427,66 @@ Subset of the Hom-set of an Object, $X$:
 
 \emph{Trivial Group} ${1}$
 
+
+
+% --------------------------------------------------------------------
+\subsection{Abelian Group}\label{subsec:abelian_group}
+% --------------------------------------------------------------------
+
+\emph{Abelian Group} also \emph{Commutative Group}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ring}\label{subsec:ring}
+% --------------------------------------------------------------------
+
+\subsubsection{Ideal}\label{subsec:ring_ideal}
+
+\emph{Ideal}
+
+\emph{Principal Ideal}
+
+
+
+\subsubsection{Zero Ring}
+
+\emph{Zero Ring}
+
+
+
+\subsubsection{Commutative Ring}
+
+\emph{Determinant}
+
+
+
+\subsubsection{Commutative Ring}
+
+\emph{Quotient Ring}
+
+
+
+\subsubsection{Field}\label{subsec:field}
+
+A \emph{Field} is a Nonzero Commutative Ring with a Multiplicative
+Inverse for every Nonzero Element or equivalently a Ring whose Nonzero
+Elements form an Abelian Group (\S\ref{subsec:abelian_group}) under
+Multiplication.
+
+
+
+\paragraph{Total Field}\label{subsec:total_field}
+
+\paragraph{Closed Field}\label{subsec:closed_field}
+
+
+
+\subsubsection{Module}
+
+\paragraph{Vector Space}\label{subsec:vector_space}
+
+\paragraph{Bimodule}\label{subsec:bimodule}
 
 
 % --------------------------------------------------------------------
@@ -1506,6 +1568,20 @@ denoted by $ker(h)$ is defined as:
 where $e_H$ is an Element of $H$, and so the Kernel is just the
 Preimage of the Singleton Set $\{e_H\}$. Such a Kernel is a Normal
 Subgroup.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Permutation Group}\label{subsec:permutation_group}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Symmetric Group}\label{subsec:symmetric_group}
+% --------------------------------------------------------------------
+
+\subsubsection{Cayley's Theorem}\label{subsec:cayleys_theorem}
 
 
 
