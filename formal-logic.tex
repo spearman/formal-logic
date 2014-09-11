@@ -3157,7 +3157,7 @@ players have Imperfect Information.
 \subsection{Denotational Semantics}
 % --------------------------------------------------------------------
 
-Phrases in a Programming Language are interpreted as Mathematics
+Expressions in a Programming Language are interpreted as Mathematics
 Objects called \emph{Denotations}.
 
 
@@ -3211,6 +3211,14 @@ in some System of Logic.
 \emph{Lambda Abstraction}
 
 \emph{Application}
+
+% --------------------------------------------------------------------
+\subsection{Computation Rule}\label{subsec:computation_rule}
+% --------------------------------------------------------------------
+
+\[
+    (\lambda x.t)(u) :\equiv t[u/x]
+\]
 
 % --------------------------------------------------------------------
 \subsection{Alpha Equivalence}\label{subsec:alpha_equivalent}
@@ -3617,32 +3625,235 @@ Pointclass of all \emph{Analytic Sets} (\S\ref{subsec:analytic_set})
 (\S\ref{sec:logic_terminology}) has a \emph{Type} and Operations
 are restricted to Terms of specific Types.
 
-As a Formal Theory (\S\ref{sec:proof_theory}), Judgements in Type
+As a Formal Theory (Part \ref{sec:proof_theory}), Judgements in Type
 Theory are of three kinds\cite{hott13}:
 \begin{enumerate}
 
-\item \emph{Context}
+\item \emph{Well-formed Context} (\S\ref{sec:type_context})
+\[
+    (\Gamma) ctx
+\]
+``$\Gamma$ is a Well-formed Context''
 
 \item \emph{Propositional Equality}
-
-$a : A$, ``$a$ is an Term of Type $A$''
+\[
+    \Gamma \vdash a : A
+\]
+``Given Contex $\Gamma$, $a$ is a Term of Type $A$''
 
 \item \emph{Definitional (Judgemental) Equality}
-
-$a \equiv b : A$, ``$a$ and $b$ are definitionally equal Terms of Type
-  $A$''
+\[
+    \Gamma \vdash a \equiv b : A
+\]
+``Given Context $\Gamma$, $a$ and $b$ are definitionally equal Terms
+of Type $A$''
 
 \end{enumerate}
 with a Deductive Apparatus (\S\ref{subsec:deductive_apparatus})
-consisting of Inference Rules only and no Axioms.
+consisting of Inference Rules only and no Axioms. Judgemental Equality
+is an Equivalence Relation respected by Typing.
 
 
 
 % ====================================================================
-\section{Context}\label{subsec:type_context}
+\section{Expression}\label{sec:type_expression}
 % ====================================================================
 
-Context, ordered list of assumptions
+\emph{Substitution}:
+\[
+    B[a/x]
+\]
+Substitute Term $a$ for Free occurrences of Variable $x$ in the Term
+$B$. Generalized:
+\[
+    B[a_1,\ldots,a_n / x_1,\ldots,x_n]
+\]
+
+
+
+% ====================================================================
+\section{Context}\label{sec:type_context}
+% ====================================================================
+
+A \emph{Context}, $\Gamma$, is a list of Assumptions of the form:
+\[
+    \Gamma = x_1 : A_1, x_2 : A_2, \ldots, x_n : A_n
+\]
+where each Element $x_i : A_i$ is an Assumption that the distinct
+Variable $x_i$ has type $A_i$.
+
+Judgements are formulated under the Assumptions of a particular
+Context, $\Gamma$:
+\[
+    \Gamma \vdash a : A
+\]
+For an empty Context:
+\[
+    \vdash a : A
+\]
+or
+\[
+    . \vdash a : A
+\]
+
+
+
+% ====================================================================
+\section{Type Universe}\label{sec:type_universe}
+% ====================================================================
+
+A \emph{Type Universe} is a Type whose Elements are Types. A hierarchy:
+\[
+    \mathcal{U}_0, \mathcal{U}_1, \mathcal{U}_2, \ldots
+\]
+is such that any Type in $\mathcal{U}_i$ is also in
+$\mathcal{U}_{i+1}$. See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
+\S\ref{subsec:universe_rules}.
+
+
+
+% ====================================================================
+\section{Inference Rules}\label{sec:type_inference}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Context Rules}
+% --------------------------------------------------------------------
+
+The following Rules of Inference allow for the determination of a
+Well-formed Context:
+\begin{enumerate}
+\item
+\[
+    {
+        \frac{}{(.)ctx}
+    } ctx-EMP
+\]
+\item
+\[
+    {
+        \frac
+        {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \mathcal{U}_i}
+        {(x_1:A_1,\ldots,x_n:A_n) ctx}
+    } ctx-EXT
+\]
+\end{enumerate}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Structural Rules}
+% --------------------------------------------------------------------
+
+Given a Context, derive Typing Judgements listed in the Context:
+\[
+    {
+        \frac
+        {(x_1:A_1, \ldots, x_n:A_n)ctx}
+        {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
+    } Vble
+\]
+
+Substitution for Typing Judgements:
+\[
+    {
+        \frac
+        {\Gamma \vdash a : A \;\;\;\;\;\;\;
+        \Gamma,x:A,\Delta \vdash b : B}
+        {\Gamma,\Delta[a/x] \vdash b[a/x] : B[a/x]}
+    } Subst_1
+\]
+
+Weakening for Typing Judgements:
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+        \Gamma,\Delta \vdash b : B}
+        {\Gamma,x:A,\Delta \vdash b:B}
+    } Wkg_1
+\]
+
+Substitution for Judgemental Equality:
+\[
+    {
+        \frac
+        {\Gamma \vdash a : A \;\;\;\;\;\;\;
+        \Gamma,x:A,\Delta \vdash b \equiv c : B}
+        {\Gamma,\Delta[a/x] \vdash b[a/x] \equiv c[a/x] : B[a/x]}
+    } Subst_2
+\]
+
+Weakening for Judgemental Equality:
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+        \Gamma,\Delta \vdash b \equiv c : B}
+        {\Gamma, x:A, \Delta \vdash b \equiv c : B}
+    } Wkg_2
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Universe Rules}\label{subsec:universe_rules}
+% --------------------------------------------------------------------
+
+\[
+    {
+        \frac
+        {(\Gamma) ctx}
+        {\Gamma \vdash \mathcal{U}_i : \mathcal{U}_{i+1}}
+    } \mathcal{U}-INTRO
+\]
+
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i}
+        {\Gamma \vdash A : \mathcal{U}_{i+1}}
+    } \mathcal{U}-CUMUL
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependent Function Type Rules}\label{subsec:dependent_rules}
+% --------------------------------------------------------------------
+
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+        \Gamma,x:A \vdash B : \mathcal{U}_i}
+        {\Gamma \vdash \prod_{(x:A)} B : \mathcal{U}_i}
+    } \Pi-FORM
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-INTRO
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-ELIM
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-COMP
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-UNIQ
+\]
 
 
 
@@ -3655,12 +3866,47 @@ Context, ordered list of assumptions
 % --------------------------------------------------------------------
 
 
+
 % ====================================================================
 \section{Intuitionistic Type Theory}
 % ====================================================================
 
-\emph{Intuitionistic Type Theory} (also \emph{Constructive Type Theory} or
-\emph{Martin-L\"of Type Theory})
+\emph{Intuitionistic Type Theory} (also \emph{Constructive Type
+  Theory} or \emph{Martin-L\"of Type Theory})
+
+Inductive Types
+
+
+
+% --------------------------------------------------------------------
+\subsection{Types}
+% --------------------------------------------------------------------
+
+\emph{Function Type}
+
+\emph{Product Type}
+
+\subsubsection{Empty Type $\mathbf{0}$}
+
+\subsubsection{Unit Type $\mathbf{1}$}
+
+\subsubsection{Natural Number Type}
+
+\subsubsection{Identity Type}
+
+\subsubsection{Dependent Function Type ($\Pi$-type)}
+
+\[
+    A \rightarrow B :\equiv \prod_{x:A} B
+\]
+
+\subsubsection{Dependent Pair Type ($\Sigma$-type)}
+
+In Set Theory: Indexed Sum over a given Type.
+
+\subsubsection{Coproduct Type}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Intensional \& Extensional Type Theory}
@@ -3670,6 +3916,16 @@ Context, ordered list of assumptions
 \emph{Canonical Form}
 
 \emph{Normal Form}
+
+
+
+% ====================================================================
+\section{Homotopy Type Theory}\label{sec:homotopy_type}
+% ====================================================================
+
+- Function Extensionality
+- Univalence Axiom
+- Higher Inductive Types
 
 
 
