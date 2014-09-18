@@ -1792,6 +1792,10 @@ Alan Turing's PhD Thesis \cite{turing38}
 \subsection{Categorical Logic}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\subsection{Paraconsistent Logic}
+% --------------------------------------------------------------------
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2292,6 +2296,8 @@ Here the right side of the Biconditional ('snow is white') is the
 
 Tarski considered this definition of Truth to be a type of
 Correspondence Theory.
+
+\emph{Dialetheism}
 
 % --------------------------------------------------------------------
 \subsection{Correspondence Theory}\label{subsec:correspondence_truth}
@@ -4018,7 +4024,7 @@ the \emph{Extension} of that Property.
 \emph{Sets} are collections of distinct objects (some of which may
 themselves be other Sets), built on the Property of \emph{Membership}
 which can be expressed as a \emph{Binary Relation}
-(\S\ref{subsec:binary_relations}) ``$\in$'' which is the \emph{Set
+(\S\ref{subsec:binary_relation}) ``$\in$'' which is the \emph{Set
   Membership Relation}. This Relation Maps 2-tuples of generic objects
 and Sets to True or False depending on whether the object is a
 \emph{Member} (or \emph{Element}) of the Set, e.g. $x \in A$ is True
@@ -4479,6 +4485,18 @@ defined as:
 
 
 
+% --------------------------------------------------------------------
+\subsection{Pairing Function}\label{subsec:pairing_function}
+% --------------------------------------------------------------------
+
+A \emph{Pairing Function} is a Primitive Recursive
+(\S\ref{subsec:primitive_recursion}) Bijection:
+\[
+    \pi : \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}
+\]
+
+
+
 % ====================================================================
 \section{Relations}\label{sec:set_relations}
 % ====================================================================
@@ -4504,8 +4522,10 @@ Such an $n$-ary Relation may also be described by a
     f_L : X_1 \times \ldots \times X_n \rightarrow \{\top,\bot\}
 \]
 
+
+
 % --------------------------------------------------------------------
-\subsection{Binary Relations}\label{subsec:binary_relations}
+\subsection{Binary Relation}\label{subsec:binary_relation}
 % --------------------------------------------------------------------
 
 Also \emph{Dyadic Relation}. Given a \emph{Binary Relation} $R$ on a
@@ -4545,11 +4565,21 @@ Transitive and Irreflexive if and only if Transitive and Asymmetric
 \[
     aRb \rightarrow \neg bRa
 \]
+\item[Left-total] when
+\[
+    \forall a \in X \exists b \in X : aRb
+\]
+\emph{Functions} (\S\ref{sec:set_function}) are Left-total Relations
+\item[Right-total] (Surjective or Onto
+  (\S\ref{subsec:surjective_function})) when
+\[
+    \forall b \in X \exists a \in X : aRb
+\]
 \item[Total] when
 \[
-    aRb \vee bRa
+    \forall a,b \in X, aRb \vee bRa
 \]
-Total implies Reflexive
+Total implies Reflexive.
 \item[Trichotomous] when
 \[
     aRb \vee bRa \vee a = b
@@ -4571,7 +4601,8 @@ From the above types of Relations, the following Orders
 general to most restricted:
 \begin{description}
 \item[Preorder] when Reflexive and Transitive.
-\item[Partial Order] when Reflexive, Transitive, and Anti-symmetric.
+\item[Partial Order] when Reflexive, Transitive, and Anti-symmetric
+  (Poset \S\ref{subsec:poset})
 \item[Total Preorder] (or Weak Order) when Preorder and Total.
 \item[Total Order] when a Partial Order and Total.
 \item[Partial Equivalence] when Symmetric and Transitive.
@@ -4643,11 +4674,12 @@ Relation.
 % ====================================================================
 
 \emph{Ordering Relations} are Binary Relations on a Set $P$ that are
-Reflexive, Antisymmetric, and Transitive (\S\ref{sec:set_relations}).
-A \emph{Partial Order} is where some pairs of Members are allowed to
-not be included in the Ordering Relation. A \emph{Total Order} (or
-\emph{Linear Order}) adds the requirement of Totality. A Totally
-Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
+Reflexive, Antisymmetric, and Transitive
+(\S\ref{subsec:binary_relation}). A \emph{Partial Order} is where some
+pairs of Members are allowed to not be included in the Ordering
+Relation. A \emph{Total Order} (or \emph{Linear Order}) adds the
+requirement of Left-totality. A Totally Ordered Subset of some
+Partially Ordered Set is called a \emph{Chain}.
 
 \emph{Weak Ordering}
 
@@ -4658,22 +4690,88 @@ Ordered Subset of some Partially Ordered Set is called a \emph{Chain}.
 
 
 % --------------------------------------------------------------------
-\subsection{Poset}\label{subsec:partially_ordered}
+\subsection{Poset}\label{subsec:poset}
 % --------------------------------------------------------------------
 
-Monotonic Function
+A \emph{Poset} is a Set, $P$, with a Partial Order
+(\S\ref{subsec:binary_relation}), $\leq$, defined on that Set (that is
+a Relation which is Reflexive, Antisymmetric, and Transitive).
 
-\subsubsection{Upper Set}\label{subsec:upper_set}
+An Element $x \in P$ is a \emph{Greatest Element} when:
+\[
+    \forall y \in P, y \leq x
+\]
+and likewise the \emph{Least element} when:
+\[
+    \forall y \in P, x \leq y
+\]
+
+An Element $x \in P$ is a \emph{Maximal Element} when:
+\[
+    \forall y \in P, x \nleq y
+\]
+and a \emph{Minimal Element} when:
+\[
+    \forall y \in P, y \nleq x
+\]
+
+The definition of Posets gives rise to the concept of a Monotonic
+Function (\S\ref{subsec:monotonicity}), that is a Function, $f$,
+between Posets which is ordered in both the Domain and the Codomain:
+\[
+    x \leq y \implies f(x) \leq f(y)
+\]
+
+
+
+\subsubsection{Totally Ordered Set}\label{subsec:total_order}
+
+A \emph{Totally Ordered Set} is a Poset whose Ordering Relation is
+Total.
+
+
+
+\subsubsection{Upper \& Lower Sets}\label{subsec:upper_lower}
+
+An \emph{Upper Set} (or \emph{Upset}) is a Subset, $U$, of a Poset,
+$P$, such that:
+\[
+    x \in U \wedge x \leq y \implies y \in U
+\]
+The Dual notion of a \emph{Lower Set} (or \emph{Downset} or
+\emph{Decreasing Set}), $L$, is defined likewise:
+\[
+    y \in L \wedge x \leq y \implies x \in L
+\]
+The Upper or Lower Set generated from a Subset $Y \subseteq X$ is
+denoted by $\uparrow Y$ or $\downarrow Y$, respectively.
+
+An Upper Set has the Property of being \emph{Upward Closed} and a
+Lower Set the Property of being \emph{Downward Closed}.
+
+
+
+\subsubsection{Infimum \& Supremum}\label{subsec:glb_lub}
+
+The \emph{Infimum} or \emph{Greatest Lower Bound} (GLB) of a Subset of
+a Poset, $S \subseteq P$ is the Greatest Element of $P$ that is a
+Least Element of $S$.
+
+The \emph{Supremum} or \emph{Least Upper Bound} (LUB) of a Subset of a
+Poset, $S \subseteq P$ is the Least Element of $P$ that is a Greatest
+Element of $S$.
+
+Such Elements are Unique but not necessarily existing.
+
+
 
 \subsubsection{Poset Product}\label{subsec:poset_product}
 
-\subsubsection{Greatest Lower Bound}\label{subsec:greatest_lower_bound}
-
 The Product of two Elements of a Poset is their Greatest Lower Bound.
 
-\subsubsection{Least Upper Bound}\label{subsec:least_upper_bound}
-
 The Coproduct of two Elements of a Poset is their Least Upper Bound.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Ideal}\label{subsec:order_ideal}
@@ -4683,9 +4781,9 @@ The Coproduct of two Elements of a Poset is their Least Upper Bound.
 \subsection{Lattice}\label{subsec:lattice}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
 \subsubsection{Free Lattice}
-% --------------------------------------------------------------------
+
+\subsubsection{Semilattice}\label{subsec:semilattice}
 
 % --------------------------------------------------------------------
 \subsection{Domain Theory}\label{subsec:domain_theory}
@@ -5333,7 +5431,7 @@ In an \emph{Undirected Graph}, it is required that for $A,B \in V$:
     (A,B) \in E \leftrightarrow (B,A) \in E
 \]
 This is the definition of a Symmetric Relation
-(\S\ref{subsec:binary_relations}) on $V$.
+(\S\ref{subsec:binary_relation}) on $V$.
 
 
 
