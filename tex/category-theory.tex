@@ -190,8 +190,9 @@ Functions that preserve the Monoid structure.
 \item [Pos] all Posets and Monotonic Functions (Locally Small)
 \item [Finset] all Finite Sets and Functions (Full Subcategory of
   $\mathbf{Set}$)
-\item [Finord] all Finite Ordinal Numbers and Functions between
-  Ordinal Numbers (Skeleton of $\mathbf{FinSet}$)
+\item [Finord] ($\mathbf{\Delta}$) all Finite Ordinal Numbers and
+  Order Preserving Maps (Skeleton of $\mathbf{FinSet}$, also called
+  the \emph{Simplex Category})
 \item [Mag] all Magmas and Homomorphisms of Operations
 \item [Med] all Medial Magmas and Homomorphisms of Operations
 \item [Mon] all Monoids and Monoid Homomorphisms
@@ -530,8 +531,20 @@ Functor, a \emph{Covariant Functor}.
 \subsubsection{Presheaf}\label{subsec:presheaf}
 
 A \emph{Presheaf} is a Contravariant Functor from an Opposite Category
-to the Category $\mathbf{Set}$.
+to the Category $\mathbf{Set}$. A Presheaf is an example of a
+\emph{Set-valued Functor Category}
+(\S\ref{subsec:setvalued_category}).
 
+
+
+\subsubsection{Simplicial Set}\label{subsec:simplicial_set}
+
+A \emph{Simplicial Set} is a Contravariant Functor from the
+\emph{Simplex Category} $\Delta$ (\S\ref{subsec:categories_list}) into
+$\mathbf{Set}$. An equivalent definition is in terms of Presheaves:
+\[
+    X: \Delta^{op} \rightarrow \mathbf{Set}
+\]
 
 
 % --------------------------------------------------------------------
@@ -723,10 +736,8 @@ at $X$. When (2) holds, a Commutative Diagram is formed and the
 Morphisms $\tau_X$ are said to be \emph{Natural} in $X$.
 
 When every Component in $\tau$ is Invertible in $\mathbf{D}$, $\tau$
-is a \emph{Natural Isomorphism} (or \emph{Natural Equivalence}), and:
-\[
-    \tau : S \cong T
-\]
+is a \emph{Natural Isomorphism} (or \emph{Natural Equivalence}) and $S
+\cong T$
 
 
 
@@ -833,7 +844,7 @@ As an example, in $\mathbf{Set}$ and $\mathbf{Pos}$, all Singleton
 Sets are Terminal, and as such they are all Isomorphic to one another.
 Given a Set $X$:
 \[
-    |X| = 1 \leftrightarrow \forall Y, |Hom_{\mathbf{Sets}}(Y,X)| = 1
+    |X| = 1 \leftrightarrow \forall Y, |Hom_{\mathbf{Set}}(Y,X)| = 1
 \]
 Also in $\mathbf{Set}$ the Empty Set is Initial as the only mapping
 from it to any other Set is the Empty Function. In $\mathbf{Grp}$, a
@@ -936,17 +947,6 @@ is a Product of $A$ and $B$ if and only if for any $A
 with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
 \rangle$ as it is uniquely determined by $z_1$ and $z_2$.
 
-Products are unique up to Isomorphism (\S\ref{subsec:isomorphism}).
-The Canonical Commutative Isomorphism $A \times B \cong B \times A$
-is:
-\[
-    \langle p_2, p_2 \rangle : A \times B \rightarrow B \times A
-\]
-Products are also Associative:
-\[
-    A \times (B \times C) \cong (A \times B) \times C
-\]
-
 The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
 is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;}
 Z \xleftarrow{\;\;z_2\;\;} B$
@@ -956,10 +956,7 @@ Z \xleftarrow{\;\;z_2\;\;} B$
 with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
 and Coprojections $q_i$ may be called \emph{Injections} (although they
 are not necessarily Injective Morphisms). An example of a Coproduct in
-$\mathbf{Sets}$ is the Disjoint Union (\S\ref{subsec:disjoint_union}).
-
-Like Products, Coproducts are also Commutative and Associative up to
-Isomorphism.
+$\mathbf{Set}$ is the Disjoint Union (\S\ref{subsec:disjoint_union}).
 
 For Morphisms $f$ and $g$, a Product $f \times g$ is defined where $f
 : A \rightarrow A'$, $g : B \rightarrow B'$ and:
@@ -984,6 +981,25 @@ and Morphisms of $\mathbf{C}$ to their Product:
     (f,g) \mapsto f \times g
 \]
 
+Products and Coproducts are unique up to Isomorphism
+(\S\ref{subsec:isomorphism}). The Canonical Commutative Isomorphism $A
+\times B \cong B \times A$ is:
+\[
+    \langle p_2, p_1 \rangle : A \times B \rightarrow B \times A
+\]
+which is the Natural Transformation $\theta$ betwen the Product
+Functor and the \emph{Twisted Product Functor} $\tilde{\times} :
+\mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}$ (Mapping $(A,B)
+\mapsto B \times A$):
+\[
+    \theta : \times \rightarrow \tilde{\times}
+\]
+
+Products are also Associative:
+\[
+    A \times (B \times C) \cong (A \times B) \times C
+\]
+
 The Universal Mapping Property for Products may be stated as a two-way
 Rule of Inference: %FIXME two-way inference
 \[
@@ -1001,6 +1017,13 @@ and for Coproducts:
 \]
 
 \paragraph{N-ary Products}\label{subsec:category_nary}
+\hfill \\
+A Terminal Object is a \emph{Nullary Product}. A general Object is its
+own \emph{Unary Product}.
+
+By Associativity of Products, $A \times B \times C = (A \times B)
+\times C$ so any Category that has Binary Products also has all
+\emph{Finite N-ary Products}.
 
 \paragraph{Exponential}\label{subsec:category_exponential}
 \hfill \\
@@ -1191,6 +1214,15 @@ The Hom-set in a Functor Category may be denoted:
 
 
 
+\subsubsection{Arrow Categories}\label{subsec:arrow_categories}
+
+An \emph{Arrow Category} of a Category $\mathbf{C}$, written
+$\mathbf{C^{\rightarrow}}$, has for its Objects the Morphisms of
+$\mathbf{C}$ and as Morphisms pairs of Objects such that their
+underlying Morphisms in $\mathbf{C}$ are Composable.
+
+
+
 % --------------------------------------------------------------------
 \subsection{Free Category}\label{subsec:free_category}
 % --------------------------------------------------------------------
@@ -1246,15 +1278,6 @@ are $Hom(A,B)$.
 The case where $S = T = 1_\mathbf{C}$, $(\mathbf{C} \downarrow
 \mathbf{C})$, is the Category of all Morphisms of $\mathbf{C}$:
 $\mathbf{C}^\mathbf{2}$.
-
-
-
-\subsubsection{Arrow Categories}\label{subsec:arrow_categories}
-
-An \emph{Arrow Category} of a Category $\mathbf{C}$, written
-$\mathbf{C^{\rightarrow}}$, has for its Objects the Morphisms of
-$\mathbf{C}$ and as Morphisms pairs of Objects such that their
-underlying Morphisms in $\mathbf{C}$ are Composable.
 
 
 
@@ -1374,6 +1397,15 @@ $\mathbf{C}$:
 
 
 
+\subsubsection{Set-valued Functor Category}\label{subsec:setvalued_category}
+
+A \emph{Set-valued Functor Category} is also called a \emph{Category
+  of Diagrams} and is of the form $\mathbf{Set}^{\mathbf{C}}$. A
+Presheaf (\S\ref{subsec:presheaf}) is an example of a Set-valued
+Functor Category from an Opposite Category into $\mathbf{Set}$.
+
+
+
 \subsubsection{Cones}\label{subsec:category_cone}
 
 \emph{Universal Cone}
@@ -1396,7 +1428,8 @@ A Category of \emph{Cartesian Closed} if it has:
   (\S\ref{subsec:category_exponential})
 \item A Terminal Object (\S\ref{subsec:initial_terminal})
 \end{enumerate}
-This provides that, by the Universal Mapping Property of Exponentials:
+By these conditions and the Universal Mapping Property of
+Exponentials:
 \[
     \forall f : X \times A \rightarrow B \iff
     \exists ! \overline{f} : X \rightarrow B^A
@@ -1404,6 +1437,8 @@ This provides that, by the Universal Mapping Property of Exponentials:
 
 The Category of Types in the \emph{Simply Typed $\lambda$-calculus}
 (\S\ref{subsec:simply_typed}) is a Catesian Closed Category.
+
+$\mathbf{Cat}$ is a Cartesian Closed Category.
 
 
 
@@ -1593,9 +1628,14 @@ Multiplication.
 \paragraph{Bimodule}\label{subsec:bimodule}
 
 
+
 % --------------------------------------------------------------------
 \subsection{Groupoid}\label{subsec:groupoid}
 % --------------------------------------------------------------------
+
+A \emph{Groupoid} is a Group with a Partial Function in place of a
+Total Binary Operation. As a Category, a Groupoid is a Category in
+which every Morphism is Invertible.
 
 \emph{Fundamental Groupoid}
 
