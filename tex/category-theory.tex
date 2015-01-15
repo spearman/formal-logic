@@ -945,7 +945,9 @@ is a Product of $A$ and $B$ if and only if for any $A
     \exists!u : Z \rightarrow P
 \]
 with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
-\rangle$ as it is uniquely determined by $z_1$ and $z_2$.
+\rangle$ as it is uniquely determined by $z_1$ and $z_2$. A Product of
+two Categories is uniquiely Isomorphic to the Cartesian Product
+(\S\ref{subsec:set_product}) of the two Sets.
 
 The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
 is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;}
@@ -956,7 +958,8 @@ Z \xleftarrow{\;\;z_2\;\;} B$
 with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
 and Coprojections $q_i$ may be called \emph{Injections} (although they
 are not necessarily Injective Morphisms). An example of a Coproduct in
-$\mathbf{Set}$ is the Disjoint Union (\S\ref{subsec:disjoint_union}).
+$\mathbf{Set}$ is the Disjoint or \emph{Tagged Union}
+(\S\ref{subsec:disjoint_union}).
 
 For Morphisms $f$ and $g$, a Product $f \times g$ is defined where $f
 : A \rightarrow A'$, $g : B \rightarrow B'$ and:
@@ -1425,6 +1428,24 @@ Functor Category from an Opposite Category into $\mathbf{Set}$.
 \subsection{Monoidal Category}\label{subsec:monoidal_category}
 % --------------------------------------------------------------------
 
+\emph{Monoidal Category} (or \emph{Tensor Category}) is a Category
+$\mathbf{C}$ with a Bifunctor $\otimes$:
+\[
+    \otimes : \mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}
+\]
+which is Associative up to a Natural Isomorphism, along with an Object
+$I$ that is both the Left and Right Identity for $\otimes$ up to a
+Natural Isomorphism.
+
+\emph{Coherence Conditions}
+
+$\mathbf{Set}$ is a Monoidal Category with the Cartesian Product as
+the Bifunctor and the Singleton Sets as the Identity Elements.
+
+With respect to Coproducts, $\mathbf{Set}$ is a Symmetric Monoidal
+Category with the Disjoint Sum as the Bifunctor and the Empty
+Set as the Identity Element.
+
 \subsubsection{Closed Monoidal Category}\label{subsec:closed_monoidal}
 
 \subsubsection{Cartesian Closed Category}\label{subsec:cartesian_category}
@@ -1597,6 +1618,36 @@ Subset of the Hom-set of an Object, $X$:
 \subsection{Ring}\label{subsec:ring}
 % --------------------------------------------------------------------
 
+A \emph{Ring} is a Set $R$ with two Binary Operators, $+$ and
+$\cdot$, where:
+
+\begin{itemize}
+\item $R$ is an Abelian Group under $+$
+    \begin{enumerate}
+        \item $+$ is Associative
+        \item There exists an Additive Identity $0 \in R$
+        \item For all $a \in R$, there exists an Additive Inverse $-a
+          \in R$
+        \item $R$ is a Monoid under $\cdot$
+    \end{enumerate}
+\item $R$ is a \emph{Monoid} under $\cdot$
+    \begin{enumerate}
+        \item $\cdot$ is Commutative
+        \item There exists a Multiplicative Identity $1 \in R$
+    \end{enumerate}
+\item $.$ Distributes over $+$
+    \begin{enumerate}
+        \item $\forall a,b,c \in R,
+            a \cdot (b + c) = (a \cdot b) + (a \cdot c)$
+            (Left Distributivity)
+        \item $\forall a,b,c \in R,
+            (b + c) \cdot a = (b \cdot a) + (c \cdot a)$
+            (Right Distributivity)
+    \end{enumerate}
+\end{itemize}
+
+
+
 \subsubsection{Ideal}\label{subsec:ring_ideal}
 
 \emph{Ideal}
@@ -1611,15 +1662,20 @@ Subset of the Hom-set of an Object, $X$:
 
 
 
+\subsubsection{Semiring}
+
+A \emph{Semiring} is a Ring without the requirement of Additive
+Inverses.
+
+
+
 \subsubsection{Commutative Ring}
 
 \emph{Determinant}
 
 
 
-\subsubsection{Commutative Ring}
-
-\emph{Quotient Ring}
+\subsubsection{Quotient Ring}
 
 
 
@@ -1650,6 +1706,10 @@ A Finite Field only exists when the Order is a Prime Power
 \subsubsection{Module}
 
 \paragraph{Vector Space}\label{subsec:vector_space}
+
+\emph{Bilinear Map}
+
+\emph{Tensor Product} \emph{Outer Product}
 
 \paragraph{Bimodule}\label{subsec:bimodule}
 
