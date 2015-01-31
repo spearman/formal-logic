@@ -1,0 +1,434 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Proof Theory}\label{sec:proof_theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ====================================================================
+\section{Metatheory} \label{sec:metatheory}
+% ====================================================================
+
+\emph{Proof Theory} is itself \emph{Metamathematical} in that it
+studies the form of Logical Consequence within Logical Systems, and
+therefore is expressed as \emph{Metatheory}.
+
+A \emph{Judgement} is an inductively definable assertion in the
+Metatheory of a Logical System. That is, one that includes
+Extra-logical Symbols, namely that of Logical Consequence, $\vdash$,
+and commas used in \emph{Sequents}
+(\S\ref{subsec:sequent_notation}). In this way, Axioms are Judgements,
+and a \emph{Formal Proof} expresses a Judgement with the Premises
+being a sequence of Judgements and the Conclusion also a Judgement.
+
+% --------------------------------------------------------------------
+\subsection{Formal Theory}\label{subsec:formal_theory}
+% --------------------------------------------------------------------
+
+A \emph{Formal Theory} is a Set of Sentences in some Formal Language
+(Part \ref{sec:formal_language}). In a Deductive System, a Theory has
+certain Sentences which are Axioms, and any Sentences which are a
+Logical Consequence are also Sentences of that Theory. That is, a
+Theory $\mathcal{T}$ which is an \emph{Inductive Class}. The Sentences
+which are considered for a particular Theory are drawn from a
+\emph{Conceptual Class} of \emph{Elementary Statements}. A Formal
+Theory is said to be \emph{Complete} if for every Sentence in the
+Language of that Theory, the Theory contains either that Sentence or
+its Negation. Such a Set of Sentences is a \emph{Maximal Consistent
+  Set}.
+
+A Formal Theory is \emph{Categorical} if it has just one \emph{Model}
+(Part \ref{sec:model_theory}) up to Isomorphism.
+
+%FIXME connections with stability theory
+
+
+
+\subsubsection{Duality Principle}\label{subsec:duality_principle}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Formal Proof} \label{subsec:formal_proof}
+% --------------------------------------------------------------------
+
+A Formal Proof is a \emph{Logical Derivation}: a finite sequence of
+Well-formed Formulas of a Formal System that are either Axioms of a
+Logical System or follow from the preceding Formulas by an Inference
+Rule. The concluding Formula in the sequence is a \emph{Theorem}. A
+Theorem used in the course of Deriving a further Theorem is called a
+\emph{Lemma}.
+
+For a Formal System, $\mathcal{S}$, of a set of Formulas, $\Gamma$,
+there is a \emph{Syntactic Consequence}, $A$, if there is a
+Formal Proof of $A$ from the set $\Gamma$:
+\[
+    \Gamma \vdash_{\mathcal{S}} A
+\]
+It will suffice for now to say that Syntactic Consequence as
+differentiated from \emph{Material Consequence} ($\rightarrow$)
+should:
+
+\begin{enumerate}
+\item Rely on the Logical Form (\S\ref{subsec:inference_rules}) of the
+  Expressions
+\item Be completely \emph{a priori}
+\item Be \emph{Modal} (\S\ref{subsec:modal_logic}) (i.e. Necessary)
+\end{enumerate}
+Another form of Logical Consequence, \emph{Semantic Consequence}
+(\S\ref{subsec:semantic_consequence}) will be described under
+\emph{Model Theory} (Part \ref{sec:model_theory}).
+
+Proof by Syntactic Consequence is a \emph{Deduction}; that is, the
+production of a Theorem is said to be a \emph{Derivation}. Deduction
+proper is the top-down, \emph{Reductive} process that starts with
+general Axioms and Reduces to the specific Theorem that is being
+proved. \emph{Mathematical Induction} is the bottom-up,
+\emph{Implicative} process where a \emph{Base Case} is shown to extend
+to the more general by means of Implication (the Inductive step). Note
+that Mathematical Induction is not \emph{Inductive Reasoning} which is
+an empirical or probabilistic Inference and not a form of Deduction.
+The \emph{Principle of Mathematical Induction}
+(\S\ref{subsec:induction_principle}) is an application of Mathematical
+Induction to the \emph{Natural Numbers}
+(\S\ref{sec:natural_number}).
+
+An \emph{Theoretic Analytic Proof} begins with an assumption and
+proceeds to an accepted truth (an Axiom, or contradiction as in
+Analytic Tableau (\S\ref{subsec:tableau_calculus}). A \emph{Synthetic
+  Proof} is the reverse of this process; beginning with known truths
+and reasoning up to the desired Proof. A \emph{Problematic Analytic
+  Proof} is constructed from given conditions that are to be
+satisfied.
+
+\subsubsection{Sequent Notation}\label{subsec:sequent_notation}
+
+A \emph{Sequent} is a specific kind of Judgement of the form
+\[\Gamma \vdash \Sigma \]
+where the \emph{Antecedent}, $\Gamma$, is a Conjunctive sequence of
+Formula, and the \emph{Succedent}, $\Sigma$, is a Disjunctive sequence
+of Formulas. Together, Antecedents and Succedents are
+\emph{Cedents}. The Extra-logical Operators, $\vdash$, and $,$
+(comma), are called \emph{Structural Operators} and Rules which change
+only Structural Operators are \emph{Structural Rules} (as opposed to
+\emph{Logical Rules}. A sequence of Cedents may be called a
+\emph{Context}, but \emph{the} Context for a specific Judgement is
+usually meant to be the Antecedent.
+
+\emph{Weakening} refers to a Rule that introduces arbitrary elements
+to a Sequent. \emph{Contraction} refers to a Rule that removes
+multiple occurences of some element and \emph{Permutation} refers to
+the re-ordering of elements. Logics lacking Structural Rules are
+\emph{Substructural Logics} (\S\ref{subsec:substructural_logic}). If
+Sequents are defined as Sets or Multisets instead of Sequences (that
+is, unordered Sets), then the Permutation rule is obsolete, likewise
+the Contraction Rule would be obsolete for Sets instead of Sequences.
+
+In a general \emph{Sequent Calculus} there may be any
+number of Formulas on either side
+\[
+    A_1, \ldots, A_n \vdash B_1, \ldots, B_k
+\]
+is equivalent to
+\[
+    \vdash(A_1 \wedge \cdots \wedge A_n) \rightarrow (B_1 \vee \cdots \vee B_k)
+\]
+and the dual nature of Judgements and negation can be expressed by the
+dual forms
+\[
+    \vdash \neg A_1 \vee \cdots \vee \neg A_n \vee B_1 \vee \cdots
+    \vee B_k
+\]
+and
+\[
+    \vdash \neg(A_1 \wedge \cdots \wedge A_n \wedge \neg B_1 \wedge
+    \cdots \wedge \neg B_k)
+\]
+
+A Sequent with no Succedent ($\Gamma \vdash$) is a
+\emph{Contradiction} meaning it proves falsity which is
+Inconsistent. A Sequent with no Antecedent ($\vdash \Sigma$) is a
+\emph{Logical Assertion} and the Succedent is a
+\emph{Tautology}. Theorems are those of the form $\vdash B$ which are
+the Conclusion of a Valid Proof.
+
+
+
+% ====================================================================
+\section{Proof Calculi}
+% ====================================================================
+
+\emph{Proof Calculi} are families of Formal (Deductive) Systems
+(\S\ref{sec:formal_systems}), specifying templates for forms of
+\emph{Formal Inference} (Axioms and Inference Rules).
+
+% --------------------------------------------------------------------
+\subsection{Axiomatic Systems}
+% --------------------------------------------------------------------
+
+\subsubsection{Hilbert Systems} \label{subsec:hilbert_systems}
+
+\emph{Hilbert Systems} are characterized by having a large number of
+Axiom Schema and few Inference Rules-- just Modus Ponens for
+Propositional Logics and Universal Generalization for Predicate
+Logic. In a Hilbert System, Judgements and Formulas are not
+differentiated. A Theorem in a Hilbert System is the Concluding
+Judgement in a Derivation.
+
+A Hilbert System is differentiated from Systems of \emph{Natural
+ Deduction} by not having any Rules that change the Context of a
+Formula.
+
+% --------------------------------------------------------------------
+\subsection{Structural Proof Theory}
+% --------------------------------------------------------------------
+
+\emph{Structural Proof Theory} studies Proof Calculi that support
+\emph{Analytic Proof}; that is Proofs that are \emph{Cut-free} (they
+do not use the \emph{Cut Rule}) or in \emph{Normal Form}.
+
+\subsubsection{Natural Deduction}\label{subsec:natural_deduction} \hfill
+\\
+Systems of \emph{Natural Deduction}\cite{prawitz65}, contrasted with
+Hilbert Systems, include many Inference Rules but few or no Axioms. A
+Natural Deduction System allows Judgements with multiple Antecedents
+and a single Succedent
+\[
+    A_1,\ldots,A_n \vdash B
+\]
+Inference Rules in Natural Deduction have the general notation
+\[
+    {
+        \frac{J_1 \quad J_2 \quad \cdots \quad J_n}
+        {J}
+    } name
+\]
+where the Rule with name $name$ has Premises of zero or more
+Judgements $J_i$ and the Judgement $J$ is the Conclusion.
+
+Inference Rules that introduce a Logical Connective in the Conclusion
+are called \emph{Introduction Rules}. Example
+\[
+    {
+        \frac{A\;\mathrm{true} \quad B\;\mathrm{true}}
+        {(A \wedge B)\;\mathrm{true}}
+    } \wedge_I
+\]
+where $A$ and $B$ are Propositions.
+
+Conversely, Inference Rules that remove Logical Connectives are
+\emph{Elimination Rules}.
+\[
+    {
+        \frac{A \wedge B\;\mathrm{true}}
+        {A\;\mathrm{true}}
+    } \wedge_E
+\]
+
+\emph{Hypothetical Derivations} (reasoning from \emph{Assumptions})
+are required for Implication Introduction or Disjunction
+Elimination. The general form of a Hypothetical Derivation with
+Antecedents $D_i$ and Succedent $J$:
+\[
+    D_1 \quad D_2 \cdots D_n
+\]\[
+    \vdots
+\]\[
+    J
+\]
+Introduction Rules for Implication:
+\[
+    {
+        \frac{}
+        {A\;\mathrm{true}}
+    } u
+\]\[
+    \vdots
+\]\[
+    {
+        \frac{B\;\mathrm{true}}
+        {A \rightarrow B\;\mathrm{true}}
+    } \rightarrow_{I^u}
+\]
+The Premise $u$ here is considered \emph{discharged} by the Rule
+$I^u$; that is the scope of $u$ does not extend past $I^u$.
+Elimination Rule for Implication (Modus Ponens):
+\[
+    {
+        \frac{A \rightarrow B\;\mathrm{true} \quad A\;\mathrm{true}}
+        {B\;\mathrm{true}}
+    } \rightarrow_{E}
+\]
+Disjunctive Elimination:
+\[
+    \frac{
+    A \vee B\;\mathrm{true} \quad
+    \begin{matrix}
+        {
+            \frac{}
+            {A\;\mathrm{true}}
+        }u \\
+        \vdots \\
+        C\;\mathrm{true}
+    \end{matrix}
+    \quad
+    \begin{matrix}
+        {
+            \frac{}
+            {B\;\mathrm{true}}
+        }w \\
+        \vdots \\
+        C\;\mathrm{true}
+    \end{matrix}
+    }{ C\;\mathrm{true}}\wedge_{E^{u,w}}
+\]
+A Theory is \emph{Locally Consistent} (or \emph{Locally Reducible}) if
+an Introduction of a Connective followed by its Elimination can be
+equivalently Derived without these steps.  The dual to Local
+Consistency is \emph{Local Completeness} which states that Elimination
+rules can decompose a Connective into the forms of its Introduction
+Rule. These correspond to $\beta$-reduction and $\eta$-conversion in
+$\lambda$-Calculus (\S\ref{subsec:lambda_calculus}) where Propositions
+are \emph{Types} and Proofs are \emph{Programs}. If an entire
+Derivation has only Eliminations followed by Introductions, it is said
+to be in \emph{Normal Form}.
+
+In a Formal Proof, the Judgements representing Antecedents are
+presented as Rules with no Premises, named by a \emph{Proof Variable}
+(from a countable set $V$ of variables):
+\[
+    \frac{}{J_1}u_1 \; \frac{}{J_2}u_2 \; \cdots \frac{}{J_n}u_n
+\]\[
+    \vdots
+\]\[
+    J
+\]
+where $u_i \in V$. Written in Sequent Notation:
+\[
+    u_1:J_1, u_2:J_2, \ldots, u_n:J_n \vdash J
+\]
+This convention is sometimes called \emph{Localized Hypotheses}. In
+general, $\pi : A$ may be read ``$\pi$ is a proof of $A$''.
+
+\subsubsection{Sequent Calculus}
+
+In \emph{Sequent Calculus} a Formal Proof is a Sequence of Sequents
+(\S\ref{subsec:sequent_notation}) where each successive Sequent is
+Derivable from prior Sequents by Inference Rules.
+
+The Rule for \emph{Cut} is as follows:
+\[
+    \frac{
+        \Gamma \vdash \Delta, A \quad A, \Sigma \vdash \Pi
+    }{
+        \Gamma, \Sigma \vdash \Delta, \Pi
+    }(Cut)
+\]
+It states that when a Formula $A$ that can be Concluded can also be
+used as a Premise, it can be \emph{cut} out and the Derivations joined
+together. That is, wherever the Lemma $A$ occurs, it can be
+substituted for the Proof of $A$. This means that the Cut Rule is an
+Admissible Rule (\S\ref{subsec:inference_rules}).
+
+The \emph{Cut-elimination Theorem} states that any Judgement with a
+Proof in Sequent Calculus that uses the Cut Rule may be expressed as a
+\emph{Cut-free} Proof without using the Cut Rule. Usually,
+demonstrating the existence of the Cut-elmination Theorem implies that
+the System is Consistent since that would rule-out the possibility of
+Proof of Contradiction.
+
+\paragraph{$\mathbf{LK}$} \hfill \\
+
+Formalization of Classical Logic (\S\ref{subsec:classical_logic})
+(sound and complete in First-Order) with Sequents having zero or more
+RHS Formulas. Allowing multiple RHS Formulas with a \emph{Right
+  Contraction Rule} is equivalent to the admissibility of the
+\emph{Law of the Excluded Middle}.
+
+\paragraph{$\mathbf{LJ}$} \hfill \\
+
+Formalization of Intuitionistic Logic
+(\S\ref{subsec:intuitionistic_logic}) with Sequents having at most one
+RHS Formula. The Cut Rule for $\mathbf{LJ}$:
+\[
+    \frac{
+        \Gamma \vdash A \quad \Pi, A \vdash B
+    }{
+        \Gamma, \Pi \vdash B
+    }(Cut)
+\]
+
+\paragraph{Substructural Rule Sets} \hfill \\
+
+A Substructural Logic (\S\ref{subsec:substructural_logic}) lacking the
+usual Structural Rules is usually weaker than $\mathbf{LK}$.
+
+In Relevance Logic (\S\ref{subsec:relevance_logic}), Weakening Rules
+are not included on the grounds that introduced Formulas are not
+\emph{Relevant}.
+
+In Linear Logic (\S\ref{subsec:linear_logic}), duplicate Formulas are
+treated differently so Contraction and Weakening Rules are is absent
+or controlled.
+
+% --------------------------------------------------------------------
+\subsection{Calculus of Structures}
+% --------------------------------------------------------------------
+
+\emph{Calculus of Structures} is a Proof Calculus with \emph{Deep
+  Inference} for studying Non-commutative Logic
+(\S\ref{subsec:noncommutative_logic}). Deep Inference is a
+generalization of Structure to handle greater Structural complexity
+\cite{schutte77}.
+
+% --------------------------------------------------------------------
+\subsection{Tableau Calculus}\label{subsec:tableau_calculus}
+% --------------------------------------------------------------------
+
+\emph{Tableau Calculus} (or \emph{Method of Analytic Tableau}) is
+commonly used as a Proof procedure for Modal Logics
+(\S\ref{subsec:modal_logic}). An Analytic Tableau is a tree with a
+Formula at the root and a Subformula at each node. A specific Tableau
+Calculus is a finite collection of Rules for breaking down Logical
+Connectives into constituent parts. Rules can be expressed as Sets,
+Multisets, Lists, or Trees of Formulas. If Sets of Formulas are used
+at each node (\emph{Set-labeled Tableau}), they are taken in
+Conjunction.
+
+A \emph{Refutation Tableau} attempts to show that a negation of the
+root Formula cannot be satisfied, thereby proving Logical Truth of the
+Formula. Rules for handling Logical Connectives may produce a branch
+in the tree and if a branch leads to a Contradiction, the branch is
+closed and if all branches are closed the Proof is complete and the
+root Formula is proved. Nodes on a single branch are considered in
+Conjunction, Nodes on separate branches are considered Disjunctively.
+
+\emph{Non-destructive Tableau Calculi} use Rules that only allow
+addition of nodes, while \emph{Destructive Tableau Calculi} use Rules
+that allow modification of existing nodes. \emph{Proof Confluence} is
+the property of a Tableau Calculus that a closed Tableau (for an
+un-satisfiable set of Propositions) can always be generated from an
+arbitrary partially constructed Tableau regardless of which Rules are
+chosen at each application (if a choice between Rules is available). A
+\emph{Strongly Complete Tableau} is one in which every Formula in
+every branch has been expanded.
+
+A method of dealing with non-determinism of rules involving Universal
+Quantification (in First-order Tableau) is called
+\emph{Unification}. This allows Free Variables to be substituted in
+the Rule for Eliminating Universal Quantifiers, which can later be
+Unified by choosing an appropriate Term to close the branch.
+
+\emph{Clause Tableau} (Tableau Method applied to sets of Clauses) may
+be used for increased efficiency. \emph{Connection Tableau} restrict
+expansion of Clause Tableau branches (not the bare root) to contain
+only Literals that unify with a Literal already on the branch
+(\emph{Weak Connectedness}) or a Literal in the current leaf
+(\emph{Strong Connectedness}).
+
+
+
+% ====================================================================
+\section{Reverse Mathematics} \label{sec:reverse_mathematics}
+% ====================================================================
+
+

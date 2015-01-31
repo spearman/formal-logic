@@ -1,0 +1,410 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Type Theory}\label{sec:type_theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{Type Theory} is the study of classes of Formal Systems
+(\S\ref{sec:formal_systems}) where each Term
+(\S\ref{sec:logic_terminology}) has a \emph{Type} and Operations
+are restricted to Terms of specific Types.
+
+As a Formal Theory (Part \ref{sec:proof_theory}), Judgements in Type
+Theory are of three kinds\cite{hott13}:
+\begin{enumerate}
+
+\item \emph{Well-formed Context} (\S\ref{sec:type_context})
+\[
+    (\Gamma) ctx
+\]
+``$\Gamma$ is a Well-formed Context''
+
+\item \emph{Propositional Equality}
+\[
+    \Gamma \vdash a : A
+\]
+``Given Contex $\Gamma$, $a$ is a Term of Type $A$''
+
+\item \emph{Definitional (Judgemental) Equality}
+\[
+    \Gamma \vdash a \equiv b : A
+\]
+``Given Context $\Gamma$, $a$ and $b$ are definitionally equal Terms
+of Type $A$''
+
+\end{enumerate}
+with a Deductive Apparatus (\S\ref{subsec:deductive_apparatus})
+consisting of Inference Rules only and no Axioms. Judgemental Equality
+is an Equivalence Relation respected by Typing.
+
+Inference Rules have the form:
+\[
+    \frac{J_1 \quad \cdots \quad J_k} {J} Name
+\]
+where $J_i$ are provided as derived hypothetical (metatheoretical)
+Judgements and $J$ is the conclusion.
+
+A tree constructed from Inference Rules forms a \emph{Derivation} of a
+Judgement.
+
+
+
+% ====================================================================
+\section{Expression}\label{sec:type_expression}
+% ====================================================================
+
+An \emph{Expression} is an Equivalence Class of Syntactic forms which
+differ in the names of \emph{Bound Variables}. That is, changing the
+name of a Bound Variable everywhere within an Expression
+(\emph{$\alpha$-conversion}) does not change the Expression.
+
+A Variable is Bound in an Expression by an \emph{Abstraction}
+expressing that the Variable is \emph{local} to the Expression:
+\[
+    \lambda x.B
+\]
+or
+\[
+    x.B
+\]
+
+\emph{Substitution}:
+\[
+    B[a/x]
+\]
+Substitute Term $a$ for Free occurrences of Variable $x$ in the Term
+$B$. Generalized:
+\[
+    B[a_1,\ldots,a_n / x_1,\ldots,x_n]
+\]
+
+
+
+% ====================================================================
+\section{Context}\label{sec:type_context}
+% ====================================================================
+
+A \emph{Context}, $\Gamma$, is a list of Assumptions of the form:
+\[
+    \Gamma = x_1 : A_1, x_2 : A_2, \ldots, x_n : A_n
+\]
+where each Element $x_i : A_i$ is an Assumption that the distinct
+Variable $x_i$ has type $A_i$.
+
+Judgements are formulated under the Assumptions of a particular
+Context, $\Gamma$:
+\[
+    \Gamma \vdash a : A
+\]
+For an empty Context:
+\[
+    \vdash a : A
+\]
+or
+\[
+    . \vdash a : A
+\]
+
+
+
+% ====================================================================
+\section{Type Universe}\label{sec:type_universe}
+% ====================================================================
+
+A \emph{Type Universe} is a Type whose Elements are Types. A hierarchy:
+\[
+    \mathcal{U}_0, \mathcal{U}_1, \mathcal{U}_2, \ldots
+\]
+is such that any Type in $\mathcal{U}_i$ is also in
+$\mathcal{U}_{i+1}$. See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
+\S\ref{subsec:universe_rules}.
+
+
+
+% ====================================================================
+\section{Inference Rules}\label{sec:type_inference}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Context Rules}
+% --------------------------------------------------------------------
+
+The following Rules of Inference allow for the determination of a
+Well-formed Context:
+\begin{enumerate}
+\item
+\[
+    {
+        \frac{}{(.)ctx}
+    } ctx-EMP
+\]
+\item
+\[
+    {
+        \frac
+        {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \mathcal{U}_i}
+        {(x_1:A_1,\ldots,x_n:A_n) ctx}
+    } ctx-EXT
+\]
+\end{enumerate}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Structural Rules}
+% --------------------------------------------------------------------
+
+Given a Context, derive Typing Judgements listed in the Context:
+\[
+    {
+        \frac
+        {(x_1:A_1, \ldots, x_n:A_n)ctx}
+        {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
+    } Vble
+\]
+
+Substitution for Typing Judgements:
+\[
+    {
+        \frac
+        {\Gamma \vdash a : A \;\;\;\;\;\;\;
+        \Gamma,x:A,\Delta \vdash b : B}
+        {\Gamma,\Delta[a/x] \vdash b[a/x] : B[a/x]}
+    } Subst_1
+\]
+
+Weakening for Typing Judgements:
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+        \Gamma,\Delta \vdash b : B}
+        {\Gamma,x:A,\Delta \vdash b:B}
+    } Wkg_1
+\]
+
+Substitution for Judgemental Equality:
+\[
+    {
+        \frac
+        {\Gamma \vdash a : A \;\;\;\;\;\;\;
+        \Gamma,x:A,\Delta \vdash b \equiv c : B}
+        {\Gamma,\Delta[a/x] \vdash b[a/x] \equiv c[a/x] : B[a/x]}
+    } Subst_2
+\]
+
+Weakening for Judgemental Equality:
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+        \Gamma,\Delta \vdash b \equiv c : B}
+        {\Gamma, x:A, \Delta \vdash b \equiv c : B}
+    } Wkg_2
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Universe Rules}\label{subsec:universe_rules}
+% --------------------------------------------------------------------
+
+\[
+    {
+        \frac
+        {(\Gamma) ctx}
+        {\Gamma \vdash \mathcal{U}_i : \mathcal{U}_{i+1}}
+    } \mathcal{U}-INTRO
+\]
+
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i}
+        {\Gamma \vdash A : \mathcal{U}_{i+1}}
+    } \mathcal{U}-CUMUL
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependent Function Type Rules}\label{subsec:dependent_rules}
+% --------------------------------------------------------------------
+
+\[
+    {
+        \frac
+        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+        \Gamma,x:A \vdash B : \mathcal{U}_i}
+        {\Gamma \vdash \prod_{(x:A)} B : \mathcal{U}_i}
+    } \Pi-FORM
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-INTRO
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-ELIM
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-COMP
+\]\[
+    {
+        \frac
+        {}
+        {}
+    } \Pi-UNIQ
+\]
+
+
+
+% ====================================================================
+\section{Typed $\lambda$-Calculus}\label{sec:typed_lambda}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Simply Typed $\lambda$-Calculus}\label{subsec:simply_typed}
+% --------------------------------------------------------------------
+
+Isomorphic by Curry-Howard (\S\ref{sec:curry_howard}) to
+Propositional Logic (\S\ref{subsec:propositional_logic})
+
+Propositional Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
+\[
+    \supset \leftrightarrow \rightarrow
+\] \[
+    \wedge \leftrightarrow \times
+\] \[
+    \vee \leftrightarrow +
+\] \[
+    False \leftrightarrow \bot
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Calculus of Constructions}\label{subsec:coq}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Intuitionistic Type Theory}
+% ====================================================================
+
+\emph{Intuitionistic Type Theory} (also \emph{Constructive Type
+  Theory} or \emph{Martin-L\"of Type Theory})
+
+Inductive Types
+
+
+
+% --------------------------------------------------------------------
+\subsection{Types}
+% --------------------------------------------------------------------
+
+\emph{Function Type}
+
+\emph{Product Type}
+
+\subsubsection{Empty Type $\mathbf{0}$}
+
+\subsubsection{Unit Type $\mathbf{1}$}
+
+\subsubsection{Natural Number Type}
+
+\subsubsection{Identity Type}
+
+\subsubsection{Dependent Function Type ($\Pi$-type)}
+
+\[
+    A \rightarrow B :\equiv \prod_{x:A} B
+\]
+
+\subsubsection{Dependent Pair Type ($\Sigma$-type)}
+
+In Set Theory: Indexed Sum over a given Type.
+
+\subsubsection{Coproduct Type}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Intensional \& Extensional Type Theory}
+\label{subsec:intension_extension}
+% --------------------------------------------------------------------
+
+\emph{Canonical Form}
+
+\emph{Normal Form}
+
+
+
+% ====================================================================
+\section{Pure Type System}\label{sec:pure_type_sytem}
+% ====================================================================
+
+Arbitrary number of Sorts and Dependencies
+
+Generalization of the \emph{Lambda Cube} to more sorts than Terms and
+Types
+
+Not necessarily Strongly Normalizing (\S\ref{subsec:normalization_property})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lambda Cube}\label{subsec:lambda_cube}
+% --------------------------------------------------------------------
+
+Simply-typed $\lambda$-calculus allows only Terms to depend on Types.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Subtype}\label{subsec:subtype}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Homotopy Type Theory}\label{sec:homotopy_type}
+% ====================================================================
+
+- Function Extensionality
+- Univalence Axiom
+- Higher Inductive Types
+
+
+
+% ====================================================================
+\section{Curry-Howard Correspondence}\label{sec:curry_howard}
+% ====================================================================
+
+\begin{tabular}{| l | l |}
+\hline
+\textbf{Type Theory} & \textbf{Logic} \\ \hline \hline
+$A$ (Type) & Proposition \\ \hline
+$a : A$ (Term) & Proof \\
+\hline
+\end{tabular}
+
+Natural Deduction - Typed Lambda Calculus
+
+Propositional Logic - Simple Types
+
+Predicate Logic - Dependent Types
+
+Modal Logic - Monads
+
+Classical-Intuitionistic Embedding - Continuation Passing Style
+
+

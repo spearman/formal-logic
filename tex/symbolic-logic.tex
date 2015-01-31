@@ -1,0 +1,821 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Symbolic Logic}\label{sec:formal_logic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{Formal Logic} applies Formal Language (Part
+\ref{sec:formal_language}) to \emph{Formal Arguments} by means of
+\emph{Inference Rules} (\S\ref{subsec:inference_rules}). A Formal
+Argument is an Ordered Set of \emph{Formulas}.
+
+
+
+% ====================================================================
+\section{Terminology}\label{sec:logic_terminology}
+% ====================================================================
+
+\begin{description}
+\item[Universe] class containing elements of \emph{objects} considered
+  in a particular Logical discourse, also called \emph{Domain of
+    Discourse}
+\item[Constant] a named object from the Domain
+\item[Variable] a placeholder that ranges over the objects in the
+  Domain
+\item[Function] $n$-ary functions maps $n$-tuples of objects in the
+  Domain to objects
+\item[Term] an object of the Domain (Variables, Constants and Compound
+  Statements)
+\item[Formula] a mathematical Fact
+\end{description}
+\hfill \\ Inductive definition of \emph{Terms} from \emph{Constants},
+\emph{Variables}, and \emph{Functions}:
+
+Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0 \cup F_1
+\cup F_2 \cup \cdots \cup F_n$, Constants, $C = F_0$:
+\[
+    V \subseteq T
+\]\[
+    C \subseteq T
+\]\[
+    \forall \tau_n=\{t_1,\cdots,t_n\} \in \mathcal{P}(T), \forall f \in F_n
+    \exists f(t_1,\cdots,t_n) \in T
+\]
+Inductive definition of \emph{Formulas} from Terms and
+\emph{Relations}:
+
+Given Terms, $T = \{t_0,\ldots,t_n\}$, and Relations, $R = \{r_0,\ldots,r_m\}$:
+\begin{itemize}
+\item $t_i = t_j$ is a Formula
+\item $r_k(t_0,\ldots,t_n)$ is a Formula and $r_k$ is an n-ary Relation
+\end{itemize}
+A Formula is \emph{Valid} if and only if it is True under every
+\emph{Interpretation} (\S\ref{subsec:interpretation}).
+
+\emph{Mapping} % Functions, Morphisms
+
+
+
+% ====================================================================
+\section{Formal Systems}\label{sec:formal_systems}
+% ====================================================================
+
+Symbols may be divided into \emph{Logical} and \emph{Non-Logical
+  Symbols}: Logical Symbols ($\forall$, $\vee$, $\rightarrow$, $\neg$,
+etc., and \emph{Variables} $x_0$, $x_1$, etc.) always have the same
+meaning while Non-Logical Symbols (\emph{Predicates} (Relations),
+\emph{Functions}, and individual \emph{Constants}) only have meaning
+under \emph{Interpretation} (\S\ref{subsec:interpretation}). The set of
+Non-Logical Symbols used in a particular discourse is called the
+\emph{Signature} of the discourse. The Signature may be defined as a
+triple:
+\[
+    \sigma = (S_{func},S_{rel},ar)
+\]
+where
+\[
+    ar: S_{func} \cup S_{rel} \rightarrow \mathbb{N}_0
+\]
+\emph{Extra-logical Symbols} are those of a Metalanguage, such as the
+symbol for \emph{Logical Consequence} (\emph{Entailment}), $\vdash$,
+(read \emph{yields} or \emph{proves}) or Metavariables, $\varphi,
+\psi, \ldots$.
+
+A particular \emph{Formal System} is required to be \emph{Consistent}; that
+is the ability to derive only the affirmation or denial of a
+particular statement, not both. Another way of stating Consistency is
+that Falsity is not provable from no Assumptions.
+
+\emph{Stratification}
+
+% --------------------------------------------------------------------
+\subsection{Deductive Apparatus} \label{subsec:deductive_apparatus}
+% --------------------------------------------------------------------
+
+A Formal Language (described by a Formal Grammar) in combination with
+a \emph{Deductive Apparatus} gives rise to a \emph{System of
+  Logic}. Here, Expressions of Symbols are usually referred to as
+\emph{Forumulas}, and Expressions that belong to the Language are
+called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
+
+The Deductive Apparatus is a set of zero or more \emph{Axioms} and one
+or more \emph{Inference Rules}. A System of Logic is termed
+\emph{Effective} (i.e. Recursively Definable) if the set of Axioms and
+the set of Inference Rules are Decidable or Semi-decidable. The notion
+of \emph{Theorems}, however, is not in general Effective
+(\S\ref{subsec:formal_proof}).
+
+\subsubsection{Axioms}\label{subsec:axiomatization}
+
+\emph{Axioms} are given as WFFs, the truth value of which are assumed
+for the purpose of performing \emph{analysis} within a System of
+Logic. An Axiom is properly an \emph{Inference Rule} with no
+\emph{Premises}, only a given \emph{Conclusion}; that is a
+\emph{Logical Assertion}(\S\ref{subsec:sequent_notation}).
+
+Axioms may be divided into two kinds: \emph{Logical Axioms} of a
+tautological sort, and \emph{Non-logical Axioms}, hereafter referred
+to as \emph{Postulates}, that play the role of assumptions: defining
+properties of the domain of the theory in question.
+
+An \emph{Axiom Schema} is properly a template for Axioms in which one
+or more \emph{Schematic Variables} (Metavariables, \S
+\ref{sec:metalanguage}) appear, standing for a subformula in the
+Object Language of the system. For a Language with infinitely many
+WFF, an Axiom Schema describes a countably infinite number of
+Axioms. A system without Schema is termed \emph{Finitely Axiomatized}.
+
+\subsubsection{Inference Rules} \label{subsec:inference_rules}
+
+An \emph{Inference Rule} is a \emph{transformation rule}: it is the
+\emph{Logical Form} of the \emph{Deduction} of a \emph{Conclusion}
+(also called an \emph{Idiomatic}) based on \emph{Premises}-- Premises
+and Conclusions being WFF in the Formal Language of the system. Axioms
+are special cases of Inference Rules which have no Premises, only a
+universally held Conclusion. Axioms may be further differentiated from
+Rules by saying that Rules are statements \emph{about} the system,
+Axioms are statements \emph{in} the system.
+
+Inference Rules may be viewed as functions that take Premises and
+return a Conclusion. An alternative formulation for Inference Rules is
+as a \emph{Deducibility Relation}, $\vdash$, that holds between zero
+or more Premises and a Conclusion. A Formal Argument is \emph{Valid}
+if and only if the Conclusion is Entailed by the Premises. Inference
+Rules, like Axioms, may be Schematic if they contain Metavariables,
+and such an Argument is called an \emph{Argument Form}. Argument Forms
+are Valid if and only if every Argument is Valid.
+
+Taken individually, both Premises and Conclusions are
+\emph{Propositions}. The Conclusion relies on the truth of the
+Premises; if the Premises are left unsatisfied, then the derivation is
+\emph{Hypothetical} and the Premises \emph{Hypotheses}. It can be said
+that the Conclusion of a Deducibility Relation is reached by
+\emph{Syntactic Consequence}, a form of \emph{Logical
+  Consequence}. For more information, see section on \emph{Formal
+  Proof} (\S\ref{subsec:formal_proof}).
+
+Inference Rules may be identified as reduntant in two senses. An
+\emph{Admissible Rule} is one which does not change the set of
+\emph{Theorems} in a Formal System when it is added. A \emph{Derivable
+  Rule} is a case of an Admissible Rule that has been \emph{Derived}
+from existing rules.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Quantification}\label{subsec:firstorder_quantification}
+% --------------------------------------------------------------------
+
+A \emph{Quantifier} limits (\emph{Binds}) a Variable to a certain
+quantity of members of the Domain, the two fundamental Quantifiers
+being \emph{Universal} ($\forall$) and \emph{Existential} ($\exists$).
+
+A \emph{Bound Quantifier} is one with a restricted Range, e.g.
+$\exists x > 0$ or $\forall x \in \mathbb{R}$.
+
+
+
+\subsubsection{Bound \& Free Variables}\label{subsec:bound_free}
+
+Variables are \emph{Free Variables} if they are not Quantified in any
+Formula, and \emph{Bound Variables} when they are Quantified.
+Inductive definition of \emph{Free} and \emph{Bound Variables}:
+\begin{enumerate}
+\item A Variable $x$ is Free in Atomic Formula $\varphi$ if $x$ occurs
+  in $\varphi$ (there are no Bound Variables in Atomic Formulas)
+\item A Variable is Free or Bound in $\varphi \bullet \psi$ if $x$ is
+  Free or Bound in either $\varphi$ or $\psi$, where $\bullet$ is a
+  Binary Connective
+\item A Variable $x$ is Free in $\forall y \varphi$ iff $x$ is Free in
+  $\varphi$ and $x$ is not $y$. Conversely $x$ is Bound in $\forall y
+  \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
+\end{enumerate}
+
+A Term with no Free Variables is a \emph{Ground Term} and a Formula
+with no Free Variables in First-order Logic is a \emph{First-order
+  Sentence} (also called a \emph{Closed Formula}). First-order
+Sentences have well-defined Truth values. Free Variables are
+implicitly Universally Quantified.
+
+\subsubsection{Uniqueness Quantification}\hfill
+
+\emph{Unique Existential Quantification}, denoted by $\exists !$,
+is expressed in natural language as ``there is one and only one.'' A
+First-Order System requires the \emph{Equality Relation}
+(\S\ref{subsec:firstorder_equality}) in order to be able to express
+Uniqueness Quantification.
+
+
+
+\subsubsection{Quantifier Rank}
+
+Inductive definition of \emph{Quantifier Rank} function $qr$:
+\begin{itemize}
+\item $qr(\varphi) = 0$ if $\varphi$ is Atomic
+\item $qr(\varphi_1 \wedge \varphi_2) = qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
+\item $qr(\neg \varphi) = qr(\varphi)$
+\item $qr(\exists_x \varphi) = qr(\varphi) + 1$
+\end{itemize}
+
+
+
+\subsubsection{Quantifier Nesting}
+
+% FIXME
+
+
+
+\subsubsection{Prenex Normal Form}\label{subsec:prenex_normal}
+
+Normalization (\S\ref{subsec:normalization_property})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Zeroth-order - Propositional}\label{subsec:propositional_logic}
+% --------------------------------------------------------------------
+
+\emph{Propositional Logic} (also called \emph{Sentential} or
+\emph{Statement Logic}) is represented by a Formal Language with WFF
+consisting only of \emph{Operators} (\emph{Logical Connectives}) and
+\emph{Primitive Symbols} representing \emph{Propositions}.
+
+Propositions are WFF that are assigned a truth value. An \emph{Atomic
+  Proposition} contains no Operators. A \emph{Composite Proposition}
+is composed by recursive application of Operators to Propositions by a
+corresponding \emph{Concatenation Rule} that assigns a new truth value
+to the Composite string.
+
+A Propositional Formula is a \emph{Boolean Term}
+(\S\ref{subsec:boolean_algebra}).
+
+Primitive Symbols are usually divided into three different categories:
+\begin{description}
+\item[Propositional Constants] \hfill \\
+Represent particular Propositions: $A$, $B$, $C$, $\ldots$
+\item[Propositional Variables] \hfill \\
+Range over set of all Atomic Propositions: $p$, $q$, $r$, $\ldots$
+\item[Schematic Variables] \hfill \\
+Metavariables; range over set of all propositions: $\varphi$, $\psi$,
+$\chi$, $\ldots$
+\end{description}
+
+The Domain of a Propositional Calculus is \emph{Truth} and
+\emph{Falsity}, so Variables are not necessarily \emph{Bound} or
+\emph{Free} as in \emph{Predicate Logic}. In fact, a Propositional
+Variable is equivalent to a \emph{Nullary Predicate} in \emph{First
+  Order Logic}.
+
+Formal definition of a \emph{Propositional Calculus}:
+\[
+    \mathcal{S} = (\mathbf{A},\mathbf{\Omega},\mathbf{Z},\mathbf{I})
+\]
+where
+\begin{itemize}
+\item $\mathbf{A}$ is a finite set of Proposition symbols ($p$, $q$,
+  $r$, $\ldots$)
+\item $\mathbf{\Omega}$ is a finite set of Operator symbols ($\neg$,
+  $\wedge$, $\vee$, $\ldots$)
+\item $\mathbf{Z}$ is a finite set of Inference Rules
+\item $\mathbf{I}$ is a finite set of Axioms
+\end{itemize}
+$\mathcal{S}$ is then inductively defined as follows, where
+$\mathbf{\Omega_j}$ is the partition of $\mathbf{\Omega}$ containing
+Operators of arity $\mathbf{j}$:
+\begin{enumerate}
+\item Any element of $\mathbf{A}$ is a Formula of $\mathcal{S}$
+\item For Formulas $p_1, p_2, \cdots, p_j$ and $f \in
+  \mathbf{\Omega_j}$ then $f(p_1, p_2, \cdots, p_j)$ is a formula
+\end{enumerate}
+Propositional Logic is closed under Truth-Functional Connectives, so
+the above is sufficient to define all WFF: nothing else is a formula
+of $\mathcal{S}$.
+
+Formulas derived by the Axioms and Inference Rules of a Propositional
+Logic are termed \emph{Theorems}. Allowing for Axiom Schema (an
+infinite number of axioms) extends Propositional Logic; an example of
+such a system is \emph{Skolem Arithmetic}\cite{skolem23}.
+
+The set of WFF of a System, $\mathcal{S}$, may be defined inductively:
+\begin{itemize}
+\item Propositional Variables are WFF
+\item If $\varphi$ is a WFF, then $\neg\varphi$ is a WFF
+\item If $\varphi$ and $\psi$ are WFF and $\bullet$ is a binary Operator,
+  then $\varphi \bullet \psi$ is a WFF.
+\end{itemize}
+
+\subsubsection{Argument Forms}
+
+Inference Rules of a Propositional Logic define Valid \emph{Argument
+  Forms} (\S\ref{subsec:inference_rules}). The simplest Argument Form
+that is both necessary (and given a complete set of Axioms is
+sufficient to define all other Argument Forms) is \emph{Modus Ponens},
+shown here Schematicized:
+
+$\textrm{1. }\varphi \rightarrow \psi$
+
+$\textrm{2. }\varphi$
+
+$\therefore\textrm{ }\psi$
+\\
+where lines one and two are Premises and line three is the Conclusion
+(the symbol $\therefore$ is read as \emph{therefore}). This is written in
+\emph{Sequent Notation}(\S\ref{subsec:sequent_notation}) as
+\[(\varphi \rightarrow \psi), \varphi \vdash \psi\]
+The Schematic representation of \emph{Modus Tollens}:
+
+$\textrm{1. }\varphi \rightarrow \psi$
+
+$\textrm{2. }\neg\psi$
+
+$\therefore\textrm{ }\neg\varphi$
+
+\subsubsection{Operators}
+
+The minimal set of primitive Operators is the \emph{negation} symbol
+($\neg$) plus a \emph{sole sufficient} Operator of either $\land$,
+$\lor$ or $\rightarrow$. Choosing one of these Operators, the other
+two, and any other Operator, can be defined in terms of it and
+negation. It is also possible to construct functionally complete sets
+of one element: $\mathbf{\Omega} = \{\uparrow\}$ or $\mathbf{\Omega} =
+\{\downarrow\}$ ($\uparrow$ and $\downarrow$ being \emph{NAND} and
+\emph{NOR}, respectively).
+\\
+Example simple Axiom system:
+
+$\mathbf{\Omega} = \mathbf{\Omega_1} \cup \mathbf{\Omega_2}$
+
+$\mathbf{\Omega_1} = \{\neg\}$
+
+$\mathbf{\Omega_2} = \{\rightarrow\}$
+
+$\mathbf{I} = \{ (p \rightarrow (q \rightarrow p)),$
+
+$\qquad((p \rightarrow (q \rightarrow r)) \rightarrow
+(( p \rightarrow q) \rightarrow (p \rightarrow r))),$
+
+$\qquad(( \neg p \rightarrow \neg q ) \rightarrow (q \rightarrow p ))
+\}$\\ with Modus Ponens as the sole inference rule (see Hilbert
+Systems, \S\ref{subsec:hilbert_systems}).
+
+In Propositional Logic, the Extra-logical Symbol for Entailment,
+$\vdash$, and the Logical \emph{Implication Symbol}, $\rightarrow$,
+coincide in that
+\[(A \vdash B) \leftrightarrow (\vdash A \rightarrow B)\]
+but the difference is that $\vdash$ describes a Deduction, that is a
+relation between Sentences, and $\rightarrow$ is a Logical Connective
+within a Formula.
+
+Another possible system is a \emph{Natural Deduction
+  System}\cite{jaskowski34} (\S \ref{subsec:natural_deduction})
+which has no Axioms ($\mathbf{I}=\varnothing$) and ten Inference
+Rules.
+
+% --------------------------------------------------------------------
+\subsection{First-order - Predicate}\label{subsec:predicate_logic}
+% --------------------------------------------------------------------
+
+Systems of \emph{First-order Predicate Logic} add \emph{Extensional
+  Quantifiers} that may be applied to Variables, which may be Objects
+of the Universe of discussion, or Relations or Functions. A
+\emph{First-Order Theory} may be formed by a system of First-order
+Logic together with a Domain of Discourse over which Variables may
+range, plus finitely many Functions and \emph{Predicates} defined on
+that Domain, and a recursive set of Axioms.
+
+A Predicate in First-order Logic takes one or more Objects from the
+Domain and returns either True or False, that is a Relation on the
+Domain. A Predicate taking no Objects (a Nullary Predicate) is
+equivalent to a Proposition in Zeroth-order Logic.
+
+\emph{Higher-order Logic}(\S\ref{subsec:higher_order}) allows Predicates
+to be applied to other Predicates or Functions, or Quantifiers may be
+applied to Predicates or Functions. In First-order Logic, Predicates
+are associated with Sets, in Higher-order Logic, with Sets of
+Sets.
+\\
+The traditional Signature used in First-order Logic:
+\begin{enumerate}
+\item For $n \geq 0$, $n$-ary Predicate (also called Relation)
+  Symbols: $p^{n}_0, p^{n}_1, p^{n}_2, p^{n}_2, p^{n}_3, \ldots$
+\item For $n \geq 0$, $n$-ary Function Symbols: $f^{n}_0, f^{n}_1,
+  f^{n}_2, f^{n}_2, f^{n}_3, \ldots$
+\end{enumerate}
+The contemporary Signature used:
+\begin{enumerate}
+\item Predicate Symbols denoted by uppercase letters $P$, $Q$, $R$,
+  $\ldots$ with arity ($\geq 0$) specified by the \emph{Valence} of the
+  parenthetical arguments, eg P(x), Q(x,y).
+\item Function Symbols denoted by lowercase letters $f$, $g$, $h$,
+  $\ldots$ with arity specified in the usual way.
+\end{enumerate}
+Here, Functions of Valence 0 are \emph{Constant Symbols} denoted by
+letters $a$, $b$, $c$, $\ldots$.
+
+\subsubsection{Properties}\label{subsec:firstorder_properties}
+
+First-order Logic may be used to devise Deductive Systems with finite
+Domains that are \emph{Sound} (\S\ref{sec:soundness}) and
+\emph{Complete}, but for infinite Domains a system of Higher-order
+Logic is required. First-order Logic is
+Semi-decidable(\S\ref{subsec:semidecidable}).
+
+%FIXME ref Lowenheim-skolem thoerem
+The \emph{L\"owenheim-Skolem theorem} implies that First-order Logic
+is unable to characterize the concept of Countability (or
+Uncountability).
+
+%FIXME def/ref compactness theorem
+The \emph{Compactness theorem} implies that if a Formula is derived
+from a System of First-order Logic with an infinite set of Axioms,
+then it can be derived from a finite number of those Axioms. This has
+implications for the determination of \emph{Connected Components} of a
+\emph{Directed Graph} (\S\ref{subsec:directed_graph}).
+
+\subsubsection{Formation Rules}\label{subsec:formation_rules}
+
+The \emph{Formation Rules} for WFF in a System of First-order Logic
+generally describe a Context-free Grammar with a infinite Alphabet and
+many Start Symbols.
+
+Terms are limited to those derived from Variables and a finite number
+of $n$-ary Function applications, but not Expressions involving a
+Predicate Symbol. See Section \ref{sec:logic_terminology} for a recursive
+definition of Terms.
+
+Definition of \emph{Atomic Formulas} (no Logical Connectives or Quantifiers):
+\begin{enumerate}
+\item If $t_1$ and $t_2$ are Terms, then $t_1 = t_2$ is an Atomic Formula.
+\item If $R$ is an $n$-ary Relation (Predicate), and $t_1,\ldots,t_n$
+  are terms, then $R(t_1,\ldots,t_n)$ is an Atomic Formula.
+\end{enumerate}
+Atomic Formulas or their negations are also called \emph{Literals}. A
+\emph{Clause} is a finite Disjunction of Literals.
+
+Definition of WFF as a finite number of applications of the following rules:
+\begin{enumerate}
+\item $\neg \phi$ is a WFF when $\phi$ is a WFF
+\item $(\phi \bullet \psi)$ is a WFF when $\phi$ and $\psi$ are WFF
+  and $\bullet$ is a Binary Connective
+\item $\exists x \phi$ is a WFF when $x$ is a Variable and $\phi$ is a WFF
+\item $\forall x \phi$ is a WFF when $x$ is a Variable and $\phi$ is a WFF
+\end{enumerate}
+
+
+
+
+\subsubsection{Inference Rules}
+
+\paragraph{Universal Generalization}\label{subsec:universal_generalization} \hfill
+\\
+\[P(x) \vdash \forall x P(x)\]
+
+\subsubsection{Equality Conventions}\label{subsec:firstorder_equality}
+
+\paragraph{First-order Logic with Equality}\hfill
+\\ Including a primitive Logical Symbol for equality, $=$, interpreted
+as the real equality relation between members of the Domain such that
+``two'' given members are the same member. This adds the following
+Axioms:
+
+\begin{enumerate}
+\item \textbf{Reflexivity}: $\forall x, x=x$
+\item \textbf{Substitution for functions}: given a function, $f$,
+  $\forall x \forall y, x = y \rightarrow f(\ldots,x,\ldots) =
+  f(\ldots,y,\ldots)$
+\item \textbf{Substitution for formulas (Leibniz's Law)}: given a
+  formula $\varphi$ with Free occurrences of $x$, and $\varphi '$ with
+  Free occurrences of $y$, $\forall x \forall y, x = y \rightarrow
+  (\varphi \rightarrow \varphi ')$
+\end{enumerate}
+
+Defining a theory with a Binary Relation $A(x,y)$ that satisfies
+Reflexivity and Leibniz's law is sufficient to derive any other
+equality Theorems.
+
+\paragraph{First-order Logic without Equality} \hfill
+\\ An alternative convention is to consider the Equality Relation to
+be a Non-logical Symbol, included as a part of the Signiature of a
+particular Theory instead of as a Rule of Logic. This allows two
+distinct individuals to be considered equal by an arbitraray
+Equivalence Relation. If this convention is used, but no distinct
+individuals, $a$ and $b$ satisfy $a=b$ then the interpretation is
+termed a \emph{Normal Model} (that is equivalent to a First-order
+Logic with Equality).
+
+
+\subsubsection{Monadic First-order Logic}
+
+\emph{Monadic First-order Logic}, also called \emph{Monadic Predicate
+  Calculus} restricts First-order Logic to unary Relations and no
+Function symbols. This weaker form of First-order Logic is fully
+Decidable.
+
+\subsubsection{Many-sorted First-order Logic}\label{subsec:manysorted_logic}
+
+\emph{Many-sorted First-order Logic} allows Variables to be Quantified
+over different Domains, thus giving Variables different
+\emph{Sorts}. With finitely many Sorts, Many-sorted First-order Logic
+can be reduced to Single-sorted First-order Logic. This can be
+accomplished by adding unary Predicates to a First-order Logic that
+partition the Domain.
+
+\subsubsection{Infinitary First-order Logic}
+
+\emph{Infinitary Logic} allows Formulas of infinite length, through
+either Conjunctons and Disjunctions, infinite-arity Relations and
+Functions, or Quantification over infinitely many Variables.
+
+\paragraph{$\Omega$-logic}\label{subsec:omega_logic}
+
+% --------------------------------------------------------------------
+\subsection{Higher-order - Plural}\label{subsec:higher_order}
+% --------------------------------------------------------------------
+
+\subsubsection{Second-order}\label{subsec:second_order}
+
+\emph{Second-order Logic} allows for Quantifiers to range over
+Relations and Functions and thus \emph{Sorts} of Variables that range
+over $k$-ary Relations and Functions. It is possible to leave out a
+definition of Quantifiers for Functions since $k$-ary Functions can be
+represented by $k+1$-ary Relations.\cite{shapiro00} Quantification
+over Functions allows the creation of the \emph{Analytic Hierarchy}
+(\S\ref{subsec:analytic_hierarchy}).
+
+\subsubsection{Plural, Monadic Second-order Logic}
+
+An alternative formulation of Second-order Logic is to allow Variables
+to take on \emph{Plural} Values. It is equi-interpretable with
+\emph{Monadic Second-order Logic}, which restricts Quantification to
+Unary Relations (sets).
+
+\subsubsection{Independence-friendly Logic}\label{subsec:independence_logic}
+
+\emph{Independence-friendly Logic} has \emph{Branching Quantifiers}.
+
+% --------------------------------------------------------------------
+\subsection{Classical Logic}\label{subsec:classical_logic}
+% --------------------------------------------------------------------
+
+\emph{Classical Logic} is the class of Propositional and
+First-order Systems of Logic characterized by the following Inference
+Rules:
+
+\begin{description}
+
+\item [Tertium non datur] (\emph{Law of excluded middle})
+    \[\vdash(p \vee \neg p)\]
+
+\item [Double Negation]
+    \[p \vdash \neg\neg p\]
+
+\item [Law of Non-contradiction]
+    \[\vdash \neg(p \wedge \neg p)\]
+
+\item [Ex falso quodlibet] (\emph{Principle of explosion},
+  \emph{Principle of Psuedo-Scotus})
+    \[\vdash 0 \rightarrow p\]
+
+%FIXME finish properties and rules
+
+\end{description}
+
+The intended Semantic Interpretation (\S\ref{subsec:interpretation})
+of Classical Logic is subject to the \emph{Principle of Bivalence}
+which says that every Proposition has one Truth-value: True or False.
+Non-classical Logics such as \emph{Intuitionistic Logic}
+(\S\ref{subsec:intuitionistic_logic}) does not have this Property.
+
+% --------------------------------------------------------------------
+\subsection{Modal (Intensional) Logic} \label{subsec:modal_logic}
+% --------------------------------------------------------------------
+
+\emph{Intensional Logic} adds to First-order Logic \emph{Sentential
+  Functors} (\emph{Intensions}) that range over Terms. An Intension is
+the \emph{Sense} in which a Logical Assertion is made, as opposed to
+the \emph{Reference} to which the Assertion applies (\emph{i.e.
+  Extensional Quantification}).
+
+\emph{Modal Logic} extends Propositional and Predicate Logic to
+include Operators expressing \emph{Modality}. Various meanings for
+these Modal Operators include \emph{Alethic Modality}
+(\emph{Necessity} and \emph{Possibility}), \emph{Temporal Modality}
+(qualification in terms of time, eg \emph{always}, \emph{eventually},
+\emph{until}), \emph{Deontic Modality} (\emph{Obligation} and
+\emph{Permission}), and \emph{Doxastic Modality} (Modalities with
+regards to \emph{Belief}).
+
+An unary \emph{Primitive Modal Operator}, $\square$, defines a Dual
+Operator, $\Diamond$, such that the following analogues of de Morgan's
+Laws (\S\ref{subsec:de_morgan}) hold:
+    \[\Diamond P \leftrightarrow \neg \square \neg P\]
+    \[\square P \leftrightarrow \neg \Diamond \neg P\]
+Modal Logic with more than one Primitive Modal Operator, $\square _i,
+i \in \{1, \ldots, n\}$ is \emph{Multimodal Logic}.
+
+By the \emph{Curry-Howard Correspondence}
+(\S\ref{sec:curry_howard}), Modal Logic corresponds
+to \emph{Monads} (\S\ref{subsec:monad}).
+
+\subsubsection{Alethic Logic}\label{subsec:alethic_logic}
+
+Most Systems of Alethic Logic are based on an extension of
+Propositional Logic called $\mathbf{K}$ which has:
+
+\begin{enumerate}
+\item $\square$, unary operator for \emph{Necessity}.
+\item $\mathbf{N}$, \emph{Necessitation Rule}: stating if $p$ is a
+  Theorem, then $\square p$ is a Theorem.
+\item $\mathbf{K}$, \emph{Distribution Axiom}: $\square(p \rightarrow
+  q) \rightarrow (\square p \rightarrow \square q)$ (also called the
+  \emph{Kripke schema} (\S\ref{sec:frame_semantics}).
+\end{enumerate}
+
+Adding further Axioms gives rise to a nested hierarchy of Systems of
+\emph{Normal Modal Logic}:
+
+\begin{itemize}
+\item $K := \mathbf{K} + \mathbf{N}$
+\item $T := K + \mathbf{T}$
+\item $S4 := T + \mathbf{4}$
+\item $S5 := S4 + \mathbf{5}$
+\item $D := K + \mathbf{D}$
+\end{itemize} \hfill \\
+where
+
+\begin{itemize}
+\item $\Diamond$, unary operator for \emph{Possibly}
+\item $\mathbf{T}$, \emph{Reflexivity Axiom}: $\square p \rightarrow p$
+\item $\mathbf{4}$: $\square p \rightarrow \square \square p$
+\item $\mathbf{B}$: $p \rightarrow \square \Diamond p$
+\item $\mathbf{D}$: $\square p \rightarrow \Diamond p$
+\item $\mathbf{5}$: $\Diamond p \rightarrow \square \Diamond p$
+\end{itemize}
+
+\subsubsection{Doxastic Logic}
+
+\emph{Doxastic Logic} uses the unary Modal Operator, $\mathcal{B}$, to
+denote \emph{Belief}. Example:
+\[
+    \mathcal{B} x
+\]
+has the meaning ``It is Believed that x is the case''. A set of
+Beliefs is usually denoted
+\[
+    \mathbb{B}: \{ b_1, b_2, \ldots, b_n \}
+\]
+
+\subsubsection{Deontic Logic}
+
+\emph{Standard Deontic Logic} ($\mathbf{SDL}$) adds the following
+Axioms to Propositional Logic (\S\ref{subsec:propositional_logic}):
+    \[O(A \rightarrow B) \rightarrow (OA \rightarrow OB)\]
+    \[PA \rightarrow \neg O \neg A\]
+with Primitive Operators $O$ (\emph{Obligatory}) and $P$
+(\emph{Permissible}). \emph{Forbidden} is defined as
+    \[FA = O \neg A\]
+or
+    \[FA = \neg P A\]
+Deontic Logic may be extended by Alethic Operators with the Axiom:
+    \[OA \rightarrow \Diamond A\]
+which has the meaning ``ought implies can''.
+
+\subsubsection{Temporal Logic}
+
+\paragraph{Tense Logic} \hfill \\
+
+\emph{Tense Logic} is a 2-modal Logic that adds operators $[F]$ for
+\emph{Future} and $[P]$ for \emph{Past} Modalities.
+
+\paragraph{CTL*}
+\hfill \\
+Superset of \emph{Computation Tree Logic} and \emph{Linear
+  Temporal Logic}
+
+\subparagraph{Computation Tree Logic}
+\hfill \\
+Temporal Logic with \emph{Path} Modalities.
+
+\subparagraph{Linear Temporal Logic}
+\hfill \\
+\emph{Linear Temporal Logic} is a Modal Logic with Modalities
+referring to Time.
+
+\paragraph{Interval Temporal Logc}
+
+\paragraph{Modal $\mu$-calculus}
+
+\subsubsection{Dynamic Logic}
+
+\emph{Dynamic Logic} adds Terms denoting \emph{Actions}:
+\[[a]p\]
+where after performing Action $a$ is necessitated that $p$ holds and
+\[\langle a \rangle p\]
+where after performing Action $a$ it is possible that $p$ holds.
+
+% --------------------------------------------------------------------
+\subsection{Intuitionistic Logic}\label{subsec:intuitionistic_logic}
+% --------------------------------------------------------------------
+
+\emph{Intuitionistic Logic} (or \emph{Constructive Logic}) replaces
+Truth with the concept of \emph{Constructive Provability}. This is to
+say that Operations in Intuitionistic Logic preserve
+\emph{Justification} rather than Truth-value. Such systems are
+restrictions of Classical Logic without the Law of the Excluded Middle
+or Double Negation Elimination (\S\ref{subsec:classical_logic}).
+
+Whereas First-order Logic (\S\ref{subsec:predicate_logic}) is a
+foundation for Set Theory (Part \ref{sec:set_theory}), Intuitionistic
+Logic is used as a foundation for \emph{Type Theory} (Part
+\ref{sec:type_theory}) and \emph{Constructive Set Theory}
+(\S\ref{sec:constructive_set_theory}).
+
+A Formula in Intuitionistic Logic does not necessarily have a Prenex
+Normal Form (\S\ref{subsec:prenex_normal}).
+
+Intuitionistic Logic is \emph{Modelled} by \emph{Heyting Algebra}
+(\S\ref{subsec:heyting_semantics}) or \emph{Kripke Semantics}
+(\S\ref{subsec:kripke_semantics}) and lacks the Principle of Bivalence
+(\S\ref{subsec:classical_logic}); thus there is no sole-sufficient
+Operator in Intuitionistic Logic. A Formula is Valid if and only if it
+receives the Value of the Top Element for any Valuation on any Heyting
+Algebra.
+
+Complete bases are:
+\[
+    \{ \vee, \leftrightarrow, \bot \}
+\]
+and
+\[
+    \{ \vee, \leftrightarrow, \neg \}
+\]
+
+Proofs (Part \ref{sec:proof_theory}) in a Theory
+(\S\ref{subsec:formal_theory}), $\mathcal{T}$, based on Intuitionistic
+Logic have the \emph{Existence Property}:
+\[
+    (\exists x)A(x) \in \mathcal{T} \rightarrow (\exists t)A(t)
+\]
+where $A(x)$ has $x$ as the only Free Variable and $t$ is a Term.
+
+\emph{Disjunction Property}:
+\[
+    A \vee B \in \mathcal{T} \rightarrow A \in \mathcal{T} \vee B \in \mathcal{T}
+\]
+
+\subsubsection{Minimal Logic}
+
+\subsubsection{Combinatory Logic}\label{subsec:combinatory_logic}
+
+\emph{Combinator}
+
+\subsubsection{Intermediate Logic}
+
+\emph{Intermediate Logic} is an extended Intuitionistic Logic
+(\emph{Superintuitionistic Logic}) that is Consistent and still weaker
+than the strongest Consistent Superintuitionistic Logic: Classical
+Logic.
+
+% --------------------------------------------------------------------
+\subsection{Substructural Logic}\label{subsec:substructural_logic}
+% --------------------------------------------------------------------
+
+\subsubsection{Relevance Logic}\label{subsec:relevance_logic}
+
+\subsubsection{Linear Logic}\label{subsec:linear_logic}
+
+\paragraph{Non-commutative Logic}\label{subsec:noncommutative_logic}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Multi-valued Logic} \label{subsec:multi_valued_logic}
+% --------------------------------------------------------------------
+
+\subsubsection{Fuzzy Logic}
+
+\subsubsection{Probabilistic Logic}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ordinal Logic}
+% --------------------------------------------------------------------
+
+Alan Turing's PhD Thesis \cite{turing38}
+
+% --------------------------------------------------------------------
+\subsection{Hoare Logic}
+% --------------------------------------------------------------------
+
+\emph{Concurrency}
+
+% --------------------------------------------------------------------
+\subsection{Categorical Logic}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Paraconsistent Logic}
+% --------------------------------------------------------------------
+
+
