@@ -13,7 +13,7 @@ of $\Sigma$; the smallest Superset of $\Sigma$ that is closed under
 string concatenation.
 
 The entire content of a Language is uniquely determined by the Set of
-all \emph{Terminal Expressions} \emph{Generated} by the
+all \emph{Terminal Expressions} that are \emph{Generated} by the
 \emph{Production} or \emph{Rewrite Rules} of a \emph{Generative
   Grammer} (\S\ref{subsec:generative_grammar}) or the Set of
 Expressions \emph{Recognized} by a \emph{Determinative Grammar}
@@ -56,39 +56,33 @@ Metavariables and Roman characters otherwise for Object Variables.
 
 
 % ====================================================================
-\section{Syntax}
+\section{Formal Grammar}\label{sec:formal_grammar}
 % ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Syntax}\label{subsec:syntax}
+% --------------------------------------------------------------------
 
 \emph{Syntax} is the aspect of Formal Languages that refers only to
 the literal strings of Symbols of a Language with no regard to the
 meaning or \emph{Interpretation} (\S\ref{subsec:interpretation}); only
 the condition that they can be identified and differentiated from
 one-another is required. Syntactic methods can be carried very far;
-all of Formal Language Theory as well as Automata Theory (Part
-\ref{sec:automata_theory}), Symbolic Logic (Part
-\ref{sec:formal_logic}), and Proof Theory (Part
-\ref{sec:proof_theory}) are carried out Syntactically. The term
-\emph{Syntax} may be used as a synonym for a \emph{Grammar}: that is a
-Set of Rules through which the strings of a Language can be either
-\emph{Generated} (\S\ref{subsec:generative_grammar}) or
-\emph{Recognized} (\S\ref{subsec:determinative_grammar}).
+all of Formal Language Theory as well as Symbolic Logic (Part
+\ref{sec:formal_logic}) and Proof Theory (Part \ref{sec:proof_theory})
+are carried out Syntactically. The term \emph{Syntax} may be used as a
+synonym for \emph{Grammar}: that is a Set of Rules through which the
+strings of a Language can be either \emph{Generated}
+(\S\ref{subsec:generative_grammar}) or \emph{Recognized}
+(\S\ref{subsec:determinative_grammar}).
 
-
-
-% --------------------------------------------------------------------
-\subsection{Syntactic Elements}
-% --------------------------------------------------------------------
-
-Within a Formal Language the Symbols will be divided into two disjoint
+Within a Formal Grammar the Symbols will be divided into two disjoint
 subsets according to whether they are \emph{Terminal} or
 \emph{Non-terminal Symbols}.
 
-The definition of a Non-terminal Symbol is one for which a Production
-rule exists with that Symbol appearing in the input and replaced in
-the output. Thus a Grammar is specified by a finite set of
-Productions, $P$, a finite set of Non-terminal Symbols, $N$, and a
-finite set of Terminal Symbols, $T$. Additionally, in certain Grammars
-it is allowed for multiple Non-terminals to appear in an Expression.
+The definition of a Non-terminal Symbol in the context of Generative
+Grammars is one for which a Production Rule exists with that Symbol
+appearing in the input and replaced in the output.
 
 \begin{description}
 
@@ -107,13 +101,11 @@ it is allowed for multiple Non-terminals to appear in an Expression.
     \item[Production] \hfill \\
     a Rewrite Rule specifying a Non-terminal Symbol substitution
 
-    \item[Grammar] \hfill \\
+    \item[Generative Grammar] \hfill \\
     a finite set of Productions over the Expressions of a Vocabulary
 
 \end{description}
-
 Two special Symbols are recognized:
-
 \begin{description}
 
     \item[Empty Symbol ($\varepsilon$)] \hfill \\
@@ -126,10 +118,6 @@ Two special Symbols are recognized:
 
 
 
-% ====================================================================
-\section{Formal Grammars}\label{sec:formal_grammar}
-% ====================================================================
-
 % --------------------------------------------------------------------
 \subsection{Generative Grammar}\label{subsec:generative_grammar}
 % --------------------------------------------------------------------
@@ -141,8 +129,8 @@ Grammar may be formally defined as a 4-tuple:
 \[
     G(N,T,P,S)
 \]
-where $N$ are Non-terminals, $T$ are Terminals, $P$ Production Rules
-and $S$ the Start Symbol.
+where $N$ are Non-terminal Symbols, $T$ are Terminal Symbols, $P$ are
+Production Rules and $S$ is the Start Symbol.
 
 An unrestricted Production Rule has the form:
 \[
@@ -196,7 +184,9 @@ lowercase ($a,b,c,\cdots$), and Expressions by Greek letters
 
 A \emph{Determinative Grammar} is a Grammar through which a Member of
 $\Sigma^*$ can be determined to belong to a Language $L \subseteq
-\Sigma^*$
+\Sigma^*$ (\emph{Recognized}). Such systems are described by
+\emph{Automata Theory} (\S\ref{sec:automata_theory})
+
 
 
 % --------------------------------------------------------------------
@@ -213,6 +203,8 @@ covering all possible Formal Grammars.
 These different levels in the hierarchy are \emph{Recognizable} by
 different kinds of \emph{Automata} (\S\ref{subsec:automata}).
 
+
+
 \subsubsection{Type-0: Unrestricted}
 
 \paragraph{Semi-decidable}\label{subsec:semidecidable}
@@ -221,42 +213,42 @@ Production Rules of an \emph{Unrestricted} Grammar have the form
     \alpha \rightarrow \beta
 \]
 where $\alpha$ and $\beta$ are Expressions of $N \cup T$ and $\alpha
-\neq \varepsilon$.
+\neq \varepsilon$. Note that this means there is not necessarily a
+distinction between Terminal and Non-terminal Symbols in an
+Unrestricted Grammar.
 
-A completely unrestricted Grammar is called \emph{recursively
-  enumerable} or \emph{Semi-decidable}. This means membership of the
-Language can be decided by an algorithm, but non-membership cannot,
-and the class of Languages having this property is called
-$\mathsf{RE}$. Members of this class are also \emph{Diophantine} sets
-and the Lattice of $\mathsf{RE}$ sets under inclusion is written
-$\mathcal{E}$. % FIXME add a reference when sections describing these terms
-               % are added
+A completely Unrestricted Grammar is called \emph{Recursively
+  Enumerable} or \emph{Semi-decidable}
+(\S\ref{subsec:partial_recursive}). This means membership of the
+Language can be decided by an Algorithm, but non-membership cannot,
+and the Class of Languages having this property is called
+$\mathsf{RE}$.
 
-The complement of $\mathsf{RE}$ is the class of Languages for which
-an algorithm may decide non-membership only and is termed
+The complement of $\mathsf{RE}$ is the Class of Languages for which an
+Algorithm may decide non-membership only and is termed
 $\mathsf{coRE}$. The class of Automata capable of implementing these
-algorithms are \emph{Turing Machines}(\S\ref{subsec:turing_machine}).
+Algorithms are \emph{Turing Machines}(\S\ref{subsec:turing_machine}).
 
-\paragraph{Decidable}\label{subsec:decidability}
-A \emph{Decidable} or \emph{recursive} Language (as opposed to
-recursively enumerable) is defined as the intersection of
-$\mathsf{RE}$ and $\mathsf{coRE}$:
+\paragraph{Decidable}\label{subsec:decidable_language}
+A \emph{Decidable} or \emph{Recursive} Language is defined as the
+intersection of $\mathsf{RE}$ and $\mathsf{coRE}$:
 \[
     \mathsf{R} = \mathsf{RE} \cap \mathsf{coRE}
 \]
 That is, it can be decided whether a Symbol is a member or not by a
-\emph{total computable function} (one which returns \emph{True} or
-\emph{False} depending on membership). Decidable Languages are
-Recognizable by a \emph{Decider} or \emph{Total Turing
-  Machine}\cite{kozen97} (however determining whether an arbitrary
-Turing Machine gives an answer for every input is an undecidable
-decision problem).
+\emph{Total Computable Function} (\S\ref{sec:computable_function}).
+Decidable Languages are Recognizable by a \emph{Decider} or
+\emph{Total Turing Machine}\cite{kozen97} (however determining whether
+an arbitrary Turing Machine gives an answer for every input is an
+Undecidable Decision Problem).
+
+
 
 \subsubsection{Type-1: Context-sensitive}
 
 \paragraph{Context-sensitive}\label{subsec:context_sensitive}
 \emph{Context-sensitive Grammars} have the restriction that the result
-of a Production is not shorter than the input. Formally stated
+of a Production is not shorter than the input. Formally stated,
 Productions are of the form
 \[
     \alpha \Gamma \beta \rightarrow \alpha \gamma \beta
@@ -269,8 +261,8 @@ and allowing the rule
 \[
     S \rightarrow \varepsilon
 \]
-makes the Context-sensitive Languages a proper superset of the
-\emph{Context-free Languages}.
+makes the Context-sensitive Languages a proper Superset of the
+\emph{Context-free Languages} (\S\ref{subsec:context_free}).
 
 Context-sensitive Languages are equivalent to \emph{Linear
 Bounded Automata} (\S\ref{subsec:linear_bounded_automata}).
@@ -286,21 +278,21 @@ $F$, with Productions of three possible forms,
     A[f\sigma] \rightarrow \alpha[\sigma]
 \]
 where $f \in F$ and $\sigma$ is a string of Index Symbols. The Index
-Symbols are used to form a \emph{stack} by the Production Rules where
-Index Symbols are either pushed or popped from the stack.
+Symbols are used to form a \emph{Stack} by the Production Rules where
+Index Symbols are either pushed or popped from the Stack.
 
 An Indexed Language can be Recognized by a \emph{Nested Stack
-  Automaton}\cite{aho69}.
+  Automaton} (\S\ref{subsec:nested_stack_automaton}).\cite{aho69}
 
 \paragraph{Generalized Contex-free}
-A \emph{Generalized Context-free Grammar} adds to the rewrite rules of
-a Context-free Grammar a set of non-context-free \emph{composition
-  functions} that combine tuples of symbols:
+A \emph{Generalized Context-free Grammar} adds to the Production Rules
+of a Context-free Grammar a set of non-Context-free \emph{Composition
+  Functions} that combine tuples of Symbols:
 \[
     f(\langle x_1,\cdots,x_m\rangle,\cdots,\langle
     y_1,\cdots,y_n\rangle)=\gamma
 \]
-where $\gamma$ is a single tuple or another composition function that
+where $\gamma$ is a single tuple or another Composition Function that
 reduces to a single tuple.
 
 Rules are of the form:
@@ -313,78 +305,86 @@ There are several weakly equivalent Grammars to the composition
 formulation:
 
 \begin{description}
-\item[Linear context-free rewriting system] \hfill \\
-    Weakly equivalent to \emph{multi-component Tree-adjoining
-      Grammars} where composition functions are both \emph{linear} and
-    \emph{regular}. Can be Recognized by \emph{Thread
-      Automata}\cite{villemonte02}.
+\item[Linear Context-free Rewriting System] \hfill \\
+    Weakly equivalent to \emph{Multi-component Tree-adjoining
+      Grammars} where Composition Functions are both \emph{Linear} and
+    \emph{Regular}. Can be Recognized by \emph{Thread
+      Automata} (\S\ref{subsec:thread_automaton})\cite{villemonte02}
 
 \item[Tree-adjoining] \hfill \\
-    Elementary rewriting unit is a tree rather than a Symbol. Can be
-    Recognized by \emph{Embedded Pushdown
-      Automata}\cite{vijayashanker88}.
+    Elementary rewriting unit is a \emph{Tree}
+    (\S\ref{subsec:graph_tree}) rather than a Symbol. Can be Recognized
+    by \emph{Embedded Pushdown Automata}
+    (\S\ref{subsec:embedded_pushdown})\cite{vijayashanker88}
 
-\item[Linear indexed grammar] \hfill \\
-    A modified Indexed Grammar where only one symbol receives the
-    stack.
+\item[Linear Indexed Grammar] \hfill \\
+    A modified Indexed Grammar where only one Symbol receives the
+    Stack.
 
 \item[Combinatory Categorical Grammar] \hfill \\
-    A type of \emph{phrase Structure Grammar} using \emph{Combinatory
-      Logic}(\S\ref{subsec:combinatory_logic}).
+    A type of \emph{Phrase Structure Grammar}
+    (\S\ref{subsec:context_free}) using \emph{Combinatory Logic}
+    (\S\ref{subsec:combinatory_logic}).
 
 \item[Head grammar] \hfill \\
-    A subset of the Linear context-free rewriting system and a Phrase
+    A Subset of the Linear Context-free Rewriting System and a Phrase
     Structure Grammar.
 
 \end{description}
 
-\subsubsection{Type-2: Context-free}\label{subsec:context_free_language}
+
+
+\subsubsection{Type-2: Context-free}\label{subsec:context_free}
 
 \paragraph{Context-free}
-\emph{Context-free Grammars} (\emph{CFG}s) have Production Rules of the form
+\emph{Context-free Grammars} (\emph{CFG}s) have Production Rules of
+the form:
 \[
     V \rightarrow \alpha
 \]
 where $V$ is a single Non-terminal and $\alpha$ is a string of Terminals
-and/or Non-terminals (or empty). Because $V$ is required to be a
+and/or Non-terminals (or $\varepsilon$). Because $V$ is required to be a
 single Non-terminal, the Production Rules can be applied regardless of
 Context. Each Non-terminal in a Context-free Grammar, $G$, is said to
-form a \emph{Sub-Language} of the language defined by $G$.
+form a \emph{Sublanguage} of the Language defined by $G$.
 
 Multiple Context-free Grammars may generate the same Language, so
-properties of CFGs may be termed \emph{extrinsic} while Language properties
-are \emph{intrinsic}. The question of equality between CFGs is
-undecidable.
+properties of CFGs may be termed \emph{Extrinsic} while Language
+properties are \emph{Intrinsic}. The question of equality between CFGs
+is Undecidable.
 
 A popular notation for Context-free Grammars (especially in Computer
 Science) is \emph{Backus-Naur form} (\emph{BNF}).
 
 In Linguistics, the term used for Context-free Grammar is \emph{Phrase
-  Structure Grammar} which is also called \emph{constituency grammar}
+  Structure Grammar} which is also called \emph{Constituency Grammar}
 due to the one-to-one-or-many correspondence between the Productions
-(ultimately rooted in the \emph{subject-predicate} clause derived from
-\emph{Term Logic}).
+(ultimately rooted in the \emph{Subject-Predicate Clause} derived from
+\emph{Term Logic} (\S\ref{subsec:term_logic})).
 
-An alternative formulation to Phrase Structure Grammar is \emph{Dependency
-  Grammar} in which the Verb is the root and there is a one-to-one
-correspondence between Symbols and nodes in the syntax structure.
+An alternative formulation to Phrase Structure Grammar is
+\emph{Dependency Grammar} in which the Verb is the root and there is a
+one-to-one correspondence between Symbols and nodes in the Syntax
+Structure.
 
-The Context-free Grammar is equivalent to \emph{Non-deterministic
-Pushdown Automata}(\S\ref{subsec:pushdown_automata}).
+Context-free Grammars are equivalent to \emph{Non-deterministic
+  Pushdown Automata}(\S\ref{subsec:pushdown_automata}).
 
 \paragraph{Deterministic}\label{subsec:deterministic_cfg}
 \emph{Deterministic Context-free Grammars} are derived from
-\emph{Deterministic Pushdown Automata}(\S\ref{subsec:deterministic_pda})
-and are always \emph{unambiguous}. They can be parsed in linear time
-and a \emph{Parser} can be automatically generated from the Grammar by a
-\emph{Parser Generator}(\S\ref{subsec:parser_generator}).
+\emph{Deterministic Pushdown
+  Automata}(\S\ref{subsec:deterministic_pda}) and are always
+\emph{unambiguous}. They can be \emph{Parsed} (\S\ref{sec:parser}) in
+Linear Time and a Parser can be automatically generated from
+the Grammar by a \emph{Parser
+  Generator}(\S\ref{subsec:parser_generator}).
 
 \paragraph{Visibly Pushdown}
 \emph{Visibly Pushdown Grammars} are described by the 4-tuple
 \[
     G = (V=V^0 \cup V^1,T,P,S)
 \]
-where $V^0$ and $V^1$ are disjoint sets of Non-terminals and there
+where $V^0$ and $V^1$ are Disjoint Sets of Non-terminals and there
 are three kinds of Production Rules:
 \[
     X \rightarrow \varepsilon
@@ -396,12 +396,15 @@ are three kinds of Production Rules:
 where $Z \in V^0$ and if $X \in V^0$ then $Y \in V^0$
 
 The resulting Language is a \emph{Regular Language} with \emph{nested
-  words}, described by a \emph{Monadic Second-order Logic}. % FIXME ref
+  words}, described by a \emph{Monadic Second-order Logic}
+(\S\ref{subsec:monadic_second_order}).
+
+
 
 \subsubsection{Type-3: Regular} \label{subsec:regular_language}
 
 \emph{Regular Languages} are more restricted than Context-free
-Languages and satisfy a number of closure properties. For two Regular
+Languages and satisfy a number of Closure Properties. For two Regular
 Languages, $K$ and $L$, the following operations result in a Language
 that is also Regular:
 \[
@@ -422,13 +425,12 @@ An algebraic description is as follows:
 \[
     L = \{ w \in \Sigma^* | f(w) \in N \}
 \]
-where $f : \Sigma^* \rightarrow M$ is a \emph{Monoid homomorphism} of
-\emph{Finite Monoid}, $M$, and $N \subseteq M$.
-% FIXME ref monoids
+where $f : \Sigma^* \rightarrow M$ is a \emph{Monoid Homomorphism} of
+\emph{Finite Monoid} (\S\ref{subsec:monoid}) $M$ and $N \subseteq M$.
 
 \paragraph{Extended Regular}
-\emph{Extended Regular Grammars} have Productions of either \emph{right
-Regular} or \emph{left Regular} form.
+\emph{Extended Regular Grammars} have Productions of either \emph{Right
+Regular} or \emph{Left Regular} form.
 
 Right:
 \[
@@ -451,8 +453,8 @@ where $a$ is a single Non-terminal and $\nu$ is an expression of only
 Non-terminal characters.
 
 \paragraph{Strictly Regular}
-\emph{Strictly Regular Grammars} also have Productions of either right
-Regular or left Regular form.
+\emph{Strictly Regular Grammars} also have Productions of either Right
+Regular or Left Regular form.
 
 Right:
 \[
@@ -477,15 +479,15 @@ There is a one-to-one correspondence between the rules of a
 \emph{Strictly Left Regular Grammar} and those of a
 \emph{Non-deterministic Finite Automaton}(\S\ref{subsec:ndfa}).
 
-The \emph{pumping lemma} states that the middle section of an
+The \emph{Pumping Lemma} states that the middle section of an
 Expression within a Regular Language may be repeated an arbitrary
 number of times to produce another Expression in that same Language.
 
 \paragraph{k-Testable}\label{subsec:k_testable}
 A \emph{k-Testable Language} is one where membership of an Expression
-depends on the first and last symbol and a set of factors of length
+depends on the first and last Symbol and a Set of Factors of length
 $k$. An example is a \emph{Local Language} which is a \emph{2-Testable
-  Language} described by the \emph{regular expression}:
+  Language} described by the Regular Expression:
 \[
     (Q\Sigma^* \cap \Sigma^*R)\setminus\Sigma^*F\Sigma^*
 \]
@@ -503,50 +505,59 @@ all Expressions in the Language with the Star Height of an
 Expression's \emph{Complement} being equal.
 
 Star-free Languages are characterized as those with \emph{Aperiodic
-  Syntactic Monoids}\cite{schutzenberger65} and also as the
-\emph{Counter-free Langauges}\cite{mcnaughton-papert71} by the
-\emph{Aperiodic Finite-state Automaton}, and \emph{Linear Temporal
-  Logic}. % FIXME ref
+  Syntactic Monoids}\cite{schutzenberger65}
+(\S\ref{subsec:syntactic_monoid}) and also as the \emph{Counter-free
+  Languages}\cite{mcnaughton-papert71} by the \emph{Aperiodic
+  Finite-state Automaton} (\S\ref{subsec:aperiodic_automaton}) and
+\emph{Linear Temporal Logic} (\S\ref{subsec:linear_temporal}).
+
+
 
 % --------------------------------------------------------------------
 \subsection{Affix Grammars}
 % --------------------------------------------------------------------
 
 \emph{Affix Grammars} are those of a Context-free Grammar with a
-subset of the Non-terminals used as \emph{affix arguments}. If the
-same affix appears multiple places in a Production, the value must be
+Subset of the Non-terminals used as \emph{Affix Arguments}. If the
+same Affix appears multiple places in a Production, the value must be
 the same.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Two-Level Grammars}
 % --------------------------------------------------------------------
 
-\emph{Two-Level Grammars} are \emph{Grammar generators} that may
-generate Grammars with infinite rules. Allowing the values for affixes
+\emph{Two-Level Grammars} are \emph{Grammar Generators} that may
+generate Grammars with infinite rules. Allowing the values for Affixes
 to be described by a Context-free Grammar results in a Two-Level
 Grammar.
 
 
 \begin{description}
 \item[W-grammar] \emph{Van Wijngaarden Grammar} consists of a finite
-  set of \emph{meta-rules} used to derive a possibly infinite set of
-  Production Rules from a finite set of \emph{hyper-rules}.
+  Set of \emph{Meta-rules} used to derive a possibly infinite set of
+  Production Rules from a finite Set of \emph{Hyper-rules}.
 \item[Extended Affix Grammar] is a restricted W-grammar.
 \end{description}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Attribute Grammars}
 % --------------------------------------------------------------------
 
-\emph{Attribute Grammars} allows affixes from arbitrary domains and
-allows functions calculate values of affixes.
+\emph{Attribute Grammars} allows Affixes from arbitrary Domains and
+allows Functions to calculate values of Affixes.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Analytic Grammars}
 % --------------------------------------------------------------------
 
-\emph{Analytic Grammars} are used in \emph{Parsing} (\S
-\ref{sec:parser}). A few examples:
+\emph{Analytic Grammars} are used in \emph{Parsing}
+(\S\ref{sec:parser}). A few examples:
 
 \begin{description}
 \item[Top-Down Parsing Language] \hfill \\
@@ -564,8 +575,11 @@ rules of the form
 \item[Parsing Expression Generator] \hfill \\
 A more generalized Top-Down Parsing Language.
 \item[Link Grammar] \hfill \\
-Dependency Grammar with directionality between Symbols.
+Dependency Grammar
+  (\S\ref{subsec:context_free}) with directionality between Symbols.
 \end{description}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Adaptive Grammars}
@@ -575,11 +589,13 @@ Dependency Grammar with directionality between Symbols.
 within the Grammar, including addition, deletion, and modification of
 Rules.
 
+
+
 \subsubsection{Imperative Adaptive Grammar}
 
 Global
 
-Rule changes are based on global state changing over time.
+Rule changes are based on global State changing over time.
 
 \begin{itemize}
 \item Extensible Context-Free Grammars
@@ -587,11 +603,13 @@ Rule changes are based on global state changing over time.
 \item Bottom-up Modifiable Grammars
 \end{itemize}
 
+
+
 \subsubsection{Declarative Adaptive Grammar}
 
 Local
 
-Rule changes only affect the position in the syntax tree of the
+Rule changes only affect the position in the Syntax Tree of the
 generation of a string.
 
 \begin{itemize}
@@ -599,11 +617,15 @@ generation of a string.
 \item Recursive Adaptive Grammars
 \end{itemize}
 
+
+
 \subsubsection{Time-space (Hybrid) Adaptive Grammar}
 
 \begin{itemize}
 \item \S-Calculus
 \end{itemize}
+
+
 
 \subsubsection{Dynamic Grammars}
 
@@ -612,16 +634,465 @@ Boullier\cite{boullier94}
 
 
 % ====================================================================
+\section{Automata Theory}\label{sec:automata_theory}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Abstract Machine} \label{subsec:abstract_machine}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{State Transition Systems} \label{subsec:state_transition_system}
+% --------------------------------------------------------------------
+
+A \emph{State Transition System} can have an infinite number of
+\emph{States} and \emph{Transitions}, represented as the pair
+\[
+    (S,\rightarrow)
+\]
+where $S$ is a set of States and $\rightarrow \subseteq S \times S$.
+This is identical to an \emph{un-indexed Abstract Rewriting
+  System}(\S\ref{sec:abstract_rewrite}).
+
+\emph{Finite Automata} may be seen as State Transition Systems with an
+initial State and a number of final \emph{Accept} states indicating
+\emph{Word} (Expression) membership for a Language.
+
+\emph{Labelled State Transition Systems} have an additional set of
+\emph{Labels}, $\Lambda$
+\[(S,\Lambda,\rightarrow)\]
+and $\rightarrow \subseteq S \times \Lambda \times S$.
+
+\emph{Action Programming Languages} add a set of \emph{Fluents}, $F$, and
+\emph{Values}, $V$, and a function mapping $F \times S$ to $V$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Semiautomata}\label{subsec:semiautomata}
+% --------------------------------------------------------------------
+
+A State Transition System may be formulated as a \emph{Semiautomata}
+\[
+    (Q,\Sigma,T)
+\]
+where $\Sigma$ is a non-empty \emph{input Symbols}, $Q$ is the set of
+States, and $T$ is a \emph{transition function} $T:Q \times \Sigma
+\rightarrow Q$.
+
+A Semiautomaton induces a Monoid called the \emph{input Monoid}:
+\[
+    M(Q,\Sigma,T) = \{T_w | w \in \Sigma^*\}
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Automata} \label{subsec:automata}
+% --------------------------------------------------------------------
+
+An \emph{Automaton} reads input strings, \emph{Words} (Expressions),
+and either accepts or rejects depending on whether a Word is a member
+of the Language recognized by that Automaton. By convention the
+Vocabulary of Expressions from Formal Languages will be re-cast as an
+Alphabet of Words, $\Sigma$. The Set of all Words accepted by an
+Automaton are those that are \emph{Recognized} by the Automaton.
+
+Automata may be arranged in a hierarchy according to increasing power:
+\[
+    DFA = NFA \subset DPDA-I \subset NPDA-I \subset LBA \subset DPDA-II =
+\]\[
+    = NPDA-II = DTM = NTM = PTM = MDTM
+\]
+where
+\begin{itemize}
+\item DFA = Deterministic Finite Automata
+\item NFA = Non-deterministic Finite Automata
+\item DPDA = Deterministic Push Down Automata with 1
+  or 2 push-down stores
+\item NPDA = Non-deterministic Push Down Automata
+  with 1 or 2 push-down stores
+\item LBA = Linear Bounded Automata
+\item DTM = Deterministic Turing Machine
+\item NTM = Non-deterministic Turing Machine
+\item PTM = Probabilistic Turing Machine
+\item MDTM = Multidimensional Turing Machine
+\end{itemize}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finite Automata}\label{subsec:finite_automata}
+% --------------------------------------------------------------------
+
+\emph{Finite Automata} are \emph{Finite State Machines} and take a
+finite input string of Symbols and either accepts or rejects the input
+depending on the final State of the computation. Finite Automata are
+able to recognize Regular Languages(\S\ref{subsec:regular_language}).
+
+
+
+\subsubsection{Deterministic Finite Automata}\label{subsec:dfa}
+
+\emph{Deterministic Finite Automata} have the restriction that an
+input Symbol has a transition function to a single State.
+Deterministic Finite Automata recognize Regular
+Languages(\S\ref{subsec:regular_language}).
+
+Representation of a Deterministic Finite Automaton as a 5-tuple:
+\[
+    (Q,\Sigma,\delta,q_0,F)
+\]
+where
+\begin{itemize}
+\item $Q$ is a finite set of States
+\item $\Sigma$ is the Alphabet
+\item $\delta$ is the transition function $\delta: Q \times
+  \Sigma \rightarrow Q$
+\item $q_0 \in Q$ is the initial State
+\item $F \subseteq Q$ is the set of final Accept States.
+\end{itemize}
+
+Running for a given input $w = a_1,a_2, \cdots , a_n \in \Sigma^*$
+produces a sequence of States $q_0,q_1,q_2,\cdots , q_n$ where $q_i
+\in Q$ such that $q_i = \delta (q_{i-1},a_i)$ and $w$ is accepted if
+$q_n \in F$.
+
+A recursive definition using \emph{composition} of transition
+functions
+\[
+    \widehat{\delta}(q,\varepsilon) = q
+\]\[
+    \widehat{\delta}(q,wa) = \delta_a(\widehat{\delta}(q,w))
+\]
+where $w \in \Sigma^*$, $a \in \Sigma$ and $q \in Q$. Repeated
+application describes the \emph{Transition Monoid} or
+\emph{Transformation Semigroup}.
+
+\paragraph{Local Automaton}\label{subsec:local_automaton}
+A \emph{Local Automaton} is a DFA for which all Edges with the same
+Label lead to a single Vertex.
+
+Local Automata Recognize Local Languages(\S\ref{subsec:k_testable}).
+
+
+
+\subsubsection{Nondeterministic Finite Automata}\label{subsec:ndfa}
+
+\emph{Nondeterministic Finite Automata} are Finite State Machines that
+may transition from one State to a number of different states, given
+as an element of the powerset of $Q$, $\mathcal{P}(Q)$.
+
+Representation of a Nondeterministic Finite Automaton as a
+5-tuple:
+\[
+    (Q,\Sigma,\Delta,q_0,F)
+\]
+where
+\begin{itemize}
+\item $Q$ is a finite set of States
+\item $\Sigma$ is the Alphabet
+\item $\Delta$ is a \emph{transition relation} $\Delta: Q \times
+  \Sigma \rightarrow \mathcal{P}(Q)$
+\item $q_0 \in Q$ is the initial State
+\item $F \subseteq Q$ is the set of final Accept States.
+\end{itemize}
+
+A Word, $w=a_1,a_2,\cdots,a_n$, is accepted when there exists a
+sequence of States, $r_0,r_1,\cdots,r_n$ such that
+\begin{enumerate}
+\item $r_0 = q_0$
+\item $r_{i+1} \in \Delta(r_i, a_{i+1})$, for $i = 0, \cdots, n-1$
+\item $r_n \in F$
+\end{enumerate}
+
+A DFA may be seen as a NFA which restricts transitions to allow only
+one State, and can be constructed from a NFA with $n$ States using
+\emph{powerset construction}, requiring up to $2^n$ States. Both types
+recognize the same Regular Languages(\S\ref{subsec:regular_language}).
+
+\paragraph{NFA-$\varepsilon$} is a NFA that allows transitions
+without consuming input Symbols. A transition that changes state
+without consuming input is an $\varepsilon$ $move$. Each State $q$
+defines an $\varepsilon$-\emph{closure}, $E(q)$, which is the set of
+States that are reachable by $\varepsilon$ moves.
+
+The Languages recognized by NFA-$\varepsilon$ are the same as NFA/DFA.
+
+
+
+\subsubsection{Aperiodic Finite-state Automaton}
+\label{subsec:aperiodic_automaton}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Pushdown Automata}\label{subsec:pushdown_automata}
+% --------------------------------------------------------------------
+
+\emph{Pushdown Automata} add to Finite Automata a \emph{Stack} as a
+parameter for choice of States and can recognize Context-free
+Languages(\S\ref{subsec:context_free}).
+
+Adding a second Stack makes a Pushdown Automata equal in power to a
+Turing Machine.
+
+Unlike Finite Automata, Deterministic PDA are not equivalent to
+Nondeterministic PDA. The general representation for a PDA is
+\[
+    M = (Q, \Sigma, \Gamma, q_0, Z_0, F, \delta)
+\]
+where
+\begin{itemize}
+\item $Q$ is a finite set of States
+\item $\Sigma$ is a finite set of input Symbols
+\item $\Gamma$ is a finite set of Stack Symbols
+\item $q_0 \in Q$ is the initial State
+\item $Z_0 \in \Gamma$ is the initial Stack Symbol
+\item $F \subseteq Q$ is the set of final Accept States
+\item $\delta$ is the transition function $\delta: (Q \times (\Sigma
+  \cup \{\varepsilon\}) \times \Gamma) \rightarrow \mathcal{P}(Q \times
+  \Gamma^*)$
+\end{itemize}
+
+An element $(p,a,Z,q,\alpha)\in\delta$, with $M$ in State $p \in Q$,
+input $a \in \Sigma \cup \{\varepsilon\}$, and top stack Symbol $Z \in
+\Gamma$ results in the following:
+\begin{enumerate}
+\item read $a$
+\item change state to $q$
+\item pop $Z$
+\item push $\alpha \in \Gamma^*$
+\end{enumerate}
+
+
+
+\subsubsection{Deterministic Pushdown Automata}\label{subsec:deterministic_pda}
+
+\emph{Deterministic Pushdown Automata} have the restriction of only
+one derivation per accepted input Word. This allows recognition of a
+subset of Context-free Languages termed
+Deterministic(\S\ref{subsec:deterministic_cfg}). Such Languages can be
+parsed in linear time and Parsers for such Languages can be generated
+automatically(\S\ref{subsec:parser_generator}).
+
+A Pushdown Automata is Deterministic iff both
+\begin{enumerate}
+\item $\forall q \in Q, a \in \Sigma \cup {\varepsilon}, x \in
+  \Gamma \vdash |\delta(q,a,x)| \leq 1$
+\item $\forall q \in Q, x \in \Gamma \vdash |\delta(q,\varepsilon,x)|
+  \neq 0 \Rightarrow \forall a \in \Sigma \vdash |\delta(q,a,x)|=0$
+\end{enumerate}
+
+
+
+\subsubsection{Embedded Pushdown Automata}\label{subsec:embedded_pushdown}
+
+
+
+\subsubsection{Nested Stack Automaton}\label{subsec:nested_stack_automaton}
+
+
+
+\subsubsection{Thread Automaton}\label{subsec:thread_automaton}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Linear Bounded Automata} \label{subsec:linear_bounded_automata}
+% --------------------------------------------------------------------
+
+\emph{Linear Bounded Automata} are Turing Machines restricted to an
+input of finite length and are acceptors for Context-sensitive
+Languages(\S\ref{subsec:context_sensitive}) which require that
+Production Rules do not increase the size of the Expression as a
+result; therefore the size of the input is sufficient for calculation.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Turing Machines}\label{subsec:turing_machine}
+% --------------------------------------------------------------------
+
+A \emph{Turing Machine} operates on an infinite \emph{storage tape},
+which acts as the read input as well as write storage. Pushdown
+Automata with 2 Stacks are equivalent to Turing Machines.
+
+A Turing Machine that halts for every input is a \emph{Total Turing
+  Machine} or \emph{Decider}.
+
+
+
+\subsubsection{Nondeterministic Turing Machines}
+
+\emph{Nondeterministic Turing Machines} (\emph{NTM}s) can be defined
+as
+    \[
+        M = (Q, \Sigma, q_0, \sqcup, A, \delta)
+    \]
+where
+\begin{itemize}
+\item $Q$ is a finite set of States
+\item $\Sigma$ is the finite Alphabet
+\item $q_0 \in Q$ is the initial State
+\item $\sqcup \in \Sigma$ is the blank Symbol
+\item $F \subseteq Q$ is the set of final Accept States
+\item $\delta \subseteq (Q \setminus F \times \Sigma) \times (Q \times
+  \Sigma \times \{L,R\})$ and $L$ and $R$ are left and right shift.
+\end{itemize}
+
+The operation of $M$ in State $q_i$ and current read input $a_j$ is a
+transition function, $q_i a_j \rightarrow q_{i1} a_{j1} d_k$. Note
+that for an NTM, $\delta$ is a relation and more than one function can
+exist for each possible input/State combination. The result is to
+write the new Symbol $a_{j1}$ in the current position and shift the
+storage left or right as specified by $d_k$, afterwards assuming State
+$q_{i1}$.
+
+
+
+\subsubsection{Deterministic Turing Machines}
+
+\emph{Deterministic Turing Machines} (\emph{DTM}s) have one possible
+output transition per unique input/State combination, thus $\delta$ is
+a \emph{partial function} rather than a \emph{relation}:
+\[
+    \delta : Q \setminus F \times \Sigma \rightarrow Q \times
+    \Sigma \times {L,R}
+\]
+The computational power of DTMs and NTMs is equivalent (they can solve
+the same problems) as NTMs include DTMs as a special case. An
+equivalent accepting computation in a DTM is generally exponential to
+the length of the shortest accepting computation of an NTM.
+
+
+
+\subsubsection{Probabilistic Turing Machines}
+
+A \emph{Probabilistic Turing Machine} adds to transitions a
+probability distribution (or a tape with random Symbols). It is an
+open question whether this is more powerful than a DTM
+($\mathsf{BPP}=\mathsf{P}$ ?)  but it is useful in the definition of
+\emph{interactive proof systems}. %FIXME ref
+
+
+
+\subsubsection{Multidimensional Turing Machines}
+
+\emph{Multidimensional Turing Machines} allow for tapes of varying
+topologies. This requires additional shift directions (i.e. $\{L, R, U,
+D\}$ for a 2-dimensional tape) but does not increase the computing
+power; even an $\infty$-\emph{dimensional} Turing Machine can be
+simulated by a DTM.
+
+
+
+% ====================================================================
+\section{Parser} \label{sec:parser}
+% ====================================================================
+
+A \emph{Parser} analyzes an Expression according to the rules of a
+Formal Grammar, generating a \emph{Data Structure} describing the
+Syntax of the input. An outline of the process follows.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lexical Analysis}
+% --------------------------------------------------------------------
+
+A Parser may be preceded by a \emph{Lexical Analyzer} which creates
+\emph{Tokens} (Symbols) from an input Expression. Strings of Tokens
+are referred to as Phrases. A Lexical Analyzer is a Parser itself and
+usually the \emph{Lexical Grammar} is a Regular Language (other
+methods are \emph{flags}, \emph{delimiters}, or \emph{dictionaries})
+and the Tokens are parsed as a Context-free or \emph{Attribute Phrase
+  Syntax}.
+
+Prior to \emph{Scanning}, a \emph{Lexer} may perform its own
+Tokenization.  The Scanning stage first recognizes the Token
+strings as \emph{Lexemes}, usually achieved by a Finite State
+Machine.
+
+Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
+values where needed-- this results in Tokens that are either a
+\emph{Type-Value} pair, or just a \emph{Type}.
+
+% --------------------------------------------------------------------
+\subsection{Syntactic Analysis}
+% --------------------------------------------------------------------
+
+The Parser determines if and how the input can be derived from the
+Start Symbol of the Grammar. Parsing can proceed in two directions:
+
+\begin{description}
+    \item[Top-down Parsing]
+    starts with the highest level of the \emph{Parse Tree}. Proceeds greedily
+    and may be \emph{Exponential} with \emph{Backtracking}.
+    \item[Bottom-up Parsing]
+    starts with the lowest level of the Parse Tree.
+\end{description}
+
+Further \emph{Semantic} Parsing may be performed after these steps. An
+example of this would be the in the \emph{Compiler} of a
+\emph{Programming Language}.
+
+% --------------------------------------------------------------------
+\subsection{Top-down Parsers}
+% --------------------------------------------------------------------
+
+\subsubsection{Recursive Descent Parser}
+
+\subsubsection{LL Parser}
+
+\subsubsection{Early Parser}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Bottom-up Parsers}
+% --------------------------------------------------------------------
+
+\subsubsection{Precedence Parser}
+
+\subsubsection{LR Parser}
+
+\emph{Canonical LR} LR(1)
+
+\paragraph{SLR Parser}
+
+\paragraph{LALR Parser}
+
+\paragraph{GLR Parser}
+
+\subsubsection{CYK Parser}
+
+\subsubsection{Recursive Ascent Parser}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Parser Generators}\label{subsec:parser_generator}
+% --------------------------------------------------------------------
+
+A \emph{Parser Generator} takes as a Grammar (for example a BNF
+Grammar) and outputs the source code of a Parser for the Language
+specified by the Grammar.
+
+
+
+% ====================================================================
 \section{Abstract Reduction Systems}\label{sec:abstract_rewrite}
 % ====================================================================
 
 The previous descriptions of Formal Grammars may be abstracted as
-\emph{Abstract Reduction} or \emph{Rewrite Systems}. This is simply
+\emph{Abstract Reduction} or \emph{Abstract Rewrite Systems}. This is
+simply
     \[(A,\rightarrow)\]
 where $A$ is a Set of objects and $\rightarrow \subseteq A \times A$
 is a Binary Relation on those objects. This is equivalent to an
-\emph{Unlabeled State Transition System}
-(\S\ref{sec:state_transition_system}).
+\emph{Unlabelled State Transition System}
+(\S\ref{subsec:state_transition_system}).
 
 An \emph{Indexed Abstract Reduction System} differentiates Reductions
 into Classes so that $\rightarrow$ is the Indexed Union of these
@@ -674,90 +1145,8 @@ such as \emph{Simply-typed $\lambda$-calculus}
 \subsection{Confluence}\label{subsec:rewrite_confluence}
 % --------------------------------------------------------------------
 
-
-
-% ====================================================================
-\section{Parsers} \label{sec:parser}
-% ====================================================================
-
-A \emph{Parser} analyzes an Expression according to the rules of a Formal
-Grammar, generating a \emph{Data Structure} describing the Syntax of
-the input. An outline of the process follows.
-
 % --------------------------------------------------------------------
-\subsection{Lexical Analysis}
+\subsection{Semi-Thue System}\label{subsec:semithue_system}
 % --------------------------------------------------------------------
 
-A Parser may be preceded by a \emph{Lexical Analyzer} which creates
-\emph{Tokens} (Symbols) from an input Expression. Strings of Tokens
-are referred to as Phrases. A Lexical Analyzer is a Parser itself and
-usually the \emph{Lexical Grammar} is a Regular Language (other
-methods are \emph{flags}, \emph{delimiters}, or \emph{dictionaries})
-and the Tokens are parsed as a Context-free or \emph{Attribute Phrase
-  Syntax}.
-
-Prior to \emph{Scanning}, a \emph{Lexer} may perform its own
-Tokenization.  The Scanning stage first recognizes the Token
-strings as \emph{Lexemes}, usually achieved by a Finite State
-Machine.
-
-Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
-values where needed-- this results in Tokens that are either a
-\emph{Type-Value} pair, or just a \emph{Type}.
-
-% --------------------------------------------------------------------
-\subsection{Syntactic Analysis}
-% --------------------------------------------------------------------
-
-The Parser determines if and how the input can be derived from the
-Start Symbol of the Grammar. Parsing can proceed in two directions:
-
-\begin{description}
-    \item[Top-down Parsing]
-    starts with the highest level of the \emph{Parse Tree}. Proceeds greedily
-    and may be \emph{Exponential} with \emph{Backtracking}.
-    \item[Bottom-up Parsing]
-    starts with the lowest level of the Parse Tree.
-\end{description}
-
-Further \emph{Semantic} Parsing may be performed after these steps. An
-example of this would be the in the \emph{Compiler} of a
-\emph{Programming Language}.
-
-% --------------------------------------------------------------------
-\subsection{Top-down Parsers}
-% --------------------------------------------------------------------
-
-\subsubsection{Recursive Descent Parser}
-
-\subsubsection{LL Parser}
-
-\subsubsection{Early Parser}
-
-% --------------------------------------------------------------------
-\subsection{Bottom-up Parsers}
-% --------------------------------------------------------------------
-
-\subsubsection{Precedence Parser}
-
-\subsubsection{LR Parser}
-
-\emph{Canonical LR} LR(1)
-
-\paragraph{SLR Parser}
-
-\paragraph{LALR Parser}
-
-\paragraph{GLR Parser}
-
-\subsubsection{CYK Parser}
-
-\subsubsection{Recursive Ascent Parser}
-
-% --------------------------------------------------------------------
-\subsection{Parser Generators}\label{subsec:parser_generator}
-% --------------------------------------------------------------------
-
-A \emph{Parser Generator} takes as a Grammar (for example a BNF
-Grammar) and outputs the source code of a Parser for the Language
-specified by the Grammar.
+or \emph{String Rewriting System} (\emph{SRS})
