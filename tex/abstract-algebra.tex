@@ -79,6 +79,15 @@ Subset of the Hom-set of an Object, $X$:
 
 \emph{Trivial Group} ${1}$
 
+An \emph{Additive Group} refers to one where the Group Operation can
+be thought of as \emph{Addition} (usually Abelian).
+
+\[
+    S_1 = \{e\}
+\] \[
+    S_2 = \{e, \tau\}
+\]
+
 
 
 % --------------------------------------------------------------------
@@ -104,6 +113,23 @@ Functor $f$ which is equivalent to a Group Homomorphism:
 \[
     f : G \rightarrow H
 \]
+and for $x,y \in G$:
+\[
+    f(xy) = f(x)f(y)
+\]
+The \emph{Kernel} of $G$ is $\{x | f(x)=e_H, x \in G\}$ and always
+gives a \emph{Normal Subgroup} (\S\ref{subsec:subgroup}) of $G$,
+written $H \triangleleft G$.
+
+If the Image of $f$ is equal to $H$, and the Kernel is $\{
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abelian Group}\label{subsec:abelian_group}
+% --------------------------------------------------------------------
+
+\emph{Abelian Group} also \emph{Commutative Group}
 
 
 
@@ -145,6 +171,11 @@ is defined as
 \end{description}
 
 
+\subsubsection{Cyclic Subgroup}\label{subsec:cyclic_subgroup}
+
+\emph{Order}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Group Kernel}\label{subsec:group_kernel}
@@ -169,6 +200,10 @@ Subgroup.
 \subsection{Symmetric Group}\label{subsec:symmetric_group}
 % --------------------------------------------------------------------
 
+The Group of all Permutations of a Set $S$ is the \emph{Symmetric
+  Group} $Sym(S)$. The Symmetric Group on ${1, 2, ..., n} \in
+\mathbb{N}$ is denoted $\mathrm{S}_n$.
+
 \subsubsection{Cayley's Theorem}\label{subsec:cayleys_theorem}
 
 
@@ -176,14 +211,6 @@ Subgroup.
 % --------------------------------------------------------------------
 \subsection{Abstract Groups}\label{subsec:abstract_groups}
 % --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Abelian Group}\label{subsec:abelian_group}
-% --------------------------------------------------------------------
-
-\emph{Abelian Group} also \emph{Commutative Group}
 
 
 
@@ -240,9 +267,18 @@ Inverses.
 
 
 
-\subsubsection{Zero Ring}
+\subsubsection{Zero Ring}\label{subsec:zero_ring}
 
-\emph{Zero Ring}
+The \emph{Zero Ring}, denoted $\{0\}$ or $\mathbf{0}$, is the Unique Ring
+(up to Isomorphism) consisting of one Element with Operations:
+\[
+    0 + 0 = 0
+\] \[
+    0 * 0 = 0
+\]
+In the Category of all Rings, $\mathbf{Rng}$, the Zero Ring is
+\emph{Terminal Object} and the Ring of Integers $\mathbf{Z}$ is the
+\emph{Initial Object} (\S\ref{subsec:initial_terminal}).
 
 
 
@@ -306,6 +342,41 @@ A Finite Field only exists when the Order is a Prime Power
 % ====================================================================
 \subsection{Module}
 % ====================================================================
+
+A \emph{Module} is a Unital Ring, $R$, together with an Abelian Group,
+$(M, +)$, and an Operation called \emph{Scalar Multiplication} which
+is either:
+\[ R \times M \rightarrow M \]
+for a \emph{Left $R$-module $M$}, $_R M$, or:
+\[ M \times R \rightarrow M \]
+for a \emph{Right $R$-module $M$}, $M_R$.
+
+The Scalar Multiplication Operator is required that for all $r,s \in
+R$ and $x,y \in M$ in a Left $R$-module $M$:
+\begin{enumerate}
+    \item $r(x + y) = rx + ry$
+    \item $(r + s)x = rx + sx$
+    \item $(rs)x = r(sx)$
+    \item $1_Rx = x$
+\end{enumerate}
+or in a Right $R$-module $M$:
+\begin{enumerate}
+    \item $(x + y)r = xr + yr$
+    \item $x(r + s) = xr + xs$
+    \item $x(rs) = (sx)r$
+    \item $x 1_R = x$
+\end{enumerate}
+where $1_R$ is the Multiplicative Identity for $R$. If the Ring is not
+required to be Unital, then item (4) above can be ommitted, but can be
+explicitly required by stating that we are talking about a
+\emph{Unital Left/Right $R$-module $M$}.
+
+\emph{Bimodule}
+
+If $R$ is Commutative, then Left $R$-modules are the same as Right
+$R$-modules and simply called \emph{$R$-modules}.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Ideal}\label{subsec:ring_ideal}
