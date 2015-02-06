@@ -59,22 +59,21 @@ Metavariables and Roman characters otherwise for Object Variables.
 \section{Formal Grammar}\label{sec:formal_grammar}
 % ====================================================================
 
-% --------------------------------------------------------------------
-\subsection{Syntax}\label{subsec:syntax}
-% --------------------------------------------------------------------
+The term \emph{Syntax} may be used as a synonym for \emph{Grammar}:
+that is a Set of Rules through which the strings of a Language can be
+either \emph{Generated} (\S\ref{subsec:generative_grammar}) or
+\emph{Recognized} (\S\ref{subsec:determinative_grammar}).
 
-\emph{Syntax} is the aspect of Formal Languages that refers only to
-the literal strings of Symbols of a Language with no regard to the
-meaning or \emph{Interpretation} (\S\ref{subsec:interpretation}); only
-the condition that they can be identified and differentiated from
-one-another is required. Syntactic methods can be carried very far;
-all of Formal Language Theory as well as Symbolic Logic (Part
-\ref{sec:formal_logic}) and Proof Theory (Part \ref{sec:proof_theory})
-are carried out Syntactically. The term \emph{Syntax} may be used as a
-synonym for \emph{Grammar}: that is a Set of Rules through which the
-strings of a Language can be either \emph{Generated}
-(\S\ref{subsec:generative_grammar}) or \emph{Recognized}
-(\S\ref{subsec:determinative_grammar}).
+Syntax is the aspect of Formal Languages that refers only to the
+literal strings of Symbols of a Language with no regard to the meaning
+or \emph{Interpretation} (\S\ref{subsec:interpretation}); only the
+condition that they can be identified and differentiated from
+one-another is required. The process of \emph{Syntactic Analysis} is
+known as \emph{Parsing} (\S\ref{sec:parsing}).
+
+Syntactic methods can be carried very far; all of Formal Language
+Theory as well as Proof Theory (Part \ref{sec:proof_theory}) are
+carried out Syntactically.
 
 Within a Formal Grammar the Symbols will be divided into two disjoint
 subsets according to whether they are \emph{Terminal} or
@@ -353,28 +352,32 @@ properties of CFGs may be termed \emph{Extrinsic} while Language
 properties are \emph{Intrinsic}. The question of equality between CFGs
 is Undecidable.
 
-A popular notation for Context-free Grammars (especially in Computer
-Science) is \emph{Backus-Naur form} (\emph{BNF}).
+A popular notation for Context-free Grammars in Computer Science is
+\emph{Backus-Naur form} (\emph{BNF}).
 
+Context-free Grammars are equivalent to \emph{Non-deterministic
+  Pushdown Automata}(\S\ref{subsec:pushdown_automata}).
+
+\paragraph{Constituency Grammar}\label{subsec:constituency_grammar}
 In Linguistics, the term used for Context-free Grammar is \emph{Phrase
   Structure Grammar} which is also called \emph{Constituency Grammar}
 due to the one-to-one-or-many correspondence between the Productions
 (ultimately rooted in the \emph{Subject-Predicate Clause} derived from
-\emph{Term Logic} (\S\ref{subsec:term_logic})).
+\emph{Term Logic} (\S\ref{subsec:term_logic})). A \emph{Parse Tree}
+(\S\ref{subsec:concrete_syntax}) may be constructed according to the
+\emph{Constituency Relation} of a Constituency Grammar.
 
+\paragraph{Dependency Grammar}\label{subsec:dependency_grammar}
 An alternative formulation to Phrase Structure Grammar is
 \emph{Dependency Grammar} in which the Verb is the root and there is a
 one-to-one correspondence between Symbols and nodes in the Syntax
-Structure.
-
-Context-free Grammars are equivalent to \emph{Non-deterministic
-  Pushdown Automata}(\S\ref{subsec:pushdown_automata}).
+Structure (\S\ref{subsec:concrete_syntax}).
 
 \paragraph{Deterministic}\label{subsec:deterministic_cfg}
 \emph{Deterministic Context-free Grammars} are derived from
 \emph{Deterministic Pushdown
   Automata}(\S\ref{subsec:deterministic_pda}) and are always
-\emph{unambiguous}. They can be \emph{Parsed} (\S\ref{sec:parser}) in
+\emph{unambiguous}. They can be \emph{Parsed} (\S\ref{sec:parsing}) in
 Linear Time and a Parser can be automatically generated from
 the Grammar by a \emph{Parser
   Generator}(\S\ref{subsec:parser_generator}).
@@ -514,7 +517,7 @@ Star-free Languages are characterized as those with \emph{Aperiodic
 
 
 % --------------------------------------------------------------------
-\subsection{Affix Grammars}
+\subsection{Affix Grammars}\label{subsec:affix_grammar}
 % --------------------------------------------------------------------
 
 \emph{Affix Grammars} are those of a Context-free Grammar with a
@@ -544,11 +547,38 @@ Grammar.
 
 
 % --------------------------------------------------------------------
-\subsection{Attribute Grammars}
+\subsection{Attribute Grammars}\label{subsec:attribute_grammar}
 % --------------------------------------------------------------------
 
-\emph{Attribute Grammars} allows Affixes from arbitrary Domains and
-allows Functions to calculate values of Affixes.
+\emph{Attribute Grammars} can be seen as Context-free Grammars
+extended to provide Context-sensitivity using a Set of
+\emph{Attributes}, \emph{Attribute Values}, \emph{Evaluation Rules}
+and \emph{Conditions}. Attributes are either \emph{Synthesized
+  Attributes} or \emph{Inherited Attributes}.
+
+Attribute Grammars allow Affixes (\S\ref{subsec:affix_grammar}) from
+arbitrary Domains and allows Functions to calculate values of Affixes.
+
+In the context of Computer Science, Attribute Grammars can formally
+express the rules for \emph{Type Checking} and declaration order, as
+well as the \emph{Operational Semantics} of \emph{Programming
+  Languages}.
+
+\emph{L-attributed Grammar}
+
+\emph{LR-attributed Grammar}
+
+\emph{ECLR-attributed Grammar}
+
+\emph{S-attributed Grammar}
+
+
+
+\subsubsection{Synthesized Attributes}
+
+
+
+\subsubsection{Inherited Attributes}
 
 
 
@@ -557,7 +587,7 @@ allows Functions to calculate values of Affixes.
 % --------------------------------------------------------------------
 
 \emph{Analytic Grammars} are used in \emph{Parsing}
-(\S\ref{sec:parser}). A few examples:
+(\S\ref{sec:parsing}). A few examples:
 
 \begin{description}
 \item[Top-Down Parsing Language] \hfill \\
@@ -988,12 +1018,45 @@ simulated by a DTM.
 
 
 % ====================================================================
-\section{Parser} \label{sec:parser}
+\section{Parsing} \label{sec:parsing}
 % ====================================================================
 
-A \emph{Parser} analyzes an Expression according to the rules of a
+\emph{Parsing} is the process of \emph{Syntactic Analysis}. A
+\emph{Parser} analyzes an Expression according to the rules of a
 Formal Grammar, generating a \emph{Data Structure} describing the
-Syntax of the input. An outline of the process follows.
+Syntax of the input.
+% FIXME: ref data structure
+
+The Data Structure produced by the Parser may be a \emph{Concrete
+  Syntax Tree} (\emph{Parse Tree}), an \emph{Abstract Syntax Tree}
+(\emph{Syntax Tree}), or other hierarchical structure.
+
+
+
+
+% --------------------------------------------------------------------
+\subsection{Concrete Syntax Tree}\label{subsec:concrete_syntax}
+% --------------------------------------------------------------------
+
+A \emph{Concrete Syntax Tree} is an Ordered, Rooted Tree
+(\S\ref{subsec:graph_tree}) representing the \emph{Syntactic
+  Structure} of a string according to a Context-free Grammar
+(\S\ref{subsec:context_free}) such as the \emph{Constituency Relation}
+of a Constituency Grammar (\S\ref{subsec:constituency_grammar}) or the
+\emph{Depenency Relation} of a Dependency Grammar
+(\S\ref{subsec:dependency_grammar})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abstract Syntax Tree}\label{subsec:abstract_syntax}
+% --------------------------------------------------------------------
+
+\emph{Abstract Syntax} is a representation of the Source (Concrete)
+Syntax being Parsed.
+
+\emph{First-order Abstract Syntax} (FOAS), \emph{Higher-order Abstract
+  Syntax} (HOAS)
 
 
 
@@ -1006,36 +1069,57 @@ A Parser may be preceded by a \emph{Lexical Analyzer} which creates
 are referred to as Phrases. A Lexical Analyzer is a Parser itself and
 usually the \emph{Lexical Grammar} is a Regular Language (other
 methods are \emph{flags}, \emph{delimiters}, or \emph{dictionaries})
-and the Tokens are parsed as a Context-free or \emph{Attribute Phrase
-  Syntax}.
+and the Tokens are parsed as a Context-free
+(\S\ref{subsec:context_free}) or Attribute Phrase
+(\S\ref{subsec:attribute_grammar}) Syntax.
 
 Prior to \emph{Scanning}, a \emph{Lexer} may perform its own
-Tokenization.  The Scanning stage first recognizes the Token
+Tokenization. The Scanning stage first recognizes the Token
 strings as \emph{Lexemes}, usually achieved by a Finite State
 Machine.
 
 Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
-values where needed-- this results in Tokens that are either a
-\emph{Type-Value} pair, or just a \emph{Type}.
+values where needed-- this results in Tokens that are either
+\emph{Type-Value} pairs, or just \emph{Types}.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Syntactic Analysis}
 % --------------------------------------------------------------------
 
 The Parser determines if and how the input can be derived from the
-Start Symbol of the Grammar. Parsing can proceed in two directions:
-
+Start Symbol of a Context-free Grammar. Parsing can proceed in two
+directions:
 \begin{description}
-    \item[Top-down Parsing]
-    starts with the highest level of the \emph{Parse Tree}. Proceeds greedily
-    and may be \emph{Exponential} with \emph{Backtracking}.
-    \item[Bottom-up Parsing]
-    starts with the lowest level of the Parse Tree.
+    \item [Top-down Parsing] starts with the highest level of the Parse
+      Tree. Proceeds greedily and may be \emph{Exponential} with
+      \emph{Backtracking}.
+    \item [Bottom-up Parsing] starts with the lowest level of the
+      Parse Tree.
 \end{description}
+The output of Syntactic Analysis is a Data Structure such as a
+Concrete or Abstract Syntax Tree. Further Context-sensitive Parsing
+may follow.
 
-Further \emph{Semantic} Parsing may be performed after these steps. An
-example of this would be the in the \emph{Compiler} of a
-\emph{Programming Language}.
+
+
+% --------------------------------------------------------------------
+\subsection{Semantic Analysis}\label{subsec:semantic_analysis}
+% --------------------------------------------------------------------
+
+\emph{Semantic Analysis} (or \emph{Symantic Parsing} or
+\emph{Contextual Analysis}) may be performed after Syntactic Analysis.
+Parsing for Context-sensitive Semantics, such as Type Checking or
+declaration order, can be formally expressed with Attribute Grammars
+(\S\ref{subsec:attribute_grammar}).
+
+A further example would be the in the resulting actions of
+\emph{Evaluation} in an \emph{Interpreter} or \emph{Code Generation}
+of a \emph{Compiler} for a \emph{Programming Language}, for which
+purpose an Attribute Grammar may also be used.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Top-down Parsers}
