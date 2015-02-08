@@ -36,26 +36,6 @@ For a given Language $L \subseteq \Sigma^*$ there exists a
 
 
 % ====================================================================
-\section{Metalanguage}\label{sec:metalanguage}
-% ====================================================================
-
-A \emph{Metalanguage} is a Language used to describe another Language,
-the \emph{Object Language}. A \emph{Metavariable} is a Variable
-written in a Metalanguage that stands in for an Element in the Object
-Language. Metavariables may be referred to as \emph{Schematic
-  Variables} in the context of \emph{Axiom Schemata} and \emph{Rule
-  Schemata} (\S\ref{subsec:deductive_apparatus}).
-
-The use of an Object Language to describe itself is an \emph{Embedded
-  Metalanguage} (e.g. the English words \emph{noun} and \emph{verb}
-are used to describe English itself).
-
-Note it is common to use Greek letters ($\Phi$, $\Psi$) for
-Metavariables and Roman characters otherwise for Object Variables.
-
-
-
-% ====================================================================
 \section{Formal Grammar}\label{sec:formal_grammar}
 % ====================================================================
 
@@ -664,6 +644,224 @@ Boullier\cite{boullier94}
 
 
 % ====================================================================
+\section{Abstract Reduction Systems}\label{sec:abstract_rewrite}
+% ====================================================================
+
+Formal Grammars may be abstracted as \emph{Abstract Reduction} or
+\emph{Abstract Rewrite Systems}. This is simply
+    \[(A,\rightarrow)\]
+where $A$ is a Set of objects and $\rightarrow \subseteq A \times A$
+is a Binary Relation on those objects. This is equivalent to an
+\emph{Unlabelled State Transition System}
+(\S\ref{subsec:state_transition_system}).
+
+An \emph{Indexed Abstract Reduction System} differentiates Reductions
+into Classes so that $\rightarrow$ is the Indexed Union of these
+relations:
+    \[(A, \rightarrow_1, \rightarrow_2, \cdots)\]
+This is identical to a \emph{Labeled Transition System}.
+
+\emph{Holism}
+
+\emph{Reductionism}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Notation}\label{subsec:rewrite_notation}
+% --------------------------------------------------------------------
+
+$\stackrel{*}{\rightarrow}$
+
+$\leftrightarrow$
+
+$\stackrel{*}{\leftrightarrow}$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Normal Form}\label{subsec:normal_form}
+% --------------------------------------------------------------------
+
+An object of an Abstract Rewriting System $(A,\rightarrow)$ is in
+\emph{Normal Form} or \emph{Irreducible} if it cannot be Rewritten
+further. That is, $x \in A$ is in Normal Form if $\nexists y \in A : x
+\rightarrow y$. Otherwise $x$ is \emph{Reducible}.
+
+\emph{Untyped $\lambda$-calculus} (\S\ref{sec:untyped_lambda}) lacks
+the Normalization Property.
+
+\emph{Strong Normalization}
+
+Systems of \emph{Typed $\lambda$-calculus} (\S\ref{sec:typed_lambda})
+such as \emph{Simply-typed $\lambda$-calculus}
+(\S\ref{subsec:simply_typed}) and \emph{Calculus of Constructions}
+(\S\ref{subsec:coq}) are Strongly Normalizing.
+
+\emph{Weak Normalization}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Confluence}\label{subsec:rewrite_confluence}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Semi-Thue System}\label{subsec:semithue_system}
+% --------------------------------------------------------------------
+
+or \emph{String Rewriting System} (\emph{SRS})
+
+
+
+% ====================================================================
+\section{Parsing} \label{sec:parsing}
+% ====================================================================
+
+\emph{Parsing} is the process of \emph{Syntactic Analysis}. A
+\emph{Parser} analyzes an Expression according to the rules of a
+Formal Grammar, generating a \emph{Data Structure} describing the
+Syntax of the input.
+% FIXME: ref data structure
+
+The Data Structure produced by the Parser may be a \emph{Concrete
+  Syntax Tree} (\emph{Parse Tree}), an \emph{Abstract Syntax Tree}
+(\emph{Syntax Tree}), or other hierarchical structure.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Concrete Syntax Tree}\label{subsec:concrete_syntax}
+% --------------------------------------------------------------------
+
+A \emph{Concrete Syntax Tree} is an Ordered, Rooted Tree
+(\S\ref{subsec:graph_tree}) representing the \emph{Syntactic
+  Structure} of a string according to a Context-free Grammar
+(\S\ref{subsec:context_free}) such as the \emph{Constituency Relation}
+of a Constituency Grammar (\S\ref{subsec:constituency_grammar}) or the
+\emph{Depenency Relation} of a Dependency Grammar
+(\S\ref{subsec:dependency_grammar})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abstract Syntax Tree}\label{subsec:abstract_syntax}
+% --------------------------------------------------------------------
+
+\emph{Abstract Syntax} is a representation of the Source (Concrete)
+Syntax being Parsed.
+
+\emph{First-order Abstract Syntax} (FOAS), \emph{Higher-order Abstract
+  Syntax} (HOAS)
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lexical Analysis}
+% --------------------------------------------------------------------
+
+A Parser may be preceded by a \emph{Lexical Analyzer} which creates
+\emph{Tokens} (Symbols) from an input Expression. Strings of Tokens
+are referred to as Phrases. A Lexical Analyzer is a Parser itself and
+usually the \emph{Lexical Grammar} is a Regular Language (other
+methods are \emph{flags}, \emph{delimiters}, or \emph{dictionaries})
+and the Tokens are parsed as a Context-free
+(\S\ref{subsec:context_free}) or Attribute Phrase
+(\S\ref{subsec:attribute_grammar}) Syntax.
+
+Prior to \emph{Scanning}, a \emph{Lexer} may perform its own
+Tokenization. The Scanning stage first recognizes the Token
+strings as \emph{Lexemes}, usually achieved by a Finite State
+Machine.
+
+Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
+values where needed-- this results in Tokens that are either
+\emph{Type-Value} pairs, or just \emph{Types}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Syntactic Analysis}
+% --------------------------------------------------------------------
+
+The Parser determines if and how the input can be derived from the
+Start Symbol of a Context-free Grammar. Parsing can proceed in two
+directions:
+\begin{description}
+    \item [Top-down Parsing] starts with the highest level of the Parse
+      Tree. Proceeds greedily and may be \emph{Exponential} with
+      \emph{Backtracking}.
+    \item [Bottom-up Parsing] starts with the lowest level of the
+      Parse Tree.
+\end{description}
+The output of Syntactic Analysis is a Data Structure such as a
+Concrete or Abstract Syntax Tree. Further Context-sensitive Parsing
+may follow.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Semantic Analysis}\label{subsec:semantic_analysis}
+% --------------------------------------------------------------------
+
+\emph{Semantic Analysis} (or \emph{Symantic Parsing} or
+\emph{Contextual Analysis}) may be performed after Syntactic Analysis.
+Parsing for Context-sensitive Semantics, such as Type Checking or
+declaration order, can be formally expressed with Attribute Grammars
+(\S\ref{subsec:attribute_grammar}).
+
+A further example would be the in the resulting actions of
+\emph{Evaluation} in an \emph{Interpreter} or \emph{Code Generation}
+of a \emph{Compiler} for a \emph{Programming Language}, for which
+purpose an Attribute Grammar may also be used.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Top-down Parsers}
+% --------------------------------------------------------------------
+
+\subsubsection{Recursive Descent Parser}
+
+\subsubsection{LL Parser}
+
+\subsubsection{Early Parser}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Bottom-up Parsers}
+% --------------------------------------------------------------------
+
+\subsubsection{Precedence Parser}
+
+\subsubsection{LR Parser}
+
+\emph{Canonical LR} LR(1)
+
+\paragraph{SLR Parser}
+
+\paragraph{LALR Parser}
+
+\paragraph{GLR Parser}
+
+\subsubsection{CYK Parser}
+
+\subsubsection{Recursive Ascent Parser}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Parser Generators}\label{subsec:parser_generator}
+% --------------------------------------------------------------------
+
+A \emph{Parser Generator} takes as a Grammar (for example a BNF
+Grammar) and outputs the source code of a Parser for the Language
+specified by the Grammar.
+
+
+
+% ====================================================================
 \section{Automata Theory}\label{sec:automata_theory}
 % ====================================================================
 
@@ -1018,219 +1216,19 @@ simulated by a DTM.
 
 
 % ====================================================================
-\section{Parsing} \label{sec:parsing}
+\section{Metalanguage}\label{sec:metalanguage}
 % ====================================================================
 
-\emph{Parsing} is the process of \emph{Syntactic Analysis}. A
-\emph{Parser} analyzes an Expression according to the rules of a
-Formal Grammar, generating a \emph{Data Structure} describing the
-Syntax of the input.
-% FIXME: ref data structure
-
-The Data Structure produced by the Parser may be a \emph{Concrete
-  Syntax Tree} (\emph{Parse Tree}), an \emph{Abstract Syntax Tree}
-(\emph{Syntax Tree}), or other hierarchical structure.
-
-
-
-
-% --------------------------------------------------------------------
-\subsection{Concrete Syntax Tree}\label{subsec:concrete_syntax}
-% --------------------------------------------------------------------
-
-A \emph{Concrete Syntax Tree} is an Ordered, Rooted Tree
-(\S\ref{subsec:graph_tree}) representing the \emph{Syntactic
-  Structure} of a string according to a Context-free Grammar
-(\S\ref{subsec:context_free}) such as the \emph{Constituency Relation}
-of a Constituency Grammar (\S\ref{subsec:constituency_grammar}) or the
-\emph{Depenency Relation} of a Dependency Grammar
-(\S\ref{subsec:dependency_grammar})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Abstract Syntax Tree}\label{subsec:abstract_syntax}
-% --------------------------------------------------------------------
-
-\emph{Abstract Syntax} is a representation of the Source (Concrete)
-Syntax being Parsed.
-
-\emph{First-order Abstract Syntax} (FOAS), \emph{Higher-order Abstract
-  Syntax} (HOAS)
-
-
-
-% --------------------------------------------------------------------
-\subsection{Lexical Analysis}
-% --------------------------------------------------------------------
-
-A Parser may be preceded by a \emph{Lexical Analyzer} which creates
-\emph{Tokens} (Symbols) from an input Expression. Strings of Tokens
-are referred to as Phrases. A Lexical Analyzer is a Parser itself and
-usually the \emph{Lexical Grammar} is a Regular Language (other
-methods are \emph{flags}, \emph{delimiters}, or \emph{dictionaries})
-and the Tokens are parsed as a Context-free
-(\S\ref{subsec:context_free}) or Attribute Phrase
-(\S\ref{subsec:attribute_grammar}) Syntax.
-
-Prior to \emph{Scanning}, a \emph{Lexer} may perform its own
-Tokenization. The Scanning stage first recognizes the Token
-strings as \emph{Lexemes}, usually achieved by a Finite State
-Machine.
-
-Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
-values where needed-- this results in Tokens that are either
-\emph{Type-Value} pairs, or just \emph{Types}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Syntactic Analysis}
-% --------------------------------------------------------------------
-
-The Parser determines if and how the input can be derived from the
-Start Symbol of a Context-free Grammar. Parsing can proceed in two
-directions:
-\begin{description}
-    \item [Top-down Parsing] starts with the highest level of the Parse
-      Tree. Proceeds greedily and may be \emph{Exponential} with
-      \emph{Backtracking}.
-    \item [Bottom-up Parsing] starts with the lowest level of the
-      Parse Tree.
-\end{description}
-The output of Syntactic Analysis is a Data Structure such as a
-Concrete or Abstract Syntax Tree. Further Context-sensitive Parsing
-may follow.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Semantic Analysis}\label{subsec:semantic_analysis}
-% --------------------------------------------------------------------
-
-\emph{Semantic Analysis} (or \emph{Symantic Parsing} or
-\emph{Contextual Analysis}) may be performed after Syntactic Analysis.
-Parsing for Context-sensitive Semantics, such as Type Checking or
-declaration order, can be formally expressed with Attribute Grammars
-(\S\ref{subsec:attribute_grammar}).
-
-A further example would be the in the resulting actions of
-\emph{Evaluation} in an \emph{Interpreter} or \emph{Code Generation}
-of a \emph{Compiler} for a \emph{Programming Language}, for which
-purpose an Attribute Grammar may also be used.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Top-down Parsers}
-% --------------------------------------------------------------------
-
-\subsubsection{Recursive Descent Parser}
-
-\subsubsection{LL Parser}
-
-\subsubsection{Early Parser}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Bottom-up Parsers}
-% --------------------------------------------------------------------
-
-\subsubsection{Precedence Parser}
-
-\subsubsection{LR Parser}
-
-\emph{Canonical LR} LR(1)
-
-\paragraph{SLR Parser}
-
-\paragraph{LALR Parser}
-
-\paragraph{GLR Parser}
-
-\subsubsection{CYK Parser}
-
-\subsubsection{Recursive Ascent Parser}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Parser Generators}\label{subsec:parser_generator}
-% --------------------------------------------------------------------
-
-A \emph{Parser Generator} takes as a Grammar (for example a BNF
-Grammar) and outputs the source code of a Parser for the Language
-specified by the Grammar.
-
-
-
-% ====================================================================
-\section{Abstract Reduction Systems}\label{sec:abstract_rewrite}
-% ====================================================================
-
-The previous descriptions of Formal Grammars may be abstracted as
-\emph{Abstract Reduction} or \emph{Abstract Rewrite Systems}. This is
-simply
-    \[(A,\rightarrow)\]
-where $A$ is a Set of objects and $\rightarrow \subseteq A \times A$
-is a Binary Relation on those objects. This is equivalent to an
-\emph{Unlabelled State Transition System}
-(\S\ref{subsec:state_transition_system}).
-
-An \emph{Indexed Abstract Reduction System} differentiates Reductions
-into Classes so that $\rightarrow$ is the Indexed Union of these
-relations:
-    \[(A, \rightarrow_1, \rightarrow_2, \cdots)\]
-This is identical to a \emph{Labeled Transition System}.
-
-\emph{Holism}
-
-\emph{Reductionism}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Notation}\label{subsec:rewrite_notation}
-% --------------------------------------------------------------------
-
-$\stackrel{*}{\rightarrow}$
-
-$\leftrightarrow$
-
-$\stackrel{*}{\leftrightarrow}$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Normal Form}\label{subsec:normal_form}
-% --------------------------------------------------------------------
-
-An object of an Abstract Rewriting System $(A,\rightarrow)$ is in
-\emph{Normal Form} or \emph{Irreducible} if it cannot be Rewritten
-further. That is, $x \in A$ is in Normal Form if $\nexists y \in A : x
-\rightarrow y$. Otherwise $x$ is \emph{Reducible}.
-
-\emph{Untyped $\lambda$-calculus} (\S\ref{sec:untyped_lambda}) lacks
-the Normalization Property.
-
-\emph{Strong Normalization}
-
-Systems of \emph{Typed $\lambda$-calculus} (\S\ref{sec:typed_lambda})
-such as \emph{Simply-typed $\lambda$-calculus}
-(\S\ref{subsec:simply_typed}) and \emph{Calculus of Constructions}
-(\S\ref{subsec:coq}) are Strongly Normalizing.
-
-\emph{Weak Normalization}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Confluence}\label{subsec:rewrite_confluence}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Semi-Thue System}\label{subsec:semithue_system}
-% --------------------------------------------------------------------
-
-or \emph{String Rewriting System} (\emph{SRS})
+A \emph{Metalanguage} is a Language used to describe another Language,
+the \emph{Object Language}. A \emph{Metavariable} is a Variable
+written in a Metalanguage that stands in for an Element in the Object
+Language. Metavariables may be referred to as \emph{Schematic
+  Variables} in the context of \emph{Axiom Schemata} and \emph{Rule
+  Schemata} (\S\ref{subsec:deductive_apparatus}).
+
+The use of an Object Language to describe itself is an \emph{Embedded
+  Metalanguage} (e.g. the English words \emph{noun} and \emph{verb}
+are used to describe English itself).
+
+Note it is common to use Greek letters ($\Phi$, $\Psi$) for
+Metavariables and Roman characters otherwise for Object Variables.
