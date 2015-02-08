@@ -6,11 +6,11 @@
 
 A \emph{Formal Language}, $L$, is a possibly infinite Subset of an
 infinite \emph{Vocabulary}, $\Sigma^*$, that is the Set of all
-possible finite \emph{Expressions} (strings) over a possibly infinite
-\emph{Alphabet} of \emph{Symbols}, $\Sigma$. This Set $\Sigma^*$ is
-the \emph{Kleene star} or \emph{Free Monoid} (\S\ref{subsec:monoid})
-of $\Sigma$; the smallest Superset of $\Sigma$ that is closed under
-string concatenation.
+possible finite string \emph{Expressions} (or \emph{Words}) over a
+possibly infinite \emph{Alphabet} of \emph{Symbols}, $\Sigma$. This
+Set $\Sigma^*$ is the \emph{Kleene star} or \emph{Free Monoid}
+(\S\ref{subsec:monoid}) of $\Sigma$; the smallest Superset of $\Sigma$
+that is closed under string concatenation.
 
 The entire content of a Language is uniquely determined by the Set of
 all \emph{Terminal Expressions} that are \emph{Generated} by the
@@ -49,7 +49,7 @@ literal strings of Symbols of a Language with no regard to the meaning
 or \emph{Interpretation} (\S\ref{subsec:interpretation}); only the
 condition that they can be identified and differentiated from
 one-another is required. The process of \emph{Syntactic Analysis} is
-known as \emph{Parsing} (\S\ref{sec:parsing}).
+known as \emph{Parsing} (\S\ref{sec:parser}).
 
 Syntactic methods can be carried very far; all of Formal Language
 Theory as well as Proof Theory (Part \ref{sec:proof_theory}) are
@@ -169,7 +169,7 @@ $\Sigma^*$ can be determined to belong to a Language $L \subseteq
 
 
 % --------------------------------------------------------------------
-\subsection{Chomsky Hierarchy}\cite{chomsky56}
+\subsection{Chomsky Hierarchy}\label{subsec:chomsky_hierarchy}\cite{chomsky56}
 % --------------------------------------------------------------------
 
 Grammars are classified by how restrictive the Production Rules are.
@@ -184,9 +184,12 @@ different kinds of \emph{Automata} (\S\ref{subsec:automata}).
 
 
 
-\subsubsection{Type-0: Unrestricted}
+% --------------------------------------------------------------------
+\subsection{Type-0: Unrestricted Grammar}\label{subsec:unrestricted_grammar}
+% --------------------------------------------------------------------
 
-\paragraph{Semi-decidable}\label{subsec:semidecidable}
+\subsubsection{Semi-decidable}\label{subsec:semidecidable}
+
 Production Rules of an \emph{Unrestricted} Grammar have the form
 \[
     \alpha \rightarrow \beta
@@ -208,7 +211,10 @@ Algorithm may decide non-membership only and is termed
 $\mathsf{coRE}$. The class of Automata capable of implementing these
 Algorithms are \emph{Turing Machines}(\S\ref{subsec:turing_machine}).
 
-\paragraph{Decidable}\label{subsec:decidable_language}
+
+
+\subsubsection{Decidable}\label{subsec:decidable_language}
+
 A \emph{Decidable} or \emph{Recursive} Language is defined as the
 intersection of $\mathsf{RE}$ and $\mathsf{coRE}$:
 \[
@@ -223,9 +229,10 @@ Undecidable Decision Problem).
 
 
 
-\subsubsection{Type-1: Context-sensitive}
+% --------------------------------------------------------------------
+\subsection{Type-1: Context-sensitive Grammar}\label{subsec:context_sensitive}
+% --------------------------------------------------------------------
 
-\paragraph{Context-sensitive}\label{subsec:context_sensitive}
 \emph{Context-sensitive Grammars} have the restriction that the result
 of a Production is not shorter than the input. Formally stated,
 Productions are of the form
@@ -246,7 +253,10 @@ makes the Context-sensitive Languages a proper Superset of the
 Context-sensitive Languages are equivalent to \emph{Linear
 Bounded Automata} (\S\ref{subsec:linear_bounded_automata}).
 
-\paragraph{Indexed}
+
+
+\subsubsection{Indexed Grammar}\label{subsubsection:indexed_grammar}
+
 An \emph{Indexed Grammar} has an extra set of \emph{Index Symbols},
 $F$, with Productions of three possible forms,
 \[
@@ -263,7 +273,10 @@ Index Symbols are either pushed or popped from the Stack.
 An Indexed Language can be Recognized by a \emph{Nested Stack
   Automaton} (\S\ref{subsec:nested_stack_automaton}).\cite{aho69}
 
-\paragraph{Generalized Contex-free}
+
+
+\subsubsection{Generalized Contex-free}\label{subsec:generalized_context_free}
+
 A \emph{Generalized Context-free Grammar} adds to the Production Rules
 of a Context-free Grammar a set of non-Context-free \emph{Composition
   Functions} that combine tuples of Symbols:
@@ -313,9 +326,10 @@ formulation:
 
 
 
-\subsubsection{Type-2: Context-free}\label{subsec:context_free}
+% --------------------------------------------------------------------
+\subsection{Type-2: Context-free Grammar}\label{subsec:context_free}
+% --------------------------------------------------------------------
 
-\paragraph{Context-free}
 \emph{Context-free Grammars} (\emph{CFG}s) have Production Rules of
 the form:
 \[
@@ -338,7 +352,10 @@ A popular notation for Context-free Grammars in Computer Science is
 Context-free Grammars are equivalent to \emph{Non-deterministic
   Pushdown Automata}(\S\ref{subsec:pushdown_automata}).
 
-\paragraph{Constituency Grammar}\label{subsec:constituency_grammar}
+
+
+\subsubsection{Constituency Grammar}\label{subsec:constituency_grammar}
+
 In Linguistics, the term used for Context-free Grammar is \emph{Phrase
   Structure Grammar} which is also called \emph{Constituency Grammar}
 due to the one-to-one-or-many correspondence between the Productions
@@ -347,22 +364,22 @@ due to the one-to-one-or-many correspondence between the Productions
 (\S\ref{subsec:concrete_syntax}) may be constructed according to the
 \emph{Constituency Relation} of a Constituency Grammar.
 
-\paragraph{Dependency Grammar}\label{subsec:dependency_grammar}
+\subsubsection{Dependency Grammar}\label{subsec:dependency_grammar}
 An alternative formulation to Phrase Structure Grammar is
 \emph{Dependency Grammar} in which the Verb is the root and there is a
 one-to-one correspondence between Symbols and nodes in the Syntax
 Structure (\S\ref{subsec:concrete_syntax}).
 
-\paragraph{Deterministic}\label{subsec:deterministic_cfg}
+\subsubsection{Deterministic}\label{subsec:deterministic_cfg}
 \emph{Deterministic Context-free Grammars} are derived from
 \emph{Deterministic Pushdown
   Automata}(\S\ref{subsec:deterministic_pda}) and are always
-\emph{unambiguous}. They can be \emph{Parsed} (\S\ref{sec:parsing}) in
+\emph{unambiguous}. They can be \emph{Parsed} (\S\ref{sec:parser}) in
 Linear Time and a Parser can be automatically generated from
 the Grammar by a \emph{Parser
   Generator}(\S\ref{subsec:parser_generator}).
 
-\paragraph{Visibly Pushdown}
+\subsubsection{Visibly Pushdown}
 \emph{Visibly Pushdown Grammars} are described by the 4-tuple
 \[
     G = (V=V^0 \cup V^1,T,P,S)
@@ -384,7 +401,9 @@ The resulting Language is a \emph{Regular Language} with \emph{nested
 
 
 
-\subsubsection{Type-3: Regular} \label{subsec:regular_language}
+% --------------------------------------------------------------------
+\subsection{Type-3: Regular Grammar} \label{subsec:regular_language}
+% --------------------------------------------------------------------
 
 \emph{Regular Languages} are more restricted than Context-free
 Languages and satisfy a number of Closure Properties. For two Regular
@@ -411,7 +430,9 @@ An algebraic description is as follows:
 where $f : \Sigma^* \rightarrow M$ is a \emph{Monoid Homomorphism} of
 \emph{Finite Monoid} (\S\ref{subsec:monoid}) $M$ and $N \subseteq M$.
 
-\paragraph{Extended Regular}
+
+
+\subsubsection{Extended Regular}\label{subsec:extended_regular}
 \emph{Extended Regular Grammars} have Productions of either \emph{Right
 Regular} or \emph{Left Regular} form.
 
@@ -435,7 +456,9 @@ Left:
 where $a$ is a single Non-terminal and $\nu$ is an expression of only
 Non-terminal characters.
 
-\paragraph{Strictly Regular}
+
+
+\subsubsection{Strictly Regular}\label{subsec:strictly_regular}
 \emph{Strictly Regular Grammars} also have Productions of either Right
 Regular or Left Regular form.
 
@@ -481,7 +504,10 @@ second Symbol in $R$, and no factor of $w$ of length 2 is in $F$. A
 Local Language is Recognized by a \emph{Local
   Automaton}(\S\ref{subsec:dfa}).
 
-\paragraph{Star-free}
+
+
+\subsubsection{Star-free}\label{subsec:starfree_grammar}
+
 A \emph{Star-free Language} is one having a \emph{Generalized Star
   Height} equal to zero, that is, the minimal \emph{Star Height} of
 all Expressions in the Language with the Star Height of an
@@ -497,7 +523,7 @@ Star-free Languages are characterized as those with \emph{Aperiodic
 
 
 % --------------------------------------------------------------------
-\subsection{Affix Grammars}\label{subsec:affix_grammar}
+\subsection{Affix Grammar}\label{subsec:affix_grammar}
 % --------------------------------------------------------------------
 
 \emph{Affix Grammars} are those of a Context-free Grammar with a
@@ -508,7 +534,7 @@ the same.
 
 
 % --------------------------------------------------------------------
-\subsection{Two-Level Grammars}
+\subsection{Two-Level Grammars}\label{subsec:two_level_grammar}
 % --------------------------------------------------------------------
 
 \emph{Two-Level Grammars} are \emph{Grammar Generators} that may
@@ -527,14 +553,23 @@ Grammar.
 
 
 % --------------------------------------------------------------------
-\subsection{Attribute Grammars}\label{subsec:attribute_grammar}
+\subsection{Attribute Grammar}\label{subsec:attribute_grammar}
+\cite{slonneger-kurtz95}
 % --------------------------------------------------------------------
 
 \emph{Attribute Grammars} can be seen as Context-free Grammars
 extended to provide Context-sensitivity using a Set of
 \emph{Attributes}, \emph{Attribute Values}, \emph{Evaluation Rules}
-and \emph{Conditions}. Attributes are either \emph{Synthesized
-  Attributes} or \emph{Inherited Attributes}.
+and \emph{Conditions}.
+
+A finite, possibly empty set of Attributes is associated with each
+distinct Symbol in the Grammar. Each Attribute has an associated
+Domain of Values they may take on. Attributes are either
+\emph{Synthesized Attributes} or \emph{Inherited Attributes}.
+
+Production Rules have additional Conditions that must be met by the
+Attribute Values at that Node in the \emph{Parse Tree}
+(\S\ref{subsec:concrete_syntax}).
 
 Attribute Grammars allow Affixes (\S\ref{subsec:affix_grammar}) from
 arbitrary Domains and allows Functions to calculate values of Affixes.
@@ -556,18 +591,24 @@ well as the \emph{Operational Semantics} of \emph{Programming
 
 \subsubsection{Synthesized Attributes}
 
+A \emph{Synthesized Attribute} is passed from Child Node to Parent
+Node.
+
 
 
 \subsubsection{Inherited Attributes}
 
+An \emph{Inherited Attribute} is passed from Parent Node to Child
+Node.
+
 
 
 % --------------------------------------------------------------------
-\subsection{Analytic Grammars}
+\subsection{Analytic Grammar}\label{subsec:analytic_grammar}
 % --------------------------------------------------------------------
 
 \emph{Analytic Grammars} are used in \emph{Parsing}
-(\S\ref{sec:parsing}). A few examples:
+(\S\ref{sec:parser}). A few examples:
 
 \begin{description}
 \item[Top-Down Parsing Language] \hfill \\
@@ -592,7 +633,7 @@ Dependency Grammar
 
 
 % --------------------------------------------------------------------
-\subsection{Adaptive Grammars}
+\subsection{Adaptive Grammar}\label{subsec:adaptive_grammar}
 % --------------------------------------------------------------------
 
 \emph{Adaptive Grammars} allow for Production Rules to be manipulated
@@ -644,7 +685,7 @@ Boullier\cite{boullier94}
 
 
 % ====================================================================
-\section{Abstract Reduction Systems}\label{sec:abstract_rewrite}
+\section{Abstract Reduction System}\label{sec:abstract_rewrite}
 % ====================================================================
 
 Formal Grammars may be abstracted as \emph{Abstract Reduction} or
@@ -715,7 +756,7 @@ or \emph{String Rewriting System} (\emph{SRS})
 
 
 % ====================================================================
-\section{Parsing} \label{sec:parsing}
+\section{Parser} \label{sec:parser}
 % ====================================================================
 
 \emph{Parsing} is the process of \emph{Syntactic Analysis}. A
@@ -1037,7 +1078,8 @@ sequence of States, $r_0,r_1,\cdots,r_n$ such that
 A DFA may be seen as a NFA which restricts transitions to allow only
 one State, and can be constructed from a NFA with $n$ States using
 \emph{powerset construction}, requiring up to $2^n$ States. Both types
-recognize the same Regular Languages(\S\ref{subsec:regular_language}).
+recognize the same Regular Languages
+(\S\ref{subsec:regular_language}).
 
 \paragraph{NFA-$\varepsilon$} is a NFA that allows transitions
 without consuming input Symbols. A transition that changes state
@@ -1220,15 +1262,46 @@ simulated by a DTM.
 % ====================================================================
 
 A \emph{Metalanguage} is a Language used to describe another Language,
-the \emph{Object Language}. A \emph{Metavariable} is a Variable
-written in a Metalanguage that stands in for an Element in the Object
-Language. Metavariables may be referred to as \emph{Schematic
-  Variables} in the context of \emph{Axiom Schemata} and \emph{Rule
-  Schemata} (\S\ref{subsec:deductive_apparatus}).
+the \emph{Object Language}.
+
+Metalanguage Expressions find use in:
+\begin{itemize}
+    \item Deductive Systems (\S\ref{subsec:deductive_apparatus})
+    \item Metavariables (\S\ref{subsec:metavariable})
+    \item Metatheory (\S\ref{sec:metatheory})
+    \item Interpretations (\S\ref{subsec:interpretation})
+\end{itemize}
+
+Note it is common to use Greek letters ($\Phi$, $\Psi$) for
+Metavariables and Roman characters otherwise for Object Variables.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Embedded Metalanguage}\label{subsec:embedded_metalanguage}
+% --------------------------------------------------------------------
 
 The use of an Object Language to describe itself is an \emph{Embedded
   Metalanguage} (e.g. the English words \emph{noun} and \emph{verb}
 are used to describe English itself).
 
-Note it is common to use Greek letters ($\Phi$, $\Psi$) for
-Metavariables and Roman characters otherwise for Object Variables.
+
+
+% --------------------------------------------------------------------
+\subsection{Ordered Metalanguage}\label{subsec:ordered_metalanguage}
+% --------------------------------------------------------------------
+
+An \emph{Ordered Metalanguage} is constructed to discuss an
+\emph{Object Language}, and a further Ordered Metalanguage may be
+constructed to discuss the first.
+
+analogous to \emph{Ordered Logic}
+(\S\ref{subsec:noncommutative_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hierarchical Metalanguage}\label{subsec:hierarchical_metalanguage}
+% --------------------------------------------------------------------
+
+an Ordered Hierarchy of Embedded Metalanguages
