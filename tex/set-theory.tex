@@ -165,12 +165,6 @@ An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
 
 
 % --------------------------------------------------------------------
-\subsection{Closure}\label{sec:set_closure}
-% --------------------------------------------------------------------
-
-\subsubsection{Finitary Closure}\label{sec:finitary_closure}
-
-% --------------------------------------------------------------------
 \subsection{Forcing}\label{sec:forcing}
 % --------------------------------------------------------------------
 
@@ -241,8 +235,6 @@ is Transitive.
 
 A Set, $S$, containing no Urelements is Transitive if and only if $S
 \subset \mathcal{P}(X)$
-
-\emph{Transitive Closure}
 
 
 
@@ -738,6 +730,69 @@ particular Equivalence Relation.
 
 \subsubsection{Congruence Relation}\label{sec:congruence_relation}
 
+\subsubsection{Reflexive Reduction}\label{sec:reflexive_reduction}
+
+The \emph{Irreflexive Kernel} or \emph{Reflexive Reduction} of a
+Binary Relation $R$ on a Set $S$ is the smallest Relation $Y$
+such that $Y$ has the same Reflexive Closure as $R$:
+\[
+    Y = (R\;\setminus=)
+\]
+The Reflexive Reduction of $x \leq y$ is $x < y$.
+
+
+
+\subsubsection{Well-founded Relation}\label{sec:well_founded}
+
+\emph{Well-founded}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Relation Join}\label{sec:relation_join}
+% --------------------------------------------------------------------
+
+\emph{Relational Algebra} (\S\ref{sec:relational_algebra})
+
+\emph{Pullback} (\S\ref{sec:category_pullback})
+
+
+
+\subsubsection{Relation Composition}\label{sec:relation_composition}
+
+For two Binary Relations, $R \subseteq X \times Y$ and $S \subseteq Y
+\times Z$, the \emph{Relation Composition}, $S \circ R \in X \times Z$
+is defined as:
+\[
+    S \circ R = \{(x,z) \in X \times Z \;|\;
+    \exists y \in Y : (x,y) \in R \wedge (y,z) \in S \}
+\]
+
+
+
+\subsubsection{Function Composition}\label{sec:function_composition}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Closure}\label{sec:set_closure}
+% --------------------------------------------------------------------
+
+\subsubsection{Transitive Closure}\label{sec:transitive_closure}
+
+For a Relation, $R$, on a Set, $X$, the \emph{Transitive Closure}
+$R^+$ is a Relation on $X$ such that $R \subseteq R^+$ and $R^+$ is
+\emph{Minimal} (the smallest Relation closed under Relation
+Composition):
+\[
+    R^+ = \bigcup_{i \in \{1,2,3,...\}} R^i
+\]
+If $R$ is Transitive then $R = R^+$.
+
+\emph{Reachability} (\S\ref{sec:dag})
+
+
+
 \subsubsection{Reflexive Closure}\label{sec:reflexive_closure}
 
 The \emph{Reflexive Closure}, $X$, of a Binary Relation, $R$, on a
@@ -747,25 +802,21 @@ Set, $S$, is the smallest Reflexive Relation on $S$ that contains $R$:
 \]
 that is, the Union of $R$ with the Equivalence Relation $=$.
 
-The Reflexive Closure of $x < y$ is $x leq y$.
+The Reflexive Closure of $<$ is $\leq$.
 
 
 
-\subsubsection{Reflexive Reduction}\label{sec:reflexive_reduction}
+\subsubsection{Symmetric Closure}\label{sec:symmetric_closure}
 
-The \emph{Irreflexive Kernel} or \emph{Reflexive Reduction} of a
-Binary Relation $R$ on a Set $S$ is the smallest Relation $Y$
-such that $Y$ has the same Reflexive Closure as $R$:
+The \emph{Symmetric Closure}, $X$, of a Binary Relation, $R$, on a
+Set, $S$, is the Union of $R$ with its Inverse Relation:
 \[
-    Y = R \ =
+    R \cup R^{-1} = X = R \cup \{(x,y) : (y,x) \in R\}
 \]
-The Reflexive Reduction of $x \leq y$ is $x < y$.
 
 
 
-\subsubsection{Well-founded Relation}\label{sec:well_founded}
-
-\emph{Well-founded}
+\subsubsection{Finitary Closure}\label{sec:finitary_closure}
 
 
 
