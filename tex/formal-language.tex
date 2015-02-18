@@ -692,9 +692,9 @@ Formal Grammars may be abstracted as \emph{Abstract Reduction} or
 \emph{Abstract Rewrite Systems}. This is simply
     \[(A,\rightarrow)\]
 where $A$ is a Set of objects and $\rightarrow \subseteq A \times A$
-is a Binary Relation on those objects. This is equivalent to an
-\emph{Unlabelled State Transition System}
-(\S\ref{sec:state_transition_system}).
+is a Binary Relation on those objects called the \emph{Reduction
+  Relation}. This is equivalent to an \emph{Unlabelled State
+  Transition System} (\S\ref{sec:state_transition_system}).
 
 An \emph{Indexed Abstract Reduction System} differentiates Reductions
 into Classes so that $\rightarrow$ is the Indexed Union of these
@@ -703,25 +703,27 @@ relations:
 This is identical to a \emph{Labeled Transition System}
 (\S\ref{sec:state_transition_system}).
 
-
-
-% --------------------------------------------------------------------
-\subsection{Notation}\label{sec:rewrite_notation}
-% --------------------------------------------------------------------
+Given the Reduction Relation, $\rightarrow$, for an ARS, the following
+Relations may be defined:
 
 \begin{description}
 
 \item [$\stackrel{*}{\rightarrow}$]: Reflexive Transitive Closure of
   $\rightarrow$, the smallest Preorder (Reflexive and Transitive
-  Relation) containing $\rightarrow$ (the Transitive Closure of
-  $\rightarrow \cup =$)
+  Relation) containing $\rightarrow$, that is, the Transitive Closure
+  of $\rightarrow \cup =$:
+  \[ (\rightarrow \cup =)^+ =
+    \bigcup_{i \in \{1,2,3,...\}} (\rightarrow \cup =)^i \]
 
 \item [$\leftrightarrow$]: Symmetric Closure of $\rightarrow$:
-  $\rightarrow \cup \rightarrow^{-1}$
+  \[ \rightarrow \cup \rightarrow^{-1} \]
 
-\item [$\stackrel{*}{\leftrightarrow}$]: Reflexive Transitive Closure
-  of $\leftrightarrow$ (smallest Equivalence Relation containing
-  $\rightarrow$): $\leftrightarrow \cup =$
+\item [$\stackrel{*}{\leftrightarrow}$]: Reflexive Transitive
+  Symmetric Closure of $\rightarrow$ (smallest Equivalence Relation
+  containing $\rightarrow$), that is, the Transitive Closure of
+  $\leftrightarrow \cup =$:
+  \[ (\leftrightarrow \cup =)^+ =
+    \bigcup_{i \in \{1,2,3,...\}} (\leftrightarrow \cup =)^i \]
 
 \end{description}
 
