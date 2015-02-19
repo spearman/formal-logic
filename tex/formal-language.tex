@@ -688,8 +688,9 @@ Boullier\cite{boullier94}
 \section{Abstract Reduction System}\label{sec:abstract_rewrite}
 % ====================================================================
 
-Formal Grammars may be abstracted as \emph{Abstract Reduction} or
-\emph{Abstract Rewrite Systems}. This is simply
+Formal Grammars may be abstracted as \emph{Abstract Reduction Systems}
+(or \emph{Abstract Rewrite Systems}), abbreviated $ARS$. An ARS is
+simply
     \[(A,\rightarrow)\]
 where $A$ is a Set of objects and $\rightarrow \subseteq A \times A$
 is a Binary Relation on those objects called the \emph{Reduction
@@ -708,7 +709,7 @@ Relations may be defined:
 
 \begin{description}
 
-\item [$\stackrel{*}{\rightarrow}$]: Reflexive Transitive Closure of
+\item [$\stackrel{*}\rightarrow$]: Reflexive Transitive Closure of
   $\rightarrow$, the smallest Preorder (Reflexive and Transitive
   Relation) containing $\rightarrow$, that is, the Transitive Closure
   of $\rightarrow \cup =$:
@@ -718,7 +719,7 @@ Relations may be defined:
 \item [$\leftrightarrow$]: Symmetric Closure of $\rightarrow$:
   \[ \rightarrow \cup \rightarrow^{-1} \]
 
-\item [$\stackrel{*}{\leftrightarrow}$]: Reflexive Transitive
+\item [$\stackrel{*}\leftrightarrow$]: Reflexive Transitive
   Symmetric Closure of $\rightarrow$ (smallest Equivalence Relation
   containing $\rightarrow$), that is, the Transitive Closure of
   $\leftrightarrow \cup =$:
@@ -734,27 +735,73 @@ Relations may be defined:
 % --------------------------------------------------------------------
 
 An object of an Abstract Rewriting System $(A,\rightarrow)$ is in
-\emph{Normal Form} or \emph{Irreducible} if it cannot be Rewritten
+\emph{Normal Form} (\emph{Irreducible}) if it cannot be Rewritten
 further. That is, $x \in A$ is in Normal Form if $\nexists y \in A : x
 \rightarrow y$. Otherwise $x$ is \emph{Reducible}.
 
+For two objects $x,y \in A$, $y$ is a Normal Form of $x$ if $x
+\stackrel{*}{\rightarrow} y$ and $y$ is Irreducible. A unique Normal
+Form of $x$ is denoted $x \downarrow$.
+
+An object of an ARS is \emph{Weakly Normalizing} if some Rewrite
+sequence leads to a Normal Form and \emph{Strongly Normalizing} if
+every Rewrite sequence leads to a Normal Form.
+
+An ARS is \emph{Normalizing} if every object has at least one Normal
+Form, and likewise is Weakly or Strongly Normalizing if every object
+is Weakly or Strongly Normalizing.
+
 \emph{Untyped $\lambda$-calculus} (\S\ref{sec:untyped_lambda}) lacks
 the Normalization Property.
-
-\emph{Strong Normalization}
 
 Systems of \emph{Typed $\lambda$-calculus} (\S\ref{sec:typed_lambda})
 such as \emph{Simply-typed $\lambda$-calculus}
 (\S\ref{sec:simply_typed}) and \emph{Calculus of Constructions}
 (\S\ref{sec:coq}) are Strongly Normalizing.
 
-\emph{Weak Normalization}
+
+
+% --------------------------------------------------------------------
+\subsection{Joinability}\label{sec:rewrite_join}
+% --------------------------------------------------------------------
+
+For an ARS $(A, \rightarrow)$, two objects $x,y\in A$ are
+\emph{Joinable} when:
+\[
+    \exists z \in A :
+    x \stackrel{*}\rightarrow z \stackrel{*}\leftarrow y
+\]
+The \emph{Joinability Relation} can be defined as:
+\[
+    \stackrel{*}\rightarrow \circ \stackrel{*}\leftarrow
+\]
+where $\circ$ is Relation Composition
+(\S\ref{sec:relation_composition}). As a Binary Relation, Joinability
+is denoted $x \downarrow y$.
+
+An ARS has the \emph{Church-Rosser Property} if and only if:
+\[
+    \forall x,y \in A, x \stackrel{*}\leftrightarrow y
+    \implies x \downarrow y
+\]
 
 
 
 % --------------------------------------------------------------------
 \subsection{Confluence}\label{sec:rewrite_confluence}
 % --------------------------------------------------------------------
+
+An ARS $(A, \rightarrow)$ is \emph{Confluent} if and only if:
+\[
+    \forall w,x,y \in A,
+    x \stackrel{*}\leftarrow w \stackrel{*}\rightarrow y
+    \implies x \downarrow y
+\]
+
+If an ARS is Strongly Normalizing and Weakly Confluent, then it is
+Confluent.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Termination}\label{sec:rewrite_termination}
@@ -769,6 +816,18 @@ such as \emph{Simply-typed $\lambda$-calculus}
 % --------------------------------------------------------------------
 
 or \emph{String Rewriting System} (\emph{SRS})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Term Rewriting System}\label{sec:term_rewriting}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Graph Rewriting System}\label{sec:graph_rewriting}
+% --------------------------------------------------------------------
 
 
 
