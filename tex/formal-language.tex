@@ -692,10 +692,13 @@ Formal Grammars may be abstracted as \emph{Abstract Reduction Systems}
 (or \emph{Abstract Rewrite Systems}), abbreviated $ARS$. An ARS is
 simply
     \[(A,\rightarrow)\]
-where $A$ is a Set of objects and $\rightarrow \subseteq A \times A$
-is a Binary Relation on those objects called the \emph{Reduction
-  Relation}. This is equivalent to an \emph{Unlabelled State
-  Transition System} (\S\ref{sec:state_transition_system}).
+where $A$ is a Set of objects (Expressions) and $\rightarrow \subseteq
+A \times A$ is a Binary Relation on those objects called the
+\emph{Reduction Relation}. The object appearing in the right-hand side
+of a Reduction Relation is called a \emph{Reduct} (or
+\emph{Expansion}) of the left-hand side. This is equivalent to an
+\emph{Unlabelled State Transition System}
+(\S\ref{sec:state_transition_system}).
 
 An \emph{Indexed Abstract Reduction System} differentiates Reductions
 into Classes so that $\rightarrow$ is the Indexed Union of these
@@ -703,6 +706,10 @@ relations:
     \[(A, \rightarrow_1, \rightarrow_2, \cdots)\]
 This is identical to a \emph{Labeled Transition System}
 (\S\ref{sec:state_transition_system}).
+
+A \emph{Reduction Sequence}, $x \rightarrow y \rightarrow z$, is
+denoted $x \stackrel{*}\rightarrow z$, where $\stackrel{*}\rightarrow$
+is the Reflexive Transitive Closure of $\rightarrow$ (see below).
 
 Given the Reduction Relation, $\rightarrow$, for an ARS, the following
 Relations may be defined:
@@ -745,7 +752,10 @@ Form of $x$ is denoted $x \downarrow$.
 
 An object of an ARS is \emph{Weakly Normalizing} if some Rewrite
 sequence leads to a Normal Form and \emph{Strongly Normalizing} if
-every Rewrite sequence leads to a Normal Form.
+every Rewrite sequence leads to a Normal Form. If all objects of an
+ARS are Strongly Normalizing, then the system itself is called
+Strongly Normalizing (or \emph{Terminating} or \emph{Noetherian}) and
+has no infinite Reduction Sequences.
 
 An ARS is \emph{Normalizing} if every object has at least one Normal
 Form, and likewise is Weakly or Strongly Normalizing if every object
@@ -784,6 +794,17 @@ An ARS has the \emph{Church-Rosser Property} if and only if:
     \forall x,y \in A, x \stackrel{*}\leftrightarrow y
     \implies x \downarrow y
 \]
+Equivalently, the Church-Rosser Property can be expressed as:
+\[
+    \stackrel{*}\leftrightarrow \subseteq \downarrow
+\]
+The Church-Rosser Property is equivalent to \emph{Confluence}
+(\S\ref{sec:rewrite_confluence}).
+
+In a Church-Rosser system, an object can have zero or one Normal
+Forms. By the \emph{Church-Rosser Theorem}, $\lambda$-calculus
+(\S\ref{sec:untyped_lambda}) has this property, which means that
+evaluation ($beta$-reduction) can be carried out in any order.
 
 
 
@@ -791,25 +812,64 @@ An ARS has the \emph{Church-Rosser Property} if and only if:
 \subsection{Confluence}\label{sec:rewrite_confluence}
 % --------------------------------------------------------------------
 
-An ARS $(A, \rightarrow)$ is \emph{Confluent} if and only if:
+An ARS $(A, \rightarrow)$ is \emph{Confluent} (or \emph{Globally
+  Confluent}) if and only if:
 \[
     \forall w,x,y \in A,
     x \stackrel{*}\leftarrow w \stackrel{*}\rightarrow y
     \implies x \downarrow y
 \]
+That is, for any two diverging paths, they eventually meet at a common
+successor. An individual object can be said to be Confluent if it has
+this property.
 
-If an ARS is Strongly Normalizing and Weakly Confluent, then it is
-Confluent.
+\emph{Semi-confluent}:
+\[
+    \forall w,x,y \in A,
+    x \leftarrow w \stackrel{*}\rightarrow y
+    \implies x \downarrow y
+\]
+
+\emph{Weakly Confluent} (or \emph{Locally Confluent}):
+\[
+    \forall w,x,y \in A,
+    x \leftarrow w \rightarrow y \implies x \downarrow y
+\]
+
+\emph{Strongly Confluent}
+\[
+    \forall w,x,y \in A,
+    x \leftarrow w \rightarrow y \implies
+    \exists z \in A : x \stackrel{*}\rightarrow z \wedge
+    (y \rightarrow z \vee y = z)
+\]
+
+A Semi-confluent system is necessarily Confluent. The Church-Rosser
+Property, Confluence, and Semi-confluence are all equivalent
+properties for an ARS. If Confluence is restricted to single
+Reductions (rather than Reduction Sequences), the stronger property is
+called the \emph{Diamond Property}.
+
+A Reduction Relation $\rightarrow$ is Confluent if and only if
+$\stackrel{*}\rightarrow$ is Locally Confluent.
+
+By \emph{Newman's Lemma}, if an ARS is Locally Confluent and
+Terminating, then it is Confluent.
+
+Reduction of Polynomials Modulo an Ideal is a Confluent Rewrite System
+when working with a Grobner Basis (\S\ref{sec:ring_ideal}).
 
 
-
-% --------------------------------------------------------------------
-\subsection{Termination}\label{sec:rewrite_termination}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Convergence}\label{sec:rewrite_convergence}
 % --------------------------------------------------------------------
+
+An ARS that is both Confluent and Terminating is called
+\emph{Convergent} (or \emph{Canonical}) and every object has a unique
+Normal Form.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Semi-Thue System}\label{sec:semithue_system}
@@ -820,13 +880,13 @@ or \emph{String Rewriting System} (\emph{SRS})
 
 
 % --------------------------------------------------------------------
-\subsection{Term Rewriting System}\label{sec:term_rewriting}
-% --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
 \subsection{Graph Rewriting System}\label{sec:graph_rewriting}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Term Rewriting System}\label{sec:term_rewriting}
 % --------------------------------------------------------------------
 
 
