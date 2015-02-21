@@ -346,6 +346,9 @@ properties of CFGs may be termed \emph{Extrinsic} while Language
 properties are \emph{Intrinsic}. The question of equality between CFGs
 is Undecidable.
 
+A Context-free Language may also be called a \emph{Recursive
+  Language}.
+
 A popular notation for Context-free Grammars in Computer Science is
 \emph{Backus-Naur form} (\emph{BNF}).
 
@@ -405,10 +408,10 @@ The resulting Language is a \emph{Regular Language} with \emph{nested
 \subsection{Type-3: Regular Grammar} \label{sec:regular_language}
 % --------------------------------------------------------------------
 
-\emph{Regular Languages} are more restricted than Context-free
-Languages and satisfy a number of Closure Properties. For two Regular
-Languages, $K$ and $L$, the following operations result in a Language
-that is also Regular:
+\emph{Regular Languages} (or \emph{Token-level Languages}) are more
+restricted than Context-free Languages and satisfy a number of Closure
+Properties. For two Regular Languages, $K$ and $L$, the following
+operations result in a Language that is also Regular:
 \[
     K \cup L, \quad
     K \cap L, \quad
@@ -942,14 +945,12 @@ A Parser may be preceded by a \emph{Lexical Analyzer} which creates
 are referred to as Phrases. A Lexical Analyzer is a Parser itself and
 usually the \emph{Lexical Grammar} is a Regular Language (other
 methods are \emph{flags}, \emph{delimiters}, or \emph{dictionaries})
-and the Tokens are parsed as a Context-free
-(\S\ref{sec:context_free}) or Attribute Phrase
-(\S\ref{sec:attribute_grammar}) Syntax.
+and the Tokens are parsed as a Context-free (\S\ref{sec:context_free})
+or Attribute Phrase (\S\ref{sec:attribute_grammar}) Syntax.
 
 Prior to \emph{Scanning}, a \emph{Lexer} may perform its own
-Tokenization. The Scanning stage first recognizes the Token
-strings as \emph{Lexemes}, usually achieved by a Finite State
-Machine.
+Tokenization. The Scanning stage first recognizes the Token strings as
+\emph{Lexemes}, usually achieved by a Finite State Machine.
 
 Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
 values where needed-- this results in Tokens that are either
@@ -1410,6 +1411,26 @@ Metalanguage Expressions find use in:
 
 Note it is common to use Greek letters ($\Phi$, $\Psi$) for
 Metavariables and Roman characters otherwise for Object Variables.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Metasyntax}\label{sec:metasyntax}
+% --------------------------------------------------------------------
+
+The \emph{Metasyntax} describes the structure of valid Expressions in
+a Metalanguage. There are three types of Symbols distinguished in
+Metasyntax:
+\begin{description}
+    \item [Terminal Symbol] stand-alone Syntactic structure in the
+      Object Language
+    \item [Non-terminal Symbol] Syntactic category defining a Set of
+      valid Expression structures in an $n$-element Subset
+    \item [Metasymbol] Metalinguistic denotations
+\end{description}
+Depending on the Object Language, not all of these Categories may be
+used. For example, Metasyntax for Regular Languages
+(\S\ref{sec:regular_language}) does not have Non-terminals.
 
 
 
