@@ -367,11 +367,15 @@ due to the one-to-one-or-many correspondence between the Productions
 (\S\ref{sec:concrete_syntax}) may be constructed according to the
 \emph{Constituency Relation} of a Constituency Grammar.
 
+
+
 \subsubsection{Dependency Grammar}\label{sec:dependency_grammar}
 An alternative formulation to Phrase Structure Grammar is
 \emph{Dependency Grammar} in which the Verb is the root and there is a
 one-to-one correspondence between Symbols and nodes in the Syntax
 Structure (\S\ref{sec:concrete_syntax}).
+
+
 
 \subsubsection{Deterministic}\label{sec:deterministic_cfg}
 \emph{Deterministic Context-free Grammars} are derived from
@@ -381,6 +385,8 @@ Structure (\S\ref{sec:concrete_syntax}).
 Linear Time and a Parser can be automatically generated from
 the Grammar by a \emph{Parser
   Generator}(\S\ref{sec:parser_generator}).
+
+
 
 \subsubsection{Visibly Pushdown}
 \emph{Visibly Pushdown Grammars} are described by the 4-tuple
@@ -899,14 +905,14 @@ or \emph{String Rewriting System} (\emph{SRS})
 % ====================================================================
 
 \emph{Parsing} is the process of \emph{Syntactic Analysis}. A
-\emph{Parser} analyzes an Expression according to the rules of a
-Formal Grammar, generating a \emph{Data Structure} describing the
-Syntax of the input.
-% FIXME: ref data structure
+\emph{Parser} analyzes Expressions according to the rules of a Formal
+Grammar, generating a \emph{Data Structure} (\S\ref{sec:f_algebra})
+describing the Syntax of the input.
 
 The Data Structure produced by the Parser may be a \emph{Concrete
-  Syntax Tree} (\emph{Parse Tree}), an \emph{Abstract Syntax Tree}
-(\emph{Syntax Tree}), or other hierarchical structure.
+  Syntax Tree} (\emph{Parse Tree}: \S\ref{sec:concrete_syntax}), an
+\emph{Abstract Syntax Tree} (\emph{Syntax Tree}:
+\S\ref{sec:abstract_syntax}), or other hierarchical structure.
 
 
 
@@ -940,21 +946,31 @@ Syntax being Parsed.
 \subsection{Lexical Analysis}
 % --------------------------------------------------------------------
 
-A Parser may be preceded by a \emph{Lexical Analyzer} which creates
-\emph{Tokens} (Symbols) from an input Expression. Strings of Tokens
-are referred to as Phrases. A Lexical Analyzer is a Parser itself and
-usually the \emph{Lexical Grammar} is a Regular Language (other
-methods are \emph{flags}, \emph{delimiters}, or \emph{dictionaries})
-and the Tokens are parsed as a Context-free (\S\ref{sec:context_free})
-or Attribute Phrase (\S\ref{sec:attribute_grammar}) Syntax.
+A Parser may be preceded by a \emph{Lexical Analyzer} (also
+\emph{Lexer} or \emph{Tokenizer}) which creates \emph{Tokens} from
+input Expressions. A Token is a structure representing a \emph{Lexeme}
+(that is, a string forming a Syntactic unit) and associated
+\emph{Type} and \emph{Value} information.
 
-Prior to \emph{Scanning}, a \emph{Lexer} may perform its own
-Tokenization. The Scanning stage first recognizes the Token strings as
-\emph{Lexemes}, usually achieved by a Finite State Machine.
+A Lexical Analyzer is itself a Parser and usually the \emph{Lexical
+  Syntax} is defined by a Regular Language
+(\S\ref{sec:regular_language}). The Tokens are then analyzed by the
+Parser according to the rules of the \emph{Phrase Syntax}, which is
+usualy a Context-free Language (\S\ref{sec:context_free}). A Parser
+without a separate Lexer is called a \emph{Scannerless Parser}.
 
-Lexemes are resolved into Tokens by an \emph{Evaluator} which assigns
-values where needed-- this results in Tokens that are either
-\emph{Type-Value} pairs, or just \emph{Types}.
+Lexing may be divided into two stages: \emph{Scanning} and
+\emph{Evaluation}. Prior to Tokenization, a \emph{Scanner} (usually a
+Finite-state Machine \S\ref{sec:finite_automata}) may perform its own
+Lexical Analysis, producing Lexemes categorized by Token class. An
+\emph{Evaluator} then produces the final Tokens by either adding Value
+information to the Type to produce a Type-Value pair, or returning
+just the Type, or possibly also suppressing the Lexeme so the Parser
+doesn't see it (e.g. whitespace or comments).
+
+Token identification methods include \emph{Regular Expressions},
+\emph{Flags} (specific sequences), \emph{Delimiters} (specific
+separators), or explicit \emph{Dictionaries}.
 
 
 
