@@ -4,12 +4,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{Proof Theory} studies \emph{Deductive Arguments} in the form of
-\emph{Formal Proofs} (\S\ref{sec:formal_proof}).
-
-Proof by \emph{Syntactic Consequence} (a form of \emph{Logical
-  Consequence} (\S\ref{sec:logical_consequence})) is a \emph{Deductive
-  Inference} (\S\ref{sec:mathematical_inference}).
+\emph{Proof Theory} analyzes \emph{Deductive Arguments} in the form of
+\emph{Formal Proofs} (\S\ref{sec:formal_proof}). Deductive Arguments
+proceed by \emph{Syntactic Consequence}
+(\S\ref{sec:logical_consequence}) to make \emph{Deductive Inferences}
+(\S\ref{sec:mathematical_inference}).
 
 
 
@@ -17,30 +16,34 @@ Proof by \emph{Syntactic Consequence} (a form of \emph{Logical
 \section{Formal System}\label{sec:formal_system}
 % ====================================================================
 
-A \emph{Formal System} (or \emph{Logical Calculus}) is a Formal
-Language combined with a \emph{Deductive Apparatus}
-(\S\ref{sec:deductive_apparatus}) in order to \emph{Derive}
-\emph{Theorems} (\S\ref{sec:formal_proof}). Here, Expressions
-(strings) of Symbols are usually referred to as \emph{Forumulas}, and
-Expressions that belong to the Language are called ``\emph{Well-formed
-  Formulas}'' (\emph{WFF}).
+A \emph{Formal System} (also \emph{Logical Calculus} or \emph{System
+  of Inference}) is a Formal Language combined with a \emph{Deductive
+  Apparatus} (\S\ref{sec:deductive_apparatus}) in order to
+\emph{Derive} \emph{Theorems} (\S\ref{sec:formal_proof}). Here,
+Expressions (strings) of Symbols are usually referred to as
+\emph{Forumulas}, and Expressions that belong to the Language are
+called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
 
 A particular Formal System is required to be \emph{Consistent}; that
-is the ability to Derive only the affirmation or denial of a
-particular statement, not both. Another way of stating Consistency is
-that \emph{Falsity} is not provable starting with zero
-\emph{Assumptions}.
+is, it allows the Derivation of only the affirmation or the denial of
+a particular Fomula, not both. Another way of stating the Consistency
+requirement is that \emph{Falsity} is not provable starting with zero
+\emph{Assumptions} (that is, WFFs given as true without Proof).
 
-Symbols may be divided into \emph{Logical} and \emph{Non-Logical
-  Symbols}: Logical Symbols (e.g. $\forall$, $\vee$, $\rightarrow$,
-$\neg$, etc., and \emph{Variables} $x_0$, $x_1$, etc.) always have the
-same meaning while Non-Logical Symbols (e.g. \emph{Predicates}
-(Relations), \emph{Functions}, and individual \emph{Constants})
-(\S\ref{sec:logic_terminology}) only have meaning under
-\emph{Interpretation} (\S\ref{sec:interpretation}). The set of
-Non-Logical Symbols used in a particular discourse is called the
-\emph{Signature} of the discourse. The Signature may be defined as a
-triple:
+Symbols in a Formal System may be divided into \emph{Logical Symbols}
+and \emph{Non-Logical Symbols}.
+
+Logical Symbols always have the same meaning, e.g. Symbols such as
+$\forall$, $\vee$, $\rightarrow$, $\neg$, etc., and \emph{Variables}
+(\S\ref{sec:variable}) $x_0$, $x_1$, etc.
+
+Non-Logical Symbols only have meaning under an \emph{Interpretation}
+(\S\ref{sec:interpretation}), e.g. Symbols such as \emph{Predicates}
+(Relations \S\ref{sec:set_relation}), \emph{Functions}
+(\S\ref{sec:set_function}), and individual \emph{Constants} (Nullary
+Functions). The set of Non-Logical Symbols used in a particular
+discourse is called the \emph{Signature} of the discourse. The
+Signature may be defined as a triple:
 \[
     \sigma = (S_{func},S_{rel},ar)
 \]
@@ -58,13 +61,14 @@ where
 
 
 % --------------------------------------------------------------------
-\subsection{Deductive Apparatus} \label{sec:deductive_apparatus}
+\section{Deductive Apparatus} \label{sec:deductive_apparatus}
 % --------------------------------------------------------------------
 
 A \emph{Deductive Apparatus} (or \emph{Deductive System}) is a set of
-zero or more \emph{Axioms} and one or more \emph{Inference Rules}. A
-Deductive System gives a precise account of \emph{Logical Consequence}
-with respect to a Formal Language. A Formal System is termed
+zero or more \emph{Axioms} (\S\ref{sec:axiom}) and one or more
+\emph{Inference Rules} (\S\ref{sec:inference_rule}). A Deductive
+System gives a precise account of \emph{Logical Consequence} with
+respect to a Formal Language. A Formal System is termed
 \emph{Effective} (i.e. Recursively Definable) if the set of Axioms and
 the set of Inference Rules are Decidable or Semi-decidable. The notion
 of \emph{Theorems}, however, is not in general Effective
@@ -75,8 +79,9 @@ Deduction proper is the top-down, \emph{Reductive}
 and Reduces to the specific Theorem that is being proved.
 
 
+
 % --------------------------------------------------------------------
-\subsection{Axioms}\label{sec:axiomatization}
+\subsection{Axiom}\label{sec:axiom}
 % --------------------------------------------------------------------
 
 \emph{Axioms} are given as WFFs, the truth value of which are assumed
@@ -99,8 +104,18 @@ Axioms. A system without Schema is termed \emph{Finitely Axiomatized}.
 
 
 
+\subsubsection{Logical Axiom}\label{sec:logical_axiom}
+
+
+
+\subsubsection{Non-logical Axiom}\label{sec:nonlogical_axiom}
+
+\emph{Non-logical Axiom} (or \emph{Postulate})
+
+
+
 % --------------------------------------------------------------------
-\subsection{Inference Rules} \label{sec:inference_rules}
+\subsection{Inference Rule} \label{sec:inference_rule}
 % --------------------------------------------------------------------
 
 An \emph{Inference Rule} is a \emph{transformation rule}: it is the
@@ -135,6 +150,10 @@ Inference Rules may be identified as reduntant in two senses. An
 \emph{Theorems} in a Formal System when it is added. A \emph{Derivable
   Rule} is a case of an Admissible Rule that has been \emph{Derived}
 from existing rules.
+
+
+
+\subsubsection{Logical Harmony}\label{sec:logical_harmony}
 
 
 
@@ -187,7 +206,7 @@ differentiated from \emph{Material Consequence} ($\rightarrow$)
 should:
 
 \begin{enumerate}
-\item Rely on the Logical Form (\S\ref{sec:inference_rules}) of the
+\item Rely on the Logical Form (\S\ref{sec:inference_rule}) of the
   Expressions
 \item Be completely \emph{a priori}
 \item Be \emph{Modal} (\S\ref{sec:modal_logic}) (i.e. Necessary)
@@ -441,7 +460,7 @@ It states that when a Formula $A$ that can be Concluded can also be
 used as a Premise, it can be \emph{cut} out and the Derivations joined
 together. That is, wherever the Lemma $A$ occurs, it can be
 substituted for the Proof of $A$. This means that the Cut Rule is an
-Admissible Rule (\S\ref{sec:inference_rules}).
+Admissible Rule (\S\ref{sec:inference_rule}).
 
 The \emph{Cut-elimination Theorem} states that any Judgement with a
 Proof in Sequent Calculus that uses the Cut Rule may be expressed as a
