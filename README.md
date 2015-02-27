@@ -4,14 +4,14 @@
 
 ## Generating PDF
 
-From command line:
+With `pdflatex`:
 
     $ pdflatex formal-logic.tex
 
-With `latexmk`:
+With `latexmk` (recommended):
 
     $ latexmk -pdf formal-logic
 
-or use included utility script:
+or use included utility script (shortcut for the above):
 
     $ ./mk
