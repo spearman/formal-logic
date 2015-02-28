@@ -6,7 +6,7 @@
 
 \emph{Set Theory} is formulated within First-order Logic
 (\S\ref{sec:predicate_logic}) and as such the objects of Set Theory
-are Sets and Propositions. See \emph{Axiomatic Set Theory}
+are \emph{Sets} and Propositions. See \emph{Axiomatic Set Theory}
 (\S\ref{sec:axiomatic_set_theory}) for specific formulations of Set
 theory.
 
@@ -22,6 +22,8 @@ theory.
 
 \emph{Identity} \emph{Determinable} \emph{Determinate}
 
+
+
 % --------------------------------------------------------------------
 \subsection{Property}\label{sec:set_property}
 % --------------------------------------------------------------------
@@ -29,12 +31,27 @@ theory.
 \emph{Properties} (or \emph{Predicables}) are objects that can be
 Predicated (\S\ref{sec:predicate_logic}) of other objects. The
 Predicate or \emph{Indicator Function}
-(\S\ref{sec:indicator_function}) itself is not the Property, but
-the \emph{Extension} of that Property.
+(\S\ref{sec:indicator_function}) itself is not the Property, but the
+\emph{Extension} of that Property. An Extension of a Property is a
+\emph{Set}, but not every Property has an Extension as exemplified by
+\emph{Russell's Paradox}.
 
 \emph{Predicativity / Impredicativity} - Weyl
 
 \emph{Vicious Circle Principle}
+
+
+
+\subsubsection{Axiom of Extensionality}\label{sec:extensionality}
+\[
+    \forall S \forall T
+        [S = T \Leftrightarrow \forall R [ R \in S \Leftrightarrow R \in T ]]
+\]
+cf. \emph{Leibniz Law} (\S\ref{sec:equality}):
+\[
+    \forall S \forall T
+        [S = T \Leftrightarrow \forall R [ S \in R \Leftrightarrow T \in R ]]
+\]
 
 
 
@@ -796,7 +813,7 @@ A Set, $S$, is \emph{Closed} (has \emph{Closure}) under an Operation,
 $\cdot$, if for every Input from $S$, the Output of the Operation is
 also in $S$:
 \[
-    \forall x \in S : (x,y) \in \cdot \implies y \in S
+    \forall x \in S : (x,y) \in \cdot \Rightarrow y \in S
 \]
 
 \subsubsection{Transitive Closure}\label{sec:transitive_closure}
@@ -894,11 +911,11 @@ A \emph{Strict Order} is an Irreflexive Partial Order (e.g. $<$).
 There is a one-to-one correspondence between Strict and Non-strict
 Partial Orders via the \emph{Irreflexive Kernel}:
 \[
-    a \leq b \wedge a \neq b \implies a < b
+    a \leq b \wedge a \neq b \Rightarrow a < b
 \]
 and conversely the \emph{Reflexive Closure}:
 \[
-    a < b \vee a = b \implies a \leq b
+    a < b \vee a = b \Rightarrow a \leq b
 \]
 
 
@@ -942,7 +959,7 @@ The definition of Posets gives rise to the concept of a Monotonic
 Function (\S\ref{sec:monotonicity}), that is a Function, $f$,
 between Posets which is ordered in both the Domain and the Codomain:
 \[
-    x \leq y \implies f(x) \leq f(y)
+    x \leq y \Rightarrow f(x) \leq f(y)
 \]
 
 A Poset satisfies the \emph{Ascending Chain Condition} if every
@@ -967,12 +984,12 @@ non-empty Subset of $S$ has a Least Element.
 An \emph{Upper Set} (or \emph{Upset}) is a Subset, $U$, of a Poset,
 $P$, such that:
 \[
-    x \in U \wedge x \leq y \implies y \in U
+    x \in U \wedge x \leq y \Rightarrow y \in U
 \]
 The Dual notion of a \emph{Lower Set} (or \emph{Downset} or
 \emph{Decreasing Set}), $L$, is defined likewise:
 \[
-    y \in L \wedge x \leq y \implies x \in L
+    y \in L \wedge x \leq y \Rightarrow x \in L
 \]
 The Upper or Lower Set generated from a Subset $Y \subseteq X$ is
 denoted by $\uparrow Y$ or $\downarrow Y$, respectively.
