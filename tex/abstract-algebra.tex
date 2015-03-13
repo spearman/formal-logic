@@ -31,9 +31,9 @@ a Group (\S\ref{sec:group}) by not requiring Inverses.
 
 
 
-% ====================================================================
-\section{Monoid}\label{sec:monoid}
-% ====================================================================
+% --------------------------------------------------------------------
+\subsection{Monoid}\label{sec:monoid}
+% --------------------------------------------------------------------
 
 A \emph{Monoid} is a Semigroup with an Identity Element. The set of
 all Endomorphisms of an Object, $X$, in a Category, $C$,
@@ -42,17 +42,11 @@ all Endomorphisms of an Object, $X$, in a Category, $C$,
 \]
 defines a Monoid and is denoted $End_C(X)$.
 
-% --------------------------------------------------------------------
-\subsection{Free Monoid}\label{sec:free_monoid}
-% --------------------------------------------------------------------
+\subsubsection{Free Monoid}\label{sec:free_monoid}
 
-% --------------------------------------------------------------------
-\subsection{Trace Monoid}\label{sec:trace_monoid}
-% --------------------------------------------------------------------
+\subsubsection{Trace Monoid}\label{sec:trace_monoid}
 
-% --------------------------------------------------------------------
-\subsection{Syntactic Monoid}\label{sec:syntactic_monoid}
-% --------------------------------------------------------------------
+\subsubsection{Syntactic Monoid}\label{sec:syntactic_monoid}
 
 
 
@@ -65,9 +59,9 @@ defines a Monoid and is denoted $End_C(X)$.
 % --------------------------------------------------------------------
 
 A \emph{Group} is a Monoid (\S\ref{sec:monoid}) with an Inverse for
-every Morphism (every Morphism is an Isomorphism). That is, a Group is
-a Set $G$, and a Binary \emph{Group Operation}, $\cdot$, expressed as
-a Tuple, $(G,\cdot)$, satisfying four \emph{Group Axioms}:
+every element. That is, a Group is a Set $G$, and a Binary \emph{Group
+  Operation}, $\cdot$, expressed as a Tuple, $(G,\cdot)$, satisfying
+four \emph{Group Axioms}:
 \begin{enumerate}
     \item Closure: $\forall a,b \in G, a \cdot b \in G$
     \item Associativity: $\forall a,b,c \in G, (a \cdot b) \cdot c = a
@@ -79,9 +73,9 @@ a Tuple, $(G,\cdot)$, satisfying four \emph{Group Axioms}:
 \end{enumerate}
 
 A Group may be formed from a Set $X$ by adding all Automorphisms
-(\S\ref{sec:automorphism}) of $X$: $Aut(X)$. \emph{Cayley's
-  Theorem} states that every Group is Isomorphic to a Group of
-Permutations (\S\ref{sec:permutations}).
+(\S\ref{sec:automorphism}) of $X$: $Aut(X)$. \emph{Cayley's Theorem}
+states that every Group is Isomorphic to a Group of Permutations
+(\S\ref{sec:permutations}).
 
 A Group, $G$, within a Category, $\mathbf{C}$, may be viewed as a
 Subset of the Hom-set of an Object, $X$:
@@ -89,16 +83,64 @@ Subset of the Hom-set of an Object, $X$:
     G \subseteq Hom_{\mathbf{C}}(X,X)
 \]
 
-\emph{Trivial Group} ${1}$
 
-An \emph{Additive Group} refers to one where the Group Operation can
-be thought of as \emph{Addition} (usually Abelian).
 
+\subsubsection{Trivial Group}\label{sec:trivial_group}
+
+A \emph{Trivial Group} is a Group $\{e\}$ with only an Identity
+Element and no others. The Trivial Group may be denoted $0$ when
+Group Operation is thought of as addition or as $1$ when Group
+Operation is thought of as multiplication.
+
+Given any Group $G$ with Identity Element $e$, the Trivial Group
+$\{e\}$ is a Subgroup (\S\ref{sec:subgroup}) of $G$, called the
+\emph{Trivial Subgroup}:
+\[
+    \{e\} \leq G
+\]
+
+All Trivial Groups are Isomorphic to one another, so \emph{the}
+Trivial Group may be spoken of. The Trivial Group is the Zero Object
+in the Category of Groups.
+
+The Trivial Group is a Cyclic Group (\S\ref{sec:cyclic_group}) of
+Order 1 and may be denoted $Z_1$ in this context.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abelian Group}\label{sec:abelian_group}
+% --------------------------------------------------------------------
+
+\emph{Abelian Group} also \emph{Commutative Group}
+
+
+
+\subsubsection{Additive Group}\label{sec:additive_group}
+
+An \emph{Additive Group} refers to a Group where the Group Operation
+can be thought of as \emph{Addition} (usually Abelian).
 \[
     S_1 = \{e\}
 \] \[
     S_2 = \{e, \tau\}
 \]
+
+
+
+\subsubsection{Cyclic Group}\label{sec:cyclic_group}
+
+A Group $G$ is \emph{Cyclic} when there exists an element $g \in G$
+such that:
+\[
+    G = \langle g \rangle = \{ g^n | n \in \mathbb{Z} \}
+\]
+
+Every Infinite Cyclic Group is Isomorphic to the Additive Group
+$(\mathbb{Z}, +)$ of the Integers.
+
+Every Finite Cyclic Group of Order $n$ is Isomorphic to the Additive
+Group $\mathsf{Z}/n\mathsf{Z}$ of the Integers Modulo $n$.
 
 
 
@@ -121,6 +163,75 @@ An \emph{$inf$-groupoid} is an $inf$-category
 
 By the \emph{Homotopy Hypothesis}, $inf$-groupoids are \emph{Spaces}
 (\S\ref{sec:topological_space}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Subgroup}\label{sec:subgroup}
+% --------------------------------------------------------------------
+
+Given a Group $G$, a \emph{Subgroup} $H$ is a Subset of Group Elements
+that are still a Group under the Group Operation of $G$, denoted $H
+\leq G$. When a Subgroup $H$ is a Proper Subset of $G$, $H$ is a
+\emph{Proper Subgroup} of $G$, denoted $H \neq G$.
+
+All Groups have at least two Subgroups: the Trivial Group
+(\S\ref{sec:trivial_group}) and Group itself. A Group with exactly
+these two Subgroups and no others is a \emph{Simple Group}
+(\S\ref{sec:simple_group}).
+
+
+
+\subsubsection{Skeleton}
+
+\subsubsection{Coset}\label{sec:group_coset}
+
+The \emph{Coset} of a Subgroup (\S\ref{sec:subgroup}) $H$ in a Group $G$
+is defined as
+\begin{description}
+\item[Left Coset] $gH = {gh : h \in H}$
+\item[Right Coset] $Hg = {hg : h \in H}$
+\end{description}
+
+
+
+\subsubsection{Normal Subgroup}\label{sec:normal_subgroup}
+
+Given a Group $G$ and Subgroup $H$, $H$ is a \emph{Normal Subgroup} if
+and only if $\forall g \in G, gH = Hg$.
+
+
+
+\subsubsection{Cyclic Subgroup}\label{sec:cyclic_subgroup}
+
+\emph{Order}
+
+
+
+\subsubsection{Commutator Subgroup}\label{sec:commutator_subgroup}
+
+\emph{Commutator Subgroup}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finite Group}\label{sec:finite_group}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Simple Group}\label{sec:simple_group}
+% --------------------------------------------------------------------
+
+A Group $G$ is a \emph{Simple Group} if it has only the Trivial Group
+and the entire Group $G$ as Normal Subgroups.
+
+
+
+\subsubsection{Finite Simple Group}\label{sec:finite_simple_group}
+
+
+
+\subsubsection{Infinite Simple Group}\label{sec:infinite_simple_group}
 
 
 
@@ -161,16 +272,73 @@ written $H \triangleleft G$.
 
 
 % --------------------------------------------------------------------
-\subsection{Abelian Group}\label{sec:abelian_group}
+\subsection{Transformation Group}\label{sec:transformation_group}
 % --------------------------------------------------------------------
 
-\emph{Abelian Group} also \emph{Commutative Group}
+\emph{Permutation Group} (\S\ref{sec:permutation_group}) Set
+
+\emph{Matrix Group} (\S\ref{sec:matrix_group}) Vector Space
+
+\subsubsection{Permutation Group}\label{sec:permutation_group}
+
+Any Permutation Group on a Set $S$ with Cardinality $n$ is a Subgroup
+of the Symmetric Group $\mathrm{S}_n$ (\S\ref{sec:symmetric_group}).
+
+
+
+\subsubsection{Symmetric Group}\label{sec:symmetric_group}
+
+The Group of all Permutations of a Set $S$ is the \emph{Symmetric
+  Group} $Sym(S)$. The Symmetric Group on ${1, 2, ..., n} \in
+\mathbb{N}$ is denoted $\mathrm{S}_n$.
+
+\paragraph{Cayley's Theorem}\label{sec:cayleys_theorem}
+
+
+
+\subsubsection{Symmetry Group}\label{sec:symmetry_group}
+
+\paragraph{Dihedral Group}\label{sec:dihedral_group}
+
+
+
+\subsubsection{Alternating Group}\label{sec:alternating_group}
+
+\subsubsection{Matrix Group}\label{sec:matrix_group}
+
+\subsubsection{Lie Group}\label{sec:lie_group}
 
 
 
 % --------------------------------------------------------------------
-\section{Presentation}\label{sec:presentation}
+\subsection{Periodic Group}\label{sec:periodic_group}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Solvable Group}\label{sec:solvable_group}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Conjugacy Class}\label{sec:conjugacy_class}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Quotient Group}\label{sec:quotient_group}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Free Group}\label{sec:free_group}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Abstract Group}\label{sec:abstract_group}
+% --------------------------------------------------------------------
+
+\subsubsection{Presentation}\label{sec:presentation}
+
+\emph{Generators}
+
+\emph{Relations}
 
 (\S\ref{sec:semithue_system})
 
@@ -182,8 +350,20 @@ written $H \triangleleft G$.
 
 
 
+\subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
+
+
+
 % --------------------------------------------------------------------
-\subsection{Group Representations}\label{sec:group_representation}
+\subsection{Topological Group}\label{sec:topological_group}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Algebraic Group}\label{sec:algebraic_group}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Representation Theory}\label{sec:representation_theory}
 % --------------------------------------------------------------------
 
 Given a Functor $R$ from a Group $G$ to a general Category
@@ -193,72 +373,6 @@ $\mathbf{C}$
 \]
 Such a Functor $R$ is termed a \emph{Representation} of $G$ in
 $\mathbf{C}$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Subgroup}\label{sec:subgroup}
-% --------------------------------------------------------------------
-
-A \emph{Subgroup} is a Subset of Group Elements that are still a Group
-under the Group Operation.
-
-Given a Group $G$ and Subgroup $H$, $H$ is a \emph{Normal Subgroup} if
-and only if $\forall g \in G, gH = Hg$.
-
-\emph{Commutator Subgroup}
-
-\subsubsection{Skeleton}
-
-\subsubsection{Coset}\label{sec:group_coset}
-
-The \emph{Coset} of a Subgroup (\S\ref{sec:subgroup}) $H$ in a Group $G$
-is defined as
-\begin{description}
-\item[Left Coset] $gH = {gh : h \in H}$
-\item[Right Coset] $Hg = {hg : h \in H}$
-\end{description}
-
-
-\subsubsection{Cyclic Subgroup}\label{sec:cyclic_subgroup}
-
-\emph{Order}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Permutation Group}\label{sec:permutation_group}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Symmetric Group}\label{sec:symmetric_group}
-% --------------------------------------------------------------------
-
-The Group of all Permutations of a Set $S$ is the \emph{Symmetric
-  Group} $Sym(S)$. The Symmetric Group on ${1, 2, ..., n} \in
-\mathbb{N}$ is denoted $\mathrm{S}_n$.
-
-\subsubsection{Cayley's Theorem}\label{sec:cayleys_theorem}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Dihedral Group}\label{sec:dihedral_group}
-% --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Quotient Group}\label{sec:quotient_group}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Conjugacy Class}\label{sec:conjugacy_class}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Abstract Groups}\label{sec:abstract_groups}
-% --------------------------------------------------------------------
 
 
 
