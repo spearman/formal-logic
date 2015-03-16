@@ -4,14 +4,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{Proof Theory} is the study of \emph{Deductive Logic}
-(\emph{Top-down Logic} or \emph{Deductive Reasoning}) by means of
-representing \emph{Deductive Arguments} as \emph{Formal Proofs}
-(\S\ref{sec:formal_proof}).
-
-Formal Proofs proceed by \emph{Syntactic Consequence}
-(\S\ref{sec:syntactic_consequence}) to make \emph{Deductive Inferences}
-(\S\ref{sec:deductive_inference}).
+\emph{Proof Theory} is the study of \emph{Syntactic Consequence}
+(\S\ref{sec:syntactic_consequence}) by means of representing
+\emph{Deductive Arguments} (\S\ref{sec:logical_argument}) as
+\emph{Formal Proofs} (\S\ref{sec:formal_proof}).
 
 
 
@@ -20,40 +16,79 @@ Formal Proofs proceed by \emph{Syntactic Consequence}
 % ====================================================================
 
 A \emph{Formal System} (also \emph{Logical Calculus} or \emph{System
-  of Inference}) is a Formal Language combined with a \emph{Deductive
-  Apparatus} (\S\ref{sec:deductive_apparatus}) in order to
-\emph{Derive} \emph{Theorems} (\S\ref{sec:formal_proof}). Here,
-Expressions (strings) of Symbols are usually referred to as
-\emph{Forumulas}, and Expressions that belong to the Language are
-called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
-
-A particular Formal System is required to be \emph{Consistent}; that
-is, it allows the Derivation of only the affirmation or the denial of
-a particular Fomula, not both. Another way of stating the Consistency
-requirement is that \emph{Falsity} is not provable starting with zero
-\emph{Assumptions} (that is, WFFs given as true without Proof).
-
-\emph{Stratification}
+  of Inference}) is a Formal Language (\S\ref{sec:formal_language})
+combined with a \emph{Deductive Apparatus}
+(\S\ref{sec:deductive_apparatus}) in order to Derive \emph{Theorems}.
+Here, Expressions (strings) of Symbols are usually referred to as
+\emph{Forumulas}, and Expressions that belong to the underlying
+Language are called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
 
 
 
-% --------------------------------------------------------------------
+% ====================================================================
 \section{Deductive Apparatus} \label{sec:deductive_apparatus}
+% ====================================================================
+
+A \emph{Deductive Apparatus} (or \emph{Deductive System}) is a Set of
+zero or more WFFs called \emph{Axioms} (\S\ref{sec:axiom}) and one or
+more Functions on WFFs called \emph{Inference Rules}
+(\S\ref{sec:inference_rule}) that can be used to Derive
+\emph{Theorems} (\S\ref{sec:formal_proof}).
+
+Deduction (\S\ref{sec:deductive_inference}) proper is the top-down,
+\emph{Reductive} (\S\ref{sec:abstract_rewrite}) process that starts
+with general Axioms and Reduces to the specific Theorem that is being
+proved.
+
+A Deductive System gives a precise account of \emph{Syntactic
+  Consequence} (\S\ref{sec:syntactic_consequence}) with respect to a
+Formal Language. A Formal System is termed \emph{Effective} (i.e.
+Recursively Definable) if the Set of Axioms and the Set of Inference
+Rules are Decidable or Semi-decidable (\S\ref{sec:decidable_set}). The
+notion of \emph{Theorem}, however, is not in general Effective.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Syntactic Consequence}\label{sec:syntactic_consequence}
 % --------------------------------------------------------------------
 
-A \emph{Deductive Apparatus} (or \emph{Deductive System}) is a set of
-zero or more \emph{Axioms} (\S\ref{sec:axiom}) and one or more
-\emph{Inference Rules} (\S\ref{sec:inference_rule}). A Deductive
-System gives a precise account of \emph{Logical Consequence} with
-respect to a Formal Language. A Formal System is termed
-\emph{Effective} (i.e. Recursively Definable) if the set of Axioms and
-the set of Inference Rules are Decidable or Semi-decidable. The notion
-of \emph{Theorems}, however, is not in general Effective
-(\S\ref{sec:formal_proof}).
+For a Formal System $\mathcal{S}$, a WFF $A$ is a \emph{Syntactic
+  Consequence} of a possibly empty Set of Formulas $\Gamma$ if there
+is a Formal Proof (\S\ref{sec:formal_proof}) of $A$ from $\Gamma$ in
+$\mathcal{S}$:
+\[
+    \Gamma \vdash_{\mathcal{S}} A
+\]
+where $\vdash_{\mathcal{S}}$ is the \emph{Syntactic Consequence
+  Relation} on $\mathcal{S}$.
 
-Deduction proper is the top-down, \emph{Reductive}
-(\S\ref{sec:abstract_rewrite}) process that starts with general Axioms
-and Reduces to the specific Theorem that is being proved.
+
+
+% --------------------------------------------------------------------
+\subsection{Inference Rule} \label{sec:inference_rule}
+% --------------------------------------------------------------------
+
+An \emph{Inference Rule} is a Function which takes an input Set of
+WFFs called \emph{Premises} and returns an output Set of WFFs called
+\emph{Conclusions}. An alternative formulation for Inference Rules is
+as a \emph{Deducibility Relation}, $\vdash$, that holds between zero
+or more Premises and one or more Conclusions.
+
+Taken individually, both Premises and Conclusions are
+\emph{Propositions}. The Conclusion relies on the truth of the
+Premises; if the Premises are left unsatisfied, then the Derivation is
+\emph{Hypothetical} and the Premises \emph{Hypotheses}. It can be said
+that the Conclusion of a Deducibility Relation is reached by
+\emph{Syntactic Consequence}, a form of \emph{Logical
+  Consequence}. For more information, see section on \emph{Formal
+  Proof} (\S\ref{sec:formal_proof}).
+
+Inference Rules may be identified as reduntant in two senses. An
+\emph{Admissible Rule} is one which does not change the set of
+\emph{Theorems} in a Formal System when it is added. A \emph{Derivable
+  Rule} is a case of an Admissible Rule that has been \emph{Derived}
+from existing rules.
 
 
 
@@ -62,10 +97,15 @@ and Reduces to the specific Theorem that is being proved.
 % --------------------------------------------------------------------
 
 \emph{Axioms} are given as WFFs, the truth value of which are assumed
-for the purpose of performing \emph{analysis} within a System of
-Logic. An Axiom is properly an \emph{Inference Rule} with no
-\emph{Premises}, only a given \emph{Conclusion}; that is a
-\emph{Logical Assertion}(\S\ref{sec:sequent_notation}).
+for the purpose of performing analysis within a Formal System. An
+Axiom is properly an \emph{Inference Rule} with no Premises,
+only a given \emph{Conclusion}; that is a \emph{Logical
+  Assertion}(\S\ref{sec:sequent_notation}).
+
+Axioms are special cases of Inference Rules which have no Premises,
+only a universally Valid Conclusion. Axioms may be further
+differentiated from Rules by saying that Rules are statements
+\emph{about} the system, Axioms are statements \emph{in} the system.
 
 Axioms may be divided into two kinds: \emph{Logical Axioms} of a
 tautological sort, and \emph{Non-logical Axioms}, hereafter referred
@@ -88,45 +128,6 @@ Axioms. A system without Schema is termed \emph{Finitely Axiomatized}.
 \subsubsection{Non-logical Axiom}\label{sec:nonlogical_axiom}
 
 \emph{Non-logical Axiom} (or \emph{Postulate})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Inference Rule} \label{sec:inference_rule}
-% --------------------------------------------------------------------
-
-An \emph{Inference Rule} is a \emph{transformation rule}: it is the
-\emph{Logical Form} of the \emph{Deduction} of a \emph{Conclusion}
-(also called an \emph{Idiomatic}) based on \emph{Premises}-- Premises
-and Conclusions being WFF in the Formal Language of the system. Axioms
-are special cases of Inference Rules which have no Premises, only a
-universally held Conclusion. Axioms may be further differentiated from
-Rules by saying that Rules are statements \emph{about} the system,
-Axioms are statements \emph{in} the system.
-
-Inference Rules may be viewed as functions that take Premises and
-return a Conclusion. An alternative formulation for Inference Rules is
-as a \emph{Deducibility Relation}, $\vdash$, that holds between zero
-or more Premises and a Conclusion. A Formal Argument is \emph{Valid}
-if and only if the Conclusion is Entailed by the Premises. Inference
-Rules, like Axioms, may be Schematic if they contain Metavariables,
-and such an Argument is called an \emph{Argument Form}. Argument Forms
-are Valid if and only if every Argument is Valid.
-
-Taken individually, both Premises and Conclusions are
-\emph{Propositions}. The Conclusion relies on the truth of the
-Premises; if the Premises are left unsatisfied, then the Derivation is
-\emph{Hypothetical} and the Premises \emph{Hypotheses}. It can be said
-that the Conclusion of a Deducibility Relation is reached by
-\emph{Syntactic Consequence}, a form of \emph{Logical
-  Consequence}. For more information, see section on \emph{Formal
-  Proof} (\S\ref{sec:formal_proof}).
-
-Inference Rules may be identified as reduntant in two senses. An
-\emph{Admissible Rule} is one which does not change the set of
-\emph{Theorems} in a Formal System when it is added. A \emph{Derivable
-  Rule} is a case of an Admissible Rule that has been \emph{Derived}
-from existing rules.
 
 
 
@@ -168,12 +169,6 @@ Analytic Tableau (\S\ref{sec:tableau_calculus}). A \emph{Synthetic
 and reasoning up to the desired Proof. A \emph{Problematic Analytic
   Proof} is constructed from given conditions that are to be
 satisfied.
-
-
-
-\subsubsection{Syntactic Consequence}\label{sec:syntactic_consequence}
-
-\emph{Entailment}
 
 
 
