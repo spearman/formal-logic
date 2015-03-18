@@ -18,10 +18,11 @@
 A \emph{Formal System} (also \emph{Logical Calculus} or \emph{System
   of Inference}) is a Formal Language (\S\ref{sec:formal_language})
 combined with a \emph{Deductive Apparatus}
-(\S\ref{sec:deductive_apparatus}) in order to Derive \emph{Theorems}.
-Here, Expressions (strings) of Symbols are usually referred to as
-\emph{Forumulas}, and Expressions that belong to the underlying
-Language are called ``\emph{Well-formed Formulas}'' (\emph{WFF}).
+(\S\ref{sec:deductive_apparatus}) in order to Derive \emph{Theorems}
+(\S\ref{sec:formal_proof}). Expressions (strings) of Symbols are
+usually referred to as \emph{Forumulas}, and Expressions that belong
+to the underlying Language are called ``\emph{Well-formed Formulas}''
+(\emph{WFF}).
 
 A Formula is \emph{Valid} (\S\ref{sec:validity}) if it is True under
 very \emph{Interpretation} (\S\ref{sec:interpretation}).
@@ -41,7 +42,7 @@ more Functions on WFFs called \emph{Inference Rules}
 Deduction (\S\ref{sec:deductive_inference}) proper is the top-down,
 \emph{Reductive} (\S\ref{sec:abstract_rewrite}) process that starts
 with general Axioms and Reduces to the specific Theorem that is being
-proved.
+proved by repeated application of Inference Rules.
 
 A Deductive System gives a precise account of \emph{Syntactic
   Consequence} (\S\ref{sec:syntactic_consequence}) with respect to a
@@ -136,35 +137,23 @@ Schema is termed \emph{Finitely Axiomatized}.
 % --------------------------------------------------------------------
 
 A \emph{Formal Proof} (or \emph{Derivation}) is a finite sequence of
-Well-formed Formulas of a Formal System that are either Axioms of a
-Logical System or follow from the preceding Formulas by an Inference
-Rule. The concluding Formula in the sequence is a \emph{Theorem}. A
-Theorem used in the course of Deriving a further Theorem is called a
-\emph{Lemma}.
+Well-formed Formulas of a Formal System that are either Axioms or
+follow from the preceding Formulas by an Inference Rule. The
+concluding Formula in the sequence is a \emph{Theorem}. A Theorem is a
+\emph{Syntactic Consequence} (\S\ref{sec:syntactic_consequence}) of
+the preceding WFFs in the Proof. A Theorem used in the course of
+Deriving a further Theorem is called a \emph{Lemma}.
 
-For a Formal System, $\mathcal{S}$, of a set of Formulas, $\Gamma$,
-there is a \emph{Syntactic Consequence}, $A$, if there is a
-Formal Proof of $A$ from the set $\Gamma$:
+For a Set of WFFs, $\Gamma$, in a Formal System, $\mathcal{S}$, there
+is a Syntactic Consequence, $A$, if there is a Formal Proof of $A$
+from the Set $\Gamma$:
 \[
     \Gamma \vdash_{\mathcal{S}} A
 \]
-It will suffice for now to say that Syntactic Consequence as
-differentiated from \emph{Material Consequence} ($\rightarrow$)
-should:
 
-\begin{enumerate}
-\item Rely on the Logical Form (\S\ref{sec:inference_rule}) of the
-  Expressions
-\item Be completely \emph{a priori}
-\item Be \emph{Modal} (\S\ref{sec:modal_logic}) (i.e. Necessary)
-\end{enumerate}
-Another form of Logical Consequence, \emph{Semantic Consequence}
-(\S\ref{sec:semantic_consequence}) will be described under
-\emph{Model Theory} (Part \ref{sec:model_theory}).
-
-An \emph{Theoretic Analytic Proof} begins with an assumption and
+A \emph{Theoretic Analytic Proof} begins with an assumption and
 proceeds to an accepted truth (an Axiom, or contradiction as in
-Analytic Tableau (\S\ref{sec:tableau_calculus}). A \emph{Synthetic
+\S\ref{sec:tableau_calculus} Analytic Tableau. A \emph{Synthetic
   Proof} is the reverse of this process; beginning with known truths
 and reasoning up to the desired Proof. A \emph{Problematic Analytic
   Proof} is constructed from given conditions that are to be
@@ -172,17 +161,74 @@ satisfied.
 
 
 
-\subsubsection{Sequent Notation}\label{sec:sequent_notation}
+% --------------------------------------------------------------------
+\subsection{Formal Theory}\label{sec:formal_theory}
+% --------------------------------------------------------------------
 
-A \emph{Sequent} is a specific kind of Judgement of the form
-\[\Gamma \vdash \Sigma \]
+A \emph{Formal Theory} is a Set of Sentences in some Formal Language
+(Part \ref{sec:formal_language}). In a Deductive System, a Theory has
+certain Sentences which are Axioms, and any Sentences which are a
+Logical Consequence are also Sentences of that Theory. That is, a
+Theory $\mathcal{T}$ which is an \emph{Inductive Class}. The Sentences
+which are considered for a particular Theory are drawn from a
+\emph{Conceptual Class} of \emph{Elementary Statements}. A Formal
+Theory is said to be \emph{Complete} if for every Sentence in the
+Language of that Theory, the Theory contains either that Sentence or
+its Negation. Such a Set of Sentences is a \emph{Maximal Consistent
+  Set}.
+
+\emph{Synthetic Theory}
+
+A Formal Theory is \emph{Categorical} if it has just one \emph{Model}
+(Part \ref{sec:model_theory}) up to Isomorphism.
+
+%FIXME connections with stability theory
+
+
+
+\subsubsection{Duality Principle}\label{sec:duality_principle}
+
+
+
+% ====================================================================
+\section{Metatheory} \label{sec:metatheory}
+% ====================================================================
+
+Proof Theory is itself \emph{Metamathematical} in that it studies the
+form of Logical Consequence within Logical Systems, and therefore is
+expressed as \emph{Metatheory}.
+
+
+% --------------------------------------------------------------------
+\subsection{Judgement}\label{sec:judgement}
+% --------------------------------------------------------------------
+
+A \emph{Judgement} is an inductively definable assertion in the
+Metatheory of a Logical System. That is, one that includes
+Extra-logical Symbols, namely that of Logical Consequence, $\vdash$,
+and commas used in \emph{Sequents}
+(\S\ref{sec:sequent_notation}). In this way, Axioms are Judgements,
+and a \emph{Formal Proof} expresses a Judgement with the Premises
+being a sequence of Judgements and the Conclusion also a Judgement.
+
+
+
+% ====================================================================
+\section{Sequent Notation}\label{sec:sequent_notation}
+% ====================================================================
+
+A \emph{Sequent} is a specific kind of Judgement
+(\S\ref{sec:judgement}) of the form
+\[
+    \Gamma \vdash \Sigma
+\]
 where the \emph{Antecedent}, $\Gamma$, is a Conjunctive sequence of
-Formula, and the \emph{Succedent}, $\Sigma$, is a Disjunctive sequence
-of Formulas. Together, Antecedents and Succedents are
+Formulas, and the \emph{Succedent}, $\Sigma$, is a Disjunctive
+sequence of Formulas. Together, Antecedents and Succedents are
 \emph{Cedents}. The Extra-logical Operators, $\vdash$, and $,$
 (comma), are called \emph{Structural Operators} and Rules which change
 only Structural Operators are \emph{Structural Rules} (as opposed to
-\emph{Logical Rules}. A sequence of Cedents may be called a
+\emph{Logical Rules}). A sequence of Cedents may be called a
 \emph{Context}, but \emph{the} Context for a specific Judgement is
 usually meant to be the Antecedent.
 
@@ -225,53 +271,26 @@ the Conclusion of a Valid Proof.
 
 
 
-\subsubsection{Constructive Proof}\label{sec:constructive_proof}
+% --------------------------------------------------------------------
+\subsection{Constructive Proof}\label{sec:constructive_proof}
+% --------------------------------------------------------------------
 
 \emph{Existence Theorem}
 
 
 
-% --------------------------------------------------------------------
-\subsection{Formal Theory}\label{sec:formal_theory}
-% --------------------------------------------------------------------
-
-A \emph{Formal Theory} is a Set of Sentences in some Formal Language
-(Part \ref{sec:formal_language}). In a Deductive System, a Theory has
-certain Sentences which are Axioms, and any Sentences which are a
-Logical Consequence are also Sentences of that Theory. That is, a
-Theory $\mathcal{T}$ which is an \emph{Inductive Class}. The Sentences
-which are considered for a particular Theory are drawn from a
-\emph{Conceptual Class} of \emph{Elementary Statements}. A Formal
-Theory is said to be \emph{Complete} if for every Sentence in the
-Language of that Theory, the Theory contains either that Sentence or
-its Negation. Such a Set of Sentences is a \emph{Maximal Consistent
-  Set}.
-
-\emph{Synthetic Theory}
-
-A Formal Theory is \emph{Categorical} if it has just one \emph{Model}
-(Part \ref{sec:model_theory}) up to Isomorphism.
-
-%FIXME connections with stability theory
-
-
-
-\subsubsection{Duality Principle}\label{sec:duality_principle}
-
-
-
 % ====================================================================
-\section{Proof Calculi}
+\section{Proof Calculus}\label{sec:proof_calculus}
 % ====================================================================
 
-\emph{Proof Calculi} are families of Formal Systems
-(\S\ref{sec:formal_system}), specifying templates for forms of
-\emph{Formal Inference} (Axioms and Inference Rules).
+A \emph{Proof Calculus} is a family of Formal Systems
+(\S\ref{sec:formal_system}) that use a common style of Formal
+Inference for Inference Rules.
 
 
 
 % --------------------------------------------------------------------
-\subsection{Axiomatic Systems}
+\subsection{Axiomatic System} \label{sec:axiomatic_system}
 % --------------------------------------------------------------------
 
 \subsubsection{Hilbert Systems} \label{sec:hilbert_systems}
@@ -287,6 +306,8 @@ A Hilbert System is differentiated from Systems of \emph{Natural
  Deduction} by not having any Rules that change the Context of a
 Formula.
 
+
+
 % --------------------------------------------------------------------
 \subsection{Structural Proof Theory}
 % --------------------------------------------------------------------
@@ -295,12 +316,16 @@ Formula.
 \emph{Analytic Proof}; that is Proofs that are \emph{Cut-free} (they
 do not use the \emph{Cut Rule}) or in \emph{Normal Form}.
 
-\subsubsection{Natural Deduction}\label{sec:natural_deduction} \hfill
-\\
-Systems of \emph{Natural Deduction}\cite{prawitz65}, contrasted with
-Hilbert Systems, include many Inference Rules but few or no Axioms. A
-Natural Deduction System allows Judgements with multiple Antecedents
-and a single Succedent
+
+
+\subsubsection{Natural Deduction}\label{sec:natural_deduction}
+
+\emph{Natural Deduction}\cite{prawitz65} provides a generalization of
+Formal Proofs.
+
+Systems of Natural Deduction, contrasted with Hilbert Systems, include
+many Inference Rules but few or no Axioms. A Natural Deduction System
+allows Judgements with multiple Antecedents and a single Succedent:
 \[
     A_1,\ldots,A_n \vdash B
 \]
@@ -544,26 +569,6 @@ only Literals that unify with a Literal already on the branch
 \section{Realizability} \label{sec:realizability}
 % ====================================================================
 
-
-
 % ====================================================================
 \section{Reverse Mathematics} \label{sec:reverse_mathematics}
 % ====================================================================
-
-
-
-% ====================================================================
-\section{Metatheory} \label{sec:metatheory}
-% ====================================================================
-
-Proof Theory is itself \emph{Metamathematical} in that it studies the
-form of Logical Consequence within Logical Systems, and therefore is
-expressed as \emph{Metatheory}.
-
-A \emph{Judgement} is an inductively definable assertion in the
-Metatheory of a Logical System. That is, one that includes
-Extra-logical Symbols, namely that of Logical Consequence, $\vdash$,
-and commas used in \emph{Sequents}
-(\S\ref{sec:sequent_notation}). In this way, Axioms are Judgements,
-and a \emph{Formal Proof} expresses a Judgement with the Premises
-being a sequence of Judgements and the Conclusion also a Judgement.
