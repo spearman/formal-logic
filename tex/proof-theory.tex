@@ -120,6 +120,9 @@ System. For a Language with infinitely many WFFs, an Axiom Schema
 describes a countably infinite number of Axioms. A System without
 Schema is termed \emph{Finitely Axiomatized}.
 
+Systems with a large number of Axioms and few other Inference Rules
+are called \emph{Axiomatic Systems} (\S\ref{sec:axiomatic_system}).
+
 
 
 \subsubsection{Logical Axiom}\label{sec:logical_axiom}
@@ -138,11 +141,7 @@ Schema is termed \emph{Finitely Axiomatized}.
 
 A \emph{Formal Proof} (or \emph{Derivation}) is a finite sequence of
 Well-formed Formulas of a Formal System that are either Axioms or
-follow from the preceding Formulas by an Inference Rule. The
-concluding Formula in the sequence is a \emph{Theorem}. A Theorem is a
-\emph{Syntactic Consequence} (\S\ref{sec:syntactic_consequence}) of
-the preceding WFFs in the Proof. A Theorem used in the course of
-Deriving a further Theorem is called a \emph{Lemma}.
+follow from the preceding Formulas by an Inference Rule.
 
 For a Set of WFFs, $\Gamma$, in a Formal System, $\mathcal{S}$, there
 is a Syntactic Consequence, $A$, if there is a Formal Proof of $A$
@@ -151,40 +150,107 @@ from the Set $\Gamma$:
     \Gamma \vdash_{\mathcal{S}} A
 \]
 
+
+
+\subsubsection{Theorem} \label{sec:theorem}
+
+The concluding Formula in the sequence is a \emph{Theorem}. A Theorem
+is a \emph{Syntactic Consequence} (\S\ref{sec:syntactic_consequence})
+of the preceding WFFs in the Proof. A Theorem used in the course of
+Deriving a further Theorem is called a \emph{Lemma}.
+
+
+
+\subsubsection{Analytic Proof} \label{sec:analytic_proof}
+
 A \emph{Theoretic Analytic Proof} begins with an assumption and
 proceeds to an accepted truth (an Axiom, or contradiction as in
-\S\ref{sec:tableau_calculus} Analytic Tableau. A \emph{Synthetic
-  Proof} is the reverse of this process; beginning with known truths
-and reasoning up to the desired Proof. A \emph{Problematic Analytic
-  Proof} is constructed from given conditions that are to be
-satisfied.
+\S\ref{sec:tableau_calculus} Analytic Tableau.
+
+
+
+\subsubsection{Synthetic Proof} \label{sec:synthetic_proof}
+
+A \emph{Synthetic Proof} is the reverse of this process; beginning
+with known truths and reasoning up to the desired Proof. A
+\emph{Problematic Analytic Proof} is constructed from given conditions
+that are to be satisfied.
 
 
 
 % --------------------------------------------------------------------
-\subsection{Formal Theory}\label{sec:formal_theory}
+\subsection{Deductive Theory}\label{sec:deductive_theory}
 % --------------------------------------------------------------------
 
-A \emph{Formal Theory} is a Set of Sentences in some Formal Language
-(Part \ref{sec:formal_language}). In a Deductive System, a Theory has
-certain Sentences which are Axioms, and any Sentences which are a
-Logical Consequence are also Sentences of that Theory. That is, a
-Theory $\mathcal{T}$ which is an \emph{Inductive Class}. The Sentences
-which are considered for a particular Theory are drawn from a
-\emph{Conceptual Class} of \emph{Elementary Statements}. A Formal
-Theory is said to be \emph{Complete} if for every Sentence in the
-Language of that Theory, the Theory contains either that Sentence or
-its Negation. Such a Set of Sentences is a \emph{Maximal Consistent
-  Set}.
+In the context of a Deductive System, $\mathcal{S}$, a \emph{Formal
+  Theory} (\S\ref{sec:formal_theory}), $T$, is a \emph{Deductive
+  Theory} (also an \emph{Inductive Class}) that consists of all the
+Theorems that are Derivable in $\mathcal{S}$, including any Axioms.
 
-\emph{Synthetic Theory}
+A Theory $S$ is a \emph{Subtheory} of a Theory $T$ if $S \subseteq T$.
+$T$ is then a \emph{Supertheory} (or \emph{Extension}) of $S$.
 
-A Formal Theory is \emph{Categorical} if it has just one \emph{Model}
-(Part \ref{sec:model_theory}) up to Isomorphism.
+
+
+\subsubsection{Consistent}\label{sec:consistent_theory}
+
+A Theory is \emph{Absolutely Consistent} (also \emph{Coherent} or
+\emph{Non-trivial}) if not every WFF in the underlying Language is a
+Theorem.
+
+A Non-trivial Theory is \emph{Consistent} if it satisfies the
+\emph{Principle of Explosion}, that is, Proof of a contradiction
+Implies Proof of all other WFFs. Therefore, a Consistent Theory must
+be free of contradictions.
+
+See also \emph{Paraconsistency} (\S\ref{sec:paraconsistent_inference}).
+
+
+
+\subsubsection{Complete}\label{sec:complete_theory}
+
+A Consistent Theory is said to be \emph{Complete} if for every
+Sentence in the Language of that Theory, the Theory contains either
+that Sentence or its Negation. Such a Set of Sentences is a
+\emph{Maximal Consistent Set}.
+
+
+
+\subsubsection{Satisfiable}\label{sec:satisfiable_theory}
+
+A Theory is \emph{Satisfiable} if there exists a \emph{Model}
+(\S\ref{sec:model_theory}) for that Theory.
+
+A Theory is \emph{Categorical} if it has just one Model up to
+Isomorphism.
 
 %FIXME connections with stability theory
 
+By G\"odels Completeness Theorem, a First-order
+(\S\ref{sec:predicate_logic}) Theory is Consistent if and only if it
+is Satisfiable. Higher-order Logics may allow Syntactically Consistent
+Theories that are not Satisfiable.
 
+
+
+\subsubsection{Sound}\label{sec:sound_theory}
+
+A Theory is \emph{Sound} when every Theorem is \emph{Valid}
+(\S\ref{sec:validity}).
+
+
+
+\subsubsection{Effective}\label{sec:effective_theory}
+
+A Theory is \emph{Effective} when it is possible to Effectively
+(\S\ref{sec:effective_method}) determine whether a Deduction is Valid
+or not.
+
+
+
+\subsubsection{$\omega$-consistent}\label{sec:omega_consistent}
+
+\subsubsection{Synthetic Theory}\label{sec:synthetic_theory}
 
 \subsubsection{Duality Principle}\label{sec:duality_principle}
 
@@ -194,9 +260,17 @@ A Formal Theory is \emph{Categorical} if it has just one \emph{Model}
 \section{Metatheory} \label{sec:metatheory}
 % ====================================================================
 
-Proof Theory is itself \emph{Metamathematical} in that it studies the
-form of Logical Consequence within Logical Systems, and therefore is
-expressed as \emph{Metatheory}.
+A \emph{Metatheory} is a Theory whose subject matter is some other
+Theory.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Metatheorem}\label{sec:metatheorem}
+% --------------------------------------------------------------------
+
+A \emph{Metatheorem} is a Theorem proved within a Metatheory.
+
 
 
 % --------------------------------------------------------------------
@@ -564,6 +638,10 @@ only Literals that unify with a Literal already on the branch
 (\emph{Strong Connectedness}).
 
 
+
+% ====================================================================
+\section{Proof Procedure}\label{sec:proof_procedure}
+% ====================================================================
 
 % ====================================================================
 \section{Realizability} \label{sec:realizability}
