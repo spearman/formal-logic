@@ -1,0 +1,326 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Model Theory}\label{sec:model_theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+One definition of \emph{Model Theory} is the combination of Formal
+Logic with \emph{Universal Algebra} (\S\ref{sec:universal_algebra}).
+An alternative view of Model Theory equates it with \emph{Algebraic
+  Geometry} (Part \ref{sec:algebraic_geometry}). The broadest
+definition of Model Theory includes four divisions: Classical Model
+Theory, Model Theory of Groups and Fields, Geometric Model Theory, and
+Computable Model Theory (\S\ref{sec:computable_model_theory}).
+
+The Language of Model Theory is has two Kinds of Mathematical Object:
+\emph{Sets} and \emph{Relations}. As such Model Theory forms the
+\emph{Domain of Discourse} for \emph{Predicate Logic}. % FIXME xref
+
+\emph{Models} are \emph{Interpretations}
+(\S\ref{sec:interpretation}) of Theories
+(\S\ref{sec:formal_theory}) in a Formal Language. That is, an
+Interpretation is a Model if it assigns Truth values to the Sentences
+of a Theory. Model Theory uses Tarski's Semantic Theory of Truth
+(\S\ref{sec:semantic_truth}) as the definition of Truth. Model Theory
+also forms the foundation of \emph{Formal (Truth-conditional)
+  Semantics}-- a reduction of the Meaning of Assertions in Natural
+Languages to their Truth-conditions.
+
+A Model is an Analytic example of a Synthetic Theory. \cite{shulman15}
+
+
+
+% ====================================================================
+\section{Satisfaction}\label{sec:satisfaction}
+% ====================================================================
+
+When defining a Theory as a set of Sentences in a Formal Language, a
+\emph{Model} is an \emph{Interpretation} that \emph{Satisfies} the
+Sentences of that Theory. For a Formula $\phi$ and a Structure
+$\mathcal{M}$, a \emph{Satisfaction Relation} is denoted:
+\[
+    \mathcal{M} \vDash \phi
+\]
+For $\mathcal{M}$ to be a Model of a Theory, $T$, it is required that:
+\begin{itemize}
+\item The Language of $\mathcal{M}$ is the same as the Language of $T$
+\item Every Sentence in $T$ is Satisfied by $\mathcal{M}$
+\end{itemize}
+%FIXME ref completeness theorem
+By the Completeness Theorem a Consistent Theory is Satisfiable, that
+is, a Theory has a Model if and only if it is Consistent. The
+Compactness Theorem (\S\ref{sec:firstorder_properties}) implies
+that a Theory has a Model if and only if every Finite Subset of the
+Sentences in that Theory also have Models.
+
+
+
+% ====================================================================
+\section{Compactness Theorem}
+% ====================================================================
+
+%FIXME
+
+% ====================================================================
+\section{Conservativity}\label{sec:conservativity}
+% ====================================================================
+
+
+
+% ====================================================================
+\section{Quantifier Elimination}
+% ====================================================================
+
+Within a Theory $T$, if every First-order Formula $\varphi(x_1,
+\ldots, x_n)$ with Quantifiers is equivalent to a First-order Formula
+$\psi(x_1, \ldots, x_n)$ without Quantifiers, $T$ is said to have the
+property of \emph{Quantifier Elimination}. A Theory without Quantifier
+Elimination may be made to have it by adding Symbols to its Signature.
+
+
+
+% ====================================================================
+\section{Model Completion}\label{sec:model_completion}
+% ====================================================================
+
+A First-order Theory $T$ is called \emph{Model Complete} if every
+Embedding (\S\ref{sec:sigma_embedding}) of Models of $T$ is an
+Elementary Embedding.
+
+A Theory $T^*$ is a \emph{Companion} of another Theory $T$ if every
+Model of $T$ can be Embedded in a Model of $T^*$ and likewise every
+Model of $T^*$ can be Embedded in a Model of $T$. A \emph{Model
+  Companion} is a \emph{Companion} of a Theory that is \emph{Model
+  Complete}.
+
+%FIXME ref Amalgamation Property
+A \emph{Model Completion} is a Model Companion $T^*$ of a Model $T$
+that has the \emph{Amalgamation Property}. This means that every Model
+of $T$ can be uniquiely Embedded in a Model of $T^*$.
+
+
+
+% ====================================================================
+\section{Categoricity}
+% ====================================================================
+
+%FIXME ref Cardinal, Lowenheim-Skolem
+A Theory is termed \emph{Categorical} if all its Models are
+Isomorphic. With this definition and the L\"owenheim-Skolem Theorem it
+follows that any First-order Theory with a Model of infinite
+Cardinality can't be Categorical.
+
+For a Cardinal $\kappa$, a Theory $T$ is \emph{$\kappa$-Categorical}
+if any two Models of $T$ of Cardinality $\kappa$ are Isomorphic to one
+another. By \emph{Morley's Categoricity Theorem}\cite{morley65} if a
+First-order Theory in a Countable Language is Categorical in an
+Uncountable Cardinal $\kappa$, then it is Categorical in all
+Uncountable Cardinalities. There are three possible cases for
+$\kappa$-Categoricity:
+\begin{description}
+\item[Totally Categorical] $\kappa$-Categorical for all Infinite
+  Cardinals
+\item[Uncountably Categorical] $\kappa$-Categorical if and only if
+  $\kappa$ is an Uncountable Cardinal
+\item[Countably Categorical] $\kappa$-Categorical if and only if
+  $\kappa$ is a Countable Cardinal
+\end{description}
+The special case of $\kappa = \aleph_0$ is called
+\emph{$\omega$-Categorical}.
+
+
+
+% ====================================================================
+\section{Interpretability}
+% ====================================================================
+
+Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
+$N$ is a pair $(n,f)$ where
+\begin{itemize}
+    \item $n \in \mathbb{N}$
+    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
+      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
+      by a First-order Formula is definable in $N$ by a First-order
+      Formula
+\end{itemize}
+
+Two Structures are \emph{Bi-interpretable} if they can be interpreted
+in each other. This can be used to define an Equivalence Relation
+between Structures.
+
+
+
+% ====================================================================
+\section{Abstract Model Theory}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Abstract Logic}
+% --------------------------------------------------------------------
+
+An \emph{Abstract Logic} is a Formal System that consists of a Class
+of Sentences with a Satisfaction Relation
+(\S\ref{sec:satisfaction}).
+
+%FIXME compactness, lowenheim-skolem
+\emph{Lindstr\"om's Theorem} states that First-order Logic is the
+Strongest (\S\ref{sec:elementary_class}) Logic which has both
+Countable Compactness and the Downward L\"owenheim-Skolem Property.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Institutional Model Theory}
+% --------------------------------------------------------------------
+
+\emph{Institutional Model Theory} generalizes First-order Model Theory
+to arbitrary Logical Systems formalized as \emph{Institutions}
+(\S\ref{sec:institution_theory}).
+
+
+
+% ====================================================================
+\section{Finite Model Theory}
+% ====================================================================
+
+\emph{Finite Model Theory} (FMT) is a restriction of Model Theory to
+Interpretations of Finite Structures.
+
+A Finite Structure can always be described by a single First-order
+Sentence. An example structure of $n$ Elements:
+\[
+    \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
+    \varphi_m )
+\]
+This may be extended to a Finite number of Structures:
+\[
+    \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
+    \varphi_m )
+    \vee
+    \cdots
+    \vee
+    \exists x_1 \cdots \exists x_p ( \psi_1 \wedge \cdots \wedge
+    \psi_q )
+\]
+Note the difference here with Infinite First-order Model Theory in
+which a Model cannot be uniquely determined by a set of First-order
+Sentences because of the Compactness Theorem (For every Infinite Model
+a Non-isomorphic Model exists).
+
+The ability of a \emph{Property} (\S\ref{sec:set_property}) $P$ to
+be expressed in First-order Logic may be determined by whether two
+Structures $A \in P$ and $B \notin P$ satisfy all the same First-order
+Sentences:
+\[
+    A \vDash \alpha \leftrightarrow B \vDash \alpha
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finite Model Property}
+% --------------------------------------------------------------------
+
+A System of Logic $S$ has the \emph{Finite Model Property} if there is
+a Class of Models $\mathrm{M}$ such that any non-Theorem of $S$ is
+Falsified by some Finite Model in $\mathrm{M}$. If $fmp(S)$, $A$ is a
+$S$-theorem if and only if $A$ is a Theorem of the Theory of Finite
+Models of $S$.
+
+If $S$ is Finitely Axiomatizable (\S\ref{sec:axiom}) and $fmp(S)$ then
+it is Decidable (\S\ref{sec:computable_function}).
+
+
+
+% ====================================================================
+\section{Computable Model Theory}\label{sec:computable_model_theory}
+% ====================================================================
+
+\cite{harizanov98}
+
+
+
+% ====================================================================
+\section{Geometric Model Theory}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Classification Theory}
+% --------------------------------------------------------------------
+
+\emph{Classification Theory} is the division of Theories based on
+their \emph{Stability} which is the ability of the Models of the
+Theory to be \emph{Classified}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Types}
+% --------------------------------------------------------------------
+
+An \emph{$n$-type} of a Model, $\mathcal{M}$, over a (possibly empty)
+Subset of Constants, $A \in M$, is a set of Formulas,
+$p(x_1,\ldots,x_n) = p(\mathbf{x})$, with at most $n$ Free Variables
+in the Language $L(A)$, formed by adding the members of $A$ to the
+Language of $\mathcal{M}$:
+\[
+    L(A) = L \cup \{ c_a : a \in A \}
+\]
+such that for every Finite Subset $p_0(\mathbf{x}) \subseteq
+p(\mathbf{x})$ there exist Elements $b_1,\ldots,b_n \in M$ with
+$\mathcal{M} \vDash p_0(b_1,\ldots,b_n)$.
+
+A \emph{Complete Type} is \emph{Maximal}
+(\S\ref{sec:formal_theory})) under Inclusion such that $\forall
+\phi(\mathbf{x}) \in L(A,\mathbf{x})$ either $\phi(\mathbf{x}) \in
+p(\mathbf{x})$ or $\neg \phi(\mathbf{x}) \in p(\mathbf{x})$. A
+non-Complete type is called a \emph{Partial Type}.
+
+An $n$-type is \emph{Realized} in $\mathcal{M}$ if there is an Element
+$\mathbf{b} \in M^n$ such that $\mathcal{M} \vDash
+p(\mathbf{b})$. This is guaranteed by the Compactness Theorem
+(\S\ref{sec:firstorder_properties}) in either $\mathcal{M}$ or an
+Elementary Extension (\S\ref{sec:model_substructure}) of
+$\mathcal{M}$. This is denoted by $tp_{n}^{\mathcal{M}}(\mathbf{b}/A)$
+which is read as ``the Complete Type of $\mathbf{b}$ over $A$''.
+
+A Type $p(\mathbf{x})$ is \emph{Isolated} by a Formula
+$\varphi(\mathcal{x})$ if $\forall \psi(\mathbf{x}) \in
+p(\mathbf{x})$, $\varphi (\mathbf{x}) \rightarrow
+\psi(\mathbf{x})$. Isolated Types are Realized in every Elementary
+Substructure or Extension.
+
+
+
+\subsubsection{Saturation}\label{sec:model_saturation}
+
+A Model $\mathcal{M}$ is \emph{$\kappa$-saturated} (where $\kappa$ is
+a Cardinal number) if for all $A \subseteq M$ of Cardinality $<
+\kappa$, $M$ Realizes all Complete Types over $A$. A Model is
+\emph{Saturated} if it is $|M|$-saturated where $|M|$ is the
+Cardinality of $M$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Stability}\label{sec:model_stability}
+% --------------------------------------------------------------------
+
+A Theory $T$ is \emph{$\kappa$-stable} for an Infinite Cardinal $\kappa$
+if for every set $A$ such that $|A| = \kappa$, the Set of Complete
+Types over $A$ has Cardinality $\kappa$. Theories are Classified with
+the following terms:
+\begin{description}
+\item [Stable] $\kappa$-stable for some Infinite Cardinal $\kappa$
+\item [Unstable] not $\kappa$-stable for all Infinite Cardinals $\kappa$
+\item [Superstable] $\kappa$-stable for all sufficiently large
+  Cardinals $\kappa$
+\item [Totally Transcendental] \emph{Morley Rank}\cite{morley65} less
+  than $\infty$
+\end{description}
+
+
+
+% ====================================================================
+\section{Inner Model Theory}\label{sec:inner_model_theory}
+% ====================================================================

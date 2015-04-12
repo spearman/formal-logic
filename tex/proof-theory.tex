@@ -194,14 +194,31 @@ that are to be satisfied.
 
 
 
+% ====================================================================
+\section{Formal Theory}\label{sec:formal_theory}
+% ====================================================================
+
+For a Formal Language (\S\ref{sec:formal_language}), $L$, a Formal
+Theory, $\mathcal{T}$, is a Subset of a Conceptual Class of
+\emph{Elementary Expressions} (\emph{Elementary Statements} or
+\emph{Well-formed Formulas} \S\ref{sec:formal_system}), $\mathcal{E}$,
+consisting of \emph{Elementary Theorems} considered to be \emph{True}.
+In a \emph{Deductive Theory} (\S\ref{sec:deductive_theory}),
+$\mathcal{T}$ is an \emph{Inductive Class} such that some of the
+Elementary Theorems are taken to be \emph{Axioms} and any Expressions
+Deducible by those Axioms are also Elementary Theorems in
+$\mathcal{T}$.
+
+
+
 % --------------------------------------------------------------------
 \subsection{Deductive Theory}\label{sec:deductive_theory}
 % --------------------------------------------------------------------
 
 In the context of a Deductive System, $\mathcal{S}$, a \emph{Deductive
-  Theory} (or \emph{Inductive Class}), $T$, is a \emph{Formal Theory}
-(\S\ref{sec:formal_theory}) that consists of all the Theorems that are
-Derivable in $\mathcal{S}$, including any Axioms.
+  Theory} (or \emph{Inductive Class}), $T$, is a Formal Theory that
+consists of all the Theorems that are Derivable in $\mathcal{S}$,
+including any Axioms.
 
 
 
@@ -393,7 +410,7 @@ the Conclusion of a Valid Proof.
 
 
 % ====================================================================
-\section{Proof Calculus}\label{sec:proof_calculus}
+\section{Proof Calculi}\label{sec:proof_calculus}
 % ====================================================================
 
 A \emph{Proof Calculus} is a family of Formal Systems
@@ -556,6 +573,8 @@ where $u_i \in V$. Written in Sequent Notation:
 This convention is sometimes called \emph{Localized Hypotheses}. In
 general, $\pi : A$ may be read ``$\pi$ is a proof of $A$''.
 
+
+
 \subsubsection{Sequent Calculus}
 
 In \emph{Sequent Calculus} a Formal Proof is a Sequence of Sequents
@@ -645,6 +664,13 @@ Multisets, Lists, or Trees of Formulas. If Sets of Formulas are used
 at each node (\emph{Set-labeled Tableau}), they are taken in
 Conjunction.
 
+A \emph{Strongly Complete Tableau} is one in which every Formula in
+every branch has been expanded.
+
+
+
+\subsubsection{Refutation Tableau}\label{sec:refutation_tableau}
+
 A \emph{Refutation Tableau} attempts to show that a negation of the
 root Formula cannot be satisfied, thereby proving Logical Truth of the
 Formula. Rules for handling Logical Connectives may produce a branch
@@ -653,15 +679,28 @@ closed and if all branches are closed the Proof is complete and the
 root Formula is proved. Nodes on a single branch are considered in
 Conjunction, Nodes on separate branches are considered Disjunctively.
 
+
+
+\subsubsection{Destructive \& Non-destructive Tableau}
+\label{sec:destructive_tableau}
+
 \emph{Non-destructive Tableau Calculi} use Rules that only allow
 addition of nodes, while \emph{Destructive Tableau Calculi} use Rules
-that allow modification of existing nodes. \emph{Proof Confluence} is
-the property of a Tableau Calculus that a closed Tableau (for an
-un-satisfiable set of Propositions) can always be generated from an
-arbitrary partially constructed Tableau regardless of which Rules are
-chosen at each application (if a choice between Rules is available). A
-\emph{Strongly Complete Tableau} is one in which every Formula in
-every branch has been expanded.
+that allow modification of existing nodes.
+
+
+
+\subsubsection{Proof Confluence} \label{sec:proof_confluence}
+
+\emph{Proof Confluence} is the property of a Tableau Calculus that a
+closed Tableau (for an un-satisfiable set of Propositions) can always
+be generated from an arbitrary partially constructed Tableau
+regardless of which Rules are chosen at each application (if a choice
+between Rules is available).
+
+
+
+\subsubsection{Unification} \label{sec:unification}
 
 A method of dealing with non-determinism of rules involving Universal
 Quantification (in First-order Tableau) is called
@@ -669,12 +708,19 @@ Quantification (in First-order Tableau) is called
 the Rule for Eliminating Universal Quantifiers, which can later be
 Unified by choosing an appropriate Term to close the branch.
 
+
+
+\subsubsection{Clause Tabeau} \label{sec:clause_tableau}
+
 \emph{Clause Tableau} (Tableau Method applied to sets of Clauses) may
-be used for increased efficiency. \emph{Connection Tableau} restrict
-expansion of Clause Tableau branches (not the bare root) to contain
-only Literals that unify with a Literal already on the branch
-(\emph{Weak Connectedness}) or a Literal in the current leaf
-(\emph{Strong Connectedness}).
+be used for increased efficiency.
+
+\paragraph{Connection Tableau} \label{sec:connection_tableau}
+
+\emph{Connection Tableau} restrict expansion of Clause Tableau
+branches (not the bare root) to contain only Literals that unify with
+a Literal already on the branch (\emph{Weak Connectedness}) or a
+Literal in the current leaf (\emph{Strong Connectedness}).
 
 
 
