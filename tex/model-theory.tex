@@ -1,32 +1,148 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Model Theory}\label{sec:model_theory}
+\part{Model Theory}\label{sec:model_theory}\cite{hodges97}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-One definition of \emph{Model Theory} is the combination of Formal
-Logic with \emph{Universal Algebra} (\S\ref{sec:universal_algebra}).
-An alternative view of Model Theory equates it with \emph{Algebraic
+\emph{Model Theory} deals with construction and classification of
+\emph{Mathematical Structures} (\S\ref{sec:structure}) as
+\emph{Models} (\S\ref{sec:interpretation}) of \emph{Formal Theories}
+(\S\ref{sec:formal_theory}).
+
+The Language of Model Theory has two Kinds of Mathematical Objects:
+\emph{Sets} and \emph{Relations} (Part \ref{sec:set_theory}). As such
+Model Theory forms the \emph{Domain of Discourse} for \emph{Predicate
+  Logic} (\S\ref{sec:predicate_logic}).
+
+One definition of Model Theory is the combination of Formal Logic with
+\emph{Universal Algebra} (\S\ref{sec:universal_algebra}). An
+alternative view of Model Theory equates it with \emph{Algebraic
   Geometry} (Part \ref{sec:algebraic_geometry}). The broadest
 definition of Model Theory includes four divisions: Classical Model
 Theory, Model Theory of Groups and Fields, Geometric Model Theory, and
 Computable Model Theory (\S\ref{sec:computable_model_theory}).
 
-The Language of Model Theory is has two Kinds of Mathematical Object:
-\emph{Sets} and \emph{Relations}. As such Model Theory forms the
-\emph{Domain of Discourse} for \emph{Predicate Logic}. % FIXME xref
 
-\emph{Models} are \emph{Interpretations}
-(\S\ref{sec:interpretation}) of Theories
-(\S\ref{sec:formal_theory}) in a Formal Language. That is, an
-Interpretation is a Model if it assigns Truth values to the Sentences
-of a Theory. Model Theory uses Tarski's Semantic Theory of Truth
-(\S\ref{sec:semantic_truth}) as the definition of Truth. Model Theory
-also forms the foundation of \emph{Formal (Truth-conditional)
-  Semantics}-- a reduction of the Meaning of Assertions in Natural
-Languages to their Truth-conditions.
+
+% ====================================================================
+\section{Structure}\label{sec:structure}
+% ====================================================================
+
+A \emph{Structure} $\mathcal{A}$ is composed of a Set $A$ called the
+\emph{Domain} along with a collection of Sets of $n$-ary Relation
+Symbols or \emph{Operators} (defined as Subsets of $A^n$) called the
+\emph{Signature} (\S\ref{sec:signature}) of $\mathcal{A}$.
+
+Formal definition of a Structure:
+\[
+    \mathcal{A} = (A, \sigma)
+\]
+with Domain $A$, Signature $\sigma$.
+
+Combining a Structure with an \emph{Interpretation Function} $I$ gives
+a \emph{Model} (\S\ref{sec:interpretation}).
+
+Allowing for \emph{Infinitary Operators} leads to a Theory of
+\emph{Complete Lattices}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Domain}\label{sec:domain}
+% --------------------------------------------------------------------
+
+The \emph{Domain} of a Structure (also called \emph{Carrier Set},
+\emph{Underlying Set}, or \emph{Universe}) is a Set of Elements over
+which the Relations of the Signature of the Structure are defined. The
+Domain $A$ of a Structure $\mathcal{A}$ may also be written as
+$dom(\mathcal{A})$ or $|\mathcal{A}|$ (not to be confused with the
+Cardinality of the Domain, $|A|$).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Signature}\label{sec:signature}
+% --------------------------------------------------------------------
+
+The \emph{Signature} or \emph{Vocabulary} of a Structure is the Set of
+Operators (Functions and Relations) that characterize it. A Structure
+with Signature $\sigma$ may be called a \emph{$\sigma$-structure}.
+
+A Signature is given as a triple
+\[
+    (O,F,P)
+\]
+where $O$ are Constants, $F$ are Functions, and $P$ are Predicates
+(Relations).
+
+A Signature with no Predicate Symbols is an \emph{Algebraic
+  Signature}, and the associated Structure an \emph{Algebra}
+(\S\ref{sec:universal_algebra}).
+
+A Signature with no Function Symbols is a \emph{Relational Signature},
+and the associated Structure is a \emph{Relational Structure}. A
+Relational Structure may be used as the basis for a \emph{Relational
+  Model} (\S\ref{sec:relational_model}) in \emph{Database Theory}.
+
+The Signature is a synonym for the \emph{Type} of the Structure
+(Schematically represented by $\Omega$), and can be written as an
+ordered sequence of Natural Numbers representing the arity of the
+Operators. The arity, $n$, of a particular Operator symbol, $s$, may
+be written $n=ar(s)$.
+
+A \emph{Reduct} of a Structure is created by omitting certain
+Operations and Relations from the Signature. The converse is
+\emph{Expansion}.
+
+
+
+% ====================================================================
+\section{Interpretation}\label{sec:interpretation}
+% ====================================================================
+
+A Structure that can be given as an \emph{Interpretation} of a Formal
+Theory (\S\ref{sec:formal_theory}) is called a \emph{Model} of that
+Theory. That is, an Interpretation is a Model if it assigns Truth
+values to the Sentences of a Theory. Model Theory uses Tarski's
+Semantic Theory of Truth (\S\ref{sec:semantic_truth}) as the
+definition of Truth. Model Theory also forms the foundation of
+\emph{Formal (Truth-conditional) Semantics}-- a reduction of the
+Meaning of Assertions in Natural Languages to their Truth-conditions.
 
 A Model is an Analytic example of a Synthetic Theory. \cite{shulman15}
+
+In Model Theory an Interpretation fixes the \emph{Domain of Discourse}
+for expressions of Symbolic Logic (Part \ref{sec:formal_logic}); that
+is it assigns the Sets and Relations that Variables can range over.
+
+Roughly, an Interpretation of a Formal Language is an assignment of
+\emph{Meanings} to Symbols and \emph{Truth-Conditions}
+(\S\ref{sec:semantic_truth}) to Sentences. An Interpretation of
+First-order Logic Maps Terms to Individuals in the Universe and
+Propositions to Truth Values.
+
+The Interpretation Function in a Mathematical Structure maps Function
+and Relation Symbols of the Signature to actual Functions and
+Relations on the Domain:
+\[
+    f^{\mathcal{A}} = I (f)
+\]
+\[
+    R^{\mathcal{A}} = I (R) \subseteq A^{ar(R)}
+\]
+A Constant (Nullary) Symbol is identified with an Element of the
+Domain:
+\[
+    I(c) \in A
+\]
+
+Thus the Interpretation Function is the \emph{Extension}
+(\S\ref{sec:set_property}) of the Symbols and Strings of Symbols of
+the Object Language.
+
+\emph{Intended Interpretation}, \emph{Standard Model}
+
+\emph{Stratification}
 
 
 
