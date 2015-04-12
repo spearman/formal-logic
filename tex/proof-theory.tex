@@ -19,13 +19,24 @@ A \emph{Formal System} (also \emph{Logical Calculus} or \emph{System
   of Inference}) is a Formal Language (\S\ref{sec:formal_language})
 combined with a \emph{Deductive Apparatus}
 (\S\ref{sec:deductive_apparatus}) in order to Derive \emph{Theorems}
-(\S\ref{sec:formal_proof}). Expressions (strings) of Symbols are
-usually referred to as \emph{Forumulas}, and Expressions that belong
-to the underlying Language are called ``\emph{Well-formed Formulas}''
-(\emph{WFF}).
+(\S\ref{sec:formal_proof}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Formula}\label{sec:formula}
+% --------------------------------------------------------------------
+
+In the context of a Formal System, Expressions that belong to the
+underlying Formal Language are called ``\emph{Well-formed Formulas}''
+(\emph{WFFs}) or just \emph{Formulas}.
+
+A Formula is \emph{Satisfiable} (\S\ref{sec:satisfaction}) if it is
+True under some \emph{Interpretation} (\S\ref{sec:interpretation}).
 
 A Formula is \emph{Valid} (\S\ref{sec:validity}) if it is True under
-very \emph{Interpretation} (\S\ref{sec:interpretation}).
+very Interpretation.
+
 
 
 
@@ -73,11 +84,12 @@ where $\vdash_{\mathcal{S}}$ is the \emph{Syntactic Consequence
 \subsection{Inference Rule} \label{sec:inference_rule}
 % --------------------------------------------------------------------
 
-An \emph{Inference Rule} is a Function which takes an input Set of
-WFFs called \emph{Premises} and returns an output Set of WFFs called
-the \emph{Conclusion}. An alternative formulation for Inference Rules
-is as a \emph{Deducibility Relation}, $\vdash$, that holds between
-zero or more Premises and one or more Conclusions.
+An \emph{Inference Rule} (or \emph{Transformation Rule}) is a Function
+which takes an input Set of WFFs called \emph{Premises} and returns an
+output Set of WFFs called the \emph{Conclusion}. An alternative
+formulation for Inference Rules is as a \emph{Deducibility Relation},
+$\vdash$, that holds between zero or more Premises and one or more
+Conclusions.
 
 Taken individually, both Premises and Conclusions are
 \emph{Propositions} (\S\ref{sec:proposition}), that is, bearers of
@@ -113,13 +125,6 @@ to as \emph{Postulates}, that play the role of assumptions: defining
 properties of the domain of the \emph{Theory}
 (\S\ref{sec:formal_theory}) in question.
 
-An \emph{Axiom Schema} is a template for Axioms in which one or more
-\emph{Schematic Variables} (\S\ref{sec:metalanguage} Metalanguage)
-appear, standing for a Subformula in the Object Language of the
-System. For a Language with infinitely many WFFs, an Axiom Schema
-describes a countably infinite number of Axioms. A System without
-Schema is termed \emph{Finitely Axiomatized}.
-
 Systems with a large number of Axioms and few other Inference Rules
 are called \emph{Axiomatic Systems} (\S\ref{sec:axiomatic_system}).
 
@@ -132,6 +137,17 @@ are called \emph{Axiomatic Systems} (\S\ref{sec:axiomatic_system}).
 \subsubsection{Non-logical Axiom}\label{sec:nonlogical_axiom}
 
 \emph{Non-logical Axiom} (or \emph{Postulate})
+
+
+
+\subsubsection{Axiom Schema}\label{sec:axiom_schema}
+
+An \emph{Axiom Schema} is a template for Axioms in which one or more
+\emph{Schematic Variables} (\S\ref{sec:metalanguage} Metalanguage)
+appear, standing for a Subformula in the Object Language of the
+System. For a Language with infinitely many WFFs, an Axiom Schema
+describes a countably infinite number of Axioms. A System without
+Schema is termed \emph{Finitely Axiomatized}.
 
 
 
@@ -182,17 +198,38 @@ that are to be satisfied.
 \subsection{Deductive Theory}\label{sec:deductive_theory}
 % --------------------------------------------------------------------
 
-In the context of a Deductive System, $\mathcal{S}$, a \emph{Formal
-  Theory} (\S\ref{sec:formal_theory}), $T$, is a \emph{Deductive
-  Theory} (also an \emph{Inductive Class}) that consists of all the
-Theorems that are Derivable in $\mathcal{S}$, including any Axioms.
+In the context of a Deductive System, $\mathcal{S}$, a \emph{Deductive
+  Theory} (or \emph{Inductive Class}), $T$, is a \emph{Formal Theory}
+(\S\ref{sec:formal_theory}) that consists of all the Theorems that are
+Derivable in $\mathcal{S}$, including any Axioms.
+
+
+
+\subsubsection{Subtheory \& Extension}\label{sec:subtheory}
 
 A Theory $S$ is a \emph{Subtheory} of a Theory $T$ if $S \subseteq T$.
 $T$ is then a \emph{Supertheory} (or \emph{Extension}) of $S$.
 
 
 
-\subsubsection{Consistent}\label{sec:consistent_theory}
+\subsubsection{Conservative Extension}\label{sec:conservative_extension}
+
+Given two Theories $T_1$ and $T_2$ with underlying Formal Languages
+$L_1$ and $L_2$ respectively, $T_2$ is a \emph{Conservative Extension}
+of $T_1$ if:
+\begin{enumerate}
+    \item $L_2$ extends $L_1$
+    \item $T_1 \subseteq T_2$
+    \item any Theorem of $T_2$ in $L_1$ is already a Theorem of $T_1$
+\end{enumerate}
+An Extension which is not Conservative may be called a \emph{Proper
+  Extension}.
+
+See also \emph{Conservativity} (\S\ref{sec:conservativity})
+
+
+
+\subsubsection{Consistent Theory}\label{sec:consistent_theory}
 
 A Theory is \emph{Absolutely Consistent} (also \emph{Coherent} or
 \emph{Non-trivial}) if not every WFF in the underlying Language is a
@@ -202,6 +239,8 @@ A Non-trivial Theory is \emph{Consistent} if it satisfies the
 \emph{Principle of Explosion}, that is, Proof of a contradiction
 Implies Proof of all other WFFs. Therefore, a Consistent Theory must
 be free of contradictions.
+
+The Conservative Extension of a Consistent Theory is Consistent.
 
 See also \emph{Paraconsistency} (\S\ref{sec:paraconsistent_inference}).
 
