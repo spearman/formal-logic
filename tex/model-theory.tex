@@ -42,16 +42,13 @@ with Domain $A$, Signature $\sigma$.
 Combining a Structure with an \emph{Interpretation Function} $I$ gives
 a \emph{Model} (\S\ref{sec:interpretation}).
 
-Allowing for \emph{Infinitary Operators} leads to a Theory of
-\emph{Complete Lattices}.
-
 
 
 % --------------------------------------------------------------------
 \subsection{Domain}\label{sec:domain}
 % --------------------------------------------------------------------
 
-The \emph{Domain} of a Structure (also called \emph{Carrier Set},
+The \emph{Domain} of a Structure (also called the \emph{Carrier Set},
 \emph{Underlying Set}, or \emph{Universe}) is a Set of Elements over
 which the Relations of the Signature of the Structure are defined. The
 Domain $A$ of a Structure $\mathcal{A}$ may also be written as
@@ -64,18 +61,28 @@ Cardinality of the Domain, $|A|$).
 \subsection{Signature}\label{sec:signature}
 % --------------------------------------------------------------------
 
-The \emph{Signature} or \emph{Vocabulary} of a Structure is the Set of
-Operators (Functions and Relations) that characterize it. A Structure
-with Signature $\sigma$ may be called a \emph{$\sigma$-structure}.
+The \emph{Signature} (or \emph{Vocabulary}) of a Structure is the Set
+of Operators (Function and Relation Symbols) that characterize it
+together with an \emph{Arity Function} ``$ar$'' that maps each
+Operator Symbol $s$ to a corresponding Natural Number $n$ which is the
+Arity of the Interpretation of $s$: $n = ar(s)$.
 
 A Signature is given as a triple
 \[
-    (O,F,P)
+    (F,R,ar)
 \]
-where $O$ are Constants, $F$ are Functions, and $P$ are Predicates
-(Relations).
+where $F$ is a Set of Function Symbols, and $R$ is a Set of Relation
+Symbols (or Predicates) and $ar$ is the Arity Function. If both $F$
+and $R$ are Finite Sets, $\sigma$ is a \emph{Finite Signature}. A
+\emph{Nullary Function Symbol} is a \emph{Constant Symbol}. A Function
+or Relation Symbol $s$ of Arity $n$ is sometimes denoted
+$\prescript{n}{}{s}$. Allowing for \emph{Infinitary Operators} leads
+to a Theory of \emph{Complete Lattices}.
 
-A Signature with no Predicate Symbols is an \emph{Algebraic
+A Structure with Signature $\sigma$ may be called a
+\emph{$\sigma$-structure}.
+
+A Signature with no Relation Symbols is an \emph{Algebraic
   Signature}, and the associated Structure an \emph{Algebra}
 (\S\ref{sec:universal_algebra}).
 
@@ -96,6 +103,187 @@ Operations and Relations from the Signature. The converse is
 
 
 
+\subsubsection{Cardinality}\label{sec:signature_cardinality}
+
+The \emph{Cardinality} of a Signature $\sigma = (F,R,ar)$ is denoted
+$|\sigma|$ and is the least Infinite Cardinal
+(\S\ref{sec:cardinal_number}) $n$ such that $n \geq (|F| + |R|)$, that
+is, greater than or equal to the number of Symbols in the Signature
+$\sigma$. This is equal to the number of First-order Formulas
+(\S\ref{sec:predicate_logic}) of $\sigma$.
+
+
+
+\subsubsection{Reduction \& Expansion}\label{sec:reduct_expansion}
+
+For two Signatures $\sigma^-$ and $\sigma^+$ where $\sigma^- \subset
+\sigma^+$, any $\sigma^+$-structure $\mathcal{A}$ is also a
+$\sigma^-$-structure called the \emph{$\sigma^-$-reduct} of
+$\mathcal{A}$ denoted $\mathcal{A}|\sigma^-$, having the same Domain
+as $\mathcal{A}$ (although the Set of Constant Elements corresponding
+to Constant Functions in the Signature of $\sigma^-$ may be smaller).
+
+A Homomorphism of $\sigma^+$-structures $h : \mathcal{A} \rightarrow
+\mathcal{B}$ is also a Homomorphism of $\sigma^-$-structures $h :
+\mathcal{A} | \sigma^- \rightarrow \mathcal{B} | \sigma^-$.
+
+If a Structure $\mathcal{B}$ is a $\sigma^-$-reduct of a
+$\sigma^+$-structure $\mathcal{A}$ then $\mathcal{A}$ is called the
+\emph{Expansion} of $\mathcal{B}$ to $\sigma^+$. Such an Expansion is
+not necessarily unique.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Structure Homomorphism}\label{sec:structure_homomorphism}
+% --------------------------------------------------------------------
+
+For two Structures $\mathcal{A}$ and $\mathcal{B}$, both with
+Signature $\sigma = (F,R,ar)$, a \emph{$\sigma$-homomorphism} $h$ is a
+Function:
+\[
+    h : |\mathcal{A}| \rightarrow |\mathcal{B}|
+\]
+with Properties:
+\begin{itemize}
+    \item $\forall \prescript{n}{}{f} \in F,
+    a_1, a_2,\ldots, a_n \in |\mathcal{A}|$:
+\[
+    h (f^\mathcal{A}(a_1, a_2,\ldots, a_n))
+    = f^\mathcal{B} (h(a_1), h(a_2),\ldots, h(a_n))
+\]
+    \item $\forall \prescript{n}{}{r} \in R,
+    a_1, a_2,\ldots, a_n \in |\mathcal{A}|$:
+\[
+    (a_1,a_2,\ldots,a_n) \in r^\mathcal{A} \Rightarrow
+    (h(a_1), h(a_2),\ldots,h(a_n)) \in r^\mathcal{B}
+\]
+\end{itemize}
+A Homomorphism $f : |\mathcal{A}| \rightarrow |\mathcal{A}|$ is an
+Endomorphism. An Endomorphism that is also an \emph{Isomorphism}
+(\S\ref{sec:structure_isomorphism}) is called an \emph{Automorphism}.
+The \emph{Identity Map} of $|\mathcal{A}|$ is an Automorphism denoted
+$1_\mathcal{A}$.
+
+A Structure $\mathcal{B}$ is a \emph{Homomorphic Image} of
+$\mathcal{A}$ if there exists a Surjective Homomorphism $g :
+\mathcal{A} \rightarrow \mathcal{B}$.
+
+For every Signature $\sigma$ there is a \emph{Concrete Category}
+(\S\ref{sec:concrete_category}) $\sigma$-$\mathbf{Hom}$ with
+$\sigma$-structures as Objects and $\sigma$-homomorphisms as
+Morphisms.
+
+
+
+\subsubsection{Strong Homomorphism}\label{sec:strong_homomorphism}
+
+A $\sigma$-homomorphism $h : \mathcal{A} \rightarrow \mathcal{B}$ is
+\emph{Strong} if $\forall \prescript{n}{}{s} \in \sigma, a_1,
+a_2,\ldots, a_n \in |\mathcal{A}|$:
+\[
+    (a_1, a_2,\ldots, a_n) \in s^\mathcal{A} \Leftrightarrow
+    (h(a_1), h(a_2),\ldots,h(a_n)) \in s^\mathcal{B}
+\]
+
+
+
+\subsubsection{Embedding}\label{sec:embedding}
+
+A Strong $\sigma$-homomorphism that is also Injective is called an
+\emph{Embedding}.
+
+The Category $\sigma$-$\mathbf{Emb}$ of $\sigma$-structures and
+$\sigma$-embeddings is a Concrete Subcategory of
+$\sigma$-$\mathbf{Hom}$.
+
+
+
+\paragraph{Structure Isomorphism}\label{sec:structure_isomorphism}
+
+An Embedding that is Surjective is an \emph{Isomorphism}. The
+existence of an Isomorphism between two Structures $\mathcal{A}$ and
+$\mathcal{B}$ is denoted $\mathcal{A} \cong \mathcal{B}$ and $\cong$
+is an Equivalence Relation on the Class of $\sigma$-structures.
+
+
+
+\subsubsection{Retraction}\label{sec:retraction}
+
+For two Structures in a Substructure Relation
+(\S\ref{sec:substructure}) $\mathcal{A} \subseteq \mathcal{B}$, a
+\emph{Retraction} from $\mathcal{B}$ to $\mathcal{A}$ is a
+Homomorphism $h : \mathcal{B} \rightarrow \mathcal{A}$ such that
+$\forall a \in |\mathcal{A}|, h(a) = a$. Thus $h$ is Idempotent ($h^2
+= h$).
+
+For an Endomorphism $g : \mathcal{B} \rightarrow \mathcal{B}$, if $g^2
+= g$, then $g$ is a Retraction to a Substructure $\mathcal{A}$ of
+$\mathcal{B}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Substructure}\label{sec:substructure}
+% --------------------------------------------------------------------
+
+Given $\sigma$-structures $\mathcal{A}$ and $\mathcal{B}$, if
+$|\mathcal{A}| \subseteq |\mathcal{B}|$ and the Inclusion Map
+(\S\ref{sec:inclusion_map}) $i : |\mathcal{A}| \rightarrow
+|\mathcal{B}|$ is an Embedding (\S\ref{sec:embedding}), then
+$\mathcal{A}$ is a \emph{Substructure} of $\mathcal{B}$ and
+$\mathcal{B}$ is an \emph{Extension} of $\mathcal{A}$, denoted
+$\mathcal{A} \subseteq \mathcal{B}$.
+
+By the definition of Structure Homomorphisms, the following Properties
+apply to the Function Symbols $f$ and Relation Symbols $r$ in the
+Signature of the two Structures in the Relation $\mathcal{A} \subseteq
+\mathcal{B}$:
+\begin{itemize}
+    \item Constant Symbols $\prescript{0}{}{f}^\mathcal{A}$ are
+      equivalent in both Structures:
+\[
+    \prescript{0}{}{f}^\mathcal{A} = \prescript{0}{}{f}^\mathcal{B}
+\]
+    \item for $n >0$, $\prescript{n}{}{f}^\mathcal{A}$ is the
+      Restriction of $\prescript{n}{}{f}^\mathcal{B}$ to the Domain of
+      $\mathcal{A}$:
+\[
+    \prescript{n}{}{f}^\mathcal{A}
+    = \prescript{n}{}{f}^\mathcal{B} |_{|\mathcal{A}|}
+\]
+    \item $\prescript{n}{}{r}^\mathcal{A}$ is the Intersection of
+      $\prescript{n}{}{r}^\mathcal{B}$ with $|\mathcal{A}|^n$:
+\[
+    \prescript{n}{}{r}^\mathcal{A}
+    = \prescript{n}{}{r}^\mathcal{B} \cap |\mathcal{A}|^n
+\]
+\end{itemize}
+
+
+
+\subsubsection{Generator} \label{sec:generator}
+
+For a Subset $Y \subset |\mathcal{B}|$, there is a unique smallest
+Substructure $\mathcal{A}$ \emph{Generated} by $Y$ such that $Y
+\subseteq |\mathcal{A}|$ called the \emph{Hull} of $Y$, denoted by:
+\[
+    \mathcal{A} = \langle Y \rangle_\mathcal{B}
+\]
+The Set $Y$ is said to be a \emph{Set of Generators} for $\mathcal{A}$
+and if $Y$ is finite then $\mathcal{A}$ is said to be \emph{Finitely
+  Generated}. For a Finite Signature $\sigma$ with no Function
+Symbols, every Finitely Generated $\sigma$-structure is Finite.
+
+The following equality holds for the Cardinality of Generated
+Structures where the Signature is $\sigma$
+(\S\ref{sec:signature_cardinality}):
+\[
+  |\langle Y \rangle_\mathcal{B}| = |Y| + |\sigma|
+\]
+
+
+
 % ====================================================================
 \section{Interpretation}\label{sec:interpretation}
 % ====================================================================
@@ -108,7 +296,6 @@ Semantic Theory of Truth (\S\ref{sec:semantic_truth}) as the
 definition of Truth. Model Theory also forms the foundation of
 \emph{Formal (Truth-conditional) Semantics}-- a reduction of the
 Meaning of Assertions in Natural Languages to their Truth-conditions.
-
 A Model is an Analytic example of a Synthetic Theory. \cite{shulman15}
 
 In Model Theory an Interpretation fixes the \emph{Domain of Discourse}
