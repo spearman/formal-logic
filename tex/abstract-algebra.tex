@@ -155,8 +155,9 @@ such that:
 Every Infinite Cyclic Group is Isomorphic to the Additive Group
 $(\mathbb{Z}, +)$ of the Integers.
 
-Every Finite Cyclic Group of Order $n$ is Isomorphic to the Additive
-Group $\mathsf{Z}/n\mathsf{Z}$ of the Integers Modulo $n$.
+Every Finite Cyclic Group of Order $n$ is Isomorphic
+(\S\ref{sec:group_isomorphism}) to the Additive Group
+$\mathbb{Z}/n\mathbb{Z}$ of the Integers Modulo $n$.
 
 
 
@@ -172,12 +173,12 @@ which every Morphism is Invertible.
 
 
 
-\subsubsection{$\inf$-groupoid}\label{sec:infinity_groupoid}
+\subsubsection{$\infty$-groupoid}\label{sec:infinity_groupoid}
 
-An \emph{$inf$-groupoid} is an $inf$-category
+An \emph{$\infty$-groupoid} is an $\infty$-category
 (\S\ref{sec:quasicategory}) generalization of a Groupoid.
 
-By the \emph{Homotopy Hypothesis}, $inf$-groupoids are \emph{Spaces}
+By the \emph{Homotopy Hypothesis}, $\infty$-groupoids are \emph{Spaces}
 (\S\ref{sec:topological_space}).
 
 
@@ -274,7 +275,18 @@ and the entire Group $G$ as Normal Subgroups.
 \subsection{Group Homomorphism}\label{sec:group_homomorphism}
 % --------------------------------------------------------------------
 
-A \emph{Group Homomorphism} preserves Group operations.
+A \emph{Group Homomorphism} $h$, between two Groups, $G$ and $H$, is a
+Morphism $h : G \rightarrow H$ that preserves Group operations
+$\cdot_G$ and $\cdot_H$. That is, for $x,y \in G$:
+\[
+    h(x \cdot_G y) = h(x) \cdot_H h(y)
+\]
+
+There is always a \emph{Trivial Homomorphism} between any two Groups
+$G$ and $H$:
+\[
+    \forall x \in G, h (x) = e_H
+\]
 
 Taken as Monoidal Categories, two Groups $G, H$ may be related by a
 Functor $f$ which is equivalent to a Group Homomorphism:
@@ -285,7 +297,21 @@ and for $x,y \in G$:
 \[
     f(xy) = f(x)f(y)
 \]
-If the Image of $f$ is equal to $H$, and the Kernel is $\{e\}$ %FIXME
+If the Image of $f$ is equal to $H$, and the Kernel is $\{e\}$
+(\S\ref{sec:morphism_kernel}).
+
+
+
+\subsubsection{Group Isomorphism}\label{sec:group_isomorphism}
+
+A \emph{Group Isomorphism} is a Bijective Group Homomorphism.
+
+Isomorphism Properties for two Groups $G$, $H$:
+\begin{itemize}
+    \item $|G| = |H|$
+    \item $G$ is Abelian $\Leftrightarrow$ $H$ is Abelian
+    \item $G$ and $H$ have the same number of Elements of every Order
+\end{itemize}
 
 
 
@@ -303,6 +329,21 @@ Subgroup.
 The Kernel of $G$ is $\{x | f(x)=e_H, x \in G\}$ and always
 gives a \emph{Normal Subgroup} (\S\ref{sec:subgroup}) of $G$,
 written $H \triangleleft G$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Direct Product}\label{sec:direct_product}
+% --------------------------------------------------------------------
+
+The \emph{Direct Product} of two Groups $G$ and $H$, denoted $G \times
+H$, is a Group with Elements from the Cartesian Product of the
+Elements of $G$ and $H$, $\{(g,h) | g \in G, h \in H\}$, and Group
+Operation defined Componentwise:
+\[
+    (g_1, h_1) \cdot_{G \times H} (g_2, h_2)
+    = (g_1 \cdot_G g_2, h_1 \cdot_H h_2)
+\]
 
 
 
@@ -362,13 +403,35 @@ Symmetric Group.
 \subsubsection{Symmetry Group}\label{sec:symmetry_group}
 
 \paragraph{Dihedral Group}\label{sec:dihedral_group}
+\hfill \\
+\emph{Dihedral Group}
+
+
+\paragraph{Klein 4-group}\label{sec:klein_4group}
+\hfill \\
+
+The \emph{Klein 4-group} or $K_4$ (also $V$ for
+``\emph{Vierergruppe}'') is the Group resulting from the Direct
+Product (\S\ref{sec:direct_product}) of two Cyclic Groups
+(\S\ref{sec:cyclic_group}) of Order 2: $K_4 = Z_2 \times Z_2$.
+
+As a Permutation Representation on 4 Elements $K_4$ is a Subgroup of
+the Alternating Group (\S\ref{sec:alternating_group}) on 4 Elements,
+$A_4$:
+\[
+    K_4 = \{ (), (12)(34), (13)(24), (14)(23) \}
+\]
+
+The Klein 4-group is an Abelian Group and is Isomorphic to the
+Dihedral Group of Order 4 and is the smallest Non-cyclic Group.
 
 
 
 \subsubsection{Alternating Group}\label{sec:alternating_group}
 
-\subsubsection{Matrix Group}\label{sec:matrix_group}
 
+
+\subsubsection{Matrix Group}\label{sec:matrix_group}
 
 \paragraph{General Linear Group}\label{sec:general_linear_group}
 
