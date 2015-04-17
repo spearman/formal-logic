@@ -4,12 +4,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{Presentations}: Generators, Relations
-
-\emph{Finitely Presented}
-
-
-
 % ====================================================================
 \section{Magma}\label{sec:magma}
 % ====================================================================
@@ -56,6 +50,10 @@ String $\varepsilon$ as the Identity Element.
 \subsubsection{Trace Monoid}\label{sec:trace_monoid}
 
 \subsubsection{Syntactic Monoid}\label{sec:syntactic_monoid}
+
+\emph{Syntactic Quotient}
+
+\emph{Syntactic Relation} (\emph{Syntactic Equivalence})
 
 
 
@@ -117,6 +115,32 @@ in the Category of Groups.
 
 The Trivial Group is a Cyclic Group (\S\ref{sec:cyclic_group}) of
 Order 1 and may be denoted $Z_1$ in this context.
+
+
+
+\subsubsection{Group Word}\label{sec:group_word}
+
+For a Group $G$ and a Subset of $G$, $S$, a \emph{Word} in $S$ is any
+Expression of the form:
+\[
+    s_1^{\varepsilon_1}s_2^{\varepsilon_2} \cdots s_n^{\varepsilon_n}
+\]
+where $s_1,\ldots,s_n \in S$ and $\varepsilon_i \in \{-1, 1\}$ and $n$
+is the \emph{Length} of the Word. The \emph{Empty Word} is used as the
+Identity Element in the Free Group of Words (\S\ref{sec:free_group}).
+
+\paragraph{Reduction}\label{sec:word_reduction}
+\hfill \\
+
+If an Element appears in a Word next to its Inverse, a
+\emph{Reduction} may be applied which removes those Elements from the
+Word due to the Group Axioms which imply that the resulting Word is
+equivalent. A \emph{Reduced Word} contains no such redundant pairs.
+
+A Word is \emph{Cyclically Reduced} if and only if every Cyclic
+Permutation (\S\ref{sec:cyclic_permutation}) of the Word is Reduced
+(that is, it is Reduced and the first and last Element are not
+Inverses).
 
 
 
@@ -219,8 +243,11 @@ is defined as
 
 \subsubsection{Normal Subgroup}\label{sec:normal_subgroup}
 
-Given a Group $G$ and Subgroup $H$, $H$ is a \emph{Normal Subgroup} if
-and only if $\forall g \in G, gH = Hg$.
+A \emph{Normal Subgroup} of a Group $G$ is a \emph{Subgroup} $H$ that
+is invariant under Conjugation (\S\ref{sec:conjugacy_class}) by the
+Elements of $G$. That is, $H$ is a Normal Subgroup of $G$ if and only
+if $\forall g \in G, gH = Hg$, denoted $H \triangleleft G$.
+
 
 
 % --------------------------------------------------------------------
@@ -459,35 +486,57 @@ $Sym(R^n)$.
 \subsection{Conjugacy Class}\label{sec:conjugacy_class}
 % --------------------------------------------------------------------
 
+Two Elements $a$ and $b$ of a Group $G$ are \emph{Conjugates} if there
+is an Element $g \in G$ such that:
+\[
+    gag^{-1} = b
+\]
+which reads ``Conjugation of $a$ by $g$ results in $b$.'' Conjugation
+is Invariant if and only if the Elements are Commutative:
+\[
+    gag^{-1} = a \Leftrightarrow ag = ga
+\]
+
+A \emph{Conjugacy Class} for an Element $a$ is defined as:
+\[
+    Cl(a) = \{ b \in G | \exists g \in G : b = gag^{-1}\}
+\]
+
+
+
 % --------------------------------------------------------------------
 \subsection{Quotient Group}\label{sec:quotient_group}
 % --------------------------------------------------------------------
+
+For a Normal Subgroup (\S\ref{sec:normal_subgroup}) $H$ of a Group
+$G$, $H \triangleleft G$, the \emph{Quotient Group} $G/H$ is the Set of
+all Left Cosets (\S\ref{sec:group_coset}) of $H$ in $G$:
+\[
+    G/H = \{ aH : a \in G \}
+\]
+
+
 
 % --------------------------------------------------------------------
 \subsection{Free Group}\label{sec:free_group}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Abstract Group}\label{sec:abstract_group}
-% --------------------------------------------------------------------
+The \emph{Free Group}, $F_S$, over a Set, $S$, called the \emph{Free
+  Generating Set}, consists of all Reduced Words
+(\S\ref{sec:group_word}) in $S$ as Elements and Concatenation of Words
+(with Reduction) as the Group Operation. As a Group Presentation
+(\S\ref{sec:group_presentation}):
+\[
+    F_S = \langle S, \rangle
+\]
+Every Word is Conjugate to a Cyclically Reduced Word
+(\S\ref{sec:word_reduction}), and a Cyclically Reduced Conjugate of a
+Cyclically Reduced Word is a Cyclic Permutation of the Word.
 
-\subsubsection{Presentation}\label{sec:presentation}
-
-\emph{Generators}
-
-\emph{Relations}
-
-(\S\ref{sec:semithue_system})
-
-\emph{Semigroup Presentation}
-
-\emph{Monoid Presentation}
-
-\emph{Group Presentation}
-
-
-
-\subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
+A Group $G$ is called Free if it is Isomorphic to $F_S$ for some
+Subset $S$ of $G$, that is, every Element of $G$ can be written
+uniquely as a Product of finitely many Elements of $S$ and their
+Inverses.
 
 
 
@@ -498,6 +547,57 @@ $Sym(R^n)$.
 % --------------------------------------------------------------------
 \subsection{Algebraic Group}\label{sec:algebraic_group}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Abstract Group}\label{sec:abstract_group}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Presentation}\label{sec:presentation}
+% ====================================================================
+
+\emph{Generators}
+
+\emph{Relations}
+
+\emph{Finitely Presented}
+
+(\S\ref{sec:string_rewriting})
+
+\emph{Semigroup Presentation}
+
+
+
+\subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
+
+
+
+\subsubsection{Group Presentation}\label{sec:group_presentation}
+
+A \emph{Group Presentation} is the definition of a Group $G$ by a Set
+$S$ of Generators (\S\ref{sec:free_group}) and a Set $R$ of Relations
+between the Words in $S$ that represent the same Element of $G$:
+\[
+  \langle S | R \rangle
+\]
+The Group $G$ has this Presentation if it is Isomorphic to the
+Quotient (\S\ref{sec:quotient_group}) of a Free Group on $S$. The Set
+of Relations $R$ is said to \emph{Define} $G$ if every Relation in $G$
+follows from those in $R$.
+
+
+
+\subsubsection{Monoid Presentation}\label{sec:monoid_presentation}
+
+A \emph{Monoid Presentation} is a description of a Monoid in terms of
+a Set $\Sigma$ of Generators and a Set of Relations on the Free Monoid
+$\Sigma*$.
+
+
+
+
 
 % --------------------------------------------------------------------
 \subsection{Representation Theory}\label{sec:representation_theory}
@@ -693,6 +793,12 @@ A Module Homomorphism is an \emph{Linear Map}.
 \emph{Bilinear Map}
 
 \emph{Multilinear Map}
+
+
+
+\subsubsection{Free Module}\label{sec:free_module}
+
+\paragraph{Group Ring}\label{sec:group_ring}
 
 
 

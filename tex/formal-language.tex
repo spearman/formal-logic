@@ -1,15 +1,71 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Formal Language Theory}\label{sec:formal_language_theory} \cite{hammel03}
+\part{Formal Language Theory}\label{sec:formal_language_theory}
+\cite{hammel03}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{Formal Language Theory} is the study of \emph{Formal Languages}
+\emph{Formal Language Theory} is the study of Formal Languages
 (\S\ref{sec:formal_language}) and their finite representations,
-\emph{Automata} (\S\ref{sec:automata_theory}). These topics are
-closely related to questions of \emph{Decidability}
-(\S\ref{sec:computable_function}), an important concept in
-\emph{Recursion Theory} (Part \ref{sec:recursion_theory}).
+Automata (\S\ref{sec:automata_theory}). These topics are closely
+related to questions of Decidability
+(\S\ref{sec:computable_function}), an important concept in Recursion
+Theory (Part \ref{sec:recursion_theory}).
+
+
+
+% ====================================================================
+\section{String}\label{sec:string}
+% ====================================================================
+
+A \emph{String} is a any Finite Sequence (\S\ref{sec:tuple}) over a
+non-empty, finite Set of \emph{Symbols} or \emph{Characters},
+$\Sigma$, called an \emph{Alphabet}. The \emph{Length} of a String $s$
+is denoted $|s|$ and is equal to the number of Symbols in $s$. The
+\emph{Empty String} $\varepsilon$ is the unique String over $\Sigma$
+of Length 0.
+
+The Set of all Strings of Length $n$ over $\Sigma$ is denoted
+$\Sigma^n$.
+
+The infinite Set of all possible Strings of any finite Length,
+$\Sigma^*$, is the Free Monoid (\S\ref{sec:free_monoid}) or
+\emph{Kleene Closure} of $\Sigma$, that is, the smallest Superset of
+$\Sigma$ that is closed under String Concatenation
+(\S\ref{sec:string_concatenation}):
+\[
+    \Sigma^* = \bigcup_{n\in\mathbb{N}_0} \Sigma^n
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{String Concatenation}\label{sec:string_concatenation}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Prefix \& Suffix}\label{sec:prefix_suffix}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{String Substitution}\label{sec:string_substitution}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{String Homomorphism}\label{sec:string_homomorphism}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{String Projection}\label{sec:string_projection}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Right Quotient}\label{sec:right_quotient}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Right Cancellation}\label{sec:right_cancellation}
+% --------------------------------------------------------------------
 
 
 
@@ -17,20 +73,24 @@ closely related to questions of \emph{Decidability}
 \section{Formal Language}\label{sec:formal_language}
 % ====================================================================
 
-A \emph{Formal Language}, $L$, is a possibly infinite Subset of all
-possible \emph{Expressions} (or \emph{Words}) over a possibly infinite
-\emph{Alphabet} of \emph{Symbols}, $\Sigma$. This infinite Set
-$\Sigma^*$ is the \emph{Kleene star} or \emph{Free Monoid}
-(\S\ref{sec:free_monoid}) of $\Sigma$; the smallest Superset of
-$\Sigma$ that is closed under string concatenation.
+A \emph{Formal Language}, $L$, is a possibly infinite Subset of
+$\Sigma^*$ (all possible Strings over an Alphabet $\Sigma$
+(\S\ref{sec:string}). The Strings belonging to $L$ are called
+\emph{Expressions} (or \emph{Phrases} (\S\ref{sec:lexical_analysis})
+or \emph{Well-formed Formulas} \S\ref{sec:formula}).
 
-The entire content of a Language is uniquely determined by the Set of
-all \emph{Terminal Expressions} that are \emph{Generated} by the
-\emph{Production} or \emph{Rewrite Rules} of a \emph{Generative
-  Grammer} (\S\ref{sec:generative_grammar}) or the Set of
-Expressions \emph{Recognized} by a \emph{Determinative Grammar}
-(\S\ref{sec:determinative_grammar}). This possibly infinite Set of
-Terminal Expressions will be a Subset of $\Sigma^*$.
+The entire content of a Formal Language is uniquely determined by
+either:
+\begin{itemize}
+\item the Set of all Terminal Expressions that are Generated by the
+  Production Rules of a Generative Grammer
+  (\S\ref{sec:generative_grammar})
+\end{itemize}
+or
+\begin{itemize}
+\item the Set of Expressions Recognized by a Determinative Grammar
+  (\S\ref{sec:determinative_grammar})
+\end{itemize}
 
 For two Languages $L1$ and $L2$ over a common Alphabet $\Sigma$:
 \begin{itemize}
@@ -45,6 +105,9 @@ If $L2 \subset L1$ then $L2$ is a \emph{Sublanguage} of $L1$.
 For a given Language $L \subseteq \Sigma^*$ there exists a
 \emph{Complement Language} $L^C = \Sigma^* - L$.
 
+The Language consisting of just the Empty String $\{\varepsilon\}$ is
+distinguished from the Empty Language $\{\}$.
+
 
 
 % ====================================================================
@@ -52,60 +115,20 @@ For a given Language $L \subseteq \Sigma^*$ there exists a
 % ====================================================================
 
 The term \emph{Syntax} may be used as a synonym for \emph{Grammar}:
-that is a Set of Rules through which the strings of a Language can be
+that is a Set of Rules through which the Strings of a Language can be
 either \emph{Generated} (\S\ref{sec:generative_grammar}) or
 \emph{Recognized} (\S\ref{sec:determinative_grammar}).
 
 Syntax is the aspect of Formal Languages that refers only to the
-literal strings of Symbols of a Language with no regard to the meaning
-or \emph{Interpretation} (\S\ref{sec:interpretation}); only the
-condition that they can be identified and differentiated from
-one-another is required. The process of \emph{Syntactic Analysis} is
-known as \emph{Parsing} (\S\ref{sec:parser}).
+literal Strings of Symbols of a Language with no regard to the meaning
+or Interpretation (\S\ref{sec:interpretation}); only the condition
+that they can be identified and differentiated from one-another is
+required. The process of Syntactic Analysis is known as \emph{Parsing}
+(\S\ref{sec:parser}).
 
 Syntactic methods can be carried very far; all of Formal Language
 Theory as well as Proof Theory (Part \ref{sec:proof_theory}) are
-carried out Syntactically.
-
-Within a Formal Grammar the Symbols will be divided into two disjoint
-subsets according to whether they are \emph{Terminal} or
-\emph{Non-terminal Symbols}.
-
-The definition of a Non-terminal Symbol in the context of Generative
-Grammars is one for which a Production Rule exists with that Symbol
-appearing in the input and replaced in the output.
-
-\begin{description}
-
-    \item[Symbol] \hfill \\
-    an atomic unit of a Language
-
-    \item[Alphabet ($\Sigma$)] \hfill \\
-    a possibly infinite set of Symbols
-
-    \item[Expression] \hfill \\
-    a finite string of Symbols
-
-    \item[$\Sigma^{*}$] \hfill \\
-    set of all Expressions over an Alphabet of Symbols
-
-    \item[Production] \hfill \\
-    a Rewrite Rule specifying a Non-terminal Symbol substitution
-
-    \item[Generative Grammar] \hfill \\
-    a finite set of Productions over the Expressions of a Free Monoid
-
-\end{description}
-Two special Symbols are recognized:
-\begin{description}
-
-    \item[Empty Symbol ($\varepsilon$)] \hfill \\
-    the Symbol of zero length and a Terminal Symbol
-
-    \item[Start Symbol ($S$)] \hfill \\
-    a unique Non-terminal Symbol
-
-\end{description}
+Syntactic.
 
 
 
@@ -114,10 +137,20 @@ Two special Symbols are recognized:
 % --------------------------------------------------------------------
 
 A \emph{Generative Grammar} \emph{Generates} a Language by the
-repeated application of its Production Rules beginning with the Start
-Symbol. A sequence of rule applications is a \emph{Derivation} (cf.
-\S\ref{sec:formal_proof} and \S\ref{sec:logical_argument}). A Grammar
-may be formally defined as a 4-tuple:
+repeated application of \emph{Production Rules} beginning with a
+unique \emph{Non-terminal Symbol} called the Start Symbol, here
+denoted $S$.
+
+The definition of a Non-terminal Symbol in the context of a Generative
+Grammar is one for which a Production Rule exists with that Symbol
+appearing in the input and replaced in the output. A \emph{Terminal
+  Symbol} is one for which no Production Rule exists with that Symbol
+occuring in the input.
+
+A sequence of rule applications is a \emph{Derivation} (cf.
+\S\ref{sec:formal_proof} and \S\ref{sec:logical_argument}).
+
+A Generative Grammar may be formally defined as a 4-tuple:
 \[
     G(N,T,P,S)
 \]
@@ -133,40 +166,7 @@ another, where the left Expression must contain at least one
 Non-terminal Symbol. By convention, Non-terminal Symbols
 will be denoted by capitals ($A,B,C,\cdots$), and Terminals by
 lowercase ($a,b,c,\cdots$), and Expressions by Greek letters
-($\alpha,\beta,\gamma$). Let:
-
-\[
-    \mathcal{A} = \{ Alphabets \},\: \mathcal{V} = \{ Free Monoids \}
-\] \[
-    \mathcal{G} = \{ Grammars \},\: \mathcal{L} = \{ Languages \}
-\]
-
-\begin{itemize}
-
-\item Definition of the Kleene star over an Alphabet where $\circ$ is
-  the operation to \emph{Concatenate} two Expressions:
-\[
-    \forall \: \Sigma \in \mathcal{A} \:
-    \exists \: \Sigma^* \in \mathcal{V}
-    : \Sigma^* = \bigcup_{i=0}^{|\Sigma|} \Sigma_i
-    = (\Sigma,\circ)
-\]
-
-\item Definition of a Language in terms of a Free Monoid:
-\[
-    \forall \: L \in \mathcal{L} \:
-    \exists \: \Sigma^* \in \mathcal{V}
-    : L \subseteq \Sigma^*
-\]
-
-\item Existence of the Empty Symbol, $\varepsilon$:
-\[
-    \forall \: \Sigma^* \in \mathcal{V} \:
-    \exists ! \: \varepsilon \in \Sigma^*
-    : |\varepsilon|=0
-\]
-
-\end{itemize}
+($\alpha,\beta,\gamma$).
 
 
 
@@ -179,19 +179,21 @@ $\Sigma^*$ can be determined to belong to a Language $L \subseteq
 \Sigma^*$ (\emph{Recognized}). Such systems are described by
 \emph{Automata Theory} (\S\ref{sec:automata_theory})
 
+Syntactic Monoid (\S\ref{sec:syntactic_monoid})
+
 
 
 % --------------------------------------------------------------------
-\subsection{Chomsky Hierarchy}\label{sec:chomsky_hierarchy}\cite{chomsky56}
+\subsection{Chomsky Hierarchy}\label{sec:chomsky_hierarchy}
+\cite{chomsky56}
 % --------------------------------------------------------------------
 
 Grammars are classified by how restrictive the Production Rules are.
 By convention, they may be organized into a hierarchy of Classes under
 Proper Inclusion, where \emph{Type-0} is an Unrestricted Grammar,
-covering all possible Formal Grammars.
-\[
-    Type-0 \supset Type-1 \supset Type-2 \supset Type-3
-\]
+covering all possible Formal Grammars:
+
+    Type-0 $\supset$ Type-1 $\supset$ Type-2 $\supset$ Type-3 \\
 These different levels in the hierarchy are \emph{Recognizable} by
 different kinds of \emph{Automata} (\S\ref{sec:automata}).
 
@@ -203,7 +205,7 @@ different kinds of \emph{Automata} (\S\ref{sec:automata}).
 
 \subsubsection{Semi-decidable}\label{sec:semidecidable}
 
-Production Rules of an \emph{Unrestricted} Grammar have the form
+Production Rules of an \emph{Unrestricted Grammar} have the form
 \[
     \alpha \rightarrow \beta
 \]
@@ -279,7 +281,7 @@ $F$, with Productions of three possible forms,
 \]\[
     A[f\sigma] \rightarrow \alpha[\sigma]
 \]
-where $f \in F$ and $\sigma$ is a string of Index Symbols. The Index
+where $f \in F$ and $\sigma$ is a String of Index Symbols. The Index
 Symbols are used to form a \emph{Stack} by the Production Rules where
 Index Symbols are either pushed or popped from the Stack.
 
@@ -304,7 +306,7 @@ Rules are of the form:
 \[
     A \rightarrow f(X,Y,\cdots)
 \]
-where $X$,$Y$,$\cdots$ are string tuples or Non-terminal Symbols.
+where $X$,$Y$,$\cdots$ are String tuples or Non-terminal Symbols.
 
 There are several weakly equivalent Grammars to the composition
 formulation:
@@ -348,7 +350,7 @@ the form:
 \[
     V \rightarrow \alpha
 \]
-where $V$ is a single Non-terminal and $\alpha$ is a string of Terminals
+where $V$ is a single Non-terminal and $\alpha$ is a String of Terminals
 and/or Non-terminals (or $\varepsilon$). Because $V$ is required to be a
 single Non-terminal, the Production Rules can be applied regardless of
 Context. Each Non-terminal in a Context-free Grammar, $G$, is said to
@@ -683,7 +685,7 @@ Rule changes are based on global State changing over time.
 Local
 
 Rule changes only affect the position in the Syntax Tree of the
-generation of a string.
+generation of a String.
 
 \begin{itemize}
 \item Christiansen Grammars
@@ -896,10 +898,15 @@ Normal Form.
 
 
 % --------------------------------------------------------------------
-\subsection{Semi-Thue System}\label{sec:semithue_system}
+\subsection{String Rewriting System}\label{sec:string_rewriting}
 % --------------------------------------------------------------------
 
-or \emph{String Rewriting System} (\emph{SRS})
+A \emph{String Rewriting System} (\emph{SRS}, also \emph{Semi-Thue
+  System}) is defined by a Tuple $(\Sigma, R)$ with Alphabet $\Sigma$
+and Binary Relation $R$ corresponding to the Rewrite Rules between
+some fixed Strings of Alphabet Symbols.
+
+Monoid Presentation (\S\ref{sec:presentation})
 
 
 
@@ -935,7 +942,7 @@ The Data Structure produced by the Parser may be a \emph{Concrete
 
 A \emph{Concrete Syntax Tree} is an Ordered, Rooted Tree
 (\S\ref{sec:graph_tree}) representing the \emph{Syntactic
-  Structure} of a string according to a Context-free Grammar
+  Structure} of a String according to a Context-free Grammar
 (\S\ref{sec:context_free}) such as the \emph{Constituency Relation}
 of a Constituency Grammar (\S\ref{sec:constituency_grammar}) or the
 \emph{Depenency Relation} of a Dependency Grammar
@@ -956,13 +963,13 @@ Syntax being Parsed.
 
 
 % --------------------------------------------------------------------
-\subsection{Lexical Analysis}
+\subsection{Lexical Analysis}\label{sec:lexical_analysis}
 % --------------------------------------------------------------------
 
 A Parser may be preceded by a \emph{Lexical Analyzer} (also
 \emph{Lexer} or \emph{Tokenizer}) which creates \emph{Tokens} from
 input Expressions. A Token is a structure representing a \emph{Lexeme}
-(that is, a string forming a Syntactic unit) and associated
+(that is, a String forming a Syntactic unit) and associated
 \emph{Type} and \emph{Value} information.
 
 A Lexical Analyzer is itself a Parser and usually the \emph{Lexical
@@ -1132,7 +1139,7 @@ A Semiautomaton induces a Monoid called the \emph{input Monoid}:
 \subsection{Automata} \label{sec:automata}
 % --------------------------------------------------------------------
 
-An \emph{Automaton} reads input strings, \emph{Words} (Expressions),
+An \emph{Automaton} reads input Strings, \emph{Words} (Expressions),
 and either accepts or rejects depending on whether a Word is a member
 of the Language recognized by that Automaton. By convention the Set of
 Expressions from Formal Languages will be re-cast as Alphabets of
@@ -1167,7 +1174,7 @@ where
 % --------------------------------------------------------------------
 
 \emph{Finite Automata} are \emph{Finite State Machines} and take a
-finite input string of Symbols and either accepts or rejects the input
+finite input String of Symbols and either accepts or rejects the input
 depending on the final State of the computation. Finite Automata are
 able to recognize Regular Languages(\S\ref{sec:regular_language}).
 
