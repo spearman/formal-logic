@@ -78,6 +78,11 @@ four \emph{Group Axioms}:
     \item Inverse elements: $\forall a \in G, \exists b \in G :
       a \cdot b = b \cdot a = e$
 \end{enumerate}
+The Identity Element is the only Element with the unique Property:
+\[
+    e \cdot e = e
+\]
+
 The Signature (\S\ref{sec:signature}) for Groups is $\{\cdot, 1,
 ^{-1}\}$.
 
@@ -160,10 +165,16 @@ Inverses).
 
 An \emph{Additive Group} refers to a Group where the Group Operation
 can be thought of as \emph{Addition} (usually Abelian).
+
+
+
+\subsubsection{Multiplicative Group}\label{sec:multiplicative_group}
+
+A \emph{Multiplicative Group} is defined in terms of a Structure with
+Invertible Elements such as a \emph{Ring} (\S\ref{sec:ring}) $R$
+having Multiplication, $\bullet$, as one of its Operations:
 \[
-    S_1 = \{e\}
-\] \[
-    S_2 = \{e, \tau\}
+  (R \ {0}, \bullet)
 \]
 
 
@@ -228,15 +239,13 @@ where $b \in \mathbb{Z}$.
 
 
 
-\subsubsection{Skeleton}
-
 \subsubsection{Coset}\label{sec:group_coset}
 
 The \emph{Coset} of a Subgroup (\S\ref{sec:subgroup}) $H$ in a Group $G$
 is defined as
 \begin{description}
-\item[Left Coset] $gH = {gh : h \in H}$
-\item[Right Coset] $Hg = {hg : h \in H}$
+\item[Left Coset:] $gH = {gh : h \in H}$
+\item[Right Coset:] $Hg = {hg : h \in H}$
 \end{description}
 
 
@@ -245,8 +254,160 @@ is defined as
 
 A \emph{Normal Subgroup} of a Group $G$ is a \emph{Subgroup} $H$ that
 is invariant under Conjugation (\S\ref{sec:conjugacy_class}) by the
-Elements of $G$. That is, $H$ is a Normal Subgroup of $G$ if and only
-if $\forall g \in G, gH = Hg$, denoted $H \triangleleft G$.
+Elements of $G$, $gHg^{-1} = H$ and is denoted $H \triangleleft G$.
+$H$ is a Normal Subgroup of $G$ if and only if $\forall g \in G, gH =
+Hg$.
+
+In an Abelian Group, all Subgroups are Normal Subgroups.
+
+
+
+\subsubsection{Center}\label{sec:group_center}
+
+The \emph{Center} of a Group $G$, denoted $Z(G)$, is a Normal Subgroup
+of $G$ defined as:
+\[
+    Z(G) = \{ z \in G | \forall g \in G, zg = gz \}
+\]
+If $G$ is an Abelian Group, $Z(G) = G$.
+
+For a Symmetric Group (\S\ref{sec:symmetric_group}) $S_n$:
+\[
+    Z(S_n) = \{e\}
+\]
+
+For a General Linear Group (\S\ref{sec:general_linear_group})
+$GL_n(R)$:
+\[
+    Z(GL_n(R)) = \{\lambda \mathrm{I}\}
+\]
+
+
+
+\subsubsection{Skeleton}\label{sec:group_skeleton}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Group Homomorphism}\label{sec:group_homomorphism}
+% --------------------------------------------------------------------
+
+A \emph{Group Homomorphism} $h$, between two Groups, $G$ and $H$, is a
+Morphism $h : G \rightarrow H$ that preserves Group operations
+$\cdot_G$ and $\cdot_H$. That is, for $x,y \in G$:
+\[
+    h(x \cdot_G y) = h(x) \cdot_H h(y)
+\]
+From this it follows that Group Homomorphisms have the Properties:
+\[
+    h(e_G) = e_H
+\]\[
+    h(x^{-1}) = h(x)^{-1}
+\]
+
+There is always a \emph{Trivial Homomorphism} between any two Groups
+$G$ and $H$:
+\[
+    \forall x \in G, h (x) = e_H
+\]
+
+The Composition of two Homomorphisms $h : G \rightarrow H$ and $g : F
+\rightarrow G$, $h \circ g$ is a Homomorphism.
+
+Taken as Monoidal Categories (\S\ref{sec:monoidal_category}), two
+Groups $G, H$ may be related by a Functor $f$ which is equivalent to a
+Group Homomorphism:
+\[
+    f : G \rightarrow H
+\]
+and for $x,y \in G$:
+\[
+    f(xy) = f(x)f(y)
+\]
+
+
+
+\subsubsection{Group Homomorphism Image}\label{sec:group_image}
+
+The \emph{Image} of a Group Homomorphism:
+\[
+    im(h) = \{ x' \in H | h(x) = x', x \in G \}
+\]
+The Image of a $h$ is a Subgroup (\S\ref{sec:subgroup}) of $H$:
+\[
+    im(h) \subset H
+\]
+
+If the Image of $h$ is equal to $H$, and the Kernel
+(\S\ref{sec:group_kernel}) is $\{e_G\}$ (\S\ref{sec:morphism_kernel}),
+then $h$ is an Isomorphism (\S\ref{sec:group_isomorphism}).
+
+
+
+\subsubsection{Group Homomorphism Kernel}\label{sec:group_kernel}
+
+The \emph{Kernel} of a Group Homomorphism, $h : G \rightarrow H$,
+denoted by $ker(h)$ is defined as:
+\[
+    ker(h) = \{g \in G | h(g) = e_H\}
+\]
+where $e_H$ is the Identity Element of $H$, that is, the Preimage of
+the Singleton Set $\{e_H\}$. The Kernel is a Normal Subgroup
+(\S\ref{sec:normal_subgroup}) of the Domain Group of the Group
+Homomorphism, in this case $G$:
+\[
+    ker(h) \triangleleft G
+\]
+
+If $ker(h) = \{e_G\}$ and the Image (\S\ref{sec:group_image}) is equal
+to the Codomain Group, $im(h) = H$, then $h$ is an Isomorphism
+(\S\ref{sec:group_isomorphism}).
+
+
+
+\subsubsection{Group Isomorphism}\label{sec:group_isomorphism}
+
+A \emph{Group Isomorphism} is a Bijective Group Homomorphism.
+
+A Group Homomorphism $h : G \rightarrow H$ is an Isomorphism if
+$ker(h) = e_G$ and $im(h) = H$. If $G = H$ then $h$ is an
+\emph{Automorphism} (\S\ref{sec:group_automorphism}).
+
+The existence of an Isomorphism between Groups $G$ and $H$ imply the
+following Properties:
+\begin{itemize}
+    \item $|G| = |H|$
+    \item $G$ is Abelian $\Leftrightarrow$ $H$ is Abelian
+    \item $G$ and $H$ have the same number of Elements of every Order
+\end{itemize}
+
+
+
+\paragraph{Isomorphism Theorem}\label{sec:isomorphism_theorem}
+
+\emph{First Isomorphism Theorem}
+
+\emph{Second Isomorphism Theorem}
+
+\emph{Third Isomorphism Theorem}
+
+
+
+\subsubsection{Group Automorphism}\label{sec:group_automorphism}
+
+A \emph{Automorphism} is an Endomorphism that is also an Isomorphism.
+
+
+
+\paragraph{Inner Automorphism}\label{sec:inner_automorphism}
+\hfill \\
+
+An \emph{Inner Automorphism} of a Group $G$ is an Automorphism $f : G
+\rightarrow G$ defined by:
+\[
+    \forall g \in G, f(g) = a^{-1}ga
+\]
+where $a$ is a given fixed Element of $G$.
 
 
 
@@ -299,67 +460,6 @@ and the entire Group $G$ as Normal Subgroups.
 
 
 % --------------------------------------------------------------------
-\subsection{Group Homomorphism}\label{sec:group_homomorphism}
-% --------------------------------------------------------------------
-
-A \emph{Group Homomorphism} $h$, between two Groups, $G$ and $H$, is a
-Morphism $h : G \rightarrow H$ that preserves Group operations
-$\cdot_G$ and $\cdot_H$. That is, for $x,y \in G$:
-\[
-    h(x \cdot_G y) = h(x) \cdot_H h(y)
-\]
-
-There is always a \emph{Trivial Homomorphism} between any two Groups
-$G$ and $H$:
-\[
-    \forall x \in G, h (x) = e_H
-\]
-
-Taken as Monoidal Categories, two Groups $G, H$ may be related by a
-Functor $f$ which is equivalent to a Group Homomorphism:
-\[
-    f : G \rightarrow H
-\]
-and for $x,y \in G$:
-\[
-    f(xy) = f(x)f(y)
-\]
-If the Image of $f$ is equal to $H$, and the Kernel is $\{e\}$
-(\S\ref{sec:morphism_kernel}).
-
-
-
-\subsubsection{Group Isomorphism}\label{sec:group_isomorphism}
-
-A \emph{Group Isomorphism} is a Bijective Group Homomorphism.
-
-Isomorphism Properties for two Groups $G$, $H$:
-\begin{itemize}
-    \item $|G| = |H|$
-    \item $G$ is Abelian $\Leftrightarrow$ $H$ is Abelian
-    \item $G$ and $H$ have the same number of Elements of every Order
-\end{itemize}
-
-
-
-\subsubsection{Group Kernel}\label{sec:group_kernel}
-
-The \emph{Kernel} of a Group Homomorphism, $h : G \rightarrow H$,
-denoted by $ker(h)$ is defined as:
-\[
-    ker(h) = {g \in G : f(g) = e_H}
-\]
-where $e_H$ is an Element of $H$, and so the Kernel is just the
-Preimage of the Singleton Set $\{e_H\}$. Such a Kernel is a Normal
-Subgroup.
-
-The Kernel of $G$ is $\{x | f(x)=e_H, x \in G\}$ and always
-gives a \emph{Normal Subgroup} (\S\ref{sec:subgroup}) of $G$,
-written $H \triangleleft G$.
-
-
-
-% --------------------------------------------------------------------
 \subsection{Direct Product}\label{sec:direct_product}
 % --------------------------------------------------------------------
 
@@ -406,6 +506,14 @@ For $k \leq n$, $S_k \subset S_n$.
 
 
 
+\paragraph{Cayley's Theorem}\label{sec:cayleys_theorem}
+
+
+
+\subsubsection{Alternating Group}\label{sec:alternating_group}
+
+
+
 \subsubsection{Permutation Group}\label{sec:permutation_group}
 
 Any Permutation Group on a Set $S$ with Cardinality $n$ is any
@@ -423,7 +531,38 @@ Symmetric Group.
 
 
 
-\paragraph{Cayley's Theorem}\label{sec:cayleys_theorem}
+\paragraph{Inner Automorphism Group}\label{sec:inner_automorphism_group}
+\hfill \\
+
+For the Automorphism Group of a Group $G$, $Aut(G)$, one can always
+construct a Homomorphism:
+\[
+    f : G \rightarrow Aut(G)
+\]
+defined as:
+\[
+    \forall g \in G, f (g) (h) = g h g^{-1}
+\]
+with Kernel equal to the Center (\S\ref{sec:group_center}) of $G$:
+\[
+    ker(f) = Z(G)
+\]
+and the Image is a Subgroup of $Aut(G)$ called the \emph{Inner
+  Automorphism Group} of $G$, denoted $Inn(G)$, defined as:
+\[
+    Inn(G) = \{ a \in Aut(G) | \exists g \in G : a(h) = g h g^{-1} \}
+\]
+where $a$ is an \emph{Inner Automorphism}
+(\S\ref{sec:inner_automorphism}) of $G$.
+
+By the First Isomorphism Theorem (\S\ref{sec:isomorphism_theorem}),
+$Inn(G)$ is Isomorphic to the Quotient Group
+(\S\ref{sec:quotient_group}) $G / Z(G) \cong Inn(G)$.
+
+
+
+\paragraph{Outer Automorphism Group}\label{sec:outer_automorphism_group}
+\hfill \\
 
 
 
@@ -452,9 +591,8 @@ $A_4$:
 The Klein 4-group is an Abelian Group and is Isomorphic to the
 Dihedral Group of Order 4 and is the smallest Non-cyclic Group.
 
-
-
-\subsubsection{Alternating Group}\label{sec:alternating_group}
+The Automorphism Group (\S\ref{sec:automorphism_group}) $Aut(K_4)$ is
+Isomorphic to $S_3$.
 
 
 
@@ -467,6 +605,25 @@ Dihedral Group of Order 4 and is the smallest Non-cyclic Group.
 Invertible Matrices and the Group Operation is ordinary Matrix
 Multiplication and is denoted $GL_n(R)$ and is a Subgroup of
 $Sym(R^n)$.
+
+
+
+\paragraph{Special Linear Group}\label{sec:special_linear_group}
+
+\hfill \\ A \emph{Special Linear Group} of Degree $n$ over a Ring
+(\S\ref{sec:ring}) $R$, denoted $SL_n(R)$, is the Set of $n \times n$
+Matrices with Determinant (\S\ref{sec:determinant}) equal to $1$, with
+the Group Operation of ordinary Matrix Multiplication. This is a
+Normal Subgroup of the General Linear Group $GL_n(R)$ given by the
+Kernel of the Determinant Function $ker(det)$, where:
+\[
+  det : GL_n(R) \rightarrow R^\times
+\]
+and $R^\times$ is the Multiplicative Group
+(\S\ref{sec:multiplicative_group}) on $R$.
+
+The Elements of $SL_n(R)$ are the Volume and Orientation preserving
+Linear Transformations of $R^n$.
 
 
 
