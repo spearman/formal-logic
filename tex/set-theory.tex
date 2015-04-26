@@ -123,9 +123,11 @@ is denoted $\{\}$ or $\varnothing$. A Set with Cardinality 1 is called a
 
 \emph{Union}
 
+
+
 \subsubsection{Disjoint Union}\label{sec:disjoint_union}
 
-Given a Family (\S\ref{sec:index_set}) of Sets ${A_i : i \in I}$,
+Given a Family (\S\ref{sec:family}) of Sets ${A_i : i \in I}$,
 the \emph{Disjoint Union} is defined as:
 \[
     \bigsqcup_{i \in I} A_i = \bigcup_{i \in I} {(x,i) : x \in A_i}
@@ -182,6 +184,30 @@ An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
 
 
 % --------------------------------------------------------------------
+\subsection{Family}\label{sec:family}
+% --------------------------------------------------------------------
+
+A \emph{Family} is a collection of Sets.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Partition}\label{sec:partition}
+% --------------------------------------------------------------------
+
+A \emph{Partition} of a Set $X$ is a Set of Non-empty Subsets of $X$
+such that every Element of $X$ is in exactly one Subset, thus $X$ is
+the Disjoint Union (\S\ref{sec:disjoint_union}) of the Subsets. A
+Partition $P$ of $X$ has the Properties:
+\begin{enumerate}
+  \item $\emptyset \notin P$
+  \item $\bigcup_{A \in P}A = X$
+  \item $A,B \in P \wedge A \neq B \Rightarrow A \cap B = \emptyset$
+\end{enumerate}
+
+
+
+% --------------------------------------------------------------------
 \subsection{Forcing}\label{sec:forcing}
 % --------------------------------------------------------------------
 
@@ -206,6 +232,10 @@ Given two Sets $X,Y$ and Functions $f,g : X \rightarrow Y$, the
 An \emph{Index Set} is one that \emph{Indexes} (or \emph{Labels})
 Members of another Set. Indexing is a Surjective Function
 (\S\ref{sec:set_function}) from an Index Set onto a target Set.
+
+
+
+\subsubsection{Indexed Family}\label{sec:indexed_family}
 
 An \emph{Indexed Family} of Sets is a Function from an Index Set to
 the Class of Sets. For Index Set $J$ and Indexed Set $A$, the Indexed
@@ -414,7 +444,7 @@ Function is the Subset of the Codomain that the Function actually Maps
 to, and the Subset of the Domain that Maps to it is called the
 \emph{Inverse Image} or \emph{Preimage}. For an Element of a Set $Y$,
 $y \in Y$, under a Map $f: X \rightarrow Y$, the \emph{Fiber} of $y$
-is the Preimage of the Singleton Set ${y}$.
+is the Preimage of the Singleton Set $\{y\}$.
 
 Each Element of the Preimage Maps to one Element of the Image. This
 Property is expressed as
@@ -715,7 +745,8 @@ From the above types of Relations, the following Orders
 general to most restricted:
 \begin{description}
 \item[Preorder] (or Quasiorder) when Reflexive and Transitive (all
-  Partial Orders and Equivalence Relations are Preorders)
+  Partial Orders and Equivalence Relations
+  (\S\ref{sec:equivalence_relation}) are Preorders)
 \item[Partial Order] when Preorder and Anti-symmetric (Poset
   \S\ref{sec:poset})
 \item[Total Preorder] (or Weak Order) when Preorder and Total.
@@ -745,13 +776,27 @@ implies Symmetry. A Binary Relation is a Tournament when $a \neq b
 
 \subsubsection{Equivalence Relation}\label{sec:equivalence_relation}
 
-An \emph{Equivalence Class} of an Element $a$ in a Set $X$ with
-\emph{Equivalence Relation} $\sim$ is defined as
+An \emph{Equivalence Relation} on a Set $X$ is a Reflexive, Symmetric,
+and Transitive Relation that Partitions (\S\ref{sec:partition}) the
+Set into Disjoint Subsets called \emph{Equivalence Classes}.
+
+The Equivalence Class of an Element $a \in X$ with Equivalence
+Relation $\sim$ is the Subset of $X$ defined as:
 \[
     [a] = \{x \in X | a \sim x\}
 \]
 The \emph{Quotient Set} is the Set of Equivalence Classes of a
 particular Equivalence Relation.
+
+For a Function between Sets $f : S \rightarrow T$, one may define an
+Equivalence Relation on Elements $a,b \in S$:
+\[
+    a \sim b \Leftrightarrow f(a) = f(b)
+\]
+where the Equivalence Classes are the Fibers
+(\S\ref{sec:set_function}) of the Elements in $T$ and the Quotient Set
+is the Image of the Equivalence Relation viewed as a Function on
+Elements of $S$ to their Equivalence Classes.
 
 
 
