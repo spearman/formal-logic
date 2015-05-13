@@ -1,5 +1,5 @@
 #!/bin/bash
 
-latexmk -pdf formal-logic
+latexmk -pdf main
 
 exit
