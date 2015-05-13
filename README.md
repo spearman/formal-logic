@@ -17,11 +17,11 @@ latex packages `texlive-latex-recommended` and
 
 With `pdflatex`:
 
-    $ pdflatex formal-logic.tex
+    $ pdflatex main.tex
 
 With `latexmk` (recommended):
 
-    $ latexmk -pdf formal-logic
+    $ latexmk -pdf main
 
 or use included utility script (shortcut for the above):
 
