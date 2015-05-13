@@ -44,9 +44,25 @@ under at least one Interpretation. A Formula is Valid
 
 
 
-% ====================================================================
-\section{Deductive Apparatus} \label{sec:deductive_apparatus}
-% ====================================================================
+% --------------------------------------------------------------------
+\subsection{Syntactic Consequence}\label{sec:syntactic_consequence}
+% --------------------------------------------------------------------
+
+For a Formal System, $\mathcal{S}$, a WFF, $A$, is a \emph{Syntactic
+  Consequence} of a possibly empty Set of Formulas, $\Gamma$, if there
+is a Formal Proof (\S\ref{sec:formal_proof}) of $A$ from $\Gamma$ in
+$\mathcal{S}$:
+\[
+    \Gamma \vdash_{\mathcal{S}} A
+\]
+where $\vdash_{\mathcal{S}}$ is the \emph{Syntactic Consequence
+  Relation} on $\mathcal{S}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Deductive Apparatus} \label{sec:deductive_apparatus}
+% --------------------------------------------------------------------
 
 A \emph{Deductive Apparatus} (or \emph{Deductive System}) is a Set of
 zero or more WFFs called \emph{Axioms} (\S\ref{sec:axiom}) and one or
@@ -65,22 +81,6 @@ A Formal System is termed \emph{Effective} (i.e. Recursively
 Definable) if the Set of Axioms and the Set of Inference Rules are
 Decidable or Semi-decidable (\S\ref{sec:decidable_set}). The notion of
 ``Theorem'', however, is not in general Effective.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Syntactic Consequence}\label{sec:syntactic_consequence}
-% --------------------------------------------------------------------
-
-For a Formal System, $\mathcal{S}$, a WFF, $A$, is a \emph{Syntactic
-  Consequence} of a possibly empty Set of Formulas, $\Gamma$, if there
-is a Formal Proof (\S\ref{sec:formal_proof}) of $A$ from $\Gamma$ in
-$\mathcal{S}$:
-\[
-    \Gamma \vdash_{\mathcal{S}} A
-\]
-where $\vdash_{\mathcal{S}}$ is the \emph{Syntactic Consequence
-  Relation} on $\mathcal{S}$.
 
 
 
@@ -155,9 +155,9 @@ number of Axioms. A System without Schema is termed \emph{Finitely
 
 
 
-% --------------------------------------------------------------------
-\subsection{Formal Proof} \label{sec:formal_proof}
-% --------------------------------------------------------------------
+% ====================================================================
+\section{Formal Proof} \label{sec:formal_proof}
+% ====================================================================
 
 A \emph{Formal Proof} (or \emph{Derivation}) is a finite sequence of
 Well-formed Formulas of a Formal System that are either Axioms or
@@ -172,7 +172,9 @@ from the Set $\Gamma$:
 
 
 
-\subsubsection{Theorem} \label{sec:theorem}
+% --------------------------------------------------------------------
+\subsection{Theorem} \label{sec:theorem}
+% --------------------------------------------------------------------
 
 The concluding Formula in the sequence is a \emph{Theorem}. A Theorem
 is a Syntactic Consequence (\S\ref{sec:syntactic_consequence}) of the
@@ -181,7 +183,9 @@ a further Theorem is called a \emph{Lemma}.
 
 
 
-\subsubsection{Analytic Proof} \label{sec:analytic_proof}
+% --------------------------------------------------------------------
+\subsection{Analytic Proof} \label{sec:analytic_proof}
+% --------------------------------------------------------------------
 
 A \emph{Theoretic Analytic Proof} begins with an assumption and
 proceeds to an accepted truth (an Axiom, or contradiction as in
@@ -189,7 +193,9 @@ proceeds to an accepted truth (an Axiom, or contradiction as in
 
 
 
-\subsubsection{Synthetic Proof} \label{sec:synthetic_proof}
+% --------------------------------------------------------------------
+\subsection{Synthetic Proof} \label{sec:synthetic_proof}
+% --------------------------------------------------------------------
 
 A \emph{Synthetic Proof} is the reverse of this process; beginning
 with known truths and reasoning up to the desired Proof. A
@@ -198,13 +204,21 @@ that are to be satisfied.
 
 
 
-\subsubsection{Constructive Proof}\label{sec:constructive_proof}
+% --------------------------------------------------------------------
+\subsection{Constructive Proof}\label{sec:constructive_proof}
+% --------------------------------------------------------------------
 
 \emph{Existence Theorem}
 
 
 
-\subsubsection{Non-constructive Proof}\label{sec:nonconstructive_proof}
+\subsubsection{Realizability} \label{sec:realizability}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Non-constructive Proof}\label{sec:nonconstructive_proof}
+% --------------------------------------------------------------------
 
 
 
@@ -235,14 +249,18 @@ including any Axioms.
 
 
 
-\subsubsection{Subtheory \& Extension}\label{sec:subtheory}
+% --------------------------------------------------------------------
+\subsection{Subtheory \& Extension}\label{sec:subtheory}
+% --------------------------------------------------------------------
 
 A Theory $S$ is a \emph{Subtheory} of a Theory $T$ if $S \subseteq T$.
 $T$ is then a \emph{Supertheory} (or \emph{Extension}) of $S$.
 
 
 
-\subsubsection{Conservative Extension}\label{sec:conservative_extension}
+% --------------------------------------------------------------------
+\subsection{Conservative Extension}\label{sec:conservative_extension}
+% --------------------------------------------------------------------
 
 Given two Theories $T_1$ and $T_2$ with underlying Formal Languages
 $L_1$ and $L_2$ respectively, $T_2$ is a \emph{Conservative Extension}
@@ -259,7 +277,9 @@ See also \emph{Conservativity} (\S\ref{sec:conservativity})
 
 
 
-\subsubsection{Consistent Theory}\label{sec:consistent_theory}
+% --------------------------------------------------------------------
+\subsection{Consistent Theory}\label{sec:consistent_theory}
+% --------------------------------------------------------------------
 
 A Theory is \emph{Absolutely Consistent} (also \emph{Coherent} or
 \emph{Non-trivial}) if not every WFF in the underlying Language is a
@@ -276,7 +296,13 @@ See also \emph{Paraconsistency} (\S\ref{sec:paraconsistent_inference}).
 
 
 
-\subsubsection{Complete}\label{sec:complete_theory}
+\subsubsection{$\omega$-consistent}\label{sec:omega_consistent}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Complete}\label{sec:complete_theory}
+% --------------------------------------------------------------------
 
 A Consistent Theory is said to be \emph{Complete} if for every
 Sentence in the Language of that Theory, the Theory contains either
@@ -289,7 +315,9 @@ that Sentence or its Negation. Such a Set of Sentences is a
 
 
 
-\subsubsection{Satisfiable}\label{sec:satisfiable_theory}
+% --------------------------------------------------------------------
+\subsection{Satisfiable}\label{sec:satisfiable_theory}
+% --------------------------------------------------------------------
 
 A Theory is \emph{Satisfiable} if there exists a Model
 (\S\ref{sec:structure}) for that Theory.
@@ -306,14 +334,18 @@ Theories that are not Satisfiable.
 
 
 
-\subsubsection{Sound}\label{sec:sound_theory}
+% --------------------------------------------------------------------
+\subsection{Sound}\label{sec:sound_theory}
+% --------------------------------------------------------------------
 
 A Theory is \emph{Sound} when every Theorem is Valid
 (\S\ref{sec:validity}).
 
 
 
-\subsubsection{Effective}\label{sec:effective_theory}
+% --------------------------------------------------------------------
+\subsection{Effective}\label{sec:effective_theory}
+% --------------------------------------------------------------------
 
 A Theory is \emph{Effective} when it is possible to Effectively
 (\S\ref{sec:effective_method}) determine whether a Deduction is Valid
@@ -321,34 +353,30 @@ or not.
 
 
 
-\subsubsection{$\omega$-consistent}\label{sec:omega_consistent}
+% --------------------------------------------------------------------
+\subsection{Synthetic Theory}\label{sec:synthetic_theory}
+% --------------------------------------------------------------------
 
-\subsubsection{Synthetic Theory}\label{sec:synthetic_theory}
+% --------------------------------------------------------------------
+\subsection{Duality Principle}\label{sec:duality_principle}
+% --------------------------------------------------------------------
 
-\subsubsection{Duality Principle}\label{sec:duality_principle}
-
-
-
-% ====================================================================
-\section{Metatheory} \label{sec:metatheory}
-% ====================================================================
+% --------------------------------------------------------------------
+\subsection{Metatheory} \label{sec:metatheory}
+% --------------------------------------------------------------------
 
 A \emph{Metatheory} is a Theory whose subject matter is some other
 Theory.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Metatheorem}\label{sec:metatheorem}
-% --------------------------------------------------------------------
+\subsubsection{Metatheorem}\label{sec:metatheorem}
 
 A \emph{Metatheorem} is a Theorem proved within a Metatheory.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Judgement}\label{sec:judgement}
-% --------------------------------------------------------------------
+\subsubsection{Judgement}\label{sec:judgement}
 
 A \emph{Judgement} is an inductively definable assertion in the
 Metatheory of a Logical System. That is, one that includes
@@ -756,10 +784,6 @@ Literal in the current leaf (\emph{Strong Connectedness}).
 
 % ====================================================================
 \section{Proof Procedure}\label{sec:proof_procedure}
-% ====================================================================
-
-% ====================================================================
-\section{Realizability} \label{sec:realizability}
 % ====================================================================
 
 % ====================================================================
