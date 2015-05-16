@@ -4,69 +4,226 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{Formal Logic} (or \emph{Symbolic Logic})
+\emph{Formal Logic} (or \emph{Symbolic Logic}) is the study of Logical
+Systems (\S\ref{sec:logical_system}), that is, Formal Systems
+(\S\ref{sec:formal_system}) with an underlying Language that is
+suitable for the particular Logic under consideration, together with a
+form of Semantics (Part \ref{sec:formal_semantics}), usually as a
+Model-theoretic Interpretation (\S\ref{sec:interpretation}).
 
-Formal System (\S\ref{sec:formal_system}) + Formal Semantics
-(\S\ref{sec:formal_semantics})
 
-Symbols in a Formal System may be divided into \emph{Logical Symbols}
-and \emph{Non-Logical Symbols}.
 
-Logical Symbols always have the same meaning, e.g. Symbols such as
-$\forall$, $\vee$, $\rightarrow$, $\neg$, etc., and \emph{Variables}
-(\S\ref{sec:variable}) $x_0$, $x_1$, etc.
+% ====================================================================
+\section{Logical System}\label{sec:logical_system}
+% ====================================================================
 
-Non-Logical Symbols only have meaning under an \emph{Interpretation}
-(\S\ref{sec:interpretation}), e.g. Symbols such as \emph{Predicates}
-(Relations \S\ref{sec:set_relation}), \emph{Functions}
-(\S\ref{sec:set_function}), and individual \emph{Constants} (Nullary
-Functions). The set of Non-Logical Symbols used in a particular
-discourse is called the \emph{Signature} of the discourse. The
-Signature may be defined as a triple:
-\[
-    \sigma = (S_{func},S_{rel},ar)
-\]
-where
-\[
-    ar: S_{func} \cup S_{rel} \rightarrow \mathbb{N}_0
-\]
+A \emph{Logical System} (or \emph{System of Logic} or just
+``\emph{Logic}'') is a Formal System (\S\ref{sec:formal_system}) together
+with a form of Semantics (Part \ref{sec:formal_semantics}) that gives
+Meanings to the Formulas in the underlying Language. Symbols in the
+Language are broadly divided into \emph{Variables} or
+\emph{Constants}.
+
+Constants may be further divided into \emph{Logical Constants} and
+\emph{Non-Logical Constants}.
+
+Symbols that don't have individual Meaning in isolation are called
+\emph{Syncategorematic} (see Term Logic \S\ref{sec:term_logic}),
+otherwise they are called \emph{Categorematic}.
+
 \emph{Extra-logical Symbols} are those of a Metalanguage
-(\S\ref{sec:metalanguage}), such as the symbol for \emph{Logical
-  Consequence} (\emph{Entailment}), $\vdash$, (read \emph{yields} or
-\emph{proves}) or Metavariables, $\varphi, \psi, \ldots$.
+(\S\ref{sec:metalanguage}), such as the Symbol for Logical Consequence
+(Entailment \S\ref{sec:logical_consequence}), $\vdash$, or Metavariables,
+$\varphi, \psi, \ldots$.
 
-%FIXME
+Other Symbols may be used for \emph{Punctuation}, like Parentheses and
+Commas, as long as they don't appear in one of the other kinds of
+Symbols.
 
+
+
+% --------------------------------------------------------------------
+\subsection{Variable}\label{sec:variable}
+% --------------------------------------------------------------------
+
+A \emph{Variable} is a placeholder that ranges over the objects in the
+Domain of Discourse (\S\ref{sec:domain}).
+
+Variables are called \emph{Bound Variables} or \emph{Free Variables}
+depending on whether or not they are Quantified
+(\S\ref{sec:quantifier}).
+
+Inductive definition of Free and Bound Variables:
+\begin{enumerate}
+\item A Variable $x$ is Free in Atomic Formula
+  (\S\ref{sec:atomic_formula}) $\varphi$ if $x$ occurs in $\varphi$
+  (Atomic Formulas are Quantifier-free)
+\item A Variable is Free or Bound in the Compound Formula $\varphi
+  \bullet \psi$ if $x$ is Free or Bound in either $\varphi$ or $\psi$,
+  where $\bullet$ is a Binary Logical Connective
+  (\S\ref{sec:logical_connective})
+\item A Variable $x$ is Free in $\forall y \varphi$ iff $x$ is Free in
+  $\varphi$ and $x$ is not $y$. Conversely $x$ is Bound in $\forall y
+  \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
+\end{enumerate}
+
+A Term with no Free Variables is a \emph{Ground Term} and a Formula
+with no Free Variables in First-order Logic is a \emph{Sentence} (also
+called a \emph{Closed Formula}). Sentences have well-defined Truth
+values. In some treatments, Free Variables may be Implicitly
+Universally Quantified, but in general this is not the case.
+
+
+
+\subsubsection{Metavariable}\label{sec:metavariable}
+
+A \emph{Metavariable} is a Variable written in a Metalanguage that
+stands in for an Element in the Object Language. The Formalization of
+Metavariables falls under \emph{Type Theory} (Part
+\ref{sec:type_theory}).
+
+Metavariables may be referred to as \emph{Schematic Variables} in the
+context of Axiom Schemata (\S\ref{sec:axiom_schema}) and Rule Schemata
+(\S\ref{sec:rule_schema}). A Schematic Variable ranges over all
+Propositions (\S\ref{sec:proposition}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logical Constant}\label{sec:logical_constant}
+% --------------------------------------------------------------------
+
+\emph{Logical Constants} (or \emph{Logical Symbols}) have the same
+Semantic Meaning under every Interpretation of the Language.
+
+Two types of Logical Constants are \emph{Logical Connectives} and
+\emph{Quantifiers}.
+
+
+
+\subsubsection{Logical Connective}\label{sec:logical_connective}
+
+\emph{Logical Connective} (or \emph{Logical Operator})
+
+
+
+\paragraph{Material Conditional}\label{sec:material_conditional}\hfill \\
+
+\emph{Material Conditional}, \emph{Material Implication},
+\emph{Material Consequence}
+
+
+
+
+\subsubsection{Quantifier}\label{sec:quantifier}
+
+A \emph{Quantifier} limits (\emph{Binds}) a Variable to a certain
+quantity of members of the Domain, the two fundamental Quantifiers
+being the \emph{Universal Quantifier} ($\forall$) and
+\emph{Existential Quantifier} ($\exists$).
+
+A \emph{Bound Quantifier} is one with a restricted Range, e.g.
+$\exists x > 0$ or $\forall x \in \mathbb{R}$.
+
+The \emph{Unique Existential Quantifier}, denoted by $\exists !$, is
+expressed in natural language as ``there is one and only one.'' A
+First-Order System requires the \emph{Equality Relation}
+(\S\ref{sec:firstorder_equality}) in order to be able to express
+Uniqueness Quantification.
+
+\emph{Witness}
+
+
+
+\subsubsection{Quantifier Rank}\label{sec:quantifier_rank}
+
+\emph{Quantifier Rank} is the depth of nesting of Quantifiers in a
+Formula.
+
+Inductive definition of Quantifier Rank function $qr$:
 \begin{itemize}
-\item Propositional Logic, Sentential Logic
-\item ??? Second-order Propositional Logic
-\item Zeroth-order Logic
-\item First-order Logic
-\item Second-order Logic
-\item $n$th-order Logic
-\item ??? Infinitary Logic
+\item $qr(\varphi) = 0$ if $\varphi$ is Atomic
+\item $qr(\varphi_1 \wedge \varphi_2) = qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
+\item $qr(\neg \varphi) = qr(\varphi)$
+\item $qr(\exists_x \varphi) = qr(\varphi) + 1$
 \end{itemize}
 
-Propositional Logic, Sentential Logic:
 
-- Set Algebra, Set Operations
-- Boolean Algebra, Boolean Functions
-- Propositional Calculus, Logical Connectives
 
-Zeroth-order Logic:
+\subsubsection{Prenex Normal Form}\label{sec:prenex_normal}
 
-???:
+\emph{Normal Form} (\S\ref{sec:normal_form})
 
-- Term Logic, Monadic Predicate Calculus
-- Simply-typed Lambda Calculus
-- Minimal Logic
-- Positive Propositional Logic
-- Intuitionistic Propositional Calculus
 
-Second-order Propositional Logic:
 
-- Second-order Lambda Calculus, System F (Intuitionistic Logic +
-    Impredicative Quantification)
+
+
+% --------------------------------------------------------------------
+\subsection{Non-logical Constant}\label{sec:nonlogical_constant}
+% --------------------------------------------------------------------
+
+Non-Logical Symbols only have meaning under an Interpretation
+(\S\ref{sec:interpretation}). These are Symbols such as Relation
+Symbols (Predicates \S\ref{sec:predicate}) and Function Symbols.
+
+The set of Non-Logical Symbols used in a particular discourse is
+called the \emph{Signature} (\S\ref{sec:signature}) of the discourse.
+
+
+
+\subsubsection{Predicate}\label{sec:predicate}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Formula}\label{sec:formula}
+% --------------------------------------------------------------------
+
+Expressions belonging to the underlying Language of a Logical System
+are called ``\emph{Well-formed Formulas}'' (\emph{WFFs}) or just
+\emph{Formulas}.
+
+A Valuation (\S\ref{sec:valuation}) gives a Formula a particular Truth
+Value (\S\ref{sec:logical_truth}), while an Interpretation
+(\S\ref{sec:interpretation}) associates the Symbols of the Formula
+with their Realizations (Meanings).
+
+A Formula is Satisfiable (\S\ref{sec:satisfaction}) if it is True
+under at least one Interpretation. A Formula is Valid
+(\S\ref{sec:validity}) if and only if it is True under very
+Interpretation.
+
+
+
+\subsubsection{Term}\label{sec:term}
+
+A \emph{Term} represents an object of the Domain (\S\ref{sec:domain}).
+
+Terms can be defined Inductively from Constants, Variables, and
+Functions. Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0
+\cup F_1 \cup F_2 \cup \cdots \cup F_n$, Constants, $C = F_0$:
+\[
+    V \subseteq T
+\]\[
+    C \subseteq T
+\]\[
+    \forall \tau_n=\{t_1,\cdots,t_n\} \in \mathcal{P}(T), \forall f
+    \in F_n \exists f(t_1,\cdots,t_n) \in T
+\]
+
+
+
+\subsubsection{Atomic Formula}\label{sec:atomic_formula}
+
+\emph{Atomic Formula}
+
+Atomic Formulas can be defined Inductively from Terms and Relations.
+Given Terms, $T = \{t_0,\ldots,t_n\}$, and Relations, $R =
+\{r_0,\ldots,r_m\}$:
+\begin{itemize}
+\item $t_i = t_j$ is a Formula
+\item $r_k(t_0,\ldots,t_n)$ is a Formula and $r_k$ is an n-ary Relation
+\end{itemize}
 
 
 
@@ -74,17 +231,156 @@ Second-order Propositional Logic:
 \section{Propositional Logic}\label{sec:propositional_logic}
 % ====================================================================
 
-%FIXME
+\emph{Propositional Logic} (also called \emph{Propositional Calculus}
+or \emph{Sentential} or \emph{Statement Logic}) studies the Truth
+Value of \emph{Propositional Formulas} built up from Atomic Formulas
+(\S\ref{sec:atomic_formula}) and Logical Connectives
+(\S\ref{sec:logical_connective}).
 
-Language:
+The Language of Propositional Logic therefore consists of
+\emph{Propositional Variables} (or \emph{Sentential Variables}),
+Logical Connectives, and Punctuation Symbols. Propositional Variables
+act as the Atomic Formulas of Propositional Logic. A Propositional
+Variable that has been given a Truth Valuation (\S\ref{sec:valuation})
+is sometimes called a \emph{Propositional Constant}.
 
-Propositional Variables
+A Propositional Formula is equivalent to a Boolean Term
+(\S\ref{sec:boolean_algebra}).
 
-Logical Connectives
+A Signature (\S\ref{sec:signature}) for Propositional Logic consists
+only of Nullary Relation Symbols for each Propositional Variable, and
+a Model (\S\ref{sec:structure}) provides a Truth Valuation for each.
 
-Grouping Symbols (parentheses, etc.)
+Propositional Calculus is Isomorphic to Simply-typed
+$\lambda$-calculus (\S\ref{sec:simply_typed}) and is Strongly
+Normalizing (\S\ref{sec:normal_form}) to either a Conjunctive Normal
+Form (\S\ref{sec:conjunctive_form}) or Disjunctive Normal Form
+(\S\ref{sec:disjunctive_form}), and thus is not a Turing Complete
+system.
+
+Formal definition of a Propositional Calculus:
+\[
+    \mathcal{S} = (\mathbf{A},\mathbf{\Omega},\mathbf{Z},\mathbf{I})
+\]
+where
+\begin{itemize}
+\item $\mathbf{A}$ is a Finite Set of Propositional Variables ($P$,
+  $Q$, $R$, $\ldots$)
+\item $\mathbf{\Omega}$ is a Finite Set of Logical Connective Symbols
+  ($\neg$, $\wedge$, $\vee$, $\ldots$)
+\item $\mathbf{Z}$ is a Finite Set of Inference Rules
+\item $\mathbf{I}$ is a Finite Set of Axioms
+\end{itemize}
+
+The Formulas of $\mathcal{S}$ are then Inductively defined as follows,
+where $\mathbf{\Omega}_n$ is the Partition of $\mathbf{\Omega}$
+containing Operators of Arity $n$:
+\begin{enumerate}
+\item Any element of $\mathbf{A}$ is a Formula of $\mathcal{S}$
+\item For Formulas $p_1, p_2, \cdots, p_n$ and $f \in
+  \mathbf{\Omega}_n$ then $f(p_1, p_2, \cdots, p_j)$ is a Formula
+\end{enumerate}
+Propositional Logic is closed under Truth-Functional Connectives, so
+the above is sufficient to define all WFF: nothing else is a Formula
+of $\mathcal{S}$.
+
+Formulas Derived by the Axioms and Inference Rules of a Propositional
+Logic are Theorems (\S\ref{sec:theorem}). Allowing for Axiom Schemata
+(an Infinite number of Axioms) extends Propositional Logic; an example
+of such a System is Skolem Arithmetic (\S\ref{sec:skolem_arithmetic}).
+
+Inference Rules of a Propositional Logic define Valid \emph{Argument
+  Forms} (\S\ref{sec:logical_form}). The simplest Argument Form that
+is both necessary (and given a complete set of Axioms is sufficient to
+define all other Argument Forms) is \emph{Modus Ponens}, shown here
+Schematicized:
+
+$\textrm{1. }\varphi \rightarrow \psi$
+
+$\textrm{2. }\varphi$
+
+$\therefore\textrm{ }\psi$ \\
+where lines one and two are Premises and
+line three is the Conclusion (the symbol $\therefore$ is read as
+\emph{therefore}). This is written in Sequent Notation
+(\S\ref{sec:sequent_notation}) as:
+\[
+  (\varphi \rightarrow \psi), \varphi \vdash \psi
+\]
+The Schematic representation of \emph{Modus Tollens}:
+
+$\textrm{1. }\varphi \rightarrow \psi$
+
+$\textrm{2. }\neg\psi$
+
+$\therefore\textrm{ }\neg\varphi$
 
 
+
+\subsubsection{Operators}
+
+The minimal set of primitive Operators is the \emph{negation} symbol
+($\neg$) plus a \emph{sole sufficient} Operator of either $\land$,
+$\lor$ or $\rightarrow$. Choosing one of these Operators, the other
+two, and any other Operator, can be defined in terms of it and
+negation. It is also possible to construct functionally complete sets
+of one element: $\mathbf{\Omega} = \{\uparrow\}$ or $\mathbf{\Omega} =
+\{\downarrow\}$ ($\uparrow$ and $\downarrow$ being \emph{NAND} and
+\emph{NOR}, respectively).
+\\
+Example simple Axiom system:
+
+$\mathbf{\Omega} = \mathbf{\Omega_1} \cup \mathbf{\Omega_2}$
+
+$\mathbf{\Omega_1} = \{\neg\}$
+
+$\mathbf{\Omega_2} = \{\rightarrow\}$
+
+$\mathbf{I} = \{ (p \rightarrow (q \rightarrow p)),$
+
+$\qquad((p \rightarrow (q \rightarrow r)) \rightarrow
+(( p \rightarrow q) \rightarrow (p \rightarrow r))),$
+
+$\qquad(( \neg p \rightarrow \neg q ) \rightarrow (q \rightarrow p ))
+\}$\\ with Modus Ponens as the sole inference rule (see Hilbert
+Systems, \S\ref{sec:hilbert_systems}).
+
+In Propositional Logic, the Extra-logical Symbol for Entailment,
+$\vdash$, and the Logical \emph{Implication Symbol}, $\rightarrow$,
+coincide in that
+\[(A \vdash B) \leftrightarrow (\vdash A \rightarrow B)\]
+but the difference is that $\vdash$ describes a Deduction, that is a
+relation between Sentences, and $\rightarrow$ is a Logical Connective
+within a Formula.
+
+Another possible system is a \emph{Natural Deduction
+  System}\cite{jaskowski34} (\S \ref{sec:natural_deduction})
+which has no Axioms ($\mathbf{I}=\varnothing$) and ten Inference
+Rules.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Proposition}\label{sec:proposition}
+% --------------------------------------------------------------------
+
+\emph{Propositions} are WFF that are assigned a Truth Value
+(\S\ref{sec:logical_truth}), i.e. they are Truth-bearers
+(\S\ref{sec:truth_bearer}). An \emph{Atomic Proposition} contains no
+Logical Connectives. A \emph{Compound Proposition} is composed by
+Recursive application of Logical Connectives to Propositions by a
+corresponding \emph{Concatenation Rule} that assigns a new Truth Value
+to the Compound Proposition.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Conjunctive Normal Form}\label{sec:conjunctive_form}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Disjunctive Normal Form}\label{sec:disjunctive_form}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Second-order Propositional Logic}
@@ -131,350 +427,6 @@ Grouping Symbols (parentheses, etc.)
 \section{Terminology}\label{sec:logic_terminology}
 % ====================================================================
 
-Freely generated sequences:
-
-    String, Word
-
-Grammatical (Syntax, Formal):
-
-    Sentence, Expression, Clause, Phrase, Formula (Well-formed)
-
-Logical (Semantics, Interpretation):
-
-    Proposition, Statement, Sentence, Theorem, Truthbearer
-
-Predicate (Quantification):
-
-    Term, Predicate
-
-Composition:
-
-    Atomic Formulae (no Logical Connectives):
-
-        Atom, Literal, Atomic Sentence, Atomic Proposition, Propositional
-        Variable
-
-    Compound Formulae (Logical Connectives \& Subformulas):
-
-        Clause, Composite Proposition
-
-Valuation:
-
-    Open Formulae (free Variables):
-
-        Propositional Formula, Propositional Expression, Propositional
-        Function, Open Sentence, Sentential Formula
-
-    Ground Formulae (no free Variables):
-
-        Sentence, Ground Term, Ground Atom, Ground Literal, Ground
-        Predicate, Ground Expression, Ground Clause
-
-
-
-\begin{description}
-\item[Universe] class containing elements of \emph{objects} considered
-  in a particular Logical discourse, also called \emph{Domain of
-    Discourse}
-\item[Constant] a named object from the Domain
-\item[Variable] a placeholder that ranges over the objects in the
-  Domain
-\item[Function] $n$-ary functions maps $n$-tuples of objects in the
-  Domain to objects
-\item[Term] an object of the Domain (Variables, Constants and Compound
-  Statements)
-\item[Formula] a mathematical Fact
-\end{description}
-\hfill \\ Inductive definition of \emph{Terms} from \emph{Constants},
-\emph{Variables}, and \emph{Functions}:
-
-Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0 \cup F_1
-\cup F_2 \cup \cdots \cup F_n$, Constants, $C = F_0$:
-\[
-    V \subseteq T
-\]\[
-    C \subseteq T
-\]\[
-    \forall \tau_n=\{t_1,\cdots,t_n\} \in \mathcal{P}(T), \forall f \in F_n
-    \exists f(t_1,\cdots,t_n) \in T
-\]
-Inductive definition of \emph{Formulas} from Terms and
-\emph{Relations}:
-
-Given Terms, $T = \{t_0,\ldots,t_n\}$, and Relations, $R = \{r_0,\ldots,r_m\}$:
-\begin{itemize}
-\item $t_i = t_j$ is a Formula
-\item $r_k(t_0,\ldots,t_n)$ is a Formula and $r_k$ is an n-ary Relation
-\end{itemize}
-A Formula is \emph{Valid} if and only if it is True under every
-\emph{Interpretation} (\S\ref{sec:interpretation}).
-
-\emph{Mapping} % Functions, Morphisms
-
-A \emph{Formal Argument} is an Ordered Set of \emph{Formulas}.
-
-\emph{Witness}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Metavariable}\label{sec:metavariable}
-% --------------------------------------------------------------------
-
-A \emph{Metavariable} is a Variable written in a Metalanguage that
-stands in for an Element in the Object Language. The Formalization of
-Metavariables falls under \emph{Type Theory} (Part
-\ref{sec:type_theory}).
-
-Metavariables may be referred to as \emph{Schematic Variables} in the
-context of \emph{Axiom Schemata} and \emph{Rule Schemata}
-(\S\ref{sec:deductive_apparatus}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Proposition}\label{sec:proposition}
-% --------------------------------------------------------------------
-
-Propositions are WFF that are assigned a truth value. An \emph{Atomic
-  Proposition} contains no Operators. A \emph{Composite Proposition}
-is composed by recursive application of Operators to Propositions by a
-corresponding \emph{Concatenation Rule} that assigns a new truth value
-to the Composite string.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Logical Operator}\label{sec:logical_operator}
-% --------------------------------------------------------------------
-
-\subsubsection{Material Conditional}\label{sec:material_conditional}
-
-\emph{Material Conditional}, \emph{Material Implication},
-\emph{Material Consequence}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Quantification}\label{sec:firstorder_quantification}
-% --------------------------------------------------------------------
-
-A \emph{Quantifier} limits (\emph{Binds}) a Variable to a certain
-quantity of members of the Domain, the two fundamental Quantifiers
-being \emph{Universal} ($\forall$) and \emph{Existential} ($\exists$).
-
-A \emph{Bound Quantifier} is one with a restricted Range, e.g.
-$\exists x > 0$ or $\forall x \in \mathbb{R}$.
-
-
-
-\subsubsection{Bound \& Free Variables}\label{sec:bound_free}
-
-Variables are \emph{Free Variables} if they are not Quantified in any
-Formula, and \emph{Bound Variables} when they are Quantified.
-Inductive definition of \emph{Free} and \emph{Bound Variables}:
-\begin{enumerate}
-\item A Variable $x$ is Free in Atomic Formula $\varphi$ if $x$ occurs
-  in $\varphi$ (there are no Bound Variables in Atomic Formulas)
-\item A Variable is Free or Bound in $\varphi \bullet \psi$ if $x$ is
-  Free or Bound in either $\varphi$ or $\psi$, where $\bullet$ is a
-  Binary Connective
-\item A Variable $x$ is Free in $\forall y \varphi$ iff $x$ is Free in
-  $\varphi$ and $x$ is not $y$. Conversely $x$ is Bound in $\forall y
-  \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
-\end{enumerate}
-
-A Term with no Free Variables is a \emph{Ground Term} and a Formula
-with no Free Variables in First-order Logic is a \emph{First-order
-  Sentence} (also called a \emph{Closed Formula}). First-order
-Sentences have well-defined Truth values. Free Variables are
-implicitly Universally Quantified.
-
-\subsubsection{Uniqueness Quantification}\hfill
-
-\emph{Unique Existential Quantification}, denoted by $\exists !$,
-is expressed in natural language as ``there is one and only one.'' A
-First-Order System requires the \emph{Equality Relation}
-(\S\ref{sec:firstorder_equality}) in order to be able to express
-Uniqueness Quantification.
-
-
-
-\subsubsection{Quantifier Rank}
-
-Inductive definition of \emph{Quantifier Rank} function $qr$:
-\begin{itemize}
-\item $qr(\varphi) = 0$ if $\varphi$ is Atomic
-\item $qr(\varphi_1 \wedge \varphi_2) = qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
-\item $qr(\neg \varphi) = qr(\varphi)$
-\item $qr(\exists_x \varphi) = qr(\varphi) + 1$
-\end{itemize}
-
-
-
-\subsubsection{Quantifier Nesting}
-
-% FIXME
-
-
-
-\subsubsection{Conjunctive Normal Form}\label{sec:conjunctive_form}
-
-
-
-\subsubsection{Disjunctive Normal Form}\label{sec:disjunctive_form}
-
-
-
-\subsubsection{Prenex Normal Form}\label{sec:prenex_normal}
-
-\emph{Normal Form} (\S\ref{sec:normal_form})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Zeroth-order - Propositional}\label{sec:0th_order}
-% --------------------------------------------------------------------
-
-\emph{Propositional Logic} (also called \emph{Sentential} or
-\emph{Statement Logic}) is represented by a Formal Language with WFF
-consisting only of \emph{Operators} (\emph{Logical Connectives}) and
-\emph{Primitive Symbols} representing \emph{Propositions}.
-
-Propositional Calculus is Isomorphic to \emph{Simply-typed
-  $\lambda$-calculus} (\S\ref{sec:simply_typed}) and is Strongly
-Normalizing (\S\ref{sec:normal_form}) to either a \emph{Conjunctive
-  Normal Form} (\S\ref{sec:conjunctive_form}) or \emph{Disjunctive
-  Normal Form} (\S\ref{sec:disjunctive_form}), and thus is not Turing
-Complete.
-
-A Propositional Formula is a \emph{Boolean Term}
-(\S\ref{sec:boolean_algebra}).
-
-Primitive Symbols are usually divided into three different categories:
-\begin{description}
-\item[Propositional Constants] \hfill \\
-Represent particular Propositions: $A$, $B$, $C$, $\ldots$
-\item[Propositional Variables] \hfill \\
-Range over set of all Atomic Propositions: $p$, $q$, $r$, $\ldots$
-\item[Schematic Variables] \hfill \\
-Metavariables; range over set of all propositions: $\varphi$, $\psi$,
-$\chi$, $\ldots$
-\end{description}
-
-The Domain of a Propositional Calculus is \emph{Truth} and
-\emph{Falsity}, so Variables are not necessarily \emph{Bound} or
-\emph{Free} as in \emph{Predicate Logic}. In fact, a Propositional
-Variable is equivalent to a \emph{Nullary Predicate} in \emph{First
-  Order Logic}.
-
-Formal definition of a \emph{Propositional Calculus}:
-\[
-    \mathcal{S} = (\mathbf{A},\mathbf{\Omega},\mathbf{Z},\mathbf{I})
-\]
-where
-\begin{itemize}
-\item $\mathbf{A}$ is a finite set of Proposition symbols ($p$, $q$,
-  $r$, $\ldots$)
-\item $\mathbf{\Omega}$ is a finite set of Operator symbols ($\neg$,
-  $\wedge$, $\vee$, $\ldots$)
-\item $\mathbf{Z}$ is a finite set of Inference Rules
-\item $\mathbf{I}$ is a finite set of Axioms
-\end{itemize}
-$\mathcal{S}$ is then inductively defined as follows, where
-$\mathbf{\Omega_j}$ is the partition of $\mathbf{\Omega}$ containing
-Operators of arity $\mathbf{j}$:
-\begin{enumerate}
-\item Any element of $\mathbf{A}$ is a Formula of $\mathcal{S}$
-\item For Formulas $p_1, p_2, \cdots, p_j$ and $f \in
-  \mathbf{\Omega_j}$ then $f(p_1, p_2, \cdots, p_j)$ is a formula
-\end{enumerate}
-Propositional Logic is closed under Truth-Functional Connectives, so
-the above is sufficient to define all WFF: nothing else is a formula
-of $\mathcal{S}$.
-
-Formulas derived by the Axioms and Inference Rules of a Propositional
-Logic are termed \emph{Theorems}. Allowing for Axiom Schema (an
-infinite number of axioms) extends Propositional Logic; an example of
-such a system is \emph{Skolem Arithmetic}\cite{skolem23}.
-
-The set of WFF of a System, $\mathcal{S}$, may be defined inductively:
-\begin{itemize}
-\item Propositional Variables are WFF
-\item If $\varphi$ is a WFF, then $\neg\varphi$ is a WFF
-\item If $\varphi$ and $\psi$ are WFF and $\bullet$ is a binary Operator,
-  then $\varphi \bullet \psi$ is a WFF.
-\end{itemize}
-
-\subsubsection{Argument Forms}
-
-Inference Rules of a Propositional Logic define Valid \emph{Argument
-  Forms} (\S\ref{sec:inference_rule}). The simplest Argument Form
-that is both necessary (and given a complete set of Axioms is
-sufficient to define all other Argument Forms) is \emph{Modus Ponens},
-shown here Schematicized:
-
-$\textrm{1. }\varphi \rightarrow \psi$
-
-$\textrm{2. }\varphi$
-
-$\therefore\textrm{ }\psi$
-\\
-where lines one and two are Premises and line three is the Conclusion
-(the symbol $\therefore$ is read as \emph{therefore}). This is written in
-\emph{Sequent Notation}(\S\ref{sec:sequent_notation}) as
-\[(\varphi \rightarrow \psi), \varphi \vdash \psi\]
-The Schematic representation of \emph{Modus Tollens}:
-
-$\textrm{1. }\varphi \rightarrow \psi$
-
-$\textrm{2. }\neg\psi$
-
-$\therefore\textrm{ }\neg\varphi$
-
-\subsubsection{Operators}
-
-The minimal set of primitive Operators is the \emph{negation} symbol
-($\neg$) plus a \emph{sole sufficient} Operator of either $\land$,
-$\lor$ or $\rightarrow$. Choosing one of these Operators, the other
-two, and any other Operator, can be defined in terms of it and
-negation. It is also possible to construct functionally complete sets
-of one element: $\mathbf{\Omega} = \{\uparrow\}$ or $\mathbf{\Omega} =
-\{\downarrow\}$ ($\uparrow$ and $\downarrow$ being \emph{NAND} and
-\emph{NOR}, respectively).
-\\
-Example simple Axiom system:
-
-$\mathbf{\Omega} = \mathbf{\Omega_1} \cup \mathbf{\Omega_2}$
-
-$\mathbf{\Omega_1} = \{\neg\}$
-
-$\mathbf{\Omega_2} = \{\rightarrow\}$
-
-$\mathbf{I} = \{ (p \rightarrow (q \rightarrow p)),$
-
-$\qquad((p \rightarrow (q \rightarrow r)) \rightarrow
-(( p \rightarrow q) \rightarrow (p \rightarrow r))),$
-
-$\qquad(( \neg p \rightarrow \neg q ) \rightarrow (q \rightarrow p ))
-\}$\\ with Modus Ponens as the sole inference rule (see Hilbert
-Systems, \S\ref{sec:hilbert_systems}).
-
-In Propositional Logic, the Extra-logical Symbol for Entailment,
-$\vdash$, and the Logical \emph{Implication Symbol}, $\rightarrow$,
-coincide in that
-\[(A \vdash B) \leftrightarrow (\vdash A \rightarrow B)\]
-but the difference is that $\vdash$ describes a Deduction, that is a
-relation between Sentences, and $\rightarrow$ is a Logical Connective
-within a Formula.
-
-Another possible system is a \emph{Natural Deduction
-  System}\cite{jaskowski34} (\S \ref{sec:natural_deduction})
-which has no Axioms ($\mathbf{I}=\varnothing$) and ten Inference
-Rules.
-
-
-
 % --------------------------------------------------------------------
 \subsection{First-order - Predicate} \label{sec:predicate_logic}
 % --------------------------------------------------------------------
@@ -515,6 +467,8 @@ The contemporary Signature used:
 \end{enumerate}
 Here, Functions of Valence 0 are \emph{Constant Symbols} denoted by
 letters $a$, $b$, $c$, $\ldots$.
+
+
 
 \subsubsection{Properties}\label{sec:firstorder_properties}
 
@@ -940,6 +894,10 @@ Alan Turing's PhD Thesis \cite{turing38}
 % --------------------------------------------------------------------
 \subsection{Term Logic}\label{sec:term_logic}
 % --------------------------------------------------------------------
+
+\emph{Syncategorematic Term}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Connexive Logic}\label{sec:connexive_logic}
