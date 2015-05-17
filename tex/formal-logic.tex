@@ -241,6 +241,8 @@ Functions. Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0
     \forall \tau_n=\{t_1,\cdots,t_n\} \in \mathcal{P}(T), \forall f
     \in F_n \exists f(t_1,\cdots,t_n) \in T
 \]
+If no Variables appear in a Term it is called a \emph{Closed Term} (or
+\emph{Ground Term}).
 
 
 
@@ -265,7 +267,7 @@ forms a \emph{Clause}.
 \subsection{Proposition}\label{sec:proposition}
 % --------------------------------------------------------------------
 
-\emph{Propositions} are WFF that are assigned a Truth Value
+\emph{Propositions} are Formulas that are assigned a Truth Value
 (\S\ref{sec:truth_value}), i.e. they are Truth-bearers
 (\S\ref{sec:truth_bearer}). An \emph{Atomic Proposition} contains no
 Logical Connectives. A \emph{Compound Proposition} is composed by
@@ -326,33 +328,38 @@ system.
 
 Formal definition of a System of Propositional Calculus $\mathcal{S}$:
 \[
-    \mathcal{S} = (\mathbf{A},\mathbf{\Omega},\mathbf{Z},\mathbf{I})
+    \mathcal{S} = (\sigma, \Omega, A, I)
 \]
 where:
 \begin{itemize}
-\item $\mathbf{R}$ is a Finite Set of Propositional Variables ($P_1$,
-  $P_2$, $P_3$, $\ldots$)
-\item $\mathbf{\Omega}$ is a Finite, Functionally Complete Set of
-  Logical Connective Symbols ($\neg$, $\wedge$, $\vee$, $\ldots$)
-\item $\mathbf{I}$ is a Finite Set of Inference Rules
-\item $\mathbf{A}$ is a Finite Set of Axioms
+\item $\sigma$ is the Signature (\S\ref{sec:signature}) for a
+  Propositional Calculus consisting of a Finite Set $R = \{P_1, P_2,
+  P_3, \ldots\}$ of Nullary Relation Symbols which are the
+  Propositional Variables of $\mathcal{S}$: $\sigma = (R)$
+\item $\Omega$ is a Finite, Functionally Complete Set of Logical
+  Connective Symbols $\{\neg$, $\wedge$, $\vee$, $\ldots\}$
+\item $A$ is a Finite Set of Axioms (Formulas in the Language defined
+  by the Formation Rules over the Signature $\sigma$ and the Logical
+  Operators $\Omega$)
+\item $I$ is a Finite Set of Inference Rules
 \end{itemize}
-The Atomic Formulas of $\mathcal{S}$ are just the Propositional
-Variables $P_1, P_2, P_3, \ldots$.
+Atomic Formulas of $\mathcal{S}$ are just the Propositional Variables
+$P_1, P_2, P_3, \ldots$, which means that a Literal in $\mathcal{S}$
+is just a Propositional Variable or its Negation.
 
 The Formulas of $\mathcal{S}$ are then Inductively defined as the
-smallest Class, $\mathbf{X}$, with the following Formation Rules:
+smallest Class, $\mathcal{L}$, such that:
 \begin{enumerate}
-\item Any Literal of $\mathcal{S}$ is in $\mathbf{X}$
-\item For Formulas $\phi_1, \phi_2, \cdots, \phi_n$ and $n$-ary
+\item Any Literal of $\mathcal{S}$ is a Formula in $\mathcal{L}$
+\item For Formulas $\phi_1, \phi_2, \cdots, \phi_n$ and an $n$-ary
   Logical Operator $f \in \mathbf{\Omega}_n$ where $\mathbf{\Omega}_n$
   is the Partition of $\mathbf{\Omega}$ containing all $n$-ary Logical
   Operators, then $f(\phi_1, \phi_2, \cdots, \phi_n)$ is also a
-  Formula
+  Formula in $\mathcal{L}$
 \end{enumerate}
 Propositional Logic is closed under Truth-Functional Operators, so the
-above is sufficient to define all WFFs: nothing else is a Formula of
-$\mathcal{S}$.
+above Formation Rules define all Formulas: nothing else is a Formula
+of $\mathcal{S}$.
 
 Formulas Derived by the Axioms and Inference Rules of a Propositional
 Logic are Theorems (\S\ref{sec:theorem}) in that System. Allowing for
@@ -440,8 +447,9 @@ Grouping Symbols (parentheses, etc.)
 \emph{Predicate Logic} (or \emph{Predicate Calculus}) describes
 Logical Systems with Formulas containing Variables
 (\S\ref{sec:variable}) that can be Quantified
-(\S\ref{sec:quantifier}). This includes First-order Logic
-(\S\ref{sec:firstorder_logic}), Higher-order Logic
+(\S\ref{sec:quantifier}). This includes Systems of First-order Logic
+(\S\ref{sec:firstorder_logic}), Second-order Logic
+(\S\ref{sec:secondorder_logic}), Higher-order Logic
 (\S\ref{sec:higherorder_logic}), Many-sorted Logic
 (\S\ref{sec:many_sorted_logic}), and Infinitary Logic
 (\S\ref{sec:infinitary_logic}). This is in contrast to Logical Systems
@@ -455,69 +463,78 @@ without Variables or Quantifiers such as Propositional Logic
 \subsection{First-order Logic}\label{sec:firstorder_logic}
 % --------------------------------------------------------------------
 
-% FIXME this section requires rewrite/cleanup
-
 \emph{First-order Logic} (or \emph{Lower Predicate Logic}) allows
 Quantification over individual Objects in the Domain of Discourse
-(\S\ref{sec:domain}). This is in contrast to Logical Systems that
-allow Plural Quantification (Quantification over Sets
+(\S\ref{sec:domain}). This is in contrast to Systems of Predicate
+Logic that allow Plural Quantification (Quantification over Sets
 \S\ref{sec:plural_quantification}), such as Second-order Logic
 (\S\ref{sec:secondorder_logic}) and Higher-order Logic
 (\S\ref{sec:higherorder_logic}).
 
-The traditional Signature used in First-order Logic:
+A System of First-order Logic, $\mathcal{S}$, is defined as:
+\[
+  \mathcal{S} = (\sigma,\Omega,V,A,I)
+\]
+where:
+\begin{itemize}
+  \item $\sigma$ is a Signature (\S\ref{sec:signature}) for
+    First-order Logic consisting of a Finite Set $F = \{f_1, f_2, f_3,
+    \ldots \}$ of Function Symbols and a Finite Set $P = \{ R_1, R_2,
+    R_3, \ldots\}$ of Relation Symbols, and $ar : F \cup P \rightarrow
+    \mathbb{N}_0$ a Function Mapping Function and Relation Symbols to
+    their Arity:
+    \[\sigma = (F,P,ar)\]
+  \item $\Omega$ is a Finite, Functionally Complete Set of Logical
+    Connective Symbols $\{\neg$, $\wedge$, $\vee$, $\ldots\}$
+  \item $V$ is a Set of Variable Symbols:
+    \[V = \{v_1, v_2, v_3, \ldots\}\]
+  \item $A$ is a Finite Set of Axioms (Formulas in the Language
+    defined by the Formation Rules over the Signature $\sigma$, the
+    Logical Operators $\Omega$, and the Variable Symbols $V$)
+  \item $I$ is a Finite Set of Inference Rules
+\end{itemize}
+
+The Formation Rules for Formulas in a System of First-order Logic
+generally describe a Context-free Grammar (\S\ref{sec:context_free}).
+
+Terms are limited to Variables and a Finite number of $n$-ary Function
+applications, defined Inductively by:
 \begin{enumerate}
-\item For $n \geq 0$, $n$-ary Predicate (also called Relation)
-  Symbols: $p^{n}_0, p^{n}_1, p^{n}_2, p^{n}_2, p^{n}_3, \ldots$
-\item For $n \geq 0$, $n$-ary Function Symbols: $f^{n}_0, f^{n}_1,
-  f^{n}_2, f^{n}_2, f^{n}_3, \ldots$
+  \item Every Variable is a Term
+  \item For Terms $t_1, t_2, \ldots, t_n$ and $n$-ary Function Symbol
+    $f$, then $f(t_1, t_2, \ldots, t_n)$ is a Term.
 \end{enumerate}
-The contemporary Signature used:
+Atomic Formulas are defined as:
 \begin{enumerate}
-\item Predicate Symbols denoted by uppercase letters $P$, $Q$, $R$,
-  $\ldots$ with arity ($\geq 0$) specified by the \emph{Valence} of the
-  parenthetical arguments, eg P(x), Q(x,y).
-\item Function Symbols denoted by lowercase letters $f$, $g$, $h$,
-  $\ldots$ with arity specified in the usual way.
+\item If $t_1$ and $t_2$ are Terms, and there is a Logical Operator
+  for Equality\\$(=) \in \Omega$, then $t_1 = t_2$ is an Atomic
+  Formula.
+\item If $R$ is an $n$-ary Relation, and $t_1,\ldots,t_n$ are terms,
+  then $R(t_1,\ldots,t_n)$ is an Atomic Formula.
 \end{enumerate}
-Here, Functions of Valence 0 are \emph{Constant Symbols} denoted by
-letters $a$, $b$, $c$, $\ldots$.
-
-The Formation Rules for WFF in a System of First-order Logic generally
-describe a Context-free Grammar (\S\ref{sec:context_free}) with a
-infinite Alphabet and multiple Start Symbols.
-
-Terms are limited to those including Variables and a Finite number of
-$n$-ary Function applications, but not including Expressions involving
-a Predicate Symbol.
-
-Definition of Atomic Formulas (no Logical Connectives or Quantifiers):
+The Class $\mathcal{L}$ of Formulas is defined Inductively by the
+Formation Rules:
 \begin{enumerate}
-\item If $t_1$ and $t_2$ are Terms, then $t_1 = t_2$ is an Atomic Formula.
-\item If $R$ is an $n$-ary Relation (Predicate), and $t_1,\ldots,t_n$
-  are terms, then $R(t_1,\ldots,t_n)$ is an Atomic Formula.
+\item All Atomic Formulas are Formulas in $\mathcal{L}$
+\item If $\phi \in \mathcal{L}$ then $\neg \phi \in \mathcal{L}$
+\item If $\phi_1, \phi_2, \dots, \phi_n$ are Formulas in
+  $\mathcal{L}$, and $f \in \Omega_n$ is an $n$-ary Logical Operator,
+  then $f (\phi_1, \phi_2, \ldots, \phi_n) \in \mathcal{L}$
+\item If $x \in V$ and $\phi \in \mathcal{L}$, then $\exists x \phi
+  \in \mathcal{L}$ and $\forall x \phi \in \mathcal{L}$
 \end{enumerate}
 
-Definition of WFF as a finite number of applications of the following rules:
-\begin{enumerate}
-\item $\neg \phi$ is a WFF when $\phi$ is a WFF
-\item $(\phi \bullet \psi)$ is a WFF when $\phi$ and $\psi$ are WFF
-  and $\bullet$ is a Binary Connective
-\item $\exists x \phi$ is a WFF when $x$ is a Variable and $\phi$ is a WFF
-\item $\forall x \phi$ is a WFF when $x$ is a Variable and $\phi$ is a WFF
-\end{enumerate}
-
-First-order Logic may be used to devise Deductive Systems with Finite
-Domains that are Sound (\S\ref{sec:soundness}) and Complete
-(\S\ref{sec:completeness}), but for Domains of Infinite Cardinality a
-System of Higher-order Logic is required. First-order Logic is
-Semi-decidable (\S\ref{sec:semidecidable}).
+First-order Logic may be used as the System of Logic for Deductive
+Systems with Finite Domains that are Sound (\S\ref{sec:soundness}) and
+Complete (\S\ref{sec:completeness}), but for Domains of Infinite
+Cardinality a System of Higher-order Logic is required. First-order
+Logic is Semi-decidable (\S\ref{sec:semidecidable}).
 
 The L\"owenheim-Skolem Theorem (\S\ref{sec:lowenheim_skolem}) implies
 that First-order Logic is unable to characterize the concept of
 Countability or Uncountability \S\ref{sec:cardinality}).
 
-The Compactness theorem (\S\ref{sec:compactness_theorem}) implies that
+The Compactness Theorem (\S\ref{sec:compactness_theorem}) implies that
 if a Formula is derived from a System of First-order Logic with an
 Infinite Set of Axioms, then it can be derived from a Finite Subset of
 those Axioms. This has implications for the determination of Connected
@@ -532,9 +549,7 @@ Components of a Directed Graph (\S\ref{sec:directed_graph}).
 
 
 
-\subsubsection{Equality Conventions}\label{sec:firstorder_equality}
-
-\textbf{First-order Logic with Equality}
+\subsubsection{First-order Logic with Equality}\label{sec:firstorder_equality}
 
 Including a primitive Logical Symbol for Equality, $=$, interpreted
 as the real Equality Relation between members of the Domain such that
@@ -558,10 +573,12 @@ equality Theorems.
 
 
 
-\textbf{First-order Logic without Equality}
+\subsubsection{First-order Logic without Equality}
+\label{sec:firstorder_no_equality}
 
-An alternative convention is to consider the Equality Relation to be a
-Non-logical Symbol, included as a part of the Signiature of a
+An alternative convention to First-order Logic with Equality
+(\S\ref{sec:firstorder_equality}) is to consider the Equality Relation
+to be a Non-logical Symbol, included as a part of the Signiature of a
 particular Theory instead of as a Logical Operator. This allows two
 distinct individuals to be considered equal by an arbitraray
 Equivalence Relation. If this convention is used, but no distinct
@@ -627,6 +644,8 @@ over Functions allows the creation of the Analytic Hierarchy
 
 
 
+\subsubsection{Principal of Bivalence}\label{sec:bivalence_principal}
+
 \subsubsection{Monadic Second-order Logic}\label{sec:monadic_secondorder}
 
 \paragraph{Plural Monadic Second-order Logic}
@@ -686,11 +705,12 @@ Rules:
 
 \end{description}
 
-The intended Semantic Interpretation (\S\ref{sec:interpretation})
-of Classical Logic is subject to the \emph{Principle of Bivalence}
-which says that every Proposition has one Truth-value: True or False.
-Non-classical Logics such as \emph{Intuitionistic Logic}
-(\S\ref{sec:intuitionistic_logic}) does not have this Property.
+The intended Semantic Interpretation (\S\ref{sec:interpretation}) of
+Classical Logic is subject to the Principle of Bivalence
+(\S\ref{sec:bivalence_principal}) which says that every Proposition
+has one Truth-value: True or False. Non-classical Logics such as
+\emph{Intuitionistic Logic} (\S\ref{sec:intuitionistic_logic}) does
+not have this Property.
 
 
 
@@ -965,6 +985,14 @@ Alan Turing's PhD Thesis \cite{turing38}
 % ====================================================================
 \section{Connexive Logic}\label{sec:connexive_logic}
 % ====================================================================
+
+% ====================================================================
+\section{Free Logic}\label{sec:free_logic}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Inclusive Logic}\label{sec:inclusive_logic}
+% --------------------------------------------------------------------
 
 
 
