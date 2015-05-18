@@ -40,6 +40,10 @@ Other Symbols may be used for \emph{Punctuation}, like Parentheses and
 Commas, as long as they don't appear in one of the other kinds of
 Symbols.
 
+A Structure (\S\ref{sec:structure}) that Satisfies
+(\S\ref{sec:satisfaction}) the Axioms of a Logical System is called a
+\emph{Model} (\S\ref{sec:model}) of the System.
+
 
 
 % --------------------------------------------------------------------
@@ -309,7 +313,7 @@ Propositional Formula is equivalent to a Boolean Term
 
 A Signature (\S\ref{sec:signature}) for Propositional Logic consists
 only of Nullary Relation Symbols for each Propositional Variable, and
-a Model (\S\ref{sec:structure}) provides a Truth Valuation for each.
+a Model (\S\ref{sec:model}) provides a Truth Valuation for each.
 
 In Propositional Logic, the Extra-logical Symbol for Entailment,
 $\vdash$, and the Material Implication Operator, $\rightarrow$,
@@ -709,8 +713,8 @@ The intended Semantic Interpretation (\S\ref{sec:interpretation}) of
 Classical Logic is subject to the Principle of Bivalence
 (\S\ref{sec:bivalence_principal}) which says that every Proposition
 has one Truth-value: True or False. Non-classical Logics such as
-\emph{Intuitionistic Logic} (\S\ref{sec:intuitionistic_logic}) does
-not have this Property.
+Intuitionistic Logic (\S\ref{sec:intuitionistic_logic}) does not have
+this Property.
 
 
 
@@ -718,40 +722,49 @@ not have this Property.
 \section{Intensional Logic}\label{sec:intensional_logic}
 % ====================================================================
 
+\emph{Intensional Logic} adds to First-order Logic \emph{Sentential
+  Functors} (\emph{Intensions}) that range over Terms. An Intension is
+the \emph{Sense} in which a Logical Assertion is made, as opposed to
+the \emph{Reference} to which the Assertion applies (i.e. Extensional
+Quantification).
+
+
+
 % --------------------------------------------------------------------
 \subsection{Modal Logic}\label{sec:modal_logic}
 % --------------------------------------------------------------------
 
-\emph{Modal Logic} adds to First-order Logic \emph{Sentential
-  Functors} (\emph{Intensions}) that range over Terms. An Intension is
-the \emph{Sense} in which a Logical Assertion is made, as opposed to
-the \emph{Reference} to which the Assertion applies (\emph{i.e.
-  Extensional Quantification}).
-
 \emph{Modal Logic} extends Propositional and Predicate Logic to
 include Operators expressing \emph{Modality}. Various meanings for
-these Modal Operators include \emph{Alethic Modality}
-(\emph{Necessity} and \emph{Possibility}), \emph{Temporal Modality}
-(qualification in terms of time, eg \emph{always}, \emph{eventually},
-\emph{until}), \emph{Deontic Modality} (\emph{Obligation} and
-\emph{Permission}), and \emph{Doxastic Modality} (Modalities with
-regards to \emph{Belief}).
+these Modal Operators include Alethic Modality
+(\S\ref{sec:alethic_logic} Necessity and Possibility), Temporal
+Modality (\S\ref{sec:temporal_logic} qualification in terms of time,
+e.g. Always, Eventually, Until), Deontic Modality
+(\S\ref{sec:deontic_logic} Obligation and Permission), and Doxastic
+Modality (\S\ref{sec:doxastic_logic} Belief).
 
 An unary \emph{Primitive Modal Operator}, $\square$, defines a Dual
 Operator, $\Diamond$, such that the following analogues of de Morgan's
 Laws (\S\ref{sec:de_morgan}) hold:
-    \[\Diamond P \leftrightarrow \neg \square \neg P\]
-    \[\square P \leftrightarrow \neg \Diamond \neg P\]
-Modal Logic with more than one Primitive Modal Operator, $\square _i,
-i \in \{1, \ldots, n\}$ is \emph{Multimodal Logic}.
+  \[\Diamond P \leftrightarrow \neg \square \neg P\]
+  \[\square P \leftrightarrow \neg \Diamond \neg P\]
+By the Curry-Howard Correspondence (\S\ref{sec:curry_howard}), Modal
+Logic corresponds to Monads (\S\ref{sec:monad}).
 
-By the \emph{Curry-Howard Correspondence}
-(\S\ref{sec:curry_howard}), Modal Logic corresponds
-to \emph{Monads} (\S\ref{sec:monad}).
+
+
+\subsubsection{Multimodal Logic}\label{sec:multimodal_logic}
+
+A Modal Logic with more than one Primitive Modal Operator is called a
+\emph{Multimodal Logic}. A Multimodal Logic with exactly $n$ Primitive
+Modal Operators is called an \emph{$n$-modal Logic} with $n > 1$ and
+Operators $\square_i, i \in \{1, \ldots, n\}$.
 
 
 
 \subsubsection{Alethic Logic}\label{sec:alethic_logic}
+
+\emph{Alethic Logic}
 
 Most Systems of Alethic Logic are based on an extension of
 Propositional Logic called $\mathbf{K}$ which has:
@@ -762,7 +775,7 @@ Propositional Logic called $\mathbf{K}$ which has:
   Theorem, then $\square p$ is a Theorem.
 \item $\mathbf{K}$, \emph{Distribution Axiom}: $\square(p \rightarrow
   q) \rightarrow (\square p \rightarrow \square q)$ (also called the
-  \emph{Kripke schema} (\S\ref{sec:frame_semantics}).
+  \emph{Kripke Schema} (\S\ref{sec:frame_semantics}).
 \end{enumerate}
 
 Adding further Axioms gives rise to a nested hierarchy of Systems of
@@ -775,7 +788,7 @@ Adding further Axioms gives rise to a nested hierarchy of Systems of
 \item $S5 := S4 + \mathbf{5}$
 \item $D := K + \mathbf{D}$
 \end{itemize} \hfill \\
-where
+where:
 
 \begin{itemize}
 \item $\Diamond$, unary operator for \emph{Possibly}
@@ -795,8 +808,8 @@ denote \emph{Belief}. Example:
 \[
     \mathcal{B} x
 \]
-has the meaning ``It is Believed that x is the case''. A set of
-Beliefs is usually denoted
+has the meaning ``It is Believed that $x$ is the case''. A set of
+Beliefs is usually denoted:
 \[
     \mathbb{B}: \{ b_1, b_2, \ldots, b_n \}
 \]
@@ -807,57 +820,67 @@ Beliefs is usually denoted
 
 \emph{Standard Deontic Logic} ($\mathbf{SDL}$) adds the following
 Axioms to Propositional Logic (\S\ref{sec:propositional_logic}):
-    \[O(A \rightarrow B) \rightarrow (OA \rightarrow OB)\]
-    \[PA \rightarrow \neg O \neg A\]
+  \[O(A \rightarrow B) \rightarrow (OA \rightarrow OB)\]
+  \[PA \rightarrow \neg O \neg A\]
 with Primitive Operators $O$ (\emph{Obligatory}) and $P$
-(\emph{Permissible}). \emph{Forbidden} is defined as
-    \[FA = O \neg A\]
-or
-    \[FA = \neg P A\]
+(\emph{Permissible}). \emph{Forbidden} is defined as:
+  \[FA = O \neg A\]
+or:
+  \[FA = \neg P A\]
 Deontic Logic may be extended by Alethic Operators with the Axiom:
-    \[OA \rightarrow \Diamond A\]
+  \[OA \rightarrow \Diamond A\]
 which has the meaning ``ought implies can''.
 
 
 
-\subsubsection{Temporal Logic}
+\subsubsection{Temporal Logic}\label{sec:temporal_logic}
 
-\paragraph{Tense Logic} \hfill \\
+\paragraph{Tense Logic}\label{sec:tense_logic}
+\hfill \\
 
 \emph{Tense Logic} is a 2-modal Logic that adds operators $[F]$ for
 \emph{Future} and $[P]$ for \emph{Past} Modalities.
 
 
 
-\paragraph{CTL*}
+\paragraph{CTL*}\label{sec:ctl_star}
 \hfill \\
+
 Superset of \emph{Computation Tree Logic} and \emph{Linear
   Temporal Logic}
 
-\subparagraph{Computation Tree Logic}
+
+\subparagraph{Computation Tree Logic}\label{sec:computation_tree_logic}
 \hfill \\
+
 Temporal Logic with \emph{Path} Modalities.
+
 
 \subparagraph{Linear Temporal Logic}\label{sec:linear_temporal}
 \hfill \\
+
 \emph{Linear Temporal Logic} is a Modal Logic with Modalities
-referring to Time.
+referring to \emph{Time}.
 
 
 
-\paragraph{Interval Temporal Logc}
+\paragraph{Interval Temporal Logc}\label{sec:interval_temporal}
 
-\paragraph{Modal $\mu$-calculus}
+\paragraph{Modal $\mu$-calculus}\label{sec:modal_mu}
 
 
 
-\subsubsection{Dynamic Logic}
+\subsubsection{Dynamic Logic}\label{sec:dynamic_logic}
 
 \emph{Dynamic Logic} adds Terms denoting \emph{Actions}:
 \[[a]p\]
 where after performing Action $a$ is necessitated that $p$ holds and
 \[\langle a \rangle p\]
 where after performing Action $a$ it is possible that $p$ holds.
+
+
+
+\subsubsection{Epistemic Modal Logic}\label{sec:epistemic_logic}
 
 
 
