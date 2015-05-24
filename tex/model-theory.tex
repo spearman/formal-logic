@@ -5,9 +5,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \emph{Model Theory} deals with construction and classification of
-Structures (\S\ref{sec:structure}) as Models
-(\S\ref{sec:interpretation}) of Formal Theories
-(\S\ref{sec:formal_theory}).
+Structures (\S\ref{sec:structure}) as Models (\S\ref{sec:model}) of
+Formal Theories (\S\ref{sec:formal_theory}).
 
 The Language of Model Theory has two Kinds of Mathematical Objects:
 Sets and Relations (Part \ref{sec:set_theory}). As such Model Theory
@@ -23,6 +22,14 @@ includes four divisions: Classical Model Theory, Model Theory of
 Groups and Fields, Geometric Model Theory, and Computable Model Theory
 (\S\ref{sec:computable_model_theory}).
 
+Model Theory uses Tarski's Semantic Theory of Truth
+(\S\ref{sec:semantic_truth}) as the definition of Truth. Model Theory
+also forms the foundation of \emph{Formal (Truth-conditional)
+  Semantics} (Part \ref{sec:formal_semantics})-- a reduction of the
+Meaning of Assertions in Natural Languages to their Truth-conditions.
+A Model is an Analytic example of a Synthetic Theory
+(\S\ref{sec:synthetic_theory}). \cite{shulman15}
+
 
 
 % ====================================================================
@@ -30,18 +37,16 @@ Groups and Fields, Geometric Model Theory, and Computable Model Theory
 % ====================================================================
 
 A \emph{Structure} $\mathcal{A}$ is composed of a Set $A$ called the
-\emph{Domain} (\S\ref{sec:domain}) along with a collection of Sets of
-$n$-ary Function and Relation Symbols called the \emph{Signature}
-(\S\ref{sec:signature}) of $\mathcal{A}$.
+\emph{Domain} (\S\ref{sec:domain}) along with an \emph{Interpretation
+  Function} (\S\ref{sec:interpretation}) $I$ that maps Symbols in the
+Signature (\S\ref{sec:signature}) to their \emph{Realizations} in the
+Structure.
 
 Formal definition of a Structure:
 \[
-    \mathcal{A} = (A, \sigma)
+    \mathcal{A} = (A, I)
 \]
-with Domain $A$, Signature $\sigma$.
-
-Combining a Structure with an \emph{Interpretation Function} $I$ gives
-a \emph{Model} (\S\ref{sec:model}).
+with Domain $A$, Interpretation Function $I$.
 
 
 
@@ -59,88 +64,42 @@ confused with the Cardinality of the Domain, $|A|$).
 
 
 % --------------------------------------------------------------------
-\subsection{Signature}\label{sec:signature}
+\subsection{Interpretation}\label{sec:interpretation}
 % --------------------------------------------------------------------
 
-The \emph{Signature} (or \emph{Vocabulary}) of a Structure is the Set
-of Operators (Function and Relation Symbols) that characterize it
-together with an \emph{Arity Function} ``$ar$'' that maps each
-Operator Symbol $s$ to a corresponding Natural Number $n$ which is the
-Arity of the Interpretation of $s$: $n = ar(s)$.
+In Model Theory an \emph{Interpretation} fixes the \emph{Domain of
+  Discourse} for expressions of Symbolic Logic (Part
+\ref{sec:formal_logic}); that is it assigns the Sets and Relations
+that Variables can range over.
 
-A Signature is given as a triple:
+Roughly, an Interpretation of a Formal Language is an assignment of
+\emph{Meanings} to Symbols and \emph{Truth-Conditions}
+(\S\ref{sec:semantic_truth}) to Sentences. An Interpretation of
+First-order Logic Maps Terms to Individuals in the Universe and
+Propositions to Truth Values.
+
+The Interpretation Function in a Mathematical Structure maps Function
+and Relation Symbols of the Signature to actual Functions and
+Relations on the Domain:
 \[
-    (F,R,ar)
+    f^{\mathcal{A}} = I (f)
 \]
-where $F$ is a Set of Function Symbols, and $R$ is a Set of Relation
-Symbols (or Predicates) and $ar$ is the Arity Function:
 \[
-    ar: F \cup R \rightarrow \mathbb{N}_0
+    R^{\mathcal{A}} = I (R) \subseteq A^{ar(R)}
 \]
-If both $F$ and $R$ are Finite Sets, $\sigma$ is a \emph{Finite
-  Signature}. A \emph{Nullary Function Symbol} is a \emph{Constant
-  Symbol}. A Function or Relation Symbol $s$ of Arity $n$ is sometimes
-denoted $\prescript{n}{}{s}$. Allowing for \emph{Infinitary Operators}
-leads to a Theory of \emph{Complete Lattices}.
+A Constant (Nullary) Symbol is identified with an Element of the
+Domain:
+\[
+    I(c) \in A
+\]
 
-A Structure with Signature $\sigma$ may be called a
-\emph{$\sigma$-structure}.
+Thus the Interpretation Function is the \emph{Extension}
+(\S\ref{sec:set_property}) of the Symbols and Strings of Symbols of
+the Object Language.
 
-A Signature with no Relation Symbols is an \emph{Algebraic
-  Signature}, and the associated Structure an \emph{Algebra}
-(\S\ref{sec:universal_algebra}).
+\emph{Intended Interpretation}, \emph{Standard Model}
 
-A Signature with no Function Symbols is a \emph{Relational Signature},
-and the associated Structure is a \emph{Relational Structure}. A
-Relational Structure may be used as the basis for a \emph{Relational
-  Model} (\S\ref{sec:relational_model}) in \emph{Database Theory}.
-
-The Signature is a synonym for the \emph{Type} of the Structure
-(Schematically represented by $\Omega$), and can be written as an
-ordered sequence of Natural Numbers representing the arity of the
-Operators. The arity, $n$, of a particular Operator symbol, $s$, may
-be written $n=ar(s)$.
-
-A \emph{Reduct} of a Structure is created by omitting certain
-Operations and Relations from the Signature the converse is
-\emph{Expansion} (\S\ref{sec:reduct_expansion}).
-
-
-
-\subsubsection{Cardinality}\label{sec:signature_cardinality}
-
-The \emph{Cardinality} of a Signature $\sigma = (F,R,ar)$ is denoted
-$|\sigma|$ and is the least Infinite Cardinal
-(\S\ref{sec:cardinal_number}) $n$ such that $n \geq (|F| + |R|)$, that
-is, greater than or equal to the number of Symbols in the Signature
-$\sigma$. This is equal to the number of First-order Formulas
-(\S\ref{sec:predicate_logic}) of $\sigma$.
-
-
-
-\subsubsection{Reduction \& Expansion}\label{sec:reduct_expansion}
-
-For two Signatures $\sigma^-$ and $\sigma^+$ where $\sigma^- \subset
-\sigma^+$, any $\sigma^+$-structure $\mathcal{A}$ is also a
-$\sigma^-$-structure called the \emph{$\sigma^-$-reduct} of
-$\mathcal{A}$ denoted $\mathcal{A}|\sigma^-$, having the same Domain
-as $\mathcal{A}$ (although the Set of Constant Elements corresponding
-to Constant Functions in the Signature of $\sigma^-$ may be smaller).
-
-A Homomorphism of $\sigma^+$-structures $h : \mathcal{A} \rightarrow
-\mathcal{B}$ is also a Homomorphism of $\sigma^-$-structures $h :
-\mathcal{A} | \sigma^- \rightarrow \mathcal{B} | \sigma^-$.
-
-If a Structure $\mathcal{B}$ is a $\sigma^-$-reduct of a
-$\sigma^+$-structure $\mathcal{A}$ then $\mathcal{A}$ is called the
-\emph{Expansion} of $\mathcal{B}$ to $\sigma^+$. Such an Expansion is
-not necessarily unique. The notation for an Expansion by certain
-additional Function or Relation Symbols, $f, g, h$, is denoted
-$\mathcal{A} = (\mathcal{B}, f, g, h)$.
-
-
-
-\subsubsection{Many-sorted Signature}\label{sec:many_sorted_signature}
+\emph{Stratification}
 
 
 
@@ -170,7 +129,7 @@ with Properties:
 \]
 \end{itemize}
 A Homomorphism $f : |\mathcal{A}| \rightarrow |\mathcal{A}|$ is an
-Endomorphism. An Endomorphism that is also an \emph{Isomorphism}
+Endomorphism. An Endomorphism that is also an Isomorphism
 (\S\ref{sec:structure_isomorphism}) is called an \emph{Automorphism}.
 The \emph{Identity Map} of $|\mathcal{A}|$ is an Automorphism denoted
 $1_\mathcal{A}$.
@@ -179,7 +138,7 @@ A Structure $\mathcal{B}$ is a \emph{Homomorphic Image} of
 $\mathcal{A}$ if there exists a Surjective Homomorphism $g :
 \mathcal{A} \rightarrow \mathcal{B}$.
 
-For every Signature $\sigma$ there is a \emph{Concrete Category}
+For every Signature $\sigma$ there is a Concrete Category
 (\S\ref{sec:concrete_category}) $\sigma$-$\mathbf{Hom}$ with
 $\sigma$-structures as Objects and $\sigma$-homomorphisms as
 Morphisms.
@@ -210,6 +169,7 @@ $\sigma$-$\mathbf{Hom}$.
 
 
 \paragraph{Structure Isomorphism}\label{sec:structure_isomorphism}
+\hfill \\
 
 An Embedding that is Surjective is an \emph{Isomorphism}. The
 existence of an Isomorphism between two Structures $\mathcal{A}$ and
@@ -301,70 +261,35 @@ Structures where the Signature is $\sigma$
 
 
 % ====================================================================
-\section{Interpretation}\label{sec:interpretation}
-% ====================================================================
-
-A Structure that can be given as an \emph{Interpretation} of a Formal
-Theory (\S\ref{sec:formal_theory}) is called a \emph{Model} of that
-Theory. That is, an Interpretation is a Model if it assigns Truth
-values to the Sentences of a Theory. Model Theory uses Tarski's
-Semantic Theory of Truth (\S\ref{sec:semantic_truth}) as the
-definition of Truth. Model Theory also forms the foundation of
-\emph{Formal (Truth-conditional) Semantics}-- a reduction of the
-Meaning of Assertions in Natural Languages to their Truth-conditions.
-A Model is an Analytic example of a Synthetic Theory. \cite{shulman15}
-
-In Model Theory an Interpretation fixes the \emph{Domain of Discourse}
-for expressions of Symbolic Logic (Part \ref{sec:formal_logic}); that
-is it assigns the Sets and Relations that Variables can range over.
-
-Roughly, an Interpretation of a Formal Language is an assignment of
-\emph{Meanings} to Symbols and \emph{Truth-Conditions}
-(\S\ref{sec:semantic_truth}) to Sentences. An Interpretation of
-First-order Logic Maps Terms to Individuals in the Universe and
-Propositions to Truth Values.
-
-The Interpretation Function in a Mathematical Structure maps Function
-and Relation Symbols of the Signature to actual Functions and
-Relations on the Domain:
-\[
-    f^{\mathcal{A}} = I (f)
-\]
-\[
-    R^{\mathcal{A}} = I (R) \subseteq A^{ar(R)}
-\]
-A Constant (Nullary) Symbol is identified with an Element of the
-Domain:
-\[
-    I(c) \in A
-\]
-
-Thus the Interpretation Function is the \emph{Extension}
-(\S\ref{sec:set_property}) of the Symbols and Strings of Symbols of
-the Object Language.
-
-\emph{Intended Interpretation}, \emph{Standard Model}
-
-\emph{Stratification}
-
-
-
-% ====================================================================
 \section{Satisfaction}\label{sec:satisfaction}
 % ====================================================================
 
-When defining a Theory as a set of Sentences in a Formal Language, a
-\emph{Model} (\S\ref{sec:model}) is a Structure
-(\S\ref{sec:structure}) that \emph{Satisfies} the Sentences of that
-Theory. For a Formula $\phi$ and a Structure $\mathcal{M}$, a
-\emph{Satisfaction Relation} is denoted:
+\emph{Satisfies}
+
+For a Formula $\phi$ and a Structure $A$, a \emph{Satisfaction
+  Relation} is denoted:
 \[
     \mathcal{M} \vDash \phi
 \]
-For $\mathcal{M}$ to be a Model of a Theory, $T$, it is required that:
+
+
+
+% --------------------------------------------------------------------
+\subsection{Model}\label{sec:model}
+% --------------------------------------------------------------------
+
+A Structure (\S\ref{sec:structure}) $A$ that Satisfies a Sentence
+$\phi$ is called a \emph{Model} of $\phi$: $A \vDash \phi$,
+(equivalently ``$\phi$ is True in $A$'').
+
+If $A$ Satisfies all the Sentences of a Theory $\mathcal{T}$ is a
+Model of $\mathcal{T}$: $A \vDash \mathcal{T}$.
+
+For $A$ to be a Model of a $\mathcal{T}$, it is required that:
 \begin{itemize}
-\item The Language of $\mathcal{M}$ is the same as the Language of $T$
-\item Every Sentence in $T$ is Satisfied by $\mathcal{M}$
+  \item The Language of $A$ is the same as the Language of
+    $\mathcal{T}$
+  \item Every Sentence in $\mathcal{T}$ is Satisfied by $A$
 \end{itemize}
 By the Completeness Theorem (\S\ref{sec:completeness}) a Consistent
 Theory is Satisfiable, that is, a Theory has a Model if and only if it
@@ -376,7 +301,7 @@ have Models.
 
 
 % --------------------------------------------------------------------
-\subsection{Model}\label{sec:model}
+\subsection{Completeness Theorem}\label{sec:completeness}
 % --------------------------------------------------------------------
 
 

@@ -18,21 +18,33 @@ Theory (Part \ref{sec:recursion_theory}).
 \section{String}\label{sec:string}
 % ====================================================================
 
-A \emph{String} is a Finite Sequence (\S\ref{sec:tuple}) over a
-non-empty, finite Set of \emph{Symbols} or \emph{Characters},
-$\Sigma$, called an \emph{Alphabet}. The \emph{Length} of a String $s$
-is denoted $|s|$ and is equal to the number of Symbols in $s$. The
-\emph{Empty String} $\varepsilon$ is the unique String over $\Sigma$
-of Length 0.
+A \emph{String}, $s$, is a Finite Sequence (\S\ref{sec:tuple}) over a
+non-empty, finite Set of \emph{Symbols} (or \emph{Characters}),
+$\Sigma$, called an \emph{Alphabet}:
+\[
+    s = c_1 \ldots c_n
+\]
+where $c_1 \ldots c_n \in \Sigma$.
 
+The \emph{Length} of a String is denoted $|s|$ and is equal to the
+number of Symbols in $s$. The \emph{Empty String} $\varepsilon$ is the
+unique String over $\Sigma$ of Length 0, and acts as an Identity
+Element for String Concatenation (\S\ref{sec:string_concatenation}).
 The Set of all Strings of Length $n$ over $\Sigma$ is denoted
 $\Sigma^n$.
 
-The infinite Set of all possible Strings of all finite Lengths,
+The Alphabet of a String, $s$, is the Set of Symbols occuring in that
+particular String, $\mathrm{Alph}(s)$, while the Alphabet of a
+Language (\S\ref{sec:formal_language}), $S$, is the Set of all Symbols
+occuring in any String of that Language:
+\[
+    \mathrm{Alph}(S) = \bigcup_{s \in S} \mathrm{Alph}(s)
+\]
+
+The Infinite Set of all possible Strings of all Finite Lengths,
 $\Sigma^*$, is the Free Monoid (\S\ref{sec:free_monoid}) or
 \emph{Kleene Closure} of $\Sigma$, that is, the smallest Superset of
-$\Sigma$ that is closed under String Concatenation
-(\S\ref{sec:string_concatenation}):
+$\Sigma$ that is closed under String Concatenation:
 \[
   \Sigma^* = \bigcup_{n\in\mathbb{N}_0} \Sigma^n
 \]
@@ -42,6 +54,21 @@ $\Sigma$ that is closed under String Concatenation
 % --------------------------------------------------------------------
 \subsection{String Concatenation}\label{sec:string_concatenation}
 % --------------------------------------------------------------------
+
+The \emph{Concatenation} of two Strings, $s$ and $t$, is an
+Associative Operation denoted $s \cdot t$ or $st$, giving the String
+resulting from appending the right-hand String to the end of the
+left-hand String. The Empty String $\varepsilon$ acts as an Identity
+Element:
+\[
+  s \cdot \varepsilon = s = \varepsilon \cdot s
+\]
+With a third String, $u$, the Associative Property gives:
+\[
+  s \cdot (t \cdot u) = (s \cdot t) \cdot u
+\]
+
+
 
 % --------------------------------------------------------------------
 \subsection{Prefix \& Suffix}\label{sec:prefix_suffix}
@@ -93,12 +120,6 @@ or
   Grammar} (\S\ref{sec:determinative_grammar})
 \end{itemize}
 
-
-
-% --------------------------------------------------------------------
-\subsection{Language Operation}\label{sec:formal_operation}
-% --------------------------------------------------------------------
-
 For two Languages $L1$ and $L2$ over a common Alphabet $\Sigma$:
 \begin{itemize}
   \item $L1 \cup L2$ is a Language (Set Union)
@@ -114,6 +135,32 @@ For a given Language $L \subseteq \Sigma^*$ there exists a
 
 The Language consisting of just the Empty String $\{\varepsilon\}$ is
 distinguished from the Empty Language $\{\}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Language Concatenation}\label{sec:language_concatenation}
+% --------------------------------------------------------------------
+
+The \emph{Concatenation} of two Languages, $S$ and $T$, is an
+Associative Operation that gives a third Language, $S \cdot T$,
+defined as:
+\[
+  S \cdot T = \{s \cdot t\;|\; s \in S \wedge t \in T\}
+\]
+The Language consisting of just the Empty String, $\{\varepsilon\}$,
+acts as an Identity Element:
+\[
+  S \cdot \{\varepsilon\} = S = \{\varepsilon\} \cdot S
+\]
+and the Empty Language, $\{\}$, acts as a Zero Element:
+\[
+  S \cdot \{\} = \{\} = \{\} \cdot S
+\]
+With a third Language, $U$, the Associative Property gives:
+\[
+  S \cdot (T \cdot U) = (S \cdot T) \cdot U
+\]
 
 
 
@@ -360,6 +407,9 @@ single Non-terminal, the Production Rules can be applied regardless of
 Context. Each Non-terminal in a Context-free Grammar, $G$, is said to
 form a \emph{Sublanguage} of the Language defined by $G$.
 
+A Context-free Language is Closed under String Substitution
+(\S\ref{sec:string_substitution}).
+
 Multiple Context-free Grammars may generate the same Language, so
 Properties of CFGs may be termed \emph{Extrinsic} while Language
 Properties are \emph{Intrinsic}. The question of Equality between CFGs
@@ -450,6 +500,9 @@ Regular:
   K / L, \quad
   L^R
 \]
+Like Context-free Languages, Regular Languages are Closed under String
+Substitution (\S\ref{sec:string_substitution}).
+
 A common formulation of Regular Languages is using \emph{Regular
   Expressions} (\S\ref{sec:regular_expression}) and conversely it is
 sometimes said that a Regular Language is one that can be defined by a
@@ -742,9 +795,9 @@ Formal Grammars may be abstracted as \emph{Abstract Reduction Systems}
 (or \emph{Abstract Rewrite Systems}), abbreviated $ARS$. An ARS is
 simply
   \[(A,\rightarrow)\]
-where $A$ is a Set of objects (Expressions) and $\rightarrow \subseteq
-A \times A$ is a Binary Relation on those objects called the
-\emph{Reduction Relation}. The object appearing in the right-hand side
+where $A$ is a Set of Objects (Expressions) and $\rightarrow \subseteq
+A \times A$ is a Binary Relation on those Objects called the
+\emph{Reduction Relation}. The Object appearing in the right-hand side
 of a Reduction Relation is called a \emph{Reduct} (or
 \emph{Expansion}) of the left-hand side. This is equivalent to an
 Unlabelled State Transition System
@@ -791,24 +844,24 @@ Relations may be defined:
 \subsection{Normal Form}\label{sec:normal_form}
 % --------------------------------------------------------------------
 
-An object of an Abstract Rewriting System $(A,\rightarrow)$ is in
+An Object of an Abstract Rewriting System $(A,\rightarrow)$ is in
 \emph{Normal Form} (\emph{Irreducible}) if it cannot be Rewritten
 further. That is, $x \in A$ is in Normal Form if $\nexists y \in A : x
 \rightarrow y$. Otherwise $x$ is \emph{Reducible}.
 
-For two objects $x,y \in A$, $y$ is a Normal Form of $x$ if $x
+For two Objects $x,y \in A$, $y$ is a Normal Form of $x$ if $x
 \stackrel{*}{\rightarrow} y$ and $y$ is Irreducible. A unique Normal
 Form of $x$ is denoted $x \downarrow$.
 
-An object of an ARS is \emph{Weakly Normalizing} if some Rewrite
+An Object of an ARS is \emph{Weakly Normalizing} if some Rewrite
 sequence leads to a Normal Form and \emph{Strongly Normalizing} if
-every Rewrite sequence leads to a Normal Form. If all objects of an
+every Rewrite sequence leads to a Normal Form. If all Objects of an
 ARS are Strongly Normalizing, then the system itself is called
 Strongly Normalizing (or \emph{Terminating} or \emph{Noetherian}) and
 has no infinite Reduction Sequences.
 
-An ARS is \emph{Normalizing} if every object has at least one Normal
-Form, and likewise is Weakly or Strongly Normalizing if every object
+An ARS is \emph{Normalizing} if every Object has at least one Normal
+Form, and likewise is Weakly or Strongly Normalizing if every Object
 is Weakly or Strongly Normalizing. A Strongly Normalizing ARS always
 terminates and is therefore not Turing Complte and cannot be used as a
 Self-interpreter (in Programming Languages).
@@ -827,7 +880,7 @@ such as \emph{Simply-typed $\lambda$-calculus}
 \subsection{Joinability}\label{sec:rewrite_join}
 % --------------------------------------------------------------------
 
-For an ARS $(A, \rightarrow)$, two objects $x,y\in A$ are
+For an ARS $(A, \rightarrow)$, two Objects $x,y\in A$ are
 \emph{Joinable} when:
 \[
   \exists z \in A :
@@ -853,7 +906,7 @@ Equivalently, the Church-Rosser Property can be expressed as:
 The Church-Rosser Property is equivalent to Confluence
 (\S\ref{sec:rewrite_confluence}).
 
-In a Church-Rosser system, an object can have zero or one Normal
+In a Church-Rosser system, an Object can have zero or one Normal
 Forms. By the \emph{Church-Rosser Theorem}, $\lambda$-calculus
 (\S\ref{sec:untyped_lambda}) has this property, which means that
 Evaluation ($\beta$-reduction) can be carried out in any order.
@@ -872,7 +925,7 @@ An ARS $(A, \rightarrow)$ is \emph{Confluent} (or \emph{Globally
   \Rightarrow x \downarrow y
 \]
 That is, for any two diverging paths, they eventually meet at a common
-successor. An individual object can be said to be Confluent if it has
+successor. An individual Object can be said to be Confluent if it has
 this property.
 
 \emph{Semi-confluent}:
@@ -919,7 +972,7 @@ when working with a Grobner Basis (\S\ref{sec:ring_ideal}).
 
 An ARS that is both Confluent (\S\ref{sec:rewrite_confluence}) and
 Terminating (\S\ref{sec:normal_form}) is called \emph{Convergent} (or
-\emph{Canonical}) and every object has a unique Normal Form.
+\emph{Canonical}) and every Object has a unique Normal Form.
 
 
 
@@ -943,6 +996,16 @@ Monoid Presentation (\S\ref{sec:presentation})
 % --------------------------------------------------------------------
 \subsection{Term Rewriting System}\label{sec:term_rewriting}
 % --------------------------------------------------------------------
+
+A \emph{Term Rewriting System} is an Abstract Rewriting System with
+\emph{Terms} (Formal Logic\S\ref{sec:term}) as Objects and a Rewrite
+Relation, $\rightarrow_R$, given by the Set of \emph{Term Rewriting
+  Rules}, $R$, of the form:
+\[
+  l \rightarrow r
+\]
+where $l$ and $r$ are a pair of Terms. Such a Rule is \emph{Applied}
+to a Term $s$ if $l$ matches a Subterm of $s$.
 
 
 

@@ -17,24 +17,23 @@ Model-theoretic Interpretation (\S\ref{sec:interpretation}).
 \section{Logical System}\label{sec:logical_system}
 % ====================================================================
 
-A \emph{Logical System} (or \emph{System of Logic} or just
-``\emph{Logic}'') is a Formal System (\S\ref{sec:formal_system}) together
-with a form of Semantics (Part \ref{sec:formal_semantics}) that gives
-Meanings to the Formulas in the underlying Language. Symbols in the
-Language are broadly divided into \emph{Variables} or
-\emph{Constants}.
-
-Constants may be further divided into \emph{Logical Constants} and
-\emph{Non-Logical Constants}.
-
-Symbols that don't have individual Meaning in isolation are called
-\emph{Syncategorematic} (see Term Logic \S\ref{sec:term_logic}),
-otherwise they are called \emph{Categorematic}.
+A \emph{Logical System} (or \emph{System of Logic}) is a Formal System
+(\S\ref{sec:formal_system}) together with a form of Semantics (Part
+\ref{sec:formal_semantics}) that gives Meanings to the Formulas in the
+underlying Language. Symbols in the Language are broadly divided into
+\emph{Variables} (\S\ref{sec:variable}) and \emph{Constants}, the
+latter of which are divided into \emph{Logical Constants}
+(\S\ref{sec:logical_constant}) and \emph{Non-Logical Constants}
+(\S\ref{sec:nonlogical_constant}).
 
 \emph{Extra-logical Symbols} are those of a Metalanguage
 (\S\ref{sec:metalanguage}), such as the Symbol for Logical Consequence
 (Entailment \S\ref{sec:logical_consequence}), $\vdash$, or
 Metavariables (\emph{Schematic Variables}), $\varphi, \psi, \ldots$.
+
+Symbols that don't have individual Meaning in isolation are called
+\emph{Syncategorematic} (see Term Logic \S\ref{sec:term_logic}),
+otherwise they are called \emph{Categorematic}.
 
 Other Symbols may be used for \emph{Punctuation}, like Parentheses and
 Commas, as long as they don't appear in one of the other kinds of
@@ -47,61 +46,16 @@ A Structure (\S\ref{sec:structure}) that Satisfies
 
 
 % --------------------------------------------------------------------
-\subsection{Variable}\label{sec:variable}
-% --------------------------------------------------------------------
-
-A \emph{Variable} is a placeholder that ranges over the objects in the
-Domain of Discourse (\S\ref{sec:domain}).
-
-Variables are called \emph{Bound Variables} or \emph{Free Variables}
-depending on whether or not they are Quantified
-(\S\ref{sec:quantifier}).
-
-Inductive definition of Free and Bound Variables:
-\begin{enumerate}
-\item A Variable $x$ is Free in Atomic Formula
-  (\S\ref{sec:atomic_formula}) $\varphi$ if $x$ occurs in $\varphi$
-  (Atomic Formulas are Quantifier-free)
-\item A Variable is Free or Bound in the Compound Formula $\varphi
-  \bullet \psi$ if $x$ is Free or Bound in either $\varphi$ or $\psi$,
-  where $\bullet$ is a Binary Logical Connective
-  (\S\ref{sec:logical_connective})
-\item A Variable $x$ is Free in $\forall y \varphi$ iff $x$ is Free in
-  $\varphi$ and $x$ is not $y$. Conversely $x$ is Bound in $\forall y
-  \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
-\end{enumerate}
-
-A Term with no Free Variables is a \emph{Ground Term} and a Formula
-with no Free Variables in First-order Logic is a \emph{Sentence} (also
-called a \emph{Closed Formula}). Sentences have well-defined Truth
-values. In some treatments, Free Variables may be Implicitly
-Universally Quantified, but in general this is not the case.
-
-
-
-\subsubsection{Metavariable}\label{sec:metavariable}
-
-A \emph{Metavariable} is a Variable written in a Metalanguage that
-stands in for an Element in the Object Language. The Formalization of
-Metavariables falls under \emph{Type Theory} (Part
-\ref{sec:type_theory}).
-
-Metavariables may be referred to as \emph{Schematic Variables} in the
-context of Axiom Schemata (\S\ref{sec:axiom_schema}) and Rule Schemata
-(\S\ref{sec:rule_schema}). A Schematic Variable ranges over all
-Propositions (\S\ref{sec:proposition}).
-
-
-
-% --------------------------------------------------------------------
 \subsection{Logical Constant}\label{sec:logical_constant}
 % --------------------------------------------------------------------
 
 \emph{Logical Constants} (or \emph{Logical Symbols}) have the same
-Semantic Meaning under every Interpretation of the Language.
+Semantic Meaning under every Interpretation
+(\S\ref{sec:interpretation}) of the Language.
 
-Two types of Logical Constants are \emph{Logical Connectives} and
-\emph{Quantifiers}.
+Two types of Logical Constants are \emph{Logical Connectives}
+(\S\ref{sec:logical_connective} and \emph{Quantifiers}
+(\S\ref{sec:quantifier}).
 
 
 
@@ -167,8 +121,6 @@ First-Order System requires the \emph{Equality Relation}
 (\S\ref{sec:firstorder_equality}) in order to be able to express
 Uniqueness Quantification.
 
-\emph{Witness}
-
 
 
 \paragraph{Quantifier Rank}\label{sec:quantifier_rank}\hfill \\
@@ -202,16 +154,168 @@ Inductive definition of Quantifier Rank function $qr$:
 \subsection{Non-logical Constant}\label{sec:nonlogical_constant}
 % --------------------------------------------------------------------
 
-Non-Logical Symbols only have meaning under an Interpretation
+\emph{Non-Logical Symbols} only have Meaning under an Interpretation
 (\S\ref{sec:interpretation}). These are Symbols such as Relation
 Symbols (Predicates \S\ref{sec:predicate}) and Function Symbols.
 
 The set of Non-Logical Symbols used in a particular discourse is
-called the \emph{Signature} (\S\ref{sec:signature}) of the discourse.
+called the Signature (\S\ref{sec:signature}) of the discourse.
 
 
 
-\subsubsection{Predicate}\label{sec:predicate}
+% --------------------------------------------------------------------
+\subsection{Variable}\label{sec:variable}
+% --------------------------------------------------------------------
+
+A \emph{Variable} is a placeholder that ranges over the objects in the
+Domain of Discourse (\S\ref{sec:domain}).
+
+Variables are called \emph{Bound Variables} or \emph{Free Variables}
+depending on whether or not they are Quantified
+(\S\ref{sec:quantifier}).
+
+Inductive definition of Free and Bound Variables:
+\begin{enumerate}
+\item A Variable $x$ is Free in Atomic Formula
+  (\S\ref{sec:atomic_formula}) $\varphi$ if $x$ occurs in $\varphi$
+  (Atomic Formulas are Quantifier-free)
+\item A Variable is Free or Bound in the Compound Formula
+  (\S\ref{sec:formula}) $\varphi \bullet \psi$ if $x$ is Free or Bound
+  in either $\varphi$ or $\psi$, where $\bullet$ is a Binary Logical
+  Connective (\S\ref{sec:logical_connective})
+\item A Variable $x$ is Free in $\forall y \varphi$ iff $x$ is Free in
+  $\varphi$ and $x$ is not $y$. Conversely $x$ is Bound in $\forall y
+  \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
+\end{enumerate}
+
+A Term with no Free Variables is a \emph{Ground Term} and a Formula
+with no Free Variables in First-order Logic is a \emph{Sentence} (also
+called a \emph{Closed Formula}). Sentences have well-defined Truth
+values. In some treatments, Free Variables may be Implicitly
+Universally Quantified, but in general this is not the case.
+
+
+
+\subsubsection{Witness}\label{sec:witness}
+
+An Existentially Quantified Variable, $\exists x$, may be removed by
+introducing a new Constant Symbol, $c$, that provides a \emph{Witness}
+of an Element that Satisfies the Formula in which it appears.
+
+
+
+\subsubsection{Skolemisation}\label{sec:skolemisation}
+
+\emph{Skolemisation} is the removal of an Existential Quantifier that
+appears after a Universal Quantifier, $\forall x \exists y : P (x,y)$,
+by introducing a new Function Symbol, $f$:
+\[
+  \forall x : P (x, f(x))
+\]
+that produces a Witness (\S\ref{sec:witness}) depending on $x$.
+
+
+
+\subsubsection{Metavariable}\label{sec:metavariable}
+
+A \emph{Metavariable} is a Variable written in a Metalanguage that
+stands in for an Element in the Object Language. The Formalization of
+Metavariables falls under \emph{Type Theory} (Part
+\ref{sec:type_theory}).
+
+Metavariables may be referred to as \emph{Schematic Variables} in the
+context of Axiom Schemata (\S\ref{sec:axiom_schema}) and Rule Schemata
+(\S\ref{sec:rule_schema}). A Schematic Variable ranges over all
+Propositions (\S\ref{sec:proposition}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Signature}\label{sec:signature}
+% --------------------------------------------------------------------
+
+The \emph{Signature} (or \emph{Vocabulary}) defines the Non-logical
+Constants (\S\ref{sec:nonlogical_constant}) of the Language of a
+Logical System as a Set of Function and Relation Symbols that
+characterize it together with an \emph{Arity Function} ``$ar$'' that
+maps each Function and Relation Symbol $s$ to a corresponding Natural
+Number $n$ which is the Arity of $s$: $n = ar(s)$. A Structure
+(\S\ref{sec:structure}) with Signature $\sigma$ may be called a
+\emph{$\sigma$-structure}.
+
+A Signature is defined as a triple:
+\[
+    (F,R,ar)
+\]
+where $F$ is a Set of Function Symbols, and $R$ is a Set of Relation
+Symbols (or Predicates) and $ar$ is the Arity Function:
+\[
+    ar: F \cup R \rightarrow \mathbb{N}_0
+\]
+If both $F$ and $R$ are Finite Sets, $\sigma$ is a \emph{Finite
+  Signature}.
+
+A Nullary Function Symbol is a \emph{Constant Symbol} and a Nullary
+Relation Symbol is a \emph{Propositional Variable}
+(\S\ref{sec:propositional_logic}). A Function or Relation Symbol $s$
+of Arity $n$ is sometimes denoted $\prescript{n}{}{s}$. Allowing for
+\emph{Infinitary Operators} leads to a Theory of Complete Lattices
+(\S\ref{sec:complete_lattice}).
+
+A Signature with no Relation Symbols is an \emph{Algebraic Signature},
+and the associated Structure an Algebra
+(\S\ref{sec:universal_algebra}).
+
+A Signature with no Function Symbols is a \emph{Relational Signature},
+and the associated Structure is a \emph{Relational Structure}. A
+Relational Structure may be used as the basis for a Relational Model
+(\S\ref{sec:relational_model}) in Database Theory.
+
+The Signature is a synonym for the \emph{Type} (\S\ref{sec:type}) of
+the Structure (Schematically represented by $\Omega$), and can be
+written as an ordered sequence of Natural Numbers representing the
+Arity of the Operators.
+
+A \emph{Reduct} of a Structure is created by omitting certain
+Operations and Relations from the Signature the converse is
+\emph{Expansion} (\S\ref{sec:reduct_expansion}).
+
+
+
+\subsubsection{Cardinality}\label{sec:signature_cardinality}
+
+The \emph{Cardinality} of a Signature $\sigma = (F,R,ar)$ is denoted
+$|\sigma|$ and is the least Infinite Cardinal
+(\S\ref{sec:cardinal_number}) $n$ such that $n \geq (|F| + |R|)$, that
+is, greater than or equal to the number of Symbols in the Signature
+$\sigma$. This is equal to the number of First-order Formulas
+(\S\ref{sec:predicate_logic}) of $\sigma$.
+
+
+
+\subsubsection{Reduction \& Expansion}\label{sec:reduct_expansion}
+
+For two Signatures $\sigma^-$ and $\sigma^+$ where $\sigma^- \subset
+\sigma^+$, any $\sigma^+$-structure $\mathcal{A}$ is also a
+$\sigma^-$-structure called the \emph{$\sigma^-$-reduct} of
+$\mathcal{A}$ denoted $\mathcal{A}|\sigma^-$, having the same Domain
+as $\mathcal{A}$ (although the Set of Constant Elements corresponding
+to Constant Functions in the Signature of $\sigma^-$ may be smaller).
+
+A Homomorphism of $\sigma^+$-structures $h : \mathcal{A} \rightarrow
+\mathcal{B}$ is also a Homomorphism of $\sigma^-$-structures $h :
+\mathcal{A} | \sigma^- \rightarrow \mathcal{B} | \sigma^-$.
+
+If a Structure $\mathcal{B}$ is a $\sigma^-$-reduct of a
+$\sigma^+$-structure $\mathcal{A}$ then $\mathcal{A}$ is called the
+\emph{Expansion} of $\mathcal{B}$ to $\sigma^+$. Such an Expansion is
+not necessarily unique. The notation for an Expansion by certain
+additional Function or Relation Symbols, $f, g, h$, is denoted
+$\mathcal{A} = (\mathcal{B}, f, g, h)$.
+
+
+
+\subsubsection{Many-sorted Signature}\label{sec:many_sorted_signature}
 
 
 
@@ -223,7 +327,13 @@ Expressions belonging to the underlying Language of a Logical System
 are called ``\emph{Well-formed Formulas}'' (\emph{WFFs}) or just
 \emph{Formulas}. The Syntax (\S\ref{sec:formal_grammar}) of a Formula
 is defined by the Symbols and \emph{Formation Rules} for a particular
-kind of Logic.
+kind of Logic. A Formula containing no Logical Connectives is called
+an \emph{Atomic Formula} (\S\ref{sec:atomic_formula}). A Formula
+composed of Atomic Formulas combined with Logical Connectives is a
+\emph{Compound Formula}. The component Formulas that make up a
+Compound Formula are called \emph{Subformulas} and all Formulas are
+Subformulas of themselves. A Subformula that is not the entire Formula
+is called a \emph{Proper Subformula}.
 
 A Formula capable of being assigned a Truth Value is called a
 \emph{Proposition} (\S\ref{sec:proposition}).
@@ -267,9 +377,15 @@ forms a \emph{Clause}.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Proposition}\label{sec:proposition}
-% --------------------------------------------------------------------
+\subsubsection{Variant}\label{sec:variant}
+
+A Formula is a \emph{Variant} of another Formula if the two Formulas
+differ only in the choice of Variables. \emph{Variance} is an
+Equivalence Relation on the Class of Formulas.
+
+
+
+\subsubsection{Proposition}\label{sec:proposition}
 
 \emph{Propositions} are Formulas that are assigned a Truth Value
 (\S\ref{sec:truth_value}), i.e. they are Truth-bearers
@@ -289,6 +405,36 @@ A Proposition is Satisfiable (\S\ref{sec:satisfaction}) if it is True
 under at least one Interpretation. A Proposition is Valid
 (\S\ref{sec:validity}) if and only if it is True under very
 Interpretation.
+
+
+
+\subsubsection{Sentence}\label{sec:sentence}
+
+
+
+% --------------------------------------------------------------------
+\section{Substitution}\label{sec:substitution}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\section{Logic}\label{sec:logic}
+% --------------------------------------------------------------------
+
+A \emph{Logic} is a Family of Languages that differ from eachother
+only in Signature (\S\ref{sec:signature}), such as \emph{First-order
+  Logic} (\S\ref{sec:firstorder_logic}), \emph{Modal Logic}
+(\S\ref{sec:modal_logic}), etc.
+
+The Cardinality of the underlying Language $\mathcal{L}$,
+$|\mathcal{L}|$, is equal to the number of Equivalence Classes defined
+by the Variance Relation (\S\ref{sec:variant}) on the Formulas of
+$\mathcal{L}$.
+
+
+
+\subsubsection{Predicate}\label{sec:predicate}
 
 
 
@@ -589,6 +735,12 @@ Equivalence Relation. If this convention is used, but no distinct
 individuals, $a$ and $b$ satisfy $a=b$ then the Interpretation is
 termed a \emph{Normal Model} (that is equivalent to a First-order
 Logic with Equality).
+
+
+
+\subsubsection{Equational Logic}\label{sec:equational_logic}
+
+\emph{Equational Logic} is First-order Logic without Quantifiers.
 
 
 
