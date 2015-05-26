@@ -18,11 +18,11 @@ Theory (Part \ref{sec:recursion_theory}).
 \section{String}\label{sec:string}
 % ====================================================================
 
-A \emph{String}, $s$, is a Finite Sequence (\S\ref{sec:tuple}) over a
-non-empty, finite Set of \emph{Symbols} (or \emph{Characters}),
+A \emph{String}, $s$, is a Finite Sequence (\S\ref{sec:sequence}) over
+a non-empty Finite Set of \emph{Symbols} (or \emph{Characters}),
 $\Sigma$, called an \emph{Alphabet}:
 \[
-    s = c_1 \ldots c_n
+    s = \langle c_1 \ldots c_n \rangle
 \]
 where $c_1 \ldots c_n \in \Sigma$.
 
@@ -71,24 +71,159 @@ With a third String, $u$, the Associative Property gives:
 
 
 % --------------------------------------------------------------------
-\subsection{Prefix \& Suffix}\label{sec:prefix_suffix}
+\subsection{Substring}\label{sec:substring}
 % --------------------------------------------------------------------
+
+A \emph{Substring} (or \emph{Subword} or \emph{Factor}) is a
+Subsequence (\S\ref{sec:subsequence}) of consecutive Symbols that
+occur within a given String. For an $n$-length String, there are
+$n(n+1) \over 2$ Non-empty Substrings.
+
+
+
+\subsubsection{Prefix \& Suffix}\label{sec:prefix_suffix}
+
+A \emph{Prefix} is a Substring that occurs at the beginning of a
+String, and a \emph{Suffix} is a Substring that occurs at the end of a
+String. A Prefix or Suffix that is not equal to the entire String
+itself is called a \emph{Proper Prefix} or \emph{Proper Suffix}
+respectively.
+
+The Prefix Relation is sometimes denoted $t \sqsubseteq s$ for Prefix
+$t$ of $s$, and defines a kind of Prefix Order
+(\S\ref{sec:prefix_order}). For related Data Structures, see
+\emph{Prefix Tree}\S\ref{sec:prefix_tree} and \emph{Suffix
+  Tree}\S\ref{sec:suffix_tree}.
+
+The Function $\mathrm{Pref}_L(s)$ is defined as the Set of all
+Prefixes of a String $s$, with respect to a Language $L$:
+\[
+  \mathrm{Pref}_L(s) =
+    \{ t\;|\;s = tu; t,u \in \mathrm{Alph}(L)^* \}
+\]
+For two Strings $s$ and $t$, the Prefix Relation
+(\S\ref{sec:prefix_suffix}) can be defined in terms of the
+$\mathrm{Pref}$ Function as:
+\[
+  s \sqsubseteq t \Leftrightarrow s \in \mathrm{Pref}_L(t)
+\]
+This Function is also used in the definition of the \emph{Prefix Closure}
+of a Language (\S\ref{sec:prefix_closure}).
+
+
+
+\subsubsection{Border}\label{sec:string_border}
+
+A \emph{Border} is a Substring that is both a Prefix and a Suffix of
+the same String.
+
+
+
+\subsubsection{Superstring}\label{sec:superstring}
+
+A \emph{Superstring}, $s$, for a Set of Strings, $P$, is a single
+String that contains every String in $P$ as a Substring. For example,
+the trivial Superstring of $P$ would be given by the concatenation of
+all the Strings in $P$ in any order.
+
+
 
 % --------------------------------------------------------------------
 \subsection{String Substitution}\label{sec:string_substitution}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{String Homomorphism}\label{sec:string_homomorphism}
-% --------------------------------------------------------------------
+A \emph{String Substitution} is a Function, $f$, from Symbols in the
+Alphabet, $s \in \Sigma$, of a Language, $L$, to another Language,
+$L_s$, possibly with a different Alphabet, $\Delta$:
+\[
+  f(s) = L_s
+\]
+where $L_s \subseteq \Delta^*$. It is extended to Strings by:
+\[
+  f(\varepsilon) = \varepsilon
+\]
+for Empty String $\varepsilon$ and:
+\[
+  f(st) = f(s)f(t)
+\]
+for Strings $s,t \in L$. This can be extended to give the Substitution
+Closure (\S\ref{sec:substitution_closure}) of a Language. Regular
+(\S\ref{sec:regular_language}) and Context-free
+(\S\ref{sec:context_free}) Languages are closed under String
+Substitution.
+
+
+
+\subsubsection{String Homomorphism}\label{sec:string_homomorphism}
+
+A \emph{String Homomorphism} is a String Substitution such that each
+Symbol in an Alphabet $\Sigma$ is replaced by a Single String. A
+String Homomorphism is a Monoid Morphism on the Free Monoid of
+$\Sigma$ (preserving String Concatenation). For a String Homomorphism
+$f$ on Alphabet $\Sigma_1$:
+\[
+  f : \Sigma_1^* \rightarrow \Sigma_2^*
+\]
+where $\forall u,v \in \Sigma_1, f(uv) = f(u)f(v)$.
+
+A String Homomorphism $f$ is \emph{$\varepsilon$-free} if $\forall a
+\in \Sigma, f(a) \neq \varepsilon$.
+
+A String Homomorphism can
+be used to define a Homomorphism Closure for Languages
+(\S\ref{sec:language_homomorphism}). Regular
+(\S\ref{sec:regular_language}) and Context-free
+(\S\ref{sec:context_free}) Languages are Closed under String
+Homomorphisms.
+
+
 
 % --------------------------------------------------------------------
 \subsection{String Projection}\label{sec:string_projection}
 % --------------------------------------------------------------------
 
+For a String $s$ and Alphabet $\Sigma$ (not necessarily
+$\text{Alph}(s)$), a \emph{String Projection}, $\pi_{\Sigma}(s)$, is
+the String gotten by removing all Symbols of $s$ that are not in
+$\Sigma$:
+\[
+  \pi_{\Sigma}(s) =
+  \begin{cases}
+    \varepsilon       & \quad \text{if $s = \varepsilon$}\\
+    \pi_{\Sigma}(t)   & \quad \text{if $s = ta$ and $a \notin \Sigma$}\\
+    \pi_{\Sigma}(t)a  & \quad \text{if $s = ta$ and $a \in \Sigma$}\\
+  \end{cases}
+\]
+cf. Projection in Relational Algebra
+\S\ref{sec:relational_projection}. String Projection may be used to
+define a Projection over a Language (\S\ref{sec:language_projection}).
+
+
+
 % --------------------------------------------------------------------
-\subsection{Right Quotient}\label{sec:right_quotient}
+\subsection{Quotient}\label{sec:string_quotient}
 % --------------------------------------------------------------------
+
+The \emph{Right Quotient} of a String, $S$, and Symbol, $b$, denoted
+$S / b$ is defined as:
+\[
+  (Sa)/b =
+  \begin{cases}
+    S           & \quad \text{if $a = b$}\\
+    \varepsilon & \quad \text{if $a \neq b$}\\
+  \end{cases}
+\]
+Likewise a \emph{Left Quotient} $b \ S$ is defined as:
+\[
+  b\backslash(aS) =
+  \begin{cases}
+    S           & \quad \text{if $a = b$}\\
+    \varepsilon & \quad \text{if $a \neq b$}\\
+  \end{cases}
+\]
+cf. Syntactic Monoid\S Syntactic Quotient \ref{sec:syntactic_quotient}.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Right Cancellation}\label{sec:right_cancellation}
@@ -164,6 +299,82 @@ With a third Language, $U$, the Associative Property gives:
 
 
 
+% --------------------------------------------------------------------
+\subsection{Prefix Closure}\label{sec:prefix_closure}
+% --------------------------------------------------------------------
+
+The \emph{Prefix Closure} of a Language $L$ is given by the Function
+$\mathrm{Pref}(L)$:
+\[
+  \mathrm{Pref}(L) = \bigcup_{s \in L} \mathrm{Pref}_L(s) =
+  \{ t\;|\;s = tu; s \in L; t,u \in \mathrm{Alph}(L)^* \}
+\]
+where $\mathrm{Pref}_L(s)$ is the Set of Prefixes
+(\S\ref{sec:prefix_suffix}) of String $s$ with respect to $L$. A
+Language is \emph{Prefix Closed} if $\mathrm{Pref}(L) = L$.
+$\mathrm{Pref}$ is Idempotent:
+\[
+  \mathrm{Pref}(\mathrm{Pref}(L)) = \mathrm{Pref}(L)
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Substitution Closure}\label{sec:substitution_closure}
+% --------------------------------------------------------------------
+
+The \emph{Substitution Closure} of a Language $L$ is defined as:
+\[
+  f(L) = \bigcup_{s \in L} f(s)
+\]
+where $f(s)$ is the String Substitution Function
+(\S\ref{sec:string_substitution}). Regular
+(\S\ref{sec:regular_language}) and Context-free
+(\S\ref{sec:context_free}) Languages are Closed under String
+Substitution.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Language Homomorphism}\label{sec:language_homomorphism}
+% --------------------------------------------------------------------
+
+A \emph{Homomorphism}, $h$, of a Language, $L$, with Alphabet,
+$\Sigma$, is defined in terms of a String Homomorphism
+(\S\ref{sec:string_homomorphism}) $f(s)$, where $s \in L$:
+\[
+  h(L) = \bigcup_{s \in L} f(s)
+\]
+and the Inverse Homomorphic Image is then:
+\[
+  h^{-1}(L) = \{ s\;|\; f(s) \in L \}
+\]
+In General $h(h^{-1}(L)) \neq L$, but:
+\[
+  h (h^{-1}(L)) \subseteq L
+\] and:
+\[
+  L \subseteq h^{-1}(h(L))
+\]
+Regular (\S\ref{sec:regular_language}) and Context-free
+(\S\ref{sec:context_free}) Languages are Closed under Homomorphisms
+and Inverse Homomorphisms.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Language Projection}\label{sec:language_projection}
+% --------------------------------------------------------------------
+
+Using a String Projection (\S\ref{sec:string_projection}),
+$\pi_{\Sigma}(s)$, on Strings, $s$, the \emph{Language Projection} for
+a Language, $L$, is defined as:
+\[
+  \pi_{\Sigma}(L) = \{\pi_{\Sigma}(s)\;|\; s \in L\}
+\]
+
+
+
 % ====================================================================
 \section{Formal Grammar}\label{sec:formal_grammar}
 % ====================================================================
@@ -230,8 +441,10 @@ lowercase ($a,b,c,\cdots$), and Expressions by Greek letters
 
 A \emph{Determinative Grammar} is a Grammar through which a Member of
 $\Sigma^*$ can be determined to belong to a Language $L \subseteq
-\Sigma^*$ (\emph{Recognized}). Such systems are described by
-\emph{Automata Theory} (\S\ref{sec:automata_theory})
+\Sigma^*$ (\emph{Recognized}, note this is different from the use of
+\emph{Recognizable} (\S\ref{sec:recognizable}) in the case of
+Monoids). Such systems are described by \emph{Automata Theory}
+(\S\ref{sec:automata_theory})
 
 Syntactic Monoid (\S\ref{sec:syntactic_monoid})
 
@@ -373,7 +586,7 @@ formulation:
   %FIXME may need to link to concepts of Linear and Regular
 
 \item[Tree-adjoining] \hfill \\
-  Elementary rewriting unit is a Tree (\S\ref{sec:graph_tree}) rather
+  Elementary rewriting unit is a Tree (\S\ref{sec:tree_graph}) rather
   than a Symbol. Can be Recognized by Embedded Pushdown Automata
   (\S\ref{sec:embedded_pushdown})\cite{vijayashanker88}
 
@@ -1030,7 +1243,7 @@ or other hierarchical structure.
 % --------------------------------------------------------------------
 
 A \emph{Concrete Syntax Tree} (or \emph{Parse Tree}) is an Ordered,
-Rooted Tree (\S\ref{sec:graph_tree}) representing the \emph{Syntactic
+Rooted Tree (\S\ref{sec:tree_graph}) representing the \emph{Syntactic
   Structure} of a String according to a Context-free Grammar
 (\S\ref{sec:context_free}) such as the Constituency Relation of a
 Constituency Grammar (\S\ref{sec:constituency_grammar}) or the
@@ -1221,12 +1434,13 @@ Set of States, and $T$ is a \emph{Transition Function}:
 \[
   T:Q \times \Sigma \rightarrow Q
 \]
-A Semiautomaton induces a Monoid (\S\ref{sec:monoid}) called the
-\emph{Input Monoid} (also \emph{Transition Monoid},
-\emph{Characteristic Monoid}, or \emph{Transition System}):
+A Semiautomaton induces a Monoid called the \emph{Transition Monoid}
+(\S\ref{sec:transition_monoid}):
 \[
   M(Q,\Sigma,T) = \{T_w | w \in \Sigma^*\}
 \]
+
+A Semiautomaton induces a Monoid Action (\S\ref{sec:monoid_action})
 
 Transformation Semigroup (\S\ref{sec:transformation_semigroup})
 
@@ -1287,7 +1501,7 @@ able to recognize Regular Languages(\S\ref{sec:regular_language}).
 \emph{Deterministic Finite Automata} have the restriction that an
 Input Symbol has a Transition Function to a single State.
 Deterministic Finite Automata recognize Regular
-Languages(\S\ref{sec:regular_language}).
+Languages (\S\ref{sec:regular_language}).
 
 Representation of a Deterministic Finite Automaton as a 5-tuple:
 \[
@@ -1320,8 +1534,18 @@ application describes the Transition Monoid
 
 
 
-\paragraph{Local Automaton}\label{sec:local_automaton}
-\hfill \\
+\paragraph{Minimum DFA}\label{sec:minimum_dfa}\hfill \\
+
+For each Regular Language accepted by a DFA, there is a \emph{Minimum
+  DFA} which is unique up to Isomorphism with a minimum number of
+States. \emph{Minimization} from the original DFA is achieved by
+removing \emph{Unreachable States} and merging
+\emph{Nondistinguishable States}.
+
+
+
+\paragraph{Local Automaton}\label{sec:local_automaton}\hfill \\
+
 A \emph{Local Automaton} is a DFA for which all Edges with the same
 Label lead to a single Vertex.
 
