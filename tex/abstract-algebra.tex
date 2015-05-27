@@ -108,6 +108,15 @@ $\begin{array}{c||c|c|}
 \subsection{Commutative Non-associative Magma}\label{sec:commutative_magma}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\subsection{Free Magma}\label{sec:free_magma}
+% --------------------------------------------------------------------
+
+For a Set $X$, the \emph{Free Magma}, $M_X$, is the Set of
+Non-associative Words (Strings) on $X$ with parentheses retained.
+
+Free Object (\S\ref{sec:free_object})
+
 
 
 % ====================================================================
@@ -207,12 +216,39 @@ where $x$ is called a \emph{Pseudoinverse}. Every Group
 \section{Monoid}\label{sec:monoid}
 % ====================================================================
 
-A \emph{Monoid} is a Semigroup with an Identity Element. The set of
-all Endomorphisms of an Object, $X$, in a Category, $C$,
+A \emph{Monoid} is a Semigroup with an Identity Element.
+
+The set of all Endomorphisms of an Object, $X$, in a Category, $C$,
 \[
     Hom(X,X)
 \]
 defines a Monoid and is denoted $End_C(X)$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Monoid Congruence}\label{sec:monoid_congruence}
+% --------------------------------------------------------------------
+
+A \emph{Monoid Congruence} on a Monoid $(M,*)$ is an Equivalence
+Relation, $\sim$, that respects the Monoid Operator:
+\[
+  a,b,c,d \in M, a \sim c \wedge b \sim d \Rightarrow a*b \sim c*d
+\]
+
+See also Syntactic Congruence \S\ref{sec:syntactic_congruence}.
+
+
+
+\subsubsection{Quotient Monoid}\label{sec:quotient_monoid}
+
+For a Monoid Congruence, $\sim$, over a Monoid, $(M,*)$, a
+\emph{Quotient Monoid}, $M/\sim$, can be defined with Equivalence
+Classes as of $\sim$ as Objects and Binary Operation $\bullet$ defined
+as:
+\[
+  a,b \in M, [a]\bullet[b] = [a*b]
+\]
 
 
 
@@ -307,7 +343,16 @@ String $\varepsilon$ as the Identity Element.
 \subsection{Syntactic Monoid}\label{sec:syntactic_monoid}
 % --------------------------------------------------------------------
 
-The \emph{Syntactic Monoid}, $M(L)$, of a Formal Language
+Given a Subset of a Monoid, $S \subset M$, a \emph{Syntactic Monoid},
+$M(S)$, is the Quotient Monoid (\S\ref{sec:quotient_monoid}) formed by
+the Syntactic Congruence Relation (\S\ref{sec:syntactic_congruence})
+$\equiv_S$ where the Objects are Equivalence Classes in $M / \equiv_S$
+and the Operation $\bullet$ is defined as:
+\[
+  [a] \bullet [b] = [ab]
+\]
+
+The Syntactic Monoid, $M(L)$, of a Formal Language
 (\S\ref{sec:formal_language}), $L$, is the smallest Monoid that
 Recognizes (\S\ref{sec:recognizable}) $L$.
 
@@ -317,28 +362,63 @@ Minimal Automaton (\S\ref{sec:minimum_dfa}) accepting the Language.
 
 
 
-\subsubsection{Syntactic Quotient}\label{sec:syntactic_quotient}\hfill \\
+\subsubsection{Syntactic Quotient}\label{sec:syntactic_quotient}
 
-\emph{Syntactic Quotient}
+\emph{Syntactic Quotient} cf. String\S Quotient
+\ref{sec:string_quotient}.
 
-The \emph{Right Quotient Subset} of a Subset of a Monoid $S \subset M$
-is defined as:
+The \emph{Right Quotient} of a Subset of a Monoid $S \subset M$, by an
+Element $a \in M$, is defined as:
 \[
   S / a = \{ s \in M\;|\;sa \in S \}
 \]
-cf. String\S Quotient \ref{sec:string_quotient}.
+and the \emph{Left Quotient} as:
+\[
+  a \backslash S = \{ s \in M\;|\;as \in S \}
+\]
+
+A Formal Language $L$ is Regular (\S\ref{sec:regular_language}) if and
+only if the Family of Quotients $\{ m \ L \;|\; m \in M \}$ is Finite.
 
 
 
-\subsubsection{Syntactic Relation}\label{sec:syntactic_relation}\hfill \\
+\subsubsection{Syntactic Relation}\label{sec:syntactic_relation}
 
-\emph{Syntactic Relation} (\emph{Syntactic Equivalence})
+A Syntactic Quotient (\S\ref{sec:syntactic_quotient}) of a Subset of a
+Monoid $S \subset M$ induces an Equivalence Relation called a
+\emph{Syntactic Relation} (or \emph{Syntactic Equivalence}). The
+\emph{Right Syntactic Equivalence Relation} is defined as:
+\[
+  \sim_S = \{ (a,b) \in M \times M \;|\; S/a = S/b\}
+\]
+and the \emph{Left Syntactic Equivalence Relation} as:
+\[
+  \prescript{}{S}{\sim} = \{ (a,b) \in M \times M \;|\;
+  a \backslash S = b \backslash S \}
+\]
 
 
 
-% --------------------------------------------------------------------
-\subsection{Trace Monoid}\label{sec:trace_monoid}
-% --------------------------------------------------------------------
+\subsubsection{Syntactic Congruence}\label{sec:syntactic_congruence}
+
+\emph{Total Syntactic Congruence} (or \emph{Myhill Congruence}) with
+respect to a Subset of a Monoid $S \subset M$, denoted $\equiv_S$, is
+defined for $u,v \in M$ as:
+\[
+  u \equiv_S v \Leftrightarrow
+  (\forall x,y \in M, xuy \in S \Leftrightarrow xvy \in S)
+\]
+
+
+
+\paragraph{Disjunctive Set}\label{sec:disjunctive_set}\hfill \\
+
+A \emph{Disjunctive Set} is a Subset of a Monoid $S \subset M$ such
+that the Syntactic Congruence defined by $S$ is the Equality Relation.
+
+
+
+\subsubsection{Trace Monoid}\label{sec:trace_monoid}
 
 
 
@@ -1417,10 +1497,6 @@ A Basis defines an Isomorphism of Vector Spaces:
 
 % ====================================================================
 \section{Operad Theory}\label{sec:operad_theory}
-% ====================================================================
-
-% ====================================================================
-\section{Initial Algebra}\label{sec:initial_algebra}
 % ====================================================================
 
 % ====================================================================
