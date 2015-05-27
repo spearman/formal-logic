@@ -188,11 +188,12 @@ Inductive definition of Free and Bound Variables:
   \varphi$ if $x$ is $y$ or $x$ is Bound in $\varphi$.
 \end{enumerate}
 
-A Term with no Free Variables is a \emph{Ground Term} and a Formula
-with no Free Variables in First-order Logic is a \emph{Sentence} (also
-called a \emph{Closed Formula}). Sentences have well-defined Truth
-values. In some treatments, Free Variables may be Implicitly
-Universally Quantified, but in general this is not the case.
+A Term (\S\ref{sec:term}) with no Free Variables is a \emph{Ground
+  Term} and a Formula with no Free Variables in First-order Logic is a
+\emph{Sentence} (\S\ref{sec:sentence}, also called a \emph{Closed
+  Formula}). Sentences have well-defined Truth values. In some
+treatments, Free Variables may be Implicitly Universally Quantified,
+but in general this is not the case.
 
 
 
@@ -355,14 +356,27 @@ Functions. Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0
     \forall \tau_n=\{t_1,\cdots,t_n\} \in \mathcal{P}(T), \forall f
     \in F_n \exists f(t_1,\cdots,t_n) \in T
 \]
-If no Variables appear in a Term it is called a \emph{Closed Term} (or
-\emph{Ground Term}).
+
+
+
+\paragraph{Ground Term}\label{sec:ground_term}\hfill \\
+
+If no Free Variables appear in a Term it is called a \emph{Ground
+  Term} (or \emph{Closed Term}).
+
+
+
+\paragraph{Linear Term}\label{sec:linear_term}\hfill \\
+
+A \emph{Linear Term} is a Term without multiple occurences of a single
+Variable.
 
 
 
 \subsubsection{Atomic Formula}\label{sec:atomic_formula}
 
-\emph{Atomic Formula}
+An \emph{Atomic Formula} (or \emph{Atom}) is a Formula with no Logical
+Constants (Connectives or Quantifiers).
 
 Atomic Formulas can be defined Inductively by Formation Rules on Terms
 and Relations. Given Terms, $T = \{t_0,\ldots,t_n\}$, and Relations,
@@ -371,9 +385,22 @@ $R = \{r_0,\ldots,r_m\}$:
 \item $t_i = t_j$ is a Formula
 \item $r_k(t_0,\ldots,t_n)$ is a Formula and $r_k$ is an n-ary Relation
 \end{itemize}
+If no Free Variables occur in an Atomic Formula it is called a
+\emph{Ground Atom}.
+
+
+
+\paragraph{Literal}\label{sec:literal}\hfill \\
+
 A \emph{Literal} is an Atomic Formula, $\phi$, or its Negation, $\neg
-\phi$. A Finite Disjunction (\S\ref{sec:disjunction}) of Literals
-forms a \emph{Clause}.
+\phi$.
+
+
+
+\paragraph{Clause}\label{sec:clause}\hfill \\
+
+A Finite Disjunction (\S\ref{sec:disjunction}) of Literals is called a
+\emph{Clause}.
 
 
 
@@ -389,12 +416,13 @@ Equivalence Relation on the Class of Formulas.
 
 \emph{Propositions} are Formulas that are assigned a Truth Value
 (\S\ref{sec:truth_value}), i.e. they are Truth-bearers
-(\S\ref{sec:truth_bearer}). An \emph{Atomic Proposition} contains no
-Logical Connectives. A \emph{Compound Proposition} is composed by
-Recursive application of Logical Connectives to Propositions by a
-corresponding \emph{Concatenation Rule} that assigns a new Truth Value
-to the Compound Proposition. A Proposition with no Free Variables is
-called a \emph{Sentence}.
+(\S\ref{sec:truth_bearer}). An \emph{Atomic Proposition}
+(\S\ref{sec:atomic_formula}) contains no Logical Connectives. A
+\emph{Compound Proposition} is composed by Recursive application of
+Logical Connectives to Propositions by a corresponding
+\emph{Concatenation Rule} that assigns a new Truth Value to the
+Compound Proposition. A Proposition with no Free Variables is called a
+\emph{Sentence} (\S\ref{sec:sentence}).
 
 A Valuation (\S\ref{sec:valuation}) gives a Proposition a particular
 Truth Value, while an Interpretation (\S\ref{sec:interpretation})
@@ -410,11 +438,36 @@ Interpretation.
 
 \subsubsection{Sentence}\label{sec:sentence}
 
+A \emph{Sentence} (or \emph{Ground Formula}) is a Proposition with no
+Free Variables.
+
 
 
 % --------------------------------------------------------------------
-\section{Substitution}\label{sec:substitution}
+\subsection{Substitution}\label{sec:substitution}
 % --------------------------------------------------------------------
+
+A \emph{Substitution} is the replacement of all occurences of a Free
+Variable by a Term, which can be defined as a Total Mapping $\sigma: X
+\rightarrow T$ from Variables $X$ to Terms $T$.
+
+The \emph{Application} of a Substitution $\sigma$ to a Term $t$ is
+denoted $t\sigma$, or explicitly in postfix notation:
+\[
+  t(x_1 \ldots x_n)[s_1 \ldots s_n]
+\]
+where $x_1 \ldots x_n$ are the Free Variables of $t$, and $s_1 \ldots
+s_n$ are the Terms $s_i$ to be Substituted for each $x_i$.
+
+The result of Applying a Substitution, $t\sigma$, is called a
+\emph{Substitution Instance} of $t$. The \emph{Domain} of a
+Substitution $dom(\sigma)$ is the Set of Variables actually replaced:
+\[
+  \{ x \in X \;|\; x\sigma \neq x \}
+\]
+A Substitution $\sigma$ is a \emph{Ground Substitution} if all
+Variables are Mapped to Ground Terms, and $t\sigma$ is a Ground Term
+if all the Variables of $t$ are in $dom(\sigma)$.
 
 
 
