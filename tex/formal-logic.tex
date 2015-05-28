@@ -14,24 +14,25 @@ Model-theoretic Interpretation (\S\ref{sec:interpretation}).
 
 
 % ====================================================================
-\section{Logical System}\label{sec:logical_system}
+\section{Logic}\label{sec:logic}
 % ====================================================================
 
-A \emph{Logical System} (or \emph{System of Logic}) is a Formal System
-(\S\ref{sec:formal_system}) together with a form of Semantics (Part
-\ref{sec:formal_semantics}) that gives Meanings to the Formulas in the
-underlying Language. Symbols in the Language are broadly divided into
-\emph{Variables} (\S\ref{sec:variable}) and \emph{Constants}, the
-latter of which are divided into \emph{Logical Constants}
-(\S\ref{sec:logical_constant}) and \emph{Non-Logical Constants}
-(\S\ref{sec:nonlogical_constant}).
+A \emph{Logic} is a Family of Languages that differ from eachother
+only in \emph{Signature} (\S\ref{sec:signature}), such as
+\emph{First-order Logic} (\S\ref{sec:firstorder_logic}), \emph{Modal
+  Logic} (\S\ref{sec:modal_logic}), etc.
+
+Symbols in a Language are broadly divided into \emph{Variables}
+(\S\ref{sec:variable}) and \emph{Constants}, the latter of which are
+divided into \emph{Logical Constants} (\S\ref{sec:logical_constant})
+and \emph{Non-Logical Constants} (\S\ref{sec:nonlogical_constant}).
 
 \emph{Extra-logical Symbols} are those of a Metalanguage
 (\S\ref{sec:metalanguage}), such as the Symbol for Logical Consequence
 (Entailment \S\ref{sec:logical_consequence}), $\vdash$, or
 Metavariables (\emph{Schematic Variables}), $\varphi, \psi, \ldots$.
 
-Symbols that don't have individual Meaning in isolation are called
+Symbols that don't have individual Meaning in isolation are termed
 \emph{Syncategorematic} (see Term Logic \S\ref{sec:term_logic}),
 otherwise they are called \emph{Categorematic}.
 
@@ -39,9 +40,10 @@ Other Symbols may be used for \emph{Punctuation}, like Parentheses and
 Commas, as long as they don't appear in one of the other kinds of
 Symbols.
 
-A Structure (\S\ref{sec:structure}) that Satisfies
-(\S\ref{sec:satisfaction}) the Axioms of a Logical System is called a
-\emph{Model} (\S\ref{sec:model}) of the System.
+The Cardinality of the underlying Language $\mathcal{L}$,
+$|\mathcal{L}|$, is equal to the number of Equivalence Classes defined
+by the Variance Relation (\S\ref{sec:variant}) on the Formulas of
+$\mathcal{L}$.
 
 
 
@@ -163,6 +165,99 @@ called the Signature (\S\ref{sec:signature}) of the discourse.
 
 
 
+\subsubsection{Signature}\label{sec:signature}
+
+The \emph{Signature} (or \emph{Vocabulary}) defines the Non-logical
+Constants (\S\ref{sec:nonlogical_constant}) of the Language of a
+Logical System as a Set of Function and Relation Symbols that
+characterize it together with an \emph{Arity Function} ``$ar$'' that
+maps each Function and Relation Symbol $s$ to a corresponding Natural
+Number $n$ which is the Arity of $s$: $n = ar(s)$. A Structure
+(\S\ref{sec:structure}) with Signature $\sigma$ may be called a
+\emph{$\sigma$-structure}.
+
+A Signature is defined as a triple:
+\[
+    (F,R,ar)
+\]
+where $F$ is a Set of Function Symbols, and $R$ is a Set of Relation
+Symbols (or Predicates) and $ar$ is the Arity Function:
+\[
+    ar: F \cup R \rightarrow \mathbb{N}_0
+\]
+If both $F$ and $R$ are Finite Sets, $\sigma$ is a \emph{Finite
+  Signature}.
+
+A Nullary Function Symbol is a \emph{Constant Symbol} and a Nullary
+Relation Symbol is a \emph{Propositional Variable}
+(\S\ref{sec:propositional_logic}). A Function or Relation Symbol $s$
+of Arity $n$ is sometimes denoted $\prescript{n}{}{s}$. Allowing for
+\emph{Infinitary Operators} leads to a Theory of Complete Lattices
+(\S\ref{sec:complete_lattice}).
+
+A Signature with no Relation Symbols is an \emph{Algebraic Signature},
+and the associated Structure an Algebra
+(\S\ref{sec:universal_algebra}).
+
+A Signature with no Function Symbols is a \emph{Relational Signature},
+and the associated Structure is a \emph{Relational Structure}. A
+Relational Structure may be used as the basis for a Relational Model
+(\S\ref{sec:relational_model}) in Database Theory.
+
+The Signature is a synonym for the \emph{Type} (\S\ref{sec:type}) of
+the Structure (Schematically represented by $\Omega$), and can be
+written as an ordered sequence of Natural Numbers representing the
+Arity of the Operators.
+
+A \emph{Reduct} of a Structure is created by omitting certain
+Operations and Relations from the Signature the converse is
+\emph{Expansion} (\S\ref{sec:reduct_expansion}).
+
+
+
+\paragraph{Cardinality}\label{sec:signature_cardinality}\hfill \\
+
+The \emph{Cardinality} of a Signature $\sigma = (F,R,ar)$ is denoted
+$|\sigma|$ and is the least Infinite Cardinal
+(\S\ref{sec:cardinal_number}) $n$ such that $n \geq (|F| + |R|)$, that
+is, greater than or equal to the number of Symbols in the Signature
+$\sigma$. This is equal to the number of First-order Formulas
+(\S\ref{sec:predicate_logic}) of $\sigma$.
+
+
+
+\paragraph{Reduction \& Expansion}\label{sec:reduct_expansion}
+\hfill \\
+
+For two Signatures $\sigma^-$ and $\sigma^+$ where $\sigma^- \subset
+\sigma^+$, any $\sigma^+$-structure $\mathcal{A}$ is also a
+$\sigma^-$-structure called the \emph{$\sigma^-$-reduct} of
+$\mathcal{A}$ denoted $\mathcal{A}|\sigma^-$, having the same Domain
+as $\mathcal{A}$ (although the Set of Constant Elements corresponding
+to Constant Functions in the Signature of $\sigma^-$ may be smaller).
+
+A Homomorphism of $\sigma^+$-structures $h : \mathcal{A} \rightarrow
+\mathcal{B}$ is also a Homomorphism of $\sigma^-$-structures $h :
+\mathcal{A} | \sigma^- \rightarrow \mathcal{B} | \sigma^-$.
+
+If a Structure $\mathcal{B}$ is a $\sigma^-$-reduct of a
+$\sigma^+$-structure $\mathcal{A}$ then $\mathcal{A}$ is called the
+\emph{Expansion} of $\mathcal{B}$ to $\sigma^+$. Such an Expansion is
+not necessarily unique. The notation for an Expansion by certain
+additional Function or Relation Symbols, $f, g, h$, is denoted
+$\mathcal{A} = (\mathcal{B}, f, g, h)$.
+
+
+
+\paragraph{Many-sorted Signature}\label{sec:many_sorted_signature}
+\hfill \\
+
+
+
+\paragraph{Predicate}\label{sec:predicate}\hfill \\
+
+
+
 % --------------------------------------------------------------------
 \subsection{Variable}\label{sec:variable}
 % --------------------------------------------------------------------
@@ -228,95 +323,6 @@ Metavariables may be referred to as \emph{Schematic Variables} in the
 context of Axiom Schemata (\S\ref{sec:axiom_schema}) and Rule Schemata
 (\S\ref{sec:rule_schema}). A Schematic Variable ranges over all
 Propositions (\S\ref{sec:proposition}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Signature}\label{sec:signature}
-% --------------------------------------------------------------------
-
-The \emph{Signature} (or \emph{Vocabulary}) defines the Non-logical
-Constants (\S\ref{sec:nonlogical_constant}) of the Language of a
-Logical System as a Set of Function and Relation Symbols that
-characterize it together with an \emph{Arity Function} ``$ar$'' that
-maps each Function and Relation Symbol $s$ to a corresponding Natural
-Number $n$ which is the Arity of $s$: $n = ar(s)$. A Structure
-(\S\ref{sec:structure}) with Signature $\sigma$ may be called a
-\emph{$\sigma$-structure}.
-
-A Signature is defined as a triple:
-\[
-    (F,R,ar)
-\]
-where $F$ is a Set of Function Symbols, and $R$ is a Set of Relation
-Symbols (or Predicates) and $ar$ is the Arity Function:
-\[
-    ar: F \cup R \rightarrow \mathbb{N}_0
-\]
-If both $F$ and $R$ are Finite Sets, $\sigma$ is a \emph{Finite
-  Signature}.
-
-A Nullary Function Symbol is a \emph{Constant Symbol} and a Nullary
-Relation Symbol is a \emph{Propositional Variable}
-(\S\ref{sec:propositional_logic}). A Function or Relation Symbol $s$
-of Arity $n$ is sometimes denoted $\prescript{n}{}{s}$. Allowing for
-\emph{Infinitary Operators} leads to a Theory of Complete Lattices
-(\S\ref{sec:complete_lattice}).
-
-A Signature with no Relation Symbols is an \emph{Algebraic Signature},
-and the associated Structure an Algebra
-(\S\ref{sec:universal_algebra}).
-
-A Signature with no Function Symbols is a \emph{Relational Signature},
-and the associated Structure is a \emph{Relational Structure}. A
-Relational Structure may be used as the basis for a Relational Model
-(\S\ref{sec:relational_model}) in Database Theory.
-
-The Signature is a synonym for the \emph{Type} (\S\ref{sec:type}) of
-the Structure (Schematically represented by $\Omega$), and can be
-written as an ordered sequence of Natural Numbers representing the
-Arity of the Operators.
-
-A \emph{Reduct} of a Structure is created by omitting certain
-Operations and Relations from the Signature the converse is
-\emph{Expansion} (\S\ref{sec:reduct_expansion}).
-
-
-
-\subsubsection{Cardinality}\label{sec:signature_cardinality}
-
-The \emph{Cardinality} of a Signature $\sigma = (F,R,ar)$ is denoted
-$|\sigma|$ and is the least Infinite Cardinal
-(\S\ref{sec:cardinal_number}) $n$ such that $n \geq (|F| + |R|)$, that
-is, greater than or equal to the number of Symbols in the Signature
-$\sigma$. This is equal to the number of First-order Formulas
-(\S\ref{sec:predicate_logic}) of $\sigma$.
-
-
-
-\subsubsection{Reduction \& Expansion}\label{sec:reduct_expansion}
-
-For two Signatures $\sigma^-$ and $\sigma^+$ where $\sigma^- \subset
-\sigma^+$, any $\sigma^+$-structure $\mathcal{A}$ is also a
-$\sigma^-$-structure called the \emph{$\sigma^-$-reduct} of
-$\mathcal{A}$ denoted $\mathcal{A}|\sigma^-$, having the same Domain
-as $\mathcal{A}$ (although the Set of Constant Elements corresponding
-to Constant Functions in the Signature of $\sigma^-$ may be smaller).
-
-A Homomorphism of $\sigma^+$-structures $h : \mathcal{A} \rightarrow
-\mathcal{B}$ is also a Homomorphism of $\sigma^-$-structures $h :
-\mathcal{A} | \sigma^- \rightarrow \mathcal{B} | \sigma^-$.
-
-If a Structure $\mathcal{B}$ is a $\sigma^-$-reduct of a
-$\sigma^+$-structure $\mathcal{A}$ then $\mathcal{A}$ is called the
-\emph{Expansion} of $\mathcal{B}$ to $\sigma^+$. Such an Expansion is
-not necessarily unique. The notation for an Expansion by certain
-additional Function or Relation Symbols, $f, g, h$, is denoted
-$\mathcal{A} = (\mathcal{B}, f, g, h)$.
-
-
-
-\subsubsection{Many-sorted Signature}\label{sec:many_sorted_signature}
 
 
 
@@ -468,26 +474,6 @@ Substitution $dom(\sigma)$ is the Set of Variables actually replaced:
 A Substitution $\sigma$ is a \emph{Ground Substitution} if all
 Variables are Mapped to Ground Terms, and $t\sigma$ is a Ground Term
 if all the Variables of $t$ are in $dom(\sigma)$.
-
-
-
-% --------------------------------------------------------------------
-\section{Logic}\label{sec:logic}
-% --------------------------------------------------------------------
-
-A \emph{Logic} is a Family of Languages that differ from eachother
-only in Signature (\S\ref{sec:signature}), such as \emph{First-order
-  Logic} (\S\ref{sec:firstorder_logic}), \emph{Modal Logic}
-(\S\ref{sec:modal_logic}), etc.
-
-The Cardinality of the underlying Language $\mathcal{L}$,
-$|\mathcal{L}|$, is equal to the number of Equivalence Classes defined
-by the Variance Relation (\S\ref{sec:variant}) on the Formulas of
-$\mathcal{L}$.
-
-
-
-\subsubsection{Predicate}\label{sec:predicate}
 
 
 
@@ -888,42 +874,6 @@ nested Sets.
 
 
 % ====================================================================
-\section{Classical Logic}\label{sec:classical_logic}
-% ====================================================================
-
-\emph{Classical Logic} is the class of Propositional and
-First-order Systems of Logic characterized by the following Inference
-Rules:
-
-\begin{description}
-
-\item [Tertium non datur] (\emph{Law of excluded middle})
-    \[\vdash(p \vee \neg p)\]
-
-\item [Double Negation]
-    \[p \vdash \neg\neg p\]
-
-\item [Law of Non-contradiction]
-    \[\vdash \neg(p \wedge \neg p)\]
-
-\item [Ex falso quodlibet] (\emph{Principle of explosion},
-  \emph{Principle of Psuedo-Scotus})
-    \[\vdash 0 \rightarrow p\]
-
-%FIXME finish properties and rules
-
-\end{description}
-
-The intended Semantic Interpretation (\S\ref{sec:interpretation}) of
-Classical Logic is subject to the Principle of Bivalence
-(\S\ref{sec:bivalence_principal}) which says that every Proposition
-has one Truth-value: True or False. Non-classical Logics such as
-Intuitionistic Logic (\S\ref{sec:intuitionistic_logic}) does not have
-this Property.
-
-
-
-% ====================================================================
 \section{Intensional Logic}\label{sec:intensional_logic}
 % ====================================================================
 
@@ -1090,127 +1040,7 @@ where after performing Action $a$ it is possible that $p$ holds.
 
 
 % ====================================================================
-\section{Intuitionistic Logic}\label{sec:intuitionistic_logic}
-% ====================================================================
-
-\emph{Intuitionistic Logic} (or \emph{Constructive Logic}) replaces
-Truth with the concept of \emph{Constructive Provability}. This is to
-say that Logical Operations in Intuitionistic Logic preserve
-\emph{Justification} (\S\ref{sec:formal_proof}) rather than
-Truth-value. Such systems are restrictions of Classical Logic
-(\S\ref{sec:classical_logic}) without the Law of the Excluded Middle
-or Double Negation Elimination.
-
-Whereas First-order Logic (\S\ref{sec:firstorder_logic}) is a
-foundation for Set Theory (Part \ref{sec:set_theory}), Intuitionistic
-Logic is used as a foundation for Type Theory (Part
-\ref{sec:type_theory}) and Constructive Set Theory
-(\S\ref{sec:constructive_set_theory}).
-
-A Formula in Intuitionistic Logic does not necessarily have a Prenex
-Normal Form (\S\ref{sec:prenex_normal}).
-
-Intuitionistic Logic is Modelled (\S\ref{sec:model}) by Heyting
-Algebra (\S\ref{sec:heyting_semantics}) or Kripke Semantics
-(\S\ref{sec:kripke_semantics}) and lacks the Principle of Bivalence
-(\S\ref{sec:bivalence_principal}); thus there is no Sole-sufficient
-Operator in Intuitionistic Logic. A Formula in Intuitionistic Logic is
-Valid if and only if it receives the Value of the Top Element for any
-Valuation on a Heyting Algebra.
-
-Functionally Complete Sets of Operators are:
-\[
-    \{ \vee, \leftrightarrow, \bot \}
-\]
-and:
-\[
-    \{ \vee, \leftrightarrow, \neg \}
-\]
-
-
-
-\subsubsection{Existence Property}\label{sec:existence_property}
-
-Proofs in a Theory (\S\ref{sec:formal_theory}), $\mathcal{T}$, based
-on Intuitionistic Logic have the \emph{Existence Property}:
-\[
-    (\exists x)A(x) \in \mathcal{T} \rightarrow (\exists t)A(t)
-\]
-where $A(x)$ has $x$ as the only Free Variable and $t$ is a Term.
-
-
-
-\subsubsection{Disjunction Property}\label{sec:disjunction_property}
-
-\emph{Disjunction Property}:
-\[
-    A \vee B \in \mathcal{T} \rightarrow A \in \mathcal{T} \vee B \in \mathcal{T}
-\]
-
-
-
-\subsubsection{Minimal Logic}
-
-\emph{Minimal Logic} is an Intuitionistic Logic without the Principle
-of Explosion (\S\ref{sec:explosion_principle}).
-
-
-
-\subsubsection{Combinatory Logic}\label{sec:combinatory_logic}
-
-\emph{Combinator}
-
-
-
-\subsubsection{Intermediate Logic}
-
-\emph{Intermediate Logic} is an extended Intuitionistic Logic
-(\emph{Superintuitionistic Logic}) that is Consistent and still weaker
-than the strongest Consistent Superintuitionistic Logic: Classical
-Logic.
-
-
-
-% ====================================================================
-\section{Substructural Logic}\label{sec:substructural_logic}
-% ====================================================================
-
-% --------------------------------------------------------------------
-\subsection{Relevance Logic}\label{sec:relevance_logic}
-% --------------------------------------------------------------------
-
-\emph{Relevance Logic} (or \emph{Relevant Logic})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Linear Logic}\label{sec:linear_logic}
-% --------------------------------------------------------------------
-
-\subsubsection{Noncommutative Logic}\label{sec:noncommutative_logic}
-
-\emph{Ordered Logic}
-
-
-
-% ====================================================================
-\section{Ordinal Logic}\label{sec:ordinal_logic}
-% ====================================================================
-
-Alan Turing's PhD Thesis \cite{turing38}
-
-
-
-% ====================================================================
-\section{Hoare Logic}\label{sec:hoare_logic}
-% ====================================================================
-
-\emph{Concurrency}
-
-
-
-% ====================================================================
-\subsection{Term Logic}\label{sec:term_logic}
+\section{Term Logic}\label{sec:term_logic}
 % ====================================================================
 
 \emph{Syncategorematic Term}
@@ -1218,69 +1048,288 @@ Alan Turing's PhD Thesis \cite{turing38}
 
 
 % ====================================================================
-\section{Categorical Logic}\label{sec:categorical_logic}
-% ====================================================================
-
-
-
-% ====================================================================
-\section{Connexive Logic}\label{sec:connexive_logic}
-% ====================================================================
-
-% ====================================================================
-\section{Free Logic}\label{sec:free_logic}
+\section{Metalogic}\label{sec:metalogic}
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Inclusive Logic}\label{sec:inclusive_logic}
+\subsection{Logical Inference}\label{sec:logical_inference}
+% --------------------------------------------------------------------
+
+\emph{Logical Inference} (or \emph{Logical Reasoning})
+
+\begin{enumerate}
+\item \emph{Premise} (\emph{Precondition}, \emph{Antecedent})
+
+\item \emph{Material Conditional} (\emph{Corresponding Conditional},
+  \emph{Implication Rule}, \emph{Inference Rule} (?)
+  \S\ref{sec:inference_rule})
+
+\item \emph{Logical Consequence} (\emph{Conclusion},
+  \emph{Consequent}, \emph{Idiomatic})
+\end{enumerate}
+
+The Premise and Conclusion are \emph{Truth-bearers}
+(\S\ref{sec:truth_bearer}).
+
+\begin{description}
+\item [Coherent] \hfill\\
+    \S\ref{sec:paraconsistent_inference}
+    \emph{Paraconsistent Inference}
+
+\item [Consistent] \hfill\\
+    \S\ref{sec:deductive_inference} \emph{Deductive Inference}
+
+\item [Non-monotonic] \hfill\\
+    \S\ref{sec:inductive_inference} \emph{Inductive Inference}
+
+    \S\ref{sec:abductive_inference} \emph{Abductive Inference}
+
+\end{description}
+
+? \emph{Analogical Inference}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logical Argument}\label{sec:logical_argument}
+% --------------------------------------------------------------------
+
+A \emph{Logical Argument}, \emph{Formal Argument}, or
+\emph{Derivation} (see \S\ref{sec:formal_proof} \emph{Formal Proof})
+is a sequence of Logical Inferences. Generally this is an Ordered Set
+of Sentences (\S\ref{sec:truth_bearer} Truth-bearers).
+
+
+
+\subsubsection{Corresponding Conditional}\label{sec:corresponding_conditional}
+
+The \emph{Corresponding Conditional} of a Derivation is a
+\emph{Material Conditional} (\S\ref{sec:material_conditional}) whose
+Antecedent is the Conjunction of the Derivation's Premises and whose
+Consequent is the Derivation's Conclusion.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logical Form}\label{sec:logical_form}
+% --------------------------------------------------------------------
+
+\emph{Normal Form} (\S\ref{sec:normal_form})
+
+The Logical Form of an \emph{Argument} (\S\ref{sec:logical_argument})
+is Derived from the Logical Form of its constituent Sentences. When
+considering Terms as \emph{Schematic Variables}
+(\S\ref{sec:metavariable}), the Logical Form of the whole Argument or
+\emph{Argument Form} is called the \emph{Schemata} or
+\emph{Inferential Structure} of the Argument.
+
+
+
+Logical Constant (\S\ref{sec:logical_constant})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logical Truth}\label{sec:logical_truth}
+% --------------------------------------------------------------------
+
+\emph{Interpretation} (\emph{Valuation}, \emph{Assignment})
+\S\ref{sec:interpretation}
+
+\emph{Corresponding Conditional} is \emph{Logical Truth}
+
+\emph{Satisfiable}
+
+
+
+\subsubsection{Truth Value}\label{sec:truth_value}
+
+\emph{Truth Value} (\emph{Logical Value})
+
+
+
+\subsubsection{Truth-bearer}\label{sec:truth_bearer}
+
+\begin{itemize}
+\item Proposition
+\item Type-token
+\item Judgement
+\end{itemize}
+
+
+
+\subsubsection{Truth Function}\label{sec:truth_function}
+
+
+
+\subsubsection{Validity}\label{sec:validity}
+
+\emph{Valid}, \emph{Logically True}, \emph{Tautological}
+
+A Logical Argument is \emph{Valid} if and only if its Corresponding
+Conditional is a Logical Truth, or equivalently, if and only if the
+Conclusion is \emph{Logically Entailed}
+(\S\ref{sec:logical_consequence}) by the Premises.
+
+An Inference is \emph{Semantically Valid} if all Interpretations that
+Validate the Premises Validate the Conclusion.
+
+A Statement or Formula (\S\ref{sec:formal_system}) is Valid if it is
+True under every possible \emph{Interpretation}
+(\S\ref{sec:interpretation}).
+
+
+
+\subsubsection{Analytic Truth}\label{sec:analytic_truth}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logical Consequence}\label{sec:logical_consequence}
+\cite{beall-restall05}
+% --------------------------------------------------------------------
+
+\emph{Logical Consequence} (\emph{Entailment}):
+\[
+    S \in \mathbf{L}, D \subset \mathbf{L}, S \leftrightarrow D
+\]
+\begin{itemize}
+    \item 1. Logical Form (\S\ref{sec:logical_form})
+    \item 2. A Priori
+    \item 3. Modality (\S\ref{sec:modal_logic})
+\end{itemize}
+
+A Premise \emph{Logically Entails} a Conclusion if and only if the
+negation of the Conclusion is \emph{Logically Inconsistent} with the
+Premises.
+
+
+
+\subsubsection{Formal Consequence}\label{sec:formal_consequence}
+
+\emph{Syntactic Consequence} (\S\ref{sec:syntactic_consequence})
+
+\emph{Semantic Consequence} (\S\ref{sec:semantic_consequence})
+
+\emph{Validity}
+
+
+
+\subsubsection{Material Consequence}
+
+\emph{Material Consequence} (\emph{Implication})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Paraconsistent Inference}\label{sec:paraconsistent_inference}
+\cite{priest-tanaka-weber13}
+% --------------------------------------------------------------------
+
+\subsubsection{Paraconsistent Consequence}\label{sec:paraconsistent_consequence}
+
+A Logical Consequence Relation is a \emph{Paraconsistent Consequence
+  Relation} if and only if it is not \emph{Explosive}. Such a Relation
+is required to be \emph{Coherent} (\emph{Absolutely Consistent} or
+\emph{Non-trivial}), meaning that no Paraconsistent Theory
+(\S\ref{sec:formal_theory}) can include all Sentences.
+
+A Consequence Relation $\vDash$ is \emph{Explosive} when:
+\[
+    \forall A, B. \{A, \neg A\} \vDash B
+\]
+which is the case with \emph{Consistent Consequence Relations}.
+
+
+
+
+% --------------------------------------------------------------------
+\subsection{Deductive Inference}\label{sec:deductive_inference}
+% --------------------------------------------------------------------
+
+\emph{Top-down Logic}
+
+\subsubsection{Deductive Consequence}\label{sec:deductive_consequence}
+
+A \emph{Deductive Consequence} is a Modally \emph{Necessary}
+Conclusion drawn from given Premises and Inference Rules.
+
+\emph{Consistency}
+
+Deductive Consequence can be extended to provide \emph{Inductive
+  Support} in \emph{Inductive Consequence}
+(\S\ref{sec:inductive_consequence})
+
+
+
+\paragraph{Principle of Explosion}\label{sec:explosion_principle}
+
+\emph{Principle of Explosion}
+
+
+
+\subsubsection{Mathematical Induction}\label{sec:mathematical_induction}
+
+\emph{Mathematical Induction} as an Inference Rule is the
+\emph{Implicative} process where a \emph{Base Case} is shown to extend
+to the more general by means of Implication (the Inductive step). Note
+that Mathematical Induction is not \emph{Inductive Reasoning} which is
+an empirical or probabilistic Inference and not a form of Deduction.
+The \emph{Principle of Mathematical Induction}
+(\S\ref{sec:induction_principle}) is an application of Mathematical
+Induction to the \emph{Natural Numbers} (\S\ref{sec:natural_number}).
+
+
+
+\subsubsection{Structural Induction}\label{sec:structural_induction}
+
+\paragraph{Coinduction}\label{sec:coinduction}
+
+\emph{Codata}
+
+
+
+\subsubsection{Noetherian Induction}\label{sec:noetherian_induction}
+
+\emph{Well-founded Relation}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Inductive Inference}\label{sec:inductive_inference}
+\cite{hawthorne08}
+% --------------------------------------------------------------------
+
+\emph{Universal Inductive Inference}
+
+
+
+\subsubsection{Inductive Consequence}\label{sec:inductive_consequence}
+
+\emph{Inductive Consequence} (\emph{Inductive Support}) is an
+extension of Deductive Consequence where the Modality of Necessity is
+relaxed to that of \emph{Sufficiency}.
+
+
+
+\subsubsection{Defeasible Inference}\label{sec:defeasible_inference}
+
+\subsubsection{Probabilistic Inference}\label{sec:probabilistic_inference}
+
+\subsubsection{Statistical Inference}\label{sec:statistical_inference}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abductive Inference}\label{sec:abductive_inference}
 % --------------------------------------------------------------------
 
 
 
-% ====================================================================
-\section{Non-monotonic Logic}\label{sec:nonmonotonic_logic}
-% ====================================================================
-
-Defeasible Inference (\S\ref{sec:defeasible_inference})
-
-
-
 % --------------------------------------------------------------------
-\subsection{Default Logic}\label{sec:default_logic}
-% --------------------------------------------------------------------
-
-Default Inference (\S\ref{sec:default_inference})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Autoepistemic Logic}\label{sec:autoepistemic_logic}
-% --------------------------------------------------------------------
-
-
-
-% ====================================================================
-\section{Paraconsistent Logic}\label{sec:paraconsistent_logic}
-% ====================================================================
-
-% --------------------------------------------------------------------
-\subsection{Discursive Logic}\label{sec:discursive_logic}
+\subsection{Default Inference}\label{sec:default_inference}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Non-adjunctive Logic}\label{sec:nonadjunctive_logic}
+\subsection{Logical Quality}\label{sec:logical_quality}
 % --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Adaptive Logic}\label{sec:adaptive_logic}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Formal Inconsistency}\label{sec:formal_inconsistency}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Logic of Paradox}\label{sec:logic_of_paradox}
-% --------------------------------------------------------------------
-
-Graham Priest
