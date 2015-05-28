@@ -5,7 +5,7 @@
 ## Latex packages
 
 The `latex` packages used in this document should be contained in the
-latex packages `texlive-latex-recommended` and
+synaptic latex packages `texlive-latex-recommended` and
 `texlive-fonts-recommended`:
 
     $ sudo aptitude update
