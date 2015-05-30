@@ -142,7 +142,7 @@ Inductive definition of Quantifier Rank function $qr$:
 
 \paragraph{Prenex Normal Form}\label{sec:prenex_normal}\hfill \\
 
-\emph{Normal Form} (\S\ref{sec:normal_form})
+Normal Form (\S\ref{sec:normal_form})
 
 
 
@@ -323,27 +323,8 @@ Propositions (\S\ref{sec:proposition}).
 
 
 % --------------------------------------------------------------------
-\subsection{Formula}\label{sec:formula}
+\subsection{Term}\label{sec:term}
 % --------------------------------------------------------------------
-
-Expressions belonging to the underlying Language of a Logical System
-are called ``\emph{Well-formed Formulas}'' (\emph{WFFs}) or just
-\emph{Formulas}. The Syntax (\S\ref{sec:formal_grammar}) of a Formula
-is defined by the Symbols and \emph{Formation Rules} for a particular
-kind of Logic. A Formula containing no Logical Connectives is called
-an \emph{Atomic Formula} (\S\ref{sec:atomic_formula}). A Formula
-composed of Atomic Formulas combined with Logical Connectives is a
-\emph{Compound Formula}. The component Formulas that make up a
-Compound Formula are called \emph{Subformulas} and all Formulas are
-Subformulas of themselves. A Subformula that is not the entire Formula
-is called a \emph{Proper Subformula}.
-
-A Formula capable of being assigned a Truth Value is called a
-\emph{Proposition} (\S\ref{sec:proposition}).
-
-
-
-\subsubsection{Term}\label{sec:term}
 
 A \emph{Term} represents an object of the Domain (\S\ref{sec:domain}).
 
@@ -361,17 +342,39 @@ Functions. Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0
 
 
 
-\paragraph{Ground Term}\label{sec:ground_term}\hfill \\
+\subsubsection{Ground Term}\label{sec:ground_term}
 
 If no Free Variables appear in a Term it is called a \emph{Ground
   Term} (or \emph{Closed Term}).
 
 
 
-\paragraph{Linear Term}\label{sec:linear_term}\hfill \\
+\subsubsection{Linear Term}\label{sec:linear_term}
 
-A \emph{Linear Term} is a Term without multiple occurences of a single
-Variable.
+A \emph{Linear Term} is a Term where no Variable occurs more than
+once.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Formula}\label{sec:formula}
+% --------------------------------------------------------------------
+
+Expressions (\S\ref{sec:expression}) belonging to the underlying
+Language of a Logical System are called ``\emph{Well-formed
+  Formulas}'' (\emph{WFFs}) or just \emph{Formulas}. As a Syntactic
+Objects, a Formula is given Semantic Meaning (\S\ref{sec:meaning}) by
+an Interpretation (\S\ref{sec:interpretation}), which usually
+Interprets the Formula as a Proposition (\S\ref{sec:proposition}) in
+the case of a Propositional Formula
+(\S\ref{sec:propositional_formula}).
+
+The Syntax (\S\ref{sec:formal_grammar}) of a Formula is defined by the
+Symbols and \emph{Formation Rules} for a particular kind of Logic. A
+Formula containing no Logical Connectives is called an \emph{Atomic
+  Formula} (\S\ref{sec:atomic_formula}). A Formula composed of Atomic
+Formulas combined with Logical Connectives is a \emph{Compound
+  Formula} (\S\ref{sec:compound_formula}).
 
 
 
@@ -399,7 +402,18 @@ A \emph{Literal} is an Atomic Formula, $\phi$, or its Negation, $\neg
 
 
 
-\paragraph{Clause}\label{sec:clause}\hfill \\
+\subsubsection{Compound Formula}\label{sec:compound_formula}
+
+A \emph{Compound Formula} is made up of one or more Literals
+(\S\ref{sec:literal}) in combination with one or more Logical
+Constants (\S\ref{sec:logical_constant}). The component Formulas that
+make up a Compound Formula are called \emph{Subformulas} and all
+Formulas are considered Subformulas of themselves. A Subformula that
+is not the entire Formula is called a \emph{Proper Subformula}.
+
+
+
+\paragraph{Clause}\label{sec:clause}
 
 A Finite Disjunction (\S\ref{sec:disjunction}) of Literals is called a
 \emph{Clause}.
@@ -418,10 +432,10 @@ Equivalence Relation on the Class of Formulas.
 
 
 
-\subsubsection{Proposition}\label{sec:proposition}
+\subsubsection{Propositional Formula}\label{sec:propositional_formula}
 
-\emph{Propositions} are Formulas that are assigned a Truth Value
-(\S\ref{sec:truth_value}), i.e. they are Truth-bearers
+A \emph{Propositional Formula} is a Formula that is assigned a Truth
+Value (\S\ref{sec:truth_value}), i.e. it is a Truth-bearer
 (\S\ref{sec:truth_bearer}). An \emph{Atomic Proposition}
 (\S\ref{sec:atomic_formula}) contains no Logical Connectives. A
 \emph{Compound Proposition} is composed by Recursive application of
@@ -430,17 +444,14 @@ Logical Connectives to Propositions by a corresponding
 Compound Proposition. A Proposition with no Free Variables is called a
 \emph{Sentence} (\S\ref{sec:sentence}).
 
-A Valuation (\S\ref{sec:valuation}) gives a Proposition a particular
-Truth Value, while an Interpretation (\S\ref{sec:interpretation})
-associates the Symbols of the Formula with their Realizations
-(Meanings).
+A Valuation (\S\ref{sec:valuation}) is an Interpretation
+(\S\ref{sec:interpretation}) that gives a Proposition a particular
+Truth Value.
 
 A Proposition is Satisfiable (\S\ref{sec:satisfaction}) if it is True
 under at least one Interpretation. A Proposition is Valid
 (\S\ref{sec:validity}) if and only if it is True under very
 Interpretation.
-
-Proposition: Predicate (Subject)
 
 
 
@@ -448,6 +459,14 @@ Proposition: Predicate (Subject)
 
 A \emph{Sentence} (or \emph{Ground Formula}) is a Proposition with no
 Free Variables.
+
+
+
+\paragraph{Statement}\label{sec:statement}
+
+A \emph{Statement} is the Normal Form (\S\ref{sec:normal_form}) of a
+Sentence, so that there may be more than one Sentence that makes the
+same Statement.
 
 
 
@@ -512,7 +531,7 @@ within a Formula.
 
 Propositional Calculus is Isomorphic to Simply-typed
 $\lambda$-calculus (\S\ref{sec:simply_typed}) and is Strongly
-Normalizing (\S\ref{sec:normal_form}) to either a Conjunctive Normal
+Normalizing (\S\ref{sec:normalization}) to either a Conjunctive Normal
 Form (\S\ref{sec:conjunctive_form}) or Disjunctive Normal Form
 (\S\ref{sec:disjunctive_form}), and thus is not a Turing Complete
 system.
@@ -1112,11 +1131,23 @@ Consequent is the Derivation's Conclusion.
 
 
 
+\subsubsection{Soundness}\label{sec:soundness}
+
+An Argument in a System of Logic (\S\ref{sec:logical_system}) is
+\emph{Sound} if and only if the Argument is Valid and all of its
+Premises are True. The Logical System itself has the Soundness
+Property if and only if its Inference Rules
+(\S\ref{sec:inference_rule}) Prove only Valid Formulas under Semantic
+Interpretation. This usually amounts to the simple requirement that
+the Axioms are Valid and the Inference Rules preserve Validity.
+
+
+
 % --------------------------------------------------------------------
 \subsection{Logical Form}\label{sec:logical_form}
 % --------------------------------------------------------------------
 
-\emph{Normal Form} (\S\ref{sec:normal_form})
+Normal Form (\S\ref{sec:normal_form})
 
 The Logical Form of an \emph{Argument} (\S\ref{sec:logical_argument})
 is Derived from the Logical Form of its constituent Sentences. When
@@ -1160,7 +1191,13 @@ Logical Constant (\S\ref{sec:logical_constant})
 
 
 
+\paragraph{Proposition}\label{sec:proposition}\hfill \\
+
+
+
 \subsubsection{Truth Function}\label{sec:truth_function}
+
+Predicate (\S\ref{sec:predicate})
 
 
 

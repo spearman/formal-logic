@@ -18,9 +18,10 @@ Theory (Part \ref{sec:recursion_theory}).
 \section{String}\label{sec:string}
 % ====================================================================
 
-A \emph{String}, $s$, is a Finite Sequence (\S\ref{sec:sequence}) over
-a non-empty Finite Set of \emph{Symbols} (or \emph{Characters}),
-$\Sigma$, called an \emph{Alphabet}:
+A \emph{String} (or \emph{Word}), $s$, is a Finite Sequence
+(\S\ref{sec:sequence}) over a non-empty Finite Set of \emph{Symbols}
+(or \emph{Characters} or \emph{Letters}), $\Sigma$, called an
+\emph{Alphabet}:
 \[
     s = \langle c_1 \ldots c_n \rangle
 \]
@@ -249,9 +250,9 @@ starting from the right-hand side:
 A \emph{Formal Language}, $L$, is a (possibly infinite) Subset of
 $\Sigma^*$, the Set of all possible Strings over an Alphabet $\Sigma$
 (\S\ref{sec:string}). The Strings belonging to $L$ are called
-\emph{Expressions} (or \emph{Phrases} \S\ref{sec:lexical_analysis} or
-\emph{Well-formed Formulas} \S\ref{sec:formula} depending on the
-context).
+\emph{Expressions} (\S\ref{sec:expression}, or \emph{Phrases}
+\S\ref{sec:lexical_analysis} or \emph{Well-formed Formulas}
+\S\ref{sec:formula} depending on the context).
 
 The entire content of a Formal Language is uniquely determined by
 either:
@@ -281,6 +282,15 @@ For a given Language $L \subseteq \Sigma^*$ there exists a
 
 The Language consisting of just the Empty String $\{\varepsilon\}$ is
 distinguished from the Empty Language $\{\}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Expression}\label{sec:expression}
+% --------------------------------------------------------------------
+
+An \emph{Expression} is a String (\S\ref{sec:string}) belonging to a
+Formal Language.
 
 
 
@@ -1077,26 +1087,39 @@ For two Objects $x,y \in A$, $y$ is a Normal Form of $x$ if $x
 \stackrel{*}{\rightarrow} y$ and $y$ is Irreducible. A unique Normal
 Form of $x$ is denoted $x \downarrow$.
 
+
+
+% --------------------------------------------------------------------
+\subsection{Normalization}\label{sec:normalization}
+% --------------------------------------------------------------------
+
 An Object of an ARS is \emph{Weakly Normalizing} if some Rewrite
 sequence leads to a Normal Form and \emph{Strongly Normalizing} if
-every Rewrite sequence leads to a Normal Form. If all Objects of an
-ARS are Strongly Normalizing, then the system itself is called
-Strongly Normalizing (or \emph{Terminating} or \emph{Noetherian}) and
-has no infinite Reduction Sequences.
+every Rewrite sequence leads to a Normal Form.
 
 An ARS is \emph{Normalizing} if every Object has at least one Normal
 Form, and likewise is Weakly or Strongly Normalizing if every Object
 is Weakly or Strongly Normalizing. A Strongly Normalizing ARS always
-terminates and is therefore not Turing Complte and cannot be used as a
-Self-interpreter (in Programming Languages).
+Terminates (\S\ref{sec:termination}) and is therefore not Turing
+Complete and cannot be used as a Self-interpreter (in Programming
+Languages).
 
-\emph{Untyped $\lambda$-calculus} (\S\ref{sec:untyped_lambda}) lacks
-the Normalization Property.
+Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda}) lacks the
+Normalization Property.
 
-Systems of \emph{Typed $\lambda$-calculus} (\S\ref{sec:typed_lambda})
-such as \emph{Simply-typed $\lambda$-calculus}
-(\S\ref{sec:simply_typed}) and \emph{Calculus of Constructions}
-(\S\ref{sec:coq}) are Strongly Normalizing.
+Systems of Typed $\lambda$-calculus (\S\ref{sec:typed_lambda}) such as
+Simply-typed $\lambda$-calculus (\S\ref{sec:simply_typed}) and
+Calculus of Constructions (\S\ref{sec:coq}) are Strongly Normalizing.
+
+
+
+\subsubsection{Termination}\label{sec:termination}
+
+If all Objects of an ARS are Strongly Normalizing, then the system
+itself is called \emph{Strongly Normalizing} (or \emph{Terminating} or
+\emph{Noetherian}, cf. Noetherian Relation
+\S\ref{sec:noetherian_relation}) and has no infinite Reduction
+Sequences.
 
 
 
@@ -1195,8 +1218,9 @@ when working with a Grobner Basis (\S\ref{sec:ring_ideal}).
 % --------------------------------------------------------------------
 
 An ARS that is both Confluent (\S\ref{sec:rewrite_confluence}) and
-Terminating (\S\ref{sec:normal_form}) is called \emph{Convergent} (or
-\emph{Canonical}) and every Object has a unique Normal Form.
+Terminating (\S\ref{sec:termination}) is called \emph{Convergent} (or
+\emph{Canonical}) and every Object has a unique Normal Form
+(\S\ref{sec:normal_form}).
 
 
 
@@ -1231,7 +1255,7 @@ Relation, $\rightarrow_R$, given by the Set of \emph{Term Rewriting
 where $l$ and $r$ are a pair of Terms. Such a Rule is \emph{Applied}
 to a Term $s$ if $l$ matches a Subterm of $s$.
 
-Termination (\S\ref{sec:normal_form}) is Decidable for Finite Ground
+Termination (\S\ref{sec:termination}) is Decidable for Finite Ground
 Systems, but Undecidable for Systems with a single Rule consisting of
 a Linear (\S\ref{sec:linear_term}) left-hand side, or for Systems with
 only Unary Function Symbols. % FIXME clarify finite ground system
