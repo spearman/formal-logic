@@ -362,12 +362,7 @@ once.
 
 Expressions (\S\ref{sec:expression}) belonging to the underlying
 Language of a Logical System are called ``\emph{Well-formed
-  Formulas}'' (\emph{WFFs}) or just \emph{Formulas}. As a Syntactic
-Objects, a Formula is given Semantic Meaning (\S\ref{sec:meaning}) by
-an Interpretation (\S\ref{sec:interpretation}), which usually
-Interprets the Formula as a Proposition (\S\ref{sec:proposition}) in
-the case of a Propositional Formula
-(\S\ref{sec:propositional_formula}).
+  Formulas}'' (\emph{WFFs}) or just \emph{Formulas}.
 
 The Syntax (\S\ref{sec:formal_grammar}) of a Formula is defined by the
 Symbols and \emph{Formation Rules} for a particular kind of Logic. A
@@ -375,6 +370,14 @@ Formula containing no Logical Connectives is called an \emph{Atomic
   Formula} (\S\ref{sec:atomic_formula}). A Formula composed of Atomic
 Formulas combined with Logical Connectives is a \emph{Compound
   Formula} (\S\ref{sec:compound_formula}).
+
+As a Syntactic Object, a Formula is given Semantic Meaning
+(\S\ref{sec:meaning}) by an Interpretation
+(\S\ref{sec:interpretation}), which usually Interprets the Formula as
+a Proposition (\S\ref{sec:proposition}). A Formula that is True under
+some Interpretation is called \emph{Satisfiable}
+(\S\ref{sec:satisfaction}). A Formula that is True under all
+Interpretations is called \emph{Valid} (\S\ref{sec:validity}).
 
 
 
@@ -429,29 +432,6 @@ A Finite Disjunction (\S\ref{sec:disjunction}) of Literals is called a
 A Formula is a \emph{Variant} of another Formula if the two Formulas
 differ only in the choice of Variables. \emph{Variance} is an
 Equivalence Relation on the Class of Formulas.
-
-
-
-\subsubsection{Propositional Formula}\label{sec:propositional_formula}
-
-A \emph{Propositional Formula} is a Formula that is assigned a Truth
-Value (\S\ref{sec:truth_value}), i.e. it is a Truth-bearer
-(\S\ref{sec:truth_bearer}). An \emph{Atomic Proposition}
-(\S\ref{sec:atomic_formula}) contains no Logical Connectives. A
-\emph{Compound Proposition} is composed by Recursive application of
-Logical Connectives to Propositions by a corresponding
-\emph{Concatenation Rule} that assigns a new Truth Value to the
-Compound Proposition. A Proposition with no Free Variables is called a
-\emph{Sentence} (\S\ref{sec:sentence}).
-
-A Valuation (\S\ref{sec:valuation}) is an Interpretation
-(\S\ref{sec:interpretation}) that gives a Proposition a particular
-Truth Value.
-
-A Proposition is Satisfiable (\S\ref{sec:satisfaction}) if it is True
-under at least one Interpretation. A Proposition is Valid
-(\S\ref{sec:validity}) if and only if it is True under very
-Interpretation.
 
 
 
@@ -606,6 +586,39 @@ $\therefore\textrm{ }\neg\varphi$\\
 
 
 % --------------------------------------------------------------------
+\subsection{Propositional Formula}\label{sec:propositional_formula}
+% --------------------------------------------------------------------
+
+A \emph{Propositional Formula} is a Formula that is assigned a Truth
+Value (\S\ref{sec:truth_value}), i.e. it is a Truth-bearer
+(\S\ref{sec:truth_bearer}). An \emph{Atomic Proposition}
+(\S\ref{sec:atomic_formula}) contains no Logical Connectives. A
+\emph{Compound Proposition} is composed by Recursive application of
+Logical Connectives to Propositions by a corresponding
+\emph{Concatenation Rule} that assigns a new Truth Value to the
+Compound Proposition. A Proposition with no Free Variables is called a
+\emph{Sentence} (\S\ref{sec:sentence}).
+
+A Valuation (\S\ref{sec:valuation}) is an Interpretation
+(\S\ref{sec:interpretation}) that gives a Proposition a particular
+Truth Value. A Propositional Formula is Satisfiable
+(\S\ref{sec:satisfaction}) if it is True under at least one
+Interpretation.
+
+
+
+\subsubsection{Tautology}\label{sec:tautology} \hfill \\
+
+A Propositional Formula that is \emph{Valid} (\S\ref{sec:validity}) is
+one that is True under every possible Interpretation
+(\S\ref{sec:interpretation}) and is called a \emph{Tautology}.
+
+The Set of Tautologies over a Countable Alphabet is a Decidable Set
+(\S\ref{sec:decidable_set}).
+
+
+
+% --------------------------------------------------------------------
 \subsection{Conjunctive Normal Form}\label{sec:conjunctive_form}
 % --------------------------------------------------------------------
 
@@ -733,6 +746,9 @@ Formation Rules:
 \item If $x \in V$ and $\phi \in \mathcal{L}$, then $\exists x \phi
   \in \mathcal{L}$ and $\forall x \phi \in \mathcal{L}$
 \end{enumerate}
+A First-order Formula that is a Substitution Instance
+(\S\ref{sec:substitution}) of a Tautological Propositional Formula
+(\S\ref{sec:tautology}) is a \emph{First-order Tautology}.
 
 First-order Logic may be used as the System of Logic for Deductive
 Systems with Finite Domains that are Sound (\S\ref{sec:soundness}) and
@@ -1069,98 +1085,231 @@ where after performing Action $a$ it is possible that $p$ holds.
 
 
 % ====================================================================
+\section{Logical System}\label{sec:logical_system}
+% ====================================================================
+
+A \emph{Logical System} (or \emph{System of Logic}) is a Formal System
+(\S\ref{sec:formal_system}) together with a form of Semantics that
+gives Meanings to the Formulas in the underlying Language.
+
+A Structure (\S\ref{sec:structure}) that Satisfies
+(\S\ref{sec:satisfaction}) the Axioms of a Logical System is called a
+\emph{Model} (\S\ref{sec:model}) of the System.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Classical Logic}\label{sec:classical_logic}
+% --------------------------------------------------------------------
+
+\emph{Classical Logic} is the class of Propositional and
+First-order Systems of Logic characterized by the following Inference
+Rules:
+
+\begin{description}
+
+\item [Tertium non datur] (\emph{Law of excluded middle})
+    \[\vdash(p \vee \neg p)\]
+
+\item [Double Negation]
+    \[p \vdash \neg\neg p\]
+
+\item [Law of Non-contradiction]
+    \[\vdash \neg(p \wedge \neg p)\]
+
+\item [Ex falso quodlibet] (\emph{Principle of explosion},
+  \emph{Principle of Psuedo-Scotus})
+    \[\vdash 0 \rightarrow p\]
+
+%FIXME finish properties and rules
+
+\end{description}
+
+The intended Semantic Interpretation (\S\ref{sec:interpretation}) of
+Classical Logic is subject to the Principle of Bivalence
+(\S\ref{sec:bivalence_principal}) which says that every Proposition
+has one Truth-value: True or False. Non-classical Logics such as
+Intuitionistic Logic (\S\ref{sec:intuitionistic_logic}) does not have
+this Property.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Intuitionistic Logic}\label{sec:intuitionistic_logic}
+% --------------------------------------------------------------------
+
+\emph{Intuitionistic Logic} (or \emph{Constructive Logic}) replaces
+Truth with the concept of \emph{Constructive Provability}. This is to
+say that Logical Operations in Intuitionistic Logic preserve
+\emph{Justification} (\S\ref{sec:formal_proof}) rather than
+Truth-value. Such systems are restrictions of Classical Logic
+(\S\ref{sec:classical_logic}) without the Law of the Excluded Middle
+or Double Negation Elimination.
+
+Whereas First-order Logic (\S\ref{sec:firstorder_logic}) is a
+foundation for Set Theory (Part \ref{sec:set_theory}), Intuitionistic
+Logic is used as a foundation for Type Theory (Part
+\ref{sec:type_theory}) and Constructive Set Theory
+(\S\ref{sec:constructive_set_theory}).
+
+A Formula in Intuitionistic Logic does not necessarily have a Prenex
+Normal Form (\S\ref{sec:prenex_normal}).
+
+Intuitionistic Logic is Modelled (\S\ref{sec:model}) by Heyting
+Algebra (\S\ref{sec:heyting_semantics}) or Kripke Semantics
+(\S\ref{sec:kripke_semantics}) and lacks the Principle of Bivalence
+(\S\ref{sec:bivalence_principal}); thus there is no Sole-sufficient
+Operator in Intuitionistic Logic. A Formula in Intuitionistic Logic is
+Valid if and only if it receives the Value of the Top Element for any
+Valuation on a Heyting Algebra.
+
+Functionally Complete Sets of Operators are:
+\[
+    \{ \vee, \leftrightarrow, \bot \}
+\]
+and:
+\[
+    \{ \vee, \leftrightarrow, \neg \}
+\]
+
+
+
+\subsubsection{Existence Property}\label{sec:existence_property}
+
+Proofs in a Theory (\S\ref{sec:formal_theory}), $\mathcal{T}$, based
+on Intuitionistic Logic have the \emph{Existence Property}:
+\[
+    (\exists x)A(x) \in \mathcal{T} \rightarrow (\exists t)A(t)
+\]
+where $A(x)$ has $x$ as the only Free Variable and $t$ is a Term.
+
+
+
+\subsubsection{Disjunction Property}\label{sec:disjunction_property}
+
+\emph{Disjunction Property}:
+\[
+    A \vee B \in \mathcal{T} \rightarrow A \in \mathcal{T} \vee B \in \mathcal{T}
+\]
+
+
+
+\subsubsection{Minimal Logic}\label{sec:minimal_logic}
+
+\emph{Minimal Logic} is an Intuitionistic Logic without the Principle
+of Explosion (\S\ref{sec:explosion_principle}).
+
+
+
+\subsubsection{Combinatory Logic}\label{sec:combinatory_logic}
+
+\emph{Combinator}
+
+
+
+\subsubsection{Intermediate Logic}\label{sec:intermediate_logic}
+
+\emph{Intermediate Logic} is an extended Intuitionistic Logic
+(\emph{Superintuitionistic Logic}) that is Consistent and still weaker
+than the strongest Consistent Superintuitionistic Logic: Classical
+Logic.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Substructural Logic}\label{sec:substructural_logic}
+% --------------------------------------------------------------------
+
+\subsubsection{Relevance Logic}\label{sec:relevance_logic}
+
+\emph{Relevance Logic} (or \emph{Relevant Logic})
+
+
+
+\subsubsection{Linear Logic}\label{sec:linear_logic}
+
+\paragraph{Noncommutative Logic}\label{sec:noncommutative_logic}
+\hfill \\
+
+\emph{Ordered Logic}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ordinal Logic}\label{sec:ordinal_logic}
+% --------------------------------------------------------------------
+
+Alan Turing's PhD Thesis \cite{turing38}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Categorical Logic}\label{sec:categorical_logic}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Hoare Logic}\label{sec:hoare_logic}
+% --------------------------------------------------------------------
+
+\emph{Concurrency}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Free Logic}\label{sec:free_logic}
+% --------------------------------------------------------------------
+
+\subsubsection{Inclusive Logic}\label{sec:inclusive_logic}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Connexive Logic}\label{sec:connexive_logic}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Non-monotonic Logic}\label{sec:nonmonotonic_logic}
+% --------------------------------------------------------------------
+
+Defeasible Inference (\S\ref{sec:defeasible_inference})
+
+
+
+\subsubsection{Default Logic}\label{sec:default_logic}
+
+Default Inference (\S\ref{sec:default_inference})
+
+
+
+\subsubsection{Autoepistemic Logic}\label{sec:autoepistemic_logic}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Paraconsistent Logic}\label{sec:paraconsistent_logic}
+% --------------------------------------------------------------------
+
+\subsubsection{Discursive Logic}\label{sec:discursive_logic}
+
+\subsubsection{Non-adjunctive Logic}\label{sec:nonadjunctive_logic}
+
+\subsubsection{Adaptive Logic}\label{sec:adaptive_logic}
+
+\subsubsection{Formal Inconsistency}\label{sec:formal_inconsistency}
+
+\subsubsection{Logic of Paradox}\label{sec:logic_of_paradox}
+
+Graham Priest
+
+
+
+% ====================================================================
 \section{Metalogic}\label{sec:metalogic}
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Logical Inference}\label{sec:logical_inference}
+\subsection{Logical Quality}\label{sec:logical_quality}
 % --------------------------------------------------------------------
-
-\emph{Logical Inference} (or \emph{Logical Reasoning})
-
-\begin{enumerate}
-\item \emph{Premise} (\emph{Precondition}, \emph{Antecedent})
-
-\item \emph{Material Conditional} (\emph{Corresponding Conditional},
-  \emph{Implication Rule}, \emph{Inference Rule} (?)
-  \S\ref{sec:inference_rule})
-
-\item \emph{Logical Consequence} (\emph{Conclusion},
-  \emph{Consequent}, \emph{Idiomatic})
-\end{enumerate}
-
-The Premise and Conclusion are \emph{Truth-bearers}
-(\S\ref{sec:truth_bearer}).
-
-\begin{description}
-\item [Coherent] \hfill\\
-    \S\ref{sec:paraconsistent_inference}
-    \emph{Paraconsistent Inference}
-
-\item [Consistent] \hfill\\
-    \S\ref{sec:deductive_inference} \emph{Deductive Inference}
-
-\item [Non-monotonic] \hfill\\
-    \S\ref{sec:inductive_inference} \emph{Inductive Inference}
-
-    \S\ref{sec:abductive_inference} \emph{Abductive Inference}
-
-\end{description}
-
-? \emph{Analogical Inference}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Logical Argument}\label{sec:logical_argument}
-% --------------------------------------------------------------------
-
-A \emph{Logical Argument}, \emph{Formal Argument}, or
-\emph{Derivation} (see \S\ref{sec:formal_proof} \emph{Formal Proof})
-is a sequence of Logical Inferences. Generally this is an Ordered Set
-of Sentences (\S\ref{sec:truth_bearer} Truth-bearers).
-
-
-
-\subsubsection{Corresponding Conditional}\label{sec:corresponding_conditional}
-
-The \emph{Corresponding Conditional} of a Derivation is a
-\emph{Material Conditional} (\S\ref{sec:material_conditional}) whose
-Antecedent is the Conjunction of the Derivation's Premises and whose
-Consequent is the Derivation's Conclusion.
-
-
-
-\subsubsection{Soundness}\label{sec:soundness}
-
-An Argument in a System of Logic (\S\ref{sec:logical_system}) is
-\emph{Sound} if and only if the Argument is Valid and all of its
-Premises are True. The Logical System itself has the Soundness
-Property if and only if its Inference Rules
-(\S\ref{sec:inference_rule}) Prove only Valid Formulas under Semantic
-Interpretation. This usually amounts to the simple requirement that
-the Axioms are Valid and the Inference Rules preserve Validity.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Logical Form}\label{sec:logical_form}
-% --------------------------------------------------------------------
-
-Normal Form (\S\ref{sec:normal_form})
-
-The Logical Form of an \emph{Argument} (\S\ref{sec:logical_argument})
-is Derived from the Logical Form of its constituent Sentences. When
-considering Terms as \emph{Schematic Variables}
-(\S\ref{sec:metavariable}), the Logical Form of the whole Argument or
-\emph{Argument Form} is called the \emph{Schemata} or
-\emph{Inferential Structure} of the Argument.
-
-
-
-Logical Constant (\S\ref{sec:logical_constant})
-
-
 
 % --------------------------------------------------------------------
 \subsection{Logical Truth}\label{sec:logical_truth}
@@ -1205,21 +1354,59 @@ Predicate (\S\ref{sec:predicate})
 
 \emph{Valid}, \emph{Logically True}, \emph{Tautological}
 
-A Logical Argument is \emph{Valid} if and only if its Corresponding
-Conditional is a Logical Truth, or equivalently, if and only if the
-Conclusion is \emph{Logically Entailed}
-(\S\ref{sec:logical_consequence}) by the Premises.
+A Formula (\S\ref{sec:formula}) is Valid if and only if it is True
+under every possible Interpretation (\S\ref{sec:interpretation}).
 
 An Inference is \emph{Semantically Valid} if all Interpretations that
-Validate the Premises Validate the Conclusion.
+Validate the Premises also Validate the Conclusion.
 
-A Statement or Formula (\S\ref{sec:formal_system}) is Valid if it is
-True under every possible \emph{Interpretation}
-(\S\ref{sec:interpretation}).
+A Logical Argument is Valid if and only if its Corresponding
+Conditional is a Logical Truth, or equivalently, if and only if the
+Conclusion is Logically Entailed (\S\ref{sec:logical_consequence}) by
+the Premises.
 
 
 
 \subsubsection{Analytic Truth}\label{sec:analytic_truth}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logical Inference}\label{sec:logical_inference}
+% --------------------------------------------------------------------
+
+\emph{Logical Inference} (or \emph{Logical Reasoning})
+
+\begin{enumerate}
+\item \emph{Premise} (\emph{Precondition}, \emph{Antecedent})
+
+\item \emph{Material Conditional} (\emph{Corresponding Conditional},
+  \emph{Implication Rule}, \emph{Inference Rule} (?)
+  \S\ref{sec:inference_rule})
+
+\item \emph{Logical Consequence} (\emph{Conclusion},
+  \emph{Consequent}, \emph{Idiomatic})
+\end{enumerate}
+
+The Premise and Conclusion are \emph{Truth-bearers}
+(\S\ref{sec:truth_bearer}).
+
+\begin{description}
+\item [Coherent] \hfill\\
+    \S\ref{sec:paraconsistent_inference}
+    \emph{Paraconsistent Inference}
+
+\item [Consistent] \hfill\\
+    \S\ref{sec:deductive_inference} \emph{Deductive Inference}
+
+\item [Non-monotonic] \hfill\\
+    \S\ref{sec:inductive_inference} \emph{Inductive Inference}
+
+    \S\ref{sec:abductive_inference} \emph{Abductive Inference}
+
+\end{description}
+
+? \emph{Analogical Inference}
 
 
 
@@ -1278,7 +1465,6 @@ A Consequence Relation $\vDash$ is \emph{Explosive} when:
     \forall A, B. \{A, \neg A\} \vDash B
 \]
 which is the case with \emph{Consistent Consequence Relations}.
-
 
 
 
@@ -1370,5 +1556,50 @@ relaxed to that of \emph{Sufficiency}.
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Logical Quality}\label{sec:logical_quality}
+\subsection{Logical Argument}\label{sec:logical_argument}
 % --------------------------------------------------------------------
+
+A \emph{Logical Argument}, \emph{Formal Argument}, or
+\emph{Derivation} (see \S\ref{sec:formal_proof} \emph{Formal Proof})
+is a sequence of Logical Inferences. Generally this is an Ordered Set
+of Sentences (\S\ref{sec:truth_bearer} Truth-bearers).
+
+
+
+\subsubsection{Corresponding Conditional}\label{sec:corresponding_conditional}
+
+The \emph{Corresponding Conditional} of a Derivation is a
+\emph{Material Conditional} (\S\ref{sec:material_conditional}) whose
+Antecedent is the Conjunction of the Derivation's Premises and whose
+Consequent is the Derivation's Conclusion.
+
+
+
+\subsubsection{Soundness}\label{sec:soundness}
+
+An Argument in a System of Logic (\S\ref{sec:logical_system}) is
+\emph{Sound} if and only if the Argument is Valid and all of its
+Premises are True. The Logical System itself has the Soundness
+Property if and only if its Inference Rules
+(\S\ref{sec:inference_rule}) Prove only Valid Formulas under Semantic
+Interpretation. This usually amounts to the simple requirement that
+the Axioms are Valid and the Inference Rules preserve Validity.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logical Form}\label{sec:logical_form}
+% --------------------------------------------------------------------
+
+Normal Form (\S\ref{sec:normal_form})
+
+The Logical Form of an \emph{Argument} (\S\ref{sec:logical_argument})
+is Derived from the Logical Form of its constituent Sentences. When
+considering Terms as \emph{Schematic Variables}
+(\S\ref{sec:metavariable}), the Logical Form of the whole Argument or
+\emph{Argument Form} is called the \emph{Schemata} or
+\emph{Inferential Structure} of the Argument.
+
+
+
+Logical Constant (\S\ref{sec:logical_constant})
