@@ -9,8 +9,8 @@ Structures (\S\ref{sec:structure}) as Models (\S\ref{sec:model}) of
 Formal Theories (\S\ref{sec:formal_theory}).
 
 The Language of Model Theory has two Kinds of Mathematical Objects:
-Sets and Relations (Part \ref{sec:set_theory}). As such Model Theory
-forms the Domain of Discourse for Predicate Logic
+Sets and Relations (see Part \ref{sec:set_theory} Set Theory). As such
+Model Theory forms the Domain of Discourse for Predicate Logic
 (\S\ref{sec:predicate_logic}).
 
 One definition of Model Theory is the combination of Formal Logic
@@ -23,12 +23,13 @@ Groups and Fields, Geometric Model Theory, and Computable Model Theory
 (\S\ref{sec:computable_model_theory}).
 
 Model Theory uses Tarski's Semantic Theory of Truth
-(\S\ref{sec:semantic_truth}) as the definition of Truth. Model Theory
-also forms the foundation of \emph{Formal (Truth-conditional)
-  Semantics} (Part \ref{sec:formal_semantics})-- a reduction of the
-Meaning of Assertions in Natural Languages to their Truth-conditions.
-A Model is an Analytic example of a Synthetic Theory
-(\S\ref{sec:synthetic_theory}). \cite{shulman15}
+(\S\ref{sec:semantic_truth}) as the definition of Truth
+(\S\ref{sec:logical_truth}). Model Theory also forms the foundation of
+\emph{Formal (Truth-conditional) Semantics} (Part
+\ref{sec:formal_semantics})-- a reduction of the Meaning of Assertions
+in Natural Languages to their Truth-conditions. A Model is an Analytic
+example of a Synthetic Theory (\S\ref{sec:synthetic_theory}).
+\cite{shulman15}
 
 
 
@@ -36,17 +37,18 @@ A Model is an Analytic example of a Synthetic Theory
 \section{Structure}\label{sec:structure}
 % ====================================================================
 
-A \emph{Structure} $\mathcal{A}$ is composed of a Set $A$ called the
-\emph{Domain} (\S\ref{sec:domain}) along with an \emph{Interpretation
-  Function} (\S\ref{sec:interpretation}) $I$ that maps Symbols in the
-Signature (\S\ref{sec:signature}) to their \emph{Realizations} in the
-Structure.
+A \emph{Structure} $\mathcal{A}$ is composed of a Set, $A$, called the
+\emph{Domain} (\S\ref{sec:domain}) along with a Signature
+(\S\ref{sec:signature}), $\sigma$, and an \emph{Interpretation
+  Function} (\S\ref{sec:interpretation}), $I$, that maps Symbols in
+the Signature (\S\ref{sec:signature}) to their \emph{Realizations}
+(\S\ref{sec:realization}).
 
 Formal definition of a Structure:
 \[
-    \mathcal{A} = (A, I)
+    \mathcal{A} = (A, \sigma, I)
 \]
-with Domain $A$, Interpretation Function $I$.
+with Domain $A$, Signature $\sigma$, and Interpretation Function $I$.
 
 
 
@@ -55,11 +57,15 @@ with Domain $A$, Interpretation Function $I$.
 % --------------------------------------------------------------------
 
 The \emph{Domain} of a Structure (also called the \emph{Carrier Set},
-\emph{Underlying Set}, \emph{Domain of Discourse}, or \emph{Universe})
-is a Set of Elements over which the Relations of the Signature of the
-Structure are defined. The Domain $A$ of a Structure $\mathcal{A}$ may
-also be written as $dom(\mathcal{A})$ or $|\mathcal{A}|$ (not to be
-confused with the Cardinality of the Domain, $|A|$).
+\emph{Underlying Set}, \emph{Domain of Discourse}, or \emph{Universe},
+cf. \S\ref{sec:universe}) is a Set of Elements over which the
+Relations of the Signature are defined, and over which Variables
+(\S\ref{sec:variable}) and Quantifiers (\S\ref{sec:quantifier}) are
+allowed to range.
+
+The Domain $A$ of a Structure $\mathcal{A}$ may also be written as
+$dom(\mathcal{A})$ or $|\mathcal{A}|$ (not to be confused with the
+Cardinality of the Domain, $|A|$).
 
 
 
@@ -67,37 +73,25 @@ confused with the Cardinality of the Domain, $|A|$).
 \subsection{Interpretation}\label{sec:interpretation}
 % --------------------------------------------------------------------
 
-In Model Theory an \emph{Interpretation} fixes the \emph{Domain of
-  Discourse} for expressions of Symbolic Logic (Part
-\ref{sec:formal_logic}); that is it assigns the Sets and Relations
-that Variables can range over.
+An \emph{Interpretation} of a Formal Language is an assignment of
+\emph{Meanings} (\S\ref{sec:meaning}) to Symbols and
+\emph{Truth-Conditions} (\S\ref{sec:truth_condition}) to Sentences.
 
-Roughly, an Interpretation of a Formal Language is an assignment of
-\emph{Meanings} to Symbols and \emph{Truth-Conditions}
-(\S\ref{sec:semantic_truth}) to Sentences. An Interpretation of
-First-order Logic Maps Terms to Individuals in the Universe and
-Propositions to Truth Values.
+The \emph{Interpretation Function}, $I$, in a Mathematical Structure,
+$\mathcal{A} = (A, \sigma, I)$, maps Predicate and Function Symbols of
+the Signature, $f, R \in \sigma$ to Predicates and Functional
+Predicates on the Domain:
 
-The Interpretation Function in a Mathematical Structure maps Function
-and Relation Symbols of the Signature to actual Functions and
-Relations on the Domain:
-\[
-    f^{\mathcal{A}} = I (f)
-\]
-\[
-    R^{\mathcal{A}} = I (R) \subseteq A^{ar(R)}
-\]
-A Constant (Nullary) Symbol is identified with an Element of the
-Domain:
-\[
-    I(c) \in A
-\]
+$I (\prescript{n}{}{f}) = f^{\mathcal{A}} : A^n \rightarrow A$
 
-Thus the Interpretation Function is the \emph{Extension}
-(\S\ref{sec:property}) of the Symbols and Strings of Symbols of the
-Object Language.
+$I (\prescript{n}{}{R}) = R^{\mathcal{A}} : A^n \rightarrow \{true,
+false\}$
+\\ Thus the Interpretation Function is the \emph{Extension}
+(\S\ref{sec:extension}) of the Symbols and Formulas of a Formal
+Language.
 
-\emph{Intended Interpretation}, \emph{Standard Model}
+An Interpretation of First-order Logic Maps Terms to Elements in the
+Domain and Propositions to Truth Values.
 
 \emph{Stratification}
 
@@ -206,7 +200,7 @@ $\mathcal{B}$ is an \emph{Extension} of $\mathcal{A}$, denoted
 $\mathcal{A} \subseteq \mathcal{B}$.
 
 By the definition of Structure Homomorphisms, the following Properties
-apply to the Function Symbols $f$ and Relation Symbols $r$ in the
+apply to the Function Symbols $f$ and Predicate Symbols $r$ in the
 Signature of the two Structures in the Relation $\mathcal{A} \subseteq
 \mathcal{B}$:
 \begin{itemize}
@@ -300,9 +294,17 @@ have Models.
 
 
 
+\subsubsection{Standard Model}\label{sec:standard_model}
+
+\emph{Standard Model} (or \emph{Intended Interpretation})
+
+
+
 % --------------------------------------------------------------------
-\subsection{Completeness Theorem}\label{sec:completeness}
+\subsection{Completeness}\label{sec:completeness}
 % --------------------------------------------------------------------
+
+\subsubsection{Incompleteness Theorem}\label{sec:incompleteness_theorem}
 
 
 

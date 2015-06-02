@@ -157,8 +157,9 @@ Normal Form (\S\ref{sec:normal_form})
 % --------------------------------------------------------------------
 
 \emph{Non-Logical Symbols} only have Meaning under an Interpretation
-(\S\ref{sec:interpretation}). These are Symbols such as Relation
-Symbols (Predicates \S\ref{sec:predicate}) and Function Symbols.
+(\S\ref{sec:interpretation}). These are Symbols such as Predicate
+(\S\ref{sec:predicate}) and Function Symbols
+(\S\ref{sec:set_function}).
 
 The set of Non-Logical Symbols used in a particular discourse is
 called the Signature (\S\ref{sec:signature}) of the discourse.
@@ -169,19 +170,25 @@ called the Signature (\S\ref{sec:signature}) of the discourse.
 
 The \emph{Signature} (or \emph{Vocabulary}) defines the Non-logical
 Constants (\S\ref{sec:nonlogical_constant}) of the Language of a
-Logical System as a Set of Function and Relation Symbols that
+Logical System as a Set of Function and Predicate Symbols that
 characterize it together with an \emph{Arity Function} ``$ar$'' that
-maps each Function and Relation Symbol $s$ to a corresponding Natural
+maps each Function and Predicate Symbol $s$ to a corresponding Natural
 Number $n$ which is the Arity of $s$: $n = ar(s)$. A Structure
 (\S\ref{sec:structure}) with Signature $\sigma$ may be called a
 \emph{$\sigma$-structure}.
+
+Technically the Function Symbols, which are Interpreted
+(\S\ref{sec:interpretation}) as Functional Predicates
+(\S\ref{sec:functional_predicate}), could also be Realized as
+Relations, and thus it is only for convenience that they are included
+in addition to Predicate Symbols, not out of necessity.
 
 A Signature is defined as a triple:
 \[
     (F,R,ar)
 \]
-where $F$ is a Set of Function Symbols, and $R$ is a Set of Relation
-Symbols (or Predicates) and $ar$ is the Arity Function:
+where $F$ is a Set of Function Symbols, and $R$ is a Set of Predicate
+Symbols and $ar$ is the Arity Function:
 \[
     ar: F \cup R \rightarrow \mathbb{N}_0
 \]
@@ -189,14 +196,14 @@ If both $F$ and $R$ are Finite Sets, $\sigma$ is a \emph{Finite
   Signature}.
 
 A Nullary Function Symbol is a \emph{Constant Symbol} and a Nullary
-Relation Symbol is a \emph{Propositional Variable}
-(\S\ref{sec:propositional_logic}). A Function or Relation Symbol $s$
+Predicate Symbol is a \emph{Propositional Variable}
+(\S\ref{sec:propositional_logic}). A Function or Predicate Symbol $s$
 of Arity $n$ is sometimes denoted $\prescript{n}{}{s}$. Allowing for
 \emph{Infinitary Operators} leads to a Theory of Complete Lattices
 (\S\ref{sec:complete_lattice}).
 
-A Signature with no Relation Symbols is an \emph{Algebraic Signature},
-and the associated Structure an Algebra
+A Signature with no Predicate Symbols is an \emph{Algebraic
+  Signature}, and the associated Structure an Algebra
 (\S\ref{sec:universal_algebra}).
 
 A Signature with no Function Symbols is a \emph{Relational Signature},
@@ -209,8 +216,8 @@ the Structure (Schematically represented by $\Omega$), and can be
 written as an ordered sequence of Natural Numbers representing the
 Arity of the Operators.
 
-A \emph{Reduct} of a Structure is created by omitting certain
-Operations and Relations from the Signature the converse is
+A \emph{Reduct} of a Structure is created by omitting certain Function
+and Predicate Symbols from the Signature; the converse is
 \emph{Expansion} (\S\ref{sec:reduct_expansion}).
 
 
@@ -244,7 +251,7 @@ If a Structure $\mathcal{B}$ is a $\sigma^-$-reduct of a
 $\sigma^+$-structure $\mathcal{A}$ then $\mathcal{A}$ is called the
 \emph{Expansion} of $\mathcal{B}$ to $\sigma^+$. Such an Expansion is
 not necessarily unique. The notation for an Expansion by certain
-additional Function or Relation Symbols, $f, g, h$, is denoted
+additional Function or Predicate Symbols, $f, g, h$, is denoted
 $\mathcal{A} = (\mathcal{B}, f, g, h)$.
 
 
@@ -387,11 +394,12 @@ An \emph{Atomic Formula} (or \emph{Atom}) is a Formula with no Logical
 Constants (Connectives or Quantifiers).
 
 Atomic Formulas can be defined Inductively by Formation Rules on Terms
-and Relations. Given Terms, $T = \{t_0,\ldots,t_n\}$, and Relations,
-$R = \{r_0,\ldots,r_m\}$:
+and Predicates. Given Terms, $T = \{t_0,\ldots,t_n\}$, and Predicates,
+$P = \{r_0,\ldots,r_m\}$:
 \begin{itemize}
-\item $t_i = t_j$ is a Formula
-\item $r_k(t_0,\ldots,t_n)$ is a Formula and $r_k$ is an n-ary Relation
+  \item $t_i = t_j$ is a Formula
+  \item $r_k(t_0,\ldots,t_n)$ is a Formula and $r_k$ is an n-ary
+    Predicate
 \end{itemize}
 If no Free Variables occur in an Atomic Formula it is called a
 \emph{Ground Atom}.
@@ -498,15 +506,17 @@ Propositional Formula is equivalent to a Boolean Term
 (\S\ref{sec:boolean_algebra}).
 
 A Signature (\S\ref{sec:signature}) for Propositional Logic consists
-only of Nullary Relation Symbols for each Propositional Variable, and
+only of Nullary Predicate Symbols for each Propositional Variable, and
 a Model (\S\ref{sec:model}) provides a Truth Valuation for each.
 
 In Propositional Logic, the Extra-logical Symbol for Entailment,
 $\vdash$, and the Material Implication Operator, $\rightarrow$,
 coincide in that:
-\[(A \vdash B) \Leftrightarrow (\vdash A \rightarrow B)\]
+\[
+  (A \vdash B) \Leftrightarrow (\vdash A \rightarrow B)
+\]
 but the difference is that $\vdash$ describes a Deduction, that is a
-relation between Sentences, and $\rightarrow$ is a Logical Connective
+Relation between Sentences, and $\rightarrow$ is a Logical Connective
 within a Formula.
 
 Propositional Calculus is Isomorphic to Simply-typed
@@ -522,16 +532,16 @@ Formal definition of a System of Propositional Calculus $\mathcal{S}$:
 \]
 where:
 \begin{itemize}
-\item $\sigma$ is the Signature (\S\ref{sec:signature}) for a
-  Propositional Calculus consisting of a Finite Set $R = \{P_1, P_2,
-  P_3, \ldots\}$ of Nullary Relation Symbols which are the
-  Propositional Variables of $\mathcal{S}$: $\sigma = (R)$
-\item $\Omega$ is a Finite, Functionally Complete Set of Logical
-  Connective Symbols $\{\neg$, $\wedge$, $\vee$, $\ldots\}$
-\item $A$ is a Finite Set of Axioms (Formulas in the Language defined
-  by the Formation Rules over the Signature $\sigma$ and the Logical
-  Operators $\Omega$)
-\item $I$ is a Finite Set of Inference Rules
+  \item $\sigma$ is the Signature (\S\ref{sec:signature}) for a
+    Propositional Calculus consisting of a Finite Set $R = \{P_1, P_2,
+    P_3, \ldots\}$ of Nullary Predicate Symbols which are the
+    Propositional Variables of $\mathcal{S}$: $\sigma = (R)$
+  \item $\Omega$ is a Finite, Functionally Complete Set of Logical
+    Connective Symbols $\{\neg$, $\wedge$, $\vee$, $\ldots\}$
+  \item $A$ is a Finite Set of Axioms (Formulas in the Language defined
+    by the Formation Rules over the Signature $\sigma$ and the Logical
+    Operators $\Omega$)
+  \item $I$ is a Finite Set of Inference Rules
 \end{itemize}
 Atomic Formulas of $\mathcal{S}$ are just the Propositional Variables
 $P_1, P_2, P_3, \ldots$, which means that a Literal in $\mathcal{S}$
@@ -540,12 +550,12 @@ is just a Propositional Variable or its Negation.
 The Formulas of $\mathcal{S}$ are then Inductively defined as the
 smallest Class, $\mathcal{L}$, such that:
 \begin{enumerate}
-\item Any Literal of $\mathcal{S}$ is a Formula in $\mathcal{L}$
-\item For Formulas $\phi_1, \phi_2, \cdots, \phi_n$ and an $n$-ary
-  Logical Operator $f \in \mathbf{\Omega}_n$ where $\mathbf{\Omega}_n$
-  is the Partition of $\mathbf{\Omega}$ containing all $n$-ary Logical
-  Operators, then $f(\phi_1, \phi_2, \cdots, \phi_n)$ is also a
-  Formula in $\mathcal{L}$
+  \item Any Literal of $\mathcal{S}$ is a Formula in $\mathcal{L}$
+  \item For Formulas $\phi_1, \phi_2, \cdots, \phi_n$ and an $n$-ary
+    Logical Operator $f \in \mathbf{\Omega}_n$ where $\mathbf{\Omega}_n$
+    is the Partition of $\mathbf{\Omega}$ containing all $n$-ary Logical
+    Operators, then $f(\phi_1, \phi_2, \cdots, \phi_n)$ is also a
+    Formula in $\mathcal{L}$
 \end{enumerate}
 Propositional Logic is closed under Truth-Functional Operators, so the
 above Formation Rules define all Formulas: nothing else is a Formula
@@ -649,9 +659,9 @@ The Set of Tautologies over a Countable Alphabet is a Decidable Set
 
 Language:
 
-Propositional Variables (Relations of Arity 0)
+Propositional Variables (Predicates of Arity 0)
 
-Relations of Arity >= 1
+Predicates of Arity >= 1
 
 Constants (Functions of Arity 0)
 
@@ -703,9 +713,9 @@ where:
   \item $\sigma$ is a Signature (\S\ref{sec:signature}) for
     First-order Logic consisting of a Finite Set $F = \{f_1, f_2, f_3,
     \ldots \}$ of Function Symbols and a Finite Set $P = \{ R_1, R_2,
-    R_3, \ldots\}$ of Relation Symbols, and $ar : F \cup P \rightarrow
-    \mathbb{N}_0$ a Function Mapping Function and Relation Symbols to
-    their Arity:
+    R_3, \ldots\}$ of Predicate Symbols, and $ar : F \cup P
+    \rightarrow \mathbb{N}_0$ a Function Mapping Function and
+    Predicate Symbols to their Arity:
     \[\sigma = (F,P,ar)\]
   \item $\Omega$ is a Finite, Functionally Complete Set of Logical
     Connective Symbols $\{\neg$, $\wedge$, $\vee$, $\ldots\}$
@@ -729,11 +739,11 @@ applications, defined Inductively by:
 \end{enumerate}
 Atomic Formulas are defined as:
 \begin{enumerate}
-\item If $t_1$ and $t_2$ are Terms, and there is a Logical Operator
-  for Equality\\$(=) \in \Omega$, then $t_1 = t_2$ is an Atomic
-  Formula.
-\item If $R$ is an $n$-ary Relation, and $t_1,\ldots,t_n$ are terms,
-  then $R(t_1,\ldots,t_n)$ is an Atomic Formula.
+  \item If $t_1$ and $t_2$ are Terms, and there is a Logical Operator
+    for Equality\\$(=) \in \Omega$, then $t_1 = t_2$ is an Atomic
+    Formula.
+  \item If $R$ is an $n$-ary Predicate, and $t_1,\ldots,t_n$ are
+    terms, then $R(t_1,\ldots,t_n)$ is an Atomic Formula.
 \end{enumerate}
 The Class $\mathcal{L}$ of Formulas is defined Inductively by the
 Formation Rules:
@@ -823,8 +833,8 @@ Logic with Equality).
 \subsubsection{Monadic First-order Logic}\label{sec:monadic_firstorder}
 
 \emph{Monadic First-order Logic} (or \emph{Monadic Predicate
-  Calculus}) restricts First-order Logic to Unary Relations and no
-Function symbols. This weaker form of First-order Logic is fully
+  Calculus}) restricts First-order Logic to Unary Predicates and no
+Function Symbols. This weaker form of First-order Logic is fully
 Decidable.
 
 
@@ -843,7 +853,7 @@ Unary Predicates to a First-order Logic that Partition
 \subsubsection{Infinitary Logic}\label{sec:infinitary_logic}
 
 \emph{Infinitary Logic} allows Formulas of Infinite length, through
-either Conjunctons and Disjunctions, Infinite-arity Relations and
+either Conjunctons and Disjunctions, Infinite-arity Predicates and
 Functions, or Quantification over Infinitely many Variables.
 
 
@@ -867,10 +877,10 @@ Logic Algebraically without Quantified Variables by using
 % --------------------------------------------------------------------
 
 \emph{Second-order Logic} allows for Quantifiers to range over
-Relations and Functions and thus \emph{Sorts} of Variables that range
-over $k$-ary Relations and Functions. It is possible to leave out a
+Predicates and Functions and thus \emph{Sorts} of Variables that range
+over $k$-ary Predicates and Functions. It is possible to leave out a
 definition of Quantifiers for Functions since $k$-ary Functions can be
-represented by $k+1$-ary Relations.\cite{shapiro00} Quantification
+represented by $k+1$-ary Predicates.\cite{shapiro00} Quantification
 over Functions allows the creation of the Analytic Hierarchy
 (\S\ref{sec:analytic_hierarchy}).
 
@@ -886,7 +896,7 @@ over Functions allows the creation of the Analytic Hierarchy
 An alternative formulation of Second-order Logic is to allow Variables
 to take on \emph{Plural} Values. It is equi-interpretable with
 \emph{Monadic Second-order Logic}, which restricts Quantification to
-Unary Relations (Sets).
+Unary Predicates (Sets).
 
 
 
@@ -1322,11 +1332,16 @@ Graham Priest
 
 \emph{Satisfiable}
 
+\emph{Necessarily True}
+
 
 
 \subsubsection{Truth Value}\label{sec:truth_value}
 
 \emph{Truth Value} (\emph{Logical Value})
+
+In Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type}),
+\emph{Types} take the place of Truth Values.
 
 
 
@@ -1342,11 +1357,17 @@ Graham Priest
 
 \paragraph{Proposition}\label{sec:proposition}\hfill \\
 
+\emph{Proposition}
+
 
 
 \subsubsection{Truth Function}\label{sec:truth_function}
 
 Predicate (\S\ref{sec:predicate})
+
+
+
+\subsubsection{Analytic Truth}\label{sec:analytic_truth}
 
 
 
@@ -1357,17 +1378,60 @@ Predicate (\S\ref{sec:predicate})
 A Formula (\S\ref{sec:formula}) is Valid if and only if it is True
 under every possible Interpretation (\S\ref{sec:interpretation}).
 
-An Inference is \emph{Semantically Valid} if all Interpretations that
-Validate the Premises also Validate the Conclusion.
+An Inference is \emph{Semantically Valid}
+(\S\ref{sec:semantic_validity}) if all Interpretations that Validate
+the Premises also Validate the Conclusion.
 
-A Logical Argument is Valid if and only if its Corresponding
-Conditional is a Logical Truth, or equivalently, if and only if the
-Conclusion is Logically Entailed (\S\ref{sec:logical_consequence}) by
-the Premises.
+A Logical Argument (\S\ref{sec:logical_argument}) is Valid if and only
+if its Corresponding Conditional
+(\S\ref{sec:corresponding_conditional}) is a Logical Truth ($\top$),
+or equivalently, if and only if the Conclusion is Logically Entailed
+(\S\ref{sec:logical_consequence}) by the Premises, i.e. there would be
+a Contradiction if the Premises were True and the Conclusion was
+False.
 
 
 
-\subsubsection{Analytic Truth}\label{sec:analytic_truth}
+\paragraph{Preservation}\label{sec:preservation}
+
+\emph{Truth-preserving}
+
+\emph{False-preserving}
+
+\emph{Non-preserving}
+
+
+
+\paragraph{$n$-validity}\label{sec:n_validity}
+
+\paragraph{$\omega$-validity}\label{sec:omega_validity}
+
+
+
+\subsubsection{Soundness}\label{sec:soundness}
+
+\emph{Sound}
+
+A Logical Argument (\S\ref{sec:logical_argument}) is Sound if and only
+if it is Valid (\S\ref{sec:validity}) and all of its Premises are
+True.
+
+A Formal System (\S\ref{sec:formal_system}) is Sound if and only if
+its Inference Rules (\S\ref{sec:inference_rule}) Prove only Valid
+Formulas under Semantic Interpretation. This usually amounts to the
+simple requirement that the Axioms are Valid and the Inference Rules
+preserve Validity, i.e. any Theorem Provable in the System is Valid,
+thus all Provable Sentences are True. The converse of Soundness,
+Completeness (\S\ref{sec:completeness}) requires that all True
+Sentences are Provable. By the Incompleteness Theorem
+(\S\ref{sec:incompleteness_theorem}), not all Sound Deductive Systems
+are Complete.
+
+\emph{Weak Soundness}
+
+\emph{Strong Soundness}
+
+\emph{Arithmetic Soundness}
 
 
 
@@ -1520,6 +1584,10 @@ Induction to the \emph{Natural Numbers} (\S\ref{sec:natural_number}).
 
 
 
+\subsubsection{Transfinite Induction}\label{sec:transfinite_induction}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Inductive Inference}\label{sec:inductive_inference}
 \cite{hawthorne08}
@@ -1572,18 +1640,6 @@ The \emph{Corresponding Conditional} of a Derivation is a
 \emph{Material Conditional} (\S\ref{sec:material_conditional}) whose
 Antecedent is the Conjunction of the Derivation's Premises and whose
 Consequent is the Derivation's Conclusion.
-
-
-
-\subsubsection{Soundness}\label{sec:soundness}
-
-An Argument in a System of Logic (\S\ref{sec:logical_system}) is
-\emph{Sound} if and only if the Argument is Valid and all of its
-Premises are True. The Logical System itself has the Soundness
-Property if and only if its Inference Rules
-(\S\ref{sec:inference_rule}) Prove only Valid Formulas under Semantic
-Interpretation. This usually amounts to the simple requirement that
-the Axioms are Valid and the Inference Rules preserve Validity.
 
 
 

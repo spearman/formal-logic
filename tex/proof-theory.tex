@@ -22,7 +22,7 @@ in order to Derive Theorems (\S\ref{sec:formal_proof}).
 
 In the context of a Formal System, Expressions that belong to the
 underlying Formal Language are called ``\emph{Well-formed Formulas}''
-(\emph{WFFs}) or just \emph{Formulas} (\S\ref{sec:formula}). The
+(\emph{Formulas}) or just \emph{Formulas} (\S\ref{sec:formula}). The
 actual Syntax will be determined within the bounds of the particular
 Logical System (\S\ref{sec:logical_system}) under consideration.
 
@@ -33,8 +33,8 @@ Logical System (\S\ref{sec:logical_system}) under consideration.
 % --------------------------------------------------------------------
 
 A \emph{Deductive Apparatus} (or \emph{Deductive System}) is a Set of
-zero or more WFFs called \emph{Axioms} (\S\ref{sec:axiom}) and one or
-more Functions on WFFs called \emph{Inference Rules}
+zero or more Formulas called \emph{Axioms} (\S\ref{sec:axiom}) and one or
+more Functions on Formulas called \emph{Inference Rules}
 (\S\ref{sec:inference_rule}) that can be used to Derive Theorems
 (\S\ref{sec:formal_proof}).
 
@@ -57,8 +57,8 @@ Decidable or Semi-decidable (\S\ref{sec:decidable_set}). The notion of
 % --------------------------------------------------------------------
 
 An \emph{Inference Rule} (or \emph{Transformation Rule}) is a Function
-which takes an input Set of WFFs called \emph{Premises} and returns an
-output Set of WFFs called the \emph{Conclusion}. An alternative
+which takes an input Set of Formulas called \emph{Premises} and returns an
+output Set of Formulas called the \emph{Conclusion}. An alternative
 formulation for Inference Rules is as a \emph{Deducibility Relation},
 $\vdash$, that holds between zero or more Premises and one or more
 Conclusions.
@@ -121,7 +121,7 @@ are called \emph{Axiomatic Systems} (\S\ref{sec:axiomatic_system}).
 An \emph{Axiom Schema} is a template for Axioms in which one or more
 Schematic Variables (\S\ref{sec:metalanguage}) appear, standing for a
 Subformula in the Object Language of the System. For a Language with
-infinitely many WFFs, an Axiom Schema describes a countably infinite
+infinitely many Formulas, an Axiom Schema describes a countably infinite
 number of Axioms. A System without Schema is termed \emph{Finitely
   Axiomatized}.
 
@@ -131,15 +131,21 @@ number of Axioms. A System without Schema is termed \emph{Finitely
 \section{Formal Proof} \label{sec:formal_proof}
 % ====================================================================
 
-A \emph{Formal Proof} (or \emph{Derivation}) is a finite sequence of
-Well-formed Formulas of a Formal System that are either Axioms or
-follow from the preceding Formulas by an Inference Rule. A Formal
-Proof is said to provide \emph{Justification} for the Theorem
-(\S\ref{sec:theorem}) thus Derived.
+A \emph{Formal Proof} (or \emph{Derivation}) is a Finite Sequence of
+Formulas of a Formal System that are either Axioms (\S\ref{sec:axiom})
+or follow from the preceding Formulas by Inference Rules
+(\S\ref{sec:inference_rule}). A Formal Proof is said to provide
+\emph{Justification} for the Theorem (\S\ref{sec:theorem}) thus
+Derived.
 
-For a Set of WFFs, $\Gamma$, in a Formal System, $\mathcal{S}$, there
-is a Syntactic Consequence, $A$, if there is a Formal Proof of $A$
-from the Set $\Gamma$:
+A Formal Proof is \emph{Valid} (\S\ref{sec:validity})
+
+A Formal Proof is \emph{Sound} (\S\ref{sec:soundness}) if it is Valid
+and all the Premises are True.
+
+For a Set of Formulas, $\Gamma$, in a Formal System, $\mathcal{S}$,
+there is a Syntactic Consequence, $A$, if there is a Formal Proof of
+$A$ from the Set $\Gamma$:
 \[
     \Gamma \vdash_{\mathcal{S}} A
 \]
@@ -152,7 +158,7 @@ from the Set $\Gamma$:
 
 The concluding Formula in the sequence is a \emph{Theorem}. A Theorem
 is a Syntactic Consequence (\S\ref{sec:syntactic_consequence}) of the
-preceding WFFs in the Proof. A Theorem used in the course of Deriving
+preceding Formulas in the Proof. A Theorem used in the course of Deriving
 a further Theorem is called a \emph{Lemma}.
 
 
@@ -186,7 +192,18 @@ that are to be satisfied.
 
 
 
-\subsubsection{Realizability} \label{sec:realizability}
+\subsubsection{Realizability}\label{sec:realizability}
+
+Formalization of the BHK Interpretation of Intuitionistic Logic
+(\S\ref{sec:intuitionistic_logic}).
+
+
+
+\paragraph{Modified Realizability}\label{sec:modified_realizability}
+
+
+
+\subsubsection{Proof Mining}\label{sec:proof_mining}
 
 
 
@@ -268,12 +285,12 @@ See also \emph{Conservativity} (\S\ref{sec:conservativity})
 % --------------------------------------------------------------------
 
 A Theory is \emph{Absolutely Consistent} (also \emph{Coherent} or
-\emph{Non-trivial}) if not every WFF in the underlying Language is a
+\emph{Non-trivial}) if not every Formula in the underlying Language is a
 Theorem.
 
 A Non-trivial Theory is \emph{Consistent} if it satisfies the
 \emph{Principle of Explosion}, that is, Proof of a contradiction
-Implies Proof of all other WFFs. Therefore, a Consistent Theory must
+Implies Proof of all other Formulas. Therefore, a Consistent Theory must
 be free of contradictions.
 
 The Conservative Extension of a Consistent Theory is Consistent.
@@ -762,7 +779,7 @@ Theory.
 \subsection{Syntactic Consequence}\label{sec:syntactic_consequence}
 % --------------------------------------------------------------------
 
-For a Formal System, $\mathcal{S}$, a WFF, $A$, is a \emph{Syntactic
+For a Formal System, $\mathcal{S}$, a Formula, $A$, is a \emph{Syntactic
   Consequence} of a possibly empty Set of Formulas, $\Gamma$, if there
 is a Formal Proof (\S\ref{sec:formal_proof}) of $A$ from $\Gamma$ in
 $\mathcal{S}$:
