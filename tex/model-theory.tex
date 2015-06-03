@@ -69,6 +69,12 @@ Cardinality of the Domain, $|A|$).
 
 
 
+\subsubsection{Sort}\label{sec:sort}
+
+\emph{One-sorted} \emph{Many-sorted}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Interpretation}\label{sec:interpretation}
 % --------------------------------------------------------------------
@@ -252,19 +258,85 @@ Structures where the Signature is $\sigma$
 \section{Valuation}\label{sec:valuation}
 % ====================================================================
 
+A \emph{Valuation} (or \emph{Truth Assignment}) is the assignment of a
+Truth Value (\S\ref{sec:truth_value}) to each Sentence
+(\S\ref{sec:sentence}) in the Language of a given Structure
+(\S\ref{sec:structure}) via the Structure's Interpretation Function.
+
+For a Propositional Calculus (\S\ref{sec:propositional_logic}), this
+is the assignment of Truth Values to each Propositional Variable
+(Nullary Predicate), giving a unique Truth Value to each Propositional
+Formula.
+
+A Valuation $v : L \rightarrow \{true, false\}$ may be denoted
+$v(\phi) = [[\phi]]_v$ for a Formula $\phi \in L$.
 
 
-% ====================================================================
-\section{Satisfaction}\label{sec:satisfaction}
-% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Satisfaction}\label{sec:satisfaction}
+% --------------------------------------------------------------------
 
 \emph{Satisfies}
 
-For a Formula $\phi$ and a Structure $A$, a \emph{Satisfaction
+For a Sentence $\phi$ and a Structure $A$, a \emph{Satisfaction
   Relation} is denoted:
 \[
-    \mathcal{M} \vDash \phi
+    A \vDash \phi
 \]
+
+If $\phi(\bar{x})$ is a Formula with Free Variables $\bar{x}$, and $A$
+is a Structure with Elements $\bar{a}$ that gives a Closed Formula
+under Substitution (\S\ref{sec:substitution}), then:
+\[
+    A \vDash \phi(\bar{x})[\bar{a}]
+\]
+
+
+
+\subsubsection{Finite Satisfiability}\label{sec:finite_satisfiability}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Satisfiability}\label{sec:satisfiability}
+% --------------------------------------------------------------------
+
+A Formula is \emph{Satisfiable} if there exists a Model that makes it
+True.
+
+A Theory (\S\ref{sec:formal_theory}) is Satisfiable if there exists a
+Model that Satisfies all of the Axioms of the Theory.
+
+Satisfiability of Propositional Formulas is a Decidable problem of NP
+Complexity % FIXME ref NP complexity
+
+Satisfiability of arbitrary First-order Formulas is Undecidable.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Validity}\label{sec:validity}
+% --------------------------------------------------------------------
+
+\emph{Valid}, \emph{Logically True}, \emph{Tautological}
+
+A Formula (\S\ref{sec:formula}) is Valid if and only if it is True
+under every possible Interpretation (\S\ref{sec:interpretation}).
+
+An Inference is \emph{Semantically Valid}
+(\S\ref{sec:semantic_validity}) if all Interpretations that Validate
+the Premises also Validate the Conclusion.
+
+A Logical Argument (\S\ref{sec:logical_argument}) is Valid if and only
+if its Corresponding Conditional
+(\S\ref{sec:corresponding_conditional}) is a Logical Truth ($\top$),
+or equivalently, if and only if the Conclusion is Logically Entailed
+(\S\ref{sec:logical_consequence}) by the Premises, i.e. there would be
+a Contradiction if the Premises were True and the Conclusion was
+False.
+
+Validity of arbitrary First-order Formulas is Semidecidable.
 
 
 
