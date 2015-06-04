@@ -254,47 +254,66 @@ Structures where the Signature is $\sigma$
 
 
 
-% ====================================================================
-\section{Valuation}\label{sec:valuation}
-% ====================================================================
+% --------------------------------------------------------------------
+\subsection{Parameter}\label{sec:parameter}
+% --------------------------------------------------------------------
+
+For a $\sigma$-structure $\mathcal{A}$ with Elements $\bar{a}$ for
+which Constant Symbols do not already exist, the addition of Constant
+Symbols $\bar{c}$ gives a new Signature $\sigma(\bar{c})$ and
+$\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Valuation}\label{sec:valuation}
+% --------------------------------------------------------------------
 
 A \emph{Valuation} (or \emph{Truth Assignment}) is the assignment of a
 Truth Value (\S\ref{sec:truth_value}) to each Sentence
 (\S\ref{sec:sentence}) in the Language of a given Structure
-(\S\ref{sec:structure}) via the Structure's Interpretation Function.
+(\S\ref{sec:structure}) via the Structure's Interpretation Function
+(\S\ref{sec:interpretation}).
 
 For a Propositional Calculus (\S\ref{sec:propositional_logic}), this
 is the assignment of Truth Values to each Propositional Variable
 (Nullary Predicate), giving a unique Truth Value to each Propositional
 Formula.
 
-A Valuation $v : L \rightarrow \{true, false\}$ may be denoted
-$v(\phi) = [[\phi]]_v$ for a Formula $\phi \in L$.
+A Valuation $v : L \rightarrow \{true, false\}$ on a Formula $\varphi \in
+L$ of a Language $L$ may be denoted $v(\varphi) = [[\varphi]]_v$.
 
 
 
-% --------------------------------------------------------------------
+\subsubsection{T-schema}\label{sec:t_schema}
+
+\emph{T-schema} (or \emph{Equivalence Schema}) is used to give an
+Inductive definition of Truth.
+
+
+
+% ====================================================================
 \subsection{Satisfaction}\label{sec:satisfaction}
-% --------------------------------------------------------------------
+% ====================================================================
 
-\emph{Satisfies}
-
-For a Sentence $\phi$ and a Structure $A$, a \emph{Satisfaction
-  Relation} is denoted:
+Each $\sigma$-Structure $\mathcal{A}$ has a \emph{Satisfaction
+  Relation}:
 \[
-    A \vDash \phi
+    A \vDash \varphi
 \]
+defined for all Formulas $\varphi$ in the Language of $\sigma(\bar{c})$
+with Parameters (\S\ref{sec:parameter}) $\bar{c}$ being Constants
+naming Elements of $A = dom(\mathcal{A})$.
 
-If $\phi(\bar{x})$ is a Formula with Free Variables $\bar{x}$, and $A$
+If $\varphi(\bar{x})$ is a Formula with Free Variables $\bar{x}$, and $A$
 is a Structure with Elements $\bar{a}$ that gives a Closed Formula
 under Substitution (\S\ref{sec:substitution}), then:
 \[
-    A \vDash \phi(\bar{x})[\bar{a}]
+    A \vDash \varphi(\bar{x})[\bar{a}]
 \]
 
-
-
-\subsubsection{Finite Satisfiability}\label{sec:finite_satisfiability}
+The Satisfaction Relation is defined Inductively using T-schema
+(\S\ref{sec:t_schema}).
 
 
 
@@ -311,7 +330,13 @@ Model that Satisfies all of the Axioms of the Theory.
 Satisfiability of Propositional Formulas is a Decidable problem of NP
 Complexity % FIXME ref NP complexity
 
-Satisfiability of arbitrary First-order Formulas is Undecidable.
+Satisfiability of arbitrary First-order Formulas is Undecidable. By
+the Completeness Theorem (\S\ref{sec:completeness}), a First-order
+Theory is Satisfiable if and only if it is Consistent.
+
+
+
+\subsubsection{Finite Satisfiability}\label{sec:finite_satisfiability}
 
 
 
@@ -341,34 +366,53 @@ Validity of arbitrary First-order Formulas is Semidecidable.
 
 
 % --------------------------------------------------------------------
-\subsection{Model}\label{sec:model}
+\subsection{Definability}\label{sec:definability}
 % --------------------------------------------------------------------
 
-A Structure (\S\ref{sec:structure}) $A$ that Satisfies a Sentence
-$\phi$ is called a \emph{Model} of $\phi$: $A \vDash \phi$,
-(equivalently ``$\phi$ is True in $A$'').
+An $n$-ary Relation $R$ on the Domain of a Structure $\mathcal{A} =
+(A, \sigma, I)$ is \emph{Definable} (or \emph{Explicity Definable} or
+\emph{$\emptyset$-definable}) if there is a Formula $\varphi
+(x_1,\ldots,x_n)$ such that:
+\[
+  R = \{(a_1,\ldots,a_n) \in A^n \;|\; \mathcal{A} \vDash \varphi
+    [a_1, \ldots, a_n]\}
+\]
+or equivalently:
+\[
+  (a_1, \ldots, a_n) \in R \Leftrightarrow \mathcal{A} \vDash
+    \varphi[a_1, \ldots, a_n]
+\]
+An Element $a$ of $A$ is Definable in $\mathcal{A}$ if and only if
+there is a Formula $\varphi(a)$ such that:
+\[
+  \mathcal{A} \vDash \forall x (x = a \leftrightarrow \varphi(x))
+\]
+A Relation $R$ is \emph{$A$-definable} (or \emph{Definable with
+  Parameters}) if there is a Formula $\varphi$ with Parameters
+(\S\ref{sec:parameter}) from $\mathcal{A}$ such that $R$ is definable
+using $\varphi$. Every Element is Definable using itself as a
+Parameters.
 
-If $A$ Satisfies all the Sentences of a Theory $\mathcal{T}$ is a
-Model of $\mathcal{T}$: $A \vDash \mathcal{T}$.
 
-For $A$ to be a Model of a $\mathcal{T}$, it is required that:
-\begin{itemize}
-  \item The Language of $A$ is the same as the Language of
-    $\mathcal{T}$
-  \item Every Sentence in $\mathcal{T}$ is Satisfied by $A$
-\end{itemize}
-By the Completeness Theorem (\S\ref{sec:completeness}) a Consistent
-Theory is Satisfiable, that is, a Theory has a Model if and only if it
-is Consistent. The Compactness Theorem
-(\S\ref{sec:compactness_theorem}) implies that a Theory has a Model if
-and only if every Finite Subset of the Sentences in that Theory also
-have Models.
+
+\subsubsection{Implicit Definability}\label{sec:implicit_definability}
+
+For a Relation $R$ and a $\sigma$-structure $\mathcal{A}$, $R$ is
+\emph{Implicitly Definable} if there is a Formula $\varphi$ in the
+Extended Language $\sigma(R)$ and $R$ is the only Relation on
+$\mathcal{A}$ such that $\mathcal{A} \vDash \varphi$. By Beth's
+Theorem (\S\ref{sec:beth_definability}), a Relation is Implicitly
+Definable if and only if it is Explicitly Definable.
 
 
 
-\subsubsection{Standard Model}\label{sec:standard_model}
+\subsubsection{Beth Definability}\label{sec:beth_definability}
 
-\emph{Standard Model} (or \emph{Intended Interpretation})
+
+
+% --------------------------------------------------------------------
+\subsection{Distinguishibility}\label{sec:distinguishibility}
+% --------------------------------------------------------------------
 
 
 
@@ -393,6 +437,53 @@ Compactness (Topology \S\ref{sec:compactness})
 
 
 % --------------------------------------------------------------------
+\subsection{L\"owenheim-Skolem Theorem}\label{sec:lowenheim_skolem}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Boolean Satisfiability Problem}
+\label{sec:boolean_satisfiability}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Model}\label{sec:model}
+% ====================================================================
+
+A Structure (\S\ref{sec:structure}) $A$ that Satisfies a Sentence
+$\varphi$ is called a \emph{Model} of $\varphi$: $A \vDash \varphi$,
+(equivalently ``$\varphi$ is True in $A$'').
+
+If $A$ Satisfies all the Sentences of a Theory $\mathcal{T}$ is a
+Model of $\mathcal{T}$: $A \vDash \mathcal{T}$.
+
+For $A$ to be a Model of a $\mathcal{T}$, it is required that:
+\begin{itemize}
+  \item The Language of $A$ is the same as the Language of
+    $\mathcal{T}$
+  \item Every Sentence in $\mathcal{T}$ is Satisfied by $A$
+\end{itemize}
+By the Completeness Theorem (\S\ref{sec:completeness}) a Consistent
+Theory is Satisfiable, that is, a Theory has a Model if and only if it
+is Consistent. The Compactness Theorem
+(\S\ref{sec:compactness_theorem}) implies that a Theory has a Model if
+and only if every Finite Subset of the Sentences in that Theory also
+have Models.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Standard Model}\label{sec:standard_model}
+% --------------------------------------------------------------------
+
+\emph{Standard Model} (or \emph{Intended Interpretation})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Elementary Equivalence}\label{sec:elementary_equivalence}
 % --------------------------------------------------------------------
 
@@ -402,14 +493,31 @@ if they both Satisfy the same First-order $\sigma$-sentences.
 
 
 % --------------------------------------------------------------------
-\subsection{L\"owenheim-Skolem Theorem}\label{sec:lowenheim_skolem}
+\subsection{Elementary Class}\label{sec:elementary_class}
 % --------------------------------------------------------------------
 
+A Class of Structures, $K$, with Signature $\sigma$ is an
+\emph{Elementary Class} if there is a First-order Theory, $T$, with
+Signature $\sigma$ such that $K$ contains all Models of $T$.
+Expressed with the \emph{Satisfaction Relation}
+(\S\ref{sec:satisfaction}):
+\[
+    \mathcal{M} \in \mathcal{E}_T \leftrightarrow \mathcal{M} \vDash T
+\]
+where $\mathcal{E}_T$ is an Elementary Class, $\mathcal{M}$ is a
+Model, and $T$ is a Theory.
 
+If $T$ has only a single Sentence, then $K$ is a \emph{Basic
+  Elementary Class}. The Reduct (\S\ref{sec:structure}) of an
+Elementary Class is a \emph{Pseudoelementary Class}.
 
-% --------------------------------------------------------------------
-\subsection{Boolean Satisfiability Problem}\label{sec:boolean_satisfiability}
-% --------------------------------------------------------------------
+Elementary Classes are termed \emph{Axiomatizable in First-Order
+  Logic} (or simply \emph{Axiomatizable} when implicitly First-Order).
+
+The notion of \emph{Strength} of Formal Systems is defined in terms of
+Elementary Clases. A Logic $\alpha$ is equal to another Logic $\beta$
+when every Elementary Class in $\beta$ is an Elementary Class in
+$\alpha$.
 
 
 
@@ -453,7 +561,7 @@ of $T$ can be uniquiely Embedded in a Model of $T^*$.
 
 
 % ====================================================================
-\section{Categoricity}
+\section{Categoricity}\label{sec:categoricity}
 % ====================================================================
 
 %FIXME ref Cardinal, Lowenheim-Skolem
@@ -483,7 +591,7 @@ The special case of $\kappa = \aleph_0$ is called
 
 
 % ====================================================================
-\section{Interpretability}
+\section{Interpretability}\label{sec:interpretability}
 % ====================================================================
 
 Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
@@ -621,11 +729,11 @@ such that for every Finite Subset $p_0(\mathbf{x}) \subseteq
 p(\mathbf{x})$ there exist Elements $b_1,\ldots,b_n \in M$ with
 $\mathcal{M} \vDash p_0(b_1,\ldots,b_n)$.
 
-A \emph{Complete Type} is \emph{Maximal}
-(\S\ref{sec:formal_theory})) under Inclusion such that $\forall
-\phi(\mathbf{x}) \in L(A,\mathbf{x})$ either $\phi(\mathbf{x}) \in
-p(\mathbf{x})$ or $\neg \phi(\mathbf{x}) \in p(\mathbf{x})$. A
-non-Complete type is called a \emph{Partial Type}.
+A \emph{Complete Type} is \emph{Maximal} (\S\ref{sec:formal_theory}))
+under Inclusion such that $\forall \varphi(\mathbf{x}) \in
+L(A,\mathbf{x})$ either $\varphi(\mathbf{x}) \in p(\mathbf{x})$ or
+$\neg \varphi(\mathbf{x}) \in p(\mathbf{x})$. A non-Complete type is
+called a \emph{Partial Type}.
 
 An $n$-type is \emph{Realized} in $\mathcal{M}$ if there is an Element
 $\mathbf{b} \in M^n$ such that $\mathcal{M} \vDash
