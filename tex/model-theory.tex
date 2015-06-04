@@ -18,9 +18,13 @@ One definition of Model Theory is the combination of Formal Logic
 (\S\ref{sec:universal_algebra}). An alternative view of Model Theory
 equates it with Algebraic Geometry (Part
 \ref{sec:algebraic_geometry}). The broadest definition of Model Theory
-includes four divisions: Classical Model Theory, Model Theory of
-Groups and Fields, Geometric Model Theory, and Computable Model Theory
-(\S\ref{sec:computable_model_theory}).
+includes four divisions:
+\begin{itemize}
+  \item Classical Model Theory
+  \item Model Theory of Groups and Fields
+  \item Computable Model Theory (\S\ref{sec:computable_model})
+  \item Geometric Model Theory (\S\ref{sec:geometric_model})
+\end{itemize}
 
 Model Theory uses Tarski's Semantic Theory of Truth
 (\S\ref{sec:semantic_truth}) as the definition of Truth
@@ -255,17 +259,6 @@ Structures where the Signature is $\sigma$
 
 
 % --------------------------------------------------------------------
-\subsection{Parameter}\label{sec:parameter}
-% --------------------------------------------------------------------
-
-For a $\sigma$-structure $\mathcal{A}$ with Elements $\bar{a}$ for
-which Constant Symbols do not already exist, the addition of Constant
-Symbols $\bar{c}$ gives a new Signature $\sigma(\bar{c})$ and
-$\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
-
-
-
-% --------------------------------------------------------------------
 \subsection{Valuation}\label{sec:valuation}
 % --------------------------------------------------------------------
 
@@ -292,8 +285,38 @@ Inductive definition of Truth.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Parameter}\label{sec:parameter}
+% --------------------------------------------------------------------
+
+For a $\sigma$-structure $\mathcal{A}$ with Elements $\bar{a}$ for
+which Constant Symbols do not already exist, the addition of Constant
+Symbols $\bar{c}$ gives a new Signature $\sigma(\bar{c})$ and
+$\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Interpretability}\label{sec:interpretability}
+% --------------------------------------------------------------------
+
+Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
+$N$ is a pair $(n,f)$ where
+\begin{itemize}
+  \item $n \in \mathbb{N}$
+  \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
+    $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$ by
+    a First-order Formula is definable in $N$ by a First-order Formula
+\end{itemize}
+
+Two Structures are \emph{Bi-interpretable} if they can be interpreted
+in each other. This can be used to define an Equivalence Relation
+between Structures.
+
+
+
 % ====================================================================
-\subsection{Satisfaction}\label{sec:satisfaction}
+\section{Satisfaction}\label{sec:satisfaction}
 % ====================================================================
 
 Each $\sigma$-Structure $\mathcal{A}$ has a \emph{Satisfaction
@@ -416,39 +439,6 @@ Definable if and only if it is Explicitly Definable.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Completeness}\label{sec:completeness}
-% --------------------------------------------------------------------
-
-\subsubsection{Incompleteness Theorem}\label{sec:incompleteness_theorem}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Compactness Theorem}\label{sec:compactness_theorem}
-% --------------------------------------------------------------------
-
-The \emph{Compactness Theorem} states that a Set of First-order
-Sentences (\S\ref{sec:firstorder_logic}) has a Model if and only if
-every Finite Subset of it has a Model.
-
-Compactness (Topology \S\ref{sec:compactness})
-
-
-
-% --------------------------------------------------------------------
-\subsection{L\"owenheim-Skolem Theorem}\label{sec:lowenheim_skolem}
-% --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Boolean Satisfiability Problem}
-\label{sec:boolean_satisfiability}
-% --------------------------------------------------------------------
-
-
-
 % ====================================================================
 \section{Model}\label{sec:model}
 % ====================================================================
@@ -468,10 +458,11 @@ For $A$ to be a Model of a $\mathcal{T}$, it is required that:
 \end{itemize}
 By the Completeness Theorem (\S\ref{sec:completeness}) a Consistent
 Theory is Satisfiable, that is, a Theory has a Model if and only if it
-is Consistent. The Compactness Theorem
-(\S\ref{sec:compactness_theorem}) implies that a Theory has a Model if
-and only if every Finite Subset of the Sentences in that Theory also
-have Models.
+is Consistent.
+
+The Compactness Theorem (\S\ref{sec:compactness}) implies that a
+Theory has a Model if and only if every Finite Subset of the Sentences
+in that Theory also have Models.
 
 
 
@@ -484,90 +475,31 @@ have Models.
 
 
 % --------------------------------------------------------------------
-\subsection{Elementary Equivalence}\label{sec:elementary_equivalence}
+\subsection{Diagram}\label{sec:diagram}
 % --------------------------------------------------------------------
-
-Two $\sigma$-structures $M$ and $N$ are \emph{Elementarily Equivalent}
-if they both Satisfy the same First-order $\sigma$-sentences.
 
 
 
 % --------------------------------------------------------------------
-\subsection{Elementary Class}\label{sec:elementary_class}
+\subsection{Compactness}\label{sec:compactness}
 % --------------------------------------------------------------------
 
-A Class of Structures, $K$, with Signature $\sigma$ is an
-\emph{Elementary Class} if there is a First-order Theory, $T$, with
-Signature $\sigma$ such that $K$ contains all Models of $T$.
-Expressed with the \emph{Satisfaction Relation}
-(\S\ref{sec:satisfaction}):
-\[
-    \mathcal{M} \in \mathcal{E}_T \leftrightarrow \mathcal{M} \vDash T
-\]
-where $\mathcal{E}_T$ is an Elementary Class, $\mathcal{M}$ is a
-Model, and $T$ is a Theory.
+The \emph{Compactness Theorem} states that a First-order Theory
+(\S\ref{sec:formal_theory}) $T$ has a Model if and only if every
+Finite Subset of $T$ has a Model.
 
-If $T$ has only a single Sentence, then $K$ is a \emph{Basic
-  Elementary Class}. The Reduct (\S\ref{sec:structure}) of an
-Elementary Class is a \emph{Pseudoelementary Class}.
-
-Elementary Classes are termed \emph{Axiomatizable in First-Order
-  Logic} (or simply \emph{Axiomatizable} when implicitly First-Order).
-
-The notion of \emph{Strength} of Formal Systems is defined in terms of
-Elementary Clases. A Logic $\alpha$ is equal to another Logic $\beta$
-when every Elementary Class in $\beta$ is an Elementary Class in
-$\alpha$.
+Compactness (Topology \S\ref{sec:compact_space})
 
 
 
-% ====================================================================
-\section{Conservativity}\label{sec:conservativity}
-% ====================================================================
-
-
-
-% ====================================================================
-\section{Quantifier Elimination}
-% ====================================================================
-
-Within a Theory $T$, if every First-order Formula $\varphi(x_1,
-\ldots, x_n)$ with Quantifiers is equivalent to a First-order Formula
-$\psi(x_1, \ldots, x_n)$ without Quantifiers, $T$ is said to have the
-property of \emph{Quantifier Elimination}. A Theory without Quantifier
-Elimination may be made to have it by adding Symbols to its Signature.
-
-
-
-% ====================================================================
-\section{Model Completion}\label{sec:model_completion}
-% ====================================================================
-
-A First-order Theory $T$ is called \emph{Model Complete} if every
-Embedding (\S\ref{sec:sigma_embedding}) of Models of $T$ is an
-Elementary Embedding.
-
-A Theory $T^*$ is a \emph{Companion} of another Theory $T$ if every
-Model of $T$ can be Embedded in a Model of $T^*$ and likewise every
-Model of $T^*$ can be Embedded in a Model of $T$. A \emph{Model
-  Companion} is a \emph{Companion} of a Theory that is \emph{Model
-  Complete}.
-
-%FIXME ref Amalgamation Property
-A \emph{Model Completion} is a Model Companion $T^*$ of a Model $T$
-that has the \emph{Amalgamation Property}. This means that every Model
-of $T$ can be uniquiely Embedded in a Model of $T^*$.
-
-
-
-% ====================================================================
-\section{Categoricity}\label{sec:categoricity}
-% ====================================================================
+% --------------------------------------------------------------------
+\subsection{Categoricity}\label{sec:categoricity}
+% --------------------------------------------------------------------
 
 %FIXME ref Cardinal, Lowenheim-Skolem
 A Theory is termed \emph{Categorical} if all its Models are
 Isomorphic. With this definition and the L\"owenheim-Skolem Theorem it
-follows that any First-order Theory with a Model of infinite
+follows that any First-order Theory with a Model of Infinite
 Cardinality can't be Categorical.
 
 For a Cardinal $\kappa$, a Theory $T$ is \emph{$\kappa$-Categorical}
@@ -590,47 +522,113 @@ The special case of $\kappa = \aleph_0$ is called
 
 
 
+% --------------------------------------------------------------------
+\subsection{Elementary Equivalence}\label{sec:elementary_equivalence}
+% --------------------------------------------------------------------
+
+Two $\sigma$-structures $M$ and $N$ are \emph{Elementarily Equivalent}
+if they both Satisfy the same First-order $\sigma$-sentences.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Elementary Class}\label{sec:elementary_class}
+% --------------------------------------------------------------------
+
+A Class of Structures, $K$, with Signature $\sigma$ is an
+\emph{Elementary Class} if there is a First-order Theory, $T$, with
+Signature $\sigma$ such that $K$ contains all Models of $T$.
+Expressed with the \emph{Satisfaction Relation}
+(\S\ref{sec:satisfaction}):
+\[
+  \mathcal{M} \in \mathcal{E}_T \Leftrightarrow \mathcal{M} \vDash T
+\]
+where $\mathcal{E}_T$ is an Elementary Class, $\mathcal{M}$ is a
+Model, and $T$ is a Theory.
+
+If $T$ has only a single Sentence, then $K$ is a \emph{Basic
+  Elementary Class}. The Reduct (\S\ref{sec:structure}) of an
+Elementary Class is a \emph{Pseudoelementary Class}.
+
+Elementary Classes are termed \emph{Axiomatizable in First-Order
+  Logic} (or simply \emph{Axiomatizable} when implicitly First-Order).
+
+
+
+\subsubsection{Strength}\label{sec:strength}
+
+The notion of \emph{Strength} of Formal Systems is defined in terms of
+Elementary Classes. A Logic $\alpha$ is equal to another Logic $\beta$
+when every Elementary Class in $\beta$ is an Elementary Class in
+$\alpha$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Model Completion}\label{sec:model_completion}
+% --------------------------------------------------------------------
+
+A First-order Theory $T$ is called \emph{Model Complete} if every
+Embedding (\S\ref{sec:sigma_embedding}) of Models of $T$ is an
+Elementary Embedding.
+
+A Theory $T^*$ is a \emph{Companion} of another Theory $T$ if every
+Model of $T$ can be Embedded in a Model of $T^*$ and likewise every
+Model of $T^*$ can be Embedded in a Model of $T$. A \emph{Model
+  Companion} is a \emph{Companion} of a Theory that is \emph{Model
+  Complete}.
+
+%FIXME ref Amalgamation Property
+A \emph{Model Completion} is a Model Companion $T^*$ of a Model $T$
+that has the \emph{Amalgamation Property}. This means that every Model
+of $T$ can be uniquiely Embedded in a Model of $T^*$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{L\"owenheim-Skolem Theorem}\label{sec:lowenheim_skolem}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Model Existence Theorem}\label{sec:model_existence}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Boolean Satisfiability Problem}
+\label{sec:boolean_satisfiability}
+% --------------------------------------------------------------------
+
+
+
 % ====================================================================
-\section{Interpretability}\label{sec:interpretability}
-% ====================================================================
-
-Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
-$N$ is a pair $(n,f)$ where
-\begin{itemize}
-    \item $n \in \mathbb{N}$
-    \item $f:f_{dom} \subset N^n \rightarrow M$ such that the
-      $f^k$-preimage of every set $X \subseteq M^k$ definable in $M$
-      by a First-order Formula is definable in $N$ by a First-order
-      Formula
-\end{itemize}
-
-Two Structures are \emph{Bi-interpretable} if they can be interpreted
-in each other. This can be used to define an Equivalence Relation
-between Structures.
-
-
-
-% ====================================================================
-\section{Abstract Model Theory}
+\section{Abstract Model Theory}\label{sec:abstract_model}
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Abstract Logic}
+\subsection{Abstract Logic}\label{sec:abstract_logic}
 % --------------------------------------------------------------------
 
-An \emph{Abstract Logic} is a Formal System that consists of a Class
-of Sentences with a Satisfaction Relation
-(\S\ref{sec:satisfaction}).
+An \emph{Abstract Logic} is a Formal System
+(\S\ref{sec:formal_system}) that consists of a Class of Sentences with
+a Satisfaction Relation (\S\ref{sec:satisfaction}).
 
-%FIXME compactness, lowenheim-skolem
+
+
+% --------------------------------------------------------------------
+\subsection{Lindstr\"om's Theorem}\label{sec:lindstroms_theorem}
+% --------------------------------------------------------------------
+
 \emph{Lindstr\"om's Theorem} states that First-order Logic is the
 Strongest (\S\ref{sec:elementary_class}) Logic which has both
-Countable Compactness and the Downward L\"owenheim-Skolem Property.
+Countable Compactness and the Downward L\"owenheim-Skolem Property
+(\S\ref{sec:lowenheim_skolem}).
 
 
 
 % --------------------------------------------------------------------
-\subsection{Institutional Model Theory}
+\subsection{Institutional Model Theory}\label{sec:institutional_model}
 % --------------------------------------------------------------------
 
 \emph{Institutional Model Theory} generalizes First-order Model Theory
@@ -640,11 +638,11 @@ to arbitrary Logical Systems formalized as \emph{Institutions}
 
 
 % ====================================================================
-\section{Finite Model Theory}
+\section{Finite Model Theory}\label{sec:finite_model}
 % ====================================================================
 
 \emph{Finite Model Theory} (FMT) is a restriction of Model Theory to
-Interpretations of Finite Structures.
+Interpretations of Finite Structures (\S\ref{sec:structure}).
 
 A Finite Structure can always be described by a single First-order
 Sentence. An example structure of $n$ Elements:
@@ -677,7 +675,7 @@ in First-order Logic may be determined by whether two Structures $A
 
 
 % --------------------------------------------------------------------
-\subsection{Finite Model Property}
+\subsection{Finite Model Property}\label{sec:finite_model_property}
 % --------------------------------------------------------------------
 
 A System of Logic $S$ has the \emph{Finite Model Property} if there is
@@ -692,19 +690,19 @@ it is Decidable (\S\ref{sec:computable_function}).
 
 
 % ====================================================================
-\section{Computable Model Theory}\label{sec:computable_model_theory}
-% ====================================================================
-
+\section{Computable Model Theory}\label{sec:computable_model}
 \cite{harizanov98}
+% ====================================================================
+
 
 
 
 % ====================================================================
-\section{Geometric Model Theory}
+\section{Geometric Model Theory}\label{sec:geometric_model}
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Classification Theory}
+\subsection{Classification Theory}\label{sec:classification_theory}
 % --------------------------------------------------------------------
 
 \emph{Classification Theory} is the division of Theories based on
@@ -714,7 +712,7 @@ Theory to be \emph{Classified}.
 
 
 % --------------------------------------------------------------------
-\subsection{Types}
+\subsection{Type}\label{sec:model_type}
 % --------------------------------------------------------------------
 
 An \emph{$n$-type} of a Model, $\mathcal{M}$, over a (possibly empty)
@@ -736,18 +734,22 @@ $\neg \varphi(\mathbf{x}) \in p(\mathbf{x})$. A non-Complete type is
 called a \emph{Partial Type}.
 
 An $n$-type is \emph{Realized} in $\mathcal{M}$ if there is an Element
-$\mathbf{b} \in M^n$ such that $\mathcal{M} \vDash
-p(\mathbf{b})$. This is guaranteed by the Compactness Theorem
-(\S\ref{sec:compactness_theorem}) in either $\mathcal{M}$ or an
-Elementary Extension (\S\ref{sec:model_substructure}) of
-$\mathcal{M}$. This is denoted by $tp_{n}^{\mathcal{M}}(\mathbf{b}/A)$
-which is read as ``the Complete Type of $\mathbf{b}$ over $A$''.
+$\mathbf{b} \in M^n$ such that $\mathcal{M} \vDash p(\mathbf{b})$.
+This is guaranteed by the Compactness Theorem
+(\S\ref{sec:compactness}) in either $\mathcal{M}$ or an Elementary
+Extension (\S\ref{sec:model_substructure}) of $\mathcal{M}$. This is
+denoted by $tp_{n}^{\mathcal{M}}(\mathbf{b}/A)$ which is read as ``the
+Complete Type of $\mathbf{b}$ over $A$''.
 
 A Type $p(\mathbf{x})$ is \emph{Isolated} by a Formula
 $\varphi(\mathcal{x})$ if $\forall \psi(\mathbf{x}) \in
 p(\mathbf{x})$, $\varphi (\mathbf{x}) \rightarrow
 \psi(\mathbf{x})$. Isolated Types are Realized in every Elementary
 Substructure or Extension.
+
+
+
+\subsubsection{Stone Space}\label{sec:stone_space}
 
 
 
@@ -777,9 +779,3 @@ the following terms:
 \item [Totally Transcendental] \emph{Morley Rank}\cite{morley65} less
   than $\infty$
 \end{description}
-
-
-
-% ====================================================================
-\section{Inner Model Theory}\label{sec:inner_model_theory}
-% ====================================================================
