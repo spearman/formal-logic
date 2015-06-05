@@ -72,10 +72,10 @@ and the Premises \emph{Hypotheses}.
 
 Inference Rules may be identified as redundant in two senses:
 \begin{enumerate}
-\item An \emph{Admissible Rule} is one which does not change the Set
-  of Theorems in a Formal System when it is added.
-\item A \emph{Derivable Rule} is a case of an Admissible Rule that has
-  been Derived from existing rules.
+  \item An \emph{Admissible Rule} is one which does not change the Set
+    of Theorems in a Formal System when it is added.
+  \item A \emph{Derivable Rule} is a case of an Admissible Rule that
+    has been Derived from existing rules.
 \end{enumerate}
 
 
@@ -90,9 +90,9 @@ Inference Rules may be identified as redundant in two senses:
 
 \emph{Axioms} are special cases of Inference Rules which have no
 Premises, only a universally Valid (\S\ref{sec:validity}) Conclusion;
-that is, a \emph{Logical Assertion} (\S\ref{sec:sequent_notation}).
-Axioms may be further differentiated from Rules by saying that Rules
-are statements \emph{about} the System, and Axioms are statements
+that is, a \emph{Logical Assertion} (\S\ref{sec:assertion}). Axioms
+may be further differentiated from Rules by saying that Rules are
+statements \emph{about} the System, and Axioms are statements
 \emph{in} the System.
 
 Axioms may be divided into two kinds: \emph{Logical Axioms} of a
@@ -147,7 +147,7 @@ For a Set of Formulas, $\Gamma$, in a Formal System, $\mathcal{S}$,
 there is a Syntactic Consequence, $A$, if there is a Formal Proof of
 $A$ from the Set $\Gamma$:
 \[
-    \Gamma \vdash_{\mathcal{S}} A
+  \Gamma \vdash_{\mathcal{S}} A
 \]
 
 
@@ -282,9 +282,9 @@ Given two Theories $T_1$ and $T_2$ with underlying Formal Languages
 $L_1$ and $L_2$ respectively, $T_2$ is a \emph{Conservative Extension}
 of $T_1$ if:
 \begin{enumerate}
-    \item $L_2$ extends $L_1$
-    \item $T_1 \subseteq T_2$
-    \item any Theorem of $T_2$ in $L_1$ is already a Theorem of $T_1$
+  \item $L_2$ extends $L_1$
+  \item $T_1 \subseteq T_2$
+  \item any Theorem of $T_2$ in $L_1$ is already a Theorem of $T_1$
 \end{enumerate}
 An Extension which is not Conservative may be called a \emph{Proper
   Extension}.
@@ -419,14 +419,14 @@ Systems of Natural Deduction include many Inference Rules but few or
 no Axioms. A Natural Deduction System allows Judgements with multiple
 Antecedents and a single Succedent:
 \[
-    A_1,\ldots,A_n \vdash B
+  A_1,\ldots,A_n \vdash B
 \]
 Inference Rules in Natural Deduction have the general notation
 \[
-    {
-        \frac{J_1 \quad J_2 \quad \cdots \quad J_n}
-        {J}
-    } name
+  {
+    \frac{J_1 \quad J_2 \quad \cdots \quad J_n}
+    {J}
+  } name
 \]
 where the Rule with name $name$ has Premises of zero or more
 Judgements $J_i$ and the Judgement $J$ is the Conclusion.
@@ -434,20 +434,20 @@ Judgements $J_i$ and the Judgement $J$ is the Conclusion.
 Inference Rules that introduce a Logical Connective in the Conclusion
 are called \emph{Introduction Rules}. Example
 \[
-    {
-        \frac{A\;\mathrm{true} \quad B\;\mathrm{true}}
-        {(A \wedge B)\;\mathrm{true}}
-    } \wedge_I
+  {
+    \frac{A\;\mathrm{true} \quad B\;\mathrm{true}}
+    {(A \wedge B)\;\mathrm{true}}
+  } \wedge_I
 \]
 where $A$ and $B$ are Propositions.
 
 Conversely, Inference Rules that remove Logical Connectives are
 \emph{Elimination Rules}.
 \[
-    {
-        \frac{A \wedge B\;\mathrm{true}}
-        {A\;\mathrm{true}}
-    } \wedge_E
+  {
+    \frac{A \wedge B\;\mathrm{true}}
+    {A\;\mathrm{true}}
+  } \wedge_E
 \]
 
 \emph{Hypothetical Derivations} (reasoning from \emph{Assumptions})
@@ -455,57 +455,57 @@ are required for Implication Introduction or Disjunction
 Elimination. The general form of a Hypothetical Derivation with
 Antecedents $D_i$ and Succedent $J$:
 \[
-    D_1 \quad D_2 \cdots D_n
+  D_1 \quad D_2 \cdots D_n
 \]\[
-    \vdots
+  \vdots
 \]\[
-    J
+  J
 \]
 Introduction Rules for Implication:
 \[
-    {
-        \frac{}
-        {A\;\mathrm{true}}
-    } u
+  {
+    \frac{}
+    {A\;\mathrm{true}}
+  } u
 \]\[
-    \vdots
+  \vdots
 \]\[
-    {
-        \frac{B\;\mathrm{true}}
-        {A \rightarrow B\;\mathrm{true}}
-    } \rightarrow_{I^u}
+  {
+    \frac{B\;\mathrm{true}}
+    {A \rightarrow B\;\mathrm{true}}
+  } \rightarrow_{I^u}
 \]
 The Premise $u$ here is considered \emph{discharged} by the Rule
 $I^u$; that is the scope of $u$ does not extend past $I^u$.
 Elimination Rule for Implication (Modus Ponens):
 \[
-    {
-        \frac{A \rightarrow B\;\mathrm{true} \quad A\;\mathrm{true}}
-        {B\;\mathrm{true}}
-    } \rightarrow_{E}
+  {
+    \frac{A \rightarrow B\;\mathrm{true} \quad A\;\mathrm{true}}
+    {B\;\mathrm{true}}
+  } \rightarrow_{E}
 \]
 Disjunctive Elimination:
 \[
-    \frac{
-    A \vee B\;\mathrm{true} \quad
-    \begin{matrix}
-        {
-            \frac{}
-            {A\;\mathrm{true}}
-        }u \\
-        \vdots \\
-        C\;\mathrm{true}
-    \end{matrix}
-    \quad
-    \begin{matrix}
-        {
-            \frac{}
-            {B\;\mathrm{true}}
-        }w \\
-        \vdots \\
-        C\;\mathrm{true}
-    \end{matrix}
-    }{ C\;\mathrm{true}}\wedge_{E^{u,w}}
+  \frac{
+  A \vee B\;\mathrm{true} \quad
+  \begin{matrix}
+    {
+      \frac{}
+      {A\;\mathrm{true}}
+    }u \\
+    \vdots \\
+    C\;\mathrm{true}
+  \end{matrix}
+  \quad
+  \begin{matrix}
+    {
+      \frac{}
+      {B\;\mathrm{true}}
+    }w \\
+    \vdots \\
+    C\;\mathrm{true}
+  \end{matrix}
+  }{ C\;\mathrm{true}}\wedge_{E^{u,w}}
 \]
 A Theory is \emph{Locally Consistent} (or \emph{Locally Reducible}) if
 an Introduction of a Connective followed by its Elimination can be
@@ -525,15 +525,15 @@ In a Formal Proof, the Judgements representing Antecedents are
 presented as Rules with no Premises, named by a \emph{Proof Variable}
 (from a countable set $V$ of variables):
 \[
-    \frac{}{J_1}u_1 \; \frac{}{J_2}u_2 \; \cdots \frac{}{J_n}u_n
+  \frac{}{J_1}u_1 \; \frac{}{J_2}u_2 \; \cdots \frac{}{J_n}u_n
 \]\[
-    \vdots
+  \vdots
 \]\[
-    J
+  J
 \]
 where $u_i \in V$. Written in Sequent Notation:
 \[
-    u_1:J_1, u_2:J_2, \ldots, u_n:J_n \vdash J
+  u_1:J_1, u_2:J_2, \ldots, u_n:J_n \vdash J
 \]
 This convention is sometimes called \emph{Localized Hypotheses}. In
 general, $\pi : A$ may be read ``$\pi$ is a proof of $A$''.
@@ -543,66 +543,112 @@ general, $\pi : A$ may be read ``$\pi$ is a proof of $A$''.
 \subsubsection{Sequent Calculus}\label{sec:sequent_calculus}
 
 In \emph{Sequent Calculus} (or \emph{Gentzen System}) a Formal Proof
-is a Sequence of Sequents (\S\ref{sec:sequent_notation}) where each
+is a Sequence of Sequents (\S\ref{sec:sequent}) where each
 successive Sequent is Derivable from prior Sequents by Inference
 Rules.
 
+Theorems are Sequents of the form $\vdash B$ which are the Conclusion
+of a Valid Proof.
 
 
-\paragraph{Sequent Notation}\label{sec:sequent_notation} \hfill \\
+
+\paragraph{Sequent}\label{sec:sequent} \hfill \\
 
 A \emph{Sequent} is a specific kind of Judgement
 (\S\ref{sec:judgement}) of the form
 \[
-    \Gamma \vdash \Sigma
+  \Gamma \vdash \Sigma
 \]
 where the \emph{Antecedent}, $\Gamma$, is a Conjunctive sequence of
 Formulas, and the \emph{Succedent}, $\Sigma$, is a Disjunctive
 sequence of Formulas. Together, Antecedents and Succedents are
-\emph{Cedents}. The Extra-logical Operators, $\vdash$, and $,$
-(comma), are called \emph{Structural Operators} and Rules which change
-only Structural Operators are \emph{Structural Rules} (as opposed to
-\emph{Logical Rules}). A sequence of Cedents may be called a
-\emph{Context}, but \emph{the} Context for a specific Judgement is
-usually meant to be the Antecedent.
-
-\emph{Weakening} refers to a Rule that introduces arbitrary elements
-to a Sequent. \emph{Contraction} refers to a Rule that removes
-multiple occurences of some element and \emph{Permutation} refers to
-the re-ordering of elements. Logics lacking Structural Rules are
-called \emph{Substructural Logics} (\S\ref{sec:substructural_logic}).
-If Sequents are defined as Sets or Multisets (\S\ref{sec:multiset})
-instead of Sequences (that is, unordered Sets), then the Permutation
-rule is obsolete, likewise the Contraction Rule would be obsolete for
-Sets instead of Sequences.
+\emph{Cedents}.
 
 In a general Sequent Calculus there may be any number of Formulas on
 either side
 \[
-    A_1, \ldots, A_n \vdash B_1, \ldots, B_k
+  A_1, \ldots, A_n \vdash B_1, \ldots, B_k
 \]
 is equivalent to
 \[
-    \vdash(A_1 \wedge \cdots \wedge A_n) \rightarrow (B_1 \vee \cdots \vee B_k)
+  \vdash(A_1 \wedge \cdots \wedge A_n) \rightarrow
+  (B_1 \vee \cdots \vee B_k)
 \]
 and the dual nature of Judgements and negation can be expressed by the
 dual forms
 \[
-    \vdash \neg A_1 \vee \cdots \vee \neg A_n \vee B_1 \vee \cdots
-    \vee B_k
+  \vdash \neg A_1 \vee \cdots \vee \neg A_n \vee B_1 \vee \cdots
+  \vee B_k
 \]
 and
 \[
-    \vdash \neg(A_1 \wedge \cdots \wedge A_n \wedge \neg B_1 \wedge
-    \cdots \wedge \neg B_k)
+  \vdash \neg(A_1 \wedge \cdots \wedge A_n \wedge \neg B_1 \wedge
+  \cdots \wedge \neg B_k)
 \]
+
+If Sequents are defined as Sets or Multisets (\S\ref{sec:multiset})
+instead of Sequences (that is, Unordered Sets), then the Permutation
+Rule (\S\ref{sec:permutation_rule}) is obsolete, likewise the
+Contraction Rule (\S\ref{sec:contraction_rule}) would be obsolete for
+Sets instead of Sequences.
+
+
+
+\paragraph{Context}\label{sec:sequent_context} \hfill \\
+
+A Sequence of Cedents may be called a \emph{Context}, but \emph{the}
+Context for a \emph{specific} Judgement is usually meant to be the
+Antecedent.
+
+
+
+\paragraph{Assertion}\label{sec:assertion} \hfill \\
+
+A Sequent with no Antecedent ($\vdash \Sigma$) is an \emph{Assertion}
+(or \emph{Logical Assertion}) and the Succedent is a \emph{Tautology}
+(\S\ref{sec:tautology}).
+
+
+
+\paragraph{Contradiction}\label{sec:contradiction} \hfill \\
 
 A Sequent with no Succedent ($\Gamma \vdash$) is a
 \emph{Contradiction} meaning it proves falsity which is
-Inconsistent. A Sequent with no Antecedent ($\vdash \Sigma$) is a
-\emph{Logical Assertion} and the Succedent is a
-\emph{Tautology}. Theorems are those of the form $\vdash B$ which are
-the Conclusion of a Valid Proof.
+Inconsistent.
+
+
+
+\paragraph{Structural Rule}\label{sec:structural_rule} \hfill \\
+
+The Extra-logical Operators, $\vdash$, and $,$ (comma), are called
+\emph{Structural Operators} and Rules which change only Structural
+Operators are \emph{Structural Rules} (as opposed to \emph{Logical
+  Rules}). Logics lacking Structural Rules are called
+\emph{Substructural Logics} (\S\ref{sec:substructural_logic}).
+
+
+
+\subparagraph{Weakening Rule}\label{sec:weakening_rule} \hfill \\
+
+\emph{Weakening} refers to a Rule that introduces arbitrary elements
+to a Sequent.
+
+
+
+\subparagraph{Contraction Rule}\label{sec:contraction_rule} \hfill \\
+
+\emph{Contraction} refers to a Rule that removes
+multiple occurences of some Element.
+
+
+
+\subparagraph{Exchange Rule}\label{sec:exchange_rule} \hfill \\
+
+
+
+\paragraph{Permutation Rule}\label{sec:permutation_rule} \hfill \\
+
+\emph{Permutation} refers to the re-ordering of elements.
 
 
 
@@ -610,11 +656,11 @@ the Conclusion of a Valid Proof.
 
 The Rule for \emph{Cut} is as follows:
 \[
-    \frac{
-        \Gamma \vdash \Delta, A \quad A, \Sigma \vdash \Pi
-    }{
-        \Gamma, \Sigma \vdash \Delta, \Pi
-    }(Cut)
+  \frac{
+    \Gamma \vdash \Delta, A \quad A, \Sigma \vdash \Pi
+  }{
+    \Gamma, \Sigma \vdash \Delta, \Pi
+  }(Cut)
 \]
 It states that when a Formula $A$ that can be Concluded can also be
 used as a Premise, it can be \emph{cut} out and the Derivations joined
@@ -648,11 +694,11 @@ Formalization of Intuitionistic Logic
 $\mathbf{LK}$ to allow at most one RHS Formula in a Sequent. The Cut
 Rule for $\mathbf{LJ}$:
 \[
-    \frac{
-        \Gamma \vdash A \quad \Pi, A \vdash B
-    }{
-        \Gamma, \Pi \vdash B
-    }(Cut)
+  \frac{
+    \Gamma \vdash A \quad \Pi, A \vdash B
+  }{
+    \Gamma, \Pi \vdash B
+  }(Cut)
 \]
 
 
@@ -784,7 +830,7 @@ For a Formal System, $\mathcal{S}$, a Formula, $A$, is a \emph{Syntactic
 is a Formal Proof (\S\ref{sec:formal_proof}) of $A$ from $\Gamma$ in
 $\mathcal{S}$:
 \[
-    \Gamma \vdash_{\mathcal{S}} A
+  \Gamma \vdash_{\mathcal{S}} A
 \]
 where $\vdash_{\mathcal{S}}$ is the \emph{Syntactic Consequence
   Relation} on $\mathcal{S}$.
@@ -806,7 +852,7 @@ A \emph{Metatheorem} is a Theorem proved within a Metatheory.
 A \emph{Judgement} is an inductively definable assertion in the
 Metatheory of a Logical System. That is, one that includes
 Extra-logical Symbols, namely that of Logical Consequence, $\vdash$,
-and commas used in Sequents (\S\ref{sec:sequent_notation}). In this
-way, Axioms are Judgements, and a Formal Proof expresses a Judgement
-with the Premises being a sequence of Judgements and the Conclusion
-also a Judgement.
+and commas used in Sequents (\S\ref{sec:sequent}). In this way, Axioms
+are Judgements, and a Formal Proof expresses a Judgement with the
+Premises being a sequence of Judgements and the Conclusion also a
+Judgement.

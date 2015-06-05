@@ -132,10 +132,11 @@ Formula.
 
 Inductive definition of Quantifier Rank function $qr$:
 \begin{itemize}
-\item $qr(\varphi) = 0$ if $\varphi$ is Atomic
-\item $qr(\varphi_1 \wedge \varphi_2) = qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
-\item $qr(\neg \varphi) = qr(\varphi)$
-\item $qr(\exists_x \varphi) = qr(\varphi) + 1$
+  \item $qr(\varphi) = 0$ if $\varphi$ is Atomic
+  \item $qr(\varphi_1 \wedge \varphi_2) =
+    qr(\varphi_1 \vee \varphi_2) = max(qr(\varphi_1),qr(\varphi_2))$
+  \item $qr(\neg \varphi) = qr(\varphi)$
+  \item $qr(\exists_x \varphi) = qr(\varphi) + 1$
 \end{itemize}
 
 
@@ -185,12 +186,12 @@ in addition to Predicate Symbols, not out of necessity.
 
 A Signature is defined as a triple:
 \[
-    (F,R,ar)
+  (F,R,ar)
 \]
 where $F$ is a Set of Function Symbols, and $R$ is a Set of Predicate
 Symbols and $ar$ is the Arity Function:
 \[
-    ar: F \cup R \rightarrow \mathbb{N}_0
+  ar: F \cup R \rightarrow \mathbb{N}_0
 \]
 If both $F$ and $R$ are Finite Sets, $\sigma$ is a \emph{Finite
   Signature}.
@@ -339,12 +340,12 @@ Terms can be defined Inductively from Constants, Variables, and
 Functions. Given Terms, $T$, Variables, $V$, n-ary Functions, $F = F_0
 \cup F_1 \cup F_2 \cup \cdots \cup F_n$, Constants, $C = F_0$:
 \[
-    V \subseteq T
+  V \subseteq T
 \]\[
-    C \subseteq T
+  C \subseteq T
 \]\[
-    \forall \tau_n=\{t_1,\cdots,t_n\} \in \mathcal{P}(T), \forall f
-    \in F_n \exists f(t_1,\cdots,t_n) \in T
+  \forall \tau_n=\{t_1,\cdots,t_n\} \in \mathcal{P}(T), \forall f
+  \in F_n \exists f(t_1,\cdots,t_n) \in T
 \]
 
 
@@ -578,10 +579,9 @@ $\textrm{1. }\varphi \rightarrow \psi$
 $\textrm{2. }\varphi$
 
 $\therefore\textrm{ }\psi$ \\
-where lines one and two are Premises and
-line three is the Conclusion (the symbol $\therefore$ is read as
-\emph{therefore}). This is written in Sequent Notation
-(\S\ref{sec:sequent_notation}) as:
+where lines one and two are Premises and line three is the Conclusion
+(the symbol $\therefore$ is read as \emph{therefore}). This is written
+in Sequent Notation (\S\ref{sec:sequent}) as:
 \[
   (\varphi \rightarrow \psi), \varphi \vdash \psi
 \]
@@ -748,13 +748,13 @@ Atomic Formulas are defined as:
 The Class $\mathcal{L}$ of Formulas is defined Inductively by the
 Formation Rules:
 \begin{enumerate}
-\item All Atomic Formulas are Formulas in $\mathcal{L}$
-\item If $\phi \in \mathcal{L}$ then $\neg \phi \in \mathcal{L}$
-\item If $\phi_1, \phi_2, \dots, \phi_n$ are Formulas in
-  $\mathcal{L}$, and $f \in \Omega_n$ is an $n$-ary Logical Operator,
-  then $f (\phi_1, \phi_2, \ldots, \phi_n) \in \mathcal{L}$
-\item If $x \in V$ and $\phi \in \mathcal{L}$, then $\exists x \phi
-  \in \mathcal{L}$ and $\forall x \phi \in \mathcal{L}$
+  \item All Atomic Formulas are Formulas in $\mathcal{L}$
+  \item If $\phi \in \mathcal{L}$ then $\neg \phi \in \mathcal{L}$
+  \item If $\phi_1, \phi_2, \dots, \phi_n$ are Formulas in
+    $\mathcal{L}$, and $f \in \Omega_n$ is an $n$-ary Logical Operator,
+    then $f (\phi_1, \phi_2, \ldots, \phi_n) \in \mathcal{L}$
+  \item If $x \in V$ and $\phi \in \mathcal{L}$, then $\exists x \phi
+    \in \mathcal{L}$ and $\forall x \phi \in \mathcal{L}$
 \end{enumerate}
 A First-order Formula that is a Substitution Instance
 (\S\ref{sec:substitution}) of a Tautological Propositional Formula
@@ -785,7 +785,9 @@ Components of a Directed Graph (\S\ref{sec:directed_graph}).
 \subsubsection{Universal Generalization}\label{sec:universal_generalization}
 
 \emph{Universal Generalization} is an Inference Rule:
-\[P(x) \vdash \forall x P(x)\]
+\[
+  P(x) \vdash \forall x P(x)
+\]
 
 
 
@@ -952,8 +954,12 @@ Modality (\S\ref{sec:doxastic_logic} Belief).
 An unary \emph{Primitive Modal Operator}, $\square$, defines a Dual
 Operator, $\Diamond$, such that the following analogues of de Morgan's
 Laws (\S\ref{sec:de_morgan}) hold:
-  \[\Diamond P \leftrightarrow \neg \square \neg P\]
-  \[\square P \leftrightarrow \neg \Diamond \neg P\]
+\[
+  \Diamond P \leftrightarrow \neg \square \neg P
+\]
+\[
+  \square P \leftrightarrow \neg \Diamond \neg P
+\]
 By the Curry-Howard Correspondence (\S\ref{sec:curry_howard}), Modal
 Logic corresponds to Monads (\S\ref{sec:monad}).
 
@@ -988,21 +994,22 @@ Adding further Axioms gives rise to a nested hierarchy of Systems of
 \emph{Normal Modal Logic}:
 
 \begin{itemize}
-\item $K := \mathbf{K} + \mathbf{N}$
-\item $T := K + \mathbf{T}$
-\item $S4 := T + \mathbf{4}$
-\item $S5 := S4 + \mathbf{5}$
-\item $D := K + \mathbf{D}$
+  \item $K := \mathbf{K} + \mathbf{N}$
+  \item $T := K + \mathbf{T}$
+  \item $S4 := T + \mathbf{4}$
+  \item $S5 := S4 + \mathbf{5}$
+  \item $D := K + \mathbf{D}$
 \end{itemize} \hfill \\
 where:
 
 \begin{itemize}
-\item $\Diamond$, unary operator for \emph{Possibly}
-\item $\mathbf{T}$, \emph{Reflexivity Axiom}: $\square p \rightarrow p$
-\item $\mathbf{4}$: $\square p \rightarrow \square \square p$
-\item $\mathbf{B}$: $p \rightarrow \square \Diamond p$
-\item $\mathbf{D}$: $\square p \rightarrow \Diamond p$
-\item $\mathbf{5}$: $\Diamond p \rightarrow \square \Diamond p$
+  \item $\Diamond$, unary operator for \emph{Possibly}
+  \item $\mathbf{T}$, \emph{Reflexivity Axiom}:
+    $\square p \rightarrow p$
+  \item $\mathbf{4}$: $\square p \rightarrow \square \square p$
+  \item $\mathbf{B}$: $p \rightarrow \square \Diamond p$
+  \item $\mathbf{D}$: $\square p \rightarrow \Diamond p$
+  \item $\mathbf{5}$: $\Diamond p \rightarrow \square \Diamond p$
 \end{itemize}
 
 
@@ -1012,12 +1019,12 @@ where:
 \emph{Doxastic Logic} uses the unary Modal Operator, $\mathcal{B}$, to
 denote \emph{Belief}. Example:
 \[
-    \mathcal{B} x
+  \mathcal{B} x
 \]
 has the meaning ``It is Believed that $x$ is the case''. A set of
 Beliefs is usually denoted:
 \[
-    \mathbb{B}: \{ b_1, b_2, \ldots, b_n \}
+  \mathbb{B}: \{ b_1, b_2, \ldots, b_n \}
 \]
 
 
@@ -1026,15 +1033,25 @@ Beliefs is usually denoted:
 
 \emph{Standard Deontic Logic} ($\mathbf{SDL}$) adds the following
 Axioms to Propositional Logic (\S\ref{sec:propositional_logic}):
-  \[O(A \rightarrow B) \rightarrow (OA \rightarrow OB)\]
-  \[PA \rightarrow \neg O \neg A\]
+\[
+  O(A \rightarrow B) \rightarrow (OA \rightarrow OB)
+\]
+\[
+  PA \rightarrow \neg O \neg A
+\]
 with Primitive Operators $O$ (\emph{Obligatory}) and $P$
 (\emph{Permissible}). \emph{Forbidden} is defined as:
-  \[FA = O \neg A\]
+\[
+  FA = O \neg A
+\]
 or:
-  \[FA = \neg P A\]
+\[
+  FA = \neg P A
+\]
 Deontic Logic may be extended by Alethic Operators with the Axiom:
-  \[OA \rightarrow \Diamond A\]
+\[
+  OA \rightarrow \Diamond A
+\]
 which has the meaning ``ought implies can''.
 
 
@@ -1079,9 +1096,13 @@ referring to \emph{Time}.
 \subsubsection{Dynamic Logic}\label{sec:dynamic_logic}
 
 \emph{Dynamic Logic} adds Terms denoting \emph{Actions}:
-\[[a]p\]
+\[
+  [a]p
+\]
 where after performing Action $a$ is necessitated that $p$ holds and
-\[\langle a \rangle p\]
+\[
+  \langle a \rangle p
+\]
 where after performing Action $a$ it is possible that $p$ holds.
 
 
@@ -1129,17 +1150,25 @@ Rules:
 \begin{description}
 
 \item [Tertium non datur] (\emph{Law of excluded middle})
-    \[\vdash(p \vee \neg p)\]
+  \[
+    \vdash(p \vee \neg p)
+  \]
 
 \item [Double Negation]
-    \[p \vdash \neg\neg p\]
+  \[
+    p \vdash \neg\neg p
+  \]
 
 \item [Law of Non-contradiction]
-    \[\vdash \neg(p \wedge \neg p)\]
+  \[
+    \vdash \neg(p \wedge \neg p)
+  \]
 
 \item [Ex falso quodlibet] (\emph{Principle of explosion},
   \emph{Principle of Psuedo-Scotus})
-    \[\vdash 0 \rightarrow p\]
+  \[
+    \vdash 0 \rightarrow p
+  \]
 
 %FIXME finish properties and rules
 
@@ -1185,11 +1214,11 @@ Valuation on a Heyting Algebra.
 
 Functionally Complete Sets of Operators are:
 \[
-    \{ \vee, \leftrightarrow, \bot \}
+  \{ \vee, \leftrightarrow, \bot \}
 \]
 and:
 \[
-    \{ \vee, \leftrightarrow, \neg \}
+  \{ \vee, \leftrightarrow, \neg \}
 \]
 
 
@@ -1199,7 +1228,7 @@ and:
 Proofs in a Theory (\S\ref{sec:formal_theory}), $\mathcal{T}$, based
 on Intuitionistic Logic have the \emph{Existence Property}:
 \[
-    (\exists x)A(x) \in \mathcal{T} \rightarrow (\exists t)A(t)
+  (\exists x)A(x) \in \mathcal{T} \rightarrow (\exists t)A(t)
 \]
 where $A(x)$ has $x$ as the only Free Variable and $t$ is a Term.
 
@@ -1209,7 +1238,8 @@ where $A(x)$ has $x$ as the only Free Variable and $t$ is a Term.
 
 \emph{Disjunction Property}:
 \[
-    A \vee B \in \mathcal{T} \rightarrow A \in \mathcal{T} \vee B \in \mathcal{T}
+  A \vee B \in \mathcal{T}
+  \rightarrow A \in \mathcal{T} \vee B \in \mathcal{T}
 \]
 
 
@@ -1358,6 +1388,12 @@ Graham Priest
 
 \emph{Necessarily True}
 
+\emph{Semantic Theory} (\S\ref{sec:semantic_truth})
+
+\emph{Correspondence Theory} (\S\ref{sec:correspondence_truth})
+
+\emph{Deflationary Theory} (\S\ref{sec:deflationary_truth})
+
 
 
 \subsubsection{Truth Value}\label{sec:truth_value}
@@ -1372,9 +1408,9 @@ In Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type}),
 \subsubsection{Truth-bearer}\label{sec:truth_bearer}
 
 \begin{itemize}
-\item Proposition
-\item Type-token
-\item Judgement
+  \item Proposition
+  \item Type-token
+  \item Judgement
 \end{itemize}
 
 
@@ -1460,16 +1496,16 @@ The Premise and Conclusion are \emph{Truth-bearers}
 
 \begin{description}
 \item [Coherent] \hfill\\
-    \S\ref{sec:paraconsistent_inference}
-    \emph{Paraconsistent Inference}
+  \S\ref{sec:paraconsistent_inference}
+  \emph{Paraconsistent Inference}
 
 \item [Consistent] \hfill\\
-    \S\ref{sec:deductive_inference} \emph{Deductive Inference}
+  \S\ref{sec:deductive_inference} \emph{Deductive Inference}
 
 \item [Non-monotonic] \hfill\\
-    \S\ref{sec:inductive_inference} \emph{Inductive Inference}
+  \S\ref{sec:inductive_inference} \emph{Inductive Inference}
 
-    \S\ref{sec:abductive_inference} \emph{Abductive Inference}
+  \S\ref{sec:abductive_inference} \emph{Abductive Inference}
 
 \end{description}
 
@@ -1484,12 +1520,12 @@ The Premise and Conclusion are \emph{Truth-bearers}
 
 \emph{Logical Consequence} (\emph{Entailment}):
 \[
-    S \in \mathbf{L}, D \subset \mathbf{L}, S \leftrightarrow D
+  S \in \mathbf{L}, D \subset \mathbf{L}, S \leftrightarrow D
 \]
 \begin{itemize}
-    \item 1. Logical Form (\S\ref{sec:logical_form})
-    \item 2. A Priori
-    \item 3. Modality (\S\ref{sec:modal_logic})
+  \item 1. Logical Form (\S\ref{sec:logical_form})
+  \item 2. A Priori
+  \item 3. Modality (\S\ref{sec:modal_logic})
 \end{itemize}
 
 A Premise \emph{Logically Entails} a Conclusion if and only if the
@@ -1529,7 +1565,7 @@ is required to be \emph{Coherent} (\emph{Absolutely Consistent} or
 
 A Consequence Relation $\vDash$ is \emph{Explosive} when:
 \[
-    \forall A, B. \{A, \neg A\} \vDash B
+  \forall A, B. \{A, \neg A\} \vDash B
 \]
 which is the case with \emph{Consistent Consequence Relations}.
 
