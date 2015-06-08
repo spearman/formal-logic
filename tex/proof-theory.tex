@@ -96,7 +96,7 @@ statements \emph{about} the System, and Axioms are statements
 \emph{in} the System.
 
 Axioms may be divided into two kinds: \emph{Logical Axioms} of a
-tautological sort, and \emph{Non-logical Axioms}, hereafter referred
+Tautological sort, and \emph{Non-logical Axioms}, hereafter referred
 to as \emph{Postulates}, that play the role of assumptions: defining
 properties of the domain of the Theory (\S\ref{sec:formal_theory}) in
 question.
@@ -229,15 +229,18 @@ Formalization of the BHK Interpretation of Intuitionistic Logic
 \section{Formal Theory}\label{sec:formal_theory}
 % ====================================================================
 
-For a Formal Language (\S\ref{sec:formal_language}), $L$, a Formal
-Theory, $\mathcal{T}$, is a Subset of a Conceptual Class of
-\emph{Elementary Expressions} (\emph{Elementary Statements} or
-\emph{Well-formed Formulas} \S\ref{sec:formula}), $\mathcal{E}$,
-consisting of \emph{Elementary Theorems} considered to be True. In a
-\emph{Deductive Theory} (\S\ref{sec:deductive_theory}), $\mathcal{T}$
-is an \emph{Inductive Class} such that some of the Elementary Theorems
-are taken to be \emph{Axioms} and any Expressions Deducible by those
-Axioms are also Elementary Theorems in $\mathcal{T}$.
+A \emph{Formal Theory} is a Set of Sentences (\S\ref{sec:sentence}) of
+a Formal Language (\S\ref{sec:formal_language}).
+
+For a Formal Language, $L$, a Formal Theory, $\mathcal{T}$, is a
+Subset of a Conceptual Class of \emph{Elementary Expressions}
+(\emph{Elementary Statements} or \emph{Well-formed Formulas}
+\S\ref{sec:formula}), $\mathcal{E}$, consisting of \emph{Elementary
+  Theorems} considered to be True. In a \emph{Deductive Theory}
+(\S\ref{sec:deductive_theory}), $\mathcal{T}$ is an \emph{Inductive
+  Class} such that some of the Elementary Theorems are taken to be
+\emph{Axioms} and any Expressions Deducible by those Axioms are also
+Elementary Theorems in $\mathcal{T}$.
 
 A Theory is \emph{Satisfiable} (\S\ref{sec:satisfiability}) if there
 exists a Model (\S\ref{sec:structure}) for that Theory.
@@ -246,7 +249,14 @@ A Theory is \emph{Categorical} (\S\ref{sec:categoricity}) if it has
 just one Model up to Isomorphism.
 
 A Theory $\mathcal{T}$ is \emph{Sound} (\S\ref{sec:soundness}) when
-every Theorem in $\mathcal{T}$ is Valid (\S\ref{sec:validity}).
+every Theorem in $\mathcal{T}$ is Valid (\S\ref{sec:validity}). The
+Soundness Property for Propositional Calculus
+(\S\ref{sec:propositional_calculus}) can be expressed in terms of the
+Syntactic (\S\ref{sec:syntactic_consequence}) and Semantic
+(\S\ref{sec:semantic_consequence}) Consequence Relations:
+\[
+  \Gamma \vdash \varphi \Rightarrow \Gamma \vDash \varphi
+\]
 
 A Theory is \emph{Effective} when it is possible to Effectively
 (\S\ref{sec:effective_method}) determine whether a Deduction is Valid
@@ -308,9 +318,10 @@ A Non-trivial Theory is \emph{Consistent} if it satisfies the
 Implies Proof of all other Formulas. Therefore, a Consistent Theory must
 be free of contradictions.
 
-By G\"odels Completeness Theorem, a First-order Theory is Consistent
-if and only if it is Satisfiable. Higher-order Logics may allow
-Syntactically Consistent Theories that are not Satisfiable.
+By G\"odels Completeness Theorem (\S\ref{sec:completeness}), a
+First-order Theory is Consistent if and only if it is Satisfiable.
+Higher-order Logics may allow Syntactically Consistent Theories that
+are not Satisfiable.
 
 The Conservative Extension (\S\ref{sec:conservative_extension}) of a
 Consistent Theory is Consistent.
@@ -331,6 +342,19 @@ A Consistent (\S\ref{sec:consistency}) Theory is said to be
 \emph{Complete} if for every Sentence in the Language of that Theory,
 the Theory contains either that Sentence or its Negation. Such a Set
 of Sentences is a \emph{Maximal Consistent Set}.
+
+For a Theory $\mathcal{T}$ in Propositional
+(\S\ref{sec:propositional_logic}) or First-order Logic
+(\S\ref{sec:firstorder_logic}), Completeness may be defined as follows
+with the Semantic (\S\ref{sec:semantic_consequence}) and Syntactic
+(\S\ref{sec:syntactic_consequence}) Consequence Relations on a Set of
+Sentences $\Gamma$ and Formulas $\varphi \in \mathcal{T}$:
+\[
+  \Gamma \vDash \varphi \Rightarrow \Gamma \vdash \varphi
+\]
+
+In Propositional and First-order Logic, Completeness and Soundness
+(\S\ref{sec:soundness}) are equivalent Properties.
 
 
 
@@ -833,7 +857,8 @@ $\mathcal{S}$:
   \Gamma \vdash_{\mathcal{S}} A
 \]
 where $\vdash_{\mathcal{S}}$ is the \emph{Syntactic Consequence
-  Relation} on $\mathcal{S}$.
+  Relation} on $\mathcal{S}$. This expresses that $A$ is
+\emph{Provable} from $\Gamma$.
 
 
 
