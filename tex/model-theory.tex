@@ -73,19 +73,20 @@ Cardinality of the Domain, $|A|$).
 
 \subsubsection{Sort}\label{sec:sort}
 
-\emph{One-sorted} \emph{Many-sorted}
+\emph{One-sorted}
+
+A \emph{Many-sorted} Structure allows an arbitrary number of Domains.
+
+Many-sorted Signature (\S\ref{sec:manysorted_signature})
+
+Many-sorted Logic (\S\ref{sec:manysorted_logic})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Interpretation}\label{sec:interpretation}
+\subsection{Interpretation Function}
+\label{sec:interpretation_function}
 % --------------------------------------------------------------------
-
-An \emph{Interpretation} of a Formal Language is an assignment of
-\emph{Meanings} (\S\ref{sec:meaning}) to Symbols and
-\emph{Truth-conditions} (\S\ref{sec:truth_condition}) to Sentences;
-that is, the Extensions (\S\ref{sec:extension}) of Symbols and
-Sentences.
 
 The \emph{Interpretation Function}, $I$, in a Mathematical Structure,
 $\mathcal{A} = (A, \sigma, I)$, maps Predicate and Function Symbols,
@@ -95,19 +96,89 @@ on the Domain, respectively:
 $I (\prescript{n}{}{f}) = f^{\mathcal{A}} : A^n \rightarrow A$
 
 $I (\prescript{m}{}{R}) = R^{\mathcal{A}} : A^m \rightarrow \{true,
-false\}$
-\\ Thus the Interpretation Function is the Extension
-(\S\ref{sec:extension}) of the Symbols and Formulas of a Formal
+false\}$ \\
+Thus the Interpretation Function gives the Extension of
+the Non-logical Symbols (\S\ref{sec:nonlogical_constant}) of a Formal
 Language.
 
 An Interpretation that assigns the Value $true$ to a Sentence or
 Theory is called a \emph{Model} (\S\ref{sec:model}) of that Sentence
-or Theory.
+or Theory, and the Sentence is said to be \emph{Satisfied}
+(\S\ref{sec:satisfaction}) by that assignment. A Sentence is Valid
+(\S\ref{sec:validity}) if it is Satisfied by every Interpretation (a
+Tautology \S\ref{sec:tautology}) and a Sentence is Satisfiable (or
+Consistent \S\ref{sec:consistency}) if it is Satisfied by at least one
+Interpretation.
 
-An Interpretation of First-order Logic Maps Terms to Elements in the
-Domain and Propositions to Truth-values.
+If a Sentence $\varphi$ is Satisfied by every Interpretation that
+Satisfies another Sentence $\psi$, then $\varphi$ is a Semantic
+Consequence (\S\ref{sec:semantic_consequence}) of $\psi$:
+\[
+  \psi \vDash \varphi
+\]
+
+An Interpretation Function of Propositional Logic maps Propositional
+Variables to Truth Values and is called a \emph{Truth Assignment}.
+
+An Interpretation Function of First-order Logic maps Function and
+Predicate Symbols to Functional Predicates and Predicates on the
+Domain and by Induction assigns Terms to Elements in the Domain.
 
 \emph{Stratification}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Valuation}\label{sec:valuation}
+% --------------------------------------------------------------------
+
+A \emph{Valuation} is the assignment of a Truth-value
+(\S\ref{sec:truth_value}) to each Sentence (\S\ref{sec:sentence}) in a
+Formal Language that follows a \emph{Truth Schema} (or \emph{T-schema}
+\S\ref{sec:t_schema}).
+
+In Propositional Logic a Valuation results from the Truth Assignment
+(Interpretation Function \S\ref{sec:interpretation_function}) giving
+Truth-values to each Propositional Variable which induces Truth-values
+for all Propositional Formulas according to the Truth Functional
+Interpretation of the Logical Constants of the Language.
+
+In First-order Logic a Structure gives the Domain of Discourse over
+which Quantifiers Range and an Interpretation Function for Function
+and Predicate Symbols results in unique assignment of Truth-values to
+all Sentences of the Language.
+
+A Valuation $v : L \rightarrow \{true, false\}$ on a Formula $\varphi
+\in L$ of a Language $L$ may be denoted $v(\varphi) = [[\varphi]]_v$.
+
+
+
+\subsubsection{Supervaluation}\label{sec:supervaluation}
+
+A \emph{Supervaluation} is a Valuation that does not assign
+Truth-values to Vacuous Truths.
+
+A Supervaluation $V(\varphi)$ is Undefined if there are exactly two
+Valuations $v$ and $v'$ such that $v(\varphi) = true$ and $v'(\varphi)
+= false$.
+
+Valid Sentences still have Truth-values even if the constituent Atomic
+Formulas do not and under Supervaluationism may be called
+\emph{Supertrue}. That is, a Supervaluation $V(\varphi)$ is Supertrue
+if and only if $v(\varphi) = true$ for every Valuation $v$. The dual
+notion of \emph{Superfalse} is defined for a Supervaluation $V(\psi)$
+such that $v(\psi) = false$ for every Valuation $v$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Parameter}\label{sec:parameter}
+% --------------------------------------------------------------------
+
+For a $\sigma$-structure $\mathcal{A}$ with Elements $\bar{a}$ for
+which Constant Symbols do not already exist, the addition of Constant
+Symbols $\bar{c}$ gives a new Signature $\sigma(\bar{c})$ and
+$\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
 
 
 
@@ -271,44 +342,6 @@ Structures where the Signature is $\sigma$
 
 
 % --------------------------------------------------------------------
-\subsection{Valuation}\label{sec:valuation}
-% --------------------------------------------------------------------
-
-A \emph{Valuation} (or \emph{Truth Assignment}) is the assignment of a
-Truth-value (\S\ref{sec:truth_value}) to each Sentence
-(\S\ref{sec:sentence}) in the Language of a given Structure
-(\S\ref{sec:structure}) via the Structure's Interpretation Function
-(\S\ref{sec:interpretation}).
-
-For a Propositional Calculus (\S\ref{sec:propositional_logic}), this
-is the assignment of Truth-values to each Propositional Variable
-(Nullary Predicate), giving a unique Truth-value to each Propositional
-Formula.
-
-A Valuation $v : L \rightarrow \{true, false\}$ on a Formula $\varphi \in
-L$ of a Language $L$ may be denoted $v(\varphi) = [[\varphi]]_v$.
-
-
-
-\subsubsection{T-schema}\label{sec:t_schema}
-
-\emph{T-schema} (or \emph{Equivalence Schema}) is used to give an
-Inductive definition of Truth.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Parameter}\label{sec:parameter}
-% --------------------------------------------------------------------
-
-For a $\sigma$-structure $\mathcal{A}$ with Elements $\bar{a}$ for
-which Constant Symbols do not already exist, the addition of Constant
-Symbols $\bar{c}$ gives a new Signature $\sigma(\bar{c})$ and
-$\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
-
-
-
-% --------------------------------------------------------------------
 \subsection{Interpretability}\label{sec:interpretability}
 % --------------------------------------------------------------------
 
@@ -342,6 +375,9 @@ being Constants naming Elements of $A = dom(\mathcal{A})$. The
 Structure $\mathcal{A}$ is a \emph{Model} (\S\ref{sec:model}) for each
 of the Formulas in the Satisfaction Relation.
 
+The Satisfaction Relation is defined Inductively using T-schema
+(\S\ref{sec:t_schema}).
+
 If $\varphi(\bar{x})$ is a Formula with Free Variables $\bar{x}$, and
 $A$ is a Structure with Elements $\bar{a}$ that gives a Closed Formula
 under Substitution (\S\ref{sec:substitution}), then:
@@ -349,8 +385,13 @@ under Substitution (\S\ref{sec:substitution}), then:
   \mathcal{A} \vDash \varphi(\bar{x})[\bar{a}]
 \]
 
-The Satisfaction Relation is defined Inductively using T-schema
-(\S\ref{sec:t_schema}).
+In First-order Logic, Universally Quantified Sentences such as
+$\forall x \varphi (x)$ are Satisfied when every Substitution Instance
+by an Element in $dom(\mathcal{A})$ is Satisfied, and Existentially
+Quantified Sentences such as $\exists x \psi (x)$ are Satisfied when
+there is at least one Substitution Instance of an Element from
+$dom(\mathcal{A}$ that Satisfies $\psi$.
+
 
 
 
@@ -540,7 +581,15 @@ A Model is an Analytic example of a Synthetic Theory
 \subsection{Standard Model}\label{sec:standard_model}
 % --------------------------------------------------------------------
 
-\emph{Standard Model} (or \emph{Intended Interpretation})
+\emph{Standard Model}
+
+Intended Interpretation (\S\ref{sec:intended_interpretation})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Non-standard Model}\label{sec:nonstandard_model}
+% --------------------------------------------------------------------
 
 
 
@@ -574,11 +623,11 @@ be Categorical.
 
 For a Cardinal (\S\ref{sec:cardinal_number}) $\kappa$, a Theory $T$ is
 \emph{$\kappa$-Categorical} if any two Models of $T$ of Cardinality
-$\kappa$ are Isomorphic to one another. By \emph{Morley's Categoricity
-  Theorem}\cite{morley65} if a First-order Theory in a Countable
-Language is Categorical in an Uncountable Cardinal $\kappa$, then it
-is Categorical in all Uncountable Cardinalities. There are three
-possible cases for $\kappa$-Categoricity:
+$\kappa$ are Isomorphic to each another. By \emph{Morley's
+  Categoricity Theorem}\cite{morley65} if a First-order Theory in a
+Countable Language is Categorical in an Uncountable Cardinal $\kappa$,
+then it is Categorical in all Uncountable Cardinalities. There are
+three possible cases for $\kappa$-Categoricity:
 \begin{description}
 \item[Totally Categorical]: $\kappa$-Categorical for all Infinite
   Cardinals
@@ -658,8 +707,20 @@ $\mathcal{T}$ can be uniquiely Embedded in a Model of $\mathcal{T}^*$.
 
 
 % --------------------------------------------------------------------
-\subsection{L\"owenheim-Skolem Theorem}\label{sec:lowenheim_skolem}
+\subsection{L\"owenheim Number}\label{sec:lowenheim_number}
 % --------------------------------------------------------------------
+
+smallest Cardinal $\kappa$ such that for a Logical System
+$\mathcal{L}$ such that if an arbitrary Sentence of $\mathcal{L}$ has
+a Model, the Sentence has a Model no larger than $\kappa$.
+
+Non-constructive Proof
+
+
+
+\subsubsection{L\"owenheim-Skolem Theorem}\label{sec:lowenheim_skolem}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Model Existence Theorem}\label{sec:model_existence}

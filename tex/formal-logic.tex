@@ -174,15 +174,11 @@ Constants (\S\ref{sec:nonlogical_constant}) of the Language of a
 Logical System as a Set of Function and Predicate Symbols that
 characterize it together with an \emph{Arity Function} ``$ar$'' that
 maps each Function and Predicate Symbol $s$ to a corresponding Natural
-Number $n$ which is the Arity of $s$: $n = ar(s)$. A Structure
-(\S\ref{sec:structure}) with Signature $\sigma$ may be called a
-\emph{$\sigma$-structure}.
+Number $n$ which is the Arity of $s$: $n = ar(s)$.
 
-Technically the Function Symbols, which are Interpreted
-(\S\ref{sec:interpretation}) as Functional Predicates
-(\S\ref{sec:functional_predicate}), could also be Realized as
-Relations, and thus it is only for convenience that they are included
-in addition to Predicate Symbols, not out of necessity.
+The corresponding Formal Language is the Set of
+\emph{$\sigma$-formulas} and a Structure (\S\ref{sec:structure}) with
+Signature $\sigma$ may be called a \emph{$\sigma$-structure}.
 
 A Signature is defined as a triple:
 \[
@@ -196,12 +192,18 @@ Symbols and $ar$ is the Arity Function:
 If both $F$ and $R$ are Finite Sets, $\sigma$ is a \emph{Finite
   Signature}.
 
-A Nullary Function Symbol is a \emph{Constant Symbol} and a Nullary
-Predicate Symbol is a \emph{Propositional Variable}
-(\S\ref{sec:propositional_logic}). A Function or Predicate Symbol $s$
-of Arity $n$ is sometimes denoted $\prescript{n}{}{s}$. Allowing for
-\emph{Infinitary Operators} leads to a Theory of Complete Lattices
-(\S\ref{sec:complete_lattice}).
+Technically the Function Symbols, which are Interpreted
+(\S\ref{sec:interpretation_function}) as Functional Predicates
+(\S\ref{sec:functional_predicate}), could also be Realized as
+Relations, and thus it is only for convenience that they are included
+in addition to Predicate Symbols, not out of necessity.
+
+A Nullary Function Symbol is a \emph{Constant Symbol} (represents a
+Constant Element) and a Nullary Predicate Symbol is a
+\emph{Propositional Variable} (represents a Constant Truth-value). A
+Function or Predicate Symbol $s$ of Arity $n$ is sometimes denoted
+$\prescript{n}{}{s}$. Allowing for \emph{Infinitary Operators} leads
+to a Theory of Complete Lattices (\S\ref{sec:complete_lattice}).
 
 A Signature with no Predicate Symbols is an \emph{Algebraic
   Signature}, and the associated Structure an Algebra
@@ -220,6 +222,20 @@ Arity of the Operators.
 A \emph{Reduct} of a Structure is created by omitting certain Function
 and Predicate Symbols from the Signature; the converse is
 \emph{Expansion} (\S\ref{sec:reduct_expansion}).
+
+
+
+\paragraph{Many-sorted Signature}\label{sec:manysorted_signature}
+\hfill \\
+
+A \emph{Many-sorted Signature} is given as:
+\[
+  (S, \sigma, type)
+\]
+which adds to a Signature $\sigma$ a Set of Sorts (\S\ref{sec:sort}),
+$S$, and a Function $type$ that maps each Symbol of $\sigma$ to a Type
+(\S\ref{sec:type}) over $S$. The Arity Function of $\sigma$ is also
+modified to give Tuples of Sorts rather than Natural Numbers.
 
 
 
@@ -254,11 +270,6 @@ $\sigma^+$-structure $\mathcal{A}$ then $\mathcal{A}$ is called the
 not necessarily unique. The notation for an Expansion by certain
 additional Function or Predicate Symbols, $f, g, h$, is denoted
 $\mathcal{A} = (\mathcal{B}, f, g, h)$.
-
-
-
-\paragraph{Many-sorted Signature}\label{sec:many_sorted_signature}
-\hfill \\
 
 
 
@@ -528,15 +539,17 @@ if all the Variables of $t$ are in $dom(\sigma)$.
 
 \emph{Propositional Logic} (or \emph{Sentential} or \emph{Statement
   Logic}) studies the Truth-value of \emph{Propositional Formulas}
-built up from Atomic Formulas (\S\ref{sec:atomic_formula}) and Logical
-Connectives (\S\ref{sec:logical_connective}).
+(\S\ref{sec:propositional_formula}) built up from Atomic Formulas
+(\S\ref{sec:atomic_formula}) and Logical Connectives
+(\S\ref{sec:logical_connective}).
 
 The Language of Propositional Logic therefore consists of
 \emph{Propositional Variables} (or \emph{Sentential Variables}), and a
 Functionally Complete set of Logical Connectives. A Propositional
 Variable that has been given a Truth Valuation (\S\ref{sec:valuation})
-is sometimes called a \emph{Propositional Constant}. Propositional
-Variables act as the Atomic Formulas of Propositional Logic.
+by a Truth Assignment (\S\ref{sec:interpretation}) is sometimes called
+a \emph{Propositional Constant}. Propositional Variables act as the
+Atomic Formulas of Propositional Logic.
 
 A Propositional Formula is equivalent to a Boolean Term
 (\S\ref{sec:boolean_algebra}). The Formal System for Propositional
@@ -655,7 +668,7 @@ Interpretation.
 
 
 
-\subsubsection{Tautology}\label{sec:tautology} \hfill \\
+\subsubsection{Tautology}\label{sec:tautology}
 
 A Propositional Formula that is \emph{Valid} (\S\ref{sec:validity}) is
 one that is True under every possible Interpretation
@@ -728,7 +741,7 @@ Logical Systems with Formulas containing Variables
 (\S\ref{sec:firstorder_logic}), Second-order Logic
 (\S\ref{sec:secondorder_logic}), Higher-order Logic
 (\S\ref{sec:higherorder_logic}), Many-sorted Logic
-(\S\ref{sec:many_sorted_logic}), and Infinitary Logic
+(\S\ref{sec:manysorted_logic}), and Infinitary Logic
 (\S\ref{sec:infinitary_logic}). This is in contrast to Logical Systems
 without Variables or Quantifiers such as Propositional Logic
 (\S\ref{sec:propositional_logic}) and Zeroth-order Logic
@@ -804,6 +817,12 @@ A First-order Formula that is a Substitution Instance
 (\S\ref{sec:substitution}) of a Tautological Propositional Formula
 (\S\ref{sec:tautology}) is a \emph{First-order Tautology}.
 
+Certain Equivalences for First-order Logical Systems fail to hold if
+Empty Domains (\S\ref{sec:domain}) are allowed and Function Symbols
+are always Interpreted (\S\ref{sec:interpretation_function}) with
+assignment of Well-defined (\S\ref{sec:well_defined}) Total Functions
+to the Symbols.
+
 First-order Logic may be used as the System of Logic for Deductive
 Systems with Finite Domains that are Sound (\S\ref{sec:soundness}) and
 Complete (\S\ref{sec:completeness}), but for Domains of Infinite
@@ -835,12 +854,12 @@ Components of a Directed Graph (\S\ref{sec:directed_graph}).
 
 
 
-\subsubsection{First-order Logic with Equality}\label{sec:firstorder_equality}
+\subsubsection{First-order Logic with Equality}
+\label{sec:firstorder_equality}
 
-Including a primitive Logical Symbol for Equality, $=$, interpreted
-as the real Equality Relation between members of the Domain such that
-``two'' given Elements are the same Element. This adds the following
-Axioms:
+Including a primitive Logical Symbol for Equality, $=$, Interpreted as
+the real Equality Relation between members of the Domain such that
+``two'' given Elements are the same Element adds the following Axioms:
 
 \begin{enumerate}
 \item \textbf{Reflexivity}: $\forall x, x=x$
@@ -864,13 +883,14 @@ equality Theorems.
 
 An alternative convention to First-order Logic with Equality
 (\S\ref{sec:firstorder_equality}) is to consider the Equality Relation
-to be a Non-logical Symbol, included as a part of the Signiature of a
-particular Theory instead of as a Logical Operator. This allows two
-distinct individuals to be considered equal by an arbitraray
-Equivalence Relation. If this convention is used, but no distinct
-individuals, $a$ and $b$ satisfy $a=b$ then the Interpretation is
-termed a \emph{Normal Model} (that is equivalent to a First-order
-Logic with Equality).
+to be a Non-logical Symbol of the Signiature of a particular Logical
+System. This allows two distinct individuals to be considered equal by
+an arbitraray Equivalence Relation. If this convention is used, but no
+distinct individuals (\S\ref{sec:discernibility}), $a$ and $b$ satisfy
+$a=b$ then the Interpretation is termed a \emph{Normal Model} (that is
+equivalent to a First-order Logic with Equality). In such a case the
+Axioms related to Equality automatically hold and don't need to be
+included explicitly.
 
 
 
@@ -889,7 +909,8 @@ Decidable.
 
 
 
-\subsubsection{Many-sorted First-order Logic}\label{sec:many_sorted_logic}
+\subsubsection{Many-sorted First-order Logic}
+\label{sec:manysorted_logic}
 
 \emph{Many-sorted First-order Logic} allows Variables to be Quantified
 over different Domains, thus giving Variables different \emph{Sorts}
@@ -897,6 +918,8 @@ over different Domains, thus giving Variables different \emph{Sorts}
 Logic can be reduced to Single-sorted First-order Logic. This can be
 accomplished by adding Unary Predicates to a First-order Logic that
 Partition (\S\ref{sec:partition}) the Domain.
+
+Many-sorted Signature (\S\ref{sec:manysorted_signature})
 
 
 
@@ -934,6 +957,10 @@ represented by $k+1$-ary Predicates.\cite{shapiro00} Quantification
 over Functions allows the creation of the Analytic Hierarchy
 (\S\ref{sec:analytic_hierarchy}).
 
+Because the Powerset Operation (\S\ref{sec:powerset}) is Definable in
+Second-order Logic, Second-order Logic can simulate Higher-order
+Logics (\S\ref{sec:higherorder_logic}).
+
 
 
 \subsubsection{Principal of Bivalence}\label{sec:bivalence_principal}
@@ -967,6 +994,24 @@ Unary Predicates (Sets).
 \emph{Higher-order Logic} is the Union of First-, Second-, Third-,
 $\ldots$ order Logic and allows Quantification over arbitrarily deep
 nested Sets.
+
+\textbf{Standard Semantics} (Full Semantics): Quantifiers range over all
+possible Objects of a given Type
+
+\textbf{Henkin Semantics}: Each Higher-order Type has its own Domain,
+equivalent to Many-sorted First-order Logic
+(\S\ref{sec:manysorted_logic})
+
+Stronger than First-order Logic, e.g. admits Categorical
+Axiomatization (\S\ref{sec:categoricity}) of the Natural Numbers or
+the Real Numbers
+
+Can be simulated in Second-order Logic (\S\ref{sec:secondorder_logic})
+through use of the Powerset Operation as it is Definable in
+Second-order Logic
+
+Unifiability (\S\ref{sec:unification}) is Undecidable for
+Type-theoretic (\S\ref{sec:intuitionistic_type}) Third-order Logic.
 
 
 
@@ -1369,6 +1414,10 @@ Alan Turing's PhD Thesis \cite{turing38}
 \subsection{Categorical Logic}\label{sec:categorical_logic}
 % --------------------------------------------------------------------
 
+Many-sorted Logic, Type Theory, Categorical Logic
+
+
+
 % --------------------------------------------------------------------
 \subsection{Hoare Logic}\label{sec:hoare_logic}
 % --------------------------------------------------------------------
@@ -1475,6 +1524,18 @@ A Truth-value is the Extension (\S\ref{sec:extension}) of a Sentence
 
 
 \paragraph{Vacuous Truth}\label{sec:vacuous_truth}
+\hfill \\
+
+A \emph{Vacuous Truth} is a Conditional Statement with a False
+Antecedent (\S\ref{sec:antecedent}).
+
+A Sentence (\S\ref{sec:sentence}) that Asserts (\S\ref{sec:assertion})
+all Members of the Empty Set have a certain Property
+(\S\ref{sec:property}) is also a Vacuous Truth and may be also be
+reduced to a Conditional Statement with a False Antecedent.
+
+Used as Base Case in Proofs by Mathematical Induction
+(\S\ref{sec:mathematical_induction})
 
 
 
@@ -1531,10 +1592,10 @@ True.
 
 A Formal System (\S\ref{sec:formal_system}) is Sound if and only if
 its Inference Rules (\S\ref{sec:inference_rule}) Prove only Valid
-Formulas under Semantic Interpretation. This usually amounts to the
-simple requirement that the Axioms are Valid and the Inference Rules
-preserve Validity, i.e. any Theorem Provable in the System is Valid,
-thus all Provable Sentences are True.
+Formulas under Semantic Interpretation (\S\ref{sec:interpretation}).
+This usually amounts to the simple requirement that the Axioms are
+Valid and the Inference Rules preserve Validity, i.e. any Theorem
+Provable in the System is Valid, thus all Provable Sentences are True.
 
 In a Theory, $\mathcal{T}$, of Propositional
 (\S\ref{sec:propositional_calculus}) or First-order Logic
@@ -1624,7 +1685,7 @@ Premises.
 
 \emph{Semantic Consequence} (\S\ref{sec:semantic_consequence})
 
-\emph{Validity}
+\emph{Validity} (\S\ref{sec:validity})
 
 
 
@@ -1684,12 +1745,16 @@ Deductive Consequence can be extended to provide \emph{Inductive
 
 \emph{Mathematical Induction} as an Inference Rule is the
 \emph{Implicative} process where a \emph{Base Case} is shown to extend
-to the more general by means of Implication (the Inductive step). Note
-that Mathematical Induction is not \emph{Inductive Reasoning} which is
-an empirical or probabilistic Inference and not a form of Deduction.
-The \emph{Principle of Mathematical Induction}
+to the more general by means of Implication (the Inductive step).
+
+Note that Mathematical Induction is not \emph{Inductive Reasoning}
+which is an empirical or probabilistic Inference and not a form of
+Deduction. The \emph{Principle of Mathematical Induction}
 (\S\ref{sec:induction_principle}) is an application of Mathematical
 Induction to the \emph{Natural Numbers} (\S\ref{sec:natural_number}).
+
+The Base Case may be given as a Vacuous Truth
+(\S\ref{sec:vacuous_truth}).
 
 
 
