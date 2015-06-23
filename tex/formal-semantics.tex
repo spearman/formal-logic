@@ -11,8 +11,31 @@
 
 
 % ====================================================================
-\section{Semantic Consequence}\label{sec:semantic_consequence}
+\section{Interpretation}\label{sec:interpretation}
 % ====================================================================
+
+An \emph{Interpretation} of a Formal Language is an assignment of
+Meanings (\S\ref{sec:meaning}) to Symbols.
+
+The Logical Symbols (\S\ref{sec:logical_constant}) are given the same
+Meaning in every Interpretation, while the Meanings of Non-logical
+Symbols (\S\ref{sec:nonlogical_constant}) are given by an Interpretation
+Function (\S\ref{sec:interpretation_function}).
+
+A \emph{Truth Functional Interpretation}
+
+In Higher-order Logic (\S\ref{sec:higherorder_logic}) Quantifiers may
+be Interpreted differently depending on the Semantics given: a
+\emph{Full Semantics} Interprets Quantifiers as Ranging over all
+possible Objects of a given Type (\S\ref{sec:type}), while a
+\emph{Henkin Semantics} requires an separate Domain for each Type of
+Higher-order Variable to Range over.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Semantic Consequence}\label{sec:semantic_consequence}
+% --------------------------------------------------------------------
 
 \emph{Semantic Consequence} of a Theory (\S\ref{sec:formal_theory})
 $\mathcal{T}$ of a Formal System $\mathcal{S}$:
@@ -23,7 +46,8 @@ is defined for Sentences $\varphi$ such that any Interpretation
 $\mathcal{I}$ that Satisfies (\S\ref{sec:satisfaction}) $\mathcal{T}$
 also Satisfies $\varphi$:
 \[
-  \mathcal{I} \models \mathcal{T} \Rightarrow \mathcal{I} \models \varphi
+  \mathcal{I} \models \mathcal{T}
+  \Rightarrow \mathcal{I} \models \varphi
 \]
 That is, $\varphi$ is True in all Models of $\mathcal{T}$.
 
@@ -36,18 +60,87 @@ Set.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Valuation}\label{sec:valuation}
+% --------------------------------------------------------------------
+
+A \emph{Valuation} is the assignment of a Truth-value
+(\S\ref{sec:truth_value}) to each Sentence (\S\ref{sec:sentence}) in a
+Formal Language that follows a \emph{Truth Schema} (or \emph{T-schema}
+\S\ref{sec:t_schema}).
+
+In Propositional Logic a Valuation results from the Truth Assignment
+(Interpretation Function \S\ref{sec:interpretation_function}) giving
+Truth-values to each Propositional Variable which induces Truth-values
+for all Propositional Formulas according to the Truth Functional
+Interpretation of the Logical Constants of the Language.
+
+In First-order Logic a Structure (\S\ref{sec:structure}) gives the
+Domain of Discourse over which Quantifiers Range and an Interpretation
+Function for Function and Predicate Symbols results in unique
+assignment of Truth-values to all Sentences of the Language.
+
+A Valuation $v : L \rightarrow \{true, false\}$ on a Formula $\varphi
+\in L$ of a Language $L$ may be denoted $v(\varphi) = [[\varphi]]_v$.
+
+
+
+\subsubsection{Supervaluation}\label{sec:supervaluation}
+
+A \emph{Supervaluation} is a Valuation that does not assign
+Truth-values to Vacuous Truths.
+
+A Supervaluation $V(\varphi)$ is Undefined if there are exactly two
+Valuations $v$ and $v'$ such that $v(\varphi) = true$ and $v'(\varphi)
+= false$.
+
+Valid Sentences still have Truth-values even if the constituent Atomic
+Formulas do not and under Supervaluationism may be called
+\emph{Supertrue}. That is, a Supervaluation $V(\varphi)$ is Supertrue
+if and only if $v(\varphi) = true$ for every Valuation $v$. The dual
+notion of \emph{Superfalse} is defined for a Supervaluation $V(\psi)$
+such that $v(\psi) = false$ for every Valuation $v$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Semantic Validity}\label{sec:semantic_validity}
+% --------------------------------------------------------------------
+
+An Inference (\S\ref{sec:logical_inference}) is \emph{Semantically
+  Valid} if all Interpretations that Satisfy the Premises also Satisfy
+the Conclusion. \cite{gamut91}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Intended Interpretation}\label{sec:intended_interpretation}
+% --------------------------------------------------------------------
+
+Standard Model (\S\ref{sec:standard_model})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Herbrand Interpretation}\label{sec:herbrand_interpretation}
+% --------------------------------------------------------------------
+
+
+
 % ====================================================================
 \section{Semantic Truth}\label{sec:semantic_truth}
 % ====================================================================
 
-\emph{Tarski's Undefinability Theorem} \cite{tarski36} uses the same
-techniques as G\"odel's Incompleteness Theorems to show that Truth
-cannot be defined in an Object Language (\S\ref{sec:metalanguage}).
+\emph{Semantic Truth} is a conception of Logical Truth
+(\S\ref{sec:logical_truth}) as a Property (\S\ref{sec:property}) of
+Sentences (\S\ref{sec:sentence}).
+
 The two related conceptions of Truth are the \emph{Correspondence
   Theory} (\S\ref{sec:correspondence_truth}) and \emph{Deflationary
   Theory} (\S\ref{sec:deflationary_truth}).
 
-Briefly, the Undefinability Theorem results in a \emph{Material
+Briefly, the Undefinability Theorem
+(\S\ref{sec:undefinability_theorem}) results in a \emph{Material
   Adequacy Condition} (called \emph{Convention T}) that any Theory of
 Truth must entail:
 \[
@@ -86,10 +179,6 @@ Correspondence Theory.
 Inductive definition of Truth.
 
 
-
-% --------------------------------------------------------------------
-\subsection{Semantic Validity}\label{sec:semantic_validity}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Correspondence Theory}\label{sec:correspondence_truth}
@@ -186,313 +275,12 @@ goal of Assertion.
 
 
 % --------------------------------------------------------------------
-\subsection{Substructure}\label{sec:model_substructure}
+\subsection{Undefinability Theorem}\label{sec:undefinability_theorem}
 % --------------------------------------------------------------------
 
-A Structure $\mathcal{A}$ is an \emph{Induced Substructure} of
-Structure $\mathcal{B}$ when
-\begin{itemize}
-\item $\sigma(\mathcal{A}) = \sigma(\mathcal{B})$
-\item $A \subseteq B$
-\item $I_{\mathcal{A}}=I_{\mathcal{B}}$
-\end{itemize}
-denoted by the notation $\mathcal{A} \subseteq \mathcal{B}$ where
-$\mathcal{B}$ is called the \emph{Extension} or \emph{Superstructure}
-of $\mathcal{A}$.
-
-A Substructure $A$ is an \emph{Elementary Substructure} of $B$ if $A$
-and $B$ both \emph{Satisfy} (\S\ref{sec:satisfaction}) the same
-Sentences. Here $B$ would be an \emph{Elementary Extension} of $A$.
-
-When a Structure is applied as a \emph{Model}
-(\S\ref{sec:model_theory}) of a particular Theory
-(\S\ref{sec:formal_theory}), if no extensions of that Structure
-result in Theories that are Consistent, that Theory is termed
-\emph{Complete}. A Theory $T$ is called \emph{Model Complete}
-(\S\ref{sec:model_completion}) if every Substructure of a Model of
-$T$ is itself a Model of $T$.
-
-Induced Substructures (and \emph{Closed Subsets} described in the next
-section) on a Structure form a \emph{Lattice}.
-
-
-
-\subsubsection{Closed Subsets}
-
-A Subset of a Domain is a \emph{Closed Subset} if it is closed under
-the Operators of the Structure. For any Subset, $B$, of a Domain,
-$|\mathcal{A}|$, there is a \emph{smallest Closed Subset} of
-$|\mathcal{A}|$ that contains $B$ called the \emph{Hull} of $B$
-denoted by $\langle B \rangle$ or $\langle B \rangle_{\mathcal{A}}$,
-which is said to be \emph{generated} by $B$. $\langle \rangle$ is the
-\emph{Finitary Closure Operator} (\S\ref{sec:finitary_closure}).
-
-
-
-% ====================================================================
-\section{Interpretation}\label{sec:interpretation}
-% ====================================================================
-
-An \emph{Interpretation} of a Formal Language is an assignment of
-Meanings (\S\ref{sec:meaning}) to Symbols.
-
-The Logical Symbols (\S\ref{sec:logical_constant}) are given the same
-Meaning in every Interpretation, while the Meanings of Non-logical
-Symbols (\S\ref{sec:nonlogical_constant}) are given by an Interpretation
-Function (\S\ref{sec:interpretation_function}).
-
-A \emph{Truth Functional Interpretation}
-
-In Higher-order Logic (\S\ref{sec:higherorder_logic}) Quantifiers may
-be Interpreted differently depending on the Semantics given: a
-\emph{Full Semantics} Interprets Quantifiers as Ranging over all
-possible Objects of a given Type (\S\ref{sec:type}), while a
-\emph{Henkin Semantics} requires an separate Domain for each Type of
-Higher-order Variable to Range over.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Intended Interpretation}\label{sec:intended_interpretation}
-% --------------------------------------------------------------------
-
-Standard Model (\S\ref{sec:standard_model})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Herbrand Interpretation}\label{sec:herbrand_interpretation}
-% --------------------------------------------------------------------
-
-
-
-% ====================================================================
-\section{Valuation}\label{sec:valuation}
-% ====================================================================
-
-A \emph{Valuation} is the assignment of a Truth-value
-(\S\ref{sec:truth_value}) to each Sentence (\S\ref{sec:sentence}) in a
-Formal Language that follows a \emph{Truth Schema} (or \emph{T-schema}
-\S\ref{sec:t_schema}).
-
-In Propositional Logic a Valuation results from the Truth Assignment
-(Interpretation Function \S\ref{sec:interpretation_function}) giving
-Truth-values to each Propositional Variable which induces Truth-values
-for all Propositional Formulas according to the Truth Functional
-Interpretation of the Logical Constants of the Language.
-
-In First-order Logic a Structure (\S\ref{sec:structure}) gives the
-Domain of Discourse over which Quantifiers Range and an Interpretation
-Function for Function and Predicate Symbols results in unique
-assignment of Truth-values to all Sentences of the Language.
-
-A Valuation $v : L \rightarrow \{true, false\}$ on a Formula $\varphi
-\in L$ of a Language $L$ may be denoted $v(\varphi) = [[\varphi]]_v$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Supervaluation}\label{sec:supervaluation}
-% --------------------------------------------------------------------
-
-A \emph{Supervaluation} is a Valuation that does not assign
-Truth-values to Vacuous Truths.
-
-A Supervaluation $V(\varphi)$ is Undefined if there are exactly two
-Valuations $v$ and $v'$ such that $v(\varphi) = true$ and $v'(\varphi)
-= false$.
-
-Valid Sentences still have Truth-values even if the constituent Atomic
-Formulas do not and under Supervaluationism may be called
-\emph{Supertrue}. That is, a Supervaluation $V(\varphi)$ is Supertrue
-if and only if $v(\varphi) = true$ for every Valuation $v$. The dual
-notion of \emph{Superfalse} is defined for a Supervaluation $V(\psi)$
-such that $v(\psi) = false$ for every Valuation $v$.
-
-
-
-% ====================================================================
-\section{Algebraic Logic}\label{sec:algebraic_logic}
-% ====================================================================
-
-\emph{Algebraic Logic} is the reasoning arising from the manipulation
-of Equations with Free Variables. Algebraic Logic deals with
-\emph{Algebraic Semantics} of Classes of Algebras which are the
-specification of Semantics based on \emph{Abstract Algebra}
-(\S\ref{sec:abstract_algebra}). This allows the matching of Logical
-Systems with Structures that Model (\S\ref{sec:model_theory}) them.
-
-
-\emph{Lindenbaum-Tarski}
-
-
-% --------------------------------------------------------------------
-\subsection{Abstract Algebraic Logic}
-\label{sec:abstract_algebraic_logic}
-% --------------------------------------------------------------------
-
-\emph{Abstract Algebraic Hierarchy} (also called the \emph{Leibniz
-  Hierarchy})
-
-
-
-\subsubsection{Leibniz Operator}\label{sec:leibniz_operator}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Term Algebra}\label{sec:term_algebra}
-% --------------------------------------------------------------------
-
-A \emph{Term Algebra} (also termed \emph{Absolutely Free Algebra} or
-\emph{Anarchic Algebra}) is an Algebraic Structure Freely Generated
-(\S\ref{sec:free_object}) over a given Signature
-(\S\ref{sec:signature}).
-
-Given a Signature $\sigma$ and a Set of Variables $X$, the Term
-Algebra of $\sigma$ with Basis (\S\ref{sec:free_module}) $X$ is the
-Structure (\S\ref{sec:structure}) $A$ with Domain consisting of all
-the Terms (\S\ref{sec:term}) of $\sigma$ with Variables taken from
-$X$, such that:
-\[
-  f^A(\bar{t}) = f(\bar{t})
-\] and: \[
-  R^A = \varnothing
-\]
-for Function Symbols $f$ and Relation Symbols $R$ in $\sigma$, and
-$\bar{t}$ $n$-tuples of Elements in $|A|$ (i.e. Terms). The Signature
-of $A$, $\sigma'$, is the Subset of $\sigma$ without any Relation
-Symbols.
-
-In Category Theory a Term Algebra is an Initial Algebra
-(\S\ref{sec:initial_algebra}) for the Category of all Algebras with a
-given Signature.
-
-
-
-\subsubsection{Herbrand Universe}\label{sec:herbrand_universe}
-
-A \emph{Herbrand Universe} is the Freely Generated Structure over the
-Function Symbols of a Signature, resulting in all Ground Terms
-(\S\ref{sec:term}) over that Signature.
-
-A \emph{Herbrand Base} is the set of all Ground Atoms
-(\S\ref{sec:atomic_formula}) that can be formed from the Predicate
-Symbols of the Signature.
-
-\emph{Herbrand Structure}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Quotient Algebra}\label{sec:quotient_algebra}
-% --------------------------------------------------------------------
-
-\emph{Quotient Algebra} (or \emph{Factor Algebra})
-
-For an Algebra $\mathbf{A}$ with Underlying Set $A$, the
-\emph{Quotient Set}, $A / E$ is the Partitioning of $A$ into
-Equivalence Classes by a \emph{Congruence Relation}
-(\S\ref{sec:congruence_relation}) $E$. Since the Operators are
-Compatible with the Equivalence Classes of the Quotient Set, these
-Classes are \emph{Quotient Algebras}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Universal Algebra}\label{sec:universal_algebra}
-% --------------------------------------------------------------------
-
-%FIXME: ref Complete Lattices
-Universal Algebra is the study of \emph{Algebraic Structure} (as
-opposed to specific instances of Algebraic Systems). Universal Algebra
-together with \emph{Category Theory} (Part \ref{sec:category_theory})
-makes up \emph{Abstract Algebra} (\S\ref{sec:abstract_algebra}). An
-Algebraic Structure differs from a general \emph{Mathematical
-  Structure} in that its Signature consists of only Function Symbols
-and no Relation Symbols.
-
-An Algebra may be limited by Axioms of \emph{Equational Laws} (eg. the
-Associative Axiom).
-
-
-
-\subsubsection{Congruence}\label{sec:general_congruence}
-
-
-
-\subsubsection{Kernel}\label{sec:general_kernel}
-
-For Algebraic Structures $A$ and $B$, and Homomorphism $f: A
-\rightarrow B$, the \emph{Kernel} of $f$ is defined as:
-\[
-    ker(f) = \{ (a,a') \in A \times A : f(a) = f(a') \}
-\]
-$ker(f)$ is a Congruence Relation on $A$ and $f$ is Injective if and
-only if $ker(f) = \{(a,a) : a \in A\}$.
-
-The Quotient Algebra $A/ker(f)$ is Isomorphic to the Image of $f$
-(which is a Subalgebra of $B$, see First Isomorphism Theorem
-(\S\ref{sec:isomorphism_theorem}).
-
-
-
-\subsubsection{Free Object}\label{sec:free_object}
-
-
-
-\subsubsection{Variety}\label{sec:model_variety}
-
-%FIXME ref Fields, Homomorphism, Subalgebra, Direct Product
-A \emph{Variety} is a \emph{Class} of Algebras defined only by Axioms
-that are Identities satisfied by a given Signature
-(\S\ref{sec:formal_system}). This is equivalent to saying a Variety
-is the Class of Algebraic Structures with the same Signature that is
-closed under \emph{Homomorphic Images}, \emph{Subalgebras}, and
-\emph{Direct Products}; a result known as the \emph{HSP Theorem} or
-\emph{Birkhoff's Theorem}\cite{birkhoff35}. This rules out Logical
-Connectives, Existential Quantification, and all Relations besides
-Equality (thus excluding the Class of \emph{Fields}) and Identities
-being implicitly Universally Quantified over the Domain.
-
-Algebraic Structures in a Variety are Quotient Algebras
-(\S\ref{sec:quotient_algebra}) generated by the Set of Identities
-on the Term Algebra generated from the Signature and Underlying Set.
-
-A \emph{Subvariety} is a Subclass of a Variety with the same Signature
-(eg. the Class of \emph{Abelian Groups} is a Subvariety of the Class
-of \emph{Groups}). Classes of Finite Algebras (Algebras with a finite
-Underlying Set) are sometimes called \emph{Pseudovarieties}.
-
-An example of a Variety with Signature $\Omega = (2)$ is the Class of
-all \emph{Semigroups} with an equation defining the Associative Law:
-\[
-    x(yz) = (xy)z
-\]
-
-%FIXME: ref homomorphism
-A Homomorphism between two Algebras $A$ and $B$ is a function $h: A
-\rightarrow B$ defined for $n$-ary Operations:
-\[
-\forall f_A \in A, f_B \in B, h(f_A(x_1, ..., x_n)) = f_B(h(x_1), ...,
-h(x_n))
-\]
-
-A Subalgebra of an Algebra, $A$, is a Subset of $A$ that is closed
-under all the operations of $A$.
-
-The Product of a set of Algebraic Structures is the \emph{Cartesian
-  Product} of the Sets with the Operations defined coordinatewise.
-
-
-
-\subsubsection{Unification}\label{sec:unification}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Ultraproduct}\label{sec:ultraproducts}
-% --------------------------------------------------------------------
+\emph{Tarski's Undefinability Theorem} \cite{tarski36} uses the same
+techniques as G\"odel's Incompleteness Theorems to show that Truth
+cannot be defined in an Object Language.
 
 
 
@@ -673,6 +461,160 @@ Introduction and Elimination Rules.
 
 
 % ====================================================================
+\section{Algebraic Semantics}\label{sec:algebraic_semantics}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Lindenbaum-Tarski Algebra}\label{sec:lindenbaum_tarski}
+% --------------------------------------------------------------------
+
+Propositional Logic (\S\ref{sec:propositional_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Boolean Algebra}\label{sec:boolean_algebra}
+% --------------------------------------------------------------------
+
+\subsubsection{Truth-table}\label{sec:truth_table}
+
+\subsubsection{Two-element Boolean Algebra}\label{sec:twoelement_boolean}
+
+Propositional Logic (\S\ref{sec:propositional_logic})
+
+Syntactically, every Boolean Term corresponds to a Propositional
+Formula
+
+
+
+\subsubsection{Boolean Algebra with Operators}\label{sec:boolean_with_operators}
+
+Propositional Modal Logic (\S\ref{sec:modal_logic})
+
+
+
+\subsubsection{Monadic Boolean Algebra}\label{sec:monadic_boolean}
+
+Modal Logic $\mathrm{S5}$ (\S\ref{sec:modal_logic})
+
+Monadic Predicate Logic (\S\ref{sec:monadic_firstorder})
+
+
+
+\subsubsection{Complete Boolean Algebra}\label{sec:complete_boolean}
+
+First-order Logic (\S\ref{sec:firstorder_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Heyting Algebra}\label{sec:heyting_algebra}
+% --------------------------------------------------------------------
+
+Intuitionistic Propositional Logic (\S\ref{sec:intuitionistic_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{MV-algebra}\label{sec:mv_algebra}
+% --------------------------------------------------------------------
+
+Lukasiewicz Logic (\S\ref{sec:lukasiewicz_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Cylindric Algebra}\label{sec:cylindric_algebra}
+% --------------------------------------------------------------------
+
+First-order Logic with Equality (\S\ref{sec:firstorder_equality})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Polyadic Algebra}\label{sec:polyadic_algebra}
+% --------------------------------------------------------------------
+
+First-order Logic without Equality
+(\S\ref{sec:firstorder_no_equality})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Predicate Functor Logic}\label{sec:pfl}
+% --------------------------------------------------------------------
+
+First-order Logic (\S\ref{sec:firstorder_logic})
+
+\emph{Predicate Functor Logic} allows the expression of First-order
+Logic (\S\ref{sec:firstorder_logic}) Algebraically without Quantified
+Variables by using \emph{Predicate Functors} that Operate on Terms to
+yield Terms.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Modal Algebra}\label{sec:modal_algebra}
+% --------------------------------------------------------------------
+
+Normal Modal Logic $\mathrm{K}$ (\S\ref{sec:normal_modal_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Interior Algebra}\label{sec:interior_algebra}
+% --------------------------------------------------------------------
+
+Topology (\S\ref{sec:topology})
+
+Modal Logic $\mathrm{S4}$ (\S\ref{sec:modal_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Relation Algebra}\label{sec:relation_algebra}
+% --------------------------------------------------------------------
+
+Set Theory (Part \S\ref{sec:set_theory})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Combinatory Logic}\label{sec:combinatory_logic}
+% --------------------------------------------------------------------
+
+\emph{Combinator}
+
+Set Theory (Part \S\ref{sec:set_theory})
+
+
+
+% ====================================================================
+\section{Operational Semantics}\label{sec:operational_semantics}
+% ====================================================================
+
+\emph{Operational Semantics} are used in the interpretation of
+Programming Languages.
+
+\emph{Concurrency}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Structural Semantics}\label{sec:structural_semantics}
+% --------------------------------------------------------------------
+
+\subsubsection{Reduction Semantics}\label{sec:reduction_semantics}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Natural Semantics}\label{sec:natural_semantics}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
 \subsection{Truth-value Semantics}\label{sec:truthvalue_semantics}
 % ====================================================================
 
@@ -728,31 +670,6 @@ Objects called \emph{Denotations}.
 
 
 % ====================================================================
-\section{Operational Semantics}\label{sec:operational_semantics}
-% ====================================================================
-
-\emph{Operational Semantics} are used in the interpretation of
-Programming Languages.
-
-\emph{Concurrency}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Structural Semantics}\label{sec:structural_semantics}
-% --------------------------------------------------------------------
-
-\subsubsection{Reduction Semantics}\label{sec:reduction_semantics}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Natural Semantics}\label{sec:natural_semantics}
-% --------------------------------------------------------------------
-
-
-
-% ====================================================================
 \section{Axiomatic Semantics}\label{sec:axiomatic_semantics}
 % ====================================================================
 
@@ -762,66 +679,6 @@ in some System of Logic.
 
 Axiomatic Semantics are used as a Formal Semantics of Programming
 Languages.
-
-
-
-% ====================================================================
-\section{Untyped $\lambda$-Calculus}\label{sec:untyped_lambda}
-% ====================================================================
-
-\emph{Untyped $\lambda$-Calculus} describes a Semantics for
-\emph{Computable Functions} (\S\ref{sec:computable_function}).
-
-\emph{Lambda Terms}
-
-\emph{Free Variables}
-
-\emph{Anonymous Functions}
-
-\emph{Lambda Abstraction}
-
-\emph{Application}
-
-\emph{Church-Rosser Theorem}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Computation Rule}\label{sec:computation_rule}
-% --------------------------------------------------------------------
-
-\[
-    (\lambda x.t)(u) :\equiv t[u/x]
-\]
-
-% --------------------------------------------------------------------
-\subsection{Alpha Equivalence}\label{sec:alpha_equivalent}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Capture-avoiding Substitution}\label{sec:capture_avoiding}
-% --------------------------------------------------------------------
-
-\emph{Capture-avoiding Substitution}
-
-% --------------------------------------------------------------------
-\subsection{Beta Reduction}\label{sec:beta_reduction}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Eta Conversion}\label{sec:eta_conversion}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Normalization \& Confluence}
-\label{sec:normalization_confluence}
-% --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Deductive $\lambda$-Calclulus}\label{sec:deductive_lambda}
-% --------------------------------------------------------------------
 
 
 

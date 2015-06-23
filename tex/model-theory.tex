@@ -71,6 +71,19 @@ Cardinality of the Domain, $|A|$).
 
 
 
+\subsubsection{Closed Subsets}\label{sec:closed_subset}
+
+A Subset of a Domain is a \emph{Closed Subset} if it is closed under
+the Operators of the Structure's Signature. For any Subset, $B$, of a
+Domain, $|\mathcal{A}|$, there is a \emph{smallest Closed Subset} of
+$|\mathcal{A}|$ that contains $B$ called the \emph{Hull} of $B$
+denoted by $\langle B \rangle$ or $\langle B \rangle_{\mathcal{A}}$,
+which is said to be \emph{Generated} (\S\ref{sec:generator}) by $B$.
+$\langle \rangle$ is the \emph{Finitary Closure Operator}
+(\S\ref{sec:finitary_closure}).
+
+
+
 \subsubsection{Sort}\label{sec:sort}
 
 \emph{One-sorted}
@@ -204,7 +217,7 @@ where:
   \]
 \end{itemize}
 Such an Embedding is an \emph{Elementary Embedding} if $h(A)$ is an
-Elementary Substructure (\S\ref{sec:model_substructure}) of $B$.
+Elementary Substructure (\S\ref{sec:substructure}) of $B$.
 
 The Category $\sigma$-$\mathbf{Emb}$ of $\sigma$-structures and
 $\sigma$-embeddings is a Concrete Subcategory of
@@ -252,6 +265,17 @@ $\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
 \subsection{Substructure}\label{sec:substructure}
 % --------------------------------------------------------------------
 
+A Structure $\mathcal{A}$ is an \emph{Induced Substructure} of
+Structure $\mathcal{B}$ when:
+\begin{itemize}
+  \item $\sigma(\mathcal{A}) = \sigma(\mathcal{B})$
+  \item $A \subseteq B$
+  \item $I_{\mathcal{A}}=I_{\mathcal{B}}$
+\end{itemize}
+denoted by the notation $\mathcal{A} \subseteq \mathcal{B}$ where
+$\mathcal{B}$ is called the \emph{Extension} or \emph{Superstructure}
+of $\mathcal{A}$.
+
 Given $\sigma$-structures $\mathcal{A}$ and $\mathcal{B}$, if
 $|\mathcal{A}| \subseteq |\mathcal{B}|$ and the Inclusion Map
 (\S\ref{sec:inclusion_map}) $i : |\mathcal{A}| \rightarrow
@@ -288,6 +312,19 @@ of the two Structures in the Relation $\mathcal{A} \subseteq
 
 
 
+When a Structure is applied as a \emph{Model}
+(\S\ref{sec:model_theory}) of a particular Theory
+(\S\ref{sec:formal_theory}), if no extensions of that Structure
+result in Theories that are Consistent, that Theory is termed
+\emph{Complete}. A Theory $T$ is called \emph{Model Complete}
+(\S\ref{sec:model_completion}) if every Substructure of a Model of
+$T$ is itself a Model of $T$.
+
+Induced Substructures (and \emph{Closed Subsets} described in the next
+section) on a Structure form a \emph{Lattice}.
+
+
+
 \subsubsection{Elementary Substructure}
 \label{sec:elementary_substructure}
 
@@ -295,7 +332,11 @@ For $\sigma$-structures in the Substructure Relation $\mathcal{A}
 \subseteq \mathcal{B}$, $\mathcal{A}$ is an \emph{Elementary
   Substructure} if every First-order $\sigma$-formula
 $\varphi(\bar{a})$ with Parameters $\bar{a}$ from $\mathcal{A}$ is
-True in $\mathcal{A}$ if and only if it is True in $\mathcal{B}$.
+True in $\mathcal{A}$ if and only if it is True in $\mathcal{B}$. That
+is, Substructure $\mathcal{A}$ is an Elementary Substructure of
+$\mathcal{B}$ if $\mathcal{A}$ and $\mathcal{B}$ both \emph{Satisfy}
+(\S\ref{sec:satisfaction}) the same Sentences. Here $\mathcal{B}$
+would be an \emph{Elementary Extension} of $\mathcal{A}$.
 
 
 
@@ -890,8 +931,8 @@ An $n$-type is \emph{Realized} in $\mathcal{M}$ if there is an Element
 $\mathbf{b} \in M^n$ such that $\mathcal{M} \models p(\mathbf{b})$.
 This is guaranteed by the Compactness Theorem
 (\S\ref{sec:compactness}) in either $\mathcal{M}$ or an Elementary
-Extension (\S\ref{sec:model_substructure}) of $\mathcal{M}$. This is
-denoted by $tp_{n}^{\mathcal{M}}(\mathbf{b}/A)$ which is read as ``the
+Extension (\S\ref{sec:substructure}) of $\mathcal{M}$. This is denoted
+by $tp_{n}^{\mathcal{M}}(\mathbf{b}/A)$ which is read as ``the
 Complete Type of $\mathbf{b}$ over $A$''.
 
 A Type $p(\mathbf{x})$ is \emph{Isolated} by a Formula
@@ -968,3 +1009,122 @@ precise Semantics are called \emph{Concrete Semantics}.
 \emph{Non-relational Domain}
 
 
+
+% ====================================================================
+\section{Algebraic Logic}\label{sec:algebraic_logic}
+% ====================================================================
+
+\emph{Algebraic Logic} is the reasoning arising from the manipulation
+of Equations with Free Variables. Algebraic Logic deals with Algebraic
+Semantics (\S\ref{sec:algebraic_semantics}) of Classes of Algebras
+(\S\ref{sec:algebraic_structure}) which are the specification of
+Semantics based on Abstract Algebra (\S\ref{sec:abstract_algebra}).
+This allows the matching of Logical Systems with Structures that Model
+(\S\ref{sec:model}) them.
+
+\emph{Lindenbaum-Tarski}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Term Algebra}\label{sec:term_algebra}
+% --------------------------------------------------------------------
+
+A \emph{Term Algebra} (also termed \emph{Absolutely Free Algebra} or
+\emph{Anarchic Algebra}) is an Algebraic Structure Freely Generated
+(\S\ref{sec:free_object}) over a given Signature
+(\S\ref{sec:signature}).
+
+Given a Signature $\sigma$ and a Set of Variables $X$, the Term
+Algebra of $\sigma$ with Basis (\S\ref{sec:free_module}) $X$ is the
+Structure (\S\ref{sec:structure}) $A$ with Domain consisting of all
+the Terms (\S\ref{sec:term}) of $\sigma$ with Variables taken from
+$X$, such that:
+\[
+  f^A(\bar{t}) = f(\bar{t})
+\] and: \[
+  R^A = \varnothing
+\]
+for Function Symbols $f$ and Relation Symbols $R$ in $\sigma$, and
+$\bar{t}$ $n$-tuples of Elements in $|A|$ (i.e. Terms). The Signature
+of $A$, $\sigma'$, is the Subset of $\sigma$ without any Relation
+Symbols.
+
+In Category Theory a Term Algebra is an Initial Algebra
+(\S\ref{sec:initial_algebra}) for the Category of all Algebras with a
+given Signature.
+
+
+
+\subsubsection{Herbrand Universe}\label{sec:herbrand_universe}
+
+A \emph{Herbrand Universe} is the Freely Generated Structure over the
+Function Symbols of a Signature, resulting in all Ground Terms
+(\S\ref{sec:term}) over that Signature.
+
+A \emph{Herbrand Base} is the set of all Ground Atoms
+(\S\ref{sec:atomic_formula}) that can be formed from the Predicate
+Symbols of the Signature.
+
+\emph{Herbrand Structure}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Quotient Algebra}\label{sec:quotient_algebra}
+% --------------------------------------------------------------------
+
+\emph{Quotient Algebra} (or \emph{Factor Algebra})
+
+For an Algebra $\mathbf{A}$ with Underlying Set $A$, the
+\emph{Quotient Set}, $A / E$ is the Partitioning of $A$ into
+Equivalence Classes by a \emph{Congruence Relation}
+(\S\ref{sec:congruence_relation}) $E$. Since the Operators are
+Compatible with the Equivalence Classes of the Quotient Set, these
+Classes are \emph{Quotient Algebras}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Representation}\label{sec:representation}
+% --------------------------------------------------------------------
+
+Representation Theory (\S\ref{sec:representation_theory})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Duality}\label{sec:duality}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ultraproduct}\label{sec:ultraproducts}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Abstract Algebraic Logic}
+\label{sec:abstract_algebraic_logic}
+% --------------------------------------------------------------------
+
+\subsubsection{Leibniz Operator}\label{sec:leibniz_operator}
+
+
+
+\subsubsection{Abstract Algebraic Hierarchy}\label{sec:leibniz_hierarchy}
+
+\emph{Abstract Algebraic Hierarchy} (also called the \emph{Leibniz
+  Hierarchy})
+
+Equivalential Logics, Algebraizable Logics, Weakly Algebraizable
+Logics $\subset$ Protoalgebraic Logics
+
+
+
+% --------------------------------------------------------------------
+\subsection{Categorical Abstract Algebraic Logic}
+\label{sec:categorical_abstract}
+% --------------------------------------------------------------------
+
+$\pi$-institution
