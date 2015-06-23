@@ -1534,6 +1534,40 @@ $\mathbf{Cat}$ is a Cartesian Closed Category.
 \subsection{Institution}\label{sec:institution}
 % --------------------------------------------------------------------
 
+An \emph{Institution} consists of:
+
+\begin{itemize}
+\item a Category $\mathbf{Sign}$ of Signatures (\S\ref{sec:signature})
+  and Signature Morphisms between them
+\item a Functor $sen : \mathbf{Sign} \rightarrow \mathbf{Set}$ where
+  $sen(\sigma)$ is a Set of Sentences and for each Signature Morphism
+  $h : \sigma \rightarrow \sigma'$ there is a \emph{Sentence
+  Translation Map}:
+  \[
+    sen(h) : sen(\sigma) \rightarrow sen(\sigma')
+  \]
+\item a Functor $Mod : \mathbf{Sign^{op}} \rightarrow \mathbf{Cat}$,
+  giving the Category of Models $Mod (\sigma)$ for each Signature
+  $\sigma$, and for each Signature Morphism $h : \sigma \rightarrow
+  \sigma'$, the \emph{Reduct Functor}:
+  \[
+    Mod(h) : Mod(\sigma') \rightarrow Mod(\sigma)
+  \]
+  with $Mod(h)(\mathcal{M}')$ denoted by $\mathcal{M}'|_h$.
+\item a Satisfaction Relation $\models_\sigma \subseteq |Mod(\sigma)|
+  \times sen(\sigma)$ for each $\sigma \in \mathbf{Sign}$
+\end{itemize}
+where the following \emph{Satisfaction Condition} holds for each
+Signature Morphism $h : \sigma \rightarrow \sigma'$ in
+$\mathbf{Sign}$:
+\[
+  \mathcal{M}' \models_\sigma' h(\varphi) \Leftrightarrow
+  \mathcal{M}'|_h \models_\sigma \varphi
+\]
+for all $\mathcal{M}' \in Mod(\sigma')$ and $\varphi \in sen(\sigma)$.
+The Satisfaction Condition expresses that Truth is invariant under
+change of Signature.
+
 
 
 % ====================================================================

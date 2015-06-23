@@ -129,60 +129,6 @@ Domain and by Induction assigns Terms to Elements in the Domain.
 
 
 % --------------------------------------------------------------------
-\subsection{Valuation}\label{sec:valuation}
-% --------------------------------------------------------------------
-
-A \emph{Valuation} is the assignment of a Truth-value
-(\S\ref{sec:truth_value}) to each Sentence (\S\ref{sec:sentence}) in a
-Formal Language that follows a \emph{Truth Schema} (or \emph{T-schema}
-\S\ref{sec:t_schema}).
-
-In Propositional Logic a Valuation results from the Truth Assignment
-(Interpretation Function \S\ref{sec:interpretation_function}) giving
-Truth-values to each Propositional Variable which induces Truth-values
-for all Propositional Formulas according to the Truth Functional
-Interpretation of the Logical Constants of the Language.
-
-In First-order Logic a Structure gives the Domain of Discourse over
-which Quantifiers Range and an Interpretation Function for Function
-and Predicate Symbols results in unique assignment of Truth-values to
-all Sentences of the Language.
-
-A Valuation $v : L \rightarrow \{true, false\}$ on a Formula $\varphi
-\in L$ of a Language $L$ may be denoted $v(\varphi) = [[\varphi]]_v$.
-
-
-
-\subsubsection{Supervaluation}\label{sec:supervaluation}
-
-A \emph{Supervaluation} is a Valuation that does not assign
-Truth-values to Vacuous Truths.
-
-A Supervaluation $V(\varphi)$ is Undefined if there are exactly two
-Valuations $v$ and $v'$ such that $v(\varphi) = true$ and $v'(\varphi)
-= false$.
-
-Valid Sentences still have Truth-values even if the constituent Atomic
-Formulas do not and under Supervaluationism may be called
-\emph{Supertrue}. That is, a Supervaluation $V(\varphi)$ is Supertrue
-if and only if $v(\varphi) = true$ for every Valuation $v$. The dual
-notion of \emph{Superfalse} is defined for a Supervaluation $V(\psi)$
-such that $v(\psi) = false$ for every Valuation $v$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Parameter}\label{sec:parameter}
-% --------------------------------------------------------------------
-
-For a $\sigma$-structure $\mathcal{A}$ with Elements $\bar{a}$ for
-which Constant Symbols do not already exist, the addition of Constant
-Symbols $\bar{c}$ gives a new Signature $\sigma(\bar{c})$ and
-$\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
-
-
-
-% --------------------------------------------------------------------
 \subsection{Structure Homomorphism}\label{sec:structure_homomorphism}
 % --------------------------------------------------------------------
 
@@ -239,7 +185,26 @@ a_2,\ldots, a_n \in |\mathcal{A}|$:
 \subsubsection{Embedding}\label{sec:embedding}
 
 A Strong $\sigma$-homomorphism that is also Injective is called an
-\emph{Embedding}.
+\emph{Embedding}, denoted $h : \mathcal{A} \hookrightarrow
+\mathcal{B}$, for $\sigma$-structures $\mathcal{A}$ and $\mathcal{B}$,
+where:
+\begin{itemize}
+\item for every $\prescript{n}{}{f} \in \sigma$ and $a_1, \ldots, a_n
+  \in |\mathcal{A}|^n$:
+  \[
+    h(\prescript{n}{}{f^\mathcal{A}}(a_1,\ldots,a_n)) =
+    \prescript{n}{}{f^\mathcal{B}}(h(a_1),\ldots,h(a_n))
+  \]
+\item for every $\prescript{n}{}{R} \in \sigma$ and $a_1, \ldots, a_n
+  \in |\mathcal{A}|^n$:
+  \[
+    \mathcal{A} \models \prescript{n}{}{R}(a_1, \ldots, a_n)
+    \Leftrightarrow \mathcal{B} \models \prescript{n}{}{R}(h(a_1),
+    \ldots, h(a_n))
+  \]
+\end{itemize}
+Such an Embedding is an \emph{Elementary Embedding} if $h(A)$ is an
+Elementary Substructure (\S\ref{sec:model_substructure}) of $B$.
 
 The Category $\sigma$-$\mathbf{Emb}$ of $\sigma$-structures and
 $\sigma$-embeddings is a Concrete Subcategory of
@@ -273,6 +238,17 @@ $\mathcal{B}$.
 
 
 % --------------------------------------------------------------------
+\subsection{Parameter}\label{sec:parameter}
+% --------------------------------------------------------------------
+
+For a $\sigma$-structure $\mathcal{A}$ with Elements $\bar{a}$ for
+which Constant Symbols do not already exist, the addition of Constant
+Symbols $\bar{c}$ gives a new Signature $\sigma(\bar{c})$ and
+$\bar{a}$ and $\bar{c}$ are called \emph{Parameters}.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Substructure}\label{sec:substructure}
 % --------------------------------------------------------------------
 
@@ -284,9 +260,10 @@ $\mathcal{A}$ is a \emph{Substructure} of $\mathcal{B}$ and
 $\mathcal{B}$ is an \emph{Extension} of $\mathcal{A}$, denoted
 $\mathcal{A} \subseteq \mathcal{B}$.
 
-By the definition of Structure Homomorphisms, the following Properties
-apply to the Function Symbols $f$ and Predicate Symbols $r$ in the
-Signature of the two Structures in the Relation $\mathcal{A} \subseteq
+By the definition of Structure Homomorphisms
+(\S\ref{sec:structure_homomorphism}), the following Properties apply
+to the Function Symbols $f$ and Predicate Symbols $r$ in the Signature
+of the two Structures in the Relation $\mathcal{A} \subseteq
 \mathcal{B}$:
 \begin{itemize}
   \item Constant Symbols $\prescript{0}{}{f}^\mathcal{A}$ are
@@ -311,7 +288,20 @@ Signature of the two Structures in the Relation $\mathcal{A} \subseteq
 
 
 
-\subsubsection{Generator} \label{sec:generator}
+\subsubsection{Elementary Substructure}
+\label{sec:elementary_substructure}
+
+For $\sigma$-structures in the Substructure Relation $\mathcal{A}
+\subseteq \mathcal{B}$, $\mathcal{A}$ is an \emph{Elementary
+  Substructure} if every First-order $\sigma$-formula
+$\varphi(\bar{a})$ with Parameters $\bar{a}$ from $\mathcal{A}$ is
+True in $\mathcal{A}$ if and only if it is True in $\mathcal{B}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Generator}\label{sec:generator}
+% --------------------------------------------------------------------
 
 For a Subset $Y \subset |\mathcal{B}|$, there is a unique smallest
 Substructure $\mathcal{A}$ \emph{Generated} by $Y$ such that $Y
@@ -334,15 +324,8 @@ Structures where the Signature is $\sigma$
 
 
 % --------------------------------------------------------------------
-\subsection{Amalgam}\label{sec:amalgam}
-% --------------------------------------------------------------------
-
-\subsubsection{Amalgamation Property}\label{sec:amalgamation_property}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Interpretability}\label{sec:interpretability}
+\subsection{Structure Interpretation}
+\label{sec:structure_interpretation}
 % --------------------------------------------------------------------
 
 Given two Structures, $M$ and $N$, an \emph{Interpretation} of $M$ in
@@ -354,9 +337,20 @@ $N$ is a pair $(n,f)$ where
     a First-order Formula is definable in $N$ by a First-order Formula
 \end{itemize}
 
-Two Structures are \emph{Bi-interpretable} if they can be interpreted
+Two Structures are \emph{Bi-interpretable} if they can be Interpreted
 in each other. This can be used to define an Equivalence Relation
 between Structures.
+
+An Interpretation without Parameters (\S\ref{sec:parameter}) may be
+called a \emph{$0$-interpretation}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Amalgam}\label{sec:amalgam}
+% --------------------------------------------------------------------
+
+\subsubsection{Amalgamation Property}\label{sec:amalgamation_property}
 
 
 
@@ -367,7 +361,7 @@ between Structures.
 Each $\sigma$-Structure $\mathcal{A}$ has a \emph{Satisfaction
   Relation}:
 \[
-  \mathcal{A} \vDash \varphi
+  \mathcal{A} \models \varphi
 \]
 defined for all Formulas $\varphi$ in the Language of
 $\sigma(\bar{c})$ with Parameters (\S\ref{sec:parameter}) $\bar{c}$
@@ -382,7 +376,7 @@ If $\varphi(\bar{x})$ is a Formula with Free Variables $\bar{x}$, and
 $A$ is a Structure with Elements $\bar{a}$ that gives a Closed Formula
 under Substitution (\S\ref{sec:substitution}), then:
 \[
-  \mathcal{A} \vDash \varphi(\bar{x})[\bar{a}]
+  \mathcal{A} \models \varphi(\bar{x})[\bar{a}]
 \]
 
 In First-order Logic, Universally Quantified Sentences such as
@@ -391,7 +385,6 @@ by an Element in $dom(\mathcal{A})$ is Satisfied, and Existentially
 Quantified Sentences such as $\exists x \psi (x)$ are Satisfied when
 there is at least one Substitution Instance of an Element from
 $dom(\mathcal{A}$ that Satisfies $\psi$.
-
 
 
 
@@ -444,6 +437,36 @@ Validity of arbitrary First-order Formulas is Semidecidable.
 
 
 % --------------------------------------------------------------------
+\subsection{Categoricity}\label{sec:categoricity}
+% --------------------------------------------------------------------
+
+A Theory (\S\ref{sec:formal_theory}) is termed \emph{Categorical} if
+all its Models are Isomorphic. With this definition and the
+L\"owenheim-Skolem Theorem (\S\ref{sec:lowenheim_skolem}) it follows
+that any First-order Theory with a Model of Infinite Cardinality can't
+be Categorical.
+
+For a Cardinal (\S\ref{sec:cardinal_number}) $\kappa$, a Theory $T$ is
+\emph{$\kappa$-Categorical} if any two Models of $T$ of Cardinality
+$\kappa$ are Isomorphic to each another. By \emph{Morley's
+  Categoricity Theorem}\cite{morley65} if a First-order Theory in a
+Countable Language is Categorical in an Uncountable Cardinal $\kappa$,
+then it is Categorical in all Uncountable Cardinalities. There are
+three possible cases for $\kappa$-Categoricity:
+\begin{description}
+\item[Totally Categorical]: $\kappa$-Categorical for all Infinite
+  Cardinals
+\item[Uncountably Categorical]: $\kappa$-Categorical if and only if
+  $\kappa$ is an Uncountable Cardinal
+\item[Countably Categorical]: $\kappa$-Categorical if and only if
+  $\kappa$ is a Countable Cardinal
+\end{description}
+The special case of $\kappa = \aleph_0$ is called
+\emph{$\omega$-Categorical}.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Definability}\label{sec:definability}
 % --------------------------------------------------------------------
 
@@ -452,18 +475,18 @@ An $n$-ary Relation $R$ on the Domain of a Structure $\mathcal{A} =
 \emph{$\emptyset$-definable}) if there is a Formula $\varphi
 (x_1,\ldots,x_n)$ such that:
 \[
-  R = \{(a_1,\ldots,a_n) \in A^n \;|\; \mathcal{A} \vDash \varphi
+  R = \{(a_1,\ldots,a_n) \in A^n \;|\; \mathcal{A} \models \varphi
     [a_1, \ldots, a_n]\}
 \]
 or equivalently:
 \[
-  (a_1, \ldots, a_n) \in R \Leftrightarrow \mathcal{A} \vDash
+  (a_1, \ldots, a_n) \in R \Leftrightarrow \mathcal{A} \models
     \varphi[a_1, \ldots, a_n]
 \]
 An Element $a$ of $A$ is Definable in $\mathcal{A}$ if and only if
 there is a Formula $\varphi(a)$ such that:
 \[
-  \mathcal{A} \vDash \forall x (x = a \leftrightarrow \varphi(x))
+  \mathcal{A} \models \forall x (x = a \leftrightarrow \varphi(x))
 \]
 A Relation $R$ is \emph{$A$-definable} (or \emph{Definable with
   Parameters}) if there is a Formula $\varphi$ with Parameters
@@ -478,7 +501,7 @@ Parameters.
 For a Relation $R$ and a $\sigma$-structure $\mathcal{A}$, $R$ is
 \emph{Implicitly Definable} if there is a Formula $\varphi$ in the
 Extended Language $\sigma(R)$ and $R$ is the only Relation on
-$\mathcal{A}$ such that $\mathcal{A} \vDash \varphi$. By Beth's
+$\mathcal{A}$ such that $\mathcal{A} \models \varphi$. By Beth's
 Theorem (\S\ref{sec:beth_definability}), a Relation is Implicitly
 Definable if and only if it is Explicitly Definable.
 
@@ -546,17 +569,24 @@ not Weakly Discernible (\S\ref{sec:weak_discernibility}).
 
 
 
+% --------------------------------------------------------------------
+\subsection{Boolean Satisfiability Problem}
+\label{sec:boolean_satisfiability}
+% --------------------------------------------------------------------
+
+
+
 % ====================================================================
 \section{Model}\label{sec:model}
 % ====================================================================
 
 A Structure (\S\ref{sec:structure}) $\mathcal{A}$ that Satisfies a
-Sentence $\varphi$, $\mathcal{A} \vDash \varphi$ is called a
+Sentence $\varphi$, $\mathcal{A} \models \varphi$, is called a
 \emph{Model} of $\varphi$ (equivalently ``$\varphi$ is True in
 $\mathcal{A}$'').
 
 If $\mathcal{A}$ Satisfies all the Sentences of a Theory
-$\mathcal{T}$, $\mathcal{A} \vDash \mathcal{T}$ is a Model of
+$\mathcal{T}$, $\mathcal{A} \models \mathcal{T}$, is a Model of
 $\mathcal{T}$. For $\mathcal{A}$ to be a Model of a $\mathcal{T}$, it
 is required that:
 \begin{itemize}
@@ -591,55 +621,9 @@ Intended Interpretation (\S\ref{sec:intended_interpretation})
 \subsection{Non-standard Model}\label{sec:nonstandard_model}
 % --------------------------------------------------------------------
 
-
-
 % --------------------------------------------------------------------
-\subsection{Diagram}\label{sec:diagram}
+\subsection{Canonical Model}\label{sec:canonical_model}
 % --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Compactness}\label{sec:compactness}
-% --------------------------------------------------------------------
-
-The \emph{Compactness Theorem} states that a First-order Theory
-(\S\ref{sec:formal_theory}) $\mathcal{T}$ has a Model if and only if
-every Finite Subset of $\mathcal{T}$ has a Model.
-
-Compactness (Topology \S\ref{sec:compact_space})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Categoricity}\label{sec:categoricity}
-% --------------------------------------------------------------------
-
-A Theory (\S\ref{sec:formal_theory}) is termed \emph{Categorical} if
-all its Models are Isomorphic. With this definition and the
-L\"owenheim-Skolem Theorem (\S\ref{sec:lowenheim_skolem}) it follows
-that any First-order Theory with a Model of Infinite Cardinality can't
-be Categorical.
-
-For a Cardinal (\S\ref{sec:cardinal_number}) $\kappa$, a Theory $T$ is
-\emph{$\kappa$-Categorical} if any two Models of $T$ of Cardinality
-$\kappa$ are Isomorphic to each another. By \emph{Morley's
-  Categoricity Theorem}\cite{morley65} if a First-order Theory in a
-Countable Language is Categorical in an Uncountable Cardinal $\kappa$,
-then it is Categorical in all Uncountable Cardinalities. There are
-three possible cases for $\kappa$-Categoricity:
-\begin{description}
-\item[Totally Categorical]: $\kappa$-Categorical for all Infinite
-  Cardinals
-\item[Uncountably Categorical]: $\kappa$-Categorical if and only if
-  $\kappa$ is an Uncountable Cardinal
-\item[Countably Categorical]: $\kappa$-Categorical if and only if
-  $\kappa$ is a Countable Cardinal
-\end{description}
-The special case of $\kappa = \aleph_0$ is called
-\emph{$\omega$-Categorical}.
-
-
 
 % --------------------------------------------------------------------
 \subsection{Elementary Equivalence}\label{sec:elementary_equivalence}
@@ -654,14 +638,14 @@ if they both Satisfy the same First-order $\sigma$-sentences.
 \subsection{Elementary Class}\label{sec:elementary_class}
 % --------------------------------------------------------------------
 
-A Class of Structures, $\mathcal{K}$, with Signature $\sigma$ is an
-\emph{Elementary Class} if there is a First-order Theory,
-$\mathcal{T}$, with Signature $\sigma$ such that $\mathcal{K}$
-contains all Models of $\mathcal{T}$. Expressed with the
-\emph{Satisfaction Relation} (\S\ref{sec:satisfaction}):
+A Class of $\sigma$-structures, $\mathcal{K}$, is an \emph{Elementary
+  Class} if there is a First-order Theory $\mathcal{T}$ in the
+Language $\sigma$ such that $\mathcal{K}$ contains all Models of
+$\mathcal{T}$. Expressed with the Satisfaction Relation
+(\S\ref{sec:satisfaction}):
 \[
   \mathcal{M} \in \mathcal{K}_\mathcal{T}
-  \Leftrightarrow \mathcal{M} \vDash \mathcal{T}
+  \Leftrightarrow \mathcal{M} \models \mathcal{T}
 \]
 where $\mathcal{K}_\mathcal{T}$ is an Elementary Class, $\mathcal{M}$
 is a Model, and $\mathcal{T}$ is a Theory.
@@ -677,11 +661,11 @@ Elementary Classes are termed \emph{Axiomatizable in First-Order
 
 \subsubsection{Strength}\label{sec:strength}
 
-The notion of \emph{Strength} of Formal Systems
-(\S\ref{sec:formal_system}) is defined in terms of Elementary Classes.
-A Logic (\S\ref{sec:logical_system}) $\alpha$ is equal to another
-Logic $\beta$ when every Elementary Class in $\beta$ is an Elementary
-Class in $\alpha$.
+The notion of \emph{Strength} of Logical Systems
+(\S\ref{sec:logical_system}) is defined in terms of Elementary
+Classes. A Logical System $\mathcal{S}$ is equal in Strength to
+another Logical System $\mathcal{S}'$ when every Elementary Class in
+$\mathcal{S}'$ is an Elementary Class in $\mathcal{S}$.
 
 
 
@@ -690,19 +674,57 @@ Class in $\alpha$.
 % --------------------------------------------------------------------
 
 A First-order Theory $\mathcal{T}$ is called \emph{Model Complete} if
-every Embedding (\S\ref{sec:sigma_embedding}) of Models of
-$\mathcal{T}$ is an Elementary Embedding.
+every Embedding (\S\ref{sec:embedding}) of Models of $\mathcal{T}$ is
+an Elementary Embedding.
 
 A Theory $\mathcal{T}^*$ is a \emph{Companion} of another Theory
 $\mathcal{T}$ if every Model of $\mathcal{T}$ can be Embedded in a
 Model of $\mathcal{T}^*$ and likewise every Model of $\mathcal{T}^*$
 can be Embedded in a Model of $\mathcal{T}$. A \emph{Model Companion}
-is a \emph{Companion} of a Theory that is \emph{Model Complete}.
+is a Companion of a Theory that is Model Complete.
 
 A \emph{Model Completion} is a Model Companion $\mathcal{T}^*$ of a
 Model $\mathcal{T}$ that has the Amalgamation Property
 (\S\ref{sec:amalgamation_property}). This means that every Model of
 $\mathcal{T}$ can be uniquiely Embedded in a Model of $\mathcal{T}^*$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Diagram}\label{sec:diagram}
+% --------------------------------------------------------------------
+
+The (\emph{Robinson}) \emph{Diagram} of a $\sigma$-structure,
+$\mathcal{A}$, denoted $diag(\mathcal{A})$, is the Set of all Closed
+Literals (\S\ref{sec:literal}) in the Language $\sigma(\bar{c})$ that
+are True in $(\mathcal{A}, \bar{a})$ where $\bar{a}$ is a Set of
+Generators (\S\ref{sec:generator}) of $\mathcal{A}$ named by Constants
+$\bar{c}$. Either the Diagram or Positive Diagram
+(\S\ref{sec:positive_diagram}) are not uniquely determined, depending
+on the choice of Generators, but they do determine the Model
+$\mathcal{A}$ up to Isomorphism.
+
+
+
+\subsubsection{Positive Diagram}\label{sec:positive_diagram}
+
+The \emph{Positive Diagram} of a $\sigma$-structure, $\mathcal{A}$,
+denoted $diag^+(\mathcal{A})$, is the Set of all Atomic Sentences of
+the Language $\sigma(\bar{c})$ that are True in $(\mathcal{A},
+\bar{a})$ where $\bar{a}$ is a Set of Generators
+(\S\ref{sec:generator}) of $\mathcal{A}$ named by Constants $\bar{c}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Compactness}\label{sec:compactness}
+% --------------------------------------------------------------------
+
+The \emph{Compactness Theorem} states that a First-order Theory
+(\S\ref{sec:formal_theory}) $\mathcal{T}$ has a Model if and only if
+every Finite Subset of $\mathcal{T}$ has a Model.
+
+Compactness (Topology \S\ref{sec:compact_space})
 
 
 
@@ -726,41 +748,57 @@ Non-constructive Proof
 \subsection{Model Existence Theorem}\label{sec:model_existence}
 % --------------------------------------------------------------------
 
+
+
+% ====================================================================
+\section{Finite Model Theory}\label{sec:finite_model}
+% ====================================================================
+
+\emph{Finite Model Theory} (FMT) is a restriction of Model Theory to
+Interpretations of Finite Structures (\S\ref{sec:structure}).
+
+A Finite Structure can always be described by a single First-order
+Sentence. An example structure of $n$ Elements:
+\[
+  \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
+  \varphi_m )
+\]
+This may be extended to a Finite number of Structures:
+\[
+  \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
+  \varphi_m )
+  \vee
+  \cdots
+  \vee
+  \exists x_1 \cdots \exists x_p ( \psi_1 \wedge \cdots \wedge
+  \psi_q )
+\]
+Note the difference here with Infinite First-order Model Theory in
+which a Model cannot be uniquely determined by a set of First-order
+Sentences because of the Compactness Theorem (for every Infinite Model
+a Non-isomorphic Model exists).
+
+The ability of a Property (\S\ref{sec:property}) $P$ to be expressed
+in First-order Logic may be determined by whether two Structures $A
+\in P$ and $B \notin P$ satisfy all the same First-order Sentences:
+\[
+  A \models \alpha \Leftrightarrow B \models \alpha
+\]
+
+
+
 % --------------------------------------------------------------------
-\subsection{Model Checking}\label{sec:model_checking}
+\subsection{Finite Model Property}\label{sec:finite_model_property}
 % --------------------------------------------------------------------
 
-\subsubsection{Abstract Interpretation}\label{sec:abstract_interpretation}
+A System of Logic $S$ has the \emph{Finite Model Property}, $fmp(S)$,
+if there is a Class of Models $\mathcal{E}$ such that any non-Theorem
+of $S$ is Falsified by some Finite Model in $\mathcal{E}$. If
+$fmp(S)$, $A$ is a $S$-theorem if and only if $A$ is a Theorem of the
+Theory of Finite Models of $S$.
 
-An \emph{Abstract Interpretation} gives several Semantic
-Interpretations related by levels of \emph{Abstraction}. The most
-precise Semantics are called \emph{Concrete Semantics}.
-
-\emph{Concrete Set}
-
-\emph{Abstract Set}
-
-\emph{Abstraction Function}
-
-\emph{Concretization Function}
-
-\emph{Valid Abstraction}
-
-
-
-\paragraph{Abstract Domain}\label{sec:abstract_domain}
-\hfill \\
-
-\emph{Relational Domain}
-
-\emph{Non-relational Domain}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Boolean Satisfiability Problem}
-\label{sec:boolean_satisfiability}
-% --------------------------------------------------------------------
+If $S$ is Finitely Axiomatizable (\S\ref{sec:axiom}) and $fmp(S)$ then
+it is Decidable (\S\ref{sec:computable_function}).
 
 
 
@@ -797,57 +835,10 @@ L\"owenheim-Skolem Property (\S\ref{sec:lowenheim_skolem}).
 to arbitrary Logical Systems formalized as \emph{Institutions}
 (\S\ref{sec:institution_theory}).
 
-
-
-% ====================================================================
-\section{Finite Model Theory}\label{sec:finite_model}
-% ====================================================================
-
-\emph{Finite Model Theory} (FMT) is a restriction of Model Theory to
-Interpretations of Finite Structures (\S\ref{sec:structure}).
-
-A Finite Structure can always be described by a single First-order
-Sentence. An example structure of $n$ Elements:
-\[
-  \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
-  \varphi_m )
-\]
-This may be extended to a Finite number of Structures:
-\[
-  \exists x_1 \cdots \exists x_n ( \varphi_1 \wedge \cdots \wedge
-  \varphi_m )
-  \vee
-  \cdots
-  \vee
-  \exists x_1 \cdots \exists x_p ( \psi_1 \wedge \cdots \wedge
-  \psi_q )
-\]
-Note the difference here with Infinite First-order Model Theory in
-which a Model cannot be uniquely determined by a set of First-order
-Sentences because of the Compactness Theorem (for every Infinite Model
-a Non-isomorphic Model exists).
-
-The ability of a Property (\S\ref{sec:property}) $P$ to be expressed
-in First-order Logic may be determined by whether two Structures $A
-\in P$ and $B \notin P$ satisfy all the same First-order Sentences:
-\[
-  A \vDash \alpha \Leftrightarrow B \vDash \alpha
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Finite Model Property}\label{sec:finite_model_property}
-% --------------------------------------------------------------------
-
-A System of Logic $S$ has the \emph{Finite Model Property}, $fmp(S)$,
-if there is a Class of Models $\mathcal{E}$ such that any non-Theorem
-of $S$ is Falsified by some Finite Model in $\mathcal{E}$. If
-$fmp(S)$, $A$ is a $S$-theorem if and only if $A$ is a Theorem of the
-Theory of Finite Models of $S$.
-
-If $S$ is Finitely Axiomatizable (\S\ref{sec:axiom}) and $fmp(S)$ then
-it is Decidable (\S\ref{sec:computable_function}).
+Models and Theories may be arbitrary objects along with an assumed
+Satisfaction Relation between Models and Sentences within a Context of
+a Signature. Signature Morphisms are assumed to preserver
+Satisfaction.
 
 
 
@@ -887,7 +878,7 @@ Language of $\mathcal{M}$:
 \]
 such that for every Finite Subset $p_0(\mathbf{x}) \subseteq
 p(\mathbf{x})$ there exist Elements $b_1,\ldots,b_n \in M$ with
-$\mathcal{M} \vDash p_0(b_1,\ldots,b_n)$.
+$\mathcal{M} \models p_0(b_1,\ldots,b_n)$.
 
 A \emph{Complete Type} is \emph{Maximal} (\S\ref{sec:formal_theory}))
 under Inclusion such that $\forall \varphi(\mathbf{x}) \in
@@ -896,7 +887,7 @@ $\neg \varphi(\mathbf{x}) \in p(\mathbf{x})$. A non-Complete type is
 called a \emph{Partial Type}.
 
 An $n$-type is \emph{Realized} in $\mathcal{M}$ if there is an Element
-$\mathbf{b} \in M^n$ such that $\mathcal{M} \vDash p(\mathbf{b})$.
+$\mathbf{b} \in M^n$ such that $\mathcal{M} \models p(\mathbf{b})$.
 This is guaranteed by the Compactness Theorem
 (\S\ref{sec:compactness}) in either $\mathcal{M}$ or an Elementary
 Extension (\S\ref{sec:model_substructure}) of $\mathcal{M}$. This is
@@ -942,3 +933,38 @@ Classified with the following terms:
 \item [Totally Transcendental]: \emph{Morley Rank}\cite{morley65} less
   than $\infty$
 \end{description}
+
+
+
+% ====================================================================
+\section{Model Checking}\label{sec:model_checking}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Abstract Interpretation}\label{sec:abstract_interpretation}
+% --------------------------------------------------------------------
+
+An \emph{Abstract Interpretation} gives several Semantic
+Interpretations related by levels of \emph{Abstraction}. The most
+precise Semantics are called \emph{Concrete Semantics}.
+
+\emph{Concrete Set}
+
+\emph{Abstract Set}
+
+\emph{Abstraction Function}
+
+\emph{Concretization Function}
+
+\emph{Valid Abstraction}
+
+
+
+\paragraph{Abstract Domain}\label{sec:abstract_domain}
+\hfill \\
+
+\emph{Relational Domain}
+
+\emph{Non-relational Domain}
+
+
