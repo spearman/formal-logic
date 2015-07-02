@@ -5,10 +5,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \emph{Set Theory} is formulated within First-order Logic
-(\S\ref{sec:predicate_logic}) and as such the objects of Set Theory
-are \emph{Sets} and Propositions. See \emph{Axiomatic Set Theory}
-(\S\ref{sec:axiomatic_set_theory}) for specific formulations of Set
-theory.
+(\S\ref{sec:firstorder_logic}) and as such the objects of Set Theory
+are \emph{Sets} (\S\ref{sec:set}) and \emph{Relations}
+(\S\ref{sec:relation}). See Axiomatic Set Theory
+(\S\ref{sec:axiomatic_set_theory}) for specific Systems of Set Theory.
 
 
 
@@ -16,23 +16,61 @@ theory.
 \section{Set}\label{sec:set}
 % ====================================================================
 
-\emph{Sets} are collections of distinct objects (some of which may
-themselves be other Sets), built on the Property of \emph{Membership}
-which can be expressed as a \emph{Binary Relation}
-(\S\ref{sec:binary_relation}) ``$\in$'' which is the \emph{Set
-  Membership Relation}. This Relation Maps 2-tuples of generic objects
-and Sets to True or False depending on whether the object is a
-\emph{Member} (or \emph{Element}) of the Set, e.g. $x \in A$ is True
-when the object $x$ is a Member of the Set $A$.
+A \emph{Set} is a Well-defined (\S\ref{sec:well_defined}) collection
+of distinct objects defined by the Property of \emph{Set Membership}
+which can be expressed as a Binary Relation
+(\S\ref{sec:binary_relation}) ``$\in$''. An object that satisfies this
+Relation for a particular Set is a \emph{Member} (or \emph{Element})
+of that Set, e.g. $x \in A$ is True when $x$ is a Member of the Set
+$A$.
 
-An Element that is specifically not a Set is called an
-\emph{Individual} or \emph{Urelement} (\S\ref{sec:urelement}).
+A Set is allowed to have other Sets as Members and conversely a Set is
+allowed to be a Member of other Sets. An object in Set Theory that is
+not allowed to have Members is called an \emph{Individual} or
+\emph{Urelement} (\S\ref{sec:urelement}) and an object that may have
+Members but may not be a Member of another object is called a
+\emph{Class} (\S\ref{sec:class}).
+
+A Set $A$ may be given by its Extension (\S\ref{sec:extension}), that
+is, listing each member in the Set:
+\[
+  A = \{x,y,z\}
+\]
+The Intentionsional (\S\ref{sec:intension}) Definition of a Set $B$
+may be given by a Property (\S\ref{sec:property}) or other rule that
+specifies its Members:
+\[
+  B = \{ x : x \in \mathbb{N}_0 \wedge x < 4 \}
+\]
+defines the Set $B$ with Extension $\{ 0, 1, 2, 3 \}$.
+
+By the Axiom of Extensionality (\S\ref{sec:extensionality_axiom}) Sets
+are uniquely defined by their constituent Elements and therefore Sets
+with multiple Members that are Identical are Equal and the order in
+which Elements are given is unimportant:
+\[
+  \{ 2, 3 \} = \{ 3, 2 \} = \{ 2, 3, 3, 2 \}
+\]
 
 
 
 % --------------------------------------------------------------------
 \subsection{Subset}\label{sec:subset}
 % --------------------------------------------------------------------
+
+For two Sets $A$ and $B$, if all the Members of $A$ are also Members
+of $B$, then $A$ is a \emph{Subset} of $B$, denoted $A \subseteq B$:
+\[
+  (\forall x) x \in A \rightarrow x \in B \Rightarrow A \subseteq B
+\]
+By this definition a Set is a Subset of itself, $A = B \Rightarrow A
+\subseteq B$, but a \emph{Proper Subset} may be defined as a Subset
+that is not equal to the containing Set, $A \subset B$:
+\[
+  A \subseteq B \wedge B \nsubseteq A \Rightarrow A \subset B
+\]
+
+
 
 \subsubsection{Cofinal}\label{sec:coinitial_cofinal}
 
@@ -42,127 +80,7 @@ An Element that is specifically not a Set is called an
 \subsection{Powerset}\label{sec:powerset}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Cardinality}\label{sec:cardinality}
-% --------------------------------------------------------------------
-
-\emph{Countable}
-
-\emph{Uncountable}
-
-\emph{Subcountable}
-
-The unique Set with Cardinality 0 is called the \emph{Empty Set} and
-is denoted $\{\}$ or $\varnothing$. A Set with Cardinality 1 is called a
-\emph{Singleton Set}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Unary Set Operators}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Binary Set Operators}
-% --------------------------------------------------------------------
-
-\subsubsection{Union}
-
-\emph{Union}
-
-
-
-\subsubsection{Disjoint Union}\label{sec:disjoint_union}
-
-Given a Family (\S\ref{sec:family}) of Sets ${A_i : i \in I}$,
-the \emph{Disjoint Union} is defined as:
-\[
-    \bigsqcup_{i \in I} A_i = \bigcup_{i \in I} {(x,i) : x \in A_i}
-\]
-
-
-
-\subsubsection{Infinitary Union}
-
-\[
-    x \in \bigcup S \leftrightarrow \exists y \in S : x \in y
-\]
-
-
-
-\subsubsection{Intersection}
-
-
-
-\subsubsection{Subset}
-
-\paragraph{Filter}
-
-A \emph{Filter}, $\mathcal{F}$, of a Set, $X$, is a Set of Subsets of
-$X$
-\[
-    \mathcal{F} \subseteq \mathcal{P}(X)
-\]
-where
-\begin{itemize}
-\item if $A \in \mathcal{F}$ and $B \supseteq A$, then $B \in
-  \mathcal{F}$
-\item if $A \in \mathcal{F}$ and $B \in \mathcal{F}$ then $A \cap B
-  \in \mathcal{F}$
-\item $X \in \mathcal{F}$ and $\emptyset \notin \mathcal{F}$
-\end{itemize}
-An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
-\subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
-
-
-
-\subsubsection{Symmetric Difference}\label{sec:symmetric_difference}
-
-The \emph{Symmetric Difference} of two Sets $A$ and $B$, denoted $A
-\oplus B$, is the Set of Elements in $A$ or $B$ but not both $A$ and
-$B$:
-\[
-  A \oplus B =
-  \{ x : (x \in A \vee x \in B) \wedge x \notin A \cap B \}
-\]
-or:
-\[
-  A \oplus B = A \setminus B \cup B \setminus A
-\]
-
-
-
-\subsubsection{Relative Complement}\label{sec:relative_complement}
-
-The \emph{Relative Complement} (or \emph{Difference}) of two Sets $A$
-and $B$, denoted $A \setminus B$, is the Set of Elements in $A$ but
-not $B$.
-
-\emph{Complement}
-
-\emph{Symmetric Difference}
-
-
-
-\subsubsection{Absolute Complement}\label{sec:absolute_complement}
-
-The \emph{Absolute Complement} (or \emph{Complement}) of a Set $A$ is
-the Relative Complement defined with $A$ and the given Universe,
-$\mathbf{U}$.
-
-
-
-\subsubsection{de Morgan's Law}\label{sec:de_morgan}
-
-\subsubsection{Cartesian Product}\label{sec:cartesian_product}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Family}\label{sec:family}
-% --------------------------------------------------------------------
-
-A \emph{Family} is a collection of Sets.
+\subsubsection{Cantor's Theorem}\label{sec:cantors_theorem}
 
 
 
@@ -183,25 +101,55 @@ Partition $P$ of $X$ has the Properties:
 
 
 % --------------------------------------------------------------------
-\subsection{Forcing}\label{sec:forcing}
+\subsection{Cardinality}\label{sec:cardinality}
 % --------------------------------------------------------------------
 
+The \emph{Cardinality} (or \emph{Size}) of a Set $A$, denoted $|A|$ or
+$card(A)$, is a measure of the number of Elements in the Set. Two Sets
+with the same Cardinality are said to be \emph{Equinumerous}.
+
+The unique Set with Cardinality 0 is called the \emph{Empty Set} and
+is denoted $\{\}$ or $\varnothing$. A Set with Cardinality 1 is called a
+\emph{Singleton Set}.
+
+Cardinal Numbers (\S\ref{sec:cardinal_number})
+
+Bijection (\S\ref{sec:bijection}) and Injection
+(\S\ref{sec:injection})
+
+Cantor's Theorem (\S\ref{sec:cantors_theorem})
+
+The Axiom of Choice (\S\ref{sec:choice_axiom}) Implies the Law of
+Trichotomy (\S\ref{sec:trichotomy_law}) for Cardinality which assigns
+a given Set $X$ to one of the Classes:
+
+\begin{description}
+\item [Finite] $|X| < |\mathbb{N}|$ (\S\ref{sec:finite})
+\item [Countably Infinite] $|X| = |\mathbb{N}| = \aleph_0$
+  (\S\ref{sec:countably_infinite})
+\item [Uncountably Infinite] $|\mathbb{N}| < |X|$
+  (\S\ref{sec:uncountably_infinite})
+\end{description}
+
+
+
+\subsubsection{Finite}\label{sec:finite}
+
+\subsubsection{Countably Infinite}\label{sec:countably_infinite}
+
+\subsubsection{Uncountably Infinite}\label{sec:uncountably_infinite}
+
+\subsubsection{Subcountable}\label{sec:subcountable}
+
+A Set $X$ is \emph{Subcountable} if there is a Partial Surjection from
+$\mathbb{N}$ onto the $X$, that is, if $X$ is Finite
+(\S\ref{sec:finite}) or Countably Infinite
+(\S\ref{sec:countably_infinite})
+
+
+
 % --------------------------------------------------------------------
-\subsection{Equalizers}\label{sec:set_equalizer}
-% --------------------------------------------------------------------
-
-Given two Sets $X,Y$ and Functions $f,g : X \rightarrow Y$, the
-\emph{Equalizer} of $f$ and $g$ is defined as
-\[
-    Eq(f,g) = { x \in X | f(x) = g(x) }
-\]
-
-\emph{Coequalizer}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Index Sets}\label{sec:index_set}
+\subsection{Index Set}\label{sec:index_set}
 % --------------------------------------------------------------------
 
 An \emph{Index Set} is one that \emph{Indexes} (or \emph{Labels})
@@ -213,43 +161,11 @@ Members of another Set. Indexing is a Surjective Function
 \subsubsection{Indexed Family}\label{sec:indexed_family}
 
 An \emph{Indexed Family} of Sets is a Function from an Index Set to
-the Class of Sets. For Index Set $J$ and Indexed Set $A$, the Indexed
-Family may be denoted
+the Class (\S\ref{sec:class}) of all Sets. For Index Set $J$ and
+Indexed Set $A$, the Indexed Family may be denoted
 \[
-    (A_j)_{j \in J}
+  (A_j)_{j \in J}
 \]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Decidable Set}\label{sec:decidable_set}
-% --------------------------------------------------------------------
-
-\emph{Semi-decidable Set}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Recursive Set}\label{sec:recursive_set}
-% --------------------------------------------------------------------
-
-\subsubsection{Recursively Enumerable Set}\label{sec:recursively_enumerable}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Hyperarithmetic Set}\label{sec:hyperarithmetic_set}
-% --------------------------------------------------------------------
-
-\emph{Hyperarithmetic Sets} are the Class of Sets denoted as
-$\Delta^1_1$ in the \emph{Analytic Hierarchy}
-(\S\ref{sec:analytic_hierarchy}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Analytical Set}\label{sec:analytical_set}
-% --------------------------------------------------------------------
 
 
 
@@ -257,15 +173,21 @@ $\Delta^1_1$ in the \emph{Analytic Hierarchy}
 \subsection{Transitive Set}\label{sec:transitive_set}
 % --------------------------------------------------------------------
 
-A Set, $S$, is \emph{Transitive} if and only if
+A Set, $A$, is \emph{Transitive} if and only if:
 \[
-    \bigcup S \subseteq S
+  \bigcup A \subseteq A
 \]
+That is for each non-empty Set $B \in A$:
+\[
+  B \in A \rightarrow B \subset A
+\]
+Transitivity for Classes (\S\ref{sec:class}) is defined in the same
+way.
 
-For two Transitive Sets, $S$ and $T$, the Set $S \cup T \cup \{S,T\}$
+For two Transitive Sets, $A$ and $B$, the Set $A \cup B \cup \{A,B\}$
 is Transitive.
 
-A Set, $S$, containing no Urelements is Transitive if and only if $S
+A Set, $B$, containing no Urelements is Transitive if and only if $A
 \subset \mathcal{P}(X)$
 
 
@@ -278,6 +200,93 @@ Set Theory (\S\ref{sec:kripke_platek}).
 
 The smallest example of an Admissible Set is the Set of
 \emph{Hereditarily Finite Sets}. %FIXME ref hereditarily finite
+
+
+
+% ===================================================================
+\section{Set Operation}\label{sec:set_operation}
+% ===================================================================
+
+% -------------------------------------------------------------------
+\subsection{Union}\label{sec:union}
+% -------------------------------------------------------------------
+
+\emph{Union}
+
+
+
+\subsubsection{Disjoint Union}\label{sec:disjoint_union}
+
+Given a Family (\S\ref{sec:family}) of Sets ${A_i : i \in I}$,
+the \emph{Disjoint Union} is defined as:
+\[
+    \bigsqcup_{i \in I} A_i = \bigcup_{i \in I} {(x,i) : x \in A_i}
+\]
+
+
+
+\subsubsection{Infinitary Union}\label{sec:infinitary_union}
+
+\[
+    x \in \bigcup S \leftrightarrow \exists y \in S : x \in y
+\]
+
+
+
+% -------------------------------------------------------------------
+\subsection{Intersection}\label{sec:intersection}
+% -------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------
+\subsection{Relative Complement}\label{sec:relative_complement}
+% -------------------------------------------------------------------
+
+The \emph{Relative Complement} (or \emph{Difference}) of two Sets $A$
+and $B$, denoted $A \setminus B$, is the Set of Elements in $A$ but
+not $B$.
+
+
+
+% -------------------------------------------------------------------
+\subsection{Symmetric Difference}\label{sec:symmetric_difference}
+% -------------------------------------------------------------------
+
+The \emph{Symmetric Difference} of two Sets $A$ and $B$, denoted $A
+\oplus B$, is the Set of Elements in $A$ or $B$ but not both $A$ and
+$B$:
+\[
+  A \oplus B =
+  \{ x : (x \in A \vee x \in B) \wedge x \notin A \cap B \}
+\]
+or:
+\[
+  A \oplus B = A \setminus B \cup B \setminus A
+\]
+
+
+
+% -------------------------------------------------------------------
+\subsection{Absolute Complement}\label{sec:absolute_complement}
+% -------------------------------------------------------------------
+
+The \emph{Absolute Complement} (or \emph{Complement}) of a Set $A$ is
+the Relative Complement of $A$ with the given Universe
+(\S\ref{sec:universe}) $\mathcal{U}$:
+\[
+  \mathcal{U} \setminus A
+\]
+
+
+
+% -------------------------------------------------------------------
+\subsection{Cartesian Product}\label{sec:cartesian_product}
+% -------------------------------------------------------------------
+
+% -------------------------------------------------------------------
+\subsection{de Morgan's Law}\label{sec:de_morgan}
+% -------------------------------------------------------------------
 
 
 
@@ -351,6 +360,16 @@ another Object as a Member.
 
 
 % ====================================================================
+\section{Family}\label{sec:family}
+% ====================================================================
+
+A \emph{Family} is a collection of Sets that is allowed to be a
+Multiset (\S\ref{sec:multiset}) and/or a Small or Proper Class
+(\S\ref{sec:class}).
+
+
+
+% ====================================================================
 \section{Universe}\label{sec:universe}
 % ====================================================================
 
@@ -417,248 +436,8 @@ considered the \emph{Universe of Ordinary Mathematics}.
 
 %FIXME similar to definitions above
 
-
-
-% ====================================================================
-\section{Map}\label{sec:set_map}
-% ====================================================================
-
-A \emph{Map} (or \emph{Mapping}) is a Relation or \emph{Morphism}
-(\S\ref{sec:morphism}) that is either a \emph{Function}
-(\S\ref{sec:set_function}) or \emph{Multimap} (\S\ref{sec:multimap}),
-depending on whether the Mapping is Determinate or not.
-
-Maps refer to the Extensional Definition of Functions (a Subset of the
-Cartesian Product of the Domain and Codomain), while the underlying
-Function may or may not be Extensionally Defined.
-
-
-
-% ====================================================================
-\section{Function}\label{sec:set_function}
-% ====================================================================
-
-A \emph{Function} $f$, defined for all Members of Set $A$ and $image(f)
-\subseteq B$ is written
-\[
-    f : A \rightarrow B
-\]
-The \emph{Input} or \emph{Domain} of $f$ is denoted $dom(f)$ and the
-\emph{Ouptut} or \emph{Co-domain} as $cod(f)$. The \emph{Image} of the
-Function is the Subset of the Codomain that the Function actually Maps
-to, and the Subset of the Domain that Maps to it is called the
-\emph{Inverse Image} or \emph{Preimage}. For an Element of a Set $Y$,
-$y \in Y$, under a Map $f: X \rightarrow Y$, the \emph{Fiber} of $y$
-is the Preimage of the Singleton Set $\{y\}$.
-
-Each Element of the Preimage Maps to one Element of the Image. This
-Property is expressed as
-\[
-    (a,b) \in f \wedge (a,c) \in f \rightarrow b = c
-\]
-A Relation without this Property is known as a \emph{Multimap}
-(\S\ref{sec:multimap}).
-
-The Extension of a Function may be called a \emph{Graph} of the
-Function.
-
-In the case where $image(f) = cod(f)$, $f$ is known as a
-\emph{Surjective Function} (\S\ref{sec:surjective_function}).
-
-\emph{Function Equality} is defined such that Equal Functions have the
-same Output for a given Input. A Function can be seen as a Subset of
-the Cartesian Product (\S\ref{sec:cartesian_product}) of the Domain
-and Codomain:
-\[
-    f \subseteq A \times B
-\]
-
-Given a second Function $g : B \rightarrow C$, there is a
-\emph{Composite Function}
-\[
-    g \circ f : A \rightarrow C
-\]
-where $(g \circ f)(a) = g(f(a))$ and $a \in A$. The \emph{Composition
-  Operation} $\circ$ is Associative: $(h \circ g) \circ f = h \circ (g
-\circ f)$. Composition of Functions may be represented with the
-$\circ$ elided: $gf$.
-
-%FIXME ref unit operation?
-\emph{Unit Operations} for the Composition Operation are
-\emph{Identity Functions} on Sets. The Identity Function for a Set $A$
-\[
-    I_A : A \rightarrow A
-\]
-is defined as
-\[
-    I_A(a) = a
-\]
-with the result given the function $f$ above
-\[
-    f \circ I_A = f = I_B \circ f
-\]
-
-A \emph{Fixed Point}, $c$, is an Element of the Domain Function that
-is Mapped to itself by the Function:
-\[
-    f(c) = c
-\]
-
-A \emph{Periodic Point} is an Element of the Domain of a Function that
-is returned to after a finite number of iterations.
-
-An \emph{Empty Function} has the Empty Set as a Domain, defining a
-Unique Function for each Set, $A$:
-\[
-    f_A : \varnothing \rightarrow A
-\]
-
-\emph{Finitary Function}
-
-\emph{Infinitary Function}
-
-\emph{Ordinate}, \emph{Abscissa}
-
-
-
 % --------------------------------------------------------------------
-\subsection{Injective Function}\label{sec:injective_function}
-% --------------------------------------------------------------------
-
-An \emph{Injective Function} (or \emph{One-to-one Function}) is one
-where the Elements of the Codomain are the Images of at most one
-Elements of the Domain. A Function that is Non-injective is considered
-an \emph{Information Losing Function} because the Inverse is no longer
-a Function but it is a \emph{Multimap} (\S\ref{sec:multimap}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Surjective Function}\label{sec:surjective_function}
-% --------------------------------------------------------------------
-
-A \emph{Surjective Function} is one such that the Image is equal to
-the Codomain. Such a Function may be said to be \emph{Onto} but is not
-necessarily \emph{Injective}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Bijective Function}\label{sec:bijective_function}
-% --------------------------------------------------------------------
-
-A \emph{Bijective Function} is one that is both Surjective and
-Injective (both One-to-one and Onto). A Function is Bijective if and
-only if it is also \emph{Invertible}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Inverses}\label{sec:inverse_functions}
-% --------------------------------------------------------------------
-
-For a Mapping between sets, $f: X \rightarrow Y$, a \emph{Left
-  Inverse} or \emph{Retraction} of $f$ is a Map $g: Y \rightarrow X$
-such that $gf = Id(X)$. A \emph{Right Inverse} or \emph{Section} of
-$f$ would be a Map $h: Y \rightarrow X$ such that $fh = Id(Y)$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Idempotence}\label{sec:idempotence}
-% --------------------------------------------------------------------
-
-A Function, $f$, is \emph{Idempotent} if $f^2 = f$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Partial Function}\label{sec:partial_function}
-% --------------------------------------------------------------------
-
-A \emph{Total Function} is one where the Function is defined for every
-Element of the Domain, while a \emph{Partial Function} the Function
-may be defined for only a Subset of the Domain called the \emph{Domain
-  of Definition}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Monotonicity}\label{sec:monotonicity}
-% --------------------------------------------------------------------
-
-A \emph{Monotonic Function} is a Function between \emph{Posets}
-(\S\ref{sec:order_theory}) where the Ordering of Elements of the
-Domain Imply the Ordering of Elements in the Image of those Elements
-under the Function.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Inclusion Map}\label{sec:inclusion_map}
-% --------------------------------------------------------------------
-
-An \emph{Inclusion Map} or \emph{Inclusion Function} is an Identity
-Function that Maps Elements of a Subset to those in a Superset
-\[
-    \iota : A \hookrightarrow X
-\]
-where $A \subseteq X$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Pointed Sets}
-% --------------------------------------------------------------------
-
-A \emph{Pointed Set} is one that has a \emph{Null Element}
-(\S\ref{sec:universal_property}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Indicator Functions}\label{sec:indicator_function}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Function Space}\label{sec:function_space}
-% --------------------------------------------------------------------
-
-The \emph{Function Space} of two Sets $A$ and $B$ is the Set of all
-Functions from $A$ to $B$ denoted by $B^A$.
-
-
-
-\subsubsection{Evaluation Function}\label{sec:evaluation_function}
-
-Given a Function Space $B^A$, the \emph{Evaluation Function} is
-defined as:
-\[
-    eval : B^A \times A \rightarrow B
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Pairing Function}\label{sec:pairing_function}
-% --------------------------------------------------------------------
-
-A \emph{Pairing Function} is a Primitive Recursive
-(\S\ref{sec:primitive_recursion}) Bijection:
-\[
-    \pi : \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Functional Predicate}\label{sec:functional_predicate}
-% --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Boolean-valued Function}\label{sec:boolean_function}
+\subsection{Forcing}\label{sec:forcing}
 % --------------------------------------------------------------------
 
 
@@ -667,26 +446,41 @@ A \emph{Pairing Function} is a Primitive Recursive
 \section{Relation}\label{sec:relation}
 % ====================================================================
 
-A \emph{Relation} is a Mapping between Truth-values and Tuples of
-individuals. The general definition for an $n$-ary Relation $L$ over
-Sets $X_1, \ldots, X_n$ is a Subset of the Cartesian Product $X_1
-\times \ldots \times X_n$ called the \emph{Graph} of $L$:
+A $n$-ary \emph{Relation} $L$ over Sets $X_1, \ldots, X_n$ is defined
+in Extension (\S\ref{sec:extension}) as a Subset of the Cartesian
+Product $X_1 \times \ldots \times X_n$ called the \emph{Graph} of $L$:
 \[
     G(L) \subseteq X_1 \times \ldots \times X_n
 \]
-The Expression $L x_1 \ldots x_n$ where $x_i \in X_i$ is True when
-$(x_1, \ldots, x_n) \in G(L)$ and False otherwise. Such an $n$-ary
-Relation may be completely specified by an $n + 1$-tuple called a
-\emph{Correspondence}:
+The Sets $X_1, \ldots, X_n$ are called the \emph{Domain} of $L$. If
+any Domain of $L$ is empty, then $L$ is the unique \emph{Empty
+  Relation} $L = \varnothing$.
+
+An $n$-ary Relation may be completely specified by an $n + 1$-tuple
+called a \emph{Correspondence} (or \emph{Embedded} or \emph{Included
+  Relation}):
 \[
     (X_1, \ldots, X_n, G(L))
 \]
-Such an $n$-ary Relation may also be described by a
-\emph{Characteristic Function} (or \emph{Indicator Function}): %FIXME
-                                %ref indicator function
+The Expression $L x_1 \ldots x_n$ where $x_i \in X_i$ is True when
+$(x_1, \ldots, x_n) \in G(L)$ and False otherwise. As such, an $n$-ary
+Relation may also be defined by a Boolean-valued \emph{Characteristic
+  Function} (or \emph{Indicator Function}
+\S\ref{sec:indicator_function}, cf. Predicate \S\ref{sec:predicate}):
 \[
     f_L : X_1 \times \ldots \times X_n \rightarrow \{\top,\bot\}
 \]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finitary Relation}\label{sec:finitary_relation}
+% --------------------------------------------------------------------
+
+A Relation with a Finite Arity is called a \emph{Finitary Relation}.
+
+There are only two $0$-ary Relations on the Empty Tuple $()$: one that
+is always True and one that is always False.
 
 
 
@@ -872,6 +666,15 @@ The Reflexive Reduction of $x \leq y$ is $x < y$.
 
 
 % --------------------------------------------------------------------
+\subsection{Multimap}\label{sec:multimap}
+% --------------------------------------------------------------------
+
+A \emph{Multimap} (or \emph{Multi-valued Function}) is a Left-total
+Relation.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Relation Join}\label{sec:relation_join}
 % --------------------------------------------------------------------
 
@@ -975,23 +778,271 @@ Extensional.
 
 
 % ====================================================================
-\section{Multimap}\label{sec:multimap}
+\section{Function}\label{sec:set_function}
 % ====================================================================
 
-A \emph{Multimap} (or \emph{Multi-valued Function}) is a Left-total
-Relation.
+A \emph{Function} $f$, defined for all Members of Set $A$ and $image(f)
+\subseteq B$ is written
+\[
+    f : A \rightarrow B
+\]
+The \emph{Input} or \emph{Domain} of $f$ is denoted $dom(f)$ and the
+\emph{Ouptut} or \emph{Co-domain} as $cod(f)$. The \emph{Image} of the
+Function is the Subset of the Codomain that the Function actually Maps
+to, and the Subset of the Domain that Maps to it is called the
+\emph{Inverse Image} or \emph{Preimage}. For an Element of a Set $Y$,
+$y \in Y$, under a Map $f: X \rightarrow Y$, the \emph{Fiber} of $y$
+is the Preimage of the Singleton Set $\{y\}$.
+
+Each Element of the Preimage Maps to one Element of the Image. This
+Property is expressed as
+\[
+    (a,b) \in f \wedge (a,c) \in f \rightarrow b = c
+\]
+A Relation without this Property is known as a \emph{Multimap}
+(\S\ref{sec:multimap}).
+
+The Extension of a Function may be called a \emph{Graph} of the
+Function.
+
+In the case where $image(f) = cod(f)$, $f$ is known as a
+\emph{Surjective Function} (\S\ref{sec:surjective_function}).
+
+\emph{Function Equality} is defined such that Equal Functions have the
+same Output for a given Input. A Function can be seen as a Subset of
+the Cartesian Product (\S\ref{sec:cartesian_product}) of the Domain
+and Codomain:
+\[
+    f \subseteq A \times B
+\]
+
+Given a second Function $g : B \rightarrow C$, there is a
+\emph{Composite Function}
+\[
+    g \circ f : A \rightarrow C
+\]
+where $(g \circ f)(a) = g(f(a))$ and $a \in A$. The \emph{Composition
+  Operation} $\circ$ is Associative: $(h \circ g) \circ f = h \circ (g
+\circ f)$. Composition of Functions may be represented with the
+$\circ$ elided: $gf$.
+
+%FIXME ref unit operation?
+\emph{Unit Operations} for the Composition Operation are
+\emph{Identity Functions} on Sets. The Identity Function for a Set $A$
+\[
+    I_A : A \rightarrow A
+\]
+is defined as
+\[
+    I_A(a) = a
+\]
+with the result given the function $f$ above
+\[
+    f \circ I_A = f = I_B \circ f
+\]
+
+A \emph{Fixed Point}, $c$, is an Element of the Domain Function that
+is Mapped to itself by the Function:
+\[
+    f(c) = c
+\]
+
+A \emph{Periodic Point} is an Element of the Domain of a Function that
+is returned to after a finite number of iterations.
+
+An \emph{Empty Function} has the Empty Set as a Domain, defining a
+Unique Function for each Set, $A$:
+\[
+    f_A : \varnothing \rightarrow A
+\]
+
+\emph{Finitary Function}
+
+\emph{Infinitary Function}
+
+\emph{Ordinate}, \emph{Abscissa}
 
 
+
+% --------------------------------------------------------------------
+\subsection{Injective Function}\label{sec:injective_function}
+% --------------------------------------------------------------------
+
+An \emph{Injective Function} (or \emph{One-to-one Function}) is one
+where the Elements of the Codomain are the Images of at most one
+Elements of the Domain. A Function that is Non-injective is considered
+an \emph{Information Losing Function} because the Inverse is no longer
+a Function but it is a \emph{Multimap} (\S\ref{sec:multimap}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Surjective Function}\label{sec:surjective_function}
+% --------------------------------------------------------------------
+
+A \emph{Surjective Function} is one such that the Image is equal to
+the Codomain. Such a Function may be said to be \emph{Onto} but is not
+necessarily \emph{Injective}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Injection}\label{sec:injection}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Bijection}\label{sec:bijection}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Bijective Function}\label{sec:bijective_function}
+% --------------------------------------------------------------------
+
+A \emph{Bijective Function} is one that is both Surjective and
+Injective (both One-to-one and Onto). A Function is Bijective if and
+only if it is also \emph{Invertible}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Inverses}\label{sec:inverse_functions}
+% --------------------------------------------------------------------
+
+For a Mapping between sets, $f: X \rightarrow Y$, a \emph{Left
+  Inverse} or \emph{Retraction} of $f$ is a Map $g: Y \rightarrow X$
+such that $gf = Id(X)$. A \emph{Right Inverse} or \emph{Section} of
+$f$ would be a Map $h: Y \rightarrow X$ such that $fh = Id(Y)$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Idempotence}\label{sec:idempotence}
+% --------------------------------------------------------------------
+
+A Function, $f$, is \emph{Idempotent} if $f^2 = f$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Partial Function}\label{sec:partial_function}
+% --------------------------------------------------------------------
+
+A \emph{Total Function} is one where the Function is defined for every
+Element of the Domain, while a \emph{Partial Function} the Function
+may be defined for only a Subset of the Domain called the \emph{Domain
+  of Definition}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Monotonicity}\label{sec:monotonicity}
+% --------------------------------------------------------------------
+
+A \emph{Monotonic Function} is a Function between \emph{Posets}
+(\S\ref{sec:order_theory}) where the Ordering of Elements of the
+Domain Imply the Ordering of Elements in the Image of those Elements
+under the Function.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Inclusion Map}\label{sec:inclusion_map}
+% --------------------------------------------------------------------
+
+An \emph{Inclusion Map} or \emph{Inclusion Function} is an Identity
+Function that Maps Elements of a Subset to those in a Superset
+\[
+    \iota : A \hookrightarrow X
+\]
+where $A \subseteq X$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Pointed Sets}
+% --------------------------------------------------------------------
+
+A \emph{Pointed Set} is one that has a \emph{Null Element}
+(\S\ref{sec:universal_property}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Indicator Functions}\label{sec:indicator_function}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Function Space}\label{sec:function_space}
+% --------------------------------------------------------------------
+
+The \emph{Function Space} of two Sets $A$ and $B$ is the Set of all
+Functions from $A$ to $B$ denoted by $B^A$.
+
+
+
+\subsubsection{Evaluation Function}\label{sec:evaluation_function}
+
+Given a Function Space $B^A$, the \emph{Evaluation Function} is
+defined as:
+\[
+    eval : B^A \times A \rightarrow B
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Equalizer}\label{sec:equalizer}
+% --------------------------------------------------------------------
+
+Given two Sets $X,Y$ and Functions $f,g : X \rightarrow Y$, the
+\emph{Equalizer} of $f$ and $g$ is defined as
+\[
+    Eq(f,g) = { x \in X | f(x) = g(x) }
+\]
+
+\emph{Coequalizer}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Pairing Function}\label{sec:pairing_function}
+% --------------------------------------------------------------------
+
+A \emph{Pairing Function} is a Primitive Recursive
+(\S\ref{sec:primitive_recursion}) Bijection:
+\[
+    \pi : \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Functional Predicate}\label{sec:functional_predicate}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Boolean-valued Function}\label{sec:boolean_function}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Naive Set Theory}\label{sec:naive_set_theory}
+% ====================================================================
 
 % ====================================================================
 \section{Axiomatic Set Theory}\label{sec:axiomatic_set_theory}
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Zermelo-Fraenkel (ZFC)}\label{sec:zermelo_fraenkel}
+\subsection{Axiom of Choice}\label{sec:choice_axiom}
 % --------------------------------------------------------------------
 
-\subsubsection{Axiom of Extensionality}\label{sec:extensionality_axiom}
+% --------------------------------------------------------------------
+\subsection{Axiom of Extensionality}\label{sec:extensionality_axiom}
+% --------------------------------------------------------------------
 \[
     \forall S \forall T
         [S = T \Leftrightarrow \forall R [ R \in S \Leftrightarrow R \in T ]]
@@ -1002,6 +1053,9 @@ cf. \emph{Leibniz Law} (\S\ref{sec:equality}):
         [S = T \Leftrightarrow \forall R [ S \in R \Leftrightarrow T \in R ]]
 \]
 
+% --------------------------------------------------------------------
+\subsection{Zermelo-Fraenkel (ZFC)}\label{sec:zermelo_fraenkel}
+% --------------------------------------------------------------------
 
 
 % --------------------------------------------------------------------
@@ -1011,6 +1065,12 @@ cf. \emph{Leibniz Law} (\S\ref{sec:equality}):
 % --------------------------------------------------------------------
 \subsection{New Foundations (NF)}\label{sec:quine_foundations}
 % --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Set Algebra}\label{sec:set_algebra}
+% ===================================================================
 
 
 
@@ -1122,6 +1182,10 @@ Total.
 A \emph{Well-order} is a Total Order on a Set $S$ such that every
 non-empty Subset of $S$ has a Least Element.
 
+\subparagraph{Well-ordering Theorem}\label{sec:wellorder_theorem}
+
+Axiom of Choice (\S\ref{sec:choice_axiom})
+
 
 
 \subsubsection{Upper \& Lower Sets}\label{sec:upper_lower}
@@ -1200,10 +1264,41 @@ $<$.
 
 
 % --------------------------------------------------------------------
+\subsection{Filter}\label{sec:filter}
+% --------------------------------------------------------------------
+
+Poset (\S\ref{sec:poset})
+
+A \emph{Filter}, $\mathcal{F}$, of a Set, $X$, is a Set of Subsets of
+$X$:
+\[
+    \mathcal{F} \subseteq \mathcal{P}(X)
+\]
+where:
+\begin{itemize}
+\item if $A \in \mathcal{F}$ and $B \supseteq A$, then $B \in
+  \mathcal{F}$
+\item if $A \in \mathcal{F}$ and $B \in \mathcal{F}$ then $A \cap B
+  \in \mathcal{F}$
+\item $X \in \mathcal{F}$ and $\emptyset \notin \mathcal{F}$
+\end{itemize}
+
+
+
+\subsubsection{Ultrafilter}\label{sec:ultrafilter}
+
+An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
+\subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Order Ideal}\label{sec:order_ideal}
 % --------------------------------------------------------------------
 
-
+% --------------------------------------------------------------------
+\subsection{Law of Trichotomy}\label{sec:trichotomy_law}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Domain Theory}\label{sec:domain_theory}
@@ -1231,13 +1326,9 @@ String (\S\ref{sec:string})
 \subsection{Subsequence}\label{sec:subsequence}
 % --------------------------------------------------------------------
 
-
-
 % --------------------------------------------------------------------
 \subsection{Tuple}\label{sec:tuple}
 % --------------------------------------------------------------------
-
-
 
 % --------------------------------------------------------------------
 \subsection{Infinite Sequence}\label{sec:infinite_sequence}
@@ -1367,6 +1458,43 @@ exchanges two Elements and leaves all other Elements fixed.
 % ====================================================================
 \section{Constructive Set Theory}\label{sec:constructive_set_theory}
 % ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Apartness}\label{sec:apartness}
+% --------------------------------------------------------------------
+
+An \emph{Apartness Relation} is a Binary Relation $\#$ such that:
+
+\begin{enumerate}
+\item $\neg (x\#x)$
+\item $x\#y \rightarrow y\#x$
+\item $x\#y \rightarrow (x\#z \vee y\#z)$
+\end{enumerate}
+
+In Models of IZF all Sets with Apartness Relations are Subcountable
+(\S\ref{sec:subcountable}).
+
+
+
+\subsubsection{Tight}\label{sec:tight}
+
+A \emph{Tight Apartness Relation} is an Apartness Relation that
+additionally satisfies:
+\[
+  \neg (x \# y) \rightarrow x = y
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{IZF}\label{sec:izf}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{CZF}\label{sec:czf}
+% --------------------------------------------------------------------
+
+
 
 % ====================================================================
 \section{Inner Model Theory}\label{sec:inner_model_theory}
