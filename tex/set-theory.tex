@@ -154,7 +154,7 @@ $\mathbb{N}$ onto the $X$, that is, if $X$ is Finite
 
 An \emph{Index Set} is one that \emph{Indexes} (or \emph{Labels})
 Members of another Set. Indexing is a Surjective Function
-(\S\ref{sec:set_function}) from an Index Set onto a target Set.
+(\S\ref{sec:function}) from an Index Set onto a target Set.
 
 
 
@@ -296,7 +296,7 @@ the Relative Complement of $A$ with the given Universe
 
 A \emph{Multiset} (or \emph{Bag}) is a 2-tuple $(A,m)$ of an
 \emph{Underlying Set}, $A$, together with a \emph{Multiplicity
-  Function} (\S\ref{sec:set_function}), $m : A \rightarrow
+  Function} (\S\ref{sec:function}), $m : A \rightarrow
 \mathbb{N}_{\geq 1}$, mapping Elements of $A$ to Positive Natural
 Numbers representing the \emph{Multiplicity} Elements, that is the
 number of times an Element occurs in the Multiset. A Multiset may be
@@ -482,81 +482,97 @@ A Relation with a Finite Arity is called a \emph{Finitary Relation}.
 There are only two $0$-ary Relations on the Empty Tuple $()$: one that
 is always True and one that is always False.
 
+A $2$-ary Relation is usually called a Binary Relation
+(\S\ref{sec:binary_relation}), and a $3$-ary Relation may be called a
+Ternary Relation.
+
 
 
 % --------------------------------------------------------------------
 \subsection{Binary Relation}\label{sec:binary_relation}
 % --------------------------------------------------------------------
 
-Also \emph{Dyadic Relation}. Given a \emph{Binary Relation} $R$ on a
-Set $X$, $R$ is
+A \emph{Binary} (or \emph{Dyadic}) Relation is a $2$-ary Relation.
+
+A Binary Relation $R$ on a Set $A$ is:
 \begin{description}
-\item[Serial] when
-\[
-    \forall a \in X \exists b \in X : aRb
-\]
-\item[Reflexive] when
-\[
-    aRa = \top
-\]
-Reflexive implies Transitive and Serial
-\item[Irreflexive] (also \emph{Strict}) when
-\[
-    aRa = \bot
-\]
-\item[Co-reflexive] when
-\[
-    aRb \rightarrow a = b
-\]
-\item[Transitive] when
-\[
-    aRb \wedge bRc \rightarrow aRc
-\]
-Transitive and Irreflexive if and only if Transitive and Asymmetric
-\item[Symmetric] when
-\[
-    aRb \leftrightarrow bRa
-\]
-\item[Anti-symmetric] when
-\[
-    aRb \wedge bRa \rightarrow a = b
-\]
-\item[Asymmetric] when both Anti-symmetric and Irreflexive
-\[
-    aRb \rightarrow \neg bRa
-\]
-\item[Left-total] when
-\[
-    \forall a \in X \exists b \in X : aRb
-\]
-\emph{Functions} (\S\ref{sec:set_function}) are Left-total Relations
-\item[Right-total] (Surjective or Onto
-  (\S\ref{sec:surjective_function})) when
-\[
-    \forall b \in X \exists a \in X : aRb
-\]
-\item[Total] when
-\[
-    \forall a,b \in X, aRb \vee bRa
-\]
-Total implies Reflexive.
-\item[Trichotomous] when
-\[
-    aRb \vee bRa \vee a = b
-\]
-Trichotomous implies Irreflexive.
-Trichotomous and Transitive implies Asymmetric.
-A Transitive Trichotomous Relation is a Strict Total Order.
-\item[Right Euclidean] when
-\[
-    aRb \wedge aRc \rightarrow bRc
-\]
-\item[Left Euclidean] when
-\[
-    bRa \wedge cRa \rightarrow bRc
-\]
+\item[Serial](\S\ref{sec:serial_relation}) if:
+  \[
+    \forall a \in A \exists b \in A : xRy
+  \]
+\item[Reflexive](\S\ref{sec:serial_relation}) if:
+  \[
+    xRx = \top
+  \]
+  Reflexive implies Transitive and Serial
+\item[Irreflexive] (also \emph{Strict}
+  \S\ref{sec:irreflexive_relation}) if:
+  \[
+    xRx = \bot
+  \]
+\item[Co-reflexive](\S\ref{sec:coreflexive_relation}) if:
+  \[
+    xRy \rightarrow a = b
+  \]
+\item[Transitive](\S\ref{sec:transitive_relation}) if:
+  \[
+    xRy \wedge yRc \rightarrow xRc
+  \]
+  Transitive and Irreflexive if and only if Transitive and Asymmetric
+\item[Symmetric](\S\ref{sec:symmetric_relation}) if:
+  \[
+    xRy \leftrightarrow yRx
+  \]
+\item[Anti-symmetric](\S\ref{sec:antisymmetric_relation}) if:
+  \[
+    xRy \wedge yRx \rightarrow a = b
+  \]
+\item[Asymmetric](\S\ref{sec:antisymmetric_relation}) if both
+  Anti-symmetric and Irreflexive:
+  \[
+    xRy \rightarrow \neg yRx
+  \]
+\item[Left-total] (\S\ref{sec:lefttotal_relation}) if:
+  \[
+    \forall a \in A \exists b \in A : xRy
+  \]
+  Multimaps (\S\ref{sec:multimap}) and Functions
+  (\S\ref{sec:function}) are Left-total
+\item[Right-total] (\emph{Surjective} or \emph{Onto}
+  (\S\ref{sec:surjective_function})) if:
+  \[
+    \forall b \in A \exists a \in A : xRy
+  \]
+\item[Right-unique] (or \emph{Functional} or \emph{Univalent}
+  \S\ref{sec:functional_relation}) if:
+  \[
+    \forall x \in dom(R), y \in rng(R)
+    (xRy \wedge xRz \rightarrow y = z)
+  \]
+\item[Total] (\S\ref{sec:total_relation}) if:
+  \[
+    \forall a,b \in A, xRy \vee yRx
+  \]
+  Total implies Reflexive (\S\ref{sec:reflexive_relation})
+\item[Trichotomous] (\S\ref{sec:trichotomous_relation}) if:
+  \[
+    xRy \vee yRx \vee a = b
+  \]
+  Trichotomous implies Irreflexive (\S\ref{sec:irreflexive_relation}).
+  Trichotomous and Transitive (\S\ref{sec:transitive_relation})
+  implies Asymmetric (\S\ref{sec:asymmetric_relation}). A Transitive
+  Trichotomous Relation is a Strict Total Order
+  (\S\ref{sec:strict_order}, \S\ref{sec:total_order}).
+\item[Right Euclidean] (\S\ref{sec:euclidean_relation}) if:
+  \[
+    xRy \wedge xRc \rightarrow yRc
+  \]
+\item[Left Euclidean] (\S\ref{sec:euclidean_relation}) if:
+  \[
+    yRx \wedge cRx \rightarrow yRc
+  \]
 \end{description}
-From the above types of Relations, the following Orders
+From the above Classes of Relations, the following Orders
 (\S\ref{sec:order_theory}) are distinguished, listed here from most
 general to most restricted:
 \begin{description}
@@ -572,23 +588,41 @@ general to most restricted:
   (\S\ref{sec:equivalence_relation}).
 \end{description}
 
-The Set of all Binary Relations on a Set $X$ is denoted
-$\mathbf{Rel}(X)$ and is the Power Set of $X \times X$: $2^{X \times
-  X}$.
-
-Functions (\S\ref{sec:set_function}) are Well-defined Binary Relations.
+The Set of all Binary Relations on a Set $A$ is denoted
+$\mathbf{Rel}(A)$ and is the Power Set of $A \times A$: $2^{A \times
+  A}$.
 
 A Dependency Relation is a Binary Relation that is Symmetric and
 Reflexive.
 
-Undirected Graphs (\S\ref{sec:undirected_graph}) are Symmetric.
-Any Binary Relation may be a Directed Graph
-(\S\ref{sec:directed_graph}). A Binary Relation is a Complete Graph
-(\S\ref{sec:complete_graph}) when $a \neq b \rightarrow aRb$ and
-implies Symmetry. A Binary Relation is a Tournament when $a \neq b
-\rightarrow aRb \vee bRa$ and implies Anti-symmetry.
+Undirected Graphs (\S\ref{sec:undirected_graph}) are Symmetric. Any
+Binary Relation may be a Directed Graph (\S\ref{sec:directed_graph}).
+A Binary Relation is a Complete Graph (\S\ref{sec:complete_graph})
+when $a \neq b \rightarrow xRy$ and implies Symmetry. A Binary
+Relation is a Tournament when $a \neq b \rightarrow xRy \vee yRx$ and
+implies Anti-symmetry.
 
 
+
+\subsubsection{Reflexive Relation}\label{sec:reflexive_relation}
+
+\subsubsection{Irreflexive Relation}\label{sec:irreflexive_relation}
+
+\subsubsection{Coreflexive Relation}\label{sec:coreflexive_relation}
+
+\subsubsection{Transitive Relation}\label{sec:transitive_relation}
+
+\subsubsection{Symmetric Relation}\label{sec:symmetric_relation}
+
+\subsubsection{Antisymmetric Relation}\label{sec:antisymmetric_relation}
+
+\subsubsection{Asymmetric Relation}\label{sec:asymmetric_relation}
+
+\subsubsection{Functional Relation}\label{sec:functional_relation}
+
+\subsubsection{Left-total Relation}\label{sec:lefttotal_relation}
+
+\subsubsection{Total Relation}\label{sec:total_relation}
 
 \subsubsection{Equivalence Relation}\label{sec:equivalence_relation}
 
@@ -609,25 +643,50 @@ Equivalence Relation on Elements $a,b \in S$:
 \[
     a \sim b \Leftrightarrow f(a) = f(b)
 \]
-where the Equivalence Classes are the Fibers
-(\S\ref{sec:set_function}) of the Elements in $T$ and the Quotient Set
-is the Image of the Equivalence Relation viewed as a Function on
-Elements of $S$ to their Equivalence Classes.
+where the Equivalence Classes are the Fibers (\S\ref{sec:function}) of
+the Elements in $T$ and the Quotient Set is the Image of the
+Equivalence Relation viewed as a Function on Elements of $S$ to their
+Equivalence Classes.
 
 
 
-\subsubsection{Congruence Relation}\label{sec:congruence_relation}
+\paragraph{Congruence Relation}\label{sec:congruence_relation}
 
 
+
+
+\subsubsection{Trichotomous Relation}\label{sec:trichotomous_relation}
+
+\subsubsection{Serial Relation}\label{sec:serial_relation}
 
 \subsubsection{Ordering Relation}\label{sec:ordering_relation}
 
-\emph{Partial Order}
+Order Theory (\S\ref{sec:order_theory})
+
+Partial Order (\S\ref{sec:partial_order})
 
 The Signature (\S\ref{sec:signature}) of Partial Orderings is
 $\{\leq\}$.
 
 \emph{Total Order}
+
+
+
+\paragraph{Partial Order}\label{sec:partial_order}
+\hfill \\
+
+\subparagraph{Strict Order}\label{sec:strict_order}
+
+
+
+\paragraph{Total Order}\label{sec:total_order}
+
+
+
+
+\subsubsection{Euclidean Relation}\label{sec:euclidean_relation}
+
+\emph{Left-euclidean} \emph{Right-euclidean}
 
 
 
@@ -643,34 +702,28 @@ $\{\leq\}$.
 
 
 
-\subsubsection{Reflexive Reduction}\label{sec:reflexive_reduction}
-
-The \emph{Irreflexive Kernel} or \emph{Reflexive Reduction} of a
-Binary Relation $R$ on a Set $S$ is the smallest Relation $Y$
-such that $Y$ has the same Reflexive Closure as $R$:
-\[
-    Y = (R\;\setminus=)
-\]
-The Reflexive Reduction of $x \leq y$ is $x < y$.
-
-
-
 \subsubsection{Well-founded Relation}\label{sec:well_founded}
 
 \emph{Well-founded}
 
 
 
-\subsubsection{$P$-closure}\label{sec:p_closure}
+\paragraph{Noetherian Relation}\label{sec:noetherian_relation}
+\hfill \\
+
+\emph{Noetherian} (or \emph{Terminating})
 
 
 
-% --------------------------------------------------------------------
-\subsection{Multimap}\label{sec:multimap}
-% --------------------------------------------------------------------
+\subsubsection{Extensional Relation}\label{sec:extensional_relation}
 
-A \emph{Multimap} (or \emph{Multi-valued Function}) is a Left-total
-Relation.
+A Binary Relation $R$ is \emph{Extensional} if and only if:
+\[
+  \forall x,y (x = y \leftrightarrow
+    \forall z (R(x,z) \leftrightarrow R(y,z))
+\]
+The Converse of an Extensional Relation is not necessarily
+Extensional.
 
 
 
@@ -704,12 +757,13 @@ is defined as:
 \subsection{Closure}\label{sec:set_closure}
 % --------------------------------------------------------------------
 
-A Set, $S$, is \emph{Closed} (has \emph{Closure}) under an Operation,
-$\cdot$, if for every Input from $S$, the Output of the Operation is
-also in $S$:
+A Set, $A$, is \emph{Closed} (has \emph{Closure}) under a Relation,
+$L$, if for every $(x,y) \in L$, $y \in dom(L)$:
 \[
-    \forall x \in S : (x,y) \in \cdot \Rightarrow y \in S
+    (\forall x \in A) (x,y) \in L \Rightarrow y \in A
 \]
+
+
 
 \subsubsection{Transitive Closure}\label{sec:transitive_closure}
 
@@ -739,6 +793,19 @@ The Reflexive Closure of $<$ is $\leq$.
 
 
 
+\paragraph{Reflexive Reduction}\label{sec:reflexive_reduction}
+\hfill \\
+
+The \emph{Reflexive Reduction} (or \emph{Irreflexive Kernel}) of a
+Binary Relation $R$ on a Set $S$ is the smallest Relation $Y$ such
+that $Y$ has the same Reflexive Closure as $R$:
+\[
+    Y = (R\;\setminus=)
+\]
+The Reflexive Reduction of $x \leq y$ is $x < y$.
+
+
+
 \subsubsection{Symmetric Closure}\label{sec:symmetric_closure}
 
 The \emph{Symmetric Closure}, $X$, of a Binary Relation, $R$, on a
@@ -751,34 +818,14 @@ Set, $S$, is the Union of $R$ with its Inverse Relation:
 
 \subsubsection{Finitary Closure}\label{sec:finitary_closure}
 
-
-
 \subsubsection{Rewrite Closure}\label{sec:rewrite_closure}
 
-
-
-% --------------------------------------------------------------------
-\subsection{Extensionality}\label{sec:extensionality}
-% --------------------------------------------------------------------
-
-A Binary Relation $R$ is \emph{Extensional} if and only if:
-\[
-  \forall x,y (x = y \leftrightarrow
-    \forall z (R(x,z) \leftrightarrow R(y,z))
-\]
-The Converse of an Extensional Relation is not necessarily
-Extensional.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Noetherian Relation}\label{sec:noetherian_relation}
-% --------------------------------------------------------------------
+\subsubsection{$P$-closure}\label{sec:p_closure}
 
 
 
 % ====================================================================
-\section{Function}\label{sec:set_function}
+\section{Function}\label{sec:function}
 % ====================================================================
 
 A \emph{Function} $f$, defined for all Members of Set $A$ and $image(f)
@@ -1029,8 +1076,13 @@ A \emph{Pairing Function} is a Primitive Recursive
 
 
 % ====================================================================
-\section{Naive Set Theory}\label{sec:naive_set_theory}
+\subsection{Multimap}\label{sec:multimap}
 % ====================================================================
+
+A \emph{Multimap} (or \emph{Multi-valued Function}) is a Left-total
+Relation.
+
+
 
 % ====================================================================
 \section{Axiomatic Set Theory}\label{sec:axiomatic_set_theory}
@@ -1170,7 +1222,7 @@ of the Cofinal Subsets (\S\ref{sec:coinitial_cofinal}) of $A$.
 
 
 
-\subsubsection{Totally Ordered Set}\label{sec:total_order}
+\subsubsection{Totally Ordered Set}\label{sec:totally_ordered}
 
 A \emph{Totally Ordered Set} is a Poset whose Ordering Relation is
 Total.
