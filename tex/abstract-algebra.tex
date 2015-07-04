@@ -8,17 +8,11 @@
 \section{Universal Algebra}\label{sec:universal_algebra}
 % ====================================================================
 
-%FIXME: ref Complete Lattices
-Universal Algebra is the study of \emph{Algebraic Structure} (as
-opposed to specific instances of Algebraic Systems). Universal Algebra
-together with \emph{Category Theory} (Part \ref{sec:category_theory})
-makes up \emph{Abstract Algebra} (\S\ref{sec:abstract_algebra}). An
-Algebraic Structure differs from a general \emph{Mathematical
-  Structure} in that its Signature consists of only Function Symbols
-and no Relation Symbols.
-
-An Algebra may be limited by Axioms of \emph{Equational Laws} (eg. the
-Associative Axiom).
+\emph{Universal Algebra} is the study of \emph{Algebraic Structures}
+(\S\ref{sec:algebraic_structure}), that is, Structures
+(\S\ref{sec:structure}) with only Functional Symbols and no Relation
+Symbols. Universal Algebra together with Category Theory (Part
+\ref{sec:category_theory}) makes up Abstract Algebra.
 
 
 
@@ -28,82 +22,131 @@ Associative Axiom).
 
 Structure (\S\ref{sec:structure})
 
+An Algebra may be limited by Axioms of \emph{Equational Laws}
+(\S\ref{sec:equational_law}), e.g. the Associative Axiom.
+
+Allowing for Infinitary Operations leads to the Algebraic Theory of
+Complete Lattics (\S\ref{sec:complete_lattice}).
 
 
-% --------------------------------------------------------------------
-\subsection{Congruence}\label{sec:general_congruence}
-% --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Kernel}\label{sec:general_kernel}
-% --------------------------------------------------------------------
+\subsubsection{Algebraic Type}\label{sec:algebraic_type}
 
-For Algebraic Structures $A$ and $B$, and Homomorphism $f: A
-\rightarrow B$, the \emph{Kernel} of $f$ is defined as:
+The \emph{Algebraic Type} of an Algebraic Structure, $\Omega$, is an
+Ordered Sequence of Natural Numbers listing the Arity of the
+Operations of the Algebra.
+
+
+
+\subsubsection{Equational Law}\label{sec:equational_law}
+
+\subsubsection{Partial Algebra}\label{sec:partial_algebra}
+
+\subsubsection{Subalgebra}\label{sec:subalgebra}
+
+A \emph{Subalgebra} of an Algebraic Structure, $\mathfrak{A}$ is a
+Subset of $|\mathfrak{A}|$ that is closed under all the Operations of
+$\mathfrak{A}$.
+
+
+
+\subsubsection{Algebra Homomorphism}\label{sec:algebra_homomorphism}
+
+A \emph{Homomorphism} between two Algebraic Structures $\mathfrak{A}$
+and $\mathfrak{B}$ is a Function $h: \mathfrak{A} \rightarrow
+\mathfrak{B}$ defined for $n$-ary Operations:
 \[
-    ker(f) = \{ (a,a') \in A \times A : f(a) = f(a') \}
+  \forall f_\mathfrak{A} \in \mathfrak{A}, f_\mathfrak{B} \in
+  \mathfrak{B}, h(f_\mathfrak{A}(x_1, ..., x_n)) =
+  f_\mathfrak{B}(h(x_1), ..., h(x_n))
 \]
-$ker(f)$ is a Congruence Relation on $A$ and $f$ is Injective if and
-only if $ker(f) = \{(a,a) : a \in A\}$.
 
-The Quotient Algebra $A/ker(f)$ is Isomorphic to the Image of $f$
-(which is a Subalgebra of $B$, see First Isomorphism Theorem
-(\S\ref{sec:isomorphism_theorem}).
+
+
+\paragraph{Algebra Homomorphism Kernel}
+\label{sec:algebra_homomorphism_kernel} \hfill \\
+
+For Algebraic Structures $\mathfrak{A}$ and $\mathfrak{B}$, and
+Homomorphism $f: \mathfrak{A} \rightarrow \mathfrak{B}$, the
+\emph{Kernel} of $f$ is defined as:
+\[
+    ker(f) = \{ (a,a') \in \mathfrak{A} \times \mathfrak{A} : f(a) = f(a') \}
+\]
+$ker(f)$ is a Congruence Relation on $\mathfrak{A}$ and $f$ is Injective if and
+only if $ker(f) = \{(a,a) : a \in \mathfrak{A}\}$.
+
+The Quotient Algebra $\mathfrak{A}/ker(f)$ is Isomorphic to the Image
+of $f$ (which is a Subalgebra of $\mathfrak{B}$, see First Isomorphism
+Theorem (\S\ref{sec:isomorphism_theorem}).
+
+
+
+\subsubsection{Direct Product}\label{sec:direct_product}
+
+The \emph{Direct Product} of a Set of Algebraic Structures is the
+Cartesian Product of the Sets with the Operations defined
+coordinatewise.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Variety}\label{sec:variety}
+% --------------------------------------------------------------------
+
+A \emph{Variety} is a Class of Algebraic Structures defined only by
+Axioms that are Identities in a given Signature. This is equivalent to
+saying a Variety is the Class of Algebraic Structures with the same
+Signature that are Closed under Homomorphic (\S\ref{sec:homomorphism})
+Images, Subalgebras (\S\ref{sec:subalgebra}), and Direct Products
+(\S\ref{sec:direct_product}); a result known as Birkhoff's Theorem
+(\S\ref{sec:birkhoffs_theorem}). This rules out Logical Connectives,
+Existential Quantification, and all Relations for the Signature
+besides Equality (thus excluding the Class of Fields
+\S\ref{sec:field}) and Identities being implicitly Universally
+Quantified over the Domain.
+
+An example of a Variety with Algebraic Signature $\Omega = (2)$ is the
+Class of all Semigroups with an equation defining the Associative Law:
+\[
+    x(yz) = (xy)z
+\]
+
+Algebraic Structures in a Variety are Quotient Algebras
+(\S\ref{sec:quotient_algebra}) generated by the Identities on the Term
+Algebra (\S\ref{sec:term_algebra}) generated from the Signature and
+Underlying Set.
+
+
+
+\subsubsection{Subvariety}\label{sec:subvariety_theorem}
+
+A \emph{Subvariety} is a Subclass of a Variety with the same
+Signature. For example, the Class of Abelian Groups is a Subvariety of
+the Class of Groups.
+
+
+
+\subsubsection{Pseudovariety}\label{sec:pseudovariety}
+
+A Variety of Finite Algebraic Structures is called a
+\emph{Pseudovariety}.
+
+
+
+\subsubsection{Quasivariety}\label{sec:quasivariety}
+
+
+
+\subsubsection{Birkhoff's Theorem}\label{sec:birkhoffs_theorem}
+\cite{birkhoff35}
+
+\emph{Birkhoff's Theorem} (or \emph{HSP Theorem})
 
 
 
 % --------------------------------------------------------------------
 \subsection{Free Object}\label{sec:free_object}
 % --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Variety}\label{sec:model_variety}
-% --------------------------------------------------------------------
-
-%FIXME ref Fields, Homomorphism, Subalgebra, Direct Product
-A \emph{Variety} is a \emph{Class} of Algebras defined only by Axioms
-that are Identities satisfied by a given Signature
-(\S\ref{sec:formal_system}). This is equivalent to saying a Variety
-is the Class of Algebraic Structures with the same Signature that is
-closed under \emph{Homomorphic Images}, \emph{Subalgebras}, and
-\emph{Direct Products}; a result known as the \emph{HSP Theorem} or
-\emph{Birkhoff's Theorem}\cite{birkhoff35}. This rules out Logical
-Connectives, Existential Quantification, and all Relations besides
-Equality (thus excluding the Class of \emph{Fields}) and Identities
-being implicitly Universally Quantified over the Domain.
-
-Algebraic Structures in a Variety are Quotient Algebras
-(\S\ref{sec:quotient_algebra}) generated by the Set of Identities
-on the Term Algebra generated from the Signature and Underlying Set.
-
-A \emph{Subvariety} is a Subclass of a Variety with the same Signature
-(eg. the Class of \emph{Abelian Groups} is a Subvariety of the Class
-of \emph{Groups}). Classes of Finite Algebras (Algebras with a finite
-Underlying Set) are sometimes called \emph{Pseudovarieties}.
-
-An example of a Variety with Signature $\Omega = (2)$ is the Class of
-all \emph{Semigroups} with an equation defining the Associative Law:
-\[
-    x(yz) = (xy)z
-\]
-
-%FIXME: ref homomorphism
-A Homomorphism between two Algebras $A$ and $B$ is a function $h: A
-\rightarrow B$ defined for $n$-ary Operations:
-\[
-\forall f_A \in A, f_B \in B, h(f_A(x_1, ..., x_n)) = f_B(h(x_1), ...,
-h(x_n))
-\]
-
-A Subalgebra of an Algebra, $A$, is a Subset of $A$ that is closed
-under all the operations of $A$.
-
-The Product of a set of Algebraic Structures is the \emph{Cartesian
-  Product} of the Sets with the Operations defined coordinatewise.
-
-
 
 % --------------------------------------------------------------------
 \subsection{Unification}\label{sec:unification}
@@ -719,6 +762,8 @@ which every Morphism is Invertible.
 
 
 
+\subsubsection{Partial Groupoid}\label{sec:partial_groupoid}
+
 \subsubsection{$\infty$-groupoid}\label{sec:infinity_groupoid}
 
 An \emph{$\infty$-groupoid} is an $\infty$-category
@@ -1009,10 +1054,10 @@ $A_n$ is a Simple Group.
 
 
 % --------------------------------------------------------------------
-\subsection{Direct Product}\label{sec:direct_product}
+\subsection{Group Product}\label{sec:group_product}
 % --------------------------------------------------------------------
 
-The \emph{Direct Product} of two Groups $G$ and $H$, denoted $G \times
+The \emph{Group Product} of two Groups $G$ and $H$, denoted $G \times
 H$, is a Group with Elements from the Cartesian Product of the
 Elements of $G$ and $H$, $\{(g,h) | g \in G, h \in H\}$, and Group
 Operation defined Componentwise:
@@ -1542,6 +1587,10 @@ Module over a given Basis (\S\ref{sec:basis}).
 
 
 % --------------------------------------------------------------------
+\subsection{Bimodule}\label{sec:bimodule}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Ideal}\label{sec:ring_ideal}
 % --------------------------------------------------------------------
 
@@ -1613,8 +1662,23 @@ A Basis defines an Isomorphism of Vector Spaces:
 
 
 % --------------------------------------------------------------------
-\subsection{Bimodule}\label{sec:bimodule}
+\subsection{Algebra}\label{sec:algebra}
 % --------------------------------------------------------------------
+
+\emph{Algebra over a Commutative Ring}
+
+\emph{Algebra over a Field}
+
+
+
+\subsubsection{Unital Algebra}\label{sec:unital_algebra}
+
+\subsubsection{Zero Algebra}\label{sec:zero_algebra}
+
+\subsubsection{Associative Algebra}\label{sec:associative_algebra}
+
+\subsubsection{Non-associative Algebra}
+\label{sec:nonassociative_algebra}
 
 
 
@@ -1652,7 +1716,6 @@ these Axiom Identities for all $a,b,c \in L$:
 \end{description}
 The Signature (\S\ref{sec:signature}) of Lattices is
 $\{\wedge, \vee\}$.
-
 
 
 
@@ -1711,10 +1774,6 @@ Such a Functor $R$ is termed a \emph{Representation} of $G$ in
 $\mathbf{C}$.
 
 
-
-% ====================================================================
-\section{Operad Theory}\label{sec:operad_theory}
-% ====================================================================
 
 % ====================================================================
 \section{Relational Algebra}\label{sec:relational_algebra}
