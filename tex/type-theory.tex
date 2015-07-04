@@ -6,10 +6,12 @@
 
 \emph{Type Theory} is the study of Classes of Formal Systems
 (\S\ref{sec:formal_system}) where each Term (\S\ref{sec:term}) has a
-\emph{Type} and Operations are restricted to Terms of specific Types.
+\emph{Type} (\S\ref{sec:type}) and Operations are restricted to Terms
+of specific Types.
 
-As a Formal Theory (Part \ref{sec:proof_theory}), Judgements in Type
-Theory are of three kinds\cite{hott13}:
+As a Formal Theory (\S\ref{sec:formal_theory}), Judgements
+(\S\ref{sec:judgement}) in Type Theory are of three
+kinds\cite{hott13}:
 \begin{enumerate}
 
 \item \emph{Well-formed Context} (\S\ref{sec:type_context})
@@ -45,6 +47,24 @@ Judgements and $J$ is the conclusion.
 
 A tree constructed from Inference Rules forms a \emph{Derivation} of a
 Judgement.
+
+\textbf{Intensional \& Extensional Type Theory}
+
+\emph{Canonical Form}
+
+\emph{Normal Form}
+
+\begin{itemize}
+\item \emph{Extensional Type Theory}: Definitional (Computational)
+  Equality is not distinguished from Propositional (Proof) Equality
+  but Type Checking (\S\ref{sec:type_checking}) is Undecidable
+\item \emph{Intensional Type Theory}: Type Checking is Decidable but
+  Extensional Reasoning must be carried out using Setoids
+  (\S\ref{sec:setoid})
+\item \emph{Homotopy Type Theory} (\S\ref{sec:homotopy_type}): Higher
+  Inductive Types (\S\ref{sec:higher_inductive_type}) allow definition
+  of Higher-order Constructors
+\end{itemize}
 
 
 
@@ -111,8 +131,69 @@ or
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Ramified Type}\label{sec:ramified_type}
+\subsection{Inhabited Type}\label{sec:inhabited_type}
 % --------------------------------------------------------------------
+
+\emph{Inhabited}
+
+In Simply-typed $\lambda$-calculus (\S\ref{sec:simply_typed}), a Type
+is Inhabited if and only if its corresponding Proposition is a
+Tautology of Minimal Implicative Logic (\S\ref{sec:minimal_logic}).
+
+In Second-order $\lambda$-calculus (\S\ref{sec:secondorder_lambda}), a
+Type is Inhabited if and only if its corresponding Proposition is a
+Tautology of Second-order Logic (\S\ref{sec:secondorder_logic}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Inductive Type}\label{sec:inductive_type}
+% --------------------------------------------------------------------
+
+Structural Recursion (\S\ref{sec:structural_recursion})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Polymorphic Type}\label{sec:polymorphic_type}
+% --------------------------------------------------------------------
+
+Second-order $\lambda$-calculus (\S\ref{sec:secondorder_lambda})
+
+Subtyping
+
+Function Overloading
+
+Parametric Polymorphism
+
+Variance
+
+Bounded Quantification
+
+
+
+% --------------------------------------------------------------------
+\subsection{Type Operator}\label{sec:type_operator}
+% --------------------------------------------------------------------
+
+\emph{Type Constructor}
+
+Simply-typed Lambda Calculus with Type Operators ``$\lambda
+\underline{\omega}$''
+
+System F_{\omega}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependent Type}\label{sec:dependent_type}
+% --------------------------------------------------------------------
+
+Logical Quantifiers (\S\ref{sec:quantifier})
+
+Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+
+Examples: Dependent Functions, Dependent Pairs
 
 
 
@@ -276,17 +357,18 @@ Weakening for Judgemental Equality:
 
 
 % ====================================================================
-\section{Typed $\lambda$-Calculus}\label{sec:typed_lambda}
+\subsection{Simply Typed $\lambda$-Calculus}\label{sec:simply_typed}
 % ====================================================================
 
-% --------------------------------------------------------------------
-\subsection{Simply Typed $\lambda$-Calculus}\label{sec:simply_typed}
-% --------------------------------------------------------------------
-
 Isomorphic by Curry-Howard (\S\ref{sec:curry_howard}) to
-Propositional Logic (\S\ref{sec:propositional_logic})
+Minimal Logic (\S\ref{sec:minimal_logic}):
+\begin{itemize}
+\item Terms correspond to Proofs in Natural Deduction
+  (\S\ref{sec:natural_deduction})
+\item (Inhabited) Types correspond to Tautologies in Minimal Logic
+\end{itemize}
 
-Propositional Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
+Minimal Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
 \[
     \supset \leftrightarrow \rightarrow
 \] \[
@@ -299,16 +381,18 @@ Propositional Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
 
 
 
-% --------------------------------------------------------------------
+% ====================================================================
 \subsection{Second-order $\lambda$-Calculus}
-\label{sec:secondorder_lambda_calculus}
-% --------------------------------------------------------------------
+\label{sec:secondorder_lambda}
+% ====================================================================
+
+\emph{System F}
 
 
 
-% --------------------------------------------------------------------
+% ====================================================================
 \subsection{Calculus of Constructions}\label{sec:coq}
-% --------------------------------------------------------------------
+% ====================================================================
 
 
 
@@ -355,17 +439,6 @@ In Set Theory: Indexed Sum over a given Type.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Intensional \& Extensional Type Theory}
-\label{sec:intension_extension}
-% --------------------------------------------------------------------
-
-\emph{Canonical Form}
-
-\emph{Normal Form}
-
-
-
 % ====================================================================
 \section{Pure Type System}\label{sec:pure_type_sytem}
 % ====================================================================
@@ -397,9 +470,17 @@ Simply-typed $\lambda$-calculus allows only Terms to depend on Types.
 \section{Homotopy Type Theory}\label{sec:homotopy_type}
 % ====================================================================
 
+Homotopy Thoery (\S\ref{sec:homotopy_theory})
+
 - Function Extensionality
 - Univalence Axiom
-- Higher Inductive Types
+
+- Values (Points), Paths, Homotopies
+
+
+% --------------------------------------------------------------------
+\subsection{Higher Inductive Type}\label{sec:higher_inductive_type}
+% --------------------------------------------------------------------
 
 
 
@@ -417,9 +498,11 @@ $a : A$ (Term) & Proof \\
 
 Natural Deduction - Typed Lambda Calculus
 
-Propositional Logic - Simple Types
+Minimal Logic - Simple Types (Simply-typed $\lambda$-calculus
+\S\ref{sec:simply_typed})
 
-Predicate Logic - Dependent Types
+Predicate Logic - Dependent Types (Intuitionistic Type Theory
+\S\ref{sec:intuitionistic_type})
 
 Modal Logic - Monads
 
@@ -433,4 +516,8 @@ Classical-Intuitionistic Embedding - Continuation Passing Style
 
 % --------------------------------------------------------------------
 \subsection{Hindley-Milner Type System}\label{sec:hindley_milner}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Type Checking}\label{sec:type_checking}
 % --------------------------------------------------------------------
