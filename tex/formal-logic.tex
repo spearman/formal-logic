@@ -937,6 +937,15 @@ Partition (\S\ref{sec:partition}) the Domain.
 Many-sorted Signature (\S\ref{sec:manysorted_signature})
 
 
+\paragraph{Nominal Logic}\label{sec:nominal_logic}
+\hfill \\
+\emph{Nominal Logic}
+
+Variable Binding
+
+see also $\alpha$-conversion (\S\ref{sec:alpha_conversion})
+
+
 
 \subsubsection{Infinitary Logic}\label{sec:infinitary_logic}
 
@@ -1099,6 +1108,23 @@ and every Normal Modal Logic (\S\ref{sec:normal_modal}) is Regular.
 
 
 \paragraph{Normal Modal Logic}\label{sec:normal_modal}
+\hfill \\
+
+A Normal Modal Logic contains all Propositional Tautologies
+(\S\ref{sec:tautology}) and all Instances of the Distribution Axiom
+(or Kripke Schema):
+\[
+  \square (A \rightarrow B) \rightarrow
+  (\square A \rightarrow \square B)
+\]
+and is Closed under:
+\begin{itemize}
+  \item Modus Ponens (\emph{Detachment Rule}): $A \rightarrow B$, $A
+    \vdash B$
+  \item Necessitation Rule: $\vdash A \Rightarrow \vdash \square A$
+\end{itemize}
+The Smallest Logic satisfying these conditions is called \emph{System
+  $\mathsf{K}$}.
 
 
 
@@ -1118,38 +1144,54 @@ Operators $\square_i, i \in \{1, \ldots, n\}$.
 Possible World Semantics (\S\ref{sec:possible_world})
 
 Most Systems of Alethic Logic are based on an extension of
-Propositional Logic called $\mathbf{K}$ which has:
-
+Propositional Logic called \emph{System $\mathsf{K}$} which is a
+Normal Modal Logic (\S\ref{sec:normal_modal}) where:
 \begin{enumerate}
 \item $\square$, unary operator for \emph{Necessity}.
-\item $\mathbf{N}$, \emph{Necessitation Rule}: stating if $p$ is a
+\item \emph{Necessitation Rule} $N$ : stating if $p$ is a
   Theorem, then $\square p$ is a Theorem.
-\item $\mathbf{K}$, \emph{Distribution Axiom}: $\square(p \rightarrow
-  q) \rightarrow (\square p \rightarrow \square q)$ (also called the
-  \emph{Kripke Schema} (\S\ref{sec:frame_semantics}).
+\item \emph{Distribution Axiom} (or \emph{Kripke Schema}) $K$ :
+  \[
+    \square(p \rightarrow q) \rightarrow
+    (\square p \rightarrow \square q)
+  \]
 \end{enumerate}
-
-Adding further Axioms gives rise to a nested hierarchy of Systems of
-\emph{Normal Modal Logic}:
-
+There are also further Axioms used to extend System $\mathsf{K}$:
 \begin{itemize}
-  \item $K := \mathbf{K} + \mathbf{N}$
-  \item $T := K + \mathbf{T}$
-  \item $S4 := T + \mathbf{4}$
-  \item $S5 := S4 + \mathbf{5}$
-  \item $D := K + \mathbf{D}$
-\end{itemize} \hfill \\
-where:
-
-\begin{itemize}
-  \item $\Diamond$, unary operator for \emph{Possibly}
-  \item $\mathbf{T}$, \emph{Reflexivity Axiom}:
-    $\square p \rightarrow p$
-  \item $\mathbf{4}$: $\square p \rightarrow \square \square p$
-  \item $\mathbf{B}$: $p \rightarrow \square \Diamond p$
-  \item $\mathbf{D}$: $\square p \rightarrow \Diamond p$
-  \item $\mathbf{5}$: $\Diamond p \rightarrow \square \Diamond p$
+  \item \emph{Reflexivity Axiom} $T$ : $\square p \rightarrow p$
+  \item $4$: $\square p \rightarrow \square \square p$
+  \item $B$: $p \rightarrow \square \Diamond p$
+  \item $D$: $\square p \rightarrow \Diamond p$
+  \item $5$: $\Diamond p \rightarrow \square \Diamond p$
 \end{itemize}
+The Axioms correspond to various Frame Conditions
+(\S\ref{sec:frame_semantics}) on the Accessibility Relation $R : W
+\rightarrow W$ that specify Classes of Frames $\langle W,R \rangle$:
+\begin{itemize}
+  \item $K$: no Frame Conditions
+  \item $T$: Reflexive ($wRw$)
+  \item $4$: Transitive ($wRv \wedge vRu \Rightarrow wRu$)
+  \item $4$: Dense ($wRu \Rightarrow \exists v (w R v \wedge v R u)$)
+  \item $B$: Symmetric
+  \item $D$: Serial
+  \item $5$: Euclidean
+  \item $GL$: $R$ Transitive, $R^{-1}$ Well-founded
+  \item $Grz$: $R$ Reflexive and Transitive, $R^{-1} - Id$
+    Well-founded
+  \item $H$: $w R u \wedge w R v \Rightarrow u R v \vee v R u$
+  \item $M$
+  \item $G$: Convergent
+\end{itemize}
+Adding some of these Axioms to System $\mathsf{K}$ gives rise to a
+nested hierarchy of Systems of Normal Modal Logic:
+\begin{itemize}
+  \item $\mathsf{K} := K + N$
+  \item $\mathsf{T} := \mathsf{K} + T$
+  \item $\mathsf{S4} := \mathsf{T} + 4$
+  \item $\mathsf{S5} := \mathsf{S4} + 5$
+  \item $\mathsf{D} := \mathsf{K} + D$
+\end{itemize}
+
 Necessity:
 \[
   \square p \equiv \neg \Diamond \neg p
@@ -1265,6 +1307,24 @@ where after performing Action $a$ is necessitated that $p$ holds and
   \langle a \rangle p
 \]
 where after performing Action $a$ it is possible that $p$ holds.
+
+
+
+\subsubsection{Provability Logic}\label{sec:provability_logic}
+
+\paragraph{Polymodal Logic}\label{sec:polymodal_logic}
+\hfill \\
+
+$\mathsf{GLP}$
+
+
+
+\paragraph{Interpretability Logic}\label{sec:interpretability_logic}
+\hfill \\
+
+$\mathsf{ILM}$
+
+$\mathsf{TOL}$
 
 
 
