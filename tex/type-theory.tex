@@ -16,19 +16,19 @@ kinds\cite{hott13}:
 
 \item \emph{Well-formed Context} (\S\ref{sec:type_context})
 \[
-    (\Gamma) ctx
+  (\Gamma) ctx
 \]
 ``$\Gamma$ is a Well-formed Context''
 
 \item \emph{Propositional Equality}
 \[
-    \Gamma \vdash a : A
+  \Gamma \vdash a : A
 \]
 ``Given Contex $\Gamma$, $a$ is a Term of Type $A$''
 
 \item \emph{Definitional (Judgemental) Equality}
 \[
-    \Gamma \vdash a \equiv b : A
+  \Gamma \vdash a \equiv b : A
 \]
 ``Given Context $\Gamma$, $a$ and $b$ are definitionally equal Terms
 of Type $A$''
@@ -40,7 +40,7 @@ is an Equivalence Relation respected by Typing.
 
 Inference Rules have the form:
 \[
-    \frac{J_1 \quad \cdots \quad J_k} {J} Name
+  \frac{J_1 \quad \cdots \quad J_k} {J} Name
 \]
 where $J_i$ are provided as derived hypothetical (metatheoretical)
 Judgements and $J$ is the conclusion.
@@ -84,21 +84,21 @@ name of a Bound Variable everywhere within an Expression
 A Variable is Bound in an Expression by an \emph{Abstraction}
 expressing that the Variable is \emph{local} to the Expression:
 \[
-    \lambda x.B
+  \lambda x.B
 \]
 or
 \[
-    x.B
+  x.B
 \]
 
 \emph{Substitution}:
 \[
-    B[a/x]
+  B[a/x]
 \]
 Substitute Term $a$ for Free occurrences of Variable $x$ in the Term
 $B$. Generalized:
 \[
-    B[a_1,\ldots,a_n / x_1,\ldots,x_n]
+  B[a_1,\ldots,a_n / x_1,\ldots,x_n]
 \]
 
 
@@ -109,7 +109,7 @@ $B$. Generalized:
 
 A \emph{Context}, $\Gamma$, is a list of Assumptions of the form:
 \[
-    \Gamma = x_1 : A_1, x_2 : A_2, \ldots, x_n : A_n
+  \Gamma = x_1 : A_1, x_2 : A_2, \ldots, x_n : A_n
 \]
 where each Element $x_i : A_i$ is an Assumption that the distinct
 Variable $x_i$ has type $A_i$.
@@ -117,15 +117,15 @@ Variable $x_i$ has type $A_i$.
 Judgements are formulated under the Assumptions of a particular
 Context, $\Gamma$:
 \[
-    \Gamma \vdash a : A
+  \Gamma \vdash a : A
 \]
 For an empty Context:
 \[
-    \vdash a : A
+  \vdash a : A
 \]
 or
 \[
-    . \vdash a : A
+  . \vdash a : A
 \]
 
 
@@ -133,6 +133,10 @@ or
 % ====================================================================
 \section{Type}\label{sec:type}
 % ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Function Type}\label{sec:function_type}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Inhabited Type}\label{sec:inhabited_type}
@@ -144,7 +148,7 @@ In Simply-typed $\lambda$-calculus (\S\ref{sec:simply_typed}), a Type
 is Inhabited if and only if its corresponding Proposition is a
 Tautology of Minimal Implicative Logic (\S\ref{sec:minimal_logic}).
 
-In Second-order $\lambda$-calculus (\S\ref{sec:secondorder_lambda}), a
+In Second-order $\lambda$-calculus (\S\ref{sec:system_f}), a
 Type is Inhabited if and only if its corresponding Proposition is a
 Tautology of Second-order Logic (\S\ref{sec:secondorder_logic}).
 
@@ -183,7 +187,7 @@ Structural Recursion (\S\ref{sec:structural_recursion})
 \subsection{Polymorphic Type}\label{sec:polymorphic_type}
 % --------------------------------------------------------------------
 
-Second-order $\lambda$-calculus (\S\ref{sec:secondorder_lambda})
+Second-order $\lambda$-calculus (\S\ref{sec:system_f})
 
 Subtyping
 
@@ -203,13 +207,25 @@ Parametricity
 \subsection{Type Operator}\label{sec:type_operator}
 % --------------------------------------------------------------------
 
-\emph{Type Constructor}
-
-Adding Type Operators to Simply-typed Lambda Calculus results in
-\emph{Simply-typed Lambda Calculus with Type Operators} ``$\lambda
-\underline{\omega}$''
+Adding additional Type Operators to Simply-typed Lambda Calculus
+results in \emph{Simply-typed Lambda Calculus with Type Operators}
+``$\lambda \underline{\omega}$''
 
 System F$_{\omega}$
+
+
+
+\subsubsection{Type Constructor}\label{sec:type_constructor}
+
+\emph{Type Constructor}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Subtype}\label{sec:subtype}
+% --------------------------------------------------------------------
+
+System $F_<$ (System $F$ with Subtyping)
 
 
 
@@ -239,7 +255,7 @@ Examples: Dependent Functions, Dependent Pairs
 
 A \emph{Type Universe} is a Type whose Elements are Types. A hierarchy:
 \[
-    \mathcal{U}_0, \mathcal{U}_1, \mathcal{U}_2, \ldots
+  \mathcal{U}_0, \mathcal{U}_1, \mathcal{U}_2, \ldots
 \]
 is such that any Type in $\mathcal{U}_i$ is also in
 $\mathcal{U}_{i+1}$. See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
@@ -260,17 +276,17 @@ Well-formed Context:
 \begin{enumerate}
 \item
 \[
-    {
-        \frac{}{(.)ctx}
-    } ctx-EMP
+  {
+    \frac{}{(.)ctx}
+  } ctx-EMP
 \]
 \item
 \[
-    {
-        \frac
-        {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \mathcal{U}_i}
-        {(x_1:A_1,\ldots,x_n:A_n) ctx}
-    } ctx-EXT
+  {
+    \frac
+    {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \mathcal{U}_i}
+    {(x_1:A_1,\ldots,x_n:A_n) ctx}
+  } ctx-EXT
 \]
 \end{enumerate}
 
@@ -282,51 +298,51 @@ Well-formed Context:
 
 Given a Context, derive Typing Judgements listed in the Context:
 \[
-    {
-        \frac
-        {(x_1:A_1, \ldots, x_n:A_n)ctx}
-        {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
-    } Vble
+  {
+    \frac
+    {(x_1:A_1, \ldots, x_n:A_n)ctx}
+    {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
+  } Vble
 \]
 
 Substitution for Typing Judgements:
 \[
-    {
-        \frac
-        {\Gamma \vdash a : A \;\;\;\;\;\;\;
-        \Gamma,x:A,\Delta \vdash b : B}
-        {\Gamma,\Delta[a/x] \vdash b[a/x] : B[a/x]}
-    } Subst_1
+  {
+    \frac
+    {\Gamma \vdash a : A \;\;\;\;\;\;\;
+    \Gamma,x:A,\Delta \vdash b : B}
+    {\Gamma,\Delta[a/x] \vdash b[a/x] : B[a/x]}
+  } Subst_1
 \]
 
 Weakening for Typing Judgements:
 \[
-    {
-        \frac
-        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
-        \Gamma,\Delta \vdash b : B}
-        {\Gamma,x:A,\Delta \vdash b:B}
-    } Wkg_1
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    \Gamma,\Delta \vdash b : B}
+    {\Gamma,x:A,\Delta \vdash b:B}
+  } Wkg_1
 \]
 
 Substitution for Judgemental Equality:
 \[
-    {
-        \frac
-        {\Gamma \vdash a : A \;\;\;\;\;\;\;
-        \Gamma,x:A,\Delta \vdash b \equiv c : B}
-        {\Gamma,\Delta[a/x] \vdash b[a/x] \equiv c[a/x] : B[a/x]}
-    } Subst_2
+  {
+    \frac
+    {\Gamma \vdash a : A \;\;\;\;\;\;\;
+    \Gamma,x:A,\Delta \vdash b \equiv c : B}
+    {\Gamma,\Delta[a/x] \vdash b[a/x] \equiv c[a/x] : B[a/x]}
+  } Subst_2
 \]
 
 Weakening for Judgemental Equality:
 \[
-    {
-        \frac
-        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
-        \Gamma,\Delta \vdash b \equiv c : B}
-        {\Gamma, x:A, \Delta \vdash b \equiv c : B}
-    } Wkg_2
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    \Gamma,\Delta \vdash b \equiv c : B}
+    {\Gamma, x:A, \Delta \vdash b \equiv c : B}
+  } Wkg_2
 \]
 
 
@@ -336,19 +352,19 @@ Weakening for Judgemental Equality:
 % --------------------------------------------------------------------
 
 \[
-    {
-        \frac
-        {(\Gamma) ctx}
-        {\Gamma \vdash \mathcal{U}_i : \mathcal{U}_{i+1}}
-    } \mathcal{U}-INTRO
+  {
+    \frac
+    {(\Gamma) ctx}
+    {\Gamma \vdash \mathcal{U}_i : \mathcal{U}_{i+1}}
+  } \mathcal{U}-INTRO
 \]
 
 \[
-    {
-        \frac
-        {\Gamma \vdash A : \mathcal{U}_i}
-        {\Gamma \vdash A : \mathcal{U}_{i+1}}
-    } \mathcal{U}-CUMUL
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i}
+    {\Gamma \vdash A : \mathcal{U}_{i+1}}
+  } \mathcal{U}-CUMUL
 \]
 
 
@@ -358,36 +374,36 @@ Weakening for Judgemental Equality:
 % --------------------------------------------------------------------
 
 \[
-    {
-        \frac
-        {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
-        \Gamma,x:A \vdash B : \mathcal{U}_i}
-        {\Gamma \vdash \prod_{(x:A)} B : \mathcal{U}_i}
-    } \Pi-FORM
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    \Gamma,x:A \vdash B : \mathcal{U}_i}
+    {\Gamma \vdash \prod_{(x:A)} B : \mathcal{U}_i}
+  } \Pi-FORM
 \]\[
-    {
-        \frac
-        {}
-        {}
-    } \Pi-INTRO
+  {
+    \frac
+    {}
+    {}
+  } \Pi-INTRO
 \]\[
-    {
-        \frac
-        {}
-        {}
-    } \Pi-ELIM
+  {
+    \frac
+    {}
+    {}
+  } \Pi-ELIM
 \]\[
-    {
-        \frac
-        {}
-        {}
-    } \Pi-COMP
+  {
+    \frac
+    {}
+    {}
+  } \Pi-COMP
 \]\[
-    {
-        \frac
-        {}
-        {}
-    } \Pi-UNIQ
+  {
+    \frac
+    {}
+    {}
+  } \Pi-UNIQ
 \]
 
 
@@ -396,16 +412,44 @@ Weakening for Judgemental Equality:
 \section{Typed $\lambda$-Calculus}\label{sec:typed_lambda}
 % ====================================================================
 
+\emph{Typed $\lambda$-Calculus} allows for Lambda Terms to be assigned
+Types (\S\ref{sec:type}).
+
+Simply-typed $\lambda$-calculus (\S\ref{sec:simply_typed}) has only
+one Type Constructor (\S\ref{sec:type_constructor}), $\rightarrow$
+(see Function Type \S\ref{sec:function_type}).
+
 Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda}) may be
 considered a Typed $\lambda$-calculus with only one Type.
 
 
 
 % --------------------------------------------------------------------
-\subsection{Simply Typed $\lambda$-Calculus}\label{sec:simply_typed}
+\subsection{Simply-typed $\lambda$-calculus}\label{sec:simply_typed}
 % --------------------------------------------------------------------
 
-Simply Typed $\lambda$-calculus is the Internal Language
+\emph{Simply-typed $\lambda$-calculus} ($\lambda^\rightarrow$) is a
+Typed Interpretation of $\lambda$-calculus with one Type Constructor
+(\S\ref{sec:type_constructor}), $\rightarrow$, for Function Types
+(\S\ref{sec:function_type}).
+
+``Simply-typed'' is to distinguish from extensions such as:
+\begin{itemize}
+  \item System F (\S\ref{sec:system_f}): Polymorphic Types
+  \item Logical Framework (\S\ref{sec:logical_framework}): Dependent
+    Types
+\end{itemize}
+because Polymorphism and Dependency cannot be encoding using only
+$\rightarrow$ and Type Variables.
+
+The following extensions are still considered ``Simply-typed'':
+\begin{itemize}
+  \item System T (\S\ref{sec:system_t}): Products, Coproducts, Natural
+    Numbers
+  \item PCF (\S\ref{sec:pcf}): Full Recursion
+\end{itemize}
+
+Simply-typed $\lambda$-calculus is the Internal Language
 (\S\ref{sec:internal_language}) of the Cartesian Closed Categories
 (\S\ref{sec:cartesian_closed}).
 
@@ -419,23 +463,83 @@ Minimal Logic (\S\ref{sec:minimal_logic}):
 
 Minimal Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
 \[
-    \supset \leftrightarrow \rightarrow
+  \supset \leftrightarrow \rightarrow
 \] \[
-    \wedge \leftrightarrow \times
+  \wedge \leftrightarrow \times
 \] \[
-    \vee \leftrightarrow +
+  \vee \leftrightarrow +
 \] \[
-    False \leftrightarrow \bot
+  False \leftrightarrow \bot
 \]
 
 
 
+\subsubsection{Simply-typed $\lambda$-calculus with Conjunctive Types}
+\label{sec:simplytyped_conjunctive}
+
+Subtyping (\S\ref{sec:subtype})
+
+System $F_<$
+
+
+
+\subsubsection{System T}\label{sec:system_t}
+
+G\"odel
+
+Proof Interpretation of Heyting Arithmetic into a Finite-type
+Extension of Primitive Recursive Arithmetic
+(\S\ref{sec:primitive_recursion})
+
+All Recursive Functions in Peano Arithmetic are definable
+
+
+
+\subsubsection{PCF}\label{sec:pcf}
+
+
+
 % --------------------------------------------------------------------
-\subsection{Second-order $\lambda$-Calculus}
-\label{sec:secondorder_lambda}
+\subsection{System F}\label{sec:system_f}
 % --------------------------------------------------------------------
 
-\emph{System F}
+\emph{System F} (or \emph{Second-order $\lambda$-calculus})
+
+Universal Quantification over all Types
+
+Can describe all Functions that are Provably Total in Second-order
+Logic (\S\ref{sec:secondorder_logic})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependently-typed $\lambda$-Calculus}
+\label{sec:dependently_typed}
+% --------------------------------------------------------------------
+
+Dependent Types (\S\ref{sec:dependent_type})
+
+Dependently-typed $\lambda$-calculus is base of Intuitionistic Type
+Theory (\S\ref{sec:intuitionistic_type}), Calculus of Constructions
+(\S\ref{sec:coq}), and Logical Framework
+(\S\ref{sec:logical_framework}).
+
+Dependently-typed $\lambda$-calculus with a Type of all Types (the
+simplest Pure Type System \S\ref{sec:pure_type_system}) is not
+Strongly Normalizing due to Girard's Paradox
+(\S\ref{sec:girards_paradox})
+
+
+
+\subsubsection{Logical Framework}\label{sec:logical_framework}
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\kappa$-calculus}\label{sec:kappa_calculus}
+% --------------------------------------------------------------------
+
+First-order fragment of Typed $\lambda$-calculus
 
 
 
@@ -471,7 +575,7 @@ Inductive Types
 \subsubsection{Dependent Function Type ($\Pi$-type)}
 
 \[
-    A \rightarrow B :\equiv \prod_{x:A} B
+  A \rightarrow B :\equiv \prod_{x:A} B
 \]
 
 \subsubsection{Dependent Pair Type ($\Sigma$-type)}
@@ -507,11 +611,7 @@ Homotopy Thoery (\S\ref{sec:homotopy_theory})
 
 
 % ====================================================================
-\section{Logical Framework}\label{sec:logical_framework}
-% ====================================================================
-
-% ====================================================================
-\section{Pure Type System}\label{sec:pure_type_sytem}
+\section{Pure Type System}\label{sec:pure_type_system}
 % ====================================================================
 
 Arbitrary number of Sorts and Dependencies
@@ -521,6 +621,8 @@ Types
 
 Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
 
+Barendregt-Geuvers-Klop Conjecture
+
 
 
 % --------------------------------------------------------------------
@@ -529,13 +631,13 @@ Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
 
 Simply-typed $\lambda$-calculus allows only Terms to depend on Types.
 
+All Strongly Normalizing
+
 
 
 % --------------------------------------------------------------------
-\subsection{Subtype}\label{sec:subtype}
+\subsection{Girard's Paradox}\label{sec:girards_paradox}
 % --------------------------------------------------------------------
-
-System $F_<$ (System $F$ with Subtyping)
 
 
 
