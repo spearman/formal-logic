@@ -14,39 +14,33 @@ As a Formal Theory (\S\ref{sec:formal_theory}), Judgements
 kinds\cite{hott13}:
 \begin{enumerate}
 
-\item \emph{Well-formed Context} (\S\ref{sec:type_context})
-\[
-  (\Gamma) ctx
-\]
-``$\Gamma$ is a Well-formed Context''
+\item \emph{Well-formed Context} (\S\ref{sec:type_context}):
+  \[
+    (\Gamma) ctx
+  \]
+  ``$\Gamma$ is a Well-formed Context''
 
-\item \emph{Propositional Equality}
-\[
-  \Gamma \vdash a : A
-\]
-``Given Contex $\Gamma$, $a$ is a Term of Type $A$''
+\item \emph{Propositional Equality} (Typing Judgement
+    \S\ref{sec:typing_judgement}):
+  \[
+    \Gamma \vdash a : A
+  \]
+  ``Given Contex $\Gamma$, $a$ is a Term of Type $A$''
 
-\item \emph{Definitional (Judgemental) Equality}
-\[
-  \Gamma \vdash a \equiv b : A
-\]
-``Given Context $\Gamma$, $a$ and $b$ are definitionally equal Terms
-of Type $A$''
+\item \emph{Definitional (Judgemental) Equality}:
+  \[
+    \Gamma \vdash a \equiv b : A
+  \]
+  ``Given Context $\Gamma$, $a$ and $b$ are Definitionally Equal Terms
+  of Type $A$''
 
 \end{enumerate}
 with a Deductive Apparatus (\S\ref{sec:deductive_apparatus})
-consisting of Inference Rules only and no Axioms. Judgemental Equality
-is an Equivalence Relation respected by Typing.
+consisting of Inference Rules (\S\ref{sec:type_inference}) only and no
+Axioms. Judgemental Equality is an Equivalence Relation respected by
+Typing.
 
-Inference Rules have the form:
-\[
-  \frac{J_1 \quad \cdots \quad J_k} {J} Name
-\]
-where $J_i$ are provided as derived hypothetical (metatheoretical)
-Judgements and $J$ is the conclusion.
 
-A tree constructed from Inference Rules forms a \emph{Derivation} of a
-Judgement.
 
 \textbf{Intensional \& Extensional Type Theory}
 
@@ -103,6 +97,25 @@ $B$. Generalized:
 
 
 
+% --------------------------------------------------------------------
+\subsection{Term Constant}\label{sec:term_constant}
+% --------------------------------------------------------------------
+
+A \emph{Term Constant} is a Term that is a Base Type
+(\S\ref{sec:type_constant})
+% FIXME ???
+
+
+
+% --------------------------------------------------------------------
+\subsection{Well-typed Term}\label{sec:well_typed}
+% --------------------------------------------------------------------
+
+A \emph{Well-typed Term} (or \emph{Typable Term}) is a Term for which
+a Typing Derivation (\S\ref{sec:typing_derivation}) exists.
+
+
+
 % ====================================================================
 \section{Context}\label{sec:type_context}
 % ====================================================================
@@ -135,8 +148,28 @@ or
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Function Type}\label{sec:function_type}
+\subsection{Type Constant}\label{sec:type_constant}
 % --------------------------------------------------------------------
+
+\emph{Type Constant} (or \emph{Base Type} or \emph{Atomic Type})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Type Order}\label{sec:type_order}
+% --------------------------------------------------------------------
+
+\emph{Order}
+
+In Simply-typed $\lambda$-calculus ($\lambda^\rightarrow$), the Order
+of a Type $\tau$, denoted $o(\tau)$, is defined Inductively as:
+\begin{itemize}
+\item $o(T) = 0$ if $T$ is a Base Type
+\item $o(\sigma \rightarrow \tau) = \text{max}(o(\sigma) + 1,
+  o(\tau))$
+\end{itemize}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Inhabited Type}\label{sec:inhabited_type}
@@ -164,8 +197,17 @@ The \emph{Equality Type} (or \emph{Identity Type}), denoted
 
 
 % --------------------------------------------------------------------
+\subsection{Recursive Type}\label{sec:recursive_type}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Universe Type}\label{sec:universe_type}
 % --------------------------------------------------------------------
+
+A \emph{Universe Type} contains all other Types, see Type Universe
+(\S\ref{sec:type_universe}).
+
+
 
 % --------------------------------------------------------------------
 \subsection{Inductive Type}\label{sec:inductive_type}
@@ -189,7 +231,7 @@ Structural Recursion (\S\ref{sec:structural_recursion})
 
 Second-order $\lambda$-calculus (\S\ref{sec:system_f})
 
-Subtyping
+Subtyping (\S\ref{sec:subtype})
 
 Function Overloading
 
@@ -200,6 +242,12 @@ Variance
 Bounded Quantification
 
 Parametricity
+
+
+
+\subsubsection{Subtype}\label{sec:subtype}
+
+System $F_<$ (System $F$ with Subtyping)
 
 
 
@@ -215,17 +263,29 @@ System F$_{\omega}$
 
 
 
+\subsubsection{Higher-order Type Operator}
+\label{sec:higherorder_typeoperator}
+
+
+
 \subsubsection{Type Constructor}\label{sec:type_constructor}
 
 \emph{Type Constructor}
 
 
 
-% --------------------------------------------------------------------
-\subsection{Subtype}\label{sec:subtype}
-% --------------------------------------------------------------------
+\paragraph{Kind}\label{sec:kind}
+\hfill \\
 
-System $F_<$ (System $F$ with Subtyping)
+A \emph{Kind} is the Type of a Type Constructor, or the Type of a
+Higher-order Type Operator \S\ref{sec:higherorder_typeoperator}).
+
+
+
+\paragraph{Function Type}\label{sec:function_type}
+\hfill \\
+
+A \emph{Function Type} (or \emph{Arrow Type}) is a Higher-kinded
 
 
 
@@ -239,7 +299,19 @@ Logical Quantifiers (\S\ref{sec:quantifier})
 
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
 
-Examples: Dependent Functions, Dependent Pairs
+A \emph{Dependent Type} is the Type of a Dependent Function
+(\S\ref{sec:dependent_function}).
+
+Dependent Pairs
+
+
+
+\subsubsection{Dependent Function}\label{sec:dependent_function}
+
+For a Type $A : \mathcal{U}$ in Type Universe $\mathcal{U}$, a Family
+of Types $B : A \rightarrow \mathcal{U}$ can be defined by a
+\emph{Dependent Function} which assigns a Type $B(a) : \mathcal{U}$ to
+Each Term $a : A$.
 
 
 
@@ -253,158 +325,135 @@ Examples: Dependent Functions, Dependent Pairs
 \section{Type Universe}\label{sec:type_universe}
 % ====================================================================
 
-A \emph{Type Universe} is a Type whose Elements are Types. A hierarchy:
+A \emph{Type Universe} is a Type whose Elements are Types. A
+hierarchy:
 \[
   \mathcal{U}_0, \mathcal{U}_1, \mathcal{U}_2, \ldots
 \]
 is such that any Type in $\mathcal{U}_i$ is also in
-$\mathcal{U}_{i+1}$. See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
-\S\ref{sec:universe_rules}.
+$\mathcal{U}_{i+1}$.
+
+See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
+\S\ref{sec:homotopy_rules}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Girard's Paradox}\label{sec:girards_paradox}
+% --------------------------------------------------------------------
 
 
 
 % ====================================================================
-\section{Inference Rules}\label{sec:type_inference}
+\section{Typing Environment}\label{sec:typing_environment}
 % ====================================================================
 
-% --------------------------------------------------------------------
-\subsection{Context Rules}
-% --------------------------------------------------------------------
+A \emph{Typing Environment} (or \emph{Context} or \emph{Variable
+  Assignment}) $\Gamma$ is a Set of Typing Assumptions.
 
-The following Rules of Inference allow for the determination of a
-Well-formed Context:
-\begin{enumerate}
-\item
-\[
-  {
-    \frac{}{(.)ctx}
-  } ctx-EMP
-\]
-\item
-\[
-  {
-    \frac
-    {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \mathcal{U}_i}
-    {(x_1:A_1,\ldots,x_n:A_n) ctx}
-  } ctx-EXT
-\]
-\end{enumerate}
+Closed Terms are those Terms that are Typable
+(\S\ref{sec:typing_derivation}) in an Empty Context, e.g. the I, S,
+and K Combinators (\S\ref{sec:combinator}).
 
 
 
 % --------------------------------------------------------------------
-\subsection{Structural Rules}
+\subsection{Typing Assumption}\label{sec:typing_assumption}
 % --------------------------------------------------------------------
 
-Given a Context, derive Typing Judgements listed in the Context:
-\[
-  {
-    \frac
-    {(x_1:A_1, \ldots, x_n:A_n)ctx}
-    {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
-  } Vble
-\]
+\emph{Typing Assumption})
 
-Substitution for Typing Judgements:
 \[
-  {
-    \frac
-    {\Gamma \vdash a : A \;\;\;\;\;\;\;
-    \Gamma,x:A,\Delta \vdash b : B}
-    {\Gamma,\Delta[a/x] \vdash b[a/x] : B[a/x]}
-  } Subst_1
+  e : \tau
 \]
-
-Weakening for Typing Judgements:
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
-    \Gamma,\Delta \vdash b : B}
-    {\Gamma,x:A,\Delta \vdash b:B}
-  } Wkg_1
-\]
-
-Substitution for Judgemental Equality:
-\[
-  {
-    \frac
-    {\Gamma \vdash a : A \;\;\;\;\;\;\;
-    \Gamma,x:A,\Delta \vdash b \equiv c : B}
-    {\Gamma,\Delta[a/x] \vdash b[a/x] \equiv c[a/x] : B[a/x]}
-  } Subst_2
-\]
-
-Weakening for Judgemental Equality:
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
-    \Gamma,\Delta \vdash b \equiv c : B}
-    {\Gamma, x:A, \Delta \vdash b \equiv c : B}
-  } Wkg_2
-\]
+``Term $e$ has Type $\tau$''
 
 
 
 % --------------------------------------------------------------------
-\subsection{Universe Rules}\label{sec:universe_rules}
+\subsection{Type Annotation}\label{sec:type_annotation}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\subsection{Type Erasure}\label{sec:type_erasure}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Reification}\label{sec:reification}
+% --------------------------------------------------------------------
+
+* opposite of Type Erasure
+* see Type Inference (\S\ref{sec:type_inference})
+
+
+
+% ====================================================================
+\section{Typing Judgement}\label{sec:typing_judgement}
+% ====================================================================
+
+A \emph{Typing Judgement} is an instance of a \emph{Typing Relation}
+(\S\ref{sec:typing_relation}).
+
+A Typing Judgement expresses Propositional Equality. % FIXME
+
+The Validity of a Typing Judgement is given by a Typing Derivation
+(\S\ref{sec:typing_derivation}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Typing Relation}\label{sec:typing_relation}
+% --------------------------------------------------------------------
+
+\emph{Typing Relation} between Terms and Types
+
+\[
+  \Gamma \vdash e : \tau
+\]
+``$e$ is a (Well-typed \S\ref{sec:well_typed}) Term of Type $\tau$ in
+Context $\Gamma$'',
+
+Terms that are Well-typed in the Empty Context are Closed Terms.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Typing Rule}\label{sec:typing_rule}
+% --------------------------------------------------------------------
+
+A \emph{Typing Rule} (or \emph{Type Rule}) describes how a Type is
+assigned to a Syntactic Construction.
+
+The notation for Type Rules is that of Sequent Notation
+(\S\ref{sec:sequent}):
 \[
   {
     \frac
-    {(\Gamma) ctx}
-    {\Gamma \vdash \mathcal{U}_i : \mathcal{U}_{i+1}}
-  } \mathcal{U}-INTRO
+    { \Gamma_1 \vdash e_1:\tau_1 \quad \cdots
+      \quad \Gamma_n \vdash e_n:\tau_n }
+    { \Gamma \vdash e:\tau }
+  }
 \]
-
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \mathcal{U}_i}
-    {\Gamma \vdash A : \mathcal{U}_{i+1}}
-  } \mathcal{U}-CUMUL
-\]
+where $\Gamma$ are Typing Environments and $e:\tau$ are Typing
+Judgements.
 
 
 
 % --------------------------------------------------------------------
-\subsection{Dependent Function Type Rules}\label{sec:dependent_rules}
+\subsection{Typing Derivation}\label{sec:typing_derivation}
 % --------------------------------------------------------------------
 
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
-    \Gamma,x:A \vdash B : \mathcal{U}_i}
-    {\Gamma \vdash \prod_{(x:A)} B : \mathcal{U}_i}
-  } \Pi-FORM
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-INTRO
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-ELIM
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-COMP
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-UNIQ
-\]
+A \emph{Typing Derivation} shows the Validity of a Typing Judgement
+and is constructed from Typing Rules (\S\ref{sec:typing_rule}).
+
+A Term for which a Typing Derivation exists is called a
+\emph{Well-typed Term} (\S\ref{sec:well_typed}).
+
+
+
+% ====================================================================
+\section{Type Inference}\label{sec:type_inference}
+% ====================================================================
 
 
 
@@ -430,8 +479,11 @@ considered a Typed $\lambda$-calculus with only one Type.
 
 \emph{Simply-typed $\lambda$-calculus} ($\lambda^\rightarrow$) is a
 Typed Interpretation of $\lambda$-calculus with one Type Constructor
-(\S\ref{sec:type_constructor}), $\rightarrow$, for Function Types
-(\S\ref{sec:function_type}).
+for Function Types: $\rightarrow$ (\S\ref{sec:function_type}).
+
+Strongly Normalizing, not Turing Complete: addition of $fix_\alpha$
+Operator or Recursive Types (\S\ref{sec:recursive_type}) gives Turing
+Completeness
 
 ``Simply-typed'' is to distinguish from extensions such as:
 \begin{itemize}
@@ -442,23 +494,135 @@ Typed Interpretation of $\lambda$-calculus with one Type Constructor
 because Polymorphism and Dependency cannot be encoding using only
 $\rightarrow$ and Type Variables.
 
-The following extensions are still considered ``Simply-typed'':
+The following extensions are still considered ``Simply-typed''
+systems:
 \begin{itemize}
   \item System T (\S\ref{sec:system_t}): Products, Coproducts, Natural
     Numbers
   \item PCF (\S\ref{sec:pcf}): Full Recursion
 \end{itemize}
 
+Simply-typed $\lambda$-calculus has the same Equational Theory of
+$\beta\eta$-equivalence (\S\ref{sec:beta_reduction},
+\S\ref{sec:eta_conversion}) as Untyped $\lambda$-calculus, subject to
+Type restrictions.
+
+$\beta$-reduction:
+\[
+  (\lambda x:s.t)u =_\beta t[x := u]
+\]
+holds in Context $\Gamma$ when $\Gamma$, $x:\sigma \rightarrow t:\tau$
+and $\Gamma \vdash u:\sigma$.
+
+$\eta$-reduction:
+\[
+  \lambda x:\sigma .t x =_\eta t
+\]
+holds when $\Gamma \vdash t : \sigma \rightarrow \tau$ and $x$ is not
+Free in $t$.
+
+With the Function Type Constructor $\rightarrow$ and the Base Types
+$B$, the Types of a Simply-typed $\lambda$-calculus are defined (with
+BNF Notation):
+\[
+  \tau ::= \tau \rightarrow \tau \;|\; T \in B
+\]
+
+\emph{Term Constant}
+
+That is, Expressions of Simply-typed $\lambda$-calculus are defined
+as:
+\[
+  e ::= x \;|\; \lambda x:t.e \;|\; e e \;|\; c
+\]
+where $x$ is a Variable and $\tau$ is a Type, and $c$ is a Term
+Constant. These Expressions are, in order:
+\begin{itemize}
+  \item Variable Reference
+  \item Abstraction
+  \item Application
+  \item Constant
+\end{itemize}
+
+
+
+\textbf{Intrinsic Interpretation}: \emph{Church-style}
+
+* Only Well-typed Terms have Meaning (Meaning assigned to Typing
+Derivations), therefore equivalent Terms having different Annotations
+may have different Meanings, cf. Reification
+(\S\ref{sec:reification}):
+
+
+
+\textbf{Extrinsic Interpretation}: \emph{Curry-style}
+
+* Terms Interpreted as in an Untyped Language, cf. Type Erasure
+(\S\ref{sec:type_erasure})
+
+
+
+\subsubsection{Simply-typed $\lambda$-calculus Typing Rules}
+\label{sec:simplytyped_rules}
+
+Typing Rules (\S\ref{sec:typing_rule}):
+\begin{enumerate}
+\item
+  \[
+    {
+      \frac
+      {x : \tau \in \Gamma}
+      {\Gamma \vdash x : \tau}
+    }
+  \]
+\item
+  \[
+    {
+      \frac
+      {c \;\text{is a constant of Base Type}\; T}
+      {\Gamma \vdash c:T}
+    }
+  \]
+\item
+  \[
+    {
+      \frac
+      {\Gamma, x:\sigma \vdash e:\tau}
+      {\Gamma \vdash (\lambda x:\sigma.e):(\sigma \rightarrow \tau)}
+    }
+  \]
+\item
+  \[
+    {
+      \frac
+      {\Gamma \vdash e_1:\sigma \rightarrow \tau \quad
+        \Gamma \vdash e_2:\sigma}
+      {\Gamma \vdash e_1 e_2 : \tau}
+    }
+  \]
+\end{enumerate}
+
+
+
+\textbf{Operational Semantics}
+
+\textbf{Categorical Semantics}
+
 Simply-typed $\lambda$-calculus is the Internal Language
 (\S\ref{sec:internal_language}) of the Cartesian Closed Categories
 (\S\ref{sec:cartesian_closed}).
 
-Isomorphic by Curry-Howard (\S\ref{sec:curry_howard}) to
-Minimal Logic (\S\ref{sec:minimal_logic}):
+
+
+\textbf{Proof-theoretic Semantics}
+
+Simply-typed $\lambda$-calculus is Isomorphic by Curry-Howard
+(\S\ref{sec:curry_howard}) to Minimal Logic
+(\S\ref{sec:minimal_logic}):
 \begin{itemize}
-\item Terms correspond to Proofs in Natural Deduction
-  (\S\ref{sec:natural_deduction})
-\item (Inhabited) Types correspond to Tautologies in Minimal Logic
+  \item Terms correspond to Proofs in Natural Deduction
+    (\S\ref{sec:natural_deduction})
+  \item (Inhabited) Types correspond to Tautologies in Minimal Logic
 \end{itemize}
 
 Minimal Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
@@ -610,6 +774,156 @@ Homotopy Thoery (\S\ref{sec:homotopy_theory})
 
 
 
+% --------------------------------------------------------------------
+\subsection{Inference Rules}\label{sec:homotopy_rules}
+% --------------------------------------------------------------------
+
+Inference Rules (\S\ref{sec:type_inference}) have the form:
+\[
+  \frac{J_1 \quad \cdots \quad J_k} {J} Name
+\]
+where $J_i$ are provided as derived hypothetical (metatheoretical)
+Judgements and $J$ is the conclusion.
+
+A Tree constructed from Inference Rules forms a Derivation
+(\S\ref{sec:typing_derivation}) of a Judgement.
+
+
+
+\textbf{Context Rules}
+
+The following Rules of Inference allow for the determination of a
+Well-formed Context:
+\begin{enumerate}
+\item
+\[
+  {
+    \frac{}{(.)ctx}
+  } ctx-EMP
+\]
+\item
+\[
+  {
+    \frac
+    {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \mathcal{U}_i}
+    {(x_1:A_1,\ldots,x_n:A_n) ctx}
+  } ctx-EXT
+\]
+\end{enumerate}
+
+
+
+\textbf{Structural Rules}
+
+Given a Context, derive Typing Judgements
+(\S\ref{sec:typing_judgement}) listed in the Context:
+\[
+  {
+    \frac
+    {(x_1:A_1, \ldots, x_n:A_n)ctx}
+    {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
+  } Vble
+\]
+
+Substitution for Typing Judgements:
+\[
+  {
+    \frac
+    {\Gamma \vdash a : A \;\;\;\;\;\;\;
+    \Gamma,x:A,\Delta \vdash b : B}
+    {\Gamma,\Delta[a/x] \vdash b[a/x] : B[a/x]}
+  } Subst_1
+\]
+
+Weakening for Typing Judgements:
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    \Gamma,\Delta \vdash b : B}
+    {\Gamma,x:A,\Delta \vdash b:B}
+  } Wkg_1
+\]
+
+Substitution for Judgemental Equality:
+\[
+  {
+    \frac
+    {\Gamma \vdash a : A \;\;\;\;\;\;\;
+    \Gamma,x:A,\Delta \vdash b \equiv c : B}
+    {\Gamma,\Delta[a/x] \vdash b[a/x] \equiv c[a/x] : B[a/x]}
+  } Subst_2
+\]
+
+Weakening for Judgemental Equality:
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    \Gamma,\Delta \vdash b \equiv c : B}
+    {\Gamma, x:A, \Delta \vdash b \equiv c : B}
+  } Wkg_2
+\]
+
+
+
+\textbf{Universe Rules}
+
+\[
+  {
+    \frac
+    {(\Gamma) ctx}
+    {\Gamma \vdash \mathcal{U}_i : \mathcal{U}_{i+1}}
+  } \mathcal{U}-INTRO
+\]
+
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i}
+    {\Gamma \vdash A : \mathcal{U}_{i+1}}
+  } \mathcal{U}-CUMUL
+\]
+
+
+
+\textbf{Dependent Function Type Rules}
+
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    \Gamma,x:A \vdash B : \mathcal{U}_i}
+    {\Gamma \vdash \prod_{(x:A)} B : \mathcal{U}_i}
+  } \Pi-FORM
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-INTRO
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-ELIM
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-COMP
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-UNIQ
+\]
+
+
+
 % ====================================================================
 \section{Pure Type System}\label{sec:pure_type_system}
 % ====================================================================
@@ -632,12 +946,6 @@ Barendregt-Geuvers-Klop Conjecture
 Simply-typed $\lambda$-calculus allows only Terms to depend on Types.
 
 All Strongly Normalizing
-
-
-
-% --------------------------------------------------------------------
-\subsection{Girard's Paradox}\label{sec:girards_paradox}
-% --------------------------------------------------------------------
 
 
 
@@ -678,3 +986,10 @@ Classical-Intuitionistic Embedding - Continuation Passing Style
 % --------------------------------------------------------------------
 \subsection{Type Checking}\label{sec:type_checking}
 % --------------------------------------------------------------------
+
+\subsubsection{Bi-directional Type Checking}
+\label{sec:bidirectional_checking}
+
+\emph{Checking}
+
+\emph{Synthesis}
