@@ -188,6 +188,10 @@ Tautology of Second-order Logic (\S\ref{sec:secondorder_logic}).
 
 
 % --------------------------------------------------------------------
+\subsection{Finite Type}\label{sec:finite_type}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Equality Type}\label{sec:equality_type}
 % --------------------------------------------------------------------
 
@@ -195,6 +199,14 @@ The \emph{Equality Type} (or \emph{Identity Type}), denoted
 \emph{Propositional Equality}, represents Equality of Types and Terms.
 
 
+
+% --------------------------------------------------------------------
+\subsection{Product Type}\label{sec:product_type}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Coproduct Type}\label{sec:coproduct_type}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Recursive Type}\label{sec:recursive_type}
@@ -233,15 +245,33 @@ Second-order $\lambda$-calculus (\S\ref{sec:system_f})
 
 Subtyping (\S\ref{sec:subtype})
 
-Function Overloading
-
-Parametric Polymorphism
-
 Variance
 
 Bounded Quantification
 
 Parametricity
+
+
+
+\subsubsection{Polymorphic Function}\label{sec:polymorphic_function}
+
+A Polymorphic Function Dependent Product Type
+(\S\ref{sec:dependent_product}):
+\[
+  \Pi(A:\mathcal{U}) A \rightarrow C
+\]
+
+A Polymorphic Function has a Dependent Product Type
+(\S\ref{sec:dependent_product}):
+\[
+  \Pi_{(A:\mathcal{U})} A \rightarrow C
+\]
+
+
+
+Ad-hoc Polymorphism (Function Overloading)
+
+Parametric Polymorphism
 
 
 
@@ -295,29 +325,88 @@ A \emph{Function Type} (or \emph{Arrow Type}) is a Higher-kinded
 
 A \emph{Dependent Type} depends on a Term or another Type.
 
+A Dependent Product Type (\S\ref{sec:dependent_product}) is defined by
+a Dependent Function (\S\ref{sec:dependent_function}).
+
 Logical Quantifiers (\S\ref{sec:quantifier})
 
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
 
-A \emph{Dependent Type} is the Type of a Dependent Function
+A Dependent Type is the Type of a Dependent Function
 (\S\ref{sec:dependent_function}).
 
 Dependent Pairs
+
+\textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
+\emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
+Dependent Product Type (\S\ref{sec:dependent_product}) to Simply-typed
+$\lambda$-calculus.
+
+\textbf{Second-order Dependent Type Theory} ($\lambda \Pi 2$):
+allowing Quantification over Type Constructors
+(\S\ref{sec:type_constructor}), $\Pi$ operator Subsumes both
+$\rightarrow$ of Simply-typed $\lambda$-calculus and $\forall$ of
+System F (\S\ref{sec:system_f})
+
+\textbf{Higher-order Dependently Typed Polymorphic $\lambda$-calculus}
+($\lambda \Pi \omega$): corresponds to \emph{Calculus of
+  Constructions} (\S\ref{sec:coq}); extends $\lambda \Pi 2$ to all
+abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
 
 
 
 \subsubsection{Dependent Function}\label{sec:dependent_function}
 
+A \emph{Dependent Function} is a Function from Terms to Types.
+
+
+
+\subsubsection{Dependent Product Type}\label{sec:dependent_product}
+
+\emph{Dependent Product Type} (or \emph{$\Pi$-type})
+
 For a Type $A : \mathcal{U}$ in Type Universe $\mathcal{U}$, a Family
-of Types $B : A \rightarrow \mathcal{U}$ can be defined by a
-\emph{Dependent Function} which assigns a Type $B(a) : \mathcal{U}$ to
-Each Term $a : A$.
+of Types
+\[
+  B : A \rightarrow \mathcal{U}
+\]
+can be defined by a Dependent Function which assigns a Type $B(a) :
+\mathcal{U}$ to Each Term $a : A$. The Type of this Function is a
+Dependent Product Type (\S\ref{sec:dependent_product}):
+\[
+  \Pi_{(a:A)}B(a)
+\]
+If $B$ is Constant, then $\Pi_(a:A)B$ is Judgementally Equal to the
+Function Type $A \rightarrow B$:
+\[
+  \Pi_{(a:A)}B \equiv A \rightarrow B
+\]
+
+By Curry-Howard, $\Pi$-types model Implication and Universal
+Quantification.
+
+Polymorphic Function (\S\ref{sec:polymorphic_function})
 
 
 
 \subsubsection{Dependent Sum Type}\label{sec:dependent_sum}
 
-\emph{$\Sigma$-type}
+\emph{Dependent Sum Type} (or \emph{$\Sigma$-type} or \emph{Dependent
+  Pair Type}
+
+\[
+  \Sigma_{(x:A)} B(x)
+\]
+If $B$ is Constant, then $\Sigma_{(x:A)}B$ is Judgementally Equal to
+the Product Type (\S\ref{sec:product_type}) $A \times B$:
+\[
+  \Sigma_{(x:A)} B \equiv A \times B
+\]
+
+By Curry-Howard, $\Sigma$-types model Conjunction and Existential
+Quantification.
+
+Analagous to Coproduct or Disjoint Union.
 
 
 
@@ -325,13 +414,29 @@ Each Term $a : A$.
 \section{Type Universe}\label{sec:type_universe}
 % ====================================================================
 
-A \emph{Type Universe} is a Type whose Elements are Types. A
-hierarchy:
+A \emph{Type Universe} is a Type whose Elements are Types.
+
+Small Type %FIXME
+
+$\mathcal{U}_0$ is the Universe of all Small Types. Every Name
+(\S\ref{sec:name}) $a:\mathcal{U}_0$ has an associated Type $El(a)$
+giving its Extension or Meaning ($El$ is a Dependent Type
+\S\ref{sec:dependent_type} that maps each Object to its corresponding
+Type).
+
+A Predicative \emph{Cumulative Hierarchy}:
 \[
   \mathcal{U}_0, \mathcal{U}_1, \mathcal{U}_2, \ldots
 \]
-is such that any Type in $\mathcal{U}_i$ is also in
-$\mathcal{U}_{i+1}$.
+is such that any Type in $\mathcal{U}_n$ is also in
+$\mathcal{U}_{n+1}$:
+\[
+  u_n:\mathcal{U}_n+1
+\]
+with (Cumulative Property):
+\[
+  El(u_n) \equiv \mathcal{U}_n
+\]
 
 See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
 \S\ref{sec:homotopy_rules}.
@@ -470,6 +575,9 @@ one Type Constructor (\S\ref{sec:type_constructor}), $\rightarrow$
 
 Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda}) may be
 considered a Typed $\lambda$-calculus with only one Type.
+
+A Denotational Semantics can be given by a \emph{B\"ohm Tree}
+(\S\ref{sec:bohm_tree}).
 
 
 
@@ -707,6 +815,46 @@ First-order fragment of Typed $\lambda$-calculus
 
 
 
+% --------------------------------------------------------------------
+\subsection{B\"ohm Tree}\label{sec:bohm_tree}
+% --------------------------------------------------------------------
+
+A \emph{B\"ohm Tree} is a Possibly Infinite Directed Acyclic Graph
+where some Vertices are Labelled by $\lambda$-terms and all Vertices
+besides the Root have exactly one Parent, every Vertex has a finite
+number of Children, and every Unlabelled Vertex has no Children.
+
+
+
+% ====================================================================
+\section{Calculus of Constructions}\label{sec:coq}
+% ====================================================================
+
+% ====================================================================
+\section{Pure Type System}\label{sec:pure_type_system}
+% ====================================================================
+
+Arbitrary number of Sorts and Dependencies
+
+Generalization of the \emph{Lambda Cube} to more sorts than Terms and
+Types
+
+Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
+
+Barendregt-Geuvers-Klop Conjecture
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lambda Cube}\label{sec:lambda_cube}
+% --------------------------------------------------------------------
+
+Simply-typed $\lambda$-calculus allows only Terms to depend on Types.
+
+All Strongly Normalizing
+
+
+
 % ====================================================================
 \section{Intuitionistic Type Theory}\label{sec:intuitionistic_type}
 % ====================================================================
@@ -714,7 +862,95 @@ First-order fragment of Typed $\lambda$-calculus
 \emph{Intuitionistic Type Theory} (also \emph{Constructive Type
   Theory} or \emph{Martin-L\"of Type Theory})
 
-Inductive Types
+Inductive Types (\S\ref{sec:inductive_type})
+
+Types:
+\[
+  A \textsf{ Type}
+\]
+Objects:
+\[
+  a:A
+\]
+Type Equality:
+\[
+  A = B
+\]
+Object Equality:
+\[
+  a = b
+\]
+Dependent Type (\S\ref{sec:dependent_type}):
+\[
+  (x:A)B
+\]
+Removal of Dependency by Substitution:
+\[
+  B[x/a]
+\]
+Abstracted Object:
+\[
+  [x]b
+\]
+Removal of Abstration on Object:
+\[
+  b[x/a]
+\]
+Well-formed Context of Typing Assumptions
+(\S\ref{sec:typing_assumption}):
+\[
+  \vdash \Gamma \textsf{Context}
+\]
+Context (\S\ref{sec:type_context}) Judgements:
+\begin {itemize}
+\item Well-formed Type $\sigma$:
+  \[
+    \Gamma \vdash \sigma \mathsf{ Type}
+  \]
+\item Well-formed Term $t$ of Type $\sigma$:
+  \[
+    \Gamma \vdash t : \sigma
+  \]
+\item Type Equivalence:
+  \[
+    \Gamma \vdash \sigma \equiv \tau
+  \]
+\item Term Equivalence:
+  \[
+    \Gamma \vdash t \equiv u : \sigma
+  \]
+\end {itemize}
+\hfill\\
+Type Universe:
+\[
+  \mathcal{U}
+\]
+Dependent Type mapping Objects to Types:
+\[
+  \textrm{El}
+\]
+
+Categorical Model, ``Category with Families'':
+
+\begin{itemize}
+  \item Category $\mathsf{C}$ of Contexts: Objects are Contexts,
+    Morphisms are Substitutions
+  \item Functor $T : \mathsf{C}^{op} \rightarrow \mathbf{Fam(Set)}$
+    where $\mathbf{Fam(Set)}$ is the Category of Families
+    (\S\ref{sec:family}) of Sets where Objects are Pairs $(A,B)$ of an
+    Index Set $A$ and a Function $B: X \rightarrow A$ and Morphisms
+    are Pairs of Functions $f: A \rightarrow A$ and $g: X \rightarrow
+    X'$ such that $B' \circ g = f \circ B$, i.e. $f$ maps $B_a$ to
+    $B'_{g(a)}$
+\end{itemize}
+
+The Functor $T$ assigns a Context $\Gamma$ to a Set of Types
+$Ty(\Gamma)$, and for each $A : Ty(\Gamma)$ a Set of Terms
+$Tm(\Gamma,A)$.
+
+The Empty Context is the Terminal Object of $\mathsf{C}$.
+
+Final Object for \emph{Comprehension} (or \emph{Context Extension}) % FIXME
 
 
 
@@ -722,37 +958,12 @@ Inductive Types
 \subsection{Constructive Type}\label{sec:constructive_type}
 % --------------------------------------------------------------------
 
-\emph{Function Type}
+% --------------------------------------------------------------------
+\subsection{Meaning Explanation}\label{sec:meaning_explanation}
+% --------------------------------------------------------------------
 
-\emph{Higher-order Function}
-
-\emph{Product Type}
-
-\subsubsection{Empty Type $\mathbf{0}$}
-
-\subsubsection{Unit Type $\mathbf{1}$}
-
-\subsubsection{Natural Number Type}
-
-\subsubsection{Identity Type}
-
-\subsubsection{Dependent Function Type ($\Pi$-type)}
-
-\[
-  A \rightarrow B :\equiv \prod_{x:A} B
-\]
-
-\subsubsection{Dependent Pair Type ($\Sigma$-type)}
-
-In Set Theory: Indexed Sum over a given Type.
-
-\subsubsection{Coproduct Type}
-
-
-
-% ====================================================================
-\section{Calculus of Constructions}\label{sec:coq}
-% ====================================================================
+Martin-L\"of, a Proof-theoretic Semantics
+(\S\ref{sec:proof_semantics}) for Type Theory
 
 
 
@@ -921,31 +1132,6 @@ Weakening for Judgemental Equality:
     {}
   } \Pi-UNIQ
 \]
-
-
-
-% ====================================================================
-\section{Pure Type System}\label{sec:pure_type_system}
-% ====================================================================
-
-Arbitrary number of Sorts and Dependencies
-
-Generalization of the \emph{Lambda Cube} to more sorts than Terms and
-Types
-
-Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
-
-Barendregt-Geuvers-Klop Conjecture
-
-
-
-% --------------------------------------------------------------------
-\subsection{Lambda Cube}\label{sec:lambda_cube}
-% --------------------------------------------------------------------
-
-Simply-typed $\lambda$-calculus allows only Terms to depend on Types.
-
-All Strongly Normalizing
 
 
 
