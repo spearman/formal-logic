@@ -212,6 +212,22 @@ By the \emph{Homotopy Hypothesis}, $\inf$-groupoids
 
 
 % --------------------------------------------------------------------
+\subsection{Cofinite Topology}\label{sec:cofinite_topology}
+% --------------------------------------------------------------------
+
+\emph{Cofinite Topology} (or \emph{Finite Complement Topology})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Cocountable Topology}\label{sec:cocountable_topology}
+% --------------------------------------------------------------------
+
+\emph{Cocountable Topology}
+
+
+
+% --------------------------------------------------------------------
 \subsection{Cover}\label{sec:topological_cover}
 % --------------------------------------------------------------------
 
@@ -395,9 +411,9 @@ Set of all Neighborhoods of $x$.
 
 \subsubsection{Neighborhood Base}\label{sec:neighborhood_base}
 
-Given a Neighborhood System, $V(x)$, a \emph{Neighborhood Base} for
-$x$ is defined as a Subset of the Neighborhood System, $\beta(x)
-\subseteq \mathcal{V}(x)$, such that:
+Given a Neighborhood System, $\mathcal{V}(x)$, a \emph{Neighborhood
+  Base} for $x$ is defined as a Subset of the Neighborhood System,
+$\beta(x) \subseteq \mathcal{V}(x)$, such that:
 \[
     \forall v \in V(x), \exists b \in \beta(x) : b \subseteq v
 \]
@@ -408,12 +424,96 @@ all $x \in X$.
 
 
 
-
 % --------------------------------------------------------------------
-\subsection{Sequence}\label{sec:topology_sequence}
+\subsection{Sequence}\label{sec:sequence_topology}
 % --------------------------------------------------------------------
 
-\emph{Converges}
+\subsubsection{Limit}\label{sec:limit_topology}
+
+\subsubsection{Convergence}\label{sec:convergence_topology}
+
+A Sequence (\S\ref{sec:sequence}) $(x_n) : \mathbb{N} \rightarrow X$
+\emph{Converges} in a Metric Space $(X,d)$, if:
+\[
+  \lim_{n \rightarrow \infty} d (x_n, x) = 0
+\]
+
+For a Topological Space, $(X,\tau)$, the Sequence $(x_n)$ Converges to
+$x$ if:
+\[
+  \forall A \in \mathcal{V}(x), \exists n \in \mathbb{N}
+  : m \geq n \Rightarrow x_m \in A
+\]
+There may possibly be more than one or infinite Limits in a general
+Topological Space.
+
+In the Trivial Topology $(X, \{\varnothing, X\})$, all Sequences
+Converge to every $x \in X$.
+
+
+
+\subsubsection{Residuality}\label{sec:reside}
+
+In a Topological Space $(X, \tau)$, a Sequence is \emph{Residually}
+(or \emph{Eventually}) in an arbitrary Subset $Y \subseteq X$ if:
+\[
+  \exists m \in \mathbb{N} : n \geq m \Rightarrow x_n \in Y
+\]
+Such a Sequence \emph{Resides} in $Y$.
+
+
+
+\subsubsection{Frequentness}\label{sec:frequent}
+
+In a Topological Space $(X, \tau)$, a Sequence is \emph{Frequently}
+in an arbitrary Subset $Y \subseteq X$ if there is a Subsequence that
+is always in that Set:
+\[
+  (\exists c : \mathbb{N} \rightarrow \mathbb{N})
+  : (\forall n \in \mathbb{N}) x_{c(n)} \in Y
+\]
+
+
+
+\subsubsection{Accumulation}\label{sec:accumulation}
+
+A Point $x$ in a Topological Space $(X, \tau)$ is an
+\emph{Accumulation Point} (or \emph{Cluster Point}) of a Sequence
+$(x_n)$ if $(x_n)$ is Frequently in every Neighborhood in the
+Neighborhood Space of $x$.
+
+
+
+\subsubsection{Subsequence}\label{sec:subsequence_topology}
+
+Given a Sequence $(x_n) : \mathbb{N} \rightarrow X$, a
+\emph{Subsequence} is given by the Composition of $(x_n)$ with a
+Strictly Increasing Function on $c : \mathbb{N} \rightarrow
+\mathbb{N}$:
+\[
+  (x_n) \circ c :
+  \mathbb{N} \xrightarrow{c} \mathbb{N} \xrightarrow{(x_n)} \mathbb{N}
+\]
+
+
+
+\subsubsection{Sequentially Continuous Function}
+\label{sec:sequentially_continuous}
+
+A Function $f : X \rightarrow Y$ between Topological Spaces $(X,
+\tau)$ and $(Y, \sigma)$ is \emph{Sequentially Continuous} at a Point
+$x \in X$ if for any Sequence $(x_n)$ in $X$:
+\[
+  \lim_{n \rightarrow \infty} x_n = x
+  \Rightarrow \lim_{n \rightarrow \infty} f(x_n) = f(x)
+\]
+and Sequentially Continuous in general if Sequentially Continuous at
+every Point $x \in X$.
+
+All Continuous Functions (\S\ref{sec:continuous_function}) are
+Sequentially Continuous. If the Domain $X$ is First Countable
+(\S\ref{sec:countability_axioms}), then any Sequentially Continuous
+Function $f : X \rightarrow Y$ is also a Continuous Function.
 
 
 
@@ -427,7 +527,9 @@ $(Y,d')$ is \emph{Continuous} at a Point $c$ if:
     \forall \epsilon > 0, \exists \delta > 0 :
     f (B_{\delta}(c)) \subseteq B_{\epsilon}(f(c))
 \]
-and a \emph{Continuous Function} satisfies the above for all $c$.
+and a \emph{Continuous Function} satisfies the above for all $c$. All
+Continuous Functions are Sequentially Continuous
+(\S\ref{sec:sequentially_continuous}).
 
 Alternatively, a Function $f: X \rightarrow Y$ is Continuous between
 Metric Spaces if and only if for all Open Sets $V \subseteq Y$,
@@ -457,11 +559,15 @@ Z$ is Continuous.
 
 
 % --------------------------------------------------------------------
-\subsection{Connectedness}\label{sec:connectedness}
+\subsection{Homotopy}\label{sec:homotopy}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Homotopy}\label{sec:homotopy}
+\subsection{Net}\label{sec:net}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Connectedness}\label{sec:connectedness}
 % --------------------------------------------------------------------
 
 
