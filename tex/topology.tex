@@ -4,22 +4,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A \emph{Topology}, $\tau$, is a collection of Subsets called
-\emph{Open Sets} (\S\ref{sec:open_set}) of a \emph{Metric Space}
-(\S\ref{sec:metric_space}), $M$, subject to the following Inductive
-definition:
-\begin{enumerate}
-\item $\varnothing \in \tau, M \in \tau$
-\item $U,V \in \tau \rightarrow U \cap V \in \tau$
-\item $\{U_i\}_{i \in I} \subseteq \tau \rightarrow \bigcup_{i \in I}
-  U_i \in \tau$
-\end{enumerate}
-
-An equivalent definition is possible in terms of \emph{Closed Sets}
-(\S\ref{sec:closed_set}).
-
-
-
 % ====================================================================
 \section{Metric Space}\label{sec:metric_space}
 % ====================================================================
@@ -228,6 +212,10 @@ By the \emph{Homotopy Hypothesis}, $\inf$-groupoids
 
 
 % --------------------------------------------------------------------
+\subsection{Order Topology}\label{sec:order_topology}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Cover}\label{sec:topological_cover}
 % --------------------------------------------------------------------
 
@@ -322,8 +310,26 @@ Compactness Theorem (Model Theory \S\ref{sec:compactness})
 
 
 % ====================================================================
-\section{Point-set Topology}\label{sec:point_set}
+\section{General Topology}\label{sec:general_topology}
 % ====================================================================
+
+\emph{General Topology} (or \emph{Point-set Topology})
+
+A \emph{Topology}, $\tau$, is a collection of Subsets called
+\emph{Open Sets} (\S\ref{sec:open_set}) of a \emph{Metric Space}
+(\S\ref{sec:metric_space}), $M$, subject to the following Inductive
+definition:
+\begin{enumerate}
+\item $\varnothing \in \tau, M \in \tau$
+\item $U,V \in \tau \rightarrow U \cap V \in \tau$
+\item $\{U_i\}_{i \in I} \subseteq \tau \rightarrow \bigcup_{i \in I}
+  U_i \in \tau$
+\end{enumerate}
+
+An equivalent definition is possible in terms of \emph{Closed Sets}
+(\S\ref{sec:closed_set}).
+
+
 
 % --------------------------------------------------------------------
 \subsection{Point}\label{sec:topological_point}
@@ -428,11 +434,19 @@ all $x \in X$.
 \subsection{Sequence}\label{sec:sequence_topology}
 % --------------------------------------------------------------------
 
+A \emph{Sequence} is a Net (\S\ref{sec:net}) where the Directed Set is
+the Natural Numbers:
+\[
+  (x_n) : \mathbb{N} \rightarrow (X,\tau)
+\]
+
+
+
 \subsubsection{Limit}\label{sec:limit_topology}
 
 \subsubsection{Convergence}\label{sec:convergence_topology}
 
-A Sequence (\S\ref{sec:sequence}) $(x_n) : \mathbb{N} \rightarrow X$
+A Sequence $(x_n) : \mathbb{N} \rightarrow X$
 \emph{Converges} in a Metric Space $(X,d)$, if:
 \[
   \lim_{n \rightarrow \infty} d (x_n, x) = 0
@@ -559,15 +573,91 @@ Z$ is Continuous.
 
 
 % --------------------------------------------------------------------
-\subsection{Homotopy}\label{sec:homotopy}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
 \subsection{Net}\label{sec:net}
 % --------------------------------------------------------------------
 
+A \emph{Net} is a Function from a Directed Set
+(\S\ref{sec:directed_set}) into a Topological Space:
+\[
+  (x_\alpha) : D \rightarrow (X, \tau)
+\]
+A Net is \emph{Eventually} in a Set $A \in X$ if:
+\[
+  \exists \alpha \in D
+  : \forall \beta \in D, \beta \geq \alpha \wedge x_\beta \in A
+\]
+
+A Net is \emph{Frequently} in a Set $A \in X$ if:
+\[
+  \forall \alpha \in D, \exists \beta \in D
+  : \alpha \leq \beta \wedge (x_\beta) \in A
+\]
+
+A Sequence (\S\ref{sec:sequence}) is a Net where the Directed Set is
+the Natural Numbers $\mathbb{N}$.
+
+
+
+\subsubsection{Net Convergence}\label{sec:net_convergence}
+
+A Net $(x_\alpha)$ \emph{Converges} to a Point $x$ if for any
+Neighborhood $U \in \mathcal{V}(x)$ in the Neighborhood System of $x$,
+$(x_\alpha)$ is Eventually in $U$.
+
+
+
+\subsubsection{Subnet}\label{sec:subnet}
+
+A Net $(y_\beta) : B \rightarrow X$ is a Subnet of a Net $(x_\alpha) :
+A \rightarrow X$ if there is a Monotone (\S\ref{sec:monotonic}),
+Cofinal (\S\ref{sec:cofinal}) Total Function:
+\[
+  h : B \rightarrow A
+\]
+that is, with the Properties:
+\begin{enumerate}
+  \item Monotonicity:
+    $\beta_1 \leq \beta_2 \Rightarrow h(\beta_1) \leq h(\beta_2)$
+  \item Cofinality:
+     $\forall \alpha \in A, \exists \beta \in B : \alpha \leq h(\beta)$
+\end{enumerate}
+
+
+
+\subsubsection{Cluster Point}\label{sec:cluster_point}
+
+A Point $x$ in a Topological Space $(X,\tau)$ is a \emph{Cluster
+  Point} of a Net $(x_\alpha)$ if $(x_\alpha)$ is Frequently in every
+Neighborhood $U \in \mathcal{V}(x)$ of the Neighborhood System of $x$.
+Alternatively, $x$ is a Cluster Point of a Net if there exists some
+Subnet that Converges to $x$.
+
+
+
+\subsubsection{Continuity}\label{sec:net_continuity}
+
+Given two Topological Spaces $(X,\tau)$ and $(Y,\sigma)$, a Function
+$f : X \rightarrow Y$ is \emph{Continuous}
+(\S\ref{sec:continuous_function}) at a Point $x \in X$ if any only if
+for any Convergent Net $(x_\alpha)$:
+\[
+  \lim (x_\alpha) = x \Rightarrow \lim f(x_\alpha) = f(x)
+\]
+
+
+
 % --------------------------------------------------------------------
 \subsection{Connectedness}\label{sec:connectedness}
+% --------------------------------------------------------------------
+
+\subsubsection{Path-connected}\label{sec:path_connected}
+
+\subsubsection{Simply-connected}\label{sec:simply_connected}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Homotopy}\label{sec:homotopy}
 % --------------------------------------------------------------------
 
 
@@ -583,8 +673,16 @@ Z$ is Continuous.
 % ====================================================================
 
 % --------------------------------------------------------------------
+\subsection{Homotopy Group}\label{sec:homotopy_group}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Homology Theory}\label{sec:homology_theory}
 % --------------------------------------------------------------------
+
+\subsubsection{Homology}\label{sec:homology}
+
+\subsubsection{Cohomology}\label{sec:cohomology}
 
 
 
@@ -602,6 +700,24 @@ Z$ is Continuous.
 
 % --------------------------------------------------------------------
 \subsection{Zariski Geometry}\label{sec:zariski_geometry}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Simplical Complex}\label{sec:simplical_complex}
+% --------------------------------------------------------------------
+
+\subsubsection{Abstract Simplical Complex}\label{sec:abstract_complex}
+
+
+
+
+
+% ====================================================================
+\section{Knot Theory} \label{sec:knot_theory}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Quandle} \label{sec:quandle}
 % --------------------------------------------------------------------
 
 
