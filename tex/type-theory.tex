@@ -9,6 +9,14 @@
 \emph{Type} (\S\ref{sec:type}) and Operations are restricted to Terms
 of specific Types.
 
+A Type Theory may have two Signatures: $\sigma_\tau$ for Type Symbols
+and $\sigma_o$ for Object (Term) Symbols. From this one may construct
+a Monad $R = R_{\sigma_o}$, a Module over $R$: $LM =
+LM_{\sigma_\tau,\sigma_o}$, and a Contextual Category
+(\S\ref{sec:contextual_category}) $CC(R,LM)$ describing a Class of
+Sub-quotients of $CC(R,LM)$ in terms of Objects Constructed from $R$
+and $LM$. \cite{voevedsky14}
+
 As a Formal Theory (\S\ref{sec:formal_theory}), Judgements
 (\S\ref{sec:judgement}) in Type Theory are of three
 kinds\cite{hott13}:
@@ -205,12 +213,20 @@ The \emph{Equality Type} (or \emph{Identity Type}), denoted
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Sum Type}\label{sec:sum_type}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Coproduct Type}\label{sec:coproduct_type}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Recursive Type}\label{sec:recursive_type}
 % --------------------------------------------------------------------
+
+Algebraic Data Type
+
+
 
 % --------------------------------------------------------------------
 \subsection{Universe Type}\label{sec:universe_type}
@@ -238,8 +254,34 @@ Structural Recursion (\S\ref{sec:structural_recursion})
 
 
 % --------------------------------------------------------------------
+\subsection{Existential Type}\label{sec:existential_type}
+% --------------------------------------------------------------------
+
+Existentially Quantified Type Variable
+
+Programming: Module Interfaces
+
+Second-order Typed $\lambda$-calculus with Existential Quantification
+(whereas System $F$ is Second-order Typed $\lambda$-calculus with
+Universal Quantification.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Polymorphic Type}\label{sec:polymorphic_type}
 % --------------------------------------------------------------------
+
+Terms depending on Types, e.g.:
+\[
+  x:\tau \vdash id(x):\tau
+\]
+where the Type of the Term $id(x)$ is $\tau$, which is dependent on
+the Type $\tau$ of $x$, where the Type of $id$:
+\[
+  id:\sigma \rightarrow \sigma
+\]
+is Universally Quantified ``$\forall \sigma$''
+(\S\ref{sec:parametric_polymorphism}).
 
 Second-order $\lambda$-calculus (\S\ref{sec:system_f})
 
@@ -247,9 +289,96 @@ Subtyping (\S\ref{sec:subtype})
 
 Variance
 
-Bounded Quantification
+Ad-hoc Polymorphism (\S\ref{sec:adhoc_polymorphism})
 
-Parametricity
+Restricted Rank
+
+Rank-1 \emph{Prenex Polymorphism}: Type Variables may not be
+instantiated with Polymorphic Types.
+
+Rank-$k$: Quantifier may not appear to the left of $k$ or more Arrows;
+Type Inference is decidable for Rank-2 but Rank-3 and above is not
+
+Rank-$n$: Quantifier may appear to the left of arbitrarily many Arrows
+
+Predicative: a Type $\tau$ containing a Type Variable $\alpha$ may not
+have $\alpha$ Instantiated to a Polymorphic Type (Martin-L\"of Type
+Theory \S\ref{sec:intuitionistic_type} and NuPRL).
+
+Impredicative \emph{First-class Polymorphism}: Self-referential
+(System F \S\ref{sec:system_f})
+
+Parametric (\S\ref{sec:parametric_polymorphism}): Universal
+Quantification
+
+Existential (\S\ref{sec:existential_type}): Existential Quantification
+
+Bounded Quantification (\S\ref{sec:bounded_polymorphism})
+
+
+
+\subsubsection{Subtype}\label{sec:subtype}
+
+\emph{Subtype Polymorphism}
+
+System $F_{<:}$ (\S\ref{sec:system_fsub})
+
+Bounded Polymorphism (\S\ref{sec:bounded_polymorphism})
+
+
+
+\subsubsection{Parametric Polymorphism}
+\label{sec:parametric_polymorphism}
+
+\emph{Generic Function}, \emph{Generic Datatype}
+
+Universally Quantified Type Variable
+
+Bounded (\S\ref{sec:bounded_polymorphism}) Parametric Polymorphism
+
+
+
+\subsubsection{Ad-hoc Polymorphism}\label{sec:adhoc_polymorphism}
+
+\emph{Function Overloading}, \emph{Operator Overloading}
+
+Polymorphic Functions applied to Terms of different Types
+
+
+
+\paragraph{Constrained Type}\label{sec:constrained_type}
+\hfill \\
+
+\emph{Type Class}, Ad-hoc Polymorphism (Function Overloading)
+
+
+
+\subsubsection{Bounded Polymorphism}\label{sec:bounded_polymorphism}
+
+\emph{Bounded Quantification} (or \emph{Bounded Polymorphism} or
+\emph{Constrained Genericity})
+
+Bounds on Type Parameters to range only over Subtypes
+(\S\ref{sec:subtype}) of a particular Type
+
+Type Class (\S\ref{sec:constrained_type})
+
+
+
+\subsubsection{Higher-rank Impredicative Polymorphism}
+\label{sec:higherrank_impredicative}
+
+\emph{Higher-rank Impredicative Polymorphism} (most general)
+
+
+
+\subsubsection{Predicative Prenex Polymorphism}
+\label{sec:predicative_prened}
+
+\emph{Predicative Prenex Polymorphism} (Restricted Rank and
+Predicative)
+
+``\emph{Let-polymorphism}''
 
 
 
@@ -269,18 +398,6 @@ A Polymorphic Function has a Dependent Product Type
 
 
 
-Ad-hoc Polymorphism (Function Overloading)
-
-Parametric Polymorphism
-
-
-
-\subsubsection{Subtype}\label{sec:subtype}
-
-System $F_<$ (System $F$ with Subtyping)
-
-
-
 % --------------------------------------------------------------------
 \subsection{Type Operator}\label{sec:type_operator}
 % --------------------------------------------------------------------
@@ -291,31 +408,52 @@ results in \emph{Simply-typed Lambda Calculus with Type Operators}
 
 System F$_{\omega}$
 
+The Type Operators themselves can be viewed as a Simply-typed
+$\lambda$-calculus with only one Base Type (\S\ref{sec:type_constant})
+denoted `$\ast$' representing the Type of all Types in the underlying
+Language which are called \emph{Proper Types} to distinguish from the
+Type of the Type Operators which are called \emph{Kinds}
+(\S\ref{sec:kind}).
+
+
+
+\subsubsection{Type Variable}\label{sec:type_variable}
+
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
+Universally Quantified Type Variables
+
+Existential Types (\S\ref{sec:existential_type}):
+Existentially Quantified Type Variables
+
+
+
+\subsubsection{Kind}\label{sec:kind}
+
+A \emph{Kind} is the Type of a Type Operator, or the Type of a
+Higher-order Type Operator \S\ref{sec:higherorder_typeoperator}).
+
 
 
 \subsubsection{Higher-order Type Operator}
 \label{sec:higherorder_typeoperator}
+
+Allowing for the Type Operators to form a Simply-typed
+$\lambda$-calculus with the single Base Type `$*$' allows for
+Higher-order Type Operators.
+
+
+
+\subsubsection{Function Type}\label{sec:function_type}
+
+A \emph{Function Type} (or \emph{Arrow Type}) is Type formed by the
+Higher-kinded Type Constructor $\rightarrow$, a special case of the
+Dependent Product Type (\S\ref{sec:dependent_product}).
 
 
 
 \subsubsection{Type Constructor}\label{sec:type_constructor}
 
 \emph{Type Constructor}
-
-
-
-\paragraph{Kind}\label{sec:kind}
-\hfill \\
-
-A \emph{Kind} is the Type of a Type Constructor, or the Type of a
-Higher-order Type Operator \S\ref{sec:higherorder_typeoperator}).
-
-
-
-\paragraph{Function Type}\label{sec:function_type}
-\hfill \\
-
-A \emph{Function Type} (or \emph{Arrow Type}) is a Higher-kinded
 
 
 
@@ -331,6 +469,9 @@ a Dependent Function (\S\ref{sec:dependent_function}).
 Logical Quantifiers (\S\ref{sec:quantifier})
 
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+
+Categorically, Dependent Types correspond to Morphisms regarded as
+Indexed Families (Bundle or Fibration). % FIXME
 
 A Dependent Type is the Type of a Dependent Function
 (\S\ref{sec:dependent_function}).
@@ -363,7 +504,8 @@ A \emph{Dependent Function} is a Function from Terms to Types.
 
 \subsubsection{Dependent Product Type}\label{sec:dependent_product}
 
-\emph{Dependent Product Type} (or \emph{$\Pi$-type})
+The \emph{Dependent Product Type} (or \emph{$\Pi$-type}) generalizes
+the idea of a Polymorphic Function.
 
 For a Type $A : \mathcal{U}$ in Type Universe $\mathcal{U}$, a Family
 of Types
@@ -600,7 +742,11 @@ Completeness
     Types
 \end{itemize}
 because Polymorphism and Dependency cannot be encoding using only
-$\rightarrow$ and Type Variables.
+$\rightarrow$ and Type Variables. Adding Record Types
+(\S\ref{sec:product_type}) to Simply-typed $\lambda$-calculus allows
+for Subtyping (\S\ref{sec:subtype}), and the resulting System
+(\S\ref{sec:simplytyped_conjunctive}) is no longer ``Simply-typed''
+because it allows for Terms to have more than one Type.
 
 The following extensions are still considered ``Simply-typed''
 systems:
@@ -751,7 +897,7 @@ Minimal Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
 
 Subtyping (\S\ref{sec:subtype})
 
-System $F_<$
+System $F_{<:}$ (\S\ref{sec:system_fsub})
 
 
 
@@ -777,10 +923,15 @@ All Recursive Functions in Peano Arithmetic are definable
 
 \emph{System F} (or \emph{Second-order $\lambda$-calculus})
 
-Universal Quantification over all Types
+Universal Quantification over all Types (cf. Existential Type Theory
+\S\ref{sec:existential_type})
 
 Can describe all Functions that are Provably Total in Second-order
 Logic (\S\ref{sec:secondorder_logic})
+
+
+
+\subsubsection{System F}\label{sec:system_fsub}
 
 
 
@@ -800,6 +951,8 @@ Dependently-typed $\lambda$-calculus with a Type of all Types (the
 simplest Pure Type System \S\ref{sec:pure_type_system}) is not
 Strongly Normalizing due to Girard's Paradox
 (\S\ref{sec:girards_paradox})
+
+Contextual Category (\S\ref{sec:contextual_category})
 
 
 
@@ -863,6 +1016,12 @@ All Strongly Normalizing
   Theory} or \emph{Martin-L\"of Type Theory})
 
 Inductive Types (\S\ref{sec:inductive_type})
+
+Extensional Martin-L\"of Type Theory: Internal Language
+(\S\ref{sec:internal_language}) for Cartesian Closed Quasi-categories
+(\S\ref{sec:quasicategory})
+
+Intensional Martin-L\"of Type Theory: Internal Language
 
 Types:
 \[
@@ -977,6 +1136,9 @@ Homotopy Thoery (\S\ref{sec:homotopy})
 - Univalence Axiom
 
 - Values (Points), Paths, Homotopies
+
+- Internal Language of Higher Categories
+(\S\ref{sec:higher_category}).
 
 
 
@@ -1169,6 +1331,14 @@ Classical-Intuitionistic Embedding - Continuation Passing Style
 % --------------------------------------------------------------------
 \subsection{Hindley-Milner Type System}\label{sec:hindley_milner}
 % --------------------------------------------------------------------
+
+$\lambda$-calculus with Parametric Polymorphism
+
+
+
+\subsubsection{Algorithm W}\label{sec:algorithm_w}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Type Checking}\label{sec:type_checking}
