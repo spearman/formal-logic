@@ -242,6 +242,8 @@ $fst_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \sigma$
 
 $snd_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \tau$
 
+Corresponds to Cartesian Product
+
 
 
 \subsubsection{Coproduct Type}\label{sec:coproduct_type}
@@ -251,6 +253,10 @@ $snd_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \tau$
 % --------------------------------------------------------------------
 \subsection{Sum Type}\label{sec:sum_type}
 % --------------------------------------------------------------------
+
+Corresponds to Disjoint Sum
+
+
 
 % --------------------------------------------------------------------
 \subsection{Power Type}\label{sec:power_type}
@@ -262,6 +268,10 @@ $snd_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \tau$
 
 \subsubsection{Recursive Data Type}\label{sec:recursive_datatype}
 
+Well-founded (\S\ref{sec:well_founded})
+
+
+
 \paragraph{Infinite Data Type}\label{sec:infinite_datatype}
 \hfill \\
 
@@ -271,9 +281,28 @@ $snd_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \tau$
 
 \subsubsection{Algebraic Data Type}\label{sec:algebraic_datatype}
 
+Trees (\S\ref{sec:tree})
+
+$W$ Type
+
+
+
+\paragraph{Quotient Type}\label{sec:quotient_type}
+\hfill \\
+
+Set Theoretic Quotients
+
+
+
 \subsubsection{Abstract Data Type}\label{sec:abstract_datatype}
 
+Type defined by certain Properties %FIXME
 
+
+
+% --------------------------------------------------------------------
+\subsection{Congruence Type}\label{sec:congruence_type}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Universe Type}\label{sec:universe_type}
@@ -288,15 +317,23 @@ A \emph{Universe Type} contains all other Types, see Type Universe
 \subsection{Inductive Type}\label{sec:inductive_type}
 % --------------------------------------------------------------------
 
+Monotonic Type Function $\Theta : \sigma \Rightarrow \tau$
+
 Type Constructor (\S\ref{sec:type_constructor})
 
 Structural Recursion (\S\ref{sec:structural_recursion})
 
-\emph{Coinductive Type}, Coinduction (\S\ref{sec:coinduction})
-
 \emph{Induction Induction}
 
 \emph{Induction Recursion}
+
+Streams between interacting processes in Programming Languages
+
+
+
+\subsubsection{Coinductive Type}\label{sec:coinductive_type}
+
+\emph{Coinductive Type}, Coinduction (\S\ref{sec:coinduction})
 
 
 
@@ -317,6 +354,22 @@ Universal Quantification.
 % --------------------------------------------------------------------
 \subsection{Polymorphic Type}\label{sec:polymorphic_type}
 % --------------------------------------------------------------------
+
+$\tau \mapsto \sigma$
+
+Introduction:
+\[
+  {
+  \frac{
+    \begin{matrix}
+      x : \sigma \\
+      \vdots \\
+      b : B
+    \end{matrix}
+  }
+  {b : \sigma \mapsto \tau}
+  }(\mapsto I)
+\]
 
 Terms depending on Types, e.g.:
 \[
@@ -361,6 +414,11 @@ Parametric (\S\ref{sec:parametric_polymorphism}): Universal
 Quantification
 
 Existential (\S\ref{sec:existential_type}): Existential Quantification
+
+The Type $(\exists x : A).B$ is inhabited by Pairs $(a,b)$ with $a:A$
+and $b:B[a/x]$, i.e. the Sum of the Types $B(x)$ as $x$ ranges over
+$A$ \emph{or} the Subset of $A$ consisting of those $a \in A$ with the
+Property $B[a/x]$.
 
 Bounded Quantification (\S\ref{sec:bounded_polymorphism})
 
@@ -589,6 +647,8 @@ abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
 
 A \emph{Dependent Function} is a Function from Terms to Types.
 
+Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
+
 
 
 \subsubsection{Dependent Product Type}\label{sec:dependent_product}
@@ -638,6 +698,28 @@ By Curry-Howard, $\Sigma$-types model Conjunction and Existential
 Quantification.
 
 Analagous to Coproduct or Disjoint Union.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Partial Type}\label{sec:partial_type}
+\cite{thompson99}
+% --------------------------------------------------------------------
+
+Non-terminating Computations
+
+Total Objects are Identified at Simple Types
+
+Undefined Object ``Bottom'' $\uparrow$ is a Member of every Type
+
+\[
+  \sigma \rightarrow \tau \quad
+  \sigma \rightarrow \overline{\tau} \quad
+  \overline{\sigma} \rightarrow \overline{\tau} \quad
+  \overline{\sigma \rightarrow \tau} \quad
+  \overline{\sigma \rightarrow \overline{\tau}} \quad
+  \overline{\overline{\sigma} \rightarrow \overline{\tau}} \quad
+\]
 
 
 
@@ -1478,8 +1560,8 @@ No Proof for the Contradictory Proposition $\bot$
 $(\exists x : A).P$ where $P$ is a Witness (\S\ref{sec:type_witness})
 $w : A$ with a Proof that $P$ holds of $w$, i.e. $P[w/x]$
 
-$(\forall x : A).P$ implies that $P[a/x]$ is Valid for every $a \in
-A$; a Function mapping any Proof of $A$ to a Proof of $P$.
+$(\forall x : A).P$ implies that $P[a/x]$ is Valid for every $a$ in
+$A$; a Function mapping any Proof of $A$ to a Proof of $P$.
 
 Introduction Rule for $\forall$:
 \[
@@ -1573,6 +1655,10 @@ Predicate Logic - Dependent Types (Intuitionistic Type Theory
 Modal Logic - Monads
 
 Classical-Intuitionistic Embedding - Continuation Passing Style
+
+Subset Type $(\exists x:A).B$ (Pairs of Objects and the Proofs that
+they have Property): $\{ x : A | B \}$ consisting of those $a$ in $A$
+with Property $B[a/x]$, i.e. $B[a/x]$ is Inhabited.
 
 
 
