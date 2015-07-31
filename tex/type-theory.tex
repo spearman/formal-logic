@@ -200,11 +200,33 @@ Tautology of Second-order Logic (\S\ref{sec:secondorder_logic}).
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Infinite Type}\label{sec:infinite_type}
+% --------------------------------------------------------------------
+
+Infinite Data Type (\S\ref{sec:infinite_datatype})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Equality Type}\label{sec:equality_type}
 % --------------------------------------------------------------------
 
 The \emph{Equality Type} (or \emph{Identity Type}), denoted
 \emph{Propositional Equality}, represents Equality of Types and Terms.
+
+$a =_A b$: ``$a$ and $b$ are Equal Objects of Type $A$''
+
+Martin-L\"of Notation $I(A,a,b)$
+
+For $a,b:A$, the Term $a = b : I(A,a,b)$ Denotes the Type of Equality
+Proofs for ``$a$ is Equal to $b$''. If the Type $I(A,a,b)$ is
+Inhabited (a Proof exists), then $a$ is Equal to $b$.
+
+There is one Canonical Inhabitant of $I(A,a,a)$ (Proof of
+Reflexivity):
+\[
+  \text{refl}: \prod_{a:A} (a=a)
+\]
 
 
 
@@ -212,19 +234,44 @@ The \emph{Equality Type} (or \emph{Identity Type}), denoted
 \subsection{Product Type}\label{sec:product_type}
 % --------------------------------------------------------------------
 
+If $\sigma$ and $\tau$ are Types, then $\sigma \times \tau$ is a Type
+
+$x : \sigma$, $y : \tau$, $(x,y) : \sigma \times \tau$
+
+$fst_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \sigma$
+
+$snd_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \tau$
+
+
+
+\subsubsection{Coproduct Type}\label{sec:coproduct_type}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Sum Type}\label{sec:sum_type}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Coproduct Type}\label{sec:coproduct_type}
+\subsection{Power Type}\label{sec:power_type}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Recursive Type}\label{sec:recursive_type}
+\subsection{Data Type}\label{sec:data_type}
 % --------------------------------------------------------------------
 
-Algebraic Data Type
+\subsubsection{Recursive Data Type}\label{sec:recursive_datatype}
+
+\paragraph{Infinite Data Type}\label{sec:infinite_datatype}
+\hfill \\
+
+(Proof Object) Definition by Recursion: Proof by Induction
+
+
+
+\subsubsection{Algebraic Data Type}\label{sec:algebraic_datatype}
+
+\subsubsection{Abstract Data Type}\label{sec:abstract_datatype}
 
 
 
@@ -241,7 +288,7 @@ A \emph{Universe Type} contains all other Types, see Type Universe
 \subsection{Inductive Type}\label{sec:inductive_type}
 % --------------------------------------------------------------------
 
-Type Constructor (\S\ref{sec:type_operator})
+Type Constructor (\S\ref{sec:type_constructor})
 
 Structural Recursion (\S\ref{sec:structural_recursion})
 
@@ -282,6 +329,8 @@ the Type $\tau$ of $x$, where the Type of $id$:
 \]
 is Universally Quantified ``$\forall \sigma$''
 (\S\ref{sec:parametric_polymorphism}).
+
+Dependent Product Type (\S\ref{sec:dependent_product})
 
 Second-order $\lambda$-calculus (\S\ref{sec:system_f})
 
@@ -324,6 +373,24 @@ Bounded Quantification (\S\ref{sec:bounded_polymorphism})
 System $F_{<:}$ (\S\ref{sec:system_fsub})
 
 Bounded Polymorphism (\S\ref{sec:bounded_polymorphism})
+
+
+
+\paragraph{Variance}\label{sec:variance}
+\hfill \\
+
+\emph{Variance} describes how Type Constructors either preserve,
+reverse, or ignore Subtyping on input Types.
+
+\begin{itemize}
+  \item \emph{Covariant}: Preserves Subtyping
+  \item \emph{Contravariant}: Reverses Subtyping
+  \item \emph{Bivariant}: Both Subtypes
+  \item \emph{Invariant}: No Subtyping
+\end{itemize}
+
+$(\rightarrow)$ is Contravariant on the Input Type and Covariant on
+the Output Type.
 
 
 
@@ -384,12 +451,6 @@ Predicative)
 
 \subsubsection{Polymorphic Function}\label{sec:polymorphic_function}
 
-A Polymorphic Function Dependent Product Type
-(\S\ref{sec:dependent_product}):
-\[
-  \Pi(A:\mathcal{U}) A \rightarrow C
-\]
-
 A Polymorphic Function has a Dependent Product Type
 (\S\ref{sec:dependent_product}):
 \[
@@ -398,8 +459,18 @@ A Polymorphic Function has a Dependent Product Type
 
 
 
+\paragraph{Polymorphic Recursion}\label{sec:polymorphic_recursion}
+\hfill \\
+
+Recursive Parametrically Polymorphic Function
+
+Type Inference under Polymorphic Recursion is Undecidable (equivalent
+to Semi-unification) %FIXME
+
+
+
 % --------------------------------------------------------------------
-\subsection{Type Operator}\label{sec:type_operator}
+\subsection{Type Function}\label{sec:type_function}
 % --------------------------------------------------------------------
 
 Adding additional Type Operators to Simply-typed Lambda Calculus
@@ -453,7 +524,25 @@ Dependent Product Type (\S\ref{sec:dependent_product}).
 
 \subsubsection{Type Constructor}\label{sec:type_constructor}
 
+Injective Type Function: maps all Types of a particular Kind to a new
+Set of Types and Type Synonyms
+
 \emph{Type Constructor}
+
+
+
+\subsubsection{Type Family}\label{sec:type_family}
+
+A \emph{Type Family} is a Partial Type Function that allows Types to
+be defined by matching Terms.
+
+
+
+\paragraph{Associated Type}\label{sec:associated_type}
+\hfill \\
+
+A Type Family declared inside a Type Class is an \emph{Associated
+  Type}
 
 
 
@@ -549,6 +638,16 @@ By Curry-Howard, $\Sigma$-types model Conjunction and Existential
 Quantification.
 
 Analagous to Coproduct or Disjoint Union.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Type Conversion}\label{sec:type_conversion}
+% --------------------------------------------------------------------
+
+\subsubsection{Type Promotion}\label{sec:type_promotion}
+
+Special case of Implicit Type Conversion
 
 
 
@@ -662,6 +761,9 @@ Context $\Gamma$'',
 
 Terms that are Well-typed in the Empty Context are Closed Terms.
 
+Under a Proof Theoretic Interpretation, $p : P$ may be read as ``$p$
+is a Proof of Proposition $P$''
+
 
 
 % --------------------------------------------------------------------
@@ -670,6 +772,8 @@ Terms that are Well-typed in the Empty Context are Closed Terms.
 
 A \emph{Typing Rule} (or \emph{Type Rule}) describes how a Type is
 assigned to a Syntactic Construction.
+
+Corresponding to Introduction and Elimination Rules of Proof Theory
 
 The notation for Type Rules is that of Sequent Notation
 (\S\ref{sec:sequent}):
@@ -695,6 +799,13 @@ and is constructed from Typing Rules (\S\ref{sec:typing_rule}).
 
 A Term for which a Typing Derivation exists is called a
 \emph{Well-typed Term} (\S\ref{sec:well_typed}).
+
+
+
+\subsubsection{Type Witness}\label{sec:type_witness}
+
+\emph{Witnessing Information} gives verification of a Typing
+Assumption
 
 
 
@@ -732,8 +843,8 @@ Typed Interpretation of $\lambda$-calculus with one Type Constructor
 for Function Types: $\rightarrow$ (\S\ref{sec:function_type}).
 
 Strongly Normalizing, not Turing Complete: addition of $fix_\alpha$
-Operator or Recursive Types (\S\ref{sec:recursive_type}) gives Turing
-Completeness
+Operator or Recursive Types (\S\ref{sec:recursive_datatype}) gives
+Turing Completeness
 
 ``Simply-typed'' is to distinguish from extensions such as:
 \begin{itemize}
@@ -745,8 +856,8 @@ because Polymorphism and Dependency cannot be encoding using only
 $\rightarrow$ and Type Variables. Adding Record Types
 (\S\ref{sec:product_type}) to Simply-typed $\lambda$-calculus allows
 for Subtyping (\S\ref{sec:subtype}), and the resulting System
-(\S\ref{sec:simplytyped_conjunctive}) is no longer ``Simply-typed''
-because it allows for Terms to have more than one Type.
+(\S\ref{sec:conjunctive_lambda}) is no longer ``Simply-typed'' because
+it allows for Terms to have more than one Type.
 
 The following extensions are still considered ``Simply-typed''
 systems:
@@ -879,6 +990,8 @@ Simply-typed $\lambda$-calculus is Isomorphic by Curry-Howard
   \item (Inhabited) Types correspond to Tautologies in Minimal Logic
 \end{itemize}
 
+
+
 Minimal Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
 \[
   \supset \leftrightarrow \rightarrow
@@ -889,15 +1002,6 @@ Minimal Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
 \] \[
   False \leftrightarrow \bot
 \]
-
-
-
-\subsubsection{Simply-typed $\lambda$-calculus with Conjunctive Types}
-\label{sec:simplytyped_conjunctive}
-
-Subtyping (\S\ref{sec:subtype})
-
-System $F_{<:}$ (\S\ref{sec:system_fsub})
 
 
 
@@ -918,6 +1022,17 @@ All Recursive Functions in Peano Arithmetic are definable
 
 
 % --------------------------------------------------------------------
+\subsection{$\lambda$-calculus with Conjunctive Types}
+\label{sec:conjunctive_lambda}
+% --------------------------------------------------------------------
+
+Subtyping (\S\ref{sec:subtype})
+
+System $F_{<:}$ (\S\ref{sec:system_fsub})
+
+
+
+% --------------------------------------------------------------------
 \subsection{System F}\label{sec:system_f}
 % --------------------------------------------------------------------
 
@@ -931,7 +1046,7 @@ Logic (\S\ref{sec:secondorder_logic})
 
 
 
-\subsubsection{System F}\label{sec:system_fsub}
+\subsubsection{System F$_{<:}$}\label{sec:system_fsub}
 
 
 
@@ -1021,9 +1136,9 @@ Extensional Martin-L\"of Type Theory: Internal Language
 (\S\ref{sec:internal_language}) for Cartesian Closed Quasi-categories
 (\S\ref{sec:quasicategory})
 
-Intensional Martin-L\"of Type Theory: Internal Language
-
-Types:
+Types (encodes Syntax of Formulas ``A is a Proposition''; note some
+Formulas are only Well-formed if certain Judgements are Derivable
+\cite{thompson99}):
 \[
   A \textsf{ Type}
 \]
@@ -1113,6 +1228,23 @@ Final Object for \emph{Comprehension} (or \emph{Context Extension}) % FIXME
 
 
 
+\textbf{Alternate description}\cite{bastenhof09}
+
+Language $L$:
+\begin{enumerate}
+  \item $1$ (Unity Type), $\Omega$ (Truth Value Type)
+  \item Base Types $\tau_1, \tau_2, \tau_3, \ldots$
+  \item Function Symbols $f, g, h, \ldots$
+\end{enumerate}
+The Types of a System are given by the smallest Set including $1$,
+$\Omega$, and the Base Types closed under $\times$ (Product Types
+\S\ref{sec:product_type}) and Unary Type Operator $P$ (Power Types
+\S\ref{sec:power_type}).
+
+Terms of Type $\Omega$ represent Formulas, e.g. $\tau_1 = \tau_2$.
+
+
+
 % --------------------------------------------------------------------
 \subsection{Constructive Type}\label{sec:constructive_type}
 % --------------------------------------------------------------------
@@ -1133,7 +1265,7 @@ Martin-L\"of, a Proof-theoretic Semantics
 Homotopy Thoery (\S\ref{sec:homotopy})
 
 - Function Extensionality
-- Univalence Axiom
+- Univalence Axiom (\S\ref{sec:univalence_axiom})
 
 - Values (Points), Paths, Homotopies
 
@@ -1298,6 +1430,21 @@ Weakening for Judgemental Equality:
 
 
 
+% --------------------------------------------------------------------
+\subsection{Univalence Axiom}\label{sec:univalence_axiom}
+% --------------------------------------------------------------------
+
+``Identity is Equivalent to Equivalence''
+
+``Equivalent Types are Identical''
+\[
+  (A = B) \simeq (A \simeq B)
+\]
+where $A = B$ is notation for the Type $Id_U(A,B)$ where $U$ is the
+Universe containing $A$ and $B$.
+
+
+
 % ====================================================================
 \section{Curry-Howard Correspondence}\label{sec:curry_howard}
 % ====================================================================
@@ -1309,6 +1456,111 @@ $A$ (Type) & Proposition \\ \hline
 $a : A$ (Term) & Proof \\
 \hline
 \end{tabular}
+
+Proofs and Propositions form the Object Language; Derivations are used
+to infer Judgements about the Object Language
+
+***
+
+$p : P$ ``$p$ is a Proof of Proposition $P$''
+
+A Proof of $A \wedge B$ is a Pair of Proofs $p : A$ and $q : B$ (holds
+in both Classical and Constructive Systems)
+
+A Proof of $A \vee B$ is a Proof $p : A$ or a Proof $q : B$ with an
+indication of which Formula is Proved (differs from Classical Logic)
+
+A Proof of $A \Rightarrow B$ is a Function that Transforms a Proof $p
+: A$ into a Proof $q : B$.
+
+No Proof for the Contradictory Proposition $\bot$
+
+$(\exists x : A).P$ where $P$ is a Witness (\S\ref{sec:type_witness})
+$w : A$ with a Proof that $P$ holds of $w$, i.e. $P[w/x]$
+
+$(\forall x : A).P$ implies that $P[a/x]$ is Valid for every $a \in
+A$; a Function mapping any Proof of $A$ to a Proof of $P$.
+
+Introduction Rule for $\forall$:
+\[
+  {
+    \frac{
+      \begin{matrix}
+        [x : A]\\
+        \vdots\\
+        p : P
+      \end{matrix}
+    }{
+      (\lambda x : A).p : (\forall x : A).P
+    }
+  } (\forall I)
+\]
+
+Computation Rule for $\forall$:
+\[
+  ((\lambda x : A).p) \rightarrow p[a/x]
+\]
+
+Introduction Rule for $\exists$:
+\[
+  {
+    \frac{
+      a : A \quad\quad p : P [a/x]
+    }{
+      (a,p) : (\exists x : A).P
+    }
+  } (\exists I)
+\]
+
+Computation Rules for $\exists$:
+\[
+  fst (p,q) \rightarrow p
+\]\[
+  snd (p,q) \rightarrow q
+\]
+
+The Formation Rule for Equality Types (\S\ref{sec:equality_type})
+requires other Judgements (Type Assumptions) in addition to
+Well-typing Judgements:
+\[
+  {
+    \frac{ A \mathsf{ Type} \quad\quad a : A \quad\quad b:A }
+    { I (A,a,b) \mathsf{ Type}}
+  } (I F)
+\]
+
+Introduction Rule for $I$:
+\[
+  {
+    \frac{ a : A }
+    { r(a) : I(A,a,a)}
+  } (II)
+\]
+
+Elimination Rule for $I$:
+\[
+  {
+    \frac{ c : I (A, a, b) \quad\quad d : C(a,a,r(a)) }
+    { J(c,d) : C(a,b,c) }
+  } (I E)
+\]
+
+Computation Rule for $I$:
+\[
+  J (r(a), d) \rightarrow d
+\]
+
+Leibniz Law
+
+***
+
+Formation Rules : Defines what the Types of the System are (Syntax)
+
+Introduction \& Elimination Rules : Define which Terms are Members of
+which Types; Typing Rules (\S\ref{sec:typing_rule})
+
+Computation Rules : How Objects can be Reduced, i.e. Evaluated
+(Computation)
 
 Natural Deduction - Typed Lambda Calculus
 
