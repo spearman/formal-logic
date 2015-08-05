@@ -231,8 +231,52 @@ Reflexivity):
 
 
 % --------------------------------------------------------------------
-\subsection{Product Type}\label{sec:product_type}
+\subsection{Power Type}\label{sec:power_type}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Data Type}\label{sec:data_type}
+% --------------------------------------------------------------------
+
+\subsubsection{Recursive Data Type}\label{sec:recursive_datatype}
+
+or (\emph{Inductive Data Type})
+
+Values may contain Values of the same Type
+
+Well-founded (\S\ref{sec:well_founded})
+
+
+
+\paragraph{Infinite Data Type}\label{sec:infinite_datatype}
+\hfill \\
+
+(Proof Object) Definition by Recursion: Proof by Induction
+
+
+
+\subsubsection{Composite Data Type}\label{sec:composite_datatype}
+
+\paragraph{Algebraic Data Type}\label{sec:algebraic_datatype}
+\hfill \\
+
+Trees (\S\ref{sec:tree})
+
+$W$ Type
+
+
+
+\subparagraph{Sum Type}\label{sec:sum_type}
+\hfill \\
+
+\emph{Variant Type}
+
+Corresponds to Disjoint Sum
+
+
+
+\subparagraph{Product Type}\label{sec:product_type}
+\hfill \\
 
 If $\sigma$ and $\tau$ are Types, then $\sigma \times \tau$ is a Type
 
@@ -246,48 +290,12 @@ Corresponds to Cartesian Product
 
 
 
-\subsubsection{Coproduct Type}\label{sec:coproduct_type}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Sum Type}\label{sec:sum_type}
-% --------------------------------------------------------------------
-
-Corresponds to Disjoint Sum
-
-
-
-% --------------------------------------------------------------------
-\subsection{Power Type}\label{sec:power_type}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Data Type}\label{sec:data_type}
-% --------------------------------------------------------------------
-
-\subsubsection{Recursive Data Type}\label{sec:recursive_datatype}
-
-Well-founded (\S\ref{sec:well_founded})
-
-
-
-\paragraph{Infinite Data Type}\label{sec:infinite_datatype}
+\subparagraph{Coproduct Type}\label{sec:coproduct_type}
 \hfill \\
 
-(Proof Object) Definition by Recursion: Proof by Induction
 
 
-
-\subsubsection{Algebraic Data Type}\label{sec:algebraic_datatype}
-
-Trees (\S\ref{sec:tree})
-
-$W$ Type
-
-
-
-\paragraph{Quotient Type}\label{sec:quotient_type}
+\subparagraph{Quotient Type}\label{sec:quotient_type}
 \hfill \\
 
 Set Theoretic Quotients
@@ -426,6 +434,8 @@ Bounded Quantification (\S\ref{sec:bounded_polymorphism})
 
 \subsubsection{Subtype}\label{sec:subtype}
 
+\emph{Intersection Type}
+
 \emph{Subtype Polymorphism}
 
 System $F_{<:}$ (\S\ref{sec:system_fsub})
@@ -452,6 +462,10 @@ the Output Type.
 
 
 
+\paragraph{Refinement Type}\label{sec:refinement_type}
+
+
+
 \subsubsection{Parametric Polymorphism}
 \label{sec:parametric_polymorphism}
 
@@ -468,6 +482,10 @@ Bounded (\S\ref{sec:bounded_polymorphism}) Parametric Polymorphism
 \emph{Function Overloading}, \emph{Operator Overloading}
 
 Polymorphic Functions applied to Terms of different Types
+
+Ad-hoc Polymorphism is contrasted with Parametric Polymorphism by
+supporting a limited number of distinct Types rather than any Type
+whatsoever.
 
 
 
@@ -1667,18 +1685,6 @@ with Property $B[a/x]$, i.e. $B[a/x]$ is Inhabited.
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Hindley-Milner Type System}\label{sec:hindley_milner}
-% --------------------------------------------------------------------
-
-$\lambda$-calculus with Parametric Polymorphism
-
-
-
-\subsubsection{Algorithm W}\label{sec:algorithm_w}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Type Checking}\label{sec:type_checking}
 % --------------------------------------------------------------------
 
@@ -1688,3 +1694,88 @@ $\lambda$-calculus with Parametric Polymorphism
 \emph{Checking}
 
 \emph{Synthesis}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Substructural Type System}\label{sec:substructural_type}
+% --------------------------------------------------------------------
+
+Substructural Logic (\S\ref{sec:substructural_logic})
+
+Substructural Type Systems are categorized by allowing or disallowing
+Structural rules of Exchange (\S\ref{sec:exchange_rule}), Weakening
+(\S\ref{sec:weakening_rule}), or Contraction
+(\S\ref{sec:contraction_rule}):
+
+\begin{itemize}
+  \item Linear Type Systems (\S\ref{sec:linear_type}): Allow Exchange,
+    not Weakening or Contraction; Every Variable used exactly once
+  \item Affine Type Systems (\S\ref{sec:affine_type}): Allow Exchange
+    and Weakening, not Contraction; Every occurrence of a Variable
+    used at most once
+  \item Relevant Type System (\S\ref{sec:relevant_type}): Allow
+    Exchange and Contraction, not Weakening; Every variable used at
+    least once
+  \item Ordered Type System (\S\ref{sec:ordered_type}): Disallow
+    Exchange, Contraction and Weakening; Every Variable is used
+    Exactly once in the order it was introduced
+\end{itemize}
+
+
+
+\subsubsection{Linear Type System}\label{sec:linear_type}
+
+Linear Logic (\S\ref{sec:linear_logic}) allows safe Deallocation
+(Objects used exactly once)
+
+Internal Language (\S\ref{sec:internal_language}) of Closed Symmetric
+Monoidal Categories (\S\ref{sec:closed_monoidal})
+
+Allows References but not Aliases
+
+Modelling of Heap-based Memory Allocation
+
+No-cloning Theorem (Quantum States):
+\begin{itemize}
+  \item No Diagonal Functor (\S\ref{sec:diagonal_functor})
+    which could duplicate States
+  \item No $K$-combinator which can destroy States
+  \item A Variable $x$ can appear at most once in a $\lambda$-term
+\end{itemize}
+
+
+
+\paragraph{Affine Type System}\label{sec:affine_type}
+\hfill \\
+
+Affine Logic (\S\ref{sec:affine_logic})
+
+
+
+\subsubsection{Relevant Type System}\label{sec:relevant_type}
+
+Relevant Logic (\S\ref{sec:relevance_logic})
+
+
+
+\subsubsection{Ordered Type System}\label{sec:ordered_type}
+
+Noncommutative Logic (\S\ref{sec:noncommutative_logic})
+
+modelling Stack-based Memory Allocation
+
+only Objects on top of modelled Stack may be used, after which it is
+popped off
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hindley-Milner Type System}\label{sec:hindley_milner}
+% --------------------------------------------------------------------
+
+$\lambda$-calculus with Parametric Polymorphism
+
+
+
+\subsubsection{Algorithm W}\label{sec:algorithm_w}
