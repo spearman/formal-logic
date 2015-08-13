@@ -516,6 +516,10 @@ cf. Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
 
 Universally Quantified Type Variable
 
+Type-level Function Abstraction $\Lambda$
+
+Second-order $\lambda$-calculus (\S\ref{sec:system_f})
+
 Bounded (\S\ref{sec:bounded_polymorphism}) Parametric Polymorphism
 
 
@@ -594,9 +598,9 @@ to Semi-unification) %FIXME
 
 Adding additional Type Operators to Simply-typed Lambda Calculus
 results in \emph{Simply-typed Lambda Calculus with Type Operators}
-``$\lambda \underline{\omega}$''
+``$\lambda \underline{\omega}$'' (\S\ref{sec:simply_operators})
 
-System F$_{\omega}$
+System F$_{\omega}$ (\S\ref{sec:system_fomega})
 
 The Type Operators themselves can be viewed as a Simply-typed
 $\lambda$-calculus with only one Base Type (\S\ref{sec:type_constant})
@@ -1135,7 +1139,7 @@ Simply-typed $\lambda$-calculus is Isomorphic by Curry-Howard
 
 
 
-Minimal Logic $\leftrightarrow$ Simply Typed $\lambda$-Calculus:
+Minimal Logic $\leftrightarrow$ Simply-typed $\lambda$-calculus:
 \[
   \supset \leftrightarrow \rightarrow
 \] \[
@@ -1176,6 +1180,19 @@ System $F_{<:}$ (\S\ref{sec:system_fsub})
 
 
 % --------------------------------------------------------------------
+\subsection{Simply-typed $\lambda$-calculus with Type Operators}
+\label{sec:simply_operators}
+% --------------------------------------------------------------------
+
+$\lambda\underline{\omega}$
+
+Types depending on Types
+
+System F$_\omega$ (\S\ref{sec:system_fomega})
+
+
+
+% --------------------------------------------------------------------
 \subsection{System F}\label{sec:system_f}
 % --------------------------------------------------------------------
 
@@ -1184,26 +1201,35 @@ System $F_{<:}$ (\S\ref{sec:system_fsub})
 Universal Quantification over all Types (cf. Existential Type Theory
 \S\ref{sec:existential_type})
 
-Can describe all Functions that are Provably Total in Second-order
+By Curry-Howard Isomorphism, System F corresponds to the fragment of
+Second-order Intuitionistic Logic using only Universal Quantification;
+can describe all Functions that are Provably Total in Second-order
 Logic (\S\ref{sec:secondorder_logic})
+
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
+Type-level Function Abstraction $\Lambda$
 
 
 
 \subsubsection{System F$_{<:}$}\label{sec:system_fsub}
 
+\subsubsection{System F$_\omega$}\label{sec:system_fomega}
+
 
 
 % --------------------------------------------------------------------
-\subsection{Dependently-typed $\lambda$-Calculus}
-\label{sec:dependently_typed}
+\subsection{LF Logical Framework}
+\label{sec:logical_framework}
 % --------------------------------------------------------------------
 
 Dependent Types (\S\ref{sec:dependent_type})
 
 Dependently-typed $\lambda$-calculus is base of Intuitionistic Type
 Theory (\S\ref{sec:intuitionistic_type}), Calculus of Constructions
-(\S\ref{sec:coq}), and Logical Framework
-(\S\ref{sec:logical_framework}).
+(\S\ref{sec:coq})
+
+By Curry-Howard Isomorphism Dependent Types correspond to Propositions
+of First-order Predicate Logic (\S\ref{sec:firstorder_logic})
 
 Dependently-typed $\lambda$-calculus with a Type of all Types (the
 simplest Pure Type System \S\ref{sec:pure_type_system}) is not
@@ -1214,9 +1240,9 @@ Contextual Category (\S\ref{sec:contextual_category})
 
 
 
-\subsubsection{Logical Framework}\label{sec:logical_framework}
-
-
+% --------------------------------------------------------------------
+\subsection{Linear $\lambda$-calculus}\label{sec:linear_lambda}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{$\kappa$-calculus}\label{sec:kappa_calculus}
@@ -1260,9 +1286,21 @@ Barendregt-Geuvers-Klop Conjecture
 \subsection{Lambda Cube}\label{sec:lambda_cube}
 % --------------------------------------------------------------------
 
-Simply-typed $\lambda$-calculus allows only Terms to depend on Types.
-
 All Strongly Normalizing
+
+$\lambda\rightarrow$: Simply-typed $\lambda$-calculus; Terms depending
+on Terms
+
+$\lambda\underline{\omega}$: Simply-typed $\lambda$-calculus with
+Type Operators (\S\ref{sec:simply_operators}); Types depending on Types
+
+$\lambda2$: Second-order $\lambda$-calculus (System F
+\S\ref{sec:system_f}); Terms depending on Types (Parametric
+Polymorphism \S\ref{sec:parametric_polymorphism})
+
+$\lambda\Pi$: Dependently-typed $\lambda$-calculus
+(Logical Framework \S\ref{sec:logical_framework}); Types depending on
+Terms
 
 
 
@@ -1775,6 +1813,8 @@ Structural rules of Exchange (\S\ref{sec:exchange_rule}), Weakening
 
 Linear Logic (\S\ref{sec:linear_logic}) allows safe Deallocation
 (Objects used exactly once)
+
+Linear $\lambda$-calculus (\S\ref{sec:linear_lambda})
 
 Internal Language (\S\ref{sec:internal_language}) of Closed Symmetric
 Monoidal Categories (\S\ref{sec:closed_monoidal})
