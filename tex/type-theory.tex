@@ -1644,13 +1644,53 @@ Universe containing $A$ and $B$.
 \section{Curry-Howard Correspondence}\label{sec:curry_howard}
 % ====================================================================
 
+\emph{Curry-Howard Correspondence}
+
+Type Theory, Proof Theory, Algebra (Preorders)
+\\
 \begin{tabular}{| l | l |}
 \hline
-\textbf{Type Theory} & \textbf{Logic} \\ \hline \hline
-$A$ (Type) & Proposition \\ \hline
-$a : A$ (Term) & Proof \\
+\textbf{Logic} & \textbf{Type Theory} \\ \hline \hline
+Proposition & $A$ (Type) \\ \hline
+Proof & $a : A$ (Term) \\
 \hline
 \end{tabular}
+\\
+\begin{tabular}{| l | p{2.5cm} | p{4.5cm} | p{3cm} |}
+\hline
+& \textbf{Logic} & \textbf{Type} & \textbf{Algebra}\\ \hline \hline
+Reflexivity
+  & \begin{center} $A \vdash A$ \end{center}
+  & \begin{center} $x : A \vdash x : A$ \end{center}
+  & \begin{center} $A \leq A$ \end{center} \\ \hline
+Transitivity
+  & \begin{center}
+      $\underline{A \vdash B \quad B \vdash C}$\newline
+      $A \vdash C$
+    \end{center}
+  & \begin{center}
+    $\underline{x:A \vdash m:B \quad y:B \vdash n:C}$\newline
+    $x:A \vdash n[m/y]:C$
+    \end{center}
+  & \begin{center}
+    $\underline{A \leq B \quad B \leq C}$\newline
+    $A \leq C$
+    \end{center} \\ \hline
+Conjunction
+  & \begin{center}
+    $\underline{C \vdash A \quad C \vdash B}$\newline
+    $C \vdash A \wedge B$
+    \end{center}
+  & \begin{center}
+    $\underline{x:C \vdash m:A \quad x:C \vdash n:B}$\newline
+    $x:C \vdash (m,n):A \times B$
+    \end{center}
+  & \begin{center}
+    $\underline{C \leq A \quad C \leq B}$\newline
+    $C \leq A \wedge B$
+    \end{center} \\ \hline
+\hline
+\end{tabular}\cite{harper12}
 
 Proofs and Propositions form the Object Language; Derivations are used
 to infer Judgements about the Object Language
