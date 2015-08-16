@@ -235,6 +235,14 @@ Reflexivity):
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Exponential Type}\label{sec:exponential_type}
+% --------------------------------------------------------------------
+
+Higher-order Functions
+
+
+
+% --------------------------------------------------------------------
 \subsection{Data Type}\label{sec:data_type}
 % --------------------------------------------------------------------
 
@@ -273,10 +281,14 @@ $W$ Type
 
 Corresponds to Disjoint Sum
 
+Choices, Multiple ``Classes'' of Data
+
 
 
 \subparagraph{Product Type}\label{sec:product_type}
 \hfill \\
+
+(Cartesian) Product Types: Structs, Tuples
 
 If $\sigma$ and $\tau$ are Types, then $\sigma \times \tau$ is a Type
 
@@ -658,6 +670,16 @@ Set of Types and Type Synonyms
 
 A \emph{Type Family} is a Partial Type Function that allows Types to
 be defined by matching Terms.
+
+Generalization of Predicates (Relations) over Domains
+
+Example: Family of Types Indexed by $\mathbb{N}$:
+\[
+  x : \mathbb{N} \vdash even(x) \text{type}
+\]
+is a Propositional Function (takes a Natural Number and yields a
+Proposition). For each Natural Number, either $even(x)$ is Inhabited
+(if $x$ is Even) or Uninhabited (if $x$ is Odd).\cite{harper12}
 
 
 
@@ -1646,7 +1668,8 @@ Universe containing $A$ and $B$.
 
 \emph{Curry-Howard Correspondence}
 
-Type Theory, Proof Theory, Algebra (Preorders)
+Type Theory, Proof Theory, Algebra (Preorders: $\leq$ is a Reflexive
+and Transitive Relation)
 \\
 \begin{tabular}{| l | l |}
 \hline
@@ -1656,25 +1679,53 @@ Proof & $a : A$ (Term) \\
 \hline
 \end{tabular}
 \\
-\begin{tabular}{| l | p{2.5cm} | p{4.5cm} | p{3cm} |}
+\cite{harper12}
+\\
+\begin{tabular}{| p{2cm} | p{3cm} | p{4.5cm} | p{3cm} |}
 \hline
 & \textbf{Logic} & \textbf{Type} & \textbf{Algebra}\\ \hline \hline
+Trivial Proposition
+  & \begin{center} $\overline{A \vdash \top}$ \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} $\overline{A \leq \top}$ \end{center} \\ \hline
+Bottom
+  & \begin{center} $\overline{\bot \vdash A}$ \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} $\overline{\bot \leq A}$ \end{center} \\ \hline
 Reflexivity
   & \begin{center} $A \vdash A$ \end{center}
   & \begin{center} $x : A \vdash x : A$ \end{center}
   & \begin{center} $A \leq A$ \end{center} \\ \hline
-Transitivity
+Negation Elimination
+  & \begin{center} $\neg A \vdash A \rightarrow \bot$ \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} $A \wedge \neg A = \bot$ \end{center} \\ \hline
+Negation Introduction
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center}
   & \begin{center}
-      $\underline{A \vdash B \quad B \vdash C}$\newline
-      $A \vdash C$
+      $\underline{C \wedge A \leq \bot}$\newline
+      $C \leq \overline{A}$
+    \end{center} \\ \hline
+Elimination Rules
+  & \begin{center}
+      $\overline{A \wedge B \vdash A}$,\newline\newline
+      $\overline{A \wedge B \vdash B}$
     \end{center}
+  & \begin{center} ??? \end{center}
   & \begin{center}
-    $\underline{x:A \vdash m:B \quad y:B \vdash n:C}$\newline
-    $x:A \vdash n[m/y]:C$
+      $\overline{A \wedge B \leq A}$,\newline\newline
+      $\overline{A \wedge B \leq B}$
+    \end{center} \\ \hline
+Introduction Rules
+  & \begin{center}
+      $\overline{A \vdash A \vee B}$,\newline\newline
+      $\overline{B \vdash A \vee B}$
     \end{center}
+  & \begin{center} ??? \end{center}
   & \begin{center}
-    $\underline{A \leq B \quad B \leq C}$\newline
-    $A \leq C$
+      $\overline{A \leq A \vee B}$,\newline\newline
+      $\overline{B \leq A \vee B}$
     \end{center} \\ \hline
 Conjunction
   & \begin{center}
@@ -1689,8 +1740,62 @@ Conjunction
     $\underline{C \leq A \quad C \leq B}$\newline
     $C \leq A \wedge B$
     \end{center} \\ \hline
+Disjunction
+  & \begin{center}
+    $\underline{A \vdash C \quad B \vdash C}$\newline
+    $A \vee B \vdash C$
+    \end{center}
+  & \begin{center}
+    ???
+    \end{center}
+  & \begin{center}
+    $\underline{A \leq C \quad B \leq C}$\newline
+    $A \vee B \leq C$
+    \end{center} \\ \hline
+Transitivity
+  & \begin{center}
+      $\underline{A \vdash B \quad B \vdash C}$\newline
+      $A \vdash C$
+    \end{center}
+  & \begin{center}
+    $\underline{x:A \vdash m:B \quad y:B \vdash n:C}$\newline
+    $x:A \vdash n[m/y]:C$
+    \end{center}
+  & \begin{center}
+    $\underline{A \leq B \quad B \leq C}$\newline
+    $A \leq C$
+    \end{center} \\ \hline
 \hline
-\end{tabular}\cite{harper12}
+\end{tabular}
+\\
+\begin{tabular}{| p{2cm} | p{3cm} | p{4.5cm} | p{3cm} |}
+\hline
+& \textbf{Logic} & \textbf{Type} & \textbf{Algebra}\\ \hline \hline
+Implication Elimination
+  & \begin{center} $A, (A \rightarrow B) \vdash B$ \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center} \\ \hline
+Implication Introduction
+  & \begin{center}
+      $\underline{A \wedge C \vdash B}$\newline
+      $C \vdash A \rightarrow B$
+    \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center} \\ \hline
+Weakening
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center} \\ \hline
+Contraction
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center} \\ \hline
+Exchange
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center}
+  & \begin{center} ??? \end{center} \\ \hline
+\hline
+\end{tabular}
 
 Proofs and Propositions form the Object Language; Derivations are used
 to infer Judgements about the Object Language
