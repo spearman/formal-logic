@@ -669,17 +669,9 @@ Set of Types and Type Synonyms
 \subsubsection{Type Family}\label{sec:type_family}
 
 A \emph{Type Family} is a Partial Type Function that allows Types to
-be defined by matching Terms.
+be defined by matching Terms. The Functionality of this Type Function
 
 Generalization of Predicates (Relations) over Domains
-
-Example: Family of Types Indexed by $\mathbb{N}$:
-\[
-  x : \mathbb{N} \vdash even(x) \text{type}
-\]
-is a Propositional Function (takes a Natural Number and yields a
-Proposition). For each Natural Number, either $even(x)$ is Inhabited
-(if $x$ is Even) or Uninhabited (if $x$ is Odd).\cite{harper12}
 
 
 
@@ -735,6 +727,29 @@ abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
 A \emph{Dependent Function} is a Function from Terms to Types.
 
 Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
+
+Functionality (respect for Definitional Equality
+\S\ref{sec:proof_equality}):
+\[
+  x : A \vdash B_x \;\text{type}
+\]\[
+  m : A \mapsto B[m/x] \;\text{type}
+\]\[
+  m \equiv n : A \mapsto B[m/x] \equiv B[n/x] \;\text{type}
+\]
+
+Doubly-indexed Type:
+\[
+  x : A, y : B_x \vdash C_{x,y} \;\text{type}
+\]
+
+Example: Family of Types Indexed by $\mathbb{N}$:
+\[
+  x : \mathbb{N} \vdash even(x) \;\text{type}
+\]
+is a Propositional Function (takes a Natural Number and yields a
+Proposition). For each Natural Number, either $even(x)$ is Inhabited
+(if $x$ is Even) or Uninhabited (if $x$ is Odd).\cite{harper12}
 
 
 
@@ -1341,35 +1356,29 @@ Extensional Martin-L\"of Type Theory: Internal Language
 (\S\ref{sec:quasicategory})
 
 Four forms of Judgements:
-\begin{enumerate}
-  \item $A$ is a Set, $A$ is a Proposition, $A$ is an Expectation, $A$
-    is a Task
-  \item $A$ and $B$ are Equal Sets
-  \item $a$ is an Element of $A$, $a$ is a Proof of $A$, $a$ is a
-    Realization of $A$, $a$ is a Method for doing $A$
-  \item $a$ and $b$ are Equal Elements of Set $A$
-\end{enumerate}
-
-Types (encodes Syntax of Formulas ``A is a Proposition''; note some
-Formulas are only Well-formed if certain Judgements are Derivable
-\cite{thompson99}):
-\[
-  A \textsf{ Type}
-\]
-Objects:
-\[
-  a:A
-\]
-Type Equality:
-\[
-  A = B
-\]
-Object Equality:
-\[
-  a = b
-\]
-
-
+\begin{description}
+  \item [Well-formed Type]: $A$ is a Set, $A$ is a Proposition, $A$ is
+    an Expectation, $A$ is a Task; Types (encodes Syntax of Formulas
+    ``A is a Proposition''; note some Formulas are only Well-formed if
+    certain Judgements are Derivable \cite{thompson99}):
+    \[
+      A \text{ type}
+    \]
+  \item [Equality of Types]: $A$ and $B$ are Equal Sets:
+    \[
+      A \equiv B \text{ type}
+    \]
+  \item [Well-formed Term of Type]: $a$ is an Element of $A$, $a$ is a
+    Proof of $A$, $a$ is a Realization of $A$, $a$ is a Method for
+    doing $A$:
+    \[
+      a : A
+    \]
+  \item [Equality of Terms]: $a$ and $b$ are Equal Elements of Set $A$:
+    \[
+      a \equiv b : A
+    \]
+\end{description}
 
 Dependent Type (\S\ref{sec:dependent_type}):
 \[
@@ -1420,6 +1429,97 @@ Dependent Type mapping Objects to Types:
 \[
   \textrm{El}
 \]
+
+Definitional Equality (\S\ref{sec:proof_equality})
+
+Structural Rules (\S\ref{sec:structural_rule})
+
+
+
+\hfill \\
+\textbf{Dependent Product Types} (\S\ref{sec:dependent_product})
+\\
+Logical Implication and Universal Quantification
+\\
+Dependent Product Formation:
+\[
+  \frac{
+    \Gamma \vdash A \text{ type} \quad
+    \Gamma, x:A \vdash B \text{ type}
+  }{
+    \Gamma \vdash \Pi_{x:A} B \text{ type}
+  } (\Pi\text{-F})
+\]
+Dependent Product Introduction:
+\[
+  \frac{
+    \Gamma, x : A \vdash m_x : B_x \quad
+  }{
+    \Gamma \vdash (\lambda x:A.m_x : B_x) : \Pi_{x:A} B
+  } (\Pi\text{-I})
+\]
+Dependent Product Elimination:
+\[
+  \frac{
+    \Gamma \vdash m : \Pi_{x:A} B \quad
+    \Gamma \vdash n : A
+  }{
+    \Gamma \vdash m\;n : B[n/x]
+  } (\Pi\text{-E})
+\]
+Dependent Product Computation (cf. $\beta$-reduction
+\S\ref{sec:beta_reduction}):
+\[
+  \frac{
+    \Gamma \vdash A \text{ type} \quad
+    \Gamma , x : A \vdash m : B
+  }{
+    \Gamma \vdash (\lambda x : A.m)\;n \equiv m[n/x] : B[n/x]
+  } (\Pi\text{-C})
+\]
+
+
+\hfill \\
+\textbf{Dependent Sum Types} (\S\ref{sec:dependent_sum})
+\\
+Logical Conjunction and Existential Quantification
+\\
+Dependent Sum Formation:
+\[
+  \frac{
+    \Gamma \vdash A \text{ type} \quad
+    \Gamma, x : A \vdash B_x \text{ type}
+  }{
+    \Gamma \vdash \Sigma_{x:A} B_x \text{ type}
+  } (\Sigma\text{-F})
+\]
+Dependent Sum Introduction:
+\[
+  \frac{
+    \Gamma \vdash m : A \quad
+    \Gamma \vdash n : B[m/x]
+  }{
+    \Gamma \vdash (m,n) : \Sigma_{x:A} B_x
+  } (\Sigma\text{-I})
+\]
+Dependent Sum Elimination 1:
+\[
+  \frac{
+    \Gamma \vdash m : \Sigma_{x:A} B_x
+  }{
+    \Gamma \vdash \pi_1\;m : A
+  } (\Sigma\text{-E$_1$})
+\]
+Dependent Sum Elimination 2:
+\[
+  \frac{
+    \Gamma \vdash m : \Sigma_{x:A} B_x
+  }{
+    \Gamma \vdash \pi_2\;m : B[\pi_1\;m/x]
+  } (\Sigma\text{-E$_2$})
+\]
+
+
 
 Categorical Model, ``Category with Families'':
 
