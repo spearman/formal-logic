@@ -95,12 +95,12 @@ or
 
 \emph{Substitution}:
 \[
-  B[a/x]
+  [a/x]B
 \]
 Substitute Term $a$ for Free occurrences of Variable $x$ in the Term
 $B$. Generalized:
 \[
-  B[a_1,\ldots,a_n / x_1,\ldots,x_n]
+  [a_1,\ldots,a_n / x_1,\ldots,x_n]B
 \]
 
 
@@ -1407,7 +1407,7 @@ Dependent Type (\S\ref{sec:dependent_type}):
 \]
 Removal of Dependency by Substitution:
 \[
-  B[x/a]
+  [x/a]B
 \]
 Abstracted Object:
 \[
@@ -1458,6 +1458,27 @@ Structural Rules (\S\ref{sec:structural_rule})
 
 
 \hfill \\
+\textbf{Identity Types} (\S\ref{sec:equality_type})
+\\
+Identity Type Introduction:
+\[
+  \frac{
+    \Gamma \vdash m : A
+  }{
+    \Gamma \vdash refl_A(m) : Id_A(m,m)
+  } (Id_A\text{-I})
+\]
+Identity Type Elimination:
+\[
+  \frac{
+    \Gamma \vdash p : Id_A (m,n) \quad
+    \Gamma, x:A, y:A, z : Id_A(x,y) \vdash C_{x,y,z} \text{ type}\quad
+    \Gamma, x : A \vdash q : [x, x, refl_A(x)/x,y,z]C
+  }{
+    \Gamma \vdash refl_A(m) : Id_A(m,m)
+  } (Id_A\text{-E})
+\]
+\hfill \\
 \textbf{Dependent Product Types} (\S\ref{sec:dependent_product})
 \\
 Logical Implication and Universal Quantification
@@ -1485,7 +1506,7 @@ Dependent Product Elimination:
     \Gamma \vdash m : \Pi_{x:A} B \quad
     \Gamma \vdash n : A
   }{
-    \Gamma \vdash m\;n : B[n/x]
+    \Gamma \vdash m\;n : [n/x]B
   } (\Pi\text{-E})
 \]
 Dependent Product Computation (cf. $\beta$-reduction
@@ -1495,7 +1516,7 @@ Dependent Product Computation (cf. $\beta$-reduction
     \Gamma \vdash A \text{ type} \quad
     \Gamma , x : A \vdash m : B
   }{
-    \Gamma \vdash (\lambda x : A.m)\;n \equiv m[n/x] : B[n/x]
+    \Gamma \vdash (\lambda x : A.m)\;n \equiv [n/x]m : [n/x]B
   } (\Pi\text{-C})
 \]
 
@@ -1518,7 +1539,7 @@ Dependent Sum Introduction:
 \[
   \frac{
     \Gamma \vdash m : A \quad
-    \Gamma \vdash n : B[m/x]
+    \Gamma \vdash n : [m/x]B
   }{
     \Gamma \vdash (m,n) : \Sigma_{x:A} B_x
   } (\Sigma\text{-I})
@@ -1538,6 +1559,38 @@ Dependent Sum Elimination 2:
   }{
     \Gamma \vdash \pi_2\;m : B[\pi_1\;m/x]
   } (\Sigma\text{-E$_2$})
+\]
+\hfill \\
+\textbf{Binary Sum Types} (\S\ref{sec:sum_type})
+\\
+Disjunction
+\\
+Binary Sum Introduction 1:
+\[
+  \frac{
+    \Gamma \vdash m : A
+  }{
+    \Gamma \vdash inl(m) : A + B
+  } (+\text{-I}_1)
+\]
+Binary Sum Introduction 2:
+\[
+  \frac{
+    \Gamma \vdash n : B
+  }{
+    \Gamma \vdash inr(n) : A + B
+  } (+\text{-I}_2)
+\]
+Binary Sum Elimination:
+\[
+  \frac{
+    \Gamma \vdash m : A + B \quad
+    \Gamma, z : A + B \vdash C \text{ type} \quad
+    \Gamma, x : A \vdash n : [inl(x)/z]C \quad
+    \Gamma, y : B \vdash p : [inr(y)/z]C
+  }{
+    \Gamma \vdash case (m, x\;n, y\;p) : [m/z]C
+  } (+\text{-E})
 \]
 
 
@@ -1675,7 +1728,7 @@ Substitution for Typing Judgements:
     \frac
     {\Gamma \vdash a : A \;\;\;\;\;\;\;
     \Gamma,x:A,\Delta \vdash b : B}
-    {\Gamma,\Delta[a/x] \vdash b[a/x] : B[a/x]}
+    {\Gamma,[a/x]\Delta \vdash [a/x]b : [a/x]B}
   } Subst_1
 \]
 
@@ -1695,7 +1748,7 @@ Substitution for Judgemental Equality:
     \frac
     {\Gamma \vdash a : A \;\;\;\;\;\;\;
     \Gamma,x:A,\Delta \vdash b \equiv c : B}
-    {\Gamma,\Delta[a/x] \vdash b[a/x] \equiv c[a/x] : B[a/x]}
+    {\Gamma,[a/x]\Delta \vdash [a/x]b \equiv [a/x]c : [a/x]B}
   } Subst_2
 \]
 
@@ -1880,7 +1933,7 @@ Transitivity
     \end{center}
   & \begin{center}
     $\underline{x:A \vdash m:B \quad y:B \vdash n:C}$\newline
-    $x:A \vdash n[m/y]:C$
+    $x:A \vdash [m/y]n:C$
     \end{center}
   & \begin{center}
     $\underline{A \leq B \quad B \leq C}$\newline
@@ -1937,9 +1990,9 @@ A Proof of $A \Rightarrow B$ is a Function that Transforms a Proof $p
 No Proof for the Contradictory Proposition $\bot$
 
 $(\exists x : A).P$ where $P$ is a Witness (\S\ref{sec:type_witness})
-$w : A$ with a Proof that $P$ holds of $w$, i.e. $P[w/x]$
+$w : A$ with a Proof that $P$ holds of $w$, i.e. $[w/x]P$
 
-$(\forall x : A).P$ implies that $P[a/x]$ is Valid for every $a$ in
+$(\forall x : A).P$ implies that $[a/x]P$ is Valid for every $a$ in
 $A$; a Function mapping any Proof of $A$ to a Proof of $P$.
 
 Introduction Rule for $\forall$:
@@ -1959,14 +2012,14 @@ Introduction Rule for $\forall$:
 
 Computation Rule for $\forall$:
 \[
-  ((\lambda x : A).p) \rightarrow p[a/x]
+  ((\lambda x : A).p) \rightarrow [a/x]p
 \]
 
 Introduction Rule for $\exists$:
 \[
   {
     \frac{
-      a : A \quad\quad p : P [a/x]
+      a : A \quad\quad p : [a/x]P
     }{
       (a,p) : (\exists x : A).P
     }
@@ -2037,7 +2090,7 @@ Classical-Intuitionistic Embedding - Continuation Passing Style
 
 Subset Type $(\exists x:A).B$ (Pairs of Objects and the Proofs that
 they have Property): $\{ x : A | B \}$ consisting of those $a$ in $A$
-with Property $B[a/x]$, i.e. $B[a/x]$ is Inhabited.
+with Property $[a/x]B$, i.e. $[a/x]B$ is Inhabited.
 
 
 
