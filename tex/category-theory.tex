@@ -135,9 +135,11 @@ An equivalent definition of Categories can be given in terms of
 
 Example Categories:
 \begin{itemize}
-\item Sets and Functions
+\item Sets and (Set) Functions
 \item Finite Sets and Injective Functions
 \item Posets and Monotonic Functions
+\item Monoids and Monoid Homomorphisms
+\item Groups and Group Homomorphisms
 \item Categories and Functors
 \item Formulae and Deductions
 \item Functors and Natural Transformations
@@ -409,6 +411,10 @@ The Existence of an \emph{Invertible Morphism}
 (\S\ref{sec:bijective_function}) between Objects also Implies their
 Isomorphism. A Category in which every Morphism is Invertible is a
 \emph{Groupoid} (\S\ref{sec:groupoid}).
+
+In $\mathbf{Top}$ the Category of Topological Spaces and Continuous
+Maps, the Isomorphisms are exactly the Homeomorphisms
+(\S\ref{sec:homeomorphism}) between Topological Spaces.
 
 
 
@@ -744,6 +750,12 @@ called the \emph{Yoneda Embedding}.
 \subsection{Product Functor}\label{sec:product_functor}
 % --------------------------------------------------------------------
 
+\[
+  F_\times : \mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}
+\]
+
+
+
 \subsubsection{Coproduct Functor}\label{sec:coproduct_functor}
 
 
@@ -1041,6 +1053,9 @@ with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
 two Categories is uniquiely Isomorphic to the Cartesian Product
 (\S\ref{sec:cartesian_product}) of the two Sets.
 
+In a Poset, the Product of two Elements is the Meet or Greatest Lower
+Bound (\S\ref{sec:glb_lub}).
+
 The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
 is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;}
 Z \xleftarrow{\;\;z_2\;\;} B$
@@ -1049,9 +1064,14 @@ Z \xleftarrow{\;\;z_2\;\;} B$
 \]
 with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
 and Coprojections $q_i$ may be called \emph{Injections} (although they
-are not necessarily Injective Morphisms). An example of a Coproduct in
-$\mathbf{Set}$ is the Disjoint or \emph{Tagged Union}
-(\S\ref{sec:disjoint_union}).
+are not necessarily Injective Morphisms).
+
+An example of a Coproduct in $\mathbf{Set}$ is the Disjoint Union
+(\S\ref{sec:disjoint_union}) in Set Theory or the Tagged Union
+(\S\ref{sec:sum_type}) in Type Theory. The Coproduct of a Monoid of
+Group is sometimes defined as a Tensor Product
+(\S\ref{sec:tensor_product}). In a Poset the Coproduct of two Elements
+is the Join or Leas Upper Bound (\S\ref{sec:glb_lub}).
 
 For Morphisms $f$ and $g$, a Product $f \times g$ is defined where $f
 : A \rightarrow A'$, $g : B \rightarrow B'$ and:
@@ -1120,8 +1140,10 @@ By Associativity of Products, $A \times B \times C = (A \times B)
 \times C$ so any Category that has Binary Products also has all
 \emph{Finite N-ary Products}.
 
-\paragraph{Exponential}\label{sec:category_exponential}
-\hfill \\
+
+
+\subsubsection{Exponential}\label{sec:category_exponential}
+
 Given a Category $\mathbf{C}$ with Binary Products between any two
 Objects:
 \[
