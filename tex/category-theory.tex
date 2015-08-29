@@ -167,6 +167,10 @@ Functions that preserve the Monoid structure.
 
 
 % --------------------------------------------------------------------
+\subsubsection{Commutative Diagram}\label{sec:commutative_diagram}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Concrete Category}\label{sec:concrete_category}
 % --------------------------------------------------------------------
 
@@ -187,9 +191,14 @@ $\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
   them
 \item [3] three Objects with Identity Morphisms in a Commutative
   Triangle
-\item [$\downarrow\downarrow$] two Objects, no Identity morphisms, and
-  two parallel Morphisms between them
+\item [$\downdownarrows$] two Objects and two parallel Morphisms
+  between them
+\item [$\omega$] the ordinals $\omega$ as a Poset
 \item [Set] all Small Sets and Functions (Locally Small)
+\item [Set$^\omega$] Sets through time: Functors from $mathbf{\omega}$
+  to $\mathbf{Set}$ as Objects and Natural Transformations between
+  them as Morphisms
+\item [Set$^\downdownarrows$] Graph and Graph Homomorphisms
 \item [Cls] all Classes and Functions between Classes
 \item [Set$_*$] all Pointed Sets and Base-point preserving Functions
 \item [Rel] all Sets and Relations
@@ -291,7 +300,7 @@ This gives a \emph{Functor} (\S\ref{sec:functor}):
 \[
   Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
 \]
-each half of which is are \emph{Representable Functors}
+each half of which is a Representable Functor
 (\S\ref{sec:representable_functor}).
 
 Note that the Hom-set need not be a Set (it could be a Proper Class).
@@ -540,6 +549,22 @@ A Functor on two Categories is a \emph{Bifunctor}
 
 
 % --------------------------------------------------------------------
+\subsection{Category Diagram}\label{sec:category_diagram}
+% --------------------------------------------------------------------
+
+A \emph{Category Diagram} is a Covariant Functor from an \emph{Index
+  Category} into another Category:
+\[
+  D : \mathbf{J} \rightarrow \mathbf{C}
+\]
+A Diagram is the Category Theory analogue of an Indexed Family of Sets
+(\S\ref{sec:index_set}).
+
+Category of Diagrams (\S\ref{sec:setvalued_functor})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Faithful \& Full Functor}\label{sec:faithful_functor}
 % --------------------------------------------------------------------
 
@@ -587,8 +612,7 @@ Functor, a \emph{Covariant Functor}.
 
 A \emph{Presheaf} is a Contravariant Functor from an Opposite Category
 to the Category $\mathbf{Set}$. A Presheaf is an example of a
-\emph{Set-valued Functor Category}
-(\S\ref{sec:setvalued_category}).
+Set-valued Functor Category (\S\ref{sec:category_diagram}).
 
 Sheave (\S\ref{sec:sheave})
 
@@ -636,6 +660,14 @@ a Contravariant definition:
   g \mapsto g \circ f
 \]
 \end{enumerate}
+The Hom-functor $Hom(-,-)$ is a Covariant Bifunctor
+(\S\ref{sec:bifunctor}):
+\[
+  Hom_\mathbf{C}(-,-):
+    \mathbf{C}^{op} \times \mathbf{C} \rightarrow \mathbf{Set}
+\]
+each half of which is a \emph{Representable Functor}
+\S\ref{sec:representable_functor}.
 
 The Category of all Hom-functors and \emph{Natural Transformations}
 (\S\ref{sec:natural_transformation}) between them, $\{ h^A | A \in
@@ -666,18 +698,15 @@ to
   g \circ h \circ f : A' \rightarrow B'
 \]
 
-The Covariant Bifunctor $Hom_{\mathbf{C}}(-,-) : \mathbf{C^{op}}
-\times \mathbf{C} \rightarrow \mathbf{Set}$ is Contravariant in the
-first argument and Covariant in the second. See \emph{Representable
-  Functor} \S\ref{sec:representable_functor}.
-
 
 
 \subsubsection{Internal Hom-functor}\label{sec:internal_homfunctor}
 
 
 
-\subsubsection{Representable Functor}\label{sec:representable_functor}
+% --------------------------------------------------------------------
+\subsection{Representable Functor}\label{sec:representable_functor}
+% --------------------------------------------------------------------
 
 %FIXME definition of 'representation'
 %FIXME ref Naturally Isomorphic
@@ -705,7 +734,9 @@ a pair $(A, \Phi)$ with Natural Isomorphism $\Phi : Hom(A,-)
 
 
 
-\subsubsection{Yoneda Lemma}\label{sec:yoneda_lemma}
+% --------------------------------------------------------------------
+\subsection{Yoneda Lemma}\label{sec:yoneda_lemma}
+% --------------------------------------------------------------------
 
 For an arbitrary Covariant Functor $F : \mathbf{C} \rightarrow
 \mathbf{Set}$:
@@ -831,6 +862,7 @@ $\mathbf{D}$:
 \[
   \tau : S \rightarrow T
 \]
+such that:
 \begin{enumerate}
   \item $\forall X \in \mathbf{C},
     \exists \tau_X : S(X) \rightarrow T(X) \in \mathbf{D}$
@@ -1402,14 +1434,59 @@ The Hom-set in a Functor Category may be denoted:
     \{ \tau | \tau : S \rightarrow T \}
 \]
 
+A Functor Category into the Category $\mathbf{Set}$ is called a
+\emph{Category Diagram} (\S\ref{sec:category_diagram}).
+
+With Evaluation Functor $\eta : \mathbf{D^C} \times \mathbf{C}
+\rightarrow \mathbf{D}$, $\mathbf{D^C}$ is an Exponential
+(\S\ref{sec:category_exponential}) in $\mathbf{Cat}$ and
+$\mathbf{Cat}$ is a Cartesian Closed Category
+(\S\ref{sec:cartesian_closed}).
+
+The Functor Category $\mathbf{C^2}$ is Isomorphic to Arrow Categories
+(\S\ref{sec:arrow_category}) $\mathbf{C}^\rightarrow$.
+
+The Functor Category $\mathbf{C}^\mathrm{2}$ from the Discrete
+Category $\mathrm{2}$ consisting of two Objects and no Morphisms other
+than Identities is equivalent to the Product Category $\mathbf{C}
+\times \mathbf{C}$.
+
+The Functor Category $\mathbf{Set}^\downdownarrows$ where
+$\downdownarrows$ is the Category with two Objects and two Morphisms
+between them ($* \rightrightarrows \star$) is equivalent to the
+Category of Graphs and Graph Homomorphisms. Cf. Simplicial Sets
+(\S\ref{sec:simplicial_set}).
 
 
-\subsubsection{Arrow Categories}\label{sec:arrow_categories}
+
+\subsubsection{Arrow Categories}\label{sec:arrow_category}
 
 An \emph{Arrow Category} of a Category $\mathbf{C}$, written
 $\mathbf{C^{\rightarrow}}$, has for its Objects the Morphisms of
 $\mathbf{C}$ and as Morphisms pairs of Objects such that their
-underlying Morphisms in $\mathbf{C}$ are Composable.
+underlying Morphisms in $\mathbf{C}$ are Composable (Commutative
+Squares).
+
+The Arrow Category $\mathbf{C}^\rightarrow$ is Isomorphic to the
+Functor Category $\mathbf{C^2}$.
+
+
+
+\subsubsection{Set-valued Functor Category}\label{sec:setvalued_functor}
+
+A \emph{Set-valued Functor Category} (or \emph{Category of Diagrams})
+is a Functor Category from a Category into the Category
+$\mathbf{Set}$.
+
+A Presheaf (\S\ref{sec:presheaf}) is an example of a Set-valued
+(Contravariant) Functor Category from an Opposite Category into
+$\mathbf{Set}$.
+
+
+
+\subsubsection{Cones}\label{sec:category_cone}
+
+\emph{Universal Cone}
 
 
 
@@ -1567,43 +1644,6 @@ cod(g'_1)$.
 
 
 % --------------------------------------------------------------------
-\subsection{Diagrams}\label{sec:category_diagram}
-% --------------------------------------------------------------------
-
-A \emph{Diagram} consists of Objects and Morphisms that are Indexed by
-a Category or equivalently a \emph{Functor} from an \emph{Index
-  Category} to another Category. A Diagram is the Category Theory
-analogue of an Indexed Family of Sets (\S\ref{sec:index_set}).
-
-A Diagram, $D$, with Index Category $\mathbf{J}$ in Category
-$\mathbf{C}$:
-\[
-  D : \mathbf{J} \rightarrow \mathbf{C}
-\]
-
-
-
-\subsubsection{Commutative Diagram}\label{sec:commutative_diagram}
-
-
-
-\subsubsection{Set-valued Functor Category}\label{sec:setvalued_category}
-
-A \emph{Set-valued Functor Category} is also called a \emph{Category
-  of Diagrams} and is of the form $\mathbf{Set}^{\mathbf{C}}$. A
-Presheaf (\S\ref{sec:presheaf}) is an example of a Set-valued
-Functor Category from an Opposite Category into $\mathbf{Set}$.
-
-
-
-\subsubsection{Cones}\label{sec:category_cone}
-
-\emph{Universal Cone}
-
-
-
-
-% --------------------------------------------------------------------
 \subsection{Monoidal Category}\label{sec:monoidal_category}
 % --------------------------------------------------------------------
 
@@ -1655,6 +1695,22 @@ $\lambda^{\times, \rightarrow} \simeq \mathrm{CCC}$
 $\mathrm{IPC}^{\wedge, \Rightarrow, \vee} \simeq \mathrm{Heyting Algebra}$
 
 Kripke Models: $\mathbf{Set^C}$, $\mathbf{Set}^P$ % FIXME
+
+Equalities on a Cartesian Closed Category $\mathbf{C}$ with
+$0,1,A,B,C \in \mathbf{C}_0$:
+\[
+  C^{A + B} \cong C^A \times C^B
+\]\[
+  (C^B)^A \cong C^{B \times A}
+\]\[
+  (A \times B)^C \cong A^C \times B^C
+\]\[
+  C^0 \cong 1
+\]\[
+  C^1 \cong C
+\]\[
+  A \times (B + C) \cong A \times B + A \times C
+\]
 
 
 
