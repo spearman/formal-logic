@@ -612,7 +612,8 @@ Functor, a \emph{Covariant Functor}.
 
 A \emph{Presheaf} is a Contravariant Functor from an Opposite Category
 to the Category $\mathbf{Set}$. A Presheaf is an example of a
-Set-valued Functor Category (\S\ref{sec:category_diagram}).
+Set-valued Functor Category (\S\ref{sec:category_diagram}) and gives a
+Cartesian Closed Category (\S\ref{sec:cartesian_closed}).
 
 Sheave (\S\ref{sec:sheave})
 
@@ -843,6 +844,8 @@ Quantifier in Logic (\S\ref{sec:quantifier}) and the \emph{Image
   Operation} along a \emph{Continuous Function} in \emph{Topology}
 (Part \ref{sec:topology}).
 
+Adjoint (\S\ref{sec:adjoint})
+
 
 
 \subsubsection{Monad}\label{sec:monad}
@@ -925,6 +928,44 @@ following \emph{Interchange Law} applies:
 \[
   (\tau' \cdot \sigma') \circ (\tau \cdot \sigma) =
   (\tau' \circ \tau) \cdot (\sigma' \circ \sigma)
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Adjunction}\label{sec:adjoint}
+% --------------------------------------------------------------------
+
+Two Functors $F$ and $G$ are \emph{Adjoints}, $F \dashv G$, when:
+\[
+  f : F Y \rightarrow X \cong g : Y \rightarrow G X
+\]
+Adjoints are Unique up to Isomorphism.
+
+See also \emph{Adjoint Functor} \S\ref{sec:adjoint_functor}
+
+In a Cartesian Closed Category (\S\ref{sec:cartesian_closed}), the
+following Functors are Adjoints:
+\[
+  + \dashv \Delta \dashv \times
+\]
+and:
+\[
+  (-) \times A \dashv (-)^A
+\]
+In First-order Logic (Provability $\vdash$):
+\[
+  \exists \dashv \star \dashv \forall
+\]
+
+\textbf{Unit}:
+\[
+  1_{F X}: F X \rightarrow F X \cong \eta : X \rightarrow G F X
+\]
+
+\textbf{Counit}:
+\[
+  \epsilon: F G Y \rightarrow Y \cong 1_{G_Y} : G Y \rightarrow G Y
 \]
 
 
@@ -1196,7 +1237,9 @@ such that:
 \]
 where $\lambda f \times 1_A : X \times A \rightarrow B^A \times A$.
 The Morphisms $f$ and $\lambda f$ are called \emph{Exponential
-  Adjoints}.
+  Adjoints}. The $\epsilon$ function is the Counit of the Adjunction
+(\S\ref{sec:adjoint}) between the Product Functor and the Exponential
+Functor.
 
 The Universal Mapping Property for Exponentials implies the two-way
 Rule of Inference:
@@ -1548,7 +1591,7 @@ $\mathbf{C}^\mathbf{2}$.
 
 
 
-\subsubsection{Slice Categories}\label{sec:slice_categories}
+\subsubsection{Slice Category}\label{sec:slice_category}
 
 A \emph{Slice Category} $\mathbf{C}/C$ of a Category $\mathbf{C}$ with
 an Object $C$ has as Objects the Morphisms with Codomain $C$ and as
@@ -1711,6 +1754,25 @@ $0,1,A,B,C \in \mathbf{C}_0$:
 \]\[
   A \times (B + C) \cong A \times B + A \times C
 \]
+
+
+
+\paragraph{Locally Cartesian Closed Category}
+\label{sec:locally_cartesian}
+\hfill \\
+A \emph{Locally Cartesian Closed Category} $\mathbf{E}$ is a Category
+such that all Slice Categories (\S\ref{sec:slice_category})
+$\mathbf{E}/X$ are Cartesian Closed Categories.
+
+Model for Intuitionistic Type Theory with Dependent Type Theory
+(\S\ref{sec:intuitionistic_type})
+
+
+
+\subsubsection{Heyting Category}\label{sec:heyting_category}
+
+Model for Intuitionistic First-order Logic
+(\S\ref{sec:intuitionistic_logic})
 
 
 
