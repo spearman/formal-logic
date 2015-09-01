@@ -74,7 +74,7 @@ Combinatory Logic corresponds to a Hilbert System
 \subsection{Combinator}\label{sec:combinator}
 % --------------------------------------------------------------------
 
-\emph{Combinator}
+\emph{Combinator} (or \emph{Constant})
 
 Closed Primitive Function
 
@@ -129,18 +129,80 @@ Enumerable. \cite{goldberg05}
 \subsection{Combinatory Term}\label{sec:combinatory_term}
 % --------------------------------------------------------------------
 
+Curry \emph{Theory of Functionality}
+
 \begin{itemize}
   \item a Variable $x$
-  \item a Combinator $P$
+  \item a Combinator (Constant) $P$
   \item Application of Combinatory Terms $E_1 E_2$
 \end{itemize}
+Variables and Constants are \emph{Atoms}.
+
+
+
+\subsubsection{Contraction}\label{sec:combinatory_contraction}
+\cite{seldin03}
+
+Basic Combinators:
+\begin{enumerate}
+  \item $\mathsf{I} X = X$
+  \item $\mathsf{K} X Y = X$
+  \item $\mathsf{S} X Y Z = (X Z) (Y Z)$
+\end{enumerate}
+
+Weak Reduction, a Sequence of Zero or more Contractions: $M \rhd N$
+
+Weak Conversion, a Sequence of Zero or more Contractions and reverse
+Contractions: $M =_* N$
+
+
+
+\subsubsection{Bracket Abstraction}\label{sec:bracket_abstraction}
+
+\emph{Abstraction} of Term $M$ with respect to Variable $x$ denoted
+$[x]M$, defined Inductively:\cite{seldin03}
+\[
+  [x]x \equiv \mathsf{I}
+\]\[
+  [x]c \equiv \mathsf{K}c
+\]\[
+  [x](M N) \equiv \mathsf{S}([x]M)([x]N)
+\]
+where $c$ is an Atom other than $x$ and $\equiv$ is an Equivalence of
+Terms.
+
+Theorem:
+\[
+  ([x]M)N \rhd [N/x]M
+\]
 
 
 
 \subsubsection{Abstraction Elimination}
 \label{sec:abstraction_elimination}
 
-\subsubsection{Bracket Abstraction}\label{sec:bracket_abstraction}
+
+
+\subsubsection{Type Assignment}\label{sec:combinatory_type}
+\cite{seldin03}
+
+\begin{itemize}
+  \item ($\rightarrow \mathsf{I}$) $\mathsf{I}: A \rightarrow A$
+  \item ($\rightarrow \mathsf{K}$)
+    $\mathsf{K}: A \rightarrow (B \rightarrow A)$
+  \item ($\rightarrow \mathsf{S}$)
+    $\mathsf{S}: (A \rightarrow (B \rightarrow C))
+      \rightarrow (A \rightarrow B) \rightarrow A \rightarrow C$
+\end{itemize}
+
+Derived Rule (cf. Modus Ponens):
+\[
+  \frac{
+    [x:A] \quad m:B
+  }{
+    [x]m:A \rightarrow B
+  }
+\]
 
 
 

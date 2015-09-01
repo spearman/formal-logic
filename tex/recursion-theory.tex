@@ -430,17 +430,34 @@ see also Nominal Logic (\S\ref{sec:nominal_logic})
 
 
 
+\subsubsection{Contraction}\label{sec:contraction}\cite{seldin03}
+
+Replacement of Subterms:
+\begin{enumerate}
+  \item $\lambda x . M =_\alpha \lambda y . [y/x]M$
+  \item $(\lambda x . M)N =_\beta [N/x]M$
+\end{enumerate}
+
+
+
 \subsubsection{$\beta$-reduction}\label{sec:beta_reduction}
 
-\emph{$\beta$-reduction}:
-\[
-  (\lambda x.t)s =_\beta t[x/s]
-\]
-Repeated $\beta$-reduction may not Terminate but $\beta$-reduction is
-Confluent (\S\ref{sec:rewrite_confluence}).
+A \emph{$\beta$-reduction} is a Sequence of Zero or more Contractions
+(\S\ref{sec:contraction}). A Term $M$ that Reduces to a Term $N$ is
+written $M \rhd N$. $\beta$-reduction may not Terminate but
+$\beta$-reduction is Confluent (\S\ref{sec:rewrite_confluence}).
 
-As a Semantics for Functional Programming, a $\beta$-reduction
+As a Semantics for Functional Programming, a $\beta$-contraction
 corresponds to a Computational Step.
+
+
+
+\subsubsection{$\beta$-conversion}\label{sec:beta_conversion}
+\cite{seldin03}
+
+A \emph{$\beta$-conversion} is a Sequence of Zero or more Contractions
+or reverse Contractions. A Conversion from Term $M$ to Term $N$ is
+denoted $M =_* N$.
 
 
 
