@@ -82,6 +82,14 @@ Corollary 5: $gcd(\frac{a}{d}, \frac{b}{d}) = 1$
 
 $\mathbb{P}$
 
+A Number that is \emph{not} Prime is called \emph{Composite}.
+
+The Cardinality of $\mathbb{P}$ is Countably Infinite.
+
+The Series (\S\ref{sec:series}) $\sum_{p \in \mathbb{P}} \frac{1}{p}$
+Diverges The corresponding Series over Twin Primes
+(\S\ref{sec:twin_prime}) Converges.
+
 If $p \in \mathbb{P}$, then $gcd(p,a) = 1$ or $gcd(p,a) = p$ for any
 $a \in \mathbb{Z}$.
 
@@ -89,6 +97,25 @@ If $p \nmid b$ and $p \in \mathbb{P}$ then $gcd (p,b) = 1$.
 
 Corollary to Euclid's Lemma: If $p \in \mathbb{P}$ and $p|a_1 a_2
 \ldots a_n$ then $p|a_i$ for some $1 \leq i \leq n$.
+
+Given any $l \in \mathbb{N}$, a Sequence of $l$ consecutive Composite
+Numbers may be found.
+
+\emph{Bertrand's Postulate} (\emph{Bertrand-Chebyshev Theorem}):
+\[
+  (\forall n \in \mathbb{Z}^{>3}, \exists p \in \mathbb{P}) n < p < 2n
+\]
+
+Given an Arithmetic Sequence $S = \{ a + bx \;|\; x \in \mathbb{Z}^+\}$:
+\begin{enumerate}
+  \item If $gcd(a,b) > 1$ then there are no Primes in $S$.
+  \item If $gcd(a,b) = 1$ then there are Infinitely many Primes in $S$
+    (Dirichlet)
+  \item For any $l \in \mathbb{N}$, there exists a consecutive
+    Sequence of Primes of Length $l$ in $S$ (Green \& Tao)
+\end{enumerate}
+
+Sieve Theory (\S\ref{sec:sieve_theory})
 
 
 
@@ -114,11 +141,26 @@ in Quotient Sets over the Integers.
 
 
 
+\paragraph{Prime Counting Function}\label{sec:prime_counting}
+
 \paragraph{Prime Power}\label{sec:prime_power}
 \hfill \\
 
 A \emph{Prime Power} is a Prime Number raised to the power of a
 positive Integer.
+
+
+
+\paragraph{Twin Prime}\label{sec:twin_prime}
+
+\paragraph{Goldbach Conjecture}\label{sec:goldbach_conjecture}
+\hfill \\
+
+Partial result:
+\[
+  (\forall n \in 2\mathbb{N}, \exists p,q \vee p,q,r \in \mathbb{P})
+  n = p + q \vee n = p + q * r
+\]
 
 
 
@@ -295,9 +337,58 @@ Decidable, weaker than Peano Arithmetic
 \subsection{Modular Arithmetic}\label{sec:modular_arithmetic}
 % --------------------------------------------------------------------
 
+Partition of $\mathbb{Z}$ into $\mathbb{Z}/n$ by $n \in \mathbb{N}$.
+
+
+
 \subsubsection{Modular Congruence}\label{sec:modular_congruence}
 
-$a \equiv b (\mathrm{mod} n)$
+$a \equiv b (\mathrm{mod} n)$ \emph{Congruent modulo $n$}
+
+For two Integers $a,b \in \mathbb{Z}$, $a$ and $b$ are in the same
+Quotient Set or \emph{Residue} (\S\ref{sec:residue}) if and only if
+$(a - b)|n$, denoted $a \equiv b (\mathrm{mod} n)$.
+
+\begin{enumerate}
+
+  \item $(\forall a \in \mathbb{Z}) a \equiv a (\mathrm{mod} n)$
+
+  \item $(\forall a,b \in \mathbb{Z}) a \equiv b (\mathrm{mod} n)
+    \Leftrightarrow b \equiv a (\mathrm{mod} n)$
+
+  \item $(\forall a,b,c \in \mathbb{Z}) a \equiv b (\mathrm{mod} n)
+    \wedge b \equiv c (\mathrm{mod} n) \Rightarrow a \equiv c
+    (\mathrm{mod} n)$
+
+  \item
+    If $a \equiv b (\mathrm{mod} n)$ and $c \equiv d (\mathrm{mod}
+    n)$, then:
+    \begin{itemize}
+    \item $a + c \equiv b + d (\mathrm{mod} n)$
+    \item $a - c \equiv b - d (\mathrm{mod} n)$
+    \item $ac \equiv bd (\mathrm{mod} n)$
+    \item $a^t \equiv b ^t (\mathrm{mod} n)$ for any $t \in
+      \mathbb{N}$
+    \end{itemize}
+
+\end{enumerate}
+
+Cancellation: If $ac \equiv bc (\mathrm{mod} n)$ then $a \equiv b
+(\mathrm{mod} \frac{n}{d})$ where $d = gcd(n,c)$.
+
+
+
+\subsubsection{Residue}\label{sec:residue}
+
+A \emph{Residue}
+
+
+
+\textbf{Complete Set of Residues}
+
+Pigeon Hole Principle: A Set of Integers $T \subset \mathbb{Z}$ is a
+Complete Set of Residues $\mathrm{mod} n$ if $|T| = n$ and no Elements
+of a particular Residue $\mathrm{mod} n$ occur more than once.
 
 
 
@@ -344,6 +435,12 @@ Peano Arithmetic with Intuitionistic Logic
 % ====================================================================
 \section{Sieve Theory}\label{sec:sieve_theory}
 % ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Sieve of Eratosthenes}\label{sec:sieve}
+% --------------------------------------------------------------------
+
+
 
 % ====================================================================
 \section{Finitism}\label{sec:finitism}
