@@ -8,7 +8,7 @@
 \section{Metacategory}\label{sec:metacategory}
 % ====================================================================
 
-The Formal System of Category Theory consists of
+The Formal System of Category Theory consists of:
 \begin{itemize}
 \item two Sorts (\S\ref{sec:sort}), \emph{Objects} $A,B,C,\ldots$, and
   \emph{Arrows} (corresponding to Morphisms) $f,g,h,\ldots$
@@ -39,7 +39,7 @@ A Sentence, $\Sigma$, in the Elementary Theory of Abstract Categories
 can be made into a Dual Sentence, $\Sigma^*$, by replacing instances
 of $cod$ by $dom$ and $dom$ by $cod$, and $h = g \circ f$ with $h = f
 \circ g$. The Double-dual is Idempotent (\S\ref{sec:idempotent}):
-$\Sigma^** = \Sigma$.
+$\Sigma^{**} = \Sigma$.
 
 Because the Axioms are Self-dual, if a Sentence can be derived from
 them, so can its Dual by the Duality Principle
@@ -57,7 +57,7 @@ A \emph{Precategory} (or \emph{Diagram Scheme}), $G$, is a Directed
 Graph (\S\ref{sec:directed_graph}) in the context of Category
 Theory. A Precategory is used to generate a \emph{Free Category}
 (\S\ref{sec:free_category}). Here we will use the notation for
-\emph{Categories} (\S\ref{sec:category}) to equate Vertices with
+Categories (\S\ref{sec:category}) to equate Vertices with
 Objects $G_0$ and Edges with Morphisms $G_1$. A Precategory can then
 be described as a pair of Functions, $cod$ and $dom$, from the Set of
 Edges to the Set of Objects:
@@ -111,24 +111,22 @@ which Morphisms are Identities and which are Composites.
 \section{Category}\label{sec:category}
 % ====================================================================
 
-A \emph{Category} is an \emph{Algebraic Structure}
-(\S\ref{sec:universal_algebra}) where Functions are Morphisms
-(\S\ref{sec:morphism}) between Objects and each Object has
-its own \emph{Identity Morphism} and Morphisms are \emph{Associative}.
+A \emph{Category} is an Algebraic Structure
+(\S\ref{sec:algebraic_structure}) where Functions are Morphisms
+(\S\ref{sec:morphism}) between Objects and each Object has a Unique
+\emph{Identity Morphism} and where Composition of Morphisms is
+Associative and Transitive.
 
-A Category $\mathbf{C}$ is defined as
+A Category $\mathbf{C}$ is defined as:
 \begin{itemize}
 \item a Class $C_0$ of Objects
 \item a Class $C_1$ of Morphisms (also called \emph{Arrows} or
   \emph{Maps}) with Identity Morphisms for each Object
-\item a Binary Associative Composition Operation for every three
-  Objects
+\item a Binary Associative and Transitive Composition Operation on
+  Morphisms
 \end{itemize}
 $\mathbf{C}$ is considered \emph{Small} (as opposed to \emph{Large})
-if both $C_0$ and $C_1$ can be represented as Sets. In the context of
-Category Theory, a \emph{Small Set} (not to be confused with a Small
-Category) is a member of a fixed \emph{Universe}
-(\S\ref{sec:universe}) of Sets.
+if both $C_0$ and $C_1$ can be represented as Sets.
 
 An equivalent definition of Categories can be given in terms of
 \emph{Hom-sets} (\S\ref{sec:hom_set}).
@@ -146,23 +144,26 @@ Example Categories:
 \item Types and Computable Functions
 \end{itemize}
 The Category of all Sets and Set Mappings is denoted $\mathbf{Set}$
-(and is \emph{Dual} to the Category of Complete, Atomic Boolean
-Algebras (\S\ref{sec:boolean_algebra}).
+(and is Dual to the Category of Complete, Atomic Boolean Algebras
+(\S\ref{sec:boolean_algebra}). See \emph{List of Categories}
+\S\ref{sec:categories_list} for more examples of Categories.
 
-Preorders and Posets (\S\ref{sec:order_theory}) can represent
-Categories by taking Elements as Objects and Morphisms as existing
-between Pairs of Elements in the Ordering Relation. The Category of
-Posets is denoted $\mathbf{Pos}$. A special case of a Poset Category
-is a \emph{Discrete Category} which is a Category of Objects with only
-Identity Morphisms.
+Preorders (\S\ref{sec:preorder}) represent Categories by taking
+Elements as Objects and (Single) Morphisms existing between Pairs of
+Elements in the Ordering Relation which satisfies the Category Axioms
+by the Reflexivity and Transitivity of the Preorder.
 
-A \emph{Monoid} (\S\ref{sec:monoid}) is a Category with a single
-Object and Morphisms for each Element in the Monoid such that
-Composition of the Morphisms is the Binary Operation of the
-Monoid. The Category $\mathbf{Mon}$ is the Category of all Monoids and
-Functions that preserve the Monoid structure.
+The Category of Posets is denoted $\mathbf{Pos}$. A special case of a
+Poset Category is a Discrete Category (\S\ref{sec:discrete_category})
+which is a Category of Objects with only Identity Morphisms.
 
-\emph{Simplicial}
+A Monoid (\S\ref{sec:monoid}) is a Category with a single Object and
+Morphisms for each Element in the Monoid such that Composition of
+Morphisms is the Binary Operation of the Monoid. The Category
+$\mathbf{Mon}$ is the Category of all Monoids and Functions that
+preserve the Monoid structure.
+
+Simplex Category (\S\ref{sec:simplex_category})
 
 
 
@@ -171,14 +172,101 @@ Functions that preserve the Monoid structure.
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Concrete Category}\label{sec:concrete_category}
+\subsection{Hom-set}\label{sec:hom_set}
 % --------------------------------------------------------------------
 
-A \emph{Concrete Category} is pair, $(\mathbf{C},U)$, where
-$\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
-\mathbf{C} \rightarrow \mathbf{Set}$.
+The collection of all Morphisms between two Objects $X$ and $Y$ in a
+Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
+$Hom(X,Y)$:
+\[
+  Hom(X,Y) = \{f \in \mathbf{C} | f : X \rightarrow Y\}
+\]
+This gives a Hom-functor (\S\ref{sec:hom_functor}):
+\[
+  Hom_\mathbf{C} : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
+\]
+each half of which is a Representable Functor
+(\S\ref{sec:representable_functor}).
+\newline
+\HandRight\; Note that the Hom-set need not be a Set (it could be a
+Proper Class). A Category for which all Hom-sets are Sets is called a
+Locally Small Category (\S\ref{sec:locally_small}).
+
+Some Properties of Hom-sets:
+\begin{itemize}
+\item $ (X,Y) \neq (X',Y') \Rightarrow
+  Hom(X,Y) \cap Hom(X',Y') = \varnothing$
+\end{itemize}
+
+A definition of Categories can be given in terms of Hom-sets. %FIXME
 
 
+
+% --------------------------------------------------------------------
+\subsection{Category Equivalence}\label{sec:category_equivalence}
+% --------------------------------------------------------------------
+
+An \emph{Equivalence} between two Categories, $\mathbf{C}$ and
+$\mathbf{D}$, can be established by a Pair of Functors
+(\S\ref{sec:functor}):
+\[
+  S : \mathbf{C} \rightarrow \mathbf{D}
+\]\[
+  T : \mathbf{D} \rightarrow \mathbf{C}
+\]
+and Natural Isomorphisms (\S\ref{sec:natural_transformation}):
+\[
+  I_\mathbf{C} \cong T \circ S
+\]\[
+  I_\mathbf{D} \cong S \circ T
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Subcategory}\label{sec:subcategory}
+% --------------------------------------------------------------------
+
+A \emph{Subcategory}, $\mathbf{S}$, of a Category, $\mathbf{C}$, is a
+Category whose Objects and Morphisms are in $\mathbf{C}$. There is a
+Faithful Functor (\S\ref{sec:faithful_functor}) called the
+\emph{Inclusion Functor} which Maps Objects and Morphisms to
+themselves:
+\[
+  I : \mathbf{S} \rightarrow \mathbf{C}
+\]
+If $I$ is a Full Functor then $S$ is a \emph{Full Subcategory}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finite Category}\label{sec:finite_category}
+% --------------------------------------------------------------------
+
+A \emph{Finite Category} has a Finite number of Morphisms and
+Objects. An Infinite number of Objects Implies and Infinite number of
+Morphisms because each Object has its own Identity Morphism.
+
+A Category such as:
+\[
+  A
+  \begin{matrix}
+  \xrightarrow{\;\;f\;\;}\\
+  \xleftarrow[\;\;g\;\;]{}
+  \end{matrix}
+  B
+\]
+induces an Infinite Category if $f$ and $g$ are not Isomorphisms
+(\S\ref{sec:isomorphism}) because new Morphisms exist wherever the
+Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
+\ldots$ and $fg, fgfg, fgfgfg, \ldots$. See \emph{Finitely Presented
+  Categories} \S\ref{sec:finitely_presented}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Discrete Category}\label{sec:discrete_category}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{List of Categories}\label{sec:categories_list}
@@ -218,134 +306,17 @@ $\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
 \item [Grph] all Small Graphs and Graph Morphisms
 \item [Cat] all Small Categories and Functors
 \item [Cat'] all Large Categories and Functors
+\item [Vect$_\mathbb{R}$] all Finite-dimensional Vector Spaces over
+  $\mathbb{R}$ and Linear Maps
 \item [Top] all Topological Spaces and Continuous Maps (Locally Small)
 \item [Top$_*$] all Pointed Topological Spaces and Continuous Maps
 \item [Toph] all Topological Spaces and Homotopy Classes of Continuous
   Maps
+\item [Man] all Smooth Manifolds and Smooth Maps
+\item [C($\lambda$)] all Types and Closed Terms
 \end{description}
 
-
-
-% --------------------------------------------------------------------
-\subsection{Category Equivalence}\label{sec:category_equivalence}
-% --------------------------------------------------------------------
-
-\emph{Equivalence} between two Categories, $\mathbf{C}$ and
-$\mathbf{D}$, is defined as a Pair of \emph{Functors}
-(\S\ref{sec:functor}):
-\[
-  S : \mathbf{C} \rightarrow \mathbf{D}
-\]\[
-  T : \mathbf{D} \rightarrow \mathbf{C}
-\]
-and \emph{Natural Isomorphisms} (\S\ref{sec:natural_transformation}):
-\[
-  I_\mathbf{C} \cong T \circ S
-\]\[
-  I_\mathbf{D} \cong S \circ T
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Finite Categories}\label{sec:finite_categories}
-% --------------------------------------------------------------------
-
-A \emph{Finite Category} has a Finite number of Morphisms and
-Objects. An Infinite number of Objects Implies and Infinite number of
-Morphisms because each Object has its own Identity Morphism. A
-Category such as
-\[
-  A
-  \begin{matrix}
-  \xrightarrow{\;\;f\;\;}\\
-  \xleftarrow[\;\;g\;\;]{}
-  \end{matrix}
-  B
-\]
-Induces an Infinite Category because new Morphisms exist wherever the
-Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
-\ldots$ and $fg, fgfg, fgfgfg, \ldots$. See \emph{Finitely Presented
-  Categories} \S\ref{sec:finitely_presented}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Subcategory}\label{sec:subcategory}
-% --------------------------------------------------------------------
-
-A \emph{Subcategory}, $\mathbf{S}$, of a Category, $\mathbf{C}$, is a
-Category whose Objects and Morphisms are in $\mathbf{C}$. There is a
-\emph{Faithful Functor} (\S\ref{sec:faithful_functor}) called the
-\emph{Inclusion Functor} which Maps Objects and Morphisms to
-themselves:
-\[
-  I : \mathbf{S} \rightarrow \mathbf{C}
-\]
-If $I$ is a \emph{Full Functor}, then $S$ is a \emph{Full
-  Subcategory}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Hom-set}\label{sec:hom_set}
-% --------------------------------------------------------------------
-
-The collection of all Morphisms between two Objects $X$ and $Y$ in a
-Category $\mathbf{C}$ is called the \emph{Hom-set} and is denoted
-$Hom(X,Y)$:
-\[
-  Hom(X,Y) = \{f \in \mathbf{C} | f : X \rightarrow Y\}
-\]
-This gives a \emph{Functor} (\S\ref{sec:functor}):
-\[
-  Hom : \mathbf{C^{op}} \times \mathbf{C} \rightarrow \mathbf{Set}
-\]
-each half of which is a Representable Functor
-(\S\ref{sec:representable_functor}).
-
-Note that the Hom-set need not be a Set (it could be a Proper Class).
-A Category for which all Hom-sets are Sets is called a \emph{Locally
-  Small Category}.
-
-
-
-Some Properties of Hom-sets:
-\begin{itemize}
-\item $ (X,Y) \neq (X',Y') \rightarrow
-  Hom(X,Y) \cap Hom(X',Y') = \varnothing$
-\end{itemize}
-
-A definition of Categories can be given in terms of Hom-sets. %FIXME
-
-
-
-% --------------------------------------------------------------------
-\subsection{Representable Category}\label{sec:representable_category}
-% --------------------------------------------------------------------
-
-A Category is \emph{Representable} if there is a Functor from that
-Category into $\mathbf{Set}$.
-
-
-
-\subsubsection{Locally Small Category}\label{sec:locally_small}
-
-A Category is \emph{Locally Small} if all Hom-sets of the Category are
-Sets and not Proper Classes.
-% FIXME definition in terms of hom-sets
-
-There is at least one canonical Functor from any Locally Small
-Category into $\mathbf{Set}$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Complete Category}\label{sec:complete_category}
-% --------------------------------------------------------------------
-
-A \emph{Complete Category} is a Category where all Small Limits
-(\S\ref{sec:limit}) exist.
+Database Schema (\S\ref{sec:database_schema}): Tables and Foreign Keys
 
 
 
@@ -354,54 +325,107 @@ A \emph{Complete Category} is a Category where all Small Limits
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Homomorphism}\label{sec:homomorphism}
+\subsection{Monomorphism}\label{sec:monomorphism}
 % --------------------------------------------------------------------
 
-A \emph{Homomorphism} is a Structure-preserving Morphism between
-Algebraic Structures (\S\ref{sec:universal_algebra}). That is, for
-an Homomorphism $f : A \rightarrow B$ where $A$ and $B$ have Operators
-$*$ and $*'$ respectively, for any $a_i \in A$
-\[
-  f(a_1 * a_2) = f(a_1) *' f(a_2)
-\]
-Note that the Operators do not have to be the same.
-
-
-
-\subsubsection{Monomorphism}\label{sec:monomorphism}
-
-A \emph{Monomorphism} is a Homomorphism that is Injective, a
-sufficient condition of which is that the Morphism has a Left Inverse
-(\S\ref{sec:left_inverse}) or \emph{Retraction}. A Monomorphism with a
-Left Inverse is called a \emph{Split Monomorphism} and the Retraction
-a Split Epimorphism. A Monomorphism $f$ between Objects $A$ and $B$ is
-denoted
+A \emph{Monomorphism} $f$ between Objects $A$ and $B$ is denoted:
 \[
   f : A \rightarrowtail B
 \]
 and has the property for any two Morphisms $g, h : C \rightarrow A$,
-$fg = fh$ Implies $g = h$ ($f$ is Left Cancellative). If $f$ is a
-Monomorphism then $gf$ and $hf$ are Idempotent
-(\S\ref{sec:idempotent}).
+$fg = fh$ Implies $g = h$ ($f$ is Left Cancellative
+\S\ref{sec:cancellative_property}). An Monomorphism in a Category
+$\mathbf{C}$ is an Epimorphism in $\mathbf{C^{op}}$.
+
+If $f$ is a Monomorphism then $gf$ and $hf$ are Idempotent
+(\S\ref{sec:idempotent}). %FIXME correct ???
+
+Functions between Sets (any Morphism in a Concrete Category
+\S\ref{sec:concrete_category}) are Monomorphisms if they are Injective
+Functions. In $\mathbf{Set}$ Monomorphisms are exactly the Injective
+Functions between Sets. This is also true in the Categories
+$\mathbf{Grp}$, $\mathbf{Rng}$, and any Abelian Category
+(\S\ref{sec:abelian_category}).
+
+Equalizers (\S\ref{sec:equalizer}) are always Monomorphisms and as
+such are used to define the notion of Subobject
+(\S\ref{sec:subobject}).
+
+\HandRight\; Note not all Monomorphisms are required to be Injective.
+
+Left-invertible Morphisms are necessarily Monomorphisms (Split
+Monomorphism \S\ref{sec:split_monomorphism}).
 
 
 
-\subsubsection{Epimorphism}\label{sec:epimorphism}
+\subsubsection{Split Monomorphism}\label{sec:split_monomorphism}
 
-A Homomorphism whose underlying function is Surjective is an
-\emph{Epimorphism}, is a sufficient condition of which is that the
-Morphism has a Right Inverse (\S\ref{sec:right_inverse}) or
-\emph{Section}. An Epimorphism with a Right Inverse is called a
-\emph{Split Epimorphism} and the Section a Split Monomorphism. An
-Epimorphism $f$ between Objects $A$ and $B$ is denoted
+A Morphism with a Left Inverse or \emph{Retraction} is a Monomorphism
+called a \emph{Split Monomorphism}.
+
+The Retraction of a Split Monomorphism is a Split Epimorphism
+(\S\ref{sec:split_epimorphism}).
+
+
+
+\subsubsection{Regular Monomorphism}\label{sec:regular_monomorphism}
+
+\subsubsection{Strong Monomorphism}\label{sec:strong_monomorphism}
+
+\subsubsection{Extremal Monomorphism}\label{sec:extremal_monomorphism}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Epimorphism}\label{sec:epimorphism}
+% --------------------------------------------------------------------
+
+An \emph{Epimorphism} $f$ between Objects $A$ and $B$ is denoted:
 \[
   f : A \twoheadrightarrow B
 \]
-and has the property that for any two Morphisms $g, h : B \rightarrow
-C$, $gf = hf$ Implies $g = h$ ($f$ is Right Cancellative). Note that
-being an Epimorphism doesn't necessitate the Morphism to be
-Surjective. If $f$ is an Epimorphism, then $fg$ and $fh$ are
-Idempotent (\S\ref{sec:idempotent}).
+and has the property for any two Morphisms $g, h : B \rightarrow C$,
+$gf = hf$ Implies $g = h$ ($f$ is Right Cancellative
+\S\ref{sec:cancellative_property}). An Epimorphism in a Category
+$\mathbf{C}$ is a Monomorphism in $\mathbf{C^{op}}$.
+
+In a Concrete Category (\S\ref{sec:concrete_category}), every Morphism
+corresponding to a Surjective Function is an Epimorphism.
+
+\HandRight\; Note that being an Epimorphism doesn't imply the Morphism
+is Surjective. It is more frequently True for Monomorphisms that
+Injective Functions imply they are Monomorphism than the reverse for
+Surjective Functions and Epimorphisms. Regular
+(\S\ref{sec:regular_epimorphism}) and Strong
+(\S\ref{sec:strong_epimorphism}) Epimorphisms behave closer to
+Surjections than ordinary Epimorphisms.
+
+If $f$ is an Epimorphism, then $fg$ and $fh$ are Idempotent
+(\S\ref{sec:idempotent}). %FIXME correct ???
+
+
+
+\subsubsection{Split Epimorphism}\label{sec:split_epimorphism}
+
+A Morphism with a Right Inverse (\S\ref{sec:right_inverse}) or
+\emph{Section} or \emph{Splitting} is an Epimorphism called a
+\emph{Split Epimorphism}. The Section is a Split Monomorphism
+(\S\ref{sec:split_monomorphism}).
+
+The Condition that every Epimorphism be a Split Epimorphism in a
+Category is a version of the Axiom of Choice
+(\S\ref{sec:choice_axiom}) and implies that all Sets are Projective
+Objects (\S\ref{sec:projective_object}).\cite{awodey06}
+
+
+
+\subsubsection{Regular Epimorphism}\label{sec:regular_epimorphism}
+
+\subsubsection{Strong Epimorphism}\label{sec:strong_epimorphism}
+
+\subsubsection{Extremal Epimorphism}\label{sec:extremal_epimorphism}
+
+\subsubsection{Projective Object}\label{sec:projective_object}
 
 An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
 \rightarrow X$ and Morphism $f : P \rightarrow X$, then $\exists
@@ -409,13 +433,32 @@ An Object $P$ is \emph{Projective} if for any Epimorphism $e : E
 
 
 
+% --------------------------------------------------------------------
+\subsection{Bimorphism}\label{sec:bimorphism}
+% --------------------------------------------------------------------
+
+both Epimorphism and Monomorphism
+
+\HandRight\; Note that not all Bimorphisms are Isomorphisms
+
+
+
 \subsubsection{Isomorphism}\label{sec:isomorphism}
 
-A Morphism $f$ is an \emph{Isomorphism} if there exists another
-Morphism $g$ such that $g = f^{-1}$. The Existance of an Isomorphism
-between two Objects $A$ and $B$ is denoted $A \cong B$. An Isomorphism
-is a Homomorphism that is both a Monomorphism and an Epimorphism. Note
-that a Mono- and Epi-morphism need not be an Isomorphism.
+A Bimorphism $f : A \rightarrow B$ is an \emph{Isomorphism} if there
+exists another Morphism $g : B \rightarrow A$ such that $f \circ g =
+1_Y$ and $g \circ f = 1_X$, i.e. $f$ admits a Two-sided Inverse. The
+Existance of an Isomorphism between two Objects $A$ and $B$ is denoted
+$A \cong B$.
+
+\HandRight\; Note that a Bimorphism need not be an Isomorphism.
+
+In a Concrete Category (\S\ref{sec:concrete_category}) an Isomorphism
+must correspond to a Bijective Function on the underlying Sets, but
+there are Concrete Categories with Bijective Morphisms that are not
+necessarily Isomorphisms (e.g. in $\mathbf{Top}$) and there are also
+Categories with Objects corresponding to Sets with Isomorphisms that
+are not Bijections.
 
 The Existence of an \emph{Invertible Morphism}
 (\S\ref{sec:bijective_function}) between Objects also Implies their
@@ -430,7 +473,9 @@ Maps, the Isomorphisms are exactly the Homeomorphisms
 
 
 
-\subsubsection{Endomorphism}
+% --------------------------------------------------------------------
+\subsection{Endomorphism}
+% --------------------------------------------------------------------
 
 An \emph{Endomorphism} is a Homomorphism from an Object to itself.
 
@@ -443,13 +488,15 @@ that is, an Invertible Endomorphism.
 
 
 
-\subsubsection{Paramorphism}\label{sec:paramorphism}
+% --------------------------------------------------------------------
+\subsection{Paramorphism}\label{sec:paramorphism}
+% --------------------------------------------------------------------
 
 Primitive Recursion (\S\ref{sec:primitive_recursion})
 
 
 
-\paragraph{Catamorphism}\label{sec:catamorphism}
+\subsubsection{Catamorphism}\label{sec:catamorphism}
 
 Unique Homomorphism from Initial Algebra into some other Algebra
 
@@ -457,21 +504,25 @@ Unique Homomorphism from Initial Algebra into some other Algebra
 
 
 
-\subsubsection{Apomorphism}\label{sec:apomorphism}
+% --------------------------------------------------------------------
+\subsection{Apomorphism}\label{sec:apomorphism}
+% --------------------------------------------------------------------
 
 Primitive Corecursion (\S\ref{sec:primitive_corecursion})
 
 
 
-\paragraph{Anamorphism}\label{sec:anamorphism}
-\hfill \\
+\subsubsection{Anamorphism}\label{sec:anamorphism}
+
 \emph{Unfold}
 
 Coinduction (\S\ref{sec:coinduction})
 
 
 
-\subsubsection{Hylomorphism}\label{sec:hylomorphism}
+% --------------------------------------------------------------------
+\subsection{Hylomorphism}\label{sec:hylomorphism}
+% --------------------------------------------------------------------
 
 Composition of Anamorphism followed by Catamorphism
 
@@ -479,7 +530,9 @@ Deforestation
 
 
 
-\subsubsection{Metamorphism}\label{sec:metamorphism}
+% --------------------------------------------------------------------
+\subsection{Metamorphism}\label{sec:metamorphism}
+% --------------------------------------------------------------------
 
 Composition of Catamorphism followed by Anamorphism
 
@@ -495,7 +548,12 @@ any $g, h : W \rightarrow X$, $fg = fh$.
 A Morphism $f : X \rightarrow Y$ is a \emph{Co-constant Morphism} if
 for any $g, h : Y \rightarrow Z$, $gf = hf$.
 
-\emph{Zero Morphism} is one that is both Constant and Co-constant.
+
+
+\subsection{Zero Morphism}\label{sec:zero_morphism}
+
+\emph{Zero Morphism} is a Morphism that is both Constant and
+Co-constant.
 
 
 
@@ -511,11 +569,47 @@ exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
 
 
 % --------------------------------------------------------------------
+\subsection{Equalizer}\label{sec:equalizer}
+% --------------------------------------------------------------------
+
+An \emph{Equalizer} is an (Unique) Object $E$ and Morphism $e: E
+\rightarrow A$ such that for a given pair of parallel Morphisms $f,g :
+A \rightarrow B$:
+\[
+  f \circ e = g \circ e
+\]
+$e$ is necessarily a Monomorphism.
+
+The Category $\mathbf{Ab}$ has all Equalizers.
+
+%FIXME merge with kernels?
+
+
+
+\subsection{Coequalizer}\label{sec:coequalizer}
+
+An \emph{Coequalizer} is an (Unique) Object $Q$ and Morphism $q: B
+\rightarrow Q$ such that for a given pair of parallel Morphisms $f,g :
+A \rightarrow B$:
+\[
+  q \circ f = q \circ g
+\]
+$q$ is necessarily an Epimorphism.
+
+A Coequalizer in a Category $\mathbf{C}$ is an Equalizer in
+$\mathbf{C}$ and \emph{vice versa}.
+
+The Categories $\mathbf{Set}$ and $\mathbf{Pos}$ have all
+Coequalizers.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Factors}\label{sec:morphism_factor}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Subobjects}\label{sec:category_subobjects}
+\subsection{Subobject}\label{sec:subobject}
 % --------------------------------------------------------------------
 
 A \emph{Subobject} of an Object $X$ in $\mathbf{C}$ is a Monomorphism
@@ -529,15 +623,33 @@ $\mathbf{C}$ as $Sub_{\mathbf{C}}(X)$. Because there is at most one
 Morphism between Subobjects, $Sub_{\mathbf{C}}(X)$ is a Preorder
 Category.
 
+A \emph{Subobject} (Slice) \emph{Category}
+(\S\ref{sec:slice_category}) $Sub_\mathbf{C}(X)$ may be formed by
+taking Monomorphisms into $X$ as Objects and (Mono-)Morphisms between
+them in the usual Slice Category definition corresponding to
+\emph{Inclusion} of Subobjects and Isomorphisms as \emph{Equivalence}
+of Subobjects. $Sub_\mathbf{C}(X)$ is a Preorder Category and a Poset
+Category may be obtained by factoring out the Equivalence Relation
+$\equiv$ and:
+\[
+  Sub_\mathbf{Set}(X) \cong \mathcal{P}(X)
+\]
+
+For Subobjects $M,M'$ of $X$ related by $f : M \rightarrow M'$, there
+is a Functor:
+\[
+  i_* : Sub (M') \rightarrow Sub (X)
+\]
+
 
 
 % ====================================================================
 \section{Functor}\label{sec:functor}
 % ====================================================================
 
-A \emph{Functor} is a \emph{Homomorphism}
-(\S\ref{sec:homomorphism}) of Categories. A Functor $F$ between
-Categories $\mathbf{C}$ and $\mathbf{D}$
+A \emph{Functor} is a Homomorphism (\S\ref{sec:homomorphism}) of
+Categories. A Functor $F$ between Categories $\mathbf{C}$ and
+$\mathbf{D}$:
 \[
   F : \mathbf{C} \rightarrow \mathbf{D}
 \]
@@ -551,10 +663,15 @@ and Morphisms of $\mathbf{D}$ with the following Equivalences:
 Every Category has an Identity Functor $1_{\mathbf{C}} : \mathbf{C}
 \rightarrow \mathbf{C}$ and the Category of all Small Categories and
 Functors is denoted $\mathbf{Cat}$. An Identity Functor is an example
-of an \emph{Endofunctor} which is a Functors from a Category to
-itself. Note that in constructions (\S\ref{sec:category_construction})
-where a Functor appears, if that Functor is an Identity Functor, the
-Category instead may be substituted.
+of an \emph{Endofunctor} which is a Functor from a Category to itself.
+
+Note that in constructions (\S\ref{sec:category_construction}) where a
+Functor appears, if that Functor is an Identity Functor, the Category
+instead may be substituted.
+
+Because Functors preserve Identities, they also perserve Split
+Epimorphisms and Monomorphisms (\S\ref{sec:split_epimorphism},
+\ref{sec:split_monomorphism}).
 
 Functors may also be defined in terms of the Object Mapping and Hom-sets:
 \[
@@ -575,21 +692,8 @@ A Functor on two Categories is a \emph{Bifunctor}
 (\S\ref{sec:bifunctor}) and generalised to more Categories is a
 \emph{Multifunctor}.
 
-
-
-% --------------------------------------------------------------------
-\subsection{Category Diagram}\label{sec:category_diagram}
-% --------------------------------------------------------------------
-
-A \emph{Category Diagram} is a Covariant Functor from an \emph{Index
-  Category} into another Category:
-\[
-  D : \mathbf{J} \rightarrow \mathbf{C}
-\]
-A Diagram is the Category Theory analogue of an Indexed Family of Sets
-(\S\ref{sec:index_set}).
-
-Category of Diagrams (\S\ref{sec:setvalued_functor})
+Every Functor $F$ defines a Kernel Category
+(\S\ref{sec:kernel_category}) $ker(F)$.
 
 
 
@@ -814,12 +918,18 @@ called the \emph{Yoneda Embedding}.
 % --------------------------------------------------------------------
 
 \[
-  F_\times : \mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}
+  \times : \mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}
 \]
 
 
 
 \subsubsection{Coproduct Functor}\label{sec:coproduct_functor}
+
+\[
+  + : \mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}
+\]
+
+
 
 
 
@@ -869,9 +979,8 @@ Coproduct Functor (\S\ref{sec:coproduct_functor}).
 % --------------------------------------------------------------------
 
 An \emph{Adjoint Functor} is the Categorical analog of the Existential
-Quantifier in Logic (\S\ref{sec:quantifier}) and the \emph{Image
-  Operation} along a \emph{Continuous Function} in \emph{Topology}
-(Part \ref{sec:topology}).
+Quantifier in Logic (\S\ref{sec:quantifier}) and the Image Operation
+along a Continuous Function in Topology (Part \ref{sec:topology}).
 
 Adjoint (\S\ref{sec:adjoint})
 
@@ -1040,9 +1149,10 @@ other Object $A$ in the Category there is a unique Morphism $A
 
 An Object that is both an Initial and a Terminal Object is called a
 \emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
-Object is called a \emph{Pointed Category}. For a Zero Object, $Z \in
-\mathbf{C}$, there is a Unique Morphism between any two Objects, $A, B
-\in \mathbf{C}$ called the \emph{Composite} in $Z$:
+Object is called a \emph{Pointed Category}
+(\S\ref{sec:pointed_category}). For a Zero Object, $Z \in \mathbf{C}$,
+there is a Unique Morphism between any two Objects, $A, B \in
+\mathbf{C}$ called the \emph{Composite} in $Z$:
 \[
   A \rightarrow Z \rightarrow B
 \]
@@ -1064,6 +1174,10 @@ Trivial Group ${1}$ is a Zero Object.
 
 In a particular Poset, a Top Element is a Terminal Object and a Bottom
 Element is an Initial Object.
+
+
+
+\subsection{Pointed Category}\label{sec:pointed_category}
 
 
 
@@ -1115,7 +1229,7 @@ For a Functor $H : \mathbf{D} \rightarrow \mathbf{Set}$, an
 
 
 % --------------------------------------------------------------------
-\subsection{Global \& General Elements}\label{sec:general_element}
+\subsection{Global Elements}\label{sec:global_element}
 % --------------------------------------------------------------------
 
 A \emph{Global Element}, $a$, (also \emph{Point} or \emph{Constant})
@@ -1124,6 +1238,23 @@ Object
 \[
   a: 1 \rightarrow A
 \]
+In $\mathbf{Set}$ this expresses an Isomorphism:
+\[
+  A \cong Hom_\mathbf{Set}(1,A)
+\]
+but is not true for all Categories in general.
+
+In some settings Global Elements represent Closed Terms.
+
+
+
+\subsubsection{Well-pointed Category}\label{sec:well_pointed}
+
+
+
+% --------------------------------------------------------------------
+\subsection{General Elements}\label{sec:general_element}
+% --------------------------------------------------------------------
 
 A \emph{General Element}, $x$, (also \emph{Variable}) is a Morphism
 from an arbitrary Domain Object, $X$
@@ -1131,10 +1262,57 @@ from an arbitrary Domain Object, $X$
   x: X \rightarrow A
 \]
 
+In some contexts General Elements correspond to arbitrary Terms
+(\S\ref{sec:term}).
+
 
 
 % --------------------------------------------------------------------
-\subsection{Limits \& Colimits}\label{sec:category_limits}
+\subsection{Category Diagram}\label{sec:category_diagram}
+% --------------------------------------------------------------------
+
+A \emph{Category Diagram} is a Covariant Functor from an \emph{Index
+  Category} into another Category:
+\[
+  D : \mathbf{J} \rightarrow \mathbf{C}
+\]
+A Diagram is the Category Theory analogue of an Indexed Family of Sets
+(\S\ref{sec:index_set}).
+
+Category of Diagrams (\S\ref{sec:setvalued_functor})
+
+
+
+\subsubsection{Cone}\label{sec:functor_cone}
+
+Co-cone
+
+
+
+\paragraph{Universal Cone}\label{sec:universal_cone}
+\hfill \\
+
+Limits (\S\ref{sec:limit}) and Colimits (\S\ref{sec:colimit}) are
+defined as Universal Cones.
+
+
+
+\subsubsection{Span}\label{sec:span}
+
+\emph{Span} (or \emph{Roof} or \emph{Correspondence})
+
+The Colimit of a Span is a Pushout (\S\ref{sec:pushout})
+
+
+
+\subsubsection{Cospan}\label{sec:cospan}
+
+The Limit of a Cospan is a Pullback (\S\ref{sec:pullback})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Limit}\label{sec:limit}
 % --------------------------------------------------------------------
 
 \emph{Limit} = \emph{Inverse Limit} = \emph{Projective Limit} =
@@ -1143,9 +1321,14 @@ from an arbitrary Domain Object, $X$
 \emph{Colimit} = \emph{Direct Limit} = \emph{Inductive Limit} =
 \emph{Right Root}
 
+Colimit (\S\ref{sec:colimit})
+
+A \emph{Limit} is defined as a Universal Cone
+(\S\ref{sec:universal_cone})
 
 
-\subsubsection{Products \& Coproducts}\label{sec:universal_product}
+
+\subsubsection{Product}\label{sec:product}
 
 A \emph{Product} of two Objects $P = A \times B$:
 \[
@@ -1163,23 +1346,6 @@ two Categories is uniquiely Isomorphic to the Cartesian Product
 
 In a Poset, the Product of two Elements is the Meet or Greatest Lower
 Bound (\S\ref{sec:glb_lub}).
-
-The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
-is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;}
-Z \xleftarrow{\;\;z_2\;\;} B$:
-\[
-  \exists!u : Q \rightarrow Z
-\]
-with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
-and Coprojections $q_i$ may be called \emph{Injections} (although they
-are not necessarily Injective Morphisms).
-
-An example of a Coproduct in $\mathbf{Set}$ is the Disjoint Union
-(\S\ref{sec:disjoint_union}) in Set Theory or the Tagged Union
-(\S\ref{sec:sum_type}) in Type Theory. The Coproduct of a Monoid of
-Group is sometimes defined as a Tensor Product
-(\S\ref{sec:tensor_product}). In a Poset the Coproduct of two Elements
-is the Join or Leas Upper Bound (\S\ref{sec:glb_lub}).
 
 For Morphisms $f$ and $g$, a Product $f \times g$ is defined where $f
 : A \rightarrow A'$, $g : B \rightarrow B'$ and:
@@ -1203,6 +1369,8 @@ and Morphisms of $\mathbf{C}$ to their Product:
 \[
   (f,g) \mapsto f \times g
 \]
+A Category with Binary Products and a Terminal Object is said to have
+all \emph{Finite Products}.
 
 Products and Coproducts are unique up to Isomorphism
 (\S\ref{sec:isomorphism}). The Canonical Commutative Isomorphism $A
@@ -1238,6 +1406,14 @@ Products are also Associative:
 \[
   A \times (B \times C) \cong (A \times B) \times C
 \]
+
+In the Category $\mathbf{Ab}$ there is a Canonical
+Isomorphism:\cite{awodey06}
+\[
+  A + B \cong A \times B
+\]
+
+
 
 \paragraph{N-ary Products}\label{sec:category_nary}
 \hfill \\
@@ -1327,25 +1503,75 @@ corresponds to an Object:
 
 
 
-\subsubsection{Pushouts \& Pullbacks}\label{sec:category_pullback}
+\subsubsection{Pullback}\label{sec:pullback}
+
+For a Category $\mathbf{C}$, a \emph{Pullback} of Morphisms $f : A
+\rightarrow C$ and $g : B \rightarrow C$ are Morphisms $p_1 : P
+\rightarrow A$ and $p_2 : P \rightarrow B$ with the Universal Property
+that $fp_1 = g_p2$. This implies for any given $z_1 : Z \rightarrow A$
+and $z_2 : Z \rightarrow B$ such that $fz_1 = gz_2$, there is a Unique
+Morphism $u : Z \rightarrow P$ such that $z_1 = p_1 u$ and $z_2 = p_2
+u$.
+
+A Pullback is the Limit of a Cospan (\S\ref{sec:cospan}).
 
 
+
+\subsubsection{Inverse Limit}\label{sec:inverse_limit}
 
 \subsubsection{Equalizer}\label{sec:limit_equalizer}
 
 
 
 % --------------------------------------------------------------------
-\subsection{Limit} \label{sec:limit}
+\subsection{Colimit} \label{sec:colimit}
 % --------------------------------------------------------------------
 
 Adjoint Functor (\S\ref{sec:adjoint_functor})
 
 Diagonal Functor (\S\ref{sec:diagonal_functor})
 
+Small Limit
+
+A \emph{Colimit} is defined as a Universal Cone
+(\S\ref{sec:universal_cone})
 
 
-\subsubsection{Colimit} \label{sec:colimit}
+
+\subsubsection{Coproduct}\label{sec:coproduct}
+
+Disjoint Union (\S\ref{sec:disjoint_union})
+
+The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
+is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;}
+Z \xleftarrow{\;\;z_2\;\;} B$:
+\[
+  \exists!u : Q \rightarrow Z
+\]
+with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
+and Coprojections $q_i$ may be called \emph{Injections} (although they
+are not necessarily Injective Morphisms).
+
+An example of a Coproduct in $\mathbf{Set}$ is the Disjoint Union
+(\S\ref{sec:disjoint_union}) in Set Theory or the Tagged Union
+(\S\ref{sec:sum_type}) in Type Theory. The Coproduct of a Monoid of
+Group is sometimes defined as a Tensor Product
+(\S\ref{sec:tensor_product}). In a Poset the Coproduct of two Elements
+is the Join or Leas Upper Bound (\S\ref{sec:glb_lub}).
+
+
+
+\subsubsection{Pushout}\label{sec:pushout}
+
+A Pushout is the Colimit of a Span (\S\ref{sec:span})
+
+
+
+\subsubsection{Direct Limit}\label{sec:direct_limit}
+
+\subsubsection{Complete Category}\label{sec:complete_category}
+
+A \emph{Complete Category} is a Category where all Small Limits exist.
 
 
 
@@ -1362,7 +1588,7 @@ Diagonal Functor (\S\ref{sec:diagonal_functor})
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Opposite Categories}\label{sec:opposite_category}
+\subsection{Opposite Category}\label{sec:opposite_category}
 % --------------------------------------------------------------------
 
 The \emph{Opposite} or \emph{Dual} (\S\ref{sec:abstract_category})
@@ -1387,6 +1613,10 @@ In a Dual Category the following are all Duals of eachother:
   \item Left and Right Inverses (\S\ref{sec:morphism})
   \item Initial and Terminal Objects (\S\ref{sec:universal_property})
 \end{itemize}
+
+The Functor $(-)^\mathbf{op} : \mathbf{Cat} \rightarrow \mathbf{Cat}$
+is an Involution (\S\ref{sec:involution}) but is Contravariant so it
+does not define any Isomorphisms.
 
 
 
@@ -1424,8 +1654,8 @@ has Objects of the form $(C,D)$ where $C \in \mathbf{C}$ and $D \in
 \]\[
   1_{(C,D)} = (1_C, 1_D)
 \]
-$\mathbf{C} \times \mathbf{D}$ is a Product
-(\S\ref{sec:universal_product}) in $\mathbf{Cat}$.
+$\mathbf{C} \times \mathbf{D}$ is a Product (\S\ref{sec:product}) in
+$\mathbf{Cat}$.
 
 
 
@@ -1512,6 +1742,7 @@ The Hom-set in a Functor Category may be denoted:
 
 A Functor Category into the Category $\mathbf{Set}$ is called a
 \emph{Category Diagram} (\S\ref{sec:category_diagram}).
+%FIXME terminology doesn't match
 
 With Evaluation Functor $\eta : \mathbf{D^C} \times \mathbf{C}
 \rightarrow \mathbf{D}$, $\mathbf{D^C}$ is an Exponential
@@ -1535,7 +1766,7 @@ Category of Graphs and Graph Homomorphisms. Cf. Simplicial Sets
 
 
 
-\subsubsection{Arrow Categories}\label{sec:arrow_category}
+\subsubsection{Arrow Category}\label{sec:arrow_category}
 
 An \emph{Arrow Category} of a Category $\mathbf{C}$, written
 $\mathbf{C^{\rightarrow}}$, has for its Objects the Morphisms of
@@ -1545,6 +1776,12 @@ Squares).
 
 The Arrow Category $\mathbf{C}^\rightarrow$ is Isomorphic to the
 Functor Category $\mathbf{C^2}$.
+
+There are two Functors defined on an Arrow Category:
+\[
+  \mathbf{C} \xleftarrow{\mathbf{dom}} \mathbf{C}^\rightarrow
+  \xrightarrow{\mathbf{cod}} \mathbf{D}
+\]
 
 
 
@@ -1557,12 +1794,6 @@ $\mathbf{Set}$.
 A Presheaf (\S\ref{sec:presheaf}) is an example of a Set-valued
 (Contravariant) Functor Category from an Opposite Category into
 $\mathbf{Set}$.
-
-
-
-\subsubsection{Cones}\label{sec:category_cone}
-
-\emph{Universal Cone}
 
 
 
@@ -1682,13 +1913,16 @@ $\mathbf{C^{\sim}}$:
 \]\[
   \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
 \]
+The Categorical Congruence $~$ on a Group $G$ is a Normal Subgroup $N
+\subseteq G$ and the Quotient Category $G/~$ and the Quotient Group
+$G/N$ coincide. \cite{awodey06}
 
 
 
 \subsubsection{Kernel Category}\label{sec:kernel_category}
 
 Given a Functor $F : \mathbf{C} \rightarrow \mathbf{D}$, a Congruence
-$\sim_F$ on $\mathbf{C}$ is defined as
+$\sim_F$ on $\mathbf{C}$ is defined as:
 \[
   f \sim_F g \leftrightarrow dom(f) = dom(g) \wedge cod(f) = cod(g)
   \wedge F(f) = F(g)
@@ -1705,12 +1939,12 @@ Category of $\sim_F$
 
 % FIXME free category notation?
 A \emph{Finitely Presented Category} is given by taking the Quotient
-Category of a Free Category $\mathbf{C}(G)$ with the Congruence
-$\sim_\Sigma$
+Category of a Free Category (\S\ref{sec:free_category})
+$\mathbf{C}(G)$ with the Congruence $\sim_\Sigma$:
 \[
   \mathbf{C}(G) / \sim_{\Sigma} = \mathbf{C}(G,\Sigma)
 \]
-where $\Sigma$ is the finite Set of Relations
+where $\Sigma$ is the finite Set of Relations:
 \[
   (g_1 \circ \ldots \circ g_n) = (g'_1 \circ \ldots \circ g'_m)
 \]
@@ -1749,7 +1983,7 @@ Set as the Identity Element.
 
 A Category is \emph{Cartesian Closed} if it has:
 \begin{enumerate}
-\item A Product Functor (\S\ref{sec:universal_product})
+\item A Product Functor (\S\ref{sec:product})
 \item An Exponential for any pair of Objects
   (\S\ref{sec:category_exponential})
 \item A Terminal Object (\S\ref{sec:initial_terminal})
@@ -1812,6 +2046,47 @@ Model for Intuitionistic First-order Logic
 \subsubsection{Braided Monoidal Category}\label{sec:braided_monoidal}
 
 \paragraph{Symmetric Monoidal Category}\label{sec:symmetric_monoidal}
+
+
+
+% ====================================================================
+\section{Representable Category}\label{sec:representable_category}
+% ====================================================================
+
+A Category is \emph{Representable} if there is a Functor from that
+Category into $\mathbf{Set}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Concrete Category}\label{sec:concrete_category}
+% --------------------------------------------------------------------
+
+A \emph{Concrete Category} is pair, $(\mathbf{C},U)$, where
+$\mathbf{C}$ is a Category and $U$ is a Faithful Functor $U :
+\mathbf{C} \rightarrow \mathbf{Set}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Locally Small Category}\label{sec:locally_small}
+% --------------------------------------------------------------------
+
+A Category is \emph{Locally Small} if all Hom-sets
+(\S\ref{sec:hom_set}) of the Category are Sets and not Proper Classes.
+% FIXME definition in terms of hom-sets
+
+There is at least one canonical Functor from any Locally Small
+Category into $\mathbf{Set}$.
+
+
+
+% ====================================================================
+\section{Abelian Category}\label{sec:abelian_category}
+% ====================================================================
+
+Motivating Example $\mathbf{Ab}$ Category of all Abelian Groups with
+Group Homomorphisms
 
 
 
@@ -1995,9 +2270,7 @@ Propositions as Types in each Context
 \subsection{Simplex Category}\label{sec:simplex_category}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Simplicial Set}\label{sec:simplicial_set}
-% --------------------------------------------------------------------
+\subsubsection{Simplicial Set}\label{sec:simplicial_set}
 
 A \emph{Simplicial Set} is a Contravariant Functor from the
 \emph{Simplex Category} $\Delta$ (\S\ref{sec:simplex_category}) into
@@ -2008,7 +2281,8 @@ $\mathbf{Set}$. An equivalent definition is in terms of Presheaves:
 
 
 
-\subsubsection{Pro-simplicial}\label{sec:pro_simplicial}
+\paragraph{Pro-simplicial}\label{sec:pro_simplicial}
+\hfill \\
 
 Shape Theory (\S\ref{sec:shape_theory})
 
