@@ -558,53 +558,6 @@ Co-constant.
 
 
 % --------------------------------------------------------------------
-\subsection{Kernel}\label{sec:morphism_kernel}
-% --------------------------------------------------------------------
-
-The \emph{Kernel} of a Morphism $f : X \rightarrow Y$ is the most
-general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
-any Morphism $k' : K' \rightarrow X$ such that $fk' = 0_{K'Y}$, there
-exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Equalizer}\label{sec:equalizer}
-% --------------------------------------------------------------------
-
-An \emph{Equalizer} is an (Unique) Object $E$ and Morphism $e: E
-\rightarrow A$ such that for a given pair of parallel Morphisms $f,g :
-A \rightarrow B$:
-\[
-  f \circ e = g \circ e
-\]
-$e$ is necessarily a Monomorphism.
-
-The Category $\mathbf{Ab}$ has all Equalizers.
-
-%FIXME merge with kernels?
-
-
-
-\subsection{Coequalizer}\label{sec:coequalizer}
-
-An \emph{Coequalizer} is an (Unique) Object $Q$ and Morphism $q: B
-\rightarrow Q$ such that for a given pair of parallel Morphisms $f,g :
-A \rightarrow B$:
-\[
-  q \circ f = q \circ g
-\]
-$q$ is necessarily an Epimorphism.
-
-A Coequalizer in a Category $\mathbf{C}$ is an Equalizer in
-$\mathbf{C}$ and \emph{vice versa}.
-
-The Categories $\mathbf{Set}$ and $\mathbf{Pos}$ have all
-Coequalizers.
-
-
-
-% --------------------------------------------------------------------
 \subsection{Factors}\label{sec:morphism_factor}
 % --------------------------------------------------------------------
 
@@ -992,6 +945,8 @@ A \emph{Monad} is a Composition $G \circ F$ of Adjoint Functors $F :
 \mathbf{C} \rightarrow \mathbf{D}$ and $G : \mathbf{D} \rightarrow
 \mathbf{C}$.
 
+Terminal Object %FIXME terminal object required in category?
+
 \emph{Kleisli Category}
 
 
@@ -1133,55 +1088,6 @@ Isomorphisms are effectively two-way Rules of Inference.
 
 
 % --------------------------------------------------------------------
-\subsection{Initial \& Terminal Objects}\label{sec:initial_terminal}
-% --------------------------------------------------------------------
-
-There are two Universal Properties of Objects: \emph{Initial} and
-\emph{Terminal}.
-
-An Object $0$ in a Category $\mathbf{C}$ is Initial if for every other
-Object $A$ in the Category there is a unique Morphism $0 \rightarrow
-A$.
-
-An Object $1$ in a Category $\mathbf{C}$ is Terminal if for every
-other Object $A$ in the Category there is a unique Morphism $A
-\rightarrow 1$.
-
-An Object that is both an Initial and a Terminal Object is called a
-\emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
-Object is called a \emph{Pointed Category}
-(\S\ref{sec:pointed_category}). For a Zero Object, $Z \in \mathbf{C}$,
-there is a Unique Morphism between any two Objects, $A, B \in
-\mathbf{C}$ called the \emph{Composite} in $Z$:
-\[
-  A \rightarrow Z \rightarrow B
-\]
-
-It follows for any pair of Objects that are both Terminal and/or both
-Initial that an Isomorphism (\S\ref{sec:isomorphism}) exists
-between them; that is, Universal Objects are always unique up to
-Isomorphism.
-
-As an example, in $\mathbf{Set}$ and $\mathbf{Pos}$, all Singleton
-Sets are Terminal, and as such they are all Isomorphic to each other.
-Given a Set $X$:
-\[
-  |X| = 1 \leftrightarrow \forall Y, |Hom_{\mathbf{Set}}(Y,X)| = 1
-\]
-Also in $\mathbf{Set}$ the Empty Set is Initial as the only mapping
-from it to any other Set is the Empty Function. In $\mathbf{Grp}$, a
-Trivial Group ${1}$ is a Zero Object.
-
-In a particular Poset, a Top Element is a Terminal Object and a Bottom
-Element is an Initial Object.
-
-
-
-\subsection{Pointed Category}\label{sec:pointed_category}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Universal Morphism}\label{sec:universal_morphism}
 % --------------------------------------------------------------------
 
@@ -1285,6 +1191,10 @@ Category of Diagrams (\S\ref{sec:setvalued_functor})
 
 \subsubsection{Cone}\label{sec:functor_cone}
 
+A \emph{Cone} in a Diagram $D : \mathbf{J} \rightarrow \mathbf{C}$ is
+an Object $U$ and a Unique Morphism for each Object in the Diagram
+such that any resulting triangle Commutes.
+
 Co-cone
 
 
@@ -1328,6 +1238,24 @@ A \emph{Limit} is defined as a Universal Cone
 
 
 
+\subsubsection{Terminal Object}\label{sec:terminal_object}
+
+An Object $1$ in a Category $\mathbf{C}$ is \emph{Terminal} if for
+every other Object $A$ in the Category there is a unique Morphism $A
+\rightarrow 1$. A Unique, Canonical Isomorphism exists between any two
+Terminal Objects in $\mathbf{C}$.
+
+As an example, in $\mathbf{Set}$ and $\mathbf{Pos}$, all Singleton
+Sets are Terminal, and as such they are all Isomorphic to each other.
+Given a Set $X$:
+\[
+  |X| = 1 \leftrightarrow \forall Y, |Hom_{\mathbf{Set}}(Y,X)| = 1
+\]
+
+In a Poset, a Top Element is a Terminal Object.
+
+
+
 \subsubsection{Product}\label{sec:product}
 
 A \emph{Product} of two Objects $P = A \times B$:
@@ -1339,10 +1267,12 @@ is a Product of $A$ and $B$ if and only if for any $A
 \[
   \exists!u : Z \rightarrow P
 \]
-with $p_i \circ u = z_i$. $u$ may also be written as $\langle z_1, z_2
-\rangle$ as it is uniquely determined by $z_1$ and $z_2$. A Product of
-two Categories is uniquiely Isomorphic to the Cartesian Product
-(\S\ref{sec:cartesian_product}) of the two Sets.
+with $p_i \circ u = z_i$. $u$ is called a \emph{Factorization} and may
+also be written as $\langle z_1, z_2 \rangle$ as it is uniquely
+determined by $z_1$ and $z_2$.
+
+A Product of two Categories is uniquiely Isomorphic to the Cartesian
+Product (\S\ref{sec:cartesian_product}) of the two Sets.
 
 In a Poset, the Product of two Elements is the Meet or Greatest Lower
 Bound (\S\ref{sec:glb_lub}).
@@ -1372,9 +1302,8 @@ and Morphisms of $\mathbf{C}$ to their Product:
 A Category with Binary Products and a Terminal Object is said to have
 all \emph{Finite Products}.
 
-Products and Coproducts are unique up to Isomorphism
-(\S\ref{sec:isomorphism}). The Canonical Commutative Isomorphism $A
-\times B \cong B \times A$ is:
+Products are unique up to Isomorphism (\S\ref{sec:isomorphism}). The
+Canonical Commutative Isomorphism $A \times B \cong B \times A$ is:
 \[
   \langle p_2, p_1 \rangle : A \times B \rightarrow B \times A
 \]
@@ -1394,23 +1323,10 @@ Rule of Inference:
     {X \rightarrow A \times B}
   }\times
 \]
-and for Coproducts:
-\[
-  {
-    \frac{A \rightarrow X \;\;\;\; B \rightarrow X}
-    {A + B \rightarrow X}
-  }+
-\]
 
 Products are also Associative:
 \[
   A \times (B \times C) \cong (A \times B) \times C
-\]
-
-In the Category $\mathbf{Ab}$ there is a Canonical
-Isomorphism:\cite{awodey06}
-\[
-  A + B \cong A \times B
 \]
 
 
@@ -1426,7 +1342,200 @@ By Associativity of Products, $A \times B \times C = (A \times B)
 
 
 
-\subsubsection{Exponential}\label{sec:category_exponential}
+\paragraph{Power}\label{sec:power}
+
+
+
+\subsubsection{Equalizer}\label{sec:equalizer}
+
+An \emph{Equalizer} is an (Unique) Object $E$ and Morphism $e: E
+\rightarrow A$ such that for a given pair of parallel Morphisms $f,g :
+A \rightarrow B$:
+\[
+  f \circ e = g \circ e
+\]
+$e$ is necessarily a Monomorphism.
+
+The Category $\mathbf{Ab}$ has all Equalizers.
+
+
+
+\paragraph{Kernel}\label{sec:morphism_kernel}
+\hfill \\
+
+The \emph{Kernel} of a Morphism $f : X \rightarrow Y$ is the most
+general Morphism $k : K \rightarrow X$ such that $fk = 0_{KY}$ and for
+any Morphism $k' : K' \rightarrow X$ such that $fk' = 0_{K'Y}$, there
+exists a unique Morphism $u : K' \rightarrow K$ such that $ku = k'$.
+
+A Kernel is a special case of an Equalizer where one of the Morphisms
+is a Zero Morphism (\S\ref{sec:zero_morphism}).
+
+
+
+\subsubsection{Pullback}\label{sec:pullback}
+
+For a Category $\mathbf{C}$, a \emph{Pullback} of Morphisms $f : A
+\rightarrow C$ and $g : B \rightarrow C$ are Morphisms $p_1 : P
+\rightarrow A$ and $p_2 : P \rightarrow B$ with the Universal Property
+that $fp_1 = g_p2$. This implies for any given $z_1 : Z \rightarrow A$
+and $z_2 : Z \rightarrow B$ such that $fz_1 = gz_2$, there is a Unique
+Morphism $u : Z \rightarrow P$ such that $z_1 = p_1 u$ and $z_2 = p_2
+u$.
+
+A Pullback is the Limit of a Cospan (\S\ref{sec:cospan}).
+
+
+
+\subsubsection{Inverse Limit}\label{sec:inverse_limit}
+
+\subsubsection{Complete Category}\label{sec:complete_category}
+
+A \emph{Complete Category} is a Category where all Small Limits exist.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Colimit} \label{sec:colimit}
+% --------------------------------------------------------------------
+
+Adjoint Functor (\S\ref{sec:adjoint_functor})
+
+Diagonal Functor (\S\ref{sec:diagonal_functor})
+
+Small Limit
+
+A \emph{Colimit} is defined as a Universal Cone
+(\S\ref{sec:universal_cone})
+
+
+
+\subsubsection{Initial Object}\label{sec:initial_object}
+
+An Object $0$ in a Category $\mathbf{C}$ is \emph{Initial} if for
+every other Object $A$ in the Category there is a unique Morphism $0
+\rightarrow A$. A Unique Canonical Isomorphism exists between any two
+Initial Objects in $\mathbf{C}$.
+
+An Initial Object is the Colimit of the Empty Diagram $\varnothing
+\rightarrow \mathbb{C}$
+
+In $\mathbf{Set}$ the Empty Set is Initial as the only mapping from it
+to any other Set is the Empty Function.
+
+In a Poset, the Bottom Element is an Initial Object.
+
+All Universal Properties are Initial Objects somewhere...
+%FIXME catsters
+
+
+
+\subsubsection{Coproduct}\label{sec:coproduct}
+
+Disjoint Union (\S\ref{sec:disjoint_union})
+
+The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
+is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;}
+Z \xleftarrow{\;\;z_2\;\;} B$:
+\[
+  \exists!u : Q \rightarrow Z
+\]
+with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
+and Coprojections $q_i$ may be called \emph{Injections} (although they
+are not necessarily Injective Morphisms).
+
+The Universal Mapping Property for Coproducts may be stated as a
+two-way Rule of Inference:
+\[
+  {
+    \frac{A \rightarrow X \;\;\;\; B \rightarrow X}
+    {A + B \rightarrow X}
+  }+
+\]
+
+An example of a Coproduct in $\mathbf{Set}$ is the Disjoint Union
+(\S\ref{sec:disjoint_union}) in Set Theory or the Tagged Union
+(\S\ref{sec:sum_type}) in Type Theory. The Coproduct of a Monoid of
+Group is sometimes defined as a Tensor Product
+(\S\ref{sec:tensor_product}). In a Poset the Coproduct of two Elements
+is the Join or Leas Upper Bound (\S\ref{sec:glb_lub}).
+
+In the Category $\mathbf{Ab}$ there is a Canonical
+Isomorphism:\cite{awodey06}
+\[
+  A + B \cong A \times B
+\]
+
+
+
+\paragraph{Copower}\label{sec:copower}
+
+
+
+\subsubsection{Coequalizer}\label{sec:coequalizer}
+
+An \emph{Coequalizer} is an (Unique) Object $Q$ and Morphism $q: B
+\rightarrow Q$ such that for a given pair of parallel Morphisms $f,g :
+A \rightarrow B$:
+\[
+  q \circ f = q \circ g
+\]
+$q$ is necessarily an Epimorphism.
+
+A Coequalizer in a Category $\mathbf{C}$ is an Equalizer in
+$\mathbf{C}$ and \emph{vice versa}.
+
+The Categories $\mathbf{Set}$ and $\mathbf{Pos}$ have all
+Coequalizers.
+
+
+
+\paragraph{Cokernel}\label{sec:cokernel}
+
+
+
+\subsubsection{Pushout}\label{sec:pushout}
+
+A Pushout is the Colimit of a Span (\S\ref{sec:span})
+
+
+
+\subsubsection{Direct Limit}\label{sec:direct_limit}
+
+\subsubsection{Cocomplete Category}\label{sec:cocomplete_category}
+
+A \emph{Cocomplete Category} is a Category where all Small Colimits
+exist.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Zero Object}\label{sec:zero_object}
+% --------------------------------------------------------------------
+
+An Object that is both an Initial and a Terminal Object is called a
+\emph{Zero Object} (or \emph{Null Object}). A Category with a Zero
+Object is called a \emph{Pointed Category}
+(\S\ref{sec:pointed_category}).
+
+For a Zero Object, $Z \in \mathbf{C}$, there is a Unique Morphism
+between any two Objects, $A, B \in \mathbf{C}$ called the
+\emph{Composite} in $Z$:
+\[
+  A \rightarrow Z \rightarrow B
+\]
+
+In $\mathbf{Grp}$, a Trivial Group ${1}$ is a Zero Object.
+
+
+
+\subsection{Pointed Category}\label{sec:pointed_category}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Exponential}\label{sec:category_exponential}
+% --------------------------------------------------------------------
 
 Given a Category $\mathbf{C}$ with Binary Products between any two
 Objects:
@@ -1480,7 +1589,7 @@ Exponentials do not exists for Group Homomorphisms but they do for
 Groupoids.
 
 A Category with an Exponential for any two Objects and a Terminal
-Object (\S\ref{sec:initial_terminal}) is a Cartesian Closed Category
+Object (\S\ref{sec:terminal_object}) is a Cartesian Closed Category
 (\S\ref{sec:cartesian_closed}). In a Cartesian Closed Category the
 Functor sending $B$ to $B^A$ is the Right-adjoint Functor
 (\S\ref{sec:adjoint_functor}) $- \times Y$ and there is a Bijection
@@ -1500,78 +1609,6 @@ corresponds to an Object:
 \[
   curry : ((C^B)^A)^{C^{A \times B}}
 \]
-
-
-
-\subsubsection{Pullback}\label{sec:pullback}
-
-For a Category $\mathbf{C}$, a \emph{Pullback} of Morphisms $f : A
-\rightarrow C$ and $g : B \rightarrow C$ are Morphisms $p_1 : P
-\rightarrow A$ and $p_2 : P \rightarrow B$ with the Universal Property
-that $fp_1 = g_p2$. This implies for any given $z_1 : Z \rightarrow A$
-and $z_2 : Z \rightarrow B$ such that $fz_1 = gz_2$, there is a Unique
-Morphism $u : Z \rightarrow P$ such that $z_1 = p_1 u$ and $z_2 = p_2
-u$.
-
-A Pullback is the Limit of a Cospan (\S\ref{sec:cospan}).
-
-
-
-\subsubsection{Inverse Limit}\label{sec:inverse_limit}
-
-\subsubsection{Equalizer}\label{sec:limit_equalizer}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Colimit} \label{sec:colimit}
-% --------------------------------------------------------------------
-
-Adjoint Functor (\S\ref{sec:adjoint_functor})
-
-Diagonal Functor (\S\ref{sec:diagonal_functor})
-
-Small Limit
-
-A \emph{Colimit} is defined as a Universal Cone
-(\S\ref{sec:universal_cone})
-
-
-
-\subsubsection{Coproduct}\label{sec:coproduct}
-
-Disjoint Union (\S\ref{sec:disjoint_union})
-
-The Diagram $A \xrightarrow{\;\;q_1\;\;} Q \xleftarrow{\;\;q_2\;\;} B$
-is a \emph{Coproduct} $A + B$ if for any $A \xrightarrow{\;\;z_1\;\;}
-Z \xleftarrow{\;\;z_2\;\;} B$:
-\[
-  \exists!u : Q \rightarrow Z
-\]
-with $u \circ q_i = z_i$. $u$ may also be written as $[ z_1, z_2 ]$
-and Coprojections $q_i$ may be called \emph{Injections} (although they
-are not necessarily Injective Morphisms).
-
-An example of a Coproduct in $\mathbf{Set}$ is the Disjoint Union
-(\S\ref{sec:disjoint_union}) in Set Theory or the Tagged Union
-(\S\ref{sec:sum_type}) in Type Theory. The Coproduct of a Monoid of
-Group is sometimes defined as a Tensor Product
-(\S\ref{sec:tensor_product}). In a Poset the Coproduct of two Elements
-is the Join or Leas Upper Bound (\S\ref{sec:glb_lub}).
-
-
-
-\subsubsection{Pushout}\label{sec:pushout}
-
-A Pushout is the Colimit of a Span (\S\ref{sec:span})
-
-
-
-\subsubsection{Direct Limit}\label{sec:direct_limit}
-
-\subsubsection{Complete Category}\label{sec:complete_category}
-
-A \emph{Complete Category} is a Category where all Small Limits exist.
 
 
 
@@ -1986,7 +2023,7 @@ A Category is \emph{Cartesian Closed} if it has:
 \item A Product Functor (\S\ref{sec:product})
 \item An Exponential for any pair of Objects
   (\S\ref{sec:category_exponential})
-\item A Terminal Object (\S\ref{sec:initial_terminal})
+\item A Terminal Object (\S\ref{sec:terminal_object})
 \end{enumerate}
 By these conditions and the Universal Mapping Property of
 Exponentials:
