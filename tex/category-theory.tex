@@ -239,6 +239,10 @@ If $I$ is a Full Functor then $S$ is a \emph{Full Subcategory}.
 
 
 
+\subsubsection{Full Subcategory}\label{sec:full_subcategory}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Finite Category}\label{sec:finite_category}
 % --------------------------------------------------------------------
@@ -267,6 +271,15 @@ Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
 % --------------------------------------------------------------------
 \subsection{Discrete Category}\label{sec:discrete_category}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Thin Category}\label{sec:thin_category}
+% --------------------------------------------------------------------
+
+A \emph{Thin Category} has at most one Morphism between Objects, e.g.
+a Preorder.
+
+
 
 % --------------------------------------------------------------------
 \subsection{List of Categories}\label{sec:categories_list}
@@ -612,7 +625,8 @@ and Morphisms of $\mathbf{D}$ with the following Equivalences:
 Every Category has an Identity Functor $1_{\mathbf{C}} : \mathbf{C}
 \rightarrow \mathbf{C}$ and the Category of all Small Categories and
 Functors is denoted $\mathbf{Cat}$. An Identity Functor is an example
-of an \emph{Endofunctor} which is a Functor from a Category to itself.
+of an \emph{Endofunctor} (\S\ref{sec:endofunctor}) which is a Functor
+from a Category to itself.
 
 Note that in constructions (\S\ref{sec:category_construction}) where a
 Functor appears, if that Functor is an Identity Functor, the Category
@@ -622,7 +636,8 @@ Because Functors preserve Identities, they also perserve Split
 Epimorphisms and Monomorphisms (\S\ref{sec:split_epimorphism},
 \ref{sec:split_monomorphism}).
 
-Functors may also be defined in terms of the Object Mapping and Hom-sets:
+Functors may also be defined in terms of the Object Mapping and
+Hom-sets:
 \[
   F_{A,B} : Hom_{\mathbf{C}}(A,B) \rightarrow Hom_{\mathbf{D}}(F(A),F(B))
 \]
@@ -645,6 +660,10 @@ Every Functor $F$ defines a Kernel Category
 (\S\ref{sec:kernel_category}) $ker(F)$.
 
 
+
+% --------------------------------------------------------------------
+\subsection{Endofunctor}\label{sec:endofunctor}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Faithful \& Full Functor}\label{sec:faithful_functor}
@@ -880,6 +899,12 @@ called the \emph{Yoneda Embedding}.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Constant Functor}\label{sec:constant_functor}
+% --------------------------------------------------------------------
+
+$\Delta_X : \mathbf{C} \rightarrow \mathbf{D}$
+
 
 
 % --------------------------------------------------------------------
@@ -890,7 +915,7 @@ For Functor Category (\S\ref{sec:functor_category})
 $\mathbf{C}^\mathbf{J}$ with Small Index Category $\mathbf{J}$, a
 \emph{Diagonal Functor} $\Delta : \mathbf{C} \rightarrow
 \mathbf{C}^\mathbf{J}$ assigns to each Object $A$ of $\mathbf{C}$ the
-Constant Functor $\Delta(A) \in \mathbf{C}^\mathbf{J}$ with fixed $A$
+Constant Functor $\Delta_A \in \mathbf{C}^\mathbf{J}$ with fixed $A$
 and to each Morphism $f : A \rightarrow B$ of $\mathbf{C}$ the Natural
 Transformation $\eta$ in $\mathbf{C}^\mathbf{J}$ given by $\eta_j =
 f$.
@@ -943,7 +968,23 @@ A \emph{Monad} is a Composition $G \circ F$ of Adjoint Functors $F :
 
 Terminal Object %FIXME terminal object required in category?
 
-\emph{Kleisli Category}
+
+
+\paragraph{Eilenberg-Moore Category}\label{sec:eilenberg_moore}
+\hfill \\
+
+$\mathbf{C}^T$ Category of $T$-algebras for Monad $T$ in Category
+$\mathbf{C}$
+
+
+
+\paragraph{Kleisli Category}\label{sec:kleisli_category}
+\hfill \\
+
+For Monad $T$ and Category $\mathbf{C}$, \emph{Kleisli Category}
+$\mathbf{C}_T$ equivalent to the Category of Free $T$-algebras-- Full
+Subcategory (\S\ref{sec:full_subcategory}) of Eilenberg-Moore Category
+$\mathbf{C}^T$
 
 
 
@@ -1066,6 +1107,10 @@ In First-order Logic (Provability $\vdash$):
 % ====================================================================
 \section{Universal Properties}\label{sec:universal_property}
 % ====================================================================
+
+Unique up to Unique Isomorphism
+
+
 
 % --------------------------------------------------------------------
 \subsection{Universal Mapping Property}
@@ -1871,6 +1916,9 @@ on the Edges of the Graph. A Graph with no Edges generates a Discrete
 Category (\S\ref{sec:category}). The Free Category on a Graph with
 two Vertices and one Edge between them is the Finite Category
 $\mathbf{2}$.
+
+Any Directed Acyclic Graph generates a Partial Order as its Free
+Category.
 
 
 
