@@ -200,6 +200,10 @@ Some Properties of Hom-sets:
 
 A definition of Categories can be given in terms of Hom-sets. %FIXME
 
+Internal Hom-set
+
+External Hom-set
+
 
 
 % --------------------------------------------------------------------
@@ -552,6 +556,25 @@ Composition of Catamorphism followed by Anamorphism
 
 
 % --------------------------------------------------------------------
+\subsection{Heteromorphism}\label{sec:heteromorphism}
+% --------------------------------------------------------------------
+
+For Functor $L : \mathbf{C} \rightarrow \mathbf{D}$, the Set of
+\emph{Heteromorphisms} of Objects $c \in \mathbf{C}$ and $d \in
+\mathbf{D}$ is the Hom-set:
+\[
+  Het(c,d) = \mathbf{D}(L(c), d)
+\]
+and if $L$ has a Right Adjoint then this is equivalent to:
+\[
+  Het(c,d) = \mathbf{C}(c, R(d))
+\]
+
+Profunctor (\S\ref{sec:profunctor})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Constant Morphism}\label{sec:constant_morphism}
 % --------------------------------------------------------------------
 
@@ -622,11 +645,12 @@ and Morphisms of $\mathbf{D}$ with the following Equivalences:
 \item $F(g \circ f) = F(g) \circ F(f)$
 \item $F(1_A) = 1_{F(A)}$
 \end{itemize}
-Every Category has an Identity Functor $1_{\mathbf{C}} : \mathbf{C}
-\rightarrow \mathbf{C}$ and the Category of all Small Categories and
-Functors is denoted $\mathbf{Cat}$. An Identity Functor is an example
-of an \emph{Endofunctor} (\S\ref{sec:endofunctor}) which is a Functor
-from a Category to itself.
+Every Category has an Identity Functor (\S\ref{sec:identity_functor})
+$1_{\mathbf{C}} : \mathbf{C} \rightarrow \mathbf{C}$ and the Category
+of all Small Categories and Functors is denoted $\mathbf{Cat}$. An
+Identity Functor is an example of an \emph{Endofunctor}
+(\S\ref{sec:endofunctor}) which is a Functor from a Category to
+itself.
 
 Note that in constructions (\S\ref{sec:category_construction}) where a
 Functor appears, if that Functor is an Identity Functor, the Category
@@ -663,6 +687,18 @@ Every Functor $F$ defines a Kernel Category
 
 % --------------------------------------------------------------------
 \subsection{Endofunctor}\label{sec:endofunctor}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Constant Functor}\label{sec:constant_functor}
+% --------------------------------------------------------------------
+
+$\Delta_X : \mathbf{C} \rightarrow \mathbf{D}$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Identity Functor}\label{sec:identity_functor}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -719,10 +755,6 @@ Cartesian Closed Category (\S\ref{sec:cartesian_closed}).
 Sheave (\S\ref{sec:sheave})
 
 
-
-% --------------------------------------------------------------------
-\subsection{Profunctor}\label{sec:profunctor}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Hom-functor}\label{sec:hom_functor}
@@ -896,14 +928,6 @@ called the \emph{Yoneda Embedding}.
 \[
   + : \mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}
 \]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Constant Functor}\label{sec:constant_functor}
-% --------------------------------------------------------------------
-
-$\Delta_X : \mathbf{C} \rightarrow \mathbf{D}$
 
 
 
@@ -1796,8 +1820,7 @@ giving:
 
 
 
-\paragraph{Bifunctor}\label{sec:bifunctor}
-\hfill \\
+\subsubsection{Bifunctor}\label{sec:bifunctor}
 
 A \emph{Bifunctor} is a Functor of two Variables from a Product
 Category to an arbitrary Category:
@@ -1806,6 +1829,22 @@ Category to an arbitrary Category:
 \]
 
 A \emph{Multifunctor} is a generalized to $n$ or more Variables.
+
+
+
+\paragraph{Profunctor}\label{sec:profunctor}
+\hfill \\
+
+Bimodule (\S\ref{sec:bimodule})
+
+$F : \mathbf{C} \nrightarrow \mathbf{D}$
+
+$H_F : \mathbf{D}^{op} \times \mathbf{C} \rightarrow \mathbf{Set}$
+
+Set of Heteromorphisms (\S\ref{sec:heteromorphism})
+
+A Profunctor is a Bifunctor that is Contravariant in the first
+argument and Covariant in the second.
 
 
 
@@ -1826,6 +1865,7 @@ and $(U \times V)$ is the unique Functor such that:
 \[
   P'(U \times V) = UP, \;\; Q'(U \times V) = VQ
 \]
+%FIXME is the above correct?
 
 
 
@@ -2142,6 +2182,14 @@ $\mathbf{E}/X$ are Cartesian Closed Categories.
 
 Model for Intuitionistic Type Theory with Dependent Types
 (\S\ref{sec:intuitionistic_type})
+
+
+
+\subsubsection{Bicartesian Closed Category}\label{sec:bicartesian}
+
+A \emph{Bicartesian Closed Category} is a Cartesian Closed Category
+that also has an Initial Object and Coproducts that are distributed
+over by Products.
 
 
 
