@@ -702,6 +702,16 @@ $\Delta_X : \mathbf{C} \rightarrow \mathbf{D}$
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Continuous Functor}\label{sec:continuous_functor}
+% --------------------------------------------------------------------
+
+A \emph{Continuous Functor} preserves Limits
+
+Hom-functor (\S\ref{sec:hom_functor})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Faithful \& Full Functor}\label{sec:faithful_functor}
 % --------------------------------------------------------------------
 
@@ -756,6 +766,13 @@ Sheave (\S\ref{sec:sheave})
 
 
 
+\paragraph{Representable Presheaf}\label{sec:representable_presheaf}
+\hfill \\
+
+Limit (\S\ref{sec:limit})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Hom-functor}\label{sec:hom_functor}
 % --------------------------------------------------------------------
@@ -800,8 +817,9 @@ The Hom-functor $Hom(-,-)$ is a Covariant Bifunctor
   Hom_\mathbf{C}(-,-):
     \mathbf{C}^{op} \times \mathbf{C} \rightarrow \mathbf{Set}
 \]
-each half of which is a \emph{Representable Functor}
-\S\ref{sec:representable_functor}.
+each half of which is a Representable Functor
+\S\ref{sec:representable_functor}. Hom-functors are Continuous
+Functors (\S\ref{sec:hom_functor}).
 
 The Category of all Hom-functors and \emph{Natural Transformations}
 (\S\ref{sec:natural_transformation}) between them, $\{ h^A | A \in
@@ -1132,12 +1150,12 @@ In First-order Logic (Provability $\vdash$):
 
 % --------------------------------------------------------------------
 \subsection{Extranatural Transformation}
-\label{sec:extranatural_tranformation}
+\label{sec:extranatural_transformation}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Dinatural Transformation}
-\label{sec:dinatural_tranformation}
+\label{sec:dinatural_transformation}
 % --------------------------------------------------------------------
 
 
@@ -1273,7 +1291,11 @@ Category of Diagrams (\S\ref{sec:setvalued_functor})
 A \emph{Cone} in a Diagram $D : \mathbf{J} \rightarrow \mathbf{C}$ is
 an Object $C \in \mathbf{C}_0$ and a Unique Morphism $c_j : C
 \rightarrow D_j$ for each Object in the Diagram such that any
-resulting triangle Commutes.
+resulting triangles Commute.
+
+This is equivalent to a Natural Tranformation from the Constant
+Functor (\S\ref{sec:constant_functor}) $\Delta_C$ to the Diagram
+Functor $D$.
 
 Cocone (\S\ref{sec:cocone})
 
@@ -1318,6 +1340,8 @@ Category.
 
 \emph{Span} (or \emph{Roof} or \emph{Correspondence})
 
+Diagram over $1 \rightarrow 2 \leftarrow 3$
+
 The Colimit of a Span is a Pushout (\S\ref{sec:pushout})
 
 
@@ -1340,8 +1364,21 @@ The Limit of a Cospan is a Pullback (\S\ref{sec:pullback})
 
 Colimit (\S\ref{sec:colimit})
 
-A \emph{Limit} is defined as a Universal Cocone
-(\S\ref{sec:universal_cocone})
+A \emph{Limit} is defined as a Terminal Object in the Cone Category
+(\S\ref{sec:category_cone}) over a Diagram $D : \mathbf{J} \rightarrow
+\mathbf{C}$:
+\[
+  c_i : \lim_{\xleftarrow[j]{}} D_j \rightarrow D_i
+\]
+
+A Limit is also definable as a Natural Isomorphism (a Natural
+Transformation with every Component an Isomorphism) between the two
+Functors:
+\[
+  \mathbf{C}(c, \lim_{\xleftarrow[j]{}} D) \cong Nat (\Delta_c, D)
+\]
+
+Representable Presheaf (\S\ref{sec:representable_presheaf})
 
 
 
@@ -1480,6 +1517,14 @@ is a Zero Morphism (\S\ref{sec:zero_morphism}).
 
 
 
+\paragraph{End}\label{sec:end}
+\hfill \\
+
+\emph{End} of a Functor is a Universal Extranatural Transformation
+(\S\ref{sec:extranatural_transformation})
+
+
+
 \subsubsection{Pullback}\label{sec:pullback}
 
 For a Category $\mathbf{C}$, a \emph{Pullback} of Morphisms $f : A
@@ -1491,6 +1536,10 @@ Morphism $u : Z \rightarrow P$ such that $z_1 = p_1 u$ and $z_2 = p_2
 u$.
 
 A Pullback is the Limit of a Cospan (\S\ref{sec:cospan}).
+
+Subtyping (\S\ref{sec:subtype})
+
+Type Inference (\S\ref{sec:type_inference}) (Unification)
 
 
 
@@ -1595,9 +1644,13 @@ $\mathbf{C}$ and \emph{vice versa}.
 The Categories $\mathbf{Set}$ and $\mathbf{Pos}$ have all
 Coequalizers.
 
+Quotient (\S\ref{sec:equivalence_class})
+
 
 
 \paragraph{Cokernel}\label{sec:cokernel}
+
+\paragraph{Coend}\label{sec:coend}
 
 
 
@@ -1724,6 +1777,12 @@ corresponds to an Object:
 % --------------------------------------------------------------------
 
 \emph{Trace Monoid} (\S\ref{sec:trace_monoid})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Kan Extension}\label{sec:kan_extension}
+% --------------------------------------------------------------------
 
 
 
@@ -2117,6 +2176,10 @@ cod(g'_1)$.
 
 
 % --------------------------------------------------------------------
+\subsection{Closed Category}\label{sec:closed_category}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Monoidal Category}\label{sec:monoidal_category}
 % --------------------------------------------------------------------
 
@@ -2138,9 +2201,55 @@ With respect to Coproducts, $\mathbf{Set}$ is a Symmetric Monoidal
 Category with the Disjoint Sum as the Bifunctor and the Empty
 Set as the Identity Element.
 
+Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda})
 
+
+
+\subsubsection{Rigid Category}\label{sec:rigid_category}
+
+\subsubsection{Autonomous Category}\label{sec:autonomous_category}
 
 \subsubsection{Closed Monoidal Category}\label{sec:closed_monoidal}
+
+Linear Type Systems (\S\ref{sec:linear_type}) are the Internal
+Language of Closed Symmetric (\S\ref{sec:symmetric_monoidal}) Monoidal
+Categories
+
+
+
+\subsubsection{Braided Monoidal Category}\label{sec:braided_monoidal}
+
+\paragraph{Symmetric Monoidal Category}\label{sec:symmetric_monoidal}
+\hfill \\
+
+Linear Type Systems (\S\ref{sec:linear_type}) are the Internal
+Language of Closed (\S\ref{sec:closed_monoidal}) Symmetric Monoidal
+Categories
+
+
+
+\subsubsection{Compact Closed Category}\label{sec:compact_closed}
+
+\paragraph{Simplex Category}\label{sec:simplex_category}
+
+\subparagraph{Simplicial Set}\label{sec:simplicial_set}
+\hfill \\
+
+A \emph{Simplicial Set} is a Contravariant Functor from the
+\emph{Simplex Category} $\Delta$ (\S\ref{sec:simplex_category}) into
+$\mathbf{Set}$. An equivalent definition is in terms of Presheaves:
+\[
+  X: \Delta^{op} \rightarrow \mathbf{Set}
+\]
+
+
+
+\paragraph{Pro-simplicial}\label{sec:pro_simplicial}
+\hfill \\
+
+Shape Theory (\S\ref{sec:shape_theory})
+
+
 
 \subsubsection{Cartesian Closed Category}\label{sec:cartesian_closed}
 
@@ -2214,9 +2323,12 @@ Model for Intuitionistic First-order Logic
 
 
 
-\subsubsection{Braided Monoidal Category}\label{sec:braided_monoidal}
+% --------------------------------------------------------------------
+\subsection{Enriched Category}\label{sec:enriched_category}
+% --------------------------------------------------------------------
 
-\paragraph{Symmetric Monoidal Category}\label{sec:symmetric_monoidal}
+Replace Hom-sets with Objects from a general Monoidal Category
+(\S\ref{sec:monoidal_category})
 
 
 
@@ -2434,28 +2546,6 @@ $2$-category regarded as a System of Theories
 Categorical Logic: collection of Contexts with Operations of Context
 Extension/Substitution and Quantification on the Categories of
 Propositions as Types in each Context
-
-
-
-% --------------------------------------------------------------------
-\subsection{Simplex Category}\label{sec:simplex_category}
-% --------------------------------------------------------------------
-
-\subsubsection{Simplicial Set}\label{sec:simplicial_set}
-
-A \emph{Simplicial Set} is a Contravariant Functor from the
-\emph{Simplex Category} $\Delta$ (\S\ref{sec:simplex_category}) into
-$\mathbf{Set}$. An equivalent definition is in terms of Presheaves:
-\[
-  X: \Delta^{op} \rightarrow \mathbf{Set}
-\]
-
-
-
-\paragraph{Pro-simplicial}\label{sec:pro_simplicial}
-\hfill \\
-
-Shape Theory (\S\ref{sec:shape_theory})
 
 
 
