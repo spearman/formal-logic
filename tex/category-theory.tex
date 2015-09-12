@@ -323,6 +323,8 @@ a Preorder.
 \item [Grph] all Small Graphs and Graph Morphisms
 \item [Cat] all Small Categories and Functors
 \item [Cat'] all Large Categories and Functors
+\item [Vect$_K$] all Finite-dimensional Vector Spaces over Field $K$
+  and $K$-linear Transformations
 \item [Vect$_\mathbb{R}$] all Finite-dimensional Vector Spaces over
   $\mathbb{R}$ and Linear Maps
 \item [Top] all Topological Spaces and Continuous Maps (Locally Small)
@@ -372,6 +374,13 @@ such are used to define the notion of Subobject
 
 Left-invertible Morphisms are necessarily Monomorphisms (Split
 Monomorphism \S\ref{sec:split_monomorphism}).
+
+As a representing Subobjects (\S\ref{sec:subobject}) Monomorphisms in:
+\begin{itemize}
+  \item $\mathbf{Set}$ are generalized Subsets
+  \item $\mathbf{Grp}$ are generalized Subgroups
+  \item $\mathbf{Top}$ are generalized Subspaces
+\end{itemize}
 
 
 
@@ -602,6 +611,17 @@ into $X$:
 \[
   m : M \rightarrowtail X
 \]
+The \emph{Inclusion Relation} between two Subobjects $m$ and $m'$ is
+defined as:
+\[
+  m \subseteq m' \Leftrightarrow \exists f : m \rightarrow m'
+\]
+Two Subobjects are \emph{Equivalent} if and only if they are
+Isomorphic:
+\[
+  m \subseteq m' \wedge m' \subseteq m \Leftrightarrow m \equiv m'
+\]
+
 A Morphism between two Subobjects is a Morphism in the Quotient
 Category $\mathbf{C}/X$ giving the Category of Subobjects of $X$ in
 $\mathbf{C}$ as $Sub_{\mathbf{C}}(X)$. Because there is at most one
@@ -670,8 +690,8 @@ where $F_{A,A}1_A = 1_{F(A)}$ and Composition is Commutative.
 Functors between Poset Categories are Monotonic Functions
 (\S\ref{sec:monotonic}).
 
-A \emph{Forgetful Functor} is one that drops some Property of the
-Input Category in the Output Category.
+A \emph{Forgetful Functor} (\S\ref{sec:forgetful_functor}) is one that
+drops some Property of the Input Category in the Output Category.
 
 An \emph{Inclusion Functor} is a Functor from a Subcategory to its
 containing Category (\S\ref{sec:subcategory}).
@@ -689,6 +709,14 @@ Every Functor $F$ defines a Kernel Category
 \subsection{Endofunctor}\label{sec:endofunctor}
 % --------------------------------------------------------------------
 
+\subsubsection{Endofunctor Category}\label{sec:endofunctor_category}
+
+$\mathbf{End_C}$ with Objects as Endofunctors of $\mathbf{C}$ and
+Morphisms as Natural Transformations between them with Monoidal
+Structure Induced by Composition of Endofunctors.
+
+
+
 % --------------------------------------------------------------------
 \subsection{Constant Functor}\label{sec:constant_functor}
 % --------------------------------------------------------------------
@@ -702,6 +730,18 @@ $\Delta_X : \mathbf{C} \rightarrow \mathbf{D}$
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
+\subsection{Conservative Functor}\label{sec:conservative_functor}
+% --------------------------------------------------------------------
+
+A Functor $F : \mathbf{C} \rightarrow \mathbf{D}$ is
+\emph{Conservative} if it ``Reflects Isomorphisms'', i.e. if $g : A
+\rightarrow B$ is a Morphism in $\mathbf{C}$ and $F(g)$ is an
+Isomorphism in $\mathbf{D}$ then $g$ is an Isomorphism in
+$\mathbf{C}$.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Continuous Functor}\label{sec:continuous_functor}
 % --------------------------------------------------------------------
 
@@ -712,20 +752,22 @@ Hom-functor (\S\ref{sec:hom_functor})
 
 
 % --------------------------------------------------------------------
-\subsection{Faithful \& Full Functor}\label{sec:faithful_functor}
+\subsection{Full Functor}\label{sec:full_functor}
 % --------------------------------------------------------------------
 
-Given a Functor, $F : C \rightarrow D$, and the Induced Function
+$F$ is a \emph{Full Functor} if $F_{X,Y}$ is Surjective
+
+
+
+% --------------------------------------------------------------------
+\subsection{Faithful Functor}\label{sec:faithful_functor}
+% --------------------------------------------------------------------
+
+Given a Functor, $F : C \rightarrow D$, and the Induced Function:
 \[
   F_{X,Y} : \mathrm{Hom}_C(X,Y) \rightarrow \mathrm{Hom}_D(F(X),F(Y))
 \]
-then
-\begin{itemize}
-  \item $F$ is a \emph{Faithful Functor} if $F_{X,Y}$ is Injective
-  \item $F$ is a \emph{Full Functor} if $F_{X,Y}$ is Surjective
-  \item $F$ is a \emph{Fully Faithful Functor} if $F_{X,Y}$ is
-    Bijective
-\end{itemize}
+then $F$ is a \emph{Faithful Functor} if $F_{X,Y}$ is Injective.
 
 
 
@@ -734,6 +776,30 @@ then
 A Faithful Functor may be considered an \emph{Embedding}, e.g. the
 \emph{Inclusion Functor} for a Subcategory
 (\S\ref{sec:subcategory}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Fully Faithful Functor}\label{sec:fully_faithful}
+% --------------------------------------------------------------------
+
+$F$ is a \emph{Fully Faithful Functor} if $F_{X,Y}$ is Bijective
+
+
+
+% --------------------------------------------------------------------
+\subsection{Forgetful Functor}\label{sec:forgetful_functor}
+% --------------------------------------------------------------------
+
+A Forgetful Functor that only removes Axioms is always Fully Faithful
+(\S\ref{sec:fully_faithful}).
+
+A Forgetful Functor that removes Predicates (Structures) are Faithful
+(\S\ref{sec:faithful_functor}) but not necessarily Full
+(\S\ref{sec:full_functor}).
+
+A Forgetful Functor that removes Types (extra Sets) are not
+necessarily Faithful nor Full.
 
 
 
@@ -884,6 +950,9 @@ A \emph{Representation} of a Covariant Representable Functor, $F$, is
 a pair $(A, \Phi)$ with Natural Isomorphism $\Phi : Hom(A,-)
 \rightarrow F$.
 
+Contravariant Representable Functors map all Colimits
+(\S\ref{sec:colimit}) to Limits (\S\ref{sec:limit}).
+
 
 
 % --------------------------------------------------------------------
@@ -1006,9 +1075,57 @@ Adjoint (\S\ref{sec:adjoint})
 
 A \emph{Monad} is a Composition $G \circ F$ of Adjoint Functors $F :
 \mathbf{C} \rightarrow \mathbf{D}$ and $G : \mathbf{D} \rightarrow
-\mathbf{C}$.
+\mathbf{C}$. If $F$ and $G$ are Inverses then the corresponding Monad
+is the Identity Functor.
+
+Definition of a Monad as a Triple:
+\[
+  (T, \eta, \mu)
+\]
+where $T : \mathbf{C} \rightarrow \mathbf{C}$ is an Endofunctor and
+$\eta : 1_\mathbf{C} \rightarrow T$ and $\mu : T^2 \rightarrow T$
+(where $T^2 = T \circ T : \mathbf{C} \rightarrow \mathbf{C}$) are
+Natural Transformations satisfying the Coherence Conditions
+(\S\ref{sec:coherence_condition}):
+\begin{enumerate}
+  \item $\mu \circ T\mu = \mu \circ \mu T : T^3 \rightarrow T$
+  \item $\mu \circ T\eta = \mu \circ \eta T = 1_T : T \rightarrow T$
+\end{enumerate}
+(1) is analogous to Associativity in Monoids and (2) gives the
+existence of an Identity Element.
+
+A Monad on $\mathbf{C}$ can be defined as a Monoid on the Endofunctor
+Category (\S\ref{sec:endofunctor_category}) $\mathbf{End_C}$.
+
+
+
+Comonad $F \circ G$ (\S\ref{sec:comonad})
+
+Monadic Adjunction (\S\ref{sec:monadic_adjunction})
 
 Terminal Object %FIXME terminal object required in category?
+
+Generalization of Closure Operators on Posets (\S\ref{sec:poset}) to
+arbitrary Categories (Galois Connections \S\ref{sec:galois_connection}
+as Adjoint Pairs)
+
+
+
+\textbf{Generalization of Universal Algebra}
+
+Any Variety (\S\ref{sec:variety}) in Universal Algebra gives rise to a
+Monad on $\mathbf{Set}$ and the Algebra Type can be recovered from the
+Monad as the Category of Eilenberg-Moore Algebras
+(\S\ref{sec:eilenberg_moore}). A Variety of Algebras is a Finitary
+Algebraic Category (\S\ref{sec:finitary_algebraic_category}).
+
+A Monad on $\mathbf{Set}$:
+\[
+  (\mathcal{P}, \{-\}, \bigcup)
+\]
+where $\mathcal{P}$ is the Powerset Operation, $\{-\}$ is the
+Singleton Operation, and $\bigcup$ is the Union Operation.
+% FIXME xref
 
 
 
@@ -1027,6 +1144,54 @@ For Monad $T$ and Category $\mathbf{C}$, \emph{Kleisli Category}
 $\mathbf{C}_T$ equivalent to the Category of Free $T$-algebras-- Full
 Subcategory (\S\ref{sec:full_subcategory}) of Eilenberg-Moore Category
 $\mathbf{C}^T$
+
+
+
+\paragraph{Adjoint Category}\label{sec:adjoint_category}
+\hfill \\
+
+For a Monad $(T,\eta,\mu)$, the \emph{Adjoint Category}
+$\mathbf{Adj}(\mathbf{C}, T)$ is the Category where Objects are
+Adjunctions $(F,G,e,\varepsilon)$ such that $(GF,e,G \varepsilon F) =
+(T,\eta,\mu)$ with Initial Object:
+\[
+  (F_T, G_T, \eta, \mu_T) : \mathbf{C} \rightarrow \mathbf{C}_T
+\]
+where $\mathbf{C}_T$ is the Kleisli Category
+(\S\ref{sec:kleisli_category}) and Terminal Object:
+\[
+  (F^T, G^T, \eta, \mu^T) : \mathbf{C} \rightarrow \mathbf{C}^T
+\]
+where $\mathbf{C}^T$ is the Eilenberg-Moore Category
+(\S\ref{sec:eilenberg_moore}).
+
+
+
+\subsubsection{Comonad}\label{sec:comonad}
+
+\subsubsection{Monadic Functor}\label{sec:monadic_functor}
+
+A Functor $F : \mathbf{D} \rightarrow \mathbf{C}$ is Monadic if it has
+a Left Adjoint $F$ forming a Monadic Adjunction.
+
+\textbf{Beck's Monadicity Theorem}
+
+Functor $U : \mathbf{C} \rightarrow \mathbf{D}$ is \emph{Monadic} if
+and only if:
+\begin{enumerate}
+  \item $U$ has a Left Adjoint (\S\ref{sec:adjoint})
+  \item $U$ is Conservative (\S\ref{sec:conservative_functor})
+  \item $\mathbf{C}$ has Coequalizers (\S\ref{sec:coequalizer}) of
+    $U$-split parallel pairs of Morphisms in $\mathbf{C}$ and $U$
+    preserves those Coequalizers
+\end{enumerate}
+
+Functor $U : \mathbf{D} \rightarrow \mathbf{C}$ is Monadic if it has a
+Right Adjoint and up to Equivalence $\mathbf{D}$ is the
+Eilenberg-Moore Category (\S\ref{sec:eilenberg_moore}).
+\cite{lambek-scott88}
+
+Descent Theory (\S\ref{sec:descent_theory})
 
 
 
@@ -1145,6 +1310,22 @@ In First-order Logic (Provability $\vdash$):
 \[
   \epsilon: F G Y \rightarrow Y \cong 1_{G_Y} : G Y \rightarrow G Y
 \]
+
+
+
+\subsection{Monadic Adjunction}\label{sec:monadic_adjunction}
+
+An Adjunction is \emph{Monadic} if it is equivalent to the
+Eilenberg-Moore Category (\S\ref{sec:eilenberg_moore}) of its
+associated Monad (\S\ref{sec:monad}).
+
+$(F,G,\eta,\varepsilon)$ is a \emph{Monadic Adjunction} when
+$\mathbf{D}$ is equivalent to the Eilenberg-Moore Category
+$\mathbf{C}^T$ for Monad $T = GF$.
+
+%FIXME keep one or the other of these definitions?
+
+
 
 
 
@@ -1297,8 +1478,9 @@ This is equivalent to a Natural Tranformation from the Constant
 Functor (\S\ref{sec:constant_functor}) $\Delta_C$ to the Diagram
 Functor $D$.
 
-Cocone (\S\ref{sec:cocone})
+Cone Category $\mathbf{Cone}(D)$
 
+Cocone (\S\ref{sec:cocone})
 
 
 
@@ -1370,6 +1552,13 @@ A \emph{Limit} is defined as a Terminal Object in the Cone Category
 \[
   c_i : \lim_{\xleftarrow[j]{}} D_j \rightarrow D_i
 \]
+
+A Category has all Finite Limits if and only if it has Finite Products
+(\S\ref{sec:category_product}) and Equalizers (\S\ref{sec:equalizer}),
+or equivalently if it has Pullbacks (\S\ref{sec:pullback}) and a
+Terminal Object (\S\ref{sec:terminal_object}). Furthermore, a Category
+has all Limits of som Cardinality if and only if it has all Equalizers
+and Products of that Cardinality. \cite{awodey06}
 
 A Limit is also definable as a Natural Isomorphism (a Natural
 Transformation with every Component an Isomorphism) between the two
@@ -1444,7 +1633,12 @@ and Morphisms of $\mathbf{C}$ to their Product:
   (f,g) \mapsto f \times g
 \]
 A Category with Binary Products and a Terminal Object is said to have
-all \emph{Finite Products}.
+all \emph{Finite Products}. It is possible to Model the Theory of
+Groups (\S\ref{sec:group_theory}) in any Category with all Finite
+Products.
+
+A Category has Finite Products and Equalizers if and only if it has
+Pullbacks (\S\ref{sec:pullback}) and a Terminal Object. \cite{awodey06}
 
 Products are unique up to Isomorphism (\S\ref{sec:isomorphism}). The
 Canonical Commutative Isomorphism $A \times B \cong B \times A$ is:
@@ -1486,10 +1680,6 @@ By Associativity of Products, $A \times B \times C = (A \times B)
 
 
 
-\paragraph{Power}\label{sec:power}
-
-
-
 \subsubsection{Equalizer}\label{sec:equalizer}
 
 An \emph{Equalizer} is an (Unique) Object $E$ and Morphism $e: E
@@ -1500,7 +1690,13 @@ A \rightarrow B$:
 \]
 $e$ is necessarily a Monomorphism.
 
+For a Set $X$ in $\mathbf{Set}$, every Subset $U \subseteq X$ occurs
+as an Equalizer.
+
 The Category $\mathbf{Ab}$ has all Equalizers.
+
+If a Category has Binary Products (\S\ref{sec:category_product}) and
+Equalizers then it has Pullbacks (\S\ref{sec:pullback}).
 
 
 
@@ -1541,6 +1737,49 @@ Subtyping (\S\ref{sec:subtype})
 
 Type Inference (\S\ref{sec:type_inference}) (Unification)
 
+generalization of Intersection (\S\ref{sec:intersection}) and Inverse
+Image (\S\ref{sec:preimage})
+
+A Category has Pullbacks and a Terminal Object if and only if it has
+Finite Products (\S\ref{sec:category_product}) and Equalizers
+(\S\ref{sec:equalizer}). \cite{awodey06}
+
+
+
+\paragraph{Pullback Functor}\label{sec:pullback_functor}\cite{awodey06}
+\hfill \\
+
+For $h : C' \rightarrow C$ in a Category $\mathbf{C}$ with Pullbacks,
+the \emph{Pullback Functor}:
+\[
+  h^* : \mathbf{C}/C \rightarrow \mathbf{C}/C'
+\]
+is defined as:
+\[
+  (A \xrightarrow{\alpha} C) \mapsto
+    (C' \times_\mathbf{C} A \xrightarrow{\alpha '} C')
+\]
+
+
+
+\paragraph{Reindexed Family}\label{sec:reindexed_family}
+\hfill \\
+Indexed Family (\S\ref{sec:indexed_family})
+
+
+
+\subsubsection{Cotensor Product}\label{sec:cotensor_product}
+
+Monoidal Category (\S\ref{sec:monoidal_category})
+
+
+
+\paragraph{Power}\label{sec:power}
+
+Covariant Powerset Functor % FIXME
+
+Cumulative Hierarchy (\S\ref{sec:cumulative_hierarchy})
+
 
 
 \subsubsection{Inverse Limit}\label{sec:inverse_limit}
@@ -1563,6 +1802,12 @@ Small Limit
 
 A \emph{Colimit} is defined as a Universal Cone
 (\S\ref{sec:universal_cone})
+
+A Category has Finite Colimits if and only if it has Finite Coproducts
+(\S\ref{sec:coproduct}) and Coequalizers (\S\ref{sec:coequalizer}).
+Likewise, a Category has all Colimits of some Cardinality $\kappa$ if
+and only if it has Coequalizers and Coproducts of Cardinality
+$\kappa$.
 
 
 
@@ -1624,10 +1869,6 @@ Isomorphism:\cite{awodey06}
 
 
 
-\paragraph{Copower}\label{sec:copower}
-
-
-
 \subsubsection{Coequalizer}\label{sec:coequalizer}
 
 An \emph{Coequalizer} is an (Unique) Object $Q$ and Morphism $q: B
@@ -1658,9 +1899,31 @@ Quotient (\S\ref{sec:equivalence_class})
 
 A Pushout is the Colimit of a Span (\S\ref{sec:span})
 
+$B +_A C \cong (B + C)/~$
+
+
+
+\subsubsection{Tensor Product}\label{sec:tensor_product}
+
+Monoidal Category (\S\ref{sec:monoidal_category})
+
+
+
+\paragraph{Copower}\label{sec:copower}
+
 
 
 \subsubsection{Direct Limit}\label{sec:direct_limit}
+
+\paragraph{$\omega$-colimit}\label{sec:omega_colimit}
+\hfill \\
+
+$\omega$-colimit $G_\infty$
+
+Forgetful Functor $U : \mathbf{Grp} \rightarrow \mathbf{Set}$ creates
+$\omega$-colimits (and all Limits). \cite{awodey06}
+
+
 
 \subsubsection{Cocomplete Category}\label{sec:cocomplete_category}
 
@@ -2016,6 +2279,16 @@ $\mathbf{Set}$.
 
 
 
+\paragraph{Powerset Functor}\label{sec:powerset_functor}
+\hfill \\
+
+$\mathcal{P} : \mathbf{Set} \rightarrow \mathbf{Set}$
+
+Functions $f : X \rightarrow Y$ to the Image Mapping $img(f) :
+\mathcal{P}(X) \rightarrow \mathcal{P}(Y)$
+
+
+
 % --------------------------------------------------------------------
 \subsection{Free Category}\label{sec:free_category}
 % --------------------------------------------------------------------
@@ -2120,9 +2393,9 @@ $\mathbf{C}/R$ is called the Category with \emph{Generators} $G$ and
 Morphisms such that for two Morphisms $f,g \in \mathbf{C_1}$, $f \sim
 g$ Implies:
 \begin{itemize}
-\item $dom(f) = dom(g)$
-\item $cod(f) = cod(g)$
-\item $\forall a,b \in \mathbf{C_1}, bfa \sim bga$
+  \item $dom(f) = dom(g)$
+  \item $cod(f) = cod(g)$
+  \item $\forall a,b \in \mathbf{C_1}, bfa \sim bga$
 \end{itemize}
 Such a Congruence defines a \emph{Congruence Category}
 $\mathbf{C^{\sim}}$:
@@ -2157,7 +2430,8 @@ Category of $\sim_F$
 
 
 
-\subsubsection{Finitely Presented Category}\label{sec:finitely_presented}
+\subsubsection{Finitely Presented Category}
+\label{sec:finitely_presented}
 
 % FIXME free category notation?
 A \emph{Finitely Presented Category} is given by taking the Quotient
@@ -2332,6 +2606,25 @@ Replace Hom-sets with Objects from a general Monoidal Category
 
 
 
+% --------------------------------------------------------------------
+\subsection{Coherence Condition}\label{sec:coherence_condition}
+% --------------------------------------------------------------------
+
+%FIXME this section should probably be relocated
+
+
+
+% ====================================================================
+\section{Abelian Category}\label{sec:abelian_category}
+% ====================================================================
+
+Motivating Example $\mathbf{Ab}$ Category of all Abelian Groups with
+Group Homomorphisms
+
+Homology Theory (\S\ref{sec:homology_theory})
+
+
+
 % ====================================================================
 \section{Representable Category}\label{sec:representable_category}
 % ====================================================================
@@ -2365,11 +2658,31 @@ Category into $\mathbf{Set}$.
 
 
 % ====================================================================
-\section{Abelian Category}\label{sec:abelian_category}
+\section{Algebraic Category}\label{sec:algebraic_category}
 % ====================================================================
 
-Motivating Example $\mathbf{Ab}$ Category of all Abelian Groups with
-Group Homomorphisms
+An Category is an \emph{Algebraic Category} if it is Monadic
+(\S\ref{sec:monad}) over $\mathbf{Set}$.
+
+Variety (\S\ref{sec:variety})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finitary Algebraic Category}
+\label{sec:finitary_algebraic_category}
+% --------------------------------------------------------------------
+
+Variety (\S\ref{sec:variety})
+
+If $\mathbf{A}$ is a Finitary Algebraic Category then the Forgetful
+Functor $U : \mathbf{A} \rightarrow \mathbf{Set}$ is Strictly Monadic
+(\S\ref{sec:monadic_functor}) so that the Comparison Functor $K :
+\mathbf{A} \rightarrow \mathbf{Set}^T$ is an Isomorphism where
+$\mathbf{Set}^T$ is the Eilenberg-Moore (\S\ref{sec:eilenberg_moore})
+Category on $\mathbf{Set}$.
+
+% FIXME comparison functor
 
 
 
@@ -2406,6 +2719,28 @@ Group Homomorphisms
 \paragraph{Prefix Tree}\label{sec:prefix_tree}
 
 \paragraph{Suffix Tree}\label{sec:suffix_tree}
+
+
+
+% ====================================================================
+\section{Representation Theory}\label{sec:representation_theory}
+% ====================================================================
+
+Given a Functor $R$ from a Group $G$ to a general Category
+$\mathbf{C}$:
+\[
+    R : G \rightarrow \mathbf{C}
+\]
+Such a Functor $R$ is termed a \emph{Representation} of $G$ in
+$\mathbf{C}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Linear Representation}\label{sec:linear_representation}
+% --------------------------------------------------------------------
+
+$R : G \rightarrow \mathbf{Vect}_K$
 
 
 
@@ -2494,6 +2829,9 @@ Presheaf (\S\ref{sec:presheaf})
 \subsection{Topos}\label{sec:topos}
 % --------------------------------------------------------------------
 
+A \emph{Topos} is a Category with Finite Limits (\S\ref{sec:limit})
+and Power Objects (\S\ref{sec:power}) for all Objects.
+
 Category behaving like the Category of Sheaves (\S\ref{sec:sheave})
 of Sets on a Topological Space
 
@@ -2520,6 +2858,18 @@ Scheme (\S\ref{sec:scheme})
 Formal Logic (\S\ref{sec:formal_logic})
 
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+
+
+
+\subsubsection{Effective Topos}\label{sec:effective_topos}
+
+Effectivity (\S\ref{sec:effective_method})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Geometric Morphism}\label{sec:geometric_morphism}
+% --------------------------------------------------------------------
 
 
 
