@@ -211,8 +211,8 @@ External Hom-set
 % --------------------------------------------------------------------
 
 An \emph{Equivalence} between two Categories, $\mathbf{C}$ and
-$\mathbf{D}$, can be established by a Pair of Functors
-(\S\ref{sec:functor}):
+$\mathbf{D}$, $\mathbf{C} \simeq \mathbf{D}$, can be established by a
+Pair of Functors (\S\ref{sec:functor}):
 \[
   S : \mathbf{C} \rightarrow \mathbf{D}
 \]\[
@@ -224,6 +224,22 @@ and Natural Isomorphisms (\S\ref{sec:natural_transformation}):
 \]\[
   I_\mathbf{D} \cong S \circ T
 \]
+$S$ and $T$ in such an Equivalence are Fully Faithful
+(\S\ref{sec:fully_faithful}).
+
+\HandRight\;Note Equality of Categories $\simeq$ is distinct from
+Isomorphism of Categories $\cong$.
+
+$\mathbf{Set}_{fin} \simeq \mathbf{Ord}_fin$
+
+$\mathbf{Par} \cong \mathbf{Set}$
+
+$\mathbf{Set}^I \simeq \mathbf{Set}/I$
+
+$\mathbf{BA}_{fin} \simeq \mathbf{Set}_{fin}^{op}$
+
+$\mathbf{caBA} \simeq \mathbf{Set}^{op}$ Complete Atomic Boolean
+Algebras %FIXME xref
 
 
 
@@ -232,18 +248,45 @@ and Natural Isomorphisms (\S\ref{sec:natural_transformation}):
 % --------------------------------------------------------------------
 
 A \emph{Subcategory}, $\mathbf{S}$, of a Category, $\mathbf{C}$, is a
-Category whose Objects and Morphisms are in $\mathbf{C}$. There is a
-Faithful Functor (\S\ref{sec:faithful_functor}) called the
+Category whose Objects and Morphisms are in $\mathbf{C}$.
+
+For a Monomorphism in $\mathbf{Cat}$ from a Category $\mathbf{E}$ such
+that $E$ is an Equalizer:
+\[
+  \mathbf{E} \xrightarrow{\;\;E\;\;} \mathbf{C}
+  \begin{matrix}
+  \xrightarrow{\;\;F\;\;}\\
+  \xrightarrow[\;\;G\;\;]{}
+  \end{matrix}
+  \mathbf{D}
+\]
+$\mathbf{E}$ is a Subcategory of $\mathbf{C}$.
+
+
+
+\subsubsection{Inclusion Functor}\label{sec:inclusion_functor}
+
+For a Subcategory $\mathbf{S}$ of a Category $\mathbf{C}$ there is a
+Monomorphic Faithful Functor (\S\ref{sec:faithful_functor}) called the
 \emph{Inclusion Functor} which Maps Objects and Morphisms to
 themselves:
 \[
   I : \mathbf{S} \rightarrow \mathbf{C}
 \]
-If $I$ is a Full Functor then $S$ is a \emph{Full Subcategory}.
+If $I$ is a Full Functor then $\mathbf{S}$ is a \emph{Full
+  Subcategory} (\S\ref{sec:full_subcategory}).
 
 
 
 \subsubsection{Full Subcategory}\label{sec:full_subcategory}
+
+A Subcategory $\mathbf{S}$ of a Category $\mathbf{C}$ is a \emph{Full
+  Subcategory}, denoted $\mathbf{S} \rightarrowtail \mathbf{C}$ if the
+corresponding Inclusion Functor is a Full Functor. A Full Subcategory
+consists of some Objects and all Morphisms between them.
+
+The Inclusion Functor $\mathbf{Set}_{fin} \rightarrowtail
+\mathbf{Set}$ is Fully Faithful (\S\ref{sec:fully_faithful}).
 
 
 
@@ -276,6 +319,11 @@ Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
 \subsection{Discrete Category}\label{sec:discrete_category}
 % --------------------------------------------------------------------
 
+The Discrete Category Functor $S : \mathbf{Set} \rightarrow
+\mathbf{Cat}$ is Fully Faithful (\S\ref{sec:fully_faithful}).
+
+
+
 % --------------------------------------------------------------------
 \subsection{Thin Category}\label{sec:thin_category}
 % --------------------------------------------------------------------
@@ -306,6 +354,7 @@ a Preorder.
 \item [Set$^\downdownarrows$] Graph and Graph Homomorphisms
 \item [Cls] all Classes and Functions between Classes
 \item [Set$_*$] all Pointed Sets and Base-point preserving Functions
+\item [Par] all Sets and Partial Functions
 \item [Rel] all Sets and Relations
 \item [Pos] all Posets and Monotonic Functions (Locally Small)
 \item [Cpo] all Complete Partial Orders and Continuous Functions
@@ -319,6 +368,7 @@ a Preorder.
 \item [Mon] all Monoids and Monoid Homomorphisms
 \item [Grp] all Groups and Group Homomorphisms (Locally Small)
 \item [Ab] all Abelian Groups with Group Homomorphisms
+\item [Grpd] all Groupoids and Groupoid Homomorphisms
 \item [Rng] all Small Rings and Ring Morphisms
 \item [Grph] all Small Graphs and Graph Morphisms
 \item [Cat] all Small Categories and Functors
@@ -332,6 +382,7 @@ a Preorder.
 \item [Toph] all Topological Spaces and Homotopy Classes of Continuous
   Maps
 \item [Man] all Smooth Manifolds and Smooth Maps
+\item [BA] all Boolean Algebras and their Homomorphisms
 \item [C($\lambda$)] all Types and Closed Terms
 \end{description}
 
@@ -763,7 +814,8 @@ $F$ is a \emph{Full Functor} if $F_{X,Y}$ is Surjective
 \subsection{Faithful Functor}\label{sec:faithful_functor}
 % --------------------------------------------------------------------
 
-Given a Functor, $F : C \rightarrow D$, and the Induced Function:
+Given a Functor, $F : \mathbf{C} \rightarrow \mathbf{D}$, and the
+Induced Function:
 \[
   F_{X,Y} : \mathrm{Hom}_C(X,Y) \rightarrow \mathrm{Hom}_D(F(X),F(Y))
 \]
@@ -800,6 +852,15 @@ A Forgetful Functor that removes Predicates (Structures) are Faithful
 
 A Forgetful Functor that removes Types (extra Sets) are not
 necessarily Faithful nor Full.
+
+The Forgetful Functor $\mathbf{Grp} \rightarrowtail \mathbf{Set}$ is
+Faithful but not Full.
+
+The Forgetful Functor $\mathbf{Grp} \rightarrow \mathbf{Cat}$ is
+Fully Faithful.
+
+The Forgetful Functor $\mathbf{Pos} \rightarrow \mathbf{Cat}$ is
+Fully Faithful.
 
 
 
@@ -952,6 +1013,8 @@ a pair $(A, \Phi)$ with Natural Isomorphism $\Phi : Hom(A,-)
 
 Contravariant Representable Functors map all Colimits
 (\S\ref{sec:colimit}) to Limits (\S\ref{sec:limit}).
+
+A Locally Small Category has Representable Functors for all Objects.
 
 
 
@@ -1221,7 +1284,17 @@ be no Natural Transformation from $S$ to $T$.
 
 When every Component in $\tau$ is Invertible in $\mathbf{D}$, $\tau$
 is a \emph{Natural Isomorphism} (or \emph{Natural Equivalence}) and $S
-\cong T$
+\cong T$. Equivalently, a Natural Isomorphism is an Isomorphism in the
+Functor Category $Fun(\mathbf{C},\mathbf{D})$.
+
+Natural Isomorphisms:
+\[
+  Hom_\mathbf{Grp}(F_1,G) \cong U(G)
+\]\[
+  Hom_\mathbf{Set}(X,\mathbf{2}) \cong \mathcal{P}(X)
+\]\[
+  Hom_\mathbf{BA}(B,\mathbf{2}) \cong Ult(X)
+\]
 
 
 
@@ -1464,6 +1537,8 @@ A Diagram is the Category Theory analogue of an Indexed Family of Sets
 (\S\ref{sec:index_set}).
 
 Category of Diagrams (\S\ref{sec:setvalued_functor})
+
+$Diag(\mathbf{C},\mathbf{D})$
 
 
 
@@ -1780,6 +1855,43 @@ Covariant Powerset Functor % FIXME
 
 Cumulative Hierarchy (\S\ref{sec:cumulative_hierarchy})
 
+$Hom(X,\mathbf{2}) \cong \mathcal{P}(X)$
+
+Ultrafilters (\S\ref{sec:ultrafilter})
+
+$Ult(B) \cong Hom_\mathbf{BA}(B,\mathbf{2})$
+
+Adjoint Functors:
+
+$Ult : \mathbf{BA}^{op} \rightarrow \mathbf{Set}$
+
+$\mathcal{P}^\mathbf{BA} : \mathbf{Set}^{op} \rightarrow \mathbf{BA}$
+
+Natural Transformations (\S\ref{sec:natural_transformation}) from
+Stone Duality (\S\ref{sec:stone_duality}):
+\[
+  \eta_X : X \rightarrow Ult(\mathcal{P}(X))
+\]\[
+  \phi_B : B \rightarrow \mathcal{P}(Ult(B))
+\]
+
+$\mathcal{P}^\mathbf{BA} :
+  \mathbf{Set}^{op}_{fin} \rightarrow \mathbf{BA}_{fin}$
+
+$A : \mathbf{BA}^{op}_{fin} \rightarrow \mathbf{Set}_{fin}$
+\emph{Atoms} of a Boolean Algebra:
+\[
+  A(\mathcal{B}) = \{ a \in \mathcal{B} \;|\;
+    0 < a, (b < a \Rightarrow b = 0) \}
+\]
+There is an Isomorphism between Atoms $a$ of a Finite Boolean Algebra
+$\mathcal{B}$ and Ultrafilters $U \subseteq \mathcal{B}$:
+\[
+  U \mapsto \bigwedge_{b \in U} b
+\]\[
+  a \mapsto \uparrow (a)
+\]
+
 
 
 \subsubsection{Inverse Limit}\label{sec:inverse_limit}
@@ -2009,7 +2121,7 @@ corresponds to Implication:
 \]
 
 Exponentials do not exists for Group Homomorphisms but they do for
-Groupoids.
+Groupoids (\S\ref{sec:groupoid}).
 
 A Category with an Exponential for any two Objects and a Terminal
 Object (\S\ref{sec:terminal_object}) is a Cartesian Closed Category
@@ -2058,6 +2170,13 @@ $-^A : \mathbf{C} \rightarrow \mathbf{C}$
 % ====================================================================
 \section{Constructions}\label{sec:category_construction}
 % ====================================================================
+
+A \emph{Construction} is just a Functor (\S\ref{sec:functor}).
+
+A Relation between Constructions is just a Natural Transformation
+(\S\ref{sec:natural_transformation}).
+
+
 
 % --------------------------------------------------------------------
 \subsection{Opposite Category}\label{sec:opposite_category}
@@ -2220,18 +2339,13 @@ Given two Categories, $\mathbf{C}$ and $\mathbf{D}$, a \emph{Functor
 \rightarrow \mathbf{D}$ and Morphisms as Natural Transformations
 between Functors:
 \[
-  \mathbf{D}^{\mathbf{C}} = Funct(\mathbf{C},\mathbf{D})
+  \mathbf{D}^{\mathbf{C}} = Fun(\mathbf{C},\mathbf{D})
 \]
 The Hom-set in a Functor Category may be denoted:
 \[
   Nat(S,T) = \mathbf{D}^{\mathbf{C}}(S,T) =
     \{ \tau | \tau : S \rightarrow T \}
 \]
-
-A Functor Category into the Category $\mathbf{Set}$ is called a
-\emph{Category Diagram} (\S\ref{sec:category_diagram}).
-%FIXME terminology doesn't match
-
 With Evaluation Functor $\eta : \mathbf{D^C} \times \mathbf{C}
 \rightarrow \mathbf{D}$, $\mathbf{D^C}$ is an Exponential
 (\S\ref{sec:category_exponential}) in $\mathbf{Cat}$ and
@@ -2246,11 +2360,20 @@ Category $\mathrm{2}$ consisting of two Objects and no Morphisms other
 than Identities is equivalent to the Product Category $\mathbf{C}
 \times \mathbf{C}$.
 
+For any Discrete Category $I$:
+\[
+  \mathbf{C}^I \cong \prod_{i \in I} \mathbf{C}
+\]
+
 The Functor Category $\mathbf{Set}^\downdownarrows$ where
 $\downdownarrows$ is the Category with two Objects and two Morphisms
 between them ($* \rightrightarrows \star$) is equivalent to the
-Category of Graphs and Graph Homomorphisms. Cf. Simplicial Sets
-(\S\ref{sec:simplicial_set}).
+Category of Graphs and Graph Homomorphisms $\mathbf{Graph}$. Cf.
+Simplicial Sets (\S\ref{sec:simplicial_set}).
+
+A Functor Category into the Category $\mathbf{Set}$ is called a
+\emph{Category Diagram} (\S\ref{sec:category_diagram}).
+%FIXME terminology doesn't match
 
 
 
@@ -2565,6 +2688,8 @@ preserving $[X]_M = M$ for the Basic Types and Terms of $\mathcal{F}$.
 
 $\mathbf{Cat}$ is a Cartesian Closed Category.
 
+$\mathbf{Grpd}$ is a Cartesian Closed Category.
+
 $\lambda^{\times, \rightarrow} \simeq \mathrm{CCC}$
 
 $\mathrm{IPC}^{\wedge, \Rightarrow, \vee} \simeq \mathrm{Heyting Algebra}$
@@ -2671,8 +2796,9 @@ A Category is \emph{Locally Small} if all Hom-sets
 (\S\ref{sec:hom_set}) of the Category are Sets and not Proper Classes.
 % FIXME definition in terms of hom-sets
 
-There is at least one canonical Functor from any Locally Small
-Category into $\mathbf{Set}$.
+There is at least one canonical Representable Functor
+(\S\ref{sec:representable_functor}) from any Locally Small Category
+into $\mathbf{Set}$.
 
 
 
