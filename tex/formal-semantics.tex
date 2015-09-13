@@ -506,14 +506,6 @@ Introduction and Elimination Rules.
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Lindenbaum-Tarski Algebra}\label{sec:lindenbaum_tarski}
-% --------------------------------------------------------------------
-
-Propositional Logic (\S\ref{sec:propositional_logic})
-
-
-
-% --------------------------------------------------------------------
 \subsection{Boolean Algebra}\label{sec:boolean_algebra}
 % --------------------------------------------------------------------
 
@@ -552,23 +544,67 @@ First-order Logic (\S\ref{sec:firstorder_logic})
 \subsection{Heyting Algebra}\label{sec:heyting_algebra}
 % --------------------------------------------------------------------
 
-Intuitionistic Propositional Logic (\S\ref{sec:intuitionistic_logic})
+A \emph{Heyting Algebra} is a Poset with:
+\begin{enumerate}
+  \item Finite Meets $1$ and $p \wedge q$
+  \item Finite Joins $0$ and $p \vee q$
+  \item Exponentials $a \Rightarrow b$ for each $a,b$ such that $a
+    \wedge b \leq c$ if and only if $a \leq b \Rightarrow c$
+\end{enumerate}
+A Heyting Algebra is a Distributive Lattice
+(\S\ref{sec:distributive_lattice}), but not every Distributive Lattice
+is a Heyting Algebra.
 
-Cartesian Closed Preorder (\S\ref{sec:cartesian_preorder})
-
-A Boolean Algebra (\S\ref{sec:boolean_algebra}) is a Heyting Algebra
-with a Complementary Negation, that is, in a Heyting Algebra it is not
-the case that (in a Preorder):
+A Boolean Algebra is a Heyting Algebra with a Complementary Negation,
+that is, in a Heyting Algebra it is not the case that (in a Preorder):
 \[
   \top \leq A \vee \overline{A}
 \]
 which implies that there are Undecidable Propositions.
+
+Cartesian Closed Preorder (\S\ref{sec:cartesian_preorder})
+
+Algebraic equivalent of Intuitionistic Propositional Logic
+(\S\ref{sec:intuitionistic_logic})
 
 Theorem (Intuitionistic Propositional Logic does not refute the Law of
 the Excluded Middle)\cite{harper12}:
 \[
   \forall A, \neg (\neg (A \vee \neg A))
 \]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lindenbaum-Tarski Algebra}\label{sec:lindenbaum_tarski}
+% --------------------------------------------------------------------
+
+\cite{awodey06}
+For an Intuitionistic Propositional Calculus $\mathcal{L}$ with
+Propositional Formulas $p,q$, a \emph{Lindenbaum-Tarski Algebra} is a
+Heyting Algebra $H(\mathcal{L})$ with Equivalence Classes:
+\[
+  [p] = [q] \Leftrightarrow p \dashv \vdash q
+\]
+and Ordering Relation:
+\[
+  [p] \leq [q] \Leftrightarrow p \vdash q
+\]
+and Induced Operations:
+\[
+  1 = [\top]
+\]\[
+  0 = [\bot]
+\]\[
+  [p] \wedge [q] = [p \wedge q]
+\]\[
+  [p] \vee [q] = [p \vee q]
+\]\[
+  [p] \Rightarrow [q] = [p \Rightarrow q]
+\]
+A Formula $p$ is Provable in $\mathcal{L}$ just in case $[p] = 1$.
+
+Propositional Logic (\S\ref{sec:propositional_logic})
 
 
 
