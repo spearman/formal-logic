@@ -371,7 +371,8 @@ a Preorder.
 \item [Grpd] all Groupoids and Groupoid Homomorphisms
 \item [Rng] all Small Rings and Ring Morphisms
 \item [Grph] all Small Graphs and Graph Morphisms
-\item [Cat] all Small Categories and Functors
+\item [Cat] all Small Categories and Functors (2-category
+  \S\ref{sec:2_category})
 \item [Cat'] all Large Categories and Functors
 \item [Vect$_K$] all Finite-dimensional Vector Spaces over Field $K$
   and $K$-linear Transformations
@@ -382,6 +383,7 @@ a Preorder.
 \item [Toph] all Topological Spaces and Homotopy Classes of Continuous
   Maps
 \item [Man] all Smooth Manifolds and Smooth Maps
+\item [Cob] all Closed Manifolds and Cobordisms
 \item [BA] all Boolean Algebras and their Homomorphisms
 \item [C($\lambda$)] all Types and Closed Terms
 \end{description}
@@ -875,6 +877,9 @@ Fully Faithful.
 The Forgetful Functor $\mathbf{Pos} \rightarrow \mathbf{Cat}$ is
 Fully Faithful.
 
+Forgetful Functors are Right Adjoint (\S\ref{sec:adjoint}) to Free
+Functors (\S\ref{sec:free_functor}).
+
 
 
 % --------------------------------------------------------------------
@@ -1165,8 +1170,8 @@ Adjoint (\S\ref{sec:adjoint})
 
 A \emph{Monad} is a Composition $G \circ F$ of Adjoint Functors $F :
 \mathbf{C} \rightarrow \mathbf{D}$ and $G : \mathbf{D} \rightarrow
-\mathbf{C}$. If $F$ and $G$ are Inverses then the corresponding Monad
-is the Identity Functor.
+\mathbf{C}$, namely $G F$. If $F$ and $G$ are Inverses then the
+corresponding Monad is the Identity Functor.
 
 Definition of a Monad as a Triple:
 \[
@@ -1186,6 +1191,13 @@ existence of an Identity Element.
 
 A Monad on $\mathbf{C}$ can be defined as a Monoid on the Endofunctor
 Category (\S\ref{sec:endofunctor_category}) $\mathbf{End_C}$.
+
+Given a Monad $T$ on a Category $\mathbf{C}$, there is a Category of
+Adjunctions (\S\ref{sec:adjoint}) that give rise to that Monad.
+
+A Monad gives an Algebraic Theory (\S\ref{sec:algebra}) and an Algebra
+(\S\ref{sec:t_algebra}) for a Monad is a Model (\S\ref{sec:model}) of
+that Theory.
 
 
 
@@ -1222,18 +1234,41 @@ Singleton Operation, and $\bigcup$ is the Union Operation.
 \paragraph{Eilenberg-Moore Category}\label{sec:eilenberg_moore}
 \hfill \\
 
-$\mathbf{C}^T$ Category of $T$-algebras for Monad $T$ in Category
-$\mathbf{C}$
+$\mathbf{C}^T$ Category of $T$-algebras (\S\ref{sec:t_algebra}) for
+Monad $T$ in Category $\mathbf{C}$
+
+Freely Constructed
+
+$A \mapsto \mu_A : T^2 A \rightarrow T A$ is a Functor from
+$\mathbf{C}$ to $\mathbf{C}^T$
+
+$\theta : T A \rightarrow A \mapsto A$ is a Functor from
+$\mathbf{C}^T$ to $\mathbf{C}$
+
+Terminal Object in the Category of Adjunctions
+(\S\ref{sec:adjoint_category}) that give rise to Monad $T$
 
 
 
 \paragraph{Kleisli Category}\label{sec:kleisli_category}
 \hfill \\
 
-For Monad $T$ and Category $\mathbf{C}$, \emph{Kleisli Category}
-$\mathbf{C}_T$ equivalent to the Category of Free $T$-algebras-- Full
-Subcategory (\S\ref{sec:full_subcategory}) of Eilenberg-Moore Category
+For Monad $T$ and Category $\mathbf{C}$, a \emph{Kleisli Category}
+$\mathbf{C}_T$ (or $Kl(T)$) is equivalent to the Category of Free
+$T$-algebras (\S\ref{sec:t_algebra})-- Full Subcategory
+(\S\ref{sec:full_subcategory}) of Eilenberg-Moore Category
 $\mathbf{C}^T$
+
+Objects are Objects of $\mathbf{C}$ and Morphisms for a pair of
+Objects $A$, $B$ are the Morphisms in $\mathbf{C}(A, T B)$
+
+Composition of $f : A \rightarrow B$, $g : B \rightarrow C$ is $f
+\circ T g \circ \mu_A : A \rightarrow TC$
+
+Identity $\eta_A : A \rightarrow T A$
+
+Initial Object in the Category of Adjunctions
+(\S\ref{sec:adjoint_category}) that give rise to Monad $T$
 
 
 
@@ -1282,6 +1317,30 @@ Eilenberg-Moore Category (\S\ref{sec:eilenberg_moore}).
 \cite{lambek-scott88}
 
 Descent Theory (\S\ref{sec:descent_theory})
+
+
+
+\subsubsection{$T$-algebra}\label{sec:t_algebra}
+
+Monad $(T, \eta, \mu)$ where $T : \mathbf{C} \rightarrow \mathbf{C}$
+
+$T$-algebra $(A, \theta)$ where $A \in \mathbf{C}$ and \emph{Action}
+$\theta : T A \rightarrow A$ such that $\theta \circ \eta = 1_A$ and
+$\theta \circ \mu_A = \theta \circ T \theta$
+
+A $T$-algebra defines a Monoid with Underlying Set $A$ and Monoid
+Operation $\theta$.
+
+The $T$-algebras for a given Monad gives a Category of $T$-algebras,
+$\mathbf{Alg}(T)$ (or $\mathbf{C}^T$, see Eilenberg-Moore Category
+\S\ref{sec:eilenberg_moore}), where Morphisms between $T$-algebras
+$(A, \theta)$ and $(B, \varphi)$ with $f : A \rightarrow B$ give a
+Commutative Square:
+\[
+  \varphi \circ T f = f \circ \theta
+\]
+which is the Terminal Object in the Category of Adjunctions that give
+rise to $T$.
 
 
 
@@ -1379,11 +1438,75 @@ following \emph{Interchange Law} applies:
 \subsection{Adjunction}\label{sec:adjoint}
 % --------------------------------------------------------------------
 
-Two Functors $F$ and $G$ are \emph{Adjoints}, $F \dashv G$, when:
+Two Functors $F : \mathbf{C} \rightarrow \mathbf{D}$ and $U :
+\mathbf{D} \rightarrow \mathbf{C}$ are \emph{Adjoints} when there is a
+Natural Isomorphism:
 \[
-  f : F Y \rightarrow X \cong g : Y \rightarrow G X
+  \Phi : Hom_\mathbf{D}(F C,D) \cong Hom_\mathbf{C}(C,U D) : \Psi
 \]
-Adjoints are Unique up to Isomorphism.
+is Natural in $C$ and $D$.
+
+\textbf{Unit}:
+
+Natural Transformation:
+\[
+  \eta : 1_\mathbf{C} \rightarrow U F
+\]
+
+\textbf{Counit}:
+
+Natural Transformation:
+\[
+  \epsilon : F U \rightarrow 1_\mathbf{D}
+\]
+
+\textbf{Triangle Identities}:
+\[
+  \epsilon F \circ F \eta = 1_F
+\]\[
+  U \epsilon \circ \eta U = 1_U
+\]
+
+Universal Mapping Property (\S\ref{sec:universal_property}) for $\eta
+: 1_\mathbf{C} \rightarrow U \circ F$ (Unit):
+
+\begin{itemize}
+\item For any $C \in \mathbf{C}$, $D \in \mathbf{D}$, $f : C
+  \rightarrow U D$, there exists a unique $g : FC \rightarrow D$ such
+  that:
+  \[
+    f = U g \circ \eta_C
+  \]
+\end{itemize}
+
+Universal Mapping Property for $\epsilon : F \circ U \rightarrow
+1_\mathbf{D}$ (Counit):
+
+\begin{itemize}
+\item For any $C \in \mathbf{C}$, $D \in \mathbf{D}$, $g : F C
+  \rightarrow D$, there exists a unique $f : C \rightarrow U D$ such
+  that:
+  \[
+    g = \epsilon_D \circ F f
+  \]
+\end{itemize}
+
+Relation between Hom-set and Unit definitions:
+\[
+  \Phi(g) = U g \circ \eta_C
+\]\[
+  \eta_C = \Phi(1_{FC})
+\]
+
+Relation between (Inverse) Hom-set and Unit definitions:
+\[
+  \Psi (f) = \epsilon_D \circ F f
+\]\[
+  \epsilon_D = \Psi(1_{U D})
+\]
+
+Free Functors (\S\ref{sec:free_functor}) are Left Adjoint to Forgetful
+Functors (\S\ref{sec:forgetful_functor})
 
 See also \emph{Adjoint Functor} \S\ref{sec:adjoint_functor}
 
@@ -1401,31 +1524,15 @@ In First-order Logic (Provability $\vdash$):
   \exists \dashv \star \dashv \forall
 \]
 
-\textbf{Unit}:
-\[
-  1_{F X}: F X \rightarrow F X \cong \eta : X \rightarrow G F X
-\]
-
-\textbf{Counit}:
-\[
-  \epsilon: F G Y \rightarrow Y \cong 1_{G_Y} : G Y \rightarrow G Y
-\]
-
 
 
 \subsection{Monadic Adjunction}\label{sec:monadic_adjunction}
 
-An Adjunction is \emph{Monadic} if it is equivalent to the
-Eilenberg-Moore Category (\S\ref{sec:eilenberg_moore}) of its
-associated Monad (\S\ref{sec:monad}).
-
 $(F,G,\eta,\varepsilon)$ is a \emph{Monadic Adjunction} when
 $\mathbf{D}$ is equivalent to the Eilenberg-Moore Category
-$\mathbf{C}^T$ for Monad $T = GF$.
+(\S\ref{sec:eilenberg_moore}) $\mathbf{C}^T$ for Monad $T = GF$.
 
-%FIXME keep one or the other of these definitions?
-
-
+``\emph{Monadicity}''
 
 
 
@@ -1846,13 +1953,13 @@ is a Zero Morphism (\S\ref{sec:zero_morphism}).
 
 \subsubsection{Pullback}\label{sec:pullback}
 
-For a Category $\mathbf{C}$, a \emph{Pullback} of Morphisms $f : A
-\rightarrow C$ and $g : B \rightarrow C$ are Morphisms $p_1 : P
-\rightarrow A$ and $p_2 : P \rightarrow B$ with the Universal Property
-that $fp_1 = g_p2$. This implies for any given $z_1 : Z \rightarrow A$
-and $z_2 : Z \rightarrow B$ such that $fz_1 = gz_2$, there is a Unique
-Morphism $u : Z \rightarrow P$ such that $z_1 = p_1 u$ and $z_2 = p_2
-u$.
+For a Category $\mathbf{C}$, a \emph{Pullback} (or \emph{Fiber
+  Product} or \emph{Cartesian Square}) of Morphisms $f : A \rightarrow
+C$ and $g : B \rightarrow C$ are Morphisms $p_1 : P \rightarrow A$ and
+$p_2 : P \rightarrow B$ with the Universal Property that $fp_1 =
+g_p2$. This implies for any given $z_1 : Z \rightarrow A$ and $z_2 : Z
+\rightarrow B$ such that $fz_1 = gz_2$, there is a Unique Morphism $u
+: Z \rightarrow P$ such that $z_1 = p_1 u$ and $z_2 = p_2 u$.
 
 A Pullback is the Limit of a Cospan (\S\ref{sec:cospan}).
 
@@ -2068,7 +2175,13 @@ $B +_A C \cong (B + C)/~$
 
 \subsubsection{Tensor Product}\label{sec:tensor_product}
 
-Monoidal Category (\S\ref{sec:monoidal_category})
+For a Monoidal Category (\S\ref{sec:monoidal_category}) $\mathbf{M}$,
+a \emph{Tensor Product} is a Functor:
+\[
+  \otimes : \mathbf{M} \times \mathbf{M} \rightarrow \mathbf{M}
+\]
+
+Vertically Categorified (\S\ref{sec:vertical_categorification}) Monoid
 
 
 
@@ -2486,6 +2599,15 @@ Functions $f : X \rightarrow Y$ to the Image Mapping $img(f) :
 
 
 % --------------------------------------------------------------------
+\subsection{Free Functor}\label{sec:free_functor}
+% --------------------------------------------------------------------
+
+Free Functors are Left Adjoint (\S\ref{sec:adjoint}) to Forgetful
+Functors (\S\ref{sec:forgetful_functor}).
+
+
+
+% --------------------------------------------------------------------
 \subsection{Free Category}\label{sec:free_category}
 % --------------------------------------------------------------------
 
@@ -2654,13 +2776,16 @@ cod(g'_1)$.
 % --------------------------------------------------------------------
 
 \emph{Monoidal Category} (or \emph{Tensor Category}) is a Category
-$\mathbf{C}$ with a Bifunctor $\otimes$:
+$\mathbf{C}$ with a Tensor Product (\S\ref{sec:tensor_product})
+$\otimes$:
 \[
   \otimes : \mathbf{C} \times \mathbf{C} \rightarrow \mathbf{C}
 \]
 which is Associative up to a Natural Isomorphism, along with an Object
 $I$ that is both the Left and Right Identity for $\otimes$ up to a
 Natural Isomorphism.
+
+$(\mathbf{C}, \otimes, I_\mathbf{C})$
 
 \emph{Coherence Conditions}
 
@@ -2672,6 +2797,23 @@ Category with the Disjoint Sum as the Bifunctor and the Empty
 Set as the Identity Element.
 
 Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda})
+
+Horizontal Categorification gives $2$-categories
+(\S\ref{sec:2_category})
+
+
+
+\subsubsection{Monoidal Functor}\label{sec:monoidal_functor}
+
+\subsubsection{String Diagram}\label{sec:string_diagram}
+
+Weak 2-category (Bicategory \S\ref{sec:bicategory})
+
+Interchange Law (\S\ref{sec:interchange_law})
+
+
+
+\paragraph{Whiskering}\label{sec:whiskering}
 
 
 
@@ -2711,6 +2853,25 @@ $\mathbf{Set}$. An equivalent definition is in terms of Presheaves:
 \[
   X: \Delta^{op} \rightarrow \mathbf{Set}
 \]
+
+
+
+\subparagraph{Kan Fibration}\label{sec:kan_fibration}
+
+\subparagraph{Kan Complex}\label{sec:kan_complex}
+\hfill \\
+
+Kan Fibration (\S\ref{sec:kan_fibration}) over a Point
+
+$\infty$-groupoid (\S\ref{sec:infinity_groupoid})
+
+
+
+\subparagraph{Simplicial Enriched Category}
+\label{sec:simplicial_enriched}
+\hfill \\
+
+$(\infty,1)$-category %FIXME xref
 
 
 
@@ -2832,6 +2993,43 @@ Replace Hom-sets with Objects from a general Monoidal Category
 % --------------------------------------------------------------------
 
 %FIXME this section should probably be relocated
+
+
+
+% --------------------------------------------------------------------
+\subsection{Vertical Categorification}
+\label{sec:vertical_categorification}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Horizontal Categorification}
+\label{sec:horizontal_categorification}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Dagger Category}\label{sec:dagger_category}
+% ====================================================================
+
+Involution Semigroup (\S\ref{sec:involution_semigroup})
+
+Examples:
+
+\begin{itemize}
+
+\item Discrete Categories (Trivial)
+\item Any Monoid with Involution (Dagger Category with one Object)
+\item Any Groupoid or Group
+\item $\mathbf{Rel}$ Category of Sets and Relations
+\item $\mathbf{Cob}$ Category of Closed Manifolds and Cobordisms
+\item $Spans(\mathbf{C})$ of $\mathbf{C}$ with Pullbacks
+\item $CoSpans(\mathbf{C})$ of $\mathbf{C}$ with Pushouts
+
+\end{itemize}
+
+Every Endomorphism Hom-set in a Dagger Category is a Monoid with
+Involution.
 
 
 
@@ -3024,6 +3222,10 @@ change of Signature.
 \section{Topos Theory}\label{sec:topos_theory}
 % ====================================================================
 
+Abstract Sheaf (\S\ref{sec:sheaf}) Theory
+
+
+
 % --------------------------------------------------------------------
 \subsection{Grothendieck Topology}\label{sec:grothendieck_topology}
 % --------------------------------------------------------------------
@@ -3130,6 +3332,10 @@ Effectivity (\S\ref{sec:effective_method})
 \subsection{$2$-category}\label{sec:2_category}
 % --------------------------------------------------------------------
 
+$2$-categories are Horizontal Categorification
+(\S\ref{sec:horizontal_categorification}) of Monoidal Categories
+(\S\ref{sec:monoidal_category}).
+
 
 
 \subsubsection{Doctrine}\label{sec:doctrine}
@@ -3201,3 +3407,7 @@ Homotopy
 % --------------------------------------------------------------------
 
 \subsubsection{Bicategory}\label{sec:bicategory}
+
+2-category (\S\ref{sec:2_category})
+
+String Diagram (\S\ref{sec:string_diagram})
