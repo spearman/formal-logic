@@ -90,7 +90,7 @@ expressing that the Variable is \emph{local} to the Expression:
 \[
   \lambda x.B
 \]
-or
+or:
 \[
   x.B
 \]
@@ -127,33 +127,6 @@ a Typing Derivation (\S\ref{sec:typing_derivation}) exists.
 
 
 % ====================================================================
-\section{Context}\label{sec:type_context}
-% ====================================================================
-
-A \emph{Context}, $\Gamma$, is a list of Assumptions of the form:
-\[
-  \Gamma = x_1 : A_1, x_2 : A_2, \ldots, x_n : A_n
-\]
-where each Element $x_i : A_i$ is an Assumption that the distinct
-Variable $x_i$ has type $A_i$.
-
-Judgements are formulated under the Assumptions of a particular
-Context, $\Gamma$:
-\[
-  \Gamma \vdash a : A
-\]
-For an empty Context:
-\[
-  \vdash a : A
-\]
-or
-\[
-  . \vdash a : A
-\]
-
-
-
-% ====================================================================
 \section{Type}\label{sec:type}
 % ====================================================================
 
@@ -163,16 +136,17 @@ or
 
 \emph{Type Constant} (or \emph{Base Type} or \emph{Atomic Type})
 
+Uninterpreted (\S\ref{sec:uninterpreted_function}) % FIXME
+
 
 
 % --------------------------------------------------------------------
 \subsection{Type Order}\label{sec:type_order}
 % --------------------------------------------------------------------
 
-\emph{Order}
-
-In Simply-typed $\lambda$-calculus ($\lambda^\rightarrow$), the Order
-of a Type $\tau$, denoted $o(\tau)$, is defined Inductively as:
+In Simply-typed $\lambda$-calculus ($\lambda^\rightarrow$), the
+\emph{Order} of a Type $\tau$, denoted $o(\tau)$, is defined
+Inductively as:
 \begin{itemize}
 \item $o(T) = 0$ if $T$ is a Base Type
 \item $o(\sigma \rightarrow \tau) = \text{max}(o(\sigma) + 1,
@@ -235,6 +209,10 @@ Reflexivity):
 % --------------------------------------------------------------------
 \subsection{Power Type}\label{sec:power_type}
 % --------------------------------------------------------------------
+
+$P A$ the Type of all Subtypes (\S\ref{sec:power_type}) of $A$
+
+
 
 % --------------------------------------------------------------------
 \subsection{Data Type}\label{sec:data_type}
@@ -403,10 +381,6 @@ Type Constructor (\S\ref{sec:type_constructor})
 
 Structural Recursion (\S\ref{sec:structural_recursion})
 
-\emph{Induction Induction}
-
-\emph{Induction Recursion}
-
 Streams between interacting processes in Programming Languages
 
 
@@ -415,6 +389,18 @@ Streams between interacting processes in Programming Languages
 
 \emph{Coinductive Type} (\emph{Codata}), Coinduction
 (\S\ref{sec:coinduction})
+
+
+
+\subsubsection{Induction Induction}\label{sec:induction_induction}
+
+\emph{Induction Induction}
+
+
+
+\subsubsection{Induction Recursion}\label{sec:induction_recursion}
+
+\emph{Induction Recursion}
 
 
 
@@ -547,6 +533,8 @@ Subtyping Judgement:
   \Gamma \vdash \tau_1 \preceq \tau_2
 \]
 
+Power Type (\S\ref{sec:power_type}) $P A$: Type of all Subtypes of $A$
+
 
 
 \paragraph{Variance}\label{sec:variance}
@@ -601,7 +589,7 @@ Universally Quantified Type Variable
 
 Type-level Function Abstraction $\Lambda$
 
-Second-order $\lambda$-calculus (\S\ref{sec:system_f})
+Second-order $\lambda$-calculus (System F \S\ref{sec:system_f})
 
 Bounded (\S\ref{sec:bounded_polymorphism}) Parametric Polymorphism
 
@@ -673,7 +661,7 @@ Predicative)
 A Polymorphic Function has a Dependent Product Type
 (\S\ref{sec:dependent_product}):
 \[
-  \Pi_{(A:\mathcal{U})} A \rightarrow C
+  \Pi_{(A:\class{U})} A \rightarrow C
 \]
 
 
@@ -692,9 +680,11 @@ to Semi-unification) %FIXME
 \subsection{Type Function}\label{sec:type_function}
 % --------------------------------------------------------------------
 
+\emph{Type Function} (or \emph{Type Operator})
+
 Adding additional Type Operators to Simply-typed Lambda Calculus
 results in \emph{Simply-typed Lambda Calculus with Type Operators}
-``$\lambda \underline{\omega}$'' (\S\ref{sec:simply_operators})
+``$\lambda \underline{\omega}$'' (\S\ref{sec:simplytyped_operators})
 
 System F$_{\omega}$ (\S\ref{sec:system_fomega})
 
@@ -744,7 +734,8 @@ Dependent Product Type (\S\ref{sec:dependent_product}).
 In a Category without Products, the Function Type can't be defined.
 
 Function Types are Covariant Functors on the Return Type and
-Contravariant Functors on the Argument Type.
+Contravariant Functors on the Argument Type. Cf. Hughes Arrows
+(\S\ref{sec:hughes_arrow}).
 
 
 
@@ -795,12 +786,16 @@ Logical Quantifiers (\S\ref{sec:quantifier})
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
 
 Categorically, Dependent Types correspond to Morphisms regarded as
-Indexed Families (Bundle or Fibration). % FIXME
+Indexed Families (Bundle or Fibration), represented by a \emph{Display
+  Map} which is a Morphism $p : B \rightarrow A$.
+% FIXME display map section?
 
 A Dependent Type is the Type of a Dependent Function
 (\S\ref{sec:dependent_function}).
 
 Dependent Pairs
+
+Classifying Space (\S\ref{sec:classifying_space})
 
 \textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
 \emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
@@ -822,7 +817,10 @@ abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
 
 \subsubsection{Dependent Function}\label{sec:dependent_function}
 
-A \emph{Dependent Function} is a Function from Terms to Types.
+A \emph{Dependent Function} is a Function from Terms to Types
+(Codomain varies depending on Argument). The Type of a Dependent
+Function is a \emph{Dependent Product Type}
+(\S\ref{sec:dependent_product}).
 
 Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
 
@@ -853,17 +851,20 @@ Proposition). For each Natural Number, either $even(x)$ is Inhabited
 
 \subsubsection{Dependent Product Type}\label{sec:dependent_product}
 
-The \emph{Dependent Product Type} (or \emph{$\Pi$-type}) generalizes
-the idea of a Polymorphic Function.
+The \emph{Dependent Product Type} (or \emph{$\Pi$-type}) is the Type
+of a Dependent Function. By Curry-Howard, $\Pi$-types model
+Implication and Universal Quantification.
 
-For a Type $A : \mathcal{U}$ in Type Universe $\mathcal{U}$, a Family
-of Types
+Generalizes the idea of a Polymorphic Function.
+
+For a Type $A : \class{U}$ in Type Universe $\class{U}$, a Family
+of Types:
 \[
-  B : A \rightarrow \mathcal{U}
+  B : A \rightarrow \class{U}
 \]
 can be defined by a Dependent Function which assigns a Type $B(a) :
-\mathcal{U}$ to Each Term $a : A$. The Type of this Function is a
-Dependent Product Type (\S\ref{sec:dependent_product}):
+\class{U}$ to Each Term $a : A$. The Type of this Function is a
+Dependent Product Type:
 \[
   \Pi_{(a:A)}B(a)
 \]
@@ -872,9 +873,6 @@ Function Type $A \rightarrow B$:
 \[
   \Pi_{(a:A)}B \equiv A \rightarrow B
 \]
-
-By Curry-Howard, $\Pi$-types model Implication and Universal
-Quantification.
 
 Polymorphic Function (\S\ref{sec:polymorphic_function})
 
@@ -944,27 +942,27 @@ Small Type %FIXME
 Type Theory analogue of Inaccessible Cardinal
 (\S\ref{sec:inaccessible_cardinal})
 
-$\mathcal{U}_0$ is the Universe of all Small Types. Every Name
-(\S\ref{sec:name}) $a:\mathcal{U}_0$ has an associated Type $El(a)$
+$\class{U}_0$ is the Universe of all Small Types. Every Name
+(\S\ref{sec:name}) $a:\class{U}_0$ has an associated Type $El(a)$
 giving its Extension or Meaning ($El$ is a Dependent Type
 \S\ref{sec:dependent_type} that maps each Object to its corresponding
 Type).
 
 A Predicative Cumulative Hierarchy (\S\ref{sec:cumulative_hierarchy}):
 \[
-  \mathcal{U}_0, \mathcal{U}_1, \mathcal{U}_2, \ldots
+  \class{U}_0, \class{U}_1, \class{U}_2, \ldots
 \]
-is such that any Type in $\mathcal{U}_n$ is also in
-$\mathcal{U}_{n+1}$:
+is such that any Type in $\class{U}_n$ is also in
+$\class{U}_{n+1}$:
 \[
-  u_n:\mathcal{U}_n+1
+  u_n:\class{U}_n+1
 \]
 with (Cumulative Property):
 \[
-  El(u_n) \equiv \mathcal{U}_n
+  El(u_n) \equiv \class{U}_n
 \]
 
-See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
+See $\class{U}-INTRO$ and $\class{U}-CUMUL$
 \S\ref{sec:homotopy_rules}.
 
 
@@ -976,11 +974,31 @@ See $\mathcal{U}-INTRO$ and $\mathcal{U}-CUMUL$
 
 
 % ====================================================================
-\section{Typing Environment}\label{sec:typing_environment}
+\section{Context}\label{sec:type_context}
 % ====================================================================
 
-A \emph{Typing Environment} (or \emph{Context} or \emph{Variable
-  Assignment}) $\Gamma$ is a Set of Typing Assumptions.
+A \emph{Context} (or \emph{Typing Environment} or \emph{Variable
+  Assignment}), $\Gamma$, is a list of \emph{Typing Assumptions}
+(\S\ref{sec:typing_assumption}) of the form:
+\[
+  \Gamma = x_1 : A_1, x_2 : A_2, \ldots, x_n : A_n
+\]
+where each Element $x_i : A_i$ is an Assumption that the distinct
+Variable $x_i$ has type $A_i$.
+
+\emph{Typing Judgements} (\S\ref{sec:typing_judgement}) are formulated
+under the Assumptions of a particular Context, $\Gamma$:
+\[
+  \Gamma \vdash a : A
+\]
+For an empty Context:
+\[
+  \vdash a : A
+\]
+or:
+\[
+  . \vdash a : A
+\]
 
 Closed Terms are those Terms that are Typable
 (\S\ref{sec:typing_derivation}) in an Empty Context, e.g. the I, S,
@@ -1016,6 +1034,11 @@ and K Combinators (\S\ref{sec:combinator}).
 * opposite of Type Erasure
 * see Type Inference (\S\ref{sec:type_inference})
 
+Abstract idea about a computer program turned into an explicit Data
+Model or Object
+
+(Hypostatize) %FIXME
+
 
 
 % ====================================================================
@@ -1029,6 +1052,8 @@ A Typing Judgement expresses Propositional Equality. % FIXME
 
 The Validity of a Typing Judgement is given by a Typing Derivation
 (\S\ref{sec:typing_derivation}).
+
+Constant Type % FIXME empty context
 
 
 
@@ -1101,8 +1126,6 @@ Assumption
 % ====================================================================
 \section{Type Inference}\label{sec:type_inference}
 % ====================================================================
-
-
 
 % ====================================================================
 \section{Typed $\lambda$-Calculus}\label{sec:typed_lambda}
@@ -1198,6 +1221,9 @@ Constant. These Expressions are, in order:
   \item Constant
 \end{itemize}
 
+Abstraction corresponds to Existential Quantification in Second-order
+Logic (\S\ref{sec:secondorder_logic}).
+
 
 
 \textbf{Intrinsic Interpretation}: \emph{Church-style}
@@ -1263,7 +1289,7 @@ Typing Rules (\S\ref{sec:typing_rule}):
 \textbf{Categorical Semantics}
 
 Simply-typed $\lambda$-calculus is the Internal Language
-(\S\ref{sec:internal_language}) of the Cartesian Closed Categories
+(\S\ref{sec:internal_logic}) of the Cartesian Closed Categories
 (\S\ref{sec:cartesian_closed}).
 
 
@@ -1346,7 +1372,7 @@ System $F_{<:}$ (\S\ref{sec:system_fsub})
 
 % --------------------------------------------------------------------
 \subsection{Simply-typed $\lambda$-calculus with Type Operators}
-\label{sec:simply_operators}
+\label{sec:simplytyped_operators}
 % --------------------------------------------------------------------
 
 $\lambda\underline{\omega}$
@@ -1363,6 +1389,8 @@ System F$_\omega$ (\S\ref{sec:system_fomega})
 
 \emph{System F} (or \emph{Second-order $\lambda$-calculus})
 
+(\emph{Girard-Reynolds}) \emph{Polymorphic $\lambda$-calculus})
+
 Universal Quantification over all Types (cf. Existential Type Theory
 \S\ref{sec:existential_type})
 
@@ -1373,6 +1401,10 @@ Logic (\S\ref{sec:secondorder_logic})
 
 Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
 Type-level Function Abstraction $\Lambda$
+
+Quantification over Propositional Variables in Second-order Logic
+corresponds to Type Abstraction in Second-order $\lambda$-calculus.
+\cite{wadler14}
 
 
 
@@ -1453,19 +1485,21 @@ Barendregt-Geuvers-Klop Conjecture
 
 All Strongly Normalizing
 
-$\lambda\rightarrow$: Simply-typed $\lambda$-calculus; Terms depending
-on Terms
+$\lambda\rightarrow$: Simply-typed $\lambda$-calculus
+(\S\ref{sec:simply_typed}); Terms depending on Terms (Function Type
+\S\ref{sec:function_type})
 
 $\lambda\underline{\omega}$: Simply-typed $\lambda$-calculus with Type
-Operators (\S\ref{sec:simply_operators}); Types depending on Types
+Operators (\S\ref{sec:simplytyped_operators}); Types depending on
+Types (Type Functions \S\ref{sec:type_function})
 
 $\lambda2$: Second-order $\lambda$-calculus (System F
 \S\ref{sec:system_f}); Terms depending on Types (Parametric
 Polymorphism \S\ref{sec:parametric_polymorphism})
 
-$\lambda\Pi$: Dependently-typed $\lambda$-calculus
-(Logical Framework \S\ref{sec:logical_framework}); Types depending on
-Terms
+$\lambda\Pi$: Dependently-typed $\lambda$-calculus (Logical Framework
+\S\ref{sec:logical_framework}); Types depending on Terms (Dependent
+Types \S\ref{sec:dependent_type})
 
 
 
@@ -1483,8 +1517,16 @@ Modelled by Locally Cartesian Closed Category
 (\S\ref{sec:locally_cartesian})
 
 Extensional Martin-L\"of Type Theory: Internal Language
-(\S\ref{sec:internal_language}) for Cartesian Closed Quasi-categories
+(\S\ref{sec:internal_logic}) for Cartesian Closed Quasi-categories
 (\S\ref{sec:quasicategory})
+
+Formation: the Context in which the Type is defined
+
+Introduction: rules for Construction
+
+Elimination: rules for De-construction
+
+Computation:
 
 Four forms of Judgements:
 \begin{description}
@@ -1554,7 +1596,7 @@ Context (\S\ref{sec:type_context}) Judgements:
 \hfill\\
 Type Universe:
 \[
-  \mathcal{U}
+  \class{U}
 \]
 Dependent Type mapping Objects to Types:
 \[
@@ -1807,15 +1849,14 @@ Homotopy Thoery (\S\ref{sec:homotopy})
 - Internal Language of Higher Categories
 (\S\ref{sec:higher_category}).
 
-$\infty$-groupoid (\S\ref{sec:infinity_groupoid})
+Homotopy Types Model $\infty$-groupoids
+(\S\ref{sec:infinity_groupoid})
 
 
 
 % --------------------------------------------------------------------
 \subsection{Higher Inductive Type}\label{sec:higher_inductive_type}
 % --------------------------------------------------------------------
-
-
 
 % --------------------------------------------------------------------
 \subsection{Inference Rules}\label{sec:homotopy_rules}
@@ -1848,7 +1889,7 @@ Well-formed Context:
 \[
   {
     \frac
-    {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \mathcal{U}_i}
+    {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \class{U}_i}
     {(x_1:A_1,\ldots,x_n:A_n) ctx}
   } ctx-EXT
 \]
@@ -1882,7 +1923,7 @@ Weakening for Typing Judgements:
 \[
   {
     \frac
-    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
     \Gamma,\Delta \vdash b : B}
     {\Gamma,x:A,\Delta \vdash b:B}
   } Wkg_1
@@ -1902,7 +1943,7 @@ Weakening for Judgemental Equality:
 \[
   {
     \frac
-    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
+    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
     \Gamma,\Delta \vdash b \equiv c : B}
     {\Gamma, x:A, \Delta \vdash b \equiv c : B}
   } Wkg_2
@@ -1916,16 +1957,16 @@ Weakening for Judgemental Equality:
   {
     \frac
     {(\Gamma) ctx}
-    {\Gamma \vdash \mathcal{U}_i : \mathcal{U}_{i+1}}
-  } \mathcal{U}-INTRO
+    {\Gamma \vdash \class{U}_i : \class{U}_{i+1}}
+  } \class{U}-INTRO
 \]
 
 \[
   {
     \frac
-    {\Gamma \vdash A : \mathcal{U}_i}
-    {\Gamma \vdash A : \mathcal{U}_{i+1}}
-  } \mathcal{U}-CUMUL
+    {\Gamma \vdash A : \class{U}_i}
+    {\Gamma \vdash A : \class{U}_{i+1}}
+  } \class{U}-CUMUL
 \]
 
 
@@ -1935,9 +1976,9 @@ Weakening for Judgemental Equality:
 \[
   {
     \frac
-    {\Gamma \vdash A : \mathcal{U}_i \;\;\;\;\;\;\;
-    \Gamma,x:A \vdash B : \mathcal{U}_i}
-    {\Gamma \vdash \prod_{(x:A)} B : \mathcal{U}_i}
+    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
+    \Gamma,x:A \vdash B : \class{U}_i}
+    {\Gamma \vdash \prod_{(x:A)} B : \class{U}_i}
   } \Pi-FORM
 \]\[
   {
@@ -1979,6 +2020,15 @@ Weakening for Judgemental Equality:
 \]
 where $A = B$ is notation for the Type $Id_U(A,B)$ where $U$ is the
 Universe containing $A$ and $B$.
+
+
+
+% ====================================================================
+\section{Opetopic Type Theory}\label{sec:opetopic_typetheory}
+% ====================================================================
+
+Internal Language of $\infty$-categories
+(\S\ref{sec:infinity_category})
 
 
 
@@ -2232,7 +2282,7 @@ Predicate Logic - Dependent Types (Intuitionistic Type Theory
 
 Modal Logic - Monads
 
-Classical-Intuitionistic Embedding - Continuation Passing Style
+Classical-Intuitionistic Embedding - Continuation-passing Style
 
 Subset Type $(\exists x:A).B$ (Pairs of Objects and the Proofs that
 they have Property): $\{ x : A | B \}$ consisting of those $a$ in $A$
@@ -2293,9 +2343,11 @@ Structural rules of Exchange (\S\ref{sec:exchange_rule}), Weakening
 Linear Logic (\S\ref{sec:linear_logic}) allows safe Deallocation
 (Objects used exactly once)
 
+Distribution and Concurrency (Session Types \S\ref{sec:session_type})
+
 Linear $\lambda$-calculus (\S\ref{sec:linear_lambda})
 
-Internal Language (\S\ref{sec:internal_language}) of Closed
+Internal Language (\S\ref{sec:internal_logic}) of Closed
 (\S\ref{sec:closed_monoidal}) Symmetric
 (\S\ref{sec:symmetric_monoidal}) Monoidal Categories
 
@@ -2317,6 +2369,13 @@ No-cloning Theorem (Quantum States):
 \hfill \\
 
 Affine Logic (\S\ref{sec:affine_logic})
+
+
+
+\paragraph{Session Type}\label{sec:session_type}
+\hfill \\
+
+Distribution and Concurrency
 
 
 
