@@ -32,6 +32,10 @@ Measurable
 
 
 % --------------------------------------------------------------------
+\subsection{Measurable Function}\label{sec:measurable_function}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Measure Space}\label{sec:measure_space}
 % --------------------------------------------------------------------
 
@@ -44,6 +48,10 @@ Measurable
 % ====================================================================
 \section{Probability Space}\label{sec:probability_space}
 % ====================================================================
+
+$(\Omega, \Sigma, P)$
+
+
 
 % --------------------------------------------------------------------
 \subsection{Sample Space}\label{sec:sample_space}
@@ -110,6 +118,57 @@ has Probability $0$ of assuming a particular Value
 
 
 
+\subsubsection{Expected Value}\label{sec:expected_value}
+
+For Random Variable $X$ with Probability Distribution $f(x)$, the
+\emph{Expected Value} (or \emph{Mean}) of $X$ is (Discrete):
+\[
+  \mu = E[X] = \sum_{i=1}^\infty x_i f(x_i)
+\]
+(Continuous):
+\[
+  \mu = E[X] = \int\limits_{-\infty}^{\infty} x_i f(x_i) dx
+\]
+
+Law of Large Numbers (\S\ref{sec:large_numbers})
+
+For Random Variable $X$ with Probability Distribution $f(x)$, the
+Expected Value of a Measurable Function
+(\S\ref{sec:measurable_function}) of $X$, $g(X)$, is:
+\[
+  \mu_{g(X)} = E[g(X)] = \int\limits_{-\infty}^{\infty} g(x) f(x) dx
+\]
+
+For Joint Probability Density Function:
+\[
+  E[X Y] = \int\int x y j(x,y) dx dy
+\]
+\HandRight\; Note that $E[X Y]$ is not necessarily equal to $E[X]
+E[Y]$, see Covariance (\S\ref{sec:covariance}).
+
+
+
+\subsubsection{Variance}\label{sec:variance}
+
+Discrete Random Variable $X$:
+\[
+  Var(X) = \sum_{i=1}^n f(x_i) (x_i - \mu)^2
+  = \sum_{i=1}^n f(x_i) x_i^2 - \mu^2
+\]
+where $\mu = \sum_{i=1}^n f(x_i) x_i$
+
+Continuous Random Variable $X$:
+\[
+  Var(X) = \sigma^2 = \int (x - \mu)^2 f(x) dx = \int x^2 f(x) dx - \mu^2
+\]
+where $\mu = \int x f(x) dx$
+
+
+
+\subsubsection{Covariance}\label{sec:covariance}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Probability}\label{sec:probability}
 % --------------------------------------------------------------------
@@ -167,7 +226,7 @@ where terms such that $P(B_n) = 0$ are omitted from the summation.
 \]
 
 
-\subsubsection{Law of Large Numbers}\label{sec:law_of_large_numbers}
+\subsubsection{Law of Large Numbers}\label{sec:large_numbers}
 
 \subsubsection{Probability Measure Function}
 \label{sec:probability_measure}
@@ -213,9 +272,19 @@ Discrete Random Variables:
   \item $P(X = x, Y = y) = f(x,y)$
 \end{enumerate}
 
+Continuous Random Variables:
+\begin{enumerate}
+  \item $\forall (x,y) \in X \times Y, f(x,y) \geq 0$
+  \item $\int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
+    f(x,y) dx dy = 1$
+  \item $P[(X,Y) \in B] = \iint\limits_B f(x,y) dA$
+\end{enumerate}
 
 
 \subsubsection{Marginal Distribution}\label{sec:marginal_distribution}
+
+\subsubsection{Conditional Distribution}
+\label{sec:conditional_distribution}
 
 \subsubsection{Probability Mass Function}\label{sec:probability_mass}
 
@@ -259,6 +328,12 @@ f(t) dt$
 % --------------------------------------------------------------------
 \subsection{Normalizing Constant}\label{sec:normalizing_constant}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Independence}\label{sec:independence}
+% --------------------------------------------------------------------
+
+\subsection{Conditional Independence}\label{sec:conditional_independence}
 
 
 
@@ -347,6 +422,8 @@ Degrees of Freedom, Linear Independence, Biased/Unbiased Estimator % FIXME
 
 \paragraph{Standard Deviation}\label{sec:standard_deviation}
 \hfill \\
+
+Variance (\S\ref{sec:variance})
 
 \emph{Uncorrected Standard Deviation}:
 \[
