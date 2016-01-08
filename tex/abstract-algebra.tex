@@ -4,48 +4,85 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-1 Set:
+\iffalse
 
-  1 Operator *:
+1 Set X:
 
-  Magma         * Closed
-  Semigroup     * Closed, Associative
-  Monoid        * Closed, Associative, Identity
-  Group         * Closed, Associative, Identity, Inverse
-  Abelian Group * Closed, Associative, Identity, Inverse, Commutative
+  1 Operator
+  * : X x X -> X
 
-  2 Operators * +:
+    Magma         * Closed
+    Semigroup     * Closed, Associative
+    Monoid        * Closed, Associative, Identity
+    Group         * Closed, Associative, Identity, Inverse
+    Abelian Group * Closed, Associative, Identity, Inverse, Commutative
 
-  Rng           * + Distributive
-                  + Closed, Associative, Identity, Inverse, Commutative
-                  * Closed, Associative
-  Ring (Unital) * + Distributive
-                  + Closed, Associative, Identity, Inverse, Commutative
-                  * Closed, Associative, Identity
-  Division Ring * + Distributive
-                  + Closed, Associative, Identity, Inverse, Commutative
-                  * Closed, Associative, Identity, Inverse
-  Field         * + Distributive
-                  + Closed, Associative, Identity, Inverse, Commutative
-                  * Closed, Associative, Identity, Inverse, Commutative
+  2 Operators
+  * : X x X -> X
+  + : X x X -> X
 
-2 Sets:
+    Rng           * + Distributive
+                    + Closed, Associative, Identity, Inverse, Commutative
+                    * Closed, Associative
+    Ring (Unital) * + Distributive
+                    + Closed, Associative, Identity, Inverse, Commutative
+                    * Closed, Associative, Identity
+    Division Ring * + Distributive
+                    + Closed, Associative, Identity, Inverse, Commutative
+                    * Closed, Associative, Identity, Inverse
+    Field         * + Distributive
+                    + Closed, Associative, Identity, Inverse, Commutative
+                    * Closed, Associative, Identity, Inverse, Commutative
 
-  2 Operators * +, 1 Operator x, Scalar Multiplier .:
+2 Sets X Y:
 
-  Module      . * + Distributive
-          Ring: * + Distributive
-                  + Closed, Associative, Identity, Inverse, Commutative
-                  * Closed, Associative, Identity
-        Abelian
-         Group:   x Closed, Associative, Identity, Commutative
+  2 Operators
+  * : X x X -> X
+  + : X x X -> X
+  1 Operator
+  & : Y x Y -> Y
+  Scalar Multiplier
+  . : Y x X -> X
 
- Vector Space . * + Distributive
-         Field: * + Distributive
-                  + Closed, Associative, Identity, Inverse, Commutative
-                  * Closed, Associative, Identity, Inverse, Commutative
-        Abelian
-         Group:   x Closed, Associative, Identity, Commutative
+    Module        . * + Distributive
+              Ring: * + Distributive
+                      + Closed, Associative, Identity, Inverse, Commutative
+                      * Closed, Associative, Identity
+            Abelian
+             Group:   & Closed, Associative, Identity, Inverse, Commutative
+
+    Vector Space  . * + Distributive
+             Field: * + Distributive
+                      + Closed, Associative, Identity, Inverse, Commutative
+                      * Closed, Associative, Identity, Inverse, Commutative
+            Abelian
+             Group:   & Closed, Associative, Identity, Inverse, Commutative
+
+  2 Operators
+  * : X x X -> X
+  + : X x X -> X
+  2 Operators
+  & : Y x Y -> Y
+  x : Y x Y -> Y
+  Scalar Multiplier
+  . : Y x X -> X
+
+    R-algebra     . * + Distributive
+              Ring: * + Distributive
+                      + Closed, Associative, Identity, Inverse, Commutative
+                      * Closed, Associative, Identity
+            Abelian
+             Group:   ^ Closed, Associative, Identity, Inverse, Commutative
+
+    K-algebra     . * + Distributive
+             Field: * + Distributive
+                      + Closed, Associative, Identity, Inverse, Commutative
+                      * Closed, Associative, Identity, Inverse, Commutative
+            Abelian
+             Group:   ^ Closed, Associative, Identity, Inverse, Commutative
+
+
+\fi
 
 
 % ====================================================================
@@ -1550,6 +1587,11 @@ Every Subgroup of a Free Group is Free. \cite{hatcher02}
 \subsection{Topological Group}\label{sec:topological_group}
 % --------------------------------------------------------------------
 
+Group $G$ with Topology (\S\ref{sec:topology}) $\tau$ on $G$ such that
+Group Binary and Inverse Operations are Continuous.
+
+
+
 \subsubsection{Profinite Group}\label{sec:profinite_group}
 
 
@@ -1667,14 +1709,18 @@ A \emph{Finite Ring} is a Ring that has a Finite number of Elements.
 A \emph{Unit} is an Element of a Ring $R$ that has an Inverse
 Element in the Multiplicative Monoid of $R$.
 
-The term \emph{Unital Ring} is used to indicate a Ring with a
-Multiplicative Identity, to differentiate from other
-\emph{Pseudo-rings} that may lack a Multiplicative Identity.
+The term \emph{Unital Ring} (\S\ref{sec:unital_ring}) is used to
+indicate a Ring with a Multiplicative Identity, to differentiate from
+other \emph{Pseudo-rings} that may lack a Multiplicative Identity.
 
-A \emph{Rng} is a Pseudo-ring that satisfies all Ring axioms except a
-Multiplicative Identity.
+A \emph{Rng} (\S\ref{sec:rng}) is a Pseudo-ring that satisfies all
+Ring axioms except a Multiplicative Identity.
 
 
+
+\subsubsection{Rng}\label{sec:rng}
+
+\subsubsection{Unital Ring}\label{sec:unital_ring}
 
 \subsubsection{Semiring}\label{sec:semiring}
 
@@ -1819,66 +1865,6 @@ An \emph{Ordered Field} is a Field with a Total Ordering
 (\S\ref{sec:total_order}) compatible with the Field Operations.
 
 
-
-% --------------------------------------------------------------------
-\subsection{Module}\label{sec:module}
-% --------------------------------------------------------------------
-
-A \emph{Module} is a Unital Ring, $R$, together with an Abelian Group,
-$(M, +)$, and an Operation called \emph{Scalar Multiplication} which
-is either:
-\[ R \times M \rightarrow M \]
-for a \emph{Left $R$-module $M$}, $_R M$, or:
-\[ M \times R \rightarrow M \]
-for a \emph{Right $R$-module $M$}, $M_R$.
-
-The Scalar Multiplication Operator is required that for all $r,s \in
-R$ and $x,y \in M$ in a Left $R$-module $M$:
-\begin{enumerate}
-    \item $r(x + y) = rx + ry$
-    \item $(r + s)x = rx + sx$
-    \item $(rs)x = r(sx)$
-    \item $1_Rx = x$
-\end{enumerate}
-or in a Right $R$-module $M$:
-\begin{enumerate}
-    \item $(x + y)r = xr + yr$
-    \item $x(r + s) = xr + xs$
-    \item $x(rs) = (sx)r$
-    \item $x 1_R = x$
-\end{enumerate}
-where $1_R$ is the Multiplicative Identity for $R$. If the Ring is not
-required to be Unital, then item (4) above can be ommitted, but can be
-explicitly required by stating that we are talking about a
-\emph{Unital Left/Right $R$-module $M$}.
-
-\emph{Bimodule}
-
-If $R$ is Commutative, then Left $R$-modules are the same as Right
-$R$-modules and simply called \emph{$R$-modules}.
-
-A Module Homomorphism is an \emph{Linear Map} (\S\ref{sec:linear_map})
-
-\emph{Bilinear Map}
-
-\emph{Multilinear Map}
-
-
-
-\subsubsection{Free Module}\label{sec:free_module}
-
-A \emph{Free Module} is a Freely Generated (\S\ref{sec:free_object})
-Module over a given Basis (\S\ref{sec:basis}).
-
-
-
-\paragraph{Group Ring}\label{sec:group_ring}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Bimodule}\label{sec:bimodule}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Ring Ideal}\label{sec:ring_ideal}
