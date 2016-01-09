@@ -369,16 +369,16 @@ $\cat{CGHaus}$
 
 
 % --------------------------------------------------------------------
+\subsection{Separation Axioms}\label{sec:separation_axioms}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Hausdorff Space}\label{sec:hausdorff_space}
 % --------------------------------------------------------------------
 
 distinct Points have Disjoint Neighborhoods (\S\ref{sec:neighborhood})
 
 
-
-% --------------------------------------------------------------------
-\subsection{Separation Axioms}\label{sec:separation_axioms}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Topologist's Sine Curve}\label{sec:topologists_sine}
@@ -400,7 +400,15 @@ A Cover can also be defined for an arbitrary Subset of $X$, $Y
   Y \subseteq \bigcup_{i \in I} U_i
 \]
 
+
+
 \subsubsection{Refinement}\label{sec:refinement}
+
+\subsubsection{Covering Map}\label{sec:covering_map}
+
+\subsubsection{Covering Space}\label{sec:covering_space}
+
+\subsubsection{Base Space}\label{sec:base_space}
 
 
 
@@ -534,53 +542,6 @@ Compactness Theorem (Model Theory \S\ref{sec:compactness})
 \subsection{Complete Metric Space}\label{sec:complete_metric_space}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Pointed Space}\label{sec:pointed_space}
-% --------------------------------------------------------------------
-
-\subsubsection{Loop Space}\label{sec:loop_space}
-
-Loop (\S\ref{sec:loop})
-
-$\Omega X$
-
-A$_\infty$-operad (\S\ref{sec:a_infinity_operad})
-
-
-
-\paragraph{Free Loop Space}\label{sec:free_loop_space}
-\hfill \\
-
-Space of Maps from $S^1$ to $X$ with Compact-open Topology
-(\S\ref{sec:compact_open})
-
-
-
-\subsubsection{Fundamental Group}\label{sec:fundamental_group}
-
-Algebraic Image of a Space from the Loops (\S\ref{sec:loop}) in the
-Space
-
-Homeomorphic Spaces have Isomorphic Fundamental Groups. Every Group
-can be realized as the Fundamental Group of some Space.
-\cite{hatcher02}
-
-For a Space $X$, Elements are Loops in $X$ starting and ending at a
-Base Point $x_0 \in X$, where two Loops are the same Element if they
-can be Continuously Deformed (\S\ref{sec:homotopy}) into eachother
-within the Space $X$.
-
-For $X$ the Complement of a Circle $A$ the Fundamental Group is the
-Infinite Cyclic Group (\S\ref{sec:infinite_cyclic}) with one
-Generator.
-
-For the Complement of two Unlinked Circles $A$ and $B$, the
-Fundamental Group is the Non-abelian (\S\ref{sec:nonabelian_group})
-Free Group (\S\ref{sec:free_group}) on two Generators.
-
-For the Complement of two Linked Circles $A$ and $B$, the Fundamental
-Group is the Abelian (\S\ref{sec:abelian_group}) Free Group
-(\S\ref{sec:free_group}) on two Generators. \cite{hatcher02}
 
 
 
@@ -612,12 +573,20 @@ An equivalent definition is possible in terms of \emph{Closed Sets}
 
 \emph{Point}
 
-Two Points that are within the same Open Set of a Topology are said to
-be \emph{Topologically Indistinguishable}.
+Two Points that are within the same Open Set (they have exactly the
+same Neighborhoods) of a Topology are said to be \emph{Topologically
+  Indistinguishable} (\S\ref{sec:topologically_distinguishable}).
 
 
 
 \subsubsection{Isolated Point}\label{sec:isolated_point}
+
+\subsubsection{Topologically Distinguishable}
+\label{sec:topologically_distinguishable}
+
+Two Points of a Topological Space $X$ are \emph{Topologically
+  Indistinguishable} if they have exactly the same Neighborhoods
+(\S\ref{sec:neighborhood}).
 
 
 
@@ -975,22 +944,142 @@ any Convergent Net $(x_\alpha)$:
 
 
 % --------------------------------------------------------------------
-\subsection{Path}\label{sec:path}
+\subsection{Path}\label{sec:path} \cite{hatcher02}
 % --------------------------------------------------------------------
+
+Continuous Map (\S\ref{sec:continuous_map}) $f : I \rightarrow X$ from
+Unit Interval (\S\ref{sec:unit_interval}) $I$ to Space $X$.
+
+Constant Path %FIXME
+
+
+
+\subsubsection{Path Product}\label{sec:path_product}
+
+$f,g : I \rightarrow X$ where $f(1) = g(0)$, \emph{Product Path} (or
+\emph{Composition}) $f \cdot g$:
+\[
+  f \cdot g (s) =
+  \begin{cases}
+    f(2s)   & \quad 0 \leq s \leq \sfrac{1}{2} \\
+    g(2s-1) & \quad \sfrac{1}{2} \leq s \leq 1 \\
+  \end{cases}
+\]
+
+
+
+\subsubsection{Inverse Path}\label{sec:inverse_path}
+
+$f^{-1}(s) = f(1-s)$
+
+
+
+\subsubsection{Path Homotopy}\label{sec:path_homotopy}
+
+\emph{Homotopic Paths} $f_0 \simeq f_1$ with \emph{Homotopy}
+(\S\ref{sec:homotopy}) $f_t$
+
+Family of Paths $f_t : I \rightarrow X$ for $t \in [0,1]$ such that:
+\begin{enumerate}
+  \item $f_t(0) = x_0$ and $f_t(1) = x_1$
+  \item Map $F : I \times I \rightarrow X$ with $F(s,t) = f_t(s)$ is
+    Continuous
+\end{enumerate}
+
+Linear Homotopy in $\reals^n$ (or any Convex Subspace
+\S\ref{sec:convex_subspace} $X \subset \reals^n$):
+\[
+  f_t(s) = (1 - t) f_0(s) + t f_1(s)
+\]
+
+
+
+\paragraph{Homotopy Class}\label{sec:homotopy_class}
+\hfill \\
+
+Equivalence Class $[f]$
+
+
 
 \subsubsection{Loop}\label{sec:loop}
 
-Path with equal Initial and Terminal Points: Continuous Function
+Path with equal Initial and Terminal Points called the
+\emph{Basepoint}: Continuous Function
 (\S\ref{sec:continuous_function}) $f$ from Unit Interval $[0,1]$ to
-Topological Space $X$ where $f(0) = f(1)$
+Topological Space $X$ where $f(0) = f(1) = x_0 \in X$
 
-Two Loops $B_m$ and $B_n$ with the same Initial and Terminal Points
-can be combined into a new Loop $B_m + B_n = B_{m+n}$.
+Two Loops $f_m$ and $f_n$ with the same Initial and Terminal Points
+can be combined into a new Loop $f_m + f_n = B_{m+n}$.
 \cite{hatcher02}
 
 Loop Space (\S\ref{sec:loop_space})
 
+Fundamental Group (\S\ref{sec:fundamental_group})
+
 Link (\S\ref{sec:link})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Pointed Space}\label{sec:pointed_space}
+% --------------------------------------------------------------------
+
+\subsubsection{Loop Space}\label{sec:loop_space}
+
+Loop (\S\ref{sec:loop})
+
+$\Omega X$
+
+A$_\infty$-operad (\S\ref{sec:a_infinity_operad})
+
+
+
+\paragraph{Free Loop Space}\label{sec:free_loop_space}
+\hfill \\
+
+Space of Maps from $S^1$ to $X$ with Compact-open Topology
+(\S\ref{sec:compact_open})
+
+
+
+\paragraph{Fundamental Group}\label{sec:fundamental_group}
+\hfill \\
+
+Algebraic Image of a Space from the Loops (\S\ref{sec:loop}) in the
+Space
+
+For a Space $X$, Elements are Loops in $X$ starting and ending at a
+Base Point $x_0 \in X$, where two Loops are the same Element if they
+can be Continuously Deformed (\S\ref{sec:path_homotopy}) into
+eachother within the Space $X$.
+
+All Homotopy Classes (\S\ref{sec:path_homotopy}) $[f]$ of Loops $f : I
+\rightarrow X$ at Basepoint $x_0$:
+\[
+  \pi_1(X,x_0)
+\]
+with Group Operation as the Path Product (\S\ref{sec:path_product}):
+\[
+  [f][g] = [f \cdot g]
+\]
+
+Homeomorphic Spaces have Isomorphic Fundamental Groups. Every Group
+$G$ can be realized as the Fundamental Group of some Space $X_G$.
+\cite{hatcher02}
+
+For $X$ the Complement of a Circle $A$ the Fundamental Group is the
+Infinite Cyclic Group (\S\ref{sec:infinite_cyclic}) with one
+Generator: $\pi_1(S^1) \cong \ints$
+
+For the Complement of two Unlinked Circles $A$ and $B$, the
+Fundamental Group is the Non-abelian (\S\ref{sec:nonabelian_group})
+Free Group (\S\ref{sec:free_group}) on two Generators.
+
+For the Complement of two Linked Circles $A$ and $B$, the Fundamental
+Group is the Abelian (\S\ref{sec:abelian_group}) Free Group
+(\S\ref{sec:free_group}) on two Generators. \cite{hatcher02}
+
+$n$-th Homotopy Group (\S\ref{sec:homotopy_group}) $\pi_n(X,x_0)$
 
 
 
@@ -1356,6 +1445,14 @@ $r : X \rightarrow X$, such that $r(X) = A$ and $r | A = id_A$.
 % --------------------------------------------------------------------
 \subsection{Homotopy Group}\label{sec:homotopy_group}
 % --------------------------------------------------------------------
+
+Fundamental Group (\S\ref{sec:fundamental_group}) $\pi_1(X,x_0)$
+
+$n$-th Homotopy Group $\pi_n(X,x_0)$
+
+$I^n$
+
+
 
 % --------------------------------------------------------------------
 \subsection{Homology Theory}\label{sec:homology_theory}
