@@ -975,6 +975,11 @@ Neither Covariant nor Contravariant
 
 
 % --------------------------------------------------------------------
+\subsection{Product-preserving Functor}
+\label{sec:product_preserving_functor}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Hom-functor}\label{sec:hom_functor}
 % --------------------------------------------------------------------
 
@@ -1455,11 +1460,31 @@ Seen as an Indexed Monoid $A(-,+)$, Contravariant on input, Covariant
 on output. A Monad may be seen as a special case of a Hughes Arrow
 with output but no input.
 
-A Monoid $(M,\cdot,e)$ gives rise to a Constant Arrow.
-\cite{jacobs-heunen-hasuo09}
-
 $\ggg : A(X,P) \times A(P,Y) \rightarrow A(X,Y)$ is Dinatural in $P$
 (signifying $\ggg$ is Parametric in $P$). \cite{jacobs-heunen-hasuo09}
+
+\begin{itemize}
+  \item Monoid $(M,\cdot,e)$ (Constant Arrow)
+  \item Strong Monad (\S\ref{sec:strong_monad}) $M$: Arrow
+    $\overline{M}(X,Y) = M(Y)^X$
+  \item Comonad $N$: Arrow $\overline{N}(X,Y) = Y^{N(X)}$
+  \item Monad $M$ + Comonad $N$: Arrow
+    $\overline{(M,N)}(X,Y) = M(Y)^{N(X)}$
+  \item ``Non-deterministic Dataflow'':
+    $(X,Y) \mapsto \mathcal{P}(Y^\nats)^{(X^\nats)}$
+  \item Arrows $A_1$, $A_2$: Product Arrow
+    $A(X,Y) = A_1(X,Y) \times A_2(X,Y)$
+  \item Product-preserving Functor
+    (\S\ref{sec:product_preserving_functor}) $F$: Arrow
+    $A_F(X,Y) = A(F(X),F(Y))$
+  \item Type $S$, Arrow $A$: Arrow
+    $A_{S\times}(X,Y) = A(S \times X, S \times Y)$
+  \item State Functors
+  \item Parsers
+  \item Quantum Computation
+\end{itemize}
+\cite{jacobs-heunen-hasuo09}
+
 
 
 
@@ -2117,10 +2142,15 @@ Products are also Associative:
   A \times (B \times C) \cong (A \times B) \times C
 \]
 
+In $\cat{Set}$ the Product is the Cartesian Product $\times$ and the
+Unit is the Singleton Set $1$.
+
 In $\cat{Rel}$ the Product is the Direct Sum $+$ and the Unit is
 the Empty Set $\varnothing$.
 
-In $\cat{Hilb}$ the Product is Binary Sum
+In $\cat{Hilb}$ the Product is Binary Sum and the Unit is the
+Zero-dimensional Hilbert Space $\{ 0 \}$. %FIXME products not
+                                %isomorphic? strict monoidal category
 
 
 
@@ -3037,6 +3067,8 @@ Y$ and $g : X' \rightarrow Y'$ is given by:
 A Monoidal Category may be denoted by the Triple: $(\cat{C},
 \otimes, I_\cat{C})$.
 
+Associator $\alpha$, Left Unitor $\lambda$, Right Unitor $\rho$
+
 The above is a Vertical Categorification; Horizontal Categorification
 gives $2$-categories (\S\ref{sec:2_category})
 
@@ -3052,13 +3084,25 @@ Set as the Identity Element.
 
 Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda})
 
-Strict Monoidal Category
-
 Enriched Category (\S\ref{sec:enriched_category})
 
 $\cat{R-\text{Mod}}$ Category of $R$-modules (\S\ref{sec:module});
 Monoidal Objects (\S\ref{sec:monoid_object}) are Associative Algebras
 (\S\ref{sec:associative_algebra}).
+
+State, Systems %FIXME
+
+
+
+\subsubsection{Strict Monoidal Category}\label{sec:strict_monoidal}
+
+\emph{Strict Monoidal Category}
+
+Natural Isomorphisms Associator $\alpha$, Left Unitor $\lambda$, and
+Right Unitor $\rho$ are Identities
+
+Every Monoidal Category is Monoidally Equivalent to a Strict Monoidal
+Category %FIXME
 
 
 
@@ -3106,6 +3150,10 @@ Interchange Law (\S\ref{sec:interchange_law})
 Linear Type Systems (\S\ref{sec:linear_type}) are the Internal
 Language of Closed (\S\ref{sec:closed_monoidal}) Symmetric Monoidal
 Categories
+
+Theorem: An Equational Statement between Expressions in a Dagger
+Compact Symmetric Monoidal Category holds if and only if it is
+Derivable in Graphical Notation via Homotopy %FIXME cite selinger 05
 
 
 
@@ -3326,6 +3374,8 @@ Examples:
 \item $\cat{Cob}$ Category of Closed Manifolds and Cobordisms
 \item $Spans(\cat{C})$ of $\cat{C}$ with Pullbacks
 \item $CoSpans(\cat{C})$ of $\cat{C}$ with Pushouts
+\item $Hilb$ of Hilbert Spaces (\S\ref{sec:hilbert_space}) and Bounded
+  Linear Operators (\S\ref{sec:bounded_linear_operator})
 
 \end{itemize}
 
@@ -3521,6 +3571,8 @@ $\cat{C}$:
 \]
 Such a Functor $R$ is termed a \emph{Representation} of $G$ in
 $\cat{C}$.
+
+Frobenius Algebra (\S\ref{sec:frobenius_algebra})
 
 
 
