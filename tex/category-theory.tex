@@ -1441,6 +1441,8 @@ rise to $T$.
 
 Tensorial Strength (\S\ref{sec:tensorial_strength})
 
+$st_{X,Y} : T(X) \otimes Y \rightarrow T(X \otimes Y)$
+
 
 
 \paragraph{Hughes Arrow}\label{sec:hughes_arrow}
@@ -1449,9 +1451,10 @@ Tensorial Strength (\S\ref{sec:tensorial_strength})
 As a Triple $(A, arr, \ggg)$
 
 As a Monad is a Monoid in an Endofunctor Category $\cat{C} \rightarrow
-\cat{C}$, a Hughes Arrow $(A, arr, \ggg)$ is a Monoid in a Bifunctor
-Category $\cat{C}^{op} \times \cat{C} \rightarrow \cat{C}$ (cf.
-Internal Hom Functor \S\ref{sec:internal_homfunctor}).
+\cat{C}$, $\cat{Cat}(\cat{C},\cat{C})$, a Hughes Arrow $(A, arr,
+\ggg)$ is a Monoid in a Bifunctor Category $\cat{C}^{op} \times
+\cat{C} \rightarrow \cat{C}$ (cf. Internal Hom Functor
+\S\ref{sec:internal_homfunctor}).
 
 Functor Category $\cat{Cat}(\cat{C}^{op} \times \cat{C},
 \cat{Set})$ of Bifunctors
@@ -1543,10 +1546,39 @@ Example Arrow constructions:
 
 
 
+\subparagraph{Biarrow}\label{sec:biarrow}
+
+
+
 \paragraph{Freyd Category}\label{sec:freyd_category}
 \hfill \\
 
-Kleisli Category (\S\ref{sec:kleisli_category})
+A \emph{Freyd Category} is a Symmetric Premonoidal Category
+(\S\ref{sec:symmetric_premonoidal_category}), $\cat{D}$, of
+``Computations'' and a Category with Finite Products, $\cat{C}$, of
+``Values'', and an ``Identity-on-objects'' Functor $J : \cat{C}
+\rightarrow \cat{D}$ which:
+\begin{itemize}
+\item maps Cartesian Products in $\cat{C}$ to Premonoidal Products in
+  $\cat{D}$: $J(X \times Y) = X \boxtimes Y$, $J(\alpha) = \alpha$,
+  $J(\lambda) = \lambda$, etc.
+\item preserves Central Morphisms (\S\ref{sec:central_morphism}): all
+  Morphisms in $\cat{C}$ are Central so every $J(g) \in \cat{D}$ is
+  Central
+\end{itemize}
+\cite{jacobs-heunen-hasuo09}
+
+Kleisli Category (\S\ref{sec:kleisli_category}) is the analogous
+construction for Monads
+
+For Arrow $A : \cat{C}^{op} \times \cat{C} \rightarrow \cat{Set}$ with
+Operations $arr$, $\ggg$, $fst$, the Category $\cat{C}_A$ has Objects
+of $\cat{C}$ with Morphisms $X \rightarrow Y$ as Elements of the Set
+$A(X,Y)$ with Identity $arr$ and Composition by $\ggg$.
+\cite{jacobs-heunen-hasuo09}
+
+Locally Small if $\cat{D}$ is Locally Small
+(\S\ref{sec:locally_small})
 
 
 
@@ -3464,6 +3496,28 @@ Model for Intuitionistic First-order Logic
 
 
 \subsubsection{Tannakian Category}\label{sec:tannakian_category}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Binoidal Category}\label{sec:binoidal_category}
+% --------------------------------------------------------------------
+
+\subsubsection{Central Morphism}\label{sec:central_morphism}
+
+\subsubsection{Premonoidal Category}\label{sec:premonoidal_category}
+
+Tensor Product not necessarily Bifunctorial but Functorial in each
+Variable separately.
+
+Non-bifunctoriality: ``Side-effects'' \cite{jacobs-heunen-hasuo09}
+
+
+
+\paragraph{Symmetric Premonoidal Category}
+\label{sec:symmetric_premonoidal_category}
+
+Freyd Categories (\S\ref{sec:freyd_category})
 
 
 
