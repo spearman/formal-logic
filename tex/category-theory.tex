@@ -387,7 +387,7 @@ Isomorphism Classes of the original Objects.
   \S\ref{sec:2_category})
 \item [Cat'] all Large Categories and Functors
 \item [Prof] all Small Categories and Profunctors
-  (\S\ref{sec:profunctor})
+  (\S\ref{sec:profunctor}) with Natural Transformations between them
 \item [Vect$_K$] all Finite-dimensional Vector Spaces over Field $K$
   and $K$-linear Transformations
 \item [Vect$_\reals$] all Finite-dimensional Vector Spaces over
@@ -1027,7 +1027,7 @@ each half of which is a Representable Functor
 (\S\ref{sec:representable_functor}). $Hom_\cat{C}(-,-)$ is also the
 Identity Profunctor (\S\ref{sec:profunctor}) $1_\cat{C} :
 \cat{C} \nrightarrow \cat{C}$. Hom-functors are Continuous
-Functors (\S\ref{sec:hom_functor}).
+Functors (\S\ref{sec:continuous_functor}).
 
 The Category of all Hom-functors and Natural Transformations
 (\S\ref{sec:natural_transformation}) between them, $\{ h^A | A \in
@@ -1448,13 +1448,18 @@ Tensorial Strength (\S\ref{sec:tensorial_strength})
 
 As a Triple $(A, arr, \ggg)$
 
-As a Monad is a Monoid on (??? in) an Endofunctor Category $\cat{C}
-\rightarrow \cat{C}$, a Hughes Arrow $(A, arr, \ggg)$ is a Monoid in a
-Bifunctor Category $\cat{C}^{op} \times \cat{C} \rightarrow \cat{C}$
-(cf. Internal Hom Functor \S\ref{sec:internal_homfunctor}).
+As a Monad is a Monoid in an Endofunctor Category $\cat{C} \rightarrow
+\cat{C}$, a Hughes Arrow $(A, arr, \ggg)$ is a Monoid in a Bifunctor
+Category $\cat{C}^{op} \times \cat{C} \rightarrow \cat{C}$ (cf.
+Internal Hom Functor \S\ref{sec:internal_homfunctor}).
 
 Functor Category $\cat{Cat}(\cat{C}^{op} \times \cat{C},
 \cat{Set})$ of Bifunctors
+
+$(A \otimes A) \xrightarrow{\ggg} A \xleftarrow{arr} I$ is a Monoid in
+the Category $\cat{Cat} (\cat{C}^{op} \times \cat{C}, \cat{Set})$ of
+Bifunctors $(\cat{C}^{op} \times \cat{C} \rightarrow \cat{Set}$ with
+Identity $I = \cat{C} (-,+)$
 
 Seen as an Indexed Monoid $A(-,+)$, Contravariant on input, Covariant
 on output. A Monad may be seen as a special case of a Hughes Arrow
@@ -1463,6 +1468,56 @@ with output but no input.
 $\ggg : A(X,P) \times A(P,Y) \rightarrow A(X,Y)$ is Dinatural in $P$
 (signifying $\ggg$ is Parametric in $P$). \cite{jacobs-heunen-hasuo09}
 
+$fst : A(X,Y) \rightarrow A(X \times Z, Y \times Z)$
+
+$\alpha : (X \times Y) \times Z
+\xrightarrow{\cong} X \times (Y \times Z)$
+
+Strength (Natural Transformation), Monad $T : \cat{C} \rightarrow
+\cat{C}$ on Monoidal Category $\cat{C}$, satisfying Coherence
+Conditions (\S\ref{sec:coherence_condition}):
+
+$st_{X,Y} : T(X) \otimes Y \rightarrow T(X \otimes Y)$
+
+Arrow Laws:
+\begin{enumerate}
+  \item $st(u,y) = M(\lambda x.\langle x,y \rangle)(u)$
+  \item $(a \ggg b) \ggg c = a \ggg (b \ggg c)$
+  \item $arr (g \circ f) = arr(f) \ggg arr(g)$
+  \item $arr(I) \ggg a = a = a \ggg arr(I)$
+  \item $fst(a) \ggg arr(\pi_1) = arr(\pi_1) \ggg a$
+  \item $fst(a) \ggg arr (I \times f) = arr (I \times f) \ggg fst(a)$
+  \item $fst (fst(a)) \ggg arr(\alpha) = arr(\alpha) \ggg fst(a)$
+  \item $fst (arr(f)) = arr (f \times I)$
+  \item $fst (a \ggg b) = fst(a) \ggg fst(b)$
+\end{enumerate}
+Laws (2)-(4) correspond to Monoid Equations (Semantical)
+
+$fst$ is equivalent to an analogous form of Strength for Bifunctors
+called \emph{Internal Strength} $ist$ (Natural Transformation):
+\[
+  ist_{X,Y} : A(X,Y) \rightarrow A(X,Y \times X)
+\]
+Natural in $Y$ and Dinatural in $X$, satisfying:
+\begin{enumerate}
+  \item $ist(arr(f)) = arr(\langle f,I \rangle)$
+  \item $ist(a) \ggg arr(\pi_1) = a$
+  \item $ist(a \ggg b) = ist(a) \ggg ist(arr(\pi_1) \ggg b) \ggg arr(I
+    \times \pi_2)$
+  \item $ist(ist(a)) = ist(a) \ggg arr(\langle I, \pi_2 \rangle)$
+\end{enumerate}
+giving Internal Strength on $a : A(X,Y)$ as:
+\[
+  ist(a) = arr(\Delta) \ggg fst(a)
+\]
+where $\Delta = \langle I,I \rangle$
+
+$fst$ defined in terms of $ist$:
+\[
+  fst(a) = ist(arr(\pi_1) \ggg a) \ggg arr(I \times \pi_2)
+\]
+
+Example Arrow constructions:
 \begin{itemize}
   \item Monoid $(M,\cdot,e)$ (Constant Arrow)
   \item Strong Monad (\S\ref{sec:strong_monad}) $M$: Arrow
@@ -1511,10 +1566,11 @@ A \emph{Multifunctor} is a generalized to $n$ or more Variables.
 
 \subsubsection{Profunctor}\label{sec:profunctor}
 
-A \emph{Profunctor} is a Bifunctor that is Contravariant in the first
-argument and Covariant in the second.
+A \emph{Profunctor} (or \emph{Distributor}) is a Bifunctor that is
+Contravariant in the first argument and Covariant in the second.
 
-Bimodule (\S\ref{sec:bimodule})
+Generalization of Functors, Categorical generalization of Bimodules
+(\S\ref{sec:bimodule})
 
 $P : \cat{C} \nrightarrow \cat{D}$
 
@@ -1522,14 +1578,28 @@ $H_P : \cat{D}^{op} \times \cat{C} \rightarrow \cat{Set}$
 
 Set of Heteromorphisms (\S\ref{sec:heteromorphism})
 
+Identity Profunctor $Id : \cat{C} \nrightarrow \cat{C}$ is given by
+the Hom-functor $\cat{C}(-,-) : \cat{C}^{op} \times \cat{C}
+\rightarrow \cat{Set}$
+
+Composition of Profunctors $P : \cat{C} \nrightarrow \cat{D}$, $Q :
+\cat{D} \nrightarrow \cat{E}$:
+\[
+  Q P = \int^{d \in \cat{D}} P(d,-) \otimes Q(-,d)
+\]
+% FIXME kan extensions?
+
 Every Functor $F : \cat{C} \rightarrow \cat{D}$ induces two
 Profunctors $D(1,F) : \cat{C} \nrightarrow \cat{D}$ and $D(F,1)
 : \cat{D} \nrightarrow \cat{C}$ where $D(1,F)(d,c) = D(d,f(c))$
 and $D(f,1)(c,d) = D(f(c),d)$.
 
-Identity Profunctor $Id : \cat{C} \nrightarrow \cat{C}$ is given
-by the Hom-functor $\cat{C}(-,-) : \cat{C}^{op} \times
-\cat{C}$
+Functor $F : \cat{C} \rightarrow \cat{D}$ gives a Profunctor $P_F :
+\cat{C} \nrightarrow \cat{D}$ by Post-composition with the Yoneda
+Functor (\S\ref{sec:yoneda_embedding}):
+\[
+  P_F = Y_\cat{D} \circ F
+\]
 
 
 
@@ -2664,6 +2734,18 @@ $-^A : \cat{C} \rightarrow \cat{C}$
 \subsection{Kan Extension}\label{sec:kan_extension}
 % --------------------------------------------------------------------
 
+Functor $F : \cat{C} \rightarrow {C}'$
+
+Left Kan Extension $Lan$
+
+Right Kan Extension $Ran$
+
+Adjoint (\S\ref{sec:adjoint}) as Kan Extension
+
+Limit (\S\ref{sec:limit}) as Kan Extension
+
+``Constrained Optimization'' % FIXME
+
 
 
 % ====================================================================
@@ -3204,6 +3286,7 @@ Derivable in Graphical Notation via Homotopy %FIXME cite selinger 05
 
 \subparagraph{Closed Symmetric Monoidal Category}
 \label{sec:closed_symmetric_monoidal}
+\hfill \\
 
 $X, Y \in \cat{C}$
 
@@ -3213,6 +3296,19 @@ Axiom: $\cat{C}(X \otimes Y, Z) \cong \cat{C}(X, Z^Y)$
 
 Linear Type Systems (\S\ref{sec:linear_type}) are the Internal
 Language of Closed Symmetric Monoidal Categories
+
+
+
+\subparagraph{Compact Symmetric Monoidal Category}
+\label{sec:compact_symmetric_monoidal}
+\hfill \\
+
+Example Compact Symmetric Monoidal Categories:
+
+\begin{itemize}
+\item $\cat{Hilb}$
+\item $n\cat{Cob}$
+\end{itemize}
 
 
 
@@ -3298,9 +3394,13 @@ $\cat{D}$ there is a Unique Functor:
 preserving $[X]_M = M$ for the Basic Types and Terms of $\mathcal{F}$.
 \cite{awodey06}
 
-$\cat{Cat}$ is a Cartesian Closed Category.
+Example Cartesian Closed Categories:
 
-$\cat{Grpd}$ is a Cartesian Closed Category.
+\begin{itemize}
+\item $\cat{Cat}$
+\item $\cat{Grpd}$
+\item $\cat{Set}$
+\end{itemize}
 
 $\lambda^{\times, \rightarrow} \simeq \mathrm{CCC}$
 
@@ -3431,7 +3531,7 @@ Graphic Monoid (\S\ref{sec:graphic_monoid})
 
 Involution Semigroup (\S\ref{sec:involution_semigroup})
 
-Examples:
+Example Dagger Categories:
 
 \begin{itemize}
 
@@ -3519,6 +3619,12 @@ Variety (\S\ref{sec:variety})
 % --------------------------------------------------------------------
 
 %FIXME note this section may need to be moved
+
+$X$ Acting on $Y$: $act: X \times Y \rightarrow Y$
+
+Action on an Abelian Group or Vector Space by Linear Maps then the
+Action is also a Module (\S\ref{sec:module}) or Representation
+(\S\ref{sec:representation})
 
 
 
@@ -3645,10 +3751,27 @@ Frobenius Algebra (\S\ref{sec:frobenius_algebra})
 
 
 % --------------------------------------------------------------------
-\subsection{Linear Representation}\label{sec:linear_representation}
+\subsection{Representation}\label{sec:representation}
 % --------------------------------------------------------------------
 
+Action (\S\ref{sec:action})
+
+Functor $F : \cat{C} \rightarrow \cat{D}$
+
+
+
+\subsubsection{Linear Representation}\label{sec:linear_representation}
+
 $R : G \rightarrow \cat{Vect}_K$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Intertwiner}\label{sec:intertwiner}
+% --------------------------------------------------------------------
+
+Homomorphism of Representations (\S\ref{sec:representation}), Actions
+(\S\ref{sec:action}), Modules (\S\ref{sec:module})
 
 
 
@@ -3900,6 +4023,8 @@ Cell Complexes with regard to Generating Cofibrations
 $2$-categories are Horizontal Categorification
 (\S\ref{sec:horizontal_categorification}) of Monoidal Categories
 (\S\ref{sec:monoidal_category}).
+
+Weak $2$-category: Bicategory (\S\ref{sec:bicategory})
 
 
 
