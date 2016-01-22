@@ -1277,6 +1277,15 @@ A Monad gives an Algebraic Theory and an Algebra
 (\S\ref{sec:t_algebra}) for a Monad is a Model (\S\ref{sec:model}) of
 that Theory. %FIXME xref algebraic theory?
 
+Correspondences: \cite{jacobs-heunen-hasuo09}
+\begin{itemize}
+\item Monoids in $\cat{Cat}(\cat{C},\cat{C})$
+\item Monads $M$ on $\cat{C}$
+\item Identity-on-objects Functors $J : \cat{C} \rightarrow \cat{D}$
+  having Right Adjoints (see Kleisli Categories
+  \S\ref{sec:kleisli_category})
+\end{itemize}
+
 
 
 Comonad $F \circ G$ (\S\ref{sec:comonad})
@@ -1306,6 +1315,31 @@ A Monad on $\cat{Set}$:
 where $\mathcal{P}$ is the Powerset Operation, $\{-\}$ is the
 Singleton Operation, and $\bigcup$ is the Union Operation.
 % FIXME xref
+
+
+
+\paragraph{$T$-algebra}\label{sec:t_algebra}
+\hfill \\
+
+Monad $(T, \eta, \mu)$ where $T : \cat{C} \rightarrow \cat{C}$
+
+$T$-algebra $(A, \theta)$ where $A \in \cat{C}$ and \emph{Action}
+$\theta : T A \rightarrow A$ such that $\theta \circ \eta = 1_A$ and
+$\theta \circ \mu_A = \theta \circ T \theta$
+
+A $T$-algebra defines a Monoid with Underlying Set $A$ and Monoid
+Operation $\theta$.
+
+The $T$-algebras for a given Monad gives a Category of $T$-algebras,
+$\cat{Alg}(T)$ (or $\cat{C}^T$, see Eilenberg-Moore Category
+\S\ref{sec:eilenberg_moore}), where Morphisms between $T$-algebras
+$(A, \theta)$ and $(B, \varphi)$ with $f : A \rightarrow B$ give a
+Commutative Square:
+\[
+  \varphi \circ T f = f \circ \theta
+\]
+which is the Terminal Object in the Category of Adjunctions that give
+rise to $T$.
 
 
 
@@ -1413,30 +1447,6 @@ Descent Theory (\S\ref{sec:descent_theory})
 
 
 
-\subsubsection{$T$-algebra}\label{sec:t_algebra}
-
-Monad $(T, \eta, \mu)$ where $T : \cat{C} \rightarrow \cat{C}$
-
-$T$-algebra $(A, \theta)$ where $A \in \cat{C}$ and \emph{Action}
-$\theta : T A \rightarrow A$ such that $\theta \circ \eta = 1_A$ and
-$\theta \circ \mu_A = \theta \circ T \theta$
-
-A $T$-algebra defines a Monoid with Underlying Set $A$ and Monoid
-Operation $\theta$.
-
-The $T$-algebras for a given Monad gives a Category of $T$-algebras,
-$\cat{Alg}(T)$ (or $\cat{C}^T$, see Eilenberg-Moore Category
-\S\ref{sec:eilenberg_moore}), where Morphisms between $T$-algebras
-$(A, \theta)$ and $(B, \varphi)$ with $f : A \rightarrow B$ give a
-Commutative Square:
-\[
-  \varphi \circ T f = f \circ \theta
-\]
-which is the Terminal Object in the Category of Adjunctions that give
-rise to $T$.
-
-
-
 \subsubsection{Strong Monad}\label{sec:strong_monad}
 
 Tensorial Strength (\S\ref{sec:tensorial_strength})
@@ -1445,8 +1455,7 @@ $st_{X,Y} : T(X) \otimes Y \rightarrow T(X \otimes Y)$
 
 
 
-\paragraph{Hughes Arrow}\label{sec:hughes_arrow}
-\hfill \\
+\subsubsection{Hughes Arrow}\label{sec:hughes_arrow}
 
 As a Triple $(A, arr, \ggg)$
 
@@ -1545,8 +1554,31 @@ Example Arrow constructions:
 
 
 
+\paragraph{$A$-algebra}\label{sec:a_algebra}
+\cite{jacobs-heunen-hasuo09}
+\hfill \\
 
-\subparagraph{Biarrow}\label{sec:biarrow}
+Arrow analogue of $T$-algebras (\S\ref{sec:t_algebra}) for Monads
+
+Arrow $A : \cat{C}^{op} \times \cat{C} \rightarrow \cat{Set}$
+
+Natural Transformation $\chi : A \Rightarrow Hom$
+
+Natural mapping of Computations to Pure Functions
+
+Bijective corresondence between (Strong) $T$-algebras $T \Rightarrow
+I$ and $A$-algebras $\overline{T} \Rightarrow Hom$ (similarly for
+Comonad Coalgebras: $I \Rightarrow N$ with $\overline{N} \Rightarrow
+Hom$)
+
+For Monad $M$ and Comonad $N$ with Distributive Law $\lambda : N M
+\Rightarrow M N$, Bijective correspondence between
+$\lambda$-bialgebras $M \Rightarrow I \Rightarrow N$ and $A$-algebras
+$\overline{(M,N)} \Rightarrow Hom$
+
+Left Inverse (Retraction) $K : \cat{C}_A \rightarrow \cat{C}$ of
+``Kleisli Inclusion'' (see \S\ref{sec:freyd_category}) $J_A : \cat{C}
+\rightarrow \cat{C}_A$, i.e. $K J = Id$
 
 
 
@@ -1568,17 +1600,34 @@ A \emph{Freyd Category} is a Symmetric Premonoidal Category
 \end{itemize}
 \cite{jacobs-heunen-hasuo09}
 
+Locally Small if $\cat{D}$ is Locally Small
+(\S\ref{sec:locally_small})
+
+One-to-one correspondence of Arrows over $\cat{C}$ and Locally Small
+Freyd Categories $\cat{C} \rightarrow \cat{D}$
+
 Kleisli Category (\S\ref{sec:kleisli_category}) is the analogous
 construction for Monads
+
+Kleisli Construction for Arrows: $A \mapsto (\cat{C} \xrightarrow{J_A}
+\cat{C}_A)$ (Bijective: ``Arrows are Freyd Categories'')
 
 For Arrow $A : \cat{C}^{op} \times \cat{C} \rightarrow \cat{Set}$ with
 Operations $arr$, $\ggg$, $fst$, the Category $\cat{C}_A$ has Objects
 of $\cat{C}$ with Morphisms $X \rightarrow Y$ as Elements of the Set
-$A(X,Y)$ with Identity $arr$ and Composition by $\ggg$.
+$A(X,Y)$ with Identity $arr$ and Composition by $\ggg$. There is a
+``Identity-on-objects'' Functor $J_A : \cat{C} \rightarrow \cat{C}_A$
+with action on Morphisms given by $arr$.
+
+For an Arrow induced by a Monad or Comonad, the associated Freyd
+Category coincides with the usual Kleisli Category. For an Arrow
+induced by a Monad together with a Comonad (i.e. $\overline{(M,N)}$),
+the corresponding construction is a Bi-Kleisli Category.
 \cite{jacobs-heunen-hasuo09}
 
-Locally Small if $\cat{D}$ is Locally Small
-(\S\ref{sec:locally_small})
+
+
+\subsubsection{Biarrow}\label{sec:biarrow}
 
 
 
@@ -4079,6 +4128,20 @@ $2$-categories are Horizontal Categorification
 (\S\ref{sec:monoidal_category}).
 
 Weak $2$-category: Bicategory (\S\ref{sec:bicategory})
+
+A $2$-category in which all $1$-morphisms and $2$-morphisms are
+Invertible is a $2$-groupoid (\S\ref{sec:2_groupoid})
+
+Examples:
+\begin{itemize}
+\item $\cat{Cat}$
+\item $\cat{V-Cat}$ for any Enriching Category $\cat{V}$
+\item $\cat{V-Prof}$ for any Enriching Category $\cat{V}$
+\item $\cat{Span}(\cat{C})$ for any Category with Pullbacks $\cat{C}$
+\item $\cat{Freyd}$ of Freyd Categories (\S\ref{sec:freyd_category})
+\item $\cat{Arr_{Freyd}}$ of Arrows (\S\ref{sec:hughes_arrow}) on
+  Freyd Categories
+\end{itemize}
 
 
 
