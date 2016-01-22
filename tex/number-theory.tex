@@ -98,22 +98,22 @@ Corollary 5: $gcd(\frac{a}{d}, \frac{b}{d}) = 1$
 
 \subsubsection{Prime Number}\label{sec:prime_number}
 
-$\mathbb{P}$
+$\primes$
 
 A Number that is \emph{not} Prime is called \emph{Composite}.
 
-The Cardinality of $\mathbb{P}$ is Countably Infinite.
+The Cardinality of $\primes$ is Countably Infinite.
 
-The Series (\S\ref{sec:series}) $\sum_{p \in \mathbb{P}} \frac{1}{p}$
+The Series (\S\ref{sec:series}) $\sum_{p \in \primes} \frac{1}{p}$
 Diverges The corresponding Series over Twin Primes
 (\S\ref{sec:twin_prime}) Converges.
 
-If $p \in \mathbb{P}$, then $gcd(p,a) = 1$ or $gcd(p,a) = p$ for any
+If $p \in \primes$, then $gcd(p,a) = 1$ or $gcd(p,a) = p$ for any
 $a \in \mathbb{Z}$.
 
-If $p \nmid b$ and $p \in \mathbb{P}$ then $gcd (p,b) = 1$.
+If $p \nmid b$ and $p \in \primes$ then $gcd (p,b) = 1$.
 
-Corollary to Euclid's Lemma: If $p \in \mathbb{P}$ and $p|a_1 a_2
+Corollary to Euclid's Lemma: If $p \in \primes$ and $p|a_1 a_2
 \ldots a_n$ then $p|a_i$ for some $1 \leq i \leq n$.
 
 Given any $l \in \mathbb{N}$, a Sequence of $l$ consecutive Composite
@@ -121,7 +121,7 @@ Numbers may be found.
 
 \emph{Bertrand's Postulate} (\emph{Bertrand-Chebyshev Theorem}):
 \[
-  (\forall n \in \mathbb{Z}^{>3}, \exists p \in \mathbb{P}) n < p < 2n
+  (\forall n \in \mathbb{Z}^{>3}, \exists p \in \primes) n < p < 2n
 \]
 
 Given an Arithmetic Sequence $S = \{ a + bx \;|\; x \in \mathbb{Z}^+\}$:
@@ -135,15 +135,15 @@ Given an Arithmetic Sequence $S = \{ a + bx \;|\; x \in \mathbb{Z}^+\}$:
 
 Sieve Theory (\S\ref{sec:sieve_theory})
 
-For all $p \in \mathbb{P}$, $gcd(p, (p-1)!) = 1$
+For all $p \in \primes$, $gcd(p, (p-1)!) = 1$
 
-If $n \notin \mathbb{P}$ and $n > 4$ then $gcd(n,(n-1)!) = n$
+If $n \notin \primes$ and $n > 4$ then $gcd(n,(n-1)!) = n$
 
 \emph{Wilson's Theorem}:
 \[
   (p - 1)! = -1 \mathrm{mod}\;p
 \]
-for $p \in \mathbb{P}$.
+for $p \in \primes$.
 
 $x^2 \equiv -1 \mathrm{mod}\;p$ if and only if $p \equiv 1 mod 4$
 
@@ -200,7 +200,7 @@ $2^{2^i} + 1$
 
 Partial result:
 \[
-  (\forall n \in 2\mathbb{N}, \exists p,q \vee p,q,r \in \mathbb{P})
+  (\forall n \in 2\mathbb{N}, \exists p,q \vee p,q,r \in \primes)
   n = p + q \vee n = p + q * r
 \]
 
@@ -231,11 +231,34 @@ the form $(x_0 + \frac{b}{d}t, y_0 - \frac{a}{d}t)$ with $t \in
 
 \paragraph{Exponential Diophantine Equation}
 \label{sec:exponential_diophantine}
-\hfill \\
 
 
 
 \subsubsection{Composite Number}\label{sec:composite_number}
+
+\paragraph{Kn\"odel Number}\label{sec:knodel_number}
+\hfill \\
+
+For Positive Integer $n$, a \emph{Kn\"odel Number} $m$ is a Composite
+number such that every $i < m$ Coprime to $m$ satisfies $i^{m-n}
+\equiv 1 \mod m$
+
+Set of all Kn\"odel Numbers for $n$, denoted $K_n$
+
+Every Composite Number is a Kn\"odel Number by setting $n$ to $m -
+\varphi(m)$
+
+
+
+\subparagraph{Carmichael Number}\label{sec:carmichael_number}
+\hfill \\
+
+Composite Number $n$ satisfying $b^{n-1} \equiv 1 \mod n$ for all
+Integers $1 < b < n$ Relatively Prime to $n$
+
+Subset $K_1$ of Kn\"odel Numbers
+
+
 
 \subsubsection{Integer Coefficient Polynomial}
 \label{sec:integer_coefficient}
@@ -502,6 +525,31 @@ Examples:
 
 
 
+\paragraph{M\"obius Function}\label{sec:mobius_function}
+\hfill \\
+
+\[
+  \mu(n) =
+  \begin{cases}
+  1     & \quad n = 1 \\
+  0     & \quad \exists p \in \primes : p^2|n \\
+  -1^m  & \quad n = \prod_{i = 1}^m q_i, q_i \in \primes \\
+  \end{cases}
+\]
+
+
+
+\paragraph{Legendre Symbol}\label{sec:legendre_symbol}
+\hfill \\
+
+Dirichlet Character (\S\ref{sec:dirichlet_character})
+
+
+
+\subparagraph{Jacobi Symbol}\label{sec:jacobi_symbol}
+
+
+
 \subsubsection{Divisor Function}\label{sec:divisor_function}
 
 $F(n) = \sum_{d|n}f(d)$
@@ -548,6 +596,19 @@ If $gcd(a,n) = 1$ then $a^{\varphi(n)} \equiv 1 \mod n$
 
 
 
+\subsubsection{Completely Additive Function}
+\label{sec:completely_additive_function}
+
+\subsubsection{Completely Multiplicative Function}
+\label{sec:completely_multiplicative_function}
+
+\subsubsection{M\"obius Inversion Formula}
+\label{sec:mobius_inversion}
+
+\subsubsection{Dirichlet Convolution}\label{sec:dirichlet_convolution}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Skolem Arithmetic}\label{sec:skolem_arithmetic}
 \cite{skolem23}
@@ -579,7 +640,7 @@ Decidable, weaker than Peano Arithmetic
 
 Partition of $\mathbb{Z}$ into $\mathbb{Z}/n$ by $n \in \mathbb{N}$.
 
-For Prime $p \in \mathbb{P}$ (``Freshman's Dream''):
+For Prime $p \in \primes$ (``Freshman's Dream''):
 \[
   (x+y)^p \mod n \equiv x^p + y^p \mod n
 \]
@@ -623,6 +684,12 @@ Cancellation: If $ac \equiv bc \mod n$ then $a \equiv b
 
 
 
+\paragraph{Chinese Remainder Theorem}\label{sec:chinese_remainder}
+
+\paragraph{Simultaneous Congruence}\label{sec:simultaneous_congruence}
+
+
+
 \subsubsection{Residue}\label{sec:residue}
 
 \textbf{Complete Set of Residues}
@@ -646,23 +713,34 @@ $\equiv 0 \mod n$
 
 
 
+\paragraph{Quadratic Residue}\label{sec:quadratic_residue}
+
+\subparagraph{Quadratic Reciprocity}\label{sec:quadratic_reciprocity}
+
+
+
+\paragraph{Least Residue}\label{sec:least_residue}
+
+\paragraph{Reduced Residue}\label{sec:reduced_residue}
+
+
+
 \subsubsection{Linear Congruence}\label{sec:linear_congruence}
 
-$ax \equiv b \mod n$ has solutions if and only if $d =
-gcd(a,n) | b$. If $d|b$ then there are exactly $d$ solutions in a
-given CSR $\mod n$.
+$ax \equiv b \mod n$ has solutions if and only if $d = gcd(a,n) | b$.
+If $d|b$ then there are exactly $d$ solutions in a given CSR $\mod n$.
 
 
 
 \subsubsection{Fermat's Little Theorem}\label{sec:fermat_little}
 
-$p \in \mathbb{P}$, $a^p \equiv a \mod n$
+$p \in \primes$, $a^p \equiv a \mod n$
 
-If $p \in \mathbb{P}$ and $a \in \mathbb{Z}$ and $p \nmid a$ then $a^{p-1}
-\equiv 1 \mathbb{mod}\;p$.
+If $p \in \primes$ and $a \in \mathbb{Z}$ and $p \nmid a$ then
+$a^{p-1} \equiv 1 \mathbb{mod}\;p$.
 
-For $p \in \mathbb{P}$ and $a \in \mathbb{Z}$, $\{ a, 2a, \ldots,
-(p-1)a \}$ is a Non-zero CSR.
+For $p \in \primes$ and $a \in \mathbb{Z}$, $\{ a, 2a, \ldots, (p-1)a
+\}$ is a Non-zero CSR.
 
 
 
@@ -698,6 +776,8 @@ $\varphi(\varphi(n))$ Primitive Roots defined by the Set:
 
 For Prime $p$, $p$ has $\varphi(p-1)$ Primitive Roots.
 
+Index (Discrete Logarithm) %FIXME xref
+
 
 
 % --------------------------------------------------------------------
@@ -721,7 +801,24 @@ Recursive Definition (\S\ref{sec:recursive_definition})
 % ====================================================================
 
 % --------------------------------------------------------------------
-\subsection{Dirichlet L-Series}\label{sec:l_series}
+\subsection{Multiplicative Number Theory}
+\label{sec:multiplicative_number_theory}
+% --------------------------------------------------------------------
+
+\subsubsection{Dirichlet Character}\label{sec:dirichlet_character}
+
+\subsubsection{Dirichlet $L$-Series}\label{sec:l_series}
+
+Meromorphic Functions (\S\ref{sec:meromorphic_function})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Additive Number Theory}\label{sec:additive_number_theory}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{$p$-adic Analysis}\label{sec:padic_analysis}
 % --------------------------------------------------------------------
 
 
@@ -733,10 +830,6 @@ Recursive Definition (\S\ref{sec:recursive_definition})
 Arithmetic Topology (\S\ref{sec:arithmetic_topology})
 
 
-
-% ====================================================================
-\section{Additive Number Theory}\label{sec:additive_number_theory}
-% ====================================================================
 
 % ====================================================================
 \section{Computationsl Number Theory}\label{sec:computational_number_theory}
