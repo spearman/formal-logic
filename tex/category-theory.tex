@@ -119,9 +119,10 @@ Associative and Transitive.
 
 A Category $\cat{C}$ is defined as:
 \begin{itemize}
-\item a Class $C_0$ of Objects
-\item a Class $C_1$ of Morphisms (also called \emph{Arrows} or
-  \emph{Maps}) with Identity Morphisms for each Object
+\item a Class $C_0$ of Objects (\S\ref{sec:category_object})
+\item a Class $C_1$ of Morphisms (\S\ref{sec:morphism}; also called
+  \emph{Arrows} or \emph{Maps}) with Identity Morphisms for each
+  Object
 \item a Binary Associative and Transitive Composition Operation on
   Morphisms
 \end{itemize}
@@ -168,7 +169,75 @@ Simplex Category (\S\ref{sec:simplex_category})
 
 
 % --------------------------------------------------------------------
-\subsubsection{Commutative Diagram}\label{sec:commutative_diagram}
+\subsection{List of Categories}\label{sec:categories_list}
+% --------------------------------------------------------------------
+
+\begin{description}
+\item [0] no Objects or Morphisms
+\item [1] one Object with Identity Morphism
+\item [2] two Objects with Identity Morphisms and one Morphism between
+  them
+\item [3] three Objects with Identity Morphisms in a Commutative
+  Triangle
+\item [$\downdownarrows$] two Objects and two parallel Morphisms
+  between them
+\item [$\omega$] the ordinals $\omega$ as a Poset
+\item [Set] all Small Sets and Functions (Locally Small)
+\item [Set$^\omega$] Sets through time: Functors from $cat{\omega}$
+  to $\cat{Set}$ as Objects and Natural Transformations between
+  them as Morphisms
+\item [Set$^\downdownarrows$] Graph and Graph Homomorphisms
+\item [Cls] all Classes and Functions between Classes
+\item [Set$_*$] all Pointed Sets and Base-point preserving Functions
+\item [Par] all Sets and Partial Functions
+\item [Rel] all Sets and Relations
+\item [Pos] all Posets and Monotonic Functions (Locally Small)
+\item [Cpo] all Complete Partial Orders and Continuous Functions
+  (Domain Theory \S\ref{sec:domain_theory})
+\item [Finset] all Finite Sets and Functions (Full Subcategory of
+  $\cat{Set}$)
+\item [Finord] ($\cat{\Delta}$) all Finite Ordinal Numbers and
+  Order Preserving Maps (Skeleton of $\cat{FinSet}$, also called
+  the \emph{Simplex Category} \S\ref{sec:simplex_category})
+\item [Mag] all Magmas and Homomorphisms of Operations
+\item [Med] all Medial Magmas and Homomorphisms of Operations
+\item [Mon] all Monoids and Monoid Homomorphisms
+\item [Grp] all Groups and Group Homomorphisms (Locally Small)
+\item [Ab] all Abelian Groups with Group Homomorphisms
+\item [Grpd] all Groupoids and Groupoid Homomorphisms
+\item [Rng] all Small Rings and Ring Morphisms
+\item [$R$-Mod] all $R$-modules (\S\ref{sec:module})
+\item [Grph] all Small Graphs and Graph Morphisms
+\item [Cat] all Small Categories and Functors (2-category
+  \S\ref{sec:2_category})
+\item [Cat'] all Large Categories and Functors
+\item [Prof] all Small Categories and Profunctors
+  (\S\ref{sec:profunctor}) with Natural Transformations between them
+\item [Vect$_K$] all Finite-dimensional Vector Spaces over Field $K$
+  and $K$-linear Transformations
+\item [Vect$_\reals$] all Finite-dimensional Vector Spaces over
+  $\reals$ and Linear Maps
+\item [Top] all Topological Spaces and Continuous Maps (Locally Small)
+\item [Top$_*$] all Pointed Topological Spaces and Continuous Maps
+\item [Toph] all Topological Spaces and Homotopy Classes of Continuous
+  Maps
+\item [Man] all Smooth Manifolds and Smooth Maps
+\item [Cob] all Closed Manifolds and Cobordisms
+\item [Loc] all Locales and Maps of Locales (Meet preserving Functions
+  with Left Adjoints preserving Finite Meets)
+\item [Frm] all Frames and Monotone Functions preserving Finite Meets
+  and arbitrary Joins
+\item [CHey] all Complete Heyting Algebras and their Homomorphisms
+\item [BA] all Boolean Algebras and their Homomorphisms
+\item [C($\lambda$)] all Types and Closed Terms
+\end{description}
+
+Database Schema (\S\ref{sec:database_schema}): Tables and Foreign Keys
+
+
+
+% --------------------------------------------------------------------
+\subsection{Commutative Diagram}\label{sec:commutative_diagram}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -294,9 +363,9 @@ The Inclusion Functor $\cat{Set}_{fin} \rightarrowtail
 \subsection{Finite Category}\label{sec:finite_category}
 % --------------------------------------------------------------------
 
-A \emph{Finite Category} has a Finite number of Morphisms and
-Objects. An Infinite number of Objects Implies and Infinite number of
-Morphisms because each Object has its own Identity Morphism.
+A \emph{Finite Category} has a Finite number of Morphisms and Objects.
+An Infinite number of Objects implies an Infinite number of Morphisms
+because each Object has its own Identity Morphism.
 
 A Category such as:
 \[
@@ -315,9 +384,18 @@ Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
 
 
 
+\subsubsection{Locally Finite Category}
+\label{sec:locally_finite_category}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Discrete Category}\label{sec:discrete_category}
 % --------------------------------------------------------------------
+
+A Category is \emph{Discrete} if it is Equivalent
+(\S\ref{sec:category_equivalence}) or (sometimes) Isomorphic to a
+Category with only Identity Morphisms and no others.
 
 The Discrete Category Functor $S : \cat{Set} \rightarrow
 \cat{Cat}$ is Fully Faithful (\S\ref{sec:fully_faithful}).
@@ -340,74 +418,6 @@ a Preorder.
 A Category is \emph{Skeletal} if Isomorphic Objects are the same
 Object. Any Category can be made Skeletal by taking Objects as
 Isomorphism Classes of the original Objects.
-
-
-
-% --------------------------------------------------------------------
-\subsection{List of Categories}\label{sec:categories_list}
-% --------------------------------------------------------------------
-
-\begin{description}
-\item [0] no Objects or Morphisms
-\item [1] one Object with Identity Morphism
-\item [2] two Objects with Identity Morphisms and one Morphism between
-  them
-\item [3] three Objects with Identity Morphisms in a Commutative
-  Triangle
-\item [$\downdownarrows$] two Objects and two parallel Morphisms
-  between them
-\item [$\omega$] the ordinals $\omega$ as a Poset
-\item [Set] all Small Sets and Functions (Locally Small)
-\item [Set$^\omega$] Sets through time: Functors from $cat{\omega}$
-  to $\cat{Set}$ as Objects and Natural Transformations between
-  them as Morphisms
-\item [Set$^\downdownarrows$] Graph and Graph Homomorphisms
-\item [Cls] all Classes and Functions between Classes
-\item [Set$_*$] all Pointed Sets and Base-point preserving Functions
-\item [Par] all Sets and Partial Functions
-\item [Rel] all Sets and Relations
-\item [Pos] all Posets and Monotonic Functions (Locally Small)
-\item [Cpo] all Complete Partial Orders and Continuous Functions
-  (Domain Theory \S\ref{sec:domain_theory})
-\item [Finset] all Finite Sets and Functions (Full Subcategory of
-  $\cat{Set}$)
-\item [Finord] ($\cat{\Delta}$) all Finite Ordinal Numbers and
-  Order Preserving Maps (Skeleton of $\cat{FinSet}$, also called
-  the \emph{Simplex Category} \S\ref{sec:simplex_category})
-\item [Mag] all Magmas and Homomorphisms of Operations
-\item [Med] all Medial Magmas and Homomorphisms of Operations
-\item [Mon] all Monoids and Monoid Homomorphisms
-\item [Grp] all Groups and Group Homomorphisms (Locally Small)
-\item [Ab] all Abelian Groups with Group Homomorphisms
-\item [Grpd] all Groupoids and Groupoid Homomorphisms
-\item [Rng] all Small Rings and Ring Morphisms
-\item [$R$-Mod] all $R$-modules (\S\ref{sec:module})
-\item [Grph] all Small Graphs and Graph Morphisms
-\item [Cat] all Small Categories and Functors (2-category
-  \S\ref{sec:2_category})
-\item [Cat'] all Large Categories and Functors
-\item [Prof] all Small Categories and Profunctors
-  (\S\ref{sec:profunctor}) with Natural Transformations between them
-\item [Vect$_K$] all Finite-dimensional Vector Spaces over Field $K$
-  and $K$-linear Transformations
-\item [Vect$_\reals$] all Finite-dimensional Vector Spaces over
-  $\reals$ and Linear Maps
-\item [Top] all Topological Spaces and Continuous Maps (Locally Small)
-\item [Top$_*$] all Pointed Topological Spaces and Continuous Maps
-\item [Toph] all Topological Spaces and Homotopy Classes of Continuous
-  Maps
-\item [Man] all Smooth Manifolds and Smooth Maps
-\item [Cob] all Closed Manifolds and Cobordisms
-\item [Loc] all Locales and Maps of Locales (Meet preserving Functions
-  with Left Adjoints preserving Finite Meets)
-\item [Frm] all Frames and Monotone Functions preserving Finite Meets
-  and arbitrary Joins
-\item [CHey] all Complete Heyting Algebras and their Homomorphisms
-\item [BA] all Boolean Algebras and their Homomorphisms
-\item [C($\lambda$)] all Types and Closed Terms
-\end{description}
-
-Database Schema (\S\ref{sec:database_schema}): Tables and Foreign Keys
 
 
 
@@ -679,6 +689,10 @@ Co-constant.
 
 
 
+% ====================================================================
+\section{Object}\label{sec:category_object}
+% ====================================================================
+
 % --------------------------------------------------------------------
 \subsection{Subobject}\label{sec:subobject}
 % --------------------------------------------------------------------
@@ -732,6 +746,14 @@ $\Omega$
 Object of ``Propositions'' or ``Truth-values'' with $t =
 \mathrm{true}$ and $u : E \rightarrow \Omega$ a Propositional Function
 where $U \rightarrowtail E$ is the ``Extension''.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Monoid Object}\label{sec:monoid_object}
+% --------------------------------------------------------------------
+
+$1 \xrightarrow{\eta} M \xleftarrow{\mu} M \times M$
 
 
 
@@ -1061,15 +1083,6 @@ to
 
 
 
-\subsubsection{Internal Hom-functor}\label{sec:internal_homfunctor}
-
-A Category with an Internal Hom-functor is a \emph{Closed Category}
-(\S\ref{sec:closed_category}).
-
-For a Monoidal Category (\S\ref{sec:monoidal_category})
-
-
-
 % --------------------------------------------------------------------
 \subsection{Representable Functor}\label{sec:representable_functor}
 % --------------------------------------------------------------------
@@ -1231,6 +1244,10 @@ As an example, the Diagonal Functor $\cat{C} \rightarrow \cat{C}
 Coproduct Functor (\S\ref{sec:coproduct_functor}).
 
 
+
+% --------------------------------------------------------------------
+\subsection{Monoidal Functor}\label{sec:monoidal_functor}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Adjoint Functor}\label{sec:adjoint_functor}
@@ -2521,8 +2538,18 @@ $\cat{C}$ the Functor Category $\cat{Set^{C^{op}}}$ is Complete.
 
 \paragraph{Finitely Complete Category}
 \label{sec:finitely_complete_category}
+\hfill \\
 
 Internal Logic: Cartesian Logic %FIXME xref
+
+
+
+\subparagraph{Regular Category}\label{sec:regular_category}
+\hfill \\
+
+Internal Logic: Regular Logic (\S\ref{sec:regular_logic})
+
+Coherent Category (\S\ref{sec:coherent_category})
 
 
 
@@ -3263,6 +3290,25 @@ Internal Hom-functor (\S\ref{sec:internal_homfunctor})
 
 
 
+\subsubsection{Internal Hom-functor}\label{sec:internal_homfunctor}
+
+A Category with an Internal Hom-functor is a Closed Category
+
+Closed Monoidal Category (\S\ref{sec:closed_monoidal})
+
+
+
+\subsubsection{Dualizing Object}\label{sec:dualizing_object}
+
+\emph{Dualizing Object} $D$ in a Closed Category $\cat{D}$ is an
+Object with Internal Hom $[-,D]: \cat{C} \rightarrow \cat{C}^{op}$ an
+Involutive Duality Operation on $\cat{C}$: %FIXME
+\[
+  [[-,D],D]: \cat{C} \rightarrow \cat{C}
+\]
+
+
+
 % --------------------------------------------------------------------
 \subsection{Monoidal Category}\label{sec:monoidal_category}
 % --------------------------------------------------------------------
@@ -3358,13 +3404,132 @@ Closed Symmetric Monoidal Categories
 
 
 
-\subsubsection{Monoid Object}\label{sec:monoid_object}
+\subsubsection{Cartesian Category}\label{sec:cartesian_category}
 
-$1 \xrightarrow{\eta} M \xleftarrow{\mu} M \times M$
+\paragraph{Cartesian Closed Category}\label{sec:cartesian_closed}
+\hfill \\
+
+A Category is \emph{Cartesian Closed} if it has:
+\begin{enumerate}
+\item A Product Functor (\S\ref{sec:product})
+\item An Exponential for any pair of Objects
+  (\S\ref{sec:category_exponential})
+\item A Terminal Object (\S\ref{sec:terminal_object})
+\end{enumerate}
+By these conditions and the Universal Mapping Property of
+Exponentials:
+\[
+  \forall f : X \times A \rightarrow B \Leftrightarrow
+  \exists ! \overline{f} : X \rightarrow B^A
+\]
+
+The Category of Types in the Simply Typed $\lambda$-calculus
+(\S\ref{sec:simply_typed}) is a Catesian Closed Category.
+
+For a Theory $\mathcal{F}$, the Cartesian Close Category
+$\cat{C}(\mathcal{F})$ is built from the $\lambda$-calculus over
+$\mathcal{F}$ by the Presented Generators and Relations stated in
+$\mathcal{F}$ and has the Universal Mapping Property such that given
+any Model $M$ of $\mathcal{F}$ in any Cartesian Closed Category
+$\cat{D}$ there is a Unique Functor:
+\[
+  \llbracket - \rrbracket_M :
+    \cat{C}(\mathcal{F}) \rightarrow \cat{D}
+\]
+preserving $[X]_M = M$ for the Basic Types and Terms of $\mathcal{F}$.
+\cite{awodey06}
+
+Example Cartesian Closed Categories:
+
+\begin{itemize}
+\item $\cat{Cat}$
+\item $\cat{Grpd}$
+\item $\cat{Set}$
+\end{itemize}
+
+$\lambda^{\times, \rightarrow} \simeq \mathrm{CCC}$
+
+$\mathrm{IPC}^{\wedge, \Rightarrow, \vee} \simeq \mathrm{Heyting Algebra}$
+
+Kripke Models: $\cat{Set^C}$, $\cat{Set}^P$ % FIXME
+
+Equalities on a Cartesian Closed Category $\cat{C}$ with
+$0,1,A,B,C \in \cat{C}_0$:
+\[
+  C^{A + B} \cong C^A \times C^B
+\]\[
+  (C^B)^A \cong C^{B \times A}
+\]\[
+  (A \times B)^C \cong A^C \times B^C
+\]\[
+  C^0 \cong 1
+\]\[
+  C^1 \cong C
+\]\[
+  A \times (B + C) \cong A \times B + A \times C
+\]
 
 
 
-\subsubsection{Monoidal Functor}\label{sec:monoidal_functor}
+\subparagraph{Locally Cartesian Closed Category}
+\label{sec:locally_cartesian}
+\hfill \\
+A \emph{Locally Cartesian Closed Category} $\cat{E}$ is a Category
+such that all Slice Categories (\S\ref{sec:slice_category})
+$\cat{E}/X$ are Cartesian Closed Categories.
+
+Model for Intuitionistic Type Theory with Dependent Types
+(\S\ref{sec:intuitionistic_type})
+
+
+
+\paragraph{Bicartesian Closed Category}\label{sec:bicartesian}
+\hfill \\
+
+A \emph{Bicartesian Closed Category} is a Cartesian Closed Category
+that also has an Initial Object and Coproducts that are distributed
+over by Products.
+
+
+
+\subparagraph{Distributive Category}\label{sec:distributive_category}
+\hfill \\
+
+If a Cartesian Closed Category $\cat{C}$ has Coproducts, then
+Products and Coproducts are \emph{Distributive}:\cite{awodey06}
+\[
+  A \times (B + C) \cong (A \times B) + (A \times C)
+\]
+
+
+
+\subsubsection{Coherent Category}\label{sec:coherent_category}
+
+(or \emph{Pre-logos})
+
+Regular Category (\S\ref{sec:regular_category})
+
+Internal Logic: Coherent Logic (\S\ref{sec:coherent_logic})
+
+
+
+\paragraph{Heyting Category}\label{sec:heyting_category}
+\hfill \\
+
+(or \emph{Logos})
+
+Model for Intuitionistic First-order Logic
+(\S\ref{sec:intuitionistic_logic})
+
+
+
+\paragraph{Infinitary Coherent Category}
+\label{sec:infinitary_coherent_category}
+\hfill \\
+
+\emph{Infinitary Coherent Category} (or \emph{Geometric Category})
+
+
 
 \subsubsection{String Diagram}\label{sec:string_diagram}
 
@@ -3431,6 +3596,14 @@ Example Compact Symmetric Monoidal Categories:
 
 
 
+\paragraph{$*$-autonomous Category}\label{sec:star_autonomous}
+\hfill \\
+
+Symmetric Closed Monoidal Category $\langle C, \otimes, I \rangle$
+with a Dualizing Object (\S\ref{sec:dualizing_object})
+
+
+
 \subsubsection{Compact Closed Category}\label{sec:compact_closed}
 
 \paragraph{Simplex Category}\label{sec:simplex_category}
@@ -3478,107 +3651,6 @@ $(\infty,1)$-category %FIXME xref
 \hfill \\
 
 Shape Theory (\S\ref{sec:shape_theory})
-
-
-
-\subsubsection{Cartesian Closed Category}\label{sec:cartesian_closed}
-
-A Category is \emph{Cartesian Closed} if it has:
-\begin{enumerate}
-\item A Product Functor (\S\ref{sec:product})
-\item An Exponential for any pair of Objects
-  (\S\ref{sec:category_exponential})
-\item A Terminal Object (\S\ref{sec:terminal_object})
-\end{enumerate}
-By these conditions and the Universal Mapping Property of
-Exponentials:
-\[
-  \forall f : X \times A \rightarrow B \Leftrightarrow
-  \exists ! \overline{f} : X \rightarrow B^A
-\]
-
-The Category of Types in the Simply Typed $\lambda$-calculus
-(\S\ref{sec:simply_typed}) is a Catesian Closed Category.
-
-For a Theory $\mathcal{F}$, the Cartesian Close Category
-$\cat{C}(\mathcal{F})$ is built from the $\lambda$-calculus over
-$\mathcal{F}$ by the Presented Generators and Relations stated in
-$\mathcal{F}$ and has the Universal Mapping Property such that given
-any Model $M$ of $\mathcal{F}$ in any Cartesian Closed Category
-$\cat{D}$ there is a Unique Functor:
-\[
-  \llbracket - \rrbracket_M :
-    \cat{C}(\mathcal{F}) \rightarrow \cat{D}
-\]
-preserving $[X]_M = M$ for the Basic Types and Terms of $\mathcal{F}$.
-\cite{awodey06}
-
-Example Cartesian Closed Categories:
-
-\begin{itemize}
-\item $\cat{Cat}$
-\item $\cat{Grpd}$
-\item $\cat{Set}$
-\end{itemize}
-
-$\lambda^{\times, \rightarrow} \simeq \mathrm{CCC}$
-
-$\mathrm{IPC}^{\wedge, \Rightarrow, \vee} \simeq \mathrm{Heyting Algebra}$
-
-Kripke Models: $\cat{Set^C}$, $\cat{Set}^P$ % FIXME
-
-Equalities on a Cartesian Closed Category $\cat{C}$ with
-$0,1,A,B,C \in \cat{C}_0$:
-\[
-  C^{A + B} \cong C^A \times C^B
-\]\[
-  (C^B)^A \cong C^{B \times A}
-\]\[
-  (A \times B)^C \cong A^C \times B^C
-\]\[
-  C^0 \cong 1
-\]\[
-  C^1 \cong C
-\]\[
-  A \times (B + C) \cong A \times B + A \times C
-\]
-
-
-
-\paragraph{Locally Cartesian Closed Category}
-\label{sec:locally_cartesian}
-\hfill \\
-A \emph{Locally Cartesian Closed Category} $\cat{E}$ is a Category
-such that all Slice Categories (\S\ref{sec:slice_category})
-$\cat{E}/X$ are Cartesian Closed Categories.
-
-Model for Intuitionistic Type Theory with Dependent Types
-(\S\ref{sec:intuitionistic_type})
-
-
-
-\subsubsection{Bicartesian Closed Category}\label{sec:bicartesian}
-
-A \emph{Bicartesian Closed Category} is a Cartesian Closed Category
-that also has an Initial Object and Coproducts that are distributed
-over by Products.
-
-
-
-\paragraph{Distributive Category}\label{sec:distributive_category}
-
-If a Cartesian Closed Category $\cat{C}$ has Coproducts, then
-Products and Coproducts are \emph{Distributive}:\cite{awodey06}
-\[
-  A \times (B + C) \cong (A \times B) + (A \times C)
-\]
-
-
-
-\subsubsection{Heyting Category}\label{sec:heyting_category}
-
-Model for Intuitionistic First-order Logic
-(\S\ref{sec:intuitionistic_logic})
 
 
 
