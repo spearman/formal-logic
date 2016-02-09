@@ -544,10 +544,6 @@ Family of approaches for modelling Concurrent Systems
 
 Linear Logic (\S\ref{sec:linear_logic})
 
-$\otimes$
-
-$\parr$
-
 Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
 \begin{itemize}
   \item Propositions as Session Types (\S\ref{sec:session_type})
@@ -557,10 +553,193 @@ Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
 \end{itemize}
 
 
+Constructions for Concurrent Programming:
+\cite{honda-vasconcelos-kubo98}
+\begin{itemize}
+  \item Session (\S\ref{sec:session})
+  \item Parallel Composition: $P_1 | P_2$
+  \item Name Hiding: $(\nu a)P \quad (\nu k)P$
+  \item Conditional: $\text{if } e \text{ then } P \text{ else } Q$
+    with Boolean Expression $e$
+  \item Recursion: $\mathtt{def }X_1(\tilde{x}_1 \tilde{k}_1) = P_1
+    \mathtt{ and } \cdots \mathtt{ and } X_n(\tilde{x}_n \tilde{k}_n)
+    = P_n \mathtt{ in } P$
+\end{itemize}
+
+Inaction $\mathtt{inact}$ (Unit of $|$)
+
+
+Primitives:
+\begin{itemize}
+  \item \emph{Send}
+  \item \emph{Receive}
+  \item \emph{Sequence} (not needed) %FIXME
+  \item \emph{Choice}
+  \item \emph{Recursion}
+\end{itemize}
+
+
+Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
+\cite{honda-vasconcelos-kubo98}
+
+Asynchronous Polyadic $\pi$-calculus
+(\S\ref{sec:polyadic_pi_calculus}) with Branching
+\cite{honda-vasconcelos-kubo98}
+
+
+$\otimes$
+
+$\parr$
+
+Namespaces: \cite{honda-vasconcelos-kubo98}
+\begin{itemize}
+\item Names $a,b,c,\ldots$
+\item Channels $k,k',k'',\ldots$
+\item Variables $x,y,z,\ldots$
+\item Constants $c,c',c'',\ldots$
+\item Expressions $e,e',e'',\ldots$
+\item Labels $l,l',l'',\ldots$
+\item Process Variables $X,Y,Z,\ldots$
+\item Names or Channels $u, u', u'', \ldots$
+\item Processes $P,Q,R, \ldots$
+\end{itemize}
+
+
 
 \subsubsection{Process}\label{sec:process}
 
+\emph{Process} (or \emph{Program})
+
+
+
+\paragraph{Replicated Input Process}
+\label{sec:replicated_input_process}
+\hfill \\
+
+Replicated Input (\S\ref{sec:replicated_input})
+
+$!x(y).P$
+
+\emph{Server} waiting on Channel $x$ to be Invoked
+(\S\ref{sec:invocation}) by \emph{Clients}
+
+
+
+\subparagraph{Invocation}\label{sec:invocation}
+\hfill \\
+
+Replicated Input Process $!x(y).P$ (Server)
+
+\emph{Invocation} by Client Spawns a new copy of the Process $P[a/y]$
+with $a$ the Name passed by the Client to the Server during the
+Invocation
+
+
+
+\subsubsection{Channel}\label{sec:process_channel}
+
+\emph{Channel}
+
+Private Port Designating a Session (\S\ref{sec:session}) through which
+Communication (\S\ref{sec:communication}) is performed
+\cite{honda-vasconcelos-kubo98}
+
+\HandRight\; cf. Information Theory \S\ref{sec:channel} Channels
+
+Channels form a distinct Syntactic Domain (\S\ref{sec:formal_grammar})
+\cite{honda-vasconcelos-kubo98}
+
+Atomic Interactions:
+\begin{itemize}
+  \item \emph{Data Sending/Receiving} (\S\ref{sec:data_passing}):
+    Value Passing, including Name Passing (Synchronous Message Passing
+    as in $\pi$-calculus \S\ref{sec:pi_calculus})
+  \item \emph{Label Selection/Branching}
+    (\S\ref{sec:label_branching}): Label Branching (Method Invocation
+    without Value Passing)
+  \item \emph{Channel Sending/Receiving} (\S\ref{sec:delegation}):
+    Delegation (Passing a Channel to another Process)
+\end{itemize}
+
+
+
+
+\subsubsection{Session}\label{sec:session}
+
+Session Type (\S\ref{sec:session_type})
+
+\cite{honda-vasconcelos-kubo98}:
+
+Session: Chain (Sequence \S\ref{sec:sequence}) of Dyadic Interactions,
+possibly with Branching and Recursion
+
+Process (Program \S\ref{sec:process}): Collection of Dyadic Interactions
+(Communications \S\ref{sec:communication}) in a Session
+
+Channel (\S\ref{sec:process_channel}): Private Port Designating a
+Session through which Interactions are performed in the Session; fresh
+Channel for each Session
+
+Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
+\cite{honda-vasconcelos-kubo98}
+
+
+
 \subsubsection{Communication}\label{sec:communication}
+
+\emph{Communication} (or \emph{Dyadic Interaction} or \emph{Reciprocal
+  Interaction})
+
+Remote Procedure Calls and Method Invocation as Session Type
+(\S\ref{sec:session_type}) Abstractions
+\cite{honda-vasconcelos-kubo98}
+
+\emph{Passing}: Sending/Receiving
+
+Communication Primitives:
+\cite{honda-vasconcelos-kubo98}
+\begin{itemize}
+  \item Value Passing, including Name Passing (Synchronous Message
+    Passing as in $\pi$-calculus \S\ref{sec:pi_calculus})
+  \item Label Branching (Method Invocation without Value Passing)
+  \item Delegation (Passing a Channel to another Process)
+\end{itemize}
+
+
+Combining Communication Primitives:
+\begin{itemize}
+  \item Concurrent (Parallel) Composition
+  \item Name/Channel Hiding
+  \item Conditional
+  \item Recursion
+\end{itemize}
+
+
+
+\paragraph{Data Passing}\label{sec:data_passing}
+\hfill \\
+
+Value, Name Passing
+
+Synchronous Message Passing
+
+
+
+\paragraph{Label Branching}\label{sec:label_branching}
+\hfill \\
+
+Label Selection, Label Branching
+
+Method Invocation
+
+
+
+\paragraph{Delegation}\label{sec:delegation}
+\hfill \\
+
+Channel Passing
+
+
 
 \subsubsection{Classical Processes}\label{sec:classical_processes}
 
@@ -601,7 +780,80 @@ Th. \textbf{Translation Preserves Types}
 
 \subsubsection{$\pi$-calculus}\label{sec:pi_calculus}
 
+Name-passing
+
+Bisimulation Equivalence (\S\ref{sec:bisimulation}) is Decidable for
+Recursion-free $pi$-calculus and Finite-control $pi$-calculus (number
+of Parallel components in any Process is Bounded by a Constant)
+
+Labelled Transition Semantics $P \xrightarrow{\alpha} P'$
+
+Non-deterministic Choice Operator $P + Q$
+
+Match Operator (Name Equality) $[x=y]P$
+
+Replication (\S\ref{sec:replication}) $!P$
+
+
+
+\paragraph{Replication}\label{sec:replication}
+\hfill \\
+
+Recursively Defined Agents
+
+$!P$
+
+
+
+\subparagraph{Replicated Input}\label{sec:replicated_input}
+\hfill \\
+
+Replicated Input $!x(y).P$
+
+Structural Congruence Axiom:
+\[
+  !x(y).P \equiv x(y).P | !x(y).P
+\]
+
+Replicated Input Processes (\S\ref{sec:replicated_input_process}) such
+as $!x(y).P$ can be understood as \emph{Servers} waiting on Channel
+$x$ to be Invoked by \emph{Clients}
+
+
+
 \paragraph{Local $\pi$-calculus}\label{sec:local_pi_calculus}
+
+\paragraph{Polyadic $\pi$-calculus}\label{sec:polyadic_pi_calculus}
+\hfill \\
+
+Communicating more than one Name
+
+Polyadic Input
+
+Polyadic Output
+
+
+
+\paragraph{Asynchronous $\pi$-calculus}\label{sec:asynchronous_pi_calculus}
+\hfill \\
+
+Allows only Outputs with no Suffix (Output Atoms have the form
+$\overline{x}\langle y \rangle$)
+
+Any Process in the original $pi$-calculus can be represented in
+Asynchronous $pi$-calculus using an extra Channel to simulate explicit
+acknowledgement from the receiving Process
+
+Strictly less expressive than the Synchronous $pi$-calculus with the
+Choice Operator
+
+
+
+\paragraph{Higher-order $\pi$-calculus}
+\label{sec:higherorder_pi_calculus}
+\hfill \\
+
+Processes may be sent through Channels
 
 
 
