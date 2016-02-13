@@ -542,6 +542,8 @@ also \emph{Post Tag Machine}
 
 Family of approaches for modelling Concurrent Systems
 
+Process Theory (???)
+
 Linear Logic (\S\ref{sec:linear_logic})
 
 Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
@@ -552,35 +554,34 @@ Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
     (\S\ref{sec:communication})
 \end{itemize}
 
+Session \S\ref{sec:session}: Sequence of Communications
+
+
+Communication Primitives:
+\begin{itemize}
+  \item Data Passing (\S\ref{sec:data_passing})
+  \item Label Branching (\S\ref{sec:label_branching})
+  \item Delegation (\S\ref{sec:delegation})
+\end{itemize}
+
 
 Constructions for Concurrent Programming:
 \cite{honda-vasconcelos-kubo98}
 \begin{itemize}
-  \item Session (\S\ref{sec:session})
-  \item Parallel Composition: $P_1 | P_2$
-  \item Name Hiding: $(\nu a)P \quad (\nu k)P$
-  \item Conditional: $\text{if } e \text{ then } P \text{ else } Q$
-    with Boolean Expression $e$
-  \item Recursion: $\mathtt{def }X_1(\tilde{x}_1 \tilde{k}_1) = P_1
-    \mathtt{ and } \cdots \mathtt{ and } X_n(\tilde{x}_n \tilde{k}_n)
-    = P_n \mathtt{ in } P$
+  \item Parallel Composition \S\ref{sec:parallel_composition}
+  \item Name Hiding \S\ref{sec:name_hiding}
+  \item Conditional \S\ref{sec:conditional}
+  \item Recursion \S\ref{sec:process_recursion}
 \end{itemize}
 
 Inaction $\mathtt{inact}$ (Unit of $|$)
 
 
-Primitives:
-\begin{itemize}
-  \item \emph{Send}
-  \item \emph{Receive}
-  \item \emph{Sequence} (not needed) %FIXME
-  \item \emph{Choice}
-  \item \emph{Recursion}
-\end{itemize}
-
-
 Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
 \cite{honda-vasconcelos-kubo98}
+
+Summation-less Asynchronous $\pi$-calculus
+(\S\ref{sec:asynchronous_pi_calculus}) \cite{honda-vasconcelos-kubo98}
 
 Asynchronous Polyadic $\pi$-calculus
 (\S\ref{sec:polyadic_pi_calculus}) with Branching
@@ -644,23 +645,20 @@ Private Port Designating a Session (\S\ref{sec:session}) through which
 Communication (\S\ref{sec:communication}) is performed
 \cite{honda-vasconcelos-kubo98}
 
-\HandRight\; cf. Information Theory \S\ref{sec:channel} Channels
+\HandRight\; Cf. Information Theory \S\ref{sec:channel} Channels
 
 Channels form a distinct Syntactic Domain (\S\ref{sec:formal_grammar})
 \cite{honda-vasconcelos-kubo98}
 
 Atomic Interactions:
 \begin{itemize}
-  \item \emph{Data Sending/Receiving} (\S\ref{sec:data_passing}):
-    Value Passing, including Name Passing (Synchronous Message Passing
-    as in $\pi$-calculus \S\ref{sec:pi_calculus})
-  \item \emph{Label Selection/Branching}
-    (\S\ref{sec:label_branching}): Label Branching (Method Invocation
-    without Value Passing)
-  \item \emph{Channel Sending/Receiving} (\S\ref{sec:delegation}):
-    Delegation (Passing a Channel to another Process)
+  \item \emph{Data Passing} \S\ref{sec:data_passing} (Value Passing,
+    Name Passing, Synchronous Message Passing as in $\pi$-calculus
+    \S\ref{sec:pi_calculus})
+  \item \emph{Label Branching} \S\ref{sec:label_branching} (Method
+    Invocation without Value Passing)
+  \item \emph{Delegation} \S\ref{sec:delegation} (Channel Passing)
 \end{itemize}
-
 
 
 
@@ -685,6 +683,24 @@ Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
 
 
 
+\paragraph{Session Initiation}\label{sec:session_initiation}
+\hfill \\
+
+\cite{honda-vasconcelos-kubo98}:
+\[
+  \mathtt{request} \; a(k) \; \mathtt{in} \; P
+  \quad\quad\quad
+  \mathtt{accept} \; a(k) \; \mathtt{in} \; P
+\]
+
+Request via Name $a$ to Initiate a Session and generation of Channel
+$k$ (to be bound in $P$)
+
+Accept via Name $a$ to Initiate a Session and generation of Channel
+$k$ (to be bound in $P$)
+
+
+
 \subsubsection{Communication}\label{sec:communication}
 
 \emph{Communication} (or \emph{Dyadic Interaction} or \emph{Reciprocal
@@ -696,22 +712,26 @@ Remote Procedure Calls and Method Invocation as Session Type
 
 \emph{Passing}: Sending/Receiving
 
-Communication Primitives:
+Communication Primitives (Atomic Interactions):
 \cite{honda-vasconcelos-kubo98}
 \begin{itemize}
-  \item Value Passing, including Name Passing (Synchronous Message
-    Passing as in $\pi$-calculus \S\ref{sec:pi_calculus})
-  \item Label Branching (Method Invocation without Value Passing)
-  \item Delegation (Passing a Channel to another Process)
+  \item Data Passing \S\ref{sec:data_passing}) (Value Passing, Name
+    Passing, Synchronous Message Passing as in $\pi$-calculus
+    \S\ref{sec:pi_calculus})
+  \item Label Branching \S\ref{sec:label_branching} (Method Invocation
+    without Value Passing)
+  \item Delegation \S\ref{sec:delegation} (Channel Passing)
 \end{itemize}
+organized by Sessions (\S\ref{sec:session})
 
 
 Combining Communication Primitives:
+\cite{honda-vasconcelos-kubo98}
 \begin{itemize}
-  \item Concurrent (Parallel) Composition
-  \item Name/Channel Hiding
-  \item Conditional
-  \item Recursion
+  \item Parallel Composition \S\ref{sec:parallel_composition}
+  \item Name Hiding \S\ref{sec:name_hiding}
+  \item Conditional \S\ref{sec:conditional}
+  \item Recursion \S\ref{sec:process_recursion}
 \end{itemize}
 
 
@@ -721,16 +741,34 @@ Combining Communication Primitives:
 
 Value, Name Passing
 
-Synchronous Message Passing
+\emph{Synchronous Message Passing}
+
+Expressions $e_i$
+
+Variables $x_i$
+
+\[
+    k![e_1 \cdots e_n]; P
+    \quad\quad\quad
+    k?(x_1 \cdots x_n) \; \mathtt{in} \; P
+\]
 
 
 
 \paragraph{Label Branching}\label{sec:label_branching}
 \hfill \\
 
-Label Selection, Label Branching
+Label Branching/Selection
 
-Method Invocation
+Method Invocation (without Value Passing)
+
+Labels $l$
+
+\[
+  k \lhd l; P
+  \quad\quad\quad
+  k \rhd \{ l_1 : P_1 \llbracket \cdots \rrbracket l_n : P_n \}
+\]
 
 
 
@@ -738,6 +776,105 @@ Method Invocation
 \hfill \\
 
 Channel Passing
+
+\[
+  \mathtt{throw} \; k[k']; P
+  \quad\quad\quad
+  \mathtt{catch} \; k(k') \; \mathtt{in} \; P
+\]
+
+
+
+\subsubsection{Communication Operators}\label{sec:communication_operators}
+
+\paragraph{Sequential Composition}\label{sec:sequential_composition}
+
+\paragraph{Parallel Composition}\label{sec:parallel_composition}
+\hfil \\
+
+(or \emph{Concurrent Composition})
+
+\[
+  P_1 | P_2
+\]
+
+\textbf{Reduction Semantics} (\S\ref{sec:reduction_semantics})
+
+Reduction Rule:
+\[
+  x<y>.P | x(v).Q ---> P | Q[y/v]
+\]
+
+
+
+\subparagraph{Inaction}\label{sec:inaction}
+
+Unit of $|$
+
+$\mathtt{inact}$
+
+
+
+\paragraph{Conditional}\label{sec:conditional}
+\hfill \\
+
+Boolean Expression $e$
+
+\[
+  \text{if } e \text{ then } P \text{ else } Q
+\]
+
+
+
+\paragraph{Name Hiding}\label{sec:name_hiding}
+\hfill \\
+
+Declares Name (or Channel) to be Local in Scope
+
+\[
+  (\nu a)P \quad (\nu k)P
+\]
+
+
+
+\paragraph{Recursion}\label{sec:process_recursion}
+\hfill \\
+
+Process Variable (???) $X$
+
+\[
+  \mathtt{def} \; X_1(\tilde{x}_1 \tilde{k}_1)
+  = P_1 \; \mathtt{and} \; \cdots \; \mathtt{and} \;
+  X_n(\tilde{x}_n \tilde{k}_n) = P_n \; \mathtt{in} \; P
+\]
+
+
+
+\subparagraph{Replication}\label{sec:replication}
+\hfill \\
+
+Recursively Defined Agents
+
+$!P$
+
+Replicated Input (\S\ref{sec:replicated_input})
+
+
+
+\subsubsection{Null Process}\label{sec:null_process}
+
+\subsubsection{Replicated Input}\label{sec:replicated_input}
+
+Replicated Input $!x(y).P$
+
+Structural Congruence Axiom:
+\[
+  !x(y).P \equiv x(y).P | !x(y).P
+\]
+
+Replicated Input Processes (\S\ref{sec:replicated_input_process}) such
+as $!x(y).P$ can be understood as \emph{Servers} waiting on Channel
+$x$ to be Invoked by \emph{Clients}
 
 
 
@@ -794,30 +931,8 @@ Match Operator (Name Equality) $[x=y]P$
 
 Replication (\S\ref{sec:replication}) $!P$
 
-
-
-\paragraph{Replication}\label{sec:replication}
-\hfill \\
-
-Recursively Defined Agents
-
-$!P$
-
-
-
-\subparagraph{Replicated Input}\label{sec:replicated_input}
-\hfill \\
-
-Replicated Input $!x(y).P$
-
-Structural Congruence Axiom:
-\[
-  !x(y).P \equiv x(y).P | !x(y).P
-\]
-
-Replicated Input Processes (\S\ref{sec:replicated_input_process}) such
-as $!x(y).P$ can be understood as \emph{Servers} waiting on Channel
-$x$ to be Invoked by \emph{Clients}
+\emph{Summation-less}, \emph{Summation-less Asynchronous
+  $pi$-calculus} %FIXME def
 
 
 
@@ -854,6 +969,15 @@ Choice Operator
 \hfill \\
 
 Processes may be sent through Channels
+
+
+
+\paragraph{Session-typed $\pi$-calculus}
+\label{sec:session_typed_pi_calculus}
+\cite{caires-pfenning10}
+\hfill \\
+
+Session Types (\S\ref{sec:session_type})
 
 
 
@@ -1140,6 +1264,8 @@ Pointclass of all \emph{Analytic Sets} (\S\ref{sec:analytic_set})
 Breaking down to reach a Base Case
 
 Self-referential Functions
+
+\HandRight\; Cf. \emph{Process Recursion} \S\ref{sec:process_recursion}
 
 
 
