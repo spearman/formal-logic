@@ -739,6 +739,13 @@ Combining Communication Primitives:
 \end{itemize}
 
 
+Interaction at Channels: Deterministic
+
+Interaction at Names: Non-deterministic
+
+Interaction Structure
+
+
 
 \paragraph{Data Passing}\label{sec:data_passing}
 \hfill \\
@@ -1145,12 +1152,115 @@ Processes may be sent through Channels
 
 
 
+\paragraph{Monadic $\pi$-calculus}\label{sec:monadic_pi_calculus}
+\hfill \\
+
+Ill-sorted, Well-typed % FIXME
+
+
+
 \paragraph{Session-typed $\pi$-calculus}
 \label{sec:session_typed_pi_calculus}
+\cite{honda-vasconcelos-kubo98}
 \cite{caires-pfenning10}
 \hfill \\
 
 Session Types (\S\ref{sec:session_type})
+
+Sorts $S, S', \ldots$
+
+Sort Variables $s, s', \dots$
+
+Type Variables $t, t', \ldots$
+
+Types $\alpha, \beta, \ldots$
+
+Cotypes $\overline{\alpha}, \overline{\beta}, \ldots$ %FIXME
+
+Sort Syntax:
+\[
+  S ::= \; \mathbf{nat} \;
+      | \; \mathbf{bool} \;
+      | \; \langle \alpha, \overline{\alpha} \rangle \;
+      | \; s \;
+      | \; \mu s.S
+\]
+
+Type Syntax:
+\[
+\begin{split}
+  \alpha  ::=&\; \uparrow[\alpha]; \beta \;
+            | \; \downarrow[\alpha]; \beta \; \\
+            |&\; \uparrow[\tilde{S}]; \alpha \;
+            | \; \downarrow[\tilde{S}]; \alpha \\
+            |&\; \& \{ l_1 : \alpha_1, \ldots, l_n : \alpha_n \} \;
+            | \; \oplus \{ l_1 : \alpha_1, \ldots, l_n : \alpha_n \} \\
+            |&\; \mathbf{1} \;
+            | \; \bot \; \\
+            |&\; t \;
+            | \; \mu t.\alpha
+\end{split}
+\]
+
+$\&$ External Choice
+
+$\oplus$ Internal Choice
+
+
+Cotype definitions:
+
+\begin{itemize}
+  \item $\overline{\uparrow[\alpha]; \beta}
+    = \downarrow[\alpha]; \overline{\beta}$
+  \item $\overline{\downarrow[\alpha]; \beta}
+    = \uparrow[\alpha]; \overline{\beta}$
+  \item $\overline{\uparrow[\tilde{S}]; \alpha}
+    = \downarrow[\tilde{S}]; \overline{\alpha}$
+  \item $\overline{\downarrow[\tilde{S}]; \alpha}
+    = \uparrow[\tilde{S}]; \overline{\alpha}$
+  \item $\overline{\& \{ l_i : \alpha_i \}}
+    = \oplus \{ l_i : \overline{\alpha_i} \}$
+  \item $\overline{\oplus \{ l_i : \alpha_i \}}
+    = \& \{ l_i : \overline{\alpha_i} \}$
+  \item $\overline{\mathbf{1}} = \mathbf{1}$
+  \item $\overline{t} = t$
+  \item $\overline{\mu t.\alpha} = \mu t.\overline{\alpha}$
+\end{itemize}
+
+$\overline{\overline{\alpha}} = \alpha$ when $\overline{\alpha}$ is
+  Defined
+
+Sort $\langle \alpha, \overline{\alpha} \rangle$ represents two
+complementary Interaction Structures: one starting with a
+$\mathtt{request}$ and another with an $\mathtt{accept}$
+
+
+\textbf{Sorting}: Finite Partial Mapping from Names and Variables to
+Sorts $\Gamma, \Gamma', \ldots$
+
+\textbf{Typing}: Finite Partial Mapping from Channels to Types
+$\Delta, \Delta', \ldots$
+
+\textbf{Basis}: Finite Partial Mapping from Process Variables to
+Sequences of Sorts and Types $\Theta, \Theta', \ldots$
+
+
+
+Main Sequent of Typing System:
+
+$\Theta; \Gamma \vdash P \rhd \Delta$
+
+Given Environment $\Theta; \Gamma$, Process $P$ has Typing $\Delta$
+
+\cite{honda-vasconcelos-kubo98}:
+\begin{enumerate}
+  \item (Invariance under $\equiv$)
+    $\Theta; \Gamma \vdash P \rhd \Delta \wedge P \equiv Q
+    \Rightarrow \Theta; \Gamma \vdash Q \rhd \Delta$
+  \item (Subject Reduction)
+    $\Theta; \Gamma \vdash P \rhd \Delta \wedge P \rightarrow^* Q
+    \Rightarrow \Theta; \Gamma \vdash Q \rhd \Delta$
+\end{enumerate}
 
 
 
