@@ -578,7 +578,7 @@ Inaction $\mathtt{inact}$ (Unit of $|$)
 
 
 Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
-\cite{honda-vasconcelos-kubo98}
+(\S\ref{sec:unbounded_interaction}) \cite{honda-vasconcelos-kubo98}
 
 Summation-less Asynchronous $\pi$-calculus
 (\S\ref{sec:asynchronous_pi_calculus}) \cite{honda-vasconcelos-kubo98}
@@ -596,7 +596,22 @@ $\parr$
 
 \subsubsection{Process}\label{sec:process}
 
-\emph{Process} (or \emph{Program})
+\emph{Process}
+
+Free Names
+
+Free Channels
+
+Free Variables
+
+Free Process Variables
+
+
+
+\paragraph{Program}\label{sec:program}
+\hfill \\
+
+A \emph{Program} is a Process with no Free Variables or Free Channels
 
 
 
@@ -770,11 +785,17 @@ Labels $l$
 
 Channel Passing
 
+Distributed Programming
+
 \[
   \mathtt{throw} \; k[k']; P
   \quad\quad\quad
   \mathtt{catch} \; k(k') \; \mathtt{in} \; P
 \]
+
+$\otimes_n P$
+
+Client is unaware of Delegation in Server
 
 
 
@@ -872,9 +893,25 @@ Structural Congruence Axiom:
   !x(y).P \equiv x(y).P | !x(y).P
 \]
 
-Replicated Input Processes (\S\ref{sec:replicated_input_process}) such
-as $!x(y).P$ can be understood as \emph{Servers} waiting on Channel
-$x$ to be Invoked by \emph{Clients}
+Replicated Input Process (\S\ref{sec:replicated_input_process}) such
+as $!x(y).P$ can be understood as \emph{Server} waiting on Channel $x$
+to be Invoked by \emph{Client}
+
+
+
+\subsubsection{Communication Pattern}\label{sec:communication_pattern}
+
+\paragraph{Continuous Interaction}\label{sec:continuous_interaction}
+\hfill \\
+
+Sequence of Sessions
+
+
+
+\paragraph{Unbounded Interaction}\label{sec:unbounded_interaction}
+\hfill \\
+
+Recursion with a Session
 
 
 
@@ -969,6 +1006,92 @@ Second Process Requests Initiation of Session
 (\S\ref{sec:session_initiation}) via $a$, and Sequentially Receives
 Value $x$ on Generated Channel $k$ and Sends Return Value $x + 1$ on
 $k$ (??? $\mathtt{inact}$)
+
+Alpha Equivalence $\equiv_alpha$
+
+Evaluation Relation $\downarrow$
+
+Inductive Mapping into Structuring Primitives $\llbracket \cdot
+\rrbracket$
+
+Free Names $fn(P)$
+
+Free Channels $fc(P)$
+
+Free Variables $fv(P)$
+
+Free Process Variables $fpv(P)$
+
+$fu(P) =_{\text{def}} fc(P) \cup fn(P)$
+
+
+\textbf{Structural (Syntactic) Equality}
+(\S\ref{sec:structural_equality})
+\cite{honda-vasconcelos-kubo98}
+
+Structural Equality $equiv$ given by the Smallest Congruence Relation
+(\S\ref{sec:congruence_relation}) such that:
+\begin{enumerate}
+  \item $P \equiv_\alpha Q \Rightarrow P \equiv Q$
+  \item $P \;|\; \mathtt{inact} \equiv P$, \quad\quad $P | Q \equiv Q
+    | P$, \quad\quad $(P|Q)|R \equiv P|(Q|R)$
+  \item $(\nu u) \; \mathtt{inact}$, \quad
+    $(\nu u u)P \equiv (\nu u)P$, \quad
+    $(\nu u u')P \equiv (\nu u' u)P$, \\
+    $u \notin fu(Q) \Rightarrow (\nu u)P | Q \equiv (\nu u)(P|Q)$, \\
+    $u \notin fu(D) \Rightarrow
+    (\nu u) \mathtt{def} \; D \; \mathtt{in} \; P
+    \equiv \mathtt{def} \; D \; \mathtt{in} \; (\nu u)P$
+  \item $fpv(D) \cap fpv(Q) = \varnothing \Rightarrow
+    (\mathtt{def} \; D \; \mathtt{in} \; P) | Q
+    \equiv \mathtt{def} \; D \; \mathtt{in} \; (P|Q)$
+  \item $fpv(D) \cap fpv(D') = \varnothing \Rightarrow
+    \mathtt{def} \; D \; \mathtt{in} \;
+    (\mathtt{def} \; D' \; \mathtt{in} \; P)
+    \equiv \mathtt{def} \; D \; \mathtt{and} \; D' \mathtt{in} \; P$
+\end{enumerate}
+
+
+\textbf{Operational Semantics} (\S\ref{sec:operational_semantics})
+\cite{honda-vasconcelos-kubo98}
+
+Operational Semantics given by the Smallest Reduction Relation
+(\S\ref{sec:reduction_relation}) $P \rightarrow Q$ such that:
+
+\begin{itemize}
+  \item Link
+  \item Com
+  \item Label
+  \item Pass
+  \item If1
+  \item If2
+  \item Def
+  \item Scop
+  \item Par
+  \item Str
+\end{itemize}
+
+$\rightarrow^*$
+
+
+\textbf{Example of a Reduction (Synchronous)} \cite{honda-vasconcelos-kubo98}
+
+%FIXME
+
+
+\textbf{Call-return} (Remote Procedure Call)
+
+Synchronous Call-return
+
+Asynchronous Call-return: Rendez-vous, Futures
+
+
+\textbf{Method Invocation} (\S\ref{sec:label_branching})
+
+Cell (Read/Write)
+
+
+\textbf{Continuous Interaction} (\S\ref{sec:continuous_interaction}
 
 
 
