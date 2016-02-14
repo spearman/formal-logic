@@ -8,9 +8,35 @@
 \emph{Formal Language Theory} is the study of Formal Languages
 (\S\ref{sec:formal_language}) and their finite representations,
 Automata (\S\ref{sec:automata_theory}). These topics are closely
-related to questions of Decidability
+related to the question of Decidability
 (\S\ref{sec:computable_function}), an important concept in Recursion
 Theory (Part \ref{part:recursion_theory}).
+
+
+
+% ====================================================================
+\section{Alphabet}\label{sec:alphabet}
+% ====================================================================
+
+An \emph{Alphabet}:
+\[
+  \Sigma = \{ \sigma_1, \ldots, \sigma_n \}
+\]
+is a Non-empty Finite Set (\S\ref{sec:set}) of \emph{Symbols}
+(Signifiers \S\ref{sec:signifier}), usually \emph{Characters} or
+\emph{Letters}.
+
+The Alphabet of a String (\S\ref{sec:string}), $s$, is the Set of
+Symbols occuring in that String:
+\[
+  \mathrm{Alph}(s)
+\]
+
+The Alphabet of a Language (\S\ref{sec:formal_language}), $L$, is the
+Set of all Symbols occuring in any String of that Language:
+\[
+  \mathrm{Alph}(L) = \bigcup_{s \in L} \mathrm{Alph}(s)
+\]
 
 
 
@@ -19,33 +45,27 @@ Theory (Part \ref{part:recursion_theory}).
 % ====================================================================
 
 A \emph{String} (or \emph{Word}), $s$, is a Finite Sequence
-(\S\ref{sec:sequence}) over a non-empty Finite Set of \emph{Symbols}
-(or \emph{Characters} or \emph{Letters}), $\Sigma$, called an
-\emph{Alphabet}:
+(\S\ref{sec:sequence}) of Symbols over an Alphabet $\Sigma$:
 \[
-  s = \langle c_1 \ldots c_n \rangle
+  s = \langle c_1 \cdots c_k \rangle
 \]
-where $c_1, \ldots, c_n \in \Sigma$.
+where $c_1, \ldots, c_k \in \Sigma$.
 
-The \emph{Length} of a String is denoted $|s|$ and is equal to the
-number of Symbols in $s$. The \emph{Empty String} $\varepsilon$ is the
-unique String over $\Sigma$ of Length 0, and acts as an Identity
-Element for String Concatenation (\S\ref{sec:string_concatenation}).
+The \emph{Length} of a String, $|s| = k$, is equal to the number of
+Symbols in $s$.
+
+The \emph{Empty String} $\varepsilon$ is the unique String over
+$\Sigma$ of Length 0, and acts as an Identity Element for String
+Concatenation (\S\ref{sec:string_concatenation}).
+
 The Set of all Strings of Length $n$ over $\Sigma$ is denoted
 $\Sigma^n$.
 
-The Alphabet of a String, $s$, is the Set of Symbols occuring in that
-particular String, $\mathrm{Alph}(s)$, while the Alphabet of a
-Language (\S\ref{sec:formal_language}), $S$, is the Set of all Symbols
-occuring in any String of that Language:
-\[
-  \mathrm{Alph}(S) = \bigcup_{s \in S} \mathrm{Alph}(s)
-\]
-
 The Infinite Set of all possible Strings of all Finite Lengths,
 $\Sigma^*$, is the Free Monoid (\S\ref{sec:free_monoid}) or
-\emph{Kleene Closure} of $\Sigma$, that is, the smallest Superset of
-$\Sigma$ that is closed under String Concatenation:
+\emph{Kleene Closure} of $\Sigma$, i.e. the smallest Superset
+(\S\ref{sec:subset}) of $\Sigma$ that is closed under String
+Concatenation (\S\ref{sec:string_concatenation}):
 \[
   \Sigma^* = \bigcup_{n\in\mathbb{N}_0} \Sigma^n
 \]
@@ -59,11 +79,13 @@ $\Sigma$ that is closed under String Concatenation:
 The \emph{Concatenation} of two Strings, $s$ and $t$, is an
 Associative Operation denoted $s \cdot t$ or $st$, giving the String
 resulting from appending the right-hand String to the end of the
-left-hand String. The Empty String $\varepsilon$ acts as an Identity
-Element:
+left-hand String.
+
+The Empty String $\varepsilon$ acts as an Identity Element:
 \[
   s \cdot \varepsilon = s = \varepsilon \cdot s
 \]
+
 With a third String, $u$, the Associative Property gives:
 \[
   s \cdot (t \cdot u) = (s \cdot t) \cdot u
@@ -110,8 +132,8 @@ $\mathrm{Pref}$ Function as:
 \[
   s \sqsubseteq t \Leftrightarrow s \in \mathrm{Pref}_L(t)
 \]
-This Function is also used in the definition of the \emph{Prefix Closure}
-of a Language (\S\ref{sec:prefix_closure}).
+This Function is also used in the definition of the \emph{Prefix
+  Closure} (\S\ref{sec:prefix_closure}) of a Language.
 
 
 
@@ -150,7 +172,7 @@ for Empty String $\varepsilon$ and:
   f(st) = f(s)f(t)
 \]
 for Strings $s,t \in L$. This can be extended to give the Substitution
-Closure (\S\ref{sec:substitution_closure}) of a Language. Regular
+Closure of a Language (\S\ref{sec:substitution_closure}). Regular
 (\S\ref{sec:regular_language}) and Context-free
 (\S\ref{sec:context_free}) Languages are closed under String
 Substitution.
@@ -172,9 +194,8 @@ where $\forall u,v \in \Sigma_1, f(uv) = f(u)f(v)$.
 A String Homomorphism $f$ is \emph{$\varepsilon$-free} if $\forall a
 \in \Sigma, f(a) \neq \varepsilon$.
 
-A String Homomorphism can
-be used to define a Homomorphism Closure for Languages
-(\S\ref{sec:language_homomorphism}). Regular
+A String Homomorphism can be used to define a Homomorphism Closure for
+Languages (\S\ref{sec:language_homomorphism}). Regular
 (\S\ref{sec:regular_language}) and Context-free
 (\S\ref{sec:context_free}) Languages are Closed under String
 Homomorphisms.
@@ -187,8 +208,8 @@ Homomorphisms.
 
 For a String $s$ and Alphabet $\Sigma$ (not necessarily
 $\text{Alph}(s)$), a \emph{String Projection}, $\pi_{\Sigma}(s)$, is
-the String gotten by removing all Symbols of $s$ that are not in
-$\Sigma$:
+the String resulting from removal of all Symbols of $s$ that are not
+in $\Sigma$:
 \[
   \pi_{\Sigma}(s) =
   \begin{cases}
@@ -197,7 +218,7 @@ $\Sigma$:
     \pi_{\Sigma}(t)a  & \quad \text{if $s = ta$ and $a \in \Sigma$}\\
   \end{cases}
 \]
-cf. Projection in Relational Algebra
+\HandRight\; Cf. Projection in Relational Algebra
 \S\ref{sec:relational_projection}. String Projection may be used to
 define a Projection over a Language (\S\ref{sec:language_projection}).
 
@@ -207,8 +228,8 @@ define a Projection over a Language (\S\ref{sec:language_projection}).
 \subsection{Quotient}\label{sec:string_quotient}
 % --------------------------------------------------------------------
 
-The \emph{Right Quotient} of a String, $S$, and Symbol, $b$, denoted
-$S / b$ is defined as:
+The \emph{Right Quotient} $S / b$ of a String $S$ and Symbol $b$
+defined as:
 \[
   (Sa)/b =
   \begin{cases}
@@ -216,7 +237,7 @@ $S / b$ is defined as:
     \varepsilon & \quad \text{if $a \neq b$}\\
   \end{cases}
 \]
-Likewise a \emph{Left Quotient} $b \ S$ is defined as:
+Likewise the \emph{Left Quotient} $b \backslash S$ is defined as:
 \[
   b\backslash(aS) =
   \begin{cases}
@@ -224,7 +245,8 @@ Likewise a \emph{Left Quotient} $b \ S$ is defined as:
     \varepsilon & \quad \text{if $a \neq b$}\\
   \end{cases}
 \]
-cf. Syntactic Monoid\S Syntactic Quotient \ref{sec:syntactic_quotient}.
+\HandRight\; Cf. Syntactic Quotient \S\ref{sec:syntactic_quotient}
+(Syntactic Monoid)
 
 
 
@@ -232,9 +254,9 @@ cf. Syntactic Monoid\S Syntactic Quotient \ref{sec:syntactic_quotient}.
 \subsection{Right Cancellation}\label{sec:right_cancellation}
 % --------------------------------------------------------------------
 
-\emph{Right Cancellation} of a Symbol $a$ from a String $S$, denoted
-$s \div a$, is the removal of the first occurance of $a$ from $S$,
-starting from the right-hand side:
+\emph{Right Cancellation}, $s \div a$, of a Symbol $a$ from a String
+$S$ is the removal of the first occurance of $a$ from $S$, starting
+from the right-hand side:
 \[
   (sb) \div a =
   \begin{cases}
@@ -403,16 +425,16 @@ a Language, $L$, is defined as:
 % ====================================================================
 
 The term \emph{Syntax} may be used as a synonym for \emph{Grammar}:
-that is a Set of Rules through which the Strings of a Language can be
+i.e. a Set of Rules through which the Strings of a Language can be
 either \emph{Generated} (\S\ref{sec:generative_grammar}) or
 \emph{Recognized} (\S\ref{sec:determinative_grammar}).
 
 Syntax is the aspect of Formal Languages that refers only to the
-literal Strings of Symbols of a Language with no regard to the meaning
-or Interpretation (\S\ref{sec:interpretation}); only the condition
-that they can be identified and differentiated from one-another is
-required. The process of Syntactic Analysis is known as \emph{Parsing}
-(\S\ref{sec:parser}).
+literal Strings of Symbols of a Language with no regard to the Meaning
+(\S\ref{sec:meaning}) or Interpretation (\S\ref{sec:interpretation});
+only the condition that they can be identified and differentiated from
+one-another is required. The process of Syntactic Analysis is known as
+\emph{Parsing} (\S\ref{sec:parser}).
 
 
 
@@ -1524,7 +1546,7 @@ A State Transition System may be formulated as a \emph{Semiautomaton}
 \[
   (Q,\Sigma,T)
 \]
-where $\Sigma$ is a non-empty Set of \emph{Input Symbols}, $Q$ is the
+where $\Sigma$ is a Non-empty Set of \emph{Input Symbols}, $Q$ is the
 Set of States, and $T$ is a \emph{Transition Function}:
 \[
   T:Q \times \Sigma \rightarrow Q

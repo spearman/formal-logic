@@ -592,19 +592,6 @@ $\otimes$
 
 $\parr$
 
-Namespaces: \cite{honda-vasconcelos-kubo98}
-\begin{itemize}
-\item Names $a,b,c,\ldots$
-\item Channels $k,k',k'',\ldots$
-\item Variables $x,y,z,\ldots$
-\item Constants $c,c',c'',\ldots$
-\item Expressions $e,e',e'',\ldots$
-\item Labels $l,l',l'',\ldots$
-\item Process Variables $X,Y,Z,\ldots$
-\item Names or Channels $u, u', u'', \ldots$
-\item Processes $P,Q,R, \ldots$
-\end{itemize}
-
 
 
 \subsubsection{Process}\label{sec:process}
@@ -660,6 +647,8 @@ Atomic Interactions:
   \item \emph{Delegation} \S\ref{sec:delegation} (Channel Passing)
 \end{itemize}
 
+Channel Generation (???)
+
 
 
 \subsubsection{Session}\label{sec:session}
@@ -693,10 +682,10 @@ Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
   \mathtt{accept} \; a(k) \; \mathtt{in} \; P
 \]
 
-Request via Name $a$ to Initiate a Session and generation of Channel
+Request via Name $a$ to Initiate a Session and Generation of Channel
 $k$ (to be bound in $P$)
 
-Accept via Name $a$ to Initiate a Session and generation of Channel
+Accept via Name $a$ to Initiate a Session and Generation of Channel
 $k$ (to be bound in $P$)
 
 
@@ -753,6 +742,10 @@ Variables $x_i$
     k?(x_1 \cdots x_n) \; \mathtt{in} \; P
 \]
 
+\subparagraph{Value Passing}\label{sec:value_passing}
+
+\subparagraph{Name Passing}\label{sec:name_passing}
+
 
 
 \paragraph{Label Branching}\label{sec:label_branching}
@@ -785,12 +778,19 @@ Channel Passing
 
 
 
-\subsubsection{Communication Operators}\label{sec:communication_operators}
+\subsubsection{Operators}\label{sec:process_operators}
 
 \paragraph{Sequential Composition}\label{sec:sequential_composition}
+\hfill \\
+
+\[
+  P_1; P_2
+\]
+
+
 
 \paragraph{Parallel Composition}\label{sec:parallel_composition}
-\hfil \\
+\hfill \\
 
 (or \emph{Concurrent Composition})
 
@@ -917,11 +917,13 @@ Th. \textbf{Translation Preserves Types}
 
 \subsubsection{$\pi$-calculus}\label{sec:pi_calculus}
 
-Name-passing
+Name Passing (\S\ref{sec:name_passing})
 
 Bisimulation Equivalence (\S\ref{sec:bisimulation}) is Decidable for
-Recursion-free $pi$-calculus and Finite-control $pi$-calculus (number
-of Parallel components in any Process is Bounded by a Constant)
+Recursion-free $\pi$-calculus (\S\ref{sec:recursionfree_pi_calculus})
+and Finite-control $\pi$-calculus
+(\S\ref{sec:finitecontrol_pi_calculus}); number of Parallel components
+in any Process is Bounded by a Constant)
 
 Labelled Transition Semantics $P \xrightarrow{\alpha} P'$
 
@@ -931,12 +933,60 @@ Match Operator (Name Equality) $[x=y]P$
 
 Replication (\S\ref{sec:replication}) $!P$
 
-\emph{Summation-less}, \emph{Summation-less Asynchronous
+\emph{Summation-less}, \emph{Asynchronous
   $pi$-calculus} %FIXME def
+\cite{honda-vasconcelos-kubo98}
+
+
+\textbf{Namespaces} \cite{honda-vasconcelos-kubo98}
+
+\begin{itemize}
+\item Names $a,b,c,\ldots$
+\item Channels $k,k',k'',\ldots$
+\item Variables $x,y,z,\ldots$
+\item Constants $c,c',c'',\ldots$
+\item Expressions $e,e',e'',\ldots$
+\item Labels $l,l',l'',\ldots$
+\item Process Variables $X,Y,Z,\ldots$
+\item Names or Channels $u, u', u'', \ldots$
+\item Processes $P,Q,R, \ldots$
+\end{itemize}
+
+
+\textbf{Example of a Program} \cite{honda-vasconcelos-kubo98}
+\[
+  \mathtt{accept} \; a(k) \; \mathtt{in} \; k![1];
+  k?(y) \; \mathtt{in} \; P
+  \quad | \quad
+  \mathtt{request} \; a(k) \; \mathtt{in} \; k?(x)
+  \; \mathtt{in} \; k![x+1]; \mathtt{inact}
+\]
+First Process Receives Request for a new Session via $a$, Generates
+new Channel $k$, then Sequentially Sends $1$ on $k$ and Receives
+Return Value $y$ on $k$ (??? and Continues on $(y)$ bound in $P$ ???)
+
+Second Process Requests Initiation of Session
+(\S\ref{sec:session_initiation}) via $a$, and Sequentially Receives
+Value $x$ on Generated Channel $k$ and Sends Return Value $x + 1$ on
+$k$ (??? $\mathtt{inact}$)
 
 
 
 \paragraph{Local $\pi$-calculus}\label{sec:local_pi_calculus}
+
+\paragraph{Finite-control $\pi$-calculus}
+\label{sec:finitecontrol_pi_calculus} \hfill \\
+
+Decidable Bisimulation Equivalence
+
+
+
+\paragraph{Recursion-free $\pi$-calculus}
+\label{sec:recursionfree_pi_calculus} \hfill \\
+
+Decidable Bisimulation Equivalence
+
+
 
 \paragraph{Polyadic $\pi$-calculus}\label{sec:polyadic_pi_calculus}
 \hfill \\
