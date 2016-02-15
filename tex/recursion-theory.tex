@@ -666,45 +666,6 @@ Channel Generation (???)
 
 
 
-\subsubsection{Session}\label{sec:session}
-
-Session Type (\S\ref{sec:session_type})
-
-\cite{honda-vasconcelos-kubo98}:
-
-Session: Chain (Sequence \S\ref{sec:sequence}) of Dyadic Interactions,
-possibly with Branching and Recursion
-
-Process (Program \S\ref{sec:process}): Collection of Dyadic Interactions
-(Communications \S\ref{sec:communication}) in a Session
-
-Channel (\S\ref{sec:process_channel}): Private Port Designating a
-Session through which Interactions are performed in the Session; fresh
-Channel for each Session
-
-Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
-\cite{honda-vasconcelos-kubo98}
-
-
-
-\paragraph{Session Initiation}\label{sec:session_initiation}
-\hfill \\
-
-\cite{honda-vasconcelos-kubo98}:
-\[
-  \mathtt{request} \; a(k) \; \mathtt{in} \; P
-  \quad\quad\quad
-  \mathtt{accept} \; a(k) \; \mathtt{in} \; P
-\]
-
-Request via Name $a$ to Initiate a Session and Generation of Channel
-$k$ (to be bound in $P$)
-
-Accept via Name $a$ to Initiate a Session and Generation of Channel
-$k$ (to be bound in $P$)
-
-
-
 \subsubsection{Communication}\label{sec:communication}
 
 \emph{Communication} (or \emph{Dyadic Interaction} or \emph{Reciprocal
@@ -758,11 +719,17 @@ Expressions $e_i$
 
 Variables $x_i$
 
+$!$ Send
+
+$?$ Receive
+
 \[
     k![e_1 \cdots e_n]; P
     \quad\quad\quad
     k?(x_1 \cdots x_n) \; \mathtt{in} \; P
 \]
+
+
 
 \subparagraph{Value Passing}\label{sec:value_passing}
 
@@ -826,6 +793,7 @@ Client is unaware of Delegation in Server
   P_1 | P_2
 \]
 
+
 \textbf{Reduction Semantics} (\S\ref{sec:reduction_semantics})
 
 Reduction Rule:
@@ -876,6 +844,10 @@ Process Variable (???) $X$
   X_n(\tilde{x}_n \tilde{k}_n) = P_n \; \mathtt{in} \; P
 \]
 
+$\mu t.P$ Enter Recursive Scope
+
+$t$ Recurse (DeBruijn Indices ???) %FIXME
+
 
 
 \subparagraph{Replication}\label{sec:replication}
@@ -891,7 +863,55 @@ Replicated Input (\S\ref{sec:replicated_input})
 
 \subsubsection{Null Process}\label{sec:null_process}
 
-\subsubsection{Replicated Input}\label{sec:replicated_input}
+
+
+\subsubsection{Session}\label{sec:session}
+
+Session Type (\S\ref{sec:session_type})
+
+Protocol
+
+Only Processes with Dual Protocols can Interact
+
+\cite{honda-vasconcelos-kubo98}:
+
+Session: Chain (Sequence \S\ref{sec:sequence}) of Dyadic Interactions,
+possibly with Branching and Recursion
+
+Process (Program \S\ref{sec:process}): Collection of Dyadic Interactions
+(Communications \S\ref{sec:communication}) in a Session
+
+Channel (\S\ref{sec:process_channel}): Private Port Designating a
+Session through which Interactions are performed in the Session; fresh
+Channel for each Session
+
+Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
+\cite{honda-vasconcelos-kubo98}
+
+
+
+\paragraph{Session Initiation}\label{sec:session_initiation}
+\hfill \\
+
+\cite{honda-vasconcelos-kubo98}:
+\[
+  \mathtt{request} \; a(k) \; \mathtt{in} \; P
+  \quad\quad\quad
+  \mathtt{accept} \; a(k) \; \mathtt{in} \; P
+\]
+
+Request via Name $a$ to Initiate a Session and Generation of Channel
+$k$ (to be bound in $P$)
+
+Accept via Name $a$ to Initiate a Session and Generation of Channel
+$k$ (to be bound in $P$)
+
+
+
+\subsubsection{Communication Pattern}\label{sec:communication_pattern}
+
+\paragraph{Replicated Input}\label{sec:replicated_input}
+\hfill \\
 
 Replicated Input $!x(y).P$
 
@@ -905,8 +925,6 @@ as $!x(y).P$ can be understood as \emph{Server} waiting on Channel $x$
 to be Invoked by \emph{Client}
 
 
-
-\subsubsection{Communication Pattern}\label{sec:communication_pattern}
 
 \paragraph{Continuous Interaction}\label{sec:continuous_interaction}
 \hfill \\
@@ -1202,9 +1220,9 @@ Type Syntax:
 \end{split}
 \]
 
-$\&$ External Choice
+$\&$ External Choice, Passive Selection, ``Offer''
 
-$\oplus$ Internal Choice
+$\oplus$ Internal Choice, Active Selection, ``Choose''
 
 
 Cotype definitions:
