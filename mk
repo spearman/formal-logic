@@ -1,5 +1,5 @@
 #!/bin/bash
 
-latexmk -pdf main
+latexmk -xelatex -pdf main
 
 exit
