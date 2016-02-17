@@ -872,6 +872,8 @@ Components of a Directed Graph (\S\ref{sec:directed_graph}).
 An Interpretation of First-order Logic can be given in any Topos
 (\S\ref{sec:topos}).
 
+Frame Problem %FIXME
+
 
 
 \subsubsection{Universal Generalization}\label{sec:universal_generalization}
@@ -1610,6 +1612,8 @@ the strongest Consistent Superintuitionistic Logic: Classical Logic.
 
 \emph{Relevance Logic} (or \emph{Relevant Logic})
 
+Strict Logic
+
 
 
 \subsubsection{Linear Logic}\label{sec:linear_logic}
@@ -1631,17 +1635,156 @@ An Algebraic Semantics for Linear Logic is given by Quantales
 
 Game Semantics (\S\ref{sec:game_semantics})
 
+Resources, Effects, Non-interference \cite{caires-pfenning10}
+
 Process Calculus (\S\ref{sec:process_calculus})
 
 Session Types (\S\ref{sec:session_type})
 
-Classical Linear Logic
+Classical Linear Logic (\S\ref{sec:classical_linear_logic})
 
 Intuitionistic Linear Logic
 
+Dual Intuitionistic Linear Logic (Session Types)
+\cite{caires-pfenning10}
+
+Context (\S\ref{sec:sequent_context})
+
+Exchange (\S\ref{sec:exchange_rule})
+
+Omitted Rules: Weakening (\S\ref{sec:weakening_rule}), Contraction
+(\S\ref{sec:contraction_rule})
+
+Exponentials $!$, $?$: controlled access to Weakening and Contraction
+
+Initial Sequent (Unit for Composition)
+
+Cut (\S\ref{sec:cut_elimination}) (Composition)
+
+Translation from Intuitionistic Logic into Linear Logic:
+G\"odel-Gentzen Negative Translation (\S\ref{sec:godel_gentzen}),
+embedding Classical First-order Logic into Linear First-order Logic
 
 
-\paragraph{Noncommutative Logic}\label{sec:noncommutative_logic}
+
+\paragraph{Canonical Form Property}\label{sec:canonical_form_property}
+\hfill \\
+
+\emph{Canonical Form Property}:
+\begin{itemize}
+  \item \emph{Completeness of Atomic Initial Sequents}: arbitrary
+    Initial Sequents can be Derived from Atomic Initial Sequents
+  \item \emph{Cut-elimination Theorem}: whenever a Sequent is Provable
+    it can be given a Cut-free Proof
+\end{itemize}
+
+Subformula Property
+
+
+
+\paragraph{Classical Linear Logic}\label{sec:classical_linear_logic}
+\hfill \\
+
+Entailment Relation in Full CLL is Undecidable
+
+MLL, MALL, MELL
+
+Syntax (BNF notation):
+\[
+\begin{split}
+  A ::=& \; p \; | \; p^\bot\\
+      |& \; A \otimes A \; | \; A \oplus A\\
+      |& \; A \& A \; | \; A \parr A\\
+      |& \; 1 \; | \; 0 \; | \; \top \; | \; \bot\\
+      |& \; !A \; | \; ?A
+\end{split}
+\]
+
+$p$ and $p^\bot$ ranging over Logical Atoms
+(\S\ref{sec:atomic_formula})
+
+Multiplicatives $\otimes$, $\parr$, $1$, $\bot$
+
+Additives $\oplus$, $\&$, $0$, $\top$
+
+Exponentials $!$, $?$
+
+\begin{itemize}
+  \item $\otimes$ Multiplicative Conjunction (``Tensor'', simultaneous
+    occurrence of Resources)
+  \item $\oplus$ Additive Disjunction (``Plus'', alternative occurence
+    of Resources, Internal Choice)
+  \item $\&$ Additive Conjunction (``With'', alternative occurence of
+    Resources, External Choice)
+  \item $\parr$ Additive Disjunction (``Parr'')
+  \item $1$ Unit for Multiplicative Conjunction (absence of any
+    Resource)
+  \item $0$ Unit for Additive Disjunction (Resource that cannot be
+    created)
+  \item $\top$ Unit for Additive Conjunction (unspecified alternative)
+  \item $\bot$
+  \item $!$ (``Bang'')
+  \item $?$ (``Why Not'')
+\end{itemize}
+
+Duals for Propositions %FIXME
+
+Linear Negation of $A$: $A^\bot$
+
+$A^{\bot\bot} = A$
+
+
+\textbf{Polarity}
+
+Positive: $\otimes$, $\oplus$, $1$, $0$, $!$
+
+Negative: $\parr$, $\&$, $\bot$, $\top$, $?$
+
+
+\textbf{Linear Implication}
+
+\[
+  A \multimap B := \; A^{\bot} \parr B
+\]
+(Resource Interpretation: Validity of Transforming Resource $A$ into
+Resource $B$)
+
+
+\textbf{Intuistionistic Implication}
+
+$!A \multimap B$
+
+
+\textbf{Classical Implication}
+
+$!A \multimap ?B$
+
+
+\textbf{Equivalences}
+
+$A \equiv B = (A \multimap B) \& (B \multimap A)$
+
+
+\textbf{Distributivity}
+
+$A \otimes (B \oplus C) \equiv (A \otimes B) \oplus (A \otimes C)$
+
+
+\textbf{Linear Distribution} (Weak Distribution)
+
+$(A \otimes (B \parr C)) \multimap ((A \otimes B) \parr C)$
+
+
+\textbf{Exponential Isomorphism}
+
+$!(A \& B) \equiv !A \otimes !B$
+
+
+\textbf{LU Presentation}
+
+
+
+\paragraph{Non-commutative Logic}\label{sec:noncommutative_logic}
 \hfill \\
 
 \emph{Ordered Logic}
