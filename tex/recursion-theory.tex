@@ -554,6 +554,9 @@ Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
     Communication (\S\ref{sec:communication})
 \end{itemize}
 
+Any Proof Reduction or Conversion corresponds to either a Computation
+Step or Proces Equivalence \cite{caires-pfenning10}
+
 Session \S\ref{sec:session}: Sequence of Communications
 
 
@@ -639,6 +642,15 @@ Invocation
 
 
 
+\subparagraph{Shared Server}\label{sec:shared_server}
+\hfill \\
+
+Session-typed $\pi$-calculus
+
+$!A$ Shared Server for Sessions of Type $A$
+
+
+
 \subsubsection{Channel}\label{sec:process_channel}
 
 \emph{Channel}
@@ -663,6 +675,10 @@ Atomic Interactions:
 \end{itemize}
 
 Channel Generation (???)
+
+
+
+\paragraph{Session Channel}\label{sec:session_channel}
 
 
 
@@ -908,6 +924,12 @@ $k$ (to be bound in $P$)
 
 
 
+\paragraph{Session Protocol}\label{sec:session_protocol}
+
+\paragraph{Finite Session}\label{sec:finite_session}
+
+
+
 \subsubsection{Communication Pattern}\label{sec:communication_pattern}
 
 \paragraph{Replicated Input}\label{sec:replicated_input}
@@ -992,8 +1014,6 @@ Replication (\S\ref{sec:replication}) $!P$
 \emph{Summation-less}, \emph{Asynchronous
   $\pi$-calculus} %FIXME def
 \cite{honda-vasconcelos-kubo98}
-
-Dual Intuitionistic Linear Logic \cite{caires-pfenning10}
 
 Bisimulation Equivalence (\S\ref{sec:bisimulation}) is Decidable for
 Recursion-free $\pi$-calculus (\S\ref{sec:recursionfree_pi_calculus})
@@ -1122,6 +1142,33 @@ Cell (Read/Write)
 
 
 
+\paragraph{Synchronous $\pi$-calculus}
+\label{sec:synchronous_pi_calculus}
+\cite{caires-pfenning10}
+\hfill \\
+
+Names $\Lambda = \{x,y,z,u,v,\ldots\}$
+
+Processes $P, Q, R,\ldots$:
+
+
+
+\paragraph{Asynchronous $\pi$-calculus}
+\label{sec:asynchronous_pi_calculus}
+\hfill \\
+
+Allows only Outputs with no Suffix (Output Atoms have the form
+$\overline{x}\langle y \rangle$)
+
+Any Process in the original $\pi$-calculus can be represented in
+Asynchronous $\pi$-calculus using an extra Channel to simulate explicit
+acknowledgement from the receiving Process
+
+Strictly less expressive than the Synchronous $\pi$-calculus with the
+Choice Operator
+
+
+
 \paragraph{Local $\pi$-calculus}\label{sec:local_pi_calculus}
 
 \paragraph{Finite-control $\pi$-calculus}
@@ -1149,21 +1196,6 @@ Polyadic Output
 
 
 
-\paragraph{Asynchronous $\pi$-calculus}\label{sec:asynchronous_pi_calculus}
-\hfill \\
-
-Allows only Outputs with no Suffix (Output Atoms have the form
-$\overline{x}\langle y \rangle$)
-
-Any Process in the original $\pi$-calculus can be represented in
-Asynchronous $\pi$-calculus using an extra Channel to simulate explicit
-acknowledgement from the receiving Process
-
-Strictly less expressive than the Synchronous $\pi$-calculus with the
-Choice Operator
-
-
-
 \paragraph{Higher-order $\pi$-calculus}
 \label{sec:higherorder_pi_calculus}
 \hfill \\
@@ -1185,7 +1217,38 @@ Ill-sorted, Well-typed % FIXME
 \cite{caires-pfenning10}
 \hfill \\
 
-Session Types (\S\ref{sec:session_type})
+Session Types \S\ref{sec:session_type}
+
+Terms (Functions, Values): Linear $\lambda$-calculus Types
+(\S\ref{sec:typed_lambda})
+
+Names (Channels \S\ref{sec:channel}): ``Interpretation Types''
+describing Session Protocols (\S\ref{sec:session_protocol})
+
+Dual Intuitionistic Linear Logic \cite{caires-pfenning10}
+
+\emph{Session-based Concurrency}: Processes (\S\ref{sec:process})
+Communicate (\S\ref{sec:communication}) through Session Channels
+(\S\ref{sec:session_channel}) connecting exactly two Subsystems (???)
+and Communication disciplined by Session Protocols
+(\S\ref{sec:session_protocol}) such that Actions (???) always occur in
+Dual Pairs (e.g. Send/Receive, Offer/Choose, etc.) and no further
+Interaction can occur after a Session Terminates (???), new Sessions
+Initiated (\S\ref{sec:session_initiation}) (Dynamically Created) by
+Invocation (\S\ref{sec:invocation}) of Shared Servers
+(\S\ref{sec:shared_server}) \cite{caires-pfenning10}
+
+Multiple simultaneous Sessions
+
+Data Races in Unshared Resources Forbidden
+
+Mobility: Server and Session Name Passing (Delegation
+\S\ref{sec:delegation})
+
+Finite Session (\S\ref{sec:finite_session})
+
+
+\textbf{Syntax}
 
 Sorts $S, S', \ldots$
 
@@ -1281,6 +1344,23 @@ Given Environment $\Theta; \Gamma$, Process $P$ has Typing $\Delta$
     $\Theta; \Gamma \vdash P \rhd \Delta \wedge P \rightarrow^* Q
     \Rightarrow \Theta; \Gamma \vdash Q \rhd \Delta$
 \end{enumerate}
+
+
+
+\textbf{Sessions}
+
+$A \multimap B$: Session $x$ that first Inputs a Session Channel
+(\S\ref{sec:session_channel}) of Type $A$ and then behaves as
+Interactive Behavior (???) $B$
+
+$A \otimes B$: first Sends a Session Channel of Type $A$ and
+afterwards behaves as $B$ (Continuation Session); $A$ and $B$ are
+independent
+
+$!A$: Shared Server (\S\ref{sec:shared_server}) for Sessions of Type
+$A$
+
+$\&$: Branch
 
 
 
