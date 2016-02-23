@@ -5,11 +5,10 @@
 ## Latex packages
 
 The `latex` packages used in this document should be contained in the
-synaptic latex packages `texlive-latex-recommended` and
-`texlive-fonts-recommended`:
+following synaptic packages:
 
     $ sudo aptitude update
-    $ sudo aptitude install texlive-latex-recommended texlive-fonts-recommended texlive-math-extra texlive-xetex lmodern
+    $ sudo aptitude install texlive-latex-recommended texlive-fonts-recommended texlive-math-extra texlive-xetex
 
 
 

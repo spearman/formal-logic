@@ -1144,12 +1144,158 @@ Cell (Read/Write)
 
 \paragraph{Synchronous $\pi$-calculus}
 \label{sec:synchronous_pi_calculus}
-\cite{caires-pfenning10}
 \hfill \\
+
+\textbf{Synchronous $\pi$-calculus with Guarded (Binary) Choice}
+\cite{caires-pfenning10}
 
 Names $\Lambda = \{x,y,z,u,v,\ldots\}$
 
 Processes $P, Q, R,\ldots$:
+\[
+\begin{split}
+  P ::=&\quad \mathbf{0} \quad
+      | \quad P|Q \quad
+      | \quad (\nu y)P \quad \\
+      |&\quad x\langle y \rangle.P \quad
+      | \quad x(y).P \quad
+      | \quad !x(y).P \quad \\
+      |&\quad x.\mathtt{inl}; P \quad
+      | \quad x.\mathtt{inr}; P \quad
+      | \quad x.\mathtt{case}(P,Q)
+\end{split}
+\]
+
+``Static'' Fragment:
+\begin{itemize}
+  \item $\mathbf{0}$ (Inaction)
+  \item $P|Q$ (Parallel Composition)
+  \item $(\nu y)P$ (Name Restriction)
+\end{itemize}
+
+\begin{itemize}
+  \item $x\langle y \rangle.P$ (Output: Send $y$ on $x$ and continue
+    as $P$)
+  \item $x(y).P$ (Input: Receive Name $z$ on $x$ and continue as $P$
+    with Paramter $y$ replaced with $z$)
+  \item $!x(y).P$ (Replicated (Persistent) Input)
+\end{itemize}
+
+(Minimal) Labelled Choice Mechanism:
+\begin{itemize}
+  \item $x.\mathtt{inl}; P$
+  \item $x.\mathtt{inr}; P$
+  \item $x.\mathtt{case}(P,Q)$
+\end{itemize}
+
+Free Names $fn(P)$, Closed Process has no Free Names
+
+Alpha Equivalence (consistent renaming of Bound Names) $\equiv_\alpha$
+
+Capture Avoiding Substitution $P\{x/y\}$
+
+
+\textbf{Structural (Syntactic) Congruence}
+(\S\ref{sec:structural_equality})
+
+$(P \equiv Q)$: Identities on the Structure of Processes; Least
+Congruence Relation on Processes such that:
+
+\begin{tabular}{l l}
+  $P|\mathbf{0} \equiv P$ & $(S\mathbf{0})$ \\
+  $P|Q \equiv Q|P$ & $(S|C)$ \\
+  $(\nu x) \mathbf{0} \equiv \mathbf{0}$ & $(S \nu \mathbf{0})$ \\
+  $(\nu x)(\nu y)P \equiv (\nu y)(\nu x)P$ & $(S\nu\nu)$ \\
+  $P \equiv_\alpha Q \Rightarrow P \equiv Q$ & $(S\alpha)$ \\
+  $P|(Q|R) \equiv (P|Q)|R$ & $(S|A)$ \\
+  $x \notin fn(P) \Rightarrow P|(\nu x)Q \equiv (\nu x)(P|Q)$
+  & $(S\nu|)$
+\end{tabular}
+
+
+\textbf{Reduction}
+
+$(P \rightarrow Q)$: Behavior of Processes; Closed under Structural
+Congruence
+
+\begin{tabular}{l l}
+  $x\langle y \rangle.Q | x(z).P \rightarrow Q | P \{y/z\}$
+  & $(RC)$ \\
+  $x\langle y \rangle.Q | !x(z).P \rightarrow Q | P \{y/z\} | !x(z).P$
+  & $(R!)$ \\
+  $x.\mathtt{inl}; P | x.\mathtt{case}(Q,R) \rightarrow P | Q$
+  & $(RL)$ \\
+  $x.\mathtt{inr}; P | x.\mathtt{case}(Q,R) \rightarrow P | R$
+  & $(RR)$ \\
+  $Q \rightarrow Q' \Rightarrow P|Q \rightarrow P|Q'$
+  & $(R|)$ \\
+  $P \rightarrow Q \Rightarrow (\nu y)P \rightarrow (\nu y)Q$
+  & $(R\nu)$ \\
+  $P \equiv P', P' \rightarrow Q', Q'
+    \equiv Q \Rightarrow P \rightarrow Q$
+  & $(R\equiv)$
+\end{tabular}
+
+
+\textbf{Labelled Transition System}
+(\S\ref{sec:state_transition_system})
+
+$P \xrightarrow{\alpha} Q$: Process $P$ may Transition to Process $Q$
+by Action $\alpha$
+
+Co-action $\overline{\alpha}$
+
+\[
+\begin{split}
+  \alpha ::=&\quad x(y) \quad
+           | \quad \overline{x \langle y \rangle} \quad
+           | \quad \overline{(\nu y) x \langle y \rangle} \quad \\
+           |&\quad x.\mathtt{inl} \quad
+           | \quad x.\mathtt{inr} \quad
+           | \quad \overline{x.\mathtt{inl}} \quad
+           | \quad \overline{x.\mathtt{inr}} \quad
+\end{split}
+\]
+Side Conditions:
+$(\mathtt{res})$
+$(\mathtt{par})$
+$(\overline{\mathtt{par}})$
+$(\mathtt{com})$
+$(\overline{\mathtt{com}})$
+$(\mathtt{close})$
+$(\overline{\mathtt{close}})$
+$(\mathtt{open})$
+$(\mathtt{out})$
+$(\mathtt{in})$
+$(\mathtt{rep})$
+$(\mathtt{lout})$
+$(\mathtt{rout})$
+$(\mathtt{lin})$
+$(\mathtt{rin})$
+
+\begin{itemize}
+  \item $x.(y)$ (Input)
+  \item $\overline{x \langle y \rangle}$ (Output)
+  \item $\overline{(\nu y) x \langle y \rangle}$ (Bound Output; Output
+    new Name $y$ on Channel $x$)
+  \item $x.\mathtt{inl}$ (Left Offer)
+  \item $x.\mathtt{inr}$ (Right Offer )
+  \item $\overline{x.\mathtt{inl}}$ (Left Select)
+  \item $\overline{x.\mathtt{inr}}$ (Right Select)
+  \item $\xrightarrow{\tau}$ (Internal Action)
+\end{itemize}
+
+\emph{Subject} of $\alpha$: $s(\alpha)$ (e.g. $x$ in $x\langle y
+\rangle$) (???) \cite{caires-pfenning10}
+
+\emph{Internal Action} $\tau$
+
+Relation Composition $\rho_1 \rho_2$ (e.g. $\xrightarrow{\tau}\equiv$)
+
+
+
+\textbf{Types}
+%FIXME move to session-typed pi-calculus?
 
 
 
@@ -1262,26 +1408,26 @@ Cotypes $\overline{\alpha}, \overline{\beta}, \ldots$ %FIXME
 
 Sort Syntax:
 \[
-  S ::= \; \mathbf{nat} \;
-      | \; \mathbf{bool} \;
-      | \; \langle \alpha, \overline{\alpha} \rangle \;
-      | \; s \;
-      | \; \mu s.S
+  S ::= \quad \mathbf{nat} \quad
+      | \quad \mathbf{bool} \quad
+      | \quad \langle \alpha, \overline{\alpha} \rangle \quad
+      | \quad s \quad
+      | \quad \mu s.S
 \]
 
 Type Syntax:
 \[
 \begin{split}
-  \alpha  ::=&\; \uparrow[\alpha]; \beta \;
-            | \; \downarrow[\alpha]; \beta \; \\
-            |&\; \uparrow[\tilde{S}]; \alpha \;
-            | \; \downarrow[\tilde{S}]; \alpha \\
-            |&\; \& \{ l_1 : \alpha_1, \ldots, l_n : \alpha_n \} \;
-            | \; \oplus \{ l_1 : \alpha_1, \ldots, l_n : \alpha_n \} \\
-            |&\; \mathbf{1} \;
-            | \; \bot \; \\
-            |&\; t \;
-            | \; \mu t.\alpha
+  \alpha  ::=&\quad \uparrow[\alpha]; \beta \quad
+            | \quad \downarrow[\alpha]; \beta \quad \\
+            |&\quad \uparrow[\tilde{S}]; \alpha \quad
+            | \quad \downarrow[\tilde{S}]; \alpha \\
+            |&\quad \& \{ l_1 : \alpha_1, \ldots, l_n : \alpha_n \} \quad
+            | \quad \oplus \{ l_1 : \alpha_1, \ldots, l_n : \alpha_n \} \\
+            |&\quad \mathbf{1} \quad
+            | \quad \bot \quad \\
+            |&\quad t \quad
+            | \quad \mu t.\alpha
 \end{split}
 \]
 
