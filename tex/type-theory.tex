@@ -346,20 +346,10 @@ Coequalizer (\S\ref{sec:coequalizer})
 
 
 
-\subsubsection{Abstract Data Type}\label{sec:abstract_datatype}
+\subparagraph{Algebraic Effect}\label{sec:algebraic_effect}
+\hfill \\
 
-Type defined by certain Properties %FIXME
-
-Type (with associated Operations) whose Representation is hidden
-
-Co-algebra (\S\ref{sec:coalgebra})
-
-\begin{itemize}
-  \item Primitive Types in certain Programming Languages (e.g. Haskell)
-  \item Parameterized Data Types (\S\ref{sec:parametric_datatype}, a
-    weak form of Abstract Data Type)
-  \item Type Class (Constrained Type \S\ref{sec:constrained_type})
-\end{itemize}
+alternative to using Monads (\S\ref{sec:monad}) to Model Side-effects
 
 
 
@@ -479,8 +469,21 @@ Algebra and Final Coalgebras are Isomorphic.
 
 
 % --------------------------------------------------------------------
-\subsection{Existential Type}\label{sec:existential_type}
+\subsection{Concrete Type}\label{sec:concrete_type}
 % --------------------------------------------------------------------
+
+\HandRight\; Cf. Abstract (Existential) Type (\S\ref{sec:abstract_type})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Abstract Type}\label{sec:abstract_type}
+% --------------------------------------------------------------------
+
+\emph{Abstract Type} (or \emph{Existential Type})
+
+Type in a Nominal Type System (\S\ref{sec:nominal_type_system}) that
+cannot be Instantiated (\S\ref{sec:instantiation}) directly.
 
 Existentially Quantified Type Variable
 
@@ -490,7 +493,53 @@ Second-order Typed $\lambda$-calculus with Existential Quantification
 (whereas System $F$ is Second-order Typed $\lambda$-calculus with
 Universal Quantification.
 
-Abstract Types (???) are Existential Types (Robert Harper) %FIXME
+a Type that is not Abstract is a Concrete Type
+(\S\ref{sec:concrete_type})
+
+Abstract Type with no Implementation: Protocol, Interface, etc.
+
+
+
+\subsubsection{Abstract Data Type}\label{sec:abstract_datatype}
+
+Type defined by certain Properties %FIXME
+
+Type (with associated Operations) whose Representation is hidden
+
+Co-algebra (\S\ref{sec:coalgebra})
+
+\begin{itemize}
+  \item Primitive Types in certain Programming Languages (e.g. Haskell)
+  \item Parameterized Data Types (\S\ref{sec:parametric_datatype}, a
+    weak form of Abstract Data Type)
+  \item Type Class (Constrained Type \S\ref{sec:constrained_type})
+\end{itemize}
+
+Monads (\S\ref{sec:monad}) give the Interface to the Abstract Data
+Type of ``Program Fragments'' (\HandRight\; Cf. Algebraic Effects
+\S\ref{sec:algebraic_effect})
+
+
+
+\paragraph{Parametric Data Type}\label{sec:parametric_datatype}
+\hfill \\
+
+\emph{Parametric Data Type} (or \emph{Parameterized Data Type} or
+\emph{Generic Data Type})
+
+Weak form of Abstract Data Type
+
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
+
+
+
+\paragraph{Constrained Type}\label{sec:constrained_type}
+\hfill \\
+
+\emph{Type Class}
+
+Ad-hoc Polymorphism \S\ref{sec:adhoc_polymorphism}) (Function
+Overloading)
 
 
 
@@ -556,7 +605,7 @@ Impredicative \emph{First-class Polymorphism}: Self-referential
 Parametric (\S\ref{sec:parametric_polymorphism}): Universal
 Quantification
 
-Existential (\S\ref{sec:existential_type}): Existential Quantification
+Existential (\S\ref{sec:abstract_type}): Existential Quantification
 
 The Type $(\exists x : A).B$ is inhabited by Pairs $(a,b)$ with $a:A$
 and $b:B[a/x]$, i.e. the Sum of the Types $B(x)$ as $x$ ranges over
@@ -632,7 +681,7 @@ Type Targeted Testing, Liquid Types (Logically Qualified Types
 
 \emph{Generic Function}
 
-\emph{Generic Datatype} (\S\ref{sec:parametric_datatype})
+Parametric Datatype (\S\ref{sec:parametric_datatype})
 
 Uniformaly for all Types (``for all''); used to define Natural
 Transformations (\S\ref{sec:natural_transformation}) in Programming
@@ -648,19 +697,6 @@ Bounded (\S\ref{sec:bounded_polymorphism}) Parametric Polymorphism
 
 
 
-\paragraph{Parametric Data Type}\label{sec:parametric_datatype}
-\hfill \\
-
-\emph{Parametric Data Type} (or \emph{Parameterized Data Type} or
-\emph{Generic Data Type})
-
-Weak form of Abstract Data Type (\S\ref{sec:abstract_datatype})
-
-A Type that is not Parametric may be called a \emph{Concrete Data
-  Type}
-
-
-
 \subsubsection{Ad-hoc Polymorphism}\label{sec:adhoc_polymorphism}
 
 \emph{Function Overloading}, \emph{Operator Overloading}
@@ -671,12 +707,7 @@ Ad-hoc Polymorphism is contrasted with Parametric Polymorphism by
 supporting a limited number of distinct Types rather than any Type
 whatsoever.
 
-
-
-\paragraph{Constrained Type}\label{sec:constrained_type}
-\hfill \\
-
-\emph{Type Class}, Ad-hoc Polymorphism (Function Overloading)
+Constrained Type (Abstract Data Type \S\ref{sec:constrained_type})
 
 
 
@@ -761,7 +792,7 @@ A Type Function is an Endofunctor on the Category of Types.
 Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
 Universally Quantified Type Variables
 
-Existential Types (\S\ref{sec:existential_type}):
+Existential Types (\S\ref{sec:abstract_type}):
 Existentially Quantified Type Variables
 
 
@@ -1468,7 +1499,7 @@ System F$_\omega$ (\S\ref{sec:system_fomega})
 (\emph{Girard-Reynolds}) \emph{Polymorphic $\lambda$-calculus})
 
 Universal Quantification over all Types (cf. Existential Type Theory
-\S\ref{sec:existential_type})
+\S\ref{sec:abstract_type}) %FIXME
 
 By Curry-Howard Isomorphism, System F corresponds to the fragment of
 Second-order Intuitionistic Logic using only Universal Quantification;
@@ -2418,7 +2449,20 @@ with Property $[a/x]B$, i.e. $[a/x]B$ is Inhabited.
 
 
 % --------------------------------------------------------------------
-\subsection{Substructural Type System}\label{sec:substructural_type}
+\subsection{Nominal Type System}\label{sec:nominal_type_system}
+% --------------------------------------------------------------------
+
+Names
+
+
+
+% --------------------------------------------------------------------
+\subsection{Structural Type System}\label{sec:structural_type_system}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Substructural Type System}
+\label{sec:substructural_type_system}
 % --------------------------------------------------------------------
 
 Substructural Logic (\S\ref{sec:substructural_logic})
