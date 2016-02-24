@@ -645,7 +645,9 @@ Invocation
 \subparagraph{Shared Server}\label{sec:shared_server}
 \hfill \\
 
-Session-typed $\pi$-calculus
+Session-typed $\pi$-calculus (\S\ref{sec:session_typed_pi_calculus})
+
+Replicated Server
 
 $!A$ Shared Server for Sessions of Type $A$
 
@@ -679,6 +681,19 @@ Channel Generation (???)
 
 
 \paragraph{Session Channel}\label{sec:session_channel}
+\hfill \\
+
+Session-typed $\pi$-calculus (\S\ref{sec:session_typed_pi_calculus})
+
+
+
+\paragraph{Standard Channel}\label{sec:standard_channel}
+\hfill \\
+
+$!A$ Non-session (Non-linearized, Shared) Channel used by Server to
+spawn arbitrary number of Sessions of Type $A$
+
+Session-typed $\pi$-calculus (\S\ref{sec:session_typed_pi_calculus})
 
 
 
@@ -922,6 +937,16 @@ $k$ (to be bound in $P$)
 Accept via Name $a$ to Initiate a Session and Generation of Channel
 $k$ (to be bound in $P$)
 
+Session Initiation Channels, Standard Types $!A$
+
+
+
+\paragraph{Continuation Session}\label{sec:continuation_session}
+\hfill \\
+
+$A \otimes B$: First $A$ is Sent as Output and then behaves (???) as
+\emph{Continuation Session} $B$
+
 
 
 \paragraph{Session Protocol}\label{sec:session_protocol}
@@ -1054,7 +1079,7 @@ Second Process Requests Initiation of Session
 Value $x$ on Generated Channel $k$ and Sends Return Value $x + 1$ on
 $k$ (??? $\mathtt{inact}$)
 
-Alpha Equivalence $\equiv_alpha$
+Alpha Equivalence $\equiv_\alpha$
 
 Evaluation Relation $\downarrow$
 
@@ -1121,7 +1146,8 @@ Operational Semantics given by the Smallest Reduction Relation
 $\rightarrow^*$
 
 
-\textbf{Example of a Reduction (Synchronous)} \cite{honda-vasconcelos-kubo98}
+\textbf{Example of a Reduction (Synchronous)}
+\cite{honda-vasconcelos-kubo98}
 
 %FIXME
 
@@ -1151,7 +1177,8 @@ Cell (Read/Write)
 
 Names $\Lambda = \{x,y,z,u,v,\ldots\}$
 
-Processes $P, Q, R,\ldots$:
+\textbf{Processes} $P, Q, R,\ldots$:
+\cite{caires-pfenning10}
 \[
 \begin{split}
   P ::=&\quad \mathbf{0} \quad
@@ -1188,7 +1215,9 @@ Processes $P, Q, R,\ldots$:
   \item $x.\mathtt{case}(P,Q)$
 \end{itemize}
 
-Free Names $fn(P)$, Closed Process has no Free Names
+Free Names $fn(P)$, Bound Names $bn(P)$
+
+\emph{Closed Process} has no Free Names
 
 Alpha Equivalence (consistent renaming of Bound Names) $\equiv_\alpha$
 
@@ -1395,6 +1424,7 @@ Finite Session (\S\ref{sec:finite_session})
 
 
 \textbf{Syntax}
+\cite{honda-vasconcelos-kubo98}
 
 Sorts $S, S', \ldots$
 
@@ -1407,6 +1437,7 @@ Types $\alpha, \beta, \ldots$
 Cotypes $\overline{\alpha}, \overline{\beta}, \ldots$ %FIXME
 
 Sort Syntax:
+\cite{honda-vasconcelos-kubo98}
 \[
   S ::= \quad \mathbf{nat} \quad
       | \quad \mathbf{bool} \quad
@@ -1416,10 +1447,11 @@ Sort Syntax:
 \]
 
 Type Syntax:
+\cite{honda-vasconcelos-kubo98}
 \[
 \begin{split}
   \alpha  ::=&\quad \uparrow[\alpha]; \beta \quad
-            | \quad \downarrow[\alpha]; \beta \quad \\
+            | \quad \downarrow[\alpha]; \beta \\
             |&\quad \uparrow[\tilde{S}]; \alpha \quad
             | \quad \downarrow[\tilde{S}]; \alpha \\
             |&\quad \& \{ l_1 : \alpha_1, \ldots, l_n : \alpha_n \} \quad
@@ -1437,7 +1469,7 @@ $\oplus$ Internal Choice, Active Selection, ``Choose''
 
 
 Cotype definitions:
-
+\cite{honda-vasconcelos-kubo98}
 \begin{itemize}
   \item $\overline{\uparrow[\alpha]; \beta}
     = \downarrow[\alpha]; \overline{\beta}$
@@ -1492,21 +1524,124 @@ Given Environment $\Theta; \Gamma$, Process $P$ has Typing $\Delta$
 \end{enumerate}
 
 
+\textbf{Types} $A, B, C, \ldots$ (Intuitionistic Linear Logic
+\S\ref{sec:linear_logic})
+\cite{caires-pfenning10}
+\[
+\begin{split}
+  A,B ::=&\quad \mathbf{1} \quad
+        | \quad !A\\
+        |&\quad A \otimes B \quad
+        | \quad A \oplus B \\
+        |&\quad A \multimap B \quad
+        | \quad A \& B
+\end{split}
+\]
 
-\textbf{Sessions}
+Types are assigned to Channel Names $x:A$: Process uses Channel $x$
+according to Type $A$
 
-$A \multimap B$: Session $x$ that first Inputs a Session Channel
-(\S\ref{sec:session_channel}) of Type $A$ and then behaves as
-Interactive Behavior (???) $B$
 
-$A \otimes B$: first Sends a Session Channel of Type $A$ and
-afterwards behaves as $B$ (Continuation Session); $A$ and $B$ are
-independent
+\textbf{Session Types}
+(Finite Session Types)
+\cite{caires-pfenning10}
 
-$!A$: Shared Server (\S\ref{sec:shared_server}) for Sessions of Type
-$A$
+Sessions either Terminate ($\mathbf{1}$) or become a Replicated Server
+\S\ref{sec:shared_server} ($!A$)
 
-$\&$: Branch
+Session Type Constructors $\leftrightarrow$ Intuitionistic Linear
+Logic Connectives
+
+Intuitionistic: enforces Locality of Shared Channels
+
+\begin{itemize}
+  \item $A \otimes B$: Channel first performs Output, Sending a
+    Session Channel of Type $A$, and then behaves (???) as $B$
+    (Continuation Session \S\ref{sec:continuation_session})
+  \item $A \multimap B$: Channel first performs Input, Receiving a
+    Session Channel of Type $A$, and then behaves (???) as $B$
+  \item $\mathbf{1}$: Session is Terminated (Names still exist)
+  \item $A \oplus B$: Either Selects ``left'' and then behaves (???)
+    as $A$ or Selects ``right'' and then behaves (???) as $B$
+    (Internal Choice, ``Choice'')
+  \item $A \& B$: Offer either ``left'' Choice of behavior $A$ or
+    ``right'' Choice of behavior $B$ as $A$ or Selects ``right'' and
+    then behaves (???) as $B$ (External Choice, ``Branch'')
+  \item $!A$: Non-session (Non-linearized, Shared) Channel (Standard
+    Channel \S\ref{sec:standard_channel}); used by Shared Server
+    (\S\ref{sec:shared_server}) spawning arbitrary number of Sessions
+    of Type $A$
+\end{itemize}
+
+
+\textbf{Type Environment}
+\cite{caires-pfenning10}
+
+Typing Judgements correspond to Sequents in Dual Intuitionistic Linear
+Logic (\S\ref{sec:dual_linear_logic}) by erasing Processes
+
+Name : Type
+
+$x : A$
+
+Linear $\Delta$, Unrestricted $\Gamma$ (Weakening, Contraction)
+
+(Linear) Variables $x,y,z,\ldots \in \Delta$
+(Unrestricted) Variables $u,v,w,\ldots \in \Gamma$
+
+
+Judgements:
+\[
+  \Gamma; \Delta \vdash P :: z:C
+\]
+Process $P$ (safely) provides a usage (???) of $z$ according to
+behavior (Session) specified by Type $C$ in Processing Environment
+providing usages (???) of Names according to behaviors (Sessions)
+specified by Names in $\Gamma; \Delta$
+
+\emph{or} (equivalently)
+
+System providing behavior (Session) $C$ at Channel $z$ building on
+``services'' declared in $\Gamma; \Delta$
+
+$fn(P) \subseteq \Gamma \cup \Delta \cup \{z\}$
+
+$\Gamma; \Delta \vdash \hat{D}^z :: z:A$ is Derivable in $\pi$-DILL if and
+only if $\Gamma; \Delta \vdash D : A$ is Derivable in DILL
+
+Type Extraction: Proof $D$ Extracts to Process $\hat{D}^z$
+
+Examples:
+
+$\Gamma; \Delta \vdash Q :: -:\mathbf{1}$: Pure Client $Q$ relying on
+external services and not providing any
+
+$\Gamma; \Delta \vdash R :: z:!A$: Shared Server $R$
+
+$\stackrel{\triangle}{=}$
+
+Example Session-based Interaction %FIXME
+
+$\mathbf{0} :: x : \mathbf{1}$ Inactive (Terminated) Process (does not
+use $x$)
+
+Simple Process Interacting in different Sessions %FIXME
+
+$id_A(x,y)$: (Process) implements a Synchronous Mediator;
+bidirectionally behaves as Protocol $A$ between Channels $x$ and $y$
+
+Behavioral Equivalences: Derivable from known Properties of Typed
+Processes (Replication Theorems)
+%FIXME cite pi calculus sangiorgi & walker
+
+$\simeq_s$: Typed Behavioral Equivalence on Processes
+
+Computational Conversions, Structural Conversions
+
+Subject Reduction (\S\ref{sec:subject_reduction})
+
+Contextual Progress Property, Global Progress Property,
+Non-replicated Guarded Process %FIXME
 
 
 
