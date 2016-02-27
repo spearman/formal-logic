@@ -283,8 +283,7 @@ Tree (\S\ref{sec:tree_type})
 
 \subsubsection{Composite Data Type}\label{sec:composite_datatype}
 
-\paragraph{Algebraic Data Type}\label{sec:algebraic_datatype}
-\hfill \\
+\subsubsection{Algebraic Data Type}\label{sec:algebraic_datatype}
 
 Trees (\S\ref{sec:tree})
 
@@ -299,7 +298,7 @@ Algebraic Data Types form a Semiring (\S\ref{sec:semiring})
 
 
 
-\subparagraph{Sum Type}\label{sec:sum_type}
+\paragraph{Sum Type}\label{sec:sum_type}
 \hfill \\
 
 (or \emph{Variant Type} or \emph{Tagged Union})
@@ -312,8 +311,10 @@ Choices, Multiple ``Classes'' of Data
 
 
 
-\subparagraph{Product Type}\label{sec:product_type}
+\paragraph{Product Type}\label{sec:product_type}
 \hfill \\
+
+(or \emph{Record Type})
 
 (Cartesian) Product Types: Structs, Tuples
 
@@ -329,14 +330,14 @@ Corresponds to Cartesian Product (\S\ref{sec:cartesian_product})
 
 
 
-\subparagraph{Coproduct Type}\label{sec:coproduct_type}
+\paragraph{Coproduct Type}\label{sec:coproduct_type}
 \hfill \\
 
 %FIXME sum type?
 
 
 
-\subparagraph{Quotient Type}\label{sec:quotient_type}
+\paragraph{Quotient Type}\label{sec:quotient_type}
 \hfill \\
 
 Set Theoretic Quotients
@@ -346,10 +347,37 @@ Coequalizer (\S\ref{sec:coequalizer})
 
 
 
-\subparagraph{Algebraic Effect}\label{sec:algebraic_effect}
+\paragraph{Algebraic Effect}\label{sec:algebraic_effect}
 \hfill \\
 
 alternative to using Monads (\S\ref{sec:monad}) to Model Side-effects
+
+\cite{nielson-nielson99}
+
+``Lazy State'' and ``Lazy Writer'' cannot be captured by any Effect
+System (E. Kmett)
+
+
+
+\subparagraph{Effect Handler}\label{sec:effect_handler}
+\hfill \\
+
+Homomorphism from Free Algebras
+\cite{bauer-pretnar12}
+
+
+
+\subparagraph{Extensible Effect}\label{sec:extensible_effect}
+\hfill \\
+
+van Laarhoven Free Monad (\S\ref{sec:vanlaarhoven_free_monad})
+
+
+
+\subparagraph{Communication Effect}\label{sec:communication_effect}
+\hfill \\
+
+Communication \S\ref{sec:communication}
 
 
 
@@ -540,6 +568,16 @@ Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
 
 Ad-hoc Polymorphism \S\ref{sec:adhoc_polymorphism}) (Function
 Overloading)
+
+
+
+\subparagraph{Functional Dependency}\label{sec:functional_dependency}
+\hfill \\
+
+used to Constrain the Parameters (dependcies between the Parameters)
+of a (Multi-parameter) Type Class
+
+%FIXME xref relational database theory
 
 
 
@@ -2431,6 +2469,10 @@ with Property $[a/x]B$, i.e. $[a/x]B$ is Inhabited.
 \section{Type System}\label{sec:type_system}
 % ====================================================================
 
+\emph{Type System} (or \emph{Typing Discipline})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Type Checking}\label{sec:type_checking}
 % --------------------------------------------------------------------
@@ -2455,6 +2497,10 @@ with Property $[a/x]B$, i.e. $[a/x]B$ is Inhabited.
 Names
 
 
+
+% --------------------------------------------------------------------
+\subsection{Unified Type System}\label{sec:unified_type_system}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Structural Type System}\label{sec:structural_type_system}
@@ -2528,6 +2574,34 @@ Affine Logic (\S\ref{sec:affine_logic})
 \paragraph{Session Type}\label{sec:session_type}
 \hfill \\
 
+\emph{Session Types} are a Typing Discipline (\S\ref{sec:type_system})
+for Heterogenous Bidirectional Communication Channels defining the
+possible Sequences of Messages (\S\ref{sec:message}) determined by the
+Channel's Session Type (e.g. Stream-based Internet Protocols)
+\cite{neubauer-thiemann04}
+
+Message Sequences are Described by a Regular Language
+(\S\ref{sec:regular_language}) on Atomic Communication Actions
+(\S\ref{sec:communication}); Channel Type (\S\ref{sec:channel_type})
+specifies the Language with a Fix-point Expression ($\mu$). Operations
+peel off the ``outermost'' Action (???) of the Channel Type and change
+the Channel Type (Linearity). \cite{neubauer-thiemann04}
+
+Implementation requirements: \cite{neubauer-thiemann04}
+\begin{itemize}
+  \item Type Constraints (Type Classes \S\ref{sec:constrained_type})
+    with Functional Dependencies (\S\ref{sec:functional_dependency}):
+    modelling the progression of the current state of the Channel
+  \item Functions with Polymorphic Parameters
+    (\S\ref{sec:parametric_polymorphism}): models Client and Server
+    side of a Communication with one specification
+\end{itemize}
+
+Static Analysis of the Communication Behavior (???) of Agents (???) in
+a Distributed System \cite{gay-vasconcelos10}
+
+(Communication) Protocol
+
 Distribution and Concurrency
 
 $\parr$
@@ -2553,8 +2627,6 @@ Session: a ``unit'' of a Communication
 
 Session Type: ``structure'' of a Communication
 
-Protocol
-
 Only Processes with Dual Protocols can Interact
 
 Cotype
@@ -2573,6 +2645,15 @@ Channel: Private Port Designating a Session (cf. Information Theory
 Session Protocol (\S\ref{sec:session_protocol})
 
 
+\cite{neubauer-thiemann04}:
+\begin{enumerate}
+  \item First-order Base Type Values
+  \item Functions
+  \item Labels (cf. Labels in Record (\S\ref{sec:product_type}) or
+    Variant Types (\S\ref{sec:sum_type})
+\end{enumerate}
+
+
 \textbf{Primitives}
 
 \begin{itemize}
@@ -2582,6 +2663,12 @@ Session Protocol (\S\ref{sec:session_protocol})
   \item \emph{Choice}
   \item \emph{Recursion}
 \end{itemize}
+
+
+
+\paragraph{Channel Type}\label{sec:channel_type}
+
+\subparagraph{Label}\label{sec:channel_label}
 
 
 

@@ -657,6 +657,9 @@ $!A$ Shared Server for Sessions of Type $A$
 
 \emph{Channel}
 
+allows for a Sequence of Communications (\S\ref{sec:communication}),
+Messages (\S\ref{sec:message})
+
 Private Port Designating a Session (\S\ref{sec:session}) through which
 Communication (\S\ref{sec:communication}) is performed
 \cite{honda-vasconcelos-kubo98}
@@ -665,6 +668,12 @@ Communication (\S\ref{sec:communication}) is performed
 
 Channels form a distinct Syntactic Domain (\S\ref{sec:formal_grammar})
 \cite{honda-vasconcelos-kubo98}
+
+Homogenous Channel (all Messages have the same Type)
+
+Heterogenous Channel (Messages may have different Types)
+
+Bidirectional Channel
 
 Atomic Interactions:
 \begin{itemize}
@@ -685,6 +694,11 @@ Channel Generation (???)
 
 Session-typed $\pi$-calculus (\S\ref{sec:session_typed_pi_calculus})
 
+Heterogenous Bidirectional Communication Channel: each Message
+(\S\ref{sec:message}) has a different Type and the possible Sequences
+of Messages are determined by the Channel's Session Type
+\cite{neubauer-thiemann04}
+
 
 
 \paragraph{Standard Channel}\label{sec:standard_channel}
@@ -701,6 +715,8 @@ Session-typed $\pi$-calculus (\S\ref{sec:session_typed_pi_calculus})
 
 \emph{Communication} (or \emph{Dyadic Interaction} or \emph{Reciprocal
   Interaction})
+
+Communication Effect (\S\ref{sec:communication_effect})
 
 Remote Procedure Calls and Method Invocation as Session Type
 (\S\ref{sec:session_type}) Abstractions
@@ -745,6 +761,8 @@ Interaction Structure
 Value, Name Passing
 
 \emph{Synchronous Message Passing}
+
+Message (\S\ref{sec:message})
 
 Expressions $e_i$
 
@@ -804,6 +822,10 @@ Client is unaware of Delegation in Server
 
 
 
+\paragraph{Message}\label{sec:message}
+
+
+
 \subsubsection{Operators}\label{sec:process_operators}
 
 \paragraph{Sequential Composition}\label{sec:sequential_composition}
@@ -835,6 +857,7 @@ Reduction Rule:
 
 
 \subparagraph{Inaction}\label{sec:inaction}
+\hfill \\
 
 Unit of $|$
 
@@ -884,7 +907,7 @@ $t$ Recurse (DeBruijn Indices ???) %FIXME
 \subparagraph{Replication}\label{sec:replication}
 \hfill \\
 
-Recursively Defined Agents
+Recursively Defined Agents (???)
 
 $!P$
 
@@ -898,7 +921,13 @@ Replicated Input (\S\ref{sec:replicated_input})
 
 \subsubsection{Session}\label{sec:session}
 
-Session Type (\S\ref{sec:session_type})
+Session Type (\S\ref{sec:session_type}) determines the allowed
+Sequences of Messages, Defined by a Regular Language
+(\S\ref{sec:regular_language}) on Atomic Communication Actions
+(\S\ref{sec:communication}). Channel Type (\S\ref{sec:channel_type})
+specifies the Language with a Fix-point Expression. Operations peel
+off ``outermost'' Action (???) of the Channel Type and change the
+Channel Type (Linearity). \cite{neubauer-thiemann04}
 
 Protocol
 
@@ -909,8 +938,8 @@ Only Processes with Dual Protocols can Interact
 Session: Chain (Sequence \S\ref{sec:sequence}) of Dyadic Interactions,
 possibly with Branching and Recursion
 
-Process (Program \S\ref{sec:process}): Collection of Dyadic Interactions
-(Communications \S\ref{sec:communication}) in a Session
+Process (Program \S\ref{sec:process}): Collection of Dyadic
+Interactions (Communications) in a Session
 
 Channel (\S\ref{sec:process_channel}): Private Port Designating a
 Session through which Interactions are performed in the Session; fresh
@@ -984,43 +1013,6 @@ Sequence of Sessions
 \hfill \\
 
 Recursion with a Session
-
-
-
-\subsubsection{Classical Processes}\label{sec:classical_processes}
-
-\emph{Classical Processes} (CP)
-
-Caires-Pfenning
-
-No Deadlocks
-
-Th. \textbf{Subject Reduction}:
-\[
-  \text{If } P \vdash \Gamma \text{ and } P \Rightarrow Q
-  \text{ then } Q \vdash \Gamma
-\]
-
-Th. \textbf{Cut Elimination}:
-\[
-  \text{If } P \vdash \Gamma \text{ then there exists } Q
-  \text{ such that } P \Rightarrow^* Q \text{ and } Q
-  \text{ is not a } Cut
-\]
-
-
-
-\subsubsection{Good Variation}\label{sec:good_variation}
-
-Gay-Vasconcelos
-
-Th. \textbf{Translation Preserves Types}
-
-\[
-  \text{If } \Phi \vdash M : T \text{ then }
-  \llbracket M \rrbracket x \vdash \llbracket \Phi \rrbracket^\bot,
-  x : \llbracket T \rrbracket
-\]
 
 
 
@@ -1642,6 +1634,61 @@ Subject Reduction (\S\ref{sec:subject_reduction})
 
 Contextual Progress Property, Global Progress Property,
 Non-replicated Guarded Process %FIXME
+
+
+
+\subparagraph{Classical Processes}\label{sec:classical_processes}
+\hfill \\
+\cite{wadler12}
+
+\emph{Classical Processes} (CP)
+
+Caires-Pfenning \cite{caires-pfenning10}
+
+No Deadlocks
+
+$\pi$-DILL:
+\begin{itemize}
+  \item Output: $- \vdash \otimes$, $\multimap \vdash -$
+
+  \item Input: $- \vdash \multimap$, $\otimes \vdash -$
+\end{itemize}
+
+CP:
+\begin{itemize}
+  \item Output: $\vdash \otimes$
+
+  \item Input: $\vdash \parr$
+\end{itemize}
+
+Th. \textbf{Subject Reduction}:
+\[
+  \text{If } P \vdash \Gamma \text{ and } P \Rightarrow Q
+  \text{ then } Q \vdash \Gamma
+\]
+
+Th. \textbf{Cut Elimination}:
+\[
+  \text{If } P \vdash \Gamma \text{ then there exists } Q
+  \text{ such that } P \Rightarrow^* Q \text{ and } Q
+  \text{ is not a } Cut
+\]
+
+
+
+\subparagraph{Good Variation}\label{sec:good_variation}
+\hfill \\
+\cite{wadler12}
+
+Gay-Vasconcelos %FIXME
+
+Th. \textbf{Translation Preserves Types}
+
+\[
+  \text{If } \Phi \vdash M : T \text{ then }
+  \llbracket M \rrbracket x \vdash \llbracket \Phi \rrbracket^\bot,
+  x : \llbracket T \rrbracket
+\]
 
 
 
