@@ -794,6 +794,27 @@ $1 \xrightarrow{\eta} M \xleftarrow{\mu} M \times M$
 
 
 
+% --------------------------------------------------------------------
+\subsection{Pointed Object}\label{sec:pointed_object}
+% --------------------------------------------------------------------
+
+In a Category $\cat{C}$ with a Terminal Object $1$, a \emph{Pointed
+  Object} is an Object $X \in \cat{C}_0$ with a Global Element
+(\S\ref{sec:global_element}) $1 \rightarrow X$ called its
+\emph{Basepoint}.
+
+Structure, cf. Property: Inhabited Set %FIXME
+
+Category of Pointed Objects is the Co-slice Category
+(\S\ref{sec:coslice_category}) $1/\cat{C}$ with an ``obvious''
+Forgetful Functor $1 / \cat{C}$ to $\cat{C}$. If $\cat{C}$ has Finite
+Coproducts (\S\ref{sec:coproduct}) this Functor has a Left-adjoint
+Functor (a Free Functor \S\ref{sec:free_functor}) which takes an
+object $X \in \cat{C}_0$ to the Coproduct $1 \sqcup X$ equipped with
+the ``obvious'' Point (Maybe Monad). $X_+$, Module over a Monad %FIXME
+
+
+
 % ====================================================================
 \section{Functor}\label{sec:functor}
 % ====================================================================
@@ -857,9 +878,18 @@ Every Functor $F$ defines a Kernel Category
 
 \subsubsection{Endofunctor Category}\label{sec:endofunctor_category}
 
-$\cat{End_C}$ with Objects as Endofunctors of $\cat{C}$ and
-Morphisms as Natural Transformations between them with Monoidal
-Structure Induced by Composition of Endofunctors.
+$\cat{End_C}$ (or $\mathrm{End}(\cat{C})$)i with Objects as
+Endofunctors of $\cat{C}$ and Morphisms as Natural Transformations
+between them with Monoidal Structure Induced by Composition of
+Endofunctors.
+
+
+
+\paragraph{Pointed Endofunctor}\label{sec:pointed_endofunctor}
+\hfill \\
+
+Pointed Object (\S\ref{sec:pointed_object}) in an Endofunctor Category
+($Id \rightarrow S$)
 
 
 
@@ -962,6 +992,39 @@ Fully Faithful.
 
 Forgetful Functors are Right Adjoint (\S\ref{sec:adjoint}) to Free
 Functors (\S\ref{sec:free_functor}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Free Functor}\label{sec:free_functor}
+% --------------------------------------------------------------------
+
+Free Functors are Left Adjoint (\S\ref{sec:adjoint}) to Forgetful
+Functors (\S\ref{sec:forgetful_functor}).
+
+
+
+\subsubsection{Free Object}\label{sec:free_object}
+
+Forgetful Functor $U : \cat{C} \rightarrow \cat{D}$
+
+$x \in \cat{D}_0$
+
+\emph{Free $\cat{C}$-object} on $x$ with respect to $U$ is an Object
+of $\cat{C}$ satisfying the Universal Property
+(\S\ref{sec:universal_property}) that $F(x)$ has if $F$ was the
+corresponding Free Functor to $U$. Sometimes called a \emph{Universal
+  Arrow} from $x$ to $U$.
+
+If $U$ has a Left-adjoint then $F(x)$ is a Free $\cat{C}$-object on
+$x$ for every $x \in \cat{D}$ and conversely if there is a Free
+$\cat{C}$-object for every $x \in \cat{D}$ then $U$ has a
+Left-adjoint.
+
+Initial Object of the Comma Category (\S\ref{sec:comma_category}) $x /
+U$
+
+Free Monad (\S\ref{sec:free_monad})
 
 
 
@@ -1379,6 +1442,12 @@ Correspondences: \cite{jacobs-heunen-hasuo09}
 In Programming: Interface to Abstract Datatype of ``Program
 Fragments''
 
+An alternative to Monads for Computational Effects is Algebraic
+Effects (\S\ref{sec:algebraic_effect}), more often seen in Strict
+Languages
+
+Pointed Endofunctor (\S\ref{sec:pointed_endofunctor}) where $\sigma$
+is the Unit
 
 
 Comonad $F \circ G$ (\S\ref{sec:comonad})
@@ -1390,7 +1459,6 @@ Terminal Object %FIXME terminal object required in category?
 Generalization of Closure Operators on Posets (\S\ref{sec:poset}) to
 arbitrary Categories (Galois Connections \S\ref{sec:galois_connection}
 as Adjoint Pairs)
-
 
 
 \textbf{Generalization of Universal Algebra}
@@ -1522,6 +1590,27 @@ Descent
 
 
 \subsubsection{Free Monad}\label{sec:free_monad}
+
+Free Object (\S\ref{sec:free_object}) relative to a Forgetful Functor
+from a Category of Monads.
+
+Forgetful Functors:
+\[
+  \mathrm{Mnd}(\cat{C}) \rightarrow \mathrm{PtEnd}(\cat{C})
+  \rightarrow \mathrm{End}(\cat{C}) \rightarrow [\cat{C}_0, \cat{C}]
+\]
+
+$\mathrm{Mnd}(\cat{C})$: ``Monad Category''; Objects: Monads on
+$\cat{C}$, Morphisms: Natural Transformations Commuting with Monad
+Structure Maps (Category of Monoids in the Monoidal Category of
+Endofunctors with Composition)
+
+$\mathrm{PtEnd}(\cat{C})$ Pointed Endofunctors
+(\S\ref{sec:pointed_endofunctor})
+
+$\mathrm{End}(\cat{C})$ Category of Endofunctors of $\cat{C}$
+
+
 
 \paragraph{van Laarhoven Free Monad}
 \label{sec:vanlaarhoven_free_monad}
@@ -2129,7 +2218,7 @@ For a Functor $H : \cat{D} \rightarrow \cat{Set}$, an
 
 
 % --------------------------------------------------------------------
-\subsection{Global Elements}\label{sec:global_element}
+\subsection{Global Element}\label{sec:global_element}
 % --------------------------------------------------------------------
 
 A \emph{Global Element}, $a$, (also \emph{Point} or \emph{Constant})
@@ -2145,6 +2234,8 @@ In $\cat{Set}$ this expresses an Isomorphism:
 but is not true for all Categories in general.
 
 In some settings Global Elements represent Closed Terms.
+
+Pointed Object (\S\ref{sec:pointed_object})
 
 
 
@@ -3222,15 +3313,6 @@ $\pow : \cat{Set} \rightarrow \cat{Set}$
 
 Functions $f : X \rightarrow Y$ to the Image Mapping $img(f) :
 \pow(X) \rightarrow \pow(Y)$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Free Functor}\label{sec:free_functor}
-% --------------------------------------------------------------------
-
-Free Functors are Left Adjoint (\S\ref{sec:adjoint}) to Forgetful
-Functors (\S\ref{sec:forgetful_functor}).
 
 
 

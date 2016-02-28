@@ -347,44 +347,6 @@ Coequalizer (\S\ref{sec:coequalizer})
 
 
 
-\paragraph{Algebraic Effect}\label{sec:algebraic_effect}
-\hfill \\
-
-alternative to using Monads (\S\ref{sec:monad}) to Model Side-effects
-
-subsumed by Monads
-
-\cite{nielson-nielson99}
-
-``Lazy State'' and ``Lazy Writer'' cannot be captured by any Effect
-System (E. Kmett)
-
-\cite{pretnar15}
-
-
-
-\subparagraph{Effect Handler}\label{sec:effect_handler}
-\hfill \\
-
-Homomorphism from Free Algebras
-\cite{bauer-pretnar12}
-
-
-
-\subparagraph{Extensible Effect}\label{sec:extensible_effect}
-\hfill \\
-
-van Laarhoven Free Monad (\S\ref{sec:vanlaarhoven_free_monad})
-
-
-
-\subparagraph{Communication Effect}\label{sec:communication_effect}
-\hfill \\
-
-Communication \S\ref{sec:communication}
-
-
-
 \subsubsection{Logically Qualified Data Type}
 \label{sec:logically_qualified}\cite{rondon-kawaguchi-jhala08}
 
@@ -1032,6 +994,94 @@ By Curry-Howard, $\Sigma$-types model Conjunction and Existential
 Quantification.
 
 Analagous to Coproduct or Disjoint Union.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Effect System}\label{sec:effect_system}
+% --------------------------------------------------------------------
+
+Types $\tau$, $\tau'$
+
+Effect $\sigma$
+
+$\tau \xrightarrow{\sigma} \tau'$
+
+(Wadler, Thiemann - 2003 - \emph{The marriage of effects and monads}):
+%FIXME
+
+$(\tau \xrightarrow{\sigma} \tau')^\dag$
+$\rightsquigarrow$
+$\tau^\dag \rightarrow T^\sigma \tau'^\dag$
+
+
+
+\subsubsection{Algebraic Effect}\label{sec:algebraic_effect}
+
+\cite{nielson-nielson99}
+\cite{pretnar15}
+
+(Countable) Equational Theories (Algebraic Theory
+\S\ref{sec:algebraic_theory})
+
+(Pretnar, Plotkin - 2009 - \emph{Handlers of Algebraic Effects}): %FIXME
+
+Computational Effects representable by an Algebraic Theory:
+Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
+etc.
+
+Computational Monad: Free Monad (\S\ref{sec:free_monad})
+
+Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
+Algebraic Theory
+
+alternative to using Monads (\S\ref{sec:monad}) to Model Side-effects,
+most often seen in Strict Languages
+
+subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
+captured by any Effect System (E. Kmett)
+
+Continuations are not representable as Algebraic Effects
+
+(Pretnar - 2010 - \emph{The Logic and Handling of Algebraic Effects}):
+%FIXME
+
+Occurence of an Effect can been seen as a Branching in the Execution
+of a Program (number of Branches equal to the number of possible
+outcomes of an Effect)
+
+``Source'' of an Effect is represented by an Operation with Arity
+equal to the number of outcomes and Arguments represent Branches
+
+
+
+\paragraph{Effect Handler}\label{sec:effect_handler}
+\hfill \\
+
+Homomorphism from Free Algebras
+\cite{bauer-pretnar12}
+
+(Pretnar, Plotkin - 2009 - \emph{Handlers of Algebraic Effects}): %FIXME
+
+corresponds to Model of the Algebraic Theory
+(\S\ref{sec:algebraic_theory}) of the Effects
+
+Handling a Computational Effect: Homomorphically Mapping the Handled
+Computation into another Computation
+
+
+
+\paragraph{Extensible Effect}\label{sec:extensible_effect}
+\hfill \\
+
+van Laarhoven Free Monad (\S\ref{sec:vanlaarhoven_free_monad})
+
+
+
+\paragraph{Communication Effect}\label{sec:communication_effect}
+\hfill \\
+
+Communication \S\ref{sec:communication}
 
 
 
