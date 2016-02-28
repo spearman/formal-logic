@@ -739,6 +739,9 @@ Isomorphic:
   m \subseteq m' \wedge m' \subseteq m \Leftrightarrow m \equiv m'
 \]
 
+Isomorphism Class of Monomorphisms, Propositions as Subobjects (???)
+%FIXME
+
 A Morphism between two Subobjects is a Morphism in the Quotient
 Category $\cat{C}/X$ giving the Category of Subobjects of $X$ in
 $\cat{C}$ as $Sub_{\cat{C}}(X)$. Because there is at most one
@@ -765,7 +768,15 @@ is a Functor:
 
 
 
+\subsubsection{Characteristic Morphism}\label{sec:characteristic_morphism}
+
+Classifying Morphism (\S\ref{sec:classifying_morphism})
+
+
+
 \subsubsection{Subobject Classifier}\label{sec:subobject_classifier}
+
+Classifying Space (\S\ref{sec:classifying_space})
 
 $\Omega$
 
@@ -1053,8 +1064,9 @@ a Contravariant definition:
 \]
 
   \item \emph{Contravariant Hom-functor} (also \emph{Functor of
-    Points}, see \S\ref{sec:general_element}), for $B,f : X
-    \rightarrow Y \in \cat{C}$:
+    Points}, see Generalized Elements
+    \S\ref{sec:generalized_element}), for $B,f : X \rightarrow Y \in
+    \cat{C}$:
 \[
   h_B = Hom(-,B) : \cat{C} \rightarrow \cat{Set}
 \]\[
@@ -1351,9 +1363,9 @@ input.
 Given a Monad $T$ on a Category $\cat{C}$, there is a Category of
 Adjunctions (\S\ref{sec:adjoint}) that give rise to that Monad.
 
-A Monad gives an Algebraic Theory and an Algebra
-(\S\ref{sec:t_algebra}) for a Monad is a Model (\S\ref{sec:model}) of
-that Theory. %FIXME xref algebraic theory?
+A $T$-algebra (\S\ref{sec:t_algebra}) for a Monad $T$ is a Model
+(\S\ref{sec:model}) of the Algebraic Theory
+(\S\ref{sec:algebraic_theory}) given by a Monad.
 
 Correspondences: \cite{jacobs-heunen-hasuo09}
 \begin{itemize}
@@ -2141,17 +2153,20 @@ In some settings Global Elements represent Closed Terms.
 
 
 % --------------------------------------------------------------------
-\subsection{General Elements}\label{sec:general_element}
+\subsection{Generalized Element}\label{sec:generalized_element}
 % --------------------------------------------------------------------
 
-A \emph{General Element}, $x$, (also \emph{Variable}) is a Morphism
-from an arbitrary Domain Object, $X$
+A \emph{Generalized Element} (or \emph{General Element} or
+\emph{Variable}) $x$ is a Morphism from an arbitrary Domain Object,
+$X$:
 \[
   x: X \rightarrow A
 \]
 
-In some contexts General Elements correspond to arbitrary Terms
-(\S\ref{sec:term}).
+In some contexts Generalized Elements correspond to arbitrary Terms
+(\S\ref{sec:term}) as in Programming Languages (``Computational
+Trinitarianism'', Curry-Howard Correspondence
+\S\ref{sec:curry_howard}).
 
 
 
@@ -2542,7 +2557,32 @@ is defined as:
 
 \paragraph{Reindexed Family}\label{sec:reindexed_family}
 \hfill \\
+
 Indexed Family (\S\ref{sec:indexed_family})
+
+
+
+\paragraph{Display Map}\label{sec:display_map}
+\hfill \\
+
+Categorical Semantics (\S\ref{sec:categorical_semantics}) of Dependent
+Types (\S\ref{sec:dependent_type})
+
+$b : B \rightarrow A$
+
+$B \type$ Dependent on Variable of Type $A$:
+
+$x:A \vdash B(x):\mathrm{Type}$
+
+
+
+\subparagraph{Display Class}\label{sec:display_class}
+\hfill \\
+
+For Category $\cat{C}$ a Class of Morphisms of $\cat{C}$, $\class{D}
+\subset \cat{C}_1$, is a \emph{Class of Displays} if all Pullbacks
+(\S\ref{sec:pullback}) of Elements of $\class{D}$ exist and belong to
+$\class{D}$.
 
 
 
@@ -3589,6 +3629,17 @@ Internal Logic: Coherent Logic (\S\ref{sec:coherent_logic})
 
 
 
+\paragraph{Geometric Category}\label{sec:geometric_category}
+\hfill \\
+
+\emph{Infinitary Coherent Category}
+
+Internal Logic: Geometric Logic (\S\ref{sec:geometric_logic})
+
+\emph{Infinitary Coherent Category} (or \emph{Geometric Category})
+
+
+
 \paragraph{Heyting Category}\label{sec:heyting_category}
 \hfill \\
 
@@ -3597,13 +3648,8 @@ Internal Logic: Coherent Logic (\S\ref{sec:coherent_logic})
 Model for Intuitionistic First-order Logic
 (\S\ref{sec:intuitionistic_logic})
 
-
-
-\paragraph{Infinitary Coherent Category}
-\label{sec:infinitary_coherent_category}
-\hfill \\
-
-\emph{Infinitary Coherent Category} (or \emph{Geometric Category})
+Internal Logic: Finitary Fist-order Logic
+(\S\ref{sec:firstorder_logic})
 
 
 
@@ -4358,7 +4404,12 @@ Propositions as Types in each Context
 
 \subsubsection{Syntactic Category}\label{sec:syntactic_category}
 
+\emph{Syntactic Category} (or \emph{Category of Contexts})
+
 $\text{Theories} \rightleftarrows \text{Categories}$
+
+Programming Languages, ``Computational Trinitarianism'', Curry-Howard
+Correspondence (\S\ref{sec:curry_howard})
 
 Functor:
 \[
@@ -4371,7 +4422,42 @@ Left Adjoint to Functor:
 extracting the Internal Logic (\S\ref{sec:internal_logic}) of
 Categories.
 
+(from nLab): %FIXME
+
+Type Theory $T$
+
 $Syn(T)$
+
+
+
+\begin{itemize}
+  \item Objects: (Type) Contexts (\S\ref{sec:type_context}) in $T$
+  \item Morphisms: Substitutions (\S\ref{sec:substitution}) or
+    Interepretations (\S\ref{sec:interpretation}) of Variables in
+    Contexts
+\end{itemize}
+
+\begin{itemize}
+  \item $Syn(T)$ always has Finite Products
+    (\S\ref{sec:category_product})
+  \item If $T$ has Function Types (\S\ref{sec:function_type}) then
+    $Syn(T)$ is Cartesian Closed (\S\ref{sec:cartesian_closed})
+  \item If $T$ has Sum Types (\S\ref{sec:sum_type}) then $Syn(T)$ has
+    Binary Coproducts (\S\ref{sec:coproduct})
+  \item If $T$ is a Dependent Type Theory (\S\ref{sec:dependent_type})
+    with Dependent Product Types (\S\ref{sec:dependent_product}) then
+    $Syn(T)$ is Locally Cartesian Closed
+    (\S\ref{sec:locally_cartesian})
+  \item If $T$ is a Regular Theory (\S\ref{sec:regular_theory}) then
+    $Syn(T)$ is a Regular Category (\S\ref{sec:regular_category})
+  \item If $T$ is a Coherent Theory (\S\ref{sec:coherent_theory}) then
+    $Syn(T)$ is a Coherent Category (\S\ref{sec:coherent_category})
+  \item If $T$ is a Geometric Theory (\S\ref{sec:geometric_theory}) then
+    $Syn(T)$ is a Geometric Category (\S\ref{sec:geometric_category})
+  \item If $T$ is a Finitary First-order Theory
+    (\S\ref{sec:firstorder_theory}) then $Syn(T)$ is a Heyting
+    Category (\S\ref{sec:heyting_category})
+\end{itemize}
 
 
 
@@ -4428,6 +4514,8 @@ Objects.
 \emph{Fundamental Groupoid}
 
 \emph{Strict Groupoid}, \emph{Weak Groupoid}
+
+Homotopy $1$-type (\S\ref{sec:homotopy_1type})
 
 
 
