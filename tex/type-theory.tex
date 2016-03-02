@@ -328,6 +328,14 @@ $snd_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \tau$
 
 Corresponds to Cartesian Product (\S\ref{sec:cartesian_product})
 
+Product Type $A \times B$ is a special case of Dependent Sum Type
+(\S\ref{sec:sigma_type}) $\Sigma_{(x:A)}B$ with a Constant Codomain
+Type $B$:
+\[
+  \Sigma_{(x:A)} B \equiv A \times B
+\]
+where $\equiv$ is Judgemental Equality.
+
 
 
 \paragraph{Coproduct Type}\label{sec:coproduct_type}
@@ -581,7 +589,7 @@ the Type $\tau$ of $x$, where the Type of $id$:
 is Universally Quantified ``$\forall \sigma$''
 (\S\ref{sec:parametric_polymorphism}).
 
-Dependent Product Type (\S\ref{sec:dependent_product})
+Dependent Product Type (\S\ref{sec:pi_type})
 
 Second-order $\lambda$-calculus (\S\ref{sec:system_f})
 
@@ -707,7 +715,8 @@ Bounded (\S\ref{sec:bounded_polymorphism}) Parametric Polymorphism
 
 \emph{Function Overloading}, \emph{Operator Overloading}
 
-Polymorphic Functions applied to Terms of different Types
+Polymorphic Functions (\S\ref{sec:polymorphic_function}) applied to
+Terms of different Types
 
 Ad-hoc Polymorphism is contrasted with Parametric Polymorphism by
 supporting a limited number of distinct Types rather than any Type
@@ -749,7 +758,7 @@ Predicative)
 \subsubsection{Polymorphic Function}\label{sec:polymorphic_function}
 
 A Polymorphic Function has a Dependent Product Type
-(\S\ref{sec:dependent_product}):
+(\S\ref{sec:pi_type}):
 \[
   \Pi_{(A:\class{U})} A \rightarrow C
 \]
@@ -822,8 +831,15 @@ Higher-order Type Operators.
 \subsubsection{Function Type}\label{sec:function_type}
 
 A \emph{Function Type} (or \emph{Arrow Type}) is Type formed by the
-Higher-kinded Type Constructor $\rightarrow$, a special case of the
-Dependent Product Type (\S\ref{sec:dependent_product}).
+Higher-kinded Type Constructor $\rightarrow$
+
+The Function Type $A \rightarrow B$ is a special case of Dependent
+Product Type (\S\ref{sec:pi_type}) $\Pi_(a:A)B$ with a
+Constant Codomain Type $B$:
+\[
+  \Pi_{(a:A)}B \equiv A \rightarrow B
+\]
+where $\equiv$ is Judgemental Equality.
 
 In a Category without Products, the Function Type can't be defined.
 
@@ -872,7 +888,11 @@ A Type Family declared inside a Type Class is an \emph{Associated
 
 A \emph{Dependent Type} depends on a Term or another Type.
 
-A Dependent Product Type (\S\ref{sec:dependent_product}) is defined by
+\[
+  x : A \vdash B(x):\mathrm{Types}
+\]
+
+A Dependent Product Type (\S\ref{sec:pi_type}) is defined by
 a Dependent Function (\S\ref{sec:dependent_function}).
 
 Logical Quantifiers (\S\ref{sec:quantifier})
@@ -882,12 +902,8 @@ Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
 Categorically, Dependent Types correspond to Morphisms regarded as
 Indexed Families (Bundle or Fibration), represented by a \emph{Display
   Map} (\S\ref{sec:display_map}) which is a Morphism $p : B
-\rightarrow A$ where $B$ is a Type Depending on a Variable of Type
-$A$:
-\[
-  x : A \vdash B(x):\mathrm{Types}
-\]
-where $B(x)$ is the Fiber (\S\ref{sec:fiber}) of $p$ over $x:A$.
+\rightarrow A$ where $B(x)$ is the Fiber (\S\ref{sec:fiber}) of $p$
+over $x:A$.
 
 Classifying Morphism (\S\ref{sec:classifying_morphism}),
 Classifying Space (\S\ref{sec:classifying_space})
@@ -895,11 +911,11 @@ Classifying Space (\S\ref{sec:classifying_space})
 A Dependent Type is the Type of a Dependent Function
 (\S\ref{sec:dependent_function}).
 
-Dependent Pairs
+Dependent Pairs (Dependent Sum Type \S\ref{sec:sigma_type})
 
 \textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
 \emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
-Dependent Product Type (\S\ref{sec:dependent_product}) to Simply-typed
+Dependent Product Type (\S\ref{sec:pi_type}) to Simply-typed
 $\lambda$-calculus.
 
 \textbf{Second-order Dependent Type Theory} ($\lambda \Pi 2$):
@@ -920,7 +936,7 @@ abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
 A \emph{Dependent Function} is a Function from Terms to Types
 (Codomain varies depending on Argument). The Type of a Dependent
 Function is a \emph{Dependent Product Type}
-(\S\ref{sec:dependent_product}).
+(\S\ref{sec:pi_type}).
 
 Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
 
@@ -949,16 +965,16 @@ Proposition). For each Natural Number, either $even(x)$ is Inhabited
 
 
 
-\subsubsection{Dependent Product Type}\label{sec:dependent_product}
+\subsubsection{$\Pi$-type}\label{sec:pi_type}
 
-The \emph{Dependent Product Type} (or \emph{$\Pi$-type}) is the Type
+The \emph{$\Pi$-type} (or \emph{Dependent Product Type}) is the Type
 of a Dependent Function. By Curry-Howard, $\Pi$-types model
 Implication and Universal Quantification.
 
-Generalizes the idea of a Polymorphic Function.
+Dependent Product (\S\ref{sec:dependent_product})
 
-For a Type $A : \class{U}$ in Type Universe $\class{U}$, a Family
-of Types:
+For a Type $A : \class{U}$ in Type Universe
+(\S\ref{sec:type_universe}) $\class{U}$, a Family of Types:
 \[
   B : A \rightarrow \class{U}
 \]
@@ -966,26 +982,37 @@ can be defined by a Dependent Function which assigns a Type $B(a) :
 \class{U}$ to Each Term $a : A$. The Type of this Function is a
 Dependent Product Type:
 \[
-  \Pi_{(a:A)}B(a)
+  \Pi_{(x:A)}B(x)
 \]
-If $B$ is Constant, then $\Pi_(a:A)B$ is Judgementally Equal to the
-Function Type $A \rightarrow B$:
+
+If $B$ is Constant, then $\Pi_(x:A)B$ is Judgementally Equal to the
+Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
 \[
-  \Pi_{(a:A)}B \equiv A \rightarrow B
+  \Pi_{(x:A)}B \equiv A \rightarrow B
 \]
 
-Polymorphic Function (\S\ref{sec:polymorphic_function})
+Generalizes the idea of a Polymorphic Function
+(\S\ref{sec:polymorphic_function})
+
+A Polymorphic Function returning elements of Type $C$ has Polymorphic
+Type (\S\ref{sec:polymorphic_type}):
+\[
+  \Pi_{(A:\class{U})} A \rightarrow C
+\]
 
 
 
-\subsubsection{Dependent Sum Type}\label{sec:dependent_sum}
+\subsubsection{$\Sigma$-type}\label{sec:sigma_type}
 
-\emph{Dependent Sum Type} (or \emph{$\Sigma$-type} or \emph{Dependent
-  Pair Type}
+\emph{$\Sigma$-type} (or \emph{Dependent Sum Type} or \emph{Dependent
+  Pair Type})
+
+Dependent Sum (\S\ref{sec:dependent_sum})
 
 \[
   \Sigma_{(x:A)} B(x)
 \]
+
 If $B$ is Constant, then $\Sigma_{(x:A)}B$ is Judgementally Equal to
 the Product Type (\S\ref{sec:product_type}) $A \times B$:
 \[
@@ -1871,7 +1898,7 @@ Identity Type Elimination:
   } (Id_A\text{-E})
 \]
 \hfill \\
-\textbf{Dependent Product Types} (\S\ref{sec:dependent_product})
+\textbf{Dependent Product Types} (\S\ref{sec:pi_type})
 \\
 Logical Implication and Universal Quantification
 \\
@@ -1914,7 +1941,7 @@ Dependent Product Computation (cf. $\beta$-reduction
 
 
 \hfill \\
-\textbf{Dependent Sum Types} (\S\ref{sec:dependent_sum})
+\textbf{Dependent Sum Types} (\S\ref{sec:sigma_type})
 \\
 Logical Conjunction and Existential Quantification
 \\
