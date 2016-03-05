@@ -4,8 +4,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Ordering Relation (\S\ref{sec:ordering_relation})
-
 \emph{Top Element}
 
 \emph{Lexicographic Order}
@@ -17,49 +15,6 @@ Ordering Relation (\S\ref{sec:ordering_relation})
 % ====================================================================
 
 Order Theory (\S\ref{sec:order_theory})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Upper Bound}\label{sec:upper_bound}
-% --------------------------------------------------------------------
-
-\subsubsection{Least Upper Bound}\label{sec:least_upperbound}
-
-Supremum (\S\ref{sec:glb_lub})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Lower Bound}\label{sec:lower_bound}
-% --------------------------------------------------------------------
-
-\subsubsection{Greatest Lower Bound}\label{sec:greatest_lowerbound}
-
-Infimum (\S\ref{sec:glb_lub})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Cofinal}\label{sec:cofinal}
-% --------------------------------------------------------------------
-
-A Subset $B$ is \emph{Cofinal} in a Set $A$ with an Ordering Relation
-$\leq$ if:
-\[
-  \forall a \in A, \exists b \in B : a \leq b
-\]
-
-
-
-\subsubsection{Coinitial}\label{sec:coinitial}
-
-A \emph{Coinitial Subset} is the Order Theoretic Dual of a Cofinal
-Subset. A Subset $B$ is Coinitial in a Set $A$ with an Ordering
-Relation $\leq$ if:
-\[
-  \forall a \in A, \exists b \in B : b \leq a
-\]
 
 
 
@@ -91,19 +46,6 @@ Heyting Algebra (\S\ref{sec:heyting_algebra})
 
 
 % --------------------------------------------------------------------
-\subsection{Directed Set}\label{sec:directed_set}
-% --------------------------------------------------------------------
-
-A \emph{Directed Set} $D$ has a Preorder $\leq$ with the extra
-condition that any two Elements of $D$ have an Upper Bound
-(\S\ref{sec:upper_bound}):
-\[
-  \forall x, y \in D, \exists z \in D : x \leq z \wedge y \leq z
-\]
-
-
-
-% --------------------------------------------------------------------
 \subsection{Partial Order}\label{sec:partial_order}
 % --------------------------------------------------------------------
 
@@ -130,6 +72,16 @@ and conversely the Reflexive Closure (\S\ref{sec:reflexive_closure}):
 
 
 
+\subsubsection{Least Fixed Point}\label{sec:least_fixedpoint}
+
+\subsubsection{Greatest Fixed Point}\label{sec:greatest_fixedpoint}
+
+\subsubsection{Pre-fixpoint}\label{sec:prefixpoint}
+
+\subsubsection{Post-fixpoint}\label{sec:postfixpoint}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Total Order}\label{sec:total_order}
 % --------------------------------------------------------------------
@@ -137,6 +89,8 @@ and conversely the Reflexive Closure (\S\ref{sec:reflexive_closure}):
 A \emph{Total Order} (or \emph{Linear Order}) adds the requirement of
 Left-totality. A Totally Ordered Subset of some Partially Ordered Set
 is called a \emph{Chain}.
+
+Totally Ordered Set (\S\ref{sec:totally_ordered})
 
 
 
@@ -160,6 +114,33 @@ Every non-empty Subset has a Minimal Element
 
 
 
+% --------------------------------------------------------------------
+\subsection{Cofinal Subset}\label{sec:cofinal_subset}
+% --------------------------------------------------------------------
+
+A Subset $B$ is \emph{Cofinal} in a Set $A$ with an Ordering Relation
+$\leq$ if:
+\[
+  \forall a \in A, \exists b \in B : a \leq b
+\]
+
+Cofinality (Posets \S\ref{sec:cofinality})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Coinitial}\label{sec:coinitial_subset}
+% --------------------------------------------------------------------
+
+A \emph{Coinitial Subset} is the Order Theoretic Dual of a Cofinal
+Subset. A Subset $B$ is Coinitial in a Set $A$ with an Ordering
+Relation $\leq$ if:
+\[
+  \forall a \in A, \exists b \in B : b \leq a
+\]
+
+
+
 % ====================================================================
 \section{Setoid}\label{sec:setoid}
 % ====================================================================
@@ -174,6 +155,25 @@ A \emph{Setoid} is a Set with an Equivalence Relation.
 
 A \emph{Proset} is a Set, $P$, with a Preorder
 (\S\ref{sec:preorder}), $\lesssim$, defined on that Set.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Directed Set}\label{sec:directed_set}
+% --------------------------------------------------------------------
+
+A \emph{Directed Set} (or \emph{Directed Preorder} or \emph{Filtered
+  Set}) $D$ has a Preorder $\leq$ with the extra condition that any
+two Elements of $D$ have an Upper Bound (\S\ref{sec:upper_bound}):
+\[
+  \forall x, y \in D, \exists z \in D : x \leq z \wedge y \leq z
+\]
+
+
+
+\subsubsection{Final Map}\label{sec:final_map}
+
+\subsubsection{Cofinal Map}\label{sec:cofinal_map}
 
 
 
@@ -207,65 +207,13 @@ and a \emph{Minimal Element} when:
 \]
 
 The definition of Posets gives rise to the concept of a Monotonic
-Function (\S\ref{sec:monotonic}), that is a Function, $f$, between
-Posets which is ordered in both the Domain and the Codomain:
+Function (\S\ref{sec:monotonic_function}), that is a Function, $f$,
+between Posets which is ordered in both the Domain and the Codomain:
 \[
   x \leq y \Rightarrow f(x) \leq f(y)
 \]
 
-Tree (\S\ref{sec:tree})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Upper \& Lower Sets}\label{sec:upper_lower}
-% --------------------------------------------------------------------
-
-An \emph{Upper Set} (or \emph{Upset}) is a Subset, $U$, of a Poset,
-$P$, such that:
-\[
-  x \in U \wedge x \leq y \Rightarrow y \in U
-\]
-The Dual notion of a \emph{Lower Set} (or \emph{Downset} or
-\emph{Decreasing Set}), $L$, is defined likewise:
-\[
-  y \in L \wedge x \leq y \Rightarrow x \in L
-\]
-The Upper or Lower Set generated from a Subset $Y \subseteq X$ is
-denoted by $\uparrow Y$ or $\downarrow Y$, respectively.
-
-An Upper Set has the Property of being \emph{Upward Closed} and a
-Lower Set the Property of being \emph{Downward Closed}.
-
-A Topos Sieve (\S\ref{sec:topos_sieve}) is a generalization of a Lower
-Set.
-
-
-
-\subsubsection{Linear Continuum}\label{sec:linear_continuum}
-
-$\reals$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Infimum \& Supremum}\label{sec:glb_lub}
-% --------------------------------------------------------------------
-
-The \emph{Infimum} (or \emph{Greatest Lower Bound} (GLB) or
-\emph{Meet}) of a Subset of a Poset, $S \subseteq P$, is the Greatest
-Element of $P$ that is a Least Element of $S$, denoted $\wedge S$ or
-$inf (S)$.
-
-The \emph{Supremum} (or \emph{Least Upper Bound} (LUB) or \emph{Join})
-of a Subset of a Poset, $S \subseteq P$ is the Least Element of $P$
-that is a Greatest Element of $S$, denoted $\vee S$ or $sup (S)$.
-
-The Join is an example of a Coproduct (\S\ref{sec:coproduct})
-
-Least Upper Bound (Analysis \S\ref{sec:least_upperbound})
-
-Such Elements are Unique but not necessarily existing.
+%FIXME
 
 Meet and Join can be defined as Commutative, Associative, and
 Idempotent Partial Binary Operations on pairs of Elements of $P$.
@@ -276,7 +224,113 @@ The \emph{Nullary Meet} is the Top Element.
 
 
 
-\subsubsection{Least-upper-bound Property}\label{sec:leastupperbound_property}
+% --------------------------------------------------------------------
+\subsection{Upper Bound}\label{sec:upper_bound}
+% --------------------------------------------------------------------
+
+\subsubsection{Least Upper Bound}\label{sec:least_upperbound}
+
+The \emph{Supremum} (or \emph{Least Upper Bound} (LUB) or \emph{Join})
+of a Subset of a Poset, $S \subseteq P$ is the (Unique) Least Element
+of $P$ that is a Greatest Element of $S$, denoted $\vee S$ or $sup
+(S)$.
+
+The Join is an example of a Coproduct (\S\ref{sec:coproduct})
+
+
+
+\paragraph{Least-upper-bound Property}\label{sec:leastupperbound_property}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lower Bound}\label{sec:lower_bound}
+% --------------------------------------------------------------------
+
+\subsubsection{Greatest Lower Bound}\label{sec:greatest_lowerbound}
+
+The \emph{Infimum} (or \emph{Greatest Lower Bound} (GLB) or
+\emph{Meet}) of a Subset of a Poset, $S \subseteq P$, is the (Unique)
+Greatest Element of $P$ that is a Least Element of $S$, denoted
+$\wedge S$ or $inf (S)$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Upper Set}\label{sec:upper_set}
+% --------------------------------------------------------------------
+
+An \emph{Upper Set} (or \emph{Upset} or \emph{Upward Closed Set}) is a
+Subset, $U$, of a Poset, $P$, such that:
+\[
+  x \in U \wedge x \leq y \Rightarrow y \in U
+\]
+
+A Topos Sieve (\S\ref{sec:topos_sieve}) is a generalization of a Lower
+Set.
+
+The Upper Set generated from a Subset $Y \subseteq X$ is denoted by
+$\uparrow Y$.
+
+
+
+\subsubsection{Filter}\label{sec:filter}
+
+A \emph{Filter}, $\mathcal{F}$, of a Set, $X$, is a Set of Subsets of
+$X$:
+\[
+  \mathcal{F} \subseteq \pow(X)
+\]
+where:
+\begin{itemize}
+\item if $A \in \mathcal{F}$ and $B \supseteq A$, then $B \in
+  \mathcal{F}$
+\item if $A \in \mathcal{F}$ and $B \in \mathcal{F}$ then $A \cap B
+  \in \mathcal{F}$
+\item $X \in \mathcal{F}$ and $\emptyset \notin \mathcal{F}$
+\end{itemize}
+
+Dual is an \emph{Ideal} (\S\ref{sec:order_ideal})
+
+
+
+\subsubsection{Ultrafilter}\label{sec:ultrafilter}
+
+An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
+\subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
+
+
+
+\subsubsection{Linear Continuum}\label{sec:linear_continuum}
+
+$\reals$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lower Set}\label{sec:lower_set}
+% --------------------------------------------------------------------
+
+A \emph{Lower Set} (or \emph{Downset} or \emph{Decreasing Set} or
+\emph{Downward Closed Set}) $L$, is defined by:
+\[
+  y \in L \wedge x \leq y \Rightarrow x \in L
+\]
+
+The Lower Set generated from a Subset $Y \subseteq X$ is denoted by
+$\downarrow Y$.
+
+
+
+\subsubsection{Ideal}\label{sec:order_ideal}
+
+Dual of a Filter (\S\ref{sec:filter})
+
+
+
+\paragraph{Prime Ideal Theorem}\label{sec:prime_ideal}
+
+Boolean Prime Ideal Theorem
 
 
 
@@ -291,8 +345,21 @@ The Coproduct of two Elements of a Poset is their Least Upper Bound.
 
 
 % --------------------------------------------------------------------
-\subsection{Order Isomorphism}\label{sec:order_isomorphism}
+\subsection{Monotonic Function}\label{sec:monotonic_function}
 % --------------------------------------------------------------------
+
+A \emph{Monotonic Function} is a Function between Posets
+(\S\ref{sec:poset}) where the Ordering of Elements of the Domain
+Implies the Ordering of Elements in the Image of those Elements under
+the Function.
+
+
+
+\subsubsection{Order Isomorphism}\label{sec:order_isomorphism}
+
+Surjective Order Embedding
+
+
 
 % --------------------------------------------------------------------
 \subsection{Covering Relation}\label{sec:covering_relation}
@@ -318,7 +385,7 @@ Sequences of Elements.
 % --------------------------------------------------------------------
 
 The \emph{Cofinality} of a Poset $A$ is the least of the Cardinalities
-of the Cofinal Subsets (\S\ref{sec:cofinal}) of $A$.
+of the Cofinal Subsets (\S\ref{sec:cofinal_subset}) of $A$.
 
 
 
@@ -329,57 +396,6 @@ of the Cofinal Subsets (\S\ref{sec:cofinal}) of $A$.
 Adjoint Pairs (\S\ref{sec:adjoint}) in Poset Categories
 
 Closure Operators are Monads (\S\ref{sec:monad})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Totally Ordered Set}\label{sec:totally_ordered}
-% --------------------------------------------------------------------
-
-A \emph{Totally Ordered Set} is a Poset whose Ordering Relation is
-Total (\S\ref{sec:total_order}).
-
-
-
-\subsubsection{Interval}\label{sec:interval}
-
-\emph{Open Interval} $(0,1)$: does not include Endpoints
-
-\emph{Closed Interval} $[0,1]$: includes Endpoints
-
-\emph{Degenerate Interval} $[1,1]$: a Set containing a single Element
-
-Unit Interval (\S\ref{sec:unit_interval}): $[0,1]$
-
-
-
-\subsubsection{Chain}\label{sec:chain}
-
-A Totally Ordered Subset of some Poset is called a \emph{Chain}.
-
-\paragraph{Complete Chain}\label{sec:complete_chain}
-
-
-
-\subsubsection{Well-order}\label{sec:well_order}
-
-A \emph{Well-order} is a Total Order on a Set $S$ such that every
-non-empty Subset of $S$ has a Least Element.
-
-\begin{itemize}
-  \item $\mathbb{N}$
-  \item $\mathbb{Z}^{\geq n}$
-\end{itemize}
-
-Well-ordering Axioms can be used to prove the Principle of
-Mathematical Induction (\S\ref{sec:mathematical_induction}) as a
-Theorem.
-
-
-\paragraph{Well-ordering Theorem}\label{sec:wellorder_theorem}
-\hfill \\
-
-Axiom of Choice (\S\ref{sec:choice_axiom})
 
 
 
@@ -413,63 +429,75 @@ Denotational Semantics (\S\ref{sec:denotational_semantics})
 
 
 % ====================================================================
-\section{Prefix Order}\label{sec:prefix_order}
+\section{Totally Ordered Set}\label{sec:totally_ordered}
 % ====================================================================
 
-% ====================================================================
-\section{Filter}\label{sec:filter}
-% ====================================================================
+A \emph{Totally Ordered Set} is a Poset whose Ordering Relation is
+Total (\S\ref{sec:total_order}).
 
-Poset (\S\ref{sec:poset})
 
-``Upward-closed Set''
 
-A \emph{Filter}, $\mathcal{F}$, of a Set, $X$, is a Set of Subsets of
-$X$:
-\[
-  \mathcal{F} \subseteq \pow(X)
-\]
-where:
+% --------------------------------------------------------------------
+\subsection{Interval}\label{sec:interval}
+% --------------------------------------------------------------------
+
+\emph{Open Interval} $(0,1)$: does not include Endpoints
+
+\emph{Closed Interval} $[0,1]$: includes Endpoints
+
+\emph{Degenerate Interval} $[1,1]$: a Set containing a single Element
+
+Unit Interval (\S\ref{sec:unit_interval}): $[0,1]$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Chain}\label{sec:chain}
+% --------------------------------------------------------------------
+
+A Totally Ordered Subset of some Poset is called a \emph{Chain}.
+
+\paragraph{Complete Chain}\label{sec:complete_chain}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Well-order}\label{sec:well_order}
+% --------------------------------------------------------------------
+
+A \emph{Well-order} is a Total Order on a Set $S$ such that every
+non-empty Subset of $S$ has a Least Element.
+
 \begin{itemize}
-\item if $A \in \mathcal{F}$ and $B \supseteq A$, then $B \in
-  \mathcal{F}$
-\item if $A \in \mathcal{F}$ and $B \in \mathcal{F}$ then $A \cap B
-  \in \mathcal{F}$
-\item $X \in \mathcal{F}$ and $\emptyset \notin \mathcal{F}$
+  \item $\mathbb{N}$
+  \item $\mathbb{Z}^{\geq n}$
 \end{itemize}
 
-Dual is an \emph{Ideal} (\S\ref{sec:order_ideal})
+Well-ordering Axioms can be used to prove the Principle of
+Mathematical Induction (\S\ref{sec:mathematical_induction}) as a
+Theorem.
+
+
+\subsubsection{Well-ordering Theorem}\label{sec:wellorder_theorem}
+
+Axiom of Choice (\S\ref{sec:choice_axiom})
 
 
 
-% --------------------------------------------------------------------
-\subsection{Ultrafilter}\label{sec:ultrafilter}
-% --------------------------------------------------------------------
+\subsubsection{Tree} \label{sec:tree}
 
-An \emph{Ultrafilter} $\mathcal{U}$ is a Filter such that for all $A
-\subseteq X$, either $A \in \mathcal{U}$ or $X - A \in \mathcal{U}$.
-
-
-
-% ====================================================================
-\section{Ideal}\label{sec:order_ideal}
-% ====================================================================
-
-Dual of a Filter (\S\ref{sec:filter})
+A \emph{Tree} is a Poset $(T,<)$ such that $\forall t \in T$, the Set
+$\{s \in T : s < t \}$ is Well-ordered (\S\ref{sec:well_order}) by
+$<$.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Prime Ideal Theorem}\label{sec:prime_ideal}
-% --------------------------------------------------------------------
+\paragraph{Prefix Order}\label{sec:prefix_order}
+\hfill \\
 
-Boolean Prime Ideal Theorem
-
+generalized Tree (\S\ref{sec:tree})
 
 
-% ====================================================================
-\section{Law of Trichotomy}\label{sec:trichotomy_law}
-% ====================================================================
 
 % ====================================================================
 \section{Lattice Theory}\label{sec:lattice_theory}
@@ -479,6 +507,7 @@ Boolean Prime Ideal Theorem
 \subsection{Lattice}\label{sec:lattice}
 % --------------------------------------------------------------------
 
+%FIXME xref join, meet
 A \emph{Lattice} is a Poset for which every Element has both a Join
 and a Meet. For a Lattice with an underlying Set $L$, the Algebraic
 Structure (\S\ref{sec:universal_algebra}) $(L, \vee, \wedge)$ has
@@ -513,7 +542,7 @@ $\{\wedge, \vee\}$.
 % --------------------------------------------------------------------
 
 A \emph{Join-semilattice} (or \emph{Upper Semilattice}) is a Poset for
-which all pairs have a Join (\S\ref{sec:glb_lub}).
+which all pairs have a Join (\S\ref{sec:least_upperbound}).
 
 A \emph{Meet-semilattice} (or \emph{Lower Semilattice}) is a Poset for
 which all pairs have a Meet.

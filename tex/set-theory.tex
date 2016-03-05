@@ -695,6 +695,19 @@ A Function (\S\ref{sec:set_function}) is a Left-total
 
 \subsubsection{Trichotomous Relation}\label{sec:trichotomous_relation}
 
+\paragraph{Law of Trichotomy}\label{sec:trichotomy_law}
+\hfill \\
+
+Trichotomous Relation $<$ on a Set $X$ exactly one of the following
+holds for all $x,y \in X$:
+\begin{itemize}
+\item $x < y$
+\item $x = y$
+\item $x > y$
+\end{itemize}
+
+
+
 \subsubsection{Serial Relation}\label{sec:serial_relation}
 
 \subsubsection{Extensional Relation}\label{sec:extensional_relation}
@@ -931,6 +944,10 @@ Unique Function for each Set, $A$:
 
 \HandRight\; Cf. \emph{Morphism} (\S\ref{sec:morphism})
 
+Functional Predicate (\S\ref{sec:functional_predicate})
+
+Real-valued Function (\S\ref{sec:real_function})
+
 $\rightarrow$
 
 Injection, Monomorphism: $\rightarrowtail$
@@ -965,13 +982,7 @@ $\dashrightarrow$
 
 $\looparrowright$
 
-Real-valued Function (\S\ref{sec:real_function})
 
-
-
-% --------------------------------------------------------------------
-\subsection{Functional Predicate}\label{sec:functional_predicate}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Image}\label{sec:image}
@@ -992,9 +1003,11 @@ A Left-total Relation without this Property is known as a
 
 
 
+% --------------------------------------------------------------------
 \subsection{Preimage}\label{sec:preimage}
+% --------------------------------------------------------------------
 
-\emph{Preimage} (or \emph{Inverse Image})
+\emph{Preimage} (or \emph{Inverse Image}) of a Subset
 
 
 
@@ -1008,102 +1021,41 @@ Fiber (Topology) \S\ref{sec:point_fiber}
 
 
 % --------------------------------------------------------------------
-\subsection{Restriction}\label{sec:restriction}
+\subsection{Restriction}\label{sec:function_restriction}
 % --------------------------------------------------------------------
+
+$f|_A$ smaller Domain $A$
+
+
 
 % --------------------------------------------------------------------
 \subsection{Extension}\label{sec:function_extension}
 % --------------------------------------------------------------------
 
-(or \emph{Overriding Union})
+$f$ is the Extension of the Restriction $f|_A$
 
 
 
-% --------------------------------------------------------------------
-\subsection{Kernel}\label{sec:kernel}
-% --------------------------------------------------------------------
+\subsubsection{Overriding Union}\label{sec:overriding_union}
 
-The \emph{Kernel} of a Function $f : X \rightarrow Y$, $ker(f)$, is an
-Equivalence Relation defined as:
+Overriding $f : X \rightarrow Y$ by $g : W \rightarrow Y$:
 \[
-  ker(f) = \{ (x,x') \in X \times X : f(x) = f(x') \}
+  f \oplus g : (X \cup W) \rightarrow Y
 \]
 
-
-
-% --------------------------------------------------------------------
-\subsection{Function Composition}\label{sec:function_composition}
-% --------------------------------------------------------------------
-
-Given two Functins $f : A \rightarrow B$ and $g : B \rightarrow C$,
-there is a \emph{Composite Function}:
-\[
-  g \circ f : A \rightarrow C
-\]
-where $(g \circ f)(a) = g(f(a))$ and $a \in A$.
-
-The \emph{Composition Operation} $\circ$ is Associative: $(h \circ g)
-\circ f = h \circ (g \circ f)$. Composition of Functions may be
-represented with the $\circ$ elided: $gf$.
-
-Identity Element for the Composition Operation is the Identity
-Function (\S\ref{sec:identity_function}) on Sets. The Identity
-Function for a Set $A$:
-\[
-  I_A : A \rightarrow A
-\]
-is defined as:
-\[
-  I_A(a) = a
-\]
-with the result given the Function $f$ above:
-\[
-  f \circ I_A = f = I_B \circ f
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Fixed Point}\label{sec:fixed_point}
-% --------------------------------------------------------------------
-
-A \emph{Fixed Point}, $c$, of a Function $f$, is an Element of the
-Domain of $f$ that is Mapped to itself by $f$:
-\[
-  f(c) = c
-\]
-
-Fixed-point Theorems
-
-
-
-\subsubsection{Periodic Point}\label{sec:periodic_point}
-
-A \emph{Periodic Point} is an Element of the Domain of a Function that
-is returned to after a finite number of iterations.
-
-
-
-\subsubsection{Least \& Greatest Fixpoint}
-\label{sec:leastgreatest_fixpoint}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Idempotent Function}\label{sec:idempotent}
-% --------------------------------------------------------------------
-
-A Function, $f$, is \emph{Idempotent} if it maps each Element of
-$dom(f)$ to a Fixed Point of $f$:
-\[
-  f^2 = f
-\]
+Union of $g$ and $f|_{X/W}$
 
 
 
 % --------------------------------------------------------------------
 \subsection{Identity Function}\label{sec:identity_function}
 % --------------------------------------------------------------------
+
+$f(x) = x$
+
+$a \mapsto a$
+
+
 
 \subsubsection{Inclusion Map}\label{sec:inclusion_map}
 
@@ -1117,28 +1069,8 @@ where $A \subseteq X$.
 
 
 % --------------------------------------------------------------------
-\subsection{Inverse Function}\label{sec:inverse_function}
+\subsection{Constant Function}\label{sec:constant_function}
 % --------------------------------------------------------------------
-
-$f^{-1}$
-
-
-
-\subsubsection{Left Inverse}\label{sec:left_inverse}
-
-For a Function $f: X \rightarrow Y$, a \emph{Left Inverse} or
-\emph{Retraction} of $f$ is a Function $g: Y \rightarrow X$ such that
-$gf = Id(X)$.
-
-
-
-\subsubsection{Right Inverse}\label{sec:right_inverse}
-
-For a Function $f: X \rightarrow Y$, a \emph{Right Inverse} or
-\emph{Section} of $f$ is a Function $h: Y \rightarrow X$ such that $fh
-= Id(Y)$.
-
-
 
 % --------------------------------------------------------------------
 \subsection{Injective Function}\label{sec:injective_function}
@@ -1182,13 +1114,137 @@ An Identity Map is a trivial Involution.
 
 
 % --------------------------------------------------------------------
-\subsection{Monotonic Function}\label{sec:monotonic}
+\subsection{Inverse Function}\label{sec:inverse_function}
 % --------------------------------------------------------------------
 
-A \emph{Monotonic Function} is a Function between Posets
-(\S\ref{sec:poset}) where the Ordering of Elements of the Domain
-Implies the Ordering of Elements in the Image of those Elements under
-the Function.
+$f^{-1}$
+
+
+
+\subsubsection{Left Inverse}\label{sec:left_inverse}
+
+For a Function $f: X \rightarrow Y$, a \emph{Left Inverse} or
+\emph{Retraction} of $f$ is a Function $g: Y \rightarrow X$ such that
+$gf = Id(X)$.
+
+
+
+\subsubsection{Right Inverse}\label{sec:right_inverse}
+
+For a Function $f: X \rightarrow Y$, a \emph{Right Inverse} or
+\emph{Section} of $f$ is a Function $h: Y \rightarrow X$ such that $fh
+= Id(Y)$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Function Composition}\label{sec:function_composition}
+% --------------------------------------------------------------------
+
+Given two Functins $f : A \rightarrow B$ and $g : B \rightarrow C$,
+there is a \emph{Composite Function}:
+\[
+  g \circ f : A \rightarrow C
+\]
+where $(g \circ f)(a) = g(f(a))$ and $a \in A$.
+
+The \emph{Composition Operation} $\circ$ is Associative: $(h \circ g)
+\circ f = h \circ (g \circ f)$. Composition of Functions may be
+represented with the $\circ$ elided: $gf$.
+
+Identity Element for the Composition Operation is the Identity
+Function (\S\ref{sec:identity_function}) on Sets. The Identity
+Function for a Set $A$:
+\[
+  I_A : A \rightarrow A
+\]
+is defined as:
+\[
+  I_A(a) = a
+\]
+with the result given the Function $f$ above:
+\[
+  f \circ I_A = f = I_B \circ f
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Kernel}\label{sec:function_kernel}
+% --------------------------------------------------------------------
+
+The \emph{Kernel} of a Function $f : X \rightarrow Y$, $ker(f)$, is an
+Equivalence Relation defined as:
+\[
+  ker(f) = \{ (x,x') \in X \times X : f(x) = f(x') \}
+\]
+i.e. the Set of all Pairs of Elements that Map to the same Value
+
+
+
+% --------------------------------------------------------------------
+\subsection{Equalizer}\label{sec:function_equalizer}
+% --------------------------------------------------------------------
+
+Given two Sets $X,Y$ and Functions $f,g : X \rightarrow Y$, the
+\emph{Equalizer} of $f$ and $g$ is defined as:
+\[
+  Eq(f,g) = { x \in X | f(x) = g(x) }
+\]
+i.e. the Set of Arguments at which two (or more) Functions have Equal
+Values.
+
+
+\emph{Coequalizer}
+
+
+
+\subsubsection{Difference Kernel}\label{sec:difference_equalizer}
+
+Equalizer of exactly two Functions
+
+
+
+% --------------------------------------------------------------------
+\subsection{Fixed Point}\label{sec:fixed_point}
+% --------------------------------------------------------------------
+
+A \emph{Fixed Point}, $c$, of a Function $f$, is an Element of the
+Domain of $f$ that is Mapped to itself by $f$:
+\[
+  f(c) = c
+\]
+
+Fixed-point Combinator (\S\ref{sec:fixedpoint_combinator})
+
+Prefixpoint (\S\ref{sec:prefixpoint})
+
+Least Fixed Point (\S\ref{sec:least_fixedpoint})
+
+Greatest Fixed Point (\S\ref{sec:greatest_fixedpoint})
+
+Postfixpoint (\S\ref{sec:postfixpoint})
+
+
+
+\subsubsection{Periodic Point}\label{sec:periodic_point}
+
+A \emph{Periodic Point} is an Element of the Domain of a Function that
+is returned to after a finite number of iterations.
+
+
+
+\subsubsection{Idempotent Function}\label{sec:idempotent}
+
+A Function, $f$, is \emph{Idempotent} if it maps each Element of
+$dom(f)$ to a Fixed Point of $f$:
+\[
+  f^2 = f
+\]
+
+
+
+\subsubsection{Fixed-point Theorem}\label{sec:fixedpoint_theorem}
 
 
 
@@ -1203,6 +1259,8 @@ When $B$ is a Field (\S\ref{sec:field}), Functions have a Vector
 (\S\ref{sec:vector}) structure with two Pointwise Addition Operators
 and Scalar Multiplication. %FIXME
 
+Bijective Functions $A \leftrightarrow B$
+
 
 
 \subsubsection{Evaluation Function}\label{sec:evaluation_function}
@@ -1216,22 +1274,14 @@ defined as:
 
 
 % --------------------------------------------------------------------
-\subsection{Equalizer}\label{sec:function_equalizer}
-% --------------------------------------------------------------------
-
-Given two Sets $X,Y$ and Functions $f,g : X \rightarrow Y$, the
-\emph{Equalizer} of $f$ and $g$ is defined as:
-\[
-  Eq(f,g) = { x \in X | f(x) = g(x) }
-\]
-
-\emph{Coequalizer}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Binary Operation}\label{sec:binary_operation}
 % --------------------------------------------------------------------
+
+Domains and Codomain Subsets of the same Set
+
+$f : S \times S \rightarrow S$
+
+
 
 \subsubsection{Commutator}\label{sec:commutator}
 
@@ -1252,19 +1302,11 @@ Group Commutator (\S\ref{sec:group_commutator})
 \subsection{Boolean-valued Function}\label{sec:boolean_function}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Pairing Function}\label{sec:pairing_function}
-% --------------------------------------------------------------------
+Predicate (\S\ref{sec:predicate})
 
-A \emph{Pairing Function} is a Primitive Recursive
-(\S\ref{sec:primitive_recursive}) Bijection:
-\[
-  \pi : \nats \times \nats \rightarrow \nats
-\]
+Indicator Function (\S\ref{sec:indicator_function})
 
-
-
-\subsubsection{Cantor Pairing Function}\label{sec:cantor_pairing}
+Truth-valued Function (\S\ref{sec:truth_function})
 
 
 
