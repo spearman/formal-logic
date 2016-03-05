@@ -834,8 +834,8 @@ A \emph{Function Type} (or \emph{Arrow Type}) is Type formed by the
 Higher-kinded Type Constructor $\rightarrow$
 
 The Function Type $A \rightarrow B$ is a special case of Dependent
-Product Type (\S\ref{sec:pi_type}) $\Pi_(a:A)B$ with a
-Constant Codomain Type $B$:
+Product Type (\S\ref{sec:pi_type}) $\Pi_{(a:A)}B$ with a Constant
+Codomain Type $B$:
 \[
   \Pi_{(a:A)}B \equiv A \rightarrow B
 \]
@@ -853,6 +853,10 @@ Contravariant Functors on the Argument Type. Cf. Hughes Arrows
 \hfill \\
 
 Higher-order Functions
+
+Function Space
+
+Function Type (\S\ref{sec:function_type})
 
 
 
@@ -913,16 +917,19 @@ A Dependent Type is the Type of a Dependent Function
 
 Dependent Pairs (Dependent Sum Type \S\ref{sec:sigma_type})
 
+
 \textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
 \emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
 Dependent Product Type (\S\ref{sec:pi_type}) to Simply-typed
 $\lambda$-calculus.
+
 
 \textbf{Second-order Dependent Type Theory} ($\lambda \Pi 2$):
 allowing Quantification over Type Constructors
 (\S\ref{sec:type_constructor}), $\Pi$ operator Subsumes both
 $\rightarrow$ of Simply-typed $\lambda$-calculus and $\forall$ of
 System F (\S\ref{sec:system_f})
+
 
 \textbf{Higher-order Dependently Typed Polymorphic $\lambda$-calculus}
 ($\lambda \Pi \omega$): corresponds to \emph{Calculus of
@@ -965,44 +972,7 @@ Proposition). For each Natural Number, either $even(x)$ is Inhabited
 
 
 
-\subsubsection{$\Pi$-type}\label{sec:pi_type}
-
-The \emph{$\Pi$-type} (or \emph{Dependent Product Type}) is the Type
-of a Dependent Function. By Curry-Howard, $\Pi$-types model
-Implication and Universal Quantification.
-
-Dependent Product (\S\ref{sec:dependent_product})
-
-For a Type $A : \class{U}$ in Type Universe
-(\S\ref{sec:type_universe}) $\class{U}$, a Family of Types:
-\[
-  B : A \rightarrow \class{U}
-\]
-can be defined by a Dependent Function which assigns a Type $B(a) :
-\class{U}$ to Each Term $a : A$. The Type of this Function is a
-Dependent Product Type:
-\[
-  \Pi_{(x:A)}B(x)
-\]
-
-If $B$ is Constant, then $\Pi_(x:A)B$ is Judgementally Equal to the
-Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
-\[
-  \Pi_{(x:A)}B \equiv A \rightarrow B
-\]
-
-Generalizes the idea of a Polymorphic Function
-(\S\ref{sec:polymorphic_function})
-
-A Polymorphic Function returning elements of Type $C$ has Polymorphic
-Type (\S\ref{sec:polymorphic_type}):
-\[
-  \Pi_{(A:\class{U})} A \rightarrow C
-\]
-
-
-
-\subsubsection{$\Sigma$-type}\label{sec:sigma_type}
+\subsubsection{Dependent Sum Type ($\Sigma$-type)}\label{sec:sigma_type}
 
 \emph{$\Sigma$-type} (or \emph{Dependent Sum Type} or \emph{Dependent
   Pair Type})
@@ -1023,6 +993,58 @@ By Curry-Howard, $\Sigma$-types model Conjunction and Existential
 Quantification.
 
 Analagous to Coproduct or Disjoint Union.
+
+
+
+\subsubsection{Dependent Product Type ($\Pi$-type)}\label{sec:pi_type}
+
+The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or
+\emph{Dependent Function Type}) is the Type of a Dependent Function.
+By Curry-Howard, $\Pi$-types model Implication and Universal
+Quantification.
+
+Dependent Product (\S\ref{sec:dependent_product})
+
+For a Type $A : \class{U}$ in Type Universe
+(\S\ref{sec:type_universe}) $\class{U}$, a Family of Types:
+\[
+  B : A \rightarrow \class{U}
+\]
+can be defined by a Dependent Function which assigns a Type $B(a) :
+\class{U}$ to Each Term $a : A$. The Type of this Function is a
+Dependent Product Type:
+\[
+  \Pi_{(x:A)}B(x)
+\]
+
+If $B$ is Constant, then $\Pi_{(x:A)}B$ is Judgementally Equal to the
+Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
+\[
+  \Pi_{(x:A)}B \equiv A \rightarrow B
+\]
+
+Generalizes the idea of a Polymorphic Function
+(\S\ref{sec:polymorphic_function})
+
+\cite{hott13}
+Example $id$:
+\[
+  id : \Pi_{(A : \class{U})} A \rightarrow A
+\]
+
+Example 2 $swap$:
+\[
+  swap : \Pi_{(A:\class{U})} \Pi_{(B:\class{U})} \Pi_{(C:\class{U})}
+  (A \rightarrow B \rightarrow C) \rightarrow (B \rightarrow A
+  \rightarrow C)
+\]
+Type arguments may be written as subscripts: $id_A$, $swap_{A,B,C}$
+
+A Polymorphic Function returning elements of Type $C$ has Polymorphic
+Type (\S\ref{sec:polymorphic_type}):
+\[
+  \Pi_{(A:\class{U})} A \rightarrow C
+\]
 
 
 
@@ -2053,6 +2075,118 @@ $\Omega$, and the Base Types closed under $\times$ (Product Types
 
 Terms of Type $\Omega$ represent Formulas, e.g. $\tau_1 = \tau_2$.
 
+
+\center *** \raggedright
+
+
+\textbf{Sum Type} (\S\ref{sec:sum_type}) (Tagged Union)
+
+$A \cup B = \{ a_1, a_2, ..., b_1, b_2, ... \}$
+
+$x \in A \cup B \Rightarrow x \in A \vee x \in B$
+
+$U \subset A \cup B \Rightarrow \forall u \in U, u \in A \vee u \in B \}$
+
+
+\textbf{Product Type} (\S\ref{sec:product_type}) (Pairs)
+
+$A \times B = \{ (a_1,b_1), (a_1,b_2), ..., (a_2,b_1), (a_2,b_2), ... \}$
+
+$(x,y) \in A \times B \Rightarrow x \in A \wedge y \in B$
+
+$U \subset A \times B
+\Rightarrow \forall (u,v) \in U, u \in A \wedge v \in B$
+
+
+\textbf{Powerset} (\S\ref{sec:powerset})
+(Relations \S\ref{sec:binary_relation})
+
+$\pow(A \times B) = \{ \linebreak[1]
+\{(a_1,b_1)\}, \{(a_1,b_2)\}, ...,
+\{(a_2,b_1)\}, \{(a_2,b_2)\}, ...
+\linebreak[1] \vdots \linebreak[1]
+\{(a_1,b_1), (a_1,b_2)\}, \{(a_1,b_1), (a_1,b_3)\}, ...,
+\{(a_2,b_1), (a_2,b_2)\}, \{(a_2,b_1), (a_2,b_3)\}, ...
+\linebreak[1] \vdots \linebreak[1]
+..., A \times B - \{(a_2,b_1), (a_2,b_3)\}, \allowbreak
+A \times B - \{(a_2,b_1), (a_2,b_2)\}, \allowbreak
+..., A \times B - \{(a_1,b_1), (a_1,b_3)\}, \allowbreak
+A \times B - \{(a_1,b_1), (a_1,b_2)\}, \allowbreak
+\linebreak[1] \vdots \linebreak[1]
+..., A \times B - \{(a_2,b_2)\}, A \times B - \{(a_2,b_1)\}, \allowbreak
+..., A \times B - \{(a_1,b_2)\}, A \times B - \{(a_1,b_1)\}, \allowbreak
+\linebreak[1] A \times B
+\}$
+
+$A \times B \in \pow(A \times B)$
+
+$U \in \pow(A \times B) \Rightarrow U \subseteq A \times B \allowbreak
+\Rightarrow \forall (u,v) \in U, u \in A \wedge v \in B$
+
+$\class{V} \subset \pow(A \times B)
+\Rightarrow \forall U \in \class{V}, U \subseteq A \times B$
+
+
+\textbf{Function Type} (\S\ref{sec:function_type})
+
+$A \rightarrow B = B^A = \{ \linebreak[1]
+\{ (a_1, b_1), (a_2, b_1), (a_3, b_1), ...\},
+\{ (a_1, b_2), (a_2, b_2), (a_3, b_2), ...\},
+\{ (a_1, b_3), (a_2, b_3), (a_3, b_3), ...\}, ...
+\linebreak[1] \vdots \linebreak[1]
+\{ (a_1, b_2), (a_2, b_1), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_2), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_1), (a_3, b_2), ...\}, ...
+\linebreak[1] \vdots \linebreak[1]
+\{ (a_1, b_3), (a_2, b_1), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_3), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_1), (a_3, b_3), ...\},
+\linebreak[1] \vdots \linebreak[1]
+\}$
+
+$B^A \subset \pow(A \times B)$
+
+$f \in B^A
+\Rightarrow f \in \pow(A \times B) \wedge f \neq A \times B \allowbreak
+\Rightarrow f \subset A \times B
+\Rightarrow \forall (x, f(x)) \in f, x \in A \wedge f(x) \in B$
+
+$U \subset B^A \Rightarrow \forall u \in U, u \in \pow(A \times B)$
+
+
+\textbf{Dependent Type} (\S\ref{sec:dependent_type})
+
+$a:A \vdash B(a) = \{(a_1,B(a_1)), (a_2,B(a_2)), ...\}$
+
+$a:A \vdash B(a) \in \class{U}^A \linebreak[1]
+\Rightarrow a:A \vdash B(a) \subset A \times \class{U}$
+
+$(x,X) \in a:A \vdash B(a) \Rightarrow x \in A \wedge X \in \class{U}$
+
+$U \subset a:A \vdash B(a) \Rightarrow \forall (x,X) \in U, x \in A
+\wedge X \in \class{U}$
+
+
+\textbf{Dependent Sum Type} ($\Sigma$-type \S\ref{sec:sigma_type})
+
+$\Sigma_{(a:A)} B(a) = \{\{ (a_1, x_1), (a_1, x_2), ...\},
+\{ (a_2, y_1), (a_2, y_2), ...\}, \cdots \}$
+
+$\Sigma_{(a:A)} B(a) \subset \pow \bigsqcup_{X \in \class{U}} A \times X$
+
+$Z \in \Sigma_{(a:A)} B(a) \Rightarrow \exists x \in A : \forall y \in
+B(x), (x,y) \in P$
+
+
+
+\textbf{Dependent Product Type} ($\Pi$-type \S\ref{sec:pi_type})
+
+$\Pi_{(a:A)} B(a) = \{(a_1, x), (a_2, y), (a_3, z), ...\}$
+
+$\Pi_{(a:A)} B(a) \subset \pow \bigsqcup_{a \in A} \Sigma_{(a:A)} B(a)$
+
+
+\center *** \raggedright
 
 
 % --------------------------------------------------------------------

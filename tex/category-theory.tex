@@ -1107,19 +1107,19 @@ Neither Covariant nor Contravariant
 \subsection{Hom-functor}\label{sec:hom_functor}
 % --------------------------------------------------------------------
 
-A \emph{Hom-functor} is a Functor from a Locally Small Category,
-$\cat{C}$, to the Category $\cat{Set}$, and has a Covariant and
-a Contravariant definition:
+A \emph{Hom-functor} is a Functor from a Locally Small Category
+(\S\ref{sec:locally_small}), $\cat{C}$, to the Category $\cat{Set}$,
+and has a Covariant and a Contravariant definition:
 
 \begin{enumerate}
-  \item \emph{Covariant Hom-functor}, for $A,f : X \rightarrow Y \in
-    \cat{C}$:
+  \item \emph{Covariant Hom-functor}, for $A \in \cat{C}_0$, $f : X
+    \rightarrow Y \in \cat{C}_1$:
 \[
-  h^A = Hom(A,-) : \cat{C} \rightarrow \cat{Set}
-\]\[
-  X \mapsto Hom(A,X)
-\]\[
-  f \mapsto Hom(A,f) : Hom(A,X) \rightarrow Hom(A,Y)
+\begin{split}
+  & h^A = Hom(A,-) : \cat{C} \rightarrow \cat{Set} \\
+  & X \mapsto Hom(A,X) \\
+  & f \mapsto Hom(A,f) : Hom(A,X) \rightarrow Hom(A,Y)
+\end{split}
 \]
   where $Hom(A,f)$ is defined for all $g \in Hom(A,X)$ as:
 \[
@@ -1128,20 +1128,21 @@ a Contravariant definition:
 
   \item \emph{Contravariant Hom-functor} (also \emph{Functor of
     Points}, see Generalized Elements
-    \S\ref{sec:generalized_element}), for $B,f : X \rightarrow Y \in
-    \cat{C}$:
+    \S\ref{sec:generalized_element}), for $B \in \cat{C}_0$, $f : X
+    \rightarrow Y \in \cat{C}_1$:
 \[
-  h_B = Hom(-,B) : \cat{C} \rightarrow \cat{Set}
-\]\[
-  X \mapsto Hom(X,B)
-\]\[
-  f \mapsto Hom(f,B) : Hom(Y,B) \rightarrow Hom(X,B)
+\begin{split}
+  & h_B = Hom(-,B) : \cat{C} \rightarrow \cat{Set} \\
+  & X \mapsto Hom(X,B) \\
+  & f \mapsto Hom(f,B) : Hom(Y,B) \rightarrow Hom(X,B)
+\end{split}
 \]
   where $Hom(f,B)$ is defined for all $g \in Hom(Y,B)$ as:
 \[
   g \mapsto g \circ f
 \]
 \end{enumerate}
+
 The Hom-functor $Hom(-,-)$ is a Covariant Bifunctor
 (\S\ref{sec:bifunctor}):
 \[
@@ -1173,14 +1174,28 @@ For any pair of Morphisms, $f : A' \rightarrow A$ and $g : B
 \[
   Hom(A',g) \circ Hom(f,B) = Hom(f,B') \circ Hom(A,g)
 \]
-is a path sending
+is a path sending:
 \[
   h : A \rightarrow B
 \]
-to
+to:
 \[
   g \circ h \circ f : A' \rightarrow B'
 \]
+
+
+
+\subsubsection{Internal Hom-functor}\label{sec:internal_homfunctor}
+
+\emph{Internal Hom Functor}
+\[
+  [-,-] : \cat{C}^{op} \times \cat{C} \rightarrow \cat{C}
+\]
+
+A Category with an Internal Hom-functor is a Closed Category
+(\S\ref{sec:closed_category})
+
+Closed Monoidal Category (\S\ref{sec:closed_monoidal})
 
 
 
@@ -2621,8 +2636,8 @@ Subtyping (\S\ref{sec:subtype})
 
 Type Inference (\S\ref{sec:type_inference}) (Unification)
 
-generalization of Intersection (\S\ref{sec:intersection}) and Inverse
-Image (\S\ref{sec:preimage})
+generalization of Intersection (\S\ref{sec:set_intersection}) and
+Inverse Image (\S\ref{sec:preimage})
 
 A Category has Pullbacks and a Terminal Object if and only if it has
 Finite Products (\S\ref{sec:category_product}) and Equalizers
@@ -3508,14 +3523,6 @@ Internal Hom-functor (\S\ref{sec:internal_homfunctor})
 
 
 
-\subsubsection{Internal Hom-functor}\label{sec:internal_homfunctor}
-
-A Category with an Internal Hom-functor is a Closed Category
-
-Closed Monoidal Category (\S\ref{sec:closed_monoidal})
-
-
-
 \subsubsection{Dualizing Object}\label{sec:dualizing_object}
 
 \emph{Dualizing Object} $D$ in a Closed Category $\cat{D}$ is an
@@ -4027,6 +4034,8 @@ $\cat{C}$ is a Category and $U$ is a Faithful Functor $U :
 A Category is \emph{Locally Small} if all Hom-sets
 (\S\ref{sec:hom_set}) of the Category are Sets and not Proper Classes.
 % FIXME definition in terms of hom-sets
+
+Hom-functor (\S\ref{sec:hom_functor})
 
 There is at least one canonical Representable Functor
 (\S\ref{sec:representable_functor}) from any Locally Small Category

@@ -7,7 +7,7 @@
 \emph{Set Theory} is formulated within First-order Logic
 (\S\ref{sec:firstorder_logic}) and as such the objects of Set Theory
 are \emph{Sets} (\S\ref{sec:set}) and \emph{Relations}
-(\S\ref{sec:relation}). See Axiomatic Set Theory
+(\S\ref{sec:set_relation}). See Axiomatic Set Theory
 (\S\ref{sec:axiomatic_set_theory}) for specific Systems of Set Theory.
 
 
@@ -52,6 +52,8 @@ which Elements are given is unimportant:
   \{ 2, 3 \} = \{ 3, 2 \} = \{ 2, 3, 3, 2 \}
 \]
 
+De Morgan's Laws (\S\ref{sec:de_morgan}) for Sets
+
 
 
 % --------------------------------------------------------------------
@@ -72,13 +74,92 @@ that is not equal to the containing Set, $A \subset B$:
 
 
 
-% --------------------------------------------------------------------
-\subsection{Powerset}\label{sec:powerset}
-% --------------------------------------------------------------------
-
-\subsubsection{Cantor's Theorem}\label{sec:cantors_theorem}
+\subsubsection{Indicator Function}\label{sec:indicator_function}
 
 
+
+% -------------------------------------------------------------------
+\subsection{Set Union}\label{sec:set_union}
+% -------------------------------------------------------------------
+
+\emph{Union}
+
+$A \cup B$
+
+
+
+\subsubsection{Disjoint Union}\label{sec:disjoint_union}
+
+Given a Family (\S\ref{sec:family}) of Sets ${A_i : i \in I}$,
+the \emph{Disjoint Union} is defined as:
+\[
+  \bigsqcup_{i \in I} A_i = \bigcup_{i \in I} \{(x,i) | x \in A_i \}
+\]
+
+Coproduct (\S\ref{sec:coproduct})
+
+
+
+\subsubsection{Infinitary Union}\label{sec:infinitary_union}
+
+\[
+  x \in \bigcup S \leftrightarrow \exists y \in S : x \in y
+\]
+
+
+
+% -------------------------------------------------------------------
+\subsection{Set Intersection}\label{sec:set_intersection}
+% -------------------------------------------------------------------
+
+\emph{Intersection}
+
+$A \cap B$
+
+
+
+% -------------------------------------------------------------------
+\subsection{Relative Complement}\label{sec:relative_complement}
+% -------------------------------------------------------------------
+
+The \emph{Relative Complement} (or \emph{Difference}) of two Sets $A$
+and $B$, denoted $A \setminus B$, is the Set of Elements in $A$ but
+not $B$.
+
+
+
+\subsubsection{Absolute Complement}\label{sec:absolute_complement}
+
+The \emph{Absolute Complement} (or \emph{Complement}) of a Set $A$ is
+the Relative Complement of $A$ with the given Universe
+(\S\ref{sec:universe}) $\mathcal{U}$:
+\[
+  \mathcal{U} \setminus A
+\]
+
+
+
+% -------------------------------------------------------------------
+\subsection{Symmetric Difference}\label{sec:symmetric_difference}
+% -------------------------------------------------------------------
+
+The \emph{Symmetric Difference} of two Sets $A$ and $B$, denoted $A
+\oplus B$, is the Set of Elements in $A$ or $B$ but not both $A$ and
+$B$:
+\[
+  A \oplus B =
+  \{ x : (x \in A \vee x \in B) \wedge x \notin A \cap B \}
+\]
+or:
+\[
+  A \oplus B = A \setminus B \cup B \setminus A
+\]
+
+
+
+% -------------------------------------------------------------------
+\subsection{Cartesian Product}\label{sec:cartesian_product}
+% -------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Partition}\label{sec:set_partition}
@@ -93,6 +174,16 @@ Partition $P$ of $X$ has the Properties:
   \item $\bigcup_{A \in P}A = X$
   \item $A,B \in P \wedge A \neq B \Rightarrow A \cap B = \emptyset$
 \end{enumerate}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Powerset}\label{sec:powerset}
+% --------------------------------------------------------------------
+
+$\pow{X}$, $2^X$
+
+\subsubsection{Cantor's Theorem}\label{sec:cantors_theorem}
 
 
 
@@ -120,7 +211,7 @@ Trichotomy (\S\ref{sec:trichotomy_law}) for Cardinality which assigns
 a given Set $X$ to one of the Classes:
 
 \begin{description}
-\item [Finite] $|X| < |\nats|$ (\S\ref{sec:finite})
+\item [Finite] $|X| < |\nats|$ (\S\ref{sec:finite_cardinality})
 \item [Countably Infinite] $|X| = |\nats| = \aleph_0$
   (\S\ref{sec:countably_infinite})
 \item [Uncountably Infinite] $|\nats| < |X|$
@@ -129,7 +220,7 @@ a given Set $X$ to one of the Classes:
 
 
 
-\subsubsection{Finite}\label{sec:finite}
+\subsubsection{Finite}\label{sec:finite_cardinality}
 
 \subsubsection{Countably Infinite}\label{sec:countably_infinite}
 
@@ -139,7 +230,7 @@ a given Set $X$ to one of the Classes:
 
 A Set $X$ is \emph{Subcountable} if there is a Partial Surjection from
 $\nats$ onto the $X$, that is, if $X$ is Finite
-(\S\ref{sec:finite}) or Countably Infinite
+(\S\ref{sec:finite_cardinality}) or Countably Infinite
 (\S\ref{sec:countably_infinite})
 
 
@@ -150,7 +241,7 @@ $\nats$ onto the $X$, that is, if $X$ is Finite
 
 An \emph{Index Set} is one that \emph{Indexes} (or \emph{Labels})
 Members of another Set. Indexing is a Surjective Function
-(\S\ref{sec:function}) from an Index Set onto a target Set.
+(\S\ref{sec:surjective_function}) from an Index Set onto a target Set.
 
 
 
@@ -165,9 +256,8 @@ Indexed Set $A$, the Indexed Family may be denoted
 
 
 
-% --------------------------------------------------------------------
-\subsection{Cover}\label{sec:cover}
-% --------------------------------------------------------------------
+\paragraph{Cover}\label{sec:cover}
+\hfill \\
 
 A \emph{Cover} of a Set $X$ is an Indexed Family of Sets $C = \{ U_i :
 i \in I \}$ such that their Union contains $X$:
@@ -223,96 +313,9 @@ Function that returns the Basepoint.
 
 
 
-% ===================================================================
-\section{Set Operation}\label{sec:set_operation}
-% ===================================================================
-
-% -------------------------------------------------------------------
-\subsection{Union}\label{sec:union}
-% -------------------------------------------------------------------
-
-\emph{Union}
-
-
-
-\subsubsection{Disjoint Union}\label{sec:disjoint_union}
-
-Given a Family (\S\ref{sec:family}) of Sets ${A_i : i \in I}$,
-the \emph{Disjoint Union} is defined as:
-\[
-  \bigsqcup_{i \in I} A_i = \bigcup_{i \in I} \{(x,i) | x \in A_i \}
-\]
-
-Coproduct (\S\ref{sec:coproduct})
-
-
-
-\subsubsection{Infinitary Union}\label{sec:infinitary_union}
-
-\[
-  x \in \bigcup S \leftrightarrow \exists y \in S : x \in y
-\]
-
-
-
-% -------------------------------------------------------------------
-\subsection{Intersection}\label{sec:intersection}
-% -------------------------------------------------------------------
-
-% -------------------------------------------------------------------
-\subsection{Relative Complement}\label{sec:relative_complement}
-% -------------------------------------------------------------------
-
-The \emph{Relative Complement} (or \emph{Difference}) of two Sets $A$
-and $B$, denoted $A \setminus B$, is the Set of Elements in $A$ but
-not $B$.
-
-
-
-% -------------------------------------------------------------------
-\subsection{Symmetric Difference}\label{sec:symmetric_difference}
-% -------------------------------------------------------------------
-
-The \emph{Symmetric Difference} of two Sets $A$ and $B$, denoted $A
-\oplus B$, is the Set of Elements in $A$ or $B$ but not both $A$ and
-$B$:
-\[
-  A \oplus B =
-  \{ x : (x \in A \vee x \in B) \wedge x \notin A \cap B \}
-\]
-or:
-\[
-  A \oplus B = A \setminus B \cup B \setminus A
-\]
-
-
-
-% -------------------------------------------------------------------
-\subsection{Absolute Complement}\label{sec:absolute_complement}
-% -------------------------------------------------------------------
-
-The \emph{Absolute Complement} (or \emph{Complement}) of a Set $A$ is
-the Relative Complement of $A$ with the given Universe
-(\S\ref{sec:universe}) $\mathcal{U}$:
-\[
-  \mathcal{U} \setminus A
-\]
-
-
-
-% -------------------------------------------------------------------
-\subsection{Cartesian Product}\label{sec:cartesian_product}
-% -------------------------------------------------------------------
-
-% -------------------------------------------------------------------
-\subsection{de Morgan's Law}\label{sec:de_morgan}
-% -------------------------------------------------------------------
-
-
-
-% ====================================================================
-\section{Multiset}\label{sec:multiset}
-% ====================================================================
+% --------------------------------------------------------------------
+\subsection{Multiset}\label{sec:multiset}
+% --------------------------------------------------------------------
 
 A \emph{Multiset} (or \emph{Bag}) is a 2-tuple $(A,m)$ of an
 \emph{Underlying Set}, $A$, together with a \emph{Multiplicity
@@ -325,9 +328,9 @@ brackets:
   [a,a,b]
 \]
 If the Underlying Set is restricted to a Subset of a given
-\emph{Universe}, $U$, the Multiplicity Function may be extended to
-$m_U : U \rightarrow \nats$ where $a \in U, a \notin A
-\leftrightarrow m(a)=0$.
+\emph{Universe} (\S\ref{sec:universe}), $U$, the Multiplicity Function
+may be extended to $m_U : U \rightarrow \nats$ where $a \in U, a
+\notin A \leftrightarrow m(a)=0$.
 
 \emph{Indicator Function} (\S\ref{sec:indicator_function})
 
@@ -480,47 +483,43 @@ considered the \emph{Universe of Ordinary Mathematics}.
 
 
 % ====================================================================
-\section{Relation}\label{sec:relation}
+\section{Relation}\label{sec:set_relation}
 % ====================================================================
 
-A $n$-ary \emph{Relation} $L$ over Sets $X_1, \ldots, X_n$ is defined
-in Extension (\S\ref{sec:extension}) as a Subset of the Cartesian
-Product $X_1 \times \ldots \times X_n$ called the \emph{Graph} of $L$:
-\[
-  G(L) \subseteq X_1 \times \ldots \times X_n
-\]
-When a Graph is actually plotted on a Coordinate Plane
-(\S\ref{sec:cartesian_coordinate}), the First Elements of the Ordered
-Pairs of $G(L)$, mapped to the Horizontal Axis, are \emph{Abscissae},
-and the Second Elements of the Ordered Pairs of $G(L)$, mapped to the
-Vertical Axis, are called \emph{Ordinates}.
+Domain (\S\ref{sec:domain})
 
-The Sets $X_1, \ldots, X_n$ are called the \emph{Domain} of $L$. If
-any Domain of $L$ is empty, then $L$ is the unique \emph{Empty
-  Relation} $L = \varnothing$.
+Predicate (\S\ref{sec:predicate})
 
-An $n$-ary Relation may be completely specified by an $n + 1$-tuple
-called a \emph{Correspondence} (or \emph{Embedded} or \emph{Included
-  Relation}):
+The Sets $X_1, X_2, \ldots$ are called the \emph{Domain}
+(\S\ref{sec:domain}) of $R$. If any Domain of $R$ is empty, then $R$
+is the unique \emph{Empty Relation} $R = \varnothing$.
+
+The \emph{Graph} of a Relation $R$, $G(R)$, defines the Relation in
+Extension (\S\ref{sec:extension}) as a Subset of the Cartesian Product
+(\S\ref{sec:cartesian_product}) of the Domain:
 \[
-  (X_1, \ldots, X_n, G(L))
+  G(R) \subseteq X_1 \times X_2 \times \ldots
 \]
-The Expression $L x_1 \ldots x_n$ where $x_i \in X_i$ is True when
-$(x_1, \ldots, x_n) \in G(L)$ and False otherwise. As such, an $n$-ary
-Relation may also be defined by a Boolean-valued \emph{Characteristic
+
+The \emph{Arity} of a Relation is the Dimension of the Domain in the
+Graph of a Relation. %FIXME
+
+The Expression $R x_1 x_2 \ldots$ where $x_i \in X_i$ is True when
+$(x_1, x_2, \ldots) \in G(R)$ and False otherwise. As such, any
+Relation may defined by a Boolean-valued \emph{Characteristic
   Function} (or \emph{Indicator Function}
 \S\ref{sec:indicator_function}, cf. Predicate \S\ref{sec:predicate}):
 \[
-  f_L : X_1 \times \ldots \times X_n \rightarrow \{\top,\bot\}
+  f_R : X_1 \times X_2 \times \ldots \rightarrow \{\top,\bot\}
 \]
-
 
 
 % --------------------------------------------------------------------
 \subsection{Finitary Relation}\label{sec:finitary_relation}
 % --------------------------------------------------------------------
 
-A Relation with a Finite Arity is called a \emph{Finitary Relation}.
+A Relation with a Finite Arity $n$ is called a \emph{Finitary
+  Relation} or \emph{$n$-ary Relation}.
 
 There are only two $0$-ary Relations on the Empty Tuple $()$: one that
 is always True and one that is always False.
@@ -531,119 +530,139 @@ Ternary Relation.
 
 
 
+\subsubsection{Correspondence}\label{sec:correspondence}
+
+An $n$-ary Relation may be completely specified by an $n + 1$-tuple
+called a \emph{Correspondence} (or \emph{Embedded} or \emph{Included
+  Relation}):
+\[
+  (X_1, \ldots, X_n, G(R))
+\]
+
+
+
 % --------------------------------------------------------------------
 \subsection{Binary Relation}\label{sec:binary_relation}
 % --------------------------------------------------------------------
 
 A \emph{Binary} (or \emph{Dyadic}) Relation is a $2$-ary Relation.
 
+When the Graph of a Binary Relation is plotted on a Coordinate Plane
+(\S\ref{sec:cartesian_coordinate}), the First Elements of the Ordered
+Pairs of $G(R)$, mapped to the Horizontal Axis, are \emph{Abscissae},
+and the Second Elements of the Ordered Pairs of $G(R)$, mapped to the
+Vertical Axis, are called \emph{Ordinates}.
+
+Reduction Relation (\S\ref{sec:reduction_relation})
+
 A Binary Relation $R$ on a Set $A$ is:
 \begin{description}
 \item[Serial](\S\ref{sec:serial_relation}) if:
-  \[
-    \forall a \in A \exists b \in A : xRy
-  \]
+
+  $ \forall a \in A \exists b \in A : xRy $
+
 \item[Reflexive](\S\ref{sec:serial_relation}) if:
-  \[
-    xRx = \top
-  \]
-  Reflexive implies Transitive and Serial
+
+  $ xRx = \top $
+
+  Reflexive Implies Transitive and Serial
+
 \item[Irreflexive] (also \emph{Strict}
   \S\ref{sec:irreflexive_relation}) if:
-  \[
-    xRx = \bot
-  \]
+
+  $ xRx = \bot $
+
 \item[Co-reflexive](\S\ref{sec:coreflexive_relation}) if:
-  \[
-    xRy \rightarrow a = b
-  \]
+
+  $ xRy \rightarrow a = b $
+
 \item[Transitive](\S\ref{sec:transitive_relation}) if:
-  \[
-    xRy \wedge yRc \rightarrow xRc
-  \]
+
+  $ xRy \wedge yRc \rightarrow xRc $
+
   Transitive and Irreflexive if and only if Transitive and Asymmetric
+
 \item[Symmetric](\S\ref{sec:symmetric_relation}) if:
-  \[
-    xRy \leftrightarrow yRx
-  \]
+
+  $ xRy \leftrightarrow yRx $
+
 \item[Anti-symmetric](\S\ref{sec:antisymmetric_relation}) if:
-  \[
-    xRy \wedge yRx \rightarrow a = b
-  \]
+
+  $ xRy \wedge yRx \rightarrow a = b $
+
 \item[Asymmetric](\S\ref{sec:antisymmetric_relation}) if both
   Anti-symmetric and Irreflexive:
-  \[
-    xRy \rightarrow \neg yRx
-  \]
-\item[Left-total] (\S\ref{sec:lefttotal_relation}) if:
-  \[
-    \forall a \in A \exists b \in A : xRy
-  \]
+
+  $ xRy \rightarrow \neg yRx $
+
+\item[Left-total] (\S\ref{sec:left_total}) if:
+
+  $ \forall a \in A \exists b \in A : xRy $
+
   Multimaps (\S\ref{sec:multimap}) and Functions
-  (\S\ref{sec:function}) are Left-total
+  (\S\ref{sec:set_function}) are Left-total
+
 \item[Right-total] (\emph{Surjective} or \emph{Onto}
-  (\S\ref{sec:surjective_function})) if:
-  \[
-    \forall b \in A \exists a \in A : xRy
-  \]
+  \S\ref{sec:surjective_function}) if:
+
+  $ \forall b \in A \exists a \in A : xRy $
+
 \item[Right-unique] (or \emph{Functional} or \emph{Univalent}
   \S\ref{sec:functional_relation}) if:
-  \[
-    \forall x \in dom(R), y \in rng(R)
-    (xRy \wedge xRz \rightarrow y = z)
-  \]
+
+  $ \forall x \in dom(R), y \in rng(R)
+    (xRy \wedge xRz \rightarrow y = z) $
+
 \item[Total] (\S\ref{sec:total_relation}) if:
-  \[
-    \forall a,b \in A, xRy \vee yRx
-  \]
-  Total implies Reflexive (\S\ref{sec:reflexive_relation})
+
+  $ \forall a,b \in A, xRy \vee yRx $
+
+  Total Implies Reflexive (\S\ref{sec:reflexive_relation})
+
 \item[Trichotomous] (\S\ref{sec:trichotomous_relation}) if:
-  \[
-    xRy \vee yRx \vee a = b
-  \]
-  Trichotomous implies Irreflexive (\S\ref{sec:irreflexive_relation}).
+
+  $ xRy \vee yRx \vee a = b $
+
+  Trichotomous Implies Irreflexive (\S\ref{sec:irreflexive_relation}).
   Trichotomous and Transitive (\S\ref{sec:transitive_relation})
-  implies Asymmetric (\S\ref{sec:asymmetric_relation}). A Transitive
+  Implies Asymmetric (\S\ref{sec:asymmetric_relation}). A Transitive
   Trichotomous Relation is a Strict Total Order
   (\S\ref{sec:strict_order}, \S\ref{sec:total_order}).
+
 \item[Right Euclidean] (\S\ref{sec:euclidean_relation}) if:
-  \[
-    xRy \wedge xRc \rightarrow yRc
-  \]
+
+  $ xRy \wedge xRc \rightarrow yRc $
+
 \item[Left Euclidean] (\S\ref{sec:euclidean_relation}) if:
-  \[
-    yRx \wedge cRx \rightarrow yRc
-  \]
+
+  $ yRx \wedge cRx \rightarrow yRc $
+
 \end{description}
-From the above Classes of Relations, the following Orders
-(\S\ref{sec:order_theory}) are distinguished, listed here from most
-general to most restricted:
+
+From the above Classes of Relations, the following Binary Ordering
+Relations (\S\ref{sec:ordering_relation}) are distinguished, listed
+here from most general to most restricted:
+
 \begin{description}
-\item[Preorder] (or Quasiorder) when Reflexive and Transitive (all
-  Partial Orders and Equivalence Relations
-  (\S\ref{sec:equivalence_relation}) are Preorders)
-\item[Partial Order] when Preorder and Anti-symmetric (Poset
-  \S\ref{sec:poset})
-\item[Total Preorder] (or Weak Order) when Preorder and Total.
-\item[Total Order] when a Partial Order and Total.
-\item[Partial Equivalence] when Symmetric and Transitive.
-\item[Equivalence] when Reflexive, Symmetric, and Transitive
-  (\S\ref{sec:equivalence_relation}).
+\item[Preorder] (\S\ref{sec:preorder}) when Reflexive and Transitive
+  (all Partial Orders and Equivalence Relations are Preorders)
+\item[Partial Order] (\S\ref{sec:partial_order}) when Preorder and
+  Anti-symmetric
+\item[Weak order] (\S\ref{sec:weak_order}) when Preorder and Total
+\item[Total Order] (\S\ref{sec:total_order}) when a Partial Order and
+  Total
+\item[Partial Equivalence] (\S\ref{sec:partial_equivalence}) when
+  Symmetric and Transitive
+\item[Equivalence] (\S\ref{sec:equivalence_relation}) when Reflexive,
+  Symmetric, and Transitive
 \end{description}
 
 The Set of all Binary Relations on a Set $A$ is denoted
-$\mathbf{Rel}(A)$ and is the Power Set of $A \times A$: $2^{A \times
-  A}$.
+$\mathbf{Rel}(A)$ and is the Powerset (\S\ref{sec:powerset}) of $A
+\times A$: $2^{A \times A}$.
 
-A Dependency Relation is a Binary Relation that is Symmetric and
-Reflexive.
-
-Undirected Graphs (\S\ref{sec:undirected_graph}) are Symmetric. Any
-Binary Relation may be a Directed Graph (\S\ref{sec:directed_graph}).
-A Binary Relation is a Complete Graph (\S\ref{sec:complete_graph})
-when $a \neq b \rightarrow xRy$ and implies Symmetry. A Binary
-Relation is a Tournament when $a \neq b \rightarrow xRy \vee yRx$ and
-implies Anti-symmetry.
+A Dependency Relation (\S\ref{sec:dependency_relation}) is a Binary
+Relation that is Symmetric and Reflexive.
 
 
 
@@ -661,27 +680,22 @@ implies Anti-symmetry.
 
 \subsubsection{Asymmetric Relation}\label{sec:asymmetric_relation}
 
-\subsubsection{Left-total Relation}\label{sec:lefttotal_relation}
+\subsubsection{Left-total Relation}\label{sec:left_total}
 
 \subsubsection{Total Relation}\label{sec:total_relation}
 
 \subsubsection{Functional Relation}\label{sec:functional_relation}
 
+Right-unique
+
+A Function (\S\ref{sec:set_function}) is a Left-total
+(\S\ref{sec:left_total}) Functional Relation.
+
+
+
 \subsubsection{Trichotomous Relation}\label{sec:trichotomous_relation}
 
 \subsubsection{Serial Relation}\label{sec:serial_relation}
-
-\subsubsection{Rewrite Relation}\label{sec:rewrite_relation}
-
-\emph{Rewrite Relation}
-
-\emph{Rewrite Preorder}
-
-\emph{Reduction Preorder}
-
-\emph{Rewrite Closure}
-
-
 
 \subsubsection{Extensional Relation}\label{sec:extensional_relation}
 
@@ -703,14 +717,18 @@ Extensional.
 \subsection{Endorelation}\label{sec:endorelation}
 % --------------------------------------------------------------------
 
+$X = Y$
+
 \begin{description}
 \item [Directed Graph] (\S\ref{sec:directed_graph})
 
-\item [Undirected Graph] (\S\ref{sec:undirected_graph}) Irreflexive, Symmetric
+\item [Undirected Graph] (\S\ref{sec:undirected_graph}) Irreflexive,
+  Symmetric
 
 \item [Tournament] (\S\ref{sec:tournament}) Irreflexive, Antisymmetric
 
-\item [Dependency] (\S\ref{sec:dependency_relation}) Reflexive, Symmetric
+\item [Dependency] (\S\ref{sec:dependency_relation}) Reflexive,
+  Symmetric
 
 \item [Weak Order] (\S\ref{sec:weak_order}) Transitive
 
@@ -729,6 +747,11 @@ Extensional.
   Reflexive, Symmetric, Transitive
 
 \end{description}
+
+Any Endorelation may be given as a Directed Graph. An Endorelation is
+a Complete Graph (\S\ref{sec:complete_graph}) when $a \neq b
+\rightarrow xRy$ and implies Symmetry. An Endorelation is a Tournament
+when $a \neq b \rightarrow xRy \vee yRx$ and Implies Antisymmetry.
 
 
 
@@ -754,7 +777,7 @@ Equivalence Relation on Elements $a,b \in S$:
 \[
     a \sim b \Leftrightarrow f(a) = f(b)
 \]
-where the Equivalence Classes are the Fibers (\S\ref{sec:function}) of
+where the Equivalence Classes are the Fibers (\S\ref{sec:fiber}) of
 the Elements in $T$ and the Quotient Set is the Image of the
 Equivalence Relation viewed as a Function on Elements of $S$ to their
 Equivalence Classes.
@@ -777,140 +800,6 @@ Equivalence Classes.
 
 Equivalence Relation on an Algebraic Structure
 (\S\ref{sec:algebraic_structure}) compatible with that Structure
-
-
-
-% --------------------------------------------------------------------
-\subsection{Ordering Relation}\label{sec:ordering_relation}
-% --------------------------------------------------------------------
-
-Order Theory (\S\ref{sec:order_theory})
-
-
-
-\subsubsection{Upper Bound}\label{sec:upper_bound}
-
-\paragraph{Least Upper Bound}\label{sec:least_upperbound}
-\hfill \\
-
-Supremum (\S\ref{sec:glb_lub})
-
-
-
-\subsubsection{Lower Bound}\label{sec:lower_bound}
-
-\paragraph{Greatest Lower Bound}\label{sec:greatest_lowerbound}
-\hfill \\
-
-Infimum (\S\ref{sec:glb_lub})
-
-
-
-\subsubsection{Cofinal}\label{sec:cofinal}
-
-A Subset $B$ is \emph{Cofinal} in a Set $A$ with an Ordering Relation
-$\leq$ if:
-\[
-  \forall a \in A, \exists b \in B : a \leq b
-\]
-
-
-
-\paragraph{Coinitial}\label{sec:coinitial}
-\hfill \\
-
-A \emph{Coinitial Subset} is the Order Theoretic Dual of a Cofinal
-Subset. A Subset $B$ is Coinitial in a Set $A$ with an Ordering
-Relation $\leq$ if:
-\[
-  \forall a \in A, \exists b \in B : b \leq a
-\]
-
-
-
-\subsubsection{Weak Order}\label{sec:weak_order}
-
-\subsubsection{Preorder}\label{sec:preorder}
-
-Reflexive, Transitive
-
-
-\paragraph{Cartesian Closed Preorder}\label{sec:cartesian_preorder}
-\hfill \\
-
-Heyting Algebra (\S\ref{sec:heyting_algebra})
-
-
-
-\subsubsection{Directed Set}\label{sec:directed_set}
-
-A \emph{Directed Set} $D$ has a Preorder $\leq$ with the extra
-condition that any two Elements of $D$ have an Upper Bound
-(\S\ref{sec:upper_bound}):
-\[
-  \forall x, y \in D, \exists z \in D : x \leq z \wedge y \leq z
-\]
-
-
-
-\subsubsection{Partial Order}\label{sec:partial_order}
-
-Reflexive, Antisymmetric, Transitive
-
-The Signature (\S\ref{sec:signature}) of Partial Orderings is
-$\{\prec\}$.
-
-
-
-\paragraph{Strict Order}\label{sec:strict_order}
-
-A \emph{Strict Order} is an Irreflexive Partial Order (e.g. $<$).
-There is a one-to-one correspondence between Strict and Non-strict
-Partial Orders via the Irreflexive Kernel
-(\S\ref{sec:reflexive_reduction}):
-\[
-  a \leq b \wedge a \neq b \Rightarrow a < b
-\]
-and conversely the Reflexive Closure (\S\ref{sec:reflexive_closure}):
-\[
-  a < b \vee a = b \Rightarrow a \leq b
-\]
-
-
-
-\subsubsection{Total Order}\label{sec:total_order}
-
-A \emph{Total Order} (or \emph{Linear Order}) adds the requirement of
-Left-totality. A Totally Ordered Subset of some Partially Ordered Set
-is called a \emph{Chain}.
-
-
-
-\subsubsection{Complete Partial Order}\label{sec:complete_partialorder}
-
-\subsubsection{Well-founded Relation}\label{sec:well_founded}
-
-\emph{Well-founded}
-
-Every non-empty Subset has a Minimal Element
-
-
-
-\paragraph{Noetherian Relation}\label{sec:noetherian_relation}
-\hfill \\
-
-\emph{Noetherian} (or \emph{Terminating})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Tolerance Relation}\label{sec:tolerance_relation}
-% --------------------------------------------------------------------
-
-\subsubsection{Dependency Relation}\label{sec:dependency_relation}
-\hfill \\
-
-Finite Tolerance Relation
 
 
 
@@ -1010,12 +899,12 @@ Set, $S$, is the Union of $R$ with its Inverse Relation:
 
 
 % ====================================================================
-\section{Function}\label{sec:function}
+\section{Function}\label{sec:set_function}
 % ====================================================================
 
-A \emph{Function} is a Left-total (\S\ref{sec:lefttotal_relation})
-Right-unique (\S\ref{sec:functional_relation}) Relation. A Function
-$f$ with Domain $A$ and Codomain $B$ is denoted:
+A \emph{Function} is a Left-total (\S\ref{sec:left_total})
+Right-unique (Functional \S\ref{sec:functional_relation}) Relation. A
+Function $f$ with Domain $A$ and Codomain $B$ is denoted:
 \[
   f : A \rightarrow B
 \]
@@ -1039,6 +928,8 @@ Unique Function for each Set, $A$:
 \emph{Finitary Function}
 
 \emph{Infinitary Function}
+
+\HandRight\; Cf. \emph{Morphism} (\S\ref{sec:morphism})
 
 $\rightarrow$
 
@@ -1291,10 +1182,6 @@ An Identity Map is a trivial Involution.
 
 
 % --------------------------------------------------------------------
-\subsection{Indicator Function}\label{sec:indicator_function}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
 \subsection{Monotonic Function}\label{sec:monotonic}
 % --------------------------------------------------------------------
 
@@ -1387,7 +1274,7 @@ A \emph{Pairing Function} is a Primitive Recursive
 
 A \emph{Partial Function} is a Functional Relation
 (\S\ref{sec:functional_relation}) that is not Left-total
-(\S\ref{sec:lefttotal_relation}).
+(\S\ref{sec:left_total}).
 
 $f : A \rightharpoondown B$
 
@@ -1408,7 +1295,7 @@ Function with that Property.''
 % ====================================================================
 
 A \emph{Multimap} (or \emph{Multi-valued Function}) is a Left-total
-Relation (\S\ref{sec:lefttotal_relation}) that is not Right-unique
+Relation (\S\ref{sec:left_total}) that is not Right-unique
 (\S\ref{sec:functional_relation}).
 
 $A \multimap B$
