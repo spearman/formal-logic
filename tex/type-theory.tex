@@ -1026,7 +1026,8 @@ Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
 Generalizes the idea of a Polymorphic Function
 (\S\ref{sec:polymorphic_function})
 
-\cite{hott13}
+\cite{hott13}:
+
 Example $id$:
 \[
   id : \Pi_{(A : \class{U})} A \rightarrow A
@@ -1079,7 +1080,8 @@ $\tau^\dag \rightarrow T^\sigma \tau'^\dag$
 
 Computational Effects representable by an Algebraic Theory:
 Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
-etc.
+Stream Redirection, Backtracking, Co-operative Multi-threading,
+Delimited Continuations, etc.
 
 Computational Monad: Free Monad (\S\ref{sec:free_monad})
 
@@ -1104,6 +1106,59 @@ outcomes of an Effect)
 
 ``Source'' of an Effect is represented by an Operation with Arity
 equal to the number of outcomes and Arguments represent Branches
+
+
+\textbf{Language}
+
+\cite{pretnar15}:
+
+\emph{Values}:
+\begin{flalign*}
+  \quad v ::=&\quad x \quad | \quad \true \quad | \quad \false \quad
+            | \quad \lambda x \mapsto c &\\
+      \quad |&\quad \mathtt{handler}\; \{ \mathtt{return}\; x
+              \mapsto c_r, \mathtt{op}_1(x;k) \mapsto c_1, \ldots,
+              \mathtt{op}_n(x;k) \mapsto c_n \}&
+\end{flalign*}
+
+\emph{Computations}:
+\begin{flalign*}
+  \quad c ::=&\quad \mathtt{return}\; v \quad | \quad \mathtt{op}(v;y.c) \quad
+            | \quad \mathtt{do}\; x \leftarrow c_1 \;\mathtt{in}\; c_2 &\\
+      \quad |&\quad \mathtt{if}\; v \;\mathtt{then}\; c_1
+              \;\mathtt{else}\; c_2 \quad
+            | \quad v_1 v_2 \quad | \quad \;\mathtt{with}\; v
+              \;\mathtt{handle}\; c&
+\end{flalign*}
+
+Sequencing:
+\[
+  \mathtt{do}\; x \leftarrow c_1 \;\mathtt{in}\; c_2
+\]
+first Evaluate $c_1$, Bind result Value to $x$, and proceed as $c_2$;
+if $x$ does not appear in $c_2$, then abbreviate to $c1; c2$.
+
+Operation Call:
+\[
+  \mathtt{op}(v;y.c)
+\]
+Parameter Value $v$ (e.g. Memory Location to be Read) passed to
+$\mathtt{op}$, $\mathtt{op}$ performs Effect, Result Value (e.g.
+Contents of Memory Location) is Bound to $y$ and Evaluation of
+Continuation $c$ resumes. (Handlers \S\ref{sec:effect_handler}) may
+override this behavior).
+
+Generic Effect (\S\ref{sec:generic_effect}):
+\[
+  \mathtt{op}\; \stackrel{\mathrm{def}}{=} \;\mathtt{fun}\; x \mapsto
+  \mathtt{op}(x; y.\mathtt{return}\; y)
+\]
+Parameter Value $x$ passed to Operation with the Trivial Continuation;
+specific Operations $\mathtt{op}(v;y.c)$ can be recovered by
+Evaluating:
+\[
+  \mathtt{do}\; y \leftarrow \mathtt{op}\; v \;\mathtt{in}\; c
+\]
 
 
 
@@ -1141,6 +1196,16 @@ continue Handling Operations in the Continuation
 
 
 \paragraph{Generic Effect}\label{sec:generic_effect}
+\hfill \\
+
+\cite{pretnar15}:
+\[
+  \mathtt{op}\; \stackrel{\mathrm{def}}{=} \;\mathtt{fun} x \mapsto
+  \;\mathtt{op}(x; y.\mathtt{return}\; y)
+\]
+Parameter $x$ passed to Operation with the Trivial Continuation
+
+
 
 \paragraph{Extensible Effect}\label{sec:extensible_effect}
 \hfill \\
