@@ -1073,6 +1073,8 @@ $\tau^\dag \rightarrow T^\sigma \tau'^\dag$
 \cite{nielson-nielson99}
 \cite{pretnar15}
 
+Sets of Operations
+
 (Countable) Equational Theories (Algebraic Theory
 \S\ref{sec:algebraic_theory})
 
@@ -1087,6 +1089,9 @@ Computational Monad: Free Monad (\S\ref{sec:free_monad})
 
 Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
 Algebraic Theory
+
+\HandRight\; Note that some Handlers (e.g. for Backtracking) do not
+respect the Equations of an Algebraic Theory. \cite{pretnar15}
 
 alternative to using Monads (\S\ref{sec:monad}) to Model Side-effects,
 most often seen in Strict Languages
@@ -1161,6 +1166,90 @@ Evaluating:
 \]
 
 
+\textbf{Denotational Semantics} \cite{pretnar15}
+
+Computations as Trees:
+
+Returned Values (or Bottom $\bot$ for Divergent Computation that does
+not call any Operations) are Leaves and Branching Points are
+Operations
+
+Operation Calls create a ``Branching Point'' in the Evaluation with as
+many Branches as there are possible Results that can be Yielded to the
+Continuation. \cite{pretnar15}
+
+A Divergent Computation that repeatedly Calls Operations gives a
+Non-well-founded Tree. \cite{pretnar15}
+
+
+\emph{Denotational Semantics Returning First-order Values and no
+  Recursion}:
+
+Value Type $A$: Set $\llbracket A \rrbracket$
+
+Computation Type $\llbracket A!\Delta \rrbracket$: Set of Trees with
+Leaves (Values) in $\llbracket A \rrbracket$ and Nodes (Operations) in
+$\Delta$
+
+Handlers: Functions between Trees defined by Structural Recursion on
+Tree of the Handled Computation and Handling is Interpreted by
+Application of such Functions
+
+A \emph{Model} of $\Delta$ is a Set $M$ with Maps:
+\[
+  \mathtt{op}_M : \llbracket A \rrbracket
+    \times M^{\llbracket B \rrbracket} \rightarrow M
+\]
+for each Operation $\mathtt{op} : A \rightarrow B$ in $\Delta$
+
+\emph{Homomorphism} between Models $M$, $N$ is a Map $h : M
+\rightarrow N$ such that:
+\[
+  (h \circ \mathtt{op}_M)(x,k) = \mathtt{op}_N(x,h \circ k)
+\]
+
+$\llbracket A ! \Delta \rrbracket$ is the \emph{Free Model} of
+$\Delta$ over $A$ with Universal Property
+(\S\ref{sec:universal_property}):
+
+For any Model $M$ of $\Delta$ and Map $f : \llbracket A \rrbracket
+\rightarrow M$ there exists a Unique Homomorphism $h : \llbracket A !
+\Delta \rrbracket \rightarrow M$ that agrees with $f$ on Leaves.
+\cite{pretnar15}
+
+Operation Clauses define a Model of Operations and the Return Clause
+provides a Function $f$ that can be extended to a Homomorphism.
+\cite{pretnar15}
+
+\HandRight\; With General Recursion and Higher-order Results then
+Domains (\S\ref{sec:order_domain}) are used instead of Sets.
+
+Comodel: Set $W$ of possible World States and Map $\mathtt{op}^W : W
+\times \llbracket A \rrbracket \rightarrow W \times \llbracket B
+\rrbracket$ for each Operation $\mathtt{op} : A \rightarrow B$ in
+$\Sigma$
+
+when Operation Call $\mathtt{op}(v; y.c)$ escapes all Handlers, pass
+current State $w \in W$ and Parameter $v$ to $\mathtt{op}^W$ and get
+back new State and Result, assigning Result to $y$ and continue
+Evaluating $c$. \cite{pretnar15}
+
+
+\textbf{Operational Semantics} \cite{pretnar15}
+
+Small-step Operational Semantics
+
+Operation Calls do not perform Effects: they behave as ``Signals''
+that propagate outwards until they reach a Handler with a matching
+Clause. \cite{pretnar15}
+
+An Operation that escapes all Handlers is treated as a Terminating
+Computation (no further Reductions). \cite{pretnar15}
+
+``Actual'' Effectful behavior simulated by an Outermost Handler.
+\cite{pretnar15}
+
+
 
 \paragraph{Effect Handler}\label{sec:effect_handler}
 \hfill \\
@@ -1176,7 +1265,12 @@ corresponds to Model of the Algebraic Theory
 Handling a Computational Effect: Homomorphically Mapping the Handled
 Computation into another Computation
 
-\cite{pretnar15}: %FIXME
+\cite{pretnar15}:
+\[
+  \mathtt{handler}\; \{ \mathtt{return}\; x
+          \mapsto c_r, \mathtt{op}_1(x;k) \mapsto c_1, \ldots,
+          \mathtt{op}_n(x;k) \mapsto c_n \}
+\]
 
 
 
@@ -1184,6 +1278,9 @@ Computation into another Computation
 \hfill \\
 
 only Handle the first call of an Operation
+
+more ``elementary'': can be used to simulate Deep Handler through
+Recursion \cite{pretnar15}
 
 
 
