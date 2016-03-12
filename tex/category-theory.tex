@@ -3133,9 +3133,9 @@ Category (\S\ref{sec:endofunctor_category}) $\cat{End_C}$. Special
 case of a Hughes Arrow (\S\ref{sec:hughes_arrow}) with output but no
 input.
 
-Pointed Endofunctor (\S\ref{sec:pointed_endofunctor}) $E : \cat{C}
+Pointed Endofunctor (\S\ref{sec:pointed_endofunctor}) $S : \cat{C}
 \rightarrow \cat{C}$ with Natural Transformation $\sigma : 1_\cat{C}
-\rightarrow E$ as the Unit; Well-pointed exactly when the Monad is
+\rightarrow S$ as the Unit; Well-pointed exactly when the Monad is
 Idempotent (\S\ref{sec:idempotent_monad})
 
 Given a Monad $T$ on a Category $\cat{C}$, there is a Category of
@@ -3157,13 +3157,17 @@ Correspondences: \cite{jacobs-heunen-hasuo09}
 In Programming: Interface to Abstract Datatype of ``Program
 Fragments''
 
-An alternative to Monads for Computational Effects is Algebraic
-Effects (\S\ref{sec:algebraic_effect}), more often seen in Strict
-Languages
+An alternative to Monads for Computational Effects
+(\S\ref{sec:effect_system}) is Algebraic Effects
+(\S\ref{sec:algebraic_effect}), more often seen in Strict Languages
+(Algebraic Effects as a Subclass of Computational Effects
+\cite{plotkin-pretnar09})
 
 Pointed Endofunctor (\S\ref{sec:pointed_endofunctor}) where $\sigma$
 is the Unit
 
+
+\center *** \raggedright
 
 Comonad $F \circ G$ (\S\ref{sec:comonad})
 
@@ -3174,6 +3178,39 @@ Terminal Object %FIXME terminal object required in category?
 Generalization of Closure Operators on Posets (\S\ref{sec:poset}) to
 arbitrary Categories (Galois Connections \S\ref{sec:galois_connection}
 as Adjoint Pairs)
+
+Continuation (\S\ref{sec:continuation}), Continuation Monad (???) %FIXME
+
+
+\center *** \raggedright
+
+Computations
+
+Monad: $T$
+
+Type of $T$-computations with Values in $X$:
+\[
+  T (X)
+\]
+
+Kleisli Functions:
+\[
+\begin{split}
+  f : X \rightarrow T(Y) \\
+  g : Y \rightarrow T(Z)
+\end{split}
+\]
+
+Kleisli Composition (``Bind'', $\mathtt{(>>=)}$):
+\[
+  g \circ f : X \rightarrow T(Z)
+  g \circ f = \mu_Z \circ T(g) \circ f
+\]
+
+Unit for Kleisli Composition (``Return''):
+\[
+  \mathtt{pure}_X : X \rightarrow T (X)
+\]
 
 
 \textbf{Generalization of Universal Algebra}
@@ -3284,6 +3321,34 @@ The analogous construction for Hughes Arrows
 (\S\ref{sec:hughes_arrow}) are Freyd Categories
 (\S\ref{sec:freyd_category}).
 
+Monad: $T$
+
+Type of $T$-computations with Values in $X$:
+\[
+  T (X)
+\]
+
+Kleisli Functions:
+\[
+\begin{split}
+  f : X \rightarrow T(Y) \\
+  g : Y \rightarrow T(Z)
+\end{split}
+\]
+
+Kleisli Composition (``Bind'', $\mathtt{(>>=)}$):
+\[
+  g \circ f : X \rightarrow T(Z)
+  g \circ f = \mu_Z \circ T(g) \circ f
+\]
+
+Unit for Kleisli Composition (``Return''):
+\[
+  \mathtt{pure}_X : X \rightarrow T (X)
+\]
+
+Syntactic Cateogry (\S\ref{sec:syntactic_category})
+
 
 
 \subsubsection{Monadic Adjunction}\label{sec:monadic_adjunction}
@@ -3362,6 +3427,24 @@ $\mathrm{PtEnd}(\cat{C})$ Pointed Endofunctors
 
 $\mathrm{End}(\cat{C})$ Category of Endofunctors of $\cat{C}$
 
+Cofree Comonad (\S\ref{sec:cofree_comonad})
+
+Free Monad of a Functor $F$ is Uniquely Determined by the Functor up
+to Isomorphism: ??? %FIXME
+
+
+
+\paragraph{Algebraically-free Monad}\label{sec:algebraically_free}
+\hfill \\
+
+\emph{Algebraically-free Monad}
+
+any Algebraically-free Monad is Free
+
+if $\cat{C}$ is Locally Small (\S\ref{sec:locally_small}) and Complete
+(\S\ref{sec:complete_category}) then any Free Monad is
+Algebraically-free
+
 
 
 \paragraph{van Laarhoven Free Monad}
@@ -3400,6 +3483,10 @@ be Codense)
 % --------------------------------------------------------------------
 
 Descent
+
+
+
+\subsubsection{Cofree Comonad}\label{sec:cofree_comonad}
 
 
 
@@ -4430,13 +4517,10 @@ Left Adjoint to Functor:
 extracting the Internal Logic (\S\ref{sec:internal_logic}) of
 Categories.
 
-(from nLab): %FIXME
 
-Type Theory $T$
+(from nLab):
 
-$Syn(T)$
-
-
+(1):
 
 \begin{itemize}
   \item Objects: (Type) Contexts (\S\ref{sec:type_context}) in $T$
@@ -4465,6 +4549,43 @@ $Syn(T)$
     (\S\ref{sec:firstorder_theory}) then $Syn(T)$ is a Heyting
     Category (\S\ref{sec:heyting_category})
 \end{itemize}
+
+(2):
+
+Type Theory (\S\ref{sec:type_system}) $\class{T}$
+
+$Syn(\class{T})$
+
+Objects $X \in Syn(\class{T})_0$ are Types (\S\ref{sec:type})
+
+Morphisms $X \rightarrow Y \in Syn(\class{T})_1$ are Terms (or Equivalence
+Class of Terms)
+
+Monads (\S\ref{sec:monad}) are certain Endofunctors:
+\[
+  T : Syn(\class{T}) \rightarrow Syn(\class{T})
+\]
+
+Unit Natural Transformation $\eta : 1_{Syn(\class{T})} \Rightarrow T$
+provides Component Morphism for each $X$:
+\[
+  \mathtt{pure}_X : X \rightarrow \class{T}(X)
+\]
+
+Multiplication Natural Transformation $\mu : T \circ T \Rightarrow T$
+provides Morphism for each $X$:
+\[
+  \mu_X : T(T(X)) \Rightarrow T(X)
+\]
+Inducing Kleisli Composition (\S\ref{sec:kleisli_category}):
+\[
+  g \circ f := X \xrightarrow{f} T(Y) \xrightarrow{T(g)} T(T(Z))
+  \xrightarrow{\mu_Z} T(Z)
+\]
+i.e.:
+\[
+  g \circ f = \mu_Z \circ T(g) \circ f
+\]
 
 
 

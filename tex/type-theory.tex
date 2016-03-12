@@ -1053,14 +1053,16 @@ Type (\S\ref{sec:polymorphic_type}):
 \subsection{Effect System}\label{sec:effect_system}
 % --------------------------------------------------------------------
 
+Effect Theory
+
+(Wadler, Thiemann - 2003 - \emph{The marriage of effects and monads}):
+%FIXME
+
 Types $\tau$, $\tau'$
 
 Effect $\sigma$
 
 $\tau \xrightarrow{\sigma} \tau'$
-
-(Wadler, Thiemann - 2003 - \emph{The marriage of effects and monads}):
-%FIXME
 
 $(\tau \xrightarrow{\sigma} \tau')^\dag$
 $\rightsquigarrow$
@@ -1068,24 +1070,50 @@ $\tau^\dag \rightarrow T^\sigma \tau'^\dag$
 
 
 
+\subsubsection{Computational Effect}\label{sec:computational_effect}
+
+Computational Effects
+
+e.g. Exceptions, Non-determinism, Interactive Input/Output,
+Concurrency, State, Time, Continuations, etc. \cite{plotkin-pretnar09}
+
+Monad (\S\ref{sec:monad})
+
+Computation (Monad) $T$ Returning Value of Type $X$:
+\[
+  T X
+\]
+
+Return
+
+Bind
+
+
+
 \subsubsection{Algebraic Effect}\label{sec:algebraic_effect}
 
 \cite{nielson-nielson99}
+\cite{plotkin-pretnar09}
 \cite{pretnar15}
-
-Sets of Operations
 
 (Countable) Equational Theories (Algebraic Theory
 \S\ref{sec:algebraic_theory})
 
-(Pretnar, Plotkin - 2009 - \emph{Handlers of Algebraic Effects}): %FIXME
+
+\cite{plotkin-pretnar09}:
+
+Subclass of Computational Effects (\S\ref{sec:computational_effect}):
+Effects that allow Representation by Operations and Equations.
+
+Sets of Operations
 
 Computational Effects representable by an Algebraic Theory:
 Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
 Stream Redirection, Backtracking, Co-operative Multi-threading,
 Delimited Continuations, etc.
 
-Computational Monad: Free Monad (\S\ref{sec:free_monad})
+Computation Monad: Free-model Monad (???, Free Monad
+\S\ref{sec:free_monad}) of the Algebraic Theory
 
 Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
 Algebraic Theory
@@ -1093,8 +1121,9 @@ Algebraic Theory
 \HandRight\; Note that some Handlers (e.g. for Backtracking) do not
 respect the Equations of an Algebraic Theory. \cite{pretnar15}
 
-alternative to using Monads (\S\ref{sec:monad}) to Model Side-effects,
-most often seen in Strict Languages
+
+as an alternative to using Monads (\S\ref{sec:monad}) to Model
+Side-effects, most often seen in Strict Languages
 
 subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
 captured by any Effect System (E. Kmett)
@@ -1102,8 +1131,8 @@ captured by any Effect System (E. Kmett)
 Continuations (\S\ref{sec:continuation}) are not representable as
 Algebraic Effects
 
-(Pretnar - 2010 - \emph{The Logic and Handling of Algebraic Effects}):
-%FIXME
+
+\cite{pretnar15}:
 
 Occurence of an Effect can been seen as a Branching in the Execution
 of a Program (number of Branches equal to the number of possible
