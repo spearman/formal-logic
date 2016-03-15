@@ -1100,28 +1100,6 @@ Bind
 \S\ref{sec:algebraic_theory})
 
 
-\cite{plotkin-pretnar09}:
-
-Subclass of Computational Effects (\S\ref{sec:computational_effect}):
-Effects that allow Representation by Operations and Equations.
-
-Sets of Operations
-
-Computational Effects representable by an Algebraic Theory:
-Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
-Stream Redirection, Backtracking, Co-operative Multi-threading,
-Delimited Continuations, etc.
-
-Computation Monad: Free-model Monad (???, Free Monad
-\S\ref{sec:free_monad}) of the Algebraic Theory
-
-Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
-Algebraic Theory
-
-\HandRight\; Note that some Handlers (e.g. for Backtracking) do not
-respect the Equations of an Algebraic Theory. \cite{pretnar15}
-
-
 as an alternative to using Monads (\S\ref{sec:monad}) to Model
 Side-effects, most often seen in Strict Languages
 
@@ -1130,6 +1108,115 @@ captured by any Effect System (E. Kmett)
 
 Continuations (\S\ref{sec:continuation}) are not representable as
 Algebraic Effects
+
+
+\cite{plotkin-pretnar09}:
+
+Computations $T$ that Return Values in $X$: $T X$ for ``suitable''
+Monad (\S\ref{sec:monad}) $T$
+
+Subclass of Computational Effects (\S\ref{sec:computational_effect}):
+Effects that allow Representation by Operations and Equations.
+
+Equational Logic (\S\ref{sec:equational_logic})
+
+Computational Effects representable by an Algebraic Theory:
+Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
+Stream Redirection, Backtracking, Co-operative Multi-threading,
+Delimited Continuations, etc.
+
+Sets of Operations
+
+Operations give rise to Effects
+
+Arguments of an Operation represent possible Computations after an
+Occurrence (???) of an Effect
+
+Example Non-deterministic Boolean $\mathtt{or}$ Operator:
+\[
+  \mathtt{or}(\mathtt{return}\;true, \mathtt{return}\;false)
+  : F \mathrm{Bool}
+\]
+
+$F \sigma$: Type of Computations with Return Values of Type $\sigma$
+
+Computation Monad: Free-model Monad (???, Free Monad
+\S\ref{sec:free_monad}) of the Algebraic Theory; Equations of the
+Theory Generate the Free-model Functor (exactly the corresponding
+Monad for the Effect, Modulo the Forgetful Functor): used to Interpret
+the Type $F \sigma$.
+
+Operations Interpreted by the Model Structure
+
+Family of Functions Parametric in $X$ (Algebraic Operation),
+characterized by a Naturality Condition %FIXME
+
+Example Parametric Operation:
+\[
+  \mathtt{or}_X : T X^2 \rightarrow T X
+\]
+
+Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
+Algebraic Theory
+
+Algebraic Operations (\emph{Effect Constructors}) and Effect Handlers
+(\emph{Effect Destructors}) are Dual (cf. Filinski: Reflection and
+Reification) %FIXME
+
+Handling a Computation is Composing it with a Unique Homomorphism
+(defined Universally) with Domain is a Free Model of the Algebraic
+Theory of the Effects ``at hand'', and Range is the Programmer-defined
+Model (???) of the Algebraic Theory and Extends a Programmer-defined
+Map on Values.
+
+Instances of Handlers: Exception Handling, Stream Redirection,
+Renaming and Hiding, Timeout, Rollback, etc.
+
+\HandRight\; Note that some Handlers (e.g. for Backtracking) do not
+respect the Equations of an Algebraic Theory. \cite{pretnar15}
+
+\cite{plotkin-pretnar09}:
+
+\emph{Base Signature} $\Sigma_{\mathrm{base}}$:
+\begin{itemize}
+  \item Base Types $\beta_1, \beta_2, \ldots$
+  \item Subset of Base Types: Arity Types $\alpha_1, \alpha_2, \ldots$
+  \item Function Symbols $f : (\beta_1, \ldots, \beta_n) \rightarrow
+    \beta$
+  \item Relation Symbols $R : (\beta_1, \ldots, \beta_n)$
+\end{itemize}
+
+\emph{Base Terms} $v$: Variables $x,y,z,\ldots$, Function Symbols
+$f (v_1, \ldots, v_n)$
+
+\emph{Base Formulas} $\varphi$: Equations $v_1 = v_2$, Relation
+Symbols $R (v_1, \ldots, v_n)$, Logical Connectives, Quantifiers
+applied to Base Types
+
+\emph{Context} $\Gamma$: Variables Bound to Base Types
+
+A Context $\Gamma$ Types Base Terms as $\Gamma \vdash v:\beta$ and
+Base Formulas as $\Gamma \vdash \varphi : \mathbf{form}$
+
+\emph{Interpretation} of the Base Signature:
+\begin{itemize}
+  \item Sets $\llbracket \beta \rrbracket$ for each Base Type
+    (Countable when $\beta$ is an Arity Type)
+  \item Maps $\llbracket f \rrbracket : \llbracket \beta_1, \ldots,
+    \beta_n \rrbracket \rightarrow \llbracket \beta \rrbracket$ for
+    each Function Symbol
+  \item Subsets $\llbracket R \rrbracket \subseteq \llbracket \beta_1,
+    \ldots, \beta_n \rrbracket$ for each Relation Symbol
+  \item Maps $\llbracket v \rrbracket : \llbracket \Gamma \rrbracket
+    \rightarrow \llbracket \beta \rrbracket$ for Terms
+  \item Subsets $\llbracket \varphi \rrbracket \subseteq \llbracket
+    \Gamma \rrbracket$ for Formulas
+\end{itemize}
+where $\llbracket \beta_1, \ldots, \beta_n \rrbracket = \llbracket
+\beta_1 \rrbracket \times \cdots \times \llbracket \beta_n \rrbracket$
+
+\emph{Effect Signature} $\Sigma_{\mathrm{eff}}$:
+
 
 
 \cite{pretnar15}:

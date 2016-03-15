@@ -196,9 +196,9 @@ Simplex Category (\S\ref{sec:simplex_category})
 \item [Pos] all Posets and Monotonic Functions (Locally Small)
 \item [Cpo] all Complete Partial Orders and Continuous Functions
   (Domain Theory \S\ref{sec:domain_theory})
-\item [Finset] all Finite Sets and Functions (Full Subcategory of
+\item [FinSet] all Finite Sets and Functions (Full Subcategory of
   $\cat{Set}$)
-\item [Finord] ($\cat{\Delta}$) all Finite Ordinal Numbers and
+\item [FinOrd] ($\cat{\Delta}$) all Finite Ordinal Numbers and
   Order Preserving Maps (Skeleton of $\cat{FinSet}$, also called
   the \emph{Simplex Category} \S\ref{sec:simplex_category})
 \item [Mag] all Magmas and Homomorphisms of Operations
@@ -281,6 +281,63 @@ A definition of Categories can be given in terms of Hom-sets. %FIXME
 Internal Hom-set
 
 External Hom-set
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finite Category}\label{sec:finite_category}
+% --------------------------------------------------------------------
+
+A \emph{Finite Category} has a Finite number of Morphisms and Objects.
+An Infinite number of Objects implies an Infinite number of Morphisms
+because each Object has its own Identity Morphism.
+
+A Category such as:
+\[
+  A
+  \begin{matrix}
+  \xrightarrow{\;\;f\;\;}\\
+  \xleftarrow[\;\;g\;\;]{}
+  \end{matrix}
+  B
+\]
+induces an Infinite Category if $f$ and $g$ are not Isomorphisms
+(\S\ref{sec:isomorphism}) because new Morphisms exist wherever the
+Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
+\ldots$ and $fg, fgfg, fgfgfg, \ldots$. See \emph{Finitely Presented
+  Categories} (\S\ref{sec:finitely_presented}).
+
+\begin{itemize}
+  \item $\cat{0}$: Empty Category (\S\ref{sec:empty_category})
+    \[
+      \varnothing
+    \]
+
+    Initial Object in $\cat{Cat}$, Empty Groupoid
+    (\S\ref{sec:groupoid}), Empty Set
+
+  \item $\cat{1}$
+    \[
+      \bullet
+    \]
+
+    Terminal Object in $\cat{Cat}$
+
+  \item $\cat{2}$
+    \[
+      \bullet \longrightarrow \circ
+    \]
+
+    Generator for $\cat{Cat}$
+
+\end{itemize}
+
+
+
+\subsubsection{Empty Category}\label{sec:empty_category}
+
+\subsubsection{Locally Finite Category}
+\label{sec:locally_finite_category}
 
 
 
@@ -412,36 +469,6 @@ Reflection (Homoiconicity \S\ref{sec:homoiconicity})
 
 
 % --------------------------------------------------------------------
-\subsection{Finite Category}\label{sec:finite_category}
-% --------------------------------------------------------------------
-
-A \emph{Finite Category} has a Finite number of Morphisms and Objects.
-An Infinite number of Objects implies an Infinite number of Morphisms
-because each Object has its own Identity Morphism.
-
-A Category such as:
-\[
-  A
-  \begin{matrix}
-  \xrightarrow{\;\;f\;\;}\\
-  \xleftarrow[\;\;g\;\;]{}
-  \end{matrix}
-  B
-\]
-induces an Infinite Category if $f$ and $g$ are not Isomorphisms
-(\S\ref{sec:isomorphism}) because new Morphisms exist wherever the
-Codomain of one Morphism is the Domain of another: $gf, gfgf, gfgfgf,
-\ldots$ and $fg, fgfg, fgfgfg, \ldots$. See \emph{Finitely Presented
-  Categories} \S\ref{sec:finitely_presented}.
-
-
-
-\subsubsection{Locally Finite Category}
-\label{sec:locally_finite_category}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Discrete Category}\label{sec:discrete_category}
 % --------------------------------------------------------------------
 
@@ -483,9 +510,10 @@ and Edges under Concatenation of Paths.
 
 For a Graph with a single Vertex, the Free Category is the Free Monoid
 on the Edges of the Graph. A Graph with no Edges generates a Discrete
-Category (\S\ref{sec:category}). The Free Category on a Graph with
-two Vertices and one Edge between them is the Finite Category
-$\cat{2}$.
+Category (\S\ref{sec:discrete_category}). The Free Category on a Graph
+with two Vertices and one Edge between them is the Finite Category
+(\S\ref{sec:finite_category}) $\cat{2}$. The Category $\cat{2}$ is a
+Generator for the Category of all Categories.
 
 Any Directed Acyclic Graph generates a Partial Order as its Free
 Category.
@@ -1005,6 +1033,40 @@ Subcategory (\S\ref{sec:full_subcategory}) of $\cat{C}$
 
 $\Delta_X : \cat{C} \rightarrow \cat{D}$
 
+Maps Every Object in $\cat{C}_0$ to $X \in \cat{D}_0$ and Every
+Morphism in $\cat{C}_1$ to $1_X \in \cat{D}_0$.
+
+Functor which Factors through $\cat{1}$:
+\[
+  \Delta_X = \cat{C} \xrightarrow{\;\;!\;\;} \cat{1}
+    \xrightarrow{[X]} \cat{D}
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Covariant Functor} \label{sec:covariant_functor}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Contravariant Functor} \label{sec:contravariant_functor}
+% --------------------------------------------------------------------
+
+A \emph{Contravariant Functor} is a Functor from a Dual Category
+(\S\ref{sec:opposite_category}) to another Category, e.g. $F :
+\cat{C^{op}} \rightarrow \cat{D}$, but expressed in terms of the
+original Category:
+\[
+  \overline{F} : \cat{C} \rightarrow \cat{D}
+\]
+
+The Dual (\S\ref{sec:abstract_category}) of a Contravariant
+Functor, a \emph{Covariant Functor}.
+
+Positive Position ($X \rightarrow A$)
+
+Negative Position ($A \rightarrow X$)
+
 
 
 % --------------------------------------------------------------------
@@ -1116,29 +1178,8 @@ nCatLab:
 
 
 % --------------------------------------------------------------------
-\subsection{Covariant Functor} \label{sec:covariant_functor}
+\subsection{Cofree Functor}\label{sec:cofree_functor}
 % --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Contravariant Functor} \label{sec:contravariant_functor}
-% --------------------------------------------------------------------
-
-A \emph{Contravariant Functor} is a Functor from a Dual Category
-(\S\ref{sec:opposite_category}) to another Category, e.g. $F :
-\cat{C^{op}} \rightarrow \cat{D}$, but expressed in terms of the
-original Category:
-\[
-  \overline{F} : \cat{C} \rightarrow \cat{D}
-\]
-
-The Dual (\S\ref{sec:abstract_category}) of a Contravariant
-Functor, a \emph{Covariant Functor}.
-
-Positive Position ($X \rightarrow A$)
-
-Negative Position ($A \rightarrow X$)
-
-
 
 % --------------------------------------------------------------------
 \subsection{Bivariant Functor} \label{sec:bivariant_functor}
@@ -2979,11 +3020,28 @@ Dependent Sum Type (\S\ref{sec:sigma_type})
 \subsection{Kan Extension}\label{sec:kan_extension}
 % --------------------------------------------------------------------
 
-Functor $F : \cat{C} \rightarrow {C}'$
+Wiki: Generalizes the notion of Extending a Function defined on a
+Subset to a Function defined on the whole Set.
+
+Categories $\cat{A}, \cat{B}, \cat{C}$
+
+Fuctors $X : \cat{A} \rightarrow \cat{C}, F : \cat{A} \rightarrow
+\cat{B}$
+
+Right Kan Extension $Ran$ of $X$ along $F$ is a Functor $R : \cat{B}
+\rightarrow \cat{C}$ and a Natural Transformation $\eta : RF
+\Rightarrow X$ and Couniversal such that for any Functor $M : \cat{B}
+\rightarrow \cat{C}$ and Natural Transformation $\mu : MF \rightarrow
+X$ there is a Unique Natural Transformation $\delta : M \rightarrow R$
+such that:
+\[
+  \mu = \eta \circ \delta_F
+\]
+where $\delta_F$ is the Natural Transformation with $\delta_F(a) =
+\delta (F a) : M F(a) \rightarrow RF(a)$ for any Object $a \in
+\cat{A}_0$. The Functor $R$ may also be written $\mathrm{Ran}_F X$.
 
 Left Kan Extension $Lan$
-
-Right Kan Extension $Ran$
 
 Adjoint (\S\ref{sec:adjoint}) as Kan Extension
 
@@ -3067,7 +3125,8 @@ Relation between (Inverse) Hom-set and Unit definitions:
 \]
 
 Free Functors (\S\ref{sec:free_functor}) are Left Adjoint to Forgetful
-Functors (\S\ref{sec:forgetful_functor})
+Functors (\S\ref{sec:forgetful_functor}): Free Functor $\dashv$
+Forgetful Functor
 
 In a Cartesian Closed Category (\S\ref{sec:cartesian_closed}), the
 following Functors are Adjoints:
@@ -3277,6 +3336,16 @@ $C \in \cat{C}_0$ the following are equivalent:
     one Algebra Structure on $C$ given by $\xi = (\eta C)^{-1} : T C
     \rightarrow C$ %FIXME
 \end{enumerate}
+
+
+
+\subsubsection{Finitary Monad}\label{sec:finitary_monad}
+
+or \emph{Algebraic Monad}
+
+Finitary Lawvere Theory (\S\ref{sec:lawvere_theory})
+
+Algebraic Theory (\S\ref{sec:algebraic_theory})
 
 
 
@@ -4147,6 +4216,8 @@ Internal Logic: Coherent Logic (\S\ref{sec:coherent_logic})
 
 
 
+\subsubsection{Boolean Category}\label{sec:boolean_category}
+
 \subsubsection{Geometric Category}\label{sec:geometric_category}
 
 \emph{Infinitary Coherent Category}
@@ -4419,6 +4490,16 @@ Internal Hom-functor (\S\ref{sec:internal_homfunctor})
 \section{Higher Category Theory}\label{sec:higher_category}
 % ====================================================================
 
+\begin{tabular}{l l}
+  $(-2)$-category   & ($\top$, Trivial) \\
+  $(-1)$-category   & (Truth Value) \\
+  $0$-category      & (Set) \\
+  $1$-category      & (Category) \\
+  $2$-category      & \\
+\end{tabular}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Cell}\label{sec:cell}
 % --------------------------------------------------------------------
@@ -4645,6 +4726,20 @@ Objects.
 
 Homotopy $1$-type (\S\ref{sec:homotopy_1type})
 
+The Empty Groupoid is the Empty Category (\S\ref{sec:empty_category})
+
+\begin{tabular}{l l}
+  $(-2)$-groupoid & ($\top$, Trivial) \\
+
+  $(-1)$-groupoid & (Truth Value) \\
+
+  $0$-groupoid    & (Set) \\
+
+  $1$-groupoid    & (Groupoid) \\
+
+  $2$-groupoid    & \\
+\end{tabular}
+
 
 
 \subsubsection{Pre-groupoid}\label{sec:pre_groupoid}
@@ -4799,13 +4894,50 @@ Opetopic Type Theory (\S\ref{sec:opetopic_typetheory})
 
 
 
+\subsubsection{$\omega$-nerve}\label{sec:omega_nerve}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Truncation}\label{sec:truncation}
+% --------------------------------------------------------------------
+
+\subsubsection{Truncated Object}\label{sec:truncated_object}
+
+
+
 % ====================================================================
 \section{Topos Theory}\label{sec:topos_theory}
 % ====================================================================
 
 Abstract Sheaf (\S\ref{sec:sheaf}) Theory
 
+Proofs:
+\begin{itemize}
+  \item Proof is Finitist and Constructive $\Rightarrow$ holds in any
+    Topos
+  \item Proof is Constructive $\Rightarrow$ holds in any Topos with a
+    Natural Numbers Object (???)
+  \item Proof $\Rightarrow$ holds in any Boolean Topos
+    (\S\ref{sec:boolean_topos})
+\end{itemize}
 
+$\Pi$-pretopos
+
+Heyting Pretopos
+
+Category of Sheaves (\S\ref{sec:sheave}) on a Category $\cat{C}$;
+Grothendieck Topos (\S\ref{sec:grothendieck_topos})
+
+$\cat{Set}$; Grothendieck Topos: Category of Sheaves on the Point
+
+$\cat{FinSet}$; Elementary Topos (\S\ref{sec:elementary_topos})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Pretopos}\label{sec:pretopos}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Grothendieck Topology}\label{sec:grothendieck_topology}
@@ -4900,6 +5032,12 @@ Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
 
 
 
+\subsubsection{Boolean Topos}\label{sec:boolean_topos}
+
+Boolean Category (\S\ref{sec:boolean_category})
+
+
+
 \subsubsection{Effective Topos}\label{sec:effective_topos}
 
 Effectivity (\S\ref{sec:effective_method})
@@ -4956,6 +5094,14 @@ Group Homomorphisms. A Ring (\S\ref{sec:ring}) is a Monoid Object
 (\S\ref{sec:monoid_object}) in $\cat{Ab}$
 
 Homology Theory (\S\ref{sec:homology_theory})
+
+Homological Algebra (\S\ref{sec:homological_algebra})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Grothendieck Category}\label{sec:grothendieck_category}
+% --------------------------------------------------------------------
 
 
 
