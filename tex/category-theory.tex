@@ -109,6 +109,18 @@ Composites.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Vertical Categorification}
+\label{sec:vertical_categorification}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Horizontal Categorification}
+\label{sec:horizontal_categorification}
+% --------------------------------------------------------------------
+
+
+
 % ====================================================================
 \section{Category}\label{sec:category}
 % ====================================================================
@@ -244,10 +256,6 @@ Simplex Category (\S\ref{sec:simplex_category})
 Database Schema (\S\ref{sec:database_schema}): Tables and Foreign Keys
 
 
-
-% --------------------------------------------------------------------
-\subsection{Commutative Diagram}\label{sec:commutative_diagram}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Hom-set}\label{sec:hom_set}
@@ -525,6 +533,13 @@ Category.
 % ====================================================================
 
 % --------------------------------------------------------------------
+\subsection{Identity}\label{sec:identity_morphism}
+% --------------------------------------------------------------------
+
+Objects (\S\ref{sec:category_object})
+
+
+% --------------------------------------------------------------------
 \subsection{Monomorphism}\label{sec:monomorphism}
 % --------------------------------------------------------------------
 
@@ -794,6 +809,11 @@ Co-constant.
 \section{Object}\label{sec:category_object}
 % ====================================================================
 
+An Object may be equated with its Identity Morphism
+(\S\ref{sec:identity_morphism})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Subobject}\label{sec:subobject}
 % --------------------------------------------------------------------
@@ -914,9 +934,14 @@ Identity Functor is an example of an \emph{Endofunctor}
 (\S\ref{sec:endofunctor}) which is a Functor from a Category to
 itself.
 
-Note that in constructions (\S\ref{sec:category_construction}) where a
-Functor appears, if that Functor is an Identity Functor, the Category
-instead may be substituted.
+A \emph{Construction} is just a Functor (\S\ref{sec:functor}).
+
+A Relation between Constructions is just a Natural Transformation
+(\S\ref{sec:natural_transformation}).
+
+\HandRight\; Note that in Constructions where a Functor appears, if
+that Functor is an Identity Functor, the Category instead may be
+substituted.
 
 Because Functors preserve Identities, they also perserve Split
 Epimorphisms and Monomorphisms (\S\ref{sec:split_epimorphism},
@@ -1405,19 +1430,8 @@ Ex.: Hughes Arrow (\S\ref{sec:hughes_arrow}) $\ggg : A (X,P) \times A
 
 
 % ====================================================================
-\section{Constructions}\label{sec:category_construction}
+\section{Opposite Category}\label{sec:opposite_category}
 % ====================================================================
-
-A \emph{Construction} is just a Functor (\S\ref{sec:functor}).
-
-A Relation between Constructions is just a Natural Transformation
-(\S\ref{sec:natural_transformation}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Opposite Category}\label{sec:opposite_category}
-% --------------------------------------------------------------------
 
 The \emph{Opposite} or \emph{Dual} (\S\ref{sec:abstract_category})
 of a Category $\cat{C}$ is denoted $\cat{C^{op}}$ or
@@ -1435,6 +1449,10 @@ expressed:
 A Terminal Object in $\cat{C}$ is an Initial Object in
 $\cat{C^{op}}$ and vice-versa.
 
+The Functor $(-)^\cat{op} : \cat{Cat} \rightarrow \cat{Cat}$
+is an Involution (\S\ref{sec:involution}) but is Contravariant so it
+does not define any Isomorphisms.
+
 In a Dual Category the following are all Duals of eachother:
 \begin{itemize}
   \item Monomorphisms and Epimorphisms (\S\ref{sec:morphism})
@@ -1442,44 +1460,15 @@ In a Dual Category the following are all Duals of eachother:
   \item Initial and Terminal Objects (\S\ref{sec:universal_property})
 \end{itemize}
 
-The Functor $(-)^\cat{op} : \cat{Cat} \rightarrow \cat{Cat}$
-is an Involution (\S\ref{sec:involution}) but is Contravariant so it
-does not define any Isomorphisms.
 
 
+% ====================================================================
+\section{Category Product}\label{sec:category_product}
+% ====================================================================
 
-% --------------------------------------------------------------------
-\subsection{Concrete Category}\label{sec:concrete_category}
-% --------------------------------------------------------------------
-
-A \emph{Concrete Category} is pair, $(\cat{C},U)$, where $\cat{C}$ is
-a Category and $U$ is a Faithful Functor
-(\S\ref{sec:faithful_functor}) $U : \cat{C} \rightarrow \cat{Set}$.
-
-Representable Functor (\S\ref{sec:representable_functor})
-
-Sets with Structure (\S\ref{sec:abstract_structure})
-
-Categories with Interpretations as Concrete Categories:
-\begin{itemize}
-  \item $\cat{Set}$
-  \item $\cat{Top}$
-  \item $\cat{Grp}$
-\end{itemize}
-
-Not \emph{Concretizable}:
-\begin{itemize}
-  \item $\cat{Toph}$
-\end{itemize}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Category Product}\label{sec:category_product}
-% --------------------------------------------------------------------
-
-A \emph{Product}, $\times$, is a construction (or more specifically a
-Functor) on Categories or Functors:
+A \emph{Product}, $\times$, is a Construction (i.e. a Functor,
+specifically a Bifunctor \S\ref{sec:bifunctor}) on Categories (or
+Functors):
 \[
   \times : \cat{Cat} \times \cat{Cat} \rightarrow \cat{Cat}
 \]
@@ -1488,7 +1477,9 @@ Product (\S\ref{sec:product})
 
 
 
-\subsubsection{Product Category}\label{sec:product_category}
+% --------------------------------------------------------------------
+\subsection{Product Category}\label{sec:product_category}
+% --------------------------------------------------------------------
 
 A \emph{Product Category} can be constructed from two Categories,
 $\cat{C}$ and $\cat{D}$, and is denoted:
@@ -1509,8 +1500,8 @@ $\cat{Cat}$.
 
 
 
-\paragraph{Projection}\label{sec:projection_functor}
-\hfill \\
+\subsubsection{Projection}\label{sec:projection_functor}
+
 A Product Category has a pair of \emph{Projections} which are Functors
 from the Product Category to the original Categories:
 \[
@@ -1540,7 +1531,9 @@ giving:
 
 
 
-\subsubsection{Functor Product}\label{sec:functor_product}
+% --------------------------------------------------------------------
+\subsection{Functor Product}\label{sec:functor_product}
+% --------------------------------------------------------------------
 
 Give two Functors, $U : \cat{C} \rightarrow \cat{C'}$ and $V :
 \cat{D} \rightarrow \cat{D'}$, a \emph{Functor Product} is
@@ -1561,54 +1554,100 @@ and $(U \times V)$ is the unique Functor such that:
 
 
 
+% ====================================================================
+\section{Quotient Category}\label{sec:quotient_category}
+% ====================================================================
+
+%FIXME this probably needs a rewrite
+
+The \emph{Quotient Category} is defined for a Category $\cat{C}$
+with Congruence Relation $\sim$ as $\cat{C}/\sim$:
+\[
+  (\cat{C}/\sim)_0 = \cat{C_0}
+\]\[
+  (\cat{C}/\sim)_1 = (\cat{C_1})/\sim
+\]
+where Morphisms are of the form $[f]$ where $f \in \cat{C_1}$.
+
+For a Category $\cat{C}$ with Graph $G$ and relations $R$,
+$\cat{C}/R$ is called the Category with \emph{Generators} $G$ and
+\emph{Relations} $R$.
+
+Homotopy Category (\S\ref{sec:homotopy_category})
+
+
+
 % --------------------------------------------------------------------
-\subsection{Functor Category}\label{sec:functor_category}
+\subsection{Congruence Category}\label{sec:congruence_category}
 % --------------------------------------------------------------------
 
-Given two Categories, $\cat{C}$ and $\cat{D}$, a \emph{Functor
-  Category} is a Category with Objects as Functors $T : \cat{C}
-\rightarrow \cat{D}$ and Morphisms as Natural Transformations
-between Functors:
+\emph{Congruence} on a Category is an Equivalence Relation on
+Morphisms such that for two Morphisms $f,g \in \cat{C_1}$, $f \sim
+g$ Implies:
+\begin{itemize}
+  \item $dom(f) = dom(g)$
+  \item $cod(f) = cod(g)$
+  \item $\forall a,b \in \cat{C_1}, bfa \sim bga$
+\end{itemize}
+Such a Congruence defines a \emph{Congruence Category}
+$\cat{C^{\sim}}$:
 \[
-  \cat{D}^{\cat{C}} = Fun(\cat{C},\cat{D})
+  (\cat{C^{\sim}})_0 = \cat{C}_0
+\]\[
+  (\cat{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
+\]\[
+  \tilde{1_\cat{C}} = \langle 1_\cat{C}, 1_\cat{C} \rangle
+\]\[
+  \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
 \]
-A Hom-set in a Functor Category may be denoted:
+The Categorical Congruence $~$ on a Group $G$ is a Normal Subgroup $N
+\subseteq G$ and the Quotient Category $G/~$ and the Quotient Group
+$G/N$ coincide. \cite{awodey06}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Kernel Category}\label{sec:kernel_category}
+% --------------------------------------------------------------------
+
+Given a Functor $F : \cat{C} \rightarrow \cat{D}$, a Congruence
+$\sim_F$ on $\cat{C}$ is defined as:
 \[
-  Nat(S,T) = \cat{D}^{\cat{C}}(S,T) =
-    \{ \tau | \tau : S \rightarrow T \}
+  f \sim_F g \leftrightarrow dom(f) = dom(g) \wedge cod(f) = cod(g)
+  \wedge F(f) = F(g)
 \]
-With Evaluation Functor $\eta : \cat{D^C} \times \cat{C}
-\rightarrow \cat{D}$, $\cat{D^C}$ is an Exponential
-(\S\ref{sec:category_exponential}) in $\cat{Cat}$ and
-$\cat{Cat}$ is a Cartesian Closed Category
-(\S\ref{sec:cartesian_closed}).
-
-The Functor Category $\cat{C^2}$ is Isomorphic to Arrow Categories
-(\S\ref{sec:arrow_category}) $\cat{C}^\rightarrow$.
-
-The Functor Category $\cat{C}^\mathrm{2}$ from the Discrete
-Category $\mathrm{2}$ consisting of two Objects and no Morphisms other
-than Identities is equivalent to the Product Category $\cat{C}
-\times \cat{C}$.
-
-For any Discrete Category $I$:
+The \emph{Kernel Category} of $F$ is then defined as the Congruence
+Category of $\sim_F$
 \[
-  \cat{C}^I \cong \prod_{i \in I} \cat{C}
+  ker(F) = C^{\sim_F}
 \]
 
-The Functor Category $\cat{Set}^\downdownarrows$ where
-$\downdownarrows$ is the Category with two Objects and two Morphisms
-between them ($* \rightrightarrows \star$) is equivalent to the
-Category of Graphs and Graph Homomorphisms $\cat{Graph}$. Cf.
-Simplicial Sets (\S\ref{sec:simplicial_set}).
-
-A Functor Category into the Category $\cat{Set}$ is called a
-\emph{Category Diagram} (\S\ref{sec:category_diagram}).
-%FIXME terminology doesn't match
 
 
+% --------------------------------------------------------------------
+\subsection{Finitely Presented Category}
+\label{sec:finitely_presented}
+% --------------------------------------------------------------------
 
-\subsubsection{Arrow Category}\label{sec:arrow_category}
+% FIXME free category notation?
+A \emph{Finitely Presented Category} is given by taking the Quotient
+Category of a Free Category (\S\ref{sec:free_category})
+$\cat{C}(G)$ with the Congruence $\sim_\Sigma$:
+\[
+  \cat{C}(G) / \sim_{\Sigma} = \cat{C}(G,\Sigma)
+\]
+where $\Sigma$ is the finite Set of Relations:
+\[
+  (g_1 \circ \ldots \circ g_n) = (g'_1 \circ \ldots \circ g'_m)
+\]
+for all $g_i \in G$ such that $dom(g_n) = dom(g'_m)$ and $cod(g_1) =
+cod(g'_1)$.
+
+
+
+% ====================================================================
+\section{Arrow Category}\label{sec:arrow_category}
+% ====================================================================
 
 An \emph{Arrow Category} of a Category $\cat{C}$, written
 $\cat{C^{\rightarrow}}$, has for its Objects the Morphisms of
@@ -1625,38 +1664,19 @@ There are two Functors defined on an Arrow Category:
   \xrightarrow{\cat{cod}} \cat{D}
 \]
 
-
-
-\subsubsection{Set-valued Functor Category}\label{sec:setvalued_functor}
-
-A \emph{Set-valued Functor Category} (or \emph{Category of Diagrams})
-is a Functor Category from a Category into the Category
-$\cat{Set}$.
-
-A Presheaf (\S\ref{sec:presheaf}) is an example of a Set-valued
-(Contravariant) Functor Category from an Opposite Category into
-$\cat{Set}$.
+Equivalent to the Comma Category (\S\ref{sec:comma_category})
+$(1_\cat{C}/1_\cat{C})$
 
 
 
-\paragraph{Powerset Functor}\label{sec:powerset_functor}
-\hfill \\
+% ====================================================================
+\section{Comma Category}\label{sec:comma_category}
+% ====================================================================
 
-$\pow : \cat{Set} \rightarrow \cat{Set}$
-
-Functions $f : X \rightarrow Y$ to the Image Mapping $img(f) :
-\pow(X) \rightarrow \pow(Y)$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Comma Category}\label{sec:comma_category}
-% --------------------------------------------------------------------
-
-A \emph{Comma Category} is formed from a pair of Functors
-(\S\ref{sec:functor}) that share a common Codomain. For three
-Categories, $\cat{A}$, $\cat{B}$, and $\cat{C}$ and Functors
-$S$ (\emph{Source}) and $T$ (\emph{Target}) in the following relation:
+A \emph{Comma Category} is formed from a pair of Functors that share a
+common Codomain. For three Categories, $\cat{A}$, $\cat{B}$, and
+$\cat{C}$ and Functors $S$ (\emph{Source}) and $T$ (\emph{Target}) in
+the following relation:
 \[
   \cat{A} \xrightarrow{\;\; S\;\;} \cat{C} \xleftarrow{\;\;
     T\;\;} \cat{B}
@@ -1690,8 +1710,9 @@ The case where $S = T = 1_\cat{C}$, $(\cat{C} \downarrow
 $\cat{C}^\cat{2}$.
 
 
-
-\subsubsection{Slice Category}\label{sec:slice_category}
+% --------------------------------------------------------------------
+\subsection{Slice Category}\label{sec:slice_category}
+% --------------------------------------------------------------------
 
 A \emph{Slice Category} $\cat{C}/C$ of a Category $\cat{C}$ with
 an Object $C$ has as Objects the Morphisms with Codomain $C$ and as
@@ -1707,112 +1728,232 @@ the Morphism in the Slice Category between the two is $g$ such that
 
 
 
-\subsubsection{Coslice Category}\label{sec:coslice_category}
-
-
-
 % --------------------------------------------------------------------
-\subsection{Quotient Category}\label{sec:quotient_category}
+\subsection{Coslice Category}\label{sec:coslice_category}
 % --------------------------------------------------------------------
 
-%FIXME this probably needs a rewrite
 
-The \emph{Quotient Category} is defined for a Category $\cat{C}$
-with Congruence Relation $\sim$ as $\cat{C}/\sim$:
+
+% ====================================================================
+\section{$F$-algebra}\label{sec:f_algebra}
+% ====================================================================
+
+\emph{$F$-algebra}
+
+\emph{$F$-coalgebra} (\S\ref{sec:f_coalgebra})
+
+See also:
+
+$H$-algebra (Endofunctors \S\ref{sec:h_algebra}) \\
+$S$-algebra (Pointed Endofunctors \S\ref{sec:s_algebra}) \\
+$T$-algebra (Monads \S\ref{sec:t_algebra}) \\
+$A$-algebra (Hughes Arrows \S\ref{sec:a_algebra})
+
+An \emph{$F$-algebra} for an Endofunctor $F : \cat{C} \rightarrow
+\cat{C}$ is an Object $A \in \cat{C}_0$ with a Morphism $\alpha : F(A)
+\rightarrow A$ \cite{corfield08}
+
+Construction (Data Structure \S\ref{sec:data_structure})
+
+$F$-homomorphism $z$:
 \[
-  (\cat{C}/\sim)_0 = \cat{C_0}
-\]\[
-  (\cat{C}/\sim)_1 = (\cat{C_1})/\sim
-\]
-where Morphisms are of the form $[f]$ where $f \in \cat{C_1}$.
-
-For a Category $\cat{C}$ with Graph $G$ and relations $R$,
-$\cat{C}/R$ is called the Category with \emph{Generators} $G$ and
-\emph{Relations} $R$.
-
-Homotopy Category (\S\ref{sec:homotopy_category})
-
-
-
-\subsubsection{Congruence Category}\label{sec:congruence_category}
-
-\emph{Congruence} on a Category is an Equivalence Relation on
-Morphisms such that for two Morphisms $f,g \in \cat{C_1}$, $f \sim
-g$ Implies:
-\begin{itemize}
-  \item $dom(f) = dom(g)$
-  \item $cod(f) = cod(g)$
-  \item $\forall a,b \in \cat{C_1}, bfa \sim bga$
-\end{itemize}
-Such a Congruence defines a \emph{Congruence Category}
-$\cat{C^{\sim}}$:
-\[
-  (\cat{C^{\sim}})_0 = \cat{C}_0
-\]\[
-  (\cat{C^{\sim}})_1 = \{\langle f,g \rangle | f \sim g\}
-\]\[
-  \tilde{1_\cat{C}} = \langle 1_\cat{C}, 1_\cat{C} \rangle
-\]\[
-  \langle f',g' \rangle \circ \langle f,g \rangle = \langle f'f,g'g \rangle
-\]
-The Categorical Congruence $~$ on a Group $G$ is a Normal Subgroup $N
-\subseteq G$ and the Quotient Category $G/~$ and the Quotient Group
-$G/N$ coincide. \cite{awodey06}
-
-
-
-\subsubsection{Kernel Category}\label{sec:kernel_category}
-
-Given a Functor $F : \cat{C} \rightarrow \cat{D}$, a Congruence
-$\sim_F$ on $\cat{C}$ is defined as:
-\[
-  f \sim_F g \leftrightarrow dom(f) = dom(g) \wedge cod(f) = cod(g)
-  \wedge F(f) = F(g)
-\]
-The \emph{Kernel Category} of $F$ is then defined as the Congruence
-Category of $\sim_F$
-\[
-  ker(F) = C^{\sim_F}
+  g \circ F z = z \circ f
 \]
 
+If a Functor has an Initial Algebra (\S\ref{sec:initial_algebra}, i.e.
+Least Fixed-point) or a Final Coalgebra
+(\S\ref{sec:terminal_coalgebra}, i.e. Greatest Fixed-point) then it is
+Isomorphic to its Image under the Functor. \cite{corfield08}
+
+Catamorphism (\S\ref{sec:catamorphism}): unique Homomorphism from the
+Initial Algebra to any orther $F$-algebra
 
 
-\subsubsection{Finitely Presented Category}
-\label{sec:finitely_presented}
 
-% FIXME free category notation?
-A \emph{Finitely Presented Category} is given by taking the Quotient
-Category of a Free Category (\S\ref{sec:free_category})
-$\cat{C}(G)$ with the Congruence $\sim_\Sigma$:
+% --------------------------------------------------------------------
+\subsection{Initial Algebra}\label{sec:initial_algebra}
+% --------------------------------------------------------------------
+
+In $\cat{Set}$, built as ``Term Models'' \cite{corfield08} %FIXME
+
+Initial Algebras generalize Least Fixed-points
+(\S\ref{sec:fixed_point}) \cite{rutten00}
+
+
+
+% --------------------------------------------------------------------
+\subsection{$F$-coalgebra}\label{sec:f_coalgebra}
+% --------------------------------------------------------------------
+
+An \emph{$F$-coalgebra} for an Endofunctor $F : \cat{C} \rightarrow
+\cat{C}$ is an Object $A \in \cat{C}_0$ with a Morphism $\beta : A
+\rightarrow F(A)$ \cite{corfield08}
+
+Deconstruction (Observation, Modification)
+
+
+
+\subsubsection{Terminal Coalgebra}\label{sec:terminal_coalgebra}
+
+\emph{Final Coalgebra}
+
+Observations only
+
+Terminal Coalgebras generalize Greatest Fixed-points
+(\S\ref{sec:fixed_point}) \cite{rutten00}
+
+Set of Streams $A^\omega$ (Infinite Sequences of Elements of $A$, map
+$A^\omega \rightarrow A \times A^\omega$, $A^\omega$ is a Coalgebra
+for Functor $G : X \rightarrow A \times X$ and is the Terminal
+$G$-coalgebra
+
+
+
+% --------------------------------------------------------------------
+\subsection{Data Structure}\label{sec:data_structure}
+% --------------------------------------------------------------------
+
+(also Data Structure as Folds of Church Encodings) %??? FIXME
+
+
+
+\subsubsection{Ordered Tree}\label{sec:ordered_tree}
+
+\paragraph{Trie}\label{sec:trie}
+
+\paragraph{Prefix Tree}\label{sec:prefix_tree}
+
+\paragraph{Suffix Tree}\label{sec:suffix_tree}
+
+
+
+\subsubsection{Fingertree}\label{sec:fingertree}
+
+
+
+% ====================================================================
+\section{Bifunctor}\label{sec:bifunctor}
+% ====================================================================
+
+A \emph{Bifunctor} is a Functor of two Variables from a Product
+Category to an arbitrary Category:
 \[
-  \cat{C}(G) / \sim_{\Sigma} = \cat{C}(G,\Sigma)
+  B : \cat{C} \times \cat{D} \rightarrow \cat{A}
 \]
-where $\Sigma$ is the finite Set of Relations:
+
+A \emph{Multifunctor} is a generalized to $n$ or more Variables.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Product Functor}\label{sec:product_functor}
+% --------------------------------------------------------------------
+
 \[
-  (g_1 \circ \ldots \circ g_n) = (g'_1 \circ \ldots \circ g'_m)
+  \times : \cat{C} \times \cat{C} \rightarrow \cat{C}
 \]
-for all $g_i \in G$ such that $dom(g_n) = dom(g'_m)$ and $cod(g_1) =
-cod(g'_1)$.
+
+Category Product (\S\ref{sec:category_product})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Coherence Condition}\label{sec:coherence_condition}
+\subsection{Coproduct Functor}\label{sec:coproduct_functor}
 % --------------------------------------------------------------------
 
-%FIXME this section should probably be relocated
+\[
+  + : \cat{C} \times \cat{C} \rightarrow \cat{C}
+\]
 
 
 
 % --------------------------------------------------------------------
-\subsection{Vertical Categorification}
-\label{sec:vertical_categorification}
+\subsection{Diagonal Functor}\label{sec:diagonal_functor}
 % --------------------------------------------------------------------
 
+For Functor Category (\S\ref{sec:functor_category})
+$\cat{C}^\cat{J}$ with Small Index Category $\cat{J}$, a
+\emph{Diagonal Functor} $\Delta : \cat{C} \rightarrow
+\cat{C}^\cat{J}$ assigns to each Object $A$ of $\cat{C}$ the
+Constant Functor $\Delta_A \in \cat{C}^\cat{J}$ with fixed $A$
+and to each Morphism $f : A \rightarrow B$ of $\cat{C}$ the Natural
+Transformation $\eta$ in $\cat{C}^\cat{J}$ given by $\eta_j =
+f$.
+
+If $\cat{J}$ is a Discrete Category with two Objects, the Diagonal
+Functor is $\cat{C} \rightarrow \cat{C} \times \cat{C}$.
+
+The Limit (\S\ref{sec:limit}) of a Functor $F : \cat{J} \rightarrow
+\cat{C}$ is a Universal Morphism (\S\ref{sec:universal_morphism})
+from the Diagonal Functor $\Delta$ to $F$.
+
+If $\cat{C}$ is Complete (\S\ref{sec:complete_category}) then every
+Functor from $\cat{J}$ to $\cat{C}$ has a Limit and the
+operation of taking Limits is a Functor from $\cat{C}^\cat{J}$
+to $\cat{C}$.
+
+The Limit Functor is the Right-adjoint (\S\ref{sec:adjoint_functor})
+of the Diagonal Functor.
+
+A Colimit (\S\ref{sec:colimit}) is a Universal Morphism $F \rightarrow
+\Delta$.
+
+If $\cat{C}$ is Complete the Colimit Functor exists and is the
+Left-adjoint of the Diagonal Functor.
+
+As an example, the Diagonal Functor $\cat{C} \rightarrow \cat{C}
+\times \cat{C}$ is the Left-adjoint of the Binary Product Functor
+(\S\ref{sec:product_functor}) and the Right-adjoint of the Binary
+Coproduct Functor (\S\ref{sec:coproduct_functor}).
+
+
+
 % --------------------------------------------------------------------
-\subsection{Horizontal Categorification}
-\label{sec:horizontal_categorification}
+\subsection{Profunctor}\label{sec:profunctor}
 % --------------------------------------------------------------------
+
+A \emph{Profunctor} (or \emph{Distributor}) is a Bifunctor that is
+Contravariant in the first argument and Covariant in the second.
+
+Generalization of Functors, Categorical generalization of Bimodules
+(\S\ref{sec:bimodule})
+
+$P : \cat{C} \nrightarrow \cat{D}$
+
+$H_P : \cat{D}^{op} \times \cat{C} \rightarrow \cat{Set}$
+
+Set of Heteromorphisms (\S\ref{sec:heteromorphism})
+
+Identity Profunctor $Id : \cat{C} \nrightarrow \cat{C}$ is given by
+the Hom-functor $\cat{C}(-,-) : \cat{C}^{op} \times \cat{C}
+\rightarrow \cat{Set}$
+
+Composition of Profunctors $P : \cat{C} \nrightarrow \cat{D}$, $Q :
+\cat{D} \nrightarrow \cat{E}$:
+\[
+  Q P = \int^{d \in \cat{D}} P(d,-) \otimes Q(-,d)
+\]
+% FIXME kan extensions?
+
+Every Functor $F : \cat{C} \rightarrow \cat{D}$ induces two
+Profunctors $D(1,F) : \cat{C} \nrightarrow \cat{D}$ and $D(F,1)
+: \cat{D} \nrightarrow \cat{C}$ where $D(1,F)(d,c) = D(d,f(c))$
+and $D(f,1)(c,d) = D(f(c),d)$.
+
+Functor $F : \cat{C} \rightarrow \cat{D}$ gives a Profunctor $P_F :
+\cat{C} \nrightarrow \cat{D}$ by Post-composition with the Yoneda
+Functor (\S\ref{sec:yoneda_embedding}):
+\[
+  P_F = Y_\cat{D} \circ F
+\]
+
+
+
+\subsubsection{Profunctor Bicategory}\label{sec:profunctor_bicategory}
+
+Bicategory (\S\ref{sec:bicategory}) of Profunctors
+
+Coend (\S\ref{sec:coend})
 
 
 
@@ -1987,6 +2128,32 @@ the Evaluation Functor $ev_C : \cat{Set^{C^{op}}} \rightarrow
 
 
 % ====================================================================
+\section{Concrete Category}\label{sec:concrete_category}
+% ====================================================================
+
+A \emph{Concrete Category} is pair, $(\cat{C},U)$, where $\cat{C}$ is
+a Category and $U$ is a Faithful Functor
+(\S\ref{sec:faithful_functor}) $U : \cat{C} \rightarrow \cat{Set}$.
+
+Representable Functor (\S\ref{sec:representable_functor})
+
+Sets with Structure (\S\ref{sec:abstract_structure})
+
+Categories with Interpretations as Concrete Categories:
+\begin{itemize}
+  \item $\cat{Set}$
+  \item $\cat{Top}$
+  \item $\cat{Grp}$
+\end{itemize}
+
+Not \emph{Concretizable}:
+\begin{itemize}
+  \item $\cat{Toph}$
+\end{itemize}
+
+
+
+% ====================================================================
 \section{Yoneda Lemma}\label{sec:yoneda_lemma}
 % ====================================================================
 
@@ -2046,6 +2213,129 @@ $Nat_\cat{Set^{C^op}}(Hom(-,A), Hom(-,B)) \cong Hom_\cat{C}(A,B)$
 
 Yoneda Embedding preserves all Products and Exponentials in
 $\cat{C}$.
+
+
+
+% ====================================================================
+\section{Functor Category}\label{sec:functor_category}
+% ====================================================================
+
+Given two Categories, $\cat{C}$ and $\cat{D}$, a \emph{Functor
+  Category} is a Category with Objects as Functors $T : \cat{C}
+\rightarrow \cat{D}$ and Morphisms as Natural Transformations
+between Functors:
+\[
+  \cat{D}^{\cat{C}} = Fun(\cat{C},\cat{D})
+\]
+
+A Hom-set in a Functor Category may be denoted:
+\[
+  Nat(S,T) = \cat{D}^{\cat{C}}(S,T) =
+    \{ \tau | \tau : S \rightarrow T \}
+\]
+
+With Evaluation Functor $\eta : \cat{D^C} \times \cat{C} \rightarrow
+\cat{D}$, $\cat{D^C}$ is an Exponential
+(\S\ref{sec:category_exponential}) in $\cat{Cat}$ and $\cat{Cat}$ is a
+Cartesian Closed Category (\S\ref{sec:cartesian_closed}).
+
+The Functor Category $\cat{C^2}$ is Isomorphic to Arrow Categories
+(\S\ref{sec:arrow_category}) $\cat{C}^\rightarrow$.
+
+The Functor Category $\cat{C}^\cat{2}$ from the Discrete Category
+$\cat{2}$ is equivalent to the Product Category $\cat{C} \times
+\cat{C}$.
+
+For any Discrete Category $I$:
+\[
+  \cat{C}^I \cong \prod_{i \in I} \cat{C}
+\]
+
+The Functor Category $\cat{Set}^\downdownarrows$ where
+$\downdownarrows$ is the Category with two Objects and two Morphisms
+between them ($* \rightrightarrows \star$) is equivalent to the
+Category of Graphs and Graph Homomorphisms $\cat{Graph}$. Cf.
+Simplicial Sets (\S\ref{sec:simplicial_set}).
+
+A Functor Category into the Category $\cat{Set}$ is called a
+\emph{Category Diagram} (\S\ref{sec:category_diagram}).
+%FIXME terminology doesn't match
+
+
+
+% --------------------------------------------------------------------
+\subsection{Set-valued Functor Category}\label{sec:setvalued_functor}
+% --------------------------------------------------------------------
+
+A \emph{Set-valued Functor Category} (or \emph{Category of Diagrams})
+is a Functor Category from a Category into the Category
+$\cat{Set}$.
+
+A Presheaf (\S\ref{sec:presheaf}) is an example of a Set-valued
+(Contravariant) Functor Category from an Opposite Category into
+$\cat{Set}$.
+
+
+
+\subsubsection{Powerset Functor}\label{sec:powerset_functor}
+
+$\pow : \cat{Set} \rightarrow \cat{Set}$
+
+Functions $f : X \rightarrow Y$ to the Image Mapping $img(f) :
+\pow(X) \rightarrow \pow(Y)$
+
+
+
+% ====================================================================
+\section{Presheaf Category}\label{sec:presheaf_category}
+% ====================================================================
+
+Objects: Functors $F: \cat{C}^{op} \rightarrow \cat{Set}$
+
+Morphisms: Natural Transformations $\Phi : F \rightarrow G$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Presheaf}\label{sec:category_presheaf}
+% --------------------------------------------------------------------
+
+A \emph{Presheaf} is a Contravariant Functor from an Opposite Category
+to the Category $\cat{Set}$. A Presheaf is an example of a
+Set-valued Functor Category (\S\ref{sec:category_diagram}) and gives a
+Cartesian Closed Category (\S\ref{sec:cartesian_closed}).
+
+Presheaf (Topology \S\ref{sec:presheaf})
+
+$2$-presheaf (\S\ref{sec:2_presheaf})
+
+Sheave (\S\ref{sec:sheave})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Copresheaf}\label{sec:copresheaf}
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+\subsection{Representable Presheaf}\label{sec:representable_presheaf}
+% --------------------------------------------------------------------
+
+Limit (\S\ref{sec:limit})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Graphic Category}\label{sec:graphic_category}
+% --------------------------------------------------------------------
+
+Class of Finite Monoids and Categories permitting a ``graphic
+display'' via Presheaf (\S\ref{sec:presheaf}) Categories
+(def. nCat Lab) % FIXME
+
+Graphic Monoid (\S\ref{sec:graphic_monoid})
 
 
 
@@ -3162,9 +3452,9 @@ Left-adjoint $F$ that is a ``Free $C$ Functor'' %FIXME
 
 
 
-% --------------------------------------------------------------------
-\subsection{Monad}\label{sec:monad}
-% --------------------------------------------------------------------
+% ====================================================================
+\section{Monad}\label{sec:monad}
+% ====================================================================
 
 A \emph{Monad} is a Composition $G \circ F$ of Adjoint Functors $F :
 \cat{C} \rightarrow \cat{D}$ and $G : \cat{D} \rightarrow
@@ -3290,7 +3580,9 @@ Singleton Operation, and $\bigcup$ is the Union Operation.
 
 
 
-\subsubsection{$T$-algebra}\label{sec:t_algebra}
+% --------------------------------------------------------------------
+\subsection{$T$-algebra}\label{sec:t_algebra}
+% --------------------------------------------------------------------
 
 Monad $(T, \eta, \mu)$ where $T : \cat{C} \rightarrow \cat{C}$
 
@@ -3319,7 +3611,9 @@ without Associativity: Algebra over an Endofunctor
 
 
 
-\subsubsection{Idempotent Monad}\label{sec:idempotent_monad}
+% --------------------------------------------------------------------
+\subsection{Idempotent Monad}\label{sec:idempotent_monad}
+% --------------------------------------------------------------------
 
 exactly when underlying Pointed Endofunctor
 (\S\ref{sec:pointed_endofunctor}) is Well-pointed
@@ -3339,7 +3633,9 @@ $C \in \cat{C}_0$ the following are equivalent:
 
 
 
-\subsubsection{Finitary Monad}\label{sec:finitary_monad}
+% --------------------------------------------------------------------
+\subsection{Finitary Monad}\label{sec:finitary_monad}
+% --------------------------------------------------------------------
 
 or \emph{Algebraic Monad}
 
@@ -3349,7 +3645,9 @@ Algebraic Theory (\S\ref{sec:algebraic_theory})
 
 
 
-\subsubsection{Eilenberg-Moore Category}\label{sec:eilenberg_moore}
+% --------------------------------------------------------------------
+\subsection{Eilenberg-Moore Category}\label{sec:eilenberg_moore}
+% --------------------------------------------------------------------
 
 $\cat{C}^T$ Category of $T$-algebras (\S\ref{sec:t_algebra}) for
 Monad $T$ in Category $\cat{C}$
@@ -3367,7 +3665,9 @@ Terminal Object in the Category of Adjunctions
 
 
 
-\subsubsection{Kleisli Category}\label{sec:kleisli_category}
+% --------------------------------------------------------------------
+\subsection{Kleisli Category}\label{sec:kleisli_category}
+% --------------------------------------------------------------------
 
 For Monad $T$ and Category $\cat{C}$, a \emph{Kleisli Category}
 $\cat{C}_T$ (or $Kl(T)$) is equivalent to the Category of Free
@@ -3420,7 +3720,9 @@ Syntactic Cateogry (\S\ref{sec:syntactic_category})
 
 
 
-\subsubsection{Monadic Adjunction}\label{sec:monadic_adjunction}
+% --------------------------------------------------------------------
+\subsection{Monadic Adjunction}\label{sec:monadic_adjunction}
+% --------------------------------------------------------------------
 
 $(F,G,\eta,\varepsilon)$ is a \emph{Monadic Adjunction} when
 $\cat{D}$ is equivalent to the Eilenberg-Moore Category
@@ -3430,7 +3732,9 @@ $\cat{D}$ is equivalent to the Eilenberg-Moore Category
 
 
 
-\subsubsection{Monadic Functor}\label{sec:monadic_functor}
+% --------------------------------------------------------------------
+\subsection{Monadic Functor}\label{sec:monadic_functor}
+% --------------------------------------------------------------------
 
 A Functor $F : \cat{D} \rightarrow \cat{C}$ is Monadic if it has
 a Left Adjoint $F$ forming a Monadic Adjunction.
@@ -3456,7 +3760,9 @@ Descent Theory (\S\ref{sec:descent_theory})
 
 
 
-\subsubsection{Adjoint Category}\label{sec:adjoint_category}
+% --------------------------------------------------------------------
+\subsection{Adjoint Category}\label{sec:adjoint_category}
+% --------------------------------------------------------------------
 
 For a Monad $(T,\eta,\mu)$, the \emph{Adjoint Category}
 $\cat{Adj}(\cat{C}, T)$ is the Category where Objects are
@@ -3475,7 +3781,9 @@ where $\cat{C}^T$ is the Eilenberg-Moore Category
 
 
 
-\subsubsection{Free Monad}\label{sec:free_monad}
+% --------------------------------------------------------------------
+\subsection{Free Monad}\label{sec:free_monad}
+% --------------------------------------------------------------------
 
 Free Object (\S\ref{sec:free_object}) relative to a Forgetful Functor
 from a Category of Monads.
@@ -3503,8 +3811,7 @@ to Isomorphism: ??? %FIXME
 
 
 
-\paragraph{Algebraically-free Monad}\label{sec:algebraically_free}
-\hfill \\
+\subsubsection{Algebraically-free Monad}\label{sec:algebraically_free}
 
 \emph{Algebraically-free Monad}
 
@@ -3516,9 +3823,8 @@ Algebraically-free
 
 
 
-\paragraph{van Laarhoven Free Monad}
+\subsubsection{van Laarhoven Free Monad}
 \label{sec:vanlaarhoven_free_monad}
-\hfill \\
 
 van Laarhoven Function: $(X \rightarrow F X) \rightarrow F Y$
 equivalent to Store Comonad (cf. Lenses in Programming, Extensible
@@ -3526,7 +3832,9 @@ Effects \S\ref{sec:extensible_effect})
 
 
 
-\subsubsection{Strong Monad}\label{sec:strong_monad}
+% --------------------------------------------------------------------
+\subsection{Strong Monad}\label{sec:strong_monad}
+% --------------------------------------------------------------------
 
 Tensorial Strength (\S\ref{sec:tensorial_strength})
 
@@ -3534,7 +3842,9 @@ $st_{X,Y} : T(X) \otimes Y \rightarrow T(X \otimes Y)$
 
 
 
-\subsubsection{Codensity Monad}\label{sec:codensity_monad}
+% --------------------------------------------------------------------
+\subsection{Codensity Monad}\label{sec:codensity_monad}
+% --------------------------------------------------------------------
 
 For Functor $J : \cat{A} \rightarrow \cat{C}$, the \emph{Codensity
   Monad} is the Right Kan Extension (\S\ref{sec:kan_extension})
@@ -3560,132 +3870,8 @@ Descent
 
 
 % ====================================================================
-\section{Bifunctor}\label{sec:bifunctor}
+\section{Hughes Arrow}\label{sec:hughes_arrow}
 % ====================================================================
-
-A \emph{Bifunctor} is a Functor of two Variables from a Product
-Category to an arbitrary Category:
-\[
-  B : \cat{C} \times \cat{D} \rightarrow \cat{A}
-\]
-
-A \emph{Multifunctor} is a generalized to $n$ or more Variables.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Product Functor}\label{sec:product_functor}
-% --------------------------------------------------------------------
-
-\[
-  \times : \cat{C} \times \cat{C} \rightarrow \cat{C}
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Coproduct Functor}\label{sec:coproduct_functor}
-% --------------------------------------------------------------------
-
-\[
-  + : \cat{C} \times \cat{C} \rightarrow \cat{C}
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Diagonal Functor}\label{sec:diagonal_functor}
-% --------------------------------------------------------------------
-
-For Functor Category (\S\ref{sec:functor_category})
-$\cat{C}^\cat{J}$ with Small Index Category $\cat{J}$, a
-\emph{Diagonal Functor} $\Delta : \cat{C} \rightarrow
-\cat{C}^\cat{J}$ assigns to each Object $A$ of $\cat{C}$ the
-Constant Functor $\Delta_A \in \cat{C}^\cat{J}$ with fixed $A$
-and to each Morphism $f : A \rightarrow B$ of $\cat{C}$ the Natural
-Transformation $\eta$ in $\cat{C}^\cat{J}$ given by $\eta_j =
-f$.
-
-If $\cat{J}$ is a Discrete Category with two Objects, the Diagonal
-Functor is $\cat{C} \rightarrow \cat{C} \times \cat{C}$.
-
-The Limit (\S\ref{sec:limit}) of a Functor $F : \cat{J} \rightarrow
-\cat{C}$ is a Universal Morphism (\S\ref{sec:universal_morphism})
-from the Diagonal Functor $\Delta$ to $F$.
-
-If $\cat{C}$ is Complete (\S\ref{sec:complete_category}) then every
-Functor from $\cat{J}$ to $\cat{C}$ has a Limit and the
-operation of taking Limits is a Functor from $\cat{C}^\cat{J}$
-to $\cat{C}$.
-
-The Limit Functor is the Right-adjoint (\S\ref{sec:adjoint_functor})
-of the Diagonal Functor.
-
-A Colimit (\S\ref{sec:colimit}) is a Universal Morphism $F \rightarrow
-\Delta$.
-
-If $\cat{C}$ is Complete the Colimit Functor exists and is the
-Left-adjoint of the Diagonal Functor.
-
-As an example, the Diagonal Functor $\cat{C} \rightarrow \cat{C}
-\times \cat{C}$ is the Left-adjoint of the Binary Product Functor
-(\S\ref{sec:product_functor}) and the Right-adjoint of the Binary
-Coproduct Functor (\S\ref{sec:coproduct_functor}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Profunctor}\label{sec:profunctor}
-% --------------------------------------------------------------------
-
-A \emph{Profunctor} (or \emph{Distributor}) is a Bifunctor that is
-Contravariant in the first argument and Covariant in the second.
-
-Generalization of Functors, Categorical generalization of Bimodules
-(\S\ref{sec:bimodule})
-
-$P : \cat{C} \nrightarrow \cat{D}$
-
-$H_P : \cat{D}^{op} \times \cat{C} \rightarrow \cat{Set}$
-
-Set of Heteromorphisms (\S\ref{sec:heteromorphism})
-
-Identity Profunctor $Id : \cat{C} \nrightarrow \cat{C}$ is given by
-the Hom-functor $\cat{C}(-,-) : \cat{C}^{op} \times \cat{C}
-\rightarrow \cat{Set}$
-
-Composition of Profunctors $P : \cat{C} \nrightarrow \cat{D}$, $Q :
-\cat{D} \nrightarrow \cat{E}$:
-\[
-  Q P = \int^{d \in \cat{D}} P(d,-) \otimes Q(-,d)
-\]
-% FIXME kan extensions?
-
-Every Functor $F : \cat{C} \rightarrow \cat{D}$ induces two
-Profunctors $D(1,F) : \cat{C} \nrightarrow \cat{D}$ and $D(F,1)
-: \cat{D} \nrightarrow \cat{C}$ where $D(1,F)(d,c) = D(d,f(c))$
-and $D(f,1)(c,d) = D(f(c),d)$.
-
-Functor $F : \cat{C} \rightarrow \cat{D}$ gives a Profunctor $P_F :
-\cat{C} \nrightarrow \cat{D}$ by Post-composition with the Yoneda
-Functor (\S\ref{sec:yoneda_embedding}):
-\[
-  P_F = Y_\cat{D} \circ F
-\]
-
-
-
-\subsubsection{Profunctor Bicategory}\label{sec:profunctor_bicategory}
-
-Bicategory (\S\ref{sec:bicategory}) of Profunctors
-
-Coend (\S\ref{sec:coend})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Hughes Arrow}\label{sec:hughes_arrow}
-% --------------------------------------------------------------------
 
 As a Triple $(A, arr, \ggg)$
 
@@ -3793,8 +3979,10 @@ Example Arrow constructions:
 
 
 
-\subsubsection{$A$-algebra}\label{sec:a_algebra}
+% --------------------------------------------------------------------
+\subsection{$A$-algebra}\label{sec:a_algebra}
 \cite{jacobs-heunen-hasuo09}
+% --------------------------------------------------------------------
 
 Arrow analogue of $T$-algebras (\S\ref{sec:t_algebra}) for Monads
 
@@ -3877,104 +4065,9 @@ $\kappa$-calculus, $\kappa$-category, $\kappa$-quantifier %FIXME hasegawa
 
 
 
-\subsubsection{Biarrow}\label{sec:biarrow}
-
-
-
-% ====================================================================
-\section{$F$-algebra}\label{sec:f_algebra}
-% ====================================================================
-
-\emph{$F$-algebra}
-
-\emph{$F$-coalgebra} (\S\ref{sec:f_coalgebra})
-
-See also:
-
-$H$-algebra (Endofunctors \S\ref{sec:h_algebra}) \\
-$S$-algebra (Pointed Endofunctors \S\ref{sec:s_algebra}) \\
-$T$-algebra (Monads \S\ref{sec:t_algebra}) \\
-$A$-algebra (Hughes Arrows \S\ref{sec:a_algebra})
-
-An \emph{$F$-algebra} for an Endofunctor $F : \cat{C} \rightarrow
-\cat{C}$ is an Object $A \in \cat{C}_0$ with a Morphism $\alpha : F(A)
-\rightarrow A$ \cite{corfield08}
-
-Construction (Data Structure \S\ref{sec:data_structure})
-
-$F$-homomorphism $z$:
-\[
-  g \circ F z = z \circ f
-\]
-
-If a Functor has an Initial Algebra (\S\ref{sec:initial_algebra}, i.e.
-Least Fixed-point) or a Final Coalgebra
-(\S\ref{sec:terminal_coalgebra}, i.e. Greatest Fixed-point) then it is
-Isomorphic to its Image under the Functor. \cite{corfield08}
-
-Catamorphism (\S\ref{sec:catamorphism}): unique Homomorphism from the
-Initial Algebra to any orther $F$-algebra
-
-
-
 % --------------------------------------------------------------------
-\subsection{Initial Algebra}\label{sec:initial_algebra}
+\subsection{Biarrow}\label{sec:biarrow}
 % --------------------------------------------------------------------
-
-In $\cat{Set}$, built as ``Term Models'' \cite{corfield08} %FIXME
-
-Initial Algebras generalize Least Fixed-points
-(\S\ref{sec:fixed_point}) \cite{rutten00}
-
-
-
-% --------------------------------------------------------------------
-\subsection{$F$-coalgebra}\label{sec:f_coalgebra}
-% --------------------------------------------------------------------
-
-An \emph{$F$-coalgebra} for an Endofunctor $F : \cat{C} \rightarrow
-\cat{C}$ is an Object $A \in \cat{C}_0$ with a Morphism $\beta : A
-\rightarrow F(A)$ \cite{corfield08}
-
-Deconstruction (Observation, Modification)
-
-
-
-\subsubsection{Terminal Coalgebra}\label{sec:terminal_coalgebra}
-
-\emph{Final Coalgebra}
-
-Observations only
-
-Terminal Coalgebras generalize Greatest Fixed-points
-(\S\ref{sec:fixed_point}) \cite{rutten00}
-
-Set of Streams $A^\omega$ (Infinite Sequences of Elements of $A$, map
-$A^\omega \rightarrow A \times A^\omega$, $A^\omega$ is a Coalgebra
-for Functor $G : X \rightarrow A \times X$ and is the Terminal
-$G$-coalgebra
-
-
-
-% --------------------------------------------------------------------
-\subsection{Data Structure}\label{sec:data_structure}
-% --------------------------------------------------------------------
-
-(also Data Structure as Folds of Church Encodings) %??? FIXME
-
-
-
-\subsubsection{Ordered Tree}\label{sec:ordered_tree}
-
-\paragraph{Trie}\label{sec:trie}
-
-\paragraph{Prefix Tree}\label{sec:prefix_tree}
-
-\paragraph{Suffix Tree}\label{sec:suffix_tree}
-
-
-
-\subsubsection{Fingertree}\label{sec:fingertree}
 
 
 
@@ -4411,55 +4504,12 @@ Multicategory (\S\ref{sec:multicategory})
 
 
 % ====================================================================
-\section{Presheaf Category}\label{sec:presheaf_category}
+\section{Coherence Condition}\label{sec:coherence_condition}
 % ====================================================================
 
-Objects: Functors $F: \cat{C}^{op} \rightarrow \cat{Set}$
+Monoidal Category (\S\ref{sec:monoidal_category})
 
-Morphisms: Natural Transformations $\Phi : F \rightarrow G$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Presheaf}\label{sec:category_presheaf}
-% --------------------------------------------------------------------
-
-A \emph{Presheaf} is a Contravariant Functor from an Opposite Category
-to the Category $\cat{Set}$. A Presheaf is an example of a
-Set-valued Functor Category (\S\ref{sec:category_diagram}) and gives a
-Cartesian Closed Category (\S\ref{sec:cartesian_closed}).
-
-Presheaf (Topology \S\ref{sec:presheaf})
-
-$2$-presheaf (\S\ref{sec:2_presheaf})
-
-Sheave (\S\ref{sec:sheave})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Copresheaf}\label{sec:copresheaf}
-% --------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------
-\subsection{Representable Presheaf}\label{sec:representable_presheaf}
-% --------------------------------------------------------------------
-
-Limit (\S\ref{sec:limit})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Graphic Category}\label{sec:graphic_category}
-% --------------------------------------------------------------------
-
-Class of Finite Monoids and Categories permitting a ``graphic
-display'' via Presheaf (\S\ref{sec:presheaf}) Categories
-(def. nCat Lab) % FIXME
-
-Graphic Monoid (\S\ref{sec:graphic_monoid})
+Associator
 
 
 
