@@ -956,7 +956,31 @@ where $U \rightarrowtail E$ is the ``Extension''.
 \subsection{Monoid Object}\label{sec:monoid_object}
 % --------------------------------------------------------------------
 
-$1 \xrightarrow{\eta} M \xleftarrow{\mu} M \times M$
+\[
+  1 \xrightarrow{\eta} M \xleftarrow{\mu} M \times M
+\]
+
+Classical Monoids (\S\ref{sec:monoid}) are Monoid Objects in
+$\cat{Set}$ with the Cartesian Product $\times$
+
+(Mircocosm Principle): %FIXME
+
+sufficient for the Ambient Category $\cat{C}$ to be a Multicategory
+(\S\ref{sec:multicategory})
+
+Monoid Object, Monoidal Category (\S\ref{sec:monoidal_category})
+
+Commutative Monoid Object, Symmetric Monoidal Category
+(\S\ref{sec:symmetric_monoidal})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Group Object}\label{sec:group_object}
+% --------------------------------------------------------------------
+
+can only be defined in a Cartesian Multicategory
+(\S\ref{sec:cartesian_multicategory})
 
 
 
@@ -1080,10 +1104,17 @@ $1_{\cat{C}}$
 
 \subsubsection{Endofunctor Category}\label{sec:endofunctor_category}
 
-$\cat{End_C}$ (or $\mathrm{End}(\cat{C})$) with Objects as
+$\cat{End_C}$ (or $\cat{End}(\cat{C})$) with Objects as
 Endofunctors of $\cat{C}$ and Morphisms as Natural Transformations
 between them with Monoidal Structure Induced by Composition of
 Endofunctors.
+
+Unit $1_\cat{C} \in \cat{End_C}$
+
+A Monoid Object (\S\ref{sec:monoid_object}) in $\cat{End_C}$ is a
+Monad (\S\ref{sec:monad}) on $\cat{C}$
+
+Strict Monoidal Category (\S\ref{sec:strict_monoidal})
 
 
 
@@ -1808,6 +1839,10 @@ the Morphism in the Slice Category between the two is $g$ such that
 \]
 
 \emph{Coslice}
+
+if each Slice Category $\cat{C}/x$ is a Cartesian Monoidal Category
+(\S\ref{sec:cartesian_monoidal}) then $\cat{C}$ is Locally Cartesian
+(\S\ref{sec:locally_cartesian})
 
 
 
@@ -2655,9 +2690,33 @@ A Universal Wedge is called an \emph{End} (\S\ref{sec:end})
 
 \emph{Span} (or \emph{Roof} or \emph{Correspondence})
 
+Span from Object $X$ to Object $Y$ in a Category $\cat{C}$, with
+another Object $S$:
+\[
+  X \xleftarrow{\quad f \quad} S \xrightarrow{\quad g \quad} Y
+\]
+
+generalization of Relations: a Correspondence which is
+$(-1)$-truncated (\S\ref{sec:truncation}) as a Morphism into the
+Cartesian Product
+
 Diagram over $1 \rightarrow 2 \leftarrow 3$
 
 The Colimit of a Span is a Pushout (\S\ref{sec:pushout})
+
+Spans can be Composed in a Category with Pullbacks
+(\S\ref{sec:pullback})
+
+
+
+\paragraph{Correspondence Category}\label{sec:correspondence_category}
+\hfill \\
+
+Category of Spans
+
+$\cat{Corr_C}$
+
+Self-dual: if Limits Exist, Colimits also Exist and vice versa
 
 
 
@@ -2916,6 +2975,13 @@ g_p2$. This implies for any given $z_1 : Z \rightarrow A$ and $z_2 : Z
 \rightarrow B$ such that $fz_1 = gz_2$, there is a Unique Morphism $u
 : Z \rightarrow P$ such that $z_1 = p_1 u$ and $z_2 = p_2 u$.
 
+Categorical Semantics of an Equation (\S\ref{sec:equation})
+
+In $\cat{Set}$ a Pullback is a Subset of the Cartesian Product of two
+Sets: for the Diagram with $A,B,C$ Sets and Functions $f : A
+\rightarrow C$, $g : B \rightarrow C$, a Pullback is the Subset $X
+\subseteq A \times B$ of Pairs $(a,b)$ such that $f(a) = g(b)$.
+
 A Pullback is the Limit of a Cospan (\S\ref{sec:cospan}).
 
 Subtyping (\S\ref{sec:subtype})
@@ -2924,6 +2990,12 @@ Type Inference (\S\ref{sec:type_inference}) (Unification)
 
 generalization of Intersection (\S\ref{sec:set_intersection}) and
 Inverse Image (\S\ref{sec:preimage})
+
+Dependent Sum (\S\ref{sec:dependent_sum}) over the Dependent Equality
+Type (\S\ref{sec:dependent_equality}):
+\[
+  \sum_{a:A} \sum_{b:B} (f(a) = g(b))
+\]
 
 A Category has Pullbacks and a Terminal Object if and only if it has
 Finite Products (\S\ref{sec:category_product}) and Equalizers
@@ -3030,32 +3102,6 @@ $\mathcal{B}$ and Ultrafilters $U \subseteq \mathcal{B}$:
 
 
 \subsubsection{Inverse Limit}\label{sec:inverse_limit}
-
-\subsubsection{Complete Category}\label{sec:complete_category}
-
-A \emph{Complete Category} is a Category where all Small Limits exist.
-
-For any Locally Small Category (\S\ref{sec:locally_small})
-$\cat{C}$ the Functor Category $\cat{Set^{C^{op}}}$ is Complete.
-
-
-
-\paragraph{Finitely Complete Category}
-\label{sec:finitely_complete_category}
-\hfill \\
-
-Internal Logic: Cartesian Logic %FIXME xref
-
-
-
-\subparagraph{Regular Category}\label{sec:regular_category}
-\hfill \\
-
-Internal Logic: Regular Logic (\S\ref{sec:regular_logic})
-
-Coherent Category (\S\ref{sec:coherent_category})
-
-
 
 % --------------------------------------------------------------------
 \subsection{Colimit} \label{sec:colimit}
@@ -3189,6 +3235,13 @@ $\zeta : S \xrightarrow{..} d$
 A Pushout is the Colimit of a Span (\S\ref{sec:span})
 
 $B +_A C \cong (B + C)/~$
+
+In $\cat{Set}$ a Pushout is a Quotient of the Disjoint Union of two
+Sets: in a Diagram with $A,B,C$ Sets and Functions $f : C \rightarrow
+A$ and $g : C \rightarrow B$, the Pushout is the Disjoint Union $A +
+B$ with $a \in A ~ b \in B$ when there Exists $x \in C$ such that
+$f(x) = a$ and $g(x) = b$. When $C$ is the Intersection of $A$ and $B$
+(and $f$ and $g$ are the Inclusions), the Pushout is equal to $A + B$.
 
 
 
@@ -3400,6 +3453,9 @@ Cobase Change
 
 Dependent Product Type (\S\ref{sec:pi_type})
 
+Category with all Dependent Products necessarily has all Pullbacks
+(\S\ref{sec:pullback})
+
 
 
 \subsubsection{Dependent Sum}\label{sec:dependent_sum}
@@ -3566,12 +3622,7 @@ Left-adjoint $F$ that is a ``Free $C$ Functor'' %FIXME
 \section{Monad}\label{sec:monad}
 % ====================================================================
 
-A \emph{Monad} is a Composition $G \circ F$ of Adjoint Functors $F :
-\cat{C} \rightarrow \cat{D}$ and $G : \cat{D} \rightarrow
-\cat{C}$, namely $G F$. If $F$ and $G$ are Inverses then the
-corresponding Monad is the Identity Functor.
-
-Definition of a Monad as a Triple:
+A \emph{Monad} is given by the Triple:
 \[
   (T, \eta, \mu)
 \]
@@ -3587,15 +3638,22 @@ Natural Transformations satisfying the Coherence Conditions
 (1) is analogous to Associativity in Monoids and (2) gives the
 existence of an Identity Element.
 
-A Monad on $\cat{C}$ can be defined as a Monoid on the Endofunctor
-Category (\S\ref{sec:endofunctor_category}) $\cat{End_C}$. Special
-case of a Hughes Arrow (\S\ref{sec:hughes_arrow}) with output but no
-input.
+A Monad on $\cat{C}$ can be defined as a Monoid Object
+(\S\ref{sec:monoid_object}) on the Endofunctor Category
+(\S\ref{sec:endofunctor_category}) $\cat{End_C}$.
+
+special case of a Hughes Arrow (\S\ref{sec:hughes_arrow}) with ``output''
+but no ``input''
 
 Pointed Endofunctor (\S\ref{sec:pointed_endofunctor}) $S : \cat{C}
 \rightarrow \cat{C}$ with Natural Transformation $\sigma : 1_\cat{C}
 \rightarrow S$ as the Unit; Well-pointed exactly when the Monad is
 Idempotent (\S\ref{sec:idempotent_monad})
+
+A Monad also arises as a Composition $G \circ F$ of Adjoint Functors
+$F : \cat{C} \rightarrow \cat{D}$ and $G : \cat{D} \rightarrow
+\cat{C}$, namely $G F$. If $F$ and $G$ are Inverses then the
+corresponding Monad is the Identity Functor.
 
 Given a Monad $T$ on a Category $\cat{C}$, there is a Category of
 Adjunctions (\S\ref{sec:adjoint}) that give rise to that Monad.
@@ -3779,11 +3837,57 @@ $C \in \cat{C}_0$ the following are equivalent:
 \subsection{Finitary Monad}\label{sec:finitary_monad}
 % --------------------------------------------------------------------
 
-or \emph{Algebraic Monad}
+(or \emph{Algebraic Monad})
 
-Finitary Lawvere Theory (\S\ref{sec:lawvere_theory})
+is a Monoid in the Category of Algebraic Endofunctors (???) on
+$\cat{Set}$
+
+completely determined by Value on all Finite Ordinals $n \in \nats_0$
+(as Finite Sets): $T(n)$ is the Set of $n$-ary Operations
+
+\HandRight\; Cf. Non-symmetric Operad (\S\ref{sec:operad}) in
+$\cat{Set}$
+
+\center *** \raggedright
 
 Algebraic Theory (\S\ref{sec:algebraic_theory})
+
+nLab:
+
+Every Finitary Monad $T$ defines a Lawvere Theory
+(\S\ref{sec:lawvere_theory}) $\mathrm{Th}_T$:
+\[
+  \cat{Th}_T = \cat{Free}^{op}_{fin}
+\]
+where $\cat{Free}_{fin}$ is the Category of Free Algebras $T(n)$ on
+Finite Sets (as a Full Subcategory \S\ref{sec:full_subcategory} of
+$\cat{Alg}_T$) %FIXME xref Alg_T
+
+Equivalence between Category of Finitary Monads on $\cat{Set}$ and the
+Category of Lawvere Theories %FIXME
+
+Category of $T$-algebras is Equivalent to the Category of Models of
+$\cat{Th}_T$ %FIXME
+
+Commutative Algebraic Theory
+(\S\ref{sec:commutative_algebraic_theory})
+
+Category of Finitary Monads on $\cat{Set}$
+
+Monadic over the Category of Finitary Endofunctors of $\cat{Set}$
+
+Monadic over the Category of $\nats$-indexed Sets
+
+
+
+% --------------------------------------------------------------------
+\subsection{Cartesian Monad}\label{sec:cartesian_monad}
+% --------------------------------------------------------------------
+
+Multicategories (\S\ref{sec:multicategory})
+
+Locally Cartesian Category (\S\ref{sec:locally_cartesian}), Pullbacks
+(\S\ref{sec:pullback})
 
 
 
@@ -3936,15 +4040,15 @@ Forgetful Functors:
   \rightarrow \mathrm{End}(\cat{C}) \rightarrow [\cat{C}_0, \cat{C}]
 \]
 
-$\mathrm{Mnd}(\cat{C})$: ``Monad Category''; Objects: Monads on
+$\cat{Mnd}(\cat{C})$: ``Monad Category''; Objects: Monads on
 $\cat{C}$, Morphisms: Natural Transformations Commuting with Monad
 Structure Maps (Category of Monoids in the Monoidal Category of
 Endofunctors with Composition)
 
-$\mathrm{PtEnd}(\cat{C})$ Pointed Endofunctors
+$\cat{PtEnd}(\cat{C})$ Pointed Endofunctors
 (\S\ref{sec:pointed_endofunctor})
 
-$\mathrm{End}(\cat{C})$ Category of Endofunctors of $\cat{C}$
+$\cat{End}(\cat{C})$ Category of Endofunctors of $\cat{C}$
 
 Cofree Comonad (\S\ref{sec:cofree_comonad})
 
@@ -3975,8 +4079,46 @@ Effects \S\ref{sec:extensible_effect})
 
 
 % --------------------------------------------------------------------
-\subsection{Strong Monad}\label{sec:strong_monad}
+\subsection{Identity Monad}\label{sec:identity_monad}
 % --------------------------------------------------------------------
+
+Identity Functor $1_\cat{C}$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Free Monoid Monad}\label{sec:free_monoid_monad}
+% --------------------------------------------------------------------
+
+\emph{Free Monoid Monad}: $(-)^* : \cat{Set} \rightarrow \cat{Set}$
+
+Free Monoid Functor $F : \cat{Set} \rightarrow \cat{Mon}$
+
+Forgetful Functor $U : \cat{Mon} \rightarrow \cat{Set}$
+
+\emph{List Monad}
+
+List Monad : Multicategories (\S\ref{sec:multicategory}) :: Identity
+Monad $1_{\cat{Set}}$ : Categories
+
+
+
+% --------------------------------------------------------------------
+\subsection{Monoidal Monad}\label{sec:monoidal_monad}
+% --------------------------------------------------------------------
+
+\emph{Commutative Monad}
+
+Commutative Algebraic Theory
+(\S\ref{sec:commutative_algebraic_theory})
+
+Monad in the $2$-category of Monoidal Categories
+
+%FIXME
+
+
+
+\subsubsection{Strong Monad}\label{sec:strong_monad}
 
 Tensorial Strength (\S\ref{sec:tensorial_strength})
 
@@ -4269,6 +4411,10 @@ $(\cat{Rel}, +, \varnothing)$ (Product)
 
 $(\cat{Hilb}, \otimes, \comps)$
 
+Faithful Functor from Monoidal Categories to Multicategories
+(\S\ref{sec:multicategory}): Represented Multicategories (Endomorphism
+Operads \S\ref{sec:endomorphism_operad})
+
 
 
 % --------------------------------------------------------------------
@@ -4408,9 +4554,33 @@ $0,1,A,B,C \in \cat{C}_0$:
 
 
 
-\paragraph{Locally Cartesian Closed Category}
-\label{sec:locally_cartesian}
-\hfill \\
+\subsubsection{Cartesian Monoidal Category}
+\label{sec:cartesian_monoidal}
+
+if each Slice Category (\S\ref{sec:slice_category}) $\cat{C}/x$ is a
+Cartesian Monoidal Category then $\cat{C}$ is \emph{Locally Cartesian}
+(\S\ref{sec:locally_cartesian})
+
+
+
+\subsubsection{Locally Cartesian Category}\label{sec:locally_cartesian}
+
+Category $\cat{C}$
+
+\emph{Locally Cartesian} if each Slice Category
+(\S\ref{sec:slice_category}) $\cat{C}/x$ is a Cartesian Monoidal
+Category (\S\ref{sec:cartesian_monoidal})
+
+Finitely Complete Category (\S\ref{sec:finitely_complete}) is exactly
+a Locally Cartesian Category that has a Terminal Object.
+
+Cartesian Monad (\S\ref{sec:cartesian_monad})
+
+
+
+\subsubsection{Locally Cartesian Closed Category}
+\label{sec:locally_cartesian_closed}
+
 A \emph{Locally Cartesian Closed Category} $\cat{E}$ is a Category
 such that all Slice Categories (\S\ref{sec:slice_category})
 $\cat{E}/X$ are Cartesian Closed Categories.
@@ -4448,6 +4618,8 @@ Products and Coproducts are \emph{Distributive}:\cite{awodey06}
 Regular Category (\S\ref{sec:regular_category})
 
 Internal Logic: Coherent Logic (\S\ref{sec:coherent_logic})
+
+Positive Category (\S\ref{sec:positive_category})
 
 
 
@@ -4648,6 +4820,13 @@ Multicategory (\S\ref{sec:multicategory})
 
 
 
+\paragraph{Virtual Equipment}\label{sec:virtual_equipment}
+\hfill \\
+
+Virtual Double Category with all Units and all Restrictions (???)
+
+
+
 % ====================================================================
 \section{Coherence Condition}\label{sec:coherence_condition}
 % ====================================================================
@@ -4655,6 +4834,56 @@ Multicategory (\S\ref{sec:multicategory})
 Monoidal Category (\S\ref{sec:monoidal_category})
 
 Associator
+
+
+
+% ====================================================================
+\section{Complete Category}\label{sec:complete_category}
+% ====================================================================
+
+A \emph{Complete Category} is a Category where all Small Limits exist.
+
+For any Locally Small Category (\S\ref{sec:locally_small})
+$\cat{C}$ the Functor Category $\cat{Set^{C^{op}}}$ is Complete.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finitely Complete Category}\label{sec:finitely_complete}
+% --------------------------------------------------------------------
+
+Internal Logic: Cartesian Logic %FIXME xref
+
+exactly a Locally Cartesian Category (\S\ref{sec:locally_cartesian})
+that has a Terminal Object (\S\ref{sec:terminal_object})
+
+
+
+\subsubsection{Regular Category}\label{sec:regular_category}
+
+Internal Logic: Regular Logic (\S\ref{sec:regular_logic})
+
+Coherent Category (\S\ref{sec:coherent_category})
+
+
+
+% ====================================================================
+\section{Extensive Category}\label{sec:extensive_category}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Positive Category}\label{sec:positive_category}
+% --------------------------------------------------------------------
+
+Coherent (\S\ref{sec:coherent_category})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Disjunctive Category}\label{sec:disjunctive_category}
+% --------------------------------------------------------------------
+
+\emph{Lextensive}
 
 
 
@@ -4667,11 +4896,10 @@ Associator
 % --------------------------------------------------------------------
 
 Replace Hom-sets with Objects from a general Monoidal Category
-(\S\ref{sec:monoidal_category}) $\cat{K}$, allowing
-\emph{Hom-objects} to be something other than Sets of Functions, such
-as Vector Spaces or Topological Spaces of Morphisms. The Category
-$\cat{K}$ must be Monoidal so that Composition is defined as a
-Morphism:
+(\S\ref{sec:monoidal_category}) $\cat{K}$, allowing \emph{Hom-objects}
+to be something other than Sets of Functions, such as Vector Spaces or
+Topological Spaces of Morphisms. The Category $\cat{K}$ must be
+Monoidal so that Composition is defined as a Morphism:
 \[
   \circ : hom(y,z) \otimes hom(x,y) \rightarrow hom(x,z)
 \]
@@ -4793,6 +5021,12 @@ Left Adjoint to Functor:
 extracting the Internal Logic (\S\ref{sec:internal_logic}) of
 Categories.
 
+a Category with Finite Products such
+that all Objects are Finite Products of a given Object %FIXME
+
+a Model is given by an Algebra over a Lawvere Theory
+(\S\ref{sec:lawvere_algebra})
+
 
 (from nLab):
 
@@ -4814,7 +5048,7 @@ Categories.
     Binary Coproducts (\S\ref{sec:coproduct})
   \item If $T$ is a Dependent Type Theory (\S\ref{sec:dependent_type})
     with Dependent Product Types (\S\ref{sec:pi_type}) then $Syn(T)$
-    is Locally Cartesian Closed (\S\ref{sec:locally_cartesian})
+    is Locally Cartesian Closed (\S\ref{sec:locally_cartesian_closed})
   \item If $T$ is a Regular Theory (\S\ref{sec:regular_theory}) then
     $Syn(T)$ is a Regular Category (\S\ref{sec:regular_category})
   \item If $T$ is a Coherent Theory (\S\ref{sec:coherent_theory}) then
@@ -5279,37 +5513,6 @@ Effectivity (\S\ref{sec:effective_method})
 
 
 % ====================================================================
-\section{Multicategory}\label{sec:multicategory}
-% ====================================================================
-
-% ====================================================================
-\section{Dagger Category}\label{sec:dagger_category}
-% ====================================================================
-
-Involution Semigroup (\S\ref{sec:involution_semigroup})
-
-Example Dagger Categories:
-
-\begin{itemize}
-
-\item Discrete Categories (Trivial)
-\item Any Monoid with Involution (Dagger Category with one Object)
-\item Any Groupoid or Group
-\item $\cat{Rel}$ Category of Sets and Relations
-\item $\cat{Cob}$ Category of Closed Manifolds and Cobordisms
-\item $Spans(\cat{C})$ of $\cat{C}$ with Pullbacks
-\item $CoSpans(\cat{C})$ of $\cat{C}$ with Pushouts
-\item $Hilb$ of Hilbert Spaces (\S\ref{sec:hilbert_space}) and Bounded
-  Linear Operators (\S\ref{sec:bounded_linear_operator})
-
-\end{itemize}
-
-Every Endomorphism Hom-set in a Dagger Category is a Monoid with
-Involution.
-
-
-
-% ====================================================================
 \section{Abelian Category}\label{sec:abelian_category}
 % ====================================================================
 
@@ -5416,6 +5619,95 @@ Homomorphism of Representations (\S\ref{sec:representation}), Actions
 
 
 % ====================================================================
+\section{Dagger Category}\label{sec:dagger_category}
+% ====================================================================
+
+Involution Semigroup (\S\ref{sec:involution_semigroup})
+
+Example Dagger Categories:
+
+\begin{itemize}
+
+\item Discrete Categories (Trivial)
+\item Any Monoid with Involution (Dagger Category with one Object)
+\item Any Groupoid or Group
+\item $\cat{Rel}$ Category of Sets and Relations
+\item $\cat{Cob}$ Category of Closed Manifolds and Cobordisms
+\item $Spans(\cat{C})$ of $\cat{C}$ with Pullbacks
+\item $CoSpans(\cat{C})$ of $\cat{C}$ with Pushouts
+\item $Hilb$ of Hilbert Spaces (\S\ref{sec:hilbert_space}) and Bounded
+  Linear Operators (\S\ref{sec:bounded_linear_operator})
+
+\end{itemize}
+
+Every Endomorphism Hom-set in a Dagger Category is a Monoid with
+Involution.
+
+
+
+% ====================================================================
+\section{Multicategory}\label{sec:multicategory}
+% ====================================================================
+
+(or \emph{Coloured Operad})
+
+Objects $\cat{C}_0$
+
+Multimorphisms $\cat{C}_1$
+
+Source Map $s : \cat{C}_1 \rightarrow (\cat{C}_0)^*$
+
+Cartesian Monad (\S\ref{sec:cartesian_monad})
+
+Monoid Objects (\S\ref{sec:monoid_object})
+
+Free Monoid Monad (\S\ref{sec:free_monoid_monad}): $(-)^* : \cat{Set}
+\rightarrow \cat{Set}$
+
+Faithful Functor from Monoidal Categories
+(\S\ref{sec:monoidal_category}) to Multicategories: Represented
+Multicategories (Endomorphism Operads \S\ref{sec:endomorphism_operad})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Generalized Multicategory}
+\label{sec:generalized_multicategory}
+% --------------------------------------------------------------------
+
+Categories, Multicategories: Monads in appropriate Bicategory
+(\S\ref{sec:bicategory}) of Span-like (\S\ref{sec:span}) Objects.
+
+Categories: Monads in the Category of Spans
+(\S\ref{sec:correspondence_category}) of Sets, $\cat{Corr_Set}$
+
+Multicategories: Monads in the Bicategory of Spans with Shape:
+\[
+  X \leftarrow R \rightarrow Y^*
+\]
+where $Y^*$ is the Set of Finite Lists of elements of $Y$.
+
+Generalized Multicategories replace the Free Monoid Monad
+(\S\ref{sec:free_monoid_monad}) $(-)^*$ with a general Monad $T$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Cartesian Multicategory}
+\label{sec:cartesian_multicategory}
+% --------------------------------------------------------------------
+
+Symmetric Multicategory with Duplication Operations and Deletion
+Operations
+
+Type Theory (Part \ref{part:type_theory})
+
+every Type Theory gives rise to a Cartesian Multicategory with Objects
+as Types and Multimorphisms as Terms
+
+
+
+% ====================================================================
 \section{Operad Theory}\label{sec:operad_theory}
 % ====================================================================
 
@@ -5448,6 +5740,8 @@ Composition
 
 Associativity and Unitality
 
+``Non-symmetric Operad'': Finitary Monad (\S\ref{sec:finitary_monad})
+
 nLab:
 
 Groupoid $\mathbb{P}$ of Finite Cardinals with Bijections as Morphisms
@@ -5463,6 +5757,14 @@ $(Psh(\mathbb{P}), \circ, I)$ %FIXME
 \subsubsection{A$_\infty$-operad}\label{sec:a_infinity_operad}
 
 Loop Space (\S\ref{sec:loop_space})
+
+
+
+\subsubsection{Endomorphism Operad}\label{sec:endomorphism_operad}
+
+Multicategory (\S\ref{sec:multicategory})
+
+Represented Multicategory
 
 
 
