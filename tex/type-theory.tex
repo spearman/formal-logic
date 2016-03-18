@@ -1058,391 +1058,6 @@ Type (\S\ref{sec:polymorphic_type}):
 
 
 % --------------------------------------------------------------------
-\subsection{Effect System}\label{sec:effect_system}
-% --------------------------------------------------------------------
-
-Effect Theory
-
-(Wadler, Thiemann - 2003 - \emph{The marriage of effects and monads}):
-%FIXME
-
-Types $\tau$, $\tau'$
-
-Effect $\sigma$
-
-$\tau \xrightarrow{\sigma} \tau'$
-
-$(\tau \xrightarrow{\sigma} \tau')^\dag$
-$\rightsquigarrow$
-$\tau^\dag \rightarrow T^\sigma \tau'^\dag$
-
-
-
-\subsubsection{Computational Effect}\label{sec:computational_effect}
-
-Computational Effects
-
-e.g. Exceptions, Non-determinism, Interactive Input/Output,
-Concurrency, State, Time, Continuations, etc. \cite{plotkin-pretnar09}
-
-Monad (\S\ref{sec:monad})
-
-Computation (Monad) $T$ Returning Value of Type $X$:
-\[
-  T X
-\]
-
-Return
-
-Bind
-
-
-
-\subsubsection{Algebraic Effect}\label{sec:algebraic_effect}
-
-\cite{nielson-nielson99}
-\cite{plotkin-pretnar09}
-\cite{pretnar15}
-
-(Countable) Equational Theories (Algebraic Theory
-\S\ref{sec:algebraic_theory})
-
-
-as an alternative to using Monads (\S\ref{sec:monad}) to Model
-Side-effects, most often seen in Strict Languages
-
-subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
-captured by any Effect System (E. Kmett)
-
-Continuations (\S\ref{sec:continuation}) are not representable as
-Algebraic Effects
-
-
-\cite{plotkin-pretnar09}:
-
-Computations $T$ that Return Values in $X$: $T X$ for ``suitable''
-Monad (\S\ref{sec:monad}) $T$
-
-Subclass of Computational Effects (\S\ref{sec:computational_effect}):
-Effects that allow Representation by Operations and Equations.
-
-Equational Logic (\S\ref{sec:equational_logic})
-
-Computational Effects representable by an Algebraic Theory:
-Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
-Stream Redirection, Backtracking, Co-operative Multi-threading,
-Delimited Continuations, etc.
-
-Sets of Operations
-
-Operations give rise to Effects
-
-Arguments of an Operation represent possible Computations after an
-Occurrence (???) of an Effect
-
-Example Non-deterministic Boolean $\mathtt{or}$ Operator:
-\[
-  \mathtt{or}(\mathtt{return}\;true, \mathtt{return}\;false)
-  : F \mathrm{Bool}
-\]
-
-$F \sigma$: Type of Computations with Return Values of Type $\sigma$
-
-Computation Monad: Free-model Monad (???, Free Monad
-\S\ref{sec:free_monad}) of the Algebraic Theory; Equations of the
-Theory Generate the Free-model Functor (exactly the corresponding
-Monad for the Effect, Modulo the Forgetful Functor): used to Interpret
-the Type $F \sigma$.
-
-Operations Interpreted by the Model Structure
-
-Family of Functions Parametric in $X$ (Algebraic Operation),
-characterized by a Naturality Condition %FIXME
-
-Example Parametric Operation:
-\[
-  \mathtt{or}_X : T X^2 \rightarrow T X
-\]
-
-Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
-Algebraic Theory
-
-Algebraic Operations (\emph{Effect Constructors}) and Effect Handlers
-(\emph{Effect Destructors}) are Dual (cf. Filinski: Reflection and
-Reification) %FIXME
-
-Handling a Computation is Composing it with a Unique Homomorphism
-(defined Universally) with Domain is a Free Model of the Algebraic
-Theory of the Effects ``at hand'', and Range is the Programmer-defined
-Model (???) of the Algebraic Theory and Extends a Programmer-defined
-Map on Values.
-
-Instances of Handlers: Exception Handling, Stream Redirection,
-Renaming and Hiding, Timeout, Rollback, etc.
-
-\HandRight\; Note that some Handlers (e.g. for Backtracking) do not
-respect the Equations of an Algebraic Theory. \cite{pretnar15}
-
-\cite{plotkin-pretnar09}:
-
-\emph{Base Signature} $\Sigma_{\mathrm{base}}$:
-\begin{itemize}
-  \item Base Types $\beta_1, \beta_2, \ldots$
-  \item Subset of Base Types: Arity Types $\alpha_1, \alpha_2, \ldots$
-  \item Function Symbols $f : (\beta_1, \ldots, \beta_n) \rightarrow
-    \beta$
-  \item Relation Symbols $R : (\beta_1, \ldots, \beta_n)$
-\end{itemize}
-
-\emph{Base Terms} $v$: Variables $x,y,z,\ldots$, Function Symbols
-$f (v_1, \ldots, v_n)$
-
-\emph{Base Formulas} $\varphi$: Equations $v_1 = v_2$, Relation
-Symbols $R (v_1, \ldots, v_n)$, Logical Connectives, Quantifiers
-applied to Base Types
-
-\emph{Context} $\Gamma$: Variables Bound to Base Types
-
-A Context $\Gamma$ Types Base Terms as $\Gamma \vdash v:\beta$ and
-Base Formulas as $\Gamma \vdash \varphi : \mathbf{form}$
-
-\emph{Interpretation} of the Base Signature:
-\begin{itemize}
-  \item Sets $\llbracket \beta \rrbracket$ for each Base Type
-    (Countable when $\beta$ is an Arity Type)
-  \item Maps $\llbracket f \rrbracket : \llbracket \beta_1, \ldots,
-    \beta_n \rrbracket \rightarrow \llbracket \beta \rrbracket$ for
-    each Function Symbol
-  \item Subsets $\llbracket R \rrbracket \subseteq \llbracket \beta_1,
-    \ldots, \beta_n \rrbracket$ for each Relation Symbol
-  \item Maps $\llbracket v \rrbracket : \llbracket \Gamma \rrbracket
-    \rightarrow \llbracket \beta \rrbracket$ for Terms
-  \item Subsets $\llbracket \varphi \rrbracket \subseteq \llbracket
-    \Gamma \rrbracket$ for Formulas
-\end{itemize}
-where $\llbracket \beta_1, \ldots, \beta_n \rrbracket = \llbracket
-\beta_1 \rrbracket \times \cdots \times \llbracket \beta_n \rrbracket$
-
-\emph{Effect Signature} $\Sigma_{\mathrm{eff}}$:
-
-
-
-\cite{pretnar15}:
-
-Occurence of an Effect can been seen as a Branching in the Execution
-of a Program (number of Branches equal to the number of possible
-outcomes of an Effect)
-
-``Source'' of an Effect is represented by an Operation with Arity
-equal to the number of outcomes and Arguments represent Branches
-
-
-\textbf{Language}
-
-\cite{pretnar15}:
-
-\emph{Values}:
-\begin{flalign*}
-  \quad v ::=&\quad x \quad | \quad \true \quad | \quad \false \quad
-            | \quad \lambda x \mapsto c &\\
-      \quad |&\quad \mathtt{handler}\; \{ \mathtt{return}\; x
-              \mapsto c_r, \mathtt{op}_1(x;k) \mapsto c_1, \ldots,
-              \mathtt{op}_n(x;k) \mapsto c_n \}&
-\end{flalign*}
-
-\emph{Computations}:
-\begin{flalign*}
-  \quad c ::=&\quad \mathtt{return}\; v \quad | \quad \mathtt{op}(v;y.c) \quad
-            | \quad \mathtt{do}\; x \leftarrow c_1 \;\mathtt{in}\; c_2 &\\
-      \quad |&\quad \mathtt{if}\; v \;\mathtt{then}\; c_1
-              \;\mathtt{else}\; c_2 \quad
-            | \quad v_1 v_2 \quad | \quad \;\mathtt{with}\; v
-              \;\mathtt{handle}\; c&
-\end{flalign*}
-
-Sequencing:
-\[
-  \mathtt{do}\; x \leftarrow c_1 \;\mathtt{in}\; c_2
-\]
-first Evaluate $c_1$, Bind result Value to $x$, and proceed as $c_2$;
-if $x$ does not appear in $c_2$, then abbreviate to $c1; c2$.
-
-Operation Call:
-\[
-  \mathtt{op}(v;y.c)
-\]
-Parameter Value $v$ (e.g. Memory Location to be Read) passed to
-$\mathtt{op}$, $\mathtt{op}$ performs Effect, Result Value (e.g.
-Contents of Memory Location) is Bound to $y$ and Evaluation of
-Continuation $c$ resumes. (Handlers \S\ref{sec:effect_handler}) may
-override this behavior).
-
-Generic Effect (\S\ref{sec:generic_effect}):
-\[
-  \mathtt{op}\; \stackrel{\mathrm{def}}{=} \;\mathtt{fun}\; x \mapsto
-  \mathtt{op}(x; y.\mathtt{return}\; y)
-\]
-Parameter Value $x$ passed to Operation with the Trivial Continuation;
-specific Operations $\mathtt{op}(v;y.c)$ can be recovered by
-Evaluating:
-\[
-  \mathtt{do}\; y \leftarrow \mathtt{op}\; v \;\mathtt{in}\; c
-\]
-
-
-\textbf{Denotational Semantics} \cite{pretnar15}
-
-Computations as Trees:
-
-Returned Values (or Bottom $\bot$ for Divergent Computation that does
-not call any Operations) are Leaves and Branching Points are
-Operations
-
-Operation Calls create a ``Branching Point'' in the Evaluation with as
-many Branches as there are possible Results that can be Yielded to the
-Continuation. \cite{pretnar15}
-
-A Divergent Computation that repeatedly Calls Operations gives a
-Non-well-founded Tree. \cite{pretnar15}
-
-
-\emph{Denotational Semantics Returning First-order Values and no
-  Recursion}:
-
-Value Type $A$: Set $\llbracket A \rrbracket$
-
-Computation Type $\llbracket A!\Delta \rrbracket$: Set of Trees with
-Leaves (Values) in $\llbracket A \rrbracket$ and Nodes (Operations) in
-$\Delta$
-
-Handlers: Functions between Trees defined by Structural Recursion on
-Tree of the Handled Computation and Handling is Interpreted by
-Application of such Functions
-
-A \emph{Model} of $\Delta$ is a Set $M$ with Maps:
-\[
-  \mathtt{op}_M : \llbracket A \rrbracket
-    \times M^{\llbracket B \rrbracket} \rightarrow M
-\]
-for each Operation $\mathtt{op} : A \rightarrow B$ in $\Delta$
-
-\emph{Homomorphism} between Models $M$, $N$ is a Map $h : M
-\rightarrow N$ such that:
-\[
-  (h \circ \mathtt{op}_M)(x,k) = \mathtt{op}_N(x,h \circ k)
-\]
-
-$\llbracket A ! \Delta \rrbracket$ is the \emph{Free Model} of
-$\Delta$ over $A$ with Universal Property
-(\S\ref{sec:universal_property}):
-
-For any Model $M$ of $\Delta$ and Map $f : \llbracket A \rrbracket
-\rightarrow M$ there exists a Unique Homomorphism $h : \llbracket A !
-\Delta \rrbracket \rightarrow M$ that agrees with $f$ on Leaves.
-\cite{pretnar15}
-
-Operation Clauses define a Model of Operations and the Return Clause
-provides a Function $f$ that can be extended to a Homomorphism.
-\cite{pretnar15}
-
-\HandRight\; With General Recursion and Higher-order Results then
-Domains (\S\ref{sec:order_domain}) are used instead of Sets.
-
-Comodel: Set $W$ of possible World States and Map $\mathtt{op}^W : W
-\times \llbracket A \rrbracket \rightarrow W \times \llbracket B
-\rrbracket$ for each Operation $\mathtt{op} : A \rightarrow B$ in
-$\Sigma$
-
-when Operation Call $\mathtt{op}(v; y.c)$ escapes all Handlers, pass
-current State $w \in W$ and Parameter $v$ to $\mathtt{op}^W$ and get
-back new State and Result, assigning Result to $y$ and continue
-Evaluating $c$. \cite{pretnar15}
-
-
-\textbf{Operational Semantics} \cite{pretnar15}
-
-Small-step Operational Semantics
-
-Operation Calls do not perform Effects: they behave as ``Signals''
-that propagate outwards until they reach a Handler with a matching
-Clause. \cite{pretnar15}
-
-An Operation that escapes all Handlers is treated as a Terminating
-Computation (no further Reductions). \cite{pretnar15}
-
-``Actual'' Effectful behavior simulated by an Outermost Handler.
-\cite{pretnar15}
-
-
-
-\paragraph{Effect Handler}\label{sec:effect_handler}
-\hfill \\
-
-Homomorphism from Free Algebras
-\cite{bauer-pretnar12}
-
-(Pretnar, Plotkin - 2009 - \emph{Handlers of Algebraic Effects}): %FIXME
-
-corresponds to Model of the Algebraic Theory
-(\S\ref{sec:algebraic_theory}) of the Effects
-
-Handling a Computational Effect: Homomorphically Mapping the Handled
-Computation into another Computation
-
-\cite{pretnar15}:
-\[
-  \mathtt{handler}\; \{ \mathtt{return}\; x
-          \mapsto c_r, \mathtt{op}_1(x;k) \mapsto c_1, \ldots,
-          \mathtt{op}_n(x;k) \mapsto c_n \}
-\]
-
-
-
-\subparagraph{Shallow Handler}\label{sec:shallow_handler}
-\hfill \\
-
-only Handle the first call of an Operation
-
-more ``elementary'': can be used to simulate Deep Handler through
-Recursion \cite{pretnar15}
-
-
-
-\subparagraph{Deep Handler}\label{sec:deep_handler}
-\hfill \\
-
-continue Handling Operations in the Continuation
-(\S\ref{sec:continuation})
-
-
-
-\paragraph{Generic Effect}\label{sec:generic_effect}
-\hfill \\
-
-\cite{pretnar15}:
-\[
-  \mathtt{op}\; \stackrel{\mathrm{def}}{=} \;\mathtt{fun} x \mapsto
-  \;\mathtt{op}(x; y.\mathtt{return}\; y)
-\]
-Parameter $x$ passed to Operation with the Trivial Continuation
-
-
-
-\paragraph{Extensible Effect}\label{sec:extensible_effect}
-\hfill \\
-
-van Laarhoven Free Monad (\S\ref{sec:vanlaarhoven_free_monad})
-
-
-
-\paragraph{Communication Effect}\label{sec:communication_effect}
-\hfill \\
-
-Communication \S\ref{sec:communication}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Partial Type}\label{sec:partial_type}
 \cite{thompson99}
 % --------------------------------------------------------------------
@@ -2733,6 +2348,614 @@ Weakening for Judgemental Equality:
 \]
 where $A = B$ is notation for the Type $Id_U(A,B)$ where $U$ is the
 Universe containing $A$ and $B$.
+
+
+
+% ====================================================================
+\section{Effect System}\label{sec:effect_system}
+% ====================================================================
+
+(Wadler, Thiemann - 2003 - \emph{The marriage of effects and monads}):
+%FIXME
+
+Types $\tau$, $\tau'$
+
+Effect $\sigma$
+
+$\tau \xrightarrow{\sigma} \tau'$
+
+$(\tau \xrightarrow{\sigma} \tau')^\dag$
+$\rightsquigarrow$
+$\tau^\dag \rightarrow T^\sigma \tau'^\dag$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Computational Effect}\label{sec:computational_effect}
+% --------------------------------------------------------------------
+
+Computational Effects
+
+e.g. Exceptions, Non-determinism, Interactive Input/Output,
+Concurrency, State, Time, Continuations, etc. \cite{plotkin-pretnar09}
+
+Monad (\S\ref{sec:monad})
+
+Computation (Monad) $T$ Returning Value of Type $X$:
+\[
+  T X
+\]
+
+Return
+
+Bind
+
+
+
+% --------------------------------------------------------------------
+\subsection{Algebraic Effect}\label{sec:algebraic_effect}
+% --------------------------------------------------------------------
+
+\cite{nielson-nielson99}
+\cite{plotkin-pretnar09}
+\cite{pretnar15}
+
+(Countable) Equational Theories (Algebraic Theory
+\S\ref{sec:algebraic_theory})
+
+
+as an alternative to using Monads (\S\ref{sec:monad}) to Model
+Side-effects, most often seen in Strict Languages
+
+subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
+captured by any Effect System (E. Kmett)
+
+Continuations (\S\ref{sec:continuation}) are not representable as
+Algebraic Effects
+
+
+\cite{plotkin-pretnar09}:
+
+$T X$: Computations $T$ that Return Values in $X$, for ``suitable''
+Monad (\S\ref{sec:monad}) $T$
+
+Subclass of Computational Effects (\S\ref{sec:computational_effect}):
+Effects that allow Representation by Operations and Equations.
+
+Equational Logic (\S\ref{sec:equational_logic})
+
+Computational Effects representable by an Algebraic Theory:
+Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
+Stream Redirection, Backtracking, Co-operative Multi-threading,
+Delimited Continuations, etc.
+
+Sets of Operations
+
+Operations give rise to Effects
+
+Arguments of an Operation represent possible Computations after an
+Occurrence (???) of an Effect
+
+Example Non-deterministic Boolean $\mono{or}$ Operator:
+\[
+  \mono{or}(\mono{return}\;true, \mono{return}\;false)
+  : F \mathrm{Bool}
+\]
+
+$F \sigma$: Type of Computations with Return Values of Type $\sigma$
+
+Computation Monad: Free-model Monad (???, Free Monad
+\S\ref{sec:free_monad}) of the Algebraic Theory; Equations of the
+Theory Generate the Free-model Functor (exactly the corresponding
+Monad for the Effect, Modulo the Forgetful Functor): used to Interpret
+the Type $F \sigma$.
+
+Operations Interpreted by the Model Structure
+
+Family of Functions Parametric in $X$ (Algebraic Operation),
+characterized by a Naturality Condition %FIXME
+
+Example Parametric Operation:
+\[
+  \mono{or}_X : T X^2 \rightarrow T X
+\]
+
+Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
+Algebraic Theory
+
+Algebraic Operations (\emph{Effect Constructors}) and Effect Handlers
+(\emph{Effect Destructors}) are Dual (cf. Filinski: Reflection and
+Reification) %FIXME
+
+Handling a Computation is Composing it with a Unique Homomorphism
+(defined Universally) with Domain a Free Model of the Algebraic Theory
+of the Effects ``at hand'', and Range the Programmer-defined Model
+(???) of the Algebraic Theory, Extending a Programmer-defined Map on
+Values.
+
+Instances of Handlers: Exception Handling, Stream Redirection,
+Renaming and Hiding, Timeout, Rollback, etc.
+
+\HandRight\; Note that some Handlers (e.g. for Backtracking) do not
+respect the Equations of an Algebraic Theory. \cite{pretnar15}
+
+\cite{plotkin-pretnar09}:
+
+Parts of an Effect System detailed below:
+\begin{itemize}
+  \item Base Signature $\Sigma_\mathrm{base}$:
+    \begin{itemize}
+      \item Base Types
+      \item Function Symbols
+      \item Relation Symbols
+    \end{itemize}
+  \item Base Terms
+  \item Base Formulas
+  \item Effect Signature $\Sigma_\mathrm{eff}$:
+    \begin{itemize}
+      \item Operations
+    \end{itemize}
+  \item Effect Terms
+  \item (Conditional) Effect Theory (\S\ref{sec:effect_theory})
+    $\thy{E}$:
+    \begin{itemize}
+      \item Conditional Equations
+    \end{itemize}
+  \item Handler (\S\ref{sec:effect_handler}) Signature
+    $\Sigma_\mathrm{hand}$:
+    \begin{itemize}
+      \item Handler Symbols
+    \end{itemize}
+  \item Handler Types
+  \item Handler Terms
+  \item Computation Types
+  \item Computation Terms
+\end{itemize}
+
+
+\emph{Base Signature} $\Sigma_{\mathrm{base}}$:
+\begin{itemize}
+  \item Base Types $\beta_1, \beta_2, \ldots$
+  \begin{itemize}
+    \item Arity Types $\alpha_1, \alpha_2, \ldots$
+  \end{itemize}
+  \item Function Symbols $f : (\beta_1, \ldots, \beta_n) \rightarrow
+    \beta$
+  \item Relation Symbols $R : (\beta_1, \ldots, \beta_n)$
+\end{itemize}
+
+Variables $x,y,z,\ldots$
+
+Function Symbols $f,g,h,\ldots$
+
+\emph{Base Terms}:
+\[
+  v ::= x \quad | \quad f (v_1, \ldots, v_n)
+\]
+
+\emph{Base Formulas} $\varphi$: Equations $v_1 = v_2$, Relation
+Symbols $R (v_1, \ldots, v_n)$, Logical Connectives, Quantifiers
+applied to Base Types
+
+\emph{Context} $\Gamma$: Variables Bound to Base Types
+
+A Context $\Gamma$ Types Base Terms as $\Gamma \vdash v:\beta$ and
+Base Formulas as $\Gamma \vdash \varphi : \mathbf{form}$
+
+\emph{Interpretation} of the Base Signature:
+\begin{itemize}
+  \item Sets $\llbracket \beta \rrbracket$ for each Base Type
+    (Countable when $\beta$ is an Arity Type)
+  \item Maps $\llbracket f \rrbracket : \llbracket \beta_1, \ldots,
+    \beta_n \rrbracket \rightarrow \llbracket \beta \rrbracket$ for
+    each Function Symbol
+  \item Subsets $\llbracket R \rrbracket \subseteq \llbracket \beta_1,
+    \ldots, \beta_n \rrbracket$ for each Relation Symbol
+  \item Maps $\llbracket v \rrbracket : \llbracket \Gamma \rrbracket
+    \rightarrow \llbracket \beta \rrbracket$ for Terms
+  \item Subsets $\llbracket \varphi \rrbracket \subseteq \llbracket
+    \Gamma \rrbracket$ for Formulas
+\end{itemize}
+where $\llbracket \beta_1, \ldots, \beta_n \rrbracket = \llbracket
+\beta_1 \rrbracket \times \cdots \times \llbracket \beta_n \rrbracket$
+
+\emph{Effect Signature} $\Sigma_{\mathrm{eff}}$:
+\begin{itemize}
+  \item Operation Symbols $\mono{op} : \beta_1, \ldots, \beta_m;
+    A_1, \ldots, A_n$ where $\beta_1, \ldots, \beta_m$ are Base Type
+    Parameters and $A_1, \ldots, A_n$ are Lists of Argument Arity
+    Types (``;'' is ommitted if the List of Base Types is Empty and
+    $n$ is used if all $A_i$ Lists of Argument Arities are Empty)
+\end{itemize}
+
+\emph{Effect Variables} $w$
+
+\emph{Effect Terms}:
+\[
+  T ::= w(v_1, \ldots, v_n) \quad | \quad
+  \mono{op}_{v_1, \ldots, v_m} (X_1:A_1.T_1, \ldots, X_n:A_n.T_n)
+\]
+where $X_i:A_i$ are Lists of Base Terms of Arity Types.
+
+$\Delta$ is a Set of Effect Variables $w:(\alpha_1, \ldots, \alpha_n)$
+with rules:
+\begin{enumerate}
+  \item $(w:(\alpha_1, \ldots, \alpha_n) \in \Delta)$:
+  \[
+    {\Gamma \vdash v_1:\alpha_1, \ldots, v_n:\alpha_n}
+    \over{\Gamma;\Delta \vdash w(v_1, \ldots, v_n)}
+  \]
+  \item $(\mono{op} : \beta_1, \ldots, \beta_m; A_1, \ldots, A_n
+    \in \Sigma_\mathrm{eff})$:
+    \[
+      {\Gamma \vdash v_1:\beta_1, \ldots, v_m:\beta_m \quad\quad
+        \Gamma, X_i:A_i; \Delta \vdash T_i \quad (i = 1, \ldots, n)}
+      \over{\Gamma; \Delta \vdash
+        \mono{op}_{v_1,\ldots,v_m}(X_i:A_i.T_i)_i}
+    \]
+\end{enumerate}
+
+Typing Effect Terms: $\Gamma; \Delta \vdash T$
+
+\emph{Conditional Equations}: $\Gamma; \Delta \vdash T_1 = T_2
+(\varphi)$ given that $\Gamma; \Delta \vdash T_1$, $\Gamma; \Delta
+\vdash T_2$, and $\Gamma \vdash \varphi:\mathbf{form}$
+
+\emph{Conditional Effect Theory} (\S\ref{sec:effect_theory}):
+$\thy{E}$ is a collection of Conditional Equations
+
+Equational Theory (\S\ref{sec:equational_theory}) given by Effect
+Theory:
+\begin{itemize}
+  \item For each Operator $\mono{op}:\beta_1, \ldots, \beta_m; A_1,
+    \ldots, A_n \in \Sigma_\mathrm{eff}$ and $b_1, \ldots, b_m \in
+    \llbracket \beta_1, \beta_2, \ldots \rrbracket$ take an Operation
+    Symbol $\mono{op}_{b_1, \ldots, b_m}$ of (Countable) Arity
+    $\sum_{i=1}^n|\llbracket A_i \rrbracket|$ (??? is this indexing
+    correct) %FIXME
+  \item Each Effect Term $\Gamma; \Delta \vdash T$ and each $c_1,
+    \ldots, c_n \in \llbracket \Gamma \rrbracket$ gives rise to a Term
+    $\Delta' \vdash T_{c_1, \ldots, c_n}$ with $\Delta'$ consisting of
+    Effect Variables $w_{a_1, \ldots, a_m}$ for each $w:(\alpha_1,
+    \ldots, \alpha_m) \in \Delta$ and $a_1, \ldots, a_m \in \llbracket
+    \alpha_1, \alpha_2, \ldots \rrbracket$ (??? again indexing) %FIXME
+  \item Equations:
+    \[
+      \Delta' \vdash T_{c_1, \ldots, c_n} = T_{c_1', \ldots, c_n'}
+    \]
+    (??? indexes) for any Conditional Equations $\Gamma; \Delta \vdash
+    T = T'(\varphi)$ in $\thy{E}$ and any $c_1, \ldots, c_n \in
+    \llbracket \varphi \rrbracket$
+\end{itemize}
+
+Model of the Effect Theory:
+\begin{itemize}
+  \item Set $M$
+  \item Family of Maps $\{ \mono{op}_M : \llbracket \beta_1, \ldots,
+    \beta_m \rrbracket \times \prod_{i=1}^n M^{\llbracket A_i
+      \rrbracket} \rightarrow M \}_{\mono{op}:\beta_1, \ldots,
+      \beta_m; A_1, \ldots, A_n \in \Sigma_{\mathrm{eff}}}$
+\end{itemize}
+such that the corresponding Maps $\mono{op}_M(b_1, \ldots, b_m, -)$
+(where $b_1, \ldots, \b_m \in \llbracket \beta_1, \beta_2, \ldots
+\rrbracket$) satisfy the Equations of the Induced Infinitary Effect
+Theory.
+
+A Homomorphism between Models $M$ and $N$ is a Map $f : M \rightarrow
+N$ such that $\mono{op}_N \circ (id_{\llbracket \beta_1, \ldots,
+  \beta_m \rrbracket} \times \prod_{i=1}^n f^{\llbracket A_i
+  \rrbracket}) = f \circ \mono{op}_M$
+
+Category of Models and Homomorphisms $\cat{Mod}_\thy{E}$
+
+Forgetful Functor $U : \cat{Mod}_\thy{E} \rightarrow \cat{Set}$
+
+Left-adjoint to $U$ Free-model Functor $F$: constructs the Free Model
+$F A$ on a Set of Generators $A$.
+
+$U F A$: Set of Computations Returning Values in $A$
+
+$U F$: Monad used to Model the corresponding Effect
+
+Handler (\S\ref{sec:effect_handler}) Signature $\Sigma_\mathrm{hand}$
+
+Typing Handlers
+
+Computation Type
+
+Computation Term
+
+Typing Computation Terms
+
+Examples: \cite{plotkin-pretnar09}
+
+CCS (Calculus of Communicating Systems)
+
+%FIXME
+
+
+
+\cite{pretnar15}:
+
+Occurence of an Effect can been seen as a Branching in the Execution
+of a Program (number of Branches equal to the number of possible
+outcomes of an Effect)
+
+``Source'' of an Effect is represented by an Operation with Arity
+equal to the number of outcomes and Arguments represent Branches
+
+
+\textbf{Language}
+
+\cite{pretnar15}:
+
+\emph{Values}:
+\begin{flalign*}
+  \quad v ::=&\quad x \quad | \quad \true \quad | \quad \false \quad
+            | \quad \lambda x \mapsto c &\\
+      \quad |&\quad \mono{handler}\; \{ \mono{return}\; x
+              \mapsto c_r, \mono{op}_1(x;k) \mapsto c_1, \ldots,
+              \mono{op}_n(x;k) \mapsto c_n \}&
+\end{flalign*}
+
+\emph{Computations}:
+\begin{flalign*}
+  \quad c ::=&\quad \mono{return}\; v \quad | \quad \mono{op}(v;y.c) \quad
+            | \quad \mono{do}\; x \leftarrow c_1 \;\mono{in}\; c_2 &\\
+      \quad |&\quad \mono{if}\; v \;\mono{then}\; c_1
+              \;\mono{else}\; c_2 \quad
+            | \quad v_1 v_2 \quad | \quad \;\mono{with}\; v
+              \;\mono{handle}\; c&
+\end{flalign*}
+
+Sequencing:
+\[
+  \mono{do}\; x \leftarrow c_1 \;\mono{in}\; c_2
+\]
+first Evaluate $c_1$, Bind result Value to $x$, and proceed as $c_2$;
+if $x$ does not appear in $c_2$, then abbreviate to $c1; c2$.
+
+Operation Call:
+\[
+  \mono{op}(v;y.c)
+\]
+Parameter Value $v$ (e.g. Memory Location to be Read) passed to
+$\mono{op}$, $\mono{op}$ performs Effect, Result Value (e.g.
+Contents of Memory Location) is Bound to $y$ and Evaluation of
+Continuation $c$ resumes. (Handlers \S\ref{sec:effect_handler}) may
+override this behavior).
+
+Generic Effect (\S\ref{sec:generic_effect}):
+\[
+  \mono{op}\; \stackrel{\mathrm{def}}{=} \;\mono{fun}\; x \mapsto
+  \mono{op}(x; y.\mono{return}\; y)
+\]
+Parameter Value $x$ passed to Operation with the Trivial Continuation;
+specific Operations $\mono{op}(v;y.c)$ can be recovered by
+Evaluating:
+\[
+  \mono{do}\; y \leftarrow \mono{op}\; v \;\mono{in}\; c
+\]
+
+
+\textbf{Denotational Semantics} \cite{pretnar15}
+
+Computations as Trees:
+
+Returned Values (or Bottom $\bot$ for Divergent Computation that does
+not call any Operations) are Leaves and Branching Points are
+Operations
+
+Operation Calls create a ``Branching Point'' in the Evaluation with as
+many Branches as there are possible Results that can be Yielded to the
+Continuation. \cite{pretnar15}
+
+A Divergent Computation that repeatedly Calls Operations gives a
+Non-well-founded Tree. \cite{pretnar15}
+
+
+\emph{Denotational Semantics Returning First-order Values and no
+  Recursion}:
+
+Value Type $A$: Set $\llbracket A \rrbracket$
+
+Computation Type $\llbracket A!\Delta \rrbracket$: Set of Trees with
+Leaves (Values) in $\llbracket A \rrbracket$ and Nodes (Operations) in
+$\Delta$
+
+Handlers: Functions between Trees defined by Structural Recursion on
+Tree of the Handled Computation and Handling is Interpreted by
+Application of such Functions
+
+A \emph{Model} of $\Delta$ is a Set $M$ with Maps:
+\[
+  \mono{op}_M : \llbracket A \rrbracket
+    \times M^{\llbracket B \rrbracket} \rightarrow M
+\]
+for each Operation $\mono{op} : A \rightarrow B$ in $\Delta$
+
+\emph{Homomorphism} between Models $M$, $N$ is a Map $h : M
+\rightarrow N$ such that:
+\[
+  (h \circ \mono{op}_M)(x,k) = \mono{op}_N(x,h \circ k)
+\]
+
+$\llbracket A ! \Delta \rrbracket$ is the \emph{Free Model} of
+$\Delta$ over $A$ with Universal Property
+(\S\ref{sec:universal_property}):
+
+For any Model $M$ of $\Delta$ and Map $f : \llbracket A \rrbracket
+\rightarrow M$ there exists a Unique Homomorphism $h : \llbracket A !
+\Delta \rrbracket \rightarrow M$ that agrees with $f$ on Leaves.
+\cite{pretnar15}
+
+Operation Clauses define a Model of Operations and the Return Clause
+provides a Function $f$ that can be extended to a Homomorphism.
+\cite{pretnar15}
+
+\HandRight\; With General Recursion and Higher-order Results then
+Domains (\S\ref{sec:order_domain}) are used instead of Sets.
+
+Comodel: Set $W$ of possible World States and Map $\mono{op}^W : W
+\times \llbracket A \rrbracket \rightarrow W \times \llbracket B
+\rrbracket$ for each Operation $\mono{op} : A \rightarrow B$ in
+$\Sigma$
+
+when Operation Call $\mono{op}(v; y.c)$ escapes all Handlers, pass
+current State $w \in W$ and Parameter $v$ to $\mono{op}^W$ and get
+back new State and Result, assigning Result to $y$ and continue
+Evaluating $c$. \cite{pretnar15}
+
+
+\textbf{Operational Semantics} \cite{pretnar15}
+
+Small-step Operational Semantics
+
+Operation Calls do not perform Effects: they behave as ``Signals''
+that propagate outwards until they reach a Handler with a matching
+Clause. \cite{pretnar15}
+
+An Operation that escapes all Handlers is treated as a Terminating
+Computation (no further Reductions). \cite{pretnar15}
+
+``Actual'' Effectful behavior simulated by an Outermost Handler.
+\cite{pretnar15}
+
+
+
+\subsubsection{Effect Theory}\label{sec:effect_theory}
+\cite{plotkin-pretnar09}
+
+$\thy{E}$
+
+Conditional Effect Theory: collection of Conditional Equations:
+\[
+  \Gamma; \Delta \vdash T_1 = T_2(\varphi)
+\]
+given that $\Gamma; \Delta \vdash T_1$, $\Gamma; \Delta \vdash T_2$,
+and $\Gamma \vdash \varphi : \mathbf{form}$
+
+An Effect Theory $\thy{E}$ gives rise to a standard (possibly
+Infinitary) Equational Theory (\S\ref{sec:equational_theory}).
+\cite{plotkin-pretnar09}
+
+
+
+\subsubsection{Effect Handler}\label{sec:effect_handler}
+
+Homomorphism from Free Algebras
+\cite{bauer-pretnar12}
+
+\cite{plotkin-pretnar09}:
+
+corresponds to Model of the Algebraic Theory
+(\S\ref{sec:algebraic_theory}) of the Effects
+
+Handling a Computational Effect: Homomorphically Mapping the Handled
+Computation into another Computation
+
+Well-formed-ness, Correctness (redefinition of Operations yields a
+Model of the Effect Theory)
+
+\cite{plotkin-pretnar09}:
+
+Type Variables $X$
+
+Value Types $\sigma$
+
+Handler Variables $z$
+
+Value Terms $u$
+
+Quantifier-free Formulas $\varphi$
+
+\emph{Handler Types}:
+\begin{flalign*}
+  \quad \chi &::= X \quad | \quad F \sigma \quad | \quad 1 \quad
+    | \quad \chi_1 \times \chi_2 \quad | \quad \sigma \rightarrow \chi &
+\end{flalign*}
+
+\emph{Handler Terms}:
+\begin{flalign*}
+  \quad h ::=& \; z(v_1, v_2, \ldots) \quad
+    | \quad \mono{op}_{v_1, v_2, \ldots}
+      (X_1:A_1.h_1, X_2:A_2.h_2, \ldots) & \\
+    |&\quad \mono{if}\; \varphi \;\mono{then}\; h_1
+      \;\mono{else}\; h_2 \quad | \quad \mono{return}\; u \quad
+    | \quad \mono{let}\; x \;\mono{be}\; h \;\mono{in}\; h' & \\
+    |&\quad \star \quad
+    | \quad \langle h_1, h_2 \rangle \quad | \quad \mono{fst}\; h \quad
+    | \quad \mono{snd}\; h \quad | \quad \lambda x:\sigma.h \quad
+    | \quad h u &
+\end{flalign*}
+
+Typing Handler Terms:
+\begin{itemize}
+  \item Context $\Gamma$ of Value Types
+  \item Context $Z$ of Handler Variables $z : (\alpha_1, \alpha_2,
+    \ldots) \rightarrow \chi$ (written $z:\chi$ if the List of Arity
+    Types is Empty), according to rules:
+    \begin{enumerate}
+      \item $(z:(\alpha_1, \alpha_2, \ldots) \rightarrow \chi \in Z)$
+        %FIXME
+      \item $(\mono{op}:\beta_1, \ldots, \beta_m; A_1, \ldots, A_n \in
+        \Sigma_\mathrm{eff})$
+        %FIXME
+      \item %FIXME
+      \item %FIXME
+    \end{enumerate}
+\end{itemize}
+
+Handler Signature $\Sigma_\mathrm{hand}$
+
+
+\cite{pretnar15}:
+\[
+  \mono{handler}\; \{ \mono{return}\; x
+          \mapsto c_r, \mono{op}_1(x;k) \mapsto c_1, \ldots,
+          \mono{op}_n(x;k) \mapsto c_n \}
+\]
+
+
+
+\paragraph{Shallow Handler}\label{sec:shallow_handler}
+\hfill \\
+
+only Handle the first call of an Operation
+
+more ``elementary'': can be used to simulate Deep Handler through
+Recursion \cite{pretnar15}
+
+
+
+\paragraph{Deep Handler}\label{sec:deep_handler}
+\hfill \\
+
+continue Handling Operations in the Continuation
+(\S\ref{sec:continuation})
+
+
+
+\subsubsection{Generic Effect}\label{sec:generic_effect}
+
+\cite{pretnar15}:
+\[
+  \mono{op}\; \stackrel{\mathrm{def}}{=} \;\mono{fun} x \mapsto
+  \;\mono{op}(x; y.\mono{return}\; y)
+\]
+Parameter $x$ passed to Operation with the Trivial Continuation
+
+
+
+\subsubsection{Extensible Effect}\label{sec:extensible_effect}
+
+van Laarhoven Free Monad (\S\ref{sec:vanlaarhoven_free_monad})
+
+
+
+\subsubsection{Communication Effect}\label{sec:communication_effect}
+
+Communication \S\ref{sec:communication}
 
 
 

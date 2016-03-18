@@ -588,7 +588,7 @@ Constructions for Concurrent Programming:
   \item Recursion \S\ref{sec:process_recursion}
 \end{itemize}
 
-Inaction $\mathtt{inact}$ (Unit of $|$)
+Inaction $\mono{inact}$ (Unit of $|$)
 
 
 Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
@@ -786,7 +786,7 @@ $?$ Receive
 \[
     k![e_1 \cdots e_n]; P
     \quad\quad\quad
-    k?(x_1 \cdots x_n) \; \mathtt{in} \; P
+    k?(x_1 \cdots x_n) \; \mono{in} \; P
 \]
 
 
@@ -822,9 +822,9 @@ Channel Passing
 Distributed Programming
 
 \[
-  \mathtt{throw} \; k[k']; P
+  \mono{throw} \; k[k']; P
   \quad\quad\quad
-  \mathtt{catch} \; k(k') \; \mathtt{in} \; P
+  \mono{catch} \; k(k') \; \mono{in} \; P
 \]
 
 $\otimes_n P$
@@ -872,7 +872,7 @@ Reduction Rule:
 
 Unit of $|$
 
-$\mathtt{inact}$
+$\mono{inact}$
 
 
 
@@ -904,9 +904,9 @@ Declares Name (or Channel) to be Local in Scope
 Process Variable (???) $X$
 
 \[
-  \mathtt{def} \; X_1(\tilde{x}_1 \tilde{k}_1)
-  = P_1 \; \mathtt{and} \; \cdots \; \mathtt{and} \;
-  X_n(\tilde{x}_n \tilde{k}_n) = P_n \; \mathtt{in} \; P
+  \mono{def} \; X_1(\tilde{x}_1 \tilde{k}_1)
+  = P_1 \; \mono{and} \; \cdots \; \mono{and} \;
+  X_n(\tilde{x}_n \tilde{k}_n) = P_n \; \mono{in} \; P
 \]
 
 $\mu t.P$ Enter Recursive Scope
@@ -966,9 +966,9 @@ Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
 
 \cite{honda-vasconcelos-kubo98}:
 \[
-  \mathtt{request} \; a(k) \; \mathtt{in} \; P
+  \mono{request} \; a(k) \; \mono{in} \; P
   \quad\quad\quad
-  \mathtt{accept} \; a(k) \; \mathtt{in} \; P
+  \mono{accept} \; a(k) \; \mono{in} \; P
 \]
 
 Request via Name $a$ to Initiate a Session and Generation of Channel
@@ -1069,11 +1069,11 @@ in any Process is Bounded by a Constant)
 
 \textbf{Example of a Program} \cite{honda-vasconcelos-kubo98}
 \[
-  \mathtt{accept} \; a(k) \; \mathtt{in} \; k![1];
-  k?(y) \; \mathtt{in} \; P
+  \mono{accept} \; a(k) \; \mono{in} \; k![1];
+  k?(y) \; \mono{in} \; P
   \quad | \quad
-  \mathtt{request} \; a(k) \; \mathtt{in} \; k?(x)
-  \; \mathtt{in} \; k![x+1]; \mathtt{inact}
+  \mono{request} \; a(k) \; \mono{in} \; k?(x)
+  \; \mono{in} \; k![x+1]; \mono{inact}
 \]
 First Process Receives Request for a new Session via $a$, Generates
 new Channel $k$, then Sequentially Sends $1$ on $k$ and Receives
@@ -1082,7 +1082,7 @@ Return Value $y$ on $k$ (??? and Continues on $(y)$ bound in $P$ ???)
 Second Process Requests Initiation of Session
 (\S\ref{sec:session_initiation}) via $a$, and Sequentially Receives
 Value $x$ on Generated Channel $k$ and Sends Return Value $x + 1$ on
-$k$ (??? $\mathtt{inact}$)
+$k$ (??? $\mono{inact}$)
 
 Alpha Equivalence $\equiv_\alpha$
 
@@ -1110,22 +1110,22 @@ Structural Equality $equiv$ given by the Smallest Congruence Relation
 (\S\ref{sec:congruence_relation}) such that:
 \begin{enumerate}
   \item $P \equiv_\alpha Q \Rightarrow P \equiv Q$
-  \item $P \;|\; \mathtt{inact} \equiv P$, \quad\quad $P | Q \equiv Q
+  \item $P \;|\; \mono{inact} \equiv P$, \quad\quad $P | Q \equiv Q
     | P$, \quad\quad $(P|Q)|R \equiv P|(Q|R)$
-  \item $(\nu u) \; \mathtt{inact}$, \quad
+  \item $(\nu u) \; \mono{inact}$, \quad
     $(\nu u u)P \equiv (\nu u)P$, \quad
     $(\nu u u')P \equiv (\nu u' u)P$, \\
     $u \notin fu(Q) \Rightarrow (\nu u)P | Q \equiv (\nu u)(P|Q)$, \\
     $u \notin fu(D) \Rightarrow
-    (\nu u) \mathtt{def} \; D \; \mathtt{in} \; P
-    \equiv \mathtt{def} \; D \; \mathtt{in} \; (\nu u)P$
+    (\nu u) \mono{def} \; D \; \mono{in} \; P
+    \equiv \mono{def} \; D \; \mono{in} \; (\nu u)P$
   \item $fpv(D) \cap fpv(Q) = \varnothing \Rightarrow
-    (\mathtt{def} \; D \; \mathtt{in} \; P) | Q
-    \equiv \mathtt{def} \; D \; \mathtt{in} \; (P|Q)$
+    (\mono{def} \; D \; \mono{in} \; P) | Q
+    \equiv \mono{def} \; D \; \mono{in} \; (P|Q)$
   \item $fpv(D) \cap fpv(D') = \varnothing \Rightarrow
-    \mathtt{def} \; D \; \mathtt{in} \;
-    (\mathtt{def} \; D' \; \mathtt{in} \; P)
-    \equiv \mathtt{def} \; D \; \mathtt{and} \; D' \mathtt{in} \; P$
+    \mono{def} \; D \; \mono{in} \;
+    (\mono{def} \; D' \; \mono{in} \; P)
+    \equiv \mono{def} \; D \; \mono{and} \; D' \mono{in} \; P$
 \end{enumerate}
 
 
@@ -1192,9 +1192,9 @@ Names $\Lambda = \{x,y,z,u,v,\ldots\}$
       |&\quad x\langle y \rangle.P \quad
       | \quad x(y).P \quad
       | \quad !x(y).P \quad \\
-      |&\quad x.\mathtt{inl}; P \quad
-      | \quad x.\mathtt{inr}; P \quad
-      | \quad x.\mathtt{case}(P,Q)
+      |&\quad x.\mono{inl}; P \quad
+      | \quad x.\mono{inr}; P \quad
+      | \quad x.\mono{case}(P,Q)
 \end{split}
 \]
 
@@ -1215,9 +1215,9 @@ Names $\Lambda = \{x,y,z,u,v,\ldots\}$
 
 (Minimal) Labelled Choice Mechanism:
 \begin{itemize}
-  \item $x.\mathtt{inl}; P$
-  \item $x.\mathtt{inr}; P$
-  \item $x.\mathtt{case}(P,Q)$
+  \item $x.\mono{inl}; P$
+  \item $x.\mono{inr}; P$
+  \item $x.\mono{case}(P,Q)$
 \end{itemize}
 
 Free Names $fn(P)$, Bound Names $bn(P)$
@@ -1257,9 +1257,9 @@ Congruence
   & $(RC)$ \\
   $x\langle y \rangle.Q | !x(z).P \rightarrow Q | P \{y/z\} | !x(z).P$
   & $(R!)$ \\
-  $x.\mathtt{inl}; P | x.\mathtt{case}(Q,R) \rightarrow P | Q$
+  $x.\mono{inl}; P | x.\mono{case}(Q,R) \rightarrow P | Q$
   & $(RL)$ \\
-  $x.\mathtt{inr}; P | x.\mathtt{case}(Q,R) \rightarrow P | R$
+  $x.\mono{inr}; P | x.\mono{case}(Q,R) \rightarrow P | R$
   & $(RR)$ \\
   $Q \rightarrow Q' \Rightarrow P|Q \rightarrow P|Q'$
   & $(R|)$ \\
@@ -1284,38 +1284,38 @@ Co-action $\overline{\alpha}$
   \alpha ::=&\quad x(y) \quad
            | \quad \overline{x \langle y \rangle} \quad
            | \quad \overline{(\nu y) x \langle y \rangle} \quad \\
-           |&\quad x.\mathtt{inl} \quad
-           | \quad x.\mathtt{inr} \quad
-           | \quad \overline{x.\mathtt{inl}} \quad
-           | \quad \overline{x.\mathtt{inr}} \quad
+           |&\quad x.\mono{inl} \quad
+           | \quad x.\mono{inr} \quad
+           | \quad \overline{x.\mono{inl}} \quad
+           | \quad \overline{x.\mono{inr}} \quad
 \end{split}
 \]
 Side Conditions:
-$(\mathtt{res})$
-$(\mathtt{par})$
-$(\overline{\mathtt{par}})$
-$(\mathtt{com})$
-$(\overline{\mathtt{com}})$
-$(\mathtt{close})$
-$(\overline{\mathtt{close}})$
-$(\mathtt{open})$
-$(\mathtt{out})$
-$(\mathtt{in})$
-$(\mathtt{rep})$
-$(\mathtt{lout})$
-$(\mathtt{rout})$
-$(\mathtt{lin})$
-$(\mathtt{rin})$
+$(\mono{res})$
+$(\mono{par})$
+$(\overline{\mono{par}})$
+$(\mono{com})$
+$(\overline{\mono{com}})$
+$(\mono{close})$
+$(\overline{\mono{close}})$
+$(\mono{open})$
+$(\mono{out})$
+$(\mono{in})$
+$(\mono{rep})$
+$(\mono{lout})$
+$(\mono{rout})$
+$(\mono{lin})$
+$(\mono{rin})$
 
 \begin{itemize}
   \item $x.(y)$ (Input)
   \item $\overline{x \langle y \rangle}$ (Output)
   \item $\overline{(\nu y) x \langle y \rangle}$ (Bound Output; Output
     new Name $y$ on Channel $x$)
-  \item $x.\mathtt{inl}$ (Left Offer)
-  \item $x.\mathtt{inr}$ (Right Offer )
-  \item $\overline{x.\mathtt{inl}}$ (Left Select)
-  \item $\overline{x.\mathtt{inr}}$ (Right Select)
+  \item $x.\mono{inl}$ (Left Offer)
+  \item $x.\mono{inr}$ (Right Offer )
+  \item $\overline{x.\mono{inl}}$ (Left Select)
+  \item $\overline{x.\mono{inr}}$ (Right Select)
   \item $\xrightarrow{\tau}$ (Internal Action)
 \end{itemize}
 
@@ -1498,7 +1498,7 @@ $\overline{\overline{\alpha}} = \alpha$ when $\overline{\alpha}$ is
 
 Sort $\langle \alpha, \overline{\alpha} \rangle$ represents two
 complementary Interaction Structures: one starting with a
-$\mathtt{request}$ and another with an $\mathtt{accept}$
+$\mono{request}$ and another with an $\mono{accept}$
 
 
 \textbf{Sorting}: Finite Partial Mapping from Names and Variables to
