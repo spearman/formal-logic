@@ -2381,14 +2381,28 @@ Concurrency, State, Time, Continuations, etc. \cite{plotkin-pretnar09}
 
 Monad (\S\ref{sec:monad})
 
-Computation (Monad) $T$ Returning Value of Type $X$:
+Computation (Monad) $T$ Returning Value of Type $A$:
 \[
-  T X
+  T A
 \]
 
 Return
 
 Bind
+
+\cite{plotkin-pretnar13}:
+
+In the Category $\cat{Set}$, a Computation that Returns Values from a
+Set $A$ is Modelled by an Element $T A$ for a ``suitable'' Monad $T$.
+
+E.g. Exceptions, State, Non-determinism, Interactive Input/Output,
+Time, Continuations, etc. (and combinations thereof)
+
+Algebraic Effects (\S\ref{sec:algebraic_effect}):
+\begin{itemize}
+  \item Set of Operations representing Sources of Effects
+  \item Equational Theory describing Properties of the Operations
+\end{itemize}
 
 
 
@@ -2398,7 +2412,14 @@ Bind
 
 \cite{nielson-nielson99}
 \cite{plotkin-pretnar09}
+\cite{plotkin-pretnar13}
 \cite{pretnar15}
+
+\HandRight\; The paper \emph{Handlers of Algebraic Effects}
+\cite{plotkin-pretnar09} (Plotkin, Pretnar 2009) is a preliminary
+version of \emph{Handling Algebraic Effects} \cite{plotkin-pretnar13}
+(Plotkin, Pretnar 2013)
+
 
 (Countable) Equational Theories (Algebraic Theory
 \S\ref{sec:algebraic_theory})
@@ -2412,6 +2433,20 @@ captured by any Effect System (E. Kmett)
 
 Continuations (\S\ref{sec:continuation}) are not representable as
 Algebraic Effects
+
+\cite{plotkin-pretnar13}:
+
+Algebraic Effects (\S\ref{sec:algebraic_effect}):
+\begin{itemize}
+  \item Set of Operations representing Sources of Effects
+  \item Equational Theory (\S\ref{sec:equational_theory}) describing
+    Properties of the Operations
+\end{itemize}
+
+Each Computation either Returns a Value, or performs an Operation with
+an Outcome that determines a Continuation (\S\ref{sec:continuation})
+of the Computation with Arguments of the Operation representing
+possible Continuations.
 
 
 \cite{plotkin-pretnar09}:
@@ -2657,21 +2692,95 @@ $U F A$: Set of Computations Returning Values in $A$
 
 $U F$: Monad used to Model the corresponding Effect
 
-Handler (\S\ref{sec:effect_handler}) Signature $\Sigma_\mathrm{hand}$
+\emph{Handler Types}:
+\begin{flalign*}
+  \quad \chi &::= X \quad | \quad F \sigma \quad | \quad 1 \quad
+    | \quad \chi_1 \times \chi_2 \quad | \quad \sigma \rightarrow \chi &
+\end{flalign*}
+
+\emph{Handler Terms}:
+\begin{flalign*}
+  \quad h ::=& \; z(v_1, v_2, \ldots) \quad
+    | \quad \mono{op}_{v_1, v_2, \ldots}
+      (X_1:A_1.h_1, X_2:A_2.h_2, \ldots) & \\
+    |&\quad \mono{if}\; \varphi \;\mono{then}\; h_1
+      \;\mono{else}\; h_2 \quad | \quad \mono{return}\; u \quad
+    | \quad \mono{let}\; x \;\mono{be}\; h \;\mono{in}\; h' & \\
+    |&\quad \star \quad
+    | \quad \langle h_1, h_2 \rangle \quad | \quad \mono{fst}\; h \quad
+    | \quad \mono{snd}\; h \quad | \quad \lambda x:\sigma.h \quad
+    | \quad h u &
+\end{flalign*}
 
 Typing Handlers
 
-Computation Type
+Handler (\S\ref{sec:effect_handler}) Signature $\Sigma_\mathrm{hand}$:
+Set of Handler Symbols $H$
 
-Computation Term
+\emph{Computation Type}:
+\begin{flalign*}
+  \quad \underline{\tau} &::= F \sigma \quad | \quad 1 \quad
+    | \quad \underline{\tau}_1 \times \underline{\tau}_2 \quad
+    | \quad \sigma \rightarrow \underline{\tau} &
+\end{flalign*}
+
+\emph{Computation Term}:
+\begin{flalign*}
+  \quad t ::=& \; \mono{op}_{v_1, v_2, \ldots}
+      (X_1:A_1.t_1, X_2:A_2.t_2, \ldots) & \\
+    |&\quad \mono{if}\; \varphi \;\mono{then}\; t_1
+      \;\mono{else}\; t_2 \quad | \quad \mono{return}\; u \quad
+    | \quad \mono{let}\; x \;\mono{be}\; t \;\mono{in}\; t' & \\
+    |&\quad \mono{try}\; t \;\mono{with}\; H(u_1,u_2,\ldots;
+      t_1,t_2,\ldots) \;\mono{as}\; x \;\mono{in}\; t' \\
+    |&\quad \star \quad | \quad \langle t_1, t_2 \rangle \quad
+    | \quad \mono{fst}\; t \quad
+    | \quad \mono{snd}\; t \quad | \quad \lambda x:\sigma.t \quad
+    | \quad t u &
+\end{flalign*}
+
+\HandRight\; Note that Computation Types mirror Handler Types (except
+for Type Variables), and Computation Terms mirror Handler Terms
+(except for Handler Variables and the addition of the
+$\mono{try}\ldots\mono{with}$ Construct)
+
+The syntax:
+\[
+  \mono{handle}\; t \;\mono{with}\;
+  H(u_1, u_2, \ldots; t_1, t_2, \ldots)
+\]
+can be used in place of:
+\[
+    \mono{try}\; t \;\mono{with}\; H(u_1,u_2,\ldots;
+      t_1,t_2,\ldots) \;\mono{as}\; x \;\mono{in\;return}\; x
+\]
+
+When the Handler Signature consists of a single Handler Symbol $H$ it
+may be ommitted:
+\[
+    \mono{try}\; t \;\mono{with}\; u_1,u_2,\ldots;
+      t_1,t_2,\ldots \;\mono{as}\; x \;\mono{in}\; t'
+\]
 
 Typing Computation Terms
+
+a Handler:
+\[
+  H : (\sigma_1, \sigma_2, \ldots; \chi_1, \chi_2, \ldots)
+    \rightarrow \chi \mathbf{handler} \in \Sigma_\mathrm{hand}
+\]
+
+Typing Handling Constructs
 
 Examples: \cite{plotkin-pretnar09}
 
 CCS (Calculus of Communicating Systems)
 
 %FIXME
+
+
+
+\cite{plotkin-pretnar13}:
 
 
 
@@ -2906,7 +3015,24 @@ Typing Handler Terms:
     \end{enumerate}
 \end{itemize}
 
-Handler Signature $\Sigma_\mathrm{hand}$
+Handler Signature $\Sigma_\mathrm{hand}$: Set of Handler Symbols $H$
+
+a Handler:
+\[
+  H : (\sigma_1, \sigma_2, \ldots; \chi_1, \chi_2, \ldots)
+    \rightarrow \chi \mathbf{handler} \in \Sigma_\mathrm{hand}
+\]
+
+Computation Types
+
+Computation Terms
+
+Typing Computation Terms
+
+Typing Handling Constructs
+
+Uniform Handler, Parametrically Uniform Handler
+\cite{plotkin-pretnar09}
 
 
 \cite{pretnar15}:
