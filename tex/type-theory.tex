@@ -651,6 +651,8 @@ Subtyping Judgement:
 
 Power Type (\S\ref{sec:power_type}) $P A$: Type of all Subtypes of $A$
 
+Coherence
+
 
 
 \paragraph{Variance}\label{sec:type_variance}
@@ -870,6 +872,8 @@ Injective Type Function: maps all Types of a particular Kind to a new
 Set of Types and Type Synonyms
 
 \emph{Type Constructor}
+
+(or \emph{Type Schema})
 
 
 
@@ -1196,6 +1200,8 @@ Abstract idea about a computer program turned into an explicit Data
 Model or Object
 
 (Hypostatize) %FIXME
+
+Monadic Reification (Layered Monads \S\ref{sec:layered_monad})
 
 
 
@@ -2167,7 +2173,7 @@ Weak Equivalence
 \section{Homotopy Type Theory}\label{sec:homotopy_type_theory}
 % ====================================================================
 
-Homotopy Thoery (\S\ref{sec:homotopy})
+Homotopy Theory (\S\ref{sec:homotopy})
 
 - Function Extensionality
 - Univalence Axiom (\S\ref{sec:univalence_axiom})
@@ -2406,6 +2412,141 @@ Algebraic Effects (\S\ref{sec:algebraic_effect}):
 
 
 
+\subsubsection{Partiality Effect}\label{sec:partiality_effect}
+
+an Effect that all Recursively Defined Functions have
+(\S\ref{sec:recursive_function})
+
+possible Semantics:
+
+Lifting Monad (\S\ref{sec:lifting_monad})
+
+Continuation-based (\S\ref{sec:continuation})
+
+
+
+\subsubsection{Subeffect}\label{sec:subeffect}
+
+Layered Monad (\S\ref{sec:layered_monad}) \cite{filinski99}
+
+
+
+\subsubsection{Layered Monad}\label{sec:layered_monad}
+\cite{filinski99}
+
+each Effect specified independently by a Formal Monadic Translation
+
+Proto-operations: Monadic Reflection (\S\ref{sec:type_reflection}),
+Monadic Reification (\S\ref{sec:reification})
+
+establishes a (Trivial) Bijection between ``Opaque'' and
+``Transparent'' Representations of an Effectful Computation
+
+Effect Operations defined using the Transparent Representation
+
+General Programs written using the Opaque Abstraction
+
+each Monadic Translation can be simulated by a Continuation-passing
+(\S\ref{sec:continuation}) Translation: original Transparent
+Representation but with a different Opaque Representation substituted
+
+$e ::= \mathfrak{n} | \mathfrak{p} | \cdots$ Effect Names
+
+$E$ Expressions
+
+$\tau$ Types
+
+$\Gamma$ Context (Assumptions)
+
+Typing Judgement:
+\[
+  \Gamma \vdash E : \tau / e
+\]
+Expression $E$ has Type $\tau$ and possible Effects $e$
+
+$\mathfrak{n}$: \emph{None}: Evaluation of $E$ has no Effects
+
+$\mathfrak{p}$: \emph{Partiality} (\S\ref{sec:partiality_effect};
+Evaluation of $E$ may Diverge (\S\ref{sec:divergence}); all
+Recursively Defined Functions (\S\ref{sec:recursive_function}) have
+Partiality
+
+Effect-layering Relation $e_1 \prec e_2$: typically $e_2$ was defined
+by a Formal Translation into a Language with $e_1$-effects; Subeffect
+(\S\ref{sec:subeffect})
+
+$\preceq$ Reflexive, Transitive Closure of $\prec$
+
+$\tau_1 \xrightarrow{\mathfrak{n}} \tau_2$ may be written $\tau_1
+\rightarrow \tau_2$
+
+$\Gamma \vdash E : \tau / \mathfrak{n}$ may be written as
+
+$\Gamma \vdash E : \tau$ may be written as
+
+\emph{Complete Program}: Closed Term of Base Type
+
+``Escaping'' Effects (disallowed)
+
+Signature $\Sigma$ assigns (potentially Polymorphic) Types to the Base
+Constants of the Language (e.g. standard Arithmetic Functions,
+Call-by-value Fix-point Operators, etc.)
+
+Implicit Subtyping (\S\ref{sec:subtype}), Implicit Subeffect
+(\S\ref{sec:subeffect})
+
+Coercion Terms
+
+Chain-complete Posets (CPO \S\ref{sec:cpo})
+
+Monad (\S\ref{sec:monad}) $T$ Maps a CPO $A$ to a CPO of
+$A$-computations
+
+Elements of $T A$ are Effectful Computations yielding Values in $A$
+
+\emph{Layering} of Monad $(T,\eta,\mu)$ Over another Monad
+$(\overline{T}, \overline{\eta}, \overline{\mu})$ is a Family of
+Functions:
+\[
+  \zeta_A : \overline{T}(T A) \rightarrow T A
+\]
+such that each $(T A, \zeta_A)$ is a $\overline{T}$-algebra
+(\S\ref{sec:t_algebra}) %FIXME
+
+Any Monad can be Layered over itself %FIXME
+
+For Monad $T$ Layered over Monad $\overline{T}$, a Family of
+\emph{Computation-inclusion} (or \emph{Lifting}) Functions:
+\[
+  i_A = \zeta_A \circ \overline{T} \eta_A :
+    \overline{T} A \rightarrow T A
+\]
+
+For Monad Morphism (\S\ref{sec:monad_morphism}) $i : \overline{T}
+\rightarrow T$, a Layering is obtained by:
+\[
+  \zeta_A = id^*_{T A} \circ i_A
+\]
+
+(Trivial) Layering of a Monad $T$ over the Identity Monad
+(\S\ref{sec:identity_monad}) by taking $\zeta_A t = t$
+
+Semantics:
+\begin{itemize}
+  \item Base Types $b$: CPO $\class{B}(b)$
+  \item Effects $e$: Monad $\class{E}(e) = (T^e,\eta^e,\mu^e)$
+    \begin{itemize}
+      \item if $e' \prec e$ then $\class{E}(e)$ is Layered over
+        $\class{E}(e')$ by $\zeta^e$
+    \end{itemize}
+\end{itemize}
+
+$\class{E}(\mathfrak{n})$ Identity Monad
+
+$\class{E}(\mathfrak{p})$ Lifting
+
+
+
 % --------------------------------------------------------------------
 \subsection{Algebraic Effect}\label{sec:algebraic_effect}
 % --------------------------------------------------------------------
@@ -2434,9 +2575,52 @@ captured by any Effect System (E. Kmett)
 Continuations (\S\ref{sec:continuation}) are not representable as
 Algebraic Effects
 
+
+
 \cite{plotkin-pretnar08}:
 
+Effectful Programs (1) cause Effects (Computation Terms combined by an
+Operation), (2) Return Values (Returned Value Terms), (3) have an
+Evaluation Order (Computations Sequenced with a $\mono{let}$ Binding)
+
 $a$-calculus: Values, Effects, Computations
+
+Operations: ``sources'' of Effects
+
+Value Theory $\thy{V}$
+
+$\Sigma_{\mathrm{fun}}$
+
+Value Contex $\Gamma$
+
+Effect Theory $\thy{E}$
+
+$\Sigma_{\mathrm{op}}$
+
+Effect Contex $\Xi$
+
+Computations Returning Value of Type $\sigma$: $F \sigma$
+
+Evaluation of Computation $\mono{let}\; x \;\mono{be}\; \mono{op}(t_1,
+\ldots, t_n) \;\mono{in}\; t'$ begins with Occurrence of Effect
+represented by $\mono{op}:n$ and then based on the Outcome (???) of an
+Effect, proceeds by Evaluating one of the Computation Terms $t_1,
+\ldots, t_n$ and Binding its Result to $x$ in Computation Term $t'$
+
+Effect Theory $\thy{E}$ gives rise to a Lawvere Theory
+(\S\ref{sec:lawvere_theory}) $\cat{L}$
+
+\textbf{Semantics}
+
+Value Terms Interpreted in $\cat{Set}$
+
+Effect Terms Interpreted in a Lawvere Theory $\cat{L}$
+
+Computation Terms Interpreted in the Category of Models
+(\S\ref{sec:category_of_models}) $\cat{Mod}_\cat{L}(\cat{Set})$ of
+Models of $\cat{L}$ in $\cat{Set}$.
+
+
 
 \cite{plotkin-pretnar13}:
 
@@ -2798,6 +2982,26 @@ Model $F A$
 Algebraic Effect. Continuations (\S\ref{sec:continuation}) are an
 example of a Non-algebraic Effect (does not arise from an Equational
 Presentation).
+
+\emph{Handlers} correspond to (not-necessarily Free) Models of the
+Equational Theory
+
+Semantics of Handling given using Universal Property of the Free Model
+(it Induces Unique Homomorphisms to the Models)
+
+Exception Handling Construct: Application of Unique Homomorphism that
+Preserves Returned Values
+
+\emph{or}
+
+(generalizing to all Algebraic Effects, e.g. Stream Redirection,
+Renaming and Hiding, Timeout, Rollback, etc.): Returned Values are
+passed to a user-defined Continuation (Application of an arbitrary
+Homomorphism to a Computation)
+
+Algebraic Operations (\emph{Effect Constructors}: giving rise to the
+Effects) are Dual to Effect Handlers (\emph{Effect Deconstructors}:
+proceeding according to Effects already created)
 
 
 
@@ -3607,3 +3811,15 @@ $\lambda$-calculus with Parametric Polymorphism
 
 
 \subsubsection{Algorithm W}\label{sec:algorithm_w}
+
+
+
+% ====================================================================
+\section{Metaprogramming}\label{sec:metaprogramming}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Reflection}\label{sec:type_reflection}
+% --------------------------------------------------------------------
+
+Type Introspection (???) + Manipulation
