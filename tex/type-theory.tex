@@ -1201,7 +1201,7 @@ Model or Object
 
 (Hypostatize) %FIXME
 
-Monadic Reification (Layered Monads \S\ref{sec:layered_monad})
+Monadic Reification (\S\ref{sec:monadic_reification})
 
 
 
@@ -2425,6 +2425,10 @@ Continuation-based (\S\ref{sec:continuation})
 
 
 
+\subsubsection{Exception Effect}\label{sec:exception_effect}
+
+\subsubsection{State Effect}\label{sec:state_effect}
+
 \subsubsection{Subeffect}\label{sec:subeffect}
 
 Layered Monad (\S\ref{sec:layered_monad}) \cite{filinski99}
@@ -2436,8 +2440,8 @@ Layered Monad (\S\ref{sec:layered_monad}) \cite{filinski99}
 
 each Effect specified independently by a Formal Monadic Translation
 
-Proto-operations: Monadic Reflection (\S\ref{sec:type_reflection}),
-Monadic Reification (\S\ref{sec:reification})
+Proto-operations: Monadic Reflection (\S\ref{sec:monadic_reflection}),
+Monadic Reification (\S\ref{sec:monadic_reification})
 
 establishes a (Trivial) Bijection between ``Opaque'' and
 ``Transparent'' Representations of an Effectful Computation
@@ -2470,6 +2474,10 @@ $\mathfrak{p}$: \emph{Partiality} (\S\ref{sec:partiality_effect};
 Evaluation of $E$ may Diverge (\S\ref{sec:divergence}); all
 Recursively Defined Functions (\S\ref{sec:recursive_function}) have
 Partiality
+
+$\mathfrak{ex}$: \emph{Exceptions} (\S\ref{sec:exception_effect}
+
+$\mathfrak{st}$: \emph{State} (\S\ref{sec:state_effect}
 
 Effect-layering Relation $e_1 \prec e_2$: typically $e_2$ was defined
 by a Formal Translation into a Language with $e_1$-effects; Subeffect
@@ -2531,7 +2539,7 @@ For Monad Morphism (\S\ref{sec:monad_morphism}) $i : \overline{T}
 (Trivial) Layering of a Monad $T$ over the Identity Monad
 (\S\ref{sec:identity_monad}) by taking $\zeta_A t = t$
 
-Semantics:
+Semantics $\class{L}$ of Effect-language $L$:
 \begin{itemize}
   \item Base Types $b$: CPO $\class{B}(b)$
   \item Effects $e$: Monad $\class{E}(e) = (T^e,\eta^e,\mu^e)$
@@ -2541,9 +2549,112 @@ Semantics:
     \end{itemize}
 \end{itemize}
 
-$\class{E}(\mathfrak{n})$ Identity Monad
+$\class{E}(\mathfrak{n})$ Identity Monad $I$
 
-$\class{E}(\mathfrak{p})$ Lifting
+$\class{E}(\mathfrak{p})$ Lifting Monad $L$
+
+Definitional Translation: ``explaining away'' and Effect
+
+Syntactic Extension: \emph{Formal Monad} $\mathsf{T}$ over Effect
+$\bar{e}$ in $L$ is a Type Constructor with 3 ``Polymorphic Terms''
+(???):
+\begin{align*}
+  \mathsf{T} - &: Type \rightarrow Type \\
+  glue_\alpha &: (1 \xrightarrow{\bar{e}} \mathsf{T} \alpha)
+    \rightarrow \mathsf{T} \alpha \\
+  unit_\alpha &: \alpha \rightarrow \mathsf{T} \alpha \\
+  bind_{\alpha_1,\alpha_2} &: \mathsf{T} \alpha_1 \times (\alpha_1
+    \rightarrow \mathsf{T} \alpha_2) \rightarrow \mathsf{T} \alpha_2
+\end{align*}
+denotes an (actual) Monad:
+\[
+  \class{L}\llbracket \mathsf{T} \rrbracket^m = (T,\eta,\mu,\zeta)
+\]
+Layered over $\class{E}(\bar{E})$ in a Semantics $\class{L}$ of
+Effect-language $L$ if: %FIXME
+\begin{enumerate}
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+\HandRight\; $\mathsf{T}$ does not necessarily denote a Monad for all
+Interpretations of the Effect $\bar{e}$, e.g. the List Monad can only
+be properly Layered over a Commutative Monad (???) such as Partiality
+%FIXME
+
+Given $\mathsf{T}$, $L^\mathsf{T}$ is an (Proper) Extension of $L$
+with new Effect $t$ and new Proto-operations \emph{Monadic Reflection}
+and \emph{Monadic Reification}:
+\begin{align*}
+  \mono{reflect}_\alpha^t &: \mathsf{T} \alpha \xrightarrow{t} \alpha \\
+  \mono{reify}_\alpha^t &: (1 \xrightarrow{t} \alpha) \rightarrow
+    \mathsf{T} \alpha
+\end{align*}
+
+Any $L$-program is still a Valid $L^\mathsf{T}$-program with the same
+Meaning: Semantics of $L^\mathsf{T}$ can be defined by a Formal
+Monadic Translation $|-|_\mathsf{T}$ back into $L$ by expanding only
+the new Type and Term Constructors into their $L$-definitions
+
+Explicit Effect-passing (???)
+
+Effect-ordering: Hierarchical, Translation-based Definition
+
+different orderings correspond to different intended Semantics
+
+Example ordering:
+\[
+\mathfrak{p} \prec \mathfrak{st} \prec \mathfrak{ex}
+\]
+with State persistent across Exceptions, corresponds to Effect Type:
+\[
+  ||\alpha / \mathfrak{ex}|_{EX}|_{ST} = |1
+  \xrightarrow{\mathfrak{st}} \alpha + exn|_{ST} = 1 \rightarrow state
+  \xrightarrow{\mathfrak{p}} (\alpha + exn) \times state
+\]
+$\mathfrak{st}$-computations always Implicitly Coercible (with
+Subtyping Definitions) into an
+$\mathfrak{ex}$-computation
+
+Each individual Monadic Translation can be uniformly simulated by a
+Layer of Continuation-passing
+
+Any hierarchy of Continuation-passing Layers can be simulated by a
+single Effect comprising First-class Continuations and Mutable State
+
+$\mono{shift}$
+
+$\mono{reset}$
+
+$T$-$K$ Simulation Theorem
+
+$K$-$CS$ Simulation Theorem
+
+$T^*$-$CS^*$ Simulation Theorem
+
+Metacontinution (???)
+
+Resumption-computation (\S\ref{sec:resumption})
+
+Effect-recursive Monads (???): new Effect being defined is implicitly
+used in its own Specification
+
+
+
+\paragraph{Monadic Reflection}\label{sec:monadic_reflection}
+\hfill \\
+\[
+  \mono{reflect}_\alpha^t : \mathsf{T} \alpha \xrightarrow{t} \alpha
+\]
+
+\paragraph{Monadic Reification}\label{sec:monadic_reification}
+\hfill \\
+\[
+  \mono{reify}_\alpha^t : (1 \xrightarrow{t} \alpha) \rightarrow
+    \mathsf{T} \alpha
+\]
 
 
 
@@ -3823,3 +3934,5 @@ $\lambda$-calculus with Parametric Polymorphism
 % --------------------------------------------------------------------
 
 Type Introspection (???) + Manipulation
+
+Monadic Reflection (\S\ref{sec:monadic_reflection})
