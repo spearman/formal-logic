@@ -480,7 +480,7 @@ Algebra and Final Coalgebras are Isomorphic.
 \subsection{Concrete Type}\label{sec:concrete_type}
 % --------------------------------------------------------------------
 
-\HandRight\; Cf. Abstract (Existential) Type (\S\ref{sec:abstract_type})
+\fist Cf. Abstract (Existential) Type (\S\ref{sec:abstract_type})
 
 
 
@@ -524,7 +524,7 @@ Co-algebra (\S\ref{sec:coalgebra})
 \end{itemize}
 
 Monads (\S\ref{sec:monad}) give the Interface to the Abstract Data
-Type of ``Program Fragments'' (\HandRight\; Cf. Algebraic Effects
+Type of ``Program Fragments'' (\fist Cf. Algebraic Effects
 \S\ref{sec:algebraic_effect})
 
 
@@ -2443,6 +2443,12 @@ each Effect specified independently by a Formal Monadic Translation
 Proto-operations: Monadic Reflection (\S\ref{sec:monadic_reflection}),
 Monadic Reification (\S\ref{sec:monadic_reification})
 
+\fist Cf. Algebraic Effects (\S\ref{sec:algebraic_effect}):
+\emph{Effect Constructors} (Algebraic Operations
+\S\ref{sec:algebraic_operation}) and \emph{Effect Deconstructors}
+(Effect Handlers \S\ref{sec:effect_handler})
+
+
 establishes a (Trivial) Bijection between ``Opaque'' and
 ``Transparent'' Representations of an Effectful Computation
 
@@ -2579,19 +2585,25 @@ Effect-language $L$ if: %FIXME
   \item
 \end{enumerate}
 
-\HandRight\; $\mathsf{T}$ does not necessarily denote a Monad for all
+\fist $\mathsf{T}$ does not necessarily denote a Monad for all
 Interpretations of the Effect $\bar{e}$, e.g. the List Monad can only
 be properly Layered over a Commutative Monad (???) such as Partiality
 %FIXME
 
 Given $\mathsf{T}$, $L^\mathsf{T}$ is an (Proper) Extension of $L$
 with new Effect $t$ and new Proto-operations \emph{Monadic Reflection}
-and \emph{Monadic Reification}:
+(\S\ref{sec:monadic_reflection}) and \emph{Monadic Reification}
+(\S\ref{sec:monadic_reification}):
 \begin{align*}
   \mono{reflect}_\alpha^t &: \mathsf{T} \alpha \xrightarrow{t} \alpha \\
   \mono{reify}_\alpha^t &: (1 \xrightarrow{t} \alpha) \rightarrow
     \mathsf{T} \alpha
 \end{align*}
+
+\fist Cf. Algebraic Effects (\S\ref{sec:algebraic_effect}):
+\emph{Effect Constructors} (Algebraic Operations
+\S\ref{sec:algebraic_operation}) and \emph{Effect Deconstructors}
+(Effect Handlers \S\ref{sec:effect_handler})
 
 Any $L$-program is still a Valid $L^\mathsf{T}$-program with the same
 Meaning: Semantics of $L^\mathsf{T}$ can be defined by a Formal
@@ -2649,12 +2661,22 @@ used in its own Specification
   \mono{reflect}_\alpha^t : \mathsf{T} \alpha \xrightarrow{t} \alpha
 \]
 
+\emph{Effect Deconstructor}: Algebraic Effects
+(\S\ref{sec:algebraic_effect}), Effect Handler
+(\S\ref{sec:effect_handler})
+
+
+
 \paragraph{Monadic Reification}\label{sec:monadic_reification}
 \hfill \\
 \[
   \mono{reify}_\alpha^t : (1 \xrightarrow{t} \alpha) \rightarrow
     \mathsf{T} \alpha
 \]
+
+\emph{Effect Constructor}: Algebraic Effects
+(\S\ref{sec:algebraic_effect}), Algebraic Operation
+(\S\ref{sec:algebraic_operation})
 
 
 
@@ -2667,7 +2689,7 @@ used in its own Specification
 \cite{plotkin-pretnar13}
 \cite{pretnar15}
 
-\HandRight\; The paper \emph{Handlers of Algebraic Effects}
+\fist The paper \emph{Handlers of Algebraic Effects}
 \cite{plotkin-pretnar09} (Plotkin, Pretnar 2009) is a preliminary
 version of \emph{Handling Algebraic Effects} \cite{plotkin-pretnar13}
 (Plotkin, Pretnar 2013)
@@ -2675,6 +2697,8 @@ version of \emph{Handling Algebraic Effects} \cite{plotkin-pretnar13}
 
 (Countable) Equational Theories (Algebraic Theory
 \S\ref{sec:algebraic_theory})
+
+Algebraic Operation (\S\ref{sec:algebraic_operation})
 
 
 as an alternative to using Monads (\S\ref{sec:monad}) to Model
@@ -2795,12 +2819,15 @@ Example Parametric Operation:
   \mono{or}_X : T X^2 \rightarrow T X
 \]
 
+Algebraic Operations \S\ref{sec:algebraic_operation} (\emph{Effect
+  Constructors}) and Effect Handlers \S\ref{sec:effect_handler}
+(\emph{Effect Destructors}) are Dual
+
+\fist Cf. Monadic Reflection (\S\ref{sec:monadic_reflection})
+and Monadic Reification (\S\ref{sec:monadic_reification})
+
 Handlers (\S\ref{sec:effect_handler}) correspond to a Model of the
 Algebraic Theory
-
-Algebraic Operations (\emph{Effect Constructors}) and Effect Handlers
-(\emph{Effect Destructors}) are Dual (cf. Filinski: Reflection and
-Reification) %FIXME
 
 Handling a Computation is Composing it with a Unique Homomorphism
 (defined Universally) with Domain a Free Model
@@ -2811,7 +2838,7 @@ Theory, Extending a Programmer-defined Map on Values.
 Instances of Handlers: Exception Handling, Stream Redirection,
 Renaming and Hiding, Timeout, Rollback, etc.
 
-\HandRight\; Note that some Handlers (e.g. for Backtracking) do not
+\fist Note that some Handlers (e.g. for Backtracking) do not
 respect the Equations of an Algebraic Theory. \cite{pretnar15}
 
 \cite{plotkin-pretnar09}:
@@ -3039,7 +3066,7 @@ Set of Handler Symbols $H$
     | \quad t u &
 \end{flalign*}
 
-\HandRight\; Note that Computation Types mirror Handler Types (except
+\fist Note that Computation Types mirror Handler Types (except
 for Type Variables), and Computation Terms mirror Handler Terms
 (except for Handler Variables and the addition of the
 $\mono{try}\ldots\mono{with}$ Construct)
@@ -3110,9 +3137,13 @@ Renaming and Hiding, Timeout, Rollback, etc.): Returned Values are
 passed to a user-defined Continuation (Application of an arbitrary
 Homomorphism to a Computation)
 
-Algebraic Operations (\emph{Effect Constructors}: giving rise to the
-Effects) are Dual to Effect Handlers (\emph{Effect Deconstructors}:
+Algebraic Operations \S\ref{sec:algebraic_operation} (\emph{Effect
+  Constructors}: giving rise to the Effects) are Dual to Effect
+Handlers \S\ref{sec:effect_handler} (\emph{Effect Deconstructors}:
 proceeding according to Effects already created)
+
+\fist Cf. Monadic Reflection (\S\ref{sec:monadic_reflection})
+and Monadic Reification (\S\ref{sec:monadic_reification})
 
 
 
@@ -3234,7 +3265,7 @@ Operation Clauses define a Model of Operations and the Return Clause
 provides a Function $f$ that can be extended to a Homomorphism.
 \cite{pretnar15}
 
-\HandRight\; With General Recursion and Higher-order Results then
+\fist With General Recursion and Higher-order Results then
 Domains (\S\ref{sec:order_domain}) are used instead of Sets.
 
 Comodel: Set $W$ of possible World States and Map $\mono{op}^W : W
