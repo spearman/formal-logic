@@ -2374,6 +2374,9 @@ $(\tau \xrightarrow{\sigma} \tau')^\dag$
 $\rightsquigarrow$
 $\tau^\dag \rightarrow T^\sigma \tau'^\dag$
 
+subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
+captured by any Effect System (E. Kmett)
+
 
 
 % --------------------------------------------------------------------
@@ -2426,6 +2429,97 @@ Continuation-based (\S\ref{sec:continuation})
 
 
 \subsubsection{Exception Effect}\label{sec:exception_effect}
+
+\cite{plotkin-pretnar13}:
+
+Finite Set of Exceptions $\mathbf{exc}$
+
+Exception Monad
+
+\begin{align*}
+     T A & \defeq A + \mathbf{exc} \\
+  \eta_A & \defeq in_1 : A \rightarrow A + \mathbf{exc}
+\end{align*}
+
+Computations:
+
+$\mono{return}\; V$ Interpreted by $\eta_A(V) = in_1(V)$
+
+$\mono{raise}_e()$ Interpreted by $in_2(e)$
+
+Effect Handler (\S\ref{sec:effect_handler})
+
+Exception Handling
+
+Computation $M \in A + \mathbf{exc}$
+\[
+  M \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e \}_{e\in\mathbf{exc}}
+\]
+where $\{\cdots\}_{e\in\mathbf{exc}}$ is a Set of Computations, one
+for each Exception $e \in \mathbf{exc}$
+
+carries out $M$, ``Intercepting'' Exceptions $e \in \mathbf{exc}$ by
+carrying out predefined Computations $M_e \in A + \mathbf{exc}$
+instead
+
+Un-handled Exceptions take $M_e$ to be $\mono{raise}_e()$
+
+Handling Construct Satisfies two Equations:
+\begin{enumerate}
+  \item $\mono{return}\; V \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
+    = in_1(V)$
+  \item $\mono{raise}_{e'}() \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
+    = M_{e'}$
+\end{enumerate}
+
+the Computations $M_e$ give a new Model $\mathcal{M}$ for the Theory
+of Exceptions with same Carrier (i.e. Domain \S\ref{sec:domain}) $A +
+\mathbf{exc}$ and for each $e$, each $\mono{raise}_e ()$ is instead
+Interpreted by $M_e$
+
+\[
+  h(M) \defeq M \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
+\]
+is a Unique Homomorphism (Preserving Operations) from $A +
+\mathbf{exc}$ to $\mathcal{M}$ that Extends $in_1 : A \rightarrow A +
+\mathbf{exc}$, i.e. such that:
+\[
+  A \xrightarrow{in_1} \mathcal{M} =
+    A \xrightarrow{\eta_A} A + \mathbf{exc} \xrightarrow{h} \mathcal{M}
+\]
+
+Extended Handling Construct:
+\[
+  M \;\mono{handled\;with}\;
+    \{\mono{raise}_e() \mapsto M_e \}_{e\in\mathbf{exc}}
+    \;\mono{to}\; x : A.N(x)
+\]
+
+\begin{enumerate}
+  \item $\mono{return}\; V \;\mono{handled\;with}\;
+    \{\mono{raise}_e() \mapsto N_e\}_{e \in \mathbf{exc}}
+    \;\mono{to}\; x:A.N(x)
+    = N(V)$
+  \item $\mono{raise}_{e'}() \;\mono{handled\;with}\;
+    \{\mono{raise}_e() \mapsto N_e\}_{e \in \mathbf{exc}}
+    \;\mono{to}\; x:A.N(x)
+    = N_{e'}$
+\end{enumerate}
+\[
+  A \xrightarrow{N} \mathcal{M} =
+    A \xrightarrow{\eta_A} A + \mathbf{exc} \xrightarrow{h} \mathcal{M}
+\]
+
+Homomorphisms from the Free Model to a Model on a given Carrier
+
+Effect Handler (\S\ref{sec:effect_handler}): Exceptions replaced by
+Handling Computations
+
+
 
 \subsubsection{State Effect}\label{sec:state_effect}
 
@@ -2704,9 +2798,6 @@ Algebraic Operation (\S\ref{sec:algebraic_operation})
 as an alternative to using Monads (\S\ref{sec:monad}) to Model
 Side-effects, most often seen in Strict Languages
 
-subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
-captured by any Effect System (E. Kmett)
-
 Continuations (\S\ref{sec:continuation}) are not representable as
 Algebraic Effects
 
@@ -2771,6 +2862,7 @@ an Outcome that determines a Continuation (\S\ref{sec:continuation})
 of the Computation with Arguments of the Operation representing
 possible Continuations (possible Computations after the occurrence of
 an Effect).
+
 
 
 \cite{plotkin-pretnar09}:
@@ -3142,8 +3234,34 @@ Algebraic Operations \S\ref{sec:algebraic_operation} (\emph{Effect
 Handlers \S\ref{sec:effect_handler} (\emph{Effect Deconstructors}:
 proceeding according to Effects already created)
 
-\fist Cf. Monadic Reflection (\S\ref{sec:monadic_reflection})
-and Monadic Reification (\S\ref{sec:monadic_reification})
+\fist Cf. Layered Monads (\S\ref{sec:layered_monad}): Monadic
+Reflection (\S\ref{sec:monadic_reflection}) and Monadic Reification
+(\S\ref{sec:monadic_reification})
+
+Signature Types:
+\[
+  \alpha, \beta ::= b \;|\; 1 \;|\; \alpha \times \beta \;|\;
+    \Sigma_{\ell \in L} \alpha_\ell
+\]
+
+Base Types $b$
+
+Labels $\ell$
+
+$Lab$ all possible Labels
+
+$L$ Finite Subsets of Labels
+
+Arity Base Types
+
+Arity Signature Type: a Signature Type that contains only Arity Base
+Types
+
+Function Symbols $f : \alpha \rightarrow \beta$
+
+Operation $\mono{op} : \alpha \rightarrowtriangle \beta$
+
+Effect Theory (\S\ref{sec:effect_theory}) $\thy{T}$
 
 
 
@@ -3199,8 +3317,8 @@ override this behavior).
 
 Generic Effect (\S\ref{sec:generic_effect}):
 \[
-  \mono{op}\; \stackrel{\mathrm{def}}{=} \;\mono{fun}\; x \mapsto
-  \mono{op}(x; y.\mono{return}\; y)
+  \mono{op}\; \defeq \;\mono{fun}\; x \mapsto
+    \mono{op}(x; y.\mono{return}\; y)
 \]
 Parameter Value $x$ passed to Operation with the Trivial Continuation;
 specific Operations $\mono{op}(v;y.c)$ can be recovered by
@@ -3318,9 +3436,33 @@ Infinitary) Equational Theory (\S\ref{sec:equational_theory}).
 Homomorphism from Free Algebras
 \cite{bauer-pretnar12}
 
+\cite{plotkin-pretnar13}:
+
+Homomorphisms from the Free Model to a Model on a given Carrier
+
+Model of an Equational Theory: Carrier Set, Set of Handling Maps (one
+for each Operation) Satisfying Equations
+
+Computations Interpreted in the Free Model
+
+Handling Constructs Interpreted by Induced Homomorphisms
+
+Operations replaced by Operation Maps
+
+\fist Cf. Exception Handlers (\S\ref{sec:exception_effect}) where
+Exceptions are replaced by Handling Computations
+
+\danger\; Note that note all Families of Maps yield a Model of the
+Theory, for some Families it is Undecidable given their Definitions
+whether they yield a Model or not; if allowing complete freedom in the
+Language (all possible Definitions allowed), not all Handlers will
+have Interpretations
+
+
+
 \cite{plotkin-pretnar09}:
 
-corresponds to Model of the Algebraic Theory
+Handling corresponds to Model of the Algebraic Theory
 (\S\ref{sec:algebraic_theory}) of the Effects
 
 Handling a Computational Effect: Homomorphically Mapping the Handled
