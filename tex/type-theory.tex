@@ -3238,11 +3238,19 @@ proceeding according to Effects already created)
 Reflection (\S\ref{sec:monadic_reflection}) and Monadic Reification
 (\S\ref{sec:monadic_reification})
 
+
+\textbf{Types}
+
 Signature Types:
 \[
   \alpha, \beta ::= b \;|\; 1 \;|\; \alpha \times \beta \;|\;
     \Sigma_{\ell \in L} \alpha_\ell
 \]
+
+(Type) Signature: Base Types, Typed Function Symbols, Typed Operation
+Symbols
+
+Syntax Parameterized by choice of Signature
 
 Base Types $b$
 
@@ -3263,6 +3271,141 @@ Operation $\mono{op} : \alpha \rightarrowtriangle \beta$
 
 Effect Theory (\S\ref{sec:effect_theory}) $\thy{T}$
 
+Operations: Sources of Effects
+
+Effect Theory: Properties of Effects
+
+Operation $\mono{op} : \alpha \rightarrowtriangle \beta$:
+%FIXME
+\begin{enumerate}
+  \item accepts Parameter of Type $\alpha$
+  \item performs relevant Effect
+  \item outcome of Type $\beta$ determines its Continuation
+\end{enumerate}
+
+$\mono{op}$ is:
+\begin{itemize}
+  \item Parameterized on $\alpha$
+  \item has Arity $\beta$ ($\beta$-ary)
+\end{itemize}
+
+When $\alpha = 1$, $\mono{op}$ may be written $\mono{op}:\beta$
+
+Value Types $A,B,\ldots$:
+\begin{flalign*}
+  \quad A,B ::=&\; b \;|\; 1 \;|\; A \times B \;|\; \sum_{\ell \in
+    L}A_{\ell} \;|\; U \underline{C} &
+\end{flalign*}
+
+Computation Types $\underline{C},\ldots$:
+\begin{flalign*}
+  \quad \underline{C} ::=&\; F A
+    \;|\; \prod_{\ell \in L} \underline{C}_{\ell}
+    \;|\; A \rightarrow \underline{C} &
+\end{flalign*}
+
+Value Types extend Signature Types by addition of Type Constructor $U
+-$ classifying Computations of Type $\underline{C}$ that have been
+Thunked (???) into Values (later Forced back into Evaluation).
+%FIXME xref Thunk, Forced
+
+Computation Type $F A$ classifies Computations that Return Value of
+Type $A$
+
+$\prod_{\ell \in L} \underline{C}_{\ell}$ classifies Finite Indexed
+Products of Computations
+
+$A \rightarrow \underline{C}$ Computations of Type $\underline{C}$
+Parametric on Values of Type $A$
+
+
+\textbf{Terms}
+
+Value Terms, Computation Terms, Handler Terms
+
+(``Value'', ``Computation'', or ``Handler'' may be used instead of
+``Value Term'', ``Computation Term'', or ``Handler Term'')
+
+Value Variables $x,y,\ldots$
+
+Value Terms $V,W,\ldots$:
+\begin{flalign*}
+  \quad V,W ::=&\; x \;|\; \mono{f}(V) \;|\; \langle \rangle
+    \;|\; \langle V,W \rangle \;|\; \ell (V) \;|\; \mono{thunk}\; M &
+\end{flalign*}
+%FIXME is \mono{f} an operation here?
+
+
+Continuation Variables $k,\ldots$
+
+Computation Terms $M,N,\ldots$:
+\begin{flalign*}
+  \quad M,N ::=&\; \mono{match}\; V \;\mono{with}\;
+      \langle x,y \rangle \mapsto M
+    \;|\; \mono{match}\; V \;\mono{with}\; \{\ell(x_\ell) \mapsto
+      M_\ell\}_{\ell \in L}
+    \;|\; \mono{force}\; V & \\
+    \;|\;& \mono{return}\; V \;|\; M \;\mono{to}\; x:A.N
+    \;|\; \langle M_\ell \rangle_{\ell \in L} \;|\; \mono{prj}_\ell M
+    \;|\; \lambda x:A.M \;|\; M V & \\
+    \;|\;& \mono{op}_V(x:\beta.M) \;|\; k(V)s
+    \;|\; M \;\mono{handled\;with}\; H \;\mono{to}\; x:A.N &
+\end{flalign*}
+
+
+Handler Terms $H,\ldots$:
+\begin{flalign*}
+  \quad H ::=&\; \{ \mono{op}_{x:\alpha}
+    (k:\beta \rightarrow \underline{C}) \mapsto
+    M_{\mono{op}} \}_{\mono{op:\alpha \rightarrow \beta}} &
+\end{flalign*}
+
+
+$\{\cdots\}_{\ell \in L}$ Set of Computations, one for each Label
+$\ell \in L$
+
+$\{\cdots\}_{\mono{op}: \alpha \rightarrowtriangle \beta}$ Set of
+Computations, one for each Operation Symbol $\mono{op}: \alpha
+\rightarrowtriangle \beta$
+
+Value Terms involve only Constructors; corresponding Destructor Terms
+are Computations
+
+Constructor, Destructor Terms for Computation Types
+
+For Type $F A$:
+\begin{itemize}
+  \item Return $\mono{return}\; V$
+  \item Sequencing Construct $M \;\mono{to}\; x:A.N$
+\end{itemize}
+
+Operation Application (Computation Term):
+\[
+  \mono{op}_V(x:\beta.M)
+\]
+first triggers Operation $\mono{op}$ with Parameter $V$, then binds
+Outcome to $x$ and Proceeds as Continuation $M$.
+
+Handler Term:
+\[
+  \{ \mono{op}_{x:\alpha}
+    (k:\beta \rightarrow \underline{C}) \mapsto
+    M_{\mono{op}} \}_{\mono{op:\alpha \rightarrow \beta}}
+\]
+is given by a Finite Set of \emph{Handling Operation Definitions}:
+\[
+  \mono{op}_{x:\alpha}
+    (k:\beta \rightarrow \underline{C}) \mapsto
+    M_{\mono{op}}
+\]
+one for each Operation Symbol $\mono{op}$
+
+Handling Terms $M_{\mono{op}}$ are dependent on their Parameters
+(captured in their Parameter Values $x$) and on the Continuations of
+the Handled Operations (captured in their Continuation Variables $k$)
+
+\fist Note Continuation Variables always appear applied to a Value
+$k(V)$
 
 
 \cite{pretnar15}:
