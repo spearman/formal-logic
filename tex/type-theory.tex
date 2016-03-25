@@ -1983,7 +1983,7 @@ $\Omega$, and the Base Types closed under $\times$ (Product Types
 Terms of Type $\Omega$ represent Formulas, e.g. $\tau_1 = \tau_2$.
 
 
-\center *** \raggedright
+\asterism
 
 
 \textbf{Sum Type} (\S\ref{sec:sum_type}) (Tagged Union)
@@ -2093,7 +2093,8 @@ $\Pi_{(a:A)} B(a) = \{(a_1, x), (a_2, y), (a_3, z), ...\}$
 $\Pi_{(a:A)} B(a) \subset \pow \bigsqcup_{a \in A} \Sigma_{(a:A)} B(a)$
 
 
-\center *** \raggedright
+\asterism
+
 
 
 % --------------------------------------------------------------------
@@ -2786,7 +2787,14 @@ used in its own Specification
 \fist The paper \emph{Handlers of Algebraic Effects}
 \cite{plotkin-pretnar09} (Plotkin, Pretnar 2009) is a preliminary
 version of \emph{Handling Algebraic Effects} \cite{plotkin-pretnar13}
-(Plotkin, Pretnar 2013)
+(Plotkin, Pretnar 2013). In \cite{plotkin-pretnar09}, there are
+restricted facilities for defining Handlers (the \emph{Minimal}
+approach). Two levels of Language are considered: in the first there
+are no Handlers but it is used to define Handlers, and if they give
+Models then they are used in Handling Constructs in the second level
+(with no facilities for further definition of Handlers). In
+\cite{plotkin-pretnar13} Handlers and Handling may be nested
+arbitrarily deeply (the \emph{Maximal} approach).
 
 
 (Countable) Equational Theories (Algebraic Theory
@@ -2801,6 +2809,8 @@ Side-effects, most often seen in Strict Languages
 Continuations (\S\ref{sec:continuation}) are not representable as
 Algebraic Effects
 
+
+Call-by-value, Call-by-push-value %FIXME
 
 
 \cite{plotkin-pretnar08}:
@@ -2982,9 +2992,9 @@ Variables $x,y,z,\ldots$
 Function Symbols $f,g,h,\ldots$
 
 \emph{Base Terms}:
-\[
-  v ::= x \quad | \quad f (\vec{v})
-\]
+\begin{flalign*}
+  \quad v ::=& x \; | \; f (\vec{v}) &
+\end{flalign*}
 
 \emph{Base Formulas} $\varphi$: Equations $v_1 = v_2$, Relation
 Symbols $R (\vec{v})$, Logical Connectives, Quantifiers
@@ -3025,10 +3035,11 @@ where $\llbracket \vec{\beta} \rrbracket = \llbracket \beta_1
 \emph{Effect Variables} $w$
 
 \emph{Effect Terms}:
-\[
-  T ::= w(\vec{v}) \quad | \quad \mono{op}_{\vec{v}}
+\begin{flalign*}
+  \quad T ::=& w(\vec{v}) \; | \; \mono{op}_{\vec{v}}
   (\vec{x}_1:\vec{\alpha}_1.T_1, \ldots, \vec{x}_n:\vec{\alpha}_n.T_n)
-\]
+  &
+\end{flalign*}
 where $\vec{x}_i:\vec{\alpha}_i$ are Lists of Base Terms of Arity
 Types.
 
@@ -3113,22 +3124,22 @@ $U F$: Monad used to Model the corresponding Effect
 
 \emph{Handler Types}:
 \begin{flalign*}
-  \quad \chi &::= X \quad | \quad F \sigma \quad | \quad 1 \quad
-    | \quad \chi_1 \times \chi_2 \quad | \quad \sigma \rightarrow \chi &
+  \quad \chi &::= X \; | \; F \sigma \; | \; 1 \;
+    | \; \chi_1 \times \chi_2 \; | \; \sigma \rightarrow \chi &
 \end{flalign*}
 
 \emph{Handler Terms}:
 \begin{flalign*}
-  \quad h ::=& \; z(\vec{v}) \quad
-    | \quad \mono{op}_{\vec{v}}
+  \quad h ::=& \; z(\vec{v}) \;
+    | \; \mono{op}_{\vec{v}}
       (\vec{x}_1:\vec{\alpha}_1.h_1, \ldots, \vec{x}_n:\vec{\alpha}_n.h_n) & \\
-    |&\quad \mono{if}\; \varphi \;\mono{then}\; h_1
-      \;\mono{else}\; h_2 \quad | \quad \mono{return}\; u \quad
-    | \quad \mono{let}\; x \;\mono{be}\; h \;\mono{in}\; h' & \\
-    |&\quad \star \quad
-    | \quad \langle h_1, h_2 \rangle \quad | \quad \mono{fst}\; h \quad
-    | \quad \mono{snd}\; h \quad | \quad \lambda x:\sigma.h \quad
-    | \quad h u &
+    |&\; \mono{if}\; \varphi \;\mono{then}\; h_1
+      \;\mono{else}\; h_2 \; | \; \mono{return}\; u \;
+    | \; \mono{let}\; x \;\mono{be}\; h \;\mono{in}\; h' & \\
+    |&\; \star \;
+    | \; \langle h_1, h_2 \rangle \; | \; \mono{fst}\; h \;
+    | \; \mono{snd}\; h \; | \; \lambda x:\sigma.h \;
+    | \; h u &
 \end{flalign*}
 
 Typing Handlers
@@ -3138,24 +3149,24 @@ Set of Handler Symbols $H$
 
 \emph{Computation Type}:
 \begin{flalign*}
-  \quad \underline{\tau} &::= F \sigma \quad | \quad 1 \quad
-    | \quad \underline{\tau}_1 \times \underline{\tau}_2 \quad
-    | \quad \sigma \rightarrow \underline{\tau} &
+  \quad \underline{\tau} &::= F \sigma \; | \; 1 \;
+    | \; \underline{\tau}_1 \times \underline{\tau}_2 \;
+    | \; \sigma \rightarrow \underline{\tau} &
 \end{flalign*}
 
 \emph{Computation Term}:
 \begin{flalign*}
   \quad t ::=& \; \mono{op}_{\vec{v}}
       (\vec{x}_1:\vec{\alpha}_1.t_1, \ldots \vec{x}_n:\vec{\alpha}_n.t_n) & \\
-    |&\quad \mono{if}\; \varphi \;\mono{then}\; t_1
-      \;\mono{else}\; t_2 \quad | \quad \mono{return}\; u \quad
-    | \quad \mono{let}\; x \;\mono{be}\; t \;\mono{in}\; t' & \\
-    |&\quad \mono{try}\; t \;\mono{with}\; H(\vec{u};
+    |&\; \mono{if}\; \varphi \;\mono{then}\; t_1
+      \;\mono{else}\; t_2 \; | \; \mono{return}\; u \;
+    | \; \mono{let}\; x \;\mono{be}\; t \;\mono{in}\; t' & \\
+    |&\; \mono{try}\; t \;\mono{with}\; H(\vec{u};
       \vec{t}) \;\mono{as}\; x \;\mono{in}\; t' \\
-    |&\quad \star \quad | \quad \langle t_1, t_2 \rangle \quad
-    | \quad \mono{fst}\; t \quad
-    | \quad \mono{snd}\; t \quad | \quad \lambda x:\sigma.t \quad
-    | \quad t u &
+    |&\; \star \; | \; \langle t_1, t_2 \rangle \;
+    | \; \mono{fst}\; t \;
+    | \; \mono{snd}\; t \; | \; \lambda x:\sigma.t \;
+    | \; t u &
 \end{flalign*}
 
 \fist Note that Computation Types mirror Handler Types (except
@@ -3193,7 +3204,7 @@ Typing Handling Constructs
 
 Examples: \cite{plotkin-pretnar09}
 
-CCS (Calculus of Communicating Systems)
+CCS (Calculus of Communicating Systems \S\ref{sec:ccs})
 
 %FIXME
 
@@ -3241,7 +3252,7 @@ Reflection (\S\ref{sec:monadic_reflection}) and Monadic Reification
 
 \textbf{Types}
 
-Signature Types:
+\emph{Signature Types}:
 \[
   \alpha, \beta ::= b \;|\; 1 \;|\; \alpha \times \beta \;|\;
     \Sigma_{\ell \in L} \alpha_\ell
@@ -3265,39 +3276,39 @@ Arity Base Types
 Arity Signature Type: a Signature Type that contains only Arity Base
 Types
 
-Function Symbols $f : \alpha \rightarrow \beta$
+\emph{Function Symbols} $f : \alpha \rightarrow \beta$
 
-Operation $\mono{op} : \alpha \rightarrowtriangle \beta$
+\emph{Operation Symbols} $op : \alpha \rightarrowtriangle \beta$
 
-Effect Theory (\S\ref{sec:effect_theory}) $\thy{T}$
+\emph{Effect Theory} (\S\ref{sec:effect_theory}) $\thy{T}$
 
 Operations: Sources of Effects
 
 Effect Theory: Properties of Effects
 
-Operation $\mono{op} : \alpha \rightarrowtriangle \beta$:
-%FIXME
+Operation $op : \alpha \rightarrowtriangle \beta$:
 \begin{enumerate}
   \item accepts Parameter of Type $\alpha$
   \item performs relevant Effect
   \item outcome of Type $\beta$ determines its Continuation
 \end{enumerate}
+%FIXME
 
-$\mono{op}$ is:
+$op$ is:
 \begin{itemize}
   \item Parameterized on $\alpha$
   \item has Arity $\beta$ ($\beta$-ary)
 \end{itemize}
 
-When $\alpha = 1$, $\mono{op}$ may be written $\mono{op}:\beta$
+When $\alpha = 1$, $op$ may be written $op:\beta$
 
-Value Types $A,B,\ldots$:
+\emph{Value Types} $A,B,\ldots$:
 \begin{flalign*}
-  \quad A,B ::=&\; b \;|\; 1 \;|\; A \times B \;|\; \sum_{\ell \in
-    L}A_{\ell} \;|\; U \underline{C} &
+  \quad A,B ::=&\; b \;|\; 1 \;|\; A \times B
+    \;|\; \sum_{\ell \in L}A_{\ell} \;|\; U \underline{C} &
 \end{flalign*}
 
-Computation Types $\underline{C},\ldots$:
+\emph{Computation Types} $\underline{C},\ldots$:
 \begin{flalign*}
   \quad \underline{C} ::=&\; F A
     \;|\; \prod_{\ell \in L} \underline{C}_{\ell}
@@ -3328,17 +3339,16 @@ Value Terms, Computation Terms, Handler Terms
 
 Value Variables $x,y,\ldots$
 
-Value Terms $V,W,\ldots$:
+\emph{Value Terms} $V,W,\ldots$:
 \begin{flalign*}
-  \quad V,W ::=&\; x \;|\; \mono{f}(V) \;|\; \langle \rangle
+  \quad V,W ::=&\; x \;|\; f(V) \;|\; \langle \rangle
     \;|\; \langle V,W \rangle \;|\; \ell (V) \;|\; \mono{thunk}\; M &
 \end{flalign*}
-%FIXME is \mono{f} an operation here?
 
 
 Continuation Variables $k,\ldots$
 
-Computation Terms $M,N,\ldots$:
+\emph{Computation Terms} $M,N,\ldots$:
 \begin{flalign*}
   \quad M,N ::=&\; \mono{match}\; V \;\mono{with}\;
       \langle x,y \rangle \mapsto M
@@ -3348,24 +3358,24 @@ Computation Terms $M,N,\ldots$:
     \;|\;& \mono{return}\; V \;|\; M \;\mono{to}\; x:A.N
     \;|\; \langle M_\ell \rangle_{\ell \in L} \;|\; \mono{prj}_\ell M
     \;|\; \lambda x:A.M \;|\; M V & \\
-    \;|\;& \mono{op}_V(x:\beta.M) \;|\; k(V)s
+    \;|\;& op_V(x:\beta.M) \;|\; k(V)s
     \;|\; M \;\mono{handled\;with}\; H \;\mono{to}\; x:A.N &
 \end{flalign*}
 
 
-Handler Terms $H,\ldots$:
+\emph{Handler Terms} $H,\ldots$:
 \begin{flalign*}
-  \quad H ::=&\; \{ \mono{op}_{x:\alpha}
+  \quad H ::=&\; \{ op_{x:\alpha}
     (k:\beta \rightarrow \underline{C}) \mapsto
-    M_{\mono{op}} \}_{\mono{op:\alpha \rightarrow \beta}} &
+    M_{op} \}_{\mono{op:\alpha \rightarrowtriangle \beta}} &
 \end{flalign*}
 
 
 $\{\cdots\}_{\ell \in L}$ Set of Computations, one for each Label
 $\ell \in L$
 
-$\{\cdots\}_{\mono{op}: \alpha \rightarrowtriangle \beta}$ Set of
-Computations, one for each Operation Symbol $\mono{op}: \alpha
+$\{\cdots\}_{op: \alpha \rightarrowtriangle \beta}$ Set of
+Computations, one for each Operation Symbol $op: \alpha
 \rightarrowtriangle \beta$
 
 Value Terms involve only Constructors; corresponding Destructor Terms
@@ -3381,31 +3391,435 @@ For Type $F A$:
 
 Operation Application (Computation Term):
 \[
-  \mono{op}_V(x:\beta.M)
+  op_V(x:\beta.M)
 \]
-first triggers Operation $\mono{op}$ with Parameter $V$, then binds
+first triggers Operation $op$ with Parameter $V$, then binds
 Outcome to $x$ and Proceeds as Continuation $M$.
 
 Handler Term:
 \[
-  \{ \mono{op}_{x:\alpha}
+  \{ op_{x:\alpha}
     (k:\beta \rightarrow \underline{C}) \mapsto
-    M_{\mono{op}} \}_{\mono{op:\alpha \rightarrow \beta}}
+    M_{op} \}_{\mono{op:\alpha \rightarrowtriangle \beta}}
 \]
 is given by a Finite Set of \emph{Handling Operation Definitions}:
 \[
-  \mono{op}_{x:\alpha}
+  op_{x:\alpha}
     (k:\beta \rightarrow \underline{C}) \mapsto
-    M_{\mono{op}}
+    M_{op}
 \]
-one for each Operation Symbol $\mono{op}$
+one for each Operation Symbol $op$
 
-Handling Terms $M_{\mono{op}}$ are dependent on their Parameters
+Handling Terms $M_{op}$ are dependent on their Parameters
 (captured in their Parameter Values $x$) and on the Continuations of
 the Handled Operations (captured in their Continuation Variables $k$)
 
 \fist Note Continuation Variables always appear applied to a Value
 $k(V)$
+
+Handling Computation Term:
+\[
+  M \;\mono{handled\;with}\; H \;\mono{to}\; x:A.N
+\]
+Evaluates Computation $M$, Handling all Operation Application
+Computations according to $H$, Binds result to $x$ and proceeds as $N$
+
+Sequencing is a special case of Handling where $H$ Handles all
+Operations ``by themselves''
+
+Example: if $M$ triggers an Operation Application $op_V(y.M')$
+and the corresponding Handling Term is $op_z(k) \mapsto
+M_op \in H$, then the Operation is Handled by Evaluating
+$M_op$ instead with Parameter Variable $z$ bound to $V$ and
+each occurrence of a Term $k(W)$ in $M_op$ replaced by:
+\[
+  M'[W/y] \;\mono{handled\;with}\; H \;\mono{to}\; x:A.N
+\]
+and the Continuation $k$ receives an outcome $W$, determined by
+$M_op$ and is Handled in the same way as $M$.
+
+\fist Note that while Continuations are Handled by $H$, the Handling
+Term $M_op$ is not; any Operations it triggers or Values it
+Returns escape the Handler.
+
+$\mono{let}$-binding abbreviation:
+\[
+  \mono{let}\; x:A \;\mono{be}\; V \;\mono{in}\; M
+    \defeq (\lambda x:A.M)V
+\]
+
+
+\textbf{Typing Judgements}
+
+\emph{Value Context}:
+\[
+  \Gamma = x_1:A_1, \ldots,x_m:A_m
+\]
+of Value Variables $x_i$ Bound to Value Types $A_i$
+
+\emph{Continuation Context}:
+\[
+  K = k_1:\alpha_1 \rightarrow \underline{C}_1, \ldots,
+    k_n:\alpha_n \rightarrow \underline{C}_n
+\]
+of Continuation Variables $k_j$ Bound to Continuation Types $\alpha_j
+\rightarrow \underline{C}_j$
+
+A Continuation Type $\alpha \rightarrow \underline{C}$ with an Arity
+Signature Type $\alpha$ Types a Continuation $k$ that accepts a Value
+of Type $\alpha$ and proceeds as a Computation of Type
+$\underline{C}$.
+
+Values are Typed:
+\[
+  \Gamma | K \vdash V:A
+\]
+
+Computations are Typed:
+\[
+  \Gamma | K \vdash M : \underline{C}
+\]
+
+Handlers are Typed:
+\[
+  \Gamma | K \vdash H : \underline{C} \;\mathbf{handler}
+\]
+
+Value Typing Rules, Computation Typing Rules, Handler Typing Rules
+%FIXME
+
+$K$ may contain more than one Continuation Variable when the Handler
+being Defined is used in Handling Definitions of other Handlers
+
+Handlers for a Subset $\Theta$ of Operation Symbols %FIXME
+
+Handler with Identity Continuation:
+\[
+  M \;\mono{handled\;with}\; H
+    \defeq M \;\mono{handled\;with}\; H \;\mono{to}\;
+      x:A.\mono{return}\; x
+\]
+
+Binary Deconstructor (Unix Pipe, Parallel Combinator in CCS
+\S\ref{sec:ccs}) %FIXME
+
+Simple Handlers (\S\ref{sec:simple_handler})
+
+Parameter-passing Handlers (\S\ref{sec:parameter_passing_handler})
+
+
+\textbf{CCS Example}
+
+Effect Constructors (Operations):
+\begin{enumerate}
+  \item Deadlock $\mono{nil} : 1 \rightarrowtriangle 0$
+  \item Action Prefix $\mono{prefix} : Act \rightarrowtriangle 1$
+  \item Sum $\mono{choose} : 1 \rightarrowtriangle 2$
+\end{enumerate}
+
+Effect Deconstructors (Handlers):
+\begin{enumerate}
+  \item Renaming $P[b/a]$
+  \item Hiding $P \backslash a$
+  \item Parallel $P | Q$
+\end{enumerate}
+
+
+\asterism
+
+
+\textbf{Semantics}
+
+Denotational Semantics (\S\ref{sec:denotational_semantics})
+
+Cartesian-closed Category (\S\ref{sec:cartesian_closed})
+
+First-class Functions, Finite Products and Finite Sums (Coproducts)
+
+Free Model (\S\ref{sec:free_model}) Construction (Functor ???)
+
+Parametric Lifting (??? Lifting Monad \S\ref{sec:lifting_monad}) of
+Maps to Homomorphisms from the Free Model
+
+Sets, $\omega$-cpos (\S\ref{sec:omega_cpo})
+
+Lawvere Theories (\S\ref{sec:lawvere_theory})
+
+Lawvere $\cat{V}$-theories (???)
+
+
+\asterism
+
+
+Template Variables $z$
+
+\emph{Templates} $T,\ldots$:
+\begin{flalign*}
+  \quad T ::=& \; z(V) \;|\; \mono{match}\; V
+    \;\mono{with}\; \langle x,y \rangle \mapsto T
+    \;|\; \mono{match}\; V \;\mono{with}\; \{\ell(x_\ell) \mapsto
+    T_\ell\}_{\ell \in L} \;|\; op_V(x:\beta.T)
+\end{flalign*}
+Templates describe Common Properties of Computations; they are not
+Typed, but Well-formed relative to a Value Context and a Template Context
+
+Templates are limited to Signature Values (e.g. can be Typed as
+$\Gamma \vdash V:\alpha$); Typing Rules are the same as the Typing
+Rules for Values with the omission of Continuation Contexts and the
+Rule for Typing Thunks.
+
+\emph{Template Context}:
+\[
+  Z = z_1:\alpha_1, \ldots, z_n:\alpha_n
+\]
+of Template Variables $z_j$ Bound to Arity Signature Types $\alpha_j$.
+
+$z_j:\alpha_j$ represents a Computation dependent on a Value of Type
+$\alpha_j$
+
+Typing Judgements for being a Well-formed Template $\Gamma | Z \vdash
+T$, given by Rules:
+%FIXME
+
+
+\emph{Effect Theory} $\thy{T}$ is a Finite Set of Equations:
+\[
+  \Gamma | Z \vdash T_1 = T_2
+\]
+where $T_1$ and $T_2$ are Well-formed relative to $\Gamma$ and $Z$
+
+Effect Theories for: Exceptions, State, Read-only State,
+Nondeterminism, Input/Output %FIXME
+
+Combining Theories:
+\begin{enumerate}
+  \item \emph{Sum} simple Union assuming disjoint Sets of Operation
+    Symbols
+
+  \item \emph{Tensor} Commuting combinations of two Effects, e.g. two
+    Independent States; given by Union again assuming disjoing Sets of
+    Operation Symbols plus the Equation:
+    \[
+    \begin{split}
+      y:\alpha,y':\alpha' | z:\beta \times \beta' \vdash
+        op_y(x:\beta.op'_{y'}(x':\beta'.z(x.x'))) \\
+        \quad = op'_{y'}(x':\beta'.op_y(x:\beta.z(x,x')))
+    \end{split}
+    \]
+    for each Operation Symbol $op : \alpha \rightarrowtriangle \beta$
+    from the first Theory and Operation Symbol $op' : \alpha'
+    \rightarrowtriangle \beta'$ from the second Theory.
+\end{enumerate}
+
+More example Theories:
+\begin{itemize}
+  \item Explicit Nondeterminism
+  \item CCS: Sum of Theories for Nondeterminism and Explicit
+    Nondeterminism
+  \item Time
+  \item Destructive Exceptions (``Rollback''): Tensor Product of
+    Theories for State and Exceptions
+\end{itemize}
+
+
+\textbf{Interpretation of an Effect Theory}
+
+Model $\struct{M}$ for an Effect Theory $\thy{T}$
+
+Carrier Set $|\struct{M}|$
+
+An Operation:
+\[
+  op_\struct{M} : \llbracket \alpha \rrbracket \times
+    |\struct{M}|^{\llbracket \beta \rrbracket} \rightarrow |\struct{M}|
+\]
+for each Operation Symbol $op:\alpha \rightarrowtriangle \beta$, such
+that $\llbracket T_1 \rrbracket = \llbracket T_2 \rrbracket$ for all
+the Equations $\Gamma | Z \vdash T_1 = T_2$ in $\thy{T}$
+
+Homomorphism of Models $h : \struct{M}_1 \multimap \struct{M}_2$ is a
+Map $h : |\struct{M}_1| \rightarrow |\struct{M}_2|$ such that:
+\[
+  h \circ op_{\struct{M}_1} = op_{\struct{M}_2} \circ
+    (id_{\llbracket \alpha \rrbracket}
+      \times h^{\llbracket \beta \rrbracket})
+\]
+holds for all Operation Symbols $op:\alpha \rightarrowtriangle \beta$
+
+Category $\cat{Mod}_\thy{T}$ of Models of $\thy{T}$ and Homomorphisms
+between them
+
+Forgetful Functor $U : \cat{Mod}_\thy{T} \rightarrow \cat{Set}$ where:
+\[
+  \begin{split}
+    U \struct{M} \defeq & |\struct{M}| \\
+    U h \defeq & h
+  \end{split}
+\]
+Left-adjoint to the Forgetful Functor is the Free-model Functor $F :
+\cat{Set} \rightarrow \cat{Mod}_\thy{T}$
+
+$F A$ Free Model over Set $A$
+
+Homomorphism Induced by $f : A \rightarrow U \struct{M}$: Adjoint
+Homomorphism $\bar{f} : F A \multimap \struct{M}$
+
+Unit $\eta_A : A \rightarrow F A$
+
+
+\textbf{Interpretation of Values and Computation Types}
+
+given a Signature, an Effect Theory $\thy{T}$ over the Signature, and
+an Interpretation of the Effect Theory
+
+Product Models, Exponent Models (???) %FIXME
+
+An Interpretation $\llbracket V \rrbracket$ of a Well-typed Value
+$\Gamma | K \vdash V:A$ is a Map $\llbracket \Gamma \rrbracket \times
+\llbracket K \rrbracket \rightarrow \llbracket A \rrbracket$
+
+Kleene Equality $\simeq$: Equal if both sides are Defined and Equal or
+both sides are Undefined %FIXME xref
+
+\emph{Parameterized Lifting} $f^{\dagger_\struct{M}} : A
+\times U F B \rightarrow U \struct{M}$ of a Map $f : A \times B
+\rightarrow U \struct{M}$ given by:
+\[
+  f^{\dagger_\struct{M}} \defeq U \bar{f} \circ st
+\]
+where $\bar{f}$ is the Homomorphism Induced by $f$ and $st : A \times
+U F B \rightarrow U F (A \times B)$ is the Strength
+(\S\ref{sec:strong_monad}) of Monad $U F$.
+
+
+\emph{Interpretation of Handlers}
+
+Handler Correctness: for an Empty Effect Theory, any Handler is
+Correct, but in general Correctness is Undecidable
+
+Correctness of Simple Handlers (\S\ref{sec:simple_handler}) is
+$\Pi_2$-complete
+
+
+\asterism
+
+
+Equivalence of Computations
+
+Weak Equality Judgement $\bumpeq$
+
+Definedness Judgement $\downarrow$
+
+Template Substitution
+
+Capture-avoiding Substitution
+
+Inheritance Rule
+
+Equations for the Handling Construct state the Universal properties of
+the Induced Homomorphism:
+\begin{enumerate}
+  \item Extends the Inducing Map on Values
+  \item acts Homomorphically on Operations
+\end{enumerate}
+
+Rule for showing Handler Correctness: %FIXME
+states that a Handler is Correct when its Operation Definitions
+respect the Equations of the Effect Theory
+
+\emph{Simple Handler} (\S\ref{sec:simple_handler})
+
+\emph{Parameter-passing Handler}
+(\S\ref{sec:parameter_passing_handler})
+
+\emph{Simple Signature}: no Base Types or Function Symbols, Implies a
+Unique (Trivial) Interpretation
+
+Simple Signatures and Theories are equivalent to ones with all
+Operation Symbols are $n$-ary for some $n$
+
+Simple Signatures: Exceptions over a Finite Set, Read-only State,
+Input/Output, and Nondeterminism
+
+\emph{Uniformly Simple} Family of Handlers: Exception Handler,
+Temporary-state Handler, Stream Redirection Handler
+
+A Family of Handlers is Correct if each Handler in the Family is
+Correct
+
+Deciding whether a Uniformly Simple Family of Closed Handlers is
+$\Sigma_1$-complete (Semidecidable)
+
+Effect Theories with a Simple Signature corresond to ordinary Finite
+Equational Theories (i.e. Finitely many Finitary Function Symbols and
+Finitely many Axioms)
+
+For a Simple Signature, Decidable Effect Theory, and a Uniformly
+Simple Family of Handlers, Correctness of the Family of Handlers is
+Decidable
+
+
+\textbf{Recursion}
+
+Nondeterminism Operator:
+\[
+  \Omega : 1 \rightarrowtriangle 0
+\]
+
+Fixed-point Constructor $\mono{rec}\; x : U \underline{C}.M$, Typed
+by:
+\[
+  \frac{\Gamma,x:U \underline{C} | K \vdash M : \underline{C}}
+  {\Gamma | K \vdash \mono{rec}\; x : U \underline{C}.M : \underline{C}}
+\]
+
+Effect Theories become \emph{Inequations} $\Gamma | Z \vdash T_1 \leq
+T_2$
+
+always contains the Inequation:
+\[
+  \cdot | z:1 \vdash \Omega() \leq z
+\]
+stating that $\Omega$ is the Least Element
+
+$\omega\cat{Cpo}$ Category of $\omega$-cpos and Continuous Functions
+(instead of $\cat{Set}$)
+
+Flat $\omega$-cpo
+
+$U : \cat{Mod}_\thy{T} \rightarrow \omega \cat{Cpo}$
+
+$F : \omega\cat{Cpo} \rightarrow \cat{Mod}_\thy{T}$
+
+both $U$ and $F$ have Continuous Strengths and are Locally Continuous
+
+Carriers of Models are Pointed $\omega$-cpos and Model Homomorphisms
+are Strict Continuous Functions (Preserving Least Elements)
+
+\emph{Lifting} $Q_\bot$ is the $\omega$-cpo obtained from $Q$ by
+adding a new Least Element %FIXME xref?
+
+Nondeterminism: Convex Powerdomain Monad (???)
+
+Continuously Parameterised Countably Infinitary Inequational Theories:
+equivalent to Discrete Countable Lawvere $\omega\cat{Cpo}$-theories
+
+Value Types: Interpreted by $\omega$-cpos
+
+Computation Types: Interpreted by Models whose Carriers are Pointed
+$\omega$-cpos
+
+Values, Computations, and Handlers are Interpreted by Continuous Maps
+(such Interpretations may not be defined)
+
+Fixed-point Constructor is Interpreted using the Least Fixed-point
+Interpretation %FIXME
+
+Correct Handlers cannot redefine $\Omega$ as the Theory of $\Omega$
+fixes it Uniquely
+
+Open question: Parallel Computations (Binary Deconstructors)
+
 
 
 \cite{pretnar15}:
@@ -3424,20 +3838,20 @@ equal to the number of outcomes and Arguments represent Branches
 
 \emph{Values}:
 \begin{flalign*}
-  \quad v ::=&\quad x \quad | \quad \true \quad | \quad \false \quad
-            | \quad \lambda x \mapsto c &\\
-      \quad |&\quad \mono{handler}\; \{ \mono{return}\; x
+  \quad v ::=&\; x \; | \; \true \; | \; \false \;
+            | \; \lambda x \mapsto c &\\
+      \; |&\; \mono{handler}\; \{ \mono{return}\; x
               \mapsto c_r, \mono{op}_1(x;k) \mapsto c_1, \ldots,
               \mono{op}_n(x;k) \mapsto c_n \}&
 \end{flalign*}
 
 \emph{Computations}:
 \begin{flalign*}
-  \quad c ::=&\quad \mono{return}\; v \quad | \quad \mono{op}(v;y.c) \quad
-            | \quad \mono{do}\; x \leftarrow c_1 \;\mono{in}\; c_2 &\\
-      \quad |&\quad \mono{if}\; v \;\mono{then}\; c_1
-              \;\mono{else}\; c_2 \quad
-            | \quad v_1 v_2 \quad | \quad \;\mono{with}\; v
+  \quad c ::=&\; \mono{return}\; v \; | \; \mono{op}(v;y.c) \;
+            | \; \mono{do}\; x \leftarrow c_1 \;\mono{in}\; c_2 &\\
+      \; |&\; \mono{if}\; v \;\mono{then}\; c_1
+              \;\mono{else}\; c_2 \;
+            | \; v_1 v_2 \; | \; \;\mono{with}\; v
               \;\mono{handle}\; c&
 \end{flalign*}
 
@@ -3628,22 +4042,22 @@ Quantifier-free Formulas $\varphi$
 
 \emph{Handler Types}:
 \begin{flalign*}
-  \quad \chi &::= X \quad | \quad F \sigma \quad | \quad 1 \quad
-    | \quad \chi_1 \times \chi_2 \quad | \quad \sigma \rightarrow \chi &
+  \quad \chi &::= X \; | \; F \sigma \; | \; 1 \;
+    | \; \chi_1 \times \chi_2 \; | \; \sigma \rightarrow \chi &
 \end{flalign*}
 
 \emph{Handler Terms}:
 \begin{flalign*}
-  \quad h ::=& \; z(v_1, v_2, \ldots) \quad
-    | \quad \mono{op}_{v_1, v_2, \ldots}
+  \quad h ::=& \; z(v_1, v_2, \ldots) \;
+    | \; \mono{op}_{v_1, v_2, \ldots}
       (X_1:A_1.h_1, X_2:A_2.h_2, \ldots) & \\
-    |&\quad \mono{if}\; \varphi \;\mono{then}\; h_1
-      \;\mono{else}\; h_2 \quad | \quad \mono{return}\; u \quad
-    | \quad \mono{let}\; x \;\mono{be}\; h \;\mono{in}\; h' & \\
-    |&\quad \star \quad
-    | \quad \langle h_1, h_2 \rangle \quad | \quad \mono{fst}\; h \quad
-    | \quad \mono{snd}\; h \quad | \quad \lambda x:\sigma.h \quad
-    | \quad h u &
+    |&\; \mono{if}\; \varphi \;\mono{then}\; h_1
+      \;\mono{else}\; h_2 \; | \; \mono{return}\; u \;
+    | \; \mono{let}\; x \;\mono{be}\; h \;\mono{in}\; h' & \\
+    |&\; \star \;
+    | \; \langle h_1, h_2 \rangle \; | \; \mono{fst}\; h \;
+    | \; \mono{snd}\; h \; | \; \lambda x:\sigma.h \;
+    | \; h u &
 \end{flalign*}
 
 Typing Handler Terms:
@@ -3691,6 +4105,12 @@ Uniform Handler, Parametrically Uniform Handler
 \]
 
 
+\asterism
+
+
+Timeout Handler
+
+
 
 \paragraph{Shallow Handler}\label{sec:shallow_handler}
 \hfill \\
@@ -3707,6 +4127,32 @@ Recursion \cite{pretnar15}
 
 continue Handling Operations in the Continuation
 (\S\ref{sec:continuation})
+
+
+
+\paragraph{Simple Handler}\label{sec:simple_handler}
+\cite{plotkin-pretnar13}
+\hfill \\
+
+Simple Handlers define Handling Computations in terms of Polymorphic
+Constructs only.
+
+Examples: Exception Handler, Temporary-state Handler, Stream
+Redirection Handler, CCS Renaming and Hiding Handlers, etc.
+
+No Parameter-passing Handlers
+(\S\ref{sec:parameter_passing_handler})are Simple
+
+\emph{Uniformly Simple} Family of Handlers
+
+
+
+\paragraph{Parameter-passing Handler}
+\label{sec:parameter_passing_handler}
+\cite{plotkin-pretnar13}
+\hfill \\
+
+contains $\lambda$-abstraction in the Handling Terms
 
 
 
