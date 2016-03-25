@@ -629,6 +629,13 @@ Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
     Communication (\S\ref{sec:communication})
 \end{itemize}
 
+Curry-Howard for $\lambda$-calculus identifies a Fragment that is
+(Strongly?) Normalizing; Curry-Howard for Concurrency identifies a
+Fragment of Process Calculus which is free from Deadlock
+(\S\ref{sec:deadlock}): $\pi$-DILL
+(\S\ref{sec:session_typed_pi_calculus}), CP
+(\S\ref{sec:classical_processes}), GV (\S\ref{sec:good_variation})
+
 Any Proof Reduction or Conversion corresponds to either a Computation
 Step or Proces Equivalence \cite{caires-pfenning10}
 
@@ -992,7 +999,7 @@ Replicated Input (\S\ref{sec:replicated_input})
 
 \subsubsection{Null Process}\label{sec:null_process}
 
-
+\subsubsection{Deadlock}\label{sec:deadlock}
 
 \subsubsection{Session}\label{sec:session}
 
@@ -1213,6 +1220,17 @@ Operational Semantics given by the Smallest Reduction Relation
 \end{itemize}
 
 $\rightarrow^*$
+
+Communication Reduction Rule: \cite{wadler12}
+\[
+  \nu x.(\nu y.x\langle y \rangle.(P|Q)|x(z).R) \Longrightarrow
+    \nu y.P|\nu x.(Q|R\{x/y\})
+\]
+Corresponding Rule in CP (\S\ref{sec:classical_processes}):
+\[
+  \nu x.(x[y].(P|Q) | x(y).R) \Longrightarrow
+    \nu y.(P|\nu x.(Q|R))
+\]
 
 
 \textbf{Example of a Reduction (Synchronous)}
@@ -1675,8 +1693,8 @@ System providing behavior (Session) $C$ at Channel $z$ building on
 
 $fn(P) \subseteq \Gamma \cup \Delta \cup \{z\}$
 
-$\Gamma; \Delta \vdash \hat{D}^z :: z:A$ is Derivable in $\pi$-DILL if and
-only if $\Gamma; \Delta \vdash D : A$ is Derivable in DILL
+$\Gamma; \Delta \vdash \hat{D}^z :: z:A$ is Derivable in $\pi$-DILL if
+and only if $\Gamma; \Delta \vdash D : A$ is Derivable in DILL
 
 Type Extraction: Proof $D$ Extracts to Process $\hat{D}^z$
 
@@ -1712,6 +1730,8 @@ Subject Reduction (\S\ref{sec:subject_reduction})
 Contextual Progress Property, Global Progress Property,
 Non-replicated Guarded Process %FIXME
 
+Compare with $\pi$-CLL %FIXME
+
 
 
 \subparagraph{Classical Processes}\label{sec:classical_processes}
@@ -1722,7 +1742,7 @@ Non-replicated Guarded Process %FIXME
 
 Caires-Pfenning \cite{caires-pfenning10}
 
-No Deadlocks
+No Deadlocks (\S\ref{sec:deadlock})
 
 $\pi$-DILL:
 \begin{itemize}
@@ -1738,16 +1758,450 @@ CP:
   \item Input: $\vdash \parr$
 \end{itemize}
 
+Subject Reduction and Cut Elimination Theorems (see below)
+
+
+\emph{Types}:
+\begin{flalign*}
+  \quad A,B,C ::=& \; X \;|\; X^\bot
+    \;|\; A \otimes B \;|\; A \parr B \;|\; A \oplus B \;|\; A \& B & \\
+    \;|\; & !A \;|\; ?A \;|\; \exists X.B \;|\; \forall X.B
+    \;|\; 1 \;|\; \bot \;|\; 0 \;|\; \top &
+\end{flalign*}
+
+$X$ Propositional Variable, $X^\bot$ Dual Propositional Variable
+
+Multiplicatives: \\
+$A \otimes B$: ``Times'', Output $A$ then Behave as $B$ \\
+$A \parr B$: ``Par'', Input $A$ then Behave as $B$
+
+Additives: \\
+$A \oplus B$: ``Plus'', Select from $A$ or $B$ \\
+$A \& B$: ``With'', Offer Choice of $A$ or $B$
+
+Exponentials: \\
+$!A$: ``Of course!'', Server Accept \\
+$?A$: ``Why not?'', Client Request
+
+Second-order Quantifiers: \\
+$\exists X.B$: Existential: Output a Type; $X$ is Bound in $B$ \\
+$\forall X.B$: Universal: Input a Type; $X$ is Bound in $B$
+
+Units: \\
+$1$: Unit for $\otimes$ \\
+$\bot$: Unit for $\parr$ \\
+$0$: Unit for $\oplus$ \\
+$\top$: Unit for $\&$
+
+
+\asterism
+
+
+$fv(A)$: Free Variables in Proposition $A$
+
+Duals:
+\[
+  \begin{aligned}[c]
+    (X)^\bot &= X^\bot \\
+    (A \otimes B)^\bot &= A^\bot \parr B^\bot \\
+    (A \oplus B)^\bot &= A^\bot \& B^\bot \\
+    (!A)^\bot &= ?A^\bot \\
+    (\exists X.B)^\bot &= \forall X.B^\bot \\
+    1^\bot &= \bot \\
+    0^\bot &= \top
+  \end{aligned}
+  \quad \quad
+  \begin{aligned}[c]
+    (X^\bot)^\bot &= X \\
+    (A \parr B)^\bot &= A^\bot \otimes B^\bot \\
+    (A \& B)^\bot &= A^\bot \oplus B^\bot \\
+    (?A)^\bot &= !A^\bot \\
+    (\forall X.B)^\bot &= \exists X.B^\bot \\
+    \bot^\bot &= 1 \\
+    \top^\bot &= 0
+  \end{aligned}
+\]
+
+Substitution: $B\{A/X\}$ Denotes Substitution of $A$ for $X$ in $B$
+
+\[
+  \begin{split}
+    X \{A / X\} &= A \\
+    Y \{A / X\} &= Y \\
+    X^\bot \{A / X\} &= A^\bot \\
+    Y^\bot \{A / X\} &= Y^\bot
+  \end{split}
+\]
+
+Duality Preserves Substitution:
+\[
+  B\{A/X\}^\bot = B^\bot\{A/X\}
+\]
+
+Environments $\Gamma, \Delta, \Theta$: associating Names to
+Propositions (where each Name is distinct)
+
+$\Gamma = x_1:A_1, \ldots x_n:A_n$ with $x_i \neq x_j$ when $i \neq j$
+
+$fn(\Gamma)$: Names in $\Gamma$
+
+$fv(\Gamma) = fv(A_1) \cup \cdots \cup fv(A_n)$: Free Variables in
+$\Gamma$
+
+Combining Environments must contain distinct Names:
+\[
+  \Gamma, \Delta \Rightarrow fn(\Gamma) \cap fn(\Delta) = \varnothing
+\]
+
+
+\emph{Processes}:
+\begin{flalign*}
+  \quad P,Q,R ::=& \; x \leftrightarrow y \;|\; \nu x:A.(P|Q)
+    \;|\; x[y].(P|Q) \;|\; x(y).P & \\
+    \;|\; & x[inl].P \;|\; x[inr].P \;|\; x.\mono{case}(P,Q) & \\
+    \;|\; & !x(y).P \;|\; ?x[y].P \;|\; x[A].P \;|\; x(X).P & \\
+    \;|\; & x[].0 \;|\; x().P \;|\; x.\mono{case}() &
+\end{flalign*}
+
+$x \leftrightarrow y$: Link, ``Forwarding''; every Message Received on
+$y$ is Re-transmitted on $x$, and every Message Received on $x$ is
+Re-transmitted on $y$
+
+$\nu x:A.(P|Q)$: Parallel Composition; Name $x$ is Bound in $P$ and
+$Q$ \\
+$x[y].(P|Q)$: Output; Name $y$ is Bound in $P$ but not in $Q$ \\
+$x(y).(P)$: Input; Name $y$ is Bound in $P$ \\
+$x[inl].P$: Left Selection \\
+$x[inr].P$: Right Selection \\
+$x.\mono{case}(P,Q)$: Choice \\
+$!x(y).P$: Server Accept; Name $y$ is Bound in $P$ \\
+$?x[y].P$: Client Request; Name $y$ is Bound in $P$ \\
+$x[A].P$: Send Type \\
+$x(X).P$: Receive Type; Propositional Variable $X$ is Boundin $P$ \\
+$x[].0$: Empty Output \\
+$x().P$: Empty Input \\
+$x.\mono{case}()$: Empty Choice
+
+
+$fn(P)$: Free Names in $P$
+
+$[]$: Outputs, $()$: Inputs
+
+(in $\pi$-calculus $x[y].P$ is $\bar{x}(y).P$)
+
+Both Output and Input Names are Bound (unlike $\pi$-calculus)
+
+$x[y].P$ and $?x[y].P$ in CP behaves like $\nu y.x\langle y \rangle.P$
+in $\pi$-calculus
+
+
+\asterism
+
+
+\emph{Judgements}
+
+Form of Judgements:
+\[
+  P \vdash x_1 : A_1, \ldots, x_n : A_n
+\]
+indicates Process $P$ Communicates (\S\ref{sec:communication}) along
+each Channel (\S\ref{sec:channel}) Named $x_i$, obeying the Protocol
+specified by $A_i$
+
+
+Typing Rules
+
+$Ax$ \\
+$Cut$ \\
+$\otimes$ \\
+$\parr$ \\
+$\oplus_1$ \\
+$\oplus_2$ \\
+$\&$ \\
+$!$ \\
+$?$ \\
+$Weaken$ \\
+$Contract$ \\
+$\exists$ \\
+$\forall (X \in fv(\delta))$ \\
+$1$ \\
+$\bot$ \\
+(no rule for $0$) \\
+$\top$
+
+
+\emph{Structural Rules}: Axiom and Cut (Order in Environments is
+ignored so Exchange Rules are omitted)
+\[
+  \frac{
+  }{
+    w \leftrightarrow x \vdash w:A^\bot, x:A
+  }(Ax)
+\]\[
+  \frac{
+    P \vdash \Gamma, x:A \quad Q \vdash \Delta, x:A^\bot
+  }{
+    \nu x:A.(P|Q) \vdash \Gamma, \Delta
+  }(Cut)
+\]
+
+Cut Elimination is Process Reduction ($AxCut$) $\Longrightarrow$
+
+Equivalences: ($Swap$, $Assoc$) $\equiv$
+
+$Swap$:
+\[
+  \nu x:A.(P|Q) \equiv \nu x:A^\bot(Q|P)
+\]
+states $Cut$ is Symmetric. The counterpart in $\pi$-calculus is
+Structural Equivalence for Symmetry $P | Q \equiv Q | P$.
+
+$Assoc$:
+\[
+  \nu y.(\nu x.(P | Q) | R) \equiv \nu x.(P | \nu y.(Q | R))
+\]
+which is the counterpart to Structural Equivalence for Associativity
+in $\pi$-calculus $P | Q \equiv Q | P$ and Scope Extrusion $(\nu x.P)
+| Q \equiv \nu x.(P|Q)$ when $x \notin P$.
+%FIXME is that really structural equivalence for assoc?
+
+$AxCut$:
+\[
+  \nu x.(w \leftrightarrow x | P) \Longrightarrow P \{w/x\}
+\]
+simplifies a Cut against an Axiom.
+
+
+\asterism
+
+$A \otimes B$ Session Type of a Process that Outputs an $A$ then
+behaves as $B$
+
+$A \parr B$ Session Type of a Process that Inputs an $A$ then behaves
+as $B$
+
+\emph{Output} $x[y].(P|Q)$: \\
+$P$ and $Q$ act on Disjoint Sets of Channels
+(guarantees no Deadlock) \\
+Process $P$ Communicates on Channel $y$ obeying Protocol $A$ \\
+Process $Q$ Communicates on Channel $x$ obeying Protocol $B$ \\
+Composite Process $x[y].(P|Q)$ Communicates on Channel $x$ obeying
+Protocol $A \otimes B$:
+\begin{enumerate}
+  \item Allocates fresh Channel $y$
+  \item Sends $y$ on Channel $x$
+  \item Concurrently Executes Process $P$ and Process $Q$
+\end{enumerate}
+
+\emph{Input} $x(y).R$: \\
+Process $R$ Communicates on Channel $y$ obeying Protocol $A$ and on
+Channel $x$ obeying Protocol $B$ \\
+Composite Process $x(y).R$ Communicates on Channel $x$ obeying
+Protocol $A \parr B$:
+\begin{enumerate}
+  \item Receives Name $y$ on $x$
+  \item Executes Process $R$
+\end{enumerate}
+
+\fist Note in Output, $x$ first has Type $B$ in Component Process $Q$
+then Type $A \otimes B$ in Composite Process $x[y].(P|Q)$ and in
+Input, $x$ first has Type $B$ in Component Process $R$ then Type $A
+\parr B$ in Composite Process $x(y).R$. This corresponds to the notion
+of Session Type (\S\ref{sec:session_type})
+
+$1$: Session Type of a Process that performs an Empty Output \\
+$\bot$: Session Type of a Process that performs an Empty Input \\
+$1^\bot = \bot$
+
+
+
+$A \oplus B$ Session Type of a Process that Selects from either an $A$
+or a $B$
+
+$A \& B$ Session Type of a Process that Offers a Choice of either an
+$A$ or a $B$
+
+\emph{Left Select} $x[inl].P$: \\
+Process $P$ Communicates on Channel $x$ obeying Protocol $A$ \\
+Composite Process $x[inl].P$ Communicates on Channel $x$ obeying
+Protocol $A \oplus B$:
+\begin{enumerate}
+  \item Sends on Channel $x$ a Request to Select the Left Option from
+    a Choice
+  \item Executes Process $P$
+\end{enumerate}
+
+\emph{Choice} $x.\mono{case}(Q,R)$: \\
+Composite Process $x.\mono{case}(Q,R)$ Communicates on Channel $x$
+obeying Protocol $A \& B$:
+\begin{enumerate}
+  \item Receives a Selection on Channel $x$
+  \item Executes Process $Q$ or $R$ depending on which was Selected
+\end{enumerate}
+Process $Q$ if Selected will Communicate on Channel $x$ obeying
+Protocol $A$ \\
+Process $R$ if Selected will Communicate on Channel $x$ obeying
+Protocol $B$
+
+$0$: Session Type of a Process that Selects from no Alternatives \\
+$\top$: Session Type of a Process that Offers Choice of no
+Alternatives \\
+$0^\bot = \top$
+
+
+$!A$: Session Type of a Server Process that will repeatedly Accept an
+$A$
+
+$?A$: Session Type of a collection of Client Processes that may each
+Request an $A$
+
+\emph{Server} $!x(y).P$: \\
+Process $P$ Communicates on Channel $y$ obeying Protcol $A$ \\
+Composite Process $!x(y).P$ Communicates on Channel $x$ obeying
+Protocol $!A$:
+\begin{enumerate}
+  \item Receives Channel $y$ on Channel $x$
+  \item Spawns a fresh copy of Process $P$ to Execute
+\end{enumerate}
+All Channels used by $P$ other than $y$ must obey Protocol $?B$ for
+some $B$: i.e. a Process may provide a Replicable Service only if it
+is implemented by Communicating with other Processes that provide
+Replicable Services
+
+Dereliction, Weakening, Contraction: Server may have One, None, or
+Many Clients resp.
+
+\emph{Single Client} $?x[y].Q$: \\
+Process $Q$ Communicates on Channel $y$ obeying Protocol $A$ \\
+Composite Process $?x[y].Q$ Communicates on Channel $x$ obeying
+Protocol $?A$:
+\begin{enumerate}
+  \item Allocates fresh Channel $y$
+  \item Sends Channel $y$ on Channel $x$
+  \item Executes Process $Q$
+\end{enumerate}
+
+\emph{No Clients} $Q$: \\
+Process $Q$ does not Communicate on any Channel obeying Protocol $A$
+can be regarded as Communicating on a Channel $x$ obeying Protocol
+$?A$
+
+\emph{Multiple Clients} $Q\{x/x',x/x''\}$: \\
+Process $Q$ Communicates on Channels $x$ and $x'$ both obeying
+Protocol $?A$ \\
+Process $Q\{x/x',x'/x''\}$ Communicates on Channel $x$ obeying
+Protocol $?A$
+
+
+$\exists X.B$ Session Type of a Process that Instantiates
+Propositional Variable $X$ to a given Proposition (Type Application)
+
+$\forall X.B$ Session Type of a Process that generalizes over $X$
+(Type Abstraction)
+
+Polymorphic $\pi$-calculus (???)
+
+\emph{Instantiation} $x[A].P$: \\
+Process $P$ Communicates on Channel $x$ obeying Protocol $B\{A/X\}$ \\
+Composite Process $x[A].P$ Communicates on Channel $x$ obeying
+Protocol $\exists X.B$:
+\begin{enumerate}
+  \item Sends Representation of Proposition $A$ on Channel $x$
+  \item Executes Process $P$
+\end{enumerate}
+
+\emph{Generalization} $x(A).Q$: \\
+Process $Q$ Communicates on Channel $x$ obeying Protocol $B$ \\
+Composite Process $x(A).Q$ Communicates on Channel $x$ obeying
+Protocol $\forall X.B$:
+\begin{enumerate}
+  \item Receives Representation of a Proposition on Channel $x$
+  \item Binds the Proposition to the Propositional Variable $X$
+  \item Executes $Q$
+\end{enumerate}
+
+
+\asterism
+
+
+\textbf{Principal Cut Reductions}
+
+$(\beta_{\otimes \parr})$ Output against Input: Communication
+\[
+  \nu x.(x[y].(P|Q) | x(y).R) \Longrightarrow
+    \nu y.(P|\nu x.(Q|R))
+\]
+
+$(\beta_{\oplus \&})$ Selection against Choice: Choosing an
+Alternative
+\[
+  x[inl].P | x.\mono{case}(Q,R) \Longrightarrow \nu x.(P|Q)
+    \quad (\text{Left})
+\]
+
+$(\beta_{! ?})$ $!$ against $?$: Spawning a single copy of
+a Server to Communicate with a Client
+\[
+  \nu x.(!x(y).P | ?x[y].Q) \Longrightarrow \nu y.(P|Q)
+\]
+
+$(\beta_{! W})$ $!$ against $Weaken$: Deallocating a Server that
+has no Clients (Garbage Collection)
+\[
+  \nu x.(!x(y).P|Q) \Longrightarrow Q,
+    \quad \text{if}\; x \notin fn(Q)
+\]
+
+$(\beta_{! C})$ $!$ against $Contract$: Replicating a Server
+\[
+  \nu x.(!x(y)).P | Q \{x/x', x/x''\}) \Longrightarrow
+    \nu x'.(!x'(y).P | \nu x''.(!x''(y).P | Q))
+\]
+
+$(\beta_{\exists \forall})$ Instantiation against Generalization:
+Transmitting a Representation of a Proposition
+\[
+  \nu x.(x[A].P | x(X).Q) \Longrightarrow \nu x.(P|Q\{A/X\})
+\]
+
+$(\beta_{1 \bot})$ Empty Output against Empty Input: Empty
+Communication
+\[
+  \nu x.(x[].0 | x().P) \Longrightarrow P
+\]
+
+$(\beta_{0 \top})$
+
+
+Explicit notation for Contraction and Weakening %FIXME
+
+
+\textbf{Commuting Conversion}
+
+$\kappa_{\otimes 1}$ \\
+$\kappa_{\otimes 2}$ \\
+$\kappa_\parr$ \\
+$\kappa_\oplus$ \\
+$\kappa_\&$ \\
+$\kappa_!$ \\
+$\kappa_?$ \\
+$\kappa_\exists$ \\
+$\kappa_\forall$ \\
+$\kappa_\bot$ \\
+(no rule for $0$) \\
+$\kappa_\top$
+
+
 Th. \textbf{Subject Reduction}:
 \[
-  \text{If } P \vdash \Gamma \text{ and } P \Rightarrow Q
+  \text{If } P \vdash \Gamma \text{ and } P \Longrightarrow Q
   \text{ then } Q \vdash \Gamma
 \]
 
 Th. \textbf{Cut Elimination}:
 \[
   \text{If } P \vdash \Gamma \text{ then there exists } Q
-  \text{ such that } P \Rightarrow^* Q \text{ and } Q
+  \text{ such that } P \Longrightarrow^* Q \text{ and } Q
   \text{ is not a } Cut
 \]
 
