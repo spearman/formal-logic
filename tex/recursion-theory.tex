@@ -1793,6 +1793,9 @@ $\bot$: Unit for $\parr$ \\
 $0$: Unit for $\oplus$ \\
 $\top$: Unit for $\&$
 
+Types with $!$ correspond to Unlimited Types in GV
+(\S\ref{sec:good_variation})
+
 
 \asterism
 
@@ -1822,6 +1825,8 @@ Duals:
   \end{aligned}
 \]
 
+$(A^\bot)^\bot = A$
+
 Substitution: $B\{A/X\}$ Denotes Substitution of $A$ for $X$ in $B$
 
 \[
@@ -1838,7 +1843,7 @@ Duality Preserves Substitution:
   B\{A/X\}^\bot = B^\bot\{A/X\}
 \]
 
-Environments $\Gamma, \Delta, \Theta$: associating Names to
+\emph{Environments} $\Gamma, \Delta, \Theta$: associating Names to
 Propositions (where each Name is distinct)
 
 $\Gamma = x_1:A_1, \ldots x_n:A_n$ with $x_i \neq x_j$ when $i \neq j$
@@ -1863,24 +1868,39 @@ Combining Environments must contain distinct Names:
     \;|\; & x[].0 \;|\; x().P \;|\; x.\mono{case}() &
 \end{flalign*}
 
-$x \leftrightarrow y$: Link, ``Forwarding''; every Message Received on
+$x \leftrightarrow y$ -- Link, ``Forwarding''; every Message Received on
 $y$ is Re-transmitted on $x$, and every Message Received on $x$ is
 Re-transmitted on $y$
 
-$\nu x:A.(P|Q)$: Parallel Composition; Name $x$ is Bound in $P$ and
-$Q$ \\
-$x[y].(P|Q)$: Output; Name $y$ is Bound in $P$ but not in $Q$ \\
-$x(y).(P)$: Input; Name $y$ is Bound in $P$ \\
-$x[inl].P$: Left Selection \\
-$x[inr].P$: Right Selection \\
-$x.\mono{case}(P,Q)$: Choice \\
-$!x(y).P$: Server Accept; Name $y$ is Bound in $P$ \\
-$?x[y].P$: Client Request; Name $y$ is Bound in $P$ \\
-$x[A].P$: Send Type \\
-$x(X).P$: Receive Type; Propositional Variable $X$ is Boundin $P$ \\
-$x[].0$: Empty Output \\
-$x().P$: Empty Input \\
-$x.\mono{case}()$: Empty Choice
+$\nu x:A.(P|Q)$ -- Parallel Composition; Name $x$ is Bound in $P$ and
+$Q$
+
+$x[y].(P|Q)$ -- Output; Name $y$ is Bound in $P$ but not in $Q$
+
+$x(y).(P)$ -- Input; Name $y$ is Bound in $P$
+
+$x[inl].P$ -- Left Selection
+
+$x[inr].P$ -- Right Selection
+
+$x.\mono{case}(P,Q)$ -- Choice
+
+$!x(y).P$ -- Server Accept; Name $y$ is Bound in $P$
+
+$?x[y].P$ -- Client Request; Name $y$ is Bound in $P$
+
+$x[A].P$ -- Send Type
+
+$x(X).P$ -- Receive Type; Propositional Variable $X$ is Boundin $P$
+
+$x[].0$ -- Empty Output
+
+$x().P$ -- Empty Input
+
+$x.\mono{case}()$ -- Empty Choice
+
+
+\asterism
 
 
 $fn(P)$: Free Names in $P$
@@ -1972,15 +1992,31 @@ $AxCut$:
 simplifies a Cut against an Axiom.
 
 
+Additional Rules:
+\[
+  \frac{P \equiv Q \quad Q \Longrightarrow R \quad R \equiv S}
+  {P \equiv S}
+\]
+
+\[
+  \frac{P \Longrightarrow R}
+  {\nu x.(P|Q) \Longrightarrow \nu x.(R|Q)}
+\]
+
+\[
+  \frac{Q \Longrightarrow R}
+  {\nu x.(P|Q) \Longrightarrow \nu x.(R|Q)}
+\]
+
 \asterism
 
-$A \otimes B$ Session Type of a Process that Outputs an $A$ then
+$A \otimes B$ -- Session Type of a Process that Outputs an $A$ then
 behaves as $B$
 
-$A \parr B$ Session Type of a Process that Inputs an $A$ then behaves
-as $B$
+$A \parr B$ -- Session Type of a Process that Inputs an $A$ then
+behaves as $B$
 
-\emph{Output} $x[y].(P|Q)$: \\
+\emph{Output} -- $x[y].(P|Q)$: \\
 $P$ and $Q$ act on Disjoint Sets of Channels
 (guarantees no Deadlock) \\
 Process $P$ Communicates on Channel $y$ obeying Protocol $A$ \\
@@ -1993,7 +2029,7 @@ Protocol $A \otimes B$:
   \item Concurrently Executes Process $P$ and Process $Q$
 \end{enumerate}
 
-\emph{Input} $x(y).R$: \\
+\emph{Input} -- $x(y).R$: \\
 Process $R$ Communicates on Channel $y$ obeying Protocol $A$ and on
 Channel $x$ obeying Protocol $B$ \\
 Composite Process $x(y).R$ Communicates on Channel $x$ obeying
@@ -2009,19 +2045,19 @@ Input, $x$ first has Type $B$ in Component Process $R$ then Type $A
 \parr B$ in Composite Process $x(y).R$. This corresponds to the notion
 of Session Type (\S\ref{sec:session_type})
 
-$1$: Session Type of a Process that performs an Empty Output \\
-$\bot$: Session Type of a Process that performs an Empty Input \\
+$1$ -- Session Type of a Process that performs an Empty Output \\
+$\bot$ -- Session Type of a Process that performs an Empty Input \\
 $1^\bot = \bot$
 
 
 
-$A \oplus B$ Session Type of a Process that Selects from either an $A$
-or a $B$
-
-$A \& B$ Session Type of a Process that Offers a Choice of either an
+$A \oplus B$ -- Session Type of a Process that Selects from either an
 $A$ or a $B$
 
-\emph{Left Select} $x[inl].P$: \\
+$A \& B$ -- Session Type of a Process that Offers a Choice of either
+an $A$ or a $B$
+
+\emph{Left Select} -- $x[inl].P$: \\
 Process $P$ Communicates on Channel $x$ obeying Protocol $A$ \\
 Composite Process $x[inl].P$ Communicates on Channel $x$ obeying
 Protocol $A \oplus B$:
@@ -2031,7 +2067,7 @@ Protocol $A \oplus B$:
   \item Executes Process $P$
 \end{enumerate}
 
-\emph{Choice} $x.\mono{case}(Q,R)$: \\
+\emph{Choice} -- $x.\mono{case}(Q,R)$: \\
 Composite Process $x.\mono{case}(Q,R)$ Communicates on Channel $x$
 obeying Protocol $A \& B$:
 \begin{enumerate}
@@ -2043,19 +2079,19 @@ Protocol $A$ \\
 Process $R$ if Selected will Communicate on Channel $x$ obeying
 Protocol $B$
 
-$0$: Session Type of a Process that Selects from no Alternatives \\
-$\top$: Session Type of a Process that Offers Choice of no
+$0$ -- Session Type of a Process that Selects from no Alternatives \\
+$\top$ -- Session Type of a Process that Offers Choice of no
 Alternatives \\
 $0^\bot = \top$
 
 
-$!A$: Session Type of a Server Process that will repeatedly Accept an
+$!A$ -- Session Type of a Server Process that will repeatedly Accept an
 $A$
 
-$?A$: Session Type of a collection of Client Processes that may each
+$?A$ -- Session Type of a collection of Client Processes that may each
 Request an $A$
 
-\emph{Server} $!x(y).P$: \\
+\emph{Server} -- $!x(y).P$: \\
 Process $P$ Communicates on Channel $y$ obeying Protcol $A$ \\
 Composite Process $!x(y).P$ Communicates on Channel $x$ obeying
 Protocol $!A$:
@@ -2071,7 +2107,7 @@ Replicable Services
 Dereliction, Weakening, Contraction: Server may have One, None, or
 Many Clients resp.
 
-\emph{Single Client} $?x[y].Q$: \\
+\emph{Single Client} -- $?x[y].Q$: \\
 Process $Q$ Communicates on Channel $y$ obeying Protocol $A$ \\
 Composite Process $?x[y].Q$ Communicates on Channel $x$ obeying
 Protocol $?A$:
@@ -2081,27 +2117,27 @@ Protocol $?A$:
   \item Executes Process $Q$
 \end{enumerate}
 
-\emph{No Clients} $Q$: \\
+\emph{No Clients} -- $Q$: \\
 Process $Q$ does not Communicate on any Channel obeying Protocol $A$
 can be regarded as Communicating on a Channel $x$ obeying Protocol
 $?A$
 
-\emph{Multiple Clients} $Q\{x/x',x/x''\}$: \\
+\emph{Multiple Clients} -- $Q\{x/x',x/x''\}$: \\
 Process $Q$ Communicates on Channels $x$ and $x'$ both obeying
 Protocol $?A$ \\
 Process $Q\{x/x',x'/x''\}$ Communicates on Channel $x$ obeying
 Protocol $?A$
 
 
-$\exists X.B$ Session Type of a Process that Instantiates
+$\exists X.B$ -- Session Type of a Process that Instantiates
 Propositional Variable $X$ to a given Proposition (Type Application)
 
-$\forall X.B$ Session Type of a Process that generalizes over $X$
+$\forall X.B$ -- Session Type of a Process that generalizes over $X$
 (Type Abstraction)
 
 Polymorphic $\pi$-calculus (???)
 
-\emph{Instantiation} $x[A].P$: \\
+\emph{Instantiation} -- $x[A].P$: \\
 Process $P$ Communicates on Channel $x$ obeying Protocol $B\{A/X\}$ \\
 Composite Process $x[A].P$ Communicates on Channel $x$ obeying
 Protocol $\exists X.B$:
@@ -2110,7 +2146,7 @@ Protocol $\exists X.B$:
   \item Executes Process $P$
 \end{enumerate}
 
-\emph{Generalization} $x(A).Q$: \\
+\emph{Generalization} -- $x(A).Q$: \\
 Process $Q$ Communicates on Channel $x$ obeying Protocol $B$ \\
 Composite Process $x(A).Q$ Communicates on Channel $x$ obeying
 Protocol $\forall X.B$:
@@ -2126,45 +2162,45 @@ Protocol $\forall X.B$:
 
 \textbf{Principal Cut Reductions}
 
-$(\beta_{\otimes \parr})$ Output against Input: Communication
+$(\beta_{\otimes \parr})$ -- Output against Input: Communication
 \[
   \nu x.(x[y].(P|Q) | x(y).R) \Longrightarrow
     \nu y.(P|\nu x.(Q|R))
 \]
 
-$(\beta_{\oplus \&})$ Selection against Choice: Choosing an
+$(\beta_{\oplus \&})$ -- Selection against Choice: Choosing an
 Alternative
 \[
   x[inl].P | x.\mono{case}(Q,R) \Longrightarrow \nu x.(P|Q)
     \quad (\text{Left})
 \]
 
-$(\beta_{! ?})$ $!$ against $?$: Spawning a single copy of
+$(\beta_{! ?})$ -- $!$ against $?$: Spawning a single copy of
 a Server to Communicate with a Client
 \[
   \nu x.(!x(y).P | ?x[y].Q) \Longrightarrow \nu y.(P|Q)
 \]
 
-$(\beta_{! W})$ $!$ against $Weaken$: Deallocating a Server that
+$(\beta_{! W})$ -- $!$ against $Weaken$: Deallocating a Server that
 has no Clients (Garbage Collection)
 \[
   \nu x.(!x(y).P|Q) \Longrightarrow Q,
     \quad \text{if}\; x \notin fn(Q)
 \]
 
-$(\beta_{! C})$ $!$ against $Contract$: Replicating a Server
+$(\beta_{! C})$ -- $!$ against $Contract$: Replicating a Server
 \[
   \nu x.(!x(y)).P | Q \{x/x', x/x''\}) \Longrightarrow
     \nu x'.(!x'(y).P | \nu x''.(!x''(y).P | Q))
 \]
 
-$(\beta_{\exists \forall})$ Instantiation against Generalization:
+$(\beta_{\exists \forall})$ -- Instantiation against Generalization:
 Transmitting a Representation of a Proposition
 \[
   \nu x.(x[A].P | x(X).Q) \Longrightarrow \nu x.(P|Q\{A/X\})
 \]
 
-$(\beta_{1 \bot})$ Empty Output against Empty Input: Empty
+$(\beta_{1 \bot})$ -- Empty Output against Empty Input: Empty
 Communication
 \[
   \nu x.(x[].0 | x().P) \Longrightarrow P
@@ -2211,7 +2247,75 @@ Th. \textbf{Cut Elimination}:
 \hfill \\
 \cite{wadler12}
 
-Gay-Vasconcelos %FIXME
+Gay-Vasconcelos 2010 %FIXME
+
+Session Types $\subset$ Types
+
+\emph{Types}:
+\begin{flalign*}
+  \quad T,U,V &::= S \;|\; T \otimes U \;|\; T \multimap U
+    \;|\; T \rightarrow U \;|\; Unit &
+\end{flalign*}
+
+$S$ -- (Linear) Session Type
+
+$T \otimes U$ -- (Linear) Tensor Product
+
+$T \multimap U$ -- (Linear) Function
+
+$T \rightarrow U$ -- (Unlimited) Function
+
+$Unit$ -- (Unlimited) Unit
+
+\emph{Unlimited Types} support Weakening and Contraction,
+\emph{Linear Types} do not
+
+Unlimited Types correspond to Types written with $!$ in CP
+(\S\ref{sec:classical_processes})
+
+\emph{Session Types}:
+\begin{flalign*}
+  \quad S &::= \;!T.S \;|\; ?T.S \;|\; \oplus\{l_i:S_i\}_{i \in I}
+    \;|\; \&\{l_i:S_i\}_{i \in I} \;|\; end_! \;|\; end_? &
+\end{flalign*}
+
+$!T.S$ -- Output Value of Type $T$ then Behave as $S$
+
+$?T.S$ -- Input Value of Type $T$ then Behave as $S$
+
+$\oplus\{l_i:S_i\}_{i \in I}$ -- Select from Behaviors $S_i$ with
+Label $l_i$
+
+$\&\{l_i:S_i\}_{i \in I}$ -- Offer Choice of Behaviors $S_i$ with
+Label $l_i$
+
+$end_!$ -- Terminator for use with Output
+
+$end_?$ -- Terminator for use with Input
+
+
+Session Type Duals:
+\begin{align*}
+  \overline{!T.S} &= ?T.\overline{S} \\
+  \overline{?T.S} &= !T.\overline{S} \\
+  \overline{\oplus\{l_i:S_i\}_{i \in I}} &=
+    \&\{l_i:\overline{S_i}\}_{i \in I} \\
+  \overline{\&\{l_i:S_i\}_{i \in I}} &=
+    \oplus\{l_i:\overline{S_i}\}_{i \in I} \\
+  \overline{end_!} &= end_? \\
+  \overline{end_?} &= end_!
+\end{align*}
+
+$\overline{\overline{S}} = S$
+
+
+\emph{Environments} $\Phi, \Psi$ associating Values to Types
+
+$un(\Phi)$ -- Each Type in $\Phi$ is Unlimited
+
+
+\asterism
+
 
 Th. \textbf{Translation Preserves Types}
 
