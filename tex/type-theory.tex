@@ -1322,6 +1322,11 @@ one Type Constructor (\S\ref{sec:type_constructor}), $\rightarrow$
 Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda}) may be
 considered a Typed $\lambda$-calculus with only one Type.
 
+Extension to Untyped $\lambda$-calculus may be achieved by
+considering Recursive Types with Recursion in Negative Positions;
+Untyped $\lambda$-calculus can be Modelled by a Solution to the
+Recursion Equation $X \simeq X \rightarrow X$. \cite{wadler12}
+
 A Denotational Semantics can be given by a \emph{B\"ohm Tree}
 (\S\ref{sec:bohm_tree}).
 
@@ -1536,7 +1541,7 @@ All Recursive Functions in Peano Arithmetic are definable
 
 extended version of Typed Lambda Calculus (\S\ref{sec:typed_lambda})
 
-Geometry of Interaction (\S\ref{sec:geometry_of_interaction})
+Geometry of Interaction (\S\ref{sec:interaction_geometry})
 
 Denotational Semantics (\S\ref{sec:denotational_semantics}):
 \emph{Scott Model}
@@ -1634,6 +1639,338 @@ Contextual Category (\S\ref{sec:contextual_category})
 % --------------------------------------------------------------------
 
 Linear Type System (\S\ref{sec:linear_type})
+
+
+
+\subsubsection{Good Variation}\label{sec:good_variation}
+\cite{wadler12}
+
+Gay-Vasconcelos 2010 (Semantics: Asynchronous Buffered
+Communication) %FIXME
+
+Linear Functional Language for Session Types
+
+Session Types $\subset$ Types
+
+\fist See \emph{Classical Processes} (CP
+\S\ref{sec:classical_processes}) for a Session-typed $\pi$-calculus
+Translation
+
+No Deadlock
+
+Extensions:
+\begin{itemize}
+  \item $Mix$ (Girard):
+\[
+  \frac{P \vdash \Gamma \quad Q \vdash \Delta}
+  {P | Q \vdash \Gamma, \Delta} (Mix)
+\]
+    No Channels in Common between $P$ and $Q$ (rather than one Channel
+    in common as in $Cut$); Equivalent to Provability of the
+    Proposition:
+\[
+  A \otimes B \multimap A \parr B
+\]
+    Still no Deadlock but allows Independent Concurrent Components.
+  \item $BiCut$ (\cite{abramsky-gay-nagarajan96}; special case of
+    $MultiCut$):
+\[
+  \frac{P \vdash \Gamma, x:A, y:B \quad
+    Q \vdash \Delta, x:A^\bot, y:B^\bot}
+  {\nu x:A.y:B.(P|Q) \vdash \Gamma, \Delta} (BiCut)
+\]
+    Two Channels in common between $P$ and $Q$ (rather than one
+    Channel in common as in $Cut$); Equivalent to Provability of the
+    Proposition:
+\[
+  A \parr B \multimap A \otimes B
+\]
+    Allows for systems where Communication forms a loop and may
+    Deadlock
+\end{itemize}
+
+Systems with both $Mix$ and $BiCut$ are Compact: from either of $A
+\otimes B$ and $A \parr B$ one may derive the other;
+Compact Linear Systems (\S\ref{sec:compact_linear_system}),
+Interaction Categories (\S\ref{sec:interaction_category})
+
+\emph{Types}:
+\begin{flalign*}
+  \quad T,U,V &::= S \;|\; T \otimes U \;|\; T \multimap U
+    \;|\; T \rightarrow U \;|\; Unit &
+\end{flalign*}
+
+$S$ -- (Linear) Session Type
+
+$T \otimes U$ -- (Linear) Tensor Product
+
+$T \multimap U$ -- (Linear) Function
+
+$T \rightarrow U$ -- (Unlimited) Function
+
+$Unit$ -- (Unlimited) Unit
+
+\emph{Unlimited Types} support Weakening and Contraction,
+\emph{Linear Types} do not
+
+Unlimited Types correspond to Types written with $!$ in CP
+(\S\ref{sec:classical_processes})
+
+\emph{Session Types}:
+\begin{flalign*}
+  \quad S &::= \;!T.S \;|\; ?T.S \;|\; \oplus\{l_i:S_i\}_{i \in I}
+    \;|\; \&\{l_i:S_i\}_{i \in I} \;|\; end_! \;|\; end_? &
+\end{flalign*}
+
+$!T.S$ -- Output Value of Type $T$ then Behave as $S$
+
+$?T.S$ -- Input Value of Type $T$ then Behave as $S$
+
+$\oplus\{l_i:S_i\}_{i \in I}$ -- Select from Behaviors $S_i$ with
+Label $l_i$
+
+$\&\{l_i:S_i\}_{i \in I}$ -- Offer Choice of Behaviors $S_i$ with
+Label $l_i$
+
+$end_!$ -- Terminator for use with Output
+
+$end_?$ -- Terminator for use with Input
+
+
+Session Type Duals:
+\begin{align*}
+  \overline{!T.S} &= ?T.\overline{S} \\
+  \overline{?T.S} &= !T.\overline{S} \\
+  \overline{\oplus\{l_i:S_i\}_{i \in I}} &=
+    \&\{l_i:\overline{S_i}\}_{i \in I} \\
+  \overline{\&\{l_i:S_i\}_{i \in I}} &=
+    \oplus\{l_i:\overline{S_i}\}_{i \in I} \\
+  \overline{end_!} &= end_? \\
+  \overline{end_?} &= end_!
+\end{align*}
+
+$\overline{\overline{S}} = S$
+
+Duality on Session Types in GV leaves the Types of Sent and Received
+Values unchanged, i.e.:
+\begin{align*}
+  \overline{!T.S} &= ?T.\overline{S} \\
+  \overline{?T.S} &= !T.\overline{S}
+\end{align*}
+
+
+\emph{Environments} $\Phi, \Psi$ associating Values to Types
+
+$un(\Phi)$ -- Each Type in $\Phi$ is Unlimited
+
+
+\emph{Terms}:
+\begin{flalign*}
+  \quad L,M,N &::= x \;|\; \mono{unit} \;|\; \lambda x.N \;|\; L M
+    \;|\; (M,N) \;|\; \mono{let}\; (x,y) = M \;\mono{in}\; N & \\
+    & \;|\; \mono{send}\; M N \;|\; \mono{receive}\; M
+    \;|\; \mono{select}\; l M
+    \;|\; \mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I} & \\
+    & \;|\; \mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N
+    \;|\; \mono{terminate}\; M &
+\end{flalign*}
+
+Linear $\lambda$-calculus:
+
+$x$ -- Identifier
+
+$\mono{unit}$ -- Unit Constant
+
+$\lambda x.N$ -- Function Abstraction
+
+$L M$ -- Function Application
+
+$(M,N)$ -- Pair Construction
+
+$\mono{let}\; (x,y) = M \;\mono{in}\; N$
+
+Communication on a Channel:
+
+$\mono{send}\; M N$ -- Send Value $M$ on Channel $N$
+
+$\mono{receive}\; M$ -- Receive on Channel $M$
+
+$\mono{select}\; l M$ -- Select Label $l$ on Channel $M$
+
+$\mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I}$ -- Offer Choice
+on Channel $M$
+
+$\mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N$ -- Connect $M$
+to $N$ by Channel $x$
+
+$\mono{terminate}\; M$ -- Terminate Input
+
+
+Type Rules
+
+Function Abstraction may produce an Unlimited Function if and only if
+all of its Free Variables are of Unlimited Type.
+
+Each Term is not required to have a Unique Type, e.g. a
+$\lambda$-expression where all Free Variables have Unlimited Type may
+be given either a Linear or Unlimited Function Type.
+
+Possibly Subtyping could be added to arrange for giving each Term a
+Unique Smallest Type.
+
+
+\asterism
+
+
+\emph{Output} -- $\mono{send}\; M N$: \\
+Outputs the Value $M$ of Type $T$ on Channel $N$ of Session Type
+$!T.S$ \\
+Returns the updated Channel after which the Output has Session Type
+$S$
+
+\emph{Input} -- $\mono{receive}\; M$: \\
+Inputs a Value from Channel $M$ of Session Type $?T.S$ \\
+Returns a (Linear) Pair of the Input Value of Type $T$ and the updated
+Channel after which the Input has Session Type $S$
+
+\emph{New Channel} ($Connect$) -- $\mono{with}\; x \;\mono{connect}\;
+M \;\mono{to}\; N$ \\
+Creates a new Channel $x$ with Session Type $S$ where $x$ is used at
+Type $S$ in Term $M$ and Dual Type $\overline{S}$ in Term $N$ \\
+$M$ and $N$ are Evaluated Concurrently \\
+Left Subterm returns exhausted Channel of Type $end_!$ %FIXME
+
+\emph{Terminate Channel} ($Terminate$) -- $\mono{terminate}\; M$: \\
+Evaluates Term $M$ which Returns a Pair of an Exhausted Channel of
+Type $end_?$ and a Value of Type $T$ \\
+Deallocates the Channel and Returns the Value
+
+Constructs for $Connect$ and $Terminate$ Deallocate two ends of a
+Channel between them.
+
+Alternative designs %FIXME
+
+
+\asterism
+
+
+\textbf{Translation of GV into CP}
+
+CP (\S\ref{sec:classical_processes})
+
+Translation of Session Types:
+\begin{align*}
+  \llbracket !T.S \rrbracket &=
+    \llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket \\
+  \llbracket ?T.S \rrbracket &=
+    \llbracket T \rrbracket \otimes \llbracket S \rrbracket \\
+  \llbracket \oplus \{l_i : S_i\}_{i \in I} \rrbracket &=
+    \llbracket S_1 \rrbracket \& \cdots \& \llbracket S_n \rrbracket,
+    \quad I = \{1,\ldots,n\} \\
+  \llbracket \& \{l_i : S_i\}_{i \in I} \rrbracket &=
+    \llbracket S_1 \rrbracket \oplus \cdots \oplus
+    \llbracket S_n \rrbracket, \quad I = \{1,\ldots,n\} \\
+  \llbracket end_! \rrbracket &= \bot \\
+  \llbracket end_? \rrbracket &= 1
+\end{align*}
+
+\fist Note that Input/Output are translated into their Duals. This is
+explained by Send and Receive in GV taking Channels as
+\emph{Arguments}, while in the Interpretations in CP Channels are
+\emph{Results}.
+\begin{itemize}
+  \item \emph{Send}: takes a Value and a Channel and Sends the Value
+    on that Channel (the Channel must \emph{Input} the Value)
+  \item \emph{Receive}: takes a Channel and Returns a Value (the
+    Channel must \emph{Output} the Value)
+\end{itemize}
+Since Duality on Session Types in GV leaves Types of Sent and Received
+Values unchanged, the Translation of these Operations takes the Dual
+of the Sent Value, but not the Received Value, i.e.:
+\begin{align*}
+  \llbracket !T.S \rrbracket &=
+    \llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket \\
+  \llbracket ?T.S \rrbracket &=
+    \llbracket T \rrbracket \otimes \llbracket S \rrbracket
+\end{align*}
+and following the equality in Linear Logic, $A \multimap B = A^\bot
+\parr B$, $\llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket$
+could alternatively be written $\llbracket T \rrbracket \multimap
+\llbracket S \rrbracket$.
+
+Translation Preserves Duality:
+\[
+  \llbracket \overline{S} \rrbracket = \llbracket S \rrbracket^\bot
+\]
+
+Translation of Types:
+\begin{align*}
+  \llbracket T \multimap U \rrbracket &=
+    \llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket \\
+  \llbracket T \rightarrow U \rrbracket &=
+    \;!(\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket) \\
+  \llbracket T \otimes U \rrbracket &=
+    \llbracket T \rrbracket \otimes \llbracket U \rrbracket \\
+  \llbracket Unit \rrbracket &= \;!\top
+\end{align*}
+
+$\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket$ could
+alternatively be written:
+\[
+  \llbracket T \rrbracket \multimap \llbracket U \rrbracket
+\]
+
+$!(\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket)$ could
+alternatively be written:
+\[
+  !(\llbracket T \rrbracket \multimap \llbracket U \rrbracket)
+\]
+
+$!T$ could alternatively be written $1$ (Unit for $\otimes$)
+
+This Translation follows the Call-by-value Translation of Classical
+Linear Logic (\S\ref{sec:classical_linear_logic})
+
+Translation of Terms:
+
+Linear $\lambda$ Terms:
+\begin{itemize}
+  \item Variable Translates to an $Axiom$
+  \item $Weaken$ and $Contract$ Translate to $Weaken$ and $Contract$
+  \item Function Abstraction and Product Deconstruction Translate to
+    Input
+  \item Function Application and Product Construction Translate to
+    Output
+  \item Translation of Elimination Rules ($\multimap-E$,
+    $\rightarrow-E$, $\times-E$) require use of $Cut$
+\end{itemize}
+
+Communication Operation Terms:
+\begin{itemize}
+  \item Send: Output Operation $x[y].(P|Q)$
+  \item Select: Select Operation $x[in_j].P$
+  \item Case: Choice Operation $\mono{case}(Q_1, \ldots, Q_n)$
+  \item $end_!$ in Connect: Empty Output $y[].0$
+  \item Terminate: Empty Input $x().P$
+  \item Receive (Trivial): $x(y).R$ (???)
+  \item Connect: $Cut$ corresponds to introducing a Channel for
+    Communication between two Subterms
+\end{itemize}
+Each of these Communication Translations involve a $Cut$ corresponding
+to Communication with given Channel.
+
+Term $M$ of Type $T$ is Translated $\llbracket M \rrbracket_z$ where
+$z$ is a Channel of Type $\llbracket T \rrbracket$ where $\llbracket M
+\rrbracket_z$ Sends the ``Answer'' it Computes on $z$, as expressed by
+the Theorem:
+
+Th. \textbf{Translation Preserves Types}
+
+\[
+  \text{If } \Phi \vdash M : T \text{ then }
+  \llbracket M \rrbracket z \vdash \llbracket \Phi \rrbracket^\bot,
+  z : \llbracket T \rrbracket
+\]
 
 
 

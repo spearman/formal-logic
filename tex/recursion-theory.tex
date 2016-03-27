@@ -1487,7 +1487,11 @@ Terms (Functions, Values): Linear $\lambda$-calculus Types
 Names (Channels \S\ref{sec:channel}): ``Interpretation Types''
 describing Session Protocols (\S\ref{sec:session_protocol})
 
-Dual Intuitionistic Linear Logic \cite{caires-pfenning10}
+Dual Intuitionistic Linear Logic ($\pi$-DILL):
+\cite{caires-pfenning10} Locality Property (requires that Names
+Received on a Channel may be used to Send Output but not to Receive
+Input; Satisfies additional Observational Equivalences
+\S\ref{sec:observational_equality}) \cite{wadler12}
 
 \emph{Session-based Concurrency}: Processes (\S\ref{sec:process})
 Communicate (\S\ref{sec:communication}) through Session Channels
@@ -1743,6 +1747,9 @@ Compare with $\pi$-CLL %FIXME
 Caires-Pfenning \cite{caires-pfenning10}
 
 No Deadlocks (\S\ref{sec:deadlock})
+
+\fist See \emph{Good Variation} (GV \S\ref{sec:good_variation}) for a
+Linear $\lambda$-calculus Translation
 
 $\pi$-DILL:
 \begin{itemize}
@@ -2243,87 +2250,18 @@ Th. \textbf{Cut Elimination}:
 
 
 
-\subparagraph{Good Variation}\label{sec:good_variation}
+\paragraph{Compact Linear System}\label{sec:compact_linear_system}
 \hfill \\
+
+\cite{abramsky-gay-nagarajan96}
+
+$Mix$, $BiCut$
+
 \cite{wadler12}
 
-Gay-Vasconcelos 2010 %FIXME
+Geometry of Interaction (\S\ref{sec:interaction_geometry})
 
-Session Types $\subset$ Types
-
-\emph{Types}:
-\begin{flalign*}
-  \quad T,U,V &::= S \;|\; T \otimes U \;|\; T \multimap U
-    \;|\; T \rightarrow U \;|\; Unit &
-\end{flalign*}
-
-$S$ -- (Linear) Session Type
-
-$T \otimes U$ -- (Linear) Tensor Product
-
-$T \multimap U$ -- (Linear) Function
-
-$T \rightarrow U$ -- (Unlimited) Function
-
-$Unit$ -- (Unlimited) Unit
-
-\emph{Unlimited Types} support Weakening and Contraction,
-\emph{Linear Types} do not
-
-Unlimited Types correspond to Types written with $!$ in CP
-(\S\ref{sec:classical_processes})
-
-\emph{Session Types}:
-\begin{flalign*}
-  \quad S &::= \;!T.S \;|\; ?T.S \;|\; \oplus\{l_i:S_i\}_{i \in I}
-    \;|\; \&\{l_i:S_i\}_{i \in I} \;|\; end_! \;|\; end_? &
-\end{flalign*}
-
-$!T.S$ -- Output Value of Type $T$ then Behave as $S$
-
-$?T.S$ -- Input Value of Type $T$ then Behave as $S$
-
-$\oplus\{l_i:S_i\}_{i \in I}$ -- Select from Behaviors $S_i$ with
-Label $l_i$
-
-$\&\{l_i:S_i\}_{i \in I}$ -- Offer Choice of Behaviors $S_i$ with
-Label $l_i$
-
-$end_!$ -- Terminator for use with Output
-
-$end_?$ -- Terminator for use with Input
-
-
-Session Type Duals:
-\begin{align*}
-  \overline{!T.S} &= ?T.\overline{S} \\
-  \overline{?T.S} &= !T.\overline{S} \\
-  \overline{\oplus\{l_i:S_i\}_{i \in I}} &=
-    \&\{l_i:\overline{S_i}\}_{i \in I} \\
-  \overline{\&\{l_i:S_i\}_{i \in I}} &=
-    \oplus\{l_i:\overline{S_i}\}_{i \in I} \\
-  \overline{end_!} &= end_? \\
-  \overline{end_?} &= end_!
-\end{align*}
-
-$\overline{\overline{S}} = S$
-
-
-\emph{Environments} $\Phi, \Psi$ associating Values to Types
-
-$un(\Phi)$ -- Each Type in $\Phi$ is Unlimited
-
-
-\asterism
-
-
-Th. \textbf{Translation Preserves Types}
-
-\[
-  \text{If } \Phi \vdash M : T \text{ then }
-  \llbracket M \rrbracket x \vdash \llbracket \Phi \rrbracket^\bot,
-  x : \llbracket T \rrbracket
-\]
+Interaction Categories (\S\ref{sec:interaction_category})
 
 
 
