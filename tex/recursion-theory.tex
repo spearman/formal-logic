@@ -615,11 +615,11 @@ also \emph{Post Tag Machine}
 \subsection{Process Calculus}\label{sec:process_calculus}
 % --------------------------------------------------------------------
 
+(or \emph{Process Algebra})
+
 Family of approaches for modelling Concurrent Systems
 
 Process Theory (???)
-
-Linear Logic (\S\ref{sec:linear_logic})
 
 Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
 \begin{itemize}
@@ -628,8 +628,6 @@ Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi:
   \item Cut-elimination (\S\ref{sec:cut_elimination}) \emph{as}
     Communication (\S\ref{sec:communication})
 \end{itemize}
-
-Interaction Categories (\S\ref{sec:interaction_category})
 
 Curry-Howard for $\lambda$-calculus identifies a Fragment that is
 (Strongly?) Normalizing; Curry-Howard for Concurrency identifies a
@@ -641,7 +639,13 @@ Fragment of Process Calculus which is free from Deadlock
 Any Proof Reduction or Conversion corresponds to either a Computation
 Step or Proces Equivalence \cite{caires-pfenning10}
 
+History Monoid (\S\ref{sec:history_monoid})
+
 Session \S\ref{sec:session}: Sequence of Communications
+
+Linear Logic (\S\ref{sec:linear_logic})
+
+Interaction Categories (\S\ref{sec:interaction_category})
 
 
 Communication Primitives:
@@ -2646,3 +2650,183 @@ Self-referential Data
 % ====================================================================
 \section{Generative Recursion}\label{sec:generative_recursion}
 % ====================================================================
+
+% ====================================================================
+\section{Trace Theory}\label{sec:trace_theory}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Trace Monoid}\label{sec:trace_monoid}
+% --------------------------------------------------------------------
+
+Free Partially-commutative Monoid
+
+Isomorphic to History Monoids (\S\ref{sec:history_monoid}) and to the
+Monoid of Dependency Graphs (\S\ref{sec:dependency_graph})
+
+Free Object (\S\ref{sec:free_object})
+
+$\Sigma^*$ -- Free Monoid (\S\ref{sec:free_monoid}) on Alphabet
+(\S\ref{sec:alphabet}) $\Sigma$
+
+A Dependency Relation (\S\ref{sec:dependency_relation}) $D$ Induces an
+Independency Relation $I$ on $\Sigma$ defining Sets of Commuting
+Letters, which Induces a Binary Relation $\sim$ on $\Sigma^*$ where $u
+\sim v$ if and only if there exist $x,y \in \Sigma^*$ and $(a,b) \in
+I$ such that:
+\begin{align*}
+  u &= xaby \\
+  v &= xbay
+\end{align*}
+The Symmetric Transitive Closure of $\sim$ gives an Equivalence
+Relation $\equiv_D$ called the \emph{Trace} (\S\ref{sec:trace}) that
+Partitions the Free Monoid $\Sigma^*$ into a Set of Equivalence
+Classes giving a Quotient Monoid called the \emph{Trace Monoid},
+$M(D)$:
+\[
+  M(D) = \Sigma^*/\equiv_D
+\]
+
+Canonical Homomorphism:
+\[
+  \phi_D : \Sigma^* \rightarrow M(D)
+\]
+%FIXME universal property
+
+analogous to Free Monoid providing the underpinnings of Formal
+Languages (\S\ref{sec:formal_language})
+
+In Concurrent Computation (see Process Calculi
+\S\ref{sec:process_calculus}), Commuting Letters are portions of a
+``Job'' that can execute Independently of one another and
+Non-commuting Letters are Locks, Synchronization Points, or Thread
+Joins. %FIXME
+
+\emph{Cancellation Property}
+
+\emph{Dependency Morphism}
+
+Lexicographic Normal Form
+
+Foata Normal Form
+
+
+
+\subsubsection{Trace}\label{sec:trace}
+
+A \emph{Trace} $\equiv_D$ is the Transitive Symmetric Closure of the
+Binary Relation $\sim$ Induced by Independency Relation $I$ Induced by
+the Dependency Relation (\S\ref{sec:dependency_relation}) $D$.
+
+Set of Strings where certain Letters in the String are allowed to
+Commute
+
+
+
+% --------------------------------------------------------------------
+\subsection{Trace Language}\label{sec:trace_language}
+% --------------------------------------------------------------------
+
+A \emph{Trace Language} $L$ is a Subset of all Possible Traces $M(D)$
+(the Trace Monoid \S\ref{sec:trace_monoid}).
+
+analogous to Free Monoids and Formal Languages
+(\S\ref{sec:formal_language})
+
+Trace Closure of a Set of Strings:
+\[
+  [L]_D = \{[w]_D \;|\; w \in L\}
+\]
+
+Set of Strings in a Set of Traces:
+\[
+  \bigcup T = \{w \;|\; [w]_D \in T\}
+\]
+
+Trace Language:
+\[
+  L = \bigcup [L]_D
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{History Monoid}\label{sec:history_monoid}
+% --------------------------------------------------------------------
+
+Isomorphic to Trace Monoids (\S\ref{sec:trace_monoid}), i.e. Free
+Partially-commutative Monoids and to the Monoid of Dependency Graphs
+(\S\ref{sec:dependency_graph})
+
+Semi-abelian Categorical Product in $\cat{Mon}$
+
+Histories of Concurrent Processes (see Process Calculus
+\S\ref{sec:process_calculus})
+
+Provides a Set of Synchronization Primitives (e.g. Locks, Mutexes,
+Thread Joins, etc.) for providing Rendezvous Points between a Set of
+Independently Executing Processes (or Threads or Machines).
+
+$A = (\Sigma_1, \ldots, \Sigma_n)$ -- $n$-tuple of Alphabets
+$\Sigma_k$
+
+$P(A) = \Sigma_1^* \times \cdots \times \Sigma_n^*$ -- ``Product
+Monoid'', all possible combinations of Finite Strings from the
+Alphabets %FIXME xref product monoid?
+
+Component-wise Composition:
+\begin{align*}
+  \vect{u} &= (u_1, \ldots, u_n) \\
+  \vect{v} &= (v_1, \ldots, v_n) \\
+  \vect{uv} &= (u_1 v_1, \ldots, u_n v_n)
+\end{align*}
+for all $\vect{u},\vect{v} \in P(A)$A.
+
+$\Sigma = \Sigma_1 \cup \cdots \cup \Sigma_n$ -- Union Alphabet (Set
+Union \S\ref{sec:set_union}, not Disjoint Union)
+
+$\pi_k : \Sigma^* \rightarrow \Sigma_k^*$ -- String Projection
+(\S\ref{sec:string_projection})
+
+\emph{Distribution}:
+\begin{align*}
+  & \pi : \Sigma^* \rightarrow P(A) \\
+  & \pi(w) \mapsto (\pi_1(w), \ldots, \pi_n(w))
+\end{align*}
+
+The Tuple $\pi(a)$ for a Letter $a \in \Sigma$ is called the
+\emph{Elementary History} of $a$ giving an Indicator Function
+(\S\ref{sec:indicator_function}) for the Inclusion of a Letter $a$ in
+an Alphabet $\Sigma_k$:
+\[
+  \pi(a) = (a_1, \ldots, a_n)
+\]
+where:
+\[
+  a_k =
+  \begin{cases}
+    a \text{if} a \in \Sigma_k \\
+    \varepsilon \text{otherwise} \\
+  \end{cases}
+\]
+
+The \emph{History Monoid} $H(A)$ is the Submonoid
+(\S\ref{sec:submonoid}) of the Product Monoid $P(A)$ Generated by the
+Elementary Histories.
+
+The Elements of $H(A)$ are called \emph{Global Histories}.
+
+The Projections of a Global History are called \emph{Individual
+  Histories}: in Computer Science it is a record of the Sequence of
+States of a Process (or Thread or Machine) where the Alphabet
+$\Sigma_k$ is the Set of States of the Process.
+
+A Letter that occurs in two or more Alphabets is a
+\emph{Synchronization Primitive} between Individual Histories.
+
+The History Monoid $H(\Sigma_1, \ldots, \Sigma_n)$ is Isomorphic to
+the Trace Monoid $M(D)$ with Dependency Relation:
+\[
+  D = (\Sigma_1 \times \Sigma_1) \cup \cdots
+    \cup (\Sigma_n \times \Sigma_n)
+\]
