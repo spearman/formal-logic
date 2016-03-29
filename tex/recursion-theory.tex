@@ -291,7 +291,10 @@ Functions on itself can be defined if only Continuous Functions are
 considered, providing a Model for $\lambda$-calculus. cf. Denotational
 Semantics (\S\ref{sec:denotational_semantics})
 
-see also Combinatory Logic (\S\ref{sec:combinatory_logic})
+\fist see also Combinatory Logic (\S\ref{sec:combinatory_logic})
+
+\fist An embedding of $\lambda$-calculus into $\pi$-calculus is given
+by Milner \cite{milner90}
 
 
 
@@ -406,10 +409,11 @@ Untyped $\lambda$-calculus with the following Inductive definition:
 \end{itemize}
 Bracketing may be needed to disambiguate Terms.
 
-By the \emph{Church-Rosser Theorem}, the Reduction Rules of
-$\lambda$-calculus are Confluent, so every Lambda Term has at most one
-Normal Form. In general there is no Effective method for deciding
-whether two arbitrary Lambda Terms are Equivalent.
+By the \emph{Church-Rosser Theorem} (\S\ref{sec:church_rosser}), the
+Reduction Rules (\S\ref{sec:reduction_strategy}) of $\lambda$-calculus
+are Confluent, so every Lambda Term has at most one Normal Form. In
+general there is no Effective method for deciding whether two
+arbitrary Lambda Terms are Equivalent.
 
 
 
@@ -571,7 +575,123 @@ Von Neumann Universe (\S\ref{sec:vonneumann_universe})
 
 
 
+\subsubsection{Evaluation Strategy}\label{sec:evaluation_strategy}
+
+\fist Note that Evaluation Strategies and Reduction Strategies
+(\S\ref{sec:reduction_strategy}) are similar but distinct concepts.
+
+Evaluation Function (\S\ref{sec:evaluation_function})
+
+determine when to Evaluate the Arguments of a Function Call
+(Operation, Method, Relation, etc.), and what kind of Value to pass
+the Function.
+
+Remote Evaluation
+
+Short-circuit Evaluation
+
+In a Typed $\lambda$-calculus (\S\ref{sec:typed_lambda}), a Type
+System has Subject Reduction (\S\ref{sec:subject_reduction}) if
+Evaluation of Expressions Preserves Types.
+
+
+
+\paragraph{Strict Evaluation}\label{sec:strict_evaluation}
+\hfill \\
+
+\emph{Eager Evaluation}
+
+Call-by-value \\
+Call-by-reference -- Function Application Evaluates the Argument
+before proceeding to Evaluation of the Function Body: allows lookup of
+the current Value of the Argument as well as modofication via
+Assignment
+
+
+
+\subparagraph{Call-by-value}\label{sec:call_by_value}
+\hfill \\
+
+Applicative Order (or Leftmost Innermost)
+
+
+
+\subparagraph{Call-by-reference}\label{sec:call_by_reference}
+\hfill \\
+
+(Call-by-address)
+
+Call-by-sharing
+
+
+
+\subparagraph{Call-by-copy-restore}\label{sec:call_by_copy_restore}
+\hfill \\
+
+(Copy-in Copy-out, Call-by-value-result, Call-by-value-return)
+
+Special case of Call-by-reference
+
+
+
+\subparagraph{Partial Evaluation}\label{sec:partial_evaluation}
+
+
+
+\paragraph{Non-strict Evaluation}\label{sec:nonstrict_evaluation}
+
+\subparagraph{Call-by-need}\label{sec:call_by_need}
+\hfill \\
+
+\emph{Lazy Evaluation}
+
+Normal-order (or Leftmost Outermost)
+
+Applicative Simulation (encoding Lazy $\lambda$-calculus into
+$\pi$-calculus) \cite{milner90}
+
+
+
+\subparagraph{Call-by-name}\label{sec:call_by_name}
+
+
+
+\paragraph{Nondeterministic Evaluation}
+\label{sec:nondeterministic_evaluation}
+
+
+
+\subparagraph{Full $\beta$-reduction}\label{sec:full_beta_reduction}
+
+\subparagraph{Call-by-future}\label{sec:call_by_future}
+
+\subparagraph{Optimistic Evaluation}\label{sec:optimistic_evaluation}
+
+
+
 \subsubsection{Reduction Strategy}\label{sec:reduction_strategy}
+
+Complex Expression
+
+Simple Expression
+
+\fist Note that Evaluation Strategies
+(\S\ref{sec:evaluation_strategy}) and Reduction Strategies are similar
+but distinct concepts.
+
+Abstract Reduction (or Rewrite) System (\S\ref{sec:abstract_rewrite})
+
+Reduction Relation (\S\ref{sec:reduction_relation})
+
+Reduction Semantics (\S\ref{sec:reduction_semantics})
+
+$\beta$-reduction (\S\ref{sec:beta_reduction})
+
+
+
+\paragraph{Church-Rosser Theorem}\label{sec:church_rosser}
+
+\paragraph{Call-by-push-value}\label{sec:call_by_pushvalue}
 
 
 
@@ -618,6 +738,14 @@ also \emph{Post Tag Machine}
 (or \emph{Process Algebra})
 
 Family of approaches for modelling Concurrent Systems
+
+\begin{itemize}
+\item Communicating Sequential Processes (CSP \S\ref{sec:csp})
+\item Calculus of Communicating Systems (CSP \S\ref{sec:ccs})
+\item $\pi$-calculus (\S\ref{sec:pi_calculus})
+\item Chemical Abstract Machine
+\item Petri Nets
+\end{itemize}
 
 Process Theory (???)
 
@@ -688,6 +816,10 @@ $\parr$
 \subsubsection{Process}\label{sec:process}
 
 \emph{Process}
+
+\emph{Agent}
+
+Terms
 
 Free Names
 
@@ -1128,6 +1260,16 @@ and Finite-control $\pi$-calculus
 (\S\ref{sec:finitecontrol_pi_calculus}); number of Parallel components
 in any Process is Bounded by a Constant)
 
+\cite{milner90}:
+
+Function Paradigm (Process Calculus, $\lambda$-calculus): an Agent can
+be Transmitted as a Value and Bound to a Variable
+
+Object Paradigm ($\pi$-calculus): only Access to an Agent can be
+Transmitted and Bound (Sole Access of one Agent to another only as a
+special case)
+
+
 
 \textbf{Namespaces} \cite{honda-vasconcelos-kubo98}
 
@@ -1258,6 +1400,270 @@ Cell (Read/Write)
 
 
 \textbf{Continuous Interaction} (\S\ref{sec:continuous_interaction}
+
+
+\asterism
+
+
+Milner90 \cite{milner90}
+
+\textbf{Syntax}
+
+\emph{Names} -- Infinite Set $\class{N}$
+
+Name Variables $x,y,z,\ldots$
+
+\emph{Terms} -- Set $\class{P}$ (\emph{Agents}, i.e. \emph{Processes})
+
+Process Variables $P,Q,R,\ldots$:
+\begin{flalign*}
+  \quad P,Q &::= \;\overline{x}y.P \;|\; x(y).P \;|\; 0
+    \;|\; P|Q \;|\; !P \;|\; (y)P &
+\end{flalign*}
+
+$P\{y/x\}$ -- Replace Free occurrences of $x$ by $y$ in $P$
+
+\begin{enumerate}
+  \item \emph{Guarded Terms} -- $g.P$ with \emph{Guard} $g$:
+    \begin{flalign*}
+      \quad g &::= \;\overline{x}y \;|\; x(y) &
+    \end{flalign*}
+    where:
+    \begin{itemize}
+      \item \emph{Send} -- $\overline{x}y.P$ is the Process that Sends
+        Name $y$ on Link (Channel) Named $x$ and then Executes $P$
+      \item \emph{Receive} -- $x(y).P$ is the Process that Receives a
+        Name $z$ on Link (Channel) Named $x$ and then Executes
+        $P\{z/y\}$
+    \end{itemize}
+
+    $x$ is the \emph{Subject} and $y$ is the \emph{Object} of the
+    Guards $x(y)$ and $\overline{x}y$
+
+    A Term $Q$ in $P$ is \emph{Guarded} if it occurs within any
+    Guarded Term in $P$, otherwise it is \emph{Unguarded}
+
+    $x(y)$ is like $\lambda$-prefix $\lambda y$ in that it Binds $y$,
+    and unlike $\lambda y$ in that every Name $x \in \class{N}$ is a
+    Binder like $\lambda$ but only Names (not Terms) can replace Bound
+    Names.
+
+  \item \emph{Concurrent Behavior}:
+    \begin{itemize}
+      \item \emph{Composition} -- $P | Q$ Executes $P$ and $Q$
+        Concurently allowing them to Interact via Shared Links (i.e.
+        Shared Names).
+
+      \item \emph{Replication} -- $!P$ roughly stands for
+        $P|P|\cdots$; replacement for Recursion
+
+      \item \emph{Inaction} -- $0$ degenerate Composition of no
+        Processes
+    \end{itemize}
+
+    $x(y).P | \overline{x}z.Q$ is an Interaction with the Result
+    $P\{z/y\}|Q$ which differs from $\beta$-reduction
+    (\S\ref{sec:beta_reduction}) $(\lambda x M) N \rightarrow M
+    \{N/x\}$ in that the Sender $\overline{x}z.Q$ has an Independent
+    Future $Q$ after the Interaction while in $\beta$-reduction the
+    Future Behavior of Argument $N$ is controlled by $M$ via the
+    Variable $x$ (in a way depending on Evaluation Strategy
+    \S\ref{sec:evaluation_strategy}; cf. Function vs. Object
+    Paradigms).
+
+  \item \emph{Restriction} -- $(x)P$ confines the use of $x$ as a Link
+    to within $P$, i.e. no Interaction between Components can occur
+    in:
+    \[
+      x(y).P | (x)(\overline{x}z.Q)
+    \]
+
+    $(x)$ Applied to $(1)$: no Interaction at $x$ can occur between
+    this Term and any Terms that surround it:
+    \[
+      (x)(x(y).P | \overline{x}z.Q)) \approx (x)(P\{z/y\}|Q)
+    \]
+    for some Congruence Relation $\approx$.
+
+\end{enumerate}
+
+(Omitted): \\
+$\tau.P$ -- Silent Guard \\
+$[x=y]P$ -- Matching \\
+$P + Q$ -- Summation
+
+Two forms of Binding: $x(y)$ and $(y)$
+
+\fist Note $x$ is Free in $x(y).P$
+
+$fn(P)$ -- Free Names of $P$
+
+$n(P)$ -- All Names occurring in $P$
+
+Abbreviations:
+\begin{itemize}
+  \item $\overline{x}y$ for $\overline{x}y.0$
+  \item $x(y)(z)$ for $x(y).x(z)$ and $\overline{x}yz$ for
+    $\overline{x}y.\overline{x}z$
+  \item Agent $(y)\overline{x}y.P$ simultaneously Creates and Sends a
+    new Private Name, when $x \neq y$ is abbreviated to
+    $\overline{x}(y).P$
+\end{itemize}
+
+Example Agent with abbreviations:
+\[
+  x(y).x(z).\overline{y}z.(x)\overline{y}x.0
+\]
+is abbreviated to:
+\[
+  x(y)(z).\overline{y}z(x)
+\]
+
+
+\textbf{Reductions}
+
+\emph{Structural Congruence} $\equiv$ -- Smallest Congruence over
+$\class{P}$ satisfying:
+\begin{enumerate}
+  \item
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+%FIXME
+
+\begin{itemize}
+  \item all Unguarded Restrictions can be moved outermost
+  \item Interaction Condition (???) is Invariant under $\equiv$
+  \item any two potential Interactors $x(y).P$ and $\overline{x}z.Q$
+    can be brought together as $x(y).P | \overline{x}z.Q$ (but
+    possibly with $\alpha$-conversion, e.g.:
+\end{itemize}
+%FIXME
+
+\emph{Interaction Condtion}:
+
+For Term $R$ containing two Unguarded Subterms $x(y).P$ and
+$\overline{x}z.Q$, where each Restriction $(x)$ contains both or
+neither (so that $x$ is the same for both Subterms), the Subterms can
+Interact yielding a Reduction $R \rightarrow R'$.
+
+Examples:
+\begin{enumerate}
+  \item $R = x(y).P | \overline{x}z_1.Q_1 | \overline{x}z_2.Q_2$ has
+    two Reductions:
+    \begin{align*}
+      R &\rightarrow P\{z_1/y\} | Q_1 | \overline{x}z_2.Q_2 \\
+      R &\rightarrow P\{z_2/y\} | \overline{x}z_1.Q_1 | Q_2
+    \end{align*}
+  \item $R = w(x).(x(y).P | \overline{x}z.Q)$ has no Reductions (the
+    Subterms are Guarded)
+  \item $R = x(y).P | (z)(\overline{x}z.Q)$,
+    assuming $z$ not Free in $P$, has Reduction:
+    \[
+      R \rightarrow (z)(P\{z/y\} | Q)
+    \]
+    called \emph{Extrusion} (of the Scope of a Restriction)
+\end{enumerate}
+
+\emph{Reduction} $\rightarrow$ -- Smallest Relation Satisfying Rules:
+\begin{enumerate}
+  \item $COM$:
+  \[
+    x(y).P | \overline{x}z.Q \rightarrow P\{z/y\} | Q
+  \]
+  \item $PAR$:
+  \[
+    \frac{P \rightarrow P'}
+    {P|Q \rightarrow P'|Q}
+  \]
+  \item $RES$:
+  \[
+    \frac{P \rightarrow P'}
+    {(y)P \rightarrow (y)P'}
+  \]
+  \item $STRUCT$:
+  \[
+    \frac{Q \equiv P \quad P \rightarrow P' \quad P' \equiv Q'}
+    {Q \rightarrow Q'}
+  \]
+\end{enumerate}
+
+Structural Congruence may be Undecidale, but $\rightarrow$ is
+Computable by virtue of the Invarance of the Interaction Condition
+under $\equiv$
+
+\textbf{Prop.} A Finite Set $Red(P)$ of Agents can be Recursively
+Computed from $P$ such that $P \rightarrow P'$ if and only if $P'
+\equiv P''$ for some $P'' \in Red(P)$.
+
+Difference from (Milner 89) and (Milner, Parrow, Walker 89), inspired
+by Chemical Abstract Machine (???) (Berry, Boudol 90):
+
+Structured Operational Semantics (\S\ref{sec:structural_semantics})
+treats Physical Structure of a Family of Concurrent Agents and their
+Interaction in the same way-- proposing Structural Laws as Axioms
+allows the distinction.
+
+Once Behavioral Congruence is Defined (Milner 89), the Structural
+Equations are obtained as Theorems, but the Theorems are not clearly
+distinct from other Theorems holding only because of the way
+Observation is Characterized, e.g. a Sequential Observer (Milner 89).
+
+\textbf{Prop.} The Relations $\xrightarrow{\tau}\equiv$ and
+$\rightarrow$ are Identical over $\class{P}$
+
+$P$ is \emph{$r$-determinate} when $P \rightarrow^* Q$, $Q \rightarrow
+Q_1$, and $Q \rightarrow Q_2$, then $Q_1 \equiv Q_2$.
+
+$P \downarrow Q$ -- $P$ \emph{Converges} to $Q$ if $P \rightarrow^* Q
+\nrightarrow$
+
+$P\downarrow$ -- $P$ Converges to some $Q$
+
+$P\uparrow$ -- $P$ does not Converge to any $Q$
+
+Embedding of $\lambda$-calculus in $\pi$-calculus \cite{milner90}
+
+Each $M \in \class{L}$ is Encoded as $\llbracket M \rrbracket$ a Map
+from Names to $\class{P}$
+
+$\rightarrow$ describes how parts of $P$ may Interact with eachother,
+but not how $P$ (or its parts) may Interact with the Environment
+
+\emph{Actions} $\alpha$ defined in (Milner, Parrow, Walker 89):
+\begin{flalign*}
+  \quad \alpha &::= \tau \;|\; x(y)
+    \;|\; \overline{x}y \;|\; \overline{x}(y)
+\end{flalign*}
+
+$\tau$ -- Intra-action (Reduction)
+
+$x(y)$ -- Input
+
+$\overline{x}y$ -- Output
+
+$\overline{x}(y)$ -- Restricted Output Guard
+
+Actions are \emph{Potential Interactions} (incuding Reduction)
+
+$\tau$-actions (Intra-actions) correspond to Reductions.
+
+Action Relations $\xrightarrow{\alpha}$ are the smallest Satisfying
+Rules:
+\begin{enumerate}
+  \item $IN$
+  \item $OUT$
+  \item $COM$
+  \item $PAR$
+  \item $RES$
+  \item $OPEN$
+  \item $STRUCT$
+\end{enumerate}
+%FIXME
+
+Observation Precongruences $\sqsubseteq$
 
 
 
