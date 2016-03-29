@@ -292,10 +292,17 @@ Simplex Category (\S\ref{sec:simplex_category})
   Functors
 \item [Prof] all Small Categories and Profunctors
   (\S\ref{sec:profunctor}) with Natural Transformations between them
+\item [DagCat] all Dagger Categories (\S\ref{sec:dagger_category}) and
+  Dagger Functors (\S\ref{sec:dagger_functor})
 \item [Vect$_K$] all Finite-dimensional Vector Spaces over Field $K$
   and $K$-linear Transformations
 \item [Vect$_\reals$] all Finite-dimensional Vector Spaces over
   $\reals$ and Linear Maps
+\item [Hilb] all Hilbert Spaces (\S\ref{sec:hilbert_space}) and Short
+  Linear Maps (\S\ref{sec:short_linear}); is a Dagger Compact Category
+  (\S\ref{sec:dagger_compact})
+\item [FdHilb] all Finite-dimensional Hilbert Spaces and Short Linear
+  Maps (???)
 \item [Top] all Topological Spaces and Continuous Maps (Locally Small)
 \item [Top$_*$] all Pointed Topological Spaces and Continuous Maps
 \item [CGTop] all Compactly Generated Spaces
@@ -610,6 +617,17 @@ $\cat{StrCat}$
 
 Category of $T$-algebras (\S\ref{sec:t_algebra}) for a Monad on the
 Category of Quivers $\cat{Quiv}$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Localization}\label{sec:category_localization}
+% --------------------------------------------------------------------
+
+for a Collection $W$ of Morphisms, result of making all Morphisms in
+$W$ into Isomorphisms
+
+%FIXME
 
 
 
@@ -1084,13 +1102,30 @@ the ``obvious'' Point (Maybe Monad). $X_+$, Module over a Monad %FIXME
 
 
 
+% --------------------------------------------------------------------
+\subsection{Mapping Object}\label{sec:mapping_object}
+% --------------------------------------------------------------------
+
+Exponential (\S\ref{sec:category_exponential})
+
+$A \Rightarrow B$
+
+Closed Monoidal Categories (\S\ref{sec:closed_monoidal})
+
+
+
+\subsubsection{Exponential Object}\label{sec:exponential_object}
+
+$B^A$
+
+
+
 % ====================================================================
 \section{Functor}\label{sec:functor}
 % ====================================================================
 
 A \emph{Functor} is a Homomorphism (\S\ref{sec:homomorphism}) of
-Categories. A Functor $F$ between Categories $\cat{C}$ and
-$\cat{D}$:
+Categories. A Functor $F$ between Categories $\cat{C}$ and $\cat{D}$:
 \[
   F : \cat{C} \rightarrow \cat{D}
 \]
@@ -2240,14 +2275,54 @@ to:
 \subsection{Closed Category}\label{sec:closed_category}
 % --------------------------------------------------------------------
 
-\subsubsection{Internal Hom-functor}\label{sec:internal_homfunctor}
+A \emph{Closed Category} is a Category $\cat{C}$ with:
+\begin{itemize}
+  \item Internal Hom-functor (\S\ref{sec:internal_hom}):
+    \[
+      [-,-]:\cat{C}^{op} \times \cat{C} \rightarrow \cat{C}
+    \]
+  \item Unit Object:
+    \[
+      I \in \cat{C}_0
+    \]
+  \item Natural Isomorphism:
+    \[
+      i : 1_\cat{C} \cong [I,-]
+    \]
+  \item Transformation:
+    \[
+      j_X : I \rightarrow [X,X]
+    \]
+    Extranatural (\S\ref{sec:extranatural_transformation}) in $X$
+  \item Transformation:
+    \[
+      L_{Y Z}^X : [Y,Z] \rightarrow [[X,Y],[X,Z]]
+    \]
+    Natural in $Y$ and $Z$ and Extranatural in $X$
+\end{itemize}
+Satisfying the Axioms:
+\begin{enumerate}
+  \item $L_{Y Y}^X \circ j_Y = j_{[X,Y]}$ for any $X,Y$
+  \item $[j_X,1] \circ L_{X Y}^X = i_{[X,Y]}$ for any $X,Y$
+  \item $[i_Y,1] \circ L_{Y Z}^I = [1,i_Z]$ for any $Y,Z$
+  \item $[1,L_{Y V}^X] \circ L_{U V}^Y = [L_{Y U}^X,1] \circ L_{[X,U]
+    [X,V]}^{[X,Y]} \circ L_{U V}^X$ for any $X,Y,U,V$
+  \item The Map $\gamma : \cat{C}(X,Y) \rightarrow \cat{C}(I,[X,Y])$
+    defined by $f \mapsto [1,f](j_X)$ is a Bijection
+\end{enumerate}
+
+Every Closed Category embeds Fully and Faithfully into a Closed
+Monoidal Category (\S\ref{sec:closed_monoidal}) by a Strong Closed
+Functor (LaPlaza) %FIXME
+
+
+
+\subsubsection{Internal Hom-functor}\label{sec:internal_hom}
 
 \emph{Internal Hom Functor}
 \[
   [-,-] : \cat{C}^{op} \times \cat{C} \rightarrow \cat{C}
 \]
-
-Closed Monoidal Category (\S\ref{sec:closed_monoidal})
 
 
 
@@ -3429,9 +3504,9 @@ Objects:
 \[
   \exists \times_{A,B} \forall A,B \in \cat{C}
 \]
-an \emph{Exponential} is an Object $B^A$ with a Universal Morphism
-(\S\ref{sec:universal_morphism}) (sometimes called ``eval'' or
-``apply''):
+an \emph{Exponential Object} (\S\ref{sec:exponential_object}) $B^A$
+with a Universal Morphism (\S\ref{sec:universal_morphism}) (sometimes
+called ``eval'' or ``apply''):
 \[
   \epsilon : B^A \times A \rightarrow B
 \]
@@ -4320,7 +4395,7 @@ As a Monad is a Monoid in an Endofunctor Category $\cat{C} \rightarrow
 \cat{C}$, $\cat{Cat}(\cat{C},\cat{C})$, a Hughes Arrow $(A, arr,
 \ggg)$ is a Monoid in a Bifunctor Category $\cat{C}^{op} \times
 \cat{C} \rightarrow \cat{C}$ (cf. Internal Hom Functor
-\S\ref{sec:internal_homfunctor}).
+\S\ref{sec:internal_hom}).
 
 Functor Category $\cat{Cat}(\cat{C}^{op} \times \cat{C},
 \cat{Set})$ of Bifunctors
@@ -4630,16 +4705,66 @@ Strict Monoidal Category and a Skeletal
 \subsection{Closed Monoidal Category}\label{sec:closed_monoidal}
 % --------------------------------------------------------------------
 
-Closed Category (\S\ref{sec:closed_category})
+A \emph{Closed Monoidal Category} is a Closed Category
+(\S\ref{sec:closed_category}), i.e. it has an Internal Hom-functor
+(\S\ref{sec:internal_hom}):
+\[
+  [-,-] : \cat{C}^{op} \times \cat{C} \rightarrow \cat{C}
+\]
+(and other requirements of a Closed Category) allowing the formation
+of Mapping Objects (\S\ref{sec:mapping_object}), $[A,B]$,
+and it is also Monoidal Category such that the Tensor Product Functor
+$(-) \otimes B : \cat{C} \rightarrow \cat{C}$ has Right Adjoint
+(\S\ref{sec:adjoint}) $[B,-] : \cat{C} \rightarrow \cat{C}$,
+meaning there is a Bijection called Currying (???) between Hom-sets:
+\[
+  Hom_\cat{C}(A \otimes B,C) \cong Hom_\cat{C}(A, [B,C])
+\]
 
-Internal Hom-functor (\S\ref{sec:internal_homfunctor})
+Specifically this is a Right-closed Monoidal Category. In a
+Left-closed Monoidal Category the Left Tensor Functor $A \otimes (-)$
+has a Right Adjoint $[-,A]$
 
-Tensor Product Functor $(-) \otimes X$
+Equivalently a Closed Monoidal Category $\cat{C}$ has for every two
+Objects $A,B \in \cat{C}_0$:
+\begin{itemize}
+  \item an Object $[A,B]$
+  \item a Morphism $eval_{A,B} : [A,B] \otimes A \rightarrow B$
+\end{itemize}
+Satisfying the Universal Property that for every Morphism $f : X
+\otimes A \rightarrow B$, there exists a Unique Morphism $h : X
+\rightarrow [A,B]$ such that:
+\[
+  f = eval_{A,B} \otimes (h \otimes 1_A)
+\]
 
-$\cat{C}(A, [X,Z]) \cong \cat{C}(A \otimes X, Z)$
+When Tensor Product is the Cartesian Product $\times$, the notation
+for Mapping Objects $A \Rightarrow B$ is:
+\[
+  B^A
+\]
+and is called an Exponential Object (\S\ref{sec:exponential_object}).
+
+Every Closed Category embeds Fully and Faithfully into a Closed
+Monoidal Category by a Strong Closed Functor (LaPlaza)
+%FIXME
 
 Closed Symmetric Monoidal Categories
 (\S\ref{sec:closed_symmetric_monoidal})
+
+Compact Closed Category (\S\ref{sec:closed_category})
+
+
+
+\subsection{Biclosed Monoidal Category}\label{sec:biclosed_monoidal}
+
+both Left and Right Closed
+
+A Symmetric Monoidal Category (\S\ref{sec:symmetric_monoidal}) is Left
+Closed if and only if it is Right Closed so a Symmetric Monoidal
+Closed Category (\S\ref{sec:closed_symmetric_monoidal}) is always
+Biclosed, and likewise for Braided Monoidal Categories
+(\S\ref{sec:braided_monoidal}).
 
 
 
@@ -4811,14 +4936,30 @@ Internal Logic: Finitary Fist-order Logic
 \subsection{Braided Monoidal Category}\label{sec:braided_monoidal}
 % --------------------------------------------------------------------
 
+A \emph{Braided Monoidal Category} is a Monoidal Category $\cat{C}$
+with a Natural Isomorphism:
+\[
+  B_{x,y} : x \otimes y \rightarrow y \otimes x
+\]
+called \emph{Braiding} which satisfies two Axioms called \emph{Hexagon
+  Identities} %FIXME
+
+Coherence Laws
+
+If $B_{y,x} B_{x,y} = 1_{x \otimes y}$ then the Category is Symmetric
+Monoidal (\S\ref{sec:symmetric_monoidal}).
+
+
+
 \subsubsection{Symmetric Monoidal Category}
 \label{sec:symmetric_monoidal}
 
-$X \otimes Y \cong Y \otimes X$
-
-Braiding Operator $B_{X,Y} : X \otimes Y \rightarrow Y \otimes X$
-
-$B_{Y,X} B_{X,Y} = 1_{X \otimes Y}$
+A \emph{Symmetric Monoidal Category} is a Braided Monoidal Category
+$\cat{C}$ with Braiding Operator $B_{x,y} : x \otimes y \rightarrow y
+\otimes x$ Satisfying the additional Axiom:
+\[
+  B_{y,x} B_{x,y} = 1_{x \otimes y}
+\]
 
 Linear Type Systems (\S\ref{sec:linear_type}) are the Internal
 Language of Closed (\S\ref{sec:closed_monoidal}) Symmetric Monoidal
@@ -4845,8 +4986,16 @@ $Y^X$
 
 Axiom: $\cat{C}(X \otimes Y, Z) \cong \cat{C}(X, Z^Y)$
 
+Linear Logic (\S\ref{sec:linear_logic}) is the Internal Logic of
+Closed Symmetric Monoidal Categories
+
 Linear Type Systems (\S\ref{sec:linear_type}) are the Internal
 Language of Closed Symmetric Monoidal Categories
+
+A Compact Closed Category (\S\ref{sec:compact_closed}) is a Closed
+Symmetric Monoidal Category where every Object is Dualizable
+(\S\ref{sec:dual_object}), i.e. a Rigid (\S\ref{sec:rigid_category})
+Closed Symmetric Monoidal Category.
 
 
 
@@ -4868,7 +5017,7 @@ $*$-autonomous Category with the Tensor Unit as the Dualizing Object.
 Example Compact Symmetric Monoidal Categories:
 
 \begin{itemize}
-\item $\cat{Hilb}$
+\item $\cat{Hilb}$ (Dagger Compact \S\ref{sec:dagger_compact})
 \item $n\cat{Cob}$
 \end{itemize}
 
@@ -4896,7 +5045,7 @@ $Int(\cat{C})$
 
 Monoidal Category where every Object is \emph{Rigid}, i.e. has a Dual
 (\S\ref{sec:dual_object}) $X^*$ (the Internal Hom
-\S\ref{sec:internal_homfunctor} $[X,1]$) and a Morphism $1 \rightarrow
+\S\ref{sec:internal_hom} $[X,1]$) and a Morphism $1 \rightarrow
 X \otimes X^*$ Satisfying Naturality Conditions.
 
 
@@ -4905,13 +5054,17 @@ X \otimes X^*$ Satisfying Naturality Conditions.
 \subsection{Compact Closed Category}\label{sec:compact_closed}
 % --------------------------------------------------------------------
 
-General Context for treating Dual Objects (\S\ref{sec:dual_object})
+A Symmetric Monoidal Category (\S\ref{sec:symmetric_monoidal})
+$(\cat{C}, \otimes, I)$ is \emph{Compact Closed} if every Object $A
+\in \cat{C}_0$ has a Dual Object (\S\ref{sec:dual_object}).
 
-Autonomous Category (\S\ref{sec:rigid_category}) that is also
-Symmetric (\S\ref{sec:symmetric_monoidal})
+General Context for treating Dual Objects
+
+Compact Closed Categories are precisely the Symmetric Autonomous
+(Rigid) Categories (\S\ref{sec:rigid_category}).
 
 \emph{Rigid Symmetric Monoidal Category} with Internal Hom
-(\S\ref{sec:internal_homfunctor}) given by:
+(\S\ref{sec:internal_hom}) given by:
 \[
   [A,B] \simeq A^* \otimes B
 \]
@@ -4920,6 +5073,20 @@ where $A$ is the Dual Object of $A$, via the Natural Equivalence:
   \cat{C}(C,[A,B]) \simeq \cat{C}(C,A^* \otimes B)
     \simeq \cat{C}(C \otimes A, B)
 \]
+
+Compact Closed Category -- Every Object is Dualizable
+(\S\ref{sec:dual_object}) \\
+(special case of) \\
+Closed Symmetric Monoidal Category
+(\S\ref{sec:closed_symmetric_monoidal})
+-- Braiding Operation Satisfying additional Symmetry Axiom \\
+(special case of) \\
+Closed Monoidal Category (\S\ref{sec:closed_monoidal}) -- Closed
+Category with Evaluation Morphisms for every Internal Hom-set defined
+in terms of the Tensor Product \\
+(special case of) \\
+Closed Category (\S\ref{sec:closed_category}) -- Category with an
+Internal Hom-functor (\S\ref{sec:internal_hom})
 
 A Compact Closed Category is a $*$-autonomous Category
 (\S\ref{sec:star_autonomous}) with the Tensor Unit as a Dualizing
@@ -4934,9 +5101,50 @@ $\cat{FdVect}$ of Finite-dimensional Vector Spaces
 (\S\ref{sec:finite_dimensional_vectorspace}) and Linear Maps
 (\S\ref{sec:linear_map}).
 
+Inclusion from Category of Compact Closed Categories into the Category
+of Closed Symmetric Monoidal Categories
+
+Given a Closed Symmetric Monoidal Category $\cat{S}$, the Free Compact
+Closed Category $C(\cat{S})$ is the Localization
+(\S\ref{sec:category_localization}) of $\cat{S}$ by the Maps:
+\[
+  \sigma:[A,B] \otimes \cat{C} \rightarrow [A,B \otimes C]
+\]
+corresponding to the Tensorial Strength
+(\S\ref{sec:tensorial_strength}) of the Functors $[A,-]: \cat{S}
+\rightarrow \cat{S}$.
+
+
+
+\subsubsection{Non-symmetric Compact Closed Category}
+\label{sec:nonsymmetric_compact_closed}
+
+Monoidal Category $(\cat{C}, \otimes, I)$, not necessarily Symmetric
+(e.g. Pregroup Grammar \S\ref{sec:pregroup_grammar})
+
+\emph{Non-symmetric Compact Closed Category}
+
+General case, a Compact Closed Category is both Left and Right-rigid
+(\S\ref{sec:rigid_category}) and Biclosed
+(\S\ref{sec:biclosed_monoidal})
+
+Simplex Category (\S\ref{sec:simplex_category})
+
+Dagger Compact Closed (\S\ref{sec:dagger_compact})
+
+Categorial Grammar (\S\ref{sec:categorial_grammar})
+
 
 
 \subsubsection{Simplex Category}\label{sec:simplex_category}
+
+Non-symmetric Compact Closed Category
+(\S\ref{sec:nonsymmetric_compact_closed})
+
+Category of Monotone Maps (\S\ref{sec:monotonic_function}) of Finite
+Ordinals (\S\ref{sec:finite_ordinal})
+
+
 
 \paragraph{Simplicial Set}\label{sec:simplicial_set}
 \hfill \\
@@ -5124,7 +5332,7 @@ Monoidal so that Composition is defined as a Morphism:
 \]
 ``Enriched over $\cat{K}$''
 
-Internal Hom-functor (\S\ref{sec:internal_homfunctor})
+Internal Hom-functor (\S\ref{sec:internal_hom})
 
 
 
@@ -5845,26 +6053,115 @@ Homomorphism of Representations (\S\ref{sec:representation}), Actions
 \section{Dagger Category}\label{sec:dagger_category}
 % ====================================================================
 
+\emph{Dagger Category} (or \emph{Involutive Category} although an
+Involutive Category might have additional conditions) %FIXME
+
 Involution Semigroup (\S\ref{sec:involution_semigroup})
 
+\[
+  \dag : \cat{C}^{op} \rightarrow \cat{C}
+\]
+which is:
+\begin{enumerate}
+  \item Identity on Objects
+  \item an Involution: $\dag \circ \dag = 1_\cat{C}$
+\end{enumerate}
+and Maps Morphisms to their Adjoints. %FIXME adjoint morphism
+
 Example Dagger Categories:
-
 \begin{itemize}
-
-\item Discrete Categories (Trivial)
-\item Any Monoid with Involution (Dagger Category with one Object)
-\item Any Groupoid or Group
-\item $\cat{Rel}$ Category of Sets and Relations
-\item $\cat{Cob}$ Category of Closed Manifolds and Cobordisms
-\item $Spans(\cat{C})$ of $\cat{C}$ with Pullbacks
-\item $CoSpans(\cat{C})$ of $\cat{C}$ with Pushouts
-\item $Hilb$ of Hilbert Spaces (\S\ref{sec:hilbert_space}) and Bounded
-  Linear Operators (\S\ref{sec:bounded_linear_operator})
-
+  \item Discrete Categories (Trivial)
+  \item Any Monoid with Involution (Dagger Category with one Object)
+  \item Any Groupoid or Group
+  \item $\cat{Rel}$ Category of Sets and Relations
+  \item $\cat{Cob}$ Category of Closed Manifolds and Cobordisms
+  \item $Spans(\cat{C})$ of $\cat{C}$ with Pullbacks
+  \item $CoSpans(\cat{C})$ of $\cat{C}$ with Pushouts
+  \item $\cat{Hilb}$ of Hilbert Spaces (\S\ref{sec:hilbert_space}) and
+    Bounded Linear Operators (\S\ref{sec:bounded_linear_operator}) is
+    a Dagger Compact Category (\S\ref{sec:dagger_compact})
+  \item $\cat{FdHilb}$
 \end{itemize}
 
 Every Endomorphism Hom-set in a Dagger Category is a Monoid with
 Involution.
+
+Morphism $f$ is called:
+\begin{itemize}
+  \item \emph{Unitary} if $f^\dag = f^{-1}$
+  \item \emph{Self-adjoint} if $f^\dag = f$
+\end{itemize}
+
+Only Endomorphisms $f : A \rightarrow A$ can be Self-adjoint
+
+Category of Dagger Categories $\cat{DagCat}$ is a Cartesian Closed
+Category
+
+Dagger Functor (\S\ref{sec:dagger_functor})
+
+Dagger Graph %FIXME
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dagger Functor}\label{sec:dagger_functor}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Dagger Symmetric Monoidal Category}
+\label{sec:dagger_symmetric_monoidal}
+% --------------------------------------------------------------------
+
+$(\cat{C}, \otimes, I)$
+
+\begin{enumerate}
+  \item For all $f,g \in \cat{C}_1$:
+    \[
+      (f \otimes g)^\dag = f^\dag \otimes g^\dag
+    \]
+  \item Associator, Left and Right Unitors, and Braiding are all
+    Unitary
+\end{enumerate}
+%FIXME xrefs
+
+$\cat{Rel}$
+
+$\cat{FdHilb}$
+
+Interaction Category (\S\ref{sec:interaction_category}) (???)
+%FIXME
+
+Composition of Morphisms: Sequential Composition of Processes
+
+Tensor Product: Parallel Composition of Processes
+
+Dagger Compact (\S\ref{sec:dagger_compact}): Distinguish between
+``Input'' and ``Output'' Processes
+
+
+
+
+\subsubsection{Dagger Compact Category}\label{sec:dagger_compact}
+
+$(\cat{C}, \otimes, I, \dag)$
+
+Dagger Symmetric Monoidal Category which is Compact Closed
+
+Dagger used to connect the Unit to the Counit so that for all $A \in
+\cat{C}$:
+\[
+  \sigma_{A \otimes A^*} \circ \varepsilon_A^\dag = \eta_A
+\]
+
+$\cat{Hilb}$ -- Hilbert Spaces and Short Linear Maps
+
+$\cat{FdHilb}$, Hermitian Conjugate (\S\ref{sec:hermitian_adjoint})
+
+Interaction Category (\S\ref{sec:interaction_category}) (???)
+%FIXME
+
+Categorical Quantum Mechanics, Entangled States and Measurements
+(Abramsky, Coecke)
 
 
 
