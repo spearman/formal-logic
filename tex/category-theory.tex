@@ -624,6 +624,7 @@ Category of Quivers $\cat{Quiv}$
 Objects (\S\ref{sec:category_object})
 
 
+
 % --------------------------------------------------------------------
 \subsection{Parallel Morphism}\label{sec:parallel_morphism}
 % --------------------------------------------------------------------
@@ -975,6 +976,58 @@ $\Omega$
 Object of ``Propositions'' or ``Truth-values'' with $t =
 \mathrm{true}$ and $u : E \rightarrow \Omega$ a Propositional Function
 where $U \rightarrowtail E$ is the ``Extension''.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dual Object}\label{sec:dual_object}
+% --------------------------------------------------------------------
+
+generalizes the concept of a Dual Space (\S\ref{sec:dual_space}) in
+Linear Algebra
+
+A Category in which every Object has a Dual is called \emph{Rigid} or
+\emph{Autonomous} (\S\ref{sec:rigid_category}) A Rigid Category that
+is also Symmetric is a Compact Closed Category
+(\S\ref{sec:compact_closed})
+
+$(\cat{C}, \otimes, I, \alpha, \lambda, \rho)$ -- Monoidal Category
+(\S\ref{sec:monoidal_category})
+
+Object $X \in (\cat{C}, \otimes, I, \alpha, \lambda, \rho)$
+
+Object $X^*$ is called \emph{Left Dual} of $X$ if there exist two
+Morphisms:
+\begin{enumerate}
+  \item $\eta : I \rightarrow X \otimes X^*$ -- Coevaluation
+  \item $\varepsilon : X^* \otimes X \rightarrow I$ -- Evaluation
+\end{enumerate}
+such that:
+\[
+  \lambda = \rho \circ (1 \otimes \varepsilon) \circ \alpha \circ
+    (\eta \otimes 1)
+\]
+and:
+\[
+  \rho = \lambda \circ (\varepsilon \otimes 1) \circ \alpha^{-1}
+    \circ (1 \otimes \eta)
+\]
+and $X$ is then the \emph{Right Dual} of $X^*$
+
+An Object for which a Dual Object exists is called \emph{Rigid}.
+
+Left and Right Duals are Canonically Isomorphic when they exist
+%FIXME universal?
+
+Dualizing Object (\S\ref{sec:dualizing_object})
+
+When $\cat{C}$ is Braided (\S\ref{sec:braided_monoidal}) (or Symmetric
+\S\ref{sec:symmetric_monoidal}) every Left Dual is also a Right Dual
+and vice versa.
+
+Considering a Monoidal Category as a Bicategory
+(\S\ref{sec:bicategory}) with one Object, a Dual Pair is exactly an
+Adjoint Pair (\S\ref{sec:adjoint}).
 
 
 
@@ -2206,6 +2259,8 @@ Involutive Duality Operation on $\cat{C}$: %FIXME
 \[
   [[-,D],D]: \cat{C} \rightarrow \cat{C}
 \]
+
+Dual Object (\S\ref{sec:dual_object})
 
 
 
@@ -4596,10 +4651,10 @@ Closed Symmetric Monoidal Categories
 
 A Category is \emph{Cartesian Closed} if it has:
 \begin{enumerate}
-\item A Product Functor (\S\ref{sec:product})
-\item An Exponential for any pair of Objects
-  (\S\ref{sec:category_exponential})
-\item A Terminal Object (\S\ref{sec:terminal_object})
+  \item A Product Functor (\S\ref{sec:product})
+  \item An Exponential for any pair of Objects
+    (\S\ref{sec:category_exponential})
+  \item A Terminal Object (\S\ref{sec:terminal_object})
 \end{enumerate}
 By these conditions and the Universal Mapping Property of
 Exponentials:
@@ -4652,6 +4707,10 @@ $0,1,A,B,C \in \cat{C}_0$:
 \]\[
   A \times (B + C) \cong A \times B + A \times C
 \]
+
+Categorical Combinators for Cartesian-closed Categories yield a
+Variable-free Translation of $\lambda$-calculus (???)
+%FIXME xref untyped or typed lambda calculus?
 
 
 
@@ -4771,6 +4830,9 @@ Derivable in Graphical Notation via Homotopy %FIXME cite selinger 05
 
 Operad (\S\ref{sec:operad})
 
+Compact Closed Category (\S\ref{sec:compact_closed}): Symmetric
+Category where every Object has a Left and Right Dual.
+
 
 
 \paragraph{Closed Symmetric Monoidal Category}
@@ -4794,6 +4856,9 @@ Language of Closed Symmetric Monoidal Categories
 Symmetric Closed Monoidal Category $\langle C, \otimes, I \rangle$
 with a Dualizing Object (\S\ref{sec:dualizing_object})
 
+Compact Closed Category (\S\ref{sec:compact_closed}) is a
+$*$-autonomous Category with the Tensor Unit as the Dualizing Object.
+
 
 
 \paragraph{Compact Symmetric Monoidal Category}
@@ -4810,8 +4875,66 @@ Example Compact Symmetric Monoidal Categories:
 
 
 % --------------------------------------------------------------------
+\subsection{Traced Monoidal Category}\label{sec:traced_monoidal}
+% --------------------------------------------------------------------
+
+``Operational'' Categorical Semantics for Linear Logic
+(\S\ref{sec:linear_logic}), known as Geometry of Interactions
+(\S\ref{sec:interaction_geometry})
+
+Free Construction Completion of a Traced Monoidal Category $\cat{C}$
+to a Compact Closed Category (\S\ref{sec:compact_closed})
+$Int(\cat{C})$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Rigid Category}\label{sec:rigid_category}
+% --------------------------------------------------------------------
+
+(or \emph{Autonomous Category})
+
+Monoidal Category where every Object is \emph{Rigid}, i.e. has a Dual
+(\S\ref{sec:dual_object}) $X^*$ (the Internal Hom
+\S\ref{sec:internal_homfunctor} $[X,1]$) and a Morphism $1 \rightarrow
+X \otimes X^*$ Satisfying Naturality Conditions.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Compact Closed Category}\label{sec:compact_closed}
 % --------------------------------------------------------------------
+
+General Context for treating Dual Objects (\S\ref{sec:dual_object})
+
+Autonomous Category (\S\ref{sec:rigid_category}) that is also
+Symmetric (\S\ref{sec:symmetric_monoidal})
+
+\emph{Rigid Symmetric Monoidal Category} with Internal Hom
+(\S\ref{sec:internal_homfunctor}) given by:
+\[
+  [A,B] \simeq A^* \otimes B
+\]
+where $A$ is the Dual Object of $A$, via the Natural Equivalence:
+\[
+  \cat{C}(C,[A,B]) \simeq \cat{C}(C,A^* \otimes B)
+    \simeq \cat{C}(C \otimes A, B)
+\]
+
+A Compact Closed Category is a $*$-autonomous Category
+(\S\ref{sec:star_autonomous}) with the Tensor Unit as a Dualizing
+Object (\S\ref{sec:dualizing_object})
+
+There is a Free Construction Completion of a Traced Monoidal Category
+(\S\ref{sec:traced_monoidal}) $\cat{C}$ to a Compact Closed Category
+$Int(\cat{C})$
+
+Canonical example of a Compact Closed Category is the Category
+$\cat{FdVect}$ of Finite-dimensional Vector Spaces
+(\S\ref{sec:finite_dimensional_vectorspace}) and Linear Maps
+(\S\ref{sec:linear_map}).
+
+
 
 \subsubsection{Simplex Category}\label{sec:simplex_category}
 
@@ -4861,14 +4984,6 @@ $(\infty,1)$-category %FIXME xref
 Shape Theory (\S\ref{sec:shape_theory})
 
 
-
-% --------------------------------------------------------------------
-\subsection{Rigid Category}\label{sec:rigid_category}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Autonomous Category}\label{sec:autonomous_category}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Tannakian Category}\label{sec:tannakian_category}

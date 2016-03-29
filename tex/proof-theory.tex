@@ -998,6 +998,10 @@ PCF (\S\ref{sec:pcf})
 Game Semantics (\S\ref{sec:game_semantics}) for Linear Logic
 (\S\ref{sec:linear_logic})
 
+``Operational'' (\S\ref{sec:operational_semantics}) Categorical
+Semantics (\S\ref{sec:categorical_semantics}): Traced Monoidal
+Categories (\S\ref{sec:traced_monoidal})
+
 Compact Linear Systems (\S\ref{sec:compact_linear_system})
 
 \cite{abramsky-gay-nagarajan96}
@@ -1041,13 +1045,81 @@ Semantics or Model, and notions of Equivalence, etc.
 \asterism
 
 
+Process analogy with Relations (Symmetric, Bidirectional character)
+
+$p : A \rightarrow B$ -- Concurrent Module with Interface to the
+Environment Partitioned by Types $A$ and $B$
+
+Accessing Interface Positionally allows Combinators for Name-free
+Process Algebra, e.g. in Relations there is Positional Access via
+Tuples $(a_1, \ldots, a_n)$ vs. the Labelled Records Representation $[
+  l_1 \Rightarrow a_1; \cdots ; l_n \Rightarrow a_n]$
+
+Duality on Processes:
+\[
+  \frac{A \xrightarrow{p} B}
+  {\overline{B^\bot \xrightarrow{p^\bot} A^\bot}}
+\]
+
+$(p^\bot)^\bot = p$
+
+Composition as combined Parallel Composition and Hiding or Restriction
+
+Associativity is guaranteed by Typed Framework (???)
+
+Tensor Product (\S\ref{sec:tensor_product}) $A \otimes B$:
+\[
+  \frac{p : A \rightarrow B \quad q : A' \rightarrow B'}
+  {p \otimes q : A \otimes A' \rightarrow B \otimes B'}
+\]
+Disjoint Parallel Composition of $p$ and $q$: no Interaction between
+them.
+
+Canonical Isomorphisms:
+\begin{align*}
+  & assoc_{A,B,C} : & (A \otimes B) \otimes C & \cong
+    A \otimes (B \otimes C) \\
+  & symm_{A,B} : & A \otimes B & \cong B \otimes A \\
+  & unit_A : & A \otimes I & \cong A
+\end{align*}
+
+Symmetric Monoidal Category (\S\ref{sec:symmetric_monoidal})
+
+Repartitioning of an Interface by Currying:
+\[
+  \frac{p:A \otimes B \rightarrow C}
+  {\Lambda (p) : A \rightarrow (B \multimap C)}
+\]
+with Application:
+\[
+  Ap_{A,B} : (A \multimap B) \otimes A \rightarrow B
+\]
+
+Tensor Structure gives:
+\begin{itemize}
+  \item Interpretation of Multiplicatives of Linear Logic
+    (\S\ref{sec:linear_logic}), see also Linear $\lambda$-calculus
+    (\S\ref{sec:linear_lambda})
+  \item Static Operations of Process Calculus
+    (\S\ref{sec:process_calculus}) in Name-free Form
+\end{itemize}
+
+If $A = A^\bot$, or more generally $A \otimes B = (A^\bot \otimes
+B^\bot)^\bot$, i.e. the Category is Compact Closed
+(\S\ref{sec:compact_closed}), then the Type Structure can be used to
+build arbitrary Process Interconnection Networks including Cycles.
+
+
+\asterism
+
+
 $\cat{SProc}$
 
-Objects: Concurrent System Specifications
+$\cat{SProc}_0$: Concurrent System Specifications
 
-Morphisms: Synchronization Trees
+$\cat{SProc}_1$: Synchronization Trees
 
-Composition: Synchronous Product + Restriction
+$\circ_{\cat{SProc}}$: Synchronous Product + Restriction
 
 Identities: Synchronous Buffers (``Wires'' or ``Relays'')
 
