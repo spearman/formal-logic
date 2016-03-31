@@ -1274,6 +1274,22 @@ Logic corresponds to Monads (\S\ref{sec:monad}).
 
 
 
+\subsubsection{Modality}\label{sec:modality}
+
+``way of being True''
+
+\emph{or}
+
+``way of Being''
+
+Truncated Types, $h$-level (???) %FIXME
+
+Modal Type Theory (\S\ref{sec:modal_type_theory})
+
+Adjoint Modality (\S\ref{sec:adjoint_modality})
+
+
+
 \subsubsection{Classical Modal Logic}\label{sec:classical_modal}
 
 A \emph{Classical Modal Logic} has as an Axiom or Theorem the Duality
@@ -1467,11 +1483,142 @@ which has the meaning ``ought implies can''.
 
 \subsubsection{Temporal Logic}\label{sec:temporal_logic}
 
-(Curry-Howard): Partial Evaluation, Functional Reactive Programming
-% FIXME xref
+(Curry-Howard): Partial Evaluation (\S\ref{sec:partial_evaluation}),
+Functional Reactive Programming (\S\ref{sec:functional_reactive})
 
-Unary Operators: $X$ ``next'', $G$ ``globally'' (Behavior), $F$
-``finally'' (Event)
+\begin{itemize}
+  \item Logical Operators (Logical Connectives
+    \S\ref{sec:logical_connective})
+  \item Modal Operators
+\end{itemize}
+
+
+Unary Operators:
+\begin{itemize}
+  \item $A\phi$ -- All
+  \item $E\phi$ -- Exists
+\end{itemize}
+
+Unary Modal Operators:
+\begin{itemize}
+  \item $N\phi$, $\bigcirc\phi$ -- Next
+  \item $G\phi$, $\square\phi$ -- Globally (Behavior
+    \S\ref{sec:behavior})
+  \item $F\phi$, $\lozenge\phi$ -- Future, Finally (Event
+    \S\ref{sec:frp_event})
+\end{itemize}
+
+Binary Modal Operators:
+\begin{itemize}
+  \item $\phi U \psi$ -- Until
+  \item $\phi R \psi$ -- Release
+  \item $\phi S \psi$ -- Since
+\end{itemize}
+
+\fist Note simple Temporal Logics such as Basic Temporal Language
+(\S\ref{sec:btl}) may have fewer or different Operators or some
+Operators cannot be expressed.
+
+Reflexive, Irreflexive Ordering
+
+
+\asterism
+
+
+Categorical Semantics (\S\ref{sec:categorical_semantics})
+
+Category $\cat{C}$
+
+Internal Category (\S\ref{sec:internal_category}) given by:
+\[
+  b,e : \cat{Time}_1 \rightrightarrows \cat{Time}_0
+\]
+where Elements of $\cat{Time}_1$ are Time Intervals with $b$ and $e$
+marking Beginning and End points. Time may have additional Structure
+(Poset \S\ref{sec:poset}, Linear Order \S\ref{sec:total_order})
+
+Each Arrow $b,e$ Generates an Adjoint Triple:
+\begin{align*}
+  \Sigma_b \dashv b^* \dashv \Pi_b \\
+  \Sigma_e \dashv e^* \dashv \Pi_e
+\end{align*}
+between Slices (\S\ref{sec:slice_category}) $\cat{C}/\cat{Time}_0$ and
+$\cat{C}/\cat{Time}_1$ where $\Sigma$ is Dependent Sum
+(\S\ref{sec:dependent_sum}), $-^*$ is Base Change
+(\S\ref{sec:base_change}), and $\Pi$ is Dependent Product
+(\S\ref{sec:dependent_product})
+
+Adjunctions
+
+$\Sigma_b e^* \dashv \Pi_e b^*$
+
+$\Sigma_e b^* \dashv \Pi_b e^*$
+
+Propositions $\phi, \psi$
+
+$\Sigma_b e^* \phi$ -- ``there exists an Interval Beginning now such
+that $\phi$ is True at its End'', i.e. $F \phi$
+
+$\Pi_e b^* \psi$ -- ``for all Intervals Ending now, $\psi$ is True at
+their Beginning'', i.e. $H \psi$
+
+Therefore:
+\begin{itemize}
+  \item $F \dashv H$
+  \item $P \dashv G$
+\end{itemize}
+
+$\phi S \psi := \Sigma_e (b^* \psi \times \Pi_c(ep)^*\phi)$ -- ``there
+is a Subinterval Ending now such that $\psi$ was True at its Beginning
+and $\phi$ was True at all Times inside it''
+
+$\phi U \psi := \Sigma_b (e^* \psi \times \Pi_c(ep)^*\phi)$ --
+``$\phi$ will be True until a Time when $\psi$ is True''
+
+where $p,q$ are Projections for the $\cat{Time}$ Category:
+\[
+  p,q : \cat{Time}_1 \times_{\cat{Time}_0} \cat{Time}_1
+    \rightarrow \cat{Time}_1
+\]
+and $c$ is Composition for the $\cat{Time}$ Category:
+\[
+  c : \cat{Time}_1 \times_{\cat{Time}_0} \cat{Time}_1
+    \rightarrow \cat{Time}_1
+\]
+and $ep = bq$.
+
+Instant-based, Interval-based (Interval Temporal Logic
+\S\ref{sec:interval_temporal}) approaches
+
+Adjoint Logic (\S\ref{sec:adjoint_logic})
+
+
+
+\paragraph{Basic Temporal Language (BTL)}\label{sec:btl}
+\hfill \\
+
+Unary Modal Operators:
+\begin{itemize}
+  \item $F\phi$ -- Future: $\phi$ will be True at some Future Time
+  \item $P\phi$ -- Past: $\phi$ was True at some Past Time
+\end{itemize}
+
+Duals of $F$ and $P$
+\begin{itemize}
+  \item $G\phi = \neg F \neg\phi$ -- Globally: at no Future Time is
+    $\phi$ not True
+  \item $H\phi = \neg P \neg\phi$ -- History: at no Past Time is
+    $\phi$ not True
+\end{itemize}
+
+Frame (\S\ref{sec:kripke_frame}): Set $T$ with Binary Relations $R_F$
+and $R_P$
+
+$x R_F y$ -- ``at $x$, $y$ is in the Future''
+
+$R_P$ is Converse (\S\ref{sec:converse}) to $R_F$
+
+\emph{Bidirectional Frame} $(T,R,R^{op})$
 
 
 
@@ -1543,6 +1690,36 @@ $\mathsf{TOL}$
 
 
 \subsubsection{Epistemic Modal Logic}\label{sec:epistemic_logic}
+
+\subsubsection{Adjoint Logic}\label{sec:adjoint_logic}
+
+Adjunctions (\S\ref{sec:adjoint}) of Modal Operators: Adjoint Modality
+(\S\ref{sec:adjoint_modality})
+
+
+
+\paragraph{Adjoint Modality}\label{sec:adjoint_modality}
+\hfill \\
+
+Adjoint Cylinder (\S\ref{sec:adjoint_cylinder})
+
+Adjoint Monads (\S\ref{sec:adjoint_monad})
+
+Hegelian ``Unity of Opposites''
+
+Dialectical Reasoning (???) %FIXME
+
+Category of Being (\S\ref{sec:category_of_being})
+
+Cohesiveness, Differential Cohesion (???)
+
+\[
+  \begin{matrix}
+    \lozenge & \dashv & \bigcirc \\
+    \bot & \empty & \bot \\
+    \bigcirc & \dashv & \square
+  \end{matrix}
+\]
 
 
 
@@ -2338,7 +2515,7 @@ The Premise and Conclusion are \emph{Truth-bearers}
 \begin{itemize}
   \item 1. Logical Form (\S\ref{sec:logical_form})
   \item 2. A Priori
-  \item 3. Modality (\S\ref{sec:modal_logic})
+  \item 3. Modality (\S\ref{sec:modality})
 \end{itemize}
 
 A Premise \emph{Logically Entails} a Conclusion if and only if the
