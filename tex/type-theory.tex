@@ -678,7 +678,7 @@ the Output Type.
 
 Predicate assumed to hold for any Element of Refined Type
 
-cf. Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
+\fist Cf. Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
 
 Type Targeted Testing, Liquid Types (Logically Qualified Types
 \S\ref{sec:logically_qualified})
@@ -4667,7 +4667,9 @@ Exchange
 Proofs and Propositions form the Object Language; Derivations are used
 to infer Judgements about the Object Language
 
-***
+
+\asterism
+
 
 $p : P$ ``$p$ is a Proof of Proposition $P$''
 
@@ -4759,7 +4761,9 @@ Computation Rule for $I$:
 
 Leibniz Law
 
-***
+
+\asterism
+
 
 Formation Rules : Defines what the Types of the System are (Syntax)
 
@@ -4781,6 +4785,10 @@ Modal Logic - Monads
 
 Classical-Intuitionistic Embedding - Continuation-passing Style
 (\S\ref{sec:continuation})
+
+Linear Logic - Session Types (\S\ref{sec:session_type})
+
+Linear Temporal Logic - Reactive Types (\S\ref{sec:reactive_type})
 
 Subset Type $(\exists x:A).B$ (Pairs of Objects and the Proofs that
 they have Property): $\{ x : A | B \}$ consisting of those $a$ in $A$
@@ -5045,29 +5053,345 @@ Idempotent Monadic or Idempotent Comonadic (???)
 
 
 % ====================================================================
-\section{Functional Reactive Programming}
-\label{sec:functional_reactive}
+\section{Functional Reactive Programming}\label{sec:frp}
 % ====================================================================
 
 %FIXME possibly move this? dynamical systems? control theory?
 
 (FRP)
 
+Pure Functions over Signals \S\ref{sec:signal} (Time-dependent Values)
+
 Temporal Logic (\S\ref{sec:temporal_logic})
 
+Linear Temporal Logic (LTL \S\ref{sec:linear_temporal})
+
+LTL Propositions \emph{as} Types \\
+Proofs of LTL Formulae \emph{as} FRP Programs \cite{jeffrey12},
+(Jeltsch 11)
+
+LTL Types express Temporal Behaviors of Programs, e.g. a Program which
+must be used immediately, or one which may be used at some Time in the
+Future \cite{jeffrey12}
+
+Fan Categories (\S\ref{sec:fan_category}) \cite{jeltsch12}
+
+Hughes Arrows (\S\ref{sec:hughes_arrow}) with Loops (???): Type Class
+(\S\ref{sec:constrained_type}) for a Freyd Categories
+(\S\ref{sec:freyd_category}), i.e. Premonoidal Categories
+(\S\ref{sec:premonoidal_category}) with a Cartesian Center (???), with
+a Premonoidal Trace (\S\ref{sec:category_trace}) -- defines the
+Dataflow Structure but lacks Temporal Properties \cite{jeffrey12}
+%FIXME
+
+Reactive Programs form Proofs of Constructive LTL Properties
+\cite{jeffrey12}
+
+Implications in LTL give rise to Stateless Functions on Streams (???),
+``Constrains'' Modality gives rise to Causal Functions
+\cite{jeffrey12} %FIXME xref
+
+Reactive Programs form a Partially-traced Monoidal Category
+(\S\ref{sec:partially_traced}) \cite{jeffrey12}
+
+Arrows with Loops where the Type System enforces that only Decoupled
+Functions can be Looped \cite{jeffrey12}
+
+Stateless Function, Causal Function, Decoupled Function: expression as
+LTL Operators \cite{jeffrey12}
+
+LTL Formulae: Reactive Types (\S\ref{sec:reactive_type})
+
+Implementation in a Dependent Type Theory (\S\ref{sec:dependent_type})
+
 
 
 % --------------------------------------------------------------------
-\subsection{Behavior}\label{sec:behavior}
+\subsection{Reactive Type}\label{sec:reactive_type}
 % --------------------------------------------------------------------
+
+\cite{jeffrey12}:
+
+Propositions of Linear Temporal Logic (\S\ref{sec:linear_temporal})
+
+Loop Combinator: Cyclic Dataflow Graphs (???), Type of a Partial Trace
+(\S\ref{sec:partial_trace}) %FIXME
+
+\emph{Reactive Type}
+
+Elements of $Time \rightarrow Set$
+
+\begin{flalign*}
+  \quad & RSet : Set_1 & \\
+  \quad & RSet = Time \rightarrow Set \\
+  \quad & \langle \rangle : Set \rightarrow RSet \\
+  \quad & \langle A \rangle(t) = A \\
+  \quad & \llbracket \rrbracket : RSet \rightarrow Set \\
+  \quad & \llbracket A \rrbracket = \forall \{t\}A(t)
+\end{flalign*}
+
+$\langle A \rangle$ -- Constant Reactive Type for each Type $A$
+
+$\llbracket A \rrbracket$ -- Reactive Type with Elements as Signals
+(\S\ref{sec:signal}) $\sigma$ such that $\sigma\{t\} : A(t)$ for all
+Times $t$; generalizes the Signal Type Constructor with Isomorphism:
+\[
+  Signal(A) \cong \llbracket \langle A \rangle \rrbracket
+\]
+$\llbracket \langle \rangle \rrbracket : Set \rightarrow Set$ is a
+Monad (\S\ref{sec:monad}) as an Instance of the Read-only State Monad
+where State is the current Time
+
+Example Reactive Type:
+\begin{flalign*}
+  \quad & Past : RSet & \\
+  \quad & Past(t) = \exists \{s\}(s \leq t)
+\end{flalign*}
+
+Type Combinators can be Pointwise Lifted (Lifting Monad?
+\S\ref{sec:lifting_monad}) from Types to Reactive Types, e.g. Lifted
+version of the $Maybe$ Type:
+\begin{flalign*}
+  \quad & E : RSet \rightarrow RSet & \\
+  \quad & E(A)(t) = Maybe(A(t))
+\end{flalign*}
+
+Category of Reactive Types $\cat{RSet}$:
+\begin{itemize}
+  \item Objects: Reactive Types
+  \item Morphisms: Elements of $\llbracket A \Rightarrow B \rrbracket$
+  \item Identity and Composition: inherited Pointwise from $\cat{Set}$
+\end{itemize}
+The Cartesian-closed (\S\ref{sec:cartesian_closed}) Structure of
+$\cat{Set}$ Lifts to $\cat{RSet}$ and $\langle \rangle$ gives rise to
+a Functor from $\cat{Set}$ to $\cat{RSet}$.
+
+Temporal Propositions \S\ref{sec:temporal_logic} (Propositions with
+one Time Parameter) \emph{as} Reactive Types
+
+Modalities (\S\ref{sec:modality}) of Linear-time Temporal Logic (LTL
+\S\ref{sec:linear_temporal}) \emph{as} Reactive Type Combinators
+
+Primitive Modalities:
+\begin{itemize}
+  \item $\bigcirc \phi$ -- Next
+  \item $\phi U \psi$ -- Until
+\end{itemize}
+
+Derived Modalities:
+\begin{itemize}
+  \item $\lozenge \phi$ -- Future
+  \item $\square \phi$ -- Globally: $\phi$ True at all Future Times
+  \item $\phi \underline{U} \psi$ -- Non-strict Until
+  \item $\phi \rhd \psi$ -- Constrains
+  \item $\phi \unrhd \psi$ -- Non-strict Constrains
+  \item $\phi \rightsquigarrow \psi$ -- Choice: Constructively defines
+    a Choice Function, Classically collapses to $\Rightarrow$
+\end{itemize}
+
+Duals of $\bigcirc$, $\underline{U}$, $\lozenge$, $\square$:
+\begin{itemize}
+  \item $\ominus \phi$ -- Yesterday: $\phi$ True at Time $s$ when True
+    at Time $s - 1$
+  \item $\phi \underline{S} \psi$ -- Non-strict Since
+  \item $\blacklozenge \phi$ -- Once: True when $\phi$ is True at some
+    Past Time
+  \item $\boxminus \phi$ -- Historically: True whenever $\phi$ is True
+    at all Past Times
+\end{itemize}
+
+$\Rightarrow$, $\rhd$, and $\unrhd$ define Function Spaces:
+\begin{itemize}
+  \item $A \Rightarrow B$ -- \emph{Stateless Functions}: Output Value
+    at Time $t$ depends only on Input Value at Time $t$
+  \item $A \unrhd B$ -- \emph{Causal Functions}: Output Value at Time
+    $t$ depends on History of Inputs (respect Equality up to the
+    current Time)
+  \item $A \rhd B$ -- \emph{Decoupled Functions}: Output Value at Time
+    $t$ depends on History of Inputs but cannot depend on Input Value
+    at Time $t$
+\end{itemize}
+
+Comonad Structure of $\square$: $extend$, $extract$, $duplicate$
+
+Applicative Structure of $\square$
+
+Comonad and Applicative Structure of $\square$ show that $\square$ is
+a Model of $S4$ (Alethic) Modal Logic (\S\ref{sec:alethic_logic})
+
+$\bigcirc$, $\ominus$: Applicative Functors
+(\S\ref{sec:applicative_functor})
+
+$\lozenge$, $\blacklozenge$: Applicative Monads
+(\S\ref{sec:applicative_monad})
+
+$\boxminus$: Applicative Comonad (\S\ref{sec:applicative_comonad})
+
+Kleisli Category (\S\ref{sec:kleisli_category}) $\boxminus \cat{RSet}$:
+\begin{itemize}
+  \item Objects: Reactive Types
+  \item Morphisms: Elements of $\llbracket \boxminus A \Rightarrow B
+    \rrbracket$
+  \item Identity and Composition: usual for Kleisli Construction
+\end{itemize}
+
+Enriched Categorical (\S\ref{sec:enriched_category}) Structure of
+$\unrhd$ (with Hom-objects given by $\unrhd$): $arr$, $id$, $before$,
+$after$, $\$$, $\ggg$
+
+$\unrhd \cat{RSet}$:
+\begin{itemize}
+  \item Objects: Reactive Types
+  \item Morphisms: Elements of $\llbracket A \unrhd B
+    \rrbracket$
+  \item Identity and Composition: as given by Enriched Category
+    Structure of $\unrhd$
+\end{itemize}
+
+\begin{itemize}
+  \item $\cat{Set}$: Morphisms are Witnesses of Implication with no
+    place in Time
+  \item $\cat{RSet}$: Morphisms are Witnesses of Implication whose
+    Hypothesis is True at some Time $t$
+  \item $\unrhd \cat{RSet}$: Morphisms are Witnesses of Implication
+    whose Hypothesis is True over an Interval $[s,t]$
+  \item $\boxminus \cat{RSet}$: Morphisms are Witnesses of Implication
+    whose Hypothesis is True over an Interval $(-\infty,t]$
+\end{itemize}
+leads to (Embedding \S\ref{sec:category_embedding}) Functors:
+\[
+  \cat{Set} \hookrightarrow \cat{RSet} \hookrightarrow
+    \unrhd\cat{RSet} \hookrightarrow \boxminus\cat{RSet}
+\]
+All have Finite Products inherited from $\cat{Set}$
+
+All but $\unrhd\cat{RSet}$ are Cartesian Closed
+(\S\ref{sec:cartesian_closed}): in $\cat{RSet}$, $\underline{S}$ (with
+its Arguments flipped) is Left-adjoint to $\unrhd$ so $\cat{RSet}$ has
+a Closed Structure for $\unrhd$ even if $\unrhd\cat{RSet}$ does not.
+
+
+$\cat{RSet}$ inherits Coproducts from $\cat{Set}$
+
+$\unrhd\cat{RSet}$ has Weak Coproducts
+
+$\boxminus\cat{RSet}$ does not have Coproducts
+
+\fist Note that the Embedding of $\unrhd\cat{RSet} \hookrightarrow
+\boxminus\cat{RSet}$ requires the existence of a Least Element of Time
+$-\infty$.
+
+$C$ -- Chop Modality on Paths %FIXME
+
+
+
+% --------------------------------------------------------------------
+\subsection{Signal}\label{sec:signal}
+% --------------------------------------------------------------------
+
+\emph{Signal} (or \emph{Behavior})
 
 $a$-valued Behavior: $Time \rightarrow a$
+
+\cite{jeffrey12}:
+
+gives rise to an Event Stream (\S\ref{sec:frp_event})
+
+\begin{flalign*}
+  \quad & Signal : Set \rightarrow Set & \\
+  \quad & Signal(A) = Time \rightarrow A
+\end{flalign*}
+
+$Time$ forms a Decidable Total Order:
+\begin{flalign*}
+  \quad & Time : Set & \\
+  \quad & \leq : Time \rightarrow Time \rightarrow Set \\
+  \quad & + : Time \rightarrow \nats \rightarrow Time \\
+  \quad & - : Time \rightarrow Time \rightarrow \nats
+\end{flalign*}
+
+assuming a Discrete Time Model
+
+Dense Time FRP
+
+Isomorphism with Reactive Type (\S\ref{sec:reactive_type})
+Constructors:
+\[
+  Signal(A) \cong \llbracket \langle A \rangle \rrbracket
+\]
+
+$\llbracket \langle \rangle \rrbracket : Set \rightarrow Set$ is a
+Monad (\S\ref{sec:monad}) as an Instance of the Read-only State Monad
+where State is the current Time
+
+Signals of Signals give rise to Signals
+
+
+
+\subsubsection{Signal Function}\label{sec:signal_function}
+
+\cite{jeffrey12}:
+
+Functions from Signals to Signals
+
+Functions required to be Causal Functions $A \unrhd B$:
+\begin{flalign*}
+  \quad & SF : Set \rightarrow Set \rightarrow Set & \\
+  \quad & SF(A,B) = (f : Signal(A) \rightarrow
+    Signal(B)) \times (Causal (f))
+\end{flalign*}
+
+Causal Functions respect Equivalence up to the current Time
+
+$SF(A,B)$ encoded in LTL over the past:
+\[
+  SF(A,B) \cong \llbracket \boxminus\langle A \rangle
+    \Rightarrow \langle B \rangle \rrbracket
+\]
+gives a Semantics for Signal Functions in $\boxminus\cat{RSet}$ and
+$\boxminus\cat{RSet}$ is compatible with Hughes Arrows
+(\S\ref{sec:hughes_arrow}) as any Category with Finite Products is
+trivially a Freyd Category (\S\ref{sec:freyd_category})
+
+$SF$ modified with $era$ Parameter (Jeltsch 09):
+\begin{flalign*}
+  \quad & SF' : Set \rightarrow Set \rightarrow Time
+    \rightarrow Set & \\
+  \quad & SF' (A,B,s) = (f : Signal(A) \rightarrow
+    Signal(B)) \times (Causal_s(f))
+\end{flalign*}
+$SF'(A,B,s)$ encoded in LTL:
+\[
+  SF'(A,B) \cong \langle A \rangle \unrhd \langle B \rangle
+\]
+has a Semantics in $\unrhd\cat{RSet}$ which also satisfies the
+requirements of Arrows.
+
+Decoupled Functions are a Subset of Signal Functions:
+\begin{flalign*}
+  \quad & SF'' : Set \rightarrow Set \rightarrow Time
+    \rightarrow Set & \\
+  \quad & SF'' (A,B,s) = (f : Signal(A) \rightarrow
+    Signal(B)) \times (Decoupled_s(f))
+\end{flalign*}
+$SF'(A,B,s)$ encoded in LTL:
+\[
+  SF''(A,B) \cong \langle A \rangle \rhd \langle A \rangle
+\]
+
+\fist Note that $\rhd\cat{RSet}$ is not a Category as it has
+Composition but not Identities (Identity Function is only Decoupled on
+Singleton Types), cf. Contraction Maps in a Complete Metric Space:
+Identities are Non-expanding but not Contracting
+%FIXME xref
 
 
 
 % --------------------------------------------------------------------
 \subsection{Event}\label{sec:frp_event}
 % --------------------------------------------------------------------
+
+Signal gives rise to an \emph{Event Stream}
 
 
 

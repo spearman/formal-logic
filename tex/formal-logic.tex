@@ -1484,7 +1484,7 @@ which has the meaning ``ought implies can''.
 \subsubsection{Temporal Logic}\label{sec:temporal_logic}
 
 (Curry-Howard): Partial Evaluation (\S\ref{sec:partial_evaluation}),
-Functional Reactive Programming (\S\ref{sec:functional_reactive})
+Functional Reactive Programming (\S\ref{sec:frp})
 
 \begin{itemize}
   \item Logical Operators (Logical Connectives
@@ -1503,7 +1503,7 @@ Unary Modal Operators:
 \begin{itemize}
   \item $N\phi$, $\bigcirc\phi$ -- Next
   \item $G\phi$, $\square\phi$ -- Globally (Behavior
-    \S\ref{sec:behavior})
+    Signals? \S\ref{sec:signal}) %FIXME
   \item $F\phi$, $\lozenge\phi$ -- Future, Finally (Event
     \S\ref{sec:frp_event})
 \end{itemize}
@@ -1646,8 +1646,51 @@ Temporal Logic with \emph{Path} Modalities.
 \subparagraph{Linear Temporal Logic}\label{sec:linear_temporal}
 \hfill \\
 
-\emph{Linear Temporal Logic} is a Modal Logic with Modalities
-referring to \emph{Time}.
+\cite{jeffrey12}:
+
+\emph{Linear Temporal Logic} (LTL or \emph{Linear-time Temporal
+  Logic}) is a Modal Logic with Modalities referring to \emph{Time}.
+
+Propositions of LTL correspond to Reactive Types
+(\S\ref{sec:reactive_type}) in Functional Reactive Programming
+(\S\ref{sec:frp})
+
+Modalities (\S\ref{sec:modality}) of LTL \emph{as} Combinators of
+Reactive Types
+
+Primitive Modalities:
+\begin{itemize}
+  \item $\bigcirc \phi$ -- Next
+  \item $\phi U \psi$ -- Until
+\end{itemize}
+
+Derived Modalities:
+\begin{itemize}
+  \item $\lozenge \phi$ -- Future
+  \item $\square \phi$ -- Globally: $\phi$ True at all Future Times
+  \item $\phi \underline{U} \psi$ -- Non-strict Until
+  \item $\phi \rhd \psi$ -- Constrains
+  \item $\phi \unrhd \psi$ -- Non-strict Constrains
+  \item $\phi \rightsquigarrow \psi$ -- Choice: Constructively defines
+    a Choice Function, Classically collapses to $\Rightarrow$
+\end{itemize}
+
+Duals of $\bigcirc$, $\underline{U}$, $\lozenge$, $\square$:
+\begin{itemize}
+  \item $\ominus \phi$ -- Yesterday: $\phi$ True at Time $s$ when True
+    at Time $s - 1$
+  \item $\phi \underline{S} \psi$ -- Non-strict Since
+  \item $\blacklozenge \phi$ -- Once: True when $\phi$ is True at some
+    Past Time
+  \item $\boxminus \phi$ -- Historically: True whenever $\phi$ is True
+    at all Past Times
+\end{itemize}
+
+Constrains Modality was introduced for Rely/Guarantee Properties (???)
+of Parallel Systems
+%FIXME
+
+Derivations of Modalities: %FIXME
 
 
 
@@ -2022,6 +2065,10 @@ Cut (\S\ref{sec:cut_elimination}) (Composition)
 Translation from Intuitionistic Logic into Linear Logic:
 G\"odel-Gentzen Negative Translation (\S\ref{sec:godel_gentzen}),
 embedding Classical First-order Logic into Linear First-order Logic
+
+Traced Monoidal Categories (\S\ref{sec:traced_monoidal}): Operational
+Categorical Semantics for Linear Logic (Geometry of Interactions
+\S\ref{sec:interaction_geometry})
 
 
 
