@@ -5064,7 +5064,7 @@ Pure Functions over Signals \S\ref{sec:signal} (Time-dependent Values)
 
 Temporal Logic (\S\ref{sec:temporal_logic})
 
-Linear Temporal Logic (LTL \S\ref{sec:linear_temporal})
+Linear Temporal Logic (LTL) (\S\ref{sec:linear_temporal})
 
 LTL Propositions \emph{as} Types \\
 Proofs of LTL Formulae \emph{as} FRP Programs \cite{jeffrey12},
@@ -5072,16 +5072,16 @@ Proofs of LTL Formulae \emph{as} FRP Programs \cite{jeffrey12},
 
 LTL Types express Temporal Behaviors of Programs, e.g. a Program which
 must be used immediately, or one which may be used at some Time in the
-Future \cite{jeffrey12}
+Future \cite{jeffrey12} %FIXME clarify used
 
 Fan Categories (\S\ref{sec:fan_category}) \cite{jeltsch12}
 
 Hughes Arrows (\S\ref{sec:hughes_arrow}) with Loops (???): Type Class
-(\S\ref{sec:constrained_type}) for a Freyd Categories
+(\S\ref{sec:constrained_type}) for Freyd Categories
 (\S\ref{sec:freyd_category}), i.e. Premonoidal Categories
-(\S\ref{sec:premonoidal_category}) with a Cartesian Center (???), with
-a Premonoidal Trace (\S\ref{sec:category_trace}) -- defines the
-Dataflow Structure but lacks Temporal Properties \cite{jeffrey12}
+(\S\ref{sec:premonoidal_category}) with a Cartesian Center (???) and a
+Premonoidal Trace (\S\ref{sec:category_trace}) -- defines the Dataflow
+Structure but lacks Temporal Properties \cite{jeffrey12}
 %FIXME
 
 Reactive Programs form Proofs of Constructive LTL Properties
@@ -5097,12 +5097,18 @@ Reactive Programs form a Partially-traced Monoidal Category
 Arrows with Loops where the Type System enforces that only Decoupled
 Functions can be Looped \cite{jeffrey12}
 
-Stateless Function, Causal Function, Decoupled Function: expression as
-LTL Operators \cite{jeffrey12}
+Stateless Function $\Rightarrow$, Causal Function $\unrhd$, Decoupled
+Function $\rhd$: expression as LTL Operators \cite{jeffrey12}
 
 LTL Formulae: Reactive Types (\S\ref{sec:reactive_type})
 
-Implementation in a Dependent Type Theory (\S\ref{sec:dependent_type})
+Implementation in a Dependent Type Theory
+(\S\ref{sec:dependent_type}): not efficiently executable as a Polling
+Pull (???) implementation and also suffers from Time Leaks in that the
+entire Input History must be recorded (and can't be Garbage Collected)
+\cite{jeffrey12}
+
+Push-pull FRP: underlying I/O model is Asynchronous
 
 
 
@@ -5112,7 +5118,8 @@ Implementation in a Dependent Type Theory (\S\ref{sec:dependent_type})
 
 \cite{jeffrey12}:
 
-Propositions of Linear Temporal Logic (\S\ref{sec:linear_temporal})
+correspondance with Propositions of Linear Temporal Logic (LTL)
+(\S\ref{sec:linear_temporal})
 
 Loop Combinator: Cyclic Dataflow Graphs (???), Type of a Partial Trace
 (\S\ref{sec:partial_trace}) %FIXME
@@ -5169,32 +5176,32 @@ a Functor from $\cat{Set}$ to $\cat{RSet}$.
 Temporal Propositions \S\ref{sec:temporal_logic} (Propositions with
 one Time Parameter) \emph{as} Reactive Types
 
-Modalities (\S\ref{sec:modality}) of Linear-time Temporal Logic (LTL
-\S\ref{sec:linear_temporal}) \emph{as} Reactive Type Combinators
+Modalities (\S\ref{sec:modality}) of Linear-time Temporal Logic (LTL)
+(\S\ref{sec:linear_temporal}) \emph{as} Reactive Type Combinators
 
 Primitive Modalities:
 \begin{itemize}
-  \item $\bigcirc \phi$ -- Next
-  \item $\phi U \psi$ -- Until
+  \item $\ocircle \phi$ -- Next
+  \item $\phi \;\until\; \psi$ -- Until
 \end{itemize}
 
 Derived Modalities:
 \begin{itemize}
   \item $\lozenge \phi$ -- Future
   \item $\square \phi$ -- Globally: $\phi$ True at all Future Times
-  \item $\phi \underline{U} \psi$ -- Non-strict Until
+  \item $\phi \;\untileq\; \psi$ -- Non-strict Until
   \item $\phi \rhd \psi$ -- Constrains
   \item $\phi \unrhd \psi$ -- Non-strict Constrains
   \item $\phi \rightsquigarrow \psi$ -- Choice: Constructively defines
     a Choice Function, Classically collapses to $\Rightarrow$
 \end{itemize}
 
-Duals of $\bigcirc$, $\underline{U}$, $\lozenge$, $\square$:
+Duals of $\ocircle$, $\untileq$, $\lozenge$, $\square$:
 \begin{itemize}
   \item $\ominus \phi$ -- Yesterday: $\phi$ True at Time $s$ when True
     at Time $s - 1$
-  \item $\phi \underline{S} \psi$ -- Non-strict Since
-  \item $\blacklozenge \phi$ -- Once: True when $\phi$ is True at some
+  \item $\phi \;\sinceeq\; \psi$ -- Non-strict Since
+  \item $\minlozenge \phi$ -- Once: True when $\phi$ is True at some
     Past Time
   \item $\boxminus \phi$ -- Historically: True whenever $\phi$ is True
     at all Past Times
@@ -5203,26 +5210,147 @@ Duals of $\bigcirc$, $\underline{U}$, $\lozenge$, $\square$:
 $\Rightarrow$, $\rhd$, and $\unrhd$ define Function Spaces:
 \begin{itemize}
   \item $A \Rightarrow B$ -- \emph{Stateless Functions}: Output Value
-    at Time $t$ depends only on Input Value at Time $t$
+    at Time $t$ depends only on Input Value at Time $t$; Implications
+    in LTL
   \item $A \unrhd B$ -- \emph{Causal Functions}: Output Value at Time
     $t$ depends on History of Inputs (respect Equality up to the
-    current Time)
+    current Time); ``Constrains'' Modality
   \item $A \rhd B$ -- \emph{Decoupled Functions}: Output Value at Time
     $t$ depends on History of Inputs but cannot depend on Input Value
     at Time $t$
 \end{itemize}
 
-Comonad Structure of $\square$: $extend$, $extract$, $duplicate$
+Derivations in Classical Logic:
+\begin{align*}
+  \lozenge A &= T \;\until\; A \\
+  \square A &= \neg(\lozenge\neg A) \\
+  A \; \untileq\; B &= A \;\until\; (A \wedge B) \\
+  A \rhd B &= \neg(A \;\until\; \neg B) \\
+  A \unrhd B &= A \neg(A \;\untileq\; \neg B) \\ %FIXME is this right?
+  A \rightsquigarrow B &= \neg((A \wedge \neg B) \;\untileq\; T)
+\end{align*}
 
-Applicative Structure of $\square$
+
+\textbf{Combinators}
+
+Signal Functions (\S\ref{sec:signal_function}) $f,g$:
+
+$f \ggg g$, $f \&\&\& g$, and $loop f$ allow Dataflow Networks to be
+built which can be visualized in any Traced Monoidal Category
+(\S\ref{sec:traced_monoidal})
+
+Example $clickMonitor$:
+\begin{flalign*}
+  \quad & clickMonitor : \llbracket \langle MouseButtonState \rangle
+    \unrhd \langle MouseEvent \rangle \rrbracket & \\
+  \quad & clickMonitor = arr (\cdot = up) \ggg edge \ggg tag(mouseClick)
+\end{flalign*}
+
+$\ggg$ and $\&\&\&$ respect Decoupling:
+\begin{itemize}
+  \item if $f:\llbracket A \rhd B \rrbracket$ and $g : \llbracket B
+    \unrhd C \rrbracket$ then $f \ggg g : \llbracket A \rhd C
+    \rrbracket$
+  \item if $f:\llbracket A \unrhd B \rrbracket$ and $g : \llbracket B
+    \rhd C \rrbracket$ then $f \ggg g : \llbracket A \rhd C
+    \rrbracket$
+  \item if $f:\llbracket A \rhd B \rrbracket$ and $g : \llbracket B
+    \rhd C \rrbracket$ then $f \&\&\& g : \llbracket A \rhd B \wedge C
+    \rrbracket$
+\end{itemize}
+
+
+\textbf{FRP Primitives}
+
+$constant : \forall\{A,B\}\llbracket \square B
+  \Rightarrow A \rhd B \rrbracket$
+
+$localTime : \forall\{A\} \llbracket A \rhd
+  \langle Time \rangle \rrbracket$
+
+$initially : \forall\{A\} \llbracket A
+  \Rightarrow A \unrhd A \rrbracket$
+
+$decouple : \forall\{A\} \llbracket \ominus A
+  \Rightarrow A \rhd \ominus A \rrbracket$
+
+\emph{Nested Signals} via the $\square$ Modality indicates a
+\emph{Stream} of Future Values, e.g. $\llbracket \square\square A
+\rrbracket$ is Inhabited by Signals of Signals of Type $A$.
+
+$decouple$ Primitive used to introduce minimal Decoupling, i.e. acts
+as an Identity with a $1$ Unit delay.
+
+
+\textbf{Feedback Loops}
+
+\[
+  \llbracket ((A \wedge B) \unrhd (A \wedge C))
+    \Rightarrow B \unrhd C \rrbracket
+\]
+required to Satisfy the Equations of a Traced Premonoidal Category
+(\S\ref{sec:traced_premonoidal})
+
+Instance of the Type Class of Arrows (\S\ref{sec:hughes_arrow}) with
+Loops
+
+Consequence of the existence of Loops is that every Type is Inhabited,
+e.g. defining:
+\begin{flalign*}
+  \quad & f : \llbracket (F \wedge T) \unrhd (F \wedge F) \rrbracket & \\
+  \quad & f = arr[\lambda(x,y).(x,x)]
+\end{flalign*}
+and Tracing (???) $f$ gives a Function $T \unrhd F$ which can be used
+to Inhabit the Empty Type. When this is not desired it can be avoided
+by only giving Fixed Points to Decoupled Functions leading to a Type
+for $loop$:
+\begin{flalign*}
+  \quad & loop : \forall\{A,B,C\} \llbracket ((A \wedge B)
+    \rhd (A \wedge C)) \Rightarrow B \rhd C \rrbracket & \\
+  \quad & loop f = (ifix(f \ggg fst) \&\&\& id) \ggg f \ggg snd
+\end{flalign*}
+where $ifix$ is the Function for Indexed Fixed Points.
+
+Decoupled Functions form Contraction Maps
+(\S\ref{sec:contraction_map}) in an Ultrametric Space
+(\S\ref{sec:ultrametric_space}) of Functions and so have Fixed Points.
+
+Because $loop$ can only be Applied to Decoupled Functions and not
+Functions in general it does not form a Trace
+(\S\ref{sec:category_trace}) and instead forms a Partial Trace
+(\S\ref{sec:partial_trace}).
+
+
+\asterism
+
+
+Comonad Structure of $\square$:
+\begin{flalign*}
+  \quad & extend : \forall\{A,B\} \llbracket A \Rightarrow B \rrbracket
+    \rightarrow \llbracket \square A
+    \Rightarrow \square B \rrbracket & \\
+  \quad & extract : \forall\{A\} \llbracket \square A
+    \Rightarrow A \rrbracket \\
+  \quad & duplicate : \forall\{A\} \llbracket \square A
+    \Rightarrow \square\square A \rrbracket
+\end{flalign*}
+
+Applicative Structure of $\square$:
+\begin{flalign*}
+  \quad & [\cdot] : \forall\{A\} \llbracket A \rrbracket
+    \rightarrow \llbracket \square A \rrbracket & \\
+  \quad & (\cdot \langle * \rangle \cdot) : \forall\{A,B\}
+    \llbracket \square (A \Rightarrow B) \Rightarrow \square A
+    \Rightarrow \square B \rrbracket
+\end{flalign*}
 
 Comonad and Applicative Structure of $\square$ show that $\square$ is
 a Model of $S4$ (Alethic) Modal Logic (\S\ref{sec:alethic_logic})
 
-$\bigcirc$, $\ominus$: Applicative Functors
+$\ocircle$, $\ominus$: Applicative Functors
 (\S\ref{sec:applicative_functor})
 
-$\lozenge$, $\blacklozenge$: Applicative Monads
+$\lozenge$, $\minlozenge$: Applicative Monads
 (\S\ref{sec:applicative_monad})
 
 $\boxminus$: Applicative Comonad (\S\ref{sec:applicative_comonad})
@@ -5266,9 +5394,10 @@ leads to (Embedding \S\ref{sec:category_embedding}) Functors:
 All have Finite Products inherited from $\cat{Set}$
 
 All but $\unrhd\cat{RSet}$ are Cartesian Closed
-(\S\ref{sec:cartesian_closed}): in $\cat{RSet}$, $\underline{S}$ (with
-its Arguments flipped) is Left-adjoint to $\unrhd$ so $\cat{RSet}$ has
-a Closed Structure for $\unrhd$ even if $\unrhd\cat{RSet}$ does not.
+(\S\ref{sec:cartesian_closed}): in $\cat{RSet}$, $\sinceeq$
+(with its Arguments flipped) is Left-adjoint to $\unrhd$ so
+$\cat{RSet}$ has a Closed Structure for $\unrhd$ even if
+$\unrhd\cat{RSet}$ does not.
 
 
 $\cat{RSet}$ inherits Coproducts from $\cat{Set}$
@@ -5281,7 +5410,66 @@ $\boxminus\cat{RSet}$ does not have Coproducts
 \boxminus\cat{RSet}$ requires the existence of a Least Element of Time
 $-\infty$.
 
-$C$ -- Chop Modality on Paths %FIXME
+$\mathsf{C}$ -- Chop Modality on Paths; Interval Temporal Logic
+(\S\ref{sec:interval_temporal})
+
+
+\asterism
+
+
+\textbf{Implementation}
+
+Implementation uses Interval Types (\S\ref{sec:interval_type}) instead
+of Reactive Types (\S\ref{sec:reactive_type}); Interval Temporal Logic
+(\S\ref{sec:interval_temporal}) admits the Chop Modality $\mathsf{C}$
+on Paths and may give a Cartesian Closed structure to $\unrhd$
+
+For a Causal Function Space $A \unrhd B$ the State (???) of a Causal
+Function is Modelled as a \emph{Process} of Type:
+\[
+  (A @ s \multimap B @ u)
+\]
+that has ``Received'' Input up to Time $s$ and ``Produced'' Output up
+to Time $u$; initial State of a Causal Function at Time $t$ is a
+Process where $s = t = u$. A Process can Terminate when $u = \infty$,
+i.e. when it has ``Produced'' all its Output (even if $s \prec
+\infty$).
+
+Resumption Model of Concurrency (???)
+
+(??? cf. Processes \S\ref{sec:process} in Process Calculus?)
+
+
+
+% --------------------------------------------------------------------
+\subsection{Interval Type}\label{sec:interval_type}
+% --------------------------------------------------------------------
+
+\cite{jeffrey12}:
+
+\emph{Time Intervals}: Segments of Signals
+
+$Time^\infty$ -- Type of Time Bounds, Extends $Time$ with $\infty$
+
+$[s \prec t)$ -- \emph{Time Interval}
+
+$i \sim j$ -- \emph{Concatenable Intervals}: $i = [s \prec t)$ and $j
+    = [t \prec u)$
+
+$i \frown j \because i \sim j$ -- \emph{Concatenation} of $i = [s
+        \prec t)$ and $j = [t \prec u)$ is $[s \prec u)$
+
+
+
+\emph{Interval Types}
+
+\emph{Monotone Interval Type}
+
+$MSet$
+
+Non-monotone Semantics
+
+Monotone Semantics
 
 
 
@@ -5310,9 +5498,11 @@ $Time$ forms a Decidable Total Order:
   \quad & - : Time \rightarrow Time \rightarrow \nats
 \end{flalign*}
 
-assuming a Discrete Time Model
+assuming a Discrete Time Model: Termination Property of $fix$
 
-Dense Time FRP
+Dense Time FRP: $\epsilon$-decoupled Functions for some $0 <
+\epsilon$; \emph{Zeno Processes} perform Output which is successively
+smaller; \emph{Zeno Event Signals}
 
 Isomorphism with Reactive Type (\S\ref{sec:reactive_type})
 Constructors:
@@ -5326,9 +5516,15 @@ where State is the current Time
 
 Signals of Signals give rise to Signals
 
+Continuous Behaviors
+
+Discrete Behaviors: \emph{Events} (\S\ref{sec:frp_event})
+
 
 
 \subsubsection{Signal Function}\label{sec:signal_function}
+
+or \emph{Reactive Function}
 
 \cite{jeffrey12}:
 
@@ -5386,12 +5582,79 @@ Identities are Non-expanding but not Contracting
 %FIXME xref
 
 
+\textbf{Combinators}
+
+Signal Functions $f,g$:
+
+$f \ggg g$, $f \&\&\& g$, and $loop f$ allow Dataflow Networks to be
+built which can be visualized in any Traced Monoidal Category
+(\S\ref{sec:traced_monoidal})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Event}\label{sec:frp_event}
 % --------------------------------------------------------------------
 
+\cite{jeffrey12}:
+
+Discrete Behaviors
+
 Signal gives rise to an \emph{Event Stream}
+
+
+Semantics given by Signals of Type $E A$ where:
+\begin{flalign*}
+  \quad & E : RSet \rightarrow RSet & \\
+  \quad & E(A)(t) = Maybe(A(t))
+\end{flalign*}
+A Signal of Type $E A$ at Time $t$ is either $Nothing$ (no Event has
+arrived) or $Just(a)$ (an Event of $a$ of Type $A(t)$ has arrived).
+
+Example:
+\[
+  mouseClick : \llbracket E \langle MouseEvent \rangle \rrbracket
+\]
+
+
+\textbf{Event Primitives}
+
+$never : \forall\{A,B\} \llbracket A \rhd E B \rrbracket$
+
+$now : \forall\{A,B\} \llbracket B \Rightarrow A \rhd E B \rrbracket$
+
+$later : \forall\{A,B\} \llbracket \lozenge B
+  \Rightarrow A \rhd E B \rrbracket$
+
+$tag : \forall\{A,B\} \llbracket \square B \Rightarrow
+  E A \unrhd E B \rrbracket$
+
+$edge : \llbracket [Bool] \unrhd E T \rrbracket$ -- converts Signals
+  into Events
+
+$hold : \forall\{A\} \llbracket A \Rightarrow E A
+  \rhd \minlozenge A \rrbracket$ -- converts Events into Signals
+
+
+\textbf{Switching}
+
+starting and stopping Signal Functions based on Events
+
+Switching Combinators:
+
+$switch : \forall\{A,B,C\} \llbracket (A \unrhd (B \wedge E C))
+  \Rightarrow \square(C \Rightarrow (A \unrhd B))
+  \Rightarrow (A \unrhd B) \rrbracket$ -- only React to the first
+  Switching Event
+
+$rswitch : \forall\{A,B\} \llbracket (A \unrhd B)
+  \Rightarrow (A \wedge E(A \unrhd B)) \unrhd B \rrbracket$ -- React
+  on every Switching Event
+
+Example Function which Returns True after an Event has occurred:
+\[
+  switch(constant[False] \&\&\& id)[\lambda x.constant[True]]
+\]
 
 
 

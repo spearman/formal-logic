@@ -1484,7 +1484,8 @@ which has the meaning ``ought implies can''.
 \subsubsection{Temporal Logic}\label{sec:temporal_logic}
 
 (Curry-Howard): Partial Evaluation (\S\ref{sec:partial_evaluation}),
-Functional Reactive Programming (\S\ref{sec:frp})
+Functional Reactive Programming (\S\ref{sec:frp}), Reactive Types
+(\S\ref{sec:reactive_type})
 
 \begin{itemize}
   \item Logical Operators (Logical Connectives
@@ -1501,7 +1502,7 @@ Unary Operators:
 
 Unary Modal Operators:
 \begin{itemize}
-  \item $N\phi$, $\bigcirc\phi$ -- Next
+  \item $N\phi$, $\ocircle\phi$ -- Next
   \item $G\phi$, $\square\phi$ -- Globally (Behavior
     Signals? \S\ref{sec:signal}) %FIXME
   \item $F\phi$, $\lozenge\phi$ -- Future, Finally (Event
@@ -1510,9 +1511,9 @@ Unary Modal Operators:
 
 Binary Modal Operators:
 \begin{itemize}
-  \item $\phi U \psi$ -- Until
+  \item $\phi \until \psi$ -- Until
   \item $\phi R \psi$ -- Release
-  \item $\phi S \psi$ -- Since
+  \item $\phi \since \psi$ -- Since
 \end{itemize}
 
 \fist Note simple Temporal Logics such as Basic Temporal Language
@@ -1637,10 +1638,12 @@ Superset of \emph{Computation Tree Logic} and \emph{Linear
   Temporal Logic}
 
 
+
 \subparagraph{Computation Tree Logic}\label{sec:computation_tree_logic}
 \hfill \\
 
 Temporal Logic with \emph{Path} Modalities.
+
 
 
 \subparagraph{Linear Temporal Logic}\label{sec:linear_temporal}
@@ -1660,26 +1663,26 @@ Reactive Types
 
 Primitive Modalities:
 \begin{itemize}
-  \item $\bigcirc \phi$ -- Next
-  \item $\phi U \psi$ -- Until
+  \item $\ocircle \phi$ -- Next
+  \item $\phi \until \psi$ -- Until
 \end{itemize}
 
 Derived Modalities:
 \begin{itemize}
   \item $\lozenge \phi$ -- Future
   \item $\square \phi$ -- Globally: $\phi$ True at all Future Times
-  \item $\phi \underline{U} \psi$ -- Non-strict Until
+  \item $\phi \underline{\until} \psi$ -- Non-strict Until
   \item $\phi \rhd \psi$ -- Constrains
   \item $\phi \unrhd \psi$ -- Non-strict Constrains
   \item $\phi \rightsquigarrow \psi$ -- Choice: Constructively defines
     a Choice Function, Classically collapses to $\Rightarrow$
 \end{itemize}
 
-Duals of $\bigcirc$, $\underline{U}$, $\lozenge$, $\square$:
+Duals of $\ocircle$, $\underline{\until}$, $\lozenge$, $\square$:
 \begin{itemize}
   \item $\ominus \phi$ -- Yesterday: $\phi$ True at Time $s$ when True
     at Time $s - 1$
-  \item $\phi \underline{S} \psi$ -- Non-strict Since
+  \item $\phi \underline{\since} \psi$ -- Non-strict Since
   \item $\blacklozenge \phi$ -- Once: True when $\phi$ is True at some
     Past Time
   \item $\boxminus \phi$ -- Historically: True whenever $\phi$ is True
@@ -1687,7 +1690,7 @@ Duals of $\bigcirc$, $\underline{U}$, $\lozenge$, $\square$:
 \end{itemize}
 
 Constrains Modality was introduced for Rely/Guarantee Properties (???)
-of Parallel Systems
+of Parallel Systems; $\rhd$ has Fixed Points
 %FIXME
 
 Derivations of Modalities: %FIXME
@@ -1695,6 +1698,11 @@ Derivations of Modalities: %FIXME
 
 
 \paragraph{Interval Temporal Logc}\label{sec:interval_temporal}
+\hfill \\
+
+Interval Types (\S\ref{sec:interval_type})
+
+
 
 \paragraph{Modal $\mu$-calculus}\label{sec:modal_mu}
 
@@ -1758,9 +1766,9 @@ Cohesiveness, Differential Cohesion (???)
 
 \[
   \begin{matrix}
-    \lozenge & \dashv & \bigcirc \\
+    \lozenge & \dashv & \ocircle \\
     \bot & \empty & \bot \\
-    \bigcirc & \dashv & \square
+    \ocircle & \dashv & \square
   \end{matrix}
 \]
 
@@ -2237,6 +2245,20 @@ Session-typed $\pi$-calculus (\S\ref{sec:session_typed_pi_calculus})
 \hfill \\
 
 Characterizing Complexity Classes (\S\ref{sec:complexity_class})
+
+
+
+\paragraph{Multiplicative Linear Logic}
+\label{sec:multiplicative_linear_logic}
+\hfill \\
+
+\cite{haghverdi-scott05}
+
+$MLL$
+
+Multiplicative Exponential Linear Logic $MELL$
+
+Multiobject Geometry of Interaction (\S\ref{sec:multiobject_goi})
 
 
 
