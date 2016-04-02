@@ -1309,1389 +1309,238 @@ Expressions leaves their Types unchanged.
 % ====================================================================
 
 % ====================================================================
-\section{Typed $\lambda$-Calculus}\label{sec:typed_lambda}
+\section{Type System}\label{sec:type_system}
 % ====================================================================
 
-\emph{Typed $\lambda$-Calculus} allows for Lambda Terms to be assigned
-Types (\S\ref{sec:type}).
-
-Simply-typed $\lambda$-calculus (\S\ref{sec:simply_typed}) has only
-one Type Constructor (\S\ref{sec:type_constructor}), $\rightarrow$
-(see Function Type \S\ref{sec:function_type}).
-
-Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda}) may be
-considered a Typed $\lambda$-calculus with only one Type.
-
-Extension to Untyped $\lambda$-calculus may be achieved by
-considering Recursive Types with Recursion in Negative Positions;
-Untyped $\lambda$-calculus can be Modelled by a Solution to the
-Recursion Equation $X \simeq X \rightarrow X$. \cite{wadler12}
-
-A Denotational Semantics can be given by a \emph{B\"ohm Tree}
-(\S\ref{sec:bohm_tree}).
+\emph{Type System} (or \emph{Typing Discipline})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Simply-typed $\lambda$-calculus}\label{sec:simply_typed}
+\subsection{Type Checking}\label{sec:type_checking}
 % --------------------------------------------------------------------
 
-\emph{Simply-typed $\lambda$-calculus} ($\lambda^\rightarrow$) is a
-Typed Interpretation of $\lambda$-calculus with one Type Constructor
-for Function Types: $\rightarrow$ (\S\ref{sec:function_type}).
+\subsubsection{Bi-directional Type Checking}
+\label{sec:bidirectional_checking}
 
-Strongly Normalizing, not Turing Complete: addition of $fix_\alpha$
-Operator or Recursive Types (\S\ref{sec:recursive_datatype}) gives
-Turing Completeness
+\emph{Checking}
 
-``Simply-typed'' is to distinguish from extensions such as:
+\emph{Synthesis}
+
+
+
+\subsubsection{Extended Static Checking}\label{sec:extended_static}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Nominal Type System}\label{sec:nominal_type_system}
+% --------------------------------------------------------------------
+
+Names
+
+
+
+% --------------------------------------------------------------------
+\subsection{Unified Type System}\label{sec:unified_type_system}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Structural Type System}\label{sec:structural_type_system}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Substructural Type System}
+\label{sec:substructural_type_system}
+% --------------------------------------------------------------------
+
+Substructural Logic (\S\ref{sec:substructural_logic})
+
+Substructural Type Systems are categorized by allowing or disallowing
+Structural rules of Exchange (\S\ref{sec:exchange_rule}), Weakening
+(\S\ref{sec:weakening_rule}), or Contraction
+(\S\ref{sec:contraction_rule}):
+
 \begin{itemize}
-  \item System F (\S\ref{sec:system_f}): Polymorphic Types
-  \item Logical Framework (\S\ref{sec:logical_framework}): Dependent
-    Types
-\end{itemize}
-because Polymorphism and Dependency cannot be encoding using only
-$\rightarrow$ and Type Variables. Adding Record Types
-(\S\ref{sec:product_type}) to Simply-typed $\lambda$-calculus allows
-for Subtyping (\S\ref{sec:subtype}), and the resulting System
-(\S\ref{sec:conjunctive_lambda}) is no longer ``Simply-typed'' because
-it allows for Terms to have more than one Type.
-
-The following extensions are still considered ``Simply-typed''
-systems:
-\begin{itemize}
-  \item System T (\S\ref{sec:system_t}): Products, Coproducts, Natural
-    Numbers
-  \item PCF (\S\ref{sec:pcf}): Full Recursion
-\end{itemize}
-
-Simply-typed $\lambda$-calculus has the same Equational Theory of
-$\beta\eta$-equivalence (\S\ref{sec:beta_reduction},
-\S\ref{sec:eta_conversion}) as Untyped $\lambda$-calculus, subject to
-Type restrictions.
-
-$\beta$-reduction:
-\[
-  (\lambda x:s.t)u =_\beta t[x := u]
-\]
-holds in Context $\Gamma$ when $\Gamma$, $x:\sigma \rightarrow t:\tau$
-and $\Gamma \vdash u:\sigma$.
-
-$\eta$-reduction:
-\[
-  \lambda x:\sigma .t x =_\eta t
-\]
-holds when $\Gamma \vdash t : \sigma \rightarrow \tau$ and $x$ is not
-Free in $t$.
-
-With the Function Type Constructor $\rightarrow$ and the Base Types
-$B$, the Types of a Simply-typed $\lambda$-calculus are defined (with
-BNF Notation):
-\[
-  \tau ::= \tau \rightarrow \tau \;|\; T \in B
-\]
-
-\emph{Term Constant}
-
-That is, Expressions of Simply-typed $\lambda$-calculus are defined
-as:
-\[
-  e ::= x \;|\; \lambda x:t.e \;|\; e e \;|\; c
-\]
-where $x$ is a Variable and $\tau$ is a Type, and $c$ is a Term
-Constant. These Expressions are, in order:
-\begin{itemize}
-  \item Variable Reference
-  \item Abstraction
-  \item Application
-  \item Constant
+  \item Linear Type Systems (\S\ref{sec:linear_type}): Allow Exchange,
+    not Weakening or Contraction; Every Variable used exactly once
+  \item Affine Type Systems (\S\ref{sec:affine_type}): Allow Exchange
+    and Weakening, not Contraction; Every occurrence of a Variable
+    used at most once
+  \item Relevant Type System (\S\ref{sec:relevant_type}): Allow
+    Exchange and Contraction, not Weakening; Every variable used at
+    least once
+  \item Ordered Type System (\S\ref{sec:ordered_type}): Disallow
+    Exchange, Contraction and Weakening; Every Variable is used
+    Exactly once in the order it was introduced
 \end{itemize}
 
-Abstraction corresponds to Existential Quantification in Second-order
-Logic (\S\ref{sec:secondorder_logic}).
+
+
+\subsubsection{Linear Type System}\label{sec:linear_type}
+
+Values used exactly once
+
+Linear Logic (\S\ref{sec:linear_logic}) allows safe Deallocation
+(Objects used exactly once)
+
+Distribution and Concurrency (Session Types \S\ref{sec:session_type})
+
+Linear $\lambda$-calculus (\S\ref{sec:linear_lambda})
+
+Internal Language (\S\ref{sec:internal_logic}) of Closed Symmetric
+Monoidal Categories (\S\ref{sec:closed_symmetric_monoidal})
+
+Allows References but not Aliases
+
+Modelling of Heap-based Memory Allocation
+
+No-cloning Theorem (Quantum States):
+\begin{itemize}
+  \item No Diagonal Functor (\S\ref{sec:diagonal_functor})
+    which could duplicate States
+  \item No $K$-combinator which can destroy States
+  \item A Variable $x$ can appear at most once in a $\lambda$-term
+\end{itemize}
 
 
 
-\textbf{Intrinsic Interpretation}: \emph{Church-style}
+\paragraph{Affine Type System}\label{sec:affine_type}
+\hfill \\
 
-* Only Well-typed Terms have Meaning (Meaning assigned to Typing
-Derivations), therefore equivalent Terms having different Annotations
-may have different Meanings, cf. Reification
-(\S\ref{sec:reification}):
+Values used at most once
 
-
-
-\textbf{Extrinsic Interpretation}: \emph{Curry-style}
-
-* Terms Interpreted as in an Untyped Language, cf. Type Erasure
-(\S\ref{sec:type_erasure})
+Affine Logic (\S\ref{sec:affine_logic})
 
 
 
-\subsubsection{Simply-typed $\lambda$-calculus Typing Rules}
-\label{sec:simplytyped_rules}
+\paragraph{Session Type}\label{sec:session_type}
+\hfill \\
 
-Typing Rules (\S\ref{sec:typing_rule}):
+\emph{Session Types} are a Typing Discipline (\S\ref{sec:type_system})
+for Heterogenous Bidirectional Communication Channels defining the
+possible Sequences of Messages (\S\ref{sec:message}) determined by the
+Channel's Session Type (e.g. Stream-based Internet Protocols)
+\cite{neubauer-thiemann04}
+
+Message Sequences are Described by a Regular Language
+(\S\ref{sec:regular_language}) on Atomic Communication Actions
+(\S\ref{sec:communication}); Channel Type (\S\ref{sec:channel_type})
+specifies the Language with a Fix-point Expression ($\mu$). Operations
+peel off the ``outermost'' Action (???) of the Channel Type and change
+the Channel Type (Linearity). \cite{neubauer-thiemann04}
+
+Implementation requirements: \cite{neubauer-thiemann04}
+\begin{itemize}
+  \item Type Constraints (Type Classes \S\ref{sec:constrained_type})
+    with Functional Dependencies (\S\ref{sec:functional_dependency}):
+    modelling the progression of the current state of the Channel
+  \item Functions with Polymorphic Parameters
+    (\S\ref{sec:parametric_polymorphism}): models Client and Server
+    side of a Communication with one specification
+\end{itemize}
+
+Static Analysis of the Communication Behavior (???) of Agents (???) in
+a Distributed System \cite{gay-vasconcelos10}
+
+(Communication) Protocol
+
+Distribution and Concurrency
+
+$\parr$
+
+$\otimes$
+
+Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi
+(\S\ref{sec:process_calculus}):
+\begin{itemize}
+  \item Propositions as Session Types
+  \item Proofs as Processes (\S\ref{sec:process})
+  \item Cut-elimination (\S\ref{sec:cut_elimination}) as Communication
+    (\S\ref{sec:communication})
+\end{itemize}
+
+Linear Propositions (\S\ref{sec:linear_logic})
+
+Dual Intuitionistic Linear Logic \cite{caires-pfenning10} (Shared ???,
+Linear)
+
+% FIXME ???
+Session: a ``unit'' of a Communication
+
+Session Type: ``structure'' of a Communication
+
+Only Processes with Dual Protocols can Interact
+
+Cotype
+
+
+\cite{honda-vasconcelos-kubo98}:
+
+Session: a Sequence of Dyadic Interactions
+
+Program: a Collection of Dyadic Interactions in a Session \emph{or} a
+Process with no Free Variables % FIXME
+
+Channel: Private Port Designating a Session (cf. Information Theory
+\S\ref{sec:channel} Channels)
+
+Session Protocol (\S\ref{sec:session_protocol})
+
+
+\cite{neubauer-thiemann04}:
 \begin{enumerate}
-\item
-  \[
-    {
-      \frac
-      {x : \tau \in \Gamma}
-      {\Gamma \vdash x : \tau}
-    }
-  \]
-\item
-  \[
-    {
-      \frac
-      {c \;\text{is a constant of Base Type}\; T}
-      {\Gamma \vdash c:T}
-    }
-  \]
-\item
-  \[
-    {
-      \frac
-      {\Gamma, x:\sigma \vdash e:\tau}
-      {\Gamma \vdash (\lambda x:\sigma.e):(\sigma \rightarrow \tau)}
-    }
-  \]
-\item
-  \[
-    {
-      \frac
-      {\Gamma \vdash e_1:\sigma \rightarrow \tau \quad
-        \Gamma \vdash e_2:\sigma}
-      {\Gamma \vdash e_1 e_2 : \tau}
-    }
-  \]
+  \item First-order Base Type Values
+  \item Functions
+  \item Labels (cf. Labels in Record (\S\ref{sec:product_type}) or
+    Variant Types (\S\ref{sec:sum_type})
 \end{enumerate}
 
 
+\textbf{Primitives}
 
-\textbf{Operational Semantics}
-
-\textbf{Categorical Semantics}
-
-Simply-typed $\lambda$-calculus is the Internal Language
-(\S\ref{sec:internal_logic}) of the Cartesian Closed Categories
-(\S\ref{sec:cartesian_closed}).
-
-
-
-\textbf{Proof-theoretic Semantics}
-
-Simply-typed $\lambda$-calculus is Isomorphic by Curry-Howard
-(\S\ref{sec:curry_howard}) to Minimal Logic
-(\S\ref{sec:minimal_logic}):
 \begin{itemize}
-  \item Terms correspond to Proofs in Natural Deduction
-    (\S\ref{sec:natural_deduction})
-  \item (Inhabited) Types correspond to Tautologies in Minimal Logic
+  \item \emph{Send}
+  \item \emph{Receive}
+  \item \emph{Sequence}
+  \item \emph{Choice}
+  \item \emph{Recursion}
 \end{itemize}
 
 
 
-Minimal Logic $\leftrightarrow$ Simply-typed $\lambda$-calculus:
-\[
-  \supset \leftrightarrow \rightarrow
-\] \[
-  \wedge \leftrightarrow \times
-\] \[
-  \vee \leftrightarrow +
-\] \[
-  False \leftrightarrow \bot
-\]
+\paragraph{Channel Type}\label{sec:channel_type}
+
+\subparagraph{Label}\label{sec:channel_label}
 
 
 
-\emph{Type Assignment}:
-\[
-  \frac{
-    f:A \rightarrow B \quad x:A
-  }{
-    f x : B
-  }(\rightarrow e)
-\]\[
-  \frac{
-    x:A \quad y:B
-  }{
-    \lambda x.y : A \rightarrow B
-  }(\rightarrow i)
-\]
+\subsubsection{Relevant Type System}\label{sec:relevant_type}
+
+Relevant Logic (\S\ref{sec:relevance_logic})
 
 
 
-\subsubsection{System T}\label{sec:system_t}
+\subsubsection{Ordered Type System}\label{sec:ordered_type}
 
-G\"odel
+Noncommutative Logic (\S\ref{sec:noncommutative_logic})
 
-Proof Interpretation of Heyting Arithmetic into a Finite-type
-Extension of Primitive Recursive Arithmetic
-(\S\ref{sec:primitive_recursive})
+modelling Stack-based Memory Allocation
 
-All Recursive Functions in Peano Arithmetic are definable
-
-
-
-\subsubsection{PCF}\label{sec:pcf}
-
-\emph{Programming Computable Functions}
-
-extended version of Typed Lambda Calculus (\S\ref{sec:typed_lambda})
-
-Geometry of Interaction (\S\ref{sec:interaction_geometry})
-
-Denotational Semantics (\S\ref{sec:denotational_semantics}):
-\emph{Scott Model}
-
-Scott-continuous Function (\S\ref{sec:scott_continuity})
-
-
-
-\subsubsection{Reflexive Domain}\label{sec:reflexive_domain}
-
-Dana Scott % FIXME
+only Objects on top of modelled Stack may be used, after which it is
+popped off
 
 
 
 % --------------------------------------------------------------------
-\subsection{$\lambda$-calculus with Conjunctive Types}
-\label{sec:conjunctive_lambda}
+\subsection{Hindley-Milner Type System}\label{sec:hindley_milner}
 % --------------------------------------------------------------------
 
-Subtyping (\S\ref{sec:subtype})
+$\lambda$-calculus with Parametric Polymorphism
 
-System $F_{<:}$ (\S\ref{sec:system_fsub})
 
 
-
-% --------------------------------------------------------------------
-\subsection{Simply-typed $\lambda$-calculus with Type Operators}
-\label{sec:simplytyped_operators}
-% --------------------------------------------------------------------
-
-$\lambda\underline{\omega}$
-
-Types depending on Types
-
-System F$_\omega$ (\S\ref{sec:system_fomega})
-
-
-
-% --------------------------------------------------------------------
-\subsection{System F}\label{sec:system_f}
-% --------------------------------------------------------------------
-
-\emph{System F} (or \emph{Second-order $\lambda$-calculus})
-
-(\emph{Girard-Reynolds}) \emph{Polymorphic $\lambda$-calculus})
-
-Universal Quantification over all Types (cf. Existential Type Theory
-\S\ref{sec:abstract_type}) %FIXME
-
-By Curry-Howard Isomorphism, System F corresponds to the fragment of
-Second-order Intuitionistic Logic using only Universal Quantification;
-can describe all Functions that are Provably Total in Second-order
-Logic (\S\ref{sec:secondorder_logic})
-
-Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
-Type-level Function Abstraction $\Lambda$
-
-Quantification over Propositional Variables in Second-order Logic
-corresponds to Type Abstraction in Second-order $\lambda$-calculus.
-\cite{wadler14}
-
-
-
-\subsubsection{System F$_{<:}$}\label{sec:system_fsub}
-
-\subsubsection{System F$_\omega$}\label{sec:system_fomega}
-
-
-
-% --------------------------------------------------------------------
-\subsection{LF Logical Framework}
-\label{sec:logical_framework}
-% --------------------------------------------------------------------
-
-Dependent Types (\S\ref{sec:dependent_type})
-
-Dependently-typed $\lambda$-calculus is base of Intuitionistic Type
-Theory (\S\ref{sec:intuitionistic_type}), Calculus of Constructions
-(\S\ref{sec:coq})
-
-By Curry-Howard Isomorphism Dependent Types correspond to Propositions
-of First-order Predicate Logic (\S\ref{sec:firstorder_logic})
-
-Dependently-typed $\lambda$-calculus with a Type of all Types (the
-simplest Pure Type System \S\ref{sec:pure_type_system}) is not
-Strongly Normalizing due to Girard's Paradox
-(\S\ref{sec:girards_paradox})
-
-Contextual Category (\S\ref{sec:contextual_category})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Linear $\lambda$-calculus}\label{sec:linear_lambda}
-% --------------------------------------------------------------------
-
-Linear Type System (\S\ref{sec:linear_type})
-
-
-
-\subsubsection{Good Variation}\label{sec:good_variation}
-\cite{wadler12}
-
-Gay-Vasconcelos 2010 (Semantics: Asynchronous Buffered
-Communication) %FIXME
-
-Linear Functional Language for Session Types
-
-Session Types $\subset$ Types
-
-\fist See \emph{Classical Processes} (CP
-\S\ref{sec:classical_processes}) for a Session-typed $\pi$-calculus
-Translation
-
-No Deadlock
-
-Extensions:
-\begin{itemize}
-  \item $Mix$ (Girard):
-\[
-  \frac{P \vdash \Gamma \quad Q \vdash \Delta}
-  {P | Q \vdash \Gamma, \Delta} (Mix)
-\]
-    No Channels in Common between $P$ and $Q$ (rather than one Channel
-    in common as in $Cut$); Equivalent to Provability of the
-    Proposition:
-\[
-  A \otimes B \multimap A \parr B
-\]
-    Still no Deadlock but allows Independent Concurrent Components.
-  \item $BiCut$ (\cite{abramsky-gay-nagarajan96}; special case of
-    $MultiCut$):
-\[
-  \frac{P \vdash \Gamma, x:A, y:B \quad
-    Q \vdash \Delta, x:A^\bot, y:B^\bot}
-  {\nu x:A.y:B.(P|Q) \vdash \Gamma, \Delta} (BiCut)
-\]
-    Two Channels in common between $P$ and $Q$ (rather than one
-    Channel in common as in $Cut$); Equivalent to Provability of the
-    Proposition:
-\[
-  A \parr B \multimap A \otimes B
-\]
-    Allows for systems where Communication forms a loop and may
-    Deadlock
-\end{itemize}
-
-Systems with both $Mix$ and $BiCut$ are Compact: from either of $A
-\otimes B$ and $A \parr B$ one may derive the other;
-Compact Linear Systems (\S\ref{sec:compact_linear_system}),
-Interaction Categories (\S\ref{sec:interaction_category})
-
-\emph{Types}:
-\begin{flalign*}
-  \quad T,U,V &::= S \;|\; T \otimes U \;|\; T \multimap U
-    \;|\; T \rightarrow U \;|\; Unit &
-\end{flalign*}
-
-$S$ -- (Linear) Session Type
-
-$T \otimes U$ -- (Linear) Tensor Product
-
-$T \multimap U$ -- (Linear) Function
-
-$T \rightarrow U$ -- (Unlimited) Function
-
-$Unit$ -- (Unlimited) Unit
-
-\emph{Unlimited Types} support Weakening and Contraction,
-\emph{Linear Types} do not
-
-Unlimited Types correspond to Types written with $!$ in CP
-(\S\ref{sec:classical_processes})
-
-\emph{Session Types}:
-\begin{flalign*}
-  \quad S &::= \;!T.S \;|\; ?T.S \;|\; \oplus\{l_i:S_i\}_{i \in I}
-    \;|\; \&\{l_i:S_i\}_{i \in I} \;|\; end_! \;|\; end_? &
-\end{flalign*}
-
-$!T.S$ -- Output Value of Type $T$ then Behave as $S$
-
-$?T.S$ -- Input Value of Type $T$ then Behave as $S$
-
-$\oplus\{l_i:S_i\}_{i \in I}$ -- Select from Behaviors $S_i$ with
-Label $l_i$
-
-$\&\{l_i:S_i\}_{i \in I}$ -- Offer Choice of Behaviors $S_i$ with
-Label $l_i$
-
-$end_!$ -- Terminator for use with Output
-
-$end_?$ -- Terminator for use with Input
-
-
-Session Type Duals:
-\begin{align*}
-  \overline{!T.S} &= ?T.\overline{S} \\
-  \overline{?T.S} &= !T.\overline{S} \\
-  \overline{\oplus\{l_i:S_i\}_{i \in I}} &=
-    \&\{l_i:\overline{S_i}\}_{i \in I} \\
-  \overline{\&\{l_i:S_i\}_{i \in I}} &=
-    \oplus\{l_i:\overline{S_i}\}_{i \in I} \\
-  \overline{end_!} &= end_? \\
-  \overline{end_?} &= end_!
-\end{align*}
-
-$\overline{\overline{S}} = S$
-
-Duality on Session Types in GV leaves the Types of Sent and Received
-Values unchanged, i.e.:
-\begin{align*}
-  \overline{!T.S} &= ?T.\overline{S} \\
-  \overline{?T.S} &= !T.\overline{S}
-\end{align*}
-
-
-\emph{Environments} $\Phi, \Psi$ associating Values to Types
-
-$un(\Phi)$ -- Each Type in $\Phi$ is Unlimited
-
-
-\emph{Terms}:
-\begin{flalign*}
-  \quad L,M,N &::= x \;|\; \mono{unit} \;|\; \lambda x.N \;|\; L M
-    \;|\; (M,N) \;|\; \mono{let}\; (x,y) = M \;\mono{in}\; N & \\
-    & \;|\; \mono{send}\; M N \;|\; \mono{receive}\; M
-    \;|\; \mono{select}\; l M
-    \;|\; \mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I} & \\
-    & \;|\; \mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N
-    \;|\; \mono{terminate}\; M &
-\end{flalign*}
-
-Linear $\lambda$-calculus:
-
-$x$ -- Identifier
-
-$\mono{unit}$ -- Unit Constant
-
-$\lambda x.N$ -- Function Abstraction
-
-$L M$ -- Function Application
-
-$(M,N)$ -- Pair Construction
-
-$\mono{let}\; (x,y) = M \;\mono{in}\; N$
-
-Communication on a Channel:
-
-$\mono{send}\; M N$ -- Send Value $M$ on Channel $N$
-
-$\mono{receive}\; M$ -- Receive on Channel $M$
-
-$\mono{select}\; l M$ -- Select Label $l$ on Channel $M$
-
-$\mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I}$ -- Offer Choice
-on Channel $M$
-
-$\mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N$ -- Connect $M$
-to $N$ by Channel $x$
-
-$\mono{terminate}\; M$ -- Terminate Input
-
-
-Type Rules
-
-Function Abstraction may produce an Unlimited Function if and only if
-all of its Free Variables are of Unlimited Type.
-
-Each Term is not required to have a Unique Type, e.g. a
-$\lambda$-expression where all Free Variables have Unlimited Type may
-be given either a Linear or Unlimited Function Type.
-
-Possibly Subtyping could be added to arrange for giving each Term a
-Unique Smallest Type.
-
-
-\asterism
-
-
-\emph{Output} -- $\mono{send}\; M N$: \\
-Outputs the Value $M$ of Type $T$ on Channel $N$ of Session Type
-$!T.S$ \\
-Returns the updated Channel after which the Output has Session Type
-$S$
-
-\emph{Input} -- $\mono{receive}\; M$: \\
-Inputs a Value from Channel $M$ of Session Type $?T.S$ \\
-Returns a (Linear) Pair of the Input Value of Type $T$ and the updated
-Channel after which the Input has Session Type $S$
-
-\emph{New Channel} ($Connect$) -- $\mono{with}\; x \;\mono{connect}\;
-M \;\mono{to}\; N$ \\
-Creates a new Channel $x$ with Session Type $S$ where $x$ is used at
-Type $S$ in Term $M$ and Dual Type $\overline{S}$ in Term $N$ \\
-$M$ and $N$ are Evaluated Concurrently \\
-Left Subterm returns exhausted Channel of Type $end_!$ %FIXME
-
-\emph{Terminate Channel} ($Terminate$) -- $\mono{terminate}\; M$: \\
-Evaluates Term $M$ which Returns a Pair of an Exhausted Channel of
-Type $end_?$ and a Value of Type $T$ \\
-Deallocates the Channel and Returns the Value
-
-Constructs for $Connect$ and $Terminate$ Deallocate two ends of a
-Channel between them.
-
-Alternative designs %FIXME
-
-
-\asterism
-
-
-\textbf{Translation of GV into CP}
-
-CP (\S\ref{sec:classical_processes})
-
-Translation of Session Types:
-\begin{align*}
-  \llbracket !T.S \rrbracket &=
-    \llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket \\
-  \llbracket ?T.S \rrbracket &=
-    \llbracket T \rrbracket \otimes \llbracket S \rrbracket \\
-  \llbracket \oplus \{l_i : S_i\}_{i \in I} \rrbracket &=
-    \llbracket S_1 \rrbracket \& \cdots \& \llbracket S_n \rrbracket,
-    \quad I = \{1,\ldots,n\} \\
-  \llbracket \& \{l_i : S_i\}_{i \in I} \rrbracket &=
-    \llbracket S_1 \rrbracket \oplus \cdots \oplus
-    \llbracket S_n \rrbracket, \quad I = \{1,\ldots,n\} \\
-  \llbracket end_! \rrbracket &= \bot \\
-  \llbracket end_? \rrbracket &= 1
-\end{align*}
-
-\fist Note that Input/Output are translated into their Duals. This is
-explained by Send and Receive in GV taking Channels as
-\emph{Arguments}, while in the Interpretations in CP Channels are
-\emph{Results}.
-\begin{itemize}
-  \item \emph{Send}: takes a Value and a Channel and Sends the Value
-    on that Channel (the Channel must \emph{Input} the Value)
-  \item \emph{Receive}: takes a Channel and Returns a Value (the
-    Channel must \emph{Output} the Value)
-\end{itemize}
-Since Duality on Session Types in GV leaves Types of Sent and Received
-Values unchanged, the Translation of these Operations takes the Dual
-of the Sent Value, but not the Received Value, i.e.:
-\begin{align*}
-  \llbracket !T.S \rrbracket &=
-    \llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket \\
-  \llbracket ?T.S \rrbracket &=
-    \llbracket T \rrbracket \otimes \llbracket S \rrbracket
-\end{align*}
-and following the equality in Linear Logic, $A \multimap B = A^\bot
-\parr B$, $\llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket$
-could alternatively be written $\llbracket T \rrbracket \multimap
-\llbracket S \rrbracket$.
-
-Translation Preserves Duality:
-\[
-  \llbracket \overline{S} \rrbracket = \llbracket S \rrbracket^\bot
-\]
-
-Translation of Types:
-\begin{align*}
-  \llbracket T \multimap U \rrbracket &=
-    \llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket \\
-  \llbracket T \rightarrow U \rrbracket &=
-    \;!(\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket) \\
-  \llbracket T \otimes U \rrbracket &=
-    \llbracket T \rrbracket \otimes \llbracket U \rrbracket \\
-  \llbracket Unit \rrbracket &= \;!\top
-\end{align*}
-
-$\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket$ could
-alternatively be written:
-\[
-  \llbracket T \rrbracket \multimap \llbracket U \rrbracket
-\]
-
-$!(\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket)$ could
-alternatively be written:
-\[
-  !(\llbracket T \rrbracket \multimap \llbracket U \rrbracket)
-\]
-
-$!T$ could alternatively be written $1$ (Unit for $\otimes$)
-
-This Translation follows the Call-by-value Translation of Classical
-Linear Logic (\S\ref{sec:classical_linear_logic})
-
-Translation of Terms:
-
-Linear $\lambda$ Terms:
-\begin{itemize}
-  \item Variable Translates to an $Axiom$
-  \item $Weaken$ and $Contract$ Translate to $Weaken$ and $Contract$
-  \item Function Abstraction and Product Deconstruction Translate to
-    Input
-  \item Function Application and Product Construction Translate to
-    Output
-  \item Translation of Elimination Rules ($\multimap-E$,
-    $\rightarrow-E$, $\times-E$) require use of $Cut$
-\end{itemize}
-
-Communication Operation Terms:
-\begin{itemize}
-  \item Send: Output Operation $x[y].(P|Q)$
-  \item Select: Select Operation $x[in_j].P$
-  \item Case: Choice Operation $\mono{case}(Q_1, \ldots, Q_n)$
-  \item $end_!$ in Connect: Empty Output $y[].0$
-  \item Terminate: Empty Input $x().P$
-  \item Receive (Trivial): $x(y).R$ (???)
-  \item Connect: $Cut$ corresponds to introducing a Channel for
-    Communication between two Subterms
-\end{itemize}
-Each of these Communication Translations involve a $Cut$ corresponding
-to Communication with given Channel.
-
-Term $M$ of Type $T$ is Translated $\llbracket M \rrbracket_z$ where
-$z$ is a Channel of Type $\llbracket T \rrbracket$ where $\llbracket M
-\rrbracket_z$ Sends the ``Answer'' it Computes on $z$, as expressed by
-the Theorem:
-
-Th. \textbf{Translation Preserves Types}
-
-\[
-  \text{If } \Phi \vdash M : T \text{ then }
-  \llbracket M \rrbracket z \vdash \llbracket \Phi \rrbracket^\bot,
-  z : \llbracket T \rrbracket
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{$\kappa$-calculus}\label{sec:kappa_calculus}
-% --------------------------------------------------------------------
-
-First-order fragment of Typed $\lambda$-calculus
-
-
-
-% --------------------------------------------------------------------
-\subsection{B\"ohm Tree}\label{sec:bohm_tree}
-% --------------------------------------------------------------------
-
-A \emph{B\"ohm Tree} is a Possibly Infinite Directed Acyclic Graph
-where some Vertices are Labelled by $\lambda$-terms and all Vertices
-besides the Root have exactly one Parent, every Vertex has a finite
-number of Children, and every Unlabelled Vertex has no Children.
-
-
-
-% ====================================================================
-\section{Calculus of Constructions}\label{sec:coq}
-% ====================================================================
-
-% ====================================================================
-\section{Pure Type System}\label{sec:pure_type_system}
-% ====================================================================
-
-Arbitrary number of Sorts and Dependencies
-
-Generalization of the \emph{Lambda Cube} to more sorts than Terms and
-Types
-
-Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
-
-Barendregt-Geuvers-Klop Conjecture
-
-
-
-% --------------------------------------------------------------------
-\subsection{Lambda Cube}\label{sec:lambda_cube}
-% --------------------------------------------------------------------
-
-All Strongly Normalizing
-
-$\lambda\rightarrow$: Simply-typed $\lambda$-calculus
-(\S\ref{sec:simply_typed}); Terms depending on Terms (Function Type
-\S\ref{sec:function_type})
-
-$\lambda\underline{\omega}$: Simply-typed $\lambda$-calculus with Type
-Operators (\S\ref{sec:simplytyped_operators}); Types depending on
-Types (Type Functions \S\ref{sec:type_function})
-
-$\lambda2$: Second-order $\lambda$-calculus (System F
-\S\ref{sec:system_f}); Terms depending on Types (Parametric
-Polymorphism \S\ref{sec:parametric_polymorphism})
-
-$\lambda\Pi$: Dependently-typed $\lambda$-calculus (Logical Framework
-\S\ref{sec:logical_framework}); Types depending on Terms (Dependent
-Types \S\ref{sec:dependent_type})
-
-
-
-% ====================================================================
-\section{Intuitionistic Type Theory}\label{sec:intuitionistic_type}
-\cite{martinlof84}
-% ====================================================================
-
-\emph{Intuitionistic Type Theory} (also \emph{Constructive Type
-  Theory} or \emph{Martin-L\"of Type Theory})
-
-Inductive Types (\S\ref{sec:inductive_type})
-
-Modelled by Locally Cartesian Closed Category
-(\S\ref{sec:locally_cartesian})
-
-Extensional Martin-L\"of Type Theory: Internal Language
-(\S\ref{sec:internal_logic}) for Cartesian Closed Quasi-categories
-(\S\ref{sec:quasicategory})
-
-Formation: the Context in which the Type is defined
-
-Introduction: rules for Construction
-
-Elimination: rules for De-construction
-
-Computation:
-
-Four forms of Judgements:
-\begin{description}
-  \item [Well-formed Type]: $A$ is a Set, $A$ is a Proposition, $A$ is
-    an Expectation, $A$ is a Task; Types (encodes Syntax of Formulas
-    ``A is a Proposition''; note some Formulas are only Well-formed if
-    certain Judgements are Derivable \cite{thompson99}):
-    \[
-      A \text{ type}
-    \]
-  \item [Equality of Types]: $A$ and $B$ are Equal Sets:
-    \[
-      A \equiv B \text{ type}
-    \]
-  \item [Well-formed Term of Type]: $a$ is an Element of $A$, $a$ is a
-    Proof of $A$, $a$ is a Realization of $A$, $a$ is a Method for
-    doing $A$:
-    \[
-      a : A
-    \]
-  \item [Equality of Terms]: $a$ and $b$ are Equal Elements of Set $A$:
-    \[
-      a \equiv b : A
-    \]
-\end{description}
-
-Dependent Type (\S\ref{sec:dependent_type}):
-\[
-  (x:A)B
-\]
-Removal of Dependency by Substitution:
-\[
-  [x/a]B
-\]
-Abstracted Object:
-\[
-  [x]b
-\]
-Removal of Abstration on Object:
-\[
-  b[x/a]
-\]
-Well-formed Context of Typing Assumptions
-(\S\ref{sec:typing_assumption}):
-\[
-  \vdash \Gamma \textsf{ Context}
-\]
-Context (\S\ref{sec:type_context}) Judgements:
-\begin {itemize}
-\item Well-formed Type $\sigma$:
-  \[
-    \Gamma \vdash \sigma \mathsf{ Type}
-  \]
-\item Well-formed Term $t$ of Type $\sigma$:
-  \[
-    \Gamma \vdash t : \sigma
-  \]
-\item Type Equivalence:
-  \[
-    \Gamma \vdash \sigma \equiv \tau
-  \]
-\item Term Equivalence:
-  \[
-    \Gamma \vdash t \equiv u : \sigma
-  \]
-\end {itemize}
-\hfill\\
-Type Universe:
-\[
-  \class{U}
-\]
-Dependent Type mapping Objects to Types:
-\[
-  \textrm{El}
-\]
-
-Definitional Equality (\S\ref{sec:proof_equality})
-
-Structural Rules (\S\ref{sec:structural_rule})
-
-
-
-\hfill \\
-\textbf{Identity Types} (\S\ref{sec:equality_type})
-\\
-Identity Type Introduction:
-\[
-  \frac{
-    \Gamma \vdash m : A
-  }{
-    \Gamma \vdash refl_A(m) : Id_A(m,m)
-  } (Id_A\text{-I})
-\]
-Identity Type Elimination:
-\[
-  \frac{
-    \Gamma \vdash p : Id_A (m,n) \quad
-    \Gamma, x:A, y:A, z : Id_A(x,y) \vdash C_{x,y,z} \text{ type}\quad
-    \Gamma, x : A \vdash q : [x, x, refl_A(x)/x,y,z]C
-  }{
-    \Gamma \vdash refl_A(m) : Id_A(m,m)
-  } (Id_A\text{-E})
-\]
-\hfill \\
-\textbf{Dependent Product Types} (\S\ref{sec:pi_type})
-\\
-Logical Implication and Universal Quantification
-\\
-Dependent Product Formation:
-\[
-  \frac{
-    \Gamma \vdash A \text{ type} \quad
-    \Gamma, x:A \vdash B \text{ type}
-  }{
-    \Gamma \vdash \Pi_{x:A} B \text{ type}
-  } (\Pi\text{-F})
-\]
-Dependent Product Introduction:
-\[
-  \frac{
-    \Gamma, x : A \vdash m_x : B_x \quad
-  }{
-    \Gamma \vdash (\lambda x:A.m_x : B_x) : \Pi_{x:A} B
-  } (\Pi\text{-I})
-\]
-Dependent Product Elimination:
-\[
-  \frac{
-    \Gamma \vdash m : \Pi_{x:A} B \quad
-    \Gamma \vdash n : A
-  }{
-    \Gamma \vdash m\;n : [n/x]B
-  } (\Pi\text{-E})
-\]
-Dependent Product Computation (cf. $\beta$-reduction
-\S\ref{sec:beta_reduction}):
-\[
-  \frac{
-    \Gamma \vdash A \text{ type} \quad
-    \Gamma , x : A \vdash m : B
-  }{
-    \Gamma \vdash (\lambda x : A.m)\;n \equiv [n/x]m : [n/x]B
-  } (\Pi\text{-C})
-\]
-
-
-\hfill \\
-\textbf{Dependent Sum Types} (\S\ref{sec:sigma_type})
-\\
-Logical Conjunction and Existential Quantification
-\\
-Dependent Sum Formation:
-\[
-  \frac{
-    \Gamma \vdash A \text{ type} \quad
-    \Gamma, x : A \vdash B_x \text{ type}
-  }{
-    \Gamma \vdash \Sigma_{x:A} B_x \text{ type}
-  } (\Sigma\text{-F})
-\]
-Dependent Sum Introduction:
-\[
-  \frac{
-    \Gamma \vdash m : A \quad
-    \Gamma \vdash n : [m/x]B
-  }{
-    \Gamma \vdash (m,n) : \Sigma_{x:A} B_x
-  } (\Sigma\text{-I})
-\]
-Dependent Sum Elimination 1:
-\[
-  \frac{
-    \Gamma \vdash m : \Sigma_{x:A} B_x
-  }{
-    \Gamma \vdash \pi_1\;m : A
-  } (\Sigma\text{-E$_1$})
-\]
-Dependent Sum Elimination 2:
-\[
-  \frac{
-    \Gamma \vdash m : \Sigma_{x:A} B_x
-  }{
-    \Gamma \vdash \pi_2\;m : B[\pi_1\;m/x]
-  } (\Sigma\text{-E$_2$})
-\]
-\hfill \\
-\textbf{Binary Sum Types} (\S\ref{sec:sum_type})
-\\
-Disjunction
-\\
-Binary Sum Introduction 1:
-\[
-  \frac{
-    \Gamma \vdash m : A
-  }{
-    \Gamma \vdash inl(m) : A + B
-  } (+\text{-I}_1)
-\]
-Binary Sum Introduction 2:
-\[
-  \frac{
-    \Gamma \vdash n : B
-  }{
-    \Gamma \vdash inr(n) : A + B
-  } (+\text{-I}_2)
-\]
-Binary Sum Elimination:
-\[
-  \frac{
-    \Gamma \vdash m : A + B \quad
-    \Gamma, z : A + B \vdash C \text{ type} \quad
-    \Gamma, x : A \vdash n : [inl(x)/z]C \quad
-    \Gamma, y : B \vdash p : [inr(y)/z]C
-  }{
-    \Gamma \vdash case (m, x\;n, y\;p) : [m/z]C
-  } (+\text{-E})
-\]
-
-
-
-Categorical Model, ``Category with Families'':
-
-\begin{itemize}
-  \item Category $\mathsf{C}$ of Contexts: Objects are Contexts,
-    Morphisms are Substitutions
-  \item Functor $T : \mathsf{C}^{op} \rightarrow \mathbf{Fam(Set)}$
-    where $\mathbf{Fam(Set)}$ is the Category of Families
-    (\S\ref{sec:family}) of Sets where Objects are Pairs $(A,B)$ of an
-    Index Set $A$ and a Function $B: X \rightarrow A$ and Morphisms
-    are Pairs of Functions $f: A \rightarrow A$ and $g: X \rightarrow
-    X'$ such that $B' \circ g = f \circ B$, i.e. $f$ maps $B_a$ to
-    $B'_{g(a)}$
-\end{itemize}
-
-The Functor $T$ assigns a Context $\Gamma$ to a Set of Types
-$Ty(\Gamma)$, and for each $A : Ty(\Gamma)$ a Set of Terms
-$Tm(\Gamma,A)$.
-
-The Empty Context is the Terminal Object of $\mathsf{C}$.
-
-Final Object for \emph{Comprehension} (or \emph{Context Extension}) % FIXME
-
-
-
-\textbf{Alternate description}\cite{bastenhof09}
-
-Language $L$:
-\begin{enumerate}
-  \item $1$ (Unity Type), $\Omega$ (Truth Value Type)
-  \item Base Types $\tau_1, \tau_2, \tau_3, \ldots$
-  \item Function Symbols $f, g, h, \ldots$
-\end{enumerate}
-The Types of a System are given by the smallest Set including $1$,
-$\Omega$, and the Base Types closed under $\times$ (Product Types
-\S\ref{sec:product_type}) and Unary Type Operator $P$ (Power Types
-\S\ref{sec:power_type}).
-
-Terms of Type $\Omega$ represent Formulas, e.g. $\tau_1 = \tau_2$.
-
-
-\asterism
-
-
-\textbf{Sum Type} (\S\ref{sec:sum_type}) (Tagged Union)
-
-$A \cup B = \{ a_1, a_2, ..., b_1, b_2, ... \}$
-
-$x \in A \cup B \Rightarrow x \in A \vee x \in B$
-
-$U \subset A \cup B \Rightarrow \forall u \in U, u \in A \vee u \in B \}$
-
-
-\textbf{Product Type} (\S\ref{sec:product_type}) (Pairs)
-
-$A \times B = \{ (a_1,b_1), (a_1,b_2), ..., (a_2,b_1), (a_2,b_2), ... \}$
-
-$(x,y) \in A \times B \Rightarrow x \in A \wedge y \in B$
-
-$U \subset A \times B
-\Rightarrow \forall (u,v) \in U, u \in A \wedge v \in B$
-
-
-\textbf{Powerset} (\S\ref{sec:powerset})
-(Relations \S\ref{sec:binary_relation})
-
-$\pow(A \times B) = \{ \linebreak[1]
-\{(a_1,b_1)\}, \{(a_1,b_2)\}, ...,
-\{(a_2,b_1)\}, \{(a_2,b_2)\}, ...
-\linebreak[1] \vdots \linebreak[1]
-\{(a_1,b_1), (a_1,b_2)\}, \{(a_1,b_1), (a_1,b_3)\}, ...,
-\{(a_2,b_1), (a_2,b_2)\}, \{(a_2,b_1), (a_2,b_3)\}, ...
-\linebreak[1] \vdots \linebreak[1]
-..., A \times B - \{(a_2,b_1), (a_2,b_3)\}, \allowbreak
-A \times B - \{(a_2,b_1), (a_2,b_2)\}, \allowbreak
-..., A \times B - \{(a_1,b_1), (a_1,b_3)\}, \allowbreak
-A \times B - \{(a_1,b_1), (a_1,b_2)\}, \allowbreak
-\linebreak[1] \vdots \linebreak[1]
-..., A \times B - \{(a_2,b_2)\}, A \times B - \{(a_2,b_1)\}, \allowbreak
-..., A \times B - \{(a_1,b_2)\}, A \times B - \{(a_1,b_1)\}, \allowbreak
-\linebreak[1] A \times B
-\}$
-
-$A \times B \in \pow(A \times B)$
-
-$U \in \pow(A \times B) \Rightarrow U \subseteq A \times B \allowbreak
-\Rightarrow \forall (u,v) \in U, u \in A \wedge v \in B$
-
-$\class{V} \subset \pow(A \times B)
-\Rightarrow \forall U \in \class{V}, U \subseteq A \times B$
-
-
-\textbf{Function Type} (\S\ref{sec:function_type})
-
-$A \rightarrow B = B^A = \{ \linebreak[1]
-\{ (a_1, b_1), (a_2, b_1), (a_3, b_1), ...\},
-\{ (a_1, b_2), (a_2, b_2), (a_3, b_2), ...\},
-\{ (a_1, b_3), (a_2, b_3), (a_3, b_3), ...\}, ...
-\linebreak[1] \vdots \linebreak[1]
-\{ (a_1, b_2), (a_2, b_1), (a_3, b_1), ...\},
-\{ (a_1, b_1), (a_2, b_2), (a_3, b_1), ...\},
-\{ (a_1, b_1), (a_2, b_1), (a_3, b_2), ...\}, ...
-\linebreak[1] \vdots \linebreak[1]
-\{ (a_1, b_3), (a_2, b_1), (a_3, b_1), ...\},
-\{ (a_1, b_1), (a_2, b_3), (a_3, b_1), ...\},
-\{ (a_1, b_1), (a_2, b_1), (a_3, b_3), ...\},
-\linebreak[1] \vdots \linebreak[1]
-\}$
-
-$B^A \subset \pow(A \times B)$
-
-$f \in B^A
-\Rightarrow f \in \pow(A \times B) \wedge f \neq A \times B \allowbreak
-\Rightarrow f \subset A \times B
-\Rightarrow \forall (x, f(x)) \in f, x \in A \wedge f(x) \in B$
-
-$U \subset B^A \Rightarrow \forall u \in U, u \in \pow(A \times B)$
-
-
-\textbf{Dependent Type} (\S\ref{sec:dependent_type})
-
-$a:A \vdash B(a) = \{(a_1,B(a_1)), (a_2,B(a_2)), ...\}$
-
-$a:A \vdash B(a) \in \class{U}^A \linebreak[1]
-\Rightarrow a:A \vdash B(a) \subset A \times \class{U}$
-
-$(x,X) \in a:A \vdash B(a) \Rightarrow x \in A \wedge X \in \class{U}$
-
-$U \subset a:A \vdash B(a) \Rightarrow \forall (x,X) \in U, x \in A
-\wedge X \in \class{U}$
-
-
-\textbf{Dependent Sum Type} ($\Sigma$-type \S\ref{sec:sigma_type})
-
-$\Sigma_{(a:A)} B(a) = \{\{ (a_1, x_1), (a_1, x_2), ...\},
-\{ (a_2, y_1), (a_2, y_2), ...\}, \cdots \}$
-
-$\Sigma_{(a:A)} B(a) \subset \pow \bigsqcup_{X \in \class{U}} A \times X$
-
-$Z \in \Sigma_{(a:A)} B(a) \Rightarrow \exists x \in A : \forall y \in
-B(x), (x,y) \in P$
-
-
-
-\textbf{Dependent Product Type} ($\Pi$-type \S\ref{sec:pi_type})
-
-$\Pi_{(a:A)} B(a) = \{(a_1, x), (a_2, y), (a_3, z), ...\}$
-
-$\Pi_{(a:A)} B(a) \subset \pow \bigsqcup_{a \in A} \Sigma_{(a:A)} B(a)$
-
-
-\asterism
-
-
-
-% --------------------------------------------------------------------
-\subsection{Constructive Type}\label{sec:constructive_type}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Meaning Explanation}\label{sec:meaning_explanation}
-% --------------------------------------------------------------------
-
-Martin-L\"of, a Proof-theoretic Semantics
-(\S\ref{sec:proof_semantics}) for Type Theory
-
-Realizability Model (\S\ref{sec:realizability_model}) for Type Theory
-
-Intensional Type Theory (\S\ref{sec:intensional_type})
-
-Extensional Type Theory (\S\ref{sec:extensional_type})
-
-Terms $x,y,z,X,Y,Z,\ldots$
-
-$x \Rightarrow y$: $x$ Computes (Reduces, Transitive) to $y$
-
-Predicates:
-\begin{itemize}
-  \item $A \type$
-  \item $a : A$
-  \item $a = b : A$
-\end{itemize}
-
-Induction Recursion (\S\ref{sec:induction_recursion}): $A \type$ by
-Induction (\S\ref{sec:mathematical_induction}) and two Recursive
-Functions:
-\begin{itemize}
-  \item $|A|$ the Collection of Terms of Type $A$
-  \item $=_A$ the Collection of Pairs of Equal Terms of Type $A$
-\end{itemize}
-(each Collection may be defined Inductively)
-
-
-
-% --------------------------------------------------------------------
-\subsection{Extensional Type Theory}\label{sec:extensional_type}
-\cite{harper12}
-% --------------------------------------------------------------------
-
-\emph{Extensional Type Theory} (\emph{ETT})
-
-Strict Equivalence
-
-``Homotopy Set Theory'' (Homotopically Discrete)
-
-\emph{NuPRL}
-
-Equality Reflection Principle
-
-
-
-\subsubsection{Observational Type Theory}\label{sec:observational_type}
-
-``Homotopy Set Theory''
-
-Setoid (\S\ref{sec:setoid})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Intensional Type Theory}\label{sec:intensional_type}
-\cite{harper12}
-% --------------------------------------------------------------------
-
-Weak Equivalence
-
-
-
-% ====================================================================
-\section{Homotopy Type Theory}\label{sec:homotopy_type_theory}
-% ====================================================================
-
-Homotopy Theory (\S\ref{sec:homotopy})
-
-- Function Extensionality
-- Univalence Axiom (\S\ref{sec:univalence_axiom})
-
-- Values (Points), Paths, Homotopies
-
-- Internal Language of Higher Categories
-(\S\ref{sec:higher_category}).
-
-Homotopy Types Model $\infty$-groupoids
-(\S\ref{sec:infinity_groupoid})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Higher Inductive Type}\label{sec:higher_inductive_type}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Inference Rules}\label{sec:homotopy_rules}
-% --------------------------------------------------------------------
-
-Inference Rules (\S\ref{sec:type_inference}) have the form:
-\[
-  \frac{J_1 \quad \cdots \quad J_k} {J} Name
-\]
-where $J_i$ are provided as derived hypothetical (metatheoretical)
-Judgements and $J$ is the conclusion.
-
-A Tree constructed from Inference Rules forms a Derivation
-(\S\ref{sec:typing_derivation}) of a Judgement.
-
-
-
-\textbf{Context Rules}
-
-The following Rules of Inference allow for the determination of a
-Well-formed Context:
-\begin{enumerate}
-\item
-\[
-  {
-    \frac{}{(.)ctx}
-  } ctx-EMP
-\]
-\item
-\[
-  {
-    \frac
-    {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \class{U}_i}
-    {(x_1:A_1,\ldots,x_n:A_n) ctx}
-  } ctx-EXT
-\]
-\end{enumerate}
-
-
-
-\textbf{Structural Rules}
-
-Given a Context, derive Typing Judgements
-(\S\ref{sec:typing_judgement}) listed in the Context:
-\[
-  {
-    \frac
-    {(x_1:A_1, \ldots, x_n:A_n)ctx}
-    {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
-  } Vble
-\]
-
-Substitution for Typing Judgements:
-\[
-  {
-    \frac
-    {\Gamma \vdash a : A \;\;\;\;\;\;\;
-    \Gamma,x:A,\Delta \vdash b : B}
-    {\Gamma,[a/x]\Delta \vdash [a/x]b : [a/x]B}
-  } Subst_1
-\]
-
-Weakening for Typing Judgements:
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
-    \Gamma,\Delta \vdash b : B}
-    {\Gamma,x:A,\Delta \vdash b:B}
-  } Wkg_1
-\]
-
-Substitution for Judgemental Equality:
-\[
-  {
-    \frac
-    {\Gamma \vdash a : A \;\;\;\;\;\;\;
-    \Gamma,x:A,\Delta \vdash b \equiv c : B}
-    {\Gamma,[a/x]\Delta \vdash [a/x]b \equiv [a/x]c : [a/x]B}
-  } Subst_2
-\]
-
-Weakening for Judgemental Equality:
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
-    \Gamma,\Delta \vdash b \equiv c : B}
-    {\Gamma, x:A, \Delta \vdash b \equiv c : B}
-  } Wkg_2
-\]
-
-
-
-\textbf{Universe Rules}
-
-\[
-  {
-    \frac
-    {(\Gamma) ctx}
-    {\Gamma \vdash \class{U}_i : \class{U}_{i+1}}
-  } \class{U}-INTRO
-\]
-
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \class{U}_i}
-    {\Gamma \vdash A : \class{U}_{i+1}}
-  } \class{U}-CUMUL
-\]
-
-
-
-\textbf{Dependent Function Type Rules}
-
-\[
-  {
-    \frac
-    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
-    \Gamma,x:A \vdash B : \class{U}_i}
-    {\Gamma \vdash \prod_{(x:A)} B : \class{U}_i}
-  } \Pi-FORM
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-INTRO
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-ELIM
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-COMP
-\]\[
-  {
-    \frac
-    {}
-    {}
-  } \Pi-UNIQ
-\]
-
-
-
-% --------------------------------------------------------------------
-\subsection{Univalence Axiom}\label{sec:univalence_axiom}
-% --------------------------------------------------------------------
-
-``Identity is Equivalent to Equivalence''
-
-``Equivalent Types are Identical''
-\[
-  (A = B) \simeq (A \simeq B)
-\]
-where $A = B$ is notation for the Type $Id_U(A,B)$ where $U$ is the
-Universe containing $A$ and $B$.
+\subsubsection{Algorithm W}\label{sec:algorithm_w}
 
 
 
@@ -4517,15 +3366,6 @@ Communication \S\ref{sec:communication}
 
 
 % ====================================================================
-\section{Opetopic Type Theory}\label{sec:opetopic_typetheory}
-% ====================================================================
-
-Internal Language of $\infty$-categories
-(\S\ref{sec:infinity_category})
-
-
-
-% ====================================================================
 \section{Curry-Howard Correspondence}\label{sec:curry_howard}
 % ====================================================================
 
@@ -4797,238 +3637,1201 @@ with Property $[a/x]B$, i.e. $[a/x]B$ is Inhabited.
 
 
 % ====================================================================
-\section{Type System}\label{sec:type_system}
+\section{Typed $\lambda$-Calculus}\label{sec:typed_lambda}
 % ====================================================================
 
-\emph{Type System} (or \emph{Typing Discipline})
+\emph{Typed $\lambda$-Calculus} allows for Lambda Terms to be assigned
+Types (\S\ref{sec:type}).
+
+Simply-typed $\lambda$-calculus (\S\ref{sec:simply_typed}) has only
+one Type Constructor (\S\ref{sec:type_constructor}), $\rightarrow$
+(see Function Type \S\ref{sec:function_type}).
+
+Untyped $\lambda$-calculus (\S\ref{sec:untyped_lambda}) may be
+considered a Typed $\lambda$-calculus with only one Type.
+
+Extension to Untyped $\lambda$-calculus may be achieved by
+considering Recursive Types with Recursion in Negative Positions;
+Untyped $\lambda$-calculus can be Modelled by a Solution to the
+Recursion Equation $X \simeq X \rightarrow X$. \cite{wadler12}
+
+A Denotational Semantics can be given by a \emph{B\"ohm Tree}
+(\S\ref{sec:bohm_tree}).
 
 
 
 % --------------------------------------------------------------------
-\subsection{Type Checking}\label{sec:type_checking}
+\subsection{Simply-typed $\lambda$-calculus}\label{sec:simply_typed}
 % --------------------------------------------------------------------
 
-\subsubsection{Bi-directional Type Checking}
-\label{sec:bidirectional_checking}
+\emph{Simply-typed $\lambda$-calculus} ($\lambda^\rightarrow$) is a
+Typed Interpretation of $\lambda$-calculus with one Type Constructor
+for Function Types: $\rightarrow$ (\S\ref{sec:function_type}).
 
-\emph{Checking}
+Strongly Normalizing, not Turing Complete: addition of $fix_\alpha$
+Operator or Recursive Types (\S\ref{sec:recursive_datatype}) gives
+Turing Completeness
 
-\emph{Synthesis}
-
-
-
-\subsubsection{Extended Static Checking}\label{sec:extended_static}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Nominal Type System}\label{sec:nominal_type_system}
-% --------------------------------------------------------------------
-
-Names
-
-
-
-% --------------------------------------------------------------------
-\subsection{Unified Type System}\label{sec:unified_type_system}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Structural Type System}\label{sec:structural_type_system}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Substructural Type System}
-\label{sec:substructural_type_system}
-% --------------------------------------------------------------------
-
-Substructural Logic (\S\ref{sec:substructural_logic})
-
-Substructural Type Systems are categorized by allowing or disallowing
-Structural rules of Exchange (\S\ref{sec:exchange_rule}), Weakening
-(\S\ref{sec:weakening_rule}), or Contraction
-(\S\ref{sec:contraction_rule}):
-
+``Simply-typed'' is to distinguish from extensions such as:
 \begin{itemize}
-  \item Linear Type Systems (\S\ref{sec:linear_type}): Allow Exchange,
-    not Weakening or Contraction; Every Variable used exactly once
-  \item Affine Type Systems (\S\ref{sec:affine_type}): Allow Exchange
-    and Weakening, not Contraction; Every occurrence of a Variable
-    used at most once
-  \item Relevant Type System (\S\ref{sec:relevant_type}): Allow
-    Exchange and Contraction, not Weakening; Every variable used at
-    least once
-  \item Ordered Type System (\S\ref{sec:ordered_type}): Disallow
-    Exchange, Contraction and Weakening; Every Variable is used
-    Exactly once in the order it was introduced
+  \item System F (\S\ref{sec:system_f}): Polymorphic Types
+  \item Logical Framework (\S\ref{sec:logical_framework}): Dependent
+    Types
+\end{itemize}
+because Polymorphism and Dependency cannot be encoding using only
+$\rightarrow$ and Type Variables. Adding Record Types
+(\S\ref{sec:product_type}) to Simply-typed $\lambda$-calculus allows
+for Subtyping (\S\ref{sec:subtype}), and the resulting System
+(\S\ref{sec:conjunctive_lambda}) is no longer ``Simply-typed'' because
+it allows for Terms to have more than one Type.
+
+The following extensions are still considered ``Simply-typed''
+systems:
+\begin{itemize}
+  \item System T (\S\ref{sec:system_t}): Products, Coproducts, Natural
+    Numbers
+  \item PCF (\S\ref{sec:pcf}): Full Recursion
 \end{itemize}
 
+Simply-typed $\lambda$-calculus has the same Equational Theory of
+$\beta\eta$-equivalence (\S\ref{sec:beta_reduction},
+\S\ref{sec:eta_conversion}) as Untyped $\lambda$-calculus, subject to
+Type restrictions.
 
+$\beta$-reduction:
+\[
+  (\lambda x:s.t)u =_\beta t[x := u]
+\]
+holds in Context $\Gamma$ when $\Gamma$, $x:\sigma \rightarrow t:\tau$
+and $\Gamma \vdash u:\sigma$.
 
-\subsubsection{Linear Type System}\label{sec:linear_type}
+$\eta$-reduction:
+\[
+  \lambda x:\sigma .t x =_\eta t
+\]
+holds when $\Gamma \vdash t : \sigma \rightarrow \tau$ and $x$ is not
+Free in $t$.
 
-Values used exactly once
+With the Function Type Constructor $\rightarrow$ and the Base Types
+$B$, the Types of a Simply-typed $\lambda$-calculus are defined (with
+BNF Notation):
+\[
+  \tau ::= \tau \rightarrow \tau \;|\; T \in B
+\]
 
-Linear Logic (\S\ref{sec:linear_logic}) allows safe Deallocation
-(Objects used exactly once)
+\emph{Term Constant}
 
-Distribution and Concurrency (Session Types \S\ref{sec:session_type})
-
-Linear $\lambda$-calculus (\S\ref{sec:linear_lambda})
-
-Internal Language (\S\ref{sec:internal_logic}) of Closed Symmetric
-Monoidal Categories (\S\ref{sec:closed_symmetric_monoidal})
-
-Allows References but not Aliases
-
-Modelling of Heap-based Memory Allocation
-
-No-cloning Theorem (Quantum States):
+That is, Expressions of Simply-typed $\lambda$-calculus are defined
+as:
+\[
+  e ::= x \;|\; \lambda x:t.e \;|\; e e \;|\; c
+\]
+where $x$ is a Variable and $\tau$ is a Type, and $c$ is a Term
+Constant. These Expressions are, in order:
 \begin{itemize}
-  \item No Diagonal Functor (\S\ref{sec:diagonal_functor})
-    which could duplicate States
-  \item No $K$-combinator which can destroy States
-  \item A Variable $x$ can appear at most once in a $\lambda$-term
+  \item Variable Reference
+  \item Abstraction
+  \item Application
+  \item Constant
 \end{itemize}
 
-
-
-\paragraph{Affine Type System}\label{sec:affine_type}
-\hfill \\
-
-Values used at most once
-
-Affine Logic (\S\ref{sec:affine_logic})
+Abstraction corresponds to Existential Quantification in Second-order
+Logic (\S\ref{sec:secondorder_logic}).
 
 
 
-\paragraph{Session Type}\label{sec:session_type}
-\hfill \\
+\textbf{Intrinsic Interpretation}: \emph{Church-style}
 
-\emph{Session Types} are a Typing Discipline (\S\ref{sec:type_system})
-for Heterogenous Bidirectional Communication Channels defining the
-possible Sequences of Messages (\S\ref{sec:message}) determined by the
-Channel's Session Type (e.g. Stream-based Internet Protocols)
-\cite{neubauer-thiemann04}
-
-Message Sequences are Described by a Regular Language
-(\S\ref{sec:regular_language}) on Atomic Communication Actions
-(\S\ref{sec:communication}); Channel Type (\S\ref{sec:channel_type})
-specifies the Language with a Fix-point Expression ($\mu$). Operations
-peel off the ``outermost'' Action (???) of the Channel Type and change
-the Channel Type (Linearity). \cite{neubauer-thiemann04}
-
-Implementation requirements: \cite{neubauer-thiemann04}
-\begin{itemize}
-  \item Type Constraints (Type Classes \S\ref{sec:constrained_type})
-    with Functional Dependencies (\S\ref{sec:functional_dependency}):
-    modelling the progression of the current state of the Channel
-  \item Functions with Polymorphic Parameters
-    (\S\ref{sec:parametric_polymorphism}): models Client and Server
-    side of a Communication with one specification
-\end{itemize}
-
-Static Analysis of the Communication Behavior (???) of Agents (???) in
-a Distributed System \cite{gay-vasconcelos10}
-
-(Communication) Protocol
-
-Distribution and Concurrency
-
-$\parr$
-
-$\otimes$
-
-Curry-Howard (\S\ref{sec:curry_howard}) for Process Calculi
-(\S\ref{sec:process_calculus}):
-\begin{itemize}
-  \item Propositions as Session Types
-  \item Proofs as Processes (\S\ref{sec:process})
-  \item Cut-elimination (\S\ref{sec:cut_elimination}) as Communication
-    (\S\ref{sec:communication})
-\end{itemize}
-
-Linear Propositions (\S\ref{sec:linear_logic})
-
-Dual Intuitionistic Linear Logic \cite{caires-pfenning10} (Shared ???,
-Linear)
-
-% FIXME ???
-Session: a ``unit'' of a Communication
-
-Session Type: ``structure'' of a Communication
-
-Only Processes with Dual Protocols can Interact
-
-Cotype
+* Only Well-typed Terms have Meaning (Meaning assigned to Typing
+Derivations), therefore equivalent Terms having different Annotations
+may have different Meanings, cf. Reification
+(\S\ref{sec:reification}):
 
 
-\cite{honda-vasconcelos-kubo98}:
 
-Session: a Sequence of Dyadic Interactions
+\textbf{Extrinsic Interpretation}: \emph{Curry-style}
 
-Program: a Collection of Dyadic Interactions in a Session \emph{or} a
-Process with no Free Variables % FIXME
-
-Channel: Private Port Designating a Session (cf. Information Theory
-\S\ref{sec:channel} Channels)
-
-Session Protocol (\S\ref{sec:session_protocol})
+* Terms Interpreted as in an Untyped Language, cf. Type Erasure
+(\S\ref{sec:type_erasure})
 
 
-\cite{neubauer-thiemann04}:
+
+\subsubsection{Simply-typed $\lambda$-calculus Typing Rules}
+\label{sec:simplytyped_rules}
+
+Typing Rules (\S\ref{sec:typing_rule}):
 \begin{enumerate}
-  \item First-order Base Type Values
-  \item Functions
-  \item Labels (cf. Labels in Record (\S\ref{sec:product_type}) or
-    Variant Types (\S\ref{sec:sum_type})
+\item
+  \[
+    {
+      \frac
+      {x : \tau \in \Gamma}
+      {\Gamma \vdash x : \tau}
+    }
+  \]
+\item
+  \[
+    {
+      \frac
+      {c \;\text{is a constant of Base Type}\; T}
+      {\Gamma \vdash c:T}
+    }
+  \]
+\item
+  \[
+    {
+      \frac
+      {\Gamma, x:\sigma \vdash e:\tau}
+      {\Gamma \vdash (\lambda x:\sigma.e):(\sigma \rightarrow \tau)}
+    }
+  \]
+\item
+  \[
+    {
+      \frac
+      {\Gamma \vdash e_1:\sigma \rightarrow \tau \quad
+        \Gamma \vdash e_2:\sigma}
+      {\Gamma \vdash e_1 e_2 : \tau}
+    }
+  \]
 \end{enumerate}
 
 
-\textbf{Primitives}
 
+\textbf{Operational Semantics}
+
+\textbf{Categorical Semantics}
+
+Simply-typed $\lambda$-calculus is the Internal Language
+(\S\ref{sec:internal_logic}) of the Cartesian Closed Categories
+(\S\ref{sec:cartesian_closed}).
+
+
+
+\textbf{Proof-theoretic Semantics}
+
+Simply-typed $\lambda$-calculus is Isomorphic by Curry-Howard
+(\S\ref{sec:curry_howard}) to Minimal Logic
+(\S\ref{sec:minimal_logic}):
 \begin{itemize}
-  \item \emph{Send}
-  \item \emph{Receive}
-  \item \emph{Sequence}
-  \item \emph{Choice}
-  \item \emph{Recursion}
+  \item Terms correspond to Proofs in Natural Deduction
+    (\S\ref{sec:natural_deduction})
+  \item (Inhabited) Types correspond to Tautologies in Minimal Logic
 \end{itemize}
 
 
 
-\paragraph{Channel Type}\label{sec:channel_type}
+Minimal Logic $\leftrightarrow$ Simply-typed $\lambda$-calculus:
+\[
+  \supset \leftrightarrow \rightarrow
+\] \[
+  \wedge \leftrightarrow \times
+\] \[
+  \vee \leftrightarrow +
+\] \[
+  False \leftrightarrow \bot
+\]
 
-\subparagraph{Label}\label{sec:channel_label}
+
+
+\emph{Type Assignment}:
+\[
+  \frac{
+    f:A \rightarrow B \quad x:A
+  }{
+    f x : B
+  }(\rightarrow e)
+\]\[
+  \frac{
+    x:A \quad y:B
+  }{
+    \lambda x.y : A \rightarrow B
+  }(\rightarrow i)
+\]
 
 
 
-\subsubsection{Relevant Type System}\label{sec:relevant_type}
+\subsubsection{System T}\label{sec:system_t}
 
-Relevant Logic (\S\ref{sec:relevance_logic})
+G\"odel
+
+Proof Interpretation of Heyting Arithmetic into a Finite-type
+Extension of Primitive Recursive Arithmetic
+(\S\ref{sec:primitive_recursive})
+
+All Recursive Functions in Peano Arithmetic are definable
 
 
 
-\subsubsection{Ordered Type System}\label{sec:ordered_type}
+\subsubsection{PCF}\label{sec:pcf}
 
-Noncommutative Logic (\S\ref{sec:noncommutative_logic})
+\emph{Programming Computable Functions}
 
-modelling Stack-based Memory Allocation
+extended version of Typed Lambda Calculus (\S\ref{sec:typed_lambda})
 
-only Objects on top of modelled Stack may be used, after which it is
-popped off
+Geometry of Interaction (\S\ref{sec:interaction_geometry})
+
+Denotational Semantics (\S\ref{sec:denotational_semantics}):
+\emph{Scott Model}
+
+Scott-continuous Function (\S\ref{sec:scott_continuity})
+
+
+
+\subsubsection{Reflexive Domain}\label{sec:reflexive_domain}
+
+Dana Scott % FIXME
 
 
 
 % --------------------------------------------------------------------
-\subsection{Hindley-Milner Type System}\label{sec:hindley_milner}
+\subsection{$\lambda$-calculus with Conjunctive Types}
+\label{sec:conjunctive_lambda}
 % --------------------------------------------------------------------
 
-$\lambda$-calculus with Parametric Polymorphism
+Subtyping (\S\ref{sec:subtype})
+
+System $F_{<:}$ (\S\ref{sec:system_fsub})
 
 
 
-\subsubsection{Algorithm W}\label{sec:algorithm_w}
+% --------------------------------------------------------------------
+\subsection{Simply-typed $\lambda$-calculus with Type Operators}
+\label{sec:simplytyped_operators}
+% --------------------------------------------------------------------
+
+$\lambda\underline{\omega}$
+
+Types depending on Types
+
+System F$_\omega$ (\S\ref{sec:system_fomega})
+
+
+
+% --------------------------------------------------------------------
+\subsection{System F}\label{sec:system_f}
+% --------------------------------------------------------------------
+
+\emph{System F} (or \emph{Second-order $\lambda$-calculus})
+
+(\emph{Girard-Reynolds}) \emph{Polymorphic $\lambda$-calculus})
+
+Universal Quantification over all Types (cf. Existential Type Theory
+\S\ref{sec:abstract_type}) %FIXME
+
+By Curry-Howard Isomorphism, System F corresponds to the fragment of
+Second-order Intuitionistic Logic using only Universal Quantification;
+can describe all Functions that are Provably Total in Second-order
+Logic (\S\ref{sec:secondorder_logic})
+
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
+Type-level Function Abstraction $\Lambda$
+
+Quantification over Propositional Variables in Second-order Logic
+corresponds to Type Abstraction in Second-order $\lambda$-calculus.
+\cite{wadler14}
+
+
+
+\subsubsection{System F$_{<:}$}\label{sec:system_fsub}
+
+\subsubsection{System F$_\omega$}\label{sec:system_fomega}
+
+
+
+% --------------------------------------------------------------------
+\subsection{LF Logical Framework}
+\label{sec:logical_framework}
+% --------------------------------------------------------------------
+
+Dependent Types (\S\ref{sec:dependent_type})
+
+Dependently-typed $\lambda$-calculus is base of Intuitionistic Type
+Theory (\S\ref{sec:intuitionistic_type}), Calculus of Constructions
+(\S\ref{sec:coq})
+
+By Curry-Howard Isomorphism Dependent Types correspond to Propositions
+of First-order Predicate Logic (\S\ref{sec:firstorder_logic})
+
+Dependently-typed $\lambda$-calculus with a Type of all Types (the
+simplest Pure Type System \S\ref{sec:pure_type_system}) is not
+Strongly Normalizing due to Girard's Paradox
+(\S\ref{sec:girards_paradox})
+
+Contextual Category (\S\ref{sec:contextual_category})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Linear $\lambda$-calculus}\label{sec:linear_lambda}
+% --------------------------------------------------------------------
+
+Linear Type System (\S\ref{sec:linear_type})
+
+
+
+\subsubsection{Good Variation}\label{sec:good_variation}
+\cite{wadler12}
+
+Gay-Vasconcelos 2010 (Semantics: Asynchronous Buffered
+Communication) %FIXME
+
+Linear Functional Language for Session Types
+
+Session Types $\subset$ Types
+
+\fist See \emph{Classical Processes} (CP
+\S\ref{sec:classical_processes}) for a Session-typed $\pi$-calculus
+Translation
+
+No Deadlock
+
+Extensions:
+\begin{itemize}
+  \item $Mix$ (Girard):
+\[
+  \frac{P \vdash \Gamma \quad Q \vdash \Delta}
+  {P | Q \vdash \Gamma, \Delta} (Mix)
+\]
+    No Channels in Common between $P$ and $Q$ (rather than one Channel
+    in common as in $Cut$); Equivalent to Provability of the
+    Proposition:
+\[
+  A \otimes B \multimap A \parr B
+\]
+    Still no Deadlock but allows Independent Concurrent Components.
+  \item $BiCut$ (\cite{abramsky-gay-nagarajan96}; special case of
+    $MultiCut$):
+\[
+  \frac{P \vdash \Gamma, x:A, y:B \quad
+    Q \vdash \Delta, x:A^\bot, y:B^\bot}
+  {\nu x:A.y:B.(P|Q) \vdash \Gamma, \Delta} (BiCut)
+\]
+    Two Channels in common between $P$ and $Q$ (rather than one
+    Channel in common as in $Cut$); Equivalent to Provability of the
+    Proposition:
+\[
+  A \parr B \multimap A \otimes B
+\]
+    Allows for systems where Communication forms a loop and may
+    Deadlock
+\end{itemize}
+
+Systems with both $Mix$ and $BiCut$ are Compact: from either of $A
+\otimes B$ and $A \parr B$ one may derive the other;
+Compact Linear Systems (\S\ref{sec:compact_linear_system}),
+Interaction Categories (\S\ref{sec:interaction_category})
+
+\emph{Types}:
+\begin{flalign*}
+  \quad T,U,V &::= S \;|\; T \otimes U \;|\; T \multimap U
+    \;|\; T \rightarrow U \;|\; Unit &
+\end{flalign*}
+
+$S$ -- (Linear) Session Type
+
+$T \otimes U$ -- (Linear) Tensor Product
+
+$T \multimap U$ -- (Linear) Function
+
+$T \rightarrow U$ -- (Unlimited) Function
+
+$Unit$ -- (Unlimited) Unit
+
+\emph{Unlimited Types} support Weakening and Contraction,
+\emph{Linear Types} do not
+
+Unlimited Types correspond to Types written with $!$ in CP
+(\S\ref{sec:classical_processes})
+
+\emph{Session Types}:
+\begin{flalign*}
+  \quad S &::= \;!T.S \;|\; ?T.S \;|\; \oplus\{l_i:S_i\}_{i \in I}
+    \;|\; \&\{l_i:S_i\}_{i \in I} \;|\; end_! \;|\; end_? &
+\end{flalign*}
+
+$!T.S$ -- Output Value of Type $T$ then Behave as $S$
+
+$?T.S$ -- Input Value of Type $T$ then Behave as $S$
+
+$\oplus\{l_i:S_i\}_{i \in I}$ -- Select from Behaviors $S_i$ with
+Label $l_i$
+
+$\&\{l_i:S_i\}_{i \in I}$ -- Offer Choice of Behaviors $S_i$ with
+Label $l_i$
+
+$end_!$ -- Terminator for use with Output
+
+$end_?$ -- Terminator for use with Input
+
+
+Session Type Duals:
+\begin{align*}
+  \overline{!T.S} &= ?T.\overline{S} \\
+  \overline{?T.S} &= !T.\overline{S} \\
+  \overline{\oplus\{l_i:S_i\}_{i \in I}} &=
+    \&\{l_i:\overline{S_i}\}_{i \in I} \\
+  \overline{\&\{l_i:S_i\}_{i \in I}} &=
+    \oplus\{l_i:\overline{S_i}\}_{i \in I} \\
+  \overline{end_!} &= end_? \\
+  \overline{end_?} &= end_!
+\end{align*}
+
+$\overline{\overline{S}} = S$
+
+Duality on Session Types in GV leaves the Types of Sent and Received
+Values unchanged, i.e.:
+\begin{align*}
+  \overline{!T.S} &= ?T.\overline{S} \\
+  \overline{?T.S} &= !T.\overline{S}
+\end{align*}
+
+
+\emph{Environments} $\Phi, \Psi$ associating Values to Types
+
+$un(\Phi)$ -- Each Type in $\Phi$ is Unlimited
+
+
+\emph{Terms}:
+\begin{flalign*}
+  \quad L,M,N &::= x \;|\; \mono{unit} \;|\; \lambda x.N \;|\; L M
+    \;|\; (M,N) \;|\; \mono{let}\; (x,y) = M \;\mono{in}\; N & \\
+    & \;|\; \mono{send}\; M N \;|\; \mono{receive}\; M
+    \;|\; \mono{select}\; l M
+    \;|\; \mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I} & \\
+    & \;|\; \mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N
+    \;|\; \mono{terminate}\; M &
+\end{flalign*}
+
+Linear $\lambda$-calculus:
+
+$x$ -- Identifier
+
+$\mono{unit}$ -- Unit Constant
+
+$\lambda x.N$ -- Function Abstraction
+
+$L M$ -- Function Application
+
+$(M,N)$ -- Pair Construction
+
+$\mono{let}\; (x,y) = M \;\mono{in}\; N$
+
+Communication on a Channel:
+
+$\mono{send}\; M N$ -- Send Value $M$ on Channel $N$
+
+$\mono{receive}\; M$ -- Receive on Channel $M$
+
+$\mono{select}\; l M$ -- Select Label $l$ on Channel $M$
+
+$\mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I}$ -- Offer Choice
+on Channel $M$
+
+$\mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N$ -- Connect $M$
+to $N$ by Channel $x$
+
+$\mono{terminate}\; M$ -- Terminate Input
+
+
+Type Rules
+
+Function Abstraction may produce an Unlimited Function if and only if
+all of its Free Variables are of Unlimited Type.
+
+Each Term is not required to have a Unique Type, e.g. a
+$\lambda$-expression where all Free Variables have Unlimited Type may
+be given either a Linear or Unlimited Function Type.
+
+Possibly Subtyping could be added to arrange for giving each Term a
+Unique Smallest Type.
+
+
+\asterism
+
+
+\emph{Output} -- $\mono{send}\; M N$: \\
+Outputs the Value $M$ of Type $T$ on Channel $N$ of Session Type
+$!T.S$ \\
+Returns the updated Channel after which the Output has Session Type
+$S$
+
+\emph{Input} -- $\mono{receive}\; M$: \\
+Inputs a Value from Channel $M$ of Session Type $?T.S$ \\
+Returns a (Linear) Pair of the Input Value of Type $T$ and the updated
+Channel after which the Input has Session Type $S$
+
+\emph{New Channel} ($Connect$) -- $\mono{with}\; x \;\mono{connect}\;
+M \;\mono{to}\; N$ \\
+Creates a new Channel $x$ with Session Type $S$ where $x$ is used at
+Type $S$ in Term $M$ and Dual Type $\overline{S}$ in Term $N$ \\
+$M$ and $N$ are Evaluated Concurrently \\
+Left Subterm returns exhausted Channel of Type $end_!$ %FIXME
+
+\emph{Terminate Channel} ($Terminate$) -- $\mono{terminate}\; M$: \\
+Evaluates Term $M$ which Returns a Pair of an Exhausted Channel of
+Type $end_?$ and a Value of Type $T$ \\
+Deallocates the Channel and Returns the Value
+
+Constructs for $Connect$ and $Terminate$ Deallocate two ends of a
+Channel between them.
+
+Alternative designs %FIXME
+
+
+\asterism
+
+
+\textbf{Translation of GV into CP}
+
+CP (\S\ref{sec:classical_processes})
+
+Translation of Session Types:
+\begin{align*}
+  \llbracket !T.S \rrbracket &=
+    \llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket \\
+  \llbracket ?T.S \rrbracket &=
+    \llbracket T \rrbracket \otimes \llbracket S \rrbracket \\
+  \llbracket \oplus \{l_i : S_i\}_{i \in I} \rrbracket &=
+    \llbracket S_1 \rrbracket \& \cdots \& \llbracket S_n \rrbracket,
+    \quad I = \{1,\ldots,n\} \\
+  \llbracket \& \{l_i : S_i\}_{i \in I} \rrbracket &=
+    \llbracket S_1 \rrbracket \oplus \cdots \oplus
+    \llbracket S_n \rrbracket, \quad I = \{1,\ldots,n\} \\
+  \llbracket end_! \rrbracket &= \bot \\
+  \llbracket end_? \rrbracket &= 1
+\end{align*}
+
+\fist Note that Input/Output are translated into their Duals. This is
+explained by Send and Receive in GV taking Channels as
+\emph{Arguments}, while in the Interpretations in CP Channels are
+\emph{Results}.
+\begin{itemize}
+  \item \emph{Send}: takes a Value and a Channel and Sends the Value
+    on that Channel (the Channel must \emph{Input} the Value)
+  \item \emph{Receive}: takes a Channel and Returns a Value (the
+    Channel must \emph{Output} the Value)
+\end{itemize}
+Since Duality on Session Types in GV leaves Types of Sent and Received
+Values unchanged, the Translation of these Operations takes the Dual
+of the Sent Value, but not the Received Value, i.e.:
+\begin{align*}
+  \llbracket !T.S \rrbracket &=
+    \llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket \\
+  \llbracket ?T.S \rrbracket &=
+    \llbracket T \rrbracket \otimes \llbracket S \rrbracket
+\end{align*}
+and following the equality in Linear Logic, $A \multimap B = A^\bot
+\parr B$, $\llbracket T \rrbracket^\bot \parr \llbracket S \rrbracket$
+could alternatively be written $\llbracket T \rrbracket \multimap
+\llbracket S \rrbracket$.
+
+Translation Preserves Duality:
+\[
+  \llbracket \overline{S} \rrbracket = \llbracket S \rrbracket^\bot
+\]
+
+Translation of Types:
+\begin{align*}
+  \llbracket T \multimap U \rrbracket &=
+    \llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket \\
+  \llbracket T \rightarrow U \rrbracket &=
+    \;!(\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket) \\
+  \llbracket T \otimes U \rrbracket &=
+    \llbracket T \rrbracket \otimes \llbracket U \rrbracket \\
+  \llbracket Unit \rrbracket &= \;!\top
+\end{align*}
+
+$\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket$ could
+alternatively be written:
+\[
+  \llbracket T \rrbracket \multimap \llbracket U \rrbracket
+\]
+
+$!(\llbracket T \rrbracket^\bot \parr \llbracket U \rrbracket)$ could
+alternatively be written:
+\[
+  !(\llbracket T \rrbracket \multimap \llbracket U \rrbracket)
+\]
+
+$!T$ could alternatively be written $1$ (Unit for $\otimes$)
+
+This Translation follows the Call-by-value Translation of Classical
+Linear Logic (\S\ref{sec:classical_linear_logic})
+
+Translation of Terms:
+
+Linear $\lambda$ Terms:
+\begin{itemize}
+  \item Variable Translates to an $Axiom$
+  \item $Weaken$ and $Contract$ Translate to $Weaken$ and $Contract$
+  \item Function Abstraction and Product Deconstruction Translate to
+    Input
+  \item Function Application and Product Construction Translate to
+    Output
+  \item Translation of Elimination Rules ($\multimap-E$,
+    $\rightarrow-E$, $\times-E$) require use of $Cut$
+\end{itemize}
+
+Communication Operation Terms:
+\begin{itemize}
+  \item Send: Output Operation $x[y].(P|Q)$
+  \item Select: Select Operation $x[in_j].P$
+  \item Case: Choice Operation $\mono{case}(Q_1, \ldots, Q_n)$
+  \item $end_!$ in Connect: Empty Output $y[].0$
+  \item Terminate: Empty Input $x().P$
+  \item Receive (Trivial): $x(y).R$ (???)
+  \item Connect: $Cut$ corresponds to introducing a Channel for
+    Communication between two Subterms
+\end{itemize}
+Each of these Communication Translations involve a $Cut$ corresponding
+to Communication with given Channel.
+
+Term $M$ of Type $T$ is Translated $\llbracket M \rrbracket_z$ where
+$z$ is a Channel of Type $\llbracket T \rrbracket$ where $\llbracket M
+\rrbracket_z$ Sends the ``Answer'' it Computes on $z$, as expressed by
+the Theorem:
+
+Th. \textbf{Translation Preserves Types}
+
+\[
+  \text{If } \Phi \vdash M : T \text{ then }
+  \llbracket M \rrbracket z \vdash \llbracket \Phi \rrbracket^\bot,
+  z : \llbracket T \rrbracket
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\kappa$-calculus}\label{sec:kappa_calculus}
+% --------------------------------------------------------------------
+
+First-order fragment of Typed $\lambda$-calculus
+
+
+
+% --------------------------------------------------------------------
+\subsection{B\"ohm Tree}\label{sec:bohm_tree}
+% --------------------------------------------------------------------
+
+A \emph{B\"ohm Tree} is a Possibly Infinite Directed Acyclic Graph
+where some Vertices are Labelled by $\lambda$-terms and all Vertices
+besides the Root have exactly one Parent, every Vertex has a finite
+number of Children, and every Unlabelled Vertex has no Children.
+
+
+
+% ====================================================================
+\section{Calculus of Constructions}\label{sec:coq}
+% ====================================================================
+
+% ====================================================================
+\section{Pure Type System}\label{sec:pure_type_system}
+% ====================================================================
+
+Arbitrary number of Sorts and Dependencies
+
+Generalization of the \emph{Lambda Cube} to more sorts than Terms and
+Types
+
+Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
+
+Barendregt-Geuvers-Klop Conjecture
+
+
+
+% --------------------------------------------------------------------
+\subsection{Lambda Cube}\label{sec:lambda_cube}
+% --------------------------------------------------------------------
+
+All Strongly Normalizing
+
+$\lambda\rightarrow$: Simply-typed $\lambda$-calculus
+(\S\ref{sec:simply_typed}); Terms depending on Terms (Function Type
+\S\ref{sec:function_type})
+
+$\lambda\underline{\omega}$: Simply-typed $\lambda$-calculus with Type
+Operators (\S\ref{sec:simplytyped_operators}); Types depending on
+Types (Type Functions \S\ref{sec:type_function})
+
+$\lambda2$: Second-order $\lambda$-calculus (System F
+\S\ref{sec:system_f}); Terms depending on Types (Parametric
+Polymorphism \S\ref{sec:parametric_polymorphism})
+
+$\lambda\Pi$: Dependently-typed $\lambda$-calculus (Logical Framework
+\S\ref{sec:logical_framework}); Types depending on Terms (Dependent
+Types \S\ref{sec:dependent_type})
+
+
+
+% ====================================================================
+\section{Intuitionistic Type Theory}\label{sec:intuitionistic_type}
+\cite{martinlof84}
+% ====================================================================
+
+\emph{Intuitionistic Type Theory} (also \emph{Constructive Type
+  Theory} or \emph{Martin-L\"of Type Theory})
+
+Inductive Types (\S\ref{sec:inductive_type})
+
+Modelled by Locally Cartesian Closed Category
+(\S\ref{sec:locally_cartesian})
+
+Extensional Martin-L\"of Type Theory: Internal Language
+(\S\ref{sec:internal_logic}) for Cartesian Closed Quasi-categories
+(\S\ref{sec:quasicategory})
+
+Formation: the Context in which the Type is defined
+
+Introduction: rules for Construction
+
+Elimination: rules for De-construction
+
+Computation:
+
+Four forms of Judgements:
+\begin{description}
+  \item [Well-formed Type]: $A$ is a Set, $A$ is a Proposition, $A$ is
+    an Expectation, $A$ is a Task; Types (encodes Syntax of Formulas
+    ``A is a Proposition''; note some Formulas are only Well-formed if
+    certain Judgements are Derivable \cite{thompson99}):
+    \[
+      A \text{ type}
+    \]
+  \item [Equality of Types]: $A$ and $B$ are Equal Sets:
+    \[
+      A \equiv B \text{ type}
+    \]
+  \item [Well-formed Term of Type]: $a$ is an Element of $A$, $a$ is a
+    Proof of $A$, $a$ is a Realization of $A$, $a$ is a Method for
+    doing $A$:
+    \[
+      a : A
+    \]
+  \item [Equality of Terms]: $a$ and $b$ are Equal Elements of Set $A$:
+    \[
+      a \equiv b : A
+    \]
+\end{description}
+
+Dependent Type (\S\ref{sec:dependent_type}):
+\[
+  (x:A)B
+\]
+Removal of Dependency by Substitution:
+\[
+  [x/a]B
+\]
+Abstracted Object:
+\[
+  [x]b
+\]
+Removal of Abstration on Object:
+\[
+  b[x/a]
+\]
+Well-formed Context of Typing Assumptions
+(\S\ref{sec:typing_assumption}):
+\[
+  \vdash \Gamma \textsf{ Context}
+\]
+Context (\S\ref{sec:type_context}) Judgements:
+\begin {itemize}
+\item Well-formed Type $\sigma$:
+  \[
+    \Gamma \vdash \sigma \mathsf{ Type}
+  \]
+\item Well-formed Term $t$ of Type $\sigma$:
+  \[
+    \Gamma \vdash t : \sigma
+  \]
+\item Type Equivalence:
+  \[
+    \Gamma \vdash \sigma \equiv \tau
+  \]
+\item Term Equivalence:
+  \[
+    \Gamma \vdash t \equiv u : \sigma
+  \]
+\end {itemize}
+\hfill\\
+Type Universe:
+\[
+  \class{U}
+\]
+Dependent Type mapping Objects to Types:
+\[
+  \textrm{El}
+\]
+
+Definitional Equality (\S\ref{sec:proof_equality})
+
+Structural Rules (\S\ref{sec:structural_rule})
+
+
+
+\hfill \\
+\textbf{Identity Types} (\S\ref{sec:equality_type})
+\\
+Identity Type Introduction:
+\[
+  \frac{
+    \Gamma \vdash m : A
+  }{
+    \Gamma \vdash refl_A(m) : Id_A(m,m)
+  } (Id_A\text{-I})
+\]
+Identity Type Elimination:
+\[
+  \frac{
+    \Gamma \vdash p : Id_A (m,n) \quad
+    \Gamma, x:A, y:A, z : Id_A(x,y) \vdash C_{x,y,z} \text{ type}\quad
+    \Gamma, x : A \vdash q : [x, x, refl_A(x)/x,y,z]C
+  }{
+    \Gamma \vdash refl_A(m) : Id_A(m,m)
+  } (Id_A\text{-E})
+\]
+\hfill \\
+\textbf{Dependent Product Types} (\S\ref{sec:pi_type})
+\\
+Logical Implication and Universal Quantification
+\\
+Dependent Product Formation:
+\[
+  \frac{
+    \Gamma \vdash A \text{ type} \quad
+    \Gamma, x:A \vdash B \text{ type}
+  }{
+    \Gamma \vdash \Pi_{x:A} B \text{ type}
+  } (\Pi\text{-F})
+\]
+Dependent Product Introduction:
+\[
+  \frac{
+    \Gamma, x : A \vdash m_x : B_x \quad
+  }{
+    \Gamma \vdash (\lambda x:A.m_x : B_x) : \Pi_{x:A} B
+  } (\Pi\text{-I})
+\]
+Dependent Product Elimination:
+\[
+  \frac{
+    \Gamma \vdash m : \Pi_{x:A} B \quad
+    \Gamma \vdash n : A
+  }{
+    \Gamma \vdash m\;n : [n/x]B
+  } (\Pi\text{-E})
+\]
+Dependent Product Computation (cf. $\beta$-reduction
+\S\ref{sec:beta_reduction}):
+\[
+  \frac{
+    \Gamma \vdash A \text{ type} \quad
+    \Gamma , x : A \vdash m : B
+  }{
+    \Gamma \vdash (\lambda x : A.m)\;n \equiv [n/x]m : [n/x]B
+  } (\Pi\text{-C})
+\]
+
+
+\hfill \\
+\textbf{Dependent Sum Types} (\S\ref{sec:sigma_type})
+\\
+Logical Conjunction and Existential Quantification
+\\
+Dependent Sum Formation:
+\[
+  \frac{
+    \Gamma \vdash A \text{ type} \quad
+    \Gamma, x : A \vdash B_x \text{ type}
+  }{
+    \Gamma \vdash \Sigma_{x:A} B_x \text{ type}
+  } (\Sigma\text{-F})
+\]
+Dependent Sum Introduction:
+\[
+  \frac{
+    \Gamma \vdash m : A \quad
+    \Gamma \vdash n : [m/x]B
+  }{
+    \Gamma \vdash (m,n) : \Sigma_{x:A} B_x
+  } (\Sigma\text{-I})
+\]
+Dependent Sum Elimination 1:
+\[
+  \frac{
+    \Gamma \vdash m : \Sigma_{x:A} B_x
+  }{
+    \Gamma \vdash \pi_1\;m : A
+  } (\Sigma\text{-E$_1$})
+\]
+Dependent Sum Elimination 2:
+\[
+  \frac{
+    \Gamma \vdash m : \Sigma_{x:A} B_x
+  }{
+    \Gamma \vdash \pi_2\;m : B[\pi_1\;m/x]
+  } (\Sigma\text{-E$_2$})
+\]
+\hfill \\
+\textbf{Binary Sum Types} (\S\ref{sec:sum_type})
+\\
+Disjunction
+\\
+Binary Sum Introduction 1:
+\[
+  \frac{
+    \Gamma \vdash m : A
+  }{
+    \Gamma \vdash inl(m) : A + B
+  } (+\text{-I}_1)
+\]
+Binary Sum Introduction 2:
+\[
+  \frac{
+    \Gamma \vdash n : B
+  }{
+    \Gamma \vdash inr(n) : A + B
+  } (+\text{-I}_2)
+\]
+Binary Sum Elimination:
+\[
+  \frac{
+    \Gamma \vdash m : A + B \quad
+    \Gamma, z : A + B \vdash C \text{ type} \quad
+    \Gamma, x : A \vdash n : [inl(x)/z]C \quad
+    \Gamma, y : B \vdash p : [inr(y)/z]C
+  }{
+    \Gamma \vdash case (m, x\;n, y\;p) : [m/z]C
+  } (+\text{-E})
+\]
+
+
+
+Categorical Model, ``Category with Families'':
+
+\begin{itemize}
+  \item Category $\mathsf{C}$ of Contexts: Objects are Contexts,
+    Morphisms are Substitutions
+  \item Functor $T : \mathsf{C}^{op} \rightarrow \mathbf{Fam(Set)}$
+    where $\mathbf{Fam(Set)}$ is the Category of Families
+    (\S\ref{sec:family}) of Sets where Objects are Pairs $(A,B)$ of an
+    Index Set $A$ and a Function $B: X \rightarrow A$ and Morphisms
+    are Pairs of Functions $f: A \rightarrow A$ and $g: X \rightarrow
+    X'$ such that $B' \circ g = f \circ B$, i.e. $f$ maps $B_a$ to
+    $B'_{g(a)}$
+\end{itemize}
+
+The Functor $T$ assigns a Context $\Gamma$ to a Set of Types
+$Ty(\Gamma)$, and for each $A : Ty(\Gamma)$ a Set of Terms
+$Tm(\Gamma,A)$.
+
+The Empty Context is the Terminal Object of $\mathsf{C}$.
+
+Final Object for \emph{Comprehension} (or \emph{Context Extension}) % FIXME
+
+
+
+\textbf{Alternate description}\cite{bastenhof09}
+
+Language $L$:
+\begin{enumerate}
+  \item $1$ (Unity Type), $\Omega$ (Truth Value Type)
+  \item Base Types $\tau_1, \tau_2, \tau_3, \ldots$
+  \item Function Symbols $f, g, h, \ldots$
+\end{enumerate}
+The Types of a System are given by the smallest Set including $1$,
+$\Omega$, and the Base Types closed under $\times$ (Product Types
+\S\ref{sec:product_type}) and Unary Type Operator $P$ (Power Types
+\S\ref{sec:power_type}).
+
+Terms of Type $\Omega$ represent Formulas, e.g. $\tau_1 = \tau_2$.
+
+
+\asterism
+
+
+\textbf{Sum Type} (\S\ref{sec:sum_type}) (Tagged Union)
+
+$A \cup B = \{ a_1, a_2, ..., b_1, b_2, ... \}$
+
+$x \in A \cup B \Rightarrow x \in A \vee x \in B$
+
+$U \subset A \cup B \Rightarrow \forall u \in U, u \in A \vee u \in B \}$
+
+
+\textbf{Product Type} (\S\ref{sec:product_type}) (Pairs)
+
+$A \times B = \{ (a_1,b_1), (a_1,b_2), ..., (a_2,b_1), (a_2,b_2), ... \}$
+
+$(x,y) \in A \times B \Rightarrow x \in A \wedge y \in B$
+
+$U \subset A \times B
+\Rightarrow \forall (u,v) \in U, u \in A \wedge v \in B$
+
+
+\textbf{Powerset} (\S\ref{sec:powerset})
+(Relations \S\ref{sec:binary_relation})
+
+$\pow(A \times B) = \{ \linebreak[1]
+\{(a_1,b_1)\}, \{(a_1,b_2)\}, ...,
+\{(a_2,b_1)\}, \{(a_2,b_2)\}, ...
+\linebreak[1] \vdots \linebreak[1]
+\{(a_1,b_1), (a_1,b_2)\}, \{(a_1,b_1), (a_1,b_3)\}, ...,
+\{(a_2,b_1), (a_2,b_2)\}, \{(a_2,b_1), (a_2,b_3)\}, ...
+\linebreak[1] \vdots \linebreak[1]
+..., A \times B - \{(a_2,b_1), (a_2,b_3)\}, \allowbreak
+A \times B - \{(a_2,b_1), (a_2,b_2)\}, \allowbreak
+..., A \times B - \{(a_1,b_1), (a_1,b_3)\}, \allowbreak
+A \times B - \{(a_1,b_1), (a_1,b_2)\}, \allowbreak
+\linebreak[1] \vdots \linebreak[1]
+..., A \times B - \{(a_2,b_2)\}, A \times B - \{(a_2,b_1)\}, \allowbreak
+..., A \times B - \{(a_1,b_2)\}, A \times B - \{(a_1,b_1)\}, \allowbreak
+\linebreak[1] A \times B
+\}$
+
+$A \times B \in \pow(A \times B)$
+
+$U \in \pow(A \times B) \Rightarrow U \subseteq A \times B \allowbreak
+\Rightarrow \forall (u,v) \in U, u \in A \wedge v \in B$
+
+$\class{V} \subset \pow(A \times B)
+\Rightarrow \forall U \in \class{V}, U \subseteq A \times B$
+
+
+\textbf{Function Type} (\S\ref{sec:function_type})
+
+$A \rightarrow B = B^A = \{ \linebreak[1]
+\{ (a_1, b_1), (a_2, b_1), (a_3, b_1), ...\},
+\{ (a_1, b_2), (a_2, b_2), (a_3, b_2), ...\},
+\{ (a_1, b_3), (a_2, b_3), (a_3, b_3), ...\}, ...
+\linebreak[1] \vdots \linebreak[1]
+\{ (a_1, b_2), (a_2, b_1), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_2), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_1), (a_3, b_2), ...\}, ...
+\linebreak[1] \vdots \linebreak[1]
+\{ (a_1, b_3), (a_2, b_1), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_3), (a_3, b_1), ...\},
+\{ (a_1, b_1), (a_2, b_1), (a_3, b_3), ...\},
+\linebreak[1] \vdots \linebreak[1]
+\}$
+
+$B^A \subset \pow(A \times B)$
+
+$f \in B^A
+\Rightarrow f \in \pow(A \times B) \wedge f \neq A \times B \allowbreak
+\Rightarrow f \subset A \times B
+\Rightarrow \forall (x, f(x)) \in f, x \in A \wedge f(x) \in B$
+
+$U \subset B^A \Rightarrow \forall u \in U, u \in \pow(A \times B)$
+
+
+\textbf{Dependent Type} (\S\ref{sec:dependent_type})
+
+$a:A \vdash B(a) = \{(a_1,B(a_1)), (a_2,B(a_2)), ...\}$
+
+$a:A \vdash B(a) \in \class{U}^A \linebreak[1]
+\Rightarrow a:A \vdash B(a) \subset A \times \class{U}$
+
+$(x,X) \in a:A \vdash B(a) \Rightarrow x \in A \wedge X \in \class{U}$
+
+$U \subset a:A \vdash B(a) \Rightarrow \forall (x,X) \in U, x \in A
+\wedge X \in \class{U}$
+
+
+\textbf{Dependent Sum Type} ($\Sigma$-type \S\ref{sec:sigma_type})
+
+$\Sigma_{(a:A)} B(a) = \{\{ (a_1, x_1), (a_1, x_2), ...\},
+\{ (a_2, y_1), (a_2, y_2), ...\}, \cdots \}$
+
+$\Sigma_{(a:A)} B(a) \subset \pow \bigsqcup_{X \in \class{U}} A \times X$
+
+$Z \in \Sigma_{(a:A)} B(a) \Rightarrow \exists x \in A : \forall y \in
+B(x), (x,y) \in P$
+
+
+
+\textbf{Dependent Product Type} ($\Pi$-type \S\ref{sec:pi_type})
+
+$\Pi_{(a:A)} B(a) = \{(a_1, x), (a_2, y), (a_3, z), ...\}$
+
+$\Pi_{(a:A)} B(a) \subset \pow \bigsqcup_{a \in A} \Sigma_{(a:A)} B(a)$
+
+
+\asterism
+
+
+
+% --------------------------------------------------------------------
+\subsection{Constructive Type}\label{sec:constructive_type}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Meaning Explanation}\label{sec:meaning_explanation}
+% --------------------------------------------------------------------
+
+Martin-L\"of, a Proof-theoretic Semantics
+(\S\ref{sec:proof_semantics}) for Type Theory
+
+Realizability Model (\S\ref{sec:realizability_model}) for Type Theory
+
+Intensional Type Theory (\S\ref{sec:intensional_type})
+
+Extensional Type Theory (\S\ref{sec:extensional_type})
+
+Terms $x,y,z,X,Y,Z,\ldots$
+
+$x \Rightarrow y$: $x$ Computes (Reduces, Transitive) to $y$
+
+Predicates:
+\begin{itemize}
+  \item $A \type$
+  \item $a : A$
+  \item $a = b : A$
+\end{itemize}
+
+Induction Recursion (\S\ref{sec:induction_recursion}): $A \type$ by
+Induction (\S\ref{sec:mathematical_induction}) and two Recursive
+Functions:
+\begin{itemize}
+  \item $|A|$ the Collection of Terms of Type $A$
+  \item $=_A$ the Collection of Pairs of Equal Terms of Type $A$
+\end{itemize}
+(each Collection may be defined Inductively)
+
+
+
+% --------------------------------------------------------------------
+\subsection{Extensional Type Theory}\label{sec:extensional_type}
+\cite{harper12}
+% --------------------------------------------------------------------
+
+\emph{Extensional Type Theory} (\emph{ETT})
+
+Strict Equivalence
+
+``Homotopy Set Theory'' (Homotopically Discrete)
+
+\emph{NuPRL}
+
+Equality Reflection Principle
+
+
+
+\subsubsection{Observational Type Theory}\label{sec:observational_type}
+
+``Homotopy Set Theory''
+
+Setoid (\S\ref{sec:setoid})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Intensional Type Theory}\label{sec:intensional_type}
+\cite{harper12}
+% --------------------------------------------------------------------
+
+Weak Equivalence
 
 
 
@@ -5052,9 +4855,9 @@ Idempotent Monadic or Idempotent Comonadic (???)
 
 
 
-% ====================================================================
-\section{Functional Reactive Programming}\label{sec:frp}
-% ====================================================================
+% --------------------------------------------------------------------
+\subsection{Functional Reactive Programming}\label{sec:frp}
+% --------------------------------------------------------------------
 
 %FIXME possibly move this? dynamical systems? control theory?
 
@@ -5112,9 +4915,7 @@ Push-pull FRP: underlying I/O model is Asynchronous
 
 
 
-% --------------------------------------------------------------------
-\subsection{Reactive Type}\label{sec:reactive_type}
-% --------------------------------------------------------------------
+\subsubsection{Reactive Type}\label{sec:reactive_type}
 
 \cite{jeffrey12}:
 
@@ -5441,9 +5242,7 @@ Resumption Model of Concurrency (???)
 
 
 
-% --------------------------------------------------------------------
-\subsection{Interval Type}\label{sec:interval_type}
-% --------------------------------------------------------------------
+\subsubsection{Interval Type}\label{sec:interval_type}
 
 \cite{jeffrey12}:
 
@@ -5473,9 +5272,7 @@ Monotone Semantics
 
 
 
-% --------------------------------------------------------------------
-\subsection{Signal}\label{sec:signal}
-% --------------------------------------------------------------------
+\subsubsection{Signal}\label{sec:signal}
 
 \emph{Signal} (or \emph{Behavior})
 
@@ -5522,7 +5319,8 @@ Discrete Behaviors: \emph{Events} (\S\ref{sec:frp_event})
 
 
 
-\subsubsection{Signal Function}\label{sec:signal_function}
+\paragraph{Signal Function}\label{sec:signal_function}
+\hfill \\
 
 or \emph{Reactive Function}
 
@@ -5592,9 +5390,7 @@ built which can be visualized in any Traced Monoidal Category
 
 
 
-% --------------------------------------------------------------------
-\subsection{Event}\label{sec:frp_event}
-% --------------------------------------------------------------------
+\subsubsection{Event}\label{sec:frp_event}
 
 \cite{jeffrey12}:
 
@@ -5655,6 +5451,203 @@ Example Function which Returns True after an Event has occurred:
 \[
   switch(constant[False] \&\&\& id)[\lambda x.constant[True]]
 \]
+
+
+
+% ====================================================================
+\section{Homotopy Type Theory}\label{sec:homotopy_type_theory}
+% ====================================================================
+
+Homotopy Theory (\S\ref{sec:homotopy})
+
+- Function Extensionality
+- Univalence Axiom (\S\ref{sec:univalence_axiom})
+
+- Values (Points), Paths, Homotopies
+
+- Internal Language of Higher Categories
+(\S\ref{sec:higher_category}).
+
+Homotopy Types Model $\infty$-groupoids
+(\S\ref{sec:infinity_groupoid})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Higher Inductive Type}\label{sec:higher_inductive_type}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Inference Rules}\label{sec:homotopy_rules}
+% --------------------------------------------------------------------
+
+Inference Rules (\S\ref{sec:type_inference}) have the form:
+\[
+  \frac{J_1 \quad \cdots \quad J_k} {J} Name
+\]
+where $J_i$ are provided as derived hypothetical (metatheoretical)
+Judgements and $J$ is the conclusion.
+
+A Tree constructed from Inference Rules forms a Derivation
+(\S\ref{sec:typing_derivation}) of a Judgement.
+
+
+
+\textbf{Context Rules}
+
+The following Rules of Inference allow for the determination of a
+Well-formed Context:
+\begin{enumerate}
+\item
+\[
+  {
+    \frac{}{(.)ctx}
+  } ctx-EMP
+\]
+\item
+\[
+  {
+    \frac
+    {x_1:A_1, \ldots, x_{n-1}:A_{n-1} \vdash A_n : \class{U}_i}
+    {(x_1:A_1,\ldots,x_n:A_n) ctx}
+  } ctx-EXT
+\]
+\end{enumerate}
+
+
+
+\textbf{Structural Rules}
+
+Given a Context, derive Typing Judgements
+(\S\ref{sec:typing_judgement}) listed in the Context:
+\[
+  {
+    \frac
+    {(x_1:A_1, \ldots, x_n:A_n)ctx}
+    {x_1:A_1, \ldots, x_n:A_n \vdash x_i:A_i}
+  } Vble
+\]
+
+Substitution for Typing Judgements:
+\[
+  {
+    \frac
+    {\Gamma \vdash a : A \;\;\;\;\;\;\;
+    \Gamma,x:A,\Delta \vdash b : B}
+    {\Gamma,[a/x]\Delta \vdash [a/x]b : [a/x]B}
+  } Subst_1
+\]
+
+Weakening for Typing Judgements:
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
+    \Gamma,\Delta \vdash b : B}
+    {\Gamma,x:A,\Delta \vdash b:B}
+  } Wkg_1
+\]
+
+Substitution for Judgemental Equality:
+\[
+  {
+    \frac
+    {\Gamma \vdash a : A \;\;\;\;\;\;\;
+    \Gamma,x:A,\Delta \vdash b \equiv c : B}
+    {\Gamma,[a/x]\Delta \vdash [a/x]b \equiv [a/x]c : [a/x]B}
+  } Subst_2
+\]
+
+Weakening for Judgemental Equality:
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
+    \Gamma,\Delta \vdash b \equiv c : B}
+    {\Gamma, x:A, \Delta \vdash b \equiv c : B}
+  } Wkg_2
+\]
+
+
+
+\textbf{Universe Rules}
+
+\[
+  {
+    \frac
+    {(\Gamma) ctx}
+    {\Gamma \vdash \class{U}_i : \class{U}_{i+1}}
+  } \class{U}-INTRO
+\]
+
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \class{U}_i}
+    {\Gamma \vdash A : \class{U}_{i+1}}
+  } \class{U}-CUMUL
+\]
+
+
+
+\textbf{Dependent Function Type Rules}
+
+\[
+  {
+    \frac
+    {\Gamma \vdash A : \class{U}_i \;\;\;\;\;\;\;
+    \Gamma,x:A \vdash B : \class{U}_i}
+    {\Gamma \vdash \prod_{(x:A)} B : \class{U}_i}
+  } \Pi-FORM
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-INTRO
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-ELIM
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-COMP
+\]\[
+  {
+    \frac
+    {}
+    {}
+  } \Pi-UNIQ
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Univalence Axiom}\label{sec:univalence_axiom}
+% --------------------------------------------------------------------
+
+``Identity is Equivalent to Equivalence''
+
+``Equivalent Types are Identical''
+\[
+  (A = B) \simeq (A \simeq B)
+\]
+where $A = B$ is notation for the Type $Id_U(A,B)$ where $U$ is the
+Universe containing $A$ and $B$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Opetopic Type Theory}\label{sec:opetopic_typetheory}
+% --------------------------------------------------------------------
+
+Internal Language of $\infty$-categories
+(\S\ref{sec:infinity_category})
 
 
 
