@@ -895,173 +895,6 @@ A Type Family declared inside a Type Class is an \emph{Associated
 
 
 % --------------------------------------------------------------------
-\subsection{Dependent Type}\label{sec:dependent_type}
-% --------------------------------------------------------------------
-
-A \emph{Dependent Type} depends on a Term or another Type.
-
-\[
-  x : A \vdash B(x):\mathrm{Types}
-\]
-
-A Dependent Product Type (\S\ref{sec:pi_type}) is defined by
-a Dependent Function (\S\ref{sec:dependent_function}).
-
-Logical Quantifiers (\S\ref{sec:quantifier})
-
-Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
-
-Categorically, Dependent Types correspond to Morphisms regarded as
-Indexed Families (Bundle or Fibration), represented by a \emph{Display
-  Map} (\S\ref{sec:display_map}) which is a Morphism $p : B
-\rightarrow A$ where $B(x)$ is the Fiber (\S\ref{sec:fiber}) of $p$
-over $x:A$.
-
-Classifying Morphism (\S\ref{sec:classifying_morphism}),
-Classifying Space (\S\ref{sec:classifying_space})
-
-A Dependent Type is the Type of a Dependent Function
-(\S\ref{sec:dependent_function}).
-
-Dependent Pairs (Dependent Sum Type \S\ref{sec:sigma_type})
-
-
-\textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
-\emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
-Dependent Product Type (\S\ref{sec:pi_type}) to Simply-typed
-$\lambda$-calculus.
-
-
-\textbf{Second-order Dependent Type Theory} ($\lambda \Pi 2$):
-allowing Quantification over Type Constructors
-(\S\ref{sec:type_constructor}), $\Pi$ operator Subsumes both
-$\rightarrow$ of Simply-typed $\lambda$-calculus and $\forall$ of
-System F (\S\ref{sec:system_f})
-
-
-\textbf{Higher-order Dependently Typed Polymorphic $\lambda$-calculus}
-($\lambda \Pi \omega$): corresponds to \emph{Calculus of
-  Constructions} (\S\ref{sec:coq}); extends $\lambda \Pi 2$ to all
-abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
-
-
-
-\subsubsection{Dependent Function}\label{sec:dependent_function}
-
-A \emph{Dependent Function} is a Function from Terms to Types
-(Codomain varies depending on Argument). The Type of a Dependent
-Function is a \emph{Dependent Product Type}
-(\S\ref{sec:pi_type}).
-
-Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
-
-Functionality (respect for Definitional Equality
-\S\ref{sec:proof_equality}):
-\[
-  x : A \vdash B_x \;\text{type}
-\]\[
-  m : A \mapsto B[m/x] \;\text{type}
-\]\[
-  m \equiv n : A \mapsto B[m/x] \equiv B[n/x] \;\text{type}
-\]
-
-Doubly-indexed Type:
-\[
-  x : A, y : B_x \vdash C_{x,y} \;\text{type}
-\]
-
-Example: Family of Types Indexed by $\mathbb{N}$:
-\[
-  x : \mathbb{N} \vdash even(x) \;\text{type}
-\]
-is a Propositional Function (takes a Natural Number and yields a
-Proposition). For each Natural Number, either $even(x)$ is Inhabited
-(if $x$ is Even) or Uninhabited (if $x$ is Odd).\cite{harper12}
-
-
-
-\subsubsection{Dependent Sum Type ($\Sigma$-type)}\label{sec:sigma_type}
-
-\emph{$\Sigma$-type} (or \emph{Dependent Sum Type} or \emph{Dependent
-  Pair Type})
-
-Dependent Sum (\S\ref{sec:dependent_sum})
-
-\[
-  \Sigma_{(x:A)} B(x)
-\]
-
-If $B$ is Constant, then $\Sigma_{(x:A)}B$ is Judgementally Equal to
-the Product Type (\S\ref{sec:product_type}) $A \times B$:
-\[
-  \Sigma_{(x:A)} B \equiv A \times B
-\]
-
-By Curry-Howard, $\Sigma$-types model Conjunction and Existential
-Quantification.
-
-Analagous to Coproduct or Disjoint Union.
-
-
-
-\subsubsection{Dependent Product Type ($\Pi$-type)}\label{sec:pi_type}
-
-The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or
-\emph{Dependent Function Type}) is the Type of a Dependent Function.
-By Curry-Howard, $\Pi$-types model Implication and Universal
-Quantification.
-
-Dependent Product (\S\ref{sec:dependent_product})
-
-For a Type $A : \class{U}$ in Type Universe
-(\S\ref{sec:type_universe}) $\class{U}$, a Family of Types:
-\[
-  B : A \rightarrow \class{U}
-\]
-can be defined by a Dependent Function which assigns a Type $B(a) :
-\class{U}$ to Each Term $a : A$. The Type of this Function is a
-Dependent Product Type:
-\[
-  \Pi_{(x:A)}B(x)
-\]
-
-If $B$ is Constant, then $\Pi_{(x:A)}B$ is Judgementally Equal to the
-Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
-\[
-  \Pi_{(x:A)}B \equiv A \rightarrow B
-\]
-
-Generalizes the idea of a Polymorphic Function
-(\S\ref{sec:polymorphic_function})
-
-\cite{hott13}:
-
-Example $id$:
-\[
-  id : \Pi_{(A : \class{U})} A \rightarrow A
-\]
-
-Example 2 $swap$:
-\[
-  swap : \Pi_{(A:\class{U})} \Pi_{(B:\class{U})} \Pi_{(C:\class{U})}
-  (A \rightarrow B \rightarrow C) \rightarrow (B \rightarrow A
-  \rightarrow C)
-\]
-Type arguments may be written as subscripts: $id_A$, $swap_{A,B,C}$
-
-A Polymorphic Function returning elements of Type $C$ has Polymorphic
-Type (\S\ref{sec:polymorphic_type}):
-\[
-  \Pi_{(A:\class{U})} A \rightarrow C
-\]
-
-
-
-\subsubsection{Dependent Equality Type}\label{sec:dependent_equality}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Partial Type}\label{sec:partial_type}
 \cite{thompson99}
 % --------------------------------------------------------------------
@@ -4836,6 +4669,255 @@ Weak Equivalence
 
 
 % ====================================================================
+\section{Dependent Type Theory}\label{sec:dependent_type_theory}
+% ====================================================================
+
+\textbf{Categorical Semantics} (\S\ref{sec:categorical_semantics})
+
+Categorical Model (\S\ref{sec:categorical_model})
+
+Interpretation of Judgements of Dependent Type Theory in a given
+Category $\cat{C}$ with Finite Limits (\S\ref{sec:finite_limit})
+
+Codomain Fibration (\S\ref{sec:codomain_fibration}):
+\[
+  cod:\cat{C}^I \rightarrow \cat{C}
+\]
+
+Classifying Functor (Grothendieck Construction
+\S\ref{sec:grothendieck_construction}):
+\[
+  \chi : \cat{C}^{op} \rightarrow \cat{Cat}
+\]
+sends an Object in $\cat{C}$ to the Slice Category
+(\S\ref{sec:slice_category}) over it:
+\[
+  \chi = \Gamma \mapsto \cat{C}/\Gamma
+\]
+and sends a Moprhism $f : \Gamma \rightarrow \Gamma'$ to the Pullback
+(\S\ref{sec:pullback})/Base Change (\S\ref{sec:base_change}) Functor:
+\[
+  f^* : \cat{C}/\Gamma' \rightarrow \cat{C}/\Gamma
+\]
+
+
+\textbf{Rules}
+
+Rules for choices ``$[xyz]$'' associating every String ``$xyz$'' of
+Symbols in Type Theory with Objects and Morphisms in $\cat{C}$: a
+collection of such choices following the Rules is an Interpretation (a
+choice of Categorical Semantics) of the Type Theory in the Category
+$\cat{C}$.
+
+\emph{Contexts and Type Judgements}:
+\begin{enumerate}
+  \item $[()] := *$ -- Empty Context $()$ is Interpreted as the
+    Terminal Object $*$ of $\cat{C}$
+  \item For Context $\Gamma$ with Interpretation $[\Gamma] \in
+    \cat{C}_0$, a Judgement $\Gamma \vdash A\type$ is Interpreted
+    as an Object in the Slice Category over $\Gamma$:
+    \[
+      [\Gamma \vdash A\type] \in (\cat{C}/\Gamma)_0
+    \]
+    giving a choice of Morphism:
+    \[
+      [\Gamma \vdash A\type] : [(\Gamma,x:A)] \rightarrow [\Gamma]
+    \]
+  \item For Judgement $\Gamma \vdash A\type$ Interpreted as $[\Gamma
+    \vdash A\type]$ above, an Extended Context $(\Gamma,x:A)$ is
+    Interpreted as the Domain Object $[(\Gamma,x:A)]$ of the above
+    choice of Morphism
+\end{enumerate}
+
+\emph{Terms}
+
+For Context $\Gamma$ and Judgement $\Gamma \vdash A\type$ with chosen
+Interpretation $[\Gamma \vdash A\type] : [(\Gamma,x:A)] \rightarrow
+[\Gamma]$, a Judgement $\Gamma \vdash a:A$ is Interpreted as a Section
+(\S\ref{sec:section}) of $[\Gamma \vdash A\type]$, equivalently as a
+Morphism in $\cat{C}/\Gamma$:
+\[
+  [\Gamma \vdash a:A]: * \rightarrow [\Gamma,x:A]
+\]
+giving a Commuting Triangle:
+\[
+  1_{[\Gamma]} = [\Gamma \vdash A\type] \circ [\Gamma \vdash a:A]
+\]
+
+\emph{Variables}
+
+\emph{Substitution}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependent Type}\label{sec:dependent_type}
+% --------------------------------------------------------------------
+
+A \emph{Dependent Type} depends on a Term or another Type.
+
+\[
+  x : A \vdash B(x):\mathrm{Types}
+\]
+
+A Dependent Product Type (\S\ref{sec:pi_type}) is defined by
+a Dependent Function (\S\ref{sec:dependent_function}).
+
+Logical Quantifiers (\S\ref{sec:quantifier})
+
+Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+
+Categorically, Dependent Types correspond to Morphisms regarded as
+Indexed Families (Bundle or Fibration), represented by a \emph{Display
+  Map} (\S\ref{sec:display_map}) which is a Morphism $p : B
+\rightarrow A$ where $B(x)$ is the Fiber (\S\ref{sec:fiber}) of $p$
+over $x:A$.
+
+Classifying Morphism (\S\ref{sec:classifying_morphism}),
+Classifying Space (\S\ref{sec:classifying_space})
+
+A Dependent Type is the Type of a Dependent Function
+(\S\ref{sec:dependent_function}).
+
+Dependent Pairs (Dependent Sum Type \S\ref{sec:sigma_type})
+
+
+\textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
+\emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
+Dependent Product Type (\S\ref{sec:pi_type}) to Simply-typed
+$\lambda$-calculus.
+
+
+\textbf{Second-order Dependent Type Theory} ($\lambda \Pi 2$):
+allowing Quantification over Type Constructors
+(\S\ref{sec:type_constructor}), $\Pi$ operator Subsumes both
+$\rightarrow$ of Simply-typed $\lambda$-calculus and $\forall$ of
+System F (\S\ref{sec:system_f})
+
+
+\textbf{Higher-order Dependently Typed Polymorphic $\lambda$-calculus}
+($\lambda \Pi \omega$): corresponds to \emph{Calculus of
+  Constructions} (\S\ref{sec:coq}); extends $\lambda \Pi 2$ to all
+abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
+
+
+
+\subsubsection{Dependent Function}\label{sec:dependent_function}
+
+A \emph{Dependent Function} is a Function from Terms to Types
+(Codomain varies depending on Argument). The Type of a Dependent
+Function is a \emph{Dependent Product Type}
+(\S\ref{sec:pi_type}).
+
+Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
+
+Functionality (respect for Definitional Equality
+\S\ref{sec:proof_equality}):
+\[
+  x : A \vdash B_x \;\text{type}
+\]\[
+  m : A \mapsto B[m/x] \;\text{type}
+\]\[
+  m \equiv n : A \mapsto B[m/x] \equiv B[n/x] \;\text{type}
+\]
+
+Doubly-indexed Type:
+\[
+  x : A, y : B_x \vdash C_{x,y} \;\text{type}
+\]
+
+Example: Family of Types Indexed by $\mathbb{N}$:
+\[
+  x : \mathbb{N} \vdash even(x) \;\text{type}
+\]
+is a Propositional Function (takes a Natural Number and yields a
+Proposition). For each Natural Number, either $even(x)$ is Inhabited
+(if $x$ is Even) or Uninhabited (if $x$ is Odd).\cite{harper12}
+
+
+
+\subsubsection{Dependent Sum Type ($\Sigma$-type)}\label{sec:sigma_type}
+
+\emph{$\Sigma$-type} (or \emph{Dependent Sum Type} or \emph{Dependent
+  Pair Type})
+
+Dependent Sum (\S\ref{sec:dependent_sum})
+
+\[
+  \Sigma_{(x:A)} B(x)
+\]
+
+If $B$ is Constant, then $\Sigma_{(x:A)}B$ is Judgementally Equal to
+the Product Type (\S\ref{sec:product_type}) $A \times B$:
+\[
+  \Sigma_{(x:A)} B \equiv A \times B
+\]
+
+By Curry-Howard, $\Sigma$-types model Conjunction and Existential
+Quantification.
+
+Analagous to Coproduct or Disjoint Union.
+
+
+
+\subsubsection{Dependent Product Type ($\Pi$-type)}\label{sec:pi_type}
+
+The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or
+\emph{Dependent Function Type}) is the Type of a Dependent Function.
+By Curry-Howard, $\Pi$-types model Implication and Universal
+Quantification.
+
+Dependent Product (\S\ref{sec:dependent_product})
+
+For a Type $A : \class{U}$ in Type Universe
+(\S\ref{sec:type_universe}) $\class{U}$, a Family of Types:
+\[
+  B : A \rightarrow \class{U}
+\]
+can be defined by a Dependent Function which assigns a Type $B(a) :
+\class{U}$ to Each Term $a : A$. The Type of this Function is a
+Dependent Product Type:
+\[
+  \Pi_{(x:A)}B(x)
+\]
+
+If $B$ is Constant, then $\Pi_{(x:A)}B$ is Judgementally Equal to the
+Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
+\[
+  \Pi_{(x:A)}B \equiv A \rightarrow B
+\]
+
+Generalizes the idea of a Polymorphic Function
+(\S\ref{sec:polymorphic_function})
+
+\cite{hott13}:
+
+Example $id$:
+\[
+  id : \Pi_{(A : \class{U})} A \rightarrow A
+\]
+
+Example 2 $swap$:
+\[
+  swap : \Pi_{(A:\class{U})} \Pi_{(B:\class{U})} \Pi_{(C:\class{U})}
+  (A \rightarrow B \rightarrow C) \rightarrow (B \rightarrow A
+  \rightarrow C)
+\]
+Type arguments may be written as subscripts: $id_A$, $swap_{A,B,C}$
+
+A Polymorphic Function returning elements of Type $C$ has Polymorphic
+Type (\S\ref{sec:polymorphic_type}):
+\[
+  \Pi_{(A:\class{U})} A \rightarrow C
+\]
+
+
+
+\subsubsection{Dependent Equality Type}\label{sec:dependent_equality}
+
+
+
+% ====================================================================
 \section{Modal Type Theory}\label{sec:modal_type_theory}
 % ====================================================================
 
@@ -5470,6 +5552,8 @@ Homotopy Theory (\S\ref{sec:homotopy})
 
 Homotopy Types Model $\infty$-groupoids
 (\S\ref{sec:infinity_groupoid})
+
+Categorical Semantics (\S\ref{sec:categorical_semantics})
 
 
 

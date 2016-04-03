@@ -924,6 +924,24 @@ Co-constant.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Section}\label{sec:section}
+% --------------------------------------------------------------------
+
+A \emph{Section} of a Morphism $f : A \rightarrow B$ in some Category
+is a Right-inverse (\S\ref{sec:right_inverse}), i.e. a Morphism
+$\sigma : B \rightarrow A$ such that:
+\[
+  1_B = f \circ \sigma : B \xrightarrow{\sigma} A \xrightarrow{f} B
+\]
+
+Dependent Product (\S\ref{sec:dependent_product})
+
+Global Section (\S\ref{sec:global_section}): Section of Bundles
+(\S\ref{sec:bundle})
+
+
+
 % ====================================================================
 \section{Object}\label{sec:category_object}
 % ====================================================================
@@ -979,6 +997,16 @@ is a Functor:
 \[
   i_* : Sub (M') \rightarrow Sub (X)
 \]
+
+
+
+\subsubsection{Subobject Poset}\label{sec:subobject_poset}
+
+Collection of Monomorphisms into a given Object (i.e. Subobjects).
+
+In Categorical Semantics (\S\ref{sec:categorical_semantics}), Formal
+Logic (Part \ref{part:formal_logic}) is Interpreted as being a Formal
+Language for talking about the Subobject Posets of Objects.
 
 
 
@@ -1959,12 +1987,13 @@ $\cat{C}^\cat{2}$.
 \subsection{Slice Category}\label{sec:slice_category}
 % --------------------------------------------------------------------
 
-A \emph{Slice Category} $\cat{C}/C$ of a Category $\cat{C}$ with
-an Object $C$ has as Objects the Morphisms with Codomain $C$ and as
-Morphisms those Morphisms in $\cat{C}$ between the Domains of the
-underlying Morphisms of the Objects of $\cat{C}/C$. That is, for
-Objects in the Slice Category corresonding to Morphisms $f$ and $f'$,
-the Morphism in the Slice Category between the two is $g$ such that
+A \emph{Slice Category} (or \emph{Overcategory}) $\cat{C}/C$ of a
+Category $\cat{C}$ with an Object $C$ has as Objects the Morphisms
+with Codomain $C$ and as Morphisms those Morphisms in $\cat{C}$
+between the Domains of the underlying Morphisms of the Objects of
+$\cat{C}/C$. That is, for Objects in the Slice Category corresonding
+to Morphisms $f$ and $f'$, the Morphism in the Slice Category between
+the two is $g$ such that
 \[
   f' \circ g = f
 \]
@@ -1974,6 +2003,10 @@ the Morphism in the Slice Category between the two is $g$ such that
 if each Slice Category $\cat{C}/x$ is a Cartesian Monoidal Category
 (\S\ref{sec:cartesian_monoidal}) then $\cat{C}$ is Locally Cartesian
 (\S\ref{sec:locally_cartesian})
+
+Categorical Semantics (\S\ref{sec:categorical_semantics}) for Formal
+Logic (Part \ref{part:formal_logic}) and Type Theory (Part
+\ref{part:type_theory})
 
 
 
@@ -2959,6 +2992,13 @@ Representable Presheaf (\S\ref{sec:representable_presheaf})
 
 
 
+\subsubsection{Finite Limit}\label{sec:finite_limit}
+
+Limit over a Finite Diagram, i.e. one whose shape is a Finite Category
+(\S\ref{sec:finite_category})
+
+
+
 \subsubsection{Terminal Object}\label{sec:terminal_object}
 
 An Object $1$ in a Category $\cat{C}$ is \emph{Terminal} if for
@@ -3176,21 +3216,7 @@ A Category has Pullbacks and a Terminal Object if and only if it has
 Finite Products (\S\ref{sec:category_product}) and Equalizers
 (\S\ref{sec:equalizer}). \cite{awodey06}
 
-
-
-\paragraph{Pullback Functor}\label{sec:pullback_functor}\cite{awodey06}
-\hfill \\
-
-For $h : C' \rightarrow C$ in a Category $\cat{C}$ with Pullbacks,
-the \emph{Pullback Functor}:
-\[
-  h^* : \cat{C}/C \rightarrow \cat{C}/C'
-\]
-is defined as:
-\[
-  (A \xrightarrow{\alpha} C) \mapsto
-    (C' \times_\cat{C} A \xrightarrow{\alpha '} C')
-\]
+Base Change Functor (\S\ref{sec:base_change})
 
 
 
@@ -3620,13 +3646,28 @@ Accessible Functor (\S\ref{sec:accessible_functor})
 \subsection{Base Change}\label{sec:base_change}
 % --------------------------------------------------------------------
 
+For a Moprhism $f : X \rightarrow Y$ in a Category $\cat{C}$ with
+Pullbacks (\S\ref{sec:pullback}), a \emph{Base Change Functor} is an
+Induced Functor:
+\[
+  f^* : \cat{C}/Y \rightarrow \cat{C}/X
+\]
+of Slice Categories (\S\ref{sec:slice_category}) with:
+\[
+  f^* = (Z \xrightarrow{\alpha} C) \mapsto
+    (X \times_\cat{C} Z \xrightarrow{\alpha^*} X)
+\]
+%FIXME
+
+If $\cat{C}$ is a Topos then it refines to an Essential Geometric
+Morphism (\S\ref{sec:essential_geometric})
+
+
 Cobase Change
 
 $f_! \dashv f^* \dashv f_*$
 
 $\Sigma_f \dashv f^* \dashv \Pi_f$
-
-Geometric Morphisms (\S\ref{sec:geometric_morphism})
 
 
 
@@ -5698,8 +5739,9 @@ $\cat{S}$-indexed Category $\cat{C}$ is a Pseudofunctor
   \cat{C}: \cat{S}^{op} \rightarrow \cat{Cat}
 \]
 
-by Grothendieck Construction Equivalence %FIXME
-equivalent to a Fibred Category (\S\ref{sec:fibred_category}):
+by Grothendieck Construction (\S\ref{sec:grothendieck_construction})
+Equivalence equivalent to a Fibred Category
+(\S\ref{sec:fibred_category}):
 \[
   \tilde{\cat{C}} \rightarrow \cat{S}
 \]
@@ -5932,6 +5974,17 @@ Opetopic Type Theory (\S\ref{sec:opetopic_typetheory})
 
 
 % --------------------------------------------------------------------
+\subsection{Grothendieck Construction}
+\label{sec:grothendieck_construction}
+% --------------------------------------------------------------------
+
+Classifying Morphism (\S\ref{sec:classifying_morphism})
+
+Classifying Functor?
+
+
+
+% --------------------------------------------------------------------
 \subsection{Truncation}\label{sec:truncation}
 % --------------------------------------------------------------------
 
@@ -6032,6 +6085,12 @@ First-order Logic can be Interpreted in any Topos
 
 Generalization of Point-set Topology (\S\ref{sec:general_topology})
 
+The Base Change Functor (\S\ref{sec:base_change}) in a Topos is an
+Essential Geometric Morphism (\S\ref{sec:essential_geometric}):
+\[
+  (f_! \dashv f^* \dashv f_*):C/X \rightarrow C/Y
+\]
+
 
 
 \subsubsection{Topos Sieve}\label{sec:topos_sieve}
@@ -6061,7 +6120,7 @@ Scheme (\S\ref{sec:scheme})
 
 \subsubsection{Elementary Topos}\label{sec:elementary_topos}
 
-Formal Logic (\S\ref{sec:formal_logic})
+Formal Logic (Part \ref{part:formal_logic})
 
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
 
@@ -6093,6 +6152,15 @@ Effectivity (\S\ref{sec:effective_method})
 % --------------------------------------------------------------------
 \subsection{Geometric Morphism}\label{sec:geometric_morphism}
 % --------------------------------------------------------------------
+
+\subsubsection{Essential Geometric Morphism}
+\label{sec:essential_geometric}
+
+The Base Change Functor (\S\ref{sec:base_change}) in a Topos is an
+Essential Geometric Morphism:
+\[
+  (f_! \dashv f^* \dashv f_*):C/X \rightarrow C/Y
+\]
 
 
 

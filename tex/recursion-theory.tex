@@ -3264,18 +3264,14 @@ Compact Linear Systems (\S\ref{sec:compact_linear_system})
 \cite{abramsky-gay-nagarajan96}
 % --------------------------------------------------------------------
 
-%FIXME move this section?
-
-An \emph{Interaction Category} is a Semantic Universe
+An \emph{Interaction Category} is a Semantic Universe (Categorical
+Model \S\ref{sec:categorical_model})
 
 \emph{Process Specifications}: Objects (Types)
 
 \emph{Processes}: Morphisms
 
 \emph{Interaction}: Composition
-
-Interaction in Process Calculus terms: Parallel Composition +
-Hiding/Restriction
 
 
 \asterism
@@ -3288,7 +3284,7 @@ Specification Structures for Liveness Properties and Deadlock-freedom
 Formal Calculus: Process Calculus (\S\ref{sec:process_calculus})
 
 Categorical Semantics (\S\ref{sec:categorical_semantics}): Categorical
-Model (``Semantic Universe'')
+Model (``Semantic Universe'' \S\ref{sec:categorical_model})
 
 The Formal Calculus methodology starts with a Set of Combinators
 Generating a Syntax, then one defines a Structured Operational
@@ -3316,9 +3312,17 @@ Duality on Processes:
 
 $(p^\bot)^\bot = p$
 
-Composition as combined Parallel Composition and Hiding or Restriction
+Composition (Interaction) as combined Parallel Composition and Hiding
+or Restriction
+
+Interaction in Process Calculus (\S\ref{sec:process_calculus}) terms:
+Parallel Composition + Hiding/Restriction, i.e. two Processes, $p : A
+\rightarrow B$, $q : B \rightarrow C$, have Composite Process $q \circ
+p : A \rightarrow C$ such that the shared Interface $B$ is ``Hidden''.
 
 Associativity is guaranteed by Typed Framework (???)
+
+Symmetric Monoidal Category (\S\ref{sec:symmetric_monoidal})
 
 Tensor Product (\S\ref{sec:tensor_product}) $A \otimes B$:
 \[
@@ -3336,7 +3340,14 @@ Canonical Isomorphisms:
   & unit_A : & A \otimes I & \cong A
 \end{align*}
 
-Symmetric Monoidal Category (\S\ref{sec:symmetric_monoidal})
+Tensor Structure gives:
+\begin{itemize}
+  \item Interpretation of Multiplicatives of Linear Logic
+    (\S\ref{sec:linear_logic}), see also Linear $\lambda$-calculus
+    (\S\ref{sec:linear_lambda})
+  \item Static Operations of Process Calculus
+    (\S\ref{sec:process_calculus}) in Name-free Form
+\end{itemize}
 
 Repartitioning of an Interface by Currying:
 \[
@@ -3347,15 +3358,6 @@ with Application:
 \[
   Ap_{A,B} : (A \multimap B) \otimes A \rightarrow B
 \]
-
-Tensor Structure gives:
-\begin{itemize}
-  \item Interpretation of Multiplicatives of Linear Logic
-    (\S\ref{sec:linear_logic}), see also Linear $\lambda$-calculus
-    (\S\ref{sec:linear_lambda})
-  \item Static Operations of Process Calculus
-    (\S\ref{sec:process_calculus}) in Name-free Form
-\end{itemize}
 
 If $A = A^\bot$, or more generally $A \otimes B = (A^\bot \otimes
 B^\bot)^\bot$, i.e. the Category is Compact Closed
