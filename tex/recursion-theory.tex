@@ -183,6 +183,12 @@ $\lambda$-recursive, $\mu$-recursive
 
 %FIXME this section is mostly for xrefs
 
+Recursive Functions are defined as Fixed Points of regular Functions
+
+in a similar manner (Nested) Data Structures
+(\S\ref{sec:data_structure}) can be defined as Fixed Points of regular
+Type Constructors
+
 
 
 % ====================================================================
@@ -340,6 +346,8 @@ Combinator Calculus (\S\ref{sec:ski_calculus})
 (\S\ref{sec:process_calculus}) and Geometry of Interaction
 (\S\ref{sec:interaction_geometry})
 
+
+
 % --------------------------------------------------------------------
 \subsection{$\mu$-recursion}\label{sec:mu_recursion}
 % --------------------------------------------------------------------
@@ -386,6 +394,10 @@ Semantics (\S\ref{sec:denotational_semantics})
 
 \fist An embedding of $\lambda$-calculus into $\pi$-calculus is given
 by Milner \cite{milner90}
+
+Interaction Category (\S\ref{sec:interaction_category}) $\cat{SProc}$
+(\S\ref{sec:sproc}) of Synchronous Processes is a Model for Typed
+$\lambda$-calculus.
 
 
 
@@ -1284,8 +1296,8 @@ Family of approaches for modelling Concurrent Systems
 \item Communicating Sequential Processes (CSP \S\ref{sec:csp})
 \item Calculus of Communicating Systems (CSP \S\ref{sec:ccs})
 \item $\pi$-calculus (\S\ref{sec:pi_calculus})
-\item Chemical Abstract Machine
-\item Petri Nets
+\item Chemical Abstract Machine (???)
+\item Petri Nets (???)
 \end{itemize}
 
 Process Theory (???)
@@ -1304,6 +1316,96 @@ Fragment of Process Calculus which is free from Deadlock
 (\S\ref{sec:deadlock}): $\pi$-DILL
 (\S\ref{sec:session_typed_pi_calculus}), CP
 (\S\ref{sec:classical_processes}), GV (\S\ref{sec:good_variation})
+
+
+\asterism
+
+
+\cite{winskel-nielsen93}: Atomic Actions over which the Behavior of a
+System is Defined %FIXME
+
+Behavior expresses the Patterns of Actions that a System can perform,
+capturing aspects such as Deadlock (\S\ref{sec:deadlock}), Mutual
+Exclusion (???), Starvation (???), etc.
+
+\fist Note Winskel \& Nielsen \cite{winskel-nielsen93} use the term
+\emph{Reactive System} for Distributed (Concurrent) Systems, cf. with
+Functional Reactive Programming (\S\ref{sec:frp}).
+%FIXME
+
+\[
+  \text{Sender} \leftrightarrow \text{Medium}
+    \leftrightarrow \text{Receiver}
+\]
+
+
+\textbf{Interleaving}
+
+\emph{Interleaving Model}: Abstracts away Independent Components and
+Models Behavior in terms of Sequential Patterns of Actions; Formal
+Behavior expressed in terms of Nondeterministic Merging (or
+Interleaving) of Sequential Behaviors of Components; e.g. Transition
+Systems (\S\ref{sec:state_transition}), Synchronization Trees (???),
+Acceptance Trees (???), Hoare Traces (???) %FIXME
+
+\emph{Non-interleaving Model}: retains Independent Components in the
+Model to allow expression of certain Behavioral Properties such as
+Liveness Properties (???); e.g. Petri Nets (???), Event Structures
+(???), Mazurkiewicz Traces (???)
+
+
+\textbf{Nondeterminism}
+
+\emph{Linear-time Model}: Nondeterministic Behavior expressed as Set of
+Possible (Determinate) Computation Paths; e.g. Hoare Traces,
+Mazurkiewicz Traces, Pratt Pomsets
+
+\emph{Branching-time Model}: e.g. Synchronization and Acceptance
+Trees, Petri Nets, Event Structures
+
+
+in Interleaving Models, Parallel activities are expressed in terms of
+Nondeterminism
+
+
+\textbf{States vs. Actions}
+
+Explicit Representation of (possibly repeating) States in a System:
+e.g. Petri Nets
+
+Abstraction of States in a System, instead focusing on Behavior in
+terms of Patterns of occurrences of Actions over Time: Trees, Event
+Structures, Traces
+
+
+Relationships between Behaviors (e.g. Refinement, Component, etc.)
+expressed as Moprhisms between Transition Systems
+
+The Inclusion Functor (\S\ref{sec:inclusion_functor}) of
+Synchronization Trees in Transition Systems is Left-adjoint
+(\S\ref{sec:adjoint}) to a Functor ``unfolding'' Transition Systems to
+Synchronization Trees. Ignoring the Branching of Computation Paths
+results in Languages (\S\ref{sec:formal_language}) as Models of
+Processes (i.e. the Set of Strings of Actions a Process can perform),
+and there is also an Adjoint Inclusion Functor from Languages to
+Synchronization Trees:
+\[
+  \text{Languages} \hookrightarrow \text{Synchronization Trees}
+    \hookrightarrow \text{Transition Systems}
+\]
+
+other Models...
+
+Categories, Operations of Process Calculi as Universal Constructions
+
+certain kinds of Adjunctions (i.e. Reflection
+\S\ref{sec:reflection_adjunction} and Coreflection
+\S\ref{sec:coreflection_adjunction}) provide a way to express that one
+Model is Embedded in (is more Abstract than)
+
+
+\asterism
+
 
 Any Proof Reduction or Conversion corresponds to either a Computation
 Step or Proces Equivalence \cite{caires-pfenning10}
@@ -1371,6 +1473,24 @@ Free Channels
 Free Variables
 
 Free Process Variables
+
+
+\asterism
+
+
+Interaction Categories (\S\ref{sec:interaction_category})
+
+$\cat{SProc}$ (\S\ref{sec:sproc}) -- Interaction Category for
+Synchronous Processes
+
+$\cat{ASProc}$ (\S\ref{sec:asproc}) -- Interaction Category for
+Asynchronous Processes
+
+Processes: ``Relations Extended in Time''
+
+In $\cat{SProc}$, Morphisms are Processes as Labelled Transition
+Systems (\S\ref{sec:labelled_transition}) Modulo Strong Bisimulation
+(\S\ref{sec:bisimulation})
 
 
 
@@ -1669,6 +1789,10 @@ Recursively Defined Agents (???)
 $!P$
 
 Replicated Input (\S\ref{sec:replicated_input})
+
+Replication -- Extension in Space
+
+\fist Cf. Delays -- Extension in Time \cite{abramsky-gay-nagarajan96}
 
 
 
@@ -2306,7 +2430,7 @@ Congruence
 
 
 \textbf{Labelled Transition System}
-(\S\ref{sec:state_transition_system})
+(\S\ref{sec:labelled_transition})
 
 $P \xrightarrow{\alpha} Q$: Process $P$ may Transition to Process $Q$
 by Action $\alpha$
@@ -3226,6 +3350,11 @@ Nondeterminism and Explicit Nondeterminism \cite{plotkin-pretnar13}
 
 
 
+\subsubsection{Synchronous Calculus of Communicating Systems (SCCS)}
+\label{sec:sccs}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Communicating Sequential Processes (CSP)}\label{sec:csp}
 % --------------------------------------------------------------------
@@ -3235,6 +3364,12 @@ Nondeterminism and Explicit Nondeterminism \cite{plotkin-pretnar13}
 Model-theoretic Semantics (\S\ref{sec:model_semantics})
 
 Denotational Model (Failures Model) (Brookes, Hoare, Roscoe)
+
+
+
+\subsubsection{Receptive Process Theory}\label{sec:receptive_process}
+
+assumes an Asynchronous (i.e. Nonblocking) Send Operation
 
 
 
@@ -3273,6 +3408,11 @@ Model \S\ref{sec:categorical_model})
 
 \emph{Interaction}: Composition
 
+\fist Note that \cite{abramsky-gay-nagarajan96} works within the
+Interleaving Paradigm as opposed to Non-interleaving (``true
+Concurrency''), see \cite{winskel-nielsen93}.
+%FIXME xref
+
 
 \asterism
 
@@ -3294,7 +3434,8 @@ Semantics or Model, and notions of Equivalence, etc.
 \asterism
 
 
-Process analogy with Relations (Symmetric, Bidirectional character)
+Processes (\S\ref{sec:process}): analogy with Relations (Symmetric,
+Bidirectional character); ``Relations Extended in Time''
 
 $p : A \rightarrow B$ -- Concurrent Module with Interface to the
 Environment Partitioned by Types $A$ and $B$
@@ -3368,15 +3509,128 @@ build arbitrary Process Interconnection Networks including Cycles.
 \asterism
 
 
-$\cat{SProc}$
+$\cat{SProc}$ (\S\ref{sec:sproc}) -- Interaction Category for
+Synchronous Processes
 
-$\cat{SProc}_0$: Concurrent System Specifications
+$\cat{ASProc}$ (\S\ref{sec:asproc}) -- Interaction Category for
+Asynchronous Processes
 
-$\cat{SProc}_1$: Synchronization Trees
 
-$\circ_{\cat{SProc}}$: Synchronous Product + Restriction
 
-Identities: Synchronous Buffers (``Wires'' or ``Relays'')
+\subsubsection{SProc}\label{sec:sproc}
+
+$\cat{SProc}$ -- Interaction Category for Synchronous Processes:
+\begin{itemize}
+  \item $\cat{SProc}_0$: \emph{Concurrent System Specifications}
+  \item $\cat{SProc}_1$: \emph{Synchronization Trees} --
+    Non-well-founded Sets \S\ref{sec:hyperset}, canonical
+    representations of Bisimulation (\S\ref{sec:bisimulation})
+    Equivalence Classes
+  \item $\circ_{\cat{SProc}}$: \emph{Synchronous Product} +
+    \emph{Restriction}
+  \item Identities: \emph{Synchronous Buffers} (``Wires'' or
+    ``Relays'')
+\end{itemize}
+
+Model for Classical Linear Logic (\S\ref{sec:cll})
+
+Model for Typed $\lambda$-calculus (\S\ref{sec:typed_lambda})
+
+supports Hierarchy of \emph{Delay Monads} (???): Temporal Structure,
+simulated Asynchrony (cf. SCCS \S\ref{sec:sccs}) %FIXME
+
+Delay -- Extension in Time
+
+Replication (\S\ref{sec:replication}) -- Extension in Space
+
+Process Calculus (\S\ref{sec:process_calculus}):
+\begin{itemize}
+  \item Relabelling, Restriction: Subcategory of ``Embeddings''
+  \item Non-determinism: Semi-additive Structure
+  \item Simulations: $2$-cells
+\end{itemize}
+
+Compact-closed Structure supports a Multi-cut Rule allowing general
+Process Networks to be expressed in a Typed framework
+
+``Tower of Refinements'' (Faithful Functors
+\S\ref{sec:faithful_functor}):
+\[
+  \cat{SProc} \leftarrowtail \cat{SProc}_1 \leftarrowtail
+    \cdots \leftarrowtail \cat{SProc}_k
+\]
+of progressively more Refined Specifications, e.g. Deadlock-freedom,
+Fairness; each Functor Preserving Linear Type Structure.
+
+Interaction -- Synchronous Product
+
+Synchronous Processes: Buffers impose no Delay
+
+``Buffered'' or ``Receptive'' Processes
+\S\ref{sec:receptive_process}): Processes are ``insensitive'' to
+Delay %FIXME
+
+
+\asterism
+
+
+Morphisms in $\cat{SProc}$ (Processes) as Labelled Transition Systems
+(\S\ref{sec:labelled_transition}) Modulo Strong Bisimulation
+(\S\ref{sec:bisimulation})
+
+$L$ -- Set of \emph{Labels}
+
+$\class{Q} = (Q,L,\rightarrow,q_0)$ -- $L$-labelled Transition System
+ with:
+\begin{itemize}
+  \item $Q$ -- States
+  \item $L$ -- Labels
+  \item $q_0 \in Q$ -- Initial State
+  \item $\rightarrow \subseteq Q \times L \times Q$ -- Transition
+    Relation
+\end{itemize}
+
+$p \xrightarrow{a} q$ denotes $(p,a,q) \in \rightarrow$
+
+given another $L$-labelled Transition System $\class{Q}' =
+(Q',L,\rightarrow',q_0')$, a \emph{Strong Simulation}
+(\S\ref{sec:simulation}) from $\class{Q}$ to $\class{Q}'$ is a
+Relation $R \subseteq Q \times Q'$ such that:
+\begin{itemize}
+  \item $q_1 \xrightarrow{a} q_2, q_1 R q_1' \Rightarrow
+    \exists q_2', q_1' \xrightarrow{a} q_2' \wedge q_2 R q_2'$
+  \item $q_0 R q_0'$
+\end{itemize}
+
+A Strong Simulation $R$ is a \emph{Strong Bisimulation}
+(\S\ref{sec:bisimulation}) if its Converse $R^{-1}$ is a Strong
+Simulation from $\class{Q}'$ to $\class{Q}$.
+
+Strong Bisimulation is usually the ``Finest'' Equivalence Relation
+considered on Transition Systems.
+
+Non-well-founded Set Theory (\S\ref{sec:non_wellfounded}): Bisimilar
+Sets are Equal
+
+Aczel's Anti-foundation Axiom (\S\ref{sec:anti_foundation}): every
+Accessible Pointed Graph (\S\ref{sec:pointed_graph}) corresponds to
+the Membership Structure of a Unique Set.
+
+Synchronization Trees: canonical representations of Strong
+Bisimulation Equivalence Classes
+
+Synchronization Trees over Labels $L$ are Defined as the largest
+solution to the Equation:
+\[
+  ST_L = \pow(L \times ST_L)
+\]
+specifically $ST_L$ is the Final Coalgebra
+(\S\ref{sec:terminal_coalgebra}) of the Functor $X \mapsto \pow(L
+\times X)$
+
+
+
+\subsubsection{ASProc}\label{sec:asproc}
 
 
 
