@@ -856,8 +856,9 @@ Unique Homomorphism from Initial $F$-algebra
 allows Evaluation of arbitrarily nested Expressions
 
 Catamorphism creates a Recursive Evaluator for a Nested Data Structure
-(the Fixed Point of $F$), a generalization of List Folding to
-arbitrary Recursive Data Structures (\S\ref{sec:data_structure}).
+(the Fixed Point \S\ref{sec:fixed_point} of $F$) a generalization of
+List Folding to arbitrary Recursive Data Structures
+(\S\ref{sec:data_structure}).
 
 
 
@@ -1307,19 +1308,18 @@ The Category of $F$-algebras has a Forgetful Functor to $\cat{C}$.
   \item $S$-algebra (Pointed Endofunctors \S\ref{sec:s_algebra})
   \item $T$-algebra (Monads \S\ref{sec:t_algebra})
   \item $H$-algebra (Hughes Arrows \S\ref{sec:h_algebra})
+  \item Algebra over an Endo-profunctor ($\cat{C}-\cat{C}$-bimodule)
+    (???) %FIXME
 \end{itemize}
 
 $T$-algebra (\S\ref{sec:t_algebra}) for a Monad without Associativity
 
-$F$-homomorphism $z$:
-\[
-  g \circ F z = z \circ f
-\]
-
-If a Functor has an Initial Algebra (\S\ref{sec:initial_algebra}),
-i.e. Least Fixed-point, or a Final Coalgebra
-(\S\ref{sec:terminal_coalgebra}, i.e. Greatest Fixed-point, then it is
-Isomorphic to its Image under the Functor. \cite{corfield08}
+If a Functor has an Initial Algebra (\S\ref{sec:initial_algebra},
+i.e. Least Fixed-point (\S\ref{sec:least_fixedpoint}), or a Final
+Coalgebra (\S\ref{sec:terminal_coalgebra}, i.e. Greatest Fixed-point
+(\S\ref{sec:greatest_fixedpoint}), then it is Isomorphic to its Image
+under the Functor. \cite{corfield08}
+%FIXME wording, correctness?
 
 Catamorphism (\S\ref{sec:catamorphism}): unique Homomorphism from the
 Initial Algebra to any orther $F$-algebra
@@ -1332,7 +1332,7 @@ Initial Algebra to any orther $F$-algebra
 In $\cat{Set}$, built as ``Term Models'' \cite{corfield08} %FIXME
 
 Initial Algebras generalize Least Fixed-points
-(\S\ref{sec:fixed_point}) \cite{rutten00}
+(\S\ref{sec:least_fixedpoint}) \cite{rutten00}
 
 allows for Induction (\S\ref{sec:mathematical_induction}) and
 Recursion (\S\ref{sec:recursion}), Terminal Coalgebra
@@ -1344,10 +1344,13 @@ Inductive Types (\S\ref{sec:inductive_type})
 
 (Milewski - Understanding F-Algebras):
 
-The Carrier of the Initial Algebra is the Fixed Point of $F$:
+The Carrier of the Initial Algebra is the Fixed Point
+(\S\ref{sec:fixed_point}) of $F$:
 \[
   Fix (F) = Fx (F (Fix (F)))
 \]
+where $Fix$ is the Type-level Fixed-point Combinator
+(\S\ref{sec:fixedpoint_combinator}).
 
 Evaluator of the Initial Algebra is $Fx : (F (Fix (F))) \rightarrow
 (Fix (F))$
@@ -1413,7 +1416,7 @@ Systems \S\ref{sec:state_transition})
 Coalgebraic Modal Logic (???)
 
 Terminal Coalgebras generalize Greatest Fixed-points
-(\S\ref{sec:fixed_point}) \cite{rutten00}
+(\S\ref{sec:greatest_fixedpoint}) \cite{rutten00}
 
 allows for Coinduction (\S\ref{sec:mathematical_induction}) and
 Corecursion (\S\ref{sec:recursion}), Initial Algebra
@@ -1424,8 +1427,12 @@ Corecursion (\S\ref{sec:recursion}), Initial Algebra
 Categorical Semantics (\S\ref{sec:categorical_semantics}) for
 Coinductive Types (\S\ref{sec:coinductive_type})
 
-Terminal Coalgebras $x$ are Fixed Points of their Endofunctors: $F x
-\cong x$
+Terminal Coalgebras $X$ are Fixed Points (\S\ref{sec:fixed_point}) of
+their Endofunctors: $F(X) \cong X$, i.e. if $F$ has a Terminal
+Coalgebra $\theta : X \rightarrow F(X)$ then $X$ is Isomorphic to
+$F(X)$ and $X$ is the Greatest Fixed-point of $F$.
+
+Fixed-point Combinator (\S\ref{sec:fixedpoint_combinator})
 
 Set of Streams $A^\omega$ (Infinite Sequences of Elements of $A$, map
 $A^\omega \rightarrow A \times A^\omega$, $A^\omega$ is a Coalgebra
