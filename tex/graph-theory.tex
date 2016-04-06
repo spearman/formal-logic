@@ -1,26 +1,40 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Graph Theory}
+\part{Graph Theory}\label{part:graph_theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ====================================================================
-\section{Graph} \label{sec:graph}
+\section{Graph}\label{sec:graph}
 % ====================================================================
 
 A \emph{Graph}, $G$, is an Ordered Pair of Sets, $G = (V,E)$ where:
 \begin{enumerate}
-\item $V$ is the Set of \emph{Vertices} of generic Elements
-\item $E$ is the Set of \emph{Edges} which are a ordered pairs of
-  Vertices, that is $E \subseteq V \times V$
+  \item $V$ is the Set of \emph{Vertices} (\S\ref{sec:vertex}) of
+    generic Elements
+  \item $E$ is the Set of \emph{Edges} (\S\ref{sec:edge}) which are a
+    Ordered Pairs of Vertices, that is $E \subseteq V^2$
 \end{enumerate}
 The Vertices of an Edge are \emph{Endpoints} of that Edge, and the
-Edge is \emph{Incident} to those Vertices. Two Vertices $A,B$ are
-\emph{Adjacent} when
+Edge is \emph{Incident} to those Vertices. Two Vertices $a,b$ are
+\emph{Adjacent} when:
 \[
-    (A,B) \in E \vee (B,A) \in E
+    (a,b) \in E \vee (b,a) \in E
 \]
 A \emph{Self-loop} is an Edge with both Endpoints the same Vertex.
+
+$\Delta_V$ -- the Diagonal Subset of $V$, i.e. Pairs $(x,x)$
+
+$V^2/\Delta_V$ -- Complement of $\Delta_V$, i.e. Pairs
+$(x,y)$ with $x \neq y$
+
+$\angleover{V}{2}$ -- Quotient Set of $V^2$ where $(x,y)$ is
+Identified with $(y,x)$, i.e. the Set of Unordered Pairs $\{x,y\}$ of
+Vertices
+
+${V}\choose{2}$ -- Quotient Set of $V^2/\Delta_V$ where $(x,y)$ is
+Identified with $(y,x)$, i.e. the Set of Unordered Pairs where $x \neq
+y$
 
 The \emph{Eccentricity}, $\epsilon$, of a Vertex, $v$, is the greatest
 distance between $v$ and any other Vertex.
@@ -34,20 +48,141 @@ Vertex in the Graph.
 
 
 % --------------------------------------------------------------------
-\subsection{Multigraph} \label{sec:multigraph}
+\subsection{Vertex}\label{sec:vertex}
 % --------------------------------------------------------------------
 
-A \emph{Multigraph} (or \emph{Pseudo-graph}) is a Graph where $E$ is a
-Multiset where Edges with Multiplicity $>1$ are called
-\emph{Parallel}.
+(or \emph{Node})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Simple Graph} \label{sec:simple_graph}
+\subsection{Edge}\label{sec:edge}
+% --------------------------------------------------------------------
+
+(or \emph{Line})
+
+an Directed (Ordered) Edge in a Directed Graph is called an Arc
+(\S\ref{sec:arc})
+
+
+
+\subsubsection{Loop}\label{sec:graph_loop}
+
+Edge with same base and end Vertex
+
+Loop Graph (\S\ref{sec:loop_graph})
+
+Directed Loop (\S\ref{sec:directed_loop})
+
+\fist See also \emph{Loop} (Topology \S\ref{sec:loop})
+
+
+
+\subsubsection{Adjacency}\label{sec:adjacency}
+
+$x \sim y$
+
+Adjacency Relation
+
+Directed Loop Graph (\S\ref{sec:directed_loop_graph}) determined
+entirely by the Adjacency Relation
+
+Adjacency Matrix
+
+
+
+% --------------------------------------------------------------------
+\subsection{Path}\label{sec:graph_path}
+% --------------------------------------------------------------------
+
+\emph{Directed Path} (\S\ref{sec:directed_path}) in a Directed Graph
+(\S\ref{sec:directed_graph})
+
+\fist See also \emph{Path} (Topology \S\ref{sec:topology})
+
+
+
+\subsubsection{Reachability}\label{sec:reachability}
+
+Reachability in an Undirected Graph is an Equivalence Relation:
+Connected Components are the Equivalence Classes
+
+In a Directed Graph (\S\ref{sec:directed_graph}) $G = (V,E)$, the
+Reachability Relation is the Transitive Closure of $E$. If $G$ is
+Acyclic (\S\ref{sec:dag}) then the Reachability Relation is a Partial
+Order (\S\ref{sec:partial_order}), i.e. it is Anti-symmetric
+(\S\ref{sec:antisymmetric_relation}).
+
+Transitive Reduction (\S\ref{sec:transitive_reduction_graph}) of a
+Directed Graph
+
+
+
+% --------------------------------------------------------------------
+\subsection{Subgraph}\label{sec:subgraphs}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Finite Graph}\label{sec:finite_graph}
+% --------------------------------------------------------------------
+
+$V$ and $E$ are Finite Sets
+
+
+
+% --------------------------------------------------------------------
+\subsection{Simple Graph}\label{sec:simple_graph}
 % --------------------------------------------------------------------
 
 A \emph{Simple Graph} has no Self-loops and no Parallel Edges.
+
+Injective Function $d : E \hookrightarrow {V \choose 2}$
+
+Simple Directed Graph (\S\ref{sec:simple_directed})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Loop Graph}\label{sec:loop_graph}
+% --------------------------------------------------------------------
+
+Self-loops (\S\ref{sec:graph_loop}) allowed, no Parallel Edges
+
+Injective Function $d : E \hookrightarrow \angleover{V}{2}$
+
+Undirected Loop Graph is given by a Symmetric Relation on $V$
+
+Directed Loop Graph (\S\ref{sec:directed_loop_graph}) $d : E
+\hookrightarrow V^2$ -- arbitrary Binary Relation on $V$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Multigraph}\label{sec:multigraph}
+% --------------------------------------------------------------------
+
+A \emph{Multigraph} is a Graph where $E$ is a Multiset where Edges
+with Multiplicity $>1$ are called \emph{Parallel}.
+
+no Self-loops, Parallel Edges allowed
+
+arbitrary Function $d : E \rightarrow {V \choose 2}$
+
+Directed Multigraph (\S\ref{sec:directed_multigraph}) $d : E
+\rightarrow V^2 / \Delta_V$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Pseudograph}\label{sec:pseudograph}
+% --------------------------------------------------------------------
+
+Self-loops and Parallel Edges allowed
+
+arbitrary Function $d : E \rightarrow \angleover{V}{2}$
+
+Directed Pseudograph (Quiver \S\ref{sec:quiver}) $d : E \rightarrow
+V^2$
 
 
 
@@ -55,18 +190,45 @@ A \emph{Simple Graph} has no Self-loops and no Parallel Edges.
 \subsection{Undirected Graph} \label{sec:undirected_graph}
 % --------------------------------------------------------------------
 
-In an \emph{Undirected Graph}, it is required that for $A,B \in V$:
+In an \emph{Undirected Graph}, it is required that for $a,b \in V$:
 \[
-    (A,B) \in E \leftrightarrow (B,A) \in E
+    (a,b) \in E \leftrightarrow (b,a) \in E
 \]
 This is the definition of a Symmetric Relation
 (\S\ref{sec:symmetric_relation}) on $V$.
 
 
 
+\subsubsection{Connected Component} \label{sec:connected_component}
+
+Equivalence Classes given by the Reachability
+(\S\ref{sec:reachability}) Relation
+
+\emph{Strongly Connected Component} (\S\ref{sec:strongly_connected})
+in a Directed Graph (\S\ref{sec:directed_graph})
+
+
+
+\subsubsection{Complete Graph} \label{sec:complete_graph}
+
+Simple (\S\ref{sec:simple_graph}) Undirected Graph where every Pair of
+distinct Vertices is Connected by a unique Edge.
+
+Complete Digraph (\S\ref{sec:complete_digraph})
+
+
+
 \subsubsection{Tree Graph}\label{sec:tree_graph}
 
+Pointed Tree (\S\ref{sec:pointed_tree})
+
+
+
 \paragraph{Forest} \label{sec:forest}
+
+
+
+\subsubsection{Circulant Graph} \label{sec:circulant_graph}
 
 
 
@@ -82,11 +244,19 @@ Vertices $V$: Set of Node Elements
 
 Arrows $A$: Set of Ordered Pairs of Vertices
 
+Directed Graph
+$d : E \hookrightarrow V^2 / \Delta_V$
+
+Directed Loop Graph (\S\ref{sec:directed_loop}) $d : E \hookrightarrow
+V^2$
+
+Directed Multigraph (\S\ref{sec:directed_multigraph}) $d : E
+\rightarrow V^2 / \Delta_V$
+
+Directed Pseudograph (Quiver \S\ref{sec:quiver}) $d : E \rightarrow
+V^2$
 
 
-\emph{Reachability}
-
-\emph{Directed Path}
 
 \emph{Dominator}
 
@@ -106,8 +276,90 @@ terminate at other Vertices of the Knot.
 
 
 
-\subsubsection{Strongly Connected Component}
-\label{sec:strongly_connected}
+\subsubsection{Arc}\label{sec:arc}
+
+Ordered Edge (\S\ref{sec:edge})
+
+
+
+\paragraph{Directed Loop}\label{sec:directed_loop}
+\hfill \\
+
+Directed Loop (\S\ref{sec:directed_loop})
+
+
+
+\subsubsection{Directed Path}\label{sec:directed_path}
+
+Path (\S\ref{sec:graph_path})
+
+
+
+\subsubsection{Cycle}\label{sec:cycle}
+
+\paragraph{Closed Walk}\label{sec:closed_walk}
+
+\paragraph{Simple Cycle}\label{sec:simple_cycle}
+\hfill \\
+
+(or \emph{Directed Cycle})
+
+
+
+\subsubsection{Strongly Connected}\label{sec:strongly_connected}
+
+A pair of Vertices $u,v \in V$ are \emph{Strongly Connected} if there
+is a Directed Path in each direction between them, i.e. $u$ is
+Reachable (\S\ref{sec:reachability}) from $v$ and $v$ is Reachable
+from $u$.
+
+The Strongly-connected (Binary) Relation is an Equivalence Relation
+and the Equivalence Classes of Vertices are \emph{Strongly Connected
+  Component} (\S\ref{sec:strongly_connected_component})
+
+A Directed Graph is Strongly Connected if all pairs of Vertices are
+Strongly Connected.
+
+
+
+\paragraph{Strongly Connected Component}
+\label{sec:strongly_connected_component}
+\hfill \\
+
+A \emph{Strongly Connected Component} is an Equivalence Class of the
+Strongly-connected Relation on the Vertices of a Directed Graph.
+Strongly Connected Components are then Subgraphs in which every Vertex
+is Reachable (\S\ref{sec:reachability}) from every other Vertex.
+
+Connected Component (\S\ref{sec:connected_component})
+
+
+
+\subsubsection{Complete Digraph}\label{sec:complete_digraph}
+
+every pair of distinct Vertices is Connected by a pair of unique
+Edges:
+\[
+  v,u \in V \Rightarrow \exists! (v,u), (u,v) \in E
+\]
+
+
+
+\subsubsection{Transitive Reduction}
+\label{sec:transitive_reduction_graph}
+
+Transitive Reduction (\S\ref{sec:transitive_reduction}) of the
+Reachability Relation (\S\ref{sec:reachability})
+
+not uniquely defined for Directed Graphs with Cycles
+
+Transitive Reduction of a Directed Acyclic Graph (\S\ref{sec:dag}) $G
+= (V,E)$ is unique and consists of the Edges of $G$ that from the only
+Path between their Endpoints and so it is always a Subgraph of $G$.
+This generates the Covering Relation (\S\ref{sec:covering_relation})
+of the Partial Order defined by the Reachability Relation.
+
+
 
 \subsubsection{Directed Acyclic Graph} \label{sec:dag}
 
@@ -125,34 +377,51 @@ Extension of the DAG's Partial Ordering. % FIXME ref linear extension
 
 \subsubsection{Tournament}\label{sec:tournament}
 
+\subsubsection{Simple Directed Graph}\label{sec:simple_directed}
+
+Simple Graph (\S\ref{sec:simple_graph})
+
+Irreflexive Relation on $V$
 
 
-\subsubsection{Multi-digraph}\label{sec:multi-digraph}
 
-\paragraph{Quiver}\label{sec:quiver}
-\hfill \\
+\subsubsection{Directed Loop Graph}\label{sec:directed_loop_graph}
+
+Loop Graph (\S\ref{sec:loop_graph})
+
+arbitrary Binary Relation on $V$
+
+completely determined by Adjacency Relation (\S\ref{sec:adjacency})
+
+
+
+\subsubsection{Directed Multigraph}\label{sec:directed_multigraph}
+
+Multigraph (\S\ref{sec:multigraph})
+
+
+
+\subsubsection{Quiver}\label{sec:quiver}
+
+Directed Pseudograph (\S\ref{sec:pseudograph})
 
 Paracategory (\S\ref{sec:paracategory})
 
+nCatLab:
+
+it is always possible to Interpret any kind of Graph as a Quiver
 
 
-% --------------------------------------------------------------------
-\subsection{Complete Graph} \label{sec:complete_graph}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Subgraph} \label{sec:subgraphs}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Finite Graph} \label{sec:finite_graph}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Rooted Graph} \label{sec:rooted_graph}
 % --------------------------------------------------------------------
 
 Undirected or Directed
+
+\emph{Mostowski's Collapsing Lemma}: \cite{aczel88}
+
+Every Well-founded Graph has a Unique Decoration %FIXME xref, move this?
 
 
 
@@ -163,6 +432,10 @@ A \emph{Pointed Graph} (or \emph{Accessible Pointed Graph} or
 Reachable from the Root Vertex.
 
 Anti-foundation Axioms (\S\ref{sec:anti_foundation})
+
+
+
+\subsubsection{Pointed Tree} \label{sec:pointed_tree}
 
 
 
