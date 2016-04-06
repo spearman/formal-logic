@@ -66,18 +66,6 @@ an Directed (Ordered) Edge in a Directed Graph is called an Arc
 
 
 
-\subsubsection{Loop}\label{sec:graph_loop}
-
-Edge with same base and end Vertex
-
-Loop Graph (\S\ref{sec:loop_graph})
-
-Directed Loop (\S\ref{sec:directed_loop})
-
-\fist See also \emph{Loop} (Topology \S\ref{sec:loop})
-
-
-
 \subsubsection{Adjacency}\label{sec:adjacency}
 
 $x \sim y$
@@ -91,6 +79,26 @@ Adjacency Matrix
 
 
 
+\subsubsection{Loop}\label{sec:graph_loop}
+
+Edge with same base and end Vertex
+
+Loop Graph (\S\ref{sec:loop_graph})
+
+Directed Loop (\S\ref{sec:directed_loop})
+
+\fist See also \emph{Loop} (Topology \S\ref{sec:loop})
+
+
+
+\subsubsection{Parallel Edge}\label{sec:parallel_edge}
+
+(or \emph{Multi-edge})
+
+Multigraph (\S\ref{sec:multigraph})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Path}\label{sec:graph_path}
 % --------------------------------------------------------------------
@@ -100,12 +108,47 @@ Adjacency Matrix
 
 \fist See also \emph{Path} (Topology \S\ref{sec:topology})
 
+a Graph is Well-founded if it has no Infinite Path
+
+Two Vertices are \emph{Connected} (\S\ref{sec:connectivity}) if there
+is a Path between them. A Graph is Connected if there is a Path
+between all pairs of Vertices.
+
+
+
+\subsubsection{Connectivity}\label{sec:connectivity}
+
+A pair of Vertices is \emph{Connected} if there is a Path
+(\S\ref{sec:graph_path}) between them. A Graph is Connected if there
+is a Path between all pairs of Vertices (there are no Unreachable
+Vertices \S\ref{sec:reachability}).
+
+If the underlying Undirected Graph of a Directed Graph is Connected
+then the Directed Graph is \emph{Weakly Connected}
+(\S\ref{sec:weakly_connected})
+
+Strongly Connected (\S\ref{sec:strongly_connected})
+
+
+
+\subsubsection{Connected Component}\label{sec:connected_component}
+
+Equivalence Classes given by the Reachability
+(\S\ref{sec:reachability}) Relation
+
+\emph{Strongly Connected Component}
+(\S\ref{sec:strongly_connected_component}) in a Directed Graph
+(\S\ref{sec:directed_graph})
+
 
 
 \subsubsection{Reachability}\label{sec:reachability}
 
 Reachability in an Undirected Graph is an Equivalence Relation:
 Connected Components are the Equivalence Classes
+
+if there are no Unreachable Vertices the Graph is Connected
+(\S\ref{sec:connectivity})
 
 In a Directed Graph (\S\ref{sec:directed_graph}) $G = (V,E)$, the
 Reachability Relation is the Transitive Closure of $E$. If $G$ is
@@ -115,6 +158,28 @@ Order (\S\ref{sec:partial_order}), i.e. it is Anti-symmetric
 
 Transitive Reduction (\S\ref{sec:transitive_reduction_graph}) of a
 Directed Graph
+
+
+
+\subsubsection{Cycle}\label{sec:cycle}
+
+Directed Cycle \S\ref{sec:directed_cycle}
+
+
+
+\paragraph{Closed Walk}\label{sec:closed_walk}
+
+\paragraph{Simple Cycle}\label{sec:simple_cycle}
+
+\paragraph{Circuit}\label{sec:circuit}
+
+\paragraph{Girth}\label{sec:girth}
+
+\paragraph{Chordless Cycle}\label{sec:chordless_cycle}
+
+\paragraph{Peripheral Cycle}\label{sec:peripheral_cycle}
+
+\paragraph{Cycle Space}\label{sec:cycle_space}
 
 
 
@@ -131,6 +196,14 @@ $V$ and $E$ are Finite Sets
 
 
 % --------------------------------------------------------------------
+\subsection{Well-founded Graph}\label{sec:wellfounded_graph}
+% --------------------------------------------------------------------
+
+no Infinite Paths (\S\ref{sec:graph_path})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Simple Graph}\label{sec:simple_graph}
 % --------------------------------------------------------------------
 
@@ -139,6 +212,18 @@ A \emph{Simple Graph} has no Self-loops and no Parallel Edges.
 Injective Function $d : E \hookrightarrow {V \choose 2}$
 
 Simple Directed Graph (\S\ref{sec:simple_directed})
+
+
+
+\subsubsection{Cycle Graph}\label{sec:cycle_graph}
+
+\emph{Cycle Graph} (or \emph{Circular Graph}) consists of a single
+Cycle (\S\ref{sec:cycle})
+
+$C_n$ -- Cycle Graph with $n$ Vertices
+
+the Cycle Graph $C_n$ is Dual to the Dipole Graph
+(\S\ref{sec:dipole_graph}) $D_n$
 
 
 
@@ -162,7 +247,8 @@ Directed Loop Graph (\S\ref{sec:directed_loop_graph}) $d : E
 % --------------------------------------------------------------------
 
 A \emph{Multigraph} is a Graph where $E$ is a Multiset where Edges
-with Multiplicity $>1$ are called \emph{Parallel}.
+with Multiplicity $>1$ are called \emph{Parallel}
+(\S\ref{sec:parallel_edge}).
 
 no Self-loops, Parallel Edges allowed
 
@@ -170,6 +256,18 @@ arbitrary Function $d : E \rightarrow {V \choose 2}$
 
 Directed Multigraph (\S\ref{sec:directed_multigraph}) $d : E
 \rightarrow V^2 / \Delta_V$
+
+
+
+\subsubsection{Dipole Graph}\label{sec:dipole_graph}
+
+two Vertices connected with any number of Parallel Edges
+
+$n$ Edges
+
+Order-$n$ Dipole Graph, $D_n$
+
+$D_n$ is Dual to the Cycle Graph (\S\ref{sec:cycle_graph}) $C_n$
 
 
 
@@ -186,9 +284,9 @@ V^2$
 
 
 
-% --------------------------------------------------------------------
-\subsection{Undirected Graph} \label{sec:undirected_graph}
-% --------------------------------------------------------------------
+% ====================================================================
+\section{Undirected Graph}\label{sec:undirected_graph}
+% ====================================================================
 
 In an \emph{Undirected Graph}, it is required that for $a,b \in V$:
 \[
@@ -199,42 +297,45 @@ This is the definition of a Symmetric Relation
 
 
 
-\subsubsection{Connected Component} \label{sec:connected_component}
-
-Equivalence Classes given by the Reachability
-(\S\ref{sec:reachability}) Relation
-
-\emph{Strongly Connected Component} (\S\ref{sec:strongly_connected})
-in a Directed Graph (\S\ref{sec:directed_graph})
-
-
-
-\subsubsection{Complete Graph} \label{sec:complete_graph}
+% --------------------------------------------------------------------
+\subsection{Complete Graph}\label{sec:complete_graph}
+% --------------------------------------------------------------------
 
 Simple (\S\ref{sec:simple_graph}) Undirected Graph where every Pair of
 distinct Vertices is Connected by a unique Edge.
 
 Complete Digraph (\S\ref{sec:complete_digraph})
 
-
-
-\subsubsection{Tree Graph}\label{sec:tree_graph}
-
-Pointed Tree (\S\ref{sec:pointed_tree})
-
-
-
-\paragraph{Forest} \label{sec:forest}
-
-
-
-\subsubsection{Circulant Graph} \label{sec:circulant_graph}
+assigning an Order on each Edge of a Complete Graph gives a Tournament
+(\S\ref{sec:tournament})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Directed Graph} \label{sec:directed_graph}
+\subsection{Tree Graph}\label{sec:tree_graph}
 % --------------------------------------------------------------------
+
+any two Vertices are connected by exactly one Path
+
+Rooted Tree (\S\ref{sec:rooted_tree})
+
+$1$-dimensional CW-complex (\S\ref{sec:cw_complex})
+
+
+
+\subsubsection{Forest}\label{sec:forest}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Circulant Graph}\label{sec:circulant_graph}
+% --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Directed Graph}\label{sec:directed_graph}
+% ====================================================================
 
 (or \emph{Digraph})
 
@@ -276,37 +377,74 @@ terminate at other Vertices of the Knot.
 
 
 
-\subsubsection{Arc}\label{sec:arc}
+% --------------------------------------------------------------------
+\subsection{Arc}\label{sec:arc}
+% --------------------------------------------------------------------
 
 Ordered Edge (\S\ref{sec:edge})
 
 
 
-\paragraph{Directed Loop}\label{sec:directed_loop}
-\hfill \\
+\subsubsection{Directed Loop}\label{sec:directed_loop}
 
 Directed Loop (\S\ref{sec:directed_loop})
 
 
 
-\subsubsection{Directed Path}\label{sec:directed_path}
+% --------------------------------------------------------------------
+\subsection{Directed Path}\label{sec:directed_path}
+% --------------------------------------------------------------------
 
 Path (\S\ref{sec:graph_path})
 
 
 
-\subsubsection{Cycle}\label{sec:cycle}
+% --------------------------------------------------------------------
+\subsection{Directed Cycle}\label{sec:directed_cycle}
+% --------------------------------------------------------------------
 
-\paragraph{Closed Walk}\label{sec:closed_walk}
+Cycle \S\ref{sec:cycle}
 
-\paragraph{Simple Cycle}\label{sec:simple_cycle}
-\hfill \\
+Directed Acyclic Graph (\S\ref{sec:dag}) has no Directed Cycles
 
-(or \emph{Directed Cycle})
+a Directed Cycle Graph is a Cayley Graph (\S\ref{sec:cayley_graph})
+for a Cyclic Group (\S\ref{sec:cyclic_group})
 
 
 
-\subsubsection{Strongly Connected}\label{sec:strongly_connected}
+% --------------------------------------------------------------------
+\subsection{In/Outdegree}\label{sec:inoutdegree}
+% --------------------------------------------------------------------
+
+\emph{Source}: Indegree $0$
+
+\emph{Sink}: Outdegree $0$
+
+\emph{Internal}: neither a Source nor a Sink
+
+
+Trees: Branching Factor %FIXME xref
+
+
+
+\subsubsection{Degree Sequence}\label{sec:degree_sequence}
+
+Isomorphic Directed Graphs have the same Degree Sequence
+
+
+
+% --------------------------------------------------------------------
+\subsection{Weakly Connected}\label{sec:weakly_connected}
+% --------------------------------------------------------------------
+
+A Directed Graph is \emph{Weakly Connected} if its underlying
+Undirected Graph is Connected (\S\ref{sec:connectivity})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Strongly Connected}\label{sec:strongly_connected}
+% --------------------------------------------------------------------
 
 A pair of Vertices $u,v \in V$ are \emph{Strongly Connected} if there
 is a Directed Path in each direction between them, i.e. $u$ is
@@ -322,9 +460,8 @@ Strongly Connected.
 
 
 
-\paragraph{Strongly Connected Component}
+\subsubsection{Strongly Connected Component}
 \label{sec:strongly_connected_component}
-\hfill \\
 
 A \emph{Strongly Connected Component} is an Equivalence Class of the
 Strongly-connected Relation on the Vertices of a Directed Graph.
@@ -335,7 +472,9 @@ Connected Component (\S\ref{sec:connected_component})
 
 
 
-\subsubsection{Complete Digraph}\label{sec:complete_digraph}
+% --------------------------------------------------------------------
+\subsection{Complete Digraph}\label{sec:complete_digraph}
+% --------------------------------------------------------------------
 
 every pair of distinct Vertices is Connected by a pair of unique
 Edges:
@@ -345,8 +484,10 @@ Edges:
 
 
 
-\subsubsection{Transitive Reduction}
+% --------------------------------------------------------------------
+\subsection{Transitive Reduction}
 \label{sec:transitive_reduction_graph}
+% --------------------------------------------------------------------
 
 Transitive Reduction (\S\ref{sec:transitive_reduction}) of the
 Reachability Relation (\S\ref{sec:reachability})
@@ -361,7 +502,55 @@ of the Partial Order defined by the Reachability Relation.
 
 
 
-\subsubsection{Directed Acyclic Graph} \label{sec:dag}
+% --------------------------------------------------------------------
+\subsection{Simple Directed Graph}\label{sec:simple_directed}
+% --------------------------------------------------------------------
+
+Simple Graph (\S\ref{sec:simple_graph})
+
+Irreflexive Relation on $V$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Directed Loop Graph}\label{sec:directed_loop_graph}
+% --------------------------------------------------------------------
+
+Loop Graph (\S\ref{sec:loop_graph})
+
+arbitrary Binary Relation on $V$
+
+completely determined by Adjacency Relation (\S\ref{sec:adjacency})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Directed Multigraph}\label{sec:directed_multigraph}
+% --------------------------------------------------------------------
+
+Multigraph (\S\ref{sec:multigraph})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Quiver}\label{sec:quiver}
+% --------------------------------------------------------------------
+
+Directed Pseudograph (\S\ref{sec:pseudograph})
+
+Paracategory (\S\ref{sec:paracategory})
+
+nCatLab:
+
+it is always possible to Interpret any kind of Graph as a Quiver
+
+
+
+% --------------------------------------------------------------------
+\subsection{Directed Acyclic Graph}\label{sec:dag}
+% --------------------------------------------------------------------
+
+no Directed Cycles (\S\ref{sec:directed_cycle})
 
 A Partial Ordering, $\leq_P$, of a DAG, $G$, may be defined as the
 \emph{Reachability Relation} on $G$ by taking the objects as the
@@ -375,73 +564,31 @@ Extension of the DAG's Partial Ordering. % FIXME ref linear extension
 
 
 
-\subsubsection{Tournament}\label{sec:tournament}
+% --------------------------------------------------------------------
+\subsection{Symmetric Digraph}\label{sec:symmetric_digraph}
+% --------------------------------------------------------------------
 
-\subsubsection{Simple Directed Graph}\label{sec:simple_directed}
+Inverse for every Arc
 
-Simple Graph (\S\ref{sec:simple_graph})
-
-Irreflexive Relation on $V$
-
-
-
-\subsubsection{Directed Loop Graph}\label{sec:directed_loop_graph}
-
-Loop Graph (\S\ref{sec:loop_graph})
-
-arbitrary Binary Relation on $V$
-
-completely determined by Adjacency Relation (\S\ref{sec:adjacency})
-
-
-
-\subsubsection{Directed Multigraph}\label{sec:directed_multigraph}
-
-Multigraph (\S\ref{sec:multigraph})
-
-
-
-\subsubsection{Quiver}\label{sec:quiver}
-
-Directed Pseudograph (\S\ref{sec:pseudograph})
-
-Paracategory (\S\ref{sec:paracategory})
-
-nCatLab:
-
-it is always possible to Interpret any kind of Graph as a Quiver
+a Simple Symmetric Digraph is equivalent to an Undirected Graph with
+Edges replaced by pairs of Inverse Arcs
 
 
 
 % --------------------------------------------------------------------
-\subsection{Rooted Graph} \label{sec:rooted_graph}
+\subsection{Tournament}\label{sec:tournament}
 % --------------------------------------------------------------------
 
-Undirected or Directed
-
-\emph{Mostowski's Collapsing Lemma}: \cite{aczel88}
-
-Every Well-founded Graph has a Unique Decoration %FIXME xref, move this?
-
-
-
-\subsubsection{Pointed Graph} \label{sec:pointed_graph}
-
-A \emph{Pointed Graph} (or \emph{Accessible Pointed Graph} or
-\emph{Flow Graph}) is a Rooted Graph where all other Vertices are
-Reachable from the Root Vertex.
-
-Anti-foundation Axioms (\S\ref{sec:anti_foundation})
-
-
-
-\subsubsection{Pointed Tree} \label{sec:pointed_tree}
+assignment of an Order to each Edge of a Complete Graph
+(\S\ref{sec:complete_graph})
 
 
 
 % --------------------------------------------------------------------
 \subsection{Tolerance Relation}\label{sec:tolerance_relation}
 % --------------------------------------------------------------------
+
+%FIXME possibly move
 
 \subsubsection{Dependency Relation}\label{sec:dependency_relation}
 
@@ -461,24 +608,62 @@ Partially-commutative Monoids.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Dipole and Cycle Graphs} \label{sec:dipole_cycle_graph}
-% --------------------------------------------------------------------
+% ====================================================================
+\subsection{Pointed Graph}\label{sec:pointed_graph}
+% ====================================================================
+
+A \emph{Pointed Graph} (or \emph{Rooted Graph}) is a Graph where one
+Vertex distinguished as its \emph{Point}.
+
+Undirected or Directed
+
+\emph{Mostowski's Collapsing Lemma}: \cite{aczel88}
+
+Every Well-founded Graph has a Unique Decoration %FIXME xref, move this?
+
+
 
 % --------------------------------------------------------------------
-\subsection{Cubic Graph} \label{sec:cubic_graph}
+\subsection{Accessible Pointed Graph}\label{sec:accessible_pointed}
 % --------------------------------------------------------------------
 
-\subsubsection{Snark} \label{sec:snark}
+An \emph{Accessible Pointed Graph} (or \emph{Flow Graph}) is a Pointed
+Graph where all other Vertices are Reachable from the Root Vertex.
+
+Anti-foundation Axioms (\S\ref{sec:anti_foundation})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Symmetric Graph} \label{sec:symmetric_graph}
+\subsection{Rooted Tree}\label{sec:rooted_tree}
+% --------------------------------------------------------------------
+
+A \emph{Rooted Tree} is an Accessible Pointed Graph such that the Path
+from the Point (now called the \emph{Root}) to another Vertex is
+always Unique.
+
+Tree (\S\ref{sec:tree_graph})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Multiply Rooted Graph}\label{sec:multiply_rooted}
 % --------------------------------------------------------------------
 
 
 
 % ====================================================================
-\section{Hypergraph} \label{sec:hypergraph}
+\section{Cubic Graph}\label{sec:cubic_graph}
+% ====================================================================
+
+\subsubsection{Snark}\label{sec:snark}
+
+
+
+% ====================================================================
+\section{Symmetric Graph}\label{sec:symmetric_graph}
+% ====================================================================
+
+% ====================================================================
+\section{Hypergraph}\label{sec:hypergraph}
 % ====================================================================
