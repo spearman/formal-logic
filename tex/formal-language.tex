@@ -694,7 +694,8 @@ Term Logic \S\ref{sec:term_logic}). A Parse Tree
 
 
 
-\paragraph{Transformational Grammar}\label{sec:transformational_grammar}\hfill
+\paragraph{Transformational Grammar}\label{sec:transformational_grammar}
+\hfill
 
 
 
@@ -722,7 +723,8 @@ Type-logical Semantics (\S\ref{sec:typelogical_semantics})
 
 
 
-\paragraph{Lexical Functional Grammar}\label{sec:lexical_functional}\hfill
+\paragraph{Lexical Functional Grammar}\label{sec:lexical_functional}
+\hfill
 
 Glue Semantics (\S\ref{sec:glue_semantics})
 
@@ -813,7 +815,7 @@ Monoid (\S\ref{sec:monoid}) $M$ and $N \subseteq M$.
 
 
 
-\paragraph{Star Height}\label{sec:star_height} \hfill
+\paragraph{Star Height}\label{sec:star_height}\hfill
 
 \emph{Star Height}
 
@@ -880,7 +882,7 @@ number of times to produce another Expression in that same Language.
 
 
 
-\paragraph{k-Testable}\label{sec:k_testable} \hfill
+\paragraph{k-Testable}\label{sec:k_testable}\hfill
 
 A \emph{k-Testable Language} is one where membership of an Expression
 depends on the first and last Symbol and a Set of Factors of length
@@ -1608,6 +1610,75 @@ for a Language.
 \subsubsection{Labelled Transition System}
 \label{sec:labelled_transition}
 
+%FIXME some of this may need to be moved
+
+Operational Semantics (\S\ref{sec:operational_semantics}) for Process
+Calculi (\S\ref{sec:process_calculus})
+
+Non-well-founded Set Theory (\S\ref{sec:non_wellfounded})
+
+System (\S\ref{sec:system})
+
+Transition Systems Labelled by Elements of Set $Act$ are Coalgebras
+relative to the Standard Functor (???) $\pow(Act \times \cdots)$
+\cite{aczel88}
+
+Abstract Behavior: Bisimulation (\S\ref{sec:bisimulation}) Relation on
+a Labelled Transition System \cite{aczel88}
+
+Atomic Actions: externally observable
+
+successive states are internal to the Process: distinct States of a
+Process may have the same external Behavior \cite{aczel88}
+
+$(X,\alpha)$
+
+$\alpha : X \rightarrow \pow(Act \times X)$
+\[
+  \alpha x = \{(a,y) \in Act \times X | x \xrightarrow{a} y\}
+\]
+
+$\alpha : X \rightarrow \Theta X$ where:
+\[
+  \Theta = \pow \circ (K_{Act} \times Id)
+\]
+Transition System $TS$ is a Coalgebra (\S\ref{sec:coalgebra}) relative
+to the Functor $\Theta$
+
+Final Coalgebra Theorem gives the existence of a Final Coalgebra for
+$\Theta$, called a \emph{Complete $TS$}
+
+States of SCCS are States of a Complete $TS$, $\class{P}$, the
+Greatest Fixed Point of $\Theta$ (equivalently the largest Class such
+that if $P \in \class{P}$ then $P$ is a Subset of $Act \times
+\class{P}$
+
+$\class{P}$ has Transition Relations $\xrightarrow{a}$ for $a \in Act$
+given by:
+\[
+  P \xrightarrow{a} Q \Leftrightarrow (a,Q) \in P
+\]
+for all $P,Q \in \class{P}$
+
+\emph{Behavior Map} -- Unique Map $(X,\alpha) \rightarrow \class{P}$
+for each $TS$ $(X,\alpha)$, is $\pi : X \rightarrow \class{P}$ such
+that for all $x \in X$:
+\[
+  \pi x = \{(a,\pi y) | x \xrightarrow{a} y \in (X,\alpha)\}
+\]
+
+if a $TS$ is an Operational Semantics for a Programming Language then
+the Behavior Map gives a Canonical Representation of the Abstract
+Behaviors of the Programs of the Language
+
+$\class{P}$: Domain of Mathematical Objects that can be the
+Denotations (\S\ref{sec:denotation}) of Programs for such a
+Programming Language
+
+Operations on $\class{P}$: Action, Summation, Restriction, Product
+
+
+
 \subsubsection{Simulation} \label{sec:simulation}
 
 \subsubsection{Bisimulation} \label{sec:bisimulation}
@@ -1617,6 +1688,15 @@ Universal Coalgebra (\S\ref{sec:universal_coalgebra})
 Bisimilar Object (\S\ref{sec:bisimilar_object})
 
 Non-well-founded Set Theory (\S\ref{sec:non_wellfounded})
+
+System (\S\ref{sec:system})
+
+Abstract Behavior: Bisimulation Relation on a Labelled Transition
+System (\S\ref{sec:labelled_transition}) \cite{aczel88}
+
+Maximal
+
+Regular
 
 
 

@@ -290,18 +290,6 @@ Non-well-founded Set Theory (\S\ref{sec:non_wellfounded})
 
 
 % --------------------------------------------------------------------
-\subsection{Pure Set}\label{sec:pure_set}
-% --------------------------------------------------------------------
-
-or \emph{Hereditary Set}
-
-Non-well-founded Set Theory (\S\ref{sec:non_wellfounded})
-
-%FIXME
-
-
-
-% --------------------------------------------------------------------
 \subsection{Index Set}\label{sec:index_set}
 % --------------------------------------------------------------------
 
@@ -455,6 +443,10 @@ another Object as a Member.
 
 % --------------------------------------------------------------------
 \subsection{Subclass}\label{sec:subclass}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Class Map}\label{sec:class_map}
 % --------------------------------------------------------------------
 
 
@@ -974,6 +966,9 @@ Composition):
 If $R$ is Transitive then $R = R^+$.
 
 \emph{Reachability} (\S\ref{sec:dag})
+
+$R_0 \subseteq R \Rightarrow R_0^+ \subseteq R^+$, i.e. $()^+$ is
+Monotone \cite{aczel88}
 
 
 
@@ -1598,6 +1593,66 @@ strengthening of the Extensionality Axiom
 
 Situation Theory (\S\ref{sec:situation_theory})
 
+Universe $\class{V}$
+
+(Assumption) $\class{V} \cong \ords$ Class of Ordinals
+
+$\class{V}$ Greatest Fixed Point (\S\ref{sec:greatest_fixedpoint}) of
+$\pow$ is a System (\S\ref{sec:system}) such that for every System
+$\class{M}$ there is a Unique System Map $\class{M} \rightarrow
+\class{V}$
+
+Set Continuous Operators (???): $\pow$, $Id$, $K_\class{A}$ (Constant
+???) for Class $\class{A}$
+
+Monotone + Set Based
+
+Fixed Points
+
+$J$ (\S\ref{sec:greatest_fixedpoint})
+
+$I$ (\S\ref{sec:least_fixedpoint})
+
+\emph{Standard Functor}: Set Continuous and Preserves Inclusion Maps,
+e.g. $\pow$, $Id$, $K_\class{A}$
+
+\textbf{Thm.}: If $\Phi$ is a Standard Functor then $I_\Phi$ is an
+Initial Algebra (\S\ref{sec:initial_algebra})
+
+\textbf{Thm.} Any Final Coalgebra (\S\ref{sec:terminal_coalgebra}) for
+$\pow$ is a Model for the Anti-foundation Axiom
+
+assuming AFA, the Largest Fixed Point $\class{V}$ of $\pow$ is a Final
+Coalgebra
+
+\textbf{Final Coalgebra Theorem} Any Standard Functor that Preserves
+Weak Pullbacks has a Final Coalgebra
+
+\textbf{Special Final Coalgebra Theorem} (Assuming AFA) For Standard
+Functor $\Phi$ that is Uniform on Maps (???) then $J_\Phi$ is a Final
+Coalgebra
+
+Process Calculus (\S\ref{sec:process_calculus}) applications:
+
+SCCS (\S\ref{sec:sccs}): Synchronization by Abelian Group $Act$ of
+Atomic Actions
+
+Abstract Behavior: Bisimulation Relation on a Labelled Transition
+System (\S\ref{sec:labelled_transition})
+
+Transition Systems Labelled by Elements of Set $Act$ are Coalgebras
+relative to the Standard Functor $\pow(Act \times \cdots)$
+
+when $Act$ is Singleton the Functor is Isomorphic to $\pow$ with Final
+Coalgebras as Complete Systems (\S\ref{sec:complete_system}) used to
+Model AFA
+
+Model Construction for AFA is a special case of Quotient Construction
+for SCCS
+
+Sets in AFA-universe are the Abstract Behaviors for the special case
+of SCCS where ther is only one Atomic Action
+
 
 
 \subsubsection{Anti-foundation Axiom}\label{sec:anti_foundation}
@@ -1607,14 +1662,16 @@ Situation Theory (\S\ref{sec:situation_theory})
 AFA (Aczel) -- every Well-founded (\S\ref{sec:wellfounded_graph})
 Accessible Pointed Graph (\S\ref{sec:accessible_pointed}) corresponds
 to (the Membership Structure of, i.e. is a \emph{Picture} of) a Unique
-Set; Maximal Bisimulation Relation
+Set; Maximal Bisimulation Relation (Strong Congruence in SCCS
+\S\ref{sec:sccs})
 
 SAFA (Scott) -- Sets are Equal if Isomorphic
 
 FAFA (Finsler) -- Sets are Equal if Isomorphic (different sense)
 
-BAFA (Boffa) -- standard Extensionality as Equality: Sets are Equal if
-they have the same Elements
+BAFA (Boffa) -- Axiom of Superuniversality
+(\S\ref{sec:superuniversality_axiom}): standard Extensionality as
+Equality (Sets are Equal if they have the same Elements)
 
 Extension of the Von Neumann Universe (VN):
 \[
@@ -1626,9 +1683,11 @@ Bisimulation (\S\ref{sec:bisimulation}) Relations
 
 Maximal Bisimulation Relation: AFA
 
-Isomorphism Relations: SAFA, FAFA
+Isomorphism Relations, Regular Bisimulation: SAFA, FAFA
 
 Extensionality: BAFA
+
+\emph{Regular Bisimulation} %FIXME
 
 
 
@@ -1651,12 +1710,20 @@ with the Set assigned to the Point.
 \textbf{Thm.} Any Final Coalgebra (\S\ref{sec:terminal_coalgebra}) for
 $\pow$ is a Model for the Anti-foundation Axiom
 
+assuming AFA, the Largest Fixed Point $\class{V}$ of $\pow$ is a Final
+Coalgebra
+
 \emph{Corollary}: Every Well-founded Accessible Pointed Graph is a
 Picture of a unique Set.
 
 \emph{Prop.}: Every Set has a Picture
 
 \emph{Canonical Picture}
+
+An Accessible Pointed Graph is an \emph{Exact Picture} if it has an
+Injective Decoration, i.e. the Nodes are assigned distinct Sets by the
+Decoration. Equivalently, an Accessible Pointed Graph is an Exact
+Picture if it is Isomorphic to a Canonical Picture.
 
 every Picture of a Set can be \emph{Unfolded} into a Tree Picture
 (Rooted Tree \S\ref{sec:rooted_tree})
@@ -1666,22 +1733,141 @@ Unfolding the Canonical Picture: \emph{Canonical Tree Picture}
 Consequence: Non-well-founded Sets exist and any Non-well-founded
 Accessible Pointed Graph will Picture a Non-well-founded Set.
 
+AFA is the Conjunction of:
+\begin{itemize}
+  \item $AFA_1$: Every Graph has at least one Decoration
+  \item $AFA_2$: Every Graph has at most one Decoration
+\end{itemize}
+
+Foundation Axiom Implies $AFA_2$ and the Negation of $AFA_1$
+
+For Sets $a,b$, $a \equiv b$ if and only if there is an Accessible
+Pointed Graph that is a Picture of both $a$ and $b$
+
+$AFA_2$ is Equivalent to:
+\[
+  a \equiv b \Rightarrow a = b \;\text{for all Sets}\; a,b
+\]
+
+(Systems \S\ref{sec:system})
+
+$\equiv$ is the (Maximum) Bisimulation (\S\ref{sec:bisimulation}) Relation on
+Universe? $\class{V}$; see Systems (\S\ref{sec:system})
+%FIXME define V
+
+$AFA_2 \Leftrightarrow \class{V} \;\text{is Strongly Extensional}$
+
+$AFA_2 \Leftrightarrow \;\text{Every Canonical Picture is Strongly
+  Extensional}$
+
+$AFA_2 \Leftrightarrow \;\text{Every Exact Picture is Strongly
+  Extensional}$
+
+$AFA_1 \Leftrightarrow \;\text{Every Strongly Extensional Accessible
+  Pointed Graph is an Exact Picture}$
+
+\textbf{Thm.} -- AFA is equivalent to: An Accessible Pointed Graph is
+an Exact Picture if and only if it is Strongly Extensional
+
+Normal Structure Axiom (NSA) (\S\ref{sec:normal_structure_axiom})
+
+Gordeev's Axiom (GA) (\S\ref{sec:gordeevs_axiom})
+
+$AFA_1 \Rightarrow NSA \Rightarrow GA$
+
+AFA holds if and only if $\class{V}$ is a Complete System
+(\S\ref{sec:complete_system})
 
 
-\paragraph{Labelled Anti-foundation Axiom}\hfill
-\label{sec:labelled_antifoundation}
 
-Every Labelled Graph (???) has a Unique Labelled Decoration
+\paragraph{Labelled Anti-foundation Axiom}
+\label{sec:labelled_antifoundation}\hfill
+
+\cite{aczel88}
+
+Every Labelled Graph has a Unique Labelled Decoration
+% FIXME xrefs?
 
 (Consequence of AFA)
 
+\emph{Labelled Graph}: a Graph with an assignment of a Set
+$a\downarrow$ of Labels to each Node $a$
+
+\emph{Labelled Decoration}: assignment $d$ of a Set $d a$ to each Node
+$a$ such that:
+\[
+  da = \{db | a \rightarrow b\} \cup a \downarrow
+\]
 
 
-\subsubsection{Quine Atom}\label{sec:quine_atom}
+
+\paragraph{Axiom of Superuniversality}
+\label{sec:superuniversality_axiom}\hfill
+
+BAFA
+
+Superuniversal System (\S\ref{sec:superuniversal_system})
+
+$BAFA \Leftrightarrow \class{V} \;\text{is Superuniversal}$
+
+
+
+\paragraph{Normal Structure Axiom}
+\label{sec:normal_structure_axiom}\hfill
+
+Every Kanger Structure is Isomorphic to a Normal one
+
+Kanger Structure
+
+Normal Kanger Structure
+
+$AFA_1 \Rightarrow NSA \Rightarrow GA$
+
+
+\paragraph{Gordeev's Axiom}\label{sec:gordeevs_axiom}\hfill
+
+Every Graph is Isomorphic to a Normal One
+
+Normal Graph
+
+$AFA_1 \Rightarrow NSA \Rightarrow GA$
+
+
+
+\subsubsection{Pure Set}\label{sec:pure_set}
+
+(or \emph{Hereditary Set})
+
+can only have Sets as Elements (and those Sets are also Pure)
+\cite{aczel88}
+
+allowing for Atoms (Urelements \S\ref{sec:urelement}) and Sets built
+from them results in an expanded Universe, analagous to the
+construction of a Polynomial Ring (\S\ref{sec:polynomial_ring}) from a
+Ring by adjoining Indeterminates (\S\ref{sec:indeterminate}) and
+adding all the Polynomials in those Indeterminates with Coefficients
+taken from the Ring.
+
+for $X$ Class of Atoms, the Sets that may involve Atoms from the Class
+$X$ are called \emph{$X$-sets}
+
+Substitution Lemma, Solution Lemma
+
+
+
+\paragraph{Quine Atom}\label{sec:quine_atom}\hfill
 
 $Q = \{Q\}$
 
-Hereditarily Finite
+$Q = \{\{\{\cdots\}\}\}$
+
+Hereditarily Finite (has a Finite Picture):
+\[
+  \begin{tikzpicture}
+    \node (A) {$\bullet$};
+    \draw[->,thick,loop] (A) to (A);
+  \end{tikzpicture}
+\]
 
 Urelement (\S\ref{sec:urelement}): a Set that contains only itself as
 an Element
@@ -1692,7 +1878,247 @@ a Loop
 Unfolds to the Infinite Tree $\bullet \rightarrow \bullet
 \rightarrow \bullet \rightarrow \cdots$
 
+An Accessible Pointed Graph is a Picture of $Q$ if and only if every
+Node has a Child. \cite{aczel88}
+
 AFA: Quine Atom exists and is Unique
+
+BAFA: distinct Quine Atoms exist and form a Proper Class
+
+Reflexive Set (???): $x \in x$
+
+
+
+\subsubsection{System}\label{sec:system}
+\cite{aczel88}
+
+\emph{System} is a Class $\class{M}$ of Nodes with a Class of Edges
+consisting of Ordered Pairs of Nodes.
+
+required that for each Node $a$, the Class $a_\class{M} = \{b \in
+\class{M} | a \rightarrow b\}$ of Children of $a$ is a Set
+
+a Graph is a Small System
+
+Example Large System: Universe $\class{V}$ with $a \rightarrow b$
+whenever $b \in a$
+
+Systems are Coalgebras (\S\ref{sec:coalgebra}) for the Functor $\pow$
+
+(Assumption) $\class{V} \cong \ords$ Class of Ordinals
+
+$\class{M} a$ -- Accessible Pointed Graph for $a \in \class{M}$ with
+Nodes and Edges as the Nodes and Edges of $\class{M}$ that lie on
+Paths of $\class{M}$ starting from Node $a$ and the Point of
+$\class{M} a$ is $a$
+
+Unique Decoration for each $a \in \class{M}$:
+\begin{align*}
+  d a &= d_a a \\
+      &= \{d_a x | a \rightarrow x \in \class{M} a\} \\
+      &= \{d x | a \rightarrow x \in \class{M}\}
+\end{align*}
+
+\emph{Labelled System}
+
+$a \downarrow \class{M}$ -- Set of Labels at $a$ in the Labelled
+System $\class{M}$
+
+\textbf{Thm.} (assuming AFA): Each Labelled System has a Unique
+Labelled Decoration
+
+\emph{Bisimulation} -- Binary Relation $R$ on System $\class{M}$ is a
+Bisimulation on $\class{M}$ if $R \subseteq R^+$ ($R^+$ Transitive
+Closure of $R$) where for $a,b \in \class{M}$:
+\[
+  a R^+ b \Leftrightarrow \forall x \in a_\class{M}
+    \exists y \in b_\class{M}, x R y \wedge
+    \forall y \in b_\class{M} \exists x \in a_\class{M}, x R y
+\]
+
+\emph{Maximum Bisimulation} (or \emph{Largest} or \emph{Weakest
+  Bisimulation}) -- $\equiv_\class{M}$ for System $\class{M}$ such
+that if $R$ is a Bisimulation on $\class{M}$ then for all $a,b \in
+\class{M}$:
+\[
+  a R b \Rightarrow a \equiv_\class{M} b
+\]
+and:
+\[
+  a \equiv_\class{M} b \Leftrightarrow a R b
+\]
+for some Small Bisimulation $R$ on $\class{M}$.
+%FIXME small bisimulation
+
+\textbf{Thm.}: There is a Unique Maximum Bisimulation
+$\equiv_\class{M}$ on each System $\class{M}$
+
+$\equiv$ -- for Sets $a,b$, $a \equiv b$ if and only if there is an
+Accessible Pointed Graph that is a Picture of both $a$ and $b$
+
+$\equiv$ is the Maximum Bisimulation on the (Universe?) System
+$\class{V}$ %FIXME
+
+\textbf{Prop.}:
+\[
+  a \equiv b \Leftrightarrow a \equiv_\class{V} b
+\]
+for all Sets $a,b$
+
+A System $\class{M}$ is \emph{Extensional} if for all $a,b \in
+\class{M}$:
+\[
+  a_\class{M} = b_\class{M} \Rightarrow a = b
+\]
+and \emph{Strongly Extensional} if for all $a,b \in \class{M}$:
+\[
+  a \equiv_\class{M} b \Rightarrow a = b
+\]
+
+Every Extensional Graph has at most one Decoration.
+
+By the Extensionality Axiom (\S\ref{sec:extensionality_axiom}) the
+System $\class{V}$ is Extensional.
+
+A \emph{System Map} from System $\class{M}$ to System $\class{M}'$ is
+a map $\pi : \class{M} \rightarrow \class{M}'$ such that for $a \in
+\class{M}$:
+\[
+  (\pi a)_{\class{M}'} = \{ \pi b | b \in a_\class{M} \}
+\]
+If $\pi$ is a Bijection then it is a \emph{System Isomorphism}.
+
+A System Map $G \rightarrow \class{V}$ from a Graph $G$ is a
+Decoration of the Graph.
+
+Systems and System Maps form a Category %FIXME
+
+\textbf{Prop.} For System Maps $\pi_1,\pi_2 : \class{M} \rightarrow
+\class{M}'$:
+\begin{enumerate}
+  \item If $R$ is a Bisimulation on $\class{M}$ then:
+    \[
+      (\pi_1 \times \pi_2) R
+        \defeq \{(\pi_1 a_1, \pi_2 a_2) | a_1 R a_2\}
+    \]
+    is a Bisimulation on $\class{M}'$
+  \item If $S$ is a Bisimulation on $\class{M}'$ then:
+    \[
+      (\pi_1 \times \pi_2)^{-1}S
+        \defeq \{(a_1,a_2) \in \class{M} \times \class{M}
+        | (\pi_1 a_1) S (\pi_2 a_2)\}
+    \]
+    is a Bisimulation on $\class{M}$
+\end{enumerate}
+
+Interpetation of AFA %FIXME
+
+\textbf{Thm.} $ZFC^- + AFA$ has a Full Model that is Unique up to
+Isomorphism
+
+\emph{Co-bisimulation} $R^+ \subseteq R$
+
+There is a Unique Minimal Reflexive Co-bisimulation $\sim_\class{M}$
+on a System $\class{M}$
+
+$\class{M}$ is Extensional if and only if:
+\[
+  a \sim_\class{M} b \Rightarrow a = b
+\]
+
+if $\pi : \class{M} \rightarrow \class{M}'$ is an Injective System Map
+then for $a,b \in \class{M}$:
+\[
+  a \sim_\class{M} \Leftrightarrow \pi a \sim_{\class{M}'} \pi b
+\]
+
+
+
+\paragraph{Complete System}\label{sec:complete_system}\hfill
+
+For a System $\class{M}$, an $\class{M}$-decoration of a Graph $G$ is
+a System Map $G \rightarrow \class{M}$
+
+A $\class{V}$-decoration of $G$ is just a Decoration of $G$
+
+\emph{Complete System} -- System $\class{M}$ is a Complete System if
+every Graph has a Unique $\class{M}$-decoration
+
+AFA holds if and only if $\class{V}$ is a Complete System
+
+the Class of Accessible Pointed Graphs form a System $\class{V}_0$
+with Edges $(G a, G b)$ wherever $G$ is a Graph and $a \rightarrow b
+\in G$
+
+Strongly Extensional Quotient of $\class{V}_0$:
+\[
+  \pi_c : \class{V}_0 \rightarrow \class{V}_c
+\]
+
+$\class{V}_c$ is Complete (\S\ref{sec:complete_system})
+
+For each System $\class{M}$ there is a Unique System Map $\class{M}
+\rightarrow \class{V}_c$
+
+\textbf{Thm.} The following are equivalent for a System $\class{M}$:
+\begin{enumerate}
+  \item For each System $\class{M}'$ there is a Unique System Map
+    $\class{M}' \rightarrow \class{M}$
+  \item $\class{M}$ is Complete
+  \item $\class{M} \cong \class{V}_c$
+\end{enumerate}
+
+Every Complete System is Full (\S\ref{sec:full_system})
+
+\textbf{Thm.} Each Complete System is a Model of $ZFC^- + AFA$
+
+\textbf{Thm.} $ZFC^- + AFA$ has a Full Model that is Unique up to
+Isomorphism
+
+
+
+\paragraph{Full System}\label{sec:full_system}\hfill
+
+A System $\class{M}$ is a \emph{Full System} if for every Set $x
+\subseteq \class{M}$ there is a Unique $a \in \class{M}$ such that $x
+= a_\class{M}$
+
+$\class{V}$ is a Full System
+
+$\class{V}_{wf}$ of Well-founded Sets is a Full System
+
+$\class{V}_{wf}$ is the smallest Class $\class{M}$ such that
+$\class{M} = \pow\class{M}$ and $\class{V}$ is the largest such Class.
+
+Foundation Axiom (\S\ref{sec:foundation_axiom}) is expressed by
+$\class{V} = \class{V}_{wf}$
+
+Equivalent statements for a Full System $\class{M}$:
+\begin{enumerate}
+  \item For each Full System $\class{M}'$ there is a Unique System Map
+    $\class{M} \rightarrow \class{M}'$
+  \item $\class{M}$ is Well-founded
+  \item $\class{M} \cong \class{V}_{wf}$
+\end{enumerate}
+
+Every Complete System is Full
+
+
+
+\paragraph{Superuniversal System}\label{sec:superuniversal_system}
+\hfill
+
+Superuniversality Axiom (\S\ref{sec:superuniversality_axiom})
+
+$BAFA \Leftrightarrow \class{V} \;\text{is Superuniversal}$
+
+\textbf{Thm.} Every Superuniversal System is Full
+
+There is a Unique Superuniversal System up to Isomorphism
+
+\emph{Globally Universal}
+
+Every Superuniversal System is Globally Universal
 
 
 
