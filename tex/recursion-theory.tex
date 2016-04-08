@@ -1215,12 +1215,12 @@ analogous to Free Monoids and Formal Languages
 
 Trace Closure of a Set of Strings:
 \[
-  [L]_D = \{[w]_D \;|\; w \in L\}
+  [L]_D = \{[w]_D \mid w \in L\}
 \]
 
 Set of Strings in a Set of Traces:
 \[
-  \bigcup T = \{w \;|\; [w]_D \in T\}
+  \bigcup T = \{w \mid [w]_D \in T\}
 \]
 
 Trace Language:
@@ -1346,7 +1346,8 @@ Fragment of Process Calculus which is free from Deadlock
 (\S\ref{sec:session_typed_pi_calculus}), CP
 (\S\ref{sec:classical_processes}), GV (\S\ref{sec:good_variation})
 
-Non-well-founded Set Theory (\S\ref{sec:non_wellfounded})
+Non-well-founded Set Theory (\S\ref{sec:non_wellfounded}), Systems
+(\S\ref{sec:system})
 
 
 \asterism
@@ -1376,8 +1377,9 @@ Functional Reactive Programming (\S\ref{sec:frp}).
 Models Behavior in terms of Sequential Patterns of Actions; Formal
 Behavior expressed in terms of Nondeterministic Merging (or
 Interleaving) of Sequential Behaviors of Components; e.g. Transition
-Systems (\S\ref{sec:state_transition}), Synchronization Trees (???),
-Acceptance Trees (???), Hoare Traces (???) %FIXME
+Systems (\S\ref{sec:state_transition}), Synchronization Trees
+(\S\ref{sec:synchronization_tree}), Acceptance Trees (???), Hoare
+Traces (???) %FIXME
 
 \emph{Non-interleaving Model}: retains Independent Components in the
 Model to allow expression of certain Behavioral Properties such as
@@ -1413,13 +1415,13 @@ Relationships between Behaviors (e.g. Refinement, Component, etc.)
 expressed as Moprhisms between Transition Systems
 
 The Inclusion Functor (\S\ref{sec:inclusion_functor}) of
-Synchronization Trees in Transition Systems is Left-adjoint
-(\S\ref{sec:adjoint}) to a Functor ``unfolding'' Transition Systems to
-Synchronization Trees. Ignoring the Branching of Computation Paths
-results in Languages (\S\ref{sec:formal_language}) as Models of
-Processes (i.e. the Set of Strings of Actions a Process can perform),
-and there is also an Adjoint Inclusion Functor from Languages to
-Synchronization Trees:
+Synchronization Trees (\S\ref{sec:synchronization_tree}) in Transition
+Systems is Left-adjoint (\S\ref{sec:adjoint}) to a Functor
+``unfolding'' Transition Systems to Synchronization Trees. Ignoring
+the Branching of Computation Paths results in Languages
+(\S\ref{sec:formal_language}) as Models of Processes (i.e. the Set of
+Strings of Actions a Process can perform), and there is also an
+Adjoint Inclusion Functor from Languages to Synchronization Trees:
 \[
   \text{Languages} \hookrightarrow \text{Synchronization Trees}
     \hookrightarrow \text{Transition Systems}
@@ -1509,6 +1511,7 @@ Free Process Variables
 \asterism
 
 
+Synchronization Trees (\S\ref{sec:synchronization_tree}) in
 Interaction Categories (\S\ref{sec:interaction_category})
 
 $\cat{SProc}$ (\S\ref{sec:sproc}) -- Interaction Category for
@@ -1522,6 +1525,9 @@ Processes: ``Relations Extended in Time''
 In $\cat{SProc}$, Morphisms are Processes as Labelled Transition
 Systems (\S\ref{sec:labelled_transition}) Modulo Strong Bisimulation
 (\S\ref{sec:bisimulation})
+
+Non-well-founded Set Theory (\S\ref{sec:non_wellfounded}), Systems
+(\S\ref{sec:system})
 
 
 
@@ -2109,8 +2115,8 @@ Name Variables $x,y,z,\ldots$
 
 Process Variables $P,Q,R,\ldots$:
 \begin{flalign*}
-  \quad P,Q &::= \;\overline{x}y.P \;|\; x(y).P \;|\; 0
-    \;|\; P|Q \;|\; !P \;|\; (y)P &
+  \quad P,Q &::= \;\overline{x}y.P \mid x(y).P \mid 0
+    \mid P|Q \mid \;!P \mid (y)P &
 \end{flalign*}
 
 $P\{y/x\}$ -- Replace Free occurrences of $x$ by $y$ in $P$
@@ -3433,7 +3439,8 @@ Model \S\ref{sec:categorical_model})
 
 \emph{Process Specifications}: Objects (Types)
 
-\emph{Processes}: Morphisms
+\emph{Processes}: Morphisms (Synchronization Trees
+\S\ref{sec:synchronization_tree})
 
 \emph{Interaction}: Composition
 
@@ -3441,6 +3448,46 @@ Model \S\ref{sec:categorical_model})
 Interleaving Paradigm as opposed to Non-interleaving (``true
 Concurrency''), see \cite{winskel-nielsen93}.
 %FIXME xref
+
+Computational Processes generalize Mathematical Objects by extension
+in Time: Reactive Systems (see Functional Reactive Programming
+\S\ref{sec:frp})
+
+State: Behavior in Future Interactions depends on Past
+
+Functions $X \Rightarrow Y$ generalized to Functions Extended in Time:
+\[
+  F : X \Rightarrow (X \times F)
+\]
+
+$f \in F$ Maps Input $x$ to Output $y$ as first step and proceeds as
+Continuation (\S\ref{sec:continuation}) $f_1$:
+\[
+  f(x) = (y,f_1)
+\]
+and $f_1$ will depend on the Observable Interaction $x \mapsto y$ that
+has already taken place.
+
+$F$ is Space of Deterministic Transducers (???, Finite State
+Transducer \S\ref{sec:fst}) with Input Alphabet $X$ and Output
+Alphabet $Y$, described Extensionally.
+
+Relations $\pow(X \times Y)$ generalized to Relations Extended in
+Time:
+\[
+  R = \pow((X \times Y) \times R)
+\]
+
+$R$ is a Space of Non-deterministic Transducers
+
+Non-determinism: Outputs are not uniquely determined by Inputs and
+Continuations need not be uniquely determined by Observable Interactions
+
+Taking $L = X \times Y$ in $L$-labelled Transition System $\class{Q} =
+(Q,L,\rightarrow,q_0)$, $R$ is $ST_L$: the Synchronization Trees
+(\S\ref{sec:synchronization_tree}) over Labels $L$; the Final
+Coalgebra (\S\ref{sec:terminal_coalgebra}) of the Functor $X \mapsto
+\pow(L \times X)$
 
 
 \asterism
@@ -3531,73 +3578,10 @@ with Application:
 
 If $A = A^\bot$, or more generally $A \otimes B = (A^\bot \otimes
 B^\bot)^\bot$, i.e. the Category is Compact Closed
-(\S\ref{sec:compact_closed}), then the Type Structure can be used to
-build arbitrary Process Interconnection Networks including Cycles.
-
-
-\asterism
-
-
-$\cat{SProc}$ (\S\ref{sec:sproc}) -- Interaction Category for
-Synchronous Processes
-
-$\cat{ASProc}$ (\S\ref{sec:asproc}) -- Interaction Category for
-Asynchronous Processes
-
-
-
-\subsubsection{SProc}\label{sec:sproc}
-
-$\cat{SProc}$ -- Interaction Category for Synchronous Processes:
-\begin{itemize}
-  \item $\cat{SProc}_0$: \emph{Concurrent System Specifications}
-  \item $\cat{SProc}_1$: \emph{Synchronization Trees} --
-    Non-well-founded Sets \S\ref{sec:hyperset}, canonical
-    representations of Bisimulation (\S\ref{sec:bisimulation})
-    Equivalence Classes
-  \item $\circ_{\cat{SProc}}$: \emph{Synchronous Product} +
-    \emph{Restriction}
-  \item Identities: \emph{Synchronous Buffers} (``Wires'' or
-    ``Relays'')
-\end{itemize}
-
-Model for Classical Linear Logic (\S\ref{sec:cll})
-
-Model for Typed $\lambda$-calculus (\S\ref{sec:typed_lambda})
-
-supports Hierarchy of \emph{Delay Monads} (???): Temporal Structure,
-simulated Asynchrony (cf. SCCS \S\ref{sec:sccs}) %FIXME
-
-Delay -- Extension in Time
-
-Replication (\S\ref{sec:replication}) -- Extension in Space
-
-Process Calculus (\S\ref{sec:process_calculus}):
-\begin{itemize}
-  \item Relabelling, Restriction: Subcategory of ``Embeddings''
-  \item Non-determinism: Semi-additive Structure
-  \item Simulations: $2$-cells
-\end{itemize}
-
-Compact-closed Structure supports a Multi-cut Rule allowing general
-Process Networks to be expressed in a Typed framework
-
-``Tower of Refinements'' (Faithful Functors
-\S\ref{sec:faithful_functor}):
-\[
-  \cat{SProc} \leftarrowtail \cat{SProc}_1 \leftarrowtail
-    \cdots \leftarrowtail \cat{SProc}_k
-\]
-of progressively more Refined Specifications, e.g. Deadlock-freedom,
-Fairness; each Functor Preserving Linear Type Structure.
-
-Interaction -- Synchronous Product
-
-Synchronous Processes: Buffers impose no Delay
-
-``Buffered'' or ``Receptive'' Processes
-\S\ref{sec:receptive_process}): Processes are ``insensitive'' to
-Delay %FIXME
+(\S\ref{sec:compact_closed}) (e.g. the Interaction Category for
+Synchronous Processes, $\cat{SProc}$), then the Type Structure can be
+used to build arbitrary Process Interconnection Networks including
+Cycles.
 
 
 \asterism
@@ -3607,7 +3591,9 @@ Morphisms in $\cat{SProc}$ (Processes) as Labelled Transition Systems
 (\S\ref{sec:labelled_transition}) Modulo Strong Bisimulation
 (\S\ref{sec:bisimulation})
 
-$L$ -- Set of \emph{Labels}
+$L$ -- Set (Alphabet, ``Sort'') of \emph{Labels} (\emph{Actions}), cf.
+Tokens in Lexical Analysis (\S\ref{sec:lexical_analysis}),
+Denotational Semantics (\S\ref{sec:denotational_semantics})
 
 $\class{Q} = (Q,L,\rightarrow,q_0)$ -- $L$-labelled Transition System
  with:
@@ -3639,13 +3625,82 @@ Strong Bisimulation is usually the ``Finest'' Equivalence Relation
 considered on Transition Systems.
 
 Non-well-founded Set Theory (\S\ref{sec:non_wellfounded}): Bisimilar
-Sets are Equal
+Sets are Equal, Systems (\S\ref{sec:system}) as Coalgebras
+(\S\ref{sec:coalgebra}) for the $\pow$ Functor
 
 Aczel's Anti-foundation Axiom (\S\ref{sec:anti_foundation}): every
 Accessible Pointed Graph (\S\ref{sec:accessible_pointed}) corresponds
 to the Membership Structure of a Unique Set.
 
-Synchronization Trees: canonical representations of Strong
+Synchronization Trees (\S\ref{sec:synchronization_tree}) are canonical
+representation sof Strong Bisimulation Equivalence Classes
+
+Linear Types (\S\ref{sec:linear_type}): Product, Coproduct and
+Multisets of Labels are Multiplicatives, Additives, and Exponentials
+resp.
+
+Cartesian Product of Labels: Simultaneous Actions Distributed in Space
+
+Coproduct (Tagged Union) of Labels: controlled Choice of Actions
+
+Multisets of Labels: Replication (\S\ref{sec:replication}) of
+Processes
+
+
+\textbf{Combinators}
+
+Categorical Combinators can give a Point-free (Variable-free)
+translation of Functional Programs that don't mention Labels
+
+\emph{Prefixing}: $a:p = \{(a,p)\}$
+
+\emph{Sum}: $\Sigma_{i \in I} p_i = \bigcup_{i \in I} p_i$
+
+\emph{Synchronous Product}:
+$p \times q = \{((a,b), p' \times q') | (a,p') \in p, (b,q') \in q\}$
+
+\emph{Restricted Relabelling}:
+$p[f] = \{(b,q[f]) | (a,q) \in p, f a \curlyeqsucc b\}$
+
+where $f : L \nrightarrow L$ is a Partial Function and $f a
+\curlyeqsucc b$ means ``$f a$ is defined and equal to $b$''
+
+in terms of Labelled Transitions:
+\[
+  \frac{}
+  {a : p \xrightarrow{a} p}
+\]
+
+\[
+  \frac{p_i \xrightarrow{a} q}
+  {\sum_{i \in I} p_i \xrightarrow{a} q}
+\]
+
+\[
+  \frac{p \xrightarrow{a} p' \quad q \xrightarrow{b} q'}
+  {p \times q \xrightarrow{(a,b)} p' \times q'}
+\]
+
+\[
+  \frac{p \xrightarrow{a} q \quad f a \curlyeqsucc b}
+  {p[f] \xrightarrow{b} q[f]}
+\]
+
+
+\asterism
+
+
+$\cat{SProc}$ (\S\ref{sec:sproc}) -- Interaction Category for
+Synchronous Processes
+
+$\cat{ASProc}$ (\S\ref{sec:asproc}) -- Interaction Category for
+Asynchronous Processes
+
+
+
+\subsubsection{Synchronization Tree}\label{sec:synchronization_tree}
+
+\emph{Synchronization Trees}: canonical representations of Strong
 Bisimulation Equivalence Classes
 
 Synchronization Trees over Labels $L$ are Defined as the largest
@@ -3656,6 +3711,218 @@ solution to the Equation:
 Specifically $ST_L$ is the Final Coalgebra
 (\S\ref{sec:terminal_coalgebra}) of the Functor $X \mapsto \pow(L
 \times X)$
+
+Taking $L = X \times Y$, $ST_L$ is the Space $R$ of Relations extended
+in Time, $R = \pow((X \times Y) \times R)$
+
+Synchronization Tree $p$ yields a Transition System:
+\[
+  (TC(p), \rightarrow, p)
+\]
+with:
+\[
+  TC(p) = \{p\} \cup \bigcup\{TC(q) | \exists a.(a,q) \in p\}
+\]
+and:
+\[
+  p \xrightarrow{a} q \stackrel{\Delta}\Longleftrightarrow (a,q) \in p
+\]
+
+The Inclusion Functor of Synchronization Trees into State Transition
+Systems has a Left-adjoint Unfolding (???, Non-well-founded Set Theory
+\S\ref{sec:non_wellfounded}) to Synchronization Trees
+
+
+
+\subsubsection{SProc}\label{sec:sproc}
+
+$\cat{SProc}$ -- Interaction Category for Synchronous Processes:
+\begin{itemize}
+  \item $\cat{SProc}_0$: \emph{Concurrent System Specifications}
+  \item $\cat{SProc}_1$: \emph{Synchronization Trees} --
+    Non-well-founded Sets \S\ref{sec:non_wellfounded}, canonical
+    representations of Bisimulation (\S\ref{sec:bisimulation})
+    Equivalence Classes
+  \item $\circ_{\cat{SProc}}$: \emph{Synchronous Product} +
+    \emph{Restriction}
+  \item Identities: \emph{Synchronous Buffers} (``Wires'' or
+    ``Relays'')
+\end{itemize}
+
+Model for Classical Linear Logic (\S\ref{sec:cll})
+
+Model for Typed $\lambda$-calculus (\S\ref{sec:typed_lambda})
+
+supports Hierarchy of \emph{Delay Monads} (???): Temporal Structure,
+simulated Asynchrony (cf. SCCS \S\ref{sec:sccs}) %FIXME
+
+Delay -- Extension in Time
+
+Replication (\S\ref{sec:replication}) -- Extension in Space
+
+Process Calculus (\S\ref{sec:process_calculus}):
+\begin{itemize}
+  \item Relabelling, Restriction: Subcategory of ``Embeddings''
+  \item Non-determinism: Semi-additive Structure
+  \item Simulations: $2$-cells
+\end{itemize}
+
+
+Compact Closed Category (\S\ref{sec:compact_closed})
+
+Compact-closed Structure supports a Multi-cut Rule allowing general
+Process Networks to be expressed in a Typed framework
+
+As a Compact Closed Category, also a $*$-autonomous Category
+(\S\ref{sec:star_autonomous})
+
+``Tower of Refinements'' (Faithful Functors
+\S\ref{sec:faithful_functor}):
+\[
+  \cat{SProc} \leftarrowtail \cat{SProc}_1 \leftarrowtail
+    \cdots \leftarrowtail \cat{SProc}_k
+\]
+of progressively more Refined Specifications, e.g. Deadlock-freedom,
+Fairness; each Functor Preserving Linear Type Structure.
+
+Interaction -- Synchronous Product
+
+Synchronous Processes: Buffers impose no Delay
+
+``Buffered'' or ``Receptive'' Processes
+\S\ref{sec:receptive_process}): Processes are ``insensitive'' to
+Delay %FIXME
+
+
+\textbf{Objects}
+
+$A = (\Sigma_A,S_A)$ -- Object
+
+$\Sigma_A$ -- Alphabet (Sort) of Actions (Labels)
+
+$S_A \subseteq^{\text{nepref}} \Sigma_A^*$ -- Safety Specification: a
+Non-empty Prefix-closed Subset of $\Sigma_A^*$
+
+$P : A$ -- Process $P$ with Sort $\Sigma_A$ of Type $A$ with
+$traces(P) \subseteq S_A$
+
+considering $P$ as a Labelled Transition System, $traces(P)$ is the
+Set of Sequences Labelling Finite Paths from the Root
+
+$alltraces(P)$ -- Set of Sequences Labelling Finite and Infinite Paths
+from the Root
+
+Coinductive Definition:
+\begin{align*}
+  alltraces(P) &= \{\varepsilon\} \cup \{a \sigma
+    \mid P \xrightarrow{a} Q, \sigma \in alltraces(Q)\} \\
+  traces(P) &= \{\sigma \in alltraces(P)
+    \mid \sigma \;\text{is finite}\}
+\end{align*}
+
+
+
+\textbf{Morphisms}
+
+$*$-autonomous (\S\ref{sec:star_autonomous}) structure on Objects
+
+Objects $A$, $B$
+
+Object $A \otimes B$ has:
+\begin{align*}
+  \Sigma_{A \otimes B} &= \Sigma_A \times \Sigma_B \\
+  S_{A \otimes B} &= \{\sigma \in \Sigma_{A \otimes B}^*
+    \mid \fst^*(\sigma) \in S_A \wedge \snd^*(\sigma) \in S_B\}
+\end{align*}
+
+$A^\bot = A$
+
+Compact Closed: $\otimes$ is Self-dual
+
+$(A \otimes B)^\bot \cong A^\bot \otimes B^\bot$
+
+$A \parr B \cong A \otimes B$
+
+Linear Implication $A \multimap B = A^\bot \parr B$
+
+when $A^\bot \cong A$:
+\[
+  A \multimap B \cong A \otimes B
+\]
+
+in $\cat{SProc}$, $A$ and $A^\bot$ are defined to be equal, so the
+Connectives coincide up to Equality:
+\[
+  A \parr B = A \multimap B = A \otimes B
+\]
+
+Process of Type $A \otimes B$ consists of a Pair of Actions, one from
+Alphabet of $A$ and one from Alphabet of $B$; $A$ and $B$ are two
+``Ports'' of the Process
+
+\emph{Synchrony} means that at every Time Step a Process must perform
+an Action at every one of its Ports
+
+Morphisms as Processes of Linear Function-space Type
+
+$p : A \rightarrow B$ -- Process $p$ of Type $A \multimap B$ (which is
+equal $A \otimes B$ in a Compact Closed Category such as
+$\cat{SProc}$)
+
+
+\textbf{Composition}
+
+$p : A \rightarrow B$, $q : B \rightarrow C$
+
+$p;q : A \rightarrow C$
+
+\[
+  p;q \equiv (p \times q) [((a,b),(b,c)) \mapsto (a,c)]
+\]
+is defined on those Arguments:
+\[
+  ((a,b), (b',c))
+    \in (\Sigma_A \times \Sigma_B) \times (\Sigma_B \times \Sigma_C)
+\]
+such that $b = b'$
+
+\fist Note that Pattern-matching Notation is used for Partial
+Functions, i.e. the Function is defined just on those Arguments
+matching the Pattern
+
+In terms of Labelled Transitions:
+\[
+  \frac{p \xrightarrow{(a,b)} p' \quad q \xrightarrow{(b,c)} q'}
+  {p;q \xrightarrow{(a,c)} p';q'}
+\]
+
+\emph{Interaction}: ``ongoing Communication''-- at each Step, Actions
+in the common Type $B$ have to match; the Processes being Composed
+constrain each other's Behavior, selecting possibilities that agree in
+$B$. When the Processes in the definition Terminate after a single
+Step (each is considered as a Set of Pairs), then the Labelled
+Transition Rule reduces to the definition of Relational Composition:
+``Processes are Relations Extended in Time''
+
+
+\asterism
+
+
+Identity Morphisms are Synchronous Buffers $1_A : A \rightarrow A$
+(Left instantaneously transferred to Right and vice-versa)
+
+Process $p : (\Sigma,S)$
+
+\[
+  p \upharpoonright S = \{(a,p'\upharpoonright(S/a))
+    \mid (a,p') \in p, a \in S\}
+\]
+where $S/a = \{\varepsilon\} \cup \{\sigma \mid a\sigma \in S\}$
+
+\[
+  1_A = id \upharpoonright S_{A \multimap A}
+\]
+where $id = \{((a,a),id) \mid a \in \Sigma_A\}$
 
 
 
