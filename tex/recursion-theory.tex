@@ -1416,7 +1416,7 @@ expressed as Moprhisms between Transition Systems
 
 The Inclusion Functor (\S\ref{sec:inclusion_functor}) of
 Synchronization Trees (\S\ref{sec:synchronization_tree}) in Transition
-Systems is Left-adjoint (\S\ref{sec:adjoint}) to a Functor
+Systems is Left-adjoint (\S\ref{sec:adjoint_functor}) to a Functor
 ``unfolding'' Transition Systems to Synchronization Trees. Ignoring
 the Branching of Computation Paths results in Languages
 (\S\ref{sec:formal_language}) as Models of Processes (i.e. the Set of
@@ -1832,6 +1832,15 @@ Replication -- Extension in Space
 % --------------------------------------------------------------------
 \subsection{Null Process}\label{sec:null_process}
 % --------------------------------------------------------------------
+
+(or \emph{Nil Process})
+
+In $\cat{SProc}$ (\S\ref{sec:sproc}) Interaction Category
+(\S\ref{sec:interaction_category}) for Synchronous Processes, the
+Unique Morphisms into and out of the Zero Object $0$ are Null
+Processes.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Deadlock}\label{sec:deadlock}
@@ -3484,8 +3493,8 @@ Non-determinism: Outputs are not uniquely determined by Inputs and
 Continuations need not be uniquely determined by Observable Interactions
 
 Taking $L = X \times Y$ in $L$-labelled Transition System $\class{Q} =
-(Q,L,\rightarrow,q_0)$, $R$ is $ST_L$: the Synchronization Trees
-(\S\ref{sec:synchronization_tree}) over Labels $L$; the Final
+(Q,L,\rightarrow,q_0)$, $R$ is $\mathsf{ST}_L$: the Synchronization
+Trees (\S\ref{sec:synchronization_tree}) over Labels $L$; the Final
 Coalgebra (\S\ref{sec:terminal_coalgebra}) of the Functor $X \mapsto
 \pow(L \times X)$
 
@@ -3706,14 +3715,17 @@ Bisimulation Equivalence Classes
 Synchronization Trees over Labels $L$ are Defined as the largest
 solution to the Equation:
 \[
-  ST_L = \pow(L \times ST_L)
+  \mathsf{ST}_L = \pow(L \times \mathsf{ST}_L)
 \]
 Specifically $ST_L$ is the Final Coalgebra
-(\S\ref{sec:terminal_coalgebra}) of the Functor $X \mapsto \pow(L
-\times X)$
+(\S\ref{sec:terminal_coalgebra}) of the Functor $T = X \mapsto \pow(L
+\times X)$ and:
+\[
+  \mathsf{ST}_L = T(\mathsf{ST}_L)
+\]
 
-Taking $L = X \times Y$, $ST_L$ is the Space $R$ of Relations extended
-in Time, $R = \pow((X \times Y) \times R)$
+Taking $L = X \times Y$, $\mathsf{ST}_L$ is the Space $R$ of Relations
+extended in Time, $R = \pow((X \times Y) \times R)$
 
 Synchronization Tree $p$ yields a Transition System:
 \[
@@ -3768,14 +3780,6 @@ Process Calculus (\S\ref{sec:process_calculus}):
 \end{itemize}
 
 
-Compact Closed Category (\S\ref{sec:compact_closed})
-
-Compact-closed Structure supports a Multi-cut Rule allowing general
-Process Networks to be expressed in a Typed framework
-
-As a Compact Closed Category, also a $*$-autonomous Category
-(\S\ref{sec:star_autonomous})
-
 ``Tower of Refinements'' (Faithful Functors
 \S\ref{sec:faithful_functor}):
 \[
@@ -3800,8 +3804,9 @@ $A = (\Sigma_A,S_A)$ -- Object
 
 $\Sigma_A$ -- Alphabet (Sort) of Actions (Labels)
 
-$S_A \subseteq^{\text{nepref}} \Sigma_A^*$ -- Safety Specification: a
-Non-empty Prefix-closed Subset of $\Sigma_A^*$
+$S_A \subseteq^{\text{nepref}} \Sigma_A^*$ -- Safety Specification
+(???): a Non-empty Prefix-closed (\S\ref{sec:prefix_closure}) Subset
+of $\Sigma_A^*$
 
 $P : A$ -- Process $P$ with Sort $\Sigma_A$ of Type $A$ with
 $traces(P) \subseteq S_A$
@@ -3905,24 +3910,223 @@ Transition Rule reduces to the definition of Relational Composition:
 ``Processes are Relations Extended in Time''
 
 
-\asterism
-
+\textbf{Identity Morphisms}
 
 Identity Morphisms are Synchronous Buffers $1_A : A \rightarrow A$
 (Left instantaneously transferred to Right and vice-versa)
 
-Process $p : (\Sigma,S)$
-
+Process $p : (\Sigma,S)$:
 \[
   p \upharpoonright S = \{(a,p'\upharpoonright(S/a))
     \mid (a,p') \in p, a \in S\}
 \]
 where $S/a = \{\varepsilon\} \cup \{\sigma \mid a\sigma \in S\}$
 
+Identity Morphism $1_A$:
 \[
   1_A = id \upharpoonright S_{A \multimap A}
 \]
 where $id = \{((a,a),id) \mid a \in \Sigma_A\}$
+
+
+
+\asterism
+
+
+Compact Closed Category (\S\ref{sec:compact_closed})
+
+$A^\bot = A$, $\otimes = \parr$, $\& = \oplus$, $! = ?$
+
+$I = \bot$ ($I$ Tensor Unit)
+
+$A^\bot = A \multimap I$
+
+Compact-closed Structure supports a Multi-cut Rule allowing general
+Process Networks to be expressed in a Typed framework
+
+As a Compact Closed Category, also a $*$-autonomous Category
+(\S\ref{sec:star_autonomous})
+
+
+\textbf{Duals}
+
+$\bot$
+
+$p : A \rightarrow C$
+
+$p^\bot : C \rightarrow A$:
+\[
+  \frac{p \xrightarrow{(a,c)} p'}
+  {p^\bot \xrightarrow{(c,a)} p'^\bot}
+\]
+
+
+\textbf{Multiplicatives} (Tensor)
+
+$\otimes$
+
+$p : A \rightarrow C$, $q : B \rightarrow D$
+
+$p \otimes q : A \otimes B \rightarrow C \otimes D$:
+\[
+  \frac{p \xrightarrow{(a,c)} p' \quad q \xrightarrow{(b,d)} q'}
+  {p\otimes q \xrightarrow{((a,b),(c,d))} p' \otimes q'}
+\]
+
+Tensor Unit $I$:
+\[
+  \Sigma_I = \{*\} \quad\quad\quad S_I = \{*^n \mid n < \omega \}
+\]
+
+Canonical Isomorphisms $unitl : I \otimes A \cong A$, $unitr : A
+\otimes I \cong A$, $assoc : A \otimes (B \otimes C)$, $symm : A
+\otimes B \rightarrow B \otimes A$:
+\begin{align*}
+  unitl &= \\
+  unitr &= \\
+  assoc &= \\
+  symm &=
+\end{align*}
+
+Currying, Evaluation
+
+
+\textbf{Multicut}
+
+usual Cut Rule:
+\[
+  \frac{\vdash\Gamma,A \quad\quad \vdash\Delta,A^\bot}
+  {\vdash\Gamma,\Delta}
+\]
+connecting two ``Modules'' by an ``Interface'' consisting of a single
+``Port''; allows for connecting Processes in a ``Tree Structure'', but
+not a ``Cyclic Interconnection Network''
+
+Multicut:
+\[
+  \frac{\vdash\Gamma,\Delta \quad\quad \vdash\Gamma',\Delta^\bot}
+  {\vdash\Gamma,\Gamma'}
+\]
+
+not Admissible in Linear Logic (\S\ref{sec:linear_logic}), can't be
+Interpreted in Linear Categories (???)
+
+
+\textbf{Additives} (Biproduct)
+
+as all Objects in a Compact Closed Category are Self-dual, $\oplus =
+\&$ is a Biproduct (both a Product and a Coproduct)
+
+$\oplus = \&$
+
+$p : A \rightarrow C$, $q : B \rightarrow D$
+
+$p \oplus q : A \oplus B \rightarrow C \oplus D$:
+\[
+  p \oplus q = p[(a,c) \mapsto (inl(a),inl(c))]
+    \cup q[(b,d) \mapsto (inr(b),inr(d))]
+\]
+
+$inl$, $inr$, $[p,q]$ %FIXME
+
+Additive Units $0$ (Initial Object), $1$ (Terminal Object)
+
+without Safety Specifications the Coproduct would be a Weak Coproduct
+
+$\cat{SProc}$ has all Biproducts
+
+$p : A \rightarrow B$, $q : A \rightarrow B$
+
+$p + q : A \rightarrow B$:
+\[
+  p + q = A \xrightarrow{\Delta_A} A \oplus A \xrightarrow{[p,q]} B
+        = A \xrightarrow{\langle p,q \rangle} B
+          \oplus B \xrightarrow{\nabla_B} B
+\]
+
+Unit $0_A = A \rightarrow 0 \rightarrow A$
+
+in Concrete Set representation $p + q = p \cup q$
+
+Nondeterministic Sum
+
+
+
+\textbf{Zero Object}
+
+Zero Object (\S\ref{sec:zero_object})
+
+Initial and Terminal (Additive Unit)
+
+$0 = (\varnothing, \{\varepsilon\})$
+
+Unique Morphisms into and out of $0$ are $nil$ Processes
+(\S\ref{sec:null_process})
+
+
+
+\textbf{Exponentials}
+
+Classical Linear Logic (\S\ref{sec:cll})
+
+$!$, $?$
+
+Exponentials needed to define full Typed $\lambda$-calculus
+(Functional Programming) and Replication (Process Calculus)
+
+$\cat{SProc}$ is Self-dual so $! = ?$
+
+\begin{itemize}
+  \item Promotion: for each Morphism $f : !A \rightarrow B$, there is
+    a Morphism $f^\dag : !A \rightarrow !B$
+  \item Contraction: Morphisms $contr_A : !A \rightarrow !A \otimes
+    !A$
+  \item Weakening: Morphisms $weak_A : !A \rightarrow I$
+  \item Dereliction: Morphisms $der_A : !A \rightarrow A$
+  \item Isomorphisms $!1 \cong I$ and $!(A \& B) \cong !A \otimes !B$
+\end{itemize}
+where $1$ is the Terminal Object
+
+(definitions) %FIXME
+
+$!$ is a Comonad $(!,der,\delta)$
+
+$\delta : ! \rightarrow !!$
+
+$\delta_A = \id_{!A}^\dag$
+
+$\delta_A; !der_A = \id_{!A}$
+
+Commutative Comonoid Structure:
+\[
+  I \xleftarrow{weak_A} !A \xrightarrow{contr_A} !A \otimes !A
+\]
+such that: (commutative diagrams) %FIXME
+
+for each $A$ is is a Commutative Comonoid
+
+
+Category $\cat{C}$ considered as a Model of Linear Logic
+
+Forgetful Functor from Category of Commutative Comonoids in $\cat{C}$
+has a Right Adjoint giving a construction of Cofree
+(\S\ref{sec:cofree_functor}) Commutative Comonoids
+(\S\ref{sec:comonoid}) in $\cat{C}$; Comonad $!$ can be defined from
+this Adjunction.
+
+Cofree Commutative Comonoids:
+\[
+  !A = \bigoplus_{n \in \omega} \otimes^n_s A
+\]
+where $\otimes^n_s$ is the Symmetric Tensor Power: (definition) %FIXME
+
+
+\asterism
+
+
+\textbf{Temporal Structure}
+
+Linear Types do not reflect Temporal Structure
 
 
 

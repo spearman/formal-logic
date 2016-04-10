@@ -484,7 +484,7 @@ Pair of Functors (\S\ref{sec:functor}):
 \]\[
   T : \cat{D} \rightarrow \cat{C}
 \]
-and Natural Isomorphisms (\S\ref{sec:natural_transformation}):
+and Natural Isomorphisms (\S\ref{sec:natural_isomorphism}):
 \[
   I_\cat{C} \cong T \circ S
 \]\[
@@ -1103,7 +1103,7 @@ and vice versa.
 
 Considering a Monoidal Category as a Bicategory
 (\S\ref{sec:bicategory}) with one Object, a Dual Pair is exactly an
-Adjoint Pair (\S\ref{sec:adjoint}).
+Adjoint Pair (\S\ref{sec:adjunction}).
 
 
 
@@ -1619,8 +1619,9 @@ Fully Faithful.
 The Forgetful Functor $\cat{Pos} \rightarrow \cat{Cat}$ is
 Fully Faithful.
 
-Forgetful Functors are Right Adjoint (\S\ref{sec:adjoint}) to Free
-Functors (\S\ref{sec:free_functor}).
+Forgetful Functors are Right Adjoint (\S\ref{sec:adjoint_functor}) to
+Free Functors (\S\ref{sec:free_functor}) and Left Adjoint to Cofree
+Functors (\S\ref{sec:cofree_functor}).
 
 
 
@@ -1628,7 +1629,7 @@ Functors (\S\ref{sec:free_functor}).
 \subsection{Free Functor}\label{sec:free_functor}
 % --------------------------------------------------------------------
 
-Free Functors are Left Adjoint (\S\ref{sec:adjoint}) to Forgetful
+Free Functors are Left Adjoint (\S\ref{sec:adjunction}) to Forgetful
 Functors (\S\ref{sec:forgetful_functor}).
 
 Presentation (\S\ref{sec:presentation})
@@ -1680,6 +1681,16 @@ nCatLab:
 \subsection{Cofree Functor}\label{sec:cofree_functor}
 % --------------------------------------------------------------------
 
+Cofree Functors are Right-adjoint to Free Functors
+
+(Example in \cite{abramsky-gay-nagarajan96} for $\cat{SProc}$
+\S\ref{sec:sproc}): for a Category $\cat{C}$ considered as a Model of
+Linear Logic, the Forgetful Functor from the Category of Commutative
+Comonoids in $\cat{C}$ has a Right Adjoint giving a construction of
+Cofree Commutative Comonoids (\S\ref{sec:comonoid}) in $\cat{C}$
+
+
+
 % --------------------------------------------------------------------
 \subsection{Bivariant Functor} \label{sec:bivariant_functor}
 % --------------------------------------------------------------------
@@ -1717,6 +1728,27 @@ $\cat{C}$.
 A \emph{Continuous Functor} preserves Limits
 
 Hom-functor (\S\ref{sec:hom_functor})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Weak Inverse}\label{sec:weak_inverse}
+% --------------------------------------------------------------------
+
+A \emph{Weak Inverse} of a Functor $F : \cat{C} \rightarrow \cat{D}$
+is a Functor $G : \cat{D} \rightarrow \cat{C}$ with Natural
+Isomorphisms:
+\begin{align*}
+  \iota &: \id_\cat{C} \rightarrow G \circ F \\
+  \epsilon &: F \circ G \rightarrow \id_\cat{D}
+\end{align*}
+
+Left and Right Adjoints (\S\ref{sec:adjoint_functor}) are both ``best
+approximations'' of a Weak Inverse
+
+Adjoint Equivalence (\S\ref{sec:adjoint_equivalence}) when $\iota$ and
+$\varepsilon$ satisfy the Triangle Identities
+(\S\ref{sec:triangle_identity})
 
 
 
@@ -1795,28 +1827,34 @@ Categorification of Polynomials (\S\ref{sec:polynomial})
 % ====================================================================
 
 A \emph{Natural Transformation} is a Morphism between Functors with
-two Properties. Given a Natural Transformation, $\tau$, between two
-Functors, $S$ and $T$, between two Categories, $\cat{C}$ and
-$\cat{D}$:
+two Properties. Given a Natural Transformation, $\tau : F \Rightarrow
+G$, between two Functors, $F$ and $G$, between Categories $\cat{C}$
+and $\cat{D}$:
 \[
-  \tau : S \rightarrow T
+  \begin{tikzpicture}
+    \node (C) at (-1,0) {$\cat{C}$};
+    \node (D) at (1,0) {$\cat{D}$};
+    \node (T) at (0,0) {$\;\;\;\Downarrow\tau$};
+    \draw[->,bend left] (C) to node [above] {F} (D);
+    \draw[->,bend right] (C) to node [below] {G} (D);
+  \end{tikzpicture}
 \]
 such that:
 \begin{enumerate}
   \item $\forall X \in \cat{C},
-    \exists \tau_X : S(X) \rightarrow T(X) \in \cat{D}$
+    \exists \tau_X : F(X) \rightarrow G(X) \in \cat{D}$
   \item $\forall f : X \rightarrow Y \in \cat{C},
-    \tau_Y \circ S(f) = G(f) \circ \tau_X$
+    \tau_Y \circ F(f) = G(f) \circ \tau_X$
 \end{enumerate}
 where the Morphism $\tau_X$ is called the \emph{Component} of $\tau$
 at $X$. When (2) holds, a Commutative Diagram is formed and the
 Morphisms $\tau_X$ are said to be \emph{Natural} in $X$. If there is
 no Morphism in $\cat{D}$ corresponding to $\tau_X$, then there can
-be no Natural Transformation from $S$ to $T$.
+be no Natural Transformation from $F$ to $G$.
 
-When every Component in $\tau$ is Invertible in $\cat{D}$, $\tau$
-is a \emph{Natural Isomorphism} (or \emph{Natural Equivalence}) and $S
-\cong T$. Equivalently, a Natural Isomorphism is an Isomorphism in the
+When every Component in $\tau$ is Invertible in $\cat{D}$, $\tau$ is a
+\emph{Natural Isomorphism} (\S\ref{sec:natural_isomorphism}) and $F
+\cong G$. Equivalently, a Natural Isomorphism is an Isomorphism in the
 Functor Category $Fun(\cat{C},\cat{D})$.
 
 Natural Isomorphisms:
@@ -1832,21 +1870,39 @@ in Programming Languages, Natural Transformations may be represented
 as Polymorphic Functions (i.e. Family of Functions Parameterized by
 Types)
 
+Horizontal Composition (\S\ref{sec:horizontal_composition}):
+Composition along $1$-morphisms (Functors)
+
+Vertical Composition (\S\ref{sec:horizontal_composition}):
+Composition along Objects (Categories)
+
 
 
 % --------------------------------------------------------------------
 \subsection{Vertical Composition}\label{sec:vertical_composition}
 % --------------------------------------------------------------------
 
-Given Natural Transformations $\eta : F \rightarrow G$ and $\epsilon :
-G \rightarrow H$ between Functors $F,G,H : \cat{C} \rightarrow
-\cat{D}$, the \emph{Vertical Composition} is given as:
+Given Natural Transformations $\eta : F \Rightarrow G$ and $\epsilon :
+G \Rightarrow H$ between Functors $F,G,H : \cat{C} \rightarrow
+\cat{D}$, the \emph{Vertical Composition} is $\epsilon\circ\eta : F
+\Rightarrow H$:
 \[
-  \epsilon \eta : F \rightarrow H
+  \begin{tikzpicture}
+    \node (C) at (-1,0) {$\cat{C}$};
+    \node (D) at (1,0) {$\cat{D}$};
+    \node (N) at (0,0.3) {$\;\;\;\Downarrow^\eta$};
+    \node (M) at (0,-0.4) {$\;\;\;\Downarrow^\epsilon$};
+    \node (F) at (0,0.7) {};
+    \node (H) at (0,-0.7) {};
+    \draw[->,bend left=60] (C) to node [above] {F} (D);
+    \draw[->] (C) to node [above] {\quad\quad\quad G} (D);
+    \draw[->,bend right=60] (C) to node [below] {H} (D);
+    \draw[->,bend right=30,double distance=1.5pt] (F) to
+      node [left,pos=0.75] {$_{\epsilon\circ\eta}$} (H);
+  \end{tikzpicture}
 \]
-Vertical Composition may be explicitly denoted with the $\cdot$
-Operator, $\epsilon \cdot \eta$. Vertical Composition is Associative
-and has an Identity.
+
+Composition in the corresponding Functor Category
 
 
 
@@ -1854,16 +1910,32 @@ and has an Identity.
 \subsection{Horizontal Composition}\label{sec:horizontal_composition}
 % --------------------------------------------------------------------
 
-Given Functors $F,G : \cat{C} \rightarrow \cat{D}$ and $J,K :
-\cat{D} \rightarrow \cat{E}$, and Natural Transformations $\eta
-: F \rightarrow G$ and $\epsilon : J \rightarrow K$, the
-\emph{Horizontal Composition} is given as:
+Given Functors $F,G : \cat{C} \rightarrow \cat{D}$ and $J,K : \cat{D}
+\rightarrow \cat{E}$, and Natural Transformations $\eta : F
+\rightarrow G$ and $\epsilon : J \rightarrow K$, the \emph{Horizontal
+  Composition} (or \emph{Godement Product}) is $\eta * \epsilon : JF
+\Rightarrow KG$:
 \[
-  \eta \epsilon : JF \rightarrow KG
+  \begin{tikzpicture}
+    \node (U) at (0,0) {$\stackrel{\eta*\epsilon}
+      {\stackrel{\Big\|}{\Big\Downarrow}}$};
+    \node [fill,color=white,scale=1.5] (W) at (0,0) {};
+    \node (C) at (-2,0) {$\cat{C}$};
+    \node (D) at (0,0) {$\cat{D}$};
+    \node (E) at (2,0) {$\cat{E}$};
+    \node (S) at (-1,0) {$\;\;\;\Downarrow\eta$};
+    \node (T) at (1,0) {$\;\;\;\Downarrow\epsilon$};
+    \draw[->,bend left] (C) to node [above] {F} (D);
+    \draw[->,bend right] (C) to node [below] {G} (D);
+    \draw[->,bend left] (D) to node [above] {J} (E);
+    \draw[->,bend right] (D) to node [below] {K} (E);
+    \draw[->,bend left=60] (C) to node [above] {JF} (E);
+    \draw[->,bend right=60] (C) to node [below] {GK} (E);
+  \end{tikzpicture}
 \]
-Horizontal Composition may be explicitly denoted with the $\circ$
-Operator: $\eta \circ \epsilon$. Horizontal Composition is Associative
-and has the same Identity as Vertical Composition.
+
+Horizontal Composition is Associative and has the same Identity as
+Vertical Composition.
 
 
 
@@ -1881,6 +1953,32 @@ following \emph{Interchange Law} applies:
   (\tau' \cdot \sigma') \circ (\tau \cdot \sigma) =
   (\tau' \circ \tau) \cdot (\sigma' \circ \sigma)
 \]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Natural Isomorphism}\label{sec:natural_isomorphism}
+% --------------------------------------------------------------------
+
+\emph{Natural Equivalence} in a $1$-category %FIXME xref
+
+\[
+  \begin{tikzpicture}
+    \node (C) at (-1,0) {$\cat{C}$};
+    \node (D) at (1,0) {$\cat{D}$};
+    \node (N) at (0,0) {$\;\;\;\stackrel{\simeq}{\Downarrow}\eta$};
+    \draw[->,bend left] (C) to node [above] {F} (D);
+    \draw[->,bend right] (C) to node [below] {G} (D);
+  \end{tikzpicture}
+\]
+
+\begin{itemize}
+  \item Natural Isomorphism with a Two-sided Inverse (???)
+  \item each Component $\eta_X : F(X) \rightarrow G(X)$ for all $X
+    \in \cat{C}_0$ is an Isomorphism in $\cat{D}$
+  \item Isomorphism in the Functor Category
+    (\S\ref{sec:functor_category}) $[\cat{C},\cat{D}]$
+\end{itemize}
 
 
 
@@ -2674,6 +2772,8 @@ between Functors:
   \cat{D}^{\cat{C}} = Fun(\cat{C},\cat{D})
 \]
 
+$[\cat{C},\cat{D}]$
+
 A Hom-set in a Functor Category may be denoted:
 \[
   Nat(S,T) = \cat{D}^{\cat{C}}(S,T) =
@@ -3236,6 +3336,18 @@ By Associativity of Products, $A \times B \times C = (A \times B)
 
 
 
+\paragraph{Diagonal}\label{sec:diagonal}\hfill
+
+\emph{Diagonal} of an Object $X$ in a Category with Products is the
+canonical Morphism:
+\[
+  \Delta : X \xrightarrow{(\Id,\Id)} X \times X
+\]
+
+\fist Cf. Codiagonal (\S\ref{sec:codiagonal})
+
+
+
 \subsubsection{Equalizer}\label{sec:equalizer}
 
 An \emph{Equalizer} is an (Unique) Object $E$ and Morphism $e: E
@@ -3510,6 +3622,18 @@ Isomorphism:\cite{awodey06}
 
 
 
+\paragraph{Codiagonal}\label{sec:codiagonal}\hfill
+
+\emph{Codiagonal} (or \emph{Fold Morphism}) of an Object $X$ in a
+Category with Coproducts:
+\[
+  \nabla : X \amalg X \xrightarrow{(\Id,\Id)} X
+\]
+
+\fist Cf. Diagonal (\S\ref{sec:diagonal})
+
+
+
 \subsubsection{Coequalizer}\label{sec:coequalizer}
 
 An \emph{Coequalizer} is an (Unique) Object $Q$ and Morphism $q: B
@@ -3676,7 +3800,7 @@ such that:
 where $\lambda f \times 1_A : X \times A \rightarrow B^A \times A$ is
 called the \emph{Exponential Transpose} of $f$. The Morphisms $f$ and
 $\lambda f$ are called \emph{Exponential Adjoints}. The $\epsilon$
-function is the Counit of the Adjunction (\S\ref{sec:adjoint}) between
+function is the Counit of the Adjunction (\S\ref{sec:adjunction}) between
 the Product Functor and the Exponential Functor.
 
 The Universal Mapping Property for Exponentials implies the two-way
@@ -3753,6 +3877,18 @@ Accessible Category (\S\ref{sec:accessible_category})
 Filtered Colimit
 
 Accessible Functor (\S\ref{sec:accessible_functor})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Biproduct}\label{sec:biproduct}
+% --------------------------------------------------------------------
+
+both Product (\S\ref{sec:product}) and Coproduct
+(\S\ref{sec:coproduct})
+
+Category with a Zero Object (\S\ref{sec:zero_object})
+
 
 
 % --------------------------------------------------------------------
@@ -3834,7 +3970,7 @@ where $\delta_F$ is the Natural Transformation with $\delta_F(a) =
 
 Left Kan Extension $Lan$
 
-Adjoint (\S\ref{sec:adjoint}) as Kan Extension
+Adjoint (\S\ref{sec:adjunction}) as Kan Extension
 
 Limit (\S\ref{sec:limit}) as Kan Extension
 
@@ -3845,7 +3981,7 @@ Codensity Monad (\S\ref{sec:codensity_monad})
 
 
 % ====================================================================
-\section{Adjunction}\label{sec:adjoint}
+\section{Adjunction}\label{sec:adjunction}
 % ====================================================================
 
 % Adjointness
@@ -3858,30 +3994,33 @@ Isomorphism:
 \]
 is Natural in $C$ and $D$.
 
-\textbf{Unit}:
+
+\textbf{Unit}
 
 Natural Transformation:
 \[
   \eta : 1_\cat{C} \rightarrow U F
 \]
 
-\textbf{Counit}:
+
+\textbf{Counit}
 
 Natural Transformation:
 \[
   \epsilon : F U \rightarrow 1_\cat{D}
 \]
 
-\textbf{Triangle Identities}:
+
+\textbf{Triangle Identities} (\S\ref{sec:triangle_identity})
 \[
   \epsilon F \circ F \eta = 1_F
 \]\[
   U \epsilon \circ \eta U = 1_U
 \]
 
+
 Universal Mapping Property (\S\ref{sec:universal_property}) for $\eta
 : 1_\cat{C} \rightarrow U \circ F$ (Unit):
-
 \begin{itemize}
 \item For any $C \in \cat{C}$, $D \in \cat{D}$, $f : C
   \rightarrow U D$, there exists a unique $g : FC \rightarrow D$ such
@@ -3893,7 +4032,6 @@ Universal Mapping Property (\S\ref{sec:universal_property}) for $\eta
 
 Universal Mapping Property for $\epsilon : F \circ U \rightarrow
 1_\cat{D}$ (Counit):
-
 \begin{itemize}
 \item For any $C \in \cat{C}$, $D \in \cat{D}$, $g : F C
   \rightarrow D$, there exists a unique $f : C \rightarrow U D$ such
@@ -3916,6 +4054,10 @@ Relation between (Inverse) Hom-set and Unit definitions:
 \]\[
   \epsilon_D = \Psi(1_{U D})
 \]
+
+When Unit and Counit are Natural Isomorphisms
+(\S\ref{sec:natural_isomorphism}), the Adjunction is an \emph{Adjoint
+  Equivalence} (\S\ref{sec:adjoint_equivalence}).
 
 Free Functors (\S\ref{sec:free_functor}) are Left Adjoint to Forgetful
 Functors (\S\ref{sec:forgetful_functor}): Free Functor $\dashv$
@@ -3947,13 +4089,55 @@ An \emph{Adjoint Functor} is the Categorical analog of the Existential
 Quantifier in Logic (\S\ref{sec:quantifier}) and the Image Operation
 along a Continuous Function in Topology (Part \ref{sec:topology}).
 
-Adjoint (\S\ref{sec:adjoint})
+Left Adjoint Functors Preserve Colimits (\S\ref{sec:colimit}) and
+Epimorphisms (\S\ref{sec:epimorphism})
 
-Free Functors (\S\ref{sec:free_functor}) are Left-adjoint to Forgetful
-Functors (\S\ref{sec:forgetful_functor})
+Right Adjoint Functors Preserve Limits (\S\ref{sec:limit}) and
+Monomorphisms (\S\ref{sec:monomorphism})
+
+nCatLab:
+
+Left and Right Adjoint Functors are ``best approximations'' of Weak
+Inverses (\S\ref{sec:weak_inverse})
+
+Left Adjoint: may be thought of as being defined ``Freely''; consists
+of anything an Inverse might ``need'' regardless of whether it
+``works''.
+
+Right Adjoint: may be thought of as being defined ``Cofreely'';
+consists of anything that ``works'' in an Inverse regardless of
+whether it's ``needed''.
+
+A Forgetful Functor (\S\ref{sec:forgetful_functor}) has as
+Left-adjoint a Free Functor (\S\ref{sec:free_functor}) and as
+Right-adjoint a Cofree Functor (\S\ref{sec:cofree_functor})
 
 A Forgetful Functor $G$, forgetting some Constraint $C$, has a
 Left-adjoint $F$ that is a ``Free $C$ Functor'' %FIXME
+
+
+
+\subsubsection{Triangle Identity}\label{sec:triangle_identity}
+
+\emph{Triangle Identity} (or \emph{Zigzag Identity})
+\[
+  \epsilon F \circ F \eta = 1_F
+\]\[
+  U \epsilon \circ \eta U = 1_U
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Adjoint Equivalence}\label{sec:adjoint_equivalence}
+% --------------------------------------------------------------------
+
+``Coherent'', ``Structured'' Equivalence
+
+Adjunction $F \dashv G$ where Unit and Counit are Natural Isomorphisms
+(\S\ref{sec:natural_isomorphism})
+
+Weak Inverse (\S\ref{sec:weak_inverse})
 
 
 
@@ -4043,7 +4227,7 @@ is equivalent to the Unit of the Adjunction. If $F$ and $G$ are
 Inverses then the corresponding Monad is the Identity Functor.
 
 Given a Monad $T$ on a Category $\cat{C}$, there is a Category of
-Adjunctions (\S\ref{sec:adjoint}) that give rise to that Monad.
+Adjunctions (\S\ref{sec:adjunction}) that give rise to that Monad.
 
 A $T$-algebra (\S\ref{sec:t_algebra}) for a Monad $T$ is a Model
 (\S\ref{sec:model}) of the Algebraic Theory
@@ -4451,7 +4635,7 @@ a Left Adjoint $F$ forming a Monadic Adjunction.
 Functor $U : \cat{C} \rightarrow \cat{D}$ is \emph{Monadic} if
 and only if:
 \begin{enumerate}
-  \item $U$ has a Left Adjoint (\S\ref{sec:adjoint})
+  \item $U$ has a Left Adjoint (\S\ref{sec:adjunction})
   \item $U$ is Conservative (\S\ref{sec:conservative_functor})
   \item $\cat{C}$ has Coequalizers (\S\ref{sec:coequalizer}) of
     $U$-split Parallel Pairs of Morphisms in $\cat{C}$ and $U$
@@ -5007,7 +5191,7 @@ A \emph{Closed Monoidal Category} is a Closed Category
 of Mapping Objects (\S\ref{sec:mapping_object}), $[A,B]$,
 and it is also Monoidal Category such that the Tensor Product Functor
 $(-) \otimes B : \cat{C} \rightarrow \cat{C}$ has Right Adjoint
-(\S\ref{sec:adjoint}) $[B,-] : \cat{C} \rightarrow \cat{C}$,
+(\S\ref{sec:adjunction}) $[B,-] : \cat{C} \rightarrow \cat{C}$,
 meaning there is a Bijection called Currying (???) between Hom-sets:
 \[
   Hom_\cat{C}(A \otimes B,C) \cong Hom_\cat{C}(A, [B,C])
@@ -5466,6 +5650,9 @@ corresponding to the Tensorial Strength
 
 Trace (\S\ref{sec:category_trace})
 
+Multicut Rule (???), Interaction Category
+(\S\ref{sec:interaction_category}) $\cat{SProc}$
+
 
 
 \subsubsection{Non-symmetric Compact Closed Category}
@@ -5676,6 +5863,27 @@ Monoidal so that Composition is defined as a Morphism:
 ``Enriched over $\cat{K}$''
 
 Internal Hom-functor (\S\ref{sec:internal_hom})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Preadditive Category}\label{sec:preadditive_category}
+% --------------------------------------------------------------------
+
+(or \emph{$\cat{Ab}$-category})
+
+Category Enriched over the Monoidal Category
+(\S\ref{sec:monoidal_category}) of Abelian Groups $\cat{Ab}$, i.e.
+Category $\cat{C}$ is Preadditive if every Homset $Hom(A,B)$ in
+$\cat{C}$ has the structure of an Abelian Group and Composition of
+Morphisms is Bilinear (\S\ref{sec:bilinear_map}).
+
+
+
+\subsubsection{Additive Category}\label{sec:additive_category}
+
+Preadditive Category admitting all Finitary Biproducts
+(\S\ref{sec:biproduct})
 
 
 
