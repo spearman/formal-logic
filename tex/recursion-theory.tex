@@ -1394,7 +1394,8 @@ Possible (Determinate) Computation Paths; e.g. Hoare Traces,
 Mazurkiewicz Traces, Pratt Pomsets
 
 \emph{Branching-time Model}: e.g. Synchronization and Acceptance
-Trees, Petri Nets, Event Structures
+Trees, Petri Nets, Event Structures (CTL$^*$ (\S\ref{sec:ctl_star},
+Computation Tree Logic (\S\ref{sec:ctl})
 
 
 in Interleaving Models, Parallel activities are expressed in terms of
@@ -3761,16 +3762,52 @@ $\cat{SProc}$ -- Interaction Category for Synchronous Processes:
     ``Relays'')
 \end{itemize}
 
-Model for Classical Linear Logic (\S\ref{sec:cll})
+Model for Classical Linear Logic (\S\ref{sec:cll}), Model for Typed
+$\lambda$-calculus (\S\ref{sec:typed_lambda}): translation from
+$\lambda$-terms into Process Terms built from Categorical Combinators
+(defined from the four basic Combinators): results of general theory,
+no Name or Name Binding constructs needed
 
-Model for Typed $\lambda$-calculus (\S\ref{sec:typed_lambda})
+Symmetric Monoidal Structure on $\cat{SProc}$ replaces the Abelian
+Monoid Structure on Actions in SCCS (\S\ref{sec:sccs})
+
+Closed Structure allows ``Redistribution'' of an Interface between
+Source and Target, i.e. for an Interaction $A \xrightarrow{p} B
+\xrightarrow{q} C$ there is control over what part of the Action
+Structure is put into the ``Locus of Interaction'' $B$.
+
+Duality: Symmetric, Adirectional nature of Concurrent Interaction
+
+Multiplicatives: (Product, Restriction) Static Operations
+
+Additives: provide Disjointly Labelled Sums and Non-deterministic
+Choice (``One-step Dynamics'')
+
+Exponentials: support Replication (\S\ref{sec:replication})--
+Extension in Space, Static and Dynamic
+
+
+\emph{Temporal Structure}
 
 supports Hierarchy of \emph{Delay Monads} (???): Temporal Structure,
 simulated Asynchrony (cf. SCCS \S\ref{sec:sccs}) %FIXME
 
-Delay -- Extension in Time
+Linear Types do not reflect Temporal Structure of Processes: the
+Linear Connectives never go beyond Processes with Trivial Extension in
+Time (i.e. normal Relations). The Category $\cat{Rel}$ of Sets and
+Relations is Bireflective (\S\ref{sec:reflective_subcategory}) in
+$\cat{SProc}$, the Reflection $R : \cat{SProc} \rightarrow \cat{Rel}$
+defined by:
+\begin{align*}
+  R(A) &= \{a \mid a \in S_A\} \\
+  R(p) &= \{(a,b) \mid \exists q.p \xrightarrow{(a,b)} q\}
+\end{align*}
+Preserves all the Linear Category Structure. History-free strategies
+suffice to Interpret Linear Types.
 
-Replication (\S\ref{sec:replication}) -- Extension in Space
+Milner: ``Static'' vs. ``Dynamic'' Operations
+
+Prefixing: Extension in Time, Delay Operators
 
 Process Calculus (\S\ref{sec:process_calculus}):
 \begin{itemize}
@@ -3879,10 +3916,10 @@ $\cat{SProc}$)
 
 $p : A \rightarrow B$, $q : B \rightarrow C$
 
-$p;q : A \rightarrow C$
+$p \circ q : A \rightarrow C$
 
 \[
-  p;q \equiv (p \times q) [((a,b),(b,c)) \mapsto (a,c)]
+  p \circ q \equiv (p \times q) [((a,b),(b,c)) \mapsto (a,c)]
 \]
 is defined on those Arguments:
 \[
@@ -3898,7 +3935,7 @@ matching the Pattern
 In terms of Labelled Transitions:
 \[
   \frac{p \xrightarrow{(a,b)} p' \quad q \xrightarrow{(b,c)} q'}
-  {p;q \xrightarrow{(a,c)} p';q'}
+  {p \circ q \xrightarrow{(a,c)} p' \circ q'}
 \]
 
 \emph{Interaction}: ``ongoing Communication''-- at each Step, Actions
@@ -4095,7 +4132,7 @@ $\delta : ! \rightarrow !!$
 
 $\delta_A = \id_{!A}^\dag$
 
-$\delta_A; !der_A = \id_{!A}$
+$\delta_A \circ !der_A = \id_{!A}$
 
 Commutative Comonoid Structure:
 \[
@@ -4126,7 +4163,251 @@ where $\otimes^n_s$ is the Symmetric Tensor Power: (definition) %FIXME
 
 \textbf{Temporal Structure}
 
+Prefixing -- Extension in Time
+
 Linear Types do not reflect Temporal Structure
+
+Delay Operators:
+\begin{itemize}
+  \item $\ocircle A$ -- Unit Delay (Prefixing with the Idle Action $1$
+    in SCCS, ``Next'' Operator in Temporal Logic
+    \S\ref{sec:temporal_logic})
+  \item $\delta A$ -- Unbounded Delay before first Action
+  \item $\Delta A$ -- Propagation of Unbounded Delays after the first
+    Action
+\end{itemize}
+
+
+\textbf{Unit Delay}
+
+$\circ$
+
+\[
+  \Sigma_{\ocircle A} = 1 + \Sigma_A
+\]
+taking $1 = \{*\}$ assuming that $* \notin \Sigma_A$, and taking:
+\begin{align*}
+  \Sigma_{\ocircle A} &= \{*\} \cup \Sigma_A \\
+  S_{\ocircle A} &= \{\epsilon\} \cup \{*s \mid s \in S_A\}
+\end{align*}
+
+Extending to a Functor on $\cat{SProc}$, for $p : A \rightarrow B$,
+define $\ocircle p : \ocircle A \rightarrow \ocircle B$ as:
+\[
+  \ocircle p \equiv (*,*):p
+\]
+is a Symmetric Monoidal Endomorphism on $\cat{SProc}$.
+
+Free Algebra for Unit Delay Functor
+
+Monoidal Action:
+\begin{align*}
+  m_{A,B} : \ocircle A \otimes \ocircle B
+    &\cong \ocircle(A \otimes B) \\
+  u : I &\cong \ocircle I \\
+  m_{A,B} &\equiv ((*,*),*) : \id_{A \otimes B} \\
+  u &\equiv (*,(*,*)) : \id_I \\
+  m_{A,B}^{-1} &= m_{A,B}^\bot \\
+  u^{-1} &= u^\bot
+\end{align*}
+
+Tensor Unit $I$ is the Unique Fixed Point of $\ocircle$:
+\[
+  \alpha : I \cong \ocircle I
+\]
+where $\alpha \equiv (*,*_1):\id_I$ and $\alpha^{-1} = \alpha^\bot$.
+
+$\alpha$ is the Final $\ocircle$-coalgebra and $\alpha^\bot$ is the
+Initial $\ocircle$-algebra in $\cat{SProc}$, i.e. $(I,\alpha)$ is the
+Free $\ocircle$-algebra (Freyd) and the unique $\ocircle$-invariant
+Object up to canonical Isomorphism: $\ocircle$ has the Unique Fixpoint
+Property (\S\ref{sec:unique_fixpoint}). Functors on $\cat{SProc}$
+whose Action on Morphisms is \emph{Guarded} (???) will have the Unique
+Fixpoint Property.
+
+Guarded Recursion
+
+$lt(p) = \alpha \circ \ocircle lt(p) \circ p$ ``Feedback'' %FIXME
+
+Unit Delay can be combined with Additives to express Disjointly
+Guarded Sums:
+\[
+  \sum_{i \in I} a_i : p_i \quad (a_i = a_j \Rightarrow i = j)
+\]
+as:
+\[
+  \bigoplus_{i \in I} \ocircle p_i
+\]
+
+
+\textbf{Unbounded Delay}
+
+$\delta$
+
+Unbounded Delay Monad $(\delta, \eta, \mu)$
+
+$\delta A$:
+\begin{align*}
+  \Sigma_{\delta A} &= 1 + \Sigma_A \\
+  S_{\delta A} &= \{*^k \mid k \in \omega\}
+    \cup \{*^k s \mid k \in \omega, s \in S_A\}
+\end{align*}
+with Unit $\eta_A : A \rightarrow \delta A$ defined (as a
+Protomorphism ???) by:
+\[
+  \eta_A \equiv \id_A
+\]
+where notationally $S_A \subseteq S_{\delta A}$
+
+Unit forces case of Zero Delay
+
+Multiplication ``adds'' two nested Delays so Monadic Structure of
+$\delta$ arises from the Monoid $(\nats,+,0)$ seen as the underlying
+Model of Discrete Future Time
+
+Kleisli Extension:
+\[
+  \frac{A \xrightarrow{p} \delta B}
+  {\delta A \xrightarrow{p^\dag} \delta B}
+\]
+defined by Guarded Recursion:
+\[
+  p^\dag \equiv p + \ocircle(p^\dag)
+\]
+
+For $p : A \rightarrow B$:
+\[
+  \delta p \equiv (p \circ \eta_B)^\dag
+\]
+and $\mu_A : \delta \delta A \rightarrow \delta A$ by:
+\[
+  \mu_A \equiv \id_{\delta A}^\dag
+\]
+
+Universal Characterization of $\delta$ in terms of $\ocircle$ is the
+Functorialization of the Recursive Definition of $\delta$ from the
+Unit Delay
+
+For Endofunctor $T_A : \cat{SProc} \rightarrow \cat{SProc}$ defined
+by:
+\[
+  T_A B = A \oplus \ocircle B
+\]
+and $\beta : \ocircle \delta A \rightarrow \delta A$ defined by:
+\[
+  \beta \equiv (*_1,*) : \id_{\delta A}
+\]
+and $\alpha : T_A(\delta A) \rightarrow \delta A$ defined by:
+\[
+  \alpha \equiv [\eta_A,\beta]
+\]
+$(\delta A, \alpha)$ is the Free $T_A$-algebra
+
+
+\textbf{Delay Propagation}
+
+$\Delta$
+
+Delay Propagation Monad $(\Delta,\theta,\nu)$
+
+$\Delta A$:
+\begin{align*}
+  \Sigma_{\Delta A} &= 1 + \Sigma_A \\
+  S_{\Delta A} &= \{\epsilon\} \cup \{as \in \Sigma_{\Delta A}^*
+    \mid a \in \Sigma_A, (as) \upharpoonright \Sigma_A \in S_A\}
+\end{align*}
+
+Unit $\theta_A : A \rightarrow \Delta A$ defined by:
+\[
+  \theta_A \equiv \id_A
+\]
+(as for $\eta_A$)
+
+Kleisli Extension:
+\[
+  \frac{A \xrightarrow{p} \Delta B}
+  {\Delta A \xrightarrow{p^\ddag} \Delta B}
+\]
+defined by:
+\[
+  p^\ddag \equiv \Sigma_{(a,q) \in p} a : (q^\ddag)^\dag
+\]
+
+\fist Note that basic Combinators can't define $(-)^\ddag$ as an
+Operator, corresponding to the fact that $\Delta$ is necessarily
+Primitive in SCCS.
+
+For $p : A \rightarrow B$ define:
+\[
+  \Delta p \equiv (p \circ \theta_B)^\ddag
+\]
+and $\nu_A : \Delta \Delta A \rightarrow \Delta A$ by:
+\[
+  \nu_A \equiv (\id_{\Delta A})^\ddag
+\]
+
+
+\textbf{Distributive Laws}
+
+relate Delay (Extension in Time) to Replication (Extension in Space)
+
+Monad $(T,\eta,\mu)$
+
+Comonad $(Q,\varepsilon,\delta)$
+
+Distributive Law: $\lambda : Q T \rightarrow T Q$
+
+Bi-kleisli Category (???) $K_{Q T}(\cat{C})$ with Morphisms $Q A
+\rightarrow T B$ and Composition of $f : Q A \rightarrow T B$, $g : Q
+B \rightarrow T C$ given by:
+\[
+  Q A \xrightarrow{\delta_A} Q^2 A \xrightarrow{Q f} Q T B
+    \xrightarrow{\lambda_B} T Q B \xrightarrow{T_g} T^2 C
+    \xrightarrow{\mu_C} T C
+\]
+
+Distributive Laws:
+\begin{align*}
+  \lambda &: !\delta \rightarrow \delta! \\
+  \Lambda &: !\Delta \rightarrow \Delta!
+\end{align*}
+defined as: (definitions) %FIXME
+
+
+\textbf{Nondeterminism}
+
+Process $p \in \mathsf{ST}_L$ is \emph{Deterministic} if for all $s
+\in L^*$, $p \xrightarrow{s} q$ and $p \xrightarrow{s} r$ Implies $q =
+r$.
+
+If $p$ and $q$ are Deterministic, $p \circ q$ need not be
+
+Semi-additivity (\S\ref{sec:semiadditive_category})
+
+$p+q$ -- standard Non-deterministic Plus Operation
+
+$0_A$ -- Unit; standard $nil$ Process (\S\ref{sec:null_process})
+
+(equations) %FIXME
+
+\[
+  !(\sum_{i \in I} p_i) = \sum_{i \in I} !p_i
+\]
+
+Unit Delay $\ocircle$ is not Semi-additive, i.e. $\ocircle(p+q) \neq
+\ocircle p + \ocircle q$: ``Non-equation'' of Branching-time Semantics
+(Milner CCS)
+%FIXME xref ctl?
+
+Unbounded Delay $\delta$ is not Semi-additive
+
+Delay Propagation $\Delta$ is Semi-additive: introduces Delays after
+the first Action and Preserves Biproducts
+
+
+\textbf{$\cat{SProc}$ as a $2$-category}
+
+Linear and Delay Monad structure Lifts to $2$-$\cat{Cat}$
 
 
 
