@@ -1635,6 +1635,8 @@ Session-typed $\pi$-calculus (\S\ref{sec:session_typed_pi_calculus})
 \emph{Communication} (or \emph{Dyadic Interaction} or \emph{Reciprocal
   Interaction})
 
+Interaction Category (\S\ref{sec:interaction_category})
+
 Communication Effect (\S\ref{sec:communication_effect})
 
 Remote Procedure Calls and Method Invocation as Session Type
@@ -3410,6 +3412,8 @@ Model-theoretic Semantics (\S\ref{sec:model_semantics})
 
 Denotational Model (Failures Model) (Brookes, Hoare, Roscoe)
 
+Sets of Traces
+
 
 
 \subsubsection{Receptive Process Theory}\label{sec:receptive_process}
@@ -3503,7 +3507,10 @@ Coalgebra (\S\ref{sec:terminal_coalgebra}) of the Functor $X \mapsto
 \asterism
 
 
-Propositions-as-Types + Verification = Specification Structure
+Propositions-as-Types + Verification (???) = Specification Structure
+(\S\ref{sec:specification_structure})
+
+Verification Paradigm: Logic Programming? Constraint Programming?
 
 Specification Structures for Liveness Properties and Deadlock-freedom
 
@@ -3515,6 +3522,90 @@ Model (``Semantic Universe'' \S\ref{sec:categorical_model})
 The Formal Calculus methodology starts with a Set of Combinators
 Generating a Syntax, then one defines a Structured Operational
 Semantics or Model, and notions of Equivalence, etc.
+
+Interaction Category Axioms, Guarded-ness, Guarded Functors having the
+UFPP (Unique Fixed Point Property \S\ref{sec:ufpp}) %FIXME
+
+\textbf{Ax.} \emph{Guarded Functor Axiom}: Every Guarded Functor has
+the Unique Fixed Point Property
+
+
+\textbf{Synchronous Interaction Category}
+
+(Informal) Definition of a Synchronous Interaction Category is a
+Linear Category (???) with Biproducts, Satisfying the Guarded Functor
+Axiom
+
+Intuitively, a Guarded Functor is a Functor $G$ such that for any
+Morphisms $f$ and $g$, $G(f)$ and $G(g)$ do the same thing on the
+first Step.
+
+Closure Conditions on the Class of Guarded Functors:
+\begin{itemize}
+  \item $\ocircle$ is Guarded
+  \item If $G$ and $G'$ are Guarded, so is $G \oplus G'$
+  \item If $G$ is Guarded and $F$ is any Functor, $G F$ is Guarded
+\end{itemize}
+
+Let $\cat{C}$ be a Symmetric Monoidal Category
+(\S\ref{sec:symmetric_monoidal}) with Countable Biproducts
+(\S\ref{sec:biproduct})--a Semi-additive Category
+(\S\ref{sec:semiadditive_category})--given a Monoidal Endofunctor $\ocircle$
+on $\cat{C}$ such that $\ocircle(nil) \neq nil$ where $nil$ is the
+Unit of Semi-additive Structure Induced on a Homset by the Biproducts,
+for each $A,B \in \cat{C}_0$, define Function $firststep$ on
+$\cat{C}(A,B)$ by:
+\[
+  firststep(f) = A \cong \ocircle I \otimes A
+    \xrightarrow{\ocircle(nil_{A \rightarrow B}) \otimes f}
+    \ocircle I \otimes B \cong B
+\]
+An Endofunctor $G$ on $\cat{C}$ is \emph{Guarded} if for any $A,B \in
+\cat{C}_0$ and $p,q : A \rightarrow B$:
+\[
+  firststep(G(p)) = firststep(G(q))
+\]
+Definition of $firststep$ relies on $nil \otimes f = nil$ for any
+Morphism $f$ (following from the definition of the Semi-additive
+Structure in terms of Biproducts).
+
+\fist In $\cat{ASProc}$ (Asynchronous Interaction Category): $nil
+\otimes f \neq nil$. The alternative for Asynchronous Interaction
+Categories is to give a Syntactic description of desired Guarded
+Functors based on the Closure Conditions.
+
+The requirement $\ocircle(nil) \neq nil$ is needed to prevent
+degeneracy: if $\ocircle(nil) = nil$, then $firststep(f) = nil$ for
+all $f$ meaning all Functors would be Guarded and as a further
+consequence all Homsets would be Singletons (detail in
+\cite{abramsky-gay-nagarajan96})
+
+Guarded Functor Axiom is not enough to ensure Processes have Temporal
+Behavior: $\cat{Rel}$ is a Synchronous Interaction Category by the
+above definition. A Condition Satisfied by $\cat{SProc}$ (which has
+Temporal Structure) but not $\cat{Rel}$ is that the Functor $\ocircle$
+is a Faithful Functor (\S\ref{sec:faithful_functor}).
+
+
+\textbf{Asynchronous Interaction Category}
+
+Guarded Functors given a Syntactic description
+
+In $\cat{ASProc}$, $F \oplus G$ is Guarded even if $F$ and $G$ are not
+so the Closure Conditions are stronger.
+
+Let $\cat{C}$ be a Monoidal Category (\S\ref{sec:monoidal_category})
+with a Monoidal Endofunctor $\ocircle$. Let $\class{GF}$ be the
+smallest Class of Endofunctors Satisfying:
+\begin{itemize}
+  \item $\ocircle \in \class{GF}$
+  \item For andy Endofunctors $F$ and $F'$, $F \oplus F' \in \class{GF}$
+  \item For $G \in \class{GF}$ and any Endofunctor $F$,
+    $G F \in \class{GF}$
+\end{itemize}
+
+\textbf{Ax.} \emph{Asynchronous Guarded Functor Axiom}: Every Functor
+in $\class{GF}$ has the Unique Fixed Point Property.
 
 
 \asterism
@@ -3706,6 +3797,19 @@ Synchronous Processes
 $\cat{ASProc}$ (\S\ref{sec:asproc}) -- Interaction Category for
 Asynchronous Processes
 
+\fist \cite{abramsky-gay-nagarajan96} give an analysis of a Cyclic
+Scheduler using an informal notation; for Formal, Typed Process
+Calculus see:
+\begin{itemize}
+  \item Session-typed $\pi$-calculus
+    (\S\ref{sec:session_typed_pi_calculus}): CP
+    (\S\ref{sec:classical_processes})
+  \item Linear $\lambda$-calculus (\S\ref{sec:linear_lambda}): GV
+    (\S\ref{sec:good_variation})
+  \item Modal Type Theory (\S\ref{sec:modal_type}): Functional
+    Reactive Programming (\S\ref{sec:frp})
+\end{itemize}
+
 
 
 \subsubsection{Synchronization Tree}\label{sec:synchronization_tree}
@@ -3718,7 +3822,7 @@ solution to the Equation:
 \[
   \mathsf{ST}_L = \pow(L \times \mathsf{ST}_L)
 \]
-Specifically $ST_L$ is the Final Coalgebra
+Specifically $\mathsf{ST}_L$ is the Final Coalgebra
 (\S\ref{sec:terminal_coalgebra}) of the Functor $T = X \mapsto \pow(L
 \times X)$ and:
 \[
@@ -3747,6 +3851,227 @@ Systems has a Left-adjoint Unfolding (???, Non-well-founded Set Theory
 
 
 
+\subsubsection{Specification Structure}
+\label{sec:specification_structure}
+\cite{abramsky-gay-nagarajan96}
+
+Propositions-as-Types + Verification (???) = Specification Structure
+
+Verification Paradigm: Logic Programming? Constraint Programming?
+
+Specification Structures for Liveness Properties and Deadlock-freedom
+
+Property over a Type (most general): Set of Processes of that Type
+
+Processes: Computational entities
+
+Specifications: Logical entities
+
+Base Category $\cat{C}$
+
+Specification Structure $\class{S}$ on $\cat{C}$:
+\begin{itemize}
+  \item $P_{\class{S}} A$ -- Set of Predicates on Object $A$ for each
+    $A \in \cat{C}_0$
+  \item $\class{S}_{A,B} \subseteq \class{C}(A,B) \times P_{\class{S}}
+    A \times P_{\class{S}} B$
+\end{itemize}
+Satisfying (Axioms):
+\begin{enumerate}
+  \item $\class{S}_{A,B}(\id_A,\varphi,\varphi)$
+  \item $\class{S}_{A,B}(f,\varphi,\psi)
+    \wedge \class{S}_{A,B}(g,\psi,\theta)
+    \Rightarrow \class{S}_{A,B}(f \circ g, \varphi, \theta)$
+\end{enumerate}
+
+Category $\cat{C}_{\class{S}}$:
+\begin{itemize}
+  \item Objects: Pairs $(A,\varphi)$ where $\varphi \in P_{\class{S}}A$
+  \item Morphisms: $f : (A,\varphi) \rightarrow (B,\psi)$ are
+    $\cat{C}$-morphisms $f : A \rightarrow B$ such that
+    $\class{S}_{A,B}(f,\varphi,\psi)$
+\end{itemize}
+Axioms (1) and (2) guarantee $\cat{C}_{\class{S}}$ is a Category.
+
+Faithful Functor $U_\class{S} : \cat{C}_\class{S} \rightarrow
+\cat{C}$:
+\[
+  U_{\class{S}}(A,\varphi) = A, \quad\quad U_{\class{S}}(f) = f
+\]
+
+(linear category structure) %FIXME
+
+(temporal constructions)
+
+Specification Structure $P_1, \ldots, P_k$
+
+Tower of ``Refinements'':
+\[
+  \cat{C} \stackrel{U_1}{\leftarrowtail} \cat{C}_1 \cdots
+    \stackrel{U_k}{\leftarrowtail} \cat{C}_k
+\]
+where $\cat{C}_i = \cat{C}_{P_1, \ldots, P_i}$ for $1 \leq i \leq k$,
+with:
+\begin{itemize}
+  \item Objects: Structures $(A, \varphi_1, \ldots, \varphi_k)$ where
+    $\varphi_i \in P_i(A)$
+  \item Morphisms: $p : (A, \varphi_1, \ldots, \varphi_k) \rightarrow
+    (B, \phi_1, \ldots, \phi_k)$ are $\cat{C}$-morphisms $p : A
+    \rightarrow B$ Satisfying $\class{S}_{A,B}(p,\varphi_i,\phi_i)$
+    for $1 \leq i \leq k$
+\end{itemize}
+
+Composition in $\cat{C}_k$ yields a Compositional Verification Rule
+for Parallel Composition + Restriction.
+
+Concrete examples: Fair Computations, Liveness Properties, Deadlock
+Freedom %FIXME
+
+Liveness Specification Structure $P_L$ %FIXME
+
+Controlling Deadlocks: Brancing-time Properties %FIXME
+
+Deadlock: Finite Termination, i.e. $p \xrightarrow{s} 0$ for some $s$
+then $p$ can Deadlock
+
+Deadlock-free Processes do not form a Sub-category (not Closed under
+Composition)
+
+Deadlock Specification Structure $P_D$ %FIXME
+
+Process $p$ of Type $A$ \emph{Converges}, denoted $p\downarrow$, if
+whenever $p \xrightarrow{s} q$ there is an $a \in \Sigma_A$ and a
+Process $r$ such that $q \xrightarrow{a} r$ (cf. Strong Normalization
+\S\ref{sec:normalization}).
+
+For Processes $p$, $q$ of Type $A$, $p \sqcap q$ of Type $A$ defined
+by:
+\[
+  \frac{p \xrightarrow{a} p' \quad\quad\quad q \xrightarrow{a} q'}
+  {p \sqcap q \xrightarrow{a} p' \sqcap q'}
+\]
+
+\emph{Orthogonality Relation} defined by:
+\[
+  p \bot q \stackrel{\Delta}{\Leftrightarrow} (p \sqcap q) \downarrow
+\]
+%FIXME what is \Delta over \Leftrightarrow ?
+
+If two Processes are Orthogonal they can Communicate without
+Deadlocking, i.e. any common Trace can be extended by an Action which
+is available to both Processes.
+
+A \emph{Progressive Type} in $\cat{SProc}$ is Type $A$ whose Safety
+Specifications do not force Termination:
+\[
+  \forall s \in S_A . \exists a \in \Sigma_A.sa \in S_A
+\]
+
+$\cat{SProc}_pr$ -- Full Subcategory of $\cat{SProc}$ consisting of
+Progressive Objects only, inherits all Structure of $\cat{SProc}$
+except the Zero Object (the Zero Object is not Progressive because it
+has an Empty Sort and so cannot be Lifted to $\cat{SProc}_D$).
+
+Category $\cat{SProc}_D$ of Deadlock-free Processes: not Compact
+Closed (consider that arbitrary formation of Cycles is likely to allow
+Deadlock) %FIXME
+
+$\cat{SProc}_D$ does validate the Mix Rule %FIXME
+
+$\otimes$ and $\parr$, $\oplus$ and $\&$ become distinct in
+$\cat{SProc}_D$ %FIXME
+
+$\cat{SProc}_D$ does not have Biproducts but still has
+Non-deterministic $+$ Operator. Since $nil$ Processes do not exist in
+$\cat{SProc}_D$ (they are not Convergent), each Homset has a
+Commutative and Associative $+$ Operation but it has no Unit.
+
+$\{max_A\} = M_A \Rightarrow A \cong I$ where $M_A$ is the Set of
+Convergent Processes of Type $A$. %FIXME definition of maxA
+
+entire Temporal Structure Lifts from $\cat{SProc}$ to $\cat{SProc}_D$
+
+(lifting of delay functors) %FIXME
+
+Lack of Biproducts means $!$ can't be constructed as Cofree
+Cocommutative Comonoid in $\cat{SProc}_D$ but the Structural Morphisms
+lift from $\cat{SProc}$ to $\cat{SProc}_D$. %FIXME
+
+$\cat{SProc}_D$ is a $*$-autonomous Category with Countable
+(Non-empty) Products and Coproducts, Exponentials, Unit Delay Functor
+and Delay Monads, and the Forgetful Functor $U : \cat{SProc}_D
+\rightarrow \cat{SProc}$ Preserves this structure.
+
+Theory of Asynchronous Deadlock Freedom for $\cat{ASProc}$ %FIXME
+
+$\cat{ASProc}_D$
+
+If a Type $A$ has only one Action then $M_A = (M_A)^\bot$
+
+If $p : A_1 \parr A_2 \parr \cdots \parr A_n$ in $\cat{ASProc}$ and
+$p\downarrow$, then $p:(A_1,M_{A_1}) \parr (A_2,M_{A_2}) \parr \cdots
+\parr (A_n,M_{A_n})$ in $\cat{ASProc}_D$.
+
+Problems: %FIXME
+
+-since Tensor Unit $I$ has no Actions it cannot be given a Type in
+$\cat{ASProc}_D$
+
+-if $p : A \rightarrow B$, $q : B \rightarrow C$ in $\cat{ASProc}_D$
+they can be Composed without Deadlocking but there is the possibility
+that they both only perform Actions in $B$ and never in $A$ or $C$
+resulting in a Morphism $A \rightarrow C$ which never does anyting in
+$A$ or $C$, i.e. Deadlocks. \emph{Livelock} %FIXME
+
+Sufficient Condition for $q \circ p$ to be Non-divergent is that $p$
+be Left-guarded and $q$ be Right-guarded: Left-guarded $p$ cannot
+perform an Infinite Sequence of Actions in its Right Port without
+doing some Actions in its Left Port in between; and Symmetrically for
+Right-guardedness.
+
+Guardedness Conditions as a \emph{Fairness Condition}: any Infinite
+Behavior of $p$ must do Infinitely many Actions in both Left and Right
+Ports.
+
+%FIXME FProc section
+
+Category $\cat{FProc}$ of Fair Processes: each Object Specifies a Set
+of Infinite Traces which are considered to be Fair.
+
+Objects: $A = (\Sigma_A,S_A,F_A)$ with first two components of an
+Object the same as in $\cat{ASProc}$ and the third, $F_A$, is a Subset
+of $(Act^+(A))^\omega$ (where $Act^+(A)$ is the Set of Non-empty
+Subsets of $\Sigma_A$) such that all Finite Prefixes of any Trace in
+$F_A$ are in $S_A$.
+
+(interaction category operations) %FIXME
+
+Process of Type $A$ is a Pair $(p,T_p)$ where $p$ is a Process of Type
+$A$ in $\cat{ASProc}$, $T_p$ is a Subset of the Infinite Traces
+obtainable from the Synchronization Tree of $p$, and $T_p \subseteq
+F_A$.
+
+$*$-autonomous Structure works in $\cat{FProc}$ except there is no
+Tensor Unit: $f : I \rightarrow A$ can't be Fair because there are no
+Infinite Traces over $I$.
+
+If $f : A \rightarrow C$ and $g : B \rightarrow D$ are Fair it is
+still possible for $f \otimes g : A \otimes B \rightarrow C \otimes D$
+to be Unfair (the definition of $\otimes$ on Morphisms in
+$\cat{ASProc}$ allows all Interleavings of Actions from $f$ and $g$
+including Unfair Interleavings, e.g. there are Behaviors of $f \otimes
+g$ where $g$ does no Actions at all. Therefor the Set $T_{f \otimes
+  g}$ is needed to contain just the Fair Interleavings of Traces from
+$T_f$ and $T_g$. This is equivalent to assuming the existence of a
+\emph{Fair Scheduler} (left at the level of a Specification rather
+than Implementation). Therefore $\cat{FProc}$ cannot be constructed
+from a Specification Structure over $\cat{ASProc}$: for $S$ a
+Specification Structure over a Category $\cat{C}$, $\cat{C}_S$ is a
+selection of the Morphisms of $\cat{C}$ but does not have any
+additional structure. %FIXME
+
+
+
 \subsubsection{SProc}\label{sec:sproc}
 
 $\cat{SProc}$ -- Interaction Category for Synchronous Processes:
@@ -3761,6 +4086,9 @@ $\cat{SProc}$ -- Interaction Category for Synchronous Processes:
   \item Identities: \emph{Synchronous Buffers} (``Wires'' or
     ``Relays'')
 \end{itemize}
+
+Asynchrony can be introduced by the Delay Operators $\delta$
+(Unbounded Delay) and $\Delta$ (Delay Propagation)
 
 Model for Classical Linear Logic (\S\ref{sec:cll}), Model for Typed
 $\lambda$-calculus (\S\ref{sec:typed_lambda}): translation from
@@ -3802,8 +4130,8 @@ defined by:
   R(A) &= \{a \mid a \in S_A\} \\
   R(p) &= \{(a,b) \mid \exists q.p \xrightarrow{(a,b)} q\}
 \end{align*}
-Preserves all the Linear Category Structure. History-free strategies
-suffice to Interpret Linear Types.
+Preserves all the Linear Category Structure (???, Symmetric Monoidal
+Category?). History-free strategies suffice to Interpret Linear Types.
 
 Milner: ``Static'' vs. ``Dynamic'' Operations
 
@@ -3863,7 +4191,6 @@ Coinductive Definition:
 \end{align*}
 
 
-
 \textbf{Morphisms}
 
 $*$-autonomous (\S\ref{sec:star_autonomous}) structure on Objects
@@ -3916,10 +4243,10 @@ $\cat{SProc}$)
 
 $p : A \rightarrow B$, $q : B \rightarrow C$
 
-$p \circ q : A \rightarrow C$
+$q \circ p : A \rightarrow C$
 
 \[
-  p \circ q \equiv (p \times q) [((a,b),(b,c)) \mapsto (a,c)]
+  q \circ p \equiv (p \times q) [((a,b),(b,c)) \mapsto (a,c)]
 \]
 is defined on those Arguments:
 \[
@@ -3935,7 +4262,7 @@ matching the Pattern
 In terms of Labelled Transitions:
 \[
   \frac{p \xrightarrow{(a,b)} p' \quad q \xrightarrow{(b,c)} q'}
-  {p \circ q \xrightarrow{(a,c)} p' \circ q'}
+  {q \circ p \xrightarrow{(a,c)} p' \circ q'}
 \]
 
 \emph{Interaction}: ``ongoing Communication''-- at each Step, Actions
@@ -3964,7 +4291,6 @@ Identity Morphism $1_A$:
   1_A = id \upharpoonright S_{A \multimap A}
 \]
 where $id = \{((a,a),id) \mid a \in \Sigma_A\}$
-
 
 
 \asterism
@@ -4046,7 +4372,7 @@ Multicut:
 \]
 
 not Admissible in Linear Logic (\S\ref{sec:linear_logic}), can't be
-Interpreted in Linear Categories (???)
+Interpreted in Linear Categories (???, Symmetric Monoidal Categories?)
 
 
 \textbf{Additives} (Biproduct)
@@ -4088,7 +4414,6 @@ in Concrete Set representation $p + q = p \cup q$
 Nondeterministic Sum
 
 
-
 \textbf{Zero Object}
 
 Zero Object (\S\ref{sec:zero_object})
@@ -4099,7 +4424,6 @@ $0 = (\varnothing, \{\varepsilon\})$
 
 Unique Morphisms into and out of $0$ are $nil$ Processes
 (\S\ref{sec:null_process})
-
 
 
 \textbf{Exponentials}
@@ -4177,10 +4501,13 @@ Delay Operators:
     Action
 \end{itemize}
 
+Asynchrony can be introduced by Unbounded Delay
+$\delta$ and Delay Propagation $\Delta$
+
 
 \textbf{Unit Delay}
 
-$\circ$
+$\ocircle$
 
 \[
   \Sigma_{\ocircle A} = 1 + \Sigma_A
@@ -4220,10 +4547,10 @@ where $\alpha \equiv (*,*_1):\id_I$ and $\alpha^{-1} = \alpha^\bot$.
 $\alpha$ is the Final $\ocircle$-coalgebra and $\alpha^\bot$ is the
 Initial $\ocircle$-algebra in $\cat{SProc}$, i.e. $(I,\alpha)$ is the
 Free $\ocircle$-algebra (Freyd) and the unique $\ocircle$-invariant
-Object up to canonical Isomorphism: $\ocircle$ has the Unique Fixpoint
-Property (\S\ref{sec:unique_fixpoint}). Functors on $\cat{SProc}$
-whose Action on Morphisms is \emph{Guarded} (???) will have the Unique
-Fixpoint Property.
+Object up to canonical Isomorphism: $\ocircle$ has the Unique Fixed
+Point Property (\S\ref{sec:ufpp}). Functors on $\cat{SProc}$ whose
+Action on Morphisms is \emph{Guarded} (???) will have the Unique
+Fixed Point Property. %FIXME guarded functors
 
 Guarded Recursion
 
@@ -4243,6 +4570,9 @@ as:
 \textbf{Unbounded Delay}
 
 $\delta$
+
+\fist Cf. ``Expectation'' Operator, $\varepsilon$, in SCCS (Milner):
+Delays must be Finite (yet Unbounded); (Liveness Property ???)
 
 Unbounded Delay Monad $(\delta, \eta, \mu)$
 
@@ -4380,7 +4710,7 @@ Process $p \in \mathsf{ST}_L$ is \emph{Deterministic} if for all $s
 \in L^*$, $p \xrightarrow{s} q$ and $p \xrightarrow{s} r$ Implies $q =
 r$.
 
-If $p$ and $q$ are Deterministic, $p \circ q$ need not be
+If $p$ and $q$ are Deterministic, $q \circ p$ need not be
 
 Semi-additivity (\S\ref{sec:semiadditive_category})
 
@@ -4405,13 +4735,341 @@ Delay Propagation $\Delta$ is Semi-additive: introduces Delays after
 the first Action and Preserves Biproducts
 
 
+\asterism
+
+
+\textbf{Input/Output}
+
+\fist This contents of this section are from the example of a Cyclic
+Scheduler implemented in $\cat{SProc}$ \cite{abramsky-gay-nagarajan96}
+
+Input/Output is determined at the level of Types of Ports (rather than
+the level of Actions).
+
+Given a Type $X$ defined by:
+\begin{align*}
+  \Sigma_X &= \{\bullet\} \\
+  S_X &= \{\bullet^n \mid n < \omega \}
+\end{align*}
+($X \cong I$ but special properties of $I$ are not needed), the Type
+$\Delta X$ has an extra Delay Action $*$ which may appear anywhere
+except before the first $\bullet$. The Type $\delta\Delta X$ has
+another Delay Action $*'$ which may appear before the first $\bullet$.
+
+Input Port of Type $X$ has corresponding Output Type of $X^\bot$
+(equivalent in $\cat{SProc}$ but notation may be retained for clarity)
+
+An ``Asynchronous Cell'' has Inputs of Type $\delta\Delta X$ and
+Outputs of Type $\delta\Delta X^\bot$ with an overall Type given by
+combining Ports with $\parr$ (equivalent with $\otimes$ in
+$\cat{SProc}$).
+
+\fist The use of $\parr$ vs. $\otimes$ (though equivalent in
+$\cat{SProc}$) is to denote ``Connected Concurrency'' vs. ``Disjoint
+Concurrency'' resp. Matched Input/Output Pairs connecting to a single
+Client may use $\otimes$ ? %FIXME
+
+Combining Cells into a Chain can be done in any $*$-autonomous
+Category.
+
+Cell as Morphism $cell : I \rightarrow \delta\Delta X \parr \cdots
+\parr \delta\Delta X$
+
+Connecting the free ends of a Chain together results in a ``Hiding''
+of the free ends.
+
+
+
 \textbf{$\cat{SProc}$ as a $2$-category}
 
 Linear and Delay Monad structure Lifts to $2$-$\cat{Cat}$
 
 
 
+\textbf{Interpretation of SCCS in $\cat{SProc}$}
+
+$\cat{SProc}$ as a Multicategory (\S\ref{sec:multicategory})
+
+
+
 \subsubsection{ASProc}\label{sec:asproc}
+
+\cite{abramsky-gay-nagarajan96}
+
+\fist Discussion in \cite{abramsky-gay-nagarajan96} using Sets of
+Traces (\S\ref{sec:trace}, \emph{\'a la} CSP \S\ref{sec:csp}) instead
+of Labelled Transition Systems (\S\ref{sec:labelled_transition})
+Modulo Weak Bisimulation (Observational Equivalence). In the full
+version of $\cat{ASProc}$ with Processes as Synchronization Trees the
+Empty Set is a valid Action (cf. the ``Silent'' Action $\tau$ in CCS).
+
+Compact Closed Category (\S\ref{sec:compact_closed}), Implies
+$*$-autonomous (\S\ref{sec:star_autonomous}) Structure can be defined
+on $\cat{ASProc}$
+
+\emph{Trace} of a Process
+
+$\Sigma$ -- Alphabet
+
+\emph{Trace}: Finite Sequence of Non-empty Subsets of $\Sigma$
+
+\fist Note unlike CSP, here Traces are allowed to record
+simultaneous occurrences of Events (the Non-empty Subsets of $\Sigma$)
+
+\interrobang $\pow(\Sigma)^*$ -- All possible Sequences of
+Simultaneous Events from an Alphabet $\Sigma$
+
+$Tr(\Sigma)$ -- Set of Traces on $\Sigma$
+
+For $s \in Tr(\Sigma)$ and $X \subseteq \Sigma$, define $s
+\upharpoonright X$ Inductively:
+\begin{align*}
+  \varepsilon \upharpoonright X &= \varepsilon \\
+  (ms) \upharpoonright X &=
+    \begin{cases}
+      (m \cap X)(s \upharpoonright X) & (m \cap X \neq \varnothing) \\
+      s \upharpoonright X & (m \cap X = \varnothing) \\
+    \end{cases}
+\end{align*}
+
+\emph{Process} of Sort $\Sigma$ is a Non-empty Prefix-closed Subset of
+$Tr(\Sigma)$
+
+$p \vDash A$ -- $p$ is a Process of Sort $\Sigma_A$ such that $p
+\subseteq S_A$
+
+
+\textbf{Objects}
+
+$A = (\Sigma_A,S_A)$ -- Object
+
+$\Sigma_A$ -- Alphabet (Sort) of Actions (???)
+
+$S_A \subseteq^{\mathrm{nepref}} Tr(\Sigma_A)$ -- Safety Property:
+Non-empty Prefix-closed Subset of all posible Traces over $\Sigma_A$
+
+$A^\bot = A$ Implies $A \otimes B = A \multimap B = A \parr B$
+
+$A \otimes B$ is defined by:
+\begin{align*}
+  \Sigma_{A \otimes B} &= \Sigma_A + \Sigma_B \\
+  S_{A \otimes B} &= \{s \in Tr(\Sigma_{A \otimes B})
+    \mid s \upharpoonright \Sigma_A \in S_A,
+    s \upharpoonright \Sigma_B \in S_B\}
+\end{align*}
+
+
+\textbf{Morphisms}
+
+$p : A \rightarrow B$ if and only if $p \vDash A \multimap B$
+
+A Morphism in $\cat{ASProc}$ is a triple $(A,p,B)$ such that $p : A
+\rightarrow B$.
+
+
+\textbf{Composition}
+
+$p : A \rightarrow B$, $q : B \rightarrow C$
+
+$q \circ p : A \rightarrow C$ is defined by:
+\[
+  q \circ p = \{s \upharpoonright (\Sigma_A \cup \Sigma_C)
+    \mid s \in Tr(\Sigma_A + \Sigma_B + \Sigma_C),
+    (s \upharpoonright \Sigma_A \cup \Sigma_B) \in p,
+    (s \upharpoonright \Sigma_B \cup \Sigma_C) \in q\}
+\]
+
+\fist Cf. Parallel Composition + Hiding $[p{\parallel}q]$ in CSP
+
+\fist The original notation for the above composition definition in
+\cite{abramsky-gay-nagarajan96} was potentially confusing; what was
+written $s \upharpoonright \Sigma_A,\Sigma_C$ is here written as $s
+\upharpoonright (\Sigma_A \cup \Sigma_C)$.
+
+Composition in terms of Labelled Transitions:
+\[
+  \frac{p \xrightarrow{m} p'}
+  {q \circ p \xrightarrow{m} q \circ p'}
+  m \cap \Sigma_B = \varnothing
+\]\[
+  \frac{q \xrightarrow{n} q'}
+  {q \circ p \xrightarrow{n} q' \circ p}
+  n \cap \Sigma_B = \varnothing
+\]\[
+  \frac{p \xrightarrow{m} p' \quad\quad\quad q \xrightarrow{n} q'}
+  {q \circ p \xrightarrow{(m \cup n)/\Sigma_B} q' \circ p'}
+  m \cap \Sigma_B = n \cap \Sigma_B
+\]
+
+
+\textbf{Identity Morphisms}
+
+\[
+  \id_A = \{s \in Tr(\Sigma_A \cup \Sigma_A)
+    \mid \exists t \in S_A.\forall i.s_i = inl(t_i) \cup inr(t_i)\}
+\]
+
+Behaves like a ``Wire'' \emph{Simultaneously} offering any possible
+Actions of $A$ at both ends of its Interface
+
+
+
+\textbf{Tensor $\otimes$ as Functor}
+
+Independent Parallel Composition
+
+(trace definition) %FIXME
+
+(transition definition)
+
+Tensor Unit $I$ is the Trivial Type:
+\[
+  I = (\varnothing,\{\varepsilon\})
+\]
+
+all other $*$-autonomous Category Structure can also be defined on
+$\cat{ASProc}$
+
+
+\textbf{Compact Closed Structure}
+
+CSP Operations of Composition and Hiding
+
+Type $A = (\Sigma_A, \Sigma_A^*)$
+
+Processes $p,q : I \rightarrow A$
+
+\emph{Synchronization Alphabet} $L \subseteq \Sigma_A$
+
+CSP Composition:
+\[
+  p \parallel_L q = I \cong I \otimes I
+    \xrightarrow{p \otimes q} A \otimes A \xrightarrow{m} A
+\]
+
+(recursive definition of m) %FIXME
+
+$m$ is the CSP ``Synchronization Algebra'', Composed with the
+Independent Parallel Composition $p \otimes q$ to force
+Synchronization exactly on Actions of $L$
+
+CSP Hiding:
+\[
+  p/L = I \xrightarrow{p} A \xrightarrow{\rho_L} A
+\]
+where: (definition of rho L) %FIXME
+
+
+
+\textbf{Additives}
+
+$\cat{ASProc}$ only has Weak Products (necessarily Weak Biproducts by
+Self-duality)
+
+$A \oplus B$:
+\begin{align*}
+  \Sigma_{A \oplus B} &= \Sigma_A + \Sigma_B + \{l,r\} \\
+  S_{A \oplus B} &= \{\varepsilon\} \cup \{\{l\}s
+    \mid s \in S_A\} \cup \{\{r\}t \mid t \in S_B\}
+\end{align*}
+
+\[
+\begin{tikzpicture}
+  \coordinate (P) at (0,2);
+  \coordinate (A) at (-1.0,0);
+  \coordinate (A1) at (-1.5,-1.0);
+  \coordinate (A2) at (-0.5,-1.0);
+  \coordinate (B) at (1,0);
+  \coordinate (B1) at (0.50,-1.0);
+  \coordinate (B2) at (1.5,-1.0);
+  \node (SA) at (-1.0,-0.75) {$S_A$};
+  \node (SB) at (1.0,-0.75) {$S_B$};
+  \draw[] (P) -- node [left] {$l$} (A);
+  \draw[] (P) -- node [right] {$r$} (B);
+  \draw[] (A) -- (A1);
+  \draw[] (A) -- (A2);
+  \draw[] (B) -- (B1);
+  \draw[] (B) -- (B2);
+\end{tikzpicture}
+\]
+
+(weak coproduct diagram) %FIXME
+
+extends to Weak Biproducts of arbitrary Set-indexed Families of Types
+$\bigoplus_{i \in I} A_i$
+
+In Process Calculus, these constructions yield \emph{Disjointly
+  Guarded Sums}
+
+Name-free, Names controlled indirectly via Types
+
+applying general definition of Non-determinism and Semi-additivity
+obtains $p + q = p \cup q$ which is the Interpretation of
+Non-determinism in the Trace Model
+
+in $\cat{ASProc}$ with Processes as Synchronization Trees Modulo Weak
+Bisimulation, $p+q$ is a Non-associative version of CSP \emph{Internal
+  Choice} $p \sqcap q$
+
+
+\asterism
+
+
+\textbf{Input/Output}
+
+Type $X$:
+\begin{align*}
+  \Sigma_X &= \{\bullet\} \\
+  S_X &= \Sigma_X^*
+\end{align*}
+
+Type $Y$ for an Input/Output pair Communicating with a single Client:
+\begin{align*}
+  \Sigma_Y &= \{inl(\bullet), inr(\bullet)\} \\
+  S_Y &= a.b.S_Y + ab.S_Y
+\end{align*}
+where $a$, $b$, and $ab$ are abbreviations for $\{inl(\bullet)\}$,
+$\{inr(\bullet)\}$, and $\{inl(\bullet),inr(\bullet)\}$, resp.
+Compatible Clients are of the form $a.b.P$ where $P$ is the
+Continuation Process.
+
+\interrobang Note the above is inferred from the examples of Clients
+given in \cite{abramsky-gay-nagarajan96}: $client = a.b.client$ and
+$client = a.b.nil$
+
+$cell : X \parr ... \parr X$
+
+\fist Note unlike in $\cat{SProc}$, the Asynchronous Ports do not need
+Delays ($\delta\Delta X$)
+
+
+\textbf{Safety Specifications}
+
+the above definition of $Y$ for an Input/Output pair Communicating
+with a single Client has Deadlock Freedom
+
+Example desired Safety Specification: ``Clients of a Scheduler are
+Scheduled Cyclically''
+
+$p : A$
+
+Type $S$ with same Alphabet as $A$ but more restricted Safety
+Specification
+
+\emph{Safety Morphism} -- $s: A \rightarrow A$ such that $p : I
+\rightarrow A$ Satisfies the Specification in $S$ if and only if $p =
+s \circ p$
+
+expresses stronger Specifications without ``forgetting'' what the
+Interface looks like
+
+for $s = \id_S$ (considered as a Morphism $A \rightarrow A$ because
+$S_S \subseteq S_A$), $p = s \circ p \Leftrightarrow traces(p)
+\subseteq S_S$
+
+Correctness Proofs of Processes built from Subcomponents
+
+(scheduler example)
 
 
 

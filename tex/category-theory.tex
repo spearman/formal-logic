@@ -1058,6 +1058,9 @@ Object of ``Propositions'' or ``Truth-values'' with $t =
 \mathrm{true}$ and $u : E \rightarrow \Omega$ a Propositional Function
 where $U \rightarrowtail E$ is the ``Extension''.
 
+For a Terminal Object $1$, the Power Object (\S\ref{sec:power_object})
+$\Omega^1$ is precisely a Subobject Classifier.
+
 
 
 % --------------------------------------------------------------------
@@ -1148,6 +1151,9 @@ Monoid Object, Monoidal Category (\S\ref{sec:monoidal_category})
 Commutative Monoid Object, Symmetric Monoidal Category
 (\S\ref{sec:symmetric_monoidal})
 
+The Interaction Category (\S\ref{sec:interaction_category})
+$\cat{SProc}$ (\S\ref{sec:sproc}) may be viewed as a Multicategory.
+
 
 
 % --------------------------------------------------------------------
@@ -1195,6 +1201,37 @@ Closed Monoidal Categories (\S\ref{sec:closed_monoidal})
 \subsubsection{Exponential Object}\label{sec:exponential_object}
 
 $B^A$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Power Object}\label{sec:power_object}
+% --------------------------------------------------------------------
+
+The notion of \emph{Power Object} generalizes Powersets
+(\S\ref{sec:powerset}) in $\cat{Set}$ to an arbitrary Category with
+Finite Limits (\S\ref{sec:finite_limit}).
+
+Category with Finite Limits $\cat{C}$
+
+Object $C \in \cat{C}_0$
+
+Power Object of $C$ consists of an Object $\Omega^C$ and a
+Monomorphism (\S\ref{sec:monomorphism}) $\in_C \hookrightarrow C
+\times \Omega^C$ such that for every other Object $D \in \cat{C}_0$
+and every Monomorphism $R \hookrightarrow C \times D$ there is a
+Unique Morphism $\chi_R : D \rightarrow \Omega^C$ such that $R$ is the
+Pullback of:
+\[
+  C \times D \xrightarrow{\id_C \times \chi_R} C \times \Omega^C
+    \leftarrow \in_C
+\]
+
+If $1$ is a Terminal Object then $\Omega^1$ is precisely a Subobject
+Classifier (\S\ref{sec:subobject_classifier}).
+
+A Category with Finite Limits and Power Objects for all Objects is
+precisely a Topos (\S\ref{sec:topos}).
 
 
 
@@ -1289,19 +1326,19 @@ Strict Monoidal Category (\S\ref{sec:strict_monoidal})
 
 
 
-\subsubsection{Unique Fixpoint Property}\label{sec:unique_fixpoint}
+\subsubsection{Unique Fixed Point Property}\label{sec:ufpp}
 
 An Endofunctor $H : \cat{C} \rightarrow \cat{C}$ has the \emph{Unique
-  Fixpoint Property} if for all $f : A \rightarrow H(A)$, $h : H(B)
+  Fixed Point Property} if for all $f : A \rightarrow H(A)$, $h : H(B)
 \rightarrow B$, there is a Unique $g : A \rightarrow B$ such that:
 \[
   g = f \circ H(g) \circ h
 \]
 
-If $H$ is an Endofunctor with the Unique Fixpoint Property, any
+If $H$ is an Endofunctor with the Unique Fixed Point Property, any
 $H$-invariant Object is the Free (\S\ref{sec:free_algebra})
 $H$-algebra (\S\ref{sec:f_algebra}) and so any two such Objects are
-canonically Isomorphic and $H$ has a Unique Fixpoint Property on
+canonically Isomorphic and $H$ has a Unique Fixed Point Property on
 Objects.
 
 
@@ -1653,6 +1690,8 @@ Functors (\S\ref{sec:cofree_functor}).
 
 Free Functors are Left Adjoint (\S\ref{sec:adjunction}) to Forgetful
 Functors (\S\ref{sec:forgetful_functor}).
+
+Coyoneda (\S\ref{sec:coyoneda})
 
 Presentation (\S\ref{sec:presentation})
 
@@ -2779,6 +2818,14 @@ $Nat_\cat{Set^{C^op}}(Hom(-,A), Hom(-,B)) \cong Hom_\cat{C}(A,B)$
 
 Yoneda Embedding preserves all Products and Exponentials in
 $\cat{C}$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Coyoneda}\label{sec:coyoneda}
+% --------------------------------------------------------------------
+
+Free Functor (\S\ref{sec:free_functor})
 
 
 
@@ -6504,12 +6551,20 @@ Category of Sheaves
 \subsection{Topos}\label{sec:topos}
 % --------------------------------------------------------------------
 
-A \emph{Topos} is a Category with Finite Limits (\S\ref{sec:limit}),
-Exponentials (\S\ref{sec:category_exponential}), and a Subobject
-Classifier (\S\ref{sec:subobject_classifier}). As a result of these
-Properties, a Topos also has all Finite Colimits (\S\ref{sec:colimit})
-and every Slice Category (\S\ref{sec:slice_category}) of a Topos is
-also a Topos.
+A \emph{Topos} is a Category with Finite Limits
+(\S\ref{sec:finite_limit}), Exponentials
+(\S\ref{sec:category_exponential}), and a Subobject Classifier
+(\S\ref{sec:subobject_classifier}). As a result of these Properties, a
+Topos also has all Finite Colimits (\S\ref{sec:colimit}) and every
+Slice Category (\S\ref{sec:slice_category}) of a Topos is also a
+Topos.
+
+nCatLab:
+
+A Category with Finite Limits and Power Objects for all Objects is
+precisely a Topos. The Power Object $P A$ of any Object $A$ in the
+Topos is the Exponential Object $P A = \Omega^A$ into the Subobject
+Classifier (\S\ref{sec:subobject_classifier}).
 
 For a Small Category $\cat{C}$, the Category of Diagrams
 (\S\ref{sec:category_diagram}) $\cat{Set^{C^{op}}}$ is a
@@ -6830,7 +6885,7 @@ Categorical Quantum Mechanics, Entangled States and Measurements
 
 Objects $\cat{C}_0$
 
-Multimorphisms $\cat{C}_1$
+Multimorphisms $\cat{C}_1$ -- multiple Inputs and a single Output
 
 Source Map $s : \cat{C}_1 \rightarrow (\cat{C}_0)^*$
 
