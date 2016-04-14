@@ -60,12 +60,21 @@ Multimorphisms as Terms
 \item \emph{Extensional Type Theory} (\S\ref{sec:extensional_type}):
   Definitional (Computational) Equality is not distinguished from
   Propositional (Proof) Equality (Strict Equivalence) but Type Checking
-  (\S\ref{sec:type_checking}) is Undecidable; see also
-  \emph{Observational Type Theory} (\S\ref{sec:observational_type})
+  (\S\ref{sec:type_checking}) is Undecidable
+
 \item \emph{Intensional Type Theory}: Type Checking is Decidable but
   Extensional Reasoning must be carried out using Setoids
   (\S\ref{sec:setoid}); (Weak Equivalence)
-\item \emph{Homotopy Type Theory} (\S\ref{sec:homotopy_type_theory}):
+
+\item \emph{Observational Type Theory}
+  (\S\ref{sec:observational_type}): Definitional (Intensional)
+  Equality and Type Checking are Decidable, Propositional Equality is
+  Extensional and Substitutive; a first-approximation of Homotopy Type
+  Theory where OTT Propositions are $h$-propositions
+  (\S\ref{sec:h_proposition}) and OTT Types are $h$-sets
+  (\S\ref{sec:h_set})
+
+\item \emph{Homotopy Type Theory} (\S\ref{sec:hott}):
   Higher Inductive Types (\S\ref{sec:higher_inductive_type}) allow
   definition of Higher-order Constructors
 \end{itemize}
@@ -416,6 +425,8 @@ A \emph{Universe Type} contains all other Types, see Type Universe
 
 Monotonic Type Function $\Theta : \sigma \Rightarrow \tau$
 
+``Tree-like''
+
 Initial Algebras (\S\ref{sec:initial_algebra})
 
 Type Constructor (\S\ref{sec:type_constructor})
@@ -434,6 +445,7 @@ Streams between interacting processes in Programming Languages
 Terminal Coalgebras (\S\ref{sec:terminal_coalgebra})
 
 
+
 \subsubsection{Induction Induction}\label{sec:induction_induction}
 
 \emph{Induction Induction}
@@ -443,6 +455,8 @@ Terminal Coalgebras (\S\ref{sec:terminal_coalgebra})
 \subsubsection{Induction Recursion}\label{sec:induction_recursion}
 
 \emph{Induction Recursion}
+
+Dybjer-Setzer99
 
 
 
@@ -674,6 +688,18 @@ Predicate assumed to hold for any Element of Refined Type
 
 Type Targeted Testing, Liquid Types (Logically Qualified Types
 \S\ref{sec:logically_qualified})
+
+
+\asterism
+
+
+\cite{mcbride13}:
+
+Ornaments (\S\ref{sec:ornament}): Refinements as a ``Decoration'' with
+``Logical Data''? %FIXME
+
+Algebraic Ornament (\S\ref{sec:algebraic_ornament}): Type Refinement
+Induced by Algebras over a Datatype's Structure
 
 
 
@@ -1243,12 +1269,17 @@ Channel's Session Type (e.g. Stream-based Internet Protocols)
 \cite{neubauer-thiemann04}
 
 An Embedding of Simply-typed $\lambda$-calculus
-(\S\ref{sec:simply_typed}) into Session-typed $\pi$-calculus
-(\S\ref{sec:sessiontyped_pi}) is given in Toninho-Caires-Pfenning12
-\cite{caires-pfenning-toninho12}
+(\S\ref{sec:simply_typed}) into Session-typed $\pi$-calculus (Session
+Calculus \S\ref{sec:sessiontyped_pi}) is given in
+Toninho-Caires-Pfenning12 \cite{caires-pfenning-toninho12}
 
-\cite{orchard-yoshida16} -- two-way Encoding: Session Types to and
-from Effect Systems (\S\ref{sec:effect_system})
+\cite{orchard-yoshida16} -- ``(Intensional) Behavioral Types'': Effect
+Types and Session Types; two-way Embedding: Effect Systems
+(\S\ref{sec:effect_system}) Embedded in Session Calculus
+(\S\ref{sec:sessiontyped_pi}) and vice versa--Processes as Effect
+Handlers (\S\ref{sec:effect_handler}), Session Types as Effects
+(\S\ref{sec:computational_effect})
+%FIXME behavior type theory?
 
 Dominic Orchard (youtube) -- Simple Types (\S\ref{sec:simply_typed}):
 ``What'', Effect Systems (\S\ref{sec:effect_system}): ``How'', Session
@@ -1383,21 +1414,43 @@ $\lambda$-calculus with Parametric Polymorphism
 \section{Effect System}\label{sec:effect_system}
 % ====================================================================
 
-(Wadler, Thiemann - 2003 - \emph{The marriage of effects and monads}):
-%FIXME
-
 Dominic Orchard (youtube) -- Simple Types (\S\ref{sec:simply_typed}):
 ``What'', Effect Systems: ``How'', Session Types
 (\S\ref{sec:session_type}): ``What \& How''
 
-\cite{orchard-yoshida16} -- two-way Encoding: Session Types to and
-from Effect Systems (\S\ref{sec:effect_system})
+\cite{orchard-yoshida16} -- ``(Intensional) Behavioral Types'': Effect
+Types and Session Types; two-way Embedding: Session Types
+(\S\ref{sec:session_type}) to and from Effect Systems--Processes as
+Effect Handlers (\S\ref{sec:effect_handler}), Session Types as Effects
+%FIXME behavioral type theory?
+
+\fist Orchard-Yoshida16 \cite{orchard-yoshida16} distinguishes the
+Effect Systems of Nielson-Nielson99 \cite{nielson-nielson99} from
+``traditional'' Effect Systems by distinguishing Sequential Control
+Flow from Branching Control Flow (Alternation). See FPCF
+(\S\ref{sec:fpcf}) for the \emph{Effect Algebra} of this type defined
+there.
+
+Effect Systems: general Class of Static Program Analysis for
+collecting information on Effects (e.g. State, Exceptions, Resource
+Use, etc.) \cite{orchard-yoshida16}
+
+Control-flow Algebra/Semantics (Mycroft-Orchard-Petricek16
+\cite{mycroft-orchard-petricek16})
 
 ``Impure'' Effects
+
+subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
+captured by any Effect System (E. Kmett)
+
+\cite{mycroft-orchard-petricek16} -- Graded Joinads (???): Effect
+Control-flow Algebras \& Types
 
 
 \asterism
 
+
+\cite{wadler-thiemann03}:
 
 Types $\tau$, $\tau'$
 
@@ -1409,13 +1462,15 @@ $(\tau \xrightarrow{\sigma} \tau')^\dag$
 $\rightsquigarrow$
 $\tau^\dag \rightarrow T^\sigma \tau'^\dag$
 
-subsumed by Monads: ``Lazy State'' and ``Lazy Writer'' cannot be
-captured by any Effect System (E. Kmett)
 
-Coeffect System (\S\ref{sec:coeffect_system})
+\asterism
+
 
 Effect (\S\ref{sec:computational_effect}): Monads (\S\ref{sec:monad});
 how a Program \emph{Influences} its Environment
+
+\emph{Coeffect System} (\S\ref{sec:coeffect_system}):
+Context-dependent Computations
 
 Coeffect (\S\ref{sec:coeffect}): Comonads (\S\ref{sec:comonad});
 \emph{Requirements} of a Program with respect to its Environment
@@ -1847,6 +1902,12 @@ Models then they are used in Handling Constructs in the second level
 (with no facilities for further definition of Handlers). In
 \cite{plotkin-pretnar13} Handlers and Handling may be nested
 arbitrarily deeply (the \emph{Maximal} approach).
+
+
+\fist Orchard-Yoshida16 \cite{orchard-yoshida16} distinguishes the
+Effect Systems of Nielson-Nielson99 \cite{nielson-nielson99} from
+``traditional'' Effect Systems by distinguishing Sequential Control
+Flow from Branching Control Flow (Alternation).
 
 
 (Countable) Equational Theories (Algebraic Theory
@@ -2818,11 +2879,11 @@ Nondeterminism Operator:
   \Omega : 1 \rightarrowtriangle 0
 \]
 
-Fixed-point Constructor $\mono{rec}\; x : U \underline{C}.M$, Typed
+Fixed-point Constructor $\rec\; x : U \underline{C}.M$, Typed
 by:
 \[
   \frac{\Gamma,x:U \underline{C} | K \vdash M : \underline{C}}
-  {\Gamma | K \vdash \mono{rec}\; x : U \underline{C}.M : \underline{C}}
+  {\Gamma | K \vdash \rec\; x : U \underline{C}.M : \underline{C}}
 \]
 
 Effect Theories become \emph{Inequations} $\Gamma | Z \vdash T_1 \leq
@@ -3042,6 +3103,9 @@ Infinitary) Equational Theory (\S\ref{sec:equational_theory}).
 
 \subsubsection{Effect Handler}\label{sec:effect_handler}
 
+\cite{orchard-yoshida16}: Processes as Effect Handlers, Session Types
+(\S\ref{sec:session_type}) as Effects
+
 Homomorphism from Free Algebras
 \cite{bauer-pretnar12}
 
@@ -3230,6 +3294,8 @@ Communication \S\ref{sec:communication}
 % ====================================================================
 \section{Coeffect System}\label{sec:coeffect_system}
 % ====================================================================
+
+Context-dependent Computation (Petricek, Orchard, Mycroft)
 
 Effect: how a Program \emph{Influences} its Environment
 
@@ -3772,22 +3838,144 @@ All Recursive Functions in Peano Arithmetic are definable
 
 \subsubsection{PCF}\label{sec:pcf}
 
-\emph{Programming Computable Functions}
-
-extended version of Typed Lambda Calculus (\S\ref{sec:typed_lambda})
+\emph{Programming Computable Functions} (\emph{PCF}) is an extended
+version of Simply-typed Lambda Calculus with Natural Numbers,
+Conditionals, and Recursion.
 
 Geometry of Interaction (\S\ref{sec:interaction_geometry})
 
 Denotational Semantics (\S\ref{sec:denotational_semantics}):
-\emph{Scott Model}
+\emph{Scott Model} (???)
 
 Scott-continuous Function (\S\ref{sec:scott_continuity})
 
 
 
+\paragraph{FPCF}\label{sec:fpcf}
+
+\cite{orchard-yoshida16}
+
+\emph{Effectful PCF} (\emph{FPCF})
+
+Call-by-value PCF with an Effect System (\S\ref{sec:effect_system})
+
+\fist Type-and-Effect System following Nielson-Nielson99
+\cite{nielson-nielson99}; distinguishes Sequential Control Flow from
+Branching Control Flow (Alternation)
+
+
+\textbf{Syntax}
+
+\begin{align*}
+  V &::= x \mid \lambda x.M \mid \rec(\lambda f.\lambda x.M)
+    \mid C_V \\
+  M,N &::= V \mid M N \mid \case\; M \;\of\; 0 \mapsto N,
+    (\suc\; x) \mapsto N' \mid C
+\end{align*}
+
+$V$ -- Values
+
+$M,N$ -- Computations
+
+$x$ -- Variables
+
+$C$ -- Constants: can be Instantiated to give application-specific
+(possibly Effectful) Operations %FIXME instantiated
+
+$C_V$ -- Value Constants--Subset $C_V \subset C$, including
+``Pure Constructors'': %FIXME clarify pure constructors
+\begin{itemize}
+  \item $0$ -- Zero
+  \item $\suc$ -- Successor
+  \item $\unit$ -- Unit
+\end{itemize}
+
+$\case$ -- Pattern Matches on Natural Number Constructors
+
+
+\textbf{Effect Algebra}
+
+$\class{F}$ -- Set of Effects $F,G,H \in \class{F}$
+
+$\sqsubseteq$ -- Partial Order (\S\ref{sec:partial_order}) with
+Structure:
+\begin{itemize}
+  \item $(\class{F},\bullet,I)$ -- Monoid (\S\ref{sec:monoid}) where
+    $\bullet$ corresponds to Sequential Composition and $I$ is the
+    Trivial Effect for Pure Computation
+  \item $(\class{F},\oplus)$ -- Commutative Semigroup
+    (\S\ref{sec:commutative_semigroup}) where $\oplus$ corresponds to
+    Branching with Distributivity $(F \oplus G) \bullet H = (F \bullet
+    H) \oplus (G \bullet H)$
+  \item $(\class{F},-^*)$ -- Closure Operation for Effect Fixed-points
+    with Axioms $F^* = 1 \oplus (F^* \bullet F) = 1 \oplus (F \bullet
+    F^*)$
+\end{itemize}
+For some Systems, $\oplus$ is the Least Upper-bound with respect to
+$\sqsubseteq$. %FIXME
+
+
+\textbf{Types and Effects}
+
+Type Syntax:
+\[
+  \sigma,\tau ::= \sigma \xrightarrow{F} \tau \mid \Nat \mid \Unit
+\]
+where $F$ is the Effect Annotation for the \emph{Latent Effect} of a
+Function. %FIXME latent effect
+
+$\Gamma \vdash M:\tau,F$ -- Judgement: Term $M$ has Type $\tau$ in the
+Context $\Gamma$ of Free-variable Typing Assumptions and performs
+Effect $F$
+
+Typing Rules:
+\[
+  \frac{}{\varnothing \vdash C : C_\tau,C_F} \mathrm{Const}
+\]\[
+  \frac{}{\Gamma \vdash x:\tau,I} \mathrm{Var}
+\]\[
+  \frac{\Gamma, x:\sigma \vdash M:\tau,F}
+  {\Gamma \vdash \lambda x.M:\sigma \xrightarrow{F} \tau,I}
+  \mathrm{Abs}
+\]\[
+  \frac{\Gamma \vdash M:\sigma \xrightarrow{H} \tau,F
+    \quad\quad\quad \Gamma \vdash N:\sigma,G}
+  {\Gamma \vdash M N:\tau, F \bullet G \bullet H}
+  \mathrm{App}
+\]\[
+  \frac{\Gamma \vdash M:\Nat,F \quad\quad
+    \Gamma \vdash N_1:\tau,G \quad\quad
+    \Gamma,x:\Nat \vdash N_2:\tau,H}
+  {\Gamma \vdash \case\; M \;\of\; 0 \mapsto N_1,
+    (\suc\;x) \mapsto N_2:\tau, F \bullet(G \oplus H)}
+  \mathrm{Case}
+\]\[
+  \frac{\Gamma \vdash M:\tau,F \quad\quad\quad F \sqsubseteq G}
+  {\Gamma \vdash M:\tau,G} \mathrm{Sub}
+\]\[
+  \frac{\Gamma, f:\tau \xrightarrow{F} \tau, x:\tau \vdash M:\tau,F}
+  {\Gamma \vdash
+    \rec(\lambda f.\lambda x.M):\tau \xrightarrow{F} \tau,I}
+  \mathrm{Rec}
+\]
+
+$\lett$-binding (``Syntactic sugar''):
+\[
+  \lett\; x = M \;\inn\; N := (\lambda x.N) M
+\]
+with Let Rule Typing:
+\[
+  \frac{\Gamma \vdash M:\sigma,F \quad\quad\quad
+    \Gamma,x:\sigma \vdash N:\tau,G}
+  {\Gamma \vdash \lett\; x = M \;\inn\; N:\tau, F \bullet G}
+  \mathrm{Let}
+\]
+
+
+
 \subsubsection{Reflexive Domain}\label{sec:reflexive_domain}
 
-Dana Scott % FIXME
+Dana Scott %FIXME
 
 
 
@@ -4005,7 +4193,7 @@ $un(\Phi)$ -- Each Type in $\Phi$ is Unlimited
     \;|\; (M,N) \;|\; \mono{let}\; (x,y) = M \;\mono{in}\; N & \\
     & \;|\; \mono{send}\; M N \;|\; \mono{receive}\; M
     \;|\; \mono{select}\; l M
-    \;|\; \mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I} & \\
+    \;|\; \case\; M \;\of\; \{l_i:x.N_i\}_{i\in I} & \\
     & \;|\; \mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N
     \;|\; \mono{terminate}\; M &
 \end{flalign*}
@@ -4032,7 +4220,7 @@ $\mono{receive}\; M$ -- Receive on Channel $M$
 
 $\mono{select}\; l M$ -- Select Label $l$ on Channel $M$
 
-$\mono{case}\; M \;\mono{of}\; \{l_i:x.N_i\}_{i\in I}$ -- Offer Choice
+$\case\; M \;\of\; \{l_i:x.N_i\}_{i\in I}$ -- Offer Choice
 on Channel $M$
 
 $\mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N$ -- Connect $M$
@@ -4184,7 +4372,7 @@ Communication Operation Terms:
 \begin{itemize}
   \item Send: Output Operation $x[y].(P|Q)$
   \item Select: Select Operation $x[in_j].P$
-  \item Case: Choice Operation $\mono{case}(Q_1, \ldots, Q_n)$
+  \item Case: Choice Operation $\case(Q_1, \ldots, Q_n)$
   \item $end_!$ in Connect: Empty Output $y[].0$
   \item Terminate: Empty Input $x().P$
   \item Receive (Trivial): $x(y).R$ (???)
@@ -4721,20 +4909,38 @@ Equality Reflection Principle
 
 
 
-\subsubsection{Observational Type Theory}\label{sec:observational_type}
-
-``Homotopy Set Theory''
-
-Setoid (\S\ref{sec:setoid})
-
-
-
 % --------------------------------------------------------------------
 \subsection{Intensional Type Theory}\label{sec:intensional_type}
 \cite{harper12}
 % --------------------------------------------------------------------
 
 Weak Equivalence
+
+
+
+% --------------------------------------------------------------------
+\subsection{Observational Type Theory}\label{sec:observational_type}
+% --------------------------------------------------------------------
+
+``Homotopy Set Theory'' -- first-stage approximation to Homotopy Type
+Theory (\S\ref{sec:hott}): Propositions of OTT correspond to
+$h$-propositions (\S\ref{sec:h_proposition}) of HoTT and Types of OTT
+correspond to $h$-sets (\S\ref{sec:h_set}) in HoTT.
+
+Equality based on Setoids (\S\ref{sec:setoid})--special case of Higher
+Internal Groupoids (???)
+
+Intensional (Definitional) Equality and Type Checking are Decidable
+
+Propositional Equality is Extensional
+(\S\ref{sec:extensional_equality}), i.e. Functions are Equal if they
+are Point-wise (Observationally) Equal
+
+Propositional Equality is \emph{Substitutive}: Coercion between Types
+with Observationally Equivalent Subterms.
+
+\emph{Canonicity}: any Closed Term is Definitionally Reducible to a
+Canonical Value
 
 
 
@@ -4984,6 +5190,33 @@ Type (\S\ref{sec:polymorphic_type}):
 
 
 \subsubsection{Dependent Equality Type}\label{sec:dependent_equality}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ornament}\label{sec:ornament}
+% --------------------------------------------------------------------
+
+\cite{mcbride13}
+
+Algebraic Ornament (\S\ref{sec:algebraic_ornament})
+
+Ornamental Algebra
+
+Dependent Types: ``axis'' of Indexing for Data Structures
+
+Datatype of Datatype Descriptions (\emph{Universe}: Martin-L\"of84)
+
+Refinement Types (\S\ref{sec:refinement_type}): Decoration with
+``Logical Data''; Ornaments ``Decorate'' with additional ``Non-logical
+Data'' %FIXME
+
+
+
+\subsubsection{Algebraic Ornament}\label{sec:algebraic_ornament}
+
+Type Refinement (\S\ref{sec:refinement_type}) Induced by Algebras over
+a Datatype's Structure
 
 
 
@@ -5610,7 +5843,7 @@ Example Function which Returns True after an Event has occurred:
 
 
 % ====================================================================
-\section{Homotopy Type Theory}\label{sec:homotopy_type_theory}
+\section{Homotopy Type Theory}\label{sec:hott}
 % ====================================================================
 
 Homotopy Theory (\S\ref{sec:homotopy})
@@ -5627,6 +5860,60 @@ Homotopy Types Model $\infty$-groupoids
 (\S\ref{sec:infinity_groupoid})
 
 Categorical Semantics (\S\ref{sec:categorical_semantics})
+
+nCatLab:
+
+Observational Type Theory (\S\ref{sec:observational_type}) is a
+first-step approximation to Homotopy Type Theory: Propositions of OTT
+correspond to $h$-propositions (\S\ref{sec:h_proposition}) of HoTT and
+Types of OTT correspond to $h$-sets (\S\ref{sec:h_set}) of HoTT.
+
+Homotopy Levels (\S\ref{sec:homotopy_level}), Homotopy Type
+(\S\ref{sec:homotopy_type}):
+
+$h$-level 1: $h$-proposition (\S\ref{sec:h_proposition})
+
+$h$-level 2, Homotopy $0$-type (\S\ref{sec:homotopy_0type}): $h$-set
+(\S\ref{sec:h_set})
+
+$h$-level 3, Homotopy $1$-type (\S\ref{sec:homotopy_1type}):
+$h$-groupoid (\S\ref{sec:h_groupoid})
+
+
+
+% --------------------------------------------------------------------
+\subsection{$h$-proposition}\label{sec:h_proposition}
+% --------------------------------------------------------------------
+
+$h$-level 1
+
+nCatLab:
+
+(or \emph{Mere Proposition})
+
+Internalization of notion of Proposition (\S\ref{sec:proposition}),
+i.e. Semantically corresponding to $(-1)$-truncated Objects
+(\S\ref{sec:truncated_object})
+
+Propositions of Observational Type Theory
+(\S\ref{sec:observational_type}) correspond to $h$-propositions of HoTT
+
+
+
+% --------------------------------------------------------------------
+\subsection{$h$-set}\label{sec:h_set}
+% --------------------------------------------------------------------
+
+Types in Observational Type Theory (\S\ref{sec:observational_type})
+correspond to $h$-sets of HoTT
+
+
+
+% --------------------------------------------------------------------
+\subsection{$h$-groupoid}\label{sec:h_groupoid}
+% --------------------------------------------------------------------
+
+Groupoid (\S\ref{sec:groupoid})
 
 
 
