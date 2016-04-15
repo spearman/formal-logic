@@ -3583,12 +3583,130 @@ Recursive Types are assumed to be Guarded
 
 \emph{Carried Types} (e.g. $\tau \;\inn\; ![\tau].S$) are Closed %FIXME
 
-Alias definition for Replicated Input:
+Alias definition for \emph{Replicated Input}:
 \[
   *?[\tau] := \mu\alpha.?[\tau].\alpha
 \]
 
 \fist $\End$ is often ommitted
+
+$*![\tau]$ differs from $![\tau]$ by only interacting with Replicated
+Input; Messages on a Channel Typed $*![\tau]$ may occur in multiple
+Processes and $![\tau]$ is a Linear Send (appears exactly once)
+
+For Session $S$, the Dual Session $\overline{S}$ is defined by:
+\[
+\begin{aligned}[c]
+  \overline{![\tau].S} &= ?[\tau].\overline{S} \\
+  \overline{*![\tau]} &= *?[\tau] \\
+\end{aligned}
+\quad\quad
+\begin{aligned}[c]
+  \overline{?[\tau].S} &= ![\tau].\overline{S} \\
+  \overline{*?[\tau]} &= *![\tau] \\
+\end{aligned}
+\]\[
+\begin{split}
+  \overline{\oplus[l_1:S_1, \ldots, l_n:S_n]}
+    &= \&[l_1:\overline{S_1}, \ldots, l_n:\overline{S_n}] \\
+  \overline{\&[l_1:S_1, \ldots, l_n:S_n]}
+    &= \oplus[l_1:\overline{S_1}, \ldots, l_n:\overline{S_n}] \\
+  \overline{\End} &= \End
+\end{split}
+\]
+
+
+\textbf{Typing Rules}
+
+$\Delta$ -- Session Environment: Mapping from Channels to Session
+Types
+
+$*able(\Delta)$ -- Session Types in the Environment which are
+comprised only of Replicated Outputs or $\End$:
+\begin{align*}
+  *able(\Delta) &\Leftrightarrow \forall(c:S) \in \Delta.*able(S) \\
+  *able(S) &\Leftrightarrow (\exists T.S = *![\tau].T
+    \wedge *able(T)) \vee (S = \End)
+\end{align*}
+
+$\Gamma$ -- Mapping from Variables to Base Types
+
+$\Gamma \vdash V:\tau$ -- Values
+
+(Var), (Unit), (Zero), (Suc), (Pred)
+
+$\Gamma;\Delta \vdash P$ -- Processes
+
+(Weak*), (End)
+
+(Par) -- checks whether two Processes are Composable or
+not by $\odot$
+
+(Restr), (Recv), (Chan-Recv),
+
+(*Recv) -- $*able(\Delta)$ guarantees that $P$ cannot contain Free
+Linear Session Names
+
+(Send)
+
+(Chan-Send) -- checks Composability of Channel $d$ by $\odot$
+
+(*Send), (If), (Branch)
+
+(Select) -- Introduces a Selection Type with only one Label and Branch
+
+(Sub) -- extends Select Types with extra Labels by using Subtyping
+
+
+\textbf{Balancing}
+
+Two Processes must have \emph{Balanced Session Environments} to be
+Composed in Parallel, as defined by the Symmetric Relation $\bowtie$:
+\begin{align*}
+  (c:S) &\bowtie (\overline{c}:\overline{S}) \\
+  (c:*![\tau].S) &\bowtie (c:*![\tau].S) \\
+  (c:S) &\bowtie (d:T)
+\end{align*}
+where $c \neq d$. Dual Names must have Dual Types and Channels may
+only appear in two different Processes if they are both Outputs
+($!*$). %FIXME both replicated outputs?
+
+$\odot$ -- Partial Commutative Function on Environments:
+\[
+  \Delta_1 \odot \Delta_2 =
+    \begin{cases}
+      \Delta_1 \cup \Delta_2 & \;\text{if}\; \Delta_1 \bowtie \Delta_2 \\
+      undefined & \;\text{otherwise} \\
+    \end{cases}
+\]
+with $\bowtie$ Lifted to all Pairs of Named Session Types $\Delta_1
+\times \Delta_2$.
+
+\fist Note $\mu\alpha.?[\tau]$ is Dual to both
+$\mu\alpha.![\tau].\alpha$ and $*![\tau]$ but
+$(c:\mu\alpha.![\tau].\alpha) \odot (c:*![\tau])$ is Undefined.
+
+
+
+\textbf{Subject Reduction}
+
+Session Environments represent ``Forthcoming'' Communications; during
+Process Interactions, the Session Environment will change by Relation
+$\Delta \longrightarrow \Delta'$:
+\begin{align*}
+  \Delta, c:\&[\tilde{l}:\tilde{S}],
+      \overline{c}:\oplus[\tilde{l}:\overline{\tilde{S}}]
+    & \longrightarrow \Delta,c:S_i,\overline{c}:\overline{S_i} \\
+  \Delta, c:![\tau].S, \overline{c}:?[\tau].T
+    & \longrightarrow \Delta, c:S, \overline{c}:T \\
+  \Delta, c:*![\tau].S, \overline{c}:*?[\tau]
+    & \longrightarrow \Delta, c:S, \overline{c}:*?[\tau]
+\end{align*}
+
+\emph{Subject Reduction}: Supposing $\Gamma; \Delta \vdash P$ and $P
+\rightarrow^* Q$, then $\Gamma; \Delta' \vdash Q$ with $\Delta
+\longrightarrow^* \Delta'$, and if $\Delta$ is (self-)Balanced then
+$\Delta'$ is Balanced.
 
 
 
