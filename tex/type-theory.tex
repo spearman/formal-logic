@@ -1276,7 +1276,7 @@ Toninho-Caires-Pfenning12 \cite{caires-pfenning-toninho12}
 \cite{orchard-yoshida16} -- ``(Intensional) Behavioral Types'': Effect
 Types and Session Types; two-way Embedding: Effect Systems
 (\S\ref{sec:effect_system}) Embedded in Session Calculus
-(\S\ref{sec:sessiontyped_pi}) and vice versa--Processes as Effect
+(\S\ref{sec:session_calculus}) and vice versa--Processes as Effect
 Handlers (\S\ref{sec:effect_handler}), Session Types as Effects
 (\S\ref{sec:computational_effect})
 %FIXME behavior type theory?
@@ -3851,9 +3851,9 @@ Scott-continuous Function (\S\ref{sec:scott_continuity})
 
 
 
-\paragraph{FPCF}\label{sec:fpcf}
+\paragraph{FPCF}\label{sec:fpcf}\hfill
 
-\cite{orchard-yoshida16}
+Orchard-Yoshida16 \cite{orchard-yoshida16}
 
 \emph{Effectful PCF} (\emph{FPCF})
 
@@ -3862,6 +3862,10 @@ Call-by-value PCF with an Effect System (\S\ref{sec:effect_system})
 \fist Type-and-Effect System following Nielson-Nielson99
 \cite{nielson-nielson99}; distinguishes Sequential Control Flow from
 Branching Control Flow (Alternation)
+
+\fist \cite{orchard-yoshida16} presents an Embedding of FPCF into a
+Session Calculus (\S\ref{sec:session_calculus}) and a reverse
+Embedding of Session Calculus into FPCF.
 
 
 \textbf{Syntax}
@@ -3969,6 +3973,59 @@ with Let Rule Typing:
     \Gamma,x:\sigma \vdash N:\tau,G}
   {\Gamma \vdash \lett\; x = M \;\inn\; N:\tau, F \bullet G}
   \mathrm{Let}
+\]
+
+$\beta\eta$-equality, $\equiv$:
+\[
+\begin{aligned}[r c r l]
+  (\beta) & \quad & (\lambda x.M) V
+    & \equiv M[V/x] \\
+  (\rec\beta) & \quad & \rec(\lambda f.\lambda x.M)
+    & \equiv \lambda x.M[\rec(\lambda f.\lambda x.M)/f] \\
+  (\case\beta1) & \quad & (\case\; 0 \;\of\; 0 \mapsto M,
+    (\suc\; x) \mapsto N) & \equiv M \\
+  (\case\beta2) & \quad & (\case\; (\suc\; V) \;\of\; 0 \mapsto M,
+    (\suc\; x) \mapsto N) & \equiv N[V/x] \\
+\end{aligned}
+\]
+
+additional $\lett$ Equations:
+\[
+\begin{aligned}[r c r l]
+  (\lett\text{-id}) & \quad & (\lett\; x = M \;\inn\; x)
+    & \equiv M \\
+  (\lett\text{-assoc}) & \quad & \lett\; y =
+      (\lett\; x = M \;\inn\; N) \;\inn\; N'
+    & \equiv \lett\; x = M \;\in\; (\lett\; y = N \;\inn\; N')
+      \quad (\text{if}\; x \notin fv(N'))\\
+\end{aligned}
+\]
+
+
+$\eta$-equality is Type-dependent and holds only when $M$ is Pure,
+i.e.:
+\[
+  \Gamma \vdash M \equiv (\lambda x.M x):\sigma \xrightarrow{F} \tau,I
+\]
+
+
+\textbf{Operational Semantics}
+
+Paramtereized Operational Semantics
+
+$\rightarrow$ -- Reduction Relation between Effect-specific
+Configurations $\mathbb{C}$
+
+$\mathcal{C},\mathcal{D} : M \rightarrow \mathbb{C}$ -- Maps from
+Terms to Configurations
+
+($\beta$-equality as Pure Reductions) %FIXME
+
+Subject Reduction:
+\[
+  \varnothing \vdash M:\tau,F \wedge \mathcal{C}[M]
+    \rightarrow \mathcal{D}[N]
+  \Rightarrow \varnothing \vdash N:\tau,G \wedge G \sqsubseteq F
 \]
 
 

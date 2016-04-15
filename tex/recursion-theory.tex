@@ -2643,8 +2643,8 @@ Session Types \S\ref{sec:session_type}
 in Toninho-Caires-Pfenning12 \cite{caires-pfenning-toninho12}
 
 \fist Embedding of an Effect System (\S\ref{sec:effect_system}) into
-Session Calculus and vice versa is given in Orchard-Yoshida16
-\cite{orchard-yoshida16}
+Session Calculus (\S\ref{sec:session_calculus}) and vice versa is
+given in Orchard-Yoshida16 \cite{orchard-yoshida16}
 
 Terms (Functions, Values): Linear $\lambda$-calculus Types
 (\S\ref{sec:typed_lambda})
@@ -3411,6 +3411,184 @@ Th. \textbf{Cut Elimination}:
   \text{ such that } P \Longrightarrow^* Q \text{ and } Q
   \text{ is not a } Cut
 \]
+
+
+
+\paragraph{Session Calculus}\label{sec:session_calculus}\hfill
+
+Orchard-Yoshida16 \cite{orchard-yoshida16}
+
+\fist \cite{orchard-yoshida16} gives an Embedding of
+FPCF (\S\ref{sec:fpcf}) into Session Calculus and vice versa.
+
+Dual Channels instead of Polarity %FIXME
+
+
+\textbf{Syntax}
+
+$l$ -- Labels
+
+$c,\overline{c},d,\overline{d},p,\overline{p},
+q,\overline{q},r,\overline{r}$ -- Channels
+
+$\tilde{l} : \tilde{P}$ -- Sequences of Label/Process Pairs
+
+Variables:
+\begin{flalign*}
+  \quad\quad v &::= x,y,z &
+\end{flalign*}
+
+Values (Constants/Variables):
+\begin{flalign*}
+  \quad\quad V &::= 0 \mid \suc\;V \mid \pred\;V \mid \unit \mid v &
+\end{flalign*}
+
+Processes:
+\begin{flalign*}
+  \quad\quad P,Q &::= c?(x).P \mid c!\langle V \rangle.P
+    \mid c?(d).P \mid c!\langle d \rangle.P & \\
+    & \mid c \rhd \{\tilde{l}:\tilde{P}\} \mid c \lhd l.P
+    \mid *c?(d).P \mid 0 & \\
+    & \mid \mono{if}\; [V=0] \;\mono{then}\; P \;\mono{else}\; Q
+    \mid \nu c.P \mid (P|Q) &
+\end{flalign*}
+
+Value Types:
+\begin{flalign*}
+  \quad\quad \tau &::= \Unit \mid \Nat \mid S &
+\end{flalign*}
+
+Contexts:
+\begin{flalign*}
+  \quad\quad \Gamma &::= \varnothing \mid \Gamma,x:\tau &
+\end{flalign*}
+
+$c?(x).P$ -- Receive \newline
+$c!\langle V \rangle.P$ -- Send
+
+$c?(d).P$ -- Channel Receive \newline
+$c!\langle d \rangle.P$ -- Channel Send
+
+$c \rhd \{\tilde{l}:\tilde{P}\}$ -- Branch \newline
+$c \lhd l.P$ -- Select
+
+$*c?(d).P$ -- Replicated Input (\S\ref{sec:replicated_input}) \newline
+$0$ -- Nil (\S\ref{sec:null_process})
+
+$\mono{if}\; [V=0] \;\mono{then}\; P \;\mono{else}\; Q$ --
+Conditional
+
+$\nu c.P$ -- Restrict
+
+$(P|Q)$ -- Parallel
+
+
+Dual Operation over Channels: Channel $c$, Dual Channel $\overline{c}$
+with $\overline{\overline{c}} = c$
+
+$c$ and $\overline{c}$ are Dual \emph{Endpoints}
+
+\fist Trailing occurrences of $0$ and $\End$ may be elided, e.g.
+$r!\langle x \rangle$ for $r!\langle x \rangle.0$
+
+
+\textbf{Operational Semantics}
+
+$\rightarrow$ -- Reduction Relation containing $\beta$-laws for
+Send/Receive, Branch/Select, and $\mono{if}$:
+\[
+\begin{aligned}[r c r l]
+  (\beta) & \quad & c?(x).P | \overline{c}!\langle V \rangle.Q
+    & \rightarrow P[V/x] | Q \\
+  (\beta\text{-chan}) & \quad
+    & c?(d).P | \overline{c}!\langle c_0 \rangle.Q
+    & \rightarrow P[c_0/d] | Q \\
+  (\beta\text{-}*) & \quad
+    & *c?(d).P | \overline{c}!\langle c_0 \rangle.Q
+    & \rightarrow *c?(d).P | P[c_0/d] | Q \\
+  (\beta\text{-}\lhd\rhd) & \quad
+    & c \rhd l_i.P | \overline{c} \lhd \{\tilde{l}:\tilde{Q}\}
+    & \rightarrow P | Q_i \quad (l_i \in \tilde{l}) \\
+  (\text{res}) & \quad
+    & P \rightarrow P'
+    & \Rightarrow \nu c.P \rightarrow \nu c.P' \\
+  (\text{par}) & \quad
+    & P \rightarrow P'
+    & \Rightarrow P | Q \rightarrow P' | Q \\
+  (\text{str}) & \quad
+    & Q \equiv P \rightarrow P' \equiv Q'
+    & \Rightarrow Q \rightarrow Q' \\
+  (\text{if1}) & \quad
+    & \mono{if}\; [0=0] \;\mono{then}\; P \;\mono{else}\; Q
+    & \rightarrow P \\
+  (\text{if2}) & \quad
+    & \mono{if}\; [\suc\; V = 0] \;\mono{then}\; P \;\mono{else}\; Q
+    & \rightarrow Q  \\
+\end{aligned}
+\]
+
+%FIXME: clarify or xref linear channel below
+
+$(\beta)$ -- Reduce complementary Send/Receive Actions of a Value $V$
+over a Linear Channel $c$
+
+$(\beta\text{-chan})$ -- Reduces complementary Send/Receive Actions of
+a Channel $d$ over a Linear Channel $c$
+
+$(\beta\text{-}*)$ -- Replicated Input over Non-linear Channel $c$,
+i.e. $c$ can repeatedly Receive Values (Channels?) via the persistence
+of $*c?(d).P$
+
+$(\beta\text{-}\lhd\rhd)$ -- Reduction of complementary
+Branching/Selection
+
+$(\text{res})$, $(\text{par})$ -- Congruence of Reduction with respect
+to Restriction and Parallel Composition %FIXME congruence
+
+$(\text{str})$ -- extends $\rightarrow$ along the Structural
+Congruence Relation $\equiv$, provides that $|$ is a Commutative
+Monoid with $0$ Unit
+
+$(\text{if1})$, $(\text{if2})$ %FIXME
+
+
+\textbf{Session Types} (\S\ref{sec:session_type})
+
+$\tau$ -- Value and Session Types
+
+$l$ -- Labels
+
+$\tilde{l}:\tilde{S}$ -- Sequence of Label-Session Type Pairs
+
+Session Types:
+\[
+  S ::= ![\tau].S \mid ?[\tau].S \mid *![\tau].S
+    \mid \End \mid \oplus[\tilde{l}:\tilde{S}]
+    \mid \&[\tilde{l}:\tilde{S}] \mid \mu\alpha.S \mid \alpha
+\]
+
+Session Types record Sequences of Typed \emph{Send} ($![\tau]$) and
+\emph{Receive} ($?[\tau]$) Interactions, Terminated by $\End$,
+Branched by \emph{Select} ($\oplus$) and \emph{Choice} ($\&$)
+Interactions, \emph{Output} ($*![\tau]$), and Recursive Types
+$\mu\alpha.S$
+
+Recursive Types obey Fixed-point Law:
+\[
+  \mu\alpha.S = S[\mu\alpha.S/\alpha]
+\]
+
+Recursive Types are assumed to be Guarded
+(\S\ref{sec:guarded_recursion})
+
+\emph{Carried Types} (e.g. $\tau \;\inn\; ![\tau].S$) are Closed %FIXME
+
+Alias definition for Replicated Input:
+\[
+  *?[\tau] := \mu\alpha.?[\tau].\alpha
+\]
+
+\fist $\End$ is often ommitted
 
 
 
