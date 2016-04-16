@@ -1426,6 +1426,10 @@ Types and Session Types; two-way Embedding: Session Types
 Effect Handlers (\S\ref{sec:effect_handler}), Session Types as Effects
 %FIXME behavioral type theory?
 
+Effect System for Session Types is Partial: some Operations may not be
+defined for all Arguments, Modelling the Program-logic Behavior of
+Session Types \cite{orchard-yoshida16} %FIXME
+
 \fist Orchard-Yoshida16 \cite{orchard-yoshida16} distinguishes the
 Effect Systems of Nielson-Nielson99 \cite{nielson-nielson99} from
 ``traditional'' Effect Systems by distinguishing Sequential Control
@@ -1492,152 +1496,18 @@ Coeffect-graded Comonad (???)
 
 
 % --------------------------------------------------------------------
-\subsection{Computational Effect}\label{sec:computational_effect}
+\subsection{Effect}\label{sec:effect}
 % --------------------------------------------------------------------
-
-Computational Effects
-
-e.g. Exceptions, Non-determinism, Interactive Input/Output,
-Concurrency, State, Time, Continuations, etc. \cite{plotkin-pretnar09}
-
-Monad (\S\ref{sec:monad})
-
-Computation (Monad) $T$ Returning Value of Type $A$:
-\[
-  T A
-\]
-
-Return
-
-Bind
-
-\cite{plotkin-pretnar13}:
-
-In the Category $\cat{Set}$, a Computation that Returns Values from a
-Set $A$ is Modelled by an Element $T A$ for a ``suitable'' Monad $T$.
-
-E.g. Exceptions, State, Non-determinism, Interactive Input/Output,
-Time, Continuations, etc. (and combinations thereof)
-
-Algebraic Effects (\S\ref{sec:algebraic_effect}):
-\begin{itemize}
-  \item Set of Operations representing Sources of Effects
-  \item Equational Theory describing Properties of the Operations
-\end{itemize}
-
-
-
-\subsubsection{Partiality Effect}\label{sec:partiality_effect}
-
-an Effect that all Recursively Defined Functions have
-(\S\ref{sec:recursive_function})
-
-possible Semantics:
-
-Lifting Monad (\S\ref{sec:lifting_monad})
-
-Continuation-based (\S\ref{sec:continuation})
-
-
-
-\subsubsection{Exception Effect}\label{sec:exception_effect}
-
-\cite{plotkin-pretnar13}:
-
-Finite Set of Exceptions $\mathbf{exc}$
-
-Exception Monad
-
-\begin{align*}
-     T A & \defeq A + \mathbf{exc} \\
-  \eta_A & \defeq in_1 : A \rightarrow A + \mathbf{exc}
-\end{align*}
-
-Computations:
-
-$\mono{return}\; V$ Interpreted by $\eta_A(V) = in_1(V)$
-
-$\mono{raise}_e()$ Interpreted by $in_2(e)$
-
-Effect Handler (\S\ref{sec:effect_handler})
-
-Exception Handling
-
-Computation $M \in A + \mathbf{exc}$
-\[
-  M \;\mono{handled\;with}\;
-    \{\mono{raise}_e \mapsto M_e \}_{e\in\mathbf{exc}}
-\]
-where $\{\cdots\}_{e\in\mathbf{exc}}$ is a Set of Computations, one
-for each Exception $e \in \mathbf{exc}$
-
-carries out $M$, ``Intercepting'' Exceptions $e \in \mathbf{exc}$ by
-carrying out predefined Computations $M_e \in A + \mathbf{exc}$
-instead
-
-Un-handled Exceptions take $M_e$ to be $\mono{raise}_e()$
-
-Handling Construct Satisfies two Equations:
-\begin{enumerate}
-  \item $\mono{return}\; V \;\mono{handled\;with}\;
-    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
-    = in_1(V)$
-  \item $\mono{raise}_{e'}() \;\mono{handled\;with}\;
-    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
-    = M_{e'}$
-\end{enumerate}
-
-the Computations $M_e$ give a new Model $\mathcal{M}$ for the Theory
-of Exceptions with same Carrier (i.e. Domain \S\ref{sec:domain}) $A +
-\mathbf{exc}$ and for each $e$, each $\mono{raise}_e ()$ is instead
-Interpreted by $M_e$
-
-\[
-  h(M) \defeq M \;\mono{handled\;with}\;
-    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
-\]
-is a Unique Homomorphism (Preserving Operations) from $A +
-\mathbf{exc}$ to $\mathcal{M}$ that Extends $in_1 : A \rightarrow A +
-\mathbf{exc}$, i.e. such that:
-\[
-  A \xrightarrow{in_1} \mathcal{M} =
-    A \xrightarrow{\eta_A} A + \mathbf{exc} \xrightarrow{h} \mathcal{M}
-\]
-
-Extended Handling Construct:
-\[
-  M \;\mono{handled\;with}\;
-    \{\mono{raise}_e() \mapsto M_e \}_{e\in\mathbf{exc}}
-    \;\mono{to}\; x : A.N(x)
-\]
-
-\begin{enumerate}
-  \item $\mono{return}\; V \;\mono{handled\;with}\;
-    \{\mono{raise}_e() \mapsto N_e\}_{e \in \mathbf{exc}}
-    \;\mono{to}\; x:A.N(x)
-    = N(V)$
-  \item $\mono{raise}_{e'}() \;\mono{handled\;with}\;
-    \{\mono{raise}_e() \mapsto N_e\}_{e \in \mathbf{exc}}
-    \;\mono{to}\; x:A.N(x)
-    = N_{e'}$
-\end{enumerate}
-\[
-  A \xrightarrow{N} \mathcal{M} =
-    A \xrightarrow{\eta_A} A + \mathbf{exc} \xrightarrow{h} \mathcal{M}
-\]
-
-Homomorphisms from the Free Model to a Model on a given Carrier
-
-Effect Handler (\S\ref{sec:effect_handler}): Exceptions replaced by
-Handling Computations
-
-
-
-\subsubsection{State Effect}\label{sec:state_effect}
 
 \subsubsection{Subeffect}\label{sec:subeffect}
 
 Layered Monad (\S\ref{sec:layered_monad}) \cite{filinski99}
+
+allows Effects of an Expression to be ``over-approximated''
+\cite{orchard-yoshida16}
+
+\fist Cf. (traditional) Subtyping in Session Types allows an
+approximation on Branch and Select \cite{orchard-yoshida16}
 
 
 
@@ -1881,6 +1751,190 @@ used in its own Specification
 \emph{Effect Constructor}: Algebraic Effects
 (\S\ref{sec:algebraic_effect}), Algebraic Operation
 (\S\ref{sec:algebraic_operation})
+
+
+
+\subsubsection{Parametric Effect Monad}
+\label{sec:parametric_effect_monad}
+
+(or \emph{Indexed Monad})
+
+Katsumata14, Orchard-Petricek-Mycroft14
+
+Semantic ``marriage'' of Effects and Monads
+
+Indexed Joinad (\S\ref{sec:indexed_joinad})
+
+Type-level Sets (???): Implementation in Haskell using ``data kinds''
+and ``closed type families'' (Orchard-Petricek14) %FIXME
+
+intermediate between Monads and Effect Handlers (Orchard-Petricek14)
+
+
+
+\subsubsection{Joinad}\label{sec:joinad}
+
+Extending Monads with Operations for Modelling Alternation
+(Conditionals) and Parallelism
+
+
+
+\paragraph{Graded Joinad}\label{sec:graded_joinad}\hfill
+
+Effect Control-flow Algebras \& Types
+
+
+
+\paragraph{Indexed Joinad}\label{sec:indexed_joinad}\hfill
+
+Indexed Monad (Parametric Effect Monad
+\S\ref{sec:parametric_effect_monad})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Computational Effect}\label{sec:computational_effect}
+% --------------------------------------------------------------------
+
+Computational Effects
+
+e.g. Exceptions, Non-determinism, Interactive Input/Output,
+Concurrency, State, Time, Continuations, etc. \cite{plotkin-pretnar09}
+
+Monad (\S\ref{sec:monad})
+
+Computation (Monad) $T$ Returning Value of Type $A$:
+\[
+  T A
+\]
+
+Return
+
+Bind
+
+\cite{plotkin-pretnar13}:
+
+In the Category $\cat{Set}$, a Computation that Returns Values from a
+Set $A$ is Modelled by an Element $T A$ for a ``suitable'' Monad $T$.
+
+E.g. Exceptions, State, Non-determinism, Interactive Input/Output,
+Time, Continuations, etc. (and combinations thereof)
+
+Algebraic Effects (\S\ref{sec:algebraic_effect}):
+\begin{itemize}
+  \item Set of Operations representing Sources of Effects
+  \item Equational Theory describing Properties of the Operations
+\end{itemize}
+
+
+
+\subsubsection{Partiality Effect}\label{sec:partiality_effect}
+
+an Effect that all Recursively Defined Functions have
+(\S\ref{sec:recursive_function})
+
+possible Semantics:
+
+Lifting Monad (\S\ref{sec:lifting_monad})
+
+Continuation-based (\S\ref{sec:continuation})
+
+
+
+\subsubsection{Exception Effect}\label{sec:exception_effect}
+
+\cite{plotkin-pretnar13}:
+
+Finite Set of Exceptions $\mathbf{exc}$
+
+Exception Monad
+
+\begin{align*}
+     T A & \defeq A + \mathbf{exc} \\
+  \eta_A & \defeq in_1 : A \rightarrow A + \mathbf{exc}
+\end{align*}
+
+Computations:
+
+$\mono{return}\; V$ Interpreted by $\eta_A(V) = in_1(V)$
+
+$\mono{raise}_e()$ Interpreted by $in_2(e)$
+
+Effect Handler (\S\ref{sec:effect_handler})
+
+Exception Handling
+
+Computation $M \in A + \mathbf{exc}$
+\[
+  M \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e \}_{e\in\mathbf{exc}}
+\]
+where $\{\cdots\}_{e\in\mathbf{exc}}$ is a Set of Computations, one
+for each Exception $e \in \mathbf{exc}$
+
+carries out $M$, ``Intercepting'' Exceptions $e \in \mathbf{exc}$ by
+carrying out predefined Computations $M_e \in A + \mathbf{exc}$
+instead
+
+Un-handled Exceptions take $M_e$ to be $\mono{raise}_e()$
+
+Handling Construct Satisfies two Equations:
+\begin{enumerate}
+  \item $\mono{return}\; V \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
+    = in_1(V)$
+  \item $\mono{raise}_{e'}() \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
+    = M_{e'}$
+\end{enumerate}
+
+the Computations $M_e$ give a new Model $\mathcal{M}$ for the Theory
+of Exceptions with same Carrier (i.e. Domain \S\ref{sec:domain}) $A +
+\mathbf{exc}$ and for each $e$, each $\mono{raise}_e ()$ is instead
+Interpreted by $M_e$
+
+\[
+  h(M) \defeq M \;\mono{handled\;with}\;
+    \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
+\]
+is a Unique Homomorphism (Preserving Operations) from $A +
+\mathbf{exc}$ to $\mathcal{M}$ that Extends $in_1 : A \rightarrow A +
+\mathbf{exc}$, i.e. such that:
+\[
+  A \xrightarrow{in_1} \mathcal{M} =
+    A \xrightarrow{\eta_A} A + \mathbf{exc} \xrightarrow{h} \mathcal{M}
+\]
+
+Extended Handling Construct:
+\[
+  M \;\mono{handled\;with}\;
+    \{\mono{raise}_e() \mapsto M_e \}_{e\in\mathbf{exc}}
+    \;\mono{to}\; x : A.N(x)
+\]
+
+\begin{enumerate}
+  \item $\mono{return}\; V \;\mono{handled\;with}\;
+    \{\mono{raise}_e() \mapsto N_e\}_{e \in \mathbf{exc}}
+    \;\mono{to}\; x:A.N(x)
+    = N(V)$
+  \item $\mono{raise}_{e'}() \;\mono{handled\;with}\;
+    \{\mono{raise}_e() \mapsto N_e\}_{e \in \mathbf{exc}}
+    \;\mono{to}\; x:A.N(x)
+    = N_{e'}$
+\end{enumerate}
+\[
+  A \xrightarrow{N} \mathcal{M} =
+    A \xrightarrow{\eta_A} A + \mathbf{exc} \xrightarrow{h} \mathcal{M}
+\]
+
+Homomorphisms from the Free Model to a Model on a given Carrier
+
+Effect Handler (\S\ref{sec:effect_handler}): Exceptions replaced by
+Handling Computations
+
+
+
+\subsubsection{State Effect}\label{sec:state_effect}
 
 
 
@@ -3134,6 +3188,18 @@ Language (all possible Definitions allowed), not all Handlers will
 have Interpretations
 
 
+\asterism
+
+
+An Algebraic Effect Handler that is Linear in its Continuation gives
+rise to the notion of Linear Control-flow Effects
+\cite{orchard-yoshida16}. Non-linear Effects such as Exceptions
+(Interrupted Control-flow) and Non-determinism (Branching
+Control-flow) may be captured via Session-typed
+(\S\ref{sec:session_type}) Encodings that explicitly include their
+Continuation. \cite{orchard-yoshida16} %FIXME
+
+
 
 \cite{plotkin-pretnar09}:
 
@@ -3326,6 +3392,11 @@ Zappa-Szep Product (\S\ref{sec:zappa_szep})
 % --------------------------------------------------------------------
 \subsection{Coeffect}\label{sec:coeffect}
 % --------------------------------------------------------------------
+
+Implicit Parameters in a Programming Language like Haskell is a
+Coeffect System (Orchard-Petricek14)
+
+$\mono{codo}$ Notation
 
 
 
@@ -4029,6 +4100,403 @@ Subject Reduction:
     \rightarrow \mathcal{D}[N]
   \Rightarrow \varnothing \vdash N:\tau,G \wedge G \sqsubseteq F
 \]
+
+
+\textbf{Parallel Composition}
+
+Extending the Effect Algebra of FPCF with Semigroup $(F,\diamond)$ for
+Parallel Computation where $I$ (Purity) is the Unit of $\diamond$ with
+Typing:
+\[
+  \frac{\Gamma \vdash M:\Unit,F \quad\quad\quad \Gamma \vdash N:\Unit,G}
+  {\Gamma \vdash M\|N:\Unit,F \diamond G}
+\]
+and Equality:
+\[
+  M\|\Unit \equiv M \quad\quad M\|N \equiv N\|M
+    \quad\quad M\|(N\|P) \equiv (M\|N)\|P
+\]
+
+completed Parallel Composition Reduces by: $\unit\|\unit
+\rightarrow \unit$
+
+
+\textbf{Linear Control-flow Effects}
+
+Linearity of Control Flow: equivalent to Algebraic Effect Handler
+(\S\ref{sec:effect_handler}) that is Linear in its Continuation;
+Non-linear Effects such as Exceptions (Interrupted Control-flow) and
+Non-determinism (Branching Control-flow) may be captured via
+Session-typed (\S\ref{sec:session_type}) Encodings that explicitly
+include their Continuation. %FiXME
+
+
+\asterism
+
+
+\textbf{Session Calculus Embedding}
+
+Session Calculus (\S\ref{sec:session_calculus}) Embedded into FPCF
+with a notion of \emph{Session Effect}: Session Types and
+\emph{Causal} (Non-commutative) Effects have the same structure--both
+give an Ordered Analysis of the Operational Behavior of a Program.
+
+Effect System for Sessions is Partial: some Operations may not be
+defined for all Arguments, Modelling the Program-logic Behavior of
+Session Types.
+
+Prefixing style of Session Types is replaced by Monoidal Style of
+Effect Systems \newline
+\fist Cf. Difference List (Prefixing) vs. normal
+Concatenation of Lists. %FIXME
+
+Branching/Selection via Alternation $\oplus$
+
+Replication via Recursion and $-^*$
+
+
+\textbf{Types}
+
+\begin{flalign*}
+  \quad\quad \tau & ::= \Nat \mid \Unit \mid [S] &
+\end{flalign*}
+
+
+\emph{Effect Session Types} (variant of Session Types):
+\begin{flalign*}
+  \quad\quad S,T & ::= ![\tau].S \mid ?[\tau].S \mid *![\tau].S \mid \End
+    \mid S + S \mid \mu\alpha.S \mid \alpha \mid \tilde{\odot}S &
+\end{flalign*}
+
+$+$ -- Alternation Operator: replaces Select $\oplus$ and Branch $\&$
+
+$\tilde{\odot}S$ -- Intermediate representation for the Session Type
+of Channels being Composed via $\odot$ (Balanced Composition)
+
+assuming Equirecursive Equations on $S$, e.g. $\mu\alpha.S =
+S[\mu\alpha.S/\alpha]$
+
+
+\textbf{Session Effects}
+
+$\mathbf{c,d,e,\overline{c},\overline{d},\overline{e}}
+\in \class{C}$ -- Channel Values (and Dual Endpoints)
+
+Channel Values belong to Singleton Types corresponding to the Channel
+Name:
+\[
+  \mathbf{c} : Ch\;c
+\]
+provides ``simple Value Dependency''. %FIXME
+
+$\class{F} = (\class{C} \rightarrow S) \cup \{\bot\}$ -- Maps from
+Channel Names $\class{C}$ to Effect Session Types with Algebra:
+\begin{itemize}
+  \item $(\class{F},\bullet,\varnothing)$ -- $I = \varnothing$ is the
+    Empty Mapping, $\bullet$ is Point-wise Sequential Composition of
+    Effect Session Types (via $\blacklozenge$ Partial Sequential
+    Operator for Session Types) where:
+    \[
+      \forall c:S \in F \wedge c:T \in G
+        \Rightarrow c:S \blacklozenge T \in (F \bullet G)
+    \]
+    with additional Equations for Balancing Composition triggered by
+    $\tilde{\odot}$ Types %FIXME
+  \item $\oplus$:
+    \[
+      \Delta_1 \oplus \Delta_2 =
+      \begin{cases}
+        \Delta_1 \cup \Delta_2 & \;\text{if}\;
+          \forall c:S \in \Delta_i
+          \Rightarrow c:S \in \Delta_j \vee c \notin dom(\Delta_j) \\
+        \bot & \;\text{otherwise} \\
+      \end{cases}
+    \]
+  \item $\sqsubseteq$ -- Preorder (\S\ref{sec:preorder}) where
+    $\forall\Delta,c$ and $c \notin dom(\Delta)$:
+    \[\begin{aligned}
+        \Delta &\sqsubseteq (\Delta,c:\End) \\
+        \Delta &\sqsubseteq (\Delta,c:*![S]) \\
+      \end{aligned}
+      \quad\quad
+      \begin{aligned}
+        (\Delta,c:S) &\sqsubseteq (\Delta,c:S + T) \\
+        (\Delta,c:S) &\sqsubseteq (\Delta,c:T + S) \\
+    \end{aligned}\]
+  \item $\diamond = \odot$ -- for Parallel Effects takes the Union of
+    two Mappings if they are Balanced in their Channels, otherwise
+    $\bot$ %FIXME
+  \item $F^*$:
+    \[
+      \forall c:S \in F
+        \Rightarrow c:\mu\alpha.(\End + S \blacklozenge \alpha) \in F^*
+    \]
+\end{itemize}
+
+\fist $\oplus$ is not the Least Upper-bound with respect to
+Subeffecting $\sqsubseteq$: defining Subeffecting as Subset Inclusion
+instead of the above definition is Unsound as arbitrary Session Types
+could be introduced without a corresponding implementation.
+
+
+\textbf{Send, Receive, Restriction}
+
+Operations for Sending/Receiving Values and Channels, and Restricting
+Channels are added to Constants $C$ of FPCF:
+\begin{align*}
+  send_{c,\tau} &:
+    Ch\;c \rightarrow \tau \xrightarrow{\{c:![\tau]\}} \Unit \\
+  rsend_{c,d,s} &:
+    Ch\;c \rightarrow
+      Ch\;d \xrightarrow{\{c:*![s],d:\tilde{\odot}s\}} \Unit \\
+  chSend_{c,d,s} &:
+    Ch\;c \rightarrow
+      Ch\;d \xrightarrow{\{c:![s],d:\tilde{\odot}s\}} \Unit \\
+  recv_{c,\tau} &: Ch\;c \xrightarrow{\{c:?[\tau]\}} \tau \\
+  chRecv_{c,d,s,F,\tau} &:
+    Ch\;c \xrightarrow{\{c:?[s]\}}
+      (Ch\;d \xrightarrow{F \bullet \{d:s\}} \tau)
+    \xrightarrow{F} \tau \\
+  new_{c,s,F,\tau} &:
+    (Ch\;c \rightarrow Ch\;\overline{c}
+      \xrightarrow{F \bullet \{c:s,\overline{c}:\overline{s}\}} \tau)
+    \xrightarrow{F} \tau
+\end{align*}
+Each is a Family of Operations Indexed by the Types shown as Subscripts
+and has Latent Effects which give the Session Environment Induced by
+the Operation.
+
+$send_{c,\tau}$, $recv_{c,\tau}$ -- correspond to Session Send/Receive
+Prefixes with Effect Types describing the single Action on their
+Channel
+
+$chSend_{c,d,s}$ -- second Channel Parameter $d$ is Sent over $c$
+where $d$ must be Balanced with the rest of the Environment when
+Composing (due to the $\tilde{\odot}$ Operator)
+
+$rsend_{c,d,s}$ -- identical to $chSend$ but with the
+$*!$ Session Type
+
+$chRecv_{c,d,s,F,\tau}$ -- Higher-order Operation taking a Channel $c$
+over which a Session Type $s$ is Received and passed to the Parameter
+Function which Maps a Channel $d$ to a Value $\tau$ with the Effect $F
+\bullet \{d:s\}$ and from this a Computation is Returned with $F$
+Channels where $d,c \notin F$; important for the Typability of
+Replicated Input
+
+$new_{c,s,F,\tau}$ -- Higher-order Operation where the resulting
+Effect is the Effect of the Paramter Function but with the Session
+Types $c:s$, $\overline{c}:\overline{s}$ deleted from the Environment
+(they are in Scope only for the Parameter Function) %FIXME clarify
+
+
+\textbf{Operational Semantics}
+
+$\langle M,s \rangle$ -- Configuration
+
+$M$ -- Term
+
+$s$ -- Store, Mapping Channel Endpoint Names $\class{C}$ to
+(Unbounded) Queues of Values
+
+$enq$, $deq$ %FIXME
+
+
+allows Asynchronous Communication
+
+Stable Reduction Relation, Synchronous Subset
+
+Extension of $\equiv$ with $\eta$-expansion for $new$ over Pure Values
+%FIXME
+
+
+\textbf{Encoding Types}
+
+For $\Gamma;\Delta \vdash P$:
+\[
+  \exists M.\llbracket \Gamma;\Delta \vdash P \rrbracket
+    = \llbracket \Gamma \rrbracket \vdash M:\Unit,
+      \llbracket \Delta \rrbracket
+\]
+
+Value Contexts are Encoded $\llbracket\Gamma\rrbracket$ with $\Unit$
+and $\Nat$ Mapped to their corresponding FPCF Value Types.
+
+Session Environments are Mapped to Effects $\class{F}$ by:
+\[
+  \llbracket\Delta\rrbracket
+    = \llbracket c_1:S_1, \ldots, c_n:S_n \rrbracket
+    = c:\llbracket S_1 \rrbracket, \ldots, c_n:\llbracket S_n \rrbracket
+\]
+and the following Interpretation Mapping Session Types to Effect
+Session Annotations:
+\[
+  \begin{aligned}
+    \llbracket ![\tau].S \rrbracket
+      &= !\llbracket\tau\rrbracket.\llbracket S \rrbracket \\
+    \llbracket ?[\tau].S \rrbracket
+      &= ?\llbracket\tau\rrbracket.\llbracket S \rrbracket \\
+    \llbracket\End\rrbracket &= \End
+  \end{aligned}
+  \quad\quad
+  \begin{aligned}
+    \llbracket *![\tau].S \rrbracket
+      &= *!\llbracket\tau\rrbracket.\llbracket S \rrbracket \\
+    \llbracket *?[\tau] \rrbracket
+      &= \mu\alpha.?\llbracket\tau\rrbracket.\alpha \\
+    \llbracket \mu\alpha.S \rrbracket
+      &= \mu\alpha.\llbracket S \rrbracket
+  \end{aligned}
+\]
+\begin{align*}
+  \llbracket \oplus[l_1:S,l_2:T] \rrbracket
+    &= ![\Nat].(\llbracket S \rrbracket + \llbracket T \rrbracket) \\
+  \llbracket \&[l_1:S,l_2:T] \rrbracket
+    &= ?[\Nat].(\llbracket S \rrbracket + \llbracket T \rrbracket)
+\end{align*}
+
+\fist Natural Numbers are used in the Encoding to administer
+Control-flow for Branching and Selection: for Selection Type $\oplus$
+corresponds to Sending a $\Nat$ to Select a Branch prior to
+Alternation, and for $\&$ corresponds to Receiving a $\Nat$ then
+Alternating.
+
+
+\textbf{Encoding Processes}
+
+$\llbracket\Gamma;\Delta \vdash P\rrbracket$ -- Encoding of Typed
+Processes by Induction over Data Derivations
+
+\fist Types are included only when the Encoding has a
+(Non-syntactically Implied) Type-dependence; types are elided when the
+Syntax has a single corresponding Typing Rule
+
+Encoding of Linear Send and Receive into FPCF:
+\begin{align*}
+  \llbracket{c!\langle{V}\rangle.P}\rrbracket
+    & = send\;c \llbracket{V}\rrbracket ; \llbracket{P}\rrbracket \\
+  \llbracket{c?(x).P}\rrbracket
+    & = \lett\; x = recv\;c \;\inn\; \llbracket{P}\rrbracket \\
+  \llbracket{c?(d).P}\rrbracket
+    & = \lett\; k = chRecv\; c \;\inn\;
+      k\;(\lambda d.\llbracket{P}\rrbracket) \\
+  \llbracket{\Delta \vdash c!\langle{d}\rangle.P}\rrbracket
+    & = chSend\;c\;d ; \llbracket{P}\rrbracket
+      \quad\quad (\text{if}\;c : ![S].T \in \Delta)
+\end{align*}
+where $M ; N$ is used for $\lett\;x = M \;\inn\; N$ when the Bound
+Variable $x$ is Free in $N$ (i.e. unused, wildcard).
+
+Encoding of Output and Replicated Output:
+\begin{align*}
+  \llbracket{\Delta \vdash c!\langle{d}\rangle.P}\rrbracket
+    & = rsend\;c\;d ; \llbracket{P}\rrbracket \quad\quad
+      (\text{if}\;c : *![S].T \in \Delta) \\
+  \llbracket{*c?(d).P}\rrbracket
+    & = \rec\;(\lambda f.\lambda x.\lett\;k = chRecv\;c \;\inn\;
+      (k\;(\lambda d.\llbracket{P}\rrbracket)) \| f\;\unit)\;\unit
+\end{align*}
+
+\fist Note that the Syntax $c!\langle{d}\rangle.P$ uses $chSend$ when
+$c$ is a Linear Send in $\Delta$, and $rsend$ if $c$ is Replicated
+Output in $\Delta$.
+
+$rsend\;c\;d ; \llbracket{P}\rrbracket$ -- Output: $rsend$ Send $d$
+before Continuing with $\llbracket{P}\rrbracket$
+
+$\rec\;(\lambda f.\lambda x.\lett\;k = chRecv\;c \;\inn\; (k\;(\lambda
+d.\llbracket{P}\rrbracket)) \| f\;\unit)\;\unit$ -- Replicated Input:
+repeatedly Receives a Channel on $c$ which is Bound as $d$ in the
+Scope of $\llbracket{P}\rrbracket$ in Parallel (via Continuation $k$)
+with the Recursive Call.
+
+Restricted, Parallel, and Empty Proceses:
+\begin{align*}
+  \llbracket{P|Q}\rrbracket
+    & = \llbracket{P}\rrbracket \| \llbracket{Q}\rrbracket \\
+  \llbracket{\nu c.P}\rrbracket
+    & = new\;(\lambda c.\lambda \overline{c}.\llbracket{P}\rrbracket) \\
+  \llbracket{0}\rrbracket & = \unit
+\end{align*}
+
+Branching, Selection, Conditionals:
+\[
+\begin{split}
+  \llbracket{c \lhd l_1.P}\rrbracket
+    = send\;c\;0; \llbracket{P}\rrbracket
+  \quad\quad\quad
+  \llbracket{c \lhd l_2.P}\rrbracket
+    = send\;c\;1; \llbracket{P}\rrbracket \\
+  \begin{split}
+    \llbracket{c \rhd [l_1:P,l_2:Q]}\rrbracket
+      & = \lett\; x = recv\;c \;\inn\;
+        (\case\; x \;\of\; 0 \mapsto \llbracket{P}\rrbracket,
+        \suc\;n \mapsto \llbracket{Q}\rrbracket) \\
+    \llbracket{\mono{if}\;[V=0]\;\mono{then}
+        \;P\;\mono{else}\;Q}\rrbracket
+      & = \case\; V \;\of\; 0 \mapsto \llbracket{P}\rrbracket,
+        \suc\;n \mapsto \llbracket{Q}\rrbracket
+  \end{split}
+\end{split}
+\]
+may be generalized to any Finite Set of Labels (Isomorphic to $\Nat$).
+
+Subeffecting %FIXME
+
+
+\textbf{Value Encoding}
+
+PCF has the same Constructors as Session Calculus (Modulo $\pred$):
+\[
+  \begin{split}
+    \llbracket{\unit}\rrbracket = \unit \quad\quad
+    \llbracket{0}\rrbracket = 0 \quad\quad
+    \llbracket{v}\rrbracket = v \\
+    \begin{split}
+      \llbracket{\suc\;V}\rrbracket & = \suc\;\llbracket{V}\rrbracket \\
+      \llbracket{\pred\;V}\rrbracket & =
+        \case\;\llbracket{V}\rrbracket\;\of\;
+          0 \mapsto 0, (\suc\;x) \mapsto x
+    \end{split}
+  \end{split}
+\]
+Context-preserving Embedding of Variables
+
+
+\textbf{Correctness}
+
+\emph{Top-level Contexts}
+
+$\Rightarrow$ -- Relation of \emph{Stable Reductions} between a Term
+and a Store; characterizes the equivalent of $\beta$-reductions
+(\S\ref{sec:beta_reduction}) (Synchronization) in the Session
+Calculus:
+
+$(\beta\Rightarrow)$
+
+$(\text{ch}\beta\Rightarrow)$
+
+$(\text{new}\Rightarrow)$
+
+$(\equiv\Rightarrow)$
+
+$(\rightarrow)$
+
+\textbf{Thm.} \emph{Operational Correspondence}
+
+
+\textbf{Termination and Replicated Input}
+
+Replicated Input is Encoded as a Recursive Function that becomes
+Blocked once therare no more Outputs ($rsend$).
+
+\emph{Garbage Collection Property} (???) shows this is Observationally
+Equivalent to the Empty Process:
+\[
+  \nu c.(*c?(d).P) \cong 0
+\]
+
+Property holds for the Encoding up to Non-termination Effects %FIXME
 
 
 

@@ -632,6 +632,9 @@ $\beta$-reduction is Confluent (\S\ref{sec:rewrite_confluence}).
 As a Semantics for Functional Programming, a $\beta$-contraction
 corresponds to a Computational Step.
 
+Synchronization in Session Calculus (\S\ref{sec:session_calculus})
+\cite{orchard-yoshida16}
+
 
 
 \subsubsection{$\beta$-conversion}\label{sec:beta_conversion}
@@ -3418,6 +3421,8 @@ Th. \textbf{Cut Elimination}:
 
 Orchard-Yoshida16 \cite{orchard-yoshida16}
 
+\emph{Session Calculus} $\pi_S$
+
 \fist \cite{orchard-yoshida16} gives an Embedding of
 FPCF (\S\ref{sec:fpcf}) into Session Calculus and vice versa.
 
@@ -3687,7 +3692,6 @@ $\mu\alpha.![\tau].\alpha$ and $*![\tau]$ but
 $(c:\mu\alpha.![\tau].\alpha) \odot (c:*![\tau])$ is Undefined.
 
 
-
 \textbf{Subject Reduction}
 
 Session Environments represent ``Forthcoming'' Communications; during
@@ -3707,6 +3711,139 @@ $\Delta \longrightarrow \Delta'$:
 \rightarrow^* Q$, then $\Gamma; \Delta' \vdash Q$ with $\Delta
 \longrightarrow^* \Delta'$, and if $\Delta$ is (self-)Balanced then
 $\Delta'$ is Balanced.
+
+
+\textbf{FPCF Embedding}
+
+(requirements) %FIXME
+
+$\llbracket\cdot\rrbracket$ -- Overloaded Embedding Function Mapping
+Terms, Types, Effects, Contexts and Judgements of FPCF
+(\S\ref{sec:fpcf}) to Session Calculus constructs.
+
+$\llbracket\cdot\rrbracket_r$ -- Subscript $r$ on an Embedding
+specifies the Channel $r$ over which the Result will be Sent.
+
+Side-effects are Modelled by Interactions with an Effect Handler
+(\S\ref{sec:effect_handler}) Process (e.g. Variable Agent
+\S\ref{sec:variable_agent}) over a Channel called the \emph{Effect
+  Channel}.
+
+FPCF Terms have two Free Channels called \emph{Effect Channel
+  Carriers}: one Receives the Effect Channel (\emph{Incoming}), and
+one Sends the Effect Channel after it has been used (\emph{Outgoing}).
+
+$\llparenthesis\cdot\rrparenthesis_r^{ei,eo}$ -- Intermediate form of
+Embedding Parameterized by Effect Carriers for an Incoming Effect
+Channel Carrier $ei$ and Outgoing Carrier $eo$.
+
+Example $\lett$-binding Encoding:
+\[
+  \llparenthesis \lett\; x = M \;\inn\; N \rrparenthesis_r^{ei,eo}
+    = \nu q, ea.(\llparenthesis M \rrparenthesis_q^{ei,ea}
+      | \overline{q}?(x).\llparenthesis N \rrparenthesis_r^{ea,eo})
+\]
+where $ea$ is an Intermediate Carrier between $M$ and $N$.
+
+\fist Cf. Continuation-passing Style (\S\ref{sec:continuation}) or
+``Threading a Store'' in an Operational Semantics
+(\S\ref{sec:operational_semantics}): $\langle e,s \rangle \rightarrow
+\langle e',s' \rangle$.
+
+\emph{Effect-encoding Parameters}:
+\begin{enumerate}
+  \item $H(\eff)$ -- \emph{Effect Handler Process} Parameterized $\eff$,
+    Typed:
+    \[
+      \varnothing; \eff : \mu\alpha.S \vdash H(\eff)
+    \]
+    for some $S$
+  \item $T(\overline{\eff})$ -- \emph{Terminator Process} such that:
+    \[
+      T(\overline{\eff}) | H(\eff) \rightarrow^* 0
+    \]
+  \item $\llbracket\cdot\rrbracket : \class{F} \rightarrow S$ --
+    \emph{Interpretation Functor} from Effect Algebra Elements to
+    Session Types, Satisfying the Homomorphism Property:
+    \[
+      \llbracket I \rrbracket = \End \quad\quad\quad
+      \llbracket F \bullet G \rrbracket
+        = \llbracket F \rrbracket \blacklozenge \llbracket G \rrbracket
+    \]
+    where $\blacklozenge$ is Partial Sequential Composition for
+    Session Types.
+  \item $\llparenthesis\cdot \rrparenthesis_r^{ei,eo}$ for all
+    Constants $C$ Satisfying:
+    \[
+      \exists P : \forall g.\llparenthesis \varnothing
+          \vdash C:C_\tau,C_F \rrparenthesis_r^{ei,eo}
+        = r:!\llbracket C_\tau \rrbracket,
+          ei:?\llbracket C_F \bullet g \rrbracket,
+          \overline{eo}:!\llbracket g \rrbracket \vdash P
+    \]
+  \item Encoding for $\case$/$\oplus$ and the (Sub) Rule
+\end{enumerate}
+
+\fist In Session-type Prefixes the brackets may be ommitted when an
+Interpretation is inside, e.g. $!\llbracket\tau\rrbracket$ instead of
+$![\llbracket\tau\rrbracket]$.
+
+(top-level embedding) %FIXME
+
+(encoding types) %FIXME
+
+(terms/derivations) %FIXME
+
+(subeffecting) %FIXME
+
+(homomorphic embedding of effect annotations) %FIXME
+
+Correctness of Encoding: (1) Typability, (2) Sound and Complete
+Operational Correspondence, (3) Soundness up to Observational
+Equivalence %FIXME
+
+Observational Equivalence: Reduction-closed Barbed Congruence %FIXME
+
+
+\asterism
+
+
+\textbf{Interfering Concurrent Effects}
+
+Extending the Effect Algebra of FPCF with Semigroup $(F,\diamond)$ for
+Parallel Computation where $I$ (Purity) is the Unit of $\diamond$ with
+Typing:
+\[
+  \frac{\Gamma \vdash M:\Unit,F \quad\quad\quad \Gamma \vdash N:\Unit,G}
+  {\Gamma \vdash M\|N:\Unit,F \diamond G}
+\]
+and Equality:
+\[
+  M\|\unit \equiv M \quad\quad M\|N \equiv N\|M
+    \quad\quad M\|(N\|P) \equiv (M\|N)\|P
+\]
+
+completed Parallel Composition Reduces by: $\unit\|\unit
+\rightarrow \unit$
+
+Interpretation of Parallel Effect Annotation is \emph{Lossy}:
+\[
+  \llbracket F \diamond G \rrbracket = *![S]^(n \;\text{max}\; m)
+\]
+describing the possible arbitrary Interleaving (potential for
+Interference) provided by Parallel Effects. %FIXME
+
+Duality Extension:
+\[
+  \forall n.dual(*![S]^n,*?[S])
+\]
+
+(correspondence, soundness) %FIXME
+
+For the Extended Encoding, Equational Completeness with regard to
+Observational Equivalence does not hold: any Process $P \cong
+\llbracket \Gamma \vdash N:\tau,F \rrbracket_r^\eff$ could be placed
+under a Context which Interacts Non-determinstically with the Handler.
 
 
 
