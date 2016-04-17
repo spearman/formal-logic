@@ -801,6 +801,14 @@ to Semi-unification) %FIXME
 
 
 
+\subsubsection{Value Polymorphism}\label{sec:value_polymorphism}
+
+Polymorphism restricted to \emph{Values}: a Subclass of Expressions
+that can have no Computational Effects
+(\S\ref{sec:computational_effect})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Type Function}\label{sec:type_function}
 % --------------------------------------------------------------------
@@ -1460,9 +1468,65 @@ Control-flow Algebras \& Types
 
 Types $\tau$, $\tau'$
 
+
+\textbf{Monad Language}
+
+$T \tau$ represents a Computation that yields a Value
+of Type $\tau$ and may have Side-effects
+
+Call-by-value (\S\ref{sec:call_by_value}) Translation of $\tau$ is
+$\tau^\dag$.
+
+$(\tau \rightarrow \tau')^\dag$ where $\rightarrow$ represents a
+Function that may have Side-effects is equal to $\tau^\dag \rightarrow
+T \tau'^\dag$ where $\rightarrow$ is a Pure Function (no Side-effects).
+
+Effects appear in two places:
+\begin{enumerate}
+  \item Unit ($\mathsf{return}$) of the Monad -- Labelled with the
+    Empty Effect
+  \item Bind Operation ($T^\sigma\tau \mathsf{>>=} (\tau \rightarrow
+    T^{\sigma'}\tau')$) of the Monad -- Labelled with the Union of two
+    Effects: %FIXME union
+    \begin{enumerate}
+      \item $\sigma$: the Effect of $T^\sigma\tau$
+      \item $\sigma'$: the Effect of $\tau \rightarrow
+        T^{\sigma'}\tau'$
+    \end{enumerate}
+\end{enumerate}
+
+Translation of Variables and $\lambda$-abstractions introduce Unit, so
+they are Labelled with the Empty Effect
+
+Translation of Application introduces two occurrences of Bind, so it
+is Labelled with the Union of three Effects: $\sigma \cup \sigma' \cup
+\sigma''$ %FIXME union
+
+
+\textbf{Effect System}
+
 Effect $\sigma$
 
-$\tau \xrightarrow{\sigma} \tau'$
+$\tau \xrightarrow{\sigma} \tau'$ -- a Function that may have
+Side-effects delimited by $\sigma$
+
+Variables and $\lambda$-abstractions are Labelled with the Empty
+Effect
+
+%FIXME union
+Applications are Labelled with the ``Union'' (???) of three Effects:
+\begin{enumerate}
+  \item Effects of Evaluating the Function
+  \item Effects of Evaluating the Argument
+  \item Effects of Evaluating the Function Body
+\end{enumerate}
+%FIXME clarify
+
+
+\textbf{Effects + Monads}
+
+$T^\sigma\tau$ -- Computation that yields a Value in $\tau$ and may
+have Effects delimited by $\sigma$
 
 $(\tau \xrightarrow{\sigma} \tau')^\dag$
 $\rightsquigarrow$
@@ -1486,8 +1550,8 @@ Term $M$, Type $A$, Effect $e$
   \vdash M :(A,e)
 \]
 
-$T_e A$ -- Effect-graded Monad (???), $e$ Element of an Effect
-Preordered Monoid (???)
+$T_e A$ -- Effect-graded Monad (\S\ref{sec:graded_monad}), $e$ Element
+of an Effect Preordered Monoid (???)
 
 ``Indexing''
 
@@ -1754,8 +1818,109 @@ used in its own Specification
 
 
 
-\subsubsection{Parametric Effect Monad}
-\label{sec:parametric_effect_monad}
+\subsubsection{Graded Monad}\label{sec:graded_monad}
+
+(or \emph{Effect-graded Monad})
+
+%FIXME equivalent to a parametric effect monad?
+
+\cite{orchard-yoshida16}:
+
+carry Effect information as a Type Index
+
+Effect-grade Monad:
+\begin{flalign*}
+  & \mono{class}\;\mathsf{Effect}
+    (m : \text{\emph{ef}} \rightarrow * \rightarrow *)
+    \;\mono{where} & \\
+  & \quad\quad\mono{type}\;\mathsf{Unit}\;m : \text{\emph{ef}} \\
+  & \quad\quad\mono{type}\;\mathsf{Plus}\;m\;(f : \text{\emph{ef}})
+    \;(g : \text{\emph{ef}}) : \text{\emph{ef}} \\
+  & \quad\quad\mathsf{return} : a \rightarrow
+    m\;(\mathsf{Unit\;m})\;a \\
+  & \quad\quad(\mathsf{>>=}) : m\;f\;a \rightarrow
+    (a \rightarrow m\;g\;b) \rightarrow m\;(\mathsf{Plus}\;m\;f\;g)\;b
+\end{flalign*}
+
+$\text{\emph{ef}}$ -- Domain, \emph{Kind}; Set of Effect Annotations
+$\class{F}$
+
+$\mathsf{Plus}\;m$ -- Type-level Binary Function implementing $\bullet$
+of the Effect Algebra for $\class{F}$
+
+$\mathsf{Unit}\;m$ -- Constant providing the Unit Element $I$
+
+$\mathsf{return}$ -- Lifts a Value to a Trivially Effectful
+Computation marked with $I$
+
+$\mathsf{(>>=)}$ -- Sequential Composition of Effectful Computations;
+(\emph{Bind}) Rule Models the $\lett$-binding of FPCF
+(\S\ref{sec:fpcf})
+
+an FPCF Judgement:
+\[
+  \Gamma \vdash M:\tau,F
+\]
+Maps to a ``Monadic Metalanguage Judgement'':
+\[
+  \Gamma \vdash [M]:m\;[F]\;\tau
+\]
+Embedding Effects into Types. \cite{wadler-thiemann03}
+
+
+\asterism
+
+
+Session Calculus (\S\ref{sec:session_calculus})
+
+\fist Cf. Session Calculus Embedding into FPCF \S\ref{sec:fpcf})
+
+Graded Monad Instance for $\mathsf{Process}$ (\S\ref{sec:process})
+Datatype:
+\[
+  \mono{data}\;\mathsf{Process}\;(s:[\mathsf{Map\;Name\;Session}])\;a
+    = \mathsf{Proc}\;(\mathsf{IO}\;a)
+\]
+
+$s$ -- Type-level Finite Map Modelling an Environment of Session Type
+information of the form:
+\[
+  '[c :-> s, d :-> t, \ldots]
+\]
+describing an Environment where a Channel $c$ has Session Type $s$, a
+Channel $d$ has Session Type $t$, etc.
+
+Session Environments are Composed Sequentially via the
+$\mathsf{SeqUnion}$ Type-level Function (Modelling $\bullet$ for
+Effect Algebras \S\ref{sec:effect_system})
+
+\emph{Session Effects} are Modelled by the $\mathsf{Session}$
+Datatype:
+\begin{align*}
+  \mono{data}\;\mathsf{Session}
+    =\; & \mono{forall}\;a . a :! \;\mathsf{Session}
+      \quad\quad\quad & \text{\emph{send}} \\
+    \mid\; & \mono{forall}\;a . a :? \;\mathsf{Session}
+      \quad\quad\quad & \text{\emph{receive}} \\
+    \mid\; & \mono{forall}\;a . a :*! \;\mathsf{Session}
+      \quad\quad\quad & \text{\emph{output}} \\
+    \mid\; & \mathsf{Session}\; :+ \;\mathsf{Session}
+      \quad\quad\quad & \text{\emph{alternation}} \\
+    \mid\; & \mathsf{Bal\;Session}
+      \quad\quad\quad & \text{\emph{balanced}} \\
+    \mid\; & \mathsf{End}
+      \quad\quad\quad & \text{\emph{end}} \\
+    \mid\; & \mathsf{Fix\;Session\;Session}
+      \quad\quad\quad & \text{\emph{-* prefix}}
+\end{align*}
+
+Explicit Subtyping $sub : \mathsf{Sub} f g => m f a -> m g a$
+
+
+
+
+\paragraph{Parametric Effect Monad}
+\label{sec:parametric_effect_monad} \hfill
 
 (or \emph{Indexed Monad})
 
@@ -1811,6 +1976,8 @@ Computation (Monad) $T$ Returning Value of Type $A$:
 Return
 
 Bind
+
+Value Polymorphism (\S\ref{sec:value_polymorphism})
 
 \cite{plotkin-pretnar13}:
 
@@ -4237,6 +4404,9 @@ Channel Names $\class{C}$ to Effect Session Types with Algebra:
 Subeffecting $\sqsubseteq$: defining Subeffecting as Subset Inclusion
 instead of the above definition is Unsound as arbitrary Session Types
 could be introduced without a corresponding implementation.
+
+\fist See Graded Monad (\S\ref{sec:graded_monad}) for an example of
+Session Effects Implementation
 
 
 \textbf{Send, Receive, Restriction}
