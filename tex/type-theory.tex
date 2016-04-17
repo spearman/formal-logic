@@ -262,6 +262,37 @@ Values may contain Values of the same Type
 
 Well-founded (\S\ref{sec:well_founded})
 
+general form:
+\[
+  \mu\alpha.T
+\]
+
+$\alpha$ -- Type Variable: may appear in the Type $T$ and stands for
+the entire Type itself
+
+$roll : T[\mu\alpha.T/\alpha] \rightarrow \mu\alpha.T$
+
+$unroll : \mu\alpha.T \rightarrow T[\mu\alpha.T/\alpha]$
+
+Isorecursive (\S\ref{sec:isorecursive_datatype}): $roll$ and $unroll$
+are Inverses
+
+Equirecursive (\S\ref{sec:equirecursive_datatype}): $unroll$ is the
+Identity
+
+
+
+\paragraph{Isorecursive Data Type}\label{sec:isorecursive_datatype}\hfill
+
+$roll$ and $unroll$ are Inverse Functions
+
+
+
+\paragraph{Equirecursive Data Type}\label{sec:equirecursive_datatype}
+\hfill
+
+$unroll$ is an Identity
+
 
 
 \paragraph{Tree}\label{sec:tree_type}\hfill
@@ -278,13 +309,6 @@ Mutally Recursive Defenition: Forest (\S\ref{sec:forest_type})
 \subparagraph{Forest}\label{sec:forest_type}\hfill
 
 Tree (\S\ref{sec:tree_type})
-
-
-
-\paragraph{Isorecursive Data Type}\label{sec:isorecursive_datatype}\hfill
-
-\paragraph{Equirecursive Data Type}\label{sec:equirecursive_datatype}
-\hfill
 
 
 
@@ -1293,6 +1317,14 @@ Dominic Orchard (youtube) -- Simple Types (\S\ref{sec:simply_typed}):
 ``What'', Effect Systems (\S\ref{sec:effect_system}): ``How'', Session
 Types: ``What \& How''
 
+\cite{orchard-yoshida16}: Communication Effects
+(\S\ref{sec:communication_effect}) can be encoded in Session Types,
+but there is no reverse encoding of Session Types into Communication
+Effects because Session Types do not describe the relative
+``Causality'' between Channels (recorded by Communication Effects).
+Session Types are more expressive with respect to Higher-order
+Communication (Delegation \S\ref{sec:delegation}).
+
 Message Sequences are Described by a Regular Language
 (\S\ref{sec:regular_language}) on Atomic Communication Actions
 (\S\ref{sec:communication}); Channel Type (\S\ref{sec:channel_type})
@@ -1485,7 +1517,7 @@ Effects appear in two places:
 \begin{enumerate}
   \item Unit ($\mathsf{return}$) of the Monad -- Labelled with the
     Empty Effect
-  \item Bind Operation ($T^\sigma\tau \mathsf{>>=} (\tau \rightarrow
+  \item Bind Operation ($T^\sigma\tau \bindop (\tau \rightarrow
     T^{\sigma'}\tau')$) of the Monad -- Labelled with the Union of two
     Effects: %FIXME union
     \begin{enumerate}
@@ -1826,24 +1858,26 @@ used in its own Specification
 
 \cite{orchard-yoshida16}:
 
+\fist Note the following uses a Haskell-like notation
+
 carry Effect information as a Type Index
 
-Effect-grade Monad:
+Effect-graded Monad:
 \begin{flalign*}
   & \mono{class}\;\mathsf{Effect}
-    (m : \text{\emph{ef}} \rightarrow * \rightarrow *)
+    (m : \eff \rightarrow * \rightarrow *)
     \;\mono{where} & \\
-  & \quad\quad\mono{type}\;\mathsf{Unit}\;m : \text{\emph{ef}} \\
-  & \quad\quad\mono{type}\;\mathsf{Plus}\;m\;(f : \text{\emph{ef}})
-    \;(g : \text{\emph{ef}}) : \text{\emph{ef}} \\
+  & \quad\quad\mono{type}\;\mathsf{Unit}\;m : \eff \\
+  & \quad\quad\mono{type}\;\mathsf{Plus}\;m\;(f : \eff)
+    \;(g : \eff) : \eff \\
   & \quad\quad\mathsf{return} : a \rightarrow
     m\;(\mathsf{Unit\;m})\;a \\
-  & \quad\quad(\mathsf{>>=}) : m\;f\;a \rightarrow
+  & \quad\quad(\bindop) : m\;f\;a \rightarrow
     (a \rightarrow m\;g\;b) \rightarrow m\;(\mathsf{Plus}\;m\;f\;g)\;b
 \end{flalign*}
 
-$\text{\emph{ef}}$ -- Domain, \emph{Kind}; Set of Effect Annotations
-$\class{F}$
+$\eff$ -- Domain, \emph{Kind} of Effects, i.e. $\eff$ Models a Set of
+Effect Annotations $\class{F}$
 
 $\mathsf{Plus}\;m$ -- Type-level Binary Function implementing $\bullet$
 of the Effect Algebra for $\class{F}$
@@ -1853,7 +1887,7 @@ $\mathsf{Unit}\;m$ -- Constant providing the Unit Element $I$
 $\mathsf{return}$ -- Lifts a Value to a Trivially Effectful
 Computation marked with $I$
 
-$\mathsf{(>>=)}$ -- Sequential Composition of Effectful Computations;
+$(\bindop)$ -- Sequential Composition of Effectful Computations;
 (\emph{Bind}) Rule Models the $\lett$-binding of FPCF
 (\S\ref{sec:fpcf})
 
@@ -1861,7 +1895,7 @@ an FPCF Judgement:
 \[
   \Gamma \vdash M:\tau,F
 \]
-Maps to a ``Monadic Metalanguage Judgement'':
+Maps to a ``Monadic Metalanguage Judgement'': %FIXME
 \[
   \Gamma \vdash [M]:m\;[F]\;\tau
 \]
@@ -1875,25 +1909,6 @@ Session Calculus (\S\ref{sec:session_calculus})
 
 \fist Cf. Session Calculus Embedding into FPCF \S\ref{sec:fpcf})
 
-Graded Monad Instance for $\mathsf{Process}$ (\S\ref{sec:process})
-Datatype:
-\[
-  \mono{data}\;\mathsf{Process}\;(s:[\mathsf{Map\;Name\;Session}])\;a
-    = \mathsf{Proc}\;(\mathsf{IO}\;a)
-\]
-
-$s$ -- Type-level Finite Map Modelling an Environment of Session Type
-information of the form:
-\[
-  '[c :-> s, d :-> t, \ldots]
-\]
-describing an Environment where a Channel $c$ has Session Type $s$, a
-Channel $d$ has Session Type $t$, etc.
-
-Session Environments are Composed Sequentially via the
-$\mathsf{SeqUnion}$ Type-level Function (Modelling $\bullet$ for
-Effect Algebras \S\ref{sec:effect_system})
-
 \emph{Session Effects} are Modelled by the $\mathsf{Session}$
 Datatype:
 \begin{align*}
@@ -1902,9 +1917,9 @@ Datatype:
       \quad\quad\quad & \text{\emph{send}} \\
     \mid\; & \mono{forall}\;a . a :? \;\mathsf{Session}
       \quad\quad\quad & \text{\emph{receive}} \\
-    \mid\; & \mono{forall}\;a . a :*! \;\mathsf{Session}
+    \mid\; & \mono{forall}\;a . a :\kern-2pt*! \;\mathsf{Session}
       \quad\quad\quad & \text{\emph{output}} \\
-    \mid\; & \mathsf{Session}\; :+ \;\mathsf{Session}
+    \mid\; & \mathsf{Session} \altop \mathsf{Session}
       \quad\quad\quad & \text{\emph{alternation}} \\
     \mid\; & \mathsf{Bal\;Session}
       \quad\quad\quad & \text{\emph{balanced}} \\
@@ -1914,8 +1929,70 @@ Datatype:
       \quad\quad\quad & \text{\emph{-* prefix}}
 \end{align*}
 
-Explicit Subtyping $sub : \mathsf{Sub} f g => m f a -> m g a$
+Explicit Subtyping Class: \textturnt
+\begin{flalign*}
+  \quad\quad &
+  \mono{class}\;\mathsf{Sub}\;m\;f\;g\;\mono{where}\;
+    \mathsf{sub} : \mathsf{Sub}\;f\;g \Rightarrow
+      m\;f\;a \rightarrow m\;g\;a &
+\end{flalign*}
 
+Graded Monad Instance for $\mathsf{Process}$ (\S\ref{sec:process})
+Datatype:
+\begin{flalign*}
+  \quad\quad
+  & \mono{data}\;\mathsf{Process}\;(s:[\mathsf{Map\;Name\;Session}])\;a
+    = \mathsf{Proc}\;(\mathsf{IO}\;a) & \\
+  \quad\quad & \hfill & \\
+  \quad\quad
+  & \mono{instance}\;\mathsf{Effect\;Process}\;\mono{where} & \\
+  \quad\quad
+  & \quad \mono{type}\;\mathsf{Plus\;Process}\;f\;g
+    = \mathsf{SeqUnion}\;f\;g & \\
+  \quad\quad
+  & \quad \mono{type}\;\mathsf{Unit\;Process} = '[] & \\
+  \quad\quad & \hfill & \\
+  \quad\quad
+  & \mono{instance}\;\mathsf{Sub\;Process}\;f\;g \Rightarrow & \\
+  \quad\quad
+  & \quad \mathsf{Sub\;Process}\;((c :\rightarrow s) \hastypef f)\;
+    ((c :\rightarrow s \altop t) \hastypef g) & \\
+\end{flalign*}
+
+$s$ -- Type-level Finite Map Modelling an Environment of Session Type
+information of the form:
+\[
+  '[c :\rightarrow s, d :\rightarrow t, \ldots]
+\]
+describing an Environment where a Channel $c$ has Session Type $s$, a
+Channel $d$ has Session Type $t$, etc.
+
+Session Environments are Composed Sequentially via the
+$\mathsf{SeqUnion}$ Type-level Function (Modelling $\bullet$ for
+Effect Algebras \S\ref{sec:effect_system})
+
+Operations from Embedding of Session Calculus in FPCF: %FIXME
+
+$\mathsf{send}$
+
+$\mathsf{rsend}$
+
+$\mathsf{chSend}$
+
+$\mathsf{recv}$
+
+$\mathsf{chRecv}$
+
+$\mathsf{new}$
+
+(duality type-class)
+
+\fist Haskell does not have Equirecursive Types
+(\S\ref{sec:equirecursive_datatype}) so the Implementation restricts
+Recursion to only definitions that Induce an \emph{Affine Effect
+  Equation} (???). %FIXME
+
+(specialized affineFix combinator) %FIXME
 
 
 
@@ -2102,6 +2179,18 @@ Handling Computations
 
 
 \subsubsection{State Effect}\label{sec:state_effect}
+
+\subsubsection{Communication Effect}\label{sec:communication_effect}
+
+Jouvelot-Gifford89
+
+\cite{nielson-nielson99}
+
+\cite{orchard-yoshida16}: Communication Effects can be encoded in
+Session Types (\S\ref{sec:session_type}), but there is no reverse
+encoding of Session Types into Communication Effects because Session
+Types do not describe the relative ``Causality'' between Channels
+(recorded by Communication Effects).
 
 
 
@@ -4107,6 +4196,10 @@ Branching Control Flow (Alternation)
 Session Calculus (\S\ref{sec:session_calculus}) and a reverse
 Embedding of Session Calculus into FPCF.
 
+\fist Cf. GV (\S\ref{sec:good_variation}) a Linear Functional Language
+with Session Types \cite{wadler12} -- FPCF is not fundamentally
+Linear, but Linearity for Sessions is implemented via an Effect
+Algebra and Typing.
 
 \textbf{Syntax}
 
@@ -4670,6 +4763,17 @@ Property holds for the Encoding up to Non-termination Effects %FIXME
 
 
 
+\subparagraph{metaFPCF}\label{sec:meta_fpcf}\hfill
+
+\cite{orchard-yoshida16}
+
+Monadic Metalanguage - Moggi91 %FIXME
+
+Monadic Type Constructor $T$ augmented with an Effect Annotation
+\cite{wadler-thiemann03}
+
+
+
 \subsubsection{Reflexive Domain}\label{sec:reflexive_domain}
 
 Dana Scott %FIXME
@@ -4775,6 +4879,12 @@ Session Types $\subset$ Types
 \fist See \emph{Classical Processes} (CP
 \S\ref{sec:classical_processes}) for a Session-typed $\pi$-calculus
 Translation
+
+Encoding CP into GV: Operational Correspondence (Lindley-Morris15)
+
+\fist Cf. FPCF (\S\ref{sec:fpcf}) \cite{orchard-yoshida16} -- FPCF is
+not fundamentally Linear, but Linearity for Sessions is implemented
+via an Effect Algebra and Typing.
 
 No Deadlock
 
