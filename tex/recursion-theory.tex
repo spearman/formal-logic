@@ -439,9 +439,10 @@ $\lambda$-calculus.
 
 
 
-\subsubsection{Lambda Expression}\label{sec:lambda_expression}
+\subsubsection{$\lambda$-expression}\label{sec:lambda_expression}
 
-A \emph{Lambda Expression} is an Expression in the Language of Untyped
+A \emph{$\lambda$-expression} is an Expression
+(\S\ref{sec:expression}) in the Language of Untyped
 $\lambda$-calculus.
 
 The Language of Untyped $\lambda$-calculus consists of the Symbols:
@@ -451,7 +452,7 @@ The Language of Untyped $\lambda$-calculus consists of the Symbols:
   \item Parentheses $\{ (, ) \}$
 \end{itemize}
 
-The Set of Lambda Expressions, $\Lambda$, is defined Inductively:
+The Set of $\lambda$-expressions, $\Lambda$, is defined Inductively:
 \begin{enumerate}
   \item $x \in V \Rightarrow x \in \Lambda$
   \item $x \in V \wedge M \in \Lambda \Rightarrow (\lambda x.M) \in
@@ -480,29 +481,29 @@ Notational conventions:
     \]
 \end{itemize}
 
-A Lambda Expression with no Free Variables is \emph{Closed}, or
+A $\lambda$-expression with no Free Variables is \emph{Closed}, or
 sometimes referred to as \emph{Combinators}, equivalent to Terms in
 Combinatory Logic (\S\ref{sec:combinatory_logic}).
 
 A Function $f : \mathbb{N} \rightarrow \mathbb{N}$ is a Computable
 Function (\S\ref{sec:computable_function}) if and only if there is a
-Lambda Expression $F$ such that:
+$\lambda$-expression $F$ such that:
 \[
   \forall x,y \in \mathbb{N} (f(x)=y \leftrightarrow F x =_\beta y)
 \]
 
 
 
-\subsubsection{Lambda Abstraction}\label{sec:lambda_abstraction}
+\subsubsection{$\lambda$-abstraction}\label{sec:lambda_abstraction}
 
-\emph{Lambda Abstraction} is the definition of an \emph{Anonymous
+\emph{$\lambda$-abstraction} is the definition of an \emph{Anonymous
   Function} by the Abstraction Operator $\lambda$ applied to a
 Variable (or \emph{Formal Parameter}) $x \in V$ as Binding all Free
 occurences of that Variable in the \emph{Body} following the '$.$'
 Symbol.
 
-The Variable named by the Lambda Abstraction is \emph{$lambda$-bound}
-(or just \emph{Bound}) by the Abstraction.
+The Variable named by the $\lambda$-abstraction is
+\emph{$lambda$-bound} (or just \emph{Bound}) by the Abstraction.
 
 
 
@@ -564,7 +565,7 @@ For a Lambda Term $t$ with Free Variable $x$, a \emph{Substitution}
 $t[x/s]$ is the replacement of all occurences of $x$ by a Term $s$.
 
 Substitution is defined uniquiely up to $\alpha$-equivalence
-(\S\ref{sec:alpha_conversion}).
+(\S\ref{sec:alpha_equivalence}).
 
 \fist See also Substitution (Logic \S\ref{sec:substitution})
 
@@ -582,36 +583,6 @@ Substitution is defined uniquiely up to $\alpha$-equivalence
 
 
 
-\subsubsection{$\alpha$-conversion}\label{sec:alpha_conversion}
-
-\emph{$\alpha$-conversion} (or \emph{$\alpha$-renaming}) is a renaming
-of Bound Variables in a Term that results in an $\alpha$-equivalent
-Term:
-\[
-  \lambda x.x =_\alpha \lambda y.y
-\]
-
-\emph{Variable Convention}:
-\begin{enumerate}
-  \item Bound Variables are distinct from Free Variables
-  \item ``Binders'' only Bind Variables not already in Scope % FIXME
-\end{enumerate}
-
-When represented as De Bruijn Indices (\S\ref{sec:debruijn_index}),
-$\alpha$-equivalent Expressions are Syntactically identical.
-
-\fist See also Nominal Logic (\S\ref{sec:nominal_logic})
-
-
-
-\paragraph{De Bruijn Index}\label{sec:debruijn_index}\hfill
-
-\emph{De Bruijn Indices} ``name-free''
-
-Higher-order Abstract Syntax (\S\ref{sec:hoas})
-
-
-
 \subsubsection{Contraction}\label{sec:contraction}\cite{seldin03}
 
 Replacement of Subterms:
@@ -619,45 +590,6 @@ Replacement of Subterms:
   \item $\lambda x . M =_\alpha \lambda y . [y/x]M$
   \item $(\lambda x . M)N =_\beta [N/x]M$
 \end{enumerate}
-
-
-
-\subsubsection{$\beta$-reduction}\label{sec:beta_reduction}
-
-A \emph{$\beta$-reduction} is a Sequence of Zero or more Contractions
-(\S\ref{sec:contraction}). A Term $M$ that Reduces to a Term $N$ is
-written $M \rhd N$. $\beta$-reduction may not Terminate but
-$\beta$-reduction is Confluent (\S\ref{sec:rewrite_confluence}).
-
-As a Semantics for Functional Programming, a $\beta$-contraction
-corresponds to a Computational Step.
-
-Synchronization in Session Calculus (\S\ref{sec:session_calculus})
-\cite{orchard-yoshida16}
-
-
-
-\subsubsection{$\beta$-conversion}\label{sec:beta_conversion}
-\cite{seldin03}
-
-A \emph{$\beta$-conversion} is a Sequence of Zero or more Contractions
-or reverse Contractions. A Conversion from Term $M$ to Term $N$ is
-denoted $M =_* N$.
-
-
-
-\subsubsection{$\eta$-conversion}\label{sec:eta_conversion}
-
-\emph{$\eta$-reduction}:
-\[
-  \lambda x.y x \rightarrow_\eta y
-\]
-\emph{$\eta$-abstraction}:
-\[
-  y \rightarrow_\eta \lambda x.y x
-\]
-
-Extensional (\S\ref{sec:extension}) Equivalence of Expressions
 
 
 
@@ -746,6 +678,12 @@ Call-by-reference -- Function Application Evaluates the Argument
 before proceeding to Evaluation of the Function Body: allows lookup of
 the current Value of the Argument as well as modofication via
 Assignment
+
+nCatLab:
+
+in Denotational Semantics, Positive Types (\S\ref{sec:positive_type}),
+i.e. Types whose Constructors are Primary, are ``Well-behaved'' with
+respect to Eager Evaluation Strategies
 
 
 
@@ -1920,6 +1858,8 @@ Session + Recursion $\Rightarrow$ Unbounded Thread of Communications
 
 
 
+\subsubsection{Session Protocol}\label{sec:session_protocol}
+
 \subsubsection{Session Initiation}\label{sec:session_initiation}
 
 \cite{honda-vasconcelos-kubo98}:
@@ -1939,6 +1879,8 @@ Session Initiation Channels, Standard Types $!A$
 
 
 
+\subsubsection{Finite Session}\label{sec:finite_session}
+
 \subsubsection{Continuation Session}\label{sec:continuation_session}
 
 Continuation (\S\ref{sec:continuation})
@@ -1948,9 +1890,23 @@ $A \otimes B$: First $A$ is Sent as Output and then behaves (???) as
 
 
 
-\subsubsection{Session Protocol}\label{sec:session_protocol}
+\subsubsection{Effect Session}\label{sec:effect_session}
 
-\subsubsection{Finite Session}\label{sec:finite_session}
+\cite{orchard-yoshida16}
+
+Effect (\S\ref{sec:effect})
+
+Effect System (\S\ref{sec:effect_system})
+
+Embedding FPCF (\S\ref{sec:fpcf}) into Session Calculus
+(\S\ref{sec:session_calculus})
+
+\emph{Effect Handler} (\S\ref{sec:effect_handler}) Process, e.g.
+Variable Agent (\S\ref{sec:variable_agent})
+
+\emph{Effect Channel}
+
+
 
 \subsubsection{Session Polymorphism}\label{sec:session_polymorphism}
 
@@ -3732,6 +3688,8 @@ $\Delta'$ is Balanced.
 
 
 \textbf{FPCF Embedding}
+
+Effect Session (\S\ref{sec:effect_session})
 
 (requirements) %FIXME
 

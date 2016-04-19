@@ -91,18 +91,38 @@ Term Rewrite System (\S\ref{sec:term_rewriting})
 Meaning Explanation (\S\ref{sec:meaning_explanation})
 
 
+\asterism
+
+
+Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type}): Agda
+
+Calculus of Constructions (\S\ref{sec:coq}): Coq
+
+
 
 % ====================================================================
 \section{Expression}\label{sec:type_expression}
 % ====================================================================
 
-An \emph{Expression} is an Equivalence Class of Syntactic forms which
-differ in the names of \emph{Bound Variables}. That is, changing the
-name of a Bound Variable everywhere within an Expression
-(\emph{$\alpha$-conversion}) does not change the Expression.
+An \emph{Expression} (Syntactic Expression \S\ref{sec:expression}) is
+an Equivalence Class of Syntactic Forms which differ in the Names of
+\emph{Bound Variables}. That is, changing the Name of a Bound Variable
+everywhere within an Expression (\emph{$\alpha$-conversion}
+\S\ref{sec:alpha_conversion}) does not change the Expression.
 
-A Variable is Bound in an Expression by an \emph{Abstraction}
-expressing that the Variable is \emph{local} to the Expression:
+some Expressions:
+\begin{enumerate}
+  \item Term (\S\ref{sec:term})
+  \item Type (\S\ref{sec:type})
+  \item Proposition (\S\ref{sec:proposition})
+  \item Context (\S\ref{sec:context})
+\end{enumerate}
+
+\fist $\lambda$-expression (\S\ref{sec:lambda_expression})
+
+A Variable is Bound in an Expression by an \emph{Abstraction} (e.g.
+$\lambda$-abstraction \S\ref{sec:lambda_abstraction}) expressing that
+the Variable is \emph{Local} to the Expression:
 \[
   \lambda x.B
 \]
@@ -111,14 +131,52 @@ or:
   x.B
 \]
 
-\emph{Substitution}:
+\emph{Substitution} (e.g. $\lambda$-substitution
+\S\ref{sec:lambda_substitution}):
 \[
-  [a/x]B
+  [a \backslash x]B
 \]
+or:
+\[
+  B[x/a]
+\]
+
 Substitute Term $a$ for Free occurrences of Variable $x$ in the Term
 $B$. Generalized:
 \[
-  [a_1,\ldots,a_n / x_1,\ldots,x_n]B
+  B[x_1,\ldots,x_n / a_1,\ldots,a_n]
+\]
+
+\fist See also Substitution (Logic \S\ref{sec:substitution})
+
+
+\asterism
+
+nCatLab:
+
+$\beta$-reduction (\S\ref{sec:beta_reduction}) -- how to Simplify a Term
+that involves an Eliminator Applied to a Constructor, e.g.
+$\lambda$-application (Eliminator) Applied to $\lambda$-abstraction
+(Constructor):
+\[
+  (\lambda x.b)(a):B
+\]
+$\beta$-reduces (or Evaluates or Computes) to:
+\[
+  b[a/x]
+\]
+where $b : A \rightarrow B$, $a:A$
+
+$\eta$-reduction (\S\ref{sec:eta_reduction}) -- how to Simplify a Term
+that involves a Constructor applied to an Eliminator, e.g.
+$\lambda$-abstraction (Constructor) Applied to $\lambda$-application
+(Eliminator):
+\[
+  \lambda x.f(x)
+\]
+$\eta$-reduces to:
+\[
+  f
 \]
 
 
@@ -142,37 +200,151 @@ a Typing Derivation (\S\ref{sec:typing_derivation}) exists.
 
 
 
+% --------------------------------------------------------------------
+\subsection{Term Constructor}\label{sec:term_constructor}
+% --------------------------------------------------------------------
+
+\fist Cf. Type Constructor (\S\ref{sec:type_constructor})
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\alpha$-conversion}\label{sec:alpha_conversion}
+% --------------------------------------------------------------------
+
+\emph{$\alpha$-conversion} (or \emph{$\alpha$-renaming}) is a renaming
+of Bound Variables in a Term that results in an $\alpha$-equivalent
+(\S\ref{sec:alpha_equivalence}) Term:
+\[
+  \lambda x.x =_\alpha \lambda y.y
+\]
+
+\emph{Variable Convention}:
+\begin{enumerate}
+  \item Bound Variables are distinct from Free Variables
+  \item ``Binders'' only Bind Variables not already in Scope % FIXME
+\end{enumerate}
+
+When represented as De Bruijn Indices (\S\ref{sec:debruijn_index}),
+$\alpha$-equivalent Expressions are Syntactically identical.
+
+\fist See also Nominal Logic (\S\ref{sec:nominal_logic})
+
+
+
+\subsubsection{$\alpha$-equivalence}\label{sec:alpha_equivalence}
+
+\subsubsection{De Bruijn Index}\label{sec:debruijn_index}\hfill
+
+\emph{De Bruijn Indices} ``name-free''
+
+Higher-order Abstract Syntax (\S\ref{sec:hoas})
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\beta$-conversion}\label{sec:beta_conversion}
+% --------------------------------------------------------------------
+\cite{seldin03}
+
+A \emph{$\beta$-conversion} is a Sequence of Zero or more
+\emph{$beta$-reductions} (Contractions \S\ref{sec:contraction}) or
+\emph{$beta$-expansions} (reverse Contractions). A Conversion from
+Term $M$ to Term $N$ is denoted $M =_* N$.
+
+
+
+\subsubsection{$\beta$-reduction}\label{sec:beta_reduction}
+
+A \emph{$\beta$-reduction} is a Sequence of Zero or more Contractions
+(\S\ref{sec:contraction}). A Term $M$ that Reduces to a Term $N$ is
+written $M \rhd N$. $\beta$-reduction may not Terminate but
+$\beta$-reduction is Confluent (\S\ref{sec:rewrite_confluence}).
+
+Dual to $\eta$-expansion (\S\ref{sec:eta_expansion})
+
+As a Semantics for Functional Programming, a $\beta$-reduction
+corresponds to a Computational Step.
+
+for Function Types (\S\ref{sec:function_type})
+
+for Inductive Types (\S\ref{sec:inductive_type}): $\iota$-reduction
+(\S\ref{sec:iota_reduction})
+
+Synchronization in Session Calculus (\S\ref{sec:session_calculus})
+\cite{orchard-yoshida16}
+
+
+
+\paragraph{$\iota$-reduction}\label{sec:iota_reduction}\hfill
+
+analogous reduction for Inductive Types (\S\ref{sec:inductive_type})
+
+
+
+\subsubsection{$\beta$-expansion}\label{sec:beta_expansion}
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\eta$-conversion}\label{sec:eta_conversion}
+% --------------------------------------------------------------------
+
+\emph{$\eta$-abstraction} ($\eta$-expansion \S\ref{sec:eta_expansion}):
+\[
+  y \rightarrow_\eta \lambda x.y x
+\]
+\emph{$\eta$-reduction} (\S\ref{sec:eta_reduction}):
+\[
+  \lambda x.y x \rightarrow_\eta y
+\]
+
+Extensional (\S\ref{sec:extension}) Equivalence of Expressions
+
+
+
+\subsubsection{$\eta$-expansion}\label{sec:eta_expansion}
+
+Dual to $\beta$-reduction (\S\ref{sec:beta_reduction})
+
+introducing a Constructor/Eliminator Pair
+
+
+
+\subsubsection{$\eta$-reduction}\label{sec:eta_reduction}
+
+
+
 % ====================================================================
 \section{Type}\label{sec:type}
 % ====================================================================
+
+Formula (\S\ref{sec:formula})
+
+Proposition (\S\ref{sec:proposition})
+
+%FIXME move dependent types?
+
+Dependent Types (\S\ref{sec:dependent_type})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Type Constant}\label{sec:type_constant}
 % --------------------------------------------------------------------
 
-\emph{Type Constant} (or \emph{Base Type} or \emph{Atomic Type})
+\emph{Type Constant} (also \emph{Primitive Type} or \emph{Base Type}
+or \emph{Atomic Type})
 
 Uninterpreted (\S\ref{sec:uninterpreted_function}) % FIXME
 
 
 
 % --------------------------------------------------------------------
-\subsection{Principal Type}\label{sec:principal_type}
+\subsection{Composite Type}\label{sec:composite_type}
 % --------------------------------------------------------------------
 
-Type System with Principal Type Property
-
-given a Term, all other Types are instances of the Principal Type
-
-Type Inference
-
-%FIXME xref
-Robinson's Unification Algorithm, used by Hindley-Milner Type
-Inference
-
-Polymorphic Recursion makes Inference of the Principal Type Undecidable
-
-Generalized Algebraic Data Types negates the Principal Type Property
+Algebraic Types (\S\ref{sec:algebraic_type})
 
 
 
@@ -180,14 +352,100 @@ Generalized Algebraic Data Types negates the Principal Type Property
 \subsection{Type Order}\label{sec:type_order}
 % --------------------------------------------------------------------
 
-In Simply-typed $\lambda$-calculus ($\lambda^\rightarrow$), the
-\emph{Order} of a Type $\tau$, denoted $o(\tau)$, is defined
-Inductively as:
+In Simply-typed $\lambda$-calculus ($\lambda^\rightarrow$
+\S\ref{sec:simply_typed})), the \emph{Order} of a Type $\tau$, denoted
+$o(\tau)$, is defined Inductively as:
 \begin{itemize}
-\item $o(T) = 0$ if $T$ is a Base Type
+\item $o(T) = 0$ if $T$ is a Base Type (\S\ref{sec:type_constant})
 \item $o(\sigma \rightarrow \tau) = \text{max}(o(\sigma) + 1,
   o(\tau))$
 \end{itemize}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Type Polarity}\label{sec:type_polarity}
+% --------------------------------------------------------------------
+
+Constructors (\S\ref{sec:constructor})
+
+Deconstructors (\S\ref{sec:deconstructor})
+
+
+\asterism
+
+
+Data Constructor
+
+A \emph{Constructor} Introduces a Data Type on the right-hand side of
+a definition.
+
+A \emph{Destructor} Eliminates a Data Type on the left-hand side of a
+definition.
+
+Elimination for (Finite) Data corresponds to (Well-founded)
+Recursion.
+
+Introduction for Codata corresponds to Corecursion.
+
+%FIXME
+
+
+
+\subsubsection{Constructor}\label{sec:constructor}
+
+Term Constructor (\S\ref{sec:term_constructor})
+
+Type Constructor (\S\ref{sec:type_constructor})
+
+
+
+\subsubsection{Deconstructor}\label{sec:deconstructor}
+
+(or \emph{Eliminator})
+
+
+
+\subsubsection{Positive Type}\label{sec:positive_type}
+
+nCatLab:
+
+\emph{Constructors} regarded as ``primary'': Eliminators are Derived
+from Constructors by the Rule that to ``Use'' (Eliminate) an Element
+of a Positive Type it is necessary and sufficient to specify what
+should be done for all possible ways the Element could have been
+Constructed
+
+e.g. Inductive Types (\S\ref{sec:inductive_type}): Sum Type, Product
+Type$^*$, Dependent Sum Type, Empty Type, Unit Type, Identity Type
+%FIXME
+
+Categorical Semantics: ``From the left'' Universal Properties, i.e.
+``Mapping out'' ???
+
+Denotational Semantics: well-behaved with respect to Strict Evaluation
+Strategies (\S\ref{sec:strict_evaluation})
+
+
+
+\subsubsection{Negative Type}\label{sec:negative_type}
+
+nCatLab:
+
+\emph{Eliminators} regarded as ``primary'': Constructors are Derived
+from Eliminators by the Rule that to Construct an Element of a
+Negative Type it is necessary and sufficient to specify how that
+Element ``behaves'' when Applying all of the Eliminators to it
+
+e.g. Coinductive Types (\S\ref{sec:coinductive_type}), Dependent
+Product Types (\S\ref{sec:dependent_product}): Function Type
+%FIXME
+
+Categorical Semantics: ``From the right'' Universal Properties, i.e.
+``Mapping in'' ???
+
+Denotational Semantics: well-behaved with respect to Non-strict
+Evaluation Strategies (\S\ref{sec:nonstrict_evaluation})
 
 
 
@@ -205,6 +463,8 @@ In Second-order $\lambda$-calculus (\S\ref{sec:system_f}), a
 Type is Inhabited if and only if its corresponding Proposition is a
 Tautology of Second-order Logic (\S\ref{sec:secondorder_logic}).
 
+Empty Type (\S\ref{sec:empty_type})
+
 
 
 % --------------------------------------------------------------------
@@ -216,6 +476,69 @@ Tautology of Second-order Logic (\S\ref{sec:secondorder_logic}).
 % --------------------------------------------------------------------
 
 Infinite Data Type (\S\ref{sec:infinite_datatype})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Universe Type}\label{sec:universe_type}
+% --------------------------------------------------------------------
+
+A \emph{Universe Type} contains all other Types, see Type Universe
+(\S\ref{sec:type_universe}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Empty Type}\label{sec:empty_type}
+% --------------------------------------------------------------------
+
+Type with no Terms
+
+\[
+  \frac{}
+  {\emptyset:\Type}
+\]
+
+%FIXME
+
+Positive Type (\S\ref{sec:positive_type}): no Constructors
+
+Negative Type (\S\ref{sec:negative_type}): Eliminator for any Term of
+any Type ???
+
+since the Empty Type contains no Elements, there are no Constructor
+Rules; given an Element of $\emptyset$ one can Construct an Element of
+any Type
+
+the Positive and Negative definitions are Provably Equivalent, but
+only using Contraction and Weakining Rules; therefore in Linear Type
+Systems (\S\ref{sec:linear_type}) they are distinct with the Positive
+Empty Type $0$ and Negative Empty Type $\bot$.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Unit Type}\label{sec:unit_type}
+% --------------------------------------------------------------------
+
+``the'' Type with a Unique Term; special case of Product: Nullary
+Product
+
+\[
+  \frac{}
+  {():\Unit}
+\]
+
+Positive Type (\S\ref{sec:positive_type}): single Constructor $()$
+
+Negative Type (\S\ref{sec:positive_type}): no Eliminators
+
+Equivalence of Positive and Negative definitions uses Contraction and
+Weakening Rules; therefore in Linear Type Systems
+(\S\ref{sec:linear_type}) they are distinct with the Positive Unit
+Type $1$ and Negative Unit Type $\top$.
+
+Homotopy, Contractible Type %FIXME
 
 
 
@@ -242,116 +565,45 @@ Reflexivity):
 
 
 
-% --------------------------------------------------------------------
-\subsection{Power Type}\label{sec:power_type}
-% --------------------------------------------------------------------
+\subsubsection{Congruence Type}\label{sec:congruence_type}
 
-$P A$ the Type of all Subtypes (\S\ref{sec:power_type}) of $A$
+%FIXME equality type?
 
 
 
 % --------------------------------------------------------------------
-\subsection{Data Type}\label{sec:data_type}
+\subsection{Quotient Type}\label{sec:quotient_type}\hfill
 % --------------------------------------------------------------------
 
-\subsubsection{Recursive Data Type}\label{sec:recursive_datatype}
+Set Theoretic Quotients
 
-or (\emph{Inductive Data Type})
-
-Values may contain Values of the same Type
-
-Well-founded (\S\ref{sec:well_founded})
-
-general form:
-\[
-  \mu\alpha.T
-\]
-
-$\alpha$ -- Type Variable: may appear in the Type $T$ and stands for
-the entire Type itself
-
-$roll : T[\mu\alpha.T/\alpha] \rightarrow \mu\alpha.T$
-
-$unroll : \mu\alpha.T \rightarrow T[\mu\alpha.T/\alpha]$
-
-Isorecursive (\S\ref{sec:isorecursive_datatype}): $roll$ and $unroll$
-are Inverses
-
-Equirecursive (\S\ref{sec:equirecursive_datatype}): $unroll$ is the
-Identity
+Categorical Semantics: Quotient Object (\S\ref{sec:quotient_object}) /
+Coequalizer (\S\ref{sec:coequalizer})
 
 
 
-\paragraph{Isorecursive Data Type}\label{sec:isorecursive_datatype}\hfill
-
-$roll$ and $unroll$ are Inverse Functions
-
-
-
-\paragraph{Equirecursive Data Type}\label{sec:equirecursive_datatype}
-\hfill
-
-$unroll$ is an Identity
-
-
-
-\paragraph{Tree}\label{sec:tree_type}\hfill
-
-Tree (Graph Theory \S\ref{sec:tree})
-
-Mutally Recursive Defenition: Forest (\S\ref{sec:forest_type})
-
-
-
-\paragraph{Mutually Recursive Data Type}
-\label{sec:mutually_recursive_datatype}\hfill
-
-\subparagraph{Forest}\label{sec:forest_type}\hfill
-
-Tree (\S\ref{sec:tree_type})
-
-
-
-\paragraph{Infinite Data Type}\label{sec:infinite_datatype}\hfill
-
-(Proof Object) Definition by Recursion: Proof by Induction
-
-
-
-\subsubsection{Composite Data Type}\label{sec:composite_datatype}
-
-\subsubsection{Algebraic Data Type}\label{sec:algebraic_datatype}
+% --------------------------------------------------------------------
+\subsection{Algebraic Type}\label{sec:algebraic_type}
+% --------------------------------------------------------------------
 
 Trees (\S\ref{sec:tree})
-
-$W$ Type
 
 All standard Algebraic Data Types are Functors (\S\ref{sec:functor}).
 A Parametrically Polymorphic (\S\ref{sec:parametric_polymorphism})
 Function between two such Functors is a Natural Transformation
 (\S\ref{sec:natural_transformation}).
 
-Algebraic Data Types form a Semiring (\S\ref{sec:semiring})
+Algebraic Types form a Semiring (\S\ref{sec:semiring})
 
 
 
-\paragraph{Sum Type}\label{sec:sum_type}\hfill
-
-(or \emph{Variant Type} or \emph{Tagged Union})
-
-Corresponds to Disjoint Union (\S\ref{sec:disjoint_union})
-
-Coproduct (\S\ref{sec:coproduct})
-
-Choices, Multiple ``Classes'' of Data
-
-
-
-\paragraph{Product Type}\label{sec:product_type}\hfill
+\subsubsection{Product Type}\label{sec:product_type}\hfill
 
 (or \emph{Record Type})
 
 (Cartesian) Product Types: Structs, Tuples
+
+several Values called \emph{Fields}
 
 If $\sigma$ and $\tau$ are Types, then $\sigma \times \tau$ is a Type
 
@@ -373,79 +625,28 @@ where $\equiv$ is Judgemental Equality.
 
 
 
-\paragraph{Coproduct Type}\label{sec:coproduct_type}\hfill
+\subsubsection{Sum Type}\label{sec:sum_type}\hfill
 
-%FIXME sum type?
+(also \emph{Coproduct Type} or \emph{Variant Type} or \emph{Tagged
+  Union})
 
+several Classes of Values called \emph{Variants}
 
+Corresponds to Disjoint Union (\S\ref{sec:disjoint_union})
 
-\paragraph{Quotient Type}\label{sec:quotient_type}\hfill
+Coproduct (\S\ref{sec:coproduct})
 
-Set Theoretic Quotients
-
-Categorical Semantics: Quotient Object (\S\ref{sec:quotient_object}) /
-Coequalizer (\S\ref{sec:coequalizer})
-
-
-
-\subsubsection{Generalized Algebraic Data Type}\label{sec:gadt}
-
-\subsubsection{Logically Qualified Data Type}
-\label{sec:logically_qualified}\cite{rondon-kawaguchi-jhala08}
-
-\emph{Liquid Type}
-
-Predicate Abstraction (\S\ref{sec:predicate_abstraction})
-
-Logical Qualifier: Boolean Predicate
-
-Dependent Type where the Refinement Predicate
-(\S\ref{sec:refinement_type}) is a Conjunction of Logical Qualifiers.
-
-Value Variable
-
-Base Refinement:
-\[
-  \{ v : B | e \}
-\]
-where $e$ is a Boolean-valued Expression constraining $v$ called a
-\emph{Refinement Predicate}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Data Constructor}\label{sec:data_constructor}
-% --------------------------------------------------------------------
-
-A \emph{Constructor} Introduces a Data Type on the right-hand side of
-a definition.
-
-A \emph{Destructor} Eliminates a Data Type on the left-hand side of a
-definition.
-
-Elimination for (Finite) Data corresponds to (Well-founded)
-Recursion.
-
-Introduction for Codata corresponds to Corecursion.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Congruence Type}\label{sec:congruence_type}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Universe Type}\label{sec:universe_type}
-% --------------------------------------------------------------------
-
-A \emph{Universe Type} contains all other Types, see Type Universe
-(\S\ref{sec:type_universe}).
+Choices, Multiple ``Classes'' of Data
 
 
 
 % --------------------------------------------------------------------
 \subsection{Inductive Type}\label{sec:inductive_type}
 % --------------------------------------------------------------------
+
+\emph{Inductive Type} (or \emph{Recursive Type})
+
+W-type
 
 Monotonic Type Function $\Theta : \sigma \Rightarrow \tau$
 
@@ -458,15 +659,35 @@ Type Constructor (\S\ref{sec:type_constructor})
 Structural Recursion (\S\ref{sec:structural_recursion})
 
 Streams between interacting processes in Programming Languages
+Recursive Data Type
 
 
+\asterism
 
-\subsubsection{Coinductive Type}\label{sec:coinductive_type}
 
-\emph{Coinductive Type} (\emph{Codata}), Coinduction
-(\S\ref{sec:coinduction})
+Recursive Data Type
 
-Terminal Coalgebras (\S\ref{sec:terminal_coalgebra})
+Values may contain Values of the same Type
+
+Well-founded (\S\ref{sec:well_founded})
+
+general form:
+\[
+  \mu\alpha.T
+\]
+
+$\alpha$ -- Type Variable: may appear in the Type $T$ and stands for
+the entire Type itself
+
+$roll : T[\mu\alpha.T/\alpha] \rightarrow \mu\alpha.T$
+
+$unroll : \mu\alpha.T \rightarrow T[\mu\alpha.T/\alpha]$
+
+Isorecursive (\S\ref{sec:isorecursive_type}): $roll$ and $unroll$
+are Inverses
+
+Equirecursive (\S\ref{sec:equirecursive_type}): $unroll$ is the
+Identity
 
 
 
@@ -511,6 +732,57 @@ Algebra and Final Coalgebras are Isomorphic.
 
 
 
+\subsubsection{Isorecursive Type}\label{sec:isorecursive_type}
+
+$roll$ and $unroll$ are Inverse Functions
+
+
+
+\subsubsection{Equirecursive Data Type}\label{sec:equirecursive_type}
+
+$unroll$ is an Identity
+
+
+
+\subsubsection{Mutually Recursive Type}
+\label{sec:mutually_recursive}\hfill
+
+a Forest (\S\ref{sec:forest_type}) is a Mutually Recursive Definition
+of a Tree (\S\ref{sec:tree_type})
+
+
+
+\subsubsection{Infinite Data Type}\label{sec:infinite_datatype}\hfill
+
+(Proof Object) Definition by Recursion: Proof by Induction
+
+
+
+\subsubsection{Tree}\label{sec:tree_type}\hfill
+
+Tree (Graph Theory \S\ref{sec:tree})
+
+Mutally Recursive Definition: Forest (\S\ref{sec:forest_type})
+
+
+
+\subsubsection{Forest}\label{sec:forest_type}\hfill
+
+Mutually Recursive Definition of a Tree (\S\ref{sec:tree_type})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Coinductive Type}\label{sec:coinductive_type}
+% --------------------------------------------------------------------
+
+\emph{Coinductive Type} (\emph{Codata}), Coinduction
+(\S\ref{sec:coinduction})
+
+Terminal Coalgebras (\S\ref{sec:terminal_coalgebra})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Concrete Type}\label{sec:concrete_type}
 % --------------------------------------------------------------------
@@ -542,8 +814,10 @@ a Type that is not Abstract is a Concrete Type
 Abstract Type with no Implementation: Protocol, Interface, etc.
 
 
+\asterism
 
-\subsubsection{Abstract Data Type}\label{sec:abstract_datatype}
+
+Abstract Data Type
 
 Type defined by certain Properties %FIXME
 
@@ -552,9 +826,11 @@ Type (with associated Operations) whose Representation is hidden
 Co-algebra (\S\ref{sec:coalgebra})
 
 \begin{itemize}
-  \item Primitive Types in certain Programming Languages (e.g. Haskell)
-  \item Parameterized Data Types (\S\ref{sec:parametric_datatype}, a
-    weak form of Abstract Data Type)
+  \item Primitive (Base) Types (\S\ref{sec:type_constant}) -- in
+    certain Programming Languages (e.g. Haskell)
+  \item Parameterized (Generic) Types (\S\ref{sec:generic_type}) -- a
+    weak form of Abstract Type; an instance of Parametric Polymorphism
+    \S\ref{sec:parametric_polymorphism})
   \item Type Class (Constrained Type \S\ref{sec:constrained_type})
 \end{itemize}
 
@@ -564,10 +840,10 @@ Type of ``Program Fragments'' (\fist Cf. Algebraic Effects
 
 
 
-\paragraph{Parametric Data Type}\label{sec:parametric_datatype}\hfill
+\subsubsection{Generic Type}\label{sec:generic_type}
 
-\emph{Parametric Data Type} (or \emph{Parameterized Data Type} or
-\emph{Generic Data Type})
+\emph{Generic Type} (also \emph{Parameterized} or \emph{Parametric
+  Type})
 
 Weak form of Abstract Data Type
 
@@ -575,16 +851,38 @@ Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
 
 
 
-\paragraph{Constrained Type}\label{sec:constrained_type}\hfill
+\subsubsection{Constrained Type}\label{sec:constrained_type}
+
+%FIXME type class section?
 
 \emph{Type Class}
 
-Ad-hoc Polymorphism \S\ref{sec:adhoc_polymorphism}) (Function
-Overloading)
+Ad-hoc Polymorphism (\S\ref{sec:adhoc_polymorphism}), Function
+Overloading
+
+Type Classes are used to define Overloaded Functions, Type Families
+(\S\ref{sec:type_family}) are used to defined Overloaded Data.
+
+A Type Family declared in the definition of a Type Class is called an
+\emph{Associated Type} (\S\ref{sec:associated_type}).
+
+Type Classes define Partial Functions from Types to a collection of
+Named Values by Pattern Matching on the Input Types
+
+\fist Type Families define Partial Functions from Types to Types by
+Pattern Matching on the Input Types
+
+\fist Type Constructors (\S\ref{sec:type_constructor}) define
+Injective Functions from all Types of a particular Kind
+(\S\ref{sec:kind}) to a new Set of Types
+
+\fist Type Synonyms (\S\ref{sec:type_synonym}) define Functions from
+all Types of a particular Kind to another Set of Types using a single
+``Case'' (???) %FIXME
 
 
 
-\subparagraph{Functional Dependency}\label{sec:functional_dependency}\hfill
+\paragraph{Functional Dependency}\label{sec:functional_dependency}\hfill
 
 used to Constrain the Parameters (dependcies between the Parameters)
 of a (Multi-parameter) Type Class
@@ -623,17 +921,20 @@ the Type $\tau$ of $x$, where the Type of $id$:
   id:\sigma \rightarrow \sigma
 \]
 is Universally Quantified ``$\forall \sigma$''
-(\S\ref{sec:parametric_polymorphism}).
 
 Dependent Product Type (\S\ref{sec:pi_type})
 
 Second-order $\lambda$-calculus (\S\ref{sec:system_f})
 
-Subtyping (\S\ref{sec:subtype})
 
-Variance (\S\ref{sec:type_variance})
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}).
 
 Ad-hoc Polymorphism (\S\ref{sec:adhoc_polymorphism})
+
+Subtype Polymorphism (\S\ref{sec:subtype_polymorphism})
+
+Bounded Polymorphism (\S\ref{sec:bounded_polymorphism})
+
 
 Restricted Rank
 
@@ -655,7 +956,8 @@ Impredicative \emph{First-class Polymorphism}: Self-referential
 Parametric (\S\ref{sec:parametric_polymorphism}): Universal
 Quantification
 
-Existential (\S\ref{sec:abstract_type}): Existential Quantification
+Abstract (Existential) Type (\S\ref{sec:abstract_type}): Existential
+Quantification
 
 The Type $(\exists x : A).B$ is inhabited by Pairs $(a,b)$ with $a:A$
 and $b:B[a/x]$, i.e. the Sum of the Types $B(x)$ as $x$ ranges over
@@ -666,11 +968,81 @@ Bounded Quantification (\S\ref{sec:bounded_polymorphism})
 
 
 
-\subsubsection{Subtype}\label{sec:subtype}
+\subsubsection{Ad-hoc Polymorphism}\label{sec:adhoc_polymorphism}
+
+\emph{Function Overloading}, \emph{Operator Overloading}
+
+Polymorphic Functions (\S\ref{sec:polymorphic_function}) applied to
+Terms of different Types
+
+Ad-hoc Polymorphism is contrasted with Parametric Polymorphism by
+supporting a limited number of distinct Types rather than any Type
+whatsoever.
+
+Constrained Type (Type Class \S\ref{sec:constrained_type})
+
+
+
+\subsubsection{Parametric Polymorphism}
+\label{sec:parametric_polymorphism}
+
+Parametric (Generic) Type (\S\ref{sec:generic_type}): a weak form of
+Abstract Type (\S\ref{sec:abstract_type})
+
+Parametric (Generic) Function (\S\ref{sec:generic_function})
+
+Uniformaly for all Types (``for all''); used to define Natural
+Transformations (\S\ref{sec:natural_transformation}) in Programming
+Languages
+
+Universally Quantified Type Variable
+
+Type-level Function Abstraction $\Lambda$
+
+Second-order $\lambda$-calculus (System F \S\ref{sec:system_f})
+
+Bounded Polymorphism (\S\ref{sec:bounded_polymorphism}): Bounded
+Quantification; Polymorphism restricted to Subtypes
+
+
+\asterism
+
+
+\emph{Higher-rank Impredicative Polymorphism} (Impredicative
+\S\ref{sec:impredicative_polymorphism}) -- most general
+
+\emph{Predicative Prenex Polymorphism} (Restricted Rank and
+Predicative \S\ref{sec:predicative_polymorphism}) --
+``\emph{Let-polymorphism}''
+
+
+
+\paragraph{Predicative Polymorphism}
+\label{sec:predicative_polymorphism}\hfill
+
+Type $\tau$ containing Type Variable $\alpha$ may not be used such
+that $\alpha$ is instantiated to a Polymorphic Type.
+
+
+
+\paragraph{Impredicative Polymorphism}
+\label{sec:impredicative_polymorphism}\hfill
+
+(or \emph{First-class Polymorphism})
+
+most powerful
+
+
+
+\subsubsection{Subtype Polymorphism}\label{sec:subtype_polymorphism}
+
+\paragraph{Subtype}\label{sec:subtype}\hfill
 
 \emph{Intersection Type}
 
 \emph{Subtype Polymorphism}
+
+$S <: T$
 
 System $F_{<:}$ (\S\ref{sec:system_fsub})
 
@@ -701,6 +1073,12 @@ reverse, or ignore Subtyping on input Types.
 
 $(\rightarrow)$ is Contravariant on the Input Type and Covariant on
 the Output Type.
+
+
+
+\paragraph{Power Type}\label{sec:power_type}
+
+$P A$ the Type of all Subtypes of $A$
 
 
 
@@ -737,39 +1115,21 @@ Induced by Algebras over a Datatype's Structure
 
 
 
-\subsubsection{Parametric Polymorphism}
-\label{sec:parametric_polymorphism}
+\paragraph{Principal Type}\label{sec:principal_type}
 
-\emph{Generic Function}
+Type System with Principal Type Property
 
-Parametric Datatype (\S\ref{sec:parametric_datatype})
+given a Term, all other Types are instances of the Principal Type
 
-Uniformaly for all Types (``for all''); used to define Natural
-Transformations (\S\ref{sec:natural_transformation}) in Programming
-Languages
+Type Inference
 
-Universally Quantified Type Variable
+%FIXME xref
+Robinson's Unification Algorithm, used by Hindley-Milner Type
+Inference
 
-Type-level Function Abstraction $\Lambda$
+Polymorphic Recursion makes Inference of the Principal Type Undecidable
 
-Second-order $\lambda$-calculus (System F \S\ref{sec:system_f})
-
-Bounded (\S\ref{sec:bounded_polymorphism}) Parametric Polymorphism
-
-
-
-\subsubsection{Ad-hoc Polymorphism}\label{sec:adhoc_polymorphism}
-
-\emph{Function Overloading}, \emph{Operator Overloading}
-
-Polymorphic Functions (\S\ref{sec:polymorphic_function}) applied to
-Terms of different Types
-
-Ad-hoc Polymorphism is contrasted with Parametric Polymorphism by
-supporting a limited number of distinct Types rather than any Type
-whatsoever.
-
-Constrained Type (Abstract Data Type \S\ref{sec:constrained_type})
+Generalized Algebraic Data Types negates the Principal Type Property
 
 
 
@@ -782,23 +1142,6 @@ Bounds on Type Parameters to range only over Subtypes
 (\S\ref{sec:subtype}) of a particular Type
 
 Type Class (\S\ref{sec:constrained_type})
-
-
-
-\subsubsection{Higher-rank Impredicative Polymorphism}
-\label{sec:higherrank_impredicative}
-
-\emph{Higher-rank Impredicative Polymorphism} (most general)
-
-
-
-\subsubsection{Predicative Prenex Polymorphism}
-\label{sec:predicative_prened}
-
-\emph{Predicative Prenex Polymorphism} (Restricted Rank and
-Predicative)
-
-``\emph{Let-polymorphism}''
 
 
 
@@ -834,8 +1177,76 @@ that can have no Computational Effects
 
 
 % --------------------------------------------------------------------
-\subsection{Type Function}\label{sec:type_function}
+\subsection{Generalized Algebraic Data Type}\label{sec:gadt}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Logically Qualified Data Type}
+\label{sec:logically_qualified}
+% --------------------------------------------------------------------
+
+\cite{rondon-kawaguchi-jhala08}
+
+\emph{Liquid Type}
+
+Predicate Abstraction (\S\ref{sec:predicate_abstraction})
+
+Logical Qualifier: Boolean Predicate
+
+Dependent Type where the Refinement Predicate
+(\S\ref{sec:refinement_type}) is a Conjunction of Logical Qualifiers.
+
+Value Variable
+
+Base Refinement:
+\[
+  \{ v : B | e \}
+\]
+where $e$ is a Boolean-valued Expression constraining $v$ called a
+\emph{Refinement Predicate}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Partial Type}\label{sec:partial_type}
+% --------------------------------------------------------------------
+
+\cite{thompson99}
+
+Non-terminating Computations
+
+Total Objects are Identified at Simple Types
+
+Undefined Object ``Bottom'' $\uparrow$ is a Member of every Type
+
+\[
+  \sigma \rightarrow \tau \quad
+  \sigma \rightarrow \overline{\tau} \quad
+  \overline{\sigma} \rightarrow \overline{\tau} \quad
+  \overline{\sigma \rightarrow \tau} \quad
+  \overline{\sigma \rightarrow \overline{\tau}} \quad
+  \overline{\overline{\sigma} \rightarrow \overline{\tau}} \quad
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Type Synonym}\label{sec:type_synonym}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Type Conversion}\label{sec:type_conversion}
+% --------------------------------------------------------------------
+
+\subsubsection{Type Promotion}\label{sec:type_promotion}
+
+Special case of Implicit Type Conversion
+
+
+
+% ====================================================================
+\section{Type Function}\label{sec:type_function}
+% ====================================================================
 
 \emph{Type Function} (or \emph{Type Operator})
 
@@ -856,7 +1267,9 @@ A Type Function is an Endofunctor on the Category of Types.
 
 
 
-\subsubsection{Type Variable}\label{sec:type_variable}
+% --------------------------------------------------------------------
+\subsection{Type Variable}\label{sec:type_variable}
+% --------------------------------------------------------------------
 
 Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
 Universally Quantified Type Variables
@@ -866,15 +1279,10 @@ Existentially Quantified Type Variables
 
 
 
-\subsubsection{Kind}\label{sec:kind}
-
-A \emph{Kind} is the Type of a Type Operator, or the Type of a
-Higher-order Type Operator \S\ref{sec:higherorder_typeoperator}).
-
-
-
-\subsubsection{Higher-order Type Operator}
+% --------------------------------------------------------------------
+\subsection{Higher-order Type Operator}
 \label{sec:higherorder_typeoperator}
+% --------------------------------------------------------------------
 
 Allowing for the Type Operators to form a Simply-typed
 $\lambda$-calculus with the single Base Type `$*$' allows for
@@ -882,7 +1290,19 @@ Higher-order Type Operators.
 
 
 
-\subsubsection{Function Type}\label{sec:function_type}
+% --------------------------------------------------------------------
+\subsection{Kind}\label{sec:kind}
+% --------------------------------------------------------------------
+
+A \emph{Kind} is the Type of a Type Operator
+(\S\ref{sec:type_function}), or the Type of a Higher-order Type
+Operator \S\ref{sec:higherorder_typeoperator}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Function Type}\label{sec:function_type}
+% --------------------------------------------------------------------
 
 A \emph{Function Type} (or \emph{Arrow Type}) is Type formed by the
 Higher-kinded Type Constructor $\rightarrow$
@@ -903,7 +1323,7 @@ Contravariant Functors on the Argument Type. Cf. Hughes Arrows
 
 
 
-\paragraph{Exponential Type}\label{sec:exponential_type}\hfill
+\subsubsection{Exponential Type}\label{sec:exponential_type}
 
 Higher-order Functions
 
@@ -913,7 +1333,15 @@ Function Type (\S\ref{sec:function_type})
 
 
 
-\subsubsection{Type Constructor}\label{sec:type_constructor}
+\subsubsection{Generic Function}\label{sec:generic_function}
+
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Type Constructor}\label{sec:type_constructor}
+% --------------------------------------------------------------------
 
 Injective Type Function: maps all Types of a particular Kind to a new
 Set of Types and Type Synonyms
@@ -924,51 +1352,206 @@ Set of Types and Type Synonyms
 
 
 
-\subsubsection{Type Family}\label{sec:type_family}
+% --------------------------------------------------------------------
+\subsection{Type Family}\label{sec:type_family}
+% --------------------------------------------------------------------
 
 A \emph{Type Family} is a Partial Type Function that allows Types to
 be defined by matching Terms. The Functionality of this Type Function
+
+Type Classes (Constrained Type \S\ref{sec:constrained_type}) are used
+to define Overloaded Functions, Type Families are used to defined
+Overloaded Data.
+
+Type Classes define Partial Functions from Types to a collection of
+Named Values by Pattern Matching on the Input Types
+
+Type Families define Partial Functions from Types to Types by Pattern
+Matching on the Input Types
 
 Generalization of Predicates (Relations) over Domains
 
 
 
-\paragraph{Associated Type}\label{sec:associated_type}\hfill
+\subsubsection{Associated Type}\label{sec:associated_type}
 
 A Type Family declared inside a Type Class is an \emph{Associated
   Type}
 
 
 
-% --------------------------------------------------------------------
-\subsection{Partial Type}\label{sec:partial_type}
-\cite{thompson99}
-% --------------------------------------------------------------------
+% ====================================================================
+\section{Dependent Type}\label{sec:dependent_type}
+% ====================================================================
 
-Non-terminating Computations
-
-Total Objects are Identified at Simple Types
-
-Undefined Object ``Bottom'' $\uparrow$ is a Member of every Type
+A \emph{Dependent Type} depends on a Term or another Type.
 
 \[
-  \sigma \rightarrow \tau \quad
-  \sigma \rightarrow \overline{\tau} \quad
-  \overline{\sigma} \rightarrow \overline{\tau} \quad
-  \overline{\sigma \rightarrow \tau} \quad
-  \overline{\sigma \rightarrow \overline{\tau}} \quad
-  \overline{\overline{\sigma} \rightarrow \overline{\tau}} \quad
+  x : A \vdash B(x):\mathrm{Types}
+\]
+
+A Dependent Product Type (\S\ref{sec:pi_type}) is defined by
+a Dependent Function (\S\ref{sec:dependent_function}).
+
+Logical Quantifiers (\S\ref{sec:quantifier})
+
+Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+
+Categorically, Dependent Types correspond to Morphisms regarded as
+Indexed Families (Bundle or Fibration), represented by a \emph{Display
+  Map} (\S\ref{sec:display_map}) which is a Morphism $p : B
+\rightarrow A$ where $B(x)$ is the Fiber (\S\ref{sec:fiber}) of $p$
+over $x:A$.
+
+Classifying Morphism (\S\ref{sec:classifying_morphism}),
+Classifying Space (\S\ref{sec:classifying_space})
+
+A Dependent Type is the Type of a Dependent Function
+(\S\ref{sec:dependent_function}).
+
+Dependent Pairs (Dependent Sum Type \S\ref{sec:sigma_type})
+
+
+\textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
+\emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
+Dependent Product Type (\S\ref{sec:pi_type}) to Simply-typed
+$\lambda$-calculus.
+
+
+\textbf{Second-order Dependent Type Theory} ($\lambda \Pi 2$):
+allowing Quantification over Type Constructors
+(\S\ref{sec:type_constructor}), $\Pi$ operator Subsumes both
+$\rightarrow$ of Simply-typed $\lambda$-calculus and $\forall$ of
+System F (\S\ref{sec:system_f})
+
+
+\textbf{Higher-order Dependently Typed Polymorphic $\lambda$-calculus}
+($\lambda \Pi \omega$): corresponds to \emph{Calculus of
+  Constructions} (\S\ref{sec:coq}); extends $\lambda \Pi 2$ to all
+abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependent Function}\label{sec:dependent_function}
+% --------------------------------------------------------------------
+
+A \emph{Dependent Function} is a Function from Terms to Types
+(Codomain varies depending on Argument). The Type of a Dependent
+Function is a \emph{Dependent Product Type}
+(\S\ref{sec:pi_type}).
+
+Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
+
+Functionality (respect for Definitional Equality
+\S\ref{sec:proof_equality}):
+\[
+  x : A \vdash B_x \;\text{type}
+\]\[
+  m : A \mapsto B[m/x] \;\text{type}
+\]\[
+  m \equiv n : A \mapsto B[m/x] \equiv B[n/x] \;\text{type}
+\]
+
+Doubly-indexed Type:
+\[
+  x : A, y : B_x \vdash C_{x,y} \;\text{type}
+\]
+
+Example: Family of Types Indexed by $\mathbb{N}$:
+\[
+  x : \mathbb{N} \vdash even(x) \;\text{type}
+\]
+is a Propositional Function (takes a Natural Number and yields a
+Proposition). For each Natural Number, either $even(x)$ is Inhabited
+(if $x$ is Even) or Uninhabited (if $x$ is Odd).\cite{harper12}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependent Sum Type ($\Sigma$-type)}\label{sec:sigma_type}
+% --------------------------------------------------------------------
+
+\emph{$\Sigma$-type} (or \emph{Dependent Sum Type} or \emph{Dependent
+  Pair Type})
+
+Dependent Sum (\S\ref{sec:dependent_sum})
+
+\[
+  \Sigma_{(x:A)} B(x)
+\]
+
+If $B$ is Constant, then $\Sigma_{(x:A)}B$ is Judgementally Equal to
+the Product Type (\S\ref{sec:product_type}) $A \times B$:
+\[
+  \Sigma_{(x:A)} B \equiv A \times B
+\]
+
+By Curry-Howard, $\Sigma$-types model Conjunction and Existential
+Quantification.
+
+Analagous to Coproduct or Disjoint Union.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependent Product Type ($\Pi$-type)}\label{sec:pi_type}
+% --------------------------------------------------------------------
+
+The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or
+\emph{Dependent Function Type}) is the Type of a Dependent Function.
+By Curry-Howard, $\Pi$-types model Implication and Universal
+Quantification.
+
+Dependent Product (\S\ref{sec:dependent_product})
+
+For a Type $A : \class{U}$ in Type Universe
+(\S\ref{sec:type_universe}) $\class{U}$, a Family of Types:
+\[
+  B : A \rightarrow \class{U}
+\]
+can be defined by a Dependent Function which assigns a Type $B(a) :
+\class{U}$ to Each Term $a : A$. The Type of this Function is a
+Dependent Product Type:
+\[
+  \Pi_{(x:A)}B(x)
+\]
+
+If $B$ is Constant, then $\Pi_{(x:A)}B$ is Judgementally Equal to the
+Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
+\[
+  \Pi_{(x:A)}B \equiv A \rightarrow B
+\]
+
+Generalizes the idea of a Polymorphic Function
+(\S\ref{sec:polymorphic_function})
+
+\cite{hott13}:
+
+Example $id$:
+\[
+  id : \Pi_{(A : \class{U})} A \rightarrow A
+\]
+
+Example 2 $swap$:
+\[
+  swap : \Pi_{(A:\class{U})} \Pi_{(B:\class{U})} \Pi_{(C:\class{U})}
+  (A \rightarrow B \rightarrow C) \rightarrow (B \rightarrow A
+  \rightarrow C)
+\]
+Type arguments may be written as subscripts: $id_A$, $swap_{A,B,C}$
+
+A Polymorphic Function returning elements of Type $C$ has Polymorphic
+Type (\S\ref{sec:polymorphic_type}):
+\[
+  \Pi_{(A:\class{U})} A \rightarrow C
 \]
 
 
 
 % --------------------------------------------------------------------
-\subsection{Type Conversion}\label{sec:type_conversion}
+\subsection{Dependent Equality Type}\label{sec:dependent_equality}
 % --------------------------------------------------------------------
-
-\subsubsection{Type Promotion}\label{sec:type_promotion}
-
-Special case of Implicit Type Conversion
 
 
 
@@ -978,10 +1561,12 @@ Special case of Implicit Type Conversion
 
 A \emph{Type Universe} is a Type whose Elements are Types.
 
-Small Type %FIXME
+Type of (Small) Types
 
 Type Theory analogue of Inaccessible Cardinal
 (\S\ref{sec:inaccessible_cardinal})
+
+Reflection Principle (???)
 
 $\class{U}_0$ is the Universe of all Small Types. Every Name
 (\S\ref{sec:name}) $a:\class{U}_0$ has an associated Type $El(a)$
@@ -1003,7 +1588,7 @@ with (Cumulative Property):
   El(u_n) \equiv \class{U}_n
 \]
 
-See $\class{U}-INTRO$ and $\class{U}-CUMUL$
+\fist See $\class{U}-INTRO$ and $\class{U}-CUMUL$
 \S\ref{sec:homotopy_rules}.
 
 
@@ -1129,8 +1714,8 @@ assigned to a Syntactic Construction.
 Corresponding to Introduction and Elimination Rules of Proof Theory
 (\S\ref{sec:structural_rule}).
 
-Introduction and Elimination corresponds to Data Constructors
-(\S\ref{sec:data_constructor}).
+Introduction and Elimination corresponds to Constructors
+(\S\ref{sec:constructor}).
 
 The notation for Type Rules is that of Sequent Notation
 (\S\ref{sec:sequent}):
@@ -1858,22 +2443,32 @@ used in its own Specification
 
 \cite{orchard-yoshida16}:
 
-\fist Note the following uses a Haskell-like notation
+\fist Note the following uses a Haskell-like notation, an actual
+implementation is available in the hackage $\mono{effect-monad}$ package
+\url{http://hackage.haskell.org/package/effect-monad}
 
 carry Effect information as a Type Index
 
+\fist See Session Effects (\S\ref{sec:session_effect}) for an
+implementation of Session Effects using the following Effect-graded
+Monad
+
 Effect-graded Monad:
 \begin{flalign*}
-  & \mono{class}\;\mathsf{Effect}
+  & \quad\mono{class}\;\mathsf{Effect}
     (m : \eff \rightarrow * \rightarrow *)
     \;\mono{where} & \\
-  & \quad\quad\mono{type}\;\mathsf{Unit}\;m : \eff \\
-  & \quad\quad\mono{type}\;\mathsf{Plus}\;m\;(f : \eff)
-    \;(g : \eff) : \eff \\
-  & \quad\quad\mathsf{return} : a \rightarrow
-    m\;(\mathsf{Unit\;m})\;a \\
-  & \quad\quad(\bindop) : m\;f\;a \rightarrow
-    (a \rightarrow m\;g\;b) \rightarrow m\;(\mathsf{Plus}\;m\;f\;g)\;b
+  & \quad\quad
+    \mono{type}\;\mathsf{Unit}\;m : \eff & \\
+  & \quad\quad
+    \mono{type}\;\mathsf{Plus}\;m\;(f : \eff)
+      \;(g : \eff) : \eff & \\
+  & \quad\quad
+    \mathsf{return} : a \rightarrow
+      m\;(\mathsf{Unit\;m})\;a & \\
+  & \quad\quad
+    (\bindop) : m\;f\;a \rightarrow (a \rightarrow m\;g\;b)
+        \rightarrow m\;(\mathsf{Plus}\;m\;f\;g)\;b &
 \end{flalign*}
 
 $\eff$ -- Domain, \emph{Kind} of Effects, i.e. $\eff$ Models a Set of
@@ -1901,98 +2496,6 @@ Maps to a ``Monadic Metalanguage Judgement'': %FIXME
 \]
 Embedding Effects into Types. \cite{wadler-thiemann03}
 
-
-\asterism
-
-
-Session Calculus (\S\ref{sec:session_calculus})
-
-\fist Cf. Session Calculus Embedding into FPCF \S\ref{sec:fpcf})
-
-\emph{Session Effects} are Modelled by the $\mathsf{Session}$
-Datatype:
-\begin{align*}
-  \mono{data}\;\mathsf{Session}
-    =\; & \mono{forall}\;a . a :! \;\mathsf{Session}
-      \quad\quad\quad & \text{\emph{send}} \\
-    \mid\; & \mono{forall}\;a . a :? \;\mathsf{Session}
-      \quad\quad\quad & \text{\emph{receive}} \\
-    \mid\; & \mono{forall}\;a . a :\kern-2pt*! \;\mathsf{Session}
-      \quad\quad\quad & \text{\emph{output}} \\
-    \mid\; & \mathsf{Session} \altop \mathsf{Session}
-      \quad\quad\quad & \text{\emph{alternation}} \\
-    \mid\; & \mathsf{Bal\;Session}
-      \quad\quad\quad & \text{\emph{balanced}} \\
-    \mid\; & \mathsf{End}
-      \quad\quad\quad & \text{\emph{end}} \\
-    \mid\; & \mathsf{Fix\;Session\;Session}
-      \quad\quad\quad & \text{\emph{-* prefix}}
-\end{align*}
-
-Explicit Subtyping Class: \textturnt
-\begin{flalign*}
-  \quad\quad &
-  \mono{class}\;\mathsf{Sub}\;m\;f\;g\;\mono{where}\;
-    \mathsf{sub} : \mathsf{Sub}\;f\;g \Rightarrow
-      m\;f\;a \rightarrow m\;g\;a &
-\end{flalign*}
-
-Graded Monad Instance for $\mathsf{Process}$ (\S\ref{sec:process})
-Datatype:
-\begin{flalign*}
-  \quad\quad
-  & \mono{data}\;\mathsf{Process}\;(s:[\mathsf{Map\;Name\;Session}])\;a
-    = \mathsf{Proc}\;(\mathsf{IO}\;a) & \\
-  \quad\quad & \hfill & \\
-  \quad\quad
-  & \mono{instance}\;\mathsf{Effect\;Process}\;\mono{where} & \\
-  \quad\quad
-  & \quad \mono{type}\;\mathsf{Plus\;Process}\;f\;g
-    = \mathsf{SeqUnion}\;f\;g & \\
-  \quad\quad
-  & \quad \mono{type}\;\mathsf{Unit\;Process} = '[] & \\
-  \quad\quad & \hfill & \\
-  \quad\quad
-  & \mono{instance}\;\mathsf{Sub\;Process}\;f\;g \Rightarrow & \\
-  \quad\quad
-  & \quad \mathsf{Sub\;Process}\;((c :\rightarrow s) \hastypef f)\;
-    ((c :\rightarrow s \altop t) \hastypef g) & \\
-\end{flalign*}
-
-$s$ -- Type-level Finite Map Modelling an Environment of Session Type
-information of the form:
-\[
-  '[c :\rightarrow s, d :\rightarrow t, \ldots]
-\]
-describing an Environment where a Channel $c$ has Session Type $s$, a
-Channel $d$ has Session Type $t$, etc.
-
-Session Environments are Composed Sequentially via the
-$\mathsf{SeqUnion}$ Type-level Function (Modelling $\bullet$ for
-Effect Algebras \S\ref{sec:effect_system})
-
-Operations from Embedding of Session Calculus in FPCF: %FIXME
-
-$\mathsf{send}$
-
-$\mathsf{rsend}$
-
-$\mathsf{chSend}$
-
-$\mathsf{recv}$
-
-$\mathsf{chRecv}$
-
-$\mathsf{new}$
-
-(duality type-class)
-
-\fist Haskell does not have Equirecursive Types
-(\S\ref{sec:equirecursive_datatype}) so the Implementation restricts
-Recursion to only definitions that Induce an \emph{Affine Effect
-  Equation} (???). %FIXME
-
-(specialized affineFix combinator) %FIXME
 
 
 
@@ -2182,6 +2685,8 @@ Handling Computations
 
 \subsubsection{Communication Effect}\label{sec:communication_effect}
 
+Communication \S\ref{sec:communication}
+
 Jouvelot-Gifford89
 
 \cite{nielson-nielson99}
@@ -2191,6 +2696,154 @@ Session Types (\S\ref{sec:session_type}), but there is no reverse
 encoding of Session Types into Communication Effects because Session
 Types do not describe the relative ``Causality'' between Channels
 (recorded by Communication Effects).
+
+
+
+\subsubsection{Session Effect}\label{sec:session_effect}
+
+Session (\S\ref{sec:session})
+
+Session Type (\S\ref{sec:session_type})
+
+Embedding of Session Calculus (\S\ref{sec:session_calculus}) into FPCF
+(\S\ref{sec:fpcf})
+
+\[
+  \begin{tabular}{|l r|l r|}
+    \hline \textbf{Effects} & & \textbf{Sessions} & \\
+    \hline \hline
+      $\bullet$ & \emph{sequential}
+        & $?[\tau].-$ \quad $![\tau].-$ & \emph{prefixing} \\
+    \hline
+      $I$ & \emph{pure} & $\mathsf{end}$ & \emph{inaction} \\
+    \hline
+      $\oplus$ & \emph{conditional}
+        & $\oplus[l_1:S_1, \ldots, l_n:S_n]$ & \emph{selection}/ \\
+      \hfill & \hfill
+        & $\&[\l_1:S_1, \ldots, l_n:S_n]$ & \emph{branching} \\
+    \hline
+      $*$ & \emph{repetition}
+        & $\mu a.S$ \quad $a$ & \emph{fixed points} \\
+      \hfil & \hfill
+        & $*![\tau]$ \quad $*?[\tau]$ & \emph{replication} \\
+    \hline
+      $\sqsubseteq$ & \emph{sub-effecting}
+        & $\leqq$ & \emph{sub-typing} \\
+    \hline
+      $\&$ & \emph{parallelism} & $\odot$ & \emph{balancing} \\
+    \hline
+  \end{tabular}
+\]
+
+
+\textbf{Implementation}
+
+\fist Note the following uses a Haskell-like notation, an actual
+Haskell implementation is available at
+\url{http://dorchard.co.uk/popl16}
+
+Effect-graded Monad (\S\ref{sec:graded_monad}):
+\begin{flalign*}
+  \quad & \quad\mono{class}\;\mathsf{Effect}
+    (m : \eff \rightarrow * \rightarrow *)
+    \;\mono{where} & \\
+  & \quad\quad
+    \mono{type}\;\mathsf{Unit}\;m : \eff & \\
+  & \quad\quad
+    \mono{type}\;\mathsf{Plus}\;m\;(f : \eff)
+      \;(g : \eff) : \eff & \\
+  & \quad\quad
+    \mathsf{return} : a \rightarrow
+      m\;(\mathsf{Unit\;m})\;a & \\
+  & \quad\quad
+    (\bindop) : m\;f\;a \rightarrow (a \rightarrow m\;g\;b)
+        \rightarrow m\;(\mathsf{Plus}\;m\;f\;g)\;b &
+\end{flalign*}
+
+\emph{Session Effects} (\S\ref{sec:session_effect}) are Modelled by
+the $\mathsf{Session}$ Datatype:
+\begin{align*}
+  \mono{data}\;\mathsf{Session}
+    =\; & \mono{forall}\;a . a :! \;\mathsf{Session}
+      \quad\quad\quad & \text{\emph{send}} \\
+    \mid\; & \mono{forall}\;a . a :? \;\mathsf{Session}
+      \quad\quad\quad & \text{\emph{receive}} \\
+    \mid\; & \mono{forall}\;a . a :\kern-2pt*! \;\mathsf{Session}
+      \quad\quad\quad & \text{\emph{output}} \\
+    \mid\; & \mathsf{Session} \altop \mathsf{Session}
+      \quad\quad\quad & \text{\emph{alternation}} \\
+    \mid\; & \mathsf{Bal\;Session}
+      \quad\quad\quad & \text{\emph{balanced}} \\
+    \mid\; & \mathsf{End}
+      \quad\quad\quad & \text{\emph{end}} \\
+    \mid\; & \mathsf{Fix\;Session\;Session}
+      \quad\quad\quad & \text{\emph{-* prefix}}
+\end{align*}
+
+Explicit Subtyping Class: \textturnt
+\begin{flalign*}
+  \quad\quad &
+  \mono{class}\;\mathsf{Sub}\;m\;f\;g\;\mono{where}\;
+    \mathsf{sub} : \mathsf{Sub}\;f\;g \Rightarrow
+      m\;f\;a \rightarrow m\;g\;a &
+\end{flalign*}
+
+Graded Monad Instance for $\mathsf{Process}$ (\S\ref{sec:process})
+Datatype:
+\begin{flalign*}
+  \quad\quad
+  & \mono{data}\;\mathsf{Process}\;(s:[\mathsf{Map\;Name\;Session}])\;a
+    = \mathsf{Proc}\;(\mathsf{IO}\;a) & \\
+  \quad\quad & \hfill & \\
+  \quad\quad
+  & \mono{instance}\;\mathsf{Effect\;Process}\;\mono{where} & \\
+  \quad\quad
+  & \quad \mono{type}\;\mathsf{Plus\;Process}\;f\;g
+    = \mathsf{SeqUnion}\;f\;g & \\
+  \quad\quad
+  & \quad \mono{type}\;\mathsf{Unit\;Process} = '[] & \\
+  \quad\quad & \hfill & \\
+  \quad\quad
+  & \mono{instance}\;\mathsf{Sub\;Process}\;f\;g \Rightarrow & \\
+  \quad\quad
+  & \quad \mathsf{Sub\;Process}\;((c :\rightarrow s) \hastypef f)\;
+    ((c :\rightarrow s \altop t) \hastypef g) & \\
+\end{flalign*}
+
+$s$ -- Type-level Finite Map Modelling an Environment of Session Type
+information of the form:
+\[
+  '[c :\rightarrow s, d :\rightarrow t, \ldots]
+\]
+describing an Environment where a Channel $c$ has Session Type $s$, a
+Channel $d$ has Session Type $t$, etc.
+
+Session Environments are Composed Sequentially via the
+$\mathsf{SeqUnion}$ Type-level Function (Modelling $\bullet$ for
+Effect Algebras \S\ref{sec:effect_system})
+
+Operations from Embedding of Session Calculus in FPCF: %FIXME
+
+$\mathsf{send}$
+
+$\mathsf{rsend}$
+
+$\mathsf{chSend}$
+
+$\mathsf{recv}$
+
+$\mathsf{chRecv}$
+
+$\mathsf{new}$
+
+(duality type-class)
+
+\fist Haskell does not have Equirecursive Types
+(\S\ref{sec:equirecursive_type}) so the Implementation restricts
+Recursion to only definitions that Induce an \emph{Affine Effect
+  Equation} (???). %FIXME
+
+(specialized affineFix combinator) %FIXME
 
 
 
@@ -3609,12 +4262,6 @@ van Laarhoven Free Monad (\S\ref{sec:vanlaarhoven_free_monad})
 
 
 
-\subsubsection{Communication Effect}\label{sec:communication_effect}
-
-Communication \S\ref{sec:communication}
-
-
-
 % ====================================================================
 \section{Coeffect System}\label{sec:coeffect_system}
 % ====================================================================
@@ -3960,7 +4607,7 @@ Typed Interpretation of $\lambda$-calculus with one Type Constructor
 for Function Types: $\rightarrow$ (\S\ref{sec:function_type}).
 
 Strongly Normalizing, not Turing Complete: addition of $fix_\alpha$
-Operator or Recursive Types (\S\ref{sec:recursive_datatype}) gives
+Operator or Recursive Types (\S\ref{sec:inductive_type}) gives
 Turing Completeness
 
 ``Simply-typed'' is to distinguish from extensions such as:
@@ -4397,9 +5044,10 @@ include their Continuation. %FiXME
 \textbf{Session Calculus Embedding}
 
 Session Calculus (\S\ref{sec:session_calculus}) Embedded into FPCF
-with a notion of \emph{Session Effect}: Session Types and
-\emph{Causal} (Non-commutative) Effects have the same structure--both
-give an Ordered Analysis of the Operational Behavior of a Program.
+with a notion of \emph{Session Effect} (\S\ref{sec:session_effect}):
+Session Types and \emph{Causal} (Non-commutative) Effects have the
+same structure--both give an Ordered Analysis of the Operational
+Behavior of a Program.
 
 Effect System for Sessions is Partial: some Operations may not be
 defined for all Arguments, Modelling the Program-logic Behavior of
@@ -4437,7 +5085,7 @@ assuming Equirecursive Equations on $S$, e.g. $\mu\alpha.S =
 S[\mu\alpha.S/\alpha]$
 
 
-\textbf{Session Effects}
+\textbf{Session Effects} (\S\ref{sec:session_effect})
 
 $\mathbf{c,d,e,\overline{c},\overline{d},\overline{e}}
 \in \class{C}$ -- Channel Values (and Dual Endpoints)
@@ -4497,9 +5145,6 @@ Channel Names $\class{C}$ to Effect Session Types with Algebra:
 Subeffecting $\sqsubseteq$: defining Subeffecting as Subset Inclusion
 instead of the above definition is Unsound as arbitrary Session Types
 could be introduced without a corresponding implementation.
-
-\fist See Graded Monad (\S\ref{sec:graded_monad}) for an example of
-Session Effects Implementation
 
 
 \textbf{Send, Receive, Restriction}
@@ -5257,8 +5902,8 @@ Operators (\S\ref{sec:simplytyped_operators}); Types depending on
 Types (Type Functions \S\ref{sec:type_function})
 
 $\lambda2$: Second-order $\lambda$-calculus (System F
-\S\ref{sec:system_f}); Terms depending on Types (Parametric
-Polymorphism \S\ref{sec:parametric_polymorphism})
+\S\ref{sec:system_f}); Terms depending on Types (Polymorphism
+\S\ref{sec:polymorphic_type})
 
 $\lambda\Pi$: Dependently-typed $\lambda$-calculus (Logical Framework
 \S\ref{sec:logical_framework}); Types depending on Terms (Dependent
@@ -5830,173 +6475,6 @@ giving a Commuting Triangle:
 \emph{Variables}
 
 \emph{Substitution}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Dependent Type}\label{sec:dependent_type}
-% --------------------------------------------------------------------
-
-A \emph{Dependent Type} depends on a Term or another Type.
-
-\[
-  x : A \vdash B(x):\mathrm{Types}
-\]
-
-A Dependent Product Type (\S\ref{sec:pi_type}) is defined by
-a Dependent Function (\S\ref{sec:dependent_function}).
-
-Logical Quantifiers (\S\ref{sec:quantifier})
-
-Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
-
-Categorically, Dependent Types correspond to Morphisms regarded as
-Indexed Families (Bundle or Fibration), represented by a \emph{Display
-  Map} (\S\ref{sec:display_map}) which is a Morphism $p : B
-\rightarrow A$ where $B(x)$ is the Fiber (\S\ref{sec:fiber}) of $p$
-over $x:A$.
-
-Classifying Morphism (\S\ref{sec:classifying_morphism}),
-Classifying Space (\S\ref{sec:classifying_space})
-
-A Dependent Type is the Type of a Dependent Function
-(\S\ref{sec:dependent_function}).
-
-Dependent Pairs (Dependent Sum Type \S\ref{sec:sigma_type})
-
-
-\textbf{First-order Dependent Type Theory} ($\lambda \Pi$):
-\emph{Logical Framework} (\S\ref{sec:logical_framework}), adding the
-Dependent Product Type (\S\ref{sec:pi_type}) to Simply-typed
-$\lambda$-calculus.
-
-
-\textbf{Second-order Dependent Type Theory} ($\lambda \Pi 2$):
-allowing Quantification over Type Constructors
-(\S\ref{sec:type_constructor}), $\Pi$ operator Subsumes both
-$\rightarrow$ of Simply-typed $\lambda$-calculus and $\forall$ of
-System F (\S\ref{sec:system_f})
-
-
-\textbf{Higher-order Dependently Typed Polymorphic $\lambda$-calculus}
-($\lambda \Pi \omega$): corresponds to \emph{Calculus of
-  Constructions} (\S\ref{sec:coq}); extends $\lambda \Pi 2$ to all
-abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
-
-
-
-\subsubsection{Dependent Function}\label{sec:dependent_function}
-
-A \emph{Dependent Function} is a Function from Terms to Types
-(Codomain varies depending on Argument). The Type of a Dependent
-Function is a \emph{Dependent Product Type}
-(\S\ref{sec:pi_type}).
-
-Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
-
-Functionality (respect for Definitional Equality
-\S\ref{sec:proof_equality}):
-\[
-  x : A \vdash B_x \;\text{type}
-\]\[
-  m : A \mapsto B[m/x] \;\text{type}
-\]\[
-  m \equiv n : A \mapsto B[m/x] \equiv B[n/x] \;\text{type}
-\]
-
-Doubly-indexed Type:
-\[
-  x : A, y : B_x \vdash C_{x,y} \;\text{type}
-\]
-
-Example: Family of Types Indexed by $\mathbb{N}$:
-\[
-  x : \mathbb{N} \vdash even(x) \;\text{type}
-\]
-is a Propositional Function (takes a Natural Number and yields a
-Proposition). For each Natural Number, either $even(x)$ is Inhabited
-(if $x$ is Even) or Uninhabited (if $x$ is Odd).\cite{harper12}
-
-
-
-\subsubsection{Dependent Sum Type ($\Sigma$-type)}\label{sec:sigma_type}
-
-\emph{$\Sigma$-type} (or \emph{Dependent Sum Type} or \emph{Dependent
-  Pair Type})
-
-Dependent Sum (\S\ref{sec:dependent_sum})
-
-\[
-  \Sigma_{(x:A)} B(x)
-\]
-
-If $B$ is Constant, then $\Sigma_{(x:A)}B$ is Judgementally Equal to
-the Product Type (\S\ref{sec:product_type}) $A \times B$:
-\[
-  \Sigma_{(x:A)} B \equiv A \times B
-\]
-
-By Curry-Howard, $\Sigma$-types model Conjunction and Existential
-Quantification.
-
-Analagous to Coproduct or Disjoint Union.
-
-
-
-\subsubsection{Dependent Product Type ($\Pi$-type)}\label{sec:pi_type}
-
-The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or
-\emph{Dependent Function Type}) is the Type of a Dependent Function.
-By Curry-Howard, $\Pi$-types model Implication and Universal
-Quantification.
-
-Dependent Product (\S\ref{sec:dependent_product})
-
-For a Type $A : \class{U}$ in Type Universe
-(\S\ref{sec:type_universe}) $\class{U}$, a Family of Types:
-\[
-  B : A \rightarrow \class{U}
-\]
-can be defined by a Dependent Function which assigns a Type $B(a) :
-\class{U}$ to Each Term $a : A$. The Type of this Function is a
-Dependent Product Type:
-\[
-  \Pi_{(x:A)}B(x)
-\]
-
-If $B$ is Constant, then $\Pi_{(x:A)}B$ is Judgementally Equal to the
-Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
-\[
-  \Pi_{(x:A)}B \equiv A \rightarrow B
-\]
-
-Generalizes the idea of a Polymorphic Function
-(\S\ref{sec:polymorphic_function})
-
-\cite{hott13}:
-
-Example $id$:
-\[
-  id : \Pi_{(A : \class{U})} A \rightarrow A
-\]
-
-Example 2 $swap$:
-\[
-  swap : \Pi_{(A:\class{U})} \Pi_{(B:\class{U})} \Pi_{(C:\class{U})}
-  (A \rightarrow B \rightarrow C) \rightarrow (B \rightarrow A
-  \rightarrow C)
-\]
-Type arguments may be written as subscripts: $id_A$, $swap_{A,B,C}$
-
-A Polymorphic Function returning elements of Type $C$ has Polymorphic
-Type (\S\ref{sec:polymorphic_type}):
-\[
-  \Pi_{(A:\class{U})} A \rightarrow C
-\]
-
-
-
-\subsubsection{Dependent Equality Type}\label{sec:dependent_equality}
 
 
 
