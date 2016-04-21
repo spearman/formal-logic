@@ -17,6 +17,9 @@ LM_{\sigma_\tau,\sigma_o}$, and a Contextual Category
 Sub-quotients of $CC(R,LM)$ in terms of Objects Constructed from $R$
 and $LM$. \cite{voevedsky14}
 
+For Multi-sorted Type Theory see Pure Type Systems
+(\S\ref{sec:pts})
+
 As a Formal Theory (\S\ref{sec:formal_theory}), Judgements
 (\S\ref{sec:judgement}) in Type Theory are of three
 kinds\cite{hott13}:
@@ -24,7 +27,7 @@ kinds\cite{hott13}:
 
 \item \emph{Well-formed Context} (\S\ref{sec:type_context}):
   \[
-    (\Gamma) ctx
+    (\Gamma) \ctx
   \]
   ``$\Gamma$ is a Well-formed Context''
 
@@ -96,7 +99,7 @@ Meaning Explanation (\S\ref{sec:meaning_explanation})
 
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type}): Agda
 
-Calculus of Constructions (\S\ref{sec:coq}): Coq
+Calculus of Constructions (\S\ref{sec:coc}): Coc
 
 
 
@@ -111,14 +114,14 @@ everywhere within an Expression (\emph{$\alpha$-conversion}
 \S\ref{sec:alpha_conversion}) does not change the Expression.
 
 some Expressions:
-\begin{enumerate}
+\begin{itemize}
   \item Term (\S\ref{sec:term})
   \item Type (\S\ref{sec:type})
   \item Proposition (\S\ref{sec:proposition})
   \item Context (\S\ref{sec:context})
-\end{enumerate}
+\end{itemize}
 
-\fist $\lambda$-expression (\S\ref{sec:lambda_expression})
+\fist See also $\lambda$-expression (\S\ref{sec:lambda_expression})
 
 A Variable is Bound in an Expression by an \emph{Abstraction} (e.g.
 $\lambda$-abstraction \S\ref{sec:lambda_abstraction}) expressing that
@@ -138,7 +141,7 @@ or:
 \]
 or:
 \[
-  B[x/a]
+  B[a/x]
 \]
 
 Substitute Term $a$ for Free occurrences of Variable $x$ in the Term
@@ -152,7 +155,7 @@ $B$. Generalized:
 
 \asterism
 
-nCatLab:
+nLab:
 
 $\beta$-reduction (\S\ref{sec:beta_reduction}) -- how to Simplify a Term
 that involves an Eliminator Applied to a Constructor, e.g.
@@ -204,6 +207,8 @@ a Typing Derivation (\S\ref{sec:typing_derivation}) exists.
 \subsection{Term Constructor}\label{sec:term_constructor}
 % --------------------------------------------------------------------
 
+(or \emph{Data Constructor})
+
 \fist Cf. Type Constructor (\S\ref{sec:type_constructor})
 
 
@@ -234,7 +239,7 @@ $\alpha$-equivalent Expressions are Syntactically identical.
 
 \subsubsection{$\alpha$-equivalence}\label{sec:alpha_equivalence}
 
-\subsubsection{De Bruijn Index}\label{sec:debruijn_index}\hfill
+\subsubsection{De Bruijn Index}\label{sec:debruijn_index}
 
 \emph{De Bruijn Indices} ``name-free''
 
@@ -248,9 +253,20 @@ Higher-order Abstract Syntax (\S\ref{sec:hoas})
 \cite{seldin03}
 
 A \emph{$\beta$-conversion} is a Sequence of Zero or more
-\emph{$beta$-reductions} (Contractions \S\ref{sec:contraction}) or
-\emph{$beta$-expansions} (reverse Contractions). A Conversion from
-Term $M$ to Term $N$ is denoted $M =_* N$.
+\emph{$\beta$-reductions} (Contractions \S\ref{sec:contraction}) or
+\emph{$\beta$-expansions} (reverse Contractions). A $\beta$-conversion
+from Term $M$ to Term $N$ is denoted $M =_\beta^* N$.
+
+$\beta$-reduction (\S\ref{sec:beta_reduction}):
+\[
+  (\lambda x.b)(a) \rightarrow_\beta b[a/x]
+\]
+
+$\beta$-expansion (\S\ref{sec:beta_expansion}):
+\[
+  b[a/x] \rightarrow_\beta (\lambda x.b)(a)
+\]
+
 
 
 
@@ -292,11 +308,11 @@ analogous reduction for Inductive Types (\S\ref{sec:inductive_type})
 
 \emph{$\eta$-abstraction} ($\eta$-expansion \S\ref{sec:eta_expansion}):
 \[
-  y \rightarrow_\eta \lambda x.y x
+  y \rightarrow_\eta \lambda x.y(x)
 \]
 \emph{$\eta$-reduction} (\S\ref{sec:eta_reduction}):
 \[
-  \lambda x.y x \rightarrow_\eta y
+  \lambda x.y(x) \rightarrow_\eta y
 \]
 
 Extensional (\S\ref{sec:extension}) Equivalence of Expressions
@@ -326,6 +342,25 @@ Proposition (\S\ref{sec:proposition})
 %FIXME move dependent types?
 
 Dependent Types (\S\ref{sec:dependent_type})
+
+\emph{Proper Type}, Inhabited Type (\S\ref{sec:inhabited_type}) a Type
+which has Values (Terms?)
+
+\fist Cf. Kind (\S\ref{sec:kind})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Type Variable}\label{sec:type_variable}
+% --------------------------------------------------------------------
+
+Type Operator (\S\ref{sec:type_operator})
+
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
+Universally Quantified Type Variables
+
+Abstract (Existential) Types (\S\ref{sec:abstract_type}):
+Existentially Quantified Type Variables
 
 
 
@@ -408,7 +443,7 @@ Type Constructor (\S\ref{sec:type_constructor})
 
 \subsubsection{Positive Type}\label{sec:positive_type}
 
-nCatLab:
+nLab:
 
 \emph{Constructors} regarded as ``primary'': Eliminators are Derived
 from Constructors by the Rule that to ``Use'' (Eliminate) an Element
@@ -430,7 +465,7 @@ Strategies (\S\ref{sec:strict_evaluation})
 
 \subsubsection{Negative Type}\label{sec:negative_type}
 
-nCatLab:
+nLab:
 
 \emph{Eliminators} regarded as ``primary'': Constructors are Derived
 from Eliminators by the Rule that to Construct an Element of a
@@ -454,6 +489,10 @@ Evaluation Strategies (\S\ref{sec:nonstrict_evaluation})
 % --------------------------------------------------------------------
 
 \emph{Inhabited}
+
+$\Gamma \vdash A\;\mathrm{true}$
+
+$\Gamma \vdash a:A \Rightarrow \Gamma \vdash A\;\mathrm{true}$
 
 In Simply-typed $\lambda$-calculus (\S\ref{sec:simply_typed}), a Type
 is Inhabited if and only if its corresponding Proposition is a
@@ -597,7 +636,7 @@ Algebraic Types form a Semiring (\S\ref{sec:semiring})
 
 
 
-\subsubsection{Product Type}\label{sec:product_type}\hfill
+\subsubsection{Product Type}\label{sec:product_type}
 
 (or \emph{Record Type})
 
@@ -616,16 +655,16 @@ $snd_{\sigma,\tau} : (\sigma \times \tau) \Rightarrow \tau$
 Corresponds to Cartesian Product (\S\ref{sec:cartesian_product})
 
 Product Type $A \times B$ is a special case of Dependent Sum Type
-(\S\ref{sec:sigma_type}) $\Sigma_{(x:A)}B$ with a Constant Codomain
+(\S\ref{sec:sigma_type}) $(\Sigma x:A)B$ with a Constant Codomain
 Type $B$:
 \[
-  \Sigma_{(x:A)} B \equiv A \times B
+  (\Sigma x:A) B \equiv A \times B
 \]
 where $\equiv$ is Judgemental Equality.
 
 
 
-\subsubsection{Sum Type}\label{sec:sum_type}\hfill
+\subsubsection{Sum Type}\label{sec:sum_type}
 
 (also \emph{Coproduct Type} or \emph{Variant Type} or \emph{Tagged
   Union})
@@ -648,7 +687,7 @@ Choices, Multiple ``Classes'' of Data
 
 W-type
 
-Monotonic Type Function $\Theta : \sigma \Rightarrow \tau$
+Monotonic Type Operators $\Theta : \sigma \Rightarrow \tau$
 
 ``Tree-like''
 
@@ -709,8 +748,8 @@ Dybjer-Setzer99
 
 \emph{Initial Data Types} are defined by the Least Fixed Point
 (\S\ref{sec:least_fixedpoint}), up to Isomorphism given by an Initial
-Algebra (\S\ref{sec:initial_algebra}), of a Type Function
-(\S\ref{sec:type_function}). Ordinary Recursion
+Algebra (\S\ref{sec:initial_algebra}), of a Type Operator
+(\S\ref{sec:type_operator}). Ordinary Recursion
 (\S\ref{sec:recursion}) defines Recursive Functions with an Initial
 Data Type for a Domain.
 
@@ -752,13 +791,13 @@ of a Tree (\S\ref{sec:tree_type})
 
 
 
-\subsubsection{Infinite Data Type}\label{sec:infinite_datatype}\hfill
+\subsubsection{Infinite Data Type}\label{sec:infinite_datatype}
 
 (Proof Object) Definition by Recursion: Proof by Induction
 
 
 
-\subsubsection{Tree}\label{sec:tree_type}\hfill
+\subsubsection{Tree}\label{sec:tree_type}
 
 Tree (Graph Theory \S\ref{sec:tree})
 
@@ -766,7 +805,7 @@ Mutally Recursive Definition: Forest (\S\ref{sec:forest_type})
 
 
 
-\subsubsection{Forest}\label{sec:forest_type}\hfill
+\subsubsection{Forest}\label{sec:forest_type}
 
 Mutually Recursive Definition of a Tree (\S\ref{sec:tree_type})
 
@@ -847,6 +886,8 @@ Type of ``Program Fragments'' (\fist Cf. Algebraic Effects
 
 Weak form of Abstract Data Type
 
+Universally Quantified Type Variable
+
 Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
 
 
@@ -855,13 +896,15 @@ Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
 
 %FIXME type class section?
 
-\emph{Type Class}
+(or \emph{Type Class})
+
+Existentially Quantifid Type Variable
 
 Ad-hoc Polymorphism (\S\ref{sec:adhoc_polymorphism}), Function
 Overloading
 
 Type Classes are used to define Overloaded Functions, Type Families
-(\S\ref{sec:type_family}) are used to defined Overloaded Data.
+(\S\ref{sec:type_family}) are used to defined Overloaded Data
 
 A Type Family declared in the definition of a Type Class is called an
 \emph{Associated Type} (\S\ref{sec:associated_type}).
@@ -888,291 +931,6 @@ used to Constrain the Parameters (dependcies between the Parameters)
 of a (Multi-parameter) Type Class
 
 %FIXME xref relational database theory
-
-
-
-% --------------------------------------------------------------------
-\subsection{Polymorphic Type}\label{sec:polymorphic_type}
-% --------------------------------------------------------------------
-
-$\tau \mapsto \sigma$
-
-Introduction:
-\[
-  {
-  \frac{
-    \begin{matrix}
-      x : \sigma \\
-      \vdots \\
-      b : B
-    \end{matrix}
-  }
-  {b : \sigma \mapsto \tau}
-  }(\mapsto I)
-\]
-
-Terms depending on Types, e.g.:
-\[
-  x:\tau \vdash id(x):\tau
-\]
-where the Type of the Term $id(x)$ is $\tau$, which is dependent on
-the Type $\tau$ of $x$, where the Type of $id$:
-\[
-  id:\sigma \rightarrow \sigma
-\]
-is Universally Quantified ``$\forall \sigma$''
-
-Dependent Product Type (\S\ref{sec:pi_type})
-
-Second-order $\lambda$-calculus (\S\ref{sec:system_f})
-
-
-Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}).
-
-Ad-hoc Polymorphism (\S\ref{sec:adhoc_polymorphism})
-
-Subtype Polymorphism (\S\ref{sec:subtype_polymorphism})
-
-Bounded Polymorphism (\S\ref{sec:bounded_polymorphism})
-
-
-Restricted Rank
-
-Rank-1 \emph{Prenex Polymorphism}: Type Variables may not be
-instantiated with Polymorphic Types.
-
-Rank-$k$: Quantifier may not appear to the left of $k$ or more Arrows;
-Type Inference is decidable for Rank-2 but Rank-3 and above is not
-
-Rank-$n$: Quantifier may appear to the left of arbitrarily many Arrows
-
-Predicative: a Type $\tau$ containing a Type Variable $\alpha$ may not
-have $\alpha$ Instantiated to a Polymorphic Type (Martin-L\"of Type
-Theory \S\ref{sec:intuitionistic_type} and NuPRL).
-
-Impredicative \emph{First-class Polymorphism}: Self-referential
-(System F \S\ref{sec:system_f})
-
-Parametric (\S\ref{sec:parametric_polymorphism}): Universal
-Quantification
-
-Abstract (Existential) Type (\S\ref{sec:abstract_type}): Existential
-Quantification
-
-The Type $(\exists x : A).B$ is inhabited by Pairs $(a,b)$ with $a:A$
-and $b:B[a/x]$, i.e. the Sum of the Types $B(x)$ as $x$ ranges over
-$A$ \emph{or} the Subset of $A$ consisting of those $a \in A$ with the
-Property $B[a/x]$.
-
-Bounded Quantification (\S\ref{sec:bounded_polymorphism})
-
-
-
-\subsubsection{Ad-hoc Polymorphism}\label{sec:adhoc_polymorphism}
-
-\emph{Function Overloading}, \emph{Operator Overloading}
-
-Polymorphic Functions (\S\ref{sec:polymorphic_function}) applied to
-Terms of different Types
-
-Ad-hoc Polymorphism is contrasted with Parametric Polymorphism by
-supporting a limited number of distinct Types rather than any Type
-whatsoever.
-
-Constrained Type (Type Class \S\ref{sec:constrained_type})
-
-
-
-\subsubsection{Parametric Polymorphism}
-\label{sec:parametric_polymorphism}
-
-Parametric (Generic) Type (\S\ref{sec:generic_type}): a weak form of
-Abstract Type (\S\ref{sec:abstract_type})
-
-Parametric (Generic) Function (\S\ref{sec:generic_function})
-
-Uniformaly for all Types (``for all''); used to define Natural
-Transformations (\S\ref{sec:natural_transformation}) in Programming
-Languages
-
-Universally Quantified Type Variable
-
-Type-level Function Abstraction $\Lambda$
-
-Second-order $\lambda$-calculus (System F \S\ref{sec:system_f})
-
-Bounded Polymorphism (\S\ref{sec:bounded_polymorphism}): Bounded
-Quantification; Polymorphism restricted to Subtypes
-
-
-\asterism
-
-
-\emph{Higher-rank Impredicative Polymorphism} (Impredicative
-\S\ref{sec:impredicative_polymorphism}) -- most general
-
-\emph{Predicative Prenex Polymorphism} (Restricted Rank and
-Predicative \S\ref{sec:predicative_polymorphism}) --
-``\emph{Let-polymorphism}''
-
-
-
-\paragraph{Predicative Polymorphism}
-\label{sec:predicative_polymorphism}\hfill
-
-Type $\tau$ containing Type Variable $\alpha$ may not be used such
-that $\alpha$ is instantiated to a Polymorphic Type.
-
-
-
-\paragraph{Impredicative Polymorphism}
-\label{sec:impredicative_polymorphism}\hfill
-
-(or \emph{First-class Polymorphism})
-
-most powerful
-
-
-
-\subsubsection{Subtype Polymorphism}\label{sec:subtype_polymorphism}
-
-\paragraph{Subtype}\label{sec:subtype}\hfill
-
-\emph{Intersection Type}
-
-\emph{Subtype Polymorphism}
-
-$S <: T$
-
-System $F_{<:}$ (\S\ref{sec:system_fsub})
-
-Bounded Polymorphism (\S\ref{sec:bounded_polymorphism})
-
-Subtyping Judgement:
-\[
-  \Gamma \vdash \tau_1 \preceq \tau_2
-\]
-
-Power Type (\S\ref{sec:power_type}) $P A$: Type of all Subtypes of $A$
-
-Coherence
-
-
-
-\paragraph{Variance}\label{sec:type_variance}\hfill
-
-\emph{Variance} describes how Type Constructors either preserve,
-reverse, or ignore Subtyping on input Types.
-
-\begin{itemize}
-  \item \emph{Covariant}: Preserves Subtyping
-  \item \emph{Contravariant}: Reverses Subtyping
-  \item \emph{Bivariant}: Both Subtypes
-  \item \emph{Invariant}: No Subtyping
-\end{itemize}
-
-$(\rightarrow)$ is Contravariant on the Input Type and Covariant on
-the Output Type.
-
-
-
-\paragraph{Power Type}\label{sec:power_type}
-
-$P A$ the Type of all Subtypes of $A$
-
-
-
-\paragraph{Refinement Type}\label{sec:refinement_type}\hfill
-
-Predicate assumed to hold for any Element of Refined Type
-
-\fist Cf. Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
-
-Type Targeted Testing, Liquid Types (Logically Qualified Types
-\S\ref{sec:logically_qualified})
-
-
-\asterism
-
-
-\cite{mcbride13}:
-
-Ornaments (\S\ref{sec:ornament}): Refinements as a ``Decoration'' with
-``Logical Data''? %FIXME
-
-Algebraic Ornament (\S\ref{sec:algebraic_ornament}): Type Refinement
-Induced by Algebras over a Datatype's Structure
-
-
-
-\subparagraph{Predicate Subtype}\label{sec:predicate_subtype}\hfill
-
-
-
-\paragraph{Behavioral Subtype}\label{sec:behavioral_subtype}\hfill
-
-\emph{Substitutability}
-
-
-
-\paragraph{Principal Type}\label{sec:principal_type}
-
-Type System with Principal Type Property
-
-given a Term, all other Types are instances of the Principal Type
-
-Type Inference
-
-%FIXME xref
-Robinson's Unification Algorithm, used by Hindley-Milner Type
-Inference
-
-Polymorphic Recursion makes Inference of the Principal Type Undecidable
-
-Generalized Algebraic Data Types negates the Principal Type Property
-
-
-
-\subsubsection{Bounded Polymorphism}\label{sec:bounded_polymorphism}
-
-\emph{Bounded Quantification} (or \emph{Bounded Polymorphism} or
-\emph{Constrained Genericity})
-
-Bounds on Type Parameters to range only over Subtypes
-(\S\ref{sec:subtype}) of a particular Type
-
-Type Class (\S\ref{sec:constrained_type})
-
-
-
-\subsubsection{Polymorphic Function}\label{sec:polymorphic_function}
-
-A Polymorphic Function has a Dependent Product Type
-(\S\ref{sec:pi_type}):
-\[
-  \Pi_{(A:\class{U})} A \rightarrow C
-\]
-
-
-
-\paragraph{Polymorphic Recursion}\label{sec:polymorphic_recursion}\hfill
-
-Recursive Parametrically Polymorphic Function
-
-Type Inference under Polymorphic Recursion is Undecidable (equivalent
-to Semi-unification) %FIXME
-
-
-
-\paragraph{Free Theorem}\label{sec:free_theorem}\hfill
-
-
-
-\subsubsection{Value Polymorphism}\label{sec:value_polymorphism}
-
-Polymorphism restricted to \emph{Values}: a Subclass of Expressions
-that can have no Computational Effects
-(\S\ref{sec:computational_effect})
 
 
 
@@ -1245,37 +1003,413 @@ Special case of Implicit Type Conversion
 
 
 % ====================================================================
-\section{Type Function}\label{sec:type_function}
+\section{Polymorphic Type}\label{sec:polymorphic_type}
 % ====================================================================
 
-\emph{Type Function} (or \emph{Type Operator})
+Adding Polymorphic Types to Simply-typed $\lambda$-calculus
+($\lambda\kern-5pt\rightarrow$ \S\ref{sec:simply_typed}) results in
+\emph{Second-order $\lambda$-calculus} ($\lambda2$
+\S\ref{sec:secondorder_lambda})
 
-Adding additional Type Operators to Simply-typed Lambda Calculus
-results in \emph{Simply-typed Lambda Calculus with Type Operators}
-``$\lambda \underline{\omega}$'' (\S\ref{sec:simplytyped_operators})
+Terms depending on Types
 
-System F$_{\omega}$ (\S\ref{sec:system_fomega})
 
-The Type Operators themselves can be viewed as a Simply-typed
+Ad-hoc Polymorphism (\S\ref{sec:adhoc_polymorphism})
+
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
+
+Subtype Polymorphism (\S\ref{sec:subtype_polymorphism})
+
+Bounded Polymorphism (\S\ref{sec:bounded_polymorphism})
+
+
+\asterism
+
+%FIXME
+
+$\tau \mapsto \sigma$
+
+Introduction:
+\[
+  {
+  \frac{
+    \begin{matrix}
+      x : \sigma \\
+      \vdots \\
+      b : B
+    \end{matrix}
+  }
+  {b : \sigma \mapsto \tau}
+  }(\mapsto I)
+\]
+
+
+\asterism
+
+
+Restricted Rank
+
+Rank-1 \emph{Prenex Polymorphism}: Type Variables may not be
+instantiated with Polymorphic Types.
+
+Rank-$k$: Quantifier may not appear to the left of $k$ or more Arrows;
+Type Inference is decidable for Rank-2 but Rank-3 and above is not
+
+Rank-$n$: Quantifier may appear to the left of arbitrarily many Arrows
+
+Predicative: a Type $\tau$ containing a Type Variable $\alpha$ may not
+have $\alpha$ Instantiated to a Polymorphic Type (Martin-L\"of Type
+Theory \S\ref{sec:intuitionistic_type} and NuPRL).
+
+Impredicative \emph{First-class Polymorphism}: Self-referential
+(System F \S\ref{sec:system_f})
+
+Parametric (\S\ref{sec:parametric_polymorphism}): Universal
+Quantification
+
+Abstract (Existential) Type (\S\ref{sec:abstract_type}): Existential
+Quantification
+
+The Type $(\exists x : A).B$ is inhabited by Pairs $(a,b)$ with $a:A$
+and $b:B[a/x]$, i.e. the Sum of the Types $B(x)$ as $x$ ranges over
+$A$ \emph{or} the Subset of $A$ consisting of those $a \in A$ with the
+Property $B[a/x]$.
+
+Bounded Quantification (\S\ref{sec:bounded_polymorphism})
+
+\fist See also Polymorphic Kinds (\S\ref{sec:polymorphic_kind})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ad-hoc Polymorphism}\label{sec:adhoc_polymorphism}
+% --------------------------------------------------------------------
+
+\emph{Function Overloading}, \emph{Operator Overloading}
+
+Polymorphic Functions (\S\ref{sec:polymorphic_function}) applied to
+Terms of different Types
+
+Ad-hoc Polymorphism is contrasted with Parametric Polymorphism by
+supporting a limited number of distinct Types rather than any Type
+whatsoever
+
+Constrained Type (Type Class \S\ref{sec:constrained_type})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Parametric Polymorphism}\label{sec:parametric_polymorphism}
+% --------------------------------------------------------------------
+
+Universally Quantified Type Variable
+
+\emph{Parametricity}: Abstract Uniformity Property; captures the
+intuition that all instances of a Polymorphic Function
+(\S\ref{sec:polymorphic_function}) behave the same way for all Types
+(``for all''); used to define Natural Transformations
+(\S\ref{sec:natural_transformation}) in Programming Languages
+
+Parametric (Generic) Type (\S\ref{sec:generic_type}): a weak form of
+Abstract Type (\S\ref{sec:abstract_type})
+
+Parametric (Generic) Function (\S\ref{sec:generic_function})
+
+Example:
+\[
+  x:\tau \vdash id(x):\tau
+\]
+where the Type of the Term $id(x)$ is $\tau$, which is dependent on
+the Type $\tau$ of $x$, where the Type of $id$:
+\[
+  id:\sigma \rightarrow \sigma
+\]
+is Universally Quantified ``$\forall \sigma$'':
+\[
+  id:\forall \sigma.\sigma \rightarrow \sigma
+\]
+
+
+having Pattern Matching on Types in a Type System would break
+Parametricity (idris stackoverflow user Xash) %FIXME link
+
+Type-level Function Abstraction $\Lambda$ (\S\ref{sec:type_operator})
+
+Second-order $\lambda$-calculus (System F \S\ref{sec:system_f})
+
+Bounded Polymorphism (\S\ref{sec:bounded_polymorphism}): Bounded
+Quantification; Polymorphism restricted to Subtypes
+
+
+\asterism
+
+
+$\forall a.a \rightarrow a$ -- $id$
+
+$\forall a.(a \rightarrow a) \rightarrow a$ -- $fix$
+
+$\forall a.a \rightarrow (a \rightarrow a) \rightarrow a$ -- $eval$
+
+
+$\forall a.a \rightarrow a \times a$ -- $\delta$
+
+$\forall a.a \times a \rightarrow a$ -- $\pi_1$, $\pi_2$
+
+$\forall a.a \times a \rightarrow a \times a$ -- $id$, $swap$
+
+
+$\forall a.a \rightarrow a + a$ -- $inl$, $inr$
+
+$\forall a.a + a \rightarrow a$ -- $match$
+
+$\forall a.a + a \rightarrow a + a$ -- $id$, $retag$
+
+
+$\forall a.a \rightarrow (a \rightarrow a)$ -- $true$, $false$
+
+
+$\forall a.(a \rightarrow a) \rightarrow (a \rightarrow a)$ -- $f^n$
+for $n \in \nats$
+
+
+\asterism
+
+
+\emph{Higher-rank Impredicative Polymorphism} (Impredicative
+\S\ref{sec:impredicative_polymorphism}) -- most general
+
+\emph{Predicative Prenex Polymorphism} (Restricted Rank and
+Predicative \S\ref{sec:predicative_polymorphism}) --
+``\emph{Let-polymorphism}''
+
+
+
+\subsubsection{Predicative Polymorphism}
+\label{sec:predicative_polymorphism}
+
+Type $\tau$ containing Type Variable $\alpha$ may not be used such
+that $\alpha$ is instantiated to a Polymorphic Type.
+
+
+
+\subsubsection{Impredicative Polymorphism}
+\label{sec:impredicative_polymorphism}
+
+(or \emph{First-class Polymorphism})
+
+most powerful
+
+
+
+% --------------------------------------------------------------------
+\subsection{Subtype Polymorphism}\label{sec:subtype_polymorphism}
+% --------------------------------------------------------------------
+
+\subsubsection{Subtype}\label{sec:subtype}
+
+\emph{Intersection Type}
+
+\emph{Subtype Polymorphism}
+
+$S <: T$
+
+System $F_{<:}$ (\S\ref{sec:system_fsub})
+
+Bounded Polymorphism (\S\ref{sec:bounded_polymorphism})
+
+Subtyping Judgement:
+\[
+  \Gamma \vdash \tau_1 \preceq \tau_2
+\]
+
+Power Type (\S\ref{sec:power_type}) $P A$: Type of all Subtypes of $A$
+
+Coherence
+
+
+
+\paragraph{Conjunctive Type}\label{sec:conjunctive_type}\hfill
+
+$\lambda$-calculus with Conjunctive Types
+(\S\ref{sec:conjunctive_lambda})
+
+System F$_{<:}$ (\S\ref{sec:system_fsub})
+
+System F$_{<:}^\omega$ (\S\ref{sec:system_fsub}) -- Higher-order
+Bounded Quantification
+
+
+
+\subsubsection{Variance}\label{sec:type_variance}
+
+\emph{Variance} describes how Type Constructors either preserve,
+reverse, or ignore Subtyping on input Types.
+
+\begin{itemize}
+  \item \emph{Covariant}: Preserves Subtyping
+  \item \emph{Contravariant}: Reverses Subtyping
+  \item \emph{Bivariant}: Both Subtypes
+  \item \emph{Invariant}: No Subtyping
+\end{itemize}
+
+$(\rightarrow)$ is Contravariant on the Input Type and Covariant on
+the Output Type.
+
+
+
+\subsubsection{Power Type}\label{sec:power_type}
+
+$P A$ the Type of all Subtypes of $A$
+
+
+
+\subsubsection{Intersection Type}\label{sec:intersection_type}
+
+\paragraph{Refinement Type}\label{sec:refinement_type}\hfill
+
+Predicate assumed to hold for any Element of Refined Type
+
+\fist Cf. Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
+
+Type Targeted Testing, Liquid Types (Logically Qualified Types
+\S\ref{sec:logically_qualified})
+
+
+\asterism
+
+
+\cite{mcbride13}:
+
+Ornaments (\S\ref{sec:ornament}): Refinements as a ``Decoration'' with
+``Logical Data''? %FIXME
+
+Algebraic Ornament (\S\ref{sec:algebraic_ornament}): Type Refinement
+Induced by Algebras over a Datatype's Structure
+
+
+
+\paragraph{Predicate Subtype}\label{sec:predicate_subtype}\hfill
+
+
+
+\subsubsection{Behavioral Subtype}\label{sec:behavioral_subtype}
+
+\emph{Substitutability}
+
+
+
+\subsubsection{Principal Type}\label{sec:principal_type}
+
+Type System with Principal Type Property
+
+given a Term, all other Types are instances of the Principal Type
+
+Type Inference
+
+%FIXME xref
+Robinson's Unification Algorithm, used by Hindley-Milner Type
+Inference
+
+Polymorphic Recursion makes Inference of the Principal Type Undecidable
+
+Generalized Algebraic Data Types negates the Principal Type Property
+
+
+
+% --------------------------------------------------------------------
+\subsection{Bounded Polymorphism}\label{sec:bounded_polymorphism}
+% --------------------------------------------------------------------
+
+\emph{Bounded Quantification} (or \emph{Bounded Polymorphism} or
+\emph{Constrained Genericity})
+
+Bounds on Type Parameters to range only over Subtypes
+(\S\ref{sec:subtype}) of a particular Type
+
+Type Class (\S\ref{sec:constrained_type})
+
+Conjunctive Type (\S\ref{sec:conjunctive_type})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Value Polymorphism}\label{sec:value_polymorphism}
+% --------------------------------------------------------------------
+
+Polymorphism restricted to \emph{Values}: a Subclass of Expressions
+that can have no Computational Effects
+(\S\ref{sec:computational_effect})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Polymorphic Function}\label{sec:polymorphic_function}
+% --------------------------------------------------------------------
+
+A Polymorphic Function has a Dependent Product Type
+(\S\ref{sec:pi_type}):
+\[
+  (\Pi A:\class{U}) F(A)
+\]
+
+
+
+\subsubsection{Polymorphic Recursion}\label{sec:polymorphic_recursion}
+
+Recursive Parametrically Polymorphic Function
+
+Type Inference under Polymorphic Recursion is Undecidable (equivalent
+to Semi-unification) %FIXME
+
+
+
+\subsubsection{Free Theorem}\label{sec:free_theorem}
+
+
+
+% ====================================================================
+\section{Type Operator}\label{sec:type_operator}
+% ====================================================================
+
+\emph{Type Operator} (or \emph{Type-level Function})
+
+Adding additional Type Operators to Simply-typed $\lambda$-calculus
+($\lambda\kern-5pt\rightarrow$ \S\ref{sec:simply_typed}) results in
+\emph{Higher-order $\lambda$-calculus} ($\lambda\underline{\omega}$
+\S\ref{sec:higherorder_lambda})
+
+The Type Operators themselves can be viewed as forming a Simply-typed
 $\lambda$-calculus with only one Base Type (\S\ref{sec:type_constant})
 denoted `$\ast$' representing the Type of all Types in the underlying
 Language which are called \emph{Proper Types} to distinguish from the
 Type of the Type Operators which are called \emph{Kinds}
 (\S\ref{sec:kind}).
 
-A Type Function is an Endofunctor on the Category of Types.
+A Type Operator is an Endofunctor on the Category of Types.
+
+$\Lambda$ -- Type-level Function Abstraction
+
+Monotonic Type Operators: Inductive Types (\S\ref{sec:inductive_type})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Type Variable}\label{sec:type_variable}
+\subsection{Kind}\label{sec:kind}
 % --------------------------------------------------------------------
 
-Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
-Universally Quantified Type Variables
+A \emph{Kind} is the Type of a Type Operator
+(\S\ref{sec:type_operator}), or the Type of a Higher-order Type
+Operator \S\ref{sec:higherorder_typeoperator}).
 
-Existential Types (\S\ref{sec:abstract_type}):
-Existentially Quantified Type Variables
+\fist Proper Type (\S\ref{sec:type})
+
+Super-kind
+
+Pure Type System (\S\ref{sec:pts})
+
+
+
+\subsubsection{Polymorphic Kind}\label{sec:polymorphic_kind}
 
 
 
@@ -1291,16 +1425,6 @@ Higher-order Type Operators.
 
 
 % --------------------------------------------------------------------
-\subsection{Kind}\label{sec:kind}
-% --------------------------------------------------------------------
-
-A \emph{Kind} is the Type of a Type Operator
-(\S\ref{sec:type_function}), or the Type of a Higher-order Type
-Operator \S\ref{sec:higherorder_typeoperator}).
-
-
-
-% --------------------------------------------------------------------
 \subsection{Function Type}\label{sec:function_type}
 % --------------------------------------------------------------------
 
@@ -1308,10 +1432,10 @@ A \emph{Function Type} (or \emph{Arrow Type}) is Type formed by the
 Higher-kinded Type Constructor $\rightarrow$
 
 The Function Type $A \rightarrow B$ is a special case of Dependent
-Product Type (\S\ref{sec:pi_type}) $\Pi_{(a:A)}B$ with a Constant
+Product Type (\S\ref{sec:pi_type}) $(\Pi a:A)B$ with a Constant
 Codomain Type $B$:
 \[
-  \Pi_{(a:A)}B \equiv A \rightarrow B
+  (\Pi a:A)B \equiv A \rightarrow B
 \]
 where $\equiv$ is Judgemental Equality.
 
@@ -1343,12 +1467,9 @@ Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
 \subsection{Type Constructor}\label{sec:type_constructor}
 % --------------------------------------------------------------------
 
-Injective Type Function: maps all Types of a particular Kind to a new
-Set of Types and Type Synonyms
-
-\emph{Type Constructor}
-
-(or \emph{Type Schema})
+A \emph{Type Constructor} (or \emph{Type Schema}) is an Injective Type
+Function: maps all Types of a particular Kind to a new Set of Types
+and Type Synonyms
 
 
 
@@ -1356,8 +1477,10 @@ Set of Types and Type Synonyms
 \subsection{Type Family}\label{sec:type_family}
 % --------------------------------------------------------------------
 
-A \emph{Type Family} is a Partial Type Function that allows Types to
-be defined by matching Terms. The Functionality of this Type Function
+A \emph{Type Family} is a Partial Type Operator that allows Types to
+be defined by matching Terms.
+
+%FIXME
 
 Type Classes (Constrained Type \S\ref{sec:constrained_type}) are used
 to define Overloaded Functions, Type Families are used to defined
@@ -1427,8 +1550,18 @@ System F (\S\ref{sec:system_f})
 
 \textbf{Higher-order Dependently Typed Polymorphic $\lambda$-calculus}
 ($\lambda \Pi \omega$): corresponds to \emph{Calculus of
-  Constructions} (\S\ref{sec:coq}); extends $\lambda \Pi 2$ to all
+  Constructions} (\S\ref{sec:coc}); extends $\lambda \Pi 2$ to all
 abstractions of the $\lambda$-cube (\S\ref{sec:lambda_cube})
+
+
+\asterism
+
+
+$x:A \vdash B(x):\Type$
+
+$B : A \rightarrow \Type$
+
+$B : (\Pi X:\Type) A \rightarrow X$
 
 
 
@@ -1478,13 +1611,13 @@ Proposition). For each Natural Number, either $even(x)$ is Inhabited
 Dependent Sum (\S\ref{sec:dependent_sum})
 
 \[
-  \Sigma_{(x:A)} B(x)
+  (\Sigma x:A) B(x)
 \]
 
-If $B$ is Constant, then $\Sigma_{(x:A)}B$ is Judgementally Equal to
+If $B$ is Constant, then $(\Sigma x:A)B$ is Judgementally Equal to
 the Product Type (\S\ref{sec:product_type}) $A \times B$:
 \[
-  \Sigma_{(x:A)} B \equiv A \times B
+  (\Sigma x:A) B \equiv A \times B
 \]
 
 By Curry-Howard, $\Sigma$-types model Conjunction and Existential
@@ -1514,13 +1647,13 @@ can be defined by a Dependent Function which assigns a Type $B(a) :
 \class{U}$ to Each Term $a : A$. The Type of this Function is a
 Dependent Product Type:
 \[
-  \Pi_{(x:A)}B(x)
+  (\Pi x:A)B(x)
 \]
 
-If $B$ is Constant, then $\Pi_{(x:A)}B$ is Judgementally Equal to the
+If $B$ is Constant, then $(\Pi x:A)B$ is Judgementally Equal to the
 Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
 \[
-  \Pi_{(x:A)}B \equiv A \rightarrow B
+  (\Pi x:A)B \equiv A \rightarrow B
 \]
 
 Generalizes the idea of a Polymorphic Function
@@ -1530,12 +1663,12 @@ Generalizes the idea of a Polymorphic Function
 
 Example $id$:
 \[
-  id : \Pi_{(A : \class{U})} A \rightarrow A
+  id : (\Pi A:\class{U}) A \rightarrow A
 \]
 
 Example 2 $swap$:
 \[
-  swap : \Pi_{(A:\class{U})} \Pi_{(B:\class{U})} \Pi_{(C:\class{U})}
+  swap : (\Pi A:\class{U}) (\Pi B:\class{U}) (\Pi C:\class{U})
   (A \rightarrow B \rightarrow C) \rightarrow (B \rightarrow A
   \rightarrow C)
 \]
@@ -1544,7 +1677,7 @@ Type arguments may be written as subscripts: $id_A$, $swap_{A,B,C}$
 A Polymorphic Function returning elements of Type $C$ has Polymorphic
 Type (\S\ref{sec:polymorphic_type}):
 \[
-  \Pi_{(A:\class{U})} A \rightarrow C
+  (\Pi A:\class{U}) A \rightarrow C
 \]
 
 
@@ -1815,7 +1948,7 @@ Names
 
 % --------------------------------------------------------------------
 \subsection{Substructural Type System}
-\label{sec:substructural_type_system}
+\label{sec:substructural_type}
 % --------------------------------------------------------------------
 
 Substructural Logic (\S\ref{sec:substructural_logic})
@@ -1844,6 +1977,8 @@ Structural rules of Exchange (\S\ref{sec:exchange_rule}), Weakening
 \subsubsection{Linear Type System}\label{sec:linear_type}
 
 Values used exactly once
+
+Linear Type Theory -- Co-modality (???) %FIXME
 
 Linear Logic (\S\ref{sec:linear_logic}) allows safe Deallocation
 (Objects used exactly once)
@@ -2076,6 +2211,12 @@ captured by any Effect System (E. Kmett)
 
 \cite{mycroft-orchard-petricek16} -- Graded Joinads (???): Effect
 Control-flow Algebras \& Types
+
+wiki:
+
+in addition to simple Value/Type Pairs, a \emph{Region} of Code is
+associated with an \emph{Effect Component} describing ``what'' is
+being done ``with what''
 
 
 \asterism
@@ -3776,7 +3917,7 @@ Handler Correctness: for an Empty Effect Theory, any Handler is
 Correct, but in general Correctness is Undecidable
 
 Correctness of Simple Handlers (\S\ref{sec:simple_handler}) is
-$\Pi_2$-complete
+$\Pi_2$-complete %FIXME xref
 
 
 \asterism
@@ -3826,7 +3967,7 @@ A Family of Handlers is Correct if each Handler in the Family is
 Correct
 
 Deciding whether a Uniformly Simple Family of Closed Handlers is
-$\Sigma_1$-complete (Semidecidable)
+$\Sigma_1$-complete (Semidecidable) %FIXME xref
 
 Effect Theories with a Simple Signature corresond to ordinary Finite
 Equational Theories (i.e. Finitely many Finitary Function Symbols and
@@ -4449,7 +4590,9 @@ to infer Judgements about the Object Language
 \asterism
 
 
-$p : P$ ``$p$ is a Proof of Proposition $P$''
+$P\type$ -- $P\prop$
+
+$p : P$ -- ``$p$ is a Proof of Proposition $P$''
 
 A Proof of $A \wedge B$ is a Pair of Proofs $p : A$ and $q : B$ (holds
 in both Classical and Constructive Systems)
@@ -4551,26 +4694,107 @@ which Types; Typing Rules (\S\ref{sec:typing_rule})
 Computation Rules : How Objects can be Reduced, i.e. Evaluated
 (Computation)
 
-Natural Deduction - Typed Lambda Calculus
+Natural Deduction -- Typed $\lambda$-calculus
+(\S\ref{sec:typed_lambda})
 
-Minimal Logic - Simple Types (Simply-typed $\lambda$-calculus
-\S\ref{sec:simply_typed})
+(Zeroth-order) Minimal Logic -- Simple Types (Simply-typed
+$\lambda$-calculus \S\ref{sec:simply_typed})
 
-Predicate Logic - Dependent Types (Intuitionistic Type Theory
-\S\ref{sec:intuitionistic_type})
+(First-order) Predicate Logic -- Dependent Types (Dependent Type
+Theory \S\ref{sec:dependent_type_theory})
 
-Modal Logic - Monads
-
-Classical-Intuitionistic Embedding - Continuation-passing Style
+Classical/Intuitionistic Embedding -- Continuation-passing Style
 (\S\ref{sec:continuation})
 
-Linear Logic - Session Types (\S\ref{sec:session_type})
+Modal Logic -- Monads (\S\ref{sec:monad})
 
-Linear Temporal Logic - Reactive Types (\S\ref{sec:reactive_type})
+Linear Logic -- Session Types (\S\ref{sec:session_type})
+
+Linear Temporal Logic -- Reactive Types (\S\ref{sec:reactive_type})
 
 Subset Type $(\exists x:A).B$ (Pairs of Objects and the Proofs that
 they have Property): $\{ x : A | B \}$ consisting of those $a$ in $A$
 with Property $[a/x]B$, i.e. $[a/x]B$ is Inhabited.
+
+
+
+% ====================================================================
+\section{Lambda Cube}\label{sec:lambda_cube}
+% ====================================================================
+
+All Strongly Normalizing
+
+$\lambda\kern-5pt\rightarrow$: Simply-typed $\lambda$-calculus
+(\S\ref{sec:simply_typed}); Terms depending on Terms (Function Type
+\S\ref{sec:function_type})--Types can appear on both sides of the
+Function Constructor $\rightarrow$:
+\[
+  f:A \rightarrow B
+\]
+or:
+\[
+  f:(\Pi a:A)B
+\]
+
+$\lambda2$: Polymorphic (Second-order) $\lambda$-calculus
+(\S\ref{sec:secondorder_lambda}, System F (\S\ref{sec:system_f});
+Terms depending on Types (Polymorphism
+\S\ref{sec:polymorphic_type})--Kinds appear to the left of Types as
+Parameters mapping to instances of Polymorphic Functions (Terms):
+\[
+  f:(\Pi A:\Type) C
+\]
+where:
+\[
+  f_A : C
+\]
+is the Instance of $f$ for Type $A$.
+
+$\lambda\underline{\omega}$: Higher-order $\lambda$-calculus
+(\S\ref{sec:higherorder_lambda}); Types depending on Types (Type
+Operators \S\ref{sec:type_operator})--Kinds (\S\ref{sec:kind}) can
+appear on both sides of the Type-level Function Constructor
+$\Rightarrow$:
+\[
+   F:\Type \Rightarrow \Type
+\]
+or:
+\[
+  F:(\Pi A:\Type) \Type
+\]
+
+$\lambda\Pi$: Dependently-typed $\lambda$-calculus
+(\S\ref{sec:dependent_lambda}); Types depending on Terms (Dependent
+Types \S\ref{sec:dependent_type})--Kinds can appear to the right of
+Types in Dependent Types $a:A \vdash B(a)$:
+\[
+  B : A \rightarrow \Type
+\]
+or equivalently a Polymorphic Function:
+\[
+  B : (\Pi X:\Type) X \rightarrow A
+\]
+or:
+\[
+  B : (\Pi X:\Type) (\Pi x:X) A
+\]
+allowing the definition of Dependent Product Types
+(\S\ref{sec:pi_type}) and Dependent Sum Types
+(\S\ref{sec:sigma_type}):
+\[
+  f : (\Pi a:A) B(a) \quad\quad (a,b) : (\Sigma a:A) B(a)
+\]
+where $a:A$, $b:B(a)$, $(f x):B(a)$
+
+\[
+  f : (\Pi a:A) (\Pi X:\Type) (\Pi x:X) A
+\]
+
+$\lambda\omega$ -- System F$_\omega$ (\S\ref{sec:system_fomega}): $\lambda2$
+
+\fist The Systems in the $\lambda$ Cube are limited to Sorts
+$\{\star,\square\}$, i.e. Kinds and the Kind of Kinds; Pure Type
+Systems (\S\ref{sec:pts}) for Multi-sorted Type Systems %FIXME
 
 
 
@@ -4596,6 +4820,32 @@ Recursion Equation $X \simeq X \rightarrow X$. \cite{wadler12}
 A Denotational Semantics can be given by a \emph{B\"ohm Tree}
 (\S\ref{sec:bohm_tree}).
 
+$\lambda$-cube (\S\ref{sec:lambda_cube}):
+\begin{itemize}
+  \item $\lambda\kern-5pt\rightarrow$ -- Simply-typed
+    $\lambda$-calculus (\S\ref{sec:simply_typed}); Function Types
+    (\S\ref{sec:function_type})
+  \item $\lambda2$ -- Second-order $\lambda$-calculus
+    (\S\ref{sec:secondorder_lambda}); Polymorphic Types
+    (\S\ref{sec:polymorphic_type})
+  \item $\lambda\underline{\omega}$ -- Higher-order $\lambda$-calculus
+    (\S\ref{sec:higherorder_lambda}); Type Operators
+    (\S\ref{sec:type_operator})
+  \item $\lambda\Pi$ -- Dependently-typed $\lambda$-calculus
+    (\S\ref{sec:dependent_lambda}); Dependent Types
+    (\S\ref{sec:dependent_type})
+\end{itemize}
+
+Linear $\lambda$-calculus (\S\ref{sec:linear_lambda})
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\kappa$-calculus}\label{sec:kappa_calculus}
+% --------------------------------------------------------------------
+
+First-order fragment of Typed $\lambda$-calculus
+
 
 
 % --------------------------------------------------------------------
@@ -4604,22 +4854,34 @@ A Denotational Semantics can be given by a \emph{B\"ohm Tree}
 
 \emph{Simply-typed $\lambda$-calculus} ($\lambda^\rightarrow$) is a
 Typed Interpretation of $\lambda$-calculus with one Type Constructor
-for Function Types: $\rightarrow$ (\S\ref{sec:function_type}).
+(\S\ref{sec:type_constructor}) for Function Types
+(\S\ref{sec:function_type}): $\rightarrow$
 
 Strongly Normalizing, not Turing Complete: addition of $fix_\alpha$
 Operator or Recursive Types (\S\ref{sec:inductive_type}) gives
 Turing Completeness
 
-``Simply-typed'' is to distinguish from extensions such as:
+``Simply-typed'' is to distinguish from $\lambda$-cube
+(\S\ref{sec:lambda_cube}) Extensions and other variations such as:
 \begin{itemize}
-  \item System F (\S\ref{sec:system_f}): Polymorphic Types
-  \item Logical Framework (\S\ref{sec:logical_framework}): Dependent
-    Types
+  \item Polymorphic Types (\S\ref{sec:polymorphic_type}): Second-order
+    $\lambda$-calculus ($\lambda2$ \S\ref{sec:secondorder_lambda})
+  \item Type Operators (\S\ref{sec:type_operator}):
+    ($\lambda\underline{\omega}$ \S\ref{sec:higherorder_lambda})
+  \item Dependent Types (\S\ref{sec:dependent_type}):
+    Dependently-typed $\lambda$-calculus ($\lambda\Pi$
+    \S\ref{sec:dependent_lambda})
+  \item Conjunctive Types (\S\ref{sec:conjunctive_type}):
+    $\lambda$-calculus with Conjunctive Types
+    (\S\ref{sec:conjunctive_lambda})
+  \item Linear Types (\S\ref{sec:linear_type}): Linear
+    $\lambda$-calculus (\S\ref{sec:linear_lambda})
 \end{itemize}
 because Polymorphism and Dependency cannot be encoding using only
-$\rightarrow$ and Type Variables. Adding Record Types
-(\S\ref{sec:product_type}) to Simply-typed $\lambda$-calculus allows
-for Subtyping (\S\ref{sec:subtype}), and the resulting System
+$\rightarrow$ and Type Variables (\S\ref{sec:type_variable}). Adding
+Record Types (\S\ref{sec:product_type}) to Simply-typed
+$\lambda$-calculus allows for Subtyping
+(\S\ref{sec:subtype_polymorphism}), and the resulting System
 (\S\ref{sec:conjunctive_lambda}) is no longer ``Simply-typed'' because
 it allows for Terms to have more than one Type.
 
@@ -5426,86 +5688,196 @@ Dana Scott %FIXME
 
 
 % --------------------------------------------------------------------
-\subsection{$\lambda$-calculus with Conjunctive Types}
-\label{sec:conjunctive_lambda}
+\subsection{Second-order $\lambda$-calculus}
+\label{sec:secondorder_lambda}
 % --------------------------------------------------------------------
 
-Subtyping (\S\ref{sec:subtype})
+$\lambda2$ -- Second-order (Polymorphic) $\lambda$-calculus
 
-System $F_{<:}$ (\S\ref{sec:system_fsub})
+Polymorphic Types (\S\ref{sec:polymorphic_type})
 
+Quantification over Propositional Variables in Second-order Logic
+corresponds to Type Abstraction in Second-order $\lambda$-calculus.
+\cite{wadler14}
 
-
-% --------------------------------------------------------------------
-\subsection{Simply-typed $\lambda$-calculus with Type Operators}
-\label{sec:simplytyped_operators}
-% --------------------------------------------------------------------
-
-$\lambda\underline{\omega}$
-
-Types depending on Types
-
-System F$_\omega$ (\S\ref{sec:system_fomega})
+System F (\S\ref{sec:system_f}) is the canonical $\lambda2$-calculus
 
 
 
-% --------------------------------------------------------------------
-\subsection{System F}\label{sec:system_f}
-% --------------------------------------------------------------------
+\subsubsection{System F}\label{sec:system_f}
+
+$\lambda2$
 
 \emph{System F} (or \emph{Second-order $\lambda$-calculus})
 
 (\emph{Girard-Reynolds}) \emph{Polymorphic $\lambda$-calculus})
 
-Universal Quantification over all Types (cf. Existential Type Theory
-\S\ref{sec:abstract_type}) %FIXME
+Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
+Type-level Function Abstraction $\Lambda$
 
 By Curry-Howard Isomorphism, System F corresponds to the fragment of
 Second-order Intuitionistic Logic using only Universal Quantification;
 can describe all Functions that are Provably Total in Second-order
 Logic (\S\ref{sec:secondorder_logic})
 
-Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
-Type-level Function Abstraction $\Lambda$
+Universal Quantification over all Types (cf. Existential Type Theory
+\S\ref{sec:abstract_type}) %FIXME
 
-Quantification over Propositional Variables in Second-order Logic
-corresponds to Type Abstraction in Second-order $\lambda$-calculus.
-\cite{wadler14}
+
+
+System F$_\omega$ ($\lambda\omega$ \S\ref{sec:system_fomega}) --
+  Higher-order System F (Type Operators \S\ref{sec:type_operator})
+
+System F$_{<:}$ (\S\ref{sec:system_fsub}) -- System F with
+  Conjunctive Types (\S\ref{sec:conjunctive_type})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Higher-order $\lambda$-calculus}
+\label{sec:higherorder_lambda}
+% --------------------------------------------------------------------
+
+$\lambda\underline{\omega}$ -- Higher-order $\lambda$-calculus:
+Simply-typed $\lambda$-calculus with Type Operators
+(\S\ref{sec:type_operator})
+
+Types depending on Types
+
+
+
+\subsubsection{System F$_\omega$}\label{sec:system_fomega}
+
+$\lambda\omega$ -- System F ($\lambda2$ \S\ref{sec:system_f}) with
+Type Operators
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependently-typed $\lambda$-calculus}
+\label{sec:dependent_lambda}
+% --------------------------------------------------------------------
+
+$\lambda\Pi$ -- First-order Dependently-typed $\lambda$-calculus:
+correspondence with First-order Minimal Logic
+(\S\ref{sec:minimal_logic})
+
+Calculus of Constructions ($\lambda\Pi\omega$ \S\ref{sec:coc}) --
+Higher-order Dependently-typed $\lambda$-calculus
+
+$\lambda\Pi$ is the Meta-language of LF (\S\ref{sec:lf}) Logical
+Framework (\S\ref{sec:logical_framework})
+
+Objects of $\lambda\Pi$:
+\begin{enumerate}
+  \item (Proof) Objects
+  \item Types (Propositions)
+  \item Families of Types (Type Families ???)
+\end{enumerate}
+
+Well-typing (Judgement) is Decidable %FIXME judgement?
+
+Well-typed Terms are Strongly Normalizing
+
+Church-Rosser Property
+
+\fist Type-inference is Undecidable %FIXME
+
+Dependently-typed $\lambda$-calculus with a Type of all Types (the
+simplest Pure Type System \S\ref{sec:pts}) is not
+Strongly Normalizing due to Girard's Paradox
+(\S\ref{sec:girards_paradox})
+
+
+
+\subsubsection{Calculus of Constructions}\label{sec:coc}
+
+$\lambda\Pi\omega$ -- Higher-order Dependently-typed
+$\lambda$-calculus
+
+Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+
+Intuitionistic (\S\ref{sec:intuitionistic_logic}) Predicate Calculus
+(\S\ref{sec:predicate_logic})
+
+
+\textbf{Terms}
+
+\begin{flalign*}
+  \quad\quad & A,B ::= \class{T} \mid \class{P} \mid x
+    \mid (A\;B) \mid (\lambda x:A.B) \mid (\forall x:A.B) &
+\end{flalign*}
+
+$\class{T}$ -- Type of all Large Types
+
+$\class{P}$ -- Type of all Propositions (a Type of Predicate, i.e. a
+Large Type $\class{P}:\class{T}$)
+
+$x,y,\ldots$ -- Variables
+
+
+\textbf{Objects}
+
+\begin{enumerate}
+  \item Proofs -- Terms whose Types are Propositions
+  \item Propositions -- Small Types
+  \item Predicates -- Functions that return Propositions
+  \item Types of Predicates -- Large Types, e.g. $\class{P}$
+  \item $\class{T}$ -- Type of Large Types
+\end{enumerate}
+
+
+\asterism
+
+
+(scratch)
+
+$x:(A:(\Type:(\class{P}:\class{T})))$
+
+or
+
+$x:(A:(\class{P}:\class{T}))$
+
+$x:(A:(\Type:(\class{U})))$
+
+?
+
+
+$\exists x:A.B$
+
+$(\Pi C:\Type).(\Pi (\Pi x:A).(\Pi b:B).C).C$
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\lambda$-calculus with Conjunctive Types}
+\label{sec:conjunctive_lambda}
+% --------------------------------------------------------------------
+
+Subtyping (\S\ref{sec:subtype_polymorphism})
+
+Conjunctive Type (\S\ref{sec:conjunctive_type})
 
 
 
 \subsubsection{System F$_{<:}$}\label{sec:system_fsub}
 
-\subsubsection{System F$_\omega$}\label{sec:system_fomega}
+System F ($\lambda2$ \S\ref{sec:system_f}) with Conjunctive Types
+(\S\ref{sec:conjunctive_type})
 
 
 
-% --------------------------------------------------------------------
-\subsection{LF Logical Framework}
-\label{sec:logical_framework}
-% --------------------------------------------------------------------
+\paragraph{System F$_{<:}^\omega$}\label{sec:fsub_omega}\hfill
 
-Dependent Types (\S\ref{sec:dependent_type})
-
-Dependently-typed $\lambda$-calculus is base of Intuitionistic Type
-Theory (\S\ref{sec:intuitionistic_type}), Calculus of Constructions
-(\S\ref{sec:coq})
-
-By Curry-Howard Isomorphism Dependent Types correspond to Propositions
-of First-order Predicate Logic (\S\ref{sec:firstorder_logic})
-
-Dependently-typed $\lambda$-calculus with a Type of all Types (the
-simplest Pure Type System \S\ref{sec:pure_type_system}) is not
-Strongly Normalizing due to Girard's Paradox
-(\S\ref{sec:girards_paradox})
-
-Contextual Category (\S\ref{sec:contextual_category})
+Higher-order Bounded Quantification
 
 
 
 % --------------------------------------------------------------------
 \subsection{Linear $\lambda$-calculus}\label{sec:linear_lambda}
 % --------------------------------------------------------------------
+
+Substructural Type System (\S\ref{sec:substructural_type})
 
 Linear Type System (\S\ref{sec:linear_type})
 
@@ -5850,14 +6222,6 @@ Th. \textbf{Translation Preserves Types}
 
 
 % --------------------------------------------------------------------
-\subsection{$\kappa$-calculus}\label{sec:kappa_calculus}
-% --------------------------------------------------------------------
-
-First-order fragment of Typed $\lambda$-calculus
-
-
-
-% --------------------------------------------------------------------
 \subsection{B\"ohm Tree}\label{sec:bohm_tree}
 % --------------------------------------------------------------------
 
@@ -5869,55 +6233,270 @@ number of Children, and every Unlabelled Vertex has no Children.
 
 
 % ====================================================================
-\section{Calculus of Constructions}\label{sec:coq}
+\section{Logical Framework}\label{sec:logical_framework}
 % ====================================================================
 
+%FIXME
+
+Automath, Isabelle
+
+Dependently-typed $\lambda$-calculus (\S\ref{sec:dependent_lambda})
+
+\begin{enumerate}
+  \item Class of Object-logics (???)
+  \item Meta-language (\S\ref{sec:metalanguage})
+  \item Representation Mechanism for Object-Logics
+\end{enumerate}
+
+``Framework = Language + Representation''
+
+
+
+% --------------------------------------------------------------------
+\subsection{LF}\label{sec:lf}
+% --------------------------------------------------------------------
+
+LF (Edinburgh Logical Framework)
+
+Twelf
+
+
+wiki:
+
+Meta-language -- $\lambda\Pi$ (First-order Dependently-typed
+$\lambda$-calculus \S\ref{sec:dependent_lambda}): First-order Minimal
+Logic (\S\ref{sec:minimal_logic})
+
+\fist Type-inference is Undecidable %FIXME
+
+Objects of $\lambda\Pi$:
+\begin{enumerate}
+  \item (Proof) Objects
+  \item Types (Propositions)
+  \item Families of Types (Type Families ???)
+\end{enumerate}
+
+Representation Mechanism: Judgements-as-types (cf. Intuitionistic
+Type-theory \S\ref{sec:intuitionistic_type})
+
+Judgements are Represented as the Types of their Proofs
+
+a Logical System (\S\ref{sec:logical_system}) $\class{L}$ is
+Represented by its Signature assigning Kinds and Types to a Finite Set
+of Constants that Represent its Syntax, Judgements, and Rule Schemes
+%FIXME
+
+Object-logic Rules and Proofs are Represented as Primitive Proofs of
+Hypothetico-general Judgements:
+\[
+  \Lambda x:C.J(x) \vdash K
+\]
+
+$J \vdash K$ -- Hypothetical (ordinary Function Space
+\S\ref{sec:function_type})
+
+$\Lambda x:J.K(x)$ -- General (Dependent Function Space
+\S\ref{sec:dependent_function})
+
+
+
 % ====================================================================
-\section{Pure Type System}\label{sec:pure_type_system}
+\section{Pure Type System}\label{sec:pts}
 % ====================================================================
+
+(Roorda00) %FIXME
+
+PTS (or \emph{Generalized Type System})
+
+Multi-sorted Type System
 
 Arbitrary number of Sorts and Dependencies
 
-Generalization of the \emph{Lambda Cube} to more sorts than Terms and
-Types
+Generalization of the \emph{Lambda Cube} (\S\ref{sec:lambda_cube}) to
+more Sorts than Terms and Types
 
 Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
 
-Barendregt-Geuvers-Klop Conjecture
+Dependently-typed $\lambda$-calculus (\S\ref{sec:dependent_lambda})
+with a Type of all Types (\S\ref{sec:type_universe})--the simplest
+Pure Type System--is not Strongly Normalizing due to Girard's Paradox
+(\S\ref{sec:girards_paradox})
+
+Barendregt-Geuvers-Klop Conjecture: a Weakly Normalizing PTS always
+has the Strong Normalization Property
+
+Programming Languages: SAGE, Yarrow, Henk 2000
+
+
+\asterism
+
+
+$(S,A,R)$
+
+$S$ -- Set of \emph{Sorts} (all Constants)
+
+$A \hookrightarrow S \times S$ -- Set of \emph{Axioms} of the form $c:s$ of
+Constants $c$ and Sorts $s$
+
+$R \hookrightarrow S \times S \times S$ -- Set of Rules
+$(s_1,s_2,s_3)$ on Sorts
 
 
 
 % --------------------------------------------------------------------
-\subsection{Lambda Cube}\label{sec:lambda_cube}
+\section{$\lambda\mu$-calculus}\label{sec:lambda_mu}
 % --------------------------------------------------------------------
 
-All Strongly Normalizing
+Classical Logic (\S\ref{sec:classical_logic})
 
-$\lambda\rightarrow$: Simply-typed $\lambda$-calculus
-(\S\ref{sec:simply_typed}); Terms depending on Terms (Function Type
-\S\ref{sec:function_type})
+Classical Natural Deduction (\S\ref{sec:natural_deduction})
 
-$\lambda\underline{\omega}$: Simply-typed $\lambda$-calculus with Type
-Operators (\S\ref{sec:simplytyped_operators}); Types depending on
-Types (Type Functions \S\ref{sec:type_function})
+Operators corresponding to Continuations (\S\ref{sec:continuation})
 
-$\lambda2$: Second-order $\lambda$-calculus (System F
-\S\ref{sec:system_f}); Terms depending on Types (Polymorphism
-\S\ref{sec:polymorphic_type})
+Reduction Rules:
+\begin{itemize}
+  \item Logical Reduction
+  \item Structural Reduction
+  \item Renaming
+  \item $\eta$-reduction
+\end{itemize}
 
-$\lambda\Pi$: Dependently-typed $\lambda$-calculus (Logical Framework
-\S\ref{sec:logical_framework}); Types depending on Terms (Dependent
-Types \S\ref{sec:dependent_type})
+Confluent (\S\ref{sec:rewrite_confluence}) by the above Rules
+
+
+
+% ====================================================================
+\section{Dependent Type Theory}\label{sec:dependent_type_theory}
+% ====================================================================
+
+Dependent Types (\S\ref{sec:dependent_type})
+
+Dependently-typed $\lambda$-calculus (\S\ref{sec:dependent_lambda})
+
+By Curry-Howard Isomorphism Dependent Types correspond to Propositions
+of First-order Predicate Logic (\S\ref{sec:firstorder_logic})
+
+
+\textbf{Categorical Semantics} (\S\ref{sec:categorical_semantics})
+
+Categorical Model (\S\ref{sec:categorical_model})
+
+Comprehension Category (\S\ref{sec:comprehension_category}),
+Contextual Category (\S\ref{sec:contextual_category})
+
+Interpretation of Judgements of Dependent Type Theory in a given
+Category $\cat{C}$ with Finite Limits (\S\ref{sec:finite_limit})
+
+Codomain Fibration (\S\ref{sec:codomain_fibration}):
+\[
+  cod:\cat{C}^I \rightarrow \cat{C}
+\]
+
+Classifying Functor (Grothendieck Construction
+\S\ref{sec:grothendieck_construction}):
+\[
+  \chi : \cat{C}^{op} \rightarrow \cat{Cat}
+\]
+sends an Object in $\cat{C}$ to the Slice Category
+(\S\ref{sec:slice_category}) over it:
+\[
+  \chi = \Gamma \mapsto \cat{C}/\Gamma
+\]
+and sends a Moprhism $f : \Gamma \rightarrow \Gamma'$ to the Pullback
+(\S\ref{sec:pullback})/Base Change (\S\ref{sec:base_change}) Functor:
+\[
+  f^* : \cat{C}/\Gamma' \rightarrow \cat{C}/\Gamma
+\]
+
+
+\textbf{Rules}
+
+Rules for choices ``$[xyz]$'' associating every String ``$xyz$'' of
+Symbols in Type Theory with Objects and Morphisms in $\cat{C}$: a
+collection of such choices following the Rules is an Interpretation (a
+choice of Categorical Semantics) of the Type Theory in the Category
+$\cat{C}$.
+
+\emph{Contexts and Type Judgements}:
+\begin{enumerate}
+  \item $[()] := *$ -- Empty Context $()$ is Interpreted as the
+    Terminal Object $*$ of $\cat{C}$
+  \item For Context $\Gamma$ with Interpretation $[\Gamma] \in
+    \cat{C}_0$, a Judgement $\Gamma \vdash A\type$ is Interpreted
+    as an Object in the Slice Category over $\Gamma$:
+    \[
+      [\Gamma \vdash A\type] \in (\cat{C}/\Gamma)_0
+    \]
+    giving a choice of Morphism:
+    \[
+      [\Gamma \vdash A\type] : [(\Gamma,x:A)] \rightarrow [\Gamma]
+    \]
+  \item For Judgement $\Gamma \vdash A\type$ Interpreted as $[\Gamma
+    \vdash A\type]$ above, an Extended Context $(\Gamma,x:A)$ is
+    Interpreted as the Domain Object $[(\Gamma,x:A)]$ of the above
+    choice of Morphism
+\end{enumerate}
+
+\emph{Terms}
+
+For Context $\Gamma$ and Judgement $\Gamma \vdash A\type$ with chosen
+Interpretation $[\Gamma \vdash A\type] : [(\Gamma,x:A)] \rightarrow
+[\Gamma]$, a Judgement $\Gamma \vdash a:A$ is Interpreted as a Section
+(\S\ref{sec:section}) of $[\Gamma \vdash A\type]$, equivalently as a
+Morphism in $\cat{C}/\Gamma$:
+\[
+  [\Gamma \vdash a:A]: * \rightarrow [\Gamma,x:A]
+\]
+giving a Commuting Triangle:
+\[
+  1_{[\Gamma]} = [\Gamma \vdash A\type] \circ [\Gamma \vdash a:A]
+\]
+
+\emph{Variables}
+
+\emph{Substitution}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ornament}\label{sec:ornament}
+% --------------------------------------------------------------------
+
+\cite{mcbride13}
+
+Algebraic Ornament (\S\ref{sec:algebraic_ornament})
+
+Ornamental Algebra
+
+Dependent Types: ``axis'' of Indexing for Data Structures
+
+Datatype of Datatype Descriptions (\emph{Universe}: Martin-L\"of84)
+
+Refinement Types (\S\ref{sec:refinement_type}): Decoration with
+``Logical Data''; Ornaments ``Decorate'' with additional ``Non-logical
+Data'' %FIXME
+
+
+
+\subsubsection{Algebraic Ornament}\label{sec:algebraic_ornament}
+
+Type Refinement (\S\ref{sec:refinement_type}) Induced by Algebras over
+a Datatype's Structure
 
 
 
 % ====================================================================
 \section{Intuitionistic Type Theory}\label{sec:intuitionistic_type}
-\cite{martinlof84}
 % ====================================================================
+
+\cite{martinlof84}
 
 \emph{Intuitionistic Type Theory} (also \emph{Constructive Type
   Theory} or \emph{Martin-L\"of Type Theory})
+
+Calculus of Constructions (\S\ref{sec:coc})
+
+Dependent Type Theory (\S\ref{sec:dependent_type_theory})
 
 Inductive Types (\S\ref{sec:inductive_type})
 
@@ -5934,7 +6513,7 @@ Introduction: rules for Construction
 
 Elimination: rules for De-construction
 
-Computation:
+Computation: ???
 
 Four forms of Judgements:
 \begin{description}
@@ -6047,7 +6626,7 @@ Dependent Product Formation:
     \Gamma \vdash A \text{ type} \quad
     \Gamma, x:A \vdash B \text{ type}
   }{
-    \Gamma \vdash \Pi_{x:A} B \text{ type}
+    \Gamma \vdash (\Pi x:A) B \text{ type}
   } (\Pi\text{-F})
 \]
 Dependent Product Introduction:
@@ -6055,13 +6634,13 @@ Dependent Product Introduction:
   \frac{
     \Gamma, x : A \vdash m_x : B_x \quad
   }{
-    \Gamma \vdash (\lambda x:A.m_x : B_x) : \Pi_{x:A} B
+    \Gamma \vdash (\lambda x:A.m_x : B_x) : (\Pi x:A) B
   } (\Pi\text{-I})
 \]
 Dependent Product Elimination:
 \[
   \frac{
-    \Gamma \vdash m : \Pi_{x:A} B \quad
+    \Gamma \vdash m : (\Pi x:A) B \quad
     \Gamma \vdash n : A
   }{
     \Gamma \vdash m\;n : [n/x]B
@@ -6089,7 +6668,7 @@ Dependent Sum Formation:
     \Gamma \vdash A \text{ type} \quad
     \Gamma, x : A \vdash B_x \text{ type}
   }{
-    \Gamma \vdash \Sigma_{x:A} B_x \text{ type}
+    \Gamma \vdash (\Sigma x:A) B_x \text{ type}
   } (\Sigma\text{-F})
 \]
 Dependent Sum Introduction:
@@ -6098,13 +6677,13 @@ Dependent Sum Introduction:
     \Gamma \vdash m : A \quad
     \Gamma \vdash n : [m/x]B
   }{
-    \Gamma \vdash (m,n) : \Sigma_{x:A} B_x
+    \Gamma \vdash (m,n) : (\Sigma x:A) B_x
   } (\Sigma\text{-I})
 \]
 Dependent Sum Elimination 1:
 \[
   \frac{
-    \Gamma \vdash m : \Sigma_{x:A} B_x
+    \Gamma \vdash m : (\Sigma x:A) B_x
   }{
     \Gamma \vdash \pi_1\;m : A
   } (\Sigma\text{-E$_1$})
@@ -6112,7 +6691,7 @@ Dependent Sum Elimination 1:
 Dependent Sum Elimination 2:
 \[
   \frac{
-    \Gamma \vdash m : \Sigma_{x:A} B_x
+    \Gamma \vdash m : (\Sigma x:A) B_x
   }{
     \Gamma \vdash \pi_2\;m : B[\pi_1\;m/x]
   } (\Sigma\text{-E$_2$})
@@ -6284,21 +6863,21 @@ $U \subset a:A \vdash B(a) \Rightarrow \forall (x,X) \in U, x \in A
 
 \textbf{Dependent Sum Type} ($\Sigma$-type \S\ref{sec:sigma_type})
 
-$\Sigma_{(a:A)} B(a) = \{\{ (a_1, x_1), (a_1, x_2), ...\},
+$(\Sigma a:A) B(a) = \{\{ (a_1, x_1), (a_1, x_2), ...\},
 \{ (a_2, y_1), (a_2, y_2), ...\}, \cdots \}$
 
-$\Sigma_{(a:A)} B(a) \subset \pow \bigsqcup_{X \in \class{U}} A \times X$
+$(\Sigma a:A) B(a) \subset \pow \bigsqcup_{X \in \class{U}} A \times X$
 
-$Z \in \Sigma_{(a:A)} B(a) \Rightarrow \exists x \in A : \forall y \in
+$Z \in (\Sigma a:A) B(a) \Rightarrow \exists x \in A : \forall y \in
 B(x), (x,y) \in P$
 
 
 
 \textbf{Dependent Product Type} ($\Pi$-type \S\ref{sec:pi_type})
 
-$\Pi_{(a:A)} B(a) = \{(a_1, x), (a_2, y), (a_3, z), ...\}$
+$(\Pi a:A) B(a) = \{(a_1, x), (a_2, y), (a_3, z), ...\}$
 
-$\Pi_{(a:A)} B(a) \subset \pow \bigsqcup_{a \in A} \Sigma_{(a:A)} B(a)$
+$(\Pi a:A) B(a) \subset \pow \bigsqcup_{a \in A} (\Sigma a:A) B(a)$
 
 
 \asterism
@@ -6393,115 +6972,6 @@ with Observationally Equivalent Subterms.
 
 \emph{Canonicity}: any Closed Term is Definitionally Reducible to a
 Canonical Value
-
-
-
-% ====================================================================
-\section{Dependent Type Theory}\label{sec:dependent_type_theory}
-% ====================================================================
-
-\textbf{Categorical Semantics} (\S\ref{sec:categorical_semantics})
-
-Categorical Model (\S\ref{sec:categorical_model})
-
-Interpretation of Judgements of Dependent Type Theory in a given
-Category $\cat{C}$ with Finite Limits (\S\ref{sec:finite_limit})
-
-Codomain Fibration (\S\ref{sec:codomain_fibration}):
-\[
-  cod:\cat{C}^I \rightarrow \cat{C}
-\]
-
-Classifying Functor (Grothendieck Construction
-\S\ref{sec:grothendieck_construction}):
-\[
-  \chi : \cat{C}^{op} \rightarrow \cat{Cat}
-\]
-sends an Object in $\cat{C}$ to the Slice Category
-(\S\ref{sec:slice_category}) over it:
-\[
-  \chi = \Gamma \mapsto \cat{C}/\Gamma
-\]
-and sends a Moprhism $f : \Gamma \rightarrow \Gamma'$ to the Pullback
-(\S\ref{sec:pullback})/Base Change (\S\ref{sec:base_change}) Functor:
-\[
-  f^* : \cat{C}/\Gamma' \rightarrow \cat{C}/\Gamma
-\]
-
-
-\textbf{Rules}
-
-Rules for choices ``$[xyz]$'' associating every String ``$xyz$'' of
-Symbols in Type Theory with Objects and Morphisms in $\cat{C}$: a
-collection of such choices following the Rules is an Interpretation (a
-choice of Categorical Semantics) of the Type Theory in the Category
-$\cat{C}$.
-
-\emph{Contexts and Type Judgements}:
-\begin{enumerate}
-  \item $[()] := *$ -- Empty Context $()$ is Interpreted as the
-    Terminal Object $*$ of $\cat{C}$
-  \item For Context $\Gamma$ with Interpretation $[\Gamma] \in
-    \cat{C}_0$, a Judgement $\Gamma \vdash A\type$ is Interpreted
-    as an Object in the Slice Category over $\Gamma$:
-    \[
-      [\Gamma \vdash A\type] \in (\cat{C}/\Gamma)_0
-    \]
-    giving a choice of Morphism:
-    \[
-      [\Gamma \vdash A\type] : [(\Gamma,x:A)] \rightarrow [\Gamma]
-    \]
-  \item For Judgement $\Gamma \vdash A\type$ Interpreted as $[\Gamma
-    \vdash A\type]$ above, an Extended Context $(\Gamma,x:A)$ is
-    Interpreted as the Domain Object $[(\Gamma,x:A)]$ of the above
-    choice of Morphism
-\end{enumerate}
-
-\emph{Terms}
-
-For Context $\Gamma$ and Judgement $\Gamma \vdash A\type$ with chosen
-Interpretation $[\Gamma \vdash A\type] : [(\Gamma,x:A)] \rightarrow
-[\Gamma]$, a Judgement $\Gamma \vdash a:A$ is Interpreted as a Section
-(\S\ref{sec:section}) of $[\Gamma \vdash A\type]$, equivalently as a
-Morphism in $\cat{C}/\Gamma$:
-\[
-  [\Gamma \vdash a:A]: * \rightarrow [\Gamma,x:A]
-\]
-giving a Commuting Triangle:
-\[
-  1_{[\Gamma]} = [\Gamma \vdash A\type] \circ [\Gamma \vdash a:A]
-\]
-
-\emph{Variables}
-
-\emph{Substitution}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Ornament}\label{sec:ornament}
-% --------------------------------------------------------------------
-
-\cite{mcbride13}
-
-Algebraic Ornament (\S\ref{sec:algebraic_ornament})
-
-Ornamental Algebra
-
-Dependent Types: ``axis'' of Indexing for Data Structures
-
-Datatype of Datatype Descriptions (\emph{Universe}: Martin-L\"of84)
-
-Refinement Types (\S\ref{sec:refinement_type}): Decoration with
-``Logical Data''; Ornaments ``Decorate'' with additional ``Non-logical
-Data'' %FIXME
-
-
-
-\subsubsection{Algebraic Ornament}\label{sec:algebraic_ornament}
-
-Type Refinement (\S\ref{sec:refinement_type}) Induced by Algebras over
-a Datatype's Structure
 
 
 
@@ -7146,7 +7616,7 @@ Homotopy Types Model $\infty$-groupoids
 
 Categorical Semantics (\S\ref{sec:categorical_semantics})
 
-nCatLab:
+nLab:
 
 Observational Type Theory (\S\ref{sec:observational_type}) is a
 first-step approximation to Homotopy Type Theory: Propositions of OTT
@@ -7172,7 +7642,7 @@ $h$-groupoid (\S\ref{sec:h_groupoid})
 
 $h$-level 1
 
-nCatLab:
+nLab:
 
 (or \emph{Mere Proposition})
 
