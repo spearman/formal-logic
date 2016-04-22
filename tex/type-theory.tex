@@ -700,6 +700,8 @@ Structural Recursion (\S\ref{sec:structural_recursion})
 Streams between interacting processes in Programming Languages
 Recursive Data Type
 
+Calculus of Inductive Constructions (\S\ref{sec:cic})
+
 
 \asterism
 
@@ -1378,6 +1380,9 @@ Adding additional Type Operators to Simply-typed $\lambda$-calculus
 \emph{Higher-order $\lambda$-calculus} ($\lambda\underline{\omega}$
 \S\ref{sec:higherorder_lambda})
 
+a Type Operator is a Kind (\S\ref{sec:kind}), i.e. its ``members'' are
+Types
+
 The Type Operators themselves can be viewed as forming a Simply-typed
 $\lambda$-calculus with only one Base Type (\S\ref{sec:type_constant})
 denoted `$\ast$' representing the Type of all Types in the underlying
@@ -1398,8 +1403,8 @@ Monotonic Type Operators: Inductive Types (\S\ref{sec:inductive_type})
 % --------------------------------------------------------------------
 
 A \emph{Kind} is the Type of a Type Operator
-(\S\ref{sec:type_operator}), or the Type of a Higher-order Type
-Operator \S\ref{sec:higherorder_typeoperator}).
+(\S\ref{sec:type_operator}), or the Type of a Dependent Type
+(\S\ref{sec:dependent_type}).
 
 \fist Proper Type (\S\ref{sec:type})
 
@@ -1503,6 +1508,15 @@ A Type Family declared inside a Type Class is an \emph{Associated
 
 
 
+% --------------------------------------------------------------------
+\subsection{Polymorphic Type Operator}
+\label{sec:polymorphic_type_operator}
+% --------------------------------------------------------------------
+
+(or \emph{Generic Type Constructor})
+
+
+
 % ====================================================================
 \section{Dependent Type}\label{sec:dependent_type}
 % ====================================================================
@@ -1512,6 +1526,9 @@ A \emph{Dependent Type} depends on a Term or another Type.
 \[
   x : A \vdash B(x):\mathrm{Types}
 \]
+
+a Dependent Type is actually a Kind (\S\ref{sec:kind}), i.e. its
+``members'' are Types
 
 A Dependent Product Type (\S\ref{sec:pi_type}) is defined by
 a Dependent Function (\S\ref{sec:dependent_function}).
@@ -1729,6 +1746,31 @@ with (Cumulative Property):
 % --------------------------------------------------------------------
 \subsection{Girard's Paradox}\label{sec:girards_paradox}
 % --------------------------------------------------------------------
+
+Type-theoretic analogue of Russell's Paradox
+(\S\ref{sec:russells_paradox}) in Set Theory
+
+example Inconsistent Pure Type System (\S\ref{sec:pts}): System U
+(\S\ref{sec:system_u}) -- allows the assignment of Polymorphic Kinds
+(\S\ref{sec:polymorphic_kind}) to Generic Constructors
+(\S\ref{sec:polymorphic_type_operator}); analogy to Polymorphic Types
+(\S\ref{sec:polymorphic_type}) of Terms in ordinary Polymorphic
+$\lambda$-calculi, e.g. System F (\S\ref{sec:system_f})
+
+example Generic Constructor:
+\[
+  \lambda k^\square \lambda \alpha^{k \rightarrow k}\lambda\beta^k.
+    \alpha(\alpha\beta) :
+  \Pi k:\square((k \rightarrow k) \rightarrow k \rightarrow k)
+\]
+
+using this mechanism is sufficient to Construct a Term with the Type:
+\[
+  (\forall p:\star,p) = \bot)
+\]
+which Implies that every Type is Inhabited and by Curry-Howard
+Correspondence all Logical Propositions are Provable, i.e. the System
+is Inconsistent
 
 
 
@@ -5826,6 +5868,10 @@ $x,y,\ldots$ -- Variables
   \item $\class{T}$ -- Type of Large Types
 \end{enumerate}
 
+$\star:\square$
+
+$\Prop:\Type$
+
 
 \asterism
 
@@ -5846,6 +5892,22 @@ $x:(A:(\Type:(\class{U})))$
 $\exists x:A.B$
 
 $(\Pi C:\Type).(\Pi (\Pi x:A).(\Pi b:B).C).C$
+
+
+
+\paragraph{Calculus of Inductive Constructions}\label{sec:cic}
+
+nLab:
+
+Calculus of Co-inductive Constructions
+
+Pure Type System (\S\ref{sec:pts})
+
+Universes (\S\ref{sec:type_universe}): Cumulative Hierarchy
+(\S\ref{sec:cumulative_hierarchy}) of Predicative (???) Types of Types
+and Impredicative Type of Propositions %FIXME
+
+Intensional Dependent Type Theory
 
 
 
@@ -5965,8 +6027,8 @@ Unlimited Types correspond to Types written with $!$ in CP
 
 \emph{Session Types}:
 \begin{flalign*}
-  \quad S &::= \;!T.S \;|\; ?T.S \;|\; \oplus\{l_i:S_i\}_{i \in I}
-    \;|\; \&\{l_i:S_i\}_{i \in I} \;|\; end_! \;|\; end_? &
+  \quad\quad S &::= \;!T.S \mid ?T.S \mid \oplus\{l_i:S_i\}_{i \in I}
+    \mid \&\{l_i:S_i\}_{i \in I} \mid end_! \mid end_? &
 \end{flalign*}
 
 $!T.S$ -- Output Value of Type $T$ then Behave as $S$
@@ -6013,13 +6075,13 @@ $un(\Phi)$ -- Each Type in $\Phi$ is Unlimited
 
 \emph{Terms}:
 \begin{flalign*}
-  \quad L,M,N &::= x \;|\; \mono{unit} \;|\; \lambda x.N \;|\; L M
-    \;|\; (M,N) \;|\; \mono{let}\; (x,y) = M \;\mono{in}\; N & \\
-    & \;|\; \mono{send}\; M N \;|\; \mono{receive}\; M
-    \;|\; \mono{select}\; l M
-    \;|\; \case\; M \;\of\; \{l_i:x.N_i\}_{i\in I} & \\
-    & \;|\; \mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N
-    \;|\; \mono{terminate}\; M &
+  \quad\quad L,M,N ::=&\; x \mid \mono{unit} \mid \lambda x.N \mid L\;M
+    \mid (M,N) \mid \mono{let}\; (x,y) = M \;\mono{in}\; N & \\
+    \mid &\; \mono{send}\; M\;N \mid \mono{receive}\; M
+    \mid \mono{select}\; l\;M
+    \mid \case\; M \;\of\; \{l_i:x.N_i\}_{i\in I} & \\
+    \mid &\; \mono{with}\; x \;\mono{connect}\; M \;\mono{to}\; N
+    \mid \mono{terminate}\; M &
 \end{flalign*}
 
 Linear $\lambda$-calculus:
@@ -6030,7 +6092,7 @@ $\mono{unit}$ -- Unit Constant
 
 $\lambda x.N$ -- Function Abstraction
 
-$L M$ -- Function Application
+$L\;M$ -- Function Application
 
 $(M,N)$ -- Pair Construction
 
@@ -6038,11 +6100,11 @@ $\mono{let}\; (x,y) = M \;\mono{in}\; N$
 
 Communication on a Channel:
 
-$\mono{send}\; M N$ -- Send Value $M$ on Channel $N$
+$\mono{send}\; M\;N$ -- Send Value $M$ on Channel $N$
 
 $\mono{receive}\; M$ -- Receive on Channel $M$
 
-$\mono{select}\; l M$ -- Select Label $l$ on Channel $M$
+$\mono{select}\; l\;M$ -- Select Label $l$ on Channel $M$
 
 $\case\; M \;\of\; \{l_i:x.N_i\}_{i\in I}$ -- Offer Choice
 on Channel $M$
@@ -6069,7 +6131,7 @@ Unique Smallest Type.
 \asterism
 
 
-\emph{Output} -- $\mono{send}\; M N$: \\
+\emph{Output} -- $\mono{send}\; M\;N$: \\
 Outputs the Value $M$ of Type $T$ on Channel $N$ of Session Type
 $!T.S$ \\
 Returns the updated Channel after which the Output has Session Type
@@ -6233,6 +6295,30 @@ number of Children, and every Unlabelled Vertex has no Children.
 
 
 % ====================================================================
+\section{$\lambda\mu$-calculus}\label{sec:lambda_mu}
+% ====================================================================
+
+Classical Logic (\S\ref{sec:classical_logic})
+
+Classical Natural Deduction (\S\ref{sec:natural_deduction})
+
+Operators corresponding to Continuations (\S\ref{sec:continuation})
+
+Reduction Rules:
+\begin{itemize}
+  \item Logical Reduction
+  \item Structural Reduction
+  \item Renaming
+  \item $\eta$-reduction
+\end{itemize}
+
+Confluent (\S\ref{sec:rewrite_confluence}) by the above Rules
+
+\fist Cf. Classical Pure Type Systems (\S\ref{sec:cpts})
+
+
+
+% ====================================================================
 \section{Logical Framework}\label{sec:logical_framework}
 % ====================================================================
 
@@ -6315,53 +6401,109 @@ Arbitrary number of Sorts and Dependencies
 Generalization of the \emph{Lambda Cube} (\S\ref{sec:lambda_cube}) to
 more Sorts than Terms and Types
 
-Not necessarily Strongly Normalizing (\S\ref{sec:normalization})
+Not necessarily Strongly Normalizing (\S\ref{sec:normalization}), e.g.
+System U (\S\ref{sec:system_u})
 
 Dependently-typed $\lambda$-calculus (\S\ref{sec:dependent_lambda})
 with a Type of all Types (\S\ref{sec:type_universe})--the simplest
 Pure Type System--is not Strongly Normalizing due to Girard's Paradox
 (\S\ref{sec:girards_paradox})
 
-Barendregt-Geuvers-Klop Conjecture: a Weakly Normalizing PTS always
-has the Strong Normalization Property
+\emph{Barendregt-Geuvers-Klop Conjecture}: a Weakly Normalizing PTS
+always has the Strong Normalization Property
 
 Programming Languages: SAGE, Yarrow, Henk 2000
+
+
+System of Natural Deduction (\S\ref{sec:natural_deduction}) for
+Dependent Types (\S\ref{sec:dependent_type}) with only the Dependent
+Product Type (\S\ref{sec:pi_type}) Formation Rule specified.
+
+Dependent Product as the Type of $\lambda$-expressions:
+\[
+  \Gamma,x:A \vdash B:C
+\]
+Implies:
+\[
+  \Gamma \vdash (\lambda x:A.B):(\Pi x:A.C)
+\]
 
 
 \asterism
 
 
+wiki:
+
 $(S,A,R)$
 
 $S$ -- Set of \emph{Sorts} (all Constants)
 
-$A \hookrightarrow S \times S$ -- Set of \emph{Axioms} of the form $c:s$ of
-Constants $c$ and Sorts $s$
+$A \hookrightarrow S \times S$ -- Set of \emph{Axioms} of the form
+$c:s$ of Constants $c$ and Sorts $s$
 
 $R \hookrightarrow S \times S \times S$ -- Set of Rules
-$(s_1,s_2,s_3)$ on Sorts
+$(s_1,s_2,s_3)$ on Sorts where Types of Sort $s_2$ may Depend on Types
+of Sort $s_1$ with its Dependent Product a Type of Sort $s_3$
+
+Rules $(s_1,s_2,s_2)$ are abbreviated
+$(s_1,s_2)$
+
+Axioms describe the Containment of Sorts, e.g. $\star:\square$ (Types
+in Kinds)
+
+Rules define the Dependencies between Sorts:
+\begin{itemize}
+  \item $(\star,\star)$ -- Terms may depend on Terms (Functions
+    \S\ref{sec:function_type})
+  \item $(\star,\square)$ -- Types may depend on Terms (Dependent
+    Types \S\ref{sec:dependent_type})
+  \item $(\square,\star)$ -- Terms may depend on Types (Polymorphism
+    \S\ref{sec:polymorphic_type})
+  \item $(\square,\square)$ -- Types may depend on Types (Type
+    Operators \S\ref{sec:type_operator})
+\end{itemize}
+
+$(\lambda x:A.f(x)):(\Pi x:A.B):\star$
+
+$(\lambda x:A.B(x)):(\Pi x:A.\star):\square$
+
+$(\Lambda X:\star.f_X):(\Pi X:\star.C):\star$
+
+$(\Lambda X:\star.F(X)):(\Pi X:\star.\star):\square$
 
 
 
 % --------------------------------------------------------------------
-\section{$\lambda\mu$-calculus}\label{sec:lambda_mu}
+\subsection{Classical Pure Type System}\label{sec:cpts}
 % --------------------------------------------------------------------
 
 Classical Logic (\S\ref{sec:classical_logic})
 
-Classical Natural Deduction (\S\ref{sec:natural_deduction})
+addition of Double Negation Operator
 
-Operators corresponding to Continuations (\S\ref{sec:continuation})
+\fist Cf. $\lambda\mu$-calculus (\S\ref{sec:lambda_mu})
 
-Reduction Rules:
-\begin{itemize}
-  \item Logical Reduction
-  \item Structural Reduction
-  \item Renaming
-  \item $\eta$-reduction
-\end{itemize}
 
-Confluent (\S\ref{sec:rewrite_confluence}) by the above Rules
+
+% --------------------------------------------------------------------
+\subsection{Modal Pure Type System}\label{sec:mpts}
+% --------------------------------------------------------------------
+
+Modal Logic (\S\ref{sec:modal_logic})
+
+Modal Type Theory (\S\ref{sec:modal_type_theory})
+
+
+
+% --------------------------------------------------------------------
+\subsection{System U}\label{sec:system_u}
+% --------------------------------------------------------------------
+
+Non-normalizing, Inconsistent
+
+Girard's Paradox (\S\ref{sec:girards_paradox})
+
+System U$^-$
 
 
 
@@ -6986,6 +7128,8 @@ Type Formation Rules for Modalities (\S\ref{sec:modality})
 Closure Operator Modality (???)
 
 Idempotent Monadic or Idempotent Comonadic (???)
+
+Modal Pure Type Systems (\S\ref{sec:mpts})
 
 
 
