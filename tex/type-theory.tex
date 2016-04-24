@@ -349,6 +349,23 @@ which has Values (Terms?)
 \fist Cf. Kind (\S\ref{sec:kind})
 
 
+``Datatypes'' as Fixed Points of Endofunctors: $F$-algebra
+(\S\ref{sec:f_algebra}), $F$-coalgebra (\S\ref{sec:f_coalgebra})
+%FIXME
+
+
+
+% --------------------------------------------------------------------
+\subsection{Well-formed Type}\label{sec:wellformed_type}
+% --------------------------------------------------------------------
+
+%FIXME
+
+Type Expression (\S\ref{sec:type_expression}) is Well-formed if given
+Constructor (? Type Operator \S\ref{sec:type_operator}) Expression has
+Kind (\S\ref{sec:kind}) $\star$
+
+
 
 % --------------------------------------------------------------------
 \subsection{Type Variable}\label{sec:type_variable}
@@ -371,7 +388,7 @@ Existentially Quantified Type Variables
 \emph{Type Constant} (also \emph{Primitive Type} or \emph{Base Type}
 or \emph{Atomic Type})
 
-Uninterpreted (\S\ref{sec:uninterpreted_function}) % FIXME
+Uninterpreted (\S\ref{sec:uninterpreted_function}) % FIXME ?
 
 
 
@@ -898,12 +915,14 @@ Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
 
 %FIXME type class section?
 
-(or \emph{Type Class})
-
 Existentially Quantifid Type Variable
 
 Ad-hoc Polymorphism (\S\ref{sec:adhoc_polymorphism}), Function
 Overloading
+
+\emph{Type Class} (\S\ref{sec:type_class})
+
+Restricted Polymorphic Type %FIXME
 
 Type Classes are used to define Overloaded Functions, Type Families
 (\S\ref{sec:type_family}) are used to defined Overloaded Data
@@ -924,6 +943,21 @@ Injective Functions from all Types of a particular Kind
 \fist Type Synonyms (\S\ref{sec:type_synonym}) define Functions from
 all Types of a particular Kind to another Set of Types using a single
 ``Case'' (???) %FIXME
+
+
+
+\paragraph{Type Class}\label{sec:type_class}\hfill
+
+\cite{jones95}
+
+intermediate between Monomorphic Types (Kind \S\ref{sec:kind} $\star$)
+and fully Polymorphic Types (\S\ref{sec:polymorphic_type})
+
+use Classes to represent Sets of Types, i.e. (Nullary?) Type
+Constructors (\S\ref{sec:type_operator}) of Kind $\star$
+
+special case of Constructor Classes (\S\ref{sec:constructor_class})
+representing Sets of Types of any fixed Kind $\kappa$
 
 
 
@@ -1413,6 +1447,29 @@ Super-kind
 Pure Type System (\S\ref{sec:pts})
 
 
+\cite{jones95}
+
+%FIXME sections, xrefs
+
+\emph{Kind System}
+
+Kind Inference
+
+\begin{align*}
+  \kappa ::= &\; \star \mid \kappa_1 \Rightarrow \kappa_2
+\end{align*}
+
+$\star$ -- Monotypes (Nullary Type Constructors)
+
+$\kappa_1 \Rightarrow \kappa_2$ -- Function Kinds
+
+Type Expressions (\S\ref{sec:type_expression}) are Well-formed
+(\S\ref{sec:wellformed_type}) if the given Type Constructor (? Type
+Operator \S\ref{sec:type_operator}) has Kind $\star$
+
+Constructor Classes (\S\ref{sec:constructor_class})
+
+
 
 \subsubsection{Polymorphic Kind}\label{sec:polymorphic_kind}
 
@@ -1426,6 +1483,20 @@ Pure Type System (\S\ref{sec:pts})
 Allowing for the Type Operators to form a Simply-typed
 $\lambda$-calculus with the single Base Type `$*$' allows for
 Higher-order Type Operators.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Constructor Class}\label{sec:constructor_class}
+% --------------------------------------------------------------------
+
+use Classes to represent Sets of Constructors of any fixed Kind
+$\kappa$
+
+Type Classes (\S\ref{sec:type_class}) as a specific case of
+Constructor Classes
+
+Classes of Monads, Effects ?
 
 
 
@@ -1983,6 +2054,16 @@ Names
 % --------------------------------------------------------------------
 \subsection{Unified Type System}\label{sec:unified_type_system}
 % --------------------------------------------------------------------
+
+every Type Inherits from a single ``Root'' Type
+
+
+
+\subsubsection{Type Unification}\label{sec:type_unification}
+
+%FIXME
+
+
 
 % --------------------------------------------------------------------
 \subsection{Structural Type System}\label{sec:structural_type_system}

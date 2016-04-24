@@ -868,6 +868,12 @@ Catamorphism creates a Recursive Evaluator for a Nested Data Structure
 List Folding to arbitrary Recursive Data Structures
 (\S\ref{sec:data_structure}).
 
+``Bananas'' (???) %FIXME
+
+$\llparenthesis \varphi \rrparenthesis$
+
+\fist Cf. Anamorphism (\S\ref{sec:anamorphism}) ``Lenses'' $\llense
+\psi \rlense$
 
 
 \paragraph{Fusion}\label{sec:fusion}\hfill
@@ -896,6 +902,13 @@ $\theta : A \rightarrow F(A)$
 \]\[
   Ana (\theta) = Fx \circ (fmap (Ana (\theta))) \circ \theta
 \]
+
+``Lenses'' (???) %FIXME
+
+$\llense \psi \rlense$
+
+\fist Cf. Catamorphism (\S\ref{sec:catamorphism}) ``Bananas''
+$\llparenthesis \varphi \rrparenthesis$
 
 
 
@@ -1352,6 +1365,9 @@ Objects.
 
 \emph{$F$-coalgebra} (\S\ref{sec:f_coalgebra}): Deconstruction
 (Observation, Modification)
+
+Datatypes (??? Types \S\ref{sec:type}) Constructed as the Fixed Points
+of (Endo-) Functors. \cite{jones95} %FIXME
 
 For an Endofunctor $F : \cat{C} \rightarrow \cat{C}$, an
 \emph{$F$-algebra} is an Object $A \in \cat{C}_0$ called the
@@ -1928,6 +1944,9 @@ at $X$. When (2) holds, a Commutative Diagram is formed and the
 Morphisms $\tau_X$ are said to be \emph{Natural} in $X$. If there is
 no Morphism in $\cat{D}$ corresponding to $\tau_X$, then there can
 be no Natural Transformation from $F$ to $G$.
+
+Milewski: A Natural Transformation maps Morphisms to Commuting
+Diagrams
 
 When every Component in $\tau$ is Invertible in $\cat{D}$, $\tau$ is a
 \emph{Natural Isomorphism} (\S\ref{sec:natural_isomorphism}) and $F
@@ -2993,6 +3012,12 @@ Isomorphisms are effectively two-way Rules of Inference.
 \emph{Existence}
 
 \emph{Uniqueness}
+
+Universal Construction
+
+Milewski: If a Universal Construction exists for all Diagrams of a
+certain shape in a Category, it can also be defined through an
+Adjunction (\S\ref{sec:adjunction})
 
 
 
@@ -4084,12 +4109,20 @@ Isomorphism:
 is Natural in $C$ and $D$.
 
 
+Milewski: If a Universal Construction (\S\ref{sec:universal_property})
+exists for all Diagrams of a certain shape in a Category, it can also
+be defined through an Adjunction
+
+
 \textbf{Unit}
 
 Natural Transformation:
 \[
   \eta : 1_\cat{C} \rightarrow U F
 \]
+
+\fist Unit may be called ``Return'' or ``Pure'' in a Monad
+(\S\ref{sec:monad})
 
 
 \textbf{Counit}
@@ -4098,6 +4131,15 @@ Natural Transformation:
 \[
   \epsilon : F U \rightarrow 1_\cat{D}
 \]
+
+\fist Counit may be called ``Extract'' in a Comonad
+
+
+Milewski: Unit allows the ``introduction'' of $R \circ L$ anywhere
+$\Id_\cat{D}$ would be used; Counit allows an ``elimination'' of the
+Composition $L \circ R$ replacing it with $\Id_\cat{C}$. Every Monad
+or Comonad may be ``Factorized'' (not necessarily uniquely) into a
+pair of Adjoint Functors.
 
 
 \textbf{Triangle Identities} (\S\ref{sec:triangle_identity})
@@ -4331,13 +4373,17 @@ Correspondences: \cite{jacobs-heunen-hasuo09}
   \S\ref{sec:kleisli_category})
 \end{itemize}
 
-In Programming: Interface to Abstract Datatype of ``Program
-Fragments''
+In Programming: Interface to Abstract Datatype
+(\S\ref{sec:abstract_type}) of ``Program Fragments''
 
-$Return : X \rightarrow T(X)$ (Comonad: $Extract$)
+$\mathsf{return} : X \rightarrow T(X)$ (Comonad: $\textsf{extract}$)
 
-$Join : T(T(X) \rightarrow T(X)$ (Comonad: $Duplicate : T(A)
-\rightarrow T(T(A))$)
+$\mathsf{join} : T(T(X) \rightarrow T(X)$ (Comonad:
+$\textsf{duplicate} : T(X) \rightarrow T(T(X))$)
+
+$\mathsf{bind} : T(X) \rightarrow (X \rightarrow T(Y)) \rightarrow
+T(Y)$ (Comonad: $\mathsf{cobind} : T(X) \rightarrow (T(X) \rightarrow
+Y) \rightarrow T(Y)$)
 
 An alternative to Monads for Computational Effects
 (\S\ref{sec:computational_effect}) is Algebraic Effects
@@ -4428,6 +4474,87 @@ Unit for Kleisli Composition (``Return''):
 \[
   \mathtt{pure}_X : X \rightarrow T (X)
 \]
+
+
+\asterism
+
+\cite{jones95}
+
+Classes of Monads defined by Constructor Classes
+(\S\ref{sec:constructor_class})
+%FIXME
+
+Composition of Monads $S$, $T$ of Value $A$:
+
+$\mathsf{fcomp}\;S\;T\;A = T (S A)$ -- \emph{Forward Composition}
+
+$\mathsf{bcomp}\;S\;T\;A = S (T A)$ -- \emph{Backward Composition}
+
+(functor instances)
+
+two Monads $S$,$T$ can be Composed if there is a $\mathsf{swap}$
+Function:
+\begin{flalign*}
+  \quad\quad \mathsf{swap} & : S (T A) \rightarrow T (S A) &
+\end{flalign*}
+Satisfying Laws: %FIXME
+
+(laws)
+
+\begin{flalign*}
+  \quad\quad \unit_{S,T} & : A \rightarrow S (T A) & \\
+  \quad\quad \unit_{S,T} & = \unit_S \circ \unit_T &
+\end{flalign*}
+
+\begin{flalign*}
+  \quad\quad \mathsf{join} & : S (T (S (T A))) \rightarrow S (T A) &
+\end{flalign*}
+
+\cite{duponcheel-jones93}
+
+Premonad (???) %FIXME
+
+Definition of $\mathsf{join}$ is not possible using only the
+Operations of the two Monads, additional constructions linking the two
+components is required.
+
+\cite{duponcheel-jones93} give four possible constructions:
+\begin{enumerate}
+  \item Trivial: Premonads $S$ and $T$; $\mathsf{join}$ given by
+    definition as a Polymorphic Function
+  \item $\mathsf{prod}$ Construction: Monad $S$, Premonad $T$ %FIXME
+  \item $\mathsf{dorp}$ Construction: Premonad $S$, Monad $T$ %FIXME
+  \item $\mathsf{swap}$ Construction: Monads $S$ and $T$ %FIXME
+\end{enumerate}
+
+Into/Outof %FIXME
+
+Combining two arbitrary Monads involves using one fixed Monad to
+Transform another arbitrary Monad
+
+
+\textbf{Monad Transformers}
+
+Constructors with Kind $(\star \rightarrow \star) \rightarrow (\star
+\rightarrow \star)$:
+
+Examples:
+\begin{align*}
+  \mathsf{MaybeT} & = \mathsf{fcomp\;Maybe} \\
+  \mathsf{ErrorT} & = \mathsf{fcomp\;Error} \\
+  \mathsf{WriterT} & = \mathsf{fcomp\;Writer} \\
+  \mathsf{ReaderT}\; r & = \mathsf{bcomp}\;(r \rightarrow)
+\end{align*}
+
+Class of Monad Transformers:
+\begin{flalign*}
+  \quad\quad & \mono{class}\;\mathsf{MonadT}\;t\;\mono{where} & \\
+  \quad\quad & \quad \mathsf{lift} : m\;a \rightarrow t\;m\;a
+\end{flalign*}
+where $m$ is Constrained to be a Monad.
+
+
+\asterism
 
 
 \textbf{Generalization of Universal Algebra}
