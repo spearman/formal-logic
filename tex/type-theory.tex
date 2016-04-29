@@ -2653,8 +2653,8 @@ $\mathfrak{st}$-computations always Implicitly Coercible (with
 Subtyping Definitions) into an
 $\mathfrak{ex}$-computation
 
-Each individual Monadic Translation can be uniformly simulated by a
-Layer of Continuation-passing
+Each individual Monadic Translation can be ``uniformly simulated'' by
+a Layer of Continuation-passing
 
 Any hierarchy of Continuation-passing Layers can be simulated by a
 single Effect comprising First-class Continuations and Mutable State
@@ -2830,7 +2830,7 @@ Value Polymorphism (\S\ref{sec:value_polymorphism})
 In the Category $\cat{Set}$, a Computation that Returns Values from a
 Set $A$ is Modelled by an Element $T A$ for a ``suitable'' Monad $T$.
 
-E.g. Exceptions, State, Non-determinism, Interactive Input/Output,
+e.g. Exceptions, State, Non-determinism, Interactive Input/Output,
 Time, Continuations, etc. (and combinations thereof)
 
 Algebraic Effects (\S\ref{sec:algebraic_effect}):
@@ -2855,6 +2855,71 @@ Continuation-based (\S\ref{sec:continuation})
 
 
 \subsubsection{Exception Effect}\label{sec:exception_effect}
+
+Thielecke01
+
+Continuations (\S\ref{sec:continuation})
+
+Continuations: Classical -- Exceptions: Intuitionistic
+
+$\lambda + \mathbf{cont}$
+
+$\lambda + \mathbf{exn}$
+
+$\lambda + \mathbf{state}$
+
+$\lambda + \mathbf{cont} + \mathbf{exn}$
+
+in a base Language without State, Exceptions cannot express
+Continuations
+
+in a base Language without State, Continuations cannot express
+Exceptions; Exceptions can break a Contextual Equivalence that holds
+in the presence of Continuations--Exceptions can detect parts of the
+``Dynamically Enclosing Evaluation Context'' by means of Handlers
+contained inside it, first-class Continuations can only be Invoked
+with some Value to find out anything about them
+%FIXME
+
+Exceptions and Continuations combined in a Language cannot express
+State
+
+\fist Note that depending on how Exceptions and Continuations are
+combined, this may not be the case
+
+Exceptions and State cannot express Continuations
+
+Continuations allow Backtracking which breaks an Equivalence that
+holds in the presence of Exceptions; in the presence of Exceptions,
+Continuations are used \emph{Linearly} (whereas general Continuations
+can be used multiple times)
+
+$\mono{raise}\;e\;V$ -- Raise Exception $e$ with some Value $V$
+
+$\mono{handle}\;e\;M\;N$ -- $M$ acts as Handler for Raising of $e$ in
+the Evaluation of $N$
+
+An Uncaught Exception $\mono{raise}\;e\;V$ without a ``Dynamically
+Enclosing Handler'' has no Reduction
+
+An Exception Name $e$ can be passed like any other Value
+
+An Exception Handler (an Evaluation Context, i.e. as a Continuation)
+cannot be made into a Value
+
+in $\lambda + \mathbf{cont} + \mathbf{exn}$, ``Reification'' of the
+Current Continuation includes the Exception Handler in that
+Continuation; ``Throwing'' to the Continuation later ``re-installs''
+the Exception Handler
+
+an Exception is a form of ``jump'' whose target is determined
+Dynamically %FIXME
+
+Contextual Equivalence, Separation %FIXME
+
+there are Expressions which are Contextually Equivalent in $\lambda +
+\mathbf{exn}$ but can be Separated in $\lambda + \mathbf{cont}$
+
 
 \cite{plotkin-pretnar13}:
 
@@ -3204,7 +3269,7 @@ Models of $\cat{L}$ in $\cat{Set}$.
 
 \cite{plotkin-pretnar13}:
 
-Algebraic Effects (\S\ref{sec:algebraic_effect}):
+Algebraic Effects:
 \begin{itemize}
   \item Set of Operations representing Sources of Effects
   \item Equational Theory (\S\ref{sec:equational_theory}) describing
@@ -3232,7 +3297,7 @@ Equational Logic (\S\ref{sec:equational_logic})
 Computational Effects representable by an Algebraic Theory:
 Nondeterminism, Interactive Input/Output, Concurrency, State, Time,
 Stream Redirection, Backtracking, Co-operative Multi-threading,
-Delimited Continuations, etc.
+Delimited Continuations (\S\ref{sec:delimited_continuation}), etc.
 
 Sets of Operations
 
