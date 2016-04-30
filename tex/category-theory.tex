@@ -5217,7 +5217,7 @@ Left Inverse (Retraction) $K : \cat{C}_H \rightarrow \cat{C}$ of
 \subsubsection{Freyd Category}\label{sec:freyd_category}
 
 A \emph{Freyd Category} is a Symmetric Premonoidal Category
-(\S\ref{sec:symmetric_premonoidal_category}), $\cat{D}$, of
+(\S\ref{sec:symmetric_premonoidal}), $\cat{D}$, of
 ``Computations'' and a Category with Finite Products, $\cat{C}$, of
 ``Values'', and an ``Identity-on-objects'' Functor $J : \cat{C}
 \rightarrow \cat{D}$ which:
@@ -5311,6 +5311,9 @@ Associator $\alpha$, Left Unitor $\lambda$, Right Unitor $\rho$
 The above is a Vertical Categorification; Horizontal Categorification
 gives $2$-categories (\S\ref{sec:2_category})
 
+every Monoidal Category is a Premonoidal Category
+(\S\ref{sec:premonoidal_category})
+
 \emph{Coherence Conditions}
 
 $\cat{Set}$ is a Monoidal Category with the Cartesian Product as
@@ -5351,13 +5354,47 @@ Operads \S\ref{sec:endomorphism_operad})
 \subsection{Monoidal Functor}\label{sec:monoidal_functor}
 % --------------------------------------------------------------------
 
+Functors between Monoidal Categories that Preserve the Monoidal
+Structure
+
+Functor between Monoidal Categories along with two \emph{Coherence
+  Maps}--a Natural Transofrmation and a Morphism that Preserve
+Monoidal Multiplication and Unit, resp.
+
+Strict Monoidal Categories $(\cat{C},\otimes_\cat{C})$,
+$(\cat{D},\otimes_\cat{D})$
+
+$F : \cat{C} \rightarrow \cat{D}$
+
+Morphism
+
+$\epsilon : \Id_\cat{D} \rightarrow F(\Id_\cat{C})$
+
+Natural Transformation
+
+$\mu_{x,y} : F(x) \otimes_\cat{D} F(y) \rightarrow F(x \otimes_\cat{C}
+y)$
+
+
+
 \subsubsection{Lax Monoidal Functor}\label{sec:lax_monoidal_functor}
+
+Coherence Maps satisfy no additional Properties; not necessarily
+Invertible
+
+
 
 \subsubsection{Oplax Monoidal Functor}\label{sec:oplax_monoidal_functor}
 
 \subsubsection{Strong Monoidal Functor}\label{sec:strong_monoidal_functor}
 
+Coherence Maps are Invertible
+
+
+
 \subsubsection{Strict Monoidal Functor}\label{sec:strict_monoidal_functor}
+
+Coherence Maps are Identity Maps
 
 
 
@@ -5379,7 +5416,8 @@ Interchange Law (\S\ref{sec:interchange_law})
 \subsection{Strict Monoidal Category}\label{sec:strict_monoidal}
 % --------------------------------------------------------------------
 
-\emph{Strict Monoidal Category}
+A \emph{Strict Monoidal Category} is a Monoid in the Cartesian
+Monoidal Category (\S\ref{sec:cartesian_monoidal}) $\cat{Cat}$
 
 Natural Isomorphisms Associator $\alpha$, Left Unitor $\lambda$, and
 Right Unitor $\rho$ are Identities
@@ -5489,6 +5527,9 @@ Exponentials:
 The Category of Types in the Simply Typed $\lambda$-calculus
 (\S\ref{sec:simply_typed}) is a Catesian Closed Category.
 
+A Continuation Category (\S\ref{sec:continuation_category})
+$R^\cat{C}$ is Cartesian Closed.
+
 For a Theory $\mathcal{F}$, the Cartesian Close Category
 $\cat{C}(\mathcal{F})$ is built from the $\lambda$-calculus over
 $\mathcal{F}$ by the Presented Generators and Relations stated in
@@ -5544,6 +5585,9 @@ if each Slice Category (\S\ref{sec:slice_category}) $\cat{C}/x$ is a
 Cartesian Monoidal Category then $\cat{C}$ is \emph{Locally Cartesian}
 (\S\ref{sec:locally_cartesian})
 
+a Strict Monoidal Category (\S\ref{sec:strict_monoidal}) is a Monoid
+in the Cartesian Monoidal Category $\cat{Cat}$
+
 
 
 \subsubsection{Locally Cartesian Category}\label{sec:locally_cartesian}
@@ -5593,6 +5637,437 @@ Products and Coproducts are \emph{Distributive}:\cite{awodey06}
 
 \subparagraph{Totally Distributive Category}\hfill
 \label{sec:totally_distributive_category}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Control Category}\label{sec:control_category}
+% --------------------------------------------------------------------
+
+Selinger01 \cite{selinger01}:
+
+Categorical Semantics (\S\ref{sec:categorical_semantics}) for
+(Call-by-name) $\lambda\mu$-calculus (\S\ref{sec:lambda_mu})
+
+Models of Propositional Classical Logic (\S\ref{sec:classical_logic})
+
+$\lambda\mu$-calculus as Internal Language for Class of Control
+Categories
+
+any Control Category is Equivalent to a ``Category of Continuations''
+(\S\ref{sec:continuation})
+
+Control Categories are a Model of Proof Nets (\S\ref{sec:proof_net})
+for Polarized Linear Logic (???) %FIXME
+
+
+Co-control Category (\S\ref{sec:cocontrol_category}): Call-by-value
+$\lambda\mu$-calculus
+
+
+\asterism
+
+
+Symmetric Premonoidal Category (\S\ref{sec:symmetric_premonoidal})
+$\cat{P}$
+
+Pretensor $\parr$ -- Models Disjunction in Propositional Classical
+Logic
+
+Symmetric Monoid in $\cat{P}$: Object $A$ with two Central Morphisms:
+\[
+  i_A : \bot \rightarrow A \quad\quad
+  \nabla_A : A \parr A \rightarrow A
+\]
+Satisfying Equations:
+
+(equations) %FIXME
+
+Central Morphisms of $\cat{P}$ form a Monoidal Subcategory of
+$\cat{P}$ called the \emph{Center} of $\cat{P}$, denoted
+$\cat{P}^\bullet$; if the Center is an explicitly chosen Subcategory,
+it is called a \emph{Value Category} (\S\ref{sec:value_category})
+
+Codiagonals, Discardable, Copyable, Focal Morphisms %FIXME
+
+Focal Morphism if Central, Discardable, and Copyable
+
+Focal Morphisms of $\cat{P}$ form a Subcategory of $\cat{P}$ called
+the \emph{Focus} of $\cat{P}$, denoted $\cat{P}^\sharp$
+
+in a general Symmetric Premonoidal Category $\cat{P}^\sharp \subseteq
+\cat{P}^\bullet \subseteq \cat{P}$
+
+in a Control Category any Central Morphism is Discardable
+
+in a Control Category any Central Morphism is Copyable
+
+in a Control Category the Center and Focus always coincide
+
+Center is a Derived notion: a Morphism is Central if it Satisfies
+certain Equations
+
+Central Morphisms Model Effect-free (Pure?) Computations or
+\emph{Values} (cf. Morphisms of a Value Category
+\S\ref{sec:value_category})
+%FIXME
+
+a Morphism $f : A \rightarrow B$ is Central if and only if:
+\[
+  f \circ \theta_A = \theta_B \circ \bot^{\bot^f}
+\]
+($\theta$ defined below)
+
+for $\cat{P}$ with Codiagonals and Finite Products, $\cat{P}$ is
+\emph{Distributive} (???) if the Projections $\pi_1$, $\pi_2$ are
+Focal and the Functor $-\parr C$ Preserves Finite Products for all
+Objects $C$ %FIXME
+
+\textbf{Lemma} If $\cat{P}$ is a Distributive, Symmetric Premonoidal
+Category with Codiagonals then the Focus of $\cat{P}$ is Closed under
+the Finite Product Structure
+
+Cartesian-closed Structure
+
+$s_{A,B,C} : B^A \parr C \rightarrow (B \parr C)^A$ -- Canonical
+morphism obtained by Currying %FIXME
+
+$\cat{P}$ is a Control Category if $s_{A,B,C}$ is a Natural
+Isomorphism in $A$, $B$, and $C$ Satisfying the Coherence Conditions:
+\begin{enumerate}
+  \item
+  \item
+\end{enumerate}
+%FIXME
+
+\fist Naturality in $A$ and $B$ follows from the definition of
+$s_{A,B,C}$ but Naturality in $C$ is required as a separate Axiom.
+
+Isomorphism $s_{A,B,C}$: \emph{Exponential Strength} (shown to be
+Focal) -- Classical Logic
+
+(Coherence) %FIXME
+
+($f^\star : B \rightarrow C^A$ is the Curry of $f : B \times A
+\rightarrow C$)
+
+Excluded Middle:
+\[
+  tnd_A : 1 \xrightarrow{r^\star_A} (\bot \parr A)^A
+  \xrightarrow{s^{-1}} \bot^A \parr A
+\]
+Double Negation Introduction:
+\[
+  \partial_A : A \xrightarrow{\epsilon^\star} \bot^{\bot^A}
+\]
+Double Negation Elimination:
+\[
+  \theta_A : \bot^{\bot^A} \xrightarrow{p} (A \parr
+  \bot)^{A\parr\bot^A} \xrightarrow{\;\cong\;} A^{A\parr\bot^A}
+  \xrightarrow{A^{tnd}} A
+\]
+
+\textbf{Lemma}:
+\begin{enumerate}
+  \item $\theta_{\bot^A} = \bot^{\partial_A} : \bot^{\bot^{\bot^A}}
+    \rightarrow \bot^A$
+  \item $\theta_A \circ \partial_A = \id_A : A \rightarrow A$
+  \item $tnd_A$ is Dinatural in $A$ but not Central in general
+  \item $\partial_A$ is Natural in $A$ but not Central in general
+  \item $\theta_A$ is Focal but not Natural in $A$ unless $A$ is
+    Central %FIXME correct?
+\end{enumerate}
+
+In Co-control Categories, the Dual of $\theta$ is called \emph{Thunk}
+and the Dual of $\partial$ is called \emph{Force}
+
+Natural Isomorphism of Hom-sets:
+\[
+  \cat{P}(D \times A, B \parr C) \cong \cat{P}(D,B^A \parr C)
+\]
+giving rise to Fibered Cartesian-closed Category Structure structure
+on $\cat{P}$
+%FIXME
+
+any Control Category in which $\parr$ is Bifunctorial is equivalent to
+a Boolean Algebra (\S\ref{sec:boolean_algebra})
+
+\textbf{Lemma}
+\[
+  \cat{P}(1,B \parr A) \cong \cat{P}^\bullet(\bot^A,B)
+\]
+Naturally in $A$ and Central $B$
+
+\textbf{Lemma}
+\[
+  \cat{P}(A,B) \cong \cat{P}^\bullet(\bot^B,\bot^A) \cong
+  \cat{P}^\bullet(\bot^{\bot^A},B)
+\]
+with first Isomorphism Natural in $A$ and $B$ and second Isomorphism
+Natural in $A$ and Central $B$ %FIXME in central B?
+
+\textbf{Corollary}
+\[
+  \cat{P}^\bullet(\bot^\bot,B \parr A) \cong
+  \cat{P}(1,B \parr A) \cong
+  \cat{P}^\bullet(\bot^A,B)
+\]
+Naturally in Central $A$ and Central $B$
+
+
+\asterism
+
+
+Strict Functor of Control Categories
+
+Weak Functor of Control Categories
+
+Equivalence of Control Categories
+
+\textbf{Thm.} \emph{Structure Theorem}: any Control Category $\cat{P}$
+is equivalent to a Category of Continuations $R^\cat{C}$ %FIXME
+
+
+\textbf{Weak Co-closed Structure}
+
+\[
+  \cat{P}(B,C \parr A) \cong \cat{P}(1,(C \parr A)^B) \cong
+    \cat{P}(1,C \parr A^B) \cong
+    \cat{P}^\bullet(\bot^{A^B},C)
+\]
+Natural in $A$ and $B$ and Central $C$
+
+for any Object $A$ the Functor $F : \cat{P}^\bullet \rightarrow
+\cat{P}$ given by:
+\[
+  F(C) = C \parr A
+\]
+has Left-adjoint $G : \cat{P} \rightarrow \cat{P}^\bullet$ given by:
+\[
+  G(B) = \bot^{A^B}
+\]
+with Unit of the Adjunction:
+\[
+  coapp : B \xrightarrow{\;\partial\;} A^{A^B} \xrightarrow{\;\cong\;}
+    \bot^{A^B} \parr A
+\]
+
+The Image of a map $f : B \rightarrow C \parr A$ under the Adjunction
+is denoted:
+\[
+  cocurry(f) : \bot^{A^B} \rightarrow C
+\]
+such that $f = (cocurry(f) \parr A) \circ coapp$ for all $f : B
+\rightarrow C \parr A$ and $cocurry$ is the Unique Central Morphism
+making the corresponding Diagram Commute.
+
+$\bot^{A^B}$ defines a Weak Co-closed Structure on $\cat{P}$ and:
+\[
+  B \multimapinv A := \bot^{A^B}
+\]
+
+
+\textbf{Control Categories as Algebras}
+
+Equational -- Structure can be given by Object Constructors, Morphism
+Constructors, and Universally Quantified Equations on Hom-sets
+
+Signature of Control Categories
+
+(Type-indexed)
+
+Nullary Morphism Constructors
+
+Object Constructors
+
+Binary and Unary Morphism Constructors
+
+%FIXME
+
+
+\textbf{Internal Language of a Control Category}
+
+given a Small Control Category $\cat{P}$, construct a Signature
+$\Sigma$ and Call-by-name Theory $\class{T}$: $\Sigma$ has Objects of
+$\cat{P}$ as Type Constants $\class{B}$ and one Object Constant
+$c_f^{A \rightarrow B}$ for each Morphism $f : A \rightarrow B$
+
+Canonical Interpretation Interprets each Type Constant by
+itself and each Object Constant $c_f^{A \rightarrow B}$ by $f^\star :
+1 \rightarrow B^A$
+
+$\class{T}$ is the Call-by-name Theory Induced by the Canonical
+Interpretation
+
+$(\Sigma,\class{T})$ is the \emph{Internal Call-by-name Language} of
+$\cat{P}$
+
+\textbf{Lemma} if $(\Sigma,\class{T})$ is the Internal Call-by-name
+Language of Control Category $\cat{P}$ then
+$\cat{P}^n_{\Sigma,\class{T}} \simeq \cat{P}$
+
+
+
+\subsubsection{Cocontrol Category}\label{sec:cocontrol_category}
+
+$\otimes\neg$-category with additional Structure %FIXME
+
+every $\otimes\neg$-category can be Fully and Faithfully Embedded in a
+Cocontrol Category
+
+Finite Coproducts
+
+Initial Object $0$
+
+Co-exponentials $B_A$
+
+Pretensor $\otimes$
+
+Weak Closed Structure $A \multimap B$
+
+%FIXME
+
+Dual of $\theta$ (Double Negation Elimination) -- \emph{Thunk}
+
+Dual of $\partial$ (Double Negation Introduction) -- \emph{Force}
+
+
+\asterism
+
+
+Interpretation of Call-by-value $\lambda\mu$-calculus
+(\S\ref{sec:lambda_mu}) in a Cocontrol Category
+
+
+\textbf{Internal Language of a Cocontrol Category}
+
+given a Small Co-control Category $\cat{P}$, construct a Signature
+$\Sigma$ and Call-by-value Theory $\class{T}$: $\Sigma$ has Objects of
+$\cat{P}$ as Type Constants $\class{B}$ and one Object Constant
+$c_f^{A \rightarrow B}$ for each Morphism $f : A \rightarrow B$
+
+Canonical Interpretation Interprets each Type Constant by itself and
+each Object Constant $c_f^{A \rightarrow B}$ by $curry(f): I
+\rightarrow (A \multimap B)$
+
+$\class{T}$ is the Call-by-vaue Theory Induced by the Canonical
+Interpretation
+
+$(\Sigma,\class{T})$ is the \emph{Internal Call-by-value Language} of
+$\cat{P}$
+
+\textbf{Lemma} if $(\Sigma,\class{T})$ is the Internal Call-by-name
+Language of Cocontrol Category $\cat{P}$ then
+$\cat{P}^v_{\Sigma,\class{T}} \simeq \cat{P}$
+
+
+\paragraph{Syntactic Cocontrol Category}
+\label{sec:syntactic_cocontrol_category}\hfill
+
+$\cat{P}^v_{\Sigma,\class{T}}$
+
+Objects are Types of the Language
+
+Morphisms from $A$ to $B$ are named by Valid Standard Form Judgements
+$x:A \vdash M:B$
+
+two Typing Judgements $x:A \vdash M:B$ and $x:A \vdash N:B$ name the
+same Morphism if $x:A \vdash M = N:B) \in \class{T}$
+
+
+
+\subsubsection{Value Category}\label{sec:value_category}
+
+\cite{selinger01}:
+
+\emph{Value Category} -- explicitly chosen Subcategory for the Center
+of a Control Category
+
+$\cat{V}$ is a Value Category if $|\cat{P}| \subseteq \cat{V}
+\subseteq \cat{P}^\bullet$ and Closed under all the Structural
+Operations of Control Categories except $\epsilon$ and Currying
+
+$\cat{V}$ is further required to contain the maps $s_{A,B,C}$ and
+$p_{A,B,C}$ and all maps of the form $A^f$
+
+Morphisms of a chosen Value Category are called \emph{Values}
+
+$\cat{V}(\bot^A,B) = \cat{P}^\bullet(\bot^A,B)$
+
+\textbf{Thm.} \emph{Second Structure Theorem}: for Control Category
+$\cat{P}$ with chosen Value Category $\cat{V}$ there is a Response
+Category $\cat{C}$ such that $\cat{Cat}(\cat{P},\cat{V}) \simeq
+(R^\cat{C},R^\cat{C}_v)$ and $\cat{C}$ is Unique up to Equivalence of
+Response Categories %FIXME xref response category?
+
+
+
+\subsubsection{Continuation Category}\label{sec:continuation_category}
+
+\emph{Category of Continuations}
+
+Continuations (\S\ref{sec:continuation})
+
+Category $\cat{C}$ with Distributive Finite Products and Coproducts
+
+$R$ -- distinguished Object of Responses such that for all Objects $A$
+an Exponential $R^A$ exists
+
+$\cat{C}$ is a Response Category (???) if it Satisfies the Mono
+Requirement that the canonical Morphism $\partial_A: A \rightarrow
+R^{R^A}$ is Monic (\S\ref{sec:monomorphism}) for all $A$
+%FIXME response category
+
+for Response Category $\cat{C}$, Category of Continuations $R^\cat{C}$
+is the Full Subcategory of $\cat{C}$ consisting of Objects of the form
+$R^A$
+
+$R^\cat{C}$ is Cartesian-closed (\S\ref{sec:cartesian_closed})
+
+\[
+  1 \cong R^0 \quad\quad R^A \times R^B \cong R^{A+B} \quad\quad
+  (R^B)^{R^A} \cong R^{B \times R^A}
+\]
+
+$R^\cat{C}$ has a canonical Premonoidal Structure given on Objects by:
+\[
+  \bot := R^1 \cong R \quad\quad R^A \parr R^B := R^{A \times B}
+\]
+
+all maps $R^f$ are Focal
+
+Structural maps $a,l,r,c,i,\nabla$
+
+any Morphism of the form $R^g : R^A \rightarrow R^B$ for $g : B
+\rightarrow A$ in $\cat{C}$ is Central; the Converse is True if and
+only if $\cat{C}$ Satisfies the \emph{Equalizing Requirement}
+(Moggi88, F\"uhrmann99)--for all Object $A$, the canonical Morphism
+$\partial_A : A \rightarrow R^{R^A}$ is an Equalizer of the Diagram:
+\[
+  A \xrightarrow{\partial_A} R^{R^A}
+    \stackrel{\xrightarrow{\partial_{R^{R^A}}}}
+    {\xrightarrow{R^{R^{\partial_A}}}}
+  R^{R^{R^{R^A}}}
+\]
+
+\fist Not every Response Category Satisfies the Equalizing Requirement
+
+
+
+\subsubsection{Syntactic Category}\label{sec:syntactic_control_category}
+
+\fist Cf. Syntactic Category (\S\ref{sec:syntactic_category})
+
+for $\lambda\mu$-signature $\Sigma$ and Call-by-name Theory
+$\class{T}$, construct Syntactic Control Category
+$\cat{P}^n_{\Sigma,\class{T}}$ with Objects as Types of the Language
+(and Object Constructors given by corresponding Type Constructors) and
+Morphisms from $A$ to $B$ named by Valid Standard Form Typing
+Judgements $x:A \vdash M:B$. Two Typing Judgements $x:A \vdash M:B$
+and $x:A \vdash N:B$ name the same Morphism if $(X:A \vdash M=N:B) \in
+\class{T}$
+
+%FIXME drefs?
 
 
 
@@ -5772,7 +6247,9 @@ Complete Metric Spaces (\S\ref{sec:complete_metric_space})
 
 Premonoidal Category (\S\ref{sec:premonoidal_category})
 
-Categorical Semantics of Dataflow %FIXME xref
+Non-bifunctoriality: ``Side-effects'' \cite{jacobs-heunen-hasuo09}
+
+Categorical Semantics of Data Flow (\S\ref{sec:data_flow})
 
 Functional Reactive Programming (\S\ref{sec:frp}): Loop Combinator in
 FRP is required to Satisfy the Equations of a Traced Premonoidal
@@ -5958,9 +6435,29 @@ Shape Theory (\S\ref{sec:shape_theory})
 \subsection{Binoidal Category}\label{sec:binoidal_category}
 % --------------------------------------------------------------------
 
+Selinger01 \cite{selinger01}:
+
+Binoidal Functor (\emph{Pretensor}) $\parr : \cat{P} \otimes \cat{P}
+\rightarrow \cat{P}$
+
+
+
 \subsubsection{Central Morphism}\label{sec:central_morphism}
 
+in a Control Category (\S\ref{sec:control_category}), Central
+Morphisms Model Effect-free (Pure?) Computations or \emph{Values}
+%FIXME
+
+Value Category (\S\ref{sec:value_category})
+
+
 \subsubsection{Premonoidal Category}\label{sec:premonoidal_category}
+
+a Premonoidal Category is a Monoid in another Symmetric Monoidal
+Category (\S\ref{sec:symmetric_monoidal}) whose underlying Category is
+$\cat{Cat}$
+
+every Monoidal Category is a Premonoidal Category
 
 Tensor Product not necessarily Bifunctorial but Functorial in each
 Variable separately.
@@ -5971,13 +6468,43 @@ Non-bifunctoriality: ``Side-effects'' \cite{jacobs-heunen-hasuo09}
 
 Traced Premonoidal Category (\S\ref{sec:traced_premonoidal})
 
+Central Morphisms of a Premonoidal Category $\cat{P}$ form a Monoidal
+Subcategory called the \emph{Center} of $\cat{P}$, denoted
+$\cat{P}^\bullet$
 
 
-\paragraph{Symmetric Premonoidal Category}\hfill
-\label{sec:symmetric_premonoidal_category}
+
+\paragraph{Strict Premonoidal Category}\label{sec:strict_premonoidal}
+\hfill
+
+\paragraph{Symmetric Premonoidal Category}
+\label{sec:symmetric_premonoidal} \hfill
 
 Freyd Categories (\S\ref{sec:freyd_category}): Symmetric Premonoidal
 Category with Cartesian Center (???)
+
+Control Category (\S\ref{sec:control_category})
+
+Symmetric Premonoidal Category $\cat{P}$
+
+a Symmetric Monoid in $\cat{P}$ is an Object $A$ with two Central
+Morphisms:
+\[
+  i_A : \bot \rightarrow A \quad\quad
+  \nabla_A : A \parr A \rightarrow A
+\]
+Satisfying Equations:
+
+(equations) %FIXME
+
+Central, Discardable, Copyable
+
+Focal Morphism if Central, Discardable, and Copyable
+
+Focal Morphisms of $\cat{P}$ form a Subcategory of $\cat{P}$ called
+the \emph{Focus} of $\cat{P}$, denoted $\cat{P}^\sharp$
+
+$\cat{P}^\sharp \subseteq \cat{P}^\bullet \subseteq \cat{P}$
 
 
 
@@ -6249,6 +6776,8 @@ Propositions as Types in each Context
 
 \emph{Syntactic Category} or \emph{Category of Contexts} (Context
 \S\ref{sec:context})
+
+Syntactic Control Category (\S\ref{sec:syntactic_control_category})
 
 $\text{Theories} \rightleftarrows \text{Categories}$
 

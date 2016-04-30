@@ -2026,6 +2026,33 @@ Expressions leaves their Types unchanged.
 
 \emph{Type System} (or \emph{Typing Discipline})
 
+Internal Logic (\S\ref{sec:internal_logic}), Categorical Semantics
+(\S\ref{sec:categorical_semantics})
+
+Simple Types (\S\ref{sec:simply_typed}) -- (Zeroth-order) Minimal
+Logic (\S\ref{sec:minimal_logic}) -- Cartesian-closed Category
+(\S\ref{sec:cartesian_closed})
+
+Dependent Types (\S\ref{sec:dependent_type_theory}) -- (First-order)
+Predicate Logic (\S\ref{sec:firstorder_logic}) -- Comprehension
+Category (\S\ref{sec:comprehension_category}), Contextual Category
+(\S\ref{sec:contextual_category})
+
+$\lambda\mu$-calculus (\S\ref{sec:lambda_mu}) -- Classical Logic
+(\S\ref{sec:classical_logic}) -- Control Category
+(\S\ref{sec:control_category})
+
+Linear Type System (\S\ref{sec:linear_type}) -- Linear Logic
+(\S\ref{sec:linear_logic}) -- Closed Monoidal Categories
+(\S\ref{sec:closed_monoidal})
+
+Reactive Type System (\S\ref{sec:reactive_type}) -- Linear Temporal
+Logic (\S\ref{sec:linear_temporal}) -- Traced Monoidal Categories
+(\S\ref{sec:traced_monoidal})
+
+Homotopy Types (\S\ref{sec:hott}) -- ??? -- Higher Categories
+(\S\ref{sec:higher_category})
+
 
 
 % --------------------------------------------------------------------
@@ -2336,6 +2363,10 @@ captured by any Effect System (E. Kmett)
 
 \cite{mycroft-orchard-petricek16} -- Graded Joinads (???): Effect
 Control-flow Algebras \& Types
+
+in a Control Category (\S\ref{sec:control_category}), Central
+Morphisms (\S\ref{sec:central_morphism}) Model Effect-free
+Computations or \emph{Values} %FIXME
 
 wiki:
 
@@ -2780,6 +2811,32 @@ Type-level Sets (???): Implementation in Haskell using ``data kinds''
 and ``closed type families'' (Orchard-Petricek14) %FIXME
 
 intermediate between Monads and Effect Handlers (Orchard-Petricek14)
+
+
+Orchard-Petricek-Mykroft14:
+
+Semantics for Moggi's Computational $\lambda$-calculus in terms of
+(Strong) Indexed Monads, giving a one-to-one correspondence between
+Indices of the Denotations and the Effect Annotations of traditional
+Effect Systems
+
+Dual: Indexed Comonads give a ``unified'' Semantics and Effect System
+to Coeffects (\S\ref{sec:coeffect}), i.e. Contextual notion of Effects
+
+Wadler-Thiemann03 -- Syntactic correspondence between Type-and-effect
+Systems and the Monadic Semantics by Annotating Monadic Type
+Constructors with Effect Sets of the Type-and-effect System
+
+Functor:
+\[
+  \mathsf{T} : \cat{I} \rightarrow [\cat{C},\cat{C}]
+\]
+where $\cat{I}$ is a Strict Monoidal Category
+(\S\ref{sec:monoidal_category}) $(\cat{I}, \otimes, 1)$ and
+$\mathsf{T}$ is a Lax Monoidal Functor
+(\S\ref{sec:lax_monoidal_functor}) mapping the Strict Monoidal
+Structure of $\cat{I}$ to the Strict Monoid of Endofunctor
+Composition: $([\cat{C},\cat{C}],\circ,\Id_\cat{C})$
 
 
 
@@ -5157,10 +5214,8 @@ may have different Meanings, cf. Reification
 
 
 
-\subsubsection{Simply-typed $\lambda$-calculus Typing Rules}
-\label{sec:simplytyped_rules}
+\textbf{Typing Rules} (\S\ref{sec:typing_rule})
 
-Typing Rules (\S\ref{sec:typing_rule}):
 \begin{enumerate}
 \item
   \[
@@ -5204,7 +5259,7 @@ Typing Rules (\S\ref{sec:typing_rule}):
 \textbf{Categorical Semantics}
 
 Simply-typed $\lambda$-calculus is the Internal Language
-(\S\ref{sec:internal_logic}) of the Cartesian Closed Categories
+(\S\ref{sec:internal_logic}) of the Cartesian-closed Categories
 (\S\ref{sec:cartesian_closed}).
 
 
@@ -6463,6 +6518,287 @@ Reduction Rules:
 Confluent (\S\ref{sec:rewrite_confluence}) by the above Rules
 
 \fist Cf. Classical Pure Type Systems (\S\ref{sec:cpts})
+
+
+Selinger01 \cite{selinger01}: Categorical Semantics
+(\S\ref{sec:categorical_semantics}) of (Call-by-name)
+$\lambda\mu$-calculus given by Control Categories
+(\S\ref{sec:control_category})
+
+$\lambda\mu$-calculus as Internal Language for the Class of Control
+Categories
+
+Call-by-name $\lambda\mu$-calculus: Internal Language for Cocontrol
+Categories (\S\ref{sec:control_category})
+
+Call-by-value $\lambda\mu$-calculus: Internal Language for Cocontrol
+Categories (\S\ref{sec:cocontrol_category})
+
+Syntactic Translations which are mutually Inverse up to Natural
+Isomorphism of Types and Equivalence of Terms (cf. Filinski89
+Symmetric $\lambda$-calculus) %FIXME
+
+Demand-driven vs. Data-driven Computation; extension of DeMorgan
+Duality from Formulas to Proofs %FIXME
+
+Control Constants %FIXME
+
+Translation between Call-by-value and Call-by-name Calculi exchanges
+Object and Control Constants, Object and Control Variables, and
+reverses Typing Judgements
+
+Translations Preserve Equational Theories and Operational Semantics (a
+Term and its Translation Evaluate in the same manner), and given
+notions of Observation they also Preserve Observational Equivalence
+%FIXME
+
+\begin{align*}
+  & \lett\;x^A = M\;\inn\;\lett\;y^B = N\;\inn\;P \\
+  & \lett\;y^B = N\;\inn\;\lett\;x^A = M\;\inn\;P
+\end{align*}
+are not Equivalent in the presence of Side-effects in Call-by-value
+Calculi (but are Equivalent in Call-by-name Calculi)
+
+\begin{align*}
+  & \lett\;x^A = \mu\alpha^A.
+    (\lett\;y^B = \mu\beta^B.P\;\inn\;N)\;\inn\;M \\
+  & \lett\;y^B = \mu\beta^B.
+    (\lett\;x^A = \mu\alpha^A.P\;\inn\;M)\;\inn\;N
+\end{align*}
+are not Equivalent in Call-by-name Calculi (but are Equivalent in
+Call-by-value Calculi)
+
+
+\textbf{Typing Rules} (var), (const) (*) (pair) ($\pi_1$) ($\pi_2$)
+(app) (abs) (name) ($\mu$) (weaken) %FIXME
+
+
+\textbf{Syntax}
+
+$\class{B}$ -- Set of Type Constants $\sigma,\tau,\ldots$
+
+$\class{V}$ -- Set of Variables $x,y,\ldots$
+
+$\class{N}$ -- Set of Control Variables (Names) $\alpha,\beta,\ldots$
+
+$\class{K}$ -- Object Constants $c^A,d^B,\ldots$
+
+$\Sigma = (\class{B},\class{K})$ -- Signature
+
+Terms:
+\[
+  \quad\quad M ::= x \mid c^A \mid * \mid \langle M,N \rangle
+    \mid \pi_1 M \mid \pi_2 M \mid M\;N \mid \lambda x^A.M
+    \mid [\alpha]M \mid \mu\alpha^A.M
+\]
+
+$\mu\alpha^A.M$ -- $\mu$-abstraction (\S\ref{sec:mu_abstraction})
+
+$[\alpha]M$ -- Named Term
+
+Object Context $\Gamma$
+
+Control Context $\Delta$
+
+Typing Judgement $\Gamma \vdash M:A \mid \Delta$
+
+Equation $\Gamma \vdash M = N : A \mid \Delta$ where $\Gamma \vdash M
+: A \mid \Delta$ and $\Gamma \vdash N : A \mid \Delta$ are Valid
+Typing Judgements
+
+
+\asterism
+
+
+informally when a Subterm is Evaluated it can either Return a Value to
+its Environment, or it could cause the Control Flow to Jump to some
+other part of the Program; a Term containing a Jump may never Return a
+Value to its Environment, in which case it can be given the Type
+$\bot$ (Empty Type)
+
+$[\alpha]M$ is a prototypical Term of Type $\bot$: it does not Return
+anything but passes the Value of $M$ to a Control Variable $\alpha$
+instead; in this way $\alpha$ is like a Named Channel and the Value of
+$M$ is Sent along the Channel; $M$ is ``Thrown'' to $\alpha$
+
+if $\alpha$ has Type $A$ then Value of Type $A$ can be Thrown to
+$\alpha$
+
+$N = \mu\alpha^A.M$ creates a Named Channel $\alpha$ and begins to
+Evaluate $M$, and in the process of Evaluating $M$, some Value gets
+Thrown to $\alpha$, this Value immediately becomes the Value of the
+Term $N$ and the Evaluation of $M$ is not continued; since $\alpha$ is
+of Type $A$, $N$ must be of Type $A$ as well; $M$ in a
+$\mu$-abstraction has Type $\bot$
+
+Typing Judgement:
+\[
+  x_1:B_1, \ldots, x_n:B_n \vdash M:A \mid \alpha_1:A_1, \ldots, \alpha_m:A_m
+\]
+means $M$ is a Well-typed Term with at most $n$ Free Typed Object
+Variables and at most $m$ Free Typed Control Variables, i.e. $M$ is a
+Function of $n$ Arguments with $m + 1$ possible Result Channels: it
+can Return an ordinary Value of Type $A$ or an Exceptional Value
+(\S\ref{sec:exception_effect}) of Type $A_i$ on some Channel
+$\alpha_i$
+
+Statically Scoped (Calculus of Continuations), not Dynamically Scoped
+(Exceptions) %FIXME
+
+
+\textbf{Classical Disjunction}
+
+one additional Type Constructor:
+\begin{flalign*}
+  A ::= \cdots \mid A \vee B
+\end{flalign*}
+
+two additional Term Constructors:
+\begin{flalign*}
+  M ::= \cdots \mid [\alpha,\beta]M \mid \mu(\alpha^A,\beta^B).M
+\end{flalign*}
+
+Typing Rules: (name'), ($\mu$')
+
+
+\textbf{Call-by-name Operational Semantics}
+
+\textbf{Call-by-name CPS Semantics}
+
+Continuation-passing Style (CPS)
+
+DeGroote94
+
+Hoffman-Streicher97
+
+Streicher-Reus98: CPS translation as the basis for an Abstract Machine
+Model yielding a Stack-based Kriving Machine (???) %FIXME
+
+Categorical Interpretation of Call-by-name Disjunctive
+$\lambda\mu$-calculus in a Control Category
+(\S\ref{sec:control_category})
+
+\emph{CPS Translation}
+
+Disjunctive $\lambda\mu$-calculus over Signature
+$(\class{B},\class{K})$
+
+Target Language: $\lambda^{R\times+}$ -- $\lambda$-calculus with Sum,
+Products, and distinguished Type $R$ of Responses %FIXME responses
+
+for each Type $A$ of $\lambda\mu$-calculus, define a pair of Types:
+Continuation Type $K_A$ and Computation Type $C_A$ of Type $A$:
+
+(definitions) %FIXME
+
+translations of Control Operators exchange Current Continuations, i.e.
+Control Variables of $\lambda\mu$-calculus are (essentially) Variables
+of the Target Language that a user of the Source Language has limited
+access %FIXME
+
+\emph{Categorical Interpretation of Call-by-name $\lambda\mu$-calculus
+  in a Control Category}
+
+Target Language $\lambda^{R\times+}$ can be Interpreted directly in a
+Response Category $\cat{C}$
+
+\emph{Categorical Call-by-name Interpretation}:
+
+(interpretation) %FIXME
+
+\textbf{Lemma} if $\cat{P} = R^\cat{C}$ is a Category of Continuations
+then the Call-by-name Categorical Interpretation of the
+$\lambda\mu$-calculus in $\cat{P}$ coincides with the Interpretation
+of the Call-by-name CPS Translation in $R^\cat{C}$
+
+\textbf{Prop.} (\emph{Soundness and Completeness}): Theories Induced
+on the $\lambda\mu$-calculus by the Call-by-name Categorical
+Interpretation are exactly the Theories Induced by the Call-by-name
+CPS Translation
+
+Call-by-name $\lambda\mu$-calculus is an Internal Language for Control
+Categories
+
+
+Standard Form of Typing Judgements %FIXME
+
+for $\lambda\mu$-signature $\Sigma$ and Call-by-name Theory
+$\class{T}$, construct Syntactic Control Category
+(\S\ref{sec:syntactic_control_category})
+$\cat{P}^n_{\Sigma,\class{T}}$ with Objects as Types of the Language
+(and Object Constructors given by corresponding Type Constructors) and
+Morphisms from $A$ to $B$ named by Valid Standard Form Typing
+Judgements $x:A \vdash M:B$. Two Typing Judgements $x:A \vdash M:B$
+and $x:A \vdash N:B$ name the same Morphism if $(X:A \vdash M=N:B) \in
+\class{T}$
+
+
+\emph{Axioms of Call-by-name $\lambda\mu$-calculus} %FIXME
+
+Mixed Substitution
+
+
+\textbf{Call-by-value CPS Semantics}
+
+Disjunctive $\lambda\mu$-calculus over Signature
+$(\class{B},\class{K})$
+
+for each Type $A$ of the $\lambda\mu$-calculus, define three Types
+$V_A$, $K_A$, $C_A$ of the Target Language, the Types of Values,
+Continuations and Computations of Type $A$, resp.:
+
+(definitions) %FIXME
+
+\emph{Categorical Interpretation of Call-by-value $\lambda\mu$-calculus
+  in a Cocontrol Category}
+
+Cocontrol Category (\S\ref{sec:cocontrol_category})
+
+Interpret Target Language $\lambda^{R\times+}$ of the CPS Translation
+in a Response Category $\cat{C}$
+
+Cocontrol Category $\cat{P}$
+
+(interpretation) %FIXME
+
+\textbf{Lemma} if $\cat{P} = R^\cat{C}$ is a Category of Continuations
+then the Call-by-value Categorical Interpretation of the
+$\lambda\mu$-calculus in $\cat{P}^{op}$ coincides with the
+Interpretation of the Call-by-value CPS Translation in $R^\cat{C}$
+
+\textbf{Prop.} (\emph{Soundness and Completeness}): the Theories
+Induced on the $\lambda\mu$-calculus by the Call-by-value Categorical
+Interpretation are exactly the Theories Induced by the Call-by-value
+CPS Translation
+
+(value grammar) %FIXME
+
+Call-by-value $\lambda\mu$-calculus is an Internal Language for
+Cocontrol Categories
+
+Syntactic Cocontrol Category
+(\S\ref{sec:syntactic_cocontrol_category})
+$\cat{P}^v_{\Sigma,\class{T}}$ %FIXME
+
+
+\emph{Axioms of Call-by-value $\lambda\mu$-calculus}
+
+(axioms) %FIXME
+
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\mu$-abstraction}\label{sec:mu_abstraction}
+% --------------------------------------------------------------------
+
+$\mu\alpha^A.M$
+
+$M$ has Type $\bot$
+
+Continuation (\S\ref{sec:continuation}), $\callcc$
+
+``Handler'', ``Catch'' %FIXME
 
 
 
