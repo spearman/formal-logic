@@ -921,6 +921,20 @@ $\lambda\mu$-calculus
 \subsection{Control Operator}\label{sec:control_operator}
 % --------------------------------------------------------------------
 
+\subsubsection{Call-with-current-continuation}\label{sec:callcc}
+
+Scheme -- $\mono{call/cc}$
+
+Signature as the Method of the Type Class of Continuation Monads $T$:
+\[
+  \callCC : ((A \rightarrow T B) \rightarrow T A) \rightarrow T A
+\]
+
+\fist Similar Effect to $\mono{throw}$ and $\mono{catch}$ (Exceptions
+\S\ref{sec:exception_effect})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Continuation}\label{sec:continuation}
 % --------------------------------------------------------------------
@@ -948,7 +962,25 @@ Continuations (\S\ref{sec:delimited_continuation})
 
 Continuation as the ``Future'' of a Computation
 
+
+\asterism
+
+
+youtube Byrd13 - Intro to continuations, call/cc, and CPS:
+
+Stack in Programming Languages
+
+First-class Continuations: (in Heap) %FIXME
+
+Identity Continuation
+
+
+\asterism
+
+
 Direct Style, Continuation Passing Style (CPS)
+
+CPS may be useful where Stack space is limited
 
 Example Identity Function in Direct Style:
 \[
@@ -1058,12 +1090,20 @@ Simulation Relations
 
 \subsubsection{Delimited Continuation}\label{sec:delimited_continuation}
 
+(or \emph{Composable Continuation} or \emph{Partial Continuation})
+
 Algebraic Effect (\S\ref{sec:algebraic_effect})
 
 Representable by an Algebraic Theory (\S\ref{sec:algebraic_theory})
 
+similar to ``Yield'' Operator (???) %FIXME
+
+possible to represent any Control Flow Operator ? %FIXME
+
 Haskell wiki: ``markers'', ``prompts'', ``regions'', ``contexts'',
 Sub-programs, Sub-continuations
+
+wiki: Delimited Continuations return a Value
 
 
 (Dybvig-Jones-Sabry07):
