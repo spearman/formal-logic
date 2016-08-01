@@ -102,6 +102,48 @@ Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type}): Agda
 Calculus of Constructions (\S\ref{sec:coc}): Coc
 
 
+\asterism
+
+Harper16 - Computational Higher Type Theory:
+
+two traditions:
+
+\begin{itemize}
+  \item Formal (Axiomatic): Intuitionistic Type theory
+    (\S\ref{sec:intuitionistic_type}), Homotopy Type Theory
+    (\S\ref{sec:hott})
+  \item Computational (Semantic): CMCP (???) %FIXME
+\end{itemize}
+
+%FIXME xrefs
+
+\textbf{Formal}
+
+Univalence Axiom: Function Extensionality
+
+Higher Inductive Types
+
+
+\textbf{Semantic}
+
+Meaning-explanations:
+\begin{itemize}
+  \item Computational: Programs with Deterministic Dynamics (Type
+    Theory as a Programming Language)
+  \item Mathematical: Sets, Functions
+\end{itemize}
+
+\emph{Computational}
+
+Types are Behavioral Specifications
+
+Types and Objects are Programs that Execute
+
+Judgements not intended to be decidable
+
+Cubical Type Theory (\S\ref{sec:cubical_type_theory})
+
+
 
 % ====================================================================
 \section{Expression}\label{sec:type_expression}
@@ -861,6 +903,10 @@ cannot be Instantiated (\S\ref{sec:instantiation}) directly.
 Existentially Quantified Type Variable
 
 Programming: Module Interfaces
+
+Rust: ``Trait Objects''
+
+Type Erasure (\S\ref{sec:type_erasure}), Dynamic Dispatch (???)
 
 Second-order Typed $\lambda$-calculus with Existential Quantification
 (whereas System $F$ is Second-order Typed $\lambda$-calculus with
@@ -2124,6 +2170,21 @@ Structural rules of Exchange (\S\ref{sec:exchange_rule}), Weakening
     Exactly once in the order it was introduced
 \end{itemize}
 
+Languages with Substructural Type Systems:
+
+\begin{itemize}
+  \item Clean
+  \item Rust
+  \item Mezzo
+\end{itemize}
+
+In Rust:
+
+\begin{itemize}
+  \item $\mono{Copy}$ -- Contraction
+  \item $\mono{
+\end{itemize}
+
 
 
 \subsubsection{Linear Type System}\label{sec:linear_type}
@@ -2373,6 +2434,39 @@ wiki:
 in addition to simple Value/Type Pairs, a \emph{Region} of Code is
 associated with an \emph{Effect Component} describing ``what'' is
 being done ``with what''
+%FIXME xref Region
+
+Region Ownership, Region Aliasing
+
+
+\emph{Capabilities}: %FIXME xref, cite Pottier 07
+
+Calculus of Capabilities
+
+Capabilities are \emph{prescriptive}
+
+Effects are \emph{descriptive}
+
+analogy between a Capability and a Forumula of Separation Logic
+(\S\ref{sec:separation_logic})
+
+Capabilities: Linear or Non-linear
+
+Values: Non-linear
+
+Memory Blocks: Possibly Linear
+
+recovering standard Linear Types via a Capability + Value
+
+Alias Types -- no Regions (Walker-Morrisett00) %FIXME
+
+Uniqueness Types (Clean programming language)
+
+Borrowing, Adoption, Focus %FIXME
+
+Strong Update: modifies a (Linear) Capability (modifies an Object's
+Type)
+
 
 
 \asterism
@@ -7598,6 +7692,50 @@ with Observationally Equivalent Subterms.
 
 \emph{Canonicity}: any Closed Term is Definitionally Reducible to a
 Canonical Value
+
+
+
+% ====================================================================
+\section{Higher Type Theory}\label{sec:higher_type_theory}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Cubical Type Theory}\label{sec:cubical_type_theory}
+% --------------------------------------------------------------------
+
+Harper16 - Computational Higher Type Theory
+
+Terms: Programs
+
+Types: Programs that express Specifications of Program Behavior
+
+Cubical Set (\S\ref{sec:cubical_set})
+
+Cubical Programming Language (Licata,Brunerie,Coquant,et.al):
+
+Syntax organized ``Cubically'':
+\begin{itemize}
+  \item Points: ordinary Terms and Types
+  \item Lines: Identifications (??? Judgemental account)
+  \item Squares: Homotopies, etc.
+\end{itemize}
+
+Cartesian Cubes specified by a Dimension Context, $\Psi$, a Finite Set
+of Dimension Variables $\{x,y,z,\ldots\}$
+
+
+Licata14 - Cubical infinite-dimensional type theory (YouTube):
+
+Boundaries-as-terms
+
+Dimensions as Names (Pronouns: Scoped Reference to a particular
+Binding Site, i.e. Variables, cf. Nominal Logic Names are ``things'')
+
+$n$-dimensional Cube has $n$ Dimension Names Free
+
+\textbf{Judgements}
+
+$\Psi ::= \varnothing | \Psi, s \;\mathsf{dim}$
 
 
 

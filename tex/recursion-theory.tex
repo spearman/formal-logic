@@ -114,6 +114,8 @@ Self-referential Data
 \subsection{Primitive Corecursion}\label{sec:primitive_corecursion}
 % --------------------------------------------------------------------
 
+Apomorphism (\S\ref{sec:apomorphism})
+
 
 
 % ====================================================================
@@ -296,6 +298,8 @@ Recursive Functions.
 
 \subsubsection{Primitive Recursive Function}
 \label{sec:primitive_recursive}
+
+Paramorphism (\S\ref{sec:paramorphism})
 
 The Class of \emph{Primitive Recursive Functions}, $\mathsf{PR}$, are
 those given by three Axioms:
@@ -792,6 +796,116 @@ also \emph{Post Tag Machine}
 \subsubsection{Random Access Machine}
 
 \subsubsection{Random Access Stored Program Machine}
+
+
+
+% ====================================================================
+\section{Recurison Scheme}\label{sec:recursion_scheme}
+% ====================================================================
+
+Meijer-Fokkinga-Paterson91 %FIXME cite
+
+Thomson14 - An Introduction to Recursion Schemes (Web): %FIXME cite
+
+automating the process of ``Traversing'' and Recursing through nested
+Data Structures
+
+Clojure: $\mono{clojure.walk}$
+
+Recursion Schemes: ``Implicit Recursion'' (cf. ``Explicit Recursion'')
+
+
+
+% --------------------------------------------------------------------
+\subsection{Paramorphism}\label{sec:paramorphism}
+% --------------------------------------------------------------------
+
+Primitive Recursion (\S\ref{sec:primitive_recursive})
+
+
+
+\subsubsection{Catamorphism}\label{sec:catamorphism}
+
+Unique Homomorphism from Initial $F$-algebra
+(\S\ref{sec:initial_algebra}) into some other $F$-algebra
+(\S\ref{sec:f_algebra})
+
+\emph{Fold}
+
+(Milewski - Understanding F-Algebras):
+
+\[
+  Cata : (F (A) \rightarrow A) \rightarrow (Fix (F) \rightarrow A)
+\]\[
+  Cata (\alpha) = \alpha \circ (fmap (Cata (\alpha))) \circ unFix
+\]
+
+allows Evaluation of arbitrarily nested Expressions
+
+Catamorphism creates a Recursive Evaluator for a Nested Data Structure
+(the Fixed Point \S\ref{sec:fixed_point} of $F$) a generalization of
+List Folding to arbitrary Recursive Data Structures
+(\S\ref{sec:data_structure}).
+
+``Bananas'' (???) %FIXME
+
+$\llparenthesis \varphi \rrparenthesis$
+
+\fist Cf. Anamorphism (\S\ref{sec:anamorphism}) ``Lenses'' $\llense
+\psi \rlense$ (note these are not \emph{Lenses} as in Haskell)
+
+
+\paragraph{Fusion}\label{sec:fusion}\hfill
+
+
+
+% --------------------------------------------------------------------
+\subsection{Apomorphism}\label{sec:apomorphism}
+% --------------------------------------------------------------------
+
+Primitive Corecursion (\S\ref{sec:primitive_corecursion})
+
+
+
+\subsubsection{Anamorphism}\label{sec:anamorphism}
+
+\emph{Unfold}
+
+Coinduction (\S\ref{sec:coinduction})
+
+Terminal Coalgebra (\S\ref{sec:terminal_coalgebra})
+
+$\theta : A \rightarrow F(A)$
+\[
+  Ana : (A \rightarrow F (A)) \rightarrow A \rightarrow Fix F
+\]\[
+  Ana (\theta) = Fx \circ (fmap (Ana (\theta))) \circ \theta
+\]
+
+``Lenses'' (note these are not \emph{Lenses} as in Haskell)
+
+$\llense \psi \rlense$
+
+\fist Cf. Catamorphism (\S\ref{sec:catamorphism}) ``Bananas''
+$\llparenthesis \varphi \rrparenthesis$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hylomorphism}\label{sec:hylomorphism}
+% --------------------------------------------------------------------
+
+Composition of Anamorphism followed by Catamorphism
+
+Deforestation
+
+
+
+% --------------------------------------------------------------------
+\subsection{Metamorphism}\label{sec:metamorphism}
+% --------------------------------------------------------------------
+
+Composition of Catamorphism followed by Anamorphism
 
 
 
