@@ -2300,7 +2300,11 @@ In Rust:
 
 \subsubsection{Linear Type System}\label{sec:linear_type}
 
-Values used exactly once
+Values used exactly once; guarantees that no more References can be
+made to a Value
+
+&#x261e; Cf. Uniqueness Types (\S\ref{sec:uniqueness_type}):
+guarantees that only one \emph{Reference} exists to a Value
 
 Linear Type Theory -- Co-modality (???) %FIXME
 
@@ -2464,6 +2468,35 @@ Side-effects using Sessions
 \paragraph{Channel Type}\label{sec:channel_type}\hfill
 
 \subparagraph{Label}\label{sec:channel_label}\hfill
+
+
+
+\subsubsection{Uniqueness Type}\label{sec:uniqueness_type}
+
+(De Vries, Plasmeijer, Abrahamson 08 - *Uniqueness Typing Simplified*)
+
+\emph{Uniqueness Type} -- guarantees that a Value has a single
+\emph{Reference}
+
+&#x261e; Cf. Linear Types (\S\ref{sec:linear_type}): guarantees that
+no more References can be made to a Value
+
+Programming Languages: Clean, Mercury, Idris (`UniqueType`), Rust
+(``Ownership Types'', ``Borrowed Pointers'')
+
+
+
+\paragraph{Borrowed Type}\label{sec:channel_type}\hfill
+
+Programming Languages: Idris (\mono{BorrowedType}), Rust (Borrowed
+Pointers???)
+%FIXME
+
+Idris \mono{BorrowedType}:
+
+Uniqueness Type which can be ``inspected'' at ``top level'' by Pattern
+Matching or \emph{Lending} to another Function (but no further)
+%FIXME
 
 
 
