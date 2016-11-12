@@ -3202,11 +3202,18 @@ The Limit of a Cospan is a Pullback (\S\ref{sec:pullback})
 (\S\ref{sec:cospan_category})
 
 a Cospan is a pair of Morphisms $X \rightarrow N \leftarrow Y$ with a
-common Codomain
+common Codomain (Apex)
+
+Feet $X,Y$
 
 used to model Interconnection of Systems (Fong16)
 
 Cobordism (\S\ref{sec:cobordism})
+
+Map of Cospans is a Morphism $n : N \rightarrow N'$ between Apices
+such that the resulting Diagram Commutes
+
+Composition using a Pushout from a common Foot
 
 
 
@@ -5359,6 +5366,11 @@ Coherence Maps are Invertible
 Coherence Maps are Identity Maps
 
 
+
+% --------------------------------------------------------------------
+\subsection{Monoidal Natural Transformation}
+\label{sec:monoidal_natural_transformation}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{String Diagram}\label{sec:string_diagram}
@@ -7794,11 +7806,13 @@ both Domain and Codomain of a Morphism can be Finite Lists of Objects
 
 (Fong16)
 
-A \emph{Hypergraph Category}, $(\cat{H}, \otimes)$, is a Symmetric
-Monoidal Category (\S\ref{sec:symmetric_monoidal}) in which every
-Object has the Structure of a \emph{Special Commutative Frobenius
-  Monoid} (\S\ref{sec:frobenius_monoid}) in a way compatible with the
-Monoidal Product, i.e. a Symmetric Monoidal Category that also allows
+A \emph{Hypergraph Category} (also \emph{Well-supported Compact Closed
+  Category}, \emph{DGS-monoidal Category}, or \emph{Dungeon
+  Category}), $(\cat{H}, \otimes)$, is a Symmetric Monoidal Category
+(\S\ref{sec:symmetric_monoidal}) in which every Object has the
+Structure of a \emph{Special Commutative Frobenius Monoid}
+(\S\ref{sec:frobenius_monoid}) in a way compatible with the Monoidal
+Product, i.e. a Symmetric Monoidal Category that also allows
 Multi-input/Multi-output Interconnection of Strings of the same Type.
 
 Compositional structure of Hypergraphs (\S\ref{sec:hypergraph})
@@ -7821,10 +7835,85 @@ Semantic Interpretation gives a \emph{Hypergraph Functor}
 each Object is equipped with a Special Commutative Frobenius
 Monoid
 
+Self-dual
+
 Compact Closed: (Domain and Codomain can be exchanged ???) %FIXME
+
+Dagger Functor (for any Self-dual Compact Closed Category
+\S\ref{sec:dagger_functor}): Involutive Contravariant Endofunctor that
+is the Identity on Objects
+
+Frobenius Maps: lack of Naturality in Hypergraph Categories
+
+Functor from the Category of Categories with Finite Colimits and
+Colimit perserving Functors (Finitely Cocomplete, Finitely
+Cocontinuous) to the Category of Hypergraph Categories and Hypergraph
+Functors
 
 
 \textbf{Graphical Language}
+
+Directed Hypergraph $(N,H,s,t)$
+
+$N$ -- Nodes
+
+$H$ -- Hyperedges
+
+$s,t : H \rightarrow \pow(N)$
+
+Morphisms in a Hypergrpah Category as Hyperedges
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hypergraph Functor}\label{sec:hypergraph_functor}
+% --------------------------------------------------------------------
+
+$(F,\varphi)$ is a Strong Symmetric Monoidal Functor:
+\[
+  (F,\varphi) : (\cat{H},\otimes) \rightarrow (\cat{H}',\boxtimes)
+\]
+such that:
+\begin{itemize}
+  \item $FX \boxtimes FX \xrightarrow{\mu_{FX}} FX
+    \equiv FX \boxtimes FX \xrightarrow{\varphi} F(X \otimes X)
+      \xrightarrow{F_{\mu_X}} FX$
+  \item $I' \xrightarrow{\eta_{FX}} FX
+    \equiv I' \xrightarrow{\varphi_I} FI \xrightarrow{F \eta_X} FX$
+  \item $FX \xrightarrow{\delta_{FX}} FX \boxtimes FX
+    \equiv FX \xrightarrow{F\delta_X} F(X \otimes X)
+      \xrightarrow{\varphi^{-1}} FX \boxtimes FX$
+  \item $FX \xrightarrow{\epsilon_{FX}} I'
+    \equiv FX \xrightarrow{F \epsilon_X} FI
+      \xrightarrow{\varphi^{-1}} I'$
+\end{itemize} %FIXME rewrite using composition notation?
+or equivalently a Strong Symmetric Monoidal Functor $F$ is a
+Hypergraph Functor if for every $X$ the Special Commutative Frobenius
+Structure on $FX$ is:
+\[
+  (FX, F\mu_X \circ \varphi_{X,X}, \varphi^{-1}_{X,X} \circ F\delta_X,
+    F\eta_X \circ \varphi_I, \varphi^{-1}_I \circ F\epsilon_X)
+\]
+
+Morphisms between Hypergraph Functors are Monoidal Natural
+Transformations (\S\ref{sec:monoidal_natural_transformation})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hypergraph Equivalence}\label{sec:hypergraph_equivalence}
+% --------------------------------------------------------------------
+
+Two Hypergraph Categories are \emph{Hypergraph Equivalent} if there
+exist Hypergraph Functors with Monoidal Natural Transformations to the
+Identity Functors.
+
+\emph{Coherence}: every Hypergraph Category is Hypergraph Equivalent
+to a Strict Hypergraph Category
+(\S\ref{sec:strict_hypergraph_category}), $\cat{H}_{str}$, with
+Objects forming a Free Monoid -- every Hypergraph Category can be
+constructed using Decorated Corelations
+(\S\ref{sec:decorated_corelation})
 
 
 
@@ -7869,11 +7958,40 @@ Syntactic Category that Interprets each Diagram
 \label{sec:strict_hypergraph_category}
 % --------------------------------------------------------------------
 
+\emph{Coherence}
+
+
+
 % --------------------------------------------------------------------
-\subsection{Category of Cospans}\label{sec:cospan_category}
+\subsection{Cospan Category}\label{sec:cospan_category}
 % --------------------------------------------------------------------
 
 fundamental example of Hypergraph Category
+
+Category $Cospan(\cat{C})$ of Cospans in a Category $\cat{C}$ with
+Finite Colimits
+
+Objects -- Objects of $\cat{C}$
+
+Morphisms -- Isomorphism Classes of Cospans
+
+Wide Embedding: takes each Morphism $f : X \rightarrow Y$ to the
+Cospan $X \xrightarrow{f} Y \xleftarrow{1_Y} Y$
+
+Hypergraph Category $(Cospan(\cat{C}), +)$:
+
+Objects -- Objects of $\cat{C}$
+
+Morphisms -- Isomorphism Classes of Cospans
+
+Composition -- Pushouts
+
+Monoidal Product -- Coproduct in $\cat{C}$
+
+Coherence Maps -- inherited from $(\cat{C}, +)$
+
+Hypergraph Maps -- $\mu = [1,1]$, $\eta = !$, $\delta = [1,1]^{op}$,
+$\epsilon = !^{op}$
 
 
 
