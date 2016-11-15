@@ -3757,6 +3757,10 @@ B$ with $a \in A \sim b \in B$ when there Exists $x \in C$ such that
 $f(x) = a$ and $g(x) = b$. When $C$ is the Intersection of $A$ and $B$
 (and $f$ and $g$ are the Inclusions), the Pushout is equal to $A + B$.
 
+\fist ``Connection'' of Terminals (``boundary'' ``marked'' using
+Cospans \S\ref{sec:decorated_cospan}) in an Open System
+(\S\ref{sec:open_system}) (Fong16)
+
 
 
 \subsubsection{Tensor Product}\label{sec:tensor_product}
@@ -7864,6 +7868,16 @@ $s,t : H \rightarrow \pow(N)$
 Morphisms in a Hypergrpah Category as Hyperedges
 
 
+\textbf{Open Systems}
+
+\emph{Terminal} -- ``point of Interconnection''; ``boundary''
+``marked'' using Cospan (\S\ref{sec:decorated_cospan}), Connected to
+others using Pushouts (\S\ref{sec:pushout}); having a ``marked
+boundary'' in this way makes a Closed System into an Open System;
+process of ``freely'' ``marking boundaries'' constructs a Hypergraph
+Category from a ``library'' of Network pieces
+
+
 
 % --------------------------------------------------------------------
 \subsection{Hypergraph Functor}\label{sec:hypergraph_functor}
@@ -7925,6 +7939,8 @@ construction of Hypergraph Category from Diagrammatic Language
 
 Inputs, Outputs, Composition are Modelled by Cospans and
 \emph{Decorations} specify the Components
+
+Decorated Cospan Category (\S\ref{sec:decorated_cospan_category})
 
 not all Hypergraph Categories can be constructed through Decorated
 Cospans, see Decorated Corelations (\S\ref{sec:decorated_corelation})
@@ -7992,6 +8008,75 @@ Coherence Maps -- inherited from $(\cat{C}, +)$
 
 Hypergraph Maps -- $\mu = [1,1]$, $\eta = !$, $\delta = [1,1]^{op}$,
 $\epsilon = !^{op}$
+
+
+
+\subsubsection{Decorated Cospan Category}
+\label{sec:decorated_cospan_category}
+
+Decorated Cospan (\S\ref{sec:decorated_cospan})
+
+Set of Labels $L$
+
+Finite Set $N$
+
+collection of Finite $L$-labelled Directed Multigraphs (here,
+\emph{$L$-graphs} or simply ``Graphs'') with $N$ as Set of Nodes
+
+$(N,E,s,t,r)$ -- Nodes, Edges, Source ($s : E \rightarrow N$), Target
+($t : E \rightarrow N$), Labels ($r : E \rightarrow L$)
+
+Lax Monoidal Functor from $(\cat{FinSet},+)$ to $(\cat{Set}, \times)$
+
+%FIXME move to decorated cospans?
+
+for $\cat{C}$ a Category with Finite Colimits and Lax Monoidal Functor
+$(F, \varphi) : (\cat{C}, +) \rightarrow (\cat{D}, \otimes)$, an
+$F$-decorated Cospan is a pair:
+\[
+  (X \xrightarrow{i} N \xleftarrow{o} Y, I \xrightarrow{s} F N)
+\]
+of a Cospan $X \xrightarrow{i} N \xleftarrow{o} Y$ in $\cat{C}$ and an
+Element $I \xrightarrow{s} F N$ of the $F$-image $F N$ of the Apex of
+the Cospan (the \emph{Decoration} of the Cospan).
+
+Morphism of Decorated Cospans:
+\[
+  n: (X \xrightarrow{i_X} N \xleftarrow{o_Y} Y, I \xrightarrow{s} F N)
+    \rightarrow (X \xrightarrow{i'_X} N' \xleftarrow{o'_Y} Y,
+      I \xrightarrow{s'} F N')
+\]
+is a Morphism $n : N \rightarrow N'$ of Cospans such that $F n \circ s
+= s'$
+
+Category $F\cat{Cospan}$ of $F$-decorated Cospans with Objects the
+Objects of $\cat{C}$ and Morphisms the Isomorphism Classes of
+$F$-decorated Cospans and Composition by Pushout of Cospans in
+$\cat{C}$ paired with the Composite of the Tensor Product of the
+Decorations with the $F$-image of the Copairing of the Pushout Maps
+%FIXME
+
+(big commutative diagrams) %FIXME
+
+when a Braided Monoidal Structure is present, the Category of
+Decorated Cospans is a Hypergraph Category into which the Category of
+(Undecorated) Cospans Widely Embeds
+%FIXME wide embedding
+%FIXME (D,\otimes) is braided monoidal?
+
+for Lax Braided Monoidal Functor $(F,\varphi): (\cat{C},+) \rightarrow
+(\cat{D},\otimes)$, $F\cat{Cospan}$ can be given a Symmetric Monoidal
+and Hypergraph structure such that there is a Wide Embedding of
+Hypergraph Categories:
+\[
+  Cospan(\cat{C}) \hookrightarrow F\cat{Cospan}
+\]
+
+for any Cospan $X \rightarrow N \leftarrow Y$, the Empty Decoration on
+$N$:
+\[
+  I \xrightarrow{\varphi_I} F \varnothing \xrightarrow{F!} F N
+\]
 
 
 
