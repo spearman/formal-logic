@@ -3208,6 +3208,9 @@ Feet $X,Y$
 
 used to model Interconnection of Systems (Fong16)
 
+Cospans can be thought of as $1$-morphisms in a Bicategory
+(\S\ref{sec:bicategory}) (Fong16 => Benabou67)
+
 Cobordism (\S\ref{sec:cobordism})
 
 Map of Cospans is a Morphism $n : N \rightarrow N'$ between Apices
@@ -6614,6 +6617,17 @@ Internal Logic: Cartesian Logic %FIXME xref
 exactly a Locally Cartesian Category (\S\ref{sec:locally_cartesian})
 that has a Terminal Object (\S\ref{sec:terminal_object})
 
+Finitely Complete if and only if:
+\begin{itemize}
+  \item it has a Terminal Object and admits all Binary Products
+    (\S\ref{sec:product}) and Equalizers (\S\ref{sec:equalizer})
+\end{itemize}
+or:
+\begin{itemize}
+  \item it has a Terminal Object and admits all Binary Pullbacks
+    (\S\ref{sec:pullback})
+\end{itemize}
+
 
 
 \subsubsection{Regular Category}\label{sec:regular_category}
@@ -7231,6 +7245,9 @@ $2$-category (\S\ref{sec:2_category})
 String Diagram (\S\ref{sec:string_diagram})
 
 Profunctor Bicategory (\S\ref{sec:profunctor_bicategory})
+
+Cospans (\S\ref{sec:cospan}) can be thought of as $1$-morphisms in a
+Bicategory (Fong16 => Benabou67)
 
 
 
@@ -7950,6 +7967,7 @@ common Codomain, and a Decorated Cospan equips the apex $N$ with
 ``extra structure'' (Fong16) %FIXME
 
 
+
 % --------------------------------------------------------------------
 \subsection{Decorated Corelation}\label{sec:decorated_corelation}
 % --------------------------------------------------------------------
@@ -7966,6 +7984,11 @@ Functors from Diagrams to Semantics
 can be used to construct a Semantic Hypergraph Category for any
 Network-style Diagrammatic Language and a Hypergraph Functor from its
 Syntactic Category that Interprets each Diagram
+
+Decorated Cospans (\S\ref{sec:decorated_cospan}) ``accumulate
+information'' about the interals of the Systems (Syntax), while
+Decorated Corelations allow for ``black boxing'' (Semantics) by only
+describing behavior at the ``boundaries'' of Systems
 
 
 
@@ -8016,6 +8039,11 @@ $\epsilon = !^{op}$
 
 Decorated Cospan (\S\ref{sec:decorated_cospan})
 
+Decorated Cospans ``accumulate information'' (i.e. ``internals'' of
+Systems are preserved)-- Syntax; see Decorated Corelations
+(\S\ref{sec:decorated_corelation}) for describing ``black box''
+interfaces-- Semantics
+
 Set of Labels $L$
 
 Finite Set $N$
@@ -8064,6 +8092,11 @@ Decorated Cospans is a Hypergraph Category into which the Category of
 %FIXME wide embedding
 %FIXME (D,\otimes) is braided monoidal?
 
+generality of Decorations in $(\cat{Set}, \times)$ -- Decorations
+first presented in any Braided Monoidal Category but it is ``general
+enough'' to let Decorations lie in the Symmetric Monoidal Category
+$(\cat{Set}, \times)$ %FIXME
+
 for Lax Braided Monoidal Functor $(F,\varphi): (\cat{C},+) \rightarrow
 (\cat{D},\otimes)$, $F\cat{Cospan}$ can be given a Symmetric Monoidal
 and Hypergraph structure such that there is a Wide Embedding of
@@ -8077,6 +8110,111 @@ $N$:
 \[
   I \xrightarrow{\varphi_I} F \varnothing \xrightarrow{F!} F N
 \]
+
+
+Hypergraph Structure
+
+$(F\cat{Cospan}, +)$:
+
+Objects -- Objects of $\cat{C}$
+
+Morphisms -- Isomorphism Classes of $F$-decorated Cospans in $\cat{C}$
+
+Composition -- Pushout
+
+Monoidal Product -- Coproduct on $\cat{C}$
+
+Coherence Maps -- Maps from $\cat{Cospan(C)}$ with Empty Decoration
+
+Hypergraph Maps -- Maps from $\cat{Cospan(C)}$ with Empty Decoration
+
+%FIXME hypergraph maps?
+
+if the Monoidal Unit in $(\cat{D}, \otimes)$ is the Initial Object,
+then each Object has the Empty Decoration as the only possible
+Decoration
+
+for $1_\cat{C} : (\cat{C}, +) \rightarrow (\cat{C}, +)$ the Identity
+Functor on Category $\cat{C}$ with Finite Colimits, $\cat{Cospan(C)}$
+and $1_{\cat{C}}\cat{Cospan}$ are Isomorphic as Hypergraph Categories
+and therefore there is always a Hypergraph Functor between Decorated
+Cospan Categories $1_{\cat{C}}\cat{Cospan} \rightarrow F\cat{Cospan}$
+
+
+\textbf{Functors of Decorated Cospan Categories}
+
+%FIXME
+
+Operations/Transformations on Decorating Structure
+
+Hypergraph Functor $(T,\tau) : F\cat{Cospan} \rightarrow
+G\cat{Cospan}$ -- Strong Symmetric Monoidal, perserves Special
+Commutative Frobenius Structure on each Object
+
+Semantic Functor (only to other Decorated Cospan Categories); \fist
+Cf. Functorial Semantics (\S\ref{sec:functorial_semantics}) --
+(Lawvere63)
+
+
+\textbf{Example Decorated Cospan Categories}
+
+%FIXME
+
+\emph{Labelled Graphs}
+
+$\cat{GraphCospan}$
+
+
+\emph{Linear Subspaces}
+
+$\cat{LinSubCospan}$: Semantics for Morphisms of $\cat{GraphCospan}$
+as Diagrams of Networks of Linear Resistors
+
+Natural Transformation $Res : \cat{Graph} \Rightarrow \cat{LinSub}$
+mapping each Graph (viewed as a Network of Resistors) to the Linear
+Subspace of $\reals^N \oplus (\reals^N)^*$ of Electrical States of the
+Network permitted by Ohm's Law
+
+Hypergraph Functor $\cat{GraphCospan} \rightarrow \cat{LinSubCospan}$
+
+Sequential Composition: Connect Outputs of one Circuit to Inputs of
+another
+
+Monoidal Composition: Circuits in Parallel (``placement'' of Circuits
+``side-by-side'')
+
+Symmetric Monoidal Structure: re-ordering of Input and Output wires
+
+Compactness: interchangability between Input and Output Terminals
+
+Frobenius Structure: any Node may be Wired to any number of additional
+Components
+
+
+
+\subsubsection{Decorated Cospan Bicategory}
+\label{sec:decorated_cospan_bicategory}
+
+Cospans (\S\ref{sec:cospan}) can be thought of as $1$-morphisms in a
+Bicategory (\S\ref{sec:bicategory}) (Fong16 => Benabou67)
+
+$\cat{Cospan(C)}$ is this Bicategory ``decategorified'' by discarding
+$2$-morphisms and Identifying Isomorphic $1$-morphisms
+
+Morphisms of $F$-decorated Cospans
+
+Symmetric Monoidal Bicategory $(F\cat{Cospan}, +)$:
+\begin{itemize}
+  \item Objects: Objects of $\cat{C}$
+  \item Morphisms: $F$-decorated Cospans in $\cat{C}$
+  \item $2$-morphisms: Morphisms of $F$-decorated Cospans in $\cat{C}$
+\end{itemize}
+
+(Fong16 => Courser)
+
+$2$-morphisms could be used to Model Transformations, ``Coarse
+Grainings'', Rewrite Rules, etc. of Open Systems and their
+Representations
 
 
 
