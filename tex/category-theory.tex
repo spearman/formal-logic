@@ -301,6 +301,7 @@ Simplex Category (\S\ref{sec:simplex_category})
   and $K$-linear Transformations
 \item [Vect$_\reals$] all Finite-dimensional Vector Spaces over
   $\reals$ and Linear Maps
+\item [LinRel] all Vector Spaces and Linear Relations %FIXME
 \item [Hilb] all Hilbert Spaces (\S\ref{sec:hilbert_space}) and Short
   Linear Maps (\S\ref{sec:short_linear}); is a Dagger Compact Category
   (\S\ref{sec:dagger_compact})
@@ -712,6 +713,9 @@ called a \emph{Split Monomorphism}.
 
 The Retraction of a Split Monomorphism is a Split Epimorphism
 (\S\ref{sec:split_epimorphism}).
+
+assuming the Axiom of Choice, all Monomorphisms in $\cat{Set}$ are
+Split
 
 
 
@@ -3181,6 +3185,38 @@ The Colimit of a Span is a Pushout (\S\ref{sec:pushout})
 Spans can be Composed in a Category with Pullbacks
 (\S\ref{sec:pullback})
 
+(Fong16):
+
+Spans $X \leftarrow N \rightarrow Y$ are in one-to-one correspondence
+with Functions $N \rightarrow X \times Y$
+
+
+
+\paragraph{Relation}\label{sec:relation}\hfill
+
+\fist Relations (Set Theory \S\ref{sec:set_relation})
+
+\fist Multimaps (Left-total Relations \S\ref{sec:multimap})
+
+(Fong16):
+
+Spans $X \leftarrow N \rightarrow Y$ are in one-to-one correspondence
+with Functions $N \rightarrow X \times Y$
+
+when $N \rightarrow X \times Y$ is Monic, the Span is \emph{Jointly
+  Monic}
+
+Relations can be seen as an Isomorphism Class of Jointly Monic Spans
+in the Category of Sets; \fist Cf. Corelations
+(\S\ref{sec:corelation})
+
+``Subobjects of Pair-wise Products'' %FIXME
+
+Factorization Systems (\S\ref{sec:factorization_system}) %FIXME
+
+\fist Regular Categories (\S\ref{sec:regular_category}): Finitely
+Complete Category with ``good notion'' of Image Factorization
+
 
 
 \paragraph{Correspondence Category}\label{sec:correspondence_category}\hfill
@@ -3216,15 +3252,97 @@ Cobordism (\S\ref{sec:cobordism})
 Map of Cospans is a Morphism $n : N \rightarrow N'$ between Apices
 such that the resulting Diagram Commutes
 
+(Fong16):
+
 Composition using a Pushout from a common Foot
+
+given a pair of Cospans $X \rightarrow N \leftarrow Y$ and $Y
+\rightarrow M \leftarrow Z$, the Composite has Apex the Pushout $N +_Y
+M$ which is (roughly) the Union of $N$ and $M$ with two Points
+Identified if they are both Images of the same Element of $Y$
+
+$X \rightarrow N +_Y M \leftarrow Z$
 
 
 
 \paragraph{Corelation}\label{sec:corelation}\hfill
 
+(Fong16):
+
 a Cospan $X \rightarrow N \leftarrow Y$ such that the \emph{Copairing}
 of two Morphisms $X + Y \rightarrow N$ is a Morphism in $\class{E}$ of
-the Factorization System $(\class{E}, \class{M})$ (Fong16) %FIXME
+the Factorization System $(\class{E}, \class{M})$ %FIXME
+
+Corelations are Cospans with the ``$\cat{M}$-part'' ``forgotten''
+
+Composition of Corelations
+
+to compute the Composite of any two Corelations, consider them as
+Cospans and compute their Composite as Cospans and then take the
+``$\cat{E}$-part'' of the result %FIXME
+
+$X \rightarrow \overline{N} \leftarrow Y$, $Y \rightarrow \overline{M}
+\leftarrow Z$
+
+$X \rightarrow \overline{N +_Y M} \leftarrow Z$
+
+the Apex of the Composite is the Subset of the Apex of the Composite
+Cospan of those Elemnts that are in the Image of the Maps from the
+Feet %FIXME
+
+Corelation Category (\S\ref{sec:corelation_category})
+
+Composition of Corelations is not Associative in general
+
+$\cat{M}$ obeys \emph{Stability under Pushout} (``well behaved'')i --
+Implies that Corelations in $\cat{C}$ (Category with Finite Colimits
+and Factorization System $(\cat{E},\cat{M})$) form a Hypergraph
+Category (\S\ref{sec:hypergraph_category}); Implies $\cat{M}$ is
+Closed under $+$ and $(\cat{M},+)$ is a Symmetric Monoidal Category
+
+\emph{Construct a Hypergraph Category Modelling the Semantics of Open
+  Systems}: Epi-mono Factorization (\S\ref{sec:epimono_factorization})
+
+%FIXME
+
+$(\cat{E},\cat{M})$-factorization System
+(\S\ref{sec:factorization_system})
+
+$\cat{E}$, $\cat{M}$ -- Subcategories of $\cat{C}$ such that every
+Morphism in $\cat{C}$ ``Factors in a Coherent way'' as the Composite
+of a Morphism in $\cat{E}$ followed by a Morphism in $\cat{M}$; e.g.
+on $\cat{Set}$ every Function can be written as Surjection followed by
+an Injection giving Factorization system $(\cat{Sur},\cat{Inj})$ where
+$\cat{Sur}$ is the Subcategory of Surjections in $\cat{Set}$ and
+$\cat{Inj}$ is the Subcategory of Injections in $\cat{Set}$
+
+\emph{$(\cat{E},\cat{M})$-corelations} are Cospans
+(\S\ref{sec:cospan}) such that the Copairing $X + Y \rightarrow N$ of
+the two Maps is an Element of the $\cat{E}$ ``factor''
+
+taking the $\cat{E}$-part of a Cospan $X \rightarrow N \leftarrow Y$
+the resulting Corelation is written $X \rightarrow \overline{N}
+\leftarrow Y$ with new Apex $\overline{N}$
+
+in $\cat{Set}$ with Epi-mono Factorization System $(\cat{Sur},
+\cat{Inj})$, Epi-mono Corelations from $X \rightarrow Y$ are
+Surjective Functions $X + Y \rightarrow N$ and their Isomorphism
+Classes are Partitions or Equivalence Relations on $X + Y$
+
+Composition Rule on Isomorphism Classes of Corelations %FIXME
+
+
+\textbf{Partial Order of Factorization Systems} %FIXME
+
+Morphism-isomorphism Factorization System: nothing is ``forgotten'' so
+Corelations are just Cospans
+
+Isomorphism-morphism Factorization System: everything is ``forgotten''
+so there is a unique Corelation between any two Objects
+
+Hypergraph Functor can be constructed between two Corelation
+Categories if the Codomain ``forgets'' more than the Domain, i.e. if
+the Codomain is ``less'' than the Domain in the Poset
 
 
 
@@ -6632,6 +6750,13 @@ or:
 
 \subsubsection{Regular Category}\label{sec:regular_category}
 
+Finitely Complete Category admitting a ``good notion'' of Image
+Factorization
+
+\fist Factorization Systems (\S\ref{sec:factorization_system})
+
+Calculus of Relations (\S\ref{sec:relation})
+
 Internal Logic: Regular Logic (\S\ref{sec:regular_logic})
 
 Coherent Category (\S\ref{sec:coherent_category}): Regular Category
@@ -6641,6 +6766,25 @@ Interpretation (\S\ref{sec:interpretation}) of Signatures
 (\S\ref{sec:signature}) in Regular Categories (instead of $\cat{Set}$)
 
 Cartesian Category (\S\ref{sec:cartesian_category})
+
+in any Regular Category the Regular Epimorphisms and Monomorphisms
+form a Factorization System (\S\ref{sec:factorization_system})
+
+Examples:
+
+\begin{itemize}
+  \item $\cat{Set}$
+  \item any Topos (\S\ref{sec:topos})
+  \item Abelian Categories (\S\ref{sec:abelian_category})
+\end{itemize}
+
+Coregular:
+
+\begin{itemize}
+  \item $\cat{Set}^{op}$
+  \item any Cotopos (???)
+  \item $\cat{Top}$
+\end{itemize}
 
 
 
@@ -7291,6 +7435,37 @@ $h$-proposition (\S\ref{sec:h_proposition})
 \subsection{Allegory}\label{sec:allegory}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\subsection{Factorization System}\label{sec:factorization_system}
+% --------------------------------------------------------------------
+
+(Fong16):
+
+allows any Morphism in a Category to be \emph{Factored} into the
+Composite of two Morphisms in a ``Coherent way'' %FIXME
+
+in any Regular Category (\S\ref{sec:regular_category}) the Regular
+Epimorphisms and Monomorphisms form a Factorization System
+
+
+
+\subsubsection{Orthogonal Factorization System}
+\label{sec:orthogonal_factorization_system}
+
+\paragraph{Epi-mono Factorization System}
+\label{sec:epimono_factorization}\hfill
+
+Relations (\S\ref{sec:relation}), Corelations (\S\ref{sec:corelation})
+
+Exists on any (Elementary) Topos or any Pretopos %FIXME
+
+
+
+\subsubsection{Monoidal Factorization System}
+\label{sec:monoidal_factorization_system}
+
+(Fong16)
+
 
 
 % ====================================================================
@@ -7323,6 +7498,9 @@ Grothendieck Topos (\S\ref{sec:grothendieck_topos})
 $\cat{Set}$; Grothendieck Topos: Category of Sheaves on the Point
 
 $\cat{FinSet}$; Elementary Topos (\S\ref{sec:elementary_topos})
+
+any Topos is a Regular Category (\S\ref{sec:regular_category}) and an
+Adhesive Category (\S\ref{sec:adhesive_category})
 
 
 
@@ -7422,6 +7600,8 @@ Essential Geometric Morphism (\S\ref{sec:essential_geometric}):
 \]
 
 
+
+\subsubsection{Adhesive Category}\label{sec:adhesive_category}
 
 \subsubsection{Topos Sieve}\label{sec:topos_sieve}
 
@@ -7538,6 +7718,9 @@ Group Homomorphisms. A Ring (\S\ref{sec:ring}) is a Monoid Object
 Homology Theory (\S\ref{sec:homology_theory})
 
 Homological Algebra (\S\ref{sec:homological_algebra})
+
+any Abelian Category is a Regular Category
+(\S\ref{sec:regular_category})
 
 
 
@@ -8215,6 +8398,106 @@ Symmetric Monoidal Bicategory $(F\cat{Cospan}, +)$:
 $2$-morphisms could be used to Model Transformations, ``Coarse
 Grainings'', Rewrite Rules, etc. of Open Systems and their
 Representations
+
+
+
+% --------------------------------------------------------------------
+\subsection{Corelation Category}\label{sec:corelation_category}
+% --------------------------------------------------------------------
+
+(Fong16):
+
+Corelations (\S\ref{sec:corelation})
+
+Hypergraph Category with Corelations as Morphisms
+
+$(\cat{E},\cat{M})$-factorization System
+(\S\ref{sec:factorization_system})
+
+Composition of Corelations is not Associative in general, only when
+$\cat{M}$ has \emph{Stability under Pushout} (``well behaved'');
+Implies $\cat{M}$ is Closed under $+$ and $(\cat{M},+)$ is a Symmetric
+Monoidal Category
+
+Corelations $X \xrightarrow{i_X} N \xleftarrow{o_Y} Y$ and $Y
+\xrightarrow{i_Y} M \xleftarrow{o_Z} Z$ have Composite (Unique up to
+Isomorphism):
+\[
+  X \xrightarrow{e\circ\iota_X} \overline{N +_Y M}
+    \xleftarrow{e\circ\iota_Z} Z
+\]
+
+(commutative diagram) %FIXME
+
+Category with Isomorphism Classes of Corelations as Morphisms
+
+$\cat{Cospan(C)} \rightarrow \cat{Corel(C)}$: Functorial taking each
+Cospan to its ``Jointly $\cat{E}$-like part''
+
+Monoidal Product of two Corelations is their Monoidal Product as
+Cospans
+
+for Category $\cat{C}$ with Finite Colimits and $(\cat{E},\cat{M})$ a
+Factorization System on $\cat{C}$ such that $\cat{M}$ is Stable under
+Pushout, there exists a Hypergraph Category $(\cat{Corel_{(E,M)}(C)},
++)$ with:
+\begin{itemize}
+  \item Objects -- Objects of $\cat{C}$
+  \item Morphisms -- Isomorphism Classes of
+    $(\cat{E},\cat{M})$-corelations in $\cat{C}$
+  \item Composition -- the ``$\cat{E}$-part'' of Pushout %FIXME
+  \item Monoidal Product -- the Coproduct in $\cat{C}$
+  \item Coherence Maps -- inherited from $\cat{Cospan(C)}$
+  \item Hypergraph Maps -- inherited from $\cat{Cospan(C)}$
+\end{itemize}
+
+
+\textbf{Functors between Corelation Categories}
+
+
+\textbf{Strict Hypergraph Functor}:
+\[
+  \square : \cat{Cospan(C)} \rightarrow \cat{Corel(C)}
+\]
+taking each Object of $\cat{Cospan(C)}$ to itself (as an Object of
+$\cat{Corel(C)}$) and each Cospan to its ``$\cat{E}$-part''
+
+
+\textbf{Partial Order of Factorization Systems} %FIXME
+
+Morphism-isomorphism Factorization System: nothing is ``forgotten'' so
+Corelations are just Cospans
+
+Isomorphism-morphism Factorization System: everything is ``forgotten''
+so there is a unique Corelation between any two Objects
+
+Hypergraph Functor can be constructed between two Corelation
+Categories if the Codomain ``forgets'' more than the Domain, i.e. if
+the Codomain is ``less'' than the Domain in the Poset
+
+
+\textbf{Examples}
+
+Examples of Corelation Categories:
+\begin{itemize}
+  \item Algebra of Ideal Wires
+  \item Semantics of Signal Flow Graphs (\S\ref{sec:signal_flowgraph})
+\end{itemize}
+
+Equivalence Relations as Corelations in $\cat{Set}$ %FIXME
+
+Linear Relations as Corelations in $\cat{Vect}$:
+Vector Spaces and Linear Relations form a Category $\cat{LinRel}$
+%FIXME
+
+
+\textbf{Extraspecial Commutative Frobenius Monoid}
+
+Special Commutative Frobenius Monoid obeying additional Law
+
+(allows ``collapsing'' of connections; extension of ``Spider
+Theorem'')
+%FIXME
 
 
 
