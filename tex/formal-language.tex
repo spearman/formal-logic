@@ -70,6 +70,16 @@ Concatenation (\S\ref{sec:string_concatenation}):
   \Sigma^* = \bigcup_{n\in\mathbb{N}_0} \Sigma^n
 \]
 
+A Formal Language (\S\ref{sec:formal_language}) is a possibly Infinite
+Subset of $\Sigma^*$.
+
+The Set of all Infinite Words over $\Sigma$ is denoted $\Sigma^\omega$
+and the Set of all Finite \emph{and} Infinite Words is denoted
+$\Sigma^\infty$
+
+An $\omega$-language (\S\ref{sec:omega_language}) is a Subset of
+$\Sigma^\omega$
+
 
 
 % --------------------------------------------------------------------
@@ -1106,16 +1116,9 @@ A \times A$ is a Binary Relation on those Objects called the
 appearing in the right-hand side of a Reduction Relation is called a
 \emph{Reduct} (or \emph{Expansion}) of the left-hand side. This is
 equivalent to an Unlabelled State Transition System
-(\S\ref{sec:state_transition}).
-
-An \emph{Indexed Abstract Reduction System} differentiates Reductions
-into Classes so that $\rightarrow$ is the Indexed Union of these
-relations:
-\[
-  (A, \rightarrow_1, \rightarrow_2, \cdots)
-\]
-This is identical to a Labeled Transition System
-(\S\ref{sec:state_transition}).
+(\S\ref{sec:state_transition}). Indexed Abstract Reduction Systems
+(\S\ref{sec:indexed_reduction}) coincide with Labelled State
+Transition Systems (\S\ref{sec:labelled_transition})
 
 A \emph{Reduction Sequence}, $x \rightarrow y \rightarrow z$, is
 denoted $x \stackrel{*}\rightarrow z$, where $\stackrel{*}\rightarrow$
@@ -1144,6 +1147,22 @@ Relations may be defined:
   \bigcup_{i \in \{1,2,3,...\}} (\leftrightarrow \cup =)^i \]
 
 \end{description}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Indexed Abstract Reduction System}
+\label{sec:indexed_rewrite}
+% --------------------------------------------------------------------
+
+An \emph{Indexed Abstract Reduction System} differentiates Reductions
+into Classes so that $\rightarrow$ is the Indexed Union of these
+relations:
+\[
+  (A, \rightarrow_1, \rightarrow_2, \cdots)
+\]
+This is identical to a Labelled Transition System
+(\S\ref{sec:labelled_transition}).
 
 
 
@@ -1688,13 +1707,18 @@ where $S$ is a set of States and $\rightarrow \subseteq S \times S$.
 This is identical to an Un-indexed Abstract Rewriting System
 (\S\ref{sec:abstract_rewrite}).
 
+``Infinite State Machine''; \fist Cf. Finite State Machines (Finite
+Automata \S\ref{sec:finite_automaton})
+
 \emph{Labelled State Transition Systems}
 (\S\ref{sec:labelled_transition}) have an additional set of
 \emph{Labels}, $\Lambda$:
 \[
   (S,\Lambda,\rightarrow)
 \]
-and $\rightarrow \subseteq S \times \Lambda \times S$.
+and $\rightarrow \subseteq S \times \Lambda \times S$. Labelled State
+Transition Systems coincide with Indexed Abstract Reduction Systems
+(\S\ref{sec:indexed_rewrite}).
 
 \emph{Action Programming Languages} add a set of \emph{Fluents}, $F$, and
 \emph{Values}, $V$, and a function mapping $F \times S$ to $V$.
@@ -1704,9 +1728,12 @@ Transition Systems with an initial State and a number of final
 \emph{Accept} states indicating \emph{Word} (Expression) membership
 for a Language.
 
-
 Petri Net (\S\ref{sec:petri_net}): State Transition System of
 Distributed Processes
+
+Model Checking (\S\ref{sec:model_checking}): State Transition System
+including additional Labelling Function for States giving a Kripke
+Structure (\S\ref{sec:kripke_structure})
 
 
 \asterism
@@ -1725,6 +1752,9 @@ Left-adjoint Unfolding (???, Non-well-founded Set Theory
 
 \subsubsection{Labelled Transition System}
 \label{sec:labelled_transition}
+
+Labelled Transition Systems coincide with Indexed Abstract Reduction
+Systems (\S\ref{sec:indexed_rewrite})
 
 %FIXME some of this may need to be moved
 
@@ -1894,8 +1924,15 @@ where
 
 \emph{Finite Automata} are \emph{Finite-state Machines} and take a
 finite Input String of Symbols and either Accept or Reject the Input
-depending on the final State of the computation. Finite Automata are
-able to recognize Regular Languages(\S\ref{sec:regular_language}).
+depending on the final State of the computation.
+
+Finite Automata are able to recognize Regular
+Languages(\S\ref{sec:regular_language}).
+
+\fist Cf. ``Infinite State Machines'' (State Transition Systems
+\S\ref{sec:state_transition}), $\omega$-automata
+(\S\ref{sec:omega_automaton}): Finite Automata with Infinite Input
+Strings
 
 
 
@@ -2038,6 +2075,23 @@ Interaction Categories (\S\ref{sec:interaction_category})
 Functions extended in Time: Space of Deterministic Transducers
 
 Relations extended in Time: Space of Non-deterministic Transducers
+
+
+
+\subsubsection{Moore Machine}\label{sec:moore_machine}
+
+%FIXME
+
+a Kripke Structure (\S\ref{sec:kripke_structure}) having only one
+Initial State may be identified with a Moore Machine with a singleton
+Input Alphabet and Output Function given by the structure's Labelling
+Function
+
+
+
+\subsubsection{Mealy Machine}\label{sec:mealy_machine}
+
+%FIXME
 
 
 
@@ -2202,6 +2256,87 @@ Topologies (Part \ref{sec:topology}). This requires additional Shift
 directions (i.e. $\{L, R, U, D\}$ for a 2-dimensional tape) but does
 not increase the computing power; even an $\infty$-dimensional Turing
 Machine can be simulated by a DTM.
+
+
+
+% ====================================================================
+\section{$\omega$-language}\label{sec:omega_language}
+% ====================================================================
+
+An $\omega$-language (\S\ref{sec:omega_language}) is a Subset of
+$\Sigma^\omega$
+
+a Word on a Path in a Kripke Structure (\S\ref{sec:kripke_structure})
+is an $\omega$-word over the Alphabet $2^{AP}$ where $AP$ are the
+Atomic Propositions of the Kripke Structure
+
+Operations:
+
+Intersection, Union, Left Catenation, Omega (Infinite Iteration),
+Finite Prefixes, Limits
+
+Distance, Metric Space %FIXME
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\omega$-regular language}\label{sec:omega_regular}
+% --------------------------------------------------------------------
+
+Recognized by B\"uchi Automata (\S\ref{sec:buchi_automaton})
+
+precisely the $\omega$-languages definable a particular Monadic
+Second-order Logic called $\mathsf{S2S}$
+
+
+
+% ====================================================================
+\section{$\omega$-automaton}\label{sec:omega_automaton}
+% ====================================================================
+
+variant of Finite Automaton (\S\ref{sec:finite_automaton}) that runs
+on Infinite (rather than Finite) Input Strings (Words)
+
+not expected to Terminate: different ``Acceptance Conditions''
+required %FIXME
+
+may be Deterministic or Non-deterministic
+
+all except B\"uchi Automata recognize precisely the Regular
+$\omega$-languages and differ only in Acceptance Conditions; some may
+be more succinct in their representations of a given $\omega$-language
+
+
+
+% --------------------------------------------------------------------
+\subsection{B\"uchi Automaton}\label{sec:buchi_automaton}
+% --------------------------------------------------------------------
+
+Recognizer for Subset of $\omega$-regular Languages
+(\S\ref{sec:omega_regular}); strictly weaker than other
+$\omega$-automata
+
+used in Model Checking (\S\ref{sec:model_checking}, Kripke Structures
+\S\ref{sec:kripke_structure}) as an Automata-theoretic version of a
+Formula in Linear Temporal Logic (\S\ref{sec:linear_temporal})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Rabin Automaton}\label{sec:rabin_automaton}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Streett Automaton}\label{sec:streett_automaton}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Parity Automaton}\label{sec:parity_automaton}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Muller Automaton}\label{sec:muller_automaton}
+% --------------------------------------------------------------------
 
 
 

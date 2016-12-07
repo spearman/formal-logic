@@ -1080,6 +1080,66 @@ Classified with the following terms:
 \section{Model Checking}\label{sec:model_checking}
 % ====================================================================
 
+State Transition System (\S\ref{sec:state_transition}) including
+additional Labelling Function for States giving a Kripke Structure
+(\S\ref{sec:kripke_structure})
+
+B\"uchi Automata (\S\ref{sec:buchi_automata}) are used as a
+Automata-theoretic version of Formulas in Linear Temporal Logic
+
+
+
+% --------------------------------------------------------------------
+\subsection{Kripke Structure}\label{sec:kripke_structure}
+% --------------------------------------------------------------------
+
+State Transition System (\S\ref{sec:state_transition}) with Labelling
+Function for States: represents \emph{Behavior} of the System
+
+%FIXME section for behavior? xref to behavior in other uses?
+
+may be used to Interpret Temporal Logics (\S\ref{sec:temporal_logic};
+corresponding by Curry-Howard to Reactive Programming \S\ref{sec:frp}
+in Type Theory)
+
+
+$AP$ of \emph{Atomic Propositions} (Boolean
+Expressions over Variables, Constants, and Predicates
+\S\ref{sec:propositional_logic})
+
+A \emph{Kripke Structure} $M$ is a $4$-tuple:
+\[
+  M = (S, I, R, L)
+\]
+where:
+\begin{itemize}
+  \item $S$ -- Finite Set of States
+  \item $I \subseteq S$ -- Subset of Initial States
+  \item $R \subseteq S \times S$ -- Left-total Transition Relation
+  \item $L : S \rightarrow 2^{AP}$ -- Labelling
+    (\emph{Interpretation}) Function mapping each State $s$ to the set
+    of all Atomic Propositions that are Valid in $s$
+    %FIXME is this ``valid'' in the logical sense ?
+\end{itemize}
+$R$ being Left-total implies that it is always possible to take an
+Infinite Path through the Kripke Structure.
+
+\emph{Deadlock} is Modelled by a State with a single outgoing
+Transition back to itself.
+
+A Path $\rho$ in the Structure $M$ is a Sequence of States $\rho =
+s_1s_2s_3\ldots$ such that for each $0 < i$, $R(s_i, s_{i+1})$ holds.
+
+A \emph{Word} $w$ on the Path $\rho$ is a Sequence of Sets of Atomic
+Propositions:
+\[
+  w = L(s_1)L(s_2)L(s_3)\ldots
+\]
+which is an $\omega$-word (i.e. an Infinite String) over the Alphabet
+$2^{AP}$ (\fist $\omega$-languages \S\ref{sec:omega_language})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Abstract Interpretation}\label{sec:abstract_interpretation}
 % --------------------------------------------------------------------
