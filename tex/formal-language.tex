@@ -1669,7 +1669,7 @@ Digital Logic
 
 %FIXME does sequential logic subsume all the automatons?
 
-Finite State Machines
+Finite State Machines (\S\ref{sec:finite_automaton})
 
 Digital Circuit Theory: Output depends on present Value of Input
 Signals and on the Sequence of past Inputs (the Input History)
@@ -1722,6 +1722,9 @@ Transition Systems coincide with Indexed Abstract Reduction Systems
 
 \emph{Action Programming Languages} add a set of \emph{Fluents}, $F$, and
 \emph{Values}, $V$, and a function mapping $F \times S$ to $V$.
+
+the Automata-theoretic version of a State Transition System is a
+\emph{Semiautomaton} (\S\ref{sec:semiautomaton})
 
 Finite Automata (\S\ref{sec:finite_automaton}) may be seen as State
 Transition Systems with an initial State and a number of final
@@ -1853,7 +1856,8 @@ Weak Bisimulation: Observational (Extensional) Equality
 \subsection{Semiautomaton}\label{sec:semiautomaton}
 % --------------------------------------------------------------------
 
-A State Transition System may be formulated as a \emph{Semiautomaton}
+A State Transition System (\S\ref{sec:state_transition}) may be
+formulated as a \emph{Semiautomaton}:
 \[
   (Q,\Sigma,T)
 \]
@@ -1863,7 +1867,9 @@ Set of States, and $T$ is a \emph{Transition Function}:
   T:Q \times \Sigma \rightarrow Q
 \]
 
-Deterministic Finite Automaton (DFA) with Inputs but no Outputs
+When $Q$ is finite, a Semiautomaton may be seen as a Deterministic
+Finite Automaton (DFA \S\ref{sec:dfa}) without an Initial State or set
+of Accept States
 
 \fist Essentially \emph{Functors} (\S\ref{sec:functor}) from Category
 Theory
@@ -1877,6 +1883,12 @@ A Semiautomaton induces a Monoid called the \emph{Transition Monoid}
 A Semiautomaton induces a Monoid Action (\S\ref{sec:monoid_action})
 
 Transformation Semigroup (\S\ref{sec:transformation_semigroup})
+
+the construction of all possible Transitions driven by Strings in the
+Free Group can be depicted graphically as a De Bruijn Graph
+(\S\ref{sec:debruijn_graph})
+
+%FIXME clarify which free group above
 
 
 
@@ -1916,6 +1928,11 @@ where
   (\S\ref{sec:multidimensional_turing_machine})
 \end{itemize}
 
+The Syntactic Monoid (\S\ref{sec:syntactic_monoid}) of a Formal
+Language is Isomorphic to the Transition Monoid
+(\S\ref{sec:transition_monoid}) of the minimal Automaton Accepting the
+Language.
+
 
 
 % --------------------------------------------------------------------
@@ -1940,8 +1957,8 @@ Strings
 
 \emph{Deterministic Finite Automata} have the restriction that an
 Input Symbol has a Transition Function to a single State.
-Deterministic Finite Automata recognize Regular
-Languages (\S\ref{sec:regular_language}).
+Deterministic Finite Automata recognize Regular Languages
+(\S\ref{sec:regular_language}).
 
 Representation of a Deterministic Finite Automaton as a 5-tuple:
 \[
@@ -1970,7 +1987,7 @@ A recursive definition using Composition of Transition Functions:
 \]
 where $w \in \Sigma^*$, $a \in \Sigma$ and $q \in Q$. Repeated
 application describes the Transition Monoid
-(\S\ref{sec:semiautomaton}).
+(\S\ref{sec:transition_monoid}).
 
 
 
