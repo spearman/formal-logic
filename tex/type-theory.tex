@@ -2470,8 +2470,8 @@ Side-effects using Sessions
 
 \subparagraph{Global Type}\label{sec:global_type}\hfill
 
-2011 - Castagna, Dezani-ciancaglini, Padovani - On Global Types and
-Multi-party Sessions %FIXME
+2011 - Castagna, Dezani-ciancaglini, Padovani - \emph{On Global Types and
+Multi-party Sessions} %FIXME
 
 
 
@@ -2502,41 +2502,33 @@ Session established among Multiple Parties via a \emph{Shared Name}
 generated and shared through which Communication Actions are performed
 
 
-\emph{Syntax}
+\textbf{Syntax}
 
 \begin{flalign*}
-  % session request/session accept
   \quad P ::=& \; \overline{a}[2 \ldots n](\tilde{s}).P \;
-    | \; a[i](\tilde{s}).P & \\
-  % value send/value receive
-    |&\; s!\langle\tilde{e}\rangle;P \;|\; s?(\tilde{x});P & \\
-  % session delegate/session receipt
-    |&\; s!\langle\langle\tilde{s}\rangle\rangle;P \;|\; s?((\tilde{s}));P & \\
-  % label selection/label branching
-    |&\; s \lhd l;P \;|\; s \rhd \{l_i : P_i\}_{i \in I} & \\
-  % conditional branch
-    |&\; \mono{if}\; e \;\mono{then}\; P \;\mono{else}\; Q & \\
-  % parallel composition
-    |&\; P | Q & \\
-  % inaction
-    |&\; \mathbf{0} & \\
-  % hiding
-    |&\; (\nu n) P & \\
-  % recursion
-    |&\; \mono{def}\; D \;\mono{in}\; P & \\
-  % process call
-    |&\; X \langle \tilde{x}\tilde{s} \rangle & \\
-  % message queue
-    |&\; s : \tilde{h} & \\
-  % expressions
+    | \; a[i](\tilde{s}).P &
+      \text{(multicast) session request/session accept} \\
+    |&\; s!\langle\tilde{e}\rangle;P \;|\; s?(\tilde{x});P &
+      \text{value send/value receive} \\
+    |&\; s!\langle\langle\tilde{s}\rangle\rangle;P \;|\; s?((\tilde{s}));P &
+      \text{session delegate/session receipt} \\
+    |&\; s \lhd l;P \;|\; s \rhd \{l_i : P_i\}_{i \in I} &
+      \text{label selection/label branching} \\
+    |&\; \mono{if}\; e \;\mono{then}\; P \;\mono{else}\; Q &
+      \text{conditional branch} \\
+    |&\; P | Q & \text{parallel composition} \\
+    |&\; \mathbf{0} & \text{inaction} \\
+    |&\; (\nu n) P & \text{hiding} \\
+    |&\; \mono{def}\; D \;\mono{in}\; P & \text{recursion} \\
+    |&\; X \langle \tilde{x}\tilde{s} \rangle & \text{process call} \\
+    |&\; s : \tilde{h} & \text{message queue} \\
   \quad e ::=& \; v \;|\; e \;\mono{and}\; e' \;
-    | \;\mono{not}\; e \;\ldots \; & \\
-  % values
-  \quad v ::=& \; a \;|\; \true \;|\; \false & \\
-  % messages-in-transit
-  \quad h ::=& \; l \;|\; \tilde{v} \;|\; \tilde{s} & \\
-  % recursion declaration
+    | \;\mono{not}\; e \;\ldots \; & \text{expressions} \\
+  \quad v ::=& \; a \;|\; \true \;|\; \false & \text{values} \\
+  \quad h ::=& \; l \;|\; \tilde{v} \;|\; \tilde{s} &
+    \text{messages-in-transit} \\
   \quad D ::=& \; \{X_i(\tilde{x}_i\tilde{s}_i) = P_i\}_{i \in I} &
+    \text{recursion declaration}
 \end{flalign*}
 
 
@@ -2567,7 +2559,86 @@ generated and shared through which Communication Actions are performed
 
 \textbf{Global Session Types}
 
+Global Types $G, G', \ldots$
+
+Value Types $U, \ldots$
+
+Sorts $S, S', \ldots$
+
+\begin{flalign*}
+  \quad G ::=& \; p \rightarrow p' : k \langle U \rangle.G' &
+      \text{values} \\
+    |&\; p \rightarrow p' : k \{ l_j : G_j \}_{j \in J} &
+      \text{branching} \\
+    |&\; G,G' & \text{parallel} \\
+    |&\; \mu \mathbf{t}.G & \text{recursive} \\
+    |&\; \mathbf{t} & \text{variable} \\
+    |&\; \mathsf{end} & \text{session termination} \\
+  \quad U ::=& \; \tilde{S} \;|\; T @ p \\
+  \quad S ::=& \; \mathsf{bool} \;|\; \mathsf{nat} \;|\;
+    \ldots \;|\; \langle G \rangle
+\end{flalign*}
+
+$\tilde{S}$ -- a Vector of Types for Shared Names (\emph{Sorts})
+
+$T @ p$ -- a Vector of Session Channels
+
+$p \rightarrow p' : k \langle U \rangle.G'$ -- Participant $p$ Sends
+Message of Type $U$ to Channel $k$, Received by Participant $p'$ and
+then Interactions described in $G'$ follows
+
+$p \rightarrow p' : k$ is a \emph{Prefix} from $p$ to $p'$ at $k$;
+$\langle U \rangle$ is a \emph{Carried Type} of the Prefix
+
+$p \neq p'$ -- i.e. no Reflexive Interaction
+
+\emph{Prefix Ordering} $\prec$: a Global Type $G$ is regarded as an
+Acyclic Directed Graph given by the Standard Regular Tree
+(\S\ref{sec:regular_tree_grammar}) Presentation (Pierce04 \emph{Types
+  and Programming Languages}) with Ordering of Nodes induced by
+Prefixes; imposes Sequencing only on actions of the same participant
+in Prefixes Ordered by $\prec$
+
+remaining Causal Ordering according to Lamport78 - \emph{Time, clocks,
+  and the ordering of events}
+
+
+\emph{Safety Principle} for Global Types-- a necessary and sufficient
+condition to prevent conflict (racing) at Session Channels: when a
+common Channel is used in two Communications, Send and Receive actions
+should Temporally Ordered (i.e. the pair of Prefixes become active in
+a Strict Temporal Order)
+
+
 \textbf{Causal Analysis}
+
+IO, II, OO
+
+II or IO (alone) -- only safe when the two Channels are different
+
+II,OO (combined) -- having the same Sender and Channel, Outputs are
+ordered by Message Order-preservation
+
+OI -- no Ordering from Output to Input due to Asynchrony
+
+\emph{Dependency Relations}
+
+Input Dependency, Output Dependency
+
+\emph{Linearity}
+
+$G$ is \emph{Linear} if whenever $n_i = p_i \rightarrow p'_i : k (i =
+1,2)$ are in $G$ for some $k$ and do not occur in different Branches,
+then both Input and Output Dependencies exist from $n_1$ to $n_2$, or
+if not, both exist from $n_2$ to $n_1$ (and Inductively for any Global
+Types Carried by $G$)
+
+a Global Type is Linear if and only if its One-time Unfolding is Linear
+
+Linearity of a Global Type is decidable by a Quadratic Algorithm in
+the size of the Graph
+
+%FIXME
 
 
 
