@@ -2417,7 +2417,8 @@ Linear Propositions (\S\ref{sec:linear_logic})
 Dual Intuitionistic Linear Logic \cite{caires-pfenning10} (Shared ???,
 Linear)
 
-Multi-party Asynchronous Session Types (Honda-Yoshida-Carbone08)
+Multi-party Asynchronous Session Types
+(\S\ref{sec:multiparty_session}) -- Honda-Yoshida-Carbone08
 
 % FIXME ???
 Session: a ``unit'' of a Communication
@@ -2476,6 +2477,97 @@ Multi-party Sessions %FIXME
 
 \subparagraph{Multi-party Session Type}
 \label{sec:multiparty_session}\hfill
+
+2007 - Honda,Yoshida,Carbone - \emph{Multiparty Asynchronous Session
+  Types}
+
+Global Type (\S\ref{sec:global_type}) provides shared agreement among
+Communication Peers
+
+efficient Type Checking through Projection of Global Type onto
+individual Peers
+
+Safety and Progress guarantees for general $n$-party Asynchronous
+Interactions
+
+Safety, Linearity, Progress (Deadlock free in a ``single'' Session)
+
+Predictability: Communication follows scenario declared in Session
+Type
+
+$\pi$-calculus
+
+Session established among Multiple Parties via a \emph{Shared Name}
+(``public'' Interaction point) and \emph{Session Channels} are
+generated and shared through which Communication Actions are performed
+
+
+\emph{Syntax}
+
+\begin{flalign*}
+  % session request/session accept
+  \quad P ::=& \; \overline{a}[2 \ldots n](\tilde{s}).P \;
+    | \; a[i](\tilde{s}).P & \\
+  % value send/value receive
+    |&\; s!\langle\tilde{e}\rangle;P \;|\; s?(\tilde{x});P & \\
+  % session delegate/session receipt
+    |&\; s!\langle\langle\tilde{s}\rangle\rangle;P \;|\; s?((\tilde{s}));P & \\
+  % label selection/label branching
+    |&\; s \lhd l;P \;|\; s \rhd \{l_i : P_i\}_{i \in I} & \\
+  % conditional branch
+    |&\; \mono{if}\; e \;\mono{then}\; P \;\mono{else}\; Q & \\
+  % parallel composition
+    |&\; P | Q & \\
+  % inaction
+    |&\; \mathbf{0} & \\
+  % hiding
+    |&\; (\nu n) P & \\
+  % recursion
+    |&\; \mono{def}\; D \;\mono{in}\; P & \\
+  % process call
+    |&\; X \langle \tilde{x}\tilde{s} \rangle & \\
+  % message queue
+    |&\; s : \tilde{h} & \\
+  % expressions
+  \quad e ::=& \; v \;|\; e \;\mono{and}\; e' \;
+    | \;\mono{not}\; e \;\ldots \; & \\
+  % values
+  \quad v ::=& \; a \;|\; \true \;|\; \false & \\
+  % messages-in-transit
+  \quad h ::=& \; l \;|\; \tilde{v} \;|\; \tilde{s} & \\
+  % recursion declaration
+  \quad D ::=& \; \{X_i(\tilde{x}_i\tilde{s}_i) = P_i\}_{i \in I} &
+\end{flalign*}
+
+
+\textbf{Operational Semantics} -- Structural Congruences + Reductions
+
+\emph{Structural Congruences}
+
+
+\emph{Reductions}
+
+\begin{itemize}
+  \item \emph{Link}
+  \item \emph{Send}
+  \item \emph{Deleg}
+  \item \emph{Label}
+  \item \emph{Recv}
+  \item \emph{SRec}
+  \item \emph{Branch}
+  \item \emph{IfT}
+  \item \emph{IfF}
+  \item \emph{Def}
+  \item \emph{Scop}
+  \item \emph{Par}
+  \item \emph{Defin}
+  \item \emph{Str}
+\end{itemize}
+
+
+\textbf{Global Session Types}
+
+\textbf{Causal Analysis}
 
 
 
@@ -3369,7 +3461,7 @@ Embedding of Session Calculus (\S\ref{sec:session_calculus}) into FPCF
       $\oplus$ & \emph{conditional}
         & $\oplus[l_1:S_1, \ldots, l_n:S_n]$ & \emph{selection}/ \\
       \hfill & \hfill
-        & $\&[\l_1:S_1, \ldots, l_n:S_n]$ & \emph{branching} \\
+        & $\&[l_1:S_1, \ldots, l_n:S_n]$ & \emph{branching} \\
     \hline
       $*$ & \emph{repetition}
         & $\mu a.S$ \quad $a$ & \emph{fixed points} \\
