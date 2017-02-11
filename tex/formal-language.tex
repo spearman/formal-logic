@@ -2073,8 +2073,6 @@ The Languages recognized by NFA-$\varepsilon$ are the same as NFA/DFA.
 \subsubsection{Aperiodic Finite-state Automaton}
 \label{sec:aperiodic_automaton}
 
-
-
 \subsubsection{Finite State Transducer}\label{sec:fst}
 
 $(Q,\Sigma,\Gamma,I,F,\delta)$
@@ -2150,6 +2148,110 @@ State Machines)
 
 Actions depending on the State of the System as well as the Triggering
 Event -- (UML State Machines)
+
+
+
+\subsubsection{Communicating Finite Automaton}
+\label{sec:communicating_fsm}
+
+Gouda, Manning, Yu - 1984 -
+\emph{On the progress of communication between two finite state machines}
+
+Muscholl10 - \emph{Analysis of Communicating Automata}
+
+correspondence between Communicating Automata and Session Types
+(\S\ref{sec:session_type}):
+
+Danielou-Yoshida13 - \emph{Multiparty Compatibility in
+  Communicating Automata: Synthesis and Characterisation of Multiparty
+  Session Types}
+
+Multiparty Session Types (\S\ref{sec:multiparty_session})
+
+Equivalence of Local Types (\S\ref{sec:local_type}) with Communicating
+Automata
+
+Automata/Model Checking approach to Protocol
+Specification/Verification/Implementation -- Specification and
+Description Language (SDL)
+
+Choreography Specifications
+
+WS-CDL (Web Service Choreography Description Language)
+
+Choreography BPMN (Business Process Model and Notation)
+
+\emph{Communicating Finite State Machine} $M$ -- 5-tuple:
+\[
+  M = (Q,C,q_0,\Lambda,\delta)
+\]
+
+$Q$ -- Finite Set of States
+
+$C = \{pq \in P^2 \ |\ p \neq q\}$ -- Set of Channels constructed from
+Set of Participants $P = \{ p, q, \ldots \}$
+
+$q_0 \in Q$ -- Initial State
+
+$\Lambda$ -- Finite Alphabet of Messages (Action Labels)
+
+$\delta \subseteq Q \times (C \times \{!,?\} \times \Lambda) \times Q$
+-- Finite Set of Transitions
+
+$pq!a$ -- Send an Action of $a$ from Process $p$ to Process $q$
+
+$pq?a$ -- Receive an Action of $a$ from Process $p$ by Process $q$
+
+$\ell, \ell', \ldots$ -- Actions (Transition Labels)
+
+Subject of an Action $\ell$:
+\[
+  subj(pq!a) = subj(qp?a) = p
+\]
+
+a Sending State has only Labelled Send Actions as Outgoing Transitions
+
+a Receiving State has only Labelled Receive Actions as Outgoing
+Transitions
+
+a Final State does not have any Outgoing Transitions
+
+a Mixed State has both Receiving and Sending Outgoing Transitions
+
+a Directed State has only Sending or only Receiving Actions to a
+single other Participant
+
+\emph{Path} -- a Finite Sequence of States $q_0, \ldots q_n$ such that
+$(q_i, \ell, q_{i+1}) \in \delta$ and $q \xrightarrow{\ell} q'$ if
+$(q,\ell,q') \in \delta$
+
+a Path is \emph{Connected} if for every State $q \neq q_0$ there is a
+Path from $q_0$ to $q$
+
+\emph{Deterministic} if for all States $q \in Q$ and all Actions
+$\ell$, $(q,\ell,q'),(q,\ell,q'') \in \delta$ Implies $q' = q''$
+
+a \emph{Communicating System} $\class{S}$ is a Tuple:
+\[
+  \class{S} = (M_p)_{p \in P}
+\]
+such that:
+\[
+  M_p = (Q_p, C, q_{0p}, \Lambda, \delta_p)
+\]
+
+\fist cf. Communicating System (Systems Theory
+\S\ref{sec:communicating_system}) %FIXME
+
+Danielou-Yoshida13 define a \emph{Basic} Communicating FSM to be one
+which is Deterministic, Directed, and has no Mixed States; any Basic
+CFSM can be translated into a Local Type (\S\ref{sec:local_type});
+Basic CFSMs provide a genralization of Half-duplex Communication
+Systems; \emph{note} in general the notion of Safety defined for
+Multiparty Session Types is Undecidable for Basic CFSMs: the
+\emph{Compatibility} Property is defined to enforce Behavior of CFSMs
+to be as if they were Projections of Global Types
+(\S\ref{sec:global_type})
 
 
 

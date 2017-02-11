@@ -2344,11 +2344,28 @@ Affine Logic (\S\ref{sec:affine_logic})
 
 \paragraph{Session Type}\label{sec:session_type}\hfill
 
+\fist cf. Conversation Type (\S\ref{sec:conversation_type})
+
 \emph{Session Types} are a Typing Discipline (\S\ref{sec:type_system})
 for Heterogenous Bidirectional Communication Channels defining the
 possible Sequences of Messages (\S\ref{sec:message}) determined by the
 Channel's Session Type (e.g. Stream-based Internet Protocols)
 \cite{neubauer-thiemann04}
+
+\asterism
+
+correspondence between Communicating Automata
+(\S\ref{sec:communicating_fsm}) and Session Types:
+
+Danielou, Yoshida - 2013 - \emph{Multiparty Compatibility in
+  Communicating Automata: Synthesis and Characterisation of Multiparty
+  Session Types}
+
+Lange, Yoshida, Tuosto - 2015 -
+\emph{From Communicating Machines to Graphical Choreographies}
+
+
+\asterism
 
 An Embedding of Simply-typed $\lambda$-calculus
 (\S\ref{sec:simply_typed}) into Session-typed $\pi$-calculus (Session
@@ -2417,8 +2434,11 @@ Linear Propositions (\S\ref{sec:linear_logic})
 Dual Intuitionistic Linear Logic \cite{caires-pfenning10} (Shared ???,
 Linear)
 
-Multi-party Asynchronous Session Types
-(\S\ref{sec:multiparty_session}) -- Honda-Yoshida-Carbone08
+\cite{honda-yoshida-carbone08}: Multiparty Asynchronous Session Types
+(\S\ref{sec:multiparty_session})
+
+Xi,Wu2016: \emph{Propositions in Linear Multirole Logic as
+  Multiparty Session Types} (\S\ref{sec:lmrl})
 
 % FIXME ???
 Session: a ``unit'' of a Communication
@@ -2468,20 +2488,36 @@ Side-effects using Sessions
 
 
 
-\subparagraph{Global Type}\label{sec:global_type}\hfill
+\subparagraph{Channel Type}\label{sec:channel_type}\hfill
 
-2011 - Castagna, Dezani-ciancaglini, Padovani - \emph{On Global Types and
-Multi-party Sessions} %FIXME
-
+\subparagraph{Label}\label{sec:channel_label}\hfill
 
 
-\subparagraph{Multi-party Session Type}
-\label{sec:multiparty_session}\hfill
 
-2007 - Honda,Yoshida,Carbone - \emph{Multiparty Asynchronous Session
-  Types}
+\paragraph{Multi-party Session Type}\label{sec:multiparty_session}\hfill
 
-Global Type (\S\ref{sec:global_type}) provides shared agreement among
+Xi-Wu16 -- \emph{Propositions in Linear Multirole Logic as
+  Multiparty Session Types}:
+
+Linear Multirole Logic (\S\ref{sec:lmrl})
+
+$\pi LMRL$ (\S\ref{sec:pi_lmrl})
+
+Danielou-Yoshida11 -- \emph{Dynamic Multirole Session Types}
+
+\fist Scribble (Protocol Description Language)
+
+\fist WS-CDL (Web Service Choreography Description Language)
+
+\fist Choreography BPMN (Business Process Model and Notation)
+
+
+\asterism
+
+
+Honda,Yoshida,Carbone08 \cite{honda-yoshida-carbone08}:
+
+\emph{Global Type} (\S\ref{sec:global_type}) provides shared agreement among
 Communication Peers
 
 efficient Type Checking through Projection of Global Type onto
@@ -2572,7 +2608,7 @@ Sorts $S, S', \ldots$
       \text{branching} \\
     |&\; G,G' & \text{parallel} \\
     |&\; \mu \mathbf{t}.G & \text{recursive} \\
-    |&\; \mathbf{t} & \text{variable} \\
+    |&\; \mathbf{t} & \text{type variable} \\
     |&\; \mathsf{end} & \text{session termination} \\
   \quad U ::=& \; \tilde{S} \;|\; T @ p \\
   \quad S ::=& \; \mathsf{bool} \;|\; \mathsf{nat} \;|\;
@@ -2641,10 +2677,1156 @@ the size of the Graph
 %FIXME
 
 
+\textbf{Local Types}
 
-\paragraph{Channel Type}\label{sec:channel_type}\hfill
+\emph{Local Types} represent the \emph{Local Behavior} of Processes
+and act as a link between Global Types and Processes
 
-\subparagraph{Label}\label{sec:channel_label}\hfill
+\begin{flalign*}
+  \quad T ::=& \; k! \langle U \rangle;T & \text{send} \\
+    |&\; k? \langle U \rangle;T & \text{receive} \\
+    |&\; k \oplus \{ l_i : T_i \}_{i \in I} & \text{selection} \\
+    |&\; k \& \{ l_i : T_i \}_{i \in I} & \text{branching} \\
+    |&\; \mu \mathbf{t}.T \;|\; \mathbf{t} \;|\; \mathsf{end} \\
+  \quad U ::=& \; \tilde{S} \;|\; T @ p \\
+  \quad S ::=& \; \mathsf{bool} \;|\; \ldots \;|\; \langle G \rangle
+\end{flalign*}
+
+$T @ p$ -- Local Type $T$ for Participant $p$
+
+a Sort can either be an Atomic Type (Communication of Constants) or a
+Global Type (Communication of Initiating Names)
+%FIXME ``initiating %names'' ?
+
+Type Isomorphism: allow Permutation of two consecutive Outputs with
+different Subjects (Asynchronous Communication) %FIXME
+
+
+\textbf{Projection}
+
+$G \upharpoonright p$
+
+Projection Function of Global Types to Local Types: extracts the part
+of a given Global Type that concerns the Local Behavior of a specific
+Participant
+
+\emph{Inductive Definition} %FIXME
+
+
+\textbf{Coherence}
+
+$\mathsf{pid}(G)$ -- Set of Participants occurring in $G$ (but not in
+Carried Types)
+
+$G$ is \emph{Coherent} if it is Linear and $G \upharpoonright p$ is
+Well-defined for each $p \in \mathsf{pid}(G)$ and similarly for each
+Carried Global Type Inductively
+
+$\{ T_p @ p \}_{p \in I}$ is \emph{Coherent} if for some Coherent $G$
+such that $I = \mathsf{pid}(G)$, $G \upharpoonright p = T_p$ for each
+$p \in I$
+
+Coherence of $G$ is Decidable by Quadratic Algorithm
+
+\fist Decidability of Coherence of $\{ T_p @ p \}_p$ is not proved in
+\cite{honda-yoshida-carbone08}
+
+
+\textbf{Programs}
+
+A Proces $P$ is a \emph{Program Phrase} if $P$ has no Queues and no
+Hidden Session Channels
+
+$P$ is a \emph{Program} if $P$ is a Program Phrase with no Free
+Session Channels and Process Variables
+
+
+\textbf{Environments}
+
+other than Atomic Types, a Sort has the shape $\langle G \rangle$
+where $G$ is Coherent
+
+Grammar of \emph{Sortings} (Environemnts) and \emph{Typings}:
+
+\begin{flalign*}
+  \quad \Gamma ::=& \varnothing \;|\; \Gamma, u : S \;
+    |\; \Gamma,X : \tilde{S}\tilde{T} \\
+  \quad \Delta ::=& \Delta,\tilde{s} : \{ T @ p \}_{p \in I}
+\end{flalign*}
+
+a Sorting $(\Gamma,\Gamma',\ldots)$ is a Finite Map from Names
+to Sorts and from Process Variables to Sequences of Sorts and Types
+
+a Typing $(\Delta,\Delta',\ldots)$ records a Linear Usage of Session
+Channels
+
+in Binary Sessions, each Channel is mapped to a Type; here in
+Multiparty Sessions each Vector of Session Channels is mapped to a
+Family of Located Types
+
+$\tilde{s} : T @ p$ -- Singleton Typing $\tilde{s} : \{ T @ p \}$
+
+$\Delta,\Delta'$ -- denotes Typing from Disjoint Union of $\Delta$ and
+$\Delta'$ (assuming Domains contain Disjoint Sets of Session Channels)
+
+$\mathsf{sid}(G)$ -- Set of Session Channel IDs of $G$
+
+$\circ$ -- Partial Operator:
+\[
+  \{ T_p @ p \}_{p \in I} \circ \{ T'_{p'} @ p' \}_{p' \in J} =
+    \{ T_p @ p \}_{p \in I} \cup \{ T'_{p'} @ p' \}_{p' \in J}
+\]
+
+$\Delta_1 \asymp \Delta_2$ -- \emph{Compatibility Relation}: for all
+$\tilde{s}_i \in \mathsf{dom}(\Delta_i)$ such that $\tilde{s}_1 \cap
+\tilde{s}_2 \neq \varnothing$, $\tilde{s} = \tilde{s}_1 = \tilde{s}_2$
+and $\Delta_1(\tilde{s}) \circ \Delta_2(\tilde{s})$ is Defined
+
+$\Delta_1 \circ \Delta_2$ -- the \emph{Compostion} of $\Delta_1$ and
+$\Delta_2$ is Defined when $\Delta_1 \asymp \Delta_2$ as:
+\[
+  \Delta_1 \circ \Delta_2 =
+    \{ \Delta_1(\tilde{s}) \circ \Delta_2(\tilde{s})
+      \;|\; \tilde{s} \in
+      \mathsf{dom}(\Delta_1) \cap \mathsf{dom}(\Delta_2) \}
+    \cup \Delta_1 \setminus \mathsf{dom}(\Delta_2)
+    \cup \Delta_2 \setminus \mathsf{dom}(\Delta_1)
+\]
+
+
+\textbf{Typing System}
+
+Typing Judgement:
+\[
+  \Gamma \vdash P \rhd \Delta
+\]
+denotes that Process $P$ has Typing $\Delta$ under Environment
+$\Gamma$
+
+Typing Rules:
+\begin{itemize}
+  \item \emph{Mcast}
+  \item \emph{Macc}
+  \item \emph{Send}
+  \item \emph{Rcv}
+  \item \emph{Deleg} -- passes the whole capability to participate in
+    a Multiparty Session: operationally sending the whole Vector of
+    Session Channels
+  \item \emph{SRec}
+  \item \emph{Sel}
+  \item \emph{Branch}
+  \item \emph{Conc}
+  \item \emph{If}
+  \item \emph{Inact}
+  \item \emph{NRes}
+  \item \emph{Var}
+  \item \emph{Def}
+  \item \emph{Name}
+  \item \emph{Bool}
+  \item \emph{Or}
+\end{itemize}
+
+\fist Typing Rules are essentially the same as Binary Session Typing
+Rules with $|\tilde{s}| = 1$, $n = 2$, and $p$ deleted from Located
+Type
+
+\emph{Thm.}: given an \emph{Annotated} Program Phrase $P$ and
+Environment $\Gamma$, it is decidable by Quadratic Algorithm if there
+is a $\Delta$ such that $\Gamma \vdash P \rhd \Delta$ or not
+
+\emph{Cor.}: given an Annotated Program Phrase $P$ and Environment
+$\Gamma$, it is decidable if $\Gamma \vdash P \rhd \varnothing$
+
+
+\textbf{Safety and Progress}
+
+Subject Reduction (\S\ref{sec:subject_reduction}): Reduction of
+Types follows Reduction of Processes; \emph{Safety}
+
+Progress is guaranteed by the Reduction of Processes following from
+Reduction of Types
+
+
+\emph{Runtime Typing}
+
+Message Queues
+
+Type Contexts
+
+
+\emph{Type Reduction}
+
+Causal Edges %FIXME
+
+\emph{Def.} Full Projection $\llbracket G \rrbracket$
+
+Coherent Typing, Partial Coherence
+
+
+\emph{Subject Reduction and Communication Safety}
+
+\emph{Thm.} Subject Congruence and Reduction -- guarantees Type Safety
+
+Reduction Context
+
+\emph{Thm.} Communication Safety -- Linearity, Error-freedom: if a
+Process ever does a Reduction, it conforms to the Typing and is Linear
+
+
+\emph{Progress}
+
+\emph{Def.} Queue-full Process -- a Process is Queue-full when it has
+a Queue for each Session Channel
+
+\emph{Def.} Simple Process
+
+\emph{Def.} Well-linked Process
+
+\emph{Thm.} Progress -- a Simple, Well-linked Program $P$ has the
+\emph{Progress Property}: $P \rightarrow^* P'$ Implies either $P'$ is
+Empty or $P' \rightarrow P''$ for some $P''$
+
+
+\textbf{Extensions}
+
+removing Order-preservation (``Pure'' Asynchrony -- Honda-Tokoro91):
+remove $\mathsf{OO}$-edges %FIXME datagram UDP ?
+
+Multicast Primitives
+
+
+\asterism
+
+
+Castagna,Dezani-Ciancaglini,Padovani11 -- \emph{On Global Types and
+  Multi-Party Sessions}
+
+Global Types with Trace-based Semantics
+
+Liveness Property
+
+Soundness and Completeness with respect to the Set of Traces of the
+Global Type
+
+allows different Implementations (Interleaving), cf.
+Bravetti,Lanese,Zavattaro08 \emph{Contract-driven implementation of
+  choreographies} where there is a \emph{Strong Bisimulation} between
+Choreography and its Projection
+
+\emph{Verification}: Implementation Satisfies Specification
+
+\emph{Implementability}: automatically produce Implementation from
+Specification
+
+``Behavioral Type/Process Algebra'' approaches to Implementability
+Problem:
+\begin{itemize}
+  \item Automata/Model Checking -- Message Sequence Charts (MSC),
+    Message Sequence Graphs (MSC with Branching and Iteration:
+    High-level MSC), Projected into Communicating Finite State
+    Machines (\S\ref{sec:communicating_fsm})
+  \item Cryptographic Protocols -- MSC as Global Descriptions (less
+    emphasis on Control and more on Message Processing)
+  \item Web-services -- WS-CDL (Web Service Choreography Description
+    Language); Dynamic (sending Channels)
+\end{itemize}
+
+three-layered structure (from higher to lower):
+\begin{enumerate}
+  \item Global Types (\emph{Choreographic Description})
+  \item Session Types (Type-check Process Implementations)
+  \item Processes (Implementation)
+\end{enumerate}
+
+\emph{Implementability} -- between layers (1) and (2): Projections
+are Sound and Complete with respect to Global Specifications and
+Deadlock-free
+
+\emph{Typeability} -- between layers (2) and (3): Subject Reduction
+(Well-typed Processes only Reduce to Well-typed Processes); Progress
+(Deadlock-freedom)
+
+
+\emph{Multiparty Session}: a ``Place of Interaction'' for a restricted
+number of \emph{Participants} that Communicate via \emph{Messages}
+
+Protocol: connects basic Communication Actions with Flow Control, or
+in general a \emph{Possibly Infinite Set of Finite Sequences of
+  Interactions between a fixed Set of Participants}
+
+Language for describing Sequences that characterize a Protocol: 1
+Atomic Action and 3 Composition Operations
+
+\emph{Atomic Action}: Sender, Receiver, Content (Interaction)
+
+\emph{Composition}:
+
+\begin{itemize}
+  \item Sequential -- \emph{Then}; imposes \emph{Order} on Actions
+  \item Parallel -- \emph{And}; Order not specified
+  \item Alternative -- \emph{Xor}; free Choice
+\end{itemize}
+
+``Decision Makers'' required for Liveness (Alternative always needs an
+Offer/Choose pairing) -- depends on absence of \emph{Covert Channels}
+
+to Verify an Implementation against a Protocol:
+
+\begin{enumerate}
+  \item Sequentiality -- Order of Specification respected in all
+    possible Executions
+  \item Alternativeness -- for Alternative Interactions, every
+    Execution exhibits one and only one of them
+  \item Shuffling -- for Parallel Composition of Sequences all
+    Executions must exhibit some interleaving of those Sequences
+  \item Fitness -- any Sequence of Interactions exhibited by an
+    Implementation must ``fit'' the Specification
+  \item Exhaustivity -- for any Sequence of Interactions described by
+    the Specification, there must be at least one Execution of the
+    Implementaiton that exhibits that Sequence
+\end{enumerate}
+
+checking Implementation against Specification: Projection of Gobal
+Type Satisfying certain Well-formedness Conditions to Local Session
+Type of each Participant and Type-check against Implementation
+
+\emph{Session Environments} -- mappings from Participants to their
+Session Types
+
+\emph{Flawed Global Types} -- Global Types that do not admit any
+Implementations without Covert Channels:
+
+\begin{enumerate}
+  \item No Sequentiality -- e.g. Sequencing Events that cannot be
+    Causally Related (without Covert Communication)
+  \item No Knowledge for Choice -- e.g. an Action depends on some
+    previous Action in the Execution Trace
+  \item No Knowledge, No Choice -- Incompatible Behavior, e.g.
+    Input/Output in Mutual Exclusion %FIXME
+\end{enumerate}
+
+
+\textbf{Types}
+
+$A$ -- Set of \emph{Message Types} $a, b, \ldots$
+
+$\Pi$ -- Set of \emph{Roles}
+
+$\pi, \pi', \ldots$ -- Sets of Roles
+
+$p, q, \ldots$ -- \emph{Participants}
+
+$G, G', \ldots$ -- \emph{Global Types}
+
+\textbf{Global Types} -- Global Types denote a \emph{Language}
+(defined over an Alphabet of Interactions) of allowed Interactions
+that can occur in a Multiparty Session; Regular Language with a
+``Shuffling'' (Interleaving ???) Operator and Semantics defined as
+Sequences of Interactions (Traces ???); Consequence of chosen
+Semantics ensures every Implementation of a Global Type preserves the
+possibility to reach a State where every Participant has Terminated
+successfully; Well-formed Global Types are characterized in terms of
+their Semantics
+%FIXME
+
+Syntax:
+
+\begin{flalign*}
+  \quad G ::=& \; \mathsf{skip} & \text{skip} \\
+    \ |\ & \pi \xrightarrow{a} p & \text{interaction} \\
+    \ |\ & G;G' & \text{sequence} \\
+    \ |\ & G \vee G' \ |\ G \wedge G' & \text{either/both} \\
+    \ |\ & G^* & \text{loop}
+\end{flalign*}
+
+$\pi \xrightarrow{a} p$ -- Participant $p$ awaits an $a$ Message from
+\emph{all} Participants whose ``tags'' are in $\pi$
+
+Interaction could be generalized to $\pi \xrightarrow{a} \pi'$
+(\emph{Broadcast}) by encoding as $\bigwedge_{i \in I} (\pi
+\xrightarrow{a} p_i)$, assuming Asynchronous (Non-blocking) Output
+
+$\pi \xrightarrow{a} p$ -- \emph{Join} Activities involving
+Participants $\pi \cup {p}$
+
+$\bigwedge_{i \in I} (p_i \xrightarrow{a} q)$ -- \emph{Fork} of
+Parallel Activities
+
+$p \notin \pi$ -- Participants cannot send Messages to themselves
+
+
+\textbf{Interactions}
+
+Alphabet of Interactions:
+\[
+  \Sigma = \{ \pi \xrightarrow{a} p
+    \ |\ \pi \subset_{fin} \Pi, p \in \Pi, p \notin \pi, a \in A \}
+\]
+
+$\alpha$ -- shorthand for Interaction $\pi \xrightarrow{a} p$
+
+$\varphi, \psi, \ldots$ -- Strings in $\Sigma^*$
+
+$\varepsilon$ -- Empty String
+
+$;$ -- String Concatenation
+
+\emph{Shuffle} (Interleaving) of Languages $L_1$, $L_2$:
+\[
+  \mono{shuffle}(L_1, L_2) \defeq \{ \varphi_1\psi_1 \cdots
+    \varphi_n\psi_n \ |\ \varphi_1 \cdots \varphi_n \in L_1 \wedge
+    \psi_1 \cdots \psi_n \in L_2
+  \}
+\]
+in that the Order of Interactions from each Language is preserved but
+Interleaved with those of the other
+
+\emph{Traces} -- Set of Traces of a Global Type defined Inductively:
+\begin{align*}
+  & tr(\mathsf{skip}) =& \{ \varepsilon \} \\
+  & tr(\pi \xrightarrow{a} p) =& \{ \pi \xrightarrow{a} p \} \\
+  & tr(G_1;G_2) =& tr(G_1)tr(G_2) \\
+  & tr(G^*) =& (tr(G))^* \\
+  & tr(G_1 \vee G_2) =& tr(G_1) \cup tr(G_2) \\
+  & tr(G_1 \wedge G_2) =& \mono{shuffle} (tr(G_1), tr(G_2)) \\
+\end{align*}
+where by $tr(G)$ is a Regular Language as Regular Languages are closed
+under Shuffling
+
+because Regular Languages consist of \emph{Finite} Strings, all
+Participants may Terminate -- Infinite Interactions not allowed ???
+%FIXME
+
+
+\textbf{Session Types}
+
+$X, \ldots$ -- \emph{Recursion Variables}
+
+$T,S,\ldots$ -- \emph{Pre-session Types} describe Behavior of
+Participants of a Multiparty Session, with Grammar:
+\begin{flalign*}
+  \quad T ::=& \mathsf{end} & \text{termination} \\
+    \ |\ & X & \text{variable} \\
+    \ |\ & \pi?a.T \ |\ p!a.T & \text{input/output} \\
+    \ |\ & T \oplus T' \ |\ T + T' & \text{internal/external choice} \\
+    \ |\ & \mono{rec} X.T & \text{recursion}
+\end{flalign*}
+modulo Associativity, Commutativity, and Idempotence of Internal and
+External Choice, Fold/Unfold of Recursions and Equalities:
+\[
+  \pi!a.T \oplus \pi!a.S = \pi!a.(T \oplus S) \quad\quad\quad
+  \pi?a.T + \pi?a.S = \pi?a.(T+S)
+\]
+and such that all Recursion is Guarded by at least one Input or Output
+Prefix %FIXME clarify
+
+$\mathsf{end}$ -- a Participant that has successfully Terminated (no
+longer Participates in the Session)
+
+$p!a.T$ -- a Participant that Sends an $a$ Message to Participant $p$
+and afterwards Behaves according to $T$
+
+$\pi?a.T$ -- a Participant that waits for an $a$ Message from all
+Participants in $\pi$ and upon arrival Behaves as $T$
+
+$T \oplus S$ -- a Participant that internally decides (Chooses)
+whether to Behave according to $T$ or $S$
+
+$T + S$ -- a Participant that Offers other Participants the Behaviors
+$T$ and $S$ depending on Messages Sent by the other Participant
+%FIXME which participant enacts the chosen behavior ?
+
+\emph{Session Types} are Pre-session Types where Internal Choices are
+used to combine Outputs and External Choices are used to combine
+Inputs and the \emph{Continuation} after every Prefix is uniquely
+determined by the Prefix, that Pre-session Type $T$ is a Session Type
+if one of:
+\begin{itemize}
+  \item $T = \mathsf{end}$
+  \item $T = \oplus_{i \in I} p_i!a_i.T_i$ and $\forall i,j \in I$,
+    $p_i!a_i = p_j!a_j$ Imples that $i = j$ and each $T_i$ is a
+    Session Type
+  \item $T = \Sigma_{i \in I} \pi_i ? a_i.T_i$ and $\forall i, j \in
+    I$, $\pi_i \subseteq \pi_j$ and $a_i = a_j$ Implies $i = j$ and
+    each $T_i$ is a Session Type
+\end{itemize}
+
+
+\textbf{Session Environments}
+
+a \emph{Session Environment} (or \emph{Session}) is the Set of Session
+Types of its Participants where each Participant is uniquely
+identified by a Role, that is a Finite Map:
+\[
+  \{ p_i : T_i \}_{i \in I}
+\]
+
+$\Delta, \Delta', \ldots$ -- Session Environments (Sessions)
+
+$\Delta \uplus \Delta'$ -- Union of Sessions with Disjoint Domains
+
+$p \xrightarrow{a} q$ -- Message of Type $a$ with Sender $p$ and
+Receiver $q$
+
+Asynchronous Communication: Messages are stored in a Buffer
+
+$\mathbf{B}, \ldots$ -- Buffers:
+\[
+  p_1 \xrightarrow{a_1} q_1 :: \cdots :: p_n \xrightarrow{a_n} q_n
+\]
+of Messages considered under Congruence of Order preservation for
+Messages having the same Sender and Receiver:
+\[
+  p \xrightarrow{a} q :: p' \xrightarrow{b} q' \cong
+  p' \xrightarrow{b} q' :: p \xrightarrow{a} q
+\]
+for $p \neq p'$ or $q \neq q'$; that is each pair of Participants in
+the Session is connected by a distinct \emph{FIFO Buffer}
+
+\emph{Session Reduction} -- two possible Reductions: %FIXME
+\begin{enumerate}
+  \item Effect of an Output Operation by a Participant, storing the
+    Message in a Buffer and leaving Sender with residual Session Type
+  \item Effect of an Input Operation of Messages from Particpants, and
+    if enough Messages are received, continues as residual Session
+    Type
+\end{enumerate}
+
+$\Rightarrow$ -- Reflexive, Transitive Closure of $\rightarrow$
+
+$\xRightarrow{\alpha}$ -- Composition $\Rightarrow
+\xrightarrow{\alpha} \Rightarrow$
+
+$\xRightarrow{\alpha_i\cdots\alpha_n}$ -- Composition
+$\xRightarrow{\alpha_i}\cdots\xRightarrow{\alpha_n}$
+
+\emph{Liveness Property} -- for all Reductions it is always possible to
+reach a State where all Participants have Successfully Terminated and
+the Buffer has been depleted; $\Delta$ is a \emph{Live Session} if:
+\[
+  \varepsilon ; \Delta \xRightarrow{\varphi} B; \Delta'
+\]
+Implies:
+\[
+  B ; \Delta' \xRightarrow{\psi} \varepsilon ;
+    \{ p_i : \mathsf{end} \}_{i \in I}
+\]
+for some $\phi$
+
+
+\emph{Session Traces} -- the Set of Sequences of Interactions that can
+occur in every possible Reduction with the Trace of an Incorrect
+(Non-live) Session as the Empty Set:
+\[
+  tr(\Delta) \defeq
+    \begin{cases}
+      \{ \varphi \ |\ \varepsilon ;
+        \Delta \xRightarrow{\varphi} \varepsilon;
+        \{ p_i : \mathsf{end} \}_{i \in I} \}
+        & \text{if} \ \Delta\ \text{is a Live Session} \\
+      \varnothing & \text{otherwise}
+    \end{cases}
+\]
+
+for every Global Type $G$, $tr(G) \neq \varnothing$
+
+
+\textbf{Semantic Projection}
+
+\emph{which} Global Types are able to be Projected
+
+Project a Global Type to the Session Types of its Participants, i.e.
+to a Session
+
+$\Delta$ and $G$ are not required in general to have the same Traces
+
+Correctness is a Relationship between the Traces of $\Delta$ and the
+Traces of $G$:
+\begin{enumerate}
+  \item \emph{Soundness} -- every Trace of $\Delta$ is a Trace of $G$
+  \item \emph{Completeness} -- every Trace of $G$ is a Permutation of
+    a Trace of $\Delta$
+\end{enumerate}
+that is:
+\[
+  tr(\Delta) \subseteq tr(G) \subseteq tr(\Delta)^\circ
+\]
+where $L^\circ$ is the Closure of $L$ under Permutation of Strings in
+$L$
+
+\emph{Rules}
+\begin{itemize}
+  \item \emph{SP-Action}
+  \item \emph{SP-Skip}
+  \item \emph{SP-Sequence}
+  \item \emph{SP-Alternative}
+  \item \emph{SP-Iteration}
+  \item \emph{SP-Subsumption}
+\end{itemize}
+
+\emph{Implementation Pre-order}
+
+$\Delta \leq G$ -- $\Delta$ is both Sound and Complete with respect to
+$G$, i.e. $\Delta$ is a Correct Implementation of the Specification
+$G$
+
+\emph{Judgement with Continuation} -- $\Delta'$ is the Projection of
+$G$ with \emph{Continuation} $\Delta$:
+\[
+  \Delta \vdash G \rhd \Delta'
+\]
+meaning if $\Delta$ is the Projection of some $G'$, then $\Delta'$ is
+the Projection of $G;G'$
+
+no Rule for $\wedge$ -- eliminated by the Subsumption Rule
+
+\emph{Judgement without Continuation} -- if:
+\[
+  \vdash G \rhd \Delta
+\]
+is Derivable, then $G$ is \emph{Projectable}
+
+\emph{Def.} Well-formed Global type: a Set of Traces $L$ is
+Well-formed if $\varphi; \pi \xrightarrow{a} p; \pi' \xrightarrow{b}
+p'; \psi \in L$ Implies either $p \in \pi' \cup \{p'\}$ or $\varphi;
+\pi' \xrightarrow{b} p'; \pi \xrightarrow{a} p; \psi \in L$
+
+if $G$ is Well-formed so is $tr(G)$
+
+Well-formedness of $G$ is Decidable by building an Automaton that
+Recongizes the Language $tr(G)$
+
+Projection and Well-formedness are separate Properties: it is possible
+to Project an Ill-formed Global Type
+
+if a Global Type is Projectable (i.e. $\vdash G \rhd \Delta$ is
+Derivable) then Well-formedness is a Necessary and Sufficient
+Condition for Soundness and Completeness of its Projection (i.e.
+$\Delta \leq G$
+
+\emph{Thm.} If $G$ is Well-formed and $\vdash G \rhd \Delta$, then
+$\Delta \leq G$
+
+if a Global Type is Well-formed and Projectable then its Projection is
+a (Non-empty) \emph{Live Projection}
+
+
+\textbf{Algorithmic Projection}
+
+\emph{how} Global Types are Projected
+
+given a Session Continuation $\Delta$ and a Global Type $G$ produces a
+Projection $\Delta'$ such that $\Delta \vdash G : \Delta'$
+
+Rules: \emph{AP-Skip}, \emph{AP-Action}, \emph{AP-Sequence},
+\emph{AP-Alternative}, \emph{AP-Iteration}
+
+no \emph{Completeness} -- can't return a Projection for \emph{every}
+Global Type that is Semantically Projectable
+
+\emph{Compatibility}: cf. Danielou-Yoshida13 %FIXME
+
+\emph{Merge} -- Session Types, Sessions: defined locally for pairs of
+Session Types (as opposed to $\leq$ which is ``global'')
+
+\emph{$k$-Exit Iterations} -- generalization of Binary Kleene Star
+
+
+\asterism
+
+
+Danielou-Yoshida13 - \emph{Multiparty Compatibility in Communicating
+  Automata: Characterisation and Synthesis of Global Session Types}
+
+construct a Global Specification from a Set of Distributed
+Uncontrolled Behaviors
+
+fully characterize Multiparty Session Types in terms of Communicating
+Automata exactly corresponding to Projected Local Types
+
+Communicating Finite State Machines (\S\ref{sec:communicating_fsm})
+
+Labelled Transition Systems (\S\ref{sec:labelled_transition})
+
+Global and Local Session Types equipped with Labelled Transition
+Systems with Asynchronous Communication through Unbounded Buffered
+Channels
+
+Sythesis of Global Type from a collection of Communicating Automata
+
+\emph{Multiparty Compatibility} -- non-trivial extension of Duality
+Condition for Binary Session Types
+
+\emph{Conditions for Synthesis} as a Sound and Complete
+characterisation of Multiparty Session Types with respect to
+Communicating Finite State Machines: guarantees the \emph{Global
+  Safety Property} of Multiparty Session Types
+
+
+\textbf{Communicating Automata}
+
+Subclass of Communicating Automata characterizing Binary Session Types
+was proposed in Gouda-Manning-Yu84, and independently in Villard11 in
+the context of \emph{Channel Contracts} (???); characteristics:
+\begin{enumerate}
+  \item Communications are Deterministic
+  \item no ``Mixed States'', i.e. States are only given all Send
+    Actions or all Receive Actions
+  \item \emph{Compatible} Traces (i.e. Dual)
+\end{enumerate}
+
+all three required to prevent Deadlocks, breaking (1) or (2) would
+make Compatibility Checking Undecidable
+
+\emph{Multiparty Compatibility} -- Synthesis approach: characterizes a
+Synthesis Condition under which a Global Choreography can be
+constructed from Local Machine Behavior
+
+check Duality between each Automaton and ``the Rest'' up to the
+Internal Communications (1-bounded Executions) that the other Machines
+will independently perform
+
+Generalised Multiparty Session Types
+(\S\ref{sec:generalised_multiparty}) -- Danielou-Yoshida13 (Appendix)
+
+\fist \emph{Note}: in Danielou-Yoshida13 the Set of Machine States is
+defined as $Q = \{q_0,\ldots\}$; to avoid confusing with Participants
+$q \in P$ in the following $M = \{m_0, \ldots\}$ is used instead and
+$\mathbf{M}$ will be used to denote the Machine itself
+
+
+\textbf{Communicating Systems}
+
+\fist Communicating System (\S\ref{sec:communicating_system})
+
+assuming \emph{Connected}, \emph{Deterministic} CFSMs: for every
+Non-initial State $q \neq q_0$, there is a Path from $q_0$ to $q$
+
+a \emph{Communicating System} $\class{S}$ is a Tuple:
+\[
+  \class{S} = (\mathbf{M}_p)_{p \in P}
+\]
+of Machines such that:
+\[
+  \mathbf{M}_p = (M_p, C, m_{0p}, \Lambda, \delta_p)
+\]
+and $P = \{p, q, \ldots\}$ is a Set of Participants (Roles ???) %FIXME
+
+$\Lambda$ -- Actions (Labels) $\ell, \ell', \ldots$
+
+\emph{Configuration} of $\class{S}$ is a Tuple:
+\[
+  s = (\vec{m};\vec{w})
+\]
+where $\vec{m} = (m_p)_{p \in P}$ with $m_p \in M_p$ and $\vec{w} =
+(w_{pq})_{p \neq q \in P}$ with $w_{pq} \in \Lambda^*$ where $\vec{m}$
+is the \emph{Control State} and $m \in M_i$ is the \emph{Local State}
+of Machine $\mathbf{M}_i$, and $\vec{w}$ is the \emph{Buffer State}
+
+Reachable States
+
+\emph{Initial Configuration}:
+\[
+  s_0 = (\vec{m_0};\vec{\varepsilon})
+\]
+with $\vec{m_0} = (m_{0p})_{p \in P}$
+
+\emph{Final Configuration}:
+\[
+  s_f = (\vec{m}, \vec{\varepsilon})
+\]
+with all $m_p \in \vec{m}$ Final
+
+\emph{Reachable Configuration} -- $s_0 \rightarrow^* s$
+
+\emph{Reachable Set} -- $RS(\class{S}) = \{ s\ |\ s_0 \rightarrow^* s\}$
+
+\emph{Traces}:
+\[
+  Tr(\class{S}) = \{ act(\varphi) \ |\
+    \exists s \in RS(\class{S}), s_0 \xrightarrow{\varphi} s \}
+\]
+
+
+\textbf{Configuration Properties}
+
+\emph{Stable} -- all Buffers are Empty
+
+\emph{Deadlock} -- Non-final Configuration where all Machines are in a
+Receiving State (Blocked waiting)
+
+\emph{Orphan Message} -- all Machines are in Final State but there are
+still Messages in the Buffer
+
+\emph{Unspecified Reception} (\emph{Reception Error}) -- there is a
+State prevented from Receiving any Messages %FIXME needs details from
+paper
+
+
+\emph{$k$-bounded Sequence} of Transitions: no Channel in any
+Intermediate Configuration has more than $k$ Messages
+
+\emph{$k$-reachability} -- largest Subset $RS_k(\class{S})$ of
+$RS(\class{S})$ within which each Configuration is reached by a
+$k$-bounded Execution from $s_0$
+
+for every $\class{S}$ and Integer $k$, $RS_k(\class{S})$ is Finite and
+Computable
+
+\emph{$n$-bound Trace} -- $bound(\varphi) = n$ if the number of Send
+Actions in the Trace $\varphi$ never exceeds the number of Receive
+Actions by $n$
+
+$\class{S} \approx \class{S'}$ -- Equivalence such that:
+\[
+  \forall \varphi, \varphi \in Tr(\class{S}) \Leftrightarrow
+    \varphi \in Tr(\class{S'})
+\]
+
+$\class{S} \approx_n \class{S'}$ -- Equivalence such that:
+\[
+  \forall \varphi, bound(\varphi) \leq n \Rightarrow
+    (\varphi \in Tr(\class{S}) \Leftrightarrow
+      \varphi \in Tr(\class{S'}))
+\]
+
+\emph{Safety}: Deadlock-free (Orphan Message-free and Unspecified
+Reception-free) if for all $s \in RS(\class{S})$, $s$ is not a
+Deadlock (Orphan Message, Unspecified Reception) Configuration
+
+\emph{Liveness}: if for all $s \in RS(\class{S})$, there exists $s
+\rightarrow^* s'$ such that $s'$ is Final
+
+
+\textbf{Multiparty Session Types}
+
+\fist Notation from
+Bettini-Coppo-D'Antoni-DeLuca-DezaniCiancaglini-Yoshida08 -
+\emph{Global Progress in Dynamically Interleaved Multiparty Sessions}
+-- ``most widely used notation''
+
+Labelled Transition Systems (\S\ref{sec:labelled_transition}) for
+Global Types and Local Types
+
+Equivalence of Local Types and Communicating Automata
+(\S\ref{sec:communicating_fsm})
+
+
+$G,G',\ldots$ -- \emph{Global Types}:
+\begin{flalign*}
+  \quad G ::=& p \rightarrow p' : \{ a_j.G_j \} \ |\ \mu\mathbf{t}.G
+    \ |\ \mathbf{t} \ |\ \mathsf{end}
+\end{flalign*}
+
+$p,q,\cdots \in P$ -- Participants
+
+$a_j \in \Lambda$ -- Message Labels
+
+$\mathbf{t,t',\ldots}$ -- Type Variables
+
+$p \rightarrow p' : \{a_j.G_j\}_{j \in J}, p \neq p'$ -- Participant
+$p$ can Send a Message with one of $a_j$ Labels to Participant $p'$
+and Actions in $G_j$ follow
+
+$\mu\mathbf{t}.G$ -- Recursion where Type Variables are Guarded in the
+``standard way'' (only occurring under Branches) %FIXME
+
+
+$T,T',\ldots$ -- \emph{Local Types}:
+\begin{flalign*}
+  \quad T ::=& p?\{a_i.T_i\}_{i \in I} \ |\ p!\{a_i.T_i\}_{i \in I}
+  \ |\ \mu\mathbf{t}.T \ |\ \mathbf{t} \ |\ \mathsf{end}
+\end{flalign*}
+
+$p?\{a_i.T_i\}_{i \in I}$ -- Receive from $p$ a Message from among the
+$a_i$ Labels (\emph{Branching})
+
+$p!\{a_i.T_i\}_{i \in I}$ -- Send to $p$ a Message from among the
+$a_i$ Labels (\emph{Selection})
+
+
+\emph{Projection}
+
+$G \upharpoonright p$ -- Projection of Global Type $G$ onto
+Participant $p$:
+\begin{align*}
+  p \rightarrow p' : \{a_j.G_j\}_{j \in J} \upharpoonright q = &
+    \begin{cases}
+      p!\{a_j.G_j \upharpoonright q\}_{j \in J} & q = p \\
+      p?\{a_j.G_j \upharpoonright q\}_{j \in J} & q = p' \\
+      \sqcup_{j \in J}G_j \upharpoonright q & otherwise
+    \end{cases} \\
+  (\mu\mathbf{t}.G) \upharpoonright p = &
+    \begin{cases}
+      \mu\mathbf{t}.G \upharpoonright p &
+        G \upharpoonright p \neq \mathbf{t} \\
+      \mathsf{end} & otherwise
+    \end{cases} \\
+  \mathbf{t} \upharpoonright p = &\ \mathbf{t} \\
+  \mathsf{end} \upharpoonright p = &\ \mathsf{end}
+\end{align*}
+
+$G$ is \emph{Well-formed} if $G \upharpoonright p$ is defined for all
+$p \in P$
+
+\emph{Mergeability Relation} $\bowtie$ over Local Types -- extends
+Projection to allow each Branch of a Global Type to contain different
+Interaction Patterns; Smallest Congruence Relation over Local Types
+such that:
+\[
+  \frac{
+    \forall i \in (K \cap J).T_i \bowtie T_i' \quad\quad
+      \forall k \in (K \setminus J),
+      \forall j \in (J \setminus K).a_k \neq a_j
+  }{
+    p?\{a_k.T_k\}_{k \in K} \bowtie p?\{a_j.T_j'\}_{j \in J}
+  }
+\]
+
+when $T_1 \bowtie T_2$, $\sqcup$ is a Partial Commutative Operator
+over two Local Types such that $T \sqcup T = T$ for all $T$ and:
+\[
+  p?\{a_k.T_k\}_{k \in K} \sqcup p?\{a_j.T_j'\}_{j \in J} =
+    p?(\{a_k.(T_k \sqcup T_k')\}_{k \in K \cap J} \cup
+    \{a_k.T_k\}_{k \in K \setminus J} \cup
+    \{a_j.T_j'\}_{j \in J \setminus K})
+\]
+and is Homomorphic for other Types, i.e. $\class{C}[T_1] \sqcup
+\class{C}[T_2] = \class{C}[T_1 \sqcup T_2]$ where $\class{C}$ is a
+Context for Local Types
+
+
+\textbf{Labelled Transition System Semantics for Global and Local
+  Types}
+
+$\ell, \ell', \ldots$ -- \emph{Observables} denoting Sending or
+Receiving a Message of Label $a \in \Lambda$ from $p$ to $p'$:
+\begin{flalign*}
+  \quad \ell ::=\ pp'!a \ |\ pp'?a
+\end{flalign*}
+
+$p \rightsquigarrow p' : a_j.G_j$ -- \emph{Intermediate Execution
+  State} in which Message $a_j$ has been Sent but not yet Received
+
+LTS over Global Types is defined by a Transition Relation $G
+\xrightarrow{\ell} G'$ %FIXME definition
+
+LTS over Local Types is defined by a Transition Relation $T
+\xrightarrow{\ell} T'$ for Local Type Role $p$
+
+\emph{LTS over Collections of Local Types (Configurations)}
+
+$s = (\vec{T};\vec{w})$ -- Configuration of a System of Local Types
+$\{T_p\}_{p \in P}$ with:
+\[
+  \vec{T} = (T_p)_{p \in P}
+\]
+and:
+\[
+  \vec{w} = (w_{pq})_{p \neq q \in P}, w_{pq} \in \Lambda^*
+\]
+
+$w_{pq}$ -- FIFO Queue at Channel $pq$
+
+\emph{Visible Transitions} %FIXME def
+
+$Tr(G)$ -- Set of Visible Traces that can be obtained by Reducing
+Global Type $G$
+
+$Tr(T)$ -- Set of Visible Traces that can be obtained by Reducing
+Local Type $T$
+
+$Tr(s)$ ??? %FIXME
+
+Trace Equivalences $\approx$, $\approx_n$ (same for Communicating
+Systems above)
+
+\emph{Thm.} Soundness, Completeness of Projection with respect to
+Global and Local LTSs: for Global Type $G$, Participants $P$, and
+$\vec{T} = \{G \upharpoonright p\}_{p \in P}$, then $G \approx
+(\vec{T}; \vec{\varepsilon})$ -- Implies that Processes Typed by
+Global Type $G$ follow the LTS of $G$
+
+
+\textbf{Translation from Local Types to CFSM}
+
+for Local Type $T_0$ of Participant $p$ Projected from $G$, the
+corresponding Automaton is:
+\[
+  \mathbf{M}(T_0) = (M,C,m_0,\Lambda,\delta)
+\]
+where:
+\begin{itemize}
+  \item $M = \{ T' \ |\ T' \in T_0, T' \neq \mathbf{t},
+    T' \neq \mu\mathbf{t}.T \}$
+  \item $m_0 = T'_0$ with $T_0 = \mu\vec{\mathbf{t}}.T_0'$ and $T_0'
+    \in M$
+  \item $C = \{ pq \ |\ p,q \in G \}$
+  \item $\Lambda$ is the Set of $\{ a \in G \}$
+  \item $\delta$ defined as:
+    \begin{itemize}
+      \item if $T = p'!\{a_j.T_J\}_{j \in J} \in M$ then:
+\[
+  \begin{cases}
+    (T,(pp'!a_j),T_j) \in \delta & T_j \neq \mathbf{t} \\
+    (T,(pp'!a_j),T') \in \delta & T_j = \mathbf{t},
+      \mu\mathbf{t}\vec{\mathbf{t}}.T' \in T_0, T' \in M
+  \end{cases}
+\]
+      \item if $T = p'?\{a_j.T_J\}_{j \in J} \in M$ then:
+\[
+  \begin{cases}
+    (T,(p'p?a_j),T_j) \in \delta & T_j \neq \mathbf{t} \\
+    (T,(p'p?a_j),T') \in \delta & T_j = \mathbf{t},
+      \mu\mathbf{t}\vec{\mathbf{t}}.T' \in T_0, T' \in M
+  \end{cases}
+\]
+    \end{itemize}
+\end{itemize}
+
+for Local Type $T_p$, $\mathbf{M}(T_p)$ is Deterministic, Directed,
+and has no Mixed States, i.e. a \emph{Basic CFSM} (generalization of
+Half-duplex Communication Systems; \emph{note} in general the notion
+of Safety defined for Multiparty Session Types is Undecidable for
+Basic CFSMs: see \emph{Synthesis} section below for
+\emph{Compatibility} Property to enforce Behavior of CFSMs to be as if
+they were Projections of Global Types)
+
+
+\textbf{Translation from Basic CFSM to Local Types}
+
+for Basic $\mathbf{M}_p = (M,C,m_0,\Lambda,\delta)$, the translated
+Local Type $\class{T}(\mathbf{M}_p)$ is defined such that
+$\class{T}(\mathbf{M}_p) = \class{T}_{\varepsilon}(m_0)$ and
+$\class{T}_{\tilde{m}}(m)$ defined as:
+\begin{align*}
+  \class{T}_{\tilde{m}}(m) = &
+    \begin{cases}
+      \mu\mathbf{t}_m.p'!
+        \{ a_j.\class{T}^\circ_{\tilde{m} \cdot m}(m_j) \}_{j \in J}
+        & (m,pp'!a_j,m_j) \in \delta \\
+      \mu\mathbf{t}_m.p'?
+        \{ a_j.\class{T}^\circ_{\tilde{m} \cdot m}(m_j) \}_{j \in J}
+        & (m,p'p?a_j,m_j) \in \delta
+    \end{cases} \\
+  \class{T}^\circ_{\tilde{m}}(m) = &
+    \begin{cases}
+      \class{T}_\varepsilon(m) = \mathsf{end} & m\ \text{is Final} \\
+      \mathbf{t}_{m_k} & (m,\ell,m_k) \in \delta, m_k \in \tilde{m} \\
+      \class{T}_{\tilde{m}}(m) & otherwise
+    \end{cases}
+\end{align*}
+where $\tilde{m}$ in $\class{T}_{\tilde{m}}$ records Visited States
+%FIXME clarify visited states
+
+the preservation of Semantics by these translations is described in
+terms of Trace Equivalences: for Basic CFSM $\mathbf{M}$, $\mathbf{M}
+\approx \class{T}(\mathbf{M})$ and for Local Type $T$, $T \approx
+\mathbf{M}(T)$
+
+
+\textbf{Synthesis}
+
+Completeness, Soundness
+
+Safety for general Basic CFSMs is Undecidable
+
+\emph{Compatibility Property} is introduced to ensure that Basic CFSMs
+have the Decidable Safety Property of Multiparty Session Types as if
+they were the result of a Projection from Global Types
+
+\emph{Machine Compatibility} -- Sound and Complete Condition: two
+Machines are Compatible if their Traces are exactly Dual
+
+\emph{Multiparty Compatibility} -- for a single Participant $p$, the
+remaining Machines $(\mathbf{M}_q)_{q \in P \setminus p}$ viewed
+together as a single CFSM should offer Compatible (Dual) Traces to
+$Tr(\mathbf{M_p})$ \emph{up to ``Internal Synchronizations'' (i.e.
+  1-bounded Executions)} %FIXME 1-bounded executions
+
+for a collection of Machines $\mathbf{M}_i = (M_i, C_i, m_{0i},
+\Lambda_i, \delta_i)$ and System $\class{S} = (\mathbf{M}_1, \ldots,
+\mathbf{M}_n)$, the associated CFSM is $\mathbf{M} =
+(M,C,m_0,\Sigma,\delta)$ such that:
+\begin{itemize}
+  \item $M = M_1 \times \cdots \times M_n$
+  \item $m_0 = (m_{0i}, \ldots, m_{0n})$
+  \item $\delta$ is the least Relation such that
+    $((m_1,\ldots,m_i,\ldots,m_n), \ell,
+    (m_1,\ldots,m_i',\ldots,m_n)) \in \delta$ if $(m_i,\ell,m_i') \in
+    \delta_i$ for $1 \leq i \leq n$
+\end{itemize}
+
+
+\emph{Def.} Multiparty Compatible System $\class{S} = (\mathbf{M}_1,
+\ldots, \mathbf{M}_2)$ -- for each Machine $\mathbf{M}_i$ the rest of
+the Machines ($\class{S}^{-i}$) can produce the Compatible (Dual)
+Actions by Executing \emph{Alternations} (Send/Receive Actions) in
+$\class{S}^{-i}$ where, from the viewpoint of $\mathbf{M}_i$,
+intermediate Alternations can be seen as Non-observable Internal
+Actions of $\class{S}^{-i}$
+
+
+\emph{Thm.} if a System $\class{S} = (\mathbf{M}_p)_{p \in P}$ is
+Basic and Multiparty Compatible then $\class{S}$ Satisfies the Safety
+Properties (Deadlock-free, Orphan Message-free, Reception Error-free)
+and if at least one $\mathbf{M}_q$ has a Final State then $\class{S}$
+also Satisfies the Liveness Property
+
+\emph{Prop.} if all $\mathbf{M}_p$ are Basic, there is an Algorithm to
+check whether $(\mathbf{M}_p)_{p \in P}$ is Multiparty Compatible
+
+\emph{Thm.} (Synthesis): if $\class{S}$ is a Basic System and
+Multiparty Compatible then there is an Algorithm which constructs a
+Well-formed $G$ such that $\class{S} \approx G$ if $G$ exists
+otherwise it Terminates
+
+\emph{Thm.} (Soundness and Completeness in CMSA ???): if $G$ is
+Well-formed there exists $\class{S}$ Satisfying the three Safety
+Properties and $\class{S} \approx G$
+%FIXME cmsa
+
+
+
+\subparagraph{Local Type}\label{sec:local_type}\hfill
+
+Equivalence with Communicating Automata
+(\S\ref{sec:communicating_fsm})
+
+
+
+\subparagraph{Global Type}\label{sec:global_type}\hfill
+
+\emph{Choreographic Specification} of an Interaction
+
+\fist Choreography (\S\ref{sec:choreography})
+
+Projected to Local (End-point) Types against which Processes can be
+Statically Verified (Type-checked)
+
+2008 - Honda, Yoshida, Carbone - \emph{Multiparty Asynchronous Session
+  Types} \cite{honda-yoshida-carbone08}
+
+2011 - Castagna, Dezani-ciancaglini, Padovani - \emph{On Global Types
+  and Multi-party Sessions}: Global Types with Trace-based Semantics--
+Global Types denote a \emph{Language} (over an Alphabet of
+Interactions) of allowed Interactions that can occur in a Multiparty
+Session
+
+2013 - Danielou Yoshida - \emph{Multiparty Compatibility in
+  Communicating Automata: Characterisation and Synthesis of Global
+  Session Types} -- \emph{Conditions for Synthesis} as a Sound and
+Complete characterisation of Multiparty Session Types with respect to
+Communicating Finite State Machines (\S\ref{sec:communicating_fsm})
+guarantees the \emph{Global Safety Property} of Multiparty Session
+Types
+
+
+
+\subparagraph{Generalized Multiparty Session Types}
+\label{sec:generalized_multiparty}\hfill
+
+Danielou-Yoshida13 (Appendix)
 
 
 
@@ -2660,6 +3842,18 @@ more References can be made to a Value
 
 Programming Languages: Clean, Mercury, Idris ($\mono{UniqueType}$), Rust
 (``Ownership Types'', ``Borrowed Pointers'')
+
+
+
+\paragraph{Conversation Type}\label{sec:conversation_type}\hfill
+
+Caires,Vieira 2011 - \emph{Conversation Types}
+
+%FIXME
+
+Conversation Calculus
+
+\fist cf. Session Types (\S\ref{sec:session_type})
 
 
 
@@ -5934,7 +7128,7 @@ Terms to Configurations
 
 ($\beta$-equality as Pure Reductions) %FIXME
 
-Subject Reduction:
+Subject Reduction (\S\ref{sec:subject_reduction}):
 \[
   \varnothing \vdash M:\tau,F \wedge \mathcal{C}[M]
     \rightarrow \mathcal{D}[N]
