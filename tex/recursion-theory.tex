@@ -4340,6 +4340,154 @@ under a Context which Interacts Non-determinstically with the Handler.
 
 
 
+\subparagraph{Multirole Session Calculus}
+\label{sec:multirole_session_calculus}\hfill
+
+\fist Multirole Session Types (\S\ref{sec:multirole_session})
+
+Danielou-Yoshida11 -- \emph{Dynamic Multirole Session Types}
+
+\textbf{Syntax}
+
+\begin{flalign*}
+  \quad u ::=&\ x \ |\ a \ |\ b \ |\ \ldots & \text{Shared Channels} \\
+  \quad p ::=&\ q:r \ |\ x:r & \text{Participant with Role} \\
+  \quad \vec{p} ::=&\ q::\vec{p} \ |\ x::\vec{p} \ |\ \varepsilon
+    & \text{Participant List} \\
+  \quad c ::=&\ s[p] \ |\ y & \text{Session Channel} \\
+  \quad e ::=&\ v \ |\ x \ |\ e \wedge e \ |\ \ldots
+    & \text{Expression} \\
+  \quad v ::=&\ a \ |\ s[q:r] \ |\ \true \ |\ \ldots
+    & \text{Values} \\
+  \quad P ::=&\ u\langle G \rangle & \text{Session Initialization} \\
+    |&\ u[p](y).P \ |\ \mono{quit}\langle c \rangle & \text{Join/Quit} \\
+    |&\ c!\langle p,l\langle \vec{p} \rangle\langle e \rangle \rangle
+      \ |\ c?\langle p,\{l_i\langle \vec{p}_i \rangle
+        (x_i).P_i\}_{i \in I} \rangle
+      & \text{Send/Receive} \\
+    |&\ c\forall(x:r \backslash \vec{p}).\{P\} & \text{Poll} \\
+    |&\ P | P \ |\ P;P & \text{Parallel/Sequential} \\
+    |&\ \mono{if}\ e\ \mono{then}\ P\ \mono{else}\ P
+      & \text{Conditional} \\
+    |&\ \mu X.P\ |\ X\ |\ \mathbf{0} & \text{Recursion/Variable/Null} \\
+    |&\ (\nu a:G)P\ |\ (\nu s)P & \text{Restriction/Session Restriction} \\
+    |&\ s:h\ |\ a\langle s \rangle[R] & \text{Buffer/Registry} \\
+  \quad R ::=&\ r_1:Q_1, \ldots, r_n:Q_n & \text{Role Set} \\
+  \quad h ::=&\ \varepsilon\ |\ h \cdot (q_0:r_0, q_1:r_1, l \langle
+    \vec{q} \rangle\langle v \rangle) & \text{Buffer}
+\end{flalign*}
+
+Session is Initialized by a Process of the form $u\langle G \rangle$
+which attributes a Global Type (\S\ref{sec:global_type}) $G$ to a
+Shared Channel $u$; once Initialized, Participants Join with
+$u[p](y).P$ where $p$ is a Participant Identity $q$ or $x$ associated
+with a Role Name $r$ and this Binds Variable $y$ with the Session
+Channel that the Participant can use when Acting as Role $r$; Leaving
+a Session with $\mono{quit}\langle{c}\rangle$ where $c$ is the Session
+Channel corresponding to the Participant and Role
+
+$c!\langle{p,l\langle{\vec{p}}\rangle\langle{e}\rangle}\rangle$ --
+Asynchronous Send to $p$ a Value $e$ Labelled by Constant $l$ and
+Participant Names $\vec{p}$
+
+$c?\langle{p, \{l_i\langle{\vec{p}_i}\rangle(x_i).P_i\}_{i \in
+    I}}\rangle$ -- Receive from $p$ a Message with Label from among
+$\{l_i\}_{i \in I}$ with Participants $\vec{p}_i$ with Message Content
+Received in Variable $x_i$ Binding to $P_i$
+
+$c\forall(x:r \backslash \vec{p}).\{P\}$ -- Polling Operation:
+Replicate $P$ for each Participant $x$ with Role $r$ except those in
+$\vec{p}$; main way to Interact with Participants that instantiate a
+given Role; Polling is done \emph{implicitly} for Roles that cannot be
+multiply instantiated (using syntactic sugar mentioning just the Role
+is sufficiently unambiguous)
+
+$(\nu a:G)P$ -- Creation of Shared ``Rendezvous'' Name which can be
+used as a reference for future instances of a Session specified by $G$
+%FIXME clarify
+
+when a Session is Running (Runtime Syntax):
+\begin{itemize}
+  \item Sessions is represented by a Session Restriction $(\nu s)P$
+  \item Message Buffer $s:h$ stores Messages in transit for Session
+    $s$
+  \item Session Registry $a\langle{s}\rangle[R]$ records current
+    associations between Participants and Roles in the Running Session
+    $s$
+\end{itemize}
+
+an \emph{Initial Process} is one that does not contain Free Variables
+or Runtime Syntax
+
+
+\textbf{Semantics}
+
+\emph{Reduction Rules}:
+\begin{itemize}
+  \item Init
+  \item Join
+  \item Quit
+  \item Send
+  \item Recv
+  \item Poll
+  \item IfT
+  \item IfF
+  \item Par
+  \item Ctxt
+  \item Cong
+\end{itemize}
+
+\emph{Structural Equivalence} $\equiv$
+
+Session Garbage Collection Rule, Permutation Rule
+
+
+\textbf{Dynamic Multirole Session Calculus}
+
+extends Process Syntax with \emph{Locking Mechanism} (\fist see
+Dynamic Multirole Session Types \S\ref{sec:multirole_session} for more
+details):
+\begin{flalign*}
+  \quad P ::=&\ \cdots \ |\ c\ \mono{lock}\ |\ c\ \mono{unlock}
+    \ |\ a^\circ[R,L] \ |\ a^\cdot[R,L] \\
+  \quad L ::=&\ \varnothing \ |\ L \cup \{q:r\}
+\end{flalign*}
+to allow for Safety and Progress in the interplay of Joining, Leaving,
+and Polling
+
+$a^\circ[R,L]$ -- Registry in the process of being Locked where $L$ is
+the Set of Participants that have been Locked so far
+
+$a^\bullet[R,L]$ -- Registry that is Locked and Participants $L$ are
+still ``involved'' %FIXME clarify
+
+
+\emph{Operational Semantics} -- defines the Relations between the
+three States of the Registry based on standard Two-phase Locking
+Protocol:
+\begin{enumerate}
+  \item \emph{Registration State}: $a\langle{s}\rangle[R]$ --
+    Participants can Join and Leave the Session through \emph{Join}
+    and \emph{Quit} and \emph{Lock} will cause the Registry to enter
+    the \emph{Locking State}
+  \item \emph{Locking State}: $a^\circ[R,\ell:L]$ -- waits for all
+    current Participants in $R$ to activate their Locks by Rules
+    \emph{Up} and \emph{Top} and a new Process can Asynchronously Join
+    by \emph{Join2} and a current Process can finalize the decision to
+    Leave with \emph{Quit2}; \emph{Top} is only triggered when $L$
+    contains the same combinations of Participants and Roles as $R$
+    (all Participants have activated their Locks) and the Registry
+    transitions to the \emph{Interaction State}
+  \item \emph{Interaction State}:
+    $a^\bullet\langle{s}\rangle[R,\ell:L]$ -- \emph{Send},
+    \emph{Recv}, \emph{Poll} Rules can be Safely applied and when all
+    but one Participant has activated the $\mono{unlock}$ Operation by
+    the Rule $\emph{Down}$, the application of \emph{Unlock} will
+    cause the Registry to enter the Registration State
+\end{enumerate}
+
+
+
 \subsubsection{$\pi$-LMRL}\label{sec:pi_lmrl}
 
 Xi,Wu16 -- \emph{Propositions in Linear Multirole Logic as Multiparty
