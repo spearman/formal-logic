@@ -386,7 +386,8 @@ Combinator Calculus (\S\ref{sec:ski_calculus})
 % ====================================================================
 
 \fist For Models of Concurrent Computation see Process Calculus
-(\S\ref{sec:process_calculus}) and Geometry of Interaction
+(\S\ref{sec:process_calculus}), Actor Model Theory
+(\S\ref{sec:actor_model}) and Geometry of Interaction
 (\S\ref{sec:interaction_geometry})
 
 
@@ -1751,6 +1752,20 @@ Family of approaches for modelling Concurrent Systems
 \item Chemical Abstract Machine (???)
 \item Petri Nets (\S\ref{sec:petri_net})
 \end{itemize}
+
+\fist the \emph{Actor Model} (\S\ref{sec:actor_model}) is
+another system for modelling Concurrent Digital Computation but
+differs from Process Calculi:
+\begin{itemize}
+  \item Actors have Identities; Processes (\S\ref{sec:process}) are
+    Anonymous
+  \item Actors Send Messages to ``Addresses'' (``Mailboxes'');
+    Processes Send Messages on Channels (\S\ref{sec:process_channel})
+  \item the Actor Model can be said to be Physically motivated while
+    Process Calculus is Algebraically motivated
+\end{itemize}
+
+Power Domain (\S\ref{sec:power_domain})
 
 Process Theory (???)
 
@@ -4488,12 +4503,246 @@ Protocol:
 
 
 
+\paragraph{Multiparty Classical Processes}\label{sec:mcp}\hfill
+
+Carbone-Montesi-Schurmann-Yoshida15 -- \emph{Multiparty Session Types
+  as Coherence Proofs}; $\otimes$ Input, $\parr$ Output
+
+\emph{Coherence}
+
+\emph{MCut} -- a gnerealized Cut-rule for composing multiple Proofs
+that requires Coherent Proofs
+
+Carbone-Montesi-Schurmann-Yoshida16 -- \emph{Coherence Genrealises
+  Duality: a logical explanation of multiparty session types} --
+translation of MCP to CP via Globally-governed Classical Processes
+(GCP) in which GCP interprets a Coherence Proof as an \emph{Arbiter
+  Process} that \emph{mediates} Communications in a Multiparty
+Session; reverts $\otimes$ to Output and $\parr$ as Input compared to
+Carbone-Montesi-Schurmann-Yoshida15
+
+\emph{Arbiter} is similar to \emph{Medium} in Caires-Perez16 --
+\emph{Multiparty Session Types within a Canonical Binary Theory, and
+  Beyond}
+
+
+
 \subsubsection{$\pi$-LMRL}\label{sec:pi_lmrl}
 
-Xi,Wu16 -- \emph{Propositions in Linear Multirole Logic as Multiparty
+Xi-Wu16 -- \emph{Propositions in Linear Multirole Logic as Multiparty
   Session Types}
 
-Linear Multirole Logic (\S\ref{sec:lmrl})
+Session Types are Formulas of Linear Multirole Logic
+(\S\ref{sec:lmrl}) with the addition of $1_r$ the Unit of $\otimes_r$
+
+\fist Dynamic Multirole Session Types (\S\ref{sec:multirole_session}
+
+Session Types:
+\begin{flalign*}
+  \quad A ::=&\ 1_r \ |\ A_1 \otimes_r A_2 \ |\ A_1 \&_r A_2
+    \ |\ !_r(A) &
+\end{flalign*}
+
+Process (Term) Syntax:
+\begin{flalign*}
+  \quad P ::=&\ \nu x : A.(\vec{P}) & \text{Linking} \\
+    |&\ x_R(y)_r.(P_1|P_2) \quad r \notin R & \text{Name Input} \\
+    |&\ x_R[y]_r.P \quad r \in R & \text{Name Output} \\
+    |&\ x_R(\_)_r.0 \quad r \notin R & \text{Empty Input} \\
+    |&\ x_R[\_]_r.P \quad r \in R & \text{Empty Output} \\
+    |&\ x_R(case)_r.(P_1,P_2) \quad r \notin R & \text{Case Offer} \\
+    |&\ x_R[inl]_r.P \quad r \in R & \text{Left Choice} \\
+    |&\ x_R[inr]_r.P \quad r \in R & \text{Right Choice} \\
+    |&\ !x_R(y)_r \quad r \notin R & \text{Server Accept} \\
+    |&\ ?x_R[y]_r \quad r \in R & \text{Client Request}
+\end{flalign*}
+
+$P$ -- Process
+
+$\vec{P}$ -- Sequence $(P_1|\cdots|P_n)$ where $1 \leq n$
+
+$fn(P)$ -- Set of Free Names of $P$
+
+$x,y,\ldots$ -- Channel Names
+
+$x_R$ -- Endpoint of $x$ held by Participant playing Roles $R$
+
+%FIXME name binding, annotations
+
+$\nu x.(P_1|\cdots|P_n)$ -- ``\emph{Cut}'': Link $n$ Endpoints $x_R$
+for some Name $x$ and Role Sets $R_1,\ldots,R_n$ such that $R_1 \uplus
+\cdots R_n = \overline{\varnothing}$ and each $x_{R_i}$ is
+``contained'' in $P_i$ for $1 \leq i \leq n$
+%FIXME clarify ``contained in''
+
+``Communication Header'' Terms %FIXME clarify
+
+$x_R(y)_r$ -- $r \in R$ and a Name will be Received on Endpoint $x_R$;
+usually the Received Name is Substituted for $y$ explicitly but in
+this presentation $y$ will be implicitly Renamed to match the Received
+Name
+
+$x_R[y]_r$ -- $r \notin R$ and a fresh Name is chosen and Sent on
+Endpoint $x_R$
+
+$x_R[\_]_r$ -- Send action is to take place on $x_R$ but no Name is
+\emph{actually} Sent
+
+$x_R(\_)_r$ -- Receive action is to take place on $x_R$ but no Name is
+\emph{actually} Received
+
+$x_R[inl]_r$ -- a Left Choice is to be Sent on Endpoint $x_R$
+
+$x_R[inr]_r$ -- a Right Choice is to be Sent on Endpoint $x_R$
+
+$x_R(case)_r$ -- either a Left or a Right Choice is to be Received on
+Endpoint $x_R$ determining which of the two Processes should be Chosen
+
+$!x_R[y]_r$ -- can be repeatedly used as $x_R[y]_r$
+
+$?x_R(y)_r$ -- can be repeatedly used as $x_R(y)_r$ %FIXME verify
+
+
+\textbf{Global and Local Types}
+
+$A$ -- Global Type
+
+$[A]_R$ -- ``\emph{I-type}'': Local Type for the Endpoint of a Full
+Channel held by a Participant playing the Roles in $R$
+
+$[A \otimes B]_R$ for $r \in R$ means $[A \otimes_r B]_R$ -- Input $A$
+then Behave as $B$; note this is opposite from other Session Type
+formulations (Caires-Pfenning10, Wadler12)
+
+$[A \parr B]_R$ for $r \notin R$ means $[A \otimes_r B]_R$ -- Output
+$A$ then Behave as $B$
+
+%FIXME \parr_r instead of \otimes_r ?
+
+$[A \& B]_R$ for $r \in R$ means $[A \&_r B]_R$ -- Offer Choice of $A$
+or $B$
+
+$[A \oplus B]_R$ for $r \notin R$ means $[A \&_r B]_R$ -- Selecting
+from $A$ or $B$
+
+%FIXME \oplus_r instead of \&_r ?
+
+$[!A]_R$ for $r \in A$ means $[!_r A]_R$ -- ability to repeatedly
+Spawn new Processes of Type $A$
+
+$[?A]_R$ for $r \notin A$ means $[!_r A]_R$ -- ability to repeatedly
+Request that a new Process of Type $A$ be Spawned
+
+%FIXME ?_r instead of !_r
+
+
+\textbf{Environments}
+
+$\Gamma = \{x_1:[A_1]_{R_1}, \ldots, x_n:[A_n]_{R_n}$ -- Environment
+Associating distinct Names with I-types
+
+$x : [A]_R$ -- an Association in an Environment
+
+$dom(\Gamma)$ -- the Set of Names $\{x_1, \ldots, x_n\}$ of $\Gamma$
+
+$\Gamma,\Gamma'$ -- Union of $\Gamma$ and $\Gamma'$ when $dom(\Gamma)
+\cap dom(\Gamma') = \varnothing$
+
+
+\textbf{Judgements}
+
+$P \vdash x_1:[A_1]_{R_1}, \ldots, x_n:[A_n]_{R_n}$ -- Process $P$
+Communicates on each Endpoint $(x_i)_{R_i}$ of a Full Channel
+specified by the Session Type $A_k$ for $k = 1,\ldots,n$; erasing $P$
+and the Names $x_k$ from the Judgement yields a Judgement in LMRL
+(\S\ref{sec:lmrl}) extended with $1_r$ as the Unit of $\otimes_r$ for
+each Role $r$
+
+
+\textbf{Typing Rules}
+
+\begin{itemize}
+  \item \emph{n-Cut}
+  \item \emph{$\otimes$-Neg}
+  \item \emph{$\otimes$-Pos}
+  \item \emph{$1$-Neg}
+  \item \emph{$1$-Pos}
+  \item \emph{$\&$-NegL}, \emph{$\&$-NegR}
+  \item \emph{$\&$-Pos}
+  \item \emph{$!$-NegWeaken}, \emph{$!$-NegDerelict},
+    \emph{$!$-NegContract}
+  \item \emph{$!$-Pos}
+\end{itemize}
+
+
+\textbf{Reduction Semantics}
+
+$\equiv$ -- Structural Equivalence Relation on Processes with
+Equivalence Rules:
+\begin{enumerate}
+  \item \emph{Perm}: $\nu x.(\vec{P}_1) \equiv \nu x.(\vec{P}_2)$ for
+    $\vec{P}_2$ a Permutation of $\vec{P}_1$
+  \item \emph{Assoc}: $\nu x(\nu y.(P|\vec{P}_1)|\vec{P}_2) \equiv \nu
+    y.(\nu x.(P|\vec{P}_2)|\vec{P}_1)$ for $x,y \in fn(P_1)$
+\end{enumerate}
+
+$\mathbf{D}$ -- Typing Derivation
+
+$\Rightarrow$ -- Single-step Reduction Relation on Processes
+
+Principle Cut Reduction %FIXME
+
+Non-principle Cuts handled by \emph{Commuting Conversion Rules}:
+\begin{itemize}
+  \item $\nu x_0.(x[y].P_1|\vec{P})
+    \Rightarrow x[y].\nu x_0.(P_1|\vec{P})$
+  \item $\nu x_0.(x(y).(P_1|P_2)|\vec{P})
+    \Rightarrow x(y).(\nu x_0.(P_1|\vec{P})|P_2)$ if $x_0 \in fn(P_1)$
+  \item $\nu x_0.(x(y).(P_1|P_2)|\vec{P})
+    \Rightarrow x(y).(P_1|\nu x_0.(P_2|\vec{P}))$ if $x_0 \in fn(P_2)$
+  \item $\nu x_0.(x[inl].P_1|\vec{P})
+    \Rightarrow x[inl].\nu x_0.(P_1|\vec{P})$
+  \item $\nu x_0.(x[inr].P_1|\vec{P})
+    \Rightarrow x[inr].\nu x_0.(P_1|\vec{P})$
+  \item $\nu x_0.(x(case).(P_1,P_2)|\vec{P})
+    \Rightarrow x(case).\nu x_0.(P_1|\vec{P}, P_2|\vec{P})$
+  \item $\nu x_0.(!x[y].P_1|\vec{P})
+    \Rightarrow !x[y].\nu x_0.(P_1|\vec{P})$
+  \item $\nu x_0.(?x[y].P_1|\vec{P})
+    \Rightarrow ?x[y].\nu x_0.(P_1|\vec{P})$
+\end{itemize}
+each of which pushes a Cut inside a Communication Header
+
+
+\emph{Subject Reduction}
+
+$P \rightrightarrows Q$ -- for some $P_1$ and $Q_1$, then $P \equiv
+P_1$, $P_1 \rightarrow Q_1$ and $Q_1 \equiv Q$
+
+\emph{Thm.} (Subject Reduction): given $P \vdash \Gamma$ is Derivable,
+if $P \rightrightarrows P'$, then $P' \vdash \Gamma$ is Derivable
+
+
+\emph{Cut Elimination}
+
+\emph{Thm.} (Cut Elimination): given $P \vdash \Gamma$ is Derivable,
+if $P$ is a Cut, then $P \rightrightarrows P'$ holds for some $P'$;
+guarantees Progress (but not necessarily that a Terminal State will be
+reached)
+
+
+\textbf{Point-to-point Communication}
+
+extend $\pi$LMRL with Unary Type Constructors $msg_{r,s}$ where $r$
+and $s$ range over all distinct pairs of Roles
+
+Typing Rules for $msg_{r,s}$:
+\begin{itemize}
+  \item \emph{Msg-PosPos}
+  \item \emph{Msg-NegNeg}
+  \item \emph{Msg-PosNeg}
+  \item \emph{Msg-NegPos}
+\end{itemize}
 
 
 
@@ -4553,6 +4802,116 @@ Sets of Traces
 assumes an Asynchronous (i.e. Nonblocking) Send Operation
 
 (Josephs92)
+
+
+
+% ====================================================================
+\section{Actor Model Theory}\label{sec:actor_model}
+% ====================================================================
+
+\begingroup
+
+\newcommand{\actord}{\xrightarrow{\approx}}
+\newcommand{\arrord}[1]{\xrightarrow{#1}}
+\newcommand{\cmbord}{\rightarrow}
+
+\fist cf. Process Calculus (\S\ref{sec:process_calculus})
+
+Denotational Semantics (\S\ref{sec:denotational_semantics}) are given
+by Domain Theory (\S\ref{sec:domain_theory})
+
+Power Domain (\S\ref{sec:power_domain})
+
+Closed Systems (\S\ref{sec:closed_system}) -- \emph{Computational
+  Representation Theorem} -- Consequence: a Finite Actor can
+Nondeterministically Respond with an Uncountable number of different
+Outputs %FIXME
+
+
+
+% --------------------------------------------------------------------
+\subsection{Event}\label{sec:event}
+% --------------------------------------------------------------------
+
+\begin{itemize}
+  \item Local Decisions
+  \item Creating Actors
+  \item Send Messages
+  \item Receive Messages
+  \item Behavior Designation
+\end{itemize}
+
+
+
+\subsubsection{Activation Ordering}\label{sec:activation_ordering}
+
+$e_1 \actord e_2$
+
+one Event \emph{Activating} another
+
+\begin{itemize}
+  \item Relativistically Invariant
+  \item Strict Causality Law
+  \item Finite Predecession Law
+\end{itemize}
+
+
+
+\subsubsection{Arrival Ordering}\label{sec:arrival_ordering}
+
+for Actor $x$
+
+$e_1 \arrord{x} e_2$
+
+Total Ordering of Message Receive Events
+
+World-line
+
+Inherent Indeterminacy
+
+\begin{itemize}
+  \item Relativistically Invariant
+  \item Finite Predecession Law
+\end{itemize}
+
+
+
+\subsubsection{Combined Ordering}\label{sec:combined_ordering}
+
+$e_1 \cmbord e_2$
+
+Transitive Closure of Relativistically Invariant Orderings
+
+\begin{itemize}
+  \item Relativistically Invariant
+  \item Strict Causality Law
+\end{itemize}
+
+
+
+\paragraph{Law of Finite Chains}\label{sec:finite_chain_law}\hfill
+
+Independent of the previous Laws for Combined Ordering (Clinger81)
+
+Equivalent to the Law of Discreteness (\S\ref{sec:discreteness_law})
+in the Combined Ordering (Clinger81)
+
+
+\paragraph{Law of Discreteness}\label{sec:discreteness_law}\hfill
+
+for all Events $e_1$, $e_2$, the Set $\{ e \ |\ e_1 \cmbord e \cmbord
+e_2 \}$ is Finite
+
+Equivalent to the Law of Finite Chains (\S\ref{sec:finite_chain_law})
+in the Combined Ordering (Clinger81)
+
+``without using the Axiom of Choice'' (wiki) %FIXME clarify
+
+\fist Rules out Zeno Machines (\S\ref{sec:zeno_machine})
+
+
+
+\endgroup
 
 
 

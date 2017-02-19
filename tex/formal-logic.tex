@@ -80,11 +80,17 @@ Joint Denial ($\downarrow$, \S\ref{sec:joint_denial})
 
 \emph{Disjunction} (also \emph{Alternation} or ``\emph{Logical Or}'')
 
+\fist \emph{Role-based Interpretation} of Conjunction/Disjunction
+Duality (Linear Multirole Logic \S\ref{sec:lmrl})
+
 
 
 \paragraph{Conjunction}\label{sec:conjunction}\hfill
 
 \emph{Conjunction} (or ``\emph{Logical And}'')
+
+\fist \emph{Role-based Interpretation} of Conjunction/Disjunction
+Duality (Linear Multirole Logic \S\ref{sec:lmrl})
 
 
 
@@ -2384,17 +2390,42 @@ Session-typed $\pi$-calculus (\S\ref{sec:sessiontyped_pi})
 
 \paragraph{Linear Multirole Logic}\label{sec:lmrl}\hfill
 
+\begingroup
+
+\newcommand{\msg}{\mathtt{msg}}
+\newcommand{\nil}{\mathtt{nil}}
+
+\newcommand{\channelsend}{\mathtt{channel\_send}}
+\newcommand{\channelrecv}{\mathtt{channel\_recv}}
+\newcommand{\channelclose}{\mathtt{channel\_close}}
+\newcommand{\channelskip}{\mathtt{channel\_skip}}
+
+\newcommand{\Chan}{\mathsf{Chan}}
+\newcommand{\Int}{\mathsf{Int}}
+\renewcommand{\Unit}{\mathsf{()}}
+
 \emph{Linear Multirole Logic} (LMRL)
 
-Xi-Wu16 -- \emph{Propositions in Linear Multirole Logic as
-  Multiparty Session Types}: $\pi LMRL$ (\S\ref{sec:pi_lmrl})
+Xi-Wu16 -- \emph{Propositions in Linear Multirole Logic as Multiparty
+  Session Types}: Session-typed Process Calculus $\pi LMRL$
+(\S\ref{sec:pi_lmrl}) where Session Types are Formulas of Linear
+Multirole Logic (with the addition of $1_r$ for the Unit of
+$\otimes_r$)
 
 \fist Multiparty Session Types (\S\ref{sec:multiparty_session})
 
-Danielou-Yoshida11 -- \emph{Dynamic Multirole Session Types}
-%FIXME not cited by xi,wu: might not be as pertinant
-
 \fist Communicating Systems (\S\ref{sec:communicating_system})
+
+Multi-cut first established in Carboni-Montesi-Schurmann-Yoshida15 --
+\emph{Multiparty Session Types as Coherence Proofs} introducing MCP
+(\S\ref{sec:mcp}) as an extension of CLL
+
+\fist in Danielou-Yoshida11 \emph{Dynamic Multirole Session Types} and
+Neykova-Yoshida14 \emph{Multiparty Session Actors} Participants play
+multiple Roles by holding Channels belonging to multiple Sessions (see
+Dynamic Multirole Session Types \S\ref{sec:multirole_session}); this
+could be considered a formulation of \emph{Multirole Parties} while
+Xi-Wu16 is a formulation of \emph{Multirole Channels}
 
 
 \asterism
@@ -2412,6 +2443,427 @@ can be Eliminated (extention of Cut-elimination by Gentzen)
 \emph{Dyadic Session}: Interaction between two Concurrently Running Programs
 
 \emph{Session Type}: Session Specification
+
+\emph{Terms}
+
+$\msg(i,j,T)$ -- Transfer of Value of Type $T$ from Participant
+(``Party'') Implementing Role $i$ to Participant implementing Role
+$j$; ``interpreted'' as a Send Operation for the Participant
+implementing Role $i$ and a Receive Operation for the Participant
+implementing Role $j$
+
+$S$ -- Session Type
+
+$\Chan(i,S)$ -- Type of Channel for Role $i$
+
+Type Schema for $\channelsend$ (Dyadic):
+\[
+  (!\Chan (i, \msg(i,j,T):S) \gg \Chan(i,S), \Int(i), \Int(j), T)
+    \rightarrow \Unit
+\]
+where $\int(x)$ is a Singleton Type for Integers equal to $x$;
+$\channelsend$ called on a Channel of the Type
+$\Chan(i, \msg(i,j,T):S)$ returns Unit and changes the
+Type of the Channel to $\Chan(i,S)$; $\Chan$ must be a
+\emph{Linear Type Constructor} (\S\ref{sec:linear_type})
+
+Type Schema for $\channelrecv$ (Dyadic):
+\[
+  (!\Chan (j, \msg(i,j,T):S) \gg \Chan(j,S), \Int(i), \Int(j))
+    \rightarrow T
+\]
+returning a Value of Type $T$ and changing the Type of the Channel to
+$\Chan(j,S)$.
+%FIXME is ! correct instead of ?
+
+Type Schema for $\channelclose$ (Dyadic):
+\[
+  (\Chan(i, \nil)) \rightarrow \Unit
+\]
+
+a \emph{Full Channel} $CH$ has End-points (just ``\emph{Channels}'')
+$CH_0$ and $CH_1$
+
+
+\emph{Bidirectional Forwarding} between matching Channels corresponds
+to Cut-elimination in Linear Logic (Caires-Pfenning10, Wadler12)
+
+for $CH^a$ with Endpoints $CH^a_0 : \Chan(0,S)$ and $CH^a_1 :
+\Chan(1,S)$ and $CH^b$ with Endpoints $CH^b_0 : \Chan(0,S)$ and
+$CH^b_1 : \Chan(1,S)$ forms a Full Channel with Endpoints $CH^a_0 :
+\Chan(0,S)$ and $CH^b_1 : \Chan(1,S)$
+
+
+\emph{Multirole Channel}: $\Chan(R,S)$ where $R$ is a Set of Roles
+
+$P = \{0, 1, \ldots, N\}$ -- Set of $N$ Roles where $N$ is a Natural
+Number $2 \leq N$ and $\overline{R} = P \setminus R$
+
+each Full Channel $CH$ specified by Session Type $S$ may have $n$
+End-points $CH_{R_i}$ with Types $\Chan(R_i,S)$ for $i \in
+\{1,\ldots,n\}$ where $R_1, \ldots, R_n$ form a Partition of
+$\overline{\varnothing} = P$
+
+a Value Sent into one of the Endpoints is Broadcast to all of the
+other Endpoints
+
+$\Chan(R,S)$ -- Type of a Channel of Roles $R$
+
+for any Participant holding a Channel with Type $\Chan(R,
+\msg(i,j,T)::S)$ encountering a Term $\msg(i,j,T)$ will result in one
+of four possible outcomes:
+\begin{itemize}
+  \item if $i \in R$ and $j \in R$ then the Participant should ignore
+    the Term $\msg(i,j,T)$ (no other Endpoint is expecting to Receive
+    a Value Tagged with $j$)
+  \item if $i \notin R$ and $j \notin R$ then the Participant should
+    ignore the Term $\msg(i,j,T)$ (not expected to Send or Receive)
+  \item if $i \in R$ and $j \notin R$ then the Participant should Send
+    a Value of Type $T$ with Tag $j$
+  \item if $i \notin R$ and $j \in R$ then the Participant should
+    Receive a Value of Type $T$ with Tag $j$
+\end{itemize}
+
+Type Schema for $\channelsend$ (Multirole):
+\[
+  (!\Chan (R, \msg(i,j,T):S) \gg \Chan(R,S), \Int(i), \Int(j), T)
+    \rightarrow \Unit
+\]
+assuming $i \in R$ and $j \notin R$
+
+Type Schema for $\channelrecv$ (Multirole):
+\[
+  (!\Chan (R, \msg(i,j,T):S) \gg \Chan(j,S), \Int(i), \Int(j))
+    \rightarrow T
+\]
+assuming $i \notin R$ and $j \in R$
+
+Type Schema for $\channelclose$ (Multirole):
+\[
+  (\Chan(R, \nil)) \rightarrow \Unit
+\]
+
+Type Schema for $\channelskip$:
+\[
+  (!\Chan(R,\msg(i,j,T)::S) \gg \Chan(R,S)) \rightarrow \Unit
+\]
+assuming either $i,j \in R$ or $i,j \notin R$; $\channelskip$ is a
+Proof Function (\S\ref{sec:proof_function}), i.e. it does nothing at
+Runtime
+
+
+\textbf{LMRL}
+
+\emph{Role-based Interpretation} of Conjunction/Disjunction Duality
+
+for $\underline{A},\underline{B}$ ranging over Sequents
+
+\emph{Conj-R}:
+\[
+  \frac {\underline{A} \vdash \underline{B},A \quad\quad
+    \underline{A} \vdash \underline{B},B}
+  {\underline{A} \vdash \underline{B},A \wedge B}
+\]
+\emph{Conj-L1}:
+\[
+  \frac {\underline{A},A \vdash \underline{B}}
+  {\underline{A},A \wedge B \vdash \underline{B}}
+\]
+\emph{Conj-L2}:
+\[
+  \frac {\underline{A},B \vdash \underline{B}}
+  {\underline{A},A \wedge B \vdash \underline{B}}
+\]
+\emph{Disj-L}:
+\[
+  \frac {\underline{A},A \vdash \underline{B} \quad\quad
+    \underline{A},B \vdash \underline{B}}
+  {\underline{A},A \vee B \vdash \underline{B}}
+\]
+\emph{Disj-R1}:
+\[
+  \frac {\underline{A} \vdash \underline{B},A}
+  {\underline{A} \vdash \underline{B}, A \vee B}
+\]
+\emph{Disj-R2}:
+\[
+  \frac {\underline{A} \vdash \underline{B},B}
+  {\underline{A} \vdash \underline{B}, A \vee B}
+\]
+
+\emph{Role-based Interpretation}: for two Roles $0$ and $1$, the left
+side of a Sequent Judgement ($\underline{A} \vdash \underline{B}$) is
+Role $0$ and the right side is Role $1$ and there are two Logical
+Connectives $\wedge_0$ and $\wedge_1$ that give a ``Conjunction-like''
+Interpretation for Role $r$ and a ``Disjunction-like'' Interpretation
+for the other Role
+
+introducing more Roles
+
+$R_N$ -- Set of Natural Numbers $\{0,\ldots,N-1\}$
+
+$R_\omega$ -- Set of all Natural Numbers
+
+$P$ -- Set of Roles
+
+$R$ -- Subset of $P$
+
+$\overline{R}$ -- Complement of $R$ in $P$
+
+$R_1 \uplus R_2$ -- Union of Disjoint Sets of Roles
+
+
+\emph{Conjunctive Multirole Logic}
+
+$P$ -- Set of Roles
+
+$\wedge_r$ -- Logical Connective for each $r \in P$ given a
+``Conjunction-like'' Interpretation by the Participant acting as $r$
+and a ``Disjunction-like'' Interpretation otherwise
+
+$\forall$ -- Infinite form of Conjunction
+
+
+\emph{Disjunctive Multirole Logic}
+
+$P$ -- Set of Roles
+
+$\wedge_r$ -- Logical Connective for each $r \in P$ given a
+``Disjunction-like'' Interpretation by the Participant acting as $r$
+and a ``Conjunction-like'' Interpretation otherwise
+
+
+\emph{LMRL}
+
+$[A]_R$ -- an \emph{I-formula} for a given Formula $A$ and Set of
+Roles $R \subseteq P$ is an Interpretation of $A$ based on $R$, e.g. a
+``Conjunction-like'' Interpretation of $\wedge_r$ if $r \in R$ and
+``Disjunction-like'' otherwise; Interpretations are based on
+\emph{Sets} of Roles rather than individual Roles, i.e. one
+Participant (``Side'') is allowed to play more than one Role
+simultaneously
+
+$\Gamma$ -- Sequent of LMRL: a Sequence of I-formulas--
+``Many-sided'': each $R$ appearing in $\Gamma$ is just one ``Side''
+
+\fist \emph{Note}: two identical I-formulas can appear in the same
+Sequent
+
+$\vdash \Gamma$ -- Judgement
+
+\fist \emph{Notation}: $(\Gamma_1;\ldots;\Gamma_n) \Rightarrow
+\Gamma_c$ for an Inference Rule:
+\[
+  \frac{\vdash \Gamma_1 \cdots \vdash \Gamma_n}{\vdash \Gamma_c}
+\]
+
+\emph{Cut Rule}:
+\[
+  \frac{
+    \Gamma_1,[A]_R \quad\quad \Gamma_2,[A]_{\overline{R}}
+  }{
+    \Gamma_1,\Gamma_2
+  }
+\]
+can be Interpreted as Communication between two Participants in a
+Distributed Computation (Abramsky94, Bellin-Scott94); has the same
+form as $2$-cut Conj and $2$-cut Disj below
+
+
+\emph{$n$-cut Conj} for $1 \leq n$:
+
+\[
+  \frac{
+    \overline{R}_1 \uplus \cdots \uplus \overline{R}_n = P \quad\quad
+      \Gamma_1,[A]_{R_1} \quad \cdots \quad \Gamma_n,[A]_{R_n}
+  }{
+    \Gamma_1, \ldots, \Gamma_n
+  }
+\]
+
+the pre-condition $\overline{R}_1 \uplus \cdots \uplus \overline{R}_n
+= P = \overline{\varnothing}$ on $R_1, \ldots, R_n$ is the same as the
+requirement on $R_1, \ldots, R_n$ for ``Linking'' $n$ Matching
+Channels of Types $\Chan(R_1,S), \ldots, \Chan(R_1,S)$ (see above)
+%FIXME above needs clarification
+
+
+\emph{$n$-cut Disj} for $1 \leq n$:
+
+\[
+  \frac{
+    R_1 \uplus \cdots \uplus R_n = P \quad\quad
+      \Gamma_1,[A]_{R_1} \quad \cdots \quad \Gamma_n,[A]_{R_n}
+  }{
+    \Gamma_1, \ldots, \Gamma_n
+  }
+\]
+
+
+\textbf{Syntax}
+
+$t$ -- standard First-order Terms
+
+$\otimes_r$, $\&_r$, $!_r$, $\forall_r$ -- Logical Connectives for
+each $r \in R$
+
+Formulas:
+\[
+  A ::=\ a \ |\ A_1 \otimes_r A_2 \ |\ A_1 \&_r A_2 \ |\ !_r(A)
+    \ |\ \forall_r(\lambda x.A)
+\]
+where $a$ ranges over Primitive Formulas
+
+$[?(A)]_R$ will be written to mean $[!_r(A)]_R$ for some $r \notin R$
+and $?(\Gamma)$ will mean that each I-formula in $\Gamma$ is of the
+Form $[?(A)]_R$
+
+$\{[A]_R\}$ is a Sequent consisting only of $[A]_R$ if $A$ is not of
+the form $!_r(B)$ for $r \notin R$ or some repeated occurrences of
+$[A]_R$ otherwise, i.e. if $A$ is of the form $!_r(B)$ for $r \notin
+R$ %FIXME confusing
+
+
+\textbf{LMRL$_\wedge$}
+
+Conjunctive LMRL
+
+\emph{Inference Rules}:
+\begin{itemize}
+  \item \emph{Id$_\wedge$}
+  \item \emph{$\otimes_r$-Neg}
+  \item \emph{$\otimes_r$-Pos}
+  \item \emph{$\&_r$-NegL}, \emph{$\&_r$-NegR}
+  \item \emph{$\&_r$-Pos}
+  \item \emph{$!_r$-Pos}
+  \item \emph{$!_r$-NegWeaken}, \emph{$!_r$-NegDerelict},
+    \emph{$!_r$-NegContract}
+  \item \emph{$\forall_r$-Neg}
+  \item \emph{$\forall_r$-Pos}
+\end{itemize}
+
+\emph{Major I-formula} %FIXME
+
+$|A|$ -- Number of Connectives in Formula $A$
+
+$\mathbf{D}$ -- a Derivation Tree (\S\ref{sec:concrete_syntax})
+
+$ht(\mathbf{D})$ -- Height of a Derivation Tree
+
+$\mathbf{D} :: \Gamma$ -- Derivation of $\Gamma$
+
+\emph{Substitution} %FIXME
+
+\emph{Lemma} (Admissibility of $n$-Cut-Conj for $n = 1$) -- $(\Gamma,
+     [A]_\varnothing) \Rightarrow \Gamma$ is Admissible in
+     LMRL$_\wedge$
+
+\emph{Lemma} ($\eta$-expansion) -- $\Unit \Rightarrow [A]_{R_1}, \ldots,
+     [A]_{R_n}$ is Admissible in LMRL$_\wedge$ where $R_1 \uplus
+     \cdots \uplus R_n = \overline{\varnothing}$
+
+\emph{Lemma} (2-cut with Spill) -- given Disjoint $\overline{R_1}$ and
+$\overline{R_2}$ the Rule:
+\[
+  (\Gamma_1, [A]_{R_1}; \Gamma_2,[A]_{R_2}) \Rightarrow
+    \Gamma_1, \Gamma_2, [A]_{R_1 \cap R_2}
+\]
+is Admissible in LMRL$_\wedge$
+
+\emph{Lemma} (2-cut):
+\[
+  (\Gamma_1, [A]_R : \Gamma_2, [A]_{\overline{R}})
+    \Rightarrow \Gamma_1,\Gamma_2
+\]
+is Admissible in LMRL$_\wedge$
+
+\emph{Lemma} ($n$-cut) -- for Subsets of $P$ $R_1,\ldots,R_n$ for some
+$1 \leq n$ such that:
+\[
+  \overline{R_1} \uplus \cdots \overline{R_n} = \overline{\varnothing}
+    = P
+\]
+then:
+\[
+  (\Gamma_1,[A]_{R_1}; \ldots; \Gamma_n,[A]_{R_n})
+    \Rightarrow \Gamma_1, \ldots, \Gamma_n
+\]
+is Admissible in LMRL$_\wedge$
+
+\emph{Lemma} (Splitting):
+\[
+  (\Gamma,[A]_{R_1 \uplus R_2}) \Rightarrow \Gamma,[A]_{R_1},[A]_{R_2}
+\]
+is Admissible in LMRL$_\wedge$
+
+
+\textbf{LMRL$_\vee$}
+
+Disjunctive LMRL
+
+Dual of LMRL$_\wedge$
+
+\emph{Inference Rules}:
+\begin{itemize}
+  \item \emph{Id$_\vee$}
+  \item \emph{$\parr_r$-Pos}
+  \item \emph{$\parr_r$-Neg}
+  \item \emph{$\oplus_r$-PosL}, \emph{$\&_r$-PosR}
+  \item \emph{$\oplus_r$-Neg}
+  \item \emph{$?_r$-PosWeaken}, \emph{$?_r$-PosDerelict},
+    \emph{$?_r$-PosContract}
+  \item \emph{$?_r$-Neg}
+  \item \emph{$\exists_r$-Pos}
+  \item \emph{$\exists_r$-Neg}
+\end{itemize}
+
+\emph{Lemma}:
+\[
+  (\Gamma, [A]_{\overline{\varnothing}}) \Rightarrow \Gamma
+\]
+is Admissible in LMRL$_\vee$
+
+\emph{Lemma} ($\eta$-expansion)
+
+\emph{Lemma} (2-cut with Spill)
+
+\emph{Lemma} (2-cut)
+
+\emph{Lemma} (Multi-cut)
+
+\emph{Lemma} (Co-plitting)
+
+
+
+\textbf{Negation}
+
+\emph{Not$_\wedge$} Rule:
+\[
+  \frac{
+    \Gamma, [A]_R
+  }{
+    \Gamma, [\neg A]_{\overline{R}}
+  }
+\]
+
+LMRL$_\wedge$ extended with the Not$_\wedge$ Rule is equivalent to
+Classical Linear Logic when the Set $P$ of Roles is $\{0,1\}$, then:
+\begin{itemize}
+  \item $\wedge_0$ and $\wedge_1$ correspond to $\wedge$ and $\vee$,
+    resp.
+  \item $\forall_0$ and $\forall_1$ correspond to $\forall$ and
+    $\exists$, resp.
+\end{itemize}
+
+Not$_\wedge$ invalidates the Admissibility of $n$-cut for any $n \neq
+2$-- LMRL can be seen as a form of \emph{Negation-less Logic}: the
+Negation of an I-formula $[A]_R$ is the I-formula $[A]_{\overline{R}}$
+\emph{but there is not a Negation of Formula $A$ per-se}, i.e.
+Negation cannot be \emph{internalized} in LMRL for $n$-cut to be
+preserved
+
+
+\endgroup
 
 
 
