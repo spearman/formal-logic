@@ -4505,15 +4505,26 @@ Protocol:
 
 \paragraph{Multiparty Classical Processes}\label{sec:mcp}\hfill
 
-Carbone-Montesi-Schurmann-Yoshida15 -- \emph{Multiparty Session Types
-  as Coherence Proofs}; $\otimes$ Input, $\parr$ Output
-
-\emph{Coherence}
+\emph{Coherence}: Logically reconstructs the notion of Well-formedness
+in Multiparty Session Types (\S\ref{sec:multiparty_session}) in the
+context of Synchronous Communication; yields an Algorithm for
+extracting a (Polymorphic) Global Type from a Set of Local Types
 
 \emph{MCut} -- a gnerealized Cut-rule for composing multiple Proofs
 that requires Coherent Proofs
 
-Carbone-Montesi-Schurmann-Yoshida16 -- \emph{Coherence Genrealises
+extends Polymorphism for Binary Session Types to Multiparty Session
+Types
+
+no Recursive Behavior
+
+Carbone-Montesi-Schurmann-Yoshida15 -- \emph{Multiparty Session Types
+  as Coherence Proofs}; $\otimes$ Input, $\parr$ Output-- one Sender,
+many Receivers (Coppo-DezaniCiancaglini-Yoshida-Padovani15
+``Broadcast'': cf. Xi-Wu16: Linear Multirole Logic \S\ref{sec:lmrl},
+Multirole Channels)
+
+Carbone-Lindley-Montesi-Schurmann-Wadler16 -- \emph{Coherence Genrealises
   Duality: a logical explanation of multiparty session types} --
 translation of MCP to CP via Globally-governed Classical Processes
 (GCP) in which GCP interprets a Coherence Proof as an \emph{Arbiter
@@ -4524,6 +4535,184 @@ Carbone-Montesi-Schurmann-Yoshida15
 \emph{Arbiter} is similar to \emph{Medium} in Caires-Perez16 --
 \emph{Multiparty Session Types within a Canonical Binary Theory, and
   Beyond}
+
+MCP adds \emph{Annotations} to GCP
+
+Semantics preserving translation of MCP to GCP by erasing Annotations
+with Bisimulation between MCP and GCP under translation
+
+
+\textbf{CP} (\S\ref{sec:classical_processes}):
+
+Wadler12
+
+%FIXME types, terms, rules
+
+Linking (\emph{Axiom}) -- $x \rightarrow y^B$: forwards Communication
+from $x$ to $y$
+
+Restriction (\emph{Cut}) -- $\nu x^A y$: Session formation by
+connecting two Endpoints $x$ and $y$
+
+\emph{Proof-transformation Semantics for CP Processes}:
+
+Structural Equivalence (Processes) -- swapping Names in a Link and in a
+Restriction
+
+$\eta$-expansions (Processes) -- replace a Link with Processes that
+perform the Communications required by its Type
+
+$\beta$-reductions (Processes) -- Cut-elimination Rules of CLL
+(\S\ref{sec:cll})
+
+Commuting Conversions -- lift ``Prefixes'' out of Cuts on different
+Endpoints
+
+\emph{Thms.} Subject Reduction, Cut Elimination
+
+
+\textbf{Arbiter}
+
+corresponds to the Dual of a Global Type in traditional Multiparty
+Sessions
+
+\fist Cf. ``\emph{Medium}'' of Caires-Perez16 (based on Intuitionistic
+Linear Logic instead of Classical Logic; uses standard Projection in
+place of Coherence; no Replication or Nesting in Global Types)
+
+
+\textbf{GCP}
+
+replace Binary Cut in CP with \emph{Multiparty Cut} (\emph{Coherence
+  Cut})
+
+generalization of CP to GCP may be applicable to Choreographies
+
+Judgements (\emph{Coherence} $\vDash$):
+\[
+  G \vDash \Gamma
+\]
+
+$\Gamma$ -- Set of ``Compatible'' Types
+
+$G$ -- Global Type: Proof Term corresponding to $\Gamma$
+
+Coherence Rules, Coherence Cut (FIXME)
+
+\emph{CCut}
+
+restriction of Coherence to two Parties is exactly Duality: $G \vDash
+x:A,y:B$ if and only if $A = B^\bot$
+
+\emph{Semantics}:
+
+Structural Equivalence (Global Types and Processes)
+
+$\eta$-expansions (Global Types)
+
+$\beta$-reductions (Global Types and Processes)
+
+Commuting Conversions -- allowing a Prefix to be lifted out of a
+Coherence Cut
+
+\emph{Thms.} Subject Reduction, Cut Elimination
+
+\emph{Translations of GCP to and from CP} %FIXME
+
+each Reduction in CP is Simulated by one or two Reductions in GCP
+
+\emph{Thm.} Type Preservation from GCP to CP
+
+\emph{Thm.} Simulation of GCP in CP
+
+\emph{Thm.} Reflection of CP in GCP
+
+\emph{Thm.} Type Preservation from CP to GCP
+
+\emph{Thm.} Simulation of CP in GCP
+
+Duality corresponds to $\eta$-expansion and Coherence corresponds to
+generalization of $\eta$-expansion
+
+
+\textbf{MCP}
+
+instead of having a Global Type as a ``governer'' (central point of
+control) as in GCP Semantics, MCP \emph{Annotates} Types and Processes
+with Endpoints
+
+Coherence Relation $\vDash$ identical with GCP except that the Type
+Connectives are Annotated with Names of the Endpoints with which they
+are supposed to Interact
+
+Coherence Rules:
+\begin{itemize}
+  \item $\otimes\parr$
+  \item $\oplus\&$
+  \item $1\bot$
+  \item $!?$
+  \item $0\top$
+  \item $\exists\forall$
+  \item \textsc{Axiom}
+\end{itemize}
+
+Typing Rules:
+\begin{itemize}
+  \item \textsc{Axiom}
+  \item \textsc{CCut}
+  \item \textsc{Weaken}
+  \item \textsc{Contract}
+  \item $\otimes$
+  \item $\parr$
+  \item $\oplus_1$, $\oplus_2$
+  \item $\&$
+  \item $!$
+  \item $?$
+  \item $\exists$
+  \item $\forall$
+  \item $1$
+  \item no rule for $0$
+  \item $\bot$
+  \item $\top$
+\end{itemize}
+
+$A,B,C,D,\ldots$ -- Types with Annotations
+
+$|A|$ -- removes all Annotations froma given Proposition $A$, e.g.
+$|B_1 \otimes^x B_2| = |B_1| \otimes |B_2|$
+
+Global Type Syntax is the same as in GCP with extra Annotation in the
+Term for the Axiom %FIXME
+
+$P,Q,R$ -- Processes with Annotations
+
+$x^z[y].(P|Q)$ -- Endpoint $x$ is Sending $y$ to Endpoint $z$
+
+Semantics are the same as GCP extended with Endpoint Annotations
+giving MCP a fully Distributed, ``ungoverned'' Semantics
+
+``[in Reductions] the Global Type of the Session is unnecessary for the
+Communicating Processes to know which other Processes are involved in
+the Communication: that information is instead taken from the Endpoint
+Annotations of their respective Actions''
+
+\emph{Thm.} Subject Reduction: if $P \vdash \Gamma$ and $P \Rightarrow
+Q$ then $Q \vdash \Gamma$
+
+\emph{Thm.} Cut Elimination: if $P \vdash \Gamma$ then there exists a
+$Q$ such that $P \Rightarrow^* Q$ and $Q$ is not a Cut
+
+\emph{Translations of MCP and GCP}
+
+\emph{Thm.} Type Preservation from MCP to GCP
+
+\emph{Thm.} Type Preservation from GCP to MCP
+
+Bisimulation:
+
+\emph{Thm.} Simulation of MCP in GCP
+
+\emph{Thm.} Reflection of GCP in MCP
 
 
 
