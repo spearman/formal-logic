@@ -673,6 +673,8 @@ only using Contraction and Weakining Rules; therefore in Linear Type
 Systems (\S\ref{sec:linear_type}) they are distinct with the Positive
 Empty Type $0$ and Negative Empty Type $\bot$.
 
+Dhall: Empty Variant $<>$, cf. Empty Tuple ${}$ for Unit Type
+
 
 
 % --------------------------------------------------------------------
@@ -697,6 +699,8 @@ Weakening Rules; therefore in Linear Type Systems
 Type $1$ and Negative Unit Type $\top$.
 
 Homotopy, Contractible Type %FIXME
+
+Dhall: Empty Tuple ${}$, cf. Empty Variant $<>$ for the Empty Type
 
 
 
@@ -2356,7 +2360,12 @@ possible Sequences of Messages (\S\ref{sec:message}) determined by the
 Channel's Session Type (e.g. Stream-based Internet Protocols)
 \cite{neubauer-thiemann04}
 
+\fist MTLC$_{ch}$ (\S\ref{sec:mtlc_ch}): Multi-threaded
+$\lambda$-calculus (\S\ref{sec:mtlc}) with support for Session Types
+
+
 \asterism
+
 
 correspondence between Communicating Automata
 (\S\ref{sec:communicating_fsm}) and Session Types:
@@ -2370,6 +2379,7 @@ Lange, Yoshida, Tuosto - 2015 -
 
 
 \asterism
+
 
 An Embedding of Simply-typed $\lambda$-calculus
 (\S\ref{sec:simply_typed}) into Session-typed $\pi$-calculus (Session
@@ -7071,7 +7081,7 @@ Systems (\S\ref{sec:pts}) for Multi-sorted Type Systems %FIXME
 
 
 % ====================================================================
-\section{Typed $\lambda$-Calculus}\label{sec:typed_lambda}
+\section{Typed $\lambda$-calculus}\label{sec:typed_lambda}
 % ====================================================================
 
 \emph{Typed $\lambda$-Calculus} allows for Lambda Terms to be assigned
@@ -7089,8 +7099,10 @@ considering Recursive Types with Recursion in Negative Positions;
 Untyped $\lambda$-calculus can be Modelled by a Solution to the
 Recursion Equation $X \simeq X \rightarrow X$. \cite{wadler12}
 
-A Denotational Semantics can be given by a \emph{B\"ohm Tree}
-(\S\ref{sec:bohm_tree}).
+\fist Multi-threaded $\lambda$-calculus (\S\ref{sec:mtlc})
+
+A Denotational Semantics for Typed $\lambda$-calculus can be given by a
+\emph{B\"ohm Tree} (\S\ref{sec:bohm_tree}).
 
 $\lambda$-cube (\S\ref{sec:lambda_cube}):
 \begin{itemize}
@@ -8501,7 +8513,7 @@ $z$ is a Channel of Type $\llbracket T \rrbracket$ where $\llbracket M
 \rrbracket_z$ Sends the ``Answer'' it Computes on $z$, as expressed by
 the Theorem:
 
-Th. \textbf{Translation Preserves Types}
+Thm. \textbf{Translation Preserves Types}
 
 \[
   \text{If } \Phi \vdash M : T \text{ then }
@@ -8511,13 +8523,54 @@ Th. \textbf{Translation Preserves Types}
 
 
 
-% --------------------------------------------------------------------
-\subsection{Multi-threaded $\lambda$-calculus}\label{sec:mtlc}
-% --------------------------------------------------------------------
+\subsubsection{MTLC$_0$}\label{sec:mtlc_0}
 
-Xi-Ren-Wu-Blair16 - \emph{Session Types in a Linearly typed
-  Multi-threaded Lambda-Calculus} -- embedding in ATS (Applied Type
-System) Programming Language with code generation for Erlang
+\begingroup
+
+\renewcommand{\Unit}{\mathsf{()}}
+\newcommand{\bool}{\mathsf{bool}}
+\newcommand{\Bool}{\mathsf{Bool}}
+\newcommand{\Choose}{\mathsf{Choose}}
+
+Multi-threaded $\lambda$-calculus (\S\ref{sec:mtlc}) with Linear Types
+
+Xi-Ren-Wu-Blair16 - \emph{Session Types in a Linearly Typed
+  Multi-threaded Lambda-Calculus}
+
+
+\textbf{Syntax}
+
+\emph{Viewtype} %FIXME
+
+$\mono{thread\_create} : (\Unit \rightarrow_l \Unit) \Rightarrow
+\Unit$
+
+$\hat{T}_1 \& \hat{T}_2$ as a Dependent Type:
+\[
+  \forall b : \bool. \Bool(b)
+    \rightarrow_l \Choose(\hat{T}_1, \hat{T}_2, b)
+\]
+
+\emph{Program} -- a \emph{Closed Expression} (an Expression containing
+no Free Variables)
+
+$\Pi$ -- \emph{Pool}: a collection of Programs formally defined as a
+Finite Mapping from Thread IDs (represented by Natural Numbers) to
+Closed Expressions (Programs) of MTLC$_0$ such that $0$ is always in
+the Domain of the Mapping
+
+
+
+\subsubsection{MTLC$_{ch}$}\label{sec:mtlc_ch}
+
+MTLC$_0$ extended with support for Session Types
+(\S\ref{sec:session_type})
+
+most closely related to SILL (Monadic instead of Linear) %FIXME
+
+
+
+\endgroup
 
 
 

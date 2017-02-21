@@ -778,6 +778,87 @@ $\beta$-reduction (\S\ref{sec:beta_reduction})
 
 
 % --------------------------------------------------------------------
+\subsection{Multi-threaded $\lambda$-calculus}\label{sec:mtlc}
+% --------------------------------------------------------------------
+
+\begingroup
+
+\newcommand{\Chpos}{\mathsf{Chpos}}
+\newcommand{\Chneg}{\mathsf{Chneg}}
+\newcommand{\channelsend}{\mono{channel\_send}}
+\newcommand{\chanpossend}{\mono{chanpos\_send}}
+\newcommand{\channegsend}{\mono{channeg\_send}}
+\newcommand{\channelrecv}{\mono{channel\_recv}}
+\newcommand{\chanposrecv}{\mono{chanpos\_recv}}
+\newcommand{\channegrecv}{\mono{channeg\_recv}}
+\newcommand{\channelclose}{\mono{channel\_close}}
+\newcommand{\chanposclose}{\mono{chanpos\_close}}
+\newcommand{\channegclose}{\mono{channeg\_close}}
+\renewcommand{\snd}{\mono{snd}}
+\newcommand{\rcv}{\mono{rcv}}
+\renewcommand{\Unit}{\mathsf{()}}
+
+Xi-Ren-Wu-Blair16 - \emph{Session Types in a Linearly typed
+  Multi-threaded Lambda-Calculus} -- embedding in ATS (Applied Type
+System) Programming Language with code generation for Erlang
+
+\emph{Global Progress}: Deadlock-freedom (\S\ref{sec:deadlock}) --
+\emph{DF-redicibility}
+
+
+Dual Channel Types:
+
+$\Chpos(S)$ -- \emph{Positive Channel}: equal to $\Chneg(S^\bot)$
+
+$\Chneg(S)$ -- \emph{Negative Channel}: equal to $\Chpos(S^\neg)$
+
+$\hat{T}$ -- ranges over Linear Types (including Non-linear Types as a
+special case)
+
+$\channelsend$ splits into $\chanpossend$ and $\channegrecv$:
+
+$\chanpossend : (!\Chpos(\snd(\hat{T})::S) \gg \Chpos(S), \hat{T})
+\rightarrow \Unit$
+
+$\channegrecv : (!\Chneg(\rcv(\hat{T})::S) \gg \Chneg(S), \hat{T})
+\rightarrow \Unit$
+
+$\channelrecv$ splits into $\chanposrecv$ and $\channegsend$:
+
+$\chanposrecv : (!\Chpos(\rcv(\hat{T})::S) \gg \Chpos(S))
+\rightarrow \hat{T}$
+
+$\channegsend : (!\Chneg(\snd(\hat{T})::S) \gg \Chneg(S))
+\rightarrow \hat{T}$
+
+equivalent $\chanpossend$ and $\chanposrecv$ used in formalization:
+
+$\chanpossend : (\Chpos(\snd(\hat{T})::S), \hat{T}) \rightarrow \Chpos(S)$
+
+$\chanposrecv : (\Chpos(\rcv(\hat{T})::S)) \rightarrow \Chpos(S)
+\otimes \hat{T}$
+
+where $\otimes$ is a Linear Tuple Type
+
+$\channelclose$ splits into $\chanposclose$ and $\channegclose$
+
+the non-split versions of the above functions can still be used in ATS
+thanks to overloading
+
+
+\fist \textbf{MTLC$_0$} (\S\ref{sec:mtlc_0}): MTLC equipped with a
+Linear Type System
+
+\fist \textbf{MTLC$_{ch}$} (\S\ref{sec:mtlc_ch}): MTLC$_0$ extended
+with support for Session Types (\S\ref{sec:session_type})
+
+
+
+\endgroup
+
+
+
+% --------------------------------------------------------------------
 \subsection{SKI Combinator Calculus}\label{sec:ski_calculus}
 % --------------------------------------------------------------------
 
@@ -1738,6 +1819,38 @@ the Trace Monoid $M(D)$ with Dependency Relation:
 
 
 % ====================================================================
+\section{Concurrent Computation}\label{sec:concurrent_computation}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Parallel Computation}\label{sec:parallel_computation}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Distributed Computation}\label{sec:distributed_computation}
+% --------------------------------------------------------------------
+
+all Properties of Distributed Computation can be expressed in terms of
+\emph{Safety} (\S\ref{sec:safety}) and \emph{Liveness}
+(\S\ref{sec:liveness})
+
+
+
+\subsubsection{Safety}\label{sec:safety}
+
+\fist Session Types (\ref{sec:session_type})
+
+
+
+\subsubsection{Liveness}\label{sec:liveness}
+
+\paragraph{Deadlock}\label{sec:deadlock}\hfill
+
+Global Progress
+
+
+
+% ====================================================================
 \section{Process Calculus}\label{sec:process_calculus}
 % ====================================================================
 
@@ -2338,10 +2451,6 @@ Unique Morphisms into and out of the Zero Object $0$ are Null
 Processes.
 
 
-
-% --------------------------------------------------------------------
-\subsection{Deadlock}\label{sec:deadlock}
-% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Session}\label{sec:session}
