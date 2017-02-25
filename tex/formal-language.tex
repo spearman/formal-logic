@@ -278,6 +278,16 @@ from the right-hand side:
 
 
 
+% --------------------------------------------------------------------
+\subsection{Metacharacter}\label{sec:metacharacter}
+% --------------------------------------------------------------------
+
+%FIXME relation to formal languages ?
+
+e.g. Wildcard Characters, Statement Delimiters, etc.
+
+
+
 % ====================================================================
 \section{Formal Language}\label{sec:formal_language}
 % ====================================================================
@@ -666,6 +676,19 @@ formulation:
 
 
 
+\subsubsection{Square Pattern}\label{subsubsection:square_pattern}
+
+a String constructed of repeated Substrings, e.g. ``papa'',
+``WikiWiki''
+
+in POSIX Regular Expressions, the pattern for Squares is:
+\[ \mono{(.+)\backslash1} \]
+but this is \emph{not} a feature of Regular Languages as the Language
+of Squares is not Context-free due to the \emph{Pumping Lemma}
+%FIXME xref pumping lemma
+
+
+
 % --------------------------------------------------------------------
 \subsection{Type-2: Context-free Grammar}\label{sec:context_free}
 % --------------------------------------------------------------------
@@ -820,7 +843,9 @@ Substitution (\S\ref{sec:string_substitution}).
 A common formulation of Regular Languages is using \emph{Regular
   Expressions} (\S\ref{sec:regular_expression}) and conversely it is
 sometimes said that a Regular Language is one that can be defined by a
-Regular Expression.
+Regular Expression. If there is at least one Regular Expression that
+matches a Set of Strings, then there exists an Infinite number of
+other Regular Expressions that also match that Set.
 
 An algebraic description is as follows:
 \[
@@ -835,11 +860,22 @@ Monoid (\S\ref{sec:monoid}) $M$ and $N \subseteq M$.
 
 \emph{Regular Expression}
 
+if there is at least one Regular Expression that matches a Set of
+Strings, then there exists an Infinite number of other Regular
+Expressions that also match that Set
+
 
 
 \paragraph{Star Height}\label{sec:star_height}\hfill
 
 \emph{Star Height}
+
+
+
+\subsubsection{Regular Language Induction}
+\label{sec:regular_language_induction}
+
+not all Regular Languages can be Induced
 
 
 
@@ -900,7 +936,9 @@ Finite Automaton (\S\ref{sec:ndfa}).
 
 The \emph{Pumping Lemma} states that the middle section of an
 Expression within a Regular Language may be repeated an arbitrary
-number of times to produce another Expression in that same Language.
+number of times to produce another Expression in that same Language;
+cf. Squares (\S\ref{sec:square_pattern}) in Context-sensitive
+Languages
 
 
 
