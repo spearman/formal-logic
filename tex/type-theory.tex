@@ -411,11 +411,49 @@ introducing a Constructor/Eliminator Pair
 
 
 % --------------------------------------------------------------------
+\subsection{Purity}\label{sec:pure_function}
+% --------------------------------------------------------------------
+
+\url{http://stackoverflow.com/questions/602444/functional-declarative-and-imperative-programming}
+
+\emph{Purity} of a \emph{Pure Function} applies to the
+\emph{Implementations} of Functions:
+\begin{itemize}
+  \item the only observable Output is the Return Value
+  \item the only Output Dependency is the Arguments
+  \item the Arguments are fully determined before any Output is
+    generated
+\end{itemize}
+
+\fist Cf. Referential Transparency
+(\S\ref{sec:referential_transparency}): applies to \emph{Expressions}
+the condition that replacing an Expression with the Value it Evaluates
+to will not change the Behavior of a Program
+
+Impure Functions may make Referentially Transparent Expressions in a
+Concurrent Computation (\S\ref{sec:concurrent_computation}): Purity is
+broken at the \emph{Interrupt Abstraction Layer} %FIXME
+
+if:
+\begin{itemize}
+  \item all Identifiers are Immutable
+  \item there is no accessible External State (i.e. I/O)
+  \item there is no \emph{Abstraction Layer} breakage
+\end{itemize}
+then Functions are always Pure
+
+
+
+% --------------------------------------------------------------------
 \subsection{Referential Transparency}\label{sec:referential_transparency}
 % --------------------------------------------------------------------
 
+%FIXME move to recursion theory, effect systems ?
+
 A \emph{Referentially Transparent Expression} can always be replaced
-with the Value it Evaluates to.
+with the Value it Evaluates to without changing Program Behavior
+
+no Side-effects (\S\ref{sec:effect})
 
 Functional Programming
 
@@ -429,7 +467,53 @@ allows for:
 \item Equational Reasoning
 \end{itemize}
 
-\fist Cf. Side-effects (\S\ref{sec:effect})
+Referential Transparency applies to \emph{Expressions} (e.g. Function
+Calls)
+
+\emph{Purity} (\S\ref{sec:pure_function}) applies to
+\emph{Implementations} of Functions:
+\begin{itemize}
+  \item the only observable Output is the Return Value
+  \item the only Output Dependency is the Arguments
+  \item the Arguments are fully determined before any Output is
+    generated
+\end{itemize}
+
+Impure Functions may make Referentially Transparent Expressions in a
+Concurrent Computation (\S\ref{sec:concurrent_computation})
+
+
+
+\subsubsection{Declarative Expression}\label{sec:declarative_expression}
+
+\url{http://stackoverflow.com/questions/602444/functional-declarative-and-imperative-programming}
+
+an Expression is \emph{Declarative} if all of its Sub-expressions are
+Referentially Transparent
+
+Declarative Languages:
+\begin{itemize}
+  \item no Looping Control Structures: due to Immutability the Loop
+    Condition would never change
+  \item only Control-flow is nested Function order (\emph{Logical
+    Dependencies})
+  \item nested Functions may be of a ``higher-level'' Semantics but
+    due to Immutability the results cannot depend on Mutable State but
+    only the order of nesting the Function Calls (i.e.
+    Sub-expressions)
+\end{itemize}
+
+thus Evaluation Order of Sub-expressions can only give a varying
+result when any of the Function Calls are not Referentially
+Transparent (i.e. the Function is not Pure)
+
+%FIXME
+
+
+
+\subsubsection{Imperative Expression}\label{sec:imperative_expression}
+
+%FIXME
 
 
 
@@ -932,6 +1016,23 @@ of a Tree (\S\ref{sec:tree_type})
 
 
 
+\subsubsection{Guarded Recursive Data Type}
+\label{sec:grdt}
+
+\emph{GRDT}
+
+\fist GADTs (\S\ref{sec:gadt})
+
+\fist Equality Constrained Types (Phantom Types
+\S\ref{sec:equality_constrained})
+
+Xi16:
+
+GRDTs can be thought of as an \emph{Impredicative} form of Dependent
+Type where Type Indices themselves are Types
+
+
+
 \subsubsection{Infinite Data Type}\label{sec:infinite_datatype}
 
 (Proof Object) Definition by Recursion: Proof by Induction
@@ -1037,6 +1138,17 @@ Parametric Polymorphism (\S\ref{sec:parametric_polymorphism})
 
 
 
+\subsubsection{Guarded Type}\label{sec:guarded_type}
+
+$P \Rightarrow T$ -- for Proposition $P$ and Type $T$
+
+Xi16 -- Qualified Types (as in Haskell's Type Class mechanism) cannot
+be Guarded Types as the Proof of a Guard cannot affect Run-time
+behavior of a Program while a Dictionary (a Proof of some Predicate on
+Types) for Qualified Types can affect the Run-time behavior
+
+
+
 \subsubsection{Constrained Type}\label{sec:constrained_type}
 
 Existentially Quantifid Type Variable
@@ -1074,7 +1186,26 @@ all Types of a particular Kind to another Set of Types using a single
 
 
 
+\paragraph{Equality Constrained Type}
+\label{sec:equality_constrained}\hfill
+
+\emph{Phantom Type}
+
+\fist GRDTs (\S\ref{sec:grdt})
+
+
+
 \paragraph{Type Class}\label{sec:type_class}\hfill
+
+\emph{Qualified Types} -- \cite{jones94} Jones94 \emph{Qualified
+  types: Theory and Practice} -- underlies Haskell type class
+mechanism
+
+Xi16 -- Qualified Types (as in Haskell's Type Class mechanism) cannot
+be Guarded Types (\S\ref{sec:guarded_type}) as the Proof of a Guard
+cannot affect Run-time behavior of a Program while a Dictionary (a
+Proof of some Predicate on Types) for Qualified Types can affect the
+Run-time behavior
 
 \cite{jones95}
 
@@ -1101,6 +1232,10 @@ of a (Multi-parameter) Type Class
 % --------------------------------------------------------------------
 \subsection{Generalized Algebraic Data Type}\label{sec:gadt}
 % --------------------------------------------------------------------
+
+\fist GRDTs (\S\ref{sec:grdt})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Logically Qualified Data Type}
@@ -1477,6 +1612,29 @@ Inference
 Polymorphic Recursion makes Inference of the Principal Type Undecidable
 
 Generalized Algebraic Data Types negates the Principal Type Property
+
+
+
+\subsubsection{Algebraic Subtyping}\label{sec:algebraic_subtyping}
+
+Dolan16 - \emph{Algebraic Subtyping}:
+
+difficulty integrating Type Inference with Subtyping due to the
+Unification ``Engine'' accepts only \emph{Equations} not
+\emph{Subtyping Constraints}
+
+Dolan16 presents a Type System with:
+\begin{itemize}
+  \item (ML-style) Parametric Polymorphism
+  \item (ML-style) Subtyping
+  \item Type Inference based on \emph{Biunification}
+    (\S\ref{sec:biunification})
+  \item Principal Types
+  \item Decidable Type Subsumption
+\end{itemize}
+
+exploints connections between Algebra of Regular Languages and
+Polymorphic Subtyping
 
 
 
@@ -2187,7 +2345,9 @@ assigning a Data Type (\emph{Typing} \S\ref{sec:typing_judgement})
 gives \emph{Meaning} (\S\ref{sec:meaning}) to a sequence of Bits (e.g.
 a Value in Memory or an Object such as a Variable)
 
+``Hierarchical Type Systems'' -- e.g. ATS (Applied Type System)
 
+``Cyclic Type Systems'' -- e.g. Martin-Lof Type Theory
 
 
 
@@ -2277,9 +2437,23 @@ every Type Inherits from a single ``Root'' Type
 
 
 \paragraph{Higher-order Unification}
-\label{sec:higherorder_unification}
+\label{sec:higherorder_unification}\hfill
 
 Formally Undecidable
+
+
+
+\paragraph{Biunification}\label{sec:biunification}\hfill
+
+Dolan16 - \emph{Algebraic Subtyping}:
+
+difficulty integrating Type Inference with Subtyping due to the
+Unification ``Engine'' accepts only \emph{Equations} not
+\emph{Subtyping Constraints} (\S\ref{sec:subtype})
+
+Dolan16 presents Type System with Type Inference based on
+\emph{Biunification} (\S\ref{sec:biunification}) is an analogue of
+Unification that works with Subtyping Constraints
 
 
 
@@ -4347,6 +4521,9 @@ going beyond associating Value-Type pairs, Effect Systems associate
 Virtual ``Regions'' of Code with an ``Effect'' Component describing
 \emph{what} is to be done \emph{with what}
 
+Henglein-Makholm-Niss -- \emph{Effect Types and Region-based Memory
+Management}
+
 Dominic Orchard (youtube) -- Simple Types (\S\ref{sec:simply_typed}):
 ``What'', Effect Systems: ``How'', Session Types
 (\S\ref{sec:session_type}): ``What \& How''
@@ -4533,8 +4710,8 @@ Coeffect-graded Comonad (???)
 
 ``Not-functional Programming''
 
-\fist Cf. Referential Transparency
-(Functional Programming \S\ref{sec:referential_transparency})
+\fist Cf. Referential Transparency: no Side-effects (Functional
+Programming \S\ref{sec:referential_transparency})
 
 
 
@@ -7216,6 +7393,14 @@ systems:
   \item PCF (\S\ref{sec:pcf}): Full Recursion
 \end{itemize}
 
+Types are Equivalent in Simply-typed $\lambda$-calculus if and only if
+they are \emph{Syntactically Equivalent}; Types are Equivalent in
+Second-order Polymorphic $\lambda$-calculus
+(\S\ref{sec:secondorder_lambda}) if and only if they are
+\emph{$\alpha$-equivalent}; Types are Equivalent in Higher-order
+Polymorphic $\lambda$-calculus (\S\ref{sec:higherorder_lambda}) if and
+only if they are \emph{$\beta\eta$-equivalent} -- (Xi16)
+
 Simply-typed $\lambda$-calculus has the same Equational Theory of
 $\beta\eta$-equivalence (\S\ref{sec:beta_reduction},
 \S\ref{sec:eta_conversion}) as Untyped $\lambda$-calculus, subject to
@@ -8013,6 +8198,15 @@ corresponds to Type Abstraction in Second-order $\lambda$-calculus.
 System F (\S\ref{sec:system_f}) is the canonical $\lambda2$-calculus
 
 
+Types are Equivalent in Simply-typed $\lambda$-calculus
+(\S\ref{sec:simply_typed}) if and only if they are \emph{Syntactically
+  Equivalent}; Types are Equivalent in Second-order Polymorphic
+$\lambda$-calculus if and only if they are \emph{$\alpha$-equivalent};
+Types are Equivalent in Higher-order Polymorphic $\lambda$-calculus
+(\S\ref{sec:higherorder_lambda}) if and only if they are
+\emph{$\beta\eta$-equivalent} -- (Xi16)
+
+
 
 \subsubsection{System F}\label{sec:system_f}
 
@@ -8053,6 +8247,14 @@ Simply-typed $\lambda$-calculus with Type Operators
 (\S\ref{sec:type_operator})
 
 Types depending on Types
+
+Types are Equivalent in Simply-typed $\lambda$-calculus
+(\S\ref{sec:simply_typed}) if and only if they are \emph{Syntactically
+  Equivalent}; Types are Equivalent in Second-order Polymorphic
+$\lambda$-calculus (\S\ref{sec:secondorder_lambda}) if and only if
+they are \emph{$\alpha$-equivalent}; Types are Equivalent in
+Higher-order Polymorphic $\lambda$-calculus if and only if they are
+\emph{$\beta\eta$-equivalent} -- (Xi16)
 
 
 
@@ -9013,6 +9215,12 @@ Pure Type System--is not Strongly Normalizing due to Girard's Paradox
 always has the Strong Normalization Property
 
 Programming Languages: SAGE, Yarrow, Henk 2000
+
+ATS (Applied Type System) is a Programming Language based on the
+restriction of PTS to prevent arbitrary Programs from appearing in
+Types through a strict separation of \emph{Static} (Type-level) Terms
+and \emph{Dynamic} (Program-level) Terms -- Xi16 \emph{Applied Type
+  System: An Approach to Practical Programming with Theorem-Proving}
 
 
 System of Natural Deduction (\S\ref{sec:natural_deduction}) for
