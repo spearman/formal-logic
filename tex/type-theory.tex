@@ -8764,8 +8764,10 @@ Thm. \textbf{Translation Preserves Types}
 
 Multi-threaded $\lambda$-calculus (\S\ref{sec:mtlc}) with Linear Types
 
-Xi-Ren-Wu-Blair16 - \emph{Session Types in a Linearly Typed
+Xi-Ren-Wu-Blair15 - \emph{Session Types in a Linearly Typed
   Multi-threaded Lambda-Calculus}
+
+\fist ATS (Applied Type System \S\ref{sec:ats})
 
 
 \textbf{Syntax}
@@ -8795,6 +8797,8 @@ the Domain of the Mapping
 
 MTLC$_0$ extended with support for Session Types
 (\S\ref{sec:session_type})
+
+\fist ATS (Applied Type System \S\ref{sec:ats})
 
 most closely related to SILL (Monadic instead of Linear) %FIXME
 
@@ -9216,11 +9220,13 @@ always has the Strong Normalization Property
 
 Programming Languages: SAGE, Yarrow, Henk 2000
 
-ATS (Applied Type System) is a Programming Language based on the
-restriction of PTS to prevent arbitrary Programs from appearing in
-Types through a strict separation of \emph{Static} (Type-level) Terms
-and \emph{Dynamic} (Program-level) Terms -- Xi16 \emph{Applied Type
-  System: An Approach to Practical Programming with Theorem-Proving}
+
+\fist ATS (Applied Type System \S\ref{sec:ats}) is a Programming
+Language based on the restriction of PTS to prevent arbitrary Programs
+from appearing in Types through a strict separation of \emph{Static}
+(Type-level) Terms and \emph{Dynamic} (Program-level) Terms -- Xi16
+\emph{Applied Type System: An Approach to Practical Programming with
+  Theorem-Proving}
 
 
 System of Natural Deduction (\S\ref{sec:natural_deduction}) for
@@ -9312,6 +9318,681 @@ Non-normalizing, Inconsistent
 Girard's Paradox (\S\ref{sec:girards_paradox})
 
 System U$^-$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Applied Type System}\label{sec:ats}
+% --------------------------------------------------------------------
+
+\begingroup
+
+\newcommand{\lam}{\mathsf{lam}}
+\newcommand{\app}{\mathsf{app}}
+\newcommand{\slam}{\mathsf{slam}}
+\newcommand{\sapp}{\mathsf{sapp}}
+\renewcommand{\lett}{\mathsf{let}}
+\renewcommand{\inn}{\mathsf{in}}
+\newcommand{\INT}{\mathsf{int}}
+\newcommand{\BOOL}{\mathsf{bool}}
+\newcommand{\Int}{\mathsf{Int}}
+\newcommand{\Bool}{\mathsf{Bool}}
+\renewcommand{\Nat}{\mathsf{Nat}}
+\newcommand{\dtree}{\mathscr{D}}
+
+Programming Language based on the restriction of PTS to prevent
+arbitrary Programs from appearing in Types through a strict separation
+of \emph{Static} (Type-level) Terms and \emph{Dynamic} (Program-level)
+Terms -- Xi16 \emph{Applied Type System: An Approach to Practical
+  Programming with Theorem-Proving}
+
+Programming with Theorem Proving (PwTP)
+
+successor of Dependent ML
+
+handling of Nonlinear Constraints through explicit Proof Construction
+
+compared to Theorem-proving systems such as NuPrl, Coq, in ATS Proof
+Construction is solely meant for Constraint Simplification and Proofs
+contain no Computational meaning; in NuPrl and Coq Proofs are
+\emph{Constructive} and meant for supporting \emph{Program Extraction}
+
+$\lambda_{dyn}$ -- Untyped $\lambda$-calculus
+(\S\ref{sec:untyped_lambda}): extended with Constants (incl. Constant
+Constructors, Constant Functions): needed to formally assign Dynamic
+(Operational) Semantics
+
+ATS$_0$ -- ATS without PwTP
+
+ATS$_{pf}$ -- ATS with PwTP
+
+a \emph{Well-typed Program} in ATS can be turned into one in
+$\lambda_{dyn}$ through \emph{Type-erasure} and \emph{Proof-erasure}
+and still retain its Dynamic (Operational) Semantics (Curry-style
+typing, cf. Church-style)
+
+uses approach to assigning Dynamic (Operational) Semantics to terms
+via \emph{Evaluation Contexts}
+
+
+\textbf{$\lambda_{dyn}$}
+
+\emph{Dynamic Terms} -- Syntax:
+
+\begin{flalign*}
+  \quad e ::=&\ x \ |\ dcx(\vec{e}) \ |\ \langle e_1,e_2 \rangle
+          \ |\ \fst(e) \ |\ \snd(e) \\
+            |&\ \lam\ x.e \ |\ \app(e_1,e_2)
+          \ |\ \lett\ x = e_1 \ \inn\ e_2 &
+\end{flalign*}
+
+\begin{itemize}
+\item $\vec{e}$ -- a possibly empty sequence of Dynamic Terms
+\item $dcx$ -- ranges over \emph{External Dynamic Constants}, including:
+  \begin{itemize}
+    \item $dcc$ -- \emph{Dynamic Constructors}
+    \item $dcf$ -- \emph{Dynamic Functions}
+  \end{itemize}
+\end{itemize}
+
+\emph{Values} -- special forms of Dynamic Terms:
+\begin{flalign*}
+  \quad v ::=&\ x \ |\ dcc(\vec{v}) \ |\ \langle v_1,v_2 \rangle
+          \ |\ \lam\ x.e &
+\end{flalign*}
+
+\emph{Primitive Values} -- Values not Constructed by
+$\langle-,-\rangle$ or $\lam$
+
+\emph{Evaluation Contexts} -- a Dynamic Term in which a Subterm (only
+in certain positions) is replaced with a \emph{Hole} $[]$:
+\begin{flalign*}
+  \quad E ::=&\ [] \ |\ dcx (v_1,...,v_{i-1}), E, e_{i+1},...,e_n)
+          \ |\ \langle E,e \rangle \ |\ \langle v,E \rangle & \\
+            |&\ \app(E,e) \ |\ \app(v,E) \ |\ \lett\ x = E \ \inn\ e &
+\end{flalign*}
+
+\emph{Redexes} (Reducible Expressions) in $\lambda_{dyn}$:
+\begin{itemize}
+\item $\fst (\langle v_1,v_2 \rangle)$ is a Redex and its Reduct is
+  $v_1$
+\item $\snd (\langle v_1,v_2 \rangle)$ is a Redex and its Reduct is
+  $v_2$
+\item $\app (\lam\ x.e, v)$ is a Redex and its Reduct is $e[x \mapsto
+  v]$
+\item $dcf (\vec{v})$ is a Redex if it is defined equal to some value
+  $v$ in which case its Reduct is $v$
+\item new forms of Redexes can have more than one Reduct
+\end{itemize}
+
+\emph{One-step Reduction} -- $E[e_1] \rightarrow E[e_2]$: for a
+Dynamic Term $E[e_1]$ and some Redex $e_1$, $E[e_1]$ Reduces to
+$E[e_2]$ in \emph{one step} if $e_2$ is a Reduct of $e_1$
+
+$\rightarrow^*$ -- Reflexive, Transitive Closure of $\rightarrow$
+
+\emph{Program} -- a Closed Dynamic Term
+
+for a Program $e_0$ in $\lambda_{dyn}$, a Finite Reduction Sequence can
+either lead to a Value or a Non-value
+
+\emph{Stuck Form} -- a Non-value Term that cannot be further Reduced
+
+\begin{itemize}
+\item Stuck Programs can be Aborted with an Exception
+\item the Type System can be developed to Statically (at Compile-time)
+  ensure the absence of various Stuck Forms in Well-typed Programs
+\end{itemize}
+
+
+\textbf{ATS$_0$}
+
+\emph{Dynamics} -- extended Untyped $\lambda$-calculus
+($\lambda_{dyn}$) where Programs are constructed and Evaluated; Typed
+by Static Terms
+
+\emph{Statics} -- Simply-typed $\lambda$-calculus
+($\lambda^\rightarrow$ \S\ref{sec:simply_typed}), extended with
+certain Constants, where (Dynamic Term) Types are formed and reasoned
+about
+
+\emph{Sorts} -- the "Types" of Static Terms
+
+
+
+\emph{ATS$_0$ Statics Syntax}
+
+Sorts:
+\begin{flalign*}
+  \quad \sigma ::=&\ b \ |\ \sigma_1 \rightarrow \sigma_2 &
+\end{flalign*}
+
+Static Terms:
+\begin{flalign*}
+  \quad s ::=&\ a \ |\ scx (s_1,...,s_n)
+          \ |\ \lambda a:\sigma.s \ |\ s_1(s_2) &
+\end{flalign*}
+
+Static Variable Vontext:
+\begin{flalign*}
+  \quad \Sigma ::=&\ \varnothing \ |\ \Sigma, a:\sigma &
+\end{flalign*}
+
+Static Substitution:
+\begin{flalign*}
+  \quad \Theta ::=&\ [] \ |\ \Theta[a \mapsto s] &
+\end{flalign*}
+
+$b$ -- \emph{Base Sorts}:
+\begin{itemize}
+\item $bool$ -- Static Booleans
+\item $type$ -- (Dynamic Term) Types
+\item $int$ -- Static Integers (not required for formalization of
+  ATS$_0$)
+\end{itemize}
+
+$a$ -- Static Variables
+
+$s$ -- Static Terms
+
+$scx$ -- ranges over (built-in) Static Constants:
+\begin{itemize}
+\item $scc$ -- Static Constant Constructors
+\item $scf$ -- Static Constant Functions
+\end{itemize}
+
+\emph{C-sort} -- $(\sigma_1,...,\sigma_n) \Rightarrow b$: can only be
+assigned to Static Constants (note C-sorts are not "regular" Sorts)
+
+for a Static Constant $scx$, a Static Term $scx (s_1,...,s_n)$ is of
+Sort $b$ if $scx$ is assigned the C-sort $(\sigma_1,...,\sigma_n)
+\Rightarrow b$ and each $s_i$ can be assigned Sorts $\sigma_i$ for $i
+= 1,...,n$
+
+assumed Static Constants in ATS$_0$:
+\begin{flalign*}
+  \quad true           :& () \Rightarrow bool & \\
+  \quad false          :& () \Rightarrow bool & \\
+  \quad \leq_{ty}      :& (type,type) \Rightarrow bool & \\
+  \quad *              :& (type,type) \Rightarrow type & \\
+  \quad \rightarrow    :& (type,type) \Rightarrow type & \\
+  \quad \wedge         :& (bool,type) \Rightarrow type & \\
+  \quad \supset        :& (bool,type) \Rightarrow type & \\
+  \quad \forall_\sigma :& (\sigma \rightarrow type) \Rightarrow type & \\
+  \quad \exists_\sigma :& (\sigma \rightarrow type) \Rightarrow type &
+\end{flalign*}
+
+\emph{Type Constructor} -- a Static Constant Constructor $scc$ with a
+C-sort $(\sigma_1,...,\sigma_n) \Rightarrow type$; e.g. $*$,
+$\rightarrow$, $\wedge$, $\supset$, $\forall_\sigma$, $\exists_\sigma$
+above
+
+for \emph{Proposition} $B$ and Type $T$:
+\begin{itemize}
+\item $B \supset T$ -- \emph{Guarded type}
+  (\S\ref{sec:guarded_type}): a Value $v$ assigned a Guarded Type can
+  be used if and only if $B$ is Satisfied
+\item $B \wedge T$ -- \emph{Asserting Type}: if a Value $v$ of an
+  Asserting Type is generated at a point in Program Evaluation, then
+  the \emph{Assertion} of $B$ holds at that point
+\end{itemize}
+
+$int$ -- Sort for (Static) Integers
+
+$\INT : int \Rightarrow type$ -- Type Constructor of the Sort $int
+\Rightarrow type$
+
+$\INT(i:int)$ -- a Singleton Type for the Integer equal to $i$
+
+$\Int = \exists a:int.\INT(a)$ -- Type for (Dynamic) Integers
+
+$\Nat = \exists a:int.(0 <= a) \wedge \INT(a)$ -- Type for (Dynamic)
+Natural Numbers
+
+$\BOOL : bool \Rightarrow type$ -- Type Constructor of the Sort $bool
+\Rightarrow type$ such that for each Proposition $B:bool$, $\BOOL(B)$
+is a Singleton Type for the Truth-value equal to $B$
+
+$\Bool = \exists a:bool.\BOOL(a)$ -- Type for (Dynamic) Booleans
+
+example Type of a \emph{Dynamic assertion}:
+\[
+  \forall a:bool.\BOOL(a) \rightarrow a \wedge ()
+\]
+where $()$ is the Unit Type: given a Function $f$ of this Type,
+applied to a Boolean Value $v:\BOOL(B)$ for some Proposition $B:bool$,
+if $f(v)$ returns then $B$ must be True
+
+
+\emph{Sorting Rules}
+
+\emph{St-Var}:
+\[
+  \frac{\Sigma(a) = \sigma}{\Sigma \vdash a:\sigma}
+\]
+
+\emph{St-Scx}:
+\[
+  \frac{\vdash scx:(\sigma_1,...,\sigma_n) \Rightarrow b \quad\quad
+    \Sigma \vdash s_1:\sigma_1 \quad\quad \cdots \quad\quad
+    \Sigma \vdash s_n:\sigma_n}
+  {\Sigma \vdash scx(s_1,...,s_n):b}
+\]
+
+\emph{St-Lam}:
+\[
+  \frac{\Sigma, a:\sigma_1 \vdash s:\sigma_2}
+    {\Sigma \vdash \lambda a:\sigma_1.s:\sigma_1 \rightarrow \sigma_2}
+\]
+
+\emph{St-App}:
+\[
+  \frac{\Sigma \vdash s_1:\sigma_1 \rightarrow \sigma_2 \quad\quad
+    \Sigma \vdash s_2:\sigma_1}
+  {\Sigma \vdash s_1(s_2):\sigma_2 }
+\]
+
+$\Sigma; \vec{B} \vDash B_0$ -- \emph{Constraint} where $\Sigma \vdash
+B:bool$ holds for each $B$ in $\vec{B}$ and $\Sigma \vdash B_0:bool$
+holds
+
+\emph{Constraint Relation} -- determines whether each Constraint is
+True or False
+
+\emph{Regularity Rules} (7) for the Constraint Relation %FIXME
+
+\emph{Regularity Conditions} (9) on $\leq_{ty}$ %FIXME
+
+
+\emph{ATS$_0$ Dynamics Syntax}
+
+\emph{Dynamic terms}:
+\begin{flalign*}
+  \quad e ::=&\ x \ |\ dcx\{\vec{s}\}(e_1,...,e_n)
+          \ |\ \langle e_1,e_2 \rangle
+          \ |\ \fst(e) \ |\ \snd(e) \ |\ \lam\ x.e & \\
+            |&\ \app(e_1,e_2) \ |\ \supset^+(e) \ |\ \supset^-(e)
+          \ |\ \slam\ a.e \ |\ \sapp(e,s) & \\
+            |&\ \wedge(e) \ |\ \lett\ \wedge(x) = e_1 \inn\ e_2
+          \ |\ \langle s,e \rangle
+          \ |\ \lett\ \langle a,x \rangle = e_1 \inn\ e_2 &
+\end{flalign*}
+
+\emph{Dynamic Values}:
+\begin{flalign*}
+  \quad v ::=&\ x \ |\ dcc\{\vec{s}\}(v_1,...,v_n)
+          \ |\ \langle v_1,v_2 \rangle
+          \ |\ \lam\ x.e \ |\ \supset^+(e)
+          \ |\ \slam\ a.e \ |\ \wedge(v) \ |\ \langle s,v \rangle &
+\end{flalign*}
+where $x$ ranges over Dynamic Variables, $s$ are Static Terms and
+$\{\vec{s}\}$ is a possibly empty Sequence of Static Terms, $dcx$
+ranges over Dynamic Constants including $dcc$ Dynamic Constant
+Constructors and $dcf$ Dynamic Constant Functions
+
+\emph{Dynamic Variable Contexts} -- assign Types to Dynamic Variables:
+\begin{flalign*}
+  \quad \Delta ::=& \varnothing \ |\ \Delta,x:T &
+\end{flalign*}
+where $T$ is a Type for Dynamic Terms (i.e. a Static Term of Sort
+$type$)
+
+\emph{Dynamic Substitution}:
+\begin{flalign*}
+  \quad \Theta ::=& [] \ |\ \Theta[x \mapsto e] &
+\end{flalign*}
+
+
+\emph{ATS$_0$ Derivations, Judgements, Proofs}
+
+$\dtree$ -- \emph{Derivation Tree}
+
+$J$ -- \emph{Judgement}
+
+$\dtree :: J$ -- $\dtree$ is a \emph{Derivation} of $J$ (the
+Conclusion of $\dtree$ is $J$)
+
+$ht(\dtree)$ -- Height of Derivation Tree representing $\dtree$
+
+$\Sigma;\vec{B};\Delta \vdash e:T$ -- \emph{Typing Judgement} of
+Static Variable Context $\Sigma$, zero or more Propositions $B:bool$,
+and Dynamic Variable Context $\Delta$
+
+\emph{Typing Rules} (16) %FIXME
+
+\emph{C-type} in ATS$_0$ -- $\forall \vec{a}:\vec{\sigma}.\vec{B}
+\supset (T_1,...,T_n) \Rightarrow T$
+
+$\vdash dcx : \forall\vec{a}:\vec{\sigma}.\vec{B} \supset
+(T_1,...,T_n) \Rightarrow T$ -- $dcx$ is assumed to have C-type
+following; if $dcx$ is a Constructor $dcc$ then $T$ is assumed to have
+been \emph{Constructed} by some $scc$ and $dcc$ is said to be
+\emph{Associated} with $scc$; e.g. List Constructors, Integer
+Addition/Division Functions %FIXME show examples
+
+\emph{Canonical Forms} -- if $\dtree ::
+\varnothing;\varnothing;\varnothing \vdash v:T$ then:
+\begin{enumerate}
+\item if $T = T_1*T_2$ then $v$ is of the form
+  $\langle{v_1,v_2}\rangle$
+\item if $T = T_1 \rightarrow T_2$ then $v$ is of the form $\lam\ x.e$
+\item if $T = B \wedge T_0$ then $v$ is of the form $\wedge(v_0)$
+\item if $T = B \supset T_0$ then $v$ is of the form $\supset^+(e)$
+\item if $T = \forall a:\sigma.T_0$ then $v$ is of the form
+  $\slam\ a.e$
+\item if $T = \exists a:\sigma.T_0$ then $v$ is of the form
+  $\langle{T,v_0}\rangle$
+\item if $T = scc(\vec{s}_1)$ then $v$ is of the form
+  $dcc\{\vec{s}_2\}(\vec{v})$ for some $dcc$ associated with $scc$
+\end{enumerate}
+
+
+\emph{ATS$_0$ Call-by-value Dynamic Semantics}
+
+\emph{Evaluation Contexts}:
+\begin{flalign*}
+  \quad E ::=&\ [] \ |\ dcx\{\vec{s}\}(\vec{v},E,\vec{e})
+          \ |\ \langle{E,d}\rangle \ |\ \langle{v,E}\rangle
+          \ |\ \app(E,e) \ |\ \app(v,E) & \\
+            |&\ \supset^-(E) \ |\ \wedge(E)
+          \ |\ \lett\ \wedge(x) = E \ \inn\ e
+          \ |\ \sapp(E,s) \ |\ \langle{s,E}\rangle
+          \ |\ \lett\ \langle{a,x}\rangle = E \ \inn\ e &
+\end{flalign*}
+
+\emph{Redexes and Reducts}:
+\begin{itemize}
+\item $\fst(\langle{v_1,v_2}\rangle)$ is a Redex with Reduct $v_1$
+\item $\snd(\langle{v_1,v_2}\rangle)$ is a Redex with Reduct $v_2$
+\item $\app(\lam\ x.e,v)$ is a Redex with Reduct $e[x \mapsto v]$
+\item $dcf\{\vec{s}\}(\vec{v})$ is a Redex if it is defined equal to
+  some Value $v$, if so then its Reduct is $v$
+\item $\supset^-(\supset^+(e))$ is a Redex with Reduct $e$
+\item $\sapp(\slam\ a.e,s)$ is Redex with Reduct $e[a \mapsto s]$
+\item $\lett\ \wedge(x) = \wedge(v) \ \inn\ e$ is a Redex with Reduct
+  $e[x \mapsto v]$
+\item $\lett\ \langle{a,x}\rangle = \langle{s,v}\rangle \ \inn\ e$ is
+  a Redex with Reduct $e[a \mapsto s][x \mapsto v]$
+\end{itemize}
+
+\emph{One-step Reduction}: for Dynamic Terms $e_1$, $e_2$ such that
+$e_1 = E[e]$ and $e_2 = E[e']$ for some Redex $e$ and its Reduct $e'$,
+$e_1$ Reduces to $e_2$ in \emph{one step}, denoted $e_1 \rightarrow
+e_2$
+
+$\rightarrow^*$ -- Transitive Closure of $\rightarrow$
+
+\emph{Thm.} Subject Reduction in ATS$_0$:
+
+\emph{Assume $\dtree :: \Sigma;\vec{B};\Delta \vdash e:T$ and $e
+  \rightarrow e'$; then $\Sigma;\vec{B};\Delta \vdash e':T$ is also
+  derivable.}
+
+
+\emph{Thm.} Progress in ATS$_0$:
+
+\emph{Assume $\dtree :: \varnothing;\varnothing;\varnothing \vdash
+  e:T$; then either $e$ is a Value or $e \rightarrow e'$ holds for
+  some Dynamic Term $e'$.}
+
+\emph{Type Soundness} -- (Meta-property): by Progress and Subject
+Reduction Theorems, for each \emph{Closed, Well-typed Dynamic Term}
+$e$, either $e \rightarrow^* v$ holds for some Value $v$ \emph{or}
+there is an \emph{Infinite Reduciton Sequence} starting from $e$: $e =
+e_0 \rightarrow e_1 \rightarrow e_2 \rightarrow \cdots$; i.e. each
+Well-typed Program in ATS$_0$ either reaches a Value or else runs
+forever (cannot get \emph{Stuck})
+
+$||e||$ -- \emph{Type Erasure} on Dynamic Terms: maps each Dynamic
+Term in ATS$_0$ to an Untyped Dynamic Term in $\lambda_{dyn}$; to
+ensure that Values in ATS$_0$ are mapped to Values in $\lambda_{dyn}$
+requires the Syntactic \emph{Value-form Restriction}:
+\begin{enumerate}
+\item only when $e$ is a Value can $\supset^+(e)$ be formed
+\item only when $e$ is a Value can $\slam\ a.e$ be formed
+\end{enumerate}
+and as a result $||v||$ is a Value in $\lambda_{dyn}$ for every Value
+$v$ in ATS$_0$
+
+\begin{itemize}
+\item note it is possible for a Non-value Term $e$ in ATS$_0$ to have
+  a Type Erasure resulting in a Value Term in $\lambda_{dyn}$
+\item Type Erasure cannot alter the Dynamic Semantics of ATS$_0$
+\end{itemize}
+
+
+\textbf{ATS$_{pf}$}
+
+ATS$_0$ extended with support for PwTP
+
+Programming with Theorem Proving (PwTP): a Programming Paradigm for
+\emph{Internalizing} Constraint Solving %FIXME xref constraint solving
+
+additional Base Sort: $prop$ -- Static Terms representing Types for
+\emph{Proofs}
+
+additional Static Constants:
+\begin{flalign*}
+  \quad \leq_{pr}      :& (prop,prop) \Rightarrow bool & \\
+  \quad *              :& (prop,prop) \Rightarrow prop & \\
+  \quad *              :& (prop,type) \Rightarrow type & \\
+  \quad \rightarrow    :& (prop,prop) \Rightarrow prop & \\
+  \quad \rightarrow    :& (prop,type) \Rightarrow type & \\
+  \quad \wedge         :& (bool,prop) \Rightarrow prop & \\
+  \quad \supset        :& (bool,prop) \Rightarrow prop & \\
+  \quad \forall_\sigma :& (\sigma \rightarrow prop) \Rightarrow prop & \\
+  \quad \exists_\sigma :& (\sigma \rightarrow prop) \Rightarrow prop \\
+\end{flalign*}
+\fist note that some of these Symbols are Overloaded
+
+Functions are allowed to be formed from:
+\begin{itemize}
+\item $prop \rightarrow prop$
+\item $prop \rightarrow type$
+\item $type \rightarrow type$
+\end{itemize}
+but not $type \rightarrow prop$
+
+some Dynamic constructs from ATS$_0$ need to be ``split'' in
+ATS$_{pf}$ for these different cases:
+\begin{itemize}
+\item $\langle{e1,e2}\rangle$ is split into:
+  \begin{itemize}
+    \item $\langle{e1,e2}\rangle_{pp}$ -- $prop$-$prop$ pairs
+    \item $\langle{e1,e2}\rangle_{pt}$ -- $prop$-$type$ pairs
+    \item $\langle{e1,e2}\rangle_{tt}$ -- $type$-$type$ pairs
+  \end{itemize}
+\item $\lam\ x.e$ is split into:
+  \begin{itemize}
+    \item $\lam_{pp}\ x.e$ -- $prop$-$prop$ functions
+    \item $\lam_{pt}\ x.e$ -- $prop$-$type$ functions
+    \item $\lam_{tt}\ x.e$ -- $type$-$type$ functions
+  \end{itemize}
+\item $app(e1,e2)$ is split into:
+  \begin{itemize}
+    \item $\app_{pp}(e1,e2)$ -- $prop$-$prop$ applications
+    \item $\app_{pt}(e1,e2)$ -- $prop$-$type$ applications
+    \item $\app_{tt}(e1,e2)$ -- $type$-$type$ applications
+  \end{itemize}
+\end{itemize}
+
+\emph{Dynamic Variable Contexts} of ATS$_{pf}$:
+\begin{flalign*}
+  \Delta ::=&\ \varnothing \ |\ \Delta,x:T^* &
+\end{flalign*}
+
+where $T^*$ is either a $type$ or a $prop$
+
+$\leq_{ty}$ \emph{Regularity Condition} extensions (2) %FIXME
+
+\fist note there are no Regularity Conditions on $prop$s, as Proofs
+have no \emph{Computational} meaning in ATS$_{pf}$
+
+
+\emph{ATS$_{pf}$ Static Constants}:
+\begin{flalign*}
+    \wedge         :& (bool,bool) \Rightarrow bool & \\
+    \supset        :& (bool,bool) \Rightarrow bool & \\
+    \forall_\sigma :& (\sigma \rightarrow bool) \Rightarrow bool & \\
+    \exists_\sigma :& (\sigma \rightarrow bool) \Rightarrow bool &
+\end{flalign*}
+\fist note the above Symbols corresponding to Static constants are all
+Overloaded
+
+$B$ -- a Static Term of Sort $bool$
+
+$P$ -- a Static Term of Sort $prop$
+
+correspondences with $prop$ Predicates/Constructors: *FIXME*
+
+a Proof of $P$ can be constructed in ATS$_{pf}$ to ``attest to the
+\emph{Validity}'' of the Boolean Term encoded by $P$
+
+
+\emph{ATS$_{pf}$ Typing Rules}
+
+\begin{enumerate}
+\item \emph{P-typing Rules} -- assigns $prop$s to Dynamic Terms
+  (encoding Proofs)
+\item \emph{T-typing Rules} -- assigns $type$s to Dynamic Terms (to be
+  Evaluated)
+\end{enumerate}
+
+the Typing Rules for ATS$_{pf}$ are the same as ATS$_0$ except:
+\begin{itemize}
+\item replace $T$ with $T^*$
+\item the Premises of P-typing Rules are required to be P-typing Rules
+  themselves
+\end{itemize}
+
+
+\emph{ATS$_{pf}$ Proof Erasure}
+
+\emph{Proof Erasure} -- translation of each Dynamic Term from
+ATS$_{pf}$ to a Dynamic Term in ATS$_0$ preserving the Dynamic
+(Call-by-value) Semantics
+
+for a Sort $\sigma$, the Proof-erasure $|\sigma|$ is one in which
+every occurrence of $prop$ in $\sigma$ is replaced with $bool$
+
+for a Static Variable Context $\Sigma$, the Proof-erasure $|\Sigma|$
+is obtained by replacing each Declaration $a:\sigma$ with $a:|\sigma|$
+
+for a Static Constant $scx$ of C-sort $(\sigma_1,...,\sigma_n)
+\Rightarrow \sigma$, the Proof-erasure $|scx|$ is of C-sort
+$(|\sigma_1|,...,|\sigma_n|) \Rightarrow |\sigma|$; *note* it is
+possible that $|scx_1| = |scx_2|$ for two different Constants $scx_1$
+and $scx_2$
+
+$|-|_p$ -- maps a given Dynamic Variable Context $\Delta$ to a
+sequence of Boolean Terms
+
+$|\Delta|_p$ -- a sequence of Boolean Terms $\vec{B}$ such that each
+$B$ in $\vec{B}$ is $|P|$ for some $a:P$ Declared in $\Sigma$
+
+$|-|_t$ -- maps a given Dynamic Variable Context $\Delta$ to (another)
+Dynamic Variable Context
+
+$|\Delta|_T$ -- a Dynamic Variable Context such that each Declaration
+is of the form $a:|T|$ for some $a:T$ Declared in $\Sigma$
+
+\emph{Lemma} (Constraint Internalization):
+
+\emph{Assume the Typing Judgement $\Sigma;\vec{B};\Delta |- e:P$ is
+  derivable in ATS$_{pf}$; then the Constraint
+  $|\Sigma|;|\vec{B}|;|\Delta|_p \vDash |P|$ holds}
+
+for a C-type assigned to a Dynamic Proof Constant of the form $\forall
+\Sigma.\vec{B} \supset (\vec{P}) \Rightarrow P_0$, it is assumed the
+Constraint:
+\[
+  \varnothing;\varnothing \vDash
+     \forall|\Sigma|.|\vec{B}| \supset (|\vec{P}| \supset |P_0|)
+\]
+holds in ATS$_0$
+
+for a C-type $CT$ in ATS$_{pf}$ of the form $\forall \Sigma.\vec{B}
+\supset (\vec{P},T_1,...,T_n) \Rightarrow T_0$, the C-type $|CT|$ in
+ATS$_0$ is defined as:
+\[
+  \forall |\Sigma|.|\vec{B}| \supset (|\vec{P}| \supset
+    ((|T_1|,...,|T_n|) \Rightarrow |T_0|))
+\]
+
+\emph{Thm.} 4.1
+
+\emph{Assume that $\Sigma;\vec{B};\Delta \vdash e:T$ is derivable in
+  ATS$_{pf}$. Then $|\Sigma|;|\vec{B}|,|\Delta|_p;|\Delta|_t \vdash
+  |e|:|T|$ is derivable in ATS$_0$}
+
+by Theorem 4.1, the Proof-erasure of a Program is Well-typed in
+ATS$_0$ if it is Well-typed in ATS$_{pf}$
+
+
+\emph{Relation between $prop$ and $bool$}
+
+$prop$ may be seen as an \emph{Internalized} version of $bool$: given
+a Static Term $B:bool$, its Truth-value is determined by a Constraint
+Solver \emph{outside} ATS$_{pf}$; given a Static Term $P:prop$, a
+Proof of $P$ can be constructed \emph{inside} ATS$_{pf}$ to attest the
+\emph{Validity} of the Boolean Term \emph{encoded} by $P$
+
+\emph{example} -- a \emph{Static Predicate}:
+\begin{verbatim}
+  stacst fact_b : (int,int) -> bool
+  praxi fact_b_bas () : [fact_b(0,1)] unit_p
+  praxi fact_b_ind {n:int}{r:int} ()
+    : [0 <= n && fact_b(n,r) ->> fact_b(n+1, (n+1)*r)] unit_p
+\end{verbatim}
+*FIXME* $->>$ implication or typo??? \\
+is equivalent to the ``$\mono{dataprop}$'':
+\begin{verbatim}
+  dataprop fact_p (int,int) =
+    | fact_p_bas (0,1) of ()
+    | {n:nat}{r:int} fact_p_ind (n+1, (n+1)*r) of fact_p(n,r)
+\end{verbatim}
+where $\mono{unit\_p}$ is the Unit $prop$ encoding the Truth-value
+$true$
+
+a verified implementation of Factorial Function using Static Predicate
+(no explicit use of Proofs):
+\begin{verbatim}
+    fun f_fact_b {n:nat} (n:int n) : [r:int] (fact_b (n,r) && int r) =
+      loop (0,1) where {
+      prval () = $solver_assert (fact_b_bas)
+      prval () = $solver_assert (fact_b_ind)
+      fun loop {i:nat | i <= n} {r:int | fact_b (i,r)} (
+        i:int i, r:int r
+      ) : [r:int] (fact_b (n,r) && int r) =
+        if i < n then loop (i+1, (i+1)*r) else r
+    }
+\end{verbatim}
+
+\fist note the Constraints generated by Type-checking the above code
+cannot be solved by the built-in Constraint Solver ATS (they must be
+exported to be handled by an external Constraint Solver such as one
+based on the Z3 Theorem Prover) %FIXME clarify
+
+a verified implementation of Factorial Function using
+$\mono{dataprop}$ (explicit use of Proofs):
+\begin{verbatim}
+  fun f_fact_p {n:nat} (n: int n) : [r:int] (fact_p (n,r) | int r) =
+    loop (fact_p_bas() | 0(*i*), 1(*r*)) where {
+    fun loop {i:nat | i <= n} {r:int} (
+      pf : fact_p (i,r) | i:int i, r:int r
+    ) : [r:int] (fact_p (n,r) | int r) =
+      if i < n then
+        loop (fact_p_ind (pf) | i+1, (i+1)*r)
+      else
+        (pf | r)
+  }
+\end{verbatim}
+
+a \emph{Proof} in ATS$_{pf}$ can be \emph{Non-constructive} since
+Proofs are not expected to have any Run-time meaning
+
+
+\endgroup
 
 
 
