@@ -152,7 +152,7 @@ not $B$.
 
 The \emph{Absolute Complement} (or \emph{Complement}) of a Set $A$ is
 the Relative Complement of $A$ with the given Universe
-(\S\ref{sec:universe}) $\mathcal{U}$:
+(\S\ref{sec:set_universe}) $\mathcal{U}$:
 \[
   \mathcal{U} \setminus A
 \]
@@ -415,9 +415,9 @@ brackets:
   [a,a,b]
 \]
 If the Underlying Set is restricted to a Subset of a given
-\emph{Universe} (\S\ref{sec:universe}), $U$, the Multiplicity Function
-may be extended to $m_U : U \rightarrow \nats$ where $a \in U, a
-\notin A \leftrightarrow m(a)=0$.
+\emph{Universe} (\S\ref{sec:set_universe}), $U$, the Multiplicity
+Function may be extended to $m_U : U \rightarrow \nats$ where $a \in
+U, a \notin A \leftrightarrow m(a)=0$.
 
 \emph{Indicator Function} (\S\ref{sec:indicator_function})
 
@@ -452,7 +452,7 @@ Quine Atom (\S\ref{sec:quine_atom})
 % ====================================================================
 
 A \emph{Class} is any Subset of the \emph{Universe}
-(\S\ref{sec:universe}) of discussion.
+(\S\ref{sec:set_universe}) of discussion.
 
 \begin{description}
   \item [Proper Class] a Class that is not a Set
@@ -492,7 +492,7 @@ Multiset (\S\ref{sec:multiset}) and/or a Small or Proper Class
 
 
 % ====================================================================
-\section{Universe}\label{sec:universe}
+\section{Universe}\label{sec:set_universe}
 % ====================================================================
 
 % FIXME differentiate between Universes
@@ -508,6 +508,12 @@ A \emph{Universe} is a Set, $U$, with the following Closure Properties
   U, b \subset U \rightarrow b \in U$
 \end{enumerate}
 
+nCatlab: \url{https://ncatlab.org/nlab/show/universe}
+
+\fist Universe (Category Theory \S\ref{sec:category_universe})
+
+%FIXME ``mathematical universe'' ??? appendix ???
+
 
 
 % --------------------------------------------------------------------
@@ -522,6 +528,63 @@ not itself a Universe.
 % --------------------------------------------------------------------
 \subsection{Cumulative Hierarchy}\label{sec:cumulative_hierarchy}
 % --------------------------------------------------------------------
+
+a Family of Sets $W_\alpha$ Indexed by \emph{Ordinals} $\alpha$ such
+that:
+\begin{itemize}
+  \item $W_\alpha \subseteq W_{\alpha+1}$
+  \item if $\alph$ is a Limit Ordinal then $W_\alpha = \cup_{\beta
+    \leq \alpha} W_\beta$
+\end{itemize}
+
+Satisfies a form of the Reflection Principle
+(\S\ref{sec:reflection_principle}): any Formula in the Language of Set
+Theory that holds of the Union $W$ of the Hierarchy also holds in some
+stages $W_\alpha$
+
+the ``standard'' Cumulative Hierarchy is the Von Neumann Universe
+(\S\ref{sec:vonneumann_universe}) with $V_{\alpha+1} = \pow(V_\alpha)$
+
+other Cumulative Hierarchies:
+\begin{itemize}
+  \item $L_\alpha$ -- Sets of the Constructible Universe
+    (\S\ref{sec:constructible_universe})
+  \item Boolean Valued Models constructed by Forcing
+    (\S\ref{sec:forcing}) -- built using a Cumulative Hierarchy
+  \item Well-founded Sets in a Model of Set Theory (possibly not
+    Satisfying the Axiom of Foundation) forms a Cumulative Hierarchy
+    whose Union Satsifies the Axiom of Foundation
+\end{itemize}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Reflection Principle}\label{sec:reflection_principle}
+% --------------------------------------------------------------------
+
+nCatlab \url{https://ncatlab.org/nlab/show/reflection+principle}:
+
+the \emph{Reflection Principle} states that it is possible to find
+Sets that ``resemble'' the Class (\S\ref{sec:class}) of all Sets that
+are ``constructed in some ways''; any Statement that is True of the
+Universe $U$ \emph{already} holds at some ``Initial Segment''
+$U_\alpha$-- i.e. no First-order Property can distinguish the
+Set-theoretic Universe from the \emph{Extensions} of all its Member
+Sets, suggesting the \emph{Expansiveness} of $U$: $U$ gets
+``arbitrarily large''
+
+%FIXME: is this related to skolem's ``paradox'' ???
+
+the Type of Small Types (\S\ref{sec:type_universe}) in Type Theory is
+a Reflection of the Type System in itself
+
+G\"odel's encoding of an \emph{Unprovability Predicate} into Peano
+Arithmetic can be viewed as an \emph{Anti-reflection Principle} for
+Peano Arithmetic; suggests that the Validity of Reflection Principle
+for some Theory $T$ informally expresses or approximates the
+\emph{Internal Consistency} or \emph{Completeness} of $T$
+
+
 
 % --------------------------------------------------------------------
 \subsection{Superstructure}\label{sec:superstructure}
@@ -566,6 +629,10 @@ considered the \emph{Universe of Ordinary Mathematics}.
 The Von Neumann Universe is Extended by various Anti-foundation Axioms
 (\S\ref{sec:anti_foundation})
 
+the ``standard'' Cumulative Hierarchy
+(\S\ref{sec:cumulative_hierarchy}) defined as $V_{\alpha+1} =
+\pow(V_\alpha)$
+
 
 
 % --------------------------------------------------------------------
@@ -574,9 +641,22 @@ The Von Neumann Universe is Extended by various Anti-foundation Axioms
 
 %FIXME similar to definitions above
 
+
+
+% --------------------------------------------------------------------
+\subsection{Constructible Universe}\label{sec:constrictible_universe}
+% --------------------------------------------------------------------
+
+Cumulative Hierarchy (\S\ref{sec:cumulative_hierarchy})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Forcing}\label{sec:forcing}
 % --------------------------------------------------------------------
+
+Boolean Valued Models constructed by Forcing are built using a
+Cumulative Hierarchy (\S\ref{sec:cumulative_hierarchy})
 
 
 
@@ -2269,6 +2349,8 @@ additionally satisfies:
 % --------------------------------------------------------------------
 \subsection{CZF}\label{sec:czf}
 % --------------------------------------------------------------------
+
+Aczel86 -- Type-theoretic Interpretation
 
 
 

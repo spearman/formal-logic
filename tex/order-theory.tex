@@ -645,6 +645,9 @@ which all pairs have a Join (\S\ref{sec:least_upperbound}).
 A \emph{Meet-semilattice} (or \emph{Lower Semilattice}) is a Poset for
 which all pairs have a Meet.
 
+Finite-powerset Construction as the Free Semilattice
+(\S\ref{sec:free_semilattice})
+
 
 
 % --------------------------------------------------------------------
@@ -687,6 +690,17 @@ Continuity Space (\S\ref{sec:continuity_space})
 % --------------------------------------------------------------------
 \subsection{Free Lattice}\label{sec:free_lattice}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Free Semilattice}\label{sec:free_semilattice}
+% --------------------------------------------------------------------
+
+Finite-powerset Construction as the Free Semilattice %FIXME
+
+cf. Powerdomain Construction (\S\ref{sec:power_domain}) as the Free
+Models of Theories of Non-determinism
+
+
 
 % --------------------------------------------------------------------
 \subsection{Bounded Lattice}\label{sec:bounded_lattice}
@@ -761,7 +775,10 @@ all Directed Suprema %FIXME
 
 % ====================================================================
 \section{Domain Theory}\label{sec:domain_theory}
+
 % ====================================================================
+
+Abramsky-Jung94 -- \emph{Domain Theory}
 
 Denotational Semantics (\S\ref{sec:denotational_semantics})
 
@@ -802,6 +819,122 @@ Scott-continuous Function (\S\ref{sec:scott_continuity})
 % --------------------------------------------------------------------
 \subsection{Power Domain}\label{sec:power_domain}
 % --------------------------------------------------------------------
+
+Denotational Semantics of:
+\begin{itemize}
+  \item Non-deterministic Computation
+    (\S\ref{sec:nondeterministic_computation})
+  \item Concurrent Computation (\S\ref{sec:concurrent_computation})
+\end{itemize}
+
+a Non-deterministic Function may be described as a Deterministic
+Set-valud Function where each Set contains all the Values a the
+Non-deterministic Function can yield for a given Argument
+
+in a Concurrent Computation the Power Domain expresses the Set of all
+possible Computations
+
+\fist Vietoris Topology (\S\ref{sec:vietoris_topology})
+
+Powerdomain Constructions understood abstractly as Free-models
+(\S\ref{sec:free_model}) of Theories of Non-determinism; cf. the
+Finite-powerset Construction as the Free Semilattice
+(\S\ref{sec:free_semilattice})
+
+a different Theory of Non-determinism gives rise to a different
+Powerdomain Construction
+
+
+\textbf{Power Domains as Free Models of Theories of Non-determinism}
+
+variations of the Theory of Semilattices (\S\ref{sec:semilattice})
+
+\fist note: not Algebraic Theories because some involve the Order of
+the underlying Domain %FIXME
+
+``Domain'' -- some Ordered structure
+
+``Continuous Function'' -- some kind of Limit-preserving Function
+
+all Theories have a single Sort $X$ and one Binary Operation:
+\[
+  \cup : X \times X \rightarrow X
+\]
+takes a pair and returns the Non-deterministic Choice of one of them
+
+Plotkin Powertheory Axioms:
+\begin{enumerate}
+  \item \emph{Idempotency}: $x \cup x = x$
+  \item \emph{Commutativity}: $x \cup y = y \cup x$
+  \item \emph{Associativity}: $(x \cup y) \cup z = x \cup (y \cup z)$
+\end{enumerate}
+a Model of the Plotkin Powertheory is a Continuous Semilattice with a
+Carrier Domain for which the Operation is Continuous (not necessarily
+a Meet or Join Operation for the Order of the Domain); a Homomorphism
+of Continuous Semilattices is a Continuous Function between their
+Carriers that respects the Lattice Operator
+
+a \emph{Plotkin Powerdomain} is a Model (when it exists) $P(D)$ on a
+Domain $D$ is the Free Model of the Plotkin Powertheory over $D$,
+equipped with a Continuous Function $X \rightarrow P(D)$ such that for
+any other Continuous Semilattice $L$ over $D$, there is a unique
+Continuous Semilattice Homomorphism $P(D) \rightarrow L$ making the
+Diagram Commute:
+\[
+  X \rightarrow P(D) \rightarrow L \equiv X \rightarrow L
+\]
+%FIXME: the wikipedia article:
+% https://en.wikipedia.org/wiki/Power_domains#Power_domains_as_free_models
+% states that the diagram is ``evident'', although it doesn't
+% explicitly mention X -> L which appears to be the other ``apparent''
+% edge to the diagram
+
+Lower (Hoare) Powertheory adds to the Plotkin Powertheory the
+Inequality:
+\begin{itemize}
+  \item $x \leq x \cup y$
+\end{itemize}
+a Model of the Lower Powertheory is called an \emph{Inflationary
+  Semilattice} with the additional requirement that the Operator
+behaves ``somewhat like'' a Join for the Order %FIXME
+
+Upper (Smyth) Powertheory adds to the Plotkin Powertheory the
+Inequality:
+\begin{itemize}
+  \item $x \cup y \leq x$
+\end{itemize}
+a Model of the Upper Powertheory is called an \emph{Deflationary
+  Semilattice} with the additional requirement that the Operator
+behaves ``somewhat like'' a Meet for the Order %FIXME
+
+
+\textbf{Power Domains for Concurrency}
+
+\emph{Clinger Powerdomain} (\S\ref{sec:clinger_powerdomain}) -- Actor
+Model
+
+\emph{Timed-diagrams Powerdomain}
+(\S\ref{sec:timed_diagrams_powerdomain}) -- Actor Model
+
+
+
+\subsubsection{Clinger Powerdomain}\label{sec:clinger_powerdomain}
+
+Clinger81 \emph{Foundations of Actor Semantics}
+
+\fist Actor Model (\S\ref{sec:actor_model})
+
+
+
+\subsubsection{Timed Diagrams Powerdomain}
+\label{sec:timed_diagrams_powerdomain}
+
+Hewitt06 \emph{What is Commitment? Physical, Organizational, and
+  Social}
+
+\fist Timed Diagrams Model (\S\ref{sec:timed_diagram})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Way-below Relation}\label{sec:waybelow_relation}

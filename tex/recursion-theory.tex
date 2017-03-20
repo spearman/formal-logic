@@ -1632,6 +1632,10 @@ Pointclass of all \emph{Analytic Sets} (\S\ref{sec:analytic_set})
 \section{Hypercomputation}\label{sec:hypercomputation}
 % ====================================================================
 
+Unbounded Non-determinism (\S\ref{sec:unbounded_nondeterminism})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Oracle}\label{sec:oracle}
 % --------------------------------------------------------------------
@@ -1829,8 +1833,94 @@ the Trace Monoid $M(D)$ with Dependency Relation:
 
 
 % ====================================================================
+\section{Non-deterministic Computation}
+\label{sec:nondeterministic_computation}
+% ====================================================================
+
+Denotational Semantics: Power Domains (\S\ref{sec:power_domain})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Bounded Non-determinism}\label{sec:bounded_nondeterminism}
+% --------------------------------------------------------------------
+
+Programs containing only Guarded Commands as the only sources of
+Non-determinism (\emph{Choice Non-determinism}) have only Bounded
+Non-determinism (Dijkstra76, Plotkin76)
+
+\fist Non-deterministic Automata
+\S\ref{sec:nondeterminstic_turing_machine})
+
+\fist Process Calculi (\S\ref{sec:process_calculus})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Unbounded Non-determinism}
+\label{sec:unbounded_nondeterminism}
+% --------------------------------------------------------------------
+
+wiki:
+
+a property of Concurrency by which the amount of delay in Servicing a
+Request may become \emph{Unbounded} as a result of \emph{Arbitration}
+of Contention for Shared Resources, while still guaranteeing that the
+Request will \emph{eventually} be Serviced
+
+Back80 -- \emph{Semantics of Unbounded Nondeterminism}
+
+\fist Hypercomputation (\S\ref{sec:hypercomputation})
+
+\fist Actor Model (\S\ref{sec:actor_model}), Timed Diagrams Model
+(\S\ref{sec:timed_diagrams})
+
+Fairness
+
+wiki:
+
+Arbiter -- used to deal with the circumstance that Computer Clocks
+operate Asynchronously with Input from the Outside (e.g. Keyboard
+Input, Disk Access, Network Input, etc.), so it could take an
+Unbounded Time for a Message sent to a Computer to be Received and in
+the meantime the Computer could traverse an Unbounded number of States
+
+
+
+% ====================================================================
 \section{Concurrent Computation}\label{sec:concurrent_computation}
 % ====================================================================
+
+Denotational Semantics: Power Domains (\S\ref{sec:power_domain})
+
+\fist Process Calculi (\S\ref{sec:process_calculus}): Bounded
+Non-determinism (\S\ref{sec:bounded_nondeterminism}; \fist
+Non-deterministic Automata \S\ref{sec:nondeterminstic_turing_machine})
+
+\fist Actor Model (\S\ref{sec:actor_model}): Unbounded Non-determinism
+(\S\ref{sec:unbounded_nondeterminism}; \fist Hypercomputation
+\S\ref{sec:hypercomputation}))
+
+wiki:
+
+earliest Concurrent Programs: Interrupt Handlers %FIXME
+
+Concurrency Control (\S\ref{sec:concurrency_control}): Concurrency
+with Shared Memory; Isolation of Concurrent Transactions -- Mutual
+Exclusion: Semaphores (Dijkstra), Monitors (Hoare, Hansen) --
+Serializer Construct (Hewitt, Atkinson)
+
+
+
+% --------------------------------------------------------------------
+\subsection{Concurrency Control}\label{sec:concurrency_control}
+% --------------------------------------------------------------------
+
+Concurrency with Shared Memory; Isolation of Concurrent Transactions
+
+\emph{Concurrent Transaction}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Parallel Computation}\label{sec:parallel_computation}
@@ -1888,7 +1978,13 @@ differs from Process Calculi:
     Process Calculus is Algebraically motivated
 \end{itemize}
 
-Power Domain (\S\ref{sec:power_domain})
+Process Calculi: \emph{Bounded Non-determinism}
+(\S\ref{sec:bounded_nondeterminism}; \fist Non-deterministic Automata
+\S\ref{sec:nondeterminstic_turing_machine})
+
+Actor Model: \emph{Unbounded Non-determinism}
+(\S\ref{sec:unbounded_nondeterminism}; \fist Hypercomputation
+\S\ref{sec:hypercomputation})) Power Domain (\S\ref{sec:power_domain})
 
 Process Theory (???)
 
@@ -5125,15 +5221,26 @@ assumes an Asynchronous (i.e. Nonblocking) Send Operation
 
 \fist cf. Process Calculus (\S\ref{sec:process_calculus})
 
-Denotational Semantics (\S\ref{sec:denotational_semantics}) are given
-by Domain Theory (\S\ref{sec:domain_theory})
+Process Calculi (e.g. CSP): \emph{Bounded Non-determinism}
+(\S\ref{sec:bounded_nondeterminism}; \fist Non-deterministic Automata
+\S\ref{sec:nondeterminstic_turing_machine})
 
-Power Domain (\S\ref{sec:power_domain})
+Actor Model: \emph{Unbounded Non-determinism}
+(\S\ref{sec:unbounded_nondeterminism}; \fist Hypercomputation
+\S\ref{sec:hypercomputation})) Power Domain (\S\ref{sec:power_domain})
+
+Denotational Semantics (\S\ref{sec:denotational_semantics}) are given
+by Power Domains (\S\ref{sec:power_domain}) in Domain Theory
+(\S\ref{sec:domain_theory})
+
+Clinger Powerdomain (\S\ref{sec:clinger_powerdomain})
+
+Timed Diagrams Powerdomain (\S\ref{sec:timed_diagrams_powerdomain})
 
 Closed Systems (\S\ref{sec:closed_system}) -- \emph{Computational
   Representation Theorem} -- Consequence: a Finite Actor can
-Nondeterministically Respond with an Uncountable number of different
-Outputs %FIXME
+Nondeterministically Respond with an \emph{Uncountable} number of
+different Outputs %FIXME
 
 
 
@@ -5217,6 +5324,35 @@ in the Combined Ordering (Clinger81)
 
 \fist Rules out Zeno Machines (\S\ref{sec:zeno_machine})
 
+
+
+% --------------------------------------------------------------------
+\subsection{Clinger Model}\label{sec:clinger_model}
+% --------------------------------------------------------------------
+
+Clinger Powerdomain (\S\ref{sec:clinger_powerdomain})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Timed Diagrams Model}\label{sec:timed_diagrams}
+% --------------------------------------------------------------------
+
+Hewitt06 \emph{What is Commitment? Physical, Organizational, and
+  Social}
+
+Timed Diagrams Powerdomain (\S\ref{sec:timed_diagrams_powerdomain})
+
+Physically Motivated: Clinger construction did not inclue Time
+
+resulting Computations have the Property of $\omega$-completeness
+(Unbounded Non-dterminism \S\ref{sec:unbounded_nondeterminism}) which
+provides a Guarantee of Service %FIXME
+
+
+\emph{Concurrency Representation Theorem} %FIXME
+
+\url{https://en.wikipedia.org/wiki/Denotational_semantics_of_the_Actor_model#The_Timed_Diagrams_Model}
 
 
 \endgroup

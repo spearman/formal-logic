@@ -965,6 +965,20 @@ Identity
 
 \emph{Induction Recursion}
 
+a principle for mutually defining Types of the form:
+\[
+  A : \Type
+\]
+and:
+\[
+  B : A \rightarrow Type
+\]
+where $A$ is an Inductive Type and $B$ is defined by Recursion on $A$
+and the definition of $A$ may use $B$
+
+Universes (\S\ref{sec:type_universe}) defined Internally via
+Induction-recursion are (Strongly) Tarskian
+
 Dybjer-Setzer99
 
 
@@ -1984,7 +1998,7 @@ Proposition). For each Natural Number, either $even(x)$ is Inhabited
 % --------------------------------------------------------------------
 
 \emph{$\Sigma$-type} (or \emph{Dependent Sum Type} or \emph{Dependent
-  Pair Type})
+  Pair Type} or \emph{Records})
 
 Dependent Sum (\S\ref{sec:dependent_sum})
 
@@ -2010,9 +2024,9 @@ Analagous to Coproduct or Disjoint Union.
 % --------------------------------------------------------------------
 
 The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or
-\emph{Dependent Function Type}) is the Type of a Dependent Function.
-By Curry-Howard, $\Pi$-types model Implication and Universal
-Quantification.
+\emph{Dependent Function Type}) is the Type of a Dependent Function,
+i.e. a Dependent Function Space. By Curry-Howard, $\Pi$-types model
+Implication and Universal Quantification.
 
 Dependent Product (\S\ref{sec:dependent_product})
 
@@ -2077,7 +2091,7 @@ Type of (Small) Types
 Type Theory analogue of Inaccessible Cardinal
 (\S\ref{sec:inaccessible_cardinal})
 
-Reflection Principle (???)
+\fist cf. Unified Type System (\S\ref{sec:unified_type_system})
 
 $\class{U}_0$ is the Universe of all Small Types. Every Name
 (\S\ref{sec:name}) $a:\class{U}_0$ has an associated Type $El(a)$
@@ -2101,6 +2115,184 @@ with (Cumulative Property):
 
 \fist See $\class{U}-INTRO$ and $\class{U}-CUMUL$
 \S\ref{sec:homotopy_rules}.
+
+\asterism
+
+nCatlab -- \url{https://ncatlab.org/nlab/show/type+of+types} -- Type of
+Type
+
+$\Type$ -- \emph{Universe}; Type of Small Types: Terms of $\Type$ are
+(Small) Types
+
+$\Type$ is a \emph{Reflection} (\S\ref{sec:reflection_principle}) of
+the Type System in itself
+
+$\vdash A:\Type$ -- Judgement that $A$ is a Term of ``Type'' $\Type$,
+i.e. $A$ is a Small Type
+
+$x:X \vdash A(x):\Type$ -- $A$ is an ($X$-) Dependent Type
+
+$\Type$ in Homotopy Type Theory is assumed to Satisfy the Univalence
+Axiom
+
+by Girard's Paradox (\S\ref{sec:girards_paradox}) it is Inconsistent
+for $\Type : \Type$ (as in the original Martin-L\"of Type Theory);
+therefore modern Type Theories usually contain a \emph{Hierarchy} of
+Types:
+\[
+  \Type_0 : \Type_1, \Type_1 : \Type_2, \ldots
+\]
+
+``Russell'' Type Universe -- a Type whose Terms are Types; a Judgement
+$A \type$ can be formulated as a Deduction Rule of the Form:
+\[
+  \frac{A:U}{A \type}
+\]
+Russell formulation (approach taken by HoTT, Coq) is an informal
+version of the Tarski formulation
+
+``Tarski'' Type Universe -- a Type $U$ together with an
+\emph{Interpretation Operation} allowing Terms to serve as ``Codes''
+or \emph{Names} for ``actual'' Types; the Rule:
+\[
+  \frac{A:U}{El(A) \type}
+\]
+states that for each Term $A$ of the Type Universe $U$, there is an
+``actual'' Type $El(A)$
+
+Universes defined Internally via Induction-recursion
+(\S\ref{sec:induction_recursion}) are (Strongly) Tarskian
+
+
+\asterism
+
+\begingroup %palmgren98
+
+\newcommand{\sett}{\;\mathrm{set}}
+
+%FIXME can we replace ``set'' with type ???
+
+Palmgren98 -- \emph{On universes in type theory} -- Universe-forming
+Operator, Super Universe closed under Universe-forming Operator
+
+two roles of Type Universes (Martin-L\"of):
+\begin{itemize}
+  \item a collection of Types closed under certain Type Constructions
+  \item a Set of Constructively given Infinitary Fomulas
+\end{itemize}
+
+Universe Constructions give an Intuitionistic analogue of Large
+Cardinals
+
+\emph{Type Universe} -- Type of Types closed under certain Type
+Constructions
+
+Tarski Formulation:
+\[
+  U \type \quad\quad\quad \frac{a \in U}{T(a) \type}
+\]
+
+two conceptions of Universes in Martin-L\"of Type Theory:
+\begin{itemize}
+  \item Reflection of the Judgement forms $A \sett$ and $A = B$ into a
+    Hierarchy of Universes $(U_n,T_n)$, externally Indexed by $n =
+    1,2,3,\ldots$ -- whenever $A \sett$, then in some Universe $U_n$
+    there is a Code (Name) $a$ such that $T_n(a) = A$ and if $A = B$
+    with $T_n(a) = A$ and $T_n(b) = B$ then $a = b \in U_n$
+\end{itemize}
+
+(note: skipping over details in the following...) %FIXME
+
+
+\textbf{Universes as Full Reflections}
+
+Universe $U_1$ of Codes for all ``Basic'' Sets:
+\[
+  U_1 \sett \quad\quad\quad \frac{x \in U_1}{T_1(x) \sett}
+\]
+with:
+\[
+  n_0^1,n_1^1,n^1 \in U_1 \quad\quad T_1(n_0^1) = \varnothing
+    \quad\quad T_1(n_1^1) = \{*\} \quad\quad T_1(n^1) = \nats
+\]
+closed under $\Pi$-formation, $\Sigma$-formation, $I$, $+$ and other
+Set formers
+
+the next Universe $(U_2,T_2)$ has new Codes:
+\[
+  n_0^2,n_1^2,n^2 \in U_1 \quad\quad T_1(n_0^2) = \varnothing
+    \quad\quad T_1(n_1^2) = \{*\} \quad\quad T_1(n^2) = \nats
+\]
+and to account for the Sets $U_1$, $T_1(x)$ from the previous stage:
+\[
+  u_1^2 \in U_2 \quad\quad T_2(u^2_1)=U_1 \quad\quad
+    \frac{x \in U_1}{t_1^2(x) \in U_2}
+\]
+where $t_1^2$ is a Homomorphism with respect to Set (Type)
+Constructors
+
+(equalities between codes) %FIXME
+
+any Proof in the completed Hierarchy can use only Finitely many
+Universes (Proofs are Finite, and Universes are externally Indexed):
+therefore the Reflection Principle (\S\ref{sec:reflection_principle})
+holds for both Sets and Set Equalities
+
+the Transfinite iteration:
+\[
+  u_1^\omega, u_2^\omega, u_3^\omega, \ldots \in U_\omega
+\]
+a Universe with Infinitely many Introduction Rules-- it is impossible
+to formulate an Elimination Rule without having some kind of
+\emph{internal} Indexing of the Universes
+
+
+\textbf{Universes as Uniform Constructions}
+
+not Reflecting Set Equalities allows the ``injection'' of Codes for
+Sets from an earlier Universe into the next
+
+Judgement form $A \sett$ still Reflected
+
+for an already constructed $(U_n,T_n)$, then:
+\[
+  U_{n+1} \sett \quad\quad\quad \frac{x \in U_{n+1}}{T_{n+1}(x) \sett}
+\] \[
+  u_n \in U_{n+1} \quad\quad\quad T_{n+1}(u_n) = U_n
+\] \[
+  \frac{x \in U_n}{t_n(x) \in U_{n+1}} \quad\quad\quad
+    \frac{x \in U_n}{T_{n+1}(t_n(x)) = T_n(x)}
+\]
+so that $t_n(a)$ is now considered a \emph{Canonical Element} in
+$U_{n+1}$ and is regarded as a \emph{copy} of $a$ in $U_{n+1}$; the
+code for $U_j, j < n+1$ in $U_{n+1}$ is $t_n(t_{n-1}(\ldots
+t_{j+1}(u_j) \ldots))$
+
+the construction of $(U_{n+1},T_{n+1})$ depends \emph{only} on the
+Family $(U_n,T_n)$ -- \emph{Universe Formation Operation}
+
+
+\textbf{Super Universes}
+
+Universe closed under Universe Formation Operator
+
+Universe Formation Operator acts on \emph{Families of Sets}, i.e. any
+$(A, (x)B)$ -- FIXME: this is a Pi-type term (the Sets indexed by A)
+???
+
+%FIXME
+
+Impredicative Theories
+
+Classical Universes within Type Theory-- extended Type Theory with a
+Universe of Propositions for which Classical Logic holds
+
+FIXME: this sounds somewhat like a multi-sorted type theory (cf. Pure
+Type System, or ATS)
+
+
+
+\begingroup %palmgren98
 
 
 
@@ -9380,6 +9572,11 @@ typing, cf. Church-style)
 
 uses approach to assigning Dynamic (Operational) Semantics to terms
 via \emph{Evaluation Contexts}
+
+every \emph{View} (Linear Proof) in ATS defines a kind of Writer
+Comonad (Env-comonad \S\ref{sec:comonad}) -- August Alm
+\emph{(Co)monads in ATS}
+\url{https://groups.google.com/d/msg/ats-lang-users/hvgOGcuBGrc/Mc9WAkblEgAJ}
 
 
 \textbf{$\lambda_{dyn}$}

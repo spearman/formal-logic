@@ -336,6 +336,13 @@ Database Schema (\S\ref{sec:database_schema}): Tables and Foreign Keys
 $\cat{Set}$ -- Locally Cartesian Closed
 (\S\ref{sec:locally_cartesian_closed})
 
+Higher Categories:
+
+%FIXME some of the above listed may in fact be ``higher'' categories
+
+\item [$\infty$Grpd] the $(\infty,1)$-category of $\infty$-groupoids
+  (\S\ref{sec:infinity_groupoid}), i.e. of $(\infty,0)-categories$
+
 
 
 % --------------------------------------------------------------------
@@ -4471,6 +4478,26 @@ $\mathsf{bind} : T(X) \rightarrow (X \rightarrow T(Y)) \rightarrow
 T(Y)$ (Comonad: $\mathsf{cobind} : T(X) \rightarrow (T(X) \rightarrow
 Y) \rightarrow T(Y)$)
 
+
+\asterism
+
+
+August Alm -- (Co)monads in ATS
+\url{https://groups.google.com/d/msg/ats-lang-users/hvgOGcuBGrc/Mc9WAkblEgAJ}
+
+$Return : X \rightarrow T(X)$ -- (Comonad $Extract : T(X) \rightarrow
+X$)
+
+$Bind : ((X \rightarrow T(Y)), T(X)) \rightarrow T(Y)$ -- (Comonad
+$Extend : ((T(X) \rightarrow Y), T(X)) \rightarrow T(Y)$
+
+$Join : T(T(X) \rightarrow T(X)$ -- (Comonad $Duplicate : T(A)
+\rightarrow T(T(A))$)
+
+
+\asterism
+
+
 An alternative to Monads for Computational Effects
 (\S\ref{sec:computational_effect}) is Algebraic Effects
 (\S\ref{sec:algebraic_effect}), more often seen in Strict Languages
@@ -5125,11 +5152,33 @@ Adjoint Modality (\S\ref{sec:adjoint_modality})
 \section{Comonad}\label{sec:comonad}
 % ====================================================================
 
+\asterism
+
+
+August Alm -- (Co)monads in ATS
+\url{https://groups.google.com/d/msg/ats-lang-users/hvgOGcuBGrc/Mc9WAkblEgAJ}
+
+Monads give classes of Functions that in some way ``enlarge'' the
+possible Function Outputs (Effects)
+
+Comonads give classes of Functions that in some way ``enlarge'' the
+possible Function Inputs (Context-dependencies)
+
 $Extract : T(X) \rightarrow X$ -- (Monad $Return : X \rightarrow
 T(X)$)
 
-$Duplicate : T(A) \rightarrow T(T(A))$ -- (Monad $Join : T(T(X)
-\rightarrow T(X)$)
+$Extend : ((T(X) \rightarrow Y), T(X)) \rightarrow T(Y)$ -- (Monad
+$Bind : ((X \rightarrow T(Y)), T(X)) \rightarrow T(Y)$)
+
+$Duplicate : T(A) \rightarrow T(T(A))$ -- (Monad
+$Join : T(T(X) \rightarrow T(X)$)
+
+in ATS (\S\ref{sec:ats}) every View defines a kind of Writer Comonad
+(Env-comonad)
+
+
+\asterism
+
 
 (ICFP video):
 
@@ -5369,6 +5418,42 @@ Any Category with Finite Products is trivially a Freyd Category
 % --------------------------------------------------------------------
 \subsection{Biarrow}\label{sec:biarrow}
 % --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Universe}\label{sec:category_universe}
+% ====================================================================
+
+nCatlab: \url{https://ncatlab.org/nlab/show/universe}
+
+using Higher Categories instead of ``mere'' Categories means
+``starting'' with $\infty\cat{Grpd}$ (the $(\infty,1)-category$ of
+$\infty$-groupoids, i.e. of $(\infty,0)$-categories) instead of
+$\cat{Set}$
+
+\fist Set Universe (\S\ref{sec:set_universe})
+
+%FIXME ``mathematical universe'' ??? appendix ???
+
+
+
+% --------------------------------------------------------------------
+\subsection{Internalization}\label{sec:internalization}
+% --------------------------------------------------------------------
+
+nCatlab: \url{https://ncatlab.org/nlab/show/universe}
+
+any \emph{specific} Category is only a single \emph{Model}
+(\S\ref{sec:model}), while a \emph{Class} of Categories is a
+\emph{Theory} (\S\ref{sec:formal_theory}), specifically a
+\emph{Doctrine} (\S\ref{sec:doctrine}) or 2-theory (???)
+
+ordinary Theories are Objects of some Doctrine which specifies the
+structure on Categories in which Models of a Theory can be
+Internalized
+
+\fist cf. Internal Categories (\S\ref{sec:internal_category})
 
 
 
@@ -6580,6 +6665,12 @@ Non-symmetric Compact Closed Category
 Category of Monotone Maps (\S\ref{sec:monotonic_function}) of Finite
 Ordinals (\S\ref{sec:finite_ordinal})
 
+\fist Globe Category (\S\ref{sec:globe_category})
+
+\fist Cube Category (\S\ref{sec:cube_category})
+
+\fist Cell Category (\S\ref{sec:cell_category})
+
 
 
 \paragraph{Simplicial Set}\label{sec:simplicial_set}\hfill
@@ -6607,6 +6698,9 @@ Simplicial Set to its Realization as a Compactly-generated
 \paragraph{Kan Complex}\label{sec:kan_complex}\hfill
 
 Kan Fibration (\S\ref{sec:kan_fibration}) over a Point
+
+abstraction of the Combinatorial structure found in the Singular
+Simplicial Complex of a Topological Space %FIXME
 
 $\infty$-groupoid (\S\ref{sec:infinity_groupoid})
 
@@ -6715,6 +6809,8 @@ Pullbacks.
 
 Pullbacks in an Internal Category in a Monoidal Category are replaced
 by Cotensor Products
+
+\fist cf. Internalization (\S\ref{sec:internalization})
 
 
 
@@ -6964,9 +7060,34 @@ Multiple shapes possible for each Dimension $n$:
 
 Disk (Globes and Simplices as special cases)
 
+\fist Simplex Category (\S\ref{sec:simplex_category})
+$\infty$-groupoids (\S\ref{sec:infinity_groupoid})
+
+\fist Globe Category (\S\ref{sec:globe_category}) --
+$\omega$-groupoids (\S\ref{sec:omega_groupoid})
+
+\fist Cube Category (\S\ref{sec:cube_category})
+
+\fist Cell Category (\S\ref{sec:cell_category})
+
 
 
 \subsubsection{$n$-cube}\label{sec:cellular_n_cube}
+
+\subsubsection{Globe Category}\label{sec:globe_category}
+
+%FIXME possibly move section
+
+$\omega$-groupoids (\S\ref{sec:omega_groupoid})
+
+\fist cf. Simplex Categories (\S\ref{sec:simplex_category}) for
+$\infty$-groupoids (\S\ref{sec:infinity_groupoid})
+
+
+
+\subsubsection{Cube Category}\label{sec:cube_category}
+
+\subsubsection{Cell Category}\label{sec:cell_category}
 
 
 
@@ -7031,6 +7152,12 @@ Examples:
 
 $2$-category regarded as a System of Theories
 (\S\ref{sec:formal_theory}).
+
+Internalization (\S\ref{sec:internalization}): a specific Category is
+only one \emph{Model} (\S\ref{sec:model}) while a \emph{Class} of
+Categories is a Theory (specifically, a Doctrine or 2-theory) --
+ordinary Theories are Objects of some Doctrine which specifies the
+structure on Categories in which Models of a Theory can be Internalized
 
 
 
@@ -7259,10 +7386,20 @@ The \emph{Fundamental $\infty$-groupoid} for a Topological Space $X$:
   \prod_\infty(X)
 \]
 
-\emph{Weak $\omega$-groupoid}
+Simplex Category (\S\ref{sec:simplex_category})
+
+\fist $\infty$-category (\S\ref{sec:infinity_category})
+
+\emph{Weak $\omega$-groupoid} (\S\ref{sec:omega_groupoid})
+
+\fist cf. Globe Categories (\S\ref{sec:globe_category}) for
+$\omega$-groupoids
 
 A Set is a $0$-truncated $\infty$-groupoid %FIXME
 
+$\infty$\cat{Grpd} -- the $(\infty,1)$-category of $\infty$-groupoids,
+i.e. of $(\infty,0)-categories$-- the archetypical
+$(\infty,1)$-topos %FIXME
 
 Shulman17 -- \emph{Homotopy type theory: the logic of space} --
 \begin{quote}
@@ -7285,6 +7422,18 @@ Homotopy Cardinality:
 \[
   |X| = \sum_{[x] \in \pi_0(X)} \frac{1}{|Aut(x)|}
 \] %FIXME
+
+
+
+\subsubsection{$\omega$-groupoid}\label{sec:omega_groupoid}
+
+Globe Category (\S\ref{sec:globe_category})
+
+$\infty$-groupoids (\S\ref{sec:infinity_groupoid}) -- Weak
+$\omega$-groupoids
+
+\fist cf. Simplex Categories (\S\ref{sec:simplex_category}) for
+$\infty$-groupoids
 
 
 
@@ -7455,6 +7604,8 @@ Cartesian Closed Bicategory (Computation) -- Baez14
 $\omega$-category
 
 Opetopic Type Theory (\S\ref{sec:opetopic_typetheory})
+
+\fist $\infty$-groupoid (\S\ref{sec:infinity_groupoid})
 
 
 
