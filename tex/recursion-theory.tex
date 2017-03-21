@@ -1886,6 +1886,11 @@ Unbounded Time for a Message sent to a Computer to be Received and in
 the meantime the Computer could traverse an Unbounded number of States
 
 
+\url{https://channel9.msdn.com/Shows/Going+Deep/Hewitt-Meijer-and-Szyperski-The-Actor-Model-everything-you-wanted-to-know-but-were-afraid-to-ask}:
+
+\emph{Indetermism} (Unbounded Non-determinism)
+
+
 
 % ====================================================================
 \section{Concurrent Computation}\label{sec:concurrent_computation}
@@ -1977,6 +1982,8 @@ differs from Process Calculi:
   \item the Actor Model can be said to be Physically motivated while
     Process Calculus is Algebraically motivated
 \end{itemize}
+
+\fist Behavioral Types (\S\ref{sec:behavioral_type})
 
 Process Calculi: \emph{Bounded Non-determinism}
 (\S\ref{sec:bounded_nondeterminism}; \fist Non-deterministic Automata
@@ -5229,6 +5236,9 @@ Actor Model: \emph{Unbounded Non-determinism}
 (\S\ref{sec:unbounded_nondeterminism}; \fist Hypercomputation
 \S\ref{sec:hypercomputation})) Power Domain (\S\ref{sec:power_domain})
 
+Crafa12 -- Behavioral Types (\S\ref{sec:behavioral_type}): Actor
+Calculus (\S\ref{sec:actor_calculus})
+
 Denotational Semantics (\S\ref{sec:denotational_semantics}) are given
 by Power Domains (\S\ref{sec:power_domain}) in Domain Theory
 (\S\ref{sec:domain_theory})
@@ -5241,6 +5251,130 @@ Closed Systems (\S\ref{sec:closed_system}) -- \emph{Computational
   Representation Theorem} -- Consequence: a Finite Actor can
 Nondeterministically Respond with an \emph{Uncountable} number of
 different Outputs %FIXME
+
+<https://channel9.msdn.com/Shows/Going+Deep/Hewitt-Meijer-and-Szyperski-The-Actor-Model-everything-you-wanted-to-know-but-were-afraid-to-ask>:
+
+\emph{Actors}:
+
+\begin{itemize}
+\item Processing
+\item Storage
+\item Communication
+\end{itemize}
+
+no "Primitive" Channels; only \emph{Addresses}
+
+\emph{Indeterminacy} -- Unbounded Non-determinism
+(\S\ref{sec:unbounded_nondeterminism})
+
+\emph{Addresses} -- Many-to-many Relation between Addresses and
+Actors: one Address may be for many Actors, and one Actor may have
+many Addresses; cf. \emph{Capabilities} %FIXME
+
+\emph{Axioms} %FIXME
+
+when an Actor receives a Message it can either:
+\begin{itemize}
+\item Create more Actors
+\item Send Messages to Actor Addresses
+\item Designate its Behavior for the next Message (\emph{State Update})
+\end{itemize}
+
+
+\emph{Futures}
+
+\emph{Inconsistency}
+
+
+\asterism
+
+
+Multiparty Session Types (\S\ref{sec:multiparty_session}):
+
+Neykova-Yoshida16 -- \emph{Multiparty Session Actors}
+
+Fowler16 -- \emph{An Erlang Implementation of Multiparty Session
+  Actors}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Actor Calculus}\label{sec:actor_calculus}
+% --------------------------------------------------------------------
+
+\begingroup
+
+\newcommand{\react}{\mathsf{react}}
+\newcommand{\val}{\mathsf{val\;}}
+\newcommand{\actor}{\mathsf{actor}}
+
+Crafa12 -- \emph{Behavioral Types for Actor Systems}
+
+Behavioral Types (\S\ref{sec:behavioral_type})
+
+Scala Actors API -- Actors can:
+\begin{itemize}
+  \item Dynamically create new Actors
+  \item Send Asynchronous Messages, including Messages with Actor
+    Names as Parameters
+  \item Process Received Messages (Pattern Matching)
+\end{itemize}
+
+Safety Property -- Determinism of Actor Communication: Well-typed and
+\emph{Balanced} Actor Systems are Deadlock-free (in the case of Finite
+Computations) and guarantees Eventual Handling of Messages and no
+Actor will indefinitely wait for an Expected message
+
+AC -- Actor Calculus
+
+Behavioral Typing:
+
+Actor Types -- encode the intended Communication Protocol
+
+Type-checking Statically guarantees that Runtime Computation correctly
+implements the Protocol
+
+Session Types (\S\ref{sec:session_type}) describe the ``Flow'' of
+Communications within a single Conversation Session
+
+a Behavioral Actor Type describes the Actor's point of view as an
+entity that might Concurrently participate in different, interleaved
+Conversations with different Participants
+
+$a,b,c,\ldots$ -- ranging over a Countable Set of Actor Names
+
+$x,y,z,\ldots$ -- ranging over a Countable Set of Variables
+
+$u$ -- Identifiers ranging over Names and Variables
+
+$m$ -- ranges over a Set of Message Labels
+
+Expressions (from Scala Actors API):
+\[
+  e ::=\ 0 \ |\ u!m(\tilde{u});e
+    \ |\ \react \{ m_i(\tilde{x}_i) \Rightarrow e_i \}
+    \ |\ \val a = \actor \{ e \};e
+\]
+
+$u_1 ! m(\tilde{u}_2) ; e$ -- Send to Actor $u_1$ the Message $m$ with
+Tuple of Parameters $\tilde{u}_2$ and then Continue as $e$;
+Sending a Message Asynchronously adds the Message $m(\tilde{u}_2)$ to
+the Mailbox of associated Actor $u_1$
+
+$\react$ -- Message Handling: Suspends an Actor until it Receives a
+Message $m_j \in \{ m_i \}_{i \in I}$ and when a matching Message is
+found in the Actor Mailbox then Execution is Resumed and the
+corresponding Continuation is activated
+
+$a = \actor\{e_1\};e_2$ -- Create a new Actor with Name $a$ and Body
+(Expression) $e_1$ and then Continue as $e_2$ where $a$ is in Scope of
+both the new Actor's Expression $e_1$ and the Continuation $e_2$
+
+\emph{Program} -- a top-level Sequence of Actor Definitions where
+Input and Output Actions can only occur inside an Actor Body
+(Expression)
+
+\endgroup
 
 
 
