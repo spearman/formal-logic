@@ -2743,6 +2743,8 @@ Object Paradigm ($\pi$-calculus): only Access to an Agent can be
 Transmitted and Bound (Sole Access of one Agent to another only as a
 special case)
 
+\fist Actor Calculus (\S\ref{sec:actor_caclulus}) -- Crafa12
+
 
 \asterism
 
@@ -5216,6 +5218,26 @@ assumes an Asynchronous (i.e. Nonblocking) Send Operation
 
 
 
+% --------------------------------------------------------------------
+\subsection{Conversation Calculus}\label{sec:conversation_calculus}
+% --------------------------------------------------------------------
+
+Vieira-Ciares-Seco08 -- \emph{The Conversation Calculus}
+
+designed to model Service-oriented Computation
+
+\fist Conversation Types (\S\ref{sec:conversation_type})
+
+\fist cf. Actor Calculus (AC) \S\ref{sec:actor_calculus}): compared to
+Session Types (\S\ref{sec:session_type}) which describe the flow of
+Communications within a single Conversaion Session, CC and AC take the
+point of view of an entity that Concurrently participates in different
+interleaved Conversations with different Parties
+
+Named entities are \emph{Conversation Contexts}
+
+
+
 % ====================================================================
 \section{Actor Model Theory}\label{sec:actor_model}
 % ====================================================================
@@ -5235,6 +5257,9 @@ Process Calculi (e.g. CSP): \emph{Bounded Non-determinism}
 Actor Model: \emph{Unbounded Non-determinism}
 (\S\ref{sec:unbounded_nondeterminism}; \fist Hypercomputation
 \S\ref{sec:hypercomputation})) Power Domain (\S\ref{sec:power_domain})
+
+Agha-Thati04 -- Actor Model encoded as a Typed variant of
+$\pi$-calculus
 
 Crafa12 -- Behavioral Types (\S\ref{sec:behavioral_type}): Actor
 Calculus (\S\ref{sec:actor_calculus})
@@ -5314,7 +5339,8 @@ Behavioral Types (\S\ref{sec:behavioral_type})
 
 Scala Actors API -- Actors can:
 \begin{itemize}
-  \item Dynamically create new Actors
+  \item Dynamically create new Actors (cf. Scope Extrusion in
+    $\pi$-calculus ???)
   \item Send Asynchronous Messages, including Messages with Actor
     Names as Parameters
   \item Process Received Messages (Pattern Matching)
@@ -5339,7 +5365,9 @@ Communications within a single Conversation Session
 
 a Behavioral Actor Type describes the Actor's point of view as an
 entity that might Concurrently participate in different, interleaved
-Conversations with different Participants
+Conversations with different Participants \fist cf. Conversation
+Calculus (CC) \S\ref{sec:conversation_calculus}) -- in CC the Named
+entities are \emph{Conversation Contexts}
 
 $a,b,c,\ldots$ -- ranging over a Countable Set of Actor Names
 
@@ -5352,7 +5380,7 @@ $m$ -- ranges over a Set of Message Labels
 Expressions (from Scala Actors API):
 \[
   e ::=\ 0 \ |\ u!m(\tilde{u});e
-    \ |\ \react \{ m_i(\tilde{x}_i) \Rightarrow e_i \}
+    \ |\ \react \{ m_i(\tilde{x}_i) \Rightarrow e_i \}_{i \in I}
     \ |\ \val a = \actor \{ e \};e
 \]
 
@@ -5361,18 +5389,98 @@ Tuple of Parameters $\tilde{u}_2$ and then Continue as $e$;
 Sending a Message Asynchronously adds the Message $m(\tilde{u}_2)$ to
 the Mailbox of associated Actor $u_1$
 
-$\react$ -- Message Handling: Suspends an Actor until it Receives a
-Message $m_j \in \{ m_i \}_{i \in I}$ and when a matching Message is
-found in the Actor Mailbox then Execution is Resumed and the
-corresponding Continuation is activated
+$\react\{ m_i(\tilde{x}_i) \Rightarrow e_i \}_{i \in I}$ -- Message
+Handling: Suspends an Actor until it Receives a Message $m_j \in \{
+m_i \}_{i \in I}$ and when a matching Message is found in the Actor
+Mailbox then Execution is Resumed and the corresponding Continuation
+is activated
 
-$a = \actor\{e_1\};e_2$ -- Create a new Actor with Name $a$ and Body
-(Expression) $e_1$ and then Continue as $e_2$ where $a$ is in Scope of
-both the new Actor's Expression $e_1$ and the Continuation $e_2$
+$\val a = \actor\{e_1\};e_2$ -- Create a new Actor with Name $a$ and
+Body (Expression) $e_1$ and then Continue as $e_2$ where $a$ is in
+Scope of both the new Actor's Expression $e_1$ and the Continuation
+$e_2$
 
-\emph{Program} -- a top-level Sequence of Actor Definitions where
+\emph{Program} -- a Top-level Sequence of Actor Definitions where
 Input and Output Actions can only occur inside an Actor Body
-(Expression)
+(Expression); ``this is not restrictive because it would be sufficient
+to assume an implicit Main Actor containing the Top-level Sequence of
+Expressions'' %FIXME
+-- new Actors can still be Dynamically Spawned by other Actors anytime
+during the Computation
+
+the \emph{Execution} of a Program \emph{Spawns} a collection of
+Concurrent Actors that interact by Message Passing, therefore
+represented at Runtime by \emph{Configurations}:
+\[
+  F ::=\ 0 \ |\ [a \mapsto M] a \{e\} \ |\ F|F \ |\ (\nu a)F \ |\ e
+\]
+
+$[a \mapsto M]a\{e\}$ -- Runtime representation of an \emph{Active
+  Actor} where $e$ is the Residual Body of the Actor and $[a \mapsto
+  M]$ is its associated \emph{Mailbox}
+
+$(\nu a)F$ -- a Configuration where $a$ is a \emph{Private Actor Name}
+
+each Actor is Single-threaded and a Configuration is a Parallel
+Composition of a number of \emph{Active Actors} $a$ and an Expression
+$e$ containing the ``Residual'' Sequence of Top-level Actor
+Definitions
+
+\emph{Mailboxes} are Lists of Received Messages of the form:
+\[
+  [a \mapsto m_1(\tilde{b}_1) \cdot\ldots\cdot m_k(\tilde{b}_k)]
+\]
+with Parameters of \emph{Actor Names} -- according to Scala Semantics,
+Message Parameters are Called-by-value and are implemented as
+Parameters of an Actor Object's Method Invocation %FIXME
+
+Def. \emph{Free Names} -- Formal Parameters of Input Expressions are
+Bound Variables; Actor Definitions act as Name Binders
+
+Def. \emph{Well-formed Configurations} -- (\emph{Barendregt's
+  Convention}): any Bound Name and Variable is assumed to be distinct,
+and in any Input Branching $\react\{m_i(x_i) \Rightarrow e_i\}_{i \in
+  I}$ the Labels $m_i$ are pairwise distinct.
+
+\emph{Operational Semantics} (mostly directly from $\pi$-calculus
+\S\ref{sec:pi_calculus}):
+\begin{itemize}
+  \item (Par)
+  \item (Res)
+  \item (Ended) -- a Terminated Actor $a$ with no pending Messages in
+    its Mailbox can be Garbage Collected
+  \item (Struct)
+  \item (TopSpawn) -- Spawn a new Actor from the Top-level Main
+    Thread; Configuration is extended with a new empty Mailbox and an
+    additional Thread running the Body of the new Actor
+  \item (Spawn) -- Spawn a new Actor from another Actor; Configuration
+    is extended with a new empty Mailbox and an additional Thread
+    running the Body of the new Actor
+  \item (Send) -- an Output Expression adds a Message to the Mailbox
+    of the target Actor
+  \item (Receive) -- an Input Expression scans the Mailbox for a
+    matching Message
+\end{itemize}
+%FIXME
+
+Ordering of Outputs is not guaranteed to be preserved in the Ordering
+of Inputs, unlike Asynchronous Session Types with Bufferred Channels
+(Coppo-DezaniCiancaglini-Yoshida07, Gay-Vasconcelos10)
+
+\emph{Private Sub-actors} (cf. \emph{Private Sessions}) %FIXME
+
+(examples) %FIXME
+
+Actors may interact with Restricted Actors without knowing it; unlike
+Multiparty Session Types (\S\ref{sec:multiparty_session}) where
+\emph{each interacting Party} is Identified by its \emph{Endpoint} of
+the Session Channel
+
+
+\textbf{Behavioral Types} (\S\ref{sec:behavioral_type})
+
+\emph{Preventing Deadlocks}
+
 
 \endgroup
 

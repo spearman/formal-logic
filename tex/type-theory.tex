@@ -1717,6 +1717,13 @@ Session Types as Effects
 
 \fist Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
 
+\begingroup
+
+\renewcommand{\End}{\mathsf{end}}
+\newcommand{\actors}{\mathsf{actors}}
+\newcommand{\balanced}{\mathsf{balanced}}
+\newcommand{\fullmrk}{\mathsf{fullmrk}}
+
 Crafa12 -- \emph{Behavioural Types for Actor Systems}
 
 Actor Calculus (\S\ref{sec:actor_calculus})
@@ -1726,7 +1733,8 @@ Scala Actors API -- Actors can:
   \item Send Asynchronous Messages, including Messages with Actor
     Names as Parameters
   \item Process Received Messages (Pattern Matching)
-  \item Dynamically create new Actors
+  \item Dynamically create new Actors (cf. Scope Extrusion in
+    $\pi$-calculus ???)
 \end{itemize}
 
 Safety Property -- Determinism of Actor Communication: Well-typed and
@@ -1734,7 +1742,7 @@ Safety Property -- Determinism of Actor Communication: Well-typed and
 Computation) and guarantees Eventual Handling of Messages and no Actor
 will indefinitely wait for an Expected message
 
-AC -- Actor Calculus
+AC -- Actor Calculus (\S\ref{sec:actor_calculus})
 
 Actor Types -- encode the intended Communication Protocol
 
@@ -1746,7 +1754,279 @@ Conversation Session
 
 a Behavioral Actor Type describes the Actor's point of view as an
 entity that might Concurrently participate in different, interleaved
-Conversations with different Participants
+Conversations with different Participants (cf. Conversation Calculus
+\S\ref{sec:conversation_calculus})
+
+Behavioral Types for Actor Calculus:
+\begin{flalign*}
+  \quad T ::=&\ [S] & \\
+  \quad S ::=&\ \End \ |\ !m(\tilde{T}).S
+          \ |\ \&_{i \in I} \{ ?m_i(\tilde{T}_i).S_i \} & \\
+          \ |&\ \&^\bullet_{i \in I}
+            \{^\bullet ?m(\tilde{T}).S, ?m_i(\tilde{T}_i).S_i \}
+          \ \text{with}\ \forall i \in I, \mathsf{NoMark}(S_i) &
+\end{flalign*}
+Types $T$ are Finite Sequences of Input and output Actions $S$
+
+\fist unlike Session Types (\S\ref{sec:session_type}), \emph{Output
+  Selection} is not considered -- the aim of Behavioral Types is not
+to provide a Calculus for \emph{Protocol Specification}, but to
+provide a Type-based technique to Statically Verify the \emph{Protocol
+  Conformance} of Actors -- an extension for Output Selection could be
+made $\oplus_{i \in I}\{ !m_i(\tilde{T}_i).S_i \}$ along the same
+lines as Input Branches
+
+\emph{Linear Type} assumptions: guarantees each Input is eventually
+matched by exactly one Output in the System -- denoted by
+\emph{Markings}
+
+$!m(\tilde{T})$ -- the Type of an Output Expression that Sends the
+Message $m$ with Parameter Tuple of Type $\tilde{T}$
+
+$\&_{i \in I}\{ ?m_i(\tilde{T}_i).S_i \}$ -- type of the Input Action
+that offers the Choice of Receiving one of the Message $m_i$ and
+Continuing with the Sequence $S_i$
+
+$\&^\bullet_{i \in I} \{^\bullet ?m (\tilde{T}).S,
+?m_i(\tilde{T}_i).S_i \}$ -- \emph{Marked Action}: specifies an Input
+that is ``Consumed'' by one Output Expression where
+$\mathsf{NoMark}(S)$ means $S$ does not contain any Marking %FIXME
+
+Parallel Threads must assume the same Type Assumptions but with
+\emph{Disjoint Markings}
+
+Def. \emph{Merge-mark} -- $\uplus$: Function used to Linearly Compose
+Type Assumptions %FIXME
+
+$\Gamma$ -- \emph{Type Environment}: Partial Function assigning Types
+to Names and Variables
+
+$\Gamma_1 \uplus \Gamma_2$ -- Type Environment obtained by Merging the
+Markings of two Environments $\Gamma_1$ and $\Gamma_2$ such that
+$Dom(\Gamma_1) = Dom(\Gamma_2)$:
+\[
+  \Gamma_1 \uplus \Gamma_2 =
+    \{ u:\Gamma_1(u) \uplus \Gamma_2(u)
+    \ |\ u \in Dom(\Gamma_1) = Dom(\Gamma_2) \}
+\]
+
+$\Gamma;a:T$ -- \emph{Environment Update}:
+\[
+  \Gamma \backslash \{a:\Gamma(a)\} \cup \{a:T\}
+\]
+
+Def. \emph{Escape Environment} $\Delta$ is a choice between
+alternative Type Environments:
+\[
+  \Delta ::=\ \&_{i \in I}\Gamma_i \ |\ \&_{i \in I}\Delta_i
+\]
+where $Dom(\Gamma_i) \cap Dom(\Gamma_j) = \varnothing$ and
+$Dom(\Delta_i) \cap Dom(\Delta_j) = \varnothing$ for $i,j \in I$
+
+Escape Environment Extension:
+\[
+  (\&_{i \in I}\Delta_i), u:T \overset{\triangle}{=}
+    \&_{i \in I}(\Delta_i, u:T)
+\]
+and:
+\[
+  (\&_{j \in J}\Delta_j), (\&_{i \in I}\Delta_i) \overset{\triangle}{=}
+    \&_{j \in J}\&_{i \in I}(\Delta_j, \Delta_i)
+\]
+
+\emph{Typing Judgements}:
+\[
+  \Gamma \vdash F \rhd \Delta
+\]
+for $Dom(\Gamma) \cap Dom(\Delta) = \varnothing$, $fn(F) \subseteq
+Dom(\Gamma)$ and $bn(F) \subseteq Dom(\Delta)$, where Environment
+$\Gamma$ collects the Type Assumptions of the Free Names and Variables
+of $F$ and Escape Environment $\Delta$ collects the Type Assumptions
+of the Bound Names and Bound Variables of $F$ -- the Actors in $F$
+execute the Sequence of Actions described by their Types and the
+Marked Input Actions in $\Gamma$ and $\Delta$ are exactly those that
+are consumed by the Actors in $F$
+
+$\Gamma \vdash \diamond$ -- Judgement that $\Gamma$ is Well-formed
+
+$\Gamma \vdash a:T$ -- Judgement that Actor $a$ has Type $T$ in
+$\Gamma$
+
+$\Gamma \vdash [a \mapsto M]$ -- Judgement that the Mailbox $M$ only
+contains Messages that are Well-typed according to the Type that
+$\Gamma$ assigns to $a$
+
+$\Gamma \vdash_a e \rhd \Delta$ -- Judgement that $e$ is Well-typed as
+the Body of Actor $a$
+
+\emph{Actor Typing Rules}:
+\begin{itemize}
+  \item (TypeIdentif)
+  \item (CtxEmpty)
+  \item (CtxIdentif)
+  \item (TypeSpawn) -- Actor $a$ Spawns a new Actor $b$
+  \item (TypeSend) -- Actor $a$ Sends the Message $m(u')$ to the Actor
+    $u$; the Behavioral Type for an Actor changes (decreases) as long
+    as the Actor advances in its Computation %FIXME
+  \item (TypeReceive) -- to Type an Input Expression, (TypeReceive)
+    requires the Type of $a$ to indicate that the next Action is a
+    Non-marked matching Input Action; the Names and the Types of the
+    formal Parameters are recorded in the Escape Environment of the
+    Conclusion of the Rule, preserving the ``Branching Structure''
+    of the Computation %FIXME
+  \item (TypeEnd) -- Expression $0$ is Well-typed if the Type of $a$
+    contains no more Actions and $\Gamma$ contains no Marked Input
+\end{itemize}
+%FIXME
+
+(typing of message parameters) %FIXME
+
+$S \ll S'$ -- $S$ is a Suffix of $S'$, independent of any Markings
+
+$\Gamma(u')\lfloor_m$ -- \emph{the Type of $u'$ after $m$}:
+\[
+  T \ll \Gamma(u')\lfloor_m \overset{\triangle}{=}
+  \begin{cases}
+    T \ll [S_a]      &\ \text{if}\ u' = a \\
+    T \ll [S]        &\ \text{if}\ u' = u \\
+    T \ll \Gamma(u') &\ \text{otherwise} \\
+  \end{cases}
+\]
+
+\emph{Configuration Typing Rules}:
+\begin{itemize}
+  \item (TypeResConf) -- when a new Name is introduced, a
+    corresponding Type must be \emph{guessed}; new Name is local to
+    the Configuration $F$, but it is ``globally collected'' in the
+    Escape Environment %FIXME
+  \item (TypeActor) -- Type an Active Actor: requires that the
+    Residual Actor Body $e$ comply with the Residual Sequence of
+    Actions in $\Gamma(a)$ and the Mailbox $[a \mapsto M]$ contains
+    the List of Messages $M$ that have been Received but not yet
+    Handled by the Actor $a$; a Message in $M$ will be Processed by
+    the Actor only if the Type $\Gamma(a)$ constains a matching Input
+    Action
+  \item (TypeNoMail)
+  \item (TypeMailbox) -- does not require that every Message has a
+    corresponding Handler in $\Gamma(a)$, but in \emph{Well-typed
+      Systems} Mailboxes only contain Messages that will
+    \emph{eventually} be Handled by the Receiving Actor
+  \item (TypePara) -- \emph{Parallel Composition}: splits the Type
+    Environment and the Escape Environment to ensure that the
+    resources consumed by $F_1 \ |\ F_2$ are consumed by either $F_1$
+    or $F_2$
+  \item (TypeDead)
+  \item (TypeTopSpawn)
+\end{itemize}
+
+extended Merge-mark -- Partial Function $S' \inplus S$
+
+a Type with a Marked Action must be Composed with a Type Containing
+the same Non-marked Action to ensure that the Input consumed by a
+Thread is actually offered by a Parallel Thread
+
+\emph{Type Environment Composition}:
+\[
+  (\Gamma_1,F_1 \odot \Gamma_2,F_2)(u) \overset{\triangle}{=}
+    \begin{cases}
+      \Gamma_2(u) \uplus \Gamma_1(u)
+        &\ \text{if}\ u \notin \actors(F_1) \cup \actors(F_2) \\
+      \Gamma_1(u) \inplus \Gamma_2(u)
+        &\ \text{if}\ u \in \actors(F_1) \\
+      \Gamma_2(u) \inplus \Gamma_1(u)
+        &\ \text{if}\ u \in \actors(F_2) \\
+    \end{cases}
+\]
+where $\actors(F)$ are the Free Names of Active Actors in $F$
+
+
+\textbf{Preventing Deadlocks}
+
+\fist Deadlocks (\S\ref{sec:deadlock})
+
+modification of Type Syntax %FIXME
+
+$T!m(\tilde{T}).S$ -- Output Actions where the additional component
+$T$ describes the Sequence of Actions performed by the Target Actor
+\emph{after Processing the Message $m$}
+
+$a : [[S_b]!m(T).\End]$ -- the Type of an Actor $a$ that Sends the
+Message $m$ to an Actor that eventually Reads the Message $m$ and then
+Continues as described by $S_b$; a corresponding Target: $b :
+[S.?m(T).S_b]$
+
+\emph{Asynchronous Communication}: when $a$ Sends the Message to $b$ it
+cannot know when $b$ will Process the Message but it can assume that
+after the Input of $m$, $b$ will Continue as $S_b$ -- is enough to
+ensure \emph{Deadlock Freedom}
+
+modified Actor Typing Rule (TypeSend) %FIXME
+
+modified $\uplus$, $\inplus$ %FIXME
+
+
+\emph{Type System Respects Semantics of AC}
+
+Well-typed Configurations Reduce to Well-typed Configurations
+
+Def. \emph{Environmental Consumption}:
+\begin{itemize}
+  \item $\Gamma' \ll \Gamma$ -- when $Dom(\Gamma) = Dom(\Gamma')$ and
+    $\forall u \in Dom(\Gamma), \Gamma'(u) = [S'], \Gamma(u) =
+    [S]$ such that $S' \ll S$
+  \item $\Delta' \ll \Delta$ -- when $\Delta = \&_{i \in
+    I}\Gamma_i,\Delta' = \&_{j \in J}\Gamma'_j$ with $J \subseteq I$,
+    $\Gamma'_j \subseteq \Gamma_j$ and $\forall u \in Dom(\Gamma'_j),
+    \forall_j \in J.\Gamma'_j(u) \ll \Gamma_j(u)$
+\end{itemize}
+%FIXME a better presentation of the above ???
+
+Lem. \emph{Substitution}
+
+Thm. \emph{Subject Reduction} If $\Gamma \vdash F \rhd \Delta$ and $F
+\longrightarrow F'$ then there exists $\Gamma'$ such that $\Gamma'
+\vdash F' \rhd \Delta'$ with $\Gamma' \ll \Gamma$ and $\Delta' \ll
+\Delta$
+
+
+\emph{Balanced Well-typed Actor System}
+
+$\varnothing \vdash F \rhd \Delta$ -- $F$ is a Well-typed Closed
+System
+
+then any Input Action that is Marked in $\Delta$ exactly corresponds
+to one Output Expression in $F$ that \emph{eventually} consumes that
+Input
+
+a Well-typed Actor System is \emph{Balanced} when \emph{every} Input
+in the System appears Marked in the Escape Environment
+
+in Balanced Systems every Input has a matching Output and \emph{vice
+  versa}
+
+Finite Balanced Systems eventually Terminate in the Empty
+Configuration after correctly implementing the Communication Protocol
+given by the Typing
+
+%FIXME xref closed system ???
+
+$\fullmrk([S]) = [S']$ -- where $S$ and $S'$ are the same Sequence of
+Actions but in $S'$ every Top-level Input is Marked
+
+Def. \emph{Balanced Environment} -- $\balanced(\Delta)$ %FIXME
+
+Lem. (during Computation of Well-typed Actor Systems, Mailboxes only
+contain Messages that are Eventually Handled by the Receiving Actor)
+%FIXME
+
+$\longrightarrow^*$ -- Transitive Closure of $\longrightarrow$
+
+Thm. \emph{Safety} If $\varnothing \vdash Pr \rhd \Delta$ with
+$\balanced(\Delta)$. If $Pr \longrightarrow^* F$ then either $F = 0$
+or $F \Rightarrow F'$ for some $F'$.
+
+
+\endgroup
 
 
 
@@ -4714,17 +4994,25 @@ Caires,Vieira 2011 - \emph{Conversation Types}
 
 %FIXME
 
-Conversation Calculus
+\fist Conversation Calculus (\S\ref{sec:conversation_calculus}) --
+Vieira-Caires-Seco08
 
 a Conversation models the Interactions between a Client and various
 Services with Dynamic Joining of possibly unknown number of Processes
-(\fist cf. Multirole Session Types \S\ref{sec:multirole_session})
+
+\fist cf. Session Types (\S\ref{sec:session_type}), \fist cf.
+Multirole Session Types \S\ref{sec:multirole_session}
+
+\fist cf. Behavioral Types \S\ref{sec:behavioral_types}
+
+Session Types describe the ``flow'' of Communications in a single
+Conversation Session while Behavioral Types and Conversation Types
+take the point of view of an entity Participating in many interleaved
+Conversations with multiple other Participants
 
 Distributed Behaviors among \emph{Places}
 
-Conversation Contexts
-
-\fist cf. Session Types (\S\ref{sec:session_type})
+Named Entities are \emph{Conversation Contexts}
 
 
 
