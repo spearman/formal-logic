@@ -1503,6 +1503,8 @@ Predicative \S\ref{sec:predicative_polymorphism}) --
 Type $\tau$ containing Type Variable $\alpha$ may not be used such
 that $\alpha$ is instantiated to a Polymorphic Type.
 
+Martin-L\"of Type Theory, NuPRL
+
 
 
 \subsubsection{Impredicative Polymorphism}
@@ -1511,6 +1513,9 @@ that $\alpha$ is instantiated to a Polymorphic Type.
 (or \emph{First-class Polymorphism})
 
 most powerful
+
+Impredicative Typed $\lambda$-calculi: Lambda Cube
+(\S\ref{sec:lambda_cube}), esp. System F (\S\ref{sec:system_f})
 
 
 
@@ -2619,7 +2624,7 @@ Type System, or ATS)
 
 
 
-\begingroup %palmgren98
+\endgroup %palmgren98
 
 
 
@@ -3046,6 +3051,9 @@ Linear Logic (\S\ref{sec:linear_logic}) allows safe Deallocation
 Distribution and Concurrency (Session Types \S\ref{sec:session_type})
 
 Linear $\lambda$-calculus (\S\ref{sec:linear_lambda})
+
+Stateful Views: ATS/SV (\S\ref{sec:ats_sv}) -- Proofs of Views are
+treated as \emph{Resources} which can be Generated and Consumed
 
 Internal Language (\S\ref{sec:internal_logic}) of Closed Symmetric
 Monoidal Categories (\S\ref{sec:closed_symmetric_monoidal})
@@ -8762,8 +8770,9 @@ $\lambda2$
 
 (\emph{Girard-Reynolds}) \emph{Polymorphic $\lambda$-calculus})
 
-Parametric Polymorphism (\S\ref{sec:parametric_polymorphism}):
-Type-level Function Abstraction $\Lambda$
+(Impredicative) Parametric Polymorphism
+(\S\ref{sec:impredicative_polymorphism}): Type-level Function
+Abstraction $\Lambda$
 
 By Curry-Howard Isomorphism, System F corresponds to the fragment of
 Second-order Intuitionistic Logic using only Universal Quantification;
@@ -9318,7 +9327,7 @@ Xi-Ren-Wu-Blair15 - \emph{Session Types in a Linearly Typed
 
 \textbf{Syntax}
 
-\emph{Viewtype} %FIXME
+\emph{Viewtype} (\S\ref{sec:ats_sv})
 
 $\mono{thread\_create} : (\Unit \rightarrow_l \Unit) \Rightarrow
 \Unit$
@@ -9892,9 +9901,17 @@ of \emph{Static} (Type-level) Terms and \emph{Dynamic} (Program-level)
 Terms -- Xi16 \emph{Applied Type System: An Approach to Practical
   Programming with Theorem-Proving}
 
-Programming with Theorem Proving (PwTP)
+Xi16 -- \emph{Applied Type System: An Approach to Practical
+  Programming with Theorem-proving} -- Programming with Theorem
+Proving (PwTP)
 
-successor of Dependent ML
+Zhu-Xi05 -- \emph{Safe Programming with Pointers through Stateful
+  Views} -- ATS/SV (\S\ref{sec:ats_sv}))
+
+successor of Dependent ML: restricted form of Dependent Types where
+\emph{Type Index Expressions} (Statics) are completely separated from
+Run-time Expressions (Dynamics); see \emph{Phase Distinction}
+(\S\ref{sec:phase_distinction})
 
 handling of Nonlinear Constraints through explicit Proof Construction
 
@@ -9902,6 +9919,9 @@ compared to Theorem-proving systems such as NuPrl, Coq, in ATS Proof
 Construction is solely meant for Constraint Simplification and Proofs
 contain no Computational meaning; in NuPrl and Coq Proofs are
 \emph{Constructive} and meant for supporting \emph{Program Extraction}
+
+\fist Xi-Ren-Wu-Blair15 -- \emph{Session Types in a Linearly typed
+  Multi-threaded Lambda-Calculus} -- embedding in ATS
 
 $\lambda_{dyn}$ -- Untyped $\lambda$-calculus
 (\S\ref{sec:untyped_lambda}): extended with Constants (incl. Constant
@@ -10547,6 +10567,227 @@ Proofs are not expected to have any Run-time meaning
 
 
 
+\subsubsection{ATS/SV}\label{sec:ats_sv}
+
+\begingroup
+
+\newcommand{\addr}{\mathsf{addr}}
+\newcommand{\ptr}{\mathbf{ptr}}
+\newcommand{\bool}{\mathbf{bool}}
+\newcommand{\intt}{\mathbf{intt}}
+\renewcommand{\unit}{\mathbf{1}}
+
+Zhu-Xi05 -- \emph{Safe Programming with Pointers through Stateful
+  Views} -- (\emph{Note}: this paper was written for an earlier
+version of ATS than the implementation described in \S\ref{sec:ats})
+
+\fist cf. approaches of Floyd-Hoare Logic (\S\ref{sec:hoare_logic}),
+Model Checking (\S\ref{sec:model_checking})
+
+\fist \emph{Note}: the following assumes that every Value takes one
+``Memory Unit'' to Store, e.g. ``Boxed'' Values
+
+\emph{Stateful Views}
+
+$T@L$ -- the (Stateful) View indicating that a Value of Type $T$ is
+stored at Address $L$; \emph{this is the only form of a Primitive View
+  and all other Views are built on top of such Primitive Views}
+
+a Stateful View can be assigned to Proof Terms of Stateful Views
+
+Proofs of Views are treated as \emph{Resources} (cf. Linear Types
+\S\ref{sec:linear_type}) which can be \emph{Consumed} and
+\emph{Generated}
+
+example Functions:
+\begin{flalign*}
+  \quad & getVar   &:\ & \forall a:\type.\forall l:\addr
+    .(a@l \ |\ \ptr(l)) \rightarrow (a@l \ |\ a) \\
+  \quad & setVar   &:\ & \forall a_1:\type.\forall a_2:\type.\forall l:\addr
+    .(a_1@l \ |\ a_2, \ptr(l)) \rightarrow (a_2@l \ |\ \unit) \\
+  \quad & allocVar &:\ & \unit \rightarrow \exists l:\addr
+    .(\top @ l \ |\ \ptr(l)) \\
+  \quad & freeVar  &:\ & \forall a:\type.\forall l:\addr
+    .(a@l \ |\ \ptr(l)) \rightarrow \unit
+\end{flalign*}
+where $\ptr(L)$ is the Singleton Type for a Pointer pointing to a
+given Address $L$ and every Type is a Subtype of the Top Type $\top$
+
+$:=$ -- $setVar$
+
+$!$ -- $getVar$
+
+some Proofs can be Generated and Consumed Implicitly
+
+
+\textbf{ATS/SV Statics Syntax}
+
+%FIXME: grammar
+
+for each Sort $\sigma$, one can form the Proposition:
+\[
+  s_1 =_\sigma s_2
+\]
+if $s_1$ and $s_2$ are Static Terms of Sort $\sigma$
+
+$a$ -- Static Variables
+
+$l$ -- Address Constants $\mathbf{l}_0, \mathbf{l}_1, \ldots$
+
+$b$ -- Boolean Values $true$, $false$
+
+$i$ -- Integers $\ldots, -1, 0, 1, \ldots$
+
+$s$ -- Static Terms
+
+$\vec{s}$ -- a Sequence of Static Terms
+
+$\delta(\vec{s})$ -- Primitive Types; e.g. $\top$, $\unit$, $\ptr(L)$
+(Singleton ``Pointer'' Type), $\bool(P)$ (Singleton Boolean Type),
+$\intt(I)$ (Singleton Integer Type)
+
+$\Sigma \vdash s : \sigma$ -- the Static Term $s$ can be assigned the
+Sort $\sigma$ under $\Sigma$ %FIXME: context, environment, assumptions?
+
+$L$ -- Static Term of Sort $addr$
+
+$P$ -- Static Term of Sort $bool$
+
+$I$ -- Static Term of Sort $int$
+
+$T$ -- Static Term of Sort $type$
+
+Primitive Functions $c_P$, $c_I$, etc.
+
+$L + I$ -- an Address equal to $\mathbf{l}_{n+i}$ if $L =
+\mathbf{l}_n$ and $I = i$ and $0 \leq n + i$
+
+$ST$ -- \emph{State}: a Finite Mapping from Addresses to Values with
+Domain $dom(ST)$
+
+$ST(l) = v$ -- the Value $v$ is \emph{Stored} at (Address) $l$
+
+$ST_1 \otimes ST_2$ -- Union of $ST_1$ and $ST_2$ \emph{if} $dom(ST_1)
+\cap dom(ST_2) = \varnothing$
+
+$ST : V$ -- the State $ST$ ``meets'' the View $V$
+
+$V$ -- \emph{Stateful Views}:
+\[
+  V ::= \top \ |\ T@L \ |\ \overline{\delta}(\vec{s})
+    \ |\ V_1 \multimap V_2 \ |\ V_1 \otimes V_2
+\]
+
+$\overline{P}, \overline{T}, \overline{V}$ -- Sequences of
+Propositions, Types and Views, resp.
+
+$\top$ -- the \emph{Empty View}: ``met'' by the Empty State (the State
+$ST$ such that $dom(ST) = \varnothing$)
+
+$T@L$ -- \emph{Primitive View}: ``met'' by the State that maps Address
+$L$ to a Value of Type $T$
+
+$V_1 \otimes V_2$ -- ``met'' by a State $ST$ if $ST = ST_1 \otimes
+ST_2$ for some $ST_1 : V_1$ and $ST_2 : V_2$
+
+$V_1 \multimap V_2$ -- ``met'' by a State $ST$ if $ST_1 \otimes ST$
+``meets'' $V_2$ for \emph{any} State $ST_1 : V_1$ such that
+$dom(ST_1) \cap dom(ST) = \varnothing$
+
+$\overline{\delta}$ -- a \emph{View Constructor}
+
+$\vdash \overline{\delta} (\sigma_1, \ldots, \sigma_n)$ -- indicates
+that Applying $\overline{\delta}$ to Static Terms $s_1 : \sigma_1,
+\ldots, s_n : \sigma_n$ \emph{Generates} a View $\overline{\delta}
+(s_1, \ldots, s_n)$
+
+$c$ -- Proof Constructors with each $\overline{\delta}$ which are
+assigned View of the form $\forall\Sigma, \overline{P}.(\overline{V})
+\multimap \overline{\delta}(\vec{s})$ (e.g. $arrayView(T,I,L)$ and
+associated Proof Constructors $ArrayNone$ and $ArraySome$) %FIXME
+
+$(\overline{V} \ |\ T) \rightarrow CT$ -- Type for Dynamic Functions
+that can be Applied to Values of Type $T$ \emph{only if} the Current
+State (when the Application occurs) ``meets'' the Views $\overline{V}$
+\emph{and} such an Application yields a Dynamic Term that can be
+assigned the Computation Type $CT$ of the Form $\exists\Sigma',
+\overline{P}'.(\overline{V}' \ |\ T')$, i.e. the Dynamic Term is
+expected to Evaluate to a Value $v$ at a certain State $ST$ such that
+for some Static Substitution $\Theta$ each Proposition in
+$\overline{P}'[\Theta]$ is \emph{True}, $v$ is of Type $T'[\Theta]$
+and $ST$ ``meets'' $V'[\Theta]$ %FIXME clarify
+
+$T_1 \rightarrow T_2$ -- shorthand for a ``\emph{Stateless Function
+  Type}'':
+\[
+  (\varnothing \ |\ T_1) \rightarrow \exists
+    \varnothing,\varnothing.(\varnothing \ |\ T_2)
+\]
+
+$P \supset T$ -- Guarded Type (\S\ref{sec:guarded_type})
+
+$P \wedge T$ -- Asserting Type (???) %FIXME
+
+
+\emph{Constraints} (needed to define Type Equality):
+
+$\Sigma; \overline{P} \vDash P$ -- \emph{Persistent Constraint}
+(Intuitionistic Logic)
+
+$\Sigma; \overline{P}; \overline{V} \vDash V$ -- \emph{Ephemeral
+  Constraint} (Intuitionistic Linear Logic)
+
+(Rules for Ephemeral Constraints) %FIXME
+
+
+\emph{Subtyping}:
+
+$\leq_{tp}$ -- Subtype Relation on Sort $type$
+
+$=_{tp}$ -- Type Equality:
+\[
+  T_1 \leq_{tp} T_2 \wedge T_2 \leq_{tp} T_1
+\]
+
+$\Sigma; \overline{P} \vDash T_1 \leq_{tp} T_2$ -- Subtype Judgement
+
+(\emph{Subtype Rules}) %FIXME
+
+$(ext)$ -- Frame Rule (Separation Logic \S\ref{sec:separation_logic})
+
+all Types are a Subtype of $\top$
+
+
+Example $arrayView$:
+\begin{verbatim}
+  dataview arrayView (type, int, addr) =
+    | {a:type, l:addr}
+      ArrayNone (a,0,l)
+    | {a:type, n:nat, l:addr}
+      ArraySome (a,n+1,l) of (a@l, arrayView (a, n, l+1))
+\end{verbatim}
+where the two View Proof Constructors $ArrayNone$ and $ArraySome$ are
+given the following ``Functional'' Views:
+\begin{flalign*}
+  \quad & ArrayNone &:
+    \ & \forall a:type.\forall l:addr.() \multimap arrayView(a,0,l) \\
+  \quad & ArraySome &:
+    \ & \forall a:type.\forall l:addr.\forall n:nat
+      .(a@l, arrayView(a,n,l+1)) \multimap arrayView(a,n+1,l)
+\end{flalign*}
+
+\fist Note in ATS2 (ATS Postiats) $\mathtt{array\_v}$ is defined as a
+$\mathtt{viewdef}$:
+\begin{verbatim}
+  viewdef array_v (a:viewt@ype, l:addr, n:int) = @[a][n] @ l
+\end{verbatim}
+
+
+
+\endgroup
+
+
+
 % ====================================================================
 \section{Dependent Type Theory}\label{sec:dependent_type_theory}
 % ====================================================================
@@ -10678,9 +10919,15 @@ a Datatype's Structure
 
 Calculus of Constructions (\S\ref{sec:coc})
 
+NuPrl -- Martin-L\"of Type Theory is expressive but Type-checking
+requires more Theorem Proving (Zhu-Xi05) %FIXME
+
 Dependent Type Theory (\S\ref{sec:dependent_type_theory})
 
 Inductive Types (\S\ref{sec:inductive_type})
+
+Predicative (Parametric) Polymorphism
+(\S\ref{sec:predicative_polymorphism})
 
 Modelled by Locally Cartesian Closed Category
 (\S\ref{sec:locally_cartesian})

@@ -810,10 +810,20 @@ $\beta$-reduction (\S\ref{sec:beta_reduction})
 
 Xi-Ren-Wu-Blair15 - \emph{Session Types in a Linearly typed
   Multi-threaded Lambda-Calculus} -- embedding in ATS (Applied Type
-System) Programming Language with code generation for Erlang
+System \S\ref{sec:ats}) Programming Language with code generation for
+Erlang
 
 \emph{Global Progress}: Deadlock-freedom (\S\ref{sec:deadlock}) --
 \emph{DF-redicibility}
+
+\fist \textbf{MTLC$_0$} (\S\ref{sec:mtlc_0}): MTLC equipped with a
+Linear Type System
+
+\fist \textbf{MTLC$_{ch}$} (\S\ref{sec:mtlc_ch}): MTLC$_0$ extended
+with support for Session Types (\S\ref{sec:session_type})
+
+Recursively Defined Session Types specify \emph{Unbounded Sessions}
+containing an indefinite number of Sends and Receives
 
 
 Dual Channel Types:
@@ -854,13 +864,6 @@ $\channelclose$ splits into $\chanposclose$ and $\channegclose$
 
 the non-split versions of the above functions can still be used in ATS
 thanks to overloading
-
-
-\fist \textbf{MTLC$_0$} (\S\ref{sec:mtlc_0}): MTLC equipped with a
-Linear Type System
-
-\fist \textbf{MTLC$_{ch}$} (\S\ref{sec:mtlc_ch}): MTLC$_0$ extended
-with support for Session Types (\S\ref{sec:session_type})
 
 
 
@@ -4940,7 +4943,8 @@ Bisimulation:
 
 
 
-\subsubsection{$\pi$-LMRL}\label{sec:pi_lmrl}
+\paragraph{$\pi$-LMRL}\label{sec:pi_lmrl}
+\hfill
 
 Xi-Wu16 -- \emph{Propositions in Linear Multirole Logic as Multiparty
   Session Types}
@@ -4958,16 +4962,16 @@ Session Types:
 
 Process (Term) Syntax:
 \begin{flalign*}
-  \quad P ::=&\ \nu x : A.(\vec{P}) & \text{Linking} \\
-    |&\ x_R(y)_r.(P_1|P_2) \quad r \notin R & \text{Name Input} \\
-    |&\ x_R[y]_r.P \quad r \in R & \text{Name Output} \\
-    |&\ x_R(\_)_r.0 \quad r \notin R & \text{Empty Input} \\
-    |&\ x_R[\_]_r.P \quad r \in R & \text{Empty Output} \\
-    |&\ x_R(case)_r.(P_1,P_2) \quad r \notin R & \text{Case Offer} \\
-    |&\ x_R[inl]_r.P \quad r \in R & \text{Left Choice} \\
-    |&\ x_R[inr]_r.P \quad r \in R & \text{Right Choice} \\
-    |&\ !x_R(y)_r \quad r \notin R & \text{Server Accept} \\
-    |&\ ?x_R[y]_r \quad r \in R & \text{Client Request}
+  \quad P ::=&\ \nu x : A.(\vec{P})             & \text{Linking} \\
+    |&\ x_R(y)_r.(P_1|P_2) \quad r \notin R     & \text{Name Input} \\
+    |&\ x_R[y]_r.P \quad r \in R                & \text{Name Output} \\
+    |&\ x_R(\_)_r.0 \quad r \notin R            & \text{Empty Input} \\
+    |&\ x_R[\_]_r.P \quad r \in R               & \text{Empty Output} \\
+    |&\ x_R(case)_r.(P_1,P_2) \quad r \notin R  & \text{Case Offer} \\
+    |&\ x_R[inl]_r.P \quad r \in R              & \text{Left Choice} \\
+    |&\ x_R[inr]_r.P \quad r \in R              & \text{Right Choice} \\
+    |&\ !x_R(y)_r \quad r \notin R              & \text{Server Accept} \\
+    |&\ ?x_R[y]_r \quad r \in R                 & \text{Client Request}
 \end{flalign*}
 
 $P$ -- Process
