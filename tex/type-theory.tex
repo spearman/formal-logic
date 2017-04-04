@@ -1095,6 +1095,10 @@ Terminal Coalgebras (\S\ref{sec:terminal_coalgebra})
 Type in a Nominal Type System (\S\ref{sec:nominal_type_system}) that
 cannot be Instantiated (\S\ref{sec:instantiation}) directly.
 
+wiki: Type defined by its Semantics from the point of view of a
+\emph{User} of the Data (as opposed to the \emph{Implementor} as in
+Concrete Data Structures \S\ref{sec:concrete_type})
+
 Existentially Quantified Type Variable
 
 Programming: Module Interfaces
@@ -1111,6 +1115,11 @@ a Type that is not Abstract is a Concrete Type
 (\S\ref{sec:concrete_type})
 
 Abstract Type with no Implementation: Protocol, Interface, etc.
+
+examples:
+
+\emph{Monads} (\S\ref{sec:monad}) define an Interface for the Abstract
+Type of ``Program Fragments''
 
 
 \asterism
@@ -2244,6 +2253,9 @@ Logical Quantifiers (\S\ref{sec:quantifier})
 
 Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
 
+Type Checking in a Dependent Type Theory is Undecidable -- Dowek05
+\emph{The undecidability of typability in the Lambda-Pi-calculus}
+
 Categorically, Dependent Types correspond to Morphisms regarded as
 Indexed Families (Bundle or Fibration), represented by a \emph{Display
   Map} (\S\ref{sec:display_map}) which is a Morphism $p : B
@@ -2993,7 +3005,7 @@ Unification that works with Subtyping Constraints
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Substructural Type System}
+\subsection{Substructural Type}
 \label{sec:substructural_type}
 % --------------------------------------------------------------------
 
@@ -3022,8 +3034,12 @@ Languages with Substructural Type Systems:
 
 \begin{itemize}
   \item Clean
-  \item Rust
+  \item Rust -- Affine Types (\S\ref{sec:affine_type}), Borrowed
+    Types (\S\ref{sec:borrowed_type})
   \item Mezzo
+  \item Idris -- `UniquenessTypes`, `LinearTypes`
+  \item ATS (\S\ref{sec:ats}) -- Views (Linear Proofs), Viewtypes
+    (Linear Types \S\ref{sec:viewtype})
 \end{itemize}
 
 In Rust:
@@ -3073,12 +3089,85 @@ No-cloning Theorem (Quantum States):
 \emph{Linear Type Constructor} %FIXME
 
 
+Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS} --
 
-\paragraph{Affine Type System}\label{sec:affine_type}\hfill
+\fist Viewtypes (\S\ref{sec:viewtype})
 
-Values used at most once
+examples of Functions that would not be Well-typed if $\mono{T}$ were
+a Linear Type:
+\begin{verbatim}
+  fun ignore    (x:T) : ()    = ()
+  fun duplicate (x:T) : (T,T) = (x,x)
+  fun saying    (x:T) : T     = (eat(x); x)
+\end{verbatim}
 
-Affine Logic (\S\ref{sec:affine_logic})
+
+
+\paragraph{Uniqueness Type}\label{sec:uniqueness_type}\hfill
+
+(De Vries, Plasmeijer, Abrahamson 08 - *Uniqueness Typing Simplified*)
+
+\emph{Uniqueness Type} -- guarantees that a Value has a single
+\emph{Reference}
+
+\fist Cf. Linear Types (\S\ref{sec:linear_type}): guarantees that no
+more References can be made to a Value
+
+Programming Languages: Clean, Mercury, Idris ($\mono{UniqueType}$), Rust
+(``Ownership Types'', ``Borrowed Pointers'')
+
+
+
+\subparagraph{Borrowed Type}\label{sec:borrowed_type}\hfill
+
+Programming Languages: Idris ($\mono{BorrowedType}$), Rust (Borrowed
+Pointers???)
+%FIXME
+
+Idris $\mono{BorrowedType}$:
+
+Uniqueness Type which can be ``inspected'' at ``top level'' by Pattern
+Matching or \emph{Lending} to another Function (but no further)
+%FIXME
+
+
+
+\paragraph{View}\label{sec:view}\hfill
+
+ATS/SV (\S\ref{sec:ats_sv}) -- Zhu-Xi05 \emph{Safe Programming with
+  Pointers through Stateful Views} -- (\emph{Note}: this paper was
+written for an earlier version of ATS than the implementation
+described in \S\ref{sec:ats})
+
+Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS}
+-- Views can be seen as Linear Types for classifying Capabilities
+(\S\ref{sec:capability})
+
+Linear Proposition
+
+
+
+\subparagraph{Viewtype}\label{sec:viewtype}\hfill
+
+A \emph{Viewtype} is a pair $(V,T)$ of a Linear Proof of a Linear
+Proposition (a \emph{View}), $V$, and a Value of (Non-linear) Type,
+$T$.
+
+ATS (\S\ref{sec:ats})
+
+Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS}
+
+
+
+\paragraph{Linear Dependent Type}\label{sec:dependent_linear}\hfill
+
+Vakar14 \emph{Syntax and Semantics of Linear Dependent Types} --
+Intuitionistic Linear Dependent Type Theory (ILDTT)
+
+McBride16 \emph{I Got Plenty o' Nuttin'}
+
+Resource Annotations provided by a Rig (Semiring \S\ref{sec:semiring},
+i.e. a Ring without Negation)
 
 
 
@@ -4981,21 +5070,6 @@ Communicating Timed Automata (\S\ref{sec:communicating_timed_fsm})
 
 
 
-\subsubsection{Uniqueness Type}\label{sec:uniqueness_type}
-
-(De Vries, Plasmeijer, Abrahamson 08 - *Uniqueness Typing Simplified*)
-
-\emph{Uniqueness Type} -- guarantees that a Value has a single
-\emph{Reference}
-
-\fist Cf. Linear Types (\S\ref{sec:linear_type}): guarantees that no
-more References can be made to a Value
-
-Programming Languages: Clean, Mercury, Idris ($\mono{UniqueType}$), Rust
-(``Ownership Types'', ``Borrowed Pointers'')
-
-
-
 \paragraph{Conversation Type}\label{sec:conversation_type}\hfill
 
 Caires,Vieira 2011 - \emph{Conversation Types}
@@ -5024,21 +5098,19 @@ Named Entities are \emph{Conversation Contexts}
 
 
 
-\paragraph{Borrowed Type}\label{sec:borrowed_type}\hfill
+\subsubsection{Affine Type System}\label{sec:affine_type}\hfill
 
-Programming Languages: Idris ($\mono{BorrowedType}$), Rust (Borrowed
-Pointers???)
-%FIXME
+Variables used at most once; allows a Resource to be \emph{Discarded}
 
-Idris $\mono{BorrowedType}$:
+Affine Logic (\S\ref{sec:affine_logic})
 
-Uniqueness Type which can be ``inspected'' at ``top level'' by Pattern
-Matching or \emph{Lending} to another Function (but no further)
-%FIXME
+Rust
 
 
 
 \subsubsection{Relevant Type System}\label{sec:relevant_type}
+
+Variables used at least once
 
 Relevant Logic (\S\ref{sec:relevance_logic})
 
@@ -5052,6 +5124,21 @@ modelling Stack-based Memory Allocation
 
 only Objects on top of modelled Stack may be used, after which it is
 popped off
+
+
+
+\subsubsection{Alias Type}\label{sec:alias_type}
+
+%FIXME this is part of the line of research on region-based memory
+%management and the calculus of capabilities
+
+``Pseudo-linear Types''
+
+Walker-Morrisett00 \emph{Alias Types for Recursive Data Structures}
+
+Smith-Walker-Morrisett00 \emph{Alias Types} -- (Rust ???) %FIXME
+
+Calculus of Capabilities (\S\ref{sec:capabailities_calculus})
 
 
 
@@ -5128,9 +5215,13 @@ being done ``with what''
 Region Ownership, Region Aliasing
 
 
-\emph{Capabilities}: %FIXME xref, cite Pottier 07
+\emph{Capabilities}:
 
-Calculus of Capabilities
+\fist see slides:
+\url{http://gallium.inria.fr/~fpottier/slides/fpottier-2007-05-linear-bestiary.pdf}
+(2007)
+
+Calculus of Capabilities (\S\ref{sec:capabilities_calculus})
 
 Capabilities are \emph{prescriptive}
 
@@ -5141,13 +5232,20 @@ analogy between a Capability and a Forumula of Separation Logic
 
 Capabilities: Linear or Non-linear
 
+Zhu-Xi05 -- Views (\S\ref{sec:view}): a Linear Type for classifying
+Capabilities
+
 Values: Non-linear
 
 Memory Blocks: Possibly Linear
 
-recovering standard Linear Types via a Capability + Value
+recovering standard Linear Types via a Capability + Value --
+??? (Shi-Xi13) \emph{Viewtypes} (\S\ref{sec:viewtype})
+%FIXME
 
-Alias Types -- no Regions (Walker-Morrisett00) %FIXME
+Alias Types (\S\ref{sec:alias_type}) -- no Regions
+(Walker-Morrisett00)
+%FIXME
 
 Uniqueness Types (Clean programming language)
 
@@ -9327,7 +9425,7 @@ Xi-Ren-Wu-Blair15 - \emph{Session Types in a Linearly Typed
 
 \textbf{Syntax}
 
-\emph{Viewtype} (\S\ref{sec:ats_sv})
+\emph{Viewtype} (\S\ref{sec:viewtype})
 
 $\mono{thread\_create} : (\Unit \rightarrow_l \Unit) \Rightarrow
 \Unit$
@@ -9905,8 +10003,11 @@ Xi16 -- \emph{Applied Type System: An Approach to Practical
   Programming with Theorem-proving} -- Programming with Theorem
 Proving (PwTP)
 
-Zhu-Xi05 -- \emph{Safe Programming with Pointers through Stateful
-  Views} -- ATS/SV (\S\ref{sec:ats_sv}))
+Zhu-Xi05 \emph{Safe Programming with Pointers through Stateful
+  Views} -- ATS/SV (\S\ref{sec:ats_sv})) -- Linear Proofs/Propositions
+
+Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS}
+-- \emph{Viewtypes} (Linear Types \S\ref{sec:viewtype})
 
 successor of Dependent ML: restricted form of Dependent Types where
 \emph{Type Index Expressions} (Statics) are completely separated from
@@ -10584,6 +10685,11 @@ version of ATS than the implementation described in \S\ref{sec:ats})
 \fist cf. approaches of Floyd-Hoare Logic (\S\ref{sec:hoare_logic}),
 Model Checking (\S\ref{sec:model_checking})
 
+Views (\S\ref{sec:view})
+
+\fist see also (Shi-Xi13) Viewtypes (\S\ref{sec:viewtype}): a pair of
+a Linear Proof and a (Non-linear) Value
+
 \fist \emph{Note}: the following assumes that every Value takes one
 ``Memory Unit'' to Store, e.g. ``Boxed'' Values
 
@@ -10781,6 +10887,10 @@ $\mathtt{viewdef}$:
 \begin{verbatim}
   viewdef array_v (a:viewt@ype, l:addr, n:int) = @[a][n] @ l
 \end{verbatim}
+
+(example: singly-linked list)
+
+(example: cyclic buffer)
 
 
 
