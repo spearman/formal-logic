@@ -652,6 +652,16 @@ Chaff
 
 GRASP
 
+generalization: Satisfiability Modulo Theories (SMT \S\ref{sec:smt})
+
+
+
+
+\paragraph{Davis-Putnam-Logemann-Loveland (DPLL) Algorithm}
+\label{sec:dpll}\hfill
+
+(Conjunctive Normal Form) CNF-SAT
+
 
 
 \paragraph{Conflict-driven Clause Learning}\label{sec:cdcl}\hfill
@@ -671,15 +681,81 @@ Quantifier-free Presburger Arithmetic
 
 formalized approach to Constraint Programming
 
-Z3
+cf. Answer Set Programming (ASP)
 
-Haskell: Liquid Haskell
+(wiki):
+
+generalization of Boolean SAT
+
+an SMT Instance is a Formula in First-order Logic where some Function
+and Predicate Symbols have \emph{additional Interpretations} and
+\emph{SMT} is the problem (cf. Decision Problem) of determining
+whether such a Formula is \emph{Satisfiable}
+
+Predicates are classified according to each respective Theory, e.g.:
+\begin{itemize}
+  \item Linear Equalities over Real Numbers -- Theory of Linear Real
+    Arithmetic
+  \item Uninterpreted Terms and Function Symbols -- Theory of
+    Uninterpreted Functions with Equality (\S\ref{sec:empty_theory})
+\end{itemize}
+
+Quantifier Free fragments
+
+Decidable Theories: %FIXME
+\begin{itemize}
+  \item Real Closed Fields (\S\ref{sec:real_closed}), Real Numbers --
+    Decidable using Quantifier Elimination
+  \item Presburger Arithmetic (\S\ref{sec:presburger_arithmetic})
+\end{itemize}
+
+DPLL (\S\ref{sec:dpll})
+
+SMTLIB2 -- common interface format $\mono{.smt2}$
+
+
+\textbf{Z3}
+
+Haskell: Liquid Haskell -- Refinement Type based verifier that can use
+any SMTLIB2 compliant solver
+
+ATS: contrib/ATS-extsolve-z3
+
+ATS: contrib/ATS-extsolve-smt2
 
 Rust: $\mono{rustproof}$ ``verification condition generation'' crate
 
+\begin{itemize}
+  \item Empty Theory
+  \item Linear Arithmetic
+  \item Nonlinear Arithmetic
+  \item Bitvectors
+  \item Arrays
+  \item Datatypes
+  \item Quantifiers
+  \item Strings
+\end{itemize}
 
 
-\subsubsection{Answer Set Programming}\label{sec:asp}
+\textbf{Alt-Ergo}
+
+Frama-C ACSL verifier
+
+
+
+\subsubsection{Answer Set Programming (ASP)}\label{sec:asp}
+
+no Quantifiers; cf. Satisfiability Modulo Theories (SMT)
+
+most suited for Boolean problems that reduce to the Free Theory of
+Uninterpreted Functions (\S\ref{sec:empty_theory})
+
+
+
+\subsubsection{Constraint Logic Programming}
+\label{sec:constraint_logic_programming}
+
+Logic Programming extended to include Constraint Satisfaction
 
 
 
