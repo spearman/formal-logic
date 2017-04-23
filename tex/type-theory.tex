@@ -3054,8 +3054,8 @@ Languages with Substructural Type Systems:
     Types (\S\ref{sec:borrowed_type})
   \item Mezzo
   \item Idris -- `UniquenessTypes`, `LinearTypes`
-  \item ATS (\S\ref{sec:ats}) -- Views (Linear Proofs), Viewtypes
-    (Linear Types \S\ref{sec:viewtype})
+  \item ATS (\S\ref{sec:ats}) -- Views (Linear Proofs
+    \S\ref{sec:view}), Viewtypes (Linear Types \S\ref{sec:viewtype})
 \end{itemize}
 
 In Rust:
@@ -3172,7 +3172,7 @@ Proposition (a \emph{View}), $V$, and a (``Data'') Value of
 
 ATS (\S\ref{sec:ats})
 
-Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS}
+Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS}:
 
 (example Views for Socket Programming) %FIXME
 
@@ -3183,6 +3183,21 @@ for forming \emph{Dependent Types}
 $\mono{absview}$
 
 $\mono{dataview}$
+
+a Type is always considered a Viewtype ???
+
+$\mathcal{L}^\parallel_0$
+
+$\mathcal{L}^\parallel_{\forall, \exists}$
+
+&#x261e; $\mathcal{L}^\parallel_{\forall,\exists}$
+(\S\ref{sec:l_par_quant}) -- Parallel Reduction Calculus
+(\S\ref{sec:parallel_reduction_calculus}) with Universally and
+Existentially Quantified (Polymorphic and Dependent) Viewtypes
+
+Views and Viewtypes in ATS have counterpats in the Clay Programming
+Language (Hawblitzel-Wei-Huang-Krupski-Wittie2004 \emph{Low-level
+  linear memory management})
 
 
 
@@ -5257,7 +5272,7 @@ being done ``with what''
 Region Ownership, Region Aliasing
 
 
-\emph{Capabilities}:
+\emph{Capabilities} (\S\ref{sec:capability}):
 
 \fist see slides:
 \url{http://gallium.inria.fr/~fpottier/slides/fpottier-2007-05-linear-bestiary.pdf}
@@ -9448,6 +9463,124 @@ Thm. \textbf{Translation Preserves Types}
 
 
 
+\subsubsection{$\mathcal{L}^\parallel_0$}\label{sec:l_par_zero}
+
+Shi-Xi13
+
+Parallel Reduction Calculus (\S\ref{sec:parallel_reduction_calculus})
+with a simple Linear Type System
+
+\emph{Viewtypes} (\S\ref{sec:viewtype})
+
+&#x261e; Extension: $\mathcal{L}^\parallel_{\forall,\exists}$
+(\S\ref{sec:l_par_quant}) -- Universally and Existentially Quantified
+(Polymorphic and Dependent) Viewtypes and support for Programming with
+Theorem Proving
+
+$\mono{thread\_create} : (\mathbf{1} \rightarrow_l \mathbf{1})
+\Rightarrow \mathbf{1}$
+
+$\mathbf{Res}$ -- a collection of Finite Multisets of Resources
+
+$\Pi$ -- Program Pools
+
+$\Gamma$ -- Expression Context
+
+$\Delta$ -- Linear Expression Context
+
+Lem. \emph{Canonical Forms}
+
+Lem. \emph{Substitution}
+
+Ad-hoc Redexes, Sole Reducts (Normalization ?)
+
+Def. \emph{Pure Redexes}
+
+when Ad-hoc Reduction occurs, resources may be Generated as well as
+Consumed
+
+Thm. \emph{Subject Reduction on Expressions}
+
+Thm. \emph{Progress on Expressions}
+
+Parallel Reduction for Pools
+
+Thm. \emph{Subject Reduction on Pools}
+
+Thm. \emph{Progress on Pools}
+
+absence of Race Conditions
+
+
+
+\subsubsection{$\mathcal{L}^\parallel_{\forall,\exists}$}
+\label{sec:l_par_quant}
+
+Shi-Xi13
+
+$\mathcal{L}^\parallel_0$ extended with Universally and Existentially
+Quantified (Polymorphic and Dependent) Viewtypes
+(\S\ref{sec:viewtype}) with support for Programming with Theorem
+Proving (PwTP)
+
+extension by ``\emph{Predicatization}''
+
+Applied Type System (ATS \S\ref{sec:ats})
+
+$\delta$ -- Base Type Constructors have $c$-sorts $(\sigma_1, \ldots,
+\sigma_n) \rightarrow type$ (e.g. $\mathsf{int} : (int) \rightarrow
+type$, $\mathsf{bool} : (bool) \rightarrow type$, $\mathsf{ptr} :
+(addr) \rightarrow type$)
+
+Base Viewtype Constructors have $c$-sorts $(\sigma_1, \ldots,
+\sigma_n) \rightarrow viewtype$ (e.g. $\mathsf{var} : (type, addr)
+\rightarrow viewtype$ where $\mathsf{var}(T,L)$ is a Viewtype for a
+Pointer to the Address $L$ where a Value of Type $T$ is stored)
+
+%            FIXME c-sort ???
+general form of a $c$-type in $\mathcal{L}^\parallel_{\forall,
+  \exists}$:
+\[
+  \forall\Sigma.\overline{B}
+    \supset ((VT_1, \ldots, VT_n) \Rightarrow VT)
+\]
+where $\Sigma = a_1 : \sigma_1, \ldots, a_n : \sigma_n$ and
+$\overline{B} = B_1, \ldots, B_n$
+
+Guarded, Asserting Types/Viewtypes %FIXME
+
+Programming with Theorem Proving: Sorts $prop$ (Classical
+Propositions) and $view$ (Linear Propositions \S\ref{sec:view})
+
+$prop$ is a Subsort of $view$ (every Prop is considered a View)
+
+when assigning a Prop or a View to a Dynamic Term, the Dynamic Term
+needs to be verified as being \emph{Total} (Pure and Terminating)
+
+$@$ -- (Infix) Base View Constructor with $c$-sort $(type, addr)
+\rightarrow view$; given $T$ and $L$ the View $T@L$ is assigned to a
+Resource of the form $v@L$ for some Value $v$ of Type $T$, i.e. a
+Value of Type $T$ is stored at Address $L$
+
+ptrset, ptrget functions %FIXME
+
+Recursive Views
+
+
+\textbf{Multicore Programming in ATS}
+
+$\mathsf{unplock0, uplock1, upticket} : (viewtype) \rightarrow
+viewtype$
+
+$\mathsf{tid} : (viewtype) \rightarrow viewtype$ -- $\mathsf{tid}(VT)$
+a Joinable Thread with Return Type $VT$
+
+$\mathsf{spawn} : (viewtype) \rightarrow viewtype$
+
+Parallel $\mono{let}$-binding %FIXME
+
+
+
 \subsubsection{MTLC$_0$}\label{sec:mtlc_0}
 
 \begingroup
@@ -9496,7 +9629,6 @@ MTLC$_0$ extended with support for Session Types
 \fist ATS (Applied Type System \S\ref{sec:ats})
 
 most closely related to SILL (Monadic instead of Linear) %FIXME
-
 
 
 \endgroup
@@ -10049,12 +10181,23 @@ Zhu-Xi05 \emph{Safe Programming with Pointers through Stateful
   Views} -- ATS/SV (\S\ref{sec:ats_sv})) -- Linear Proofs/Propositions
 
 Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS}
--- \emph{Viewtypes} (Linear Types \S\ref{sec:viewtype})
+-- \emph{Viewtypes} (Linear Types \S\ref{sec:viewtype}),
+$\mathcal{L}^\parallel_{\forall, \exists}$ -- Parallel Reduction
+Calculus with Universally and Existentially Quantified (Polymorphic
+and Dependent) Viewtypes and support for Programming with Theorem
+Proving
 
 successor of Dependent ML: restricted form of Dependent Types where
 \emph{Type Index Expressions} (Statics) are completely separated from
 Run-time Expressions (Dynamics); see \emph{Phase Distinction}
 (\S\ref{sec:phase_distinction})
+
+Xi07 \emph{Dependent ML}: \emph{Dependent Types} as a form of Types
+that correspond to Formulas in some First-order Many-sorted Logic %FIXME
+
+\emph{Datasorts} -- like a Datatype Declaration (ML) but the Declared
+``Sort'' is only for classifying \emph{Terms to be used as Indexes}
+for forming \emph{Dependent Types}
 
 handling of Nonlinear Constraints through explicit Proof Construction
 
