@@ -3174,6 +3174,9 @@ ATS (\S\ref{sec:ats})
 
 Shi-Xi13 \emph{A Linear Type System for Multicore Programming in ATS}:
 
+viewed ``\emph{Negatively}'' (???), Viewtypes are for classifying
+Capabilities (Spaces) of Consuming (Storing) Resources %FIXME
+
 (example Views for Socket Programming) %FIXME
 
 \emph{Datasorts} -- like a Datatype Declaration (ML) but the Declared
@@ -3184,13 +3187,13 @@ $\mono{absview}$
 
 $\mono{dataview}$
 
-a Type is always considered a Viewtype ???
+a Type is always considered a Viewtype ??? %FIXME
 
 $\mathcal{L}^\parallel_0$
 
 $\mathcal{L}^\parallel_{\forall, \exists}$
 
-&#x261e; $\mathcal{L}^\parallel_{\forall,\exists}$
+\fist $\mathcal{L}^\parallel_{\forall,\exists}$
 (\S\ref{sec:l_par_quant}) -- Parallel Reduction Calculus
 (\S\ref{sec:parallel_reduction_calculus}) with Universally and
 Existentially Quantified (Polymorphic and Dependent) Viewtypes
@@ -9472,7 +9475,7 @@ with a simple Linear Type System
 
 \emph{Viewtypes} (\S\ref{sec:viewtype})
 
-&#x261e; Extension: $\mathcal{L}^\parallel_{\forall,\exists}$
+\fist Extension: $\mathcal{L}^\parallel_{\forall,\exists}$
 (\S\ref{sec:l_par_quant}) -- Universally and Existentially Quantified
 (Polymorphic and Dependent) Viewtypes and support for Programming with
 Theorem Proving
@@ -9600,16 +9603,70 @@ Xi-Ren-Wu-Blair15 - \emph{Session Types in a Linearly Typed
 
 \textbf{Syntax}
 
-\emph{Viewtype} (\S\ref{sec:viewtype})
+(note in Xi-Ren-Wu-Blair15 the Type Constructor based on Linear
+Implication $\multimap$ is written $\rightarrow_l$; here we will just
+use $\multimap$)
 
-$\mono{thread\_create} : (\Unit \rightarrow_l \Unit) \Rightarrow
-\Unit$
+%FIXME
 
-$\hat{T}_1 \& \hat{T}_2$ as a Dependent Type:
+$T$ -- Types
+
+$\hat{T}$ -- \emph{Viewtypes} (\S\ref{sec:viewtype})--
+\emph{Resources}
+
+note that regular Types are a Subset of Viewtypes ??? %FIXME
+
+$\hat{T} \otimes \hat{T}$ -- Conjunction of two Resources
+(Multiplicative Conjunction in Linear Logic)
+
+Signiature $SIG$ assigns a Viewtype to each Constant Resource $rc$ and
+a Constant Type ($c$-type) of the form $(\hat{T}_1, \ldots, \hat{T}_n)
+\Rightarrow \hat{T}$ to each Constant
+
+$\multimap$ -- Type Constructor based on Linear Implication; applying
+a Function (of Viewtype) $\hat{T}_1 \multimap \hat{T}_2$ to a Value of
+Viewtype $\hat{T}_1$ yields a result of Viewtype $\hat{T}_2$ and
+\emph{consumes} the Function itself
+
+$\rightarrow$ -- Type Constructor; applying a Function of Type (?)
+$\hat{T}_1 \rightarrow \hat{T}_2$ \emph{does not consume} the Function
+itself
+%FIXME
+
+$\hat{T}_1 \parr \hat{T}_2$ -- Multiplicative Disjunction: essentially
+means the Capability (Space) that ``joins'' two classified by
+$\hat{T}_1$ and $\hat{T}_2$
+
+(no corresponding constructor for $\parr$ in ATS)
+
+$\hat{T}_1 \& \hat{T}_2$ -- Additive Conjunction: a Choice to obtain
+any Capability (Space) classified by either $\hat{T}_1$ or
+$\hat{T}_2$; as a Dependent Type:
 \[
-  \forall b : \bool. \Bool(b)
-    \rightarrow_l \Choose(\hat{T}_1, \hat{T}_2, b)
+  \forall b : bool. \Bool(b)
+    \multimap \Choose(\hat{T}_1, \hat{T}_2, b)
 \]
+
+Constant Function $\mono{thread\_create}$ and corresponding $c$-type:
+\[
+  \mono{thread\_create} : (\Unit \multimap \Unit) \Rightarrow \Unit
+\]
+
+$\rho(\cdot)$ -- Function computing the Multiset of Constant Resources
+for a given Expression %FIXME
+
+$R$ -- ranges over Finite Mulstisets of Resources; may be regarded as
+a mapping from Resources to Natural Numbers: $R(rc) = n$ means there
+are $n$ occurrences of $rc$ in $R$
+
+$RES$ -- an abstract collection of Finite Multisets of Resources
+assuming:
+\begin{itemize}
+  \item $\varnothing \in RES$
+  \item for any $R_1$ and $R_2$, $R_2 \in RES$ if both $R_1 \in RES$
+    and $R_2 \subseteq R_1$
+\end{itemize}
+$R$ is a \emph{Valid} Multiset of Resources when $R \in RES$ holds
 
 \emph{Program} -- a \emph{Closed Expression} (an Expression containing
 no Free Variables)
@@ -9617,7 +9674,9 @@ no Free Variables)
 $\Pi$ -- \emph{Pool}: a collection of Programs formally defined as a
 Finite Mapping from Thread IDs (represented by Natural Numbers) to
 Closed Expressions (Programs) of MTLC$_0$ such that $0$ is always in
-the Domain of the Mapping
+the Domain of the Mapping ($\Pi(0)$ being the Main Thread)
+
+(relation on pools to simulate muili-threaded program execution) %FIXME
 
 
 
@@ -9629,6 +9688,10 @@ MTLC$_0$ extended with support for Session Types
 \fist ATS (Applied Type System \S\ref{sec:ats})
 
 most closely related to SILL (Monadic instead of Linear) %FIXME
+
+``Dependent Session Types''
+
+Erlang code generation
 
 
 \endgroup
