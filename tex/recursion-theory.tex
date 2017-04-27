@@ -802,8 +802,8 @@ $\beta$-reduction (\S\ref{sec:beta_reduction})
 
 \begingroup
 
-\newcommand{\Chpos}{\mathsf{Chpos}}
-\newcommand{\Chneg}{\mathsf{Chneg}}
+\newcommand{\chpos}{\mathbf{chpos}}
+\newcommand{\chneg}{\mathbf{chneg}}
 \newcommand{\channelsend}{\mono{channel\_send}}
 \newcommand{\chanpossend}{\mono{chanpos\_send}}
 \newcommand{\channegsend}{\mono{channeg\_send}}
@@ -813,9 +813,9 @@ $\beta$-reduction (\S\ref{sec:beta_reduction})
 \newcommand{\channelclose}{\mono{channel\_close}}
 \newcommand{\chanposclose}{\mono{chanpos\_close}}
 \newcommand{\channegclose}{\mono{channeg\_close}}
-\renewcommand{\snd}{\mono{snd}}
-\newcommand{\rcv}{\mono{rcv}}
-\renewcommand{\Unit}{\mathsf{()}}
+\newcommand{\Send}{\mathsf{Send}}
+\newcommand{\Recv}{\mathsf{Recv}}
+\renewcommand{\Unit}{\mathsf{\mathbf{1}}}
 
 Xi-Ren-Wu-Blair15 - \emph{Session Types in a Linearly typed
   Multi-threaded Lambda-Calculus} -- embedding in ATS (Applied Type
@@ -837,34 +837,34 @@ containing an indefinite number of Sends and Receives
 
 Dual Channel Types:
 
-$\Chpos(S)$ -- \emph{Positive Channel}: equal to $\Chneg(S^\bot)$
+$\chpos(S)$ -- \emph{Positive Channel}: equal to $\chneg(S^\bot)$
 
-$\Chneg(S)$ -- \emph{Negative Channel}: equal to $\Chpos(S^\neg)$
+$\chneg(S)$ -- \emph{Negative Channel}: equal to $\chpos(S^\neg)$
 
 $\hat{T}$ -- ranges over Linear Types (including Non-linear Types as a
 special case)
 
 $\channelsend$ splits into $\chanpossend$ and $\channegrecv$:
 
-$\chanpossend : (!\Chpos(\snd(\hat{T})::S) \gg \Chpos(S), \hat{T})
+$\chanpossend : (!\chpos(\Send(\hat{T})::S) \gg \chpos(S), \hat{T})
 \rightarrow \Unit$
 
-$\channegrecv : (!\Chneg(\rcv(\hat{T})::S) \gg \Chneg(S), \hat{T})
+$\channegrecv : (!\chneg(\Recv(\hat{T})::S) \gg \chneg(S), \hat{T})
 \rightarrow \Unit$
 
 $\channelrecv$ splits into $\chanposrecv$ and $\channegsend$:
 
-$\chanposrecv : (!\Chpos(\rcv(\hat{T})::S) \gg \Chpos(S))
+$\chanposrecv : (!\chpos(\Recv(\hat{T})::S) \gg \chpos(S))
 \rightarrow \hat{T}$
 
-$\channegsend : (!\Chneg(\snd(\hat{T})::S) \gg \Chneg(S))
+$\channegsend : (!\chneg(\Send(\hat{T})::S) \gg \chneg(S))
 \rightarrow \hat{T}$
 
 equivalent $\chanpossend$ and $\chanposrecv$ used in formalization:
 
-$\chanpossend : (\Chpos(\snd(\hat{T})::S), \hat{T}) \rightarrow \Chpos(S)$
+$\chanpossend : (\chpos(\Send(\hat{T})::S), \hat{T}) \rightarrow \chpos(S)$
 
-$\chanposrecv : (\Chpos(\rcv(\hat{T})::S)) \rightarrow \Chpos(S)
+$\chanposrecv : (\chpos(\Recv(\hat{T})::S)) \rightarrow \chpos(S)
 \otimes \hat{T}$
 
 where $\otimes$ is a Linear Tuple Type
@@ -2783,7 +2783,7 @@ Object Paradigm ($\pi$-calculus): only Access to an Agent can be
 Transmitted and Bound (Sole Access of one Agent to another only as a
 special case)
 
-\fist Actor Calculus (\S\ref{sec:actor_caclulus}) -- Crafa12
+\fist Actor Calculus (\S\ref{sec:actor_calculus}) -- Crafa12
 
 
 \asterism

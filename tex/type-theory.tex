@@ -5130,7 +5130,7 @@ Services with Dynamic Joining of possibly unknown number of Processes
 \fist cf. Session Types (\S\ref{sec:session_type}), \fist cf.
 Multirole Session Types \S\ref{sec:multirole_session}
 
-\fist cf. Behavioral Types \S\ref{sec:behavioral_types}
+\fist cf. Behavioral Types \S\ref{sec:behavioral_type}
 
 Session Types describe the ``flow'' of Communications in a single
 Conversation Session while Behavioral Types and Conversation Types
@@ -5183,7 +5183,7 @@ Walker-Morrisett00 \emph{Alias Types for Recursive Data Structures}
 
 Smith-Walker-Morrisett00 \emph{Alias Types} -- (Rust ???) %FIXME
 
-Calculus of Capabilities (\S\ref{sec:capabailities_calculus})
+Calculus of Capabilities (\S\ref{sec:capabilities_calculus})
 
 cf. Ownership Type (\S\ref{sec:ownership_type})
 
@@ -9588,24 +9588,32 @@ Parallel $\mono{let}$-binding %FIXME
 
 \begingroup
 
-\renewcommand{\Unit}{\mathsf{()}}
+\renewcommand{\Unit}{\mathbf{1}}
 \newcommand{\bool}{\mathsf{bool}}
 \newcommand{\Bool}{\mathsf{Bool}}
 \newcommand{\Choose}{\mathsf{Choose}}
-
-Multi-threaded $\lambda$-calculus (\S\ref{sec:mtlc}) with Linear Types
+\newcommand{\Nil}{\mathsf{Nil}}
+\newcommand{\Send}{\mathsf{Send}}
+\newcommand{\Recv}{\mathsf{Recv}}
+\newcommand{\Bool}{\mathsf{Bool}}
+\newcommand{\Choose}{\mathsf{Choose}}
+\newcommand{\Service}{\mathsf{Service}}
+\newcommand{\chpos}{\mathbf{chpos}}
+\newcommand{\chneg}{\mathbf{chneg}}
 
 Xi-Ren-Wu-Blair15 - \emph{Session Types in a Linearly Typed
   Multi-threaded Lambda-Calculus}
 
 \fist ATS (Applied Type System \S\ref{sec:ats})
 
+Multi-threaded $\lambda$-calculus (\S\ref{sec:mtlc}) with Linear Types
+
+Threads can be created and eliminated but there are no Channels for
+Communication between Threads; see MTLC$_{ch}$ (\S\ref{sec:mtlc_ch})
+for extension with Synchronous Communication Channels
+
 
 \textbf{Syntax}
-
-(note in Xi-Ren-Wu-Blair15 the Type Constructor based on Linear
-Implication $\multimap$ is written $\rightarrow_l$; here we will just
-use $\multimap$)
 
 %FIXME
 
@@ -9623,10 +9631,11 @@ Signiature $SIG$ assigns a Viewtype to each Constant Resource $rc$ and
 a Constant Type ($c$-type) of the form $(\hat{T}_1, \ldots, \hat{T}_n)
 \Rightarrow \hat{T}$ to each Constant
 
-$\multimap$ -- Type Constructor based on Linear Implication; applying
-a Function (of Viewtype) $\hat{T}_1 \multimap \hat{T}_2$ to a Value of
-Viewtype $\hat{T}_1$ yields a result of Viewtype $\hat{T}_2$ and
-\emph{consumes} the Function itself
+$\rightarrow_l$ -- Type Constructor based on Linear Implication
+$\multimap$ (see Interpreting Linear Logic Connectives in
+MTLC$_{ch}$); applying a Function (of Viewtype) $\hat{T}_1
+\rightarrow_l \hat{T}_2$ to a Value of Viewtype $\hat{T}_1$ yields a
+result of Viewtype $\hat{T}_2$ and \emph{consumes} the Function itself
 
 $\rightarrow$ -- Type Constructor; applying a Function of Type (?)
 $\hat{T}_1 \rightarrow \hat{T}_2$ \emph{does not consume} the Function
@@ -9644,12 +9653,12 @@ any Capability (Space) classified by either $\hat{T}_1$ or
 $\hat{T}_2$; as a Dependent Type:
 \[
   \forall b : bool. \Bool(b)
-    \multimap \Choose(\hat{T}_1, \hat{T}_2, b)
+    \rightarrow_l \Choose(\hat{T}_1, \hat{T}_2, b)
 \]
 
 Constant Function $\mono{thread\_create}$ and corresponding $c$-type:
 \[
-  \mono{thread\_create} : (\Unit \multimap \Unit) \Rightarrow \Unit
+  \mono{thread\_create} : (\Unit \rightarrow_l \Unit) \Rightarrow \Unit
 \]
 
 $\rho(\cdot)$ -- Function computing the Multiset of Constant Resources
@@ -9679,19 +9688,450 @@ the Domain of the Mapping ($\Pi(0)$ being the Main Thread)
 (relation on pools to simulate muili-threaded program execution) %FIXME
 
 
+\textbf{Static Semantics}
+
+\emph{Typing Rules}
+
+%FIXME rules
+
+$\Gamma$ -- Intuitionistic Expression Context
+
+$\Delta$ -- Linear Expression Context
+
+each Variable occurs at most once in a Context $\Gamma$ or $\Delta$
+
+Contexts can be regarded as Finite Mappings
+
+$(\Gamma_1, \Gamma_2)$ -- Union of $\Gamma_1$ and $\Gamma_2$ defined
+when $dom(\Gamma_1) \cap dom(\Gamma_2) = \varnothing$
+
+$(\Delta_1, \Delta_2)$ -- Union of $\Delta_1$ and $\Delta_2$ defined
+when $dom(\Delta_1) \cap dom(\Delta_2) = \varnothing$
+
+$(\Gamma;\Delta)$ -- combined Expression Context defined when
+$dom(\Gamma) \cap dom(\Delta) = \varnothing$
+
+$\Theta$ -- Substitution on Type and Viewtype Variables %FIXME
+
+$\hat{T}[\Theta]$ -- the result of applying $\Theta$ to $\hat{T}$
+
+$SIG \vDash rc : \hat{\delta}$ -- $rc$ is assigned the Viewtype
+$\hat{\delta}$ in the Signature $SIG$
+
+$SIG \vDash c : (\hat{T}^0_1, \ldots, \hat{T}^0_n) \Rightarrow
+\hat{T}^0$ -- Judgement stating that $c$ is assigned a $c$-type of the
+form $(\hat{T}_1, \ldots, \hat{T}_n) \Rightarrow \hat{T}$
+%FIXME further explanation wrt substitution
+
+\emph{Typing Judgements in MTLC$_0$}:
+
+$(\Gamma;\Delta) \vdash e : \hat{T}$
+
+by the Typing Rules a Closed Value \emph{cannot} contain any Resources
+if the Value itself can be assigned a Non-linear Type rather than a
+Viewtype:
+
+Prop. \emph{If $(\varnothing;\varnothing) \vdash v : T$ is Derivable,
+  then $\rho(v) = \varnothing$}
+
+Lem. (\emph{Canonical Forms})
+
+$\theta$ -- Substitution on Variables
+
+$e[\theta]$ -- result of applying $\theta$ to Expression $e$
+
+Lem. (\emph{Substitution}) \emph{If $(\Gamma_1;\Delta_1) \vdash \theta
+  : (\Gamma_2;\Delta_2)$ and $(\Gamma_2;\Delta_2) \vdash e : \hat{T}$,
+  then $(\Gamma_1;\Delta_1) \vdash e[\theta] : \hat{T}$ is Derivable
+  and $\rho(e[\theta]) = \rho(e) \uplus \rho(\theta)$}
+
+-- needed to establish Soundness of Type System
+
+
+\textbf{Dynamic Semantics}
+
+\emph{Evaluation Rules}
+
+$E$ -- Evaluation Context (definition given)
+
+$E[e]$ -- Expression obtained from replacing the only Hole $[]$ in $E$
+with $e$
+
+Pure Redexes and Reducts
+
+Ad-hoc Redexes and Sole Reducts -- Resources may be \emph{generated}
+as well as \emph{consumed} when Ad-hoc Reductions occur
+
+$e_1 \rightarrow e_2$ -- $e_1$ Evaluates (or Reduces) to $e_2$ Purely
+when $e$ is a Pure Redex where $e_1 = E[e]$ and $e_2 = E[e']$ such
+that $e'$ is a Reduct of $e$
+
+$\Pi_1 \rightarrow \Pi_2$ -- Evaluation on Pools (definition given)
+
+Soundness of MTLC$_0$:
+
+Thm. (\emph{Subject Reduction on Pools}) \emph{If $\vdash \Pi_1 :
+  \hat{T}$ is Derivable and $\Pi_1 \rightarrow \Pi_2$ holds for some
+  $\Pi_2$ satisfying $\rho(\Pi_2) \in RES$, then $\vdash \Pi_2 :
+  \hat{T}$ is also Derivable}
+
+Thm. (\emph{Progress Property on Pools}) \emph{If $\vdash\Pi_1 :
+  \hat{T}$ is Derivable then either $\Pi_1$ is a Singleton Mapping $[0
+    \mapsto v]$ for some $v$, or else $\Pi_1 \rightarrow \Pi_2$ holds
+  for some $\Pi_2$ such that $\rho(\Pi_2) \in RES$}
+
+by the above two Theorems, the Evaluation of a Well-typed Pool either
+leads to a Pool that is a Singleton Mapping of the form $[0 \mapsto
+  v]$ for some Value $v$, or else Evaluation never halts
+(Type-soundness)
+
+(note: in the original Xi-Ren-Wu-Blair the phrase ``or else goes on
+forever'' is used instead of ``Evaluation never halts''; the latter
+seems to be more clear, if it is correctly stated)
+
+
 
 \subsubsection{MTLC$_{ch}$}\label{sec:mtlc_ch}
 
-MTLC$_0$ extended with support for Session Types
-(\S\ref{sec:session_type})
+MTLC$_0$ extended with Synchronous Communication Channels and support
+for Session Types (\S\ref{sec:session_type})
 
-\fist ATS (Applied Type System \S\ref{sec:ats})
+support for both Synchronous and Asynchronous Session-typed
+Communication Channels, ``in practice'' %FIXME
 
-most closely related to SILL (Monadic instead of Linear) %FIXME
+ATS (Applied Type System \S\ref{sec:ats}) Implementation of Dyadic
+Sessions
+
+most closely related to SILL (Monadic instead of Linear) --
+Pfenning-Griffith15 \emph{Polarized Substructural Session Types} --
+implemented in OCaml %FIXME xref
 
 ``Dependent Session Types''
 
 Erlang code generation
+
+\emph{Session Types}:
+\[
+  S ::= \Nil \ |\ \Send(\hat{T}) :: S \ |\ \Recv(\hat{T}) :: S
+\]
+Session Type Duals:
+\begin{align*}
+  dual(\Nil)              =&\ \overline{\Nil} \\
+  dual(\Send(\hat{T})::S) =&\ \Recv(\hat{T}) :: dual(S) \\
+  dual(\Recv(\hat{T})::S) =&\ \Send(\hat{T}) :: dual(S)
+\end{align*}
+
+$\Nil$ -- Empty Session; a Positive Channel of Type $\Nil$ awaits a
+Message to close itself; a Negative Channel of Type $\Nil$ Sends out
+``such a Message'' before Closing itself %FIXME such a message ?
+
+$\sigma$ -- Ranges over Session Types
+
+$\mono{chneg\_create} : (\chpos(\sigma) \rightarrow_l \mathbf{1})
+\Rightarrow \chneg(\sigma)$ -- Function for creating a Negative
+Channel with associated $c$-type $(\chpos(\sigma) \rightarrow_l
+\mathbf{1}) \Rightarrow \chneg(\sigma)$ which takes a Linear Function
+of Type $\chpos(S) \rightarrow_l \mathbf{1}$, creates a Positive and
+Negative Channel sharing the same Channel ID that are properly
+connected, and starts a Thread for Evaluating the call that applies
+the Linear Function to the Positive Channel, and then returns the
+Negative Channel
+
+Send and Receive for Positive Channels:
+
+$send : (\chpos (\Send(\hat{\alpha}) :: \sigma), \hat{\alpha})
+\Rightarrow \chpos(\sigma)$
+
+$recv : (\chpos (\Recv(\hat{\alpha}) :: \sigma)) \Rightarrow
+\chpos(\sigma) \otimes \hat{\alpha}$
+
+correspond to $\mono{chanpos\_send}$ and $\mono{chanpos\_recv}$,
+respectively
+
+Send and Receive for Negative Channels:
+
+$\overline{send} : (\chneg(\Recv(\hat{a}) :: \sigma), \hat{a})
+\Rightarrow \chneg(\sigma)$
+
+$\overline{recv} : (\chneg(\Send(\hat{a}) :: \sigma)) \Rightarrow
+\chneg(\sigma) \otimes \hat{a}$
+
+correspond to $\mono{channeg\_send}$ and $\mono{channeg\_recv}$,
+respectively
+
+$close : (\chpos(\Nil)) \Rightarrow \Unit$ -- Function for closing a
+Positive Channel (can also be referred to as $\mono{chanpos\_close}$)
+
+$\overline{close} : (\chneg(\Nil)) \Rightarrow \Unit$ -- Function for
+closing a Negative Channel (can also be referred to as
+$\mono{channeg\_close}$)
+
+$ch_i$, $\overline{ch}_i$ -- Resource Constants for Positive and
+Negative Channels, respectively, where $i$ ranges over Natural
+Numbers; for each $i$, $ch_i$ and $\overline{ch}_i$ are Dual to
+eachother and their Channel IDs are $i$
+
+$ch$, $\overline{ch}$ -- ranges over $ch_i$ and $\overline{ch}_i$
+
+
+\emph{Typing Rules} -- same as MTLC$_0$
+
+$\chpos(S)$ \emph{Matches} $\chneg(S)$ for some Session Type $S$
+
+for any Type Derivation of $\Pi : \hat{T}$ such that $\rho(\Pi) \in
+RES$, the Type assigned to a Positive Channel $ch$ is always required
+to Match the Type of the corresponding Negative Channel
+$\overline{ch}$ of the same Channel ID
+
+additional Rules for Evaluating Pools (definition given)
+
+Partial (Ad-hoc) Redexes:
+\begin{itemize}
+  \item $close(ch)$ Matches $\overline{close}(\overline{ch})$
+  \item $send(ch,v)$ Matches $\overline{send}(\overline{ch})$
+  \item $recv(ch)$ Matches $\overline{recv}(\overline{ch},v)$
+\end{itemize}
+
+every Well-typed Program in MTLC$_{ch}$ is either a Value or of the
+form $E[e]$ for some Evaluation Context $E$ and Expression $e$ that is
+either a Redex or Partial Redex
+
+\emph{Blocked Expressions} -- an Expression is \emph{Blocked} if it is
+of the form $E[e]$ for some Partial Redex $e$
+
+Blocked Expressions $E_1[e_1]$ and $E_2[e_2]$ Match if $e_1$ and $e_2$
+are Matching Partial Redexes
+
+a Pool containing two matching Blocked Expressions can be Reduced
+by the Rules for Evaluating Pools
+
+\emph{Deadlocked Pools} -- a Pool $\Pi$ is \emph{Deadlocked} if
+$\Pi(tid)$ for $tid \in dom(\Pi)$ are all Blocked Expressions and
+there are no Matching Expressions, \emph{or} if $\Pi(0)$ is a Value
+and $\Pi(tid)$ for Positive $tid \in dom(\Pi)$ are all Blocked
+Expressions with no Matching Expressions
+
+Lem. (\emph{Deadlock Freedom}) \emph{For a Well-typed Pool $\Pi$ such
+  that $\Pi(0)$ is either a Value containing no Channels or a Blocked
+  Expression, and $\Pi(tid)$ for all Positive $tid \in dom(\Pi)$ is a
+  Blocked Expression, if $\Pi$ is obtained from Evaluating an initial
+  Pool containing no Channels, then thre exist two Thread IDs $tid_1$
+  and $tid_2$ such that $\Pi(tid_1)$ and $\Pi(tid_2)$ are Matching
+  Blocked Expressions}
+
+note: the scenario where the Main Thread in a Pool returns a Value
+containing a Channel while another Thread is waiting for input is not
+considered a Deadlocked one; forms of Values that contain Channels can
+be a Channel itself, a Closure-function containing a Channel in its
+Environment, or a compound Value like a Tuple containing a Channel,
+etc.-- any Value containing a Channel can only be assigned a (true)
+Viewtype
+
+Proof of Deadlock Freedom Lemma--
+
+$M$ -- \emph{Channel Set} of Positive and Negative Channels
+
+$\class{M}$ -- Finite Non-empty Collection (Multiset) of Sets $M$
+
+$\class{M}$ is \emph{Regular} if the Sets in $\class{M}$ are pairwise
+Disjoint and each pair of Channels $ch$ and $\overline{ch}$ are either
+both included in the Multiset Union $\uplus(\class{M})$ or else are
+both excluded from it (note $\uplus(\class{M})$ is the same as the Set
+Union $\cup(\class{M})$ since the Sets in $\class{M}$ are pairwise
+Disjoint)
+
+$\class{M} \rightsquigarrow \class{M}'$ -- \emph{DF-reduction
+  Relation} on Regular Collections of Channel Sets: $\class{M}$
+DF-reduces to $\class{M}'$ via a Channel $ch$ if there exists Channel
+Sets $M_1$ and $M_2$ in $\class{M}$ such that $ch \in M_1$ and $ch \in
+M_2$ and $\class{M}' = (\class{M}\setminus\{M_1,M_2\}) \cup
+\{M_{12}\}$ where $M_{12} = (M_1 \cup
+M_2)\setminus\{ch,\overline{ch}\}$
+
+$\class{M}$ is \emph{DF-normal} if there is no $\class{M}'$ such that
+$\class{M} \rightsquigarrow \class{M}'$
+
+Prop. \emph{For each $M$ in a DF-normal $\class{M}$, a Channel $ch$ is
+  in $M$ if and only if $\overline{ch}$ is also in $M$}
+
+Def. \emph{DF-reducible}: A Regular Collection of Channel Sets
+$\class{M}$ is DF-reducible if either each Set in $\class{M}$ is
+Empty, or else $\class{M}$ is not DF-normal and $\class{M}'$ is
+DF-reducible whenever $\class{M} \rightsquigarrow \class{M}'$
+
+a Channel Set $M$ is \emph{Self-looping} if it contains both $ch$ and
+$\overline{ch}$ for some $ch$; a Collection of Channel Sets
+$\class{M}$ is not DF-reducible if there exists a Self-looping Channel
+Set in $\class{M}$
+
+(note: Xi-Ren-Wu-Blair15 contains the following proposition which
+seems to be vacuously true, not sure what purpose it serves):
+
+Prop. \emph{For a Regular Collection of Channel Sets $\class{M}$, if
+  $\class{M}$ is DF-reducible and $\class{M}' =
+  \class{M}\setminus\{\varnothing\}$ then $\class{M}'$ is also
+  DF-reducible}
+
+(note: also this proposition seems fairly obvious or equivalent to the
+previous definition of DF-reducibility):
+
+Prop. \emph{For a Regular Collection of Channel Sets $\class{M}$, if
+  $\class{M} \rightsquigarrow \class{M}'$ and $\class{M}'$ is
+  DF-reducible then $\class{M}$ is also DF-reducible}
+
+(another Prop. regarding DF-reducibility) %TODO
+
+(Lem. regarding non-DF-reducibility) %TODO
+
+$\rho_{CH}(e)$ -- Set of Channels contained in Expression $e$
+
+$\class{R}_{CH}(\Pi)$ -- Collection of $\rho_{CH}(\Pi(tid))$ where
+$tid$ ranges over $dom(\Pi)$
+
+Lem. \emph{If $\class{R}_{CH}(\Pi)$ is DF-reducible and $\Pi$
+  Evaluates to $\Pi$', then $\class{R}_{CH}(\Pi')$ is also
+  DF-reducible}
+
+--Proof of Deadlock Freedom Lemma
+
+
+\textbf{Type System Soundness}
+
+Thm. (\emph{Subject Reduction on Pools}) \emph{If $\vdash \Pi_1 :
+  \hat{T}$ is Derivable and $\Pi_1 \rightarrow \Pi_2$ such that
+  $\rho(\Pi_2) \in RES$, then $\vdash \Pi_2 : \hat{T}$ is Derivable}
+
+Thm. (\emph{Progress Property on Pools}) \emph{If $\vdash \Pi_1 :
+  \hat{T}$ is Derivable and $\rho(\Pi_1)$ is Valid, assuming that
+  $\rho(v)$ contains no Channels for every Value $v$ of the Type
+  $\hat{T}$, then either $\Pi_1$ is a singleton mapping $[0 \mapsto
+    v]$ for some $v$, or else $\Pi_1 \rightarrow \Pi_2$ holds for some
+  $\Pi_2$ such that $\rho(\Pi_2) \in RES$}
+
+
+\textbf{Additional features}
+
+Bidirectional Forwarding
+
+User-defined Recursive Session Types
+
+Quantification over Types-- ATS \emph{Predicative Quantification}
+(Dependent Types) and \emph{Impredicative Quantification} (Parametric
+Polymorphism)
+
+
+\textbf{Interpreting Linear Logic Connectives}
+
+$A \otimes B$ -- \emph{Multiplicative Conjunction}-- (from Client's
+perspective) for Session Types $A$ and $B$, a Channel of Session Type
+$A \otimes B$ is Interpreted as one that Inputs a Channel specified by
+$A$ and then Behaves as a Channel specified by $B$:
+\[
+  \Send(\chneg(A)) :: B
+\]
+$\mono{fserv\_times}$ -- allows the construction of a Channel of the
+Type $\chneg(A \otimes B)$ from two Channels of Types $\chneg(A)$ and
+$\chneg(B)$
+%TODO give definition
+
+can also be Interpreted as:
+\[
+  \Send(\chneg(A)) :: \Send(\chneg(B)) :: \Nil
+\]
+
+$A \multimap B$ -- \emph{Multiplicative Implication}-- (from Client's
+perspective) for Session Types $A$ and $B$, a Channel of Session Type
+$A \multimap B$ is Interpreted as one that Outputs a Channel specified
+by $A$ and then Behaves as a Channel specified by $B$:
+\[
+  \Recv(\chneg(A)) :: B
+\]
+$\mono{fserv\_implies}$ -- uses a (Linear) Function that can turn a
+Negative Channel specified by $A$ into a Negative Channel specified by
+$B$ to construct a Channel of Type $\chneg(A \multimap B)$
+%TODO give definition
+
+$A \oplus B$ -- \emph{Additive Disjunction}-- (from Client's
+perspective) for Session Types $A$ and $B$, a Channel of Session Type
+$A \oplus B$ is Interpreted as one that Inputs a Boolean Value and
+then Behaves as the Channel specified by either $A$ or $B$ depending
+on whether the Boolean Value was true or false, respectively:
+\[
+  \forall b : bool. \Send(\Bool(b)) :: \Choose(A,B,b)
+\]
+
+Positive Channel Type:
+\[
+  \forall b : bool. \chpos(\Send(\Bool(b)) :: \Choose(A,B,b))
+\]
+Negative Channel Type:
+\[
+  \exists b : bool. \chneg(\Send(\Bool(b)) :: \Choose(A,B,b))
+\]
+$\mono{fserv\_disj_l}$, $\mono{fserv_disj_r}$ -- also called ``Internal
+Choice'' (the Server decides)
+%TODO give definitions
+
+$A \& B$ -- \emph{Additive Conjunction}-- (from Client's perspective)
+for Session Types $A$ and $B$, a Channel of Session Type $A \& B$ is
+Interpreted as one that Outputs a Boolean Value and then Behaves as a
+Channel specified by either $A$ or $B$ depending on whether the
+Boolean Value is true or false, respectively:
+\[
+  \forall b : bool. \Recv(\Bool(b)) :: \Choose(A,B,b)
+\]
+$\&$ not supported as a Type Constructor in ATS so it is represented
+as:
+\[
+  \forall b:bool,
+    \Bool(b) \rightarrow_l \Choose(\chneg(A), \chneg(B), b)
+\]
+
+Positive Channel Type:
+\[
+  \exists b : bool. \chpos(\Recv(\Bool(b)) :: \Choose(A,B,b))
+\]
+Negative Channel Type:
+\[
+  \forall b : bool. \chneg(\Recv(\Bool(b)) :: \Choose(A,B,b))
+\]
+$\mono{fserv\_aconj}$ -- checks the ``Tag'' Received on its first
+Argument (a Positive Channel $\mono{chp}$) and then determines whether
+to offer $\mono{chp}$ as a Channel specified by $A$ or $B$; also
+called ``External Choice'' (the Client decides)
+%TODO give definition
+
+$!S$ -- \emph{Exponential}-- for a Session Type $S$, $!S$ is a Type
+that can be assigned to a Value representing a \emph{Persistent
+  Service} specified by $S$:
+\[
+  \Service(S)
+\]
+with which Channels of the Type $\chneg(S)$ can be repeatedly created
+
+built-in Function:
+\[
+  service\_create :
+    (\chpos(\sigma) \rightarrow \Unit) \Rightarrow \Service(\sigma)
+\]
+note that the argument is a Non-linear Function (can be called
+repeatedly)
+
+(at this point Xi-Ren-Wu-Blair15 presents some examples, e.g. Sieve of
+Eratosthenes, Channel Queues)
+
+
+\textbf{ATS Session-Typed Channels Implementation}
+
+Implementation in ATS of Dyadic Session-typed Channels
+
+
+\textbf{Erlang Implementation}
+
+Channels implemented as a pair of Processes: one handles Read for the
+Positive Channel and Write for the Negative Dual Channel, the other
+handles Read for the Negative Channel and Write for the for the
+Positive Dual Channel %TODO verify this is correct?
 
 
 \endgroup
