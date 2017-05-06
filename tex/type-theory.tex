@@ -944,7 +944,6 @@ Calculus of Inductive Constructions (\S\ref{sec:cic})
 
 \asterism
 
-
 Recursive Data Type
 
 Values may contain Values of the same Type
@@ -959,6 +958,11 @@ general form:
 $\alpha$ -- Type Variable: may appear in the Type $T$ and stands for
 the entire Type itself
 
+example Natural Numbers:
+\[
+  nat = \mu\alpha.1 + \alpha
+\]
+
 $roll : T[\mu\alpha.T/\alpha] \rightarrow \mu\alpha.T$
 
 $unroll : \mu\alpha.T \rightarrow T[\mu\alpha.T/\alpha]$
@@ -968,6 +972,43 @@ are Inverses
 
 Equirecursive (\S\ref{sec:equirecursive_type}): $unroll$ is the
 Identity
+
+
+
+\subsubsection{Isorecursive Type}\label{sec:isorecursive_type}
+
+$roll$ and $unroll$ are Inverse Functions
+
+
+
+\subsubsection{Equirecursive Data Type}\label{sec:equirecursive_type}
+
+$unroll$ is an Identity
+
+
+
+\subsubsection{Mutually Recursive Type}
+\label{sec:mutually_recursive}\hfill
+
+a Forest (\S\ref{sec:forest_type}) is a Mutually Recursive Definition
+of a Tree (\S\ref{sec:tree_type})
+
+
+
+\subsubsection{Guarded Recursive Data Type}
+\label{sec:grdt}
+
+\emph{GRDT}
+
+\fist GADTs (\S\ref{sec:gadt})
+
+\fist Equality Constrained Types (Phantom Types
+\S\ref{sec:equality_constrained})
+
+Xi16:
+
+GRDTs can be thought of as an \emph{Impredicative} form of Dependent
+Type where Type Indices themselves are Types
 
 
 
@@ -1023,43 +1064,6 @@ In $\mathbf{Cpo}$ (the Category of Complete Partial Orders
 \S\ref{sec:complete_partialorder} and Continuous Functions), Final
 Types coincide with Initial Types and the corresponding Initial
 Algebra and Final Coalgebras are Isomorphic.
-
-
-
-\subsubsection{Isorecursive Type}\label{sec:isorecursive_type}
-
-$roll$ and $unroll$ are Inverse Functions
-
-
-
-\subsubsection{Equirecursive Data Type}\label{sec:equirecursive_type}
-
-$unroll$ is an Identity
-
-
-
-\subsubsection{Mutually Recursive Type}
-\label{sec:mutually_recursive}\hfill
-
-a Forest (\S\ref{sec:forest_type}) is a Mutually Recursive Definition
-of a Tree (\S\ref{sec:tree_type})
-
-
-
-\subsubsection{Guarded Recursive Data Type}
-\label{sec:grdt}
-
-\emph{GRDT}
-
-\fist GADTs (\S\ref{sec:gadt})
-
-\fist Equality Constrained Types (Phantom Types
-\S\ref{sec:equality_constrained})
-
-Xi16:
-
-GRDTs can be thought of as an \emph{Impredicative} form of Dependent
-Type where Type Indices themselves are Types
 
 
 
@@ -1746,6 +1750,9 @@ Session Types (\S\ref{sec:session_type}); two-way Embedding: Processes
 Session Types as Effects
 
 \fist Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
+
+\fist Bisimulations (\S\ref{sec:bisimulation}) -- Process
+(\S\ref{sec:process_calculus}) Equivalences
 
 \begingroup
 
@@ -5109,9 +5116,273 @@ Danielou-Yoshida13 (Appendix)
 \subparagraph{Timed Multiparty Session Types}
 \label{sec:timed_multiparty}\hfill
 
+\begingroup
+
+\newcommand{\bool}{\mathsf{bool}}
+\newcommand{\nat}{\mathsf{nat}}
+\newcommand{\enndd}{\mathsf{end}}
+
 Bocchi-Yang-Yoshida14 - \emph{Timed Multiparty Session Types}
 
+\fist Timed Multiparty Session Calculus
+(\S\ref{sec:timed_multiparty_session_calculus})
+
 Communicating Timed Automata (\S\ref{sec:communicating_timed_fsm})
+
+Global and Local Types extended with \emph{Constraints on Clocks}:
+
+\emph{Timed Global Types}
+
+\emph{Timed Local Types}
+
+$X = \{x_1, \ldots, x_n\}$ -- Set of \emph{Clocks}
+
+$\nu : X \rightarrow \reals_{0\leq}$ -- \emph{Clock Assignment}
+returning the Time of Clocks in $X$
+
+$\nu + t = x \mapsto \nu(x) + t$ -- Assignment mapping all $x \in X$
+to $\nu(x) + t$
+
+$\nu_0 = x \mapsto 0$ -- \emph{Initial Assignment} mapping all Clocks
+to $0$
+
+$\Phi(X)$ -- Set of \emph{Clock Constraints} over $X$, with Syntax:
+\[
+  \delta ::=\ true \ |\ c < x \ |\ x = c \ |
+    \ \neg\delta \ |\ \delta_1 \wedge \delta_2
+\]
+where $c$ is a Bound Time Constant in $\rats_{0\leq}$; note $false$,
+$>$, $\leq$, $\geq$, and $\vee$ are derived from the above
+
+$fn(\delta)$ -- Set of \emph{Free Clocks} in $\delta$, defined
+Inductively:
+\begin{itemize}
+  \item $fn (true) = \varnothing$
+  \item $fn (c < x) = fn(x = c) = {x}$
+  \item $fn (\neg\delta) = fn (\delta)$
+  \item $fn (\delta_1 \wedge \delta_2)
+    = fn (\delta_1) \cup fn (\delta_2)$
+\end{itemize}
+
+$\nu \vDash \delta$ -- the Clock Assignment $\nu$ Satisfies the Clock
+Constraint $\delta$
+
+$\lambda$ -- a \emph{Reset Predicate} over a Subset of $X$ where each
+$x \in \lambda$ is set to $0$; Resets allow scenarios such as when a
+Time Constraint must be repeatedly Satisfied for an unbounded number
+of times
+
+$[\lambda \mapsto 0]\nu$ -- the Clock Assignment like $\nu$ with $0$
+assigned to all Clocks in $\lambda$
+
+$(p, q, p_1, \ldots \in \nats)$ -- Participants
+
+\emph{Communication}: Point-to-point Asynchronous Message Passing
+
+\emph{Interaction}: a Send Action and a Receive Action each annotated
+with a Clock Constraint (specifying when that Action can be executed)
+and a Reset Predicate (specifying which Clocks must be Reset)
+
+
+\textbf{Syntax}
+
+``Sorts'':
+\begin{flalign*}
+  \quad S ::=&\ \bool \ |\ \nat \ |\ \ldots \ |\ G \ |\ (T,\delta) &
+\end{flalign*}
+includes $G$ for Shared Name Passing and $(T,\delta)$ for
+Session Delegation %FIXME
+
+Timed Global Types:
+\begin{flalign*}
+  \quad G ::=&\ 
+    p \rightarrow q : \{l_i\langle{S_i}\rangle\{A_i\}.G_i\}_{i \in I}
+    \ |\ \mu\mathbf{t}.G \ |\ \mathbf{t} \ |\ \enndd & \\
+  \quad A ::=&\ \{\delta_O, \lambda_O, \delta_I, \lambda_I\} &
+\end{flalign*}
+where $A$ is a \emph{Time Assertion}
+
+$p \rightarrow q : \{l_i\langle{S_i}\rangle\{A_i\}.G_i\}_{i \in I}$ --
+an Interaction where $p$ chooses Branch $i \in I$ and Sends $q$ the
+Branching Label $l_i$ with a Message of Sort $S_i$ and the Session
+continues as specified by $G_i$
+
+$\mathbf{t}$ -- Type Variable
+
+$\mu\mathbf{t}.G$ -- Recursive Type
+
+Timed Local Types:
+\begin{flalign*}
+  \quad T ::=&\ p \oplus \{l_i\langle{S_i}\rangle\{B_i\}.T_i\}_{i \in I}
+    \ |\ p \& \{l_i\langle{S_i}\rangle\{B_i\}.T_i\}_{i \in I}
+    \ |\ \mu\mathbf{t}.T \ |\ \mathbf{t} \ |\ \enndd & \\
+  \quad B ::=&\ \{\delta,\lambda\} &
+\end{flalign*}
+
+$p \oplus \{l_i\langle{S_i}\rangle\{B_i\}.T_i\}_{i \in I}$ --
+Selection Types
+
+$p \& \{l_i\langle{S_i}\rangle\{B_i\}.T_i\}_{i \in I}$ -- Branching
+Types
+
+$\class{P}(G)$ -- Set of Participants of $G$
+
+$G\downarrow_p$ -- \emph{Projection} of $G$ onto Participant $p \in
+\class{P}(G)$
+
+
+\textbf{Timed Global Type Semantics}
+
+Labelled Transition System (LTS)
+
+$(\nu, G)$ -- States
+
+Labels:
+\[
+  \ell ::=\ pq!l\langle{S}\rangle \ |\ pq?l\langle{S}\rangle \ |\ t
+\]
+
+$pq!l\langle{S}\rangle$ -- $p$ Sends $l\langle{S}\rangle$ to $q$
+
+$pq?l\langle{S}\rangle$ -- $q$ Receives $l\langle{S}\rangle$ from $p$
+
+$t$ -- a \emph{Time Action} $t \in \reals_{0\leq}$ (models ``time
+passing'')
+
+$\class{L}$ -- Set of Labels
+
+$subj(\ell)$:
+\begin{itemize}
+  \item $subj(pq!l\langle{S}\rangle) = p$
+  \item $subj(pq?l\langle{S}\rangle) = q$
+  \item $subj(t) = \varnothing$
+\end{itemize}
+
+$p \rightsquigarrow q : l\langle{S}\rangle\{A\}.G$ -- extended Syntax
+of $G$ indicating a state in which $l\langle{S}\rangle$ has been Sent
+but not yet Received
+
+\emph{Ready Action} -- an Action that has no causal relationship with
+other Actions that occur earlier (syntactically)
+
+$ready(G,D)$ -- for each Ready Action in $G$, returns the Set of
+Constraints $\{\delta_i\}_{i\in I}$ of the Branches of that Ready
+Action, and $D$ is a Set of Participants tracking the causal
+dependencies between Actions. (detailed definition) %TODO
+
+Def. (Satisfiability of Ready Actions) $\nu \vDash^* ready(G)$ -- the
+Constraints of all Ready Actions of $G$ are Satisfiable under $\nu$ or
+some time in the future:
+\[
+  \nu \vDash^* read(G) \text{ if and only if }
+    \forall\{\{\delta_i\}_{i \in I}\} \in ready(G) \exists t \geq 0,
+    j \in I . \nu + t \vDash \delta_j
+\]
+
+LTS Transitions:
+\begin{itemize}
+  \item $[Select]$
+  \item $[Branch]$
+  \item $[Rec]$
+  \item $[Async1]$
+  \item $[Async2]$
+  \item $[Time]$
+\end{itemize}
+
+Execution is assumed to begin with the Initial Assignment $\nu_0$
+
+
+\textbf{Timed Local Type Semantics}
+
+$(\nu, T)$ -- States
+
+$\class{L}$ -- Labels
+
+Rules:
+\begin{itemize}
+  \item $[LSelect]$ -- Send
+  \item $[LBranch]$ -- Receive
+  \item $[LRec]$
+  \item $[LTime]$
+\end{itemize}
+
+$T$ always has only one Ready Action
+
+$ready(T)$
+
+$\nu + t \vDash^* ready(T)$
+
+$(T_1, \ldots, T_n, \vec{w})$ -- \emph{Configurations}
+
+$\vec{w} ::=\ \{w_{ij}\}_{i \neq j \in I}$ -- Unidirectional (possibly
+empty) Unbounded Channels with Messages of the form
+$l\langle{S}\rangle$
+
+(LTS for Configurations) %TODO
+
+$Tr(G)$ -- Set of ``visible'' Traces obtained by Reducing $G$ under
+the Initial Assignment $\nu_0$
+
+$\approx$ -- Trace Equivalence
+
+Thm. (Soundness and Completeness of Projection) \emph{For Timed Global
+  Type $G$ and Set of Projections $\{T_1,\ldots,T_n\} =
+  \{G\downarrow_p\}_{p \in \class{P}(G)}$, $G \approx
+  (T_1,\ldots,T_n,\vec{\varepsilon})$}
+
+
+\textbf{Proof Rules}
+
+Proof Rules for Validating Timed Multiparty Session Calculus
+(\S\ref{sec:timed_multiparty_session_calculus}) Programs
+against Timed Local Type specifications
+
+Judgements:
+
+$\Gamma \vdash P \rhd \Delta$
+
+$\Gamma \vdash e : S$
+
+Type Environments:
+\begin{flalign*}
+  \quad \Gamma ::=&\ \varnothing \ |\ \Gamma, u:S \ |\ \Gamma,X:\Delta & \\
+\end{flalign*}
+map Shared Variables/Names to Sorts and Process Variables to their
+Types
+
+Session environments:
+\begin{flalign*}
+  \quad \Delta ::=&\ \varnothing \ |\ \Delta, c:(\nu,T) &
+\end{flalign*}
+holds information on ongoing Sessions, e.g.:
+
+$\Delta(s[p]) = (\nu,T)$ -- the Proess being Validated is acting as
+$p$ in Session $s$ specified by $T$ and $\nu$ is a ``virtual'' Clock
+Assignment built during the Validation
+
+Def. (Infinite Satisfiability) -- needed to ensure Sound Typing in the
+presence of Recursive Protocols; guarantees ``regularity'' accross
+different instances of Recursion %TODO
+
+Proof Rules:
+
+$[VRequest]$, $[VAccept]$, $[VBranch]$, $[VSelect]$, $[VDelegate]$,
+$[VParallel]$, $[VConditional]$, $[VTime]$, $[VEnd]$, $[VDefine]$,
+$[VCall]$
+
+extended Rules for Errors and Clocks %TODO
+
+Thm. (Type Preservation) \emph{If $\Gamma \vdash P \rhd \varnothing$
+  and $P \rightarrow P'$, then $\Gamma \vdash P' \rhd \varnothing$}
+
+where $P$ is a Process Reduced from a Program (i.e. $\Delta =
+\varnothing$)
+
+Thm. (Time-error Freedom) \emph{If $\Gamma \vdash P \rhd \Delta$ and
+  $P \rightarrow^* P'$, then $P' \not\equiv \mathsf{error}$}
+
+
+\endgroup
 
 
 
@@ -9595,8 +9866,6 @@ Parallel $\mono{let}$-binding %FIXME
 \newcommand{\Nil}{\mathsf{Nil}}
 \newcommand{\Send}{\mathsf{Send}}
 \newcommand{\Recv}{\mathsf{Recv}}
-\newcommand{\Bool}{\mathsf{Bool}}
-\newcommand{\Choose}{\mathsf{Choose}}
 \newcommand{\Service}{\mathsf{Service}}
 \newcommand{\chpos}{\mathbf{chpos}}
 \newcommand{\chneg}{\mathbf{chneg}}

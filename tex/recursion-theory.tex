@@ -2023,7 +2023,10 @@ differs from Process Calculi:
     Process Calculus is Algebraically motivated
 \end{itemize}
 
-\fist Behavioral Types (\S\ref{sec:behavioral_type})
+\fist Behavioral Types (\S\ref{sec:behavioral_type}); Behavioral
+Theory uses Bisimulations (\S\ref{sec:bisimulation}) to describe
+Process Equivalences
+
 
 Process Calculi: \emph{Bounded Non-determinism}
 (\S\ref{sec:bounded_nondeterminism}; \fist Non-deterministic Automata
@@ -3188,6 +3191,11 @@ Observation Precongruences $\sqsubseteq$
 \subsubsection{Synchronous $\pi$-calculus}
 \label{sec:synchronous_pi_calculus}
 
+more Expressive than Asynchronous $\pi$-calculus
+(\S\ref{sec:asynchronous_pi_calculus}); same Expressiveness as
+Higher-order $\pi$-calculus (\S\ref{sec:higherorder_pi_calculus});
+less Expressive than Ambient Calculus (\S\ref{sec:ambient_calculus})
+
 \textbf{Synchronous $\pi$-calculus with Guarded (Binary) Choice}
 \cite{caires-pfenning10}
 
@@ -3347,15 +3355,22 @@ Relation Composition $\rho_1 \rho_2$ (e.g. $\xrightarrow{\tau}\equiv$)
 \subsubsection{Asynchronous $\pi$-calculus}
 \label{sec:asynchronous_pi_calculus}
 
+(wiki)
+
 Allows only Outputs with no Suffix (Output Atoms have the form
 $\overline{x}\langle y \rangle$)
 
-Any Process in the original $\pi$-calculus can be represented in
-Asynchronous $\pi$-calculus using an extra Channel to simulate explicit
-acknowledgement from the receiving Process
+Any Process in the original (Synchronous???) $\pi$-calculus can be
+represented in Asynchronous $\pi$-calculus using an extra Channel to
+simulate explicit acknowledgement from the receiving Process
+%FIXME
 
 Strictly less expressive than the Synchronous $\pi$-calculus with the
 Choice Operator
+
+Late, Early, and Open Bisimilarity coincide %FIXME
+
+Asynchronous Bisimilarity
 
 
 
@@ -3390,11 +3405,21 @@ Polyadic Output
 
 Processes may be sent through Channels
 
+same Expressiveness as Synchronous $\pi$-calculus
+(\S\ref{sec:synchronous_pi_calculus})
+
 
 
 \subsubsection{Monadic $\pi$-calculus}\label{sec:monadic_pi_calculus}
 
 Ill-sorted, Well-typed % FIXME
+
+
+
+\subsubsection{Ambient Calculus}\label{sec:ambient_calculus}
+
+more Expressive than Synchronous $\pi$-calculus
+(\S\ref{sec:synchronous_pi_calculus})
 
 
 
@@ -4619,6 +4644,53 @@ under a Context which Interacts Non-determinstically with the Handler.
 
 
 
+\subparagraph{Asynchronous Session Calculus}
+\label{sec:asynchronous_session_calculus}\hfill
+
+Bettini-Coppo-D'Antoni-De Luca-DezaniCiancaglini-Yoshida2008
+\emph{Global Progress in Dynamically Interleaved Multiparty Sessions}
+
+Timed extension: Timed Multiparty Session Calculus
+(\S\ref{sec:timed_multiparty_session_calculus})
+
+
+
+\subparagraph{Timed Multiparty Session Calculus}
+\label{sec:timed_multiparty_session_calculus}\hfill
+
+Bocchi-Yang-Yoshida14 - \emph{Timed Multiparty Session Types}
+
+\fist Timed Multiparty Session Types (\ref{sec:timed_multiparty})
+
+extension of Asynchronous Session Calculus
+(\S\ref{sec:asynchronous_session_calculus})
+
+\textbf{Process Syntax} %TODO
+
+Request, Accept, Select, Branching, Delay, Conditional, Parallel,
+Inaction, Recursion, Variable, Hide Shared, Hide Session, Queue
+
+Queue Content, Messages, Session Names, Shared Names, Expressions,
+Values
+
+a \emph{Program} is a Process that has not yet joined any Session,
+i.e. has no Queues, no Session Name Hiding, and no Free Session
+Names/Variables
+
+Structural Equivalence for Processes %TODO
+
+
+\textbf{Process Reduction Rules} %TODO
+
+$[Link]$, $[Select]$, $[Branch]$, $[Delay]$, $[Com]$, $[IfT]$,
+$[IfF]$, $[Str]$, $[Hide]$
+
+\fist see Timed Multiparty Session Types
+(\S\ref{sec:timed_multiparty}) for Proof Rules for Validating Programs
+against Timed Local Type specifications
+
+
+
 \subparagraph{Multirole Session Calculus}
 \label{sec:multirole_session_calculus}\hfill
 
@@ -4788,13 +4860,13 @@ many Receivers (Coppo-DezaniCiancaglini-Yoshida-Padovani15
 ``Broadcast'': cf. Xi-Wu16: Linear Multirole Logic \S\ref{sec:lmrl},
 Multirole Channels)
 
-Carbone-Lindley-Montesi-Schurmann-Wadler16 -- \emph{Coherence Genrealises
-  Duality: a logical explanation of multiparty session types} --
-translation of MCP to CP via Globally-governed Classical Processes
-(GCP) in which GCP interprets a Coherence Proof as an \emph{Arbiter
-  Process} that \emph{mediates} Communications in a Multiparty
-Session; reverts $\otimes$ to Output and $\parr$ as Input compared to
-Carbone-Montesi-Schurmann-Yoshida15
+Carbone-Lindley-Montesi-Schurmann-Wadler16 -- \emph{Coherence
+  Genrealises Duality: a logical explanation of multiparty session
+  types} -- translation of MCP to CP via Globally-governed Classical
+Processes (GCP) in which GCP interprets a Coherence Proof as an
+\emph{Arbiter Process} that \emph{mediates} Communications in a
+Multiparty Session; reverts $\otimes$ to Output and $\parr$ as Input
+compared to Carbone-Montesi-Schurmann-Yoshida15
 
 \emph{Arbiter} is similar to \emph{Medium} in Caires-Perez16 --
 \emph{Multiparty Session Types within a Canonical Binary Theory, and
@@ -7330,7 +7402,7 @@ Parital Trace (\S\ref{sec:partial_trace})
 % ====================================================================
 
 Crary-Walker-Morrisett99 \emph{Typed Memory Management in a Calculus
-  of Constructions}
+  of Capabilities}
 
 Region-based Memory Management
 
