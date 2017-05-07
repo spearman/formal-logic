@@ -5382,6 +5382,123 @@ Thm. (Time-error Freedom) \emph{If $\Gamma \vdash P \rhd \Delta$ and
   $P \rightarrow^* P'$, then $P' \not\equiv \mathsf{error}$}
 
 
+\textbf{Progress}
+
+Subclass of Timed Global Types Characterized by Decidable Properties:
+\begin{enumerate}
+  \item \emph{Feasibility}
+  \item \emph{Wait-freedom}
+\end{enumerate}
+as sufficient conditions for Progress of Validated Processes and
+Communicating Timed Automata.
+
+\emph{Feasibility} -- a Timed Global Type $G$ is \emph{Feasible} if
+and only if $(\nu_0,G_0) \rightarrow^* (\nu, G)$ Implies $(\nu,G)
+\rightarrow^* (\nu', \enndd)$ for some $\nu'$, i.e. $G_0$ is Feasible
+if every Partial Execution can be extended to a Terminated Session
+
+\emph{Wait-freedom} %TODO
+
+Prop. (Decidability) -- if $G$ is Infinitely Satisfiable then there is
+a Terminating Algorithm checking that it is Feasible and Wait-free
+based on a Directed Acyclic Graph annotated with Clock Constraints and
+Reset Predicates with Edges modelling the causal dependencies between
+Actions in the one-time unfolding of $G$
+
+$erase(P)$ -- the \emph{Time Erasure} of a Timed Process $P$, defined
+Inductively by removing the Delays in $P$
+
+Prop. (Conformance) \emph{If $P \rightarrow P'$, then $erase(P)
+  \rightarrow^* erase(P')$}
+
+Def. (\emph{Session Delay}) \emph{$P$ is Session Delay if for each
+  Process occurring in $P$ of the form $delay(t).P'$ there are no
+  Session Request and Session Accept in $P'$} -- requires all
+Processes to only initiate Sessions before any Delay occurs
+
+Feasibility and Wait-freedom (regulating the exchange of Messages
+within an established Session) are sufficient conditions for Progress
+of Session Delay Processes
+
+$P$ is a \emph{Deadlock Process} if $P \rightarrow^* P'$ where $P'
+\not\rightarrow$ and $P' \not\equiv \mathbf{0}$ and $\Gamma$ is
+Feasible (resp. Wait-free) if $\Gamma(u)$ is Feasible (resp.
+Wait-free) for all $u \in dom(\Gamma)$
+
+Thm. (Timed Progress in Interleaved Sessions) \emph{For Feasible and
+  Wait-free mapping $\Gamma$, $\Gamma \vdash P_0 \rhd \varnothing$ and
+  $P_0 \rightarrow^+ P$, if $P_0$ is Session Delay and $erase(P)$ is
+  not a Deadlock Process and if $erase(P)\rightarrow$, then
+  $P\rightarrow$}
+
+\emph{Simple Processes} -- Processes implementing single Sessions
+
+Cor. (Time Progress in Single Sessions) \emph{For Feasible and
+  Wait-free $G$ and Simple Process $P$ with $a : G \vdash P \rhd
+  \varnothing$, if $erase(P) \rightarrow$, then there exists $P'$ and
+  $P''$ such that $erase(P) \rightarrow P'$, $P \rightarrow^+ P''$ and
+  $erase(P'') = P'$}
+
+
+\textbf{Correspondence of Timed Global Types and Communicating Timed
+  Automata}
+
+$\class{A} = (Q,q_0,A,X,E,F)$ -- Timed Automaton
+(\S\ref{sec:timed_fsm})
+
+$\class{C} = (\class{A}_1,\ldots,\class{A}_n,\vec{w})$ -- Network of
+CTAs where $\vec{w}$ is a Set of Unidirectional Unbounded Channels
+
+
+Specified Time Transitions
+
+Specified Semantics
+
+Sound and Complete Encoding
+
+$\class{A}(T)$ -- \emph{Encoding} from $T$ into $\class{A}$
+
+$\class{A}(\{T_i\}_{i \in I}) =
+(\class{A}(T_1),\ldots,\class{A}(T_n),\vec{\varepsilon})$ -- Encoding
+a Set of Timed Local Types into a Network of CTAs
+
+$\class{A}(G)$ -- same as above for Timed Global Type having
+Projections $\{T_i\}_{i \in I}$
+
+\emph{Stable State} -- a State in which all Channels are Empty
+
+a Network of CTAs $\class{C}$ is \emph{Basic} when all its Timed
+Automata are Deterministic and all outgoing Actions from each
+$(q_i,C_i)$ are all Sending or all Receiving Actions to/from the same
+Co-participant
+
+$\class{C}$ is \emph{Multiparty Compatible} when in all its Reachable
+Stable States, all possible Input/Ouptut Actions of each Timed
+Automaton can be matched with a corresponding complementary
+Output/Input Action of the rest of the System after some $1$-bounded
+Execution (i.e. Executions where the size of each Buffer contains at
+most 1 message)
+
+\emph{Session CTA} -- a Basic and Multiparty Compatible CTA with
+specified Semantics
+
+Thm. (Soundness and Completeness) \emph{Given a Projectable Timed
+  Global Type $G$, then $\class{A}(G)$ is Basic and Multiparty
+  Compatible with a specified Semantics $G \approx \class{A}(G)$ and
+  if $\class{C}$ is a Session CTA then there exists a $G$ such that
+  $\class{C} \approx \class{A}(G)$}
+
+Time Divergence Condition: Time-progress
+
+$Tr(\class{C})$ -- Set of (``visible'') Traces obtained by Reducing
+$\class{C}$; Trace Equivalence $\approx$
+
+Thm. (Progress and Liveness for CTAs) \emph{If $\class{C}$ is a
+  Session CTA and there exists a Feasible $G$ such that $\class{C}
+  \approx \class{A}(G)$, then $\class{C}$ Satisfies Progress and
+  Liveness}
+
+
 \endgroup
 
 
