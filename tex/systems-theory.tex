@@ -136,13 +136,29 @@ Traced Ideals %FIXME
 % ====================================================================
 
 Denielou-Yoshida13 -- arises from a Choreographed collection of
-Communicating Finite State Machines (\S\ref{sec:communicating_fsm}) in
-the context of Multiparty Session Types
-(\S\ref{sec:multiparty_session})
+Communicating Finite State Machines (CFSMs
+\S\ref{sec:communicating_fsm}) in the context of Multiparty Session
+Types (\S\ref{sec:multiparty_session})
 
 Linear Multirole Logic (LMRL \S\ref{sec:lmrl})
 
 \fist Process Calculus (\S\ref{sec:process_calculus})
+
+Lange-Tuosto-Yoshida15:
+
+\emph{Generalized Multiparty Compatibility} (GMC) -- Decidable
+Condition characterizing a Set of Communicating Systems for which
+questions of Safety (Deadlock-freedom, Orphan Messages, and
+Unspecified Reception Configuration) can be Decided
+
+\emph{Communicating System}:
+\[
+  \class{S} = (M_p)_{p \in \class{P}}
+\]
+where $M_p = (Q_p, q_{0p}, \Sigma, \delta_p)$ are CFSMs for each
+Participant $p \in \class{P}$
+
+\emph{Configuration} of $\class{S}$ %FIXME
 
 
 
@@ -150,7 +166,12 @@ Linear Multirole Logic (LMRL \S\ref{sec:lmrl})
 \subsection{Choreography}\label{sec:choreography}
 % --------------------------------------------------------------------
 
-Global Types (\S\ref{sec:global_type})
+\emph{Choreographies}: ``Models of Interactions among Software
+Components from a \emph{Global} point of view'' --
+Lange-Tuosto-Yoshida15
+
+\fist Global Types (\S\ref{sec:global_type}) give \emph{Choreographic
+  Specifications} of Interactions (\S\ref{sec:interaction_geometry})
 
 
 
@@ -160,13 +181,93 @@ or \emph{Global Graphs}
 
 Lange-Tuosto-Yoshida15:
 
+Communicating Finite State Machines (\S\ref{sec:communicating_fsm})
+
 CFSMs as Behavioral Specifications of Distributed Components from
 which a Choreography can be built
 
+Sound and Complete characterization of ``safe'' CFSMs from which
+Global Graphs can be constructed
+
 CFSM model based on Asynchronous FIFO Message-passing Communication
 
-Algorithm produces a Choreography expressed as a Global Graph
-(closely related to BPMN 2.0 Choreography) given a Set of CFSMs
+Algorithm produces a Choreography expressed as a Global Graph (closely
+related to BPMN 2.0 Choreography) given a Set of CFSMs (a Set of
+Behavioral Specifications of components Interacting through
+Asynchronous FIFO Message Passing)
+
+example implementation for Golang in Ng-Yoshida16
+
+\fist \emph{Note on notation}: Lange-Tuosto-Yoshida15 uses $A$ for
+Alphabet and $Act$ for Actions, here we use $\Sigma$ for Alphabet and
+$A$ for Actions
+
+$\class{P}$ -- Finite Set of \emph{Participants}
+
+$p, q, r, s$ -- ranges over Participants
+
+$\Sigma$ -- Finite Alphabet
+
+$C = \{ pq \ |\ p,q \in \class{P}, p \neq q \}$ -- Set of
+\emph{Channels}
+
+$A = C \times \{!,?\} \times \Sigma$ -- Set of \emph{Actions}
+
+$\ell$ -- ranges over Actions
+
+$\Sigma^*$, $A^*$ -- Set of Finite Words on $\Sigma$, $A$
+
+$\varphi$ -- ranges over $\Sigma^*$, $A^*$
+
+CFSM as a $4$-tuple:
+\[
+  M = (Q, q_0, \Sigma, \delta)
+\]
+
+$Q$ -- Finite Set of \emph{States}
+
+$q_0 \in Q$ -- \emph{Initial State}
+
+$\delta \subseteq Q \times A \times Q$ -- Set of \emph{Transitions}
+
+Transitions are \emph{Labelled} by Actions
+
+$sr!a$ -- Label representing Sending a Message $a$ from $s$ to $r$
+
+$sr?a$ -- Label representing Receiving a Message $a$ by $r$ from $s$
+
+$\class{L}(M) \subseteq A^*$ -- Language on $A$ Accepted by the
+Automaton corresponding to $M$ where each State of $M$ is an Accepting
+State %TODO explain accepting state
+
+a \emph{Final State} $q \in Q$ has no Outgoing Transitions
+
+a \emph{Sending State} $q \in Q$ has all Outgoing Transitions that are
+Labelled by Send Actions
+
+a \emph{Receiving State} $q \in Q$ has all Outgoing Transitions that are
+Labelled by Receive Actions
+
+a \emph{Mixed State} $q \in Q$ has both Send and Receive Actions as
+Outgoing Transitions
+
+CFSM $M$ is \emph{Deterministic} if for all States $q \in Q$ and all
+Actions $\ell \in A$:
+\begin{itemize}
+  \item if $(q,\ell,q'),(q,\ell,q'') \in \delta$ then $q = q''$
+\end{itemize}
+
+CFSM $M$ is \emph{Minimal} if there are no other CFSMs $M'$ with fewer
+States and Transitions such that $\class{L}(M) = \class{L}(M')$
+
+\emph{Communicating System}:
+\[
+  \class{S} = (M_p)_{p \in \class{P}}
+\]
+where $M_p = (Q_p, q_{0p}, \Sigma, \delta_p)$ are CFSMs for each
+Participant $p \in \class{P}$
+
+\emph{Configuration} of $\class{S}$ %FIXME
 
 
 
