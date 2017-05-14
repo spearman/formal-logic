@@ -179,6 +179,10 @@ Lange-Tuosto-Yoshida15
 
 or \emph{Global Graphs}
 
+\begingroup
+
+\newcommand{\party}{\mono}
+
 Lange-Tuosto-Yoshida15:
 
 Communicating Finite State Machines (\S\ref{sec:communicating_fsm})
@@ -204,14 +208,15 @@ $A$ for Actions
 
 $\class{P}$ -- Finite Set of \emph{Participants}
 
-$p, q, r, s$ -- ranges over Participants
+$\party{p, q, r, s}, \ldots$ -- ranges over Participants
 
 $\Sigma$ -- Finite Alphabet
 
-$C = \{ pq \ |\ p,q \in \class{P}, p \neq q \}$ -- Set of
-\emph{Channels}
+$C \defeq \{ \party{pq}
+  \ |\ \party{p,q} \in \class{P}, \party{p \neq q} \}$
+-- Set of \emph{Channels}
 
-$A = C \times \{!,?\} \times \Sigma$ -- Set of \emph{Actions}
+$A \defeq C \times \{!,?\} \times \Sigma$ -- Set of \emph{Actions}
 
 $\ell$ -- ranges over Actions
 
@@ -232,9 +237,14 @@ $\delta \subseteq Q \times A \times Q$ -- Set of \emph{Transitions}
 
 Transitions are \emph{Labelled} by Actions
 
-$sr!a$ -- Label representing Sending a Message $a$ from $s$ to $r$
+TODO: could a Categorization be given in terms of Decorated Cospan
+Categories (\S\ref{sec:decorated_cospan_category}) ???
 
-$sr?a$ -- Label representing Receiving a Message $a$ by $r$ from $s$
+$\party{pq}!a$ -- Label representing Sending a Message $a$ from
+$\party{p}$ to $\party{q}$
+
+$\party{pq}?a$ -- Label representing Receiving a Message $a$ by
+$\party{q}$ from $\party{p}$
 
 $\class{L}(M) \subseteq A^*$ -- Language on $A$ Accepted by the
 Automaton corresponding to $M$ where each State of $M$ is an Accepting
@@ -264,10 +274,317 @@ States and Transitions such that $\class{L}(M) = \class{L}(M')$
 \[
   \class{S} = (M_p)_{p \in \class{P}}
 \]
-where $M_p = (Q_p, q_{0p}, \Sigma, \delta_p)$ are CFSMs for each
-Participant $p \in \class{P}$
+where $M_p = (Q_\party{p}, q_{0\party{p}}, \Sigma, \delta_\party{p})$
+are CFSMs for each Participant $\party{p} \in \class{P}$
 
-\emph{Configuration} of $\class{S}$ %FIXME
+$s = (\vec{q};\vec{w})$ -- \emph{Configuration} of $\class{S}$
+where:
+\begin{itemize}
+  \item $\vec{q} = (q_\party{p})_{\party{p} \in \class{P}})$ with
+    $q_\party{p} \in Q_\party{p}$ is the \emph{Control State} and
+    $q_\party{p} \in Q_\party{p}$ is the \emph{Local State} of Machine
+    $M_\party{p}$
+  \item $\vec{w} = (w_\party{pq})_{\party{pq} \in C}$ with
+    $w_\party{pq} \in A^*$
+\end{itemize}
+
+\emph{Initial Configuration} of $\class{S}$:
+\[
+  s_0 = (\vec{q}_0;\vec{\varepsilon})
+\]
+with $\vec{q}_0 = (q_{0\party{p}})_{\party{p} \in \class{P}}$
+
+A Configuration $s' = (\vec{q}',\vec{w}')$ is \emph{Reachable} from
+Configuration $s = (\vec{q},\vec{w})$ by Transition $\ell$, written $s
+\xrightarrow{\ell} s'$, if there is an Action $a \in A$ such that
+either:
+\begin{itemize}
+  \item $\ell = \party{sr}!a$ and $(q_\party{s},\ell,q_\party{s}') \in
+    \delta_\party{s}$
+  \item $q_\party{p}' = q_\party{p}$ for all $\party{p \neq s}$
+  \item $w_\party{sr}' = w_\party{sr}.a$ and $w_\party{pq}' =
+    w_\party{pq}$ for all $\party{pq \neq sr}$
+\end{itemize}
+or:
+\begin{itemize}
+  \item $\ell = \party{sr}?a$ and $(q_\party{r},\ell,q_\party{r}') \in
+    \delta_\party{r}$
+  \item $q_\party{p}' = q_\party{p}$ for all $\party{p \neq r}$
+  \item $w_\party{sr} = a.w_\party{sr}'$ and $w_\party{pq}' =
+    w_\party{pq}$ for all $\party{pq \neq sr}$
+\end{itemize}
+%TODO some explanation
+
+a Sequence of Transitions is \emph{$k$-bounded} if no Channel of any
+intermediate Configuration in the Sequence contains more than $k$
+Messages
+
+\emph{Reachable State} (???)
+
+$Rc(\class{S}) = \{ s \ |\ s_0 \rightarrow^* s \}$ -- Set of
+\emph{Reachable Configurations} of Communicating System $\class{S}$
+where $\rightarrow^*$ is the Reflexive and Transitive Closure of the
+Reachability Relation $\rightarrow$
+
+$Rc_k(\class{S})$ -- the \emph{$k$-reachability Set} of Communicating
+System $\class{S}$ is the largest Subset of $Rc(\class{S})$ within
+which each Configuration $s$ can be reached by a $k$-bounded Sequence
+from $s_0$
+
+\emph{Deadlock} -- a Configuration $s$ is a \emph{Deadlock
+  Configuration} when:
+\begin{itemize}
+  \item $\vec{w} = \vec{e}$
+  \item there exists an $\party{r} \in \class{P}$ such that
+    $(q_\party{r},\party{sr}?a,q_\party{r}') \in \delta_\party{r}$
+  \item for all $\party{p} \in \class{P}$ and $q_\party{p}$ is a
+    Receiving or Final State
+\end{itemize}
+i.e. all Buffers are empty, there is at least one Machine waiting for
+a Message, and all the other Machines are either in a Final or
+Receiving State
+
+\emph{Orphan Messages} -- a Configuration $s$ is an \emph{Orphan
+  Message Configuration} if all $q_\party{p} \in \vec{q}$ are Final
+but $\vec{w} \neq \vec{\varepsilon}$, i.e. there is at least one
+non-empty Buffer and all Machines are in a Final State
+
+\emph{Unspecified Reception} -- a Configuration $s$ is an
+\emph{Unspecified Reception Configuration} if there exists an
+$\party{r} \in \class{P}$ such that $q_\party{r}$ is a Receiving State
+and $(q_\party{r},\party{sr}?a,q_\party{r}') \in \delta_\party{r}$
+Implies $0 < |w_\party{sr}|$ and $w_\party{sr} \notin aA^*$, i.e.
+$q_\party{r}$ is prevented from Receiving any Messages from any of its
+Buffers %TODO better explanation ?
+
+Def. \emph{Safe Communicating System}: a Communicating System
+$\class{S}$ is \emph{Safe} if each $s \in Rc(\class{S})$ is not a
+Deadlock, Orphan Message, or Unspecified Reception Configuration
+
+the following definitions are provided as a means of specifying a
+Subset of Safe Communicating Systems from which Global Graphs can be
+constructed, namely by identifying Sets of \emph{Concurrent Actions},
+i.e. Actions that can be Interleaved
+
+Communicating Systems amenable for being transformed into Global
+Graphs will be identified through their \emph{Synchronous Transition
+  System} (see below)
+
+
+Equivalence Classes on CFSM Transitions
+
+$act(q,q') \defeq \{ \ell \ |\ (q,\ell,q') \in \delta \}$ for $q,q'
+\in Q$ -- Set of Labels for all Transitions between two given States
+
+$\lozenge,\blacklozenge \subseteq \delta \times \delta$ -- smallest
+Equivalence Relations on Transitions that respectively contain the
+Relations $\underline{\lozenge}$:
+
+\begin{itemize}
+\item $(q_1,\ell,q_2)\underline{\lozenge}(q_1',\ell,q_2')$ if and only
+  if $\ell \notin act(q_1,q_1') = act(q_2,q_2') \neq \varnothing$
+\end{itemize}
+
+and $\underline{\blacklozenge}$:
+
+\begin{itemize}
+\item $(q_1,\ell,q_2)\underline{\blacklozenge}(q_1',\ell,q_2')$ if and
+  only if $(q_1,\ell,q_2)\underline{\lozenge}(q_1',\ell,q_2')$ and for
+  all $(q,\ell,q') \in [(q_1,\ell,q_2)]^\lozenge$, $act(q_1,q) =
+  act(q_2,q') \wedge act(q_1',q) = act(q_2',q')$ where
+  $[(q,\ell,q')]^\lozenge$ is the Equivalence Class of $(q,\ell,q')$
+  with respect to $\lozenge$
+\end{itemize}
+intuitively two Transitions are $\blacklozenge$-related if they refer
+to the same Action up to Interleaving
+%TODO clearer explanation
+
+\emph{note on the above $\underline{\blacklozenge}$ definition}: what
+is being stated can more easily be worked out on paper; essentially
+two ``parallel'' Labelled Transitions $A$, $B$ sharing the same Label
+$\ell$ are $\underline{\blacklozenge}$-related when for every
+Transition $C$ in the $\lozenge$-equivalence Class of $A$ (note all
+$C$ are also $\ell$-labelled by the definition of $\lozenge$), the Set
+of Transition Labels from the Source and Target State of $A$ into the
+Source and Target State of each $C$, resp., are \emph{equal} Sets, and
+the same is true for the Set of Transitions Labels from the Source and
+Target State of $B$ into the Source and Target State of each $C$,
+resp., are also \emph{equal} Sets
+
+TODO: if one pair of such Transitions are $\underline{\blacklozenge}$,
+does that imply that all pairs in the $\lozenge$-equivalence Class are
+\emph{also} $\underline{\blacklozenge}$ ???
+
+%FIXME what does this relation allow for ???
+
+\emph{Synchronous Transition Systems} -- used to identify
+Communicating Systems which can be transformed into Global Graphs
+
+a Synchronous Transition System has:
+\begin{itemize}
+\item a Node consists of a Vector of Local CFSM States
+\item a Transitions (Edges) is Labelled by Elements in the \emph{Set
+  of Events} (taken up to $\blacklozenge$-equivalence):
+\[
+  \class{E} \defeq \bigcup_{\party{s,r\in\class{P}}} Q_\party{s} \times
+    Q_\party{r} \times \{(\party{s,r})\} \times A \}
+\]
+where Events are Tuples
+$(q_\party{s},q_\party{r},\party{s},\party{r},a) \in \class{E}$, also
+written:
+\[
+  (q_\party{s},q_\party{r},\party{s}\rightarrow\party{r}:a)
+\]
+indicating that Participants $\party{s}$ and $\party{r}$ can exchange
+a Message $a$ when they are in States $q_\party{s}$ and $q_\party{r}$,
+respectively
+\end{itemize}
+
+the indexing Events by Local (CFSM) States (i.e. $q_\party{s},
+q_\party{r}$) distinguishes Communication of the same Message at
+different points in the Global Graph
+
+Def. \emph{$\class{E}$-equivalence} (\emph{Event Equivalence}):
+\[
+  \bowtie \defeq \bowtie_\party{s} \cap \bowtie_\party{r}
+    \subseteq \class{E} \times \class{E}
+\]
+where:
+\begin{align*}
+  (q_1,q_2, \party{s}\rightarrow\party{r} : a) \bowtie_\party{s}&
+    (q_1',q_2', \party{s}\rightarrow\party{r} : a) \Leftrightarrow
+    \forall(q_1,\party{sr}!a,q_3),(q_1',\party{sr}!a,q_3')
+      \in \delta_\party{s}
+    . (q_1,\party{sr}!a,q_3)\blacklozenge(q_1',\party{sr}!a,q_3')
+  \\
+  (q_1,q_2, \party{s}\rightarrow\party{r} : a) \bowtie_\party{r}&
+    (q_1',q_2', \party{s}\rightarrow\party{r} : a) \Leftrightarrow
+    \forall(q_2,\party{sr}?a,q_4),(q_2',\party{sr}?a,q_4')
+      \in \delta_\party{s}
+    . (q_2,\party{sr}?a,q_4)\blacklozenge(q_2',\party{sr}?a,q_4')
+\end{align*}
+is an Equivalence Relation over Events that identifies Events with
+underlying Local Transitions that are $\blacklozenge$-equivalent
+
+$[e]$ -- Equivalence Class of Event $e$
+
+Synchronous Transition System is the Labelled Transition System
+generated by the possible interleavings of Synchronous Transitions
+(Send/Receive pairs) of the Local CFSMs
+
+Squares in the Synchronous Transition System with identical
+Sender/Receiver/Message Events (but not the same Local States) on
+opposite parallel sides (both ``horizontal'' and ``vertical'')
+identify pairs of \emph{Concurrent Interactions}
+
+$\vec{n}, \vec{n}', \ldots$ -- Vectors of Local States
+
+$\vec{n}[\party{p}]$ -- the State of $\party{p} \in \class{P}$ in
+$\vec{n}$
+
+for Communicating System $\class{S} =
+(M_\party{p})_{\party{p}\in\class{P}}$ the \emph{Synchronous
+  Transition System} of $\class{S}$:
+\[
+  STS(\class{S}) = (N,\vec{n}_0,E/\bowtie,\rightrightarrows)
+\]
+where:
+
+$N \defeq \{ \vec{q} \ |\ (\vec{q};\vec{\varepsilon}) \in Rc_1(\class{S}) \}$
+
+$\vec{n}_0 = \vec{q}_0$ -- Initial State
+
+$E \defeq \{ e \ |\ \exists\vec{n},\vec{n}' \in N :
+  (\vec{n},e,\vec{n}') \in \hat{\delta} \} \subseteq \class{E}$
+
+$\hat{\delta} \defeq \{ (\vec{n},e,\vec{n}')
+\ |\ (\vec{n};\vec{\varepsilon})
+    \xrightarrow{\party{sr}!a} \xrightarrow{\party{sr}?a}
+     (\vec{n}';\vec{\varepsilon}) \wedge
+    e = (\vec{n}[\party{s}],\vec{n}[\party{r}],
+      \party{s}\rightarrow\party{r}:a)
+\}$
+
+$\vec{n} \stackrel{[e]}{\rightrightarrows} \vec{n}' \Leftrightarrow
+  (\vec{n},e,\vec{n}') \in \hat{\delta}$
+
+$\pi$ -- ranges over Sequences of Events
+
+$e\downharpoonright_\party{p}$ -- Projection of Event $e$ onto
+Participant $\party{p}$:
+\[
+  (q_\party{s},q_\party{r},\party{s}\rightarrow\party{r}:a)
+    \downharpoonright_\party{p}
+  \defeq \begin{cases}
+    \party{pr}!a &\ \text{if}\ \party{s = p} \\
+    \party{sp}?a &\ \text{if}\ \party{r = p} \\
+    \varepsilon  &\ \text{otherwise} \\
+  \end{cases}
+\]
+
+$STS(\class{S})\downharpoonright_\party{p}$ -- Projection of
+Synchronous Transition System onto Participant $\party{p}$ is the
+Automaton $(Q, q_0, \Sigma, \delta)$ where $Q = N$, $q_0 = \vec{n}_0$
+and $\delta \subseteq Q \times A \cup \{ \varepsilon \} \times Q$ is
+such that $(n_1, e\downharpoonright_\party{p}, n_2) \in \delta
+\Leftrightarrow n_1 \stackrel{e}{\rightrightarrows} n_2$
+
+TODO the above is a bit muddled due to differences here from notation
+of the original paper
+
+$\hat{E}$ -- a representative Set of Events for each
+$\bowtie$-equivalence Class
+
+
+\textbf{Generalized Multiparty Compatibility} (GMC)
+
+Sound and Complete condition for constructing Global Graphs
+
+\emph{Representability} -- for each CFSM, each Trace and each Choice
+are ``\emph{represented}'' in $STS(\class{S})$; guarantees that
+$STS(\class{S})$ contains enough information to decide \emph{Safety
+  Properties} of any Asynchronous Execution of $\class{S}$
+
+\emph{Branching Property} -- for each Choice in $STS(\class{S})$ a
+unique CFSM makes the decision and each other Participant is either
+notified of the Choice or else is not involved in the Choice; ensures
+that if a ``\emph{branching}'' in $STS(\class{S})$ represents a
+\emph{Choice}, then the Choice is ``Well-formed''
+
+
+$\class{L}$ -- Language
+
+$hd(\class{L})$ -- \emph{First Actions} of $\class{L}$:
+\begin{align*}
+  hd(\class{L}) \defeq& \{ \ell \ |\ \exists\varphi \in A^*
+    : \ell\cdot\varphi \in \class{L} \} & \\
+  hd(\{\varepsilon\}) \defeq& \{ \varepsilon \} &
+\end{align*}
+
+$STS(\class{S})<\vec{n}>$ -- Synchronous Transition System
+$STS(\class{S})$ where Initial State $\vec{n}_0$ is replaced by
+$\vec{n}$
+
+$STS(\class{S},\vec{n},\party{p})$ -- the Language
+$\class{L}(STS(\class{S})<\vec{n}>\downharpoonright_p)$ obtained by
+setting the Initial State (Node) of $STS(\class{S})$ to $\vec{n}$ and
+then Projecting the resulting Synchronous Transition System onto
+Participant $\party{p}$
+
+
+Def. (Representability) Communicating System $\class{S}$ is
+\emph{Representable} if:
+\begin{enumerate}
+  \item $\class{L}(M_\party{p}) = STS(\class{S},\vec{n}_0,\party{p})$ and
+  \item $\forall q \in Q_\party{p} \exists \vec{n} \in N :
+    \vec{n}[\party{p}] = q \wedge
+      \bigcup_{(q,\ell,q')\in\delta_\party{p}} \{ \ell \}
+        \subseteq hd(STS(\class{S},\vec{n},\party{p}))$
+\end{enumerate}
+for all $\party{p} \in \class{P}$
+
+
+\endgroup
 
 
 
