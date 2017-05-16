@@ -179,87 +179,95 @@ Lange-Tuosto-Yoshida15
 
 or \emph{Global Graphs}
 
+\fist Labelled Graph (\S\ref{sec:labelled_graph})
+
 \begingroup
 
 \newcommand{\party}{\mono}
 
-Lange-Tuosto-Yoshida15:
+\emph{From Communicating Machines to Graphical Choreographies} \\
+Lange-Tuosto-Yoshida 2015
 
-Communicating Finite State Machines (\S\ref{sec:communicating_fsm})
+\fist Communicating Finite State Machines (CFSMs
+\S\ref{sec:communicating_fsm})
 
-CFSMs as Behavioral Specifications of Distributed Components from
-which a Choreography can be built
+\begin{itemize}
+\item CFSMs as \emph{Behavioral Specifications} of \emph{Distributed
+  Components} from which a \emph{Choreography} can be built
+\item Sound and Complete characterization of ``safe'' CFSMs from which
+  Global Graphs can be constructed
+\item CFSM model based on Asynchronous FIFO Message-passing
+  Communication
+\end{itemize}
 
-Sound and Complete characterization of ``safe'' CFSMs from which
-Global Graphs can be constructed
-
-CFSM model based on Asynchronous FIFO Message-passing Communication
-
-Algorithm produces a Choreography expressed as a Global Graph (closely
-related to BPMN 2.0 Choreography) given a Set of CFSMs (a Set of
-Behavioral Specifications of components Interacting through
+presented Algorithm produces a Choreography expressed as a Global Graph
+(closely related to BPMN 2.0 Choreography) given a Set of CFSMs (a Set
+of Behavioral Specifications of components Interacting through
 Asynchronous FIFO Message Passing)
 
-example implementation for Golang in Ng-Yoshida16
+\fist an example implementation for Golang in Ng-Yoshida16
 
-\fist \emph{Note on notation}: Lange-Tuosto-Yoshida15 uses $A$ for
+TODO: could a Categorization be given in terms of Decorated Cospan
+Categories (\S\ref{sec:decorated_cospan_category}) ?
+
+\asterism
+
+\emph{Note on notation}: Lange-Tuosto-Yoshida15 uses $A$ for
 Alphabet and $Act$ for Actions, here we use $\Sigma$ for Alphabet and
 $A$ for Actions
 
-$\class{P}$ -- Finite Set of \emph{Participants}
+detailed Proofs can be found in the full version of
+Lange-Tuosto-Yoshida15 (36pp.):
+\url{http://www.doc.ic.ac.uk/~jlange/papers/lty15.pdf}
 
-$\party{p, q, r, s}, \ldots$ -- ranges over Participants
+Haskell code:
 
-$\Sigma$ -- Finite Alphabet
+\url{https://bitbucket.org/julien-lange/gmc-synthesis}
 
+
+\textbf{CFSMs}
+
+$\Sigma = \{ a,b,c,d,\ldots \}$ -- Finite Alphabet (Messages) \\
+$\class{P} = \{ \party{p, q, r, s},\ldots\}$
+-- Finite Set of \emph{Participants} \\
 $C \defeq \{ \party{pq}
   \ |\ \party{p,q} \in \class{P}, \party{p \neq q} \}$
--- Set of \emph{Channels}
+-- Set of \emph{Channels} \\
+$A \defeq C \times \{!,?\} \times \Sigma$ -- Set of \emph{Actions} \\
+$\ell$ -- ranges over Actions \\
+$\Sigma^*$, $A^*$ -- Set of Finite Words on $\Sigma$, $A$ \\
+$\varphi$ -- ranges over $\Sigma^*$, $A^*$ \\
 
-$A \defeq C \times \{!,?\} \times \Sigma$ -- Set of \emph{Actions}
-
-$\ell$ -- ranges over Actions
-
-$\Sigma^*$, $A^*$ -- Set of Finite Words on $\Sigma$, $A$
-
-$\varphi$ -- ranges over $\Sigma^*$, $A^*$
-
-CFSM as a $4$-tuple:
+\emph{CFSM} $M$ as a $4$-tuple:
 \[
   M = (Q, q_0, \Sigma, \delta)
 \]
-
-$Q$ -- Finite Set of \emph{States}
-
-$q_0 \in Q$ -- \emph{Initial State}
-
+$Q$ -- Finite Set of \emph{States} \\
+$q_0 \in Q$ -- \emph{Initial State} \\
 $\delta \subseteq Q \times A \times Q$ -- Set of \emph{Transitions}
+that are \emph{Labelled} by Actions \\
 
-Transitions are \emph{Labelled} by Actions
-
-TODO: could a Categorization be given in terms of Decorated Cospan
-Categories (\S\ref{sec:decorated_cospan_category}) ???
-
-$\party{pq}!a$ -- Label representing Sending a Message $a$ from
-$\party{p}$ to $\party{q}$
-
-$\party{pq}?a$ -- Label representing Receiving a Message $a$ by
+$\party{pq}!a$ -- Action Label representing Sending a Message $a$ from
+$\party{p}$ to $\party{q}$ \\
+$\party{pq}?a$ -- Action Label representing Receiving a Message $a$ by
 $\party{q}$ from $\party{p}$
 
 $\class{L}(M) \subseteq A^*$ -- Language on $A$ Accepted by the
-Automaton corresponding to $M$ where each State of $M$ is an Accepting
-State %TODO explain accepting state
+Automaton corresponding to CFSM $M$ where each State of $M$ is an
+Accepting State %TODO explain accepting state
 
-a \emph{Final State} $q \in Q$ has no Outgoing Transitions
+For $q \in Q$:
+\begin{itemize}
+  \item $q$ is a \emph{Final State} if $q$ has no Outgoing Transitions
+  \item $q$ is a \emph{Sending State} if $q$ has all Outgoing
+    Transitions that are Labelled by Send Actions
+  \item $q$ is a \emph{Receiving State} if $q$ has all Outgoing
+    Transitions that are Labelled by Receive Actions
+  \item $q$ is a \emph{Mixed State} if $q$ has both Send and
+    Receive Actions as Outgoing Transitions
+\end{itemize}
 
-a \emph{Sending State} $q \in Q$ has all Outgoing Transitions that are
-Labelled by Send Actions
-
-a \emph{Receiving State} $q \in Q$ has all Outgoing Transitions that are
-Labelled by Receive Actions
-
-a \emph{Mixed State} $q \in Q$ has both Send and Receive Actions as
-Outgoing Transitions
+\emph{Deterministic CFSMs}
 
 CFSM $M$ is \emph{Deterministic} if for all States $q \in Q$ and all
 Actions $\ell \in A$:
@@ -267,8 +275,13 @@ Actions $\ell \in A$:
   \item if $(q,\ell,q'),(q,\ell,q'') \in \delta$ then $q = q''$
 \end{itemize}
 
+\emph{Minimal CFSMs}
+
 CFSM $M$ is \emph{Minimal} if there are no other CFSMs $M'$ with fewer
 States and Transitions such that $\class{L}(M) = \class{L}(M')$
+
+
+\textbf{Communicating Systems}
 
 \emph{Communicating System}:
 \[
@@ -277,27 +290,28 @@ States and Transitions such that $\class{L}(M) = \class{L}(M')$
 where $M_p = (Q_\party{p}, q_{0\party{p}}, \Sigma, \delta_\party{p})$
 are CFSMs for each Participant $\party{p} \in \class{P}$
 
-$s = (\vec{q};\vec{w})$ -- \emph{Configuration} of $\class{S}$
+\emph{Configurations}
+
+$s = (\vec{q};\vec{w})$ -- a \emph{Configuration} of $\class{S}$
 where:
 \begin{itemize}
   \item $\vec{q} = (q_\party{p})_{\party{p} \in \class{P}})$ with
     $q_\party{p} \in Q_\party{p}$ is the \emph{Control State} and
-    $q_\party{p} \in Q_\party{p}$ is the \emph{Local State} of Machine
+    $q_\party{p} \in Q_\party{p}$ is the \emph{Local State} of CFSM
     $M_\party{p}$
   \item $\vec{w} = (w_\party{pq})_{\party{pq} \in C}$ with
     $w_\party{pq} \in \Sigma^*$
 \end{itemize}
+$s_0 = (\vec{q}_0;\vec{\varepsilon})$ -- \emph{Initial Configuration}
+of $\class{S}$ with $\vec{q}_0 = (q_{0\party{p}})_{\party{p} \in
+  \class{P}}$
 
-\emph{Initial Configuration} of $\class{S}$:
-\[
-  s_0 = (\vec{q}_0;\vec{\varepsilon})
-\]
-with $\vec{q}_0 = (q_{0\party{p}})_{\party{p} \in \class{P}}$
+\emph{Configuration Reachability}
 
-A Configuration $s' = (\vec{q}',\vec{w}')$ is \emph{Reachable} from
-Configuration $s = (\vec{q},\vec{w})$ by Transition $\ell$, written $s
-\xrightarrow{\ell} s'$, if there is an Symbol (Message) $a \in \Sigma$
-such that either:
+$s \xrightarrow{\ell} s'$ -- Configuration $s' = (\vec{q}',\vec{w}')$
+is \emph{Reachable} from Configuration $s = (\vec{q},\vec{w})$ by
+Transition $\ell$ if there is a Symbol (Message) $a \in \Sigma$ such
+that either:
 \begin{itemize}
   \item $\ell = \party{sr}!a$ and $(q_\party{s},\ell,q_\party{s}') \in
     \delta_\party{s}$
@@ -315,23 +329,28 @@ or:
 \end{itemize}
 %TODO some explanation
 
-a Sequence of Transitions is \emph{$k$-bounded} if no Channel of any
-intermediate Configuration in the Sequence contains more than $k$
-Messages
-
-\emph{Reachable State} (???)
-
 $Rc(\class{S}) = \{ s \ |\ s_0 \rightarrow^* s \}$ -- Set of
 \emph{Reachable Configurations} of Communicating System $\class{S}$
 where $\rightarrow^*$ is the Reflexive and Transitive Closure of the
 Reachability Relation $\rightarrow$
+
+\emph{$k$-bounded Transition Sequences}
+
+A Sequence of Transitions is \emph{$k$-bounded} if no Channel of any
+intermediate Configuration in the Sequence contains more than $k$
+Messages.
 
 $Rc_k(\class{S})$ -- the \emph{$k$-reachability Set} of Communicating
 System $\class{S}$ is the largest Subset of $Rc(\class{S})$ within
 which each Configuration $s$ can be reached by a $k$-bounded Sequence
 from $s_0$
 
-\emph{Deadlock} -- a Configuration $s$ is a \emph{Deadlock
+
+\textbf{Safe Communicating Systems}
+
+\emph{Deadlock Configurations}
+
+Configuration $s = (\vec{q},\vec{w})$ is a \emph{Deadlock
   Configuration} when:
 \begin{itemize}
   \item $\vec{w} = \vec{e}$
@@ -344,60 +363,68 @@ i.e. all Buffers are empty, there is at least one Machine waiting for
 a Message, and all the other Machines are either in a Final or
 Receiving State
 
-\emph{Orphan Messages} -- a Configuration $s$ is an \emph{Orphan
-  Message Configuration} if all $q_\party{p} \in \vec{q}$ are Final
-but $\vec{w} \neq \vec{\varepsilon}$, i.e. there is at least one
-non-empty Buffer and all Machines are in a Final State
+\emph{Orphan Message Configurations}
 
-\emph{Unspecified Reception} -- a Configuration $s$ is an
-\emph{Unspecified Reception Configuration} if there exists an
-$\party{r} \in \class{P}$ such that $q_\party{r}$ is a Receiving State
-and $(q_\party{r},\party{sr}?a,q_\party{r}') \in \delta_\party{r}$
-Implies $0 < |w_\party{sr}|$ and $w_\party{sr} \notin aA^*$, i.e.
+Configuration $s = (\vec{q},\vec{w})$ is an \emph{Orphan Message
+  Configuration} if all $q_\party{p} \in \vec{q}$ are Final but
+$\vec{w} \neq \vec{\varepsilon}$, i.e. there is at least one non-empty
+Buffer and all Machines are in a Final State
+
+\emph{Unspecified Reception Conrigurations}
+
+Configuration $s = (\vec{q},\vec{w})$ is an \emph{Unspecified
+  Reception Configuration} if there exists an $\party{r} \in
+\class{P}$ such that $q_\party{r}$ is a Receiving State and
+$(q_\party{r},\party{sr}?a,q_\party{r}') \in \delta_\party{r}$ Implies
+$0 < |w_\party{sr}|$ and $w_\party{sr} \notin aA^*$, i.e.
 $q_\party{r}$ is prevented from Receiving any Messages from any of its
 Buffers %TODO better explanation ?
 
-Def. \emph{Safe Communicating System}: a Communicating System
+
+Def. (\emph{Safe Communicating System}) A Communicating System
 $\class{S}$ is \emph{Safe} if each $s \in Rc(\class{S})$ is not a
-Deadlock, Orphan Message, or Unspecified Reception Configuration
-
-the following definitions are provided as a means of specifying a
-Subset of Safe Communicating Systems from which Global Graphs can be
-constructed, namely by identifying Sets of \emph{Concurrent Actions},
-i.e. Actions that can be Interleaved
-
-Communicating Systems amenable for being transformed into Global
-Graphs will be identified through their \emph{Synchronous Transition
-  System} (see below)
+Deadlock, Orphan Message, or Unspecified Reception Configuration.
 
 
-Equivalence Classes on CFSM Transitions
+\textbf{Concurrent Actions}
 
-$act(q,q') \defeq \{ \ell \ |\ (q,\ell,q') \in \delta \}$ for $q,q'
-\in Q$ -- Set of Labels for all Transitions between two given States
+The following definitions are provided as a means of specifying a
+Subset of Safe Communicating Systems from which \emph{Global Graphs}
+can be constructed, namely by identifying Sets of \emph{Concurrent
+  Actions}, i.e. Actions that can be \emph{Interleaved}.
+
+Communicating Systems that are amenable for being transformed into
+Global Graphs will be identified through their \emph{Synchronous
+  Transition System} (see below).
+
+
+\emph{Equivalence Classes on CFSM Transitions}
+
+$act(q,q') \defeq \{ \ell \ |\ (q,\ell,q') \in \delta \}$ -- Set of
+Labels for all Transitions between two given States $q,q' \in Q$
 
 $\lozenge,\blacklozenge \subseteq \delta \times \delta$ -- smallest
 Equivalence Relations on Transitions that respectively contain the
 Relations $\underline{\lozenge}$:
-
-\begin{itemize}
-\item $(q_1,\ell,q_2)\underline{\lozenge}(q_1',\ell,q_2')$ if and only
-  if $\ell \notin act(q_1,q_1') = act(q_2,q_2') \neq \varnothing$
-\end{itemize}
-
+\begin{flalign*}
+\quad (q_1,\ell,q_2)\underline{\lozenge} (q_1',\ell,q_2')
+  \Longleftrightarrow
+  \ell \notin act(q_1,q_1') = act(q_2,q_2') \neq \varnothing &
+\end{flalign*}
 and $\underline{\blacklozenge}$:
+\begin{flalign*}
+\quad (q_1,\ell,q_2)\underline{\blacklozenge} (q_1',\ell,q_2')
+  \Longleftrightarrow &
+  (q_1,\ell,q_2)\underline{\lozenge}(q_1',\ell,q_2') \wedge
+   \forall(q,\ell,q') \in [(q_1,\ell,q_2)]^\lozenge . & \\
+   & act(q_1,q) = act(q_2,q') \wedge act(q_1',q) = act(q_2',q') &
+\end{flalign*}
+where $[(q,\ell,q')]^\lozenge$ is the Equivalence Class of
+$(q,\ell,q')$ with respect to $\lozenge$
 
-\begin{itemize}
-\item $(q_1,\ell,q_2)\underline{\blacklozenge}(q_1',\ell,q_2')$ if and
-  only if $(q_1,\ell,q_2)\underline{\lozenge}(q_1',\ell,q_2')$ and for
-  all $(q,\ell,q') \in [(q_1,\ell,q_2)]^\lozenge$, $act(q_1,q) =
-  act(q_2,q') \wedge act(q_1',q) = act(q_2',q')$ where
-  $[(q,\ell,q')]^\lozenge$ is the Equivalence Class of $(q,\ell,q')$
-  with respect to $\lozenge$
-\end{itemize}
-intuitively two Transitions are $\blacklozenge$-related if they refer
-to the same Action up to Interleaving
-%TODO clearer explanation
+Intuitively, two Transitions are $\blacklozenge$-related if they refer
+to the same Action up to Interleaving.
+%TODO more explanation
 
 \emph{note on the above $\underline{\blacklozenge}$ definition}: what
 is being stated can more easily be worked out on paper; essentially
@@ -413,17 +440,19 @@ resp., are also \emph{equal} Sets
 
 TODO: if one pair of such Transitions are $\underline{\blacklozenge}$,
 does that imply that all pairs in the $\lozenge$-equivalence Class are
-\emph{also} $\underline{\blacklozenge}$ ???
+\emph{also} $\underline{\blacklozenge}$ ?
 
 %FIXME what does this relation allow for ???
 
-\emph{Synchronous Transition Systems} -- used to identify
-Communicating Systems which can be transformed into Global Graphs
 
-a Synchronous Transition System has:
+\textbf{Synchronous Transition Systems}
+
+\emph{Synchronous Transition Systems} (see below) are used to identify
+Communicating Systems which can be transformed into Global Graphs. A
+Synchronous Transition System has:
 \begin{itemize}
-\item a Node consists of a Vector of Local CFSM States
-\item a Transitions (Edges) is Labelled by Elements in the \emph{Set
+\item \emph{Nodes} each consisting of a Vector of Local CFSM States
+\item \emph{Transitions} (Edges) Labelled by Elements in the \emph{Set
   of Events} (taken up to $\blacklozenge$-equivalence):
 \[
   \class{E} \defeq \bigcup_{\party{s,r\in\class{P}}} Q_\party{s} \times
@@ -440,9 +469,12 @@ a Message $a$ when they are in States $q_\party{s}$ and $q_\party{r}$,
 respectively
 \end{itemize}
 
-the indexing Events by Local (CFSM) States (i.e. $q_\party{s},
-q_\party{r}$) distinguishes Communication of the same Message at
-different points in the Global Graph
+The \emph{indexing} of Events by Local (CFSM) States (i.e.
+$q_\party{s}, q_\party{r}$) distinguishes Communication of the same
+Message at different points in the Global Graph.
+
+
+\textbf{Event Equivalence}
 
 Def. \emph{$\class{E}$-equivalence} (\emph{Event Equivalence}):
 \[
@@ -450,75 +482,85 @@ Def. \emph{$\class{E}$-equivalence} (\emph{Event Equivalence}):
     \subseteq \class{E} \times \class{E}
 \]
 where:
-\begin{align*}
-  (q_1,q_2, \party{s}\rightarrow\party{r} : a) \bowtie_\party{s}&
-    (q_1',q_2', \party{s}\rightarrow\party{r} : a) \Leftrightarrow
-    \forall(q_1,\party{sr}!a,q_3),(q_1',\party{sr}!a,q_3')
+\begin{flalign*}
+& \quad (q_1,q_2, \party{s}\rightarrow\party{r} : a) \bowtie_\party{s}
+    (q_1',q_2', \party{s}\rightarrow\party{r} : a)
+  \Longleftrightarrow \\
+& \quad\quad\quad \forall(q_1,\party{sr}!a,q_3),(q_1',\party{sr}!a,q_3')
       \in \delta_\party{s}
-    . (q_1,\party{sr}!a,q_3)\blacklozenge(q_1',\party{sr}!a,q_3')
-  \\
-  (q_1,q_2, \party{s}\rightarrow\party{r} : a) \bowtie_\party{r}&
-    (q_1',q_2', \party{s}\rightarrow\party{r} : a) \Leftrightarrow
-    \forall(q_2,\party{sr}?a,q_4),(q_2',\party{sr}?a,q_4')
+    . (q_1,\party{sr}!a,q_3)\blacklozenge(q_1',\party{sr}!a,q_3') \\
+& \quad (q_1,q_2, \party{s}\rightarrow\party{r} : a) \bowtie_\party{r}
+  (q_1',q_2', \party{s}\rightarrow\party{r} : a)
+  \Longleftrightarrow \\
+& \quad\quad\quad \forall(q_2,\party{sr}?a,q_4),(q_2',\party{sr}?a,q_4')
       \in \delta_\party{s}
     . (q_2,\party{sr}?a,q_4)\blacklozenge(q_2',\party{sr}?a,q_4')
-\end{align*}
+\end{flalign*}
 is an Equivalence Relation over Events that identifies Events with
 underlying Local Transitions that are $\blacklozenge$-equivalent
 
 $[e]$ -- Equivalence Class of Event $e$
 
-Synchronous Transition System is the Labelled Transition System
-generated by the possible interleavings of Synchronous Transitions
-(Send/Receive pairs) of the Local CFSMs
 
-Squares in the Synchronous Transition System with identical
+\emph{Concurrent Interactions}
+
+Squares in the Synchronous Transition System with Equivalent
 Sender/Receiver/Message Events (but not the same Local States) on
 opposite parallel sides (both ``horizontal'' and ``vertical'')
-identify pairs of \emph{Concurrent Interactions}
+identify pairs of \emph{Concurrent Interactions}.
 
-$\vec{n}, \vec{n}', \ldots$ -- Vectors of Local States
 
+\textbf{Synchronous Transitions}
+
+A \emph{Synchronous Transition System} is the Labelled Transition
+System generated by the possible interleavings of \emph{Synchronous
+  Transitions} (Send/Receive pairs) of the Local CFSMs.
+
+$\vec{n}, \vec{n}', \ldots$ -- Vectors of Local States \\
 $\vec{n}[\party{p}]$ -- the State of $\party{p} \in \class{P}$ in
-$\vec{n}$
-
-for Communicating System $\class{S} =
-(M_\party{p})_{\party{p}\in\class{P}}$, $STS(\class{S})$ is the
-\emph{Synchronous Transition System} of $\class{S}$:
-\[
-  STS(\class{S}) = (N,\vec{n}_0,E/\bowtie,\rightrightarrows)
-\]
-where:
-
-$N \defeq \{ \vec{q} \ |\ (\vec{q};\vec{\varepsilon}) \in Rc_1(\class{S}) \}$
-
-$\vec{n}_0 = \vec{q}_0$ -- Initial State
-
+$\vec{n}$ \\
 $\hat{\delta} \defeq \{ (\vec{n},e,\vec{n}')
 \ |\ (\vec{n};\vec{\varepsilon})
     \xrightarrow{\party{sr}!a} \xrightarrow{\party{sr}?a}
      (\vec{n}';\vec{\varepsilon}) \wedge
     e = (\vec{n}[\party{s}],\vec{n}[\party{r}],
       \party{s}\rightarrow\party{r}:a)
-\}$
+\}$ -- Set of Synchronous Transitions \\
+%TODO is this the correct description?
+
+$STS(\class{S})$ is the \emph{Synchronous Transition System} of
+Communicating System $\class{S} =
+(M_\party{p})_{\party{p}\in\class{P}}$ is a $4$-tuple:
+\[
+  STS(\class{S}) = (N,\vec{n}_0,E/\bowtie,\rightrightarrows)
+\]
+$N \defeq \{ \vec{q} \ |\ (\vec{q};\vec{\varepsilon}) \in
+Rc_1(\class{S}) \}$ %FIXME explain this definition
+
+$\vec{n}_0 = \vec{q}_0$ -- Initial State
 
 $E \defeq \{ e \ |\ \exists\vec{n},\vec{n}' \in N :
   (\vec{n},e,\vec{n}') \in \hat{\delta} \} \subseteq \class{E}$
+-- Set of Synchronous Events %TODO is this the correct description?
 
-$\vec{n} \stackrel{[e]}{\rightrightarrows} \vec{n}' \Leftrightarrow
-  (\vec{n},e,\vec{n}') \in \hat{\delta}$
-
-in $\hat{\delta}$, Events are $\bowtie$-equivalent if they have the
-same Interaction $\party{s}\rightarrow\party{r} : a$
-%TODO explain
+$\vec{n} \stackrel{[e]}{\rightrightarrows} \vec{n}'
+  \Longleftrightarrow (\vec{n},e,\vec{n}') \in \hat{\delta}$ --
+Synchronous Transition Relation %TODO is this the correct description?
 
 note: original paper uses a representative Set $\hat{E}$ of Events for
 each $\bowtie$-equivalence Class but here we will just continue
 writing $[e]$
 
+in $\hat{\delta}$, Events are $\bowtie$-equivalent if they have the
+same Interaction $\party{s}\rightarrow\party{r} : a$
+%TODO explain
+
 $\pi$ -- ranges over Sequences of Events and $\rightrightarrows$ is
 extended to Sequences of Events (as with the Reachibility Relation
 $\rightarrow$ for Configurations above)
+
+
+\emph{Projections}
 
 $e\downharpoonright_\party{p}$ -- Projection of Event $e$ onto
 Participant $\party{p}$:
@@ -543,7 +585,11 @@ Automaton $(Q, \vec{q}_0, \Sigma, \delta)$ where $Q = N$, $\vec{q}_0 =
 
 \textbf{Generalized Multiparty Compatibility} (GMC)
 
-Sound and Complete condition for constructing Global Graphs
+a Sound and Complete condition for constructing Global Graphs
+
+Def. (\emph{Generalized Multiparty Compatibility}) A Communicating
+System $\class{S}$ is \emph{Generalized Multiparty Compatible (GMC)}
+if it is \emph{Representable} and has the \emph{Branching Property}
 
 \emph{Representability} -- for each CFSM, each Trace and each Choice
 are ``\emph{represented}'' in $STS(\class{S})$; guarantees that
@@ -577,7 +623,9 @@ then Projecting the resulting Synchronous Transition System onto
 Participant $\party{p}$
 
 
-Def. (Representability) Communicating System $\class{S}$ is
+\emph{Representability}
+
+Def. (\emph{Representability}) Communicating System $\class{S}$ is
 \emph{Representable} if for all $\party{p} \in \class{P}$:
 \begin{enumerate}
   \item $\class{L}(M_\party{p}) = LTS(\class{S},\vec{n}_0,\party{p})$ and
@@ -586,12 +634,372 @@ Def. (Representability) Communicating System $\class{S}$ is
       \bigcup_{(q,\ell,q')\in\delta_\party{p}} \{ \ell \}
         \subseteq hd(LTS(\class{S},\vec{n},\party{p}))$
 \end{enumerate}
-(1) guarantees that each Trace of each Machine is represented in
+(1) guarantees that each Trace of each CFSM is represented in
 $STS(\class{S})$ and (2) is necessary to ensure that every Choice in
-each Machine is represented in $STS(\class{S})$
+each CFSM is represented in $STS(\class{S})$
 
 checking the Representability Condition for a Communicating System
 $\class{S}$ has Exponential worst-case Time Complexity
+
+
+\emph{Branching Property}
+
+(auxiliary definitions for specifying Branching Property follow)
+
+for $\vec{n},\vec{n}' \in N$, $\vec{n} \prec \vec{n}'$ if and only if:
+\begin{enumerate}
+  \item $\vec{n}\rightrightarrows^*\vec{n}'$ and
+  \item for all Paths
+    $\vec{n}_0\rightrightarrows\cdots\rightrightarrows\vec{n}_k =
+    \vec{n}$ in $STS(\class{S})$ such that
+    $\vec{n}_0,\ldots,\vec{n}_k$ are pairwise distinct,
+    $\vec{n}'\neq\vec{n}_h$ for all $0 \leq h \leq k$
+\end{enumerate}
+i.e. $\vec{n} \prec \vec{n}'$ holds if $\vec{n}'$ is Reachable from
+$\vec{n}$ and no ``simple'' Path from $\vec{n}_0$ to $\vec{n}$ goes
+through $\vec{n}'$; note $\prec$ is not a Preorder in general
+
+$ln(\vec{n},[e_1],[e_2])$ -- the \emph{Last Nodes} Reachable from
+$\vec{n} \in N$ with $[e_1] \neq [e_2] \in E/\bowtie$ and $i,j \in
+\{1,2\}$:
+\begin{align*}
+  ln(\vec{n},[e_1],[e_2]) \defeq \{ (\vec{n_1},\vec{n_2}) \ |\ &
+    \exists\vec{n}' \in N : \vec{n}\rightrightarrows^*\vec{n}'
+        \stackrel{[e_i]}\rightrightarrows\vec{n}_i \\
+    \wedge & \forall\vec{n}'' \in N . \vec{n}'\rightrightarrows\vec{n}''
+        \Longrightarrow
+          \neg(\vec{n}'\prec\vec{n}''\stackrel{[e_i]}\rightrightarrows
+  \}
+\end{align*}
+i.e. if $(\vec{n}_1,\vec{n}_2) \in ln(\vec{n},[e_1],[e_2])$ then
+$\vec{n}_i$ is an $\stackrel{[e_i]}\rightrightarrows$-successor of a
+Node $\vec{n}'$ on a Path from $\vec{n}$ whose Successors are either
+not able to fire both $[e_1]$ and $[e_2]$ or else not $\prec$-related
+to $\vec{n}'$
+
+TODO why are ``last nodes'' here defined for a pair of events, instead
+of a single ``last node'' for a single event-- branching ???
+
+for Event $e =
+(q_\party{s},q_\party{r},\party{s}\rightarrow\party{r}:a) \in
+\class{E}$, let $\iota(e) = \party{s}\rightarrow\party{r}:a$ and
+define a Dependency Relation $\lhd \subseteq \class{E}\times\class{E}$
+on Events:
+\[
+  e \lhd e' \Leftrightarrow
+    \iota(e) = \party{s}\rightarrow\party{r}:a \wedge
+    (\iota(e') = \party{s}\rightarrow\party{r}:a' \vee
+      \iota(e') = \party{r}\rightarrow\party{t}:a')
+\]
+i.e. $e$ and $e'$ are $\lhd$-related if there is a Dependency Relation
+(\S\ref{sec:dependency_relation}) between the two Interactions from
+the point of view of the \emph{Receiver} %TODO explain further
+
+the Relation $e \blacktriangleleft_\pi e'$ in a Sequence of Events
+$\pi$ is defined when there is a $\lhd$-relation between $e$ and $e'$
+``in'' $\pi$:
+\[
+  e \blacktriangleleft_\pi e' \Leftrightarrow \begin{cases}
+    (e \lhd e'' \wedge e'' \blacktriangleleft_{\pi'} e') \vee
+      e \blacktriangleleft_{\pi'} e' & \text{if }\pi = e''\cdot\pi' \\
+    e \lhd e' & \text{otherwise}
+  \end{cases}
+\]
+%TODO explain
+
+$dep(\iota(e),\pi,\iota(e'))$ if and only if:
+\[
+  (\pi = \pi_1\cdot{e}\cdot\pi_2\cdot{e'}\cdot\pi' \wedge
+    (-,-,\iota(e)) \notin \pi_1 \wedge (-,-,\iota(e'))\notin \pi_2)
+  \Longrightarrow e \blacktriangleleft_{\pi_2}
+\]
+checks whether there is a Dependency between two Interactions on a
+Path $\pi$ (if these Interactions appear in $\pi$)
+%TODO explain
+
+Def. (\emph{Branching Property}) A Communicating System $\class{S}$
+has the \emph{Branching Property} if for all $\vec{n} \in N$ and for
+all $[e_1] \neq [e_2] \in E/\bowtie$ such that $\vec{n}
+\stackrel{[e_1]}\rightrightarrows \vec{n}_1$ and $\vec{n}
+\stackrel{[e_2]}\rightrightarrows \vec{n}_2$, then either:
+\begin{enumerate}
+  \item $\exists\vec{n}' \in N :
+    \vec{n}_1\stackrel{[e_2]}\rightrightarrows\vec{n}' \wedge
+    \vec{n}_2\stackrel{[e_1]}\rightrightarrows\vec{n}'$ \\ or
+  \item for each $(\vec{n}_1',\vec{n}_2') \in ln(\vec{n},[e_1],[e_2])$,
+    the following conditions hold:
+    \begin{enumerate}
+      \item \emph{Choice-awareness} -- $\forall\party{p}\in\class{P}$,
+        either:
+        \begin{itemize}
+          \item $L_\party{p}^1 \cap L_\party{p}^2 \subseteq
+            \{\varepsilon\}$ and $\varepsilon \in L_\party{p}^1
+              \Longleftrightarrow \varepsilon \in L_\party{p}^2$ \\
+            or
+          \item $\exists\vec{n}'\in{N},\pi_1,\pi_2 :
+            \vec{n}_1'\stackrel{\pi_1}\rightrightarrows\vec{n}' \wedge
+            \vec{n}_2'\stackrel{\pi_2}\rightrightarrows\vec{n}' \wedge
+            (e_1\cdot\pi_1)\downharpoonright_\party{p} =
+            (e_2\cdot\pi_2)\downharpoonright_\party{p} = \varepsilon$
+        \end{itemize}
+      \item \emph{Unique Selector} -- $\exists!\party{s}\in\class{P} :
+        L_\party{s}^1 \cap L_\party{s}^2 = \varnothing \wedge
+        \exists\party{sr}!a \in L_\party{s}^1 \cup L_\party{s}^2$
+      \item \emph{No Race} -- $\forall\party{r}\in\class{P} .
+        L_\party{r}^1 \cap L_\party{r}^2 = \varnothing \\
+        \Longrightarrow
+          \forall\party{s}_1\party{r}?a_1\in{L_\party{r}^1},
+          \forall\party{s}_2\party{r}?a_2\in{L_\party{r}^2} .
+          \vec{n}'_i\stackrel{\pi_i}\rightrightarrows \\
+        \Longrightarrow
+          dep(\party{s}_i\rightarrow\party{r}:a_i,e_i\cdot\pi_i,
+            \party{s}_j\rightarrow\party{r}:a_j)$ \\
+    \end{enumerate}
+    where:
+    \[
+      L_\party{p}^i \defeq
+        hd(\{ e_i\downharpoonright_\party{p}\cdot\varphi
+        \ |\ \varphi \in LTS(\class{S},\vec{n}_i',\party{p}) \})
+    \]
+    for $\party{p} \in \class{P}$ and $i,j \in \{1,2\}$
+\end{enumerate}
+
+checking the Branching Property is of Factorial Computation Complexity
+in the size of $STS(\class{S})$
+
+
+\textbf{Soundness Theorem}
+
+Thm. (Soundness) \emph{If $\class{S}$ is GMC then it is
+  \emph{Safe} (no Orphan Message, Deadlock, or Unspecified Reception
+  Configurations).}
+
+Soundness Theorem states that no (Asynchronous) execution of
+$\class{S}$ will result in an Orphan Message, Deadlock, or Unspecified
+Reception Configuration
+
+with Representability (every Transition and Branching in each CFSM is
+``represented'' in $STS(\class{S})$), Proof shows that for each
+Branching Node $\vec{n}$, the Function $ln(\vec{n},[e_1],[e_2])$
+allows enough Branches to be verified against the Branching Property
+and then shows that any Sent Message is eventually Received and that a
+CFSM in a Receiving State \emph{eventually} Receives a Message it
+expected (by the Branching Property)
+
+
+\textbf{Amending non-GMC Communicating Systems}
+
+(Prop.) \emph{If Communicating System $\class{S}$ satisfies all but
+condition (1) of the Representability Property, then the System
+consisting of the (Minimized) Projections of $STS(\class{S})$ is GMC}
+
+if the Projections of $STS(\class{S})$ do not have viable alternatives
+then Language Equivalence check can be used to highlight which
+Transitions (or Paths) of each CFSM are \emph{not} represented in
+$STS(\class{S})$, and Local States and Transitions violating it can be
+identified according to condition (2) of the Representability Property
+%TODO explain
+
+when the Branching Property is violated, one can give a Vector of
+Local States and the two Branching Events for which a violation
+occurs, as well as a witnessing Execution that leads to the offending
+Configuration
+
+suggestions for violating conditions:
+\begin{itemize}
+\item (2a) \emph{Choice-awareness} -- list the CFSMs for which the
+  condition is not satisfied and:
+  \begin{itemize}
+    \item if the CFSM has a first same Receiving Action in both
+      Branches, then it may be corrected by renaming some Messages
+    \item if the CFSM Terminates in one Branch but not the other, then
+      suggest to add a new Label and a Transition to the Final State
+      in the Terminated Branch as well as a Dual Transition in a
+      Sending Machine
+  \end{itemize}
+\item (2b) \emph{Unique Selector} -- highlight the Set of CFSMs
+  Sending Messages at the Branching Node and suggest the
+  identification of a ``genuine selecting Machine'' and add
+  Communication from this CFSM to the others
+\item (2c) \emph{No Race} -- highlight for each violating CFSM the
+  Messages on which a Race Condition may occur and suggest adding an
+  acknowledgement Message between the two corresponding Actions
+\end{itemize}
+
+
+\textbf{Global Graph Construction Algorithm}
+
+Communicating System $\longrightarrow$ Synchronous Transition System
+  $\longrightarrow$ GMC check \\
+\-\ \-\ \-\ $\longrightarrow$ Petri Net
+  $\longrightarrow$ One-source Net $\longrightarrow$ Joined Net
+  $\longrightarrow$ Pre-global Graph \\
+\-\ \-\ \-\
+  $\longrightarrow$ Global Graph
+
+\begin{align*}
+  & \class{S} = (M_\party{p})_{\party{p}\in\class{P}}
+    \longrightarrow STS(\class{S})
+    \longrightarrow assert(GMC(STS(\class{S}))) \\
+  & \longrightarrow \mathbf{N}_1 \longrightarrow \mathbf{N}_2
+    \longrightarrow \mathbf{N}_3 \longrightarrow G_{pre}
+    \longrightarrow G
+\end{align*}
+
+\begin{enumerate}
+  \item Petri Net $\mathbf{N}_1$ -- Safe and Extended Free-choice
+    Petri Net with a Reachability Graph that is Bisimilar to the
+    original Transition System; construction from
+    [Cortadella-Kishinevsky-Lavagno-Yakovlev98]: transforms Events of
+    $STS(\class{S})$ into Transitions of $\mathbf{N}_1$ with Places
+    built out of \emph{Regions} (Sets of States having uniform
+    Behavior with regard to Events)
+  \item One-source Net $\mathbf{N}_2$ -- transform Petri Net
+    $\mathbf{N}_1$ so that its ``Initial Markings'' consist of exactly
+    ``one place'' %FIXME explain
+  \item Joined Net $\mathbf{N}_3$ -- Join Transitions wherever
+    possible to make explicit Join and Fork points of the work-flow
+  \item Pre-global Graph -- create a Vertex in the Global Grpah for
+    each Place, Transition, and Element of the Flow Relation in the
+    Joined Net $\mathbf{N}_3$, then Vertices are connected via
+    ``Gates''
+  \item Global Graph -- ``clean up'' Pre-global Graph of unnecessary
+    Vertices
+\end{enumerate}
+
+(Prop) \emph{(2)-(4) is Computable in Polynomial Time on the size of
+  $\mathbf{N}_1$.}
+
+$\approx$ -- Weak Bisimilarity Relation on Reachability Graphs
+
+Lemma (\emph{Weak Bisimilarity}) The Reachability Graphs $T_1$, $T_2$,
+$T_3$ of $\mathbf{N}_1$, $\mathbf{N}_2$, $\mathbf{N}_3$, respectively,
+are Weakly Bisimilar: $T_1 \approx T_2 \approx T_3$
+
+
+\textbf{Global Graph Definition}
+
+Def. (\emph{Global Graph}) A \emph{Global Graph} $G$ over Participants
+$\class{P}$ and Messages (Alphabet) $\Sigma$ is a \emph{Labelled
+  Graph} (\S\ref{sec:labelled_graph}):
+\[
+  G = \langle{V,D,\Lambda}\rangle
+\]
+with:
+
+$V$ -- Vertices \\
+$D\subseteq{V \times V}$ -- Edges \\
+$\Lambda : V \rightarrow
+  \{ \ocircle, \ocirc, \diamondplus, \boxvert \} \cup
+  \{ \party{s}\rightarrow\party{r}:a
+    \ |\ \party{s,r}\in\class{P} \wedge a \in \Sigma \}$
+-- Labelling Function mapping Vertices to \emph{Interactions}
+$\party{s}\rightarrow\party{r}:a$ and \emph{Gates} $\{ \ocircle,
+\ocirc, \diamondplus, \boxvert \}$
+
+$\party{s}\rightarrow\party{r}:a$ -- an Interaction where $\party{s}$
+Sends a Message $a$ to $\party{r}$
+
+$\ocircle$ -- Initial (Source) Vertex Gate: Source of a Global Graph
+
+$\ocirc$ -- Terminal Vertex Gate: Termination of a Branch or Thread
+
+$\boxvert$ -- Fork or Join Threads Gate
+
+$\diamondplus$ -- Branch or Merge points, or entry points of Loops
+Gate
+
+$\Lambda^{-1}(\ocircle)$ is a Singleton
+
+if $\Lambda(v) = \ocirc$ then $v$ has no outgoing Edges
+
+if $\Lambda(v) \in \{\diamondplus, \boxvert\}$ then $v$ has at least
+one incoming and one outgoing Edge
+
+if $\Lambda(v) = \party{s}\rightarrow\party{r}:a$ then $v$ has
+\emph{unique} incoming and \emph{unique} outgoing Edges
+
+
+\textbf{Transformation from $\mathbf{N}_3$ to $G_{pre}$ to $G$}
+
+$G_{pre}$ is obtained from $\mathbf{N}_3$ by:
+\begin{enumerate}
+  \item create a Vertex in the Global Graph for each Place,
+    Transition, and Element of the Flow Relation in $\mathbf{N}_3$
+  \item connect above Vertices via Gates:
+    \begin{itemize}
+      \item connect an Initial (Source) Vertex $\ocircle$ to the
+        Vertex without a Predecessor
+      \item connect Terminal (Sink) Vertex $\ocirc$ to any Vertex
+        without Successors
+      \item connect $\boxvert$-gates to Transitions if they have more
+        than one Predecessor or Successor
+      \item connect $\diamondplus$-gates Places if they have more than
+        one Predecessor or Successor
+    \end{itemize}
+  \item connect each ``component'' of the Graph by merging ``Ports''
+    corresponding to Elements in the Flow Relation %TODO clarify
+\end{enumerate}
+
+the Global Graph $G$ is obtained from $G_{pre}$ by removing all
+``unnecessary'' Nodes (i.e. former Places and Transitions) and
+Re-labelling Events into \emph{Interactions}-- Event $e$ is replaced
+by $\iota(e)$ (i.e. the Local States are ``forgotten'')
+
+
+\textbf{Global Graph Projection}
+
+Global Graph $G$ can be Projected to Local CFSMs by either:
+\begin{enumerate}[label=(\alph*)]
+  \item transform $G$ into a Petri Net and Project the Reachability
+    Graph of the Petri Net (cf. Projection of $LTS(\class{S})$)
+  \\ or:
+  \item \begin{itemize}
+    \item transform $G$ into an Automaton with States as Nodes of $G$
+      and each Transition Labelled by
+      $(\party{s}\rightarrow\party{r}:a)\downharpoonright_\party{p}$
+      if the Source State corresponds to a Vertex with Label
+      $\party{s}\rightarrow\party{r}:a$ and by $\varepsilon$ otherwise
+    \item take the Parallel Composition of the Automata resulting from
+      the Projectin of each Successor of a $\boxvert$-gate
+      %TODO explain
+    \item minimize the resulting Automata with respect to Language
+      Equivalence
+  \end{itemize}
+\end{enumerate}
+
+$G\downharpoonright_\party{p}$ -- Projection of Global Graph $G$ onto
+Participant $\party{p}\in\class{P}$ (Formal definition given in the
+extended version of Lange-Tuosto-Yoshida15)
+
+
+\textbf{Completeness Theorem}
+
+a Synchronous Transition System $STS(\class{S}) =
+(N,\vec{n}_0,E/\bowtie,\rightrightarrows)$ is \emph{Self-loop Free} if
+$\forall\vec{n},\vec{n}'\in{N} . \vec{n}\rightrightarrows\vec{n}'
+\Longrightarrow \vec{n}\neq\vec{n}'$
+
+Thm. (Completeness) \emph{For GMC Communicating System $\class{S} =
+  (M_\party{p})_\party{p\in\class{P}}$ and Global Graph $G$ built from
+  $\class{S}$ with $STS(\class{S}) =
+  (N,\vec{n}_0,E/\bowtie,\rightrightarrows)$, if $STS(\class{S})$ is
+  Self-loop Free then $\class{S}$ is Isomorphic to the Projected
+  Communicating System
+  $(G\downharpoonright_\party{p})_{p\in\party{P}}$}
+
+the Completeness Theorem relies on the fact that each CFSM is
+\emph{preserved} during the construction:
+\begin{enumerate}
+  \item Projection of $STS(\class{S})$ onto each $\party{p}$ is
+    Language Equivalent with $M_\party{p}$
+  \item the Petri Net $\mathbf{N}_1$ obtained from $STS(\class{S})$ is
+    Bisimilar to $STS(\class{S})$
+  \item each transformation preserves (Weak) Bisimilarity with the
+    Derived Petri Net (cf. Weak Bisimilarity Lemma)
+  \item transformation to a Global Graph is \emph{Sound} since the
+    Petri Net is ``Extended Free Choice'' %TODO clarify
+\end{enumerate}
 
 
 \endgroup

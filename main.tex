@@ -1,6 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass{article}
+
+\usepackage{etoolbox} % \undef, allow more math alphabets
+\makeatletter
+\def\new@mathgroup{\alloc@8\mathgroup\mathchardef\@cclvi}
+\patchcmd{\document@select@group}{\sixt@@n}{\@cclvi}{}{}
+\patchcmd{\select@group}{\sixt@@n}{\@cclvi}{}{}
+\makeatother
+
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathtools}
@@ -12,13 +20,17 @@
 \usepackage{cmll}
 \usepackage{mathrsfs}
 \usepackage{fourier-orns}
+\usepackage{MnSymbol}
+\undef\mathdollar % needed to prevent \mathdollar already defined error
 \usepackage{wasysym}
+\usepackage{enumitem} % \setlist
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 
 \usepackage{fontspec}
 \newfontfamily\freeserif{FreeSerif}
 \DeclareTextFontCommand{\texfreeserif}{\freeserif}
+
 
 \newcommand{\fist}{\large\lefthand\;\normalsize}
 \newcommand{\interrobang}{\textbf{\large\textinterrobang\;\normalsize}}
@@ -75,6 +87,7 @@
 \newcommand{\bindop}{\mathsf{\gg\kern-3pt=}}
 \newcommand{\altop}{\mathsf{\;:\kern-3pt+\;}}
 \newcommand{\minlozenge}{\mathrlap{-}\lozenge}
+%\newcommand{\diamondplus}{\mathrlap{+}\Diamond}
 \newcommand{\llense}{[\kern-1.95pt(}
 \newcommand{\rlense}{)\kern-2.0pt]}
 \newcommand{\until}{\mathsf{U}}
@@ -93,7 +106,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\includeonly{tex/systems-theory}
+\includeonly{tex/graph-theory,tex/systems-theory}
 
 \begin{document}
 
@@ -113,6 +126,7 @@
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1em}
+\setlist[itemize]{noitemsep, topsep=0pt}
 
 % --------------------------------------------------------------------
 
