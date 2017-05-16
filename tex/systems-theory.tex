@@ -285,7 +285,7 @@ where:
     $q_\party{p} \in Q_\party{p}$ is the \emph{Local State} of Machine
     $M_\party{p}$
   \item $\vec{w} = (w_\party{pq})_{\party{pq} \in C}$ with
-    $w_\party{pq} \in A^*$
+    $w_\party{pq} \in \Sigma^*$
 \end{itemize}
 
 \emph{Initial Configuration} of $\class{S}$:
@@ -296,8 +296,8 @@ with $\vec{q}_0 = (q_{0\party{p}})_{\party{p} \in \class{P}}$
 
 A Configuration $s' = (\vec{q}',\vec{w}')$ is \emph{Reachable} from
 Configuration $s = (\vec{q},\vec{w})$ by Transition $\ell$, written $s
-\xrightarrow{\ell} s'$, if there is an Action $a \in A$ such that
-either:
+\xrightarrow{\ell} s'$, if there is an Symbol (Message) $a \in \Sigma$
+such that either:
 \begin{itemize}
   \item $\ell = \party{sr}!a$ and $(q_\party{s},\ell,q_\party{s}') \in
     \delta_\party{s}$
@@ -427,7 +427,7 @@ a Synchronous Transition System has:
   of Events} (taken up to $\blacklozenge$-equivalence):
 \[
   \class{E} \defeq \bigcup_{\party{s,r\in\class{P}}} Q_\party{s} \times
-    Q_\party{r} \times \{(\party{s,r})\} \times A \}
+    Q_\party{r} \times \{(\party{s,r})\} \times \Sigma \}
 \]
 where Events are Tuples
 $(q_\party{s},q_\party{r},\party{s},\party{r},a) \in \class{E}$, also
@@ -483,8 +483,8 @@ $\vec{n}[\party{p}]$ -- the State of $\party{p} \in \class{P}$ in
 $\vec{n}$
 
 for Communicating System $\class{S} =
-(M_\party{p})_{\party{p}\in\class{P}}$ the \emph{Synchronous
-  Transition System} of $\class{S}$:
+(M_\party{p})_{\party{p}\in\class{P}}$, $STS(\class{S})$ is the
+\emph{Synchronous Transition System} of $\class{S}$:
 \[
   STS(\class{S}) = (N,\vec{n}_0,E/\bowtie,\rightrightarrows)
 \]
@@ -494,9 +494,6 @@ $N \defeq \{ \vec{q} \ |\ (\vec{q};\vec{\varepsilon}) \in Rc_1(\class{S}) \}$
 
 $\vec{n}_0 = \vec{q}_0$ -- Initial State
 
-$E \defeq \{ e \ |\ \exists\vec{n},\vec{n}' \in N :
-  (\vec{n},e,\vec{n}') \in \hat{\delta} \} \subseteq \class{E}$
-
 $\hat{\delta} \defeq \{ (\vec{n},e,\vec{n}')
 \ |\ (\vec{n};\vec{\varepsilon})
     \xrightarrow{\party{sr}!a} \xrightarrow{\party{sr}?a}
@@ -505,10 +502,23 @@ $\hat{\delta} \defeq \{ (\vec{n},e,\vec{n}')
       \party{s}\rightarrow\party{r}:a)
 \}$
 
+$E \defeq \{ e \ |\ \exists\vec{n},\vec{n}' \in N :
+  (\vec{n},e,\vec{n}') \in \hat{\delta} \} \subseteq \class{E}$
+
 $\vec{n} \stackrel{[e]}{\rightrightarrows} \vec{n}' \Leftrightarrow
   (\vec{n},e,\vec{n}') \in \hat{\delta}$
 
-$\pi$ -- ranges over Sequences of Events
+in $\hat{\delta}$, Events are $\bowtie$-equivalent if they have the
+same Interaction $\party{s}\rightarrow\party{r} : a$
+%TODO explain
+
+note: original paper uses a representative Set $\hat{E}$ of Events for
+each $\bowtie$-equivalence Class but here we will just continue
+writing $[e]$
+
+$\pi$ -- ranges over Sequences of Events and $\rightrightarrows$ is
+extended to Sequences of Events (as with the Reachibility Relation
+$\rightarrow$ for Configurations above)
 
 $e\downharpoonright_\party{p}$ -- Projection of Event $e$ onto
 Participant $\party{p}$:
@@ -524,16 +534,11 @@ Participant $\party{p}$:
 
 $STS(\class{S})\downharpoonright_\party{p}$ -- Projection of
 Synchronous Transition System onto Participant $\party{p}$ is the
-Automaton $(Q, q_0, \Sigma, \delta)$ where $Q = N$, $q_0 = \vec{n}_0$
-and $\delta \subseteq Q \times A \cup \{ \varepsilon \} \times Q$ is
-such that $(n_1, e\downharpoonright_\party{p}, n_2) \in \delta
-\Leftrightarrow n_1 \stackrel{e}{\rightrightarrows} n_2$
-
-TODO the above is a bit muddled due to differences here from notation
-of the original paper
-
-$\hat{E}$ -- a representative Set of Events for each
-$\bowtie$-equivalence Class
+Automaton $(Q, \vec{q}_0, \Sigma, \delta)$ where $Q = N$, $\vec{q}_0 =
+\vec{n}_0$ and $\delta \subseteq Q \times A \cup \{\varepsilon\}
+\times Q$ is such that $(\vec{n}_1, e\downharpoonright_\party{p},
+\vec{n}_2) \in \delta \Leftrightarrow \vec{n}_1
+\stackrel{e}{\rightrightarrows} \vec{n}_2$
 
 
 \textbf{Generalized Multiparty Compatibility} (GMC)
@@ -565,7 +570,7 @@ $STS(\class{S})<\vec{n}>$ -- Synchronous Transition System
 $STS(\class{S})$ where Initial State $\vec{n}_0$ is replaced by
 $\vec{n}$
 
-$STS(\class{S},\vec{n},\party{p})$ -- the Language
+$LTS(\class{S},\vec{n},\party{p})$ -- the Language
 $\class{L}(STS(\class{S})<\vec{n}>\downharpoonright_p)$ obtained by
 setting the Initial State (Node) of $STS(\class{S})$ to $\vec{n}$ and
 then Projecting the resulting Synchronous Transition System onto
@@ -573,15 +578,20 @@ Participant $\party{p}$
 
 
 Def. (Representability) Communicating System $\class{S}$ is
-\emph{Representable} if:
+\emph{Representable} if for all $\party{p} \in \class{P}$:
 \begin{enumerate}
-  \item $\class{L}(M_\party{p}) = STS(\class{S},\vec{n}_0,\party{p})$ and
+  \item $\class{L}(M_\party{p}) = LTS(\class{S},\vec{n}_0,\party{p})$ and
   \item $\forall q \in Q_\party{p} \exists \vec{n} \in N :
     \vec{n}[\party{p}] = q \wedge
       \bigcup_{(q,\ell,q')\in\delta_\party{p}} \{ \ell \}
-        \subseteq hd(STS(\class{S},\vec{n},\party{p}))$
+        \subseteq hd(LTS(\class{S},\vec{n},\party{p}))$
 \end{enumerate}
-for all $\party{p} \in \class{P}$
+(1) guarantees that each Trace of each Machine is represented in
+$STS(\class{S})$ and (2) is necessary to ensure that every Choice in
+each Machine is represented in $STS(\class{S})$
+
+checking the Representability Condition for a Communicating System
+$\class{S}$ has Exponential worst-case Time Complexity
 
 
 \endgroup
