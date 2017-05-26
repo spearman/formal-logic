@@ -2201,8 +2201,13 @@ restrictions on the allowed Proofs in standard ``Structural'' Logic,
 removing Properties such as:
 \begin{itemize}
   \item Exchange (Associativity ???) %FIXME
-  \item Weakening
-  \item Contraction
+  \item Weakening -- $\frac{\Gamma \vdash \Sigma}
+    {\Gamma,A \vdash \Sigma}$
+  \item Contraction (\emph{Idempotency of Entailment} in Classical
+    Logic; ``Factoring'' in Automated Theorem Proving systems using
+    Resolution Inference Rule) -- $\frac{\Gamma,A,A \vdash \Sigma}
+    {\Gamma,A \vdash \Sigma}$
+    %TODO xref
 \end{itemize}
 
 Internal Languages (\S\ref{sec:internal_logic}) of various Monoidal
@@ -2225,18 +2230,29 @@ can be used to Model Stack-based Memory Allocation
 
 
 
-\subsubsection{Affine Logic}\label{sec:affine_logic}\hfill
+\subsubsection{Affine Logic}\label{sec:affine_logic}
 
 \emph{Affine Logic}
 
 no Contraction -- ``can use at most once''
 
-foundation of Ludics (\S\ref{sec:ludics})
-
 (wiki):
 
 Russell's Paradox cannot be Derived in a Set Theory without
 Contraction (Grishin74)
+
+cf. Affine Transformation (\S\ref{sec:affine_transformation}) on
+Vector Spaces
+
+full Linear Logic (Propositional Linear Logic with Multiplicatives,
+Additives, and Exponentials) is Undecidable while full Affine Logic is
+Decidable
+
+foundation of Ludics (\S\ref{sec:ludics})
+
+
+
+\paragraph{Direct Logic}\label{sec:direct_logic}\hfill
 
 
 
@@ -2248,7 +2264,25 @@ Strict Logic
 
 no Weakening -- ``must use at least once''
 
+Girard: Weakening Rule introduces ``fake dependencies'', e.g. Constant
+Functions
+
 (wiki):
+
+notion of \emph{Relevance}:
+\begin{itemize}
+  \item in terms of a Syntactical Constraint for a
+    Propositional Calculus it is Necessary but not Sufficient that the
+    Premises and Conclusion share Atomic Formulas (i.e. Formulas that do
+    not contain any Logical Connectives \S\ref{sec:logical_connective})
+  \item in Predicate Calculus requires ``sharing'' of Variables and
+    Constants between Premises and Conclusion which can be ensured by
+    placing restrictions on the Rules of a Natural Deduction system,
+    i.e. no \emph{Weakening}
+\end{itemize}
+
+Relevance Logics are \emph{Paraconsistent Logics}
+(\S\ref{sec:paraconsistent_logic})
 
 Kripke Semantics (\S\ref{sec:kripke_semantics}) for Relevance Logic:
 can be characterized as a Class of Formulas Valid over a Class of
@@ -2277,6 +2311,8 @@ Giraud87 \emph{Linear Logic}
   (\S\ref{sec:boolean_algebra}) by C$^*$-algebras
   (\S\ref{sec:cstar_algebra}).
 \end{itemize}
+
+
 
 Internal Language of Closed Symmetric Monoidal Categories
 (\S\ref{sec:closed_symmetric_monoidal})
@@ -2325,8 +2361,12 @@ G\"odel-Gentzen Negative Translation (\S\ref{sec:godel_gentzen}),
 embedding Classical First-order Logic into Linear First-order Logic
 
 Traced Monoidal Categories (\S\ref{sec:traced_monoidal}): Operational
-Categorical Semantics for Linear Logic (Geometry of Interactions
-\S\ref{sec:interaction_geometry})
+Categorical Semantics for Linear Logic
+
+Game Semantics (\S\ref{sec:game_semantics}): Geometry of Interactions
+\S\ref{sec:interaction_geometry}) Semantics of Linear Logic
+characterizes Linear Logic in terms of Linear Algebra; cf. Coherence
+Space (\S\ref{sec:coherence_space})
 
 Exponential Modality $!$ is an example of a Comonad
 (\S\ref{sec:comonad}): Counit is \emph{Deriliction} $!A \rightarrow A$
@@ -3013,7 +3053,9 @@ Connectives of Lambek Calculus (\S\ref{sec:labek_grammar})
 
 
 
-\subsubsection{Bunched Logic}\label{sec:bunched_logic}
+% --------------------------------------------------------------------
+\subsection{Bunched Logic}\label{sec:bunched_logic}
+% --------------------------------------------------------------------
 
 (or \emph{Logic of Bunched Implications})
 
@@ -3029,6 +3071,8 @@ Distributed Systems (Pym)
 
 O'Hearn-Pym99 \emph{The Logic of Bunched Implications}:
 
+$\textbf{BI}$
+
 can be viewed as a merging of Intuitionistic Logic and Multiplicative
 Intuistionistic Linear Logic
 
@@ -3037,11 +3081,19 @@ Closed Categories, i.e. Categories that combine the Semantics of
 Propositional Intuitionistic Logic and Propositional Intuitionistic
 Multiplicative Linear Logic
 
+Multiplicative (or Linear) Implication
+
+Additive (or Intuitionistic) Implication
+
+Predicative version includes Multiplicative (or Intensional)
+Quantifiers $\forall_{new}$ and $\exists_{new}$ arising from
+restrictions on Structural Rules of Terms as well as Propositions
 
 
-\paragraph{Deep Inference}\label{sec:deep_inference}\hfill
 
-\paragraph{Hoare Logic}\label{sec:hoare_logic}\hfill
+\subsubsection{Deep Inference}\label{sec:deep_inference}
+
+\subsubsection{Hoare Logic}\label{sec:hoare_logic}
 
 (or \emph{Floyd-Hoare Logic})
 
@@ -3066,7 +3118,7 @@ Semantics (\S\ref{sec:predicate_transformer_semantics})
 
 
 
-\subparagraph{Separation Logic}\label{sec:separation_logic}\hfill
+\paragraph{Separation Logic}\label{sec:separation_logic}\hfill
 
 Reynolds02 \emph{Separation Logic: a logic for shared mutable data
   structures}
@@ -3238,6 +3290,13 @@ Default Inference (\S\ref{sec:default_inference})
 % --------------------------------------------------------------------
 \subsection{Paraconsistent Logic}\label{sec:paraconsistent_logic}
 % --------------------------------------------------------------------
+
+existance of a Contradiction will not cause an ``Explosion''
+
+Relevance Logic (\S\ref{sec:relevance_logic})--no Weakening Rule--is a
+Paraconsistent Logic
+
+
 
 \subsubsection{Discursive Logic}\label{sec:discursive_logic}
 

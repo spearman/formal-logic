@@ -188,6 +188,14 @@ or \emph{Global Graphs}
 \emph{From Communicating Machines to Graphical Choreographies} \\
 Lange-Tuosto-Yoshida 2015
 
+includes a Haskell prototype
+
+Ng-Yoshida16 \emph{Static Deadlock Detection for Concurrent Go by
+  Global Session Graph Synthesis} builds on this work: tool extracts
+Communication Operations as Session Types, converts into CFSMs, and
+then applies the Choreography Synthesis to generate a Global Graph
+representing the overal Communication pattern
+
 \fist Communicating Finite State Machines (CFSMs
 \S\ref{sec:communicating_fsm})
 
@@ -829,6 +837,8 @@ suggestions for violating conditions:
 
 \textbf{Global Graph Construction Algorithm}
 
+\fist Petri Nets (\S\ref{sec:petri_net})
+
 Communicating System $\longrightarrow$ Synchronous Transition System
   $\longrightarrow$ GMC check \\
 \-\ \-\ \-\ $\longrightarrow$ Petri Net
@@ -1002,7 +1012,222 @@ the Completeness Theorem relies on the fact that each CFSM is
 \end{enumerate}
 
 
+\textbf{Haskell Prototype Tool}
+
+takes as Input a textual representation of a Communicating System
+$\class{S}$, builds $STS(\class{S})$, checks Representability
+Condition and Branching Property--uses HKC (Bonchi-Pous13) to check
+for Language Equivalence--and constructs Petri Net from
+$STS(\class{S})$ using Petrify tool:
+\url{http://www.lsi.upc.edu/~jordicf/petrify/}
+
+
 \endgroup
+
+
+\asterism
+
+
+Ng-Yoshida16 \emph{Static Deadlock Detection for Concurrent Go by
+  Global Session Graph Synthesis}:
+
+uses Haskell GMC tool from Lange-Tuosto-Yoshida15
+
+introduces Dingo static analysis tool: analyzes Go source code to
+derive a Set of Local Session Types by abstracting Concurrent
+Interaction Patterns amongst Goroutines (Green Threads)
+
+Synchronous Communication (Unbuffered ``Rendezvous'' Channels, i.e.
+Channels with $0$-sized Buffers)
+
+a \emph{Program} is a Closed Communicating System called a
+\emph{Session}
+
+each Local Session Type represents a single \emph{Participant} of the
+Session, i.e. corresponds to a single instance of a Goroutine
+($\mono{main}$ is an implicit Goroutine)
+
+extracts Communication Operations in source code as a Local
+Session Type-- a Control-flow Graph with Session Primitives where
+each Node is one of:
+\begin{itemize}
+  \item $Channel\ ch\ T$ -- Create a new Channel named $ch$ of Type
+    $T$
+  \item $Send\ ch$ -- Send to a Channel $ch$:
+    $ch!\langle{T}\rangle; T'$ where $T'$ is the Continuation
+    (Child Node)
+  \item $Recv\ ch$ -- Receive from a Channel $ch$:
+    $ch?\langle{T}\rangle; T'$ where $T'$ is the Continuation
+    (Child Node)
+  \item $Close\ ch$ -- Close a Channel $ch$
+  \item $Label$ -- a named Jump Label %TODO explain
+\end{itemize}
+
+Static Single Assignment (SSA) Intermediate Representation --
+constructed by $\mono{go/ssa}$ package in the Go Standard Library:
+simplifies Syntax of Go program into a limited Set of Instructions and
+flattens the Control Flow of the Program as Jumps between Blocks of
+Instructions for analysis
+
+\emph{Communication Instructions} and \emph{Control Flow Instructions}
+are sufficient to infer Local Types from Go Programs; \emph{Memory
+  Access Instructions} do not affect Control Flow, nor perform any
+Communication with other Goroutines, but they will be required to
+track where Channels have been stored (e.g. in other Data Structures)
+
+\begin{enumerate}
+  \item analysis starts from Program Main Entry Point ($\mono{main}$)
+    and interprets SSA instructions following the Program Control
+    Flow:
+    \begin{itemize}
+      \item instructions related to Communications are converted to
+        Nodes of the Local Session Type Graph
+      \item instructions related to Control Flow are converted to
+        Edges of the Local Session Type Graph
+    \end{itemize}
+  \item a Set of Local Session Type Graphs is generated to represent
+    the Set of Goroutines in the Program
+\end{enumerate}
+
+SSA Communication Instructions:
+\begin{itemize}
+  \item $\mathsf{MakeChan\{Size\}}$ -- $Channel\ ch\ T$ \\
+    -- creates a Channel with $\mathsf{Size}$-sized Buffer, in
+    Ng-Yoshida16 this is always $\mathsf{Size = 0}$
+  \item $\mathsf{Send\{Chan=ch, X\}}$ -- $Send\ ch$ \\
+    -- Send a Value $\mathsf{X}$ to a Channel $\mathsf{Chan})$
+  \item $\mathsf{UnOp\{Op=ARROW, X=ch\}}$ -- $Recv\ ch$ \\
+    -- Receive from a Channel $X$ %TODO returns received?
+  \item $\mathsf{Select\{States, Blocking\}}$ -- the Local Type of
+    each Case in a $\mono{select}$ is appended as a Child to the
+    Parent Local Graph Node of $\mathsf{Select}$ \\
+    -- Non-deterministic Choice on Channel Communication: each Case is
+    guarded by a Communication Operation and a Case is \emph{chosen}
+    if it does not Block; $\mathsf{Blocking}$ is a Boolean indicating
+    whether a $\mono{default}$ Case exists (chosen if all the
+    Communication Cases are Blocking), which is given an $EmptyLabel$
+    to denote no Communication Operations
+  \item $\mathsf{Builtin\{Name=close, Arg=[ch]\}}$ -- $Close\ ch$ \\
+    -- use of built-in Function $\mathsf{close}$ that Closes the given
+    Channel
+\end{itemize}
+(??? Cases are tried in order FIXME)
+
+Function Bodies in SSA IR are Segmented into \emph{Blocks} with
+\emph{Jumps} between Blocks following the Control Flow of the Program
+
+SSA Control Flow Instructions:
+\begin{itemize}
+  \item $\mathsf{Call\{Func, Method, Args\}}$ -- Edge is added in
+    Local Type Graph from Caller to the Subgraph representing the
+    Local Types of the Callee Body \\
+    -- dual of $\mathsf{Return}$: Control Flow leaves the Caller and
+    enters called Function
+  \item $\mathsf{Go\{Func, Method, Args\}}$ -- add a new Local Type
+    Graph to Session \\
+    -- Spawns a Goroutine with Initial Node pointing to the Subgraph
+    representing the Local Types of the Callee Body
+  \item $\mathsf{Jump}$ -- Edge in Local Type Graph from the Local
+    Types of the current Block to the Local Types of the next Block \\
+    -- unconditional Jump from the current Block to a Successor Block:
+    Sequential Transition from the end of the current Block to the
+    next Block in the same Scope
+  \item $\mathsf{Return}$ -- Edge in Local Type Graph joining the last
+    Node of a Function to the Continuation of the Caller \\
+    -- dual of $\mathsf{Call}$: Control Flow continues at the Caller
+    of the called Function
+  \item $\mathsf{If\{Cond\}}$ -- two Edges pointing to the Local Types
+    for the ``Then'' and ``Else'' Blocks as Child Subgraphs\\
+    -- Conditional Jump based on the Boolean $\mathsf{Cond}$
+  \item $\mathsf{Defer\{Func, Method, Args\}}$, $\mathsf{RunDefers}$
+    -- Edge in Local Type Graph at end of Caller pointing to the Local
+    Type Subgraph of the Deferred Function \\
+    -- pair of Instructions that \emph{Defer} a Call to a Function to
+    the end of the current Function; this pushes the Deferred Function
+    onto a special Stack of Deferred Function Calls which are
+    guaranteed to be run with $\mathsf{RunDefers}$ once in each
+    Control Flow Path per Function
+\end{itemize}
+
+
+\textbf{Global Graph Synthesis}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage\null\thispagestyle{empty}\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage\null\thispagestyle{empty}\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1062,6 +1287,8 @@ Driving Functions:
 Differential Equations; \fist Cf. Information Theoretic \emph{Channel
   Capacity Theorem} (\S\ref{sec:channel_capacity})
 %FIXME xref
+
+Backpropagation ?
 
 
 
