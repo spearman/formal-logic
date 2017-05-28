@@ -1031,14 +1031,17 @@ $STS(\class{S})$ using Petrify tool:
 Ng-Yoshida16 \emph{Static Deadlock Detection for Concurrent Go by
   Global Session Graph Synthesis}:
 
+approach uses Sets of CFSMs to represent (Communicating) Systems of
+Concurrent Processes
+
 uses Haskell GMC tool from Lange-Tuosto-Yoshida15
 
 introduces Dingo static analysis tool: analyzes Go source code to
 derive a Set of Local Session Types by abstracting Concurrent
 Interaction Patterns amongst Goroutines (Green Threads)
 
-Synchronous Communication (Unbuffered ``Rendezvous'' Channels, i.e.
-Channels with $0$-sized Buffers)
+Synchronous Communication Model (Unbuffered ``Rendezvous'' Channels,
+i.e. Channels with $0$-sized Buffers)
 
 a \emph{Program} is a Closed Communicating System called a
 \emph{Session}
@@ -1152,82 +1155,142 @@ SSA Control Flow Instructions:
 
 \textbf{Global Graph Synthesis}
 
+uses Haskell GMC tool from Lange-Tuosto-Yoshida15: takes Set of
+Communicating Finite State Machines (CFSMs) as input and produces a
+Global Graph of Transitions
+
+
+\emph{Goroutine CFSMs}
+
+Models the Communication Behavior of Goroutines: represents Control
+Flows of the Inferred Local Types
+
+\begin{enumerate}
+  \item covert Local Session Graphs obtained from Go source code
+    (``Inferred Local Types'') into CFSMs -- each Local Session Graph
+    is translated to a single Goroutine CFSM
+
+    Nodes in the Local Session Graph are \emph{Events} represented as
+    State Transitions in the CFSM Model with Labels determined by the
+    Type of the Local Type Node:
+    \begin{itemize}
+      \item Node $Send\ ch$ becomes Transition with Label $ch!T$ where
+        $T$ is the Type of Channel $ch$
+      \item Node $Recv\ ch$ becomes Transition with Label $ch?T$ where
+        $T$ is the Type of Channel $ch$
+      \item Node $Close\ ch$ becomes Transition with Label
+        $ch!\mathsf{STOP}$
+    \end{itemize}
+\end{enumerate}
+
+
+\emph{Channel CFSMs}
+
+Channels between CFSMs are \emph{fixed} between two Machines: a CFSM
+can use multiple Channels, but the Endpoints are always the same
+
+Go Channels are \emph{Shared Names} which can be used by multiple
+Goroutines as a \emph{Shared Location} for two or more Goroutines to
+\emph{Synchronize} on Send and Receive Operations
+
+this is \emph{preserved} when translated from Local Types to CFSMs:
+CFSMs Communicate with Channels which are \emph{Variables} and
+\emph{not} ``Endpoint Machines''
+
+Channels connect to CFSMs as ``\emph{proxies}'': CFSMs do not
+Communicate directly but Go Channels resemble \emph{Switches} or
+\emph{Multiplexors} between CFSMs
+
+Go Channels are Modelled as CFSMs themselves--\emph{Channel CFSMs}--to
+represent all possible transitions that a Go Channel is allowed (such
+as connecting multiple Goroutines dynamically)
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item construct a Channel CFSM for each identified Channel where the
+    first outgoing Transition from the Initial State is a Receive
+    Action and the second is a Send Action matched to the Initial
+    Action, returning to the Initial State
+\end{enumerate}
+
+\emph{Global Graph Synthesis}: given both Goroutine CFSMs and Channel
+CFSMs, Synthesize Global Graph from the CFSMs by procedure involving
+generating \emph{all possible combinations} of Synchronous Labelled
+Transitions of the composed CFSMs
+
+\emph{For-loops}: translated as two Branches of Transitions from a
+State: one for \emph{Exit Loop} and another for \emph{Continue Loop}
+that loops back to the starting State
+(FIXME is this in the CFSM or Global Graph ???)
+
+Limitations:
+
+allowing for ``flexible range of Program Control Flow patterns'', e.g.
+For-loops (above), results in limited support for \emph{Dynamic
+  Concurrency}, e.g. creating Channels in a Loop or \emph{conditional}
+creation of Goroutines for ``Error Handling'', corresponding to
+\emph{Runtime Spawning} of new Channel CFSMs and new Goroutine CFSMs,
+respectively
+
+to overcome limitations, in the Inference technique outlined above:
+\begin{itemize}
+\item if a condition inthe Control Flow of a Program decides if a
+  Goroutine will be Spawned, then a \emph{Subset} of all generated
+  CFSMs -- ``which (are ???) translated from Goroutines that are
+  Spawned under the same condition'' (???) -- are \emph{selected} for
+  Global Graph Synthesis to check that the System is Safe under the
+  condition
+\end{itemize}
+(FIXME clarify)
+
+
+\textbf{Generalized Multiparty Compatibility (GMC)}
+
+Global Graph Nodes are \emph{Interactions} (matched Send/Receive
+Actions) between two Participants (CFSMs)
+
+Generalized Multiparty Compatibility (GMC -- Lange-Tuosto-Yoshida15):
+\begin{enumerate}[label=(\roman*)]
+  \item \emph{Representability} -- each Trace and Choices in the CFSMs
+    are represented in the Global Graph: ensures no information is
+    lost in the construction of the Global Type
+  \item \emph{Branching Property} -- for all Choices in the Global
+    Graph, a \emph{unique} CFSM takes (FIXME makes ???) the decision
+    and the decision is \emph{propagated} to ``other'' CFSMs (FIXME to
+    *all* other CFSMs ???) (the \emph{Unique Machine Condition}):
+    ensures that all Branches are ``Well-formed''
+\end{enumerate}
 
+Representability only applies to Goroutine CFSMs: Channel CFSMs do not
+give any influence on the Communication Behavior of Goroutine CFSMs
 
 
+\textbf{Mixed Choices}
 
+(TODO examples, clarify)
 
+original Theory in Lange-Tuosto-Yoshida15 does not allow a CFSM to
+have a \emph{Mixed Choice}, i.e. a Choice which has both Sending and
+Receiving Actions from the same State
 
+Go $\mono{select}$ allows writing Mixed Choices
 
+in Lange-Tuosto-Yoshida15 the Branching Property requires unique
+Senders (i.e. a unique Participant initiates Sending Actions)-- with
+the Synchronous Model in Ng-Yoshida16 (as opposed to an Asynchronous
+Model in Lange-Tuosto-Yoshida15), this condition can be relaxed by
+replacing the unique Sender by the \emph{Unique Machine Condition}
+(see above)
 
 
+\textbf{Case Studies}
 
-
-
-
-
-
-
-
-
-
-
-\newpage\null\thispagestyle{empty}\newpage
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\newpage\null\thispagestyle{empty}\newpage
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{itemize}
+  \item \emph{Pipeline} -- only safe if the Main Loop is
+    \emph{Bounded} (cannot be Statically Verified unless Loops are
+    ``Unrolled'')
+  \item \emph{Fan-in}
+\end{itemize}
 
 
 
