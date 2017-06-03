@@ -1552,6 +1552,9 @@ Impredicative Typed $\lambda$-calculi: Lambda Cube
 \subsection{Subtype Polymorphism}\label{sec:subtype_polymorphism}
 % --------------------------------------------------------------------
 
+%FIXME could this be a form of ad-hoc polymorphism, e.g. intersection
+%types according to huttel et al. 2016
+
 \subsubsection{Subtype}\label{sec:subtype}
 
 \emph{Intersection Type}
@@ -1612,6 +1615,19 @@ $P A$ the Type of all Subtypes of $A$
 
 \subsubsection{Intersection Type}\label{sec:intersection_type}
 
+Model Theory of $\lambda$-calculus (Barendregt et al. 2013)
+
+Type Constructor $\wedge$: an entity has Type $T_1 \wedge T_2$ if it
+has \emph{both} Type $T_1$ and Type $T_2$
+
+%TODO relation to product types ???
+
+dual notion: \emph{Union Types} (\S\ref{sec:union_type})
+
+\fist Behavioral Types (\S\ref{sec:behavioral_type})
+
+
+
 \paragraph{Refinement Type}\label{sec:refinement_type}\hfill
 
 Predicate assumed to hold for any Element of Refined Type
@@ -1639,9 +1655,28 @@ Induced by Algebras over a Datatype's Structure
 
 
 
+\subsubsection{Union Type}\label{sec:union_type}
+
+Type Constructor $\vee$: \emph{uncertainty} whether entity of Value
+$T_1 \vee T_2$ is either a $T_1$ or a $T_2$ and a Program using such a
+Value must account for both possibilities
+
+%TODO relation to sum types ???
+
+dual notion: \emph{Intersection Type}
+
+\fist Behavioral Types (\S\ref{sec:behavioral_type})
+
+
+
 \subsubsection{Behavioral Subtype}\label{sec:behavioral_subtype}
 
 \emph{Substitutability}
+
+Liskov Substitution Principle
+
+\emph{Request Substitutability} -- extension to Non-uniform Objects;
+cf. Algebra of Behavioral Types (ABT \S\ref{sec:abt})
 
 \fist Behavioral Types (\S\ref{sec:behavioral_type})
 
@@ -1745,32 +1780,135 @@ to Semi-unification) %FIXME
 
 \url{http://www.behavioural-types.eu/}
 
+\fist Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
+
+\fist Bisimulations (\S\ref{sec:bisimulation}) -- Process
+(\S\ref{sec:process_calculus}) Equivalences
+
 Orchard-Yoshida16 \cite{orchard-yoshida16} -- ``(Intensional)
 Behavioral Types'': Effect Types (\S\ref{sec:effect_system}) and
 Session Types (\S\ref{sec:session_type}); two-way Embedding: Processes
 (\S\ref{sec:process}) as Effect Handlers (\S\ref{sec:effect_handler}),
 Session Types as Effects
 
-H\"uttel et al. 2016 \emph{Foundations of Session Types and
-  Behavioural Contacts} -- e.g. Types for Non-uniform Objects (Objects
-with \emph{Non-uniform Method Availability}: Methods that can be
-Enabled/Disabled depending on internal State)
+
+\asterism
+
+
+H\"uttel et al. 2016 --
+\emph{Foundations of Session Types and Behavioural Contacts}
+
+Traditional Types: focus on outcome of Computations, i.e. \emph{what}
+the Result of a Computation should be
+
+Behavioral Types: focus on \emph{how} a Computation proceeds,
+accounting for Causality, Choice, and Resource usage
+
+reflected in Type Systems for Process Calculi
+(\S\ref{sec:process_calculus}):
+\begin{itemize}
+  \item Separation between \emph{Capabilities} for Names
+    (Pierce-Sangiorgi96, Kobayashi03)
+  \item \emph{Linear} usage of Names (Kobayashi et al.99)
+  \item Case Analyses of \emph{Variant Types} (Sangiorgi98)
+\end{itemize}
+
+\emph{Behavioral Type Systems} -- usually associated to
+\emph{Concurrent} or \emph{Distributed Computations}:
+\begin{itemize}
+  \item Interfaces
+  \item Communication Protocols
+  \item Contracts
+\end{itemize}
+in addition to ``traditional'' Input/Output Operations
+
+The \emph{Behavioral Type} of a ``Software Component'' specifies its
+\emph{expected Patterns of Interaction}, using an expressive Type
+Language, in order to determine automatically whether the Component
+Interacts ``correctly'' with other Components.
+
+\textbf{Session Types} (\S\ref{sec:session_type})
+
+\textbf{Behavioral Contracts} (\S\ref{sec:behavioral_contract})
+
+\textbf{Intersection Types} (\S\ref{sec:intersection_type})
+
+\textbf{Typestate} (\S\ref{sec:typestate})
+
+\textbf{Effects} (\S\ref{sec:effect_system})
+
+Nielson-Nielson93, Nielson-Nielson96:
+
+\begin{itemize}
+  \item \emph{Extensional} Type information -- \emph{what} an
+    Expression will Compute (Set of Values); usual notion of Types
+  \item \emph{Intensional} Type information -- \emph{how} an
+    Expression will Compute (\emph{Behavior}); Effects
+\end{itemize}
+
+Type Judgements for Programs $P$ are of the form:
+\[
+  \Gamma \vdash P : T\&B
+\]
+with:
+$\Gamma$ -- Type Environment recording the Types of Free Variables \\
+$T$ -- the Type of $P$ \\
+$B$ -- the Effect associated with executing $P$ \\
+
+Effect information intended to provide an \emph{Upper Bound} to the
+\emph{actual} Effect that will be exhibited by $P$ during its
+Computation
+
+Communication and Concurrency: Effects (\emph{Behaviors}) are Terms of
+a Process Algebra and can (like the Programming Language itself) be
+given a Labelled Transition System (Nielson-Nielson-Hankin99)--
+whenever a Well-typed Program performs a Communication $c$, the Effect
+of the \emph{Residual} of the Program is the Effect of the entire
+Program \emph{minus} the Effect corresponding to Communication $c$
+(cf. the way in which Session Type evolve)
+
+
+\textbf{Types for Non-uniform Objects}
+
+Objects with \emph{Non-uniform Method Availability}: Methods that can
+be Enabled/Disabled depending on internal State)
 \begin{itemize}
   \item Nierstrasz95 -- Traces of Menus \emph{Offered} by Objects as a
     notion of Behavioral Types with notion of Subtyping, \emph{Request
-    Substitutability}, generalizing \emph{Liskov Substitution
-    Principle} from Object-oriented Programming
-  \item ... TODO
-  \item Ravara-Vasconcelos00 -- Algebra of Behavioral Types (ABT
-    \S\ref{sec:abt})
+      Substitutability}, generalizing \emph{Liskov Substitution
+      Principle} from Object-oriented Programming
+  \item Colaco-Pantel-Dagnat-Salle99 -- Actor Calculus supporting
+    Non-uniform objects: based on Typed Concurrent Objects (TyCO, an
+    Asynchronous $\pi$-calculus \S\ref{sec:tyco}); Type System detects
+    \emph{Orphan Messages}-- Messages that may fail to ever be
+    accepted by any Actor: Types describe Interfaces annotated with
+    \emph{Multiplicities} (how often a Method can be invoked)
+  \item Najm-Nimour99 -- Calculus of Non-uniform Objects based on
+    Asynchronous $\pi$-calculus with Type System handling Dynamic
+    Method Offers in Interfaces and guaranteed \emph{Liveness
+      Property}-- every pending Request will \emph{eventually} be
+    processed; Types describe a (possibly Infinite) \emph{Transition
+      system}
+  \item Puntigam01 Puntigam-Peter01 -- Calculus of Non-uniform
+    (``Active'') Objects where Process Types enforce constraints on
+    the Ordering of Messages-- Static Type Inference ensures that even
+    with dynamic changing of Set of acceptable Messages for an Object,
+    every Message Sequence sent will eventually be received;
+    \emph{Deadlock Freedom}
+  \item Ravara-Vasconcelos00 Ravara-Resende-Vasconcelos12 -- Algebra
+    of Behavioral Types (ABT \S\ref{sec:abt}): Behavioral Type System
+    for Typed Concurrent Objects (TyCO \S\ref{sec:tyco} Vasconcelos94);
+    absence of \emph{Message-never-understood Errors}: Type Safety
+    result guarantees every Message has a chance of being Received if
+    it requires a Method that may be come enabled at some point in the
+    future
 \end{itemize}
 
-\fist Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
 
-\fist Bisimulations (\S\ref{sec:bisimulation}) -- Process
-(\S\ref{sec:process_calculus}) Equivalences
+\asterism
 
-\begingroup
+
+\begingroup %crafa12
 
 \renewcommand{\End}{\mathsf{end}}
 \newcommand{\actors}{\mathsf{actors}}
@@ -2084,14 +2222,33 @@ or $F \Rightarrow F'$ for some $F'$.
 
 
 % --------------------------------------------------------------------
-\subsection{Algebra of Behavioral Types}\label{sec:abt}
+\subsection{Typestate}\label{sec:typestate}
 % --------------------------------------------------------------------
 
-Ravara-Resende-Vasconcelos12 \emph{An Algbra of Behavioural Types}
+Strom-Yemini86
 
-Ravara-Vasconcelos00 \emph{Typing Non-uniform Concurrent objects}
+Type of an entity depends on the Operations that are permitted when in
+a particular State
+
+each Type has an associated Partially-ordered Set of
+\emph{Typestates}: Transitions are ``correct'' if the resulting Values
+are of a Typestate Reachable by Typestate Transition
+
+DeLine-Fahndrich04 \emph{Typestate for Objects} -- Fugue Programming
+Language
+
+Sunshine-Naden-Stork-Aldrich-Tanter11 \emph{First-class State Change
+  in Plaid} -- Plaid Programming Language
+
+Gay-Vasconcelos-Ravara-Gesbert-Caldeira10 \emph{Modular Session Types
+  for Distributed Object-oriented Programming} -- Session types with a
+notion of Typestates that support Non-uniform Objects
 
 
+
+% --------------------------------------------------------------------
+\subsection{Behavioral Contract}\label{sec:behavioral_contract}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Behavioral Separation Type}
@@ -2103,6 +2260,29 @@ Caires-Seco13 \emph{The Type Discipline of Behavioral Separation}
 Separation Logic (\S\ref{sec:separation_logic})
 
 Spatial-behavioral Types -- Caires08
+
+Caires-Seco13:
+
+shift of focus from Separation of \emph{Static Program State
+  Properties} towards Separation of \emph{Dynamic Usage Behaviors} of
+Runtime Values
+
+\emph{Behavioral Separation Types} specify \emph{how} Values may be
+Safely Used by Client Code
+
+\emph{Behavioral Separation}: general principle for disciplining
+``\emph{Interference}'' (Reynolds78) in Higher-order Imperative
+Concurrent Programs
+
+two Program Fragments \emph{Interfere} when the Effects generated by
+one Fragment may \emph{change} State visible to the other Fragment,
+typically due to \emph{Aliasing} or \emph{Concurrency}; Interference
+can be ``good'' (i.e. Communication) or ``bad'' (i.e. Torn Read/Write)
+
+$U \mathrlap{|}\rightarrow V$ -- Type for Functions that do not \emph{Interfere
+  Unsafely} with their Argument and specifies a \emph{single Usage} of
+a Value as a Function at the appropriate Argument $U$ and Return Type
+$V$
 
 
 
