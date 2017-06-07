@@ -833,6 +833,82 @@ Presentation of a Language (Bakker-Vink96) %FIXME
 PLT Redex: (Racket) Domain-specific Language for Specifying and
 Debugging Operational Semantics
 
+Stay-Meredith17 \emph{Representing Operational Semantics with Enriched
+Lawvere Theories}
+
+\url{https://golem.ph.utexas.edu/category/2017/06/gphenriched_lawvere_theories_f.html}:
+
+Denotational Semantics: $\lambda$-calculus, Operational Semantics:
+Turing Machines
+
+Operational Semantics of a Programming Language:
+\begin{enumerate}
+  \item ``layout'' of the State of the ``Computer'' -- for each
+    ``kind'' of Data in the description of the State, there is a
+    \emph{Sort}, e.g.:
+    \begin{itemize}
+      \item in $\lambda$-calculus there is a Sort for Variables and a
+        Sort for Terms and the Term is the entire State of the
+        Computer
+      \item a Turing Machine a Tape, a State Transition Table, Current
+        State, and position of Read/Write Head on the Tape
+      \item in a modern Programming Language the State is more complex
+        with Stack, Heap, etc.
+    \end{itemize}
+  \item ``building up'' of the State using \emph{Term Constructors}
+  \item \emph{Structural Congruence} -- ``rearrangements'' of State
+    that are ``ignored'', e.g.:
+    \begin{itemize}
+      \item in $\lambda$-calculus two Terms are the same if they only
+        differ in the choice of Bound Variables
+      \item in $\pi$-calculus the order in which Processes are listed
+        makes no difference
+    \end{itemize}
+  \item \emph{Reduction Rules} describe how the State is allowed to
+    change, e.g.:
+    \begin{itemize}
+      \item in $\lambda$-calculus the State only changes via
+        $\beta$-reduction (Applying Functions to their Arguments, i.e.
+        Substituting the Argument of a Function for the Bound Variable)
+      \item in a Turing Machine each State may change in five ways
+        (change Bit to 0 or 1, then move left or right; or halt)
+      \item in $\pi$-calculus there may be multiple Transitions out of a
+        State: if a Process is listening on a Channel for two Messages,
+        either one may be processed first
+    \end{itemize}
+  \item \emph{Contexts} under which Reduction Rules apply, e.g.:
+    \begin{itemize}
+      \item in Weak-head Normal Form $\lambda$-calculus no Reduction
+        happens under Abstraction, i.e. if a Term $t$ Reduces to $t'$,
+        $\lambda x.t$ \emph{does not} Reduce to $\lambda x.t'$
+    \end{itemize}
+\end{enumerate}
+
+\emph{Context Constructors}: Unary Morphisms for marking Reduction
+Contexts
+
+Multi-sorted $\cat{Gph}$-enriched Lawvere Theory:
+\begin{enumerate}
+  \item Generating Object for each Sort
+  \item Generating Morphism for each Term Constructor and
+    \emph{Context Constructor}
+  \item Equation between Morphisms encoding Structural Congruence and
+    \emph{Context Propagation}
+  \item an Edge for each Rewrite in its appropriate Context
+\end{enumerate}
+
+Interpretation in $\cat{Gph}$:
+\begin{enumerate}
+  \item Sorts map to Graphs
+  \item Term Constructors map to Graph Homomorphisms
+  \item Equations map to Equations
+  \item Rewrites map to ``Graph Transformations'' (genrealization of
+    Natural Transformation to $\cat{Gph}$)
+\end{enumerate}
+
+system where given a Formal Semantics for a Language, one can
+Algorithmically derive a Type System ``tailored'' to the Language
+
 
 
 % --------------------------------------------------------------------
