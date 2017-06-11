@@ -1382,7 +1382,7 @@ e.g. Always, Eventually, Until), Deontic Modality
 Modality (\S\ref{sec:doxastic_logic} Belief).
 
 \fist Modal $\mu$-calculus (Fixed-point Logic
-\S\ref{sec:modal_mu_calculus})
+\S\ref{sec:modal_mu_logic})
 
 Licata-Shulman-Riley17:
 
@@ -1800,14 +1800,14 @@ Temporal Logic with \emph{Path} Modalities.
 Branching-time
 
 \fist Linear Temporal Logic can be encoded in Modal $\mu$-calculus
-(Fixed-point Logic \S\ref{sec:modal_mu_calculus})
+(Fixed-point Logic \S\ref{sec:modal_mu_logic})
 
 
 
 \subparagraph{Linear Temporal Logic}\label{sec:linear_temporal}\hfill
 
 \fist Linear Temporal Logic can be encoded in Modal $\mu$-calculus
-(Fixed-point Logic \S\ref{sec:modal_mu_calculus})
+(Fixed-point Logic \S\ref{sec:modal_mu_logic})
 
 \cite{jeffrey12}:
 
@@ -1996,17 +1996,39 @@ Baelde-Doumane-Saurin16 - \emph{Infinitary Proof Theory: The
 
 DeYoung-Pfenning16 - \emph{Substructural Proofs as Automata} -- Linear
 Communicating Automata (\S\ref{sec:communicating_automata}): weak
-fragments of Linear Logic (\emph{Subsingleton Logic} augmented with
-Least Fixed-points (Baelde-Doumane-Saurin16, Fortier-Santocanale13);
-Proofs allowed to be Circular with conditions to ensure they can be
-seen as \emph{Coinductively Defined} (\S\ref{sec:coinduction})
+fragments of Linear Logic (\emph{Subsingleton Logic}
+\S\ref{sec:subsingleton_logic} augmented with Least Fixed-points
+(Baelde-Doumane-Saurin16, Fortier-Santocanale13); Proofs allowed to be
+Circular with conditions to ensure they can be seen as
+\emph{Coinductively Defined} (\S\ref{sec:coinduction})
+
+Subsingleton Logic: Rules enforce that every Sequent has at most one
+Antecedent and Succedent
+
+Curry-Howard Isomorphism between \emph{Fixed-cut Proofs} in
+$\oplus,\mathbf{1}$-$\mu$-subsingleton Logic and a generalization of
+Deterministic Finite-state Transducers (Subsequential Finite-state
+Transducers \S\ref{sec:sft}) that also ``captures'' Deterministic
+Automata; relates Proofs to Automata and Proof Reduction to State
+Transitions
+
+(FIXME: Finite-state Trnsducer = Finite State Machine = Automata ???)
+
+Well-behaved LCAs corresponding to Circular Proofs in
+$\oplus$,$\mathbf{1}$-$\mu$-subsingleton Logic are free from Deadlock
+and Race Conditions (analogous to how Natural Deduction in
+Intuitionistic Propositional Logic defines Well-behaved
+$\lambda$-terms)
+
+Turing Machines as a special case of LCAs with a single Read/Write
+Head
 
 
 \asterism
 
 
 % --------------------------------------------------------------------
-\subsection{Modal $\mu$-calculus}\label{sec:modal_mu_calculus}
+\subsection{Modal $\mu$-calculus}\label{sec:modal_mu_logic}
 % --------------------------------------------------------------------
 
 extension of Propsitional Modal Logic (\S\ref{sec:modal_logic}) adding
@@ -2021,6 +2043,182 @@ encoded in Modal $\mu$-calculus
 Game Semantics (\S\ref{sec:game_semantics}) of Modal $\mu$-calculus:
 Two-player Games with Perfect Information, particularly Infinite
 Parity Games
+
+\asterism
+
+$\mu$MALL (Baelde12 - \emph{Least and Greatest Fixed Points in Linear
+  Logic})
+
+\asterism
+
+\textbf{$\oplus$,$\mathbf{1}$-$\mu$-subsingleton Logic}
+(DeYoung-Pfenning16)
+
+Least Fixed-points are treated \emph{Equirecursively}
+(\S\ref{sec:equirecursive_type}) so that $\mu\alpha.A$ is identified
+with its Unfoldings $[(\mu\alpha.A)/\alpha]A$ ...
+
+Circular Proofs, \emph{Fixed-cut Circular Proofs} -- no \emph{cycle}
+contains the $Cut$ Rule, but the $Cut$ Rule may appear outside of
+cycles (Fortier-Santocanale13)
+
+Curry-Howard Isomorphism between Subsequential Finite-state
+Transducers (SFTs \S\ref{sec:sft}) and a Class of Cut-free
+Subsingleton Proofs:
+\begin{itemize}
+  \item Propositions as Languages
+  \item Proofs as SFTs
+  \item Cut Reductions are SFT Computation Steps
+\end{itemize}
+
+\emph{Computational Interpretation of
+  $\oplus$,$\One$-$\mu$-subsingleton Sequent Calculus}
+%TODO
+
+Propositions (Types):
+\begin{flalign*}
+  \quad\quad
+  A,B,C &::=\ \oplus_{\ell\in{L}}\{\ell:A_\ell\} \ |\ \One
+    \ |\ \mu\alpha.A \ | \alpha &
+\end{flalign*}
+
+Contexts:
+\begin{flalign*}
+  \quad\quad \Delta &::=\ \cdot \ |\ A &
+\end{flalign*}
+
+Conclusions:
+\begin{flalign*}
+  \quad\quad \gamma &::=\ C &
+\end{flalign*}
+
+Proof Terms:
+\begin{flalign*}
+  \quad\quad
+  P,Q &::=\ X \ |\ P \rhd Q \ |\ \mathsf{writeR}\ k; P
+    \ |\ \mathsf{readL}_{\ell\in{L}}(\ell \Rightarrow Q_\ell)
+    \ |\ \mathsf{closeR} \ |\ \mathsf{waitL}; Q &
+\end{flalign*}
+
+Signatures:
+\begin{flalign*}
+  \quad\quad
+  \Theta &::=\ \cdot \ |\ \Theta,(\Delta \vdash X = P:\gamma) &
+\end{flalign*}
+
+Logics Inference Rules become \emph{Typing Rules} for Proof Terms:
+\begin{itemize}
+  \item (no \emph{ID} Rule)
+  \item \emph{Var}
+  \item \emph{Cut} -- Types a \emph{Composition} $P \rhd Q$ of Proof
+    Terms $P$ and $Q$
+  \item $\oplus$\emph{L}
+  \item $\oplus$\emph{R}
+  \item $\One$\emph{L}
+  \item $\One$\emph{R}
+\end{itemize}
+%TODO
+
+Unfolding Principles -- used ``silently'' within a Proof and do not
+affect Proof Terms %TODO
+
+Well-typed $\Theta$:
+\begin{itemize}
+  \item \emph{Ok-E}
+  \item \emph{Ok-Var}
+\end{itemize}
+%TODO
+
+Sequents are annotated with Proof Terms and Signatures:
+\[
+  \Delta \vdash_\Theta P:\gamma
+\]
+``under the Definitions of Signature $\Theta$, the Proof Term $P$
+consumes \emph{Input} of Type $\Delta$ and produces \emph{Output} of
+Type $\gamma$''
+
+$\mathsf{writeR}\ k;P$ -- Write Operation: emits Label $k$ and
+continues (as $P$ ???) %FIXME
+
+$\mathsf{readL}_{\ell\in{L}}(\ell \Rightarrow Q_\ell)$ -- Read
+Operation: Branches on the Label that was Read
+
+$\mathsf{closeR}$ -- signals end of Output
+
+$\mathsf{waitL};Q$ -- Waits for Input to end and then continues
+``with'' (as ???) $Q$ %FIXME
+
+$\Theta$ is a Finite Signature of Corecursive Definitions of the form:
+\[
+  \Delta \vdash X = P : \gamma
+\]
+declaring the Variable $X$ as a Proof Term $P$ with a Type declaration
+of:
+\[
+  \Delta \vdash_\Theta X : \gamma
+\]
+
+\emph{Propositions as Languages} over Finite Endmarked Alphabets (as
+in SFTs)
+
+the Least Fixed-point $Str_{\hat{\Sigma}} =
+\mu\alpha.\oplus_{\ell\in\Sigma}\{\ell:A_\ell\}$ where $A_a = \alpha$
+for all $a\in\Sigma_i$ and $A_e = \One$ for all $e \in \Sigma_e$,
+unfolding to:
+\[
+  Str_{\hat{\Sigma}} = \oplus_{\ell\in\Sigma}\{\ell:A_\ell'\}
+\]
+where:
+\[
+  A_\ell' =
+  \begin{cases}
+    Str_{\hat{\Sigma}}
+      & \quad \text{if $\ell\in\Sigma_i$} \\
+    \One & \quad \text{if $\ell\in\Sigma_e$} \\
+  \end{cases}
+\]
+
+Thm. \emph{Strings from the Language $\Sigma_i^*\Sigma_e$ are in
+  Bijective correspondence with the Cut-free Proofs of $\cdot\vdash
+  Str_{\hat{\Sigma}}$}
+
+a Cut-free Proof Term $P$ of Type $\cdot\vdash Str_{\hat{\Sigma}}$
+``emits'' a Finite List of Symbols from $\hat{\Sigma}$
+
+Freely Generated Propositions correspond to Subsets of
+$\Sigma_i^*\Sigma_e$
+
+
+\emph{Encoding (Normal Form) SFTs as Cut-free Proofs of Types
+  $Str_{\hat{\Sigma}} \vdash Str_{\hat{\Gamma}}$} %TODO
+
+each SFT Transition is matched by a Proof Reduction
+
+an SFT Chain $(T_i)^n_{i=1}$ is encoded as:
+\[
+  \llbracket{q_1}\rrbracket_{T_1} \rhd \cdots \rhd
+  \llbracket{q_n}\rrbracket_{T_n}
+\]
+
+
+\emph{Extracting (Normal Form) SFTs from Cut-free Proofs of
+  $Str_{\hat{\Sigma}} \vdash_\Theta Str_{\hat{\Gamma}}$}
+
+* up to $\One{L}$ Commuting Conversion
+
+each Variable becomes a State in the SFT
+
+Fixed-cut Proofs are Isomorphic to SFT Chains by direct correspondence
+of Fixed-cuts with ``chain links'' between neighboring SFTs
+
+
+\textbf{SFT Composition by Cut Elimination}
+%TODO
+
+Subsequential Functions are Closed under Composition
+
+DFA Closure under Complement and Inverse Homomorphism
+%TODO
 
 
 
@@ -2237,6 +2435,8 @@ the strongest Consistent Superintuitionistic Logic: Classical Logic.
 
 requires extra-logical conditions to ensure Cut Admissibility
 
+Belnap82 - \emph{Display Logic}
+
 
 
 % --------------------------------------------------------------------
@@ -2246,7 +2446,7 @@ requires extra-logical conditions to ensure Cut Admissibility
 Substructural Type Theory (\S\ref{sec:substructural_type})
 
 DeYoung-Pfenning - \emph{Substructural Proofs as Automata}
--- Linear Communicating Automata (\S\ref{sec:communicating_automata})
+-- Linear Communicating Automata (\S\ref{sec:lca})
 
 Licata-Shulman-Riley17:
 
@@ -3096,6 +3296,27 @@ Multiobject Geometry of Interaction (\S\ref{sec:multiobject_goi})
 
 
 \paragraph{Soft Linear Logic}\label{sec:soft_linear_logic}\hfill
+
+
+
+\subsubsection{Subsingleton Logic}\label{sec:subsingleton_logic}
+
+fragment of Inuitionistic Linear Logic which has Sequents consisting
+of at most one Antecedent (\emph{Subsingleton Context Restriction})
+
+DeYoung-Pfenning16 -- $\oplus$,$\mathbf{1}$-subsingleton Logic
+
+\fist $\oplus$,$\mathbf{1}$-$\mu$-subsingleton Logic
+(\S\ref{sec:modal_mu_logic})
+
+Curry-Howard Isomorphism between Subsequential Finite-state
+Transducers (SFTs \S\ref{sec:sft}) and a Class of Cut-free
+Subsingleton Proofs:
+\begin{itemize}
+  \item Propositions as Languages
+  \item Proofs as SFTs
+  \item Cut Reductions are SFT Computation Steps
+\end{itemize}
 
 
 

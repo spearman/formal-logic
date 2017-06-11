@@ -2066,6 +2066,12 @@ Input Symbol has a Transition Function to a single State.
 Deterministic Finite Automata recognize Regular Languages
 (\S\ref{sec:regular_language}).
 
+a DFA is an Subsequential Finite-state Transducer (SFT
+\S\ref{sec:sft}) with an Endmarked Output Alphabet $\hat{\Gamma} =
+(\varnothing, \{a,r\})$ so that valid Output Strings are only $a$ or
+$r$ which Transduces its Input to the Output String $a$ or $r$ to
+indicate Acceptance or Rejection of the Input, respectively
+
 Representation of a Deterministic Finite Automaton as a 5-tuple:
 \[
   (Q,\Sigma,\delta,q_0,F)
@@ -2196,6 +2202,97 @@ Interaction Categories (\S\ref{sec:interaction_category})
 Functions extended in Time: Space of Deterministic Transducers
 
 Relations extended in Time: Space of Non-deterministic Transducers
+
+
+
+\paragraph{Subsequential Finite-state Transducer}\label{sec:sft}\hfill
+
+Sch\"utzenberger - \emph{Sur Une Variante des Fonctions Sequentielles}
+
+(SFT)
+
+DeYoung-Pfenning16 -- Curry-Howard Isomorphism between \emph{Fixed-cut
+  Proofs} in $\oplus,\mathbf{1}$-$\mu$-subsingleton Logic
+(\S\ref{sec:modal_mu_logic}) and a generalization of Deterministic
+Finite-state Transducers (Subsequential Finite-state Transducers) that
+also ``captures'' Deterministic Automata; relates Proofs to Automata
+and Proof Reduction to State Transitions
+
+Linear Communicating Automata (\S\ref{sec:lca}) -- Subsequential
+Finite-state String Transducer Chains
+
+Curry-Howard Isomorphism between SFTs and a Class of Cut-free
+Subsingleton Proofs:
+\begin{itemize}
+  \item Propositions as Languages
+  \item Proofs as SFTs
+  \item Cut Reductions are SFT Computation Steps
+\end{itemize}
+
+SFT $T$ as a 6-tuple:
+\[
+  T = (Q, \hat{\Sigma}, \hat{\Gamma}, \delta, \sigma, q_0)
+\]
+with:
+\begin{itemize}
+  \item $Q$ -- Set of \emph{States}, Partitioned into Sets of
+    \emph{Read States}, $Q^r$, \emph{Write States}, $Q^w$, and
+    \emph{Halt States} $Q^h$
+  \item $\hat{\Sigma} = (\Sigma_i,\Sigma_e)$ -- \emph{Endmarked Input
+    Alphabet} of Disjoint Finite Alphabets of \emph{Internal Symbols}
+    (possibly Empty) $\Sigma_i$ and \emph{Endmarkers} (Nonempty)
+    $\Sigma_e$
+  \item $\hat{\Gamma} = (\Gamma_i,\Gamma_e)$ -- \emph{Endmarked Output
+    Alphabet} of Disjoint Finite Alphabets of \emph{Internal Symbols}
+    (possibly Empty) $\Gamma_i$ and \emph{Endmarkers} (Nonempty)
+    $\Gamma_e$
+  \item $\delta : \Sigma \times Q^r \rightarrow Q$ -- Total Transition
+    Function on Read States
+  \item $\sigma : Q^w \rightarrow Q \times \Gamma$ -- Total Output
+    Function on Write States
+  \item $q_0 \in Q$ -- Initial State
+\end{itemize}
+
+\emph{Configurations}, $\longrightarrow$ TODO
+
+\emph{Normal Form SFTs} avoid getting ``stuck'' -- having a Read State
+reachable after an Endmarker signalling end of Input has been Read,
+having a Write State reachable after having written an Endmarker, or
+having Halt State reachable before an Endmarker signalling end of
+Input has been Read
+
+three Properties must be met for an SFT to be Normal Form:
+\begin{enumerate}
+  \item $\forall e \in \Sigma_e, q \in Q^r$, no Read State is
+    Reachable from $\delta(e,q)$
+  \item $\forall e \in \Gamma_e, q_e \in Q^w$, no Write State is
+    Reachable from $q_e$ if $\sigma(q) = (q_e,e)$
+  \item $\forall q \in Q^h$, all paths from the Initial State $q_0$ to
+    $q$ pass through $(e_q')$ for \emph{some} Endmarker $e \in
+    \Sigma_e$ and Read State $q' \in Q^r$
+\end{enumerate}
+
+when allowing Alphabets with more than one Endmarker, SFTs subsume
+Deterministic Finite Automata (DFAs \S\ref{sec:dfa}), where a DFA is
+an SFT with an Endmarked Output Alphabet $\hat{\Gamma} = (\varnothing,
+\{a,r\})$ so that valid Output Strings are only $a$ or $r$ which
+Transduces its Input to the Output String $a$ or $r$ to indicate
+Acceptance or Rejection of the Input, respectively
+
+
+\textbf{SFT Chains}
+
+Linear Communicating Automata (\S\ref{sec:lca})
+
+an \emph{SFT Chain} $(T_i)^n_{i=1}$ is a Finite Family of $n$ SFTs:
+\[
+  T_i = (Q_i,\hat{\Sigma}_i,\hat{\Gamma}_i,\delta_i,\sigma_i,q_i)
+\]
+such that $\hat{\Gamma} = \hat{\Sigma}_{i+1}$ for each $i < n$
+
+SFT Chain Configurations
+
+Composition accomplished by Concatenating the States of individual SFTs
 
 
 
@@ -2375,6 +2472,23 @@ $Q$ -- Finite Set of \emph{States}
 $q_0 \in Q$ -- \emph{Initial State}
 
 $\delta \subseteq Q \times Act \times Q$ -- Set of \emph{Transitions}
+
+
+
+\paragraph{Linear Communicating Automaton (LCA)}\label{sec:lca} \hfill
+
+DeYoung-Pfenning - \emph{Substructural Proofs as Automata}
+
+``Linear'': Communicating Automata arranged in a row such that each
+Automaton only Communicates with its Left and Right Neighbors
+
+Well-behaved LCAs corresponding to Circular Proofs in
+$\oplus$,$\mathbf{1}$-$\mu$-subsingleton Logic
+(\S\ref{sec:modal_mu_logic}) are free from Deadlock and Race
+Conditions
+
+Subsequential Finite-state String Transducer (SFT \S\ref{sec:sft})
+Chains
 
 
 
