@@ -2359,9 +2359,9 @@ Gouda, Manning, Yu - 1984 -
 
 Muscholl10 - \emph{Analysis of Communicating Automata}
 
-DeYoung-Pfenning16 - \emph{Substructural Proofs as Automata}
--- Linear Communicating Automata: weak Linear Logic augmented with
-Least Fixed-points (\S\ref{sec:fixedpoint_logic})
+DeYoung-Pfenning16 - \emph{Substructural Proofs as Automata} -- Linear
+Communicating Automata (\S\ref{sec:lca}): weak Linear Logic augmented
+with Least Fixed-points (\S\ref{sec:fixedpoint_logic})
 
 correspondence between Communicating Automata and Session Types
 (\S\ref{sec:session_type}):
@@ -2477,7 +2477,7 @@ $\delta \subseteq Q \times Act \times Q$ -- Set of \emph{Transitions}
 
 \paragraph{Linear Communicating Automaton (LCA)}\label{sec:lca} \hfill
 
-DeYoung-Pfenning - \emph{Substructural Proofs as Automata}
+DeYoung-Pfenning16 - \emph{Substructural Proofs as Automata}
 
 ``Linear'': Communicating Automata arranged in a row such that each
 Automaton only Communicates with its Left and Right Neighbors
@@ -2489,6 +2489,96 @@ Conditions
 
 Subsequential Finite-state String Transducer (SFT \S\ref{sec:sft})
 Chains
+
+
+\textbf{Model of Linear Communicating Automata}
+
+if conditions on Circular Proofs are relaxed so that $\mu$ is a
+\emph{general}--not Least--Fixed Point, then Proofs are as powerful as
+Turing Machines
+
+generalization of Turing Machines:
+\begin{itemize}
+  \item ability to insert and delete Cells from the Tape
+  \item ability to ``spawn'' multiple machine Heads that operate
+    Concurrently
+\end{itemize}
+
+\emph{Linear Communicating Automata (LCA)}, $M$, as an $8$-tuple:
+\[
+  M = (Q,\Sigma,\delta^{rL},\delta^{rR},\sigma^{wL},\sigma^{wR},\rho,q_0)
+\]
+with:
+\begin{itemize}
+  \item $Q$ -- Finite Set of States, Partitioned into (possibly
+    Empty) Sets of:
+    \begin{itemize}
+      \item $Q^{rL}$ and $Q^{rR}$ -- Left- and Right-reading States
+      \item $Q^{wL}$ and $Q^{wR}$ -- Left- and Right-writing States
+      \item $Q^s$ -- Spawn States
+      \item $Q^h$ -- Halt States
+    \end{itemize}
+  \item $\Sigma$ -- Finite Alphabet
+  \item $\delta^{rL} : \Sigma \times Q^{rL} \rightarrow Q$ -- Total
+    Function on Left-reading States
+  \item $\delta^{rR} : Q^{rR} \times \Sigma \rightarrow Q$ -- Total
+    Function on Right-reading States
+  \item $\sigma^{wL} : \Sigma \times Q^{wL} \rightarrow Q$ -- Total
+    Function on Left-writing States
+  \item $\sigma^{wR} : Q^{wR} \times \Sigma \rightarrow Q$ -- Total
+    Function on Right-writing States
+  \item $\rho : Q^s \rightarrow Q \times Q$ -- Total Function on Spawn
+    States
+  \item $q_0 \in Q$ -- Initial State
+\end{itemize}
+
+\emph{Configurations} of an LCA $M$ are Strings $w$ and $v$ from the Set
+$(\Sigma^*Q)*\Sigma^*$
+
+each State in the Configuration represents a Read/Write Head
+
+$\longrightarrow$ -- Binary Relation on Configurations:
+(Read-L, Read-R, Write-L, Write-R, Spawn, Halt) %TODO
+
+\emph{Turing Completeness of LCAs}
+
+$\&$,$\bot$,$\oplus$,$\One$-$\mu$-subsingleton Logic --
+\emph{Well-behaved LCAs}
+
+$\mathsf{readL}$ and $\mathsf{readR}$ become Left- and Right-reading
+States
+
+$\mathsf{writeL}$ and $\mathsf{writeR}$ become Left- and Right-writing
+States
+
+Cuts, represented by the $\rhd$ Operation which creates a new
+Read/Write Head, become Spawning States
+
+the $Id$ Rule, represented by the $\leftrightarrowtriangle$ Operation,
+becomes a Halting State
+
+LCA Transitions are mached by Proof Reductions
+
+corresponding LCAs cannot Deadlock becaues Cut Elimination can always
+make Progress (Fortier-Santocanale13) and do not have Races because
+$\mathsf{readR}$ and $\mathsf{readL}$ have different Types and as a
+result cannot be neighbors
+
+
+\emph{Turing Completeness}
+
+allowing general occurrences of $Cut$ in order to simulate Turing
+Machines; to allow for Non-halting Turing Machines, $\mu$ is relaxed
+to be a \emph{general} Recursive Type (instead of an Inductive Type)
+by dropping the requirement that every Cycle in a Circular Proof is a
+Left $\mu$-trace
+
+Turing Machines can also be simulated without $\&$ by replacing
+occurrences of $\&$, $\mathsf{readR}$, and $\mathsf{writeL}$ with
+$\oplus$ (and its constructs) in a Continuation-passing Style-- this
+indicates that Turing Completeness depends on interaction of general
+Cuts and general Recursion, not on interaction between $\oplus$ and
+$\&$
 
 
 
