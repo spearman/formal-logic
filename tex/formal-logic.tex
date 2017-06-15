@@ -2289,7 +2289,7 @@ Proof Terms:
   \quad\quad
   P,Q &::=\ \cdots \ |\ \leftrightarrowtriangle
     \ |\ \mathsf{readR}_{\ell\in{L}}(\ell\Rightarrow{P_\ell})
-    \ |\ \mathsf{writeL\ k;Q \ |\ \mathsf{waitR}; P
+    \ |\ \mathsf{writeL}\ k;Q \ |\ \mathsf{waitR}; P
     \ |\ \mathsf{closeL} &
 \end{flalign*}
 
@@ -2510,6 +2510,10 @@ where $A(x)$ has $x$ as the only Free Variable and $t$ is a Term.
 \subsubsection{Positive Implicational Calculus}
 \label{sec:positive_implicational}
 
+the Types of the $S$, $K$, and $I$ Combinator Terms in SKI Combinator
+Calculus (\S\ref{sec:ski_calculus}) correspond to the Axiom Schemata
+for Positive Implicational Logic
+
 
 
 \subsubsection{Positive Propositional Calculus}
@@ -2617,6 +2621,8 @@ can be used to Model Stack-based Memory Allocation
 
 no Contraction -- ``can use at most once''
 
+\fist see also BCK Combinatory Logic (\S\ref{sec:bck_logic})
+
 (wiki):
 
 Russell's Paradox cannot be Derived in a Set Theory without
@@ -2640,6 +2646,13 @@ foundation of Ludics (\S\ref{sec:ludics})
 \subsubsection{Relevance Logic}\label{sec:relevance_logic}
 
 \emph{Relevance Logic} (or \emph{Relevant Logic})
+
+Anderson-Belnap75 - \emph{Entailment: the Logic of Relevance and
+  Necessity, Volume I} -- \emph{Bunches} (cf. Bunched Logic
+\S\ref{sec:bunched_logic})
+
+Anderson-Belnap92 - \emph{Entailment: the Logic of Relevance and
+  Necessity, Volume II}
 
 Strict Logic
 
@@ -2682,6 +2695,8 @@ no Weakening, no Contraction -- ``must use exactly once''
 
 Giraud87 \emph{Linear Logic}
 
+\fist see also BCI Combinatory Logic (\S\ref{sec:bci_logic})
+
 (wiki):
 
 \begin{itemize}
@@ -2693,6 +2708,8 @@ Giraud87 \emph{Linear Logic}
   (\S\ref{sec:cstar_algebra}).
 \end{itemize}
 
+
+\asterism
 
 
 Internal Language of Closed Symmetric Monoidal Categories
@@ -2732,6 +2749,9 @@ Omitted Rules: Weakening (\S\ref{sec:weakening_rule}), Contraction
 (\S\ref{sec:contraction_rule})
 
 Exponentials $!$, $?$: controlled access to Weakening and Contraction
+
+the Additive Implication $\rightarrow$ can be recovered using the $!$
+Modality: $\varphi \rightarrow \psi$ as $!\varphi \multimap \psi$
 
 Initial Sequent (Unit for Composition)
 
@@ -3459,6 +3479,11 @@ Connectives of Lambek Calculus (\S\ref{sec:labek_grammar})
 \subsection{Bunched Logic}\label{sec:bunched_logic}
 % --------------------------------------------------------------------
 
+\begingroup
+
+\newcommand{\implmult}{\mathrlap{\rightarrow}*}
+\renewcommand{\Id}{\mathbf{I}}
+
 (or \emph{Logic of Bunched Implications})
 
 Tree of Hypotheses instead of flat List
@@ -3475,22 +3500,74 @@ O'Hearn-Pym99 \emph{The Logic of Bunched Implications}:
 
 $\textbf{BI}$
 
-can be viewed as a merging of Intuitionistic Logic and Multiplicative
-Intuistionistic Linear Logic
+can be viewed as a merging of Intuitionistic Logic (IL) and
+Multiplicative Intuistionistic Linear Logic (MILL)
 
 Models of Bunched-implication Proofs are given by Bicartesian Doubly
-Closed Categories, i.e. Categories that combine the Semantics of
-Propositional Intuitionistic Logic and Propositional Intuitionistic
-Multiplicative Linear Logic
+Closed Categories (\S\ref{sec:bicartesian_doubly_closed}), i.e.
+Categories that combine the Semantics of Propositional Intuitionistic
+Logic (Cartesian Closed Categories) and Propositional Intuitionistic
+Multiplicative Linear Logic (Symmetric Monoidal Categories)
 
 Multiplicative (or Linear) Implication
 
 Additive (or Intuitionistic) Implication
 
-Predicative version includes Multiplicative (or Intensional)
-Quantifiers $\forall_{new}$ and $\exists_{new}$ arising from
-restrictions on Structural Rules of Terms as well as Propositions
+Context-forming Operations -- ``;'' (Additive-- allows Contraction and
+Weakening) and ``,'' (Multiplicative-- Linear):
+\[
+  \frac{\Gamma,\varphi \vdash \psi}
+    {\Gamma \vdash \varphi \implmult \psi}
+  \quad\quad\quad
+  \frac{\Gamma;\varphi \vdash \psi}
+    {\Gamma \vdash \varphi \rightarrow \psi}
+\]
 
+Antecedants as Sequences are replaced by Antecedants as \emph{Trees}
+with Propositions as Leaves and internal Nodes Labelled by ``;'' and
+``,'', called \emph{Bunches}
+
+cf. use of Bunches in Relevance Logic (\S\ref{sec:relavance_logic};
+Anderson-Belnap75)
+
+Predicative version of BI includes Multiplicative, \emph{Intensional}
+(cf. Modal), Quantifiers $\forall_{new}$ and $\exists_{new}$ arising
+from restrictions on Structural Rules of Terms as well as Propositions
+
+
+\textbf{Propositional BI}
+
+Additive Connectives: $\One$ $\wedge$ $\rightarrow$ $\bot$ $\vee$
+
+Multiplicative Connectives: $\Id$ $*$ $\implmult$
+
+Bunches:
+\begin{flalign*}
+  \Gamma ::=\ \varphi \ |\ \{\}_m \ |\ \Gamma,\Gamma \ |\ \{\}_a
+    \ |\ \Gamma;\Gamma
+\end{flalign*}
+where $\{\}_m$ and $\{\}_a$ and Multiplicative and Additive
+combination, resp.
+
+$\Gamma(\Delta)$ -- a Bunch in which $\Delta$ appears as a Sub-tree
+and $\Gamma(\Delta')$ is the Tree where $\Delta'$ replaces $\Delta$
+
+\emph{Coherent Equivalence} -- $\Gamma \equiv \Gamma'$ is the least
+Equivalence Relation on Bunches satisfying:
+\begin{enumerate}
+  \item Commutative Monoid Equations for $\{\}_a$ and $;$
+  \item Commutative Monoid Equations for $\{\}_m$ and $,$
+  \item Congruence: if $\Delta\equiv\Delta'$ then $\Gamma(\Delta)
+    \equiv \Gamma(\Delta')$
+\end{enumerate}
+
+Judgements: $\Gamma \vdash \varphi$ where $\Gamma$ is a Bunch and
+$\varphi$ is a Formula
+
+Derivation Rules: TODO
+
+
+\endgroup
 
 
 \subsubsection{Deep Inference}\label{sec:deep_inference}
