@@ -151,6 +151,20 @@ properties:
 \fist Note that the Intersection of an arbitrary collection of
 Open Sets is not necessarily an Open Set.
 
+Given a Set $X$, a \emph{Topology} (\S\ref{sec:topology}) $\tau$ on $X$ is a
+Family (\S\ref{sec:family}) of Subsets of $X$--the Open Sets--with the
+Properties:
+\begin{enumerate}
+  \item $\varnothing \in \tau$, $X \in \tau$
+  \item $A,B \in \tau \Rightarrow A \cap B \in \tau$
+  \item $\{A_i\}_{i \in I} \subseteq \tau \Rightarrow \bigcup_{i \in
+  I} A_i \in \tau$
+\end{enumerate}
+The Topology $\tau$ is therefore a Subset of the Power Set of $X$:
+\[
+  \tau \subseteq \pow(X)
+\]
+
 
 
 \subsubsection{Borel Set}\label{sec:borel_set}
@@ -242,6 +256,17 @@ Global (Set)
 
 Distance-preserving Injective Map between Metric Spaces
 
+Isometries of Euclidean Space (\S\ref{sec:euclidean_space}):
+\begin{itemize}
+  \item Point Reflection (Central Inversion) -- an Affine Transformation
+  \item TODO
+  ...
+\end{itemize}
+
+Crystallographic Groups (\S\ref{sec:crystallographic_group}) are Cocompact
+(\S\ref{sec:cocompact_space}), Discrete Subgroups (\S\ref{sec:discrete_group})
+of the Isometries of some Euclidean Space (\S\ref{sec:euclidean_space})
+
 
 
 \subsubsection{Isometry Group}\label{sec:isometry_group}
@@ -258,6 +283,20 @@ of the Isometry Group of a Space
 Euclidean Group (\S\ref{sec:euclidean_group}) $E(n)$ -- Group of all
 Isometries $ISO(n)$ of $n$-dimensional Euclidean Space
 (\S\ref{sec:euclidean_space})
+
+Frieze Groups (\S\ref{sec:frieze_group}) and Wallpaper Groups
+(\S\ref{sec:wallpaper_group}) are Discrete Subgroups
+(\S\ref{sec:discrete_group}) of the Isometry Group of the Euclidean Plane
+(\S\ref{sec:euclidean_plane})
+
+
+
+\paragraph{Discrete Isometry Group}\label{sec:discrete_isometry_group}\hfill
+
+cf. Discrete Group (\S\ref{sec:discrete_group})
+
+a Discrete Symmetry Group (\S\ref{sec:discrete_symmetry_group}) is a Symmetry
+Group that is a Discrete Isometry Group
 
 
 
@@ -365,15 +404,15 @@ Volume, Minkowski Dimension
 % ====================================================================
 
 Given a Set $X$, a \emph{Topology} $\tau$ on $X$ is a Family
-(\S\ref{sec:family}) of Subsets of $X$ (the Open Sets
-\S\ref{sec:open_set}) with the Properties:
+(\S\ref{sec:family}) of Subsets of $X$--the Open Sets
+(\S\ref{sec:open_set})--with the Properties:
 \begin{enumerate}
   \item $\varnothing \in \tau$, $X \in \tau$
   \item $A,B \in \tau \Rightarrow A \cap B \in \tau$
   \item $\{A_i\}_{i \in I} \subseteq \tau \Rightarrow \bigcup_{i \in
   I} A_i \in \tau$
 \end{enumerate}
-$\tau$ is therefore a Subset of the Power Set of $X$:
+The Topology $\tau$ is therefore a Subset of the Power Set of $X$:
 \[
   \tau \subseteq \pow(X)
 \]
@@ -381,8 +420,34 @@ $\tau$ is therefore a Subset of the Power Set of $X$:
 
 
 % --------------------------------------------------------------------
+\subsection{Trivial Topology}\label{sec:trivial_topology}
+% --------------------------------------------------------------------
+
+or \emph{Indiscrete Topology}
+
+the Trivial Topology is the Topology with the least possible number of Open
+Sets and is the Coarsest (\S\ref{sec:coarseness}) possible Topology
+
+
+
+% --------------------------------------------------------------------
 \subsection{Discrete Topology}\label{sec:discrete_topology}
 % --------------------------------------------------------------------
+
+Discrete Metric
+
+Discrete Space (\S\ref{sec:discrete_space}) -- any Function from a Discrete
+Space to another Topological Space is Continuous (\S\ref{sec:continuous_map})
+
+Finest (\S\ref{sec:coarseness}) possible Topology that can be given on a Set,
+i.e. all Subsets are Open Sets (and therefore Closed Sets, so ``Clopen'' Sets)
+and in particular each Singleton is an Open Set
+
+A Topological Group (\S\ref{sec:topological_group}) with a Discrete Topology is
+a \emph{Discrete Group} (\S\ref{sec:discrete_group}), and any Group can be
+considered as a Topological Group by giving it the Discrete Topology.
+
+
 
 % --------------------------------------------------------------------
 \subsection{Compact-open Topology}\label{sec:compact_open}
@@ -450,6 +515,11 @@ Space which \emph{Locally} resembles Real $n$-dimensional Space
 (\S\ref{sec:topological_semantics}) for Denotational Semantics based
 on Topological Spaces
 
+A \emph{Continuous Group Action} (\S\ref{sec:continuous_group_action}) on a
+Topological Space $X$ is a Group Action of a Topological Group
+(\S\ref{sec:topological_group}) $G$ that is a \emph{Continuous Map}
+(\S\ref{sec:continuous_map}).
+
 
 
 % --------------------------------------------------------------------
@@ -485,6 +555,16 @@ $\cat{Top}((X,\tau_X),(S,\tau_S)) \cong \tau_X$
 
 Ring Structure on $S$: $\vee$, $\wedge$
 
+
+
+% --------------------------------------------------------------------
+\subsection{Discrete Space}\label{sec:discrete_space}
+% --------------------------------------------------------------------
+
+Topological Space with the Discrete Topology (\S\ref{sec:discrete_topology})
+
+any Function from a Discrete Space to another Topological Space is Continuous
+(\S\ref{sec:continuous_map})
 
 
 % --------------------------------------------------------------------
@@ -829,6 +909,7 @@ Dual to Quotient Topology (\S\ref{sec:quotient_topology})
 
 \emph{Closed Subspace}
 
+special case of Initial Topology (\S\ref{sec:initial_topology})
 
 
 % --------------------------------------------------------------------
@@ -853,23 +934,6 @@ Final Topology on the Quotient Space with respect to map $q : X
 % --------------------------------------------------------------------
 \subsection{Fell Topology}\label{sec:fell_topology}
 % --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Initial Topology}\label{sec:initial_topology}
-% --------------------------------------------------------------------
-
-\subsubsection{Weak Topology}\label{sec:weak_topology}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Final Topology}\label{sec:final_topology}
-% --------------------------------------------------------------------
-
-(also \emph{Strong Topology}, \emph{Colimit Topology}, or
-\emph{Inductive Topology})
-
-
 
 % --------------------------------------------------------------------
 \subsection{Countability Axioms}\label{sec:countability_axioms}
@@ -910,6 +974,16 @@ a Finite Interval) %FIXME
 \subsubsection{Tychonoff's Theorem}\label{sec:tychonoffs_theorem}
 
 Compactness Theorem (Model Theory \S\ref{sec:compactness})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Cocompact Space}\label{sec:cocompact_space}
+% --------------------------------------------------------------------
+
+Wallpaper Group (\S\ref{sec:wallpaper_group})
+
+Crystallographic Groups (\S\ref{sec:crystallographic_group})
 
 
 
@@ -977,12 +1051,49 @@ relative to $\tau_1$.
 Coarser Topologies will have more Topologically Indistinguishable
 Points.
 
-The Coarsest Topology possible is the Trivial Topology $\{
-\varnothing, X \}$.
+The Coarsest Topology possible is the Trivial Topology
+(\S\ref{sec:trivial_topology}) $\{ \varnothing, X \}$.
 
 The Coarsest Topology that contains a given collection of Open Sets $S
 \subseteq \pow(X)$ is the Topology Generated by taking $S$ to
 be a Subbase (\S\ref{sec:subbase}) of $X$.
+
+The Finest Topology possible on a Set is the Discrete Topology
+(\S\ref{sec:discrete_topology})-- all Subsets are Open Sets, in particular each
+Singleton is an Open Set
+
+
+
+\subsubsection{Initial Topology}\label{sec:initial_topology}
+
+The \emph{Initial Topology} for a Set $X$ with respect to a Familiy of
+Functions on $X$ is the \emph{Coarsest} Topology on $X$ that makes those
+Functions Continuous (\S\ref{sec:continuous_function})
+
+(FIXME: continuous maps ???)
+
+Subspace Topology (\S\ref{sec:subspace_topology})
+
+Product Topology (\S\ref{sec:product_topology})
+
+
+
+\paragraph{Weak Topology}\label{sec:weak_topology}
+
+(FIXME: synonym for initial topology ???)
+
+
+
+\subsubsection{Final Topology}\label{sec:final_topology}
+
+(also \emph{Strong Topology}, \emph{Colimit Topology}, or
+\emph{Inductive Topology})
+
+The \emph{Final Topology} for a Set $X$ with respect to a Familiy of
+Functions on $X$ is the \emph{Finest} Topology on $X$ that makes those
+Functions Continuous (\S\ref{sec:continuous_function})
+
+(FIXME: continuous maps ???)
 
 
 
@@ -1244,6 +1355,15 @@ Given Topological Spaces $(X, \tau_X)$, $(Y, \tau_Y)$, and $(Z,
 Continuous Maps, then the Composition $g \circ f : X \rightarrow Z$ is
 Continuous.
 
+any Function from a Discrete Space (\S\ref{sec:discrete_space}) to another
+Topological Space is Continuous
+
+A Group with Topology $\tau$ such that the Group \emph{Binary Operation} and
+\emph{Inverse Function} are Continuous Maps with respect to $\tau$, is a
+\emph{Topological Group} (\S\ref{sec:topological_group}), and any Group can be
+considered a Topological Group by giving it the Discrete Topology (a Discrete
+Group \S\ref{sec:discrete_group})
+
 
 
 \subsubsection{Quotient Map}\label{sec:quotient_map}
@@ -1274,8 +1394,16 @@ Continuous Inverse.
 
 
 % --------------------------------------------------------------------
+\subsection{Box Topology}\label{sec:box_topology}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Product Topology}\label{sec:product_topology}
 % --------------------------------------------------------------------
+
+special case of Initial Topology (\S\ref{sec:initial_topology})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Disjoint Union Topology}\label{sec:disjoint_union_topology}
@@ -1958,6 +2086,11 @@ Chain Complex (\S\ref{sec:chain_complex})
 
 \paragraph{Abstract Simplical Complex}\label{sec:abstract_complex}\hfill
 
+Combinatorial descriptoin of a Simplicial Complex, consisting of a Family of
+Non-empty Finite Sets Closed under the Operation of taking Non-empty Subsets
+
+\emph{Independence Systems}
+
 
 
 % --------------------------------------------------------------------
@@ -2100,7 +2233,8 @@ Differentiable Manifold with a Positive Definite Metric Tensor
 (\S\ref{sec:positive_definite_metric_tensor}) called the
 \emph{Riemannian Metric}
 
-Riemannian Geometry (\S\ref{sec:riemannian_geometry})
+Riemannian Geometry (\S\ref{sec:riemannian_geometry}), Sectional Curvature
+(\S\ref{sec:sectional_curvature})
 
 Smooth Manifold $M$
 
@@ -2448,6 +2582,17 @@ Essential Embedded 2-Torus
 % ====================================================================
 \section{Homogenous Space}\label{sec:homogenous_space}
 % ====================================================================
+
+Analytic Geometry (Part \ref{sec:analytic_geometry}): Euclidean Space
+(\S\ref{sec:euclidean_space}), Affine Space (\S\ref{sec:affine_space}), and
+Projective Space (\S\ref{sec:projective_space}) are Homogenous Spaces for their
+respective Symmetry Groups (\S\ref{sec:symmetry_group})
+
+Topological Groups (\S\ref{sec:topological_group})
+
+Principal Homogenous Spaces (Torsors \S\ref{sec:principal_homogenous_space})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Coset Space}\label{sec:coset_space}
