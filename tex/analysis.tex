@@ -446,6 +446,22 @@ $\sum u_n$ Converges.
 $R^1$ -- Real Line (\S\ref{sec:real_line}): 1-dimensional Real
 Coordinate Space
 
+(Infinitesimal) Calculus:
+\begin{itemize}
+\item Differential Calculus: Differentiable Functions
+  (\S\ref{sec:differentiable_function})
+\item Integral Calculus: Integrable Functions (\S\ref{sec:integrable_function})
+\end{itemize}
+uses notions of Convergent Infinite Sequences (\S\ref{sec:convergent_sequence})
+and Convergent Infinite Series (\S\ref{sec:convergent_series}); related by
+Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+
+\fist cf. Calculus of Finite Differences
+(\S\ref{sec:finite_differences_calculus})
+
+\fist extension of Calculus in one Variable to Functions of several Variables:
+Multivariable Calculus (\S\ref{sec:multivariable_calculus})
+
 
 
 % --------------------------------------------------------------------
@@ -512,8 +528,14 @@ $n \in \nats$, $a \in \reals^+$, then:
 
 
 % --------------------------------------------------------------------
-\subsection{Real-valued Function}\label{sec:real_function}
+\subsection{Real Function}\label{sec:real_function}
 % --------------------------------------------------------------------
+
+or \emph{Real-valued Function}
+
+\fist Vector-valued Functions (\S\ref{sec:vector_function})
+
+
 
 \subsubsection{Bounded Function}\label{sec:bounded_function}
 
@@ -611,14 +633,13 @@ $f(a) < c < f(b)$, there is a $d \in (a,b)$ such that $f(d) = c$.
 \subsection{Differentiable Function}\label{sec:differentiable_function}
 % --------------------------------------------------------------------
 
-Differential Equation (\S\ref{sec:differential_equation})
+cf. Differential Equation (\S\ref{sec:differential_equation})
 
 For $f$ defined on Open Interval $(a,b) \subset \reals$, $f$ is
 Differentiable at $x \in (a,b)$ if Limit $f'(x) = \lim_{h \rightarrow
   0} \frac{f (x+h) - f(x)}{h}$ exists.
 
-Differentiable (\S\ref{sec:differentiable_function}) at $a$ Implies
-Continuous at $a$
+Differentiable at $a$ Implies Continuous at $a$
 
 A Polynomial (\S\ref{sec:polynomial}), being the Sum of Differentiable
 Functions, is Differentiable everywhere
@@ -634,6 +655,13 @@ $f$ is Strictly Decreasing (see Monotonic Functions
 
 $(\frac{g}{f})' = \frac{f g' - f' g}{f^2}$
 
+often viewed as a Quotient of \emph{Differentials} (\S\ref{sec:differential}):
+\[
+  \frac{dy}{dx}
+\]
+
+\fist Vector Derivative (\S\ref{sec:vector_derivative})
+
 
 
 \subsubsection{Antiderivative}\label{sec:antiderivative}
@@ -646,6 +674,9 @@ If $f$ is Continuous on $[a,b]$ then:
 \]
 for all $x \in [a,b]$ and $F$ is Differentiable on $(a,b)$ and $F' =
 f$.
+
+\fist related to Definite Integrals (\S\ref{sec:definite_integral}) through the
+Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
 
 
 
@@ -693,6 +724,8 @@ for $f$ Continuous on $[a,b]$ and Differentiable on $(a,b)$ with $f(a)
 \subsection{Integrable Function}\label{sec:integrable_function}
 % --------------------------------------------------------------------
 
+cf. Integral Equation (\S\ref{sec:integral_equation})
+
 $f$ Bounded on Closed Bounded $[a,b]$, $\forall \varepsilon >0$, there
 exists a Partition (\S\ref{sec:interval_partition}) $P$ of $[a,b]$
 such that $0 \leq U(f,P) - L(f,P) < \varepsilon$ %FIXME xref upper lower
@@ -724,13 +757,19 @@ For Integrable $f$, $|f|$ is Integrable and $|\int_a^b f| \leq
 
 \subsubsection{Integral}\label{sec:integral}
 
-Numerical Integration (\S\ref{sec:numerical_integration})
+\fist Multiple Integral (\S\ref{sec:multiple_integral}) in Multivariable
+Calculus
 
-Integrable Function (\S\ref{sec:integrable_function})
+cf. Numerical Integration (\S\ref{sec:numerical_integration})
 
 
 
 \paragraph{Definite Integral}\label{sec:definite_integral}\hfill
+
+\fist related to Antiderivative (\S\ref{sec:antiderivative}) through the
+Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+
+
 
 \paragraph{Indefinite Integral}\label{sec:indefinite_integral}\hfill
 
@@ -774,12 +813,26 @@ $\int_a^b f = f(c)(b - a)$
 
 % --------------------------------------------------------------------
 \subsection{Fundamental Theorem of Calculus}
-\label{sec:fundamental_theorem}
+\label{sec:fundamental_calculus_theorem}
 % --------------------------------------------------------------------
 
-$F' = f$
+for Function $f$ Continuous on the Interval $[a,b]$, and $F$ with derivative
+$f$:
+\[
+  F' = f
+\]
+on the interval $(a,b)$, then:
+\[
+  \int^b_a f(x) dx = F(b) - F(a)
+\]
 
-$\int^b_a f = F(b) - F(a)$
+Additionally, for every $x$ in the Interval $(a,b)$:
+\[
+  \frac{d}{dx}\int^x_a f(t) dt = f(x)
+\]
+
+\fist Integral Theorems of Vector Calculus
+(\S\ref{sec:integral_theorems}) in Multivariable Calculus
 
 
 
@@ -920,12 +973,45 @@ Residue Calculus (???) %FIXME
 
 
 % ====================================================================
+\section{Calculus of Finite Differences}\label{sec:finite_differences_calculus}
+% ====================================================================
+
+%FIXME
+
+% --------------------------------------------------------------------
+\subsection{Finite Difference}\label{sec:finite_difference}
+% --------------------------------------------------------------------
+
+Discrete equivalent of Differentiation (\S\ref{sec:differential})
+
+
+
+% ====================================================================
 \section{Differential Equation}\label{sec:differential_equation}
 % ====================================================================
 
+cf. Differentiable Function (\S\ref{sec:differentiable_function})
+
+\fist Partial Differential Equation (\S\ref{sec:partial_differential_equation})
+in Multivariable Calculus
+
+
+
 % --------------------------------------------------------------------
-\subsection{Ordinary Differential Equation}
-\label{sec:ode}
+\subsection{Differential}\label{sec:differential}
+% --------------------------------------------------------------------
+
+an Infinitesimally small quantity $dx$
+
+cf. Derivative (\S\ref{sec:derivative}); often viewed as a \emph{Quotient} of
+Differentials: $\frac{dy}{dx}$
+
+\fist Dicrete equivalent: Finite Differences (\S\ref{sec:finite_difference})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ordinary Differential Equation}\label{sec:ode}
 % --------------------------------------------------------------------
 
 \subsubsection{Continuously Differentiable}
@@ -961,15 +1047,214 @@ Complex Dynamics (\S\ref{sec:complex_dynamics})
 
 
 % --------------------------------------------------------------------
-\subsection{Partial Differential Equation}
-\label{sec:partial_differential}
+\subsection{Boundary Value Problem}\label{sec:boundary_value_problem}
 % --------------------------------------------------------------------
+
+%FIXME harmonic analysis? dirichlet problem?
+
+\subsubsection{Finite Element Method}\label{sec:finite_element_method}
+
+\emph{Finite Element Method} or \emph{FEM} is a technique for solving
+Boundary Value Problems for Partial Differential Equations
+(\S\ref{sec:partial_differential})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Bessel function}\label{sec:bessel_function}
+% --------------------------------------------------------------------
+
+cf. Reverse Bessel Polynomials (\S\ref{sec:reverse_bessel_polynomial})
+
+
+
+% ====================================================================
+\section{Integral Equation}\label{sec:integral_equation}
+% ====================================================================
+
+cf. Integrable Function (\S\ref{sec:integrable_function})
+
+
+
+% ====================================================================
+\section{Multivariable Calculus}\label{sec:multivariable_calculus}
+% ====================================================================
+
+extension of (Infinitesimal) Calculus in one Variable to Functions with several
+Variables
+
+Calculus in one Variable:
+\begin{itemize}
+\item Differential Calculus: Differentiable Functions
+  (\S\ref{sec:differentiable_function}), Differential Equations
+  (\S\ref{sec:differential_equation})
+\item Integral Calculus: Integrable Functions
+  (\S\ref{sec:integrable_function}), Integral Equation
+  (\S\ref{sec:integral_equation})
+\end{itemize}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Multivariate Continuity}\label{sec:multivariate_continuity}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Partial Derivative}\label{sec:partial_derivative}
+% --------------------------------------------------------------------
+
+the Matrix of all First-order Partial Derivatives of a Vector Function
+(\S\ref{sec:vector_function}) is the \emph{Jacobian Matrix}
+(\S\ref{sec:jacobian_matrix})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Multiple Integral}\label{sec:multiple_integral}
+% --------------------------------------------------------------------
+
+Integral (\S\ref{sec:integral})
+
+Multiple Integration
+
+
+
+\subsubsection{Double Integral}\label{sec:double_integral}
+
+\subsubsection{Triple Integral}\label{sec:triple_integral}
+
+\subsubsection{Line Integral}\label{sec:line_integral}
+
+\subsubsection{Surface Integral}\label{sec:surface_integral}
+
+Double Integral analog of the Line Integral
+
+
+
+\subsubsection{Volume Integral}\label{sec:volume_integral}
+
+used to calculate ``\emph{Flux Densities}'' %FIXME
+
+
+
+% --------------------------------------------------------------------
+\subsection{Vector Calculus}\label{sec:vector_calclulus}
+% --------------------------------------------------------------------
+
+cf. Linear Algebra (Part \ref{sec:linear_algebra})
+
+Gradient, Divergence, Curl
+
+$\nabla$
+
+FIXME:
+
+Directional Derivative
+
+Laplacian
+
+Tensor Derivative
+
+
+
+\subsubsection{Vector Derivative}\label{sec:vector_derivative}
+
+%FIXME
+
+
+
+\subsubsection{Vector Function}\label{sec:vector_function}
+
+or \emph{Vector-valued Function}
+
+the Matrix of all First-order Partial Derivatives
+(\S\ref{sec:partial_derivative}) of a Vector Function is the \emph{Jacobian
+  Matrix} (\S\ref{sec:jacobian_matrix})
+
+
+
+\subsubsection{Gradient}\label{sec:gradient}
+
+wiki:
+
+the \emph{Gradient} of a Scalar Field (\S\ref{sec:scalar_field}) $f$ is the
+Vector Derivative (\S\ref{sec:vector_derivative}):
+\[
+  \nabla f =
+    \frac{\partial f}{\partial x}\vec{e}_x +
+    \frac{\partial f}{\partial y}\vec{e}_y +
+    \frac{\partial f}{\partial z}\vec{e}_z
+\]
+
+
+
+\subsubsection{Divergence}\label{sec:divergence}
+
+wiki:
+
+the \emph{Divergence} of a Vector Field (\S\ref{sec:vector_field})
+$\vec{v}(x,y,z) = v_x\vec{e}_x + v_y\vec{e}_y + v_z\vec{e}_z$ is a
+Scalar-valued Function (\S\ref{sec:scalar_function}):
+\[
+  \nabla \cdot \vec{v} =
+    \frac{\partial v_x}{\partial x} +
+    \frac{\partial v_y}{\partial y} +
+    \frac{\partial v_z}{\partial z}
+\]
+
+
+
+\subsubsection{Curl}\label{sec:curl}
+
+wiki:
+
+the \emph{Curl} of a Vector Field (\S\ref{sec:vector_field}) $\vec{v}(x,y,z) =
+v_x\vec{e}_x + v_y\vec{e}_y + v_z\vec{e}_z$ is a Vector-valued Function
+(\S\ref{sec:vector_function}):
+\[
+  \nabla\times\vec{v} =
+    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x +
+    (\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x})\vec{e}_y +
+    (\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y})\vec{e}_z
+\]
+associating each Point in the Vector Field with the proportional ``on-axis''
+Torque to which a ``tiny pinwheel'' would be subjected if it were centered at
+the Point and can be realized as a Pseudo-determinant
+(\S\ref{sec:pseudo_determinant}):
+
+TODO
+
+
+
+\subsubsection{Integral Theorems of Vector Calculus}
+\label{sec:integral_theorems}
+
+cf. Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+
+\paragraph{Gradient Theorem}\label{sec:gradient_theorem}\hfill
+
+\paragraph{Stoke's Theorem}\label{sec:stokes_theorem}\hfill
+
+\paragraph{Divergence Theorem}\label{sec:divergence_theorem}\hfill
+
+\paragraph{Green's Theorem}\label{sec:greens_theorem}\hfill
+
+
+
+% --------------------------------------------------------------------
+\subsection{Partial Differential Equation}
+\label{sec:partial_differential_equation}
+% --------------------------------------------------------------------
+
+%FIXME: move section ???
 
 Finite Element Method (\S\ref{sec:finite_element_method}): solving
 Boundary Value Problems (\S\ref{sec:boundary_value_problem}) for
 Partial Differential Equations
 
 
+
+\subsubsection{Partial Differential}\label{sec:partial_differential}
 
 \subsubsection{Elliptic Partial Differential Equation}
 \label{sec:elliptic_partial_differential}
@@ -1006,25 +1291,6 @@ $\nabla^2 u = u_{xx} + u_{yy} = 0$ %FIXME
 
 
 
-% --------------------------------------------------------------------
-\subsection{Boundary Value Problem}\label{sec:boundary_value_problem}
-% --------------------------------------------------------------------
-
-%FIXME harmonic analysis? dirichlet problem?
-
-\subsubsection{Finite Element Method}\label{sec:finite_element_method}
-
-\emph{Finite Element Method} or \emph{FEM} is a technique for solving
-Boundary Value Problems for Partial Differential Equations
-(\S\ref{sec:partial_differential})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Bessel function}\label{sec:bessel_function}
-% --------------------------------------------------------------------
-
-cf. Reverse Bessel Polynomials (\S\ref{sec:reverse_bessel_polynomial})
 
 
 
