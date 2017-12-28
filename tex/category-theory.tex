@@ -4555,6 +4555,19 @@ Correspondences: \cite{jacobs-heunen-hasuo09}
 In Programming: Interface to Abstract Datatype
 (\S\ref{sec:abstract_type}) of ``Program Fragments''
 
+introduced by Moggi (FIXME: xref) as a way to structure Denotational Semantics
+(\S\ref{sec:denotational_semantics})
+
+Kiselyov-Ishii15-- Monads have poor \emph{composability}, approaches taken:
+\begin{itemize}
+  \item (Moggi) Monad Transformers (\S\ref{sec:monad_transformer}): ``Lifting''
+    of Monad Operations through the ``Transformer Stack''
+  \item Coproduct with simplification leading to ``the'' Free Monad
+    (\S\ref{sec:free_monad}) FIXME: xref \emph{Data Types a la Carte}
+  \item Effects as an \emph{interaction} along with Side-effect-request
+    Handlers, implemented as Extensible Effects (\S\ref{sec:extensible_effect})
+\end{itemize}
+
 Piponi10 - \emph{Monads are Trees with Grafting}
 --$\mono{Monad}$ Type Class in Haskell is an \emph{Interface} commonto many
 types of \emph{Tree Structure} which share the notion of a \emph{Leaf Node} and
@@ -4742,29 +4755,6 @@ Combining two arbitrary Monads involves using one fixed Monad to
 Transform another arbitrary Monad
 
 
-\textbf{Monad Transformers}
-
-%FIXME section?
-
-Constructors with Kind $(\star \rightarrow \star) \rightarrow (\star
-\rightarrow \star)$:
-
-Examples:
-\begin{align*}
-  \mathsf{MaybeT} & = \mathsf{fcomp\;Maybe} \\
-  \mathsf{ErrorT} & = \mathsf{fcomp\;Error} \\
-  \mathsf{WriterT} & = \mathsf{fcomp\;Writer} \\
-  \mathsf{ReaderT}\; r & = \mathsf{bcomp}\;(r \rightarrow)
-\end{align*}
-
-Class of Monad Transformers:
-\begin{flalign*}
-  \quad\quad & \mono{class}\;\mathsf{MonadT}\;t\;\mono{where} & \\
-  \quad\quad & \quad \mathsf{lift} : m\;a \rightarrow t\;m\;a
-\end{flalign*}
-where $m$ is Constrained to be a Monad.
-
-
 \asterism
 
 
@@ -4799,6 +4789,44 @@ Subcategory of a Canonical Functor Category
 Filinski \cite{filinski99}/Piponi: every Monad is a Submonad of a
 Canonical Continuation (\S\ref{sec:continuation}) Monad
 
+
+
+% --------------------------------------------------------------------
+\subsection{Monad Transformer}\label{sec:monad_transformer}
+% --------------------------------------------------------------------
+
+approach to composition of Monads introduced by Moggi (FIXME: xref)
+
+other approaches to composition (Kiselyov-Ishii15):
+\begin{itemize}
+  \item (Moggi) Monad Transformers:monad_transformer}): ``Lifting'' of Monad
+    Operations through the ``Transformer Stack''
+  \item Coproduct with simplification leading to ``the'' Free Monad
+    (\S\ref{sec:free_monad}) FIXME: xref \emph{Data Types a la Carte}
+  \item Effects as an \emph{interaction} along with Side-effect-request
+    Handlers, implemented as Extensible Effects (\S\ref{sec:extensible_effect})
+\end{itemize}
+
+
+%FIXME section?
+
+Constructors with Kind $(\star \rightarrow \star) \rightarrow (\star
+\rightarrow \star)$:
+
+Examples:
+\begin{align*}
+  \mathsf{MaybeT} & = \mathsf{fcomp\;Maybe} \\
+  \mathsf{ErrorT} & = \mathsf{fcomp\;Error} \\
+  \mathsf{WriterT} & = \mathsf{fcomp\;Writer} \\
+  \mathsf{ReaderT}\; r & = \mathsf{bcomp}\;(r \rightarrow)
+\end{align*}
+
+Class of Monad Transformers:
+\begin{flalign*}
+  \quad\quad & \mono{class}\;\mathsf{MonadT}\;t\;\mono{where} & \\
+  \quad\quad & \quad \mathsf{lift} : m\;a \rightarrow t\;m\;a
+\end{flalign*}
+where $m$ is Constrained to be a Monad.
 
 
 % --------------------------------------------------------------------
