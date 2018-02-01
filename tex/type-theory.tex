@@ -932,6 +932,8 @@ Choices, Multiple ``Classes'' of Data
 
 \emph{Inductive Type} (or \emph{Recursive Type})
 
+\fist Higher Inductive Types (\S\ref{sec:higher_inductive_type})
+
 W-type
 
 Monotonic Type Operators $\Theta : \sigma \Rightarrow \tau$
@@ -1671,9 +1673,13 @@ dual notion: \emph{Union Types} (\S\ref{sec:union_type})
 
 \paragraph{Refinement Type}\label{sec:refinement_type}\hfill
 
+%FIXME: xref Refinement Logic ?
+
 Predicate assumed to hold for any Element of Refined Type
 
 \fist Cf. Behavioral Subtyping (\S\ref{sec:behavioral_subtype})
+
+NuPRL, RedPRL
 
 Type Targeted Testing, Liquid Types (Logically Qualified Types
 \S\ref{sec:logically_qualified})
@@ -3287,6 +3293,15 @@ Unification that works with Subtyping Constraints
 % --------------------------------------------------------------------
 \subsection{Structural Type System}\label{sec:structural_type_system}
 % --------------------------------------------------------------------
+
+cf. a \emph{Computational} Type Theory (\S\ref{sec:computational_type}) is
+defined by \emph{Semantics} (Meaning Explanations based on a prior notion of
+\emph{Computation}) rather than by ``\emph{Rules}'' as in Structural Type
+Theory
+
+\url{https://existentialtype.wordpress.com/2018/01/15/popl-2018-tutorial/}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Substructural Type}
@@ -6488,6 +6503,8 @@ Computational Effects
 
 e.g. Exceptions, Non-determinism, Interactive Input/Output,
 Concurrency, State, Time, Continuations, etc. \cite{plotkin-pretnar09}
+
+\fist cf. Computational Type Theory (\S\ref{sec:computational_type})
 
 Monad (\S\ref{sec:monad})
 
@@ -12914,9 +12931,19 @@ LCCC (Locally Cartesian Closed Categories \S\ref{sec:locally_cartesian_closed})
 \url{http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/})
 
 
+
 \subsubsection{Computational Type Theory}\label{sec:computational_type}
 
 \emph{NuPRL}
+
+\fist Computational Higher Type Theory
+(\S\ref{sec:computational_higher_type_theory})
+
+cf. a \emph{Structural} Type Theory (\S\ref{sec:structural_type}) is defined by
+``\emph{Rules}'' rather than \emph{Semantics} (Meaning Explanations based on a
+prior notion of \emph{Computation}) as in Computational Type Theory
+
+\fist see also Computability Theory (Part \ref{sec:recursion_theory})
 
 
 
@@ -13000,6 +13027,20 @@ Canonical Value
 \section{Higher Type Theory}\label{sec:higher_type_theory}
 % ====================================================================
 
+Voevodsky - \emph{Univalence Principle} identifies \emph{Equivalent Types}
+
+Univalence formulated as a new Axiom of Intensional Type Theory
+(\S\ref{sec:intensional_type}) that populates the \emph{Identity Type} with new
+``Elements'' (FIXME: clarify)
+
+Model of Univalence constructed using the Combinatorial Structures of
+\emph{Simplicial Sets} (\S\ref{sec:simplicial_set})
+
+Computational Higher Type Theory gives a \emph{Computational Meaning} to
+Univalence
+
+
+
 % --------------------------------------------------------------------
 \subsection{Cubical Type Theory}\label{sec:cubical_type_theory}
 % --------------------------------------------------------------------
@@ -13050,6 +13091,68 @@ $\Psi ::= \varnothing | \Psi, s \;\mathsf{dim}$
 % --------------------------------------------------------------------
 
 \url{https://golem.ph.utexas.edu/category/2017/05/a_type_theory_for_synthetic_ca.html}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Computational Higher Type Theory}
+\label{sec:computational_higher_type_theory}
+% --------------------------------------------------------------------
+
+\fist Computational Type Theory (\S\ref{sec:computational_type})
+
+2018 - Harper, Angiuli - Computational Higher Type Theory
+
+\url{https://existentialtype.wordpress.com/2018/01/15/popl-2018-tutorial/}
+
+a Semantic formulation of Dependent Type Theory starting with a Programming
+Language equipped with a Deterministic Operational Semantics and \emph{derives}
+Types as \emph{Specifications of Program Behavior}
+
+a Type is a \emph{Program Specification} and two Types are ``exactly''
+\emph{Equal} only if they specify the \emph{same} Behavior and a Program
+\emph{Inhabits} a Type if it Behaves \emph{according to specification}
+
+from a Logical perspective, Computational Type Theory is a Theory of
+\emph{Truth}, not a Theory of \emph{Formal} Proof
+
+Computational Type Theory is \emph{Consistent} with constructs of Formal Type
+Theory, but it is possible to consider Proof Theories such as Refinement Logics
+that lie \emph{outside} the scope of Formal Type Theory
+
+Brouwer's Intuitionistic Foundations, Per Martin-L\"of \emph{Constructive
+  Mathematics and Computer Programming}
+
+NuPRL
+
+Types themselves are Programs whose Values represent \emph{Specifications of
+  Program Equivalence}
+
+Type Theory can be extended to ``Higher Dimensions'' that account for
+\emph{Identifications} of Types and their Elements
+
+an \emph{Identification} is ``evidence'' (FIXME: proof ???) for the
+\emph{interchangability} or two Types in all contexts by \emph{Computable
+  Transformations}
+
+beginning with a Cubical (\S\ref{sec:cubical_type_theory}) Programming Language
+(Licata, Brunerie), Types are defined as Programs that Evaluate to
+Specifications of the Behavior of \emph{other} Programs; resulting Theory gives
+a \emph{Computational Meaning} to Univalence and gives a Higher-dimensional
+notion of \emph{Inductive Types} (\S\ref{sec:higher_inductive_type}) in which
+one may specify \emph{Generators} for Points (ordinary Types), Lines
+(Identifications between Types), Squares (Homotopies, etc.), and other
+Higher-dimensional objects
+
+Semantics ensures that every Well-typed Program Evaluates to a Value satisfying
+the Specification given by its Type-- in particular Closed Programs of Boolean
+Type Evaluate to either True or False and there are no ``stuck'' states or
+``exotic elements'' (FIXME: clarify)
+
+implemented in RedPRL (written in Standard ML) based on a generalized form of
+Refinement Logic (\S\ref{sec:refinement_type}), a Proof Theory that emphasizes
+\emph{Program Extraction} as a primitive notion
+
 
 
 
@@ -13786,6 +13889,12 @@ Groupoid (\S\ref{sec:groupoid})
 % --------------------------------------------------------------------
 \subsection{Higher Inductive Type}\label{sec:higher_inductive_type}
 % --------------------------------------------------------------------
+
+\fist Inductive Type (\S\ref{sec:inductive_type})
+
+%FIXME: move under higher type theory ?
+
+
 
 % --------------------------------------------------------------------
 \subsection{Inference Rules}\label{sec:homotopy_rules}
