@@ -126,6 +126,31 @@ i.e. it is Idempotent
 
 
 
+\subsubsection{Linear Form}\label{sec:linear_form}
+
+(or \emph{Linear Functional}) is a Linear Map from a Vector Space to its Field
+of Scalars
+
+for a Vector Space $V$ over a Field $k$, a Linear Functional $f$ is a Function
+from $V$ to $k$ that is \emph{Linear}:
+\begin{itemize}
+\item $f(\vec{v} + \vec{w}) = f(\vec{v}) + f(\vec{w})$ for all $\vec{v},
+  \vec{w} \in V$
+\item $f(a\vec{v} = af(\vec{v}$ for all $\vec{v} \in V, a \in k$
+\end{itemize}
+
+the action of a Linear Functional on a Vector is given by the Dot Product
+(\S\ref{sec:inner_product}), or the Matrix Product with a Row Vector on the
+Left and a Column Vector on the right
+
+the \emph{(Algebraic) Dual Space} (\S\ref{sec:dual_space}) of a Vector Space
+$V$ is the Set of all Linear Forms on a $V$ together with the Vector Space
+structure of Pointwise Addition and Multiplication by Constants
+
+Distribution (\S\ref{sec:distribution})
+
+
+
 \subsubsection{Semilinear Map}\label{sec:semilinear_map}
 
 (or \emph{Semilinear Transformation})
@@ -156,14 +181,6 @@ Quantum mechanics: Time Reversal
 Spinor Calculus
 
 \fist Antiunitary Operator (\S\ref{sec:antiunitary_operator})
-
-
-
-\subsubsection{Linear Form}\label{sec:linear_form}
-
-(or \emph{Linear Functional})
-
-Distribution (\S\ref{sec:distribution})
 
 
 
@@ -245,6 +262,8 @@ Categorical generalization: Profunctor (\S\ref{sec:profunctor})
 % ====================================================================
 \section{Vector Space}\label{sec:vector_space}
 % ====================================================================
+
+\emph{Vector} (\S\ref{sec:vector})
 
 \emph{Span}
 
@@ -565,6 +584,85 @@ Graded Algebra (\S\ref{sec:graded_algebra})
 
 
 
+% --------------------------------------------------------------------
+\subsection{Dual Space}\label{sec:dual_space}
+% --------------------------------------------------------------------
+
+the \emph{Dual Space} (or \emph{Algebraic Dual Space}) of any Vector Space $V$
+is the set of all Linear Functionals (Linear Forms \S\ref{sec:linear_form}) of
+$V$ together with the Vector Space structure of Pointwise Addition and
+Multiplication by Scalars
+
+for a Topological Vector Space (\S\ref{sec:topological_vector_space}), there is
+a Subspace of the Dual Space corresponding to Continuous Linear Functionals
+called the \emph{Continuous Dual Space} (\S\ref{sec:continuous_dual_space})
+
+$V \cong V^*$
+
+$V \cong V^**$ ``Naturally'' (\S\ref{sec:natural_transformation})
+
+Contravariant Representable Functor
+(\S\ref{sec:representable_functor}):
+\[
+  (-)^* = Vect(-,\mathbb{R}) :
+    \mathbf{Vect}^op \rightarrow \mathbf{Vect}
+\]
+
+\[
+  A^* = \pow(A) \cong \mathbf{Set}(A,2)
+\]\cite{awodey06}
+
+(FIXME: does this actually relate to linear logic ???):
+
+given a Vector Space $V$ over a Field $R$, the Dual Space $V^*$ is just the Set
+of Linear Functions into $V \mapsto R$
+--\url{https://cstheory.stackexchange.com/questions/39440/algebraic-account-of-gaussian-elimination}
+
+the Dual Bundle (\S\ref{sec:dual_bundle}) of a Vector Bundle
+(\S\ref{sec:vector_bundle}) is a Vector Bundle whose Fibers are the Dual Spaces
+of the Fibers of the original Vector Bundle
+
+
+
+% --------------------------------------------------------------------
+\subsection{Vector Bundle}\label{sec:vector_bundle}
+% --------------------------------------------------------------------
+
+FIXME: move to topology ?
+
+a Topological construction making precise the idea of a Family of Vector Space
+parameterized by another Space $X$ (e.g. a Topological Space, Manifold, or
+Algebraic Veriety) associating for every point $x \in X$ a Vector Space $V(x)$
+such that all the Vector Spaces ``fit together'' to form another Space of the
+same kind as $X$, called the \emph{Vector Bundle over $X$}
+
+an example of a \emph{Fiber Bundle} (\S\ref{sec:fiber_bundle})
+
+the Tangent Bundle (\S\ref{sec:tangent_bundle}) of Tangent Spaces
+(\S\ref{sec:tangent_space}) of a Differentiable Manifold is the prototypical
+Vector Bundle
+
+the Dual Bundle (\S\ref{sec:dual_bundle}) of the Tangent Bundle is the
+a Cotangent Bundle (\S\ref{sec:cotangent_bundle}) of
+Cotangent Spaces (\S\ref{sec:cotangent_space})
+
+
+
+\subsubsection{Dual Bundle}\label{sec:dual_bundle}
+
+the \emph{Dual Bundle} of a Vector Bundle is a Vector Bundle whose Fibers are
+Dual Spaces (\S\ref{sec:dual_space}) of the Fibers of the Vector Bundle
+
+the Dual Bundle of the Tangent Bundle (\S\ref{sec:tangent_bundle}) of a the
+Tangent Spaces of Differentiable Manifold is the a Cotangent Bundle
+(\S\ref{sec:cotangent_bundle}) of the Cotangent Spaces of the Manifold
+
+
+
+\subsubsection{Complex Vector Bundle}\label{sec:complex_vector_bundle}
+
+
+
 % ====================================================================
 \section{$R$-algebra}\label{sec:r_algebra}
 % ====================================================================
@@ -869,33 +967,6 @@ Galois Groups (\S\ref{sec:galois_group}) of Differential Equations
 % ====================================================================
 \section{Multilinear Algebra}\label{sec:multilinear_algebra}
 % ====================================================================
-
-% --------------------------------------------------------------------
-\subsection{Dual Space}\label{sec:dual_space}
-% --------------------------------------------------------------------
-
-$V \cong V^*$
-
-$V \cong V^**$ ``Naturally'' (\S\ref{sec:natural_transformation})
-
-Contravariant Representable Functor
-(\S\ref{sec:representable_functor}):
-\[
-  (-)^* = Vect(-,\mathbb{R}) :
-    \mathbf{Vect}^op \rightarrow \mathbf{Vect}
-\]
-
-\[
-  A^* = \pow(A) \cong \mathbf{Set}(A,2)
-\]\cite{awodey06}
-
-(FIXME: does this actually relate to linear logic ???):
-
-given a Vector Space $V$ over a Field $R$, the Dual Space $V^*$ is just the Set
-of Linear Functions into $V \mapsto R$
---\url{https://cstheory.stackexchange.com/questions/39440/algebraic-account-of-gaussian-elimination}
-
-
 
 % --------------------------------------------------------------------
 \subsection{Multilinear Map}\label{sec:multilinear_map}

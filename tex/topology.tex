@@ -637,6 +637,16 @@ and Codomain are the same it is a Continuous Linear Operator
 
 
 
+\paragraph{Continuous Dual Space}\label{sec:continuous_dual_space}
+\hfill
+
+the \emph{Continuous Dual Space} of a Topological Vector Space is the Subspace
+of the the (Algebraic) Dual Space (\S\ref{sec:dual_space}) corresponding to the
+\emph{Continuous Linear Functionals} (Continuous Linear Forms
+\S\ref{sec:linear_form})
+
+
+
 \paragraph{Topological Tensor Product}\label{sec:topological_tensor}
 \hfill
 
@@ -1401,6 +1411,9 @@ Continuous (\S\ref{sec:continuous_map}). $iota$ is then called a
 $(Y, \sigma)$ is is a Continuous Map $f : X \rightarrow Y$ that has a
 Continuous Inverse.
 
+a Homeomorphism $\varphi$ from an Open Subset $U$ of a Topolgoical Space $M$ to
+an Open Subset of Euclidean Space is called a \emph{Chart} (\S\ref{sec:chart})
+
 
 
 % --------------------------------------------------------------------
@@ -1408,10 +1421,26 @@ Continuous Inverse.
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Product Topology}\label{sec:product_topology}
+\subsection{Product Space}\label{sec:product_space}
 % --------------------------------------------------------------------
 
+Cartesian Product of a Family of Topological Spaces equipped with a natural
+Product Topology
+
+
+
+\subsubsection{Product Topology}\label{sec:product_topology}
+
+natural Topology of a Product Space
+
 special case of Initial Topology (\S\ref{sec:initial_topology})
+
+
+
+\subsubsection{Box Topology}\label{sec:box_topology}
+
+alternative Topology of a Product Space that agrees with the Product Topology
+when the Product is over a Finite number of Spaces
 
 
 
@@ -1842,9 +1871,32 @@ Property (\S\ref{sec:homotopy_extension})
 
 \subsubsection{Fiber Bundle}\label{sec:fiber_bundle}
 
-Total Space ??? %FIXME
+A \emph{Fiber Bundle} a Space that is Locally a Product Space
+(\S\ref{sec:product_space}) but Globally may have a different Topological
+Structure, defined as a structure:
+\[
+  (E, B, \pi, F)
+\]
+of Topological Spaces $E$ (the \emph{Total Space}), $B$ (the \emph{Base
+  Space}), and $F$ (the \emph{Fiber}) and a Continuous Surjection $\pi : E
+\rightarrow B$ called the \emph{Projection} or \emph{Submersion} of the Bundle
+satisfying a \emph{Local Triviality Condition}:
+
+For every $x \in E$ there is an Open Neighborhood $U \subset B$ of $\pi(x)$
+called the \emph{Trivializing Neighborhood} such that there is a Homeomorphism
+$\varphi : \pi^{-1}(U) \rightarrow U \times F$ such that $\pi$ ``agrees'' with
+the Projection onto the ``first factor'' --*FIXME*: clarify and explain
+
+The case where $E$ is just $B \times F$ is a \emph{Trivial Bundle}
+(\S\ref{sec:trivial_bundle})
 
 Hopf Fibration
+
+examples:
+
+Vector Bundles (\S\ref{sec:vector_bundle}), including Tangent Bundles
+(\S\ref{sec:tangent_bundle}) and Cotangent Bundles
+(\S\ref{sec:cotangent_bundle})
 
 
 
@@ -1853,6 +1905,20 @@ Hopf Fibration
 % --------------------------------------------------------------------
 
 Generalization of Fiber Bundle (\S\ref{sec:fiber_bundle})
+
+
+
+\subsubsection{Trivial Bundle}\label{sec:trivial_bundle}
+
+a Bundle or Fiber Bundle is \emph{Trivial} if it is Isomorophic to the Cross
+Product of the Base Space and a \emph{Fiber}
+
+i.e. a Fiber Bundle $(E, B, \pi, F)$ is Trivial if the Total Space $E$ is just
+the Cross Product of the Base Space and the Fiber, $B \times F$, and $\pi$ is
+the natural Projection onto the First Factor, $B \times F \rightarrow B$ where
+$E = B \times F$
+
+examples of Non-trivial Bundles are Mo\"ebius Strips and Klein Bottles
 
 
 
@@ -2236,6 +2302,40 @@ and a Topological Manifold is such a Space with an Equivalence Class of Atlases
 
 
 % --------------------------------------------------------------------
+\subsection{Chart}\label{sec:chart}
+% --------------------------------------------------------------------
+
+a \emph{Chart} (or \emph{Coordinate Chart}, \emph{Coordinate Patch},
+\emph{Coordinate Map}, or \emph{Local Frame}), $(U, \varphi)$ of a Topological
+Space $M$ is a Homeomorphism (\S\ref{sec:homeomorphism}) $\varphi$ from an Open
+Subset $U$ of $M$ to an Open Subset of Euclidean Space
+
+FIXME: is this a general topological construction or specific to manifolds ?
+
+
+
+% --------------------------------------------------------------------
+\subsection{Atlas}\label{sec:atlas}
+% --------------------------------------------------------------------
+
+a Set of Charts which ``Covers'' a Manifold
+
+
+
+\subsubsection{Smooth Atlas}\label{sec:smooth_atlas}\hfill
+
+a \emph{Smooth Atlas} for a Topological
+
+
+
+\subsubsection{Smooth Structure}\label{sec:smooth_structure}\hfill
+
+a \emph{Smooth Structure} on a Manifold $M$ is a Collection of \emph{Smoothly
+  Equivalent Smooth Atlases}
+
+
+
+% --------------------------------------------------------------------
 \subsection{Differentiable Manifold}
 \label{sec:differentiable_manifold}
 % --------------------------------------------------------------------
@@ -2280,6 +2380,72 @@ whose Derivative is everywhere Surjective.
 An Immersion is a Differentiable Function
 (\S\ref{sec:differentiable_function}) between Differentiable Manifolds
 whose Derivative is everywhere Injective.
+
+
+
+\subsubsection{Tangent Space}\label{sec:tangent_space}
+
+(wiki): a Real Vector Space attached to each point $x$ of a Differentiable
+Manifold which contains the possible ``directions'' one can Tangentially pass
+through $x$
+
+the Elements of the Tangent Space at $x$ are called the \emph{Tangent Vectors}
+at $x$-- generalization of the notion of a \emph{Bound Vector}
+(\S\ref{sec:bound_vector}) in a Euclidean Space
+
+the Dimension of the Tangent Space of a Connected Manifold is the same as that
+of the Manifold itself
+
+
+
+\paragraph{Tangent Bundle}\label{sec:tangent_bundle}\hfill
+
+the \emph{Tangent Bundle}, $T M$ of a Differentiable Manifold $M$ is the
+Disjoint Union of the Tangent Spaces of $M$, i.e. the prototypical example of a
+Vector Bundle (\S\ref{sec:vector_bundle})
+
+provides the Domain and Range for the Derivative of a \emph{Smooth Function}
+
+a Tangent Bundle comes equipped with a ``natural'' Topology (FIXME: clarify)
+and a Smooth Structure (\S\ref{sec:smooth_structure}), making it a Manifold
+itself
+
+a Riemannian Metric or Symplectic Form gives rise to a Natural Isomorphism
+between the Tangent Space and the Cotangent Space at a Point
+
+by definition a Manifold $M$ is \emph{Parallelizable} if and only if the
+Tangent Bundle is a Trivial Bundle (\S\ref{sec:trivial_bundle})
+
+
+
+\subsubsection{Cotangent Space}\label{sec:cotangent_space}
+
+(Algebraic) Dual Space (\S\ref{sec:dual_space}) of the Tangent Space at $x$
+
+a direct definition of a Cotangent Space without reference to a Tangent Space
+is formulated in terms of Equivalence Classes of Smooth Functions on $M$:
+informally two Smooth Functions $f$ and $g$ are Equivalent at a Point $x$ if
+they have the same ``\emph{First-order Behavior}'' at $x$, analogous to their
+Linear Taylor Polynomials (\S\ref{sec:taylor_polynomial}), where First-order
+Behavior is defined as Equivalent if and only if the Derivative of the Function
+$f-g$ \emph{vanishes} at $x$ --the Cotangent Space then consists of all the
+possible ``\emph{First-order Behaviors}'' of a Function near $x$
+
+Elements are called \emph{Cotangent Vectors} or \emph{Tangent Covectors}
+
+all Cotangent Spaces on a Connected Manifold have the same Dimension as the
+Manifold itself
+
+a Riemannian Metric or Symplectic Form gives rise to a Natural Isomorphism
+between the Tangent Space and the Cotangent Space at a Point
+
+
+
+\paragraph{Cotangent Bundle}\label{sec:cotangent_bundle}\hfill
+
+Vector Bundle (\S\ref{sec:vector_bundle}) of all the Cotangent Spaces
+(\S\ref{sec:cotangent_space}) at every Point in a Smooth Manifold, forming a
+new Differentiable Manifold with twice the Dimension of the underlying Manifold
 
 
 
@@ -2538,8 +2704,6 @@ cf. Algebraic Varieties (\S\ref{sec:algebraic_variety}) built by ``gluing
 together'' Affine Varities (\S\ref{sec:affine_variety})
 
 
-
-\subsubsection{Atlas}\label{sec:atlas}
 
 \subsubsection{Submanifold}\label{sec:submanifold}
 
