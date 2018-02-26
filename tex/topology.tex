@@ -726,6 +726,22 @@ $f : X \rightarrow Y$
 
 
 
+\subsubsection{Orbit Space}\label{sec:orbit_space}
+
+An \emph{Orbit Space} (or \emph{Space of Covariants}) is the Set of all
+\emph{Orbits} (\S\ref{sec:orbit}) of a Set $X$ under the Action of $G$, denoted
+$X / G$, also called the \emph{Quotient} of the Action
+
+the $n$th Un-ordered Configuration Space (\S\ref{sec:configuration_space}) is
+the Orbit Space of the Group Action of the Symmetric Group
+(\S\ref{sec:symmetric_group}) $S_n$ on the Points of $Conf_n(X)$
+
+
+
+\subsubsection{Lens Space}\label{sec:lens_space}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Configuration Space}\label{sec:configuration_space}
 % --------------------------------------------------------------------
@@ -741,9 +757,12 @@ $X$, $Conf_n(X)$ is the Set of $n$-tuples of pairwise distinct Points in $X$:
 generally given the Subspace Topology from the Inclusion of $Conf_n(X)$ into
 $X^n$
 
-\emph{$n$th (Ordered) Configuration Space}
-
-TODO
+\emph{$n$th Un-ordered Configuration Space}:
+\[
+  UConf_n(X) := Conf_n(X)/S_n
+\]
+is the Orbit Space (\S\ref{sec:orbit_space}) of the Group Action of the
+Symmetric Group (\S\ref{sec:symmetric_group}) $S_n$ on the Points of $Conf_n(X)$
 
 cf. \emph{State Space} in Physics used to describe the \emph{State} of a
 \emph{System} as a single \emph{Point} in a High-dimensional Space: a
@@ -751,6 +770,37 @@ cf. \emph{State Space} in Physics used to describe the \emph{State} of a
 non-colliding particles
 
 (FIXME: what about non-colliding rigid bodies ???)
+
+the Configuration Space (\S\ref{sec:configuration_space}) of Distinct,
+Un-ordered Points of a Manifold is also a Manifold and the Configuration Space
+of \emph{not necessarily distinct} Unordered Points is an Orbifold
+(\S\ref{sec:orbifold})
+
+a Configuration Space is a type of Classifying Space
+(\S\ref{sec:classifying_space}) or (Fine) Moduli Space
+(\S\ref{sec:moduli_space})
+
+the Homotopy Type (\S\ref{sec:homotopy_type}) of Configuration Spaces is not
+Homotopy Invariant, i.e. for any two distinct values of $m$, the Spaces
+$Conf_n(\reals^m)$ are not Homotopy Equivalent-- $Conf_n(\reals)$ is not
+Connected, $Conf_n(\reals^2)$ is an Eilenberg-Maclane Space
+(\S\ref{sec:eilenberg_maclane_space}) of type $K(\pi,1)$ and $Conf_n(\reals^m)$
+is \emph{Simply Connected} for $3 \leq m$
+
+Homotopy Invariance for Configuration Spaces of Simply Connected Closed
+Manifolds remains an open question in general
+
+for any Graph $\Gamma$, $Conf_n(\Gamma)$ is an Eilenberg-Maclane Space of Type
+$K(\pi,1)$ and Strong Deformation Retracts into a Subspace of Dimension
+$b(\Gamma)$ where $b(\Gamma)$ is the number of Vertices of Degree at least 3,
+and $Uconf_n(\Gamma)$ and $Conf_n(\Gamma)$ Deformation Retract to
+Non-positively Curved Cubical Compexes of Dimension at most $min(n,b(\gamma))$
+
+
+
+\subsubsection{Ran Space}\label{sec:ran_space}
+
+Space of all Un-ordered Configuration Spaces
 
 
 
@@ -1757,6 +1807,8 @@ Homeomorphic to Closed $n$-ball $D^n$ (\S\ref{sec:closed_ball})
 
 Homotopy Type Theory (\S\ref{sec:hott})
 
+Eilenberg-MacLane Space (\S\ref{sec:eilenberg_maclane_space})
+
 
 
 % --------------------------------------------------------------------
@@ -1772,6 +1824,9 @@ $H : X \times [0,1] \rightarrow Y$
 \subsubsection{Classifying Space}\label{sec:classifying_space}
 
 Dependent Types (\S\ref{sec:dependent_type})
+
+a Configuration Space (\S\ref{sec:configuration_space}) is a type of
+Classifying Space
 
 
 
@@ -1851,6 +1906,9 @@ $h$-level 3   & $1$-groupoid    & (Groupoid)
 Homotopy Type of a Point is called \emph{Contractible}
 (\S\ref{sec:contractible_space}), by requiring that the Identity Map
 of the Space is Null-homotopic (\S\ref{sec:null_homotopy}).
+
+the Homotopy Type of Configuration Spaces (\S\ref{sec:configuration_space}) is
+not Homotopy Invariant
 
 
 
@@ -2270,6 +2328,29 @@ $n$-th Homotopy Group $\pi_n(X,x_0)$
 
 $I^n$
 
+an \emph{Eilenberg-MacLane Space} (\S\ref{sec:eilenberg_maclane_space}) is a
+Topological Space with a single Nontrivial Homotopy Group
+
+
+
+% --------------------------------------------------------------------
+\section{Eilenberg-MacLane Space}\label{sec:eilenberg_maclane_space}
+% --------------------------------------------------------------------
+
+an \emph{Eilenberg-MacLane Space} is a Topological Space with a single
+Nontrivial Homotopy Group (\S\ref{sec:homotopy_group})
+
+building block for Homotopy Theory (\S\ref{sec:homotopy_theory})
+
+the Configuration Space (\S\ref{sec:configuration_space}) $Conf_n(\reals^2)$
+is an Eilenberg-MacLane Space of Type $K(\pi,1)$
+
+for any Graph $\Gamma$, $Conf_n(\Gamma)$ is an Eilenberg-Maclane Space of Type
+$K(\pi,1)$ and Strong Deformation Retracts into a Subspace of Dimension
+$b(\Gamma)$ where $b(\Gamma)$ is the number of Vertices of Degree at least 3,
+and $Uconf_n(\Gamma)$ and $Conf_n(\Gamma)$ Deformation Retract to
+Non-positively Curved Cubical Compexes of Dimension at most $min(n,b(\gamma))$
+
 
 
 % --------------------------------------------------------------------
@@ -2318,8 +2399,8 @@ Riemann Surface (\S\ref{sec:riemann_surface})
 \section{Topological Manifold}\label{sec:topological_manifold}
 % ====================================================================
 
-a Topological Space (which may also be a Separated Space
-\S\ref{sec:hausdorff_space}) which \emph{Locally} resembles Real
+An \emph{$n$-manifold} is a Topological Space (which may also be a Separated
+Space \S\ref{sec:hausdorff_space}) which \emph{Locally} resembles Real
 $n$-dimensional Space
 
 a Presentation of a Topological Manifold is a Second-countable Hausdorff Space
@@ -2328,6 +2409,12 @@ that is Locally Homeomorphic to a Linear Space by a collection called an
 and a Topological Manifold is such a Space with an Equivalence Class of Atlases
 
 (FIXME: xref)
+
+\fist any Manifold without a Boundary is \emph{trivially} an Orbifold
+(\S\ref{sec:orbifold})
+
+the Configuration Space (\S\ref{sec:configuration_space}) of Distinct,
+Un-ordered Points of a Manifold is also a Manifold
 
 
 
@@ -2635,6 +2722,28 @@ Complex analogue of Riemannian Manifold (\S\ref{sec:riemannian_manifold})
 a K\"ahler Manifold (\S\ref{sec:kahler_manifold}) is a Hermitian
 Manifold with a Closed Hermitian Form called the \emph{K\"ahler
   Metric} %FIXME
+
+
+
+% ====================================================================
+\section{Orbifold}\label{sec:orbifold}
+% ====================================================================
+
+generalization of Manifold--
+instead of being ``Locally Modeled'' (???) on Open Subsets of $\reals^n$, an
+\emph{Orbifold} is Locally Modeled on \emph{Quotients} of Open Subsets of
+$\reals^n$ by \emph{Finite Group Actions}
+
+\begin{itemize}
+  \item any Manifold without a Boundary is \emph{trivially} an Orbifold
+\end{itemize}
+
+a Topological Space called the \emph{Underlying Space} that locally looks like
+the Quotient Space of Euclidean Space under the Linear Action of a Finite Group
+(FIXME: clarify) with an \emph{Orbifold Structure}
+
+the Configuration Space (\S\ref{sec:configuration_space}) of not-necessarily
+distinct Unordered Points of a Manifold is an Orbifold
 
 
 
