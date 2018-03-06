@@ -61,17 +61,48 @@ Multilinear Algebra (\S\ref{sec:multilinear_algebra}):
 \subsection{Linear Map}\label{sec:linear_map}
 % --------------------------------------------------------------------
 
-(or \emph{Linear Transformation}) is a Module Homomorphism
+A \emph{Linear Map} (or \emph{Linear Transformation}) is a Module Homomorphism
 (\S\ref{sec:module}) $V \rightarrow W$ preserving Addition and Scalar
 Multiplication.
 
-Linear Maps are Morphisms in the Category of Modules over a given Ring
-(\S\ref{sec:ring})
+Any Linear Map $A : V \rightarrow W$ from an $n$-dimensional Vector Space $V$
+to an $m$-dimensional Vector Space $W$ can be represented by an $m \times n$
+Matrix of Rank $r$ sending Column Vector $\vec{v} \in V$ to the Column Vector
+$A\vec{v} \in W$. Each such Linear Transformation induces Four Fundamental
+Subspaces (\S\ref{sec:fundamental_subspace}):
+\begin{enumerate}
+  \item $im(A) \subset W$ -- the \emph{Image} of $A$ is the \emph{Column Space}
+    (\S\ref{sec:column_space}) of Dimension $r$
+  \item $coim(A) \subset V$ -- the \emph{Coimage} of $A$ is the \emph{Row Space}
+    (\S\ref{sec:row_space}) of Dimension $r$
+  \item $ker(A) \subset V$ -- the \emph{Kernel} of $A$ is the \emph{Nullspace}
+    (\S\ref{sec:nullspace}) of Dimension $n - r$ (Nullity) %FIXME clarify
+  \item $coker(A) \subset W$ -- the \emph{Cokernel} of $A$ is the \emph{Left
+    Nullspace} (\S\ref{sec:left_nullspace}) of Dimension $m - r$ (Corank)
+    %FIXME clarify
+\end{enumerate}
+such that:
+\begin{enumerate}
+  \item $ker(A) = coim(A)^\bot$ -- the Nullspace is the Orthogonal Complement
+    (\S\ref{sec:orthogonal_complement}) of the Row Space
+  \item $coker(A) = im(A)^\bot$ -- the Left Nullspace is the Orthogonal
+    Complement of the Column Space
+\end{enumerate}
 
-a Linear Map between Topological Vector Spaces
+Linear Maps are Morphisms in the Category of Modules over a given Ring
+(\S\ref{sec:ring}).
+
+A \emph{Linear Operator} (\S\ref{sec:linear_operator}) is an Endomorphic Linear
+Map (i.e. the Domain and Codomain are the same Module).
+
+A Linear Map between Topological Vector Spaces
 (\S\ref{sec:topological_vector}) can be Continuous
 (\S\ref{sec:continuous}) and if the Domain and Codomain are the same
-it is a Continuous Linear Operator (\S\ref{sec:continuous_linear})
+it is a \emph{Continuous Linear Operator} (\S\ref{sec:continuous_linear}).
+
+A \emph{Linear Functional} (or \emph{Linear Form} \S\ref{sec:linear_form}) is a
+Linear Map from a Vector Space $V$ to its Field of Scalars $K$ (viewed as a
+Vector Space over itself).
 
 (Fong16):
 
@@ -90,9 +121,64 @@ Spaces and Linear Relations $\cat{LinRel}$
 A \emph{Linear Operator} is an Endomorphic Linear Map, i.e. a Linear
 Map from a Module to itself $V \rightarrow V$
 
+there is a correspondence between $n\times{n}$ Square Matrices
+(\S\ref{sec:square_matrix}) and Linear Operators on an $n$-dimensional Vector
+Space
 
 
-\subsubsection{Continuous Linear Operator}\label{sec:continuous_linear}
+
+\paragraph{Linear Projection}\label{sec:projection}\hfill
+
+A \emph{Linear Projection} $P$ is an Idempotent Linear Operator, i.e. $P^2 = P$.
+
+
+
+\subparagraph{Orthogonal Projection}\label{sec:orthogonal_projection}\hfill
+
+An \emph{Orthogonal Projection} on a Hilbert Space (\S\ref{sec:hilbert_space})
+$W$ is a Projection for which the Range (Column Space \S\ref{sec:column_space})
+$U$ and the Nullspace (\S\ref{sec:nullspace}) $V$ are \emph{Orthogonal
+  Subspaces} (\S\ref{sec:orthogonal_subspace}), i.e. every Vector in $U$ is
+Orthogonal (\S\ref{sec:orthogonality}) to every Vector in $V$:
+\[
+  Px \bot y - Py
+\]
+
+A Projection is Orthogonal if and only if it is Self-adjoint
+(\S\ref{sec:self_adjoint_operator}).
+
+an Orthogonal Projection is a Bounded Linear Operator
+(\S\ref{sec:bounded_linear_operator})
+
+
+
+\paragraph{Adjoint Operator}\label{sec:adjoint_operator}\hfill
+
+The \emph{Adjoint Operator} (or \emph{Hermitian Adjoint}) of a
+Linear Operator $A : H_1 \rightarrow H_2$ between Hilbert Spaces
+(\S\ref{sec:hilbert_space}) is the Linear Operator $A^\dag : H_2 \rightarrow
+H_1$ satisfying:
+\[
+  \langle{Ah_1,Ah_2}\rangle_{H_2} = \langle{h_1,A^{\dag}h_2}\rangle_{H_1}
+\]
+where $\langle\cdot,\cdot\rangle_{H_i}$ is the Inner Product Space in Hilbert
+Space $H_i$.
+
+%FIXME: not required to be an endomorphism (operator) ???
+
+
+
+\subparagraph{Self-adjoint Operator}\label{sec:self_adjoint_operator}\hfill
+
+A Linear Operator $A$ on a Hilbert Space (\S\ref{sec:hilbert_space}) is
+\emph{Self-adjoint} if it is equal to its Hermitian Adjoint.
+
+A Projection is Orthogonal (\S\ref{sec:orthogonal_projection}) if and only if
+it is Self-adjoint.
+
+
+
+\paragraph{Continuous Linear Operator}\label{sec:continuous_linear}\hfill
 
 A \emph{Continuous Linear Operator} is a Continuous
 (\S\ref{sec:continuous_map}) Linear Operator between Topological
@@ -104,7 +190,6 @@ of Continuous Linear Operators on a Complex Hilbert Space
 Topologically Closed in the Norm Topology of Operators and Closed
 under the Operation of taking Adjoints of Operators
 
-
 (wiki):
 
 a Linear Operator on a Normed Vector Space
@@ -115,23 +200,13 @@ Finite-dimensional Space is Continuous
 
 
 
-\subsubsection{Projection}\label{sec:projection}
-
-a Linear Transformation $P$ from a Vector Space to itself such that $P^2 = P$,
-i.e. it is Idempotent
-
-
-
-\paragraph{Orthogonal Projection}\label{sec:orthogonal_projection}\hfill
-
-
-
 \subsubsection{Linear Form}\label{sec:linear_form}
 
-(or \emph{Linear Functional}) is a Linear Map from a Vector Space to its Field
-of Scalars
+A \emph{Linear Form} (or \emph{Linear Functional} or \emph{Covector}) is a
+Linear Map from a Vector Space to its Field of Scalars viewed as a Vector Space
+over itself.
 
-for a Vector Space $V$ over a Field $k$, a Linear Functional $f$ is a Function
+For a Vector Space $V$ over a Field $k$, a Linear Functional $f$ is a Function
 from $V$ to $k$ that is \emph{Linear}:
 \begin{itemize}
 \item $f(\vec{v} + \vec{w}) = f(\vec{v}) + f(\vec{w})$ for all $\vec{v},
@@ -139,13 +214,16 @@ from $V$ to $k$ that is \emph{Linear}:
 \item $f(a\vec{v} = af(\vec{v}$ for all $\vec{v} \in V, a \in k$
 \end{itemize}
 
-the action of a Linear Functional on a Vector is given by the Dot Product
+The action of a Linear Functional on a Vector is given by the Dot Product
 (\S\ref{sec:inner_product}), or the Matrix Product with a Row Vector on the
-Left and a Column Vector on the right
+Left and a Column Vector on the right.
 
-the \emph{(Algebraic) Dual Space} (\S\ref{sec:dual_space}) of a Vector Space
-$V$ is the Set of all Linear Forms on a $V$ together with the Vector Space
-structure of Pointwise Addition and Multiplication by Constants
+The \emph{(Algebraic) Dual Space} (\S\ref{sec:dual_space}) of a Vector Space
+$V$ is the Set of all Linear Forms on $V$ together with the Vector Space
+structure of Pointwise Addition and Multiplication by Constants.
+
+A \emph{Bilinear Form} (\S\ref{sec:bilinear_form}) is a Bilinear Map $V \times
+V \rightarrow K$ (i.e. Linear in each argument separately).
 
 Distribution (\S\ref{sec:distribution})
 
@@ -154,8 +232,6 @@ Distribution (\S\ref{sec:distribution})
 \subsubsection{Semilinear Map}\label{sec:semilinear_map}
 
 (or \emph{Semilinear Transformation})
-
-Sesquilinear Form (\S\ref{sec:sesquilinear_form})
 
 generalizes the class of Antilinear Maps (\S\ref{sec:antilinear_map})
 
@@ -176,6 +252,11 @@ for all Complex Numbers $a,b \in \comps$ with Complex Conjugates $\bar{a},
 may be equivalently described in terms of the Linear Map $\bar{f} : V
 \rightarrow \bar{W}$ from $V$ to the Complex Conjugate Vector Space $\bar{W}$
 
+A Sesquilinear Form (\S\ref{sec:sesquilinear_form}) is a Bilinear Form where
+the Codomain $K$ is the Field of Complex Numbers and the mapping is Antilinear
+in one argument.
+
+
 Quantum mechanics: Time Reversal
 
 Spinor Calculus
@@ -192,15 +273,25 @@ $\cat{Hilb}$
 
 \subsubsection{Eigenvector}\label{sec:eigenvector}
 
-or \emph{Characteristic Vector} of a Linear Transformation is a Non-zero Vector
-whose Direction does not change when the Linear Transformation is applied to it
+An \emph{Eigenvector} or \emph{Characteristic Vector} of a Linear
+Transformation is a Non-zero Vector whose Direction does not change when the
+Linear Transformation is applied to it:
+\[
+  A\vec{v} = \lambda\vec{v}
+\]
+where $\lambda$ is the \emph{Eigenvalue} corresponding to $\vec{v}$.
+
+An \emph{Eigendecomposition} (\S\ref{sec:eigendecomposition}) of a Matrix is a
+Factorization of the Matrix in terms of its Eigenvalues and Eigenvectors and
+only Diagonlizable Matrices (\S\ref{sec:diagonalizable_matrix}) can be Factored
+in this way.
 
 
 
 \paragraph{Eigenvalue}\label{sec:eigenvalue}\hfill
 
 The \emph{Eigenvalue} (or \emph{Characteristic Value} or \emph{Characteristic
-  Root}) of an Eigenvector $\vec{v}$ with respect to a Linear Map $T$, is a
+  Root}) of an Eigenvector $\vec{v}$ with respect to a Linear Operator $T$, is a
 Scalar $\lambda$ such that:
 \[
   T(\vec{v}) = \lambda\vec{v}
@@ -313,6 +404,8 @@ Field used to define a Vector Space
 Vector (1st-order Tensor \S\ref{sec:vector}) is an Element of a Vector
 Space
 
+Functional Analysis: Sequence Space (\S\ref{sec:sequence_space})
+
 
 
 % --------------------------------------------------------------------
@@ -320,11 +413,71 @@ Space
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Basis}\label{sec:basis}
+\subsection{Fundamental Theorem of Linear Algebra}
+\label{sec:fundamental_linear_algebra_theorem}
 % --------------------------------------------------------------------
 
-\subsubsection{Covariant Transformation}
-\label{sec:covariant_transformation}
+1993 - Strang - \emph{The Fundamental Theorem of Linear Algebra}
+
+An $m \times n$ Matrix $A$ of Rank (\S\ref{sec:rank}) $r$ with Singular
+Value Decomposition (\S\ref{sec:svd}):
+\[
+  A = U \Sigma V^*
+\]
+induces \emph{Four Fundamental Subspaces} (\S\ref{sec:fundamental_subspace}):
+\begin{itemize}
+  \item \emph{Column Space} (\S\ref{sec:column_space}) -- the \emph{Image},
+    $im(A)$, of Dimension $r$ (Rank \S\ref{sec:rank})
+  \item \emph{Row Space} (\S\ref{sec:row_space}) -- the \emph{Coimage},
+    $coim(A)$, of Dimension $r$ (Rank)
+  \item \emph{Nullspace} (\S\ref{sec:nullspace}) -- the \emph{Kernel},
+    $ker(A)$, of Dimension $n - r$ (Nullity \S\ref{sec:nullity})
+  \item \emph{Left Nullspace} (\S\ref{sec:left_nullspace}) -- the
+    \emph{Cokernel}, $coker(A)$, of Dimension $m - r$ (Corank
+    \S\ref{sec:corank})
+\end{itemize}
+such that:
+\begin{enumerate}
+  \item $ker(A) = coim(A)^\bot$ -- the Nullspace is the Orthogonal Complement
+    (\S\ref{sec:orthogonal_complement}) of the Row Space
+  \item $coker(A) = im(A)^\bot$ -- the Left Nullspace is the Orthogonal
+    Complement of the Column Space
+\end{enumerate}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Linear Span}\label{sec:linear_span}
+% --------------------------------------------------------------------
+
+The \emph{Linear Span} (or \emph{Linear Hull} or \emph{Span}) of a Set of
+Vectors in a Vector Space is the Intersection of all Linear Subspaces
+(\S\ref{sec:linear_subspace}) containing that Set.
+
+A \emph{Basis} (\S\ref{sec:basis}) of a Vector Space is a Linearly Independent
+Spanning Set.
+
+The \emph{Rank} (\S\ref{sec:rank}) of a Matrix is the Dimension of the Vector
+Space Spanned by its Columns, i.e. the maximal number of Linearly Independent
+Columns of the Matrix.
+
+generalized to Matroids (\S\ref{sec:matroid}) and Modules (\S\ref{sec:module})
+%FIXME explain
+
+Closed Linear Span (\S\ref{sec:closed_linear_span})
+
+
+
+\subsubsection{Basis}\label{sec:basis}
+
+A Set of Vectors in a Vector Space is a \emph{Basis} if the Vectors are
+\emph{Linearly Independent} and therefore every Vector in the Vector Space is a
+Linear Combination of the Set, that is, a \emph{Linearly Independent Spanning
+  Set} (\S\ref{sec:linear_span}).
+
+
+
+\paragraph{Covariant Transformation}\label{sec:covariant_transformation}\hfill
 
 Coordinate-free (\S\ref{sec:coordinate_free})
 
@@ -338,15 +491,48 @@ precise Transformation Law determines the Valence
 
 
 % --------------------------------------------------------------------
-\subsection{Linear Span}\label{sec:linear_span}
+\subsection{Linear Subspace}\label{sec:linear_subspace}
 % --------------------------------------------------------------------
 
-(or \emph{Linear Hull} or \emph{Span})
+A \emph{Linear Subspace} (or \emph{Vector Subspace}) is a Subset of a Vector
+Space that is Closed under Addition and Scalar Multiplication. For Field $K$
+and $V$ a Vector Space over $K$, a Subset $W \subset K$ is a \emph{Subspace} of
+$V$ if:
+\begin{enumerate}
+  \item $\vec{0} \in W$ -- the Zero Vector is in $W$
+  \item $\vec{u}, \vec{v} \in W \Rightarrow \vec{u} + \vec{v} \in W$
+    -- $W$ is Closed under Vector Addition
+  \item $c\vec{u} \in W \forall c \in K \vec{u} \in W$
+    -- $W$ is Closed under Scalar Multiplication
+\end{enumerate}
 
-Intersection of all Subspaces containing Set of Vectors in a Vector
-Space
+\fist Fundamental Subspaces (\S\ref{sec:fundamental_subspace})
 
-Closed Linear Span (\S\ref{sec:closed_linear_span})
+
+
+\subsubsection{Orthogonal Subspace}\label{sec:orthogonal_subspace}
+
+Two Linear Subspaces $A, B \subset V$ of an Inner Product Space $V$ are called
+\emph{Orthogonal Subspaces} if each Vector in $A$ is Orthogonal to each Vector
+in $B$.
+
+The largest Subspace of $V$ that is Orthogonal to a given Subspace is its
+Orthogonal Complement (\S\ref{sec:orthogonal_complement}).
+
+An Orthogonal Projection (\S\ref{sec:orthogonal_projection}) on a Hilbert Space
+(\S\ref{sec:hilbert_space}) $W$ is a Projection for which the Range (Column
+Space \S\ref{sec:column_space}) $U$ and the Nullspace (\S\ref{sec:nullspace})
+$V$ are Orthogonal Subspaces.
+
+
+
+\paragraph{Orthogonal Complement}\label{sec:orthogonal_complement}\hfill
+
+The \emph{Orthogonal Complement} of a Linear Subspace $W \subset V$ with a
+Bilinear Form (\S\ref{sec:bilinear_form}) $B$ is the Set $W^\bot$ of all
+Vectors in $V$ that are Orthogonal to every Vector in $W$ and is itself a
+Linear Subspace of $V$. The Orthogonal Complement of $W$ is the largest
+Subspace of $V$ that is Orthogonal to $W$.
 
 
 
@@ -395,6 +581,12 @@ cf. Tensor Field (\S\ref{sec:tensor_field})
 \subsection{Normed Vector Space}\label{sec:normed_vectorspace}
 % --------------------------------------------------------------------
 
+any Normed Vector Space is a Metric Space (\S\ref{sec:metric_space}) by
+defining $d(x,y) = \|y-x\|$
+
+a Complete (\S\ref{sec:complete_metric_space}) Normed Vector Space is a Banach
+Space (\S\ref{sec:banach_space})
+
 Bounded Linear Operator (\S\ref{sec:bounded_linear_operator})
 
 Functional Analysis (\S\ref{sec:functional_analysis})
@@ -441,10 +633,15 @@ Functional Analysis (\S\ref{sec:functional_analysis})
 associates each pair of Vectors in a Vector Space with a Scalar known
 as the \emph{Inner Product} of the Vectors
 
+in Euclidean Spaces the Inner Product is the Dot Product (aka Scalar Product)
+
 an Inner Product on a Real Vector Space is a Positive-definite
 (\S\ref{sec:definite_quadratic}) Symmetric Bilinear Form
 (\S\ref{sec:symmetric_bilinear}) and a Positive-definite Hermitian
 Form (\S\ref{sec:hermitian_form})
+
+A \emph{Hilbert Space} (\S\ref{sec:hilbert_space}) is an Inner Product Space
+that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
 
 Induces a Norm (\S\ref{sec:norm})
 
@@ -452,8 +649,8 @@ Induces a Norm (\S\ref{sec:norm})
 
 \subsubsection{Hilbert Space}\label{sec:hilbert_space}
 
-Complete Metric Space (\S\ref{sec:complete_metric_space}) with an
-Inner Product (\S\ref{sec:inner_product})
+A \emph{Hilbert Space} is an Inner Product Space (\S\ref{sec:inner_product})
+that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
 
 Functional Analysis (\S\ref{sec:functional_analysis}): can be defined
 as a Banach Space (\S\ref{sec:banach_space})
@@ -465,6 +662,11 @@ Hermitian Adjoint (\S\ref{sec:hermitian_adjoint})
 $\cat{Hilb}$
 
 $\cat{FdHilb}$
+
+An Orthogonal Projection (\S\ref{sec:orthogonal_projection}) on a Hilbert Space
+$W$ is a Projection for which the Range (Column Space \S\ref{sec:column_space})
+$U$ and the Nullspace (\S\ref{sec:nullspace}) $V$ are Orthogonal Subspaces
+(\S\ref{sec:orthogonal_subspace}).
 
 
 
@@ -836,11 +1038,91 @@ $2$-vector
 \section{Matrix Theory}\label{sec:matrix_theory}
 % ====================================================================
 
-a \emph{Matrix} represents a \emph{Linear Map}
-(\S\ref{sec:linear_map}) between two Vector Spaces
-(\S\ref{sec:vector_space})
+A \emph{Matrix} represents a \emph{Linear Map} (\S\ref{sec:linear_map}) between
+two Vector Spaces (\S\ref{sec:vector_space}). Any Linear Map between
+Finite-dimensional Vector Spaces $A : V \rightarrow W$ where $V$ has Dimension
+$n$ and $W$ has Dimension $m$ can be represented as an $m \times n$ Matrix
+sending the Column Vector $\vec{v} \in V$ to the Column Vector $A\vec{v} \in
+W$.
 
-\fist Matrix (Abstract Algebra \S\ref{sec:matrix})
+\fist Matrix (Second-order Tensor \S\ref{sec:matrix})
+
+\emph{Column Vector}
+
+\emph{Row Vector}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Fundamental Subspace}\label{sec:fundamental_subspace}
+% --------------------------------------------------------------------
+
+\fist Fundamental Theorem of Linear Algebra
+(\S\ref{sec:fundamental_linear_algebra_theorem})
+
+
+
+\subsubsection{Column Space}\label{sec:column_space}
+
+\emph{Image}
+
+
+
+\subsubsection{Row Space}\label{sec:row_space}
+
+\emph{Coimage}
+
+
+
+\subsubsection{Nullspace}\label{sec:nullspace}
+
+The \emph{Nullspace} of a Linear Map $L : V \rightarrow W$ between Vector
+Spaces $V$ and $W$ is the Set of all $\vec{v}\in{V}$ such that $L(\vec{v}) =
+\vec{0}$ where $\vec{0}$ is the Zero Vector in $W$:
+\[
+  \text{ker}(L) = \{\vec{v}\in{V} \;|\; L(\vec{v}) = \vec{0}\}
+\]
+
+The Kernel of $L$ is a Linear Subspace of the Domain $V$.
+
+
+
+\subsubsection{Left Nullspace}\label{sec:left_nullspace}
+
+or \emph{Cokernel}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Rank}\label{sec:rank}
+% --------------------------------------------------------------------
+
+The \emph{Rank} of a Matrix $A$ is the Dimension of the Vector Space
+``generated'' or \emph{Spanned} (\S\ref{sec:linear_span}) by its Columns, that
+is, equal to the maximal number of Linearly Independent Columns of $A$ and is
+identical to the Dimension of the Space Spanned by its Rows.
+
+Dimension of the Column Space (\S\ref{sec:column_space}) and the Row Space
+(\S\ref{sec:row_space})
+
+\emph{Rank-Nullity Theorem}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Nullity}\label{sec:nullity}
+% --------------------------------------------------------------------
+
+Dimension of the Nullspace (\S\ref{sec:nullspace})
+
+\emph{Rank-Nullity Theorem}
+
+
+% --------------------------------------------------------------------
+\subsection{Corank}\label{sec:corank}
+% --------------------------------------------------------------------
+
+Dimension of the Left Nullspace (\S\ref{sec:left_nullspace})
 
 
 
@@ -863,11 +1145,83 @@ corresponding row of $A$ on the right by the Matrix $B$.
 
 
 % --------------------------------------------------------------------
+\subsection{Matrix Decomposition}\label{sec:matrix_decomposition}
+% --------------------------------------------------------------------
+
+Factorization of a Matrix into a Product of Matrices
+
+
+
+\subsubsection{Eigendecomposition}\label{sec:eigendecomposition}
+
+or \emph{Spectral Decomposition}
+
+Factorization of a Matrix where the Matrix is represented in terms of its
+Eigenvalues and Eigenvectors (\S\ref{sec:eigenvector})
+
+only Diagonalizable Matrices (\S\ref{sec:diagonlizable_matrix}) can be
+Factorized in this way
+
+
+
+\subsubsection{Polar Decomposition}\label{sec:polar_decomposition}
+
+The \emph{Polar Decomposition} of a Square Matrix $A$ is a Matrix Decomposition
+of the form:
+\[
+  A = U P
+\]
+where $U$ is a Unitary Matrix (\S\ref{sec:unitary_matrix}) and $P$ is a
+Positive-semidefinite (\S\ref{sec:positive_definite}) Hermitian
+(\S\ref{sec:hermitian_matrix}) Matrix
+
+
+
+\subsubsection{Singular-value Decomposition}\label{sec:svd}
+
+(SVD)
+
+Factoriztion of a Real or Complex Matrix generalizing the Eigendecomposition
+(\S\ref{sec:eigendecomposition}) of a Positive Semidefinite
+(\S\ref{sec:positive_definite}) Normal (\S\ref{sec:normal_matrix}) Matrix (e.g.
+a Symmetric Matrix with Positive Eigenvalues) to any $m \times n$ Matrix via an
+extension of the Polar Decomposition (\S\ref{sec:polar_decomposition})
+
+The Singular-value Decomposition of an $m \times n$ Real or Complex Matrix $M$
+is a Factorization of the form:
+\[
+  U \Sigma V^*
+\]
+where $U$ is an $m \times m$ Real or Complex Unitary Matrix
+(\S\ref{sec:unitary_matrix}) of \emph{Left-singular Vectors}, $\Sigma$ is an $m
+\times n$ Rectangular Diagonal Matrix (\S\ref{sec:diagonal_matrix}) with
+Non-negative Real Numbers known as the \emph{Singular Values} of $M$ on the
+Diagonal, and $V$ is an $n \times n$ Real or Complex Unitary Matrix of
+\emph{Right-singular Vectors}.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Diagonal Matrix}\label{sec:diagonal_matrix}
+% --------------------------------------------------------------------
+
+A Matrix with $0$ values in all non-diagonal entries
+
+a Diagonalizable Matrix is a Square Matrix $A$ for which there exists an
+Invertible Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
+
+\begin{itemize}
+  \item Identity Matrices (\S\ref{sec:identity_matrix})
+\end{itemize}
+
+
+
+% --------------------------------------------------------------------
 \subsection{Square Matrix}\label{sec:square_matrix}
 % --------------------------------------------------------------------
 
-a Square Jacobian Matrix (\S\ref{sec:jacobian_matrix}) and its Determinant
-(\S\ref{sec:determinant}) are both called ``the Jacobian''
+there is a correspondence between $n\times{n}$ Square Matrices and Linear
+Operators (\S\ref{sec:linear_operator}) on an $n$-dimensional Vector Space
 
 a Square Matrix is Invertible (\S\ref{sec:invertible_matrix}) if and only if
 its Determinant (\S\ref{sec:determinant}) is $0$
@@ -875,6 +1229,41 @@ its Determinant (\S\ref{sec:determinant}) is $0$
 the Product of all Non-zero Eigenvalues (\S\ref{sec:eigenvalue}) of a Square
 Matrix is the Pseudo-determinant (\S\ref{sec:pseudo_determinant}) and coincides
 with the Determinant when the Matrix is Invertible
+
+a Square Jacobian Matrix (\S\ref{sec:jacobian_matrix}) and its Determinant
+(\S\ref{sec:determinant}) are both called ``the Jacobian''
+
+
+
+\subsubsection{Determinant}\label{sec:determinant}
+
+A Square Matrix is Invertible (\S\ref{sec:invertible_matrix}) if and only if
+its Determinant is non-zero, or equivalently if its Rank (\S\ref{sec:rank})
+equals the size of the Matrix, and if it is Invertible the Determinant of the
+Inverse Matrix is given by $det(A^{-1}) = \frac{1}{det(A)}$.
+
+The Special Linear Group $SL(n,F)$ of Degree $n$ over a Field $F$ is the Set of
+$n \times n$ Matrices with Determinant $1$ with the Group Operations of
+ordinary Matrix Multiplication and Matrix Inversion.
+
+The Determinant of a Square Jacobian Matrix and the Matrix itself are both
+called ``the Jacobian''.
+
+
+
+\paragraph{Pseudo-determinant}\label{sec:pseudo_determinant}\hfill
+
+Product of all Non-zero Eigenvalues (\S\ref{sec:eigenvalue}) of a Square Matrix
+
+coincides with the regular Determinant when the Matrix is Non-singular
+(Invertible \S\ref{sec:invertible_matrix})
+
+
+
+\subsubsection{Identity Matrix}\label{sec:identity_matrix}
+
+A Square Diagonal Matrix (\S\ref{sec:diagonal_matrix}) with $1$ on the main
+diagonal
 
 
 
@@ -885,13 +1274,8 @@ $1$ in each Row and each Column and $0$s elsewhere.
 
 
 
-% --------------------------------------------------------------------
-\subsection{Upper Triangular Matrix}\label{sec:upper_triangular}
-% --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Invertible Matrix}\label{sec:invertible_matrix}
-% --------------------------------------------------------------------
+\subsubsection{Invertible Matrix}\label{sec:invertible_matrix}
 
 (or \emph{Non-singular} or \emph{Non-degenerate})
 
@@ -901,26 +1285,120 @@ a Square Matrix is Invertible if and only if its Determinant
 the Pseudo-determinant (\S\ref{sec:pseudo_determinant}) of a Square Matrix
 coincides with the Determinant when the Matrix is Invertible
 
+a Square Matrix $A$ is Diagonalizable (\S\ref{sec:diagonalizable}) if there
+exists an Invertible Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
+(\S\ref{sec:diagonal_matrix})
+
+
+
+\subsubsection{Diagonalizable Matrix}\label{sec:diagonalizable_matrix}
+
+A Square Matrix $A$ is \emph{Diagonalizable} if there exists an Invertible
+Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
+(\S\ref{sec:diagonal_matrix}).
+
+A Square Matrix that is \emph{not} Diagonalizable is called \emph{Defective}.
+
+Only Diagonlizable Matrices can be Eigendecomposed
+(\S\ref{sec:eigendecomposition}).
+
+
+
+\subsubsection{Symmetric Matrix}\label{sec:symmetric_matrix}
+
+A \emph{Symmetric Matrix} $A$ is a Square Matrix that is equal to its
+Transpose:
+\[
+  A = A^T
+\]
+
+the Complex extension of a Symmetric Matrix is a \emph{Hermitian Matrix}
+(\S\ref{sec:hermitian_matrix})
+
+Positive-definite Matrix (\S\ref{sec:positive_definite})
+
+
+
+\subsubsection{Skew-symmetric Matrix}\label{sec:skew_symmetric}
+
+\subsubsection{Hamiltonian Matrix}\label{sec:hamiltonian_matrix}
+
 
 
 % --------------------------------------------------------------------
-\subsection{Determinant}\label{sec:determinant}
+\subsection{Upper Triangular Matrix}\label{sec:upper_triangular}
 % --------------------------------------------------------------------
 
-the Determinant of a Square Jacobian Matrix and the Matrix itself are both
-called ``the Jacobian''
+% --------------------------------------------------------------------
+\subsection{Diagonally Dominant Matrix}\label{sec:diagonally_dominant}
+% --------------------------------------------------------------------
 
-a Square Matrix is Invertible (\S\ref{sec:invertible_matrix}) if and only if
-its Determinant is $0$
+% --------------------------------------------------------------------
+\subsection{Irreducible Matrix}\label{sec:irreducible_matrix}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Complex Matrix}\label{sec:complex_matrix}
+% --------------------------------------------------------------------
+
+\subsubsection{Conjugate Transpose}\label{sec:conjugate_transpose}
+
+The \emph{Conjugate Transpose} (or \emph{Hermitian Transpose}) of an $m \times
+n$ Complex Matrix $A$ is the $n \times m$ Matrix $A^*$ resulting from the
+Transpose (\S\ref{sec:transpose}) of $A$ followed by taking the Complex
+Conjugate (\S\ref{sec:complex_conjugate}) of each entry.
 
 
 
-\subsubsection{Pseudo-determinant}\label{sec:pseudo_determinant}
+\subsubsection{Normal Matrix}\label{sec:normal_matrix}
 
-Product of all Non-zero Eigenvalues (\S\ref{sec:eigenvalue}) of a Square Matrix
+\subsubsection{Unitary Matrix}\label{sec:unitary_matrix}
 
-coincides with the regular Determinant when the Matrix is Non-singular
-(Invertible \S\ref{sec:invertible_matrix})
+A \emph{Unitary Matrix} $U$ has the Property that:
+\[
+  U^*U = UU^* = I
+\]
+where $U^* = \overline{U^T}$ is the Conjugate Transpose
+(\S\ref{sec:conjugate_transpose}) of $U$
+
+\fist Special Unitary Group (\S\ref{sec:special_unitary})
+$\mathrm{SU}(n)$: the Lie Group of $n \times n$ Unitary Matrices with
+Determinant $1$
+
+only a Unitary Matrix can be used as a Quantum Gate in Quantum Computation
+
+Polar Decomposition (\S\ref{sec:polar_decomposition})
+
+
+
+\subsubsection{Hermitian Matrix}\label{sec:hermitian_matrix}
+
+or \emph{Self-adjoint Matrix}
+
+a Complex Square Matrix that is equal to its own Conjugate Transpose
+
+Complex extension of Real Symmetric Matrices (\S\ref{sec:symmetric_matrix})
+
+Positive-definite Matrix (\S\ref{sec:positive_definite})
+
+Polar Decomposition (\S\ref{sec:polar_decomposition})
+
+
+
+\subsubsection{Skew Hermitian Matrix}\label{sec:skew_hermitian}
+
+or \emph{Antihermitian}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Positive-definite Matrix}\label{sec:positive_definite}
+% --------------------------------------------------------------------
+
+a Property of Symmetric (\S\ref{sec:symmetric_matrix}) and Hermitian
+(\S\ref{sec:hermitian_matrix}) Matrices
+
+Positive Semi-definite
 
 
 
@@ -990,7 +1468,29 @@ Bilinear Product (\S\ref{sec:bilinear_product})
 
 \subsubsection{Bilinear Form}\label{sec:bilinear_form}
 
-Inner Product (\S\ref{sec:inner_product})
+generalization of Dot Product (\S\ref{sec:inner_product}) of Euclidean Space
+
+Sesquilinear Form (\S\ref{sec:sesquilinear_form}) generalization of Bilinear
+Forms to cases where $K$ is the Field of Complex Numbers and the mapping is
+Antilinear (Conjugate-linear \S\ref{sec:antilinear}) in one argument.
+
+
+
+\paragraph{Orthogonality}\label{sec:orthogonality}\hfill
+
+Two Vectors $\vec{u}, \vec{v}$ in a Vector Space with Bilinear Form $B$
+are are \emph{Orthogonal} when $B(u,v) = 0$, denoted:
+\[
+  \vec{u} \bot \vec{v}
+\]
+The Zero Vector, $\vec{0}$, is Orthogonal to every Vector (including itself).
+
+Two Linear Subspaces (\S\ref{sec:linear_subspace}) $A, B \subset V$ of an Inner
+Product Space $V$ are called \emph{Orthogonal Subspaces}
+(\S\ref{sec:orthogonal_subspace}) if each Vector in $A$ is Orthogonal to each
+Vector in $B$.
+
+
 
 
 
@@ -1047,7 +1547,9 @@ a Positive-definite Symmetric Bilinear
 
 \subsubsection{Sesquilinear Form}\label{sec:sesquilinear_form}
 
-Semilinear Map (\S\ref{sec:semilinear_map})
+generalization of Bilinear Forms (\S\ref{sec:bilinear_form}) to cases where $K$
+is the Field of Complex Numbers and the mapping is Antilinear (Conjugate-linear
+\S\ref{sec:antilinear}) in one argument
 
 
 
@@ -1257,6 +1759,25 @@ Exterior Algebra (\S\ref{sec:exterior_algebra})
 \subsubsection{Stationary Iterative Method}
 \label{sec:stationary_iterative}
 
+or \emph{Relaxation Methods}
+
+used to solve the Linear Equations resulting from a Discretization of the
+Differential Equation, e.g. by Finite Differences
+
+
+
+\paragraph{Jacobi Method}\label{sec:jacobi_method}\hfill
+
+Diagonally Dominant (\S\ref{sec:diagonally_dominant}) System of Linear
+Equations (\S\ref{sec:system_of_linear_equations})
+
+
+
+\subparagraph{Projected Jacobi Method}
+\label{sec:projected_jacobi_method}
+
+
+
 \paragraph{Gauss-Seidel Method}\label{sec:gauss_seidel}\hfill
 
 (or \emph{Liebmann Method} or \emph{Method of Successive
@@ -1270,6 +1791,9 @@ Dominant (\S\ref{sec:diagonally_dominant}) or Symmetric
 (\S\ref{sec:symmetric_matrix}) and Positive Definite
 (\S\ref{sec:positive_definite})
 
+Gauss-Seidel is the same as Successive Over-Relaxation
+(\S\ref{sec:sucessive_over_relaxation}) with $\omega = 1$
+
 
 
 \subparagraph{Projected Gauss-Seidel Method}\hfill
@@ -1278,22 +1802,23 @@ Dominant (\S\ref{sec:diagonally_dominant}) or Symmetric
 Gauss-Seidel applied to Linear Complementarity Problem (LCP
 \S\ref{sec:linear_complementarity})
 
+PGS
+
 
 
 \subparagraph{Non-linear Gauss-Seidel Method}
 \label{sec:nonlinear_gauss_seidel}
 
-
-
-\paragraph{Jacobi Method}\label{sec:jacobi_method}\hfill
-
-Diagonally Dominant (\S\ref{sec:diagonally_dominant}) System of Linear
-Equations (\S\ref{sec:system_of_linear_equations})
+NGS
 
 
 
-\subparagraph{Projected Jacobi Method}
-\label{sec:projected_jacobi_method}
+\paragraph{Successive Over-Relaxation Method}
+\label{sec:successive_over_relaxation}\hfill
+
+SOR
+
+Gauss-Seidel (\S\ref{sec:gauss_seidel}) is the same as SOR with $\omega = 1$
 
 
 
