@@ -581,21 +581,41 @@ cf. Tensor Field (\S\ref{sec:tensor_field})
 \subsection{Normed Vector Space}\label{sec:normed_vectorspace}
 % --------------------------------------------------------------------
 
-any Normed Vector Space is a Metric Space (\S\ref{sec:metric_space}) by
-defining $d(x,y) = \|y-x\|$
+A \emph{Normed Vector Space} is a Vector Space $V$ over the Real or Complex
+Numbers on which a \emph{Norm} (\S\ref{sec:norm}) $\|\cdot\| : V \rightarrow
+\reals^{0\leq}$ which is a Real-valued Function defined on the Vector Space
+formalizing the notion of \emph{Distance} between Vectors.
 
-a Complete (\S\ref{sec:complete_metric_space}) Normed Vector Space is a Banach
-Space (\S\ref{sec:banach_space})
+Any Normed Vector Space is a Metric Space (\S\ref{sec:metric_space}) by
+defining $d(x,y) = \|y-x\|$.
+
+A Complete (\S\ref{sec:complete_metric_space}) Normed Vector Space is a Banach
+Space (\S\ref{sec:banach_space}).
+
+Any Inner Product Space (\S\ref{sec:innerproduct_space}) with Inner Product
+$\langle{\cdot,\cdot}\rangle$ induces a Norm by:
+\[
+  \|\vec{v}\| = \sqrt{\langle{\vec{v},\vec{v}}\rangle}
+\]
+A Complete Inner Product Space is a Hilbert Space (\S\ref{sec:hilbert_space}).
 
 Bounded Linear Operator (\S\ref{sec:bounded_linear_operator})
 
 Functional Analysis (\S\ref{sec:functional_analysis})
 
-Hilbert Space (\S\ref{sec:hilbert_space})
-
 
 
 \subsubsection{Norm}\label{sec:norm}
+
+The \emph{Norm} $\|\cdot\| : V \rightarrow \reals$ of a Normed Vector Space is
+a Real-valued Function defined on the Vector Space with the properties:
+\begin{enumerate}
+  \item $0 \leq \|\vec{v}\|$ and
+    $\|\vec{v}\| = 0 \Leftrightarrow \vec{v} = \vec{0}$
+  \item $\|c\vec{v}\| = |c|\|\vec{v}\|$
+  \item $\|\vec{u} + \vec{v}\| \leq \|\vec{u}\| + \|\vec{v}\|$ (\emph{Triangle
+    Inequality})
+\end{enumerate}
 
 \emph{Seminorm}
 
@@ -605,21 +625,26 @@ Subadditive Function (\S\ref{sec:subadditive_function})
 
 
 
-\subsubsection{Triangle Inequality}\label{sec:triangle_inequality}
+\paragraph{Triangle Inequality}\label{sec:triangle_inequality}\hfill
 
 Real Line (\S\ref{sec:real_line}) with Absolute Value as Norm:\\
 $|x + y| \leq |x| + |y|$
 
 
 
-% --------------------------------------------------------------------
-\subsection{Inner Product Space}\label{sec:innerproduct_space}
-% --------------------------------------------------------------------
+\subsubsection{Inner Product Space}\label{sec:innerproduct_space}
 
-an \emph{Inner Product Space} is a Normed Vector Space with Norm
-induced by a \emph{Inner Product}
+An \emph{Inner Product Space} $V$ is a Normed Vector Space with Norm
+(\S\ref{sec:norm}) $\|\cdot\|$ induced by the \emph{Inner Product}
+(\S\ref{sec:inner_product}) $\langle{\cdot,cdot}\rangle : V \times V
+\rightarrow \reals$ which is a Sesquilinear Form
+(\S\ref{sec:sesquilinear_form}).
 
-Orthogonality %FIXME section ?
+An Inner Product on a Real Vector Space is a Positive-definite
+(\S\ref{sec:positive_definite}) Symmetric Bilinear Form
+(\S\ref{sec:symmetric_bilinear}).
+
+\fist Orthogonality (\S\ref{sec:orthogonality})
 
 generalizes case of Euclidean Space (\S\ref{sec:euclidean_space}) to
 Vector Spaces of any, possibly Infinite, Dimension
@@ -628,26 +653,37 @@ Functional Analysis (\S\ref{sec:functional_analysis})
 
 
 
-\subsubsection{Inner Product}\label{sec:inner_product}
+\paragraph{Inner Product}\label{sec:inner_product}\hfill
 
 associates each pair of Vectors in a Vector Space with a Scalar known
 as the \emph{Inner Product} of the Vectors
 
 in Euclidean Spaces the Inner Product is the Dot Product (aka Scalar Product)
 
+An Inner Product induces a Norm (\S\ref{sec:norm}) $\|\cdot\|$ by:
+\[
+  \|\vec{v}\| = \sqrt\langle{\vec{v},\vec{v}}\rangle
+\]
+
 an Inner Product on a Real Vector Space is a Positive-definite
-(\S\ref{sec:definite_quadratic}) Symmetric Bilinear Form
-(\S\ref{sec:symmetric_bilinear}) and a Positive-definite Hermitian
-Form (\S\ref{sec:hermitian_form})
+(\S\ref{sec:positive_definite}) Symmetric Bilinear Form
+(\S\ref{sec:symmetric_bilinear}) and a Positive-definite Hermitian Form
+(\S\ref{sec:hermitian_form})
 
 A \emph{Hilbert Space} (\S\ref{sec:hilbert_space}) is an Inner Product Space
 that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
 
-Induces a Norm (\S\ref{sec:norm})
+
+
+\paragraph{Unitary Space}\label{sec:unitary_space}\hfill
+
+Inner Product Space over the Field of Complex Numbers
 
 
 
-\subsubsection{Hilbert Space}\label{sec:hilbert_space}
+\paragraph{Hilbert Space}\label{sec:hilbert_space}\hfill
+
+%FIXME: move to analysis ?
 
 A \emph{Hilbert Space} is an Inner Product Space (\S\ref{sec:inner_product})
 that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
@@ -670,13 +706,13 @@ $U$ and the Nullspace (\S\ref{sec:nullspace}) $V$ are Orthogonal Subspaces
 
 
 
-\paragraph{Hilbert Tensor Product}\label{sec:hilbert_tensor}\hfill
+\subparagraph{Hilbert Tensor Product}\label{sec:hilbert_tensor}\hfill
 
 Topological Tensor Product (\S\ref{sec:topological_tensor})
 
 
 
-\paragraph{Antiunitary Operator}\label{sec:antiunitary_operator}\hfill
+\subparagraph{Antiunitary Operator}\label{sec:antiunitary_operator}\hfill
 
 a Bijective Antilinear Map (\S\ref{sec:antlinear_map}) $U$ between Complex
 Hilbert Spaces $H_1$ and $H_2$:
@@ -692,7 +728,7 @@ Quantum Theory: Time-reversal Symmetry (Wigner's Theorem, Ray Space) %FIXME
 
 
 
-\subparagraph{Hilbert-Schmidt Mapping}\label{sec:hilbert_schmidt}\hfill
+\textbf{Hilbert-Schmidt Mapping}
 
 \emph{Weakly Hilbert-Schmidt Mapping}:
 \[
@@ -711,12 +747,6 @@ the Ideal of Hilbert-Schmidt Maps contained in the Category of Hilbert
 Spaces is an example of a \emph{Nuclear Ideal}: an Ideal contained in
 an ambient Monoidal Dagger Category with the structure of a Compact
 Closed Category except it is lacking Identities
-
-
-
-\subsubsection{Unitary Space}\label{sec:unitary_space}
-
-Inner Product Space over the Field of Complex Numbers
 
 
 
@@ -1474,6 +1504,11 @@ Sesquilinear Form (\S\ref{sec:sesquilinear_form}) generalization of Bilinear
 Forms to cases where $K$ is the Field of Complex Numbers and the mapping is
 Antilinear (Conjugate-linear \S\ref{sec:antilinear}) in one argument.
 
+An Inner Product (\S\ref{sec:inner_product}) is a Sesquilinear Form and an
+Inner Product over a Real Vector Space is a Positive-definite
+(\S\ref{sec:positive_definite}) Symmetric Bilinear Form
+(\S\ref{sec:symmetric_bilinear}).
+
 
 
 \paragraph{Orthogonality}\label{sec:orthogonality}\hfill
@@ -1485,6 +1520,8 @@ are are \emph{Orthogonal} when $B(u,v) = 0$, denoted:
 \]
 The Zero Vector, $\vec{0}$, is Orthogonal to every Vector (including itself).
 
+\fist Inner Product (\S\ref{sec:inner_product})
+
 Two Linear Subspaces (\S\ref{sec:linear_subspace}) $A, B \subset V$ of an Inner
 Product Space $V$ are called \emph{Orthogonal Subspaces}
 (\S\ref{sec:orthogonal_subspace}) if each Vector in $A$ is Orthogonal to each
@@ -1492,18 +1529,15 @@ Vector in $B$.
 
 
 
-
-
-\paragraph{Symmetric Bilinear Form}\label{sec:symmetric_bilinear}
-\hfill
+\paragraph{Symmetric Bilinear Form}\label{sec:symmetric_bilinear}\hfill
 
 Symmetric Bilinear Forms over a Vector Space correspond one-to-one
 with Quadratic Forms (\S\ref{sec:quadratic_form}) over the Vector
 Space
 
-an Inner Product (\S\ref{sec:inner_product}) on a Real Vector Space is
+An Inner Product (\S\ref{sec:inner_product}) on a Real Vector Space is
 a Positive-definite (\S\ref{sec:definite_quadratic}) Symmetric
-Bilinear Form
+Bilinear Form.
 
 
 
@@ -1550,6 +1584,8 @@ a Positive-definite Symmetric Bilinear
 generalization of Bilinear Forms (\S\ref{sec:bilinear_form}) to cases where $K$
 is the Field of Complex Numbers and the mapping is Antilinear (Conjugate-linear
 \S\ref{sec:antilinear}) in one argument
+
+Inner Products (\S\ref{sec:inner_product}) are Sesquilinear Forms
 
 
 
