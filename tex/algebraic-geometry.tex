@@ -32,9 +32,21 @@ One-dimensional Spaces:
 \section{Polynomial}\label{sec:polynomial}
 % ====================================================================
 
-\emph{Polynomial}
+A \emph{Polynomial Expression} is an Expression containing Variables (or
+\emph{Indeterminates}) and Coefficients with only Arithmetic Operations
+(\S\ref{sec:arithmetic}) and Positive Integer Exponents where the \emph{Degree}
+of the Polynomial is the largest such Exponent of any one Term with Nonzero
+Coefficient.
 
-Generalized to Formal Power Series (\S\ref{sec:formal_power_series})
+\fist Algebraic Expressions (\S\ref{sec:algebraic_expression}) are a wider
+class of Expressions that allow for Negative and Rational Exponents ($n$-th
+Roots).
+
+\fist Generalized to Formal Power Series (\S\ref{sec:formal_power_series}).
+
+The Funadmental Theorem of Algebra (\S\ref{sec:fundamental_algebra_theorem})
+states that every Polynomial of Degree $n$ has $n$ Complex Roots
+(\S\ref{sec:function_root}), counted with their Multiplicities (??? FIXME).
 
 Univariate Polynomial (\S\ref{sec:univariate_polynomial}) of Degree
 $n$ with Single Indeterminate $x$ and Coefficients $a_0, \ldots, a_n$
@@ -95,6 +107,82 @@ Euclidean Division
 Polynomial Long Division
 
 
+
+% --------------------------------------------------------------------
+\subsection{Polynomial Function}\label{sec:polynomial_function}
+% --------------------------------------------------------------------
+
+Degree $0$ or $1$ is a \emph{Linear Function}
+
+the Harmonic Functions (\S\ref{sec:harmonic_function}) on $\reals$ are
+exactly the Linear Functions
+
+
+
+% --------------------------------------------------------------------
+\subsection{Polynomial Equation}\label{sec:algebraic_equation}
+% --------------------------------------------------------------------
+
+A \emph{Polynomial Equation} is an Equation of the form:
+\[
+  P = Q
+\]
+where $P$ and $Q$ are \emph{Polynomials} (\S\ref{sec:polynomial}) with
+Coefficients in some Field (\S\ref{sec:field}).
+
+Linear Equation (\S\ref{sec:linear_equation})
+
+cf. Functional Equation --
+\url{https://golem.ph.utexas.edu/category/2017/04/functional_equations_entropy_a.html},
+Implicit Function %FIXME
+
+
+
+\subsubsection{Root}\label{sec:equation_root}
+
+\fist Root (Functions \S\ref{sec:function_root})
+
+An Algebraic Function (\S\ref{sec:algebraic_function}) is a Function that can
+be defined as the Root of a Polynomial Equation.
+
+
+
+\subsubsection{Diophantine Equation}\label{sec:diophantine_equation}
+
+
+
+\paragraph{Linear Diophantine Equation}\hfill
+\label{sec:linear_diophantine}
+Monomial (\S\ref{sec:monomial}) Equations with Integer Solutions
+
+$c = ax + by$ has a solution in $\mathbb{Z}$ when $gcd(a,b)|c$. Given
+$d=gcd(a,b)|c$ and a solution $(x_0, y_0)$, then all solutions are of
+the form $(x_0 + \frac{b}{d}t, y_0 - \frac{a}{d}t)$ with $t \in
+\mathbb{Z}$.
+
+
+
+\paragraph{Exponential Diophantine Equation}\hfill
+\label{sec:exponential_diophantine}
+
+
+
+\subsubsection{Quadratic Equation}\label{sec:quadratic_equation}
+
+\subsubsection{Parametric Equation}\label{sec:parametric_equation}
+
+%FIXME move ?
+%FIXME differential, integral calculus ?
+%FIXME analysis ?
+
+Parametric Surface (\S\ref{sec:parametric_surface})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Fundamental Theorem of Algebra}
+\label{sec:fundamental_algebra_theorem}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Monomial}\label{sec:monomial}
@@ -169,13 +257,10 @@ Function near $x$
 
 
 % --------------------------------------------------------------------
-\subsection{Polynomial Function}\label{sec:polynomial_function}
+\subsection{Formal Power Series}\label{sec:formal_power_series}
 % --------------------------------------------------------------------
 
-Degree $0$ or $1$ is a \emph{Linear Function}
-
-the Harmonic Functions (\S\ref{sec:harmonic_function}) on $\reals$ are
-exactly the Linear Functions
+\fist Power Series (\S\ref{sec:power_series})
 
 
 
@@ -183,39 +268,32 @@ exactly the Linear Functions
 \section{Algebraic Expression}\label{sec:algebraic_expression}
 % ====================================================================
 
+An \emph{Algebraic Expression} is an Expression including Arithmetic
+(\S\ref{sec:arithmetic}) and Algebraic (Rational Exponent) Operations.
+
+Algebraic Expressions do not include Transcendental Numbers
+(\S\ref{sec:transcendental_number}), Trigonometric, Logarithmic, or Hyperbolic
+Functions, nor Irrational Exponents; these are allowed by the wider class of
+Closed-form, Analytic (\S\ref{sec:analytic_expression}), and unrestricted
+Mathematical Expressions.
+
+\fist Polynomial Expressions (\S\ref{sec:polynomial_expression}) are a narrower
+class of Expressions that do not allow Rational Exponents ($n$-th Roots) or
+Negative Integer Exponents.
+
+
+
 % --------------------------------------------------------------------
 \subsection{Algebraic Fraction}\label{sec:algebraic_fraction}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Algebraic Equation}\label{sec:algebraic_equation}
+\subsection{Algebraic Function}\label{sec:algebraic_function}
 % --------------------------------------------------------------------
 
-cf. Functional Equation --
-\url{https://golem.ph.utexas.edu/category/2017/04/functional_equations_entropy_a.html},
-Implicit Function %FIXME
-
-
-
-\subsubsection{Polynomial Equation}\label{sec:polynomial_equation}
-
-\emph{Polynomial Equation}
-
-Linear Equation (\S\ref{sec:linear_equation})
-
-
-
-\paragraph{Quadratic Equation}\label{sec:quadratic_equation}\hfill
-
-
-
-\subsubsection{Parametric Equation}\label{sec:parametric_equation}
-
-%FIXME move ?
-%FIXME differential, integral calculus ?
-%FIXME analysis ?
-
-Parametric Surface (\S\ref{sec:parametric_surface})
+An \emph{Algebraic Function} is a Function that can be defined as the Root
+(\S\ref{sec:equation_root}) of a Polynomial Equation
+(\S\ref{sec:polynomial_equation}).
 
 
 
@@ -368,8 +446,7 @@ Locale (\S\ref{sec:locale})
 
 
 % --------------------------------------------------------------------
-\subsection{Algebraic Fundamental Group}
-\label{sec:algebraic_fundamental_group}
+\subsection{Algebraic Fundamental Group}\label{sec:algebraic_fundamental_group}
 % --------------------------------------------------------------------
 
 or \emph{\'Etale Fundamental Group}
