@@ -51,6 +51,18 @@ Recursive Definition (\S\ref{sec:recursive_definition})
 \subsection{Difference Equation}\label{sec:difference_equation}
 % --------------------------------------------------------------------
 
+\fist Differential Equation (\S\ref{sec:differential_equation})
+
+
+
+\subsubsection{Matrix Difference Equation}\label{sec:matrix_difference_equation}
+
+Difference Equation in which the Value of a Vector or Matrix of Variables at
+one Point in Time is related to its own Value at one or more previous Points in
+Time, using Matrices
+
+
+
 % --------------------------------------------------------------------
 \subsection{Logistic Map}\label{sec:logistic_map}
 % --------------------------------------------------------------------
@@ -377,7 +389,11 @@ than $1$
 
 \subsubsection{Hypergeometric Series}\label{sec:hypergeometric_series}
 
-Hypergeometric Function (\S\ref{sec:hypergeometric_function})
+\paragraph{Hypergeometric Function}\label{sec:hypergeometric_function}\hfill
+
+is a Solution of a Second-order Linear ODE (\S\ref{sec:linear_ode})
+
+Hypergeometric Series (\S\ref{sec:hypergeometric_series})
 
 
 
@@ -663,13 +679,14 @@ $f(a) < c < f(b)$, there is a $d \in (a,b)$ such that $f(d) = c$.
 \subsection{Differentiable Function}\label{sec:differentiable_function}
 % --------------------------------------------------------------------
 
-cf. Differential Equation (\S\ref{sec:differential_equation})
-
 For $f$ defined on Open Interval $(a,b) \subset \reals$, $f$ is
 Differentiable at $x \in (a,b)$ if Limit $f'(x) = \lim_{h \rightarrow
   0} \frac{f (x+h) - f(x)}{h}$ exists.
 
-Differentiable at $a$ Implies Continuous at $a$
+Differentiable at $a$ Implies Continuous (\S\ref{sec:continuous_function}) at
+$a$
+
+\fist Differential Equation (\S\ref{sec:differential_equation})
 
 A Polynomial (\S\ref{sec:polynomial}), being the Sum of Differentiable
 Functions, is Differentiable everywhere
@@ -710,12 +727,46 @@ Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
 
 
 
-\subsubsection{Differentiability Class}
-\label{sec:differentiability_class}
+\subsubsection{Differentiability Class}\label{sec:differentiability_class}
 
-$\mathcal{C}^1$ Continuous First Derivative
+$\mathcal{C}^k$
 
-$\mathcal{C}^2$ Continuous Second Derivative
+$\mathcal{C}^1$ -- Continuous First Derivative: Continuously Differentiable
+Function (\S\ref{sec:continuously_differentiable})
+
+$\mathcal{C}^2$ -- Continuous Second Derivative
+
+$\mathcal{C}^\infty$ -- Continuous for all Derivatives: Smooth Function
+(\S\ref{sec:smooth_function})
+
+
+
+\subsubsection{Continuously Differentiable}
+\label{sec:continuously_differentiable}
+
+A Function $f$ is \emph{Continuously Differentiable} if the Derivative $f'(x)$
+exists and is a Continuous Function.
+
+Differentiability Class (\S\ref{sec:differentiability_class}) $C^1$
+
+
+
+\subsubsection{Smooth Function}\label{sec:smooth_function}
+
+Differentiability Class (\S\ref{sec:differentiability_class}) $C^{\infty}$
+
+
+
+\paragraph{Analytic Function}\label{sec:analytic_function}
+
+A Function is \emph{Analytic} if and only if its Taylor Series about $x_0$
+Converges to the Function in some Neighborhood for every $x_0$ in its Domain.
+
+Complex Dynamics (\S\ref{sec:complex_dynamics})
+
+
+
+\subparagraph{Analytic Continuation}\label{sec:analytic_continuation}
 
 
 
@@ -1055,12 +1106,32 @@ Discrete equivalent of Differentiation (\S\ref{sec:differential})
 \section{Differential Equation}\label{sec:differential_equation}
 % ====================================================================
 
-cf. Differentiable Function (\S\ref{sec:differentiable_function})
+The \emph{Solution} to a Differential Equation $F(x,y,y',\ldots,y^{(n)}) = 0$
+of Order $n$ is a \emph{Function} or \emph{Class of Functions} of the form $u :
+I \subset \reals \rightarrow \reals$ where $u$ is an $n$-times Differentiable
+Function (\S\ref{sec:differentiable_function}) on $I$ and $\forall x \in I$:
+\[
+  F(x,u,u',\ldots,u^{(n)}) = 0
+\]
+Such a $u$ defines an \emph{Integral Curve} (\S\ref{sec:integral_curve}) for
+$F$.
 
-\fist Partial Differential Equation (\S\ref{sec:partial_differential_equation})
-in Multivariable Calculus
+In a Dynamical System (\S\ref{sec:dynamical_system}), the \emph{Evolution
+  Function} is often the Solution of a Differential Equation of Motion $\dot{x}
+= v(x)$ giving the Time Derivative of a Trajectory (Integral Curve) $x(t)$
+on the Phase Space starting at some Point $x_0$.
+
+\fist cf. the Solution of a Polynomial Equation
+(\S\ref{sec:polynomial_equation}) is a Value or Set of Values
+
+Extension, Maximal Solution, Global Solution, General Solution
+
+\fist Partial Differential Equation (\S\ref{sec:pde}) in Multivariable Calculus
 
 \fist Numerical Integration (\S\ref{sec:numerical_integration})
+
+\fist Difference Equation (\S\ref{sec:difference_equation})
+
 
 
 
@@ -1081,40 +1152,61 @@ Differentials: $\frac{dy}{dx}$
 \subsection{Ordinary Differential Equation}\label{sec:ode}
 % --------------------------------------------------------------------
 
-\subsubsection{Continuously Differentiable}
-\label{sec:continuously_differentiable}
+An \emph{Ordinary Differential Equation (ODE)} is an Equation containing a
+Function of one Independent Variable and its Derivatives.
 
-$C^1$
+\fist A \emph{Partial} Differential Equation (PDE
+\S\ref{sec:pde}) is a Differential Equation
+containing Unknown Multivariable Functions and their Partial Derivatives.
+
+\fist System of ODEs (\S\ref{sec:system_of_odes})
+
+For $F$ a Function of $x$, $y$, and Derivatives (\S\ref{sec:derivative}) of
+$y$, an Equation of the form:
+\[
+  F(x,y,y',\ldots,y^{(n-1)}) = y^{(n)}
+\]
+is a \emph{Explicit Ordinary Differential Equation} of \emph{Order $n$}, and an
+\emph{Implicit Ordinary Differential Equation} of Order $n$ has the form:
+\[
+  F(x,y,y',\ldots,y^{(n)}) = 0
+\]
 
 
 
-\subsubsection{Hypergeometric Function}
-\label{sec:hypergeometric_function}
+\subsubsection{Slope Field}\label{sec:slope_field}
 
-Hypergeometric Series (\S\ref{sec:hypergeometric_series})
+When the Differential Equation is represented as a Vector Field or Slope Field
+(\S\ref{sec:slope_field}), the corresponding Integral Curves
+(\S\ref{sec:integral_curve}) are Tangent to the Field at each point.
+
+
+
+\subsubsection{Linear Ordinary Differential Equation}\label{sec:linear_ode}
+
+An Ordinary Differential Equation is \emph{Linear} if $F$ can be written as a
+Linear Combination (\S\ref{sec:linear_combination}) of the Derivatives of $y$:
+\[
+  y^{(n)} = \sum_{i=0}^{n-1} a_i(x)y^{(i)} + r(x)
+\]
+where $a_i(x)$ and $r(x)$ are Continuous Functions in $x$ and $r(x)$ is called
+the \emph{Source Term}.
+
+Homogenous
+
+Non-homogenous
+
+
+
+\subsubsection{Stochastic Differential Equation}\label{sec:sde}
+
+\fist Stochastic Partial Differential Equation (\S\ref{sec:spde})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Smooth Function}\label{sec:smooth_function}
+\subsection{Singular Solution}\label{sec:singular_solution}
 % --------------------------------------------------------------------
-
-$C^{\infty}$
-
-
-
-\subsubsection{Analytic Function}\label{sec:analytic_function}
-
-A Function is \emph{Analytic} if and only if its Taylor Series about $x_0$
-Converges to the Function in some Neighborhood for every $x_0$ in its Domain.
-
-Complex Dynamics (\S\ref{sec:complex_dynamics})
-
-
-
-\paragraph{Analytic Continuation}\label{sec:analytic_continuation}
-
-
 
 % --------------------------------------------------------------------
 \subsection{Boundary Value Problem}\label{sec:boundary_value_problem}
@@ -1190,9 +1282,13 @@ Second-order Partial Derivatives of a Scalar-valued Function
 \subsubsection{Partial Differential}\label{sec:partial_differential}
 
 \subsubsection{Partial Differential Equation}
-\label{sec:partial_differential_equation}
+\label{sec:pde}
 
-%FIXME: move section ???
+A \emph{Partial Differential Equation (PDE)} is a Differential Equation
+containing Unknown Multivariable Functions and their Partial Derivatives.
+
+\fist An \emph{Ordinary} Differential Equation (ODE \S\ref{sec:ode}) is a
+Differential Equation with a single Independent Variable.
 
 Finite Element Method (\S\ref{sec:finite_element_method}): solving
 Boundary Value Problems (\S\ref{sec:boundary_value_problem}) for
@@ -1234,6 +1330,10 @@ $\nabla^2 u = u_{xx} + u_{yy} = 0$ %FIXME
 
 
 \paragraph{Dirichlet Problem}\label{sec:dirichlet_problem}\hfill
+
+\paragraph{Stochastic Partial Differential Equation}\label{sec:spde}\hfill
+
+\fist Stochastic Differential Equation (\S\ref{sec:sde})
 
 
 
@@ -1848,9 +1948,9 @@ Line (\S\ref{sec:extended_real_line})
 \subsection{Numerical Integration}\label{sec:numerical_integration}
 % --------------------------------------------------------------------
 
-methods for  obtaining Numerical approximations to the solutions of
+methods for obtaining Numerical approximations to the solutions of
 Time-dependent Ordinary (\S\ref{sec:differential_equation}) and Partial
-(\S\ref{sec:partial_differential_equation}) Differential Equations
+(\S\ref{sec:pde}) Differential Equations
 
 \emph{Explicit Methods} -- calculates the state of a system at a later time
 from the state of the system at the current time:
