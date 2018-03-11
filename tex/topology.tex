@@ -108,6 +108,9 @@ The above is termed an \emph{Open Ball} because it does not include
 the points where $d(x,p) = r$. Such a Ball including these additional
 Points is called a \emph{Closed Ball}.
 
+a Subset of a Metric Space is \emph{Bounded} (\S\ref{sec:bounded_subset}) if it
+is contained in a Ball of Finite Radius
+
 
 
 \subsubsection{Unit Ball}\label{sec:unit_ball}
@@ -213,6 +216,18 @@ and Closed Sets.
 
 a Closed Set with no \emph{Isolated Points}
 (\S\ref{sec:isolated_point})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Bounded Subset}\label{sec:bounded_subset}
+% --------------------------------------------------------------------
+
+a Subset of a Metric Space is \emph{Bounded} if it is contained in a Ball of
+Finite Radius
+
+a Space is Compact (\S\ref{sec:compact}) if it is Bounded and Closed
+(\S\ref{sec:closed})
 
 
 
@@ -1007,6 +1022,10 @@ Intersection of $S$ with an element of $\tau$.
 A Subspace Topology may alternatively be given as a \emph{Topological
   Embedding} (\S\ref{sec:topological_embedding}).
 
+An \emph{Embedded Submanifold} (\S\ref{sec:embedded_submanifold}) is an
+Immersed Submanifold (\S\ref{sec:immersed_submanifold}) for which the Image of
+the Inclusion Map has the Subspace Topology as the Submanifold Topology.
+
 Dual to Quotient Topology (\S\ref{sec:quotient_topology})
 
 \emph{Open Subspace}
@@ -1070,11 +1089,29 @@ All Metric Spaces are $1c$.
 
 \emph{Compactness}
 
+\begin{enumerate}
+\item \emph{Closed} (\S\ref{sec:closed_set}): contains all its Limit Points
+\item \emph{Bounded} (\S\ref{sec:bounded_subset}): all Points lie within a Ball
+  of Finite Radius
+\end{enumerate}
+
 generalizes the notion of a Subset of a Euclidean Space being Closed
 (i.e. containing all its Limit Points) and Bounded (i.e. contained in
-a Finite Interval) %FIXME
+a Finite Interval)
 
 ``Topologically Finite''
+
+a Finite Space (\S\ref{sec:finite_space}) is Trivially Compact
+
+\fist a Closed Manifold (\S\ref{sec:closed_manifold}) is a Compact Manifold
+without a Boundary and if no Boundary is possible then any Compact Manifold
+is a Closed Manifold (FIXME: clarify)
+
+
+
+\subsubsection{Finite Space}\label{sec:finite_space}
+
+Trivially Compact
 
 
 
@@ -1491,6 +1528,10 @@ A Subspace Topology (\S\ref{sec:subspace_topology}) is the Coarsest
 Continuous (\S\ref{sec:continuous_map}). $iota$ is then called a
 \emph{Topological Embedding} and $S$ is Homeomorphic
 (\S\ref{sec:homeomorphism}) to its Image in $X$.
+
+An \emph{Embedded Submanifold} (\S\ref{sec:embedded_submanifold}) is an
+Immersed Submanifold (\S\ref{sec:immersed_submanifold}) for which the Inclusion
+Map is a Topological Embedding.
 
 
 
@@ -2467,6 +2508,14 @@ a \emph{Smooth Structure} on a Manifold $M$ is a Collection of \emph{Smoothly
 
 
 % --------------------------------------------------------------------
+\subsection{Parallel Transport}\label{sec:parallel_transport}
+% --------------------------------------------------------------------
+
+\fist cf. Tangent Spaces (\S\ref{sec:tangent_space})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Differentiable Manifold}\label{sec:differentiable_manifold}
 % --------------------------------------------------------------------
 
@@ -2528,8 +2577,21 @@ the Elements of the Tangent Space at $x$ are called the \emph{Tangent Vectors}
 at $x$-- generalization of the notion of a \emph{Bound Vector}
 (\S\ref{sec:bound_vector}) in a Euclidean Space
 
-the Dimension of the Tangent Space of a Connected Manifold is the same as that
-of the Manifold itself
+the Dimension of the Tangent Space at every Point of a Connected Manifold
+(\S\ref{sec:connected_space}) is the same as that of the Manifold itself
+
+\fist cf. Parallel Transport (\S\ref{sec:parallel_transport})
+
+\fist Algebraic Varieties (Algebraic Geometry \S\ref{sec:algebraic_variety}):
+Zariski Tangent Space (\S\ref{sec:zariski_space})
+
+a \emph{Vector Field} (\S\ref{sec:vector_field}) attaches at every Point of a
+Manifold a Vector from the Tangent Space at that Point in a \emph{Smooth}
+(\S\ref{sec:smooth_function}) manner manner and such a Vector Field defines a
+generalized Ordinary Differential Equation (ODE \S\ref{sec:ode}) on a Manifold
+where a Solution to such an Equation is a Diefferentiable Curve on the Manifold
+with Derivative at any Point equal to the Tangent Vector attached to that Point
+by the Vector Field
 
 
 
@@ -2829,7 +2891,15 @@ Manifold built by ``gluing together'' Coordinate Charts
 cf. Algebraic Varieties (\S\ref{sec:algebraic_variety}) built by ``gluing
 together'' Affine Varities (\S\ref{sec:affine_variety})
 
-(wiki)
+(wiki):
+
+Manifolds do not need to be Connected (\S\ref{sec:connected_manifold}) or
+Closed (\S\ref{sec:closed_manifold})
+
+a Manifold is never Countable unless the Dimension of the Manifold is $0$
+
+a Vector Field (\S\ref{sec:vector_field}) attaches to every Point of a Manifold
+a Vector from the Tangent Space (\S\ref{sec:tangent_space}) at that Point
 
 families of Manifolds:
 \begin{itemize}
@@ -2892,6 +2962,48 @@ together'' Affine Varities (\S\ref{sec:affine_variety})
 
 
 \subsubsection{Submanifold}\label{sec:submanifold}
+
+$S \subset M$
+
+Inclusion Map $S \rightarrow M$
+
+
+
+\paragraph{Immersed Submanifold}\label{sec:immersed_submanifold}\hfill
+
+Image $S$ of an Immersion Map $f : N \rightarrow M$; need not be a Submanifold
+as a Subset and Immersion Map does not need to be Injective, i.e. allows for
+Self-intersections
+
+\emph{Injective Immersed Submanifold}: Injective Immersion where the Image
+Subset $S$ has a Topology and Differential Structure such that $S$ is a
+Manifold and the Inclusion $f : N \rightarrow M$ is an Diffeomorphism
+(\S\ref{sec:diffeomorphism})
+
+\fist Lie Subgroups (\S\ref{sec:lie_subgroup}) are naturally Immersed
+Submanifolds
+
+
+
+\subparagraph{Embedded Submanifold}\label{sec:embedded_submanifold}\hfill
+
+An \emph{Embedded Submanifold} (or \emph{Regular Submanifold}) is an Immersed
+Submanifold for which the Inclusion Map is a Topological Embedding
+(\S\ref{sec:topological_embedding}), i.e. the Image of the Inclusion Map
+has the Subspace Topology (\S\ref{sec:subspace_topology}) for the Submanifold
+Topology.
+
+
+
+\subsubsection{Closed Manifold}\label{sec:closed_manifold}
+
+Compact (\S\ref{sec:compact_space}) Manifold without a Boundary; if no
+Boundary is possible then any Compact Manofld is a Closed Manifold (FIXME:
+clarify)
+
+FIXME: is this opposite from the notion of ``closed set'' ???
+
+
 
 \subsubsection{Oriented Manifold}\label{sec:oriented_manifold}
 
