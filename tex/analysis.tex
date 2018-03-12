@@ -320,13 +320,13 @@ Transcendental Numbers (\S\ref{sec:transcendental})
 
 some examples:
 \begin{itemize}
-  \item \frac{1}{4} - \frac{1}{16} + \frac{1}{64} - \frac{1}{256} \cdots
-    = \frac{1}{4}
-  \item \frac{1}{2} - \frac{1}{4} + \frac{1}{8} - \frac{1}{16} \cdots
-    = \frac{1}{3}
-  \item 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \cdots  = \ln{2}
-  \item 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} \cdots  = \frac{\pi}{4}
-  \item 1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} \cdots = \frac{\pi^2}{6}
+  \item $\frac{1}{4} - \frac{1}{16} + \frac{1}{64} - \frac{1}{256} \cdots
+    = \frac{1}{4}$
+  \item $\frac{1}{2} - \frac{1}{4} + \frac{1}{8} - \frac{1}{16} \cdots
+    = \frac{1}{3}$
+  \item $1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \cdots  = \ln{2}$
+  \item $1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} \cdots  = \frac{\pi}{4}$
+  \item $1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} \cdots = \frac{\pi^2}{6}$
 \end{itemize}
 
 
@@ -806,6 +806,36 @@ Complex Dynamics (\S\ref{sec:complex_dynamics})
 
 \subsubsection{Chain Rule}\label{sec:chain_rule}
 
+(wiki):
+
+Formula for computing the Derivative of the \emph{Composition} of two or more
+Functions:
+\[
+  (f \circ g)' = (f' \circ g) g'
+\]
+or equivalently when $F(x) = f(g(x))$:
+\[
+  F'(x) = f'(g(x))g'(x)
+\]
+
+Leibniz Notation for Variable $z$ Dependent on Variable $y$ Dependent on
+Independent Variable $x$:
+\[
+  \frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}
+\]
+and if $z = f(y)$ and $y = g(x)$ then:
+\[
+  \frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}
+    = f'(y)g'(x) = f'(g(x))g'(x)
+\]
+
+\fist cf. \emph{Substitution Rule} (\S\ref{sec:substitution_rule}) for
+Integration
+
+Multivariable Chain Rule
+
+
+
 \subsubsection{Cauchy Mean Value Theorem}
 \label{sec:cauchy_mean_value}
 
@@ -920,6 +950,14 @@ denoted by $\int_a^b f$
 
 
 
+\subsubsection{Substitution Rule}\label{sec:substitution_rule}
+
+Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+
+\fist cf. \emph{Chain Rule} (\S\ref{sec:chain_rule}) for Differentiation
+
+
+
 \subsubsection{Integral Mean Value Theorem}
 \label{sec:integral_mean_value}
 
@@ -970,6 +1008,8 @@ Additionally, for every $x$ in the Interval $(a,b)$:
 \[
   \frac{d}{dx}\int^x_a f(t) dt = f(x)
 \]
+
+\fist Subsitution Rule (\S\ref{sec:substitution_rule})
 
 \fist Integral Theorems of Vector Calculus
 (\S\ref{sec:integral_theorems}) in Multivariable Calculus
@@ -1084,6 +1124,10 @@ Automorphic Form (\S\ref{sec:automorphic_form})
 % --------------------------------------------------------------------
 \subsection{$n$-th Root}\label{sec:nth_root}
 % --------------------------------------------------------------------
+
+\emph{Radical}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Riemann Surface}\label{sec:riemann_surface}
@@ -1346,6 +1390,24 @@ Multivariable Calculus that is \emph{independent} of Coordinates
 \emph{Three-dimensional Graph}: Two-dimensional Input with One-dimensional
 Output; Contour Plots (\S\ref{sec:contour})
 
+Multivariable Chain Rule
+
+2 Variables:
+\[
+  \frac{d}{dt} f(x(t),y(t)) =
+    \frac{\partial{f}}{\partial{x}} \cdot \frac{dx}{dt}
+      + \frac{\partial{f}}{\partial{y}} \cdot \frac{dy}{dt}
+\]
+Vector form where $\vec{v}(t) = [x(t),y(t)]$:
+\[
+  \frac{d}{dt}f(\vec{v}(t)) = \nabla{f(\vec{v}(t)}\bullet{\vec{v}'(t)}
+\]
+where $\nabla{f}$ is the Gradient (\S\ref{sec:gradient}) of $f$; this the same
+as taking the Directional Derivative (\S\ref{sec:directional_derivative}):
+\[
+  \nabla_{\vec{v}'(t)}f(\vec{v}(t))
+\]
+
 
 
 % --------------------------------------------------------------------
@@ -1361,6 +1423,30 @@ Contour Map
 % --------------------------------------------------------------------
 
 \fist \emph{Vector Function} (\S\ref{sec:vector_function})
+
+
+
+\subsubsection{Curvature}\label{sec:curvature}
+
+Radius of Curvature $R$
+
+\emph{Curvature} $\kappa = \frac{1}{R}$
+
+for Unit Tangent Vector $\hat{T}$, Arclength $s$:
+\[
+  \kappa = \|\frac{d\hat{T}}{ds}\|
+    = \|\frac{\frac{d\hat{T}}{dt}}{\frac{d\vec{r}}{dt}}\|
+\]
+where $\vec{r}(t)$ is some Parametric Function
+
+for a Plane Curve (\S\ref{sec:plane_curve}) $\vec{r}(t) = [x(t),y(t)]$:
+\[
+  \kappa = \frac{x'(t)y''(t) - y'(t)x''(t)} {(x'(t)^2 + y'(t)^2)^{\frac{3}{2}}}
+\]
+where the Numerator is equal to $\vec{r}'(t) \times \vec{r}''(t)$ and:
+\[
+  \kappa = \frac{\vec{r}' \times \vec{r}''}{\|\vec{r}'\|^3}
+\]
 
 
 
@@ -1391,6 +1477,11 @@ at that Point:
 \]
 
 Gradient (\S\ref{sec:gradient}): $\nabla f$
+
+Partial Derivative of a Multivariable Vector-valued Function (TODO); Parametric
+Surface (\S\ref{sec:parametric_surface})
+
+Partial Derivative of Vector Fields (\S\ref{sec:vector_field}) ... TODO
 
 the \emph{Hessian Matrix} (\S\ref{sec:hessian_matrix}) is the Square Matrix of
 Second-order Partial Derivatives of a Scalar-valued Function
@@ -1534,6 +1625,8 @@ or \emph{Vector-valued Function}
 the Matrix of all First-order Partial Derivatives
 (\S\ref{sec:partial_derivative}) of a Vector Function is the \emph{Jacobian
   Matrix} (\S\ref{sec:jacobian_matrix})
+
+Partial Derivative of a Multivariable Vector-valued Function (TODO)
 
 
 
