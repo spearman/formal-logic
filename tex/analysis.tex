@@ -448,6 +448,11 @@ A Function that is equal to its Taylor Series in an Open Interval
 (\S\ref{sec:interval}, or Disc \S\ref{sec:disc}) is an Analytic Function in
 that Interval.
 
+Maclaurin Series:
+\[
+  \sum_{n=0}^\infty f^{(n)}(0) \frac{x^n}{n!}
+\]
+
 
 
 \paragraph{Binomial Series}\label{sec:binomial_series}\hfill
@@ -585,6 +590,13 @@ or \emph{Real-valued Function}
 
 
 \subsubsection{Bounded Function}\label{sec:bounded_function}
+
+a Bounded Function on a Compact Interval $[a,b]$ is Riemann Integrable
+(\S\ref{sec:integrable_function}) if and only if it is Continuous
+(\S\ref{sec:continuous_function}) ``Almost Everywhere'', i.e. Set of Points of
+Discontinuity has Lebesgue Measure Zero (\S\ref{sec:lebesgue_measure})
+
+
 
 \subsubsection{Function Limit}\label{sec:function_limit}
 
@@ -737,6 +749,11 @@ $\Delta = \nabla^2$
 
 Discrete Laplace Operator (Graph Theory \S\ref{sec:discrete_laplace})
 
+the Set of Harmonic Functions (\S\ref{sec:harmonic_function}) on a given Open
+Set $U$ can be seen as the Kernel of the Laplace Operator
+
+\fist cf. Laplace Transform (\S\ref{sec:laplace_transform}) %FIXME same concept?
+
 
 
 \paragraph{Schwarzian Derivative}\label{sec:schwarzian_derivative}\hfill
@@ -747,14 +764,13 @@ Non-linear Differential Operator
 
 \subsubsection{Antiderivative}\label{sec:antiderivative}
 
-\emph{Primitive Integral}
+\emph{Indefinite Integral} or \emph{Primitive Integral}
 
 If $f$ is Continuous on $[a,b]$ then:
 \[
   F(x) = \int_a^x f
 \]
-for all $x \in [a,b]$ and $F$ is Differentiable on $(a,b)$ and $F' =
-f$.
+for all $x \in [a,b]$ and $F$ is Differentiable on $(a,b)$ and $F' = f$.
 
 \fist related to Definite Integrals (\S\ref{sec:definite_integral}) through the
 Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
@@ -791,12 +807,15 @@ Differentiability Class (\S\ref{sec:differentiability_class}) $C^{\infty}$
 
 
 
-\paragraph{Analytic Function}\label{sec:analytic_function}
+\paragraph{Analytic Function}\label{sec:analytic_function}\hfill
 
-A Function is \emph{Analytic} if and only if its Taylor Series about $x_0$
-Converges to the Function in some Neighborhood for every $x_0$ in its Domain.
+A Function is \emph{Analytic} if and only if its Taylor Series
+(\S\ref{sec:analytic_function}) about $x_0$ Converges to the Function in some
+Neighborhood for every $x_0$ in its Domain.
 
 Complex Dynamics (\S\ref{sec:complex_dynamics})
+
+Trigonometric Functions (\S\ref{sec:trigonometric_function})
 
 
 
@@ -869,6 +888,13 @@ for $f$ Continuous on $[a,b]$ and Differentiable on $(a,b)$ with $f(a)
 \subsection{Integrable Function}\label{sec:integrable_function}
 % --------------------------------------------------------------------
 
+%FIXME: is this the same as Riemann-integrable ???
+
+a Bounded Function (\S\ref{sec:bounded_function}) on a Compact Interval $[a,b]$
+is Riemann Integrable if and only if it is Continuous
+(\S\ref{sec:continuous_function}) ``Almost Everywhere'', i.e. Set of Points of
+Discontinuity has Lebesgue Measure Zero (\S\ref{sec:lebesgue_measure})
+
 cf. Integral Equation (\S\ref{sec:integral_equation})
 
 \fist Integrable System (\S\ref{sec:integrable_system})
@@ -919,6 +945,10 @@ Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
 
 
 \paragraph{Indefinite Integral}\label{sec:indefinite_integral}\hfill
+
+\fist Antiderivative (\S\ref{sec:antiderivative})
+
+
 
 \paragraph{Darboux Integral}\label{sec:darboux_integral}\hfill
 
@@ -982,6 +1012,8 @@ Complex Variable $s$ (usually Frequency + Phase)
 Frequency-domain approach for Continuous Time Signals where the System may be
 Stable \emph{or} Unstable (TODO: clarify)
 
+\fist cf. Laplace Operator (\S\ref{sec:laplace_operator}) %FIXME same concept?
+
 in Control Theory (\S\ref{sec:control_theory}), Systems are often Transformed
 from the Time Domain to the Frequency Domain using Laplace Transform and the
 Transformed System's Zeros (\S\ref{sec:complex_zero}) and Poles
@@ -994,14 +1026,14 @@ Transformed System's Zeros (\S\ref{sec:complex_zero}) and Poles
 \label{sec:fundamental_calculus_theorem}
 % --------------------------------------------------------------------
 
-for Function $f$ Continuous on the Interval $[a,b]$, and $F$ with Derivative
-$f$:
+for Function $f$ Continuous (\S\ref{sec:continuous_function}) on the Interval
+$[a,b]$, and $F$ with Derivative $f$:
 \[
   F' = f
 \]
-on the interval $(a,b)$, then:
+on the Interval $(a,b)$, then:
 \[
-  \int^b_a f(x) dx = F(b) - F(a)
+  \int_a^b f(x) dx = F(b) - F(a)
 \]
 
 Additionally, for every $x$ in the Interval $(a,b)$:
@@ -1097,6 +1129,8 @@ Function (\S\ref{sec:harmonic_function})
 % --------------------------------------------------------------------
 
 \subsubsection{Elliptic Function}\label{sec:elliptic_function}
+
+Double-periodic Functions (\S\ref{sec:double_periodic})
 
 Pendulum (Non-linear Dynamical System \S\ref{sec:nonlinear_dynamical_system})
 
@@ -1548,18 +1582,18 @@ $\nabla^2 u = u_{xx} + u{yy} = f(x,y)$
 Second-order Elliptic Partial Differential Equation
 
 written:
-
 \[ \nabla^2 \varphi = 0 \]
-
 or:
-
 \[ \Delta \varphi = 0 \]
 
 where $\Delta = \nabla^2$ is the Laplace Operator
 (\S\ref{sec:laplace_operator}) and $\varphi$ is a Scalar Function
 (\S\ref{sec:scalar_function})
 
-Harmonic Functions (\S\ref{sec:harmonic_function})
+a Harmonic Function (\S\ref{sec:harmonic_function}) is a Twice-continuously
+Differentiable Function (\S\ref{sec:continuously_differentiable}) $f : U
+\rightarrow Reals$, where $U$ is an Open Subset of $\reals^n$, satisfying
+Laplace's Equation
 
 $\nabla^2 u = u_{xx} + u_{yy} = 0$ %FIXME
 
@@ -1698,6 +1732,27 @@ Vector Derivative (\S\ref{sec:vector_derivative}):
     \frac{\partial f}{\partial z}\vec{e}_z
 \]
 
+Gradient of a Vector Field (FIXME)
+
+Divergence (\S\ref{sec:divergence}) can be expressed as:
+\[
+  \nabla \cdot \vec{v} =
+    \frac{\partial v_x}{\partial x} +
+    \frac{\partial v_y}{\partial y} +
+    \frac{\partial v_z}{\partial z}
+\]
+
+the Laplacian (\S\ref{sec:laplacian}) is the Divergence of the Gradient Field
+of $f$: $\nabla \bullet \nabla f$
+
+Curl (\S\ref{sec:curl}) can be expressed as:
+\[
+  \nabla\times\vec{v} =
+    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x +
+    (\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x})\vec{e}_y +
+    (\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y})\vec{e}_z
+\]
+
 
 
 \paragraph{Gradient Flow}\label{sec:gradient_flow}\hfill
@@ -1721,7 +1776,29 @@ Scalar-valued Function (\S\ref{sec:scalar_function}):
     \frac{\partial v_y}{\partial y} +
     \frac{\partial v_z}{\partial z}
 \]
+where $\nabla$ is the Gradient Operator (\S\ref{sec:gradient})
 
+\emph{Convergence}
+
+...
+
+\[
+  \vec{v}(x,y,z) = \begin{bmatrix}
+    p(x,y,z) \\
+    q(x,y,z) \\
+    r(x,y,z)
+  \end{bmatrix}
+\]
+
+\[
+  div\vec{v}(x,y,z)
+    = \frac{\partial{p}}{\partial{x}}
+    + \frac{\partial{q}}{\partial{y}}
+    + \frac{\partial{r}}{\partial{z}}
+\]
+
+the Laplacian (\S\ref{sec:laplacian}) is the Divergence of the Gradient Field
+of $f$: $\nabla \bullet \nabla f$
 
 
 \subsubsection{Curl}\label{sec:curl}
@@ -1733,16 +1810,34 @@ v_x\vec{e}_x + v_y\vec{e}_y + v_z\vec{e}_z$ is a Vector-valued Function
 (\S\ref{sec:vector_function}):
 \[
   \nabla\times\vec{v} =
-    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x +
+    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x -
     (\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x})\vec{e}_y +
     (\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y})\vec{e}_z
 \]
-associating each Point in the Vector Field with the proportional ``on-axis''
-Torque to which a ``tiny pinwheel'' would be subjected if it were centered at
-the Point and can be realized as a Pseudo-determinant
-(\S\ref{sec:pseudo_determinant}):
+where $\nabla$ is the Gradient Operator (\S\ref{sec:gradient}) associating each
+Point in the Vector Field with the proportional ``on-axis'' Torque to which a
+``tiny pinwheel'' would be subjected if it were centered at the Point and can
+be realized as a Pseudo-determinant (\S\ref{sec:pseudo_determinant}):
 
 TODO
+
+Right-hand Rule
+
+Counter-clockwise: Positive
+
+Clockwise: Negative
+
+
+
+\subsubsection{Laplacian}\label{sec:laplacian}
+
+the \emph{Laplacian}, $\Delta$, is the Divergence (\S\ref{sec:divergence}) of
+the Gradient Field of $f$:
+\[
+  \Delta f = \nabla \bullet \nabla f
+\]
+
+analog of Second Derivative for Multivariable Scalar-valued Functions
 
 
 
@@ -1951,6 +2046,9 @@ Twice-continuously Differentiable Function
 where $U$ is an Open Subset of $\reals^n$, satisfying \emph{Laplace's
   Equation} (\S\ref{sec:laplaces_equation})
 
+the Set of Harmonic Functions on a given Open Set $U$ can be seen as the Kernel
+of the Laplace Operator (\S\ref{sec:laplace_operator})
+
 2016 - Samantha Davies - \emph{Voltage, Temperature, and Harmonic
   Functions} -
 \url{https://jeremykun.com/2016/09/26/voltage-temperature-and-harmonic-functions/}
@@ -2006,7 +2104,132 @@ Interior Values are Uniquely Determined by the Values of the Boundary
 \subsection{Fourier Analysis}\label{sec:fourier_analysis}
 % --------------------------------------------------------------------
 
+\fist Convolution (\S\ref{sec:convolution}), Cross-correlation
+(\S\ref{sec:cross_correlation})
+
+
+
+\subsubsection{Periodic Function}\label{sec:periodic_function}
+
+a Function $f$ is \emph{Periodic} with Nonzero \emph{Period} $P$ if:
+\[
+  f(x+P) = f(x)
+\]
+for all $x$
+
+the least positive $P$ is called the \emph{Fundamental Period}
+
+Geometrically, a Periodic Function is a Function with a Graph exhibiting
+\emph{Translational Symmetry} (\S\ref{sec:translation});
+can be extended to Tessellations of the Plane (\S\ref{sec:tessellation})
+
+
+
+\paragraph{Trigonometric Function}\label{sec:trigonometric_function}\hfill
+
+Analytic Functions (\S\ref{sec:analytic_function})
+
+the Sine Wave is the only Periodic Waveform that has the Property that it
+retains its ``wave shape'' when added to another Sine Wave of the same
+Frequency and arbitrary Phase and Magnitude (FIXME: clarify)
+
+$\sin x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n + 1)!}$
+
+$\cos\theta= \sin(\frac{\pi}{2} - \theta)$
+
+$\tan\theta = \frac{\sin\theta}{\cos\theta}$
+
+$\sec\theta = \frac{1}{\cos\theta}$
+
+$\csc\theta = \frac{1}{\sin\theta}$
+
+$\cot\theta = \frac{\cos\theta}{\sin\theta}$
+
+Integrals:
+
+$\int_0^{2\pi} \sin(mt)dt = 0$ for any Integer $m$
+
+$\int_0^{2\pi} \cos(mt)dt = 0$ for any Non-zero Integer $m$
+
+$\int_0^{2\pi} \sin(mt)\cos(nt)dt = 0$ for any Integers $m,n$
+
+$\int_0^{2\pi} \sin^2(mt)dt = \pi$ for any Non-zero Integer $m$
+
+$\int_0^{2\pi} \sin(mt)\sin(nt)dt = 0$ for Integers $m,n$ such that $m\neq{n}$
+or $m\neq{-n}$
+
+$\int_0^{2\pi} \cos(mt)\cos(nt)dt = 0$ for Integers $m,n$ such that $m\neq{n}$
+or $m\neq{-n}$
+
+$\int_0^{2\pi} \cos(mt)dt = \pi$ for any Non-zero Integer $m$
+
+\fist Fourier Series (\S\ref{sec:fourier_series})
+
+
+
+\subsubsection{Double-periodic Function}\label{sec:double_periodic}
+
+e.g. Elliptic Functions (\S\ref{sec:elliptic_function})
+
+
+
 \subsubsection{Fourier Series}\label{sec:fourier_series}
+
+representation of an arbitrary Periodic Function by a Series of weighted $cos$
+and $sin$ (\S\ref{sec:trigonometric_function}) Terms
+
+(wiki):
+
+for a Function $s(x)$ Integrable on an Interval $[x_0,x_0 + P]$ that is
+Periodic outside the Interval with Period $P$ (Frequency $1/P$), then it can be
+approximated on the entire Real Line as a Series of ``Harmonically related''
+Sinusoidal Functions (FIXME: clarify)
+
+the $N$th Partial Sum:
+\[
+  s_N(x) = \frac{a_0}{2} + \sum_{n=1}^N \left(
+    a_n\cos(\frac{2\pi{nx}}{P}) + b_n\sin(\frac{2\pi{nx}}{P})
+  \right)
+\]
+where $a_0,\ldots,a_N$ and $b_1,\ldots,b_N$ are \emph{Fourier Coefficients}
+computed by:
+\begin{align*}
+  a_n & = \frac{2}{P}\int_{x_0}^{x_0+P}s(x) \cdot \cos(\frac{2\pi{nx}}{P}) dx \\
+  b_n & = \frac{2}{P}\int_{x_0}^{x_0+P}s(x) \cdot \sin(\frac{2\pi{nx}}{P}) dx
+\end{align*}
+
+the Coefficient $\frac{a_0}{2} = \frac{1}{P}\int_{x_0}^{x_0+P}s(x)dt$
+represents the \emph{Average} of $s(x)$ over the Interval $[x_0,P]$
+
+equivalently the $N$th Partial Sum can be defined as:
+\[
+  s_N(x) = \sum_{n=-N}^N c_n \cdot e^i\frac{2\pi{nx}}{P}
+\]
+where:
+\[
+  c_n \defeq \begin{cases}
+    \frac{1}{2}(a_n - ib_n) &\ \text{for n > 0} \\
+    \frac{1}{2}a_0          &\ \text{for n = 0} \\
+    c_{|n|}^*               &\ \text{for n < 0}
+  \end{cases}
+\]
+(FIXME: $^*$ is the complex conjugate ???)
+
+the Infinite Sum $s_\infty(x)$ is called the \emph{Fourier Series}
+representation of $s(x)$
+
+
+\emph{Convolution Theorems}
+
+Convolution (\S\ref{sec:convolution}), Cross-correlation
+(\S\ref{sec:cross_correlation})
+
+
+
+\subsubsection{Continuous Fourier Trasform}
+\label{sec:continuous_fourier_transform}
+
+\subsubsection{Discrete-Time Fourier Trasform (DTFT)}\label{sec:dtft}
 
 
 
@@ -2113,6 +2336,43 @@ the Interpretation of Classical Logic by replacing Boolean Algebras
 
 
 \paragraph{von Neumann Algebra}\label{sec:vonneumann_algebra}\hfill
+
+
+
+% --------------------------------------------------------------------
+\subsection{Cross-correlation}\label{sec:cross_correlation}
+% --------------------------------------------------------------------
+
+or \emph{Sliding Dot Product}
+
+Similarity Measure (\S\ref{sec:similarity_measure}) of two Series as a Function
+of the Displacement of one relative to the other
+
+for Continuous Signals the Cross-correlation Operator is the Adjoint Operator
+of the Convolution (\S\ref{sec:convolution}) Operator
+
+\fist Fourier Analysis (\S\ref{sec:fourier_analysis})
+
+
+
+\subsubsection{Autocorrelation}\label{sec:autocorrelation}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Convolution}\label{sec:convolution}
+% --------------------------------------------------------------------
+
+Operation on two Functions giving a modified Function giving the Integral of
+the Pointwise Multiplication of the two Functions as a Function of the amount
+that one of the original Functions is Translated (\S\ref{sec:translation})
+
+for Continuous Signals the Cross-correlation (\S\ref{sec:cross_correlation})
+Operator is the Adjoint Operator of the Convolution Operator
+
+Image Processing
+
+\fist Fourier Analysis (\S\ref{sec:fourier_analysis})
 
 
 
