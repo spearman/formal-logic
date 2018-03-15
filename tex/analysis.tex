@@ -547,6 +547,16 @@ Upper Bound (\S\ref{sec:upper_bound})
 
 Least Upper Bound (\S\ref{sec:least_upperbound})
 
+Local Maxima
+
+Second Derivative Test
+
+Multivariable -- Gradient (\S\ref{sec:gradient}) equal to the Zero Vector:
+$\nabla{f} = \vec{0}$
+
+\fist \emph{Saddle Points} (\S\ref{sec:saddle_point}) are specific to
+Multivariable Functions
+
 
 
 % --------------------------------------------------------------------
@@ -556,6 +566,16 @@ Least Upper Bound (\S\ref{sec:least_upperbound})
 Lower Bound (\S\ref{sec:lower_bound})
 
 Greatest Lower Bound (\S\ref{sec:greatest_lowerbound})
+
+Local Minima
+
+Second Derivative Test
+
+Multivariable -- Gradient (\S\ref{sec:gradient}) equal to the Zero Vector:
+$\nabla{f} = \vec{0}$
+
+\fist \emph{Saddle Points} (\S\ref{sec:saddle_point}) are specific to
+Multivariable Functions
 
 
 
@@ -1668,6 +1688,31 @@ that is \emph{independent} of Coordinates
 
 
 % --------------------------------------------------------------------
+\subsection{Saddle Point}\label{sec:saddle_point}
+% --------------------------------------------------------------------
+
+Gradient (\S\ref{sec:gradient}) equal to the Zero Vector: $\nabla{f} = \vec{0}$
+
+Maximum (\S\ref{sec:maximum}), Minimum (\S\ref{sec:minimum})
+
+in the $x$ direction looks like a Maximum and in the $y$ direction looks like a
+Minimum, or \emph{vice versa}
+
+\emph{Second Partial Derivative Test} -- additionally need to look at
+\emph{mixed} Partial Derivative Term
+$\frac{\partial^2{f}}{\partial{y}\partial{x}}$:
+\[
+  H = f_{xx}(x_0,y_0)f_{yy}(x_0,y_0) - f_{xy}(x_0,y_0)^2
+\]
+if $H > 0$, then it is a Maximum or a Minimum
+
+if $H < 0$, then it is a Saddle Point
+
+if $H = 0$, then ??? ... FIXME
+
+
+
+% --------------------------------------------------------------------
 \subsection{Vector Calculus}\label{sec:vector_calclulus}
 % --------------------------------------------------------------------
 
@@ -1827,7 +1872,7 @@ analog of Second Derivative for Scalar-valued Multivariable Functions
   \frac{\partial^2 f}{\partial{x_1^2}} +
   \frac{\partial^2 f}{\partial{x_2^2}} +
   \cdots +
-  \frac{\partial^2 f}{\partial{x_n^2}
+  \frac{\partial^2 f}{\partial{x_n^2}}
 \]
 
 the Laplacian of a \emph{Harmonic Function} (\S\ref{sec:harmonic_function}) is
@@ -1868,9 +1913,49 @@ Clockwise: Negative
 
 \fist cf. Locally Linear Transformation (\S\ref{sec:locally_linear})
 
+$L(x_0,y_0) = f(x_0,y_0)$
+
+$\frac{\partial{L}}{\partial{x}} = f_x(x_0,y_0)$
+
+$\frac{\partial{L}}{\partial{y}} = f_y(x_0,y_0)$
+
+a Quadratic Approximation (\S\ref{sec:quadratic_approximation}) adds Quadratic
+Terms so that the Second Partial Derivative matches the original Function at
+that Point
+
+\fist Jacobian Matrix (\S\ref{sec:jacobian_matrix})
+
+Matrix form:
+\[
+  \nabla f(\vec{x}_0) \bullet (\vec{x}-\vec{x}_0)
+\]
+(FIXME: correct ???)
+
 
 
 \subsubsection{Quadratic Approximation}\label{sec:quadratic_approximation}
+
+add Quadratic Terms to a Local Linearization so that Second Derivative matches
+the original Function at that Point
+
+$\frac{\partial^2{Q}}{\partial{x^2}}(x_0,y_0) =
+  \frac{\partial^2{f}}{\partial{x^2}}(x_0,y_0)$
+
+$\frac{\partial^2{Q}}{\partial{y}\partial{x}}(x_0,y_0) =
+  \frac{\partial^2{f}}{\partial{y}\partial{x}}(x_0,y_0)$
+
+$\frac{\partial^2{Q}}{\partial{y^2}}(x_0,y_0) =
+  \frac{\partial^2{f}}{\partial{y^2}}(x_0,y_0)$
+
+\fist Hessian Matrix (\S\ref{sec:hessian_matrix}) $\mathbf{H}$
+
+Matrix form:
+\[
+  Q_f(\vec{x}) = f(\vec{x}_0) + \nabla{f(\vec{x}_0)}\bullet (\vec{x}-\vec{x}_0)
+  + \frac{1}{2}(\vec{x}-\vec{x}_0)^T\mathbf{H}_f(\vec{x}_0)(\vec{x}-\vec{x}_0)
+\]
+
+
 
 \subsubsection{Integral Theorems of Vector Calculus}
 \label{sec:integral_theorems}
