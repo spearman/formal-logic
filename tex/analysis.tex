@@ -1051,6 +1051,8 @@ Stable \emph{or} Unstable (TODO: clarify)
 \fist cf. Laplacian (\S\ref{sec:laplacian}), Laplace Operator
 (\S\ref{sec:laplace_operator}) %FIXME same concepts?
 
+Convolution (\S\ref{sec:convolution})
+
 in Control Theory (\S\ref{sec:control_theory}), Systems are often Transformed
 from the Time Domain to the Frequency Domain using Laplace Transform and the
 Transformed System's Zeros (\S\ref{sec:complex_zero}) and Poles
@@ -1346,8 +1348,8 @@ Differentials: $\frac{dy}{dx}$
 \subsection{Ordinary Differential Equation}\label{sec:ode}
 % --------------------------------------------------------------------
 
-An \emph{Ordinary Differential Equation (ODE)} is an Equation containing a
-Function of one Independent Variable and its Derivatives.
+An \emph{Ordinary Differential Equation (ODE)} is an Equation containing one or
+more Functions of one Independent Variable and its Derivatives.
 
 \fist A \emph{Partial} Differential Equation (PDE
 \S\ref{sec:pde}) is a Differential Equation
@@ -1357,16 +1359,33 @@ containing Unknown Multivariable Functions and their Partial Derivatives.
 
 \fist Flow (\S\ref{sec:flow})
 
-For $F$ a Function of $x$, $y$, and Derivatives (\S\ref{sec:derivative}) of
+A \emph{Solution} of an ODE $F$ is a Function $u : I \subset \reals \rightarrow
+\reals$ called an \emph{Integral Curve} (\S\ref{sec:integral_curve}) for $F$
+which is Tangent to the Slope Field defined by the ODE at every Point.
+
+For $F$ a Function of $t$, $y$, and Derivatives (\S\ref{sec:derivative}) of
 $y$, an Equation of the form:
 \[
-  F(x,y,y',\ldots,y^{(n-1)}) = y^{(n)}
+  F(t,y,y',\ldots,y^{(n-1)}) = y^{(n)}
 \]
 is a \emph{Explicit Ordinary Differential Equation} of \emph{Order $n$}, and an
-\emph{Implicit Ordinary Differential Equation} of Order $n$ has the form:
+\emph{Implicit Ordinary Differential Equation} (or \emph{Homogenous Ordinary
+  Differential Equation}) of Order $n$ has the form:
 \[
-  F(x,y,y',\ldots,y^{(n)}) = 0
+  F(t,y,y',\ldots,y^{(n)}) = 0
 \]
+if $f(t)$ is a Solution to a Homogenous ODE $F$ then $c\cdot{f(t)}$ is a
+Solution to $F$ for any Constant $c$, and if $g(t)$ is also a Solution then
+$f(t) + g(t)$ is a Solution
+
+\emph{Characteristic Equation}
+
+an example of a System modelled by a First-order Ordinary Differential Equation
+is an RC Circuit
+
+an example of a System modelled by a Second-order Ordinary Differential
+Equation is a Simple Harmonic Oscillator: the Phase Space consists of a
+Velocity Dimension and a Position Dimension and the Orbit is Periodic
 
 
 
@@ -1375,6 +1394,38 @@ is a \emph{Explicit Ordinary Differential Equation} of \emph{Order $n$}, and an
 When the Differential Equation is represented as a Vector Field or Slope Field
 (\S\ref{sec:slope_field}), the corresponding Integral Curves
 (\S\ref{sec:integral_curve}) are Tangent to the Field at each point.
+
+
+
+\subsubsection{Initial Value Problem (IVP)}\label{sec:ivp}
+
+\fist cf. Boundary Value Problem (\S\ref{sec:boundary_value_problem})
+
+(wiki):
+
+an ODE together with a Value of the Unknown Function called the \emph{Initial
+  Condition} at a given Point in the Domain of the Solution
+
+Differential Equation:
+\[
+  y'(t) = f(t, y(t))
+\]
+with $f : \Omega \subset \reals \times \reals^n \rightarrow \reals^n$ where
+$\Omega$ is an Open Set of $\reals \times \reals^n$ and Initial Condition
+\[
+  (t_0, y_0) \in \Omega
+\]
+in the Domain of $f$
+
+a \emph{Solution} to an Initial Value Problem is a Function $y : \reals
+\rightarrow \reals^n$ that is a Solution to the Differential Equation and
+satisfies $y(t_0) = y_0$
+
+\fist Time Evolution (\S\ref{sec:time_evolution})
+
+\fist Dynamical System (\S\ref{sec:dynamical_system})
+
+Higher Dimensions (FIXME)
 
 
 
@@ -1639,6 +1690,12 @@ Differentiable Function (\S\ref{sec:continuously_differentiable}) $f : U
 Laplace's Equation
 
 $\nabla^2 u = u_{xx} + u_{yy} = 0$ %FIXME
+
+
+
+\paragraph{Boundary Value Problem}\label{sec:boundary_value_problem}\hfill
+
+\fist cf. Initial Value Problem (\S\ref{sec:initial_value_problem})
 
 
 
@@ -2537,6 +2594,8 @@ of the Convolution (\S\ref{sec:convolution}) Operator
 \subsection{Convolution}\label{sec:convolution}
 % --------------------------------------------------------------------
 
+$(f * g)(t) = \int_0^t f(t-\tau) g(\tau) d\tau$
+
 Operation on two Functions giving a modified Function giving the Integral of
 the Pointwise Multiplication of the two Functions as a Function of the amount
 that one of the original Functions is Translated (\S\ref{sec:translation})
@@ -2547,6 +2606,8 @@ Operator is the Adjoint Operator of the Convolution Operator
 Image Processing
 
 \fist Fourier Analysis (\S\ref{sec:fourier_analysis})
+
+Laplace Transform (\S\ref{sec:laplace_transform})
 
 
 
