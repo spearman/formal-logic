@@ -48,7 +48,7 @@ explicitly required by stating that we are talking about a
 If $R$ is Commutative, then Left $R$-modules are the same as Right
 $R$-modules and simply called \emph{$R$-modules}.
 
-A Module Homomorphism is a \emph{Linear Map} (\S\ref{sec:linear_map})
+A Module Homomorphism is a \emph{Linear Map} (\S\ref{sec:linear_transformation})
 
 Vector Space (\S\ref{sec:vector_space})
 
@@ -58,10 +58,10 @@ Multilinear Algebra (\S\ref{sec:multilinear_algebra}):
 
 
 % --------------------------------------------------------------------
-\subsection{Linear Map}\label{sec:linear_map}
+\subsection{Linear Transformation}\label{sec:linear_transformation}
 % --------------------------------------------------------------------
 
-A \emph{Linear Map} (or \emph{Linear Transformation}) is a Module Homomorphism
+A \emph{Linear Transformation} (or \emph{Linear Map}) is a Module Homomorphism
 (\S\ref{sec:module}) $L : V \rightarrow W$ preserving Addition and Scalar
 Multiplication:
 \begin{align*}
@@ -128,6 +128,51 @@ Infinity Pointwise Invariant
 
 Linear Relations as Corelations in $\cat{Vect}$; Category of Vector
 Spaces and Linear Relations $\cat{LinRel}$
+
+
+
+\subsubsection{Fundamental Subspace}\label{sec:fundamental_subspace}
+
+\fist Fundamental Theorem of Linear Algebra
+(\S\ref{sec:fundamental_linear_algebra_theorem})
+
+
+\paragraph{Column Space}\label{sec:column_space}\hfill
+
+\emph{Image}
+
+Rank (\S\ref{sec:rank})
+
+
+
+\paragraph{Row Space}\label{sec:row_space}\hfill
+
+\emph{Coimage}
+
+Rank (\S\ref{sec:rank})
+
+
+
+\paragraph{Nullspace}\label{sec:nullspace}\hfill
+
+The \emph{Nullspace} of a Linear Map $L : V \rightarrow W$ between Vector
+Spaces $V$ and $W$ is the Set of all $\vec{v}\in{V}$ such that $L(\vec{v}) =
+\vec{0}$ where $\vec{0}$ is the Zero Vector in $W$:
+\[
+  \text{ker}(L) = \{\vec{v}\in{V} \;|\; L(\vec{v}) = \vec{0}\}
+\]
+
+The Kernel of $L$ is a Linear Subspace of the Domain $V$.
+
+Nullity (\S\ref{sec:nullity})
+
+
+
+\paragraph{Left Nullspace}\label{sec:left_nullspace}\hfill
+
+or \emph{Cokernel}
+
+Corank (\S\ref{sec:rank})
 
 
 
@@ -517,6 +562,10 @@ A Set of Vectors in a Vector Space is a \emph{Basis} if the Vectors are
 Linear Combination of the Set, that is, a \emph{Linearly Independent Spanning
   Set} (\S\ref{sec:linear_span}).
 
+\fist a \emph{Free Object} (\S\ref{sec:free_object}) is a direct generalization
+to Categories of the notion of Basis in a Vector Space
+(FIXME: clarify)
+
 
 
 \paragraph{Covariant Transformation}\label{sec:covariant_transformation}\hfill
@@ -590,6 +639,16 @@ cf. Vector Field (\S\ref{sec:vector_field})
 
 cf. Tensor Field (\S\ref{sec:tensor_field})
 
+Line Integral of Parametric Curves (\S\ref{sec:parametric_curve}) in a Scalar
+Field; unlike Line Integrals of Curves in Vector Fields, the Line Integral in a
+Scalar Field is \emph{independent} of Path direction
+
+when a Vector Field is the \emph{Gradient Field} (\S\ref{sec:gradient}) of some
+Scalar Field, it is a \emph{Conservative} (\emph{Path Independent}
+\S\ref{sec:conservative_vector_field}) Vector Field and the Line Integral of
+any Path between two Points is equivalent and the Line Integral of any Closed
+Path from a Point to itself is Zero
+
 
 
 \subsubsection{Scalar Function}\label{sec:scalar_function}
@@ -612,6 +671,24 @@ Dimension ???
 \end{equation*}
 
 Partial Derivative (\S\ref{sec:partial_derivative}) ... TODO
+
+Vector Field Line Integral (\S\ref{sec:line_integral}) of a Parametric Curve
+(\S\ref{sec:parametric_curve}) is a Sum of the Dot Products of the Derivative
+of the Path Function $C = \vec{r}(t)$ with the Vectors in the Vector Field
+$\vec{f}(x,y)$:
+\[
+  \int_C \vec{f} \bullet d\vec{r}
+\]
+represents the amount of ``Work'' done on a Path in the Field (Physics)
+that unlike Line Integrals of Curves in a Scalar Field
+(\S\ref{sec:scalar_field}), the Line Integral in a Vector Field is
+\emph{dependent} on Path direction (it is Negative in the opposite direction)
+
+a Vector Field is called \emph{Path Independent} (or \emph{Conservative}
+\S\ref{sec:conservative_vector_field}) if it is equal to the Gradient Field
+(\S\ref{sec:gradient}) of a Scalar Field; if so the Line Integral of all Paths
+between Points are equal and the Line Integral from a Point to itself (Closed
+Path) is Zero
 
 wiki:
 
@@ -643,6 +720,17 @@ Autonomous Vector Field (???)
 \subsubsection{Vector Flow}\label{sec:vector_flow}
 
 Flow (\S\ref{sec:flow})
+
+
+
+\subsubsection{Conservative Vector Field}\label{sec:conservative_vector_field}
+
+a Vector Field is called \emph{Conservative} (or \emph{Path Independent}) if
+the Line Integral (\S\ref{sec:line_integral}) of all Paths between Points are
+equal and the Line Integral of a Closed Path (from a Point to itself) is Zero
+
+this is true when the Vector Field is the \emph{Gradient Field}
+(\S\ref{sec:gradient}) of some Scalar Field
 
 
 
@@ -1121,6 +1209,8 @@ Grassmann Algebra (\S\ref{sec:grassmann_algebra})
 
 $2$-vector
 
+Isomorphic to Skew-symmetric Matrices (\S\ref{sec:skew_symmetric})
+
 
 
 % --------------------------------------------------------------------
@@ -1141,7 +1231,8 @@ $2$-vector
 
 %FIXME: merge with matrix calculus ?
 
-A \emph{Matrix} represents a \emph{Linear Map} (\S\ref{sec:linear_map}) between
+A \emph{Matrix} represents a \emph{Linear Map} (Linear
+Transformation\S\ref{sec:linear_transformation}) between
 two Vector Spaces (\S\ref{sec:vector_space}). Any Linear Map between
 Finite-dimensional Vector Spaces $A : V \rightarrow W$ where $V$ has Dimension
 $n$ and $W$ has Dimension $m$ can be represented as an $m \times n$ Matrix
@@ -1153,6 +1244,10 @@ W$.
 \fist Matrix Calculus (\S\ref{sec:matrix_calculus})
 
 \fist Matrix Difference Equation (\S\ref{sec:matrix_difference_equation})
+
+\fist System of Linear Equations (\S\ref{sec:linear_system})
+
+\fist Fundamental Subspaces (\S\ref{sec:fundamental_subspace})
 
 \emph{Column Vector} -- an $m \times 1$ Matrix
 
@@ -1179,45 +1274,24 @@ respectively, a Row Vector times a Column Vector is the Dot Product
 and a Column Vector times a Row Vector is a Dyadic Product
 (\S\ref{sec:dyadic_product}), which results in an $m \times n$ Matrix
 
+\asterism
 
+For the One-dimensional Vector Space over the Reals $\reals$, a 1x1 Matrix is
+just a Real Number. The kinds of Linear Transformations are:
+\begin{itemize}
+  \item Identity -- $A = 1$
+  \item Zero -- $A = 0$
+  \item Reflection -- $A = -1$
+  \item Scaling -- $A > 0$
+  \item Scaling + Reflection -- $A < 0$
+\end{itemize}
+all Non-zero $A$ are Invertible
 
-% --------------------------------------------------------------------
-\subsection{Fundamental Subspace}\label{sec:fundamental_subspace}
-% --------------------------------------------------------------------
-
-\fist Fundamental Theorem of Linear Algebra
-(\S\ref{sec:fundamental_linear_algebra_theorem})
-
-
-
-\subsubsection{Column Space}\label{sec:column_space}
-
-\emph{Image}
-
-
-
-\subsubsection{Row Space}\label{sec:row_space}
-
-\emph{Coimage}
-
-
-
-\subsubsection{Nullspace}\label{sec:nullspace}
-
-The \emph{Nullspace} of a Linear Map $L : V \rightarrow W$ between Vector
-Spaces $V$ and $W$ is the Set of all $\vec{v}\in{V}$ such that $L(\vec{v}) =
-\vec{0}$ where $\vec{0}$ is the Zero Vector in $W$:
-\[
-  \text{ker}(L) = \{\vec{v}\in{V} \;|\; L(\vec{v}) = \vec{0}\}
-\]
-
-The Kernel of $L$ is a Linear Subspace of the Domain $V$.
-
-
-
-\subsubsection{Left Nullspace}\label{sec:left_nullspace}
-
-or \emph{Cokernel}
+In $\reals^2$, a 2x2 Matrix may additionally represent:
+\begin{itemize}
+  \item Shear -- Horizontal, Vertical; every Shear Matrix has an Inverse which
+    is a Shear Matrix with the Shear Element negated
+\end{itemize}
 
 
 
@@ -1246,6 +1320,7 @@ Dimension of the Nullspace (\S\ref{sec:nullspace})
 \emph{Rank-Nullity Theorem}
 
 
+
 % --------------------------------------------------------------------
 \subsection{Corank}\label{sec:corank}
 % --------------------------------------------------------------------
@@ -1255,8 +1330,10 @@ Dimension of the Left Nullspace (\S\ref{sec:left_nullspace})
 
 
 % --------------------------------------------------------------------
-\subsection{Matrix Multiplication}\label{sec:matrix_multiplication}
+\subsection{Matrix Product}\label{sec:matrix_product}
 % --------------------------------------------------------------------
+
+\fist Tensor Product (\S\ref{sec:module_tensor_product})
 
 The Multiplication of an $m \times n$ Matrix $A$ with entries $a_{xy}$
 on the left by an $n \times p$ Matrix $B$ with entries $b_{wv}$ on the
@@ -1448,6 +1525,10 @@ Positive-definite Matrix (\S\ref{sec:positive_definite})
 
 
 \subsubsection{Skew-symmetric Matrix}\label{sec:skew_symmetric}
+
+Bivectors (\S\ref{sec:bivector}) are Isomorphic to Skew-symmetric Matrices
+
+
 
 \subsubsection{Hamiltonian Matrix}\label{sec:hamiltonian_matrix}
 
