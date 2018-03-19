@@ -1060,6 +1060,14 @@ Transformed System's Zeros (\S\ref{sec:complex_zero}) and Poles
 
 
 
+\paragraph{Legendre Transform}\label{sec:legendre_transform}\hfill
+
+the Hamiltonian (\S\ref{sec:hamiltonian_system}) and the Routhian (TODO) can be
+obtained from the Lagrangian (\S\ref{sec:lagrangan_system}) by the Legendre
+Transform
+
+
+
 % --------------------------------------------------------------------
 \subsection{Fundamental Theorem of Calculus}
 \label{sec:fundamental_calculus_theorem}
@@ -1399,7 +1407,8 @@ When the Differential Equation is represented as a Vector Field or Slope Field
 
 \subsubsection{Initial Value Problem (IVP)}\label{sec:ivp}
 
-\fist cf. Boundary Value Problem (\S\ref{sec:boundary_value_problem})
+\fist cf. Boundary Value Problem (\S\ref{sec:boundary_value_problem}) defines
+Values of the Solution at more than one Point
 
 (wiki):
 
@@ -1423,7 +1432,13 @@ satisfies $y(t_0) = y_0$
 
 \fist Time Evolution (\S\ref{sec:time_evolution})
 
-\fist Dynamical System (\S\ref{sec:dynamical_system})
+\fist Dynamical Systems (\S\ref{sec:dynamical_system})
+
+\begin{itemize}
+  \item the Trajectory $\vec{s}(t)$ of a Hamiltonian System is a Solution to
+    the IVP defined by Hamilton's Equations and the Initial Condition
+    $\vec{s}(0) = \vec{s}_0 \in \reals^{2N}$
+\end{itemize}
 
 Higher Dimensions (FIXME)
 
@@ -1476,6 +1491,11 @@ TODO
 % --------------------------------------------------------------------
 
 %FIXME harmonic analysis? dirichlet problem?
+
+\fist Intial Value Problem (IVP \S\ref{sec:ivp}) -- specifies Value in Solution
+at only one Point (Initial Conditions)
+
+
 
 \subsubsection{Finite Element Method}\label{sec:finite_element_method}
 
@@ -1648,6 +1668,9 @@ Partial Differential Equations
 
 \fist Numerical Integration (\S\ref{sec:numerical_integration})
 
+\fist Hamilton-Jacobi-Bellman Equation (Optimal Control Theory
+\S\ref{sec:hamilton_jacobi_bellman})
+
 
 
 \paragraph{Wave Equation}\label{sec:dirichlet_problem}\hfill
@@ -1749,13 +1772,39 @@ Closed Line Integral $\oint$
 
 Volume under a Surface
 
+Area Differential, Volume Differential
+
+Bounded Domain
+
 
 
 \subsubsection{Triple Integral}\label{sec:triple_integral}
 
+Volume Differential, Mass Differential
+
+e.g. compute the Mass of a Volume of non-uniform Density with Density Function
+$\rho(x,y,z)$
+
+
+
 \subsubsection{Surface Integral}\label{sec:surface_integral}
 
 Double Integral analog of the Line Integral
+
+\[
+  d\sigma = |\frac{\partial{\vec{r}}}{\partial{s}} \times
+    \frac{\partial{\vec{r}}}{\partial{t}}| ds dt
+\]
+
+Surface Area
+
+\[
+  {\iint}_{\Sigma} d\sigma
+\]
+
+\[
+  {\iint}_{\Sigma} f(x,y,z) d\sigma
+\]
 
 
 
@@ -1769,12 +1818,68 @@ used to calculate ``\emph{Flux Densities}'' %FIXME
 \subsection{Exterior Derivative}\label{sec:exterior_derivative}
 % --------------------------------------------------------------------
 
-
-
 \subsubsection{Differential Form}\label{sec:differential_form}
 
 approach to Multivariable Calculus (\S\ref{sec:multivariable_calculus})
 that is \emph{independent} of Coordinates
+
+\fist Contact Geometry (\S\ref{sec:contact_geometry}): geometric structure on
+Smooth Manifolds given by a Hyperplane Distribution
+(\S\ref{sec:tangent_bundle_distribution}) may be given (Locally) as the Kernel
+of a Differential $1$-form and the \emph{Maximal Non-degeneracy Condition}) on
+the Form
+
+
+
+\paragraph{Tautological $1$-form}\label{sec:tautological_1form}\hfill
+
+a \emph{Tautological $1$-form} is a $1$-form defined on the Cotangent Bundle
+(\S\ref{sec:cotangent_bundle}) $T * Q$ of a Manifold $Q$
+
+the Exterior Derivative of a Tautological $1$-form defines a \emph{Symplectic
+  Form} (\S\ref{sec:symplectic_form}) giving $T * Q$ the structure of a
+Symplectic Manifold (\S\ref{sec:symplectic_manifold})
+
+relates the formalisms of Hamiltonian (\S\ref{sec:hamiltonian_system}) and
+Lagrangian (\S\ref{sec:lagrangian_system}) Mechanics
+
+in Canonical Coordinates:
+\[
+  \theta = \sum_i p_i dq^i
+\]
+
+
+
+\paragraph{Symplectic Form}\label{sec:symplectic_form}\hfill
+
+a Symplectic Manifold (\S\ref{sec:symplectic_manifold}) is a Differentiable
+Manifold equipped with a Closed Non-degenerate $2$-form called the
+\emph{Symplectic Form}
+
+the Symplectic Form in Symplectic Geometry (\S\ref{sec:symplectic_geometry})
+plays the role analagous to Metric Tensor (\S\ref{sec:metric_tensor}) in
+Riemannian Geometry (\S\ref{sec:riemannian_geometry})
+
+the Exterior Derivative of a Tautological $1$-form
+(\S\ref{sec:tautological_1form}) defined on the Cotangent Bundle
+(\S\ref{sec:cotangent_bundle}) $T * Q$ of a Manifold $Q$ defines a Symplectic
+Form giving $T * Q$ the Structure of a Symplectic Manifold
+
+Canonical Symplectic Form (Poincar\'e $2$-form):
+\[
+  \omega = -d\theta = \sum_i dq^i \wedge dp_i
+\]
+
+
+
+\paragraph{Frobenius' Theorem}\label{sec:frobenius_theorem}\hfill
+
+Vector Field (\S\ref{sec:vector_field}) formulation:
+the Subbundle (\S\ref{sec:subbundle}) of the Tangent Bundle
+(\S\ref{sec:tangent_bundle}) of a Manifold is Integrable (or Involutive) if and
+only if it arises from a \emph{Regular Foliation} (\S\ref{sec:foliation})
+
+Differential Forms formulation: TODO
 
 
 
@@ -2695,7 +2800,7 @@ the current system state and a later system state:
   G(Y(t), Y(t + \Delta{t})) = 0
 \]
 
-First-order Methods
+First-order Methods -- (Explicit) Euler Method, Symplectic (Semi-implicit) Euler
 
 Second-order Methods
 
@@ -2707,6 +2812,10 @@ Higher-order Methods
 
 a Numerical Integration Method that preserves Geometric properties of the exact
 \emph{Flow} (\S\ref{sec:integral_curve}) of a Differential Equation
+
+by definition Geometric Integrators are \emph{Canonical Transformations}
+(\S\ref{sec:canonical_coordinate}), i.e. preserving the form of Hamilton's
+Equations
 
 
 
@@ -2770,6 +2879,8 @@ uniqueness of this Field is equivalent to the Continuum Hypothesis
 
 \fist Optimal Control Theory (\S\ref{sec:optimal_control})
 
+Hamilton-Jacobi Equation (\S\ref{sec:hamilton_jacobi}
+
 
 
 % --------------------------------------------------------------------
@@ -2782,6 +2893,12 @@ Numbers for the purpose of establishing a Calculus-like structure on $X$
 \fist cf. Linear Functional (Linear Form \S\ref{sec:linear_form})
 
 \fist Functional Equations (\S\ref{sec:functional_equation})
+
+the \emph{Action} (\S\ref{sec:trajectory_action}) of a Physical System with
+Equations of Motion is a Functional taking the Trajectory of the System and
+producing a Real Number; the Hamilton's Principle Function $S$ in the
+Hamilton-Jacobi Equation (\S\ref{sec:hamilton_jacobi}) is equal to the
+\emph{Classical Action})
 
 
 
