@@ -2,6 +2,6 @@
 
 set -x
 
-latexmk $@ -f -xelatex main -outdir=output -auxdir=output/aux
+latexmk $@ -f -xelatex main
 
 exit
