@@ -519,6 +519,107 @@ the Equation $\dot{t} = 1$
 
 
 % --------------------------------------------------------------------
+\subsection{Multibody Dynamical System}\label{sec:multibody_system}
+% --------------------------------------------------------------------
+
+(wiki):
+
+Dynamic Simulation, Molecular Dynamics
+
+Multibody Simulation (MBS)
+
+Degree of Freedom -- number of independent Kinematical possibilities for
+movement (e.g. Translation, Rotation)
+
+\emph{Kinematic Behavior}
+
+\emph{Kinematic Constraints} -- Holonomic, Non-holonomic (TODO)
+
+\emph{Kinematic Chain} -- a number of Rigid Bodies (``Links'') connected by
+Kinematic Pairs (``Joints'')
+
+\emph{Kinematic Pairs} -- ``Joints'' connecting two Rigid Bodies (``Links'') in
+a Kinematic Chain
+
+\emph{Rigid Bodies} -- ``Links'' connected by Kinematic Pairs (``Joints'') in a
+Kinematic Chain
+
+\emph{Type Synthesis}: enumeration of Topologies of Kinematic Chains
+
+\emph{Constraint Conditions} -- implies the \emph{restriction} in the
+Kinematical Degrees of Freedom of one or more Bodies
+
+Constraints are usually an Algebraic (Polynomial) Equation
+(\S\ref{sec:polynomial_equation}) defining the relative Translation or Rotation
+between two Bodies, but may also constrain the relative Velocity between two
+Bodies or a Body and a ``ground'' Plane; also Non-classical Constraints may
+introduce a new unknown Coordinate, e.g. as in Sliding Joints where a Body is
+allowed to move along the Surface of another Body
+
+in the case of \emph{Contact}, the Constraint Condition is based on
+\emph{Inequalities} so that the Constraint does not \emph{permanently} restrict
+the Degrees of Freedom of the Bodies
+
+Constraint Conditions $C_i = 0$
+
+Lagrange Multipliers (\S\ref{sec:lagrance_multiplier}) $\lambda_i$ related to
+Constraint Condition $C_i$ represents a Force or a ``Moment''; Lagrange
+Multipliers do no ``Work'' compared to External Forces, i.e. they do not change
+the Potential Energy of a Body
+
+Constraint Algorithms (Computational Chemistry): methods for satisfying
+Newtonian Motion of a Rigid Body consisting of Mass Points
+
+the motion of $N$ Particles can be described by a Set (FIXME: system ???) of
+Second-order ODEs by Newton's Second Law, written in Matrix Form:
+\[
+  \mat{M} \cdot \frac{d^2\vec{q}}{dt^2}
+    = \vec{f} = -\frac{\partial{V}}{\partial{q}}
+\]
+where $\mat{M}$ is the \emph{Mass Matrix}, $\vec{q}$ is the Vector of
+Generalized Coordinates describing Particle Positions, $\vec{f}(\vec{q})$
+represents the Generalized Forces, and Scalar-valued Function $V(\vec{q})$
+represents the Potential Energy
+
+\emph{in the absence of Constraints} the Mass Matrix $\mat{M}$ is a $3N \times
+3N$ Diagonal Square Matrix with the Particle Masses along the diagonal
+
+in the presence of $M$ Constraints, the Coordinates $\vec{q}$ must also satisfy
+$M$ Time-independent Algebraic (Polynomial) Equations:
+\[
+  \vec{g} = (g_1(\vec{q}) = 0, \ldots, g_M(\vec{q}) = 0)
+\]
+giving a System of DAEs (\S\ref{sec:system_of_daes}) to Solve
+
+\fist a System of DAEs differs from an Implicit ODE System
+(\S\ref{sec:system_of_odes}) that may be rendered Explicit in that the Jacobian
+Matrix (\S\ref{sec:jacobian_matrix}) is Singular (Non-invertible
+\S\ref{sec:singular_matrix}) for a System of DAEs
+
+in practical terms, the Solution to a DAE System depends on the Derivatives of
+the \emph{Input Signal} (\S\ref{sec:signal_flow}), and not just the ``Signal
+itself'' as in the case of ODEs (FIXME: clarify); e.g. see Systems with
+Hysteresis such as the Schmitt Trigger
+
+the ``simplest'' approach to Solving is to define new Generalized Coordinates
+that are Unconstrained, eliminating the Algebraic (Polynomial) Equations and
+reducing the problem to an ODE; e.g. the motion of a Rigid Body is described by
+six Independent, Unconstrained Coordinates, instead of describing the Positions
+of the Particles that make it up and the Constraints maintaining their relative
+Distances-- this approach may become complex as the Mass Matrix may become
+Non-diagonal and depend on the Generalized Coordinates
+
+a second approach introduces Explicit Forces working to maintain Constraints--
+this approach may be computationally inefficient
+
+a third approach is to use methods such as Lagrange Multipliers
+(\S\ref{sec:lagrance_multiplier}) or Projection
+(\S\ref{sec:orthogonal_projection}) to determine Coordinate ``adjustments''
+necessary to Satisfy the Constraints
+
+
+
+% --------------------------------------------------------------------
 \subsection{Measure-preserving Dynamical System}
 \label{sec:measure_preserving_system}
 % --------------------------------------------------------------------
@@ -1973,6 +2074,13 @@ Semantics given by Corelation Categories
 (\S\ref{sec:corelation_category})
 
 Signal Flow Graph (\S\ref{sec:flow_graph})
+
+\emph{Input Signal}
+
+\fist the Solution of a System of DAEs (\S\ref{sec:system_of_daes}) depends on
+the Derivatives of the Input Signal and not just the ``Signal itself'' as in
+the case of ODE Systems (\S\ref{sec:system_of_odes})
+(FIXME: clarify)
 
 
 

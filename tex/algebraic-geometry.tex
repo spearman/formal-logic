@@ -158,6 +158,8 @@ Coefficients in some Field (\S\ref{sec:field}).
 \fist Polynomial Equations are sometimes called \emph{Algebraic Equations}, not
 to be confused with Algebraic Expressions (\S\ref{sec:algebraic_expression}).
 
+\fist System of Differential-Algebraic Equations (\S\ref{sec:system_of_daes})
+
 The \emph{Solution} to a Polynomial Equation is a Value or Set of Values; cf.
 the Solution to a Differential Equation (\S\ref{sec:differential_equation}) is
 a Function or Class of Functions.
@@ -300,6 +302,10 @@ Function near $x$
 
 \fist Power Series (\S\ref{sec:power_series})
 
+\fist \emph{Perturbation Series} (Perturbation Methods
+\S\ref{sec:perturbation_method}): Formal Power Series in some ``small''
+Parameter quantifying the deviation from the exactly Solvable problem
+
 
 
 % ====================================================================
@@ -338,6 +344,11 @@ An \emph{Algebraic Function} is a Function that can be defined as the Root
 % ====================================================================
 \section{System of Equations}\label{sec:system_of_equations}
 % ====================================================================
+
+a Finite Set of Equations (\S\ref{sec:equation}) for which a ``common
+solution'' is desired (FIXME: clarify)
+
+
 
 % --------------------------------------------------------------------
 \subsection{System of Polynomial Equations}
@@ -410,9 +421,59 @@ Combination of Unknown Variables or Functions that appear in them
 \label{sec:system_of_odes}
 % --------------------------------------------------------------------
 
-a number of ``coupled'' Differential Equations
+a number of ``coupled'' Differential Equations (\S\ref{sec:ode})
 
 \fist Dynamical Systems (\S\ref{sec:dynamical_system})
+
+\fist the Jacobian Matrix (\S\ref{sec:jacobian_matrix}) for a System of DAEs
+(\S\ref{sec:system_of_daes}) is a Singular (Non-invertible) Matrix
+(\S\ref{sec:singular_matrix})
+
+
+
+% --------------------------------------------------------------------
+\subsection{System of Differential-Algebraic Equations}
+\label{sec:system_of_daes}
+% --------------------------------------------------------------------
+
+(wiki):
+
+a System of Equations that either contains Differential Equations
+(\S\ref{sec:differential_equation}) and Algebraic (Polynomial) Equations
+(\S\ref{sec:polynomial_equation}), or is equivalent to such a System
+
+\fist Constraints of Multibody Systems (\S\ref{sec:multibody_system})
+
+general form of System of Differential equations for Vector-valued Functions
+$x$ in one Independent Variable $t$:
+\[
+  \vec{f}(\vec{x}'(t), \vec{x}(t), t) = 0
+\]
+where $\vec{x} : [a,b] \rightarrow \reals^n$ is a Vector of $n$ Dependent
+Variables:
+\[
+  \vec{x}(t) = (x_1(t), \ldots, x_n(t))
+\]
+and the System has $n$ Equations:
+\[
+  \vec{f} = (\vec{f}_1, \ldots, \vec{f}_n) : \reals^{2n+1} \rightarrow \reals^n
+\]
+
+Solution consists of a search for Consistent Initial Values and a computed
+Trajectory (\S\ref{sec:trajectory})
+
+a DAE is not completely Solvable for the Derivatives of \emph{all} Components
+of the Function $\vec{x}$ because they may not \emph{appear}, i.e. \emph{some}
+Equations are \emph{Algebraic} (Polynomial)
+
+compared to general Systems of ODEs (\S\ref{sec:system_of_odes}), the Jacobian
+Matrix (\S\ref{sec:jacobian_matrix}) for a System of DAEs is a Singular
+(Non-invertible) Matrix (\S\ref{sec:singular_matrix})
+
+in practical terms, the Solution to a DAE System depends on the Derivatives of
+the \emph{Input Signal} (\S\ref{sec:signal_flow}), and not just the ``Signal
+itself'' as in the case of ODEs
+(FIXME: clarify); e.g. see Systems with Hysteresis such as the Schmitt Trigger
 
 
 
