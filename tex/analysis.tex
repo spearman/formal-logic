@@ -1158,6 +1158,8 @@ a Laplace Transform (\S\ref{sec:laplace_transform}) transforms a Function from
 the Time Domain to the Complex Frequency Domain so it can be analyzed in the
 Complex Plane
 
+Complex Solutions to the Differential Equation $y'' + y = 0$
+
 
 
 % --------------------------------------------------------------------
@@ -1307,20 +1309,6 @@ Residue Calculus (???) %FIXME
 
 
 % ====================================================================
-\section{Calculus of Finite Differences}\label{sec:finite_differences_calculus}
-% ====================================================================
-
-%FIXME
-
-% --------------------------------------------------------------------
-\subsection{Finite Difference}\label{sec:finite_difference}
-% --------------------------------------------------------------------
-
-Discrete equivalent of Differentiation (\S\ref{sec:differential})
-
-
-
-% ====================================================================
 \section{Functional Equation}\label{sec:functional_equation}
 % ====================================================================
 
@@ -1377,6 +1365,10 @@ Extension, Maximal Solution, Global Solution, General Solution
 
 \fist Differential System (\S\ref{sec:differential_system})
 
+Exponential Models $y = Ce^{-kt}$, $y' = ky$
+
+Logistic Models $y = \frac{y_0 k}{n_0 + (k-n_0)e^{-rt}}$,
+  $y' = ky (1 - \frac{y}{k})$
 
 
 
@@ -1511,6 +1503,45 @@ Non-homogenous
 
 
 % --------------------------------------------------------------------
+\subsection{Separable Differential Equation}\label{sec:separable}
+% --------------------------------------------------------------------
+
+a Differential Equation is \emph{Separable} if the Derivative $\frac{dy}{dx}$
+can be written in terms of the product of separate functions of $x$ and $y$ as:
+\[
+  \frac{dy}{dx} = g(x)h(y)
+\]
+or equivalently, as long as $h(y) \neq 0$:
+\[
+  \frac{1}{h(y)} dy = g(x) dx
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Exact Differential Equation}\label{sec:exact_equation}
+% --------------------------------------------------------------------
+
+$\frac{d}{dx}\Psi(x,y) = \frac{\partial{\Psi}}{\partial{x}}
+  + \frac{\partial{\Psi}}{\partial{x}}\frac{dy}{dx}$
+
+$\Psi_{xy} = \Psi_{yx}$ -- if $\Psi$ and its Derivatives are Continuous over
+some Domain
+
+$\Psi_x + \Psi_y \frac{dy}{dx} = 0$
+
+$\frac{d}{dx}\Psi(x,y) = 0$
+
+$\Psi(x,y) = c$
+
+$M(x,y) + N(x,y)\frac{dy}{dx} = 0$
+
+$M_y = N_x$ if and only if $M(x,y) + N(x,y)\frac{dy}{dx} = 0$ is an Exact
+Equation, implies: $\Psi_{xy} = M_y$, $\Psi_{yx} = N_x$
+
+
+
+% --------------------------------------------------------------------
 \subsection{Linear Differential Equation}
 \label{sec:linear_differential_equation}
 % --------------------------------------------------------------------
@@ -1574,14 +1605,9 @@ TODO
 at only one Point (Initial Conditions)
 
 
-
-\subsubsection{Finite Element Method}\label{sec:finite_element_method}
-
-\emph{Finite Element Method} or \emph{FEM} is a technique for solving
-Boundary Value Problems for Partial Differential Equations
-(\S\ref{sec:partial_differential})
-
-GetFEM++ -- LGPL C++ library
+\fist the \emph{Finite Element Method} (or \emph{FEM}
+\S\ref{sec:finite_element_method}) is a technique for solving Boundary Value
+Problems for Partial Differential Equations (\S\ref{sec:partial_differential})
 
 
 
@@ -3012,6 +3038,18 @@ can also be defined as a Measure (\S\ref{sec:measure})
 \section{Numerical Analysis}\label{sec:numerical_analysis}
 % ====================================================================
 
+(wiki):
+
+the goal of Numerical Analysis is to \emph{approximate the Continuum}
+(\S\ref{sec:real_line})
+
+Mimesis -- the quality of a Numerical Method that imitates some properties of
+the ``Continuum Problem''
+
+FIXME: explain
+
+
+
 % --------------------------------------------------------------------
 \subsection{Interval Arithmetic}\label{sec:interval_arithmetic}
 % --------------------------------------------------------------------
@@ -3056,6 +3094,33 @@ Higher-order Methods
 
 
 
+\subsubsection{Explicit Integration Methods}\label{sec:explicit_integration}
+
+calculates the State of a System at a later Time, $Y(t + \Delta{t})$, from the
+State of the System at the current Time, $Y(t)$:
+\[
+  Y(t + \Delta{t}) = F(Y(t))
+\]
+
+Euler Method
+
+\fist Symplectic (Semi-implicit) Euler (\S\ref{sec:symplectic_integrator})
+
+
+
+\subsubsection{Implicit Integration Methods}\label{sec:implicit_integration}
+
+calculates the State of a System at a later Time, $Y(t + \Delta{t})$, from the
+both State of the System at the current Time, $Y(t)$, and the State of the
+System at a later Time, $Y(t + \Delta{t})$:
+\[
+  G(Y(t), Y(t + \Delta{t})) = 0
+\]
+
+Backward Euler
+
+
+
 \subsubsection{Geometric Integrator}\label{sec:geometric_integrator}
 
 a Numerical Integration Method that preserves Geometric properties of the exact
@@ -3077,7 +3142,7 @@ forms the Subclass of Geometric Integrators that are by definition
 preserves the form of Hamilton's Equations (\S\ref{sec:hamiltonian_system})
 %FIXME xref
 
-Semi-implicit Euler
+Semi-implicit (Symplectic) Euler
 
 
 
@@ -3096,6 +3161,38 @@ cf. Polynomial Interpolation (???) %FIXME
 \paragraph{B-spline}\label{sec:b_spline}\hfill
 
 
+
+% --------------------------------------------------------------------
+\section{Calculus of Finite Differences}\label{sec:finite_differences_calculus}
+% --------------------------------------------------------------------
+
+%FIXME: move to numerical analysis ?
+
+\subsubsection{Finite Difference}\label{sec:finite_difference}
+
+Discrete equivalent of Differentiation (\S\ref{sec:differential})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Finite Volume Method}\label{sec:finite_volume_method}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Finite Element Method}\label{sec:finite_element_method}
+% --------------------------------------------------------------------
+
+\emph{Finite Element Method} or \emph{FEM} is a technique for solving Boundary
+Value Problems (\S\ref{sec:boundary_value_problem}) for Partial Differential
+Equations (\S\ref{sec:partial_differential})
+
+GetFEM++ -- LGPL C++ library
+
+
+
+% --------------------------------------------------------------------
+\subsection{Meshfree Method}\label{sec:meshfree_method}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Perturbation Theory}\label{sec:perturbation_theory}

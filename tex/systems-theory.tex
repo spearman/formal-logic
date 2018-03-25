@@ -134,6 +134,65 @@ a State Space with a distinguished Propagator is a \emph{Dynamical System}
 
 
 
+% --------------------------------------------------------------------
+\subsection{Phase Plane}\label{sec:phase_plane}
+% --------------------------------------------------------------------
+
+\url{http://math.rice.edu/~dfield/dfpp.html} -- Phase Plane applet
+
+\emph{Two-dimensional Systemss}
+
+Phase Plane -- Phase Space (\S\ref{sec:phase_space}) of two State Variables
+$x,y \in \reals$
+
+Position Vector $(x,y) \in \reals^2$
+
+Velocity Vector $(\dot{x},\dot{y}) \in \reals^2$
+
+Vector Field (\S\ref{sec:vector_field}) on Phase Plane:
+\begin{align*}
+  \dot{x} & = f(x,y) \\
+  \dot{y} & = g(x,y)
+\end{align*}
+Trajectories (\S\ref{sec:trajectory}) of Points in the Phase Plane are
+Solutions (FIXME: clarify)
+
+Point in Phase Plane: $\vec{p} = (x,y)$
+
+Vector Field: $\dot{\vec{p}} = \vec{f}(\vec{p})$
+
+\emph{Fixed Points} $\vec{p}^*$ have $\dot{x} = 0$ and $\dot{y} = 0$:
+\[
+  \vec{f}(\vec{p}^*) = \vec{0}
+\]
+
+if the Vector Field $\vec{f}$ is Continuously Differentiable ($\vec{f}$ and its
+Derivative are Continuous), then Solutions (Trajectories) $\vec{p}(t)$ exist
+and are \emph{Unique} for any Initial Condition
+
+\emph{Phase Portrait} -- representation of the ``qualitatively different''
+Trajectories for a Vector Field
+
+Uniqueness of Solutions implies that two Trajectories \emph{cannot cross}, but
+they can approach the same Fixed Point
+
+a \emph{Closed} Trajectory represents a Periodic Solution (a repeating
+``motion'' or ``cycle'') of the Differential Equation of the System and acts
+like a ``barrier'' since Trajectories cannot enter or exit the enclosed region
+
+there is no \emph{Chaotic} motion possible in Two-dimensions
+(\S\ref{sec:chaos_theory})
+
+given $\dot{\vec{x}} = \vec{f}(\vec{p})$, deduce Phase Portrait: Fixed Points,
+Closed Orbits
+
+for Linear Two-dimensional Systems (\S\ref{sec:linear_dynamical_system}) of the
+form $\dot{\vec{p}} = A\vec{p}$, the Origin is always a Fixed Point with Phase
+Portrait around the Origin determined by the Eigenvectors
+(\S\ref{sec:eigenvector}) and Eigenvalues (\S\ref{sec:eigenvalue}) of $A$
+
+
+
 % ====================================================================
 \section{Closed System}\label{sec:closed_system}
 % ====================================================================
@@ -473,6 +532,51 @@ rewritten in the form of a $\dot{\vec{x}} = \vec{f}(\vec{x})$:
 \end{align*}
 -- Linear 2nd-order System
 
+\emph{Two-dimensional Linear System}:
+
+$\dot{\vec{p}} = A\vec{p}$
+
+$\vec{p}^* = \vec{0}$ is always a Fixed Point for any given $A$ with the Phase
+Portrait (\S\ref{sec:phase_plane}) around that Point determined by the
+Eigenvalues (\S\ref{sec:eigenvalue}) and Eigenvectors (\S\ref{sec:eigenvector})
+of $A$
+
+Classification of Fixed Points:
+\begin{itemize}
+  \item \textbf{Saddle Points} -- $|A| < 0$ implies that $\lambda_1 > 0$,
+    $\lambda_2 < 0$ are distinct Eigenvalues, which implies there are two
+    Linearly Independent Eigenvectors, one a Stable Eigendirection and the
+    other an Unstable Eigendirection
+  \item \textbf{Attracting/Repelling Points}: \\
+    Attracting (Stable) Points -- $|A| > 0$, $\mathrm{tr}(A) < 0$ \\
+    Repelling (Unstable) Points -- $|A| > 0$, $\mathrm{tr}(A) > 0$
+    \begin{itemize}
+      \item \textbf{Nodes} -- $\mathrm{tr}(A)^2 - 4|A| > 0$; Real $\lambda$
+        with the same Sign
+        \begin{itemize}
+          \item $\lambda_1 < \lambda_2 < 0$ -- distinct Negative EigenValues
+            gives two Linearly Independent, Stable Eigendirections:
+            Trajectories approach the Fixed Point from the ``slower''
+            ($\lambda_2$) Eigendirection; in the \emph{reverse-time} direction
+            Trajectories move away from the Origin parallel to the ``fast''
+            Eigendirection
+        \end{itemize}
+      \item \textbf{Spirals} -- $\mathrm{tr}(A)^2 - 4|A| < 0$; Complex
+        $\lambda$ which are distinct Complex Conjugates $\mu \pm{i\omega}$:
+        $\mu$ controls the ``decay rate'' and $\omega$ controls the ``rotation
+        rate''; geometric counterpart of a \emph{Damped Harmonic Oscillator}
+      \item \textbf{Centers} -- $|A| > 0$, $\mathrm{tr}(A) = 0$; Eigenvalues
+        are Imaginary $\lambda \pm i\omega$; every Trajectory is \emph{Closed}
+        (Elliptical); ``perfectly periodic motion'', e.g. Simple Harmonic
+        Oscillator w/o Damping ($\ddot{p} + p = 0$)
+      \item \textbf{Non-isolated} -- $|A| = 0$; Line (or Plane in the case of
+        constant $\dot{x} = \vec{0}$) of Fixed Points
+      \item \textbf{Repeated Roots} -- $\mathrm{tr}(A)^2 - 4|A| = 0$: every
+        Direction is an Eigendirection (``Star Nodes'') or a single
+        Eigendirection (``Critically Damped'')
+    \end{itemize}
+\end{itemize}
+
 
 
 % --------------------------------------------------------------------
@@ -482,7 +586,8 @@ rewritten in the form of a $\dot{\vec{x}} = \vec{f}(\vec{x})$:
 Non-linear Oscillators, Phase-Locked Loops (PLLs \S\ref{sec:pll}), Lasers
 (Physics)
 
-\fist Chaos Theory (\S\ref{sec:chaos_theory})
+\fist Chaos Theory (\S\ref{sec:chaos_theory}) -- Non-linear Deterministic
+Systems must 3rd-order to exhibit Chaos (Lorenz)
 
 2014 - MAE5790 - Non-linear Dynamics and Chaos - Strogatz - "Theory of
 Dynamical Systems" -
@@ -497,6 +602,9 @@ e.g. Pendulum:
 Functions
 (\S\ref{sec:elliptic_function})
 
+\fist Phase Plane (\S\ref{sec:phase_plane})
+
+Classification of Fixed Points: TODO
 
 
 % --------------------------------------------------------------------
