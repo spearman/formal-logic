@@ -4,7 +4,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\fist Multivariate Analysis (Statistics
+\begin{enumerate}
+  \item \emph{Analyticity} -- Analytic Functions (\S\ref{sec:analytic_function})
+  \item \emph{Holomorphy} -- Holomorphic Functions
+    (\S\ref{sec:holomorphic_function})
+  \item \emph{Harmonicity} -- Harmonic Functions
+    (\S\ref{sec:harmonic_function})
+  \item \emph{Conformality} -- Conformal Maps (\S\ref{sec:conformal_map})
+\end{enumerate}
+For the Complex Numbers (\S\ref{sec:complex_analysis}), the notions of
+Analyticity, Holomorphy, Harmonicity, and Conformality \emph{coincide}; for the
+Reals (\S\ref{sec:real_analysis}), and Quaternions
+(\S\ref{sec:quaternionic_analysis}), not all notions are the same.
+
+\fist cf. Multivariate Analysis (Statistics
 \S\ref{sec:multivariate_analysis})
 
 
@@ -67,10 +80,10 @@ cf. Homogenous Differential Equation
 
 
 
-\paragraph{Characteristic Equation}
+\paragraph{Characteristic Difference Equation}
 \label{sec:characteristic_difference_equation}\hfill
 
-cf. Characteristic Equation of a Homogenous Differential Equation
+cf. Characteristic Equation of a Homogenous Linear Differential Equation
 (\S\ref{sec:characteristic_equation})
 
 
@@ -782,6 +795,10 @@ defined as a Function of the Differentiation Operator
 
 
 
+\paragraph{Product Rule}\label{sec:product_rule}\hfill
+
+
+
 \subsubsection{Differential Operator}\label{sec:differential_operator}
 
 %FIXME move?
@@ -1150,7 +1167,15 @@ Additionally, for every $x$ in the Interval $(a,b)$:
 \section{Complex Analysis}\label{sec:complex_analysis}
 % ====================================================================
 
-Complex Numbers (\S\ref{sec:complex_number})
+For the Complex Numbers (\S\ref{sec:complex_number}), the notions of
+Analyticity, Holomorphy, Harmonicity, and Conformality \emph{coincide}; for the
+Reals (\S\ref{sec:real_analysis}), and Quaternions
+(\S\ref{sec:quaternionic_analysis}), not all notions are the same.
+
+Finite-dimensional Associative Division Algebra
+(\S\ref{sec:associative_division_algebra})
+
+Commutative
 
 Complex Differentiable Functions are automatically Analytic %FIXME
 
@@ -1163,12 +1188,27 @@ Complex Solutions to the Differential Equation $y'' + y = 0$
 
 
 % --------------------------------------------------------------------
-\subsection{Zero}\label{sec:complex_zero}
+\subsection{Principal Value}\label{sec:principal_value}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Pole}\label{sec:complex_pole}
+\subsection{Complex Function}\label{sec:complex_function}
 % --------------------------------------------------------------------
+
+$f$
+
+usual Limit Theorems hold
+
+for a Complex Function to have a Derivative, the Directional Derivative must
+exist in every direction and be the same
+
+
+
+\subsubsection{Zero}\label{sec:complex_zero}
+
+\subsubsection{Pole}\label{sec:complex_pole}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Euler's Formula}\label{sec:eulers_formula}
@@ -1209,8 +1249,11 @@ every Point in its Domain. Implies that any Holomorphic Function is
 Infinitely Differentiable (\S\ref{sec:smooth_function}) and equal to
 its own Taylor Series (\S\ref{sec:taylor_series}).
 
-Real or Imaginary part of any Homomorphic Function is a Harmonic
+Real or Imaginary part of any Holomorphic Function is a Harmonic
 Function (\S\ref{sec:harmonic_function})
+
+a Regular Map (\S\ref{sec:regular_map}) between Complex Algebraic Varieties is
+a Holomorphic Map
 
 
 
@@ -1305,6 +1348,34 @@ all Complex Lines in $\comps^2$
 % --------------------------------------------------------------------
 
 Residue Calculus (???) %FIXME
+
+
+
+% ====================================================================
+\section{Quaternionic Analysis}\label{sec:quaternionic_analysis}
+% ====================================================================
+
+the Quaternion Conjugate is Analytic everywhere in $\quats$
+(note the Complex Conjugate is \emph{not} Analytic in $\comps$)
+
+Homographies (\S\ref{sec:homography}): Screw Displacements ($SE(3)$
+\S\ref{sec:special_euclidean})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Quaternion Function}\label{sec:quaternion_function}
+% --------------------------------------------------------------------
+
+Maxwell's Equations
+
+Affine Transformations of Quaternions have the form:
+\[
+  f(q) = aq + b, \;\;\; a,b,q \in \quats
+\]
+
+Derivation of Quaternion Functions requires a Direction-dependent Derivative
+(FIXME: clarify)
 
 
 
@@ -1518,6 +1589,30 @@ or equivalently, as long as $h(y) \neq 0$:
 
 
 
+\subsubsection{Homogenous Differential Equation}
+\label{sec:homogenous_differential_equation}
+
+If the Differential Equation:
+\[
+  \frac{dy}{dx} = f(x,y)
+\]
+can be rewritten as:
+\[
+  \frac{dy}{dx} = F\Big(\frac{y}{x}\Big)
+\]
+then it is \emph{Homogenous} and a Variable Substitution allows the Equation to
+be made \emph{Separable}.
+
+cf. Homogenous Difference Equation
+(\S\ref{sec:homogenous_difference_equation}), Homogenous Polynomial
+(\S\ref{sec:homogenous_polynomial}), Homogenous System of Linear Equations
+(\S\ref{sec:homogenous_system})
+
+\emph{not} ``Homogenous Linear Differential Equation''
+(\S\ref{sec:homogenous_linear_differential})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Exact Differential Equation}\label{sec:exact_equation}
 % --------------------------------------------------------------------
@@ -1539,6 +1634,12 @@ $M(x,y) + N(x,y)\frac{dy}{dx} = 0$
 $M_y = N_x$ if and only if $M(x,y) + N(x,y)\frac{dy}{dx} = 0$ is an Exact
 Equation, implies: $\Psi_{xy} = M_y$, $\Psi_{yx} = N_x$
 
+\emph{Potential Function}
+
+
+
+\subsubsection{Integrating Factor}\label{sec:integrating_factor}
+
 
 
 % --------------------------------------------------------------------
@@ -1548,24 +1649,41 @@ Equation, implies: $\Psi_{xy} = M_y$, $\Psi_{yx} = N_x$
 
 cf. Linear Difference Equation (\S\ref{sec:linear_difference_equation})
 
-
-
-% --------------------------------------------------------------------
-\subsection{Homogenous Differential Equation}
-\label{sec:homogenous_differential_equation}
-% --------------------------------------------------------------------
-
-cf. Homogenous Difference Equation
-(\S\ref{sec:homogenous_difference_equation}), Homogenous Polynomial
-(\S\ref{sec:homogenous_polynomial}), Homogenous System of Linear Equations
-(\S\ref{sec:homogenous_system})
+\emph{Second-order Linear Differential Equations}:
+\[
+  a(x) y'' + b(x) y' + c(x) y = d(x)
+\]
 
 
 
-\subsubsection{Characteristic Equation}\label{sec:characteristic_equation}
+\subsubsection{Homogenous Linear Differential Equation}
+\label{sec:homogenous_linear_differential}
+
+\emph{not} general ``Homogenous Differential Equations''
+(\S\ref{sec:homogenous_differential_equation})
+
+\emph{Second-order Homogenous Linear Differential Equation}:
+
+\[
+  A y'' + B y' + C y = 0
+\]
+
+if $g(x)$ is a Solution, then $c\cdot{g(x)}$ is also a Solution
+
+if $h(x)$ is also a Solution, then $g(x) + h(x)$ is also a Solution
+
+
+
+\paragraph{Characteristic Equation}\label{sec:characteristic_equation}\hfill
 
 cf. Characteristic Equation of a Homogenous Difference Equation
 (\S\ref{sec:characteristic_difference_equation})
+
+$A y'' + B y' + C y = 0$
+
+$y = e^{rx}$
+
+$Ar^2 + Br + C = 0$
 
 
 
@@ -1842,6 +1960,12 @@ $\nabla_{\vec{v}} f = \vec{v}\bullet \nabla{f}$
 
 Gradient (\S\ref{sec:gradient})
 
+for a Complex Function (\S\ref{sec:complex_function}) to have a Derivative, the
+Directional Derivative must exist in every direction and be the same
+
+Derivation of Quaternion Functions (\S\ref{sec:quaternion_function}) requires a
+Direction-dependent Derivative (FIXME: clarify)
+
 
 
 % --------------------------------------------------------------------
@@ -2113,6 +2237,26 @@ Tensor Derivative
 
 
 
+\subsubsection{Vector}\label{sec:linear_vector}
+
+or \emph{Polar Vector}
+
+\fist Vector (Abstract Algebra \S\ref{sec:vector})
+
+
+
+\subsubsection{Pseudovector}\label{sec:linear_vector}
+
+or \emph{Axial Vector}
+
+\fist Pure Imaginary Quaternion (\S\ref{sec:quaternion})
+
+Angular Velocity behaves like a Pseudovector
+
+equivalent to Three-dimensional Bivectors (\S\ref{sec:bivector})
+
+
+
 \subsubsection{Vector Function}\label{sec:vector_function}
 
 or \emph{Vector-valued Function}
@@ -2149,6 +2293,9 @@ their Multiplicities (??? FIXME).
 \paragraph{Vector Derivative}\label{sec:vector_derivative}\hfill
 
 $\frac{d\vec{r}(t)}{dt}$
+
+the Vector Derivative represents a change of \emph{Length} (cf. Norm
+\S\ref{sec:norm}) of the Vector
 
 
 
