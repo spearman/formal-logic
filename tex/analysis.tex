@@ -1100,8 +1100,16 @@ Inverse of the Integral Transform
 
 \paragraph{Laplace Transform}\label{sec:laplace_transform}\hfill
 
-takes a Function of a Real Variable $t$ (usually Time) to a Function of a
-Complex Variable $s$ (usually Frequency + Phase)
+\[
+  \mathcal{L} \{ f(t) \} = \int_0^\infty e^{-st} f(t) dt
+\]
+
+$\mathcal{L}\{1\} = \frac{1}{s}$, $s > 0$
+
+$\mathcal{L}\{e^{at}\} = \frac{1}{s-a}$, $s > a$
+
+takes a Function $f(t)$ of a Real Variable $t$ (usually Time) to a Function
+$F(s)$ of a Complex Variable $s$ (usually Frequency + Phase)
 
 Frequency-domain approach for Continuous Time Signals where the System may be
 Stable \emph{or} Unstable (TODO: clarify)
@@ -1683,7 +1691,44 @@ $A y'' + B y' + C y = 0$
 
 $y = e^{rx}$
 
-$Ar^2 + Br + C = 0$
+Characteristic Equation: $Ar^2 + Br + C = 0$
+
+$r = \frac{-B \pm \sqrt{B^2 - 4AC}}{2A}$
+
+Real Roots: $r_1, r_2$
+
+General Solution: $y = c_1e^{r_1x} + c_2e^{r_2x}$
+
+Complex Roots: $\lambda \pm \mu i$
+
+General Solution: $y = e^{\lambda x}(c_1 \cos\mu{x} + c_2 \sin\mu{x})$
+
+Repeated Roots: $r$
+
+\emph{Reduction of Order}: $y = c_1 x e^{rx} + c_2 e^{rx}$
+
+
+
+\subsubsection{Non-homogenous Linear Differential Equation}
+\label{sec:nonhomogenous_linear_differential}
+
+Second-order Non-homogenous Linear Differential Equation:
+\[
+  A y'' + B y' + C y = g(x)
+\]
+
+for $h$ a Solution for the Homogenous Linear Differential Equation $Ah'' + Bh'
++ Ch = 0$
+
+let $j(x)$ be a \emph{particular} Solution of $Aj'' + Bj' + Cj = g(x)$
+
+then $k(x) = h(x) + j(x)$ is a Solution of $A y'' + B y' + C y = g(x)$
+
+\emph{Method of Undetermined Coefficients}
+
+for $A y'' + B y' + C y = f(x) + g(x) + \cdots$, the Solution is the General
+Solution of the Homogenous Equation plus the particular Solutions to each of
+the individual RHS (FIXME: clarify)
 
 
 
