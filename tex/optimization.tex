@@ -24,7 +24,15 @@
 \subsection{Iterative Method}\label{sec:iterative_rootfinding}
 % --------------------------------------------------------------------
 
+cf. \emph{Direct Methods}
+
 \fist Iterative Methods (Numerical Linear Algebra \S\ref{sec:iterative_method})
+
+\fist Systems of Nonlinear Equations
+(\S\ref{sec:system_of_nonlinear_equations})
+
+\fist cf. Nonlinear Programming (\S\ref{sec:nonlinear_programming}), Nonlinear
+Optimization (\S\ref{sec:nonlinear_optimization})
 
 
 
@@ -37,17 +45,81 @@
 
 
 % ====================================================================
-\section{Unconstrained Nonlinear Optimization}
-\label{sec:unconstrained_nonlinear}
+\section{Unconstrained Optimization}\label{sec:unconstrained_optimization}
 % ====================================================================
+
+(wiki):
+
+for a Constrained Optimization Problem (\S\ref{sec:constrained_optimization})
+with only Equality Constraints, the method of Lagrange Multipliers
+(\S\ref{sec:lagrange_multiplier}) can be used to convert it into an
+Unconstrained Problem with number of Variables equal to the original number
+plus the original number of Equality Constraints
+
+if the Constraints are all Equality Constraints and are all \emph{Linear}, they
+can be ``solved'' for some of the Variables in terms of the others and have
+those substituted \emph{out} of the Objective Function, leaving an
+Unconstrained Problem in a smaller number of Variables (TODO: example)
+
+
+
+% --------------------------------------------------------------------
+\subsection{Unconstrained Nonlinear Optimization}
+\label{sec:unconstrained_nonlinear}
+% --------------------------------------------------------------------
 
 \fist cf. Nonlinear Optimization (\S\ref{sec:nonlinear_optimization})
 
+\fist cf. Iterative Methods (\S\ref{sec:iterative_method})
+
 
 
 % ====================================================================
-\section{Constrained Optimization}\label{sec:constrined_optimization}
+\section{Constrained Optimization}\label{sec:constrained_optimization}
 % ====================================================================
+
+(wiki)
+
+general form:
+
+\begin{align*}
+  & f(\vec{x})
+  & g_i(\vec{x}) = c_i
+  & h_j(\vec{x}) \geq d_j
+\end{align*}
+where $f$ is the Objective Function to be Maximized/Minimized, $g_i$ for $i \in
+\{ 1, \ldots, n \}$ are Equality Constraints and $h_j$ for $j \in \{ 1, \ldots,
+m \}$ are Inequality Constraints
+
+
+\textbf{Equality Constraints}
+
+a Constrained Problem with only Equality Constraints may be converted using the
+method of Lagrange Multipliers (\S\ref{sec:lagrange_multiplier}) to an
+Unconstrained Optimization Problem (\S\ref{sec:unconstrained_optimization})
+with a number of Variables equal to the original number of Variables plus the
+original number of Equality Constraints
+
+if the Constraints are all Equality Constraints and are all \emph{Linear}, they
+can be ``solved'' for some of the Variables in terms of the others and have
+those substituted \emph{out} of the Objective Function, leaving an
+Unconstrained Problem in a smaller number of Variables (TODO: example)
+
+
+\textbf{Inequality Constraints}
+
+\emph{Geometric Optimality Conditions} (FIXME: Geometric Programming ???
+\S\ref{sec:geometric_programming})
+
+\emph{Fritz John Conditions} -- necessary condition for a solution in Nonlinear
+Programming; lemma for Karush-Kuhn-Tucker Conditions
+
+\emph{Karush-Kuhn-Tucker Conditions} (\S\ref{sec:karush_kuhn_tucker}) --
+First-order necessary condition for a solution in Nonlinear Programming,
+provided some Regularity Conditions; allowing Inequality Constraints
+generalizes the method of Lagrange Multipliers
+
+
 
 % --------------------------------------------------------------------
 \subsection{Objective Function}\label{sec:objective_function}
@@ -63,7 +135,20 @@
 \subsection{Lagrange Multiplier}\label{sec:lagrange_multiplier}
 % --------------------------------------------------------------------
 
+(wiki): for a Constrained Optimization Problem with only Equality Constraints,
+the method of Lagrange Multipliers can be used to convert into Unconstrained
+Problem (\S\ref{sec:unconstrained_optimization}) with number of Variables equal
+to the original number of Variables plus the original number of Equality
+Constraints (FIXME: details)
+
 \fist Lagrangian (\S\ref{sec:lagrangian})
+
+\fist cf. \emph{Karush-Kuhn-Tucker Conditions} (\S\ref{sec:karush_kuhn_tucker})
+-- First-order necessary condition for a solution in Nonlinear Programming,
+provided some Regularity Conditions; allowing Inequality Constraints
+generalizes the method of Lagrange Multipliers
+
+\fist Convex Optimization (\S\ref{sec:convex_optimization})
 
 $\lambda$
 
@@ -93,23 +178,16 @@ Constraint causes an increase in the Function being Optimized
 
 
 % --------------------------------------------------------------------
-\subsection{Relaxation}\label{sec:relaxation}
-% --------------------------------------------------------------------
-
-\fist not to be confused with Iterative Methods of Relaxation (Stationary
-Iterative Methods \S\ref{sec:stationary_iterative})
-
-Lagrangian Relaxation
-
-Linear Programming Relaxation
-
-
-
-% --------------------------------------------------------------------
 \subsection{Nonlinear Programming}\label{sec:nonlinear_programming}
 % --------------------------------------------------------------------
 
-Constrained Nonlinear Optimization
+Constrained Nonlinear Optimization: an Optimization Problem defined by a System
+of Equalities and Inequalities (Constraints) over a Set of unknown Real
+Variables along with an Objective Function, in which some of the Constraints
+\emph{or} the Objective Function are \emph{Non-linear}
+(\S\ref{sec:system_of_nonlinear_equations})
+
+\fist cf. Iterative Methods (\S\ref{sec:iterative_method})
 
 Barrier Methods
 
@@ -121,34 +199,24 @@ Successive Linear Programming
 
 
 
-% ====================================================================
-\section{Non-linear Optimization}\label{sec:nonlinear_optimization}
-% ====================================================================
+\subsubsection{Karush-Kuhn-Tucker Conditions}\label{sec:karush_kuhn_tucker}
 
-%FIXME: merge this section ???
+(KKT Conditions)
 
-\emph{Nonlinear Optimization}
+\emph{Karush-Kuhn-Tucker Conditions} -- First-order necessary condition for a
+solution in Nonlinear Programming, provided some Regularity Conditions;
+allowing Inequality Constraints generalizes the method of Lagrange Multipliers
+(\S\ref{sec:lagrange_multiplier})
 
-Nonlinear Constraint Solving in Programming Languages: ATS (Xi16) uses
-explicit Proof Construction to handle Nonlinear Constraints
-
-\fist cf. Nonlinear Programming (\S\ref{sec:nonlinear_programming})
-
-
-
-% ====================================================================
-\section{Convex Optimization}\label{sec:convex_optimization}
-% ====================================================================
-
-Convex Analysis (\S\ref{sec:convex_analysis})
-
-Maximum Principle (Harmonic Functions \S\ref{sec:harmonic_function})
+Fritz John Conditions -- lemma for KKT Conditions
 
 
 
 % --------------------------------------------------------------------
 \subsection{Linear Programming}\label{sec:linear_programming}
 % --------------------------------------------------------------------
+
+\fist Convex Optimization (\S\ref{sec:convex_optimization})
 
 Constrained Linear Optimization
 
@@ -170,8 +238,87 @@ Linear Integer Programming: NP-Complete
 
 all Hard Constraints are Linear but Objective Function is Quadratic
 
-solvable by Ellipsoid Method in Polynomial Time if the Objective Funciton is
-Convex; otherwise the problem is NP Hard
+solvable by Ellipsoid Method (\S\ref{sec:ellipsoid_method}) in Polynomial Time
+if the Objective Function is Convex; otherwise the problem is NP Hard
+
+with Convex Objective Function and Linear Constraints \fist Convex Optimization
+(\S\ref{sec:convex_optimzation})
+
+
+
+\subsubsection{Quadratically Constrained Quadratic Programming}
+\label{sec:quadratically_constrained}
+
+QCQP
+
+both Objective Function and Constraints are Quadratic
+
+with Convex Quadratic Constraints (FIXME: and convex objective function ???)
+\fist Convex Optimization (\S\ref{sec:convex_optimization})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Geometric Programming}\label{sec:geometric_programming}
+% --------------------------------------------------------------------
+
+not Convex in general but may be transformed into Convex Problems by change of
+Variables and a transformation of the Objective and Constraint Functions
+
+Inequality Constraints are Posynomials (\S\ref{sec:posynomials})
+$f_i(x) \leq 1$
+
+Equality Constraints are Monomials (\S\ref{sec:monomials}) $h_i(x) = 1$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Relaxation}\label{sec:relaxation}
+% --------------------------------------------------------------------
+
+\fist not to be confused with Iterative Methods of Relaxation (Stationary
+Iterative Methods \S\ref{sec:stationary_iterative})
+
+Lagrangian Relaxation
+
+Linear Programming Relaxation
+
+
+
+% ====================================================================
+\section{Non-linear Optimization}\label{sec:nonlinear_optimization}
+% ====================================================================
+
+%FIXME: merge this section ???
+
+\emph{Nonlinear Optimization}
+
+Nonlinear Constraint Solving in Programming Languages: ATS (Xi16) uses
+explicit Proof Construction to handle Nonlinear Constraints
+
+\fist cf. Nonlinear Programming (\S\ref{sec:nonlinear_programming})
+
+\fist cf. Iterative Methods (\S\ref{sec:iterative_method})
+
+
+
+% ====================================================================
+\section{Convex Optimization}\label{sec:convex_optimization}
+% ====================================================================
+
+Convex Analysis (\S\ref{sec:convex_analysis})
+
+Maximum Principle (Harmonic Functions \S\ref{sec:harmonic_function})
+
+may be formulated as Convex Optimization Problems:
+\begin{itemize}
+  \item Lagrange Multipliers (\S\ref{sec:lagrange_multiplier})
+  \item Linear Programming (\S\ref{sec:linear_programming})
+  \item Quadratic Programming (\S\ref{sec:quadratic_programming}) with Convex
+    Objective Function and Linear Constraints
+  \item Quadratic Programming with Convex Quadratic Constraints
+    (QCQP \S\ref{sec:quadratically_constrained})
+\end{itemize}
 
 
 
@@ -179,19 +326,34 @@ Convex; otherwise the problem is NP Hard
 \subsection{Interior Point Method}\label{sec:interior_point}
 % --------------------------------------------------------------------
 
+Linear Programming Problems (\S\ref{sec:linear_programming}) can be solved by
+the Interior Point Method (\S\ref{sec:interior_point}) in Polynomial Time
+
+
+
 % --------------------------------------------------------------------
 \subsection{Basis-exchange Algorithm}\label{sec:basis_exchange}
 % --------------------------------------------------------------------
 
 \subsubsection{Simplex Algorithm}\label{sec:simplex_algorithm}
 
+\emph{Simplex Method}
+
 Dantzig
+
+Linear Programming Problems (\S\ref{sec:linear_programming}) can be solved by
+Simplex Method (\S\ref{sec:simplex_algorithm}) usually, but not guaranteed, in
+Polynomial Time
 
 
 
 % --------------------------------------------------------------------
 \subsection{Ellipsoid Method}\label{sec:ellipsoid_method}
 % --------------------------------------------------------------------
+
+a Quadratic Programming Problem (\S\ref{sec:quadratic_programming}) can be
+solved in Polynomial Time using the Ellipsoid method if the Objective Function
+is Convex \fist Convex Programming (\S\ref{sec:convex_programming})
 
 
 
