@@ -116,6 +116,8 @@ Group
 A \emph{Linear Operator} (\S\ref{sec:linear_operator}) is an Endomorphic Linear
 Map (i.e. the Domain and Codomain are the same Module).
 
+\fist Linear Differential Operators (\S\ref{sec:linear_differential_operator})
+
 A Linear Map between Topological Vector Spaces
 (\S\ref{sec:topological_vector}) can be Continuous
 (\S\ref{sec:continuous}) and if the Domain and Codomain are the same
@@ -197,6 +199,15 @@ there is a correspondence between $n\times{n}$ Square Matrices
 (\S\ref{sec:square_matrix}) and Linear Operators on an $n$-dimensional Vector
 Space
 
+\begin{itemize}
+  \item the Integral (\S\ref{sec:integral}) is a Linear Operator (FIXME:
+    clarify)
+  \item every Integral Transform (\S\ref{sec:integral_transform}) is a Linear
+    Operator, and if the Kernel is allowed to be a Generalized Function
+    (\S\ref{sec:generalized_function}), then all Linear Operators are Integral
+    Transforms (\emph{Schwartz Kernel Theorem})
+\end{itemize}
+
 
 
 \paragraph{Linear Projection}\label{sec:projection}\hfill
@@ -209,7 +220,18 @@ Singular Matrix (\S\ref{sec:singular_matrix}) FIXME
 
 \subparagraph{Orthogonal Projection}\label{sec:orthogonal_projection}\hfill
 
-An \emph{Orthogonal Projection} on a Hilbert Space (\S\ref{sec:hilbert_space})
+for an $n$-dimensional Unit Vector $\hat{u}$, the $n \times n$ Orthogonal
+Projection Matrix $P_u$ can be computed by the Outer Product:
+\[
+  P_u = \hat{u}\hat{u}^T
+\]
+(if $\hat{u}$ is Complex the Transpose is the Hermitian Transpose) which
+Projects any given Vector onto the Line defined by $\hat{u}$
+
+(wiki):
+
+An \emph{Orthogonal Projection} on a Hilbert Space (\S\ref{sec:hilbert_space}),
+i.e. a Complete Vector Space with an Inner Product,
 $W$ is a Projection for which the Range (Column Space \S\ref{sec:column_space})
 $U$ and the Nullspace (\S\ref{sec:nullspace}) $V$ are \emph{Orthogonal
   Subspaces} (\S\ref{sec:orthogonal_subspace}), i.e. every Vector in $U$ is
@@ -593,6 +615,25 @@ to Categories of the notion of Basis in a Vector Space
 
 
 
+\paragraph{Orthogonal Basis}\label{sec:orthogonal_basis}\hfill
+
+\emph{Gram-Schmidt Process}: method for Orthogonalizing a Set of Linearly
+Independent Vectors in an Inner Product Space
+
+
+
+\paragraph{Orthonormal Basis}\label{sec:orthonormal_basis}\hfill
+
+a Basis for an Inner Product Space consisting of an Orthonormal
+(\S\ref{sec:orthonormal}) Set of Vectors
+
+\begin{itemize}
+  \item the Sines and Cosines in the Fourier Series
+    (\S\ref{sec:fourier_series}) form an Orthonormal Basis
+\end{itemize}
+
+
+
 \paragraph{Covariant Transformation}\label{sec:covariant_transformation}\hfill
 
 Coordinate-free (\S\ref{sec:coordinate_free})
@@ -886,6 +927,9 @@ Functional Analysis (\S\ref{sec:functional_analysis})
 associates each pair of Vectors in a Vector Space with a Scalar known
 as the \emph{Inner Product} of the Vectors
 
+two Vectors in an Inner Product Space are \emph{Orthogonal} when the Inner
+Product is Zero, denoted $\vec{u} \bot \vec{y}$
+
 in Euclidean Spaces the Inner Product is the Dot Product (aka Scalar Product)
 
 An Inner Product induces a Norm (\S\ref{sec:norm}) $\|\cdot\|$ by:
@@ -902,6 +946,23 @@ A \emph{Hilbert Space} (\S\ref{sec:hilbert_space}) is an Inner Product Space
 that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
 
 \fist Sliding Inner-product (Cross-correlation \S\ref{sec:cross_correlation})
+
+\fist Gram Matrix (\S\ref{sec:gram_matrix}): Hermitian Matrix of Inner
+Products
+
+
+
+\paragraph{Orthonormality}\label{sec:orthonormality}\hfill
+
+two Vectors in an Inner Product Space are \emph{Orthonormal} if they are
+Orthogonal and Unit Vectors
+
+\fist Orthogonality (\S\ref{sec:orthogonality})
+
+\fist Orthonormal Basis (\S\ref{sec:orthonormal_basis})
+
+an Orthogonal Matrix (\S\ref{sec:orthogonal_matrix}) is a Real-valued Square
+Matrix with Columns and Rows that are Orthonormal Vectors
 
 
 
@@ -993,6 +1054,8 @@ Closed Category except it is lacking Identities
 % --------------------------------------------------------------------
 
 Tensor Product (\S\ref{sec:tensor_product}) of two Vectors
+
+\fist Orthogonal Projection (\S\ref{sec:orthogonal_projection})
 
 
 
@@ -1660,6 +1723,40 @@ a Matrix that is its own Inverse
 
 
 
+\paragraph{Orthogonal Matrix}\label{sec:orthogonal_matrix}\hfill
+
+An \emph{Orthogonal Matrix} $Q$ is a Real-valued Square Matrix with Columns and
+Rows that are \emph{Orthonormal Vectors} (\S\ref{sec:orthonormality}),
+resulting in the identity:
+\[
+  Q^TQ = QQ^T = I
+\]
+i.e. a Matrix $Q$ is Orthogonal if its Transpose is equal to its Inverse:
+\[
+  Q^T = Q^{-1}
+\]
+
+the Set of $n \times n$ Orthogonal Matrices forms the Orthogonal Group
+$O(n)$ (\S\ref{sec:orthogonal_group})
+
+an Orthogonal Matrix has Determinant of either $1$ or $-1$; the Orthogonal
+Matrices with Determinant $+1$ are \emph{Rotation Matrices}
+(\S\ref{sec:rotation_matrix}), forming the Subgroup $SO(n)$ of Special
+Orthogonal Matrices (\S\ref{sec:special_orthogonal_group})
+
+\fist an Unitary Matrix (\S\ref{sec:unitary_matrix}) is the Complex analogue of
+an Orthogonal Matrix
+
+
+
+\subparagraph{Rotation Matrix}\label{sec:rotation_matrix}\hfill
+
+Orthogonal Matrix with Determinant $1$
+
+Special Orthogonal Group $SO(n)$ (\S\ref{sec:special_orthogonal_group})
+
+
+
 \subsubsection{Singular Matrix}\label{sec:singular_matrix}
 
 Non-invertible Matrix
@@ -1744,6 +1841,8 @@ Conjugate (\S\ref{sec:complex_conjugate}) of each entry.
 
 \subsubsection{Unitary Matrix}\label{sec:unitary_matrix}
 
+Complex analogue of an Orthogonal Matrix (\S\ref{sec:orthogonal_matrix})
+
 A \emph{Unitary Matrix} $U$ has the Property that:
 \[
   U^*U = UU^* = I
@@ -1775,6 +1874,25 @@ Polar Decomposition (\S\ref{sec:polar_decomposition})
 
 
 
+\paragraph{Gramian Matrix}\label{sec:gramian_matrix}\hfill
+
+Hermitian Matrix of Inner Products
+
+Set of Vectors $\vec{v}_1,\ldots,\vec{v}_n$ in an Inner Product Space
+
+Gramian Matrix $G$ with entries:
+\[
+  G_{ij} = \langle{\vec{v}_i,\vec{v}_j}\rangle
+\]
+
+a Set of Vectors is Linearly Independent if and only if the Determinant is
+Non-zero
+
+a Matrix is Positive Semidefinite (\S\ref{sec:positive_semidefinite}) if it is
+the Gramian Matrix of some Vectors
+
+
+
 \subsubsection{Skew Hermitian Matrix}\label{sec:skew_hermitian}
 
 or \emph{Antihermitian}
@@ -1788,7 +1906,19 @@ or \emph{Antihermitian}
 a Property of Symmetric (\S\ref{sec:symmetric_matrix}) and Hermitian
 (\S\ref{sec:hermitian_matrix}) Matrices
 
-Positive Semi-definite
+$n \times n$ Real Matrix $M$ is Positive Definite if the Scalar $z^TMz$ is
+\emph{Strictly Positive} ($>0$) for every Non-zero Column Vector $z$
+
+
+
+\subsubsection{Positive-semidefinite Matrix}\label{sec:positive_semidefinite}
+
+$M \succeq 0$
+
+Zeros are allowed
+
+a Matrix is Positive Semidefinite if it is the Gramian Matrix
+(\S\ref{sec:gramian_matrix}) of some Vectors
 
 
 
@@ -1909,10 +2039,15 @@ The Zero Vector, $\vec{0}$, is Orthogonal to every Vector (including itself).
 
 \fist Inner Product (\S\ref{sec:inner_product})
 
+\fist Orthonormality (\S\ref{sec:orthonormality})
+
 Two Linear Subspaces (\S\ref{sec:linear_subspace}) $A, B \subset V$ of an Inner
 Product Space $V$ are called \emph{Orthogonal Subspaces}
 (\S\ref{sec:orthogonal_subspace}) if each Vector in $A$ is Orthogonal to each
 Vector in $B$.
+
+a Set of Vectors is Orthogonal if every Pair of Vectors in it is Orthogonal; a
+Set is Orthonormal if it is Orthogonal and every Vector in it is a Unit Vector
 
 
 
@@ -2024,6 +2159,15 @@ cf. \emph{Direct Methods} attempt to solve a problem by a Finite Sequence of
 Operations delivering the exact Solution
 
 Attractive Fixed Points (Dynamical Systems \S\ref{sec:dynamical_systems})
+
+\fist Ellipsoid Method (\S\ref{sec:ellipsoid_method}); when specialized for
+solving feasible Linear Optimization (\S\ref{sec:linear_programming}) Problems
+with Rational Data, the Ellipsoid Metohd finds an Optimal Solution in a Finite
+number of steps
+
+\fist Sequential Quadratic Programming
+(\S\ref{sec:sequential_quadratic_programming}): Iterative Method for
+Constrained Non-linear Optimization (\S\ref{sec:nonlinear_programming})
 
 
 

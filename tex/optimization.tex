@@ -45,6 +45,24 @@ Optimization (\S\ref{sec:nonlinear_optimization})
 
 
 % ====================================================================
+\section{Optimization Problem}\label{sec:optimization_problem}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Continuous Optimization Problem}
+\label{sec:continuous_optimization_problem}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Combinatorial Optimization Problem}
+\label{sec:combinatorial_optimization_problem}
+% --------------------------------------------------------------------
+
+\fist Combinatorial Optimization (\S\ref{sec:combinatorial_optimization})
+
+
+
+% ====================================================================
 \section{Unconstrained Optimization}\label{sec:unconstrained_optimization}
 % ====================================================================
 
@@ -212,6 +230,15 @@ Fritz John Conditions -- lemma for KKT Conditions
 
 
 
+\subsubsection{Sequential Quadratic Programming}
+\label{sec:sequential_quadratic_programming}
+
+SQP
+
+\fist cf. Quadratic Programming (\S\ref{sec:quadratic_programming})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Linear Programming}\label{sec:linear_programming}
 % --------------------------------------------------------------------
@@ -224,11 +251,21 @@ Objective Function and all the Hard Constraints are Linear; can be solved by
 Simplex Method (\S\ref{sec:simplex_algorithm}) usually in Polynomial Time, or
 by Interior Point Method (\S\ref{sec:interior_point}) in Polynomial Time
 
+all Linear Programs can be expressed as Semidefinite Programs
+(\S\ref{sec:semidefinite_programming})
+
+Ellipsoid Method (\S\ref{sec:ellipsoid_method}): when specialized for solving
+feasible Linear Optimization Problems with Rational Data, the Ellipsoid Method
+finds an Optimal Solution in a Finite number of steps
 
 
 \subsubsection{Linear Inequality}\label{sec:linear_inequality}
 
-Linear Integer Programming: NP-Complete
+\subsubsection{Integer Linear Programming}\label{sec:integer_linear_programming}
+
+ILP
+
+NP-Complete
 
 
 
@@ -238,11 +275,18 @@ Linear Integer Programming: NP-Complete
 
 all Hard Constraints are Linear but Objective Function is Quadratic
 
-solvable by Ellipsoid Method (\S\ref{sec:ellipsoid_method}) in Polynomial Time
-if the Objective Function is Convex; otherwise the problem is NP Hard
+for Positive Definite (\S\ref{sec:positive_definite}) $Q$ (i.e. Convex
+Objective Function) the problem is solvable by Ellipsoid Method
+(\S\ref{sec:ellipsoid_method}) in Polynomial Time; otherwise the problem is NP
+Hard
 
 with Convex Objective Function and Linear Constraints \fist Convex Optimization
 (\S\ref{sec:convex_optimzation})
+
+\fist cf. Sequential Quadratic Programming (Iterative Method
+\S\ref{sec:sequential_quadratic_programming})
+
+2001 - Milenkovic, Schmidl - Optimization-Based Animation
 
 
 
@@ -255,6 +299,11 @@ both Objective Function and Constraints are Quadratic
 
 with Convex Quadratic Constraints (FIXME: and convex objective function ???)
 \fist Convex Optimization (\S\ref{sec:convex_optimization})
+
+if the $P_0,\ldots,P_m$ Matrices are all Positive-definite Matrices
+(\S\ref{sec:positive_definite}) then the problem is Convex and can be solved
+using Interior Point Methods (\S\ref{sec:interior_point_method}), as in
+Semidefinite Programming (\S\ref{sec:semidefinite_programming})
 
 
 
@@ -329,6 +378,21 @@ may be formulated as Convex Optimization Problems:
 Linear Programming Problems (\S\ref{sec:linear_programming}) can be solved by
 the Interior Point Method (\S\ref{sec:interior_point}) in Polynomial Time
 
+Semidefinite Programming Problems (\S\ref{sec:semidefinite_programming})
+can be solved efficiently by Interior Point Methods
+
+Quadratically Constrained Quadratic Programming
+(\S\ref{sec:quadratically_constrained}): if the $P_0,\ldots,P_m$ Matrices are
+all Positive-definite Matrices (\S\ref{sec:positive_definite}) then the problem
+is Convex and can be solved using Interior Point Methods, as in Semidefinite
+Programming
+
+any Convex Optimization Problem can be transformed into Minimizing a Linear
+Function over a Convex Set by converting to the \emph{Epigraph Form}
+
+\emph{Primal-dual Path-following Interior Point Methods}; Mehrotra's
+Predictor-Corrector Algorithm
+
 
 
 % --------------------------------------------------------------------
@@ -341,8 +405,8 @@ the Interior Point Method (\S\ref{sec:interior_point}) in Polynomial Time
 
 Dantzig
 
-Linear Programming Problems (\S\ref{sec:linear_programming}) can be solved by
-Simplex Method (\S\ref{sec:simplex_algorithm}) usually, but not guaranteed, in
+Linear Programming (\S\ref{sec:linear_programming}) problems can be solved by
+Simplex Method (\S\ref{sec:simplex_algorithm}), usually (but not guaranteed) in
 Polynomial Time
 
 
@@ -351,9 +415,36 @@ Polynomial Time
 \subsection{Ellipsoid Method}\label{sec:ellipsoid_method}
 % --------------------------------------------------------------------
 
-a Quadratic Programming Problem (\S\ref{sec:quadratic_programming}) can be
+Iterative Method (\S\ref{sec:iterative_method})
+
+when specialized for solving feasible Linear Optimization
+(\S\ref{sec:linear_programming}) Problems with Rational Data, the Ellipsoid
+Method finds an Optimal Solution in a Finite number of steps
+
+a Quadratic Programming (\S\ref{sec:quadratic_programming}) problem can be
 solved in Polynomial Time using the Ellipsoid method if the Objective Function
-is Convex \fist Convex Programming (\S\ref{sec:convex_programming})
+is Convex
+
+
+
+% --------------------------------------------------------------------
+\subsection{Cone Optimization}\label{sec:cone_optimization}
+% --------------------------------------------------------------------
+
+includes Linear Programming and Semidefinite Programming problems
+
+
+
+\subsubsection{Semidefinite Programming}\label{sec:semidefinite_programming}
+
+SDP
+
+can be efficiently solved by Interior Point Methods
+
+all Linear Programs can be expressed as SDPs
+
+hierarchies of SDPs can approximate the solutions of Polynomial Optimization
+problems
 
 
 
@@ -381,6 +472,11 @@ Bayesian Bandits
 \section{Combinatorial Optimization}
 \label{sec:combinatorial_optimization}
 % ====================================================================
+
+\fist Combinatorial Optimization Problem
+(\S\ref{sec:combinatorial_optimization_problem})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Dynamic Programming}\label{sec:dynamic_programming}
