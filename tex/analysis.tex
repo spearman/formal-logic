@@ -202,6 +202,11 @@ If $a_n$ is Convergent then it is Bounded
 If $F$ is a Closed Set (\S\ref{sec:closed_set}), then for any Sequence
 $x_n$ in $F$ can Converge to $x$ if and only if $x$ is in $F$.
 
+Intervals for Convergent Real Sequences are replaced by \emph{Discs} in the
+case of Convergent Sequences of Complex Numbers (\S\ref{sec:complex_analysis})
+
+Absolute Convergence, Uniform Convergence (TODO)
+
 
 
 \paragraph{Squeeze Theorem}\label{sec:squeeze_theorem}\hfill
@@ -360,6 +365,7 @@ some examples:
   \item $1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \cdots  = \ln{2}$
   \item $1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} \cdots  = \frac{\pi}{4}$
   \item $1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} \cdots = \frac{\pi^2}{6}$
+  \item $\sum_{n=0}^\infty \frac{x^n}{n!} = e^x$
 \end{itemize}
 
 
@@ -822,6 +828,8 @@ defined as a Function of the Differentiation Operator
 
 \paragraph{Product Rule}\label{sec:product_rule}\hfill
 
+\fist Integration by Parts (\S\ref{sec:integration_by_parts})
+
 
 
 \subsubsection{Differential Operator}\label{sec:differential_operator}
@@ -956,6 +964,8 @@ a Complex Function is Analytic if and only if it is Holomorphic
 (\S\ref{sec:holomorphic_function}), i.e. it is Complex Differentiable \fist
 Cauchy-Riemann Conditions (\S\ref{sec:cauchy_riemann})
 
+the Real and Imaginary parts of any Analytic Function define a \emph{Conformal
+  Mapping} (\S\ref{sec:conformal_map}) --FIXME: clarify
 
 
 \subparagraph{Analytic Continuation}\label{sec:analytic_continuation}
@@ -1135,6 +1145,16 @@ Integral of the Gaussian Function (TODO) $e^{-x^2}$ over the entire Real Line
 
 
 
+\paragraph{Integration by Parts}\label{sec:integration_by_parts}\hfill
+
+TODO
+
+\fist Product Rule (\S\ref{sec:product_rule})
+
+$\int{uv'} = uv - \int{u'v}$
+
+
+
 \subsubsection{Substitution Rule}\label{sec:substitution_rule}
 
 Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
@@ -1207,6 +1227,18 @@ functions on Infinite Intervals
 
 \paragraph{Laplace Transform}\label{sec:laplace_transform}\hfill
 
+$\mathcal{L}\{f(t)\} = F(s)$
+
+takes a Function $f(t)$ of a Real Variable $t$ (usually Time) to a Function
+$F(s)$ of a Complex Variable $s$ (Complex Frequency
+\S\ref{sec:complex_frequency})
+
+\fist Fourier Transform (\S\ref{sec:fourier_transform}) is a single Projection
+``out'' of a Laplace Transform (FIXME: clarify)
+
+\fist cf. Laplacian (\S\ref{sec:laplacian}), Laplace Operator
+(\S\ref{sec:laplace_operator}) %FIXME same concepts?
+
 \url{https://www.quora.com/Intuitively-speaking-what-does-a-Laplace-transformation-represent}:
 
 ``A convenient way of turning a calculus into algebra, sin/cos/exp functions
@@ -1217,40 +1249,70 @@ Why? Because it turns differentiation into multiplication by $s$, integration
 into division by $s$, and the sin/cos/exp functions into simple rational
 polynomials in $s$.''
 
-Imaginary Component of Poles indicates what Frequency the System will Resonate
-at, and Real Component of Poles indicates the magnitude of the Resonance, and
-Zeros indicate Non-resonating Exponential Decays
-
 \[
   \mathcal{L} \{ f(t) \} = F(s) = \int_0^\infty f(t) e^{-st} dt
 \]
 
-$\mathcal{L}\{1\} = \frac{1}{s}$, $s > 0$
+$\mathcal{L}\{t^0\} = \frac{1}{s}$, $s > 0$
+
+$\mathcal{L}\{t\} = \frac{1}{s^2}$
+
+$\mathcal{L}\{t^2\} = \frac{2}{s^3}$
+
+$\mathcal{L}\{t^3\} = \frac{6}{s^4}$
+
+$\vdots$
+
+$\mathcal{L}\{t^n\} = \frac{n!}{s^{n+1}}$
 
 $\mathcal{L}\{e^{at}\} = \frac{1}{s-a}$, $s > a$
+
+$\mathcal{L}\{e^{at}f(t)\} = F(s-a)$
+
+$\mathcal{L}\{\sin at\} = \frac{a}{s^2+a^2}$
 
 $\mathcal{L}\{ f'(t) \} = s \mathcal{L} \{f(t)\} - f(0)$
 
 $\mathcal{L}\{ f''(t) \} = s^2 \mathcal{L} \{f(t)\} - sf(0) - f'(0)$
 
-takes a Function $f(t)$ of a Real Variable $t$ (usually Time) to a Function
-$F(s)$ of a Complex Variable $s$ (usually Frequency + Phase)
+$\vdots$
 
-\fist Fourier Transform (\S\ref{sec:fourier_transform}) is a single Projection
-``out'' of a Laplace Transform (FIXME: clarify)
+Unit Step Function (\S\ref{sec:unit_step_function}) $u_c(t)$
+
+$\mathcal{L}\{ u_c(t)f(t-c) \} = e^{-cs}\mathcal{L}\{f(t)\}$
+
+Dirac Delta Function (\S\ref{sec:dirac_delta}) $\delta(t)$
+
+$\mathcal{L}\{ \delta(t-c) \} = e^{-cs}$
+
+$\mathcal{L}\{ \delta(t-c)f(t) \} = e^{-cs}f(c) $
+
+Inverse Laplace Transform $\mathcal{L}^{-1}$
+
+the Laplace Transform is a \emph{Linear Operator}
+(\S\ref{sec:linear_operator}):
+\[
+  \mathcal{L} \{ c_1 f(t) + c_2 g(t) \}
+    = c_1\mathcal{L}\{f(t)\} + c_2\mathcal{L}\{g(t)\}
+\]
+
+the Laplace Transform is a Holomorphic Function
+(\S\ref{sec:holomorphic_function}) of the Variable $s$ with a Power Series
+representation
 
 Frequency-domain approach for Continuous Time Signals where the System may be
 Stable \emph{or} Unstable (TODO: clarify)
 
-\fist cf. Laplacian (\S\ref{sec:laplacian}), Laplace Operator
-(\S\ref{sec:laplace_operator}) %FIXME same concepts?
-
-Convolution (\S\ref{sec:convolution})
-
 in Control Theory (\S\ref{sec:control_theory}), Systems are often Transformed
 from the Time Domain to the Frequency Domain using Laplace Transform and the
 Transformed System's Zeros (\S\ref{sec:complex_zero}) and Poles
-(\S\ref{sec:complex_pole}) are Analyzed in the Complex Plane
+(\S\ref{sec:complex_pole}) are Analyzed in the Complex Plane:
+
+Imaginary Component of Poles indicates what Frequency the System will Resonate
+at, and Real Component of Poles indicates the magnitude of the Resonance, and
+Zeros indicate Non-resonating Exponential Decays
+
+Convolution (\S\ref{sec:convolution})
 
 
 
@@ -1330,11 +1392,29 @@ Complex Solutions to the Differential Equation $y'' + y = 0$
   e^{i\pi} + 1 = 0
 \]
 
+Convergence Sequences (\S\ref{sec:convergent_sequence}): Intervals
+for Convergent Real Sequences are replaced by \emph{Discs} in the case of
+Convergent Sequences of Complex Numbers
+
+all Trigonometric Functions are related to $e^z$:
+\[
+  e^{iz} = \cos z + i \sin z
+\]
+as expressed in the Polar Form:
+\[
+  re^{i\theta}
+\]
+
 
 
 % --------------------------------------------------------------------
 \subsection{Principal Value}\label{sec:principal_value}
 % --------------------------------------------------------------------
+
+Argument (Angle) -- usually restricted to the Interval $(-\pi,\pi]$, or else
+$[0,2\pi)$ by adding $2\pi$ if the Value is Negative
+
+
 
 % --------------------------------------------------------------------
 \subsection{Complex Function}\label{sec:complex_function}
@@ -1439,6 +1519,11 @@ a Regular Map (\S\ref{sec:regular_map}) between Complex Algebraic Varieties is
 a Holomorphic Map
 
 
+\begin{itemize}
+  \item the Laplace Transform (\S\ref{sec:laplace_transform}) is a Holomorphic
+    Function of the Variable $s$ with a Power Series representation
+\end{itemize}
+
 
 \subsubsection{Cauchy-Riemann Conditions}\label{sec:cauchy_riemann}
 
@@ -1515,6 +1600,15 @@ if $f = u + iv$ is Analytic and $f'(z) \neq 0$, then:
   v & = v(x,y)
 \end{align*}
 is \emph{Conformal}
+
+the Real and Imaginary parts of any Analytic Function define a \emph{Conformal
+  Mapping} (FIXME: clarify)
+
+\begin{align*}
+  u & = e^x \cos y \\
+  v & = e^x \sin y
+\end{align*}
+is a \emph{Real Conformal Mapping} (FIXME: explain)
 
 a Conformal Mapping preserves Laplace's Equation
 (\S\ref{sec:laplaces_equation})-- only changes the Laplacian by a non-negative
@@ -1701,11 +1795,11 @@ An \emph{Ordinary Differential Equation (ODE)} is an Equation containing one or
 more Functions of one Independent Variable and its Derivatives. An equation of
 the form:
 \[
-  F\Big(x,y,y',\ldots,y^{(n-1)}\Big = y^{(n)}
+  F\Big(x,y,y',\ldots,y^{(n-1)}\Big) = y^{(n)}
 \]
 is an \emph{Order-$n$ Explicit Ordinary Differential Equation}, and:
 \[
-  F\Big(x,y,y',\ldots,y^{(n)}\Big = 0
+  F\Big(x,y,y',\ldots,y^{(n)}\Big) = 0
 \]
 is an \emph{Order-$n$ Implicit Ordinary Differential Equation}.
 
@@ -1752,6 +1846,25 @@ if $f(t)$ is a Solution to a Homogeneous ODE $F$ then $c\cdot{f(t)}$ is a
 Solution to $F$ for any Constant $c$, and if $g(t)$ is also a Solution then
 $f(t) + g(t)$ is a Solution
 
+
+Domain of Solutions: there is no way in general to know what the Domain of the
+Solution will be (MIT 18.03 2006 Lec. 1)
+
+example:
+
+for the Differential Equation $y' = \frac{-x}{y}$, setting $\frac{-x}{y}$ equal
+to a Constant, $\frac{-x}{y} = C$, gives the \emph{Isoclines}
+(\S\ref{sec:isocline}) of the Slope Field defined by the Differential Equation,
+i.e. they are curves where the Family of Solutions are intersect the
+curve with the indicated slope $C$ along its length
+
+\emph{Local Existence and Uniqueness Theorem}: for a Differential Equation
+\emph{in Standard Form}, when $f$ and $f_y$ are Continuous near $x_0$ and
+$y_0$, there is one and only one Solution through a Point $(x_0, y_0)$
+
+\emph{Global Existence and Uniqueness Theorem} (TODO)
+
+
 \emph{Characteristic Equation}
 
 an example of a System modelled by a First-order Ordinary Differential Equation
@@ -1768,6 +1881,48 @@ Velocity Dimension and a Position Dimension and the Orbit is Periodic
 When the Differential Equation is represented as a Vector Field or Slope Field
 (\S\ref{sec:slope_field}), the corresponding Integral Curves
 (\S\ref{sec:integral_curve}) are Tangent to the Field at each point.
+
+
+
+\paragraph{Integral Curve}\label{sec:integral_curve}\hfill
+
+An \emph{Integral Curve} is a Parametric Curve that represents a
+\emph{specific} Solution of an Ordinary Differential Equation
+(\S\ref{sec:ode}), or System of Equations (\S\ref{sec:system_of_odes}).
+
+When the Differential Equation is represented as a Vector Field or Slope Field
+(\S\ref{sec:slope_field}), the corresponding Integral Curves are Tangent to the
+Field at each point.
+
+Integral Curves intersect Isoclines (\S\ref{sec:isocline}) with the slope
+indicated by the Isocline
+
+(\emph{Existence and Uniqueness Theorem}) two Integral Curves cannot cross (at
+an Angle) or touch (be Tangent)
+
+In a Dynamical System (\S\ref{sec:dynamical_sytem}), the Integral Curves for
+the Differential Equation governing the System are referred to as
+\emph{Trajectories} (\S\ref{sec:trajectory}).
+
+e.g. Electric Field or Magnetic Field Lines, Streamlines (Velocity Field of a
+Fluid)
+
+\emph{Flow}
+
+
+
+\paragraph{Isocline}\label{sec:isocline}\hfill
+
+Isoclines are intersected by Integral Curves (\S\ref{sec:integral_curve}) at
+the slope indicated by the Isocline
+
+example:
+
+for the Differential Equation (\S\ref{sec:differential_equation}) $y' =
+\frac{-x}{y}$, setting $\frac{-x}{y}$ equal to a Constant, $\frac{-x}{y} = C$
+gives a Family of \emph{Isoclines} of the Slope Field defined by the
+Differential Equation, i.e. they are curves where the Family of Solutions
+intersect the curve with the indicated slope $C$ along its length
 
 
 
@@ -3258,7 +3413,17 @@ can be extended to Tessellations of the Plane (\S\ref{sec:tessellation})
 
 \paragraph{Trigonometric Function}\label{sec:trigonometric_function}\hfill
 
+or \emph{Circular Function}
+
+Hyperbolic Functions (\S\ref{sec:hyperbolic_function}) arise from the study of
+the Equation $x^2 - y^2 = 1$; cf. Circular (Trigonometric) Functions arise from
+the study of $x^2 + y^2 = 1$
+
+cf. Elliptic Functions (\S\ref{sec:elliptic_function}): Meromorphic Function
+that is Periodic in two directions
+
 Analytic Functions (\S\ref{sec:analytic_function})
+
 
 the Sine Wave is the only Periodic Waveform that has the Property that it
 retains its ``wave shape'' when added to another Sine Wave of the same
@@ -3295,6 +3460,23 @@ or $m\neq{-n}$
 $\int_0^{2\pi} \cos(mt)dt = \pi$ for any Non-zero Integer $m$
 
 \fist Fourier Series (\S\ref{sec:fourier_series})
+
+
+
+\paragraph{Hyperbolic Function}\label{sec:trigonometric_function}\hfill
+
+Hyperbolic Functions arise from the study of the Equation $x^2 - y^2 = 1$; cf.
+Circular (Trigonometric) Functions arise from the study of $x^2 + y^2 = 1$
+
+Hyperbolic Functions are Periodic with respect to the \emph{Imaginary}
+Component
+
+cf. Elliptic Functions (\S\ref{sec:elliptic_function}): Meromorphic Function
+that is Periodic in two directions
+
+$\sinh$
+
+$\cosh$
 
 
 
@@ -3414,24 +3596,34 @@ Wiener Integral; assigned to a class of Brownian Motion Paths
 
 
 % --------------------------------------------------------------------
-\subsection{Bounded Linear Operator}\label{sec:bounded_linear_operator}
+\subsection{Adjoint Operator}\label{sec:adjoint_operator}
 % --------------------------------------------------------------------
 
-a Linear Transformation between two Normed Vector Spaces
-(\S\ref{sec:normed_vectorspace}) is a Bounded Linear Operator if and
-only if it is a Continuous Linear Operator
-(\S\ref{sec:continuous_linear})
+The \emph{Adjoint Operator} (or \emph{Hermitian Adjoint}) of a
+Linear Operator $A : H_1 \rightarrow H_2$ between Hilbert Spaces
+(\S\ref{sec:hilbert_space}) is the Linear Operator $A^\dag : H_2 \rightarrow
+H_1$ satisfying:
+\[
+  \langle{Ah_1,Ah_2}\rangle_{H_2} = \langle{h_1,A^{\dag}h_2}\rangle_{H_1}
+\]
+where $\langle\cdot,\cdot\rangle_{H_i}$ is the Inner Product Space in Hilbert
+Space $H_i$.
 
-an Orthogonal Projection (\S\ref{sec:orthogonal_projection}) is a Bounded
-Linear Operator
+%FIXME: not required to be an endomorphism (operator) ???
 
-
-
-\subsubsection{Hermitian Adjoint}\label{sec:hermitian_adjoint}
-
-Adjoint Operator (\S\ref{sec:adjoint_operator})
+Bounded Linear Operator (\S\ref{sec:bounded_linear_operator})
 
 Complex Hilbert Space (\S\ref{sec:hilbert_space})
+
+
+
+\subsubsection{Self-adjoint Operator}\label{sec:self_adjoint_operator}
+
+A Linear Operator $A$ on a Hilbert Space (\S\ref{sec:hilbert_space}) is
+\emph{Self-adjoint} if it is equal to its Hermitian Adjoint.
+
+A Projection is Orthogonal (\S\ref{sec:orthogonal_projection}) if and only if
+it is Self-adjoint.
 
 
 
