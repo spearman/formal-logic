@@ -98,6 +98,10 @@ such that:
     Complement of the Column Space
 \end{enumerate}
 
+\url{https://www.youtube.com/watch?v=VmfTXVG9S0U&feature=youtu.be&t=1m39s}: in
+a Linear Transformation of a Space, all of the ``grid lines'' of the Space
+remain \emph{Parallel} and \emph{evenly spaced}
+
 Linear Transformations are Morphisms in the Category of Modules over a given
 Ring (\S\ref{sec:ring}).
 
@@ -844,7 +848,7 @@ Numbers on which a \emph{Norm} (\S\ref{sec:norm}) $\|\cdot\| : V \rightarrow
 formalizing the notion of \emph{Distance} between Vectors.
 
 Any Normed Vector Space is a Metric Space (\S\ref{sec:metric_space}) by
-defining $d(x,y) = \|y-x\|$.
+defining the Metric (Distance Function \S\ref{sec:metric}) $d(x,y) = \|y-x\|$.
 
 A Complete (\S\ref{sec:complete_metric_space}) Normed Vector Space is a Banach
 Space (\S\ref{sec:banach_space}).
@@ -874,6 +878,8 @@ a Real-valued Function defined on the Vector Space with the properties:
     Inequality})
 \end{enumerate}
 
+\fist Matrix Norm (\S\ref{sec:matrix_norm})
+
 the Vector Derivative (\S\ref{sec:vector_derivative}) represents a change of
 \emph{Length} of the Vector
 
@@ -889,6 +895,22 @@ Subadditive Function (\S\ref{sec:subadditive_function})
 
 Real Line (\S\ref{sec:real_line}) with Absolute Value as Norm:\\
 $|x + y| \leq |x| + |y|$
+
+
+
+\paragraph{$p$-norm}\label{sec:}\hfill
+
+\fist Metric (Distance Function \S\ref{sec:metric})
+
+\[
+  \|\vec{x}\|_p = \Big(\sum_{i=1}^m|x_i|^p\Big)^{\frac{1}{p}}
+\]
+
+$1$-norm -- Taxicab Norm; all components are ``weighted'' equally
+
+$2$-norm -- \emph{Euclidean Norm}; large elements have ``more weighting''
+
+$\infty$-norm -- Max Norm; only the largest element contributes to the length
 
 
 
@@ -940,6 +962,16 @@ that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
 
 \fist Gram Matrix (\S\ref{sec:gram_matrix}): Hermitian Matrix of Inner
 Products
+
+\emph{Cauchy-Schwarz Inequality}:
+\[
+  |\langle{\vec{u},\vec{v}}\rangle|^2 \leq
+    \langle{\vec{u},\vec{u}}\rangle \cdot \langle{\vec{v},\vec{v}}\rangle
+\]
+or equivalently:
+\[
+  |\langle{\vec{u},\vec{v}}\rangle| \leq \|\vec{u}\| \|\vec{v}\|
+\]
 
 
 
@@ -1559,6 +1591,73 @@ Coefficient Matrix (System of Linear Equations \S\ref{sec:coefficient_matrix})
 
 
 % --------------------------------------------------------------------
+\subsection{Matrix Norm}\label{sec:matrix_norm}
+% --------------------------------------------------------------------
+
+Vector Norm (\S\ref{sec:norm}) in a Vector Space in which Elements are Matrices
+of a given Dimension
+
+is a measure of how much a Matrix $A$ can \emph{Scale} Vectors
+
+\emph{Induced Matrix Norm}
+
+Vector Norm $\|\cdot\|_p$ and Matrix $A$, Induced Matrix Norm $\|A\|_p$, is the
+length of the largest Vector that can result from multiplying $A$ by a Unit
+Vector:
+\[
+  \|A\| = \mathrm{sup}_\vec{x} \frac{\|A\vec{x}\|}{\|\vec{x}\|}
+\]
+and therefore:
+\[
+  \|A\| \geq \frac{\|A\vec{x}\|}{\|\vec{x}\|}
+\]
+and:
+\[
+  \|A\vec{x}\| \leq \|A\| \|\vec{x}\|
+\]
+
+Induced $p$-norms (\S\ref{sec:p_norm})
+
+the Induced $1$-norm (Taxicab Norm) of a Matrix is equal to the maximum Column
+Sum (Sum of Absolute Value of individual Components) of $A$
+
+the Induced $\infty$-norm (Max Norm) is the maximum Row Sum of $A$
+
+
+\emph{Frobenius Norm} -- Square Root of the Sum of the Squares of all the
+entries; equal to the Square Root of the Trace of $A^*A$
+
+
+the Frobenius Norm and the Euclidean Norm ($2$-norm) are both invariant under
+Unitary Multiplication, i.e. Left or Right Multiplying a Matrix $A$ by an
+Unitary Matrix $Q$ results in a Matrix with the same Norm as the original
+Matrix $A$
+
+the Absolute Condition Number (\S\ref{sec:absolute_condition_number}),
+$\hat{\kappa}$, of a Differentiable Function $f(x)$ is equal to the Matrix Norm
+of its Jacobian Matrix (\S\ref{sec:jacobian_matrix}) $J$:
+\[
+  \hat{\kappa} = \|J(x)\|
+\]
+
+the Relative Condition Number (\S\ref{sec:relative_condition_number}),
+$\kappa$, of a Differentiable Function $f(x)$ is equal to:
+\[
+  \kappa = \frac{\|J(x)\| \|x\|}{\|f(x)\|}
+\]
+
+the worst case $\kappa$ for the Matrix/Vector Multiplication Function defined
+by a Matrix $A$ is the Sharp Inequality (i.e. is Equal for \emph{some}
+\vec{x}):
+\[
+  \kappa \leq \|A\|\|A^{-1}\|
+\]
+where $\|A\|\|A^{-1}\|$ is called the Condition Number $\kappa(A)$ of Matrix
+$A$
+
+
+
+% --------------------------------------------------------------------
 \subsection{Matrix Decomposition}\label{sec:matrix_decomposition}
 % --------------------------------------------------------------------
 
@@ -1853,6 +1952,11 @@ where $U^* = \overline{U^T}$ is the Conjugate Transpose
 $\mathrm{SU}(n)$: the Lie Group of $n \times n$ Unitary Matrices with
 Determinant $1$
 
+the Frobenius Norm and the Euclidean Norm ($2$-norm \S\ref{sec:matrix_norm}))
+are both invariant under Unitary Multiplication, i.e. Left or Right Multiplying
+a Matrix $A$ by an Unitary Matrix $Q$ results in a Matrix with the same Norm as
+the original Matrix $A$
+
 only a Unitary Matrix can be used as a Quantum Gate in Quantum Computation
 
 Polar Decomposition (\S\ref{sec:polar_decomposition})
@@ -1940,6 +2044,13 @@ Locally Linear Functions (\S\ref{sec:locally_linear})
 
 \fist the Jacobian Matrix for a System of DAEs (\S\ref{sec:system_of_daes}) is
 a Singular (Non-invertible) Matrix (\S\ref{sec:singular_matrix})
+
+the Absolute Condition Number (\S\ref{sec:absolute_condition_number}),
+$\hat{k}$, of a Differentiable Function $f(x)$ is equal to the Matrix Norm
+(\S\ref{sec:matrix_norm}) of its Jacobian Matrix $J$:
+\[
+  \hat{k} = \|J(x)\|
+\]
 
 
 
