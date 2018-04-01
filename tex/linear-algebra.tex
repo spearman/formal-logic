@@ -9,6 +9,9 @@ Set Theory (Part \ref{part:set_theory}) is Linear Algebra over the
 
 cf. Vector Calculus (\S\ref{sec:vector_calculus})
 
+\fist Linear Equations (\S\ref{sec:linear_equation}), Systems of Linear
+Equations (\S\ref{sec:system_of_linear_equations})
+
 
 
 % ====================================================================
@@ -155,11 +158,22 @@ Spaces and Linear Relations $\cat{LinRel}$
 (\S\ref{sec:fundamental_linear_algebra_theorem})
 
 
+
 \paragraph{Column Space}\label{sec:column_space}\hfill
 
-\emph{Image}
+\emph{Image} or \emph{Range}
 
 Rank (\S\ref{sec:rank})
+
+the Left Nullspace (\S\ref{sec:left_nullspace}) of a Matrix $A$ is the Subspace
+that is Orthogonal to the Column Space of $A$
+
+\begin{align*}
+  \vec{x} & \in \mathrm{null}(A^*) \Leftrightarrow         \\
+  \vec{x} & \bot \text{all Rows of }A^* \Leftrightarrow    \\
+  \vec{x} & \bot \text{all Columns of }A \Leftrightarrow   \\
+  \vec{x} & \in \mathrm{image}(A)^\bot
+\end{align*}
 
 
 
@@ -168,6 +182,16 @@ Rank (\S\ref{sec:rank})
 \emph{Coimage}
 
 Rank (\S\ref{sec:rank})
+
+the Nullspace (\S\ref{sec:nullspace}) of a Matrix $A$ is the Subspace that is
+orthogonal to the Row Space of $A$
+
+\begin{align*}
+  \vec{x} & \in \mathrm{null}(A) \Leftrightarrow         \\
+  \vec{x} & \bot \text{all Rows of }A \Leftrightarrow    \\
+  \vec{x} & \bot \text{all Columns of }A^* \Leftrightarrow   \\
+  \vec{x} & \in \mathrm{coimage}(A)^\bot
+\end{align*}
 
 
 
@@ -182,7 +206,12 @@ Spaces $V$ and $W$ is the Set of all $\vec{v}\in{V}$ such that $L(\vec{v}) =
 
 The Kernel of $L$ is a Linear Subspace of the Domain $V$.
 
-Nullity (\S\ref{sec:nullity})
+Nullity (\S\ref{sec:nullity}): Dimension of the Null Space
+
+\emph{Rank-Nullity Theorem}
+
+for an $m \times n$ Matrix $A$, the Rank of $A$ plus the Nullity
+of $A$ is equal to $n$
 
 
 
@@ -191,6 +220,16 @@ Nullity (\S\ref{sec:nullity})
 or \emph{Cokernel}
 
 Corank (\S\ref{sec:rank})
+
+the Left Nullspace of a Matrix $A$ is the Subspace that is Orthogonal to the
+Column Space (\S\ref{sec:column_space}) of $A$
+
+\begin{align*}
+  \vec{x} & \in \mathrm{null}(A^*) \Leftrightarrow         \\
+  \vec{x} & \bot \text{all Rows of }A^* \Leftrightarrow    \\
+  \vec{x} & \bot \text{all Columns of }A \Leftrightarrow   \\
+  \vec{x} & \in \mathrm{image}(A^*)^\bot
+\end{align*}
 
 
 
@@ -237,9 +276,35 @@ A \emph{Linear Projection} $P$ is an Idempotent Linear Operator, i.e. $P^2 = P$.
 
 Singular Matrix (\S\ref{sec:singular_matrix}) FIXME
 
+the Columns of $I - P$ Span $\mathrm{null}(P)$
+
+$P(I - P) = 0$
+
+$(I - P)$ is also a Projection
+
+$P$ gives a ``Decomposition'' of a Vector $\vec{x}$ into Components in the
+Range and Nullspace of $P$:
+\[
+  \vec{x} = P\vec{x} = (I - P)\vec{x}
+\]
+
+$P$ is an Orthogonal Projection (\S\ref{sec:orthogonal_projection}) if
+$P\vec{x}$ and $(I-P)\vec{x}$ are Orthogonal
+
 
 
 \subparagraph{Orthogonal Projection}\label{sec:orthogonal_projection}\hfill
+
+in an Orthogonal Projection, the Direction of the Projection is Orthogonal to
+the Image (Column Space) of the Projection
+
+$P$ is an Orthogonal Projection if $P\vec{x}$ and $(I-P)\vec{x}$ are Orthogonal
+
+Thm. \emph{A Matrix $P \in \comps^{n \times n}$ is an Orthogonal Projection if
+  and only if $P^2 = P$ and $P = P^*$}
+
+i.e. an Orthogonal Projection is exactly an Idempotent, Symmetric (Hermitian)
+Linear Operator
 
 for an $n$-dimensional Unit Vector $\hat{u}$, the $n \times n$ Orthogonal
 Projection Matrix $P_u$ can be computed by the Outer Product:
@@ -266,6 +331,28 @@ A Projection is Orthogonal if and only if it is Self-adjoint
 
 an Orthogonal Projection is a Bounded Linear Operator
 (\S\ref{sec:bounded_linear_operator})
+
+
+UC Math 352 \url{https://www.youtube.com/watch?v=3HS-BRbJOd0}:
+
+\emph{Orthogonal Projection onto an arbitrary Basis}
+
+for Set of Linearly Independent Vectors $\vec{a}_1, \ldots, \vec{a}_n$
+
+Orthogonal Projection onto $\mathrm{span}\{\vec{a}_1, \ldots, \vec{a}_n\}$
+
+Define $A = [\vec{a}_1 \cdots \vec{a}_n] \in \comps^{m \times n}, m \geq n$
+
+($A$ is Full Rank because the Column Vectors are Linearly Independnt)
+
+from the Reduced QR Decomposition (\S\ref{sec:qr_decomposition}):
+\[
+  A = \hat{Q}\hat{R}
+\]
+one can Define the Orthogonal Projection $P$:
+\[
+  P = \hat{Q}\hat{Q}^*
+\]
 
 
 
@@ -623,6 +710,9 @@ a Basis for an Inner Product Space consisting of an Orthonormal
 (\S\ref{sec:orthonormal}) Set of Vectors
 
 \begin{itemize}
+  \item an Orthogonal Matrix (\S\ref{sec:orthogonal_matrix}) is an $n \times n$
+    Matrix with Columns forming an Orthonormal Basis for Euclidean Space
+    $\reals^n$
   \item the Sines and Cosines in the Fourier Series
     (\S\ref{sec:fourier_series}) form an Orthonormal Basis
 \end{itemize}
@@ -1455,10 +1545,6 @@ $\wedge$
 
 
 % ====================================================================
-\section{Linear Equation}\label{sec:linear_equation}
-% ====================================================================
-
-% ====================================================================
 \section{Matrix Theory}\label{sec:matrix_theory}
 % ====================================================================
 
@@ -1537,10 +1623,30 @@ The \emph{Rank} of a Matrix $A$ is the Dimension of the Vector Space
 is, equal to the maximal number of Linearly Independent Columns of $A$ and is
 identical to the Dimension of the Space Spanned by its Rows.
 
+\fist Rank of a Matrix can be computed by Gaussian Elimination
+(\S\ref{sec:gaussian_elimination})
+
+the Maximum Rank of an $m \times n$ Matrix is $\mathrm{min}(m,n)$
+
+the Column Rank and the Row Rank are always equal
+
 Dimension of the Column Space (\S\ref{sec:column_space}) and the Row Space
 (\S\ref{sec:row_space})
 
+a Matrix is \emph{Full Rank} if its Rank equals the largest possible for a
+Matrix of the same Dimensions, which is the lesser of the number of Rows or
+Columns; for a Square Matrix this is equivalent to the statement that the
+Matrix is \emph{Invertible} (\S\ref{sec:invertible})
+
+if a Matrix $A$ is Full Rank, then $A^*A$ is Invertible
+
+every Full Rank $m \times n$ Matrix with $m \geq n$ has a unique QR
+Factorization (\S\ref{sec:qr_decomposition}) with $r_{jj} > 0$
+
 \emph{Rank-Nullity Theorem}
+
+for an $m \times n$ Matrix $A$, the Rank of $A$ plus the Nullity of $A$ is
+equal to $n$
 
 
 
@@ -1551,6 +1657,9 @@ Dimension of the Column Space (\S\ref{sec:column_space}) and the Row Space
 Dimension of the Nullspace (\S\ref{sec:nullspace})
 
 \emph{Rank-Nullity Theorem}
+
+for an $m \times n$ Matrix $A$, the Rank of $A$ plus the Nullity of $A$ is
+equal to $n$
 
 
 
@@ -1583,6 +1692,25 @@ corresponding row of $A$ on the right by the Matrix $B$.
 
 
 % --------------------------------------------------------------------
+\subsection{Matrix Square Root}\label{sec:matrix_square_root}
+% --------------------------------------------------------------------
+
+$BB = A$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Transpose}\label{sec:transpose}
+% --------------------------------------------------------------------
+
+Conjugate Transpose (\S\ref{sec:conjugate_transpose}) for Complex-valued
+Matrices
+
+if a Matrix $A$ is Full Rank, then $A^TA$ is Invertible
+
+
+
+% --------------------------------------------------------------------
 \subsection{Reduced Row Echelon Form}\label{sec:reduced_row_echelon}
 % --------------------------------------------------------------------
 
@@ -1605,7 +1733,7 @@ Vector Norm $\|\cdot\|_p$ and Matrix $A$, Induced Matrix Norm $\|A\|_p$, is the
 length of the largest Vector that can result from multiplying $A$ by a Unit
 Vector:
 \[
-  \|A\| = \mathrm{sup}_\vec{x} \frac{\|A\vec{x}\|}{\|\vec{x}\|}
+  \|A\| = \mathrm{sup}_{\vec{x}} \frac{\|A\vec{x}\|}{\|\vec{x}\|}
 \]
 and therefore:
 \[
@@ -1648,7 +1776,7 @@ $\kappa$, of a Differentiable Function $f(x)$ is equal to:
 
 the worst case $\kappa$ for the Matrix/Vector Multiplication Function defined
 by a Matrix $A$ is the Sharp Inequality (i.e. is Equal for \emph{some}
-\vec{x}):
+$\vec{x}$):
 \[
   \kappa \leq \|A\|\|A^{-1}\|
 \]
@@ -1674,6 +1802,142 @@ Eigenvalues and Eigenvectors (\S\ref{sec:eigenvector})
 
 only Diagonalizable Matrices (\S\ref{sec:diagonlizable_matrix}) can be
 Factorized in this way
+
+
+
+\subsubsection{LU Decomposition}\label{sec:lu_decomposition}
+
+``Matrix form'' of Gaussian Elimination (Row Reduction
+\S\ref{sec:gaussian_elimination})
+
+cf. QR Factorization (\S\ref{sec:qr_decomposition})
+
+
+
+\subsubsection{QR Decomposition}\label{sec:qr_decomposition}
+
+(or \emph{QR Factorization})
+
+\emph{Full QR Decomposition}: Decomposition of a Matrix $A \in \comps^{m \times
+  n}, m \geq n$ into a Product $A = QR$ of an Orthogonal (Unitary) Matrix
+(\S\ref{sec:orthogonal_matrix}) $Q$ (i.e. $Q^TQ = I$) and an Upper (Right)
+Triangular Matrix (\S\ref{sec:upper_triangular}) $R$
+
+this Factorization exists for all $A \in \comps^{m \times n}, m \geq n$, and is
+\emph{unique} if $A$ is Full Rank (\S\ref{sec:rank}) when the Diagonal Elements
+of $R$ are required to be Positive
+
+Numerically Stable way to solve Least Squares Problem
+(\S\ref{sec:least_squares})
+
+solving Eigenvalue Problems (QR Algorithm)
+
+
+\url{https://www.youtube.com/watch?v=3HS-BRbJOd0}:
+
+\emph{Reduced QR Factorization}
+
+a Full Rank $m \times n, m \geq n$ Matrix $A$ with Columns:
+\[
+  A = [ \vec{a}_1, \ldots, \vec{a}_n ]
+\]
+can have its Column Space decomposed into nested Subspaces by taking the Spans
+(\S\ref{sec:linear_span}) of the First $1$ to $n$ Columns:
+\[
+  \mathrm{span} \{ \vec{a}_1 \} \subseteq
+  \mathrm{span} \{ \vec{a}_1, \vec{a}_2 \}
+  \subseteq \cdots \subseteq
+  \mathrm{span} \{ \vec{a}_1, \ldots, \vec{a}_n \}
+  = \mathrm{span} A
+\]
+
+find Orthonormal Bases $\{ \hat{q}_1 \}, \{ \hat{q}_1, \hat{q}_2 \}, \ldots \{
+\hat{q}_1, \ldots, \hat{q}_n\}$ for each of these Column Spaces, i.e.:
+\[
+  \mathrm{span} \{ \hat{q}_1, \hat{q}_2, \ldots, \hat{q}_j \} =
+  \mathrm{span} \{ \vec{a}_1, \vec{a}_2, \ldots, \vec{a}_j \}
+\]
+which can be expressed as the Multiplication of the $m \times n$ Matrix
+$\hat{Q} = [ \hat{q}_1 \cdots \hat{q}_n ]$ by an $n \times n$ Upper Triangular
+Matrix, $A = \hat{Q}\hat{R}$:
+\[
+  [\vec{a}_1, \vec{a}_2, \ldots, \vec{a}_n] =
+  [\hat{q}_1, \hat{q}_2, \ldots, \hat{q}_n]
+  \begin{bmatrix}
+    r_{11} & r_{12} & \cdots & r_{1n} \\
+    0      & r_{22} & \cdots & r_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0      & \cdots & 0      & r_{nn} \\
+  \end{bmatrix}
+\]
+yielding the Equations:
+\begin{align*}
+  \vec{a}_1 & = r_{11}\hat{q}_1 \\
+  \vec{a}_2 & = r_{12}\hat{q}_1 + r_{22}\hat{q}_2 \\
+            & \vdots \\
+  \vec{a}_n & = r_{1n}\hat{q}_1 + r_{2n}\hat{q}_2 + \cdots + r_{nn}\hat{q}_n \\
+\end{align*}
+
+
+\emph{Full QR Factorization}
+
+\[
+  A = QR = [\hat{Q}Q_N]\begin{bmatrix} \hat{R} \\ 0 \end{bmatrix}
+\]
+$Q$ is an Orthogonal (or Unitary) $m \times m$ Matrix formed by extending
+$\hat{Q}$ by $m - n$ additional Orthonormal Columns and $R$ is an $m \times n$
+Upper Triangular Matrix formed by extending $\hat{R}$ by $m - n$ additional
+Rows of $1 \times m$ Zero Vectors
+
+the Columns of $Q_N$ form an Orthonormal Basis for the Left Nullspace of $A$,
+viz. $\mathrm{null}(A^*)$
+
+
+\emph{Existence and Uniqueness}
+
+Thm. \emph{Every Matrix $A \in \comps^{m \times n}, m \geq n$ has a Full (and
+  Reduced) QR Factorization}
+
+Thm. \emph{Every Matrix $A \in \comps^{m \times n}, m \geq n$ of Full Rank has
+  a unique Reduced QR Factorization $A = \hat{Q}\hat{R}$ with $r_{jj} \geq 0$}
+
+
+\emph{Orthogonal Projections} (\S\ref{sec:orthogonal_projection})
+
+one may define an Orthogonal Projection $P$ onto the Column Space of a Full Rank
+$m \times n, m \geq n$ Matrix $A$ using the $\hat{Q}$ Matrix from the Reduced
+QR Factorization:
+\[
+  P = \hat{Q}\hat{Q}^*
+\]
+
+
+\emph{Algorithm}
+
+cf. the process of finding Elementary Operations
+(\S\ref{sec:elementary_operations}) that produce an LU Factorization
+(\S\ref{sec:lu_factorization}) \fist Gaussian Elimination
+(\S\ref{sec:gaussian_elimination})
+
+computing $R$:
+\[
+  \cdots Q_2 Q_1 A = R
+\]
+
+using Elementary Orthogonal Matrices (\S\ref{sec:elementary_orthogonal_matrix}):
+\begin{itemize}
+  \item Givens Matrices (\emph{Plane Rotations} \S\ref{sec:plane_rotation})
+  \item Householder Matrices (\emph{Elementary Reflector}
+    \S\ref{sec:elementary_reflector})
+\end{itemize}
+
+using Givens Rotations, Multiplying by $G_{ij}$ can be used to make an entry
+$A[ji]$ Zero; combining a number of such Rotations can be used to yield $R$:
+\begin{align*}
+  \cdots G_{ij}G_{kl}A & = R \\
+  A & = (\cdots G_{ij}G_{kl})^{-1}R \\
+  A & = G_{kl}^T G_{ij}^T \cdots R = QR
+\end{align*}
 
 
 
@@ -1755,6 +2019,9 @@ its Determinant is non-zero, or equivalently if its Rank (\S\ref{sec:rank})
 equals the size of the Matrix, and if it is Invertible the Determinant of the
 Inverse Matrix is given by $det(A^{-1}) = \frac{1}{det(A)}$.
 
+\fist the Determinant of a Matrix can be computed by Gaussian Elimination
+(\S\ref{sec:gaussian_elimination})
+
 The Special Linear Group $SL(n,F)$ of Degree $n$ over a Field $F$ is the Set of
 $n \times n$ Matrices with Determinant $1$ with the Group Operations of
 ordinary Matrix Multiplication and Matrix Inversion.
@@ -1794,6 +2061,9 @@ $1$ in each Row and each Column and $0$s elsewhere.
 
 Non-zero Determinant
 
+\fist the Inverse of an Invertible Matrix can be computed through Gaussian
+Elimination (\S\ref{sec:gaussian_elimination})
+
 in general, a Square Matrix over a Commutative Ring is Invertible if and only
 if its Determinant is a Unit in that Ring
 
@@ -1811,6 +2081,11 @@ a Square Matrix $A$ is Diagonalizable (\S\ref{sec:diagonalizable}) if there
 exists an Invertible Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
 (\S\ref{sec:diagonal_matrix})
 
+for a Square Matrix, the Matrix is Full Rank (\S\ref{sec:rank}) is
+equivalent to being Invertible
+
+if a Matrix $A$ is Full Rank, then $A^*A$ is Invertible
+
 
 
 \paragraph{Involutory Matrix} (\S\ref{sec:involutory_matrix})\hfill
@@ -1821,11 +2096,13 @@ a Matrix that is its own Inverse
 
 
 
-\paragraph{Orthogonal Matrix}\label{sec:orthogonal_matrix}\hfill
+\subsubsection{Orthogonal Matrix}\label{sec:orthogonal_matrix}
 
-An \emph{Orthogonal Matrix} $Q$ is a Real-valued Square Matrix with Columns and
-Rows that are \emph{Orthonormal Vectors} (\S\ref{sec:orthonormality}),
-resulting in the identity:
+An \emph{Orthogonal Matrix} $Q$ is an $n \times n $ Real-valued Square Matrix
+with Columns and Rows that are \emph{Orthonormal Vectors}
+(\S\ref{sec:orthonormality}), i.e. forms an Orthonormal Basis
+(\S\ref{sec:orthonormal_basis}) for Euclidean Space $\reals^n$, resulting in
+the identity:
 \[
   Q^TQ = QQ^T = I
 \]
@@ -1845,13 +2122,81 @@ Orthogonal Matrices (\S\ref{sec:special_orthogonal_group})
 \fist an Unitary Matrix (\S\ref{sec:unitary_matrix}) is the Complex analogue of
 an Orthogonal Matrix
 
+QR Decomposition (\S\ref{sec:qr_decomposition}): Decomposition of a Matrix $A$
+into a Product $A = QR$ of an Orthogonal Matrix $Q$ and an Upper Triangular
+Matrix (\S\ref{sec:upper_triangular}) $R$ \fist Elementary Orthogonal Matrices
+(\S\ref{sec:elementary_orthogonal_matrix})
+
+cf. LU Decomposition (\S\ref{sec:lu_decomposition}) of a Matrix into a sequence
+of Elementary Operations (\S\ref{sec:elementary_operations}), which can be
+represented as Matrix Multiplications
 
 
-\subparagraph{Rotation Matrix}\label{sec:rotation_matrix}\hfill
+
+\paragraph{Rotation Matrix}\label{sec:rotation_matrix}\hfill
 
 Orthogonal Matrix with Determinant $1$
 
 Special Orthogonal Group $SO(n)$ (\S\ref{sec:special_orthogonal_group})
+
+
+
+\paragraph{Elementary Orthogonal Matrix}
+\label{sec:elementary_orthogonal_matrix}\hfill
+
+Elementary Matrix (\S\ref{sec:elementary_matrix})
+
+QR Factorization (\S\ref{sec:qr_decomposition})
+
+
+
+\subparagraph{Plane Rotation}\label{sec:plane_rotation}\hfill
+
+or \emph{Givens Rotation}
+
+\[
+  G_{ij}(\theta) = \begin{bmatrix}
+    1 &        &   &            &   &        &   &             &   &        &   \\
+      & \ddots &   &            &   &        &   &             &   &        &   \\
+      &        & 1 &            &   &        &   &             &   &        &   \\
+      &        &   & \cos\theta &   &        &   & -\sin\theta &   &        &   \\
+      &        &   &            & 1 &        &   &             &   &        &   \\
+      &        &   &            &   & \ddots &   &             &   &        &   \\
+      &        &   &            &   &        & 1 &             &   &        &   \\
+      &        &   & \sin\theta &   &        &   & \cos\theta  &   &        &   \\
+      &        &   &            &   &        &   &             & 1 &        &   \\
+      &        &   &            &   &        &   &             &   & \ddots &   \\
+      &        &   &            &   &        &   &             &   &        & 1 \\
+  \end{bmatrix}
+\]
+where the ``square'' formed by the $\cos$ and $\sin$ terms are in the $i$th and
+$j$th Rows and Columns:
+\begin{itemize}
+  \item $G_{ij}[ii] = \cos\theta$
+  \item $G_{ij}[ij] = -\sin\theta$
+  \item $G_{ij}[ji] = \sin\theta$
+  \item $G_{ij}[jj] = \cos\theta$
+\end{itemize}
+
+\fist may be used in computing QR Factorization (\S\ref{sec:qr_decomposition})
+
+
+
+\subparagraph{Elementary Reflector}\label{sec:elementary_reflector}\hfill
+
+or \emph{Householder Transformation}
+
+\emph{Reflection} about a Plane containing the Origin
+
+Plane Normal $\hat{w}$
+
+\begin{align*}
+  H\vec{x} & = \vec{x} - 2(\hat{w}^T\vec{x})\hat{w} \\
+  H\vec{x} & = (I - 2\hat{w}\hat{w}^T)\vec{x}       \\
+         H & = I - 2\hat{w}\hat{w}^T
+\end{align*}
+
+\fist may be used in computing QR Factorization (\S\ref{sec:qr_decomposition})
 
 
 
@@ -1898,6 +2243,9 @@ the Complex extension of a Symmetric Matrix is a \emph{Hermitian Matrix}
 
 Positive-definite Matrix (\S\ref{sec:positive_definite})
 
+an Orthogonal Projection (\S\ref{sec:orthogonal_projection}) is exactly an
+Idempotent Symmetric Linear Operator
+
 
 
 \subsubsection{Skew-symmetric Matrix}\label{sec:skew_symmetric}
@@ -1911,8 +2259,76 @@ Bivectors (\S\ref{sec:bivector}) are Isomorphic to Skew-symmetric Matrices
 
 
 % --------------------------------------------------------------------
-\subsection{Upper Triangular Matrix}\label{sec:upper_triangular}
+\subsection{Triangular Matrix}\label{sec:triangular_matrix}
 % --------------------------------------------------------------------
+
+\subsubsection{Upper Triangular Matrix}\label{sec:upper_triangular}
+
+QR Decomposition (\S\ref{sec:qr_decomposition}): Decomposition of a Matrix $A$
+into a Product $A = QR$ of an Orthogonal Matrix (\S\ref{sec:orthogonal_matrix})
+$Q$ and an Upper Triangular Matrix $R$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Elementary Matrix}\label{sec:elementary_matrix}
+% --------------------------------------------------------------------
+
+a Matrix that differs from the Identity Matrix by a single Elementary Row
+Operation (\S\ref{sec:elementary_operation})
+
+Elementary Matrices generate the General Linear Group $GL_n(R)$ of Invertible
+Matrices
+
+the LU Decomposition (\S\ref{sec:lu_decomposition}) of a Matrix is the
+Decomposition into Elementary Operations represented as Matrices \fist Gaussian
+Elimination (\S\ref{sec:gaussian_elimination})
+
+Elementary Orthogonal Matrix (\S\ref{sec:elementary_orthogonal_matrix}): can be
+used in QR Decomposition (\S\ref{sec:qr_decomposition})
+
+
+
+\subsubsection{Elementary Operation}\label{sec:elementary_operation}
+
+\emph{Elementary Row Operation}
+
+\emph{Elementary Column Operation}
+
+
+
+\subsubsection{Gaussian Elimination}\label{sec:gaussian_elimination}
+
+\emph{Row Reduction} or \emph{Gauss-Jordan Elimination}
+
+Algorithm for solving Systems of Linear Equations
+(\S\ref{sec:system_of_linear_equations})
+
+can be used to find the Rank (\S\ref{sec:rank}) of a Matrix, calculate the
+Determinant (\S\ref{sec:determinant}) of a Matrix, and to calculate the Inverse
+of an Invertible Square Matrix (\S\ref{sec:invertible_matrix})
+
+the Elementary Operations can be represented as Matrices, giving the \emph{LU
+  Factorization} (\S\ref{sec:lu_decomposition}) of a Matrix
+
+cf. QR Factorization (\S\ref{sec:qr_decomposition}) as a Decomposition into
+Orthogonal Matrices (\S\ref{sec:orthogonal_matrix})
+
+
+
+\paragraph{Echelon Form}\label{sec:echelon_form}\hfill
+
+\emph{Row Echelon Form}
+
+\emph{Column Echelon Form}
+
+
+
+\subparagraph{Reduced Echelon Form}\label{sec:reduced_echelon}\hfill
+
+or \emph{Canonical Form}
+
+
 
 % --------------------------------------------------------------------
 \subsection{Diagonally Dominant Matrix}\label{sec:diagonally_dominant}
@@ -1932,6 +2348,8 @@ The \emph{Conjugate Transpose} (or \emph{Hermitian Transpose}) of an $m \times
 n$ Complex Matrix $A$ is the $n \times m$ Matrix $A^*$ resulting from the
 Transpose (\S\ref{sec:transpose}) of $A$ followed by taking the Complex
 Conjugate (\S\ref{sec:complex_conjugate}) of each entry.
+
+if a Matrix $A$ is Full Rank, then $A^*A$ is Invertible
 
 
 
@@ -1974,6 +2392,9 @@ Complex extension of Real Symmetric Matrices (\S\ref{sec:symmetric_matrix})
 Positive-definite Matrix (\S\ref{sec:positive_definite})
 
 Polar Decomposition (\S\ref{sec:polar_decomposition})
+
+an Orthogonal Projection (\S\ref{sec:orthogonal_projection}) is exactly an
+Idempotent Hermitian Linear Operator
 
 
 
