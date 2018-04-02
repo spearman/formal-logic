@@ -350,9 +350,28 @@ Mutually Exclusive States
 
 \subsubsection{Independent Event}\label{sec:independent_event}
 
-$P(B|A) = P(B)$ or $P(A|B) = P(A)$
+$P(B|A) = P(B)$ or $P(A|B) = P(A)$ -- note that this is only defined when the
+Conditioning Event has Non-zero Probability
 
 Independent if and only if $P(A \cap B) = P(A) P(B)$
+
+$n$ Events are Independent if:
+\[
+  P(A_i \cap A_j \cap \cdots \cap A_g) = P(A_i)P(A_j) \cdots P(A_g)
+\]
+for any distinct Events $i,j,\ldots,g$
+
+Pairwise Independence does not imply $n$-way Independence
+
+\fist Independence (\S\ref{sec:independence})
+
+$P(A \cap B | C) = P(A|C)P(B|C)$
+
+\fist Conditional Independence (\S\ref{sec:conditional_independence})
+
+note that two Events may be Independent, but not \emph{Conditionally}
+Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
+the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
 
 
 
@@ -596,13 +615,22 @@ $P(A \cap B) = P(A) P(B|A)$ when $P(A) > 0$
 
 $P(A|A) = 1$
 
+note that Conditional Probability is only defined when the Conditioning Event
+has a Non-zero (Positive) Probability
+
+\fist Independent Event (\S\ref{sec:independent_event})
+
+\fist Conditional Independence (\S\ref{sec:conditional_independence})
+
 \fist Negative Probability (\S\ref{sec:negative_probability})
 
 
 
 \subsubsection{Baye's Theorem}\label{sec:bayes_theorem}
 
-\emph{Inference}
+or \emph{Bayes Rule}
+
+\emph{Bayesian Inference} (\S\ref{sec:bayesian_inference})
 
 \[
   P(A|B) = \frac{P(A)P(B|A)}{P(B)}
@@ -1007,7 +1035,21 @@ f(t) dt$
 \subsection{Independence}\label{sec:independence}
 % --------------------------------------------------------------------
 
+$P(A \cap B) = P(A)P(B)$
+
+\fist Independent Event (\S\ref{sec:independent_event})
+
+
+
 \subsubsection{Conditional Independence}\label{sec:conditional_independence}
+
+$P(A \cap B | C) = P(A|C)P(B|C)$
+
+note that two Events may be Independent, but not \emph{Conditionally}
+Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
+the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
+
+\fist Conditional Probability (\S\ref{sec:conditional_probability})
 
 \url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
 -- ``Conditional Independence happens when the Joint Probability Distribution
@@ -1150,6 +1192,8 @@ Discrete Models
 
 Continuous Models -- any individual outcome has Zero Probability (TODO: explain)
 
+Models based on Conditional Probabilities (\S\ref{sec:conditional_probability})
+
 
 
 \subsubsection{Variational Bayesian Method}
@@ -1249,6 +1293,11 @@ Two-tail
 % --------------------------------------------------------------------
 \subsection{Bayesian Inference}\label{sec:bayesian_inference}
 % --------------------------------------------------------------------
+
+Conditional Probabilities (\S\ref{sec:conditional_probability}), Bayes' Rule
+(\S\ref{sec:bayes_theorem})
+
+
 
 \subsubsection{Credible Interval}\label{sec:credible_interval}
 
