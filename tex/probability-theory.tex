@@ -1251,24 +1251,102 @@ Linear Regression, Ordinary Least Squares, Logistic Regression
 
 
 
+\subsubsection{Regression Error}\label{sec:regression_error}
+
+\subsubsection{Regression Residual}\label{sec:regression_residual}
+
 \subsubsection{Linear Regression}\label{sec:linear_regression}
 
-Ordinary Least Squares (\S\ref{sec:ordinary_least_squares})
+Linear Least Squares (\S\ref{sec:linear_least_squares})
 
 
 
 \subsubsection{Least Squares}\label{sec:least_squares}
-
-QR Decomposition (\S\ref{sec:qr_decomposition})
-
-
 
 \paragraph{Ordinary Least Squares}\label{sec:ordinary_least_squares}\hfill
 
 estimating the Unknown Parameters of a Linear Regression Model
 (\S\ref{sec:linear_regression})
 
+
+
+\subparagraph{Linear Least Squares}\label{sec:linear_least_squares}\hfill
+
 Overdetermined Systems (\S\ref{sec:overdetermined_system})
+
+QR Decomposition (\S\ref{sec:qr_decomposition})
+
+
+
+\subparagraph{Normal Equation}\label{sec:normal_equation}\hfill
+
+UC Math 352 Lec. 7 \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
+
+$A\vec{x} = \vec{b}$
+
+$\mathrm{min}_\vec{x} \|A_\vec{x} - \vec{b}\|$
+
+\emph{Normal Equation}: $(A^TA)\vec{x} = A^T\vec{b}$ -- Condition Number
+(\S\ref{sec:condition_number}) is $\kappa(A)^2$; see QR Factorization
+(\S\ref{sec:qr_factorization}) for a better Conditioned solution
+
+Project $\vec{b}$ onto the Column Space of $A$
+
+\[
+  \vec{x} = (A^TA)^{-1}A^T\vec{b}
+\]
+
+
+
+\subparagraph{QR Factorization}\label{sec:qr_factorization}\hfill
+
+QR Decomposition (\S\ref{qr_decomposition})
+
+UC Math 352 Lec. 7 \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
+
+better Condition Number than Normal Equations (\S\ref{sec:normal_equation})
+
+$A\vec{x} = \vec{b}$
+
+$A = QR$ ($Q$ is Square, Orthogonal)
+
+Residual $\vec{r} = A\vec{x} - \vec{b}$
+
+\begin{align*}
+     \vec{r} & = QR\vec{x} - \vec{b} \\
+  Q^T\vec{r} & = R\vec{x} - Q^T\vec{b} \\
+\end{align*}
+
+because Orthogonal Matrices preserve Distances and $Q$ is Orthogonal:
+\[
+  \|Q^T\vec{r}\|_2 = \|\vec{r}\|_2
+\]
+minimizing $Q^T\vec{r} = \vec{\rho}$ is equivalent to minimizing $\vec{r}$
+
+splitting $\vec{\rho}$ into:
+\begin{enumerate}
+  \item $\hat{\rho}   = \hat{R}\vec{x} - \hat{Q}^T\vec{b}$
+  \item $\vec{\rho}_N = -Q_N^T\vec{b}$
+\end{enumerate}
+$\hat{rho}$ can be made Zero by solving $\hat{R}\vec{x} - \hat{Q}^T\vec{b}$ for
+$\vec{x}$, which is an Upper Triangular Matrix that can be solved efficiently:
+\[
+  \vec{x} = \hat{R}^{-1}\hat{Q}^T\vec{b}
+\]
+and $\vec{rho}_N$ is independent of $\vec{x}$ so it is \emph{fixed}, so:
+\[
+  \|\vec{r}\|^2_2 = \|\hat{Q}_N^T\vec{b}\|_2^2
+\]
+
+
+
+\paragraph{Generalized Least Squares}\label{sec:generalized_least_squares}\hfill
+
+\subparagraph{Weighted Least Squares}\label{sec:weighted_least_squares}\hfill
+
+
+
+\paragraph{Non-linear Least Squares}\label{sec:nonlinear_least_squares}\hfill
 
 
 

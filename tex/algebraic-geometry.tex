@@ -568,9 +568,53 @@ fewer Equations than Unknowns
 
 \subsubsection{Overdetermined System}\label{sec:overdetermined_system}
 
-more Equations than Unknowns
+more Equations than Unknowns; usually no exact Solution is possible
 
-Ordinary Least Squares (OLS \S\ref{sec:ordinary_least_squares})
+Linear Systems (\S\ref{sec:linear_system_of_equations}): System Matrix $A$ is
+Rectangular $m \times n$ with $m > n$, Unknown Vector $\vec{x}$ is an $n \times
+1$ Column Vector, and RHS $\vec{b}$ is an $m \times 1$ Column Vector
+
+Linear Least Squares (\S\ref{sec:linear_least_squares}) \emph{Normal Equations}
+(\S\ref{sec:normal_equations}):
+
+instead of finding an exact Solution, find the $\vec{x}$ that \emph{minimizes}
+the (Euclidean) Norm $\|\vec{r}\|^2$ of the \emph{Residual}
+(\S\ref{sec:regression_residual}) $\vec{r}$ to the desired RHS $\vec{b}$:
+\[
+  A\vec{x} - \vec{b} = \vec{r}
+\]
+e.g. find coefficients for a an equation when a number of noisy samples have
+been recorded -- UC Math 352 - \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
+
+the Optimal Solution is then the Orthogonal Projection of $\vec{b}$ onto the
+Column Space of $A$
+
+Orthogonal Projection Matrix:
+\[
+  P = A(A^TA)^{-1}A^T
+\]
+so that $P\vec{b} = A\vec{x}$
+
+and:
+\[
+  \vec{x} = (A^TA)^{-1}A^T\vec{b}
+\]
+
+Normal Equation:
+
+$(A^TA)\vec{x} = A^T\vec{b}$
+
+
+
+\subsubsection{Consistent System}\label{sec:consistent_system}
+
+has a Solution
+
+
+
+\subsubsection{Inconsistent System}\label{sec:inconsistent_system}
+
+no Solution
 
 
 
@@ -626,6 +670,8 @@ Augmented Matrix
 Reduced Row Echelon Form (\S\ref{sec:reduced_row_echelon})
 
 
+
+\paragraph{Independent Equation}\label{sec:independent_equation}\hfill
 
 \paragraph{Homogeneous System of Linear Equations}\hfill
 \label{sec:homogeneous_system}
