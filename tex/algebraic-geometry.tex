@@ -562,13 +562,58 @@ Variables of the Equations
 
 \subsubsection{Underdetermined System}\label{sec:underdetermined_system}
 
-fewer Equations than Unknowns
+fewer Equations than Unknowns; usually Infinite number of Solutions
+
+Linear Systems (\S\ref{sec:linear_system_of_equations}): System Matrix $A$ is
+Rectangular $m \times n$ with $m < n$ (of Full Rank), Unknown Vector $\vec{x}$
+is an $n \times 1$ Column Vector, and RHS $\vec{b}$ is an $m \times 1$ Column
+Vector
+
+UC Math 352 Lec. 8 - \url{https://www.youtube.com/watch?v=56vogBfKJu0}
+
+find the Solution that is the ``smallest'': $\mathrm{min}\|\vec{x}\|^2$
+
+use QR Decomposition (\S\ref{sec:qr_decomposition}) to find:
+\[
+  A^T = QR
+\]
+for the ``tall'' transpose of $A$ giving:
+\[
+  A = R^T Q^T = \hat{R}^T \hat{Q}^T
+\]
+define $\vec{w}$ to be the ``expansion'' of $\vec{x}$ in the Columns of $Q$:
+\begin{align*}
+  \vec{x} & = Q\vec{w} \\
+  \vec{x} & = [\hat{Q}\vec{u} + Q_N\vec{v}] [\vec{u} \vec{v}]^T \\
+  \vec{x} & = \hat{Q}\vec{u} + Q_N\vec{v} \\
+\end{align*}
+then $A\vec{x} = \vec{b}$ can be written as:
+\[
+  \hat{R}^T\hat{Q}^T\hat{Q}\vec{u} + \hat{R}^T\hat{Q}^TQ_N\vec{v} = \vec{b}
+\]
+which simplifies (due to the Orthogonality of $Q$) to:
+\[
+  \hat{R}^T\vec{u} = \vec{b}
+\]
+which can be solved for $\vec{u}$ efficiently by Forward Substitution
+(\S\ref{sec:forward_substitution}) since $\hat{R}$ is a Lower Triangular Matrix
+
+since $\vec{v}$ has no constraints, it can be $\vec{0}$, so:
+\[
+  \vec{x} = \hat{Q}\hat{R}^{-T}\vec{b}
+\]
+and:
+\[
+  \|\vec{x}\|^2 = \|\vec{u}\|^2
+\]
 
 
 
 \subsubsection{Overdetermined System}\label{sec:overdetermined_system}
 
 more Equations than Unknowns; usually no exact Solution is possible
+
+find the Solution that is ``closest''
 
 Linear Systems (\S\ref{sec:linear_system_of_equations}): System Matrix $A$ is
 Rectangular $m \times n$ with $m > n$, Unknown Vector $\vec{x}$ is an $n \times
@@ -637,7 +682,10 @@ Extension (\S\ref{sec:field_extension})
 
 Linear Equation (\S\ref{sec:linear_equation})
 
-\fist Linear Transformations (\S\ref{sec:linear_transformation})
+Forward Substitution (Lower Triangular Matrices
+\S\ref{sec:forward_substitution})
+
+Back Substitution (Upper Triangular Matrices \S\ref{sec:back_substitution})
 
 a System of Linear Equations of the form:
 \begin{align*}

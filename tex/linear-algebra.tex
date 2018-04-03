@@ -252,6 +252,10 @@ Space
   \item the Laplace Transform (\S\ref{sec:laplace_transform})
 \end{itemize}
 
+Similar Matrices (\S\ref{sec:matrix_similarity}) represent the same Linear
+Operator under two possibly different Bases with $P$ being a Change of Basis
+Matrix (\S\ref{sec:change_of_basis})
+
 
 
 \paragraph{Bounded Linear Operator}\label{sec:bounded_linear_operator}
@@ -727,6 +731,14 @@ a Basis for an Inner Product Space consisting of an Orthonormal
 
 
 
+\paragraph{Change of Basis}\label{sec:change_of_basis}\hfill
+
+Similar Matrices (\S\ref{sec:matrix_similarity}) represent the same Linear
+Operator under two possibly different Bases with $P$ being a Change of Basis
+Matrix
+
+
+
 \paragraph{Covariant Transformation}\label{sec:covariant_transformation}\hfill
 
 Coordinate-free (\S\ref{sec:coordinate_free})
@@ -1176,6 +1188,11 @@ Closed Category except it is lacking Identities
 
 Tensor Product (\S\ref{sec:tensor_product}) of two Vectors
 
+$\vec{v}\vec{u}^T$
+
+the Outer Product of two Nonzero Vectors is always a Matrix of Rank 1
+(\S\ref{sec:matrix_rank})
+
 \fist Orthogonal Projection (\S\ref{sec:orthogonal_projection})
 
 
@@ -1576,8 +1593,6 @@ Columns of $A$.
 
 \fist Matrix Difference Equation (\S\ref{sec:matrix_difference_equation})
 
-\fist System of Linear Equations (\S\ref{sec:linear_system})
-
 \fist Fundamental Subspaces (\S\ref{sec:fundamental_subspace})
 
 \emph{Column Vector} -- an $m \times 1$ Matrix
@@ -1605,7 +1620,29 @@ respectively, a Row Vector times a Column Vector is the Dot Product
 and a Column Vector times a Row Vector is a Dyadic Product
 (\S\ref{sec:dyadic_product}), which results in an $m \times n$ Matrix
 
+
+Systems of Linear Equations (\S\ref{sec:linear_system})
+
+an ``tall'' $m \times n$ Rectangular Matrix $A$ (where $m > n$) can be used to
+represent the Coefficients of an \emph{Overdetermined System of Equations}
+(\S\ref{sec:overdetermined_system}) $A\vec{x} = \vec{b}$; such a System usually
+does not have an exact Solution, so methods such as Least Squares
+(\S\ref{sec:linear_least_squares}) is used to find the nearest Point to
+$\vec{b}$ in the Column Space of $A$ (i.e.  $\mathrm{min}_{\vec{x}} \|A\vec{x} -
+\vec{b}\|^2$) by Orthogonal Projection \fist Normal Equations
+(\S\ref{sec:normal_equation}), QR Factorization (\S\ref{sec:qr_factorization})
+
+a ``fat'' $m \times n$ Rectangular Matrix $A$ (where $m < n$) can be used to
+represent the Coefficients of an \emph{Underdetermined System of Equations}
+(\S\ref{sec:underdetermined_system}) $A\vec{x} = \vec{b}$; such a System
+usually has infinitely many Solutions, so methods are used to find the
+``smallest'' Solution (i.e. $\mathrm{min}_{\vec{x}} \|\vec{x}\|^2$)
+--FIXME: clarify
+
+
 \asterism
+
+TODO
 
 For the One-dimensional Vector Space over the Reals $\reals$, a 1x1 Matrix is
 just a Real Number. The kinds of Linear Transformations are:
@@ -1652,6 +1689,9 @@ Matrix is \emph{Invertible} (\S\ref{sec:invertible})
 
 if a Matrix $A$ is Full Rank, then $A^*A$ is Invertible
 
+the Outer Product (\S\ref{sec:outer_product}) $\vec{u}\vec{v}^T$ of two Nonzero
+Vectors is always a Matrix of Rank $1$
+
 every Full Rank $m \times n$ Matrix with $m \geq n$ has a unique QR
 Factorization (\S\ref{sec:qr_decomposition}) with $r_{jj} > 0$
 
@@ -1659,6 +1699,73 @@ Factorization (\S\ref{sec:qr_decomposition}) with $r_{jj} > 0$
 
 for an $m \times n$ Matrix $A$, the Rank of $A$ plus the Nullity of $A$ is
 equal to $n$
+
+
+
+\subsubsection{Rank Update}\label{sec:rank_update}
+
+UC Math 352 Lec. 8 - \url{https://www.youtube.com/watch?v=56vogBfKJu0}:
+
+the \emph{Rank 1 Update} of a Matrix $A$:
+\[
+  A_+ = A + \vec{u}\vec{v}^T
+\]
+
+$\vec{u}\vec{v}^T$ is always a Rank 1 Matrix for Nonzero $\vec{u}$ and
+$\vec{v}$
+
+can replace a Row or a Column, and ``cheaply'' update derived Matrices such as
+$A^{-1}$ (see Sherman-Morrison Formula \S\ref{sec:sherman_morrison}) or the
+$QR$ Factors (\S\ref{sec:qr_decomposition})
+
+
+
+\paragraph{Woodbury Matrix Identity}\label{sec:woodbury_matrix_identity}\hfill
+
+states that the Inverse of a Rank-$k$ Correction of some Matrix can be computed
+by doing a Rank-$k$ Correction to the Inverse of the original Matrix
+
+
+
+\subparagraph{Sherman-Morrison Formula}\label{sec:sherman_morrison}\hfill
+
+computes the Inverse of the Sum of an Invertible Matrix $A$ and the Outer
+Product $\vec{u}\vec{t}^T$ (a Rank 1 Matrix)
+
+UC Math 352 Lec. 8 - \url{https://www.youtube.com/watch?v=56vogBfKJu0}
+
+\begin{align*}
+  A_+^{-1} & = (A + \vec{u}\vec{v}^T)^{-1} \\
+  A_+^{-1} & = A^{-1} -
+    \frac{A^{-1}\vec{u}\vec{v}^TA^{-1}}{1 + \vec{v}^TA^{-1}\vec{u}}
+\end{align*}
+
+computing $A^{-1}\vec{u}$ and $\vec{v}^TA^{-1}$ are both $O(n^2)$ operations,
+and whereas recomputing $A^{-1}$ is $O(n^3)$
+
+\asterism
+
+Example -- Solving two Systems of Equations:
+\begin{align*}
+  A\vec{x}                     & = \vec{b} \\
+  A + \vec{u}\vec{v}^T\vec{x}' & = \vec{b}
+\end{align*}
+$\vec{x}'$ is called the ``Rank 1 Update of $\vec{x}$''
+
+\begin{enumerate}
+  \item Factor $A = LU$ -- LU Factorization is $O(n^3)$
+  \item Solve $\vec{x} = A^{-1}b$ -- Computing Inverse of $A$ by Forward and
+    Backward Substitution is $O(n^2)$
+  \item Compute $\vec{w} = A^{-1}\vec{u}$ -- is $O(n^2)$ ($A$ has already been
+    Factorized)
+  \item Compute
+    $\vec{x}' = \vec{x} - \vec{v}^T\vec{v}
+      \frac{\vec{v}^T\vec{x}}{1 + \vec{v}^T\vec{w}} \vec{w}$ -- $O(n^2)$
+\end{enumerate}
+
+
+
+\subparagraph{Capacitance Matrix}\label{sec:capacitance_matrix}\hfill
 
 
 
@@ -1719,6 +1826,23 @@ Conjugate Transpose (\S\ref{sec:conjugate_transpose}) for Complex-valued
 Matrices
 
 if a Matrix $A$ is Full Rank, then $A^TA$ is Invertible
+
+\begin{enumerate}
+  \item $(A^T)^T = A$ -- Involutive
+  \item $(A+B)^T = A^T + B^T$
+  \item $(AB)^T = B^T A^T$
+  \item $(cA)^T = c(A^T)$
+  \item $|A^T| = |A|$ -- Determinant is unchanged (FIXME: is this only for
+    square matrices ???)
+  \item $\vec{a} \bullet \vec{b} = \vec{a}^T\vec{b}$
+  \item if $A$ has only Real entries, then $A^T A$ is a Positive Semi-definite
+    Matrix (\S\ref{sec:positive_semidefinite})
+  \item $(A^T)^{-1} = (A^{-1})^T$ -- ``Inverse Transpose'' sometimes written
+    $A^{-T}$
+  \item if $A$ is a Square Matrix then its Eigenvalues are equal to the
+    Eigenvalues of its Transpose since they share the same Characteristic
+    Polynomial (\S\ref{sec:characteristic_polynomial})
+\end{enumerate}
 
 
 
@@ -1824,11 +1948,15 @@ Factorized in this way
 
 cf. QR Factorization (\S\ref{sec:qr_decomposition})
 
+$A = LU$
+
+Complexity: $O(n^3)$
+
 
 
 \subsubsection{QR Decomposition}\label{sec:qr_decomposition}
 
-(or \emph{QR Factorization})
+(or \emph{QR Factorization} \S\ref{sec:qr_factorization})
 
 \emph{Full QR Decomposition}: Decomposition of a Matrix $A \in \comps^{m \times
   n}, m \geq n$ into a Product $A = QR$ of an Orthogonal (Unitary) Matrix
@@ -1890,6 +2018,9 @@ yielding the Equations:
             & \vdots \\
   \vec{a}_n & = r_{1n}\hat{q}_1 + r_{2n}\hat{q}_2 + \cdots + r_{nn}\hat{q}_n \\
 \end{align*}
+
+Reduced QR Factorization can be used to compute minimal $\|\vec{x}\|^2$ for
+Underconstrained Systems (\S\ref{sec:underconstrained_system})
 
 
 \emph{Full QR Factorization}
@@ -1953,6 +2084,56 @@ $A[ji]$ Zero; combining a number of such Rotations can be used to yield $R$:
 \end{align*}
 
 
+\emph{Rank 1 Update of QR Factors}
+
+UC Math 352 Lec. 8 \url{https://www.youtube.com/watch?v=56vogBfKJu0}
+
+Rank Update (\S\ref{sec:rank_update})
+
+$A = QR$
+
+$A_+ = QR + \vec{u}\vec{v}^T$
+
+$Q^T A_+ = R + \vec{w}\vec{v}^T$
+
+where $\vec{w} = Q^T\vec{u}$
+
+compute $A_+ = Q_+ R_+$
+
+use Plane Rotations (\S\ref{sec:plane_rotation}) to make all but the first two
+elements of $\vec{w}$ Zero, starting from the end of $\vec{w}$:
+\[
+  G_{2,3}G_{3,4}\cdots G_{m-2,m-1}G_{m-1,m} \vec{w} = [w_1 w_2 0 \cdots 0]^T
+\]
+these $G_{i,j}$ Matrices turn $R$ into an Upper Hessenberg Matrix
+(\S\ref{sec:hessenberg_matrix}); then:
+\begin{align*}
+  Q^T A_+ & = R + \vec{w}\vec{v}^T \\
+  G_{2,3}G_{3,4}\cdots G{m-1,m} Q^T A_+ & =
+    G_{2,3}G_{3,4}\cdots G{m-1,m} R +
+    G_{2,3}G_{3,4}\cdots G{m-1,m} \vec{w}\vec{v}^T  = H\\
+\end{align*}
+the RHS is equal to an Upper Hessenberg Matrix $H$
+
+then apply another sequence of Plane Rotations $G'_{1,2}, G'_{2,3}, \ldots,
+G'_{m-1,m}$ to rotate the Subdiagonal entries out to Zeros, giving back an
+Upper Triangular Matrix:
+\[
+  G'_{m-1,m}\cdots G'_{3,4}G'_{2,3}G'_{1,2}G_{2,3}G_{3,4}\cdots G_{m-1,m}
+    Q^T A_+ =
+  G'_{m-1,m}\cdots G'_{3,4}G'_{2,3}G'_{1,2}H
+\]
+and so:
+\begin{align*}
+  G'_{m-1,m}\cdots G'_{3,4}G'_{2,3}G'_{1,2}G_{2,3}G_{3,4}\cdots G_{m-1,m} Q^T
+    & = Q_+^T \\
+  G'_{m-1,m}\cdots G'_{3,4}G'_{2,3}G'_{1,2}H = R_+
+\end{align*}
+
+each Plane Rotation is $O(n)$, so the QR Update is $O(mn)$ Operations vs.
+$O(m^3)$ for a full QR
+
+
 
 \subsubsection{Polar Decomposition}\label{sec:polar_decomposition}
 
@@ -1988,21 +2169,6 @@ where $U$ is an $m \times m$ Real or Complex Unitary Matrix
 Non-negative Real Numbers known as the \emph{Singular Values} of $M$ on the
 Diagonal, and $V$ is an $n \times n$ Real or Complex Unitary Matrix of
 \emph{Right-singular Vectors}.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Diagonal Matrix}\label{sec:diagonal_matrix}
-% --------------------------------------------------------------------
-
-A Matrix with $0$ values in all non-diagonal entries
-
-a Diagonalizable Matrix is a Square Matrix $A$ for which there exists an
-Invertible Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
-
-\begin{itemize}
-  \item Identity Matrices (\S\ref{sec:identity_matrix})
-\end{itemize}
 
 
 
@@ -2097,7 +2263,16 @@ exists an Invertible Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
 for a Square Matrix, the Matrix is Full Rank (\S\ref{sec:rank}) is
 equivalent to being Invertible
 
+doing Gaussian Elimination to compute the Inverse of a Matrix is $O(n^3)$
+
 if a Matrix $A$ is Full Rank, then $A^*A$ is Invertible
+
+two Square Matrices $A$ and $B$ are \emph{Similar}
+(\S\ref{sec:matrix_similarity}) if:
+\[
+  B = P^{-1}AP
+\]
+for some Invertible Matrix $P$
 
 
 
@@ -2106,6 +2281,24 @@ if a Matrix $A$ is Full Rank, then $A^*A$ is Invertible
 $A^2 = I$
 
 a Matrix that is its own Inverse
+
+
+
+\subsubsection{Matrix Similarity}\label{sec:matrix_similarity}
+
+two Square Matrices $A$ and $B$ are \emph{Similar} if:
+\[
+  B = P^{-1}AP
+\]
+for some Invertible Matrix $P$
+
+Similar Matrices represent the same Linear Operator under two possibly
+different Bases with $P$ being a Change of Basis Matrix
+(\S\ref{sec:change_of_basis})
+
+the Characteristic Polynomial (\S\ref{sec:characteristic_polynomial}) of a
+Square Matrix is a Polynomial that is Invariant under Matrix Similarity and has
+the Eigenvalues as Roots
 
 
 
@@ -2192,6 +2385,7 @@ $j$th Rows and Columns:
 \end{itemize}
 
 \fist may be used in computing QR Factorization (\S\ref{sec:qr_decomposition})
+and in computing Rank 1 Update (\S\ref{sec:rank_update}) of QR Factors
 
 
 
@@ -2269,6 +2463,23 @@ Bivectors (\S\ref{sec:bivector}) are Isomorphic to Skew-symmetric Matrices
 
 \subsubsection{Hamiltonian Matrix}\label{sec:hamiltonian_matrix}
 
+\subsubsection{Characteristic Polynomial}\label{sec:characteristic_polynomial}
+
+Polynomial which is Invariant under \emph{Matrix Similarity}
+(\S\ref{sec:matrix_similarity}) and has the Eigenvalues as Roots
+
+
+
+\subsubsection{Hessenberg Matrix}\label{sec:hessenberg_matrix}
+
+an ``almost Triangular'' Matrix (\S\ref{sec:triangular_matrix})
+
+Zeros above/below the first Super/Sub-diagonal
+
+Upper Hessenberg
+
+Lower Hessenberg
+
 
 
 % --------------------------------------------------------------------
@@ -2278,6 +2489,12 @@ Bivectors (\S\ref{sec:bivector}) are Isomorphic to Skew-symmetric Matrices
 the Group of Invertible Upper (or Lower) Triangular Matrices is a Borel
 Subgroup of the General Linear Group $GL_n$ of Invertible Matrices
 
+a Matrix that is both Upper Triangular and Lower Triangular is a Diagonal
+Matrix (\S\ref{sec:diagonal_matrix})
+
+\fist Hessenberg Matrix (\S\ref{sec:hessenberg_matrix}) -- an ``almost
+Triangular'' Matrix
+
 
 
 \subsubsection{Upper Triangular Matrix}\label{sec:upper_triangular}
@@ -2285,6 +2502,43 @@ Subgroup of the General Linear Group $GL_n$ of Invertible Matrices
 QR Decomposition (\S\ref{sec:qr_decomposition}): Decomposition of a Matrix $A$
 into a Product $A = QR$ of an Orthogonal Matrix (\S\ref{sec:orthogonal_matrix})
 $Q$ and an Upper Triangular Matrix $R$
+
+
+
+\paragraph{Back Substitution}\label{sec:back_substitution}\hfill
+
+Solve the Matrix Equation $U\vec{x} = \vec{b}$ for a Upper Triangular Matrix
+
+\fist Forward Substitution (\S\ref{sec:forward_substitution}) for Lower
+Triangular Matrices
+
+
+
+\subsubsection{Lower Triangular Matrix}\label{sec:lower_triangular}
+
+\paragraph{Forward Substitution}\label{sec:forward_substitution}\hfill
+
+Solve the Matrix Equation $L\vec{x} = \vec{b}$ for a Lower Triangular Matrix
+
+\fist Back Substitution (\S\ref{sec:back_substitution}) for Upper Triangular
+Matrices
+
+
+
+% --------------------------------------------------------------------
+\subsection{Diagonal Matrix}\label{sec:diagonal_matrix}
+% --------------------------------------------------------------------
+
+A Matrix with $0$ values in all non-diagonal entries
+
+both Upper Triangular and Lower Triangular
+
+a Diagonalizable Matrix is a Square Matrix $A$ for which there exists an
+Invertible Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
+
+\begin{itemize}
+  \item Identity Matrices (\S\ref{sec:identity_matrix})
+\end{itemize}
 
 
 
@@ -2325,6 +2579,8 @@ Algorithm for solving Systems of Linear Equations
 can be used to find the Rank (\S\ref{sec:rank}) of a Matrix, calculate the
 Determinant (\S\ref{sec:determinant}) of a Matrix, and to calculate the Inverse
 of an Invertible Square Matrix (\S\ref{sec:invertible_matrix})
+
+doing Gaussian Elimination to compute the Inverse of a Matrix is $O(n^3)$
 
 the Elementary Operations can be represented as Matrices, giving the \emph{LU
   Factorization} (\S\ref{sec:lu_decomposition}) of a Matrix
