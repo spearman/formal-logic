@@ -105,9 +105,19 @@ general form:
   & g_i(\vec{x}) = c_i
   & h_j(\vec{x}) \geq d_j
 \end{align*}
-where $f$ is the Objective Function to be Maximized/Minimized, $g_i$ for $i \in
-\{ 1, \ldots, n \}$ are Equality Constraints and $h_j$ for $j \in \{ 1, \ldots,
-m \}$ are Inequality Constraints
+where $f$ is the Objective Function to be Minimized (or Maximized), $g_i$ for
+$i \in \{ 1, \ldots, n \}$ are Equality Constraints and $h_j$ for $j \in \{ 1,
+\ldots, m \}$ are Inequality Constraints
+
+\emph{note}: a Maximization Problem can always be converted to a Minimization
+Problem by multiplying by $-1$; usually Problems are presented as Minimization
+Problems
+
+Points $\vec{x}$ Satisfying all Constriants are said to be \emph{Feasible}
+and the Set of all Feasible Points is called the \emph{Feasible Region}
+
+a Point $\vec{x}^*$ is \emph{Optimal} if there are no other Feasible Points
+with $f(\vec{x}) < f(\vec{x}^*)$
 
 
 \textbf{Equality Constraints}
@@ -147,6 +157,9 @@ generalizes the method of Lagrange Multipliers
 
 \emph{Reward Function}
 
+\fist Optimality Criterion (\S\ref{sec:optimality_criterion}), Model Selection
+(\S\ref{sec:model_selection}), Decision Rules (\S\ref{sec:decision_rule})
+
 2018 - \url{https://blog.evjang.com/2018/04/aesthetic-lr.html} - \emph{Aesthetically
   Pleasing Learning Rates}:
 
@@ -157,7 +170,7 @@ allowed to take without the optimization 'blowing up'.''
 
 \fist Lipschitz Continuity (\S\ref{sec:real_continuous})
 
-Auto-correlated Noise eems to be beneficial for State-dependent Exploration
+Auto-correlated Noise seems to be beneficial for State-dependent Exploration
 
 ``waving'' Learning Rates up and down are good for Deep Learning
 
@@ -273,6 +286,116 @@ all Linear Programs can be expressed as Semidefinite Programs
 Ellipsoid Method (\S\ref{sec:ellipsoid_method}): when specialized for solving
 feasible Linear Optimization Problems with Rational Data, the Ellipsoid Method
 finds an Optimal Solution in a Finite number of steps
+
+
+UC Math 352 Lec. 9 - \url{https://www.youtube.com/watch?v=g3E38tYcU4E&t=243s}:
+
+all of the Functions are \emph{Affine} (FIXME: ???)
+
+\emph{General Form LP}
+
+Objective Function:
+\[
+  \mathrm{min}_{\vec{x}} \vec{c}^T\vec{x} + d
+\]
+since $d$ is a Constant, the Minimization Problem $\vec{c}^T\vec{x}$ has the
+same solution without $d$
+
+Subject to:
+\begin{align*}
+  G\vec{x} & \leq \vec{h} \\
+  A\vec{x} & = \vec{b}
+\end{align*}
+
+\emph{Inequality Form LP} -- only Inequality Constraints:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $\vec{c}^T\vec{x}$      \\
+  subject to               & $A\vec{x} \leq \vec{b}$ \\
+\end{tabular}
+
+\emph{Standard Form LP} -- Set of Equality Constraints and Non-negativity
+Constraints:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $\vec{c}^T\vec{x}$     \\
+  subject to               & $A\vec{x} = \vec{b}$   \\
+                           & $\vec{x} \geq \vec{0}$ \\
+\end{tabular}
+
+General Form LP can be converted to Standard Form by introducing extra
+\emph{Slack Variables} $\vec{s}$
+
+General Form:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $\vec{c}^T\vec{x}$     \\
+  subject to               & $G\vec{x} \leq \vec{h}$   \\
+                           & $A\vec{x} = \vec{b}$ \\
+\end{tabular}
+
+an example Inequality $3x \leq 5$ can be split into:
+\begin{align*}
+  3x + s & = 5 \\
+  s      & \geq 0
+\end{align*}
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $\vec{c}^T\vec{x}$     \\
+  subject to               & $G\vec{x} + \vec{s} = \vec{h}$   \\
+                           & $A\vec{x} = \vec{b}$ \\
+                           & $\vec{s} \geq 0$ \\
+\end{tabular}
+
+express $\vec{x}$ as the Difference of two Non-negative Variables $\vec{x}^+
+\geq \vec{0}$ and $\vec{x}^- \geq \vec{0}$:
+\[
+  \vec{x} = \vec{x}^+ - \vec{x}^-
+\]
+
+Linear Program in Standard Form:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{[\vec{x} \ \vec{s}]}$ &
+    $\vec{c}^T\vec{x}^+ - \vec{c}^T\vec{x}^-$     \\
+  subject to               & $G\vec{x}^+ - G\vec{x}^- + \vec{s} = \vec{h}$   \\
+                           & $A\vec{x}^+ - A\vec{x}^- = \vec{b}$ \\
+                           & $\vec{x}^+ \geq 0$ \\
+                           & $\vec{x}^- \geq 0$ \\
+                           & $\vec{s}   \geq 0$ \\
+\end{tabular}
+
+or:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{[\vec{x} \ \vec{s}]}$ &
+    $[\vec{c}^T \ -\vec{c}^T \ \vec{0}] [\vec{x} \ \vec{s}]$ \\
+  subject to               &
+    $\begin{bmatrix} G & -G & I \\ A & -A & 0 \\ \end{bmatrix}
+      [\vec{x} \ \vec{s}] = [\vec{h} \ \vec{b}]^T$   \\
+                           & $[\vec{x} \ \vec{s}] \geq 0$ \\
+\end{tabular}
+
+
+\emph{Properties of LP}
+
+\begin{enumerate}
+  \item if Optimum $\vec{x}^*$ exists, then \emph{an} Optimal Point exists at a
+    \emph{Vertex}, i.e. the Intersection of $n$ Constraint Boundaries (in
+    Configuration Space $\reals^n$); the number of such Vertices is
+    $\binom{m}{n}$ in the number of Constraints $m$ and number of Variables $n$
+  \item if there is more than one Optimum, then there is a Surface of Optimal
+    Points
+  \item the Problem may be \emph{Infeasible}, i.e. an Empty Feasible Region
+  \item the Problem may be \emph{Unbounded}, i.e. an Infinite Feasible Region
+    (Objective Function may be made arbitrarily large)
+\end{enumerate}
+
+the number of Vertices $\binom{m}{n}$ is Factorial:
+\[
+  \frac{m!}{n!(m-n)!}
+\]
+
 
 
 \subsubsection{Linear Inequality}\label{sec:linear_inequality}
