@@ -330,14 +330,6 @@ Initial Conditions, Driving Functions
 
 %FIXME relate to transition systems, automata ?
 
-Open Dynamical Systems -- Double Categories (\S\ref{sec:double_category})
-
-\url{https://www.youtube.com/watch?v=cu718EbCOPs} Spivak 16:
-
-can't have Identities and Feedback without Partiality %FIXME
-
-Traced Ideals %FIXME
-
 (wiki):
 
 the Integral Curves (\S\ref{sec:integral_curve}) for the Differential Equation
@@ -437,6 +429,124 @@ decrease Monotonically or stay fixed
 First-order Systems represent a ``Force'' being balanced by Damping (a
 Non-linear spring pulling on a mass with no Intertia); no chance for
 \emph{overshoot}
+
+\asterism
+
+\url{https://www.youtube.com/watch?v=cu718EbCOPs} Spivak 16:
+
+can't have Identities and Feedback without Partiality %FIXME
+
+Traced Ideals %FIXME
+
+2017 - Baez, Pollard - \emph{A Compositional Framework for Reaction Networks}
+-- $\cat{RxNet}$ Cospan Category (\S\ref{sec:cospan_category}) of Open Reaction
+Networks (Petri Nets \S\ref{sec:petri_net}), $\cat{Dynam}$ Cospan Category of
+Open Dynamical Systems; the mapping associating an Open Reaction Network to its
+corresponding Dynamical System is \emph{Compositional} and the mapping taking
+an Open Dynamical System to the Relation that ``holds between its
+constituents'' in Steady State is also Compositional (FIXME: clarify)
+
+2018 - \url{https://golem.ph.utexas.edu/category/2018/04/dynamical_systems_and_their_st.html} -
+\emph{Dynamical Systems and their Steady States} -- Open Reaction Networks
+(Petri Nets)
+
+Cospan Category $\cat{Dynam}$ of Open Dynamical Systems
+
+a Dynamical System is usually defined as a Manifold $M$ with Points
+representing ``States'', together with a Smooth Vector Field on $M$ describing
+the Time Evolution of States; e.g. in a Chemical System, the Manifold is
+$\reals^S$ where $S$ is a Finite Set of \emph{Species} and a Vector $\vec{c}
+\in \reals^S$ assigns the Concentration of each Species, giving the
+Differential Equation of the Dynamical System:
+\[
+  \frac{d\vec{c}(t)}{dt} = \vec{v}(\vec{c}(t))
+\]
+where $\vec{c}(t) : \reals \rightarrow \reals^S$ gives Concentrations as a
+Function of Time
+
+an \emph{Open Dynamical System} (e.g. a Chemical System where Molecules of some
+Species can be ``injected'' or ``removed'') is a Cospan of Finite Sets:
+\[
+  X \xrightarrow{i} S \xleftarrow{o} Y
+\]
+where $i$ is Input and $o$ is Output, together with a Vector Field $\vec{v}$ on
+$\reals^S$; the Vector Fields give \emph{Decorations} of the Cospan through a
+Lax Monoidal Functor:
+\[
+  F : (\cat{FinSet}, +) \rightarrow (\cat{Set}, \times)
+\]
+allowing the formation of a Category with Objects of Finite Sets and Morphisms
+as Isomorphism Classes of Decorated Cospans, giving rise to the Category
+$\cat{Dynam}$ whose \emph{Morphisms} are Open Dynamical Systems
+
+for an Open Dynamical System $(X \xrightarrow{i} S \xleftarrow{o} Y, \vec{v})$
+together with a Constant ``Inflow'' $I \in \reals^X$ and a Constant ``Outflow''
+$O \in \reals^Y$ , a \emph{Steady State} with Inflows $I$ and Outflows $O$ is a
+Constant Vector of Concentrations $\vec{c} \in \reals^S$ such that:
+\[
+  \vec{v}(\vec{c}) + \vec{i}_*(I) - \vec{o}_*(O) = \vec{0}
+\]
+where $\vec{i}_*(I)$ is the Vector in $\reals^S$ given by the Inflow
+Concentration of all Species marked by the ``Input'' leg of the Cospan; i.e. in
+a Steady State the ``Inflows'' and ``Outflows'' exactly compensate for the
+``Reaction Velocities''
+
+Black-boxing Functor $\blacksquare : \cat{Dynam} \rightarrow \cat{Rel}$ --
+given an Open Dynamical System, records all possible combinations of Input
+Concentrations, Output Concentrations, Inflows, and Outflows that hold in
+Steady State; called ``Black-boxing'' because it ``discards'' information that
+can't be seen at the Inputs and Outputs
+
+the Functoriality of this operation implies that to study the Steady States of
+a Complex Open Dynamical System, one can study the Steady States of smaller
+individual Systems (Morphisms in $\cat{Dynam}$) and composing them (as
+Morphisms in $\cat{Rel}$)
+
+Syntax for \emph{Boxes} (Spivak):
+Category $\cat{W}_{\cat{C}}$ of $\cat{C}$-boxes and Wiring Diagrams for a
+Category $\cat{C}$ with Finite Products
+
+for a Dynamical System $f = (\reals^S, f^{dyn}, f^{rdt})$ and an Element $(I,O)
+\in \reals^X \times \reals^Y$, an \emph{$(I,O)$-steady State} is a State
+$\vec{c} \in \reals^S$ such that:
+\begin{align*}
+  f^{dyn}(I,\vec{c}) & = O \\
+  f^{rdt}(\vec{c})   & = O
+\end{align*}
+where $f^{dyn} : \reals^X \times \reals^S \rightarrow \reals^S$ is the Vector
+Field Paramaterized by the Inputs $\reals^X$, giving the Differential Equation
+of the System, and $f^{rdt} : \reals^S \rightarrow \reals^Y$ is the ``Readout
+Function'' at the Outputs $\reals^Y$
+
+Functor $ODS : \cat{W}_{\cat{Euc}} \rightarrow \cat{S}$ where $\cat{Euc}$ is
+the Category of Euclidean Spaces $\reals^n$ and Smooth Maps -- takes a Box $X =
+(X^{in},X^{out})$ to the Set of all
+$(\reals^{X^{in}}, \reals^{X^{out}})$-dynamical Systems
+
+$\boxtimes$ -- Parallel Composition of two Dynamical Systems
+
+Functor $Mat : \cat{W}_{\cat{C}} \rightarrow \cat{Set}$ of Set-matrices
+
+Steady-state (Monoidal) Natural Transformation $Stst : ODS \rightarrow Mat$ --
+assigns each Box $X$ the Function $Stst_X : ODS(X) \rightarrow Mat(X)$ taking a
+Dynamical System to its Matrix of Steady States
+
+the fact that $Stst$ is a Natural Transformation together with the fact that
+Functors $ODS$ and $Mat$ respect Parallel Composition also indicates that the
+Steady States of a Composition of Systems comes from the Composition of the
+Steady States of the parts
+
+\url{https://golem.ph.utexas.edu/category/2018/04/dynamical_systems_and_their_st.html}:
+
+(paraphrasing the conclusion)
+
+note that Spivak's approach is broader in scope than Baez \& Pollard, so the
+results of Spivak won't be implied by those of Baez \& Pollard
+
+however, setting two Box Dynamical Systems in Serial Composition will
+\emph{not} yield the Box System representing the Composition of the Cospan
+Systems, so it doesn't seem that Spivak's Compositional results will imply
+those of Baez \& Pollard
 
 
 
