@@ -542,6 +542,9 @@ Scalar $\lambda$ such that:
   T(\vec{v}) = \lambda\vec{v}
 \]
 
+\fist Spectrum (\S\ref{sec:spectrum}): generalization of Set of Eigenvalues of
+a Matrix
+
 
 
 % --------------------------------------------------------------------
@@ -2035,6 +2038,10 @@ Factorized in this way
 
 cf. QR Factorization (\S\ref{sec:qr_decomposition})
 
+Cholesky and Modified Cholesky Factorization
+(\S\ref{sec:cholesky_decomposition}) are about half as much computation as the
+LU Decomposition
+
 $A = LU$
 
 Complexity: $O(n^3)$
@@ -2222,6 +2229,25 @@ $O(m^3)$ for a full QR
 
 
 
+\subsubsection{Cholesky Decomposition}\label{sec:cholesky_decomposition}
+
+$A = LL^*$
+
+the Cholesky Decomposition exists if $A$ is Positive Definite
+(\S\ref{sec:positive_definite})
+
+Naive Gaussian Elimination (\S\ref{sec:gaussian_elimination}) needs to result
+in Positive Diagonal entries (Pivots) in $U$
+
+\emph{Modified Cholesky Factorization} $A = L D^2 L^T$ where $D$ is the
+Diagonal Matrix with entries taken from the Upper Triangular Result $U$ of
+Naive Gaussian Elimination -- avoids Square Roots
+
+Cholesky and Modified Cholesky Factorization are about half as much computation
+as the LU Decomposition (\S\ref{sec:lu_decomposition})
+
+
+
 \subsubsection{Polar Decomposition}\label{sec:polar_decomposition}
 
 The \emph{Polar Decomposition} of a Square Matrix $A$ is a Matrix Decomposition
@@ -2294,6 +2320,27 @@ ordinary Matrix Multiplication and Matrix Inversion.
 
 The Determinant of a Square Jacobian Matrix and the Matrix itself are both
 called ``the Jacobian''.
+
+
+
+\paragraph{Minor}\label{sec:minor}\hfill
+
+the Determinant of some smaller Square Matrix formed by removing one or more
+Rows or Columns
+
+$[A]_{I,J}$ where $I$ and $J$ are a Subset of Rows and Columns, respectively
+
+\emph{First Minor} -- a Minor formed by removing one Row and one Column from a
+Square Matrix
+
+if $I = J$ then $[A]_{I,J}$ is called a \emph{Principal Minor}
+
+Leading Principle Minor
+
+the Leading Principle Minor for Hermitian Matrices
+(\S\ref{sec:hermitian_matrix}) can be used to test for Positive Definiteness
+(\S\ref{sec:positive_definite}), and the Principal Minors can be used to test
+for Postive Semi-definiteness (\S\ref{sec:positive_semidefinite})
 
 
 
@@ -2638,6 +2685,12 @@ Matrices
 
 
 
+\subsubsection{Unitriangular Matrix}\label{sec:unitriangular_matrix}
+
+entries on the main Diagonal are all $1$
+
+
+
 % --------------------------------------------------------------------
 \subsection{Diagonal Matrix}\label{sec:diagonal_matrix}
 % --------------------------------------------------------------------
@@ -2724,6 +2777,8 @@ the Elementary Operations can be represented as Matrices, giving the \emph{LU
 cf. QR Factorization (\S\ref{sec:qr_decomposition}) as a Decomposition into
 Orthogonal Matrices (\S\ref{sec:orthogonal_matrix})
 
+\emph{Naive Gaussian Elimination} -- no Row Swaps or Scalar Multiplications
+
 
 
 \paragraph{Echelon Form}\label{sec:echelon_form}\hfill
@@ -2795,11 +2850,17 @@ Polar Decomposition (\S\ref{sec:polar_decomposition})
 
 or \emph{Self-adjoint Matrix}
 
-a Complex Square Matrix that is equal to its own Conjugate Transpose
+a Complex Square Matrix that is equal to its own Conjugate Transpose:
+\[
+  A^* = A
+\]
 
 Complex extension of Real Symmetric Matrices (\S\ref{sec:symmetric_matrix})
 
-Positive-definite Matrix (\S\ref{sec:positive_definite})
+Positive-definite Matrices (\S\ref{sec:positive_definite}): the Leading
+Principle Minor (\S\ref{sec:minor}) for Hermitian Matrices can be used to test
+for Positive Definiteness, and the Principal Minors can be used to test for
+Postive Semi-definiteness (\S\ref{sec:positive_semidefinite})
 
 Polar Decomposition (\S\ref{sec:polar_decomposition})
 
@@ -2841,33 +2902,90 @@ A \emph{Positive Definite Matrix} has the Property:
 \[
   \vec{x}^* A \vec{x} > 0
 \]
-for any $\vec{x} \neq \vec{0}$, which implies that $A$ is is a Symmetric
-(\S\ref{sec:symmetric_matrix}) or Hermitian (\S\ref{sec:hermitian_matrix})
+for any $\vec{x} \neq \vec{0}$, which implies that $A$ is a Symmetric
+(\S\ref{sec:symmetric_matrix}), $A^T = A$, or Hermitian
+(\S\ref{sec:hermitian_matrix}), $A^* = A$.
 
-$n \times n$ Real Matrix $M$ is Positive Definite if the Scalar $z^TMz$ is
-\emph{Strictly Positive} ($>0$) for every Non-zero Column Vector $z$
+An $n \times n$ Real Matrix $M$ is Positive Definite if the Scalar
+$\vec{x}^TM\vec{x}$ is \emph{Strictly Positive} ($>0$) for every Non-zero
+Column Vector $\vec{x}$.
 
-a general Quadratic Form (\S\ref{sec:quadratic_form}) $f(\vec{x})$ on $n$ Real
-Variables $x_1,\ldots,x_n$ can always be written as $\vec{x}^T M \vec{x}$ for
-$M$ a Symmetric Real Matrix; $M$ is a Positive-definite Matrix when $f$ has a
-unique Minimum (Zero) when $\vec{x}$ is Zero and is Strictly Positive for any
-other $\vec{x}$
+A general Quadratic Form (\S\ref{sec:quadratic_form}) $f(\vec{x})$ on $n$ Real
+Variables $x_1,\ldots,x_n$ can always be written as $\vec{x}^T M \vec{x}$ with
+$M$ a Symmetric Real Matrix; $M$ is a \emph{Positive-definite Matrix} when $f$
+has a unique Minimum (Zero) when $\vec{x}$ is Zero and is Strictly Positive for
+any other $\vec{x}$. (FIXME: clarify)
 
-generally a Real Function $f$ on $n$ Real Variables has local Minimum at
-$\vec{x}_0$ if its Gradient (\S\ref{sec:gradient}) is Zero and its Hessian
-Matrix (\S\ref{sec:hessian_matrix}) is Positive Semi-definite at that Point
-(FIXME: clarify)
+Definiteness can be checked by considering all Eigenvalues of $A$, or by
+checking the Signs of the Principle Minors (\S\ref{sec:minor}) of $A$.
 
-an \emph{Indefinite Matrix} is a Matrix that is not Positive-definite,
-Positive-semidefinite, Negative-definite, nor Negative-semidefinite
+equivalent statements of Positive Definiteness:
+\begin{itemize}
+  \item $\vec{x}^*A\vec{x} > 0$, $\forall \vec{x} \neq \vec{0}$
+  \item all Eigenvalues of $A$ are Real and Positive
+  \item all Principal Minors (\S\ref{sec:minor}) are Positive \fist Second
+    Derivative Test (\S\ref{sec:second_derivative_test})
+  \item all Pivot Elements are Positive in ``naive'' (no Row Swaps or Scalar
+    Multiplications) Gaussian Elimination (\S\ref{sec:gaussian_elimination})
+    where Pivots are Diagonal entries of the Row Echelon Form
+  \item the Matrix has a Cholesky Factorization
+    (\S\ref{sec:cholesky_decomposition})
+\end{itemize}
+
+UC Math 352 Lec. 17 \url{https://www.youtube.com/watch?v=5tY3G1895_c}
+
+``quick partial tests'' -- if any of these tests fail, then $A$ is not
+Positive-definite:
+\begin{enumerate}
+  \item $A = A^*$
+  \item $\forall{i}, a_{ii} > 0$
+  \item the Largest element of $A$ (in Modulus) is on the main Diagonal
+    --FIXME: explain
+  \item Gerschg\"orin's Circle Theorem (TODO)
+  \item if (1.)-(4.) succeed, then compute the Cholesky Factorization
+    (\S\ref{sec:cholesky_decomposition})
+\end{enumerate}
+
+\emph{Minimizing a Complex Quadratic Form} (\S\ref{sec:quadratic_form})
+
+\fist Definite Quadratic Form (\S\ref{sec:definite_quadratic})
+
+\fist Quadratic Approximation (\S\ref{sec:quadratic_approximation})
+
+Optimization Problems:
+
+\fist Multiple Regression (\S\ref{sec:multiple_regression})
+
+\fist Quadratic Programming (\S\ref{sec:quadratic_programming})
+
+Generally a Real Function $f$ on $n$ Real Variables has local Minimum at
+$\vec{x}_0$ if its Gradient (\S\ref{sec:gradient}) $\nabla f$ is Zero and its
+Hessian Matrix (\S\ref{sec:hessian_matrix}) $H(f)$ is Positive Semi-definite at
+that Point
+
+An \emph{Indefinite Matrix} is a Matrix that is not Positive-definite,
+Positive-semidefinite ($\geq 0$ \S\ref{sec:positive_semidefinite}),
+Negative-definite ($< 0$ \S\ref{sec:negative_definite}), nor
+Negative-semidefinite ($\leq 0$ \S\ref{sec:negative_semidefinite}).
 
 \begin{itemize}
-  \item $I$ -- Identity Matrix
-  \item Diagonal with Positive Real Diagonal entries
+  \item $I$ -- Identity Matrix:
+    \[
+      \vec{x}^*I\vec{x} = \sum |x_i|^2 > 0
+    \]
+  \item Diagonal Matrices $D$ with Positive Real Diagonal entries ($d_{ii} >
+    0$):
+    \[
+      \vec{x}^*D\vec{x} = \sum d_{ii}|x_i|^2 > 0
+    \]
 \end{itemize}
 
 
-UC Math 352 Lec. 16 - \url{https://www.youtube.com/watch?v=Z9hkjXYY23o}:
+UC Math 352 Lec. 16 - \url{https://www.youtube.com/watch?v=Z9hkjXYY23o}
+
+
+
+\paragraph{Sylvester's Law of Inertia}\label{sec:sylversters_law}\hfill
 
 
 
@@ -2890,8 +3008,17 @@ $A \succeq 0$
 a Matrix is Positive Semidefinite if it is the Gramian Matrix
 (\S\ref{sec:gramian_matrix}) of some Vectors
 
+Positive-definite Matrices (\S\ref{sec:positive_definite}): the Leading
+Principle Minor (\S\ref{sec:minor}) for Hermitian Matrices can be used to test
+for Positive Definiteness, and the Principal Minors can be used to test for
+Postive Semi-definiteness (\S\ref{sec:positive_semidefinite})
+
 \begin{itemize}
-  \item Diagonal with Zero or Positive Real Diagonal entries
+  \item Diagonal Matrices $D$ with Zero or Positive Real Diagonal entries
+    ($d_{ii} \geq 0$):
+    \[
+      \vec{x}^*D\vec{x} = \sum d_{ii}|x_i|^2 \geq 0
+    \]
 \end{itemize}
 
 
@@ -2947,9 +3074,9 @@ of a Scalar-valued Function or Scalar Field
 \fist Quadratic Approximation (\S\ref{sec:quadratic_approximation})
 
 generally a Real Function $f$ on $n$ Real Variables has local Minimum at
-$\vec{x}_0$ if its Gradient (\S\ref{sec:gradient}) is Zero and its Hessian
-Matrix is Positive Semi-definite (\S\ref{sec:positive_semidefinite}) at that
-Point (FIXME: clarify)
+$\vec{x}_0$ if its Gradient (\S\ref{sec:gradient}) $\nabla f$ is Zero and its
+Hessian Matrix $H(f)$ is Positive Semi-definite
+(\S\ref{sec:positive_semidefinite}) at that Point
 
 
 
