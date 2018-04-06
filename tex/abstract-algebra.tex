@@ -817,6 +817,16 @@ where $x$ is called a \emph{Pseudoinverse}. Every Group
 
 
 
+\subsubsection{Full Linear Semigroup}\label{sec:full_linear_semigroup}
+
+Linear Operators (\S\ref{sec:linear_operator})
+
+adding the requirement that Operators be Invertible (i.e. having Non-zero
+Determinant) gives the General Linear Group (\S\ref{sec:general_linear_group})
+$GL(V)$
+
+
+
 % --------------------------------------------------------------------
 \subsection{Involution Semigroup}\label{sec:involution_semigroup}
 % --------------------------------------------------------------------
@@ -1812,6 +1822,14 @@ For $n \geq 5$, $A_n$ is a Simple Group (\S\ref{sec:simple_group}).
 
 
 
+\paragraph{Projective Linear Group}\label{sec:projective_linear_group}\hfill
+
+\subparagraph{Special Projective Linear Group}
+\label{sec:special_projective_linear_group}\hfill
+
+
+
+
 \subsubsection{Inner Automorphism Group}\label{sec:inner_automorphism_group}
 
 For the Automorphism Group of a Group $G$, $Aut(G)$, one can always
@@ -1990,30 +2008,74 @@ any Finite Group is Linear
 
 \paragraph{General Linear Group}\label{sec:general_linear_group}\hfill
 
-A \emph{General Linear Group} of Degree $n$ over a Ring
-(\S\ref{sec:ring}) $R$ has as an Underlying Set of $n \times n$
-Invertible Matrices and the Group Operation is ordinary Matrix
-Multiplication and is denoted $GL_n(R)$ and is a Subgroup of
-$Sym(R^n)$ (FIXME: clarify)
+A \emph{General Linear Group} of Degree $n$ over a Ring (\S\ref{sec:ring}) $R$
+has as an Underlying Set of $n \times n$ Invertible Matrices and the Group
+Operation is ordinary Matrix Multiplication and is denoted $GL_n(R)$ and is a
+Subgroup of $Sym(R^n)$ (FIXME: clarify)
+
+Abstractly, $GL(V)$ is the Automorphism Group of Linear Automorphisms
+(Isomorphic Endomorphisms) on $V$
+
+without the requirement of Invertibility (Nonzero Determinant), the resulting
+Algebraic Structure is the Full Linear Semigroup
+(\S\ref{sec:full_linear_semigroup})
 
 Elementary Matrices (\S\ref{sec:elementary_matrix}) generate the General Linear
 Group of Invertible Matrices
 
-the Subgroup of Invertible Upper Triangular Matrices is a Borel Subgroup
+the Special Linear Group $SL(V)$ is the Normal Subgroup of $GL(V)$ given by the
+Kernel of the Determinant $\mathrm{det} : GL(n,F) \rightarrow F^\times$,
+consisting of Matrices with Determinant $1$, i.e. \emph{Orientation and Volume
+  Preserving Transformation}
 
-the Unitary Group (\S\ref{sec:unitary_group}) is a Subgroup of the General
-Linear Group
+Classical Subgroups -- Subgroups of $GL(V)$ preserving a sort of Bilinear Form
+(\S\ref{sec:bilinear_form}) on the Vector Space $V$:
+\begin{itemize}
+  \item the Orthogonal Group (\S\ref{sec:orthogonal_group}) $O(V)$ -- preserves
+    a Non-degenerate Quadratic Form (\S\ref{sec:quadratic_form}) on $V$
+  \item the Symplectic Group (\S\ref{sec:symplectic_group}) $Sp(V)$
+    -- preserves a Symplectic Form (Non-degenerate Alternating Form
+    \S\ref{sec:symplectic_form}) on $V$
+  \item the Unitary Group (\S\ref{sec:unitary_group}) $U(V)$
+    -- preserves a Non-degenerate Hermitian Form (\S\ref{sec:hermitian_form})
+    on $V$
+\end{itemize}
+
+other Subgroups:
+\begin{itemize}
+  \item the Subgroup of Invertible Upper Triangular Matrices
+    (\S\ref{sec:upper_triangular}) is a Borel Subgroup
+    (\S\ref{sec:borel_subgroup})
+  \item the Subgroup of Invertible Diagonal Matrices
+    (\S\ref{sec:diagonal_matrix}) is Isomorphic to the Multiplicative Group
+    $(F^\times)^n$, corresponding to \emph{Dilations} and \emph{Contractions}
+  \item the Subgroup of Nonzero Scalar Matrices (\S\ref{sec:scalar_matrix})
+    $Z(V)$ is Isomorphic to the Multiplicative Group $F^\times$, forming the
+    Center (\S\ref{sec:center}) of $GL(n,F)$ and is a Normal Abelian Subgroup
+\end{itemize}
+
+Extensions:
+\begin{itemize}
+  \item Affine Group (\S\ref{sec:affine_group}) $Aff(n,F)$ -- Extension by
+    Group of Translations in $F^n$ is the Group of all Affine Transformations
+    (\S\ref{sec:affine_transformation}) on the Affine Space underlying the
+    Vector Space $F^n$
+  \item Projective Linear Group (\S\ref{sec:projective_linear_group})
+    $PGL(n,F)$ -- Quotient of $GL(n,F)$ by its Center, the Subgroup of Nonzero
+    Scalar Matrices $Z(n,F)$, which is the induced Action
+    (\S\ref{sec:group_action}) on the associated Projective Space
+    (\S\ref{sec:projective_space})
+\end{itemize}
 
 
 
-\paragraph{Special Linear Group}\label{sec:special_linear_group}\hfill
+\subparagraph{Special Linear Group}\label{sec:special_linear_group}\hfill
 
-A \emph{Special Linear Group} of Degree $n$ over a Ring
-(\S\ref{sec:ring}) $R$, denoted $SL_n(R)$, is the Set of $n \times n$
-Matrices with Determinant (\S\ref{sec:determinant}) equal to $1$, with
-the Group Operation of ordinary Matrix Multiplication. This is a
-Normal Subgroup of the General Linear Group $GL_n(R)$ given by the
-Kernel of the Determinant Function $ker(det)$, where:
+A \emph{Special Linear Group} of Degree $n$ over a Ring (\S\ref{sec:ring}) $R$,
+denoted $SL_n(R)$, is the Set of $n \times n$ Matrices with Determinant
+(\S\ref{sec:determinant}) equal to $1$, with the Group Operation of ordinary
+Matrix Multiplication. This is a Normal Subgroup of the General Linear Group
+$GL_n(R)$ given by the Kernel of the Determinant Function $ker(det)$, where:
 \[
   det : GL_n(R) \rightarrow R^\times
 \]
@@ -2023,15 +2085,26 @@ and $R^\times$ is the Multiplicative Group
 The Elements of $SL_n(R)$ are the Volume and Orientation preserving
 Linear Transformations of $R^n$.
 
+Elements forms a Subvariety (\S\ref{sec:subvariety_theorem}) of $GL(V)$, i.e.
+they Satisfy a Polynomial Equation since the Determinant is Polynomial in the
+entries
+
+$SZ(n,F)$ -- the Center (\S\ref{sec:center}) of $SL(n,F)$ is the Set of all
+Scalar Matrices (\S\ref{sec:scalar_matrix}) with Unit Determinant and is
+Isomorphic to the Group of $n$th Roots of Unity (\S\ref{sec:unity_root}) of the
+Field $F$
 
 
-\paragraph{Unitary Group}\label{sec:unitary_group}\hfill
+
+\subparagraph{Unitary Group}\label{sec:unitary_group}\hfill
 
 $U(n)$ Group of $n \times n$ Unitary Matrices
 
 Subgroup of the General Linear Group
 
-Special Unitary Group (\S\ref{sec:special_unitary})
+preserves a Non-degenerate Hermitian Form (\S\ref{sec:hermitian_form}) on $V$
+
+Special Unitary Group
 
 3-fold Intersection of the Orthogonal Group (\S\ref{sec:orthogonal_group}), the
 Symplectic Group (???) and the Complex Group (???): %FIXME xrefs
@@ -2041,9 +2114,11 @@ Symplectic Group (???) and the Complex Group (???): %FIXME xrefs
 
 
 
-\subparagraph{Classical Group}\label{sec:classical_group}\hfill
+\subparagraph{Symplectic Group}\label{sec:symplectic_group}\hfill
 
-Special Linear Groups over $\reals$, $\comps$, and $\quats$ ... and more? TODO
+$Sp(V)$ -- Symplectic Group: Subgroup of the General Linear Group $GL(V)$ which
+Preserves a Symplectic Form (\S\ref{sec:symplectic_form}) on $V$ (i.e. a
+Non-degenerate Alternating Form)
 
 
 
@@ -2214,7 +2289,13 @@ Homographies of Quaternions (FIXME)
 
 Affine Transformations (\S\ref{sec:affine_transformation})
 
+Extension of General Linear Group $GL(n,F)$ by Group of Translations in $F^n$
+
 $Aff(V) = V \rtimes GL(V)$
+
+
+
+\subparagraph{Special Affine Group}\label{sec:special_affine_group}\hfill
 
 
 

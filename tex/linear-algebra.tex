@@ -149,6 +149,10 @@ A \emph{Linear Functional} (or \emph{Linear Form} \S\ref{sec:linear_form}) is a
 Linear Map from a Vector Space $V$ to its Field of Scalars $K$ (viewed as a
 Vector Space over itself).
 
+Positive Definite Matrices (\S\ref{sec:positive_definite}) are Symmetric
+Matrices $M$ such that $\vec{x}^T M \vec{x} > 0$; this is a kind of analogue to
+``Positive Real Numbers'' for Square Matrices
+
 Homothety (\S\ref{sec:homothety}): a specific kind of Linear Transformation of
 an Affine Space called a \emph{Dilation} or \emph{Scale Transformation}; in
 Projective Geometry (\S\ref{sec:projective_geometry}) it is a Similarity
@@ -256,6 +260,37 @@ Map from a Module to itself $V \rightarrow V$
 there is a correspondence between $n\times{n}$ Square Matrices
 (\S\ref{sec:square_matrix}) and Linear Operators on an $n$-dimensional Vector
 Space
+
+the Set of all Linear Operators $End(V)$ together with Addition, Composition,
+and Scalar Multiplication forms an Associative Algebra
+(\S\ref{sec:associative_algebra}) with Identity Element over the Field $K$ with
+the Identity Map for the Multiplicative Identity
+
+$End(V)$ -- Associative Algebra (Ring) of Endomorphisms
+
+$GL(V)$ -- General Linear Group (\S\ref{sec:general_linear_group}):
+Automorphism Group of Isomorphic Endomorphisms (Invertible Matrices); Group of
+Units of the Ring $End(V)$; without the Invertibility requirement (i.e.
+requiring Nonzero Determinants), the structure is the Full Linear Semigroup
+(\S\ref{sec:full_linear_semigroup})
+
+$SL(V)$ -- Special Linear Group (\S\ref{sec:special_linear_group}): Normal
+Subgroup of $GL(V)$ of Matrices with Determinant $1$, i.e. \emph{Volume and
+  Orientation Preserving} Linear Operators
+
+$O(V)$ -- Orthogonal Group (\S\ref{sec:orthogonal_group}): Group of Orthogonal
+Matrices (Determinant $+1$ or $-1$)
+
+$U(V)$ -- Unitary Group (\S\ref{sec:unitary_group}): Group of Unitary Matrices
+(i.e. $U^*U = UU^* = I$, or equivalently $U$ is Invertible with $U^{-1} =
+U^*$); Maximal Compact Subgroup of $GL(V)$ (FIXME: correct in general ???)
+
+$Sp(V)$ -- Symplectic Group (\S\ref{sec:symplectic_group}): Preserves a
+Symplectic Form (\S\ref{sec:symplectic_form}) on $V$ (i.e. a Non-degenerate
+Alternating Form)
+
+$SO(V)$ -- Special Orthogonal Group (\S\ref{sec:orthogonal_group}): Group of
+Orthogonal Matrices of Determinant $+1$
 
 \begin{itemize}
   \item the Integral (\S\ref{sec:integral}) is a Linear Operator (FIXME:
@@ -1468,6 +1503,15 @@ Algebra
 
 \fist Associative Division Algebras (\S\ref{sec:associative_division_algebra})
 
+the Set of all Linear Operators (Endomorphic Linear Transformations
+\S\ref{sec:linear_operator}) $End(V)$ together with Addition, Composition, and
+Scalar Multiplication forms an Associative Algebra with Identity Element over
+the Field $K$ with the Identity Map for the Multiplicative Identity
+
+\fist the Set of all Linear Automorphisms (Isomorphic Endomorphisms, i.e.
+Invertible Matrices \S\ref{sec:invertible_matrix}) forms the General Linear
+Group (or Automorphism Group) $GL(V$
+
 
 
 \subsubsection{Frobenius Algebra}\label{sec:frobenius_algebra}
@@ -2267,6 +2311,10 @@ coincides with the regular Determinant when the Matrix is Non-singular
 A Square Diagonal Matrix (\S\ref{sec:diagonal_matrix}) with $1$ on the main
 diagonal
 
+Scalar Matrices (\S\ref{sec:scalar_matrix}): Identity Matrix times a Scalar
+
+Positive Definite (\S\ref{sec:positive_definite})
+
 
 
 \subsubsection{Permutation Matrix}\label{sec:permutation_matrix}
@@ -2295,6 +2343,19 @@ if its Determinant is a Unit in that Ring
 \fist Special Linear Group (\S\ref{sec:special_linear_group}): Group of $n
 \times n$ Matrices with Determinant $1$; Normal Subgroup of the General Linear
 Group
+
+the Classical Subgroups of the General Linear Group $GL(V)$ preserving a kind
+of Bilinear Form (\S\ref{sec:bilinear_form}) on a Vector Space $V$:
+\begin{itemize}
+  \item the Orthogonal Group (\S\ref{sec:orthogonal_group}) $O(V)$ -- preserves
+    a Non-degenerate Quadratic Form (\S\ref{sec:quadratic_form}) on $V$
+  \item the Symplectic Group (\S\ref{sec:symplectic_group}) $Sp(V)$
+    -- preserves a Symplectic Form (Non-degenerate Alternating Form
+    \S\ref{sec:symplectic_form}) on $V$
+  \item the Unitary Group (\S\ref{sec:unitary_group}) $U(V)$
+    -- preserves a Non-degenerate Hermitian Form (\S\ref{sec:hermitian_form})
+    on $V$
+\end{itemize}
 
 the Pseudo-determinant (\S\ref{sec:pseudo_determinant}) of a Square Matrix
 coincides with the Determinant when the Matrix is Invertible
@@ -2491,10 +2552,15 @@ Transpose:
 the Complex extension of a Symmetric Matrix is a \emph{Hermitian Matrix}
 (\S\ref{sec:hermitian_matrix})
 
-Positive-definite Matrix (\S\ref{sec:positive_definite})
-
 an Orthogonal Projection (\S\ref{sec:orthogonal_projection}) is exactly an
 Idempotent Symmetric Linear Operator
+
+a Quadratic Form (\S\ref{sec:quadratic_form}) $f(\vec{x})$ on $n$ Real
+Variables $x_1,\ldots,x_n$ can always be written as $\vec{x}^T M \vec{x}$ for
+$M$ a Symmetric Real Matrix;
+$M$ is a Positive-definite Matrix (\S\ref{sec:positive_definite}) when $f$ has
+a unique Minimum (Zero) when $\vec{x}$ is Zero and is Strictly Positive for any
+other $\vec{x}$
 
 
 
@@ -2546,6 +2612,10 @@ QR Decomposition (\S\ref{sec:qr_decomposition}): Decomposition of a Matrix $A$
 into a Product $A = QR$ of an Orthogonal Matrix (\S\ref{sec:orthogonal_matrix})
 $Q$ and an Upper Triangular Matrix $R$
 
+the Subgroup of the General Linear Group (\S\ref{sec:general_linear_group})
+$GL(V)$ of Invertible Upper Triangular Matrices is a Borel Subgroup
+(\S\ref{sec:borel_subgroup})
+
 
 
 \paragraph{Back Substitution}\label{sec:back_substitution}\hfill
@@ -2579,9 +2649,32 @@ both Upper Triangular and Lower Triangular
 a Diagonalizable Matrix is a Square Matrix $A$ for which there exists an
 Invertible Matrix $P$ such that $P^{-1}AP$ is a Diagonal Matrix
 
+Positive Definite (\S\ref{sec:positive_definite}) if Diagonal entries are
+Positive Real, Positive Semidefinite (\S\ref{sec:positive_semidefinite}) if
+Diagonal entries are Zero or Positive Real
+
+the Subgroup of the General Linear Group (\S\ref{sec:general_linear_group})
+$GL(n,F)$ of Invertible Diagonal Matrices is Isomorphic to the Multiplicative
+Group $(F^\times)^n$, corresponding to \emph{Dilations} and \emph{Contractions}
+
 \begin{itemize}
   \item Identity Matrices (\S\ref{sec:identity_matrix})
 \end{itemize}
+
+
+
+\subsubsection{Scalar Matrix}\label{sec:scalar_matrix}
+
+a Scalar Multiple of the Identity Matrix
+
+the Subgroup of the General Linear Group (\S\ref{sec:general_linear_group})
+$GL(n,F)$ of Nonzero Scalar Matrices is Isomorphic to the Multiplicative Group
+$F^\times$, forms the Center (\S\ref{sec:center}) of $GL(n,F)$ and is a Normal
+Abelian Subroup
+
+the Center of $SL(n,F)$ is the Set of all Scalar Matrices
+(\S\ref{sec:scalar_matrix}) with Unit Determinant and is Isomorphic to the
+Group of $n$th Roots of Unity (\S\ref{sec:unity_root}) of the Field $F$
 
 
 
@@ -2744,22 +2837,68 @@ or \emph{Antihermitian}
 \subsection{Positive-definite Matrix}\label{sec:positive_definite}
 % --------------------------------------------------------------------
 
-a Property of Symmetric (\S\ref{sec:symmetric_matrix}) and Hermitian
-(\S\ref{sec:hermitian_matrix}) Matrices
+A \emph{Positive Definite Matrix} has the Property:
+\[
+  \vec{x}^* A \vec{x} > 0
+\]
+for any $\vec{x} \neq \vec{0}$, which implies that $A$ is is a Symmetric
+(\S\ref{sec:symmetric_matrix}) or Hermitian (\S\ref{sec:hermitian_matrix})
 
 $n \times n$ Real Matrix $M$ is Positive Definite if the Scalar $z^TMz$ is
 \emph{Strictly Positive} ($>0$) for every Non-zero Column Vector $z$
 
+a general Quadratic Form (\S\ref{sec:quadratic_form}) $f(\vec{x})$ on $n$ Real
+Variables $x_1,\ldots,x_n$ can always be written as $\vec{x}^T M \vec{x}$ for
+$M$ a Symmetric Real Matrix; $M$ is a Positive-definite Matrix when $f$ has a
+unique Minimum (Zero) when $\vec{x}$ is Zero and is Strictly Positive for any
+other $\vec{x}$
+
+generally a Real Function $f$ on $n$ Real Variables has local Minimum at
+$\vec{x}_0$ if its Gradient (\S\ref{sec:gradient}) is Zero and its Hessian
+Matrix (\S\ref{sec:hessian_matrix}) is Positive Semi-definite at that Point
+(FIXME: clarify)
+
+an \emph{Indefinite Matrix} is a Matrix that is not Positive-definite,
+Positive-semidefinite, Negative-definite, nor Negative-semidefinite
+
+\begin{itemize}
+  \item $I$ -- Identity Matrix
+  \item Diagonal with Positive Real Diagonal entries
+\end{itemize}
 
 
-\subsubsection{Positive-semidefinite Matrix}\label{sec:positive_semidefinite}
+UC Math 352 Lec. 16 - \url{https://www.youtube.com/watch?v=Z9hkjXYY23o}:
 
-$M \succeq 0$
 
-Zeros are allowed
+
+\subsubsection{Negative Definite Matrix}\label{sec:negative_definite}
+
+$A$ is \emph{Negative Definite} if $-A$ is Positive Definite
+
+
+
+\subsubsection{Positive Semidefinite Matrix}\label{sec:positive_semidefinite}
+
+A \emph{Positive Semidefinite Matrix} $A$ has the Property:
+\[
+  \vec{x}^* A \vec{x} >= 0
+\]
+for any $\vec{x} \neq \vec{0}$
+
+$A \succeq 0$
 
 a Matrix is Positive Semidefinite if it is the Gramian Matrix
 (\S\ref{sec:gramian_matrix}) of some Vectors
+
+\begin{itemize}
+  \item Diagonal with Zero or Positive Real Diagonal entries
+\end{itemize}
+
+
+
+\subsubsection{Negative Semidefinite Matrix}\label{sec:semidefinite_matrix}
+
+$A$ is \emph{Negative Semidefinite} if $-A$ is Positive Semidefinite
 
 
 
@@ -2806,6 +2945,11 @@ Matrix of all Second-order Partial Derivatives (\S\ref{sec:partial_derivative})
 of a Scalar-valued Function or Scalar Field
 
 \fist Quadratic Approximation (\S\ref{sec:quadratic_approximation})
+
+generally a Real Function $f$ on $n$ Real Variables has local Minimum at
+$\vec{x}_0$ if its Gradient (\S\ref{sec:gradient}) is Zero and its Hessian
+Matrix is Positive Semi-definite (\S\ref{sec:positive_semidefinite}) at that
+Point (FIXME: clarify)
 
 
 
@@ -2857,6 +3001,12 @@ Bilinear Product (\S\ref{sec:bilinear_product})
 
 
 
+\subsubsection{Alternating Multilinear Map}\label{sec:alternating_map}
+
+Alternating Multilinear Forms (\S\ref{sec:alternating_form})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Multilinear Form}\label{sec:multilinear_form}
 % --------------------------------------------------------------------
@@ -2873,6 +3023,22 @@ An Inner Product (\S\ref{sec:inner_product}) is a Sesquilinear Form and an
 Inner Product over a Real Vector Space is a Positive-definite
 (\S\ref{sec:positive_definite}) Symmetric Bilinear Form
 (\S\ref{sec:symmetric_bilinear}).
+
+the Classical Subgroups of the General Linear Group
+(\S\ref{sec:general_linear_group}) $GL(V)$ preserving a kind of Bilinear Form
+on a Vector Space $V$:
+\begin{itemize}
+  \item the Orthogonal Group (\S\ref{sec:orthogonal_group}) $O(V)$ -- preserves
+    a Non-degenerate Quadratic Form (\S\ref{sec:quadratic_form}) on $V$
+  \item the Symplectic Group (\S\ref{sec:symplectic_group}) $Sp(V)$
+    -- preserves a Symplectic Form (Non-degenerate Alternating Form
+    \S\ref{sec:symplectic_form}) on $V$
+  \item the Unitary Group (\S\ref{sec:unitary_group}) $U(V)$
+    -- preserves a Non-degenerate Hermitian Form (\S\ref{sec:hermitian_form})
+    on $V$
+\end{itemize}
+
+Derived Quadratic Form
 
 
 
@@ -2918,50 +3084,24 @@ Pseudo-Riemannian Manifold (\S\ref{sec:pseudo_riemannian})
 
 
 
-\subsubsection{Quadratic Form}\label{sec:quadratic_form}
+\subsubsection{Alternating Multilinear Form}\label{sec:alternating_form}
 
-%FIXME: move to polynomials ???
+Alternating Multilinear Map (\S\ref{sec:alternating_map})
 
-Homogenous Polynomial (\S\ref{sec:homogenous_polynomial})
+Set of all Alternating Multilinear Forms is a Vector Space
 
-Quadratic Forms over a Vector Space correspond one-to-one with
-Symmetric Bilinear Forms (\S\ref{sec:symmetric_bilinear}) over
-the Vector Space
-
-Matrix form $\vec{x}^T M \vec{x}$:
-\[
-  [x y]
-  \begin{bmatrix}
-    a & b \\
-    c & d
-  \end{bmatrix}
-  \begin{bmatrix}
-    x \\
-    y
-  \end{bmatrix}
-  = ax^2 + 2bxy + cy^2
-\]
+a Symplectic Form (\S\ref{sec:symplectic_form}) is a Non-degenerate Alternating
+Bilinear Form
 
 
 
-\paragraph{Definite Quadratic Form}\label{sec:definite_quadratic}\hfill
+\paragraph{Hermitian Form}\label{sec:hermitian_form}\hfill
 
-a Quadratic Form over some Real Vector Space that has the same Sign
-for every Non-zero Vector
+an Inner Product (\S\ref{sec:inner_product}) is a Positive-definite
+(\S\ref{sec:definite_quadratic}) Hermitian Form
 
-\emph{Positive Definite}
-
-\emph{Negative Definite}
-
-\emph{Semidefinite}
-
-an Inner Product (\S\ref{sec:inner_product}) on a Real Vector Space is
-a Positive-definite Symmetric Bilinear
-(\S\ref{sec:symmetric_bilinear}) Form
-
-
-
-\paragraph{Quadratic Space}\label{sec:quadratic_space}\hfill
+Unitary Group (\S\ref{sec:unitary_group}) $U(V)$ -- Subgroup of General Linear
+Group $GL(V)$ preserving a Non-degenerate Hermitian Form on $V$
 
 
 
@@ -2972,13 +3112,6 @@ is the Field of Complex Numbers and the mapping is Antilinear (Conjugate-linear
 \S\ref{sec:antilinear}) in one argument
 
 Inner Products (\S\ref{sec:inner_product}) are Sesquilinear Forms
-
-
-
-\paragraph{Hermitian Form}\label{sec:hermitian_form}\hfill
-
-an Inner Product (\S\ref{sec:inner_product}) is a Positive-definite
-(\S\ref{sec:definite_quadratic}) Hermitian Form
 
 
 

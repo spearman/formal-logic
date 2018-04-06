@@ -91,6 +91,35 @@ minimizes the worst-case deviation
 
 
 
+% --------------------------------------------------------------------
+\subsection{Duality}\label{sec:optimization_duality}
+% --------------------------------------------------------------------
+
+(wiki):
+
+Optimization Problems may be viewed as either the \emph{Primal Problem} or the
+\emph{Dual Problem}
+
+the Solution to the Dual Problem gives a Lower Bound to the Solution of the
+Primal (Minimization) Problem
+
+\emph{Duality Gap} -- difference between the Optimal Values of the Primal and
+Dual Problems
+
+\emph{Primal Constraints} -- Constraints of the original Problem
+
+for Convex Optimization Problems (\S\ref{sec:convex_optimization}), the Duality
+Gap is Zero under a ``Regularity Condition'' (Constraint Qualification
+\S\ref{sec:constraint_qualification})
+
+\begin{itemize}
+  \item Lagrangian Dual Problem (\S\ref{sec:lagrangian_dual})
+  \item Wolfe Dual Problem
+  \item Fenchel Dual Problem
+\end{itemize}
+
+
+
 % ====================================================================
 \section{Unconstrained Optimization}\label{sec:unconstrained_optimization}
 % ====================================================================
@@ -173,8 +202,8 @@ Programming; lemma for Karush-Kuhn-Tucker Conditions
 
 \emph{Karush-Kuhn-Tucker Conditions} (\S\ref{sec:karush_kuhn_tucker}) --
 First-order necessary condition for a solution in Nonlinear Programming,
-provided some Regularity Conditions; allowing Inequality Constraints
-generalizes the method of Lagrange Multipliers
+provided some Regularity Conditions (\S\ref{sec:constraint_qualification});
+allowing Inequality Constraints generalizes the method of Lagrange Multipliers
 
 
 
@@ -208,6 +237,20 @@ Pixel Values from natural images have both of the above properties
 
 
 % --------------------------------------------------------------------
+\subsection{Constraint Qualification}\label{sec:constraint_qualification}
+% --------------------------------------------------------------------
+
+or \emph{Regularity Condition}
+
+\fist Karush-Kuhn-Tucker Conditions (\S\ref{sec:karush_kuhn_tucker})
+
+for Convex Optimization Problems (\S\ref{sec:convex_optimization}), the Duality
+Gap (\S\ref{sec:optimization_duality}) is Zero under a Constraint Qualification
+Condition
+
+
+
+% --------------------------------------------------------------------
 \subsection{Lagrange Multiplier}\label{sec:lagrange_multiplier}
 % --------------------------------------------------------------------
 
@@ -221,10 +264,12 @@ Constraints (FIXME: details)
 
 \fist cf. \emph{Karush-Kuhn-Tucker Conditions} (\S\ref{sec:karush_kuhn_tucker})
 -- First-order necessary condition for a solution in Nonlinear Programming,
-provided some Regularity Conditions; allowing Inequality Constraints
-generalizes the method of Lagrange Multipliers
+provided some Regularity Conditions (\S\ref{sec:constraint_qualification});
+allowing Inequality Constraints generalizes the method of Lagrange Multipliers
 
 \fist Convex Optimization (\S\ref{sec:convex_optimization})
+
+cf. Shadow Prices (\S\ref{sec:shadow_price})
 
 $\lambda$
 
@@ -250,6 +295,116 @@ Constraint causes an increase in the Function being Optimized
   \frac{d\mathcal{L}^*}{dc} = \frac{\partial{\mathcal{L}}}{\partial{c}} =
   \lambda^*(c)
 \]
+
+
+
+\subsubsection{Lagrangian Dual Problem}\label{sec:lagrangian_dual}
+
+Dual Problem (\S\ref{sec:optimization_duality})
+
+general Optimization Problem:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $f(\vec{x})$      \\
+  subject to               & $g_i(\vec{x}) = 0, i \in \{1,\ldots,m\}$ \\
+                           & $h_j(\vec{x}) \leq 0, j \in \{1,\ldots,n\}$
+\end{tabular}
+
+with $\vec{x} \in \reals^n$
+
+Lagrangian:
+\[
+  \mathcal{L}(\vec{x},\vec{\lambda},\vec{\nu}) =
+    f(\vec{x}) + \sum_{i=1}^m\lambda_i g_i(x) + \sum_{j=1}^n \nu_j h_j(x)
+\]
+the Vectors $\lambda, \nu$ are \emph{Dual Variables}
+
+Non-empty Domain $D$
+
+\emph{Lagrange Dual Function}:
+\[
+  \Lambda(\vec{\lambda}, \vec{nu}) =
+    \mathrm{inf}_{x \in D} \mathcal{L}(\vec{x},\vec{\lambda},\vec{\nu})
+\]
+
+if the Lagrangian is Unbounded below, then the Dual Function is said to take
+the value Negative Infinity $\Lambda(\vec{\lambda}, \vec{\nu}) = -\infty$
+
+the Lagrange Dual gives a Lower Bound on the Optimum of the original
+Optimization Problem: if $\vec{\lambda} \geq \vec{0}$ then
+$\Lambda(\vec{\lambda}, \vec{\nu}) \leq \vec{p}^*$ where $\vec{p}^*$ is the
+Optimal Value of the original Problem
+
+... TODO
+
+the Problem of finding the Greatest Lower Bound on $\vec{p}^*$ from
+$\Lambda(\vec{\lambda},\vec{\nu})$ is the \emph{Lagrange Dual Problem}:
+\begin{tabular}{r l}
+  $\mathrm{max}_{\vec{\lambda},\vec{\nu}}$ &
+    $\Lambda(\vec{\lambda},\vec{\nu})$ \\
+  subject to & $\vec{\lambda} \geq \vec{0}$ \\
+\end{tabular}
+
+$\vec{\lambda} \geq \vec{0}$ and $\Lambda(\vec{\lambda},\vec{\nu}) > -\infty$
+  -- $\vec{\lambda}$, $\vec{\nu}$ are called ``Dual Feasible''
+
+$(\vec{\lambda}^*, \vec{\nu}^*)$ -- called ``Dual Optimal'' if Optimizes the
+Lagrange Dual Problem
+
+
+Solution scenarios:
+\begin{enumerate}
+  \item the Primal is Unbounded: the Dual is Infeasible
+  \item the Dual is Unbounded: the Primal is Infeasible
+  \item the Primal and Dual may both be Infeasible
+  \item both the Primal and the Dual have Solutions
+\end{enumerate}
+normally both the Primal and Dual have Solutions (4.)
+
+
+\emph{Strong Duality}: both Primal and Dual have the same Optimal Objective
+
+
+\emph{Complementary Slackness}: for a Problem with \emph{Strong Duality},
+either a Dual Constraint is Binding (``Sharp'') or else the corresponding
+Shadow Price (\S\ref{sec:shadow_price}) $x_j^* = 0$ (is Non-basic)
+
+
+\emph{Examples}
+
+\begin{itemize}
+  \item Linear Programming (\S\ref{sec:linear_programming}): Standard Form LP
+    and Inequality Form LP are Dual with \emph{Strong Duality} (have the same
+    Optimum Objective) -- Standard Form LP:
+
+    \begin{tabular}{r l}
+      $\mathrm{max}_{\vec{\lambda},\vec{\nu}}$ &
+        $-\vec{b}^T\vec{\nu}$ \\
+      subject to & $A^T\vec{\nu} - \vec{\lambda} + \vec{c} = 0$ \\
+                 & $\vec{\lambda} \geq \vec{0}$ \\
+    \end{tabular}
+
+    or equivalently:
+
+    \begin{tabular}{r l}
+      $\mathrm{max}_{\vec{\nu}}$ &
+        $-\vec{b}^T\vec{\nu}$ \\
+      subject to & $-A^T\vec{\nu} \leq \vec{c}$ \\
+    \end{tabular}
+
+    note this is the form of an \emph{Inequality Form LP}
+
+    for Inequality Form LP:
+
+    \begin{tabular}{r l}
+      $\mathrm{max}_{\vec{\lambda}}$ & $-\vec{b}^T\vec{\lambda}$ \\
+      subject to & $A^T\vec{\lambda} = -\vec{c}$ \\
+                & $\vec{\lambda} \geq \vec{0}$  \\
+    \end{tabular}
+
+    note this is the form of a \emph{Standard Form LP}
+
+\end{itemize}
 
 
 
@@ -280,7 +435,8 @@ Successive Linear Programming
 (KKT Conditions)
 
 \emph{Karush-Kuhn-Tucker Conditions} -- First-order necessary condition for a
-solution in Nonlinear Programming, provided some Regularity Conditions;
+solution in Nonlinear Programming, provided some Regularity Conditions
+(Constraint Qualification \S\ref{sec:constraint_qualification});
 allowing Inequality Constraints generalizes the method of Lagrange Multipliers
 (\S\ref{sec:lagrange_multiplier})
 
@@ -355,6 +511,9 @@ Constraints:
                            & $\vec{x} \geq \vec{0}$ \\
 \end{tabular}
 
+note that Inequality Form LP and Standard Form LP are \emph{Dual}
+(\S\ref{sec:lagrangian_dual}) to one another (see below)
+
 General Form LP can be converted to Standard Form by introducing extra
 \emph{Slack Variables} $\vec{s}$
 
@@ -428,6 +587,130 @@ the number of Vertices $\binom{m}{n}$ is Factorial:
   \frac{m!}{n!(m-n)!}
 \]
 
+an efficient algorithm for solving large LP Problems is the Simplex Method
+(\S\ref{sec:simplex_algorithm})
+
+
+UC Math 352 Lec. 11 - \url{https://www.youtube.com/watch?v=ESzYPFkY3og}:
+
+
+\emph{Fundamental Theorem of Linear Programming}
+
+Assume $A$ is Full Rank; if a Feasible Solution exists, then a Basic Feasible
+Solution Exists, and if an Optimal Feasible Solution exists, then an Optimal
+Basic Feasible Solution exists.
+
+(a Basic Solution only involves $n$ Linearly Independent Columns of $A$; see
+Simplex Method for more details)
+
+the implication is that only Basic Feasible Solutions need to be considered
+when searching for an Optimum, i.e. an \emph{Optimal Basis} (Set of Columns)
+$B$
+
+
+\textbf{Lagrangian Dual Problems} (\S\ref{sec:lagrangian_dual})
+
+Standard Form LP and Inequality Form LP are Lagrangian Duals for each other; in
+both cases the number of Primal Constraints is equal to the number of Dual
+Variables and vice versa
+
+\emph{Standard Form LP}
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $\vec{c}^T\vec{x}$     \\
+  subject to               & $A\vec{x} = \vec{b}$   \\
+                           & $\vec{x} \geq \vec{0}$ \\
+\end{tabular}
+
+Lagrangian Dual:
+
+\begin{align*}
+  \mathcal{L}(\vec{x},\vec{\lambda},\vec{\nu}) & =
+    \vec{c}^T\vec{x} + \vec{\nu}^T(A\vec{x} - \vec{b}) - \vec{\lambda}^T\vec{x} \\
+  \mathcal{L}(\vec{x},\vec{\lambda},\vec{\nu}) & =
+    -\vec{b}^T\vec{\nu} + (A^T\vec{\nu} - \vec{\lambda} + \vec{c})^T\vec{x}
+\end{align*}
+
+Dual Function:
+
+\begin{align*}
+  \Lambda(\vec{\lambda},\vec{\nu}) & = -\vec{b}^T\vec{\nu} +
+    \mathrm{inf}_{\vec{x}}(A^T\vec{\nu} - \vec{\lambda} + \vec{c})^T\vec{x} \\
+  \Lambda(\vec{\lambda},\vec{\nu}) & = \begin{cases}
+    -\vec{b}^T\vec{\nu} & \ A^T\vec{\nu} - \vec{\lambda} + \vec{c} = \vec{0} \\
+    -\infty             & otherwise \\
+  \end{cases}
+\end{align*}
+
+Lagrange Dual Problem for Standard Form LP:
+
+\begin{tabular}{r l}
+  $\mathrm{max}_{\vec{\lambda},\vec{\nu}}$ &
+    $-\vec{b}^T\vec{\nu}$ \\
+  subject to & $A^T\vec{\nu} - \vec{\lambda} + \vec{c} = 0$ \\
+             & $\vec{\lambda} \geq \vec{0}$ \\
+\end{tabular}
+
+or equivalently:
+
+\begin{tabular}{r l}
+  $\mathrm{max}_{\vec{\nu}}$ &
+    $-\vec{b}^T\vec{\nu}$ \\
+  subject to & $-A^T\vec{\nu} \leq \vec{c}$ \\
+\end{tabular}
+
+
+\emph{Inequality Form LP}
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $\vec{c}^T\vec{x}$      \\
+  subject to               & $A\vec{x} \leq \vec{b}$ \\
+\end{tabular}
+
+since there are no Equality Constraints, only the $\vec{\lambda}$ Dual Variable
+is needed
+
+Lagrangian Dual:
+
+\begin{align*}
+  \mathcal{L}(\vec{x}, \vec{\lambda}) & =
+    \vec{c}^T\vec{x} + \vec{\lambda}^T(A\vec{x} - \vec{b})
+  \mathcal{L}(\vec{x}, \vec{\lambda}) & =
+    -\vec{b}^T\vec{\lambda} + (A\vec{\lambda} + \vec{c})^T \vec{x}
+\end{align*}
+
+Dual Function:
+
+\begin{align*}
+  \Lambda(\vec{\lambda},\vec{\nu}) & = \begin{cases}
+    -\vec{b}^T\vec{\lambda} & \ A^T\vec{\lambda} = -\vec{c} \\
+    -\infty                 & otherwise \\
+  \end{cases}
+\end{align*}
+
+Lagrange Dual Problem for Inequality Form LP:
+
+\begin{tabular}{r l}
+  $\mathrm{max}_{\vec{\lambda}}$ & $-\vec{b}^T\vec{\lambda}$ \\
+  subject to & $A^T\vec{\lambda} = -\vec{c}$ \\
+             & $\vec{\lambda} \geq \vec{0}$  \\
+\end{tabular}
+
+which is a \emph{Standard Form LP}
+
+
+\emph{Optimality}
+
+Standard Form LP and Inequality Form LP have the \emph{Strong Duality}
+property: for a Primal in Standard Form with Optimal Basis $B$, if $\vec{\nu}$
+is also Dual Feasible, then it must Solve the Dual, i.e. \emph{the Primal and
+  Dual of LP have the same Optimum Objective}
+
+
+\emph{Complementary Slackness}: either a Dual Constraint is Binding (``Sharp'')
+or else the corresponding Shadow Price (\S\ref{sec:shadow_price}) $x_j^* = 0$
+(is Non-basic)
+
 
 
 \subsubsection{Linear Inequality}\label{sec:linear_inequality}
@@ -437,6 +720,42 @@ the number of Vertices $\binom{m}{n}$ is Factorial:
 ILP
 
 NP-Complete
+
+
+
+\subsubsection{Shadow Price}\label{sec:shadow_price}
+
+cf. Lagrange Multipliers (\S\ref{sec:lagrange_multiplier})
+
+UC Math 352 Lec. 15 - \url{https://www.youtube.com/watch?v=wNflFE4m17E}:
+
+for a Standard Form LP, perturbing a RHS $b_i \rightarrow b_i + \Delta{b_i}$
+may cause a change to the Optimal Objective
+$\vec{p}^* \rightarrow \vec{p}^* + \Delta{\vec{p}^*}$ and the quantity:
+\[
+  -\frac{\Delta p_i^*}{\Delta b_i}
+\]
+is called the \emph{Shadow Price} of the $i$th Constraint $\vec{a}_i^T\vec{x} =
+b_i$
+
+\emph{assuming the Basis remains constant}, then the Dual Variable
+$\vec{\nu}^*$ won't Change and:
+\[
+  \Delta \vec{p}^* = - \nu_i^* \Delta b_i
+\]
+so the Shadow Price of the $i$th Constraint is just the $i$th Optimal Dual
+Variable $\nu_i^*$
+
+\emph{Complementary Slackness}: either a Dual Constraint is Binding (``Sharp'')
+or else the corresponding Shadow Price $x_j^* = 0$ (is Non-basic)
+
+(Economics) Shadow Prices represent how much improvement can be made to the
+Objective by ``loosening Constraints'', e.g. if a Constraint has a Shadow Price
+of $\nu_i^* = \$10$, then loosening the Constraint by an amount $a$ results in
+the Objective decreasing by $\$10 a$, i.e. if a Constraint can be loosened for
+less than the Shadow Price, then the Objective can be improved by doing so; if
+the Shadow Prices is \$0, then loosening a Constraint does not improve the
+Objective
 
 
 
@@ -530,6 +849,10 @@ Convex Analysis (\S\ref{sec:convex_analysis})
 
 Maximum Principle (Harmonic Functions \S\ref{sec:harmonic_function})
 
+for Convex Optimization Problems, the Duality Gap
+(\S\ref{sec:optimization_duality}) is Zero under a Constraint Qualification
+Condition (\S\ref{sec:constraint_qualification})
+
 may be formulated as Convex Optimization Problems:
 \begin{itemize}
   \item Lagrange Multipliers (\S\ref{sec:lagrange_multiplier})
@@ -579,6 +902,181 @@ Dantzig
 Linear Programming (\S\ref{sec:linear_programming}) problems can be solved by
 Simplex Method (\S\ref{sec:simplex_algorithm}), usually (but not guaranteed) in
 Polynomial Time
+
+UC Math 352 Lec. 11 - \url{https://www.youtube.com/watch?v=ESzYPFkY3og}:
+
+Full Rank $A \in \reals^{m \times n}, m \leq n$ with Linearly Independent Rows
+
+Standard Form LP:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $\vec{c}^T\vec{x}$     \\
+  subject to               & $A\vec{x} = \vec{b}$   \\
+                           & $\vec{x} \geq \vec{0}$ \\
+\end{tabular}
+
+assume Variables written in an order such that the last $m$ Columns of $A$ are
+Linearly Independent:
+\begin{align*}
+  A       & = [A_N \ A_B] \\
+  \vec{x} & = [x_N \ x_B] \\
+\end{align*}
+where:
+\begin{align*}
+  A_N       & \in \reals^{m \times (n - m)} \\
+  A_B       & \in \reals^{m \times m} \\
+  \vec{x}_N & \in \reals^{n-m} \\
+  \vec{x}_B & \in \reals^m \\
+\end{align*}
+then the Equality Constraints can be re-written as:
+\[
+  A_N\vec{x}_N + A_B\vec{x}_B = \vec{b}
+\]
+setting $\vec{x}_N = \vec{0}$, then this becomes:
+\begin{align*}
+  A_B\vec{x}_B & = \vec{b}
+  \vec{x}_B    & = A_B^{-1}\vec{b}
+\end{align*}
+
+because $m \leq n$, this is an Underdetermined System so the resulting
+$\vec{x}$ has at least $n - m$ Zero (at most $m$ Nonzero) elements and is
+called a \emph{Basic Solution} where the $\vec{x}_N$ are called the
+\emph{Non-basic Variables} and the $\vec{x}_B$ are called the \emph{Basic
+  Variables}
+
+more generally Basic Variables correspond to the Linearly Independent Columns
+of $A$
+
+\emph{Fundamental Theorem of Linear Programming}
+
+Assume $A$ is Full Rank; if a Feasible Solution exists, then a Basic Feasible
+Solution Exists, and if an Optimal Feasible Solution exists, then an Optimal
+Basic Feasible Solution exists.
+
+the implication is that only Basic Feasible Solutions need to be considered
+when searching for an Optimum, i.e. an \emph{Optimal Basis} (Set of Columns)
+$B$
+
+Simplex Method: from a Basic Feasible Solution, try to \emph{improve} the
+Solution (i.e. lower $\vec{c}^T\vec{x}$) by replacing one Basic Variable with a
+Non-basic one, and repeat the process until no improvement to
+$\vec{c}^T\vec{x}$ is possible
+
+for the $k$-th Basic Feasible Solution $\vec{x}^{(k)}$, with Sets $B$, $N$ of
+Basic and Non-basic Variables, computing $\vec{x}_B^{(k)} = A_B^{-1}\vec{b}$
+the Cost:
+\[
+  \vec{c}^T\vec{x}^{(k)} =
+  \vec{c}_N^T\vec{x}_N^{(k)} + \vec{c}_B^T\vec{x}_B^{(k)} =
+  \vec{c}_B^T\vec{x}_B^{(k)}
+\]
+changing $\vec{x}_N$ makes it necessary to recompute $\vec{x}_B$ from Solving
+$A_N\vec{x}_N + A_B\vec{x}_B = \vec{b}$:
+\[
+  \vec{x}_B = A_B^{-1}\vec{b} - A_B^{-1}A_N\vec{x}_N
+\]
+and the Cost can be expressed in terms of $\vec{x}_N$:
+\begin{align*}
+  \vec{c}^T\vec{x} & = \vec{c}_B^T\vec{x}_B + \vec{c}_N^T\vec{x}_N \\
+                   & = \vec{c}^T\vec{x}^{(k)} + \vec{r}^T\vec{x}_N
+\end{align*}
+where $\vec{r} = (\vec{c}_N - A_N^T A_B^{-T} \vec{c}_B)$ called the \emph{Vector
+  of Reduced Costs}
+
+$\vec{r}$ quantifies how each Non-basic Variable affects the Cost; if there are
+no Negative entries of $\vec{r}$, then no improvement to the Objective can be
+made, and $\vec{x}^{(k)}$ is Optimal
+
+otherwise choose the most Negative entry of $\vec{r}$ and choose to increase
+the corresponding Non-basic Variable $x_e$ called the \emph{Entering Variable};
+increasing $x_e$ means that one of the $\vec{x}_B$ entries will becomes
+Negative (violating the Non-negativity Constraints), so the Variable that
+becomes Negative (the \emph{Leaving Variable}) first will be replaced by $x_e$
+in the Basis
+
+(TODO: details)
+
+Unbounded LP
+
+\emph{Degeneracy} -- it is possible to return to a previously selected Basis
+(\emph{Cycling}), a Basic Feasible Solution is called \emph{Degenerate} if $x_i
+= 0$ for at least one $i \in B$; this occurs geometrically when two Basic
+Solutions overlap, e.g. when more than two Constraints intersect at the same
+Point
+
+\emph{Cycling}: the Simplex Method Strictly reduces $\vec{c}^T\vec{x}$ each
+iteration for which the Entering Variable $x_e$ is \emph{increased} to a
+Strictly Positive Value; Cycling can occur when $x_e$ can't be increased above
+$0$, resulting in a sequence of Bases that repeats; this requires that $B_1,
+\ldots, B_k$ is Degenerate (the Entering Variable is $0$) and no $x_e$ is
+allowed so all Basic Feasible Solutions are the same Point
+(FIXME: clarify)
+
+\emph{Bland's Anticycling Rules} (``Smallest Subscript Rule''):
+\begin{enumerate}
+  \item of all Non-basic Variables for which the $\vec{r}$ entry is Negative,
+    choose the smallest Index to be the Entering Variable (instead of the most
+    Negative)
+  \item if there is a tie for Leaving Variable, choose the one with the
+    smallest Index
+\end{enumerate}
+these rules \emph{only} need to be invoked if no decrease in $\vec{c}^T\vec{x}$
+is obtained by a particular iteration
+
+Terminateion Guarantee for Non-degenerate LP: since LP has a Finite number of
+Vertices, or Basic Feasible Solutions, and if the Objective decreases at each
+step, then it is not possible to revisit a previous Basis, so the Simplex
+Algorithm terminates in a Finite number of steps
+
+
+\emph{Finding an initial Basic Feasible Solution}
+
+find any $\vec{x}$ Satisfying all Constraints \fist Constraint Satisfaction
+Problem (CSP \S\ref{sec:constraint_satisfaction})
+
+\begin{itemize}
+  \item ``All Slacks Basic'' -- Inequality Form LP with $\vec{b} \geq \vec{0}$;
+    set the Slack Variables to the initial Basis gives an initial Basic
+    Feasible Solution
+  \item ``Artificial Variables'' (Phase I Problem) -- Standard Form LP; force
+    $\vec{b} \geq \vec{0}$ by multiplying any Constraint with $b_i < 0$ by
+    $-1$; introduce \emph{Artificial Variables} $x_{n+1}, \ldots, x_{n+m}$ and
+    add to the LHS of each Constraint and extend $A$ with the $m \times m$
+    Identity Matrix $I_m$ forming a \emph{Phase I Problem}:
+    \begin{align*}
+      [A \ I_m][x_1 \ \cdots \ x_{n+m}]^T & = \vec{b}
+                                  \vec{x} & \geq \vec{0}
+    \end{align*}
+    Solving the Phase I Problem yields an initial Basic Feasible Solution if
+    one exists; if the Phase I Solution does not have:
+    \[
+      x_{n+1} = x_{n+2} = \cdots = x_{n+m} = 0
+    \]
+    (FIXME: explain this equation)
+    then the original Constraints are \emph{Infeasible}; otherwise the
+    ``obvious'' initial Basis for the Phase I Problem is $B = \{ n+1, \ldots,
+    n+m \}$ and the Basis that \emph{Optimizes} the Phase I Problem can be used
+    as the Initial Basis for the \emph{Phase II Problem} (the original LP)
+  \item Single Artificial Variable -- choose an initial Basis $B$ for which
+    $A_B^{-1}$ exists; if $\vec{x}_B \geq \vec{0}$ then $B$ is an Initial Basic
+    Feasible Solution, otherwise let $x_j$ be the most Negative element of
+    $\vec{x}_B$, then introduce an Artificial Variable $x_{n+1}$ with the
+    corresponding Column of $A$:
+    \[
+      \vec{a}_{n+1} = \vec{b} - (\sum_{i\in{B}}\vec{a}_i) + \vec{a}_j
+    \]
+    and define a new Basis $B' = B \setminus \{j\} \cup \{n+1\}$ (swap out $j$
+    for the new Artificial Variable), then the Sum over the new Basis Vectors
+    (Columns of $A$) is equal to $\vec{b}$, and $B'$ is an initial Basis for
+    the Phase I Problem:
+    \begin{align*}
+      [A \ \vec{a}_{n+1}][x_1 \ \cdots \ x_{n+1}]^T & = \vec{b}
+                                [\vec{x} \ x_{n+1}] & \geq \vec{0}
+    \end{align*}
+    if $x_{n+1}$ is ``Non-basic in the Solution to the Phase I Problem'' (Cost
+    = 0) then the Optimal Basis $B$ of the Phase I Problem can be used as an
+    initial Basis for the Phase II Problem (FIXME: clarify)
+\end{itemize}
 
 
 
