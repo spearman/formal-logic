@@ -236,6 +236,29 @@ Pixel Values from natural images have both of the above properties
 
 
 
+\subsubsection{Local Optimality Condition}\label{sec:local_optimality}
+
+%FIXME: move this section ???
+
+\fist multivariable generalization of Second Derivative Test
+(\S\ref{sec:second_derivative_test})
+
+for a Function $f$, Local Minima are identified by \emph{Local Optimality
+  Conditions} at a Point $\vec{x}^*$:
+\begin{align*}
+  \nabla f(\vec{x}^*) & =    \vec{0} \\
+  H(f(\vec{x}^*))     & \geq \vec{0} \\
+\end{align*}
+where $\nabla f(\vec{x}^*)$ is the Gradient (\S\ref{sec:gradient}) of $f$ at
+$\vec{x}^*$ and $H(f(\vec{x}^*)) \geq \vec{0}$ the Hessian Matrix
+(\S\ref{sec:hessian_matrix}) of Second-order Partial Derivatives is Positive
+Definite or Positive Semi-definite
+
+if $f$ is a Convex Function (\S\ref{sec:convex_function}), then $x^*$ is
+guaranteed ot be a Global Minimum
+
+
+
 % --------------------------------------------------------------------
 \subsection{Constraint Qualification}\label{sec:constraint_qualification}
 % --------------------------------------------------------------------
@@ -441,6 +464,9 @@ allowing Inequality Constraints generalizes the method of Lagrange Multipliers
 (\S\ref{sec:lagrange_multiplier})
 
 Fritz John Conditions -- lemma for KKT Conditions
+
+\fist KKT Method for Equality-constrianed Quadratic Programs
+(\S\ref{sec:quadratic_programming})
 
 
 
@@ -780,6 +806,146 @@ with Convex Objective Function and Linear Constraints \fist Convex Optimization
 
 UC Math 352 Lec. 18 - \url{https://www.youtube.com/watch?v=S538WFC8JLY}
 
+Quadratic Objective Function:
+\begin{align*}
+  f(\vec{x})        & = \frac{1}{2}\vec{x}^T P \vec{x} + \vec{q}^T\vec{x} \\
+  \nabla f(\vec{x}) & = P\vec{x} + \vec{q} \\
+  H(f(\vec{x}))     & = P \\
+\end{align*}
+where $H(f(x))$ is the Hessian Matrix (\S\ref{sec:hessian_matrix}) of
+Second-order Partial Derivatives of $f$
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x} \in \reals^m}$ &
+    $\frac{1}{2}\vec{x}^T P\vec{x} + \vec{q}^T\vec{x}$ \\
+\end{tabular}
+
+if $P$ is not Positive Semidefinite (\S\ref{sec:positive_semidefinite}), choose
+an $\vec{x}_0$ such that $\vec{x}_0^T P\vec{x}_0 < 0$, then
+$f(t\vec{x}_0) = (\frac{1}{2}\vec{x}_0^TP\vec{x}_0)t^2 + (\vec{q}^T\vec{x}_0)t$
+and $f(t\vec{x}_0)$ goes to Negative Infinity as $t$ goes to Infinity
+
+if $P$ is Positive Definite then there is a Local Minimum at $\vec{x}^* =
+P^{-1}\vec{q}$ and since the Quadratic Objective Function is Convex,
+$\vec{x}^*$ is a Global Minimum-- a \emph{Unique Stationary Point} (FIXME:
+clarify)
+
+if $P$ is strictly Positive Semi-definite, then if there are any Minimizers
+$\vec{x}^*$, they satisfy $P\vec{x}^* = - \vec{q}$ (there may be Zero, one or
+more Minimizers)
+
+
+\textbf{Equality Constrained QP}
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x} \in \reals^m}$ &
+    $f(x) = \frac{1}{2}\vec{x}^T P\vec{x} + \vec{q}^T\vec{x}$ \\
+  subject to & $A\vec{x} = \vec{b}$ \\
+\end{tabular}
+
+where $A \in \reals^{m \times n}, m < n$ is Full Rank (no redundant
+Constraints)
+
+\emph{Nullspace Method} (or \emph{QR Method})
+
+take QR Factorization (\S\ref{sec:qr_decomposition}) of $A$:
+\[
+  A^T = QR = [\hat{Q} \ Q_N] [\hat{R} \ \vec{0}]^T
+\]
+writing $\vec{x}$ as:
+\[
+  \vec{x} = \hat{Q}\vec{u} + Q_N\vec{v}
+\]
+then $\vec{u} = \hat{R}^{-T}\vec{b}$ is fixed and $\vec{v}$ is free,
+let $\hat{x} = \hat{Q}\hat{R}^{-T}\vec{b}$ in:
+\[
+  \vec{x} = \hat{x} + Q_N\vec{v}
+\]
+and the Objective Function can be written as the following Unconstrained
+Quadratic Function in $\vec{v}$:
+\[
+  f(\vec{x}) = \frac{1}{2}\vec{v}^T(Q_N^T P Q_N)\vec{v} +
+    (\hat{x}^T PQ_N + \vec{q}^T Q_N)\vec{v} +
+    \frac{1}{2}\hat{x}^T P\hat{x} + \vec{q}^T\hat{x}
+\]
+if $Q_N^T P Q_N$ is Positive Definite, i.e. $P$ is Positive Definite on
+$\mathrm{null}(A)$ (FIXME: clarify), then the Unique Minimizer is:
+\[
+  \vec{v} = -(Q_N^T P Q_N)^{-1}(\hat{x}^T P Q_N + \vec{q}^T Q_N)
+\]
+and the Optimal $\vec{x}^*$:
+\[
+  \vec{x}^* = \hat{x} + Q_N\vec{v}^*
+\]
+
+
+\emph{KKT Method}
+
+for:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{\vec{x}} \in \reals^m}$ &
+    $f(\vec{x}) = \frac{1}{2}\vec{x}^T P\vec{x} + \vec{q}^T\vec{x}$ \\
+  subject to & $h_j(\vec{x}) = 0, j \in \{1,\ldots,\ell\}$ \\
+\end{tabular}
+
+where $f(\vec{x})$ is Convex (\S\ref{sec:convex_function}) and $h_j(\vec{x})$
+are Affine (\S\ref{sec:affine_transformation}),
+then the Optimality Conditions are given by the Karush-Kuhn-Tucker (KKT)
+Conditions (\S\ref{sec:karush_kuhn_tucker}):
+\begin{align*}
+  h_j(\vec{x}^*) & = 0 & \ \ \ (Feasibility) \\
+  \nabla f(\vec{x}^*) +
+    \sum_{j=1}^\ell \lambda_j^* \nabla h_j(\vec{x}^*) & = 0 & \\
+\end{align*}
+where $\nabla f(\vec{x}^*) + \sum_{j=1}^\ell \lambda^*_j \nabla h_j(\vec{x}^*)$
+with Optimal $\lambda^*_j$ KKT Multipliers, is the Gradient of the Lagrangian
+(\S\ref{sec:lagrange_multiplier}) at Optimality;
+these conditions are \emph{necessary and sufficient} for Global Optimality of a
+Convex Problem with Affine Equality Constraints
+
+in Matrix form:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{\vec{x}} \in \reals^m}$ &
+    $\frac{1}{2}\vec{x}^T P\vec{x} + \vec{q}^T\vec{x}, P > 0$ \\
+  subject to & $A\vec{x} = \vec{b}$ \\
+\end{tabular}
+
+where $P > 0$ indicates that $P$ is Positive Definite
+(\S\ref{sec:positive_definite})
+
+the KKT Conditions can be written as:
+
+\begin{align*}
+  A\vec{x}^*                                & = \vec{b} \\
+  P\vec{x}^* + \vec{q} + A^T\vec{\lambda}^* & = 0
+\end{align*}
+
+or:
+
+\[
+  \begin{bmatrix}
+    P & A^T \\
+    A & 0   \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    \vec{x}^*       \\
+    \vec{\lambda}^* \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    -\vec{q} \\
+    \vec{b}  \\
+  \end{bmatrix}
+\]
+which is a Set of $m + n$ Equations in $m + n$ Variables which can be Solved;
+if the KKT Matrix is Non-singular, then the Equation completely determines the
+Solution (FIXME: clarify)
+
+compared to the QR Method above, the KKT method is less general since $P$ is
+required to be Positive Definite
+
 
 
 \subsubsection{Quadratically Constrained Quadratic Programming}
@@ -848,6 +1014,9 @@ explicit Proof Construction to handle Nonlinear Constraints
 % ====================================================================
 
 Convex Analysis (\S\ref{sec:convex_analysis})
+
+Convex Functions (\S\ref{sec:convex_function}) have the property that a Local
+Minimum is the unique Global Minimum
 
 Maximum Principle (Harmonic Functions \S\ref{sec:harmonic_function})
 

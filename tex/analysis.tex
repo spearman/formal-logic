@@ -627,6 +627,15 @@ $\nabla{f} = \vec{0}$
 \fist \emph{Saddle Points} (\S\ref{sec:saddle_point}) are specific to
 Multivariable Functions
 
+Convex Functions (\S\ref{sec:convex_function}) have the property that Local
+Minimum is necessarily a Global Minimum
+
+
+
+\subsubsection{Second Derivative Test}\label{sec:second_derivative_test}
+
+\fist multivariable Local Optimality Conditions (\S\ref{sec:local_optimality})
+
 
 
 % --------------------------------------------------------------------
@@ -689,6 +698,40 @@ Function $f$ has a \emph{Limit} $l$ at $a$ if for all Sequences $a_n
 
 
 \subsubsection{Convex Function}\label{sec:convex_function}
+
+\fist Convex Geometry (\S\ref{sec:convex_geometry})
+
+\fist Convex Optimization (\S\ref{sec:convex_optimization}) -- Convex Functions
+have the property that a Local Minimum is necessarily a Global Minimum, i.e.
+Local Optimality Conditions (\S\ref{sec:local_optimality}) are \emph{Global}
+Optimality Conditions
+
+for $f : X \rightarrow \reals$ where $X$ is a Convex Set in a Real Vector Space
+$\reals^m$, $f$ is \emph{Convex} when $\forall x_1, x_2 \in X, \forall t \in
+[0,1]$:
+\[
+  f(tx_1 + (1-t)x_2) \leq tf(x_1) + (1-t)f(x_2)
+\]
+and \emph{Strictly Convex} when $\forall x_1 \neq x_2 \in X, \forall t \in
+(0,1)$:
+\[
+  f(tx_1 + (1-t)x_2) < tf(x_1) + (1-t)f(x_2)
+\]
+where $tx_1 + (1-t)x_2$ is called a \emph{Convex Combination}
+(\S\ref{sec:convex_combination}) of $x$ and $y$, and likewise $tf(x_1) +
+(1-t)f(x_2)$ is a Convex Combination of $f(x_1)$ and $f(x_2)$
+
+this means that the line segment connecting $f(x_1)$ and $f(x_2)$ is above the
+curve $f(tx_1 + (1-t)x_2)$ at each point
+
+examples:
+\begin{itemize}
+  \item Quadratic Function $x^2$ \fist Quadratic Forms
+    (\S\ref{sec:quadratic_form})
+  \item Exponential Function $e^x$
+\end{itemize}
+
+
 
 \subsubsection{Level Set}\label{sec:level_set}
 
@@ -1917,6 +1960,15 @@ to a Constant, $\frac{-x}{y} = C$, gives the \emph{Isoclines}
 i.e. they are curves where the Family of Solutions are intersect the
 curve with the indicated slope $C$ along its length
 
+Standard First-order Form:
+\[
+  y' = p(x) y + q(x)
+\]
+cf. Standard Linear Form (\S\ref{sec:linear_differential_equation}):
+\[
+  y' + p(x) y = q(x)
+\]
+
 \emph{Local Existence and Uniqueness Theorem}: for a Differential Equation
 \emph{in Standard Form}, when $f$ and $f_y$ are Continuous near $x_0$ and
 $y_0$, there is one and only one Solution through a Point $(x_0, y_0)$
@@ -2058,6 +2110,8 @@ or equivalently, as long as $h(y) \neq 0$:
 
 
 
+\subsubsection{Separation of Variables}\label{sec:separation_of_variables}
+
 \subsubsection{Homogeneous Differential Equation}
 \label{sec:homogeneous_differential_equation}
 
@@ -2109,6 +2163,8 @@ Equation, implies: $\Psi_{xy} = M_y$, $\Psi_{yx} = N_x$
 
 \subsubsection{Integrating Factor}\label{sec:integrating_factor}
 
+$u(x)$
+
 
 
 % --------------------------------------------------------------------
@@ -2117,8 +2173,8 @@ Equation, implies: $\Psi_{xy} = M_y$, $\Psi_{yx} = N_x$
 % --------------------------------------------------------------------
 
 An Ordinary Differential Equation is \emph{Linear} if $F$ can be written as a
-Linear Polynomial (a Polynomial of Degree $1$) of the Unknown Function and its
-Derivatives:
+Linear Polynomial (a Polynomial of Degree $1$) of the \emph{Unknown Function}
+($y$ below) and its Derivatives:
 \[
   a_0(x)y + a_1(x)y' + a_2(x)y'' + \cdots + a_n(x)y^{(n)} + r(x) = 0
 \]
@@ -2148,6 +2204,23 @@ of a Linear Differential Equation are found by adding to a particular Solution
 any Solution of the Associated Homgeneous Equation (FIXME: clarify)
 
 cf. Linear Difference Equation (\S\ref{sec:linear_difference_equation})
+
+\emph{First-order Linear Differential Equations}:
+\[
+  a(x) y' + b(x) y = c(x)
+\]
+Homogeneous:
+\[
+  a(x) y' + b(x) y = 0
+\]
+Standard Linear Form:
+\[
+  y' + p(x) y = q(x)
+\]
+cf. Standard First-order Form (\S\ref{sec:ode}):
+\[
+  y' = p(x) y + q(x)
+\]
 
 \emph{Second-order Linear Differential Equations}:
 \[
@@ -2529,7 +2602,7 @@ Partial Differential Equations
 
 \subparagraph{Spherical Wave}\label{sec:spherical_wave}\hfill
 
-Separation of Variables (Fourier Method)
+Separation of Variables (Fourier Method \S\ref{sec:separation_of_variables})
 
 Spherical Wave Transformation (\S\ref{sec:spherical_wave_transformation})
 leaves the form of Spherical Waves Invariant in all Inertial Frames
@@ -2967,6 +3040,8 @@ Vector Derivative (\S\ref{sec:vector_derivative}):
 
 Gradient of a Vector Field (FIXME)
 
+Jacobian (\S\ref{sec:jacobian})
+
 Divergence (\S\ref{sec:divergence}) can be expressed as:
 \[
   \nabla \cdot \vec{v} =
@@ -2995,6 +3070,16 @@ when a Vector Field is the \emph{Gradient Field} of some Scalar Field
 Integral of any Path between two Points is equivalent and the Line Integral of
 a Closed Path from a Point to itself is Zero
 
+(\emph{Local Optimality Conditions} \S\ref{sec:objective_function}) generally a
+Real Function $f$ on $n$ Real Variables has local Minimum at $\vec{x}^*$ if its
+Gradient $\nabla f$ is Zero and its Hessian Matrix (\S\ref{sec:hessian_matrix})
+$H(f(\vec{x}^*))$ of Second-order Partial Derivatives is Positive Semi-definite
+(\S\ref{sec:positive_semidefinite}) at that Point:
+\begin{align*}
+  \nabla f(\vec{x}^*) & =    \vec{0} \\
+  H(f(\vec{x}^*))     & \geq \vec{0} \\
+\end{align*}
+
 
 
 \paragraph{Gradient Flow}\label{sec:gradient_flow}\hfill
@@ -3002,6 +3087,24 @@ a Closed Path from a Point to itself is Zero
 cf. Flow (\S\ref{sec:flow}), Vector Flow (\S\ref{sec:vector_flow})
 
 Geometric Flow (\S\ref{sec:geometric_flow})
+
+
+
+\subsubsection{Jacobian}\label{sec:jacobian}
+
+%FIXME: merge with jacobian matrix ?
+
+generalizes the Gradient (\S\ref{sec:gradient}) of a Scalar-valued Function of
+multiple Variables: the Jacobian of a Scalar-valued Multivariable Function is
+the Gradient, and the Jacobian of a Scalar-valued Single Variable Function is
+its Derivative
+
+Jacobian Matrix (\S\ref{sec:jacobian_matrix})
+
+\fist the Jacobian Matrix for a System of DAEs (\S\ref{sec:system_of_daes}) is
+a Singular (Non-invertible) Matrix (\S\ref{sec:singular_matrix})
+
+\fist Locally Linear Transformation (\S\ref{sec:locally_linear})
 
 
 
@@ -4090,7 +4193,10 @@ $\kappa = 1/2$ (Well-conditioned)
 
 $f(x,y) = x - y$
 
-$J = \Big(\frac{f}\frac{x} \frac{f}\frac{y}\Big) = [1 -1]$
+$J = \Big(
+  \frac{\partial{f}}{\partial{x}}
+  \frac{\partial{f}}{\partial{y}}
+\Big) = [1 -1]$
 
 $\kappa = \frac{2 \mathrm{max}(|x|,|y|)}{|x - y|}$ --
 Problem is Ill-conditioned when $x$ is near $y$
