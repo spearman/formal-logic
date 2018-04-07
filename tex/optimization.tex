@@ -473,6 +473,8 @@ Fritz John Conditions -- lemma for KKT Conditions
 \subsubsection{Sequential Quadratic Programming}
 \label{sec:sequential_quadratic_programming}
 
+Active Set Methods (TODO: xref)
+
 SQP
 
 \fist cf. Quadratic Programming (\S\ref{sec:quadratic_programming})
@@ -763,6 +765,7 @@ $\vec{p}^* \rightarrow \vec{p}^* + \Delta{\vec{p}^*}$ and the quantity:
 \]
 is called the \emph{Shadow Price} of the $i$th Constraint $\vec{a}_i^T\vec{x} =
 b_i$
+(FIXME: how is a column of A multiplied by x ???)
 
 \emph{assuming the Basis remains constant}, then the Dual Variable
 $\vec{\nu}^*$ won't Change and:
@@ -782,6 +785,8 @@ the Objective decreasing by $\$10 a$, i.e. if a Constraint can be loosened for
 less than the Shadow Price, then the Objective can be improved by doing so; if
 the Shadow Prices is \$0, then loosening a Constraint does not improve the
 Objective
+
+\fist cf. Shadow Prices for Quadratic Programs (\S\ref{sec:quadratic_program})
 
 
 
@@ -919,7 +924,7 @@ the KKT Conditions can be written as:
 
 \begin{align*}
   A\vec{x}^*                                & = \vec{b} \\
-  P\vec{x}^* + \vec{q} + A^T\vec{\lambda}^* & = 0
+  P\vec{x}^* + \vec{q} + A^T\vec{\lambda}^* & = \vec{0}
 \end{align*}
 
 or:
@@ -945,6 +950,126 @@ Solution (FIXME: clarify)
 
 compared to the QR Method above, the KKT method is less general since $P$ is
 required to be Positive Definite
+
+
+UC Math 352 Lec. 19 - \url{https://www.youtube.com/watch?v=bVN7gNFlSPA}:
+
+$P\vec{x}^* + \vec{q} + A^T\vec{\lambda}^* = \vec{0}$ is equivalent to:
+\[
+  f(\vec{x}^*) + A^T\vec{\lambda}^* = \vec{0}
+\]
+(FIXME: is this only true for positive definite P ???)
+
+
+\emph{Constraint Perturbation (Shadow Prices)} (\S\ref{sec:shadow_price})
+
+if $\vec{x}^*$ Minimizes $f(\vec{x})$ over $A\vec{x} = \vec{b}$ then $\nabla
+f(\vec{x}^*)$ must be Orthogonal to $\mathrm{null}(A)$, i.e. it is in the Range
+of $A^T$, $\mathrm{range}(A^T)$, so $\nabla f(\vec{x}^*) = -A^T\vec{\lambda}$
+for some $\vec{\lambda} \in \reals^m$
+
+a small perturbation $\Delta \vec{x}$ to $\vec{x}^*$ gives a corresponding
+First-order change to $f(\vec{x})$ is:
+\begin{align*}
+  \Delta f & = \Delta\vec{x}^T\nabla{f} = -\Delta\vec{x}^TA^T\vec{\lambda} \\
+  \Delta f & = -\Delta\vec{b}^T\vec{\lambda} \\
+\end{align*}
+therefore the Lagrange Multipliers (\S\ref{sec:lagrange_multiplier}), i.e.
+Shadow Prices, relate increments in the RHS of the Constraints to corresponding
+changes in the Objective
+
+
+\textbf{Inequality Constrained QP}
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{\vec{x}} \in \reals^m}$ &
+    $f(\vec{x}) = \frac{1}{2}\vec{x}^T P\vec{x} + \vec{q}^T\vec{x}$ \\
+  subject to & $A\vec{x} \leq \vec{b}$ \\
+\end{tabular}
+
+where $P$ is Positive Definite and $A \in \reals^{m \times n}$
+
+
+\emph{Active Set Method} (TODO: xref)
+
+cf. Sequential Quadratic Programming
+(\S\ref{sec:sequential_quadratic_programming})
+
+an \emph{Active Set} $S$ is the Set of Constraints that hold with Equality
+(i.e. are Binding or ``Sharp'')
+
+(FIXME: in the following how is a column of A multiplied by x ???)
+
+$S^*$ is the \emph{Optimal Active Set} when:
+\begin{enumerate}
+  \item the Optimizer $\vec{x}^*$ is in the Feasible Region
+  \item $\lambda^*_i \geq 0$ where $\vec{\lambda}^*$ is the Set of Lagrange
+    Multipliers for the Equality Constraints $\vec{a}_i^T\vec{x} = b_i$ for $i
+    \in S^*$
+\end{enumerate}
+
+given an Optimal Active Set $S^*$, then solving an Equality Constrained QP:
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{\vec{x}} \in \reals^m}$ &
+    $f(\vec{x}) = \frac{1}{2}\vec{x}^T P\vec{x} + \vec{q}^T\vec{x}$ \\
+  subject to & $\vec{a}_i^T\vec{x} = b_i, i \in S^*$ \\
+\end{tabular}
+
+yields the \emph{Optimizer} (Minimizer) $\vec{x}^*$ of the Inequality
+Constrained QP
+
+Active Set Algorithm (basic):
+\begin{enumerate}
+  \item start at a Feasible Point $\vec{x}_0$ and an initial Active Set $S_0$
+  \item calculate $\vec{x}^*_{EQP}$ and $\vec{\lambda}^*_{EQP}$ which Minimizes
+    the EQP defined by the current Active Set
+    \begin{enumerate}
+      \item if $\vec{x}^*_{EQP}$ is Feasible, then ``move'' to $\vec{x}^*$ and
+        check Lagrange Multipliers and if all $\lambda^*_i > 0, \lambda^*_i \in
+        \vec{\lambda}^*_{EQP}$, then $\vec{x}^*_{EQP}$ is the Optimizer (FIXME:
+        clarify); otherwise if one of the Lagrange Multipliers $\lambda^*_i$ is
+        Negative then remove that Constraint from the Active Set (FIXME: and
+        add a new constraint ???)
+      \item if $\vec{x}^*_{EQP}$ is Infeasible then ``move'' as far as possible
+        along the line segment from $\vec{x}_0$ to $\vec{x}^*_{EQP}$ while
+        staying Feasible and add to this the first Constraint that blocs
+        further progress
+    \end{enumerate}
+\end{enumerate}
+
+finding an initial Feasible Point $\vec{x}_0$ is the problem of finding a
+Feasible Point $\vec{x}$ that Satisfies $A\vec{x} \leq \vec{b}$ which can be
+solved as a Phase I Linear Program (\S\ref{sec:linear_programming}) and will
+also tell which Constraints are Active-- the Initial Active Set is the Set of
+Constraints that are Binding (``Sharp''), i.e. hold with Equality at
+$\vec{x}_0$
+
+Active Set Algorithm (formal):
+\begin{enumerate}
+  \item let $\vec{x} = \vec{x}_0$, $S = S_0$
+  \item let $\vec{x}^*_{EQP}$ and $\vec{\lambda}^*_{EQP}$ ... (FIXME ???) solve the
+    Equality Constrained QP defined by $S$
+  \item if $\vec{x}^*_{EQP}$ is Feasible:
+    \begin{enumerate}
+      \item if $\lambda^*_i \geq 0$ for all $\lambda^*_i \in
+        \vec{\lambda}^*_{EQP}$, then $\vec{x}^*_{EQP}$ is Optimal and the
+        algorithm is finished
+      \item otherwise remove from $S$ a Constraint with $\lambda^*_i < 0$ and
+        Set $\vec{x} = \vec{x}^*_{EQP}$ and go to Step (2.)
+    \end{enumerate}
+    otherwise let $t_{max}$ ... (FIXME ???) solve:
+
+    \begin{tabular}{r l}
+      $\mathrm{max}$ & $t$ \\
+      subject to     & $\vec{x} + t(\vec{x}^*_{EQP} - \vec{x})$ is Feasible
+    \end{tabular}
+
+    set $\vec{x}_+ = \vec{x} + t_{max}(\vec{x}^*_{EQP} - \vec{x})$ and add to
+    $S$ one Constraint that is Binding at $\vec{x}_+$ and that is violated by
+    $\vec{x}^*_{EQP}$ (i.e. $\vec{a}_i^T\vec{x}^*_{EQP} > b_i$), then go to
+    Step (2.)
+\end{enumerate}
 
 
 
