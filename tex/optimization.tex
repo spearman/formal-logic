@@ -36,7 +36,23 @@ Optimization (\S\ref{sec:nonlinear_optimization})
 
 
 
+\subsubsection{Trust Region}\label{sec:trust_region}
+
+\subsubsection{Line Search}\label{sec:line_search}
+
+\paragraph{Backtracking Line Search}\label{sec:backtracking_line_search}\hfill
+
+
+
 \subsubsection{Newton's Method}\label{sec:newtons_method}
+
+UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo}
+
+Minimize Second-order Taylor Polynomial
+
+Convex Objective with Equality Constraints
+
+
 
 \subsubsection{Secant Method}\label{sec:secant_method}
 
@@ -510,11 +526,15 @@ SQP
 Constrained Linear Optimization
 
 Objective Function and all the Hard Constraints are Linear; can be solved by
-Simplex Method (\S\ref{sec:simplex_algorithm}) usually in Polynomial Time, or
-by Interior Point Method (\S\ref{sec:interior_point}) in Polynomial Time
+Simplex Method (\S\ref{sec:simplex_algorithm}) usually in Polynomial Time
+
+Interior Point (\S\ref{sec:interior_point_method}) Linear Programming
+(Polynomial Time) often performs at least as well or better than the Simplex
+Method
 
 all Linear Programs can be expressed as Semidefinite Programs
-(\S\ref{sec:semidefinite_programming})
+(\S\ref{sec:semidefinite_programming}), a special case of Cone Optimization
+(\S\ref{sec:cone_optimization})
 
 Ellipsoid Method (\S\ref{sec:ellipsoid_method}): when specialized for solving
 feasible Linear Optimization Problems with Rational Data, the Ellipsoid Method
@@ -816,6 +836,23 @@ Objective
 
 all Hard Constraints are Linear but Objective Function is Quadratic
 
+(wiki):
+
+for a Quadratic Form augmented with Linear Terms, $x^TAx + 2b^Tx$, the
+First-order Conditions for a Maximum or a Minimum are found by setting the
+Matrix Derivative to the Zero Vector:
+\[
+  2Ax + 2b = 0
+\]
+giving:
+\[
+  x = -A^{-1}b
+\]
+assuming $A$ is Non-singular (Invertible); if the Quadratic Form (and hence
+$A$) are Positive Definite, then the Second-order Conditions for a
+Minimum are met at the Point
+(TODO: xrefs)
+
 for Positive Definite (\S\ref{sec:positive_definite}) $Q$ (i.e. Convex
 Objective Function) the problem is solvable by Ellipsoid Method
 (\S\ref{sec:ellipsoid_method}) in Polynomial Time; otherwise the problem is NP
@@ -1068,8 +1105,8 @@ $\vec{x}_0$
 Active Set Algorithm (formal):
 \begin{enumerate}
   \item let $\vec{x} = \vec{x}_0$, $S = S_0$
-  \item let $\vec{x}^*_{EQP}$ and $\vec{\lambda}^*_{EQP}$ ... (FIXME ???) solve the
-    Equality Constrained QP defined by $S$
+  \item let $\vec{x}^*_{EQP}$ and $\vec{\lambda}^*_{EQP}$ ... (FIXME ???) solve
+    the Equality Constrained QP defined by $S$
   \item if $\vec{x}^*_{EQP}$ is Feasible:
     \begin{enumerate}
       \item if $\lambda^*_i \geq 0$ for all $\lambda^*_i \in
@@ -1082,7 +1119,7 @@ Active Set Algorithm (formal):
 
     \begin{tabular}{r l}
       $\mathrm{max}$ & $t$ \\
-      subject to     & $\vec{x} + t(\vec{x}^*_{EQP} - \vec{x})$ is Feasible
+      subject to     & $A(\vec{x} + t(\vec{x}^*_{EQP} - \vec{x})) \leq \vec{b}$
     \end{tabular}
 
     set $\vec{x}_+ = \vec{x} + t_{max}(\vec{x}^*_{EQP} - \vec{x})$ and add to
@@ -1090,6 +1127,52 @@ Active Set Algorithm (formal):
     $\vec{x}^*_{EQP}$ (i.e. $\vec{a}_i^T\vec{x}^*_{EQP} > b_i$), then go to
     Step (2.)
 \end{enumerate}
+
+cf. the Simplex Method (\S\ref{sec:simplex_algorithm}) where the number of
+Constraints in the ``Active Set'' is fixed (FIXME: at two corresponding to a
+vertex ???)
+
+a worked example can be found here: UC Math 352 Lec. 20 -
+\url{https://www.youtube.com/watch?v=e6jDGxNZ-kk}
+
+since $P$ is Positive-definite, along any line $\vec{x}(t) = \vec{x} +
+t\vec{u}, t \in \reals, \vec{u} \neq \vec{0}$ the Quadratic $f(\vec{x}(t))$ is
+Convex
+
+at each iteration $\vec{x}^{(k)}$ and $s\vec{x}_{EQP}^{(k)}$ both lie on the
+\emph{Affine Manifold} (\S\ref{sec:affine_manifold}):
+\[
+  \mathcal{M}^(k) = \{
+    \vec{x} : \forall i \in S^{(k)}, \vec{a}_i^T\vec{x} = b_i
+  \}
+\]
+so $f(\vec{x}^{(k)}) \geq f(\vec{x}_{EQP}^{(k)})$ with Equality if and only if
+$\vec{x}^{(k)} = \vec{x}_{EQP}^{(k)}$, i.e. Minimizing subject to Constraints
+produces a Minimum that is less than or equal to the current value, and because
+the Quadratic Term of $f(\vec{x}(t))$ is Nonzero, the Objective strictly
+decreases unless the two Points are equal, that is $f$ decreases along the line
+segment joining $\vec{x}^{(k)}$ to $\vec{x}_{EQP}^{(k)}$-- \emph{every ``nonzero
+  move'' from $\vec{x}^{(k)}$ to $\vec{x}_{EQP}^{(k)}$ strictly reduces $f$}:
+\[
+  \vec{x}^{(k+1)} \neq \vec{x}^{(k)} \Rightarrow
+    f(\vec{x}^{(k+1)}) < f(\vec{x}^{(k)}
+\]
+
+when deleting a Constraint from $S^{(k)}$, the current Point is already at the
+``lowest Point'' on the Manifold $\mathcal{M}^{(k)}$; then a ``nonzero move''
+necessarily goes to a lower Point and it will not be possible to return to
+$\mathcal{M}^{(k)}$, i.e. it is not possible to return to the same Active Set
+$S^{(k)}$ again-- because the number of Active Sets is Finite, \emph{the
+  algorithm must terminate with the Optimal Active Set unless making moves of
+  Length $0$ (Degeneracy, i.e. Cycling)}
+
+Degeneracy in QP has the same features as in LP: a ``coincidence'' of
+Constraints allows Cycling through several Active Sets at the same Point
+$\vec{x}$-- apply Bland's Anticycling Rules
+
+some more example problems: UC Math 352 Lec. 21 -
+\url{https://www.youtube.com/watch?v=VJ-04jOfu-E},
+Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo} (Newton's Method \S\ref{sec:newtons_method})
 
 
 
@@ -1179,6 +1262,10 @@ may be formulated as Convex Optimization Problems:
     (QCQP \S\ref{sec:quadratically_constrained})
 \end{itemize}
 
+UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo}:
+Interior Point Method (\S\ref{sec:interior_point_method}) for general Convex
+Optimization Problems
+
 
 
 % --------------------------------------------------------------------
@@ -1203,6 +1290,64 @@ Function over a Convex Set by converting to the \emph{Epigraph Form}
 \emph{Primal-dual Path-following Interior Point Methods}; Mehrotra's
 Predictor-Corrector Algorithm
 
+\asterism
+
+UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo}:
+Interior Point Method for general Convex Optimization Problems
+
+widely used approach for solving general Convex Problem (includes LP, QP,
+etc.):
+
+\begin{tabular}{r l}
+  $\mathrm{min}_{\vec{x}}$ & $f(\vec{x})$     \\
+  subject to               & $h_i(\vec{x}) \leq 0, i \in \{1,\ldots,m\}$ \\
+                           & $A\vec{x} = \vec{b}$   \\
+\end{tabular}
+
+where $f, h_i$ are Convex and Twice-continuously Differentiable
+
+$A \in \reals^{p \times n}, p < n$ is Full Rank
+
+approximate Inequality Constraints by Continuous Functions in the Objective:
+incorporate Inequality Constraints into the Objective by:
+
+\begin{tabular}{r l}
+  $\mathrm{min}$ & $f(\vec{x}) + \sum_{i=1}^m I_{-} (h_i(\vec{x}))$ \\
+  subject to     & $A\vec{x} = \vec{b}$ \\
+\end{tabular}
+
+where $I_{-}$ is the Indicator Function for Non-positive Reals:
+\[
+  I_{-}(u) = \begin{cases}
+    0       & \ \ \ u \leq 0 \\
+    \infty  & \ \ \ u >    0 \\
+  \end{cases}
+\]
+can be ``softened'' by a Continuous Approximation:
+\[
+  \hat{I}_{-}(u) = -\frac{1}{t} \log (-u)
+\]
+where $t > 0$ is a parameter setting the accuracy of the approximation;
+substituting into the original problem:
+
+\begin{tabular}{r l}
+  $\mathrm{min}$ & $f(\vec{x}) + \sum_{i=1}^m -\frac{1}{t} \log(-h_i(\vec{x}))$
+  subject to     & $A\vec{x} = \vec{b}$ \\
+\end{tabular}
+
+has an Objective that is both Continuous and Convex, so Newton's Method
+(\S\ref{sec:newtons_method}) can be used to solve-- solve Equality Constrained
+Problem for a particular value of $t$ and then increase $t$ using the Optimum
+as the starting point for the next iteration; as $t \rightarrow \infty$, the
+approximation becomes exact
+
+note: as $t$ becomes large the problem becomes less well Conditioned, so it is
+sensitive to initial starting point
+
+\fist Interior Point Linear Programming (\S\ref{sec:linear_programming}) often
+performs at least as well or better than the Simplex Method
+(\S\ref{sec:simplex_method})
+
 
 
 % --------------------------------------------------------------------
@@ -1218,6 +1363,13 @@ Dantzig
 Linear Programming (\S\ref{sec:linear_programming}) problems can be solved by
 Simplex Method (\S\ref{sec:simplex_algorithm}), usually (but not guaranteed) in
 Polynomial Time
+
+\fist Interior Point (\S\ref{sec:interior_point_method}) Linear Programming
+often performs at least as well or better than the Simplex Method
+
+cf. Active Set Method (TODO: xref) for Quadratic Programming
+(\S\ref{sec:quadratic_programming}) where the number of constriants in the
+``Active Set'' changes as the algorithm progresses
 
 UC Math 352 Lec. 11 - \url{https://www.youtube.com/watch?v=ESzYPFkY3og}:
 
@@ -1319,6 +1471,10 @@ Unbounded LP
 = 0$ for at least one $i \in B$; this occurs geometrically when two Basic
 Solutions overlap, e.g. when more than two Constraints intersect at the same
 Point
+
+\fist Degeneracy in QP (\S\ref{sec:quadratic_programming}) has the same
+features as in LP: a ``coincidence'' of Constraints allows Cycling through
+several Active Sets at the same Point $\vec{x}$
 
 \emph{Cycling}: the Simplex Method Strictly reduces $\vec{c}^T\vec{x}$ each
 iteration for which the Entering Variable $x_e$ is \emph{increased} to a
