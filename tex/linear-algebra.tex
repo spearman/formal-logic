@@ -154,10 +154,11 @@ Matrices $M$ such that $\vec{x}^T M \vec{x} > 0$; this is a kind of analogue to
 ``Positive Real Numbers'' for Square Matrices
 
 Homothety (\S\ref{sec:homothety}): a specific kind of Linear Transformation of
-an Affine Space called a \emph{Dilation} or \emph{Scale Transformation}; in
-Projective Geometry (\S\ref{sec:projective_geometry}) it is a Similarity
-Transformation (\S\ref{sec:simliarity_transformation}) that leaves the Line at
-Infinity Pointwise Invariant
+an Affine Space called a \emph{Dilation} or \emph{Scale Transformation}, with
+Uniform Scaling (\S\ref{sec:scaling}) as a special case; in Projective Geometry
+(\S\ref{sec:projective_geometry}) it is a Similarity Transformation
+(\S\ref{sec:simliarity_transformation}) that leaves the Line at Infinity
+Pointwise Invariant
 
 (Fong16):
 
@@ -778,6 +779,13 @@ over a Field
 to Categories of the notion of Basis in a Vector Space
 (FIXME: clarify)
 
+\fist Affine Basis (\S\ref{sec:affine_basis})
+
+a Set of $n$ Vectors in an $n$-dimensional Vector Space are Linearly
+Independent if and only if the Points they define in Projective Space
+(\S\ref{sec:projective_space}) of Dimension $n-1$ are in General Linear
+Position (\S\ref{sec:general_position})
+
 
 
 \paragraph{Orthogonal Basis}\label{sec:orthogonal_basis}\hfill
@@ -1149,6 +1157,13 @@ that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
 
 \fist Gram Matrix (\S\ref{sec:gram_matrix}): Hermitian Matrix of Inner
 Products
+
+Inner Product of Euclidean Vectors (\S\ref{sec:euclidean_vectors}) is Positive
+Definite (\S\ref{sec:positive_definite}):
+\begin{align*}
+  \langle{x,x}\rangle & \geq 0 \\
+  \langle{x,x}\rangle & =    0 \Leftrightarrow x = \vec{0} \\
+\end{align*}
 
 \emph{Cauchy-Schwarz Inequality}:
 \[
@@ -2008,6 +2023,23 @@ $A$
 
 
 % --------------------------------------------------------------------
+\subsection{Nonnegative Matrix}\label{sec:nonnegative_matrix}
+% --------------------------------------------------------------------
+
+$A \geq 0$
+
+$a_{ij} \geq 0 \ \ \ \forall i,j$
+
+
+
+\subsubsection{Positive Matrix}\label{sec:positive_matrix}
+
+\fist not to be confused with Positive-definite Matrices
+(\S\ref{sec:positive_definite})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Matrix Decomposition}\label{sec:matrix_decomposition}
 % --------------------------------------------------------------------
 
@@ -2610,6 +2642,33 @@ other $\vec{x}$
 
 
 
+\paragraph{Euclidean Distance Matrix}\label{sec:euclidean_distance_matrix}\hfill
+
+(wiki):
+
+for a Set of $n$ Points $x_1, x_2, \ldots, x_n$ in $m$-dimensional Euclidean
+Space, the \emph{Euclidean Distance Matrix} $A$ is given by:
+\begin{align*}
+  A      & = (a_{ij}) \\
+  a_{ij} & = d_{ij}^2 = \|x_i - x_j\|_2^2 \\
+\end{align*}
+so that $A$ is a Symmetric Hollow Matrix (all Diagonal elements of $A$ are
+Zero) with $a_{ij} \geq 0$, i.e. its elements are the Squares of the Euclidean
+Distances between the Vectors of some Configuration
+
+a Euclidean Distance Matrix has Rank less than or equal to $m+2$
+
+if the Points $x_1, \ldots, x_n$ are in General Position
+(\S\ref{sec:general_position}) then the Rank is exactly $\mathrm{min}(n,m+2)$
+
+(2004 Boyd, Vanderberghe \emph{Convex Optimization} pp.423):
+
+a Euclidean Distance Matrix $D$ and the Length-squared Vector $\vec{z}$ (i.e.
+the Vector of squared lengths $[l_1 \ \cdots \ l_n]^T$ of each Vector $x_1,
+\ldots, x_n$), the original Configuration can be reconstructed
+
+
+
 \subsubsection{Skew-symmetric Matrix}\label{sec:skew_symmetric}
 
 Bivectors (\S\ref{sec:bivector}) are Isomorphic to Skew-symmetric Matrices
@@ -2882,6 +2941,8 @@ Gramian Matrix $G$ with entries:
 a Set of Vectors is Linearly Independent if and only if the Determinant is
 Non-zero
 
+the Gramian Matrix of any Orthonormal Basis is the Identity Matrix
+
 a Matrix is Positive Semidefinite (\S\ref{sec:positive_semidefinite}) if it is
 the Gramian Matrix of some Vectors
 
@@ -2977,6 +3038,8 @@ Negative-semidefinite ($\leq 0$ \S\ref{sec:negative_semidefinite}).
     \[
       \vec{x}^*D\vec{x} = \sum d_{ii}|x_i|^2 > 0
     \]
+  \item Inner Product (\S\ref{sec:inner_product}) of Euclidean Vectors
+    (\S\ref{sec:euclidean_vectors})
 \end{itemize}
 
 
