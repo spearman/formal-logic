@@ -546,6 +546,12 @@ Scalar $\lambda$ such that:
 \fist Spectrum (\S\ref{sec:spectrum}): generalization of Set of Eigenvalues of
 a Matrix
 
+the Function for the maximum Eigenvalue of a Symmetric Matrix $X \in
+\mathsf{S}^n$ is a Convex Function (\S\ref{sec:convex_function}):
+\[
+  \lambda_{max}(X) = \mathrm{sup}_{\|\vec{y}\|_2=1} \vec{y}^T X \vec{y}
+\]
+
 
 
 % --------------------------------------------------------------------
@@ -710,6 +716,10 @@ example of a Non-compact (\S\ref{sec:compact_space}) Lie Group
 
 \fist Convex Combinations (Convex Geometry \S\ref{sec:convex_combination}) are
 Linear Combinations of Points
+
+\emph{Linear Combination Theorem}: The GCD (\S\ref{sec:gcd}) of two non-zero
+Integers $a$ and $b$ is equal to the smallest possible Positive Linear
+Combination of $a$ and $b$.
 
 
 
@@ -1347,6 +1357,13 @@ Graded Algebra (\S\ref{sec:graded_algebra})
 
 
 
+\subsubsection{Differential Graded Vector Space}\label{sec:differential_graded}
+
+a Chain Complex (\S\ref{sec:chain_complex}) in the Abelian Category
+$\cat{Vect}_k$
+
+
+
 % --------------------------------------------------------------------
 \subsection{Dual Space}\label{sec:dual_space}
 % --------------------------------------------------------------------
@@ -1916,6 +1933,19 @@ The columns of the resulting Matrix $C$ are the result of Multiplying
 the corresponding Column of $B$ on the left by the Matrix $A$. And the
 rows of the resulting Matrix $C$ are the result of Multiplying the
 corresponding row of $A$ on the right by the Matrix $B$.
+
+the entry in the $i$th Row and the $j$th Column of the result is equal to the
+Dot Product of the $i$th Row of the LHS with the $j$th Column of the RHS
+
+an $m \times n$ Matrix $A$ Multiplied by an $n \times 1$ Matrix (Column Vector)
+gives an $n \times 1$ Vector that is a Linear Combination of the Columns of $A$
+
+an $m \times n$ Matrix $A$ Multiplied by an $1 \times m$ Matrix (Row Vector)
+gives an $1 \times m$ Vector that is a Linear Combination of the Rows of $A$
+
+\begin{itemize}
+  \item $A(BC) = (AB)C$ -- Associative
+\end{itemize}
 
 
 
@@ -2645,12 +2675,35 @@ the Complex extension of a Symmetric Matrix is a \emph{Hermitian Matrix}
 an Orthogonal Projection (\S\ref{sec:orthogonal_projection}) is exactly an
 Idempotent Symmetric Linear Operator
 
-a Quadratic Form (\S\ref{sec:quadratic_form}) $f(\vec{x})$ on $n$ Real
-Variables $x_1,\ldots,x_n$ can always be written as $\vec{x}^T M \vec{x}$ for
-$M$ a Symmetric Real Matrix;
-$M$ is a Positive-definite Matrix (\S\ref{sec:positive_definite}) when $f$ has
-a unique Minimum (Zero) when $\vec{x}$ is Zero and is Strictly Positive for any
-other $\vec{x}$
+Symmetric Bilinear Forms (\S\ref{sec:symmetric_bilinear_form}) on
+Finite-dimensional Vector Spaces correspond precisely to Symmetric Matrices
+given a Basis for $V$, and correspond one-to-one with Quadratic Forms
+(\S\ref{sec:quadratic_form}) over the Vector Space;
+a Quadratic Form $f(\vec{x})$ on $n$ Real Variables $x_1,\ldots,x_n$ can always
+be written as $\vec{x}^T M \vec{x}$ for $M$ a Symmetric Real Matrix; $M$ is a
+Positive-definite Matrix (\S\ref{sec:positive_definite}) when $f$ has a unique
+Minimum (Zero) when $\vec{x}$ is Zero and is Strictly Positive for any other
+$\vec{x}$
+
+(\emph{Jacobi's Theorem}) any Symmetric Matrix can be transformed into a
+Diagonal Matrix $B$ by an Orthogonal Matrix $S$:
+\[
+  B = S^T A S
+\]
+and the Diagonals of $B$ are uniquely determined
+
+(\emph{Sylvester's Law of Inertia}) if $S$ is allowed to be any Invertible
+Matrix then the Diagonals of $B$ may be made to be $0$, $1$, and $-1$, the
+number of each type giving the Signature of the associated Quadratic Form
+
+when the Diagonals are all $1$, the Quadratic Form is Positive Definite, and
+when all are $-1$ it is Negative Definite
+
+the Function for the maximum Eigenvalue (\S\ref{sec:eigenvalue}) of a Symmetric
+Matrix $X \in \mathsf{S}^n$ is a Convex Function (\S\ref{sec:convex_function}):
+\[
+  \lambda_{max}(X) = \mathrm{sup}_{\|\vec{y}\|_2=1} \vec{y}^T X \vec{y}
+\]
 
 
 
@@ -2822,9 +2875,29 @@ used in QR Decomposition (\S\ref{sec:qr_decomposition})
 
 \subsubsection{Elementary Operation}\label{sec:elementary_operation}
 
-\emph{Elementary Row Operation}
+\emph{Elementary Row Operations}
 
-\emph{Elementary Column Operation}
+(\emph{Elementary Column Operations})
+
+note that Row Operations are achieved by Left-multiplication by an Elementary
+Matrix while Column Operations are achieved by a Right-multiplication by an
+Elementary Matrix
+
+\begin{enumerate}
+  \item Row Swapping
+  \item Scalar Row Multiplication
+  \item Row Addition by a Scalar Multiple of another Row
+\end{enumerate}
+
+Row Swapping is achieved by a Permutation Matrix
+
+Scalar Row Multiplication is achieved by a Matrix with all $1$s on the diagonal
+except for the diagonal entry for the corresponding Row equal to the desired
+Scalar
+
+Row Addition by a Scalar Multiple of another Row is a Matrix with $1$ on the
+diagonals and a single off-diagonal non-zero entry in the Row matching the
+affected Row the Column matching to the Row that is being added
 
 
 
@@ -2848,6 +2921,31 @@ cf. QR Factorization (\S\ref{sec:qr_decomposition}) as a Decomposition into
 Orthogonal Matrices (\S\ref{sec:orthogonal_matrix})
 
 \emph{Naive Gaussian Elimination} -- no Row Swaps or Scalar Multiplications
+
+\asterism
+
+MIT 18.06 Lec. 2 - \url{https://www.youtube.com/watch?v=QVKj3LADCnA}
+
+$Ax = b$
+
+Elementary Operations are performed on the \emph{Augmented Matrix} $[A | b]$ to
+transform it into $[U | c]$ where $U$ is an Upper-triangular Matrix and the
+Elementary Operations are collected into a Matrix $L$ so that $A = LU$ \fist LU
+Decomposition (\S\ref{sec:lu_decomposition})
+
+\emph{Forward Elimination} -- perform Elementary Row Operations to
+``eliminate'' Variables from equations to put the System Matrix into an Upper
+Triangular Form so that Variables can be substituted upward by \emph{Back
+  Substitution}
+
+Pivot -- must be non-zero
+
+$Ux = c$
+
+possibility of Failure
+
+\emph{Back Substitution} -- solving Equations of an Upper-triangular System in
+reverse order
 
 
 
@@ -3276,9 +3374,16 @@ Set is Orthonormal if it is Orthogonal and every Vector in it is a Unit Vector
 
 \paragraph{Symmetric Bilinear Form}\label{sec:symmetric_bilinear}\hfill
 
-Symmetric Bilinear Forms over a Vector Space correspond one-to-one
-with Quadratic Forms (\S\ref{sec:quadratic_form}) over the Vector
-Space
+(wiki):
+
+Symmetric Bilinear Forms on Finite-dimensional Vector Spaces correspond
+precisely to Symmetric Matrices (\S\ref{sec:symmetric_matrix}) given a Basis
+for $V$
+
+Symmetric Bilinear Forms over a Vector Space correspond one-to-one with
+Quadratic Forms (\S\ref{sec:quadratic_form}) over the Vector Space: given a
+Symmetric Bilinear Form $B$, the Function $q(x) = B(x,x)$ is the associated
+Quadratic Form on the Vector Space
 
 An Inner Product (\S\ref{sec:inner_product}) on a Real Vector Space is
 a Positive-definite (\S\ref{sec:definite_quadratic}) Symmetric

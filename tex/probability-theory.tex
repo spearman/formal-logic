@@ -379,15 +379,43 @@ the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
 \subsection{Random Variable}\label{sec:random_variable}
 % --------------------------------------------------------------------
 
-Function on a Sample Space (\S\ref{sec:sample_space})
-
-Variable (\S\ref{sec:variable})
+Function on a Sample Space (\S\ref{sec:sample_space}) mapping Outcomes in the
+Sample Space to some other Set of Values
 
 $X : \Omega \rightarrow E$
 
 Discrete Random Variable (\S\ref{sec:discrete_random_variable})
 
 Continuous Random Variable (\S\ref{sec:continuous_random_variable})
+
+
+MIT 6.041SC Lec. 5 - \url{https://www.youtube.com/watch?v=3MOahpLxj6A}:
+
+Functions of Random Variables are also Random Variables
+
+Probability Mass Function (\S\ref{sec:probability_mass}) $p_X$ assigns
+Probabilities to Elements of $x \in E$:
+\[
+  p_X(x) = P(X = x)
+\]
+
+$p_X(x) \geq 1$
+
+$\sum_x p_X(x) = 1$
+
+Expected Value (\S\ref{sec:expected_value}) of a Random Variable is a kind of
+``average'' where Probabilities are treated like ``frequencies'':
+\[
+  E[X] = \sum_x xp_X(x)
+\]
+for a Function of a Random Variable $Y = g(X)$:
+\[
+  E[Y] = \sum_x g(x)p_X(x)
+\]
+
+for a PMF that is Symmetric around a certain point, that point is the Expected
+Value
+
 
 
 
@@ -410,6 +438,12 @@ has Probability $0$ of assuming a particular Value
 
 \subsubsection{Expected Value}\label{sec:expected_value}
 
+Expected Value of a Random Variable is a kind of ``average'' where
+Probabilities are treated like ``frequencies''
+
+for a Probability Mass Function (\S\ref{sec:probability_mass}) that is
+Symmetric around a certain point, that point is the Expected Value
+
 For Random Variable $X$ with Probability Distribution $f(x)$, the
 \emph{Expected Value} (or \emph{Mean}) of $X$ is (Discrete):
 \[
@@ -418,6 +452,31 @@ For Random Variable $X$ with Probability Distribution $f(x)$, the
 (Continuous):
 \[
   \mu = E[X] = \int\limits_{-\infty}^{\infty} x_i f(x_i) dx
+\]
+
+for a Function of a Random Variable $Y = g(X)$:
+\[
+  E[Y] = \sum_x g(x)p_X(x)
+\]
+
+for \emph{Linear Function} $g$:
+\[
+  E[g(X)] = g(E[X])
+\]
+
+Expectations of Constants (i.e. as ``degenerate'' Random Variables) are just
+the Constants themselves: $E[a] = a$
+
+Expectations of Random Variables multiplied by Constant is the Constant
+multiplied by the Expectation of the Random Variable:
+\[
+  E[aX] = aE[X]
+\]
+
+Expectation of a Random Variable with the addition of a Constant is the
+Constant added to the Expectation of the Random Variable:
+\[
+  E[X + b] = E[X] + b
 \]
 
 Law of Large Numbers (\S\ref{sec:large_numbers})
@@ -436,8 +495,8 @@ For Joint Probability Density Function:
 \fist Note that $E[X Y]$ is not necessarily equal to $E[X]
 E[Y]$, see Covariance (\S\ref{sec:covariance}).
 
-For $X$ and $Y$ Independent (\S\ref{sec:independence}), then $E[X,Y] =
-E[X] E[Y]$
+For $X$ and $Y$ Independent (\S\ref{sec:independence}), then $E[X,Y] = E[X]
+E[Y]$
 
 If $a$ and $b$ are Constants, then $E[aX +b] = a E[X] + b$
 
@@ -445,9 +504,29 @@ $E [g(X) \pm h(X)] = E[g(X)] \pm E[h(X)]$
 
 $E [g(X,Y) \pm h(X,Y)] = E[g(X,Y)] \pm E[h(X,Y)]$
 
+the Variance (Expected Value of the Squared Deviation \S\ref{sec:variance}) of
+a Random Variable $X$ is equal to:
+\begin{align*}
+  Var(X) & = E[(x - E[X])^2] \\
+         & = E[X^2] - (E[X])^2 \\
+\end{align*}
+
 
 
 \subsubsection{Variance}\label{sec:variance}
+
+the \emph{Variance} is the Expected Value of the Squared Deviation of a Random
+Variable
+
+Variances are always Non-negative
+
+the Variance of a Random Variable $X$ is equal to:
+\begin{align*}
+  Var(X) & = E[(x - E[X])^2] \\
+         & = E[X^2] - (E[X])^2 \\
+\end{align*}
+where $E[\cdot]$ is the Expected Value (\S\ref{sec:expected_variable}) of a
+Random Variable
 
 Discrete Random Variable $X$:
 \[
@@ -1038,6 +1117,9 @@ $X$:
   \item $\sum_x f(x) = 1$
   \item $P(X = x) = f(x)$
 \end{enumerate}
+
+for a Probability Mass Function that is Symmetric around a certain point, that
+point is the Expected Value (\S\ref{sec:expected_value})
 
 
 
