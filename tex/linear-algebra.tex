@@ -1937,6 +1937,12 @@ corresponding row of $A$ on the right by the Matrix $B$.
 the entry in the $i$th Row and the $j$th Column of the result is equal to the
 Dot Product of the $i$th Row of the LHS with the $j$th Column of the RHS
 
+the Columns of the result are combinations of the Columns of the LHS and the
+Rows of the result are combinations of the Rows of the RHS
+
+equivalently, the result is the Sum of multiplying Columns of the LHS times the
+Rows of the RHS as individual Matrices Multiplications
+
 an $m \times n$ Matrix $A$ Multiplied by an $n \times 1$ Matrix (Column Vector)
 gives an $n \times 1$ Vector that is a Linear Combination of the Columns of $A$
 
@@ -1946,6 +1952,20 @@ gives an $1 \times m$ Vector that is a Linear Combination of the Rows of $A$
 \begin{itemize}
   \item $A(BC) = (AB)C$ -- Associative
 \end{itemize}
+
+Inverses and Transposes:
+
+$AA^{-1} = I = A^{-1}A$
+
+$(A^T)^{-1} = (A^{-1})^T = A^{-T}$
+
+$(A^{-1})^T A^T = I$
+
+$ABB^{-1}A^{-1} = I$
+
+$B^{-1}A^{-1}AB = I$
+
+$AB = C \Leftrightarrow B = A^{-1}C$
 
 
 
@@ -2113,6 +2133,14 @@ Cholesky and Modified Cholesky Factorization
 LU Decomposition
 
 $A = LU$
+
+where $L$ is a Lower-triangular Matrix and $U$ is an Upper-triangular Matrix
+
+$EA = U$
+
+Elimination Steps $\cdots E_{32}E_{31}E_{21}A = U$
+
+$A = E_{21}^{-1}E_{31}^{-1}E_{32}^{-1}\cdots U$
 
 Complexity: $O(n^3)$
 
@@ -2366,7 +2394,9 @@ there is a correspondence between $n\times{n}$ Square Matrices and Linear
 Operators (\S\ref{sec:linear_operator}) on an $n$-dimensional Vector Space
 
 a Square Matrix is Invertible (\S\ref{sec:invertible_matrix}) if and only if
-its Determinant (\S\ref{sec:determinant}) is $0$
+its Determinant (\S\ref{sec:determinant}) is Nonzero
+
+the Left Inverse of an Invertible Square Matrix is equal to its Right Inverse
 
 the Product of all Non-zero Eigenvalues (\S\ref{sec:eigenvalue}) of a Square
 Matrix is the Pseudo-determinant (\S\ref{sec:pseudo_determinant}) and coincides
@@ -2393,6 +2423,8 @@ ordinary Matrix Multiplication and Matrix Inversion.
 
 The Determinant of a Square Jacobian Matrix and the Matrix itself are both
 called ``the Jacobian''.
+
+$n!$ Complexity ??? (FIXME)
 
 
 
@@ -2442,6 +2474,13 @@ Positive Definite (\S\ref{sec:positive_definite})
 A \emph{Permutation Matrix} is a Square Binary Matrix with exactly one
 $1$ in each Row and each Column and $0$s elsewhere.
 
+Permutation Matrices are Orthogonal Matrices (\S\ref{sec:orthogonal_matrix}):
+
+$P_\pi^{-1} = P_\pi^T$
+
+$n \times n$ Permutation Matrices form a Symmetic Group
+(\S\ref{sec:symmetric_group}) under Matrix Multiplication with
+with the Identity Matrix as the Identity Element
 
 
 
@@ -2451,8 +2490,10 @@ $1$ in each Row and each Column and $0$s elsewhere.
 
 Non-zero Determinant
 
-\fist the Inverse of an Invertible Matrix can be computed through Gaussian
-Elimination (\S\ref{sec:gaussian_elimination})
+\fist the Inverse of an Invertible Matrix can be computed through Gauss-Jordan
+(Gaussian) Elimination (\S\ref{sec:gaussian_elimination})
+
+for a Square Matrix, the Left Inverse is equal to the Right Inverse
 
 in general, a Square Matrix over a Commutative Ring is Invertible if and only
 if its Determinant is a Unit in that Ring
@@ -2489,6 +2530,10 @@ equivalent to being Invertible
 
 doing Gaussian Elimination to compute the Inverse of a Matrix is $O(n^3)$
 
+$ABB^{-1}A^{-1} = I$
+
+$B^{-1}A^{-1}AB = I$
+
 if a Matrix $A$ is Full Rank, then $A^*A$ is Invertible
 
 two Square Matrices $A$ and $B$ are \emph{Similar}
@@ -2505,6 +2550,23 @@ for some Invertible Matrix $P$
 $A^2 = I$
 
 a Matrix that is its own Inverse
+
+
+
+\subsubsection{Singular Matrix}\label{sec:singular_matrix}
+
+Non-invertible Matrix
+
+a Square Matrix is Singular if and only if its Determinant
+(\S\ref{sec:determinant}) is $0$
+
+\fist in a System of DAEs (\S\ref{sec:system_of_daes}), the Jacobian Matrix
+(\S\ref{sec:jacobian_matrix}) is a Singular (Non-invertible) Matrix
+
+examples:
+\begin{itemize}
+  \item Projections (\S\ref{sec:projection}) -- $A^2 = A$
+\end{itemize}
 
 
 
@@ -2560,6 +2622,11 @@ Matrix (\S\ref{sec:upper_triangular}) $R$ \fist Elementary Orthogonal Matrices
 cf. LU Decomposition (\S\ref{sec:lu_decomposition}) of a Matrix into a sequence
 of Elementary Operations (\S\ref{sec:elementary_operations}), which can be
 represented as Matrix Multiplications
+
+\begin{itemize}
+  \item Identity Matrix (\S\ref{sec:identity_matrix})
+  \item Permutation Matrices (\S\ref{sec:permutation_matrix})
+\end{itemize}
 
 
 
@@ -2628,23 +2695,6 @@ Plane Normal $\hat{w}$
 \end{align*}
 
 \fist may be used in computing QR Factorization (\S\ref{sec:qr_decomposition})
-
-
-
-\subsubsection{Singular Matrix}\label{sec:singular_matrix}
-
-Non-invertible Matrix
-
-a Square Matrix is Singular if and only if its Determinant
-(\S\ref{sec:determinant}) is $0$
-
-\fist in a System of DAEs (\S\ref{sec:system_of_daes}), the Jacobian Matrix
-(\S\ref{sec:jacobian_matrix}) is a Singular (Non-invertible) Matrix
-
-examples:
-\begin{itemize}
-  \item Projections (\S\ref{sec:projection}) -- $A^2 = A$
-\end{itemize}
 
 
 
@@ -2726,7 +2776,7 @@ a Euclidean Distance Matrix has Rank less than or equal to $m+2$
 if the Points $x_1, \ldots, x_n$ are in General Position
 (\S\ref{sec:general_position}) then the Rank is exactly $\mathrm{min}(n,m+2)$
 
-(2004 Boyd, Vanderberghe \emph{Convex Optimization} pp.423):
+(2004 Boyd, Vanderberghe \emph{Convex Optimization} pp.409):
 
 a Euclidean Distance Matrix $D$ and the Length-squared Vector $\vec{z}$ (i.e.
 the Vector of squared lengths $[l_1 \ \cdots \ l_n]^T$ of each Vector $x_1,
@@ -2884,20 +2934,21 @@ Matrix while Column Operations are achieved by a Right-multiplication by an
 Elementary Matrix
 
 \begin{enumerate}
-  \item Row Swapping
-  \item Scalar Row Multiplication
   \item Row Addition by a Scalar Multiple of another Row
+  \item Row Exchange
+  \item Scalar Row Multiplication
 \end{enumerate}
-
-Row Swapping is achieved by a Permutation Matrix
-
-Scalar Row Multiplication is achieved by a Matrix with all $1$s on the diagonal
-except for the diagonal entry for the corresponding Row equal to the desired
-Scalar
 
 Row Addition by a Scalar Multiple of another Row is a Matrix with $1$ on the
 diagonals and a single off-diagonal non-zero entry in the Row matching the
 affected Row the Column matching to the Row that is being added
+
+Row Exchange is achieved by a Permutation Matrix
+(\S\ref{sec:permutation_matrix})
+
+Scalar Row Multiplication is achieved by a Matrix with all $1$s on the diagonal
+except for the diagonal entry for the corresponding Row equal to the desired
+Scalar
 
 
 
@@ -2940,12 +2991,25 @@ Triangular Form so that Variables can be substituted upward by \emph{Back
 
 Pivot -- must be non-zero
 
+Row Exchange is required when there is a Zero in the Pivot Position
+
 $Ux = c$
 
 possibility of Failure
 
 \emph{Back Substitution} -- solving Equations of an Upper-triangular System in
 reverse order
+
+
+MIT 18.06 Lec. 3
+
+\emph{Gauss-Jordan}
+
+Reduced Row Echelon Form
+
+computing Matrix Inverses: augment with the Identity Matrix and continue Row
+Operations until the original is equal to the Identity; at the end of the
+process the Inverse Matrix will be on the augmented RHS
 
 
 
