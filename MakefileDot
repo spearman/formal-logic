@@ -1,7 +1,8 @@
-.PHONY: foo
-all: foo
-	dot -Tpng diagram.dot > diagram.png
+all: topics.png meta.png
 #dot -Tsvg $@.dot > $@.svg
 
-# dummy rule to prevent MakefileDot from trying to make itself
-MakefileDot: ;
+topics.png: topics.dot
+	dot -Tpng topics.dot > topics.png
+
+meta.png: meta.dot
+	dot -Tpng meta.dot > meta.png
