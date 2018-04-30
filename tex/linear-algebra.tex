@@ -1198,6 +1198,8 @@ Product is Zero, denoted $\vec{u} \bot \vec{y}$
 
 in Euclidean Spaces the Inner Product is the Dot Product (aka Scalar Product)
 
+Symmetric Bilinear Form (\S\ref{sec:symmetric_bilinear})
+
 An Inner Product induces a Norm (\S\ref{sec:norm}) $\|\cdot\|$ by:
 \[
   \|\vec{v}\| = \sqrt\langle{\vec{v},\vec{v}}\rangle
@@ -1375,9 +1377,27 @@ Vector Space over Scalar Field $F = \comps$
 \subsection{Symplectic Vector Space}\label{sec:symplectic_vectorspace}
 % --------------------------------------------------------------------
 
-Symplectic Geometry (\S\ref{sec:symplectic_geometry})
+A Vector Space $V$ over a Field $F$ with a Non-degenerate Alternating
+(Skew-symmetric) Bilinear Form called a \emph{Symplectic Bilinear Form}
+(\S\ref{sec:symplectic_bilinear}) $\omega : V \times V \rightarrow F$.
 
-Symplectic Form (\S\ref{sec:symplectic_form})
+If the underlying Field has Characteristic (\S\ref{sec:ring_characteristic})
+$\neq 2$, Alternation is \emph{equivalent} to Skew-symmetry; for Characteristic
+$=2$, the Skew-symmetry is \emph{implied by} (but does not imply)
+\emph{Alternation}-- every Symplectic Form is a \emph{Symmetric Form}
+(\S\ref{sec:symmetric_bilinear}) but not every Symmetric Form is Symplectic.
+
+Given a choice of Basis, $\omega$ can be represented as a Skew-symmetric
+(\S\ref{sec:skew_symmetric_matrix}), Invertible (Non-singular
+\S\ref{sec:invertible_matrix}), Hollow (\S\ref{sec:hollow}) Matrix; if $V$ is
+Finite-dimensional then it must be \emph{Even-dimensional} since every
+Skew-symmetric Hollow Matrix of odd size has Determinant \emph{Zero} (i.e.
+is Non-invertible).
+
+note this Matrix is \emph{not} the same as a Symplectic Matrix (a Symplectic
+Transformation of the Space TODO: xref)
+
+\fist Symplectic Geometry (\S\ref{sec:symplectic_geometry})
 
 ``Black-box Functor'': Category of Circuits $\rightarrow$ Category of
 Symplectic Vector Spaces % FIXME Baez 15' Passive Linear Networks
@@ -1389,14 +1409,15 @@ Attributes $\phi$ Potential and $I$ Current; Black-boxing a Circuit records
 only the Relation imposed between Variables on its Input and Output Wires, that
 is a Relation between Even-dimensional Vector Spaces (Pairs $(\phi,I)$); in
 this case these Vector Spaces are \emph{Symplectic}, i.e. they are equipped
-with a Nondegenerate Antisymmetric Bilinear Form (FIXME: ??? Symplectic Form
-\S\ref{sec:symplectic_form})
+with a Nondegenerate Alternating (Skew-symmetric) Bilinear Form called a
+\emph{Symplectic Form} \S\ref{sec:symplectic_form})
 
 the Black-box Functor respects the Symplectic Structure: it is a
 \emph{'Lagrangian' Relation} (\S\ref{sec:lagrangian_system})
 
-for any sort of System goverened by a Minimum Principle, Black-boxing should
-give a Functor to some Category where the Morphisms are Lagrangian Relations
+for any sort of System goverened by a \emph{Minimum Principle} (e.g. Principle
+of Least Action, Principle of Minimum Power), Black-boxing should give a
+Functor to some Category where the Morphisms are Lagrangian Relations
 
 $\blacksquare : \cat{Circ}_k \rightarrow \cat{LagRel}_k$
 
@@ -2867,9 +2888,18 @@ the Vector of squared lengths $[l_1 \ \cdots \ l_n]^T$ of each Vector $x_1,
 
 
 
-\subsubsection{Skew-symmetric Matrix}\label{sec:skew_symmetric}
+\subsubsection{Skew-symmetric Matrix}\label{sec:skew_symmetric_matrix}
+
+(or \emph{Antisymmetric})
 
 Bivectors (\S\ref{sec:bivector}) are Isomorphic to Skew-symmetric Matrices
+
+\fist cf. Skew-symmetric Bilinear Form (\S\ref{sec:skew_symmetric_bilinear})
+
+a Symplectic Bilinear Form (\S\ref{sec:symplectic_bilinear}) can be represented
+by an Invertible, Hollow, Skew-symmetric Matrix; note this is \emph{not} the
+same as a Symplectic Matrix (i.e. a Symplectic Transformation of the Space
+TODO: xref)
 
 
 
@@ -3495,8 +3525,8 @@ on a Vector Space $V$:
 Derived Quadratic Form
 
 Symplectic Vector Spaces (\S\ref{sec:symplectic_vectorspace}) are equipped with
-a Nondegenerate Antisymmetric Bilinear Form (FIXME: ??? Symplectic Form
-\S\ref{sec:symplectic_form})
+a Nondegenerate Alternating (Skew-symmetric) Bilinear Form called a
+\emph{Symplectic Form} \S\ref{sec:symplectic_form})
 
 
 
@@ -3525,6 +3555,9 @@ Set is Orthonormal if it is Orthogonal and every Vector in it is a Unit Vector
 
 \paragraph{Symmetric Bilinear Form}\label{sec:symmetric_bilinear}\hfill
 
+e.g. Dot (Scalar) Product (Inner Product \S\ref{sec:inner_product}) on
+Euclidean Vector Spaces
+
 (wiki):
 
 Symmetric Bilinear Forms on Finite-dimensional Vector Spaces correspond
@@ -3549,11 +3582,55 @@ Pseudo-Riemannian Manifold (\S\ref{sec:pseudo_riemannian})
 
 
 
+\paragraph{Skew-symmetric Bilinear Form}
+\label{sec:skew_symmetric_bilinear}\hfill
+
+(or \emph{Antisymmetric})
+
+$B(\vec{v},\vec{w}) = -B(\vec{w},\vec{v})$
+
+each \emph{Alternating Bilinear Form} (\S\ref{sec:alternating_form}):
+
+$B(\vec{v},\vec{v}) = 0$ for all $\vec{v} \in V$
+
+is Skew-symmetric
+
+\fist cf. Skew-symmetric Matrix (\S\ref{sec:skew_symmetric_matrix})
+
+
+
+\subparagraph{Symplectic Bilinear Form}\label{sec:symmetric_bilinear}\hfill
+
+$\omega : V \times V \rightarrow F$
+
+a Non-degenerate Alternating (Skew-symmetric) Bilinear Form
+(\S\ref{sec:alternating_form})
+
+a Symplectic Vector Space (\S\ref{sec:symplectic_vectorspace}) is one equipped
+with a Symplectic Bilinear Form
+
+given a choice of Basis, $\omega$ can be represented as a Skew-symmetric
+(\S\ref{sec:skew_symmetric_matrix}), Invertible (Non-singular
+\S\ref{sec:invertible_matrix}), Hollow (\S\ref{sec:hollow}) Matrix; if $V$ is
+Finite-dimensional then it must be \emph{Even-dimensional} since every
+Skew-symmetric Hollow Matrix of odd size has Determinant \emph{Zero} (i.e.
+is Non-invertible)
+
+note this Matrix is \emph{not} the same as a Symplectic Matrix (a Symplectic
+Transformation of the Space TODO: xref)
+
+
+
 \subsubsection{Alternating Multilinear Form}\label{sec:alternating_form}
 
 Alternating Multilinear Map (\S\ref{sec:alternating_map})
 
 Set of all Alternating Multilinear Forms is a Vector Space
+
+Alternating Bilinear Form: $B(\vec{v},\vec{v}) = 0$ for all $\vec{v} \in V$
+
+each \emph{Alternating Bilinear Form} is Skew-symmetric
+(\S\ref{sec:skew_symmetric_bilinear})
 
 a Symplectic Form (\S\ref{sec:symplectic_form}) is a Non-degenerate Alternating
 Bilinear Form
