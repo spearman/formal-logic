@@ -206,6 +206,9 @@ A Subset, $X \subseteq M$, of a Metric Space, $M$, is a \emph{Closed
 \backslash X$, is an Open Set. Likewise, the Complement of an Open Set
 is a Closed Set.
 
+A Set is Closed if and only if it contains all its Limit Points
+(\S\ref{sec:limit_point}).
+
 Properties of Closed Sets:
 \begin{enumerate}
   \item Given Topological Space $(X, \tau)$, $\varnothing$ and $X$ are
@@ -228,6 +231,10 @@ and Closed Sets.
 
 \fist cf. a Closed Manifold (\S\ref{sec:closed_manifold}) is a Manifold that is
 Compact (\S\ref{sec:compact_space}) and \emph{without} a Boundary
+
+\fist \emph{Hyperconnected Space} (\S\ref{sec:hyperconnected_space}) is a
+Topological Space that cannot be written as the Union of two Proper Closed Sets
+(either Disjoint or Non-disjoint).
 
 
 
@@ -699,15 +706,6 @@ any Function from a Discrete Space to another Topological Space is Continuous
 \end{itemize}
 
 
-% --------------------------------------------------------------------
-\subsection{Closure}\label{sec:closure}
-% --------------------------------------------------------------------
-
-Kuratowski Closure
-
-Closure Operator
-
-
 
 % --------------------------------------------------------------------
 \subsection{Metrizable Space}\label{sec:metrizable_space}
@@ -935,25 +933,6 @@ Space of all Un-ordered Configuration Spaces
 $\cat{CGTop}$
 
 $\cat{CGHaus}$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Separation Axioms}\label{sec:separation_axioms}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Hausdorff Space}\label{sec:hausdorff_space}
-% --------------------------------------------------------------------
-
-or \emph{Separated Space}
-
-distinct Points have Disjoint Neighborhoods (\S\ref{sec:neighborhood})
-
-
-
-\subsubsection{Compactly Generated Hausdorff Space}
-\label{sec:compact_hausdorff}
 
 
 
@@ -1357,32 +1336,6 @@ Functions Continuous (\S\ref{sec:continuous_function})
 
 
 % --------------------------------------------------------------------
-\subsection{Interior}\label{sec:interior}
-% --------------------------------------------------------------------
-
-For a Subset, $V$, of a Topology, $\tau$, a Point $x \in V$ is in the
-\emph{Interior} of $V$, $V^{\circ}$, if there is a \emph{Neighborhood}
-(\S\ref{sec:neighborhood}) of $x$, $N \subset V$. Inductively, for
-$\{A_i\}_{i \in I} \subseteq \tau \wedge \forall i, A_i \subseteq V$:
-\[
-  V^{\circ} = \bigcup_{i \in I} A_i \subseteq \tau
-\]
-Equivalently, the Interior of $V$, $V^o$, is every Open Set within $V$
-and is itself an Open Set:
-\[
-  V^o = \bigcup_{i \in I} \{ A_i : A_i \subseteq \tau \wedge A_i
-  \subseteq V \}
-\]
-
-
-
-\subsubsection{Interior Operator}\label{sec:interior_operator}
-
-The Closure Operator is the Dual of the Interior Operator.
-
-
-
-% --------------------------------------------------------------------
 \subsection{Neighborhood}\label{sec:neighborhood}
 % --------------------------------------------------------------------
 
@@ -1427,138 +1380,18 @@ all $x \in X$.
 
 \subsubsection{Uniform Neighborhood}\label{sec:uniform_neighborhood}
 
-
-
-% --------------------------------------------------------------------
-\subsection{Sequence}\label{sec:sequence_topology}
-% --------------------------------------------------------------------
-
-A \emph{Sequence} is a Net (\S\ref{sec:net}) where the Directed Set is
-the Natural Numbers:
-\[
-  (x_n) : \mathbb{N} \rightarrow (X,\tau)
-\]
-
-Sequence (\S\ref{sec:sequence})
-
-
-
-\subsubsection{Limit}\label{sec:limit_topology}
-
-\subsubsection{Convergence}\label{sec:convergence}
-
-A Sequence $(x_n) : \mathbb{N} \rightarrow X$ \emph{Converges} in a Metric
-Space $(X,d)$, if:
-\[
-  \lim_{n \rightarrow \infty} d (x_n, x) = 0
-\]
-
-For a Topological Space, $(X,\tau)$, the Sequence $(x_n)$ Converges to
-$x$ if:
-\[
-  \forall A \in \mathcal{V}(x), \exists n \in \mathbb{N}
-  : m \geq n \Rightarrow x_m \in A
-\]
-There may possibly be more than one or infinite Limits in a general
-Topological Space.
-
-In the Trivial Topology $(X, \{\varnothing, X\})$, all Sequences
-Converge to every $x \in X$.
-
-
-
-\paragraph{Uniform Convergence}\label{sec:uniform_convergence}\hfill
-
-Convergence in the Uniform Norm Topology (\S\ref{sec:uniform_norm_topology})
+\subsubsection{Limit Point}\label{sec:limit_point}
 
 (wiki):
 
-\emph{Weierstrass Approximation Theorem}: every Continuous Function
-(\S\ref{sec:continuous_function}) defined on a Closed Interval can be Uniformly
-Approximated to arbitrary closeness by a Polynomial Function
-(\S\ref{sec:polynomial_function})
+A \emph{Limit Point} of a Set $S$ in a Topological Space $X$ is a Point $x$
+that can be ``approximated'' by Points of $S$ in the sense that every
+Neighborhood of $x$ with respect to the Topology on $X$ \emph{also} contains a
+Point of $S$ \emph{other} than $x$ itself. Note that a Limit Point of the Set
+$S$ does not have to be an Element of $S$.
 
-the Set of Nowhere-differentiable (\S\ref{sec:nowhere_differentiable})
-Real-valued Functions on the Closed Interval $[0,1]$ is Comeagre
-(\S\ref{sec:comeagre}) in the Vector Space $C([0,1]; \reals)$ of Continuous
-Real-valued Functions on $[0,1]$ with the Topology of Uniform Convergence
-
-if a Sequence of Analytic Functions Converges Uniformly in a region $S$ of the
-Complex Plane then the Limit is Analytic in $S$-- this demonstrates that the
-Complex Functions are more ``well-behaved'' than the Real Functions since the
-Uniform Limit of Analytic Functions on a Real Interval do not need to be
-Differentiable
-
-
-
-\subsubsection{Residuality}\label{sec:reside}
-
-In a Topological Space $(X, \tau)$, a Sequence is \emph{Residually}
-(or \emph{Eventually}) in an arbitrary Subset $Y \subseteq X$ if:
-\[
-  \exists m \in \mathbb{N} : n \geq m \Rightarrow x_n \in Y
-\]
-Such a Sequence \emph{Resides} in $Y$.
-
-
-
-\subsubsection{Frequentness}\label{sec:frequent}
-
-In a Topological Space $(X, \tau)$, a Sequence is \emph{Frequently}
-in an arbitrary Subset $Y \subseteq X$ if there is a Subsequence that
-is always in that Set:
-\[
-  (\exists c : \mathbb{N} \rightarrow \mathbb{N})
-  : (\forall n \in \mathbb{N}) x_{c(n)} \in Y
-\]
-
-
-
-\subsubsection{Accumulation}\label{sec:accumulation}
-
-A Point $x$ in a Topological Space $(X, \tau)$ is an
-\emph{Accumulation Point} (or \emph{Cluster Point}) of a Sequence
-$(x_n)$ if $(x_n)$ is Frequently in every Neighborhood in the
-Neighborhood Space of $x$.
-
-
-
-\subsubsection{Subsequence}\label{sec:subsequence_topology}
-
-Given a Sequence $(x_n) : \mathbb{N} \rightarrow X$, a
-\emph{Subsequence} is given by the Composition of $(x_n)$ with a
-Strictly Increasing Function on $c : \mathbb{N} \rightarrow
-\mathbb{N}$:
-\[
-  (x_n) \circ c :
-  \mathbb{N} \xrightarrow{c} \mathbb{N} \xrightarrow{(x_n)} \mathbb{N}
-\]
-
-
-
-\subsubsection{Sequentially Continuous Function}
-\label{sec:sequentially_continuous}
-
-A Function $f : X \rightarrow Y$ between Topological Spaces $(X,
-\tau)$ and $(Y, \sigma)$ is \emph{Sequentially Continuous} at a Point
-$x \in X$ if for any Sequence $(x_n)$ in $X$:
-\[
-  \lim_{n \rightarrow \infty} x_n = x
-  \Rightarrow \lim_{n \rightarrow \infty} f(x_n) = f(x)
-\]
-and Sequentially Continuous in general if Sequentially Continuous at
-every Point $x \in X$.
-
-All Continuous Functions (\S\ref{sec:continuous_function}) are
-Sequentially Continuous. If the Domain $X$ is First Countable
-(\S\ref{sec:countability_axioms}), then any Sequentially Continuous
-Function $f : X \rightarrow Y$ is also a Continuous Function.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Limit Point}\label{sec:limit_point}
-% --------------------------------------------------------------------
+A Set is Closed (\S\ref{sec:closed_set}) if and only if it contains all its
+Limit Points.
 
 Limit Point of $D \in \reals$ is $l \in D$ such that:
 \[
@@ -1571,9 +1404,59 @@ A Discrete Set has no Limit Points. %FIXME
 
 
 
+\subsubsection{Closure}\label{sec:topological_closure}
+
+\emph{Topological Closure}
+
+(wiki):
+
+The \emph{Closure} of a Subset $S$ of Points in a Topological Space is the Set
+of all Points in $S$ together with all Limit Points of $S$. Equivalently, the
+Closure of $S$ is the Union of $S$ and its Boundary (\S\ref{sec:boundary}).
+
+Kuratowski Closure
+
+Closure Operator
+
+
+
 \subsubsection{Derived Set}\label{sec:derived_set}
 
 
+
+% --------------------------------------------------------------------
+\subsection{Interior}\label{sec:interior}
+% --------------------------------------------------------------------
+
+For a Subset, $V$, of a Topology, $\tau$, a Point $x \in V$ is in the
+\emph{Interior} of $V$, $V^{\circ}$, if there is a \emph{Neighborhood}
+(\S\ref{sec:neighborhood}) of $x$, $N \subset V$. Inductively, for
+$\{A_i\}_{i \in I} \subseteq \tau \wedge \forall i, A_i \subseteq V$:
+\[
+  V^{\circ} = \bigcup_{i \in I} A_i \subseteq \tau
+\]
+Equivalently, the Interior of $V$, $V^o$, is every Open Set within $V$
+and is itself an Open Set:
+\[
+  V^o = \bigcup_{i \in I} \{ A_i : A_i \subseteq \tau \wedge A_i
+  \subseteq V \}
+\]
+
+\fist a Hyperconnected Space (\S\ref{sec:hyperconnected_space}) is a
+Topological Space such that the Interior of every Proper
+Closed Set is Empty
+
+
+
+\subsubsection{Interior Operator}\label{sec:interior_operator}
+
+The Closure Operator is the Dual of the Interior Operator.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Boundary}\label{sec:boundary}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Density}\label{sec:density}
@@ -1585,6 +1468,9 @@ minimum Cardinality of a Dense Subset
 
 Real Numbers with usual Topology have the Rational Numbers as a Countable Dense
 Subset and the Irrational Numbers as an Uncountably Dense Subset
+
+\fist a Hyperconnected Space (\S\ref{sec:hyperconnected_space}) is a
+Topological Space such that every (Nonempty) Open Set is Dense in $X$
 
 
 
@@ -1733,6 +1619,131 @@ Dual to Product Topology (\S\ref{sec:product_topology})
 
 
 % --------------------------------------------------------------------
+\subsection{Sequence}\label{sec:sequence_topology}
+% --------------------------------------------------------------------
+
+A \emph{Sequence} is a Net (\S\ref{sec:net}) where the Directed Set is
+the Natural Numbers:
+\[
+  (x_n) : \mathbb{N} \rightarrow (X,\tau)
+\]
+
+cf. Sequences (\S\ref{sec:sequence})
+
+
+
+\subsubsection{Convergence}\label{sec:convergence}
+
+A Sequence $(x_n) : \mathbb{N} \rightarrow X$ \emph{Converges} in a Metric
+Space $(X,d)$, if:
+\[
+  \lim_{n \rightarrow \infty} d (x_n, x) = 0
+\]
+
+For a Topological Space, $(X,\tau)$, the Sequence $(x_n)$ Converges to
+$x$ if:
+\[
+  \forall A \in \mathcal{V}(x), \exists n \in \mathbb{N}
+  : m \geq n \Rightarrow x_m \in A
+\]
+There may possibly be more than one or infinite Limits in a general
+Topological Space.
+
+In the Trivial Topology $(X, \{\varnothing, X\})$, all Sequences
+Converge to every $x \in X$.
+
+
+
+\paragraph{Uniform Convergence}\label{sec:uniform_convergence}\hfill
+
+Convergence in the Uniform Norm Topology (\S\ref{sec:uniform_norm_topology})
+
+(wiki):
+
+\emph{Weierstrass Approximation Theorem}: every Continuous Function
+(\S\ref{sec:continuous_function}) defined on a Closed Interval can be Uniformly
+Approximated to arbitrary closeness by a Polynomial Function
+(\S\ref{sec:polynomial_function})
+
+the Set of Nowhere-differentiable (\S\ref{sec:nowhere_differentiable})
+Real-valued Functions on the Closed Interval $[0,1]$ is Comeagre
+(\S\ref{sec:comeagre}) in the Vector Space $C([0,1]; \reals)$ of Continuous
+Real-valued Functions on $[0,1]$ with the Topology of Uniform Convergence
+
+if a Sequence of Analytic Functions Converges Uniformly in a region $S$ of the
+Complex Plane then the Limit is Analytic in $S$-- this demonstrates that the
+Complex Functions are more ``well-behaved'' than the Real Functions since the
+Uniform Limit of Analytic Functions on a Real Interval do not need to be
+Differentiable
+
+
+
+\subsubsection{Residuality}\label{sec:reside}
+
+In a Topological Space $(X, \tau)$, a Sequence is \emph{Residually}
+(or \emph{Eventually}) in an arbitrary Subset $Y \subseteq X$ if:
+\[
+  \exists m \in \mathbb{N} : n \geq m \Rightarrow x_n \in Y
+\]
+Such a Sequence \emph{Resides} in $Y$.
+
+
+
+\subsubsection{Frequentness}\label{sec:frequent}
+
+In a Topological Space $(X, \tau)$, a Sequence is \emph{Frequently}
+in an arbitrary Subset $Y \subseteq X$ if there is a Subsequence that
+is always in that Set:
+\[
+  (\exists c : \mathbb{N} \rightarrow \mathbb{N})
+  : (\forall n \in \mathbb{N}) x_{c(n)} \in Y
+\]
+
+
+
+\subsubsection{Accumulation}\label{sec:accumulation}
+
+A Point $x$ in a Topological Space $(X, \tau)$ is an
+\emph{Accumulation Point} (or \emph{Cluster Point}) of a Sequence
+$(x_n)$ if $(x_n)$ is Frequently in every Neighborhood in the
+Neighborhood Space of $x$.
+
+
+
+\subsubsection{Subsequence}\label{sec:subsequence_topology}
+
+Given a Sequence $(x_n) : \mathbb{N} \rightarrow X$, a
+\emph{Subsequence} is given by the Composition of $(x_n)$ with a
+Strictly Increasing Function on $c : \mathbb{N} \rightarrow
+\mathbb{N}$:
+\[
+  (x_n) \circ c :
+  \mathbb{N} \xrightarrow{c} \mathbb{N} \xrightarrow{(x_n)} \mathbb{N}
+\]
+
+
+
+\subsubsection{Sequentially Continuous Function}
+\label{sec:sequentially_continuous}
+
+A Function $f : X \rightarrow Y$ between Topological Spaces $(X,
+\tau)$ and $(Y, \sigma)$ is \emph{Sequentially Continuous} at a Point
+$x \in X$ if for any Sequence $(x_n)$ in $X$:
+\[
+  \lim_{n \rightarrow \infty} x_n = x
+  \Rightarrow \lim_{n \rightarrow \infty} f(x_n) = f(x)
+\]
+and Sequentially Continuous in general if Sequentially Continuous at
+every Point $x \in X$.
+
+All Continuous Functions (\S\ref{sec:continuous_function}) are
+Sequentially Continuous. If the Domain $X$ is First Countable
+(\S\ref{sec:countability_axioms}), then any Sequentially Continuous
+Function $f : X \rightarrow Y$ is also a Continuous Function.
+
+
+
+% --------------------------------------------------------------------
 \subsection{Net}\label{sec:net}
 % --------------------------------------------------------------------
 
@@ -1765,6 +1776,24 @@ Natural Numbers $\mathbb{N}$.
 A Net $(x_\alpha)$ \emph{Converges} to a Point $x$ if for any
 Neighborhood $U \in \mathcal{V}(x)$ in the Neighborhood System of $x$,
 $(x_\alpha)$ is Eventually in $U$.
+
+
+
+\subsubsection{Limit}\label{sec:net_limit}
+
+(wiki):
+
+For a Net $(x_\alpha)$ that is a Net from a Directed Set $A$
+
+Examples:
+
+\begin{itemize}
+  \item Sequence Limits (\S\ref{sec:sequence_limit})
+  \item Function Limits (\S\ref{sec:function_limit})
+  \item Limits of Nets of Riemann Sums in Riemann Integrals
+    (\S\ref{sec:riemann_integral})-- the Directed Set is the Set of Partitions
+    of Interval of Integration, Partially Ordered by Inclusion
+\end{itemize}
 
 
 
@@ -1987,6 +2016,36 @@ Any two Points can be joined by a Path (\S\ref{sec:path})
 
 
 % --------------------------------------------------------------------
+\subsection{Hyperconnected Space}\label{sec:hyperconnected_space}
+% --------------------------------------------------------------------
+
+(wiki):
+
+A \emph{Hyperconnected Space} (or \emph{Irreducible Space}) is a Topological
+Space that cannot be written as the Union of two Proper Closed Sets (either
+Disjoint or Non-disjoint).
+
+equivalent conditions, Satisfaction of any one of which implies that a Space
+$X$ is Hyperconnected:
+\begin{itemize}
+  \item no two (Nonempty) Open Sets are Disjoint
+  \item $X$ cannot be written as the Union of two Proper Closed Sets
+  \item every (Nonempty) Open Set is \emph{Dense} (\S\ref{sec:density}) in $X$
+  \item the Interior (\S\ref{sec:interior}) of every Proper Closed Set is Empty
+\end{itemize}
+
+
+
+\subsubsection{Irreducible Set}\label{sec:irreducible_set}
+
+(wiki):
+
+An \emph{Irreducible Set} is a Subset of a Topological Space for which the
+Subspace Topology is Irreducible (Hyperconnected).
+
+
+
+% --------------------------------------------------------------------
 \subsection{Presheaf}\label{sec:presheaf}
 % --------------------------------------------------------------------
 
@@ -2063,6 +2122,50 @@ Homeomorphic to Closed $n$-ball $D^n$ (\S\ref{sec:closed_ball})
 % ====================================================================
 \section{Kolmogorov Classification}\label{sec:kolmogorov_classification}
 % ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Separation Axioms}\label{sec:separation_axioms}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Kolmogorov Space}\label{sec:kolmogorov_space}
+% --------------------------------------------------------------------
+
+$\xspace{T}_0$
+
+
+
+\subsubsection{Sober Space}\label{sec:sober_space}
+
+A \emph{Sober Space} is a Topological Space $X$ such that every Irreducible
+Closed Subset (\S\ref{sec:irreducible_set}) of $X$ is the Topological Closure
+(\S\ref{sec:topological_closure}) of exactly one Point of $X$, i.e. every
+Irreducible Closed Subset has a unique Generic Point
+(\S\ref{sec:generic_point}).
+
+classical Stone Duality (\S\ref{sec:stone_duality}): Duality between the
+Category $\cat{Sob}$ of Sober Spaces (\S\ref{sec:sober_space}) with Continuous
+Functions and the Category $\cat{SFrm}$ of Spatial Frames (Complete Heyting
+Algebras \S\ref{sec:complete_heyting_algebra}) and Frame Homomorphisms
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hausdorff Space}\label{sec:hausdorff_space}
+% --------------------------------------------------------------------
+
+$\xspace{T}_2$
+
+or \emph{Separated Space}
+
+distinct Points have Disjoint Neighborhoods (\S\ref{sec:neighborhood})
+
+
+
+\subsubsection{Compactly Generated Hausdorff Space}
+\label{sec:compact_hausdorff}
+
+
 
 % ====================================================================
 \section{Homotopy Theory}\label{sec:homotopy_theory}
@@ -3308,9 +3411,8 @@ rise to a Natural Isomorphism between the Tangent Space
 (\S\ref{sec:tangent_space}) and the Cotangent Space
 (\S\ref{sec:cotangent_space}) at a Point
 
-\fist Fisher Information Metric (\S\ref{sec:fisher_information}) is
-the Riemannian Metric for Statistical Manifolds
-(\S\ref{sec:statistical_manifold})
+the Fisher Information Metric (\S\ref{sec:fisher_metric}) is the Riemannian
+Metric for Statistical Manifolds (\S\ref{sec:statistical_manifold})
 
 
 
@@ -4017,6 +4119,11 @@ of Complete Heyting Algebras (\S\ref{sec:complete_heyting}).
 Contravariant Functor $O : \cat{Top} \rightarrow \cat{Frm}$
 
 Adjoint $|-|_{top} : \cat{Frm} \rightarrow \cat{Top}$ %FIXME
+
+classical Stone Duality (\S\ref{sec:stone_duality}): Duality between the
+Category $\cat{Sob}$ of Sober Spaces (\S\ref{sec:sober_space}) with Continuous
+Functions and the Category $\cat{SFrm}$ of Spatial Frames (Complete Heyting
+Algebras \S\ref{sec:complete_heyting_algebra}) and Frame Homomorphisms
 
 
 
