@@ -1788,6 +1788,14 @@ Induced by Algebras over a Datatype's Structure
 
 
 
+\subparagraph{Refinement Calculus}\label{sec:refinement_calculus}\hfill
+
+Formalized approach to stepwise Refinrement for Program Construction
+
+``Correct by Construction'' (FIXME: ???)
+
+
+
 \paragraph{Predicate Subtype}\label{sec:predicate_subtype}\hfill
 
 
@@ -2442,6 +2450,16 @@ cf. Behavioral Separation Types (\S\ref{sec:behavioral_separation})
 
 \emph{Logic As a Distributive Law (LADL)} -
 \url{https://developer.rchain.coop/ladl}
+
+
+\url{https://rchain-architecture.readthedocs.io/en/latest/contracts/contract-design.html}:
+
+a Behavioral Type is a Property of an Object that \emph{binds} it to a Discrete
+range of ``\emph{Action Patterns}''
+
+Behavioral Types constrain not only the \emph{structure} of Input and Output,
+but the \emph{permitted order} of Inputs and Outputs among Communicating and
+possibly Concurrent Processes
 
 
 
@@ -9870,6 +9888,8 @@ Namespace Logic (\S\ref{sec:namespace_logic}), Spatial-behavioral Types
 
 2013 - Meredith, Stay, Drossopoulou - \emph{Policy as Types}
 
+2016 - Stay, Meredith - \emph{Logic As a Distributive Law}
+
 Namespace Logic (\S\ref{sec:namespace_logic}): a Spatial Logic with Formulae
 for Separation (cf. Separation Logic \S\ref{sec:separation_logic}),
 corresponding to the structural content of the Parallel Operator in RHO
@@ -9877,7 +9897,8 @@ Calculus, in addition to Action Modailities
 
 Deniability -- Rely/Guarantee combined with Adjunct to Spatial Separation
 
-Rholang Contracting Language:
+Rholang Contracting Language -- $\rho$-calculus + Variables + Ground Terms +
+new Name construction + Arithmetic:
 \url{https://docs.google.com/document/d/1MqU-ZA2t4HT9N20xqV7cx_Y8WpEdTeViwJugcG-p-KU/edit}
 
 RHO Combinators:
@@ -9886,6 +9907,38 @@ Meredith-Stay17 - \emph{Name-free Combinators for Concurrency} --
 Combinator Calculus with no Bound Names into which Asynchronous
 $\pi$-calculus has a Faithful Embedding with Multisorted Lawvere
 Theories Enriched over Graphs as the Operational Semantics
+
+\url{https://johncarlosbaez.wordpress.com/2018/05/12/rchain/}:
+
+unlike $\pi$-calculus, $\rho$-calculus does not presuppose an infinite
+collection of atomic names
+
+with reflection: Code $\rightleftarrow$ Data
+
+*names* are *quoted processes*
+
+"reference and dereference", "quoting and unquoting"
+
+*code mobility* -- code can be turned into data, sent as a message, and turned
+ back into code
+
+make $\pi$-calculus reflective by solving for the least fixed point of a
+recursive equation which parameterizes processes by names
+
+$P[x] = 0 | x?(x).P[x] | x!(P[x]) | (P[x]|P[x]) | @P[x] | *x$
+
+$RP = P[RP]$
+
+cf. Y combinator $Yf = f(Yf)$
+
+$\rho$-calculus is \emph{Asynchronous}: senders do not get confirmation that a
+message has been received; corresponds to Polarized Linear Logic
+(\S\ref{sec:polarized_linear_logic})
+
+convention that Names are Output and Processes are Input: each 'pi' is a
+``pattern'' or Formula to collect Terms on a Channel
+
+Categorical Semantics for $\rho$-calculus not yet found ... ??? (FIXME clarify)
 
 
 
