@@ -2207,6 +2207,8 @@ Family of approaches for modelling Concurrent Systems
 \item Communicating Sequential Processes (CSP \S\ref{sec:csp})
 \item Calculus of Communicating Systems (CSP \S\ref{sec:ccs})
 \item $\pi$-calculus (\S\ref{sec:pi_calculus})
+\item $\psi$-calculus (\S\ref{sec:psi_calculus})
+\item $\rho$-calculus (\S\ref{sec:rho_calculus})
 \item Chemical Abstract Machine (???)
 \item Petri Nets (\S\ref{sec:petri_net})
 \end{itemize}
@@ -2226,6 +2228,11 @@ differs from Process Calculi:
 \fist Behavioral Types (\S\ref{sec:behavioral_type}); Behavioral
 Theory uses Bisimulations (\S\ref{sec:bisimulation}) to describe
 Process Equivalences
+
+
+\url{https://johncarlosbaez.wordpress.com/2018/05/12/rchain/}: the definition
+of a Process Calculus must specify \emph{Structural Congruence} expressing the
+Equivalences between Processes
 
 
 Process Calculi: \emph{Bounded Non-determinism}
@@ -3007,7 +3014,16 @@ Object Paradigm ($\pi$-calculus): only Access to an Agent can be
 Transmitted and Bound (Sole Access of one Agent to another only as a
 special case)
 
-\fist Actor Calculus (\S\ref{sec:actor_calculus}) -- Crafa12
+
+\asterism
+
+
+unlike $\pi$-calculus, $\rho$-calculus (\S\ref{sec:rho_calculus}) does not
+presuppose an infinite collection of Atomic Names
+
+\fist $\psi$-calculus (\S\ref{sec:psi_calculus})
+
+\fist cf. Actor Calculus (\S\ref{sec:actor_calculus}) -- Crafa12
 
 
 \asterism
@@ -3685,13 +3701,6 @@ Ill-sorted, Well-typed % FIXME
 
 more Expressive than Synchronous $\pi$-calculus
 (\S\ref{sec:synchronous_pi_calculus})
-
-
-
-\subsubsection{$\psi$-calculus}\label{sec:psi_calculus}
-
-2009 - Bengtson, Johansson, Parrow, Victor - \emph{Psi-calculi: Mobile
-  processes, nominal data, and logic}
 
 
 
@@ -5555,6 +5564,94 @@ $Mix$, $BiCut$
 Geometry of Interaction (\S\ref{sec:interaction_geometry})
 
 Interaction Categories (\S\ref{sec:interaction_category})
+
+
+
+% --------------------------------------------------------------------
+\subsection{$\psi$-calculus}\label{sec:psi_calculus}
+% --------------------------------------------------------------------
+
+2009 - Bengtson, Johansson, Parrow, Victor - \emph{Psi-calculi: Mobile
+  processes, nominal data, and logic}
+
+example of using $\psi$-calculus as an embedded DSL in Haskell to define a
+model of the Ouroboros Praos blockchain protocol:
+\url{https://iohk.io/blog/writing-a-high-assurance-blockchain-implementation/}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Reflective Higher-order (RHO) Calculus}\label{sec:rho_calculus}
+% --------------------------------------------------------------------
+
+\emph{Reflective Higher-order (RHO) Calculus}
+
+Meredith-Radestock05 - \emph{A Reflective Higher-order Calculus}
+
+$\rho$-calculus
+
+Higher-order $\lambda$-calculus with Pattern Matching of Term
+Rewriting %FIXME
+
+Meredith-Radestock05 - \emph{Namespace Logic: A Logic for Reflective
+  Higher-order Calculus} --
+Namespace Logic (\S\ref{sec:namespace_logic}), Spatial-behavioral Types
+(\S\ref{sec:spatial_behavioral}), cf. Behavioral Separation Types
+(\S\ref{sec:behavioral_separation})
+
+2013 - Meredith, Stay, Drossopoulou - \emph{Policy as Types}
+
+2016 - Stay, Meredith - \emph{Logic As a Distributive Law}
+
+Namespace Logic (\S\ref{sec:namespace_logic}): a Spatial Logic with Formulae
+for Separation (cf. Separation Logic \S\ref{sec:separation_logic}),
+corresponding to the structural content of the Parallel Operator in RHO
+Calculus, in addition to Action Modailities
+
+Deniability -- Rely/Guarantee combined with Adjunct to Spatial Separation
+
+Rholang Contracting Language -- $\rho$-calculus + Variables + Ground Terms +
+new Name construction + Arithmetic:
+\url{https://docs.google.com/document/d/1MqU-ZA2t4HT9N20xqV7cx_Y8WpEdTeViwJugcG-p-KU/edit}
+
+RHO Combinators:
+
+Meredith-Stay17 - \emph{Name-free Combinators for Concurrency} --
+Combinator Calculus with no Bound Names into which Asynchronous
+$\pi$-calculus has a Faithful Embedding with Multisorted Lawvere
+Theories Enriched over Graphs as the Operational Semantics
+
+\url{https://johncarlosbaez.wordpress.com/2018/05/12/rchain/}:
+
+unlike $\pi$-calculus (\S\ref{sec:pi_calculus}), $\rho$-calculus does not
+presuppose an infinite collection of Atomic Names
+
+with reflection: Code $\rightleftarrow$ Data
+
+\emph{Names} are \emph{Quoted Processes}
+
+"Reference and Dereference" $\Leftrightarrow$ "Quoting and Unquoting"
+
+\emph{Code Mobility} -- Code can be turned into Data, sent as a Message, and
+turned back into Code
+
+make $\pi$-calculus \emph{Reflective} by solving for the Least Fixed Point of a
+Recursive Equation which parameterizes Processes by Names
+
+$P[x] = 0 | x?(x).P[x] | x!(P[x]) | (P[x]|P[x]) | @P[x] | *x$
+
+$RP = P[RP]$
+
+cf. Y combinator $Yf = f(Yf)$
+
+$\rho$-calculus is \emph{Asynchronous}: Senders do not get confirmation that a
+Message has been Received; corresponds to Polarized Linear Logic
+(\S\ref{sec:polarized_linear_logic})
+
+convention that Names are Output and Processes are Input: each 'pi' is a
+``pattern'' or Formula to collect Terms on a Channel
+
+Categorical Semantics for $\rho$-calculus not yet found ... ??? (FIXME clarify)
 
 
 
