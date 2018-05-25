@@ -508,6 +508,56 @@ Introduction and Elimination Rules.
 \section{Algebraic Semantics}\label{sec:algebraic_semantics}
 % ====================================================================
 
+\url{https://golem.ph.utexas.edu/category/2018/05/linear_logic_for_constructive.html}:
+
+$\vee$ and $\wedge$ can be regarded as Axioms on a Poset, with $\wedge$ as
+Binary Meet (GLB) and $\vee$ as Join (LUB) and the laws of Classical Logic
+require the Poset to be a Boolean Algebra; a Proof in Propositional Logic shows
+an Equation that must hold in all Boolean Algebras
+
+a Heyting Algebra is a Lattice that when considered as a Thin Category is
+Cartesian Closed, i.e. in addition to $\vee$ and $\wedge$, it has Implication,
+$\rightarrow$; any Boolean Algebra is a Heyting Algebra with $(P \rightarrow Q)
+\equiv (\neg{P}\vee{Q})$, but not conversely, e.g. the Open-set Lattice of a
+Topological Space is a Heyting Algebra but not generally a Boolean Algebra; a
+Proof in Intuitionistic Logic shows an Equation that must hold in all Heyting
+Algebras
+
+Intuitionistic Linear Logic with Tensor Product $\otimes$ and Internal-hom
+$\multimap$ corresponds to Closed Symmetric Monoidal Lattices instead of
+Cartesian Closed; Star-autonomous Lattice is a Closed Symmetric Monoidal
+Lattice with an Object $\bot$ (not necessarily the Bottom Element) such that $P
+\equiv (P \multimap \bot) \multimap \bot$, which also has a Cotensor Product
+with Internal-hom definable in terms of the Cotensor Product, $(P \multimap Q)
+\equiv (P^\bot \parr Q)$, with corresponding Logic as Classical Linear Logic
+having two Conjunctions $\wedge$, $\otimes$ (Additive and Multiplicative,
+resp.) and two Disjunctions $\vee$, $\parr$ (Additive and Multiplicative,
+resp.); Closed Symmetric Monoidal Lattices include all Heyting Algebras
+
+Meaning Explanation for Classical Linear Logic:
+\begin{itemize}
+  \item a Proof of $P \wedge Q$ is a Proof of $P$ together with a Proof of $Q$
+    and a Refutation of $P \wedge Q$ is either a Refutation of $P$ or a
+    Refutation of $Q$
+  \item a Proof of $P \vee Q$ is a Proof of $P$ or a Proof of $Q$ and a
+    Refuration of $P \vee Q$ is a Refutation of $P$ together with a Refutation
+    of $Q$
+  \item a Proof of $P^\bot$ is a Refutation of $P$ and a Refutation of $P^\bot$
+    is a Proof of $P$
+  \item a Proof of $P \otimes Q$ is a Proof of $P$ together with a Proof of $Q$
+    and a Refutation of $P \otimes Q$ is a Construction of a Refutation of $Q$
+    from any Proof of $P$ and a Construction of a Refutation of $P$ from any
+    Proof of $Q$
+  \item a Proof of $P \parr Q$ is a Construction of a Proof of $Q$ from any
+    Refutation of $P$ and a Construction of a Proof of $P$ from any Refutation
+    of $Q$, and a Refutation of $P \parr Q$ is a Refutation of $P$ together
+    with a Refutation of $Q$
+\end{itemize}
+
+(FIXME: clarify ``Construction'')
+
+
+
 % --------------------------------------------------------------------
 \subsection{Boolean Algebra}\label{sec:boolean_algebra}
 % --------------------------------------------------------------------
@@ -846,6 +896,9 @@ Interaction Category (\S\ref{sec:interaction_category})
 % --------------------------------------------------------------------
 
 \emph{Functorial Semantics of Algebraic Theories} -- (Lawvere63)
+
+Categories with specifica extra Structure as ``Theories'' with
+Structure-preserving Functors into other such Categories as ``Models''
 
 Syntactic Expressions are Morphisms in some Category $\cat{X}$ and
 Meanings are Morphisms in some other Category $\cat{Y}$ with a Functor
