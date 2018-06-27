@@ -6,20 +6,14 @@ The `latex` packages used in this document should be contained in the
 following synaptic packages:
 
     $ sudo aptitude update
-    $ sudo aptitude install texlive-latex-recommended texlive-fonts-recommended texlive-math-extra texlive-xetex
-
+    $ sudo aptitude install texlive-latex-recommended texlive-latex-extra \
+        texlive-fonts-recommended texlive-fonts-extra \
+        texlive-extra-utils texlive-science texlive-xetex \
+        latexmk
 
 
 ## Generating PDF
 
-With `pdflatex`:
+With `latexmk`:
 
-    $ pdflatex main.tex
-
-With `latexmk` (recommended):
-
-    $ latexmk -pdf main
-
-or use included utility script (shortcut for the above):
-
-    $ ./mk
+    $ latexmk -xelatex -pdf main
