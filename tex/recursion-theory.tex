@@ -40,6 +40,8 @@ Chaos Theory (\S\ref{sec:chaos_theory})
 
 Fractal Geometry (\S\ref{sec:fractal_geometry})
 
+Cobweb Plot; &#x261e; Dynamical Systems (\S\ref{sec:dynamical_systems})
+
 
 
 \subsubsection{Functional Power}\label{sec:functional_power}
@@ -2987,6 +2989,13 @@ Recursion with a Session
 
 ``Name Passing (\S\ref{sec:name_passing}) Calculus''
 
+Milner93 - \emph{The Polyadic $\pi$-calculus: A tutorial}:
+
+``The $\pi$-calculus is a Model of Concurrent Computation based on the notion of
+\emph{Naming}''
+
+\fist Namespace Logic (\S\ref{sec:namespace_logic})
+
 Labelled Transition Semantics $P \xrightarrow{\alpha} P'$
 
 Non-deterministic Choice Operator $P + Q$
@@ -3669,15 +3678,329 @@ Polyadic Input
 
 Polyadic Output
 
+Milner93 - \emph{The Polyadic $\pi$-calculus: A tutorial}
+
+$\pi$-calculus generalized from original \emph{Monadic} form to a
+\emph{Polyadic} form
+
+Semantics given both as a Reduction (Rewrite) System
+(\S\ref{sec:abstract_rewrite}) and a version of Labelled Transitions
+(\S\ref{sec:labelled_transition}) called \emph{Commitment}
+
+Algebraic Axiomatization (\S\ref{sec:axiomatic_system}) of
+\emph{Strong Bisimilarity}
+
+characterization in Modal Logic
+
+Replication Theorems
+
+Polyadic form supports concepts of \emph{Sort} and \emph{Sorting}
+
+illustrations of different Sortings:
+\begin{itemize}
+  \item presentation of Data Structures as Processes which respect a particular
+    Sorting
+  \item Sorting for a known translation of $\lambda$-calculus into
+    $\pi$-calculus-- equational validity of $\beta$-conversion is proved with
+    help of Replication Theorems
+\end{itemize}
+
+extension of $\pi$-calculus to $\omega$-order Processes (FIXME: ???)
+
+\emph{Denotational Models of Computation}: Set-theoretic notion of Function as
+abstract content of a Deterministic Sequential Process by which a Result is
+Computed from Arguments; $\lambda$-calculus; no direct representation of a
+``Heterarchical Family of \emph{Agents}''
+
+\emph{Concurrent Models of Computation}: pervasive notion of \emph{Naming},
+which strongly presupposes \emph{Independence} with \emph{Namer} and
+\emph{Named} as co-existing (Concurrent) entities, and the act of \emph{using} a
+Name (or \emph{Address}) to locate and modifying \emph{Data} then corresponds to
+\emph{Communication}, leading to a view of Data as a special kind of Process;
+``Functional'' Computation as a special case
+
+Object-oriented Programming commonly assumes that naming of \emph{Channels} but
+not Agents should be primitive in $\pi$-calculus
+
+Logic as a distillation of a kind of Computational ``experience'', namely
+\emph{Inference}; an example Logical intuition for Concurrency comes from
+\emph{Resource use} in Linear Logic (\S\ref{sec:linear_logic}); understanding of
+Computation via Naming is as much a ``Logical activity'' as is the use of Modal
+Logics in Computer Science
 
 
-\subsubsection{Higher-order $\pi$-calculus}
-\label{sec:higherorder_pi_calculus}
+\textbf{Monadic $\pi$-calculus}
+
+$x,y,\ldots \in X$ -- \emph{Names} having no ``structure'', which \emph{Refer}
+to a \emph{Link} (Channel)
+
+$P,Q,\ldots \in P$ -- \emph{Processes} with Syntax:
+\[
+  P ::= \sum_{i\in{I}}\pi_i.P_i \|\ P|Q \|\ !P \|\ (\nu{x})P
+\]
+where $I$ is a Finite Indexing Set and when $I = \varnothing$, then the Sum Term
+is written $\mathbf{0}$ and in a Summand $\pi.P$ the \emph{Prefix} $\pi$
+represents an Atomic Action-- the first Action performed by $\pi.P$
+
+$P|Q$ -- Processes $P$ and $Q$ are \emph{Concurrently} ``active'' so they can
+act independently and also \emph{Communicate}
+
+$!P$ -- \emph{Replication}: $P|P|\cdots$; e.g. $!\pi.P$ is a \emph{Resource}
+which can only be Replicated when a Requester Communicates via $\pi$
+
+$(\nu{x})P$ -- \emph{Restriction}: ``New $x$ in $P$''; \emph{Restricts} the Name
+of $x$ to $P$, i.e. \emph{Declares} a new unique Name $x$, distinct from all
+``external Names'' (FIXME: clarify), for use in $P$
+
+$\pi$ Prefix forms with Action \emph{Subject} $x$ and Action \emph{Object} $y$:
+\begin{itemize}
+  \item $x(y)$ -- Binds $y$ in the Prefixed Process; \emph{Input} some Name $y$
+    along the Link Named $x$
+  \item $\bar{x}y$ -- does not Bind $y$ in the Prefixed Process; \emph{Output}
+    the Name $y$ along the Link Named $x$
+\end{itemize}
+where $\bar{x}$ is the \emph{Co-name} of $x$ and the Subject is \emph{Positive}
+for Input and \emph{Negative} for Output
+
+justification for Names referring to \emph{Channels}, not Processes:
+\begin{itemize}
+  \item a Process \emph{may} be Referred to by \emph{many Names}, e.g. may
+    satisfy different ``demands'' along different Channels for many ``Clients''
+  \item a Name \emph{may} access \emph{many Processes}, e.g. a request may be
+    broadcast such that any Agent able to handle it may do so
+\end{itemize}
+
+as a convention, the Name $x$ may be ``borne'' uniquely by a certain Process, in
+the sense that only that Process will use the Name $x$ as a Positive (Input)
+Subject and those addressing the Process will use the Co-name $\bar{x}$ as a
+Negative (Output) Subject
+
+$M,N,\ldots \in \mathcal{N}$ -- \emph{Normal Processes}; the Summation form
+$\Sigma\pi_i.P_i$ represents a Process able to take part in one of several
+\emph{alternatives} for \emph{Communication}, with the choice not being made by
+the Process itself; Syntax:
+\[
+  N ::= \pi.P \|\ \mathbf{0} \|\ M + N
+\]
+
+$x(y)$ and $(\nu{x})$ are the two \emph{Binding Operators} of the
+$\pi$-calculus:
+\begin{itemize}
+  \item $x(y)$ -- Binds $y$ ``somewhat'' in the way that $\lambda{y}$ Binds $y$
+    in $\lambda$-calculus
+  \item $(\nu{x})$ -- Restriction Operator of CCS (\S\ref{sec:ccs}); no exact
+    correlate in other Calculi
+\end{itemize}
+
+\emph{Structural Congruence}, \emph{Reduction Rules}
+
+\emph{Mobile Systems}; ``Process Communities''
+
+\emph{Unique Naming} discipline
+
+dual property of \emph{Unique Handles}: at any one time, only one ``component''
+can Handle ($P$ can Handle the name $x$ if $x$ occurs Free in $P$ as a Negative
+Subject) a given Resource
+
+
+\textbf{Polyadic $\pi$-calculus}
+
+both Polyadic Input $x(y_1\cdots{y_n})$ and Polyadic Output
+$\bar{x}y_1\cdots{y_n}$ can be encoded in Monadic $\pi$-calculus, but they are
+useful for \emph{Abstraction} and \emph{Sorts}
+
+\emph{Abstraction} of Names from a Process -- $(\lambda{x_1\cdots{x_n}})P$;
+differs from Abstraction in $\lambda$-calculus in that a Bound Name will only
+ever be instantiated to a Name, never to a Compound Term
+
+\emph{Chaining Combinator} $\frown$ defined over Binary Abstractions:
+\[
+  F \frown G \defeq (\lambda{xy})(\nu{z})(Fxz | Gzy)
+\]
+
+Abstraction in $\pi$-calculus has only \emph{Definitional} significance, not
+\emph{Computational} significance as in $\lambda$-calculus
+
+Input Prefix may be redefined in terms of Abstraction and \emph{Location}:
+\[
+  x(y).P \defeq x.(\lambda{y}) P
+\]
+where $x$ is the Location of $(\lambda{y})P$ indicating \emph{where} the Name
+which $y$ represents should be Received
+
+Polyadic Input:
+\[
+  x(y_1\cdots{y_n}).P \defeq x.(\lambda{y_1\cdots{y_n}}) P
+\]
+
+Output dual to Input:
+\[
+  \bar{x}y_1\cdots{y_n}.P \defeq \bar{x}.[y_1\cdots{y_n}]P
+\]
+where $\bar{x}$ is the \emph{Co-location} and $[y_1\cdots{y_n}]P$ the
+\emph{Concretion} where each $y_i$ is termed the ``\emph{Datum-name''} of the
+Concretion
+
+any Process $P$ can be an Abstraction or a Concretion with Zero Arity
+
+generalization of $COMM$ to the Polyadic Case (ignoring $+$):
+\[
+  x.F \|\ \bar{x}.C \rightarrow F \bullet C
+\]
+where $F$ and $C$ are an Abstraction and a Concretion of equal Arity, and
+$\bullet$ is ``Pseudo-application'':
+\[
+  F \bullet C \defeq (\nu\vec{z})(P\{\frac{\vec{y}}{\vec{x}}\} \|\ Q)
+\]
+
+\emph{Syntax}, \emph{Structural Congruence}, \emph{Reduction System} ...
+
+Strong Reduction Equivalence $\dot{\sim}_r$
+
+Barbed Bisimulation
+
+Strong Reduction Congruence $\sim_r$
+
+Weak Reduction Equivalence $\dot{\approx}_r$
+
+Weak Reduction Congruence $\approx_r$
+
+
+\emph{Commitment} -- an Atomic Normal Process (FIXME: clarify) $\alpha.A$ can be
+regarded as an \emph{Action} (rather, Location of an Action) $\alpha$ and a
+\emph{Continuation} $A$, called a \emph{Commitment}, that is a Process
+\emph{Committed} to ``Act at'' $\alpha$
+
+Semantically, a Process in general is just a \emph{Set of Commitments}, i.e.
+every Process is Semantically Congruent with a Normal Process
+$\Sigma\alpha_i.A_i$ (the term ``Set'' being justified by $M+M$ being Congruent
+with $M$), formalized in the \emph{Commitment Relation} between Processes and
+Commitments:
+\[
+  P \succ \alpha.A
+\]
+``$P$ can Commit to $\alpha.A$''
+
+cf. Labelled Transition System of Milner,Parrow,Walker89 - \emph{A calculus of
+  mobile processes}; $P \xrightarrow{\bar{x}y} P'$ would be written here as:
+\[
+  P \succ \bar{x}.[y]P'
+\]
+and $P \xrightarrow{x(y)} P'$ as:
+\[
+  P \succ x.(\lambda{y})P'
+\]
+
+Unobservable Action $\tau$
+
+$\alpha, \beta, \cdots$ may stand for $\tau$ as well as for a Name or Co-name
+
+\emph{Axiomatization}
+
+Replication Properties:
+
+$!P|!P \sim !P$
+
+... MORE
+
+\emph{Logical Characterization}
+
+Modal Logic (\S\ref{sec:modal_logic})
+
+Milner-Parrow-Walker91 -- based on Modalities (esp. Input Modality)
+
+Logical constructions for Abstraction and Concretion are Dependent Product and
+Dependent Sum
+
+Action Modality
+
+Syntax:
+\[
+\varphi ::= \top \|\ \varphi \wedge \psi \|\ \neg\varphi \|\ x=y \|\
+  \langle{\alpha}\rangle\varphi \|\ (\Sigma{x})\varphi \|\ (\Pi{x})\varphi
+\]
+where $\alpha$ ranges over Names, Co-names and $\tau$, $\Sigma$ and
+$\Pi$ Bind $x$ and are only Satisfied by Concretions and Abstractions, resp.,
+and $\langle{\alpha}\rangle\varphi$ is only Satisfied by Processes
+
+$\vDash$ -- \emph{Satisfaction Relation} between Agents and Formulae
+
+
+\textbf{Sorts}
+
+``Name-Use'' discipline
+
+$\mathcal{S}$ -- \emph{Subject Sorts}; for each $S \in \mathcal{S}$ there is an
+Infinity of Names with Subject Sort $S$, written $x : S$
+
+$Ob(\mathcal{S})$ -- \emph{Object Sorts}; Sequences $(S_1\cdots{S_n})$ over
+$\mathcal{S}$:
+\[
+  Ob(\mathcal{S}) = S^*
+\]
+
+a \emph{Sorting} is a Non-empty Partial Function:
+\[
+  ob : \mathcal{S} \rightarrow Ob(\mathcal{S})
+\]
+describing for any Name $x : S$ the Sort of Name-vector which it can carry
+
+
+\emph{Data Structures}
+
+Closed Expressions are \emph{Values}
+
+
+\emph{Persistent Values}
+
+\emph{Higher-order $\pi$-calculus} (\S\ref{sec:higherorder_pi_calculus})
+
+Communication in pure CCS carries no Data, corresponding to the Sorting
+$\{NAME \mapsto()\}$ in $\pi$-calculus; makes it difficult to represent Mobility
+among Processes
+
+$\pi$-calculus allows Names to flow in Communication, achieving Mobility in a
+concrete way
+
+another approach is to allow Processes themselves to flow in Communications: $P$
+may Send to Processes $Q$ a Message which consists of a third Process $R$
+
+CHOCS (Thomsen90) -- Processes as Data
+
+$\pi$-calculus: using Names as Data can give the effect of Processes as Data by
+instead of passing a Process $R$, passing a Name which gives access to $R$
+
+\emph{Process Abstraction}
+
+\emph{Parameterized Processes}, i.e. Abstractions, as Data
+
+$\omega$-order $\pi$-calculus -- allowing Parameters to be Abstractions
+
+Abstraction Variables
+
+Higher-order Sorts
+
+\emph{Data Sorts} $Dat(\mathcal{S})$:
+\[
+  Dat(\mathcal{S}) \defeq \mathcal{S} \cup Ob(\mathcal{S})
+\]
+and by Mutual Recursion:
+\[
+  Ob(\mathcal{S}) \defeq Dat(S)^*
+\]
+
+
+
+\subsubsection{Higher-order $\pi$-calculus}\label{sec:higherorder_pi_calculus}
 
 Processes may be sent through Channels
 
 same Expressiveness as Synchronous $\pi$-calculus
 (\S\ref{sec:synchronous_pi_calculus})
+
+Thomsen90 - CHOCS
+
+Milner91 \S 7 (pp. 41)
 
 Meredith-Stay17 - \emph{Name-free Combinators for Concurrency} --
 Combinator Calculus with no Bound Names into which Asynchronous
@@ -5669,6 +5992,9 @@ Effect Theory (\S\ref{sec:effect_theory}): Sum of Theories for
 Nondeterminism and Explicit Nondeterminism \cite{plotkin-pretnar13}
 
 \fist Algebra of Behavioral Types (\S\ref{sec:abt})
+
+\emph{Restriction Operator} \fist cf. Restriction Operator in $\pi$-calculus
+(\S\ref{sec:pi_calculus})
 
 
 
