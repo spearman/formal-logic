@@ -55,6 +55,19 @@ Domain Converges to the Function in some Neighborhood
 
 Recursive Definition (\S\ref{sec:recursive_definition})
 
+``Polynomial Mapping''
+
+\begin{itemize}
+  \item Dyadic Transformation (Bit-shift Map) -- TODO
+  \item Tent Map -- TODO
+\end{itemize}
+
+Non-linear Difference Equations (\S\ref{sec:difference_equation}):
+\begin{itemize}
+  \item Logistic Map (\S\ref{sec:logistic_map}):\[
+    x_{n+1} = rx_n(1-x_n)
+  \]
+\end{itemize}
 
 
 % --------------------------------------------------------------------
@@ -64,12 +77,19 @@ Recursive Definition (\S\ref{sec:recursive_definition})
 \fist cf. Differential Equation (\S\ref{sec:differential_equation})
 
 \begin{itemize}
-  \item Evolution Equation of a Discrete Dynamical System
+  \item Evolution Equation of a Discrete-time Dynamical System
     (\S\ref{sec:discrete_dynamical_system}) is a First-order Difference Equation
     $y_{n+1} = F(y_n)$ -- given an Initial State $y_0$, successive applications
     of the Unknown Function $F$ will generate the Sequence of States $y_n$
     determining the evolution of the System; a \emph{Fixed Point} of such a
     System is a $y0$ such that $F(y0) = y0$
+\end{itemize}
+
+Non-linear:
+\begin{itemize}
+  \item Logistic Map (\S\ref{sec:logistic_map}):\[
+    x_{n+1} = rx_n(1-x_n)
+  \]
 \end{itemize}
 
 
@@ -105,6 +125,41 @@ Time, using Matrices
 % --------------------------------------------------------------------
 \subsection{Logistic Map}\label{sec:logistic_map}
 % --------------------------------------------------------------------
+
+2nd-degree Polynomial Mapping (Recurrence Relation
+\S\ref{sec:recurrence_relation}):
+\[
+  x_{n+1} = rx_n(1-x_n)
+\]
+where $x_n \in (0.0, 1.0)$ represents the Ratio of existing Population to the
+Maximum possible Population and $r$ is in the Interval $[0,4]$:
+\begin{itemize}
+  \item $r$ between 0 and 1 -- the Population will eventually die independent of
+    the Initial Population
+  \item $r$ between 1 and 2 -- the Population will approach the value
+    $\frac{r-1}{r}$, independent of the initial Population
+  \item $r$ between 2 and 3 -- the Population will approach $\frac{r-1}{r}$ but
+    will fluctuate around that value for some time
+  \item $r$ between 3 and $1 + \sqrt{6} \approx 3.44949$ from ``almost all''
+    Initial Conditions will approach permanent oscillations between two values
+    dependent on $r$
+  \item ... MORE
+  \item $r \approx 3.56995$ -- onset of Chaos
+  \item ... MORE
+  \item beyond $r=4$ almost all values wil eventually diverge
+\end{itemize}
+
+Non-linear Difference Equation capturing effects of \emph{Reproduction} and
+\emph{Starvation} in Populations
+
+\fist cf. Logistic Function (Sigmoid Curve \S\ref{sec:logistic_function}) --
+\emph{Continuous} version of Logistic Map: Solution to the First-order
+Non-linear Ordinary Differential Equation:
+\[
+  \frac{d}{dx}f(x) = f(x)(1 - f(x))
+\]
+with Boundary Condition (\S\ref{sec:boundary_value_problem}) $f(0) =
+\frac{1}{2}$
 
 
 
@@ -144,6 +199,16 @@ if and only if all Subsequences of $a_n$ Converge to $l$.
 % --------------------------------------------------------------------
 \subsection{Tuple}\label{sec:tuple}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Periodic Sequence}\label{sec:periodic_sequence}
+% --------------------------------------------------------------------
+
+or \emph{Cycle}
+
+\fist cf. Periodic Function (\S\ref{sec:periodic_function})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Limit}\label{sec:sequence_limit}
@@ -219,6 +284,21 @@ Limit is Analytic in $S$-- this demonstrates that the Complex Functions are
 more ``well-behaved'' than the Real Functions since the Uniform Limit of
 Analytic Functions on a Real Interval do not need to be Differentiable
 (\S\ref{sec:nowhere_differentiable})
+
+\fist cf. Discrete First-order Dynamical Systems
+(\S\ref{sec:discrete_dynamical_system}) can be used to Numerically Solve
+Single-variable Equations-- the problem to be Solved consisting of finding the
+Roots of a Real Function $f$, i.e. the values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved Analytically, the Numerical Method involves
+defining a Dynamical System with Convergent Sequences which approach Solutions
+to the Equation:
+\begin{itemize}
+  \item Iterative Methods (\S\ref{sec:iterative_method})
+  \item Newton's Method (\S\ref{sec:newtons_method})
+\end{itemize}
 
 
 
@@ -877,9 +957,26 @@ $f(a) < c < f(b)$, there is a $d \in (a,b)$ such that $f(d) = c$.
 \subsection{Logistic Function}\label{sec:logistic_function}
 % --------------------------------------------------------------------
 
-%FIXME: move section ?
+%FIXME: move this section
 
-\fist generalization: Softmax Function (\S\ref{sec:softmax})
+Sigmoid Curve:
+\[
+  f(x) = \frac{L}{1 + e^{-k(x-x_0)}}
+\]
+where $L$ controls the curve's Maximum and $k$ is the steepness of the curve
+
+\fist Continuous version of (Discrete) Logistic Map (\S\ref{sec:logistic_map})
+
+\emph{Logistic Differential Equation} -- the Logistic Function is the Solution
+to the First-order Non-linear Ordinary Differential Equation:
+\[
+  \frac{d}{dx}f(x) = f(x)(1 - f(x))
+\]
+with Boundary Condition (\S\ref{sec:boundary_value_problem}) $f(0) =
+\frac{1}{2}$
+
+\fist generalization: Softmax Function (\S\ref{sec:softmax}); the Logistic
+Function is the Derivative of Softplus --TODO
 
 
 
@@ -1739,6 +1836,12 @@ Exponential Models $y = Ce^{-kt}$, $y' = ky$
 Logistic Models $y = \frac{y_0 k}{n_0 + (k-n_0)e^{-rt}}$,
   $y' = ky (1 - \frac{y}{k})$
 
+\fist Stochastic Differential Equation (SDE \S\ref{sec:sde})
+
+\fist Numerical Analysis (\S\ref{sec:numerical_analysis}) applied to Solving
+Differential Equations: differential_equation}): Finite Element Method
+  (\S\ref{sec:finite_element_method}), Finite Volume Method
+  (\S\ref{sec:finite_volume_method})
 
 
 \subsubsection{Ordinary Differential Equation}\label{sec:ode}
@@ -1835,6 +1938,18 @@ an example of a System modelled by a Second-order Ordinary Differential
 Equation is a Simple Harmonic Oscillator: the Phase Space consists of a
 Velocity Dimension and a Position Dimension and the Orbit is Periodic
 
+\asterism
+
+\begin{itemize}
+  \item \emph{Logistic Differential Equation} -- the Logistic Function
+    (\S\ref{sec:logistic_function}) $f(x) = \frac{L}{1 + e^{-k(x-x_0)}}$ is the
+    Solution to the First-order Non-linear Ordinary Differential Equation:
+  \[
+    \frac{d}{dx}f(x) = f(x)(1 - f(x))
+  \]
+  with Boundary Condition (\S\ref{sec:boundary_value_problem}) $f(0) =
+  \frac{1}{2}$
+\end{itemize}
 
 
 \paragraph{Slope Field}\label{sec:slope_field}\hfill
@@ -2272,7 +2387,9 @@ Additionally, for every $x$ in the Interval $(a,b)$:
 \fist Multiple Integral (\S\ref{sec:multiple_integral}) in Multivariable
 Calculus
 
-cf. Numerical Integration (\S\ref{sec:numerical_integration})
+\fist Numerical Anslysis (\S\ref{sec:numerical_analysis}) applied to Evaluating
+Integrals -- Numerical Integration (\emph{Quadrature}
+\S\ref{sec:numerical_integration})
 
 is a Linear Operator (\S\ref{sec:linear_operator}) --FIXME: clarify
 
@@ -3280,7 +3397,12 @@ $f(x)$ is \emph{Zero}.
 
 \fist Root (Equations \S\ref{sec:equation_root})
 
-\fist Root-finding Algorithms (\S\ref{sec:root_finding})
+\fist Root-finding Algorithms (Numerical Analysis \S\ref{sec:root_finding}) for
+Solving Non-linear Equations:
+\begin{itemize}
+  \item Newton's Method (\S\ref{sec:newtons_method})
+  \item Linearization (\S\ref{sec:linearization})
+\end{itemize}
 
 Any Polynomial (\S\ref{sec:polynomial}) with Odd Degree has at least
 one Real Root.
@@ -3295,6 +3417,19 @@ their Multiplicities (??? FIXME).
 Variable with Complex Coefficients \S\ref{sec:monic_polynomial}), an Algebraic
 Object, is determined by the Set of its Roots, a Geometric Object, in the
 Complex Plane (\S\ref{sec:complex_plane}).
+
+\asterism
+
+\fist cf. Discrete First-order Dynamical Systems
+(\S\ref{sec:discrete_dynamical_system}) can be used to Numerically Solve
+Single-variable Equations-- the problem to be Solved consisting of finding the
+Roots of a Real Function $f$, i.e. the values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved Analytically, the Numerical Method involves
+defining a Dynamical System with Convergent Sequences which approach Solutions
+to the Equation
 
 
 
@@ -3904,6 +4039,8 @@ for all $x$
 
 the least positive $P$ is called the \emph{Fundamental Period}
 
+\fist Periodic Sequence (\S\ref{sec:periodic_sequence})
+
 Geometrically, a Periodic Function is a Function with a Graph exhibiting
 \emph{Translational Symmetry} (\S\ref{sec:translation});
 can be extended to Tessellations of the Plane (\S\ref{sec:tessellation})
@@ -4497,21 +4634,89 @@ can also be defined as a Measure (\S\ref{sec:measure})
 \section{Numerical Analysis}\label{sec:numerical_analysis}
 % ====================================================================
 
+\begin{itemize}
+  \item \emph{Numerical Integration} (\emph{Quadrature}
+    \S\ref{sec:numerical_integration}) -- Evaluating Integrals
+    (\S\ref{sec:integral})
+  \item Solving \emph{Differential Equations}
+    (\S\ref{sec:differential_equation}) -- Finite Element Method
+    (\S\ref{sec:finite_element_method}), Finite Volume Method
+    (\S\ref{sec:finite_volume_method})
+  \item Solving \emph{Systems of Equations} (\S\ref{sec:system_of_equations}):
+    \begin{itemize}
+      \item \emph{Direct Methods} (\S\ref{sec:direct_method}) for Solving
+        Systems of Linear Equations using Matrix Decomposition
+        (\S\ref{sec:matrix_decomposition}):
+        \begin{itemize}
+          \item Gaussian Elimination (\S\ref{sec:gaussian_elimination})
+          \item LU Decomposition (\S\ref{sec:lu_decomposition})
+          \item Cholesky Decomposition (\S\ref{cholesky_decomposition})
+          \item QR Decomposition (\S\ref{sec:qr_decomposition})
+        \end{itemize}
+      \item \emph{Iterative Methods} (\S\ref{sec:iterative_method}), preferred
+        for larger Systems:
+        \begin{itemize}
+          \item Jacobi Method (\S\ref{sec:jacobi_method})
+          \item Gauss-Seidel Method (\S\ref{sec:gauss_seidel})
+          \item Successive Over-relaxation
+            (\S\ref{sec:successive_over_relaxation})
+          \item Conjugate Gradient Method
+            (\S\ref{sec:conjugate_gradient_method})
+        \end{itemize}
+      \item \emph{Root-finding Algorithms} (\S\ref{sec:root_finding}), used to
+        Solve Non-linear Equations:
+        \begin{itemize}
+          \item Newton's Method (\S\ref{sec:newtons_method})
+          \item Linearization (\S\ref{sec:linearization})
+        \end{itemize}
+    \end{itemize}
+  \item Approximation Theory (\S\ref{sec:approximation_theory})
+  \item Singular Value Problems (TODO)
+  \item ... MORE ?
+\end{itemize}
+
+see also:
+\begin{itemize}
+  \item Numerical Linear Algebra (\S\ref{sec:numerical_linear_algebra})
+  \item Regression Analysis (\S\ref{sec:regression_analysis})
+  \item Optimization (\S\ref{sec:optimization})
+\end{itemize}
+
 (wiki):
 
-the goal of Numerical Analysis is to \emph{approximate the Continuum}
-(\S\ref{sec:real_line})
+the goal of Numerical Analysis is to \emph{Approximate the Continuum}
+(Real Line \S\ref{sec:real_line})
 
 Mimesis -- the quality of a Numerical Method that imitates some properties of
 the ``Continuum Problem''
 
 FIXME: explain
 
+\asterism
+
+\fist cf. Discrete First-order Dynamical Systems
+(\S\ref{sec:discrete_dynamical_system}) can be used to Numerically Solve
+Single-variable Equations-- the problem to be Solved consisting of finding the
+Roots of a Real Function $f$, i.e. the values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved Analytically, the Numerical Method involves
+defining a Dynamical System with Convergent Sequences which approach Solutions
+to the Equation
+
 
 
 % --------------------------------------------------------------------
 \subsection{Interval Arithmetic}\label{sec:interval_arithmetic}
 % --------------------------------------------------------------------
+
+or \emph{Interval Analysis}
+
+approach on putting \emph{Bounds} (\S\ref{sec:bounded_set}) on \emph{Rounding
+  Errors} and \emph{Measurement Errors} in Numerical Computations
+
+
 
 \subsubsection{Unit Interval}\label{sec:unit_interval}
 
@@ -4520,6 +4725,50 @@ $[0,1]$, sometimes $I$
 a Complete Metric Space (\S\ref{sec:complete_metric_space}),
 Homeomorphic (\S\ref{sec:homeomorphism}) to the Extended Real Number
 Line (\S\ref{sec:extended_real_line})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Interpolation}\label{sec:interpolation}
+% --------------------------------------------------------------------
+
+cf. Extrapolation (TODO), Regression (\S\ref{sec:regression_analysis})
+
+
+
+\subsubsection{Spline Function}\label{sec:spline}
+
+\paragraph{Spline Interpolation}\label{sec:spline_interpolation}\hfill
+
+cf. Polynomial Interpolation (???) %FIXME
+
+
+
+\paragraph{Cubic Spline}\label{sec:cubic_spline}\hfill
+
+\subparagraph{B-spline}\label{sec:b_spline}\hfill
+
+
+
+% --------------------------------------------------------------------
+\subsection{Numerical Method}\label{sec:numerical_method}
+% --------------------------------------------------------------------
+
+Attractive Fixed Points (Discrete Dynamical Systems
+\S\ref{sec:discrete_dynamical_systems}) --
+Discrete First-order Dynamical Systems can be used to Numerically Solve
+Single-variable Equations-- the problem to be Solved consisting of finding the
+Roots of a Real Function $f$, i.e. the values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved \emph{Analytically} (TODO: clarify, xref),
+the Numerical Method involves defining a Dynamical System with Convergent
+Sequences which approach Solutions to the Equation:
+\begin{itemize}
+  \item Iterative Methods (\S\ref{sec:iterative_method})
+  \item Newton's Method (\S\ref{sec:newtons_method})
+\end{itemize}
 
 
 
@@ -4764,18 +5013,228 @@ to $100$
 
 
 % --------------------------------------------------------------------
-\subsection{Spline Function}\label{sec:spline}
+\subsection{Direct Method}\label{sec:direct_method}
 % --------------------------------------------------------------------
 
-\subsubsection{Spline Interpolation}\label{sec:spline_interpolation}
+attempt to solve a problem by a \emph{Finite Sequence of Operations} delivering
+the exact Solution (in the absence of Rounding Errors)
 
-cf. Polynomial Interpolation (???) %FIXME
+cf. Iterative Methods (\S\ref{sec:iterative_method}) use an initial ``guess'' to
+generate a Sequence of imporving Approximate Solutions
+
+Solving Systems of Linear Equations (\S\ref{sec:system_of_linear_equations})
+using Matrix Decomposition (\S\ref{sec:matrix_decomposition}):
+\begin{itemize}
+  \item Gaussian Elimination (\S\ref{sec:gaussian_elimination})
+  \item LU Decomposition (\S\ref{sec:lu_decomposition})
+  \item Cholesky Decomposition (\S\ref{cholesky_decomposition})
+  \item QR Decomposition (\S\ref{sec:qr_decomposition})
+\end{itemize}
 
 
 
-\subsubsection{Cubic Spline}\label{sec:cubic_spline}
+% --------------------------------------------------------------------
+\subsection{Iterative Method}\label{sec:iterative_method}
+% --------------------------------------------------------------------
 
-\paragraph{B-spline}\label{sec:b_spline}\hfill
+cf. \emph{Direct Methods} attempt to solve a problem by a Finite Sequence of
+Operations delivering the exact Solution
+
+\fist cf. Iterative Rootfinding Methods (\S\ref{sec:iterative_rootfinding})
+
+\fist Ellipsoid Method (\S\ref{sec:ellipsoid_method}); when specialized for
+solving feasible Linear Optimization (\S\ref{sec:linear_programming}) Problems
+with Rational Data, the Ellipsoid Metohd finds an Optimal Solution in a Finite
+number of steps
+
+\fist Sequential Quadratic Programming
+(\S\ref{sec:sequential_quadratic_programming}): Iterative Method for
+Constrained Non-linear Optimization (\S\ref{sec:nonlinear_programming})
+
+
+
+\subsubsection{Gradient Descent}\label{sec:gradient_descent}
+
+\url{http://ruder.io/optimizing-gradient-descent/index.html}
+
+can be applied to Linear Regression (\S\ref{sec:linear_regression})
+
+
+
+\paragraph{Momentum Optimization}\label{sec:momentum_optmization}\hfill
+
+\url{https://fosterelli.co/executing-gradient-descent-on-the-earth}
+
+
+
+\subsubsection{Conjugate Gradient Method}\label{sec:conjugate_gradient_method}
+
+applicable to large Sparse Systems
+
+
+
+\subsubsection{Stationary Iterative Method}
+\label{sec:stationary_iterative}
+
+or \emph{Relaxation Methods}
+
+\fist not to be confused with Relaxation (Approximation \S\ref{sec:relaxation})
+
+used to solve the Linear Equations resulting from a Discretization of the
+Differential Equation, e.g. by Finite Differences
+
+
+
+\paragraph{Jacobi Method}\label{sec:jacobi_method}\hfill
+
+Diagonally Dominant (\S\ref{sec:diagonally_dominant}) System of Linear
+Equations (\S\ref{sec:system_of_linear_equations})
+
+
+
+\subparagraph{Projected Jacobi Method}
+\label{sec:projected_jacobi_method}
+
+
+
+\paragraph{Gauss-Seidel Method}\label{sec:gauss_seidel}\hfill
+
+(or \emph{Liebmann Method} or \emph{Method of Successive
+  Displacement})
+
+Iterative Method for solving a Linear System of Equations
+(\S\ref{sec:system_of_linear_equations})
+
+Convergence only guaranteed if the Matrix is either Diagonally
+Dominant (\S\ref{sec:diagonally_dominant}) or Symmetric
+(\S\ref{sec:symmetric_matrix}) and Positive Definite
+(\S\ref{sec:positive_definite})
+
+Gauss-Seidel is the same as Successive Over-Relaxation
+(\S\ref{sec:sucessive_over_relaxation}) with $\omega = 1$
+
+
+
+\subparagraph{Projected Gauss-Seidel Method}\hfill
+\label{sec:projected_gauss_seidel}
+
+Gauss-Seidel applied to Linear Complementarity Problem (LCP
+\S\ref{sec:linear_complementarity})
+
+PGS
+
+
+
+\subparagraph{Non-linear Gauss-Seidel Method}
+\label{sec:nonlinear_gauss_seidel}
+
+NGS
+
+
+
+\paragraph{Successive Over-Relaxation Method}
+\label{sec:successive_over_relaxation}\hfill
+
+SOR
+
+Gauss-Seidel (\S\ref{sec:gauss_seidel}) is the same as SOR with $\omega = 1$
+
+
+
+\subsubsection{Krylov Subspace Method}\label{sec:krylov_subspace_method}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Root-finding Algorithm}\label{sec:root_finding}
+% --------------------------------------------------------------------
+
+(wiki):
+
+generally, the Roots of a Real or Complex Continuous Function
+
+
+
+\subsubsection{Bracketing Method}\label{sec:bracketing_method}
+
+\paragraph{Bisection Method}\label{sec:bisection_method}\hfill
+
+\paragraph{False Position Method}\label{sec:false_position}\hfill
+
+
+
+\subsubsection{Iterative Rootfinding}\label{sec:iterative_rootfinding}
+
+(wiki):
+
+all Root-finding Algorithms proceed by Iteration, but an \emph{Iterative
+  Root-finding Method} uses a specific type of Iteration
+
+\fist cf. Iterative Methods (\S\ref{sec:iterative_method})
+
+\fist Systems of Nonlinear Equations
+(\S\ref{sec:system_of_nonlinear_equations})
+
+\fist cf. Nonlinear Programming (\S\ref{sec:nonlinear_programming}), Nonlinear
+Optimization (\S\ref{sec:nonlinear_optimization})
+
+
+
+\paragraph{Trust Region}\label{sec:trust_region}\hfill
+
+\paragraph{Line Search}\label{sec:line_search}\hfill
+
+\subparagraph{Backtracking Line Search}\label{sec:backtracking_line_search}
+\hfill
+
+
+
+\paragraph{Newton's Method}\label{sec:newtons_method}\hfill
+
+UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo}
+
+Minimize Second-order Taylor Polynomial
+
+Convex Objective with Equality Constraints
+
+Numerical Methods (\S\ref{sec:numerical_method})
+
+
+
+\paragraph{Secant Method}\label{sec:secant_method}\hfill
+
+\paragraph{Inverse Interpolation Method}\label{sec:inverse_interpolation}\hfill
+
+
+
+% --------------------------------------------------------------------
+\subsection{Approximation Theory}\label{sec:approximation_theory}
+% --------------------------------------------------------------------
+
+\fist cf. Regression Analysis (\S\ref{sec:regression_analysis})
+
+
+
+\subsubsection{Curve Fitting}\label{sec:curve_fitting}
+
+\fist if errors are \emph{normally distributed}, Least Squares ($2$-norm Best
+Fit \S\ref{sec:least_squares}) should be used
+
+may be solved with Linear Programming (\S\ref{sec:linear_programming}) methods
+
+
+
+\paragraph{$1$-norm Best Fit}\label{sec:1norm_best_fit}\hfill
+
+less sensitive to outliers
+
+
+
+\paragraph{Chebyshev Approximation}\label{sec:chebyshev_approximation}\hfill
+
+UC Math 352 Lec. 10 - \url{https://www.youtube.com/watch?v=XII0GSmEAgg}
+
+minimizes the worst-case deviation
 
 
 

@@ -411,9 +411,6 @@ with a distinguished \emph{Propagator} (\S\ref{sec:propagator}) called the
 
 \fist cf. Initial Value Problem (IVP \S\ref{sec:ivp})
 
-Cobweb Plot: qualitative behavior of One-dimensional Iterated Functions
-(\S\ref{sec:iterated_function}), e.g. Logistic Map
-
 A Dynamical System can be defined as a tuple $(T,M,\Phi)$ where \emph{Time
   Domain} $T$ is a Monoid (\S\ref{sec:monoid}), \emph{State Space} $M$ is a
 Non-empty Set and $\Phi$ is an \emph{Evolution Function}:
@@ -1031,13 +1028,18 @@ the Equation $\dot{t} = 1$
 
 
 % --------------------------------------------------------------------
-\subsection{Discrete-time Dynamical System}
-\label{sec:discrete_dynamical_system}
+\subsection{Discrete-time Dynamical System}\label{sec:discrete_dynamical_system}
 % --------------------------------------------------------------------
 
 \emph{Discrete-time Dynamical System} (or \emph{Sampled System}), \emph{Map}
 
 \fist Linear Shift-invariant Systems (\S\ref{sec:lsi_system})
+
+Difference Equations (\S\ref{sec:difference_equation}):
+\begin{itemize}
+  \item Logistic Map (\S\ref{sec:logistic_map}) -- Non-linear
+  \item Tent Map (TODO)
+\end{itemize}
 
 Villate06, Ch.2
 
@@ -1063,6 +1065,78 @@ Sequence of States $y_n$ determining the evolution of the System:
 \]
 
 a \emph{Fixed Point} of the System is a $y_0$ such that $F(y_0) = y_0$
+
+\emph{Cobweb Plot} (or \emph{Staircase Diagram}): qualitative behavior of
+One-dimensional Iterated Functions (\S\ref{sec:iterated_function}), e.g.
+Logistic Map; values of $F(y)$ that are Strictly Less-than (\emph{below}) the
+Line defined by $G(y) = y$ move the System in the \emph{Negative} (Left)
+direction, and values of $F(y)$ that are Strictly Greater-than (\emph{above})
+the Line $G(y) = y$ move the System in the \emph{Positive} (Right) direction;
+values of $y$ where $F(y) = G(y)$ (the Intersection Points of the Iterated
+Function and the Line $G(y) = y$) are \emph{Fixed Points} of the System
+
+\emph{Repulsive Node} -- derivative $F'(y_0) > 1$; the curve $F$ crosses under
+the Line $y=x$ from the left to over the Line on the right
+
+\emph{Repulsive Focus} -- $F'(y_0) < -1$; sequence will move
+away but alternate sides
+
+\emph{Attractive Node} -- $0 \leq F'(y_0) < 1$
+
+\emph{Attractive Focus} -- $-1 < F'(y_0) < 0$
+
+for $F'$ equal to $1$ or $-1$, a Fixed Point could either be Attractive or
+Repulsive or Attractive from one side and Repulsive from the other
+
+for the Sequence $\{ y_0, y_1, y_2, \ldots \}$ of the Solution of a Dynamical
+System $y_{n+1} = F(y_n)$, any Element of the Sequence can be obtained form
+$y_0$ by applying the Composed Function $F^n$:
+\[
+  y_n = F^n(y_0) = F(F(\cdots(F(y_0))))
+\]
+the Points of a Solution Sequence containing a \emph{Cycle}
+(\S\ref{sec:periodic_sequence}) are called \emph{Periodic Points}, and the
+number of Periodic Points is called the \emph{Period} of the Cycle and for
+a Cycle of Period $n$:
+\[
+  F^n(y) = y
+\]
+i.e. the Periodic Points are Fixed Points of the Composed Function $F^n$ where
+$n$ is the Period of the Cycle (but none of them are Fixed Points of the
+original Function $F$);
+the Derivative of $F^n$ as $y_0$ can be computed using the Chain Rule:
+\[
+  (F^n(y_0))' = F'(y_0)F'(y_1)\cdots{F'(y_{n-1})}
+\]
+(FIXME: does this only work for $n$ of an $n$-period cycle ???)
+
+for a Cycle of Period $m$, all Points $F^j(y_0)$ with $j < m$ are not Fixed
+Points of $F^j$
+
+for the Absolute Value of the Product of the Derivative at the $m$ Points of the
+Cycle:
+\[
+  \prod_{j=0}^{m-1} F'(y_j)
+\]
+greater than $1$ then the Cycle is \emph{Repulsive}, less than $1$ the Cycle is
+\emph{Attractive} and if identical to $1$ the Cycle could be either Attractive
+or Repulsive in different regions
+(FIXME: is this product equal to the derivative $F^m(y_0)'$ ???)
+
+Discrete First-order Dynamical Systems can be used to Numerically
+(\S\ref{sec:numerical_method}) Solve Single-variable Equations-- the problem to
+be Solved consisting of finding the Roots of a Real Function $f$, i.e. the
+values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved Analytically, the Numerical Method involves
+defining a Dynamical System with Convergent Sequences which approach Solutions
+to the Equation:
+\begin{itemize}
+  \item Iterative Methods (\S\ref{sec:iterative_method})
+  \item Newton's Method (\S\ref{sec:newtons_method})
+\end{itemize}
 
 
 
@@ -2771,6 +2845,18 @@ Fermi-Pasta-Ulam-Tsingou Problem
 \subsection{Normal Number}\label{sec:normal_number}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\subsection{Mixing}\label{sec:mixing}
+% --------------------------------------------------------------------
+
+\emph{Strong Mixing}
+
+\emph{Weak Mixing}
+
+
+
+\subsubsection{Topological Mixing}\label{sec:topological_mixing}
+
 
 
 % ====================================================================
@@ -2806,6 +2892,13 @@ Complex Systems (\S\ref{sec:complex_system})
 Network Theory (\S\ref{sec:network_theory})
 
 Non-linear Deterministic Systems must 3rd-order to exhibit Chaos (Lorenz)
+
+(wiki): Chaos as a Spontaneous Breakdown of Topological Supersymmetry (FIXME:
+explain) which is an intrinsic property of \emph{Evolution Operators} of all
+Stochastic and Deterministic (Partial) Differential Equations (\S\ref{sec:sde});
+the long-range Dynamical Behavior associated with \emph{Chaotic Dynamics} is a
+consequence of Goldstone's Theorem (\S\ref{sec:goldstones_theorem}) in the
+application of Spontaneous Topological Supersymmetry Breaking
 
 
 
