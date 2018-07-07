@@ -74,7 +74,9 @@ Non-linear Difference Equations (\S\ref{sec:difference_equation}):
 \subsection{Difference Equation}\label{sec:difference_equation}
 % --------------------------------------------------------------------
 
-\fist cf. Differential Equation (\S\ref{sec:differential_equation})
+\fist Time-scale Calculus (\S\ref{sec:timescale_calculus}): unification of
+Theory of Difference Equations with that of Differential Equations
+(\S\ref{sec:differential_equation})
 
 \begin{itemize}
   \item Evolution Equation of a Discrete-time Dynamical System
@@ -239,6 +241,9 @@ b_n$ since $a_n$ and $b_n$ may still be equal in the Limit.
 For an Open Interval $(x,y)$, $\lim a_n \in (x,y)$ Implies $a_n \in
 (x,y)$ for all $n$, but for not for a Closed Interval.
 
+\url{https://math.stackexchange.com/questions/1490438/what-is-meant-by-limit-of-setshttps://math.stackexchange.com/questions/1490438/what-is-meant-by-limit-of-sets}
+-- on what is meant by the ``Limit of Sets''
+
 
 
 \subsubsection{Limit Inferior}\label{sec:liminf}
@@ -285,18 +290,19 @@ more ``well-behaved'' than the Real Functions since the Uniform Limit of
 Analytic Functions on a Real Interval do not need to be Differentiable
 (\S\ref{sec:nowhere_differentiable})
 
-\fist cf. Discrete First-order Dynamical Systems
-(\S\ref{sec:discrete_dynamical_system}) can be used to Numerically Solve
-Single-variable Equations-- the problem to be Solved consisting of finding the
-Roots of a Real Function $f$, i.e. the values of $x$ such that:
+\fist cf. Rootfinding Algorithms (\S\ref{sec:rootfinding_algorithm}) -- Discrete
+First-order Dynamical Systems (\S\ref{sec:discrete_dynamical_system}) can be
+used to Numerically Solve Single-variable Equations-- the problem to be Solved
+consisting of finding the Roots of a Real Function $f$, i.e. the values of $x$
+such that:
 \[
   f(x) = 0
 \]
 For Equations that cannot be solved Analytically, the Numerical Method involves
-defining a Dynamical System with Convergent Sequences which approach Solutions
-to the Equation:
+defining a Dynamical System with \emph{Convergent Sequences} which approach
+Solutions to the Equation:
 \begin{itemize}
-  \item Iterative Methods (\S\ref{sec:iterative_method})
+  \item Iterative Rootfinding Methods (\S\ref{sec:iterative_rootfinding})
   \item Newton's Method (\S\ref{sec:newtons_method})
 \end{itemize}
 
@@ -1403,16 +1409,23 @@ Derivation of Quaternion Functions requires a Direction-dependent Derivative
 \section{Differential Calculus}\label{sec:differential_calculus}
 % ====================================================================
 
+\fist a \emph{Differential Equation} (\S\ref{sec:differential_equation})
+describes the Relation between an \emph{Unknown Function} and its
+\emph{Derivatives} (\S\ref{sec:derivative}).
+
+
+
 % --------------------------------------------------------------------
 \subsection{Differential}\label{sec:differential}
 % --------------------------------------------------------------------
 
-an Infinitesimally small quantity $dx$
+an Infinitesimally small quantity $\mathrm{d}x$
 
-cf. Derivative (\S\ref{sec:derivative}); often viewed as a \emph{Quotient} of
-Differentials: $\frac{dy}{dx}$
+\fist the Derivative (\S\ref{sec:derivative}); often viewed as a \emph{Quotient}
+of Differentials $\deriv{f}{x}$; \emph{Differentiation} is the process of
+``finding'' a Derivative (FIXME: clarify)
 
-\fist Dicrete equivalent: Finite Differences (\S\ref{sec:finite_difference})
+\fist Finite Differences (\S\ref{sec:finite_difference}) -- Discrete equivalent
 
 
 
@@ -1453,80 +1466,8 @@ such a Function exists
 
 
 % --------------------------------------------------------------------
-\subsection{Differentiable Function}\label{sec:differentiable_function}
+\subsection{Differential Operator}\label{sec:differential_operator}
 % --------------------------------------------------------------------
-
-For $f$ defined on Open Interval $(a,b) \subset \reals$, $f$ is
-Differentiable at $x \in (a,b)$ if Limit $f'(x) = \lim_{h \rightarrow
-  0} \frac{f (x+h) - f(x)}{h}$ exists.
-
-Differentiable at $a$ Implies Continuous (\S\ref{sec:continuous_function}) at
-$a$
-
-a Complex Differentiable Function is called \emph{Holomorphic}
-(\S\ref{sec:holomorphic_function})
-
-\fist Differential Equation (\S\ref{sec:differential_equation})
-
-\fist cf. Locally Linear Transformation (\S\ref{sec:locally_linear})
-
-A Polynomial (\S\ref{sec:polynomial}), being the Sum of Differentiable
-Functions, is Differentiable everywhere
-
-For $f$ Differentiable on an Interval $I$, if $\forall x \in I, f'(x)
-> 0$, $f$ is Strictly Increasing and if $\forall x \in I, f'(x) < 0$,
-$f$ is Strictly Decreasing (see Monotonic Functions
-\S\ref{sec:monotonic_function}).
-
-Differentiation is a \emph{Product-preserving Functor}
-(\S\ref{sec:product_preserving_functor})
-
-Differential $df$ as a Morphism of Tangent Bundles (\S\ref{sec:tangent_bundle})
-$df : T\reals \rightarrow T\reals$ (FIXME: explain)
-
-
-
-\subsubsection{Derivative}\label{sec:derivative}
-
-the Derivative is an Operator with Domain of the Set of all Functions that have
-Derivatives at every Point of their Domain and, and with Range of a Set of
-Functions:
-\[
-  D(f) = f'(x)
-\]
-(FIXME: clarify)
-
-\fist Differential Operator (\S\ref{sec:differential_operator}): an Operator
-defined as a Function of the Differentiation Operator
-
-\fist a \emph{Differential Equation} (\S\ref{sec:differential_equation})
-describes the Relation between an \emph{Unknown Function} and its
-\emph{Derivatives} (\S\ref{sec:derivative}).
-
-
-$(\frac{g}{f})' = \frac{f g' - f' g}{f^2}$
-
-often viewed as a Quotient of \emph{Differentials} (\S\ref{sec:differential}):
-\[
-  \frac{dy}{dx}
-\]
-
-\fist Vector Derivative (\S\ref{sec:vector_derivative})
-
-\emph{Differentiation Operator}
-
-a Differential Operator (\S\ref{sec:differential_operator}) is an Operator
-defined as a Function of the Differentiation Operator
-
-
-
-\paragraph{Product Rule}\label{sec:product_rule}\hfill
-
-\fist Integration by Parts (\S\ref{sec:integration_by_parts})
-
-
-
-\subsubsection{Differential Operator}\label{sec:differential_operator}
 
 $\nabla$
 
@@ -1558,28 +1499,54 @@ the Element $YX - XY - 1$
 
 
 
-\paragraph{Linear Differential Operator}
-\label{sec:linear_differential_operator}\hfill
+\subsubsection{Derivative}\label{sec:derivative}
 
-a \emph{Linear Differential Operator} is a Linear Combination of Basic
-Differential Operators with Differentiable Functions as Coefficients
+the process of ``finding'' (FIXME: or ``taking'' or computing ???) a Derivative
+is called \emph{Differentiation}
 
-is a Linear Transformation (\S\ref{sec:linear_transformation})
+the Derivative is an Operator with Domain of the Set of all Functions that have
+Derivatives at every Point of their Domain and with Range a Set of Functions:
+\[
+  D(f) = f'(x)
+\]
+(FIXME: clarify)
 
-Linear Differential Operators form a Vector Space over the Real or Complex
-Numbers, and also a Free Module over the Ring of Differentiable Functions
+$(\frac{g}{f})' = \frac{f g' - f' g}{f^2}$
+
+often viewed as a Quotient of \emph{Differentials} (\S\ref{sec:differential}):
+\[
+  \deriv{y}{x}
+\]
+
+\fist Partial Derivative (\S\ref{sec:partial_derivative})
+
+\fist Vector Derivative (\S\ref{sec:vector_derivative})
+
+notations:
+\begin{itemize}
+  \item \emph{Leibniz Notation} -- $\deriv{y}{x}, \deriv{^2{y}}{x^2}, \ldots$
+  \item \emph{Lagrange Notation} -- $f'(x), f''(x), \ldots$
+  \item \emph{Newton Notation} -- $\dot{y}, \ddot{y}, \ldots$
+  \item \emph{Euler Notation} -- $D_x{f}, D^2_x{f}, \ldots$
+\end{itemize}
 
 
 
-\paragraph{Theta Operator}\label{sec:theta_operator}\hfill
+\paragraph{Product Rule}\label{sec:product_rule}\hfill
 
-\paragraph{Elliptic Operator}\label{sec:elliptic_operator}\hfill
+\fist Integration by Parts (\S\ref{sec:integration_by_parts})
 
-\subparagraph{Laplace Operator}\label{sec:laplace_operator}\hfill
+
+
+\subsubsection{Theta Operator}\label{sec:theta_operator}
+
+\subsubsection{Elliptic Operator}\label{sec:elliptic_operator}
+
+\paragraph{Laplace Operator}\label{sec:laplace_operator}\hfill
+
+simplest Elliptic Operator
 
 $\Delta = \nabla^2$
-
-Differential Operator (\S\ref{sec:differential_operator})
 
 Discrete Laplace Operator (Graph Theory \S\ref{sec:discrete_laplace})
 
@@ -1592,31 +1559,58 @@ that which lie in the Kernel of the Laplace Operator
 
 
 
-\paragraph{Schwarzian Derivative}\label{sec:schwarzian_derivative}\hfill
+\subsubsection{Schwarzian Derivative}\label{sec:schwarzian_derivative}\hfill
 
-Non-linear Differential Operator
+Non-linear Differential Operator; invariant under all Linear Fractional
+Transformations (TODO: xref)
 
 
 
-\subsubsection{Antiderivative}\label{sec:antiderivative}
+\subsubsection{Linear Differential Operator}
+\label{sec:linear_differential_operator}
 
-\emph{Indefinite Integral} or \emph{Primitive Integral}
+a \emph{Linear Differential Operator} is a Linear Combination of Basic
+Differential Operators with Differentiable Functions
+(\S\ref{sec:differentiable_function}) as Coefficients
 
-If $f$ is Continuous on $[a,b]$ then:
-\[
-  F(x) = \int_a^x f
-\]
-for all $x \in [a,b]$ and $F$ is Differentiable on $(a,b)$ and $F' = f$.
+is a Linear Transformation (\S\ref{sec:linear_transformation})
 
-\fist related to Definite Integrals (\S\ref{sec:definite_integral}) through the
-Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+Linear Differential Operators form a Vector Space over the Real or Complex
+Numbers, and also a Free Module over the Ring of Differentiable Functions
 
-solutions to Homogeneous Linear Differential Equations
-(\S\ref{sec:homogeneous_linear_differential_equation}) may be expressed in
-terms of Integrals
 
-Richardson's Theorem (\S\ref{sec:richardsons_theorem}) makes a statement on the
-solvability of the ``Integration Problem'' for a certain class of Expressions
+
+% --------------------------------------------------------------------
+\subsection{Differentiable Function}\label{sec:differentiable_function}
+% --------------------------------------------------------------------
+
+For $f$ defined on Open Interval $(a,b) \subset \reals$, $f$ is
+Differentiable at $x \in (a,b)$ if Limit $f'(x) = \lim_{h \rightarrow
+  0} \frac{f (x+h) - f(x)}{h}$ exists.
+
+Differentiable at $a$ Implies Continuous (\S\ref{sec:continuous_function}) at
+$a$
+
+a Complex Differentiable Function is called \emph{Holomorphic}
+(\S\ref{sec:holomorphic_function})
+
+\fist Differential Equation (\S\ref{sec:differential_equation})
+
+\fist cf. Locally Linear Transformation (\S\ref{sec:locally_linear})
+
+A Polynomial (\S\ref{sec:polynomial}), being the Sum of Differentiable
+Functions, is Differentiable everywhere
+
+For $f$ Differentiable on an Interval $I$, if $\forall x \in I, f'(x)
+> 0$, $f$ is Strictly Increasing and if $\forall x \in I, f'(x) < 0$,
+$f$ is Strictly Decreasing (see Monotonic Functions
+\S\ref{sec:monotonic_function}).
+
+Differentiation is a \emph{Product-preserving Functor}
+(\S\ref{sec:product_preserving_functor})
+
+Differential $df$ as a Morphism of Tangent Bundles (\S\ref{sec:tangent_bundle})
+$df : T\reals \rightarrow T\reals$ (FIXME: explain)
 
 
 
@@ -1792,6 +1786,10 @@ and its \emph{Derivatives} (\S\ref{sec:derivative}) and \emph{Solving} a
 Differential Equation is to find a Function that Satisfies the Relation, and
 ``some additional conditions as well''. (FIXME: clarify)
 
+\fist Time-scale Calculus (\S\ref{sec:timescale_calculus}): unification of
+Theory of Difference Equations (\S\ref{sec:difference_equation}) with that of
+Differential Equations
+
 \asterism
 
 The \emph{Solution} to a Differential Equation $F(x,y,y',\ldots,y^{(n)}) = 0$
@@ -1839,9 +1837,9 @@ Logistic Models $y = \frac{y_0 k}{n_0 + (k-n_0)e^{-rt}}$,
 \fist Stochastic Differential Equation (SDE \S\ref{sec:sde})
 
 \fist Numerical Analysis (\S\ref{sec:numerical_analysis}) applied to Solving
-Differential Equations: differential_equation}): Finite Element Method
-  (\S\ref{sec:finite_element_method}), Finite Volume Method
-  (\S\ref{sec:finite_volume_method})
+Differential Equations: Finite Element Method
+(\S\ref{sec:finite_element_method}), Finite Volume Method
+(\S\ref{sec:finite_volume_method})
 
 
 \subsubsection{Ordinary Differential Equation}\label{sec:ode}
@@ -2350,6 +2348,32 @@ cf. Reverse Bessel Polynomials (\S\ref{sec:reverse_bessel_polynomial})
 % ====================================================================
 \section{Integral Calculus}\label{sec:integral_calculus}
 % ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Antiderivative}\label{sec:antiderivative}
+% --------------------------------------------------------------------
+
+\emph{Indefinite Integral} or \emph{Primitive Integral}
+
+cf. Derivative (\S\ref{sec:derivative})
+
+If $f$ is Continuous on $[a,b]$ then:
+\[
+  F(x) = \int_a^x f
+\]
+for all $x \in [a,b]$ and $F$ is Differentiable on $(a,b)$ and $F' = f$.
+
+\fist related to Definite Integrals (\S\ref{sec:definite_integral}) through the
+Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+
+solutions to Homogeneous Linear Differential Equations
+(\S\ref{sec:homogeneous_linear_differential_equation}) may be expressed in
+terms of Integrals
+
+Richardson's Theorem (\S\ref{sec:richardsons_theorem}) makes a statement on the
+solvability of the ``Integration Problem'' for a certain class of Expressions
+
+
 
 % --------------------------------------------------------------------
 \subsection{Fundamental Theorem of Calculus}
@@ -3948,6 +3972,38 @@ of a Vector Space
 
 
 % ====================================================================
+\section{Time-scale Calculus}\label{sec:timescale_calculus}
+% ====================================================================
+
+(wiki):
+
+unification of Theory of Difference Equations (\S\ref{sec:difference_equation})
+with that of Differential Equations (\S\ref{sec:differential_equation}),
+unifying Differential (\S\ref{sec:differential_calculus}) and Integral
+(\S\ref{sec:integral_calculus}) Calculus with the \emph{Calculus of Finite
+  Differences} (\S\ref{sec:finite_differences_calculus})
+
+offers a formalism for studying hybrid Dicrete-Continuous Dynamical Systems
+(\S\ref{sec:dynamical_system})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Calculus of Finite Differences}
+\label{sec:finite_differences_calculus}
+% --------------------------------------------------------------------
+
+applications in Numerical Analysis (\S\ref{sec:numerical_analysis})
+
+
+
+\subsubsection{Finite Difference}\label{sec:finite_difference}
+
+Discrete equivalent of (Continuous) Differentials (\S\ref{sec:differential})
+
+
+
+% ====================================================================
 \section{Harmonic Analysis}\label{sec:harmonic_analysis}
 % ====================================================================
 
@@ -4634,6 +4690,9 @@ can also be defined as a Measure (\S\ref{sec:measure})
 \section{Numerical Analysis}\label{sec:numerical_analysis}
 % ====================================================================
 
+applications of Calculus of Finite Differences
+(\S\ref{sec:finite_differences_calculus}) --TODO
+
 \begin{itemize}
   \item \emph{Numerical Integration} (\emph{Quadrature}
     \S\ref{sec:numerical_integration}) -- Evaluating Integrals
@@ -4729,46 +4788,53 @@ Line (\S\ref{sec:extended_real_line})
 
 
 % --------------------------------------------------------------------
-\subsection{Interpolation}\label{sec:interpolation}
+\subsection{Approximation Theory}\label{sec:approximation_theory}
 % --------------------------------------------------------------------
+
+\fist cf. Regression Analysis (\S\ref{sec:regression_analysis})
+
+
+
+\subsubsection{Interpolation}\label{sec:interpolation}
 
 cf. Extrapolation (TODO), Regression (\S\ref{sec:regression_analysis})
 
 
 
-\subsubsection{Spline Function}\label{sec:spline}
+\paragraph{Spline Function}\label{sec:spline}\hfill
 
-\paragraph{Spline Interpolation}\label{sec:spline_interpolation}\hfill
+\subparagraph{Spline Interpolation}\label{sec:spline_interpolation}\hfill
 
 cf. Polynomial Interpolation (???) %FIXME
 
 
 
-\paragraph{Cubic Spline}\label{sec:cubic_spline}\hfill
+\subparagraph{Cubic Spline}\label{sec:cubic_spline}\hfill
 
 \subparagraph{B-spline}\label{sec:b_spline}\hfill
 
 
 
-% --------------------------------------------------------------------
-\subsection{Numerical Method}\label{sec:numerical_method}
-% --------------------------------------------------------------------
+\subsubsection{Curve Fitting}\label{sec:curve_fitting}
 
-Attractive Fixed Points (Discrete Dynamical Systems
-\S\ref{sec:discrete_dynamical_systems}) --
-Discrete First-order Dynamical Systems can be used to Numerically Solve
-Single-variable Equations-- the problem to be Solved consisting of finding the
-Roots of a Real Function $f$, i.e. the values of $x$ such that:
-\[
-  f(x) = 0
-\]
-For Equations that cannot be solved \emph{Analytically} (TODO: clarify, xref),
-the Numerical Method involves defining a Dynamical System with Convergent
-Sequences which approach Solutions to the Equation:
-\begin{itemize}
-  \item Iterative Methods (\S\ref{sec:iterative_method})
-  \item Newton's Method (\S\ref{sec:newtons_method})
-\end{itemize}
+\fist if errors are \emph{normally distributed}, Least Squares ($2$-norm Best
+Fit \S\ref{sec:least_squares}) should be used
+
+may be solved with Linear Programming (\S\ref{sec:linear_programming}) methods
+
+
+
+\paragraph{$1$-norm Best Fit}\label{sec:1norm_best_fit}\hfill
+
+less sensitive to outliers
+
+
+
+\subsubsection{Chebyshev Approximation}\label{sec:chebyshev_approximation}
+
+UC Math 352 Lec. 10 - \url{https://www.youtube.com/watch?v=XII0GSmEAgg}
+
+minimizes the worst-case deviation
 
 
 
@@ -4855,14 +4921,23 @@ Semi-implicit (Symplectic) Euler
 
 
 % --------------------------------------------------------------------
-\subsection{Numerical Stability}\label{sec:numerical_stability}
+\subsection{Numerical Method}\label{sec:numerical_method}
 % --------------------------------------------------------------------
+
+a \emph{Numerical Algorithm} is an implementation of a Numerical Method with an
+appropriate Convergence check
+
+TODO
+
+\subsubsection{Well-posed Problem}\label{sec:well_posed}
+
+\subsubsection{Numerical Stability}\label{sec:numerical_stability}
 
 Property of an Algorithm
 
 
 
-\subsubsection{Condition Number}\label{sec:condition_number}
+\paragraph{Condition Number}\label{sec:condition_number}\hfill
 
 Property of a \emph{Problem}
 
@@ -4906,7 +4981,7 @@ that is, the Absolute Condition Number is equal to the Matrix Norm
 
 
 
-\paragraph{Relative Condition Number}\label{sec:relative_condition_number}
+\subparagraph{Relative Condition Number}\label{sec:relative_condition_number}
 \hfill
 
 \[
@@ -5153,13 +5228,24 @@ Gauss-Seidel (\S\ref{sec:gauss_seidel}) is the same as SOR with $\omega = 1$
 
 generally, the Roots of a Real or Complex Continuous Function
 
+(Villate06 \S 2.5):
 
-
-\subsubsection{Bracketing Method}\label{sec:bracketing_method}
-
-\paragraph{Bisection Method}\label{sec:bisection_method}\hfill
-
-\paragraph{False Position Method}\label{sec:false_position}\hfill
+Attractive Fixed Points (Discrete Dynamical Systems
+\S\ref{sec:discrete_dynamical_systems}) --
+Discrete First-order Dynamical Systems can be used to Numerically Solve
+Single-variable Equations-- the problem to be Solved consisting of finding the
+Roots of a Real Function $f$, i.e. the values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved \emph{Analytically} (TODO: clarify, xref),
+the Numerical Method involves defining a Dynamical System with Convergent
+Sequences which approach Solutions to the Equation:
+\begin{itemize}
+  \item Iterative Rootfinding Methods (\S\ref{sec:iterative_rootfinding})
+  \item Newton's Method (\S\ref{sec:newtons_method})
+  \item ... MORE ?
+\end{itemize}
 
 
 
@@ -5178,6 +5264,25 @@ all Root-finding Algorithms proceed by Iteration, but an \emph{Iterative
 \fist cf. Nonlinear Programming (\S\ref{sec:nonlinear_programming}), Nonlinear
 Optimization (\S\ref{sec:nonlinear_optimization})
 
+(Villate06 \S 2.5.1):
+
+when the Equation $0 = f(x)$ can be written in the form of $x = g(x)$, then the
+Solutions are the Fixed Points of the Discrete Dynamical System
+(\S\ref{sec:discrete_dynamical_system}):
+\[
+  x_{n+1} = g(x_n)
+\]
+for Attractive Fixed Points, the System will Converge on the Solution; compare
+using Newton's Method (\S\ref{sec:newtons_method}) where Fixed Points are
+\emph{always} Attractive
+
+FIXME:
+if a 2-Cycle occurs, the midpoint may be chosen, which is equivalent to Newton's
+Method:
+\[
+  x_{n+1} = \frac{1}{2}\big(x_n + \frac{5}{x_n}\big)
+\]
+
 
 
 \paragraph{Trust Region}\label{sec:trust_region}\hfill
@@ -5191,13 +5296,23 @@ Optimization (\S\ref{sec:nonlinear_optimization})
 
 \paragraph{Newton's Method}\label{sec:newtons_method}\hfill
 
-UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo}
+UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo} --
+Numerical Linear Algebra (Minimization Problem)
 
 Minimize Second-order Taylor Polynomial
 
 Convex Objective with Equality Constraints
 
-Numerical Methods (\S\ref{sec:numerical_method})
+(Villate06 \S 2.5.2):
+
+Solve Equation $f(x) = 0$ by finding the Fixed Points of the Discrete Dynamical
+System (\S\ref{sec:discrete_dynamical_system}) defined by the Difference
+Equation (\S\ref{sec:difference_equation}):
+\[
+  x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+\]
+compared to the Iterative Method (\S\ref{sec:iterative_rootfinding}), the Fixed
+Points will always be \emph{Attractive}
 
 
 
@@ -5207,46 +5322,11 @@ Numerical Methods (\S\ref{sec:numerical_method})
 
 
 
-% --------------------------------------------------------------------
-\subsection{Approximation Theory}\label{sec:approximation_theory}
-% --------------------------------------------------------------------
+\subsubsection{Bracketing Method}\label{sec:bracketing_method}
 
-\fist cf. Regression Analysis (\S\ref{sec:regression_analysis})
+\paragraph{Bisection Method}\label{sec:bisection_method}\hfill
 
-
-
-\subsubsection{Curve Fitting}\label{sec:curve_fitting}
-
-\fist if errors are \emph{normally distributed}, Least Squares ($2$-norm Best
-Fit \S\ref{sec:least_squares}) should be used
-
-may be solved with Linear Programming (\S\ref{sec:linear_programming}) methods
-
-
-
-\paragraph{$1$-norm Best Fit}\label{sec:1norm_best_fit}\hfill
-
-less sensitive to outliers
-
-
-
-\paragraph{Chebyshev Approximation}\label{sec:chebyshev_approximation}\hfill
-
-UC Math 352 Lec. 10 - \url{https://www.youtube.com/watch?v=XII0GSmEAgg}
-
-minimizes the worst-case deviation
-
-
-
-% --------------------------------------------------------------------
-\section{Calculus of Finite Differences}\label{sec:finite_differences_calculus}
-% --------------------------------------------------------------------
-
-%FIXME: move to numerical analysis ?
-
-\subsubsection{Finite Difference}\label{sec:finite_difference}
-
-Discrete equivalent of Differentiation (\S\ref{sec:differential})
+\paragraph{False Position Method}\label{sec:false_position}\hfill
 
 
 
