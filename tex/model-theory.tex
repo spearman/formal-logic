@@ -535,7 +535,7 @@ The special case of $\kappa = \aleph_0$ is called
 \emph{$\omega$-Categorical}.
 
 an Elementary Topos (\S\ref{sec:elementary_topos}) can be thought of as a
-Categorical Theory of Sets (Part \ref{sec:set_theory})
+Categorical Theory of Sets (Part \ref{part:set_theory})
 
 
 
@@ -681,163 +681,6 @@ cf. Tarski-Seidenberg Theorem (\S\ref{sec:tarski_seidenberg}) states that the
 First-order Theory of the Real Field is Decidable; Euclidean Geometry without
 the ability to measure Angles is also a Model of the Real Field Axioms and
 therefore also Decidable
-
-
-
-% --------------------------------------------------------------------
-\subsection{Constraint Satisfaction Problem (CSP)}
-\label{sec:constraint_satisfaction}
-% --------------------------------------------------------------------
-
-%FIXME: move to optimization ???
-
-A Problem involving only Constraints but not an Objective Function
-(Optimization \S\ref{sec:objective_function}) is called a \emph{Feasibility
-  Problem}
-
-\fist Decision Problem (\S\ref{sec:decision_problem})
-
-formally a triple $\langle{X,D,C}\rangle$ where $X$ is a Set of Variables, $D$
-is the Set of Domains for each Variable, and $C$ is Set of Constraints
-
-a \emph{Constraint} is a Pair $\langle{t,R}\rangle$ where $t \subset X$ is a
-Subset of $k$ Variables and $R$ is a $k$-ary Relation on the corresponding
-Subset of Domains in $D$
-
-an \emph{Evaluation} of the Variables is a Function from a Subset of Variables
-to a particular Set of Values in the corresponding Subset of Domains; an
-Evaluation $v$ \emph{Satisfies} the Constraint $\langle{t,R}\rangle$ if the
-Values assigned to the Variables $t$ Satisfies the Relation $R$
-
-an Evaluation is \emph{Consistent} if it does not violate \emph{any} of the
-Constraints
-
-an Evaluation is \emph{Complete} if it includes \emph{all} of the Variables
-
-an Evaluation is a \emph{Solution} if it is Consistent \emph{and} Complete--
-such an Evaluation is said to \emph{Solve} the Constraint Satisfaction Problem
-
-\fist Phase I Problem (Linear Programming \S\ref{sec:linear_programming},
-Simplex Method \S\ref{sec:simplex_algorithm}): find an initial Feasible
-Solution that Satisfies all Constraints \emph{without} taking into account the
-Cost Function using the ``Artifical Variables'' method
-
-
-
-\subsubsection{Boolean Satisfiability Problem}\label{sec:sat}
-
-\emph{SAT}
-
-Conjunctive Normal Form (\S\ref{sec:conjunctive_form})
-
-Chaff
-
-GRASP
-
-generalization: Satisfiability Modulo Theories (SMT \S\ref{sec:smt})
-
-
-
-
-\paragraph{Davis-Putnam-Logemann-Loveland (DPLL) Algorithm}
-\label{sec:dpll}\hfill
-
-(Conjunctive Normal Form) CNF-SAT
-
-
-
-\paragraph{Conflict-driven Clause Learning}\label{sec:cdcl}\hfill
-
-\emph{CDCL}
-
-
-
-\paragraph{Two-watched Literal Scheme}\label{sec:twowatched_literal}\hfill
-
-
-
-\subsubsection{Satisfiability Modulo Theories (SMT)}\label{sec:smt}
-
-Quantifier-free Presburger Arithmetic
-(\S\ref{sec:presburger_arithmetic})
-
-formalized approach to Constraint Programming
-
-cf. Answer Set Programming (ASP)
-
-(wiki):
-
-generalization of Boolean SAT
-
-an SMT Instance is a Formula in First-order Logic where some Function
-and Predicate Symbols have \emph{additional Interpretations} and
-\emph{SMT} is the problem (cf. Decision Problem) of determining
-whether such a Formula is \emph{Satisfiable}
-
-Predicates are classified according to each respective Theory, e.g.:
-\begin{itemize}
-  \item Linear Equalities over Real Numbers -- Theory of Linear Real
-    Arithmetic
-  \item Uninterpreted Terms and Function Symbols -- Theory of
-    Uninterpreted Functions with Equality (\S\ref{sec:empty_theory})
-\end{itemize}
-
-Quantifier Free fragments
-
-Decidable Theories: %FIXME
-\begin{itemize}
-  \item Real Closed Fields (\S\ref{sec:real_closed}), Real Numbers --
-    Decidable using Quantifier Elimination
-  \item Presburger Arithmetic (\S\ref{sec:presburger_arithmetic})
-\end{itemize}
-
-DPLL (\S\ref{sec:dpll})
-
-SMTLIB2 -- common interface format $\mono{.smt2}$
-
-
-\textbf{Z3}
-
-Haskell: Liquid Haskell -- Refinement Type based verifier that can use
-any SMTLIB2 compliant solver
-
-ATS: contrib/ATS-extsolve-z3
-
-ATS: contrib/ATS-extsolve-smt2
-
-Rust: $\mono{rustproof}$ ``verification condition generation'' crate
-
-\begin{itemize}
-  \item Empty Theory
-  \item Linear Arithmetic
-  \item Nonlinear Arithmetic
-  \item Bitvectors
-  \item Arrays
-  \item Datatypes
-  \item Quantifiers
-  \item Strings
-\end{itemize}
-
-
-\textbf{Alt-Ergo}
-
-Frama-C ACSL verifier
-
-
-
-\subsubsection{Answer Set Programming (ASP)}\label{sec:asp}
-
-no Quantifiers; cf. Satisfiability Modulo Theories (SMT)
-
-most suited for Boolean problems that reduce to the Free Theory of
-Uninterpreted Functions (\S\ref{sec:empty_theory})
-
-
-
-\subsubsection{Constraint Logic Programming}
-\label{sec:constraint_logic_programming}
-
-Logic Programming extended to include Constraint Satisfaction
 
 
 
@@ -1100,6 +943,9 @@ in First-order Logic may be determined by whether two Structures $A
   A \models \alpha \Leftrightarrow B \models \alpha
 \]
 
+\fist see also Constraint Satisfaction Problems
+(\S\ref{sec:constraint_satisfaction})
+
 
 
 % --------------------------------------------------------------------
@@ -1125,6 +971,151 @@ the Set of Natural Numbers occurring as the size of a Finite Model in which a
 given Sentence is True
 
 cf. Theory Spectrum (\S\ref{sec:theory_spectrum})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Boolean Satisfiability Problem}\label{sec:sat}
+% --------------------------------------------------------------------
+
+\emph{SAT}
+
+Conjunctive Normal Form (\S\ref{sec:conjunctive_form})
+
+Chaff
+
+GRASP
+
+generalization: Satisfiability Modulo Theories (SMT \S\ref{sec:smt})
+
+
+
+
+\subsubsection{Davis-Putnam-Logemann-Loveland (DPLL) Algorithm}\label{sec:dpll}
+
+(Conjunctive Normal Form) CNF-SAT
+
+
+
+\subsubsection{Conflict-driven Clause Learning}\label{sec:cdcl}\hfill
+
+\emph{CDCL}
+
+
+
+\subsubsection{Two-watched Literal Scheme}\label{sec:twowatched_literal}\hfill
+
+
+
+% --------------------------------------------------------------------
+\subsection{Satisfiability Modulo Theories (SMT)}\label{sec:smt}
+% --------------------------------------------------------------------
+
+Quantifier-free Presburger Arithmetic
+(\S\ref{sec:presburger_arithmetic})
+
+formalized approach to Constraint Programming
+
+cf. Answer Set Programming (ASP)
+
+(wiki):
+
+generalization of Boolean SAT
+
+an SMT Instance is a Formula in First-order Logic where some Function
+and Predicate Symbols have \emph{additional Interpretations} and
+\emph{SMT} is the problem (cf. Decision Problem) of determining
+whether such a Formula is \emph{Satisfiable}
+
+Predicates are classified according to each respective Theory, e.g.:
+\begin{itemize}
+  \item Linear Equalities over Real Numbers -- Theory of Linear Real
+    Arithmetic
+  \item Uninterpreted Terms and Function Symbols -- Theory of
+    Uninterpreted Functions with Equality (\S\ref{sec:empty_theory})
+\end{itemize}
+
+Quantifier Free fragments
+
+Decidable Theories: %FIXME
+\begin{itemize}
+  \item Real Closed Fields (\S\ref{sec:real_closed}), Real Numbers --
+    Decidable using Quantifier Elimination
+  \item Presburger Arithmetic (\S\ref{sec:presburger_arithmetic})
+\end{itemize}
+
+DPLL (\S\ref{sec:dpll})
+
+SMTLIB2 -- common interface format $\mono{.smt2}$
+
+
+\textbf{Z3}
+
+Haskell: Liquid Haskell -- Refinement Type based verifier that can use
+any SMTLIB2 compliant solver
+
+ATS: contrib/ATS-extsolve-z3
+
+ATS: contrib/ATS-extsolve-smt2
+
+Rust: $\mono{rustproof}$ ``verification condition generation'' crate
+
+\begin{itemize}
+  \item Empty Theory
+  \item Linear Arithmetic
+  \item Nonlinear Arithmetic
+  \item Bitvectors
+  \item Arrays
+  \item Datatypes
+  \item Quantifiers
+  \item Strings
+\end{itemize}
+
+
+\textbf{Alt-Ergo}
+
+Frama-C ACSL verifier
+
+
+
+% --------------------------------------------------------------------
+\subsection{Logic Programming}\label{sec:logic_programming}
+% --------------------------------------------------------------------
+
+Horn Clause (\S\ref{sec:horn_clause})
+
+Semantics:
+\begin{itemize}
+  \item \emph{Completion Semantics}
+  \item \emph{Stable Model Semantics} -- Answer Set Programming (ASP
+    \S\ref{sec:asp})
+\end{itemize}
+
+
+
+\subsubsection{Answer Set Programming (ASP)}\label{sec:asp}
+
+Stable Model Semantics
+
+\emph{Stable Model} or \emph{Answer Set}
+
+no Quantifiers; cf. Satisfiability Modulo Theories (SMT)
+
+most suited for Boolean problems that reduce to the Free Theory of
+Uninterpreted Functions (\S\ref{sec:empty_theory})
+
+
+
+\subsubsection{Constraint Logic Programming}
+\label{sec:constraint_logic_programming}
+
+Logic Programming extended to include Constraint Satisfaction
+(\S\ref{sec:constraint_satisfaction})
+
+
+
+\subsubsection{Concurrent Logic Programming}
+\label{sec:concurrent_logic_programming}
 
 
 

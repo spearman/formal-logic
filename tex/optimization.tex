@@ -449,7 +449,7 @@ Constrained Linear Optimization
 Objective Function and all the Hard Constraints are Linear; can be solved by
 Simplex Method (\S\ref{sec:simplex_algorithm}) usually in Polynomial Time
 
-Interior Point (\S\ref{sec:interior_point_method}) Linear Programming
+Interior Point (\S\ref{sec:interior_point}) Linear Programming
 (Polynomial Time) often performs at least as well or better than the Simplex
 Method
 
@@ -739,7 +739,8 @@ less than the Shadow Price, then the Objective can be improved by doing so; if
 the Shadow Prices is \$0, then loosening a Constraint does not improve the
 Objective
 
-\fist cf. Shadow Prices for Quadratic Programs (\S\ref{sec:quadratic_program})
+\fist cf. Shadow Prices for Quadratic Programs
+(\S\ref{sec:quadratic_programming})
 
 
 
@@ -785,7 +786,7 @@ Objective Function) the problem is solvable by Ellipsoid Method
 Hard
 
 with Convex Objective Function and Linear Constraints \fist Convex Optimization
-(\S\ref{sec:convex_optimzation})
+(\S\ref{sec:convex_optimization})
 
 \fist cf. Sequential Quadratic Programming (Iterative Method
 \S\ref{sec:sequential_quadratic_programming})
@@ -1114,7 +1115,7 @@ with Convex Quadratic Constraints (FIXME: and convex objective function ???)
 
 if the $P_0,\ldots,P_m$ Matrices are all Positive-definite Matrices
 (\S\ref{sec:positive_definite}) then the problem is Convex and can be solved
-using Interior Point Methods (\S\ref{sec:interior_point_method}), as in
+using Interior Point Methods (\S\ref{sec:interior_point}), as in
 Semidefinite Programming (\S\ref{sec:semidefinite_programming})
 
 
@@ -1126,10 +1127,10 @@ Semidefinite Programming (\S\ref{sec:semidefinite_programming})
 not Convex in general but may be transformed into Convex Problems by change of
 Variables and a transformation of the Objective and Constraint Functions
 
-Inequality Constraints are Posynomials (\S\ref{sec:posynomials})
+Inequality Constraints are Posynomials (\S\ref{sec:posynomial})
 $f_i(x) \leq 1$
 
-Equality Constraints are Monomials (\S\ref{sec:monomials}) $h_i(x) = 1$
+Equality Constraints are Monomials (\S\ref{sec:monomial}) $h_i(x) = 1$
 
 
 
@@ -1189,7 +1190,7 @@ may be formulated as Convex Optimization Problems:
 \end{itemize}
 
 UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo}:
-Interior Point Method (\S\ref{sec:interior_point_method}) for general Convex
+Interior Point Method (\S\ref{sec:interior_point}) for general Convex
 Optimization Problems
 
 SU EE 364A - \url{https://www.youtube.com/playlist?list=PL3940DD956CDF0622}
@@ -1271,7 +1272,8 @@ where $t > 0$ is a parameter setting the accuracy of the approximation;
 substituting into the original problem:
 
 \begin{tabular}{r l}
-  $\mathrm{min}$ & $f(\vec{x}) + \sum_{i=1}^m -\frac{1}{t} \log(-h_i(\vec{x}))$
+  $\mathrm{min}$ &
+    $f(\vec{x}) + \sum_{i=1}^m -\frac{1}{t} \log(-h_i(\vec{x}))$ \\
   subject to     & $A\vec{x} = \vec{b}$ \\
 \end{tabular}
 
@@ -1286,7 +1288,7 @@ sensitive to initial starting point
 
 \fist Interior Point Linear Programming (\S\ref{sec:linear_programming}) often
 performs at least as well or better than the Simplex Method
-(\S\ref{sec:simplex_method})
+(\S\ref{sec:simplex_algorithm})
 
 
 \asterism
@@ -1328,8 +1330,8 @@ Linear Programming (\S\ref{sec:linear_programming}) problems can be solved by
 Simplex Method (\S\ref{sec:simplex_algorithm}), usually (but not guaranteed) in
 Polynomial Time
 
-\fist Interior Point (\S\ref{sec:interior_point_method}) Linear Programming
-often performs at least as well or better than the Simplex Method
+\fist Interior Point (\S\ref{sec:interior_point}) Linear Programming often
+performs at least as well or better than the Simplex Method
 
 cf. Active Set Method (TODO: xref) for Quadratic Programming
 (\S\ref{sec:quadratic_programming}) where the number of constriants in the
@@ -1595,6 +1597,9 @@ or \emph{Dynamic Optimization}
 
 alternative to Calculus of Variations (\S\ref{sec:calculus_of_variations})
 
+\fist Chart Parsers (\S\ref{sec:chart_parser}) -- uses Dynamic Programming which
+eliminates Backtracking and prevents a Combinatorial Explosion
+
 \url{https://medium.freecodecamp.org/follow-these-steps-to-solve-any-dynamic-programming-interview-problem-cc98e508cd0e}
 
 
@@ -1604,7 +1609,7 @@ alternative to Calculus of Variations (\S\ref{sec:calculus_of_variations})
 % ====================================================================
 
 \fist Information Geometry (\S\ref{sec:information_geometry}), Fisher
-Information Metric (\S\ref{sec:fisher_information})
+Information Metric (\S\ref{sec:fisher_metric})
 
 \fist \textbf{Fisher's Fundamental Theorem of Natural Selection},
 Quasi-linkage Equilibrium: approximation in the case of Weak Selection
@@ -1626,10 +1631,50 @@ evaluation of a Fitness Function for all candidate Solutions %FIXME
 
 
 % ====================================================================
-\section{Constraint Satisfaction Problem (CSP)}\label{sec:csp}
+\section{Constraint Satisfaction Problem (CSP)}
+\label{sec:constraint_satisfaction}
 % ====================================================================
 
-%FIXME: merge with model theory constraint satisfaction
+A Problem involving only Constraints but not an Objective Function
+(Optimization \S\ref{sec:objective_function}) is called a \emph{Feasibility
+  Problem}
+
+\fist Decision Problem (\S\ref{sec:decision_problem})
+
+in Finite Model Theory (\S\ref{sec:finite_model}):
+\begin{itemize}
+  \item Boolean Satisfiability Problem (SAT \S\ref{sec:sat})
+  \item Satisfiability Modulo Theories (SMT \S\ref{sec:smt})
+  \item Constraint Logic Programming (\S\ref{sec:constraint_logic_programming})
+\end{itemize}
+
+
+formally a triple $\langle{X,D,C}\rangle$ where $X$ is a Set of Variables, $D$
+is the Set of Domains for each Variable, and $C$ is Set of Constraints
+
+a \emph{Constraint} is a Pair $\langle{t,R}\rangle$ where $t \subset X$ is a
+Subset of $k$ Variables and $R$ is a $k$-ary Relation on the corresponding
+Subset of Domains in $D$
+
+an \emph{Evaluation} of the Variables is a Function from a Subset of Variables
+to a particular Set of Values in the corresponding Subset of Domains; an
+Evaluation $v$ \emph{Satisfies} the Constraint $\langle{t,R}\rangle$ if the
+Values assigned to the Variables $t$ Satisfies the Relation $R$
+
+an Evaluation is \emph{Consistent} if it does not violate \emph{any} of the
+Constraints
+
+an Evaluation is \emph{Complete} if it includes \emph{all} of the Variables
+
+an Evaluation is a \emph{Solution} if it is Consistent \emph{and} Complete--
+such an Evaluation is said to \emph{Solve} the Constraint Satisfaction Problem
+
+\fist Phase I Problem (Linear Programming \S\ref{sec:linear_programming},
+Simplex Method \S\ref{sec:simplex_algorithm}): find an initial Feasible
+Solution that Satisfies all Constraints \emph{without} taking into account the
+Cost Function using the ``Artifical Variables'' method
+
+
 
 % --------------------------------------------------------------------
 \subsection{Constraint Resolution}\label{sec:constraint_resolution}
@@ -1640,7 +1685,7 @@ Constraint Resolution on Finite Domains typically uses a form of \emph{Search}
 
 
 % --------------------------------------------------------------------
-\subsection{Constraint Satisfaction Problem (DCSP)}\label{sec:dcsp}
+\subsection{Dynamic Constraint Satisfaction Problem (DCSP)}\label{sec:dcsp}
 % --------------------------------------------------------------------
 
 
