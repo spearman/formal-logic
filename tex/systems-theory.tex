@@ -746,6 +746,212 @@ the Set infinitely often
 
 
 % --------------------------------------------------------------------
+\subsection{Discrete-time Dynamical System}\label{sec:discrete_dynamical_system}
+% --------------------------------------------------------------------
+
+\emph{Discrete-time Dynamical System} (or \emph{Sampled System}), \emph{Map}
+
+\fist Linear Shift-invariant Systems (\S\ref{sec:lsi_system})
+
+Difference Equations (\S\ref{sec:difference_equation}):
+\begin{itemize}
+  \item Logistic Map (\S\ref{sec:logistic_map}) -- Non-linear
+  \item Tent Map (TODO)
+\end{itemize}
+
+Villate06, Ch.2
+
+State changes only at Discrete Sequence of Time Instants $\{t_0, t_1, \ldots,
+\}$; the interval of Time between a consecutive pair of Instants $t_n$ and
+$t_{n+1}$ need not be constant for different $n$
+
+First-order System: single State Variable $y$ giving a Sequence of State values
+$\{y_0, y_1, y_2, \ldots\}$ at the Instants $\{t_0, t_1, t_2\}$
+
+the \emph{Evolution Equation} is a First-order Difference Equation
+(\S\ref{sec:difference_equation}):
+\[
+  y_{n+1} = F(y_n)
+\]
+computes State $y_{n+1}$ at an Instant $t_{n+1}$ given the State value $y_n$ at
+the previous Instant $t_n$, where $F(y)$ is an \emph{Unknown Function}
+
+given an Initial State $y_0$, successive applications of $F$ will generate the
+Sequence of States $y_n$ determining the evolution of the System:
+\[
+  \{ y_0, F(y_0), F^2(y_0), \ldots, y_n = F^n(y_0) \}
+\]
+
+a \emph{Fixed Point} of the System is a $y_0$ such that $F(y_0) = y_0$
+
+\emph{Cobweb Plot} (or \emph{Staircase Diagram}): qualitative behavior of
+One-dimensional Iterated Functions (\S\ref{sec:iterated_function}), e.g.
+Logistic Map; values of $F(y)$ that are Strictly Less-than (\emph{below}) the
+Line defined by $G(y) = y$ move the System in the \emph{Negative} (Left)
+direction, and values of $F(y)$ that are Strictly Greater-than (\emph{above})
+the Line $G(y) = y$ move the System in the \emph{Positive} (Right) direction;
+values of $y$ where $F(y) = G(y)$ (the Intersection Points of the Iterated
+Function and the Line $G(y) = y$) are \emph{Fixed Points} of the System
+
+\emph{Repulsive Node} -- derivative $F'(y_0) > 1$; the curve $F$ crosses under
+the Line $y=x$ from the left to over the Line on the right
+
+\emph{Repulsive Focus} -- $F'(y_0) < -1$; sequence will move
+away but alternate sides
+
+\emph{Attractive Node} -- $0 \leq F'(y_0) < 1$
+
+\emph{Attractive Focus} -- $-1 < F'(y_0) < 0$
+
+for $F'$ equal to $1$ or $-1$, a Fixed Point could either be Attractive or
+Repulsive or Attractive from one side and Repulsive from the other
+
+for the Sequence $\{ y_0, y_1, y_2, \ldots \}$ of the Solution of a Dynamical
+System $y_{n+1} = F(y_n)$, any Element of the Sequence can be obtained form
+$y_0$ by applying the Composed Function $F^n$:
+\[
+  y_n = F^n(y_0) = F(F(\cdots(F(y_0))))
+\]
+the Points of a Solution Sequence containing a \emph{Cycle}
+(\S\ref{sec:periodic_sequence}) are called \emph{Periodic Points}, and the
+number of Periodic Points is called the \emph{Period} of the Cycle and for
+a Cycle of Period $n$:
+\[
+  F^n(y) = y
+\]
+i.e. the Periodic Points are Fixed Points of the Composed Function $F^n$ where
+$n$ is the Period of the Cycle (but none of them are Fixed Points of the
+original Function $F$);
+the Derivative of $F^n$ as $y_0$ can be computed using the Chain Rule:
+\[
+  (F^n(y_0))' = F'(y_0)F'(y_1)\cdots{F'(y_{n-1})}
+\]
+(FIXME: does this only work for $n$ of an $n$-period cycle ???)
+
+for a Cycle of Period $m$, all Points $F^j(y_0)$ with $j < m$ are not Fixed
+Points of $F^j$
+
+for the Absolute Value of the Product of the Derivative at the $m$ Points of the
+Cycle:
+\[
+  \prod_{j=0}^{m-1} F'(y_j)
+\]
+greater than $1$ then the Cycle is \emph{Repulsive}, less than $1$ the Cycle is
+\emph{Attractive} and if identical to $1$ the Cycle could be either Attractive
+or Repulsive in different regions
+(FIXME: is this product equal to the derivative $F^m(y_0)'$ ???)
+
+Discrete First-order Dynamical Systems can be used to Numerically
+(\S\ref{sec:numerical_method}) Solve Single-variable Equations-- the problem to
+be Solved consisting of finding the Roots (\S\ref{sec:root_finding}) of a Real
+Function $f$, i.e. the values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved Analytically, the Numerical Method involves
+defining a Dynamical System with Convergent Sequences
+(\S\ref{sec:convergent_sequence}) which approach Solutions to the Equation:
+\begin{itemize}
+  \item Iterative Methods (\S\ref{sec:iterative_method})
+  \item Newton's Method (\S\ref{sec:newtons_method})
+\end{itemize}
+
+
+
+\subsubsection{Graph Dynamical System}\label{sec:graph_dynamical_system}
+
+\paragraph{Sequential Dynamical System}
+\label{sec:sequential_dynamical_system}\hfill
+
+\fist Boolean Networks (\S\ref{sec:boolean_network})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Continuous-time Dynamical System}
+\label{sec:continuous_dynamical_system}
+% --------------------------------------------------------------------
+
+\fist Linear Translation-invariant Systems (\S\ref{sec:lti_system})
+
+Villate06, Ch. 3 - \emph{Continuous dynamical systems}:
+
+Time-dependent Function:
+\[
+  x(t)
+\]
+
+Time Derivatives of $x(t)$:
+\begin{align*}
+  \dot{x} &= \deriv{x}{t} & \ddot{x} &= \deriv{^2x}{t^2} \\
+\end{align*}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Time-Variant System}\label{sec:time_variant_system}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Time-Invariant (TIV) System}\label{sec:tiv_system}
+% --------------------------------------------------------------------
+
+a System with a Time-dependent System Function (Evolution Function
+\S\ref{sec:evolution_function}) that is not a \emph{direct} Function of Time,
+instead it is a Function of the Time-dependent \emph{Input Function}, i.e. the
+Transfer Function of the System is only a Function of Time as expressed by the
+Input and Output
+
+the ``System Block'' \emph{Commutes} with an arbitrary Delay (FIXME: clarify)
+
+
+
+\subsubsection{Linear Shift-Invariant (LSI) System}\label{sec:lsi_system}
+
+Discrete (\S\ref{sec:discrete_dynamical_system})
+
+\fist Linear Translation-invariant (Continuous \S\ref{sec:lti_system})
+
+
+
+\subsubsection{Linear Translation-Invariant (LTI) System}
+\label{sec:lti_system}
+
+or \emph{Linear Time-Invariant Systems}
+
+Continuous (\S\ref{sec:continuous_dynamical_system})
+
+\fist Linear Shift-invariant (Discrete \S\ref{sec:lsi_system})
+
+for a Linear Time-invariant System, when taking the Laplace Transform
+(\S\ref{sec:laplace_transform}) and if the Poles (\S\ref{sec:complex_pole}) in
+the Complex Plane are:
+\begin{itemize}
+  \item in the Right Half Plane (positive Real component) then the System is
+    \emph{Unstable}
+  \item in the Left Half Plane (negative Real component) then it will be
+    \emph{Stable}
+  \item on the Imaginary Axis, it will have \emph{Marginal Stability}
+\end{itemize}
+
+
+
+\subsubsection{Non-linear Time-Invariant (NLTI) System}\label{sec:nlti_system}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Autonomous Dynamical System}\label{sec:autonomous_dynamical_system}
+% --------------------------------------------------------------------
+
+Time does not appear on RHS
+
+normally a Dynamical System can be reformulated as Autonomous by introducing
+the Equation $\dot{t} = 1$
+
+
+
+% --------------------------------------------------------------------
 \subsection{Deterministic Dynamical System}
 \label{sec:deterministic_dynamical_system}
 % --------------------------------------------------------------------
@@ -762,106 +968,6 @@ Lorenz
 % --------------------------------------------------------------------
 
 \fist Stochastic Processes (\S\ref{sec:stochastic_process})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Conservative Dynamical System}
-\label{sec:conservative_dynamical_system}
-% --------------------------------------------------------------------
-
-(MAE 5790-7)
-
-$\dot{\vec{x}} = \vec{f}(\vec{x})$ is \emph{Conservative} if it has a
-``Conserved Quantity'' (``Constant of Motion'') $E(\vec{x})$ that is Constant
-on \emph{Trajectories}, but otherwise is required to be \emph{not} Constant on
-any Open Set;
-by not allowing $E$ to be Constant on Open Sets, there are no Attracting Fixed
-Points in Conservative Systems
-
-\emph{Example - Mechanical System with 1 Degree of Freedom}:
-\[
-  m\ddot{x} = F(x) = \frac{-dV}{x}
-\]
-with Force depending only on the Position of $x$, expressed as the negative
-Derivative of a Potential (Potential Energy $V$), and is independent of Time
-$t$ (no Driving) and Velocity $\dot{x}$ (no Damping)
-
-under these conditions there is a \emph{Conserved Quantity} $E$:
-\[
-  E = \frac{1}{2}m\dot{x}^2 + V(x)
-\]
-that is the combined Kinetic Energy ($\frac{1}{2}m\dot{x}^2$) and Potential
-Energy $V(x)$
-
-$E$ is Constant on \emph{Trajectories}
-
-Proof:
-\[
-  \frac{d}{dt}\Big(\frac{m\dot{x}^2}{2} + V(x(t))\Big) = 0
-\]
-i.e. the quantity inside the parentheses is \emph{constant}
-
-
-\emph{Example - Particle in a Double-well Potential}
-
-Potential Energy Function:
-\[
-  V(x) = -\frac{1}{2}x^2 + \frac{1}{4}x^4
-\]
-
-Second-order Equation of the System:
-\begin{align*}
-  \ddot{x} & = \frac{dV}{dx} = x - x^3
-\end{align*}
-
-rewritten as a Pair of First-order Equations:
-\begin{align*}
-  \dot{x} & = y \\
-  \dot{y} & = x - x^3
-\end{align*}
-
-Jacobian Matrix:
-\[
-  \begin{bmatrix}
-    0        & 1 \\
-    1 - 3x^2 & 0 \\
-  \end{bmatrix}
-\]
-
-at Fixed Points (i.e. where $\dot{y} = 0$):
-\begin{itemize}
-  \item $(0,0)$ -- Jacobian has Trace of $0$ and Determinant of $-1$ (Saddle
-    Point)
-  \item $(1,0)$ -- Jacobian has Trace of $0$ and Determinant of $2$ (Linear
-    Center)
-  \item $(-1,0)$ -- Jacobian is same as for $(1,0)$ (Linear Center)
-\end{itemize}
-
-there are two ``Homoclinic Orbits'' from the central Saddle Point
-
-$(1,0)$ and $(-1,0)$ are ``true'' Centers due to Conservation of Energy
-
-$E(x,y) = \frac{1}{2}y^2 - \frac{1}{2}x^2 + \frac{1}{4}x^4$ -- Constant on
-Trajectories; usually Closed Curves
-
-%FIXME: are the centers above actually ``non-linear centers'' ???
-
-Thm. \emph{Non-linear Centers in 2D Conservative Systems}:
-For Conservative $\dot{\vec{x}} = \vec{f}(\vec{x})$ with $\vec{x} \in
-\reals^2$, Continuously Differentiable $\vec{f}$, and $E(\vec{x})$ a Conserved
-Quantity, with Isolated Fixed Point $\vec{x}^*$, if $\vec{x}^*$ is a Local
-Minimum or Local Maximum of $E(\vec{x})$ is a Center, i.e. all Trajectories
-sufficiently close to $\vec{x}^*$ are Closed
-
-
-\emph{Example - Dimensionless Pendulum}
-
-Phase Space is a Cylinder (not a Plane)
-
-Non-linear Center
-
-``Heteroclinic Orbits'' connect two Saddle Points
 
 
 
@@ -1022,208 +1128,102 @@ Transition Diagrams
 
 
 % --------------------------------------------------------------------
-\subsection{Autonomous Dynamical System}\label{sec:autonomous_dynamical_system}
+\subsection{Conservative Dynamical System}
+\label{sec:conservative_dynamical_system}
 % --------------------------------------------------------------------
 
-Time does not appear on RHS
+(MAE 5790-7)
 
-normally a Dynamical System can be reformulated as Autonomous by introducing
-the Equation $\dot{t} = 1$
+$\dot{\vec{x}} = \vec{f}(\vec{x})$ is \emph{Conservative} if it has a
+``Conserved Quantity'' (``Constant of Motion'') $E(\vec{x})$ that is Constant
+on \emph{Trajectories}, but otherwise is required to be \emph{not} Constant on
+any Open Set;
+by not allowing $E$ to be Constant on Open Sets, there are no Attracting Fixed
+Points in Conservative Systems
 
-
-
-% --------------------------------------------------------------------
-\subsection{Continuous-time Dynamical System}
-\label{sec:continuous_dynamical_system}
-% --------------------------------------------------------------------
-
-\fist Linear Translation-invariant Systems (\S\ref{sec:lti_system})
-
-Villate06, Ch. 3 - \emph{Continuous dynamical systems}:
-
-Time-dependent Function:
+\emph{Example - Mechanical System with 1 Degree of Freedom}:
 \[
-  x(t)
+  m\ddot{x} = F(x) = \frac{-dV}{x}
+\]
+with Force depending only on the Position of $x$, expressed as the negative
+Derivative of a Potential (Potential Energy $V$), and is independent of Time
+$t$ (no Driving) and Velocity $\dot{x}$ (no Damping)
+
+under these conditions there is a \emph{Conserved Quantity} $E$:
+\[
+  E = \frac{1}{2}m\dot{x}^2 + V(x)
+\]
+that is the combined Kinetic Energy ($\frac{1}{2}m\dot{x}^2$) and Potential
+Energy $V(x)$
+
+$E$ is Constant on \emph{Trajectories}
+
+Proof:
+\[
+  \frac{d}{dt}\Big(\frac{m\dot{x}^2}{2} + V(x(t))\Big) = 0
+\]
+i.e. the quantity inside the parentheses is \emph{constant}
+
+
+\emph{Example - Particle in a Double-well Potential}
+
+Potential Energy Function:
+\[
+  V(x) = -\frac{1}{2}x^2 + \frac{1}{4}x^4
 \]
 
-Time Derivatives of $x(t)$:
+Second-order Equation of the System:
+\begin{align*}
+  \ddot{x} & = \frac{dV}{dx} = x - x^3
+\end{align*}
+
+rewritten as a Pair of First-order Equations:
+\begin{align*}
+  \dot{x} & = y \\
+  \dot{y} & = x - x^3
+\end{align*}
+
+Jacobian Matrix:
 \[
-  \dot{x} = \deriv{x}{t} \\ \ddot{x} = \deriv{^2x}{t^2}
+  \begin{bmatrix}
+    0        & 1 \\
+    1 - 3x^2 & 0 \\
+  \end{bmatrix}
 \]
 
-
-
-% --------------------------------------------------------------------
-\subsection{Discrete-time Dynamical System}\label{sec:discrete_dynamical_system}
-% --------------------------------------------------------------------
-
-\emph{Discrete-time Dynamical System} (or \emph{Sampled System}), \emph{Map}
-
-\fist Linear Shift-invariant Systems (\S\ref{sec:lsi_system})
-
-Difference Equations (\S\ref{sec:difference_equation}):
+at Fixed Points (i.e. where $\dot{y} = 0$):
 \begin{itemize}
-  \item Logistic Map (\S\ref{sec:logistic_map}) -- Non-linear
-  \item Tent Map (TODO)
+  \item $(0,0)$ -- Jacobian has Trace of $0$ and Determinant of $-1$ (Saddle
+    Point)
+  \item $(1,0)$ -- Jacobian has Trace of $0$ and Determinant of $2$ (Linear
+    Center)
+  \item $(-1,0)$ -- Jacobian is same as for $(1,0)$ (Linear Center)
 \end{itemize}
 
-Villate06, Ch.2
+there are two ``Homoclinic Orbits'' from the central Saddle Point
 
-State changes only at Discrete Sequence of Time Instants $\{t_0, t_1, \ldots,
-\}$; the interval of Time between a consecutive pair of Instants $t_n$ and
-$t_{n+1}$ need not be constant for different $n$
+$(1,0)$ and $(-1,0)$ are ``true'' Centers due to Conservation of Energy
 
-First-order System: single State Variable $y$ giving a Sequence of State values
-$\{y_0, y_1, y_2, \ldots\}$ at the Instants $\{t_0, t_1, t_2\}$
+$E(x,y) = \frac{1}{2}y^2 - \frac{1}{2}x^2 + \frac{1}{4}x^4$ -- Constant on
+Trajectories; usually Closed Curves
 
-the \emph{Evolution Equation} is a First-order Difference Equation
-(\S\ref{sec:difference_equation}):
-\[
-  y_{n+1} = F(y_n)
-\]
-computes State $y_{n+1}$ at an Instant $t_{n+1}$ given the State value $y_n$ at
-the previous Instant $t_n$, where $F(y)$ is an \emph{Unknown Function}
+%FIXME: are the centers above actually ``non-linear centers'' ???
 
-given an Initial State $y_0$, successive applications of $F$ will generate the
-Sequence of States $y_n$ determining the evolution of the System:
-\[
-  \{ y_0, F(y_0), F^2(y_0), \ldots, y_n = F^n(y_0) \}
-\]
-
-a \emph{Fixed Point} of the System is a $y_0$ such that $F(y_0) = y_0$
-
-\emph{Cobweb Plot} (or \emph{Staircase Diagram}): qualitative behavior of
-One-dimensional Iterated Functions (\S\ref{sec:iterated_function}), e.g.
-Logistic Map; values of $F(y)$ that are Strictly Less-than (\emph{below}) the
-Line defined by $G(y) = y$ move the System in the \emph{Negative} (Left)
-direction, and values of $F(y)$ that are Strictly Greater-than (\emph{above})
-the Line $G(y) = y$ move the System in the \emph{Positive} (Right) direction;
-values of $y$ where $F(y) = G(y)$ (the Intersection Points of the Iterated
-Function and the Line $G(y) = y$) are \emph{Fixed Points} of the System
-
-\emph{Repulsive Node} -- derivative $F'(y_0) > 1$; the curve $F$ crosses under
-the Line $y=x$ from the left to over the Line on the right
-
-\emph{Repulsive Focus} -- $F'(y_0) < -1$; sequence will move
-away but alternate sides
-
-\emph{Attractive Node} -- $0 \leq F'(y_0) < 1$
-
-\emph{Attractive Focus} -- $-1 < F'(y_0) < 0$
-
-for $F'$ equal to $1$ or $-1$, a Fixed Point could either be Attractive or
-Repulsive or Attractive from one side and Repulsive from the other
-
-for the Sequence $\{ y_0, y_1, y_2, \ldots \}$ of the Solution of a Dynamical
-System $y_{n+1} = F(y_n)$, any Element of the Sequence can be obtained form
-$y_0$ by applying the Composed Function $F^n$:
-\[
-  y_n = F^n(y_0) = F(F(\cdots(F(y_0))))
-\]
-the Points of a Solution Sequence containing a \emph{Cycle}
-(\S\ref{sec:periodic_sequence}) are called \emph{Periodic Points}, and the
-number of Periodic Points is called the \emph{Period} of the Cycle and for
-a Cycle of Period $n$:
-\[
-  F^n(y) = y
-\]
-i.e. the Periodic Points are Fixed Points of the Composed Function $F^n$ where
-$n$ is the Period of the Cycle (but none of them are Fixed Points of the
-original Function $F$);
-the Derivative of $F^n$ as $y_0$ can be computed using the Chain Rule:
-\[
-  (F^n(y_0))' = F'(y_0)F'(y_1)\cdots{F'(y_{n-1})}
-\]
-(FIXME: does this only work for $n$ of an $n$-period cycle ???)
-
-for a Cycle of Period $m$, all Points $F^j(y_0)$ with $j < m$ are not Fixed
-Points of $F^j$
-
-for the Absolute Value of the Product of the Derivative at the $m$ Points of the
-Cycle:
-\[
-  \prod_{j=0}^{m-1} F'(y_j)
-\]
-greater than $1$ then the Cycle is \emph{Repulsive}, less than $1$ the Cycle is
-\emph{Attractive} and if identical to $1$ the Cycle could be either Attractive
-or Repulsive in different regions
-(FIXME: is this product equal to the derivative $F^m(y_0)'$ ???)
-
-Discrete First-order Dynamical Systems can be used to Numerically
-(\S\ref{sec:numerical_method}) Solve Single-variable Equations-- the problem to
-be Solved consisting of finding the Roots (\S\ref{sec:root_finding}) of a Real
-Function $f$, i.e. the values of $x$ such that:
-\[
-  f(x) = 0
-\]
-For Equations that cannot be solved Analytically, the Numerical Method involves
-defining a Dynamical System with Convergent Sequences
-(\S\ref{sec:convergent_sequence}) which approach Solutions to the Equation:
-\begin{itemize}
-  \item Iterative Methods (\S\ref{sec:iterative_method})
-  \item Newton's Method (\S\ref{sec:newtons_method})
-\end{itemize}
+Thm. \emph{Non-linear Centers in 2D Conservative Systems}:
+For Conservative $\dot{\vec{x}} = \vec{f}(\vec{x})$ with $\vec{x} \in
+\reals^2$, Continuously Differentiable $\vec{f}$, and $E(\vec{x})$ a Conserved
+Quantity, with Isolated Fixed Point $\vec{x}^*$, if $\vec{x}^*$ is a Local
+Minimum or Local Maximum of $E(\vec{x})$ is a Center, i.e. all Trajectories
+sufficiently close to $\vec{x}^*$ are Closed
 
 
+\emph{Example - Dimensionless Pendulum}
 
-\subsubsection{Graph Dynamical System}\label{sec:graph_dynamical_system}
+Phase Space is a Cylinder (not a Plane)
 
-\paragraph{Sequential Dynamical System}
-\label{sec:sequential_dynamical_system}\hfill
+Non-linear Center
 
-\fist Boolean Networks (\S\ref{sec:boolean_network})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Time-Variant System}\label{sec:time_variant_system}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Time-Invariant (TIV) System}\label{sec:tiv_system}
-% --------------------------------------------------------------------
-
-a System with a Time-dependent System Function (Evolution Function
-\S\ref{sec:evolution_function}) that is not a \emph{direct} Function of Time,
-instead it is a Function of the Time-dependent \emph{Input Function}, i.e. the
-Transfer Function of the System is only a Function of Time as expressed by the
-Input and Output
-
-the ``System Block'' \emph{Commutes} with an arbitrary Delay (FIXME: clarify)
-
-
-
-\subsubsection{Linear Shift-Invariant (LSI) System}\label{sec:lsi_system}
-
-Discrete (\S\ref{sec:discrete_dynamical_system})
-
-\fist Linear Translation-invariant (Continuous \S\ref{sec:lti_system})
-
-
-
-\subsubsection{Linear Translation-Invariant (LTI) System}
-\label{sec:lti_system}
-
-or \emph{Linear Time-Invariant Systems}
-
-Continuous (\S\ref{sec:continuous_dynamical_system})
-
-\fist Linear Shift-invariant (Discrete \S\ref{sec:lsi_system})
-
-for a Linear Time-invariant System, when taking the Laplace Transform
-(\S\ref{sec:laplace_transform}) and if the Poles (\S\ref{sec:complex_pole}) in
-the Complex Plane are:
-\begin{itemize}
-  \item in the Right Half Plane (positive Real component) then the System is
-    \emph{Unstable}
-  \item in the Left Half Plane (negative Real component) then it will be
-    \emph{Stable}
-  \item on the Imaginary Axis, it will have \emph{Marginal Stability}
-\end{itemize}
-
-
-
-\subsubsection{Non-linear Time-Invariant (NLTI) System}\label{sec:nlti_system}
+``Heteroclinic Orbits'' connect two Saddle Points
 
 
 
