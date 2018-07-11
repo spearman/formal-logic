@@ -20,8 +20,7 @@ Analyticity, Holomorphy, Harmonicity, and Conformality \emph{coincide}; for the
 Reals (\S\ref{sec:real_analysis}), and Quaternions
 (\S\ref{sec:quaternionic_analysis}), not all notions are the same.
 
-\fist cf. Multivariate Analysis (Statistics
-\S\ref{sec:multivariate_analysis})
+\fist cf. Multivariate Analysis (Statistics \S\ref{sec:multivariate_analysis})
 
 \emph{Differential and Integral Calculus} (\S\ref{sec:differential_calculus}),
 \S\ref{sec:integral_calculus})
@@ -40,6 +39,9 @@ Reals (\S\ref{sec:real_analysis}), and Quaternions
     Definite Integral (\S\ref{sec:integral}) \\
   \hline
 \end{tabular}
+
+\fist Analytic Geometry (Part \ref{part:analytic_geometry}), Differential
+Geometry (\S\ref{sec:differential_geometry})
 
 
 
@@ -618,20 +620,7 @@ every $x_0$ in its Domain Converges to the Function in some Neighborhood
 % ====================================================================
 
 $R^1$ -- Real Line (\S\ref{sec:real_line}): 1-dimensional Real
-Coordinate Space
-
-(Infinitesimal) Calculus:
-\begin{itemize}
-\item Differential Calculus: Differentiable Functions
-  (\S\ref{sec:differentiable_function})
-\item Integral Calculus: Integrable Functions (\S\ref{sec:integrable_function})
-\item Multivariable Calculus (\S\ref{sec:multivariable_calculus}) --
-  extension of Calculus in one Variable to Functions of several Variables
-\end{itemize}
-uses notions of \emph{Convergent Infinite Sequences}
-(\S\ref{sec:convergent_sequence}) and \emph{Convergent Infinite Series}
-(\S\ref{sec:convergent_series}); related by \emph{Fundamental Theorem of
-  Calculus} (\S\ref{sec:fundamental_calculus_theorem})
+Coordinate Space (\S\ref{sec:real_coordinate_space})
 
 
 
@@ -664,7 +653,8 @@ $a = x_0 < x_1 < x_2 < \ldots < x_n = b$
 \subsection{Real Function}\label{sec:real_function}
 % --------------------------------------------------------------------
 
-or \emph{Real-valued Function}
+A \emph{Real Function} is a \emph{Real-valued Function of a Real Variable}
+$\reals \rightarrow \reals$
 
 \fist Vector-valued Functions (\S\ref{sec:vector_function})
 
@@ -1905,7 +1895,7 @@ applications of Calculus of Finite Differences
     (\S\ref{sec:differential_equation}) -- Finite Element Method
     (\S\ref{sec:finite_element_method}), Finite Volume Method
     (\S\ref{sec:finite_volume_method})
-  \item Solving \emph{Systems of Equations} (\S\ref{sec:system_of_equations}):
+  \item Solving \emph{Systems of Equations} (\S\ref{sec:equation_system}):
     \begin{itemize}
       \item \emph{Direct Methods} (\S\ref{sec:direct_method}) for Solving
         Systems of Linear Equations using Matrix Decomposition
@@ -2335,7 +2325,7 @@ the exact Solution (in the absence of Rounding Errors)
 cf. Iterative Methods (\S\ref{sec:iterative_method}) use an initial ``guess'' to
 generate a Sequence of imporving Approximate Solutions
 
-Solving Systems of Linear Equations (\S\ref{sec:system_of_linear_equations})
+Solving Systems of Linear Equations (\S\ref{sec:linear_equation_system})
 using Matrix Decomposition (\S\ref{sec:matrix_decomposition}):
 \begin{itemize}
   \item Gaussian Elimination (\S\ref{sec:gaussian_elimination})
@@ -2401,7 +2391,7 @@ Differential Equation, e.g. by Finite Differences
 \paragraph{Jacobi Method}\label{sec:jacobi_method}\hfill
 
 Diagonally Dominant (\S\ref{sec:diagonally_dominant}) System of Linear
-Equations (\S\ref{sec:system_of_linear_equations})
+Equations (\S\ref{sec:linear_equation_system})
 
 
 
@@ -2416,7 +2406,7 @@ Equations (\S\ref{sec:system_of_linear_equations})
   Displacement})
 
 Iterative Method for solving a Linear System of Equations
-(\S\ref{sec:system_of_linear_equations})
+(\S\ref{sec:linear_equation_system})
 
 Convergence only guaranteed if the Matrix is either Diagonally
 Dominant (\S\ref{sec:diagonally_dominant}) or Symmetric
@@ -2497,7 +2487,7 @@ all Root-finding Algorithms proceed by Iteration, but an \emph{Iterative
 \fist cf. Iterative Methods (\S\ref{sec:iterative_method})
 
 \fist Systems of Nonlinear Equations
-(\S\ref{sec:system_of_nonlinear_equations})
+(\S\ref{sec:nonlinear_equation_system})
 
 \fist cf. Nonlinear Programming (\S\ref{sec:nonlinear_programming}), Nonlinear
 Optimization (\S\ref{sec:nonlinear_optimization})
@@ -2843,6 +2833,14 @@ Pointwise Domination implies Linear Dominance:
 \section{Differential Calculus}\label{sec:differential_calculus}
 % ====================================================================
 
+\emph{Differential Calculus in One Variable}
+
+\fist Multivariable Calculus (\S\ref{sec:multivariable_calculus}):
+\begin{itemize}
+  \item Partial Derivatives (\S\ref{sec:partial_derivative})
+  \item Differential Forms (\S\ref{sec:differential_form})
+\end{itemize}
+
 \fist Differential Geometry (\S\ref{sec:differential_geometry})
 
 \fist Differential Topology (\S\ref{sec:differential_topology})
@@ -2892,6 +2890,8 @@ $\mathrm{d}x$:
 
 \paragraph{Implicit Equation}\label{sec:implicit_equation}\hfill
 
+%FIXME: move ???
+
 $f(x_1, \ldots, x_n) = 0$ where $f$ is often a Polynomial
 
 \fist an Implicit Curve (\S\ref{sec:implicit_curve}) is a Plane Curve defined by
@@ -2915,6 +2915,13 @@ such a Function exists
 
 
 
+\subparagraph{Implicitization}\label{sec:implicitization}\hfill
+
+the process of finding the Implicit Equation for a Manifold or Variety from its
+Parametric Representation (Parameterization \S\ref{sec:parameterization})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Derivative}\label{sec:derivative}
 % --------------------------------------------------------------------
@@ -2932,6 +2939,12 @@ where the ``Numerator'' $\mathrm{d}y$ is the \emph{Differential} of $y$ at $x$
 \fist Difference Quotient (\S\ref{sec:difference_quotient}) -- Discrete
 equivalent of Derivative as a Quotient of Differentials (Infinitesimal
 Differences)
+
+\fist Exterior Derivative (\S\ref{sec:exterior_derivative}) -- Operation acting
+on a Differential $k$-form (\S\ref{sec:differential_form}) and produces a
+Differential $(k+1)$-form
+
+\fist Interior Derivative (\S\ref{sec:interior_derivative}) -- TODO
 
 The process of ``finding'' (FIXME: or ``taking'' or computing ???) a Derivative
 is called \emph{Differentiation}.
@@ -3404,9 +3417,9 @@ where $a_i(x)$ and $r(x)$ are Continuous Functions in $x$
 \S\ref{sec:pde}) is a Differential Equation
 containing Unknown Multivariable Functions and their Partial Derivatives.
 
-\fist System of ODEs (\S\ref{sec:system_of_odes})
+\fist System of ODEs (\S\ref{sec:ode_system})
 
-\fist System of DAEs (\S\ref{sec:system_of_daes}): a System of Equations that
+\fist System of DAEs (\S\ref{sec:dae_system}): a System of Equations that
 either contains Differential Equations and Algebraic (Polynomial) Equations
 (\S\ref{sec:polynomial_equation}), or is equivalent to one; arises in
 Constraints of Multibody Systems (\S\ref{sec:multibody_system}); differs from
@@ -3497,7 +3510,7 @@ When the Differential Equation is represented as a Vector Field or Slope Field
 
 An \emph{Integral Curve} is a Parametric Curve that represents a
 \emph{specific} Solution of an Ordinary Differential Equation
-(\S\ref{sec:ode}), or System of Equations (\S\ref{sec:system_of_odes}).
+(\S\ref{sec:ode}), or System of ODEs (\S\ref{sec:ode_system}).
 
 When the Differential Equation is represented as a Vector Field or Slope Field
 (\S\ref{sec:slope_field}), the corresponding Integral Curves are Tangent to the
@@ -3625,7 +3638,7 @@ be made \emph{Separable}.
 cf. Homogeneous Difference Equation
 (\S\ref{sec:homogeneous_difference_equation}), Homogeneous Polynomial
 (\S\ref{sec:homogeneous_polynomial}), Homogeneous System of Linear Equations
-(\S\ref{sec:homogeneous_system})
+(\S\ref{sec:homogeneous_linear_equation_system})
 
 \emph{not} ``Homogeneous Linear Differential Equation''
 (\S\ref{sec:homogeneous_linear_differential})
@@ -3907,6 +3920,12 @@ cf. Reverse Bessel Polynomials (\S\ref{sec:reverse_bessel_polynomial})
 \section{Integral Calculus}\label{sec:integral_calculus}
 % ====================================================================
 
+\emph{Integral Calculus in One Variable}
+
+\fist Multivariable Calculus (\S\ref{sec:multivariable_calculus})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Antiderivative}\label{sec:antiderivative}
 % --------------------------------------------------------------------
@@ -3960,9 +3979,10 @@ solvability of the ``Integration Problem'' for a certain class of Expressions
 
 \emph{Definite Integral}
 
-\emph{Integrand}
+\emph{Integrand} -- the Function to be Integrated
 
 notation:
+... TODO
 
 \emph{Standard Integral} of a Real-valued Function $f(x)$ of a Real Variable $x$
 on the Interval $[a,b]$:
@@ -4371,10 +4391,10 @@ Variables
 
 Calculus in one Variable:
 \begin{itemize}
-\item Differential Calculus: Differentiable Functions
-  (\S\ref{sec:differentiable_function}), Differential Equations
+\item Differential Calculus (\S\ref{sec:differential_calculus}): Differentiable
+  Functions (\S\ref{sec:differentiable_function}), Differential Equations
   (\S\ref{sec:differential_equation})
-\item Integral Calculus: Integrable Functions
+\item Integral Calculus (\S\ref{sec:integral_calculus}): Integrable Functions
   (\S\ref{sec:integrable_function}), Integral Equation
   (\S\ref{sec:integral_equation})
 \end{itemize}
@@ -4412,58 +4432,6 @@ as taking the Directional Derivative (\S\ref{sec:directional_derivative}):
 % --------------------------------------------------------------------
 
 Contour Map
-
-
-
-% --------------------------------------------------------------------
-\subsection{Parametric Function}\label{sec:parametric_function}
-% --------------------------------------------------------------------
-
-\fist \emph{Vector Function} (\S\ref{sec:vector_function})
-
-Line Integral (\S\ref{sec:line_integral})
-
-\fist Curve (Topology \S\ref{sec:curve}) -- a Topological Space Homeomorphic to
-a Line (\S\ref{sec:line})
-
-\fist Parametric Curve (\S\ref{sec:parametric_curve})
-
-\fist Parametric Surface (\S\ref{sec:parametric_surface})
-
-
-
-\subsubsection{Space-filling Curve}\label{sec:space_filling_curve}
-
-\subsubsection{Curvature}\label{sec:curvature}
-
-Radius of Curvature $R$
-
-\emph{Curvature} $\kappa = \frac{1}{R}$
-
-for Unit Tangent Vector $\hat{T}$, Arclength $s$:
-\[
-  \kappa = \|\frac{d\hat{T}}{ds}\|
-    = \|\frac{\frac{d\hat{T}}{dt}}{\frac{d\vec{r}}{dt}}\|
-\]
-where $\vec{r}(t)$ is some Parametric Function
-
-for a Plane Curve (\S\ref{sec:plane_curve}) $\vec{r}(t) = [x(t),y(t)]$:
-\[
-  \kappa = \frac{x'(t)y''(t) - y'(t)x''(t)} {(x'(t)^2 + y'(t)^2)^{\frac{3}{2}}}
-\]
-where the Numerator is equal to $\vec{r}'(t) \times \vec{r}''(t)$ and:
-\[
-  \kappa = \frac{\vec{r}' \times \vec{r}''}{\|\vec{r}'\|^3}
-\]
-
-\fist Line (Geometry \S\ref{sec:line}) -- a Primitive Geometric Object of Zero
-Curvature
-
-
-
-\subsubsection{Parametric Equation}\label{sec:parametric_equation}
-
-\fist Parametric Surface (\S\ref{sec:parametric_surface})
 
 
 
@@ -4650,6 +4618,150 @@ Vector Field on a Manifold
 
 
 % --------------------------------------------------------------------
+\subsubsection{Differential Form}\label{sec:differential_form}
+% --------------------------------------------------------------------
+
+%FIXME: move to differential geometry
+
+approach to Multivariable Calculus (\S\ref{sec:multivariable_calculus})
+that is \emph{independent} of Coordinates
+
+Differential $1$-forms are naturally Dual to Vector Fields
+(\S\ref{sec:vector_field}) on a Manifold
+
+the Exterior Derivative (\S\ref{sec:exterior_derivative}) is an Operation on
+Differential Forms that acts on a $k$-form to produce a $(k+1)$-form
+
+Exterior Algebra (\S\ref{sec:exterior_algebra}) of Differential Forms on a
+Differentiable Manifold (\S\ref{sec:differentiable_manifold})
+
+pairing between Vector Fields and $1$-forms is extended to arbitrary
+Differential Forms by the Interior Derivative (Interior Product
+\S\ref{sec:interior_derivative}), a Degree $-1$ Antiderivation on the Exterior
+Algebra of Differential Forms on a Smooth Manifold
+
+Exterior Product (\S\ref{sec:exterior_product}) -- TODO
+
+\fist Contact Geometry (\S\ref{sec:contact_geometry}): geometric structure on
+Smooth Manifolds given by a Hyperplane Distribution
+(\S\ref{sec:tangent_bundle_distribution}) may be given (Locally) as the Kernel
+of a Differential $1$-form and the \emph{Maximal Non-degeneracy Condition}) on
+the Form
+
+Bott-Tu1982 - \emph{Differential Forms in Algebraic Topology}
+
+(ncat):
+
+a Differential $n$-form on $X$ is a Smooth $n$-functor $P_n(X) \rightarrow
+\mathbf{B}^n\reals$ from the Path $n$-groupoid f $X$ to the $n$-fold Delooping
+of the Additive Lie Group of Real numbers (FIXME: explain, xref)
+
+
+
+\paragraph{Tautological $1$-form}\label{sec:tautological_1form}\hfill
+
+a \emph{Tautological $1$-form} is a $1$-form defined on the Cotangent Bundle
+(\S\ref{sec:cotangent_bundle}) $T * Q$ of a Manifold $Q$
+
+the Exterior Derivative of a Tautological $1$-form defines a \emph{Symplectic
+  Form} (\S\ref{sec:symplectic_form}) giving $T * Q$ the structure of a
+Symplectic Manifold (\S\ref{sec:symplectic_manifold})
+
+relates the formalisms of Hamiltonian (\S\ref{sec:hamiltonian_system}) and
+Lagrangian (\S\ref{sec:lagrangian_system}) Mechanics
+
+in Canonical Coordinates:
+\[
+  \theta = \sum_i p_i dq^i
+\]
+
+
+
+\paragraph{Exterior Derivative}\label{sec:exterior_derivative}\hfill
+
+Operation on Differential Forms that when acting on a $k$-form produces a
+$k+1$-form; extends the Differential (\S\ref{sec:differential}) of a Function
+and is directly related to the Curl and Divergence of a Vector Field
+
+Generalized Stokes' Theorem
+
+the Exterior Derivative gives the Exterior Algebra
+(\S\ref{sec:exterior_algebra}) of Differential Forms on a Manifold the structure
+of a Differential Algebra (\S\ref{sec:differential_algebra})
+
+\fist cf. Interior Derivative (Interior Product \S\ref{sec:interior_product})
+
+``Oriented Density'' %FIXME
+
+
+
+\paragraph{Interior Derivative}\label{sec:interior_derivative}\hfill
+
+pairing between Vector Fields (\S\ref{sec:vector_field}) and $1$-forms
+(Differential $1$-forms are naturally Dual to Vector Fields on a Manifold)
+extended to arbitrary Differential Forms
+
+
+
+\paragraph{Symplectic Form}\label{sec:symplectic_form}\hfill
+
+%FIXME: move this section to bilinear forms ???
+
+a Symplectic Manifold (\S\ref{sec:symplectic_manifold}) is a Differentiable
+Manifold equipped with a Closed Non-degenerate $2$-form called the
+\emph{Symplectic Form}
+
+the Symplectic Form in Symplectic Geometry (\S\ref{sec:symplectic_geometry})
+plays the role analagous to Metric Tensor (\S\ref{sec:metric_tensor}) in
+Riemannian Geometry (\S\ref{sec:riemannian_geometry})
+
+a Symplectic Bilinear Form (\S\ref{sec:symplectic_bilinear}) is a
+Non-degenerate Alternating (Skew-symmetric) Bilinear Form
+(\S\ref{sec:alternating_form})
+
+Symplectic Vector Spaces (\S\ref{sec:symplectic_vectorspace}) are equipped with
+a Symplectic Bilinear Form. If the underlying Field has Characteristic
+(\S\ref{sec:ring_characteristic}) $\neq 2$, Alternation is \emph{equivalent} to
+Skew-symmetry; for Characteristic $=2$, the Skew-symmetry is \emph{implied by}
+(but does not imply) \emph{Alternation}-- every Symplectic Form is a
+\emph{Symmetric (Bilinear) Form} (\S\ref{sec:symmetric_bilinear}) but not
+every Symmetric Form is Symplectic.
+
+$Sp(V)$ -- Symplectic Group (\S\ref{sec:symplectic_group}): Subgroup of the
+General Linear Group $GL(V)$ which Preserves a Symplectic Form on $V$ (i.e. a
+Non-degenerate Alternating Form \S\ref{sec:alternating_form})
+
+the Exterior Derivative of a Tautological $1$-form
+(\S\ref{sec:tautological_1form}) defined on the Cotangent Bundle
+(\S\ref{sec:cotangent_bundle}) $T * Q$ of a Manifold $Q$ defines a Symplectic
+Form giving $T * Q$ the Structure of a Symplectic Manifold
+
+Canonical Symplectic Form (Poincar\'e $2$-form):
+\[
+  \omega = -d\theta = \sum_i dq^i \wedge dp_i
+\]
+
+\asterism
+
+\url{https://mathoverflow.net/questions/19932/what-is-a-symplectic-form-intuitively}:
+
+``...given a Direction that we want to think of as Position, it tells us what
+the Momentum Direction is. What it gives us are pairs: given one Coordinate,
+there's a second so that the pair are \emph{Canonically Conjugate}, which means
+that, with respect to each other, they will \emph{act like} Position and
+Momentum and that they'll ignore the 'other direction' (that is, things will
+Poisson Commute)''
+
+\asterism
+
+Clifford Algebras (\S\ref{sec:clifford_algebra}) represent the same structure
+for Non-degenerate Symmetric Bilinear Forms (\S\ref{sec:symmetric_bilinear})
+that Weyl Algebras (Symplectic Clifford Algebras \S\ref{sec:weyl_algebra})
+represent for Symplectic Bilinear Forms (\S\ref{sec:symplectic_form})
+
+
+
+% --------------------------------------------------------------------
 \subsection{Iterated Integral}\label{sec:iterated_integral}
 % --------------------------------------------------------------------
 
@@ -4697,7 +4809,7 @@ $\rho(x,y,z)$
 
 \subsubsection{Line Integral}\label{sec:line_integral}
 
-Parametric Function (\S\ref{sec:parametric_function}) $\vec{c}(t) = p(t)\hat{i}
+Parametric Equation (\S\ref{sec:parametric_equation}) $\vec{c}(t) = p(t)\hat{i}
 + q(t)\hat{j}$
 
 Parametric Surface (\S\ref{sec:parametric_surface}) defined by Multivariable
@@ -4803,117 +4915,6 @@ used to calculate ``\emph{Flux Densities}'' (\S\ref{sec:flux}) %FIXME
 
 
 % --------------------------------------------------------------------
-\subsection{Exterior Derivative}\label{sec:exterior_derivative}
-% --------------------------------------------------------------------
-
-\fist Exterior Algebra (\S\ref{sec:exterior_algebra}), Exterior Product
-(\S\ref{sec:exterior_product})
-
-$\wedge$
-
-``Oriented Density'' %FIXME
-
-
-
-\subsubsection{Differential Form}\label{sec:differential_form}
-
-approach to Multivariable Calculus (\S\ref{sec:multivariable_calculus})
-that is \emph{independent} of Coordinates
-
-\fist Contact Geometry (\S\ref{sec:contact_geometry}): geometric structure on
-Smooth Manifolds given by a Hyperplane Distribution
-(\S\ref{sec:tangent_bundle_distribution}) may be given (Locally) as the Kernel
-of a Differential $1$-form and the \emph{Maximal Non-degeneracy Condition}) on
-the Form
-
-Bott-Tu1982 - \emph{Differential Forms in Algebraic Topology}
-
-(ncat):
-
-a Differential $n$-form on $X$ is a Smooth $n$-functor $P_n(X) \rightarrow
-\mathbf{B}^n\reals$ from the Path $n$-groupoid f $X$ to the $n$-fold Delooping
-of the Additive Lie Group of Real numbers (FIXME: explain, xref)
-
-
-
-\paragraph{Tautological $1$-form}\label{sec:tautological_1form}\hfill
-
-a \emph{Tautological $1$-form} is a $1$-form defined on the Cotangent Bundle
-(\S\ref{sec:cotangent_bundle}) $T * Q$ of a Manifold $Q$
-
-the Exterior Derivative of a Tautological $1$-form defines a \emph{Symplectic
-  Form} (\S\ref{sec:symplectic_form}) giving $T * Q$ the structure of a
-Symplectic Manifold (\S\ref{sec:symplectic_manifold})
-
-relates the formalisms of Hamiltonian (\S\ref{sec:hamiltonian_system}) and
-Lagrangian (\S\ref{sec:lagrangian_system}) Mechanics
-
-in Canonical Coordinates:
-\[
-  \theta = \sum_i p_i dq^i
-\]
-
-
-
-\paragraph{Symplectic Form}\label{sec:symplectic_form}\hfill
-
-%FIXME: move this section to bilinear forms ???
-
-a Symplectic Manifold (\S\ref{sec:symplectic_manifold}) is a Differentiable
-Manifold equipped with a Closed Non-degenerate $2$-form called the
-\emph{Symplectic Form}
-
-the Symplectic Form in Symplectic Geometry (\S\ref{sec:symplectic_geometry})
-plays the role analagous to Metric Tensor (\S\ref{sec:metric_tensor}) in
-Riemannian Geometry (\S\ref{sec:riemannian_geometry})
-
-a Symplectic Bilinear Form (\S\ref{sec:symplectic_bilinear}) is a
-Non-degenerate Alternating (Skew-symmetric) Bilinear Form
-(\S\ref{sec:alternating_form})
-
-Symplectic Vector Spaces (\S\ref{sec:symplectic_vectorspace}) are equipped with
-a Symplectic Bilinear Form. If the underlying Field has Characteristic
-(\S\ref{sec:ring_characteristic}) $\neq 2$, Alternation is \emph{equivalent} to
-Skew-symmetry; for Characteristic $=2$, the Skew-symmetry is \emph{implied by}
-(but does not imply) \emph{Alternation}-- every Symplectic Form is a
-\emph{Symmetric (Bilinear) Form} (\S\ref{sec:symmetric_bilinear}) but not
-every Symmetric Form is Symplectic.
-
-$Sp(V)$ -- Symplectic Group (\S\ref{sec:symplectic_group}): Subgroup of the
-General Linear Group $GL(V)$ which Preserves a Symplectic Form on $V$ (i.e. a
-Non-degenerate Alternating Form \S\ref{sec:alternating_form})
-
-the Exterior Derivative of a Tautological $1$-form
-(\S\ref{sec:tautological_1form}) defined on the Cotangent Bundle
-(\S\ref{sec:cotangent_bundle}) $T * Q$ of a Manifold $Q$ defines a Symplectic
-Form giving $T * Q$ the Structure of a Symplectic Manifold
-
-Canonical Symplectic Form (Poincar\'e $2$-form):
-\[
-  \omega = -d\theta = \sum_i dq^i \wedge dp_i
-\]
-
-\asterism
-
-\url{https://mathoverflow.net/questions/19932/what-is-a-symplectic-form-intuitively}:
-
-``...given a Direction that we want to think of as Position, it tells us what
-the Momentum Direction is. What it gives us are pairs: given one Coordinate,
-there's a second so that the pair are \emph{Canonically Conjugate}, which means
-that, with respect to each other, they will \emph{act like} Position and
-Momentum and that they'll ignore the 'other direction' (that is, things will
-Poisson Commute)''
-
-\asterism
-
-Clifford Algebras (\S\ref{sec:clifford_algebra}) represent the same structure
-for Non-degenerate Symmetric Bilinear Forms (\S\ref{sec:symmetric_bilinear})
-that Weyl Algebras (Symplectic Clifford Algebras \S\ref{sec:weyl_algebra})
-represent for Symplectic Bilinear Forms (\S\ref{sec:symplectic_form})
-
-
-
-% --------------------------------------------------------------------
 \subsection{Saddle Point}\label{sec:saddle_point}
 % --------------------------------------------------------------------
 
@@ -4996,9 +4997,27 @@ equivalent to Three-dimensional Bivectors (\S\ref{sec:bivector})
 
 \subsubsection{Vector Function}\label{sec:vector_function}
 
-or \emph{Vector-valued Function}
+\url{https://math.stackexchange.com/questions/662009/what-is-the-difference-between-vector-valued-functions-and-parametric-equations}:
 
-\fist Parametric Function (\S\ref{sec:parametric_function})
+A \emph{Vector Function} (or \emph{Vector-valued Function}) is a Map:
+\[
+  f : U \subset R^m \rightarrow V \subset R^n
+\]
+
+\fist cf. a \emph{Parameterization} (\S\ref{sec:parameterization}) for a
+portion of a Submanifold $M$ in Euclidean Space is a Map:
+\[
+  \varphi : U \subset R^m \rightarrow M \subset R^n
+\]
+with additional Properties:
+\begin{itemize}
+  \item $U$ is an Open Set (\S\ref{sec:open_set})
+  \item $\varphi$ is a Homeomorphism (\S\ref{sec:homeomorphism}) onto its Image
+  \item everywhere the Rank of $D\varphi = m$ (FIXME: clarify)
+\end{itemize}
+i.e. a Parameterization is always in the form of a Vector Valued Function, but
+conversely Vector-valued Functions are used to Parameterize Varieties
+(\S\ref{sec:algebraic_variety}) %FIXME: clarify
 
 the Matrix of all First-order Partial Derivatives
 (\S\ref{sec:partial_derivative}) of a Vector Function is the \emph{Jacobian
@@ -5056,7 +5075,7 @@ to the Equation
 
 \fist Algebraic Geometry (Part \ref{part:algebraic_geometry}): study of Zero
 Sets of Systems of Polynomial Equations
-(\S\ref{sec:system_of_polynomial_equations})
+(\S\ref{sec:polynomial_equation_system})
 
 e.g. the Circle (\S\ref{sec:n_sphere}) $S^1 = \{ (x,y) \in \reals^2 | x^2 + y^2
 - 1 = 0 \}$
@@ -5164,7 +5183,7 @@ its Derivative
 
 Jacobian Matrix (\S\ref{sec:jacobian_matrix})
 
-\fist the Jacobian Matrix for a System of DAEs (\S\ref{sec:system_of_daes}) is
+\fist the Jacobian Matrix for a System of DAEs (\S\ref{sec:dae_system}) is
 a Singular (Non-invertible) Matrix (\S\ref{sec:singular_matrix})
 
 \fist Locally Linear Transformation (\S\ref{sec:locally_linear})
@@ -5625,6 +5644,8 @@ Approximating them with Difference Equations
     System is a $y0$ such that $F(y0) = y0$
 \end{itemize}
 
+Matrix Difference Equation, System of Difference Equations (TODO)
+
 Non-linear:
 \begin{itemize}
   \item Logistic Map (\S\ref{sec:logistic_map}):\[
@@ -5644,7 +5665,7 @@ Non-linear:
 cf. Homogeneous Differential Equation
 (\S\ref{sec:homogeneous_differential_equation}), Homogeneous Polynomial
 (\S\ref{sec:homogeneous_polynomial}), Homogeneous System of Linear Equations
-(\S\ref{sec:homogeneous_system})
+(\S\ref{sec:homogeneous_linear_equation_system})
 
 
 

@@ -392,6 +392,14 @@ Kripke Frame with additional structure used to Model Modal
 (\S\ref{sec:modal_logic}) and Intermediate Logic
 (\S\ref{sec:intermediate_logic}).
 
+\emph{J\'onsson-Tarski Duality} --
+generalization of Stone Representation Theorem for Boolean Algebras
+(\S\ref{sec:boolean_algebra}) to Modal Algebras (\S\ref{sec:modal_algebra});
+each Modal Algebra can be Represented (\S\ref{sec:representation}) as the
+Algebra of Admissible Sets (\S\ref{sec:admissible_set} in a Modal General Frame;
+$(\cdots)^+$ and $(\cdots)_+$ are Contravariant Functors between the Category of
+General Frames and the Category of Modal Algebras
+
 
 
 \paragraph{Kripke Model}\label{sec:kripke_model}\hfill
@@ -556,6 +564,12 @@ Meaning Explanation for Classical Linear Logic:
 
 (FIXME: clarify ``Construction'')
 
+\begin{itemize}
+\item the Variety (\S\ref{sec:variety}) of all Modal Algebras
+  (\S\ref{sec:modal_algebra}) is the equivalent Algebraic Semantics of the Modal
+  $K$ Logic (\S\ref{sec:modal_logic}), in the sense of Abstract Algebraic Logic
+  (\S\ref{sec:abstract_algebraic_logic})
+\end{itemize}
 
 
 % --------------------------------------------------------------------
@@ -567,6 +581,38 @@ $Ult(B) \cong Hom_\mathbf{BA}(B,\mathbf{2})$ Ultrafilters
 
 any Control Category (\ref{sec:control_category}) in which $\parr$ is
 Bifunctorial is equivalent to a Boolean Algebra \cite{selinger01}
+
+for every Boolean Algebra $B$, the \emph{Stone Space} (Profinite Space
+\S\ref{sec:stone_space}) $\xspace{S}(B)$ is a Compact Totally Disconnected
+Hausdorff Space (\S\ref{sec:hausdorff_space}), and conversely given any
+Topological Space $X$, the collection of Clopen Subsets (\S\ref{sec:clopen_set})
+of $X$ is a Boolean Algebra
+
+Representation Theory (\S\ref{sec:representation_theory}) of Boolean Algebras
+(\S\ref{sec:boolean_algebra}) -- every Boolean Algebra can be Represented as a
+Field of Sets (Set Algebra \S\ref{sec:set_algebra})
+
+\emph{Stone Representation Theorem} -- every Boolean Algebra $B$ is Isomorphic
+to a certain Field of Sets, viz. the Algebra of Clopen Subsets of its Stone
+Space $\xspace{S}(B)$ sending an Element $b \in B$ to the Set of all
+Ultrafilters that contain $b$; Category Theoretic statement: there is a Duality
+between the Category of Boolean Algebras, $\cat{BA}$, and the Category of Stone
+Spaces, additionally implying that each Homomorphism from a Boolean Algebra $A$
+to a Boolean Algebra $B$ corresponds in a ``natural way'' to a \emph{Continuous
+  Function} (\S\ref{sec:continuous_function}) from $S(B)$ to $S(A)$, i.e. there
+is a Contravariant Functor (\S\ref{sec:contravariant_functor}) that gives an
+Equivalence between Categories (a Nontrivial Duality of Categories)
+
+\fist Representation Theory (\S\ref{sec:representation_theory})
+
+\fist Stone Representation Theorem for Boolean Algebras is a special case of
+\emph{Stone Duality} (\S\ref{sec:stone_duality}) for Dualities between
+Topological Spaces (\S\ref{sec:topological_space}) and Partially Ordered Sets
+(\S\ref{sec:poset})
+
+\fist \emph{J\'onsson-Tarski Duality} --
+generalization of Stone Representation Theorem to Modal Algebras
+(\S\ref{sec:modal_algebra}) and General Frames (\S\ref{sec:general_frames})
 
 
 
@@ -670,38 +716,70 @@ Category $\cat{Sob}$ of Sober Spaces (\S\ref{sec:sober_space}) with Continuous
 Functions and the Category $\cat{SFrm}$ of Spatial Frames (Complete Heyting
 Algebras) and Frame Homomorphisms
 
+examples:
+\begin{itemize}
+  \item Lindembaum-Tarski Algebras (\S\ref{sec:lindenbaum_tarski}) -- abstracted
+    to Abstract Algebraic Logic (\S\ref{sec:abstract_algebraic_logic})
+\end{itemize}
+
 
 
 % --------------------------------------------------------------------
-\subsection{Lindenbaum-Tarski Algebra}\label{sec:lindenbaum_tarski}
+\subsection{Modal Algebra}\label{sec:modal_algebra}
 % --------------------------------------------------------------------
 
-\cite{awodey06}
-For an Intuitionistic Propositional Calculus $\mathcal{L}$ with
-Propositional Formulas $p,q$, a \emph{Lindenbaum-Tarski Algebra} is a
-Heyting Algebra $H(\mathcal{L})$ with Equivalence Classes:
-\[
-  [p] = [q] \Leftrightarrow p \dashv \vdash q
-\]
-and Ordering Relation:
-\[
-  [p] \leq [q] \Leftrightarrow p \vdash q
-\]
-and Induced Operations:
-\[
-  1 = [\top]
-\]\[
-  0 = [\bot]
-\]\[
-  [p] \wedge [q] = [p \wedge q]
-\]\[
-  [p] \vee [q] = [p \vee q]
-\]\[
-  [p] \Rightarrow [q] = [p \Rightarrow q]
-\]
-A Formula $p$ is Provable in $\mathcal{L}$ just in case $[p] = 1$.
+(wiki):
 
-Propositional Logic (\S\ref{sec:propositional_logic})
+Algebraic Structure (\S\ref{sec:algebraic_structure}) $\langle{A, \wedge, \vee,
+  -, 0, 1, \square}\rangle$ where $\langle{A, \wedge, \vee, -, 0, 1}\rangle$ is
+a Boolean Algebra and $\square$ is a Unary Operation on $A$ Satisfying
+$\square{1} = 1$ and $\square(x \wedge y) = \square x \wedge \square y$ for all
+$x, y \in A$
+
+provides Models of Propositional Modal Logic (\S\ref{sec:modal_logic}) in the
+same way that Boolean Algebras (\S\ref{sec:boolean_algebra}) are Models of
+Classical Logic (\S\ref{sec:classical_logic})
+
+\emph{J\'onsson-Tarski Duality} -- generalization of Stone Representation
+Theorem for Boolean Algebras to Modal Algebras; each Modal Algebra can be
+Represented (\S\ref{sec:representation}) as the Algebra of Admissible Sets
+(\S\ref{sec:admissible_set} in a Modal General Frame
+(\S\ref{sec:general_frame}); $(\cdots)^+$ and $(\cdots)_+$ are Contravariant
+Functors between the Category of General Frames and the Category of Modal
+Algebras
+
+the Variety (\S\ref{sec:variety}) of all Modal Algebras
+(\S\ref{sec:modal_algebra}) is the equivalent Algebraic Semantics
+(\S\ref{sec:algebraic_semantics}) of the Normal Modal Logic $\mathrm{K}$
+(\S\ref{sec:normal_modal}), in the sense of Abstract Algebraic Logic
+(\S\ref{sec:abstract_algebraic_logic}), and the Lattice (\S\ref{sec:lattice}) if
+its Subvarieties is ``Dually Isomorphic'' (FIXME: clarify) to the Lattice of
+Normal Modal $\mathrm{K}$ Logics
+
+
+
+\subsubsection{Interior Algebra}\label{sec:interior_algebra}
+
+Interior Algebras are to Topology (Part \S\ref{part:topology}) and Modal
+$\mathsf{S4}$ Logic (\S\ref{sec:modal_logic}) what Boolean Algebras
+(\S\ref{sec:boolean_algebra}) are to Set Theory (Part \ref{part:set_theory}) and
+ordinary Propositional Logic (\S\ref{sec:propositional_logic})
+
+Interior Algebras are a Variety (\S\ref{sec:variety}) of Modal Algebras
+
+Dual to Closure Algebra (\S\ref{sec:closure_algebra})
+
+
+
+\subsubsection{Closure Algebra}\label{sec:closure_algebra}
+
+McKinsey, Tarski ``Algebra of Topology''-- describe Topological Spaces in
+Algebraic (Axiomatic) Terms
+\url{http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/}
+
+Semantics of S4 Modal Logic (\S\ref{sec:modal_logic})
+
+Dual to Interior Algebra (\S\ref{sec:interior_algebra})
 
 
 
@@ -740,40 +818,6 @@ First-order Logic (\S\ref{sec:firstorder_logic})
 Logic (\S\ref{sec:firstorder_logic}) Algebraically without Quantified
 Variables by using \emph{Predicate Functors} that Operate on Terms to
 yield Terms.
-
-
-
-% --------------------------------------------------------------------
-\subsection{Modal Algebra}\label{sec:modal_algebra}
-% --------------------------------------------------------------------
-
-Normal Modal Logic $\mathrm{K}$ (\S\ref{sec:normal_modal})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Interior Algebra}\label{sec:interior_algebra}
-% --------------------------------------------------------------------
-
-Topology (\S\ref{sec:topology})
-
-Modal Logic $\mathrm{S4}$ (\S\ref{sec:modal_logic})
-
-Dual to Closure Algebra
-
-
-
-% --------------------------------------------------------------------
-\subsection{Closure Algebra}\label{sec:closure_algebra}
-% --------------------------------------------------------------------
-
-McKinsey, Tarski ``Algebra of Topology''-- describe Topological Spaces in
-Algebraic (Axiomatic) Terms
-\url{http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/}
-
-Semantics of S4 Modal Logic (\S\ref{sec:modal_logic})
-
-Dual to Interior Algebra
 
 
 
