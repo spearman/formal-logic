@@ -4,13 +4,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Set Theory (Part \ref{part:set_theory}) as Linear Algebra over the
-``Field with one Element'' \fist $F_1$-geometry (\S\ref{sec:f1_geometry})
+\fist cf. Vector Calculus (\S\ref{sec:vector_calculus})
 
-cf. Vector Calculus (\S\ref{sec:vector_calculus})
+\fist Set Theory (Part \ref{part:set_theory}) as Linear Algebra over the
+``Field with one Element'' \fist $F_1$-geometry (\S\ref{sec:f1_geometry})
 
 \fist Linear Equations (\S\ref{sec:linear_equation}), Systems of Linear
 Equations (\S\ref{sec:linear_equation_system})
+
+\begin{itemize}
+  \item $R$-modules (Module over a Commutative Ring \S\ref{sec:module}) -- an
+    Abelian Group (\S\ref{sec:abelian_group}):
+    \[
+      (M,+)
+    \]
+    with Scalar Multiplication Operation $\cdot$
+    \begin{itemize}
+      \item $R$-algebras (Algebra over a Commutative Unital Ring
+        \S\ref{sec:r_algebra}) -- an $R$-module with a Bilinear Product
+        (\S\ref{sec:bilinear_product})
+    \end{itemize}
+  \item Vector Spaces ($K$-modules \S\ref{sec:vector_space}) -- a Module for
+    which the Ring is also a Field, $K$ (each Element has a Multiplicative
+    Inverse)
+    \begin{itemize}
+      \item $K$-algebras (Algebra over a Field \S\ref{sec:k_algebra}) -- Vector
+        Space with a Bilinear Product
+    \end{itemize}
+\end{itemize}
 
 
 
@@ -18,9 +39,9 @@ Equations (\S\ref{sec:linear_equation_system})
 \section{Module}\label{sec:module}
 % ====================================================================
 
-A \emph{Module} is a Unital Ring (\S\ref{sec:unital_ring}), $R$,
-together with an Abelian Group (\S\ref{sec:abelian_group}), $(M, +)$,
-and an Operation called \emph{Scalar Multiplication} which is either:
+A \emph{Module} is a Unital Ring (\S\ref{sec:unital_ring}), $R$, together with
+an Abelian Group (\S\ref{sec:abelian_group}), $(M, +)$, and an Operation called
+\emph{Scalar Multiplication} which is either:
 \[ R \times M \rightarrow M \]
 for a \emph{Left $R$-module $M$}, $_R M$, or:
 \[ M \times R \rightarrow M \]
@@ -46,17 +67,30 @@ required to be Unital, then item (4) above can be ommitted, but can be
 explicitly required by stating that we are talking about a
 \emph{Unital Left/Right $R$-module $M$}.
 
-\emph{Bimodule}
+If $R$ is Commutative (\S\ref{sec:commutative_ring}), then Left $R$-modules are
+the same as Right $R$-modules and simply called \emph{$R$-modules}.
 
-If $R$ is Commutative, then Left $R$-modules are the same as Right
-$R$-modules and simply called \emph{$R$-modules}.
+A Bimodule (\S\ref{sec:bimodule}) has Left and Right Scalar Operations that are
+``compatible'', but not necessarily identical.
 
-A Module Homomorphism is a \emph{Linear Map} (\S\ref{sec:linear_transformation})
+A Module Homomorphism is called a \emph{Linear Map}
+(or \emph{Linear Transformation} \S\ref{sec:linear_transformation}).
 
-Vector Space (\S\ref{sec:vector_space})
+\fist Vector Space (or \emph{$K$-module}) \S\ref{sec:vector_space}) -- Module
+over a Ring which is also a Field (\S\ref{sec:field}), i.e. all Ring Elements
+have Multiplicative Inverses
 
-Multilinear Algebra (\S\ref{sec:multilinear_algebra}):
-\emph{Multilinear Map} (\S\ref{sec:multilinear_map})
+\fist $D$-module (Algebraic Analysis \S\ref{sec:d_module}) -- a Module over a
+Ring $D$ of Differential Operators (\S\ref{sec:differential_operator}); approach
+to theory of Linear PDEs (\S\ref{sec:linear_pde})
+
+\fist $R$-algebra (Algebra over a Commutative Unital Ring \S\ref{sec:r_algebra})
+-- a Module with a Bilinear Product (\S\ref{sec:bilinear_product})
+
+\fist Commutative Algebra is the study of Commutative Rings
+(\S\ref{sec:commutative_ring}), their Ideals (\S\ref{sec:ring_ideal}), and
+Modules over Commutative Rings, and Local Algebra (\S\ref{sec:local_algebra})
+the study of Local Rings (\S\ref{sec:local_ring}) and their Modules
 
 Modules can be seen as Representations (\S\ref{sec:representation}) of Rings
 (\S\ref{sec:ring}); every Ring has a ``natural'' $R$-module on itself where the
@@ -64,11 +98,6 @@ Module Action is defined as the Multiplication in the Ring; it is therefore
 useful to study a Ring by the Category of Modules over a Ring; two Rings are
 Morita Equivalent (\S\ref{sec:morita_equivalence}) if their Module Categories
 are Equivalent
-
-\fist Commutative Algebra is the study of Commutative Rings
-(\S\ref{sec:commutative_ring}), their Ideals (\S\ref{sec:ring_ideal}), and
-Modules over Commutative Rings, and Local Algebra (\S\ref{sec:local_algebra})
-the study of Local Rings (\S\ref{sec:local_ring}) and their Modules
 
 
 
@@ -88,12 +117,15 @@ if $R$ is a Field, then a Generating Set is the same thing as a Basis
 
 
 % --------------------------------------------------------------------
+\subsection{Submodule}\label{sec:submodule}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Linear Transformation}\label{sec:linear_transformation}
 % --------------------------------------------------------------------
 
 A \emph{Linear Transformation} (or \emph{Linear Map}) is a Module Homomorphism
-(\S\ref{sec:module}) $L : V \rightarrow W$ preserving Addition and Scalar
-Multiplication:
+$L : V \rightarrow W$ preserving Addition and Scalar Multiplication:
 \begin{align*}
   L(a\vec{v})              & = aL(\vec{v}) \\
   L(\vec{v}_1 + \vec{v}_2) & = L(\vec{v}_1 + \vec{v}_2)
@@ -666,8 +698,8 @@ a Free Abelian Group is exacly a Free Module over the Ring of Integers $\ints$
 \subsection{Bimodule}\label{sec:bimodule}
 % --------------------------------------------------------------------
 
-Abelian Group (\S\ref{sec:abelian_group}) that is both a Left and a
-Right Module such that the Left and Right Multiplications are
+A \emph{Bimodule} is an Abelian Group (\S\ref{sec:abelian_group}) that is both a
+Left and a Right Module such that the Left and Right Multiplications are
 compatible.
 
 Rings $R$, $S$, $R$-$S$-bimodule is an Abelian Group $M$ such that:
@@ -683,39 +715,6 @@ Generalization of Algebra Homomorphism
 (\S\ref{sec:algebra_homomorphism})
 
 Categorical generalization: Profunctor (\S\ref{sec:profunctor})
-
-
-
-% --------------------------------------------------------------------
-\subsection{$D$-module}\label{sec:d_module}
-% --------------------------------------------------------------------
-
-\subsubsection{Algebraic $D$-module}\label{sec:algebraic_d_module}
-
-Modules over the Weyl Algebra (\S\ref{sec:weyl_algebra}) $A_n(K)$ over a Field
-$K$ of Characteristic Zero; relates Weyl Algebra to Differential Equations
-(\S\ref{sec:differential_equation})
-
-
-
-\paragraph{Holonomic Module}\label{sec:holonomic_module}\hfill
-
-a \emph{Holonomic Function} (\S\ref{sec:holonomic_function}) is an Element of a
-Holonomic Module of Smooth Functions
-
-\fist cf. Holonomy (\S\ref{sec:holonomy}), Holonomic Constraints
-(\S\ref{sec:holonomic_constraint})
-
-$M$ is Holonomic if and only if $D(M)$ is ``Concentrated'' (seen as an Object
-in a derived Category of $D$-modules) in Degree $0$ (FIXME: clarify)
-
-tendency to behave like Finite Dimensional Vector Spaces
-
-\fist Symplectic Geometry (\S\ref{sec:symplectic_geometry}): the Characteristic
-Variety (FIXME: xref) $Ch(M)$ of any $D$-module $M$, when seen as a Subvariety
-of the Cotangent Bundle $T^*X$ of $X$, is an \emph{Involutive Variety} (FIXME:
-xref), i.e. the Module is Holonomic if and only if $Ch(M)$ is a Lagrangian
-Submanifold (\S\ref{sec:lagrangian_submanifold})
 
 
 
@@ -758,6 +757,10 @@ case), then there exist Non-free Modules
 every Vector Space may be considered as an Affine Space
 (\S\ref{sec:affine_space}) over itself, $(V,V)$, allowing every element of $V$
 to be considered either as a Point or as a Vector
+
+the Set of One-dimensional (Linear) Subspaces (\S\ref{sec:linear_subspace}) of a
+Finite-dimensional Vector Space $V$ is the \emph{Projective Space}
+(\S\ref{sec:projective_space}) of $V$
 
 All Bases of a Vector Space $\mathbf{V}$ have the same number of
 Elements equal to the \emph{Dimension} of $\mathbf{V}$,
@@ -1717,6 +1720,18 @@ Algebra
 
 
 
+% --------------------------------------------------------------------
+\subsection{Graded Algebra}\label{sec:graded_algebra}
+% --------------------------------------------------------------------
+
+Algebra over a Graded Ring (\S\ref{sec:graded_ring})
+
+Differential Graded Algebra (\S\ref{sec:differential_graded_algebra})
+
+cf. Graded Vector Space (\S\ref{sec:graded_vectorspace})
+
+
+
 % ====================================================================
 \section{$K$-algebra}\label{sec:k_algebra}
 % ====================================================================
@@ -1954,14 +1969,6 @@ cf. Algebraic Geometry (Part \ref{part:algebraic_geometry})
 Exterior Algebra (\S\ref{sec:exterior_algebra})
 
 \paragraph{$p$-vector}\label{sec:p_vector}\hfill
-
-
-
-% ====================================================================
-\section{Graded Algebra}\label{sec:graded_algebra}
-% ====================================================================
-
-Graded Vector Space (\S\ref{sec:graded_vectorspace})
 
 
 
@@ -3870,38 +3877,43 @@ Three-dimensional Bivectors
 
 
 
-% --------------------------------------------------------------------
-\subsection{Exterior Product}\label{sec:exterior_product}
-% --------------------------------------------------------------------
+\subsubsection{Exterior Product}\label{sec:exterior_product}
 
 (\emph{Wedge Product})
 
 $\wedge$
 
-\fist Exterior Derivative (\S\ref{sec:exterior_derivative})
 
 
-
-% --------------------------------------------------------------------
-\subsection{Interior Product}\label{sec:interior_product}
-% --------------------------------------------------------------------
+\subsubsection{Interior Product}\label{sec:interior_product}
 
 or \emph{Interior Derivative}
 
-Degree $-1$ Antiderivation on the Exterior Algebra of Differential Forms
-(\S\ref{sec:differential_form}) on a Smooth Manifold
+Degree $-1$ Antiderivation (\S\ref{sec:antiderivation}) on the Exterior Algebra
+of Differential Forms (\S\ref{sec:differential_form}) on a Smooth Manifold
 (\S\ref{sec:smooth_manifold})
 
 
 
-% --------------------------------------------------------------------
-\subsection{Dyadic Algebra}\label{sec:dyadic_algebra}
-% --------------------------------------------------------------------
 
-\subsubsection{Dyadic Product}\label{sec:dyadic_product}
+\subsubsection{Exterior Derivative}\label{sec:exterior_derivative}\hfill
 
-Product of a Column Vector multiplied by a Row Vector produces a Second-order
-Tensor called a \emph{Dyadic}
+Operation on Differential Forms (\S\ref{sec:exterior_derivative}) that when
+acting on a $k$-form produces a $k+1$-form; extends the Differential
+(\S\ref{sec:differential}) of a Function and is directly related to the Curl and
+Divergence of a Vector Field
+
+an example of an Antiderivation (\S\ref{sec:antiderivation})
+
+Generalized Stokes' Theorem
+
+the Exterior Derivative gives the Exterior Algebra
+(\S\ref{sec:exterior_algebra}) of Differential Forms on a Manifold the structure
+of a Differential Algebra (\S\ref{sec:differential_algebra})
+
+\fist cf. Interior Derivative (Interior Product \S\ref{sec:interior_product})
+
+``Oriented Density'' %FIXME
 
 
 
@@ -3909,10 +3921,12 @@ Tensor called a \emph{Dyadic}
 \section{Differential Algebra}\label{sec:differential_algebra}
 % ====================================================================
 
+cf. Differential Calculus (\S\ref{sec:differential_calculus})
+
 the Exterior Derivative (\S\ref{sec:exterior_derivative}) gives the Exterior
 Algebra (\S\ref{sec:exterior_algebra}) of Differential Forms
 (\S\ref{sec:differential_form}) on a Manifold the structure of a Differential
-Algebra (\S\ref{sec:differential_algebra})
+Algebra
 
 
 
@@ -3920,13 +3934,67 @@ Algebra (\S\ref{sec:differential_algebra})
 \subsection{Derivation}\label{sec:derivation}
 % --------------------------------------------------------------------
 
+(wiki):
+
+generalizes features of the Derivative Operator (\S\ref{sec:derivative})
+
+For an Algebra $A$ over a Ring or a Field $K$, a \emph{$K$-derivation} is a
+$K$-linear Map (\S\ref{sec:linear_transformation}) $D : A \rightarrow A$
+satisfying Leibniz's Law (Product Rule \S\ref{sec:product_rule}):
+\[
+  D(ab) = D(a)b + aD(b)
+\]
+Generally, if $M$ is an $A$-bimodule, then a $K$-linear Map $D : A \rightarrow
+M$ that Satisfies the Leibniz Law s also called a ``\emph{Derivation}'', and the
+collection of all $K$-derivations of $A$ to itself is denoted
+$\mathrm{Der}_K(A)$, and the collection of $K$-derivations of $A$ into an
+$A$-module $M$ is denoted $\mathrm{Der}_K(A, M)$.
+
+examples:
+\begin{itemize}
+  \item the Partial Derivative (\S\ref{sec:partial_derivative}) with respect to
+    a Variable is a $\reals$-derivation on the Algebra of Real-valued
+    Differentiable Functions on $\reals^n$
+  \item Lie Derivative
+  \item ... MORE
+\end{itemize}
+
+
+
+\subsubsection{Graded Derivation}\label{sec:graded_derivation}
+
+\subsubsection{Antiderivation}\label{sec:antiderivation}
+
+cf. Antiderivative (Indefinite Integral \S\ref{sec:antiderivative})
+
+examples:
+\begin{itemize}
+  \item Exterior Derivative (\S\ref{sec:exterior_derivative})
+  \item Interior Product (Interior Derivative \S\ref{sec:interior_product})
+\end{itemize}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Differential Ring}\label{sec:differential_ring}
 % --------------------------------------------------------------------
 
+any Ring is a Differential Ring with respect to the Trivial Derivation mapping
+any Ring Element to Zero
+
+
+
 % --------------------------------------------------------------------
 \subsection{Differential Field}\label{sec:differential_field}
 % --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Differential Graded Algebra}\label{sec:differential_graded_algebra}
+% --------------------------------------------------------------------
+
+Graded Algebra (\S\ref{sec:graded_algebra})
+
+
 
 % --------------------------------------------------------------------
 \subsection{Differential Galois Theory}\label{sec:differential_galois}
@@ -4070,5 +4138,3 @@ $R : G \rightarrow \cat{Vect}_K$
 
 Homomorphism of Representations (\S\ref{sec:representation}), Actions
 (\S\ref{sec:action}), Modules (\S\ref{sec:module})
-
-
