@@ -212,6 +212,8 @@ Elementary (\S\ref{sec:elementary_logic}) or First-order
 (\S\ref{sec:firstorder_logic}) definition of \emph{Subobject} of an Object--
 Subobject Classifier (\S\ref{sec:subobject_classifier})
 
+\fist Relational Algebra (\S\ref{sec:relational_algebra})
+
 (wiki):
 
 Algebraic Structures on a Single Set:
@@ -417,7 +419,7 @@ Elements of Direct Product having only finitely many Non-zero Terms
 %FIXME
 
 Coproduct (\S\ref{sec:coproduct}) for Abelian Groups
-(\S\ref{sec:abelian_group}) and Vector Spaces
+(\S\ref{sec:commutative_group}) and Vector Spaces
 (\S\ref{sec:vector_space})
 
 Cayley-Dixon Construction
@@ -705,6 +707,101 @@ Bisimulation Relation (\S\ref{sec:bisimulation})
 \subsection{Covariety}\label{sec:covariety}
 % --------------------------------------------------------------------
 
+% --------------------------------------------------------------------
+\section{Wheel Theory}\label{sec:wheel_theory}
+% --------------------------------------------------------------------
+
+%FIXME
+
+
+
+% ====================================================================
+\section{Presentation}\label{sec:presentation}
+% ====================================================================
+
+\emph{Generators} (\S\ref{sec:generator})
+
+\emph{Relations}
+
+\emph{Finitely Presented}
+
+(\S\ref{sec:string_rewriting})
+
+\emph{Semigroup Presentation}
+
+Category Presentation (\S\ref{sec:category_presentation})
+
+$T$-algebra Presentation (\S\ref{sec:t_algebra_presentation})
+
+\emph{Presented by Generators and Relations}: obtained from a
+Structure Freely Generated (???) by a Set of Generators and imposed
+Relations among the Generators.
+
+Free Algebra (\S\ref{sec:free_algebra})
+
+Free Monoid (\S\ref{sec:free_monoid})
+
+Free Monad (\S\ref{sec:free_monad})
+
+Free Category (\S\ref{sec:free_category})
+
+Free Functor (\S\ref{sec:free_functor})
+
+Free Object (\S\ref{sec:free_object})
+
+
+
+\subsubsection{Finite Presentation}\label{sec:finite_presentation}
+\cite{awodey06}
+
+Generators: $g_1, \ldots, g_n$
+
+Relations: $l_1 = r_1, \ldots, l_m = r_m$
+
+Coequalizer (\S\ref{sec:coequalizer}):
+\[
+  F(m) {\xrightarrow[\quad\quad\quad]{l}
+    \atop \xrightarrow[r]{\quad\quad\quad}} F(n)
+  \xrightarrow{\quad\quad\quad} Q = F(n) / (l = r)
+\]
+where $l = [l_1, \ldots, l_m]$ and $r = [r_1, \ldots, r_m]$
+
+Finitely Presented Category (\S\ref{sec:finitely_presented})
+
+\url{https://golem.ph.utexas.edu/category/2017/04/gluing_together_finite_shapes.html}:
+
+Thm. \emph{In a Category of Algebras $\cat{C}$ (e.g. Models of a
+  Lawvere Theory), an Algebra $A$ is Finitely Presentable if and only
+  if the Hom-functor $\cat{C}(A,-)$ Commutes with Filtered Colimits}
+%FIXME xref filtered colimits
+
+
+
+\subsubsection{Recursive Presentation}\label{sec:recursive_presentation}
+
+\subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
+
+\subsubsection{Group Presentation}\label{sec:group_presentation}
+
+A \emph{Group Presentation} is the definition of a Group $G$ by a Set
+$S$ of Generators (\S\ref{sec:free_group}) and a Set $R$ of Relations
+between the Words in $S$ that represent the same Element of $G$:
+\[
+  \langle S | R \rangle
+\]
+The Group $G$ has this Presentation if it is Isomorphic to the
+Quotient (\S\ref{sec:quotient_group}) of a Free Group on $S$. The Set
+of Relations $R$ is said to \emph{Define} $G$ if every Relation in $G$
+follows from those in $R$.
+
+
+
+\subsubsection{Monoid Presentation}\label{sec:monoid_presentation}
+
+A \emph{Monoid Presentation} is a description of a Monoid in terms of
+a Set $\Sigma$ of Generators and a Set of Relations on the Free Monoid
+$\Sigma*$.
+
 
 
 % ====================================================================
@@ -842,10 +939,6 @@ a Group (\S\ref{sec:group}) by not requiring Inverses.
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
-\subsection{Commutative Semigroup}\label{sec:commutative_semigroup}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
 \subsection{Semigroup Action}\label{sec:semigroup_action}
 % --------------------------------------------------------------------
 
@@ -893,22 +986,9 @@ Morphisms.
 
 
 
-\subsubsection{Transformation Semigroup}\label{sec:transformation_semigroup}
-
-A \emph{Transformation Semigroup} is a pair $(X,S)$ where $X$ is a Set
-and $S$ is a Semigroup of \emph{Transformations} of $X$, that is, a
-Set of Functions $f : X \rightarrow X$ that is Closed under
-Composition. This is the Semigroup analogue of a Permutation Group
-(\S\ref{sec:permutation_group}). Any Semigroup can be realized as a
-Transformation Semigroup of some Set. A Transformation Semigroup that
-includes the Identity Function is a Transformation Monoid
-(\S\ref{sec:transformation_monoid}). A Transformation Semigroup can be
-made into a Semigroup Action $\bullet$ of $S$ by Evaluation:
-\[
-  \forall s \in S, x \in X, s \bullet x = s(x)
-\]
-
-
+% --------------------------------------------------------------------
+\subsection{Commutative Semigroup}\label{sec:commutative_semigroup}
+% --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
 \subsection{Regular Semigroup}\label{sec:regular_semigroup}
@@ -930,6 +1010,27 @@ Linear Operators (\S\ref{sec:linear_operator})
 adding the requirement that Operators be Invertible (i.e. having Non-zero
 Determinant) gives the General Linear Group (\S\ref{sec:general_linear_group})
 $GL(V)$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Transformation Semigroup}\label{sec:transformation_semigroup}
+% --------------------------------------------------------------------
+
+A \emph{Transformation Semigroup} is a pair $(X,S)$ where $X$ is a Set
+and $S$ is a Semigroup of \emph{Transformations} of $X$, that is, a
+Set of Functions $f : X \rightarrow X$ that is Closed under
+Composition. This is the Semigroup analogue of a Permutation Group
+(\S\ref{sec:permutation_group}). Any Semigroup can be realized as a
+Transformation Semigroup of some Set. A Transformation Semigroup that
+includes the Identity Function is a Transformation Monoid
+(\S\ref{sec:transformation_monoid}).
+
+A Transformation Semigroup can be made into a Semigroup Action
+(\S\ref{sec:semigroup_action}) $\bullet$ of $S$ by Evaluation:
+\[
+  \forall s \in S, x \in X, s \bullet x = s(x)
+\]
 
 
 
@@ -1031,6 +1132,14 @@ $T$-algebras (\S\ref{sec:t_algebra}) on the Free Monad
 \subsubsection{Operator Monoid}\label{sec:operator_monoid}
 
 An \emph{Operator Monoid} is a Monoid $M$ with an Action on a Set.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Commutative Monoid}\label{sec:commutative_monoid}
+% --------------------------------------------------------------------
+
+(or \emph{Abelian Monoid})
 
 
 
@@ -1243,14 +1352,6 @@ Exponential Modality $!$ has Structure of a Comonoid: Weakening $!A
 
 
 
-% --------------------------------------------------------------------
-\subsection{Commutative Monoid}\label{sec:commutative_monoid}
-% --------------------------------------------------------------------
-
-(or \emph{Abelian Monoid})
-
-
-
 % ====================================================================
 \section{Quasigroup}\label{sec:quasigroup}
 % ====================================================================
@@ -1349,6 +1450,8 @@ The Identity Element is the only Element with the unique Property:
 The Signature (\S\ref{sec:signature}) for Groups is $\{\cdot, 1,
 ^{-1}\}$.
 
+\fist Group Presentation (\S\ref{sec:group_presentation})
+
 The number of Elements in a Group $\mathrm{G}$ is known as its
 \emph{Order} and may be denoted $|\mathrm{G}|$.
 
@@ -1367,6 +1470,8 @@ Every Group can be realized as the Fundamental Group
 \emph{Cayley's Theorem} (\S\ref{sec:cayleys_theorem}): every Group is
 Isomorphic to the Permutation Group (\S\ref{sec:permutation_group}) of
 some Set
+
+\fist Homogeneous Space (\S\ref{sec:homogeneous_space})
 
 A Group, $G$, within a Category, $\mathbf{C}$, may be viewed as a
 Subset of the Hom-set of an Object, $X$:
@@ -1763,50 +1868,116 @@ are Isomorphic, given by the Direct Sum (\S\ref{sec:direct_sum})
 
 
 % --------------------------------------------------------------------
-\subsection{Group Lattice}\label{sec:group_lattice}
+\subsection{Commutative Group}\label{sec:commutative_group}
 % --------------------------------------------------------------------
+
+\emph{Abelian Group} also \emph{Commutative Group}
+
+In Abelian Groups, the Coproduct is Isomorphic to the Product:
+\[
+  A + B \cong A \times B
+\]
+
+\fist a Graded Ring (\S\ref{sec:graded_ring}) is a Ring that is the Direct Sum
+(the \emph{Gradation} or \emph{Grading}) of Abelian Groups $R_i$ such that
+$R_iR_j \subseteq R_{i+j}$
+
+\fist Modules (\S\ref{sec:module}) -- an Abelian Group and a Scalar Ring with a
+Scalar Multiplication Operation
+
+\fist Vector Spaces (\S\ref{sec:vector_space}) -- an Abelian Group and a Scalar
+Field with a Scalar Multiplication Operation
+
+\fist a Free Abelian Group (\S\ref{sec:free_commutative_group}) is exactly a
+Free Module over the Ring $\ints$ of Integers
+
+
+
+\subsubsection{Torsion-free Rank}\label{sec:torsionfree_rank}
+
+Torsion (\S\ref{sec:torsion})
+
+
+
+\subsubsection{Additive Group}\label{sec:additive_group}
+
+An \emph{Additive Group} refers to a Group where the Group Operation
+can be thought of as \emph{Addition} (usually Abelian).
+
+
+
+\paragraph{Group Lattice}\label{sec:group_lattice}\hfill
 
 Subgroup of the Additive Group $\reals^n$, which is Isomorphic to the Additive
 Group $\ints^n$ and which Spans the Real Vector Space $\reals^n$
 
 
 
-\subsubsection{Integer Lattice}\label{sec:integer_lattice}
+\subparagraph{Integer Lattice}\label{sec:integer_lattice}\hfill
+
+
+
+\subsubsection{Multiplicative Group}\label{sec:multiplicative_group}
+
+A \emph{Multiplicative Group} is defined in terms of a Structure with
+Invertible Elements such as a \emph{Ring} (\S\ref{sec:ring}) $R$
+having Multiplication, $\bullet$, as one of its Operations:
+\[
+  (R \ {0}, \bullet)
+\]
+
+Circle Group (\S\ref{sec:circle_group})
+
+
+
+\subsubsection{Divisible Group}\label{sec:divisible_group}
+
+\subsubsection{Cyclic Group}\label{sec:cyclic_group}
+
+A Group $G$ is \emph{Cyclic} when there exists an element $g \in G$ such that:
+\[
+    G = \langle g \rangle = \{ g^n | n \in \mathbb{Z} \}
+\]
+Any Group $G$ of Prime Order is Cyclic is an Abelian Simple Group
+(\S\ref{sec:simple_group}) and is Generated by any $g \in G : g \neq
+e$.
+
+Every Finite Cyclic Group of Order $n$ is Isomorphic
+(\S\ref{sec:group_isomorphism}) to the Additive Group $\mathbb{Z}/n\mathbb{Z}$
+of the Integers Modulo $n$. The Infinite Class of Cyclic Groups of Prime Order
+is one of the possible Classes for the Classification of Finite Simple Groups
+(\S\ref{sec:finite_simple_group}).
+
+Every Infinite Cyclic Group is Isomorphic to the Additive Group $(\mathbb{Z},
++)$ of the Integers.
+
+the Cayley Graph (\S\ref{sec:cayley_graph}) for a Cyclic Group is a
+Directed Cycle Graph (\S\ref{sec:directed_cycle})
+
+
+
+\paragraph{Finite Cyclic}\label{sec:finite_cyclic}\hfill
+
+\paragraph{Infinite Cyclic}\label{sec:infinite_cyclic}\hfill
+
+Frieze Group (\S\ref{sec:frieze_group})
+
+
+
+\subsubsection{Circle Group}\label{sec:circle_group}
+
+Multiplicative Group (\S\ref{sec:multiplicative_group})
+
+- Unit Circle on Complex Plane
+
+- Geometrically defined Group due to Pascal's Theorem
+  \cite{lemmermeyer-shirali09}
 
 
 
 % --------------------------------------------------------------------
-\subsection{Principal Homogeneous Space}\label{sec:principal_homogeneous_space}
+\subsection{Non-abelian Group}\label{sec:noncommutative_group}
 % --------------------------------------------------------------------
-
-or \emph{Torsor}
-
-Homogeneous Space (\S\ref{sec:homogeneous_space})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Periodic Group}\label{sec:periodic_group}
-% --------------------------------------------------------------------
-
-\emph{Periodic Group} (or \emph{Torsion Group}) if all Elements have
-Finite Period (\S\ref{sec:group_order})
-
-
-
-\subsubsection{Finite Group}\label{sec:finite_group}
-
-A \emph{Finite Group} is a Group with a Finite Order (\S\ref{sec:group_order})
-
-Any Finite Non-abelian Group is of Even Order.
-
-All Finite Groups are Periodic Groups
-
-
-
-\subsubsection{Group Exponent}\label{sec:group_exponent}
-
-
 
 % --------------------------------------------------------------------
 \subsection{Simple Group}\label{sec:simple_group}
@@ -1864,6 +2035,48 @@ $M$ as its Automorphism Group
 
 
 \subsubsection{Infinite Simple Group}\label{sec:infinite_simple_group}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Quotient Group}\label{sec:quotient_group}
+% --------------------------------------------------------------------
+
+For a Normal Subgroup (\S\ref{sec:normal_subgroup}) $H$ of a Group
+$G$, $H \triangleleft G$, the \emph{Quotient Group} $G/H$ is the Set
+of all Left Cosets (\S\ref{sec:coset}) of $H$ in $G$:
+\[
+    G/H = \{ aH : a \in G \}
+\]
+
+
+
+\subsubsection{Group Extension}\label{sec:group_extension}
+
+\subsubsection{Solvable Group}\label{sec:solvable_group}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Periodic Group}\label{sec:periodic_group}
+% --------------------------------------------------------------------
+
+\emph{Periodic Group} (or \emph{Torsion Group}) if all Elements have
+Finite Period (\S\ref{sec:group_order})
+
+
+
+\subsubsection{Finite Group}\label{sec:finite_group}
+
+A \emph{Finite Group} is a Group with a Finite Order (\S\ref{sec:group_order})
+
+Any Finite Non-abelian Group is of Even Order.
+
+All Finite Groups are Periodic Groups
+
+
+
+\subsubsection{Group Exponent}\label{sec:group_exponent}
 
 
 
@@ -2549,126 +2762,6 @@ Differentiable Manifold
 
 
 % --------------------------------------------------------------------
-\subsection{Abelian Group}\label{sec:abelian_group}
-% --------------------------------------------------------------------
-
-\emph{Abelian Group} also \emph{Commutative Group}
-
-In Abelian Groups, the Coproduct is Isomorphic to the Product:
-\[
-  A + B \cong A \times B
-\]
-
-\fist a Graded Ring (\S\ref{sec:graded_ring}) is a Ring that is the Direct Sum
-(the \emph{Gradation} or \emph{Grading}) of Abelian Groups $R_i$ such that
-$R_iR_j \subseteq R_{i+j}$
-
-\fist Modules (\S\ref{sec:module}) -- an Abelian Group and a Scalar Ring with a
-Scalar Multiplication Operation
-
-\fist Vector Spaces (\S\ref{sec:vector_space}) -- an Abelian Group and a Scalar
-Field with a Scalar Multiplication Operation
-
-\fist a Free Abelian Group (\S\ref{sec:free_abelian_group}) is exactly a Free
-Module over the Ring $\ints$ of Integers
-
-
-
-\subsubsection{Torsion-free Rank}\label{sec:torsionfree_rank}
-
-Torsion (\S\ref{sec:torsion})
-
-
-
-\subsubsection{Additive Group}\label{sec:additive_group}
-
-An \emph{Additive Group} refers to a Group where the Group Operation
-can be thought of as \emph{Addition} (usually Abelian).
-
-
-
-\subsubsection{Multiplicative Group}\label{sec:multiplicative_group}
-
-A \emph{Multiplicative Group} is defined in terms of a Structure with
-Invertible Elements such as a \emph{Ring} (\S\ref{sec:ring}) $R$
-having Multiplication, $\bullet$, as one of its Operations:
-\[
-  (R \ {0}, \bullet)
-\]
-
-Circle Group (\S\ref{sec:circle_group})
-
-
-
-\subsubsection{Divisible Group}\label{sec:divisible_group}
-
-\subsubsection{Cyclic Group}\label{sec:cyclic_group}
-
-A Group $G$ is \emph{Cyclic} when there exists an element $g \in G$ such that:
-\[
-    G = \langle g \rangle = \{ g^n | n \in \mathbb{Z} \}
-\]
-Any Group $G$ of Prime Order is Cyclic is an Abelian Simple Group
-(\S\ref{sec:simple_group}) and is Generated by any $g \in G : g \neq
-e$.
-
-Every Finite Cyclic Group of Order $n$ is Isomorphic
-(\S\ref{sec:group_isomorphism}) to the Additive Group $\mathbb{Z}/n\mathbb{Z}$
-of the Integers Modulo $n$. The Infinite Class of Cyclic Groups of Prime Order
-is one of the possible Classes for the Classification of Finite Simple Groups
-(\S\ref{sec:finite_simple_group}).
-
-Every Infinite Cyclic Group is Isomorphic to the Additive Group $(\mathbb{Z},
-+)$ of the Integers.
-
-the Cayley Graph (\S\ref{sec:cayley_graph}) for a Cyclic Group is a
-Directed Cycle Graph (\S\ref{sec:directed_cycle})
-
-
-
-\paragraph{Finite Cyclic}\label{sec:finite_cyclic}\hfill
-
-\paragraph{Infinite Cyclic}\label{sec:infinite_cyclic}\hfill
-
-Frieze Group (\S\ref{sec:frieze_group})
-
-
-
-\subsubsection{Circle Group}\label{sec:circle_group}
-
-Multiplicative Group (\S\ref{sec:multiplicative_group})
-
-- Unit Circle on Complex Plane
-
-- Geometrically defined Group due to Pascal's Theorem
-  \cite{lemmermeyer-shirali09}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Non-abelian Group}\label{sec:nonabelian_group}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Quotient Group}\label{sec:quotient_group}
-% --------------------------------------------------------------------
-
-For a Normal Subgroup (\S\ref{sec:normal_subgroup}) $H$ of a Group
-$G$, $H \triangleleft G$, the \emph{Quotient Group} $G/H$ is the Set
-of all Left Cosets (\S\ref{sec:coset}) of $H$ in $G$:
-\[
-    G/H = \{ aH : a \in G \}
-\]
-
-
-
-\subsubsection{Group Extension}\label{sec:group_extension}
-
-\subsubsection{Solvable Group}\label{sec:solvable_group}
-
-
-
-% --------------------------------------------------------------------
 \subsection{Topological Group}\label{sec:topological_group}
 % --------------------------------------------------------------------
 
@@ -2802,95 +2895,6 @@ be classified up to Cobordism
 
 
 % ====================================================================
-\section{Presentation}\label{sec:presentation}
-% ====================================================================
-
-\emph{Generators} (\S\ref{sec:generator})
-
-\emph{Relations}
-
-\emph{Finitely Presented}
-
-(\S\ref{sec:string_rewriting})
-
-\emph{Semigroup Presentation}
-
-Category Presentation (\S\ref{sec:category_presentation})
-
-$T$-algebra Presentation (\S\ref{sec:t_algebra_presentation})
-
-\emph{Presented by Generators and Relations}: obtained from a
-Structure Freely Generated (???) by a Set of Generators and imposed
-Relations among the Generators.
-
-Free Algebra (\S\ref{sec:free_algebra})
-
-Free Monoid (\S\ref{sec:free_monoid})
-
-Free Monad (\S\ref{sec:free_monad})
-
-Free Category (\S\ref{sec:free_category})
-
-Free Functor (\S\ref{sec:free_functor})
-
-Free Object (\S\ref{sec:free_object})
-
-
-
-\subsubsection{Finite Presentation}\label{sec:finite_presentation}
-\cite{awodey06}
-
-Generators: $g_1, \ldots, g_n$
-
-Relations: $l_1 = r_1, \ldots, l_m = r_m$
-
-Coequalizer (\S\ref{sec:coequalizer}):
-\[
-  F(m) {\xrightarrow[\quad\quad\quad]{l}
-    \atop \xrightarrow[r]{\quad\quad\quad}} F(n)
-  \xrightarrow{\quad\quad\quad} Q = F(n) / (l = r)
-\]
-where $l = [l_1, \ldots, l_m]$ and $r = [r_1, \ldots, r_m]$
-
-Finitely Presented Category (\S\ref{sec:finitely_presented})
-
-\url{https://golem.ph.utexas.edu/category/2017/04/gluing_together_finite_shapes.html}:
-
-Thm. \emph{In a Category of Algebras $\cat{C}$ (e.g. Models of a
-  Lawvere Theory), an Algebra $A$ is Finitely Presentable if and only
-  if the Hom-functor $\cat{C}(A,-)$ Commutes with Filtered Colimits}
-%FIXME xref filtered colimits
-
-
-
-\subsubsection{Recursive Presentation}\label{sec:recursive_presentation}
-
-\subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
-
-\subsubsection{Group Presentation}\label{sec:group_presentation}
-
-A \emph{Group Presentation} is the definition of a Group $G$ by a Set
-$S$ of Generators (\S\ref{sec:free_group}) and a Set $R$ of Relations
-between the Words in $S$ that represent the same Element of $G$:
-\[
-  \langle S | R \rangle
-\]
-The Group $G$ has this Presentation if it is Isomorphic to the
-Quotient (\S\ref{sec:quotient_group}) of a Free Group on $S$. The Set
-of Relations $R$ is said to \emph{Define} $G$ if every Relation in $G$
-follows from those in $R$.
-
-
-
-\subsubsection{Monoid Presentation}\label{sec:monoid_presentation}
-
-A \emph{Monoid Presentation} is a description of a Monoid in terms of
-a Set $\Sigma$ of Generators and a Set of Relations on the Free Monoid
-$\Sigma*$.
-
-
-
-% ====================================================================
 \section{Ring Theory}\label{sec:ring_theory}
 % ====================================================================
 
@@ -2898,8 +2902,7 @@ $\Sigma*$.
 \subsection{Ring}\label{sec:ring}
 % --------------------------------------------------------------------
 
-A \emph{Ring} is a Set $R$ with two Binary Operators, $+$ and
-$\cdot$, where:
+A \emph{Ring} is a Set $R$ with two Binary Operators, $+$ and $\cdot$, where:
 \begin{itemize}
 \item $R$ is an Abelian Group under $+$
     \begin{enumerate}
@@ -2953,13 +2956,17 @@ Multiplication in the Ring; it is therefore useful to study a Ring by the
 Category of Modules over a Ring; two Rings are Morita Equivalent
 (\S\ref{sec:morita_equivalence}) if their Module Categories are Equivalent
 
-to any Topological Space $X$ can be associated its \emph{Integral Cohomology
-  Ring} (\S\ref{sec:cohomology_ring})
-
 every Ring can be thought of as a Monoid in the Category $\cat{Ab}$ of Abelian
 Groups (thought of as a Monoidal Category under the Tensor Product of
 $\ints$-modules), and the Monoid Action ofa Ring $R$ on an Abelian Group is an
 $R$-module
+
+\begin{itemize}
+  \item Differential Ring (\S\ref{sec:differential_ring})
+  \item to any Topological Space $X$ can be associated its \emph{Integral
+    Cohomology Ring} (\S\ref{sec:cohomology_ring})
+  \item ... MORE?
+\end{itemize}
 
 
 
@@ -3148,6 +3155,14 @@ is the Set of all Prime Ideals of $R$
 
 
 % --------------------------------------------------------------------
+\subsection{Finite Ring}\label{sec:finite_ring}
+% --------------------------------------------------------------------
+
+every Finite Field (\S\ref{sec:finite_field}) is an example of a Finite Ring
+
+
+
+% --------------------------------------------------------------------
 \subsection{Simple Ring}\label{sec:simple_ring}
 % --------------------------------------------------------------------
 
@@ -3176,73 +3191,31 @@ examples:
 
 special class of Semisimple Ring
 
-Matrix Ring (\S\ref{sec:matrix_ring}) $M_n(D)$ over a Division Ring
-(\S\ref{sec:division_ring}) $D$ is an Artinian Ring
-
 every Left Artinian Ring is Left Noetherian (\S\ref{sec:noetherian_ring}) and a
 Left Artinian Ring is Left Noetherian if and only if it is Right Artinian, and
 the equivalently for exchange of ``Left'' and ``Right''
 
 
 
+\subparagraph{Matrix Ring}\label{sec:matrix_ring}\hfill
+
+Matrix Ring $M_n(D)$ over a Division Ring (\S\ref{sec:division_ring}) $D$ is an
+Artinian (Semi-)simple Ring (\S\ref{sec:artinian_ring})
+
+
+
 % --------------------------------------------------------------------
-\subsection{Finite Ring}\label{sec:finite_ring}
+\subsection{Noetherian Ring}\label{sec:noetherian_ring}
 % --------------------------------------------------------------------
 
-every Finite Field (\S\ref{sec:finite_field}) is an example of a Finite Ring
+a Ring in which there is no Strictly Increasing Infinite Chain of Left Ideals
 
+every Left Artinian Ring (\S\ref{sec:artinian_ring}) is Left Noetherian and a
+Left Artinian Ring is Left Noetherian if and only if it is Right Artinian, and
+the equivalently for exchange of ``Left'' and ``Right''
 
-
-% --------------------------------------------------------------------
-\subsection{Domain Ring}\label{sec:domain_ring}
-% --------------------------------------------------------------------
-
-Zero-product Property: a Nonzero Ring in which $ab = 0$ implies $a = 0$ or $b =
-0$
-
-equivalently, a Domain is a Ring in which $0$ is the only Left Zero Divisor (or
-equivalently the only Right Zero Divisor)
-
-a Weyl Algebra (\S\ref{sec:weyl_algebra}) is an example of a Non-commutative
-Domain Ring
-
-
-
-\subsubsection{Integral Domain}\label{sec:integral_domain}
-
-a Commutative Domain
-
-An \emph{Integral Domain}, $R$, is a Non-zero Commutative Ring where
-if $ab = 0$ in $R$, then either $a = 0$ or $b = 0$ in $R$.
-Equivalently, the product of any two non-zero elements is non-zero.
-
-All Finite Integral Domains are \emph{Finite Fields}
-(\S\ref{sec:finite_field}).
-
-Principal Ideal Domain
-
-
-
-\paragraph{Fraction Field}\label{sec:fraction_field}\hfill
-
-The \emph{Fraction Field} of an Integral Domain that is the smallest Field in
-which it can be \emph{Embedded}, where the Elements of the Fraction Field are
-Equivalence Classes written as $\frac{a}{b}$ with $a, b \in R$ and $b \neq 0$.
-
-$\Frac(R)$
-
-
-
-\paragraph{Dedekind Domain}\label{sec:dedekind_domain}\hfill
-
-(or \emph{Dedekind Ring}) is an Integral Domain in which every Non-zero Proper
-Ideal Factors into a Product of Prime Ideals; such a Factorization can be shown
-to be necessarily Unique up to the order of the Factors
-
-since a Field (\S\ref{sec:field}) is a Commutative Ring in which there are no
-Non-trivial Proper Ideals, any Field is a Dedekind Domain
-
-\fist Arithmetic Surface (\S\ref{sec:arithmetic_surface}) over a Dedekind Domain
+\fist a Weyl Algebra (\S\ref{sec:weyl_algebra}) is a (Left and Right)
+Noetherian Ring
 
 
 
@@ -3276,52 +3249,6 @@ Spectrum (\S\ref{sec:spectrum}) of a Commutative Ring
 
 
 \subsubsection{Integral Element}\label{sec:integral_element}
-
-\subsubsection{Polynomial Ring}\label{sec:polynomial_ring}
-
-\emph{Polynomial Ring} (or \emph{Free Commutative Algebra})
-
-Free Algebra (\S\ref{sec:free_algebra}) is the Non-commutative
-analogue of a Polynomial Ring
-
-the Set of Complex Numbers (\S\ref{sec:complex_number}) is the Quotient Ring of
-the Polynomial Ring in the Indeterminate $i$ by the Ideal generated by the
-Polynomial $i^2 + 1$
-
-$R[x]$ -- Ring of Polynomials in the Indeterminate $x$ over the Ring $R$
-
-$x^0, x^1, x^2, x^3, \ldots$ -- Monomials
-
-$p(x) = \sum_{i=0}^\infty a_i x^i$, $a_i \in R$ where only a Finite Number of
-$a_i$ are Non-zero -- Polynomials (\S\ref{sec:polynomial})
-
-Degree $n$, Leading Coefficient $a_n$
-
-Monic Polynomial: Leading Coefficient $a_n = 1$
-
-$R[x_1, x_2]$ is Isomorphic to $R[x_1][x_2]$
-
-Polynomial Ring in $n$ Variables $R[x_1, \ldots, x_n]$
-
-an Algebraically Closed Field (\S\ref{sec:algebraically_closed}) $F$ contains a
-Root (\S\ref{sec:function_root}) for every Non-constant Polynomial in the Ring
-of Polynomials $F[x]$ in the Variable $x$ with Coefficients in $F$
-
-an Affine Algebraic Set (Affine Variety \S\ref{sec:affine_variety}) is the
-Intersection of the Zero Sets of a number of Polynomials in a Polynomial Ring
-(\S\ref{sec:polynomial_ring}) $k[x_1,\ldots,x_n]$ over a Field
-
-\emph{Hilbert's Nullstellensatz}: fundamental correspondence between Ideals
-(\S\ref{sec:ring_ideal}) of Polynomial Rings and Algebraic Sets
-(\S\ref{sec:algebraic_set})
-
-
-
-\paragraph{Gr\"obner Basis}\label{sec:grobner_basis}\hfill
-
-%FIXME: move section ???
-
-
 
 \subsubsection{Spectrum}\label{sec:ring_spectrum}
 
@@ -3386,93 +3313,7 @@ all Places ``on equal footing'', contrary to Scheme Theory
 
 
 
-% --------------------------------------------------------------------
-\subsection{Division Ring}\label{sec:division_ring}
-% --------------------------------------------------------------------
-
-A \emph{Division Ring} is a Ring where every Nonzero Element has a
-Multiplicative Inverse (but $\cdot$ is not required to be Commutative
-as in a Field \S\ref{sec:field}).
-
-the only Ideals (\S\ref{sec:ring_ideal}) of a Division Ring $R$ are $R$ and
-$\{0\}$
-
-By \emph{Wedderburn's Little Theorem} all \emph{Finite Division Rings}
-are Commutative and therefore \emph{Finite Fields}
-(\S\ref{sec:finite_field}).
-
-
-
-% --------------------------------------------------------------------
-\subsection{Matrix Ring}\label{sec:matrix_ring}
-% --------------------------------------------------------------------
-
-Matrix Ring $M_n(D)$ over a Division Ring (\S\ref{sec:division_ring}) $D$ is an
-Artinian (Semi-)simple Ring (\S\ref{sec:artinian_ring})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Local Ring}\label{sec:local_ring}
-% --------------------------------------------------------------------
-
-(wiki):
-
-$R$ is a Local Ring if it has one of the following equivalent Properties:
-\begin{itemize}
-  \item $R$ has a Unique Maximum Left Ideal (\S\ref{sec:maximal_ideal})
-  \item $R$ has a Unique Maximum Right Ideal
-  \item $1 \neq 0$ and the Sum of any two Non-units in $R$ is a Non-unit
-  \item $1 \neq 0$ and if any $x$ is an Element of $R$ then $x$ or $x - 1$ is a
-    Unit
-  \item if a Finite Sum is a Unit then it has a Term that is a Unit, in
-    particular the Empty Sum cannot be a Unit so it implies $1 \neq 0$
-\end{itemize}
-
-a Ringed Space where the ``Stalks'' (FIXME: ???) of the Structure Sheaf
-(\S\ref{sec:structure_sheaf}) are Local Rings is a Locally Ringed Space
-(\S\ref{sec:locally_ringed_space})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Quotient Ring}\label{sec:quotient_ring}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Graded Ring}\label{sec:graded_ring}
-% --------------------------------------------------------------------
-
-Ring that is the Direct Sum (the \emph{Gradation} or \emph{Grading}) of Abelian
-Groups $R_i$ such that $R_iR_j \subseteq R_{i+j}$
-
-Graded Algebra (\S\ref{sec:graded_algebra}),
-Differential Graded Algebra (\S\ref{sec:differential_graded_algebra}),
-Graded Derivation (\S\ref{sec:graded_derivation})
-
-Graded Vector Space (\S\ref{sec:graded_vectorspace})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Ring Completion}\label{sec:ring_completion}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Semi-real Ring}\label{sec:semireal_ring}
-% --------------------------------------------------------------------
-
-$-1$ is not a Sum of Squares in $R$
-
-an arbitrary Ring $R$ is Semi-real if and only if the Real Closure
-(\S\ref{sec:real_closed_ring}) of $R$ is not the Null Ring
-(Zero Ring \S\ref{sec:zero_ring})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Real Closed Ring}\label{sec:real_closed_ring}
-% --------------------------------------------------------------------
+\subsubsection{Real Closed Ring}\label{sec:real_closed_ring}
 
 (wiki):
 
@@ -3515,9 +3356,69 @@ may not be Field but is just a Real Closed Ring
 
 
 
+\paragraph{Semi-real Ring}\label{sec:semireal_ring}\hfill
+
+$-1$ is not a Sum of Squares in $R$
+
+an arbitrary Ring $R$ is Semi-real if and only if the Real Closure
+(\S\ref{sec:real_closed_ring}) of $R$ is not the Null Ring (Zero Ring
+\S\ref{sec:zero_ring})
+
+
+
+\subsubsection{Polynomial Ring}\label{sec:polynomial_ring}
+
+\emph{Polynomial Ring} (or \emph{Free Commutative Algebra})
+
+Free Algebra (\S\ref{sec:free_algebra}) is the Non-commutative
+analogue of a Polynomial Ring
+
+the Set of Complex Numbers (\S\ref{sec:complex_number}) is the Quotient Ring of
+the Polynomial Ring in the Indeterminate $i$ by the Ideal generated by the
+Polynomial $i^2 + 1$
+
+$R[x]$ -- Ring of Polynomials in the Indeterminate $x$ over the Ring $R$
+
+$x^0, x^1, x^2, x^3, \ldots$ -- Monomials
+
+$p(x) = \sum_{i=0}^\infty a_i x^i$, $a_i \in R$ where only a Finite Number of
+$a_i$ are Non-zero -- Polynomials (\S\ref{sec:polynomial})
+
+Degree $n$, Leading Coefficient $a_n$
+
+Monic Polynomial: Leading Coefficient $a_n = 1$
+
+$R[x_1, x_2]$ is Isomorphic to $R[x_1][x_2]$
+
+Polynomial Ring in $n$ Variables $R[x_1, \ldots, x_n]$
+
+an Algebraically Closed Field (\S\ref{sec:algebraically_closed}) $F$ contains a
+Root (\S\ref{sec:function_root}) for every Non-constant Polynomial in the Ring
+of Polynomials $F[x]$ in the Variable $x$ with Coefficients in $F$
+
+an Affine Algebraic Set (Affine Variety \S\ref{sec:affine_variety}) is the
+Intersection of the Zero Sets of a number of Polynomials in a Polynomial Ring
+(\S\ref{sec:polynomial_ring}) $k[x_1,\ldots,x_n]$ over a Field
+
+\emph{Hilbert's Nullstellensatz}: fundamental correspondence between Ideals
+(\S\ref{sec:ring_ideal}) of Polynomial Rings and Algebraic Sets
+(\S\ref{sec:algebraic_set})
+
+\fist Gr\"obner Basis (Computational Algebraic Geometry
+\S\ref{sec:grobner_basis})
+
+
+
 % --------------------------------------------------------------------
-\subsection{Free Algebra}\label{sec:free_algebra}
+\subsection{Non-commutative Ring}\label{sec:noncommutative_ring}
 % --------------------------------------------------------------------
+
+\subsubsection{Free Algebra}\label{sec:free_algebra}
+
+or \emph{Free Non-commutative Ring}
+
+Non-commutative analogue of \emph{Polynomial Rings} (\emph{Free Commutative
+  Rings} \S\ref{sec:polynomial_ring})
 
 A \emph{Free Algebra}, $\mathbf{A}$, is defined by a Set of \emph{Free
   Generators}, $S$, and a Type Signature, $\rho$, which Generate an
@@ -3542,6 +3443,122 @@ of the Free Algebra on two Generators, $X$ and $Y$, by the Ideal
 
 
 % --------------------------------------------------------------------
+\subsection{Domain Ring}\label{sec:domain_ring}
+% --------------------------------------------------------------------
+
+Zero-product Property: a Nonzero Ring in which $ab = 0$ implies $a = 0$ or $b =
+0$
+
+equivalently, a Domain is a Ring in which $0$ is the only Left Zero Divisor (or
+equivalently the only Right Zero Divisor)
+
+a Weyl Algebra (\S\ref{sec:weyl_algebra}) is an example of a Non-commutative
+Domain Ring
+
+
+
+\subsubsection{Integral Domain}\label{sec:integral_domain}
+
+a Commutative Domain
+
+An \emph{Integral Domain}, $R$, is a Non-zero Commutative Ring where
+if $ab = 0$ in $R$, then either $a = 0$ or $b = 0$ in $R$.
+Equivalently, the product of any two non-zero elements is non-zero.
+
+All Finite Integral Domains are \emph{Finite Fields}
+(\S\ref{sec:finite_field}).
+
+Principal Ideal Domain
+
+
+
+\paragraph{Fraction Field}\label{sec:fraction_field}\hfill
+
+The \emph{Fraction Field} of an Integral Domain that is the smallest Field in
+which it can be \emph{Embedded}, where the Elements of the Fraction Field are
+Equivalence Classes written as $\frac{a}{b}$ with $a, b \in R$ and $b \neq 0$.
+
+$\Frac(R)$
+
+
+
+\paragraph{Dedekind Domain}\label{sec:dedekind_domain}\hfill
+
+(or \emph{Dedekind Ring}) is an Integral Domain in which every Non-zero Proper
+Ideal Factors into a Product of Prime Ideals; such a Factorization can be shown
+to be necessarily Unique up to the order of the Factors
+
+since a Field (\S\ref{sec:field}) is a Commutative Ring in which there are no
+Non-trivial Proper Ideals, any Field is a Dedekind Domain
+
+\fist Arithmetic Surface (\S\ref{sec:arithmetic_surface}) over a Dedekind Domain
+
+
+
+% --------------------------------------------------------------------
+\subsection{Division Ring}\label{sec:division_ring}
+% --------------------------------------------------------------------
+
+A \emph{Division Ring} is a Ring where every Nonzero Element has a
+Multiplicative Inverse (but $\cdot$ is not required to be Commutative
+as in a Field \S\ref{sec:field}).
+
+the only Ideals (\S\ref{sec:ring_ideal}) of a Division Ring $R$ are $R$ and
+$\{0\}$
+
+By \emph{Wedderburn's Little Theorem} all \emph{Finite Division Rings}
+are Commutative and therefore \emph{Finite Fields}
+(\S\ref{sec:finite_field}).
+
+
+
+% --------------------------------------------------------------------
+\subsection{Quotient Ring}\label{sec:quotient_ring}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Local Ring}\label{sec:local_ring}
+% --------------------------------------------------------------------
+
+(wiki):
+
+$R$ is a Local Ring if it has one of the following equivalent Properties:
+\begin{itemize}
+  \item $R$ has a Unique Maximum Left Ideal (\S\ref{sec:maximal_ideal})
+  \item $R$ has a Unique Maximum Right Ideal
+  \item $1 \neq 0$ and the Sum of any two Non-units in $R$ is a Non-unit
+  \item $1 \neq 0$ and if any $x$ is an Element of $R$ then $x$ or $x - 1$ is a
+    Unit
+  \item if a Finite Sum is a Unit then it has a Term that is a Unit, in
+    particular the Empty Sum cannot be a Unit so it implies $1 \neq 0$
+\end{itemize}
+
+a Ringed Space where the ``Stalks'' (FIXME: ???) of the Structure Sheaf
+(\S\ref{sec:structure_sheaf}) are Local Rings is a Locally Ringed Space
+(\S\ref{sec:locally_ringed_space})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Graded Ring}\label{sec:graded_ring}
+% --------------------------------------------------------------------
+
+Ring that is the Direct Sum (the \emph{Gradation} or \emph{Grading}) of Abelian
+Groups $R_i$ such that $R_iR_j \subseteq R_{i+j}$
+
+Graded Algebra (\S\ref{sec:graded_algebra}),
+Differential Graded Algebra (\S\ref{sec:differential_graded_algebra}),
+Graded Derivation (\S\ref{sec:graded_derivation})
+
+Graded Vector Space (\S\ref{sec:graded_vectorspace})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Ring Completion}\label{sec:ring_completion}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
 \subsection{Involutive Ring}\label{sec:involutive_ring}
 % --------------------------------------------------------------------
 
@@ -3557,70 +3574,6 @@ of the Free Algebra on two Generators, $X$ and $Y$, by the Ideal
 \subsection{Topological Ring}\label{sec:topological_ring}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Noetherian Ring}\label{sec:noetherian_ring}
-% --------------------------------------------------------------------
-
-a Ring in which there is no Strictly Increasing Infinite Chain of Left Ideals
-
-every Left Artinian Ring (\S\ref{sec:artinian_ring}) is Left Noetherian and a
-Left Artinian Ring is Left Noetherian if and only if it is Right Artinian, and
-the equivalently for exchange of ``Left'' and ``Right''
-
-\fist a Weyl Algebra (\S\ref{sec:weyl_algebra}) is a (Left and Right)
-Noetherian Ring
-
-
-
-% ====================================================================
-\section{Commutative Algebra}\label{sec:commutative_algebra}
-% ====================================================================
-
-study of Commutative Rings (\S\ref{sec:commutative_ring}), their Ideals
-(\S\ref{sec:ring_ideal}), and Modules (\S\ref{sec:module}) over Commutative
-Rings
-
-three closely related fields:
-\begin{itemize}
-  \item Algebraic Number Theory (\S\ref{sec:algebraic_number_theory})
-  \item Algebraic Geometry (Part \ref{part:algebraic_geometry})
-  \item Commutative Algebra
-\end{itemize}
-
-\fist $R$-algebra (Algebra over a Commutative Unital Ring \S\ref{sec:r_algebra})
--- a Module with a Bilinear Product (\S\ref{sec:bilinear_product})
-
-\fist cf. Commutative Algebraic Theory
-(\S\ref{sec:commutative_algebraic_theory})
-
-\fist Symmetric Polynomials (\S\ref{sec:symmetric_polynomial})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Local Algebra}\label{sec:local_algebra}
-% --------------------------------------------------------------------
-
-Local Rings (\S\ref{sec:local_ring}) and their Modules (\S\ref{sec:module})
-
-
-
-% ====================================================================
-\section{Noncommutative Algebra}\label{sec:noncommutative_algebra}
-% ====================================================================
-
-Non-commutative Rings
-
-Noncommutative Geometry (\S\ref{sec:noncommutative_geometry})
-
-
-
-% ====================================================================
-\section{Wheel Theory}\label{sec:wheel_theory}
-% ====================================================================
-
-%FIXME
-
 
 
 % ====================================================================
@@ -3634,7 +3587,7 @@ Noncommutative Geometry (\S\ref{sec:noncommutative_geometry})
 A \emph{Field} is a Nonzero Commutative Ring
 (\S\ref{sec:commutative_ring}) with a Multiplicative Inverse for every
 Nonzero Element or equivalently a Ring whose Nonzero Elements form an
-Abelian Group (\S\ref{sec:abelian_group}) under Multiplication.
+Abelian Group (\S\ref{sec:commutative_group}) under Multiplication.
 
 since a Field is a Commutative Ring in which there are no Non-trivial Proper
 Ideals, any Field is a \emph{Dedekind Domain} (\S\ref{sec:dedekind_domain})
@@ -3916,157 +3869,50 @@ Permutation Groups (\S\ref{sec:permutation_group})
 
 
 % ====================================================================
-\section{Tensor}\label{sec:tensor}
+\section{Commutative Algebra}\label{sec:commutative_algebra}
 % ====================================================================
 
-given a Coordinate Basis, a Tensor can be represented as a
-Multi-dimensional Array of ``Numerical Values'' %FIXME
+study of Commutative Rings (\S\ref{sec:commutative_ring}), their Ideals
+(\S\ref{sec:ring_ideal}), and Modules (\S\ref{sec:module}) over Commutative
+Rings
 
-%FIXME merge with sec:linear_tensor ???
+Polynomial Ring (Free Commutative Ring \S\ref{sec:polynomial_ring})
 
-\fist Tensor (Linear Algebra \S\ref{sec:linear_tensor})
-
-\fist Metric Tensor (\S\ref{sec:metric_tensor})
-
-the \emph{Order} (or \emph{Degree} or \emph{Rank}) of a Tensor is the
-Dimensionality of the Array needed to represent it:
-
+three closely related fields:
 \begin{itemize}
-  \item 0th-order Tensor: \emph{Scalar}
-  \item 1st-order Tensor: \emph{Vector}
-  \item 2nd-order Tensor: \emph{Matrix}
+  \item Algebraic Number Theory (\S\ref{sec:algebraic_number_theory})
+  \item Algebraic Geometry (Part \ref{part:algebraic_geometry})
+  \item Commutative Algebra
 \end{itemize}
 
-wikipedia: Abstract Object (\S\ref{sec:mathematical_object})
-expressing a ``Definite Type'' of some ``Multi-linear Concept''
+\fist $R$-algebra (Algebra over a Commutative Unital Ring \S\ref{sec:r_algebra})
+-- a Module with a Bilinear Product (\S\ref{sec:bilinear_product})
 
-Linear Algebra (Part \ref{part:linear_algebra})
+\fist cf. Commutative Algebraic Theory
+(\S\ref{sec:commutative_algebraic_theory})
 
-Multilinear Algebra (\S\ref{sec:multilinear_algebra})
+\fist Symmetric Polynomials (\S\ref{sec:symmetric_polynomial})
 
-Symmetric Monoidal Category (\S\ref{sec:symmetric_monoidal})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Scalar}\label{sec:scalar}
-% --------------------------------------------------------------------
-
-0th-order Tensor
-
-Element of the Field used to define a Vector Space
-(\S\ref{sec:vector_space})
+\fist Differential Algebra (\S\ref{sec:differential_algebra})
 
 
 
 % --------------------------------------------------------------------
-\subsection{Vector}\label{sec:vector}
+\subsection{Local Algebra}\label{sec:local_algebra}
 % --------------------------------------------------------------------
 
-1st-order Tensor
-
-Element of a Vector Space (\S\ref{sec:vector_space})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Matrix}\label{sec:matrix}
-% --------------------------------------------------------------------
-
-2nd-order Tensor
-
-Matrix (Linear Algebra \S\ref{sec:matrix_theory}):
-Linear Transformations (\S\ref{sec:linear_transformation})
-
-Laplacian Matrix (Graph Theory \S\ref{sec:laplacian_matrix})
-
-\url{https://www.youtube.com/watch?v=cu718EbCOPs} Spivak 16: relates
-Matrix Operations to Wiring Diagrams %FIXME
-
-Matrix Operations:
-\begin{itemize}
-\item Transpose -- $M^T$
-\item Complex Conjugate -- $\overline{M}$
-\item Conjugate Transpose (Hermetian Transpose) -- $M^* = \overline{M^T}$
-  (the notation $M^\dag$ is used in Quantum Mechanics)
-\item Multiplication -- $MN$
-\item Kronecker -- $M \otimes N$
-\item Khatri-Rao -- $M \bigodot N$
-\item Trace -- $Tr(M)$
-\item Hadamard -- $M \circ N$
-\item Marginalize -- $\Sigma_i M_{i,j}$
-\end{itemize}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Symmetric Tensor}\label{sec:symmetric_tensor}
-% --------------------------------------------------------------------
-
-Invariant under a Permutation of its Vector Arguments
-
-the Space of Symmetric Tensors of Order $r$ on a Finite-dimensional Vector
-Space is naturally Isomorphic to the Dual of the Space of Homogeneous
-Polynomials (\S\ref{sec:homogeneous_polynomial}) of Degree $r$ on $V$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Infinite Dimensional Tensor}
-\label{sec:infinite_dimensional_tensor}
-% --------------------------------------------------------------------
-
-Inequivalent Topologies lead to Inequivalent notions of Tensor and
-vaious Isomorphisms may or may not hold depending on the notion of
-Tensor
-
-\emph{Tensor Product of Hilbert Spaces} (\S\ref{sec:hilbert_space}):
-special case of Topological Tensor Product
-(\S\ref{sec:topological_tensor})
+Local Rings (\S\ref{sec:local_ring}) and their Modules (\S\ref{sec:module})
 
 
 
 % ====================================================================
-\section{Shelf}\label{sec:shelf}
+\section{Noncommutative Algebra}\label{sec:noncommutative_algebra}
 % ====================================================================
 
-I3 Rank-into-rank Cardinal (\S\ref{sec:rank_into_rank})
+Non-commutative Rings (\S\ref{sec:noncommutative_ring}),
+Free Algebra (Free Non-commutative Ring \S\ref{sec:free_algebra})
 
-
-
-% ====================================================================
-\section{Torsion}\label{sec:torsion}
-% ====================================================================
-
-Torsion-free Rank (\S\ref{sec:torsionfree_rank})
-
-
-
-% ====================================================================
-\section{Relational Algebra}\label{sec:relational_algebra}
-% ====================================================================
-
-\emph{Domain Relational Calculus}
-
-% --------------------------------------------------------------------
-\subsection{Projection}\label{sec:relational_projection}
-% --------------------------------------------------------------------
-
-
-
-% ====================================================================
-\section{Convex Algebra}\label{sec:convex_algebra}
-% ====================================================================
-
-%FIXME: move this section ???
-
-\url{https://golem.ph.utexas.edu/category/2018/03/cognition_convexity_and_catego.html}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Convex Relation}\label{sec:convex_relation}
-% --------------------------------------------------------------------
+Noncommutative Geometry (\S\ref{sec:noncommutative_geometry})
 
 
 
@@ -4138,6 +3984,108 @@ $(n-1)$-dimensional Boundary inducing the \emph{Singular Chain Complex}
 Derived Categories
 
 Language for Homotopical Algebra
+
+
+
+% ====================================================================
+\section{Differential Algebra}\label{sec:differential_algebra}
+% ====================================================================
+
+generalization of Commutative Algebra (\S\ref{sec:commutative_algebra})
+
+cf. Differential Calculus (\S\ref{sec:differential_calculus})
+
+2011 - Hubbard, Lundell - \emph{A First Look at Differential Algebra}
+
+Ovchinnikov - CUNY Math 86600 lecture notes -
+\url{http://qcpages.qc.cuny.edu/~aovchinnikov/MATH86600/notes.pdf}
+
+the Exterior Derivative (\S\ref{sec:exterior_derivative}) gives the Exterior
+Algebra (\S\ref{sec:exterior_algebra}) of Differential Forms
+(\S\ref{sec:differential_form}) on a Manifold the structure of a Differential
+Algebra
+
+
+
+% --------------------------------------------------------------------
+\subsection{Derivation}\label{sec:derivation}
+% --------------------------------------------------------------------
+
+(wiki):
+
+generalizes features of the Derivative Operator (\S\ref{sec:derivative})
+
+For an Algebra $A$ over a Ring or a Field $K$, a \emph{$K$-derivation} is a
+$K$-linear Map (\S\ref{sec:linear_transformation}) $D : A \rightarrow A$
+satisfying Leibniz's Law (Product Rule \S\ref{sec:product_rule}):
+\[
+  D(ab) = D(a)b + aD(b)
+\]
+Generally, if $M$ is an $A$-bimodule, then a $K$-linear Map $D : A \rightarrow
+M$ that Satisfies the Leibniz Law s also called a ``\emph{Derivation}'', and the
+collection of all $K$-derivations of $A$ to itself is denoted
+$\mathrm{Der}_K(A)$, and the collection of $K$-derivations of $A$ into an
+$A$-module $M$ is denoted $\mathrm{Der}_K(A, M)$.
+
+examples:
+\begin{itemize}
+  \item the Partial Derivative (\S\ref{sec:partial_derivative}) with respect to
+    a Variable is a $\reals$-derivation on the Algebra of Real-valued
+    Differentiable Functions on $\reals^n$
+  \item Lie Derivative
+  \item ... MORE
+\end{itemize}
+
+
+
+\subsubsection{Graded Derivation}\label{sec:graded_derivation}
+
+\subsubsection{Antiderivation}\label{sec:antiderivation}
+
+cf. Antiderivative (Indefinite Integral \S\ref{sec:antiderivative})
+
+examples:
+\begin{itemize}
+  \item Exterior Derivative (\S\ref{sec:exterior_derivative})
+  \item Interior Product (Interior Derivative \S\ref{sec:interior_product})
+\end{itemize}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Differential Ring}\label{sec:differential_ring}
+% --------------------------------------------------------------------
+
+A \emph{Differential Ring} is a Unital Ring with a Finite Set of
+\emph{Derivations} $\Delta = \{ \partial_1, \ldots, \partial_2 \}$ that are
+Homomorphisms 
+
+any Ring is a Differential Ring with respect to the Trivial Derivation mapping
+any Ring Element to Zero
+
+
+
+% --------------------------------------------------------------------
+\subsection{Differential Field}\label{sec:differential_field}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Differential Graded Algebra}\label{sec:differential_graded_algebra}
+% --------------------------------------------------------------------
+
+Graded Algebra (\S\ref{sec:graded_algebra})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Differential Galois Theory}\label{sec:differential_galois}
+% --------------------------------------------------------------------
+
+Galois Theory (\S\ref{sec:galois_theory})
+
+Extensions of Differential Fields
+
+Galois Groups (\S\ref{sec:galois_group}) of Differential Equations
 
 
 

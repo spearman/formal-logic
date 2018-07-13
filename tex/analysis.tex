@@ -2697,6 +2697,20 @@ for a Proper Cone, the Dual Cone of a Dual Cone is the original Cone
 
 
 
+% --------------------------------------------------------------------
+\subsection{Convex Algebra}\label{sec:convex_algebra}
+% --------------------------------------------------------------------
+
+%FIXME: move this section ???
+
+\url{https://golem.ph.utexas.edu/category/2018/03/cognition_convexity_and_catego.html}
+
+
+
+\subsubsection{Convex Relation}\label{sec:convex_relation}
+
+
+
 % ====================================================================
 \section{Algebraic Analysis}\label{sec:algebraic_analysis}
 % ====================================================================
@@ -3207,6 +3221,9 @@ Limit is Analytic in $S$-- this demonstrates that the Complex Functions are
 more ``well-behaved'' than the Real Functions since the Uniform Limit of
 Analytic Functions on a Real Interval do not need to be Differentiable
 (\S\ref{sec:nowhere_differentiable})
+
+Analytic Variety (\S\ref{sec:analytic_variety}) -- defined locally as the Set of
+common Solutions of several Equations involving Analytic Functions
 
 
 
@@ -4524,12 +4541,22 @@ at that Point:
     = \frac{\partial^2f}{\partial{y}\partial{x}}
 \]
 
-Gradient (\S\ref{sec:gradient}): $\nabla f$
+Gradient (\S\ref{sec:gradient}) -- for a Multivariate Scalar-valued Function
+(\S\ref{sec:scalar_function}) $f(x_1, \ldots, x_n)$ on $\reals^n$ for which a
+Partial Derivative $\pderiv{f}{x_j}$ exists for each Variable $x_j$ at a Point
+$a = (a_1, \ldots, a_n)$ the Partial Derivatives define the \emph{Gradient
+  Vector} of $f$ as $a$:
+\[
+  \nabla{f}(a_1, \ldots, a_n) = \big( \pderiv{f}{x_1}(a_1, \ldots, a_n), \ldots,
+  \pderiv{f}{x_n}(a_1, \ldots, a_n) \big)
+\]
+and consequently if $f$ is Differentiable at every Point in some Domain, the
+Gradient determines a Vector Field (\S\ref{sec:vector_field})
+
+Partial Derivative of Vector Fields ... TODO
 
 Partial Derivative of a Multivariable Vector-valued Function (TODO); Parametric
 Surface (\S\ref{sec:parametric_surface})
-
-Partial Derivative of Vector Fields (\S\ref{sec:vector_field}) ... TODO
 
 an example of a Derivation (Differential Algebra \S\ref{sec:derivation})-- an
 Unary Linear Function that satisfies the Leibniz Product Rule
@@ -4537,6 +4564,12 @@ Unary Linear Function that satisfies the Leibniz Product Rule
 
 the \emph{Hessian Matrix} (\S\ref{sec:hessian_matrix}) is the Square Matrix of
 Second-order Partial Derivatives of a Scalar-valued Function
+
+if all Partial Derivatives exist at a given Point, the Function need not be
+Continuous there, but if al Partial Derivatives exist in a \emph{Neighborhood}
+of a Point and are Continuous there, then the Function is Totally Differentiable
+(\S\ref{sec:total_derivative}) in that Neighborhood and the Total Derivative is
+Continuous
 
 
 
@@ -4666,24 +4699,6 @@ Steady State Condition (TODO)
 \paragraph{Stochastic Partial Differential Equation}\label{sec:spde}\hfill
 
 \fist Stochastic Differential Equation (\S\ref{sec:sde})
-
-
-
-\subsubsection{Directional Derivative}\label{sec:directional_derivative}
-
-$\frac{\partial{f}}{\partial{\vec{v}}}$
-
-$\nabla_{\vec{v}} f = \vec{v}\bullet \nabla{f}$
-
-Gradient (\S\ref{sec:gradient})
-
-for a Complex Function (\S\ref{sec:complex_function}) to have a Derivative, the
-Directional Derivative must exist in every direction and be the same
-
-Derivation of Quaternion Functions (\S\ref{sec:quaternion_function}) requires a
-Direction-dependent Derivative (FIXME: clarify)
-
-\fist generalized as Covariant Derivative (\S\ref{sec:covariant_derivative})
 
 
 
@@ -4821,6 +4836,18 @@ Clifford Algebras (\S\ref{sec:clifford_algebra}) represent the same structure
 for Non-degenerate Symmetric Bilinear Forms (\S\ref{sec:symmetric_bilinear})
 that Weyl Algebras (Symplectic Clifford Algebras \S\ref{sec:weyl_algebra})
 represent for Symplectic Bilinear Forms (\S\ref{sec:symplectic_form})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Total Derivative}\label{sec:total_derivative}
+% --------------------------------------------------------------------
+
+if all Partial Derivatives (\S\ref{sec:partial_derivative}) exist at a given
+Point, the Function need not be Continuous there, but if al Partial Derivatives
+exist in a \emph{Neighborhood} of a Point and are Continuous there, then the
+Function is Totally Differentiable in that Neighborhood and the Total Derivative
+is Continuous
 
 
 
@@ -5161,6 +5188,28 @@ $\frac{d\vec{r}(t)}{dt}$
 the Vector Derivative represents a change of \emph{Length} (cf. Norm
 \S\ref{sec:norm}) of the Vector
 
+cf. Directional Derivative (\S\ref{sec:directional_derivative})
+
+
+
+\subsubsection{Directional Derivative}\label{sec:directional_derivative}
+
+$\frac{\partial{f}}{\partial{\vec{v}}}$
+
+$\nabla_{\vec{v}} f = \vec{v}\bullet \nabla{f}$
+
+Gradient (\S\ref{sec:gradient})
+
+for a Complex Function (\S\ref{sec:complex_function}) to have a Derivative, the
+Directional Derivative must exist in every direction and be the same
+
+Derivation of Quaternion Functions (\S\ref{sec:quaternion_function}) requires a
+Direction-dependent Derivative (FIXME: clarify)
+
+\fist generalized as Covariant Derivative (\S\ref{sec:covariant_derivative})
+
+cf. Vector Derivative (\S\ref{sec:vector_derivative})
+
 
 
 \subsubsection{Gradient}\label{sec:gradient}
@@ -5173,8 +5222,17 @@ Differential Operator (\S\ref{sec:differential_operator})
 
 (wiki):
 
-the \emph{Gradient} of a Scalar Field (\S\ref{sec:scalar_field}) $f$ is the
-Vector Derivative (\S\ref{sec:vector_derivative}):
+for a Multivariate Scalar-valued Function (\S\ref{sec:scalar_function}) $f(x_1,
+\ldots, x_n)$ on $\reals^n$ for which a Partial Derivative $\pderiv{f}{x_j}$
+exists for each Variable $x_j$ at a Point $a = (a_1, \ldots, a_n)$ the Partial
+Derivatives define the \emph{Gradient Vector} of $f$ as $a$:
+\[
+  \nabla{f}(a_1, \ldots, a_n) = \big( \pderiv{f}{x_1}(a_1, \ldots, a_n), \ldots,
+  \pderiv{f}{x_n}(a_1, \ldots, a_n) \big)
+\]
+
+the Gradient of a Scalar Field (\S\ref{sec:scalar_field}) $f$ is the Vector
+Derivative (\S\ref{sec:vector_derivative}):
 \[
   \nabla f =
     \frac{\partial f}{\partial x}\vec{e}_x +
@@ -5191,7 +5249,8 @@ a Closed Path from a Point to itself is Zero
 
 FIXME: Matrix of Derivatives, Vector Field of Row Vectors
 
-Jacobian (\S\ref{sec:jacobian})
+for a Multivariate Real-valued Function, the Jacobian Matrix
+(\S\ref{sec:jacobian}) reduces to the Gradient Vector
 
 Divergence (\S\ref{sec:divergence}) can be expressed as:
 \[
@@ -5244,7 +5303,8 @@ multiple Variables: the Jacobian of a Scalar-valued Multivariable Function is
 the Gradient, and the Jacobian of a Scalar-valued Single Variable Function is
 its Derivative
 
-Jacobian Matrix (\S\ref{sec:jacobian_matrix})
+for a Multivariate Real-valued Function, the Jacobian Matrix
+(\S\ref{sec:jacobian_matrix}) reduces to the Gradient Vector
 
 \fist the Jacobian Matrix for a System of DAEs (\S\ref{sec:dae_system}) is
 a Singular (Non-invertible) Matrix (\S\ref{sec:singular_matrix})
