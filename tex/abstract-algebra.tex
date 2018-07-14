@@ -4,6 +4,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+(nlab):
+
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l l l|}
+\hline
+  \textbf{Algebra} &
+  \textbf{Homological Algebra} (\S\ref{sec:homological_algebra}) &
+  \textbf{Homotopical Algebra} (\S\ref{sec:homotopical_algebra}) \\
+\hline
+  Commutative (Abelian) Group (\S\ref{sec:commutative_group}) &
+  Chain Complex (\S\ref{sec:chain_complex}) &
+  Topological Spectrum (\S\ref{sec:topological_spectrum}) \\
+
+  Ring (\S\ref{sec:ring}) &
+  Differential Graded Ring (\S\ref{sec:differential_graded_ring}) &
+  Ring Spectrum (\S\ref{sec:ring_spectrum}) \\
+
+  Module (\S\ref{sec:module}) &
+  Differential Graded Module (\S\ref{sec:differential_graded_module}) &
+  Module Spectrum (\S\ref{sec:module_spectrum}) \\
+\hline
+\end{tabular}
+}
+
 \iffalse
 
 1 Set X:
@@ -164,6 +188,7 @@
 
 
 \fi
+
 
 
 % ====================================================================
@@ -1878,6 +1903,9 @@ In Abelian Groups, the Coproduct is Isomorphic to the Product:
   A + B \cong A \times B
 \]
 
+\fist Chain Complex (Homological Algebra \S\ref{sec:chain_complex}), Topological
+Spectrum (Homotopical Algebra \S\ref{sec:topological_spectrum})
+
 \fist a Graded Ring (\S\ref{sec:graded_ring}) is a Ring that is the Direct Sum
 (the \emph{Gradation} or \emph{Grading}) of Abelian Groups $R_i$ such that
 $R_iR_j \subseteq R_{i+j}$
@@ -1978,6 +2006,10 @@ Multiplicative Group (\S\ref{sec:multiplicative_group})
 % --------------------------------------------------------------------
 \subsection{Non-abelian Group}\label{sec:noncommutative_group}
 % --------------------------------------------------------------------
+
+Non-commutative Group
+
+
 
 % --------------------------------------------------------------------
 \subsection{Simple Group}\label{sec:simple_group}
@@ -2932,6 +2964,10 @@ The Signature (\S\ref{sec:signature}) for Rings is $\{+, -, \cdot, 0, 1\}$.
 A Ring may be seen as an Abelian Group with extra Structure, namely Ring
 Multiplication.
 
+cf. Differential Graded Ring (Homological Algebra
+\S\ref{sec:differential_graded_ring}), Ring Spectrum (Homotopical Algebra
+\S\ref{sec:ring_spectrum})
+
 A \emph{Finite Ring} is a Ring that has a Finite number of Elements.
 
 A \emph{Unit} is an Element of a Ring $R$ that has an Inverse
@@ -3155,6 +3191,14 @@ is the Set of all Prime Ideals of $R$
 
 
 % --------------------------------------------------------------------
+\subsection{Coring}\label{sec:coring}
+% --------------------------------------------------------------------
+
+a Biring (\S\ref{sec:biring}) is both a Ring and a Coring
+
+
+
+% --------------------------------------------------------------------
 \subsection{Finite Ring}\label{sec:finite_ring}
 % --------------------------------------------------------------------
 
@@ -3250,10 +3294,15 @@ Spectrum (\S\ref{sec:spectrum}) of a Commutative Ring
 
 \subsubsection{Integral Element}\label{sec:integral_element}
 
-\subsubsection{Spectrum}\label{sec:ring_spectrum}
+\subsubsection{Ring Spectrum}\label{sec:ring_spectrum}
 
 The \emph{Spectrum}, $\Spec(R)$, of a Commutative Ring $R$ is the Set of all
 Prime Ideals of $R$.
+
+a Module Spectrum (\S\ref{sec:module_spectrum}) is a Module over a Ring Spectrum
+
+cf. Differential Graded Ring (Homological Algebra
+\S\ref{sec:differential_graded_ring})
 
 \fist Note that ``Spectrum'' is a highly overloaded term and may otherwise
 refer to:
@@ -3272,8 +3321,9 @@ refer to:
     Equivalence Classes of Irreducible $*$-representations of a C$^*$-algebra
     (similar notion to Ring Spectrum)
 
-  \item Cohomology Spectrum (\S\ref{sec:cohomology_spectrum}) -- represents a
-    Generalized Cohomology Theory (\S\ref{sec:generalized_cohomology_theory})
+  \item Topological Spectrum (Stable Homotopy Theory
+    \S\ref{sec:topological_spectrum}) -- represents a Generalized Cohomology
+    Theory (\S\ref{sec:generalized_cohomology_theory})
 
   \item Polygon Spectrum (\S\ref{sec:polygon_spectrum}) -- the Set of all $n$
     for which an $n$-equidissection (\S\ref{sec:equidissection}) of a Polygon
@@ -3286,6 +3336,12 @@ refer to:
     Isomorphism Classes of Models of various Cardinalities
 \end{itemize}
 
+\fist Derived Algebraic Geometry (\S\ref{sec:derived_algebraic_geometry}) --
+generalization of Algebraic Geometry replacing Commutative Rings with Ring
+Spectra in Algebraic Topology where higher Homotopy accounts for
+Non-discreteness (Tor) of the Structure Sheaf (FIXME: Tor ???)
+%TODO xref
+
 (wiki):
 
 \fist \emph{Schemes} (\S\ref{sec:scheme}) are Locally Ringed Spaces
@@ -3297,6 +3353,8 @@ with the Zariski Topology (\S\ref{sec:zariski_topology}) and a Structure Sheaf
 (\S\ref{sec:structure_sheaf}), turning it into a Locally Ringed Space
 
 \fist cf. C$^*$-algebra Spectrum (Dual \S\ref{sec:cstar_dual})
+
+$Spec$ is a Functor (FIXME: details)
 
 
 
@@ -3406,6 +3464,29 @@ Intersection of the Zero Sets of a number of Polynomials in a Polynomial Ring
 
 \fist Gr\"obner Basis (Computational Algebraic Geometry
 \S\ref{sec:grobner_basis})
+
+
+
+\subsubsection{Biring}\label{sec:biring}
+
+\fist Differential Algebra (\S\ref{sec:differential_algebra})
+
+(nlab):
+
+A \emph{Biring} is a Commutative Ring $R$ equipped with the following Ring
+Homomorphisms:
+\begin{itemize}
+  \item \emph{Coaddition} -- $R \rightarrow R \otimes R$
+  \item \emph{Cozero} -- $R \rightarrow R \otimes R$
+  \item \emph{Co-additive Inverse} -- $R \rightarrow R$
+  \item \emph{Comultiplication} -- $R \rightarrow R \otimes R$
+  \item \emph{Multiplicative Counit} -- $R \rightarrow \ints$
+\end{itemize}
+
+a Biring is both a Ring and Co-ring (\S\ref{sec:coring}), i.e. it is a
+Commutative Ring Object in the Opposite Category of the Category of Commutative
+Rings $\cat{CRing}^{op}$ (\emph{a.k.a.} the Category of Affine Schemes
+\S\ref{sec:affine_scheme})
 
 
 
@@ -3926,11 +4007,22 @@ Homology (\S\ref{sec:homology_theory}) in the ``general abstract'' setting
 
 Abelian Category (\S\ref{sec:abelian_category})
 
+(ncat):
+
+Chain Complex (\S\ref{sec:chain_complex})
+
+Differential Graded Ring (\S\ref{sec:differential_graded_ring})
+
+Differential Graded Module (\S\ref{sec:differential_graded_module})
+
 
 
 % --------------------------------------------------------------------
 \subsection{Chain Complex}\label{sec:chain_complex}
 % --------------------------------------------------------------------
+
+cf. Commutative (Abelian) Group (\S\ref{sec:commutative_group}), Topological
+Spectrum (Homotopical Algebra \S\ref{sec:topological_spectrum})
 
 (wiki):
 
@@ -3978,22 +4070,16 @@ $(n-1)$-dimensional Boundary inducing the \emph{Singular Chain Complex}
 
 
 % --------------------------------------------------------------------
-\subsection{Derivator}\label{sec:derivator}
+\subsection{Differential Algebra}\label{sec:differential_algebra}
 % --------------------------------------------------------------------
-
-Derived Categories
-
-Language for Homotopical Algebra
-
-
-
-% ====================================================================
-\section{Differential Algebra}\label{sec:differential_algebra}
-% ====================================================================
 
 generalization of Commutative Algebra (\S\ref{sec:commutative_algebra})
 
-cf. Differential Calculus (\S\ref{sec:differential_calculus})
+cf. Differential Calculus (\S\ref{sec:differential_calculus}), Differential
+Geometry (\S\ref{sec:differential_geometry}), Differential Topology
+(\S\ref{sec:differential_topology})
+
+Birings (\S\ref{sec:biring})
 
 2011 - Hubbard, Lundell - \emph{A First Look at Differential Algebra}
 
@@ -4007,9 +4093,7 @@ Algebra
 
 
 
-% --------------------------------------------------------------------
-\subsection{Derivation}\label{sec:derivation}
-% --------------------------------------------------------------------
+\subsubsection{Derivation}\label{sec:derivation}
 
 (wiki):
 
@@ -4038,9 +4122,9 @@ examples:
 
 
 
-\subsubsection{Graded Derivation}\label{sec:graded_derivation}
+\paragraph{Graded Derivation}\label{sec:graded_derivation}\hfill
 
-\subsubsection{Antiderivation}\label{sec:antiderivation}
+\paragraph{Antiderivation}\label{sec:antiderivation}\hfill
 
 cf. Antiderivative (Indefinite Integral \S\ref{sec:antiderivative})
 
@@ -4052,40 +4136,114 @@ examples:
 
 
 
-% --------------------------------------------------------------------
-\subsection{Differential Ring}\label{sec:differential_ring}
-% --------------------------------------------------------------------
+\subsubsection{Differential Ring}\label{sec:differential_ring}
 
 A \emph{Differential Ring} is a Unital Ring with a Finite Set of
 \emph{Derivations} $\Delta = \{ \partial_1, \ldots, \partial_2 \}$ that are
-Homomorphisms 
+Homomorphisms of Additive Groups: (FIXME: why additive groups ???)
+\[
+  \partial : R \rightarrow R
+\]
+such that each Derivation $\partial$ Satisfies the Leibniz Product Rule:
+\[
+  \partial(r_1r_2) = (\partial{r_1})r_2 + r_1(\partial{r_2})
+\]
+for every $r_1, r_2 \in R$
+
 
 any Ring is a Differential Ring with respect to the Trivial Derivation mapping
 any Ring Element to Zero
 
 
 
-% --------------------------------------------------------------------
-\subsection{Differential Field}\label{sec:differential_field}
-% --------------------------------------------------------------------
+\paragraph{Differential Graded Ring}\label{sec:differential_graded_ring}\hfill
 
-% --------------------------------------------------------------------
-\subsection{Differential Graded Algebra}\label{sec:differential_graded_algebra}
-% --------------------------------------------------------------------
+cf. Ring (\S\ref{sec:ring}), Ring Spectrum (Homotopical Algebra
+\S\ref{sec:ring_spectrum})
+
+
+
+\subsubsection{Differential Field}\label{sec:differential_field}
+
+\subsubsection{Differential Graded Module}\label{sec:differential_graded_module}
+
+cf. Module (\S\ref{sec:module}), Module Spectrum (Homotopical Algebra
+\S\ref{sec:module_spectrum})
+
+
+
+\subsubsection{Differential Graded Algebra}
+\label{sec:differential_graded_algebra}
 
 Graded Algebra (\S\ref{sec:graded_algebra})
 
 
 
-% --------------------------------------------------------------------
-\subsection{Differential Galois Theory}\label{sec:differential_galois}
-% --------------------------------------------------------------------
+\subsubsection{Differential Graded Scheme}\label{sec:differential_graded_scheme}
+
+\subsubsection{Differential Graded Category}
+\label{sec:differential_graded_category}
+
+\subsubsection{Differential Galois Theory}\label{sec:differential_galois}
 
 Galois Theory (\S\ref{sec:galois_theory})
 
 Extensions of Differential Fields
 
 Galois Groups (\S\ref{sec:galois_group}) of Differential Equations
+
+
+
+% ====================================================================
+\section{Homotopical Algebra}\label{sec:homotopical_algebra}
+% ====================================================================
+
+or \emph{Higher Algebra}
+
+cf. Higher Category Theory (\S\ref{sec:higher_category})
+
+Topological Spectrum (\S\ref{sec:topological_spectrum})
+
+Ring Spectrum (\S\ref{sec:ring_spectrum})
+
+Module Spectrum (\S\ref{sec:module_spectrum})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Topological Spectrum}\label{sec:topological_spectrum}
+% --------------------------------------------------------------------
+
+%FIXME: xrefs
+
+Stable Homotopy Theory (\S\ref{sec:stable_homotopy}), Stable Homotopy Category
+(\S\ref{sec:stable_homotopy_category})
+
+cf. Commutative (Abelian) Group (\S\ref{sec:commutative_group}), Chain Complex
+(Homological Algebra \S\ref{sec:chain_complex})
+
+Symmetric Spectrum, Simplicial Spectrum
+
+
+
+% --------------------------------------------------------------------
+\subsection{Module Spectrum}\label{sec:module_spectrum}
+% --------------------------------------------------------------------
+
+a Module over a Ring Spectrum (\S\ref{sec:ring_spectrum})
+
+cf. Differential Graded Module (Homological Algebra
+\S\ref{sec:differential_graded_module})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Derivator}\label{sec:derivator}
+% --------------------------------------------------------------------
+
+Derived Categories (\S\ref{sec:derived_category})
+
+Language for Homotopical Algebra
 
 
 
