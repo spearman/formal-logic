@@ -638,6 +638,13 @@ Interval Arithmetic (\S\ref{sec:interval_arithmetic})
 
 $[a,b] = \bigcap_n (a - \frac{1}{n}, b + \frac{1}{n})$
 
+the Real Unit Interval $[0,1]$ is a One-dimensional Analytic Manifold
+(\S\ref{sec:analytic_manifold}) and can be interpreted as a generalization of
+the Boolean Domain $\{0, 1\}$ (Fuzzy Logic \S\ref{sec:fuzzy_logic})
+
+the Real Closed Interval (Unit 0-disc) $[-1,1]$ is a Commutative Semigroup
+(\S\ref{sec:commutative_semigroup}) under Multiplication
+
 Taylor06 - \emph{Interval Analysis Without Intervals}
 
 
@@ -742,7 +749,7 @@ examples:
   \item the Function for the maximum Eigenvalue of a Symmetric Matrix $X \in
     \mathsf{S}^n$:
     \[
-      \lambda_{max}(X) = \mathrm{sup}_{\|\vec{y}\|_2=1} \vec{y}^T X \vec{y}
+      \lambda_{max}(X) = \mathrm{sup}_{\ |\vec{y}\|_2=1} \vec{y}^T X \vec{y}
     \]
   \item $exp (g(x)$ of a Convex Function $g$
 \end{itemize}
@@ -1874,7 +1881,7 @@ Eigenvalues
 
 
 % --------------------------------------------------------------------
-\section{Calculus of Variations}\label{sec:calculus_of_variations}
+\subsection{Calculus of Variations}\label{sec:calculus_of_variations}
 % --------------------------------------------------------------------
 
 or \emph{Variational Calculus})
@@ -1886,6 +1893,10 @@ or \emph{Variational Calculus})
 Hamilton-Jacobi Equation (\S\ref{sec:hamilton_jacobi}
 
 Virtual Displacements
+
+
+
+\subsubsection{Functional Derivative}\label{sec:functional_derivative}
 
 
 
@@ -2187,13 +2198,13 @@ in Output
 \hfill
 
 \[
-  \hat{\kappa} = \mathrm{sup}_{\Delta x} \frac{\|\Delta f\|}{\|\Delta x\|}
+  \hat{\kappa} = \mathrm{sup}_{\Delta x} \frac{\ |\Delta f\|}{\|\Delta x\|}
 \]
 
 if $f$ is Differentiable to First Order, $\Delta f = J(x) \Delta x$ where $J$
 is the Jacobian Matrix (\S\ref{sec:jacobian_matrix}), and therefore:
 \begin{align*}
-  \hat{\kappa} & = \mathrm{sup}_{\Delta x} \frac{\|J\Delta x\|}{\|\Delta x\|} \\
+  \hat{\kappa} & = \mathrm{sup}_{\Delta x} \frac{\|J\Delta x\|}{\ |\Delta x\|} \\
   \hat{\kappa} & = \|J(x)\|
 \end{align*}
 that is, the Absolute Condition Number is equal to the Matrix Norm
@@ -2206,16 +2217,16 @@ that is, the Absolute Condition Number is equal to the Matrix Norm
 
 \[
   \kappa = \mathrm{sup}_{\Delta x} \frac{
-    \Big(\frac{\|\Delta f\|}{\|f(x)\|}\Big)
+    \Big(\frac{\ |\Delta f\|}{\|f(x)\|}\Big)
   }{
-    \Big(\frac{\|\Delta x\|}{\|x\|}\Big)
+    \Big(\frac{\ |\Delta x\|}{\|x\|}\Big)
   }
 \]
 
 if $f$ is Differentiable:
 \begin{align*}
   \kappa & = \mathrm{sup}_{\Delta x}
-    \frac{\|\Delta f\|}{\|\Delta x\|} \cdot \frac{\|x\|}{\|f(x)\|} \\
+    \frac{\ |\Delta f\|}{\|\Delta x\|} \cdot \frac{\|x\|}{\|f(x)\|} \\
   \kappa & = \frac{\|J(x)\| \|x\|}{\|f(x)\|}
 \end{align*}
 
@@ -2248,14 +2259,14 @@ Problem is Ill-conditioned when $x$ is near $y$
 
 \emph{Relative Condition Number for Matrix/Vector Multiplication}
 
-$\kappa = \frac{\|A\|\|x\|}{\|Ax\|}$
+$\kappa = \frac{\|A\ |\|x\|}{\|Ax\|}$
 
 worst case is the Sharp Inequality (i.e. is an Equality for \emph{some}
 $\vec{x}$):
 \[
   \kappa \leq \|A\| \|A^{-1}\|
 \]
-where $\|A\|\|A^{-1}\|$ is called the Condition Number $\kappa(A)$ of the
+where $\|A\ |\|A^{-1}\|$ is called the Condition Number $\kappa(A)$ of the
 Matrix $A$
 
 
@@ -2286,17 +2297,17 @@ $\Delta x = -A^{-1}(\Delta A)\vec{x}$
 
 and:
 
-$\|\Delta\vec{x}\| \leq \|A^{-1}\| \|\Delta{A}\| \|\vec{x}\|$
+$\ |\Delta\vec{x}\| \leq \|A^{-1}\| \|\Delta{A}\| \|\vec{x}\|$
 
 giving:
 
 \[
   \frac{
-    \frac{\|\Delta{x}\|}{\|\vec{x}\|}
+    \frac{\ |\Delta{x}\|}{\|\vec{x}\|}
   }{
-    \frac{\|\Delta{A}\|}{\|A\|}
+    \frac{\ |\Delta{A}\|}{\|A\|}
   }
-  \leq \|A^{-1}\|\|A\| = \kappa(A)
+  \leq \|A^{-1}\ |\|A\| = \kappa(A)
 \]
 
 combining all the above, Solving $A\vec{x} = \vec{b}$ or Multiplying by $A$,
@@ -2945,10 +2956,6 @@ $\mathrm{d}f$ is the \emph{Differential} of the Function at $x$;
 \emph{Differentiation} is the process of ``finding'' a Derivative (FIXME:
 clarify)
 
-\emph{An Algebra of Differentials} -
-Part 1: \url{https://www.youtube.com/watch?v=2Ga8RFwwGcg}, Part 2:
-\url{https://www.youtube.com/watch?v=oMe1gi5egiI}
-
 (wiki):
 
 different approaches to treating Differentials \emph{quantitatively}:
@@ -2970,6 +2977,83 @@ $\mathrm{d}x$:
 \[
   \mathrm{d}f(x, \mathrm{d}x) \defeq f'(x)\mathrm{d}x
 \]
+
+\asterism
+
+Mathview - \emph{Differentials 101} -
+\url{https://www.youtube.com/watch?v=KrTQ0Rz3qBo}
+
+Multiplicative Algebra of Differentials
+
+Closed Interval $[-1, 1]$ is Closed under Multiplication
+
+for an Epsilon Neighborhood (\S\ref{sec:epsilon_neighborhood}) around $0$:
+\[
+  N_\epsilon(0) = \{ \delta \ |\ -\epsilon < \delta < \epsilon \}
+\]
+note also that the Cardinality (\S\ref{sec:cardinality}) of $N_\epsilon(0)$ is
+equal to the Cardinality of the Real Line so there is a Bijection between them
+
+$N_\epsilon(0)$ is a Commutative Semigroup (\S\ref{sec:commutative_semigroup})
+under Multiplication
+
+Inverse Differentials $\frac{1}{\delta} \in \overline{N}_\epsilon^*(0)
+\subset \reals$ are the Set of arbitrarily large Real Numbers formed by the
+Multiplicative Inverses of the Differentials in $\overline{N}_\epsilon(0)$ (that
+is the ``Punctured'' Neighborhood excluding $0$); this is the Dual Commutative
+Semigroup to the Commutative Semigroup of Differentials
+
+Fiber Bundle of Differentials on the Real Numbers; each Fiber is an attached a
+``Triangle'' to each Point; Multiplicative and Additive Structure (TODO)
+
+the ``\emph{Dual Algebra}''
+(FIXME: is this a standard name ???)
+
+the entire Real Line, excluding $0$, can be recovered by Multiplying
+Differentials and Inverse Differentials $\langle \delta^* \ |\ \delta \rangle$
+
+Dual Product:
+\[
+  \langle \cdot \ |\ \cdot\rangle :
+    N_\epsilon^*(0) \times N_\epsilon(0) \rightarrow \reals - \{0\}
+\]
+
+***
+
+Mathview - \emph{An Algebra of Differentials} -
+Part 1: \url{https://www.youtube.com/watch?v=2Ga8RFwwGcg}, Part 2:
+\url{https://www.youtube.com/watch?v=oMe1gi5egiI}
+
+Additive Algebra of Differentials
+
+$N_L(0)$ -- arbitrarily large $L = \frac{1}{\epsilon}$
+
+for $0 < \epsilon << 1$ observe:
+\begin{align*}
+  N_{\frac{1}{\epsilon}}(0) & =
+    \{ \Delta \ |\ -\frac{1}{\epsilon} < x < \frac{1}{\epsilon} \} = \reals \\
+  N_\epsilon(0) & = \{ \delta \ |\ -\epsilon < \delta < \epsilon \} \\
+  \epsilon^2 N_{\frac{1}{\epsilon}}(0) & = N_\epsilon(0)
+\end{align*}
+
+$\epsilon^2$ is an Operator that maps any $x \in \reals$ back into the Interval
+$[-\epsilon, \epsilon]$, and with Inverse $\frac{1}{\epsilon^2}$ defines an
+Isomorphism between the Reals and the Epsilon Neighborhood
+
+define a Closed Addition Operation $g_A(\delta, \delta') = \delta''$ by:
+\begin{align*}
+  g_A : N_\epsilon(0) \times N_\epsilon(0) \rightarrow N_\epsilon(0) \\
+  g_A = h \circ (+) \circ (h^{-1}, h^{-1})
+\end{align*}
+
+***
+
+Mathview - Manifolds - \url{https://www.youtube.com/watch?v=jvotAfSUxWU}
+--
+Differentiable Manifolds (\S\ref{sec:differentiable_manifold}) -- Epsilon
+Neighborhoods constructed from Coordinates in $\reals^n$ are Vector Spaces of
+\emph{Differentials}; Open Neighborhoods (\S\ref{sec:open_neighborhood}) in
+Differentiable Manifolds are Vector Spaces of Differentials
 
 
 
@@ -3035,6 +3119,8 @@ on a Differential $k$-form (\S\ref{sec:differential_form}) and produces a
 Differential $(k+1)$-form
 
 \fist Interior Derivative (\S\ref{sec:interior_derivative}) -- TODO
+
+\fist Functional Derivative (\S\ref{sec:functional_derivative})
 
 The process of ``finding'' (FIXME: or ``taking'' or computing ???) a Derivative
 is called \emph{Differentiation}.
@@ -4024,6 +4110,11 @@ cf. Reverse Bessel Polynomials (\S\ref{sec:reverse_bessel_polynomial})
 
 \fist Multivariable Calculus (\S\ref{sec:multivariable_calculus})
 
+(wiki):
+
+in Integration Theory, specifying a Measure (\S\ref{sec:measure}) allows the
+definition of Integrals on Spaces more general than Subsets of Euclidean Space
+
 
 
 % --------------------------------------------------------------------
@@ -4107,6 +4198,13 @@ Integrals -- Numerical Integration (\emph{Quadrature}
 
 is a Linear Operator (\S\ref{sec:linear_operator}) --FIXME: clarify
 
+(wiki):
+
+in Integration Theory, specifying a Measure (\S\ref{sec:measure}) allows the
+definition of Integrals on Spaces more general than Subsets of Euclidean Space
+
+\asterism
+
 \emph{Integration by Substitution} (\emph{$u$-substitution})
 
 
@@ -4161,6 +4259,10 @@ denoted by $\int_a^b f$
 
 
 \subsubsection{Lebesgue Integral}\label{sec:lebesgue_integral}
+
+\fist Measure Theory (\S\ref{sec:measure_theory})
+
+
 
 \subsubsection{Wallis Integral}\label{sec:wallis_integral}
 
