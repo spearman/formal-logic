@@ -467,6 +467,22 @@ cf. Cofinality (\S\ref{sec:cofinality})
 
 
 
+\subsubsection{Filtration}\label{sec:filtration}
+
+cf. Filter (\S\ref{sec:filter})
+
+examples:
+\begin{itemize}
+  \item Continuous Functions (\S\ref{sec:continuous_function})
+    $f : \reals^n \rightarrow \reals$:
+    \[
+      \cdots \subset C^n(\reals^k) \subset \cdots \subset C^1(R^k) \subset
+        C^0(\reals^k)
+    \]
+\end{itemize}
+
+
+
 % --------------------------------------------------------------------
 \subsection{Essentially Algebraic Structure}
 \label{sec:essentially_algebraic}
@@ -4029,15 +4045,33 @@ Differential Graded Module (\S\ref{sec:differential_graded_module})
 \subsection{Chain Complex}\label{sec:chain_complex}
 % --------------------------------------------------------------------
 
-cf. Commutative (Abelian) Group (\S\ref{sec:commutative_group}), Topological
-Spectrum (Homotopical Algebra \S\ref{sec:topological_spectrum})
-
 (wiki):
 
+A \emph{Chain Complex} $(A_\bullet, d_\bullet)$ is a Sequence of Commutative
+(Abelian) Groups (\S\ref{sec:commutative_group}) or Modules
+(\S\ref{sec:module}):
+\[
+  \ldots, A_0, A_1, A_2, A_3, \ldots
+\]
+connected by Homomorphisms called \emph{Boundary Operators} (or
+\emph{Differentials} \S\ref{sec:boundary_operator}) $d_n : A_n \rightarrow
+A_{n-1}$ such that the Composition of any two consecutive Differentials is
+the Zero Map:
+\[
+  d_n \circ d_{n+1} = 0
+\]
+or written without indices:
+\[
+  d^2 = 0
+\]
+
 Algebraic Structure consisting of a Sequence of Abelian Groups or Modules and a
-Sequence of Homomorphisms called \emph{Boundary Operators} between consecutive
-Groups (Modules) such that the Image of each Homomorphism is included in the
-Kernel of the next
+Sequence of Homomorphisms called \emph{Boundary Operators}
+(\S\ref{sec:boundary_operator}) between consecutive Groups (Modules) such that
+the Image of each Homomorphism is included in the Kernel of the next
+
+\fist cf. Commutative (Abelian) Group (\S\ref{sec:commutative_group}),
+Topological Spectrum (Homotopical Algebra \S\ref{sec:topological_spectrum})
 
 \fist Homology (\S\ref{sec:homology}): describes how Images are included in
 Kernels
@@ -4047,9 +4081,55 @@ Kernels
     \emph{Differential Graded Vector Space} (\S\ref{sec:differential_graded})
 \end{itemize}
 
+\fist for Additive Category (\S\ref{sec:additive_category}) $\cat{A}$, the
+Homotopy Category of Chain Complexes (\S\ref{sec:chain_homotopy_category})
+$\cat{K}(\cat{A})$ has as Objects Chain Complexes as in $\cat{Kom}(\cat{A})$
+(FIXME: clarify) and as Morphisms maps of Complexes modulo Homotopy
+
 
 
 \subsubsection{Boundary Operator}\label{sec:boundary_operator}
+
+or \emph{Differential}
+
+(nlab):
+
+a \emph{Differential} (\S\ref{sec:differential}) is a Morphism of a Differential
+Object (\S\ref{sec:differential_object}) defining a Chain Complex
+called the \emph{Boundary Operator};
+concretely a Boundary Operator on a Chain Complex is called a ``Differential''
+if it is part of the structure of a Differential Graded Algebra
+(\S\ref{sec:differential_graded_algebra}) on the Complex
+
+
+
+\subsubsection{Chain Map}\label{sec:chain_map}
+
+A \emph{Chain Map} $f$ on Chain Complexes $(A_\bullet, d_{A,\bullet})$ and
+$(B_\bullet, d_{B,\bullet})$ is a Sequence $f_\bullet$ of Homomorphisms $f_n :
+A_n \rightarrow B_n$ for each $n$ that Commutes with the Boundary Operators of
+the two Chain Complexes, so:
+\[
+  d_{B,n} \circ f_n = f_{n-1} \circ d_{A,n}
+\]
+
+induces a map on Homology (TODO)
+
+Smooth Maps between Manifolds induce Chain Maps and Smooth Homotopies between
+Maps induce \emph{Chain Homotopies} (\S\ref{sec:chain_homotopy})
+
+
+
+\subsubsection{Bounded Chain Complex}\label{sec:bounded_chain_complex}
+
+almost all $A_n$ are $0$, i.e. a Finite Complex extended to the left and right
+by $0$
+
+an example of a Bounded Chain Complex is the Chain Complex defining the
+Simplicial Homology (\S\ref{sec:simplicial_homology}) of a Finite Simplicial
+Complex
+
+
 
 \subsubsection{Singular Chain Complex}\label{sec:singular_chain_complex}
 
@@ -4074,6 +4154,72 @@ $(n-1)$-dimensional Boundary inducing the \emph{Singular Chain Complex}
 % --------------------------------------------------------------------
 
 \fist Cohomology (\S\ref{sec:cohomology})
+
+\emph{Co-chain Complex} $(A^\bullet, d^\bullet)$
+
+
+
+\subsubsection{de Rham Complex}\label{sec:derham_complex}
+
+(wiki):
+
+The \emph{de Rham Complex} is the Cochain Complex of Differential Forms
+(\S\ref{sec:differential_form}) on some Smooth Manifold
+(\S\ref{sec:smooth_manifold}) $M$ with the Exterior Derivative
+(\S\ref{sec:exterior_derivative}) as the Differential
+(\S\ref{sec:differential}):
+\[
+  0 \rightarrow \Omega^0(M) \xrightarrow{d} \Omega^1(M) \xrightarrow{d}
+  \Omega^2(M) \xrightarrow{d} \Omega^3(M) \rightarrow \cdots
+\]
+where $\Omega^0(M)$ is the Space of Smooth Functions on $M$, $\Omega^1(M)$ is
+the Space of $1$-forms, etc.; Differential Forms which are the Image of other
+Forms under the Exterior Derivative plus the Constant $0$ Function in
+$\Omega^0(M)$ are called \emph{Exact} (\S\ref{sec:exact_differential_form}) and
+Differential Forms whose Exterior Derivative is $0$ are called \emph{Closed}
+(\S\ref{sec:closed_differential_form}); the relationship $d^2 = 0$ says that
+Exact Forms are Closed (FIXME: clarify), but the converse is not generally true
+(Closed Differential Forms need not be Exact, e.g. for the $1$-form of Angle
+Measurement on the Unit Circle $\diffy{\theta}$ there is no actual Function
+$\theta$ defined on the whole Circle of which $\diffy{\theta}$ is the
+Derivative)
+
+\emph{de Rham Cohomology}
+
+two Closed Differential Forms $\alpha, \beta \in \Omega^k(M)$ are
+\emph{Cohomologous} if they differ by an Exact Differential Form, i.e. $\alpha -
+\beta$ is Exact; this induces an Equivalence Relation on the Space of Closed
+Forms in $\Omega^k(M)$ and
+the $k$-th \emph{de Rham Cohomology Group} $H_{\mathrm{dR}}^k(M)$ is the Set of
+Equivalence Classes (i.e. the Set of Closed Forms in $\Omega^k(M)$ modulo the
+Exact Forms)
+
+for any Manifold $M$ with $n$ Connected Components (Maximal Connected Subset
+Ordered by Inclusion \S\ref{sec:connected_space}), the $0$-th de Rham Cohomology
+Group (\S\ref{sec:derham_complex}) $H_{\mathrm{dR}}^0(M)$ is Isomorphic to
+$\reals^n$:
+\[
+  H_{\mathrm{dR}}^0(M) \cong \reals^n
+\]
+following from the fact that any Smooth Function on $M$ with Zero Derivative
+(Locally Constant) is Constant on each of the Connected Components of $M$
+
+the Homology Group in Dimension Zero is Isomorphic to the Vector Space of
+Locally Constant Functions from $M$ to $\reals$; for a Compact Manifold this is
+the Real Vector Space with Dimension equal to the number f Connected Components
+of $M$
+
+Smooth Maps between Manifolds induce \emph{Chain Maps} (\S\ref{sec:chain_map})
+and Smooth Homotopies between Maps induce \emph{Chain Homotopies}
+(\S\ref{sec:chain_homotopy})
+
+
+(nlab):
+
+the archetypical example of \emph{Differential} (\S\ref{sec:differential}) is
+the Differential in the de Rham Complex $\Omega^\bullet(X)$ of a Smooth manifold
+$X$, give by Differentiation (\S\ref{sec:derivative}) of Smooth Functions and
+Differential Forms
 
 
 
@@ -4132,6 +4278,41 @@ examples:
 
 \paragraph{Graded Derivation}\label{sec:graded_derivation}\hfill
 
+\paragraph{Augmented Derivation}\label{sec:augmented_derivation}\hfill
+
+An \emph{Augmented Derivation} is a Module Homomorphism (Linear Map
+\S\ref{sec:linear_transformation}), $D : A \rightarrow B$, ``\emph{Augmented}''
+by an Algebra Homomorphism (\S\ref{sec:algebra_homomorphism})
+$\epsilon : A \rightarrow B$ such that:
+\[
+  D(\vec{a} \times \vec{b}) =
+  D(\vec{a})\epsilon(\vec{b}) + \epsilon(\vec{a})D(\vec{b})
+\]
+
+\fist \emph{Differentiation} (\S\ref{sec:derivative}) of Smooth Functions can be
+defined as an \emph{(Endo-)functor} on the Category of Smooth Manifolds and
+Smooth Maps:
+\[
+  \mathrm{d} : \cat{Diff} \rightarrow \cat{Diff}
+\]
+sending:
+\begin{itemize}
+  \item Smooth Manifolds $X$ to Tangent Bundles (\S\ref{sec:tangent_bundle}) $T
+    X$, with Points of $T X$ being Ordered Pairs $(x, v)$ where $v$ is a Tangent
+    Vector at $x$, i.e. an (Augmented) Derivation $v : C^\infty(X) \rightarrow
+    \reals$ on the Algebra of Smooth Functions, Augmented by Evaluation
+    $\mathrm{ev}_x : C^\infty(X) \rightarrow \reals$ at $x$ (FIXME: clarify)
+  \item Smooth Functions $f : X \rightarrow Y$ to Derivatives (FIXME: nlab calls
+    this here a ``Differential'' of $f$ but that seems to be inconsistent with
+    the terminology used elsewhere) $\diffy{f} : TX \rightarrow TY$; if $\gamma
+    : [-1,1] \rightarrow X$ is a Path in $X$ representing a Vector
+    $v \in T_x{X}$ then $(\diffy{f})(v) \in T_{f(x)}Y$ is the Vector represented
+    by the Path $[-1, 1] \xrightarrow{\gamma} X \xrightarrow{f} Y$
+    (FIXME: clarify)
+\end{itemize}
+
+
+
 \paragraph{Antiderivation}\label{sec:antiderivation}\hfill
 
 cf. Antiderivative (Indefinite Integral \S\ref{sec:antiderivative})
@@ -4184,6 +4365,11 @@ cf. Module (\S\ref{sec:module}), Module Spectrum (Homotopical Algebra
 \label{sec:differential_graded_algebra}
 
 Graded Algebra (\S\ref{sec:graded_algebra})
+
+a Boundary Operator (\S\ref{sec:boundary_operator}) on a Chain Complex
+(\S\ref{sec:chain_complex}) is called a ``Differential''
+(\S\ref{sec:differential}) if it is part of the structure of a Differential
+Graded Algebra on the Complex
 
 
 

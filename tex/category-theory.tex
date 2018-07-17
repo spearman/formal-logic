@@ -330,7 +330,12 @@ Simplex Category (\S\ref{sec:simplex_category})
   Maps (Homotopy Category \S\ref{sec:homotopy_category}, not
   Concretizable \S\ref{sec:concrete_category})
 \item [Hotc] all CW Complexes and Homotopy Classes of Continuous Maps
-\item [Man] or $\cat{Diff}$ all Smooth Manifolds and Smooth Maps
+\item [Man] or $\cat{Diff}$ all Smooth Manifolds (\S\ref{sec:smooth_manifold})
+  and Smooth Maps; Differentiation (\S\ref{sec:derivative}) may be defined as an
+  Endofunctor $\mathrm{d} : \cat{Diff} \rightarrow \cat{Diff}$ sending Smooth
+  Manifolds $X$ to \emph{Tangent Bundles} (\S\ref{sec:tangent_bundle}) $T X$,
+  with Points of $T X$ being Ordered Pairs $(x, v)$ where $v$ is a \emph{Tangent
+    Vector} at $x$
 \item [Cob] all Closed Manifolds and Cobordisms
 \item [Euc] Euclidean Spaces $\reals^n$ and Smooth Maps
 \item [Vect$_K$] all Finite-dimensional Vector Spaces over Field $K$
@@ -1273,6 +1278,40 @@ precisely a Topos (\S\ref{sec:topos}).
 
 
 
+% --------------------------------------------------------------------
+\subsection{Infinitesimal Object}\label{sec:infinitesimal_object}
+% --------------------------------------------------------------------
+
+\fist Infinitesimal Number (\S\ref{sec:infinitesimal})
+
+\fist Nonstandard Analysis (\S\ref{sec:nonstandard_analysis}) -- Differentials
+(\S\ref{sec:differential}) as Infinitesimals in
+Hyperreal Number Systems (\S\ref{sec:hyperreal})
+
+(nlab):
+
+Formalization in Synthetic Differential Geometry
+(\S\ref{sec:synthetic_differential_geometry})
+
+
+
+\subsubsection{Infinitesimal Interval Object}
+\label{sec:infinitesimal_interval_object}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Differential Object}\label{sec:differential_object}
+% --------------------------------------------------------------------
+
+(nlab):
+
+\fist a \emph{Differential} (\S\ref{sec:differential}) is a Morphism of a
+Differential Object defining a Chain Complex (\S\ref{sec:chain_complex}) called
+the \emph{Boundary Operator} (\S\ref{sec:boundary_operator})
+
+
+
 % ====================================================================
 \section{Functor}\label{sec:functor}
 % ====================================================================
@@ -1884,9 +1923,27 @@ $\varepsilon$ satisfy the Triangle Identities
 \label{sec:product_preserving_functor}
 % --------------------------------------------------------------------
 
-\fist Differentiation (\S\ref{sec:differentiable_function}) is a
-Product-preserving Functor (FIXME: clarify)
+examples:
+\begin{itemize}
+\item Differentiation (\S\ref{sec:derivative}) is a Product-preserving Functor
+  -- in the ``Context'' $H$ (FIXME: clarify) of Synthetic Differential Geometry
+  (\S\ref{sec:synthetic_differential_geometry}), the Differentiation
+  (Endo-)functor $\mathrm{d} : \cat{Diff} \rightarrow \cat{Diff}$ on the
+  Category of Smooth Manifolds and Smooth Maps is the Internal Hom
+  (\S\ref{sec:internal_hom}) out of the Infinitesimal Interval
+  (\S\ref{sec:infinitesimal_interval}) $D$:
+  \[
+    \mathrm{d} = [D,-] : H \rightarrow H
+  \]
+  where $D \hookrightarrow \reals$ is the Smooth Locus
+  (\S\ref{sec:smooth_locus}) defined by $x^2 = 0$ (in Toposes that Model
+  Synthetic Differential Geometry this is regarded as an Infinitesimal
+  Neighborhood about a Point)
 
+  ``this description'' as an Internally Representable Functor (FIXME: clarify)
+  leads to the Theorem that \emph{Differentiation is a Product-preserving
+    Functor}. (\S\ref{sec:product_preserving_functor})
+\end{itemize}
 
 
 % --------------------------------------------------------------------
@@ -2733,6 +2790,23 @@ Functor (LaPlaza) %FIXME
 \[
   [-,-] : \cat{C}^{op} \times \cat{C} \rightarrow \cat{C}
 \]
+
+examples:
+\begin{itemize}
+  \item (nlab): in the ``Context'' $H$ (FIXME: clarify) of Synthetic
+    Differential Geometry (\S\ref{sec:synthetic_differential_geometry}), the
+    Differentiation (\S\ref{sec:derivative}) (Endo-)functor $\mathrm{d} :
+    \cat{Diff} \rightarrow \cat{Diff}$ on the Category of Smooth Manifolds and
+    Smooth Maps is the Internal Hom out of the Infinitesimal Interval
+    (\S\ref{sec:infinitesimal_interval}) $D$:
+    \[
+      \mathrm{d} = [D,-] : H \rightarrow H
+    \]
+    where $D \hookrightarrow \reals$ is the Smooth Locus (FIXME: xref) defined
+    by $x^2 = 0$ (in Toposes that Model Synthetic Differential Geometry this is
+    regarded as an Infinitesimal Neighborhood about a Point)
+  \item ... TODO: more
+\end{itemize}
 
 
 
@@ -7515,6 +7589,8 @@ Morphisms is Bilinear (\S\ref{sec:bilinear_map}).
 Preadditive Category admitting all Finitary Biproducts
 (\S\ref{sec:biproduct})
 
+\fist Homotopy Category of Chain Complexes (\S\ref{sec:chain_homotopy_category})
+
 
 
 \subsubsection{Semiadditive Category}\label{sec:semiadditive_category}
@@ -8053,6 +8129,24 @@ Stable Homotopy Theory (\S\ref{sec:stable_homotopy_theory})
 
 Topological Spectrum (\S\ref{sec:topological_spectrum}) -- generalized
 Cohomology Theory
+
+
+
+\subsubsection{Chain Homotopy Category}\label{sec:chain_homotopy_category}
+
+for Additive Category (\S\ref{sec:additive_category}) $\cat{A}$, the Homotopy
+Category of Chain Complexes $\cat{K}(\cat{A})$ has as Objects Chain Complexes as
+in $\cat{Kom}(\cat{A})$ (FIXME: clarify) and as Morphisms maps of Complexes
+modulo Homotopy
+
+
+
+\paragraph{Chain Homotopy}\label{sec:chain_homotopy}\hfill
+
+de Rham Complex (\S\ref{sec:derham_complex})
+
+Smooth Maps between Manifolds induce \emph{Chain Maps} (\S\ref{sec:chain_map})
+and Smooth Homotopies between Maps induce \emph{Chain Homotopies}
 
 
 

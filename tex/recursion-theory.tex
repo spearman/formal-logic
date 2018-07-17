@@ -439,6 +439,53 @@ Integration (\S\ref{sec:functional_integration})
 (\S\ref{sec:actor_model}) and Geometry of Interaction
 (\S\ref{sec:interaction_geometry})
 
+\fist Complexity Theory (\S\ref{sec:complexity_theory})
+
+Guy Blelloch OPLSS18 (lectures)
+--
+Abstract Machine Models, Language-based Models
+
+two parts to Computational Model:
+\begin{itemize}
+\item the Model itself -- ``simple'', well-defined Semantics close to
+  Programming Paradigm
+\end{itemize}
+and:
+\begin{itemize}
+  \item Simulation -- mapping of ``\emph{costs}'' (good bounds when simulated on
+    ``realistic'' machines); ``verification'' that it is a realistic Model,
+    usually by comparison with another Model, e.g. a Model based on physical
+    implementation considerations
+\end{itemize}
+
+as an example of an ``unrealistic model'':
+\begin{quote}
+if you have a RAM with unbounded word size [register length] and multiplication
+then you can prove that P=NP...you can simulate parallelism in a word ... and
+could do an exponential amount of work on every single step
+\end{quote}
+
+examples of (Abstract) Machine Models (vanLeeuwen94):
+\begin{itemize}
+  \item Turing Machines (\S\ref{sec:turing_machine}); \emph{not} inherently
+    Parallel
+  \item Random Access Machines (SRAM, RAM, MRAM, LRAM, RAM-L)
+  \item Pointer Machines (SMM, KUM, pure, impure)
+  \item Parallel Machine Models (Circuit Models, PSPACE, PRAM Turing Machine
+    with Alternation, Vector Models, SIMDAG, $k$-PRAM)
+\end{itemize}
+
+examples of Language-based Models:
+\begin{itemize}
+  \item $\lambda$-calculus -- inherently Parallel; extended with built-in
+    Constants for Integers
+  \item ... TODO
+\end{itemize}
+
+advantages of Language-based Models over Machine Models: naturally Parallel,
+Model closer to code and Algorithms, closer in terms of Simulation Costs to
+``practical'' Machine Models (e.g. RAM); can be Simulated on PRAM
+
 
 
 % --------------------------------------------------------------------
@@ -456,15 +503,11 @@ Integration (\S\ref{sec:functional_integration})
 
 
 % --------------------------------------------------------------------
-\subsection{Turing Machine}
+\subsection{Post-Turing Machine}\label{sec:post_turing}
 % --------------------------------------------------------------------
 
-See Part \ref{sec:automata_theory} Automata Theory
-\S\ref{sec:turing_machine} Turing Machines
-
-
-
-\subsubsection{Post-Turing Machine}\label{sec:post_turing}
+(wiki): ``program formulation'' of a simple type of Turing Machine
+(\S\ref{sec:turing_machine})
 
 
 
@@ -1596,10 +1639,83 @@ Prompt, Frame
 
 Implicit Complexity
 
+cf. Asymptotic Analysis (\S\ref{sec:asymptotic_analysis}) %FIXME: move here ?
+
 Light Affine Lambda Calculus corresponds to the Complexity Class PTIME
 %FIXME
 
 Natural Proofs %FIXME
+
+Guy Blelloch OPLSS18 --
+
+Jan van Leeuwen - 1994 - Handbook of Theoretical Computer Science
+
+Abstract Machine Models
+
+Language-based Cost Models
+
+Simulation -- mapping of ``\emph{costs}'' (good bounds when simulated on
+``realistic'' machines); ``verification'' that it is a realistic Model,
+usually by comparison with another Model, e.g. a Model based on physical
+implementation considerations
+
+as an example of an ``unrealistic model'':
+\begin{quote}
+if you have a RAM with unbounded word size [register length] and multiplication
+then you can prove that P=NP...you can simulate parallelism in a word ... and
+could do an exponential amount of work on every single step
+\end{quote}
+
+advantages of Language-based Models over Machine Models: naturally Parallel,
+Model closer to code and Algorithms, closer in terms of Simulation Costs to
+``practical'' Machine Models (e.g. RAM); can be Simulated on PRAM
+
+Language-based Models; ``Cost Model'' based on a ``Cost Semantics'' instead of a
+Machine; \emph{Costs}: number of \emph{Reduction Steps} does not capture Space,
+Parallelism
+
+$\lambda$-calculus -- inherently Parallel
+
+some existing Cost Models based on $\lambda$-calculus:
+\begin{itemize}
+  \item SECD machine (Landin64)
+  \item Call-by-need, Call-by-value for $\lambda$-calculus (Plotkin75)
+  \item Cost Semantics (Sands, Roe)
+  \item Call-by-Value $\lambda$-calculus (BG95, FPGA), CBV $\lambda$-calculus
+    with Arrays (BG96, ICFP)
+  \item Call-by-need with Speculation (Martini, Dal Lago, Accattoli, SGM)
+  \item Call-by-value Cache Model (Harper12, POPL)
+\end{itemize}
+
+\emph{Cost Model for Parallel CBV $\lambda$-calculus}
+
+\begin{itemize}
+  \item \emph{Work}: $w$ -- Sequential Work; the ``number of operations''
+  \item \emph{Span}: $d$ -- Parallel Depth; captures \emph{Dependence Depth};
+    cf. Depth of Circuit Models
+\end{itemize}
+
+$e \Downarrow v; w,d$
+
+Expression $e$ Evaluates to $v$ with Work $w$ and Span $d$
+
+Application Rule adds Work and Span adds Sequentially and Maximum in Parallel
+
+Simulation on RAM (Sequential) or PRAM (Parallel)
+
+Sequential Simulation -- CEK Machine (Control, Environment, Continuation): a
+State Transition System; note that \emph{Substitution} is useful for Semantics
+but not efficient for implementation, instead an \emph{Environment} is used
+which keeps a map from Variables to Values; the \emph{Control} is given by types
+of Expression (Application, Abstraction, Variable Insertion/Lookup),
+\emph{Continuation} gives the ``Stack''; Logarithmic in number
+of Variable Names
+
+Parallel Simulation -- P-CEK Machine; instead of a single CEK (Control State)
+triple, there is a \emph{Sequence} of CEK-triples which can be Evaluated
+\emph{in Parallel}; a \emph{Scheduler} decides order in which to Evaluate
+
+Simulation Bounds
 
 
 
@@ -1725,6 +1841,11 @@ BQP (Bounded-error Quantum Polynomial Time) -- Quantum analogue of
 BPP (Bounded-error Probabilistic Polynomial Time)
 
 EQP (or QP; Exact Quantum Polynomial Time) -- Quantum analogue of P
+
+Blelloch OPLSS18 - ``if you have a RAM with unbounded word size [register
+  length] and multiplication then you can prove that P=NP...you can simulate
+parallelism in a word ... and could do an exponential amount of work on every
+single step''
 
 
 

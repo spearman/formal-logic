@@ -73,8 +73,14 @@ the same as Right $R$-modules and simply called \emph{$R$-modules}.
 A Bimodule (\S\ref{sec:bimodule}) has Left and Right Scalar Operations that are
 ``compatible'', but not necessarily identical.
 
-A Module Homomorphism is called a \emph{Linear Map}
-(or \emph{Linear Transformation} \S\ref{sec:linear_transformation}).
+A Module Homomorphism is called a \emph{Linear Map} (or \emph{Linear
+  Transformation} \S\ref{sec:linear_transformation})
+
+(wiki): related to Matrices by a Canonical Isomorphism of Abelian Groups (TODO)
+and viewing $R$ as a Right $R$-module, a Ring Isomorphism:
+\[
+  End_R(R^n) \simeq M_n(R)
+\]
 
 cf. Differential Graded Module (Homological Algebra
 \S\ref{sec:differential_graded_module}), Module Spectrum (Homotopical Algebra
@@ -142,6 +148,12 @@ Function of Degree Zero or One
 
 \fist cf. Locally Linear Transformations (\S\ref{sec:locally_linear})
 
+(wiki): related to Matrices by a Canonical Isomorphism of Abelian Groups (TODO)
+and viewing $R$ as a Right $R$-module, a Ring Isomorphism:
+\[
+  End_R(R^n) \simeq M_n(R)
+\]
+
 Any Linear Map $A : V \rightarrow W$ from an $n$-dimensional Vector Space $V$
 to an $m$-dimensional Vector Space $W$ can be represented by an $m \times n$
 Matrix of Rank $r$ sending Column Vector $\vec{v} \in V$ to the Column Vector
@@ -190,14 +202,14 @@ Map (i.e. the Domain and Codomain are the same Module).
 
 \fist Linear Differential Operators (\S\ref{sec:linear_differential_operator})
 
+A \emph{Linear Functional} (or \emph{Linear Form} \S\ref{sec:linear_form}) is a
+Linear Map from a Vector Space $V$ to its Field of Scalars $K$ (viewed as a
+Vector Space over itself).
+
 A Linear Map between Topological Vector Spaces
 (\S\ref{sec:topological_vectorspace}) can be Continuous
 (\S\ref{sec:continuous_map}) and if the Domain and Codomain are the same it is a
 \emph{Continuous Linear Operator} (\S\ref{sec:continuous_linear}).
-
-A \emph{Linear Functional} (or \emph{Linear Form} \S\ref{sec:linear_form}) is a
-Linear Map from a Vector Space $V$ to its Field of Scalars $K$ (viewed as a
-Vector Space over itself).
 
 Positive Definite Matrices (\S\ref{sec:positive_definite}) are Symmetric
 Matrices $M$ such that $\vec{x}^T M \vec{x} > 0$; this is a kind of analogue to
@@ -1507,6 +1519,17 @@ $\reals^n$ -- prototypical Real Vector Space; Models Euclidean Space
 (\S\ref{sec:euclidean_space}) with Cartesian Coordinates
 (\S\ref{sec:cartesian_coordinates})
 
+\begin{itemize}
+  \item for any Manifold $M$ with $n$ Connected Components (Maximal Connected
+    Subset Ordered by Inclusion \S\ref{sec:connected_space}), the $0$-th de Rham
+    Cohomology Group (\S\ref{sec:derham_complex}) $H_{\mathrm{dR}}^0(M)$ is
+    Isomorphic to $\reals^n$:
+    \[
+      H_{\mathrm{dR}}^0(M) \cong \reals^n
+    \]
+    following from the fact that any Smooth Function on $M$ with Zero Derivative
+    (Locally Constant) is Constant on each of the Connected Components of $M$
+\end{itemize}
 
 
 % --------------------------------------------------------------------
@@ -3829,6 +3852,27 @@ of a Differential Algebra (\S\ref{sec:differential_algebra})
 
 ``Oriented Density'' %FIXME
 
+\asterism
+
+The \emph{de Rham Complex} (\S\ref{sec:derham_complex}) is the Cochain Complex
+of Differential Forms on some Smooth Manifold (\S\ref{sec:smooth_manifold}) $M$
+with the Exterior Derivative as the Differential (\S\ref{sec:differential}):
+\[
+  0 \rightarrow \Omega^0(M) \xrightarrow{d} \Omega^1(M) \xrightarrow{d}
+  \Omega^2(M) \xrightarrow{d} \Omega^3(M) \rightarrow \cdots
+\]
+where $\Omega^0(M)$ is the Space of Smooth Functions on $M$, $\Omega^1(M)$ is
+the Space of $1$-forms, etc.; Differential Forms which are the Image of other
+Forms under the Exterior Derivative plus the Constant $0$ Function in
+$\Omega^0(M)$ are called \emph{Exact} (\S\ref{sec:exact_differential_form}) and
+Differential Forms whose Exterior Derivative is $0$ are called \emph{Closed}
+(\S\ref{sec:closed_differential_form}); the relationship $d^2 = 0$ says that
+Exact Forms are Closed (FIXME: clarify), but the converse is not generally true
+(Closed Differential Forms need not be Exact, e.g. for the $1$-form of Angle
+Measurement on the Unit Circle $\diffy{\theta}$ there is no actual Function
+$\theta$ defined on the whole Circle of which $\diffy{\theta}$ is the
+Derivative)
+
 
 
 % --------------------------------------------------------------------
@@ -3860,6 +3904,13 @@ $A$ is an $R$-module Module (\S\ref{sec:module}) with a \emph{Bilinear Product}
 % --------------------------------------------------------------------
 \subsection{Algebra Homomorphism}\label{sec:algebra_homomorphism}
 % --------------------------------------------------------------------
+
+$F : A \rightarrow B$ such that:
+\begin{enumerate}
+  \item $F(k\vec{x}) \rightarrow kF(\vec{x})$
+  \item $F(\vec{x} + \vec{y}) = F(\vec{x}) + F(\vec{y})$
+  \item $F(\vec{x} \times \vec{y}) = F(\vec{x}) \times F(\vec{y})$
+\end{enumerate}
 
 Generalized by Bimodules (\S\ref{sec:bimodule})
 
