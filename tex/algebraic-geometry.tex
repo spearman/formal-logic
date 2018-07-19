@@ -29,6 +29,8 @@ Study of \emph{Geometry} using Commutative Rings (\S\ref{sec:commutative_ring})
 
 cf. Geometric Algebra (Algebra over a Field \S\ref{sec:geometric_algebra})
 
+2012 - Dolgachev - \emph{Classical Algebraic Geometry: a modern view}
+
 \emph{Valuation}
 
 \emph{Hilbert's Nullstellensatz}: fundamental correspondence between Ideals
@@ -134,8 +136,10 @@ testing Polynomial Equality:
 
 \fist Polynomial Sequences (Combinatorics \S\ref{sec:polynomial_sequence})
 
-$R[x]$ -- Ring of Polynomials (\S\ref{sec:polynomial_ring}) in the
-Indeterminate $x$ over the Ring $R$
+\fist Rank Polynomial (Graph Theory \S\ref{sec:rank_polynomial})
+
+$R[x]$ -- Ring of Polynomials (Free Commutative Algebra
+\S\ref{sec:polynomial_ring}) in the Indeterminate $x$ over the Ring $R$
 
 a Linear Differential Equation (\S\ref{sec:linear_differential_equation}) is an
 Ordinary Differential Equation that is defined by a Linear (i.e. Degree $1$)
@@ -148,14 +152,20 @@ Polynomial of the Unknown Function and its Derivatives
 % --------------------------------------------------------------------
 
 \begin{itemize}
-  \item number of Terms -- Monomial (\S\ref{sec:monomial}), Binomial
-    (\S\ref{sec:binomial}), etc.
-  \item Degree (\S\ref{sec:degree}) -- highest Degree of its individual Terms
-    (Monomials)
-  \item number of Indeterminates (\S\ref{sec:indeterminate}) -- Univariate
-    (\S\ref{sec:univariate_polynomial}), Multivariate
+  \item number of \emph{Terms} (with non-zero Coefficients) -- Monomial
+    (\S\ref{sec:monomial}), Binomial (\S\ref{sec:binomial}), etc.
+  \item \emph{Degree} (\S\ref{sec:degree}) -- highest Degree of its individual
+    Terms (Monomials)
+  \item number of \emph{Indeterminates} (\S\ref{sec:indeterminate}) --
+    Univariate (\S\ref{sec:univariate_polynomial}), Multivariate
     (\S\ref{sec:multivariate_polynomial})
 \end{itemize}
+
+
+
+\subsubsection{Coefficient}\label{sec:coefficient}
+
+\emph{Leading Coefficient}
 
 
 
@@ -168,6 +178,9 @@ when a Polynomial Expression is considered as a Polynomial Function
 
 \subsubsection{Degree}\label{sec:degree}
 
+note sometimes the term ``Order'' is used to refer to the Degree of a
+Polynomial
+
 highest Degree of its Monomials
 
 \begin{itemize}
@@ -178,7 +191,22 @@ highest Degree of its Monomials
 
 
 
+\subsubsection{Resultant}\label{sec:resultant}
+
+$\mathrm{Res}$
+
+
+
 \subsubsection{Discriminant}\label{sec:discriminant}
+
+The \emph{Discriminant} of a Polynomial $A(x)$ and is defined as a Quotient of
+the Resultant of $A$ and its $A$'s Derivative $A'$ by the Leading Coefficient
+$a_n$:
+\[
+  \mathrm{Disc}_x(A) = \frac{-\frac{n(n-1)}{2}}{a_n} \mathrm{Res}_x(A, A')
+\]
+
+
 
 \subsubsection{Monomial}\label{sec:monomial}
 
@@ -264,6 +292,15 @@ Antiderivative
 Euclidean Division
 
 Polynomial Long Division
+
+
+
+% --------------------------------------------------------------------
+\subsection{Zero Polynomial}\label{sec:zero_polynomial}
+% --------------------------------------------------------------------
+
+$0$ (no Terms), Degree is either undefined or defined as \emph{Negative}: $-1$
+or $-\infty$
 
 
 
@@ -1179,7 +1216,7 @@ a number of ``coupled'' Differential Equations (\S\ref{sec:ode})
 
 \fist Dynamical Systems (\S\ref{sec:dynamical_system})
 
-\fist the Jacobian Matrix (\S\ref{sec:jacobian_matrix}) for a System of DAEs
+\fist the Jacobian Matrix (\S\ref{sec:jacobian}) for a System of DAEs
 (\S\ref{sec:dae_system}) is a Singular (Non-invertible) Matrix
 (\S\ref{sec:singular_matrix})
 
@@ -1242,7 +1279,7 @@ of the Function $\vec{x}$ because they may not \emph{appear}, i.e. \emph{some}
 Equations are \emph{Algebraic} (Polynomial)
 
 compared to general Systems of ODEs (\S\ref{sec:ode_system}), the Jacobian
-Matrix (\S\ref{sec:jacobian_matrix}) for a System of DAEs is a Singular
+Matrix (\S\ref{sec:jacobian}) for a System of DAEs is a Singular
 (Non-invertible) Matrix (\S\ref{sec:singular_matrix})
 
 in practical terms, the Solution to a DAE System depends on the Derivatives of
@@ -1563,7 +1600,7 @@ given by Regular Maps (\S\ref{sec:regular_map}) on the Variety.
 In Category Theoretic terms, an Algebraic Group is a Group Object
 (\S\ref{sec:group_object}) in the Category of Algebraic Varieties.
 
-an Abelian Variety (\S\ref{sec:abelian_variety}) is a Projective Algebraic
+\fist an Abelian Variety (\S\ref{sec:abelian_variety}) is a Projective Algebraic
 Variety that is also an Algebraic Group
 
 \begin{itemize}
@@ -1572,6 +1609,15 @@ Variety that is also an Algebraic Group
   \item Jet Groups (\S\ref{sec:jet_group})
   \item Elliptic Curves (\S\ref{sec:elliptic_curve})
 \end{itemize}
+
+
+
+\subsubsection{Isogeny}\label{sec:isogeny}
+
+Morphism of Algebraic Groups that is Surjective and has a Finite Kernel
+
+Post-quantum Cryptography: Supersingular Isogeny Diffie-Hellman (SIDH) key
+exchange
 
 
 
@@ -1608,7 +1654,7 @@ an Algebraic Torus as a Dense Subset
 \subsubsection{Abelian Variety}\label{sec:abelian_variety}
 
 Projective Algebraic Variety that is also an Algebraic Group (Group Variety
-\S\ref{sec:algebraic_group}), i.e. as a Group that is an Algebraic Variety
+\S\ref{sec:algebraic_group}), i.e. as a Group it is an Algebraic Variety
 (\S\ref{sec:algebraic_variety})
 
 as a Topological Group (\S\ref{sec:topological_group}), an Abelian Variety is a
@@ -1838,6 +1884,13 @@ Topological Space (\S\ref{sec:topological_space})
 % --------------------------------------------------------------------
 \subsection{Moduli Space}\label{sec:moduli_space}
 % --------------------------------------------------------------------
+
+a kind of Space with Points representing Geometric Objects
+(\S\ref{sec:geometric_object}) of some kind
+
+Spaces of \emph{Parameters} rather than Spaces of \emph{Objects}
+
+cf. Phase Space (\S\ref{sec:phase_space})
 
 Fine Moduli Space
 
