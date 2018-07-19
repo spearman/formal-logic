@@ -5037,11 +5037,16 @@ Intersection of the Zero Sets of a number of Polynomials in a Polynomial Ring
 
 \paragraph{Vector Derivative}\label{sec:vector_derivative}\hfill
 
-Derivative (\S\ref{sec:derivative})
+Derivative (\S\ref{sec:derivative}) of a Vector-valued Function of a single Real
+Variable
 
 $r : \reals \rightarrow \reals^n$
 
 $\deriv{\vec{r}(t)}{t}$
+
+when the parameter is interpreted as Time, then the First Vector Derivative
+represents the \emph{Velocity} and the Second Vector Derivative represents the
+\emph{Acceleration}
 
 the Vector Derivative represents a change of \emph{Length} (cf. Norm
 \S\ref{sec:norm}) of the Vector
@@ -5613,755 +5618,6 @@ of a Vector Space
 
 
 % ====================================================================
-\section{Differential Equation}\label{sec:differential_equation}
-% ====================================================================
-
-(wiki):
-
-A \emph{Differential Equation} is an Equation relating the Values of an \emph{Unknown
-  Function} (\S\ref{sec:unknown_function}) of one or more Variables to its
-\emph{Derivatives} (\S\ref{sec:derivative}) of various Orders.
-
-types of Differential Equations:
-\begin{itemize}
-  \item Ordinary (\S\ref{sec:ode}) / Partial (\S\ref{sec:partial})
-  \item Linear (\S\ref{sec:linear_differential_equation}) /
-    Non-linear (\S\ref{sec:nonlinear_differential_Equation})
-  \item Homogeneous (\S\ref{sec:homogeneous_differential_equation}) /
-    Inhomogeneous (\S\ref{sec:inhomogeneous_differential_equation})
-  \item ... MORE
-\end{itemize}
-
-Witkin, Baraff - Siggraph '97 Course:
-
-Differential Equations describe the Relation between an \emph{Unknown Function}
-and its \emph{Derivatives} (\S\ref{sec:derivative}) and \emph{Solving} a
-Differential Equation is to find a Function that Satisfies the Relation, and
-``some additional conditions as well''. (FIXME: clarify)
-
-\fist Time-scale Calculus (\S\ref{sec:timescale_calculus}): unification of
-Theory of Difference Equations (\S\ref{sec:difference_equation}) with that of
-Differential Equations
-
-\asterism
-
-The \emph{Solution} to a Differential Equation $F(x,y,y',\ldots,y^{(n)}) = 0$
-of Order $n$ is a \emph{Function} or \emph{Class of Functions} of the form $u :
-I \subset \reals \rightarrow \reals$ where $u$ is an $n$-times Differentiable
-Function (\S\ref{sec:differentiable_function}) on $I$ and $\forall x \in I$:
-\[
-  F(x,u,u',\ldots,u^{(n)}) = 0
-\]
-Such a $u$ defines an \emph{Integral Curve} (\S\ref{sec:integral_curve}) for
-$F$.
-
-\fist Family of Curves (\S\ref{sec:curve_family})
-
-\fist cf. the Solution of a Polynomial Equation
-(\S\ref{sec:polynomial_equation}) is a Value or Set of Values
-
-\fist Algebraic $D$-modules (\S\ref{sec:algebraic_d_module}): Modules over the
-Weyl Algebra (\S\ref{sec:weyl_algebra}) $A_n(K)$ over a Field $K$ of
-Characteristic Zero; relates Weyl Algebra to Differential Equations
-
-In a Dynamical System (\S\ref{sec:dynamical_system}), the \emph{Evolution
-  Function} $\Phi^t$ is often the Solution of a Differential Equation of Motion
-$\dot{x} = v(x)$ giving the Time Derivative of a Trajectory (Integral Curve)
-$x(t)$ on the Phase Space starting at some Point $x_0$.
-
-Extension, Maximal Solution, Global Solution, General Solution
-
-\fist Numerical Integration (\S\ref{sec:numerical_integration})
-
-\fist Difference Equation (\S\ref{sec:difference_equation})
-
-\fist Differential System (\S\ref{sec:differential_system})
-
-\fist Integral Equations (\S\ref{sec:integral_equation}), Integro-differential
-Equations (\S\ref{sec:integro_differential})
-
-Exponential Models $y = Ce^{-kt}$, $y' = ky$
-
-Logistic Models $y = \frac{y_0 k}{n_0 + (k-n_0)e^{-rt}}$,
-  $y' = ky (1 - \frac{y}{k})$
-
-\fist Stochastic Differential Equation (SDE \S\ref{sec:sde})
-
-\fist Numerical Analysis (\S\ref{sec:numerical_analysis}) applied to Solving
-Differential Equations: Finite Element Method
-(\S\ref{sec:finite_element_method}), Finite Volume Method
-(\S\ref{sec:finite_volume_method})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Unknown Function}\label{sec:unknown_function}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Ordinary Differential Equation}\label{sec:ode}
-% --------------------------------------------------------------------
-
-An \emph{Ordinary Differential Equation (ODE)} is a Differential Equation an
-Unknown Function ($y$) of one Independent Real or Complex Variable ($x$) and its
-Derivatives. An equation of the form:
-\[
-  F\Big(x,y,y',\ldots,y^{(n-1)}\Big) = y^{(n)}
-\]
-is an \emph{Order-$n$ Explicit Ordinary Differential Equation}, and:
-\[
-  F\Big(x,y,y',\ldots,y^{(n)}\Big) = 0
-\]
-is an \emph{Order-$n$ Implicit Ordinary Differential Equation}.
-
-\fist a \emph{Linear Differential Equation}
-(\S\ref{sec:linear_differential_equation}) is a Differential Equation defined
-by a Linear Polynomial (a Polynomial of Degree $1$) in the Unknown Function and
-its Derivatives:
-\[
-  y^{(n)} = \sum_{i=0}^{n-1} a_i (x) y^{(i)} + r(x)
-\]
-where $a_i(x)$ and $r(x)$ are Continuous Functions in $x$
-
-\fist A \emph{Partial} Differential Equation (PDE
-\S\ref{sec:pde}) is a Differential Equation
-containing Unknown Multivariable Functions and their Partial Derivatives.
-
-\fist System of ODEs (\S\ref{sec:ode_system})
-
-\fist System of DAEs (\S\ref{sec:dae_system}): a System of Equations that
-either contains Differential Equations and Algebraic (Polynomial) Equations
-(\S\ref{sec:polynomial_equation}), or is equivalent to one; arises in
-Constraints of Multibody Systems (\S\ref{sec:multibody_system}); differs from
-ODE Systems in that the Jacobian Matrix (\S\ref{sec:jacobian}) of a DAE
-is Singular (Non-invertible \S\ref{sec:singular_matrix})
-
-\fist Flow (\S\ref{sec:flow})
-
-A \emph{Solution} of an ODE $F$ is a Function $u : I \subset \reals \rightarrow
-\reals$ called an \emph{Integral Curve} (\S\ref{sec:integral_curve}) for $F$
-which is Tangent to the Slope Field defined by the ODE at every Point.
-
-For $F$ a Function of $t$, $y$, and Derivatives (\S\ref{sec:derivative}) of
-$y$, an Equation of the form:
-\[
-  F(t,y,y',\ldots,y^{(n-1)}) = y^{(n)}
-\]
-is a \emph{Explicit Ordinary Differential Equation} of \emph{Order $n$}, and an
-\emph{Implicit Ordinary Differential Equation} (or \emph{Homogeneous Ordinary
-  Differential Equation}) of Order $n$ has the form:
-\[
-  F(t,y,y',\ldots,y^{(n)}) = 0
-\]
-if $f(t)$ is a Solution to a Homogeneous ODE $F$ then $c\cdot{f(t)}$ is a
-Solution to $F$ for any Constant $c$, and if $g(t)$ is also a Solution then
-$f(t) + g(t)$ is a Solution
-
-
-Domain of Solutions: there is no way in general to know what the Domain of the
-Solution will be (MIT 18.03 2006 Lec. 1)
-
-example:
-
-for the Differential Equation $y' = \frac{-x}{y}$, setting $\frac{-x}{y}$ equal
-to a Constant, $\frac{-x}{y} = C$, gives the \emph{Isoclines}
-(\S\ref{sec:isocline}) of the Slope Field defined by the Differential Equation,
-i.e. they are curves where the Family of Solutions are intersect the
-curve with the indicated slope $C$ along its length
-
-Standard First-order Form:
-\[
-  y' = p(x) y + q(x)
-\]
-cf. Standard Linear Form (\S\ref{sec:linear_differential_equation}):
-\[
-  y' + p(x) y = q(x)
-\]
-
-\emph{Local Existence and Uniqueness Theorem}: for a Differential Equation
-\emph{in Standard Form}, when $f$ and $f_y$ are Continuous near $x_0$ and
-$y_0$, there is one and only one Solution through a Point $(x_0, y_0)$
-
-\emph{Global Existence and Uniqueness Theorem} (TODO)
-
-
-\emph{Characteristic Equation}
-
-an example of a System modelled by a First-order Ordinary Differential Equation
-is an RC Circuit
-
-an example of a System modelled by a Second-order Ordinary Differential
-Equation is a Simple Harmonic Oscillator: the Phase Space consists of a
-Velocity Dimension and a Position Dimension and the Orbit is Periodic
-
-\asterism
-
-\begin{itemize}
-  \item \emph{Logistic Differential Equation} -- the Logistic Function
-    (\S\ref{sec:logistic_function}) $f(x) = \frac{L}{1 + e^{-k(x-x_0)}}$ is the
-    Solution to the First-order Non-linear Ordinary Differential Equation:
-  \[
-    \frac{d}{dx}f(x) = f(x)(1 - f(x))
-  \]
-  with Boundary Condition (\S\ref{sec:boundary_value_problem}) $f(0) =
-  \frac{1}{2}$
-\end{itemize}
-
-
-\subsubsection{Slope Field}\label{sec:slope_field}\hfill
-
-When the Differential Equation is represented as a Vector Field or Slope Field
-(\S\ref{sec:slope_field}), the corresponding Integral Curves
-(\S\ref{sec:integral_curve}) are Tangent to the Field at each point.
-
-
-
-\paragraph{Integral Curve}\label{sec:integral_curve}\hfill
-
-An \emph{Integral Curve} is a Parametric Curve that represents a
-\emph{specific} Solution of an Ordinary Differential Equation
-(\S\ref{sec:ode}), or System of ODEs (\S\ref{sec:ode_system}).
-
-When the Differential Equation is represented as a Vector Field or Slope Field
-(\S\ref{sec:slope_field}), the corresponding Integral Curves are Tangent to the
-Field at each point.
-
-Integral Curves intersect Isoclines (\S\ref{sec:isocline}) with the slope
-indicated by the Isocline
-
-(\emph{Existence and Uniqueness Theorem}) two Integral Curves cannot cross (at
-an Angle) or touch (be Tangent)
-
-In a Dynamical System (\S\ref{sec:dynamical_system}), the Integral Curves for
-the Differential Equation governing the System are referred to as
-\emph{Trajectories} (\S\ref{sec:trajectory}).
-
-e.g. Electric Field or Magnetic Field Lines, Streamlines (Velocity Field of a
-Fluid)
-
-\emph{Flow}
-
-
-
-\paragraph{Isocline}\label{sec:isocline}\hfill
-
-Isoclines are intersected by Integral Curves (\S\ref{sec:integral_curve}) at
-the slope indicated by the Isocline
-
-example:
-
-for the Differential Equation (\S\ref{sec:differential_equation}) $y' =
-\frac{-x}{y}$, setting $\frac{-x}{y}$ equal to a Constant, $\frac{-x}{y} = C$
-gives a Family of \emph{Isoclines} of the Slope Field defined by the
-Differential Equation, i.e. they are curves where the Family of Solutions
-intersect the curve with the indicated slope $C$ along its length
-
-
-
-\subsubsection{Initial Value Problem (IVP)}\label{sec:ivp}\hfill
-
-\fist cf. Boundary Value Problem (\S\ref{sec:boundary_value_problem}) defines
-Values of the Solution at more than one Point
-
-(wiki):
-
-an ODE together with a Value of the Unknown Function called the \emph{Initial
-  Condition} at a given Point in the Domain of the Solution
-
-Differential Equation:
-\[
-  y'(t) = f(t, y(t))
-\]
-with $f : \Omega \subset \reals \times \reals^n \rightarrow \reals^n$ where
-$\Omega$ is an Open Set of $\reals \times \reals^n$ and Initial Condition
-\[
-  (t_0, y_0) \in \Omega
-\]
-in the Domain of $f$
-
-a \emph{Solution} to an Initial Value Problem is a Function $y : \reals
-\rightarrow \reals^n$ that is a Solution to the Differential Equation and
-satisfies $y(t_0) = y_0$
-
-\fist Time Evolution (\S\ref{sec:time_evolution})
-
-\fist Dynamical Systems (\S\ref{sec:dynamical_system})
-
-\begin{itemize}
-  \item the Trajectory $\vec{s}(t)$ of a Hamiltonian System is a Solution to
-    the IVP defined by Hamilton's Equations and the Initial Condition
-    $\vec{s}(0) = \vec{s}_0 \in \reals^{2N}$
-\end{itemize}
-
-First-order Initial Value Problems: \emph{Peano Existence Theorem} gives a set
-of circumstances in which a solution exists
-
-\emph{Picard-Lindel\"of Theorem}
-
-Higher Dimensions (TODO)
-
-for an $n$-th Order Linear Initial Value Problem:
-\[
-  f_n(x)\frac{d^ny}{dx^n} + \cdots + f_1(x)\frac{dy}{dx} + f_0(x)y = g(x)
-\]
-such that:
-\begin{align*}
-  y(x_0)   & = y_0   \\
-  y'(x_0)  & = y_0'  \\
-  y''(x_0) & = y_0''
-\end{align*}
-then for any Non-zero $f_n(x)$ and $\{f_0,f_1,\ldots\}$ and $g$ are Continuous
-on some Interval containing $x_0$, $y$ is unique and exists
-
-
-
-% --------------------------------------------------------------------
-\subsection{Separable Differential Equation}\label{sec:separable}
-% --------------------------------------------------------------------
-
-a Differential Equation is \emph{Separable} if the Derivative $\frac{dy}{dx}$
-can be written in terms of the product of separate functions of $x$ and $y$ as:
-\[
-  \frac{dy}{dx} = g(x)h(y)
-\]
-or equivalently, as long as $h(y) \neq 0$:
-\[
-  \frac{1}{h(y)} dy = g(x) dx
-\]
-
-
-
-\subsubsection{Separation of Variables}\label{sec:separation_of_variables}\hfill
-
-\subsubsection{Homogeneous Differential Equation}
-\label{sec:homogeneous_differential_equation}
-
-If the Differential Equation:
-\[
-  \frac{dy}{dx} = f(x,y)
-\]
-can be rewritten as:
-\[
-  \frac{dy}{dx} = F\Big(\frac{y}{x}\Big)
-\]
-then it is \emph{Homogeneous} and a Variable Substitution allows the Equation to
-be made \emph{Separable}.
-
-cf. Homogeneous Difference Equation
-(\S\ref{sec:homogeneous_difference_equation}), Homogeneous Polynomial
-(\S\ref{sec:homogeneous_polynomial}), Homogeneous System of Linear Equations
-(\S\ref{sec:homogeneous_linear_equation_system})
-
-\emph{not} ``Homogeneous Linear Differential Equation''
-(\S\ref{sec:homogeneous_linear_differential})
-
-
-
-\subsubsection{Inhomogeneous Differential Equation}
-\label{sec:inhomogeneous_differential_equation}
-
-
-
-% --------------------------------------------------------------------
-\subsection{Exact Differential Equation}\label{sec:exact_equation}
-% --------------------------------------------------------------------
-
-$\frac{d}{dx}\Psi(x,y) = \frac{\partial{\Psi}}{\partial{x}}
-  + \frac{\partial{\Psi}}{\partial{x}}\frac{dy}{dx}$
-
-$\Psi_{xy} = \Psi_{yx}$ -- if $\Psi$ and its Derivatives are Continuous over
-some Domain
-
-$\Psi_x + \Psi_y \frac{dy}{dx} = 0$
-
-$\frac{d}{dx}\Psi(x,y) = 0$
-
-$\Psi(x,y) = c$
-
-$M(x,y) + N(x,y)\frac{dy}{dx} = 0$
-
-$M_y = N_x$ if and only if $M(x,y) + N(x,y)\frac{dy}{dx} = 0$ is an Exact
-Equation, implies: $\Psi_{xy} = M_y$, $\Psi_{yx} = N_x$
-
-\emph{Potential Function}
-
-
-
-\subsubsection{Integrating Factor}\label{sec:integrating_factor}\hfill
-
-$u(x)$
-
-
-
-% --------------------------------------------------------------------
-\subsection{Linear Differential Equation}
-\label{sec:linear_differential_equation}
-% --------------------------------------------------------------------
-
-An Ordinary Differential Equation is \emph{Linear} if $F$ can be written as a
-Linear Polynomial (a Polynomial of Degree $1$) of the \emph{Unknown Function}
-($y$ below) and its Derivatives:
-\[
-  a_0(x)y + a_1(x)y' + a_2(x)y'' + \cdots + a_n(x)y^{(n)} + r(x) = 0
-\]
-or:
-\[
-  y^{(n)} = \sum_{i=0}^{n-1} a_i(x) y^{(i)} + r(x)
-\]
-where $a_i(x)$ and $r(x)$ are Differentiable Functions in $x$ (not necessarily
-Linear) and $r(x)$ is called the \emph{Source Term} (or sometimes
-\emph{Constant Term}, even though it can be a non-constant Function).
-
-First-order Linear Differential Equations (with non-constant coefficients) and
-Homogeneous Linear Differential Equations
-(\S\ref{sec:homogeneous_linear_differential}) have solutions that may
-be expressed in terms of Integrals (\S\ref{sec:antiderivative})
-
-Second-order and higher Linear Differential Equations with non-constant
-coefficients cannot in general be solved by Quadratures (i.e. Integrals --
-Kovacic Algorithm for determining if this is possible)
-
-Hypergeometric Functions (\S\ref{sec:hypergeometric_function}) are solutions of
-Second-order Linear Differential Equations
-
-Solutions of a Homogeneous Linear Differential Equation form a Vector Space,
-ordinarily of Dimension equal to that of Order of the Equation; all Solutions
-of a Linear Differential Equation are found by adding to a particular Solution
-any Solution of the Associated Homgeneous Equation (FIXME: clarify)
-
-cf. Linear Difference Equation (\S\ref{sec:linear_difference_equation})
-
-\emph{First-order Linear Differential Equations}:
-\[
-  a(x) y' + b(x) y = c(x)
-\]
-Homogeneous:
-\[
-  a(x) y' + b(x) y = 0
-\]
-Standard Linear Form:
-\[
-  y' + p(x) y = q(x)
-\]
-cf. Standard First-order Form (\S\ref{sec:ode}):
-\[
-  y' = p(x) y + q(x)
-\]
-
-\emph{Second-order Linear Differential Equations}:
-\[
-  a(x) y'' + b(x) y' + c(x) y = d(x)
-\]
-
-
-
-\subsubsection{Homogeneous Linear Differential Equation}
-\label{sec:homogeneous_linear_differential}\hfill
-
-\emph{not} the same concept as general ``Homogeneous Differential Equations''
-(\S\ref{sec:homogeneous_differential_equation})
-
-Homogeneous Linear Differential Equations have the Constant Term $0$, i.e. it
-is a Homogeneous Polynomial (\S\ref{sec:homogeneous_polynomial}) in the Unknown
-Function and its Derivatives
-
-Solutions of a Homogeneous Linear Differential Equation form a Vector Space,
-ordinarily of Dimension equal to that of Order of the Equation; all Solutions
-of a Linear Differential Equation are found by adding to a particular Solution
-any Solution of the Associated Homgeneous Equation (FIXME: clarify)
-
-an $n$-th Order Homogeneous Linear Differential Equation has Constant
-Coefficients if it has the form:
-\[
-  a_0y + a_1y' + a_2y'' + \cdots + a_ny^{(n)} = 0
-\]
-(FIXME: otherwise it has polynomial coefficients ???)
-
-e.g. $e^x$ is the unique solution to the Equation $f' = f$ such that $e^0 = 1$,
-and it follows that the $n$th Derivative of $e^{cx}$ is $c^n e^{cx}$
-
-Homogeneous Linear Differential Equations have solutions that may be expressed
-in terms of Integrals (\S\ref{sec:antiderivative})
-
-Solutions to (Systems of) Homogeneous Linear Differential Equations with
-Polynomial Coefficients (FIXME: i.e. non-constant ???) are called
-\emph{Holonomic Functions} (\S\ref{sec:holonomic_function}).
-
-\emph{Second-order Homogeneous Linear Differential Equation}:
-
-\[
-  A y'' + B y' + C y = 0
-\]
-
-if $g(x)$ is a Solution, then $c\cdot{g(x)}$ is also a Solution
-
-if $h(x)$ is also a Solution, then $g(x) + h(x)$ is also a Solution
-
-
-
-\paragraph{Characteristic Equation}\label{sec:characteristic_equation}\hfill
-
-cf. Characteristic Equation of a Homogeneous Difference Equation
-(\S\ref{sec:characteristic_difference_equation})
-
-$A y'' + B y' + C y = 0$
-
-$y = e^{rx}$
-
-Characteristic Equation: $Ar^2 + Br + C = 0$
-
-$r = \frac{-B \pm \sqrt{B^2 - 4AC}}{2A}$
-
-Real Roots: $r_1, r_2$
-
-General Solution: $y = c_1e^{r_1x} + c_2e^{r_2x}$
-
-Complex Roots: $\lambda \pm \mu i$
-
-General Solution: $y = e^{\lambda x}(c_1 \cos\mu{x} + c_2 \sin\mu{x})$
-
-Repeated Roots: $r$
-
-\emph{Reduction of Order}: $y = c_1 x e^{rx} + c_2 e^{rx}$
-
-
-
-\paragraph{Holonomic Function}\label{sec:holonomic_function}\hfill
-
-a \emph{Holonomic Function} is an Element of a Holonomic Module
-(\S\ref{sec:holonomic_module}) of Smooth Functions
-
-\fist cf. Holonomy (\S\ref{sec:holonomy}), Holonomic Constraints
-(\S\ref{sec:holonomic_constraint})
-
-a Multivariable Smooth Function that is a solution to a (System of) Homogeneous
-Linear Differential Equation(s) with Polynomial Coefficients
-
-the Class of Holonomic Functions is ``stable'' (FIXME: closed ???) under Sums,
-Products, Derivation, and Integration
-
-Strict Superset of the Hypergeometric Functions
-(\S\ref{sec:hypergeometric_function})
-
-Holonomic Functions include all Algebraic Functions
-(\S\ref{sec:algebraic_function}), some Transcendental Functions ($\sin x$,
-$\cos x$, $e^x$, $\log x$), the Generalized Hypergeometric Function
-(\S\ref{sec:generalized_hypergeometric_function}), Bessel Functions
-(\S\ref{sec:bessel_function}), Airy Functions (TODO: xref), ``classical''
-Orthogonal Polynomials (\S\ref{sec:orthogonal_polynomial_sequence})
-
-Holonomic Functions form a Ring (\S\ref{sec:ring}), but are not closed under
-Division (so they do not form a Field)
-
-
-
-\subsubsection{Non-homogeneous Linear Differential Equation}
-\label{sec:nonhomogeneous_linear_differential}\hfill
-
-an \emph{$n$-order Non-homogeneous Linear Differential Equation} with Constant
-Coefficients may be written:
-\[
-  y^{(n)}(x) + a_1y^{(n-1)}(x) + \cdots + a_{n-1}y'(x) + a_ny(x) = f(x)
-\]
-where $a_1,\ldots,a_n$ are Real or Complex Numbers, $f$ is a given Function of
-$x$ and $y$ is the Unknown Function
-
-Second-order Non-homogeneous Linear Differential Equation:
-\[
-  A y'' + B y' + C y = g(x)
-\]
-
-for $h$ a Solution for the Homogeneous Linear Differential Equation $Ah'' + Bh'
-+ Ch = 0$
-
-let $j(x)$ be a \emph{particular} Solution of $Aj'' + Bj' + Cj = g(x)$
-
-then $k(x) = h(x) + j(x)$ is a Solution of $A y'' + B y' + C y = g(x)$
-
-\emph{Method of Undetermined Coefficients}
-
-for $A y'' + B y' + C y = f(x) + g(x) + \cdots$, the Solution is the General
-Solution of the Homogeneous Equation plus the particular Solutions to each of
-the individual RHS (FIXME: clarify)
-
-
-
-% --------------------------------------------------------------------
-\subsection{Non-linear Differential Equation}
-\label{sec:nonlinear_differential_equation}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Stochastic Differential Equation}\label{sec:sde}
-% --------------------------------------------------------------------
-
-a Differential Equation in which one or more Terms is a \emph{Stochastic
-  Process} (\S\ref{sec:stochastic_process})
-
-\fist Stochastic Partial Differential Equation (\S\ref{sec:spde})
-
-(wiki): Chaos (\S\ref{sec:chaos_theory}) as a Spontaneous Breakdown of
-Topological Supersymmetry (FIXME: xref) which is an intrinsic property of
-\emph{Evolution Operators} of all Stochastic and Deterministic (Partial)
-Differential Equations; the long-range Dynamical Behavior associated with
-\emph{Chaotic Dynamics} is a consequence of Goldstone's Theorem
-(\S\ref{sec:goldstones_theorem}) in the application of Spontaneous Topological
-Supersymmetry Breaking
-
-
-
-% --------------------------------------------------------------------
-\subsection{Functional Differential Equation}\label{sec:fde}
-% --------------------------------------------------------------------
-
-a Differential Equation with \emph{Deviating Argument}
-
-TODO
-
-
-
-\subsubsection{Differential Difference Equation}\label{sec:dde}\hfill
-
-
-
-% --------------------------------------------------------------------
-\subsection{Singular Solution}\label{sec:singular_solution}
-% --------------------------------------------------------------------
-
-% --------------------------------------------------------------------
-\subsection{Bessel Function}\label{sec:bessel_function}
-% --------------------------------------------------------------------
-
-cf. Reverse Bessel Polynomials (\S\ref{sec:reverse_bessel_polynomial})
-
-\fist Holonomic Function (\S\ref{sec:holonomic_function})
-
-
-
-\subsubsection{Cylinder Function}\label{sec:cylinder_function}\hfill
-
-\fist Cylindrical Harmonics (\S\ref{sec:cylindrical_harmonics})
-
-
-
-\subsubsection{Spherical Bessel Function}\label{sec:spherical_bessel}\hfill
-
-\fist cf. Spherical Harmonics (\S\ref{sec:spherical_harmonics})
-
-
-
-% --------------------------------------------------------------------
-\subsection{Partial Differential Equation}\label{sec:pde}
-% --------------------------------------------------------------------
-
-A \emph{Partial Differential Equation (PDE)} is a Differential Equation
-containing Unknown Multivariable Functions and their Partial Derivatives.
-
-\fist An \emph{Ordinary} Differential Equation (ODE \S\ref{sec:ode}) is a
-Differential Equation with a single Independent Variable.
-
-Finite Element Method (\S\ref{sec:finite_element_method}): solving Boundary
-Value Problems (\S\ref{sec:boundary_value_problem}) for Partial Differential
-Equations
-
-\fist Numerical Integration (\S\ref{sec:numerical_integration})
-
-\fist Finite-Difference Methods (FDMs \S\ref{sec:fdm}) -- Numerical Methods for
-Solving Differential Equations by Approximating them with Difference Equations
-(\S\ref{sec:difference_equation}); dominant approach to Numerical Solutions of
-PDEs
-
-\fist Hamilton-Jacobi-Bellman Equation (Optimal Control Theory
-\S\ref{sec:hamilton_jacobi_bellman})
-
-\fist Hodge Theory (\S\ref{sec:hodge_theory}) uses Partial Differential
-Equations to study the Cohomology Groups (\S\ref{sec:cohomology_group}) of
-Smooth Manifolds (\S\ref{sec:smooth_manifold})
-
-
-
-\subsubsection{Linear Partial Differential Equation}\label{sec:linear_pde}\hfill
-
-\fist $D$-modules (\S\ref{sec:d_module}) -- Modules over a Ring $D$ of
-Differential Operators (\S\ref{sec:differential_operator}); an approach to the
-theory of Linear Partial Differential Equations
-
-
-
-\subsubsection{Wave Equation}\label{sec:wave_equation}\hfill
-
-a Second-order Linear Partial Differential Equation for the description of
-\emph{Waves} as they occur in Classical Physics
-
-Scalar Wave Equation in one Space Dimension:
-\[
-  \frac{\partial^2 u}{\partial{t}^2} = c^2 \frac{\partial^2 u}{\partial{x}^2}
-\]
-
-Scalar Wave Equation in two Space Dimensions
-
-in general Dimensions
-
-
-
-\paragraph{Spherical Wave}\label{sec:spherical_wave}\hfill
-
-Scalar Wave Equation in three Space Dimensions
-
-Separation of Variables (Fourier Method \S\ref{sec:separation_of_variables})
-
-Spherical Wave Transformation (\S\ref{sec:spherical_wave_transformation})
-leaves the form of Spherical Waves Invariant in all Inertial Frames
-(\S\ref{sec:inertial_frame})
-
-
-
-\subsubsection{Elliptic Partial Differential Equation}
-\label{sec:elliptic_partial_differential}\hfill
-
-\paragraph{Poisson Equation}\label{sec:poisson_equation}\hfill
-
-$\nabla^2 u = u_{xx} + u{yy} = f(x,y)$
-
-
-
-\paragraph{Laplace's Equation}\label{sec:laplaces_equation}\hfill
-
-Second-order Elliptic Partial Differential Equation
-
-written:
-\[ \nabla^2 \varphi = 0 \]
-or:
-\[ \Delta \varphi = 0 \]
-
-where $\Delta = \nabla^2$ is the Laplace Operator
-(\S\ref{sec:laplace_operator}) and $\varphi$ is a Scalar Function
-(\S\ref{sec:scalar_function})
-
-a Conformal (Angle Preserving) Mapping (\S\ref{sec:conformal_map}) preserves
-Laplace's Equation (\S\ref{sec:laplaces_equation})-- only changes the Laplacian
-by a non-negative factor
-
-a Harmonic Function (\S\ref{sec:harmonic_function}) is a Twice-continuously
-Differentiable Function (\S\ref{sec:continuously_differentiable}) $f : U
-\rightarrow Reals$, where $U$ is an Open Subset of $\reals^n$, satisfying
-Laplace's Equation
-
-$\nabla^2 u = u_{xx} + u_{yy} = 0$ %FIXME
-
-Steady State Condition (TODO)
-
-
-
-\subsubsection{Dirichlet Problem}\label{sec:dirichlet_problem}\hfill
-
-\subsubsection{Stochastic Partial Differential Equation}\label{sec:spde}\hfill
-
-\fist Stochastic Differential Equation (\S\ref{sec:sde})
-
-
-
-% ====================================================================
 \section{Time-scale Calculus}\label{sec:timescale_calculus}
 % ====================================================================
 
@@ -6568,3 +5824,730 @@ cf. (Definite) Summation (\S\ref{sec:summation}) -- Discrete equivalent to
 (Definite) Integration (\S\ref{sec:integral})
 
 $\Delta^{-1}_h$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Differential Equation}\label{sec:differential_equation}
+% --------------------------------------------------------------------
+
+(wiki):
+
+A \emph{Differential Equation} is an Equation relating the Values of an \emph{Unknown
+  Function} (\S\ref{sec:unknown_function}) of one or more Variables to its
+\emph{Derivatives} (\S\ref{sec:derivative}) of various Orders.
+
+types of Differential Equations:
+\begin{itemize}
+  \item Ordinary (\S\ref{sec:ode}) / Partial (\S\ref{sec:partial})
+  \item Linear (\S\ref{sec:linear_differential_equation}) /
+    Non-linear (\S\ref{sec:nonlinear_differential_Equation})
+  \item Homogeneous (\S\ref{sec:homogeneous_differential_equation}) /
+    Inhomogeneous (\S\ref{sec:inhomogeneous_differential_equation})
+  \item ... MORE
+\end{itemize}
+
+Witkin, Baraff - Siggraph '97 Course:
+
+Differential Equations describe the Relation between an \emph{Unknown Function}
+and its \emph{Derivatives} (\S\ref{sec:derivative}) and \emph{Solving} a
+Differential Equation is to find a Function that Satisfies the Relation, and
+``some additional conditions as well''. (FIXME: clarify)
+
+\fist Time-scale Calculus (\S\ref{sec:timescale_calculus}): unification of
+Theory of Difference Equations (\S\ref{sec:difference_equation}) with that of
+Differential Equations
+
+\asterism
+
+The \emph{Solution} to a Differential Equation $F(x,y,y',\ldots,y^{(n)}) = 0$
+of Order $n$ is a \emph{Function} or \emph{Class of Functions} of the form $u :
+I \subset \reals \rightarrow \reals$ where $u$ is an $n$-times Differentiable
+Function (\S\ref{sec:differentiable_function}) on $I$ and $\forall x \in I$:
+\[
+  F(x,u,u',\ldots,u^{(n)}) = 0
+\]
+Such a $u$ defines an \emph{Integral Curve} (\S\ref{sec:integral_curve}) for
+$F$.
+
+\fist Family of Curves (\S\ref{sec:curve_family})
+
+\fist cf. the Solution of a Polynomial Equation
+(\S\ref{sec:polynomial_equation}) is a Value or Set of Values
+
+\fist Algebraic $D$-modules (\S\ref{sec:algebraic_d_module}): Modules over the
+Weyl Algebra (\S\ref{sec:weyl_algebra}) $A_n(K)$ over a Field $K$ of
+Characteristic Zero; relates Weyl Algebra to Differential Equations
+
+In a Dynamical System (\S\ref{sec:dynamical_system}), the \emph{Evolution
+  Function} $\Phi^t$ is often the Solution of a Differential Equation of Motion
+$\dot{x} = v(x)$ giving the Time Derivative of a Trajectory (Integral Curve)
+$x(t)$ on the Phase Space starting at some Point $x_0$.
+
+Extension, Maximal Solution, Global Solution, General Solution
+
+\fist Numerical Integration (\S\ref{sec:numerical_integration})
+
+\fist Difference Equation (\S\ref{sec:difference_equation})
+
+\fist Differential System (\S\ref{sec:differential_system})
+
+\fist Integral Equations (\S\ref{sec:integral_equation}), Integro-differential
+Equations (\S\ref{sec:integro_differential})
+
+Exponential Models $y = Ce^{-kt}$, $y' = ky$
+
+Logistic Models $y = \frac{y_0 k}{n_0 + (k-n_0)e^{-rt}}$,
+  $y' = ky (1 - \frac{y}{k})$
+
+\fist Stochastic Differential Equation (SDE \S\ref{sec:sde})
+
+\fist Numerical Analysis (\S\ref{sec:numerical_analysis}) applied to Solving
+Differential Equations: Finite Element Method
+(\S\ref{sec:finite_element_method}), Finite Volume Method
+(\S\ref{sec:finite_volume_method})
+
+
+
+\subsubsection{Unknown Function}\label{sec:unknown_function}
+
+\subsubsection{Ordinary Differential Equation}\label{sec:ode}
+
+An \emph{Ordinary Differential Equation (ODE)} is a Differential Equation an
+Unknown Function ($y$) of one Independent Real or Complex Variable ($x$) and its
+Derivatives. An equation of the form:
+\[
+  F\Big(x,y,y',\ldots,y^{(n-1)}\Big) = y^{(n)}
+\]
+is an \emph{Order-$n$ Explicit Ordinary Differential Equation}, and:
+\[
+  F\Big(x,y,y',\ldots,y^{(n)}\Big) = 0
+\]
+is an \emph{Order-$n$ Implicit Ordinary Differential Equation}.
+
+\fist a \emph{Linear Differential Equation}
+(\S\ref{sec:linear_differential_equation}) is a Differential Equation defined
+by a Linear Polynomial (a Polynomial of Degree $1$) in the Unknown Function and
+its Derivatives:
+\[
+  y^{(n)} = \sum_{i=0}^{n-1} a_i (x) y^{(i)} + r(x)
+\]
+where $a_i(x)$ and $r(x)$ are Continuous Functions in $x$
+
+\fist A \emph{Partial} Differential Equation (PDE
+\S\ref{sec:pde}) is a Differential Equation
+containing Unknown Multivariable Functions and their Partial Derivatives.
+
+\fist System of ODEs (\S\ref{sec:ode_system})
+
+\fist System of DAEs (\S\ref{sec:dae_system}): a System of Equations that
+either contains Differential Equations and Algebraic (Polynomial) Equations
+(\S\ref{sec:polynomial_equation}), or is equivalent to one; arises in
+Constraints of Multibody Systems (\S\ref{sec:multibody_system}); differs from
+ODE Systems in that the Jacobian Matrix (\S\ref{sec:jacobian}) of a DAE
+is Singular (Non-invertible \S\ref{sec:singular_matrix})
+
+\fist Flow (\S\ref{sec:flow})
+
+A \emph{Solution} of an ODE $F$ is a Function $u : I \subset \reals \rightarrow
+\reals$ called an \emph{Integral Curve} (\S\ref{sec:integral_curve}) for $F$
+which is Tangent to the Slope Field defined by the ODE at every Point.
+
+For $F$ a Function of $t$, $y$, and Derivatives (\S\ref{sec:derivative}) of
+$y$, an Equation of the form:
+\[
+  F(t,y,y',\ldots,y^{(n-1)}) = y^{(n)}
+\]
+is a \emph{Explicit Ordinary Differential Equation} of \emph{Order $n$}, and an
+\emph{Implicit Ordinary Differential Equation} (or \emph{Homogeneous Ordinary
+  Differential Equation}) of Order $n$ has the form:
+\[
+  F(t,y,y',\ldots,y^{(n)}) = 0
+\]
+if $f(t)$ is a Solution to a Homogeneous ODE $F$ then $c\cdot{f(t)}$ is a
+Solution to $F$ for any Constant $c$, and if $g(t)$ is also a Solution then
+$f(t) + g(t)$ is a Solution
+
+
+Domain of Solutions: there is no way in general to know what the Domain of the
+Solution will be (MIT 18.03 2006 Lec. 1)
+
+example:
+
+for the Differential Equation $y' = \frac{-x}{y}$, setting $\frac{-x}{y}$ equal
+to a Constant, $\frac{-x}{y} = C$, gives the \emph{Isoclines}
+(\S\ref{sec:isocline}) of the Slope Field defined by the Differential Equation,
+i.e. they are curves where the Family of Solutions are intersect the
+curve with the indicated slope $C$ along its length
+
+Standard First-order Form:
+\[
+  y' = p(x) y + q(x)
+\]
+cf. Standard Linear Form (\S\ref{sec:linear_differential_equation}):
+\[
+  y' + p(x) y = q(x)
+\]
+
+\emph{Local Existence and Uniqueness Theorem}: for a Differential Equation
+\emph{in Standard Form}, when $f$ and $f_y$ are Continuous near $x_0$ and
+$y_0$, there is one and only one Solution through a Point $(x_0, y_0)$
+
+\emph{Global Existence and Uniqueness Theorem} (TODO)
+
+
+\emph{Characteristic Equation}
+
+an example of a System modelled by a First-order Ordinary Differential Equation
+is an RC Circuit
+
+an example of a System modelled by a Second-order Ordinary Differential
+Equation is a Simple Harmonic Oscillator: the Phase Space consists of a
+Velocity Dimension and a Position Dimension and the Orbit is Periodic
+
+\asterism
+
+\begin{itemize}
+  \item \emph{Logistic Differential Equation} -- the Logistic Function
+    (\S\ref{sec:logistic_function}) $f(x) = \frac{L}{1 + e^{-k(x-x_0)}}$ is the
+    Solution to the First-order Non-linear Ordinary Differential Equation:
+  \[
+    \frac{d}{dx}f(x) = f(x)(1 - f(x))
+  \]
+  with Boundary Condition (\S\ref{sec:boundary_value_problem}) $f(0) =
+  \frac{1}{2}$
+\end{itemize}
+
+
+\paragraph{Slope Field}\label{sec:slope_field}\hfill
+
+When the Differential Equation is represented as a Vector Field or Slope Field
+(\S\ref{sec:slope_field}), the corresponding Integral Curves
+(\S\ref{sec:integral_curve}) are Tangent to the Field at each point.
+
+
+
+\subparagraph{Integral Curve}\label{sec:integral_curve}\hfill
+
+An \emph{Integral Curve} is a Parametric Curve that represents a
+\emph{specific} Solution of an Ordinary Differential Equation
+(\S\ref{sec:ode}), or System of ODEs (\S\ref{sec:ode_system}).
+
+When the Differential Equation is represented as a Vector Field or Slope Field
+(\S\ref{sec:slope_field}), the corresponding Integral Curves are Tangent to the
+Field at each point.
+
+Integral Curves intersect Isoclines (\S\ref{sec:isocline}) with the slope
+indicated by the Isocline
+
+(\emph{Existence and Uniqueness Theorem}) two Integral Curves cannot cross (at
+an Angle) or touch (be Tangent)
+
+In a Dynamical System (\S\ref{sec:dynamical_system}), the Integral Curves for
+the Differential Equation governing the System are referred to as
+\emph{Trajectories} (\S\ref{sec:trajectory}).
+
+e.g. Electric Field or Magnetic Field Lines, Streamlines (Velocity Field of a
+Fluid)
+
+\emph{Flow}
+
+
+
+\subparagraph{Isocline}\label{sec:isocline}\hfill
+
+Isoclines are intersected by Integral Curves (\S\ref{sec:integral_curve}) at
+the slope indicated by the Isocline
+
+example:
+
+for the Differential Equation (\S\ref{sec:differential_equation}) $y' =
+\frac{-x}{y}$, setting $\frac{-x}{y}$ equal to a Constant, $\frac{-x}{y} = C$
+gives a Family of \emph{Isoclines} of the Slope Field defined by the
+Differential Equation, i.e. they are curves where the Family of Solutions
+intersect the curve with the indicated slope $C$ along its length
+
+
+
+\paragraph{Initial Value Problem (IVP)}\label{sec:ivp}\hfill
+
+\fist cf. Boundary Value Problem (\S\ref{sec:boundary_value_problem}) defines
+Values of the Solution at more than one Point
+
+(wiki):
+
+an ODE together with a Value of the Unknown Function called the \emph{Initial
+  Condition} at a given Point in the Domain of the Solution
+
+Differential Equation:
+\[
+  y'(t) = f(t, y(t))
+\]
+with $f : \Omega \subset \reals \times \reals^n \rightarrow \reals^n$ where
+$\Omega$ is an Open Set of $\reals \times \reals^n$ and Initial Condition
+\[
+  (t_0, y_0) \in \Omega
+\]
+in the Domain of $f$
+
+a \emph{Solution} to an Initial Value Problem is a Function $y : \reals
+\rightarrow \reals^n$ that is a Solution to the Differential Equation and
+satisfies $y(t_0) = y_0$
+
+\fist Time Evolution (\S\ref{sec:time_evolution})
+
+\fist Dynamical Systems (\S\ref{sec:dynamical_system})
+
+\begin{itemize}
+  \item the Trajectory $\vec{s}(t)$ of a Hamiltonian System is a Solution to
+    the IVP defined by Hamilton's Equations and the Initial Condition
+    $\vec{s}(0) = \vec{s}_0 \in \reals^{2N}$
+\end{itemize}
+
+First-order Initial Value Problems: \emph{Peano Existence Theorem} gives a set
+of circumstances in which a solution exists
+
+\emph{Picard-Lindel\"of Theorem}
+
+Higher Dimensions (TODO)
+
+for an $n$-th Order Linear Initial Value Problem:
+\[
+  f_n(x)\frac{d^ny}{dx^n} + \cdots + f_1(x)\frac{dy}{dx} + f_0(x)y = g(x)
+\]
+such that:
+\begin{align*}
+  y(x_0)   & = y_0   \\
+  y'(x_0)  & = y_0'  \\
+  y''(x_0) & = y_0''
+\end{align*}
+then for any Non-zero $f_n(x)$ and $\{f_0,f_1,\ldots\}$ and $g$ are Continuous
+on some Interval containing $x_0$, $y$ is unique and exists
+
+
+
+\subsubsection{Separable Differential Equation}\label{sec:separable}
+
+a Differential Equation is \emph{Separable} if the Derivative $\frac{dy}{dx}$
+can be written in terms of the product of separate functions of $x$ and $y$ as:
+\[
+  \frac{dy}{dx} = g(x)h(y)
+\]
+or equivalently, as long as $h(y) \neq 0$:
+\[
+  \frac{1}{h(y)} dy = g(x) dx
+\]
+
+
+
+\paragraph{Separation of Variables}\label{sec:separation_of_variables}\hfill
+
+\paragraph{Homogeneous Differential Equation}
+\label{sec:homogeneous_differential_equation}
+
+If the Differential Equation:
+\[
+  \frac{dy}{dx} = f(x,y)
+\]
+can be rewritten as:
+\[
+  \frac{dy}{dx} = F\Big(\frac{y}{x}\Big)
+\]
+then it is \emph{Homogeneous} and a Variable Substitution allows the Equation to
+be made \emph{Separable}.
+
+cf. Homogeneous Difference Equation
+(\S\ref{sec:homogeneous_difference_equation}), Homogeneous Polynomial
+(\S\ref{sec:homogeneous_polynomial}), Homogeneous System of Linear Equations
+(\S\ref{sec:homogeneous_linear_equation_system})
+
+\emph{not} ``Homogeneous Linear Differential Equation''
+(\S\ref{sec:homogeneous_linear_differential})
+
+
+
+\paragraph{Inhomogeneous Differential Equation}
+\label{sec:inhomogeneous_differential_equation}
+
+
+
+\subsubsection{Exact Differential Equation}\label{sec:exact_equation}
+
+$\frac{d}{dx}\Psi(x,y) = \frac{\partial{\Psi}}{\partial{x}}
+  + \frac{\partial{\Psi}}{\partial{x}}\frac{dy}{dx}$
+
+$\Psi_{xy} = \Psi_{yx}$ -- if $\Psi$ and its Derivatives are Continuous over
+some Domain
+
+$\Psi_x + \Psi_y \frac{dy}{dx} = 0$
+
+$\frac{d}{dx}\Psi(x,y) = 0$
+
+$\Psi(x,y) = c$
+
+$M(x,y) + N(x,y)\frac{dy}{dx} = 0$
+
+$M_y = N_x$ if and only if $M(x,y) + N(x,y)\frac{dy}{dx} = 0$ is an Exact
+Equation, implies: $\Psi_{xy} = M_y$, $\Psi_{yx} = N_x$
+
+\emph{Potential Function}
+
+
+
+\paragraph{Integrating Factor}\label{sec:integrating_factor}\hfill
+
+$u(x)$
+
+
+
+\subsubsection{Linear Differential Equation}
+\label{sec:linear_differential_equation}
+
+An Ordinary Differential Equation is \emph{Linear} if $F$ can be written as a
+Linear Polynomial (a Polynomial of Degree $1$) of the \emph{Unknown Function}
+($y$ below) and its Derivatives:
+\[
+  a_0(x)y + a_1(x)y' + a_2(x)y'' + \cdots + a_n(x)y^{(n)} + r(x) = 0
+\]
+or:
+\[
+  y^{(n)} = \sum_{i=0}^{n-1} a_i(x) y^{(i)} + r(x)
+\]
+where $a_i(x)$ and $r(x)$ are Differentiable Functions in $x$ (not necessarily
+Linear) and $r(x)$ is called the \emph{Source Term} (or sometimes
+\emph{Constant Term}, even though it can be a non-constant Function).
+
+First-order Linear Differential Equations (with non-constant coefficients) and
+Homogeneous Linear Differential Equations
+(\S\ref{sec:homogeneous_linear_differential}) have solutions that may
+be expressed in terms of Integrals (\S\ref{sec:antiderivative})
+
+Second-order and higher Linear Differential Equations with non-constant
+coefficients cannot in general be solved by Quadratures (i.e. Integrals --
+Kovacic Algorithm for determining if this is possible)
+
+Hypergeometric Functions (\S\ref{sec:hypergeometric_function}) are solutions of
+Second-order Linear Differential Equations
+
+Solutions of a Homogeneous Linear Differential Equation form a Vector Space,
+ordinarily of Dimension equal to that of Order of the Equation; all Solutions
+of a Linear Differential Equation are found by adding to a particular Solution
+any Solution of the Associated Homgeneous Equation (FIXME: clarify)
+
+cf. Linear Difference Equation (\S\ref{sec:linear_difference_equation})
+
+\emph{First-order Linear Differential Equations}:
+\[
+  a(x) y' + b(x) y = c(x)
+\]
+Homogeneous:
+\[
+  a(x) y' + b(x) y = 0
+\]
+Standard Linear Form:
+\[
+  y' + p(x) y = q(x)
+\]
+cf. Standard First-order Form (\S\ref{sec:ode}):
+\[
+  y' = p(x) y + q(x)
+\]
+
+\emph{Second-order Linear Differential Equations}:
+\[
+  a(x) y'' + b(x) y' + c(x) y = d(x)
+\]
+
+
+
+\paragraph{Homogeneous Linear Differential Equation}
+\label{sec:homogeneous_linear_differential}\hfill
+
+\emph{not} the same concept as general ``Homogeneous Differential Equations''
+(\S\ref{sec:homogeneous_differential_equation})
+
+Homogeneous Linear Differential Equations have the Constant Term $0$, i.e. it
+is a Homogeneous Polynomial (\S\ref{sec:homogeneous_polynomial}) in the Unknown
+Function and its Derivatives
+
+Solutions of a Homogeneous Linear Differential Equation form a Vector Space,
+ordinarily of Dimension equal to that of Order of the Equation; all Solutions
+of a Linear Differential Equation are found by adding to a particular Solution
+any Solution of the Associated Homgeneous Equation (FIXME: clarify)
+
+an $n$-th Order Homogeneous Linear Differential Equation has Constant
+Coefficients if it has the form:
+\[
+  a_0y + a_1y' + a_2y'' + \cdots + a_ny^{(n)} = 0
+\]
+(FIXME: otherwise it has polynomial coefficients ???)
+
+e.g. $e^x$ is the unique solution to the Equation $f' = f$ such that $e^0 = 1$,
+and it follows that the $n$th Derivative of $e^{cx}$ is $c^n e^{cx}$
+
+Homogeneous Linear Differential Equations have solutions that may be expressed
+in terms of Integrals (\S\ref{sec:antiderivative})
+
+Solutions to (Systems of) Homogeneous Linear Differential Equations with
+Polynomial Coefficients (FIXME: i.e. non-constant ???) are called
+\emph{Holonomic Functions} (\S\ref{sec:holonomic_function}).
+
+\emph{Second-order Homogeneous Linear Differential Equation}:
+
+\[
+  A y'' + B y' + C y = 0
+\]
+
+if $g(x)$ is a Solution, then $c\cdot{g(x)}$ is also a Solution
+
+if $h(x)$ is also a Solution, then $g(x) + h(x)$ is also a Solution
+
+
+
+\subparagraph{Characteristic Equation}\label{sec:characteristic_equation}\hfill
+
+cf. Characteristic Equation of a Homogeneous Difference Equation
+(\S\ref{sec:characteristic_difference_equation})
+
+$A y'' + B y' + C y = 0$
+
+$y = e^{rx}$
+
+Characteristic Equation: $Ar^2 + Br + C = 0$
+
+$r = \frac{-B \pm \sqrt{B^2 - 4AC}}{2A}$
+
+Real Roots: $r_1, r_2$
+
+General Solution: $y = c_1e^{r_1x} + c_2e^{r_2x}$
+
+Complex Roots: $\lambda \pm \mu i$
+
+General Solution: $y = e^{\lambda x}(c_1 \cos\mu{x} + c_2 \sin\mu{x})$
+
+Repeated Roots: $r$
+
+\emph{Reduction of Order}: $y = c_1 x e^{rx} + c_2 e^{rx}$
+
+
+
+\subparagraph{Holonomic Function}\label{sec:holonomic_function}\hfill
+
+a \emph{Holonomic Function} is an Element of a Holonomic Module
+(\S\ref{sec:holonomic_module}) of Smooth Functions
+
+\fist cf. Holonomy (\S\ref{sec:holonomy}), Holonomic Constraints
+(\S\ref{sec:holonomic_constraint})
+
+a Multivariable Smooth Function that is a solution to a (System of) Homogeneous
+Linear Differential Equation(s) with Polynomial Coefficients
+
+the Class of Holonomic Functions is ``stable'' (FIXME: closed ???) under Sums,
+Products, Derivation, and Integration
+
+Strict Superset of the Hypergeometric Functions
+(\S\ref{sec:hypergeometric_function})
+
+Holonomic Functions include all Algebraic Functions
+(\S\ref{sec:algebraic_function}), some Transcendental Functions ($\sin x$,
+$\cos x$, $e^x$, $\log x$), the Generalized Hypergeometric Function
+(\S\ref{sec:generalized_hypergeometric_function}), Bessel Functions
+(\S\ref{sec:bessel_function}), Airy Functions (TODO: xref), ``classical''
+Orthogonal Polynomials (\S\ref{sec:orthogonal_polynomial_sequence})
+
+Holonomic Functions form a Ring (\S\ref{sec:ring}), but are not closed under
+Division (so they do not form a Field)
+
+
+
+\paragraph{Non-homogeneous Linear Differential Equation}
+\label{sec:nonhomogeneous_linear_differential}\hfill
+
+an \emph{$n$-order Non-homogeneous Linear Differential Equation} with Constant
+Coefficients may be written:
+\[
+  y^{(n)}(x) + a_1y^{(n-1)}(x) + \cdots + a_{n-1}y'(x) + a_ny(x) = f(x)
+\]
+where $a_1,\ldots,a_n$ are Real or Complex Numbers, $f$ is a given Function of
+$x$ and $y$ is the Unknown Function
+
+Second-order Non-homogeneous Linear Differential Equation:
+\[
+  A y'' + B y' + C y = g(x)
+\]
+
+for $h$ a Solution for the Homogeneous Linear Differential Equation $Ah'' + Bh'
++ Ch = 0$
+
+let $j(x)$ be a \emph{particular} Solution of $Aj'' + Bj' + Cj = g(x)$
+
+then $k(x) = h(x) + j(x)$ is a Solution of $A y'' + B y' + C y = g(x)$
+
+\emph{Method of Undetermined Coefficients}
+
+for $A y'' + B y' + C y = f(x) + g(x) + \cdots$, the Solution is the General
+Solution of the Homogeneous Equation plus the particular Solutions to each of
+the individual RHS (FIXME: clarify)
+
+
+
+\subsubsection{Non-linear Differential Equation}
+\label{sec:nonlinear_differential_equation}
+
+\subsubsection{Stochastic Differential Equation}\label{sec:sde}
+
+a Differential Equation in which one or more Terms is a \emph{Stochastic
+  Process} (\S\ref{sec:stochastic_process})
+
+\fist Stochastic Partial Differential Equation (\S\ref{sec:spde})
+
+(wiki): Chaos (\S\ref{sec:chaos_theory}) as a Spontaneous Breakdown of
+Topological Supersymmetry (FIXME: xref) which is an intrinsic property of
+\emph{Evolution Operators} of all Stochastic and Deterministic (Partial)
+Differential Equations; the long-range Dynamical Behavior associated with
+\emph{Chaotic Dynamics} is a consequence of Goldstone's Theorem
+(\S\ref{sec:goldstones_theorem}) in the application of Spontaneous Topological
+Supersymmetry Breaking
+
+
+
+\subsubsection{Functional Differential Equation}\label{sec:fde}
+
+a Differential Equation with \emph{Deviating Argument}
+
+TODO
+
+
+
+\paragraph{Differential Difference Equation}\label{sec:dde}\hfill
+
+
+
+\subsubsection{Singular Solution}\label{sec:singular_solution}
+
+\subsubsection{Bessel Function}\label{sec:bessel_function}
+
+cf. Reverse Bessel Polynomials (\S\ref{sec:reverse_bessel_polynomial})
+
+\fist Holonomic Function (\S\ref{sec:holonomic_function})
+
+
+
+\paragraph{Cylinder Function}\label{sec:cylinder_function}\hfill
+
+\fist Cylindrical Harmonics (\S\ref{sec:cylindrical_harmonics})
+
+
+
+\paragraph{Spherical Bessel Function}\label{sec:spherical_bessel}\hfill
+
+\fist cf. Spherical Harmonics (\S\ref{sec:spherical_harmonics})
+
+
+
+\subsubsection{Partial Differential Equation}\label{sec:pde}
+
+A \emph{Partial Differential Equation (PDE)} is a Differential Equation
+containing Unknown Multivariable Functions and their Partial Derivatives.
+
+\fist An \emph{Ordinary} Differential Equation (ODE \S\ref{sec:ode}) is a
+Differential Equation with a single Independent Variable.
+
+Finite Element Method (\S\ref{sec:finite_element_method}): solving Boundary
+Value Problems (\S\ref{sec:boundary_value_problem}) for Partial Differential
+Equations
+
+\fist Numerical Integration (\S\ref{sec:numerical_integration})
+
+\fist Finite-Difference Methods (FDMs \S\ref{sec:fdm}) -- Numerical Methods for
+Solving Differential Equations by Approximating them with Difference Equations
+(\S\ref{sec:difference_equation}); dominant approach to Numerical Solutions of
+PDEs
+
+\fist Hamilton-Jacobi-Bellman Equation (Optimal Control Theory
+\S\ref{sec:hamilton_jacobi_bellman})
+
+\fist Hodge Theory (\S\ref{sec:hodge_theory}) uses Partial Differential
+Equations to study the Cohomology Groups (\S\ref{sec:cohomology_group}) of
+Smooth Manifolds (\S\ref{sec:smooth_manifold})
+
+
+
+\paragraph{Linear Partial Differential Equation}\label{sec:linear_pde}\hfill
+
+\fist $D$-modules (\S\ref{sec:d_module}) -- Modules over a Ring $D$ of
+Differential Operators (\S\ref{sec:differential_operator}); an approach to the
+theory of Linear Partial Differential Equations
+
+
+
+\paragraph{Wave Equation}\label{sec:wave_equation}\hfill
+
+a Second-order Linear Partial Differential Equation for the description of
+\emph{Waves} as they occur in Classical Physics
+
+Scalar Wave Equation in one Space Dimension:
+\[
+  \frac{\partial^2 u}{\partial{t}^2} = c^2 \frac{\partial^2 u}{\partial{x}^2}
+\]
+
+Scalar Wave Equation in two Space Dimensions
+
+in general Dimensions
+
+
+
+\subparagraph{Spherical Wave}\label{sec:spherical_wave}\hfill
+
+Scalar Wave Equation in three Space Dimensions
+
+Separation of Variables (Fourier Method \S\ref{sec:separation_of_variables})
+
+Spherical Wave Transformation (\S\ref{sec:spherical_wave_transformation})
+leaves the form of Spherical Waves Invariant in all Inertial Frames
+(\S\ref{sec:inertial_frame})
+
+
+
+\paragraph{Elliptic Partial Differential Equation}
+\label{sec:elliptic_partial_differential}\hfill
+
+\subparagraph{Poisson Equation}\label{sec:poisson_equation}\hfill
+
+$\nabla^2 u = u_{xx} + u{yy} = f(x,y)$
+
+
+
+\subparagraph{Laplace's Equation}\label{sec:laplaces_equation}\hfill
+
+Second-order Elliptic Partial Differential Equation
+
+written:
+\[ \nabla^2 \varphi = 0 \]
+or:
+\[ \Delta \varphi = 0 \]
+
+where $\Delta = \nabla^2$ is the Laplace Operator
+(\S\ref{sec:laplace_operator}) and $\varphi$ is a Scalar Function
+(\S\ref{sec:scalar_function})
+
+a Conformal (Angle Preserving) Mapping (\S\ref{sec:conformal_map}) preserves
+Laplace's Equation (\S\ref{sec:laplaces_equation})-- only changes the Laplacian
+by a non-negative factor
+
+a Harmonic Function (\S\ref{sec:harmonic_function}) is a Twice-continuously
+Differentiable Function (\S\ref{sec:continuously_differentiable}) $f : U
+\rightarrow Reals$, where $U$ is an Open Subset of $\reals^n$, satisfying
+Laplace's Equation
+
+$\nabla^2 u = u_{xx} + u_{yy} = 0$ %FIXME
+
+Steady State Condition (TODO)
+
+
+
+\paragraph{Dirichlet Problem}\label{sec:dirichlet_problem}\hfill
+
+\paragraph{Stochastic Partial Differential Equation}\label{sec:spde}\hfill
+
+\fist Stochastic Differential Equation (\S\ref{sec:sde})
