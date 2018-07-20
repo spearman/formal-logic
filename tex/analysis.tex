@@ -1077,7 +1077,7 @@ Plane.
 
 
 
-\subsubsection{Disc}\label{sec:disc}\hfill
+\subsubsection{Disc}\label{sec:disc}
 
 \subsubsection{Extended Complex Plane}\label{sec:extended_complex_plane}
 
@@ -2988,6 +2988,8 @@ Pointwise Domination implies Linear Dominance:
   \item Differential Forms (\S\ref{sec:differential_form})
 \end{itemize}
 
+\fist Differential Equations (\S\ref{sec:differential_equation})
+
 \fist Differential Geometry (\S\ref{sec:differential_geometry})
 
 \fist Differential Topology (\S\ref{sec:differential_topology})
@@ -3005,6 +3007,13 @@ Partial Derivatives (\S\ref{sec:partial_derivative}), Gradient
 (\S\ref{sec:gradient}) $f : \reals^m \rightarrow \reals$
 
 Jacobian (\S\ref{sec:jacobian}) $f : \reals^m \rightarrow \reals^n$
+
+see also:
+
+\begin{itemize}
+  \item Directional Derivative (\S\ref{sec:directional_derivative})
+  \item Matrix Derivative (\S\ref{sec:matrix_derivative})
+\end{itemize}
 
 some terminology:
 
@@ -3070,12 +3079,6 @@ or in the ``Context'' (FIXME: clarify) $H$ of Synthetic Differential Geometry
 where $D \hookrightarrow \reals$ is the Smooth Locus (\S\ref{sec:smooth_locus})
 defined by $x^2 = 0$ (in Toposes that Model Synthetic Differential Geometry this
 is regarded as an Infinitesimal Neighborhood about a Point)
-
-see also:
-
-\begin{itemize}
-  \item Directional Derivative (\S\ref{sec:directional_derivative})
-\end{itemize}
 
 
 
@@ -3307,7 +3310,8 @@ The \emph{Differentiation Operator} $D$, is a Linear Operator
 
 \fist Partial Derivative (\S\ref{sec:partial_derivative})
 
-\fist Vector Derivative (\S\ref{sec:vector_derivative})
+\fist Vector Derivative (\S\ref{sec:vector_derivative}), Matrix Derivative
+(\S\ref{sec:matrix_derivative})
 
 \fist the \emph{Gradient} (\S\ref{sec:gradient}) generalizes the Derivative to
 Multi-variable Scalar-valued Functions and the the Jacobian
@@ -3468,7 +3472,7 @@ TODO: Differential $\diffy{f}$ as a Morphism of Tangent Bundles
 
 
 
-\subsubsection{Product Rule}\label{sec:product_rule}\hfill
+\subsubsection{Product Rule}\label{sec:product_rule}
 
 \fist Integration by Parts (\S\ref{sec:integration_by_parts})
 
@@ -4878,745 +4882,6 @@ Problems for Partial Differential Equations (\S\ref{sec:partial_differential})
 
 
 
-% --------------------------------------------------------------------
-\subsection{Vector Calculus}\label{sec:vector_calculus}
-% --------------------------------------------------------------------
-
-or \emph{Vector Analysis}
-
-Gradient, Divergence, Curl
-
-$\nabla$
-
-FIXME:
-
-Directional Derivative
-
-Laplacian
-
-Tensor Derivative
-
-
-
-\subsubsection{Vector}\label{sec:linear_vector}
-
-or \emph{Polar Vector}
-
-\fist Vector (Abstract Algebra \S\ref{sec:vector})
-
-
-
-\subsubsection{Pseudovector}\label{sec:pseudovector}
-
-or \emph{Axial Vector}
-
-\fist Pure Imaginary Quaternion (\S\ref{sec:quaternion})
-
-Angular Velocity behaves like a Pseudovector
-
-(3 Dimensions) associated with Curl of a Polar Vector or Cross Product of two
-Polar Vectors
-
-equivalent to Three-dimensional Bivectors (\S\ref{sec:bivector})
-
-
-
-\subsubsection{Vector Function}\label{sec:vector_function}
-
-\url{https://math.stackexchange.com/questions/662009/what-is-the-difference-between-vector-valued-functions-and-parametric-equations}:
-
-A (Real, potentially Multivariate) \emph{$n$-dimensional Vector Function} (or
-\emph{Vector-valued Function}) is a Map:
-\[
-  f : U \subset \reals^m \rightarrow V \subset \reals^n
-\]
-
-(wiki):
-
-For $U \subset \reals$, $f$ can be written as a Function of a Real Number $x$ or
-equivalently as individual Component Functions $f_1, f_2, \ldots, f_n$:
-\[
-  f(x) = (f_1(t), f_2(t), \ldots, f_n(t))
-\]
-Then the Derivative (\S\ref{sec:derivative}) can be written in terms of the
-Derivatives of the Coordinate Functions:
-\[
-  f'(x) = (f_1'(t), f_2'(t), \ldots, f_n'(t))
-\]
-
-For $f$ a Function of several variables $\vec{x} \in \reals^m$, the First-order
-Partial Derivatives of the Components of $f$ form an $n \times m$ Matrix called
-the \emph{Jacobian Matrix} (\S\ref{sec:jacobian}) of $f$.
-
-the Matrix of all First-order Partial Derivatives
-(\S\ref{sec:partial_derivative}) of a Vector Function is the \emph{Jacobian
-  Matrix} (\S\ref{sec:jacobian})
-
-\fist cf. a \emph{Parameterization} (\S\ref{sec:parameterization}) for a
-portion of a Submanifold $M$ in Euclidean Space is a Map:
-\[
-  \varphi : U \subset R^m \rightarrow M \subset R^n
-\]
-with additional Properties:
-\begin{itemize}
-  \item $U$ is an Open Set (\S\ref{sec:open_set})
-  \item $\varphi$ is a Homeomorphism (\S\ref{sec:homeomorphism}) onto its Image
-  \item everywhere the Rank of $D\varphi = m$ (FIXME: clarify)
-\end{itemize}
-i.e. a Parameterization is always in the form of a Vector Valued Function, but
-conversely Vector-valued Functions are used to Parameterize Varieties
-(\S\ref{sec:algebraic_variety}) %FIXME: clarify
-
-Partial Derivative of a Multivariable Vector-valued Function (TODO)
-
-
-
-\paragraph{Root}\label{sec:function_root}\hfill
-
-A \emph{Root} (or \emph{Zero}) of a Vector-valued Function (including Real- or
-Complex-valued Functions) $f$ is an Element $x$ of the Domain of $f$ for which
-$f(x)$ is \emph{Zero}.
-
-\fist Root (Equations \S\ref{sec:equation_root})
-
-\fist Root-finding Algorithms (Numerical Analysis \S\ref{sec:root_finding}) for
-Solving Non-linear Equations:
-\begin{itemize}
-  \item Newton's Method (\S\ref{sec:newtons_method})
-  \item Linearization (\S\ref{sec:linearization})
-\end{itemize}
-
-Any Polynomial (\S\ref{sec:polynomial}) with Odd Degree has at least
-one Real Root.
-
-(wiki):
-
-The Fundamental Theorem of Algebra (\S\ref{sec:fundamental_algebra_theorem})
-states that every Polynomial of Degree $n$ has $n$ Complex Roots, counted with
-their Multiplicities (??? FIXME).
-
-\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial (one
-Variable with Complex Coefficients \S\ref{sec:monic_polynomial}), an Algebraic
-Object, is determined by the Set of its Roots, a Geometric Object, in the
-Complex Plane (\S\ref{sec:complex_plane}).
-
-\asterism
-
-\fist cf. Discrete First-order Dynamical Systems
-(\S\ref{sec:discrete_dynamical_system}) can be used to Numerically Solve
-Single-variable Equations-- the problem to be Solved consisting of finding the
-Roots of a Real Function $f$, i.e. the values of $x$ such that:
-\[
-  f(x) = 0
-\]
-For Equations that cannot be solved Analytically, the Numerical Method involves
-defining a Dynamical System with Convergent Sequences which approach Solutions
-to the Equation
-
-
-
-\subparagraph{Zero Set}\label{sec:zero_set}\hfill
-
-\fist Algebraic Geometry (Part \ref{part:algebraic_geometry}): study of Zero
-Sets of Systems of Polynomial Equations
-(\S\ref{sec:polynomial_equation_system})
-
-e.g. the Circle (\S\ref{sec:n_sphere}) $S^1 = \{ (x,y) \in \reals^2 | x^2 + y^2
-- 1 = 0 \}$
-
-(wiki):
-
-any Closed Subset of $\reals^n$ is the Zero Set of a Smooth Function
-(\S\ref{sec:smooth_function}) on $\reals^n$
-
-an Affine Algebraic Set (Affine Variety \S\ref{sec:affine_variety}) is the
-Intersection of the Zero Sets of a number of Polynomials in a Polynomial Ring
-(\S\ref{sec:polynomial_ring}) $k[x_1,\ldots,x_n]$ over a Field
-
-
-
-\paragraph{Vector Derivative}\label{sec:vector_derivative}\hfill
-
-Derivative (\S\ref{sec:derivative}) of a Vector-valued Function of a single Real
-Variable
-
-$r : \reals \rightarrow \reals^n$
-
-$\deriv{\vec{r}(t)}{t}$
-
-when the parameter is interpreted as Time, then the First Vector Derivative
-represents the \emph{Velocity} and the Second Vector Derivative represents the
-\emph{Acceleration}
-
-the Vector Derivative represents a change of \emph{Length} (cf. Norm
-\S\ref{sec:norm}) of the Vector
-
-cf. Directional Derivative (\S\ref{sec:directional_derivative})
-
-
-
-\subsubsection{Directional Derivative}\label{sec:directional_derivative}
-
-$\frac{\partial{f}}{\partial{\vec{v}}}$
-
-$\nabla_{\vec{v}} f = \vec{v}\bullet \nabla{f}$
-
-Gradient (\S\ref{sec:gradient})
-
-for a Complex Function (\S\ref{sec:complex_function}) to have a Derivative, the
-Directional Derivative must exist in every direction and be the same
-
-Derivation of Quaternion Functions (\S\ref{sec:quaternion_function}) requires a
-Direction-dependent Derivative (FIXME: clarify)
-
-\fist generalized as Covariant Derivative (\S\ref{sec:covariant_derivative})
-
-cf. Vector Derivative (\S\ref{sec:vector_derivative})
-
-
-
-\subsubsection{Gradient}\label{sec:gradient}
-
-Partial Derivative (\S\ref{sec:partial_derivative})
-
-Directional Derivative (\S\ref{sec:directional_derivative})
-
-Differential Operator (\S\ref{sec:differential_operator})
-
-(wiki):
-
-for a Multivariate Scalar-valued Function (\S\ref{sec:scalar_function}) $f(x_1,
-\ldots, x_n)$ on $\reals^n$ for which a Partial Derivative $\pderiv{f}{x_j}$
-exists for each Variable $x_j$ at a Point $a = (a_1, \ldots, a_n)$ the Partial
-Derivatives define the \emph{Gradient Vector} of $f$ as $a$:
-\[
-  \nabla{f}(a_1, \ldots, a_n) = \big( \pderiv{f}{x_1}(a_1, \ldots, a_n), \ldots,
-  \pderiv{f}{x_n}(a_1, \ldots, a_n) \big)
-\]
-
-the Gradient points in the \emph{direction} of greatest inscrease of the
-Function, and its magnitude is the \emph{slope} of the Graph in that direction
-
-the Gradient of a Scalar Field (\S\ref{sec:scalar_field}) $f$ is the Vector
-Derivative (\S\ref{sec:vector_derivative}):
-\[
-  \nabla f =
-    \frac{\partial f}{\partial x}\vec{e}_x +
-    \frac{\partial f}{\partial y}\vec{e}_y +
-    \frac{\partial f}{\partial z}\vec{e}_z
-\]
-that is, the Gradient of $f$ is a Vector Field (\S\ref{sec:vector_field})
-
-when a Vector Field is the Gradient Field of some Scalar Field
-(\S\ref{sec:scalar_field}), it is a \emph{Conservative} (\emph{Path
-  Independent} \S\ref{sec:conservative_vector_field}) Vector Field and the Line
-Integral of any Path between two Points is equivalent and the Line Integral of
-a Closed Path from a Point to itself is Zero
-
-FIXME: Matrix of Derivatives, Vector Field of Row Vectors
-
-the Jacobian (\S\ref{sec:jacobian}) generalizes the Gradient of a Scalar-valued
-Function of multiple Variables to the Vector-valued
-(\S\ref{sec:vector_function}) case: the Jacobian of a Scalar-valued
-Multivariable Function is the Gradient, and the Jacobian of a Scalar-valued
-Single Variable Function is its Derivative (\S\ref{sec:derivative})
-
-Divergence (\S\ref{sec:divergence}) can be expressed as:
-\[
-  \nabla \cdot \vec{v} =
-    \frac{\partial v_x}{\partial x} +
-    \frac{\partial v_y}{\partial y} +
-    \frac{\partial v_z}{\partial z}
-\]
-
-the Laplacian (\S\ref{sec:laplacian}) is the Divergence of the Gradient Field
-of $f$: $\nabla \bullet \nabla f$
-
-Curl (\S\ref{sec:curl}) can be expressed as:
-\[
-  \nabla\times\vec{v} =
-    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x +
-    (\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x})\vec{e}_y +
-    (\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y})\vec{e}_z
-\]
-
-\emph{Critical Point} (\S\ref{sec:critical_point}): Gradient equal to the Zero
-Vector; cf. Maxima, Minima, Saddle Points (\S\ref{sec:saddle_point})
-
-(\emph{Local Optimality Conditions} \S\ref{sec:objective_function}) generally a
-Real Function $f$ on $n$ Real Variables has local Minimum at $\vec{x}^*$ if its
-Gradient $\nabla f$ is Zero and its Hessian Matrix (\S\ref{sec:hessian_matrix})
-$H(f(\vec{x}^*))$ of Second-order Partial Derivatives is Positive Semi-definite
-(\S\ref{sec:positive_semidefinite}) at that Point:
-\begin{align*}
-  \nabla f(\vec{x}^*) & =    \vec{0} \\
-  H(f(\vec{x}^*))     & \geq \vec{0} \\
-\end{align*}
-
-
-
-\paragraph{Gradient Flow}\label{sec:gradient_flow}\hfill
-
-cf. Flow (\S\ref{sec:flow}), Vector Flow (\S\ref{sec:vector_flow})
-
-Geometric Flow (\S\ref{sec:geometric_flow})
-
-
-
-\subsubsection{Jacobian}\label{sec:jacobian}
-
-For $f$ a Function of several variables $\vec{x} \in \reals^m$, the First-order
-Partial Derivatives of the Components of $f$ form an $n \times m$ Matrix called
-the \emph{Jacobian Matrix} (\S\ref{sec:jacobian}) of $f$.
-
-a Square Jacobian Matrix and its Determinant (\S\ref{sec:jacobian_determinant})
-are both called ``the Jacobian''
-
-generalizes the Gradient (\S\ref{sec:gradient}) of a Scalar-valued Function of
-multiple Variables: the Jacobian of a Scalar-valued Multivariable Function is
-the Gradient, and the Jacobian of a Scalar-valued Single Variable Function is
-its Derivative
-
-for a Multivariate Real-valued Function, the Jacobian Matrix
-(\S\ref{sec:jacobian}) reduces to the Gradient Vector
-
-\fist the Jacobian Matrix for a System of DAEs (\S\ref{sec:dae_system}) is
-a Singular (Non-invertible) Matrix (\S\ref{sec:singular_matrix})
-
-\fist Locally Linear Transformation (\S\ref{sec:locally_linear})
-
-\fist Local Linearization (\S\ref{sec:linearization})
-
-the Absolute Condition Number (\S\ref{sec:absolute_condition_number}),
-$\hat{k}$, of a Differentiable Function $f(x)$ is equal to the Matrix Norm
-(\S\ref{sec:matrix_norm}) of its Jacobian Matrix $J$:
-\[
-  \hat{k} = \|J(x)\|
-\]
-
-
-
-\paragraph{Jacobian Determinant}\label{sec:jacobian_determinant}\hfill
-
-
-
-\subsubsection{Hessian}\label{sec:hessian}
-
-Matrix of all Second-order Partial Derivatives (\S\ref{sec:partial_derivative})
-of a Scalar-valued Function or Scalar Field
-
-\fist Quadratic Approximation (\S\ref{sec:quadratic_approximation})
-
-(\emph{Local Optimality Conditions} \S\ref{sec:objective_function}) generally a
-Real Function $f$ on $n$ Real Variables has local Minimum at $\vec{x}^*$ if its
-Gradient (\S\ref{sec:gradient}) $\nabla f$ is Zero and its Hessian Matrix
-$H(f(\vec{x}^*))$ is Positive Semi-definite (\S\ref{sec:positive_semidefinite})
-at that Point:
-\begin{align*}
-  \nabla f(\vec{x}^*) & = \vec{0}    \\
-  H(f(\vec{x}^*))     & \geq \vec{0} \\
-\end{align*}
-
-
-
-\subsubsection{Divergence}\label{sec:divergence}
-
-wiki:
-
-the \emph{Divergence} of a Vector Field (\S\ref{sec:vector_field})
-$\vec{v}(x,y,z) = v_x\vec{e}_x + v_y\vec{e}_y + v_z\vec{e}_z$ is a
-Scalar-valued Function (\S\ref{sec:scalar_function}):
-\[
-  \nabla \cdot \vec{v} =
-    \frac{\partial v_x}{\partial x} +
-    \frac{\partial v_y}{\partial y} +
-    \frac{\partial v_z}{\partial z}
-\]
-where $\nabla$ is the Gradient Operator (\S\ref{sec:gradient})
-
-\emph{Convergence}
-
-...
-
-\[
-  \vec{v}(x,y,z) = \begin{bmatrix}
-    p(x,y,z) \\
-    q(x,y,z) \\
-    r(x,y,z)
-  \end{bmatrix}
-\]
-
-\[
-  div\vec{v}(x,y,z)
-    = \frac{\partial{p}}{\partial{x}}
-    + \frac{\partial{q}}{\partial{y}}
-    + \frac{\partial{r}}{\partial{z}}
-\]
-
-the Laplacian (\S\ref{sec:laplacian}) is the Divergence of the Gradient Field
-of $f$: $\nabla \bullet \nabla f$
-
-Green's Theorem (\S\ref{sec:greens_theorem}):
-
-TODO
-
-
-
-\paragraph{Laplacian}\label{sec:laplacian}\hfill
-
-\fist cf. Laplace Operator (\S\ref{sec:laplace_operator}), Laplace Transform
-(\S\ref{sec:laplace_transform}) %FIXME: same concepts?
-
-the \emph{Laplacian}, $\Delta$, is the Divergence (\S\ref{sec:divergence}) of
-the Gradient Field of $f$:
-\[
-  \Delta f = \nabla \bullet \nabla f
-\]
-
-analog of Second Derivative for Scalar-valued Multivariable Functions
-
-\[
-  \frac{\partial^2 f}{\partial{x_1^2}} +
-  \frac{\partial^2 f}{\partial{x_2^2}} +
-  \cdots +
-  \frac{\partial^2 f}{\partial{x_n^2}}
-\]
-
-the Laplacian of a \emph{Harmonic Function} (\S\ref{sec:harmonic_function}) is
-Zero everywhere; intuitively this means that the average value of Neighbors for
-a given Point is equal to that Point
-
-a Conformal Map (\S\ref{sec:conformal_map}) only changes the Laplacian by a
-non-negative factor
-
-
-
-\subsubsection{Curl}\label{sec:curl}
-
-wiki:
-
-the \emph{Curl} of a Vector Field (\S\ref{sec:vector_field}) $\vec{v}(x,y,z) =
-v_x\vec{e}_x + v_y\vec{e}_y + v_z\vec{e}_z$ is a Vector-valued Function
-(\S\ref{sec:vector_function}):
-\[
-  \nabla\times\vec{v} =
-    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x -
-    (\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x})\vec{e}_y +
-    (\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y})\vec{e}_z
-\]
-where $\nabla$ is the Gradient Operator (\S\ref{sec:gradient}) associating each
-Point in the Vector Field with the proportional ``on-axis'' Torque to which a
-``tiny pinwheel'' would be subjected if it were centered at the Point and can
-be realized as a Pseudo-determinant (\S\ref{sec:pseudo_determinant}):
-
-TODO
-
-Right-hand Rule
-
-Counter-clockwise: Positive
-
-Clockwise: Negative
-
-Tangency ?
-
-Green's Theorem (\S\ref{sec:greens_theorem}) -- FIXME: relation to curl ???
-
-Stokes' Theorem (\S\ref{sec:stokes_theorem})
-
-\[
-  \oint_C \vec{f} d\vec{r}
-    = \iint_S ((\nabla \times \vec{f}) \bullet \hat{n}_S) d\vec{S}
-\]
-
-
-
-\subsubsection{Local Linearization}\label{sec:linearization}
-
-\emph{Linearization} -- finding the Linear Approximation
-(\S\ref{sec:linear_approximation}) of a Function at a given Point
-
-\fist cf. Locally Linear Transformation (\S\ref{sec:locally_linear})
-
-$L(x_0,y_0) = f(x_0,y_0)$
-
-$\frac{\partial{L}}{\partial{x}} = f_x(x_0,y_0)$
-
-$\frac{\partial{L}}{\partial{y}} = f_y(x_0,y_0)$
-
-a Quadratic Approximation (\S\ref{sec:quadratic_approximation}) adds Quadratic
-Terms so that the Second Partial Derivative matches the original Function at
-that Point
-
-\fist Jacobian Matrix (\S\ref{sec:jacobian})
-
-Matrix form:
-\[
-  \nabla f(\vec{x}_0) \bullet (\vec{x}-\vec{x}_0)
-\]
-(FIXME: correct ???)
-
-
-
-\subsubsection{Quadratic Approximation}\label{sec:quadratic_approximation}
-
-add Quadratic Terms to a Local Linearization so that Second Derivative matches
-the original Function at that Point
-
-$\frac{\partial^2{Q}}{\partial{x^2}}(x_0,y_0) =
-  \frac{\partial^2{f}}{\partial{x^2}}(x_0,y_0)$
-
-$\frac{\partial^2{Q}}{\partial{y}\partial{x}}(x_0,y_0) =
-  \frac{\partial^2{f}}{\partial{y}\partial{x}}(x_0,y_0)$
-
-$\frac{\partial^2{Q}}{\partial{y^2}}(x_0,y_0) =
-  \frac{\partial^2{f}}{\partial{y^2}}(x_0,y_0)$
-
-\fist Hessian Matrix (\S\ref{sec:hessian_matrix}) $\mathbf{H}$ -- Matrix of
-Second-order Partial Derivatives
-
-\fist Definite Quadratic (\S\ref{sec:definite_quadratic}), Positive-definite
-Matrices (\S\ref{sec:positive_definite})
-
-Matrix form:
-\[
-  Q_f(\vec{x}) = f(\vec{x}_0) + \nabla{f(\vec{x}_0)}\bullet (\vec{x}-\vec{x}_0)
-  + \frac{1}{2}(\vec{x}-\vec{x}_0)^T\mathbf{H}_f(\vec{x}_0)(\vec{x}-\vec{x}_0)
-\]
-
-
-
-\subsubsection{Integral Theorems of Vector Calculus}
-\label{sec:integral_theorems}
-
-cf. Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
-
-
-
-\paragraph{Gradient Theorem}\label{sec:gradient_theorem}\hfill
-
-\paragraph{Stoke's Theorem}\label{sec:stokes_theorem}\hfill
-
-\fist Green's Theorem (\S\ref{sec:greens_theorem})
-
-Curl (\S\ref{sec:curl})
-
-Simple Closed Piecewise Smooth Boundary $C$
-
-Piecewise Smooth Surface $S$
-
-\[
-  \oint_C \vec{f} d\vec{r}
-    = \iint_S ((\nabla \times \vec{f}) \bullet \hat{n}) d\vec{S}
-\]
-
-\fist 3D Divergence Theorem (\S\ref{sec:divergence_theorem})
-
-
-
-\paragraph{Divergence Theorem}\label{sec:divergence_theorem}\hfill
-
-2D Divergence Theorem \fist cf. Green's Theorem (\S\ref{sec:greens_theorem})
-
-3D Divergence Theorem \fist cf. Stokes' Theorem (\S\ref{sec:stokes_theorem})
-
-``simple solid regions''
-
-
-
-% --------------------------------------------------------------------
-\subsection{Matrix Calculus}\label{sec:matrix_calculus}
-% --------------------------------------------------------------------
-
-\subsubsection{Matrix Derivative}\label{sec:matrix_derivative}
-
-(wiki):
-
-e.g. for a Quadratic Form augmented with Linear Terms, $x^TAx + 2b^Tx$, the
-First-order Conditions for a Maximum or a Minimum are found by setting the
-Matrix Derivative to the Zero Vector:
-\[
-  2Ax + 2b = 0
-\]
-giving:
-\[
-  x = -A^{-1}b
-\]
-assuming $A$ is Non-singular (Invertible); if the Quadratic Form (and hence
-$A$) are Positive Definite, then the Second-order Conditions for a
-Minimum are met at the Point
-
-
-
-% --------------------------------------------------------------------
-\subsection{Tensor Calculus}\label{sec:tensor_calculus}
-% --------------------------------------------------------------------
-
-or \emph{Tensor Analysis}
-
-
-
-\subsubsection{Tensor}\label{sec:linear_tensor}
-
-wikipedia: Geometric Objects (???) that describe Linear Relations
-between Scalars, Vectors and other Tensors; Linear Relations such as
-Dot Product, Cross Product, Linear Maps
-
-%FIXME: merge with sec:tensor ???
-
-\fist Tensor (Abstract Algebra \S\ref{sec:tensor})
-
-\fist Metric Tensor (\S\ref{sec:metric_tensor})
-
-must be independent of a particular choice of Coordinate System
-(Coordinate-free \S\ref{sec:coordinate_free}): the particular Covariant
-Transformation Law (\S\ref{sec:covariant_transformation}) determines
-the \emph{Valence} (\S\ref{sec:valence}) of a Tensor
-
-may be represented by:
-\begin{itemize}
-  \item Multidimensional Arrays (Basis Independence not apparent)
-  \item Multilinear Maps (intrinsic Basis Independence)
-  \item Elements of (Abstract) Tensor Products
-\end{itemize}
-
-\fist
-\url{https://jeremykun.com/2014/01/17/how-to-conquer-tensorphobia/}
-%FIXME cite
-
-Tensors are Elements (Vectors) of a Vector Space given by
-combining two ``smaller'' Vector Spaces via a Tensor Product
-
-$v \otimes w \in V \otimes W$
-
-Scalar Multiplication: $s(v \otimes w) = (sv \otimes w) = (v \otimes
-sw)$; generalizing to  $n$-fold Tensor Products, Scalars can be moved
-around all the coordinates freely
-
-Addition Operation: $(v \otimes w) + (v' \otimes w) = (v + v') \otimes
-w)$ \emph{or} $(v \otimes w) + (v \otimes w') = v \otimes (w + w')$,
-otherwise $(x \otimes y) + (z \otimes w)$ is a ``new'' Tensor
-(Vector); generalizing to $n$-fold Tensor Products, Addition can be
-combined if all but one of the coordinates are the same in the
-Addends.
-
-Element of a Tensor Space $V_1 \otimes \cdots \otimes V_n$ as a Sum:
-\[
-  \Sigma_k a_{1,k} \otimes a_{2,k} \otimes cdots \otimes a_{n,k}
-\]
-
-A Rank $1$ or \emph{Pure Tensor} is one that can be expressed as a
-One-term Sum, i.e. just $a_1 \otimes \cdots \otimes a_n$
-
-
-\asterism
-
-
-represented as an ``organized'' Multidimensional Array of Numerical
-(?Scalar) Values
-
-\emph{Order} (or \emph{Degree}) of a Tensor $x$ is the
-Dimensionality of the Array needed to represent it or equivalently the
-minimum number of Terms to represent $x$ as a Sum of Pure Tensors (the
-Zero Element is Order $0$ by convention).
-
-Order $0$ Tensor -- Scalar (\S\ref{sec:scalar})
-
-Order $1$ Tensor -- Vector (\S\ref{sec:vector})
-
-Order $2$ Tensor -- Linear Map (\S\ref{sec:linear_transformation}) ?
-%FIXME correct?
-
-Computing Tensor Order is $NP$-hard when $k = \rats$ and $NP$-complete
-when $k$ is a Finite Field %FIXME
-
-
-\asterism
-
-
-Multilinear Maps
-
-
-\asterism
-
-
-a Type (\S\ref{sec:valence}) $(n,m)$ Tensor $T$ is defined as an
-Element of the Tensor Product (\S\ref{sec:tensor_product}) of Vector
-Spaces $V$ and Dual Spaces $V^*$:
-\[
-  T \in V_1 \otimes \cdots \otimes V_n
-    \otimes V^*_1 \otimes \cdots \otimes V^*_m
-\]
-
-the Tensor Product is Initial with respect to Multilinear Mappings
-from the Direct Product
-
-Tensors (Abstract Algebra \S\ref{sec:tensor})
-
-Tensor Products (Category Theory \S\ref{sec:tensor_product}):
-\begin{itemize}
-  \item Modules
-  \item Vector Spaces
-  \item Graded Vector Spaces
-  \item $R$-algebras
-  \item Sheaves of Modules
-  \item Quadratic Forms
-  \item Multilinear Form
-  \item Topological Vector Spaces
-\end{itemize}
-are characterized by the Universal Property that they are the ``Freest''
-(\S\ref{sec:free_object}) Bilinear Operators in each context
-(FIXME: clarify)
-
-Monoidal Category (\S\ref{sec:monoidal_category}): general context for
-Tensor Products
-
-
-
-\subsubsection{Module Tensor Product}\label{sec:module_tensor_product}
-
-Balanced Product
-
-\fist Tensor Product (\S\ref{sec:tensor_product})
-
-
-
-\subsubsection{Valence}\label{sec:valence}
-
-precise Covariant Transformation Law
-(\S\ref{sec:covariant_transformation}) determines the \emph{Valence}
-(or \emph{Type}) of a Tensor
-
-Tensor Type: Pair of Natural Numbers $(n,m)$ where $n$ is the number
-of Contravariant Indicies and $m$ is the number of Covariant Indices
-
-\emph{Total Order} is the sum of $n$ and $m$
-
-
-
-\subsubsection{Tensor Field}\label{sec:tensor_field}
-
-Tensor assigned to each Point in a Space
-
-cf. Scalar Field (\S\ref{sec:scalar_field})
-
-cf. Vector Field (\S\ref{sec:vector_field})
-
-
-
-\subsubsection{Tensor Algebra}\label{sec:tensor_algebra}
-
-of a Vector Space
-
-
-
-\subsubsection{Eigenconfiguration}\label{sec:eigenconfiguration}
-
-\subsubsection{Ricci Calculus}\label{sec:ricci_calculus}
-
-\subsubsection{Spinor}\label{sec:spinor}
-
-
-
 % ====================================================================
 \section{Time-scale Calculus}\label{sec:timescale_calculus}
 % ====================================================================
@@ -5833,18 +5098,27 @@ $\Delta^{-1}_h$
 
 (wiki):
 
-A \emph{Differential Equation} is an Equation relating the Values of an \emph{Unknown
-  Function} (\S\ref{sec:unknown_function}) of one or more Variables to its
-\emph{Derivatives} (\S\ref{sec:derivative}) of various Orders.
+A \emph{Differential Equation} is an Equation relating the Values of an
+\emph{Unknown Function} (\S\ref{sec:unknown_function}) of one or more
+Independent Variables to its \emph{Derivatives} (\S\ref{sec:derivative}) of
+various Orders.
 
 types of Differential Equations:
 \begin{itemize}
-  \item Ordinary (\S\ref{sec:ode}) / Partial (\S\ref{sec:partial})
+  \item Ordinary (ODE \S\ref{sec:ode}) / Partial (PDE \S\ref{sec:partial}) --
+    an ODE is an Equation containing an Uknown Function of a single Real or
+    Complex Variable, $x$, 
   \item Linear (\S\ref{sec:linear_differential_equation}) /
     Non-linear (\S\ref{sec:nonlinear_differential_Equation})
   \item Homogeneous (\S\ref{sec:homogeneous_differential_equation}) /
     Inhomogeneous (\S\ref{sec:inhomogeneous_differential_equation})
-  \item ... MORE
+  \item ... MORE?
+\end{itemize}
+
+examples:
+\begin{itemize}
+\item $\deriv{u}{x} = cu + x^2$ -- First-order Linear Constant Coefficient
+  Ordinary Differential Equation
 \end{itemize}
 
 Witkin, Baraff - Siggraph '97 Course:
@@ -6551,3 +5825,786 @@ Steady State Condition (TODO)
 \paragraph{Stochastic Partial Differential Equation}\label{sec:spde}\hfill
 
 \fist Stochastic Differential Equation (\S\ref{sec:sde})
+
+
+
+% ====================================================================
+\section{Vector Calculus}\label{sec:vector_calculus}
+% ====================================================================
+
+or \emph{Vector Analysis}
+
+\fist cf. Linear Algebra (Part \ref{part:linear_algebra})
+
+Gradient, Divergence, Curl
+
+$\nabla$
+
+FIXME:
+
+Directional Derivative
+
+Laplacian
+
+Tensor Derivative
+
+
+
+% --------------------------------------------------------------------
+\subsection{Vector}\label{sec:linear_vector}
+% --------------------------------------------------------------------
+
+or \emph{Polar Vector}
+
+\fist Vector (Abstract Algebra \S\ref{sec:vector})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Pseudovector}\label{sec:pseudovector}
+% --------------------------------------------------------------------
+
+or \emph{Axial Vector}
+
+\fist Pure Imaginary Quaternion (\S\ref{sec:quaternion})
+
+Angular Velocity behaves like a Pseudovector
+
+(3 Dimensions) associated with Curl of a Polar Vector or Cross Product of two
+Polar Vectors
+
+equivalent to Three-dimensional Bivectors (\S\ref{sec:bivector})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Vector Function}\label{sec:vector_function}
+% --------------------------------------------------------------------
+
+\url{https://math.stackexchange.com/questions/662009/what-is-the-difference-between-vector-valued-functions-and-parametric-equations}:
+
+A (Real, potentially Multivariate) \emph{$n$-dimensional Vector Function} (or
+\emph{Vector-valued Function}) is a Map:
+\[
+  f : U \subset \reals^m \rightarrow V \subset \reals^n
+\]
+
+(wiki):
+
+For $U \subset \reals$, $f$ can be written as a Function of a Real Number $x$ or
+equivalently as individual Component Functions $f_1, f_2, \ldots, f_n$:
+\[
+  f(x) = (f_1(t), f_2(t), \ldots, f_n(t))
+\]
+Then the Derivative (\S\ref{sec:derivative}) can be written in terms of the
+Derivatives of the Coordinate Functions:
+\[
+  f'(x) = (f_1'(t), f_2'(t), \ldots, f_n'(t))
+\]
+
+For $f$ a Function of several variables $\vec{x} \in \reals^m$, the First-order
+Partial Derivatives of the Components of $f$ form an $n \times m$ Matrix called
+the \emph{Jacobian Matrix} (\S\ref{sec:jacobian}) of $f$.
+
+the Matrix of all First-order Partial Derivatives
+(\S\ref{sec:partial_derivative}) of a Vector Function is the \emph{Jacobian
+  Matrix} (\S\ref{sec:jacobian})
+
+\fist cf. a \emph{Parameterization} (\S\ref{sec:parameterization}) for a
+portion of a Submanifold $M$ in Euclidean Space is a Map:
+\[
+  \varphi : U \subset R^m \rightarrow M \subset R^n
+\]
+with additional Properties:
+\begin{itemize}
+  \item $U$ is an Open Set (\S\ref{sec:open_set})
+  \item $\varphi$ is a Homeomorphism (\S\ref{sec:homeomorphism}) onto its Image
+  \item everywhere the Rank of $D\varphi = m$ (FIXME: clarify)
+\end{itemize}
+i.e. a Parameterization is always in the form of a Vector Valued Function, but
+conversely Vector-valued Functions are used to Parameterize Varieties
+(\S\ref{sec:algebraic_variety}) %FIXME: clarify
+
+Partial Derivative of a Multivariable Vector-valued Function (TODO)
+
+
+
+\subsubsection{Root}\label{sec:function_root}
+
+A \emph{Root} (or \emph{Zero}) of a Vector-valued Function (including Real- or
+Complex-valued Functions) $f$ is an Element $x$ of the Domain of $f$ for which
+$f(x)$ is \emph{Zero}.
+
+\fist Root (Equations \S\ref{sec:equation_root})
+
+\fist Root-finding Algorithms (Numerical Analysis \S\ref{sec:root_finding}) for
+Solving Non-linear Equations:
+\begin{itemize}
+  \item Newton's Method (\S\ref{sec:newtons_method})
+  \item Linearization (\S\ref{sec:linearization})
+\end{itemize}
+
+Any Polynomial (\S\ref{sec:polynomial}) with Odd Degree has at least
+one Real Root.
+
+(wiki):
+
+The Fundamental Theorem of Algebra (\S\ref{sec:fundamental_algebra_theorem})
+states that every Polynomial of Degree $n$ has $n$ Complex Roots, counted with
+their Multiplicities (??? FIXME).
+
+\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial (one
+Variable with Complex Coefficients \S\ref{sec:monic_polynomial}), an Algebraic
+Object, is determined by the Set of its Roots, a Geometric Object, in the
+Complex Plane (\S\ref{sec:complex_plane}).
+
+\asterism
+
+\fist cf. Discrete First-order Dynamical Systems
+(\S\ref{sec:discrete_dynamical_system}) can be used to Numerically Solve
+Single-variable Equations-- the problem to be Solved consisting of finding the
+Roots of a Real Function $f$, i.e. the values of $x$ such that:
+\[
+  f(x) = 0
+\]
+For Equations that cannot be solved Analytically, the Numerical Method involves
+defining a Dynamical System with Convergent Sequences which approach Solutions
+to the Equation
+
+
+
+\paragraph{Zero Set}\label{sec:zero_set}\hfill
+
+\fist Algebraic Geometry (Part \ref{part:algebraic_geometry}): study of Zero
+Sets of Systems of Polynomial Equations
+(\S\ref{sec:polynomial_equation_system})
+
+e.g. the Circle (\S\ref{sec:n_sphere}) $S^1 = \{ (x,y) \in \reals^2 | x^2 + y^2
+- 1 = 0 \}$
+
+(wiki):
+
+any Closed Subset of $\reals^n$ is the Zero Set of a Smooth Function
+(\S\ref{sec:smooth_function}) on $\reals^n$
+
+an Affine Algebraic Set (Affine Variety \S\ref{sec:affine_variety}) is the
+Intersection of the Zero Sets of a number of Polynomials in a Polynomial Ring
+(\S\ref{sec:polynomial_ring}) $k[x_1,\ldots,x_n]$ over a Field
+
+
+
+\subsubsection{Vector Derivative}\label{sec:vector_derivative}
+
+Derivative (\S\ref{sec:derivative}) of a Vector-valued Function of a single Real
+Variable
+
+$r : \reals \rightarrow \reals^n$
+
+$\deriv{\vec{r}(t)}{t}$
+
+when the parameter is interpreted as Time, then the First Vector Derivative
+represents the \emph{Velocity} and the Second Vector Derivative represents the
+\emph{Acceleration}
+
+the Vector Derivative represents a change of \emph{Length} (cf. Norm
+\S\ref{sec:norm}) of the Vector
+
+cf. Directional Derivative (\S\ref{sec:directional_derivative})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Directional Derivative}\label{sec:directional_derivative}
+% --------------------------------------------------------------------
+
+$\frac{\partial{f}}{\partial{\vec{v}}}$
+
+$\nabla_{\vec{v}} f = \vec{v}\bullet \nabla{f}$
+
+Gradient (\S\ref{sec:gradient})
+
+for a Complex Function (\S\ref{sec:complex_function}) to have a Derivative, the
+Directional Derivative must exist in every direction and be the same
+
+Derivation of Quaternion Functions (\S\ref{sec:quaternion_function}) requires a
+Direction-dependent Derivative (FIXME: clarify)
+
+\fist generalized as Covariant Derivative (\S\ref{sec:covariant_derivative})
+
+cf. Vector Derivative (\S\ref{sec:vector_derivative})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Gradient}\label{sec:gradient}
+% --------------------------------------------------------------------
+
+Partial Derivative (\S\ref{sec:partial_derivative})
+
+Directional Derivative (\S\ref{sec:directional_derivative})
+
+Differential Operator (\S\ref{sec:differential_operator})
+
+(wiki):
+
+for a Multivariate Scalar-valued Function (\S\ref{sec:scalar_function}) $f(x_1,
+\ldots, x_n)$ on $\reals^n$ for which a Partial Derivative $\pderiv{f}{x_j}$
+exists for each Variable $x_j$ at a Point $a = (a_1, \ldots, a_n)$ the Partial
+Derivatives define the \emph{Gradient Vector} of $f$ as $a$:
+\[
+  \nabla{f}(a_1, \ldots, a_n) = \big( \pderiv{f}{x_1}(a_1, \ldots, a_n), \ldots,
+  \pderiv{f}{x_n}(a_1, \ldots, a_n) \big)
+\]
+
+the Gradient points in the \emph{direction} of greatest inscrease of the
+Function, and its magnitude is the \emph{slope} of the Graph in that direction
+
+the Gradient of a Scalar Field (\S\ref{sec:scalar_field}) $f$ is the Vector
+Derivative (\S\ref{sec:vector_derivative}):
+\[
+  \nabla f =
+    \frac{\partial f}{\partial x}\vec{e}_x +
+    \frac{\partial f}{\partial y}\vec{e}_y +
+    \frac{\partial f}{\partial z}\vec{e}_z
+\]
+that is, the Gradient of $f$ is a Vector Field (\S\ref{sec:vector_field})
+
+when a Vector Field is the Gradient Field of some Scalar Field
+(\S\ref{sec:scalar_field}), it is a \emph{Conservative} (\emph{Path
+  Independent} \S\ref{sec:conservative_vector_field}) Vector Field and the Line
+Integral of any Path between two Points is equivalent and the Line Integral of
+a Closed Path from a Point to itself is Zero
+
+FIXME: Matrix of Derivatives, Vector Field of Row Vectors
+
+the Jacobian (\S\ref{sec:jacobian}) generalizes the Gradient of a Scalar-valued
+Function of multiple Variables to the Vector-valued
+(\S\ref{sec:vector_function}) case: the Jacobian of a Scalar-valued
+Multivariable Function is the Gradient, and the Jacobian of a Scalar-valued
+Single Variable Function is its Derivative (\S\ref{sec:derivative})
+
+Divergence (\S\ref{sec:divergence}) can be expressed as:
+\[
+  \nabla \cdot \vec{v} =
+    \frac{\partial v_x}{\partial x} +
+    \frac{\partial v_y}{\partial y} +
+    \frac{\partial v_z}{\partial z}
+\]
+
+the Laplacian (\S\ref{sec:laplacian}) is the Divergence of the Gradient Field
+of $f$: $\nabla \bullet \nabla f$
+
+Curl (\S\ref{sec:curl}) can be expressed as:
+\[
+  \nabla\times\vec{v} =
+    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x +
+    (\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x})\vec{e}_y +
+    (\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y})\vec{e}_z
+\]
+
+\emph{Critical Point} (\S\ref{sec:critical_point}): Gradient equal to the Zero
+Vector; cf. Maxima, Minima, Saddle Points (\S\ref{sec:saddle_point})
+
+(\emph{Local Optimality Conditions} \S\ref{sec:objective_function}) generally a
+Real Function $f$ on $n$ Real Variables has local Minimum at $\vec{x}^*$ if its
+Gradient $\nabla f$ is Zero and its Hessian Matrix (\S\ref{sec:hessian_matrix})
+$H(f(\vec{x}^*))$ of Second-order Partial Derivatives is Positive Semi-definite
+(\S\ref{sec:positive_semidefinite}) at that Point:
+\begin{align*}
+  \nabla f(\vec{x}^*) & =    \vec{0} \\
+  H(f(\vec{x}^*))     & \geq \vec{0} \\
+\end{align*}
+
+
+
+\subsubsection{Gradient Flow}\label{sec:gradient_flow}
+
+cf. Flow (\S\ref{sec:flow}), Vector Flow (\S\ref{sec:vector_flow})
+
+Geometric Flow (\S\ref{sec:geometric_flow})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Jacobian}\label{sec:jacobian}
+% --------------------------------------------------------------------
+
+For $f$ a Function of several variables $\vec{x} \in \reals^m$, the First-order
+Partial Derivatives of the Components of $f$ form an $n \times m$ Matrix called
+the \emph{Jacobian Matrix} (\S\ref{sec:jacobian}) of $f$.
+
+a Square Jacobian Matrix and its Determinant (\S\ref{sec:jacobian_determinant})
+are both called ``the Jacobian''
+
+generalizes the Gradient (\S\ref{sec:gradient}) of a Scalar-valued Function of
+multiple Variables: the Jacobian of a Scalar-valued Multivariable Function is
+the Gradient, and the Jacobian of a Scalar-valued Single Variable Function is
+its Derivative
+
+for a Multivariate Real-valued Function, the Jacobian Matrix
+(\S\ref{sec:jacobian}) reduces to the Gradient Vector
+
+\fist the Jacobian Matrix for a System of DAEs (\S\ref{sec:dae_system}) is
+a Singular (Non-invertible) Matrix (\S\ref{sec:singular_matrix})
+
+\fist Locally Linear Transformation (\S\ref{sec:locally_linear})
+
+\fist Local Linearization (\S\ref{sec:linearization})
+
+the Absolute Condition Number (\S\ref{sec:absolute_condition_number}),
+$\hat{k}$, of a Differentiable Function $f(x)$ is equal to the Matrix Norm
+(\S\ref{sec:matrix_norm}) of its Jacobian Matrix $J$:
+\[
+  \hat{k} = \|J(x)\|
+\]
+
+
+
+\subsubsection{Jacobian Determinant}\label{sec:jacobian_determinant}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Hessian}\label{sec:hessian}
+% --------------------------------------------------------------------
+
+Matrix of all Second-order Partial Derivatives (\S\ref{sec:partial_derivative})
+of a Scalar-valued Function or Scalar Field
+
+\fist Quadratic Approximation (\S\ref{sec:quadratic_approximation})
+
+(\emph{Local Optimality Conditions} \S\ref{sec:objective_function}) generally a
+Real Function $f$ on $n$ Real Variables has local Minimum at $\vec{x}^*$ if its
+Gradient (\S\ref{sec:gradient}) $\nabla f$ is Zero and its Hessian Matrix
+$H(f(\vec{x}^*))$ is Positive Semi-definite (\S\ref{sec:positive_semidefinite})
+at that Point:
+\begin{align*}
+  \nabla f(\vec{x}^*) & = \vec{0}    \\
+  H(f(\vec{x}^*))     & \geq \vec{0} \\
+\end{align*}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Divergence}\label{sec:divergence}
+% --------------------------------------------------------------------
+
+wiki:
+
+the \emph{Divergence} of a Vector Field (\S\ref{sec:vector_field})
+$\vec{v}(x,y,z) = v_x\vec{e}_x + v_y\vec{e}_y + v_z\vec{e}_z$ is a
+Scalar-valued Function (\S\ref{sec:scalar_function}):
+\[
+  \nabla \cdot \vec{v} =
+    \frac{\partial v_x}{\partial x} +
+    \frac{\partial v_y}{\partial y} +
+    \frac{\partial v_z}{\partial z}
+\]
+where $\nabla$ is the Gradient Operator (\S\ref{sec:gradient})
+
+\emph{Convergence}
+
+...
+
+\[
+  \vec{v}(x,y,z) = \begin{bmatrix}
+    p(x,y,z) \\
+    q(x,y,z) \\
+    r(x,y,z)
+  \end{bmatrix}
+\]
+
+\[
+  div\vec{v}(x,y,z)
+    = \frac{\partial{p}}{\partial{x}}
+    + \frac{\partial{q}}{\partial{y}}
+    + \frac{\partial{r}}{\partial{z}}
+\]
+
+the Laplacian (\S\ref{sec:laplacian}) is the Divergence of the Gradient Field
+of $f$: $\nabla \bullet \nabla f$
+
+Green's Theorem (\S\ref{sec:greens_theorem}):
+
+TODO
+
+
+
+\subsubsection{Laplacian}\label{sec:laplacian}
+
+\fist cf. Laplace Operator (\S\ref{sec:laplace_operator}), Laplace Transform
+(\S\ref{sec:laplace_transform}) %FIXME: same concepts?
+
+the \emph{Laplacian}, $\Delta$, is the Divergence (\S\ref{sec:divergence}) of
+the Gradient Field of $f$:
+\[
+  \Delta f = \nabla \bullet \nabla f
+\]
+
+analog of Second Derivative for Scalar-valued Multivariable Functions
+
+\[
+  \frac{\partial^2 f}{\partial{x_1^2}} +
+  \frac{\partial^2 f}{\partial{x_2^2}} +
+  \cdots +
+  \frac{\partial^2 f}{\partial{x_n^2}}
+\]
+
+the Laplacian of a \emph{Harmonic Function} (\S\ref{sec:harmonic_function}) is
+Zero everywhere; intuitively this means that the average value of Neighbors for
+a given Point is equal to that Point
+
+a Conformal Map (\S\ref{sec:conformal_map}) only changes the Laplacian by a
+non-negative factor
+
+
+
+% --------------------------------------------------------------------
+\subsection{Curl}\label{sec:curl}
+% --------------------------------------------------------------------
+
+wiki:
+
+the \emph{Curl} of a Vector Field (\S\ref{sec:vector_field}) $\vec{v}(x,y,z) =
+v_x\vec{e}_x + v_y\vec{e}_y + v_z\vec{e}_z$ is a Vector-valued Function
+(\S\ref{sec:vector_function}):
+\[
+  \nabla\times\vec{v} =
+    (\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z})\vec{e}_x -
+    (\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x})\vec{e}_y +
+    (\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y})\vec{e}_z
+\]
+where $\nabla$ is the Gradient Operator (\S\ref{sec:gradient}) associating each
+Point in the Vector Field with the proportional ``on-axis'' Torque to which a
+``tiny pinwheel'' would be subjected if it were centered at the Point and can
+be realized as a Pseudo-determinant (\S\ref{sec:pseudo_determinant}):
+
+TODO
+
+Right-hand Rule
+
+Counter-clockwise: Positive
+
+Clockwise: Negative
+
+Tangency ?
+
+Green's Theorem (\S\ref{sec:greens_theorem}) -- FIXME: relation to curl ???
+
+Stokes' Theorem (\S\ref{sec:stokes_theorem})
+
+\[
+  \oint_C \vec{f} d\vec{r}
+    = \iint_S ((\nabla \times \vec{f}) \bullet \hat{n}_S) d\vec{S}
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Local Linearization}\label{sec:linearization}
+% --------------------------------------------------------------------
+
+\emph{Linearization} -- finding the Linear Approximation
+(\S\ref{sec:linear_approximation}) of a Function at a given Point
+
+\fist cf. Locally Linear Transformation (\S\ref{sec:locally_linear})
+
+$L(x_0,y_0) = f(x_0,y_0)$
+
+$\frac{\partial{L}}{\partial{x}} = f_x(x_0,y_0)$
+
+$\frac{\partial{L}}{\partial{y}} = f_y(x_0,y_0)$
+
+a Quadratic Approximation (\S\ref{sec:quadratic_approximation}) adds Quadratic
+Terms so that the Second Partial Derivative matches the original Function at
+that Point
+
+\fist Jacobian Matrix (\S\ref{sec:jacobian})
+
+Matrix form:
+\[
+  \nabla f(\vec{x}_0) \bullet (\vec{x}-\vec{x}_0)
+\]
+(FIXME: correct ???)
+
+
+
+% --------------------------------------------------------------------
+\subsection{Quadratic Approximation}\label{sec:quadratic_approximation}
+% --------------------------------------------------------------------
+
+add Quadratic Terms to a Local Linearization so that Second Derivative matches
+the original Function at that Point
+
+$\frac{\partial^2{Q}}{\partial{x^2}}(x_0,y_0) =
+  \frac{\partial^2{f}}{\partial{x^2}}(x_0,y_0)$
+
+$\frac{\partial^2{Q}}{\partial{y}\partial{x}}(x_0,y_0) =
+  \frac{\partial^2{f}}{\partial{y}\partial{x}}(x_0,y_0)$
+
+$\frac{\partial^2{Q}}{\partial{y^2}}(x_0,y_0) =
+  \frac{\partial^2{f}}{\partial{y^2}}(x_0,y_0)$
+
+\fist Hessian Matrix (\S\ref{sec:hessian_matrix}) $\mathbf{H}$ -- Matrix of
+Second-order Partial Derivatives
+
+\fist Definite Quadratic (\S\ref{sec:definite_quadratic}), Positive-definite
+Matrices (\S\ref{sec:positive_definite})
+
+Matrix form:
+\[
+  Q_f(\vec{x}) = f(\vec{x}_0) + \nabla{f(\vec{x}_0)}\bullet (\vec{x}-\vec{x}_0)
+  + \frac{1}{2}(\vec{x}-\vec{x}_0)^T\mathbf{H}_f(\vec{x}_0)(\vec{x}-\vec{x}_0)
+\]
+
+
+
+% --------------------------------------------------------------------
+\subsection{Integral Theorems of Vector Calculus}
+\label{sec:integral_theorems}
+% --------------------------------------------------------------------
+
+cf. Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+
+
+
+\subsubsection{Gradient Theorem}\label{sec:gradient_theorem}
+
+\subsubsection{Stoke's Theorem}\label{sec:stokes_theorem}
+
+\fist Green's Theorem (\S\ref{sec:greens_theorem})
+
+Curl (\S\ref{sec:curl})
+
+Simple Closed Piecewise Smooth Boundary $C$
+
+Piecewise Smooth Surface $S$
+
+\[
+  \oint_C \vec{f} d\vec{r}
+    = \iint_S ((\nabla \times \vec{f}) \bullet \hat{n}) d\vec{S}
+\]
+
+\fist 3D Divergence Theorem (\S\ref{sec:divergence_theorem})
+
+
+
+\subsubsection{Divergence Theorem}\label{sec:divergence_theorem}
+
+2D Divergence Theorem \fist cf. Green's Theorem (\S\ref{sec:greens_theorem})
+
+3D Divergence Theorem \fist cf. Stokes' Theorem (\S\ref{sec:stokes_theorem})
+
+``simple solid regions''
+
+
+
+% ====================================================================
+\section{Matrix Calculus}\label{sec:matrix_calculus}
+% ====================================================================
+
+% --------------------------------------------------------------------
+\subsection{Matrix Derivative}\label{sec:matrix_derivative}
+% --------------------------------------------------------------------
+
+(wiki):
+
+e.g. for a Quadratic Form augmented with Linear Terms, $x^TAx + 2b^Tx$, the
+First-order Conditions for a Maximum or a Minimum are found by setting the
+Matrix Derivative to the Zero Vector:
+\[
+  2Ax + 2b = 0
+\]
+giving:
+\[
+  x = -A^{-1}b
+\]
+assuming $A$ is Non-singular (Invertible); if the Quadratic Form (and hence
+$A$) are Positive Definite, then the Second-order Conditions for a
+Minimum are met at the Point
+
+
+
+% ====================================================================
+\section{Tensor Calculus}\label{sec:tensor_calculus}
+% ====================================================================
+
+or \emph{Tensor Analysis}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Tensor}\label{sec:linear_tensor}
+% --------------------------------------------------------------------
+
+wikipedia: Geometric Objects (???) that describe Linear Relations
+between Scalars, Vectors and other Tensors; Linear Relations such as
+Dot Product, Cross Product, Linear Maps
+
+%FIXME: merge with sec:tensor ???
+
+\fist Tensor (Abstract Algebra \S\ref{sec:tensor})
+
+\fist Metric Tensor (\S\ref{sec:metric_tensor})
+
+must be independent of a particular choice of Coordinate System
+(Coordinate-free \S\ref{sec:coordinate_free}): the particular Covariant
+Transformation Law (\S\ref{sec:covariant_transformation}) determines
+the \emph{Valence} (\S\ref{sec:valence}) of a Tensor
+
+may be represented by:
+\begin{itemize}
+  \item Multidimensional Arrays (Basis Independence not apparent)
+  \item Multilinear Maps (intrinsic Basis Independence)
+  \item Elements of (Abstract) Tensor Products
+\end{itemize}
+
+\fist
+\url{https://jeremykun.com/2014/01/17/how-to-conquer-tensorphobia/}
+%FIXME cite
+
+Tensors are Elements (Vectors) of a Vector Space given by
+combining two ``smaller'' Vector Spaces via a Tensor Product
+
+$v \otimes w \in V \otimes W$
+
+Scalar Multiplication: $s(v \otimes w) = (sv \otimes w) = (v \otimes
+sw)$; generalizing to  $n$-fold Tensor Products, Scalars can be moved
+around all the coordinates freely
+
+Addition Operation: $(v \otimes w) + (v' \otimes w) = (v + v') \otimes
+w)$ \emph{or} $(v \otimes w) + (v \otimes w') = v \otimes (w + w')$,
+otherwise $(x \otimes y) + (z \otimes w)$ is a ``new'' Tensor
+(Vector); generalizing to $n$-fold Tensor Products, Addition can be
+combined if all but one of the coordinates are the same in the
+Addends.
+
+Element of a Tensor Space $V_1 \otimes \cdots \otimes V_n$ as a Sum:
+\[
+  \Sigma_k a_{1,k} \otimes a_{2,k} \otimes cdots \otimes a_{n,k}
+\]
+
+A Rank $1$ or \emph{Pure Tensor} is one that can be expressed as a
+One-term Sum, i.e. just $a_1 \otimes \cdots \otimes a_n$
+
+
+\asterism
+
+
+represented as an ``organized'' Multidimensional Array of Numerical
+(?Scalar) Values
+
+\emph{Order} (or \emph{Degree}) of a Tensor $x$ is the
+Dimensionality of the Array needed to represent it or equivalently the
+minimum number of Terms to represent $x$ as a Sum of Pure Tensors (the
+Zero Element is Order $0$ by convention).
+
+Order $0$ Tensor -- Scalar (\S\ref{sec:scalar})
+
+Order $1$ Tensor -- Vector (\S\ref{sec:vector})
+
+Order $2$ Tensor -- Linear Map (\S\ref{sec:linear_transformation}) ?
+%FIXME correct?
+
+Computing Tensor Order is $NP$-hard when $k = \rats$ and $NP$-complete
+when $k$ is a Finite Field %FIXME
+
+
+\asterism
+
+
+Multilinear Maps
+
+
+\asterism
+
+
+a Type (\S\ref{sec:valence}) $(n,m)$ Tensor $T$ is defined as an
+Element of the Tensor Product (\S\ref{sec:tensor_product}) of Vector
+Spaces $V$ and Dual Spaces $V^*$:
+\[
+  T \in V_1 \otimes \cdots \otimes V_n
+    \otimes V^*_1 \otimes \cdots \otimes V^*_m
+\]
+
+the Tensor Product is Initial with respect to Multilinear Mappings
+from the Direct Product
+
+Tensors (Abstract Algebra \S\ref{sec:tensor})
+
+Tensor Products (Category Theory \S\ref{sec:tensor_product}):
+\begin{itemize}
+  \item Modules
+  \item Vector Spaces
+  \item Graded Vector Spaces
+  \item $R$-algebras
+  \item Sheaves of Modules
+  \item Quadratic Forms
+  \item Multilinear Form
+  \item Topological Vector Spaces
+\end{itemize}
+are characterized by the Universal Property that they are the ``Freest''
+(\S\ref{sec:free_object}) Bilinear Operators in each context
+(FIXME: clarify)
+
+Monoidal Category (\S\ref{sec:monoidal_category}): general context for
+Tensor Products
+
+
+
+% --------------------------------------------------------------------
+\subsection{Module Tensor Product}\label{sec:module_tensor_product}
+% --------------------------------------------------------------------
+
+Balanced Product
+
+\fist Tensor Product (\S\ref{sec:tensor_product})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Valence}\label{sec:valence}
+% --------------------------------------------------------------------
+
+precise Covariant Transformation Law
+(\S\ref{sec:covariant_transformation}) determines the \emph{Valence}
+(or \emph{Type}) of a Tensor
+
+Tensor Type: Pair of Natural Numbers $(n,m)$ where $n$ is the number
+of Contravariant Indicies and $m$ is the number of Covariant Indices
+
+\emph{Total Order} is the sum of $n$ and $m$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Tensor Field}\label{sec:tensor_field}
+% --------------------------------------------------------------------
+
+Tensor assigned to each Point in a Space
+
+cf. Scalar Field (\S\ref{sec:scalar_field})
+
+cf. Vector Field (\S\ref{sec:vector_field})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Tensor Algebra}\label{sec:tensor_algebra}
+% --------------------------------------------------------------------
+
+of a Vector Space
+
+
+
+% --------------------------------------------------------------------
+\subsection{Eigenconfiguration}\label{sec:eigenconfiguration}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Ricci Calculus}\label{sec:ricci_calculus}
+% --------------------------------------------------------------------
+
+% --------------------------------------------------------------------
+\subsection{Spinor}\label{sec:spinor}
+% --------------------------------------------------------------------
