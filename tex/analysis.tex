@@ -505,6 +505,15 @@ Maclaurin Series:
   \sum_{n=0}^\infty f^{(n)}(0) \frac{x^n}{n!}
 \]
 
+truncated Taylor Series are used in the following Explicit Integrators
+(\S\ref{sec:explicit_integration}):
+\begin{itemize}
+  \item Euler Integration (First-order \S\ref{sec:euler_method})
+  \item (Explicit) Midpoint Integration (Second-order
+    \S\ref{sec:midpoint_method})
+  \item Runge-Kutta (Higher-orders \S\ref{sec:runge_kutta})
+\end{itemize}
+
 
 
 \paragraph{Binomial Series}\label{sec:binomial_series}\hfill
@@ -2155,9 +2164,11 @@ the current system state and a later system state:
   G(Y(t), Y(t + \Delta{t})) = 0
 \]
 
-First-order Methods -- (Explicit) Euler Method, Symplectic (Semi-implicit) Euler
+First-order Methods -- (Explicit) Euler Method (\S\ref{sec:euler_method}),
+Symplectic (Semi-implicit) Euler
 
-Second-order Methods
+Second-order Methods -- Midpoint Method (\S\ref{sec:midpoint_method}), Verlet
+Integration (\S\ref{sec:verlet_integration})
 
 Higher-order Methods
 
@@ -2171,9 +2182,117 @@ State of the System at the current Time, $Y(t)$:
   Y(t + \Delta{t}) = F(Y(t))
 \]
 
-Euler Method
 
-\fist Symplectic (Semi-implicit) Euler (\S\ref{sec:symplectic_integrator})
+
+\paragraph{Euler Method}\label{sec:euler_method}\hfill
+
+or \emph{Forward Euler Method}
+
+\fist cf. Symplectic (Semi-implicit) Euler (\S\ref{sec:symplectic_integrator})
+
+First-order Integrator
+
+(Witkin-Baraff97):
+
+$\vec{x}(t + \Delta{t}) = \vec{x}(t) + \Delta{t}f(\vec{x},t)$
+
+Initial Value for $\vec{x}$ denoted by $\vec{x}_0 = \vec{x}(t_0)$
+
+estimate of $\vec{x}$ at a later Time $t_0 + h$ denoted by $\vec{x}(t_0 + h)$
+where $h$ is the \emph{Stepsize Parameter}, computed by taking a Step in the
+Derivative Direction $\dot{\vec{x}}(t_0)$:
+\[
+  \vec{x}(t_0 + h) = \vec{x}_0 + h\dot{\vec{x}}(t_0)
+\]
+where $\dot{\vec{x}}(t) = f(\vec{x}, t)$ is computed by the Derivative Function
+$f$
+
+Instability: e.g. 1D Derivative Function $f = -kx$-- for $h > 1/k$ then
+$|\Delta{x}| > |x|$ so the Solution oscillates around Zero; beyond $h = 2/k$ the
+oscillation Diverges and the System ``blows up''
+
+the size of the Error depends Linearly on Step Size $h$
+
+assuming $\vec{x}(t)$ is Smooth, the exact value at the end of the Step is an
+Infinite Sum (Taylor Series \S\ref{sec:taylor_series}) involving the Value and
+its Derivatives at the beginning of the Step:
+\[
+  \vec{x}(t_0 + h) = \vec{x}(t_0) + h\dot{\vec{x}}(t_0) +
+    \frac{h^2}{2!}\ddot{\vec{x}}(t_0) + \cdots +
+    \frac{h^n}{n!}\pderiv{^n\vec{x}}{t^n} + \cdots
+\]
+so the Euler Method is a truncation of this Series to its first two Terms on the
+RHS, so it is only correct if all Derivatives above the First are Zero, i.e.
+only if $\vec{x}(t)$ is \emph{Linear}; since the Error is dominated by the
+leading Term $(h^2/2)\ddot{\vec{x}}(t_0)$, the Error can be described as Order
+$h$-squared:
+\[
+  \vec{x}(t_0 + h) = \vec{x}(t_0) + h\dot{\vec{x}}(t_0) + O(h^2)
+\]
+
+Midpoint Method (Modified Euler \S\ref{sec:midpoint_method}) -- correct within
+$O(h^3)$ but requires two Derivative Evaluations of $f$
+
+
+
+\paragraph{Midpoint Method}\label{sec:midpoint_method}\hfill
+
+\emph{Explicit Midpoint Method} or \emph{Modified Euler Method}
+
+\fist Implicit Midpoint Method (\S\ref{sec:implicit_midpoint})
+
+Second-order Runge-Kutta Integrator (\S\ref{sec:runge_kutta})
+
+(Witkin-Baraff97):
+
+retain an additional Term in the truncated Taylor Series
+(\S\ref{sec:taylor_series}):
+\[
+  \vec{x}(t_0 + h) = \vec{x}(t_0) + h\dot{\vec{x}}(t_0) +
+    \frac{h^2}{2}\ddot{\vec{x}}(t_0) + O(h^3)
+\]
+
+for an Autonomous Differential Equation $\dot{\vec{x}} = f(\vec{x}(t))$, using
+Chain Rule (\S\ref{sec:chain_rule}) gives:
+\[
+  \ddot{\vec{x}} = \pderiv{f}{\vec{x}}\dot{\vec{x}} = f' f
+\]
+to avoid evaluating $f'$, perform a Taylor Expansion of $f$:
+\[
+  f(\vec{x}_0 + \Delta{\vec{x}}) =
+    f(\vec{x}_0) + \Delta\vec{x}f'(\vec{x}_0) + O(\Delta\vec{x}^2)
+\]
+substituting $\Delta{\vec{x}} = \frac{h}{2} f(\vec{x}_0)$ and multiplying both
+sides by $h$ gives an Error of $O(h^3)$:
+\[
+  \frac{h^2}{2}\ddot{\vec{x}} + O(h^3) =
+    h(f(\vec{x}_0 + \frac{h}{2}f(\vec{x}_0)) - f(\vec{x}_0)
+\]
+and substituting this in the RHS of the truncated Taylor Series:
+\[
+  \vec{x}(t_0 + h) = \vec{x}(t_0) + h(f(\vec{x}_0 + \frac{h}{2}f(\vec{x}_0))
+\]
+which is a Formula that first evaluates an Euler Step and then performs a Second
+Derivative Evaluation at the Midpoint of the Step and using the Midpoint
+Evaluation to update $\vec{x}$
+
+
+
+\paragraph{Runge-Kutta Method}\label{sec:runge_kutta}\hfill
+
+\fist Implicit Runge-Kutta (\S\ref{sec:implicit_runge_kutta})
+
+\begin{itemize}
+  \item Midpoint Method (\S\ref{sec:midpoint_method}) -- 2nd-order Runge-Kutta
+\end{itemize}
+
+
+
+\paragraph{Verlet Integration}\label{sec:verlet_integration}\hfill
+
+Second-order Integrator
+
+\url{http://datagenetics.com/blog/july22018/index.html}
 
 
 
@@ -2187,6 +2306,24 @@ System at a later Time, $Y(t + \Delta{t})$:
 \]
 
 Backward Euler
+
+
+
+\paragraph{Implicit Midpoint Method}\label{sec:implicit_midpoint}\hfill
+
+simplest Collocation Method (\S\ref{sec:collocation_method}) and
+a Symplectic Integrator (\S\ref{sec:symplectic_integrator})
+
+Second-order Integrator
+
+\fist Explicit Midpoint Method (Modified Euler Method
+\S\ref{sec:midpoint_method})
+
+
+
+\paragraph{Implicit Runge-Kutta Method}\label{sec:implicit_runge_kutta}\hfill
+
+\fist Explicit Runge-Kutta (\S\ref{sec:runge_kutta})
 
 
 
@@ -2211,7 +2348,11 @@ forms the Subclass of Geometric Integrators that are by definition
 preserves the form of Hamilton's Equations (\S\ref{sec:hamiltonian_system})
 %FIXME xref
 
-Semi-implicit (Symplectic) Euler
+\begin{itemize}
+  \item Implicit Midpoint Method (\S\ref{sec:implicit_midpoint})
+  \item Semi-implicit (Symplectic) Euler (TODO: xref)
+  \item ...
+\end{itemize}
 
 
 
@@ -2223,6 +2364,16 @@ a \emph{Numerical Algorithm} is an implementation of a Numerical Method with an
 appropriate Convergence check
 
 TODO
+
+(Witkin-Baraff97): find \emph{Numerical Solutions} as opposed to \emph{Symbolic
+  Solutions} to Differential Equations: at each Time Step, perform one or more
+\emph{Derivative Evaluations} of the Derivative Function $f$ on the current
+numerical values of State $\vec{x}$ and Time $t$, which returns a numerical
+value for $\dot{\vec{x}}$ which is then used to increment $\vec{x}$
+
+(Villate06): There is no \emph{general method} to finding Solutions of any
+First-order ODE (\S\ref{sec:ode}) and in some cases known Solutions can only be
+evaluated with approximate Numerical Methods
 
 
 
@@ -2398,6 +2549,22 @@ Calculus of Finite Differences (\S\ref{sec:finite_differences_calculus})
 
 dominant approach to Numerical Solutions of Partial Differential Equations
 (\S\ref{sec:pde})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Collocation Method}\label{sec:collocation_method}
+% --------------------------------------------------------------------
+
+method for Numerical Solution of Differential
+(\S\ref{sec:differential_equation}) and Integral Equations
+(\S\ref{sec:integral_equation})
+
+\begin{itemize}
+  \item Implicit Midpoint Method (\S\ref{sec:implicit_midpoint}) -- simplest
+    Collocation Method
+  \item ...
+\end{itemize}
 
 
 
@@ -4059,6 +4226,13 @@ Additionally, for every $x$ in the Interval $(a,b)$:
 \fist Integral Theorems of Vector Calculus
 (\S\ref{sec:integral_theorems}) in Multivariable Calculus
 
+(Villate06): Solutions of an ODE (\S\ref{sec:ode}) of the form $y' = f(x)$
+follow from the Fundemental Theorem of Integral Calculus:
+\[
+  y(x) = \int f(x) \diffy{x} + c
+\]
+where $c$ is an arbitrary Constant
+
 
 
 \subsubsection{Darboux Integral}\label{sec:darboux_integral}
@@ -5255,12 +5429,17 @@ see also \emph{Systems of (Coupled) Differential Equations}:
   \item System of DAEs (Differential-algebraic Equations \S\ref{sec:dae_system})
 \end{itemize}
 
+(Villate06 \S 3.1): a Solution of an ODE is any Function $f$ of a single
+Variable which Satisfies the Differential Equation when \emph{substituted} for
+the Dependent Variable; Implicit form (TODO)
+
 Witkin, Baraff - Siggraph '97 Course:
 
 Differential Equations describe the Relation between an \emph{Unknown Function}
 and its \emph{Derivatives} (\S\ref{sec:derivative}) and \emph{Solving} a
 Differential Equation is to find a Function that Satisfies the Relation, and
-``some additional conditions as well''. (FIXME: clarify)
+typically while Satisfying ``some additional conditions as well''. (FIXME:
+clarify)
 
 \asterism
 
@@ -5290,7 +5469,8 @@ $x(t)$ on the Phase Space starting at some Point $x_0$.
 
 Extension, Maximal Solution, Global Solution, General Solution
 
-\fist Numerical Integration (\S\ref{sec:numerical_integration})
+\fist Numerical Integration (\S\ref{sec:numerical_integration}), Collocation
+Methods (\S\ref{sec:collocation_method})
 
 \fist Difference Equation (\S\ref{sec:difference_equation})
 
@@ -5332,6 +5512,16 @@ is an \emph{Order-$n$ Implicit Ordinary Differential Equation}.
 any ODE of Order greater than one can be rewritten as a (Coupled) System of
 First-order ODEs (\S\ref{sec:ode_system})
 
+(Villate06): Solutions of an ODE of the form $y' = f(x)$ follow from the
+Fundemental Theorem of Integral Calculus
+(\S\ref{sec:fundamental_calculus_theorem}):
+\[
+y(x) = \int f(x) \diffy{x} + c
+\]
+where $c$ is an arbitrary Constant. There is no \emph{general method} to finding
+Solutions of any First-order ODE and in some cases known Solutions can only be
+evaluated with approximate Numerical Methods (\S\ref{sec:numerical_method})
+
 \fist a \emph{Linear Differential Equation}
 (\S\ref{sec:linear_differential_equation}) is a Differential Equation defined
 by a Linear Polynomial (a Polynomial of Degree $1$) in the Unknown Function and
@@ -5349,7 +5539,8 @@ containing Unknown Multivariable Functions and their Partial Derivatives.
 
 A \emph{Solution} of an ODE $F$ is a Function $u : I \subset \reals \rightarrow
 \reals$ called an \emph{Integral Curve} (\S\ref{sec:integral_curve}) for $F$
-which is Tangent to the Slope Field defined by the ODE at every Point.
+which is Tangent to the Slope Field (\S\ref{sec:slope_field}) $f(x,y)$ defined
+by the ODE at every Point.
 
 For $F$ a Function of $t$, $y$, and Derivatives (\S\ref{sec:derivative}) of
 $y$, an Equation of the form:
@@ -5437,6 +5628,8 @@ A Solution to this IVP is Solution $x$ of the ODE $x' = f(t,x)$ such that the
 Initial Condition $x(t_0) = x_0$ is also satisfied. Such a Solution can be
 visualized as finding the Integral Curve (\S\ref{sec:integral_curve}) passing
 through the given Initial Condition Point.
+A Solution that goes through an Initial Condition Point is also called a
+\emph{Particular Solution}.
 
 A First-order Linear Differential Equation
 (\S\ref{sec:linear_differential_equation}) has the form:
@@ -5459,8 +5652,14 @@ Solution.
 
 \paragraph{Slope Field}\label{sec:slope_field}\hfill
 
-When the Differential Equation is represented as a Vector Field or Slope Field
-(\S\ref{sec:slope_field}), the corresponding Integral Curves
+or \emph{Direction Field}
+
+$f(x,y)$
+
+Points are shown with Slope equal to the Value of $f(x,y)$ at that Point
+
+When the Differential Equation is represented as a Vector Field
+(\S\ref{sec:vector_field}) or Slope Field, the corresponding Integral Curves
 (\S\ref{sec:integral_curve}) are Tangent to the Field at each point.
 
 
@@ -5562,6 +5761,45 @@ such that:
 \end{align*}
 then for any Non-zero $f_n(x)$ and $\{f_0,f_1,\ldots\}$ and $g$ are Continuous
 on some Interval containing $x_0$, $y$ is unique and exists
+
+(Witkin, Baraff - Siggraph '97 Course):
+
+canonical IVP:
+\[
+  \dot{\vec{x}} = f(\vec{x}, t)
+\]
+with known Function $f$, State $\vec{x}$, and
+$\dot{\vec{x}} = \deriv{\vec{x}}{t}$ the Time Derivative (Velocity) of $\vec{x}$
+
+Initial Conditions:
+\[
+  \vec{x}(t_0) = \vec{x}_0
+\]
+of Initial Value (State) $\vec{x}_0$ at Initial Point (Time) $t_0$
+
+a Trajectory of a Point $\vec{p}$ by $f$ forms an Integral Curve
+(\S\ref{sec:integral_curve}) of the Vector Field (\S\ref{sec:vector_field})
+defined by $f$
+
+note that if the Derivative Function $f$ depends directly on Time, then the
+Vector Field defined by $f$ will change over Time
+
+\emph{Numerical Methods}
+
+find \emph{Numerical Solutions} as opposed to \emph{Symbolic Solutions}
+
+at each Time Step, perform one or more \emph{Derivative Evaluations} of the
+Derivative Function $f$ on the current numerical values of State $\vec{x}$ and
+Time $t$, which returns a numerical value for $\dot{\vec{x}}$ which is then used
+to increment $\vec{x}$
+
+\begin{itemize}
+\item Euler's Method (\S\ref{sec:euler_method}) -- First-order
+\item Midpoint Method (\S\ref{sec:midpoint_method}) -- Second-order
+\item Runge-Kutta Integration (\S\ref{sec:midpoint_method}) -- Higher-orders
+\end{itemize}
+
+Adaptive Stepsizing
 
 
 
