@@ -42,6 +42,9 @@ Fractal Geometry (\S\ref{sec:fractal_geometry})
 
 Cobweb Plot; \fist Dynamical Systems (\S\ref{sec:dynamical_system})
 
+Fixed-point Iteration (\S\ref{sec:fixedpoint_iteration}) -- method of computing
+Fixed Points (\S\ref{sec:fixed_point}) of Iterated Functions
+
 
 
 \subsubsection{Functional Power}\label{sec:functional_power}
@@ -441,6 +444,28 @@ Integration (\S\ref{sec:functional_integration})
 
 \fist Complexity Theory (\S\ref{sec:complexity_theory})
 
+\asterism
+
+(Stay-Meredith16):
+
+Milner92 \cite{milner92} -- now ``standard'' presentation of a Computational
+Calculus:
+\begin{itemize}
+  \item Grammar (\S\ref{sec:formal_grammar}) describing the primary Data Type
+    over which \emph{Computations} are carried out
+  \item Structural Equivalence (\S\ref{sec:structural_equality}) used to erase
+    Syntactic differences that are ``irrelevant'' to Computation
+  \item Set of Rewrite Rules (\S\ref{sec:abstract_rewrite}) describing how to
+    ``realize'' Computation through Operations on Data Structures
+\end{itemize}
+generalizing the Generators and Relations Presentations
+(\S\ref{sec:presentation}) of Universal Algebra (\S\ref{sec:universal_algebra})
+with the Grammar replacing the Generators as the ``free construction'' and the
+Structural Equivalence replacing the Relations, and the Rewrite Rules providing
+the Computational Semantics (\S\ref{sec:computational_semantics})
+
+\asterism
+
 Guy Blelloch OPLSS18 (lectures)
 --
 Abstract Machine Models, Language-based Models
@@ -517,6 +542,17 @@ Model closer to code and Algorithms, closer in terms of Simulation Costs to
 
 \emph{Untyped $\lambda$-calculus} describes a Semantics for Computable
 Functions (\S\ref{sec:computable_function}).
+
+(Stay-Meredith16): $\lambda$-calculus is a paradigmatic model of Functional
+Programming with a single Data Type, the Lambda Term, described by a one-line
+Grammar, where Computation consists of repeatedly applying a single Rewrite Rule
+called $\beta$-reduction-- the Rewrite Rule matches the current Term to a
+pattern and rearranges parts of the Term and when the Term no longer matches the
+pattern the Rewriting stops and the resulting Term is taken as the ``answer'';
+cf. $\pi$-calculus (\S\ref{sec:pi_calculus}) as a paradigmatic model of
+Concurrent Programming with a structured Data Type called a ``Process''
+described by a simple Grammar and Computations carried out by repeated
+application of Rewrite Rules, primarily the $\mathsf{comm}$-rule
 
 \fist Equational Theory of $\beta\eta$-equivalence (\S\ref{sec:beta_eta})
 
@@ -2304,6 +2340,65 @@ all Properties of Distributed Computation can be expressed in terms of
 
 \fist Distributed Systems (\S\ref{sec:distributed_system})
 
+\asterism
+
+2013 - Meredith - Monadic Design Patterns for Distributed Programming, Pt. 1 -
+\url{https://www.youtube.com/watch?v=UFyhTEO2fYM}, Pt. 2 -
+\url{https://www.youtube.com/watch?v=-CcBuJxCeW8}:
+
+Functional Programming (Intuitionistic Logic) -- no Law of Excluded Middle
+
+one can show that $\neg(\neg A) \Rightarrow A$, but \emph{cannot show} that
+$A \Rightarrow \neg(\neg A)$
+
+thinking of the ``Negation Operation'' as a type of ``Closure Operation'': if
+you take a collection and apply a Closure Operation to the collection ``you may
+throw more stuff in''; once it's ``Closed'' if you apply the Closure Operation
+again, typically you get back that ``Closed'' entity, so everything that is in
+the Closed entity includes what was in the original collection, but the other
+way around may not hold-- (FIXME: clarify)
+
+in the ``Distributed'' setting, one can give a Constructive interpretation of
+the classical notion of the Law of Excluded Middle
+
+Duality between Data and Query
+
+no Data at the Key for a Query, store the \emph{Continuation} (what would be
+done with the Data) at the Key
+
+no Continuation at the Key for a (Data) Post, store the \emph{Data} at the Key
+
+when a Data and Continuation are found together
+
+Polarities: Produce/Consume
+
+Ephemeral/Persistent
+
+Persistent Data, Ephemeral Continuations -- standard Database Operations (Store,
+Read)
+
+Ephemeral/Persistent Data with Persistent Continuations -- Publish/Subscribe
+Operations
+
+Ephemeral Data, Ephemeral Continuation -- Put/Get ``item-level locking'' in a
+Distributed setting
+
+as a Logical principle (Data consistency constraint):
+
+$A$ -- a witness of $A$
+
+$\neg A$ -- expecting an $A$
+
+guarantees a Continuation will never be ``fired'' unless there is Data present
+
+correspondence in $\pi$-calculus
+
+Caires04 - \emph{Behavioral and Spatial Observations in a Logic for the
+  $\pi$-Calculus} -- Spatial Logic (\S\ref{sec:spatial_logic}),
+Spatial-Behavioral Types (\S\ref{sec:spatial_behavioral})
+
+``automatic'' load balancing
+
 
 
 \subsubsection{Safety}\label{sec:safety}
@@ -2356,6 +2451,8 @@ Process Equivalences (i.e. ``\emph{Substitutability}'' of Processes)
 
 2006 - Sangiorgi - \emph{The Bisimulation Proof Method: Enhancements and Open
   Problems}
+
+2010 - Meredith, Snyder - \emph{Knots as processes: a new kind of invariant}
 
 \url{https://johncarlosbaez.wordpress.com/2018/05/12/rchain/}: the definition
 of a Process Calculus must specify \emph{Structural Congruence} expressing the
@@ -2583,6 +2680,8 @@ Output
 
 Reachability Graph of Stochastic Petri Nets can be mapped directly to
 a Markov Process (\S\ref{sec:markov_process})
+
+\fist cf. Stochastic $\pi$-calculus (\S\ref{sec:stochastic_pi_calculus})
 
 
 
@@ -3117,12 +3216,18 @@ Recursion with a Session
 
 ``Name Passing (\S\ref{sec:name_passing}) Calculus''
 
+Caires04 - \emph{Behavioral and Spatial Observations in a Logic for the
+  $\pi$-Calculus} -- Spatial Logic (\S\ref{sec:spatial_logic}),
+Spatial-Behavioral Types (\S\ref{sec:spatial_behavioral})
+
 Milner93 - \emph{The Polyadic $\pi$-calculus: A tutorial}:
 
 ``The $\pi$-calculus is a Model of Concurrent Computation based on the notion of
 \emph{Naming}''
 
 \fist Namespace Logic (\S\ref{sec:namespace_logic})
+
+2010 - Meredith, Snyder - \emph{Knots as processes: a new kind of invariant}
 
 Labelled Transition Semantics $P \xrightarrow{\alpha} P'$
 
@@ -6133,6 +6238,21 @@ $Mix$, $BiCut$
 Geometry of Interaction (\S\ref{sec:interaction_geometry})
 
 Interaction Categories (\S\ref{sec:interaction_category})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Stochastic $\pi$-calculus}\label{sec:stochastic_pi_calculus}
+% --------------------------------------------------------------------
+
+2013 - Cardelli, Mardare - \emph{Stochastic Pi-calculus Revisited} -- version of
+Stochastic $\pi$-calculus with Semantics based on Measure Theory (Part
+\ref{part:measure_theory})
+
+\fist cf. Stochastic Petri Nets (\S\ref{sec:stochastic_petri_nets})
+
+cf. Stochastic Calculus (Calculus of Stochastic Processes
+\S\ref{sec:stochastic_calculus})
 
 
 

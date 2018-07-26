@@ -809,6 +809,12 @@ examples:
 
 
 
+\subsubsection{Concave Function}\label{sec:concave_function}
+
+\fist von Neumann Entropy (\S\ref{sec:vonneumann_entropy})
+
+
+
 \subsubsection{Level Set}\label{sec:level_set}
 
 a special case of a Fiber (\S\ref{sec:fiber})
@@ -2188,7 +2194,8 @@ State of the System at the current Time, $Y(t)$:
 
 or \emph{Forward Euler Method}
 
-\fist cf. Symplectic (Semi-implicit) Euler (\S\ref{sec:symplectic_integrator})
+\fist cf. Symplectic (Semi-implicit) Euler (\S\ref{sec:symplectic_integrator}),
+Backward (Implicit) Euler (\S\ref{sec:implicit_euler})
 
 First-order Integrator
 
@@ -2209,7 +2216,9 @@ $f$
 
 Instability: e.g. 1D Derivative Function $f = -kx$-- for $h > 1/k$ then
 $|\Delta{x}| > |x|$ so the Solution oscillates around Zero; beyond $h = 2/k$ the
-oscillation Diverges and the System ``blows up''
+oscillation Diverges and the System ``blows up''; this is an example of a
+``Stiff'' ODE (\S\ref{sec:stiff_equation}), for which Implicit Methods
+(\S\ref{sec:implicit_integration}) can be used to avoid instability
 
 the size of the Error depends Linearly on Step Size $h$
 
@@ -2305,7 +2314,51 @@ System at a later Time, $Y(t + \Delta{t})$:
   G(Y(t), Y(t + \Delta{t})) = 0
 \]
 
-Backward Euler
+(Witkin-Baraff97): used to find Solutions to ``Stiff'' ODEs
+(\S\ref{sec:stiff_equation}) what would otherwise diverge with Explicit
+Integration Methods (\S\ref{sec:explicit_integration})
+
+
+
+\paragraph{Implicit Euler Method}\label{sec:implicit_euler}\hfill
+
+or \emph{Backward Euler Method}
+
+$y_{n+1} = y_n + \Delta{t}f(t + \Delta{t}, y_{n+1})$
+
+the new approximation $y_{n+1}$ appears on both sides of the Equation, so the
+method needs to solve an Algebraic Equation (Polynomial Equation
+\S\ref{sec:polynomial_equation})-- for Non-stiff problems this can be done with
+Fixed-point Iteration (\S\ref{sec:fixedpoint_iteration})
+
+alternatively use a modification of Newton's Method (\S\ref{sec:newtons_method})
+
+(Witkin-Baraff97): use a Linear Approximation based on $f$'s Taylor Series,
+defining $\Delta{y} = y_{n+1} - y_n$:
+\[
+  y_n + \Delta{y} = y_n + \Delta{t}f(y_n + \Delta{y})
+\]
+or just:
+\[
+  \Delta{y} = \Delta{t}f(y_n + \Delta{y})
+\]
+and approximate $f(y_n + \Delta{y})$ by:
+\[
+  f(y_n) + f'(y_n)\Delta{y}
+\]
+(note $f'(y_n)$ is a Matrix), giving the approximation for $\Delta{y}$:
+\[
+  \Delta{y} = \Delta{t}(f(y_n) + f'(y_n)\Delta{y})
+\]
+rewriting as:
+\[
+  \Big(\frac{1}{\Delta{t}}I - f'(y_n)\Big)\Delta{y} = f(y_n)
+\]
+where $I$ is the Identity Matrix, solve for $\Delta{y}$:
+\[
+  \Delta{y} = \Big(\frac{1}{\Delta{t}}I - f'(y_n)\Big)^{-1}f(y_n)
+\]
+i.e. this involves solving a \emph{Linear System} at each step
 
 
 
@@ -2382,6 +2435,8 @@ evaluated with approximate Numerical Methods
 \subsubsection{Numerical Stability}\label{sec:numerical_stability}
 
 Property of an Algorithm
+
+Stiff Equations (\S\ref{sec:stiff_equation})
 
 
 
@@ -2768,14 +2823,16 @@ Method:
 
 \paragraph{Trust Region}\label{sec:trust_region}\hfill
 
-\paragraph{Line Search}\label{sec:line_search}\hfill
+\paragraph{Fixed-point Iteration}\label{sec:fixedpoint_iteration}\hfill
 
-\subparagraph{Backtracking Line Search}\label{sec:backtracking_line_search}
-\hfill
+method of computing Fixed Points (\S\ref{sec:fixed_point}) of Iterated Functions
+(\S\ref{sec:iterated_function})
 
 
 
 \paragraph{Newton's Method}\label{sec:newtons_method}\hfill
+
+or \emph{Newton-Raphson Method}
 
 UC Math 352 Lec. 22 - \url{https://www.youtube.com/watch?v=YGq1bRFDpHo} --
 Numerical Linear Algebra (Minimization Problem)
@@ -2794,6 +2851,14 @@ Equation (\S\ref{sec:difference_equation}):
 \]
 compared to the Iterative Method (\S\ref{sec:iterative_rootfinding}), the Fixed
 Points will always be \emph{Attractive}
+%FIXME: is this considered an iterative rootfinding ?
+
+
+
+\paragraph{Line Search}\label{sec:line_search}\hfill
+
+\subparagraph{Backtracking Line Search}\label{sec:backtracking_line_search}
+\hfill
 
 
 
@@ -4179,6 +4244,8 @@ Calculus
 \fist Numerical Anslysis (\S\ref{sec:numerical_analysis}) applied to Evaluating
 Integrals -- Numerical Integration (\emph{Quadrature}
 \S\ref{sec:numerical_integration})
+
+\fist It\^o Integral (Stochastic Calculus \S\ref{sec:ito_integral})
 
 is a Linear Operator (\S\ref{sec:linear_operator}) --FIXME: clarify
 
@@ -6171,6 +6238,14 @@ TODO
 
 
 
+\subsubsection{Stiff Equation}\label{sec:stiff_equation}
+
+Numerically Unstable (\S\ref{sec:numerical_stability}) when Solved using
+Explicit Methods (\S\ref{sec:explicit_integration});
+Solve using Implicit Methods (\S\ref{sec:implicit_integration}) instead
+
+
+
 \subsubsection{Singular Solution}\label{sec:singular_solution}
 
 \subsubsection{Bessel Function}\label{sec:bessel_function}
@@ -7086,3 +7161,21 @@ of a Vector Space
 % --------------------------------------------------------------------
 \subsection{Spinor}\label{sec:spinor}
 % --------------------------------------------------------------------
+
+
+
+% ====================================================================
+\section{Stochastic Calculus}\label{sec:stochastic_calculus}
+% ====================================================================
+
+%FIXME: move to probability theory ???
+
+cf. Stochastic $\pi$-calculus (\S\ref{sec:stochastic_pi_calculus})
+
+
+
+% --------------------------------------------------------------------
+\subsection{It\^o Calculus}\label{sec:ito_calculus}
+% --------------------------------------------------------------------
+
+\subsubsection{It\^o Integral}\label{sec:ito_integral}

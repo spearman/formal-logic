@@ -204,12 +204,125 @@ Algebra.
 
 Equational Logic (\S\ref{sec:equational_logic})
 
-two main Category Theoretic formulations of Universal Algebra:
+Equational Theories (\S\ref{sec:equational_theory})
 
+two main Category Theoretic formulations of Universal Algebra:
 \begin{enumerate}
   \item Lawvere Theories (\S\ref{sec:lawvere_theory})
   \item Monads (\S\ref{sec:monad})
 \end{enumerate}
+
+
+
+% --------------------------------------------------------------------
+\subsection{Presentation}\label{sec:presentation}
+% --------------------------------------------------------------------
+
+\emph{Generators} (\S\ref{sec:generator})
+
+\emph{Relations}
+
+\emph{Finitely Presented}
+
+(\S\ref{sec:string_rewriting})
+
+\emph{Semigroup Presentation}
+
+Category Presentation (\S\ref{sec:category_presentation})
+
+$T$-algebra Presentation (\S\ref{sec:t_algebra_presentation})
+
+\emph{Presented by Generators and Relations}: obtained from a
+Structure Freely Generated (???) by a Set of Generators and imposed
+Relations among the Generators.
+
+Free Algebra (\S\ref{sec:free_algebra})
+
+Free Monoid (\S\ref{sec:free_monoid})
+
+Free Monad (\S\ref{sec:free_monad})
+
+Free Category (\S\ref{sec:free_category})
+
+Free Functor (\S\ref{sec:free_functor})
+
+Free Object (\S\ref{sec:free_object})
+
+\asterism
+
+(Stay-Meredith16):
+
+Lawvere63: an Equational Theory (\S\ref{sec:equational_theory}) is a
+Presentation of a Category with Finite Products where all Objects are Powers of
+a single Generating Object (i.e. a Lawvere Theory \S\ref{sec:lawvere_theory})
+
+Milner92 \cite{milner92} -- now ``standard'' ``Presentation'' of a Computational
+Calculus (\S\ref{sec:computation_model}):
+\begin{itemize}
+  \item Grammar (\S\ref{sec:formal_grammar}) describing the primary Data Type
+    over which \emph{Computations} are carried out
+  \item Structural Equivalence (\S\ref{sec:structural_equality}) used to erase
+    Syntactic differences that are ``irrelevant'' to Computation
+  \item Set of Rewrite Rules (\S\ref{sec:abstract_rewrite}) describing how to
+    ``realize'' Computation through Operations on Data Structures
+\end{itemize}
+generalizing the Generators and Relations Presentations of Universal Algebra
+with the Grammar replacing the Generators as the ``free construction'' and the
+Structural Equivalence replacing the Relations, and the Rewrite Rules providing
+the Computational Semantics (\S\ref{sec:computational_semantics})
+
+
+
+\subsubsection{Finite Presentation}\label{sec:finite_presentation}
+\cite{awodey06}
+
+Generators: $g_1, \ldots, g_n$
+
+Relations: $l_1 = r_1, \ldots, l_m = r_m$
+
+Coequalizer (\S\ref{sec:coequalizer}):
+\[
+  F(m) {\xrightarrow[\quad\quad\quad]{l}
+    \atop \xrightarrow[r]{\quad\quad\quad}} F(n)
+  \xrightarrow{\quad\quad\quad} Q = F(n) / (l = r)
+\]
+where $l = [l_1, \ldots, l_m]$ and $r = [r_1, \ldots, r_m]$
+
+Finitely Presented Category (\S\ref{sec:finitely_presented})
+
+\url{https://golem.ph.utexas.edu/category/2017/04/gluing_together_finite_shapes.html}:
+
+Thm. \emph{In a Category of Algebras $\cat{C}$ (e.g. Models of a
+  Lawvere Theory), an Algebra $A$ is Finitely Presentable if and only
+  if the Hom-functor $\cat{C}(A,-)$ Commutes with Filtered Colimits}
+%FIXME xref filtered colimits
+
+
+
+\subsubsection{Recursive Presentation}\label{sec:recursive_presentation}
+
+\subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
+
+\subsubsection{Group Presentation}\label{sec:group_presentation}
+
+A \emph{Group Presentation} is the definition of a Group $G$ by a Set
+$S$ of Generators (\S\ref{sec:free_group}) and a Set $R$ of Relations
+between the Words in $S$ that represent the same Element of $G$:
+\[
+  \langle S | R \rangle
+\]
+The Group $G$ has this Presentation if it is Isomorphic to the
+Quotient (\S\ref{sec:quotient_group}) of a Free Group on $S$. The Set
+of Relations $R$ is said to \emph{Define} $G$ if every Relation in $G$
+follows from those in $R$.
+
+
+
+\subsubsection{Monoid Presentation}\label{sec:monoid_presentation}
+
+A \emph{Monoid Presentation} is a description of a Monoid in terms of
+a Set $\Sigma$ of Generators and a Set of Relations on the Free Monoid
+$\Sigma*$.
 
 
 
@@ -550,9 +663,10 @@ Axioms can be presented as $\top \vdash t = s$
 
 \subsubsection{Lawvere Theory}\label{sec:lawvere_theory}
 
-A \emph{Lawvere Theory} (or \emph{Finite-product Theory}) is a Small Category
-(\S\ref{sec:small_category}) $\cat{L}$ with (Strictly Associative) Finite
-Products and a Strict Identity-on-objects Functor $I : \aleph_0^{op}
+A \emph{Lawvere Theory} (or \emph{Finite-product Theory}) is (equivalently
+encoded by its Syntactic Category \S\ref{sec:syntactic_category}) as a Small
+Category (\S\ref{sec:small_category}) $\cat{L}$ with (Strictly Associative)
+Finite Products and a Strict Identity-on-objects Functor $I : \aleph_0^{op}
 \rightarrow \cat{L}$ Preserving Finite Products, where $\aleph_0$ is a Skeleton
 of $\cat{FinSet}$, i.e. it is a Category with Finite Cartesian Products and a
 distinguished Object $X$ such that every Object is a Power $X^n$, that is a
@@ -570,31 +684,31 @@ notion of Lawver Theory is Presentation (\S\ref{sec:presentation}) Independent,
 i.e. the Category of Models determines the Theory uniquely up to Coherent
 (\S\ref{sec:coherence_condition}) Isomorphism. \cite{hyland-power06}
 
-A \emph{Model} $M$ of a Lawvere Theory is Product-preserving Functor
-out of the Category (into a Category $\cat{C}$ with Finite Products):
+A \emph{Model} $M$ of a Lawvere Theory is Product-preserving Functor out of the
+Category (into a Category $\cat{C}$ with Finite Products):
 \[
   M : \cat{L} \rightarrow \cat{C}
 \]
 
-\emph{Morphism of Models} $h : M \rightarrow N$ is a Natural
-Transformation (\S\ref{sec:natural_transformation})
+\emph{Morphism of Models} $h : M \rightarrow N$ is a Natural Transformation
+(\S\ref{sec:natural_transformation})
 
-Equivalently encoded by a Syntactic Category
-(\S\ref{sec:syntactic_category}): Category with Finite Products such
-that all Objects are Finite Products of a given Object
+Equivalently encoded by a Syntactic Category (\S\ref{sec:syntactic_category}):
+Category with Finite Products such that all Objects are Finite Products of a
+given Object
 
-Every Object is Isomorphic to a Finite Cartesian Power $X^n = X \times
-\ldots \times X$ of a \emph{Generic Object} $X \in \cat{T}_0$
+Every Object is Isomorphic to a Finite Cartesian Power $X^n = X \times \ldots
+\times X$ of a \emph{Generic Object} $X \in \cat{T}_0$
 
-Hom-set $\cat{L}(n,1) := \cat{L}(x^n,x)$ is the Set of $n$-ary
-Operations Definable in the Theory.
+Hom-set $\cat{L}(n,1) := \cat{L}(x^n,x)$ is the Set of $n$-ary Operations
+Definable in the Theory.
 
 Dual to the Category of Finitely Generated Free Algebras of the Theory
 
 $\cat{Law}$ Category of Lawvere Theories
 
-$\cat{S}$ Syntactic Category on Objects $n \in \nats$ with Morphisms
-Generated by Projections $\pi_i : n \rightarrow 1$
+$\cat{S}$ Syntactic Category on Objects $n \in \nats$ with Morphisms Generated
+by Projections $\pi_i : n \rightarrow 1$
 
 $\cat{S} \simeq \cat{FinSet}^{op}$ Initial Object in $\cat{Law}$
 
@@ -605,6 +719,9 @@ Generators: Operations
 Relations: Axioms
 
 Finitary Monads (\S\ref{sec:finitary_monad}) on $\cat{Set}$
+
+every Lawvere Theory corresponds to a Finitary Monad on $\cat{Set}$ and
+vice-versa (Hyland-Power07)
 
 Operad Algebra (\S\ref{sec:operad_algebra})
 
@@ -618,6 +735,84 @@ Meredith-Stay17 - \emph{Name-free Combinators for Concurrency} --
 Combinator Calculus with no Bound Names into which Asynchronous
 $\pi$-calculus has a Faithful Embedding with Multisorted Lawvere
 Theories Enriched over Graphs as the Operational Semantics
+
+\asterism
+
+2016 - Stay, Meredith - \emph{Logic as a Distributive Law}
+
+Lawvere63: an Equational Theory is a \emph{Presentation}
+(\S\ref{sec:presentation}) of a Category with Finite Products
+where every Object is a Power of a single Generating Object, that is, a
+\emph{Lawvere Theory}
+
+for example, a Presentation of the Syntactic Category (Lawvere Theory) $Th(Mon)$
+of Monoids on a Sort $M$ with Nullary Term Constructor $e$ and Binary Term
+Constructor $*$ has Objects $1, M, M^2, M^3, \ldots$ and has Morphisms generated
+by ``Projections'' (FIXME: clarify) $e$ and $*$ modulo the Equations defining a
+Monoid (Associativity and Left and Right Identity)
+
+to \emph{Interpret} (\S\ref{sec:interpretation}) the Equational Theory as
+denoting Sets and Functions, use a Product-preserving Functor from the Lawvere
+Theory to $\cat{Set}$, mapping $M$ to a Set and $e$ and $*$ to Functions
+Satisfying the Equations
+
+if the Category $\cat{Vect}$ of Vector Spaces and Linear Maps is used to encode
+the Semantics instead of $\cat{Set}$, and the Product in $Th(Mon)$ is mapped to
+the Tensor Product in $\cat{Vect}$, then a Model of the Theory would be an
+Associative Algebra (\S\ref{sec:associative_algebra}) instead
+
+if the Category $\cat{End}(\cat{C})$ of Endofunctors and Natural Transformations
+of $\cat{C}$ is used, then a Model of the Theory would be a Monad
+(\S\ref{sec:monad})
+
+the Category of Product-preserving Functors from $Th(Mon)$ to $\cat{Set}$ and
+Natural Transformations between them is equivalent to the Category $\cat{Mon}$
+of Monoids and Monoid Homomorphisms
+
+every Lawvere Theory corresponds to a Finitary Monad on $\cat{Set}$ and
+vice-versa (Hyland-Power07)
+
+cf. ``modules'' or ``interfaces'' used to model Data Structures in computing:
+\begin{itemize}
+\item $\lambda$-calculus (\S\ref{sec:untyped_lambda}) is a paradigmatic model of
+  Functional Programming with a single Data Type, the Lambda Term, described by
+  a one-line Grammar, where Computation consists of repeatedly applying a single
+  Rewrite Rule called $\beta$-reduction-- the Rewrite Rule matches the current
+  Term to a pattern and rearranges parts of the Term and when the Term no longer
+  matches the pattern the Rewriting stops and the resulting Term is taken as the
+  ``answer''
+\item $\pi$-calculus (\S\ref{sec:pi_calculus}) as a paradigmatic model of
+  Concurrent Programming with a structured Data Type called a ``Process''
+  described by a simple Grammar and Computations carried out by repeated
+  application of Rewrite Rules, primarily the $\mathsf{comm}$-rule
+\end{itemize}
+
+cf. Milner92 \cite{milner92} for the now ``standard'' presentation of a
+Computational Calculus (\S\ref{sec:computation_model}):
+\begin{itemize}
+  \item Grammar (\S\ref{sec:formal_grammar}) describing the primary Data Type
+    over which \emph{Computations} are carried out
+  \item Structural Equivalence (\S\ref{sec:structural_equality}) used to erase
+    Syntactic differences that are ``irrelevant'' to Computation
+  \item Set of Rewrite Rules (\S\ref{sec:abstract_rewrite}) describing how to
+    ``realize'' Computation through Operations on Data Structures
+\end{itemize}
+
+capturing ``higher-order computational phenomena'', expressed as ``generalized
+Rewrites'' motivates a movement to Higher Categorical Semantics
+
+Lawvere Theories can be generalized from $1$-categories to $2$-categories where
+the corresponding notion of Equational Theory involves one more ``level of
+structure'':
+\begin{itemize}
+  \item Sorts
+  \item Term Constructors
+  \item Rewrites (instead of Equations beween Term Constructors)
+  \item Equations between Rewrites
+\end{itemize}
+
+such a Theory may be Interpreted in $\cat{Cat}$, the $2$-category of Categories,
+Functors, and Natural Transformations
 
 
 
@@ -753,95 +948,6 @@ Bisimulation Relation (\S\ref{sec:bisimulation})
 % --------------------------------------------------------------------
 
 %FIXME
-
-
-
-% ====================================================================
-\section{Presentation}\label{sec:presentation}
-% ====================================================================
-
-\emph{Generators} (\S\ref{sec:generator})
-
-\emph{Relations}
-
-\emph{Finitely Presented}
-
-(\S\ref{sec:string_rewriting})
-
-\emph{Semigroup Presentation}
-
-Category Presentation (\S\ref{sec:category_presentation})
-
-$T$-algebra Presentation (\S\ref{sec:t_algebra_presentation})
-
-\emph{Presented by Generators and Relations}: obtained from a
-Structure Freely Generated (???) by a Set of Generators and imposed
-Relations among the Generators.
-
-Free Algebra (\S\ref{sec:free_algebra})
-
-Free Monoid (\S\ref{sec:free_monoid})
-
-Free Monad (\S\ref{sec:free_monad})
-
-Free Category (\S\ref{sec:free_category})
-
-Free Functor (\S\ref{sec:free_functor})
-
-Free Object (\S\ref{sec:free_object})
-
-
-
-\subsubsection{Finite Presentation}\label{sec:finite_presentation}
-\cite{awodey06}
-
-Generators: $g_1, \ldots, g_n$
-
-Relations: $l_1 = r_1, \ldots, l_m = r_m$
-
-Coequalizer (\S\ref{sec:coequalizer}):
-\[
-  F(m) {\xrightarrow[\quad\quad\quad]{l}
-    \atop \xrightarrow[r]{\quad\quad\quad}} F(n)
-  \xrightarrow{\quad\quad\quad} Q = F(n) / (l = r)
-\]
-where $l = [l_1, \ldots, l_m]$ and $r = [r_1, \ldots, r_m]$
-
-Finitely Presented Category (\S\ref{sec:finitely_presented})
-
-\url{https://golem.ph.utexas.edu/category/2017/04/gluing_together_finite_shapes.html}:
-
-Thm. \emph{In a Category of Algebras $\cat{C}$ (e.g. Models of a
-  Lawvere Theory), an Algebra $A$ is Finitely Presentable if and only
-  if the Hom-functor $\cat{C}(A,-)$ Commutes with Filtered Colimits}
-%FIXME xref filtered colimits
-
-
-
-\subsubsection{Recursive Presentation}\label{sec:recursive_presentation}
-
-\subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
-
-\subsubsection{Group Presentation}\label{sec:group_presentation}
-
-A \emph{Group Presentation} is the definition of a Group $G$ by a Set
-$S$ of Generators (\S\ref{sec:free_group}) and a Set $R$ of Relations
-between the Words in $S$ that represent the same Element of $G$:
-\[
-  \langle S | R \rangle
-\]
-The Group $G$ has this Presentation if it is Isomorphic to the
-Quotient (\S\ref{sec:quotient_group}) of a Free Group on $S$. The Set
-of Relations $R$ is said to \emph{Define} $G$ if every Relation in $G$
-follows from those in $R$.
-
-
-
-\subsubsection{Monoid Presentation}\label{sec:monoid_presentation}
-
-A \emph{Monoid Presentation} is a description of a Monoid in terms of
-a Set $\Sigma$ of Generators and a Set of Relations on the Free Monoid
-$\Sigma*$.
 
 
 
@@ -3040,8 +3146,13 @@ Set of Units in any Ring is Closed under Multiplication
 
 \subsubsection{Nilpotent}\label{sec:nilpotent}
 
-An Element $x$ of a Ring $R$ is \emph{Nilpotent} if there is a
-positive Integer $n$ such that $x^n = 0$.
+An Element $x$ of a Ring $R$ is \emph{Nilpotent} if there is a positive Integer
+$n$ such that $x^n = 0$.
+
+\begin{itemize}
+  \item the Dual Numbers (\S\ref{sec:dual_number}) extend the Real Numbers with
+    a Nilpotent Element $\varepsilon$ such that $\varepsilon^2 = 0$
+\end{itemize}
 
 
 
