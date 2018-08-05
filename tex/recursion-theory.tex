@@ -389,6 +389,8 @@ Primitive Recursive Functions can be of four types: \cite{kleene52}
 
 $u : \mathbb{N}^2 \rightarrow \mathbb{N}$
 
+relation between Chaotic Systems and Universal Computation (FIXME)
+
 
 
 % ====================================================================
@@ -1667,6 +1669,29 @@ $\mathsf{pushSubCont}$ -- Syntactic Constructs
 
 Prompt, Frame
 
+\asterism
+
+(\url{https://www.youtube.com/watch?v=uN3hyzywzZk}): Delimited Continuations are
+\emph{Co-monadic} (\S\ref{sec:comonad}); Delimited Continuations arise from the
+notion of \emph{Evaluation Contexts}
+
+\emph{Shift}
+
+\emph{Reset}
+
+McBride08 - \emph{Clowns to the left of me, jokers to the right (pearl):
+  Dissecting data structures}
+
+(Co-monadic) notion of \emph{Derivative} for Polynomial
+Functors (TODO)
+
+Delmited Continuations arise from \emph{Reification} (Metalanguage to Language)
+of Evaluation Contexts
+
+First-class Continuations
+
+$D$-register, $E$-register
+
 
 
 % ====================================================================
@@ -1681,6 +1706,71 @@ Light Affine Lambda Calculus corresponds to the Complexity Class PTIME
 %FIXME
 
 Natural Proofs %FIXME
+
+\asterism
+
+\emph{Firewalls, AdS/CFT, and the Complexity of States and Unitaries: A Computer
+  Science Perspective}
+(video lectures)
+-
+\url{https://video.ias.edu/PiTP/2018/0719-ScottAaronson}
+
+Circuit Complexity (\S\ref{sec:circuit_complexity}) of a
+Unitary Transformation (\S\ref{sec:unitary_transformation})
+
+Circuit Complexity of an $n$-qubit Quantum State (\S\ref{sec:quantum_state})
+
+Circuit Complexity can play a similar role to Entropy (\S\ref{sec:entropy}) in
+``breaking Symmetries''
+
+Symmetry of Conditional Entropy (\S\ref{sec:conditional_entropy})
+
+modern Cryptography: Asymmetry between Multiplying and Factoring
+
+One-way Functions (TODO: xref): ``easy'' to Compute in forward direction and
+hard to Invert
+
+Injective OWF, One-way Permutation, Trapdoor OWF
+
+BQP, Post-selection
+
+\begin{quote}
+  If $P$ were equal to $NP$, then there could be no One-way Functions...because
+  Inverting a One-way Function is a perfect example of an $NP$ question, because
+  it's easy to check the answer if someone does it. We have many, many candidate
+  One-way Functions, it's just that for none of them has it been unconditionally
+  Proven that it's One-way. And it can't be, unless one first Proves $P \neq
+  NP$. Going in the converse direction has actually been an open problem for 40
+  years: could one show that One-way Functions exist under the sole assumption
+  that $P \neq NP$?
+\end{quote}
+
+\emph{Quantum Circuits}
+
+Part II: \url{https://www.youtube.com/watch?v=_i9zODajDuo}
+
+\emph{Reduction Arguments}
+
+\emph{Oracles}
+
+HH Decoding Problem
+
+Goldreich-Levin Theorem, Hard-core Predicates (TODO: xref)
+
+Unitary Synthesis Problem
+
+the Circuit Complexity of a State is not an Observable
+
+\url{https://video.ias.edu/PiTP/20180720-ScottAaronson} -- Reversible Cellular
+Automata (\S\ref{sec:cellular_automaton}): for any problem solvable with a
+Polynomial amount of Space (PSPACE Problem), making the Computation Reversible
+incurrs only a constant factor increase in the amount of space that is needed
+(1996 - Lange, McKenzie, Papp - \emph{Reversible Space Equals Deterministic
+  Space})
+
+
+\asterism
+
 
 Guy Blelloch OPLSS18 --
 
@@ -1771,11 +1861,17 @@ computable by Algorithm is a Computable Function
 
 
 % --------------------------------------------------------------------
-\subsection{Function Problem}\label{sec:function_problem}
+\subsection{Advice}\label{sec:advice}
 % --------------------------------------------------------------------
 
+$P/poly$ -- Complexity Class of Languages Recognized by a Polynomial-time Turing
+Machine with a Polynomial-bounded Advice Function; contains an Un-countable
+Infinity of problems
+
+
+
 % --------------------------------------------------------------------
-\subsection{Communication Complexity}\label{sec:communication_complexity}
+\subsection{Function Problem}\label{sec:function_problem}
 % --------------------------------------------------------------------
 
 % --------------------------------------------------------------------
@@ -1785,6 +1881,30 @@ computable by Algorithm is a Computable Function
 \[
   \mathsf{PR} \subset \mathsf{R} = \mathsf{RE} \cap \mathsf{coRE}
 \]
+
+$P/poly$ -- Complexity Class of Languages Recognized by a Polynomial-time Turing
+Machine with a Polynomial-bounded Advice Function (\S\ref{sec:advice}); contains
+an Un-countable Infinity of problems; equivalently defined as class $PSIZE$ of
+Languages having Polynomial-size Circuits; contains every Undecidable Unary
+language; \emph{Aldeman's Theorem}: $BPP \subseteq P/poly$
+
+\emph{Firewalls, AdS/CFT, and the Complexity of States and Unitaries: A Computer
+  Science Perspective}
+(video lectures)
+-
+\url{https://video.ias.edu/PiTP/2018/0719-ScottAaronson}
+
+in order to put a problem in $P$ the Circuits themselves must be ``findable''
+efficiently: there has to be an ``overall'' efficient algorithm that is able
+given $n$ as Input to output a description of the $n$th Circuit in Time
+Polynomial in $n$ (\emph{Uniformity} requirement); without the Uniformity
+requirement the Complexity Class is $P/poly$ ($P$ with Polynomial size Advice
+where an Infinite Sequence of Polynomial size Circuits where a completely
+different Circuit for every $n$ is allowed
+
+$TALLY$ -- Complexity Class of Unary (Tally) Languages
+
+TODO: xrefs
 
 
 
@@ -2019,6 +2139,130 @@ unproven Computational Hardness Assumption
 states that 3-SAT or any of several related NP-complete problems cannot be
 solved in Subexponential Time in the worst case, and if true would imply that
 $P \neq NP$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Circuit Complexity}\label{sec:circuit_complexity}
+% --------------------------------------------------------------------
+
+\emph{Firewalls, AdS/CFT, and the Complexity of States and Unitaries: A Computer
+  Science Perspective}
+(video lectures)
+-
+\url{https://video.ias.edu/PiTP/2018/0719-ScottAaronson}
+
+Circuit Complexity of a Unitary Transformation
+(\S\ref{sec:unitary_transformation})
+
+Circuit Complexity of an $n$-qubit Quantum State (\S\ref{sec:quantum_state})
+
+Circuit Complexity can play a similar role to Entropy (\S\ref{sec:entropy}) in
+``breaking Symmetries''
+
+one can think of Classical Computation as a Circuit, i.e. a Sequence of simple
+Boolean Logic Gates (AND, OR, NOT), and very roughly the Class $P$ would
+correspond to those collections of Boolean Functions that are Computable by a
+family of Circuits where the Circuit for the Functions with $n$ Inputs would
+have Size Polynomial in $n$-- ``roughly'' because in order to put a problem in
+$P$ the Circuits themselves must be ``findable'' efficiently: there has to be an
+``overall'' efficient algorithm that is able given $n$ as Input to output a
+description of the $n$th Circuit in Time Polynomial in $n$ (\emph{Uniformity}
+requirement); without the Uniformity requirement the Complexity Class is
+$P/poly$ ($P$ with Polynomial Size Advice \S\ref{sec:advice}) where an Infinite
+Sequence of Polynomial Size Circuits where a completely different Circuit for
+every $n$ is allowed
+
+\emph{Quantum Circuits}
+
+typically a Quantum Algorithm is thought of as a Classical Algorithm that given
+some $n$ as Input (e.g. the size of the problem or number of Qubits to work
+with) then outputs a description of a Quantum Circuit acting on those $n$
+Qubits, consisting of a Polynomial in $n$ number of Quantum Operations (or
+Quantum Gates)
+
+a Quantum Circuit $C$ consists of a Sequence of Unitary Transformations
+(\S\ref{sec:unitary_transformation}), each of which acts on only a small number
+of Qubits, so is a Tensor Product of a Unitary on those Qubits with the Identity
+on the remaining Qubits that are not being acted on; the (Pure) State $\Psi$ of
+the System at any point in Time is an Element of $(\comps^2)^{\otimes n}$, i.e.
+a Unit Vector in a $2^n$-dimensional Vector Space
+
+the Complexity Measure of a Circuit is \emph{Polynomially} related to the Size
+$|C|$ of the Circuit $C$ given by the \emph{number of Gates} (used in preparing
+State or applying Unitary Transformations) in it
+
+(wiki) \emph{Solovay-Kitaev Theorem}: if a Set of Single-qubit Quantum Gates
+generates a Dense Subset (\S\ref{sec:density}) of the Special Unitary Group
+(\S\ref{sec:unitary_group}) $SU(2)$, then that Set is guaranteed to ``fill SU(2)
+quickly'', implying a good approximation of any desired Gate can be created
+using ``fairly short sequences'' of Gates from the generating Set
+
+Topological Quantum Field Theory: any Quantum Computation can be expressed as
+approximating the value of the Jones Polynomial (\S\ref{sec:jones_polynomial})
+of some Knot
+
+``(Quantum) Polynomial-time Church-Turing Thesis''
+
+Hilbert Spaces:
+\begin{itemize}
+  \item Toplogical Quantum Computation -- no natural Tensor Product
+    Decmposition; still a notion of ``Elementary Operations'' corresponding to
+    basic operations on a Knot, but gives rise to the same Model of Quantum
+    Computation, modulo Complexity Class
+  \item Linear Optical Quantum Computation -- Hilbert Space is a Fox Space
+    (number of Photons per ``Mode''); also not a Tensor Product Space but
+    equivalent to BQP Model under Polynomial ``losses'' (FIXME: clarify)
+  \item ...
+\end{itemize}
+
+Complexity Measures of State Transformations, States, Unitary Transformations
+
+for a \emph{generic} $n$-qubit state, its Circuit Complexity will almost always
+be $2^n$, i.e. almost every $n$-qubit State requires an Exponentially large
+Circuit to ``Prepare'' it; to prove any \emph{particular} case has Exponential
+Complexity is much harder
+
+\emph{Universal Set} of Gates -- a Finite Set of Gates such that by Composing
+enough of them one can approximate any Unitary Transformation on any number of
+Qubits to any desired precision:
+\begin{itemize}
+  \item ... TODO: examples
+\end{itemize}
+
+there are different ways to define Circuit Complexity of Mixed States which may
+be inequivalent to eachother
+
+\emph{Firewall Paradox}
+
+2013 - Harlow, Hayden - \emph{Quantum Computation vs. Firewalls}
+
+\emph{Harlow-Hayden Decoding Problem} -- assume Quantum Polynomial Time
+Church-Turing Thesis, from which it follows that all knowledge of the relevant
+Laws of Physics could be encapsulated by specifying what Quantum Circuit takes
+the Initial State of the in-falling Matter into a Black Hole and produces the
+Quantum State of the Hawking Radiation and the Black Hole at a later Time; given
+a Circuit $C|0 \cdots 0\rangle = |\psi\rangle_{RBH}$ that maps the all Zero
+State to some Pure State $\psi$ that can be entangled between the three regions
+$R$ (the Hawking Radiation, i.e. degrees of freedom which have already ``come
+out'' of the Black Hole), $B$ (some Hawking Quantum which is just now emerging
+from the Black Hole), $H$ (inaccessible degrees of freedom in the Black Hole);
+\emph{task}: apply some Unitary Transformation $U_R$ to $R$ only that should
+have the effect of putting $B$ and some designated Qubit of $R$ (say, the last
+Qubit), into a Bell State (\S\ref{sec:bell_state}), ``decoding'' or ``making
+manifest'' the Entanglement between $R$ and $B$-- this is \emph{possible}, i.e.
+there is \emph{Maximal Entanglement} between $R$ and $B$; if the Observer were
+to \emph{fall into} the Black Hole later, would give them an Observable
+violation of the ``monogamy'' of Entanglement, when combined with the
+Entanglement that is supposed to be present between just inside and outside the
+Event Horizon because of Quantum Field Theory, implying a ``Firewall'' or
+breakdown of Quantum Mechanics
+
+
+
+% --------------------------------------------------------------------
+\subsection{Communication Complexity}\label{sec:communication_complexity}
+% --------------------------------------------------------------------
 
 
 
