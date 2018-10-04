@@ -1,49 +1,47 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Formal Language Theory}\label{part:formal_language}
 \cite{hammel03}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \emph{Formal Language Theory} is the study of Formal Languages
-(\S\ref{sec:formal_language}) and their Finite Representations:
-Automata (\S\ref{sec:automata_theory}). These topics are closely
-related to the question of Decidability
-(\S\ref{sec:computable_function}), an important concept in Recursion
-Theory (Part \ref{part:recursion_theory}).
+(\S\ref{sec:formal_language}) and their Finite Representations: Automata
+(\S\ref{sec:automata_theory}). These topics are closely related to the question
+of Decidability (\S\ref{sec:computable_function}), an important concept in
+Recursion Theory (Part \ref{part:recursion_theory}).
 %FIXME xref finite representations ?
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Alphabet}\label{sec:alphabet}
-% ====================================================================
+% ==============================================================================
 
 An \emph{Alphabet}:
 \[
   \Sigma = \{ \sigma_1, \ldots, \sigma_n \}
 \]
-is a Non-empty Finite Set (\S\ref{sec:set}) of \emph{Symbols}
-(Signifiers \S\ref{sec:signifier}), usually \emph{Characters} or
-\emph{Letters}.
+is a Non-empty Finite Set (\S\ref{sec:set}) of \emph{Symbols} (Signifiers
+\S\ref{sec:signifier}), usually \emph{Characters} or \emph{Letters}.
 
-The Alphabet of a String (\S\ref{sec:string}), $s$, is the Set of
-Symbols occuring in that String:
+The Alphabet of a String (\S\ref{sec:string}), $s$, is the Set of Symbols
+occuring in that String:
 \[
   \mathrm{Alph}(s)
 \]
 
-The Alphabet of a Language (\S\ref{sec:formal_language}), $L$, is the
-Set of all Symbols occuring in any String of that Language:
+The Alphabet of a Language (\S\ref{sec:formal_language}), $L$, is the Set of all
+Symbols occuring in any String of that Language:
 \[
   \mathrm{Alph}(L) = \bigcup_{s \in L} \mathrm{Alph}(s)
 \]
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{String}\label{sec:string}
-% ====================================================================
+% ==============================================================================
 
 A \emph{String} (or \emph{Word}), $s$, is a Finite Sequence
 (\S\ref{sec:sequence}) of Symbols over an Alphabet $\Sigma$:
@@ -52,48 +50,43 @@ A \emph{String} (or \emph{Word}), $s$, is a Finite Sequence
 \]
 where $c_1, \ldots, c_k \in \Sigma$.
 
-The \emph{Length} of a String, $|s| = k$, is equal to the number of
-Symbols in $s$.
+The \emph{Length} of a String, $|s| = k$, is equal to the number of Symbols in
+$s$.
 
-The \emph{Empty String} $\varepsilon$ is the unique String over
-$\Sigma$ of Length 0, and acts as an Identity Element for String
-Concatenation (\S\ref{sec:string_concatenation}).
+The \emph{Empty String} $\varepsilon$ is the unique String over $\Sigma$ of
+Length 0, and acts as an Identity Element for String Concatenation
+(\S\ref{sec:string_concatenation}).
 
-The Set of all Strings of Length $n$ over $\Sigma$ is denoted
-$\Sigma^n$.
+The Set of all Strings of Length $n$ over $\Sigma$ is denoted $\Sigma^n$.
 
-The Infinite Set of all possible Strings of all Finite Lengths,
-$\Sigma^*$, is the Free Monoid (\S\ref{sec:free_monoid}) or
-\emph{Kleene Closure} of $\Sigma$, i.e. the smallest Superset
-(\S\ref{sec:subset}) of $\Sigma$ that is closed under String
-Concatenation (\S\ref{sec:string_concatenation}):
+The Infinite Set of all possible Strings of all Finite Lengths, $\Sigma^*$, is
+the Free Monoid (\S\ref{sec:free_monoid}) or \emph{Kleene Closure} of $\Sigma$,
+i.e. the smallest Superset (\S\ref{sec:subset}) of $\Sigma$ that is closed under
+String Concatenation (\S\ref{sec:string_concatenation}):
 \[
   \Sigma^* = \bigcup_{n\in\mathbb{N}_0} \Sigma^n
 \]
 
-A Formal Language (\S\ref{sec:formal_language}) is a possibly Infinite
-Subset of $\Sigma^*$.
+A Formal Language (\S\ref{sec:formal_language}) is a possibly Infinite Subset of
+$\Sigma^*$.
 
-The Set of all Infinite Words over $\Sigma$ is denoted $\Sigma^\omega$
-and the Set of all Finite \emph{and} Infinite Words is denoted
-$\Sigma^\infty$
+The Set of all Infinite Words over $\Sigma$ is denoted $\Sigma^\omega$ and the
+Set of all Finite \emph{and} Infinite Words is denoted $\Sigma^\infty$
 
-An $\omega$-language (\S\ref{sec:omega_language}) is a Subset of
-$\Sigma^\omega$
+An $\omega$-language (\S\ref{sec:omega_language}) is a Subset of $\Sigma^\omega$
 
 \fist cf. Hamming Space (\S\ref{sec:hamming_space}): Set of all $2^N$ Binary
 Strings of Length $N$
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{String Concatenation}\label{sec:string_concatenation}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-The \emph{Concatenation} of two Strings, $s$ and $t$, is an
-Associative Operation denoted $s \cdot t$ or $st$, giving the String
-resulting from appending the right-hand String to the end of the
-left-hand String.
+The \emph{Concatenation} of two Strings, $s$ and $t$, is an Associative
+Operation denoted $s \cdot t$ or $st$, giving the String resulting from
+appending the right-hand String to the end of the left-hand String.
 
 The Empty String $\varepsilon$ acts as an Identity Element:
 \[
@@ -109,71 +102,68 @@ Free Monoid (\S\ref{sec:free_monoid})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Substring}\label{sec:substring}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-A \emph{Substring} (or \emph{Subword} or \emph{Factor}) is a
-Subsequence (\S\ref{sec:subsequence}) of consecutive Symbols that
-occur within a given String. For an $n$-length String, there are
-$n(n+1) \over 2$ Non-empty Substrings.
+A \emph{Substring} (or \emph{Subword} or \emph{Factor}) is a Subsequence
+(\S\ref{sec:subsequence}) of consecutive Symbols that occur within a given
+String. For an $n$-length String, there are $n(n+1) \over 2$ Non-empty
+Substrings.
 
 
 
 \subsubsection{Prefix \& Suffix}\label{sec:prefix_suffix}
 
-A \emph{Prefix} is a Substring that occurs at the beginning of a
-String, and a \emph{Suffix} is a Substring that occurs at the end of a
-String. A Prefix or Suffix that is not equal to the entire String
-itself is called a \emph{Proper Prefix} or \emph{Proper Suffix}
-respectively.
+A \emph{Prefix} is a Substring that occurs at the beginning of a String, and a
+\emph{Suffix} is a Substring that occurs at the end of a String. A Prefix or
+Suffix that is not equal to the entire String itself is called a \emph{Proper
+  Prefix} or \emph{Proper Suffix} respectively.
 
-The Prefix Relation is sometimes denoted $t \sqsubseteq s$ for Prefix
-$t$ of $s$, and defines a kind of Prefix Order
-(\S\ref{sec:prefix_order}). For related Data Structures, see
-\emph{Prefix Tree}\S\ref{sec:prefix_tree} and \emph{Suffix
-  Tree}\S\ref{sec:suffix_tree}.
+The Prefix Relation is sometimes denoted $t \sqsubseteq s$ for Prefix $t$ of
+$s$, and defines a kind of Prefix Order (\S\ref{sec:prefix_order}). For related
+Data Structures, see \emph{Prefix Tree} (\S\ref{sec:prefix_tree}) and
+\emph{Suffix Tree} (\S\ref{sec:suffix_tree}).
 
-The Function $\mathrm{Pref}_L(s)$ is defined as the Set of all
-Prefixes of a String $s$, with respect to a Language $L$:
+The Function $\mathrm{Pref}_L(s)$ is defined as the Set of all Prefixes of a
+String $s$, with respect to a Language $L$:
 \[
   \mathrm{Pref}_L(s) =
     \{ t\;|\;s = tu; t,u \in \mathrm{Alph}(L)^* \}
 \]
-For two Strings $s$ and $t$, the Prefix Relation
-(\S\ref{sec:prefix_suffix}) can be defined in terms of the
-$\mathrm{Pref}$ Function as:
+For two Strings $s$ and $t$, the Prefix Relation (\S\ref{sec:prefix_suffix}) can
+be defined in terms of the $\mathrm{Pref}$ Function as:
 \[
   s \sqsubseteq t \Leftrightarrow s \in \mathrm{Pref}_L(t)
 \]
-This Function is also used in the definition of the \emph{Prefix
-  Closure} (\S\ref{sec:prefix_closure}) of a Language.
+This Function is also used in the definition of the \emph{Prefix Closure}
+(\S\ref{sec:prefix_closure}) of a Language.
 
 
 
 \subsubsection{Border}\label{sec:string_border}
 
-A \emph{Border} is a Substring that is both a Prefix and a Suffix of
-the same String.
+A \emph{Border} is a Substring that is both a Prefix and a Suffix of the same
+String.
 
 
 
 \subsubsection{Superstring}\label{sec:superstring}
 
-A \emph{Superstring}, $s$, for a Set of Strings, $P$, is a single
-String that contains every String in $P$ as a Substring. For example,
-the trivial Superstring of $P$ would be given by the concatenation of
-all the Strings in $P$ in any order.
+A \emph{Superstring}, $s$, for a Set of Strings, $P$, is a single String that
+contains every String in $P$ as a Substring. For example, the trivial
+Superstring of $P$ would be given by the concatenation of all the Strings in $P$
+in any order.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{String Substitution}\label{sec:string_substitution}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-A \emph{String Substitution} is a Function, $f$, from Symbols in the
-Alphabet, $s \in \Sigma$, of a Language, $L$, to another Language,
-$L_s$, possibly with a different Alphabet, $\Delta$:
+A \emph{String Substitution} is a Function, $f$, from Symbols in the Alphabet,
+$s \in \Sigma$, of a Language, $L$, to another Language, $L_s$, possibly with a
+different Alphabet, $\Delta$:
 \[
   f(s) = L_s
 \]
@@ -185,21 +175,19 @@ for Empty String $\varepsilon$ and:
 \[
   f(st) = f(s)f(t)
 \]
-for Strings $s,t \in L$. This can be extended to give the Substitution
-Closure of a Language (\S\ref{sec:substitution_closure}). Regular
-(\S\ref{sec:regular_language}) and Context-free
-(\S\ref{sec:context_free}) Languages are closed under String
-Substitution.
+for Strings $s,t \in L$. This can be extended to give the Substitution Closure
+of a Language (\S\ref{sec:substitution_closure}). Regular
+(\S\ref{sec:regular_language}) and Context-free (\S\ref{sec:context_free})
+Languages are closed under String Substitution.
 
 
 
 \subsubsection{String Homomorphism}\label{sec:string_homomorphism}
 
-A \emph{String Homomorphism} is a String Substitution such that each
-Symbol in an Alphabet $\Sigma$ is replaced by a Single String. A
-String Homomorphism is a Monoid Morphism on the Free Monoid of
-$\Sigma$ (preserving String Concatenation). For a String Homomorphism
-$f$ on Alphabet $\Sigma_1$:
+A \emph{String Homomorphism} is a String Substitution such that each Symbol in
+an Alphabet $\Sigma$ is replaced by a Single String. A String Homomorphism is a
+Monoid Morphism on the Free Monoid of $\Sigma$ (preserving String
+Concatenation). For a String Homomorphism $f$ on Alphabet $\Sigma_1$:
 \[
   f : \Sigma_1^* \rightarrow \Sigma_2^*
 \]
@@ -208,22 +196,20 @@ where $\forall u,v \in \Sigma_1, f(uv) = f(u)f(v)$.
 A String Homomorphism $f$ is \emph{$\varepsilon$-free} if $\forall a
 \in \Sigma, f(a) \neq \varepsilon$.
 
-A String Homomorphism can be used to define a Homomorphism Closure for
-Languages (\S\ref{sec:language_homomorphism}). Regular
-(\S\ref{sec:regular_language}) and Context-free
-(\S\ref{sec:context_free}) Languages are Closed under String
+A String Homomorphism can be used to define a Homomorphism Closure for Languages
+(\S\ref{sec:language_homomorphism}). Regular (\S\ref{sec:regular_language}) and
+Context-free (\S\ref{sec:context_free}) Languages are Closed under String
 Homomorphisms.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{String Projection}\label{sec:string_projection}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-For a String $s$ and Alphabet $\Sigma$ (not necessarily
-$\text{Alph}(s)$), a \emph{String Projection}, $\pi_{\Sigma}(s)$, is
-the String resulting from removal of all Symbols of $s$ that are not
-in $\Sigma$:
+For a String $s$ and Alphabet $\Sigma$ (not necessarily $\text{Alph}(s)$), a
+\emph{String Projection}, $\pi_{\Sigma}(s)$, is the String resulting from
+removal of all Symbols of $s$ that are not in $\Sigma$:
 \[
   \pi_{\Sigma}(s) =
   \begin{cases}
@@ -232,15 +218,15 @@ in $\Sigma$:
     \pi_{\Sigma}(t)a  & \quad \text{if $s = ta$ and $a \in \Sigma$}\\
   \end{cases}
 \]
-\fist Cf. Projection in Relational Algebra
-\S\ref{sec:relational_projection}. String Projection may be used to
-define a Projection over a Language (\S\ref{sec:language_projection}).
+\fist Cf. Projection in Relational Algebra (\S\ref{sec:relational_projection}).
+String Projection may be used to define a Projection over a Language
+(\S\ref{sec:language_projection}).
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Quotient}\label{sec:string_quotient}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 The \emph{Right Quotient} $S / b$ of a String $S$ and Symbol $b$
 defined as:
@@ -259,18 +245,17 @@ Likewise the \emph{Left Quotient} $b \backslash S$ is defined as:
     \varepsilon & \quad \text{if $a \neq b$}\\
   \end{cases}
 \]
-\fist Cf. Syntactic Quotient \S\ref{sec:syntactic_quotient}
-(Syntactic Monoid)
+\fist Cf. Syntactic Quotient \S\ref{sec:syntactic_quotient} (Syntactic Monoid)
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Right Cancellation}\label{sec:right_cancellation}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-\emph{Right Cancellation}, $s \div a$, of a Symbol $a$ from a String
-$S$ is the removal of the first occurance of $a$ from $S$, starting
-from the right-hand side:
+\emph{Right Cancellation}, $s \div a$, of a Symbol $a$ from a String $S$ is the
+removal of the first occurance of $a$ from $S$, starting from the right-hand
+side:
 \[
   (sb) \div a =
   \begin{cases}
@@ -281,9 +266,9 @@ from the right-hand side:
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Metacharacter}\label{sec:metacharacter}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 %FIXME relation to formal languages ?
 
@@ -291,28 +276,26 @@ e.g. Wildcard Characters, Statement Delimiters, etc.
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Formal Language}\label{sec:formal_language}
-% ====================================================================
+% ==============================================================================
 
-A \emph{Formal Language}, $L$, is a (possibly Infinite) Subset of
-$\Sigma^*$, the Set of all possible Strings (\S\ref{sec:string}) over
-an Alphabet (\S\ref{sec:alphabet}) $\Sigma$. The Strings belonging to
-$L$ are called \emph{Expressions} (\S\ref{sec:expression}), or
-\emph{Phrases} (\S\ref{sec:lexical_analysis}) or \emph{Well-formed
-  Formulas} (\S\ref{sec:formula}) depending on the context.
+A \emph{Formal Language}, $L$, is a (possibly Infinite) Subset of $\Sigma^*$,
+the Set of all possible Strings (\S\ref{sec:string}) over an Alphabet
+(\S\ref{sec:alphabet}) $\Sigma$. The Strings belonging to $L$ are called
+\emph{Expressions} (\S\ref{sec:expression}), or \emph{Phrases}
+(\S\ref{sec:lexical_analysis}) or \emph{Well-formed Formulas}
+(\S\ref{sec:formula}) depending on the context.
 
-The entire content of a Formal Language is uniquely determined by
-either:
+The entire content of a Formal Language is uniquely determined by either:
 \begin{itemize}
-  \item the Set of all Terminal Expressions that are Generated by the
-    Production Rules of a \emph{Generative Grammar}
-    (\S\ref{sec:generative_grammar})
+  \item the Set of all Terminal Expressions that are Generated by the Production
+    Rules of a \emph{Generative Grammar} (\S\ref{sec:generative_grammar})
 \end{itemize}
 or
 \begin{itemize}
-  \item the Set of Expressions Recognized by a \emph{Determinative
-    Grammar} (\S\ref{sec:determinative_grammar})
+  \item the Set of Expressions Recognized by a \emph{Determinative Grammar}
+    (\S\ref{sec:determinative_grammar})
 \end{itemize}
 
 For two Languages $L_1$ and $L_2$ over a common Alphabet $\Sigma$:
@@ -325,20 +308,22 @@ For two Languages $L_1$ and $L_2$ over a common Alphabet $\Sigma$:
 \end{itemize}
 If $L_2 \subset L_1$ then $L_2$ is a \emph{Sublanguage} of $L_1$.
 
-For a given Language $L \subseteq \Sigma^*$ there exists a
-\emph{Complement Language} $L^C = \Sigma^* - L$.
+For a given Language $L \subseteq \Sigma^*$ there exists a \emph{Complement
+  Language} $L^C = \Sigma^* - L$.
 
 The Language consisting of just the Empty String $\{\varepsilon\}$ is
 distinguished from the Empty Language $\{\}$.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Expression}\label{sec:expression}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-An \emph{Expression} is a String (\S\ref{sec:string}) belonging to a
-Formal Language.
+An \emph{Expression} is a String (\S\ref{sec:string}) belonging to a Formal
+Language.
+
+\emph{Mathematical Expressions}
 
 \url{https://en.wikipedia.org/wiki/Closed-form_expression#Comparison_of_different_classes_of_expressions}:
 
@@ -352,18 +337,17 @@ $\subset$ Mathematical Expressions
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Language Concatenation}\label{sec:language_concatenation}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-The \emph{Concatenation} of two Languages, $S$ and $T$, is an
-Associative Operation that gives a third Language, $S \cdot T$,
-defined as:
+The \emph{Concatenation} of two Languages, $S$ and $T$, is an Associative
+Operation that gives a third Language, $S \cdot T$, defined as:
 \[
   S \cdot T = \{s \cdot t\;|\; s \in S \wedge t \in T\}
 \]
-The Language consisting of just the Empty String, $\{\varepsilon\}$,
-acts as an Identity Element:
+The Language consisting of just the Empty String, $\{\varepsilon\}$, acts as an
+Identity Element:
 \[
   S \cdot \{\varepsilon\} = S = \{\varepsilon\} \cdot S
 \]
@@ -378,9 +362,9 @@ With a third Language, $U$, the Associative Property gives:
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Prefix Closure}\label{sec:prefix_closure}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 The \emph{Prefix Closure} of a Language $L$ is given by the Function
 $\mathrm{Pref}(L)$:
@@ -388,11 +372,11 @@ $\mathrm{Pref}(L)$:
   \mathrm{Pref}(L) = \bigcup_{s \in L} \mathrm{Pref}_L(s) =
   \{ t\;|\;s = tu; s \in L; t,u \in \mathrm{Alph}(L)^* \}
 \]
-where $\mathrm{Pref}_L(s)$ is the Set of Prefixes
-(\S\ref{sec:prefix_suffix}) of String $s$ with respect to $L$.
+where $\mathrm{Pref}_L(s)$ is the Set of Prefixes (\S\ref{sec:prefix_suffix}) of
+String $s$ with respect to $L$.
 
-A Language is \emph{Prefix Closed} if $\mathrm{Pref}(L) = L$.
-$\mathrm{Pref}$ is Idempotent:
+A Language is \emph{Prefix Closed} if $\mathrm{Pref}(L) = L$. $\mathrm{Pref}$ is
+Idempotent:
 \[
   \mathrm{Pref}(\mathrm{Pref}(L)) = \mathrm{Pref}(L)
 \]
@@ -405,29 +389,28 @@ $\mathrm{Pref}(L) = \{\varepsilon, a, ab, abc\}$
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Substitution Closure}\label{sec:substitution_closure}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 The \emph{Substitution Closure} of a Language $L$ is defined as:
 \[
   f(L) = \bigcup_{s \in L} f(s)
 \]
 where $f(s)$ is the String Substitution Function
-(\S\ref{sec:string_substitution}). Regular
-(\S\ref{sec:regular_language}) and Context-free
-(\S\ref{sec:context_free}) Languages are Closed under String
+(\S\ref{sec:string_substitution}). Regular (\S\ref{sec:regular_language}) and
+Context-free (\S\ref{sec:context_free}) Languages are Closed under String
 Substitution.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Language Homomorphism}\label{sec:language_homomorphism}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-A \emph{Homomorphism}, $h$, of a Language, $L$, with Alphabet,
-$\Sigma$, is defined in terms of a String Homomorphism
-(\S\ref{sec:string_homomorphism}) $f(s)$, where $s \in L$:
+A \emph{Homomorphism}, $h$, of a Language, $L$, with Alphabet, $\Sigma$, is
+defined in terms of a String Homomorphism (\S\ref{sec:string_homomorphism})
+$f(s)$, where $s \in L$:
 \[
   h(L) = \bigcup_{s \in L} f(s)
 \]
@@ -443,56 +426,52 @@ In General $h(h^{-1}(L)) \neq L$, but:
   L \subseteq h^{-1}(h(L))
 \]
 Regular (\S\ref{sec:regular_language}) and Context-free
-(\S\ref{sec:context_free}) Languages are Closed under Homomorphisms
-and Inverse Homomorphisms.
+(\S\ref{sec:context_free}) Languages are Closed under Homomorphisms and Inverse
+Homomorphisms.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Language Projection}\label{sec:language_projection}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-Using a String Projection (\S\ref{sec:string_projection}),
-$\pi_{\Sigma}(s)$, on Strings, $s$, the \emph{Language Projection} for
-a Language, $L$, is defined as:
+Using a String Projection (\S\ref{sec:string_projection}), $\pi_{\Sigma}(s)$, on
+Strings, $s$, the \emph{Language Projection} for a Language, $L$, is defined as:
 \[
   \pi_{\Sigma}(L) = \{\pi_{\Sigma}(s)\;|\; s \in L\}
 \]
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Formal Grammar}\label{sec:formal_grammar}
-% ====================================================================
+% ==============================================================================
 
-The term \emph{Syntax} may be used as a synonym for \emph{Grammar}:
-i.e. a Set of Rules through which the Strings of a Language can be
-either \emph{Generated} (\S\ref{sec:generative_grammar}) or
-\emph{Recognized} (\S\ref{sec:determinative_grammar}).
+The term \emph{Syntax} may be used as a synonym for \emph{Grammar}: i.e. a Set
+of Rules through which the Strings of a Language can be either \emph{Generated}
+(\S\ref{sec:generative_grammar}) or \emph{Recognized}
+(\S\ref{sec:determinative_grammar}).
 
-Syntax is the aspect of Formal Languages that refers only to the
-literal Strings of Symbols of a Language with no regard to the Meaning
-(\S\ref{sec:meaning}) or Interpretation (\S\ref{sec:interpretation});
-only the condition that they can be identified and differentiated from
-one-another is required. The process of Syntactic Analysis is known as
-\emph{Parsing} (\S\ref{sec:parser}).
-
+Syntax is the aspect of Formal Languages that refers only to the literal Strings
+of Symbols of a Language with no regard to the Meaning (\S\ref{sec:meaning}) or
+Interpretation (\S\ref{sec:interpretation}); only the condition that they can be
+identified and differentiated from one-another is required. The process of
+Syntactic Analysis is known as \emph{Parsing} (\S\ref{sec:parser}).
 
 
-% --------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
 \subsection{Generative Grammar}\label{sec:generative_grammar}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-A \emph{Generative Grammar} \emph{Generates} a Language by the
-repeated application of \emph{Production Rules} beginning with a
-unique \emph{Non-terminal Symbol} called the Start Symbol, here
-denoted $S$.
+A \emph{Generative Grammar} \emph{Generates} a Language by the repeated
+application of \emph{Production Rules} beginning with a unique
+\emph{Non-terminal Symbol} called the Start Symbol, here denoted $S$.
 
-The definition of a Non-terminal Symbol in the context of a Generative
-Grammar is one for which a Production Rule exists with that Symbol
-appearing in the input and replaced in the output. A \emph{Terminal
-  Symbol} is one for which no Production Rule exists with that Symbol
-occuring in the input.
+The definition of a Non-terminal Symbol in the context of a Generative Grammar
+is one for which a Production Rule exists with that Symbol appearing in the
+input and replaced in the output. A \emph{Terminal Symbol} is one for which no
+Production Rule exists with that Symbol occuring in the input.
 
 A sequence of rule applications is a \emph{Derivation} (cf.
 \S\ref{sec:formal_proof} and \S\ref{sec:logical_argument}).
@@ -501,46 +480,44 @@ A Generative Grammar may be formally defined as a 4-tuple:
 \[
   G(N,T,P,S)
 \]
-where $N$ are Non-terminal Symbols, $T$ are Terminal Symbols, $P$ are
-Production Rules and $S$ is the Start Symbol.
+where $N$ are Non-terminal Symbols, $T$ are Terminal Symbols, $P$ are Production
+Rules and $S$ is the Start Symbol.
 
 An unrestricted Production Rule has the form:
 \[
   (N \cup T)^*N(N \cup T)^* \rightarrow (N \cup T)^*
 \]
-That is, a Production is a function from one Expression to
-another, where the left Expression must contain at least one
-Non-terminal Symbol. By convention, Non-terminal Symbols
-will be denoted by capitals ($A,B,C,\cdots$), and Terminals by
-lowercase ($a,b,c,\cdots$), and Expressions by Greek letters
+That is, a Production is a function from one Expression to another, where the
+left Expression must contain at least one Non-terminal Symbol. By convention,
+Non-terminal Symbols will be denoted by capitals ($A,B,C,\cdots$), and Terminals
+by lowercase ($a,b,c,\cdots$), and Expressions by Greek letters
 ($\alpha,\beta,\gamma$).
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Determinative Grammar}\label{sec:determinative_grammar}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-A \emph{Determinative Grammar} is a Grammar through which a Member of
-$\Sigma^*$ can be determined to belong to a Language $L \subseteq
-\Sigma^*$ (\emph{Recognized}, note this is different from the use of
-\emph{Recognizable} (\S\ref{sec:recognizable}) in the case of
-Monoids). Such systems are described by \emph{Automata Theory}
-(\S\ref{sec:automata_theory})
+A \emph{Determinative Grammar} is a Grammar through which a Member of $\Sigma^*$
+can be determined to belong to a Language $L \subseteq \Sigma^*$
+(\emph{Recognized}, note this is different from the use of \emph{Recognizable}
+(\S\ref{sec:recognizable}) in the case of Monoids). Such systems are described
+by \emph{Automata Theory} (\S\ref{sec:automata_theory})
 
 Syntactic Monoid (\S\ref{sec:syntactic_monoid})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Chomsky Hierarchy}\label{sec:chomsky_hierarchy}
 \cite{chomsky56}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-Grammars are classified by how restrictive the Production Rules are.
-By convention, they may be organized into a hierarchy of Classes under
-Proper Inclusion, where \emph{Type-0} is an Unrestricted Grammar,
-covering all possible Formal Grammars:
+Grammars are classified by how restrictive the Production Rules are. By
+convention, they may be organized into a hierarchy of Classes under Proper
+Inclusion, where \emph{Type-0} is an Unrestricted Grammar, covering all possible
+Formal Grammars:
 
   Type-0 $\supset$ Type-1 $\supset$ Type-2 $\supset$ Type-3 \\
 These different levels in the hierarchy are Recognizable
@@ -555,35 +532,32 @@ Type-2: Context-free (\S\ref{sec:context_free})
 
 Type-3: Regular (\S\ref{sec:regular_language})
 
-underlying the Hierarchy at a more restricted level than Regular
-Grammars is \emph{Combinational Logic}
-(\S\ref{sec:combinational_logic}) or ``Time-independent Logic'': a
-type of ``Digital Logic'' implemented by ``Boolean Circuits'' where
-the Output is a \emph{Pure Function} of the present Input
-\emph{only}-- unlike Sequential Logic (\S\ref{sec:sequential_logic})
-in which the Output depends on the present Input and also the
-\emph{history} of past Input, i.e. \emph{Memory}
+underlying the Hierarchy at a more restricted level than Regular Grammars is
+\emph{Combinational Logic} (\S\ref{sec:combinational_logic}) or
+``Time-independent Logic'': a type of ``Digital Logic'' implemented by ``Boolean
+Circuits'' where the Output is a \emph{Pure Function} of the present Input
+\emph{only}-- unlike Sequential Logic (\S\ref{sec:sequential_logic}) in which
+the Output depends on the present Input and also the \emph{history} of past
+Input, i.e. \emph{Memory}
 
-a \emph{Regular Language} can be Recognized by a \emph{Finite
-  Automaton} (\S\ref{sec:finite_automaton})
+a \emph{Regular Language} can be Recognized by a \emph{Finite Automaton}
+(\S\ref{sec:finite_automaton})
 
-a \emph{Context-free Language} can be Recognized by a Finite Automaton
-with a Stack: a \emph{Pushdown Automaton}
-(\S\ref{sec:pushdown_automaton})
+a \emph{Context-free Language} can be Recognized by a Finite Automaton with a
+Stack: a \emph{Pushdown Automaton} (\S\ref{sec:pushdown_automaton})
 
-a \emph{Context-sensitive Language} can be Recognized by a Finite
-Automaton with two Stacks of bounded size: a \emph{Linear Bounded
-  Automaton} (\S\ref{sec:linear_bounded_automaton})
+a \emph{Context-sensitive Language} can be Recognized by a Finite Automaton with
+two Stacks of bounded size: a \emph{Linear Bounded Automaton}
+(\S\ref{sec:linear_bounded_automaton})
 
-an \emph{Unrestricted Language} can be Recognized by a Finite
-Automaton with two Stacks of unbounded size: a \emph{Turing Machine}
-(\S\ref{sec:turing_machine})
+an \emph{Unrestricted Language} can be Recognized by a Finite Automaton with two
+Stacks of unbounded size: a \emph{Turing Machine} (\S\ref{sec:turing_machine})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Type-0: Unrestricted Grammar}\label{sec:unrestricted_grammar}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \subsubsection{Semi-decidable Language}\label{sec:semidecidable}
 
@@ -591,60 +565,58 @@ Production Rules of an \emph{Unrestricted Grammar} have the form
 \[
   \alpha \rightarrow \beta
 \]
-where $\alpha$ and $\beta$ are Expressions of $N \cup T$ and $\alpha
-\neq \varepsilon$. Note that this means there is not necessarily a
-distinction between Terminal and Non-terminal Symbols in an
-Unrestricted Grammar.
+where $\alpha$ and $\beta$ are Expressions of $N \cup T$ and $\alpha \neq
+\varepsilon$. Note that this means there is not necessarily a distinction
+between Terminal and Non-terminal Symbols in an Unrestricted Grammar.
 
-A completely Unrestricted Grammar generates a Language called
-\emph{Recursively Enumerable} or \emph{Semi-decidable}
-(\S\ref{sec:partial_computable}). This means membership of the
-Language can be decided by an Algorithm, but non-membership cannot,
-and the Class of Languages having this property is called
+A completely Unrestricted Grammar generates a Language called \emph{Recursively
+  Enumerable} or \emph{Semi-decidable} (\S\ref{sec:partial_computable}). This
+means membership of the Language can be decided by an Algorithm, but
+non-membership cannot, and the Class of Languages having this property is called
 $\mathsf{RE}$.
 
-The complement of $\mathsf{RE}$ is the Class of Languages for which an
-Algorithm may decide non-membership only and is termed
-$\mathsf{coRE}$. The Class of Automata capable of implementing these
-Algorithms are Turing Machines (\S\ref{sec:turing_machine}).
+The complement of $\mathsf{RE}$ is the Class of Languages for which an Algorithm
+may decide non-membership only and is termed $\mathsf{coRE}$. The Class of
+Automata capable of implementing these Algorithms are Turing Machines
+(\S\ref{sec:turing_machine}).
 
 
 
 \subsubsection{Decidable Language}\label{sec:decidable_language}
 
-A \emph{Decidable} or \emph{Recursive} Language is defined as the
-intersection of $\mathsf{RE}$ and $\mathsf{coRE}$:
+A \emph{Decidable} or \emph{Recursive} Language is defined as the intersection
+of $\mathsf{RE}$ and $\mathsf{coRE}$:
 \[
   \mathsf{R} = \mathsf{RE} \cap \mathsf{coRE}
 \]
-That is, it can be decided whether a Symbol is a member or not by a
-Total Computable Function (\S\ref{sec:computable_function}). Decidable
-Languages are Recognizable by a \emph{Decider} or Total Turing Machine
+That is, it can be decided whether a Symbol is a member or not by a Total
+Computable Function (\S\ref{sec:computable_function}). Decidable Languages are
+Recognizable by a \emph{Decider} or Total Turing Machine
 (\S\ref{sec:turing_machine}).\cite{kozen97}
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Type-1: Context-sensitive Grammar}
 \label{sec:context_sensitive}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-\emph{Context-sensitive Grammars} have the restriction that the result
-of a Production is not shorter than the input. Formally stated,
-Productions are of the form
+\emph{Context-sensitive Grammars} have the restriction that the result of a
+Production is not shorter than the input. Formally stated, Productions are of
+the form:
 \[
   \alpha \Gamma \beta \rightarrow \alpha \gamma \beta
 \]
-where $|\Gamma| \leq |\gamma|$. In this formulation $\alpha$ and
-$\beta$ form the \emph{Context} of $\Gamma$.
+where $|\Gamma| \leq |\gamma|$. In this formulation $\alpha$ and $\beta$ form
+the \emph{Context} of $\Gamma$.
 
-Requiring that $S$ does not appear on the right of any Production
-and allowing the rule
+Requiring that $S$ does not appear on the right of any Production and allowing
+the rule:
 \[
   S \rightarrow \varepsilon
 \]
-makes the Context-sensitive Languages a proper Superset of the
-Context-free Languages (\S\ref{sec:context_free}).
+makes the Context-sensitive Languages a proper Superset of the Context-free
+Languages (\S\ref{sec:context_free}).
 
 Context-sensitive Languages are equivalent to Linear Bounded Automata
 (\S\ref{sec:linear_bounded_automaton}).
@@ -653,8 +625,8 @@ Context-sensitive Languages are equivalent to Linear Bounded Automata
 
 \subsubsection{Indexed Grammar}\label{subsubsection:indexed_grammar}
 
-An \emph{Indexed Grammar} has an extra set of \emph{Index Symbols},
-$F$, with Productions of three possible forms,
+An \emph{Indexed Grammar} has an extra set of \emph{Index Symbols}, $F$, with
+Productions of three possible forms:
 \[
   A[\sigma] \rightarrow \alpha[\sigma]
 \]\[
@@ -662,9 +634,9 @@ $F$, with Productions of three possible forms,
 \]\[
   A[f\sigma] \rightarrow \alpha[\sigma]
 \]
-where $f \in F$ and $\sigma$ is a String of Index Symbols. The Index
-Symbols are used to form a \emph{Stack} by the Production Rules where
-Index Symbols are either pushed or popped from the Stack.
+where $f \in F$ and $\sigma$ is a String of Index Symbols. The Index Symbols are
+used to form a \emph{Stack} by the Production Rules where Index Symbols are
+either pushed or popped from the Stack.
 
 An Indexed Language can be Recognized by a Nested Stack Automaton
 (\S\ref{sec:nested_stack_automaton}).\cite{aho69}
@@ -674,15 +646,15 @@ An Indexed Language can be Recognized by a Nested Stack Automaton
 \subsubsection{Generalized Contex-free}
 \label{sec:generalized_context_free}
 
-A \emph{Generalized Context-free Grammar} adds to the Production Rules
-of a Context-free Grammar a set of Non-context-free \emph{Composition
-  Functions} that combine tuples of Symbols:
+A \emph{Generalized Context-free Grammar} adds to the Production Rules of a
+Context-free Grammar a set of Non-context-free \emph{Composition Functions} that
+combine tuples of Symbols:
 \[
   f(\langle x_1,\cdots,x_m\rangle,\cdots,\langle
   y_1,\cdots,y_n\rangle)=\gamma
 \]
-where $\gamma$ is a single tuple or another Composition Function that
-reduces to a single tuple.
+where $\gamma$ is a single tuple or another Composition Function that reduces to
+a single tuple.
 
 Rules are of the form:
 \[
@@ -690,81 +662,77 @@ Rules are of the form:
 \]
 where $X$,$Y$,$\cdots$ are String tuples or Non-terminal Symbols.
 
-There are several weakly equivalent Grammars to the composition
-formulation:
+There are several weakly equivalent Grammars to the composition formulation:
 
 \begin{description}
 \item[Linear Context-free Rewriting System] \hfill \\
-  Weakly equivalent to \emph{Multi-component Tree-adjoining Grammars}
-  where Composition Functions are both \emph{Linear} and
-  \emph{Regular}. Can be Recognized by Thread Automata
-  (\S\ref{sec:thread_automaton})\cite{villemonte02}
-  %FIXME may need to link to concepts of Linear and Regular
+  Weakly equivalent to \emph{Multi-component Tree-adjoining Grammars} where
+  Composition Functions are both \emph{Linear} and \emph{Regular}. Can be
+  Recognized by Thread Automata
+  (\S\ref{sec:thread_automaton})\cite{villemonte02} %FIXME may need to link to
+  concepts of Linear and Regular
 
 \item[Tree-adjoining] \hfill \\
-  Elementary rewriting unit is a Tree (\S\ref{sec:tree_graph}) rather
-  than a Symbol. Can be Recognized by Embedded Pushdown Automata
+  Elementary rewriting unit is a Tree (\S\ref{sec:tree_graph}) rather than a
+  Symbol. Can be Recognized by Embedded Pushdown Automata
   (\S\ref{sec:embedded_pushdown})\cite{vijayashanker88}
 
 \item[Linear Indexed Grammar] \hfill \\
-  A modified Indexed Grammar where only one Symbol receives the
-  Stack.
+  A modified Indexed Grammar where only one Symbol receives the Stack.
 
 \item[Combinatory Categorical Grammar] \hfill \\
   A type of Phrase Structure Grammar (\S\ref{sec:context_free}) using
   Combinatory Logic (\S\ref{sec:combinatory_logic}).
 
 \item[Head grammar] \hfill \\
-  A Subset of the Linear Context-free Rewriting System and a Phrase
-  Structure Grammar.
+  A Subset of the Linear Context-free Rewriting System and a Phrase Structure
+  Grammar.
 \end{description}
 
 
 
 \subsubsection{Square Pattern}\label{sec:square_pattern}
 
-a String constructed of repeated Substrings, e.g. ``papa'',
-``WikiWiki''
+a String constructed of repeated Substrings, e.g. ``papa'', ``WikiWiki''
 
 in POSIX Regular Expressions, the pattern for Squares is:
-\[ \mono{(.+)\backslash1} \]
-but this is \emph{not} a feature of Regular Languages as the Language
-of Squares is not Context-free due to the \emph{Pumping Lemma}
+\[
+\mono{(.+)\backslash1}
+\]
+but this is \emph{not} a feature of Regular Languages as the Language of Squares
+is not Context-free due to the \emph{Pumping Lemma}
 %FIXME xref pumping lemma
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Type-2: Context-free Grammar}\label{sec:context_free}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-\emph{Context-free Grammars} (\emph{CFG}s) have Production Rules of
-the form:
+\emph{Context-free Grammars} (\emph{CFG}s) have Production Rules of the form:
 \[
   V \rightarrow \alpha
 \]
-where $V$ is a single Non-terminal and $\alpha$ is a String of Terminals
-and/or Non-terminals (or $\varepsilon$). Because $V$ is required to be a
-single Non-terminal, the Production Rules can be applied regardless of
-Context. Each Non-terminal in a Context-free Grammar, $G$, is said to
-form a \emph{Sublanguage} of the Language defined by $G$.
+where $V$ is a single Non-terminal and $\alpha$ is a String of Terminals and/or
+Non-terminals (or $\varepsilon$). Because $V$ is required to be a single
+Non-terminal, the Production Rules can be applied regardless of Context. Each
+Non-terminal in a Context-free Grammar, $G$, is said to form a
+\emph{Sublanguage} of the Language defined by $G$.
 
 A Context-free Language is Closed under String Substitution
 (\S\ref{sec:string_substitution}).
 
-Multiple Context-free Grammars may generate the same Language, so
-Properties of CFGs may be termed \emph{Extrinsic} while Language
-Properties are \emph{Intrinsic}. The question of Equality between CFGs
-is Undecidable.
+Multiple Context-free Grammars may generate the same Language, so Properties of
+CFGs may be termed \emph{Extrinsic} while Language Properties are
+\emph{Intrinsic}. The question of Equality between CFGs is Undecidable.
 
-A Context-free Language may also be called a \emph{Recursive
-  Language}.
+A Context-free Language may also be called a \emph{Recursive Language}.
 
 A popular notation for Context-free Grammars in Computer Science is
 \emph{Backus-Naur form} (\emph{BNF}).
 
-Context-free Grammars are equivalent to Non-deterministic Pushdown
-Automata (\S\ref{sec:pushdown_automaton}).
+Context-free Grammars are equivalent to Non-deterministic Pushdown Automata
+(\S\ref{sec:pushdown_automaton}).
 
 Spivak 16:
 
@@ -774,13 +742,13 @@ every Context Free Grammar is an Operad (\S\ref{sec:operad})
 
 \subsubsection{Constituency Grammar}\label{sec:constituency_grammar}
 
-In Linguistics, the term used for Context-free Grammar is \emph{Phrase
-  Structure Grammar} which is also called \emph{Constituency Grammar}
-due to the one-to-one-or-many correspondence between the Productions
-(ultimately rooted in the \emph{Subject-Predicate Clause} derived from
-Term Logic \S\ref{sec:term_logic}). A Parse Tree
-(\S\ref{sec:concrete_syntax}) may be constructed according to the
-\emph{Constituency Relation} of a Constituency Grammar.
+In Linguistics, the term used for Context-free Grammar is \emph{Phrase Structure
+  Grammar} which is also called \emph{Constituency Grammar} due to the
+one-to-one-or-many correspondence between the Productions (ultimately rooted in
+the \emph{Subject-Predicate Clause} derived from Term Logic
+\S\ref{sec:term_logic}). A Parse Tree (\S\ref{sec:concrete_syntax}) may be
+constructed according to the \emph{Constituency Relation} of a Constituency
+Grammar.
 
 
 
@@ -793,8 +761,7 @@ Term Logic \S\ref{sec:term_logic}). A Parse Tree
 
 Montague Grammar (\S\ref{sec:montague_grammar})
 
-Non-symmetric Compact Closed Category
-(\S\ref{sec:nonsymmetric_compact_closed})
+Non-symmetric Compact Closed Category (\S\ref{sec:nonsymmetric_compact_closed})
 
 \fist Grammatical Inference (\S\ref{sec:grammatical_inference})
 
@@ -816,10 +783,10 @@ Type-logical Semantics (\S\ref{sec:typelogical_semantics})
 
 Symmetric Monoidal Categories (\S\ref{sec:symmetric_monoidal})
 
-\fist Non-commutative Logic (\S\ref{sec:noncommutative_logic}) is an
-extension of Linear Logic (\S\ref{sec:linear_logic}) combining the
-Commutative Connectives of Linear Logic with the Noncommutative
-Multiplicative Connectives of Lambek Calculus
+\fist Non-commutative Logic (\S\ref{sec:noncommutative_logic}) is an extension
+of Linear Logic (\S\ref{sec:linear_logic}) combining the Commutative Connectives
+of Linear Logic with the Noncommutative Multiplicative Connectives of Lambek
+Calculus
 
 
 
@@ -837,31 +804,30 @@ Glue Semantics (\S\ref{sec:glue_semantics})
 
 \subsubsection{Dependency Grammar}\label{sec:dependency_grammar}
 
-An alternative formulation to Phrase Structure Grammar is
-\emph{Dependency Grammar} in which the Verb is the root and there is a
-one-to-one correspondence between Symbols and nodes in the Syntax
-Structure (\S\ref{sec:concrete_syntax}).
+An alternative formulation to Phrase Structure Grammar is \emph{Dependency
+  Grammar} in which the Verb is the root and there is a one-to-one
+correspondence between Symbols and nodes in the Syntax Structure
+(\S\ref{sec:concrete_syntax}).
 
 
 
 \subsubsection{Deterministic}\label{sec:deterministic_cfg}
 
-\emph{Deterministic Context-free Grammars} are derived from
-Deterministic Pushdown Automata (\S\ref{sec:deterministic_pda}) and
-are always unambiguous. They can be Parsed in Linear Time and a Parser
-can be automatically generated from the Grammar by a Parser Generator
-(\S\ref{sec:parser_generator}).
+\emph{Deterministic Context-free Grammars} are derived from Deterministic
+Pushdown Automata (\S\ref{sec:deterministic_pda}) and are always unambiguous.
+They can be Parsed in Linear Time and a Parser can be automatically generated
+from the Grammar by a Parser Generator (\S\ref{sec:parser_generator}).
 
 
 
 \subsubsection{Visibly Pushdown}\label{sec:visibly_pushdown}
 
-\emph{Visibly Pushdown Grammars} are described by the 4-tuple
+\emph{Visibly Pushdown Grammars} are described by the 4-tuple:
 \[
   G = (V=V^0 \cup V^1,T,P,S)
 \]
-where $V^0$ and $V^1$ are Disjoint Sets of Non-terminals and there
-are three kinds of Production Rules:
+where $V^0$ and $V^1$ are Disjoint Sets of Non-terminals and there are three
+kinds of Production Rules:
 \[
   X \rightarrow \varepsilon
 \]\[
@@ -871,22 +837,20 @@ are three kinds of Production Rules:
 \]
 where $Z \in V^0$ and if $X \in V^0$ then $Y \in V^0$
 
-The resulting Language is a \emph{Regular Language} with \emph{Nested
-  Words}, described by a Monadic Second-order Logic
-(\S\ref{sec:monadic_secondorder}).
+The resulting Language is a \emph{Regular Language} with \emph{Nested Words},
+described by a Monadic Second-order Logic (\S\ref{sec:monadic_secondorder}).
 %FIXME possibly reference or explain nested words
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Type-3: Regular Grammar} \label{sec:regular_language}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-\emph{Regular Languages} (or \emph{Token-level Languages}) are more
-restricted than Context-free Languages (\S\ref{sec:context_free}) and
-satisfy a number of Closure Properties. For two Regular Languages, $K$
-and $L$, the following operations result in a Language that is also
-Regular:
+\emph{Regular Languages} (or \emph{Token-level Languages}) are more restricted
+than Context-free Languages (\S\ref{sec:context_free}) and satisfy a number of
+Closure Properties. For two Regular Languages, $K$ and $L$, the following
+operations result in a Language that is also Regular:
 \[
   K \cup L, \quad
   K \cap L, \quad
@@ -900,19 +864,18 @@ Regular:
 Like Context-free Languages, Regular Languages are Closed under String
 Substitution (\S\ref{sec:string_substitution}).
 
-A common formulation of Regular Languages is using \emph{Regular
-  Expressions} (\S\ref{sec:regular_expression}) and conversely it is
-sometimes said that a Regular Language is one that can be defined by a
-Regular Expression. If there is at least one Regular Expression that
-matches a Set of Strings, then there exists an Infinite number of
-other Regular Expressions that also match that Set.
+A common formulation of Regular Languages is using \emph{Regular Expressions}
+(\S\ref{sec:regular_expression}) and conversely it is sometimes said that a
+Regular Language is one that can be defined by a Regular Expression. If there is
+at least one Regular Expression that matches a Set of Strings, then there exists
+an Infinite number of other Regular Expressions that also match that Set.
 
 An algebraic description is as follows:
 \[
   L = \{ w \in \Sigma^* | f(w) \in N \}
 \]
-where $f : \Sigma^* \rightarrow M$ is a Monoid Homomorphism of Finite
-Monoid (\S\ref{sec:monoid}) $M$ and $N \subseteq M$.
+where $f : \Sigma^* \rightarrow M$ is a Monoid Homomorphism of Finite Monoid
+(\S\ref{sec:monoid}) $M$ and $N \subseteq M$.
 
 
 
@@ -920,9 +883,9 @@ Monoid (\S\ref{sec:monoid}) $M$ and $N \subseteq M$.
 
 \emph{Regular Expression}
 
-if there is at least one Regular Expression that matches a Set of
-Strings, then there exists an Infinite number of other Regular
-Expressions that also match that Set
+if there is at least one Regular Expression that matches a Set of Strings, then
+there exists an Infinite number of other Regular Expressions that also match
+that Set
 
 
 
@@ -941,8 +904,8 @@ not all Regular Languages can be Induced
 
 \subsubsection{Extended Regular}\label{sec:extended_regular}
 
-\emph{Extended Regular Grammars} have Productions of either \emph{Right
-Regular} or \emph{Left Regular} form.
+\emph{Extended Regular Grammars} have Productions of either \emph{Right Regular}
+or \emph{Left Regular} form.
 
 Right:
 \[
@@ -968,8 +931,8 @@ Non-terminal characters.
 
 \subsubsection{Strictly Regular}\label{sec:strictly_regular}
 
-\emph{Strictly Regular Grammars} also have Productions of either Right
-Regular or Left Regular form.
+\emph{Strictly Regular Grammars} also have Productions of either Right Regular
+or Left Regular form.
 
 Right:
 \[
@@ -990,49 +953,47 @@ Left:
 \]
 where $a$ is a single Non-terminal.
 
-There is a one-to-one correspondence between the rules of a
-\emph{Strictly Left Regular Grammar} and those of a Non-deterministic
-Finite Automaton (\S\ref{sec:ndfa}).
+There is a one-to-one correspondence between the rules of a \emph{Strictly Left
+  Regular Grammar} and those of a Non-deterministic Finite Automaton
+(\S\ref{sec:ndfa}).
 
-The \emph{Pumping Lemma} states that the middle section of an
-Expression within a Regular Language may be repeated an arbitrary
-number of times to produce another Expression in that same Language;
-cf. Squares (\S\ref{sec:square_pattern}) in Context-sensitive
-Languages
+The \emph{Pumping Lemma} states that the middle section of an Expression within
+a Regular Language may be repeated an arbitrary number of times to produce
+another Expression in that same Language; cf. Squares
+(\S\ref{sec:square_pattern}) in Context-sensitive Languages
 
 
 
 \paragraph{k-Testable}\label{sec:k_testable}\hfill
 
-A \emph{k-Testable Language} is one where membership of an Expression
-depends on the first and last Symbol and a Set of Factors of length
-$k$. An example is a \emph{Local Language} which is a \emph{2-Testable
-  Language} described by the Regular Expression:
+A \emph{k-Testable Language} is one where membership of an Expression depends on
+the first and last Symbol and a Set of Factors of length $k$. An example is a
+\emph{Local Language} which is a \emph{2-Testable Language} described by the
+Regular Expression:
 \[
   (Q\Sigma^* \cap \Sigma^*R)\setminus\Sigma^*F\Sigma^*
 \]
-where $Q,R \subseteq \Sigma$ and $F \subseteq \Sigma \times \Sigma$.
-This requires for an Expression, $w$, that is a member of a Local
-Language to have its first Symbol in $Q$, and its second Symbol in
-$R$, and no factor of $w$ of length 2 is in $F$. A Local Language is
-Recognized by a \emph{Local Automaton} (\S\ref{sec:dfa}).
+where $Q,R \subseteq \Sigma$ and $F \subseteq \Sigma \times \Sigma$. This
+requires for an Expression, $w$, that is a member of a Local Language to have
+its first Symbol in $Q$, and its second Symbol in $R$, and no factor of $w$ of
+length 2 is in $F$. A Local Language is Recognized by a \emph{Local Automaton}
+(\S\ref{sec:dfa}).
 
 
 
 \subsubsection{Star-free}\label{sec:starfree_grammar}
 
 A \emph{Star-free Language} is one having a Generalized Star Height
-(\S\ref{sec:star_height}) equal to zero, that is, the minimal Star
-Height of all Expressions in the Language with the Star Height of an
-Expression's \emph{Complement} being equal.
+(\S\ref{sec:star_height}) equal to zero, that is, the minimal Star Height of all
+Expressions in the Language with the Star Height of an Expression's
+\emph{Complement} being equal.
 % FIXME complement: ref or explain
 
-Star-free Languages are characterized as those with Aperiodic
-Syntactic Monoids
+Star-free Languages are characterized as those with Aperiodic Syntactic Monoids
 (\S\ref{sec:syntactic_monoid})\cite{schutzenberger65} and also as the
-\emph{Counter-free Languages}\cite{mcnaughton-papert71} by the
-Aperiodic Finite-state Automaton (\S\ref{sec:aperiodic_automaton}) and
-Linear Temporal Logic (\S\ref{sec:linear_temporal}).
+\emph{Counter-free Languages}\cite{mcnaughton-papert71} by the Aperiodic
+Finite-state Automaton (\S\ref{sec:aperiodic_automaton}) and Linear Temporal
+Logic (\S\ref{sec:linear_temporal}).
 
 
 
@@ -1042,9 +1003,9 @@ generalizes Regular Grammars from Strings to Trees
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Affix Grammar}\label{sec:affix_grammar}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Affix Grammars} are those of a Context-free Grammar
 (\S\ref{sec:context_free}) with a Subset of the Non-terminals used as
@@ -1055,10 +1016,10 @@ Production, the value must be the same.
 
 \subsubsection{Two-level Grammars}\label{sec:two_level_grammar}
 
-Allowing the values for Affixes to be described by a Context-free
-Grammar (\S\ref{sec:context_free}) results in a Two-level Grammar.
-Two-level Grammars are \emph{Grammar Generators} that may
-\emph{Generate} Grammars with infinite rules.
+Allowing the values for Affixes to be described by a Context-free Grammar
+(\S\ref{sec:context_free}) results in a Two-level Grammar. Two-level Grammars
+are \emph{Grammar Generators} that may \emph{Generate} Grammars with infinite
+rules.
 
 
 
@@ -1120,9 +1081,9 @@ Node.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Analytic Grammar}\label{sec:analytic_grammar}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Analytic Grammars} are used in Parsing (\S\ref{sec:parser}). A
 few examples:
@@ -1160,9 +1121,9 @@ Top-down Parsing Languages
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Adaptive Grammar}\label{sec:adaptive_grammar}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Adaptive Grammars} allow for Production Rules to be manipulated
 within the Grammar, including addition, deletion, and modification of
@@ -1215,9 +1176,9 @@ Boullier\cite{boullier94}
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Abstract Reduction System}\label{sec:abstract_rewrite}
-% ====================================================================
+% ==============================================================================
 
 Formal Grammars may be abstracted as \emph{Abstract Reduction Systems}
 (or \emph{Abstract Rewrite Systems}), abbreviated $ARS$. An ARS is
@@ -1265,10 +1226,10 @@ Relations may be defined:
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Indexed Abstract Reduction System}
 \label{sec:indexed_rewrite}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 An \emph{Indexed Abstract Reduction System} differentiates Reductions
 into Classes so that $\rightarrow$ is the Indexed Union of these
@@ -1281,9 +1242,9 @@ This is identical to a Labelled Transition System
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Reduction Relation}\label{sec:reduction_relation}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 Operational Semantics (\S\ref{sec:operational_semantics})
 
@@ -1301,9 +1262,9 @@ Operational Semantics (\S\ref{sec:operational_semantics})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Normal Form}\label{sec:normal_form}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 An Object of an Abstract Rewriting System $(A,\rightarrow)$ is in
 \emph{Normal Form} (\emph{Irreducible}) if it cannot be Rewritten
@@ -1316,9 +1277,9 @@ Form of $x$ is denoted $x \downarrow$.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Normalization}\label{sec:normalization}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 An Object of an ARS is \emph{Weakly Normalizing} if some Rewrite
 sequence leads to a Normal Form and \emph{Strongly Normalizing} if
@@ -1353,9 +1314,9 @@ Sequences.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Joinability}\label{sec:rewrite_join}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 For an ARS $(A, \rightarrow)$, two Objects $x,y\in A$ are
 \emph{Joinable} when:
@@ -1391,9 +1352,9 @@ also Rosser's Trick (\S\ref{sec:rossers_trick}).
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Confluence}\label{sec:rewrite_confluence}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 An ARS $(A, \rightarrow)$ is \emph{Confluent} (or \emph{Globally
   Confluent}) if and only if:
@@ -1444,9 +1405,9 @@ when working with a Grobner Basis (\S\ref{sec:ring_ideal}).
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Convergence}\label{sec:rewrite_convergence}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 An ARS that is both Confluent (\S\ref{sec:rewrite_confluence}) and
 Terminating (\S\ref{sec:rewrite_termination}) is called \emph{Convergent} (or
@@ -1455,9 +1416,9 @@ Terminating (\S\ref{sec:rewrite_termination}) is called \emph{Convergent} (or
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{String Rewriting System}\label{sec:string_rewriting}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 A \emph{String Rewriting System} (\emph{SRS}, also \emph{Semi-Thue
   System}) is defined by a Tuple $(\Sigma, R)$ with Alphabet $\Sigma$
@@ -1470,13 +1431,13 @@ Markov Algorithm (\S\ref{sec:markov_algorithm})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Graph Rewriting System}\label{sec:graph_rewriting}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Term Rewriting System}\label{sec:term_rewriting}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 A \emph{Term Rewriting System} is an Abstract Rewriting System with
 \emph{Terms} (Formal Logic\S\ref{sec:term}) as Objects and a Rewrite
@@ -1514,9 +1475,9 @@ Vau Calculus (\S\ref{sec:vau_calculus})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Parallel Rewriting System}\label{sec:parallel_rewriting}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \subsubsection{L-system}\label{sec:l_system}
 
@@ -1526,9 +1487,9 @@ Fractals (\S\ref{sec:fractal})
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Parser} \label{sec:parser}
-% ====================================================================
+% ==============================================================================
 
 \emph{Parsing} is the process of \emph{Syntactic Analysis}. A
 \emph{Parser} analyzes Expressions according to the rules of a Formal
@@ -1542,9 +1503,9 @@ or other hierarchical structure.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Concrete Syntax Tree}\label{sec:concrete_syntax}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 A \emph{Concrete Syntax Tree} (or \emph{Parse Tree} or
 \emph{Derivation Tree}) is an Ordered, Rooted Tree
@@ -1584,9 +1545,9 @@ that might or might not represent Proofs.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Abstract Syntax Tree}\label{sec:abstract_syntax}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Abstract Syntax} is a representation of the Source (Concrete)
 Syntax being Parsed.
@@ -1594,7 +1555,7 @@ Syntax being Parsed.
 \emph{First-order Abstract Syntax} (FOAS), \emph{Higher-order Abstract
   Syntax} (HOAS)
 
-\fist Zephyr Abstract Syntax Description Language (ASDL) --
+\fist Zephyr Abstract Syntax Description Language (ASDL) ------------
 (Wang,Appel,Korn,Serra97)
 
 
@@ -1666,9 +1627,9 @@ Reflection (\S\ref{sec:reflective_subcategory})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Syntactic Analysis}\label{sec:syntactic_analysis}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Syntactic Analysis} is the process of Parsing input. The Parser
 determines if and how the input can be derived from the Start Symbol
@@ -1733,9 +1694,9 @@ Language, for which purpose an Attribute Grammar may also be used.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Top-down Parser}\label{sec:topdown_parser}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \subsubsection{Recursive Descent Parser}\label{sec:recursive_descent}
 
@@ -1749,9 +1710,9 @@ Mutual (Indirect) Recursion (\S\ref{sec:indirect_recursion})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Bottom-up Parsers}\label{sec:bottomup_parser}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \subsubsection{Precedence Parser}\label{sec:precedence_parser}
 
@@ -1782,9 +1743,9 @@ language
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Chart Parser}\label{sec:chart_parser}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 uses Dynamic Programming (\S\ref{sec:dynamic_programming}) which eliminates
 Backtracking and prevents a Combinatorial Explosion
@@ -1805,9 +1766,9 @@ performs well for Left-recursive Rules
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Parser Generator}\label{sec:parser_generator}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 A \emph{Parser Generator} takes as a Grammar (for example a BNF
 Grammar) and outputs the source code of a Parser for the Language
@@ -1815,15 +1776,15 @@ specified by the Grammar.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Template Processing}\label{sec:template_processing}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Automata Theory}\label{sec:automata_theory}
-% ====================================================================
+% ==============================================================================
 
 %FIXME section needs a rewrite or cleanup
 
@@ -1838,9 +1799,9 @@ Sequential Logic (\S\ref{sec:sequential_logic})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Combinational Logic}\label{sec:combinational_logic}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 or \emph{Time-independent Logic}
 
@@ -1855,9 +1816,9 @@ depends on the history of Input (Memory)
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Sequential Logic}\label{sec:sequential_logic}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 %FIXME does sequential logic subsume all the automatons?
 
@@ -1882,13 +1843,13 @@ State can change at any Time in response to changing Inputs
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Abstract Machine} \label{sec:abstract_machine}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{State Transition Systems}\label{sec:state_transition}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 A \emph{State Transition System} can have an infinite number of
 \emph{States} and \emph{Transitions}, represented as the pair:
@@ -2052,9 +2013,9 @@ Weak Bisimulation: Observational (Extensional) Equality
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Semiautomaton}\label{sec:semiautomaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 A State Transition System (\S\ref{sec:state_transition}) may be
 formulated as a \emph{Semiautomaton}:
@@ -2092,9 +2053,9 @@ Free Group can be depicted graphically as a De Bruijn Graph
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Automaton} \label{sec:automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 An \emph{Automaton} reads \emph{Input Strings} (\emph{Words}) and
 either \emph{Accepts} or \emph{Rejects} the Words depending on whether
@@ -2135,9 +2096,9 @@ Language.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Finite Automaton}\label{sec:finite_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Finite Automata} are \emph{Finite-state Machines} and take a
 finite Input String of Symbols and either Accept or Reject the Input
@@ -2160,11 +2121,10 @@ Input Symbol has a Transition Function to a single State.
 Deterministic Finite Automata recognize Regular Languages
 (\S\ref{sec:regular_language}).
 
-a DFA is an Subsequential Finite-state Transducer (SFT
-\S\ref{sec:sft}) with an Endmarked Output Alphabet $\hat{\Gamma} =
-(\varnothing, \{a,r\})$ so that valid Output Strings are only $a$ or
-$r$ which Transduces its Input to the Output String $a$ or $r$ to
-indicate Acceptance or Rejection of the Input, respectively
+a DFA is an Subsequential Finite-state Transducer (SFT \S\ref{sec:sft}) with an
+Endmarked Output Alphabet $\hat{\Gamma} = (\varnothing, \{a,r\})$ so that valid
+Output Strings are only $a$ or $r$ which Transduces its Input to the Output
+String $a$ or $r$ to indicate Acceptance or Rejection of the Input, respectively
 
 Representation of a Deterministic Finite Automaton as a 5-tuple:
 \[
@@ -2636,7 +2596,7 @@ $\longrightarrow$ -- Binary Relation on Configurations:
 
 \emph{Turing Completeness of LCAs}
 
-$\&$,$\bot$,$\oplus$,$\One$-$\mu$-subsingleton Logic --
+$\&$,$\bot$,$\oplus$,$\One$-$\mu$-subsingleton Logic ------------
 \emph{Well-behaved LCAs}
 
 $\mathsf{readL}$ and $\mathsf{readR}$ become Left- and Right-reading
@@ -2686,9 +2646,9 @@ Timed Multiparty Session Types (\S\ref{sec:timed_multiparty})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Pushdown Automaton}\label{sec:pushdown_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Pushdown Automata} add to Finite Automata a \emph{Stack} as a
 \emph{Parameter for Choice} of States and can recognize Context-free
@@ -2755,9 +2715,9 @@ A Pushdown Automata is Deterministic iff both:
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Linear Bounded Automaton} \label{sec:linear_bounded_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \emph{Linear Bounded Automata} are Turing Machines (i.e. Pushdown Automata
 \S\ref{sec:pushdown_automaton} with two Stacks), restricted to an Input of
@@ -2768,9 +2728,9 @@ is sufficient for calculation.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Turing Machine}\label{sec:turing_machine}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 A \emph{Turing Machine} operates on an infinite \emph{Storage Tape},
 which acts as the Read Input as well as Write Storage. Pushdown
@@ -2865,9 +2825,9 @@ Machine can be simulated by a DTM.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Zeno Machine}\label{sec:zeno_machine}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 Countably Infinite Operations in a Finite Time
 
@@ -2876,9 +2836,9 @@ Model Theory \S\ref{sec:discreteness_law})
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Nominal Automaton}\label{sec:nominal_automaton}
-% ====================================================================
+% ==============================================================================
 
 \url{https://www.youtube.com/watch?v=b38uoZccGuU} Silva 16
 
@@ -2891,9 +2851,9 @@ Epi-Mono Factorization (\S\ref{sec:epimono_factorization})
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{$\omega$-language}\label{sec:omega_language}
-% ====================================================================
+% ==============================================================================
 
 An $\omega$-language (\S\ref{sec:omega_language}) is a Subset of
 $\Sigma^\omega$
@@ -2911,9 +2871,9 @@ Distance, Metric Space %FIXME
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{$\omega$-regular language}\label{sec:omega_regular}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 Recognized by B\"uchi Automata (\S\ref{sec:buchi_automaton})
 
@@ -2922,9 +2882,9 @@ Second-order Logic called $\mathsf{S2S}$
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{$\omega$-automaton}\label{sec:omega_automaton}
-% ====================================================================
+% ==============================================================================
 
 variant of Finite Automaton (\S\ref{sec:finite_automaton}) that runs
 on Infinite (rather than Finite) Input Strings (Words)
@@ -2940,9 +2900,9 @@ be more succinct in their representations of a given $\omega$-language
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{B\"uchi Automaton}\label{sec:buchi_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 Recognizer for Subset of $\omega$-regular Languages
 (\S\ref{sec:omega_regular}); strictly weaker than other
@@ -2954,29 +2914,29 @@ Formula in Linear Temporal Logic (\S\ref{sec:linear_temporal})
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Rabin Automaton}\label{sec:rabin_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Streett Automaton}\label{sec:streett_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Parity Automaton}\label{sec:parity_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Muller Automaton}\label{sec:muller_automaton}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Cellular Automaton}\label{sec:cellular_automaton}
-% ====================================================================
+% ==============================================================================
 
-\url{https://video.ias.edu/PiTP/20180720-ScottAaronson} --
+\url{https://video.ias.edu/PiTP/20180720-ScottAaronson} ------------
 for any problem solvable with a Polynomial amount of Space (PSPACE Problem),
 making the Computation Reversible incurrs only a constant factor increase in the
 amount of space that is needed (1996 - Lange, McKenzie, Papp - \emph{Reversible
@@ -2984,9 +2944,9 @@ amount of space that is needed (1996 - Lange, McKenzie, Papp - \emph{Reversible
 
 
 
-% ====================================================================
+% ==============================================================================
 \section{Metalanguage}\label{sec:metalanguage}
-% ====================================================================
+% ==============================================================================
 
 A \emph{Metalanguage} is a Language used to describe another Language,
 the \emph{Object Language}.
@@ -3004,9 +2964,9 @@ Metavariables and Roman characters otherwise for Object Variables.
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Metasyntax}\label{sec:metasyntax}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 The \emph{Metasyntax} describes the structure of valid Expressions in
 a Metalanguage. There are three types of Symbols distinguished in
@@ -3024,9 +2984,9 @@ used. For example, Metasyntax for Regular Languages
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Embedded Metalanguage}\label{sec:embedded_metalanguage}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 The use of an Object Language to describe itself is an \emph{Embedded
   Metalanguage} (e.g. the English words \emph{noun} and \emph{verb}
@@ -3034,9 +2994,9 @@ are used to describe English itself).
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Ordered Metalanguage}\label{sec:ordered_metalanguage}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 An \emph{Ordered Metalanguage} is constructed to discuss an
 \emph{Object Language}, and a further Ordered Metalanguage may be
@@ -3047,8 +3007,8 @@ analogous to \emph{Ordered Logic}
 
 
 
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Hierarchical Metalanguage}\label{sec:hierarchical_metalanguage}
-% --------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 an Ordered Hierarchy of Embedded Metalanguages
