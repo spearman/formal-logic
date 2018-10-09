@@ -927,9 +927,21 @@ Sigmoid Curve:
 \[
   f(x) = \frac{L}{1 + e^{-k(x-x_0)}}
 \]
-where $L$ controls the curve's Maximum and $k$ is the steepness of the curve
+where $x_0$ is the curve's midpoint, $L$ controls the curve's maximum and $k$ is
+the steepness of the curve
+
+Standard Logistic Function:
+\[
+  f(x) = \frac{1}{1 + e^{-x}}
+\]
 
 \fist Continuous version of (Discrete) Logistic Map (\S\ref{sec:logistic_map})
+
+\fist Logistic Model (\S\ref{sec:logistic_model}) -- Statistical Model using
+Logistic Function to Model a Binary Dependent Variable
+
+\fist Logistic Regression (\S\ref{sec:logistic_regression}) -- Estimating the
+Parameters of a Logistic Model
 
 \emph{Logistic Differential Equation} -- the Logistic Function is the Solution
 to the First-order Non-linear Ordinary Differential Equation:
@@ -1240,8 +1252,16 @@ Gamma Distribution (\S\ref{sec:gamma_distribution})
 
 
 % --------------------------------------------------------------------
-\subsection{Conformal Map}\label{sec:conformal_map}
+\subsection{Geometric Function Theory}\label{sec:geometric_function_theory}
 % --------------------------------------------------------------------
+
+``Geometric Properties'' of Analytic Functions (\S\ref{sec:analytic_function})
+
+Riemann Mapping Theorem
+
+
+
+\subsubsection{Conformal Map}\label{sec:conformal_map}
 
 an Invertible Mapping (FIXME: bijective ???)
 
@@ -1266,6 +1286,12 @@ is a \emph{Real Conformal Mapping} (FIXME: explain)
 a Conformal Mapping preserves Laplace's Equation
 (\S\ref{sec:laplaces_equation})-- only changes the Laplacian by a non-negative
 factor
+
+
+
+\subsubsection{Analytic Continuation}\label{sec:analytic_continuation}
+
+cf. Multivalued Functions (\S\ref{sec:multimap})
 
 
 
@@ -2008,6 +2034,8 @@ applications of Calculus of Finite Differences
 (\S\ref{sec:finite_differences_calculus}) --TODO
 
 \begin{itemize}
+  \item \emph{Numerical Differentiation} (\S\ref{sec:numerical_differentiation})
+    -- estimating Derivatives
   \item \emph{Numerical Integration} (\emph{Quadrature}
     \S\ref{sec:numerical_integration}) -- Evaluating Integrals
     (\S\ref{sec:integral})
@@ -2184,6 +2212,20 @@ Approximation to a Function at a given Point
 UC Math 352 Lec. 10 - \url{https://www.youtube.com/watch?v=XII0GSmEAgg}
 
 minimizes the worst-case deviation
+
+
+
+% --------------------------------------------------------------------
+\subsection{Numerical Differentiation}\label{sec:numerical_differentiation}
+% --------------------------------------------------------------------
+
+Algorithms for estimation of Derivatives (\S\ref{sec:derivative}) of Functions
+
+Finite Difference (\S\ref{sec:finite_difference}) Formulas
+
+Differential Quadrature
+
+classical Finite Difference Approximation 
 
 
 
@@ -3292,6 +3334,8 @@ Differential Geometry formalized in the language of Topos Theory
 
 \fist Differential Graded Category (\S\ref{sec:differential_graded_category})
 
+\fist Differentiable Programming (\S\ref{sec:differentiable_programming})
+
 Derivative (\S\ref{sec:derivative}) $f : \reals \rightarrow \reals$
 
 Vector Derivative (\S\ref{sec:vector_derivative})
@@ -3588,6 +3632,21 @@ Differences)
 
 the Derivative at a Point can also be seen as a Function $\diffy{f}$ that maps
 Differentials $\diffy{x}$ in $X$ to Differentials $\diffy{y}$ in $Y$
+
+``classical'' methods for computing the Derivative of a Function specified by a
+Computer Program:
+\begin{itemize}
+\item \emph{Symbolic Differentiation} (Computer Algebra)
+\item \emph{Numerical Differentiation} (\S\ref{sec:numerical_differentiation})
+  -- Algorithms for estimating Derivatives of Functions, Finite Difference
+  (\S\ref{sec:finite_difference}) Methods
+\end{itemize}
+
+\fist cf. \emph{Automatic Differentiation} (\emph{AD}
+\S\ref{sec:automatic_differentiation}) -- repeated application of the Chain Rule
+(\S\ref{sec:chain_rule}), i.e. Forward and Reverse Accumulation
+
+\asterism
 
 \fist cf. Pushforward (\S\ref{sec:pushforward}) -- Differential or Derivative of
 a Smooth Map
@@ -3945,6 +4004,9 @@ Complex Dynamics (\S\ref{sec:complex_dynamics})
 
 Trigonometric Functions (\S\ref{sec:trigonometric_function})
 
+\fist Geometric Function Theory (\S\ref{sec:geometric_function_theory});
+Analytic Continuations (\S\ref{sec:analytic_continuation})
+
 a Complex Function is Analytic if and only if it is Holomorphic
 (\S\ref{sec:holomorphic_function}), i.e. it is Complex Differentiable \fist
 Cauchy-Riemann Conditions (\S\ref{sec:cauchy_riemann})
@@ -3961,10 +4023,6 @@ Analytic Functions on a Real Interval do not need to be Differentiable
 
 Analytic Variety (\S\ref{sec:analytic_variety}) -- defined locally as the Set of
 common Solutions of several Equations involving Analytic Functions
-
-
-
-\subparagraph{Analytic Continuation}\label{sec:analytic_continuation}
 
 
 
@@ -5487,6 +5545,9 @@ Solving Differential Equations by Approximating them with Difference Equations
 
 Discrete equivalent of (Infinitesimal) Differentials (\S\ref{sec:differential})
 
+Finite Difference Formulas (Numerical Differentiation
+\S\ref{sec:numerical_differentiation})
+
 
 
 \paragraph{Forward Difference}\label{sec:forward_difference}\hfill
@@ -6546,6 +6607,22 @@ Steady State Condition (TODO)
 \paragraph{Stochastic Partial Differential Equation}\label{sec:spde}\hfill
 
 \fist Stochastic Differential Equation (\S\ref{sec:sde})
+
+
+
+% ====================================================================
+\section{Operational Calculus}\label{sec:operational_calculus}
+% ====================================================================
+
+2016 - Sajovic, Vuk - \emph{Operational Calculus for Differentiable Programming}
+-- Operational Calculus (\S\ref{sec:operational_calculus}) provides a Formal
+Semantics for Differentiable Programming
+(\S\ref{sec:differentiable_programming}) through an algebra of higher-order
+constructs
+
+
+
+\subsection{Fractional Calculus}\label{sec:fractional_calculus}
 
 
 
