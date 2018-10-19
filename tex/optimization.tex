@@ -1238,7 +1238,7 @@ Learning as Automated Differentiation tools are to Deep Learning
 \asterism
 
 2018 - Conal Elliot - \emph{The simple essence of automatic differentiation}
-(video lecture):
+(video lecture): \url{https://www.youtube.com/watch?v=Shl3MtWGu18}
 
 1965 - Spivak - \emph{Calculus on Manifolds}
 
@@ -1299,11 +1299,6 @@ e.g.:
   \item $D snd (a) = snd$
 \end{itemize}
 
-\emph{Cartesian Categories} (\S\ref{sec:cartesian_category})
-
-\emph{Product Rule} (\emph{Leibniz Rule} \S\ref{sec:product_rule}) for Products
-of Functions
-
 AD example of the $sqr(x) = x * x$ Function, $D_{comp}$ takes a value $x$ and
 returns a pair:
 \begin{enumerate}
@@ -1313,6 +1308,51 @@ returns a pair:
     \emph{other} $x'$ and returns the result of applying the Local Linearization
     of $sqr$ at $x$
 \end{enumerate}
+
+\emph{Product Rule} (\emph{Leibniz Rule} \S\ref{sec:product_rule}) for Products
+of Functions
+
+\emph{Cartesian Categories} (\S\ref{sec:cartesian_category}) -- the above
+follows from the property of Linear Maps that they form a Cartesian Category; it
+is therefore possible to \emph{generalize} Automatic Differentiation to an
+arbitrary Cartesian Category with Multiplication generalized in terms of a
+\emph{Scale} operation:
+\begin{align*}
+scale   & : a \rightarrow (a \multimap a) \\
+scale u & = \lambda v \rightarrow u * v
+\end{align*}
+and a (Cocartesian) \emph{Join} operation, $\triangledown$:
+\begin{align*}
+  (\triangledown)   & : (a \multimap c) \rightarrow (b \multimap c) \rightarrow
+    ((a \times b) \multimap c) \\
+  f \triangledown g & = \lambda (a,b) \rightarrow f(a) + g(b)
+\end{align*}
+as:
+\[
+mul = D (mul \vartriangle
+  (\lambda (a,b) \rightarrow (scale\ b \triangledown scale\ a)))
+\]
+
+an example would be Functions between ``Additive'' Types (Types with Addition
+and Zero)
+
+using (generalized) \emph{Matrices} (as the composition of the ``row
+structures'' and ``column structures'') instead of Functions as a data
+representation -- Identity is the Identity Matrix, Composition is Matrix
+Multiplication, Scale is constructing a $1 \times 1$ Matrix, Join takes two
+Matrices of the same height and horizontally juxtaposes them, and Fork takes two
+Matrices of the same width and vertically juxtaposes them
+
+All-right Association (Forward Mode AD) --
+
+All-left Association (Reverse Mode AD) -- better for Gradient-based
+Optimization, Machine Learning
+
+Continuation Category
+
+Dual Vectors (Linear Functionals) -- Gradient-based Optimization
+
+Automatic Differentiation \emph{is} Symbolic Differentiation done by a Compiler
 
 
 
