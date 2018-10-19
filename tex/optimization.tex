@@ -1196,6 +1196,9 @@ Differentiable Programming Space
 
 \subsubsection{Automatic Differentiation}\label{sec:automatic_differentiation}
 
+repeated application of the Chain Rule (\S\ref{sec:chain_rule}), i.e. Forward
+and Reverse Accumulation
+
 cf. \emph{classical methods}:
 
 \begin{itemize}
@@ -1207,6 +1210,109 @@ Automatic Differentiation can be more efficient than Symbolic Differentiation
 and does not have rounding errors like Numerical Differentiation, and is faster
 than both classical methods at computing the Partial Derivatives of a Function
 with respect to many Inputs, needed for Gradient-based Optimization Algorithms
+
+Supervised Learning
+
+(wiki):
+
+Forward-mode Automatic Differentiation is accomplished by augmenting the Algebra
+of Real Numbers by adding a component to every number which will represent the
+\emph{Derivative} (\S\ref{sec:derivative}) of a Function at the number, and
+extending all Arithmetic Operators to take this into account, resuling in the
+Algebra of Dual Numbers (\S\ref{sec:dual_number}); generalized by theory of
+Operational Calculus (\S\ref{sec:operational_calculus}) on Programming Spaces
+through the Tensor Algebra on the Dual Space (\S\ref{sec:dual_space})
+
+Forward Accumulation, Reverse Accumulation
+
+generally Forward and Reverse Accumulation are specific instances of applying
+the \emph{Operator of Program Composition} (FIXME)
+
+2018 - van de Meent, Paige, Yang, Wood -
+\emph{An Introduction to Probabilistic Programming} --
+two approaches to AI:
+
+Probabilistic Programming Languages are to Probabilistic (or Bayesian) Machine
+Learning as Automated Differentiation tools are to Deep Learning
+
+\asterism
+
+2018 - Conal Elliot - \emph{The simple essence of automatic differentiation}
+(video lecture):
+
+1965 - Spivak - \emph{Calculus on Manifolds}
+
+the \emph{Differentiation} is a Higher-order Function $D$ with signature:
+\[
+  D : (a \rightarrow b) \rightarrow (a \rightarrow (a \multimap b))
+\]
+that is, a Function which given a Function from $a$ to $b$ returns a
+(Higher-order) Function from $a$ to a \emph{Linear Map} from $a$ to $b$; the
+\emph{Derivative} (\S\ref{sec:derivative}) of a Function at a Point of $a$ is
+the Linear Map given by applying the resulting Function to the Point;
+specifically this Linear Map is a \emph{Local Linear Approximation} $T$ of the
+original Function at that Point, i.e.:
+\[
+  \lim_{\varepsilon \rightarrow 0}
+    \frac{\|f (a + \varepsilon) - (f a + T \varepsilon)\|}{\|\varepsilon\|}
+    \equiv 0
+\]
+
+the \emph{Chain Rule} (\S\ref{sec:chain_rule}) applies to \emph{Sequential
+  Composition} $(g \circ f)(a) = g (f (a))$ of Functions:
+\[
+  D(g \circ f) (a) \equiv D g (f(a)) \circ D f (a)
+\]
+
+for \emph{Parallel Composition} (i.e. \emph{no Data Dependencies}) or the ``Fork
+Operator'', $\delta$ is the fusion of two Functions on the same Domain into a
+single Function that gives a Product, $(f \vartriangle g)(a) = (f(a), g(a))$,
+also has a Derivative Rule:
+\[
+  D(f \vartriangle g)(a) \equiv (D f (a)) \vartriangle (D g (a))
+\]
+
+note that the Chain Rule is \emph{not compositional}, i.e. the Derivative of the
+Composition is not \emph{just} a Function of the two Derivatives, but it
+involves sampling $g$ at $f(a)$; in Automatic Differentiation, a compositional
+version of Differentiation is given as:
+\begin{align*}
+  D_{comp}   & : (a \rightarrow b)
+    \rightarrow (a \rightarrow (b \times (a \multimap b))) \\
+  D_{comp} f & = f \vartriangle D f
+\end{align*}
+which returns a Function which computes both the Linear Map and its value at the
+Point $a$
+
+the Derivative of a Linear Function $f$ is itself everywhere:
+\[
+  D_{comp} f(a) = (f a, f)
+\]
+that is:
+\[
+  D_{comp} f = f \vartriangle (const f)
+\]
+e.g.:
+\begin{itemize}
+  \item $D id (a) = id$
+  \item $D fst (a) = fst$
+  \item $D snd (a) = snd$
+\end{itemize}
+
+\emph{Cartesian Categories} (\S\ref{sec:cartesian_category})
+
+\emph{Product Rule} (\emph{Leibniz Rule} \S\ref{sec:product_rule}) for Products
+of Functions
+
+AD example of the $sqr(x) = x * x$ Function, $D_{comp}$ takes a value $x$ and
+returns a pair:
+\begin{enumerate}
+  \item $x^2 = sqr(x)$ -- the result of applying $sqr$ to $x$
+  \item $2*x = D sqr(x)$ -- the Derivative of $sqr$ at $x$, but note this is
+    seen as a \emph{Linear Map} $(D sqr(x)) (x') = 2 * x * x'$ that takes any
+    \emph{other} $x'$ and returns the result of applying the Local Linearization
+    of $sqr$ at $x$
+\end{enumerate}
 
 
 
