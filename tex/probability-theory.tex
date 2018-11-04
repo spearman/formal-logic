@@ -40,12 +40,20 @@ TODO: Giry Monads (Probability Monads) -
 \section{Population}\label{sec:population}
 % ====================================================================
 
-Totality of Observations
+``Totality of Observations''
 
 Observation: Value of a Random Variable $X$ having some Probability
 Distribution $f(x)$
 
 Paired Observation (Dependent) (???)
+
+(wiki):
+
+\emph{Statistical Population} -- a Set of ``similar items'' or Events
+(\S\ref{sec:probability_event}) of interest
+
+Descriptive Statistics (\S\ref{sec:descriptive_statistics}): a Subset of the
+Population is a \emph{Statistical Sample} (\S\ref{sec:statistical_sample})
 
 
 
@@ -54,6 +62,9 @@ Paired Observation (Dependent) (???)
 % --------------------------------------------------------------------
 
 or \emph{Statistical Parameter}
+
+(wiki): a ``quantity'' that indexes a Family of Probability Distributions
+(\S\ref{sec:probability_distribution})
 
 can be regarded as a ``numerical characteristic'' of a Population or a
 Statistical Model (\S\ref{sec:statistical_model}) \fist cf. Parametric
@@ -64,6 +75,10 @@ are Parameterized by the Mean and Standard Deviation
 
 $\mu$, $\sigma$
 
+\fist \emph{Estimation Theory} (\S\ref{sec:estimation_theory}) deals with
+``\emph{Estimating}'' the values of Statistical Parameters
+based on data that has a ``\emph{random component}'' (FIXME: clarify)
+
 
 
 % --------------------------------------------------------------------
@@ -72,9 +87,15 @@ $\mu$, $\sigma$
 
 Subset of a Population
 
+Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
+
 
 
 \subsubsection{Random Sample}\label{sec:random_sample}
+
+Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
+
+
 
 \paragraph{Simple Random Sample}\label{sec:simple_random_sample}\hfill
 
@@ -86,8 +107,8 @@ Subset of a Population
 \subsection{Statistic}\label{sec:statistic}
 % --------------------------------------------------------------------
 
-Function of the Random Variable (\S\ref{sec:random_variable})
-constituting a Random Sample (\S\ref{sec:random_sample})
+Function of the Random Variable (\S\ref{sec:random_variable}) constituting a
+Random Sample (\S\ref{sec:random_sample})
 
 $\overline{x}$, $\sigma^2$
 
@@ -697,6 +718,10 @@ a Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a
 Sample Space (\S\ref{sec:sample_space}) $S$ together with a Set of Probability
 Distributions $\mathcal{P}$ on $S$
 
+(wiki): a Statistical (or Population) Parameter
+(\S\ref{sec:population_parameter}) is a ``quantity'' that indexes a Family of
+Probability Distributions
+
 the Entropy (\S\ref{sec:entropy}) of a Distribution is the Mean number
 of Bits-per-symbols in an Optimal Encoding (\S\ref{sec:encoding}) --
 \url{https://golem.ph.utexas.edu/category/2017/02/functional_equations_iii_expla.html}
@@ -1242,11 +1267,22 @@ the Statistic is Significant
 
 or \emph{Probabilistic Model}
 
-Parameters
+\emph{Statistical Population} (\S\ref{sec:population}) -- Set of ``similar
+items'' or Events (\S\ref{sec:probability_event}) of interest
+
+\fist Descriptive Statistics (\S\ref{sec:descriptive_statistics}): a Subset of
+the Population is a \emph{Statistical Sample} (\S\ref{sec:statistical_sample})
+
+Statistical Parameters (Population Parameters \S\ref{sec:population_parameter})
 
 Data
 
-Estimate: Data $\rightarrow$ Parameters
+Estimate (\S\ref{sec:estimation_theory}): Data $\rightarrow$ Parameters
+
+\emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
+Parameters of a Statistical Model
+
+cf. Regression Model (\S\ref{sec:regression_model})
 
 (wiki):
 
@@ -1385,7 +1421,7 @@ or \emph{Probabilistic Directed Acyclic Graphical Model}
 \subsubsection{Generalized Linear Model}\label{sec:generalized_linear_model}
 
 not to be confused with General Linear Models (Multivariate Regression Models
-\S\ref{sec:generalized_linear_model})
+\S\ref{sec:multivariate_regression})
 
 
 
@@ -1413,12 +1449,38 @@ Logistic Regression (\S\ref{sec:logistic_regression})
 \subsection{Estimation Theory}\label{sec:estimation_theory}
 % --------------------------------------------------------------------
 
+deals with ``\emph{Estimating}'' the values of Statistical Parameters
+(\S\ref{sec:population_parameter}) based on data that has a ``\emph{random
+  component}'' (FIXME: clarify)
+
+an \emph{Estimator} (\S\ref{sec:estimator}) attempts to approximate unknown
+Statistical Parameters using ``measured data''
+
 \emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
-Parameters of a Statistical Model
+Parameters of a Statistical Model (\S\ref{sec:statistical_model})
+
+approaches:
+\begin{itemize}
+  \item \emph{Probabilistic} -- assume the ``measured data'' is ``random'' with
+    a Probability Distribution (\S\ref{sec:probability_distribution}) dependent
+    on the Statistical Parameters of interest
+  \item \emph{Set-membership} (\S\ref{sec:set_estimation}) -- 
+\end{itemize}
 
 
 
 \subsubsection{Estimator}\label{sec:estimator}
+
+(wiki):
+
+an \emph{Estimator} attempts to approximate unknown Statistical Parameters
+(\S\ref{sec:statistical_paramaeter}) using ``measured data''
+
+when the data consists of ``multiple variables'', Estimating the ``relation''
+between them is \emph{Regression Analysis} (\S\ref{sec:regression_analysis})
+--FIXME: clarify
+
+
 
 \paragraph{Point Estimator}\label{sec:point_estimator}\hfill
 
@@ -1448,6 +1510,12 @@ Sampling Distribution (\S\ref{sec:sampling_distribution})
 
 
 
+\subsubsection{Set Estimation}\label{sec:set_estimation}
+
+Set-membership approach to Estimation Theory (cf. Probabilistic approach)
+
+
+
 % --------------------------------------------------------------------
 \subsection{Regression Analysis}\label{sec:regression_analysis}
 % --------------------------------------------------------------------
@@ -1468,17 +1536,44 @@ cf. Numerical Analysis (\S\ref{sec:numerical_analysis}): Interpolation
 
 
 
+\subsubsection{Regression Model}\label{sec:regression_model}
+
+\emph{Regression Model}:
+\begin{itemize}
+  \item \emph{Unknown Parameters} ($\beta$) -- Statistical Parameters
+    (\S\ref{sec:statistical_parameter})
+  \item \emph{Independent Variables} ($X$) -- ``Regression Variable'',
+    ``Regressor'', ``Covariate'', ``Explanatory Variable''
+  \item \emph{Dependent Variable} ($Y$) -- ``Response Variable'',
+    ``Regressand'', ``Criterion'', ``Explained Variable''; variable whose values
+    are to be ``explained'' in terms of the Independent Variable
+\end{itemize}
+
+Linear Regression Models (\S\ref{sec:linear_regression})
+
+...
+
+
+
 \subsubsection{Regression Error}\label{sec:regression_error}
 
 \subsubsection{Regression Residual}\label{sec:regression_residual}
 
 \subsubsection{Linear Regression}\label{sec:linear_regression}
 
+\emph{Linear Regression Model}
+
 Linear Least Squares (\S\ref{sec:linear_least_squares})
 
 Gradient Descent (\S\ref{sec:gradient_descent})
 
 Simple Linear Regression -- single Regressor (Independent Variable)
+
+Regression Coefficients
+
+Error Term $\varepsilon$
+
+$Y = \beta_0 + \beta_1 X + \varepsilon$
 
 
 
@@ -1612,6 +1707,24 @@ Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
 \subsection{Statistical Analysis}\label{sec:statistical_analysis}
 % --------------------------------------------------------------------
 
+%FIXME: move this section ?
+
+Statistical Theory -- FIXME
+
+Statistic (\S\ref{sec:statistic}) -- a Function of a Random Variable
+(\S\ref{sec:random_variable}) constituting a Random Sample
+(\S\ref{sec:random_sample})
+
+Statistical Population (\S\ref{sec:population})
+
+Statistical Parameter (\S\ref{sec:population_parameter})
+
+Statistical Model (\S\ref{sec:statistical_model})
+
+Statistical Inference (\S\ref{sec:statistical_inference})
+
+
+
 \subsubsection{Cluster Analysis}\label{sec:cluster_analysis}
 
 \paragraph{Hierarchical Clustering}\label{sec:hierarchical_clustering}\hfill
@@ -1683,7 +1796,7 @@ TDA (R package)
 \subsection{Causal Inference}\label{sec:causal_inference}
 % --------------------------------------------------------------------
 
-<http://www.inference.vc/untitled/>
+\url{http://www.inference.vc/untitled/}
 
 
 
