@@ -37,6 +37,20 @@ TODO: Giry Monads (Probability Monads) -
 
 
 % ====================================================================
+\section{Observation}\label{sec:observation}
+% ====================================================================
+
+\emph{``data point''}
+
+\fist Curve Fitting (\S\ref{sec:curve_fitting}): the process of constructing a
+Curve (or Function) that has the ``best Fit'' to a Series of data points
+(Observations), possibly subject to constraints
+
+(FIXME: cf. Event ???)
+
+
+
+% ====================================================================
 \section{Population}\label{sec:population}
 % ====================================================================
 
@@ -227,6 +241,8 @@ Subset of a \emph{Event Space} (Sample Space \S\ref{sec:sample_space})
 
 if an Outcome is inside an Event (Subset), it is said to have
 ``\emph{Occurred}''
+
+(FIXME: cf. Observation ???)
 
 
 
@@ -923,6 +939,9 @@ Normalization of the Zipf Distribution
   \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
 \]
 
+\fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
+Infinite-dimensional generalizations of Multivariate Normal Distributions
+
 2018 - Eric Jang
 - \emph{Normalizing Flows Tutorial}
 - \url{https://blog.evjang.com/2018/01/nf1.html}
@@ -959,15 +978,6 @@ Variance $\sigma^2 = \alpha \beta^2$
 
 
 
-\paragraph{Continuous Power Law Distribution}
-\label{sec:continuous_power_law_distribution}\hfill
-
-\subparagraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
-
-prototypical Power Law Distribution
-
-
-
 \subparagraph{Exponential Distribution}\label{sec:exponential_squared}\hfill
 
 Continuous Random Variable $X$ with parameter $\beta > 0$:
@@ -995,9 +1005,28 @@ Non-symmetric
 
 
 
+\paragraph{Continuous Power Law Distribution}
+\label{sec:continuous_power_law_distribution}\hfill
+
+Scale Invariance (\S\ref{sec:scale_invariance})
+
+
+
+\subparagraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
+
+prototypical Power Law Distribution
+
+
+
 \paragraph{$t$-distribution}\label{sec:t_distribution}\hfill
 
 (or \emph{Student's $t$-distribution})
+
+
+
+\paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
+
+or \emph{Cauchy-Lorentz Distribution}
 
 
 
@@ -1064,6 +1093,15 @@ Standard Error (\S\ref{sec:standard_error})
 
 
 \subsubsection{Tweedie Distribution}\label{sec:tweedie_distribution}
+
+(wiki): \emph{Tweedie Convergence Theorem}: describes the Convergence of certain
+Statistical Processes towards the Family of Statistical Models known as
+\emph{Tweedie Distributions}; Variance-to-Mean Power Law (TODO: xref); cf.
+Taylor's Power Law, \emph{Fluctuation Scaling}; alternative paradigm to explain
+Power Law manifestations attributed to ``Self-organized Criticality''
+(SOC \S\ref{sec:soc})
+
+Pink ($1/f$) Noise
 
 \fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
 Sequential (Time Series) data attributed to ``convergence effects'' related to
@@ -1523,6 +1561,8 @@ Set-membership approach to Estimation Theory (cf. Probabilistic approach)
 \emph{Regression} is the Estimation (\S\ref{sec:estimation_theory}) of
 Parameters of a Statistical Model
 
+\fist cf. Curve Fitting (\S\ref{sec:curve_fitting})
+
 Regression Variable,
 ``Regressor'', or ``Explanatory Variable'' -- Independent Variable (Covariate)
 
@@ -1559,11 +1599,28 @@ Linear Regression Models (\S\ref{sec:linear_regression})
 
 \subsubsection{Regression Residual}\label{sec:regression_residual}
 
+\subsubsection{Fit}\label{sec:model_fit}
+
+measures the discrepancy between Observed (\S\ref{sec:observation}) values and
+Expected Values under the Statistical Model
+
+%FIXME: move section ???
+
+cf. Curve Fitting (\S\ref{sec:curve_fitting})
+
+
+
 \subsubsection{Linear Regression}\label{sec:linear_regression}
 
 \emph{Linear Regression Model}
 
-Linear Least Squares (\S\ref{sec:linear_least_squares})
+Fit using:
+\begin{itemize}
+  \item Linear Least Squares (\S\ref{sec:linear_least_squares}): if errors are
+    \emph{normally distributed}, Least Squares ($2$-norm Best Fit) should be
+    used
+  \item ...
+\end{itemize}
 
 Gradient Descent (\S\ref{sec:gradient_descent})
 
@@ -1950,15 +2007,40 @@ First-hitting-time Model
 
 
 % --------------------------------------------------------------------
-\subsection{Discrete-time Stochastic Process}
-\label{sec:discretetime_stochastic}
+\subsection{Random Field}\label{sec:random_field}
 % --------------------------------------------------------------------
 
-\subsubsection{Bernoulli Process}\label{sec:bernoulli_process}
+(wiki): for a Probability Space $(\Omega, \mathcal{F}, P)$, an \emph{$X$-valued
+  Random Field}, $F$, is a collection of $X$-valued Random Variables indexed by
+elements in a Topological Space $T$:
+\[
+  F = \{ F_t : t \in T \}
+\]
+where each $F_t$ is an $X$-valued Random Variable
 
-Bernoulli Trial (\S\ref{sec:bernoulli_trial})
+Tensor-valued Random Fields
 
-Stochastic Computing
+
+
+\subsubsection{Markov Random Field}\label{sec:markov_random_field}
+
+(MRF)
+
+
+
+\subsubsection{Gibbs Random Field}\label{sec:gibbs_random_field}
+
+\subsubsection{Conditional Random Field}\label{sec:conditional_random_field}
+
+Machine Learning: Sequence MOdelling
+
+
+
+\subsubsection{Gaussian Random Field}\label{sec:gaussian_random_field}
+
+(GRF)
+
+a 1D GRF is a Gaussian Process (\S\ref{sec:gaussian_process})
 
 
 
@@ -1984,6 +2066,65 @@ Markov Property (``Memorylessness'')
 
 can be seen as a special case of Petri Nets (\S\ref{sec:petri_net})
 where every Transition has a single Input and a single Output
+
+
+
+% --------------------------------------------------------------------
+\subsection{Discrete-time Stochastic Process}\label{sec:discretetime_stochastic}
+% --------------------------------------------------------------------
+
+\subsubsection{Bernoulli Process}\label{sec:bernoulli_process}
+
+Bernoulli Trial (\S\ref{sec:bernoulli_trial})
+
+Stochastic Computing
+
+
+
+% --------------------------------------------------------------------
+\subsection{Continuous-time Stochastic Process}\label{sec:continuous_stochastic}
+% --------------------------------------------------------------------
+
+\subsubsection{Gaussian Process}\label{sec:gaussian_process}
+
+a 1D Gaussian Random Field (\S\ref{sec:gaussian_random_field})
+
+can be seen as the Infinite-dimensional generalization of Multivariate Normal
+Distributions (\S\ref{sec:normal_distribution})
+
+the Distribution of a Gaussian Process is the Joint Distribution of infinitely
+many Random Variables, i.e. it is a Distribution over Functions with a
+Continuous Domain
+
+Machine Learning: Lazy Learning (1D Gaussian Distributions)
+
+
+
+\paragraph{Fractional Brownian Motion}\label{sec:fractional_brownian}\hfill
+
+(\emph{fBm})
+
+$H \in (0,1) \subset \reals$ -- Hurst index
+
+$H = 1/2$ -- Wiener Process (Brownian Motion \S\ref{sec:wiener_process})
+
+for $H > 1/2$, increments of the process are Positively Correlated, and exhibits
+Long-range dependence
+
+for $H < 1/2$, increments of the process are Negatively Correlated
+
+Hausdorff and Box Dimension of $2 - H$
+
+\fist Multifractals (\S\ref{sec:multifractal_system}): generalized framework of
+Fractional Brownian Motions
+
+
+
+\subparagraph{Wiener Process}\label{sec:wiener_process}\hfill
+
+or \emph{Brownian Motion}
+
+$H = 1/2$
 
 
 
