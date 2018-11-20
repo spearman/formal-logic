@@ -242,7 +242,9 @@ Subset of a \emph{Event Space} (Sample Space \S\ref{sec:sample_space})
 if an Outcome is inside an Event (Subset), it is said to have
 ``\emph{Occurred}''
 
-(FIXME: cf. Observation ???)
+\emph{Probability} (\S\ref{sec:probability})
+
+(FIXME: cf. Observation \S\ref{sec:observation})
 
 
 
@@ -272,6 +274,8 @@ Mutually Exclusive States
 
 \subsubsection{Independent Event}\label{sec:independent_event}
 
+\fist cf. Independence (\S\ref{sec:independence})
+
 $P(B|A) = P(B)$ or $P(A|B) = P(A)$ -- note that this is only defined when the
 Conditioning Event has Non-zero Probability
 
@@ -284,8 +288,6 @@ $n$ Events are Independent if:
 for any distinct Events $i,j,\ldots,g$
 
 Pairwise Independence does not imply $n$-way Independence
-
-\fist Independence (\S\ref{sec:independence})
 
 $P(A \cap B | C) = P(A|C)P(B|C)$
 
@@ -309,6 +311,12 @@ $X : \Omega \rightarrow E$
 Discrete Random Variable (\S\ref{sec:discrete_random_variable})
 
 Continuous Random Variable (\S\ref{sec:continuous_random_variable})
+
+a \emph{Dependence} (Association \S\ref{sec:association}) between two Random
+Variables (``Bivariate Data'') is any ``Statistical Relationship'' (which may
+or may not be Causal) --
+Random Variables are \emph{Dependent} if they do not Satisfy the Property of
+\emph{Probabilistic Independence} (\S\ref{sec:independence})
 
 \fist Relative Entropy (\S\ref{sec:relative_entropy}), Mutual Information
 (\S\ref{sec:mutual_information})
@@ -524,15 +532,6 @@ Positive semi-definite (\S\ref{sec:positive_semidefinite})
 
 
 
-\subsubsection{Correlation Coefficient}
-\label{sec:correlation_coefficient}
-
-\emph{Pearson Product-moment Correlation Coefficient}
-
-$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
-
-
-
 \subsubsection{Skewness}\label{sec:skewness}
 
 Asymmetry %FiXME
@@ -555,6 +554,74 @@ Probability Mass Function:
   f(k,n,p) = P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
 \]
 for $k = 0,1,2, \ldots, n$
+
+
+
+\subsubsection{Correlation Coefficient}
+\label{sec:correlation_coefficient}
+
+\fist Correlation (\S\ref{sec:correlation})
+
+\emph{Pearson Product-moment Correlation Coefficient}
+
+$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
+
+
+
+% --------------------------------------------------------------------
+\subsection{Dependence}\label{sec:dependence}
+% --------------------------------------------------------------------
+
+or \emph{Dependence}
+
+any ``\emph{Statistical Relationship}'' between two Random Variables
+(``Bivariate Data'')
+
+may or may not be Causal
+
+Random Variables are \emph{Dependent} if they do not Satisfy the Property of
+\emph{Probabilistic Independence} (\S\ref{sec:independence})
+
+
+
+\subsubsection{Correlation}\label{sec:statistical_correlation}
+
+measure of how close two Random Variables are to having a \emph{Linear
+  Relationship}
+
+\fist Correlation Coefficient (\S\ref{sec:correlation_coefficient})
+
+
+
+% --------------------------------------------------------------------
+\subsection{Independence}\label{sec:independence}
+% --------------------------------------------------------------------
+
+\emph{Property of Probabilistic Independence}
+
+$P(A \cap B) = P(A)P(B)$
+
+two Random Variables (\S\ref{sec:random_varible}) are \emph{Dependent}
+(\S\ref{sec:dependence}) if they do not Satisfy the Property of
+Probabilistic Independence
+
+\fist cf. Independent Event (\S\ref{sec:independent_event})
+
+
+
+\subsubsection{Conditional Independence}\label{sec:conditional_independence}
+
+$P(A \cap B | C) = P(A|C)P(B|C)$
+
+note that two Events may be Independent, but not \emph{Conditionally}
+Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
+the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
+
+\fist Conditional Probability (\S\ref{sec:conditional_probability})
+
+\url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
+-- ``Conditional Independence happens when the Joint Probability Distribution
+is the Product of the individual Probability Distributions''
 
 
 
@@ -1179,32 +1246,6 @@ f(t) dt$
 \subsection{Normalizing Constant}\label{sec:normalizing_constant}
 % --------------------------------------------------------------------
 
-% --------------------------------------------------------------------
-\subsection{Independence}\label{sec:independence}
-% --------------------------------------------------------------------
-
-$P(A \cap B) = P(A)P(B)$
-
-\fist Independent Event (\S\ref{sec:independent_event})
-
-
-
-\subsubsection{Conditional Independence}\label{sec:conditional_independence}
-
-$P(A \cap B | C) = P(A|C)P(B|C)$
-
-note that two Events may be Independent, but not \emph{Conditionally}
-Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
-the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
-
-\fist Conditional Probability (\S\ref{sec:conditional_probability})
-
-\url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
--- ``Conditional Independence happens when the Joint Probability Distribution
-is the Product of the individual Probability Distributions''
-
-
-
 % ====================================================================
 \section{Conditioning}\label{sec:conditioning}
 % ====================================================================
@@ -1451,6 +1492,12 @@ may increase or decrease as new relevant information is collected
 \paragraph{Bayesian Network}\label{sec:bayesian_network}\hfill
 
 or \emph{Probabilistic Directed Acyclic Graphical Model}
+
+DAG (\S\ref{sec:dag}) -- dependency structure
+
+representation of Probability Distributions based on \emph{Causal Dependencies}
+
+\emph{Causality} (Pearl 2009) -- counterfactual reasoning
 
 \url{https://golem.ph.utexas.edu/category/2018/07/bayesian_networks.html}
 
