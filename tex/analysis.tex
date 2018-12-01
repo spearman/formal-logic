@@ -1631,8 +1631,16 @@ computed by:
   b_n & = \frac{2}{P}\int_{x_0}^{x_0+P}s(x) \cdot \sin(\frac{2\pi{nx}}{P}) dx
 \end{align*}
 
-the Coefficient $\frac{a_0}{2} = \frac{1}{P}\int_{x_0}^{x_0+P}s(x)dt$
-represents the \emph{Average} of $s(x)$ over the Interval $[x_0,P]$
+the Coefficient $\frac{a_0}{2} = \frac{1}{P}\int_{x_0}^{x_0+P}s(x)dt$ represents
+the \emph{Average} of $s(x)$ over the Interval $[x_0,P]$ and may be called the
+``DC'' (Direct Current) Component in the context of Electrical Engineering
+
+Fundamental Frequency
+
+First Harmonic (2x Fundamental Frequency), Second Harmonic (3x Fundamental
+Frequency)
+
+Nyquist Frequency -- in Discrete Signals, is half the Sampling Rate
 
 equivalently the $N$th Partial Sum can be defined as:
 \[
@@ -1913,6 +1921,9 @@ of the Displacement of one relative to the other
 for Continuous Signals the Cross-correlation Operator is the Adjoint Operator
 of the Convolution (\S\ref{sec:convolution}) Operator
 
+for Discrete Real-valued Functions, Convolution and Cross-correlation differ
+only in Time Reversal of one of the Functions
+
 \fist Fourier Analysis (\S\ref{sec:fourier_analysis})
 
 
@@ -1927,18 +1938,37 @@ of the Convolution (\S\ref{sec:convolution}) Operator
 
 $(f * g)(t) = \int_0^t f(t-\tau) g(\tau) d\tau$
 
-Operation on two Functions giving a modified Function giving the Integral of
-the Pointwise Multiplication of the two Functions as a Function of the amount
-that one of the original Functions is Translated (\S\ref{sec:translation})
+(wiki): a \emph{Convolution} is an Operation on two Functions giving a modified
+Function giving the Integral of the Pointwise Multiplication of the two
+Functions as a Function of the amount that one of the original Functions is
+Translated (\S\ref{sec:translation}), i.e. it is the superposition of the first
+Function at each point of the second Function
 
-for Continuous Signals the Cross-correlation (\S\ref{sec:cross_correlation})
-Operator is the Adjoint Operator of the Convolution Operator
+cf. the Cross-correlation (\S\ref{sec:cross_correlation}) is a measurement of
+how well a ``Probe Function'' corresponds to a ``Test Function''
+
+for Continuous Signals the Cross-correlation Operator is the Adjoint Operator of
+the Convolution Operator
+
+for Discrete Real-valued Functions, Convolution and Cross-correlation differ
+only in Time Reversal of one of the Functions
 
 Image Processing
 
 \fist Fourier Analysis (\S\ref{sec:fourier_analysis})
 
-Laplace Transform (\S\ref{sec:laplace_transform})
+Laplace Transform (\S\ref{sec:laplace_transform}) -- \emph{Convolution Theorem}:
+
+$\mathcal{L}\{f(t)\} = F(s)$
+
+$\mathcal{L}\{g(t)\} = G(s)$
+
+$\mathcal{L}\{(f * g)(t)\} = F(s)G(s)$
+
+$(f*g)(t) = \mathcal{L}^{-1}(F(s)G(s))$
+
+note that Convolutional Neural Network layers actually perform a
+\emph{Cross-correlation} rather than a Convolution
 
 
 
@@ -4740,6 +4770,23 @@ functions on Infinite Intervals
 
 \fist Wavelet Transform (Image Processing \S\ref{sec:wavelet_transform})
 
+Transforms are also called ``Spectra'' (FIXME: disambiguate)
+
+Power Spectra
+
+``Real'' (``Position'', ``Coordinate'') Space (FIXME)
+
+Frequency (``Reciprocal'', ``Momentum'') Space (FIXME)
+
+Physics: describing a Particle as a sum of its Momentum components is equivalent
+to describing it as a sum of Frequency componenets
+
+applying a Fourier Transform to the image in Reciprocal Space recovers the image
+in Real Space
+
+\emph{Convolution Theorem} (\S\ref{sec:convolution}): TODO
+
+
 (wiki):
 
 a \emph{Periodic Signal} can be analyzed using a \emph{Discrete Frequency
@@ -4855,7 +4902,16 @@ Imaginary Component of Poles indicates what Frequency the System will Resonate
 at, and Real Component of Poles indicates the magnitude of the Resonance, and
 Zeros indicate Non-resonating Exponential Decays
 
-Convolution (\S\ref{sec:convolution})
+
+\emph{Convolution Theorem} (\S\ref{sec:convolution}):
+
+$\mathcal{L}\{f(t)\} = F(s)$
+
+$\mathcal{L}\{g(t)\} = G(s)$
+
+$\mathcal{L}\{(f * g)(t)\} = F(s)G(s)$
+
+$(f*g)(t) = \mathcal{L}^{-1}(F(s)G(s))$
 
 
 
