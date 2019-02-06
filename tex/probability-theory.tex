@@ -8,6 +8,15 @@
 
 \fist Probabilistic Logic (\S\ref{sec:probabilistic_logic})
 
+\fist Decision Theory (\S\ref{sec:decision_theory}) --
+(wiki): Probabilistic Decision Theory is Sensitive
+(\S\ref{sec:sensitivity_analysis}) to \emph{Assumptions} about Probabilities of
+Events; Non-probabilistic Decision Rules (\S\ref{sec:decision_rule}), such as
+Minimax (\S\ref{sec:minimax}), are \emph{Robust} (\S\ref{sec:robust_statistics})
+in that they don't make such Assumptions (FIXME: clarify)
+
+1933 - Kolmogorov - \emph{Foundations of the Theory of Probability}
+
 2018 - \emph{A Categorical Look at Random Variables} -
 \url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html} (article):
 
@@ -134,6 +143,14 @@ Estimator (\S\ref{sec:estimator})
 
 
 
+\subsubsection{Robust Statistic}\label{sec:robust_statistic}
+
+\fist Info-gap Decision Theory (\S\ref{sec:info_gap}) -- Non-probabilistic
+Decision Theory seeking to optimize Robustness to ``failure'' under severe
+Uncertainty (\S\ref{sec:uncertainty_analysis})
+
+
+
 % ====================================================================
 \section{Probability Space}\label{sec:probability_space}
 % ====================================================================
@@ -215,11 +232,14 @@ of the Sample Space, it is said to have ``\emph{Occurred}''
 
 
 
-\paragraph{Bernoulli Trial}\label{sec:bernoulli_trial}\hfill
+\paragraph{Binomial Trial}\label{sec:binomial_trial}\hfill
 
-Binomial Distribution (\S\ref{sec:binomial_distribution})
+or \emph{Bernoulli Trial}
 
+Binomial Distribution (\S\ref{sec:binomial_distribution}); special case:
 Bernoulli Distribution (\S\ref{sec:bernoulli_distribution})
+
+Mathematical Formalization: Bernoulli Process (\S\ref{sec:bernoulli_process})
 
 \begin{enumerate}
   \item repeated Trials
@@ -540,10 +560,9 @@ Asymmetry %FiXME
 
 \subsubsection{Kurtosis}\label{sec:kurtosis}
 
-\subsubsection{Binomial Random Variable}
-\label{sec:binomial_random_variable}
+\subsubsection{Binomial Random Variable}\label{sec:binomial_random_variable}
 
-Bernoulli Trial (\S\ref{sec:bernoulli_trial})
+Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
 
 Binomial Distribution (\S\ref{sec:binomial_distribution})
 
@@ -557,8 +576,7 @@ for $k = 0,1,2, \ldots, n$
 
 
 
-\subsubsection{Correlation Coefficient}
-\label{sec:correlation_coefficient}
+\subsubsection{Correlation Coefficient}\label{sec:correlation_coefficient}
 
 \fist Correlation (\S\ref{sec:correlation})
 
@@ -629,6 +647,8 @@ is the Product of the individual Probability Distributions''
 \subsection{Probability}\label{sec:probability}
 % --------------------------------------------------------------------
 
+cf. Uncertainty (\S\ref{sec:uncertainty})
+
 Probability of an Event (\S\ref{sec:probability_event}) $A$, $P(A)$ is the Sum
 of Weights of all Sample Points in $A$
 
@@ -652,6 +672,9 @@ A_1 \cap A_2) \ldots P(A_k | A_1 \cap A_2 \cap \ldots \cap A_{k-1})$
 
 cf. \emph{Probability Measure} (\S\ref{sec:probability_measure}),
 \emph{Probability Measure Function} (\S\ref{sec:probability_measure_function})
+
+\emph{Probability, Knowledge, and Meta-probability}:
+\url{https://www.lesswrong.com/posts/2xmKZu73gZLDEQw7c/probability-knowledge-and-meta-probability}
 
 
 
@@ -737,11 +760,16 @@ does have an analog of \emph{Strong Subadditivity of Entropy}
 
 or \emph{Bayes Rule}
 
+\url{https://arbital.com/p/bayes_rule/?l=1zq}
+
 \emph{Bayesian Inference} (\S\ref{sec:bayesian_inference})
 
 \[
   P(A|B) = \frac{P(A)P(B|A)}{P(B)}
 \]
+
+\fist Relative Entropy (Kullback-Leibler Divergence
+\S\ref{sec:relative_entropy})
 
 
 
@@ -806,6 +834,9 @@ Distributions $\mathcal{P}$ on $S$
 \fist Random Graphs (\S\ref{sec:random_graph}) -- Probability Distribution over
 a Graph
 
+collapsing a Probability Distribution (Measure) of Probability Distrubtions to a
+Probability Distribution is called the ``Giry Monad'' (TODO)
+
 (wiki): a Statistical (or Population) Parameter
 (\S\ref{sec:population_parameter}) is a ``quantity'' that indexes a Family of
 Probability Distributions
@@ -866,7 +897,7 @@ Probability of ``success'' is $p$:
 
 Binomial Random Variable (\S\ref{sec:binomial_random_variable})
 
-Bernoulli Trial (\S\ref{sec:bernoulli_trial})
+Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
 
 generalized as Multinomial Distributions (\S\ref{sec:multinomial_distribution})
 
@@ -878,18 +909,17 @@ Sample Proportion %FIXME
 
 
 
-\subparagraph{Negative Binomial Distribution}\hfill
-\label{sec:negative_binomial}
-
-$b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
-
-
-
 \subparagraph{Bernoulli Distribution}\label{sec:bernoulli_distribution}\hfill
 
 $n = 1$
 
 generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
+
+
+
+\subparagraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
+
+$b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
 
 
 
@@ -1252,6 +1282,8 @@ f(t) dt$
 % --------------------------------------------------------------------
 \subsection{Normalizing Constant}\label{sec:normalizing_constant}
 % --------------------------------------------------------------------
+
+
 
 % ====================================================================
 \section{Conditioning}\label{sec:conditioning}
@@ -1873,6 +1905,45 @@ Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
 
 
 % --------------------------------------------------------------------
+\subsection{Uncertainty Analysis}\label{sec:uncertainty_analysis}
+% --------------------------------------------------------------------
+
+\fist Decision Theory (\S\ref{sec:decision_theory})
+
+\fist Robust Statistics (\S\ref{sec:robust_statistic})
+
+
+
+\subsubsection{Uncertainty}\label{sec:uncertainty}
+
+cf. Probability (\S\ref{sec:probability})
+
+
+
+\subsubsection{Sensitivity Analysis}\label{sec:sensitivity_analysis}
+
+\fist Info-gap Decision Theory (\S\ref{sec:info_gap}): application of
+Sensitivity Analysis of the Stability Radius (\S\ref{sec:stability_radius}) type
+to Perturbations in the value of a given Estimate of a Parameter of interest
+(FIXME: clarify)
+
+
+
+\subsubsection{Evidince Theory}\label{sec:evidence_theory}
+
+or \emph{Dempster-Shafer Theory (DST)} or \emph{Theory of Belief Functions}
+
+Transferable Belief Model
+
+
+
+\subsubsection{Possibility Theory}\label{sec:possibility_theory}
+
+alternative to Probability Theory for dealing with certain types of Uncertainty
+
+
+
+% --------------------------------------------------------------------
 \subsection{Statistical Analysis}\label{sec:statistical_analysis}
 % --------------------------------------------------------------------
 
@@ -2183,6 +2254,12 @@ Poisson Distribution (\S\ref{sec:poisson_distribution})
 
 
 
+\subsubsection{Binomial Process}\label{sec:binomial_process}
+
+cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
+
+
+
 % --------------------------------------------------------------------
 \subsection{Markov Process}\label{sec:markov_process}
 % --------------------------------------------------------------------
@@ -2202,9 +2279,12 @@ where every Transition has a single Input and a single Output
 
 \subsubsection{Bernoulli Process}\label{sec:bernoulli_process}
 
-Bernoulli Trial (\S\ref{sec:bernoulli_trial})
+Mathematical Formalization of \emph{Binomial (Bernoulli) Trials}
+(\S\ref{sec:binomial_trial})
 
 Stochastic Computing
+
+cf. \emph{Binomial Process} (Point Process \S\ref{sec:binomial_process})
 
 
 
@@ -2316,6 +2396,19 @@ Crooks' Fluctuation Theorem
 % --------------------------------------------------------------------
 
 Jarzynski
+
+
+
+% --------------------------------------------------------------------
+\subsection{Statistical Ensemble}\label{sec:statistical_ensemble}
+% --------------------------------------------------------------------
+
+a Probability Distribution (\S\ref{sec:probability_distribution}) for the state
+of a Physical System
+
+
+
+\subsubsection{Thermodynamic Ensemble}\label{sec:thermodynamic_ensemble}
 
 
 
