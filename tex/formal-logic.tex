@@ -913,12 +913,19 @@ cf. \emph{Subjective Probability} (Subjective Bayesianism), Doxastic Logic
 
 2013 - \emph{Logic and Probability} -
 \url{https://plato.stanford.edu/entries/logic-probability/} (Stanford
-Encyclopedia of Philosophy)
+Encyclopedia of philosophy)
 
 cf. \emph{Inductive Logic} (\S\ref{sec:inductive_inference}) -- extension of
 Deductive Logic (\S\ref{sec:deductive_inference}) to less-than-certain
 Inferences; makes extensive use of Probabilistic notions; most work on Inductive
 Logic falls under the ``Probability Preservation'' approach
+
+ways in which a Logic can have Probabilistic features:
+\begin{itemize}
+  \item Probabilistic Models
+  \item Probabilistic Consequence Relation
+  \item Probabilistic Operators
+\end{itemize}
 
 \emph{Probabilistic Semantics} (\S\ref{sec:probabilistic_semantics}) for
 Classical Languages: Probabilistic Consequence Relation yields \emph{Probability
@@ -930,11 +937,188 @@ Probabilistic Operators
 
 Modal Probabilistic Operators
 
+Classical Probabilistic Semantics represented in the Object Language
+
+Probabilistic Semantics also exist for Intuitionistic, Modal, Classical
+First-order, Relevant, and Non-monotonic Logics, where Probability is not
+explicitly represented in the Object Language
+
+a Probability Function for a Propositional Language $L$ is a Function $P : L
+\rightarrow \reals$ Satisfying:
+\begin{itemize}
+  \item \emph{Non-negativity} -- $\forall \phi \in L, P(\phi) \geq 0$
+  \item \emph{Tautology} -- $\vDash\phi \Rightarrow P(\phi) = 1$
+  \item \emph{Finite Additivity} --
+     $\vDash\neg(\phi\wedge\Psi) \Rightarrow P(\phi\vee\Psi) = P(\phi) + P(\Psi)$
+\end{itemize}
+(where $\vDash$ denotes Semantic Validity in Classical Propositional Logic); it
+follows that $\forall \phi\in L, P(\phi) \in [0,1]$, and
+$(\vDash\phi\leftrightarrow\Psi) \Rightarrow P(\phi) = P(\Psi)$
+
+an Argument $(\Gamma,\phi)$ with Premises $\Gamma$ and Conclusion $\phi$ is
+\emph{Probabilistically Valid}, $\Gamma\vDash_P\phi$, if and only if for all
+$P : L \rightarrow \reals$:
+\[
+  \forall \gamma \in \Gamma, P(\gamma) = 1 \Rightarrow P(\phi) = 1
+\]
+in this sense, a Classical ``Valuation'' $v : L \rightarrow {0,1}$ can be seen
+as a degenerate Probability Function
+
+Classical Propositional Logic is Strongly Sound and Complete w.r.t.
+Probabilistic Semantics:
+\[
+  \Gamma \vDash_P \phi \Leftrightarrow \Gamma \vdash \phi
+\]
+
+seen as a kind of Many-valued Logic, Probabilities are seen as generalized Truth
+Values
+
+some Logicians do not regard Probabilities as generalized Truth Values because
+Probability Functions are not ``Extensional'', e.g. $P(\phi \wedge \Psi)$ cannot
+be expressed as a Function of $P(\phi)$ and $P(\Psi)$ (FIXME: clarify)
+
+another interpretation of a Sentence's Probability is as a Measure of its
+Uncertainty; under this interpretation, from the Strong Soundness and
+Completeness of Probabilistic Semantics follows the Theorem:
+
+Thm. \emph{For a Deductively Valid Argument $(\Gamma,\phi)$, if all Premises in
+  $\Gamma$ have Probability $1$, then the Conclusion $\phi$ also has Probability
+  $1$}
+
+(Adams98) defining an Uncertainty Function $U_P$ as:
+\[
+  U_P : L \rightarrow [0,1]
+\]
+mapping:
+\[
+  \phi \mapsto U_P(\phi) := 1 - P(\phi)
+\]
+one can define a Theorem that includes the above theorem as a special case:
+
+Thm. \emph{For a Valid Argument $(\Gamma,\phi)$ and Probability Function $P$,
+  the Uncertainty of the Conclusion $\phi$ cannot exceed the Sum of the
+  Uncertainties of the Premises $\gamma \in \Gamma$}:
+\[
+  U(\phi) \leq \Sum_{\gamma\in\Gamma} U(\gamma)
+\]
+note that this theorem has the problem that it takes into account the
+Uncertainty of irrelevant Premises; a solution is the introduction of a notion
+of \emph{Essential Premises} (cf. Relevance Logic), yielding a Theorem that uses
+a weighted Sum of the Uncertainties with the degree of Essentialness providing
+the weights (Proof involves use of methods from Linear Programming)
+
+Uncertainty gives an Upper-bound on the Certainty of the Conclusion, Probability
+gives a Lower-bound on the Certainty of the Conclusion
+
+Optimal bounds using Linear Programming (Hailperin & Nilsson);
+\emph{Standard Probabilistic Semantics}: Hailpern-probabilistic Validity is
+defined with respect to pairs consisting of a Formula and a Subinterval of
+$[0,1]$
+
+\emph{Probability Operators} -- extension of a Propositional Language with basic
+Probability Operators
+
+Qualitative Probability Operators
+
+$\square$ -- \emph{Probably} (or \emph{Plausibly}); \emph{not} a ``normal''
+Modal Operator and cannot be given Kripke Relational Semantics, e.g. fails to
+Satisfy $(\square\phi \wedge \square\Psi) \rightarrow \square(\phi \wedge
+\Psi)$; may be given weaker ``Neighborhood Semantics'' (Herzig, Longin, Costa)
+
+$\geq$ (Segerberg, Gardenfors) -- Binary ``at least as Probable'' Operator; can
+be used to express some absolute Probability Properties (Unary Operators), e.g.
+$\phi\geq\Top$ ($P(\phi) = 1$), $\phi \geq \neg\phi$ ($P(\phi) \geq 0.5$)
+
+Quantitative Probability Operators
+
+First-order Probability Operators -- Probabilistic Quantifiers;
+$Px(\phi) \geq q$ ``the Probability of selecting an $x$ such that $x$ Satisfies
+$\phi$ is at least $q$''; an extension allowing comparison of the Probability of
+Events (``selections'') is to create a separate class of Probability Terms as
+Numbers and the Arithmetic Operations on them; Proof Systems for First-order
+Probability Logics are difficult because the Validity Problem for them is
+generally Undecidable
+
+%FIXME: move the following into its own sub-section?
+
+\emph{Modal Probability Logic}
+(\url{https://plato.stanford.edu/entries/logic-probability/#ModProLog})
+-- makes use of multiple Probability Spaces, each associated with a Possible
+World (or ``State''), instead of a single arbitrary Probability Space; compared
+to Semantics for Modal Logic, instead of associating a Set of Accessible Worlds
+to each Possible World, associate a Probability Distribution, Probability Space,
+or Set of Probability Distributions to each Possible World
+
+as a Modal Logic, Modal Probabilistic Logic supports Higher-order Reasoning
+about Probabilities of Probabilities
+
+interpretations in the Modal setting:
+\begin{itemize}
+  \item Stochastic (Temporal) Interpretation -- concerns Probabilities over the
+    next States a System might Transition into (Larsen, Skou91)
+  \item Subjective Interpretation -- concerns Probabilities that Agents might
+    have about a ``situation'' or each other's Probabilities (Fagin, Halpern88);
+    note this is ``static'' relative to the Stochastic Interpretation, but see
+    Dynamic Modal Probabilities below
+\end{itemize}
+
+adds to Propositional Logic the Formulas of the form $P(\phi) \geq q$ where $q$
+is typically a Rational Number, and $\phi$ is any Formula, possibly a
+Probability Formula; this differs from other Probabilistic Logics in the ability
+to embed Probabilities in the arguments of Probability Terms and in the
+Semantics
+
+\emph{Basic Finite Modal Probabilistic Model} -- $M = (W, P, V)$ where $W$ is a
+Finite Set of Possible Worlds, $P$ is a Function associating a Distribution
+$P_w$ over $W$ to each World $w \in W$, and $V$ is a ``Valuation Function''
+assigning Atomic Propositions from a Set $\Phi$ to each World; the first two
+components are effectively the same as a Kripke Frame whose Relation is
+decorated with Probability Values, giving a Directed Graph with labelled Edges
+or a Probabilistic Transition System; the Valuation Function allows assigning
+Properties to the Worlds; Semantics for Formulas are given on pairs $(M,w)$
+where $M$ is a Model and $w$ is an Element of the Model-- a Formula
+$P(\phi) \geq q$ is ``True at pair $(M,w)$'', $(M,w) \vDash P(\phi) \geq q$,
+if and only if:
+\[
+  P_w(\{ w' | (M,w') \vDash \phi \}) \geq q
+\]
+
+for every State $w \in W$, the component $P_w$ of a Modal Probabilistic Model is
+replaced by an entire Probability Space $(\Omega_w, \mathcal{F}_w, \mu_w)$ such
+that $\Omega_w \subseteq W$ and $\mathcal{F}_w$ is a $\sigma$-algebra over
+$\Omega_w$
+
+a generalization allows Indexing of Distributions by two Sets: the Set $W$ of
+Worlds (the ``base Set'' of the Model), and an Index Set $A$; $P$ Associates a
+Distribution $P_{a,w}$ over $W$ for each $w \in W$ and $a \in A$; in a
+Stochastic Interpretation, Elements of $A$ are Actions; in a Subjective
+Interpretation, Elements of $A$ are Agents
+
+(Fagin, Halpern)
+to formalize the interaction between (Quantitative) Probability
+and Qualitative Uncertainty, one may add a Relation $R \subseteq W^2$ to the
+Model and a Modal Operator $\square$ to the Language such that:
+\[
+  (M,w) \vDash \square\phi \Leftrightarrow (M,w') \vDash \phi
+\]
+whenever $wRw'$ (FIXME: clarify)
+
+Dynamic Modal Probabilities
+(\url{https://plato.stanford.edu/entries/logic-probability/#Dyn}) -- allows for
+a Dynamic Subjective Interpretation in which simultaneous changes to
+Probabilities may take place in potentially all Possible Worlds, e.g. a change
+caused by ``new information'' invokes a Probabilistic revision in each Possible
+World; often modelled by Conditional Probabilities
+
 
 
 \paragraph{Probabilistic Inference}\label{sec:probabilistic_inference}\hfill
 
 Inferential Statistics (\S\ref{sec:inferential_statistics})
+
+
+
+\paragraph{Subjective Logic}\label{sec:subjective_logic}\hfill
 
 
 
@@ -1536,9 +1720,17 @@ Multisets, Sets, Dual zones, etc.) that Products, Implications, and
 Modalities manipulate
 %TODO explain
 
-Modal Algebras (\S\ref{sec:modal_algebra}) provides Models (\S\ref{sec:model})
-of Propositional Modal Logic in the same way that Boolean Algebras
-(\S\ref{sec:boolean_algebra}) are Models of Classical Logic
+Semantics (TODO)
+
+\fist cf. \emph{Modal Probabilistic Logic} (\S\ref{sec:probabilistic_logic}) --
+instead of associating a Set of Accessible Worlds to each Possible World,
+associate a Probability Distribution, Probability Space, or Set of Probability
+Distributions
+(\url{https://plato.stanford.edu/entries/logic-probability/#ModProLog})
+
+to each Possible World Modal Algebras (\S\ref{sec:modal_algebra}) provides
+Models (\S\ref{sec:model}) of Propositional Modal Logic in the same way that
+Boolean Algebras (\S\ref{sec:boolean_algebra}) are Models of Classical Logic
 (\S\ref{sec:classical_logic})
 
 Interior (Modal) Algebras (\S\ref{sec:interior_algebra}) are to Topology (Part
