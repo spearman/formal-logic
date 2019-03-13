@@ -1298,15 +1298,18 @@ Logic with Quantification corresponds to Dependent Type Theory
 \subsection{First-order Logic}\label{sec:firstorder_logic}
 % --------------------------------------------------------------------
 
-\emph{First-order Logic} (or \emph{Lower Predicate Logic}) allows
-Quantification over individual Objects in the Domain of Discourse
-(\S\ref{sec:domain}). This is in contrast to Systems of Predicate
-Logic that allow Plural Quantification (Quantification over Sets
-\S\ref{sec:plural_quantification}), such as Second-order Logic
-(\S\ref{sec:secondorder_logic}) and Higher-order Logic
+\emph{First-order Logic} (or \emph{Lower Predicate Logic}) allows Quantification
+over individual Objects in the Domain of Discourse (\S\ref{sec:domain}). This is
+in contrast to Systems of Predicate Logic that allow Plural Quantification
+(Quantification over Sets \S\ref{sec:plural_quantification}), such as
+Second-order Logic (\S\ref{sec:secondorder_logic}) and Higher-order Logic
 (\S\ref{sec:higherorder_logic}).
 
+\fist cf. Predicate Functor Logic (\S\ref{sec:pfl}): Quantifier-free Logic with
+expressive power equal to First-order Logic
+
 A System of First-order Logic, $\mathcal{S}$, is defined as:
+
 \[
   \mathcal{S} = (\sigma,\Omega,V,A,I)
 \]
@@ -1468,13 +1471,18 @@ Algebra (\S\ref{sec:polyadic_algebra}).
 
 \subsubsection{Equational Logic}\label{sec:equational_logic}
 
-\emph{Equational Logic} is First-order Logic without Quantifiers.
+(wiki): \emph{Equational Logic} consists of the Quantifier-free Terms of
+First-order Logic with Equality as the only Predicate Symbol
 
-Universal Algebra (\S\ref{sec:universal_algebra})
+Equational Reasoning (\S\ref{sec:equational_reasoning})
 
 Algebraic Theory (\S\ref{sec:algebraic_theory})
 
-Equational Reasoning (\S\ref{sec:equational_reasoning})
+Model Theory (Part \ref{sec:model_theory}): Universal Algebra
+(\S\ref{sec:universal_algebra})
+
+Category Theory (Part \ref{sec:category_theory}): Lawvere Theory
+(\S\ref{sec:lawvere_theory})
 
 
 
@@ -1794,6 +1802,222 @@ Second-order Logic
 
 Unifiability (\S\ref{sec:unification}) is Undecidable for
 Type-theoretic (\S\ref{sec:intuitionistic_type}) Third-order Logic.
+
+
+
+% ==============================================================================
+\section{Predicate Functor Logic (PFL)}\label{sec:pfl}
+% ==============================================================================
+
+purely ``Algebraic'' expression of First-order Logic
+(\S\ref{sec:firstorder_logic}) without Quantified Variables
+
+expressive power equal to First-order Logic; cf. Combinatory Logic
+(\S\ref{sec:combinatory_logic}): Quantifier-free Logic with expressive power
+equal to Set Theory (Part \S\ref{sec:set_theory})
+
+Quine
+
+
+
+% ==============================================================================
+\section{Combinatory Logic}\label{sec:combinatory_logic}
+% ==============================================================================
+
+Quantifier-free Logic with expressive power equal to Set Theory (Part
+\S\ref{part:set_theory})
+
+\fist cf. Predicate Functor Logic (\S\ref{sec:pfl}): Quantifier-free Logic with
+expressive power equal to First-order Logic (\S\ref{sec:firstorder_logic})
+
+Higher-order Functions (\S\ref{sec:higherorder_function})
+
+Combinatory Logic may be given as a variant of $\lambda$-calculus
+(\S\ref{sec:untyped_lambda}) where Lambda Expressions are replaced by
+\emph{Combinators} (\S\ref{sec:combinator}) which are Primitive Functions witout
+Bound Variables ($\lambda$-calculus without Abstraction).
+
+SKI Combinator Calculus (\S\ref{sec:ski_calculus})
+
+$\lambda$-terms can be transformed into Combinatory Logic by Abstraction
+Elimination (\S\ref{sec:abstraction_elimination})
+
+It is Undecidable whether a given Combinatory Term has a Normal Form (or whether
+two Combinatory Terms are Equivalent).
+
+By the Curry-Howard Correspondence (\S\ref{sec:curry_howard}) a Typed
+Combinatory Logic corresponds to a Hilbert System (\S\ref{sec:hilbert_system})
+in Proof Theory.
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Combinator}\label{sec:combinator}
+% ------------------------------------------------------------------------------
+
+\emph{Combinator} (or \emph{Constant})
+
+Closed Primitive Function
+
+Identity:
+\[
+  I x = x
+\]
+Constant:
+\[
+  K x y = x
+\]
+Application (Sequence):
+\[
+  S x y z = x z (y z)
+\]
+
+Identity may be defined in Terms of $S$ and $K$:
+\[
+  (S K K) x = I x
+\]
+
+$\Omega$-combinator: $(\lambda x. x x)$
+
+
+
+\subsubsection{Fixed-point Combinator}\label{sec:fixedpoint_combinator}
+
+\[
+  y f = f (y f)
+\]
+represents a Solution to the Fixed Point Equation (\S\ref{sec:fixed_point}):
+\[
+  x = f x
+\]
+
+
+
+\paragraph{$Y$-combinator}\label{sec:y_combinator}\hfill
+
+In Simply-typed $\lambda$-calculus, the $Y$-combinator cannot be assigned a
+Type.
+
+\[
+  Y = \lambda f.(\lambda x.f (x x)) (\lambda x.f (x x))
+\]
+
+Allows for \emph{Anonymous Recursion} in Programming Languages.
+%FIXME xref?
+
+
+
+\subsubsection{Non-standard Fixed-point Combinator}
+\label{sec:nonstandard_combinator}
+
+A \emph{Non-standard Fixed-point Combinator} is a Combinator that has the same
+Infinite Extension (B\"ohm Tree \S\ref{sec:bohm_tree}) as a Fixed-point
+Combinator. Every Fixed-point Combinator is a Non-standard Fixed-point
+Combinator, but not every Non-standard Fixed-point Combinator is a Fixed-point
+Combinator. A Non-standard Fixed-point Combinator that is not a Fixed-point
+Combinator is called a \emph{Strictly Non-standard Fixed-point Combinator}.
+
+The Set of Non-standard Fixed-point Combinators is not Recursively Enumerable.
+\cite{goldberg05}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Combinatory Term}\label{sec:combinatory_term}
+% ------------------------------------------------------------------------------
+
+Curry \emph{Theory of Functionality}
+
+\begin{itemize}
+  \item a Variable $x$
+  \item a Combinator (Constant) $P$
+  \item Application of Combinatory Terms $E_1 E_2$
+\end{itemize}
+Variables and Constants are \emph{Atoms}.
+
+
+
+\subsubsection{Contraction}\label{sec:combinatory_contraction}
+\cite{seldin03}
+
+Basic Combinators:
+\begin{enumerate}
+  \item $\mathsf{I} X = X$
+  \item $\mathsf{K} X Y = X$
+  \item $\mathsf{S} X Y Z = (X Z) (Y Z)$
+\end{enumerate}
+
+Weak Reduction, a Sequence of Zero or more Contractions: $M \rhd N$
+
+Weak Conversion, a Sequence of Zero or more Contractions and reverse
+Contractions: $M =_* N$
+
+
+
+\subsubsection{Bracket Abstraction}\label{sec:bracket_abstraction}
+
+\emph{Abstraction} of Term $M$ with respect to Variable $x$ denoted $[x]M$,
+defined Inductively:\cite{seldin03}
+\[
+  [x]x \equiv \mathsf{I}
+\]\[
+  [x]c \equiv \mathsf{K}c
+\]\[
+  [x](M N) \equiv \mathsf{S}([x]M)([x]N)
+\]
+where $c$ is an Atom other than $x$ and $\equiv$ is an Equivalence of Terms.
+
+Theorem:
+\[
+  ([x]M)N \rhd [N/x]M
+\]
+
+
+
+\subsubsection{Abstraction Elimination}
+\label{sec:abstraction_elimination}
+
+
+
+\subsubsection{Type Assignment}\label{sec:combinatory_type}
+\cite{seldin03}
+
+\begin{itemize}
+  \item ($\rightarrow \mathsf{I}$) $\mathsf{I}: A \rightarrow A$
+  \item ($\rightarrow \mathsf{K}$)
+    $\mathsf{K}: A \rightarrow (B \rightarrow A)$
+  \item ($\rightarrow \mathsf{S}$)
+    $\mathsf{S}: (A \rightarrow (B \rightarrow C))
+      \rightarrow (A \rightarrow B) \rightarrow A \rightarrow C$
+\end{itemize}
+
+Derived Rule (cf. Modus Ponens):
+\[
+  \frac{
+    [x:A] \quad m:B
+  }{
+    [x]m:A \rightarrow B
+  }
+\]
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{BCI Combinatory Logic}\label{sec:bci_logic}
+% ------------------------------------------------------------------------------
+
+Linear Logic (\S\ref{sec:linear_logic})
+
+Combinators have the Types of the basic Operations in a Symmetric Closed
+Category (\S\ref{sec:symmetric_closed_category})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{BCK Combinatory Logic}\label{sec:bck_logic}
+% ------------------------------------------------------------------------------
+
+Affine Logic (\S\ref{sec:affine_logic})
 
 
 
