@@ -501,13 +501,6 @@ Value
 
 
 
-\subsubsection{Characteristic}\label{sec:characteristic}
-
-Function associating a Real Number to each Element in the Sample
-Space.
-
-
-
 \subsubsection{Discrete Random Variable}\label{sec:discrete_random_variable}
 
 \paragraph{Probability Generating Function}
@@ -597,7 +590,7 @@ $E [g(X) \pm h(X)] = E[g(X)] \pm E[h(X)]$
 
 $E [g(X,Y) \pm h(X,Y)] = E[g(X,Y)] \pm E[h(X,Y)]$
 
-the Variance (Expected Value of the Squared Deviation \S\ref{sec:variance}) of
+the Variance (Expected Value of the Squared Deviation \S\ref{sec:deviation}) of
 a Random Variable $X$ is equal to:
 \begin{align*}
   Var(X) & = E[(x - E[X])^2] \\
@@ -605,6 +598,40 @@ a Random Variable $X$ is equal to:
 \end{align*}
 
 
+
+\subsubsection{Characteristic Function}\label{sec:characteristic_function}
+
+for a Scalar Random Variable $X$, the \emph{Characteristic Function} is the
+Expected Value of $e^{itX}$ where $i$ is the Imaginary Unit and $t \in \reals$
+is the Argument of the ``Characteristic Function'' $\varphi_X : \reals
+\rightarrow \comps$:
+\[
+  \varphi_X(t) = E[e^{itX}] = \int_\reals e^{itx} dF_X(x)
+\]
+where $F_X$ is the Cumulative Distribution Function (\S\ref{sec:cdf}) of $X$ and
+the Integral is a Riemann-Sieltjes Integral (TODO: xref)
+
+always exists even when the Moment-generating Function
+(\S\ref{sec:moment_generating_function}) and Probability Density Function
+(\S\ref{sec:pdf}) do not
+
+like the Cumulative Distribution Function, completely determines the behavior
+and properties of the Probability Distribution
+
+if the Random Variable admits a Probability Density Function
+(\S\ref{sec:pdf}) then the Characteristic Function is the
+Fourier Transform (\S\ref{sec:fourier_transform}) of the Probability Density
+Function and vice versa
+
+if a Random Variable has a Moment-generating Function
+(\S\ref{sec:moment_generating_function}) then the Characteristic Function can be
+extended to the Complex Plane
+
+\fist cf. Indicator Functions (\S\ref{sec:indicator_function})
+
+
+
+\subsubsection{Moment-generating Function}\label{sec:moment_generating_function}
 
 \subsubsection{Variance}\label{sec:variance}
 
@@ -949,7 +976,7 @@ Occurrence of ``Outcomes''
 Probability Distribution Functions:
 \begin{itemize}
   \item Probability Mass Function (\S\ref{sec:probability_mass})
-  \item Probability Density Function (\S\ref{sec:probability_density})
+  \item Probability Density Function (\S\ref{sec:pdf})
   \item Cumulative Distribution Function (CDF \S\ref{sec:cdf})
 \end{itemize}
 See also Probability Measure Function
@@ -1007,6 +1034,8 @@ adding more Variables
 (TODO)
 
 Mean, Variance, Skewness
+
+\fist Moment-generating Function (\S\ref{sec:moment_generating_function})
 
 
 
@@ -1391,8 +1420,7 @@ point is the Expected Value (\S\ref{sec:expected_value})
 
 
 
-\subsubsection{Probability Density Function}
-\label{sec:probability_density}
+\subsubsection{Probability Density Function}\label{sec:pdf}
 
 \emph{Probability Density Function} $f(x)$
 
@@ -1402,6 +1430,11 @@ for a Continuous Random Variable (\S\ref{sec:continuous_random_variable}) $X$:
   \item $\int\limits_{-\infty}^{\infty} f(x) dx = 1$
   \item $P (a < X < b) = \int\limits_a^b f(x) dx$
 \end{enumerate}
+
+for a Random Variable that admits a Probability Density Function, the
+Characteristic Function (\S\ref{sec:characteristic_function}) of the Random
+Variable is the Fourier Transform (\S\ref{sec:fourier_transform}) of its
+Probability Density Function and vice versa
 
 \fist Probability Amplitude (Quantum Systems \S\ref{sec:probability_amplitude}):
 Complex Number with Modulus Squared representing a Probability Density
@@ -1774,7 +1807,16 @@ between them is \emph{Regression Analysis} (\S\ref{sec:regression_analysis})
 
 
 
-\subsubsection{Error}\label{sec:error}
+\subsubsection{Deviation}\label{sec:deviation}
+
+\fist the Distribution of Deviations are used as measures of Statistical
+Dispersion (\S\ref{sec:statistical_dispersion})
+
+
+
+\paragraph{Absolute Deviation}\label{sec:absolute_deviation}\hfill
+
+\paragraph{Error}\label{sec:error}\hfill
 
 \emph{Statistical Error}
 
@@ -1782,7 +1824,7 @@ Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
 
 
 
-\subsubsection{Residual}\label{sec:residual}
+\paragraph{Residual}\label{sec:residual}\hfill
 
 or \emph{Fitting Deviation}
 
@@ -2322,6 +2364,8 @@ using the Product of Values instead of Sum as in Arithmetic Mean
 
 \subsubsection{Statistical Dispersion}\label{sec:statistical_dispersion}
 
+measured by Statistics of the Distribution of Deviations (\S\ref{sec:deviation})
+
 cf. \emph{Uncertainty}
 
 2018 - \emph{Uncertainty: a Tutorial} -
@@ -2347,6 +2391,8 @@ Unbiased Sample Variance:
 \paragraph{Standard Deviation}\label{sec:standard_deviation}\hfill
 
 Variance (\S\ref{sec:variance})
+
+Deviation (\S\ref{sec:deviation})
 
 \emph{Uncorrected Standard Deviation}:
 \[
