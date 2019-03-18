@@ -60,7 +60,8 @@
     of Trials; Reference Class Problem: Relative Frequencies must be
     ``Relativised'' to a ``Reference Class'' (this problem may exist for other
     interpretations as well)-- solutions restrict to certain Sequences of
-    Outcomes, e.g. (Infinite) ``\emph{Collectives}'' (Von Mises57) where a
+    Outcomes, e.g. (Infinite) ``\emph{Collectives}'' (Von Mises57)--cf. Infinite
+    Bernoulli Sequences (\S\ref{sec:bernoulli_sequence})--where a
     \emph{Place-selection} is an effective method of selecting indices of
     Members of a Sequence such that the selection or not of Index $i$ depends
     \emph{at most} on the first $i-1$ Outcomes (``attributes''), with the Axioms
@@ -69,9 +70,10 @@
     $\omega$ is the same in any Infinite Subsequence of $\omega$ determined by
     Place-selection; note that trivial Sequences such as $H,H,H,\ldots$ satisfy
     this ``Randomness'' Axiom; cf. the Principle of Maximum Entropy in Classical
-    Probability); issues with limiting Relative Frequencies are that they
-    violate Countable Additivity and the Domain of Definition is not a Set-field
-    or a $\sigma$-algebra (de Finetti72)
+    Probability), Algorithmic Randomness (\S\ref{sec:algorithmic_randomness});
+    issues with limiting Relative Frequencies are that they violate Countable
+    Additivity and the Domain of Definition is not a Set-field or a
+    $\sigma$-algebra (de Finetti72)
   \item \emph{Propensity Interpretations} (Pierce10, Popper57) -- Probability as
     a ``physical'' tendency or disposition of a given ``physical situation'' to
     yield an Outcome of a certain kind, or to yield long-run Relative Frequency
@@ -222,6 +224,11 @@ Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
 
 Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
 
+cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
+\emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
+
+\fist Monte Carlo Simulation (\S\ref{sec:monte_carlo})
+
 
 
 \paragraph{Simple Random Sample}\label{sec:simple_random_sample}\hfill
@@ -252,6 +259,10 @@ Estimator (\S\ref{sec:estimator})
 \fist Info-gap Decision Theory (\S\ref{sec:info_gap}) -- Non-probabilistic
 Decision Theory seeking to optimize Robustness to ``failure'' under severe
 Uncertainty (\S\ref{sec:uncertainty_analysis})
+
+
+
+\subsubsection{Sufficient Statistic}\label{sec:sufficient_statistic}
 
 
 
@@ -448,7 +459,10 @@ Random Variables are \emph{Dependent} if they do not Satisfy the Property of
 \fist Relative Entropy (\S\ref{sec:relative_entropy}), Mutual Information
 (\S\ref{sec:mutual_information})
 
-***
+cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
+\emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
+
+\asterism
 
 \emph{A Categorical Look at Random Variables} -
 \url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
@@ -524,6 +538,8 @@ has Probability $0$ of assuming a particular Value
 Expected Value of a Random Variable is a kind of ``average'' where
 Probabilities are treated like ``frequencies''
 
+\emph{Expectation}
+
 (Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
 \emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
 
@@ -596,6 +612,12 @@ a Random Variable $X$ is equal to:
   Var(X) & = E[(x - E[X])^2] \\
          & = E[X^2] - (E[X])^2 \\
 \end{align*}
+
+
+
+\paragraph{Law of Large Numbers}\label{sec:large_numbers}\hfill
+
+\fist cf. Law of Iterated Logarithm (\S\ref{sec:iterated_logarithm})
 
 
 
@@ -931,8 +953,6 @@ or \emph{Bayes Rule}
 \S\ref{sec:relative_entropy})
 
 
-
-\subsubsection{Law of Large Numbers}\label{sec:large_numbers}
 
 \subsubsection{Central Limit Theorem}\label{sec:central_limit}
 
@@ -1525,8 +1545,8 @@ intermediate values
 
 \subsubsection{Hypothesis Testing}\label{sec:hypothesis_testing}
 
-\emph{Statistical Hypothesis}: Assertion or Conjecture concerning one
-or more Populations (\S\ref{sec:population})
+\emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
+Populations (\S\ref{sec:population})
 
 \url{https://github.com/puolival/multipy} -- Python library
 
@@ -1573,6 +1593,36 @@ Test on a single Sample
 
 $P$-value: lowest Level of Significance at which the observed Value of
 the Statistic is Significant
+
+\begin{itemize}
+  \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
+\end{itemize}
+
+
+
+\paragraph{Test Statistic}\label{sec:test_statistic}\hfill
+
+cf. Descriptive Statistic (\S\ref{sec:descriptive_statistics})
+
+\begin{itemize}
+  \item $t$-statistic
+  \item $F$-test
+  \item ...
+\end{itemize}
+
+
+
+\paragraph{Null Hypothesis}\label{sec:null_hypothesis}\hfill
+
+$H_0$
+
+
+
+\paragraph{Critical Region}\label{sec:critical_region}\hfill
+
+or \emph{Region of Rejection}
+
+set of Values of the Test Statistic for which the Null Hypothesis is rejected
 
 
 
@@ -2222,15 +2272,17 @@ a ``Reference Class'' (other interpretations of Probability may have this
 problem as well)--
 
 solutions restrict to certain Sequences of Outcomes, e.g. (Infinite)
-``\emph{Collectives}'' (Von Mises57) where a \emph{Place-selection} is an
-effective method of selecting indices of Members of a Sequence such that the
-selection or not of Index $i$ depends \emph{at most} on the first $i-1$ Outcomes
+``\emph{Collectives}'' (Von Mises57)--cf. Infinite Bernoulli Sequences
+\S\ref{sec:bernoulli_sequence})--where a \emph{Place-selection} is an effective
+method of selecting indices of Members of a Sequence such that the selection or
+not of Index $i$ depends \emph{at most} on the first $i-1$ Outcomes
 (``attributes''), with the Axioms of \emph{Convergence} (the limiting Relative
 Frequency of any Outcome exists) and \emph{Randomness} (the limiting Relative
 Frequency of each Outcome in a Collective $\omega$ is the same in any Infinite
 Subsequence of $\omega$ determined by Place-selection; note that trivial
 Sequences such as $H,H,H,\ldots$ satisfy this ``Randomness'' Axiom; cf. the
-Principle of Maximum Entropy in Classical Probability);
+Principle of Maximum Entropy in Classical Probability), Algorithmic Randomness
+(\S\ref{sec:algorithmic_randomness});
 issues with limiting Relative Frequencies are that they violate Countable
 Additivity and the Domain of Definition is not a Set-field or a $\sigma$-algebra
 (de Finetti72)
@@ -2315,6 +2367,8 @@ TDA (R package)
 % ==============================================================================
 
 Summary of Data: Mean, Median, Mode, Standard Deviation
+
+cf. Test Statistics (\S\ref{sec:test_statistic})
 
 
 
@@ -2441,6 +2495,20 @@ a measure of ``nearness'' for Probability Distributions
 \section{Statistical Randomness}\label{sec:statistical_randomness}
 % ==============================================================================
 
+cf. \emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness}) --
+Universal Test, Universal Sequential Test (Martin-L\"of66)
+
+Tests (\S\ref{sec:hypothesis_testing}):
+\begin{itemize}
+  \item Frequency test
+  \item Serial Test
+  \item Poker Test
+  \item Gap Test
+  \item ...
+\end{itemize}
+
+
+
 % ==============================================================================
 \section{Pseudorandom Process}\label{sec:pseudorandom_process}
 % ==============================================================================
@@ -2461,7 +2529,11 @@ with no dependency on previous queries
 \section{Stochastic Process}\label{sec:stochastic_process}
 % ==============================================================================
 
+or \emph{Random Process}
+
 %FIXME: move section ???
+
+cf. Statistical Randomness (\S\ref{sec:statistical_randomness})
 
 Harmonic Functions (\S\ref{sec:harmonic_function})
 
@@ -2476,6 +2548,22 @@ Harmonic Functions (\S\ref{sec:harmonic_function})
 Equation in which one or more Terms is a Stochastic Process
 
 First-hitting-time Model
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Statistical Fluctuation}\label{sec:statistical_fluctuation}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Random Walk}\label{sec:random_walk}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Law of Iterated Logarithm}\label{sec:iterated_logarithm}
+
+describes magnitude of Fluctuations of a Random Walk
+
+cf. Law of Large Numbers (\S\ref{sec:large_numbers})
 
 
 
@@ -2563,6 +2651,14 @@ cf. \emph{Binomial Process} (Point Process \S\ref{sec:binomial_process})
 
 
 
+\paragraph{Bernoulli Sequence}\label{sec:bernoulli_sequence}\hfill
+
+\emph{Infinite Bernoulli Sequences} -- cf. \emph{Collectives} (Von Mises57); a
+solution to the ``Reference Class Problem'' of Frequentist Probability Theory;
+cf. (Martin-L\"of66)
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Continuous-time Stochastic Process}\label{sec:continuous_stochastic}
 % ------------------------------------------------------------------------------
@@ -2619,6 +2715,14 @@ $H = 1/2$
 Stochastic Process for which the Unconditional Joint Probability Distribution
 (\S\ref{sec:joint_probability}) does not change when shiften in Time (TODO:
 xref)
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Stochastic Simulation}\label{sec:stochastic_simulation}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Monte Carlo Simulation}\label{sec:monte_carlo}
 
 
 

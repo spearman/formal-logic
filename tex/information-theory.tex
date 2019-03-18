@@ -205,18 +205,170 @@ Bits-per-symbols in an Optimal Encoding --
 \section{Algorithmic Information Theory}\label{sec:algorithmic_information}
 % ==============================================================================
 
+1965 - Komogorov - \emph{Three Approaches to the Quantitative Definition of
+  Information}
+
+\emph{Combinatorial approach} -- a Variable $x$ capable of taking Values in a
+Finite Set $X$ containing $N$ Elements; Entropy $H(x) = \log_2 N$; Conditional
+Entropy $H(y/a) = \log_2 N(Y_a)$; Information conveyed by $x$ with respect to
+$y$:
+\[
+  I(x:y) = H(y) - H(y/x)
+\]
+(where $H(y/x)$ and $I(x : y)$ are Functions of $x$ and $y$ is a Bound Variable)
+
+Combinatorial approach allows for a ``Universal Coding''
+(\S\ref{sec:coding_theory}) method permitting the transmission of any
+sufficiently long messages, and it is not necessary to know the Frequencies of
+each Symbol beforehand
+
+\emph{Probabilistic approach} -- take $x$ and $y$ as Random Vaiables with given
+Joint Probability Distributions (\S\ref{sec:joint_probability}); Entropy
+$H_W(x) = -\sum_x p(x) \log_2 p(x)$, Conditional Entropy
+$H_W(y/x) = -\sum_y p(y/x) \log_2 p(y/x)$
+
+Inequalities:
+\begin{align*}
+  H_W(x) \leq H(x) \\
+  H_W(y/x) \leq H(y/x)
+\end{align*}
+hold when the corresponding Distributions on both $X$ and $Y_X$ are Uniform
+
+Information conveyed by $x$ with respect to $y$: $I_W(x:y) = H_W(y) - H_W(y/x)$
+
+Information Content: $I_w(x,y) = MI_W(x : y) = MI_W(y : x)$ where $M$ is the
+mathematical \emph{Expectation} (\S\ref{sec:expected_value})
+
+in the Combinatorial approach, $I(x:y)$ is always Non-negative, but in the
+Probabilistic approach, $I_W(x:y)$ may be Negative-- only the \emph{averaged}
+quantity $I_W(x,y)$ is a measure of the Information Content
+
+Probabilistic approach allows for transmission over Channels carrying ``bulk''
+Information consisting of a large number of unrelated (or weakly related)
+messages obeying definite Probabilistic laws; empirically Frequencies and
+Probabilities are often interchangeable over sufficiently long time sequences
+
+\emph{Algorithmic approach} -- quantitative Information conveyed by an
+\emph{individual} object $x$ about an \emph{individual} object $y$ is only
+meaningful when the quantity of Information is sufficiently large
+
+Relative Complexity (\S\ref{sec:algorithmic_complexity}) $K_A(y/x)$ and the
+quantity of Information are Equivalent in that the difference between them is
+bounded
+
+quantity of Information conveyed by $x$ about $y$:
+\[
+  I_A(x:y) = K_A(y) - K_A(y/x)
+\]
+is no less than some Negative Constant $C$
+
 (wiki):
 
 (Solomonoff60, Kolmogorov65) \textbf{Thm.}
 \emph{Among Algorithms that Decode Strings from their descriptions (Codes),
-  there exists an optimal one.}; can be used to define several Functions of
-Strings including Complexity, Randomness, and Information
+  there exists an Asymptotically Optimal one.}
+
+statement in (Martin-L\"of66):
+\emph{
+  There exists an algorithm $A$ such that for any Algorithm $B$:
+  \[
+    K_A(x) \leq K_B(x) + c
+  \]
+  where $c$ is a Constant dependent on $A$ and $B$ but not $x$.
+}
+
+-- can be used to define several Functions of Strings including Complexity,
+Randomness, and Information
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Algorithmic Complexity}\label{sec:algorithmic_complexity}
+% ------------------------------------------------------------------------------
+
+\emph{Algorithmic Complexity} or \emph{Descriptive Complexity}
+
+cf. Computational Complexity (\S\ref{sec:complexity_theory})
+
+(Kolmogorov65):
+
+the \emph{Relative Complexity} of an object $y$ with a given $x$
+is the minimal length $l(p)$ of the Program $p$ for obtaining $y$ from $x$
+
+a ``Programming Method'' is a Partial Recursive Function $\varphi(p, x) = y$
+that associates an object $y$ with a Program $p$ and an object $x$; for any such
+Programming Method:
+\[
+  K_\varphi(y/x) =
+  \begin{cases}
+    \nexists p : \varphi(p,x) = y & \infty \\
+    \text{otherwise}              & min_{\varphi(p, x)=y} l(p)
+  \end{cases}
+\]
+
+\emph{Asymptotically Optimal} (Komogorov) or \emph{Universal} (Solomonoff)
+Algorithm $A$
+
+\textbf{Fundamental Theorem} \emph{
+  There exists a Partial Recursive Function $A(p, x)$ such that for any other
+  Partial Recursive Function $\varphi(p, x)$:
+  \[
+    K_A(y/x) \leq K_\varphi(y/x) + C_\varphi
+  \]
+  where Constant $C_\varphi$ does not depend on $x$ or $y$.
+}
+
+-- can be used to define several Functions of Strings including Complexity,
+Randomness, and Information
+
+statement in (Martin-L\"of66):
+\emph{
+  There exists an algorithm $A$ such that for any Algorithm $B$:
+  \[
+    K_A(x) \leq K_B(x) + c
+  \]
+  where $c$ is a Constant dependent on $A$ and $B$ but not $x$.
+}
 
 
 
 % ------------------------------------------------------------------------------
 \subsection{Algorithmic Randomness}\label{sec:algorithmic_randomness}
 % ------------------------------------------------------------------------------
+
+cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness})
+
+1966 - Martin-L\"of - \emph{The Definition of Random Sequences}
+
+Elements of a given large Finite population are \emph{Random} whose Complexity
+(\S\ref{sec:kolmogorov_complexity}) is \emph{maximal}, and almost all Elements
+have a Complexity close to the maximal value
+
+Collectives (Von Mises57); cf. Frequency Interpretation of Probability Theory
+(Part \ref{part:probability_theory})
+
+Universal Test (\S\ref{sec:hypothesis_testing})
+
+Critical Level
+
+Infinite Binary Squences -- Universal Sequential Test
+
+Critical Region (\S\ref{sec:critical_region})
+
+Non-random Infinite Binary Random Sequences form a maximal Constructive Null Set
+(\S\ref{sec:null_set}), i.e. a Constructive Null Set $\mathcal{A}$ such that any
+Constructive Null Set $\mathcal{B}$ is Contained in it:
+$\mathcal{B} \subseteq \mathcal{A}$
+
+Random Sequences with respect to an arbitrary Computable Probability
+Distribution (\S\ref{sec:probability_distribution})
+
+Bernoulli Sequences (\S\ref{sec:bernoulli_sequence}); Computable ``Success
+Probability''
+
+``Irregularity Condition''
+
+
 
 % ------------------------------------------------------------------------------
 \subsection{Algorithmic Probability}\label{sec:algorithmic_probability}
@@ -229,16 +381,6 @@ or \emph{Solomonoff Probability}
 Universal Prior
 
 Occam's Razor, Epicurus' Principle
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Kolmogorov Complexity}\label{sec:kolmogorov_complexity}
-% ------------------------------------------------------------------------------
-
-\emph{Algorithmic Complexity} or \emph{Descriptive Complexity}
-
-cf. Computational Complexity (\S\ref{sec:complexity_theory})
 
 
 
