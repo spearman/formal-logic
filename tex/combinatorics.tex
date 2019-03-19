@@ -527,18 +527,137 @@ Theorem (\S\ref{sec:lagrange_inversion})
 
 (only sections 1 and 2 translated)
 
+\asterism
+
 2010 - Yorgey - \emph{Species and Functors and Types, Oh My!}
 
 \url{http://hackage.haskell.org/package/species} -- Haskell DSL package for
 describing and computing with Combinatorial Species
 
+a Species is like a Polymorphic Type Constructor (\S\ref{sec:polymorphic_type})
+with a single Type argument
+
+a Species $F$ consists of mappings:
+\begin{enumerate}
+  \item $F_\bullet$ -- maps a Finite Set of Labels $U$ to a Finite Set of
+    \emph{$F$-Structures} $F_\bullet[U]$ over $U$
+  \item $F_\leftrightarrow$ -- maps (``lifts'') a Bijection
+    $\sigma : U_1 \stackrel{\sim}{\leftrightarrow} U_2$ (i.e. a Relabelling) to
+    a Bijection between $F$-structures
+    $F_\leftrightarrow[\sigma] : F_\bullet[U_1] \stackrel{\sim}{\leftrightarrow}
+    F_\bullet[U_2]$
+    in a \emph{Functorial} manner, i.e. the Identity Relabelling lifts to the
+    Identity on Structures and the Composition of Relabellings Commutes with
+    lifting
+\end{enumerate}
+
+note that Labels only supply ``names'' for locations in a Structure; actual
+content can be specified by a mapping from Labels to Data
+
+\emph{Regular Species} correspond to Algebraic Data Types
+(\S\ref{sec:algebraic_type}); the name ``Regular'' is taken for their
+correspondence to \emph{Regular Tree Types} (Morris, Altenkirch, McBride 2004)
+
+Algebraic approach: build up more ``complex'' Species from Primitive Species and
+Species Operations
+
+Haskell implementation: for each Primitive Species or Species Operation define a
+corresponding Data Type embodying the $F_\bullet$ mapping such that the Values
+of this mapping correspond to $F$-structures; the $F_\leftrightarrow$ mapping
+can be expressed as an instance of the $\mono{Functor}$ Type Class where the
+$\mono{fmap :: (a \rightarrow b) \rightarrow f\ a \rightarrow f\ b}$ method
+Relabels a Structure $\mono{f\ a}$ by applying a Relabelling Function $\mono{a
+  \rightarrow b}$ to each of its Labels, and can also be used to ``fill in'' a
+Labelled shape with content by mapping Labels to Data; an $\mono{Enumerable}$
+Type Class defines a method $\mono{enumerate :: [a] \rightarrow [f\ a]}$ to
+enumerate all distinct Labelled Structures on a given Set of Labels
+
+\begin{itemize}
+  \item $0$ -- the Species $0$ corresponds to the constantly ``void'' Type
+    Constructor, i.e. it yields \emph{no} Structures for any input Labels:
+    \begin{flalign*}
+      & \mono{data\ 0\ a} \\
+      & \mono{instance\ Functor\ 0\ where} \\
+      & \mono{\ \ fmap = \bot} \\
+      & \mono{instance\ Enumerable\ 0\ where} \\
+      & \mono{\ \ enumerate\ \_ = []}
+    \end{flalign*}
+  \item $1$ -- the Species $1$ yields a single ``Unit'' Structure when applied
+    to an Empty Set of Labels and \emph{no} Structures otherwise, i.e. there is
+    exactly one Structure of Type $1\ a$ and it contains \emph{no} locations
+    where Values of Type $a$ can be stored; corresponds to Nullary Constructors
+    in Algebraic Data Types:
+    \begin{flalign*}
+      & \mono{data\ 1\ a = 1} \\
+      & \mono{instance\ Functor\ 0\ where} \\
+      & \mono{\ \ fmap\ \_\ 1 = 1} \\
+      & \mono{instance\ Enumerable\ 1\ where} \\
+      & \mono{\ \ enumerate\ [] = [1]} \\
+      & \mono{\ \ enumerate\ \_ = []}
+    \end{flalign*}
+  \item $X$ -- the Species of \emph{Singletons} yields a single Structure when
+    applied to a Singleton Label Set and no Structures otherwise; corresponds to
+    the Identity Type Constructor:
+    \begin{flalign*}
+      & \mono{data\ X\ a = X\ a} \\
+      & \mono{instance\ Functor\ X\ where} \\
+      & \mono{\ \ fmap\ f\ (X\ a) = X\ (f\ a)} \\
+      & \mono{instance\ Enumerable\ X\ where} \\
+      & \mono{\ \ enumerate\ [x] = [X\ x]} \\
+      & \mono{\ \ enumerate\ \_ = []}
+    \end{flalign*}
+  \item $+$ -- the \emph{Sum} Species: Disjoint (Tagged) Union; given Species
+    $F$ and $G$ and Label Set $U$, the Set of $(F+G)$-structures over $U$ is
+    the Disjoint Union of Sets of $F$- and $G$-structures over $U$, i.e. an
+    $(F+G)$-structure is \emph{either} an $F$-structure or a $G$-structure (with
+    a ``Tag'' specifying which); e.g. $1 + X$ corresponds to the $\mono{Maybe}$
+    Type Constructor
+
+    generalizing $0$ and $1$ by defining Species $n$ Isomorphic to $1 + \cdots +
+    1$ for each $n \geq 0$ as the Species which generates $n$ distinct
+    Structures for the empty Label Set, and no Structures for any non-empty
+    Label Set, e.g. $2$ corresponds to the (Constant) $Bool$ Type Constructor
+    $\mono{CBool\ a = CBool\ Bool}$
+
+    up to Isomorphism, $0$ is the Identity for Species Addition and $+$ is
+    Associative and Commutative
+  \item $\bullet$ -- the \emph{Product} Species: Type Product such that the
+    resulting Structures contain each Label exactly once, so that a $(F \bullet
+    G)$-structure over $U$ Partitions $U$ into two Subsets and forms an Ordered
+    Pair of an $F$-structure built from the first Subset of the Partition and
+    a $G$-structure built from the second Subset of the Partition, and the
+    Species $(F \bullet G)$ consists in doing so in all possible ways:
+    \[
+      (F \bullet G)[U] = \sum_{U = U_1 \uplus U_2} F[U_1] \times G[U_2]
+    \]
+
+    for example $(X \bullet X) = X^2$ is the Species of Ordered Pairs (two
+    possible orderings of Labels), and $X^3$ is the Species of Ordered Triples
+    ($3! = 6$ possible orderings of Labels), etc.
+
+    up to Isomorphism, $1$ is an Identity and $0$ an Absorbing Element, and
+    $\bullet$ is Associative and Commutative and Distributes over $+$
+\end{itemize}
+
+with $0$, $1$, and the Operations $+$ and $\bullet$, Species form a Commutative
+Semiring (\S\ref{sec:semiring})
+
+adding a Least Fixed-point (\S\ref{sec:least_fixedpoint}) Operator $\mu$ gives
+Algebraic Data Types (``Regular Types'')
+
+a Species is \emph{Regular} if it can be expressed in terms of $1$, $x$, $+$,
+$\bullet$, and $\mu$
+
+\emph{Implicit Species Theorem} -- Combinatorial Analog of the Implicit Function
+Theorem (\S\ref{sec:implicit_function}) from Analysis
+
 2014 - Yorgey - \emph{Combinatorial Species and Labelled Structures}
 
 \url{https://homotopytypetheory.org/2016/07/20/combinatorial-species-and-finite-sets-in-hott/}:
 Combinatorial Species can be seen as a Categorification of Generating Functions,
-which, over a Semiring (\S\ref{sec:semiring}) $R$, are represented by Functions
-$\nats \rightarrow R$ mapping Natural Numbers to Coefficients in $R$, and each
-Natural Number corresponds to an Equivalence Class of \emph{Finite} Sets
+which, over a Semiring $R$, are represented by Functions $\nats \rightarrow R$
+mapping Natural Numbers to Coefficients in $R$, and each Natural Number
+corresponds to an Equivalence Class of \emph{Finite} Sets
 
 
 
