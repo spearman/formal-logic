@@ -196,6 +196,11 @@ $\frac{n!}{(n-1)!}$
 
 Permutation Group (\S\ref{sec:permutation_group})
 
+Symmetric Group (\S\ref{sec:symmetric_group}) -- $\sigma \in S_n$
+
+every Permutation can be decomposed into a collection of Disjoint Cycles
+(\S\ref{sec:cycle})
+
 
 
 \subsubsection{Cyclic Permutation}\label{sec:cyclic_permutation}
@@ -648,8 +653,134 @@ Algebraic Data Types (``Regular Types'')
 a Species is \emph{Regular} if it can be expressed in terms of $1$, $x$, $+$,
 $\bullet$, and $\mu$
 
-\emph{Implicit Species Theorem} -- Combinatorial Analog of the Implicit Function
+\emph{Implicit Species Theorem} -- Combinatorial analog of the Implicit Function
 Theorem (\S\ref{sec:implicit_function}) from Analysis
+
+a Permutation (\S\ref{sec:permutation}) $\sigma \in S_n$ is a \emph{Symmetry} of
+an $F$-structure $f \in F[U]$ if and only if $\sigma$ ``fixes'' $f$, i.e.:
+\[
+  F_\leftrightarrow[\sigma](f) = f
+\]
+a Species $F$ is Regular if and only if every $F$-structure has the Identity
+Permutation as the only Symmetry
+
+$F \circ G$ -- Species Composition; Partitions the Underlying Set $U$ into
+Non-empty Disjoint parts and creates a $G$-structure on each $U_i$ and an
+$F$-structure on each of the $G$-structures; note that $G$ must not yield any
+Structures on the empty Label Set, corresponding to the criterion for composing
+Formal Power Series
+
+Composition is Associative and Non-commutative, has $X$ as both Left- and
+Right-identity, and Distributes over Sum and Product from the right
+
+Regular Species are \emph{Closed} under Composition
+
+the \emph{Derivative} of a Data Type $D$ is the Type of $D$-structures with a
+single ``hole'', i.e. a distinguished location not containing any Data
+
+the Derivative $F'$ of a Species $F$ sends Label Sets $U$ to the Set of
+$F$-structures on the Label Set $U \cup \{*\}$ (Joyal81)
+
+note that it is called ``Differentiation'' because it Satisfies the same
+Algebraic Laws as the Differentiation Operation
+(\S\ref{sec:differential_calculus}) in Calculus
+
+Regular Species are Closed under Differentiation, but a Regular Species may be
+the Derivative of a Non-regular Species
+
+\emph{Cardinality Restriction} -- a Species $F_n$ is the Species $F$ restricted
+to Label Sets of Cardinality $n$
+
+an \emph{Unlabelled Structure} or \emph{$F$-shape} is an Equivalence Class of
+Labelled $F$-structures where two Structures $s$ and $t$ are Equivalent if there
+is some Relabelling $\sigma$ such that $F_\leftrightarrow[\sigma](s) = t$
+
+for Regular Species, every Permutation of Labels results in a distinct Labelled
+Structure so there are always $n!$ times as many Labelled as Unlabelled
+Structures of size $n$
+
+\emph{Non-regular Species} and Operations
+
+\begin{itemize}
+  \item $E$ -- Species of \emph{Sets} (``\emph{Ensembles}'' or Species of
+    \emph{Bags}; represents an unordered collection of Elements; for any given
+    Label Set, there is exactly one Set Structure, the Set of Labels itself;
+    some derived Species:
+    \begin{itemize}
+      \item $X \bullet E$ -- Species of \emph{Pointed Sets}
+      \item $E \bullet E = \pow$ -- Species of \emph{Subsets}
+      \item $E \circ E_{\geq0}$ -- Species of \emph{Set Partitions}
+    \end{itemize}
+  \item $C$ -- Species of \emph{Directed Cycles} (\S\ref{sec:directed_cycle});
+    derived Species:
+    \begin{itemize}
+      \item $E \circ C$ -- Species of \emph{Permutations}; every Permutation can
+        be decomposed into a collection of Cycles
+      \item $C' = L$ -- Species of \emph{Lists}; a Cycle with a hole in it is
+        Isomorphic to a List
+    \end{itemize}
+\end{itemize}
+
+$F \times G$ -- \emph{Cartesian Product} of Species; a pair of an $F$-structure
+and a $G$-structure, each built over all the Labels; Associative, Commutative,
+Distributive over Species Sum, and has $E$ as both Left- and Right-identity
+
+$F \square G$ -- \emph{Functor Composition}:
+\[
+  (F \square G)[U] = F[G[U]]
+\]
+$F$-structures over the Set of \emph{all} $G$-structures on $U$
+
+some derived Species:
+\begin{itemize}
+  \item $\pow \square (E_2 \bullet E)$ -- the Species of \emph{Simple Graphs},
+    where $(E_2 \bullet E)$ is a Set of two Labels, i.e. an Undirected Edge, so
+    a Simple Graph is just a Subset of all possible Undirected Edges
+  \item $\pow \square (X^2 \bullet E)$ -- Species of \emph{Directed Graphs
+    without Self-loops}
+  \item $\pow \square ((X \bullet E) \times (X \bullet E))$ -- Species of
+    \emph{Directed Graphs} with Self-loops allowed
+\end{itemize}
+
+\emph{Generating Functions} (\S\ref{sec:generating_function}) -- every Species
+can be associated with several different Generating Functions:
+\begin{itemize}
+  \item $F(x) = \sum_{n \geq 0}f_n\frac{x^n}{n!}$ -- an Exponential Generating
+    Function (EGF) where $f_n$ is the number of distinct Labelled
+    $F$-structures; counting Labelled Structures can be done by interpreting
+    Species as EGFs and representing them as Infinite Lazy-lists of Coefficients
+    (FIXME: explain)
+  \item an Ordinatry Generating Function (OGF) counting Unlabelled Structures
+    (Shapes)
+  \item a Cycle Index Series
+\end{itemize}
+
+Species Sum Product, Composition, and Differentiation correspond to the same
+Operations on Formal Power Series (\S\ref{sec:formal_power_series})
+
+\emph{Weighted Species} -- assigns Weights to Structures allowing for more
+refined Enumeration
+
+\emph{Multisort Species} -- build Structures from multiple Label Sets
+(\emph{Sorts}); useful in making the Implicit Species Theorem precise
+
+\emph{Virtual Species} -- Completion (\S\ref{sec:ring_completion}) of the
+Semiring of Species analogous to the Set-theoretic Completion of the Naturals to
+the Integers; allows defining a Multiplicative Inverse for the Species $E$ of
+Sets, and to solve Compositional Inverses and Differential Equations and to
+define a \emph{Combinatorial Logarithm} generalizing the notion of Structures
+built from \emph{Connected Components} (\S\ref{sec:connected_component})
+
+\emph{Molecular Species} -- a Species $F$ such that all $F$-structures are
+Isomorphic, e.g. $X^2$ is Molecular (pairs are always Isomorphic), $L$ is not
+Molecular (List Structures of different lengths are not Isomorphic); Molecular
+Species are precisely those Species that cannot be decomposed into a Sum of two
+Nonzero Species; every Molecular Species is equivalent to $X^n$
+``Quotiented'' by some Symmetries; every Species can be written uniquely up to
+Isomorphism and reordering of Terms as a Sum of Molecular Species
+
+applications of Species expressions include Automated Testing (as input to a
+Test-generator-generator for either Random or Exhaustive Testing)
 
 2014 - Yorgey - \emph{Combinatorial Species and Labelled Structures}
 
