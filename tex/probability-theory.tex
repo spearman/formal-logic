@@ -188,121 +188,6 @@ TODO: Giry Monads (Probability Monads) -
 
 
 % ==============================================================================
-\section{Observation}\label{sec:observation}
-% ==============================================================================
-
-\emph{``data point''}
-
-\fist Curve Fitting (\S\ref{sec:curve_fitting}): the process of constructing a
-Curve (or Function) that has the ``best Fit'' to a Series of data points
-(Observations), possibly subject to constraints
-
-(FIXME: cf. Event ???)
-
-
-
-% ==============================================================================
-\section{Population}\label{sec:population}
-% ==============================================================================
-
-``Totality of Observations''
-
-Observation: Value of a Random Variable $X$ having some Probability
-Distribution $f(x)$
-
-Paired Observation (Dependent) (???)
-
-(wiki):
-
-\emph{Statistical Population} -- a Set of ``similar items'' or Events
-(\S\ref{sec:probability_event}) of interest
-
-Descriptive Statistics (\S\ref{sec:descriptive_statistics}): a Subset of the
-Population is a \emph{Statistical Sample} (\S\ref{sec:statistical_sample})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Population Parameter}\label{sec:population_parameter}
-% ------------------------------------------------------------------------------
-
-or \emph{Statistical Parameter}
-
-(wiki): a ``quantity'' that indexes a Family of Probability Distributions
-(\S\ref{sec:probability_distribution})
-
-can be regarded as a ``numerical characteristic'' of a Population or a
-Statistical Model (\S\ref{sec:statistical_model}) \fist cf. Parametric
-Statistical Models (\S\ref{sec:parametric_model})
-
-example: the Family of Normal Distributions (\S\ref{sec:normal_distribution})
-are Parameterized by the Mean and Standard Deviation
-
-$\mu$, $\sigma$
-
-\fist \emph{Estimation Theory} (\S\ref{sec:estimation_theory}) deals with
-``\emph{Estimating}'' the values of Statistical Parameters
-based on data that has a ``\emph{random component}'' (FIXME: clarify)
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Sample}\label{sec:sample}
-% ------------------------------------------------------------------------------
-
-Subset of a Population
-
-Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
-
-
-
-\subsubsection{Random Sample}\label{sec:random_sample}
-
-Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
-
-cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
-\emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
-
-\fist Monte Carlo Simulation (\S\ref{sec:monte_carlo})
-
-
-
-\paragraph{Simple Random Sample}\label{sec:simple_random_sample}\hfill
-
-\paragraph{Stratified Random Sample}\label{sec:stratified_random_sample}\hfill
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Statistic}\label{sec:statistic}
-% ------------------------------------------------------------------------------
-
-Function of the Random Variable (\S\ref{sec:random_variable}) constituting a
-Random Sample (\S\ref{sec:random_sample})
-
-$\overline{x}$, $\sigma^2$
-
-The Probability Distribution (\S\ref{sec:probability_distribution}) of
-a Statistic is a Sampling Distribution
-(\S\ref{sec:sampling_distribution})
-
-Estimator (\S\ref{sec:estimator})
-
-
-
-\subsubsection{Robust Statistic}\label{sec:robust_statistic}
-
-\fist Info-gap Decision Theory (\S\ref{sec:info_gap}) -- Non-probabilistic
-Decision Theory seeking to optimize Robustness to ``failure'' under severe
-Uncertainty (\S\ref{sec:uncertainty_analysis})
-
-
-
-\subsubsection{Sufficient Statistic}\label{sec:sufficient_statistic}
-
-
-
-% ==============================================================================
 \section{Probability Space}\label{sec:probability_space}
 % ==============================================================================
 
@@ -365,7 +250,8 @@ such that $P$ satisfies the Kolmogorov Axioms (\S\ref{sec:probability_axioms})
 \fist \emph{Unit Measure Axiom}: the total Probability of the Sample Space is
 $1 = P(S)$
 
-Random Variable (\S\ref{sec:random_variable}): Function on a Sample Space
+Random Variable (\S\ref{sec:random_variable}): Function on a Sample Space to a
+Measurable \emph{State Space}
 
 a Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a
 Sample Space $S$ together with a Set of Probability Distributions
@@ -407,6 +293,11 @@ a Subset of Outcomes in a Sample Space is called an \emph{Event}
 
 if an actual Outcome is inside an Event, the Event is said to have
 ``\emph{occurred}''
+
+\fist cf. \emph{Observation} (or \emph{Realization} \S\ref{src:observation}):
+the ``Outcome'' of a \emph{Random Variable} (\S\ref{sec:random_variable}), i.e.
+the Member of the Random Variable's State Space corresponding to an Outcome
+which occurred in the Sample Space of a performed Experiment
 
 
 
@@ -510,8 +401,9 @@ the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
 \subsection{Random Variable}\label{sec:random_variable}
 % ------------------------------------------------------------------------------
 
-Function on a Sample Space (\S\ref{sec:sample_space}) mapping Outcomes in the
-Sample Space to some other Set of Values
+Function on a Sample Space (\S\ref{sec:sample_space}) mapping Outcomes
+(\S\ref{sec:outcome}) in the Sample Space to some other Set of Values called the
+\emph{State Space}.
 
 $X : \Omega \rightarrow E$
 
@@ -581,6 +473,23 @@ for a Function of a Random Variable $Y = g(X)$:
 for a PMF that is Symmetric around a certain point, that point is the Expected
 Value
 
+
+
+
+\subsubsection{Observation}\label{sec:observation}
+
+An \emph{Observation} (\emph{Observed Value}, \emph{Realization}, or
+\emph{Random Variate}) is the Element of a Random Variable's State Space
+corresponding to the actual Outcome (\S\ref{sec:outcome}) resulting from
+performing an Experiment (\S\ref{sec:experiment}).
+
+\emph{``data point''}
+
+\fist Population (\S\ref{sec:population}): totality of Observations
+
+\fist Curve Fitting (\S\ref{sec:curve_fitting}): the process of constructing a
+Curve (or Function) that has the ``best Fit'' to a Series of data points
+(Observations), possibly subject to constraints
 
 
 
@@ -1555,17 +1464,105 @@ f(t) dt$
 
 
 % ==============================================================================
-\section{Conditioning}\label{sec:conditioning}
+\section{Population}\label{sec:population}
 % ==============================================================================
 
-%FIXME: move under bayesian inference?
+\emph{Statistical Population}
 
-Subjective Probability
-(\url{https://plato.stanford.edu/entries/probability-interpret/#SubPro}),
-Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
+totality of Observations (\S\ref{sec:observation})
 
-\fist not to be confused with Condition Numbers (Numerical Analysis
-\S\ref{sec:condition_number})
+Value of a Random Variable $X$ having some Probability
+Distribution $f(x)$
+
+Paired Observation (Dependent) (???)
+
+(wiki):
+
+\emph{Statistical Population} -- a Set of ``similar items'' or Events
+(\S\ref{sec:probability_event}) of interest
+
+Descriptive Statistics (\S\ref{sec:descriptive_statistics}): a Subset of the
+Population is a \emph{Statistical Sample} (\S\ref{sec:statistical_sample})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Population Parameter}\label{sec:population_parameter}
+% ------------------------------------------------------------------------------
+
+or \emph{Statistical Parameter}
+
+(wiki): a ``quantity'' that indexes a Family of Probability Distributions
+(\S\ref{sec:probability_distribution})
+
+can be regarded as a ``numerical characteristic'' of a Population or a
+Statistical Model (\S\ref{sec:statistical_model}) \fist cf. Parametric
+Statistical Models (\S\ref{sec:parametric_model})
+
+example: the Family of Normal Distributions (\S\ref{sec:normal_distribution})
+are Parameterized by the Mean and Standard Deviation
+
+$\mu$, $\sigma$
+
+\fist \emph{Estimation Theory} (\S\ref{sec:estimation_theory}) deals with
+``\emph{Estimating}'' the values of Statistical Parameters
+based on data that has a ``\emph{random component}'' (FIXME: clarify)
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Sample}\label{sec:sample}
+% ------------------------------------------------------------------------------
+
+Subset of a Population
+
+Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
+
+
+
+\subsubsection{Random Sample}\label{sec:random_sample}
+
+Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
+
+cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
+\emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
+
+\fist Monte Carlo Simulation (\S\ref{sec:monte_carlo})
+
+
+
+\paragraph{Simple Random Sample}\label{sec:simple_random_sample}\hfill
+
+\paragraph{Stratified Random Sample}\label{sec:stratified_random_sample}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Statistic}\label{sec:statistic}
+% ------------------------------------------------------------------------------
+
+Function of the Random Variable (\S\ref{sec:random_variable}) constituting a
+Random Sample (\S\ref{sec:random_sample})
+
+$\overline{x}$, $\sigma^2$
+
+The Probability Distribution (\S\ref{sec:probability_distribution}) of
+a Statistic is a Sampling Distribution
+(\S\ref{sec:sampling_distribution})
+
+Estimator (\S\ref{sec:estimator})
+
+
+
+\subsubsection{Robust Statistic}\label{sec:robust_statistic}
+
+\fist Info-gap Decision Theory (\S\ref{sec:info_gap}) -- Non-probabilistic
+Decision Theory seeking to optimize Robustness to ``failure'' under severe
+Uncertainty (\S\ref{sec:uncertainty_analysis})
+
+
+
+\subsubsection{Sufficient Statistic}\label{sec:sufficient_statistic}
 
 
 
@@ -2417,7 +2414,7 @@ Conditional Probabilities (\S\ref{sec:conditional_probability}), Bayes' Rule
 \fist Bayesian Network (Probabilistic Directed Acyclic Graphical Model
 \S\ref{sec:bayesian_network})
 
-Subjective Probability
+Subjective Probability %FIXME: section
 (\url{https://plato.stanford.edu/entries/probability-interpret/#SubPro}),
 Conditioning (\S\ref{sec:conditioning})
 
@@ -2427,6 +2424,19 @@ Conditioning (\S\ref{sec:conditioning})
   Rationality} -- \emph{Correlated Equilibrium}
 (\S\ref{sec:correlated_equilibrium}) ``does away with'' the ``dichotomy usually
 perceived'' between the \emph{Bayesian} and \emph{Game-theoretic} world-views
+
+
+
+\subsubsection{Conditioning}\label{sec:conditioning}
+
+%FIXME: move under bayesian inference?
+
+Subjective Probability
+(\url{https://plato.stanford.edu/entries/probability-interpret/#SubPro}),
+Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
+
+\fist not to be confused with Condition Numbers (Numerical Analysis
+\S\ref{sec:condition_number})
 
 
 
