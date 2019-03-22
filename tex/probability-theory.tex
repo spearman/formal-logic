@@ -6,6 +6,42 @@
 
 \fist Measure Theory (Part \ref{part:measure_theory})
 
+(wiki):
+
+two broad categories of \emph{Probability Interpretations}:
+\begin{enumerate}
+  \item \emph{Physical Probabilities} -- ``Objective'' or \emph{Frequency
+    Probabilities} associated with ``Random'' Physical Systems
+    \begin{enumerate}
+      \item \emph{Frequentist Probability} (``Long-run Probability'') -- defines
+        an Event's (\S\ref{sec:probability_event}) Probability as the Limit of
+        its Relative Frequency (Empirical Probability
+        \S\ref{sec:relative_frequency}) in a large number of Trials
+        (\S\ref{sec:trial}); cf. Frequentist Inference
+        (\S\ref{sec:frequentist_inference})
+      \item \emph{Propensity Probability} (``Single-case Probability'') -- a
+        Propensity (\S\ref{sec:propensity}) is not a Relative Frequency but a
+        purported ``\emph{cause}'' or explanation of the observed stable
+        Relative Frequencies; invokes the Law of Large Numbers
+        (\S\ref{sec:large_numbers}) to explain stable \emph{long-run}
+        Frequencies as a manifestation of invariant \emph{single-case}
+        Probabilities
+    \end{enumerate}
+  \item \emph{Evidential Probabilities} -- \emph{Bayesian Probability};
+    interpretation of Probability as ``reasonable'' \emph{Expectation}
+    (\S\ref{sec:expectation}) or ``degree of belief''; assigns Probability to
+    Statements even when no Random Process (\S\ref{sec:stochastic_process}) is
+    involved; assigns Probability to Hypotheses (\S\ref{sec:hypothesis}), unlike
+    Frequentist Inference which Tests Hypotheses without assigning Probability
+    \begin{enumerate}
+      \item \emph{Classical Interpretation}
+      \item \emph{Subjective Interpretation}
+      \item \emph{Inductive (Epistemic) Interpretation}
+      \item \emph{Logical Interpretation}
+      \item \emph{Intersubjective Interpretation}
+    \end{enumerate}
+\end{enumerate}
+
 2011 - \emph{Interpretations of Probability} -
 \url{https://plato.stanford.edu/entries/probability-interpret/}:
 \begin{itemize}
@@ -315,21 +351,21 @@ cf. \emph{Probability} (\S\ref{sec:probability})
 \subsection{Sample Space}\label{sec:sample_space}
 % ------------------------------------------------------------------------------
 
-or \emph{Event Space}
+a.k.a. \emph{Possibility Space} or \emph{Event Space}
+
+Set of all possible Outcomes of Statistical \emph{Experiment}
+(\S\ref{sec:experiment})
 
 $S$
 
-an Event (\S\ref{sec:probability_event}) is a Subset of a Sample Space
+an \emph{Event} (\S\ref{sec:probability_event}) is a Subset of a Sample Space
 
-Set of all possible outcomes of Statistical Experiment
+the Probability (\S\ref{sec:probability}) $P$ of an Event $E$ is usually defined
+such that $P$ satisfies the Kolmogorov Axioms (\S\ref{sec:probability_axioms})
+\fist \emph{Unit Measure Axiom}: the total Probability of the Sample Space is
+$1 = P(S)$
 
-the Probability (\S\ref{sec:probability}) $P$ of an Event $E$ is usually
-defined such that $P$ satisfies the Kolmogorov Axioms
-(\S\ref{sec:probability_axioms}) \fist \emph{Unit Measure Axiom}: the
-total Probability of the Sample Space is $1 = P(S)$
-
-Random Variable (\S\ref{sec:random_variable}): Function on a Sample
-Space
+Random Variable (\S\ref{sec:random_variable}): Function on a Sample Space
 
 a Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a
 Sample Space $S$ together with a Set of Probability Distributions
@@ -339,15 +375,48 @@ Sample Space $S$ together with a Set of Probability Distributions
 
 \subsubsection{Experiment}\label{sec:experiment}
 
-Sample Space (\S\ref{sec:sample_space}): Set of all possible Outcomes of
-Statistical Experiment
+(wiki): any ``procedure'' that can be infinitely repeated and has a well-defined
+Set of possible \emph{Outcomes} (\S\ref{sec:outcome})
 
-if an Outcome is inside an Event (\S\ref{sec:probability_event}), i.e. a Subset
-of the Sample Space, it is said to have ``\emph{Occurred}''
+when an Experiment is ``performed'' (or ``conducted'') one and only one possible
+Outcome ``results'', and any Events (\S\ref{sec:probability_event}), i.e.
+Subsets of the Sample Space, containing that Outcome are said to have
+``occurred''
+
+a \emph{Random Experiment} has more than one possible Outcome; a Random
+Experiment with exactly two possible (Mutually Exclusive) outcomes is called a
+\emph{Binomial (Bernoulli) Trial} (\S\ref{sec:bernoulli_trial})
+
+a \emph{Deterministic Experiment} has only a single possible Outcome
+
+a number of repetitions of an Experiment is called a \emph{Composed Experiment},
+and the individual repetitions are called ``\emph{Trials}'' (\S\ref{sec:trial})
+
+after conducting many Trials of the same Experiment, the \emph{Relative
+  Frequency} (Empirical Probability \S\ref{sec:relative_frequency}) of the
+various Outcomes and Events can be assessed
 
 
 
-\paragraph{Binomial Trial}\label{sec:binomial_trial}\hfill
+\paragraph{Outcome}\label{sec:outcome}
+
+a possible result of an Experiment (or Trial)
+
+a Subset of Outcomes in a Sample Space is called an \emph{Event}
+(\S\ref{sec:probability_event})
+
+if an actual Outcome is inside an Event, the Event is said to have
+``\emph{occurred}''
+
+
+
+\paragraph{Trial}\label{sec:trial}\hfill
+
+an individual repetition of a Composed Experiment
+
+
+
+\subparagraph{Binomial Trial}\label{sec:binomial_trial}\hfill
 
 or \emph{Bernoulli Trial}
 
@@ -372,10 +441,10 @@ Number of Successes in $n$ Bernoulli Trials is a \emph{Binomial Random
 \subsection{Event}\label{sec:probability_event}
 % ------------------------------------------------------------------------------
 
-Subset of a \emph{Event Space} (Sample Space \S\ref{sec:sample_space})
+Subset of a Sample Space (\S\ref{sec:sample_space})
 
-if an Outcome is inside an Event (Subset), it is said to have
-``\emph{Occurred}''
+if an actual Outcome is inside an Event (Subset), the Event is said to have
+``\emph{occurred}''
 
 \emph{Probability} (\S\ref{sec:probability})
 
@@ -618,6 +687,11 @@ a Random Variable $X$ is equal to:
 \paragraph{Law of Large Numbers}\label{sec:large_numbers}\hfill
 
 \fist cf. Law of Iterated Logarithm (\S\ref{sec:iterated_logarithm})
+
+\fist \emph{Propensity Probability} (``Single-case Probability''
+\S\ref{sec:propensity}) -- invokes the Law of Large Numbers to explain stable
+\emph{long-run} Relative Frequencies (\S\ref{sec:relative_frequency}) as a
+manifestation of invariant \emph{single-case} Probabilities
 
 
 
@@ -1529,7 +1603,7 @@ Bayesian: Credible Interval (\S\ref{sec:credible_interval})
 
 
 
-\paragraph{Best Linear Unbiased Prediction (BLUP}}\label{sec:blup}\hfill
+\paragraph{Best Linear Unbiased Prediction (BLUP)}\label{sec:blup}\hfill
 
 under ``suitable assumptions'' on the Priors, Gaussian Process Regression
 (Kriging \S\ref{sec:gaussian_process_regression}) gives the best BLUP of the
@@ -1547,6 +1621,11 @@ intermediate values
 
 \emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
 Populations (\S\ref{sec:population})
+
+in Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is assigned
+a Probability, while in Frequentist Inference
+(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
+Probability
 
 \url{https://github.com/puolival/multipy} -- Python library
 
@@ -2259,7 +2338,12 @@ Outcomes instead of the \emph{possible} Outcomes; Finite Frequentism (Venn)
 
 \subsubsection{Relative Frequency}\label{sec:relative_frequency}
 
-or \emph{Empirical Probability}
+\emph{Empirical Probability} or \emph{Experimental Probability} or
+\emph{Long-run Probability}
+
+after conducting many Trials (\S\ref{sec:trial}) of the same Experiment
+(\S\ref{sec:experiment}), the Relative Frequencies of the various Outcomes
+(\S\ref{sec:outcome}) and Events (\S\ref{sec:probability_event}) can be assessed
 
 \url{https://plato.stanford.edu/entries/probability-interpret/#FreInt}:
 
@@ -2289,6 +2373,20 @@ Additivity and the Domain of Definition is not a Set-field or a $\sigma$-algebra
 
 
 
+\subsubsection{Propensity}\label{sec:propensity}
+
+(wiki):
+
+\emph{Chance} or \emph{Single-case Probability}
+
+a purported ``\emph{cause}'' or explanation of an observed stable Relative
+Frequency
+
+invokes the Law of Large Numbers (\S\ref{sec:large_numbers}) to explain stable
+\emph{long-run} Frequencies as a manifestation of invariant \emph{single-case}
+
+
+
 \subsubsection{Frequency Distribution}\label{sec:frequency_distribution}
 
 \subsubsection{Confidence Interval}\label{sec:confidence_interval}
@@ -2308,6 +2406,10 @@ Two-tail
 % ------------------------------------------------------------------------------
 \subsection{Bayesian Inference}\label{sec:bayesian_inference}
 % ------------------------------------------------------------------------------
+
+\emph{Evidential Probability} or \emph{Bayesian Probability} -- interpretation
+of Probability as a ``reasonable'' \emph{Expectation} (\S\ref{sec:expecation})
+or ``degree of belief''
 
 Conditional Probabilities (\S\ref{sec:conditional_probability}), Bayes' Rule
 (\S\ref{sec:bayes_theorem})
