@@ -6,6 +6,274 @@
 
 \fist Measure Theory (Part \ref{part:measure_theory})
 
+\fist Probabilistic Logic (\S\ref{sec:probabilistic_logic}) --
+2013 - \emph{Logic and Probability} -
+\url{https://plato.stanford.edu/entries/logic-probability/} (Stanford
+Encyclopedia of Philosophy)
+
+\fist cf. Inductive Logic (\S\ref{sec:inductive_logic}) -- makes extensive use
+of Probabilistic notions
+
+\emph{Bayesian Epistemology}: Probability as a formal representation of Belief
+(cf. Bayesian Inference \S\ref{sec:bayesian_inference})
+
+\emph{Knowledge Representation}: Probability in Artificial Intelligence
+
+\fist cf. Fuzzy Logic (\S\ref{sec:fuzzy_logic})
+
+\fist cf. Quantum Logic (\S\ref{sec:quantum_logic}) --
+\emph{Quantum Logic and Probability Theory} (2002) -
+\url{https://plato.stanford.edu/entries/qt-quantlog/}
+
+\fist Decision Theory (\S\ref{sec:decision_theory}) --
+(wiki): Probabilistic Decision Theory is Sensitive
+(\S\ref{sec:sensitivity_analysis}) to \emph{Assumptions} about Probabilities of
+Events; Non-probabilistic Decision Rules (\S\ref{sec:decision_rule}), such as
+Minimax (\S\ref{sec:minimax}), are \emph{Robust} (\S\ref{sec:robust_statistics})
+in that they don't make such Assumptions (FIXME: clarify)
+
+2018 - \emph{A Categorical Look at Random Variables} -
+\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html} (article):
+
+$\cat{Prob}$ -- Category with Objects as Probability Spaces
+(\S\ref{sec:probability_space}) and Morphisms are ``Almost-everywhere-equality
+Equivalence Classes'' of Measure-preserving Maps
+
+``Probability Theory is \emph{not} about the Category $\cat{Prob}$, in the sense
+that Group Theory or Topology might be said (however incompletely) to be about
+the Categories $\cat{Grp}$ or $\cat{Top}$''
+
+\emph{Isomorphic Objects} in $\cat{Prob}$ are \emph{not} the same from the point
+of view of \emph{Probability Theory}
+
+example: the Distributions (\S\ref{sec:probability_distribution}) of a Uniform
+Random Variable in an Interval, an Infinite Sequence of independent ``coin
+flips'', and Brownian Motion $\{B_t : t \geq 0\}$ are \emph{different} things in
+Probability Theory, but are Isomorphic in $\cat{Prob}$
+
+the fundamental ``objects'' in Probability Theory are the Morphisms of
+$\cat{Prob}$ and those Morphisms are \emph{Random Variables}
+(\S\ref{sec:random_variable})
+
+TODO: Giry Monads (Probability Monads) -
+\url{https://ncatlab.org/nlab/show/Giry+monad}
+
+
+\asterism
+
+1933 - Kolmogorov - \emph{Foundations of the Theory of Probability}
+
+\emph{Field of Probabilities} (\emph{$\sigma$-algebra}
+(\S\ref{sec:sigma_algebra})
+
+
+
+% ==============================================================================
+\section{Experiment}\label{sec:experiment}
+% ==============================================================================
+
+(wiki): any ``procedure'' that can be infinitely repeated and has a well-defined
+Set of possible \emph{Outcomes} (\S\ref{sec:outcome})
+
+when an Experiment is ``performed'' (or ``conducted'') one and only one possible
+Outcome ``results'', and any Events (\S\ref{sec:probability_event}), i.e.
+Subsets of the Sample Space, containing that Outcome are said to have
+``occurred''
+
+a \emph{Random Experiment} has more than one possible Outcome; a Random
+Experiment with exactly two possible (Mutually Exclusive) outcomes is called a
+\emph{Binomial (Bernoulli) Trial} (\S\ref{sec:bernoulli_trial})
+
+a \emph{Deterministic Experiment} has only a single possible Outcome
+
+a number of repetitions of an Experiment is called a \emph{Composed Experiment},
+and the individual repetitions are called ``\emph{Trials}'' (\S\ref{sec:trial})
+
+after conducting many Trials of the same Experiment, the \emph{Relative
+  Frequency} (Empirical Probability \S\ref{sec:relative_frequency}) of the
+various Outcomes and Events can be assessed
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Trial}\label{sec:trial}
+% ------------------------------------------------------------------------------
+
+an individual repetition of a Composed Experiment
+
+
+
+\subsubsection{Binomial Trial}\label{sec:binomial_trial}\hfill
+
+or \emph{Bernoulli Trial}
+
+Binomial Distribution (\S\ref{sec:binomial_distribution}); special case:
+Bernoulli Distribution (\S\ref{sec:bernoulli_distribution})
+
+Mathematical Formalization: Bernoulli Process (\S\ref{sec:bernoulli_process})
+
+\begin{enumerate}
+  \item repeated Trials
+  \item each Trial results in an Outcome
+  \item Probability of Success is Constant
+  \item each Trial is Independent
+\end{enumerate}
+
+Number of Successes in $n$ Bernoulli Trials is a \emph{Binomial Random
+  Variable} (\S\ref{sec:binomial_random_variable})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Outcome}\label{sec:outcome}
+% ------------------------------------------------------------------------------
+
+a possible result of an Experiment (or Trial)
+
+a Subset of Outcomes in a Sample Space is called an \emph{Event}
+(\S\ref{sec:probability_event})
+
+if an actual Outcome is inside an Event, the Event is said to have
+``\emph{occurred}''
+
+\fist cf. \emph{Observation} (or \emph{Realization} \S\ref{src:observation}):
+the ``Outcome'' of a \emph{Random Variable} (\S\ref{sec:random_variable}), i.e.
+the Member of the Random Variable's State Space corresponding to an Outcome
+which occurred in the Sample Space of a performed Experiment
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Sample Space}\label{sec:sample_space}
+% ------------------------------------------------------------------------------
+
+a.k.a. \emph{Possibility Space} or \emph{Event Space}
+
+Set of all possible Outcomes of Statistical \emph{Experiment}
+(\S\ref{sec:experiment})
+
+$S$
+
+an \emph{Event} (\S\ref{sec:probability_event}) is a Subset of a Sample Space
+
+the Probability (\S\ref{sec:probability}) $P$ of an Event $E$ is usually defined
+such that $P$ satisfies the Kolmogorov Axioms (\S\ref{sec:probability_axioms})
+\fist \emph{Unit Measure Axiom}: the total Probability of the Sample Space is
+$1 = P(S)$
+
+Random Variable (\S\ref{sec:random_variable}): Function on a Sample Space to a
+Measurable \emph{State Space}
+
+a Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a
+Sample Space $S$ together with a Set of Probability Distributions
+(\S\ref{sec:probability_distribution}) $\mathcal{P}$ on $S$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Event}\label{sec:probability_event}
+% ------------------------------------------------------------------------------
+
+Subset of a Sample Space (\S\ref{sec:sample_space})
+
+if an actual Outcome is inside an Event (Subset), the Event is said to have
+``\emph{occurred}''
+
+\emph{Probability} (\S\ref{sec:probability})
+
+(Kolmogorov33) analogy between the \emph{Measure} (\S\ref{sec:measure}) of a Set
+and the Probability of an Event
+
+(FIXME: cf. Observation \S\ref{sec:observation})
+
+
+
+\subsubsection{Elementary Event}\label{sec:elementary_event}
+
+or \emph{Atomic Event} or \emph{Simple Event} is an Event which contains only a
+\emph{single Outcome} in the Sample Space, i.e. it is a Singleton Subset of the
+Sample Space
+
+the Unitarity Axiom (\S\ref{sec:probability_axioms}) states that the
+Probability that at least one of the Elementary Events in the Entire Sample
+Space will Occur is $1$
+
+
+
+\subsubsection{Mutually Exclusive Event}\label{sec:mutually_exclusive}
+
+$\sigma$-additivity Axiom (\S\ref{sec:probability_axioms}): the Probability of
+a Countable Sequence of Disjoint Sets is equal to the Sum of the individual
+Probabilities
+
+a Quasiprobability Distribution (\S\ref{sec:quasiprobability_distribution})
+violates the $\sigma$-additivity Axiom by not representing Probabilities of
+Mutually Exclusive States
+
+
+
+\subsubsection{Independent Event}\label{sec:independent_event}
+
+\fist cf. Independence (\S\ref{sec:independence})
+
+$P(B|A) = P(B)$ or $P(A|B) = P(A)$ -- note that this is only defined when the
+Conditioning Event has Non-zero Probability
+
+Independent if and only if $P(A \cap B) = P(A) P(B)$
+
+$n$ Events are Independent if:
+\[
+  P(A_i \cap A_j \cap \cdots \cap A_g) = P(A_i)P(A_j) \cdots P(A_g)
+\]
+for any distinct Events $i,j,\ldots,g$
+
+Pairwise Independence does not imply $n$-way Independence
+
+$P(A \cap B | C) = P(A|C)P(B|C)$
+
+\fist Conditional Independence (\S\ref{sec:conditional_independence})
+
+note that two Events may be Independent, but not \emph{Conditionally}
+Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
+the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
+
+
+
+% ==============================================================================
+\section{Probability}\label{sec:probability}
+% ==============================================================================
+
+Probability of an Event (\S\ref{sec:probability_event}) $A$, $P(A)$ is the Sum
+of Weights of all Sample Points in $A$
+
+the Probability $P$ of an Event $E$ is usually defined such that $P$ satisfies
+the Kolmogorov Axioms (\S\ref{sec:probability_axioms})
+
+(Kolmogorov33) analogy between the \emph{Measure} (\S\ref{sec:measure}) of a Set
+and the Probability of an Event
+
+cf. Uncertainty (\S\ref{sec:uncertainty})
+
+$\frac{|A|}{|S|}$
+
+$P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+
+$P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) -
+P(B \cap C) + P(A \cap B \cap C)$
+
+Corollary: for Disjoint $A_1, A_2, \ldots$:
+\[
+  P(A_1 \cup A_2 \cup \ldots) = P(A_1) + P(A_2) + \ldots
+\]
+
+$P(A_1 \cap A_2 \cap \ldots \cap A_k) = P(A_1) P(A_2 | A_1) P(A_3 |
+A_1 \cap A_2) \ldots P(A_k | A_1 \cap A_2 \cap \ldots \cap A_{k-1})$
+
+cf. \emph{Probability Measure} (\S\ref{sec:probability_measure}),
+\emph{Probability Measure Function} (\S\ref{sec:probability_measure_function})
+
+\fist Algorithmic Probability (\S\ref{sec:algorithmic_probability})
+
 (wiki):
 
 two broad categories of \emph{Probability Interpretations}:
@@ -125,639 +393,117 @@ two broad categories of \emph{Probability Interpretations}:
     history of the Universe
 \end{itemize}
 
-\fist Probabilistic Logic (\S\ref{sec:probabilistic_logic}) --
-2013 - \emph{Logic and Probability} -
-\url{https://plato.stanford.edu/entries/logic-probability/} (Stanford
-Encyclopedia of Philosophy)
+(\url{https://plato.stanford.edu/entries/logic-probability/}):
 
-\fist cf. Inductive Logic (\S\ref{sec:inductive_logic}) -- makes extensive use
-of Probabilistic notions
+Probabilistic Semantics (\S\ref{sec:probabilistic_semantics}) for Logical
+Consequence Relation yields \emph{Probability Preserving} (dually,
+\emph{Uncertainty Propagating}) Deductive Validity (\S\ref{sec:validity}),
+rather than Truth Preserving (\S\ref{sec:truth_preservation})
 
-\emph{Bayesian Epistemology}: Probability as a formal representation of Belief
-(cf. Bayesian Inference \S\ref{sec:bayesian_inference})
-
-\emph{Knowledge Representation}: Probability in Artificial Intelligence
-
-\fist cf. Fuzzy Logic (\S\ref{sec:fuzzy_logic})
-
-\fist cf. Quantum Logic (\S\ref{sec:quantum_logic}) --
-\emph{Quantum Logic and Probability Theory} (2002) -
-\url{https://plato.stanford.edu/entries/qt-quantlog/}
-
-\fist Decision Theory (\S\ref{sec:decision_theory}) --
-(wiki): Probabilistic Decision Theory is Sensitive
-(\S\ref{sec:sensitivity_analysis}) to \emph{Assumptions} about Probabilities of
-Events; Non-probabilistic Decision Rules (\S\ref{sec:decision_rule}), such as
-Minimax (\S\ref{sec:minimax}), are \emph{Robust} (\S\ref{sec:robust_statistics})
-in that they don't make such Assumptions (FIXME: clarify)
-
-2018 - \emph{A Categorical Look at Random Variables} -
-\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html} (article):
-
-$\cat{Prob}$ -- Category with Objects as Probability Spaces
-(\S\ref{sec:probability_space}) and Morphisms are ``Almost-everywhere-equality
-Equivalence Classes'' of Measure-preserving Maps
-
-``Probability Theory is \emph{not} about the Category $\cat{Prob}$, in the sense
-that Group Theory or Topology might be said (however incompletely) to be about
-the Categories $\cat{Grp}$ or $\cat{Top}$''
-
-\emph{Isomorphic Objects} in $\cat{Prob}$ are \emph{not} the same from the point
-of view of \emph{Probability Theory}
-
-example: the Distributions (\S\ref{sec:probability_distribution}) of a Uniform
-Random Variable in an Interval, an Infinite Sequence of independent ``coin
-flips'', and Brownian Motion $\{B_t : t \geq 0\}$ are \emph{different} things in
-Probability Theory, but are Isomorphic in $\cat{Prob}$
-
-the fundamental ``objects'' in Probability Theory are the Morphisms of
-$\cat{Prob}$ and those Morphisms are \emph{Random Variables}
-(\S\ref{sec:random_variable})
-
-TODO: Giry Monads (Probability Monads) -
-\url{https://ncatlab.org/nlab/show/Giry+monad}
-
-
-\asterism
-
-1933 - Kolmogorov - \emph{Foundations of the Theory of Probability}
-
-\emph{Field of Probabilities} (\emph{$\sigma$-algebra}
-(\S\ref{sec:sigma_algebra})
-
-
-
-% ==============================================================================
-\section{Probability Space}\label{sec:probability_space}
-% ==============================================================================
-
-$(\Omega, \Sigma, P)$
-
-A \emph{Probability Space} is a Measure Space
-(\S\ref{sec:measure_space}) with a Probability Measure
-(\S\ref{sec:probability_measure}).
-
-\fist Measure-preserving Dynamical Systems
-(\S\ref{sec:measure_preserving_system})
-
-$\cat{Prob}$ -- Category with Objects as Probability Spaces and Morphisms are
-``Almost-everywhere-equality Equivalence Classes'' of Measure-preserving Maps
---
-\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
-``Probability Theory is not about the Category $\cat{Prob}$''
-
-$\cat{Prob}$ -- Category with Objects as Probability Spaces and Morphisms are
-``Almost-everywhere-equality Equivalence Classes'' of Measure-preserving Maps
-(\S\ref{sec:measure_preserving_map})
-
-the fundamental ``objects'' of Probability Theory are the \emph{Morphisms} of
-$\cat{Prob}$ and these Morphisms are \emph{Random Variables}
-(\S\ref{sec:random_variable})
+\emph{Probability, Knowledge, and Meta-probability}:
+\url{https://www.lesswrong.com/posts/2xmKZu73gZLDEQw7c/probability-knowledge-and-meta-probability}
 
 
 
 % ------------------------------------------------------------------------------
-\subsection{Probability Measure}\label{sec:probability_measure}
+\subsection{Probability Axioms}\label{sec:probability_axioms}
 % ------------------------------------------------------------------------------
 
-A \emph{Probability Measure} is a Measure (\S\ref{sec:measure}) that assigns the
-Value $1$ to the entire Measure Space (making it a Probability Space).
+\emph{Kolmogorov Axioms}
 
-cf. \emph{Probability} (\S\ref{sec:probability})
-
-
-
-\subsubsection{Probability Measure Function}
-\label{sec:probability_measure_function}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Sample Space}\label{sec:sample_space}
-% ------------------------------------------------------------------------------
-
-a.k.a. \emph{Possibility Space} or \emph{Event Space}
-
-Set of all possible Outcomes of Statistical \emph{Experiment}
-(\S\ref{sec:experiment})
-
-$S$
-
-an \emph{Event} (\S\ref{sec:probability_event}) is a Subset of a Sample Space
-
-the Probability (\S\ref{sec:probability}) $P$ of an Event $E$ is usually defined
-such that $P$ satisfies the Kolmogorov Axioms (\S\ref{sec:probability_axioms})
-\fist \emph{Unit Measure Axiom}: the total Probability of the Sample Space is
-$1 = P(S)$
-
-Random Variable (\S\ref{sec:random_variable}): Function on a Sample Space to a
-Measurable \emph{State Space}
-
-a Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a
-Sample Space $S$ together with a Set of Probability Distributions
-(\S\ref{sec:probability_distribution}) $\mathcal{P}$ on $S$
-
-
-
-\subsubsection{Experiment}\label{sec:experiment}
-
-(wiki): any ``procedure'' that can be infinitely repeated and has a well-defined
-Set of possible \emph{Outcomes} (\S\ref{sec:outcome})
-
-when an Experiment is ``performed'' (or ``conducted'') one and only one possible
-Outcome ``results'', and any Events (\S\ref{sec:probability_event}), i.e.
-Subsets of the Sample Space, containing that Outcome are said to have
-``occurred''
-
-a \emph{Random Experiment} has more than one possible Outcome; a Random
-Experiment with exactly two possible (Mutually Exclusive) outcomes is called a
-\emph{Binomial (Bernoulli) Trial} (\S\ref{sec:bernoulli_trial})
-
-a \emph{Deterministic Experiment} has only a single possible Outcome
-
-a number of repetitions of an Experiment is called a \emph{Composed Experiment},
-and the individual repetitions are called ``\emph{Trials}'' (\S\ref{sec:trial})
-
-after conducting many Trials of the same Experiment, the \emph{Relative
-  Frequency} (Empirical Probability \S\ref{sec:relative_frequency}) of the
-various Outcomes and Events can be assessed
-
-
-
-\paragraph{Outcome}\label{sec:outcome}
-
-a possible result of an Experiment (or Trial)
-
-a Subset of Outcomes in a Sample Space is called an \emph{Event}
-(\S\ref{sec:probability_event})
-
-if an actual Outcome is inside an Event, the Event is said to have
-``\emph{occurred}''
-
-\fist cf. \emph{Observation} (or \emph{Realization} \S\ref{src:observation}):
-the ``Outcome'' of a \emph{Random Variable} (\S\ref{sec:random_variable}), i.e.
-the Member of the Random Variable's State Space corresponding to an Outcome
-which occurred in the Sample Space of a performed Experiment
-
-
-
-\paragraph{Trial}\label{sec:trial}\hfill
-
-an individual repetition of a Composed Experiment
-
-
-
-\subparagraph{Binomial Trial}\label{sec:binomial_trial}\hfill
-
-or \emph{Bernoulli Trial}
-
-Binomial Distribution (\S\ref{sec:binomial_distribution}); special case:
-Bernoulli Distribution (\S\ref{sec:bernoulli_distribution})
-
-Mathematical Formalization: Bernoulli Process (\S\ref{sec:bernoulli_process})
+the Probability $P$ of an Event $E$ is usually defined such that $P$ satisfies
+the Kolmogorov Axioms
 
 \begin{enumerate}
-  \item repeated Trials
-  \item each Trial results in an Outcome
-  \item Probability of Success is Constant
-  \item each Trial is Independent
+  \item (\emph{Non-negativity}) The Probability of an Event is a Non-negative
+    (Finite) Real Number
+  \item (\emph{Unit Measure}) The Probability that at least one of the
+    Elementary Events in the entire Sample Space will Occur is $1$
+  \item (Countable \emph{$\sigma$-additivity}) Any Countable Sequence of
+    Disjoint Sets (Mutually Exclusive Events) $E_1, E_2, \ldots$ satisfies:
+    \[
+      P (\bigcup_{i=1}^\infty = \sum_{i=1}^\infty P(E_i)
+    \]
 \end{enumerate}
 
-Number of Successes in $n$ Bernoulli Trials is a \emph{Binomial Random
-  Variable} (\S\ref{sec:binomial_random_variable})
+\fist Unit Measure: cf. \emph{Unitarity} in Physics is used as a synonym for
+``Consistency'', esp. the condition that the Hamiltonian is bounded from below,
+i.e. there is a State of Minimal Energy (the \emph{Ground State} or
+\emph{Vacuum State}), which is needed for the Third Law of Thermodynamics to
+hold
+
+the Third Axiom is relaxed in Quasiprobability Distributions
+(\S\ref{sec:quasiprobability_distribution}); to compensate sometimes they are
+allowed to have regions of Negative Probability
+(\S\ref{sec:negative_probability}) Density
+
+\fist cf. Probabilistic Logic (\S\ref{sec:probabilistic_logic})
 
 
 
 % ------------------------------------------------------------------------------
-\subsection{Event}\label{sec:probability_event}
+\subsection{Law of Total Probability}\label{sec:total_probability}
 % ------------------------------------------------------------------------------
 
-Subset of a Sample Space (\S\ref{sec:sample_space})
-
-if an actual Outcome is inside an Event (Subset), the Event is said to have
-``\emph{occurred}''
-
-\emph{Probability} (\S\ref{sec:probability})
-
-(Kolmogorov33) analogy between the \emph{Measure} (\S\ref{sec:measure}) of a Set
-and the Probability of an Event
-
-(FIXME: cf. Observation \S\ref{sec:observation})
-
-
-
-\subsubsection{Elementary Event}\label{sec:elementary_event}
-
-or \emph{Atomic Event} or \emph{Simple Event} is an Event which contains only a
-\emph{single Outcome} in the Sample Space, i.e. it is a Singleton Subset of the
-Sample Space
-
-the Unitarity Axiom (\S\ref{sec:probability_axioms}) states that the
-Probability that at least one of the Elementary Events in the Entire Sample
-Space will Occur is $1$
-
-
-
-\subsubsection{Mutually Exclusive Event}\label{sec:mutually_exclusive}
-
-$\sigma$-additivity Axiom (\S\ref{sec:probability_axioms}): the Probability of
-a Countable Sequence of Disjoint Sets is equal to the Sum of the individual
-Probabilities
-
-a Quasiprobability Distribution (\S\ref{sec:quasiprobability_distribution})
-violates the $\sigma$-additivity Axiom by not representing Probabilities of
-Mutually Exclusive States
-
-
-
-\subsubsection{Independent Event}\label{sec:independent_event}
-
-\fist cf. Independence (\S\ref{sec:independence})
-
-$P(B|A) = P(B)$ or $P(A|B) = P(A)$ -- note that this is only defined when the
-Conditioning Event has Non-zero Probability
-
-Independent if and only if $P(A \cap B) = P(A) P(B)$
-
-$n$ Events are Independent if:
+For a Countably Inifinite Partition of a Sample Space
+(\S\ref{sec:sample_space}), $\{ B_n : n = 1,2,3,\ldots \}$, with each
+Event $B_n$ being Measurable (\S\ref{sec:measure}), then for any Event
+$A$ in the same Probability Space (\S\ref{sec:probability_space}):
 \[
-  P(A_i \cap A_j \cap \cdots \cap A_g) = P(A_i)P(A_j) \cdots P(A_g)
+  P(A) = \sum_n P(A \cap B_n)
 \]
-for any distinct Events $i,j,\ldots,g$
+or equivalently:
+\[
+  P(A) = \sum_n P(A|B_n) P(B_n)
+\]
+where terms such that $P(B_n) = 0$ are omitted from the summation.
 
-Pairwise Independence does not imply $n$-way Independence
 
-$P(A \cap B | C) = P(A|C)P(B|C)$
+
+% ------------------------------------------------------------------------------
+\subsection{Conditional Probability}\label{sec:conditional_probability}
+% ------------------------------------------------------------------------------
+
+where Event $A$ is known to have occurred:
+
+$P(B|A) = \frac{P(A \cap B)}{P(A)}$ when $P(A) > 0$
+
+$P(A \cap B) = P(A) P(B|A)$ when $P(A) > 0$
+
+$P(A|A) = 1$
+
+note that Conditional Probability is only defined when the Conditioning Event
+has a Non-zero (Positive) Probability
+
+\fist Independent Event (\S\ref{sec:independent_event})
 
 \fist Conditional Independence (\S\ref{sec:conditional_independence})
 
-note that two Events may be Independent, but not \emph{Conditionally}
-Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
-the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
+\fist Negative Probability (\S\ref{sec:negative_probability})
+
+(Witten18): Quantum Information Theory doesn't have a good analog to defining a
+Conditional Probability Distribution as in Classical Information Theory, but
+does have an analog of \emph{Strong Subadditivity of Entropy}
+(\S\ref{sec:entropy})
 
 
 
 % ------------------------------------------------------------------------------
-\subsection{Random Variable}\label{sec:random_variable}
+\subsection{Baye's Theorem}\label{sec:bayes_theorem}
 % ------------------------------------------------------------------------------
 
-Function on a Sample Space (\S\ref{sec:sample_space}) mapping Outcomes
-(\S\ref{sec:outcome}) in the Sample Space to some other Set of Values called the
-\emph{State Space}.
+or \emph{Bayes Rule}
 
-$X : \Omega \rightarrow E$
+\url{https://arbital.com/p/bayes_rule/?l=1zq}
 
-Discrete Random Variable (\S\ref{sec:discrete_random_variable})
+\emph{Bayesian Inference} (\S\ref{sec:bayesian_inference})
 
-Continuous Random Variable (\S\ref{sec:continuous_random_variable})
-
-a \emph{Dependence} (Association \S\ref{sec:association}) between two Random
-Variables (``Bivariate Data'') is any ``Statistical Relationship'' (which may
-or may not be Causal) --
-Random Variables are \emph{Dependent} if they do not Satisfy the Property of
-\emph{Probabilistic Independence} (\S\ref{sec:independence})
-
-\fist Relative Entropy (\S\ref{sec:relative_entropy}), Mutual Information
-(\S\ref{sec:mutual_information})
-
-cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
-\emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
-
-\asterism
-
-\emph{A Categorical Look at Random Variables} -
-\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
-
-$\cat{Prob}$ -- Category with Objects as Probability Spaces
-(\S\ref{sec:probability_space}) and Morphisms are ``Almost-everywhere-equality
-Equivalence Classes'' of Measure-preserving Maps
-(\S\ref{sec:measure_preserving_map})
-
-the fundamental ``objects'' of Probability Theory are the \emph{Morphisms} of
-$\cat{Prob}$ and these Morphisms are \emph{Random Variables}
-
-a Random Variable is defined as a Measurable Map
-(\S\ref{sec:measurable_function}):
 \[
-  X : \Omega \rightarrow E
-\]
-where $(\Omega,\mathbb{P})$ is a Probability Space and $E$ is an arbitrary
-Measurable Space
-
-***
-
-MIT 6.041SC Lec. 5 - \url{https://www.youtube.com/watch?v=3MOahpLxj6A}:
-
-Functions of Random Variables are also Random Variables
-
-Probability Mass Function (\S\ref{sec:probability_mass}) $p_X$ assigns
-Probabilities to Elements of $x \in E$:
-\[
-  p_X(x) = P(X = x)
+  P(A|B) = \frac{P(A)P(B|A)}{P(B)}
 \]
 
-$p_X(x) \geq 1$
-
-$\sum_x p_X(x) = 1$
-
-Expected Value (\S\ref{sec:expected_value}) of a Random Variable is a kind of
-``average'' where Probabilities are treated like ``frequencies'':
-\[
-  E[X] = \sum_x xp_X(x)
-\]
-for a Function of a Random Variable $Y = g(X)$:
-\[
-  E[Y] = \sum_x g(x)p_X(x)
-\]
-
-for a PMF that is Symmetric around a certain point, that point is the Expected
-Value
-
-
-
-
-\subsubsection{Observation}\label{sec:observation}
-
-An \emph{Observation} (\emph{Observed Value}, \emph{Realization}, or
-\emph{Random Variate}) is the Element of a Random Variable's State Space
-corresponding to the actual Outcome (\S\ref{sec:outcome}) resulting from
-performing an Experiment (\S\ref{sec:experiment}).
-
-\emph{``data point''}
-
-\fist Population (\S\ref{sec:population}): totality of Observations
-
-\fist Curve Fitting (\S\ref{sec:curve_fitting}): the process of constructing a
-Curve (or Function) that has the ``best Fit'' to a Series of data points
-(Observations), possibly subject to constraints
-
-
-
-\subsubsection{Discrete Random Variable}\label{sec:discrete_random_variable}
-
-\paragraph{Probability Generating Function}
-\label{sec:probability_generating_function}\hfill
-
-(Ordinary) Generating Function (\S\ref{sec:generating_function})--i.e. Formal
-Power Series representation--of the Probability Mass Function
-(\S\ref{sec:probability_mass_function}) of a Discrete Random Variable
-
-
-
-\subsubsection{Continuous Random Variable}
-\label{sec:continuous_random_variable}
-
-has Probability $0$ of assuming a particular Value
-
-
-
-\subsubsection{Expected Value}\label{sec:expected_value}
-
-Expected Value of a Random Variable is a kind of ``average'' where
-Probabilities are treated like ``frequencies''
-
-\emph{Expectation}
-
-(Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
-\emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
-
-for a Probability Mass Function (\S\ref{sec:probability_mass}) that is
-Symmetric around a certain point, that point is the Expected Value
-
-For Random Variable $X$ with Probability Distribution $f(x)$, the
-\emph{Expected Value} (or \emph{Mean}) of $X$ is (Discrete):
-\[
-  \mu = E[X] = \sum_{i=1}^\infty x_i f(x_i)
-\]
-(Continuous):
-\[
-  \mu = E[X] = \int\limits_{-\infty}^{\infty} x_i f(x_i) dx
-\]
-
-for a Function of a Random Variable $Y = g(X)$:
-\[
-  E[Y] = \sum_x g(x)p_X(x)
-\]
-
-for \emph{Linear Function} $g$:
-\[
-  E[g(X)] = g(E[X])
-\]
-
-Expectations of Constants (i.e. as ``degenerate'' Random Variables) are just
-the Constants themselves: $E[a] = a$
-
-Expectations of Random Variables multiplied by Constant is the Constant
-multiplied by the Expectation of the Random Variable:
-\[
-  E[aX] = aE[X]
-\]
-
-Expectation of a Random Variable with the addition of a Constant is the
-Constant added to the Expectation of the Random Variable:
-\[
-  E[X + b] = E[X] + b
-\]
-
-Law of Large Numbers (\S\ref{sec:large_numbers})
-
-For Random Variable $X$ with Probability Distribution $f(x)$, the
-Expected Value of a Measurable Function
-(\S\ref{sec:measurable_function}) of $X$, $g(X)$, is:
-\[
-  \mu_{g(X)} = E[g(X)] = \int\limits_{-\infty}^{\infty} g(x) f(x) dx
-\]
-
-For Joint Probability Density Function:
-\[
-  E[X Y] = \int\int x y j(x,y) dx dy
-\]
-\fist Note that $E[X Y]$ is not necessarily equal to $E[X]
-E[Y]$, see Covariance (\S\ref{sec:covariance}).
-
-For $X$ and $Y$ Independent (\S\ref{sec:independence}), then $E[X,Y] = E[X]
-E[Y]$
-
-If $a$ and $b$ are Constants, then $E[aX +b] = a E[X] + b$
-
-$E [g(X) \pm h(X)] = E[g(X)] \pm E[h(X)]$
-
-$E [g(X,Y) \pm h(X,Y)] = E[g(X,Y)] \pm E[h(X,Y)]$
-
-the Variance (Expected Value of the Squared Deviation \S\ref{sec:deviation}) of
-a Random Variable $X$ is equal to:
-\begin{align*}
-  Var(X) & = E[(x - E[X])^2] \\
-         & = E[X^2] - (E[X])^2 \\
-\end{align*}
-
-
-
-\paragraph{Law of Large Numbers}\label{sec:large_numbers}\hfill
-
-\fist cf. Law of Iterated Logarithm (\S\ref{sec:iterated_logarithm})
-
-\fist \emph{Propensity Probability} (``Single-case Probability''
-\S\ref{sec:propensity}) -- invokes the Law of Large Numbers to explain stable
-\emph{long-run} Relative Frequencies (\S\ref{sec:relative_frequency}) as a
-manifestation of invariant \emph{single-case} Probabilities
-
-
-
-\subsubsection{Characteristic Function}\label{sec:characteristic_function}
-
-for a Scalar Random Variable $X$, the \emph{Characteristic Function} is the
-Expected Value of $e^{itX}$ where $i$ is the Imaginary Unit and $t \in \reals$
-is the Argument of the ``Characteristic Function'' $\varphi_X : \reals
-\rightarrow \comps$:
-\[
-  \varphi_X(t) = E[e^{itX}] = \int_\reals e^{itx} dF_X(x)
-\]
-where $F_X$ is the Cumulative Distribution Function (\S\ref{sec:cdf}) of $X$ and
-the Integral is a Riemann-Sieltjes Integral (TODO: xref)
-
-always exists even when the Moment-generating Function
-(\S\ref{sec:moment_generating_function}) and Probability Density Function
-(\S\ref{sec:pdf}) do not
-
-like the Cumulative Distribution Function, completely determines the behavior
-and properties of the Probability Distribution
-
-if the Random Variable admits a Probability Density Function
-(\S\ref{sec:pdf}) then the Characteristic Function is the
-Fourier Transform (\S\ref{sec:fourier_transform}) of the Probability Density
-Function and vice versa
-
-if a Random Variable has a Moment-generating Function
-(\S\ref{sec:moment_generating_function}) then the Characteristic Function can be
-extended to the Complex Plane
-
-\fist cf. Indicator Functions (\S\ref{sec:indicator_function})
-
-
-
-\subsubsection{Moment-generating Function}\label{sec:moment_generating_function}
-
-\subsubsection{Variance}\label{sec:variance}
-
-the \emph{Variance} is the Expected Value of the Squared Deviation of a Random
-Variable
-
-Variances are always Non-negative
-
-the Variance of a Random Variable $X$ is equal to:
-\begin{align*}
-  Var(X) & = E[(x - E[X])^2] \\
-         & = E[X^2] - (E[X])^2 \\
-\end{align*}
-where $E[\cdot]$ is the Expected Value (\S\ref{sec:expected_value}) of a
-Random Variable
-
-Discrete Random Variable $X$:
-\[
-  Var(X) = \sigma_X^2 = \sum_{i=1}^n f(x_i) (x_i - \mu)^2 = \sum_{i=1}^n
-  f(x_i) x_i^2 - \mu^2
-\]
-where $\mu = \sum_{i=1}^n f(x_i) x_i$
-
-Continuous Random Variable $X$:
-\[
-  Var(X) = \sigma_X^2 = \int (x - \mu)^2 f(x) dx = \int x^2 f(x) dx -
-  \mu^2
-\]
-where $\mu = \int x f(x) dx$
-
-For Random Variables $X$, $Y$ with Joint Probability Distribution
-$f(x,y)$ and $a$, $b$, $c$ are Constants, then:
-\[
-  \sigma^2_{a X + b Y + c} = a^2 \sigma^2_X + b^2 \sigma^2_Y + 2ab
-  \sigma_{X Y}
-\]
-
-
-
-\subsubsection{Covariance}\label{sec:covariance}
-
-$X$, $Y$, Joint Probability Distribution
-(\S\ref{sec:joint_probability}) $f(x,y)$
-
-Discrete:
-\[
-  \sigma_{xy} = E [(x - \mu_X)(y - \mu_Y)] = \sum_x \sum_y (x - \mu_X)
-  (y - \mu_Y) f(x,y)
-\]
-
-Continuous:
-\[
-  \sigma_{xy} = E [(x - \mu_X)(y - \mu_Y)] =
-  \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
-  (x - \mu_X) (y - \mu_Y) f(x,y) dx dy
-\]
-
-
-
-\paragraph{Covariance Matrix}\label{sec:covariance_matrix}\hfill
-
-Positive semi-definite (\S\ref{sec:positive_semidefinite})
-
-
-
-\subsubsection{Skewness}\label{sec:skewness}
-
-Asymmetry %FiXME
-
-
-
-\subsubsection{Kurtosis}\label{sec:kurtosis}
-
-\subsubsection{Binomial Random Variable}\label{sec:binomial_random_variable}
-
-Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
-
-Binomial Distribution (\S\ref{sec:binomial_distribution})
-
-$X \sim B(n,p)$
-
-Probability Mass Function:
-\[
-  f(k,n,p) = P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
-\]
-for $k = 0,1,2, \ldots, n$
-
-
-
-\subsubsection{Correlation Coefficient}\label{sec:correlation_coefficient}
-
-\fist Correlation (\S\ref{sec:correlation})
-
-\emph{Pearson Product-moment Correlation Coefficient}
-
-$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Dependence}\label{sec:dependence}
-% ------------------------------------------------------------------------------
-
-or \emph{Dependence}
-
-any ``\emph{Statistical Relationship}'' between two Random Variables
-(``Bivariate Data'')
-
-may or may not be Causal
-
-Random Variables are \emph{Dependent} if they do not Satisfy the Property of
-\emph{Probabilistic Independence} (\S\ref{sec:independence})
-
-
-
-\subsubsection{Correlation}\label{sec:statistical_correlation}
-
-measure of how close two Random Variables are to having a \emph{Linear
-  Relationship}
-
-\fist Correlation Coefficient (\S\ref{sec:correlation_coefficient})
+\fist Relative Entropy (Kullback-Leibler Divergence
+\S\ref{sec:relative_entropy})
 
 
 
@@ -794,150 +540,8 @@ is the Product of the individual Probability Distributions''
 
 
 % ------------------------------------------------------------------------------
-\subsection{Probability}\label{sec:probability}
+\subsection{Central Limit Theorem}\label{sec:central_limit}
 % ------------------------------------------------------------------------------
-
-Probability of an Event (\S\ref{sec:probability_event}) $A$, $P(A)$ is the Sum
-of Weights of all Sample Points in $A$
-
-the Probability $P$ of an Event $E$ is usually defined such that $P$ satisfies
-the Kolmogorov Axioms (\S\ref{sec:probability_axioms})
-
-(Kolmogorov33) analogy between the \emph{Measure} (\S\ref{sec:measure}) of a Set
-and the Probability of an Event
-
-cf. Uncertainty (\S\ref{sec:uncertainty})
-
-$\frac{|A|}{|S|}$
-
-$P(A \cup B) = P(A) + P(B) - P(A \cap B)$
-
-$P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) -
-P(B \cap C) + P(A \cap B \cap C)$
-
-Corollary: for Disjoint $A_1, A_2, \ldots$:
-\[
-  P(A_1 \cup A_2 \cup \ldots) = P(A_1) + P(A_2) + \ldots
-\]
-
-$P(A_1 \cap A_2 \cap \ldots \cap A_k) = P(A_1) P(A_2 | A_1) P(A_3 |
-A_1 \cap A_2) \ldots P(A_k | A_1 \cap A_2 \cap \ldots \cap A_{k-1})$
-
-cf. \emph{Probability Measure} (\S\ref{sec:probability_measure}),
-\emph{Probability Measure Function} (\S\ref{sec:probability_measure_function})
-
-\fist Algorithmic Probability (\S\ref{sec:algorithmic_probability})
-
-2011 - \emph{Interpretations of Probability} -
-\url{https://plato.stanford.edu/entries/probability-interpret/}
-
-(\url{https://plato.stanford.edu/entries/logic-probability/}): Probabilistic
-Semantics (\S\ref{sec:probabilistic_semantics}) for Logical Consequence Relation
-yields \emph{Probability Preserving} (dually, \emph{Uncertainty Propagating})
-Deductive Validity (\S\ref{sec:validity}), rather than Truth Preserving
-(\S\ref{sec:truth_preservation})
-
-\emph{Probability, Knowledge, and Meta-probability}:
-\url{https://www.lesswrong.com/posts/2xmKZu73gZLDEQw7c/probability-knowledge-and-meta-probability}
-
-
-
-\subsubsection{Probability Axioms}\label{sec:probability_axioms}
-
-\emph{Kolmogorov Axioms}
-
-the Probability $P$ of an Event $E$ is usually defined such that $P$ satisfies
-the Kolmogorov Axioms
-
-\begin{enumerate}
-  \item (\emph{Non-negativity}) The Probability of an Event is a Non-negative
-    (Finite) Real Number
-  \item (\emph{Unit Measure}) The Probability that at least one of the
-    Elementary Events in the entire Sample Space will Occur is $1$
-  \item (Countable \emph{$\sigma$-additivity}) Any Countable Sequence of
-    Disjoint Sets (Mutually Exclusive Events) $E_1, E_2, \ldots$ satisfies:
-    \[
-      P (\bigcup_{i=1}^\infty = \sum_{i=1}^\infty P(E_i)
-    \]
-\end{enumerate}
-
-\fist Unit Measure: cf. \emph{Unitarity} in Physics is used as a synonym for
-``Consistency'', esp. the condition that the Hamiltonian is bounded from below,
-i.e. there is a State of Minimal Energy (the \emph{Ground State} or
-\emph{Vacuum State}), which is needed for the Third Law of Thermodynamics to
-hold
-
-the Third Axiom is relaxed in Quasiprobability Distributions
-(\S\ref{sec:quasiprobability_distribution}); to compensate sometimes they are
-allowed to have regions of Negative Probability
-(\S\ref{sec:negative_probability}) Density
-
-\fist cf. Probabilistic Logic (\S\ref{sec:probabilistic_logic})
-
-
-
-\subsubsection{Law of Total Probability}\label{sec:total_probability}
-
-For a Countably Inifinite Partition of a Sample Space
-(\S\ref{sec:sample_space}), $\{ B_n : n = 1,2,3,\ldots \}$, with each
-Event $B_n$ being Measurable (\S\ref{sec:measure}), then for any Event
-$A$ in the same Probability Space (\S\ref{sec:probability_space}):
-\[
-  P(A) = \sum_n P(A \cap B_n)
-\]
-or equivalently:
-\[
-  P(A) = \sum_n P(A|B_n) P(B_n)
-\]
-where terms such that $P(B_n) = 0$ are omitted from the summation.
-
-
-
-\subsubsection{Conditional Probability}
-\label{sec:conditional_probability}
-
-where Event $A$ is known to have occurred:
-
-$P(B|A) = \frac{P(A \cap B)}{P(A)}$ when $P(A) > 0$
-
-$P(A \cap B) = P(A) P(B|A)$ when $P(A) > 0$
-
-$P(A|A) = 1$
-
-note that Conditional Probability is only defined when the Conditioning Event
-has a Non-zero (Positive) Probability
-
-\fist Independent Event (\S\ref{sec:independent_event})
-
-\fist Conditional Independence (\S\ref{sec:conditional_independence})
-
-\fist Negative Probability (\S\ref{sec:negative_probability})
-
-(Witten18): Quantum Information Theory doesn't have a good analog to defining a
-Conditional Probability Distribution as in Classical Information Theory, but
-does have an analog of \emph{Strong Subadditivity of Entropy}
-(\S\ref{sec:entropy})
-
-
-
-\subsubsection{Baye's Theorem}\label{sec:bayes_theorem}
-
-or \emph{Bayes Rule}
-
-\url{https://arbital.com/p/bayes_rule/?l=1zq}
-
-\emph{Bayesian Inference} (\S\ref{sec:bayesian_inference})
-
-\[
-  P(A|B) = \frac{P(A)P(B|A)}{P(B)}
-\]
-
-\fist Relative Entropy (Kullback-Leibler Divergence
-\S\ref{sec:relative_entropy})
-
-
-
-\subsubsection{Central Limit Theorem}\label{sec:central_limit}
 
 $z = \frac{\overline{x} - \mu}{\sfrac{\sigma}{\sqrt{n}}}$ as
 $n \rightarrow \infty$ is $n(z; 0,1)$ %FIXME
@@ -952,7 +556,9 @@ Exponential Dispersion Models (Probability Distributions
 
 
 
-\subsubsection{Negative Probability}\label{sec:negative_probability}
+% ------------------------------------------------------------------------------
+\subsection{Negative Probability}\label{sec:negative_probability}
+% ------------------------------------------------------------------------------
 
 or \emph{Quasiprobability}
 
@@ -970,9 +576,52 @@ Wigner Distribution in Phase Space (Quantum Corrections)
 
 
 
+% ==============================================================================
+\section{Probability Space}\label{sec:probability_space}
+% ==============================================================================
+
+$(\Omega, \Sigma, P)$
+
+A \emph{Probability Space} is a Measure Space (\S\ref{sec:measure_space}) with a
+\emph{Probability Measure} (\S\ref{sec:probability_measure}).
+
+\fist cf. Measure-preserving Dynamical Systems
+(\S\ref{sec:measure_preserving_system})
+
+$\cat{Prob}$ -- Category with Objects as Probability Spaces and Morphisms are
+``Almost-everywhere-equality Equivalence Classes'' of Measure-preserving Maps
+--
+\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
+``Probability Theory is not about the Category $\cat{Prob}$''
+
+$\cat{Prob}$ -- Category with Objects as Probability Spaces and Morphisms are
+``Almost-everywhere-equality Equivalence Classes'' of Measure-preserving Maps
+(\S\ref{sec:measure_preserving_map})
+
+the fundamental ``objects'' of Probability Theory are the \emph{Morphisms} of
+$\cat{Prob}$ and these Morphisms are \emph{Random Variables}
+(\S\ref{sec:random_variable})
+
+
+
 % ------------------------------------------------------------------------------
-\subsection{Probability Distribution}
-\label{sec:probability_distribution}
+\subsection{Probability Measure}\label{sec:probability_measure}
+% ------------------------------------------------------------------------------
+
+A \emph{Probability Measure} is a Measure (\S\ref{sec:measure}) that assigns the
+Value $1$ to the entire Measure Space (making it a Probability Space).
+
+cf. \emph{Probability} (\S\ref{sec:probability})
+
+
+
+\subsubsection{Probability Measure Function}
+\label{sec:probability_measure_function}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Probability Distribution}\label{sec:probability_distribution}
 % ------------------------------------------------------------------------------
 
 Mathematical Function providing the Probabilities (\S\ref{sec:probability}) of
@@ -1034,11 +683,79 @@ adding more Variables
 
 
 
+\subsubsection{Probability Mass Function}\label{sec:probability_mass}
+
+(or \emph{Probability Function})
+
+for a Discrete Random Variable (\S\ref{sec:discrete_random_variable})
+$X$:
+\begin{enumerate}
+  \item $f(x) \geq 0$
+  \item $\sum_x f(x) = 1$
+  \item $P(X = x) = f(x)$
+\end{enumerate}
+
+\fist \emph{Probability Generating Function}
+(\S\ref{sec:probability_generating_function}): (Ordinary) Generating Function
+(\S\ref{sec:generating_function})--i.e. Formal Power Series representation--of
+the Probability Mass Function of a Discrete Random Variable
+
+for a Probability Mass Function that is Symmetric around a certain point, that
+point is the Expected Value (\S\ref{sec:expected_value})
+
+
+
+\subsubsection{Probability Density Function}\label{sec:pdf}
+
+\emph{Probability Density Function} $f(x)$
+
+for a Continuous Random Variable (\S\ref{sec:continuous_random_variable}) $X$:
+\begin{enumerate}
+  \item $\forall x \in \reals, f(x) \geq 0$
+  \item $\int\limits_{-\infty}^{\infty} f(x) dx = 1$
+  \item $P (a < X < b) = \int\limits_a^b f(x) dx$
+\end{enumerate}
+
+for a Random Variable that admits a Probability Density Function, the
+Characteristic Function (\S\ref{sec:characteristic_function}) of the Random
+Variable is the Fourier Transform (\S\ref{sec:fourier_transform}) of its
+Probability Density Function and vice versa
+
+\fist Probability Amplitude (Quantum Systems \S\ref{sec:probability_amplitude}):
+Complex Number with Modulus Squared representing a Probability Density
+
+
+
+\paragraph{Normalizing Constant}\label{sec:normalizing_constant}\hfill
+
+used to reduce any Probability Function to a Probability Density Function with
+total Probability $1$
+
+
+
+\subsubsection{Cumulative Distribution Function (CDF)}\label{sec:cdf}
+
+Area under Probability Density Function
+
+cf. Distribution Function (Measure Theory \S\ref{sec:distribution_function})
+
+$\forall x \in \reals, F_X(x) = P(X \leq x) = \int\limits_{-\infty}^x
+f(t) dt$
+
+
+
 \subsubsection{Moment}\label{sec:moment}
 
 (TODO)
 
-Mean, Variance, Skewness
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment
+
+Variance (\S\ref{sec:variance}) -- Second Central Moment
+
+Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
+
+Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
+``heaviness'' of the tail of a Distribution
 
 \fist Moment-generating Function (\S\ref{sec:moment_generating_function})
 
@@ -1356,7 +1073,7 @@ a series of papers on ``Kalman Folding'':
 
 Probability Distribution of a Statistic (\S\ref{sec:statistic})
 
-Statistical Inference (\S\ref{sec:statistical_inference})
+Statistical Inference (\S\ref{sec:inferential_statistics})
 
 Standard Error (\S\ref{sec:standard_error})
 
@@ -1403,63 +1120,399 @@ Transient Signals (\S\ref{sec:transient})
 
 
 
-\subsubsection{Probability Mass Function}\label{sec:probability_mass}
+% ==============================================================================
+\section{Random Variable}\label{sec:random_variable}
+% ==============================================================================
 
-(or \emph{Probability Function})
+Function on a Sample Space (\S\ref{sec:sample_space}) mapping Outcomes
+(\S\ref{sec:outcome}) in the Sample Space to some other Set of Values called the
+\emph{State Space}.
 
-for a Discrete Random Variable (\S\ref{sec:discrete_random_variable})
-$X$:
-\begin{enumerate}
-  \item $f(x) \geq 0$
-  \item $\sum_x f(x) = 1$
-  \item $P(X = x) = f(x)$
-\end{enumerate}
+$X : \Omega \rightarrow E$
 
-\fist \emph{Probability Generating Function}
-(\S\ref{sec:probability_generating_function}): (Ordinary) Generating Function
-(\S\ref{sec:generating_function})--i.e. Formal Power Series representation--of
-the Probability Mass Function of a Discrete Random Variable
+Discrete Random Variable (\S\ref{sec:discrete_random_variable})
 
-for a Probability Mass Function that is Symmetric around a certain point, that
-point is the Expected Value (\S\ref{sec:expected_value})
+Continuous Random Variable (\S\ref{sec:continuous_random_variable})
 
+a \emph{Dependence} (Association \S\ref{sec:association}) between two Random
+Variables (``Bivariate Data'') is any ``Statistical Relationship'' (which may
+or may not be Causal) --
+Random Variables are \emph{Dependent} if they do not Satisfy the Property of
+\emph{Probabilistic Independence} (\S\ref{sec:independence})
 
+\fist Relative Entropy (\S\ref{sec:relative_entropy}), Mutual Information
+(\S\ref{sec:mutual_information})
 
-\subsubsection{Probability Density Function}\label{sec:pdf}
+cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
+\emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
 
-\emph{Probability Density Function} $f(x)$
+\asterism
 
-for a Continuous Random Variable (\S\ref{sec:continuous_random_variable}) $X$:
-\begin{enumerate}
-  \item $\forall x \in \reals, f(x) \geq 0$
-  \item $\int\limits_{-\infty}^{\infty} f(x) dx = 1$
-  \item $P (a < X < b) = \int\limits_a^b f(x) dx$
-\end{enumerate}
+\emph{A Categorical Look at Random Variables} -
+\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
 
-for a Random Variable that admits a Probability Density Function, the
-Characteristic Function (\S\ref{sec:characteristic_function}) of the Random
-Variable is the Fourier Transform (\S\ref{sec:fourier_transform}) of its
-Probability Density Function and vice versa
+$\cat{Prob}$ -- Category with Objects as Probability Spaces
+(\S\ref{sec:probability_space}) and Morphisms are ``Almost-everywhere-equality
+Equivalence Classes'' of Measure-preserving Maps
+(\S\ref{sec:measure_preserving_map})
 
-\fist Probability Amplitude (Quantum Systems \S\ref{sec:probability_amplitude}):
-Complex Number with Modulus Squared representing a Probability Density
+the fundamental ``objects'' of Probability Theory are the \emph{Morphisms} of
+$\cat{Prob}$ and these Morphisms are \emph{Random Variables}
 
+a Random Variable is defined as a Measurable Map
+(\S\ref{sec:measurable_function}):
+\[
+  X : \Omega \rightarrow E
+\]
+where $(\Omega,\mathbb{P})$ is a Probability Space and $E$ is an arbitrary
+Measurable Space
 
+***
 
-\subsubsection{Cumulative Distribution Function (CDF)}\label{sec:cdf}
+MIT 6.041SC Lec. 5 - \url{https://www.youtube.com/watch?v=3MOahpLxj6A}:
 
-Area under Probability Density Function
+Functions of Random Variables are also Random Variables
 
-cf. Distribution Function (Measure Theory \S\ref{sec:distribution_function})
+Probability Mass Function (\S\ref{sec:probability_mass}) $p_X$ assigns
+Probabilities to Elements of $x \in E$:
+\[
+  p_X(x) = P(X = x)
+\]
 
-$\forall x \in \reals, F_X(x) = P(X \leq x) = \int\limits_{-\infty}^x
-f(t) dt$
+$p_X(x) \geq 1$
+
+$\sum_x p_X(x) = 1$
+
+Expected Value (\S\ref{sec:expected_value}) of a Random Variable is a kind of
+``average'' where Probabilities are treated like ``frequencies'':
+\[
+  E[X] = \sum_x xp_X(x)
+\]
+for a Function of a Random Variable $Y = g(X)$:
+\[
+  E[Y] = \sum_x g(x)p_X(x)
+\]
+
+for a PMF that is Symmetric around a certain point, that point is the Expected
+Value
+
 
 
 
 % ------------------------------------------------------------------------------
-\subsection{Normalizing Constant}\label{sec:normalizing_constant}
+\subsection{Observation}\label{sec:observation}
 % ------------------------------------------------------------------------------
+
+An \emph{Observation} (\emph{Observed Value}, \emph{Realization}, or
+\emph{Random Variate}) is the Element of a Random Variable's State Space
+corresponding to the actual Outcome (\S\ref{sec:outcome}) resulting from
+performing an Experiment (\S\ref{sec:experiment}).
+
+\emph{``data point''}
+
+\fist a \emph{(Statistical) Population} (\S\ref{sec:population}) is a totality
+of Observations
+
+\fist Curve Fitting (\S\ref{sec:curve_fitting}): the process of constructing a
+Curve (or Function) that has the ``best Fit'' to a Series of data points
+(Observations), possibly subject to constraints
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Expected Value}\label{sec:expected_value}
+% ------------------------------------------------------------------------------
+
+Expected Value of a Random Variable is a kind of ``average'' where
+Probabilities are treated like ``frequencies''
+
+\emph{Mean} -- First Raw Moment (\S\ref{sec:moment})
+
+\emph{Expectation}
+
+(Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
+\emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
+
+for a Probability Mass Function (\S\ref{sec:probability_mass}) that is
+Symmetric around a certain point, that point is the Expected Value
+
+For Random Variable $X$ with Probability Distribution $f(x)$, the \emph{Expected
+  Value} (or \emph{Mean}) of $X$ is (Discrete):
+\[
+  \mu = E[X] = \sum_{i=1}^\infty x_i f(x_i)
+\]
+(Continuous):
+\[
+  \mu = E[X] = \int\limits_{-\infty}^{\infty} x_i f(x_i) dx
+\]
+
+for a Function of a Random Variable $Y = g(X)$:
+\[
+  E[Y] = \sum_x g(x)p_X(x)
+\]
+
+for \emph{Linear Function} $g$:
+\[
+  E[g(X)] = g(E[X])
+\]
+
+Expectations of Constants (i.e. as ``degenerate'' Random Variables) are just
+the Constants themselves: $E[a] = a$
+
+Expectations of Random Variables multiplied by Constant is the Constant
+multiplied by the Expectation of the Random Variable:
+\[
+  E[aX] = aE[X]
+\]
+
+Expectation of a Random Variable with the addition of a Constant is the
+Constant added to the Expectation of the Random Variable:
+\[
+  E[X + b] = E[X] + b
+\]
+
+Law of Large Numbers (\S\ref{sec:large_numbers})
+
+For Random Variable $X$ with Probability Distribution $f(x)$, the
+Expected Value of a Measurable Function
+(\S\ref{sec:measurable_function}) of $X$, $g(X)$, is:
+\[
+  \mu_{g(X)} = E[g(X)] = \int\limits_{-\infty}^{\infty} g(x) f(x) dx
+\]
+
+For Joint Probability Density Function:
+\[
+  E[X Y] = \int\int x y j(x,y) dx dy
+\]
+\fist Note that $E[X Y]$ is not necessarily equal to $E[X]
+E[Y]$, see Covariance (\S\ref{sec:covariance}).
+
+For $X$ and $Y$ Independent (\S\ref{sec:independence}), then $E[X,Y] = E[X]
+E[Y]$
+
+If $a$ and $b$ are Constants, then $E[aX +b] = a E[X] + b$
+
+$E [g(X) \pm h(X)] = E[g(X)] \pm E[h(X)]$
+
+$E [g(X,Y) \pm h(X,Y)] = E[g(X,Y)] \pm E[h(X,Y)]$
+
+the Variance (Expected Value of the Squared Deviation \S\ref{sec:deviation}) of
+a Random Variable $X$ is equal to:
+\begin{align*}
+  Var(X) & = E[(x - E[X])^2] \\
+         & = E[X^2] - (E[X])^2 \\
+\end{align*}
+
+
+
+\subsubsection{Law of Large Numbers}\label{sec:large_numbers}
+
+\fist cf. Law of Iterated Logarithm (\S\ref{sec:iterated_logarithm})
+
+\fist \emph{Propensity Probability} (``Single-case Probability''
+\S\ref{sec:propensity}) -- invokes the Law of Large Numbers to explain stable
+\emph{long-run} Relative Frequencies (\S\ref{sec:relative_frequency}) as a
+manifestation of invariant \emph{single-case} Probabilities
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Variance}\label{sec:variance}
+% ------------------------------------------------------------------------------
+
+the \emph{Variance} is the Expected Value of the Squared Deviation of a Random
+Variable
+
+Second Central Moment (\S\ref{sec:moment})
+
+Variances are always Non-negative
+
+the Variance of a Random Variable $X$ is equal to:
+\begin{align*}
+  Var(X) & = E[(x - E[X])^2] \\
+         & = E[X^2] - (E[X])^2 \\
+\end{align*}
+where $E[\cdot]$ is the Expected Value (\S\ref{sec:expected_value}) of a
+Random Variable
+
+Discrete Random Variable $X$:
+\[
+  Var(X) = \sigma_X^2 = \sum_{i=1}^n f(x_i) (x_i - \mu)^2 = \sum_{i=1}^n
+  f(x_i) x_i^2 - \mu^2
+\]
+where $\mu = \sum_{i=1}^n f(x_i) x_i$
+
+Continuous Random Variable $X$:
+\[
+  Var(X) = \sigma_X^2 = \int (x - \mu)^2 f(x) dx = \int x^2 f(x) dx -
+  \mu^2
+\]
+where $\mu = \int x f(x) dx$
+
+For Random Variables $X$, $Y$ with Joint Probability Distribution
+$f(x,y)$ and $a$, $b$, $c$ are Constants, then:
+\[
+  \sigma^2_{a X + b Y + c} = a^2 \sigma^2_X + b^2 \sigma^2_Y + 2ab
+  \sigma_{X Y}
+\]
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Skewness}\label{sec:skewness}
+% ------------------------------------------------------------------------------
+
+Asymmetry %FiXME
+
+``lopsided-ness''
+
+Third Central Moment (\S\ref{sec:moment})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Kurtosis}\label{sec:kurtosis}
+% ------------------------------------------------------------------------------
+
+Fourth Central Moment (\S\ref{sec:moment})
+
+ Measure of the ``heaviness'' of the tail of a Distribution
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Dependence}\label{sec:dependence}
+% ------------------------------------------------------------------------------
+
+or \emph{Dependence}
+
+any ``\emph{Statistical Relationship}'' between two Random Variables
+(``Bivariate Data'')
+
+may or may not be Causal
+
+Random Variables are \emph{Dependent} if they do not Satisfy the Property of
+\emph{Probabilistic Independence} (\S\ref{sec:independence})
+
+
+
+\subsubsection{Correlation}\label{sec:statistical_correlation}
+
+measure of how close two Random Variables are to having a \emph{Linear
+  Relationship}
+
+\fist Correlation Coefficient (\S\ref{sec:correlation_coefficient})
+
+
+
+\paragraph{Correlation Coefficient}\label{sec:correlation_coefficient}\hfill
+
+\emph{Pearson Product-moment Correlation Coefficient}
+
+$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Covariance}\label{sec:covariance}
+% ------------------------------------------------------------------------------
+
+$X$, $Y$, Joint Probability Distribution
+(\S\ref{sec:joint_probability}) $f(x,y)$
+
+Discrete:
+\[
+  \sigma_{xy} = E [(x - \mu_X)(y - \mu_Y)] = \sum_x \sum_y (x - \mu_X)
+  (y - \mu_Y) f(x,y)
+\]
+
+Continuous:
+\[
+  \sigma_{xy} = E [(x - \mu_X)(y - \mu_Y)] =
+  \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
+  (x - \mu_X) (y - \mu_Y) f(x,y) dx dy
+\]
+
+
+
+\subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
+
+Positive semi-definite (\S\ref{sec:positive_semidefinite})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Moment-generating Function}\label{sec:moment_generating_function}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Characteristic Function}\label{sec:characteristic_function}
+% ------------------------------------------------------------------------------
+
+for a Scalar Random Variable $X$, the \emph{Characteristic Function} is the
+Expected Value of $e^{itX}$ where $i$ is the Imaginary Unit and $t \in \reals$
+is the Argument of the ``Characteristic Function'' $\varphi_X : \reals
+\rightarrow \comps$:
+\[
+  \varphi_X(t) = E[e^{itX}] = \int_\reals e^{itx} dF_X(x)
+\]
+where $F_X$ is the Cumulative Distribution Function (\S\ref{sec:cdf}) of $X$ and
+the Integral is a Riemann-Sieltjes Integral (TODO: xref)
+
+always exists even when the Moment-generating Function
+(\S\ref{sec:moment_generating_function}) and Probability Density Function
+(\S\ref{sec:pdf}) do not
+
+like the Cumulative Distribution Function, completely determines the behavior
+and properties of the Probability Distribution
+
+if the Random Variable admits a Probability Density Function
+(\S\ref{sec:pdf}) then the Characteristic Function is the
+Fourier Transform (\S\ref{sec:fourier_transform}) of the Probability Density
+Function and vice versa
+
+if a Random Variable has a Moment-generating Function
+(\S\ref{sec:moment_generating_function}) then the Characteristic Function can be
+extended to the Complex Plane
+
+\fist cf. Indicator Functions (\S\ref{sec:indicator_function})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Discrete Random Variable}\label{sec:discrete_random_variable}
+% ------------------------------------------------------------------------------
+
+\paragraph{Probability Generating Function}
+\label{sec:probability_generating_function}\hfill
+
+(Ordinary) Generating Function (\S\ref{sec:generating_function})--i.e. Formal
+Power Series representation--of the Probability Mass Function
+(\S\ref{sec:probability_mass_function}) of a Discrete Random Variable
+
+
+
+\subsubsection{Binomial Random Variable}\label{sec:binomial_random_variable}
+
+Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
+
+Binomial Distribution (\S\ref{sec:binomial_distribution})
+
+$X \sim B(n,p)$
+
+Probability Mass Function:
+\[
+  f(k,n,p) = P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+for $k = 0,1,2, \ldots, n$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Continuous Random Variable}\label{sec:continuous_random_variable}
+% ------------------------------------------------------------------------------
+
+has Probability $0$ of assuming a particular Value
 
 
 
@@ -1507,6 +1560,12 @@ $\mu$, $\sigma$
 \fist \emph{Estimation Theory} (\S\ref{sec:estimation_theory}) deals with
 ``\emph{Estimating}'' the values of Statistical Parameters
 based on data that has a ``\emph{random component}'' (FIXME: clarify)
+
+
+
+\subsubsection{Proportion}\label{sec:statistical_proportion}
+
+\paragraph{Lexis Ratio}\label{sec:lexis_ratio}\hfill
 
 
 
@@ -1567,12 +1626,141 @@ Uncertainty (\S\ref{sec:uncertainty_analysis})
 
 
 % ==============================================================================
+\section{Descriptive Statistics}\label{sec:descriptive_statistics}
+% ==============================================================================
+
+Summary of Data: Mean, Median, Mode, Standard Deviation
+
+cf. Test Statistics (\S\ref{sec:test_statistic})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Statistical Sample}\label{sec:statistical_sample}
+% ------------------------------------------------------------------------------
+
+Sample (\S\ref{sec:sample}), Random Sample (\S\ref{sec:random_sample})
+
+\fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
+
+
+
+\subsubsection{Order Statistic}\label{sec:order_statistic}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Summary Statistics}\label{sec:summary_statistics}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Measure of Location}\label{sec:location_measure}
+
+\paragraph{Median}\label{sec:median}\hfill
+
+\paragraph{Mode}\label{sec:mode}\hfill
+
+cf. \emph{Unimodality}
+
+
+
+\paragraph{Arithmetic Mean}\label{sec:arithmetic_mean}\hfill
+
+\emph{Arithmetic Mean} $\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i$
+
+
+
+\paragraph{Geometric Mean}\label{sec:geometric_mean}\hfill
+
+using the Product of Values instead of Sum as in Arithmetic Mean
+
+
+
+\paragraph{Trimmed Mean}\label{sec:trimmed_mean}\hfill
+
+\paragraph{Sample Median}\label{sec:median}\hfill
+
+
+
+\subsubsection{Statistical Dispersion}\label{sec:statistical_dispersion}
+
+measured by Statistics of the Distribution of Deviations (\S\ref{sec:deviation})
+
+cf. \emph{Uncertainty}
+
+2018 - \emph{Uncertainty: a Tutorial} -
+\url{https://blog.evjang.com/2018/12/uncertainty.html}
+
+
+
+\paragraph{Sample Variance}\label{sec:variability}\hfill
+
+$s^2$
+
+Degrees of Freedom, Linear Independence, Biased/Unbiased Estimator
+(\S\ref{sec:unbiased_estimate})
+
+Unbiased Sample Variance:
+\[
+  s^2 = \frac{n}{n-1}\sigma^2_y =
+  \frac{1}{n-1} \sum_{i=1}^n (y_i - \overline{y})^2
+\]
+
+
+
+\paragraph{Standard Deviation}\label{sec:standard_deviation}\hfill
+
+Variance (\S\ref{sec:variance})
+
+Deviation (\S\ref{sec:deviation})
+
+\emph{Uncorrected Standard Deviation}:
+\[
+  s_n = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \overline{x})^2}
+\]
+
+\emph{Corrected Standard Deviation}
+
+\emph{Unbiased Standard Deviation}
+
+
+
+\subparagraph{Chebyshev's Inequality}\label{sec:chebyshevs_inequality}
+\hfill
+
+Probability that a Random Variable $X$ will assume Value within $k$ Standard
+Deviations
+
+Random Variable $X$ with Finite Expected Value (\S\ref{sec:expected_value})
+$\mu$ and Finite Non-zero Variance $\sigma^2$, for any $k \in \reals : k > 0$:
+\[
+  P(k\sigma \leq |X - \mu|) \leq \frac{1}{k^2}
+\]
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Earthmover Distance}\label{sec:earthmover_distance}
+% ------------------------------------------------------------------------------
+
+%FIXME: does this section belong here?
+
+a measure of ``nearness'' for Probability Distributions
+
+\url{https://jeremykun.com/2018/03/05/earthmover-distance/}
+
+
+
+% ==============================================================================
 \section{Inferential Statistics}\label{sec:inferential_statistics}
 % ==============================================================================
 
 Probabilistic Inference
 (\S\ref{sec:probabilistic_inference}), Inductive Inference
 (\S\ref{sec:inductive_inference})
+
+Probabilistic Classification (\S\ref{sec:probabilistic_classification}) -- use
+of Statistical Inference to solve a Statistical Classification
+(\S\ref{sec:statistical_classification})
 
 Random Variation: Sampling Variation, Observational Error
 
@@ -1581,130 +1769,19 @@ Wasserman04 - \emph{All of Statistics}
 
 
 % ------------------------------------------------------------------------------
-\subsection{Statistical Inference}\label{sec:statistical_inference}
+\subsection{Statistical Assumption}\label{sec:statistical_assumption}
 % ------------------------------------------------------------------------------
 
-Probabilistic Classification (\S\ref{sec:probabilistic_classification}) -- use
-of Statistical Inference to solve a Statistical Classification
-(\S\ref{sec:statistical_classification})
-
-
-
-\subsubsection{Predictive Inference}\label{sec:predictive_inference}
-
-\paragraph{Prediction Interval}\label{sec:prediction_interval}\hfill
-
-Frequentist: Confidence Interval (\S\ref{sec:confidence_interval})
-
-Bayesian: Credible Interval (\S\ref{sec:credible_interval})
-
-
-
-\paragraph{Best Linear Unbiased Prediction (BLUP)}\label{sec:blup}\hfill
-
-under ``suitable assumptions'' on the Priors, Gaussian Process Regression
-(Kriging \S\ref{sec:gaussian_process_regression}) gives the best BLUP of the
-intermediate values
-
-
-
-\subsubsection{Proportion}\label{sec:statistical_proportion}
-
-\paragraph{Lexis Ratio}\label{sec:lexis_ratio}\hfill
-
-
-
-\subsubsection{Hypothesis Testing}\label{sec:hypothesis_testing}
-
-\emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
-Populations (\S\ref{sec:population})
-
-in Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is assigned
-a Probability, while in Frequentist Inference
-(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
-Probability
-
-\url{https://github.com/puolival/multipy} -- Python library
-
-Methodology
-
-Confidence Intervals (\S\ref{sec:confidence_interval})
-
-Null Hypothesis $H_0$ represents any Hypothesis
-
-If $H_0$ is Rejected then Alternate Hypothesis $H_1$ is Accepted
-
-$H_1$ usually represents the question to be answered
-
-\begin{enumerate}
-  \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
-  \item Insufficient Evidence: fail to Reject $H_0$
-\end{enumerate}
-
-\emph{Test Statistic}
-
-\emph{Critical Region}, \emph{Critical Value}
-
-Type I Error: Rejection of $H_0$ when it is True
-
-Type II Error: Non-Rejection of $H_0$ when it is False
-
-\emph{Level of Significance} $\alpha$: Probability of committing a
-Type I Error
-
-$\beta$: Probability of committing a Type II Error
-
-\emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
-specific alternative is True
-
-Confidence Intervals (\S\ref{sec:confidence_interval})
-
-One-tailed Test
-
-Two-tailed Test
-
-Test on a single Mean
-
-Test on a single Sample
-
-$P$-value: lowest Level of Significance at which the observed Value of
-the Statistic is Significant
-
-\begin{itemize}
-  \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
-\end{itemize}
-
-
-
-\paragraph{Test Statistic}\label{sec:test_statistic}\hfill
-
-cf. Descriptive Statistic (\S\ref{sec:descriptive_statistics})
-
-\begin{itemize}
-  \item $t$-statistic
-  \item $F$-test
-  \item ...
-\end{itemize}
-
-
-
-\paragraph{Null Hypothesis}\label{sec:null_hypothesis}\hfill
-
-$H_0$
-
-
-
-\paragraph{Critical Region}\label{sec:critical_region}\hfill
-
-or \emph{Region of Rejection}
-
-set of Values of the Test Statistic for which the Null Hypothesis is rejected
+a Statistical Model (\S\ref{sec:statistical_model}) is a Set of Statistical
+Assumptions
 
 
 
 % ------------------------------------------------------------------------------
 \subsection{Statistical Model}\label{sec:statistical_model}
 % ------------------------------------------------------------------------------
+
+a Set of Statistical Assumptions (\S\ref{sec:statistical_assumption})
 
 or \emph{Probabilistic Model}
 
@@ -1893,6 +1970,96 @@ Logistic Regression (\S\ref{sec:logistic_regression})
 
 
 % ------------------------------------------------------------------------------
+\subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
+% ------------------------------------------------------------------------------
+
+\emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
+Populations (\S\ref{sec:population})
+
+in Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is assigned
+a Probability, while in Frequentist Inference
+(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
+Probability
+
+\url{https://github.com/puolival/multipy} -- Python library
+
+Methodology
+
+Confidence Intervals (\S\ref{sec:confidence_interval})
+
+Null Hypothesis $H_0$ represents any Hypothesis
+
+If $H_0$ is Rejected then Alternate Hypothesis $H_1$ is Accepted
+
+$H_1$ usually represents the question to be answered
+
+\begin{enumerate}
+  \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
+  \item Insufficient Evidence: fail to Reject $H_0$
+\end{enumerate}
+
+\emph{Test Statistic}
+
+\emph{Critical Region}, \emph{Critical Value}
+
+Type I Error: Rejection of $H_0$ when it is True
+
+Type II Error: Non-Rejection of $H_0$ when it is False
+
+\emph{Level of Significance} $\alpha$: Probability of committing a
+Type I Error
+
+$\beta$: Probability of committing a Type II Error
+
+\emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
+specific alternative is True
+
+Confidence Intervals (\S\ref{sec:confidence_interval})
+
+One-tailed Test
+
+Two-tailed Test
+
+Test on a single Mean
+
+Test on a single Sample
+
+$P$-value: lowest Level of Significance at which the observed Value of
+the Statistic is Significant
+
+\begin{itemize}
+  \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
+\end{itemize}
+
+
+
+\subsubsection{Test Statistic}\label{sec:test_statistic}
+
+cf. Descriptive Statistic (\S\ref{sec:descriptive_statistics})
+
+\begin{itemize}
+  \item $t$-statistic
+  \item $F$-test
+  \item ...
+\end{itemize}
+
+
+
+\subsubsection{Null Hypothesis}\label{sec:null_hypothesis}
+
+$H_0$
+
+
+
+\subsubsection{Critical Region}\label{sec:critical_region}
+
+or \emph{Region of Rejection}
+
+set of Values of the Test Statistic for which the Null Hypothesis is rejected
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Estimation Theory}\label{sec:estimation_theory}
 % ------------------------------------------------------------------------------
 
@@ -1913,6 +2080,8 @@ approaches:
     on the Statistical Parameters of interest
   \item \emph{Set-membership} (\S\ref{sec:set_estimation}) -- 
 \end{itemize}
+
+\fist cf. Approximation Theory (\S\ref{sec:approximation_theory})
 
 
 
@@ -2284,6 +2453,23 @@ alternative to Probability Theory for dealing with certain types of Uncertainty
 
 
 % ------------------------------------------------------------------------------
+\subsection{Asymptotic Theory}\label{sec:asymptotic_theory}
+% ------------------------------------------------------------------------------
+
+framework for assessing properties of Estimators (\S\ref{sec:estimator}) and
+Statistical Tests (Hypothesis Testing \S\ref{sec:hypothesis_testing})
+
+\fist cf. Asymptotic Analysis (\S\ref{sec:asymptotic_analysis})
+
+
+
+\subsubsection{Large Deviations Theory}\label{sec:large_deviations_theory}
+
+\paragraph{Rate Function}\label{sec:rate_function}\hfill
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Statistical Analysis}\label{sec:statistical_analysis}
 % ------------------------------------------------------------------------------
 
@@ -2301,7 +2487,7 @@ Statistical Parameter (\S\ref{sec:population_parameter})
 
 Statistical Model (\S\ref{sec:statistical_model})
 
-Statistical Inference (\S\ref{sec:statistical_inference})
+Statistical Inference (\S\ref{sec:inferential_statistics})
 
 Statistical Learning Theory (\S\ref{sec:statistical_learning_theory})
 
@@ -2453,6 +2639,42 @@ dual of Linear Quadratic Regulation (LQR \S\ref{sec:lqr})
 
 
 % ------------------------------------------------------------------------------
+\subsection{Predictive Inference}\label{sec:predictive_inference}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Prediction}\label{sec:prediction}
+
+\subsubsection{Predictability}\label{sec:predictability}
+
+\fist Predictable Process (\S\ref{sec:predictable_process})
+
+
+
+\subsubsection{Prediction Interval}\label{sec:prediction_interval}
+
+Frequentist: Confidence Interval (\S\ref{sec:confidence_interval})
+
+Bayesian: Credible Interval (\S\ref{sec:credible_interval})
+
+
+
+\subsubsection{Best Linear Unbiased Prediction (BLUP)}\label{sec:blup}
+
+under ``suitable assumptions'' on the Priors, Gaussian Process Regression
+(Kriging \S\ref{sec:gaussian_process_regression}) gives the best BLUP of the
+intermediate values
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Causal Inference}\label{sec:causal_inference}
+% ------------------------------------------------------------------------------
+
+\url{http://www.inference.vc/untitled/}
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Fiducial Inference}\label{sec:fiducial_inference}
 % ------------------------------------------------------------------------------
 
@@ -2465,143 +2687,6 @@ Wasserman14 - \emph{Robust Topological Inference}
 TDA (R package)
 
 
-
-% ------------------------------------------------------------------------------
-\subsection{Causal Inference}\label{sec:causal_inference}
-% ------------------------------------------------------------------------------
-
-\url{http://www.inference.vc/untitled/}
-
-
-
-% ==============================================================================
-\section{Descriptive Statistics}\label{sec:descriptive_statistics}
-% ==============================================================================
-
-Summary of Data: Mean, Median, Mode, Standard Deviation
-
-cf. Test Statistics (\S\ref{sec:test_statistic})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Statistical Sample}\label{sec:statistical_sample}
-% ------------------------------------------------------------------------------
-
-Random Sample (\S\ref{sec:random_sample})
-
-\fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
-
-
-
-\subsubsection{Order Statistic}\label{sec:order_statistic}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Summary Statistics}\label{sec:summary_statistics}
-% ------------------------------------------------------------------------------
-
-\subsubsection{Measure of Location}\label{sec:location_measure}
-
-\paragraph{Median}\label{sec:median}\hfill
-
-\paragraph{Mode}\label{sec:mode}\hfill
-
-cf. \emph{Unimodality}
-
-
-
-\paragraph{Arithmetic Mean}\label{sec:arithmetic_mean}\hfill
-
-\emph{Arithmetic Mean} $\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i$
-
-
-
-\paragraph{Geometric Mean}\label{sec:geometric_mean}\hfill
-
-using the Product of Values instead of Sum as in Arithmetic Mean
-
-
-
-\paragraph{Trimmed Mean}\label{sec:trimmed_mean}\hfill
-
-\paragraph{Sample Median}\label{sec:median}\hfill
-
-
-
-\subsubsection{Statistical Dispersion}\label{sec:statistical_dispersion}
-
-measured by Statistics of the Distribution of Deviations (\S\ref{sec:deviation})
-
-cf. \emph{Uncertainty}
-
-2018 - \emph{Uncertainty: a Tutorial} -
-\url{https://blog.evjang.com/2018/12/uncertainty.html}
-
-
-
-\paragraph{Sample Variance}\label{sec:variability}\hfill
-
-$s^2$
-
-Degrees of Freedom, Linear Independence, Biased/Unbiased Estimator
-(\S\ref{sec:unbiased_estimate})
-
-Unbiased Sample Variance:
-\[
-  s^2 = \frac{n}{n-1}\sigma^2_y =
-  \frac{1}{n-1} \sum_{i=1}^n (y_i - \overline{y})^2
-\]
-
-
-
-\paragraph{Standard Deviation}\label{sec:standard_deviation}\hfill
-
-Variance (\S\ref{sec:variance})
-
-Deviation (\S\ref{sec:deviation})
-
-\emph{Uncorrected Standard Deviation}:
-\[
-  s_n = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \overline{x})^2}
-\]
-
-\emph{Corrected Standard Deviation}
-
-\emph{Unbiased Standard Deviation}
-
-
-
-\subparagraph{Chebyshev's Inequality}\label{sec:chebyshevs_inequality}
-\hfill
-
-Probability that a Random Variable $X$ will assume Value within $k$ Standard
-Deviations
-
-Random Variable $X$ with Finite Expected Value (\S\ref{sec:expected_value})
-$\mu$ and Finite Non-zero Variance $\sigma^2$, for any $k \in \reals : k > 0$:
-\[
-  P(k\sigma \leq |X - \mu|) \leq \frac{1}{k^2}
-\]
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Earthmover Distance}\label{sec:earthmover_distance}
-% ------------------------------------------------------------------------------
-
-%FIXME: does this section belong here?
-
-a measure of ``nearness'' for Probability Distributions
-
-\url{https://jeremykun.com/2018/03/05/earthmover-distance/}
-
-
-
-% ==============================================================================
-\section{Large Deviations Theory}\label{sec:large_deviations_theory}
-% ==============================================================================
 
 % ==============================================================================
 \section{Statistical Randomness}\label{sec:statistical_randomness}
@@ -2621,12 +2706,14 @@ Tests (\S\ref{sec:hypothesis_testing}):
 
 
 
-% ==============================================================================
-\section{Pseudorandom Process}\label{sec:pseudorandom_process}
-% ==============================================================================
+% ------------------------------------------------------------------------------
+\subsection{Pseudorandom Process}\label{sec:pseudorandom_process}
+% ------------------------------------------------------------------------------
 
 Deterministic System (\S\ref{sec:deterministic_system}) exhibiting Statistical
-Randomness (\S\ref{sec:statistical_randomness})
+Randomness
+
+cf. \emph{Stochastic Process} (\S\ref{sec:stochastic_process})
 
 \emph{Hash Functions} can create ``Random Numbers'' solely based on an Input
 with no dependency on previous queries
@@ -2645,11 +2732,20 @@ or \emph{Random Process}
 
 %FIXME: move section ???
 
-cf. Statistical Randomness (\S\ref{sec:statistical_randomness})
+\fist a \emph{Pseudorandom Process} (\S\ref{sec:pseudorandom_process}) is a
+Determinstic Process exhibiting Statistical Randomness
+(\S\ref{sec:statistical_randomness})
 
-Harmonic Functions (\S\ref{sec:harmonic_function})
+\fist Stochastic Calculus (\S\ref{sec:stochastic_calculus}):
+\begin{itemize}
+  \item Predictable Process (\S\ref{sec:predictable_process}) -- Process whose
+    value is knowable at a prior time; smallest Class of Processes that is
+    Closed under taking limits of Sequences (FIXME: clarify)
+  \item Adapted Proces (Non-anticipative Process \S\ref{sec:adapted_process}) --
+    cannot be Predicted into the Future (FIXME: clarify)
+\end{itemize}
 
-\fist Stochastic Calculus (\S\ref{sec:stochastic_calculus})
+cf. Harmonic Functions (\S\ref{sec:harmonic_function})
 
 \fist cf. Stochastic Optimization (\S\ref{sec:stochastic_optimization})
 
@@ -2839,37 +2935,6 @@ xref)
 
 
 % ==============================================================================
-\section{Multivariate Statistics}\label{sec:multivariate_statistics}
-% ==============================================================================
-
-% ------------------------------------------------------------------------------
-\subsection{Multivariate Analysis}\label{sec:multivariate_analysis}
-% ------------------------------------------------------------------------------
-
-\subsubsection{Ordination}\label{sec:ordination}
-
-\paragraph{Principal Components Analysis}
-\label{sec:principal_components_analysis}\hfill
-
-\paragraph{Multidimensional Scaling}\label{sec:multidimensional_scaling}\hfill
-
-\paragraph{Correspondence Analysis}\label{sec:correspondence_analysis}\hfill
-
-\subparagraph{Detrended Correspondence Analysis}
-\label{sec:detrended_correspondence}\hfill
-
-\subparagraph{Canonical Correspondence Analysis}
-\label{sec:canonical_correspondence}\hfill
-
-
-
-\paragraph{Bray-Curtis Ordination}\label{sec:bray_curtis_ordination}\hfill
-
-\paragraph{Redundancy Analysis}\label{sec:redundancy_analysis}\hfill
-
-
-
-% ==============================================================================
 \section{Statistical Mechanics}\label{sec:statistical_mechanics}
 % ==============================================================================
 
@@ -2904,63 +2969,33 @@ of a Physical System
 
 
 % ==============================================================================
-\section{Geometric Probability}\label{sec:geometric_probability}
+\section{Multivariate Statistics}\label{sec:multivariate_statistics}
 % ==============================================================================
 
-``\emph{Continuous Combinatorics}'': analogies between \emph{Counting} and
-\emph{Measure} (\S\ref{sec:measure}) \fist Combinatorics (Part
-\ref{part:combinatorics}), Measure Theory (Part \ref{part:measure_theory})
-
-
-
 % ------------------------------------------------------------------------------
-\subsection{Integral Geometry}\label{sec:integral_geometry}
+\subsection{Multivariate Analysis}\label{sec:multivariate_analysis}
 % ------------------------------------------------------------------------------
 
-% ------------------------------------------------------------------------------
-\subsection{Stochastic Geometry}\label{sec:stochastic_geometry}
-% ------------------------------------------------------------------------------
+\subsubsection{Ordination}\label{sec:ordination}
+
+\paragraph{Principal Components Analysis}
+\label{sec:principal_components_analysis}\hfill
+
+\paragraph{Multidimensional Scaling}\label{sec:multidimensional_scaling}\hfill
+
+\paragraph{Correspondence Analysis}\label{sec:correspondence_analysis}\hfill
+
+\subparagraph{Detrended Correspondence Analysis}
+\label{sec:detrended_correspondence}\hfill
+
+\subparagraph{Canonical Correspondence Analysis}
+\label{sec:canonical_correspondence}\hfill
 
 
 
-% ==============================================================================
-\section{Information Geometry}\label{sec:information_geometry}
-% ==============================================================================
+\paragraph{Bray-Curtis Ordination}\label{sec:bray_curtis_ordination}\hfill
 
-Harper09 - \emph{The Replicator Equation as an Inference Dynamic}
-
-Harper09 - \emph{Information Geometry and Evolutionary Game Theory}
-
-\url{http://math.ucr.edu/home/baez/information/}
-
-\url{https://johncarlosbaez.wordpress.com/2017/01/31/biology-as-information-dynamics/}
-
-application of Differential Geometry
-(\S\ref{sec:differential_geometry}) techniques to Probability Theory
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Statistical Manifold}\label{sec:statistical_manifold}
-% ------------------------------------------------------------------------------
-
-Riemannian Manifold (\S\ref{sec:riemannian_manifold}) with the
-\emph{Fisher Information Metric} as the Riemannian Metric
-(\S\ref{sec:riemannian_metric})
-
-
-
-\subsubsection{Fisher Information Metric}\label{sec:fisher_metric}
-
-Riemannian Metric (\S\ref{sec:riemannian_metric}) for a Statistical
-Manifold
-
-\fist \textbf{Fisher's Fundamental Theorem of Natural Selection},
-Quasi-linkage Equilibrium: approximation in the case of Weak Selection
-and Weak Epistasis -- Evolutionary Optimization
-(\S\ref{sec:evolutionary_optimization}) %FIXME
-
-\url{https://golem.ph.utexas.edu/category/2018/05/the_fisher_metric_will_not_be.html}
+\paragraph{Redundancy Analysis}\label{sec:redundancy_analysis}\hfill
 
 
 
@@ -3034,10 +3069,62 @@ use of Statistical Inference (\S\ref{sec:statistical_inference})
 
 
 % ==============================================================================
-\section{Queueing Theory}\label{sec:queueing_theory}
+\section{Geometric Probability}\label{sec:geometric_probability}
 % ==============================================================================
 
-\emph{Little's Law}
+``\emph{Continuous Combinatorics}'': analogies between \emph{Counting} and
+\emph{Measure} (\S\ref{sec:measure}) \fist Combinatorics (Part
+\ref{part:combinatorics}), Measure Theory (Part \ref{part:measure_theory})
 
-1993 - \emph{The Distributional Little's Law and its Applications} - Bertsimas,
-Nakazato
+
+
+% ------------------------------------------------------------------------------
+\subsection{Integral Geometry}\label{sec:integral_geometry}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Stochastic Geometry}\label{sec:stochastic_geometry}
+% ------------------------------------------------------------------------------
+
+
+
+% ==============================================================================
+\section{Information Geometry}\label{sec:information_geometry}
+% ==============================================================================
+
+Harper09 - \emph{The Replicator Equation as an Inference Dynamic}
+
+Harper09 - \emph{Information Geometry and Evolutionary Game Theory}
+
+\url{http://math.ucr.edu/home/baez/information/}
+
+\url{https://johncarlosbaez.wordpress.com/2017/01/31/biology-as-information-dynamics/}
+
+application of Differential Geometry
+(\S\ref{sec:differential_geometry}) techniques to Probability Theory
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Statistical Manifold}\label{sec:statistical_manifold}
+% ------------------------------------------------------------------------------
+
+Riemannian Manifold (\S\ref{sec:riemannian_manifold}) with the
+\emph{Fisher Information Metric} as the Riemannian Metric
+(\S\ref{sec:riemannian_metric})
+
+
+
+\subsubsection{Fisher Information Metric}\label{sec:fisher_metric}
+
+Riemannian Metric (\S\ref{sec:riemannian_metric}) for a Statistical
+Manifold
+
+\fist \textbf{Fisher's Fundamental Theorem of Natural Selection},
+Quasi-linkage Equilibrium: approximation in the case of Weak Selection
+and Weak Epistasis -- Evolutionary Optimization
+(\S\ref{sec:evolutionary_optimization}) %FIXME
+
+\url{https://golem.ph.utexas.edu/category/2018/05/the_fisher_metric_will_not_be.html}
+
+
