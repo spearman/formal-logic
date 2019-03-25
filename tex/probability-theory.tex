@@ -55,9 +55,7 @@ the fundamental ``objects'' in Probability Theory are the Morphisms of
 $\cat{Prob}$ and those Morphisms are \emph{Random Variables}
 (\S\ref{sec:random_variable})
 
-TODO: Giry Monads (Probability Monads) -
-\url{https://ncatlab.org/nlab/show/Giry+monad}
-
+\fist Giry Monads (Probability Monads \S\ref{sec:probability_monad})
 
 \asterism
 
@@ -216,10 +214,10 @@ Mutually Exclusive States
 
 \fist cf. Independence (\S\ref{sec:independence})
 
-$P(B|A) = P(B)$ or $P(A|B) = P(A)$ -- note that this is only defined when the
-Conditioning Event has Non-zero Probability
-
 Independent if and only if $P(A \cap B) = P(A) P(B)$
+
+in terms of Conditional Probability (\S\ref{sec:conditional_probability}), $A$
+and $B$ are Independent if and only if $P(A|B) = P(A)$ or $P(B|A) = P(B)$
 
 $n$ Events are Independent if:
 \[
@@ -268,6 +266,12 @@ Corollary: for Disjoint $A_1, A_2, \ldots$:
 
 $P(A_1 \cap A_2 \cap \ldots \cap A_k) = P(A_1) P(A_2 | A_1) P(A_3 |
 A_1 \cap A_2) \ldots P(A_k | A_1 \cap A_2 \cap \ldots \cap A_{k-1})$
+
+\textbf{(Thm.) Continuity of Probabilities} \emph{If $A_n \rightarrow A$, then:}
+\[
+  P(A_n) \rightarrow P(A)
+\]
+\emph{as $n \rightarrow \infty$}.
 
 cf. \emph{Probability Measure} (\S\ref{sec:probability_measure}),
 \emph{Probability Measure Function} (\S\ref{sec:probability_measure_function})
@@ -446,9 +450,9 @@ allowed to have regions of Negative Probability
 % ------------------------------------------------------------------------------
 
 For a Countably Inifinite Partition of a Sample Space
-(\S\ref{sec:sample_space}), $\{ B_n : n = 1,2,3,\ldots \}$, with each
-Event $B_n$ being Measurable (\S\ref{sec:measure}), then for any Event
-$A$ in the same Probability Space (\S\ref{sec:probability_space}):
+(\S\ref{sec:sample_space}), $\{ B_n : n = 1,2,3,\ldots \}$, with each Event
+$B_n$ being Measurable (\S\ref{sec:measure}), then for any Event $A$ in the same
+Probability Space (\S\ref{sec:probability_space}):
 \[
   P(A) = \sum_n P(A \cap B_n)
 \]
@@ -475,7 +479,8 @@ $P(A|A) = 1$
 note that Conditional Probability is only defined when the Conditioning Event
 has a Non-zero (Positive) Probability
 
-\fist Independent Event (\S\ref{sec:independent_event})
+$A$ and $B$ are Independent (\S\ref{sec:independent_event}) if and only if
+$P(A|B) = P(A)$
 
 \fist Conditional Independence (\S\ref{sec:conditional_independence})
 
@@ -501,6 +506,18 @@ or \emph{Bayes Rule}
 \[
   P(A|B) = \frac{P(A)P(B|A)}{P(B)}
 \]
+
+for a Partition $A_1, \ldots, A_k$ of $\Omega$ such that $P(A_i) > 0$ for all
+$i$, if $P(B) > 0$ then for $i \in \{1, \ldots, k\}$:
+\[
+  P(A_i|B) = \frac{
+    P(B|A_i)P(A_i)
+  }{
+    \sum_j P(B|A_j)P(A_j)
+  }
+\]
+where $A_i$ is the \emph{Prior Probability} of $A$ and $P(A_i|B)$ is the
+\emph{Posterior Probability} of $A$ (FIXME: what is $A$ here ???)
 
 \fist Relative Entropy (Kullback-Leibler Divergence
 \S\ref{sec:relative_entropy})
@@ -1019,6 +1036,11 @@ or \emph{Cauchy-Lorentz Distribution}
 \label{sec:symmetric_probability}
 
 \paragraph{Uniform Distribution}\label{sec:uniform_distribution}\hfill
+
+for a Finite Sample Space $\Omega$:
+\[
+  P(A) = \frac{\|A\|}{\|\Omega\|}
+\]
 
 a Uniform Distribution is defined by a rectangle formed on the interval Interval
 $[min,max]$ such that the area is $1$
@@ -2933,6 +2955,33 @@ xref)
 % ------------------------------------------------------------------------------
 
 \subsubsection{Monte Carlo Simulation}\label{sec:monte_carlo}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Probability Monad}\label{sec:probability_monad}
+% ------------------------------------------------------------------------------
+
+1980 - Giry - \emph{A Categorical Approach to Probability Theory}
+
+\url{https://ncatlab.org/nlab/show/Giry+monad}
+
+assigns to a Space of Outcomes $X$ a new Space $P X$ containing Random Outcomes
+of $X$
+
+
+
+\subsection{Kantorovich Monad}\label{sec:kantorovich_monad}
+
+(Breugel)
+
+\url{https://golem.ph.utexas.edu/category/2019/03/the_kantorovich_monad.html}
+
+Probability Monad on the Category of Metric Spaces; can be described purely in
+terms of Combinatorics of Finite Sequences of Elements
+
+2017 - Fritz, Perrone - \emph{A Probability Monad as the Colimit of Spaces of
+  Finite Samples}
 
 
 
