@@ -117,21 +117,25 @@ Countable Unions and Intersections of Borel Sets
 
 
 
-% ------------------------------------------------------------------------------
-\subsection{Measurable Space}\label{sec:measurable_space}
-% ------------------------------------------------------------------------------
+% ==============================================================================
+\section{Measurable Space}\label{sec:measurable_space}
+% ==============================================================================
 
 a Measurable Space is the Field of Sets underlying a $\sigma$-algebra
 
 (wiki):
 
 a \emph{Measurable Space} or \emph{Borel Space} is a Set $X$ together with a
-$\sigma$-algebra $\sigma$ on the Set:
+$\sigma$-algebra $\Sigma$ on the Set:
 \[
-  (X,\sigma)
+  (X,\Sigma)
 \]
+Members of $\Sigma$ are called \emph{Measurable Sets}
+(\S\ref{sec:measurable_set}), and Functions between Measurable Spaces such that
+the Preimages are Measurable are called \emph{Measurable Functions}
+(\S\ref{sec:measurable_function})
 
-\fist A \emph{Measure Space} (\S\ref{sec:measure_space}) is a Measurable Space
+\fist a \emph{Measure Space} (\S\ref{sec:measure_space}) is a Measurable Space
 equipped with a \emph{Measure} (\S\ref{sec:measure})
 $\mu : \sigma \rightarrow \overline{\reals}$
 
@@ -159,8 +163,53 @@ Sets)
 
 
 % ------------------------------------------------------------------------------
+\subsection{Measurable Set}\label{sec:measurable_set}
+% ------------------------------------------------------------------------------
+
+a Member of the $\sigma$-algebra of a Measurable Space
+
+Measurable Sets on the Real Line are ``iterated'' Countable Unions and
+Intersections of Borel Sets (\S\ref{sec:borel_set})
+
+Solovay's Model: all Subsets of the Reals are Measurable (excluding Uncountable
+Choice)
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Measurable Function}\label{sec:measurable_function}
 % ------------------------------------------------------------------------------
+
+a \emph{Measurable Function} is a Function between two Measurable Spaces such
+that the Preimage of any Measurable Set is Measurable
+
+for a Measure Space $(E, X, \mu)$ and Function $f : E \rightarrow \reals$, an
+equivalent requirement is that the Pre-image of any Borel Subset
+(\S\ref{sec:borel_set}) of $\reals$ is in $X$
+
+\fist cf. Continuous Functions (\S\ref{sec:continuous_function}) -- a Function
+between Metric Spaces (\S\ref{sec:metric_space}) is Continuous if the Preimage
+of each Open Set is Open
+
+Measurable Functions are closed under Algebraic Operations, and Point-wise
+Sequential Limits:
+\begin{align*}
+  & \sup_{k\in\nats} f_k \\
+  & {\lim \inf}_{k\in\nats} f_k \\
+  & {\lim \sup}_{k\in\nats} f_k \\
+\end{align*}
+are Measurable if the original Sequence $(f_k)_k, k \in \nats$ consists of
+Measurable Functions
+
+\fist Lebesgue Integrals (\S\ref{sec:lebesgue_integral})
+
+a Random Variable (\S\ref{sec:random_variable}) is defined as a Measurable
+Function:
+\[
+  X : \Omega \rightarrow E
+\]
+where $(\Omega,\mathbb{P})$ is a Probability Space (i.e. a Measure Space with a
+Probability Measure) and $E$ is an arbitrary Measurable Space
 
 \emph{A Categorical Look at Random Variables} -
 \url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
@@ -172,14 +221,6 @@ Equivalence Classes'' of Measure-preserving Maps
 
 the fundamental ``objects'' of Probability Theory are the \emph{Morphisms} of
 $\cat{Prob}$ and these Morphisms are \emph{Random Variables}
-(\S\ref{sec:random_variable})
-
-a Random Variable is defined as a \emph{Measurable Map}:
-\[
-  X : \Omega \rightarrow E
-\]
-where $(\Omega,\mathbb{P})$ is a Probability Space and $E$ is an arbitrary
-Measurable Space
 
 
 
@@ -187,24 +228,24 @@ Measurable Space
 \section{Measure}\label{sec:measure}
 % ==============================================================================
 
-Set $X$
-
-$(X,\Sigma)$ -- $\sigma$-algebra (\S\ref{sec:sigma_algebra}) on $X$
-
-A \emph{Measure} on $(X,\Sigma)$:
+A \emph{Measure} on a Measurable Space (\S\ref{sec:measurable_space})
+$(X,\Sigma)$ is a Function:
 \[
   \mu : \Sigma \rightarrow [0,\infty]
 \]
-
+Satisfying:
 \begin{enumerate}
-  \item $\mu(\varnothing) = 0$
-
-  \item For $(E_i)_{i \geq 1} \in \Sigma$ with $E_i \cap E_j =
-    \varnothing$ when $i \neq j$, then:
+  \item $\forall E \in \Sigma, \mu(E) \geq 0$ -- \emph{Non-negativity}
+  \item $\mu(\varnothing) = 0$ -- \emph{Null Empty Set}
+  \item For $(E_i)_{i \geq 1} \in \Sigma$ with $E_i \cap E_j = \varnothing$
+    when $i \neq j$, then:
     \[
       \mu (\bigcup_i E_i) = \sum_i \mu(E_i)
     \]
+    -- \emph{Countable Additivity} (\emph{$\sigma$-additivity})
 \end{enumerate}
+Note that a \emph{Signed Measure} (\S\ref{sec:signed_measure}) does not require
+Property (1.) of Non-negativity.
 
 $(X,\Sigma,\mu)$ is called a \emph{Measure Space} (\S\ref{sec:measure_space})
 and a Measure Space with a Probability Measure
@@ -212,10 +253,8 @@ and a Measure Space with a Probability Measure
 (\S\ref{sec:probability_space}); a Probability Measure must assign a value of
 $1$ to the entire Probability Space.
 
-Measurable
-
 \fist cf. \emph{Valuation} (\S\ref{sec:domain_valuation}) -- a Borel Measure
-always restricts to a Valuation
+(\S\ref{sec:borel_measure}) always restricts to a Valuation
 
 (Kolmogorov33) analogy between the Measure of a Set and the \emph{Probability}
 (\S\ref{sec:probability}) of an Event
@@ -234,45 +273,16 @@ need not be Countably Additive, but must only be Finitely Additive
 
 
 % ------------------------------------------------------------------------------
-\subsection{Measure Space}\label{sec:measure_space}
+\subsection{Signed Measure}\label{sec:signed_measure}
 % ------------------------------------------------------------------------------
 
-$(X,\Sigma,\mu)$
-
-\fist cf. \emph{Measureable Space} (\S\ref{sec:measureable_space}) -- a Set
-together $X$ with a $\sigma$-algebra $\Sigma$ on the Set: $(X,\Sigma)$
-
-Abstract Axiomatic Structure needed to define a Theory of \emph{Integration}
-(\S\ref{sec:integral_calculus})
-
-cf. \emph{Metric Spaces} (\S\ref{sec:metric_space}) -- Abstract Axiomatic
-Structure needed to define Theory of \emph{Differentiation}
-(\S\ref{sec:differential_calculus})
-
-A Measure Space with a Probability Measure (\S\ref{sec:probability_measure}) is
-a \emph{Probability Space} (\S\ref{sec:probability_space}). A Probability
-Measure must assign a value of $1$ to the entire Probability Space.
-
-For $E,F \in \Sigma$:
-\[
-  \mu(E) = \mu(E \cap F) + \mu(E \cap F^c)
-\]
-
-For $E,F \in \Sigma$ such that $F \subset E$:
-\[
-  \mu(F) \leq \mu(E)
-\]
-
-Countable Additivity (or $\sigma$-additivity): %FIXME
-
-For $E_i \in \Sigma$ (Countable Collections):
-\[
-  \mu(\bigcup_i E_i) \leq \sum_i \mu(E_i)
-\]
+or \emph{Charge}
 
 
 
-\subsubsection{Null Set}\label{sec:null_set}\hfill
+% ------------------------------------------------------------------------------
+\subsection{Null Set}\label{sec:null_set}
+% ------------------------------------------------------------------------------
 
 $M = (X, \Sigma, \mu)$
 
@@ -281,11 +291,261 @@ $S \subset X$ such that $\mu(S) = 0$
 a Null Set $N \subset \reals$ is a Set that can be Covered (\S\ref{sec:cover})
 by a Countable Union of Intervals of arbitrarily small total length
 
+a Complete Measure (\S\ref{sec:complete_measure}) is a Measure for which every
+Subset of a Null Set (\S\ref{sec:null_set}) is Measurable with Measure $0$
+
 \begin{itemize}
+  \item all Countable Sets are Null Sets
   \item Non-random Infinite Binary Random Sequences form a maximal Constructive
     Null Set
   \item ...
 \end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Complete Measure}\label{sec:complete_measure}
+% ------------------------------------------------------------------------------
+
+a Measure for which every Subset of a Null Set (\S\ref{sec:null_set}) is
+Measurable with Measure $0$
+
+\textbf{Maharam's Theorem}: \emph{
+  Every Complete Measure Space is decomposable into a Measure on the Continuum
+  and a Finite or Countable Counting Measure.
+}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Inner Measure}\label{sec:inner_measure}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Outer Measure}\label{sec:outer_measure}
+% ------------------------------------------------------------------------------
+
+(wiki):
+
+an \emph{Outer Measure} (or \emph{Exterior Measure}) on a Set $X$ is a Function
+on the Power Set of $X$, $\varphi : 2^X \rightarrow [0, \infty]$, Satisfying:
+\begin{enumerate}
+  \item $\varphi(\varnothing) = 0$ -- \emph{Null Empty Set}
+  \item $A,B \in X, A \subseteq B \Rightarrow \varphi(A) \leq \varphi(B)$ --
+    \emph{Monotonicity}
+  \item for a Sequence $\{A_j\}, j \in \{1, \ldots, \infty\}$ of Subsets of $X$,
+    which may or may not be pairwise Disjoint:
+    \[
+      \varphi\Big(\bigcup_{i=1}^\infty A_i\Big) \leq \sum_j\varphi(A_j)
+    \]
+    -- \emph{Countable Subadditivity}
+\end{enumerate}
+
+a Subset $E \subseteq X$ is \emph{$\varphi$-measurable} (or
+\emph{Carath\'eodory-measurable} by $\varphi$) if and only if for every Subset
+$A \subseteq X$:
+\[
+  \varphi(A) = \varphi(A \cap E) + \varphi(A \cap \bar{E})
+\]
+
+$\textbf{Thm.}$ \emph{
+  The $\varphi$-measurable Sets form a $\sigma$-algebra and $\varphi$ restricted
+  to the Measurable Sets is a Countably Additive Complete Measure.
+}
+
+Hasudorff Dimension (\S\ref{sec:hausdorff_dimension})
+
+
+
+\subsubsection{Lebesgue Outer Measure}\label{sec:lebesgue_outer_measure}
+
+for a Subset $E \subseteq \reals$ and for Intervals $I = [a,b]$ with lengths
+$\ell(I) = b-a$, the \emph{Lebesgue Outer Measure} $\lambda^*(E)$ is defined as:
+\[
+  \lambda^*(E) = \inf \Big\{ \sum_k^\infty \ell(I_k) : (I_k)_{k \in \nats}
+    \text{is a Sequence of Intervals with Open Boundaries with}
+    E \subseteq \bigcup_{k=1}^\infty I_k \Big\}
+\]
+
+the Lebesgue Outer Measure reduces the Subsets $E \subseteq \reals$ to its Outer
+Measure by \emph{Coverage} by Sets of Open Intervals-- each such Set of
+Intervals $I$ \emph{Covers} $E$ in the sense that when the Intervals are
+combined by Union, they Contain $E$; the total length of any Covering Interval
+can \emph{overestimate} the Measure of $E$, since the Intervals may include
+Points which are not in $E$; the Lebesgue Outer Measure is the Greatest Lower
+Bound (Infimum \S\ref{sec:greatest_lowerbound}) of the lengths from all possible
+Sets of Intervals-- i.e. it is the total length of Interval Sets which ``fit''
+$E$ most tightly and do not overlap
+
+the \emph{Lebesgue Measure} (\S\ref{sec:lebesgue_measure}) is defined on the
+Lebesgue $\sigma$-algebra which is the collection of Subsets $E$ Satisfying the
+\emph{Carath\'eodory Criterion} for every $A \subseteq \reals$:
+\[
+  \lambda^*(A) = \lambda^*(A \cap E) + \lambda^*(A \cap \bar{E})
+\]
+and the Lebesgue Measure $\lambda$ is given by the Lebesgue outer Measure:
+$\lambda(E) = \lambda^*(E)$
+
+this further requirement ensures that using a Set $E$ to Partition an arbitrary
+Set $A$ by Set Difference of $A$ and $E$ results in Sets whose Outer Measures
+Sum to the original Set $A$, i.e. the Sets $E$ are \emph{Lebesgue Measurable}
+
+
+
+\subsubsection{Hausdorff Measure}\label{sec:hausdorff_measure}
+
+\fist Geometric Measure Theory (\S\ref{sec:geometric_measure_theory})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{$\sigma$-finite Measure}\label{sec:sigma_finite}
+% ------------------------------------------------------------------------------
+
+$(X,\Sigma,\mu)$ is \emph{$\sigma$-finite} if there exists a Sequence
+$(E_i)_{i \geq 1}$ in $M$ such that $\bigcup_{i} E_i = X$ and
+$\mu(E_i) \leq \infty$.
+
+
+
+\subsubsection{Counting Measure}\label{sec:counting_measure}
+
+$\mu(A) = |A|$ for $A \subset \nats$
+
+\textbf{Maharam's Theorem}: \emph{
+  Every Complete Measure Space is decomposable into a Measure on the Continuum
+  and a Finite or Countable Counting Measure.
+}
+
+
+
+\subsubsection{Lebesgue Measure}\label{sec:lebesgue_measure}
+
+(wiki):
+
+\emph{$n$-dimensional Volume}; standard way of assigning a Measure to Subsets of
+$n$-dimensional Euclidean Space
+
+Measure of Subsets of $\reals$
+
+$m((a,b)) = b - a$
+
+the \emph{Lebesgue Measure} is defined on the Lebesgue $\sigma$-algebra which is
+the collection of Subsets $E \subseteq \reals$ Satisfying the
+\emph{Carath\'eodory Criterion} for every $A \subseteq \reals$:
+\[
+  \lambda^*(A) = \lambda^*(A \cap E) + \lambda^*(A \cap \bar{E})
+\]
+and the Lebesgue Measure $\lambda$ is given by the Lebesgue Outer Measure
+(\S\ref{sec:lebesgue_outer_measure}): $\lambda(E) = \lambda^*(E)$
+
+the Lebesgue Outer Measure reduces the Subsets $E \subseteq \reals$ to its Outer
+Measure by \emph{Coverage} by Sets of Open Intervals-- each such Set of
+Intervals $I$ \emph{Covers} $E$ in the sense that when the Intervals are
+combined by Union, they Contain $E$; the total length of any Covering Interval
+can \emph{overestimate} the Measure of $E$, since the Intervals may include
+Points which are not in $E$; the Lebesgue Outer Measure is the Greatest Lower
+Bound (Infimum \S\ref{sec:greatest_lowerbound}) of the lengths from all possible
+Sets of Intervals-- i.e. it is the total length of Interval Sets which ``fit''
+$E$ most tightly and do not overlap
+
+the further requirements of the Lebesgue Measure ensures that using a Set $E$ to
+Partition an arbitrary Set $A$ by Set Difference of $A$ and $E$ results in Sets
+whose Outer Measures Sum to the original Set $A$, i.e. the Sets $E$ are
+\emph{Lebesgue Measurable}
+
+\fist cf. Lebesgue Integral (\S\ref{sec:lebesgue_integral})
+
+construction by application of Carath\'eodory's Extension Theorem (TODO)
+
+\textbf{Thm.} \emph{
+  There is no analogue of Lebesgue Measure on Infinite-dimensional Banach Space
+  (\S\ref{sec:banach_space}).
+}
+
+the Borel Measure (\S\ref{sec:lebesgue_measure}) agrees with the Lebesgue
+Measure on the Sets for which it is defined, but there are more
+Lebesgue-measurable Sets than there are Borel-measurable Sets
+
+the existence of Sets that are not Lebesgue-measurable is a consequence of the
+Axiom of Choice
+
+if the Axiom of Choice is accepted, according to the \emph{Vitali Theorem},
+there are Uncountably many \emph{Vitali Sets} which are not Lebesgue Measurable
+\emph{Solovay Model}: assuming the existence of an \emph{Inaccessible Cardinal}
+(\S\ref{sec:inaccessible_cardinal}), a Model of ZF Set Theory without the Axiom
+of Choice (but the Axiom of Countable choice holds) in which all Sets of Real
+Numbers are Lebesgue Measurable
+
+a Bounded Function (\S\ref{sec:bounded_function}) on a Compact Interval $[a,b]$
+is Riemann Integrable (\S\ref{sec:integrable_function}) if and only if it is
+Continuous (\S\ref{sec:continuous_function}) ``Almost Everywhere'', i.e. Set of
+Points of Discontinuity has Measure Zero
+
+
+
+\paragraph{Haar Measure}\label{sec:haar_measure}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Borel Measure}\label{sec:borel_measure}
+% ------------------------------------------------------------------------------
+
+any Measure defined on the Borel Sets of a Borel Algebra
+(\S\ref{sec:borel_algebra})
+
+the Borel Measure agrees with the Lebesgue Measure
+(\S\ref{sec:lebesgue_measure}) on the Sets for which it is defined, but there
+are more Lebesgue-measurable Sets than there are Borel-measurable Sets
+
+the Borel Measure is Translation-invariant but not Complete
+
+Moderate Measure
+
+\fist a Borel Measure always restricts to a \emph{Valuation}
+(\S\ref{sec:domain_valuation})
+
+
+
+\subsubsection{Regular Borel Measure}\label{sec:regualr_borel}\hfill
+
+\paragraph{Radon Measure}\label{sec:radon_measure}\hfill
+
+both Regular and Locally Finite (\S\ref{sec:locally_finite_measure})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Locally Finite Measure}\label{sec:locally_finite_measure}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Similarity Measure}\label{sec:similarity_measure}
+% ------------------------------------------------------------------------------
+
+\fist cf. Similarity Transformation (\S\ref{sec:similarity_transformation})
+
+Cross-correlation (Functional Analysis \S\ref{sec:cross_correlation})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Cylinder Set Measure}\label{sec:cylinder_set_measure}
+% ------------------------------------------------------------------------------
+
+kind of prototype for a Measure on Infinite-dimensional Vector Spaces
+(\S\ref{sec:infinite_dimensional_vectorspace})
+
+
+
+\subsubsection{Wiener Measure}\label{sec:wiener_measure}\hfill
+
+the collection of Functions that are Differentiable at a single point of
+$[0,1]$ has Wiener Measure $0$, even when taking Finite-dimensional ``slices''
+of the Vector Space of Continuous Functions $C([0,1];\reals)$, in the sense
+that the Nowhere-differentiable Functions (\S\ref{sec:nowhere_differentiable})
+form a Prevalent Subset (\S\ref{sec:prevalent_set}) of $C([0,1]; \reals)$
 
 
 
@@ -328,128 +588,42 @@ $\cat{Prob}$ and these Morphisms are \emph{Random Variables}
 
 
 
-% ------------------------------------------------------------------------------
-\subsection{$\sigma$-finite Measure}\label{sec:sigma_finite}
-% ------------------------------------------------------------------------------
-
-$(X,\Sigma,\mu)$ is \emph{$\sigma$-finite} if there exists a Sequence
-$(E_i)_{i \geq 1}$ in $M$ such that $\bigcup_{i} E_i = X$ and
-$\mu(E_i) \leq \infty$.
-
-
-
-\subsubsection{Counting Measure}\label{sec:counting_measure}
-
-$\mu(A) = |A|$ for $A \subset \nats$
-
-
-
-\subsubsection{Lebesgue Measure}\label{sec:lebesgue_measure}
-
-\emph{$n$-dimensional Volume}
-
-Measure of Subsets of $\reals$
-
-$m((a,b)) = b - a$
-
-\emph{Lebesgue Measurable}
-
-if the Axiom of Choice is accepted, according to the \emph{Vitali Theorem},
-there are Uncountably many \emph{Vitali Sets} which are not Lebesgue Measurable
-
-\emph{Solovay Model}: assuming the existence of an \emph{Inaccessible Cardinal}
-(\S\ref{sec:inaccessible_cardinal}), a Model of ZF Set Theory without the Axiom
-of Choice (but the Axiom of Countable choice holds) in which all Sets of Real
-Numbers are Lebesgue Measurable
-
-Lebesgue Outer Measure (\S\ref{sec:lebesgue_outer_measure})
-
-cf. Lebesgue Integral (\S\ref{sec:lebesgue_integral})
-
-a Bounded Function (\S\ref{sec:bounded_function}) on a Compact Interval $[a,b]$
-is Riemann Integrable (\S\ref{sec:integrable_function}) if and only if it is
-Continuous (\S\ref{sec:continuous_function}) ``Almost Everywhere'', i.e. Set of
-Points of Discontinuity has Measure Zero
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Locally Finite Measure}\label{sec:locally_finite_measure}
-% ------------------------------------------------------------------------------
-
-% ------------------------------------------------------------------------------
-\subsection{Borel Measure}\label{sec:borel_measure}
-% ------------------------------------------------------------------------------
-
-any Measure defined on the Borel Sets of a Borel Algebra
-(\S\ref{sec:borel_algebra})
-
-Moderate Measure
-
-
-
-\subsubsection{Regular Borel Measure}\label{sec:regualr_borel}\hfill
-
-\paragraph{Radon Measure}\label{sec:radon_measure}\hfill
-
-both Regular and Locally Finite (\S\ref{sec:locally_finite_measure})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Similarity Measure}\label{sec:similarity_measure}
-% ------------------------------------------------------------------------------
-
-\fist cf. Similarity Transformation (\S\ref{sec:similarity_transformation})
-
-Cross-correlation (Functional Analysis \S\ref{sec:cross_correlation})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Outer Measure}\label{sec:outer_measure}
-% ------------------------------------------------------------------------------
-
-\subsubsection{Lebesgue Outer Measure}\label{sec:lebesgue_outer_measure}
-
-Lebesgue Measure (\S\ref{sec:lebesgue_measure})
-
-
-
-\subsubsection{Hausdorff Measure}\label{sec:hausdorff_measure}
-
-\fist Geometric Measure Theory (\S\ref{sec:geometric_measure_theory})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Cylinder Set Measure}\label{sec:cylinder_set_measure}
-% ------------------------------------------------------------------------------
-
-kind of prototype for a Measure on Infinite-dimensional Vector Spaces
-(\S\ref{sec:infinite_dimensional_vectorspace})
-
-
-
-\subsubsection{Wiener Measure}\label{sec:wiener_measure}\hfill
-
-the collection of Functions that are Differentiable at a single point of
-$[0,1]$ has Wiener Measure $0$, even when taking Finite-dimensional ``slices''
-of the Vector Space of Continuous Functions $C([0,1];\reals)$, in the sense
-that the Nowhere-differentiable Functions (\S\ref{sec:nowhere_differentiable})
-form a Prevalent Subset (\S\ref{sec:prevalent_set}) of $C([0,1]; \reals)$
-
-
-
 % ==============================================================================
-\section{Measurable Set}\label{sec:measurable_set}
+\section{Measure Space}\label{sec:measure_space}
 % ==============================================================================
 
-Measurable Sets on the Real Line are ``iterated'' Countable Unions and
-Intersections of Borel Sets (\S\ref{sec:borel_set})
+$(X,\Sigma,\mu)$
 
-Solovay's Model: all Subsets of the Reals are Measurable (excluding Uncountable
-Choice)
+\fist cf. \emph{Measureable Space} (\S\ref{sec:measureable_space}) -- a Set
+together $X$ with a $\sigma$-algebra $\Sigma$ on the Set: $(X,\Sigma)$
+
+Abstract Axiomatic Structure needed to define a Theory of \emph{Integration}
+(\S\ref{sec:integral_calculus})
+
+cf. \emph{Metric Spaces} (\S\ref{sec:metric_space}) -- Abstract Axiomatic
+Structure needed to define Theory of \emph{Differentiation}
+(\S\ref{sec:differential_calculus})
+
+A Measure Space with a Probability Measure (\S\ref{sec:probability_measure}) is
+a \emph{Probability Space} (\S\ref{sec:probability_space}). A Probability
+Measure is required to assign a value of $1$ to the entire Probability Space.
+
+For $E,F \in \Sigma$:
+\[
+  \mu(E) = \mu(E \cap F) + \mu(E \cap F^c)
+\]
+
+For $E,F \in \Sigma$ such that $F \subset E$:
+\[
+  \mu(F) \leq \mu(E)
+\]
+
+Countable Additivity (or $\sigma$-additivity): %FIXME
+
+For $E_i \in \Sigma$ (Countable Collections):
+\[
+  \mu(\bigcup_i E_i) \leq \sum_i \mu(E_i)
+\]
 
 
 
