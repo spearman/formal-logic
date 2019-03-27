@@ -630,515 +630,14 @@ Value $1$ to the entire Measure Space (making it a Probability Space).
 
 cf. \emph{Probability} (\S\ref{sec:probability})
 
+\fist a \emph{Probability Distribution} (\S\ref{sec:probability_distribution})
+is the Pushforward Measure (\S\ref{sec:pushforward_measure}) of a Random
+Variable (\S\ref{sec:random_variable})
+
 
 
 \subsubsection{Probability Measure Function}
 \label{sec:probability_measure_function}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Probability Distribution}\label{sec:probability_distribution}
-% ------------------------------------------------------------------------------
-
-Mathematical Function providing the Probabilities (\S\ref{sec:probability}) of
-Occurrence of ``Outcomes''
-
-Probability Distribution Functions:
-\begin{itemize}
-  \item Probability Mass Function (\S\ref{sec:probability_mass})
-  \item Probability Density Function (\S\ref{sec:pdf})
-  \item Cumulative Distribution Function (CDF \S\ref{sec:cdf})
-\end{itemize}
-See also Probability Measure Function
-(\S\ref{sec:probability_measure_function}), Distribution Function (Measure
-Theory \S\ref{sec:distribution_function}), Distribution (Analysis
-\S\ref{sec:distribution}), Frequency Distribution
-(\S\ref{sec:frequency_distribution})
-
-a Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a
-Sample Space (\S\ref{sec:sample_space}) $S$ together with a Set of Probability
-Distributions $\mathcal{P}$ on $S$
-
-\fist Random Graphs (\S\ref{sec:random_graph}) -- Probability Distribution over
-a Graph
-
-collapsing a Probability Distribution (Measure) of Probability Distrubtions to a
-Probability Distribution is called the ``Giry Monad'' (TODO)
-
-(wiki): a Statistical (or Population) Parameter
-(\S\ref{sec:population_parameter}) is a ``quantity'' that indexes a Family of
-Probability Distributions
-
-the Entropy (\S\ref{sec:entropy}) of a Distribution is the Mean number
-of Bits-per-symbols in an Optimal Encoding (\S\ref{sec:encoding}) --
-\url{https://golem.ph.utexas.edu/category/2017/02/functional_equations_iii_expla.html}
-
-Cross Entropy (\S\ref{sec:cross_entropy}) measures the average number of Bits
-needed to identify an Event drawn from an underlying Set of Events under two
-Probability Distributions $p$ and $q$, if the ``coding scheme'' is optimized for
-an ``unnatural'' Distribution $q$ rather than a ``true'' Distribution $p$
-%FIXME: clarify
-
-\emph{Principle of Maximum Entropy}; cf. Axiom of Randomness in Frequentist
-Probability (Von Mises57)
-
-(Witten18): Quantum Information Theory doesn't have a good analog to defining a
-Conditional Probability Distribution (\S\ref{sec:conditional_probability}) as in
-Classical Information Theory, but does have an analog of \emph{Strong
-  Subadditivity of Entropy}
-
-the Quantum analog of a Classical Probability Distribution is a \emph{Density
-  Matrix} (\S\ref{sec:density_matrix}), a representation of the Linear
-\emph{Density Operator} \S\ref{sec:density_operator})-- a Self-adjoint
-(Hermitian), Positive Semi-definite, Trace One, and may be Infinite-dimensional
-Matrix; every Matrix with these properties can be ``Purified'', meaning that it
-is the Density Matrix of \emph{some} Pure State on some ``Bipartite'' System
-$AB$; there is no ``classical analog'' for Purification, i.e. there is no way to
-make Probability Distribution ``pure'' (one outcome with Probability $1$) by
-adding more Variables
-
-
-
-\subsubsection{Probability Mass Function}\label{sec:probability_mass}
-
-(or \emph{Probability Function})
-
-for a Discrete Random Variable (\S\ref{sec:discrete_random_variable})
-$X$:
-\begin{enumerate}
-  \item $f(x) \geq 0$
-  \item $\sum_x f(x) = 1$
-  \item $P(X = x) = f(x)$
-\end{enumerate}
-
-\fist \emph{Probability Generating Function}
-(\S\ref{sec:probability_generating_function}): (Ordinary) Generating Function
-(\S\ref{sec:generating_function})--i.e. Formal Power Series representation--of
-the Probability Mass Function of a Discrete Random Variable
-
-for a Probability Mass Function that is Symmetric around a certain point, that
-point is the Expected Value (\S\ref{sec:expected_value})
-
-
-
-\subsubsection{Probability Density Function}\label{sec:pdf}
-
-\emph{Probability Density Function} $f(x)$
-
-for a Continuous Random Variable (\S\ref{sec:continuous_random_variable}) $X$:
-\begin{enumerate}
-  \item $\forall x \in \reals, f(x) \geq 0$
-  \item $\int\limits_{-\infty}^{\infty} f(x) dx = 1$
-  \item $P (a < X < b) = \int\limits_a^b f(x) dx$
-\end{enumerate}
-
-for a Random Variable that admits a Probability Density Function, the
-Characteristic Function (\S\ref{sec:characteristic_function}) of the Random
-Variable is the Fourier Transform (\S\ref{sec:fourier_transform}) of its
-Probability Density Function and vice versa
-
-\fist Probability Amplitude (Quantum Systems \S\ref{sec:probability_amplitude}):
-Complex Number with Modulus Squared representing a Probability Density
-
-
-
-\paragraph{Normalizing Constant}\label{sec:normalizing_constant}\hfill
-
-used to reduce any Probability Function to a Probability Density Function with
-total Probability $1$
-
-
-
-\subsubsection{Cumulative Distribution Function (CDF)}\label{sec:cdf}
-
-Area under Probability Density Function
-
-cf. Distribution Function (Measure Theory \S\ref{sec:distribution_function})
-
-$\forall x \in \reals, F_X(x) = P(X \leq x) = \int\limits_{-\infty}^x
-f(t) dt$
-
-
-
-\subsubsection{Moment}\label{sec:moment}
-
-(TODO)
-
-Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment
-
-Variance (\S\ref{sec:variance}) -- Second Central Moment
-
-Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
-
-Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
-``heaviness'' of the tail of a Distribution
-
-\fist Moment-generating Function (\S\ref{sec:moment_generating_function})
-
-
-
-\subsubsection{Discrete Probability Distribution}
-\label{sec:discrete_probability}
-
-\paragraph{Binomial Distribution}\label{sec:binomial_distribution}\hfill
-
-Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
-$p \in [0,1]$:
-\[
-  X \sim B(n,p)
-\]
-
-Probability of getting exactly $k$ ``successes'' in $n$ ``trials'' where the
-Probability of ``success'' is $p$:
-\[
-  P(k,n,p) = \binom{n}{k}p^k(1-p)^{n-k}
-\]
-
-Binomial Random Variable (\S\ref{sec:binomial_random_variable})
-
-Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
-
-generalized as Multinomial Distributions (\S\ref{sec:multinomial_distribution})
-
-Mean $\mu = n p$
-
-Variance $\sigma^2 = n p q$
-
-Sample Proportion %FIXME
-
-
-
-\subparagraph{Bernoulli Distribution}\label{sec:bernoulli_distribution}\hfill
-
-$n = 1$
-
-generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
-
-
-
-\subparagraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
-
-$b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
-
-
-
-\subparagraph{Normal Approximation}\label{sec:normal_approximation}\hfill
-
-For Binomial Random Variable $X$ with Mean $\mu = np$ and Variance
-$\sigma^2 = npq$, then:
-\[
-  Z = \frac{X - np}{\sqrt{npq}}
-\]
-as $n \rightarrow \infty$ is the Standard Normal Distribution
-(\S\ref{sec:normal_distribution}) $n(Z;0,1)$
-
-
-
-\paragraph{Multinomial Distribution}\label{sec:multinomial_distribution}\hfill
-
-generalization of Binomial Distribution (\S\ref{sec:binomial_distribution})
-
-$k$ Outcomes $E_1, E_2, \ldots, E_k$
-
-Probabilities $p_1, p_2, \ldots, p_k$
-
-Probability Distribution of $x_1, x_2, \ldots, x_k$ number of
-Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
-\[
-  f(x_1, x_2, \ldots, x_k) = \binom{n}{x_1, x_2, \ldots, x_k} =
-  p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
-\]
-and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
-
-
-
-\subparagraph{Categorical Distribution}\label{sec:categorical_distribution}
-\hfill
-
-generalization of Bernoulli Distribution (\S\ref{sec:bernoulli_distribution})
-
-
-
-\subparagraph{Softmax Function}\label{sec:softmax}
-\hfill
-
-or \emph{Normalized Exponential Function}
-
-generalization of Logistic Function (\S\ref{sec:softmax}); the Logistic Function
-is the Derivative of Softplus --TODO
-
-output can be used to represent a Categorical Distribution
-
-often used as final layer of a Neural Network-based Classifier
-
-
-
-\paragraph{Poisson Distribution}\label{sec:poisson_distribution}\hfill
-
-Poisson Process (\S\ref{sec:poisson_process})
-
-$P(x; \lambda t) = \frac{e^{-\lambda t} (\lambda t)^x}{x!}$
-where $\lambda$ is the average number of outcomes per unit time
-
-
-
-\paragraph{Geometric Distribution}\label{sec:geometric_distribution}
-\hfill
-
-\paragraph{Hypergeometric Distribution}\hfill
-\label{sec:hypergeometric_distribution}
-
-$h(x; N, n, k) = \frac{\binom{k}{x} \binom{N-k}{n-x}}{\binom{N}{n}}$
-
-Mean $\mu = \frac{nk}{N}$
-
-Variance $\sigma^2 = \frac{N-n}{N-1} n \frac{k}{N}(1 - \frac{k}{N})$
-
-
-
-\subparagraph{Multivariate Hypergeometric Distribution}\hfill
-\label{sec:multivariate_hypergeometric}
-
-
-
-\paragraph{Parabolic Fractal Distribution}
-\label{sec:parabolic_fractal_distribution}\hfill
-
-\paragraph{Discrete Power Law Distribution}
-\label{sec:discrete_power_law_distribution}\hfill
-
-\fist Continuous Power Law Distributions
-(\S\ref{sec:continuous_power_law_distribution})
-
-
-
-\subparagraph{Zipf Distribution}\label{sec:zipf_distribution}\hfill
-
-\subparagraph{Zeta Distribution}\label{sec:zeta_distribution}\hfill
-
-Normalization of the Zipf Distribution
-
-\subparagraph{Yule-Simon Distribution}
-\label{sec:yule_simon_distribution}\hfill
-
-
-
-\subsubsection{Continuous Probability Distribution}
-\label{sec:continuous_probability}
-
-\fist Discrete Power Law Distributions
-(\S\ref{sec:discrete_power_law_distribution})
-
-
-
-\paragraph{Normal Distribution}\label{sec:normal_distribution}\hfill
-
-(or \emph{Gaussian Distribution})
-
-\[
-  n (x; \mu, \sigma) =
-  \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
-\]
-
-\fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
-Infinite-dimensional generalizations of Multivariate Normal Distributions
-
-2018 - Eric Jang
-- \emph{Normalizing Flows Tutorial}
-- \url{https://blog.evjang.com/2018/01/nf1.html}
-
-
-
-\subparagraph{Standard Normal Distribution}\label{sec:standard_normal}\hfill
-
-Mean $\mu = 0$
-
-Variance $\sigma^2 = 1$
-
-
-
-\paragraph{Log-normal Distribution}\label{sec:lognormal_distribution}\hfill
-
-\paragraph{Gamma Distribution}\label{sec:gamma_distribution}\hfill
-
-Gamma Function (\S\ref{sec:gamma_function})
-
-Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
-> 0$:
-\[
-  f(x; \alpha, \beta) =
-  \begin{cases}
-  \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}     & \quad x > 0 \\
-  0     & \quad\text{else} \\
-  \end{cases}
-\]
-
-Mean $\mu = \alpha \beta$
-
-Variance $\sigma^2 = \alpha \beta^2$
-
-
-
-\subparagraph{Exponential Distribution}\label{sec:exponential_squared}\hfill
-
-Continuous Random Variable $X$ with parameter $\beta > 0$:
-\[
-  f(x; \beta) =
-  \begin{cases}
-  \frac{1}{\beta} e^{\sfrac{-x}{\beta}}     & \quad x > 0 \\
-  0     & \quad\text{else} \\
-  \end{cases}
-\]
-
-
-
-\subparagraph{$\chi^2$ Distribution}\label{sec:chi_squared}\hfill
-
-Non-symmetric
-
-\[
-  f(x; v) =
-  \begin{cases}
-  \frac{1}{2^{\sfrac{v}{2}}\Gamma(\sfrac{v}{2})} x^{\sfrac{v}{2-1}} e^{\sfrac{-x}{2}}     & \quad x > 0 \\
-  0     & \quad\text{else} \\
-  \end{cases}
-\]
-
-
-
-\paragraph{Continuous Power Law Distribution}
-\label{sec:continuous_power_law_distribution}\hfill
-
-Scale Invariance (\S\ref{sec:scale_invariance})
-
-
-
-\subparagraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
-
-prototypical Power Law Distribution
-
-
-
-\paragraph{$t$-distribution}\label{sec:t_distribution}\hfill
-
-(or \emph{Student's $t$-distribution})
-
-
-
-\paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
-
-or \emph{Cauchy-Lorentz Distribution}
-
-
-
-\subsubsection{Symmetric Probability Distribution}
-\label{sec:symmetric_probability}
-
-\paragraph{Uniform Distribution}\label{sec:uniform_distribution}\hfill
-
-for a Finite Sample Space $\Omega$:
-\[
-  P(A) = \frac{\|A\|}{\|\Omega\|}
-\]
-
-a Uniform Distribution is defined by a rectangle formed on the interval Interval
-$[min,max]$ such that the area is $1$
-
-
-
-\subsubsection{Joint Probability Distribution}\label{sec:joint_probability}
-
-$f(x,y,\ldots)$ for two or more Random Variables $X,Y,\ldots$
-
-Discrete Random Variables:
-\begin{enumerate}
-  \item $f(x,y) \geq 0$
-  \item $\sum_x \sum_y f(x,y) = 1$
-  \item $P(X = x, Y = y) = f(x,y)$
-\end{enumerate}
-
-Continuous Random Variables:
-\begin{enumerate}
-  \item $\forall (x,y) \in X \times Y, f(x,y) \geq 0$
-  \item $\int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
-    f(x,y) dx dy = 1$
-  \item $P[(X,Y) \in B] = \iint\limits_B f(x,y) dA$
-\end{enumerate}
-
-Conditional Independence (\S\ref{sec:conditional_independence}) happens when
-the Joint Probability Distribution is the Product of the individual Probability
-Distributions
---\url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
-
-\fist a Stationary Process (\S\ref{sec:stationary_process}) is a Stochastic
-Process whose Unconditional Joint Probability Distribution is unchanged in Time
-
-
-
-\paragraph{Kalman Filter}\label{sec:kalman_filter}\hfill
-
-a series of papers on ``Kalman Folding'':
-\url{http://vixra.org/author/brian_beckman}
-
-
-
-\subsubsection{Marginal Distribution}\label{sec:marginal_distribution}
-
-\subsubsection{Conditional Distribution}
-\label{sec:conditional_distribution}
-
-\subsubsection{Asymptotic Distribution}
-\label{sec:asymptotic_distribution}
-
-\subsubsection{Sampling Distribution}\label{sec:sampling_distribution}
-
-Probability Distribution of a Statistic (\S\ref{sec:statistic})
-
-Statistical Inference (\S\ref{sec:inferential_statistics})
-
-Standard Error (\S\ref{sec:standard_error})
-
-
-
-\subsubsection{Tweedie Distribution}\label{sec:tweedie_distribution}
-
-(wiki): \emph{Tweedie Convergence Theorem}: describes the Convergence of certain
-Statistical Processes towards the Family of Statistical Models known as
-\emph{Tweedie Distributions}; Variance-to-Mean Power Law (TODO: xref); cf.
-Taylor's Power Law, \emph{Fluctuation Scaling}; alternative paradigm to explain
-Power Law manifestations attributed to ``Self-organized Criticality''
-(SOC \S\ref{sec:soc})
-
-Pink ($1/f$) Noise
-
-\fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
-Sequential (Time Series) data attributed to ``convergence effects'' related to
-the Central Limit Theorem (\S\ref{sec:central_limit}) that have Foci of
-Convergence in the family of Tweedie Exponential Dispersion Models
-
-
-
-\subsubsection{Quasiprobability Distribution}
-\label{sec:quasiprobability_distribution}
-
-relaxation of the Third Kolmogorov Axiom ($\sigma$-additivity
-\S\ref{sec:probability_axioms})
-
-to compensate some Quasiprobability Distributions have regions of Negative
-Probability (\S\ref{sec:negative_probability}) Density, contradicting the First
-Axiom
-
-regions Integrated under them do not represent Probabilities of Mutually
-Exclusive States (\S\ref{sec:mutually_exclusive})
-
-cf. Phase Space (\S\ref{sec:phase_space}) Formulation of Quantum Mechanics:
-Position and Momentum Variables on equal footing in Phase Space (cf.
-Schr\"odinger formulation uses Position \emph{or} Momentum representations)
-
-\fist Time-Frequency Analysis (\S\ref{sec:time_frequency_analysis}): analysis
-of Signals with Time-varying Statistics (cf. Entropy \S\ref{sec:entropy}), e.g.
-Transient Signals (\S\ref{sec:transient})
 
 
 
@@ -1155,6 +654,9 @@ $X : \Omega \rightarrow E$
 Discrete Random Variable (\S\ref{sec:discrete_random_variable})
 
 Continuous Random Variable (\S\ref{sec:continuous_random_variable})
+
+\fist a \emph{Probability Distribution} (\S\ref{sec:probability_distribution})
+is the Pushforward Measure (\S\ref{sec:pushforward_measure}) of $X$
 
 a \emph{Dependence} (Association \S\ref{sec:association}) between two Random
 Variables (``Bivariate Data'') is any ``Statistical Relationship'' (which may
@@ -1217,7 +719,6 @@ for a Function of a Random Variable $Y = g(X)$:
 
 for a PMF that is Symmetric around a certain point, that point is the Expected
 Value
-
 
 
 
@@ -1507,12 +1008,36 @@ extended to the Complex Plane
 \subsection{Discrete Random Variable}\label{sec:discrete_random_variable}
 % ------------------------------------------------------------------------------
 
+\fist Discrete Probability Distributions (\S\ref{sec:discrete_probability})
+
+
+
+\subsubsection{Probability Mass Function}\label{sec:probability_mass}
+
+(or \emph{Probability Function})
+
+for a Discrete Random Variable (\S\ref{sec:discrete_random_variable})
+$X$:
+\begin{enumerate}
+  \item $f(x) \geq 0$
+  \item $\sum_x f(x) = 1$
+  \item $P(X = x) = f(x)$
+\end{enumerate}
+
+\fist characterizes a Discrete Probability Distribution
+(\S\ref{sec:discrete_probability})
+
+for a Probability Mass Function that is Symmetric around a certain point, that
+point is the Expected Value (\S\ref{sec:expected_value})
+
+
+
 \paragraph{Probability Generating Function}
 \label{sec:probability_generating_function}\hfill
 
 (Ordinary) Generating Function (\S\ref{sec:generating_function})--i.e. Formal
-Power Series representation--of the Probability Mass Function
-(\S\ref{sec:probability_mass_function}) of a Discrete Random Variable
+Power Series representation--of the Probability Mass Function of a Discrete
+Random Variable
 
 
 
@@ -1537,6 +1062,536 @@ for $k = 0,1,2, \ldots, n$
 % ------------------------------------------------------------------------------
 
 has Probability $0$ of assuming a particular Value
+
+\fist Continuous Probability Distributions (\S\ref{sec:continuous_probability})
+
+
+\subsubsection{Probability Density Function}\label{sec:pdf}
+
+\emph{Probability Density Function} $f(x)$
+
+for a Continuous Random Variable $X$:
+\begin{enumerate}
+  \item $\forall x \in \reals, f(x) \geq 0$
+  \item $\int\limits_{-\infty}^{\infty} f(x) dx = 1$
+  \item $P (a < X < b) = \int\limits_a^b f(x) dx$
+\end{enumerate}
+
+\fist characterizes a Continuous Probability Distribution
+(\S\ref{sec:continuous_probability})
+
+for a Random Variable that admits a Probability Density Function, the
+Characteristic Function (\S\ref{sec:characteristic_function}) of the Random
+Variable is the Fourier Transform (\S\ref{sec:fourier_transform}) of its
+Probability Density Function and vice versa
+
+\fist Probability Amplitude (Quantum Systems \S\ref{sec:probability_amplitude}):
+Complex Number with Modulus Squared representing a Probability Density
+
+
+
+\paragraph{Normalizing Constant}\label{sec:normalizing_constant}\hfill
+
+used to reduce any Probability Function to a Probability Density Function with
+total Probability $1$
+
+
+
+% ==============================================================================
+\section{Probability Distribution}\label{sec:probability_distribution}
+% ==============================================================================
+
+the Pushforward Measure (\S\ref{sec:pushforward_measure}) of a Random Variable
+(\S\ref{sec:random_variable})
+
+cf. Probability Measure (\S\ref{sec:probability_measure})
+
+Probability Distribution Functions:
+\begin{itemize}
+  \item Probability Mass Function (\S\ref{sec:probability_mass})
+  \item Probability Density Function (\S\ref{sec:pdf})
+  \item Cumulative Distribution Function (CDF \S\ref{sec:cdf})
+\end{itemize}
+See also Probability Measure Function
+(\S\ref{sec:probability_measure_function}), Distribution Function (Measure
+Theory \S\ref{sec:distribution_function}), Distribution (Analysis
+\S\ref{sec:distribution}), Frequency Distribution
+(\S\ref{sec:frequency_distribution})
+
+a Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a
+Sample Space (\S\ref{sec:sample_space}) $S$ together with a Set of Probability
+Distributions $\mathcal{P}$ on $S$
+
+\fist Random Graphs (\S\ref{sec:random_graph}) -- Probability Distribution over
+a Graph
+
+collapsing a Probability Distribution (Measure) of Probability Distrubtions to a
+Probability Distribution is called the ``Giry Monad'' (TODO)
+
+(wiki): a Statistical (or Population) Parameter
+(\S\ref{sec:population_parameter}) is a ``quantity'' that indexes a Family of
+Probability Distributions
+
+the Entropy (\S\ref{sec:entropy}) of a Distribution is the Mean number
+of Bits-per-symbols in an Optimal Encoding (\S\ref{sec:encoding}) --
+\url{https://golem.ph.utexas.edu/category/2017/02/functional_equations_iii_expla.html}
+
+Cross Entropy (\S\ref{sec:cross_entropy}) measures the average number of Bits
+needed to identify an Event drawn from an underlying Set of Events under two
+Probability Distributions $p$ and $q$, if the ``coding scheme'' is optimized for
+an ``unnatural'' Distribution $q$ rather than a ``true'' Distribution $p$
+%FIXME: clarify
+
+\emph{Principle of Maximum Entropy}; cf. Axiom of Randomness in Frequentist
+Probability (Von Mises57)
+
+(Witten18): Quantum Information Theory doesn't have a good analog to defining a
+Conditional Probability Distribution (\S\ref{sec:conditional_probability}) as in
+Classical Information Theory, but does have an analog of \emph{Strong
+  Subadditivity of Entropy}
+
+the Quantum analog of a Classical Probability Distribution is a \emph{Density
+  Matrix} (\S\ref{sec:density_matrix}), a representation of the Linear
+\emph{Density Operator} \S\ref{sec:density_operator})-- a Self-adjoint
+(Hermitian), Positive Semi-definite, Trace One, and may be Infinite-dimensional
+Matrix; every Matrix with these properties can be ``Purified'', meaning that it
+is the Density Matrix of \emph{some} Pure State on some ``Bipartite'' System
+$AB$; there is no ``classical analog'' for Purification, i.e. there is no way to
+make Probability Distribution ``pure'' (one outcome with Probability $1$) by
+adding more Variables
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Moment}\label{sec:moment}
+% ------------------------------------------------------------------------------
+
+(TODO)
+
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment
+
+Variance (\S\ref{sec:variance}) -- Second Central Moment
+
+Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
+
+Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
+``heaviness'' of the tail of a Distribution
+
+\fist Moment-generating Function (\S\ref{sec:moment_generating_function})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Cumulative Distribution Function (CDF)}\label{sec:cdf}
+% ------------------------------------------------------------------------------
+
+Area under Probability Density Function
+
+cf. Distribution Function (Measure Theory \S\ref{sec:distribution_function})
+
+$\forall x \in \reals, F_X(x) = P(X \leq x) = \int\limits_{-\infty}^x
+f(t) dt$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Discrete Probability Distribution}
+\label{sec:discrete_probability}
+% ------------------------------------------------------------------------------
+
+Probability Distribution of a Discrete Random Variable
+(\S\ref{sec:discrete_random_variable})
+
+characterized by a Probability Mass Function (\S\ref{sec:probability_mass})
+
+Cumulative Distribution Function (\S\ref{sec:cdf}) increases only by Jump
+Discontinuities
+
+
+
+\subsubsection{Binomial Distribution}\label{sec:binomial_distribution}
+
+Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
+$p \in [0,1]$:
+\[
+  X \sim B(n,p)
+\]
+
+Probability of getting exactly $k$ ``successes'' in $n$ ``trials'' where the
+Probability of ``success'' is $p$:
+\[
+  P(k,n,p) = \binom{n}{k}p^k(1-p)^{n-k}
+\]
+
+Binomial Random Variable (\S\ref{sec:binomial_random_variable})
+
+Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
+
+generalized as Multinomial Distributions (\S\ref{sec:multinomial_distribution})
+
+Mean $\mu = n p$
+
+Variance $\sigma^2 = n p q$
+
+Sample Proportion %FIXME
+
+
+
+\paragraph{Bernoulli Distribution}\label{sec:bernoulli_distribution}\hfill
+
+$n = 1$
+
+generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
+
+
+
+\paragraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
+
+$b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
+
+
+
+\paragraph{Normal Approximation}\label{sec:normal_approximation}\hfill
+
+For Binomial Random Variable $X$ with Mean $\mu = np$ and Variance
+$\sigma^2 = npq$, then:
+\[
+  Z = \frac{X - np}{\sqrt{npq}}
+\]
+as $n \rightarrow \infty$ is the Standard Normal Distribution
+(\S\ref{sec:normal_distribution}) $n(Z;0,1)$
+
+
+
+\subsubsection{Multinomial Distribution}\label{sec:multinomial_distribution}
+
+generalization of Binomial Distribution (\S\ref{sec:binomial_distribution})
+
+$k$ Outcomes $E_1, E_2, \ldots, E_k$
+
+Probabilities $p_1, p_2, \ldots, p_k$
+
+Probability Distribution of $x_1, x_2, \ldots, x_k$ number of
+Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
+\[
+  f(x_1, x_2, \ldots, x_k) = \binom{n}{x_1, x_2, \ldots, x_k} =
+  p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
+\]
+and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
+
+
+
+\paragraph{Categorical Distribution}\label{sec:categorical_distribution}
+\hfill
+
+generalization of Bernoulli Distribution (\S\ref{sec:bernoulli_distribution})
+
+
+
+\paragraph{Softmax Function}\label{sec:softmax}
+\hfill
+
+or \emph{Normalized Exponential Function}
+
+generalization of Logistic Function (\S\ref{sec:softmax}); the Logistic Function
+is the Derivative of Softplus --TODO
+
+output can be used to represent a Categorical Distribution
+
+often used as final layer of a Neural Network-based Classifier
+
+
+
+\subsubsection{Poisson Distribution}\label{sec:poisson_distribution}
+
+Poisson Process (\S\ref{sec:poisson_process})
+
+$P(x; \lambda t) = \frac{e^{-\lambda t} (\lambda t)^x}{x!}$
+where $\lambda$ is the average number of outcomes per unit time
+
+
+
+\subsubsection{Geometric Distribution}\label{sec:geometric_distribution}
+
+\subsubsection{Hypergeometric Distribution}
+\label{sec:hypergeometric_distribution}
+
+$h(x; N, n, k) = \frac{\binom{k}{x} \binom{N-k}{n-x}}{\binom{N}{n}}$
+
+Mean $\mu = \frac{nk}{N}$
+
+Variance $\sigma^2 = \frac{N-n}{N-1} n \frac{k}{N}(1 - \frac{k}{N})$
+
+
+
+\paragraph{Multivariate Hypergeometric Distribution}
+\label{sec:multivariate_hypergeometric}\hfill
+
+
+
+\subsubsection{Parabolic Fractal Distribution}
+\label{sec:parabolic_fractal_distribution}
+
+\subsubsection{Discrete Power Law Distribution}
+\label{sec:discrete_power_law_distribution}
+
+\fist Continuous Power Law Distributions
+(\S\ref{sec:continuous_power_law_distribution})
+
+
+
+\paragraph{Zipf Distribution}\label{sec:zipf_distribution}\hfill
+
+\paragraph{Zeta Distribution}\label{sec:zeta_distribution}\hfill
+
+Normalization of the Zipf Distribution
+
+\paragraph{Yule-Simon Distribution}
+\label{sec:yule_simon_distribution}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Continuous Probability Distribution}
+\label{sec:continuous_probability}
+% ------------------------------------------------------------------------------
+
+Probability Distribution of a Continuous Random Variable
+(\S\ref{sec:continuous_random_variable})
+
+characterized by a Probability Density Function
+(\S\ref{sec:probability_density})
+
+has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
+
+\fist Discrete Power Law Distributions
+(\S\ref{sec:discrete_power_law_distribution})
+
+
+
+\subsubsection{Normal Distribution}\label{sec:normal_distribution}
+
+(or \emph{Gaussian Distribution})
+
+\[
+  n (x; \mu, \sigma) =
+  \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
+\]
+
+\fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
+Infinite-dimensional generalizations of Multivariate Normal Distributions
+
+2018 - Eric Jang
+- \emph{Normalizing Flows Tutorial}
+- \url{https://blog.evjang.com/2018/01/nf1.html}
+
+
+
+\paragraph{Standard Normal Distribution}\label{sec:standard_normal}\hfill
+
+Mean $\mu = 0$
+
+Variance $\sigma^2 = 1$
+
+
+
+\subsubsection{Log-normal Distribution}\label{sec:lognormal_distribution}
+
+\subsubsection{Gamma Distribution}\label{sec:gamma_distribution}
+
+Gamma Function (\S\ref{sec:gamma_function})
+
+Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
+> 0$:
+\[
+  f(x; \alpha, \beta) =
+  \begin{cases}
+  \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}     & \quad x > 0 \\
+  0     & \quad\text{else} \\
+  \end{cases}
+\]
+
+Mean $\mu = \alpha \beta$
+
+Variance $\sigma^2 = \alpha \beta^2$
+
+
+
+\paragraph{Exponential Distribution}\label{sec:exponential_squared}\hfill
+
+Continuous Random Variable $X$ with parameter $\beta > 0$:
+\[
+  f(x; \beta) =
+  \begin{cases}
+  \frac{1}{\beta} e^{\sfrac{-x}{\beta}}     & \quad x > 0 \\
+  0     & \quad\text{else} \\
+  \end{cases}
+\]
+
+
+
+\paragraph{$\chi^2$ Distribution}\label{sec:chi_squared}\hfill
+
+Non-symmetric
+
+\[
+  f(x; v) =
+  \begin{cases}
+  \frac{1}{2^{\sfrac{v}{2}}\Gamma(\sfrac{v}{2})} x^{\sfrac{v}{2-1}} e^{\sfrac{-x}{2}}     & \quad x > 0 \\
+  0     & \quad\text{else} \\
+  \end{cases}
+\]
+
+
+
+\subsubsection{Continuous Power Law Distribution}
+\label{sec:continuous_power_law_distribution}
+
+Scale Invariance (\S\ref{sec:scale_invariance})
+
+
+
+\paragraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
+
+prototypical Power Law Distribution
+
+
+
+\subsubsection{$t$-distribution}\label{sec:t_distribution}
+
+(or \emph{Student's $t$-distribution})
+
+
+
+\subsubsection{Cauchy Distribution}\label{sec:cauchy_distribution}
+
+or \emph{Cauchy-Lorentz Distribution}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Symmetric Probability Distribution}
+\label{sec:symmetric_probability}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Uniform Distribution}\label{sec:uniform_distribution}
+
+for a Finite Sample Space $\Omega$:
+\[
+  P(A) = \frac{\|A\|}{\|\Omega\|}
+\]
+
+a Uniform Distribution is defined by a rectangle formed on the interval Interval
+$[min,max]$ such that the area is $1$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Joint Probability Distribution}\label{sec:joint_probability}
+% ------------------------------------------------------------------------------
+
+$f(x,y,\ldots)$ for two or more Random Variables $X,Y,\ldots$
+
+Discrete Random Variables:
+\begin{enumerate}
+  \item $f(x,y) \geq 0$
+  \item $\sum_x \sum_y f(x,y) = 1$
+  \item $P(X = x, Y = y) = f(x,y)$
+\end{enumerate}
+
+Continuous Random Variables:
+\begin{enumerate}
+  \item $\forall (x,y) \in X \times Y, f(x,y) \geq 0$
+  \item $\int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
+    f(x,y) dx dy = 1$
+  \item $P[(X,Y) \in B] = \iint\limits_B f(x,y) dA$
+\end{enumerate}
+
+Conditional Independence (\S\ref{sec:conditional_independence}) happens when
+the Joint Probability Distribution is the Product of the individual Probability
+Distributions
+--\url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
+
+\fist a Stationary Process (\S\ref{sec:stationary_process}) is a Stochastic
+Process whose Unconditional Joint Probability Distribution is unchanged in Time
+
+
+
+\subsubsection{Kalman Filter}\label{sec:kalman_filter}\hfill
+
+a series of papers on ``Kalman Folding'':
+\url{http://vixra.org/author/brian_beckman}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Marginal Distribution}\label{sec:marginal_distribution}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Conditional Distribution}
+\label{sec:conditional_distribution}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Asymptotic Distribution}
+\label{sec:asymptotic_distribution}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Sampling Distribution}\label{sec:sampling_distribution}
+% ------------------------------------------------------------------------------
+
+Probability Distribution of a Statistic (\S\ref{sec:statistic})
+
+Statistical Inference (\S\ref{sec:inferential_statistics})
+
+Standard Error (\S\ref{sec:standard_error})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Tweedie Distribution}\label{sec:tweedie_distribution}
+% ------------------------------------------------------------------------------
+
+(wiki): \emph{Tweedie Convergence Theorem}: describes the Convergence of certain
+Statistical Processes towards the Family of Statistical Models known as
+\emph{Tweedie Distributions}; Variance-to-Mean Power Law (TODO: xref); cf.
+Taylor's Power Law, \emph{Fluctuation Scaling}; alternative paradigm to explain
+Power Law manifestations attributed to ``Self-organized Criticality''
+(SOC \S\ref{sec:soc})
+
+Pink ($1/f$) Noise
+
+\fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
+Sequential (Time Series) data attributed to ``convergence effects'' related to
+the Central Limit Theorem (\S\ref{sec:central_limit}) that have Foci of
+Convergence in the family of Tweedie Exponential Dispersion Models
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Quasiprobability Distribution}
+\label{sec:quasiprobability_distribution}
+% ------------------------------------------------------------------------------
+
+relaxation of the Third Kolmogorov Axiom ($\sigma$-additivity
+\S\ref{sec:probability_axioms})
+
+to compensate some Quasiprobability Distributions have regions of Negative
+Probability (\S\ref{sec:negative_probability}) Density, contradicting the First
+Axiom
+
+regions Integrated under them do not represent Probabilities of Mutually
+Exclusive States (\S\ref{sec:mutually_exclusive})
+
+cf. Phase Space (\S\ref{sec:phase_space}) Formulation of Quantum Mechanics:
+Position and Momentum Variables on equal footing in Phase Space (cf.
+Schr\"odinger formulation uses Position \emph{or} Momentum representations)
+
+\fist Time-Frequency Analysis (\S\ref{sec:time_frequency_analysis}): analysis
+of Signals with Time-varying Statistics (cf. Entropy \S\ref{sec:entropy}), e.g.
+Transient Signals (\S\ref{sec:transient})
 
 
 
@@ -2719,6 +2774,8 @@ TDA (R package)
 cf. \emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness}) --
 Universal Test, Universal Sequential Test (Martin-L\"of66)
 
+cf. Quasi-random Sequences (\S\ref{sec:low_discrepancy})
+
 Tests (\S\ref{sec:hypothesis_testing}):
 \begin{itemize}
   \item Frequency test
@@ -2963,6 +3020,9 @@ xref)
 % ------------------------------------------------------------------------------
 
 1980 - Giry - \emph{A Categorical Approach to Probability Theory}
+
+collapsing a Probability Distribution (Measure) of Probability Distrubtions to a
+Probability Distribution is called the ``Giry Monad'' (TODO)
 
 \url{https://ncatlab.org/nlab/show/Giry+monad}
 
