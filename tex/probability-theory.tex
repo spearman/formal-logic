@@ -101,7 +101,7 @@ an individual repetition of a Composed Experiment
 
 
 
-\subsubsection{Binomial Trial}\label{sec:binomial_trial}\hfill
+\subsubsection{Binomial Trial}\label{sec:binomial_trial}
 
 or \emph{Bernoulli Trial}
 
@@ -560,6 +560,9 @@ is the Product of the individual Probability Distributions''
 \subsection{Central Limit Theorem}\label{sec:central_limit}
 % ------------------------------------------------------------------------------
 
+``the Distribution of a Sum of Independent Random Variables can be approximated
+by a Normal Distribution''
+
 $z = \frac{\overline{x} - \mu}{\sfrac{\sigma}{\sqrt{n}}}$ as
 $n \rightarrow \infty$ is $n(z; 0,1)$ %FIXME
 
@@ -697,7 +700,7 @@ MIT 6.041SC Lec. 5 - \url{https://www.youtube.com/watch?v=3MOahpLxj6A}:
 
 Functions of Random Variables are also Random Variables
 
-Probability Mass Function (\S\ref{sec:probability_mass}) $p_X$ assigns
+Probability Mass Function (\S\ref{sec:pmf}) $p_X$ assigns
 Probabilities to Elements of $x \in E$:
 \[
   p_X(x) = P(X = x)
@@ -758,7 +761,7 @@ Probabilities are treated like ``frequencies''
 (Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
 \emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
 
-for a Probability Mass Function (\S\ref{sec:probability_mass}) that is
+for a Probability Mass Function (\S\ref{sec:pmf}) that is
 Symmetric around a certain point, that point is the Expected Value
 
 For Random Variable $X$ with Probability Distribution $f(x)$, the \emph{Expected
@@ -1008,24 +1011,35 @@ extended to the Complex Plane
 \subsection{Discrete Random Variable}\label{sec:discrete_random_variable}
 % ------------------------------------------------------------------------------
 
+State Space is a Countable Set
+
+has a Cumulative Distribution Function (\S\ref{sec:cdf}) that is Piecewise
+Constant (\S\ref{sec:step_function})
+
 \fist Discrete Probability Distributions (\S\ref{sec:discrete_probability})
 
 
 
-\subsubsection{Probability Mass Function}\label{sec:probability_mass}
+\subsubsection{Probability Mass Function (PMF)}\label{sec:pmf}
 
-(or \emph{Probability Function})
-
-for a Discrete Random Variable (\S\ref{sec:discrete_random_variable})
-$X$:
+for a Discrete Random Variable $X$, the \emph{Probability Mass Function} is
+defined as:
+\[
+  f_X(x) = P(X = x)
+\]
+and has the Properties:
 \begin{enumerate}
-  \item $f(x) \geq 0$
-  \item $\sum_x f(x) = 1$
-  \item $P(X = x) = f(x)$
+  \item $f_X(x) \geq 0$
+  \item $\sum_x f_X(x) = 1$
 \end{enumerate}
 
-\fist characterizes a Discrete Probability Distribution
+characterizes a Discrete Probability Distribution
 (\S\ref{sec:discrete_probability})
+
+related to the CDF (\S\ref{sec:cdf}) $F_X$ of $X$ by:
+\[
+  F_X(x) = P(X \leq x) = \sum_{x_i \leq x} f_X(x_i)
+\]
 
 for a Probability Mass Function that is Symmetric around a certain point, that
 point is the Expected Value (\S\ref{sec:expected_value})
@@ -1066,18 +1080,25 @@ has Probability $0$ of assuming a particular Value
 \fist Continuous Probability Distributions (\S\ref{sec:continuous_probability})
 
 
-\subsubsection{Probability Density Function}\label{sec:pdf}
+\subsubsection{Probability Density Function (PDF)}\label{sec:pdf}
 
-\emph{Probability Density Function} $f(x)$
 
-for a Continuous Random Variable $X$:
+\emph{Probability Density Function} $f_X(x)$ of a Continuous Random Variable $X$
+has the Properties:
 \begin{enumerate}
-  \item $\forall x \in \reals, f(x) \geq 0$
-  \item $\int\limits_{-\infty}^{\infty} f(x) dx = 1$
-  \item $P (a < X < b) = \int\limits_a^b f(x) dx$
+  \item $\forall x \in \reals, f_X(x) \geq 0$
+  \item $\int\limits_{-\infty}^{\infty} f_X(x) dx = 1$
+  \item $\forall a \leq b, P (a < X < b) = \int\limits_a^b f(x) dx$
 \end{enumerate}
+the CDF (\S\ref{sec:cdf}) $F_X$ of $X$ can be defined in terms of $f_X$ as:
+\[
+  F_X(x) = \int_{-\infty}^x f_X(t)dt
+\]
+i.e. the CDF of a Continuous Random Variable gives the Area under the PDF from
+$-\infty$ to $x$, and $f_X(x) = F'_X(x)$ at all Points $x$ at which $F_X$ is
+Differentiable
 
-\fist characterizes a Continuous Probability Distribution
+characterizes a Continuous Probability Distribution
 (\S\ref{sec:continuous_probability})
 
 for a Random Variable that admits a Probability Density Function, the
@@ -1106,13 +1127,17 @@ the Pushforward Measure (\S\ref{sec:pushforward_measure}) of a Random Variable
 
 cf. Probability Measure (\S\ref{sec:probability_measure})
 
-Probability Distribution Functions:
+\emph{Probability Distribution Function} of a Random Variable $X$ often means
+the Cumulative Distribution Function (\S\ref{sec:cdf}) $F_X$, but can also refer
+to:
 \begin{itemize}
-  \item Probability Mass Function (\S\ref{sec:probability_mass})
-  \item Probability Density Function (\S\ref{sec:pdf})
-  \item Cumulative Distribution Function (CDF \S\ref{sec:cdf})
+  \item Probability Mass Function (\S\ref{sec:pmf}) -- Discrete Probability
+    Distributions (\S\ref{sec:discrete_probability})
+  \item Probability Density Function (\S\ref{sec:pdf}) -- Continuous Probability
+    Distributions (\S\ref{sec:continuous_probability})
 \end{itemize}
-See also Probability Measure Function
+
+\fist cf. Probability Measure Function
 (\S\ref{sec:probability_measure_function}), Distribution Function (Measure
 Theory \S\ref{sec:distribution_function}), Distribution (Analysis
 \S\ref{sec:distribution}), Frequency Distribution
@@ -1185,12 +1210,66 @@ Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
 \subsection{Cumulative Distribution Function (CDF)}\label{sec:cdf}
 % ------------------------------------------------------------------------------
 
-Area under Probability Density Function
+(wiki):
 
-cf. Distribution Function (Measure Theory \S\ref{sec:distribution_function})
+the \emph{Cumulative Distribution Function (CDF)} of a Real-valued Random
+Variable $X$ evaluated at $x$ is equal to the Probability that $X$ will take a
+value less than or equal to $x$:
+\[
+  \forall x \in \reals, F_X(x) = P(X \leq x)
+\]
+every CDF is Non-decreasing and Right-continuous
 
-$\forall x \in \reals, F_X(x) = P(X \leq x) = \int\limits_{-\infty}^x
-f(t) dt$
+special case of Distribution Function (Measure Theory
+\S\ref{sec:distribution_function}) with the boundary conditions
+$\lim_t\rightarrow\infty F_X(t) = 0$ and $\lim_{t\rightarrow\infty}F_X(t) = 1$
+
+every Function with these four Properties is a CDF, i.e. for every such Function
+a Random Variable can be defined such that the Function is a CDF of that Random
+Variable
+
+a Random Variable $X$ with CDF $F$ is indicated by the notation $X \sim F$, but
+note that this does not mean ``apprximate equality''
+
+the CDF $F_X$ of a Discrete Random Variable can be related to its Probability
+Mass Function (\S\ref{sec:pmf}) $f_X$ by:
+\[
+  F_X(x) = P(X \leq x) = \sum_{x_i \leq x} f_X(x_i)
+\]
+
+the CDF of a Continuous Random Variable can be expressed as the Integral of its
+Probability Density Function (\S\ref{sec:pdf}) $f_X$:
+\[
+  F_X(x) = \int\limits_{-\infty}^x f_X(t) dt
+\]
+i.e. the CDF of a Continuous Random Variable gives the Area under the PDF from
+$-\infty$ to $x$
+
+if $F_X$ is Absolutely Continuous (\S\ref{sec:absolute_continuity}), then there
+exists a Lebesgue-integrable Function $f_X(x)$ such that:
+\[
+  F_X(b) - F_X(a) = P(a < X \leq b) = \int_a^b f_X(x) dx
+\]
+for all Real Numbers $a, b$ and $f_X$ is the PDF of the Distribution of $X$
+and equals the Derivative of $F_X$ almost everywhere
+
+
+
+\subsubsection{Quantile Function}\label{sec:quantile_function}
+
+\emph{Inverse CDF} $F^{-1}$
+
+$F^{-1}(0.25)$ -- \emph{First Quartile}
+
+$F^{-1}(0.5)$ -- \emph{Median} (or \emph{Second Quartile})
+
+$F^{-1}(0.75)$ -- \emph{Third Quartile}
+
+
+
+\paragraph{Probit}\label{sec:probit}\hfill
+
+Quantile Function of the Normal Distribution
 
 
 
@@ -1202,10 +1281,36 @@ f(t) dt$
 Probability Distribution of a Discrete Random Variable
 (\S\ref{sec:discrete_random_variable})
 
-characterized by a Probability Mass Function (\S\ref{sec:probability_mass})
+characterized by a Probability Mass Function (\S\ref{sec:pmf})
 
 Cumulative Distribution Function (\S\ref{sec:cdf}) increases only by Jump
 Discontinuities
+
+\begin{itemize}
+  \item \emph{Point Mass Distribution} -- $X \sim \delta_a$ has CDF:
+    \[
+      F_X(x) = \begin{cases}
+        0 & x <    a \\
+        1 & x \geq a \\
+      \end{cases}
+    \]
+    and PMF:
+    \[
+      f_X(x) = \begin{cases}
+        1 & x = a \\
+        0 & \text{otherwise} \\
+      \end{cases}
+    \]
+  \item \emph{Discrete Uniform Distribution} (\S\ref{sec:uniform_distribution})
+  \item \emph{Bernoulli Distribution} (\S\ref{sec:bernoulli_distribution}) --
+    $X \sim Bernoulli(p)$
+  \item \emph{Binomial Distribution} (\S\ref{sec:binomial_distribution}) --
+    $X \sim Binomial(n,p)$
+  \item \emph{Geometric Distribution} (\S\ref{Sec:geometric_distribution}) --
+    $X \sim Geom(p)$
+  \item \emph{Poisson Distribution} (\S\ref{Sec:poisson_distribution}) --
+    $X \sim Poisson(\lambda)$
+\end{itemize}
 
 
 
@@ -1216,11 +1321,10 @@ $p \in [0,1]$:
 \[
   X \sim B(n,p)
 \]
-
-Probability of getting exactly $k$ ``successes'' in $n$ ``trials'' where the
-Probability of ``success'' is $p$:
+describes the Probability of getting exactly $x$ ``successes'' in $n$ ``trials''
+where the Probability of ``success'' is $p$:
 \[
-  P(k,n,p) = \binom{n}{k}p^k(1-p)^{n-k}
+  P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
 \]
 
 Binomial Random Variable (\S\ref{sec:binomial_random_variable})
@@ -1240,6 +1344,26 @@ Sample Proportion %FIXME
 \paragraph{Bernoulli Distribution}\label{sec:bernoulli_distribution}\hfill
 
 $n = 1$
+
+for a Random Variable $X$ representing a Binary Outcome:
+\begin{itemize}
+  \item $P(X=1) = p$
+  \item $P(X=0) = 1-p$
+\end{itemize}
+for some $p \in [0,1]$
+
+PMF:
+\[
+  f(x) = p^x(1-p)^{1-x}
+\]
+or equivalently:
+\[
+  f(x) = \begin{cases}
+    p   & x = 1 \\
+    1-p & x = 0 \\
+  \end{cases}
+\]
+for $x \in \{0, 1\}$
 
 generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
 
@@ -1309,9 +1433,17 @@ Poisson Process (\S\ref{sec:poisson_process})
 $P(x; \lambda t) = \frac{e^{-\lambda t} (\lambda t)^x}{x!}$
 where $\lambda$ is the average number of outcomes per unit time
 
+models counts of rare events, e.g. radioactive decay, traffic accidents
+
 
 
 \subsubsection{Geometric Distribution}\label{sec:geometric_distribution}
+
+$P(X = k) = p(1-p)^{k-1}$ for $k \in \{1, 2, 3, \ldots\}$
+
+where $X$ is the number of Trials needed until the first Success
+
+
 
 \subsubsection{Hypergeometric Distribution}
 \label{sec:hypergeometric_distribution}
@@ -1367,6 +1499,25 @@ has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
 \fist Discrete Power Law Distributions
 (\S\ref{sec:discrete_power_law_distribution})
 
+\begin{itemize}
+  \item \emph{Uniform Distribution} (\S\ref{sec:uniform_distribution}) --
+    $X \sim Uniform(a,b)$
+  \item \emph{Normal (Gaussian) Distribution} (\S\ref{sec:normal_distribution})
+    -- $X \sim N(\mu, \sigma^2)$
+  \item \emph{Exponential Distribution} (\S\ref{sec:exponential_distribution})
+    -- $X \sim Exp(\beta) = Gamma(1, \beta)$
+  \item \emph{Gamma Distribution} (\S\ref{sec:gamma_distribution})
+    -- $X \sim Gamma(\alpha, \beta)$
+  \item \emph{Beta Distribution} (\S\ref{sec:beta_distribution})
+    -- $X \sim Beta(\alpha, \beta)$
+  \item \emph{$t$-distribution} (\S\ref{sec:t_distribution})
+    -- $X \sim t_\nu$
+  \item \emph{Cauchy-Lorenz Distribution} (\S\ref{sec:cauchy_distribution})
+    -- $X \sim t_\nu=1$
+  \item \emph{$\chi^2$-distribution} (\S\ref{sec:chi_squared})
+    -- $X \sim \chi^2_p$
+\end{itemize}
+
 
 
 \subsubsection{Normal Distribution}\label{sec:normal_distribution}
@@ -1377,6 +1528,13 @@ has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
   n (x; \mu, \sigma) =
   \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
 \]
+
+a Normal Distribution corresponds to a $t$-distribution
+(\S\ref{sec:t_distribution}) with $\nu = \infty$ Degrees of Freedom
+
+\emph{Central Limit Thoerem} (\S\ref{sec:central_limit_theorem}) -- ``the
+Distribution of a Sum of Independent Random Variables can be approximated by a
+Normal Distribution''
 
 \fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
 Infinite-dimensional generalizations of Multivariate Normal Distributions
@@ -1393,6 +1551,31 @@ Mean $\mu = 0$
 
 Variance $\sigma^2 = 1$
 
+by convention Standard Normal Random Variables are denoted by $Z$, PDF by
+$\phi(z)$ and CDF by $\Phi(z)$
+
+there is no Closed-form Expression (\S\ref{sec:closed_form_expression}) for
+$\Phi$ (requires use of the Error Function \S\ref{sec:error_function})
+
+
+
+\subsubsection{$t$-distribution}\label{sec:t_distribution}
+
+(or \emph{Student's $t$-distribution})
+
+$\nu$ -- Degrees of Freedom
+
+a Normal Distribution (\S\ref{sec:normal_distribution}) corresponds to a
+$t$-distribution with $\nu = \infty$ Degrees of Freedom
+
+
+
+\paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
+
+or \emph{Cauchy-Lorentz Distribution}
+
+$\nu = 1$
+
 
 
 \subsubsection{Log-normal Distribution}\label{sec:lognormal_distribution}
@@ -1406,7 +1589,8 @@ Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
 \[
   f(x; \alpha, \beta) =
   \begin{cases}
-  \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}     & \quad x > 0 \\
+  \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}
+        & \quad x > 0 \\
   0     & \quad\text{else} \\
   \end{cases}
 \]
@@ -1419,6 +1603,8 @@ Variance $\sigma^2 = \alpha \beta^2$
 
 \paragraph{Exponential Distribution}\label{sec:exponential_squared}\hfill
 
+a $Gamma(1,\beta)$ Distribution
+
 Continuous Random Variable $X$ with parameter $\beta > 0$:
 \[
   f(x; \beta) =
@@ -1427,6 +1613,8 @@ Continuous Random Variable $X$ with parameter $\beta > 0$:
   0     & \quad\text{else} \\
   \end{cases}
 \]
+
+models lifetimes of electronic components, wait times between rare events
 
 
 
@@ -1437,10 +1625,18 @@ Non-symmetric
 \[
   f(x; v) =
   \begin{cases}
-  \frac{1}{2^{\sfrac{v}{2}}\Gamma(\sfrac{v}{2})} x^{\sfrac{v}{2-1}} e^{\sfrac{-x}{2}}     & \quad x > 0 \\
-  0     & \quad\text{else} \\
+    \frac{1}{2^{\sfrac{v}{2}}\Gamma(\sfrac{v}{2})}
+      x^{\sfrac{v}{2-1}} e^{\sfrac{-x}{2}}
+          & \quad x > 0 \\
+    0     & \quad\text{else} \\
   \end{cases}
 \]
+
+
+
+\subsubsection{Beta Distribution}\label{sec:beta_distribution}
+
+Gamma Function (\S\ref{sec:gamma_function})
 
 
 
@@ -1454,18 +1650,6 @@ Scale Invariance (\S\ref{sec:scale_invariance})
 \paragraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
 
 prototypical Power Law Distribution
-
-
-
-\subsubsection{$t$-distribution}\label{sec:t_distribution}
-
-(or \emph{Student's $t$-distribution})
-
-
-
-\subsubsection{Cauchy Distribution}\label{sec:cauchy_distribution}
-
-or \emph{Cauchy-Lorentz Distribution}
 
 
 
@@ -1517,7 +1701,9 @@ Process whose Unconditional Joint Probability Distribution is unchanged in Time
 
 
 
-\subsubsection{Kalman Filter}\label{sec:kalman_filter}\hfill
+\subsubsection{Bivariate Distribution}\label{sec:bivariate_distribution}
+
+\subsubsection{Kalman Filter}\label{sec:kalman_filter}
 
 a series of papers on ``Kalman Folding'':
 \url{http://vixra.org/author/brian_beckman}

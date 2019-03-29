@@ -97,8 +97,15 @@ cf. Lebesgue Measure (\S\ref{sec:lebesgue_measure})
 % ------------------------------------------------------------------------------
 
 Collection of all Borel Sets (\S\ref{sec:borel_set}) on a Topological Space $X$
-forms the \emph{Borel Algebra} on $X$ which is the smallest $\sigma$-algebra
-containing all Open Sets (or equivalently all Closed Sets) of $X$
+forms the \emph{Borel Algebra} $B$ on $X$ which is the smallest $\sigma$-algebra
+containing all Open Sets (or equivalently all Closed Sets) of $X$, and the
+Measurable Space (\S\ref{sec:measurable_space}) $(X,B)$ is called the
+\emph{Borel Space} of $X$
+
+\fist cf. Standard Borel Space (\S\ref{sec:standard_borel_space}) -- the Borel
+Space of a Polish Space (\S\ref{sec:polish_space}); a Measurable Space $(X,
+\Sigma)$ is ``Standard Borel'' if there exists a Metric on $X$ which makes it a
+Complete Separable Metric Space such that $\Sigma$ is a Borel $\sigma$-algebra
 
 any Measure defined on the Borel Sets is called a Borel Measure
 (\S\ref{sec:borel_measure})
@@ -138,6 +145,12 @@ the Preimages are Measurable are called \emph{Measurable Functions}
 \fist a \emph{Measure Space} (\S\ref{sec:measure_space}) is a Measurable Space
 equipped with a \emph{Measure} (\S\ref{sec:measure})
 $\mu : \sigma \rightarrow \overline{\reals}$
+
+\fist cf. Standard Borel Space (\S\ref{sec:standard_borel_space}) -- the Borel
+Space of a Polish Space (\S\ref{sec:polish_space}); a Measurable Space $(X,
+\Sigma)$ is ``Standard Borel'' if there exists a Metric on $X$ which makes it a
+Complete Separable Metric Space such that $\Sigma$ is a Borel $\sigma$-algebra
+(\S\ref{Sec:borel_algebra})
 
 \emph{Loomis-Sikorski Theorem} -- a Stone-type Duality
 (\S\ref{sec:stone_duality}) between Countably Complete Boolean Algebras
@@ -274,6 +287,90 @@ need not be Countably Additive, but must only be Finitely Additive
 
 
 % ------------------------------------------------------------------------------
+\subsection{Null Set}\label{sec:null_set}
+% ------------------------------------------------------------------------------
+
+$M = (X, \Sigma, \mu)$
+
+$S \subset X$ such that $\mu(S) = 0$
+
+a Null Set $N \subset \reals$ is a Set that can be Covered (\S\ref{sec:cover})
+by a Countable Union of Intervals of arbitrarily small total length
+
+a Complete Measure (\S\ref{sec:complete_measure}) is a Measure for which every
+Subset of a Null Set is Measurable with Measure $0$
+
+\begin{itemize}
+  \item all Countable Sets are Null Sets
+  \item Non-random Infinite Binary Random Sequences form a maximal Constructive
+    Null Set
+  \item ...
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Distribution Function}\label{sec:distribution_function}
+% ------------------------------------------------------------------------------
+
+(wiki)
+
+for a Measure $\mu$ on the Real Numbers with the Borel $\sigma$-algebra, i.e.
+the Measure Space $(\reals, \struct{B}_\reals, \mu)$, the Function:
+\[
+  F_\mu : \reals \rightarrow \reals \cup \{+\infty, -\infty\}
+\]
+defined as:
+\[
+  F_\mu(t) = \begin{cases}
+     \mu((0,t]) & \text{if} t \geq 0 \\
+    -\mu((t,0]) & \text{if} t < 0 \\
+  \end{cases}
+\]
+is the \emph{Right-continuous Distribution Function} of the Measure $\mu$
+
+for example, the Lebesgue Measure (\S\ref{sec:lebesgue_measure}) $\lambda$ has
+$\lambda((0,t]) = t - 0 = t$ and $-\lambda((t,0]) = -(0 - t) = t$, so
+$F_\lambda(t) = t$
+
+generalization of Cumulative Distribution Functions (Probability Theory
+\S\ref{sec:cdf}), which have the boundary conditions
+$\lim_t\rightarrow\infty F(t) = 0$ and $\lim_{t\rightarrow\infty}F(t) = 1$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Topological Support}\label{sec:topological_support}
+% ------------------------------------------------------------------------------
+
+or \emph{Topological Support} or \emph{Spectrum} of a Measure $\mu$ on a
+Measurable Topological Space $(\xspace{X}, Borel(\xspace{X}))$ is the largest
+Closed Subset of $\xspace{X}$ for which every Open Neighborhood of every Point
+of the Set has a Positive Measure
+
+cf. Support of a Real-valued Function (\S\ref{sec:support})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Measure-preserving Map}\label{sec:measure_preserving_map}
+% ------------------------------------------------------------------------------
+
+cf. Measure-preserving Dynamical Systems (\S\ref{sec:measure_preserving_system})
+
+\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
+
+$\cat{Prob}$ -- Category with Objects as Probability Spaces
+(\S\ref{sec:probability_space}) and Morphisms are ``Almost-everywhere-equality
+Equivalence Classes'' of Measure-preserving Maps
+
+the fundamental ``objects'' of Probability Theory are the \emph{Morphisms} of
+$\cat{Prob}$ and these Morphisms are \emph{Random Variables}
+(\S\ref{sec:random_variable})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Signed Measure}\label{sec:signed_measure}
 % ------------------------------------------------------------------------------
 
@@ -312,29 +409,6 @@ the Pushforward Measure is also denoted by $f_\sharp\mu$
 
 \fist a Probability Distribution (\S\ref{sec:probability_distribution}) is a
 Pushforward Measure of a Random Variable (\S\ref{sec:random_variable})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Null Set}\label{sec:null_set}
-% ------------------------------------------------------------------------------
-
-$M = (X, \Sigma, \mu)$
-
-$S \subset X$ such that $\mu(S) = 0$
-
-a Null Set $N \subset \reals$ is a Set that can be Covered (\S\ref{sec:cover})
-by a Countable Union of Intervals of arbitrarily small total length
-
-a Complete Measure (\S\ref{sec:complete_measure}) is a Measure for which every
-Subset of a Null Set (\S\ref{sec:null_set}) is Measurable with Measure $0$
-
-\begin{itemize}
-  \item all Countable Sets are Null Sets
-  \item Non-random Infinite Binary Random Sequences form a maximal Constructive
-    Null Set
-  \item ...
-\end{itemize}
 
 
 
@@ -517,6 +591,9 @@ is Riemann Integrable (\S\ref{sec:integrable_function}) if and only if it is
 Continuous (\S\ref{sec:continuous_function}) ``Almost Everywhere'', i.e. Set of
 Points of Discontinuity has Measure Zero
 
+the Distribution Function (\S\ref{sec:distribution_function}) of the Lebesgue
+Measure is just the Identity Function $F_\lambda(t) = t$ for all $t \in \reals$
+
 
 
 \paragraph{Haar Measure}\label{sec:haar_measure}\hfill
@@ -581,45 +658,6 @@ $[0,1]$ has Wiener Measure $0$, even when taking Finite-dimensional ``slices''
 of the Vector Space of Continuous Functions $C([0,1];\reals)$, in the sense
 that the Nowhere-differentiable Functions (\S\ref{sec:nowhere_differentiable})
 form a Prevalent Subset (\S\ref{sec:prevalent_set}) of $C([0,1]; \reals)$
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Distribution Function}\label{sec:distribution_function}
-% ------------------------------------------------------------------------------
-
-\fist Cumulative Distribution Function (Probability Theory \S\ref{sec:cdf})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Topological Support}\label{sec:topological_support}
-% ------------------------------------------------------------------------------
-
-or \emph{Topological Support} or \emph{Spectrum} of a Measure $\mu$ on a
-Measurable Topological Space $(\xspace{X}, Borel(\xspace{X}))$ is the largest
-Closed Subset of $\xspace{X}$ for which every Open Neighborhood of every Point
-of the Set has a Positive Measure
-
-cf. Support of a Real-valued Function (\S\ref{sec:support})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Measure-preserving Map}\label{sec:measure_preserving_map}
-% ------------------------------------------------------------------------------
-
-cf. Measure-preserving Dynamical Systems (\S\ref{sec:measure_preserving_system})
-
-\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}:
-
-$\cat{Prob}$ -- Category with Objects as Probability Spaces
-(\S\ref{sec:probability_space}) and Morphisms are ``Almost-everywhere-equality
-Equivalence Classes'' of Measure-preserving Maps
-
-the fundamental ``objects'' of Probability Theory are the \emph{Morphisms} of
-$\cat{Prob}$ and these Morphisms are \emph{Random Variables}
-(\S\ref{sec:random_variable})
 
 
 
