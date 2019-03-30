@@ -219,6 +219,8 @@ Independent if and only if $P(A \cap B) = P(A) P(B)$
 in terms of Conditional Probability (\S\ref{sec:conditional_probability}), $A$
 and $B$ are Independent if and only if $P(A|B) = P(A)$ or $P(B|A) = P(B)$
 
+an Event is Self-independent if and only if $P(A) = 0$ or $P(A) = 1$
+
 $n$ Events are Independent if:
 \[
   P(A_i \cap A_j \cap \cdots \cap A_g) = P(A_i)P(A_j) \cdots P(A_g)
@@ -534,7 +536,10 @@ $P(A \cap B) = P(A)P(B)$
 
 two Random Variables (\S\ref{sec:random_varible}) are \emph{Dependent}
 (\S\ref{sec:dependence}) if they do not Satisfy the Property of
-Probabilistic Independence
+Probabilistic Independence:
+\[
+  P(X \in A, Y \in B) = P(X \in A) P(Y \in B)
+\]
 
 \fist cf. Independent Event (\S\ref{sec:independent_event})
 
@@ -662,10 +667,28 @@ Continuous Random Variable (\S\ref{sec:continuous_random_variable})
 is the Pushforward Measure (\S\ref{sec:pushforward_measure}) of $X$
 
 a \emph{Dependence} (Association \S\ref{sec:association}) between two Random
-Variables (``Bivariate Data'') is any ``Statistical Relationship'' (which may
-or may not be Causal) --
-Random Variables are \emph{Dependent} if they do not Satisfy the Property of
-\emph{Probabilistic Independence} (\S\ref{sec:independence})
+Variables (``Bivariate Data'' \S\ref{sec:bivariate_distribution}) is any
+``Statistical Relationship'' (which may or may not be Causal)
+
+two Random Variables $X$ and $Y$ are \emph{Independent}, sometimes denoted $X
+\coprod Y$, if they Satisfy the Property of \emph{Probabilistic Independence}
+(\S\ref{sec:independence}):
+\[
+  P(X \in A, Y \in B) = P(X \in A) P(Y \in B)
+\]
+that is, for every $x$ and $y$, the Events $\{X \leq x\}$ and $\{Y \leq y\}$ are
+Independent Events (\S\ref{sec:independent_event}); in terms of CDFs:
+\[
+  \forall x,y\ F_{X,Y}(x,y) = F_X(x)F_Y(y)
+\]
+or in terms of Probability Mass or Density Functions (if they exist):
+\[
+  \forall x,y\ f_{X,Y}(x,y) = f_X(x)f_Y(y)
+\]
+
+\textbf{Thm.} \emph{If the Range of Random Variables $X$ and $Y$ is a (possibly
+  Infinite) Rectangle and $f_{X,Y}(x,y) = g(x)h(y)$ for arbitrary Functions $g$
+  and $h$, then $X$ and $Y$ are Independent.}
 
 \fist Relative Entropy (\S\ref{sec:relative_entropy}), Mutual Information
 (\S\ref{sec:mutual_information})
@@ -1118,6 +1141,40 @@ total Probability $1$
 
 
 
+% ------------------------------------------------------------------------------
+\subsection{Multivariate Random Variable}\label{sec:random_vector}
+% ------------------------------------------------------------------------------
+
+or \emph{Random Vector}
+
+$X = (X_1, \ldots, X_n)$
+
+Multinomial Distribution (\S\ref{sec:multinomial_distribution})
+
+Multivariate Normal Distribution (\S\ref{sec:multivariate_normal})
+
+
+
+\subsubsection{Independent and Identically Distributed (IID)}\label{sec:iid}
+
+if $X_1, \ldots, X_n$ are Independent and each has the same Marginal
+Distribution (\S\ref{sec:marginal_distribution}) with CDF $F$, then $X_1,
+\ldots, X_n$ are said to be \emph{Independent and Identically Distributed
+  (IID)}, writing:
+\[
+  X_1, \ldots, X_n \sim F
+\]
+and if $F$ has Density $f$, then:
+\[
+  X_1, \ldots, X_n \sim f
+\]
+$X_1, \ldots, X_n$ are called a \emph{Random Sample} of Size $n$ from $F$ 
+
+cf. Random Population Samples \S\ref{sec:random_sample}) -- in Statistics it is
+commonly assumed that Observations are IID
+
+
+
 % ==============================================================================
 \section{Probability Distribution}\label{sec:probability_distribution}
 % ==============================================================================
@@ -1389,7 +1446,8 @@ as $n \rightarrow \infty$ is the Standard Normal Distribution
 
 \subsubsection{Multinomial Distribution}\label{sec:multinomial_distribution}
 
-generalization of Binomial Distribution (\S\ref{sec:binomial_distribution})
+generalization of Binomial Distribution (\S\ref{sec:binomial_distribution}) to
+Multivariate Distributions (\S\ref{sec:random_vector})
 
 $k$ Outcomes $E_1, E_2, \ldots, E_k$
 
@@ -1402,6 +1460,10 @@ Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
   p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
 \]
 and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
+
+for $X = (X_1, \ldots, X_k) \sim Multinomial(n, p)$ and
+$p = (p_1, \ldots, p_k)$, the Marginal Distribution
+(\S\ref{sec:marginal_distribution}) of $X_j$ is $Binomial (n, p_j)$
 
 
 
@@ -1559,6 +1621,13 @@ $\Phi$ (requires use of the Error Function \S\ref{sec:error_function})
 
 
 
+\paragraph{Multivariate Normal Distribution}\label{sec:multivariate_normal}
+\hfill
+
+Multivariate Random Variable (\S\ref{sec:random_vector})
+
+
+
 \subsubsection{$t$-distribution}\label{sec:t_distribution}
 
 (or \emph{Student's $t$-distribution})
@@ -1703,6 +1772,10 @@ Process whose Unconditional Joint Probability Distribution is unchanged in Time
 
 \subsubsection{Bivariate Distribution}\label{sec:bivariate_distribution}
 
+$P(X = x, Y = y)$
+
+
+
 \subsubsection{Kalman Filter}\label{sec:kalman_filter}
 
 a series of papers on ``Kalman Folding'':
@@ -1711,13 +1784,54 @@ a series of papers on ``Kalman Folding'':
 
 
 % ------------------------------------------------------------------------------
-\subsection{Marginal Distribution}\label{sec:marginal_distribution}
-% ------------------------------------------------------------------------------
-
-% ------------------------------------------------------------------------------
 \subsection{Conditional Distribution}
 \label{sec:conditional_distribution}
 % ------------------------------------------------------------------------------
+
+for Discrete Random Variables $X$, $Y$:
+
+\[
+  P(X = x | Y = y) = P(X = x, Y = y)/P(Y = y)
+\]
+the Conditional Probability Mass Function, assuming $f_Y(y) > 0$:
+\[
+  f_{X|Y}(x|y) = P(X = x|Y = y) =
+    \frac{P(X = x, Y = y)}{P(Y = y)} =
+    \frac{f_{X,Y}(x,y)}{f_Y(y)}
+\]
+
+for Continuous Random Variables $X$, $Y$, the Conditional Probability Density
+Function:
+\[
+  f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}
+\]
+and:
+\[
+  P(X \in A| Y = y) = \int_A f_{X|Y}(x|y) dx
+\]
+
+cf. \emph{Borel-Kolmogorov Paradox} -- Conditional Probability Density Functions
+need not be Invariant under Coordinate Transformations
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Marginal Distribution}\label{sec:marginal_distribution}
+% ------------------------------------------------------------------------------
+
+Marginal Probability Mass Functions:
+
+$f_X(x) = P(X = x) = \sum_y P(X = x, Y = y) = \sum_y P(X = x | Y = y) P(Y = y)$
+
+$f_Y(y) = P(Y = y) = \sum_x P(X = x, Y = y) = \sum_x P(Y = y | X = x) P(X = x)$
+
+Marginal Probability Density Functions:
+
+$f_X(x) = \int f_{X,Y}(x,y) dy$
+
+$f_Y(y) = \int f_{X,Y}(x,y) dx$
+
+
 
 % ------------------------------------------------------------------------------
 \subsection{Asymptotic Distribution}
@@ -1845,6 +1959,10 @@ Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
 
 
 \subsubsection{Random Sample}\label{sec:random_sample}
+
+\fist cf. \emph{Random Sample} (Independent and Identically Distributed Random
+Vector \S\ref{sec:iid}) $X_1, \ldots, X_n \sim F$ -- in Statistics it is
+commonly assumed that Observations are IID
 
 Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
 
