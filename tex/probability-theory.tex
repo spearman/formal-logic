@@ -790,27 +790,40 @@ Curve (or Function) that has the ``best Fit'' to a Series of data points
 \subsection{Expected Value}\label{sec:expected_value}
 % ------------------------------------------------------------------------------
 
-Expected Value of a Random Variable is a kind of ``average'' where
-Probabilities are treated like ``frequencies''
-
-\emph{Mean} -- First Raw Moment (\S\ref{sec:moment})
-
-\emph{Expectation}
+The \emph{Expected Value}, \emph{Expectation}, or \emph{Mean} (First Raw Moment
+\S\ref{sec:moment}) of a Random Variable is a kind of ``average'' where
+Probabilities are treated like ``frequencies''. (FIXME: clarify)
 
 (Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
 \emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
 
-for a Probability Mass Function (\S\ref{sec:pmf}) that is
-Symmetric around a certain point, that point is the Expected Value
-
-For Random Variable $X$ with Probability Distribution $f(x)$, the \emph{Expected
-  Value} (or \emph{Mean}) of $X$ is (Discrete):
+For a Random Variable $X$ defined on Probability Space $(\Omega,\Sigma,P)$, the
+Expected Value $\mu_X = E[X]$ of $X$ is defined as the Lebesgue Integral:
 \[
-  \mu = E[X] = \sum_{i=1}^\infty x_i f(x_i)
+  \mu_X = E[X] = \int_\Omega X(\omega) dP(\omega)
 \]
-(Continuous):
+
+In terms of the Cumulative Distribution Function (\S\ref{sec:cdf}) $F_X$ of $X$
+and a Radon Integral (\S\ref{sec:radon_integral}):
 \[
-  \mu = E[X] = \int\limits_{-\infty}^{\infty} x_i f(x_i) dx
+  \mu_X = E[X] = \int\limits_{-\infty}^{\infty} x dF_X(x)
+\]
+
+note that some Distributions have no Expected Value, e.g. the Cauchy
+Distribution (\S\ref{sec:cauchy_distribution})
+
+For Discrete Random Variable $X$ with Probability Mass Function
+(\S\ref{sec:pmf}) $f_X(x)$, the Expected Value of $X$ is:
+\[
+  E[X] = \sum_x x f_X(x)
+\]
+For a PMF that is Symmetric around a certain point, that point is the Expected
+Value.
+
+For a Continuous Random Variable $X$ with Probability Density Function
+(\S\ref{sec:pdf}) $f_X(x)$, the Expected Value of $X$ is:
+\[
+  E[X] = \int x f(x) dx
 \]
 
 for a Function of a Random Variable $Y = g(X)$:
@@ -851,11 +864,11 @@ For Joint Probability Density Function:
 \[
   E[X Y] = \int\int x y j(x,y) dx dy
 \]
-\fist Note that $E[X Y]$ is not necessarily equal to $E[X]
-E[Y]$, see Covariance (\S\ref{sec:covariance}).
+\fist Note that $E[X Y]$ is not necessarily equal to $E[X] E[Y]$, see Covariance
+(\S\ref{sec:covariance}).
 
-For $X$ and $Y$ Independent (\S\ref{sec:independence}), then $E[X,Y] = E[X]
-E[Y]$
+For $X$ and $Y$ Independent (\S\ref{sec:independence}), then
+$E[X,Y] = E[X] E[Y]$
 
 If $a$ and $b$ are Constants, then $E[aX +b] = a E[X] + b$
 
@@ -869,6 +882,15 @@ a Random Variable $X$ is equal to:
   Var(X) & = E[(x - E[X])^2] \\
          & = E[X^2] - (E[X])^2 \\
 \end{align*}
+
+example of Probability as a special case of Expectation (Wasserman Ch. 3): for
+Event $A$ with Indicator Function $I_A(x)$:
+\[
+  E(I_A(X)) = \int I_A(x)f_X(x)dx = \int_A f_X(x) dx = P(X \in A)
+\]
+
+the \emph{$k^{th}$ Moment} (\S\ref{sec:moment}) of $X$ is defined as $E(X^k)$
+assuming that $E(|X|^k) < \infty$
 
 
 
@@ -1011,6 +1033,11 @@ Positive semi-definite (\S\ref{sec:positive_semidefinite})
 % ------------------------------------------------------------------------------
 \subsection{Moment-generating Function}\label{sec:moment_generating_function}
 % ------------------------------------------------------------------------------
+
+the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) has no
+Moment-generating Function
+
+
 
 % ------------------------------------------------------------------------------
 \subsection{Characteristic Function}\label{sec:characteristic_function}
@@ -1264,7 +1291,11 @@ adding more Variables
 \subsection{Moment}\label{sec:moment}
 % ------------------------------------------------------------------------------
 
-(TODO)
+the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k)$ assuming that
+$E(|X|^k) < \infty$
+
+\textbf{Thm.} \emph{If $j < k$ and the $k$th Moment Exists, then the $j$th
+  moment exists.}
 
 Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment
 
@@ -1610,6 +1641,9 @@ has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
 a Normal Distribution corresponds to a $t$-distribution
 (\S\ref{sec:t_distribution}) with $\nu = \infty$ Degrees of Freedom
 
+the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
+$X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
+
 \emph{Central Limit Thoerem} (\S\ref{sec:central_limit_theorem}) -- ``the
 Distribution of a Sum of Independent Random Variables can be approximated by a
 Normal Distribution''
@@ -1660,6 +1694,22 @@ $t$-distribution with $\nu = \infty$ Degrees of Freedom
 or \emph{Cauchy-Lorentz Distribution}
 
 $\nu = 1$
+
+Expected Value (\S\ref{sec:expected_value}) and Variance (\S\ref{sec:variance})
+are undefined; the ``average'' of $n$ Independent Cauchy Random Variables with
+$x_0 = 0$ \emph{does not} Converge to $0$ as $n \rightarrow \infty$ with
+Probability $1$-- ``it'' stays a Cauchy Distribution of the same size; however
+$0$ is the Median and Mode (FIXME: clarify)
+--\url{https://stats.stackexchange.com/questions/36027/why-does-the-cauchy-distribution-have-no-mean}
+
+\url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
+the Cauchy Distribution is a ``disguised'' form of the Uniform Distribution on a
+Circle
+
+has no Moment-generating Function (\S\ref{sec:moment_generating_function})
+
+the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
+$X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
 
 
 
@@ -1754,6 +1804,10 @@ a Uniform Distribution is defined by a rectangle formed on the interval Interval
 $[min,max]$ such that the area is $1$
 
 $Uniform(0,1)$ -- \emph{Standard Uniform Distribution}
+
+\url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
+the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) is a ``disguised''
+form of the Uniform Distribution on a Circle
 
 
 
