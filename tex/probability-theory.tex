@@ -655,7 +655,8 @@ Variable (\S\ref{sec:random_variable})
 
 a Measurable Function (\S\ref{sec:measurable_function}) on a Sample Space
 (\S\ref{sec:sample_space}) mapping Outcomes (\S\ref{sec:outcome}) in the Sample
-Space to some other Set of Values called the \emph{State Space}
+Space to some other Set of Values called the \emph{State Space}, often the Real
+Line (\S\ref{sec:real_line})
 
 $X : \Omega \rightarrow E$
 
@@ -663,8 +664,11 @@ Discrete Random Variable (\S\ref{sec:discrete_random_variable})
 
 Continuous Random Variable (\S\ref{sec:continuous_random_variable})
 
-\fist a \emph{Probability Distribution} (\S\ref{sec:probability_distribution})
+a \emph{Probability Distribution} (\S\ref{sec:probability_distribution})
 is the Pushforward Measure (\S\ref{sec:pushforward_measure}) of $X$
+
+such a distribution records all the individual Probabilities $P(X = x)$,
+sometimes written $p_X(x)$
 
 a \emph{Dependence} (Association \S\ref{sec:association}) between two Random
 Variables (``Bivariate Data'' \S\ref{sec:bivariate_distribution}) is any
@@ -791,11 +795,16 @@ Curve (or Function) that has the ``best Fit'' to a Series of data points
 % ------------------------------------------------------------------------------
 
 The \emph{Expected Value}, \emph{Expectation}, or \emph{Mean} (First Raw Moment
-\S\ref{sec:moment}) of a Random Variable is a kind of ``average'' where
-Probabilities are treated like ``frequencies''. (FIXME: clarify)
+\S\ref{sec:moment}/Cumulant \S\ref{sec:cumulant}) of a Random Variable is a kind
+of ``average'' where Probabilities are treated like ``frequencies''. (FIXME:
+clarify)
+
+\fist Sample Mean (\S\ref{sec:sample_mean})
 
 (Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
 \emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
+
+Law of Large Numbers (\S\ref{sec:large_numbers})
 
 For a Random Variable $X$ defined on Probability Space $(\Omega,\Sigma,P)$, the
 Expected Value $\mu_X = E[X]$ of $X$ is defined as the Lebesgue Integral:
@@ -808,9 +817,6 @@ and a Radon Integral (\S\ref{sec:radon_integral}):
 \[
   \mu_X = E[X] = \int\limits_{-\infty}^{\infty} x dF_X(x)
 \]
-
-note that some Distributions have no Expected Value, e.g. the Cauchy
-Distribution (\S\ref{sec:cauchy_distribution})
 
 For Discrete Random Variable $X$ with Probability Mass Function
 (\S\ref{sec:pmf}) $f_X(x)$, the Expected Value of $X$ is:
@@ -826,12 +832,10 @@ For a Continuous Random Variable $X$ with Probability Density Function
   E[X] = \int x f(x) dx
 \]
 
-for a Function of a Random Variable $Y = g(X)$:
-\[
-  E[Y] = \sum_x g(x)p_X(x)
-\]
+note that some Distributions have no Expected Value, e.g. the Cauchy
+Distribution (\S\ref{sec:cauchy_distribution})
 
-for \emph{Linear Function} $g$:
+for Linear Function $g$:
 \[
   E[g(X)] = g(E[X])
 \]
@@ -851,9 +855,13 @@ Constant added to the Expectation of the Random Variable:
   E[X + b] = E[X] + b
 \]
 
-Law of Large Numbers (\S\ref{sec:large_numbers})
+for a Function of a Random Variable $Y = g(X)$:
+\[
+  E[Y] = \sum_x g(x) p_X(x)
+\]
+%FIXME: is this only for discrete random variables ???
 
-For Random Variable $X$ with Probability Distribution $f(x)$, the
+For Random Variable $X$ with Probability Density Function $f(x)$, the
 Expected Value of a Measurable Function
 (\S\ref{sec:measurable_function}) of $X$, $g(X)$, is:
 \[
@@ -867,21 +875,58 @@ For Joint Probability Density Function:
 \fist Note that $E[X Y]$ is not necessarily equal to $E[X] E[Y]$, see Covariance
 (\S\ref{sec:covariance}).
 
-For $X$ and $Y$ Independent (\S\ref{sec:independence}), then
-$E[X,Y] = E[X] E[Y]$
+For $X$ and $Y$ Independent (\S\ref{sec:independence}), $E[X,Y] = E[X] E[Y]$
 
-If $a$ and $b$ are Constants, then $E[aX +b] = a E[X] + b$
+If $a$ and $b$ are Constants, then $E[aX + b] = a E[X] + b$
 
 $E [g(X) \pm h(X)] = E[g(X)] \pm E[h(X)]$
 
 $E [g(X,Y) \pm h(X,Y)] = E[g(X,Y)] \pm E[h(X,Y)]$
 
+\textbf{Thm.} for $X_1, \ldots, X_n$ Random Variables and $a_1, \ldots, a_n$
+Constants:
+\[
+  E\Big(\sum_i a_i X_i\Big) = \sum_i a_i E(X_i)
+\]
+
+\textbf{Thm.} for $X_1, \ldots, X_n$ Independent Random Variables:
+\[
+  E\Big(\prod_{i=1}^n X_i\Big) = \prod_i E(X_i)
+\]
+
+\emph{Conditional Expectation} -- $E(X|Y)$ is a Random Variable whose Value is
+$E(X|Y = y)$ when $Y = y$
+
+\textbf{Thm.} (Rule of Iterated Expectations) \emph{
+  For Random Variables $X$ and $Y$, assuming Expectations exist, then:
+  \[
+    E(E(Y|X)) = E(Y) \quad\quad E(E(X|Y)) = E(X)
+  \]
+  or generally for any Function $r(x,y)$:
+  \[
+    E(E(r(X,Y)|X)) = E(r(X,Y))
+  \]
+}
+
+Moment-generating Function (\S\ref{sec:moment_generating_function}):
+$M_X(t) := E(e^{tX})$ for $t \in \reals$
+
 the Variance (Expected Value of the Squared Deviation \S\ref{sec:deviation}) of
 a Random Variable $X$ is equal to:
 \begin{align*}
-  Var(X) & = E[(x - E[X])^2] \\
-         & = E[X^2] - (E[X])^2 \\
+  \sigma^2 = V(X) & = E(X - E(X))^2   \\
+                  & = E(X^2) - E(X)^2 \\
+                  & = \int(x - E(X))^2 dF(x) \\
 \end{align*}
+assuming the Expectation exists
+
+$V(Y) = E(V(Y|X)) + V(E(Y|X))$
+
+\textbf{Thm.} \emph{Covariance (\S\ref{sec:covariance}) Satisfies:
+  \[
+    Cov(X,Y) = E(XY) - E(X)E(Y)
+  \]
+}
 
 example of Probability as a special case of Expectation (Wasserman Ch. 3): for
 Event $A$ with Indicator Function $I_A(x)$:
@@ -912,17 +957,18 @@ manifestation of invariant \emph{single-case} Probabilities
 the \emph{Variance} is the Expected Value of the Squared Deviation of a Random
 Variable
 
-Second Central Moment (\S\ref{sec:moment})
+Second Central Moment (\S\ref{sec:moment})/Second Cumulant
+(\S\ref{sec:cumulant})
 
 Variances are always Non-negative
 
 the Variance of a Random Variable $X$ is equal to:
 \begin{align*}
-  Var(X) & = E[(x - E[X])^2] \\
-         & = E[X^2] - (E[X])^2 \\
+  \sigma^2 = V(X) & = E(X - E(X))^2   \\
+                  & = E(X^2) - E(X)^2 \\
+                  & = \int(x - E(X))^2 dF(x) \\
 \end{align*}
-where $E[\cdot]$ is the Expected Value (\S\ref{sec:expected_value}) of a
-Random Variable
+assuming the Expected Value (\S\ref{sec:expected_value}) $E(\cdot)$ exists
 
 Discrete Random Variable $X$:
 \[
@@ -945,6 +991,12 @@ $f(x,y)$ and $a$, $b$, $c$ are Constants, then:
   \sigma_{X Y}
 \]
 
+\fist Sample Variance (\S\ref{sec:sample_variance})
+
+\emph{Conditional Variance} $V(X|Y)$
+
+$V(Y) = E(V(Y|X)) + V(E(Y|X))$
+
 
 
 % ------------------------------------------------------------------------------
@@ -955,7 +1007,7 @@ Asymmetry %FiXME
 
 ``lopsided-ness''
 
-Third Central Moment (\S\ref{sec:moment})
+Third Central Moment (\S\ref{sec:moment})/Third Cumulant (\S\ref{sec:cumulant})
 
 
 
@@ -966,39 +1018,6 @@ Third Central Moment (\S\ref{sec:moment})
 Fourth Central Moment (\S\ref{sec:moment})
 
  Measure of the ``heaviness'' of the tail of a Distribution
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Dependence}\label{sec:dependence}
-% ------------------------------------------------------------------------------
-
-or \emph{Dependence}
-
-any ``\emph{Statistical Relationship}'' between two Random Variables
-(``Bivariate Data'')
-
-may or may not be Causal
-
-Random Variables are \emph{Dependent} if they do not Satisfy the Property of
-\emph{Probabilistic Independence} (\S\ref{sec:independence})
-
-
-
-\subsubsection{Correlation}\label{sec:statistical_correlation}
-
-measure of how close two Random Variables are to having a \emph{Linear
-  Relationship}
-
-\fist Correlation Coefficient (\S\ref{sec:correlation_coefficient})
-
-
-
-\paragraph{Correlation Coefficient}\label{sec:correlation_coefficient}\hfill
-
-\emph{Pearson Product-moment Correlation Coefficient}
-
-$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
 
 
 
@@ -1022,11 +1041,64 @@ Continuous:
   (x - \mu_X) (y - \mu_Y) f(x,y) dx dy
 \]
 
+\fist Sample Covariance (\S\ref{sec:sample_covariance})
+
+\textbf{Thm.} \emph{Covariance Satisfies:
+  \[
+    Cov(X,Y) = E(XY) - E(X)E(Y)
+  \]
+}
+
+if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$ where $\rho$ is the
+Correlation (\S\ref{sec:correlation})
+
 
 
 \subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
 
+or \emph{Variance-Covariance Matrix}
+
 Positive semi-definite (\S\ref{sec:positive_semidefinite})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Dependence}\label{sec:dependence}
+% ------------------------------------------------------------------------------
+
+or \emph{Dependence}
+
+any ``\emph{Statistical Relationship}'' between two Random Variables
+(``Bivariate Data'')
+
+may or may not be Causal
+
+Random Variables are \emph{Dependent} if they do not Satisfy the Property of
+\emph{Probabilistic Independence} (\S\ref{sec:independence})
+
+
+
+\subsubsection{Correlation}\label{sec:statistical_correlation}
+
+$\rho$
+
+measure of how close two Random Variables are to having a \emph{Linear
+  Relationship}
+
+cf. Covariance (\S\ref{sec:covariance})
+
+if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$ where $Cov(X,Y)$ is
+the Covariance (\S\ref{sec:covariance})
+
+\fist Correlation Coefficient (\S\ref{sec:correlation_coefficient})
+
+
+
+\paragraph{Correlation Coefficient}\label{sec:correlation_coefficient}\hfill
+
+\emph{Pearson Product-moment Correlation Coefficient}
+
+$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
 
 
 
@@ -1034,8 +1106,29 @@ Positive semi-definite (\S\ref{sec:positive_semidefinite})
 \subsection{Moment-generating Function}\label{sec:moment_generating_function}
 % ------------------------------------------------------------------------------
 
+$M_X(t) = E(e^{tX}) = \int e^{tx} dF(x)$ for $t \in \reals$
+
 the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) has no
 Moment-generating Function
+
+the Cumulant-generating Function (\S\ref{sec:cumulant_generating_function}) is
+the Natural Logarithm of the Moment-generating Function
+
+\fist Laplace Transform (\S\ref{sec:laplace_transform})
+%FIXME: explain relation
+
+cf. Characteristic Function (\S\ref{sec:characteristic_function}) --
+if a Random Variable has a Moment-generating Function then the Characteristic
+Function can be extended to the Complex Plane
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Cumulant-generating Function}
+\label{sec:cumulant_generating_function}
+% ------------------------------------------------------------------------------
+
+Natural Logarithm of the Moment-generating Function
 
 
 
@@ -1053,21 +1146,18 @@ is the Argument of the ``Characteristic Function'' $\varphi_X : \reals
 where $F_X$ is the Cumulative Distribution Function (\S\ref{sec:cdf}) of $X$ and
 the Integral is a Riemann-Sieltjes Integral (TODO: xref)
 
-always exists even when the Moment-generating Function
-(\S\ref{sec:moment_generating_function}) and Probability Density Function
-(\S\ref{sec:pdf}) do not
-
 like the Cumulative Distribution Function, completely determines the behavior
 and properties of the Probability Distribution
 
-if the Random Variable admits a Probability Density Function
-(\S\ref{sec:pdf}) then the Characteristic Function is the
-Fourier Transform (\S\ref{sec:fourier_transform}) of the Probability Density
-Function and vice versa
+cf. Moment-generating Function (\S\ref{sec:moment_generating_function}) --
+the Characteristic Function always exists even when the Moment-generating
+Function and Probability Density Function (\S\ref{sec:pdf}) do not exist;
+if a Random Variable has a Moment-generating Function then the Characteristic
+Function can be extended to the Complex Plane
 
-if a Random Variable has a Moment-generating Function
-(\S\ref{sec:moment_generating_function}) then the Characteristic Function can be
-extended to the Complex Plane
+if the Random Variable admits a Probability Density Function then the
+Characteristic Function is the Fourier Transform (\S\ref{sec:fourier_transform})
+of the Probability Density Function and vice versa
 
 \fist cf. Indicator Functions (\S\ref{sec:indicator_function})
 
@@ -1294,6 +1384,9 @@ adding more Variables
 the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k)$ assuming that
 $E(|X|^k) < \infty$
 
+\fist Cumulants (\S\ref{sec:cumulant}) -- Moments determine Cumulants and vice
+versa
+
 \textbf{Thm.} \emph{If $j < k$ and the $k$th Moment Exists, then the $j$th
   moment exists.}
 
@@ -1306,7 +1399,28 @@ Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
 Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
 ``heaviness'' of the tail of a Distribution
 
+Fourth and higher-order Cumulants are not equal to Central Moments
+
 \fist Moment-generating Function (\S\ref{sec:moment_generating_function})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Cumulant}\label{sec:cumulant}
+% ------------------------------------------------------------------------------
+
+\fist Moments (\S\ref{sec:moment}) -- Cumulants determine Moments and vice
+versa
+
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Cumulant
+
+Variance (\S\ref{sec:variance}) -- Second Cumulant
+
+Skewness (\S\ref{sec:skewness}) -- Third Cumulant; ``lopsided-ness''
+
+Fourth and higher-order Cumulants are not equal to Central Moments
+
+\fist Cumulant-generating Function (\S\ref{sec:cumulant_generating_function})
 
 
 
@@ -1430,6 +1544,8 @@ where the Probability of ``success'' is $p$:
 \[
   P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
 \]
+
+Expected Value $E(X) = np$
 
 Binomial Random Variable (\S\ref{sec:binomial_random_variable})
 
@@ -1892,8 +2008,10 @@ and:
   P(X \in A| Y = y) = \int_A f_{X|Y}(x|y) dx
 \]
 
-cf. \emph{Borel-Kolmogorov Paradox} -- Conditional Probability Density Functions
-need not be Invariant under Coordinate Transformations
+cf. \emph{Borel-Kolmogorov Paradox} -- the concept of a Conditional Probability
+with regard to an isolated given Hypothesis whose Probability equals $0$ is
+inadmissable (Kolmogorov33); Conditional Probability Density Functions need not
+be Invariant under Coordinate Transformations
 
 
 
@@ -2088,6 +2206,12 @@ Uncertainty (\S\ref{sec:uncertainty_analysis})
 
 \subsubsection{Sufficient Statistic}\label{sec:sufficient_statistic}
 
+\subsubsection{Sample Mean}\label{sec:sample_mean}
+
+\subsubsection{Sample Variance}\label{sec:sample_variance}
+
+\subsubsection{Sample Covariance}\label{sec:sample_covariance}
+
 
 
 % ==============================================================================
@@ -2174,7 +2298,7 @@ Unbiased Sample Variance:
 
 \paragraph{Standard Deviation}\label{sec:standard_deviation}\hfill
 
-Variance (\S\ref{sec:variance})
+Square Root of the Variance (\S\ref{sec:variance}) $\sqrt{V(X)}$
 
 Deviation (\S\ref{sec:deviation})
 
@@ -3623,5 +3747,3 @@ and Weak Epistasis -- Evolutionary Optimization
 (\S\ref{sec:evolutionary_optimization}) %FIXME
 
 \url{https://golem.ph.utexas.edu/category/2018/05/the_fisher_metric_will_not_be.html}
-
-
