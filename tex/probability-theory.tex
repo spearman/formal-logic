@@ -91,6 +91,8 @@ after conducting many Trials of the same Experiment, the \emph{Relative
   Frequency} (Empirical Probability \S\ref{sec:relative_frequency}) of the
 various Outcomes and Events can be assessed
 
+\fist cf. Replication (Sampling \S\ref{sec:replication})
+
 
 
 % ------------------------------------------------------------------------------
@@ -568,6 +570,13 @@ is the Product of the individual Probability Distributions''
 ``the Distribution of a Sum of Independent Random Variables can be approximated
 by a Normal Distribution''
 
+for a Sequence of Random Variables (\S\ref{sec:random_variable})
+$X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
+$\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
+\emph{Converges in Distribution} to a Normal Distribution
+(\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+Mean has approximately a Normal Distribution for large $n$
+
 $z = \frac{\overline{x} - \mu}{\sfrac{\sigma}{\sqrt{n}}}$ as
 $n \rightarrow \infty$ is $n(z; 0,1)$ %FIXME
 
@@ -578,6 +587,8 @@ Sequential (Time Series) data attributed to ``convergence effects'' related to
 the Central Limit Theorem that have Foci of Convergence in the family of Tweedie
 Exponential Dispersion Models (Probability Distributions
 \S\ref{sec:tweedie_distribution})
+
+\fist cf. Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory})
 
 
 
@@ -780,7 +791,10 @@ performing an Experiment (\S\ref{sec:experiment}).
 \emph{``data point''}
 
 \fist a \emph{(Statistical) Population} (\S\ref{sec:population}) is a totality
-of Observations
+of Observations; \emph{Sample Size Determination} (\S\ref{sec:sample_size}) is
+the choosing of the number of Observations or Replicates
+(\S\ref{sec:replication}) to include in a Statistical Sample
+(\S\ref{sec:statistical_sample})
 
 \fist Curve Fitting (\S\ref{sec:curve_fitting}): the process of constructing a
 Curve (or Function) that has the ``best Fit'' to a Series of data points
@@ -937,9 +951,35 @@ Event $A$ with Indicator Function $I_A(x)$:
 the \emph{$k^{th}$ Moment} (\S\ref{sec:moment}) of $X$ is defined as $E(X^k)$
 assuming that $E(|X|^k) < \infty$
 
+\emph{Cauchy-Schwarz Inequality} (\S\ref{sec:cauchy_schwarz}):
+\[
+  E|XY|^2 \leq \sqrt{E(X^2)E(Y^2)}
+\]
+where $X$ and $Y$ have Finite Variances
+
+\textbf{Thm.} (Jensen's Inequality) \emph{
+  If $g$ is a Convex Function, then:
+  \[
+    E(g(X)) \geq g(E(X))
+  \]
+  and if $g$ is Concave, then:
+  \[
+    E(g(X)) \leq g(E(X))
+  \]
+}
+examples: $E(X^2) \geq E(X)^2$; if $X$ is Positive, then $E(1/X) \geq 1/E(X)$;
+since $\log$ is Concave $E(\log X) \leq \log E(X)$
+
 
 
 \subsubsection{Law of Large Numbers}\label{sec:large_numbers}
+
+the Sample Mean (\S\ref{sec:sample_mean})
+$\overline{X}_n = \frac{1}{n}\sum_i X_i$ of a Sequence of Random Variables
+$X_1, \ldots, X_n$ \emph{Converges in Probability}
+(\S\ref{sec:stochastic_convergence}) to the Expectation
+(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+$\overline{X}_n$ is close to $\mu$ with high Probability
 
 \fist cf. Law of Iterated Logarithm (\S\ref{sec:iterated_logarithm})
 
@@ -947,6 +987,19 @@ assuming that $E(|X|^k) < \infty$
 \S\ref{sec:propensity}) -- invokes the Law of Large Numbers to explain stable
 \emph{long-run} Relative Frequencies (\S\ref{sec:relative_frequency}) as a
 manifestation of invariant \emph{single-case} Probabilities
+
+\fist cf. Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory})
+
+
+
+\subsubsection{Markov's Inequality}\label{sec:markovs_inequality}
+
+\textbf{Thm.} (Markov's Inequality) \emph{
+  Given a Random Variable $X$ with Expectation $E(X)$, for any $t > 0$:
+  \[
+    P(X > t) \leq \frac{E(X)}{t}
+  \]
+}
 
 
 
@@ -1762,7 +1815,13 @@ $X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
 
 \emph{Central Limit Thoerem} (\S\ref{sec:central_limit_theorem}) -- ``the
 Distribution of a Sum of Independent Random Variables can be approximated by a
-Normal Distribution''
+Normal Distribution'';
+for a Sequence of Random Variables (\S\ref{sec:random_variable})
+$X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
+$\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
+\emph{Converges in Distribution} to a Normal Distribution
+(\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+Mean has approximately a Normal Distribution for large $n$
 
 \fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
 Infinite-dimensional generalizations of Multivariate Normal Distributions
@@ -1772,6 +1831,15 @@ Infinite-dimensional generalizations of Multivariate Normal Distributions
 - \url{https://blog.evjang.com/2018/01/nf1.html}
 
 
+
+\paragraph{Mill's Inequality}\label{sec:mills_inequality}\hfill
+
+\textbf{Thm.} (Mill's Inequality) \emph{
+  For $Z \sim N(0,1):
+  \[
+    P(|Z| > t) \leq \sqrt{\frac{2}{\pi}}\frac{e^{-t^2/2}}{t}
+  \]
+}
 
 \paragraph{Standard Normal Distribution}\label{sec:standard_normal}\hfill
 
@@ -2034,8 +2102,7 @@ $f_Y(y) = \int f_{X,Y}(x,y) dx$
 
 
 % ------------------------------------------------------------------------------
-\subsection{Asymptotic Distribution}
-\label{sec:asymptotic_distribution}
+\subsection{Asymptotic Distribution}\label{sec:asymptotic_distribution}
 % ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
@@ -2156,6 +2223,9 @@ Subset of a Population
 
 Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
 
+\emph{Sampling} is the \emph{selection} of a Subset (Statistical Sample) from
+within a Statistical Population
+
 
 
 \subsubsection{Random Sample}\label{sec:random_sample}
@@ -2208,6 +2278,24 @@ Uncertainty (\S\ref{sec:uncertainty_analysis})
 
 \subsubsection{Sample Mean}\label{sec:sample_mean}
 
+for Random Variables (\S\ref{sec:random_variable}) $X_1, \ldots, X_n$:
+\[
+  \overline{X}_n = \frac{1}{n}\sum_i X_i
+\]
+
+\emph{Law of Large Numbers} (\S\ref{sec:large_numbers}): the Sample Mean
+$\overline{X}_n = \frac{1}{n}\sum_i X_i$ \emph{Converges in Probability}
+(\S\ref{sec:stochastic_convergence}) to the Expectation
+(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+$\overline{X}_n$ is close to $\mu$ with high Probability
+
+\emph{Central Limit Theorem} (\S\ref{sec:central_limit}):
+$\sqrt{n}(\overline{X}_n - \mu)$ \emph{Converges in Distribution} to a Normal
+Distribution (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e.
+the Sample Mean has approximately a Normal Distribution for large $n$
+
+
+
 \subsubsection{Sample Variance}\label{sec:sample_variance}
 
 \subsubsection{Sample Covariance}\label{sec:sample_covariance}
@@ -2228,9 +2316,29 @@ cf. Test Statistics (\S\ref{sec:test_statistic})
 \subsection{Statistical Sample}\label{sec:statistical_sample}
 % ------------------------------------------------------------------------------
 
-Sample (\S\ref{sec:sample}), Random Sample (\S\ref{sec:random_sample})
+\emph{Sampling} (\S\ref{sec:sample}) is the \emph{selection} of a Subset
+(Statistical Sample) from within a Statistical Population
+(\S\ref{sec:population})
 
 \fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
+
+
+
+\subsubsection{Sample Size}\label{sec:sample_size}
+
+\emph{Sample Size Determination} -- choosing the number of Observations
+(\S\ref{sec:observation}) or Replicates (\S\ref{sec:replication}) to include in
+a Statistical Sample
+
+\fist Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory}):
+evaluates properties of Estimators (\S\ref{sec:estimator}) and Statistical Tests
+(\S\ref{sec:hypothesis_testing}) as Sample Size $n \rightarrow \infty$
+
+
+
+\subsubsection{Replication}\label{sec:replication}
+
+cf. Experiment (\S\ref{sec:experiment})
 
 
 
@@ -3045,10 +3153,35 @@ alternative to Probability Theory for dealing with certain types of Uncertainty
 \subsection{Asymptotic Theory}\label{sec:asymptotic_theory}
 % ------------------------------------------------------------------------------
 
-framework for assessing properties of Estimators (\S\ref{sec:estimator}) and
-Statistical Tests (Hypothesis Testing \S\ref{sec:hypothesis_testing})
+or \emph{Large Sample Theory}
 
 \fist cf. Asymptotic Analysis (\S\ref{sec:asymptotic_analysis})
+
+(wiki):
+
+framework for assessing properties of Estimators (\S\ref{sec:estimator}) and
+Statistical Tests (Hypothesis Testing \S\ref{sec:hypothesis_testing}) as Sample
+Size (\S\ref{sec:sample_size}) $n \rightarrow \infty$
+
+\fist Stochastic Convergence (\S\ref{sec:stochastic_convergence}) -- Convergence
+of Sequences (\S\ref{sec:convergent_sequence}) of Random Variables to Limit
+Random Variables
+
+Asymptotic Thoerems:
+\begin{itemize}
+  \item \emph{Law of Large Numbers} (\S\ref{sec:large_numbers}) --
+    for Random Variables $X_1, \ldots, X_n$, the Sample Mean
+    (\S\ref{sec:sample_mean}) $\overline{X}_n = \frac{1}{n}\sum_i X_i$ Converges
+    in Probability to $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+    $\overline{X}_n$ is close to $\mu$ with high Probability
+  \item \emph{Central Limit Theorem} (\S\ref{sec:central_limit})
+    for a Sequence of Random Variables $X_i, \ldots, X_n$ with Sample Mean
+    $\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
+    Converges in Distribution to a Normal Distribution
+    (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+    Mean has approximately a Normal Distribution for large $n$
+  \item ...
+\end{itemize}
 
 
 
@@ -3172,6 +3305,25 @@ Hypothesis Testing (\S\ref{sec:hypothesis_testing})
 One-tail
 
 Two-tail
+
+
+
+\paragraph{Hoeffding's Inequality}\label{sec:hoeffdings_inequality}\hfill
+
+used the analyze the number of required Samples needed to obtain a Confidence
+Interval
+
+\textbf{Thm.} (Hoeffding's Inequality)
+
+\emph{
+  For $Y_1, \ldots, Y_n$ Independent Observations (\S\ref{sec:observation}) such
+  that $E(Y_i) = 0$ and $a_i \leq Y_i \leq b_i$, given $\epsilon > 0$, for any $t
+  > 0$:
+  \[
+    P\Big(\sum_i Y_i \geq \epsilon\Big) \leq
+      e^{-t\epsilon} \prod_i \e^{t^2(b_i - a_i)^2/8}
+  \]
+}
 
 
 
@@ -3353,6 +3505,28 @@ First-hitting-time Model
 % ------------------------------------------------------------------------------
 \subsection{Statistical Fluctuation}\label{sec:statistical_fluctuation}
 % ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Stochastic Convergence}\label{sec:stochastic_convergence}
+% ------------------------------------------------------------------------------
+
+Convergence of Sequences (\S\ref{sec:convergent_sequence}) of Random Variables
+(\S\ref{sec:random_variable}) to a Limit Random Variable
+
+\fist Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory})
+
+\fist cf. Measure Convergence (\S\ref{sec:measure_convergence})
+
+\textbf{Modes of Convergence}:
+\begin{itemize}
+  \item \emph{Convergence in Distribution} (\emph{Weak Convergence})
+  \item \emph{Convergence in Probability}
+  \item \emph{Almost Sure (Everywhere) Convergence} (\emph{Strong Convergence})
+  \item \emph{Sure (Everywhere) Convergence} (\emph{Pointwise Convergence})
+  \item \emph{Convergence in Mean}
+\end{itemize}
+
+
 
 % ------------------------------------------------------------------------------
 \subsection{Random Walk}\label{sec:random_walk}
