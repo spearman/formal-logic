@@ -564,35 +564,6 @@ is the Product of the individual Probability Distributions''
 
 
 % ------------------------------------------------------------------------------
-\subsection{Central Limit Theorem}\label{sec:central_limit}
-% ------------------------------------------------------------------------------
-
-``the Distribution of a Sum of Independent Random Variables can be approximated
-by a Normal Distribution''
-
-for a Sequence of Random Variables (\S\ref{sec:random_variable})
-$X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
-$\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
-\emph{Converges in Distribution} to a Normal Distribution
-(\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
-Mean has approximately a Normal Distribution for large $n$
-
-$z = \frac{\overline{x} - \mu}{\sfrac{\sigma}{\sqrt{n}}}$ as
-$n \rightarrow \infty$ is $n(z; 0,1)$ %FIXME
-
-\fist an instance of \emph{Renormalization} (\S\ref{sec:renormalization})
-
-\fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
-Sequential (Time Series) data attributed to ``convergence effects'' related to
-the Central Limit Theorem that have Foci of Convergence in the family of Tweedie
-Exponential Dispersion Models (Probability Distributions
-\S\ref{sec:tweedie_distribution})
-
-\fist cf. Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory})
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Negative Probability}\label{sec:negative_probability}
 % ------------------------------------------------------------------------------
 
@@ -980,6 +951,17 @@ $X_1, \ldots, X_n$ \emph{Converges in Probability}
 (\S\ref{sec:stochastic_convergence}) to the Expectation
 (\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
 $\overline{X}_n$ is close to $\mu$ with high Probability
+
+\textbf{Thm.} (Weak Law of Large Numbers) \emph{If $X_1, \ldots, X_n$ are IID
+  (\S\ref{sec:iid}), then:
+  \[
+    \overlina{X}_n \xrightarrow{P} \mu = E(X_1)
+  \]
+}
+(note that since $X_i$ are IID, $\mu$ is identical for all $X_i$)
+
+\textbf{Thm.} (Strong Law of Large Numbers) \emph{If $X_1, \ldots, X_n$ are IID,
+  and $\mu = E(|X_1|) < \infty$, then $\overline{X}_n \xrightarrow{as} \mu$}
 
 \fist cf. Law of Iterated Logarithm (\S\ref{sec:iterated_logarithm})
 
@@ -2105,6 +2087,51 @@ $f_Y(y) = \int f_{X,Y}(x,y) dx$
 \subsection{Asymptotic Distribution}\label{sec:asymptotic_distribution}
 % ------------------------------------------------------------------------------
 
+\fist cf. Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory})
+
+
+
+\subsubsection{Central Limit Theorem}\label{sec:central_limit}
+
+``the Distribution of a Sum of Independent Random Variables can be approximated
+by a Normal Distribution''
+
+for a Sequence of Random Variables (\S\ref{sec:random_variable})
+$X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
+$\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
+\emph{Converges in Distribution} to a Normal Distribution
+(\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+Mean has approximately a Normal Distribution for large $n$
+
+\textbf{Thm.} (Central Limit Theorem) \emph{For IID (\S\ref{sec:iid}) Random
+  Variables $X_1, \ldots, X_n$ with Mean $\mu$ and Variance $\sigma^2$, then:
+  \[
+    Z_n \equiv \frac{\overline{X}_n - \mu}{\sqrt{V(\overline{X}_n)}} =
+      \frac{\sqrt{n}(\overline{X}_n - \mu)}{\sigma} \rightarrow Z \sim N(0,1)
+  \]
+  i.e:
+  \[
+    \lim_{n\rightarrow\infty} P(Z_n \leq z) = \Phi(z) =
+      \int_{-\infty}^z \frac{1}{\sqrt{2\pi}}e^{-x^2/2} dx
+  \]
+}
+
+\emph{Berry-Ess\'een Inequality}
+
+\emph{Multivariate Central Limit Theorem}
+
+generalization: \emph{Local Asymptotic Normality}
+
+\fist an instance of \emph{Renormalization} (\S\ref{sec:renormalization})
+
+\fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
+Sequential (Time Series) data attributed to ``convergence effects'' related to
+the Central Limit Theorem that have Foci of Convergence in the family of Tweedie
+Exponential Dispersion Models (Probability Distributions
+\S\ref{sec:tweedie_distribution})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Sampling Distribution}\label{sec:sampling_distribution}
 % ------------------------------------------------------------------------------
@@ -2795,6 +2822,12 @@ between them is \emph{Regression Analysis} (\S\ref{sec:regression_analysis})
 
 
 
+\paragraph{Delta Method}\label{sec:delta_method}\hfill
+
+\emph{Multivariate Delta Method}
+
+
+
 \paragraph{Point Estimator}\label{sec:point_estimator}\hfill
 
 \paragraph{Interval Estimator}\label{sec:interval_estimator}\hfill
@@ -3155,6 +3188,8 @@ alternative to Probability Theory for dealing with certain types of Uncertainty
 
 or \emph{Large Sample Theory}
 
+\fist Asymptotic Distributions (\S\ref{sec:asymptotic_distribution})
+
 \fist cf. Asymptotic Analysis (\S\ref{sec:asymptotic_analysis})
 
 (wiki):
@@ -3503,10 +3538,6 @@ First-hitting-time Model
 
 
 % ------------------------------------------------------------------------------
-\subsection{Statistical Fluctuation}\label{sec:statistical_fluctuation}
-% ------------------------------------------------------------------------------
-
-% ------------------------------------------------------------------------------
 \subsection{Stochastic Convergence}\label{sec:stochastic_convergence}
 % ------------------------------------------------------------------------------
 
@@ -3517,16 +3548,58 @@ Convergence of Sequences (\S\ref{sec:convergent_sequence}) of Random Variables
 
 \fist cf. Measure Convergence (\S\ref{sec:measure_convergence})
 
-\textbf{Modes of Convergence}:
+\textbf{Modes of Convergence}
+For a Sequence of Random Variables $X_1, X_2, \ldots$, and Random Variable $X$,
+with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 \begin{itemize}
-  \item \emph{Convergence in Distribution} (\emph{Weak Convergence})
-  \item \emph{Convergence in Probability}
+  \item \emph{Convergence in Distribution} (\emph{Weak Convergence}) --
+    $X_n \rightsquigarrow X$ if for all $x$ at which $F_X$ is Continuous:
+    \[
+      \lim_{n\rightarrow\infty} F_{X_n}(x) = F_X(x)
+    \]
+  \item \emph{Convergence in Probability} -- $X_n \xrightarrow{P} X$ if for
+    every $\epsilon > 0$:
+    \[
+      \lim_{n\rightarrow\infty}P(|X_n - X| > \epsilon) = 0
+    \]
   \item \emph{Almost Sure (Everywhere) Convergence} (\emph{Strong Convergence})
+    -- $X_n \xrightarrow{as} X$ if:
+    \[
+      P(\lim_{n\rightarrow\infty}X_n = X) = 1
+    \]
   \item \emph{Sure (Everywhere) Convergence} (\emph{Pointwise Convergence})
-  \item \emph{Convergence in Mean}
+  \item \emph{Convergence in the $r$th Mean} or \emph{L^r-norm}
+    (\S\ref{sec:lp_space})
+    \begin{itemize}
+      \item \emph{Convergence in Quadratic Mean ($L^2$)} --
+        $X_n \xrightarrow{qm} X$ if:
+        \[
+          \lim_{n\rightarrow\infty} E(X_n - X)^2 = 0
+        \]
+      \item \emph{Convergence in $L^1$} -- $X_n \xrightarrow{L^1} X$ if:
+        \[
+          \lim_{n\rightarrow\infty} E(|X_n - X|) = 0
+        \]
+    \end{itemize}
 \end{itemize}
 
+\textbf{Thm.}
+\begin{itemize}
+  \item $X_n \xrightarrow{qm} X \Rightarrow X_n \xrightarrow{L^1} X$
+  \item $X_n \xrightarrow{L^1} X \Rightarrow X_n \xrightarrow{P} X$
+  \item $X_n \xrightarrow{as} X \Rightarrow X_n \xrightarrow{P} X$
+  \item $X_n \xrightarrow{P} X \Rightarrow X_n \rightsquigarrow X$
+  \item $X \rightsquigarrow X \wedge \exists c : P(X = c) = 1 \Rightarrow
+    X_n \xrightarrow{P} X$
+\end{itemize}
 
+\emph{Slutsky's Theorem}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Statistical Fluctuation}\label{sec:statistical_fluctuation}
+% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{Random Walk}\label{sec:random_walk}
