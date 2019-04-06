@@ -96,6 +96,9 @@ various Outcomes and Events can be assessed
 initially equivalent until each object is subjected to an ``Exprimental
 Treatment''
 
+\fist cf. Data Collection (Data Generating Process
+\S\ref{sec:data_generating_process})
+
 \fist cf. Replication (Sampling \S\ref{sec:replication})
 
 
@@ -783,7 +786,8 @@ Sample.
 \fist \emph{Statistical Inference} (\S\ref{sec:inferential_statistics}) is the
 use of Sample Data to \emph{Infer} (cf. Logical Inference
 \S\ref{sec:logical_inference}, Inference Rules \S\ref{sec:inference_rule}) the
-Distribution (\S\ref{sec:probability_distribution}) that ``generated'' the Data.
+Distribution (\S\ref{sec:probability_distribution}) that \emph{Generated}
+(\S\ref{sec:data_generating_process}) the Data.
 
 \fist \emph{Observational Error} (\emph{Measurement Error}
 \S\ref{sec:observational_error}) is the
@@ -1398,9 +1402,10 @@ Theory \S\ref{sec:distribution_function}), Distribution (Analysis
 
 \fist \emph{Statistical Inference} (\S\ref{sec:inferential_statistics}) -- using
 Sample Data (\S\ref{sec:statistical_sample}) to \emph{Infer} the Distribution
-that ``generated'' the Data; a Statistical Model (\S\ref{sec:statistical_model})
-$(S,\mathcal{P})$ is a Sample Space (\S\ref{sec:sample_space}) $S$ together with
-a Set of Probability Distributions $\mathcal{P}$ on $S$
+that \emph{Generated} (\S\ref{sec:data_generating_process}) the Data; a
+Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a Sample
+Space (\S\ref{sec:sample_space}) $S$ together with a Set of Probability
+Distributions $\mathcal{P}$ on $S$
 
 \fist Random Graphs (\S\ref{sec:random_graph}) -- Probability Distribution over
 a Graph
@@ -2466,6 +2471,10 @@ of a Statistical Unit (\S\ref{sec:statistical_unit}) in a Statistical Sample.
 
 \fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
 
+\fist a Statistical Model (\S\ref{sec:statistical_model}) ``embodies'' the Set
+of Statistical Assumptions that concern the \emph{Generation}
+(\S\ref{sec:data_generating_process}) of Sample Data
+
 
 
 \subsubsection{Sample Size}\label{sec:sample_size}
@@ -2487,6 +2496,27 @@ cf. Experiment (\S\ref{sec:experiment})
 
 
 \subsubsection{Order Statistic}\label{sec:order_statistic}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Data Generating Process}\label{sec:data_generating_process}
+% ------------------------------------------------------------------------------
+
+(wiki):
+
+\begin{itemize}
+  \item \emph{Data Collection} -- cf. Experiment (\S\ref{sec:experiment})
+  \item a non-specific, implicit ``Probabilistic Model'' that would include all
+    of the ``Random influences'' that lead to individual Observations
+    (\S\ref{sec:observation})
+  \item a specific \emph{Statistical Model} (\S\ref{sec:statistical_model}) used
+    to represent Random Variations in Observations
+\end{itemize}
+
+\fist \emph{Model Validation} (\S\ref{sec:model_validation}) is the process of
+confirming that the ``outputs'' of a Statistical Model are ``acceptable'' with
+respect to the ``real'' Data Generating Process
 
 
 
@@ -2671,10 +2701,14 @@ Wasserman04 - \emph{All of Statistics}, Part II \emph{Models, Statistical
 \subsection{Statistical Assumption}\label{sec:statistical_assumption}
 % ------------------------------------------------------------------------------
 
-a Statistical Model (\S\ref{sec:statistical_model}) is a Set of Statistical
-Assumptions %FIXME
-
 (wiki):
+
+\emph{Informally}, a Statistical Model (\S\ref{sec:statistical_model}) can be
+thought of as a Set of Statistical Assumptions that allow the calculation of the
+Probability of any Event (\S\ref{sec:event}), i.e. the Statistical Model
+``embodies'' the Set of Statistical Assumptions that concern the
+\emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
+(\S\ref{sec:statistical_sample}).
 
 \emph{Classes of Assumptions} depend on which approach to Statistical Inference
 is used (Model-based Inference or Design-based Inference):
@@ -2704,26 +2738,24 @@ is used (Model-based Inference or Design-based Inference):
 \subsection{Statistical Model}\label{sec:statistical_model}
 % ------------------------------------------------------------------------------
 
-a Set of Statistical Assumptions (\S\ref{sec:statistical_assumption})
-%FIXME
-
 or \emph{Probabilistic Model}
+
+(wiki): \emph{Informally}, a Statistical Model can be thought of as a Set of
+Statistical Assumptions (\S\ref{sec:statistical_assumption}) that allow the
+calculation of the Probability of any Event (\S\ref{sec:event}), i.e. the
+Statistical Model ``embodies'' the Set of Statistical Assumptions that concern
+the \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
+(\S\ref{sec:statistical_sample}).
 
 Statistical Model $(S,\mathcal{P})$ is a Sample Space (\S\ref{sec:sample_space})
 $S$ together with a Set of Probability Distributions
 (\S\ref{sec:probability_distribution}) $\mathcal{P}$ on $S$
 
-\emph{Statistical Population} (\S\ref{sec:population}) -- Set of ``similar
-items'' or Events (\S\ref{sec:probability_event}) of interest
-
-\fist Descriptive Statistics (\S\ref{sec:descriptive_statistics}): a Subset of
-the Population is a \emph{Statistical Sample} (\S\ref{sec:statistical_sample})
-
 Statistical Parameters (Population Parameters \S\ref{sec:population_parameter})
 
-Data
-
 Estimate (\S\ref{sec:estimation_theory}): Data $\rightarrow$ Parameters
+
+Hypothesis Testing (\S\ref{sec:hypothesis_testing})
 
 \emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
 Parameters of a Statistical Model
@@ -2766,6 +2798,38 @@ Discrete Models
 Continuous Models -- any individual outcome has Zero Probability (TODO: explain)
 
 Models based on Conditional Probabilities (\S\ref{sec:conditional_probability})
+
+
+
+\subsubsection{Model Validation}\label{sec:model_validation}
+
+(wiki):
+
+confirming that the ``outputs'' of a Statistical Model are ``acceptable'' with
+respect to the ``real'' Data Generating Process
+(\S\ref{sec:data_generating_process})
+
+can be based on two types of Data (\S\ref{sec:statistical_sample}):
+\begin{enumerate}
+  \item Data that was used in the \emph{construction} of the Model -- usually
+    involves analyzing the \emph{Fit} (\S\ref{sec:model_fit}) or \emph{Residual
+      Diagnostics} (\S\ref{sec:residual})
+  \item Data that was \emph{not} used in the construction of the Model --
+    usually involves analyzing whether the Model's ``\emph{Predictive
+      Performance}'' (\S\ref{sec:prediction_interval}) holds up when applied to
+    new Data
+\end{enumerate}
+
+
+
+\paragraph{Fit}\label{sec:model_fit}
+
+measures the discrepancy between Observed (\S\ref{sec:observation}) values and
+Predicted (\S\ref{sec:prediction}) values under the Statistical Model
+
+\fist analysis of Residuals (\S\ref{sec:residual})
+
+cf. Curve Fitting (\S\ref{sec:curve_fitting})
 
 
 
@@ -3081,6 +3145,15 @@ or \emph{Fitting Deviation}
 
 \fist Regression Residual (\S\ref{sec:regression_residual})
 
+\emph{Residual Diagnostics} is a means of \emph{Model Validation}
+(\S\ref{sec:model_validation}) based on the Data
+(\S\ref{sec:statistical_sample}) that was used to construct a Statistical Model
+(\S\ref{sec:statistical_model}), consisting of analyzing whether Residuals
+of a constructed Statistical Model (\S\ref{sec:statistical_model})
+are \emph{Random} (\S\ref{sec:statistical_randomness}), another method being
+analyzing how well the Model Predictions (\S\ref{sec:prediction}) \emph{Fit}
+(\S\ref{sec:model_fit}) the original Data
+
 
 
 \subsubsection{Bias}\label{sec:bias}
@@ -3124,11 +3197,17 @@ Parameters of a Statistical Model
 
 \fist cf. Curve Fitting (\S\ref{sec:curve_fitting})
 
-Regression Variable, ``Regressor'', or ``Explanatory Variable'' -- Independent
-Variable (\S\ref{sec:independent_variable}); Covariate
+\emph{Regression Variable}, ``Regressor'', or ``Explanatory Variable'' --
+Independent Variable (\S\ref{sec:independent_variable}); Covariate
 
-Response Variable, ``Regressand'', or ``Explained Variable'' -- Dependent
+\emph{Response Variable}, ``Regressand'', or ``Explained Variable'' -- Dependent
 Variable (\S\ref{sec:dependent_variable}); Criterion
+
+\emph{Regression Function} -- the Function of the Independent Variables to be
+Estimated (\S\ref{sec:estimation_theory});
+Regression Analysis is also concerned with characterizing the \emph{variation}
+of the Dependent Variable around the Prediction (\S\ref{sec:prediction}) of the
+Regression Function using a Probability Distribution
 
 example of Pattern Recognition (assignment of some Output Value to a given Input
 Value), other examples are Statistical Classification
@@ -3141,6 +3220,8 @@ Statistical Classification: \emph{Features} (Properties of Observations
 \emph{Outcomes}
 
 Linear Regression, Ordinary Least Squares, Logistic Regression
+
+Prediction Interval (\S\ref{sec:prediction_interval})
 
 cf. Numerical Analysis (\S\ref{sec:numerical_analysis}): Interpolation
 (\S\ref{sec:interpolation}), Extrapolation (TODO)
@@ -3179,17 +3260,6 @@ Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
 \fist cf. Residual (Estimators \S\ref{sec:residual})
 
 Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
-
-
-
-\subsubsection{Fit}\label{sec:model_fit}
-
-measures the discrepancy between Observed (\S\ref{sec:observation}) values and
-Expected Values under the Statistical Model
-
-%FIXME: move section ???
-
-cf. Curve Fitting (\S\ref{sec:curve_fitting})
 
 
 
@@ -3647,6 +3717,21 @@ dual of Linear Quadratic Regulation (LQR \S\ref{sec:lqr})
 % ------------------------------------------------------------------------------
 
 \subsubsection{Prediction}\label{sec:prediction}
+
+\paragraph{Prediction Interval}\label{sec:prediction_interval}\hfill
+
+Estimate (\S\ref{sec:estimation_theory}) of the Interval in which future
+Observations (\S\ref{sec:observation}) will fall with a certain Probability,
+given what has already been Observed
+
+\fist Regression Analysis (\S\ref{sec:regression_analysis})
+
+\emph{Predictive Performance} -- a means of Model Validation
+(\S\ref{sec:model_validation}) which is an analysis of whether a constructed
+Statistical Model (\S\ref{sec:statistical_model}) holds up when applied to new
+Data (\S\ref{sec:statistical_sample})
+
+
 
 \subsubsection{Predictability}\label{sec:predictability}
 
