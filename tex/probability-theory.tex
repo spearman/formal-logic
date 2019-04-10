@@ -983,7 +983,7 @@ $\overline{X}_n$ is close to $\mu$ with high Probability
 \textbf{Thm.} (Weak Law of Large Numbers) \emph{If $X_1, \ldots, X_n$ are IID
   (\S\ref{sec:iid}), then:
   \[
-    \overlina{X}_n \xrightarrow{P} \mu = E(X_1)
+    \overline{X}_n \xrightarrow{P} \mu = E(X_1)
   \]
 }
 (note that since $X_i$ are IID, $\mu$ is identical for all $X_i$)
@@ -1305,7 +1305,6 @@ has Probability $0$ of assuming a particular Value
 
 \subsubsection{Probability Density Function (PDF)}\label{sec:pdf}
 
-
 \emph{Probability Density Function} $f_X(x)$ of a Continuous Random Variable $X$
 has the Properties:
 \begin{enumerate}
@@ -1540,6 +1539,9 @@ exists a Lebesgue-integrable Function $f_X(x)$ such that:
 \]
 for all Real Numbers $a, b$ and $f_X$ is the PDF of the Distribution of $X$
 and equals the Derivative of $F_X$ almost everywhere
+
+a (Higher-order) Function of the CDF is called a \emph{Statistical Functional}
+(Wasserman04 Example 6.05)
 
 
 
@@ -1855,7 +1857,7 @@ Infinite-dimensional generalizations of Multivariate Normal Distributions
 \paragraph{Mill's Inequality}\label{sec:mills_inequality}\hfill
 
 \textbf{Thm.} (Mill's Inequality) \emph{
-  For $Z \sim N(0,1):
+  For $Z \sim N(0,1)$:
   \[
     P(|Z| > t) \leq \sqrt{\frac{2}{\pi}}\frac{e^{-t^2/2}}{t}
   \]
@@ -2187,7 +2189,12 @@ Probability Distribution of a Statistic (\S\ref{sec:statistic})
 
 Statistical Inference (\S\ref{sec:inferential_statistics})
 
-Standard Error (\S\ref{sec:standard_error})
+the Standard Deviation (\S\ref{sec:standard_deviation}) of a Sampling
+Distribution is called the \emph{Standard Error} (\S\ref{sec:standard_error})
+
+(Wasserman04 \S6.3.1):
+the Distribution of a Point Estimator (\S\ref{sec:point_estimator})
+$\hat{\theta}_n = g(X_1,\ldots,X_n)$
 
 
 
@@ -2621,6 +2628,10 @@ Square Root of the Variance (\S\ref{sec:variance}) $\sqrt{V(X)}$
 
 Deviation (\S\ref{sec:deviation})
 
+the Standard Deviation of a Sampling Distribution
+(\S\ref{sec:sampling_distribution}) is called the \emph{Standard Error}
+(\S\ref{sec:standard_error})
+
 \emph{Uncorrected Standard Deviation}:
 \[
   s_n = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \overline{x})^2}
@@ -2738,7 +2749,10 @@ is used (Model-based Inference or Design-based Inference):
 \subsection{Statistical Model}\label{sec:statistical_model}
 % ------------------------------------------------------------------------------
 
-or \emph{Probabilistic Model}
+A \emph{Statistical Model} (or \emph{Probabilistic Model}) $\mathfrak{F} =
+(S,\mathcal{P})$ is a Sample Space (\S\ref{sec:sample_space}) $S$ together with
+a Set of Probability Distributions (\S\ref{sec:probability_distribution})
+$\mathcal{P}$ on $S$
 
 (wiki): \emph{Informally}, a Statistical Model can be thought of as a Set of
 Statistical Assumptions (\S\ref{sec:statistical_assumption}) that allow the
@@ -2747,32 +2761,39 @@ Statistical Model ``embodies'' the Set of Statistical Assumptions that concern
 the \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
 (\S\ref{sec:statistical_sample}).
 
-Statistical Model $(S,\mathcal{P})$ is a Sample Space (\S\ref{sec:sample_space})
-$S$ together with a Set of Probability Distributions
-(\S\ref{sec:probability_distribution}) $\mathcal{P}$ on $S$
+\begin{itemize}
+  \item \emph{Parametric Models} (\S\ref{sec:parametric_model}) -- Distributions
+    are Parameterized by a Finite number of \emph{Statistical Parameters}
+    (Population Parameters \S\ref{sec:population_parameter})
+  \item \emph{Non-parametric Models} (\S\ref{sec:nonparametric_model})
+  \item \emph{Semi-parametric Models} (\S\ref{sec:semiparametric_model}) -- has
+    Finite-dimensional Parameters and Infinite-dimensional ``Nuisance
+    Parameters''
+  \item \emph{Semi-nonparametric Models} (\S\ref{sec:seminonparametric_model})
+    -- has both Finite-dimensional and Infinite-dimensional unknown Parameters
+    of interest
+\end{itemize}
 
-Statistical Parameters (Population Parameters \S\ref{sec:population_parameter})
-
-Estimate (\S\ref{sec:estimation_theory}): Data $\rightarrow$ Parameters
-
-Hypothesis Testing (\S\ref{sec:hypothesis_testing})
+\emph{Estimation} (\S\ref{sec:estimation_theory}): Data $\rightarrow$ Parameters
 
 \emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
-Parameters of a Statistical Model
+Parameters of a Statistical Model; cf. Regression Models
+(\S\ref{sec:regression_model})
 
-cf. Regression Model (\S\ref{sec:regression_model})
+\emph{Prediction} (\S\ref{sec:prediction})
+
+\emph{Hypothesis Testing} (\S\ref{sec:hypothesis_testing})
 
 (wiki):
 
-$(S, \mathcal{P})$
+$\mathfrak{F} = (S, \mathcal{P})$
 
 $S$ -- Sample Space
 
-$\mathcal{P}$ -- Probability Distributions
+$\mathcal{P}$ -- Set of Probability Distributions
 (\S\ref{sec:probability_distribution}) on $S$
 
-\emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation
-(\S\ref{sec:estimation_theory}) of Parameters of a Statistical Model
+Wasserman04, Ch.6
 
 \asterism
 
@@ -2830,6 +2851,114 @@ Predicted (\S\ref{sec:prediction}) values under the Statistical Model
 \fist analysis of Residuals (\S\ref{sec:residual})
 
 cf. Curve Fitting (\S\ref{sec:curve_fitting})
+
+
+
+\subsubsection{Parametric Model}\label{sec:parametric_model}
+
+\emph{Parametric Statistics}
+
+A \emph{Parametric Model} or \emph{Finite-dimensional Model} assumes that Sample
+Data (\S\ref{sec:statistical_sample}) comes from a Population that follows a
+Probability Distribution based on a fixed Finite Set of \emph{Statistical
+  Parameters} (Population Parameters \S\ref{sec:population_parameter}).
+
+A Parametric Model is defined by a collection of Probability Distributions,
+$\mathfrak{F} = \{ F_\theta \ |\ \theta \in \Theta \}$, Indexed by a Finite Set
+$\Theta$ called the \emph{Parameter Space}. For a Parametric Model with
+Real-valued Parameters, $\Theta \subseteq \reals^k$ for some Positive Integer
+$k$.
+
+A Parametric Model consisting of Absolutely Continuous Distributions
+can be specified in terms of corresponding Probability Density Functions:
+\[
+  \mathfrak{F} = \{ f(x; \theta) \ |\ \theta \in \Theta \}
+\]
+
+\emph{example}:
+\begin{itemize}
+  \item the Family of Normal Distributions (\S\ref{sec:normal_distribution}) are
+    Parameterized by the Mean and Standard Deviation:
+    \[
+      \mathfrak{F} = \Big\{
+        f(x; \mu, \sigma) =
+          \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+        \ \Big|\ \mu \in \reals, \sigma > 0
+      \Big\}
+    \]
+    where $f(x; \mu, \sigma)$ is the PDF of each Normal Distribution
+    %FIXME: the above example is from wasserman04, 6.2; the pdf given differs
+    % from that on wikipedia for a normal distribution
+\end{itemize}
+
+
+
+\subsubsection{Non-parametric Model}\label{sec:nonparametric_model}
+
+a Model that cannot be Parameterized by a Finite Parameter Set
+
+e.g. the Model of \emph{all} Cumulative Distribution Functions (CDFs
+\S\ref{sec:cdf}) is Non-parametric
+
+Parameter Set (or \emph{Feature Set} in Machine Learning) is not fixed, i.e. it
+may increase or decrease as new relevant information is collected
+
+
+
+\subsubsection{Semi-parametric Model}\label{sec:semiparametric_model}
+
+\subsubsection{Semi-nonparametric Model}\label{sec:seminonparametric_model}
+
+
+
+\subsubsection{Discrete Choice Model}\label{sec:discrete_choice_model}
+
+\paragraph{Binary Choice Model}\label{sec:binary_choice}\hfill
+
+essentially the same as Binomial Regression
+(\S\ref{sec:binomial_regression}) Models
+
+
+
+\subsubsection{Logistic Model}\label{sec:discrete_uniform_law}
+
+or \emph{Logit Model}
+
+uses a Logistic Function (\S\ref{sec:logistic_function}) to Model a Binary
+Dependent Variable
+
+Logistic Regression (\S\ref{sec:logistic_regression})
+
+
+
+\subsubsection{Generalized Linear Model}\label{sec:generalized_linear_model}
+
+not to be confused with General Linear Models (Multivariate Regression Models
+\S\ref{sec:multivariate_regression})
+
+
+
+\subsubsection{Graphical Model}\label{sec:graphical_model}
+
+\paragraph{Bayesian Network}\label{sec:bayesian_network}\hfill
+
+or \emph{Probabilistic Directed Acyclic Graphical Model}
+
+DAG (\S\ref{sec:dag}) -- dependency structure
+
+representation of Probability Distributions based on \emph{Causal Dependencies}
+
+\emph{Causality} (Pearl 2009) -- counterfactual reasoning
+
+\url{https://golem.ph.utexas.edu/category/2018/07/bayesian_networks.html}
+
+
+
+\subsubsection{Latent Variable Model}\label{sec:latent_variable_model}
+
+\emph{Observable Variable} (\emph{Manifest Variable})
+
+\emph{Latent Variable} (\emph{Hidden Variable})
 
 
 
@@ -2897,167 +3026,6 @@ Choice using an Optimality Critereon
 
 
 
-\subsubsection{Parametric Model}\label{sec:parametric_model}
-
-\emph{Parametric Statistics}
-
-assumes that Sample Data comes from a Population that follows a Probability
-Distribution based on a fixed Set of \emph{Statistical Parameters}
-(Population Parameters \S\ref{sec:population_parameter})
-
-example: the Family of Normal Distributions (\S\ref{sec:normal_distribution})
-are Parameterized by the Mean and Standard Deviation
-
-
-
-\subsubsection{Non-parametric Model}\label{sec:nonparametric_model}
-
-Parameter Set (or \emph{Feature Set} in Machine Learning) is not fixed, i.e. it
-may increase or decrease as new relevant information is collected
-
-
-
-\subsubsection{Graphical Model}\label{sec:graphical_model}
-
-\paragraph{Bayesian Network}\label{sec:bayesian_network}\hfill
-
-or \emph{Probabilistic Directed Acyclic Graphical Model}
-
-DAG (\S\ref{sec:dag}) -- dependency structure
-
-representation of Probability Distributions based on \emph{Causal Dependencies}
-
-\emph{Causality} (Pearl 2009) -- counterfactual reasoning
-
-\url{https://golem.ph.utexas.edu/category/2018/07/bayesian_networks.html}
-
-
-
-\subsubsection{Latent Variable Model}\label{sec:latent_variable_model}
-
-\emph{Observable Variable} (\emph{Manifest Variable})
-
-\emph{Latent Variable} (\emph{Hidden Variable})
-
-
-
-\subsubsection{Generalized Linear Model}\label{sec:generalized_linear_model}
-
-not to be confused with General Linear Models (Multivariate Regression Models
-\S\ref{sec:multivariate_regression})
-
-
-
-\subsubsection{Discrete Choice Model}\label{sec:discrete_choice_model}
-
-\paragraph{Binary Choice Model}\label{sec:binary_choice}\hfill
-
-essentially the same as Binomial Regression
-(\S\ref{sec:binomial_regression}) Models
-
-
-
-\subsubsection{Logistic Model}\label{sec:discrete_uniform_law}
-
-or \emph{Logit Model}
-
-uses a Logistic Function (\S\ref{sec:logistic_function}) to Model a Binary
-Dependent Variable
-
-Logistic Regression (\S\ref{sec:logistic_regression})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
-% ------------------------------------------------------------------------------
-
-\emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
-Populations (\S\ref{sec:population})
-
-in Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is assigned
-a Probability, while in Frequentist Inference
-(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
-Probability
-
-\url{https://github.com/puolival/multipy} -- Python library
-
-Methodology
-
-Confidence Intervals (\S\ref{sec:confidence_interval})
-
-Null Hypothesis $H_0$ represents any Hypothesis
-
-If $H_0$ is Rejected then Alternate Hypothesis $H_1$ is Accepted
-
-$H_1$ usually represents the question to be answered
-
-\begin{enumerate}
-  \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
-  \item Insufficient Evidence: fail to Reject $H_0$
-\end{enumerate}
-
-\emph{Test Statistic}
-
-\emph{Critical Region}, \emph{Critical Value}
-
-Type I Error: Rejection of $H_0$ when it is True
-
-Type II Error: Non-Rejection of $H_0$ when it is False
-
-\emph{Level of Significance} $\alpha$: Probability of committing a
-Type I Error
-
-$\beta$: Probability of committing a Type II Error
-
-\emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
-specific alternative is True
-
-Confidence Intervals (\S\ref{sec:confidence_interval})
-
-One-tailed Test
-
-Two-tailed Test
-
-Test on a single Mean
-
-Test on a single Sample
-
-$P$-value: lowest Level of Significance at which the observed Value of
-the Statistic is Significant
-
-\begin{itemize}
-  \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
-\end{itemize}
-
-
-
-\subsubsection{Test Statistic}\label{sec:test_statistic}
-
-cf. Descriptive Statistic (\S\ref{sec:descriptive_statistics})
-
-\begin{itemize}
-  \item $t$-statistic
-  \item $F$-test
-  \item ...
-\end{itemize}
-
-
-
-\subsubsection{Null Hypothesis}\label{sec:null_hypothesis}
-
-$H_0$
-
-
-
-\subsubsection{Critical Region}\label{sec:critical_region}
-
-or \emph{Region of Rejection}
-
-set of Values of the Test Statistic for which the Null Hypothesis is rejected
-
-
-
 % ------------------------------------------------------------------------------
 \subsection{Estimation Theory}\label{sec:estimation_theory}
 % ------------------------------------------------------------------------------
@@ -3070,14 +3038,17 @@ an \emph{Estimator} (\S\ref{sec:estimator}) attempts to approximate unknown
 Statistical Parameters using ``measured data''
 
 \emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
-Parameters of a Statistical Model (\S\ref{sec:statistical_model})
+Parameters of a Statistical Model (\S\ref{sec:statistical_model}), i.e. the
+Estimation of the \emph{Regression Function} (\S\ref{sec:regression_function})
+defined by those Parameters
 
 approaches:
 \begin{itemize}
-  \item \emph{Probabilistic} -- assume the ``measured data'' is ``random'' with
-    a Probability Distribution (\S\ref{sec:probability_distribution}) dependent
-    on the Statistical Parameters of interest
-  \item \emph{Set-membership} (\S\ref{sec:set_estimation}) -- 
+  \item \emph{Probabilistic} -- assume the Sample Data is Random with a
+    Probability Distribution (\S\ref{sec:probability_distribution}) dependent on
+    the Statistical Parameters of interest
+  \item \emph{Set-membership} (\S\ref{sec:set_estimation}) -- assumes the
+    Sample Data belongs to a Set that depends on the Parameters
 \end{itemize}
 
 \fist cf. Approximation Theory (\S\ref{sec:approximation_theory})
@@ -3105,7 +3076,26 @@ between them is \emph{Regression Analysis} (\S\ref{sec:regression_analysis})
 
 \paragraph{Point Estimator}\label{sec:point_estimator}\hfill
 
+\emph{Point Estimation} -- use of Sample Data to calculate a single Value
+(\emph{Point Estimate} or \emph{Statistic}) of an unknown Population Parameter
+
+\[
+  \hat{\theta}_n = g(X_1, \ldots, X_n)
+\]
+where $X_1, \ldots, X_n$ are IID (\S\ref{sec:iid})
+
+the Distribution of $\hat{\theta}_n$ is called a \emph{Sampling Distribution}
+(\S\ref{sec:sampling_distribution}) and the Standard Deviation
+(\S\ref{sec:standard_deviation}) of $\hat{\theta}_n$ is called the
+\emph{Standard Error} (\S\ref{sec:standard_error})
+
+
+
 \paragraph{Interval Estimator}\label{sec:interval_estimator}\hfill
+
+Confidence Intervals (Frequentist Inference \S\ref{sec:confidence_interval})
+
+Credible Intervals (Bayesian Inference \S\ref{sec:credible_interval})
 
 
 
@@ -3192,27 +3182,38 @@ Set-membership approach to Estimation Theory (cf. Probabilistic approach)
 \subsection{Regression Analysis}\label{sec:regression_analysis}
 % ------------------------------------------------------------------------------
 
-\emph{Regression} is the Estimation (\S\ref{sec:estimation_theory}) of
-Parameters of a Statistical Model
+\emph{Regression} (or \emph{Curve Estimation}) is the Estimation
+(\S\ref{sec:estimation_theory}) of Parameters of a Statistical Model,
+specifically the \emph{Regression Function} $r(x) = E(Y | X = x)$ corresponding
+to those Parameters
 
 \fist cf. Curve Fitting (\S\ref{sec:curve_fitting})
 
-\emph{Regression Variable}, ``Regressor'', or ``Explanatory Variable'' --
-Independent Variable (\S\ref{sec:independent_variable}); Covariate
+\emph{Regression Variable}, ``Regressor'', ``Predictor'', ``Feature'', or
+``Explanatory Variable'' -- \emph{Independent Variable}
+(\S\ref{sec:independent_variable}); Covariate
 
-\emph{Response Variable}, ``Regressand'', or ``Explained Variable'' -- Dependent
-Variable (\S\ref{sec:dependent_variable}); Criterion
+\emph{Response Variable}, ``Regressand'', ``Outcome'', or ``Explained Variable''
+-- \emph{Dependent Variable} (\S\ref{sec:dependent_variable}); Criterion
 
 \emph{Regression Function} -- the Function of the Independent Variables to be
-Estimated (\S\ref{sec:estimation_theory});
+Estimated (\S\ref{sec:estimation_theory}):
+\[
+  r(x) = E(Y | X = x)
+\]
+that is, the Expected Value of the Response Variable given that the Regression
+Variable takes a specific value, where $r \in \mathcal{F}$ is a Member of the
+Statistical (Regression) Model (\S\ref{sec:statistical_model}) being considered
+
 Regression Analysis is also concerned with characterizing the \emph{variation}
-of the Dependent Variable around the Prediction (\S\ref{sec:prediction}) of the
-Regression Function using a Probability Distribution
+of the Dependent Variable $X$ around the \emph{Prediction}
+(\S\ref{sec:prediction}) $Y$ of the Regression Function using a Probability
+Distribution
 
 example of Pattern Recognition (assignment of some Output Value to a given Input
 Value), other examples are Statistical Classification
-(\S\ref{sec:statistical_classification}) and Cluster Analysis
-(\S\ref{sec:cluster_analysis})
+(\S\ref{sec:statistical_classification})--when the Response Variable is
+Discrete--and Cluster Analysis (\S\ref{sec:cluster_analysis})
 
 Statistical Classification: \emph{Features} (Properties of Observations
 \S\ref{sec:observation} or \emph{Instances}) are Explanatory Variables
@@ -3436,6 +3437,96 @@ Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
 
 
 % ------------------------------------------------------------------------------
+\subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
+% ------------------------------------------------------------------------------
+
+\emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
+Populations (\S\ref{sec:population})
+
+in Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is assigned
+a Probability, while in Frequentist Inference
+(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
+Probability
+
+\url{https://github.com/puolival/multipy} -- Python library
+
+Methodology
+
+Confidence Intervals (\S\ref{sec:confidence_interval})
+
+Null Hypothesis $H_0$ represents any Hypothesis
+
+If $H_0$ is Rejected then Alternate Hypothesis $H_1$ is Accepted
+
+$H_1$ usually represents the question to be answered
+
+\begin{enumerate}
+  \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
+  \item Insufficient Evidence: fail to Reject $H_0$
+\end{enumerate}
+
+\emph{Test Statistic}
+
+\emph{Critical Region}, \emph{Critical Value}
+
+Type I Error: Rejection of $H_0$ when it is True
+
+Type II Error: Non-Rejection of $H_0$ when it is False
+
+\emph{Level of Significance} $\alpha$: Probability of committing a
+Type I Error
+
+$\beta$: Probability of committing a Type II Error
+
+\emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
+specific alternative is True
+
+Confidence Intervals (\S\ref{sec:confidence_interval})
+
+One-tailed Test
+
+Two-tailed Test
+
+Test on a single Mean
+
+Test on a single Sample
+
+$P$-value: lowest Level of Significance at which the observed Value of
+the Statistic is Significant
+
+\begin{itemize}
+  \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
+\end{itemize}
+
+
+
+\subsubsection{Test Statistic}\label{sec:test_statistic}
+
+cf. Descriptive Statistic (\S\ref{sec:descriptive_statistics})
+
+\begin{itemize}
+  \item $t$-statistic
+  \item $F$-test
+  \item ...
+\end{itemize}
+
+
+
+\subsubsection{Null Hypothesis}\label{sec:null_hypothesis}
+
+$H_0$
+
+
+
+\subsubsection{Critical Region}\label{sec:critical_region}
+
+or \emph{Region of Rejection}
+
+set of Values of the Test Statistic for which the Null Hypothesis is rejected
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Uncertainty Analysis}\label{sec:uncertainty_analysis}
 % ------------------------------------------------------------------------------
 
@@ -3629,9 +3720,15 @@ invokes the Law of Large Numbers (\S\ref{sec:large_numbers}) to explain stable
 
 \subsubsection{Confidence Interval}\label{sec:confidence_interval}
 
+or \emph{Confidence Set} for Parameter Spaces of Dimension $2$ or greater
+
 Confidence Coefficient
 
 Confidence Limit
+
+Interval Estimator (\S\ref{sec:interval_estimator})
+
+cf. Credible Intervals (Bayesian Inference \S\ref{sec:credible_interval})
 
 Hypothesis Testing (\S\ref{sec:hypothesis_testing})
 
@@ -3650,11 +3747,11 @@ Interval
 
 \emph{
   For $Y_1, \ldots, Y_n$ Independent Observations (\S\ref{sec:observation}) such
-  that $E(Y_i) = 0$ and $a_i \leq Y_i \leq b_i$, given $\epsilon > 0$, for any $t
-  > 0$:
+  that $E(Y_i) = 0$ and $a_i \leq Y_i \leq b_i$, given $\epsilon > 0$, for any
+  $t > 0$:
   \[
     P\Big(\sum_i Y_i \geq \epsilon\Big) \leq
-      e^{-t\epsilon} \prod_i \e^{t^2(b_i - a_i)^2/8}
+      e^{-t\epsilon} \prod_i e^{t^2(b_i - a_i)^2/8}
   \]
 }
 
@@ -3705,6 +3802,12 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 \subsubsection{Posterior Distribution}\label{sec:posterior_distribution}
 
 \subsubsection{Credible Interval}\label{sec:credible_interval}
+
+cf. Confidence Interval (Frequentist Inference \S\ref{sec:confidence_interval})
+
+Interval Estimator (\S\ref{sec:interval_estimator})
+
+
 
 \subsubsection{Linear Quadratic Estimation (LQE)}\label{sec:lqe}
 
@@ -3883,7 +3986,7 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
       P(\lim_{n\rightarrow\infty}X_n = X) = 1
     \]
   \item \emph{Sure (Everywhere) Convergence} (\emph{Pointwise Convergence})
-  \item \emph{Convergence in the $r$th Mean} or \emph{L^r-norm}
+  \item \emph{Convergence in the $r$th Mean} or \emph{$L^r$-norm}
     (\S\ref{sec:lp_space})
     \begin{itemize}
       \item \emph{Convergence in Quadratic Mean ($L^2$)} --
@@ -4186,7 +4289,7 @@ of a Physical System
 \section{Statistical Learning Theory}\label{sec:statistical_learning_theory}
 % ==============================================================================
 
-%FIXME start new document ???
+%FIXME merge with inferential statistics ???
 
 
 
@@ -4194,8 +4297,12 @@ of a Physical System
 \subsection{Statistical Classification}\label{sec:statistical_classification}
 % ------------------------------------------------------------------------------
 
-(wiki): an Algorithm (\S\ref{sec:algorithm}) that implements Classification is
-called a \emph{Classifier}
+(wiki):
+
+Statistical Inference where the Response Variable is \emph{Discrete}
+
+an Algorithm (\S\ref{sec:algorithm}) that implements Classification is called a
+\emph{Classifier}
 
 often done with Logistic Regression (\S\ref{sec:logistic_regression})
 
@@ -4206,8 +4313,8 @@ often done with Logistic Regression (\S\ref{sec:logistic_regression})
 called \emph{Outcomes}
 
 example of Pattern Recognition (assignment of some Output Value to a given Input
-Value), other examples are Regression Analysis (\S\ref{sec:regression_analysis})
-and Cluster Analysis (\S\ref{sec:cluster_analysis})
+Value), other examples are Regression Analysis and Cluster Analysis
+(\S\ref{sec:cluster_analysis})
 
 
 

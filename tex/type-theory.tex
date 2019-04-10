@@ -6763,55 +6763,50 @@ $\lambda + \mathbf{state}$
 
 $\lambda + \mathbf{cont} + \mathbf{exn}$
 
-in a base Language without State, Exceptions cannot express
-Continuations
+in a base Language without State, Exceptions cannot express Continuations
 
-in a base Language without State, Continuations cannot express
-Exceptions; Exceptions can break a Contextual Equivalence that holds
-in the presence of Continuations--Exceptions can detect parts of the
-``Dynamically Enclosing Evaluation Context'' by means of Handlers
-contained inside it, first-class Continuations can only be Invoked
-with some Value to find out anything about them
+in a base Language without State, Continuations cannot express Exceptions;
+Exceptions can break a Contextual Equivalence that holds in the presence of
+Continuations--Exceptions can detect parts of the ``Dynamically Enclosing
+Evaluation Context'' by means of Handlers contained inside it, first-class
+Continuations can only be Invoked with some Value to find out anything about
+them
 %FIXME
 
-Exceptions and Continuations combined in a Language cannot express
-State
+Exceptions and Continuations combined in a Language cannot express State
 
-\fist Note that depending on how Exceptions and Continuations are
-combined, this may not be the case and State may be expressable
+\fist Note that depending on how Exceptions and Continuations are combined, this
+may not be the case and State may be expressable
 
 Exceptions and State cannot express Continuations
 
-Continuations allow Backtracking which breaks an Equivalence that
-holds in the presence of Exceptions; in the presence of Exceptions,
-Continuations are used \emph{Linearly} (whereas general Continuations
-can be used multiple times)
+Continuations allow Backtracking which breaks an Equivalence that holds in the
+presence of Exceptions; in the presence of Exceptions, Continuations are used
+\emph{Linearly} (whereas general Continuations can be used multiple times)
 
 $\mono{raise}\;e\;V$ -- Raise Exception $e$ with some Value $V$
 
-$\mono{handle}\;e\;M\;N$ -- $M$ acts as Handler for Raising of $e$ in
-the Evaluation of $N$
+$\mono{handle}\;e\;M\;N$ -- $M$ acts as Handler for Raising of $e$ in the
+Evaluation of $N$
 
-An Uncaught Exception $\mono{raise}\;e\;V$ without a ``Dynamically
-Enclosing Handler'' has no Reduction
+An Uncaught Exception $\mono{raise}\;e\;V$ without a ``Dynamically Enclosing
+Handler'' has no Reduction
 
 An Exception Name $e$ can be passed like any other Value
 
-An Exception Handler (an Evaluation Context, i.e. as a Continuation)
-cannot be made into a Value
+An Exception Handler (an Evaluation Context, i.e. as a Continuation) cannot be
+made into a Value
 
-in $\lambda + \mathbf{cont} + \mathbf{exn}$, ``Reification'' of the
-Current Continuation includes the Exception Handler in that
-Continuation; ``Throwing'' to the Continuation later ``re-installs''
-the Exception Handler
+in $\lambda + \mathbf{cont} + \mathbf{exn}$, ``Reification'' of the Current
+Continuation includes the Exception Handler in that Continuation; ``Throwing''
+to the Continuation later ``re-installs'' the Exception Handler
 
-an Exception is a form of ``jump'' whose target is determined
-Dynamically %FIXME
+an Exception is a form of ``jump'' whose target is determined Dynamically %FIXME
 
 Contextual Equivalence, Separation %FIXME
 
-there are Expressions which are Contextually Equivalent in $\lambda +
-\mathbf{exn}$ but can be Separated in $\lambda + \mathbf{cont}$
+there are Expressions which are Contextually Equivalent in
+$\lambda + \mathbf{exn}$ but can be Separated in $\lambda + \mathbf{cont}$
 
 
 \cite{plotkin-pretnar13}:
@@ -6840,12 +6835,11 @@ Computation $M \in A + \mathbf{exc}$
   M \;\mono{handled\;with}\;
     \{\mono{raise}_e \mapsto M_e \}_{e\in\mathbf{exc}}
 \]
-where $\{\cdots\}_{e\in\mathbf{exc}}$ is a Set of Computations, one
-for each Exception $e \in \mathbf{exc}$
+where $\{\cdots\}_{e\in\mathbf{exc}}$ is a Set of Computations, one for each
+Exception $e \in \mathbf{exc}$
 
-carries out $M$, ``Intercepting'' Exceptions $e \in \mathbf{exc}$ by
-carrying out predefined Computations $M_e \in A + \mathbf{exc}$
-instead
+carries out $M$, ``Intercepting'' Exceptions $e \in \mathbf{exc}$ by carrying
+out predefined Computations $M_e \in A + \mathbf{exc}$ instead
 
 Un-handled Exceptions take $M_e$ to be $\mono{raise}_e()$
 
@@ -6859,18 +6853,17 @@ Handling Construct Satisfies two Equations:
     = M_{e'}$
 \end{enumerate}
 
-the Computations $M_e$ give a new Model $\mathcal{M}$ for the Theory
-of Exceptions with same Carrier (i.e. Domain \S\ref{sec:domain}) $A +
-\mathbf{exc}$ and for each $e$, each $\mono{raise}_e ()$ is instead
-Interpreted by $M_e$
+the Computations $M_e$ give a new Model $\mathcal{M}$ for the Theory of
+Exceptions with same Carrier (i.e. Domain \S\ref{sec:domain}) $A + \mathbf{exc}$
+and for each $e$, each $\mono{raise}_e ()$ is instead Interpreted by $M_e$
 
 \[
   h(M) \defeq M \;\mono{handled\;with}\;
     \{\mono{raise}_e \mapsto M_e\}_{e \in \mathbf{exc}}
 \]
-is a Unique Homomorphism (Preserving Operations) from $A +
-\mathbf{exc}$ to $\mathcal{M}$ that Extends $in_1 : A \rightarrow A +
-\mathbf{exc}$, i.e. such that:
+is a Unique Homomorphism (Preserving Operations) from $A + \mathbf{exc}$ to
+$\mathcal{M}$ that Extends $in_1 : A \rightarrow A + \mathbf{exc}$, i.e. such
+that:
 \[
   A \xrightarrow{in_1} \mathcal{M} =
     A \xrightarrow{\eta_A} A + \mathbf{exc} \xrightarrow{h} \mathcal{M}
