@@ -646,12 +646,21 @@ Variable (\S\ref{sec:random_variable})
 \section{Random Variable}\label{sec:random_variable}
 % ==============================================================================
 
-a Measurable Function (\S\ref{sec:measurable_function}) on a Sample Space
-(\S\ref{sec:sample_space}) mapping Outcomes (\S\ref{sec:outcome}) in the Sample
-Space to some other Set of Values called the \emph{State Space}, often the Real
-Line (\S\ref{sec:real_line})
+A general \emph{Random Element} is a Measurable Function
+(\S\ref{sec:measurable_function}) on a Sample Space (\S\ref{sec:sample_space})
+mapping Outcomes (\S\ref{sec:outcome}) in the Sample Space to some other Set of
+Values called the \emph{State Space}:
+\[
+  X : \Omega \rightarrow E
+\]
+A \emph{Random Variable} is a Random Element where $E = \reals$ is the Real Line
+(\S\ref{sec:real_line}).
 
-$X : \Omega \rightarrow E$
+other types of Random Elements:
+\begin{itemize}
+  \item Random Measure (\S\ref{sec:random_measure})
+  \item ...
+\end{itemize}
 
 \fist cf. \emph{Statistical Unit} (\S\ref{sec:statistical_unit}) -- one Member
 of a Set of entities being analyzed, providing the ``material source'' for an
@@ -810,7 +819,10 @@ The \emph{Expected Value}, \emph{Expectation}, or \emph{Mean} (First Raw Moment
 of ``average'' where Probabilities are treated like ``frequencies''. (FIXME:
 clarify)
 
-\fist Sample Mean (\S\ref{sec:sample_mean})
+\fist Sample Mean (\S\ref{sec:sample_mean}), Arithmetic Mean
+(\S\ref{sec:arithmetic_mean}) --
+by the Law of Large Numbers (\S\ref{sec:large_numbers}), the Arithmetic Mean
+Converges to the Expected Value as the Sample Size gets larger
 
 (Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
 \emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
@@ -1367,7 +1379,7 @@ and if $F$ has Density $f$, then:
 \[
   X_1, \ldots, X_n \sim f
 \]
-$X_1, \ldots, X_n$ are called a \emph{Random Sample} of Size $n$ from $F$ 
+$X_1, \ldots, X_n$ are called a \emph{Random Sample} of Size $n$ from $F$
 
 cf. Random Population Samples \S\ref{sec:random_sample}) -- in Statistics it is
 commonly assumed that Observations are IID
@@ -1540,8 +1552,10 @@ exists a Lebesgue-integrable Function $f_X(x)$ such that:
 for all Real Numbers $a, b$ and $f_X$ is the PDF of the Distribution of $X$
 and equals the Derivative of $F_X$ almost everywhere
 
-a (Higher-order) Function of the CDF is called a \emph{Statistical Functional}
-(Wasserman04 Example 6.05)
+\fist \emph{Empirical Distribution Function}
+(\S\ref{sec:empirical_distribution}) -- an Unbiased Estimator for $F$ defined as
+the CDF of the Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
+(\S\ref{sec:sample})
 
 
 
@@ -1560,6 +1574,53 @@ $F^{-1}(0.75)$ -- \emph{Third Quartile}
 \paragraph{Probit}\label{sec:probit}\hfill
 
 Quantile Function of the Normal Distribution
+
+
+
+\subsubsection{Statistical Functional}\label{sec:statistical_functional}
+
+(Wasserman04 Example 6.05):
+
+a Function of a CDF is called a \emph{Statistical Functional}
+
+can be used to compute various Summary Statistics
+(\S\ref{sec:summary_statistic}):
+\begin{itemize}
+  \item $\mu = T(F) = \int x dF(x)$
+    -- Mean (Expectation \S\ref{sec:expected_value})
+  \item $\sigma^2 = T(F) = \int (x - \mu)^2 dF(x)$
+    -- Variance (\S\ref{sec:variance})
+  \item $m = T(F) = F^{-1}(0.5)$
+    -- Median (\S\ref{sec:median})
+\end{itemize}
+
+the \emph{Plug-in Estimator} (\S\ref{sec:plugin_principle}) for a Functional
+$\theta = T(F)$ is:
+\[
+  \hat{\theta} = T(\hat{F}_n)
+\]
+where $\hat{F}_n$ is the Empirical Distribution Function
+(\S\ref{sec:empirical_distribution})
+
+
+
+\paragraph{Linear Functional}\label{sec:linear_functional}\hfill
+
+a Functional of the form:
+\[
+  T(F) = \int r(x) dF(x)
+\]
+for some Function $r(x)$
+
+called ``Linear'' because in this case $T$ satisfies
+$T(aF + bG) = aT(F) + bT(G)$, i.e. $T$ is Linear in all arguments
+
+the Plug-in Estimator (\S\ref{sec:plugin_principle}) for a Linear Functional:
+\[
+  T(\hat{F}_n) = \frac{1}{n}\sum_{i=1}^n r(X_i)
+\]
+where $\hat{F}_n$ is the Empirical Distribution Function
+(\S\ref{sec:empirical_distribution})
 
 
 
@@ -2182,23 +2243,6 @@ Exponential Dispersion Models (Probability Distributions
 
 
 % ------------------------------------------------------------------------------
-\subsection{Sampling Distribution}\label{sec:sampling_distribution}
-% ------------------------------------------------------------------------------
-
-Probability Distribution of a Statistic (\S\ref{sec:statistic})
-
-Statistical Inference (\S\ref{sec:inferential_statistics})
-
-the Standard Deviation (\S\ref{sec:standard_deviation}) of a Sampling
-Distribution is called the \emph{Standard Error} (\S\ref{sec:standard_error})
-
-(Wasserman04 \S6.3.1):
-the Distribution of a Point Estimator (\S\ref{sec:point_estimator})
-$\hat{\theta}_n = g(X_1,\ldots,X_n)$
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Tweedie Distribution}\label{sec:tweedie_distribution}
 % ------------------------------------------------------------------------------
 
@@ -2273,20 +2317,31 @@ Population is a \emph{Statistical Sample} (\S\ref{sec:statistical_sample})
 or \emph{Statistical Parameter}
 
 (wiki): a ``quantity'' that indexes a Family of Probability Distributions
-(\S\ref{sec:probability_distribution})
+(\S\ref{sec:probability_distribution}), i.e. a ``numerical characteristic'' of a
+\emph{Statistical Model} (\S\ref{sec:statistical_model})
 
-can be regarded as a ``numerical characteristic'' of a Population or a
-Statistical Model (\S\ref{sec:statistical_model}) \fist cf. Parametric
-Statistical Models (\S\ref{sec:parametric_model})
+Parametric Models (\S\ref{sec:parametric_model}) have a Finite Set of Parameters
 
 example: the Family of Normal Distributions (\S\ref{sec:normal_distribution})
 are Parameterized by the Mean and Standard Deviation
 
+a \emph{Parameter} is to a \emph{Population} as a \emph{Statistic}
+(\S\ref{sec:statistic}) is to a \emph{Sample} (\S\ref{sec:sample})
+
+\fist an \emph{Estimator} (\S\ref{sec:estimator}) is a Statistic used to
+Estimate a Population Parameter
+
 $\mu$, $\sigma$
 
-\fist \emph{Estimation Theory} (\S\ref{sec:estimation_theory}) deals with
-``\emph{Estimating}'' the values of Statistical Parameters
-based on data that has a ``\emph{random component}'' (FIXME: clarify)
+\begin{itemize}
+  \item Location Parameter
+  \item Dispersion Parameter
+  \item Scale Parameter
+  \item Shape Parameter
+  \item Concentration Parameter
+  \item Regression Coefficient
+\end{itemize}
+(TODO: xrefs
 
 
 
@@ -2318,6 +2373,10 @@ a Subset (Sample)
 \fist \emph{Design-based Assumptions} -- Statistical Assumptions
 (\S\ref{sec:statistical_assumption}) of the way Observations have been made,
 e.g. Assumption of Randomization during Sampling (\S\ref{sec:random_sample})
+
+\emph{Empirical Distribution Function} (\S\ref{sec:empirical_distribution}) --
+an Unbiased Estimator for the CDF (\S\ref{sec:cdf}) associated with the
+Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
 
 
 
@@ -2368,24 +2427,51 @@ cf. Statistical Bias (\S\ref{sec:statistical_bias})
 
 
 
-% ------------------------------------------------------------------------------
-\subsection{Statistic}\label{sec:statistic}
-% ------------------------------------------------------------------------------
+\subsubsection{Statistic}\label{sec:statistic}
 
+(wiki):
+
+or \emph{Sample Statistic}
+
+Computed by applying a Function (Statistical Algorithm) to Sample Data
+(Statistical Sample \S\ref{sec:statistical_sample}), i.e. a Statistic is a
 Function of the Random Variable (\S\ref{sec:random_variable}) constituting a
-Random Sample (\S\ref{sec:random_sample})
+Random Sample (\S\ref{sec:random_sample}), therfore a Statistic itself is an
+\emph{Observable} Random Variable:
+\[
+  T_n = g(X_1, \ldots, X_n)
+\]
+
+the term \emph{Statistic} may be used both for the Function and for the value of
+the Function on a given Sample
+
+the Probability Distribution (\S\ref{sec:probability_distribution}) of a
+Statistic is a \emph{Sampling Distribution} (\S\ref{sec:sampling_distribution})
+
+a \emph{Statistic} is to a \emph{Sample} as a \emph{Parameter}
+(\S\ref{sec:population_parameter}) is to a Population (\S\ref{sec:population})
+
+\fist an \emph{Estimator} (\S\ref{sec:estimator}) is a Statistic used to
+Estimate a Population Parameter
+
+\fist Resampling (\S\ref{sec:resampling}) is a method of Estimating the
+precision of a Sample Statistic
 
 $\overline{x}$, $\sigma^2$
 
-The Probability Distribution (\S\ref{sec:probability_distribution}) of
-a Statistic is a Sampling Distribution
-(\S\ref{sec:sampling_distribution})
+\begin{itemize}
+  \item Descriptive Statistics (\S\ref{sec:descriptive_statistics}) --
+    Descriptive (Summary) Statistic (\S\ref{sec:summary_statistic}) used to
+    describe Data
+  \item Estimation Theory (\S\ref{sec:estimation_theory}) -- Estimator used to
+    describe Population Parameter
+  \item Hypothesis Testing (\S\ref{sec:hypothesis_testing}) -- Test Statistic
+    (\S\ref{sec:test_statistic}) used to Test a Hypothesis
+\end{itemize}
 
-Estimator (\S\ref{sec:estimator})
 
 
-
-\subsubsection{Robust Statistic}\label{sec:robust_statistic}
+\paragraph{Robust Statistic}\label{sec:robust_statistic}\hfill
 
 \fist Info-gap Decision Theory (\S\ref{sec:info_gap}) -- Non-probabilistic
 Decision Theory seeking to optimize Robustness to ``failure'' under severe
@@ -2393,9 +2479,11 @@ Uncertainty (\S\ref{sec:uncertainty_analysis})
 
 
 
-\subsubsection{Sufficient Statistic}\label{sec:sufficient_statistic}
+\paragraph{Sufficient Statistic}\label{sec:sufficient_statistic}\hfill
 
-\subsubsection{Sample Mean}\label{sec:sample_mean}
+\paragraph{Sample Mean}\label{sec:sample_mean}\hfill
+
+Estimates the Population Mean (Expectation \S\ref{sec:expected_value})
 
 for Random Variables (\S\ref{sec:random_variable}) $X_1, \ldots, X_n$:
 \[
@@ -2415,9 +2503,30 @@ the Sample Mean has approximately a Normal Distribution for large $n$
 
 
 
-\subsubsection{Sample Variance}\label{sec:sample_variance}
+\paragraph{Sample Variance}\label{sec:sample_variance}\hfill
 
-\subsubsection{Sample Covariance}\label{sec:sample_covariance}
+Estimates the Population Variance
+
+
+
+\paragraph{Sample Covariance}\label{sec:sample_covariance}\hfill
+
+Estimates the Population Covariance
+
+
+
+\subsubsection{Sampling Distribution}\label{sec:sampling_distribution}
+
+Probability Distribution of a Statistic (\S\ref{sec:statistic})
+
+Statistical Inference (\S\ref{sec:inferential_statistics})
+
+the Standard Deviation (\S\ref{sec:standard_deviation}) of a Sampling
+Distribution is called the \emph{Standard Error} (\S\ref{sec:standard_error})
+
+(Wasserman04 \S6.3.1):
+the Distribution of a Point Estimator (\S\ref{sec:point_estimator})
+$\hat{\theta}_n = g(X_1,\ldots,X_n)$
 
 
 
@@ -2568,6 +2677,20 @@ inaccuracy inherent to Observation or Measurement process
 \subsection{Summary Statistics}\label{sec:summary_statistics}
 % ------------------------------------------------------------------------------
 
+various Summary Statistics can be computed by Statistical Functionals
+(\S\ref{sec:statistical_functional}), i.e. Functions of the CDF
+(\S\ref{sec:cdf}):
+\begin{itemize}
+  \item $\mu = T(F) = \int x dF(x)$
+    -- Mean (Expectation \S\ref{sec:expected_value})
+  \item $\sigma^2 = T(F) = \int (x - \mu)^2 dF(x)$
+    -- Variance (\S\ref{sec:variance})
+  \item $m = T(F) = F^{-1}(0.5)$
+    -- Median (\S\ref{sec:median})
+\end{itemize}
+
+
+
 \subsubsection{Measure of Location}\label{sec:location_measure}
 
 \paragraph{Median}\label{sec:median}\hfill
@@ -2581,6 +2704,10 @@ cf. \emph{Unimodality}
 \paragraph{Arithmetic Mean}\label{sec:arithmetic_mean}\hfill
 
 \emph{Arithmetic Mean} $\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i$
+
+by the Law of Large Numbers (\S\ref{sec:large_numbers}), the Arithmetic Mean
+Converges to the Mean (Expected Value \S\ref{sec:expected_value}) as the Sample
+Size gets larger
 
 
 
@@ -2909,8 +3036,6 @@ may increase or decrease as new relevant information is collected
 
 \subsubsection{Semi-nonparametric Model}\label{sec:seminonparametric_model}
 
-
-
 \subsubsection{Discrete Choice Model}\label{sec:discrete_choice_model}
 
 \paragraph{Binary Choice Model}\label{sec:binary_choice}\hfill
@@ -3076,8 +3201,9 @@ between them is \emph{Regression Analysis} (\S\ref{sec:regression_analysis})
 
 \paragraph{Point Estimator}\label{sec:point_estimator}\hfill
 
-\emph{Point Estimation} -- use of Sample Data to calculate a single Value
-(\emph{Point Estimate} or \emph{Statistic}) of an unknown Population Parameter
+\emph{Point Estimation} -- use of Sample Data to calculate a single value
+(\emph{Point Estimate} or \emph{Statistic} \S\ref{sec:statistic}) to serve as an
+Estimate of an unknown Population Parameter (\S\ref{sec:population_parameter})
 
 \[
   \hat{\theta}_n = g(X_1, \ldots, X_n)
@@ -3089,13 +3215,45 @@ the Distribution of $\hat{\theta}_n$ is called a \emph{Sampling Distribution}
 (\S\ref{sec:standard_deviation}) of $\hat{\theta}_n$ is called the
 \emph{Standard Error} (\S\ref{sec:standard_error})
 
+\begin{itemize}
+  \item Minimum-Variance Mean-Unbiased Estimator (MVUE)
+  \item Best Linear Unbiased Estimator (BLUE)
+  \item Minimum Mean Squared Error (MMSE)
+  \item Median-Unbiased Estimator
+  \item Maximum Likelihood Estimator (MLE)
+  \item Method of Moments
+\end{itemize}
+
+Bayesian Point Estimation:
+\begin{itemize}
+  \item Posterior Mean
+  \item Posterior Median
+  \item Maximum A Posteriori (MAP)
+\end{itemize}
+
+(TODO: xrefs)
+
 
 
 \paragraph{Interval Estimator}\label{sec:interval_estimator}\hfill
 
 Confidence Intervals (Frequentist Inference \S\ref{sec:confidence_interval})
 
+$\forall \theta \in \Theta, P_\theta(a(X) < \theta < b(X)) = 1 - \alpha$
+
 Credible Intervals (Bayesian Inference \S\ref{sec:credible_interval})
+
+$P(a(x) < \Theta < b(x) | X = x) = 1 - \alpha$
+
+Prediction Interval (Regression Analysis \S\ref{sec:prediction_interval})
+
+$\forall \theta \in \Theta, P_\theta(a(X) < Y < b(X)) = 1 - \alpha$
+
+Likelihood Intervals (TODO)
+
+Fiducial Intervals (TODO)
+
+Tolerance Interval (TODO)
 
 
 
@@ -3166,6 +3324,89 @@ Sampling Distribution (\S\ref{sec:sampling_distribution})
 
 
 
+\subsubsection{Empirical Distribution Function}
+\label{sec:empirical_distribution}
+
+an Unbiased Estimator for the CDF (\S\ref{sec:cdf}) associated with the
+Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
+(\S\ref{sec:sample})
+
+\fist cf. Empirical Processes (\S\ref{sec:empirical_process})
+
+(Wasserman04 \S7.1)
+
+for $X_1, \ldots, X_n \sim F$ an IID Sample (Random Sample \S\ref{sec:iid})
+where $F$ is a CDF on the Real Line, the \emph{Empirical Distribution Function},
+$\hat{F}_n$, is the Discrete CDF with Mass assigning $1/n$ at each Data Point
+$X_i$:
+\[
+  \hat{F}_n(x) = \frac{\sum_{i=1}^n I(X_i \leq x)}{n}
+\]
+where:
+\[
+  I(X_i \leq x) = \begin{cases}
+    1 & \text{if}\ X_i \leq x \\
+    0 & \text{if}\ X_i > x \\
+  \end{cases}
+\]
+
+\textbf{Thm.} \emph{
+  At any fixed value of $x$:
+  \begin{align*}
+    E(\hat{F}_n(x)) & = F(x)                     \\
+    V(\hat{F}_n(x)) & = \frac{F(x)(1 - F(x))}{n} \\
+    MSE & = \frac{F(x)(1-F(x))}{n} \rightarrow 0 \\
+    \hat{F}_n(x) & \xrightarrow{P} F(x)          \\
+  \end{align*}
+}
+
+\emph{Glivenko-Cantelli Theorem}
+
+\emph{Dvoretsky-Kiefer-Wolfowitz (DKW) Inequality} -- can be used to construct a
+Non-parametric $1-\alpha$ Confidence Band (\S\ref{sec:confidence_band}) for $F$
+(TODO)
+
+
+
+\paragraph{Plug-in Principle}\label{sec:plugin_principle}\hfill
+
+(wiki):
+
+method of Estimation of Statistical Functionals (Functions of the CDF $F$) of a
+Population Distribution by evaluating the same Functionals at the Empirical
+Distribution based on a Sample
+
+(Wasserman04 \S7.2)
+
+the \emph{Plug-in Estimator} for a Statistical Functional
+(\S\ref{sec:statistical_functional}) $\theta = T(F)$ is:
+\[
+  \hat{\theta} = T(\hat{F}_n)
+\]
+
+the Plug-in Estimator for a Linear Functional (\S\ref{sec:linear_functional}):
+\[
+  T(\hat{F}_n) = \frac{1}{n}\sum_{i=1}^n r(X_i)
+\]
+
+Sample Correlation
+
+Sample Quantile
+
+
+
+\subsubsection{Resampling}\label{sec:resampling}
+
+methods of Estimating the precision of Sample Statistics (\S\ref{sec:statistic})
+
+
+
+\paragraph{Bootstrap Method}\label{sec:bootstrap_method}\hfill
+
+\paragraph{Jackknife Method}\label{sec:jackknife_method}\hfill
+
+
+
 \subsubsection{Pooled Estimate}\label{sec:pooled_estimate}
 
 %FIXME
@@ -3209,6 +3450,8 @@ Regression Analysis is also concerned with characterizing the \emph{variation}
 of the Dependent Variable $X$ around the \emph{Prediction}
 (\S\ref{sec:prediction}) $Y$ of the Regression Function using a Probability
 Distribution
+
+\fist Prediction Interval (\S\ref{sec:prediction_interval})
 
 example of Pattern Recognition (assignment of some Output Value to a given Input
 Value), other examples are Statistical Classification
@@ -3722,11 +3965,23 @@ invokes the Law of Large Numbers (\S\ref{sec:large_numbers}) to explain stable
 
 or \emph{Confidence Set} for Parameter Spaces of Dimension $2$ or greater
 
-Confidence Coefficient
+(wiki):
+
+for a Random Sample Vector (IID \S\ref{sec:iid}) $X$ from a Distribution with
+Parameters $\theta \in \Theta$, a \emph{Confidence Interval} for $\theta$ with
+\emph{Confidence Level} (or \emph{Confidence Coefficient}) $1 - \alpha$ is an
+Interval with Random Endpoints $(a(X), b(X))$, determined by the Random
+Variables $a(X)$ and $b(Y)$ such that:
+\[
+  \forall \theta \in \Theta, P_\theta(a(X) < \theta < b(X)) = 1 - \alpha
+\]
+note that $\theta$ is a fixed ``true'' value (not a Random Variable)
 
 Confidence Limit
 
-Interval Estimator (\S\ref{sec:interval_estimator})
+Interval Estimate (\S\ref{sec:interval_estimator})
+
+Prediction Interval (\S\ref{sec:prediction_interval})
 
 cf. Credible Intervals (Bayesian Inference \S\ref{sec:credible_interval})
 
@@ -3737,6 +3992,8 @@ One-tail
 Two-tail
 
 
+
+\paragraph{Confidence Band}\label{sec:confidence_band}\hfill
 
 \paragraph{Hoeffding's Inequality}\label{sec:hoeffdings_inequality}\hfill
 
@@ -3803,9 +4060,11 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 
 \subsubsection{Credible Interval}\label{sec:credible_interval}
 
-cf. Confidence Interval (Frequentist Inference \S\ref{sec:confidence_interval})
-
 Interval Estimator (\S\ref{sec:interval_estimator})
+
+Prediction Interval (\S\ref{sec:prediction_interval})
+
+cf. Confidence Interval (Frequentist Inference \S\ref{sec:confidence_interval})
 
 
 
@@ -3821,11 +4080,15 @@ dual of Linear Quadratic Regulation (LQR \S\ref{sec:lqr})
 
 \subsubsection{Prediction}\label{sec:prediction}
 
-\paragraph{Prediction Interval}\label{sec:prediction_interval}\hfill
+\subsubsection{Prediction Interval}\label{sec:prediction_interval}\hfill
 
-Estimate (\S\ref{sec:estimation_theory}) of the Interval in which future
-Observations (\S\ref{sec:observation}) will fall with a certain Probability,
-given what has already been Observed
+Interval Estimate (\S\ref{sec:interval_estimator}) of where future Observations
+(\S\ref{sec:observation}) will fall with a certain Probability, given what has
+already been Observed
+
+Frequentist: Confidence Interval (\S\ref{sec:confidence_interval})
+
+Bayesian: Credible Interval (\S\ref{sec:credible_interval})
 
 \fist Regression Analysis (\S\ref{sec:regression_analysis})
 
@@ -3836,17 +4099,13 @@ Data (\S\ref{sec:statistical_sample})
 
 
 
+\paragraph{Prediction Band}\label{sec:prediction_band}\hfill
+
+
+
 \subsubsection{Predictability}\label{sec:predictability}
 
 \fist Predictable Process (\S\ref{sec:predictable_process})
-
-
-
-\subsubsection{Prediction Interval}\label{sec:prediction_interval}
-
-Frequentist: Confidence Interval (\S\ref{sec:confidence_interval})
-
-Bayesian: Credible Interval (\S\ref{sec:credible_interval})
 
 
 
@@ -4020,6 +4279,35 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 % ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
+\subsection{Random Measure}\label{sec:random_measure}
+% ------------------------------------------------------------------------------
+
+a Measure-valued Random Element (\S\ref{sec:random_variable})
+
+definition as Transition Kernels
+
+\begin{itemize}
+  \item $P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$ --
+    Empirical Measure (\S\ref{sec:empirical_measure})
+  \item $\mu = \sum_{n=1}^N \delta_{X_n}$ -- Point Process
+    (\S\ref{sec:point_process})
+\end{itemize}
+
+
+
+\subsubsection{Empirical Measure}\label{sec:empirical_measure}
+
+$P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$
+
+where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
+
+the CDF (\S\ref{sec:cdf}) associated with the Empirical Measure of a Sample
+(\S\ref{sec:sample}) is the \emph{Empirical Distribution Function}
+(\S\ref{sec:empirical_distribution})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Random Walk}\label{sec:random_walk}
 % ------------------------------------------------------------------------------
 
@@ -4072,6 +4360,15 @@ a 1D GRF is a Gaussian Process (\S\ref{sec:gaussian_process})
 % ------------------------------------------------------------------------------
 \subsection{Point Process}\label{sec:point_process}
 % ------------------------------------------------------------------------------
+
+a \emph{Point Process} is a Random Measure (\S\ref{sec:random_measure}) of the
+form:
+\[
+  \mu = \sum_{n=1}^N \delta_{X_n}
+\]
+where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
+
+
 
 \subsubsection{Poisson Process}\label{sec:poisson_process}
 
@@ -4179,6 +4476,20 @@ $H = 1/2$
 Stochastic Process for which the Unconditional Joint Probability Distribution
 (\S\ref{sec:joint_probability}) does not change when shiften in Time (TODO:
 xref)
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Empirical Process}\label{sec:empirical_process}
+% ------------------------------------------------------------------------------
+
+Empirical Measure (\S\ref{sec:empirical_measure}):
+
+Empirical Distribution Function (\S\ref{sec:empirical_distribution}):
+
+$P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$
+
+where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
 
 
 
