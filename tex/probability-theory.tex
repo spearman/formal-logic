@@ -267,6 +267,11 @@ and the Probability of an Event
 
 cf. Uncertainty (\S\ref{sec:uncertainty})
 
+cf. \emph{Likelihood} (\S\ref{sec:likelihood}) -- a Probability refers to
+variable ``Data'' (\S\ref{sec:statistical_sample}) for a fixed Hypothesis
+(\S\ref{sec:hypothesis_testing}), while a Likelihood refers to variable
+Hypotheses for fixed Data
+
 $\frac{|A|}{|S|}$
 
 $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
@@ -634,6 +639,9 @@ cf. \emph{Probability} (\S\ref{sec:probability})
 \fist a \emph{Probability Distribution} (\S\ref{sec:probability_distribution})
 is the Pushforward Measure (\S\ref{sec:pushforward_measure}) of a Random
 Variable (\S\ref{sec:random_variable})
+
+\emph{Choquet Simplex} (\S\ref{sec:choquet_theory}) -- any Point in a Choquet
+Simplex is represented by a unique Probability Measure
 
 
 
@@ -1462,8 +1470,14 @@ adding more Variables
 \subsection{Moment}\label{sec:moment}
 % ------------------------------------------------------------------------------
 
-the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k)$ assuming that
-$E(|X|^k) < \infty$
+the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k) = \int x^k dF(x)$
+assuming that $E(|X|^k) < \infty$, where $F$ is the CDF (\S\ref{sec:cdf}) of $X$
+
+the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample}) $X_1, \ldots,
+X_n$ is:
+\[
+  \frac{1}{n}\sum_{i=1}^n X^k_{i}
+\]
 
 \fist Cumulants (\S\ref{sec:cumulant}) -- Moments determine Cumulants and vice
 versa
@@ -1471,7 +1485,8 @@ versa
 \textbf{Thm.} \emph{If $j < k$ and the $k$th Moment Exists, then the $j$th
   moment exists.}
 
-Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment; Sample
+Mean (\S\ref{sec:sample_mean})
 
 Variance (\S\ref{sec:variance}) -- Second Central Moment
 
@@ -1483,6 +1498,9 @@ Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
 Fourth and higher-order Cumulants are not equal to Central Moments
 
 \fist Moment-generating Function (\S\ref{sec:moment_generating_function})
+
+\fist Method of Moments (\S\ref{sec:moments_method}) -- Estimator of Statistical
+Model Parameters
 
 
 
@@ -1593,6 +1611,8 @@ can be used to compute various Summary Statistics
   \item $m = T(F) = F^{-1}(0.5)$
     -- Median (\S\ref{sec:median})
 \end{itemize}
+
+Non-parametric Inference (\S\ref{sec:nonparametric_model})
 
 the \emph{Plug-in Estimator} (\S\ref{sec:plugin_principle}) for a Functional
 $\theta = T(F)$ is:
@@ -2329,7 +2349,12 @@ a \emph{Parameter} is to a \emph{Population} as a \emph{Statistic}
 (\S\ref{sec:statistic}) is to a \emph{Sample} (\S\ref{sec:sample})
 
 \fist an \emph{Estimator} (\S\ref{sec:estimator}) is a Statistic used to
-Estimate a Population Parameter
+Estimate a Population Parameter:
+\begin{itemize}
+  \item Maximum Likelihood Estimation (MLE \S\ref{sec:mle})
+  \item Method of Moments (\S\ref{sec:moments_method})
+  \item ...
+\end{itemize}
 
 $\mu$, $\sigma$
 
@@ -2876,10 +2901,10 @@ is used (Model-based Inference or Design-based Inference):
 \subsection{Statistical Model}\label{sec:statistical_model}
 % ------------------------------------------------------------------------------
 
-A \emph{Statistical Model} (or \emph{Probabilistic Model}) $\mathfrak{F} =
-(S,\mathcal{P})$ is a Sample Space (\S\ref{sec:sample_space}) $S$ together with
-a Set of Probability Distributions (\S\ref{sec:probability_distribution})
-$\mathcal{P}$ on $S$
+A \emph{Statistical Model} (or \emph{Probabilistic Model})
+$\mathfrak{F} = (S,\mathcal{P})$ is a Sample Space (\S\ref{sec:sample_space}),
+$S$, together with a Set of Probability Distributions
+(\S\ref{sec:probability_distribution}) $\mathcal{P}$ on $S$
 
 (wiki): \emph{Informally}, a Statistical Model can be thought of as a Set of
 Statistical Assumptions (\S\ref{sec:statistical_assumption}) that allow the
@@ -2893,9 +2918,10 @@ the \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
     are Parameterized by a Finite number of \emph{Statistical Parameters}
     (Population Parameters \S\ref{sec:population_parameter})
   \item \emph{Non-parametric Models} (\S\ref{sec:nonparametric_model})
+    -- has an Infinite-dimensional Parameter Space
   \item \emph{Semi-parametric Models} (\S\ref{sec:semiparametric_model}) -- has
-    Finite-dimensional Parameters and Infinite-dimensional ``Nuisance
-    Parameters''
+    Finite-dimensional Parameters and Infinite-dimensional
+    ``Nuisance Parameters''
   \item \emph{Semi-nonparametric Models} (\S\ref{sec:seminonparametric_model})
     -- has both Finite-dimensional and Infinite-dimensional unknown Parameters
     of interest
@@ -2915,7 +2941,7 @@ Parameters of a Statistical Model; cf. Regression Models
 
 $\mathfrak{F} = (S, \mathcal{P})$
 
-$S$ -- Sample Space
+$S$ -- ``Sample Space''
 
 $\mathcal{P}$ -- Set of Probability Distributions
 (\S\ref{sec:probability_distribution}) on $S$
@@ -2970,7 +2996,7 @@ can be based on two types of Data (\S\ref{sec:statistical_sample}):
 
 
 
-\paragraph{Fit}\label{sec:model_fit}
+\paragraph{Fit}\label{sec:model_fit}\hfill
 
 measures the discrepancy between Observed (\S\ref{sec:observation}) values and
 Predicted (\S\ref{sec:prediction}) values under the Statistical Model
@@ -2978,6 +3004,8 @@ Predicted (\S\ref{sec:prediction}) values under the Statistical Model
 \fist analysis of Residuals (\S\ref{sec:residual})
 
 cf. Curve Fitting (\S\ref{sec:curve_fitting})
+
+Likelihood-ratio Test
 
 
 
@@ -3018,6 +3046,16 @@ can be specified in terms of corresponding Probability Density Functions:
     % from that on wikipedia for a normal distribution
 \end{itemize}
 
+Parameter Estimation:
+\begin{itemize}
+  \item Method of Moments
+  \item Maximum Likelihood Estimation (MLE \S\ref{sec:mle})
+  \item ...
+\end{itemize}
+(TODO: xrefs)
+
+``Parameters of Interest'', ``Nuisance Parameters''
+
 
 
 \subsubsection{Non-parametric Model}\label{sec:nonparametric_model}
@@ -3029,6 +3067,10 @@ e.g. the Model of \emph{all} Cumulative Distribution Functions (CDFs
 
 Parameter Set (or \emph{Feature Set} in Machine Learning) is not fixed, i.e. it
 may increase or decrease as new relevant information is collected
+
+\fist Non-parametric Inference: Statistical Functionals
+(\S\ref{sec:statistical_functional}), Resampling Methods
+(\S\ref{sec:resampling})
 
 
 
@@ -3151,6 +3193,12 @@ Choice using an Optimality Critereon
 
 
 
+\paragraph{Akaike Information Criterion (AIC)}\label{sec:aic}\hfill
+
+\fist Information Theory (Part \ref{part:information_theory})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Estimation Theory}\label{sec:estimation_theory}
 % ------------------------------------------------------------------------------
@@ -3220,8 +3268,8 @@ the Distribution of $\hat{\theta}_n$ is called a \emph{Sampling Distribution}
   \item Best Linear Unbiased Estimator (BLUE)
   \item Minimum Mean Squared Error (MMSE)
   \item Median-Unbiased Estimator
-  \item Maximum Likelihood Estimator (MLE)
-  \item Method of Moments
+  \item Maximum Likelihood Estimator (MLE \S\ref{sec:mle})
+  \item Method of Moments (\S\ref{sec:moments_method})
 \end{itemize}
 
 Bayesian Point Estimation:
@@ -3232,6 +3280,50 @@ Bayesian Point Estimation:
 \end{itemize}
 
 (TODO: xrefs)
+
+
+
+\subparagraph{Maximum Likelihood Estimation}\label{sec:mle}\hfill
+
+method of Estimating Population Parameters (\S\ref{sec:population_parameter})
+
+$\hat{\theta}$ -- the value of $\theta$ that maximizes the Likilihood
+(\S\ref{sec:likelihood}) $\mathcal{L}(\theta)$
+
+MLE is Consistent, Equivariant, Asymptotically Normal, and Asymptotically
+Optimal (or ``Efficient'')
+
+the MEL Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
+(\S\ref{sec:bayes_estimator})
+
+
+
+\subparagraph{Method of Moments}\label{sec:moments_method}\hfill
+
+method of Estimating Population Parameters (\S\ref{sec:population_parameter})
+
+Moment (\S\ref{sec:moment})
+
+for $k$ unknown Parameters $\theta_1, \theta_2, \ldots, \theta_k$ builds a
+System of $k$ Equations with $k$ Unknowns:
+\begin{flalign*}
+  & \hat{\mu_1} & = \mu_1 (\hat{\theta}_n) \\
+  & \hat{\mu_2} & = \mu_2 (\hat{\theta}_n) \\
+  &             & \vdots \\
+  & \hat{\mu_k} & = \mu_k (\hat{\theta}_n) \\
+\end{flalign*}
+where $\mu_j = E_\theta(X^j) = \int x^j dF_\theta(x)$ is the $j^{th}$ Moment and
+$\hat{\mu_j} = \frac{1}{n}\sum_{i=1}^n X_j^i$ is the $j^{th}$ Sample Moment, and
+$\hat{\theta}_n$ is the \emph{Method of Moments Estimator}
+
+
+
+\subparagraph{Maximum A Posteriori (MAP) Estimation}
+\label{sec:map_estimator}\hfill
+
+Bayesian Estimation
+
+Bayes Estimator (\S\ref{sec:bayes_estimator})
 
 
 
@@ -3322,6 +3414,8 @@ Unbiased Estimator with Smallest Variance
 
 Sampling Distribution (\S\ref{sec:sampling_distribution})
 
+\fist Resampling (\S\ref{sec:resampling})
+
 
 
 \subsubsection{Empirical Distribution Function}
@@ -3399,9 +3493,30 @@ Sample Quantile
 
 methods of Estimating the precision of Sample Statistics (\S\ref{sec:statistic})
 
+\fist Standard Error (\S\ref{sec:standard_error})
+
+Non-parametric Inference (\S\ref{sec:nonparametric_model})
+
 
 
 \paragraph{Bootstrap Method}\label{sec:bootstrap_method}\hfill
+
+Wasserman04 Ch. 8
+
+for a Statistic (\S\ref{sec:statistic}) $T_n(F_n)$ where
+$X = X_1, \ldots, X_n \sim F_n$, two steps:
+\begin{enumerate}
+  \item Estimate $T_n(F_n)$ with $T_n(\hat{F}_n)$ (Plug-in Principle
+    \S\ref{sec:plugin_principle})
+  \item Approximate $T_n(\hat{F}_n)$ using ``\emph{Simulation}'': drawing an
+    Observation from $\hat{F}_n$ is equivalent to drawing one Point at Random
+    from the original Data Set $X$
+\end{enumerate}
+
+Bootstrap Normal Interval, Bootstrap Pivotal Interval, Bootstrap Percentile
+Interval
+
+
 
 \paragraph{Jackknife Method}\label{sec:jackknife_method}\hfill
 
@@ -3683,6 +3798,8 @@ Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
 \subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
 % ------------------------------------------------------------------------------
 
+Neyman, Pearson
+
 \emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
 Populations (\S\ref{sec:population})
 
@@ -3769,48 +3886,13 @@ set of Values of the Test Statistic for which the Null Hypothesis is rejected
 
 
 
-% ------------------------------------------------------------------------------
-\subsection{Uncertainty Analysis}\label{sec:uncertainty_analysis}
-% ------------------------------------------------------------------------------
+\subsubsection{Significance Testing}\label{sec:significance_testing}
 
-\fist Decision Theory (\S\ref{sec:decision_theory})
-
-\fist Robust Statistics (\S\ref{sec:robust_statistic})
+Fisher
 
 
 
-\subsubsection{Uncertainty}\label{sec:uncertainty}
-
-cf. Probability (\S\ref{sec:probability})
-
-(\url{https://plato.stanford.edu/entries/logic-probability/}): Probabilistic
-Semantics (\S\ref{sec:probabilistic_semantics}) for Logical Consequence Relation
-yields \emph{Probability Preserving} (dually, \emph{Uncertainty Propagating})
-Deductive Validity (\S\ref{sec:validity}), rather than Truth Preserving
-(\S\ref{sec:truth_preservation})
-
-
-
-\subsubsection{Sensitivity Analysis}\label{sec:sensitivity_analysis}
-
-\fist Info-gap Decision Theory (\S\ref{sec:info_gap}): application of
-Sensitivity Analysis of the Stability Radius (\S\ref{sec:stability_radius}) type
-to Perturbations in the value of a given Estimate of a Parameter of interest
-(FIXME: clarify)
-
-
-
-\subsubsection{Evidince Theory}\label{sec:evidence_theory}
-
-or \emph{Dempster-Shafer Theory (DST)} or \emph{Theory of Belief Functions}
-
-Transferable Belief Model
-
-
-
-\subsubsection{Possibility Theory}\label{sec:possibility_theory}
-
-alternative to Probability Theory for dealing with certain types of Uncertainty
+\paragraph{Statistical Significance}\label{sec:statistical_significance}\hfill
 
 
 
@@ -3855,6 +3937,51 @@ Asymptotic Thoerems:
 \subsubsection{Large Deviations Theory}\label{sec:large_deviations_theory}
 
 \paragraph{Rate Function}\label{sec:rate_function}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Uncertainty Analysis}\label{sec:uncertainty_analysis}
+% ------------------------------------------------------------------------------
+
+\fist Decision Theory (\S\ref{sec:decision_theory})
+
+\fist Robust Statistics (\S\ref{sec:robust_statistic})
+
+
+
+\subsubsection{Uncertainty}\label{sec:uncertainty}
+
+cf. Probability (\S\ref{sec:probability})
+
+(\url{https://plato.stanford.edu/entries/logic-probability/}): Probabilistic
+Semantics (\S\ref{sec:probabilistic_semantics}) for Logical Consequence Relation
+yields \emph{Probability Preserving} (dually, \emph{Uncertainty Propagating})
+Deductive Validity (\S\ref{sec:validity}), rather than Truth Preserving
+(\S\ref{sec:truth_preservation})
+
+
+
+\subsubsection{Sensitivity Analysis}\label{sec:sensitivity_analysis}
+
+\fist Info-gap Decision Theory (\S\ref{sec:info_gap}): application of
+Sensitivity Analysis of the Stability Radius (\S\ref{sec:stability_radius}) type
+to Perturbations in the value of a given Estimate of a Parameter of interest
+(FIXME: clarify)
+
+
+
+\subsubsection{Evidince Theory}\label{sec:evidence_theory}
+
+or \emph{Dempster-Shafer Theory (DST)} or \emph{Theory of Belief Functions}
+
+Transferable Belief Model
+
+
+
+\subsubsection{Possibility Theory}\label{sec:possibility_theory}
+
+alternative to Probability Theory for dealing with certain types of Uncertainty
 
 
 
@@ -4058,6 +4185,39 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 
 \subsubsection{Posterior Distribution}\label{sec:posterior_distribution}
 
+\subsubsection{Likelihood}\label{sec:likelihood}
+
+\emph{Likelihood Function} $\mathcal{L} : \Theta \rightarrow [0, \infty)$ -- the
+  Joint Density (\S\ref{sec:joint_probability}) of Sample Data
+  (\S\ref{sec:statistical_sample}):
+\[
+  \mathcal{L}(\theta | x) = f_\theta(x)
+\]
+for the given Observation $x$ of Random Variable $X$ with an Absolutely
+Continuous Probability Distribution with PDF (\S\ref{sec:pdf}) $f$ depending on
+Parameters (\S\ref{sec:population_parameter}) $\theta$; for a Discrete
+Distribution:
+\[
+  \mathcal{L}(\theta | x) = P_\theta(X = x)
+\]
+
+\emph{Likelihood Principle}
+
+\emph{Likelihoodist Statistics} (cf. Frequentism, Bayesianism)
+
+cf. \emph{Probability} (\S\ref{sec:probability}) -- a Probability refers to
+variable Data for a fixed Hypothesis (\S\ref{sec:hypothesis_testing}), while a
+Likelihood refers to variable Hypotheses for fixed Data
+
+Maximum Likelihood Estimation (MLE \S\ref{sec:mle}) -- $\hat{\theta}$: the value
+of $\theta$ that Maximizes $\mathcal{L}(\theta)$
+
+Likelihood Interval
+
+Likelihood-ratio Test
+
+
+
 \subsubsection{Credible Interval}\label{sec:credible_interval}
 
 Interval Estimator (\S\ref{sec:interval_estimator})
@@ -4065,6 +4225,14 @@ Interval Estimator (\S\ref{sec:interval_estimator})
 Prediction Interval (\S\ref{sec:prediction_interval})
 
 cf. Confidence Interval (Frequentist Inference \S\ref{sec:confidence_interval})
+
+
+
+\subsubsection{Bayes Estimator}\label{sec:bayes_estimator}\hfill
+
+or \emph{Bayes Action}
+
+Maximum A Priori (MAP) Estimator (\S\ref{sec:map_estimator})
 
 
 
@@ -4155,6 +4323,19 @@ Tests (\S\ref{sec:hypothesis_testing}):
   \item Poker Test
   \item Gap Test
   \item ...
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Randomization}\label{sec:randomization}
+% ------------------------------------------------------------------------------
+
+\begin{itemize}
+  \item Random Experiments (\S\ref{sec:experiment}), cf. Observation
+    (\S\ref{sec:observation}), Sampling (\S\ref{sec:random_sample})
+  \item Survey Sampling
+  \item Resampling (\S\ref{sec:resampling})
 \end{itemize}
 
 
