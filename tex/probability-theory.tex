@@ -268,7 +268,7 @@ and the Probability of an Event
 cf. Uncertainty (\S\ref{sec:uncertainty})
 
 cf. \emph{Likelihood} (\S\ref{sec:likelihood}) -- a Probability refers to
-variable ``Data'' (\S\ref{sec:statistical_sample}) for a fixed Hypothesis
+variable ``Sample Data'' (\S\ref{sec:sample}) for a fixed Hypothesis
 (\S\ref{sec:hypothesis_testing}), while a Likelihood refers to variable
 Hypotheses for fixed Data
 
@@ -648,6 +648,15 @@ Simplex is represented by a unique Probability Measure
 \subsubsection{Probability Measure Function}
 \label{sec:probability_measure_function}
 
+\subsubsection{Kullback-Leibler Divergence}\label{sec:kullback_leibler}
+
+can be used to characterize Relative Entropy (\S\ref{sec:relative_entropy}),
+Randomness (\S\ref{sec:statistical_randomness})
+
+defined between PDFs (\S\ref{sec:pdf})
+
+can be used to show Consistency of MLE (\S\ref{sec:mle})
+
 
 
 % ==============================================================================
@@ -661,6 +670,12 @@ Values called the \emph{State Space}:
 \[
   X : \Omega \rightarrow E
 \]
+The Type (\S\ref{sec:datatype}) of a State Space is called a \emph{Statistical
+  Data Type} (\S\ref{sec:statistical_data_type}).
+
+A Realization of a Random Element resulting from a specific Outcome is called an
+\emph{Observation} (\S\ref{sec:observation}).
+
 A \emph{Random Variable} is a Random Element where $E = \reals$ is the Real Line
 (\S\ref{sec:real_line}).
 
@@ -673,6 +688,10 @@ other types of Random Elements:
 \fist cf. \emph{Statistical Unit} (\S\ref{sec:statistical_unit}) -- one Member
 of a Set of entities being analyzed, providing the ``material source'' for an
 abstract Random Variable (wiki)
+
+\fist a \emph{Statistic} (\S\ref{sec:statistic}) is an Observable Random
+Variable defined as a Function of a Random Variable constituting a Random Sample
+(IID \S\ref{sec:random_sample})
 
 Discrete Random Variable (\S\ref{sec:discrete_random_variable})
 
@@ -793,12 +812,22 @@ An \emph{Observation} (\emph{Observed Value}, \emph{Realization}, or
 corresponding to the actual Outcome (\S\ref{sec:outcome}) resulting from
 performing an Experiment (\S\ref{sec:experiment}).
 
+\fist A \emph{Data Generating Process} (\S\ref{sec:data_generating_process})
+is a possibly unspecified \emph{Probabilistic (Statistical) Model}
+(\S\ref{sec:statistical_model}) governing the ``Generation'' of Observed Data.
+The \emph{Level of Measurement} (\S\ref{sec:measurement_level}) is a
+classification of the \emph{Statistical Data Type}
+(\S\ref{sec:statistical_data_type}) of a State Space.
+
 \fist A \emph{(Statistical) Population} (\S\ref{sec:population}) is a totality
-of Observations. A \emph{Statistical Sample} (\S\ref{sec:statistical_sample}) is
+of Observations. A \emph{Statistical Sample} (\S\ref{sec:sample}) is
 a Subset of a Population selected by a definite \emph{Sampling Procedure}
-(\S\ref{sec:sample}). A \emph{``Data Point''} is an Observation of a
+(\S\ref{sec:sampling}). A \emph{``Data Point''} is an Observation of a
 \emph{Statistical Unit} (\S\ref{sec:statistical_unit}) in the Statistical
+Sample. A \emph{Statistic} (\S\ref{sec:statistic}) is an Observable Random
+Variable defined as a Function of a Random Variable constituting a Random
 Sample.
+
 
 \fist \emph{Statistical Inference} (\S\ref{sec:inferential_statistics}) is the
 use of Sample Data to \emph{Infer} (cf. Logical Inference
@@ -1351,6 +1380,8 @@ Probability Density Function and vice versa
 \fist Probability Amplitude (Quantum Systems \S\ref{sec:probability_amplitude}):
 Complex Number with Modulus Squared representing a Probability Density
 
+\fist Kullback-Leibler Divergence (\S\ref{sec:kullback_leibler})
+
 
 
 \paragraph{Normalizing Constant}\label{sec:normalizing_constant}\hfill
@@ -1387,10 +1418,10 @@ and if $F$ has Density $f$, then:
 \[
   X_1, \ldots, X_n \sim f
 \]
-$X_1, \ldots, X_n$ are called a \emph{Random Sample} of Size $n$ from $F$
+$X_1, \ldots, X_n$ are then called a \emph{Random Sample of Size $n$ from $F$}
+(\S\ref{sec:random_sample})
 
-cf. Random Population Samples \S\ref{sec:random_sample}) -- in Statistics it is
-commonly assumed that Observations are IID
+in Statistics it is commonly assumed that Observations are IID
 
 
 
@@ -1420,7 +1451,7 @@ Theory \S\ref{sec:distribution_function}), Distribution (Analysis
 (\S\ref{sec:frequency_distribution})
 
 \fist \emph{Statistical Inference} (\S\ref{sec:inferential_statistics}) -- using
-Sample Data (\S\ref{sec:statistical_sample}) to \emph{Infer} the Distribution
+Sample Data (\S\ref{sec:sample_sample}) to \emph{Infer} the Distribution
 that \emph{Generated} (\S\ref{sec:data_generating_process}) the Data; a
 Statistical Model (\S\ref{sec:statistical_model}) $(S,\mathcal{P})$ is a Sample
 Space (\S\ref{sec:sample_space}) $S$ together with a Set of Probability
@@ -2056,6 +2087,10 @@ Non-symmetric
 
 
 
+\paragraph{Wishart Distribution}\label{sec:wishart_distribution}\hfill
+
+
+
 \subsubsection{Beta Distribution}\label{sec:beta_distribution}
 
 Gamma Function (\S\ref{sec:gamma_function})
@@ -2315,8 +2350,7 @@ Transient Signals (\S\ref{sec:transient})
 
 totality of Observations (\S\ref{sec:observation})
 
-Value of a Random Variable $X$ having some Probability
-Distribution $f(x)$
+Value of a Random Variable $X$ having some Probability Distribution $f(x)$
 
 Paired Observation (Dependent) (???)
 
@@ -2325,8 +2359,83 @@ Paired Observation (Dependent) (???)
 \emph{Statistical Population} -- a Set of ``similar items'' or Events
 (\S\ref{sec:probability_event}) of interest
 
-Descriptive Statistics (\S\ref{sec:descriptive_statistics}): a Subset of the
-Population is a \emph{Statistical Sample} (\S\ref{sec:statistical_sample})
+\fist cf. Data Generating Process (\S\ref{sec:data_generating_process}), Data
+Collection (\S\ref{sec:data_collection})
+
+A Subset of the Population is a \emph{Statistical Sample} (\S\ref{sec:sample}).
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Data Generating Process}\label{sec:data_generating_process}
+% ------------------------------------------------------------------------------
+
+(wiki):
+
+\begin{itemize}
+  \item \emph{Data Collection} (\S\ref{sec:data_collection})
+  \item a ``notional'', \emph{non-specific} Probabilistic Model
+    that would include all of the ``Random influences'' that lead to individual
+    Observations (\S\ref{sec:observation})
+  \item a \emph{specific} \emph{Statistical Model}
+    (\S\ref{sec:statistical_model}) used to represent Random Variations in
+    Observations
+\end{itemize}
+
+\fist \emph{Model Validation} (\S\ref{sec:model_validation}) is the process of
+confirming that the ``outputs'' of a Statistical Model are ``acceptable'' with
+respect to the ``real'' Data Generating Process
+
+\fist cf. Sample Data (Statistical Sample \S\ref{sec:sample})
+
+\fist cf. Stochastic Process (\S\ref{sec:stochastic_process})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Level of Measurement}\label{sec:measurement_level}
+% ------------------------------------------------------------------------------
+
+\begin{itemize}
+  \item \emph{Nominal} -- Central Tendency: Mode (\S\ref{sec:mode})
+  \item \emph{Ordinal} -- Central Tendency: Median (\S\ref{sec:median})
+  \item \emph{Interval} -- Central Tendency: Mean (\S\ref{sec:arithmetic_mean}),
+    Deviation (\S\ref{sec:deviation})
+  \item \emph{Ratio} -- Central Tendency: Geometric Mean
+    (\S\ref{sec:geometric_mean}), Variation Coefficient (TODO)
+\end{itemize}
+
+
+
+\subsubsection{Statistical Data Type}\label{sec:statistical_data_type}
+
+\fist cf. \emph{Datatype}
+
+cf. Statistical Unit (\S\ref{sec:statistical_unit})
+
+\emph{Simple Data Types}:
+\begin{itemize}
+  \item Binary
+  \item Categorical
+  \item Ordinal
+  \item Binomial
+  \item Count
+  \item Real
+  \item Positive Real
+  \item ...
+\end{itemize}
+
+\emph{Multivariate Data Types}:
+\begin{itemize}
+  \item Random Vector
+  \item Random Sequence
+  \item Bayes Networks
+  \item Random Process
+  \item Random Field
+  \item ...
+\end{itemize}
+
+(TODO: xrefs)
 
 
 
@@ -2340,10 +2449,14 @@ or \emph{Statistical Parameter}
 (\S\ref{sec:probability_distribution}), i.e. a ``numerical characteristic'' of a
 \emph{Statistical Model} (\S\ref{sec:statistical_model})
 
-Parametric Models (\S\ref{sec:parametric_model}) have a Finite Set of Parameters
+Parametric Models (\S\ref{sec:parametric_model}) have a Finite Set
+of Parameters
 
 example: the Family of Normal Distributions (\S\ref{sec:normal_distribution})
 are Parameterized by the Mean and Standard Deviation
+
+Non-parametric models (\S\ref{sec:nonparametric_model}) have an Infinite Set of
+Parameters
 
 a \emph{Parameter} is to a \emph{Population} as a \emph{Statistic}
 (\S\ref{sec:statistic}) is to a \emph{Sample} (\S\ref{sec:sample})
@@ -2376,17 +2489,68 @@ $\mu$, $\sigma$
 
 
 
+% ==============================================================================
+\section{Statistical Sample}\label{sec:sample}
+% ==============================================================================
+
+A \emph{Statistical Sample} (or \emph{Data Sample}) is a Subset of a Statistical
+Population, selected by a definite procedure (\emph{Sampling Procedure}
+\S\ref{sec:sampling}).
+
+A \emph{Data Point} is an Observation (Random Variate \S\ref{sec:observation})
+of a Statistical Unit (\S\ref{sec:statistical_unit}) in a Statistical Sample.
+
+\fist cf. \emph{Data} (\S\ref{sec:data}), \emph{Data Generating Process}
+(\S\ref{sec:data_generating_process})
+
+\fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
+
+\fist a Statistical Model (\S\ref{sec:statistical_model}) ``embodies'' the Set
+of Statistical Assumptions that concern the \emph{Generation}
+(\S\ref{sec:data_generating_process}) of Sample Data
+
+
+
 % ------------------------------------------------------------------------------
-\subsection{Sample}\label{sec:sample}
+\subsection{Statistical Unit}\label{sec:statistical_unit}
 % ------------------------------------------------------------------------------
 
-Subset of a Population
+one of a Member of a Set of entities being analyzed, providing the ``material
+source'' for abstract Random Variables (\S\ref{sec:random_variable})
+
+cf. Statistical Data Type (\S\ref{sec:statistical_data_type})
+
+
+
+\subsubsection{Unit of Observation}\label{sec:observational_unit}
+
+\emph{Unit of Observation} or \emph{Unit of Collection}
+
+\begin{itemize}
+  \item \emph{Experimental Unit} -- a Member of a Set of objects that are
+    initially equivalent until each object is subjected to an ``Experimental
+    Treatment'' (\S\ref{sec:experiment})
+  \item \emph{Sampling Unit} -- an object that has been Sampled
+    (\S\ref{sec:sample}) from a Statistical Population (\S\ref{sec:population})
+\end{itemize}
+
+\fist Observation (Random Variate \S\ref{sec:observation})
+
+
+
+\subsubsection{Unit of Analysis}\label{sec:analysis_unit}
+
+the entity that frames what is being ``analyzed'' in a ``study'' (cf. Experiment
+\S\ref{sec:experiment})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Sampling}\label{sec:sampling}
+% ------------------------------------------------------------------------------
 
 \emph{Sampling} is the \emph{selection} of a Subset (Statistical Sample) from
 within a Statistical Population
-
-Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample}) -- a
-Sample selected by a definite Sampling Procedure
 
 \fist \emph{Sampling Unit} (Unit of Observation \S\ref{sec:observational_unit})
 -- an object that has been Sampled from a Population
@@ -2405,34 +2569,96 @@ Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
 
 
 
-\subsubsection{Random Sample}\label{sec:random_sample}
+\subsubsection{Data Collection}\label{sec:data_collection}
+
+%FIXME: cf. measurement, observation ?
+
+
+
+\subsubsection{Sample Size}\label{sec:sample_size}
+
+\emph{Sample Size Determination} -- choosing the number of Observations
+(\S\ref{sec:observation}) or Replicates (\S\ref{sec:replication}) to include in
+a Statistical Sample
+
+\fist Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory}):
+evaluates properties of Estimators (\S\ref{sec:estimator}) and Statistical Tests
+(\S\ref{sec:hypothesis_testing}) as Sample Size $n \rightarrow \infty$
+
+
+
+\subsubsection{Replication}\label{sec:replication}
+
+cf. Experiment (\S\ref{sec:experiment})
+
+
+
+\subsubsection{Observational Error}\label{sec:observational_error}
+
+\emph{Observational Error} (or \emph{Measurement Error}) is the difference
+between an Observed Value (Random Variate \S\ref{sec:observation}) of a
+``quantity'' and its ``true'' Value
+
+cf. \emph{Statistical Error} (\S\ref{sec:statistical_error})
+
+
+
+\paragraph{Random Error}\label{sec:random_error}\hfill
+
+or \emph{Random Variation}
+
+inconsistency of repeated Measurements of a Constant attribute or quantity
+
+usually Normally Distributed due to the Central Limit Theorem
+(\S\ref{sec:central_limit})
+
+\fist a \emph{Distributional Assumption} is a Model-baesd Statistical Assumption
+(\S\ref{sec:statistical_assumption}) about the Probability Distribution of
+Random Errors
+
+
+
+\paragraph{Systematic Error}\label{sec:systmatic_error}\hfill
+
+or \emph{Statistical Bias}
+
+cf. \emph{Sampling Bias} (\S\ref{sec:nonrandom_sample})
+
+inaccuracy inherent to Observation or Measurement process
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Random Sample}\label{sec:random_sample}
+% ------------------------------------------------------------------------------
 
 A \emph{Random Sample} (or \emph{Probability Sample}) is a Sample where each
 individual Member of the Population has a known Non-zero Probability of being
 selected as part of the Sample.
 
-\fist cf. \emph{Random Sample} (Independent and Identically Distributed Random
-Vector \S\ref{sec:iid}) $X_1, \ldots, X_n \sim F$ -- in Statistics it is
-commonly assumed that Observations are IID
+A Random Vector (Multivariate Random Variable \S\ref{sec:random_vector}) of IID
+(\S\ref{sec:iid}) Random Variables $X_1, \ldots, X_n \sim F$ is called a
+\emph{Random Sample of Size $n$ from $F$} -- in Statistics it is commonly
+assumed that Observations are IID.
 
-Statistical Sample (Descriptive Statistics \S\ref{sec:statistical_sample})
-
-cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
+\fist cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
 \emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
 
 \fist Monte Carlo Simulation (\S\ref{sec:monte_carlo})
 
 
 
-\paragraph{Simple Random Sample}\label{sec:simple_random_sample}\hfill
+\subsubsection{Simple Random Sample}\label{sec:simple_random_sample}
 
-\paragraph{Systematic Sample}\label{sec:systematic_sample}\hfill
+\subsubsection{Systematic Sample}\label{sec:systematic_sample}
 
-\paragraph{Stratified Random Sample}\label{sec:stratified_random_sample}\hfill
+\subsubsection{Stratified Random Sample}\label{sec:stratified_random_sample}
 
 
 
-\subsubsection{Non-random Sample}\label{sec:nonrandom_sample}
+% ------------------------------------------------------------------------------
+\subsection{Non-random Sample}\label{sec:nonrandom_sample}
+% ------------------------------------------------------------------------------
 
 (or \emph{Non-probability Sample} or \emph{Biased Sample})
 
@@ -2452,16 +2678,17 @@ cf. Statistical Bias (\S\ref{sec:statistical_bias})
 
 
 
-\subsubsection{Statistic}\label{sec:statistic}
+% ------------------------------------------------------------------------------
+\subsection{Statistic}\label{sec:statistic}
+% ------------------------------------------------------------------------------
 
 (wiki):
 
 or \emph{Sample Statistic}
 
-Computed by applying a Function (Statistical Algorithm) to Sample Data
-(Statistical Sample \S\ref{sec:statistical_sample}), i.e. a Statistic is a
-Function of the Random Variable (\S\ref{sec:random_variable}) constituting a
-Random Sample (\S\ref{sec:random_sample}), therfore a Statistic itself is an
+Computed by applying a Function (Statistical Algorithm) to Sample Data, i.e. a
+Statistic is a Function of the Random Variable (\S\ref{sec:random_variable})
+constituting a Random Sample, therefore a Statistic itself is an
 \emph{Observable} Random Variable:
 \[
   T_n = g(X_1, \ldots, X_n)
@@ -2494,9 +2721,27 @@ $\overline{x}$, $\sigma^2$
     (\S\ref{sec:test_statistic}) used to Test a Hypothesis
 \end{itemize}
 
+(Wasserman04 \S9.13.2) a Statistic induces a \emph{Partition} on the Set of
+Outcomes (FIXME: clarify)
 
 
-\paragraph{Robust Statistic}\label{sec:robust_statistic}\hfill
+
+\subsubsection{Sampling Distribution}\label{sec:sampling_distribution}
+
+Probability Distribution of a Statistic (\S\ref{sec:statistic})
+
+Statistical Inference (\S\ref{sec:inferential_statistics})
+
+the Standard Deviation (\S\ref{sec:standard_deviation}) of a Sampling
+Distribution is called the \emph{Standard Error} (\S\ref{sec:standard_error})
+
+(Wasserman04 \S6.3.1):
+the Distribution of a Point Estimator (\S\ref{sec:point_estimator})
+$\hat{\theta}_n = g(X_1,\ldots,X_n)$
+
+
+
+\subsubsection{Robust Statistic}\label{sec:robust_statistic}
 
 \fist Info-gap Decision Theory (\S\ref{sec:info_gap}) -- Non-probabilistic
 Decision Theory seeking to optimize Robustness to ``failure'' under severe
@@ -2504,9 +2749,36 @@ Uncertainty (\S\ref{sec:uncertainty_analysis})
 
 
 
-\paragraph{Sufficient Statistic}\label{sec:sufficient_statistic}\hfill
+\subsubsection{Sufficient Statistic}\label{sec:sufficient_statistic}
 
-\paragraph{Sample Mean}\label{sec:sample_mean}\hfill
+a \emph{Sufficient Statistic} is a Statistic that contains all the
+Information (\S\ref{sec:information}) in the Data
+
+(Wasserman04 \S9.13.2):
+
+a Statistic if Sufficient if the Likelihood Function (\S\ref{sec:likelihood})
+can be computed knowing only $T(X^n)$,
+\emph{or}: a Statistic is Sufficient if the Distribution of $X^n$ given
+$T(X^n) = t$ does not depend on Model Paramters $\theta$
+
+a Statistic is \emph{Minimal Sufficient} if it is Sufficient and is a Function
+of every other Sufficient Statistic
+
+\emph{Factorization Theorem}
+
+\emph{Rao-Blackwell Theorem} -- an Estimator (\S\ref{sec:estimator}) that does
+not depend on a Sufficient Statistic is sub-optimal
+
+for Exponential Family Distributions (\S\ref{sec:exponential_family}) which have
+PDFs of the form:
+\[
+  f(x; \theta) = h(x) e^{\eta(\theta)T(x) - B(\theta)}
+\]
+$T$ is called the \emph{Natural Sufficient Statistic}
+
+
+
+\subsubsection{Sample Mean}\label{sec:sample_mean}
 
 Estimates the Population Mean (Expectation \S\ref{sec:expected_value})
 
@@ -2528,30 +2800,15 @@ the Sample Mean has approximately a Normal Distribution for large $n$
 
 
 
-\paragraph{Sample Variance}\label{sec:sample_variance}\hfill
+\subsubsection{Sample Variance}\label{sec:sample_variance}
 
 Estimates the Population Variance
 
 
 
-\paragraph{Sample Covariance}\label{sec:sample_covariance}\hfill
+\subsubsection{Sample Covariance}\label{sec:sample_covariance}
 
 Estimates the Population Covariance
-
-
-
-\subsubsection{Sampling Distribution}\label{sec:sampling_distribution}
-
-Probability Distribution of a Statistic (\S\ref{sec:statistic})
-
-Statistical Inference (\S\ref{sec:inferential_statistics})
-
-the Standard Deviation (\S\ref{sec:standard_deviation}) of a Sampling
-Distribution is called the \emph{Standard Error} (\S\ref{sec:standard_error})
-
-(Wasserman04 \S6.3.1):
-the Distribution of a Point Estimator (\S\ref{sec:point_estimator})
-$\hat{\theta}_n = g(X_1,\ldots,X_n)$
 
 
 
@@ -2563,138 +2820,8 @@ Summary of Data: Mean, Median, Mode, Standard Deviation
 
 cf. Test Statistics (\S\ref{sec:test_statistic})
 
-
-
-% ------------------------------------------------------------------------------
-\subsection{Statistical Unit}\label{sec:statistical_unit}
-% ------------------------------------------------------------------------------
-
-one of a Member of a Set of entities being analyzed, providing the ``material
-source'' for abstract Random Variables (\S\ref{sec:random_variable})
-
-
-
-\subsubsection{Unit of Observation}\label{sec:observational_unit}
-
-\emph{Unit of Observation} or \emph{Unit of Collection}
-
-\begin{itemize}
-  \item \emph{Experimental Unit} -- a Member of a Set of objects that are
-    initially equivalent until each object is subjected to an ``Experimental
-    Treatment'' (\S\ref{sec:experiment})
-  \item \emph{Sampling Unit} -- an object that has been Sampled
-    (\S\ref{sec:sample}) from a Statistical Population (\S\ref{sec:population})
-\end{itemize}
-
-\fist Observation (Random Variate \S\ref{sec:observation})
-
-
-
-\subsubsection{Unit of Analysis}\label{sec:analysis_unit}
-
-the entity that frames what is being ``analyzed'' in a ``study'' (cf. Experiment
-\S\ref{sec:experiment})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Statistical Sample}\label{sec:statistical_sample}
-% ------------------------------------------------------------------------------
-
-A \emph{Statistical Sample} (or \emph{Data Sample}) is a Subset of a Statistical
-Population (\S\ref{sec:population}), selected by a definite procedure
-(\emph{Sampling Procedure} \S\ref{sec:sample}).
-
-A \emph{Data Point} is an Observation (Random Variate \S\ref{sec:observation})
-of a Statistical Unit (\S\ref{sec:statistical_unit}) in a Statistical Sample.
-
-\fist cf. \emph{Data Items} (\S\ref{sec:data_item}) in Databases
-
-\fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
-
-\fist a Statistical Model (\S\ref{sec:statistical_model}) ``embodies'' the Set
-of Statistical Assumptions that concern the \emph{Generation}
-(\S\ref{sec:data_generating_process}) of Sample Data
-
-
-
-\subsubsection{Sample Size}\label{sec:sample_size}
-
-\emph{Sample Size Determination} -- choosing the number of Observations
-(\S\ref{sec:observation}) or Replicates (\S\ref{sec:replication}) to include in
-a Statistical Sample
-
-\fist Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory}):
-evaluates properties of Estimators (\S\ref{sec:estimator}) and Statistical Tests
-(\S\ref{sec:hypothesis_testing}) as Sample Size $n \rightarrow \infty$
-
-
-
-\subsubsection{Replication}\label{sec:replication}
-
-cf. Experiment (\S\ref{sec:experiment})
-
-
-
-\subsubsection{Order Statistic}\label{sec:order_statistic}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Data Generating Process}\label{sec:data_generating_process}
-% ------------------------------------------------------------------------------
-
-(wiki):
-
-\begin{itemize}
-  \item \emph{Data Collection} -- cf. Experiment (\S\ref{sec:experiment})
-  \item a non-specific, implicit ``Probabilistic Model'' that would include all
-    of the ``Random influences'' that lead to individual Observations
-    (\S\ref{sec:observation})
-  \item a specific \emph{Statistical Model} (\S\ref{sec:statistical_model}) used
-    to represent Random Variations in Observations
-\end{itemize}
-
-\fist \emph{Model Validation} (\S\ref{sec:model_validation}) is the process of
-confirming that the ``outputs'' of a Statistical Model are ``acceptable'' with
-respect to the ``real'' Data Generating Process
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Observational Error}\label{sec:observational_error}
-% ------------------------------------------------------------------------------
-
-\emph{Observational Error} (or \emph{Measurement Error}) is the difference
-between an Observed Value (Random Variate \S\ref{sec:observation}) of a
-``quantity'' and its ``true'' Value
-
-cf. \emph{Statistical Error} (\S\ref{sec:statistical_error})
-
-
-
-\subsubsection{Random Error}\label{sec:random_error}
-
-or \emph{Random Variation}
-
-inconsistency of repeated Measurements of a Constant attribute or quantity
-
-usually Normally Distributed due to the Central Limit Theorem
-(\S\ref{sec:central_limit})
-
-\fist a \emph{Distributional Assumption} is a Model-baesd Statistical Assumption
-(\S\ref{sec:statistical_assumption}) about the Probability Distribution of
-Random Errors
-
-
-
-\subsubsection{Systematic Error}\label{sec:systmatic_error}
-
-or \emph{Statistical Bias}
-
-cf. \emph{Sampling Bias} (\S\ref{sec:nonrandom_sample})
-
-inaccuracy inherent to Observation or Measurement process
+Descriptive Statistics are often Non-parametric
+(\S\ref{sec:nonparametric_model})
 
 
 
@@ -2716,13 +2843,19 @@ various Summary Statistics can be computed by Statistical Functionals
 
 
 
-\subsubsection{Measure of Location}\label{sec:location_measure}
+\subsubsection{Central Tendency}\label{sec:central_tendency}
 
 \paragraph{Median}\label{sec:median}\hfill
+
+Central Tendency for Ordinal Measurement (\S\ref{sec:measurement_level})
+
+
 
 \paragraph{Mode}\label{sec:mode}\hfill
 
 cf. \emph{Unimodality}
+
+Central Tendency for Nominal Measurement (\S\ref{sec:measurement_level})
 
 
 
@@ -2734,11 +2867,15 @@ by the Law of Large Numbers (\S\ref{sec:large_numbers}), the Arithmetic Mean
 Converges to the Mean (Expected Value \S\ref{sec:expected_value}) as the Sample
 Size gets larger
 
+Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
+
 
 
 \paragraph{Geometric Mean}\label{sec:geometric_mean}\hfill
 
 using the Product of Values instead of Sum as in Arithmetic Mean
+
+Central Tendency for Ratio Measurement (\S\ref{sec:measurement_level})
 
 
 
@@ -2826,8 +2963,8 @@ a measure of ``nearness'' for Probability Distributions
 % ==============================================================================
 
 \emph{Statistical Inference} (or ``\emph{Learning}'' in Computer Science) --
-using \emph{Sample Data} (\S\ref{sec:statistical_sample}) to \emph{Infer}
-(cf. Logical Inference \S\ref{sec:logical_inference}, Inference Rules
+using \emph{Sample Data} (\S\ref{sec:sample}) to \emph{Infer} (cf. Logical
+Inference \S\ref{sec:logical_inference}, Inference Rules
 \S\ref{sec:inference_rule}) the Distribution
 (\S\ref{sec:probability_distribution}) that ``generated'' the Data
 
@@ -2871,7 +3008,7 @@ thought of as a Set of Statistical Assumptions that allow the calculation of the
 Probability of any Event (\S\ref{sec:event}), i.e. the Statistical Model
 ``embodies'' the Set of Statistical Assumptions that concern the
 \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
-(\S\ref{sec:statistical_sample}).
+(\S\ref{sec:sample}).
 
 \emph{Classes of Assumptions} depend on which approach to Statistical Inference
 is used (Model-based Inference or Design-based Inference):
@@ -2911,7 +3048,7 @@ Statistical Assumptions (\S\ref{sec:statistical_assumption}) that allow the
 calculation of the Probability of any Event (\S\ref{sec:event}), i.e. the
 Statistical Model ``embodies'' the Set of Statistical Assumptions that concern
 the \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
-(\S\ref{sec:statistical_sample}).
+(\S\ref{sec:sample}).
 
 \begin{itemize}
   \item \emph{Parametric Models} (\S\ref{sec:parametric_model}) -- Distributions
@@ -2983,7 +3120,7 @@ confirming that the ``outputs'' of a Statistical Model are ``acceptable'' with
 respect to the ``real'' Data Generating Process
 (\S\ref{sec:data_generating_process})
 
-can be based on two types of Data (\S\ref{sec:statistical_sample}):
+can be based on two types of Sample Data (\S\ref{sec:sample}):
 \begin{enumerate}
   \item Data that was used in the \emph{construction} of the Model -- usually
     involves analyzing the \emph{Fit} (\S\ref{sec:model_fit}) or \emph{Residual
@@ -2997,6 +3134,8 @@ can be based on two types of Data (\S\ref{sec:statistical_sample}):
 
 
 \paragraph{Fit}\label{sec:model_fit}\hfill
+
+\emph{Goodness-of-Fit}
 
 measures the discrepancy between Observed (\S\ref{sec:observation}) values and
 Predicted (\S\ref{sec:prediction}) values under the Statistical Model
@@ -3014,9 +3153,9 @@ Likelihood-ratio Test
 \emph{Parametric Statistics}
 
 A \emph{Parametric Model} or \emph{Finite-dimensional Model} assumes that Sample
-Data (\S\ref{sec:statistical_sample}) comes from a Population that follows a
-Probability Distribution based on a fixed Finite Set of \emph{Statistical
-  Parameters} (Population Parameters \S\ref{sec:population_parameter}).
+Data (\S\ref{sec:sample}) comes from a Population that follows a Probability
+Distribution based on a fixed Finite Set of \emph{Statistical Parameters}
+(Population Parameters \S\ref{sec:population_parameter}).
 
 A Parametric Model is defined by a collection of Probability Distributions,
 $\mathfrak{F} = \{ F_\theta \ |\ \theta \in \Theta \}$, Indexed by a Finite Set
@@ -3058,6 +3197,34 @@ Parameter Estimation:
 
 
 
+\paragraph{Exponential Family}\label{sec:exponential_family}\hfill
+
+has PDFs of the form:
+\[
+  f(x; \theta) = h(x) e^{\eta(\theta)T(x) - B(\theta)}
+\]
+where $T$ is called the \emph{Natural Sufficient Statistic}
+(\S\ref{sec:sufficient_statistic}) and $\eta$ is called the \emph{Natural
+  Parameter}
+
+includes:
+\begin{itemize}
+  \item Normal Distribution
+  \item Exponential Distribution
+  \item Gamma Distribution
+  \item Wishart Distribution
+  \item Chi-squared Distribution
+  \item Beta Distribution
+  \item Dirichlet Distribution
+  \item Bernoulli Distribution
+  \item Poisson Distribution
+  \item Categorical Distribution
+  \item Geometric Distribution
+\end{itemize}
+(TODO: xrefs)
+
+
+
 \subsubsection{Non-parametric Model}\label{sec:nonparametric_model}
 
 a Model that cannot be Parameterized by a Finite Parameter Set
@@ -3068,9 +3235,18 @@ e.g. the Model of \emph{all} Cumulative Distribution Functions (CDFs
 Parameter Set (or \emph{Feature Set} in Machine Learning) is not fixed, i.e. it
 may increase or decrease as new relevant information is collected
 
+Descriptive Statistics (\S\ref{sec:descriptive_statistics}) are often
+Non-parametric
+
 \fist Non-parametric Inference: Statistical Functionals
 (\S\ref{sec:statistical_functional}), Resampling Methods
 (\S\ref{sec:resampling})
+
+
+
+\paragraph{Order Statistic}\label{sec:order_statistic}
+
+\paragraph{Rank Statistic}\label{sec:rank_statistic}
 
 
 
@@ -3107,7 +3283,7 @@ not to be confused with General Linear Models (Multivariate Regression Models
 
 \subsubsection{Graphical Model}\label{sec:graphical_model}
 
-\paragraph{Bayesian Network}\label{sec:bayesian_network}\hfill
+\paragraph{Bayes Network}\label{sec:bayes_network}\hfill
 
 or \emph{Probabilistic Directed Acyclic Graphical Model}
 
@@ -3118,6 +3294,12 @@ representation of Probability Distributions based on \emph{Causal Dependencies}
 \emph{Causality} (Pearl 2009) -- counterfactual reasoning
 
 \url{https://golem.ph.utexas.edu/category/2018/07/bayesian_networks.html}
+
+
+
+\subparagraph{Multilevel Model}\label{sec:multilevel_model}\hfill
+
+\subparagraph{Random Tree}\label{sec:random_tree}\hfill
 
 
 
@@ -3239,9 +3421,18 @@ when the data consists of ``multiple variables'', Estimating the ``relation''
 between them is \emph{Regression Analysis} (\S\ref{sec:regression_analysis})
 --FIXME: clarify
 
+\emph{Rao-Blackwell Theorem} -- an Estimator that does not depend on a
+Sufficient Statistic (\S\ref{sec:sufficient_statistic}) is sub-optimal
+
 
 
 \paragraph{Delta Method}\label{sec:delta_method}\hfill
+
+(wiki): concerns the approximate Probability Distribution for a Function of an
+Asymptotically Normal Estimator (e.g. MLE \S\ref{sec:mle}) from knowledge of the
+limiting \emph{Variance} of the Estimator
+
+\fist cf. Propagation of Error (\S\ref{sec:error_propagation})
 
 \emph{Multivariate Delta Method}
 
@@ -3290,11 +3481,27 @@ method of Estimating Population Parameters (\S\ref{sec:population_parameter})
 $\hat{\theta}$ -- the value of $\theta$ that maximizes the Likilihood
 (\S\ref{sec:likelihood}) $\mathcal{L}(\theta)$
 
-MLE is Consistent, Equivariant, Asymptotically Normal, and Asymptotically
-Optimal (or ``Efficient'')
+under \emph{Regularity Conditions} (essentially Smoothness Conditions on
+$f(x; \theta)$), MLE is Consistent, Equivariant, Asymptotically Normal, and
+Asymptotically Optimal (or ``Efficient'' \S\ref{sec:efficiency})
 
-the MEL Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
+\fist Delta Method (\S\ref{sec:delta_method})
+
+the MLE Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
 (\S\ref{sec:bayes_estimator})
+
+$\hat{\theta} \pm 2\hat{S_E}$ is an approximate 95\% Confidence Interval, where
+$S_E$ is the Standard Error
+
+(Wasserman04 \S9.13.4) Numerical Approximations -- Iterative Method:
+\begin{itemize}
+  \item Newton-Raphson (Newton's Method \S\ref{sec:newtons_method})
+  \item Expectation-Maximization (EM) Algorithm
+\end{itemize}
+produce a Sequence of values $\theta^0, \theta^1, \ldots$ that Converge to MLE
+$\hat{\theta}$;
+often the Method of Moements (\S\ref{sec:moments_method}) is a good starting
+value of $\theta^0$
 
 
 
@@ -3354,6 +3561,10 @@ Tolerance Interval (TODO)
 \fist the Distribution of Deviations are used as measures of Statistical
 Dispersion (\S\ref{sec:statistical_dispersion})
 
+Central Tendency (\S\ref{sec:central_tendency}) for Interval Measurement
+(\S\ref{sec:measurement_level})
+%FIXME
+
 
 
 \paragraph{Absolute Deviation}\label{sec:absolute_deviation}\hfill
@@ -3386,12 +3597,12 @@ or \emph{Fitting Deviation}
 \fist Regression Residual (\S\ref{sec:regression_residual})
 
 \emph{Residual Diagnostics} is a means of \emph{Model Validation}
-(\S\ref{sec:model_validation}) based on the Data
-(\S\ref{sec:statistical_sample}) that was used to construct a Statistical Model
-(\S\ref{sec:statistical_model}), consisting of analyzing whether Residuals
-of a constructed Statistical Model (\S\ref{sec:statistical_model})
-are \emph{Random} (\S\ref{sec:statistical_randomness}), another method being
-analyzing how well the Model Predictions (\S\ref{sec:prediction}) \emph{Fit}
+(\S\ref{sec:model_validation}) based on the Sample Data (\S\ref{sec:sample})
+that was used to construct a Statistical Model (\S\ref{sec:statistical_model}),
+consisting of analyzing whether Residuals of a constructed Statistical Model
+(\S\ref{sec:statistical_model}) are \emph{Random}
+(\S\ref{sec:statistical_randomness}), another method being analyzing how well
+the Model Predictions (\S\ref{sec:prediction}) \emph{Fit}
 (\S\ref{sec:model_fit}) the original Data
 
 
@@ -3412,9 +3623,17 @@ Unbiased Estimator with Smallest Variance
 
 \subsubsection{Standard Error}\label{sec:standard_error}
 
+$S_E$
+
 Sampling Distribution (\S\ref{sec:sampling_distribution})
 
 \fist Resampling (\S\ref{sec:resampling})
+
+
+
+\subsubsection{Efficiency}\label{sec:efficiency}
+
+\paragraph{Asymptotic Relative Efficiency (ARE)}\label{sec:are}\hfill
 
 
 
@@ -3515,6 +3734,8 @@ $X = X_1, \ldots, X_n \sim F_n$, two steps:
 
 Bootstrap Normal Interval, Bootstrap Pivotal Interval, Bootstrap Percentile
 Interval
+
+Parametric Bootstrap (Wasserman04 \S9.11)
 
 
 
@@ -3798,36 +4019,41 @@ Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
 \subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
 % ------------------------------------------------------------------------------
 
-Neyman, Pearson
+A \emph{Statistical Test} is a ``procedure'' with Samples as input and results
+in a \emph{Hypothesis} (\S\ref{sec:hypothesis}), i.e. an Assertion or conjecture
+concerning one or more Statistical Populations (\S\ref{sec:population}).
 
-\emph{Statistical Hypothesis}: Assertion or Conjecture concerning one or more
-Populations (\S\ref{sec:population})
-
-in Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is assigned
-a Probability, while in Frequentist Inference
+\fist In Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is
+assigned a Probability, while in Frequentist Inference
 (\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
-Probability
+Probability.
 
-\url{https://github.com/puolival/multipy} -- Python library
-
-Methodology
-
-Confidence Intervals (\S\ref{sec:confidence_interval})
-
-Null Hypothesis $H_0$ represents any Hypothesis
-
-If $H_0$ is Rejected then Alternate Hypothesis $H_1$ is Accepted
-
-$H_1$ usually represents the question to be answered
+Partitioning the Parameter Space (\S\ref{sec:parametric_model}) $\Theta$ into
+Disjoint Sets $\Theta_0$ and $\Theta_1$, the \emph{Null Hypothesis}
+(\S\ref{sec:null_hypothesis}), $H_0 : \theta \in \Theta_0$, represents any
+Hypothesis, and the \emph{Alternative Hypothesis}
+(\S\ref{sec:alternative_hypothesis}), $H_1 : \theta \in \Theta_1$, represents an
+Hypothesis that is accepted in the case that the Null Hypothesis is Rejected
 
 \begin{enumerate}
   \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
   \item Insufficient Evidence: fail to Reject $H_0$
 \end{enumerate}
 
-\emph{Test Statistic}
+\emph{Test Statistic} (\S\ref{sec:test_statistic})
 
-\emph{Critical Region}, \emph{Critical Value}
+One-tailed Test
+
+Two-tailed Test
+
+Test on a single Mean
+
+Test on a single Sample
+
+$P$-value: lowest Level of Significance at which the observed Value of
+the Statistic is Significant
+
+\emph{Critical Region} (\S\ref{sec:critical_region})
 
 Type I Error: Rejection of $H_0$ when it is True
 
@@ -3841,28 +4067,50 @@ $\beta$: Probability of committing a Type II Error
 \emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
 specific alternative is True
 
-Confidence Intervals (\S\ref{sec:confidence_interval})
-
-One-tailed Test
-
-Two-tailed Test
-
-Test on a single Mean
-
-Test on a single Sample
-
-$P$-value: lowest Level of Significance at which the observed Value of
-the Statistic is Significant
-
 \begin{itemize}
   \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
 \end{itemize}
+
+\emph{Neyman-Pearson Lemma}
+
+(Wasserman04 Ch.10)
+
+\url{https://github.com/puolival/multipy} -- Python library
+
+
+
+\subsubsection{Hypothesis}\label{sec:hypothesis}
+
+A \emph{Statistical Hypothesis} is an Assertion (\S\ref{sec:assertion}) or
+conjecture concerning one or more Populations (\S\ref{sec:population}).
+
+
+
+\paragraph{Null Hypothesis}\label{sec:null_hypothesis}\hfill
+
+$H_0$
+
+
+
+\paragraph{Alternative Hypothesis}\label{sec:alternative_hypothesis}\hfill
+
+$H_1$
+
+
+
+\paragraph{Simple Hypothesis}\label{sec:simple_hypothesis}\hfill
+
+Hypothesis specifies the Population Distribution completely
+
+
+
+\paragraph{Composite Hypothesis}\label{sec:composite_hypothesis}\hfill
 
 
 
 \subsubsection{Test Statistic}\label{sec:test_statistic}
 
-cf. Descriptive Statistic (\S\ref{sec:descriptive_statistics})
+Statistic (\S\ref{sec:statistic})
 
 \begin{itemize}
   \item $t$-statistic
@@ -3872,17 +4120,13 @@ cf. Descriptive Statistic (\S\ref{sec:descriptive_statistics})
 
 
 
-\subsubsection{Null Hypothesis}\label{sec:null_hypothesis}
+\paragraph{Critical Region}\label{sec:critical_region}\hfill
 
-$H_0$
-
-
-
-\subsubsection{Critical Region}\label{sec:critical_region}
-
-or \emph{Region of Rejection}
+or \emph{Rejection Region}
 
 set of Values of the Test Statistic for which the Null Hypothesis is rejected
+
+\emph{Critical Values} -- boundaries of the Critical Region
 
 
 
@@ -3962,6 +4206,14 @@ Deductive Validity (\S\ref{sec:validity}), rather than Truth Preserving
 
 
 
+\paragraph{Propagation of Error}\label{sec:error_propagation}\hfill
+
+or \emph{Propagation of Uncertainty}
+
+\fist cf. Delta Method (\S\ref{sec:delta_method})
+
+
+
 \subsubsection{Sensitivity Analysis}\label{sec:sensitivity_analysis}
 
 \fist Info-gap Decision Theory (\S\ref{sec:info_gap}): application of
@@ -3995,7 +4247,6 @@ Statistical Theory -- FIXME
 
 Statistic (\S\ref{sec:statistic}) -- a Function of a Random Variable
 (\S\ref{sec:random_variable}) constituting a Random Sample
-(\S\ref{sec:random_sample})
 
 Statistical Population (\S\ref{sec:population})
 
@@ -4106,9 +4357,11 @@ note that $\theta$ is a fixed ``true'' value (not a Random Variable)
 
 Confidence Limit
 
-Interval Estimate (\S\ref{sec:interval_estimator})
-
 Prediction Interval (\S\ref{sec:prediction_interval})
+
+Interval Measurement (\S\ref{sec:measurement_level})
+
+Interval Estimate (\S\ref{sec:interval_estimator})
 
 cf. Credible Intervals (Bayesian Inference \S\ref{sec:credible_interval})
 
@@ -4189,7 +4442,7 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 
 \emph{Likelihood Function} $\mathcal{L} : \Theta \rightarrow [0, \infty)$ -- the
   Joint Density (\S\ref{sec:joint_probability}) of Sample Data
-  (\S\ref{sec:statistical_sample}):
+  (\S\ref{sec:sample}):
 \[
   \mathcal{L}(\theta | x) = f_\theta(x)
 \]
@@ -4215,6 +4468,18 @@ of $\theta$ that Maximizes $\mathcal{L}(\theta)$
 Likelihood Interval
 
 Likelihood-ratio Test
+
+\fist a Statistic $T(X^n)$ is \emph{Sufficient}
+(\S\ref{sec:sufficient_statistic}) if the Likelihood Function can be computed
+knowing only $T(X^n)$ (Wasserman04 \S9.13.2)
+
+
+
+\paragraph{Score}\label{sec:score}\hfill
+
+\emph{Score Function} is the Derivative of the Log Likelihood Function
+
+\fist Fisher Information (\S\ref{sec:fisher_metric})
 
 
 
@@ -4263,7 +4528,7 @@ Bayesian: Credible Interval (\S\ref{sec:credible_interval})
 \emph{Predictive Performance} -- a means of Model Validation
 (\S\ref{sec:model_validation}) which is an analysis of whether a constructed
 Statistical Model (\S\ref{sec:statistical_model}) holds up when applied to new
-Data (\S\ref{sec:statistical_sample})
+Data (\S\ref{sec:sample})
 
 
 
@@ -4365,6 +4630,8 @@ with no dependency on previous queries
 or \emph{Random Process}
 
 %FIXME: move section ???
+
+\fist cf. Data Generating Process (\S\ref{sec:data_generating_process})
 
 \fist a \emph{Pseudorandom Process} (\S\ref{sec:pseudorandom_process}) is a
 Determinstic Process exhibiting Statistical Randomness
@@ -4899,8 +5166,13 @@ Riemannian Manifold (\S\ref{sec:riemannian_manifold}) with the
 
 \subsubsection{Fisher Information Metric}\label{sec:fisher_metric}
 
-Riemannian Metric (\S\ref{sec:riemannian_metric}) for a Statistical
-Manifold
+$I$
+
+Riemannian Metric (\S\ref{sec:riemannian_metric}) for a Statistical Manifold
+
+Score Function (\S\ref{sec:score})
+
+Fisher Information Matrix
 
 \fist \textbf{Fisher's Fundamental Theorem of Natural Selection},
 Quasi-linkage Equilibrium: approximation in the case of Weak Selection
