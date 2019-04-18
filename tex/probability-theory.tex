@@ -2005,6 +2005,8 @@ $\nu$ -- Degrees of Freedom
 a Normal Distribution (\S\ref{sec:normal_distribution}) corresponds to a
 $t$-distribution with $\nu = \infty$ Degrees of Freedom
 
+$t$-test (\S\ref{sec:t_test})
+
 
 
 \paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
@@ -2084,6 +2086,8 @@ Non-symmetric
     0     & \quad\text{else} \\
   \end{cases}
 \]
+
+\fist Pearson's Chi-squared Test (\S\ref{sec:pearsons_chi_squared})
 
 
 
@@ -2343,8 +2347,33 @@ Transient Signals (\S\ref{sec:transient})
 
 
 % ==============================================================================
-\section{Population}\label{sec:population}
+\section{Statistical Analysis}\label{sec:statistical_analysis}
 % ==============================================================================
+
+Statistical Theory -- FIXME
+
+Statistical Population (\S\ref{sec:population})
+
+Statistical Sample (\S\ref{sec:sample})
+
+Statistic (\S\ref{sec:statistic}) -- a Function of a Random Variable
+(\S\ref{sec:random_variable}) constituting a Random Sample
+
+Descriptive Statistics (\S\ref{sec:descriptive_statistics})
+
+Statistical Parameter (\S\ref{sec:population_parameter})
+
+Statistical Model (\S\ref{sec:statistical_model})
+
+Statistical Inference (\S\ref{sec:inferential_statistics})
+
+Statistical Learning Theory (\S\ref{sec:statistical_learning_theory})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Population}\label{sec:population}
+% ------------------------------------------------------------------------------
 
 \emph{Statistical Population}
 
@@ -2363,6 +2392,12 @@ Paired Observation (Dependent) (???)
 Collection (\S\ref{sec:data_collection})
 
 A Subset of the Population is a \emph{Statistical Sample} (\S\ref{sec:sample}).
+A \emph{Statistical Model} (\S\ref{sec:statistical_model}) is a Set of
+Statistical Assumptions (\S\ref{sec:statistical_assumption}) concerning the
+Generation (\S\ref{sec:data_generating_process}) of Sample Data.
+
+A \emph{Statistical Hypothesis} is a Conjecture (\S\ref{sec:conjecture})
+concerning one or more Populations.
 
 
 
@@ -2489,9 +2524,9 @@ $\mu$, $\sigma$
 
 
 
-% ==============================================================================
-\section{Statistical Sample}\label{sec:sample}
-% ==============================================================================
+% ------------------------------------------------------------------------------
+\subsection{Statistical Sample}\label{sec:sample}
+% ------------------------------------------------------------------------------
 
 A \emph{Statistical Sample} (or \emph{Data Sample}) is a Subset of a Statistical
 Population, selected by a definite procedure (\emph{Sampling Procedure}
@@ -2551,6 +2586,8 @@ the entity that frames what is being ``analyzed'' in a ``study'' (cf. Experiment
 
 \emph{Sampling} is the \emph{selection} of a Subset (Statistical Sample) from
 within a Statistical Population
+
+\fist cf. \emph{Data Collection} (\S\ref{sec:data_collection})
 
 \fist \emph{Sampling Unit} (Unit of Observation \S\ref{sec:observational_unit})
 -- an object that has been Sampled from a Population
@@ -2968,6 +3005,8 @@ Inference \S\ref{sec:logical_inference}, Inference Rules
 \S\ref{sec:inference_rule}) the Distribution
 (\S\ref{sec:probability_distribution}) that ``generated'' the Data
 
+\fist cf. Statistical Learning Theory (\S\ref{sec:statistical_learning_theory})
+
 \fist cf. Probabilistic Inference
 (\S\ref{sec:probabilistic_inference}), Inductive Inference
 (\S\ref{sec:inductive_inference})
@@ -3031,6 +3070,9 @@ is used (Model-based Inference or Design-based Inference):
     (\S\ref{sec:random_sample})
 \end{enumerate}
 
+cf. Statistical Hypothesis (\S\ref{sec:hypothesis})
+
+\fist Assumption (Proof Theory \S\ref{sec:antecedent})
 
 
 
@@ -3144,7 +3186,7 @@ Predicted (\S\ref{sec:prediction}) values under the Statistical Model
 
 cf. Curve Fitting (\S\ref{sec:curve_fitting})
 
-Likelihood-ratio Test
+Likelihood-Ratio (LR) Test (\S\ref{sec:lr_test})
 
 
 
@@ -3714,7 +3756,8 @@ methods of Estimating the precision of Sample Statistics (\S\ref{sec:statistic})
 
 \fist Standard Error (\S\ref{sec:standard_error})
 
-Non-parametric Inference (\S\ref{sec:nonparametric_model})
+Non-parametric Inference (\S\ref{sec:nonparametric_model}), Permutation Tests
+(\S\ref{sec:permutation_test})
 
 
 
@@ -3756,395 +3799,13 @@ Set-membership approach to Estimation Theory (cf. Probabilistic approach)
 
 
 % ------------------------------------------------------------------------------
-\subsection{Regression Analysis}\label{sec:regression_analysis}
-% ------------------------------------------------------------------------------
-
-\emph{Regression} (or \emph{Curve Estimation}) is the Estimation
-(\S\ref{sec:estimation_theory}) of Parameters of a Statistical Model,
-specifically the \emph{Regression Function} $r(x) = E(Y | X = x)$ corresponding
-to those Parameters
-
-\fist cf. Curve Fitting (\S\ref{sec:curve_fitting})
-
-\emph{Regression Variable}, ``Regressor'', ``Predictor'', ``Feature'', or
-``Explanatory Variable'' -- \emph{Independent Variable}
-(\S\ref{sec:independent_variable}); Covariate
-
-\emph{Response Variable}, ``Regressand'', ``Outcome'', or ``Explained Variable''
--- \emph{Dependent Variable} (\S\ref{sec:dependent_variable}); Criterion
-
-\emph{Regression Function} -- the Function of the Independent Variables to be
-Estimated (\S\ref{sec:estimation_theory}):
-\[
-  r(x) = E(Y | X = x)
-\]
-that is, the Expected Value of the Response Variable given that the Regression
-Variable takes a specific value, where $r \in \mathcal{F}$ is a Member of the
-Statistical (Regression) Model (\S\ref{sec:statistical_model}) being considered
-
-Regression Analysis is also concerned with characterizing the \emph{variation}
-of the Dependent Variable $X$ around the \emph{Prediction}
-(\S\ref{sec:prediction}) $Y$ of the Regression Function using a Probability
-Distribution
-
-\fist Prediction Interval (\S\ref{sec:prediction_interval})
-
-example of Pattern Recognition (assignment of some Output Value to a given Input
-Value), other examples are Statistical Classification
-(\S\ref{sec:statistical_classification})--when the Response Variable is
-Discrete--and Cluster Analysis (\S\ref{sec:cluster_analysis})
-
-Statistical Classification: \emph{Features} (Properties of Observations
-\S\ref{sec:observation} or \emph{Instances}) are Explanatory Variables
-(Regressors) and possible values of the Dependent Variable are categories called
-\emph{Outcomes}
-
-Linear Regression, Ordinary Least Squares, Logistic Regression
-
-Prediction Interval (\S\ref{sec:prediction_interval})
-
-cf. Numerical Analysis (\S\ref{sec:numerical_analysis}): Interpolation
-(\S\ref{sec:interpolation}), Extrapolation (TODO)
-
-
-
-\subsubsection{Regression Model}\label{sec:regression_model}
-
-\emph{Regression Model}:
-\begin{itemize}
-  \item \emph{Unknown Parameters} ($\beta$) -- Statistical Parameters
-    (\S\ref{sec:statistical_parameter})
-  \item \emph{Independent Variables} ($X$) -- ``Regression Variable'',
-    ``Regressor'', ``Covariate'', ``Explanatory Variable''
-  \item \emph{Dependent Variable} ($Y$) -- ``Response Variable'',
-    ``Regressand'', ``Criterion'', ``Explained Variable''; variable whose values
-    are to be ``explained'' in terms of the Independent Variable
-\end{itemize}
-
-Linear Regression Models (\S\ref{sec:linear_regression})
-
-...
-
-
-
-\subsubsection{Regression Error}\label{sec:regression_error}
-
-\fist cf. Statistical Error (Estimators \S\ref{sec:error})
-
-Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
-
-
-
-\subsubsection{Regression Residual}\label{sec:regression_residual}
-
-\fist cf. Residual (Estimators \S\ref{sec:residual})
-
-Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
-
-
-
-\subsubsection{Linear Regression}\label{sec:linear_regression}
-
-\emph{Linear Regression Model}
-
-Fit using:
-\begin{itemize}
-  \item Linear Least Squares (\S\ref{sec:linear_least_squares}): if errors are
-    \emph{normally distributed}, Least Squares ($2$-norm Best Fit) should be
-    used
-  \item ...
-\end{itemize}
-
-Gradient Descent (\S\ref{sec:gradient_descent})
-
-cf. Convex Optimization (\S\ref{sec:convex_optimization}) -- for Linear
-Regression, a Mean-Square Error Loss Function is always \emph{Convex} (example
-\url{https://towardsdatascience.com/introduction-to-machine-learning-algorithms-linear-regression-14c4e325882a}
-
-cf. Linear Programming (\S\ref{sec:linear_programming})
--- article: \emph{Linear Programming for Linear Regression};
-\url{https://lazyprogrammer.me/linear-programming-for-linear-regression/}
-
-Simple Linear Regression -- single Regressor (Independent Variable)
-
-Regression Coefficients
-
-Error Term $\varepsilon$
-
-$Y = \beta_0 + \beta_1 X + \varepsilon$
-
-
-
-\subsubsection{Least Squares}\label{sec:least_squares}
-
-$2$-norm Best Fit \fist cf. $1$-norm Best Fit (\S\ref{sec:1norm_best_fit}),
-Chebyshev Approximation ($\infty$-norm Best Fit
-\S\ref{sec:chebyshev_approximation})
-
-
-
-\paragraph{Ordinary Least Squares}\label{sec:ordinary_least_squares}\hfill
-
-estimating the Unknown Parameters of a Linear Regression Model
-(\S\ref{sec:linear_regression})
-
-
-
-\subparagraph{Linear Least Squares}\label{sec:linear_least_squares}\hfill
-
-Overdetermined Systems (\S\ref{sec:overdetermined_system})
-
-QR Decomposition (\S\ref{sec:qr_decomposition})
-
-
-
-\subparagraph{Normal Equation}\label{sec:normal_equation}\hfill
-
-UC Math 352 Lec. 7 \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
-
-$A\vec{x} = \vec{b}$
-
-$\mathrm{min}_{\vec{x}} \|A_{\vec{x}} - \vec{b}\|$
-
-\emph{Normal Equation}: $(A^TA)\vec{x} = A^T\vec{b}$ -- Condition Number
-(\S\ref{sec:condition_number}) is $\kappa(A)^2$; see QR Factorization
-(\S\ref{sec:qr_factorization}) for a better Conditioned solution
-
-Project $\vec{b}$ onto the Column Space of $A$
-
-\[
-  \vec{x} = (A^TA)^{-1}A^T\vec{b}
-\]
-
-solve by Cholesky Factorization (\S\ref{sec:cholesky_decomposition}) ... TODO
-\url{https://www.youtube.com/watch?v=VJ-04jOfu-E}
-
-
-
-\subparagraph{QR Factorization}\label{sec:qr_factorization}\hfill
-
-QR Decomposition (\S\ref{sec:qr_decomposition})
-
-UC Math 352 Lec. 7 \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
-
-better Condition Number than Normal Equations (\S\ref{sec:normal_equation})
-
-$A\vec{x} = \vec{b}$
-
-$A = QR$ ($Q$ is Square, Orthogonal)
-
-Residual $\vec{r} = A\vec{x} - \vec{b}$
-
-\begin{align*}
-     \vec{r} & = QR\vec{x} - \vec{b} \\
-  Q^T\vec{r} & = R\vec{x} - Q^T\vec{b} \\
-\end{align*}
-
-because Orthogonal Matrices preserve Distances and $Q$ is Orthogonal:
-\[
-  \|Q^T\vec{r}\|_2 = \|\vec{r}\|_2
-\]
-minimizing $Q^T\vec{r} = \vec{\rho}$ is equivalent to minimizing $\vec{r}$
-
-splitting $\vec{\rho}$ into:
-\begin{enumerate}
-  \item $\hat{\rho}   = \hat{R}\vec{x} - \hat{Q}^T\vec{b}$
-  \item $\vec{\rho}_N = -Q_N^T\vec{b}$
-\end{enumerate}
-$\hat{rho}$ can be made Zero by solving $\hat{R}\vec{x} - \hat{Q}^T\vec{b}$ for
-$\vec{x}$, which is an Upper Triangular Matrix that can be solved efficiently:
-\[
-  \vec{x} = \hat{R}^{-1}\hat{Q}^T\vec{b}
-\]
-and $\vec{rho}_N$ is independent of $\vec{x}$ so it is \emph{fixed}, so:
-\[
-  \|\vec{r}\|^2_2 = \|\hat{Q}_N^T\vec{b}\|_2^2
-\]
-
-
-
-\paragraph{Generalized Least Squares}\label{sec:generalized_least_squares}\hfill
-
-\subparagraph{Weighted Least Squares}\label{sec:weighted_least_squares}\hfill
-
-
-
-\paragraph{Non-linear Least Squares}\label{sec:nonlinear_least_squares}\hfill
-
-
-
-\subsubsection{Multivariate Regression}\label{sec:multivariate_regression}
-
-or \emph{General Linear Model}; not to be confused with Generalized Linear
-Models (\S\ref{sec:generalized_linear_model})
-
-
-
-\subsubsection{Binomial Regression}\label{sec:binomial_regression}
-
-essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
-
-
-
-\paragraph{Logistic Regression}\label{sec:logistic_regression}\hfill
-
-or \emph{Logit Regression}
-
-Logistic Model (\S\ref{sec:logistic_model}) -- uses a Logistic Function
-(\S\ref{sec:logistic_function}) to Model a Binary Dependent Variable
-
-Statistical Classification (\S\ref{sec:statistical_classification})
-
-
-
-\subsubsection{Gaussian Process Regression}
-\label{sec:gaussian_process_regression}
-
-\emph{Kriging} or \emph{Wiener-Komogorov Prediction}
-
-under ``suitable assumptions'' on the Priors, Kriging gives the \emph{Best
-  Linear Unbiased Prediction} (BLUP \S\ref{sec:blup}) of the intermediate values
-
-\fist Spatial Analysis (\S\ref{sec:spatial_analysis})
-
-
-
-\subsubsection{Multiple Regression}\label{sec:multiple_regression}
-
-Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
-% ------------------------------------------------------------------------------
-
-A \emph{Statistical Test} is a ``procedure'' with Samples as input and results
-in a \emph{Hypothesis} (\S\ref{sec:hypothesis}), i.e. an Assertion or conjecture
-concerning one or more Statistical Populations (\S\ref{sec:population}).
-
-\fist In Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is
-assigned a Probability, while in Frequentist Inference
-(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
-Probability.
-
-Partitioning the Parameter Space (\S\ref{sec:parametric_model}) $\Theta$ into
-Disjoint Sets $\Theta_0$ and $\Theta_1$, the \emph{Null Hypothesis}
-(\S\ref{sec:null_hypothesis}), $H_0 : \theta \in \Theta_0$, represents any
-Hypothesis, and the \emph{Alternative Hypothesis}
-(\S\ref{sec:alternative_hypothesis}), $H_1 : \theta \in \Theta_1$, represents an
-Hypothesis that is accepted in the case that the Null Hypothesis is Rejected
-
-\begin{enumerate}
-  \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
-  \item Insufficient Evidence: fail to Reject $H_0$
-\end{enumerate}
-
-\emph{Test Statistic} (\S\ref{sec:test_statistic})
-
-One-tailed Test
-
-Two-tailed Test
-
-Test on a single Mean
-
-Test on a single Sample
-
-$P$-value: lowest Level of Significance at which the observed Value of
-the Statistic is Significant
-
-\emph{Critical Region} (\S\ref{sec:critical_region})
-
-Type I Error: Rejection of $H_0$ when it is True
-
-Type II Error: Non-Rejection of $H_0$ when it is False
-
-\emph{Level of Significance} $\alpha$: Probability of committing a
-Type I Error
-
-$\beta$: Probability of committing a Type II Error
-
-\emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
-specific alternative is True
-
-\begin{itemize}
-  \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
-\end{itemize}
-
-\emph{Neyman-Pearson Lemma}
-
-(Wasserman04 Ch.10)
-
-\url{https://github.com/puolival/multipy} -- Python library
-
-
-
-\subsubsection{Hypothesis}\label{sec:hypothesis}
-
-A \emph{Statistical Hypothesis} is an Assertion (\S\ref{sec:assertion}) or
-conjecture concerning one or more Populations (\S\ref{sec:population}).
-
-
-
-\paragraph{Null Hypothesis}\label{sec:null_hypothesis}\hfill
-
-$H_0$
-
-
-
-\paragraph{Alternative Hypothesis}\label{sec:alternative_hypothesis}\hfill
-
-$H_1$
-
-
-
-\paragraph{Simple Hypothesis}\label{sec:simple_hypothesis}\hfill
-
-Hypothesis specifies the Population Distribution completely
-
-
-
-\paragraph{Composite Hypothesis}\label{sec:composite_hypothesis}\hfill
-
-
-
-\subsubsection{Test Statistic}\label{sec:test_statistic}
-
-Statistic (\S\ref{sec:statistic})
-
-\begin{itemize}
-  \item $t$-statistic
-  \item $F$-test
-  \item ...
-\end{itemize}
-
-
-
-\paragraph{Critical Region}\label{sec:critical_region}\hfill
-
-or \emph{Rejection Region}
-
-set of Values of the Test Statistic for which the Null Hypothesis is rejected
-
-\emph{Critical Values} -- boundaries of the Critical Region
-
-
-
-\subsubsection{Significance Testing}\label{sec:significance_testing}
-
-Fisher
-
-
-
-\paragraph{Statistical Significance}\label{sec:statistical_significance}\hfill
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Asymptotic Theory}\label{sec:asymptotic_theory}
 % ------------------------------------------------------------------------------
 
 or \emph{Large Sample Theory}
+
+\fist cf. \emph{Exact Statistics} (\S\ref{sec:exact_statistics}) -- not based on
+Large Sample Theory
 
 \fist Asymptotic Distributions (\S\ref{sec:asymptotic_distribution})
 
@@ -4185,6 +3846,267 @@ Asymptotic Thoerems:
 
 
 % ------------------------------------------------------------------------------
+\subsection{Exact Statistics}\label{sec:exact_statistics}
+% ------------------------------------------------------------------------------
+
+not based on Large Sample Theory (Asymptotic Theory
+\S\ref{sec:asymptotic_theory})
+
+\fist Exact Test (\S\ref{sec:exact_test})
+
+Non-parametric
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
+% ------------------------------------------------------------------------------
+
+or \emph{Confirmatory Data Analysis}
+
+A \emph{Statistical Test} is a ``procedure'' with Samples as input and results
+in a \emph{Hypothesis} (\S\ref{sec:hypothesis}), i.e. a Conjecture
+(\S\ref{sec:conjecture}) concerning one or more Statistical Populations
+(\S\ref{sec:population}).
+
+\fist In Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is
+assigned a Probability, while in Frequentist Inference
+(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
+Probability.
+
+Partitioning the Parameter Space (\S\ref{sec:parametric_model}) $\Theta$ into
+Disjoint Sets $\Theta_0$ and $\Theta_1$, the \emph{Null Hypothesis}
+(\S\ref{sec:null_hypothesis}), $H_0 : \theta \in \Theta_0$, represents any
+Hypothesis, and the \emph{Alternative Hypothesis}
+(\S\ref{sec:alternative_hypothesis}), $H_1 : \theta \in \Theta_1$, represents an
+Hypothesis that is accepted in the case that the Null Hypothesis is Rejected
+
+\begin{enumerate}
+  \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
+  \item Insufficient Evidence: fail to Reject $H_0$
+\end{enumerate}
+
+\emph{Test Statistic} (\S\ref{sec:test_statistic}) $T(x)$
+
+\emph{One-tail (One-sided) Test}:
+\[
+  H_0 : \theta \leq \theta_0 \quad\quad\quad H_1 : \theta > \theta_0
+\]
+or:
+\[
+  H_0 : \theta \geq \theta_0 \quad\quad\quad H_1 : \theta < \theta_0
+\]
+
+\emph{Two-tail (Two-sided) Test}:
+\[
+  H_0 : \theta = \theta_0 \quad\quad\quad H_1 : \theta \neq \theta_0
+\]
+
+Test on a single Mean
+
+Test on a single Sample
+
+\emph{Critical Region} (\S\ref{sec:critical_region}) $R = \{ x : T(x) > c \}$
+
+Type I Error: Rejection of $H_0$ when it is True
+
+Type II Error: Non-Rejection of $H_0$ when it is False
+
+$\beta$: Probability of committing a Type II Error
+
+(Wasserman04, Ch.10)
+
+the \emph{Power Function} of a Test with Rejection Region $R$:
+\[
+  \beta(\theta) = P_\theta(X \in R)
+\]
+
+\emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
+specific alternative is True
+
+the \emph{Size} or \emph{Significance Level} (\S\ref{sec:significance_testing})
+of a Test:
+\[
+  \alpha = \sup_{\theta \in \Theta_0} \beta(\theta)
+\]
+
+a Test has \emph{Level} $\alpha$ if its Size is less than or equal to $\alpha$
+
+$p$-value: lowest Level of Significance at which the observed Value of
+the Statistic is Significant
+
+\begin{itemize}
+  \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
+\end{itemize}
+
+\emph{Neyman-Pearson Lemma} -- most Powerful Test for Simple Null Hypothesis
+$H_0 : \theta = \theta_0$ and Simple Alternative Hypothesis
+$H_1 : \theta = \theta_1$
+
+\url{https://github.com/puolival/multipy} -- Python library
+
+
+
+\subsubsection{Hypothesis}\label{sec:hypothesis}
+
+A \emph{Statistical Hypothesis} is a Conjecture (\S\ref{sec:conjecture})
+concerning one or more Populations (\S\ref{sec:population}).
+
+cf. Hypothesis (Antecedent \S\ref{sec:antecedent} of a Hypothetical Proposition
+\S\ref{sec:proposition})
+
+
+
+\paragraph{Null Hypothesis}\label{sec:null_hypothesis}\hfill
+
+$H_0$
+
+
+
+\paragraph{Alternative Hypothesis}\label{sec:alternative_hypothesis}\hfill
+
+$H_1$
+
+
+
+\paragraph{Simple Hypothesis}\label{sec:simple_hypothesis}\hfill
+
+Hypothesis specifies the Population Distribution completely
+
+$\theta = \theta_0$
+
+
+
+\paragraph{Composite Hypothesis}\label{sec:composite_hypothesis}\hfill
+
+$\theta < \theta_0$ or $\theta > \theta_0$
+
+
+
+\subsubsection{Test Statistic}\label{sec:test_statistic}
+
+Statistic (\S\ref{sec:statistic}), $T$
+
+(Wasserman04, Ch.10)
+
+\begin{itemize}
+  \item $t$-statistic
+  \item $F$-test
+  \item ...
+\end{itemize}
+
+
+
+\paragraph{Critical Region}\label{sec:critical_region}\hfill
+
+or \emph{Rejection Region}
+
+set of Values of the Test Statistic for which the Null Hypothesis is rejected
+
+\emph{Critical Values} -- boundaries of the Critical Region
+
+$R = \{ x : T(x) > c \}$
+
+
+
+\subsubsection{Significance Testing}\label{sec:significance_testing}
+
+Fisher
+
+
+
+\paragraph{Statistical Significance}\label{sec:statistical_significance}\hfill
+
+the \emph{Size} or \emph{Significance Level} of a Test:
+\[
+  \alpha = \sup_{\theta \in \Theta_0} \beta(\theta)
+\]
+
+a Test has \emph{Level} $\alpha$ if its Size is less than or equal to $\alpha$
+
+
+
+\paragraph{$p$-value}\label{sec:p_value}\hfill
+
+$p$-value: lowest Level of Significance at which the Observed value of
+the Statistic is Significant
+
+(Wasserman04 \S10.2):
+
+the $p$-value is the Probability under the Null Hypothesis $H_0$ of Observing a
+value of the Test Statistic the same as or more extreme than what was actually
+Observed
+
+\textbf{Thm.} \emph{
+  If the Test Statistic has a Continuous Distribution, then under
+  $H_0 : \theta = \theta_0$ the $p$-value has a $Uniform(0,1)$ Distribution and
+  therefore one Rejects $H_0$ when $p$-value is less than the Significance Level
+  $\alpha$, and the Probability of a Type I Error is $\alpha$.
+}
+
+
+
+\subsubsection{Multiple Testing Problem}\label{sec:multiple_testing}
+
+or \emph{Multiple Comparisons Problem}
+
+
+
+
+\paragraph{False Discovery Rate (FDR)}\label{sec:fdr}\hfill
+
+\subparagraph{Bonferroni Method}\label{sec:bonferroni_method}\hfill
+
+\emph{False Discovery Rate (FDR)}
+
+
+
+\paragraph{Bonferroni Method}\label{sec:bonferroni_method}\hfill
+
+or \emph{Holm-Bonferroni Method}
+
+
+
+\subsubsection{Wald Test}\label{sec:wald_test}
+
+
+
+\paragraph{$t$-test}\label{sec:t_test}\hfill
+
+\emph{Student's $t$-test}
+
+\fist $t$-distribution (\S\ref{sec:t_distribution})
+
+essentially equal to Wald Test for moderately large $n$
+
+
+
+\subsubsection{Pearson's Chi-squared Test}\label{sec:pearsons_chi_squared}
+
+\subsubsection{Exact Test}\label{sec:exact_test}
+
+\emph{Exact Statistics} (\S\ref{sec:exact_statistics}) -- not based on Large
+Sample Theory (Asymptotic Theory \S\ref{sec:asymptotic_theory})
+
+
+
+\paragraph{Permutation Test}\label{sec:permutation_test}\hfill
+
+\fist Exact Test
+
+Non-parametric method for testing whether two Distributions are ``the same''
+
+\fist cf. Resampling (\S\ref{sec:resampling})
+
+
+
+\subsubsection{Likelihood-Ratio (LR) Test}\label{sec:lr_test}
+
+used for comparing Fit (\S\ref{sec:fit}) of two Statistical Models
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Uncertainty Analysis}\label{sec:uncertainty_analysis}
 % ------------------------------------------------------------------------------
 
@@ -4216,6 +4138,10 @@ or \emph{Propagation of Uncertainty}
 
 \subsubsection{Sensitivity Analysis}\label{sec:sensitivity_analysis}
 
+or \emph{``What-if'' Analysis}
+
+cf. Hypothetical Propositions (\S\ref{sec:proposition})
+
 \fist Info-gap Decision Theory (\S\ref{sec:info_gap}): application of
 Sensitivity Analysis of the Stability Radius (\S\ref{sec:stability_radius}) type
 to Perturbations in the value of a given Estimate of a Parameter of interest
@@ -4238,44 +4164,6 @@ alternative to Probability Theory for dealing with certain types of Uncertainty
 
 
 % ------------------------------------------------------------------------------
-\subsection{Statistical Analysis}\label{sec:statistical_analysis}
-% ------------------------------------------------------------------------------
-
-%FIXME: move this section ?
-
-Statistical Theory -- FIXME
-
-Statistic (\S\ref{sec:statistic}) -- a Function of a Random Variable
-(\S\ref{sec:random_variable}) constituting a Random Sample
-
-Statistical Population (\S\ref{sec:population})
-
-Statistical Parameter (\S\ref{sec:population_parameter})
-
-Statistical Model (\S\ref{sec:statistical_model})
-
-Statistical Inference (\S\ref{sec:inferential_statistics})
-
-Statistical Learning Theory (\S\ref{sec:statistical_learning_theory})
-
-
-
-\subsubsection{Cluster Analysis}\label{sec:cluster_analysis}
-
-Unsupervised Learning
-
-example of Pattern Recognition (assignment of some Output Value to a given Input
-Value), other examples are Statistical Classification
-(\S\ref{sec:statistical_classification}) and Regression Analysis
-(\S\ref{sec:regression_analysis})
-
-
-
-\paragraph{Hierarchical Clustering}\label{sec:hierarchical_clustering}\hfill
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Frequentist Inference}\label{sec:frequentist_inference}
 % ------------------------------------------------------------------------------
 
@@ -4283,6 +4171,19 @@ Frequency Interpretation
 (\url{https://plato.stanford.edu/entries/probability-interpret/#FreInt}) --
 differs from the Classical Interpretation in counting only the \emph{actual}
 Outcomes instead of the \emph{possible} Outcomes; Finite Frequentism (Venn)
+
+(Wasserman04 \S11.1)
+
+Frequentist postulates:
+\begin{enumerate}
+  \item Probability refers to limiting Relative Frequencies and Probabilities
+    are \emph{objective} properties of the ``real world''
+  \item Parameters are fixed, unknown Constants, and no useful Probability
+    statements can be made about Parameters
+  \item Statistical procedures should be designed to have well-defined long-run
+    Frequency properties
+\end{enumerate}
+
 
 
 
@@ -4367,9 +4268,7 @@ cf. Credible Intervals (Bayesian Inference \S\ref{sec:credible_interval})
 
 Hypothesis Testing (\S\ref{sec:hypothesis_testing})
 
-One-tail
-
-Two-tail
+One-tail, Two-tail
 
 
 
@@ -4418,6 +4317,19 @@ Conditioning (\S\ref{sec:conditioning})
   Rationality} -- \emph{Correlated Equilibrium}
 (\S\ref{sec:correlated_equilibrium}) ``does away with'' the ``dichotomy usually
 perceived'' between the \emph{Bayesian} and \emph{Game-theoretic} world-views
+
+(Wasserman04 \S11.1)
+
+Bayesian postulates:
+\begin{enumerate}
+  \item Probability describes \emph{degree of belief} (not limiting Frequency),
+    so Probability statements can be made about things other than Random
+    Variables
+  \item Probability statements can be made about Statistical Parameters
+  \item Inferences about a Parameter $\theta$ are made by producing a
+    Probability Distribution for $\theta$, and Inferences such as Point
+    Estimates and Interval Estimates can be extracted from this Distribution
+\end{enumerate}
 
 
 
@@ -5098,6 +5010,283 @@ $k$ by taking the Dot Product of the Feature Vector with a Vector of
 \label{sec:probabilistic_classification}
 
 use of Statistical Inference (\S\ref{sec:statistical_inference})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Regression Analysis}\label{sec:regression_analysis}
+% ------------------------------------------------------------------------------
+
+\emph{Regression} (or \emph{Curve Estimation}) is the Estimation
+(\S\ref{sec:estimation_theory}) of Parameters of a Statistical Model,
+specifically the \emph{Regression Function} $r(x) = E(Y | X = x)$ corresponding
+to those Parameters
+
+\fist cf. Curve Fitting (\S\ref{sec:curve_fitting})
+
+\emph{Regression Variable}, ``Regressor'', ``Predictor'', ``Feature'', or
+``Explanatory Variable'' -- \emph{Independent Variable}
+(\S\ref{sec:independent_variable}); Covariate
+
+\emph{Response Variable}, ``Regressand'', ``Outcome'', or ``Explained Variable''
+-- \emph{Dependent Variable} (\S\ref{sec:dependent_variable}); Criterion
+
+\emph{Regression Function} -- the Function of the Independent Variables to be
+Estimated (\S\ref{sec:estimation_theory}):
+\[
+  r(x) = E(Y | X = x)
+\]
+that is, the Expected Value of the Response Variable given that the Regression
+Variable takes a specific value, where $r \in \mathcal{F}$ is a Member of the
+Statistical (Regression) Model (\S\ref{sec:statistical_model}) being considered
+
+Regression Analysis is also concerned with characterizing the \emph{variation}
+of the Dependent Variable $X$ around the \emph{Prediction}
+(\S\ref{sec:prediction}) $Y$ of the Regression Function using a Probability
+Distribution
+
+\fist Prediction Interval (\S\ref{sec:prediction_interval})
+
+example of Pattern Recognition (assignment of some Output Value to a given Input
+Value), other examples are Statistical Classification
+(\S\ref{sec:statistical_classification})--when the Response Variable is
+Discrete--and Cluster Analysis (\S\ref{sec:cluster_analysis})
+
+Statistical Classification: \emph{Features} (Properties of Observations
+\S\ref{sec:observation} or \emph{Instances}) are Explanatory Variables
+(Regressors) and possible values of the Dependent Variable are categories called
+\emph{Outcomes}
+
+Linear Regression, Ordinary Least Squares, Logistic Regression
+
+Prediction Interval (\S\ref{sec:prediction_interval})
+
+cf. Numerical Analysis (\S\ref{sec:numerical_analysis}): Interpolation
+(\S\ref{sec:interpolation}), Extrapolation (TODO)
+
+
+
+\subsubsection{Regression Model}\label{sec:regression_model}
+
+\emph{Regression Model}:
+\begin{itemize}
+  \item \emph{Unknown Parameters} ($\beta$) -- Statistical Parameters
+    (\S\ref{sec:statistical_parameter})
+  \item \emph{Independent Variables} ($X$) -- ``Regression Variable'',
+    ``Regressor'', ``Covariate'', ``Explanatory Variable''
+  \item \emph{Dependent Variable} ($Y$) -- ``Response Variable'',
+    ``Regressand'', ``Criterion'', ``Explained Variable''; variable whose values
+    are to be ``explained'' in terms of the Independent Variable
+\end{itemize}
+
+Linear Regression Models (\S\ref{sec:linear_regression})
+
+...
+
+
+
+\subsubsection{Regression Error}\label{sec:regression_error}
+
+\fist cf. Statistical Error (Estimators \S\ref{sec:error})
+
+Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
+
+
+
+\subsubsection{Regression Residual}\label{sec:regression_residual}
+
+\fist cf. Residual (Estimators \S\ref{sec:residual})
+
+Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
+
+
+
+\subsubsection{Linear Regression}\label{sec:linear_regression}
+
+\emph{Linear Regression Model}
+
+Fit using:
+\begin{itemize}
+  \item Linear Least Squares (\S\ref{sec:linear_least_squares}): if errors are
+    \emph{normally distributed}, Least Squares ($2$-norm Best Fit) should be
+    used
+  \item ...
+\end{itemize}
+
+Gradient Descent (\S\ref{sec:gradient_descent})
+
+cf. Convex Optimization (\S\ref{sec:convex_optimization}) -- for Linear
+Regression, a Mean-Square Error Loss Function is always \emph{Convex} (example
+\url{https://towardsdatascience.com/introduction-to-machine-learning-algorithms-linear-regression-14c4e325882a}
+
+cf. Linear Programming (\S\ref{sec:linear_programming})
+-- article: \emph{Linear Programming for Linear Regression};
+\url{https://lazyprogrammer.me/linear-programming-for-linear-regression/}
+
+Simple Linear Regression -- single Regressor (Independent Variable)
+
+Regression Coefficients
+
+Error Term $\varepsilon$
+
+$Y = \beta_0 + \beta_1 X + \varepsilon$
+
+
+
+\subsubsection{Least Squares}\label{sec:least_squares}
+
+$2$-norm Best Fit \fist cf. $1$-norm Best Fit (\S\ref{sec:1norm_best_fit}),
+Chebyshev Approximation ($\infty$-norm Best Fit
+\S\ref{sec:chebyshev_approximation})
+
+
+
+\paragraph{Ordinary Least Squares}\label{sec:ordinary_least_squares}\hfill
+
+estimating the Unknown Parameters of a Linear Regression Model
+(\S\ref{sec:linear_regression})
+
+
+
+\subparagraph{Linear Least Squares}\label{sec:linear_least_squares}\hfill
+
+Overdetermined Systems (\S\ref{sec:overdetermined_system})
+
+QR Decomposition (\S\ref{sec:qr_decomposition})
+
+
+
+\subparagraph{Normal Equation}\label{sec:normal_equation}\hfill
+
+UC Math 352 Lec. 7 \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
+
+$A\vec{x} = \vec{b}$
+
+$\mathrm{min}_{\vec{x}} \|A_{\vec{x}} - \vec{b}\|$
+
+\emph{Normal Equation}: $(A^TA)\vec{x} = A^T\vec{b}$ -- Condition Number
+(\S\ref{sec:condition_number}) is $\kappa(A)^2$; see QR Factorization
+(\S\ref{sec:qr_factorization}) for a better Conditioned solution
+
+Project $\vec{b}$ onto the Column Space of $A$
+
+\[
+  \vec{x} = (A^TA)^{-1}A^T\vec{b}
+\]
+
+solve by Cholesky Factorization (\S\ref{sec:cholesky_decomposition}) ... TODO
+\url{https://www.youtube.com/watch?v=VJ-04jOfu-E}
+
+
+
+\subparagraph{QR Factorization}\label{sec:qr_factorization}\hfill
+
+QR Decomposition (\S\ref{sec:qr_decomposition})
+
+UC Math 352 Lec. 7 \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
+
+better Condition Number than Normal Equations (\S\ref{sec:normal_equation})
+
+$A\vec{x} = \vec{b}$
+
+$A = QR$ ($Q$ is Square, Orthogonal)
+
+Residual $\vec{r} = A\vec{x} - \vec{b}$
+
+\begin{align*}
+     \vec{r} & = QR\vec{x} - \vec{b} \\
+  Q^T\vec{r} & = R\vec{x} - Q^T\vec{b} \\
+\end{align*}
+
+because Orthogonal Matrices preserve Distances and $Q$ is Orthogonal:
+\[
+  \|Q^T\vec{r}\|_2 = \|\vec{r}\|_2
+\]
+minimizing $Q^T\vec{r} = \vec{\rho}$ is equivalent to minimizing $\vec{r}$
+
+splitting $\vec{\rho}$ into:
+\begin{enumerate}
+  \item $\hat{\rho}   = \hat{R}\vec{x} - \hat{Q}^T\vec{b}$
+  \item $\vec{\rho}_N = -Q_N^T\vec{b}$
+\end{enumerate}
+$\hat{rho}$ can be made Zero by solving $\hat{R}\vec{x} - \hat{Q}^T\vec{b}$ for
+$\vec{x}$, which is an Upper Triangular Matrix that can be solved efficiently:
+\[
+  \vec{x} = \hat{R}^{-1}\hat{Q}^T\vec{b}
+\]
+and $\vec{rho}_N$ is independent of $\vec{x}$ so it is \emph{fixed}, so:
+\[
+  \|\vec{r}\|^2_2 = \|\hat{Q}_N^T\vec{b}\|_2^2
+\]
+
+
+
+\paragraph{Generalized Least Squares}\label{sec:generalized_least_squares}\hfill
+
+\subparagraph{Weighted Least Squares}\label{sec:weighted_least_squares}\hfill
+
+
+
+\paragraph{Non-linear Least Squares}\label{sec:nonlinear_least_squares}\hfill
+
+
+
+\subsubsection{Multivariate Regression}\label{sec:multivariate_regression}
+
+or \emph{General Linear Model}; not to be confused with Generalized Linear
+Models (\S\ref{sec:generalized_linear_model})
+
+
+
+\subsubsection{Binomial Regression}\label{sec:binomial_regression}
+
+essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
+
+
+
+\paragraph{Logistic Regression}\label{sec:logistic_regression}\hfill
+
+or \emph{Logit Regression}
+
+Logistic Model (\S\ref{sec:logistic_model}) -- uses a Logistic Function
+(\S\ref{sec:logistic_function}) to Model a Binary Dependent Variable
+
+Statistical Classification (\S\ref{sec:statistical_classification})
+
+
+
+\subsubsection{Gaussian Process Regression}
+\label{sec:gaussian_process_regression}
+
+\emph{Kriging} or \emph{Wiener-Komogorov Prediction}
+
+under ``suitable assumptions'' on the Priors, Kriging gives the \emph{Best
+  Linear Unbiased Prediction} (BLUP \S\ref{sec:blup}) of the intermediate values
+
+\fist Spatial Analysis (\S\ref{sec:spatial_analysis})
+
+
+
+\subsubsection{Multiple Regression}\label{sec:multiple_regression}
+
+Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Cluster Analysis}\label{sec:cluster_analysis}
+% ------------------------------------------------------------------------------
+
+Unsupervised Learning
+
+example of Pattern Recognition (assignment of some Output Value to a given Input
+Value), other examples are Statistical Classification
+(\S\ref{sec:statistical_classification}) and Regression Analysis
+(\S\ref{sec:regression_analysis})
+
+
+
+\subsubsection{Hierarchical Clustering}\label{sec:hierarchical_clustering}
 
 
 
