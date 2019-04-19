@@ -463,6 +463,9 @@ allowed to have regions of Negative Probability
 
 \fist cf. Probabilistic Logic (\S\ref{sec:probabilistic_logic})
 
+(wiki): note that Axiomatic Probability Theory avoids definition of a
+\emph{Random Sequence} (\S\ref{sec:random_sequence})
+
 
 
 % ------------------------------------------------------------------------------
@@ -1352,6 +1355,7 @@ has Probability $0$ of assuming a particular Value
 \fist Continuous Probability Distributions (\S\ref{sec:continuous_probability})
 
 
+
 \subsubsection{Probability Density Function (PDF)}\label{sec:pdf}
 
 \emph{Probability Density Function} $f_X(x)$ of a Continuous Random Variable $X$
@@ -1388,6 +1392,60 @@ Complex Number with Modulus Squared representing a Probability Density
 
 used to reduce any Probability Function to a Probability Density Function with
 total Probability $1$
+
+%FIXME: same concept as Normalizing Constant for bayesian inference ?
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Random Sequence}\label{sec:random_sequence}
+% ------------------------------------------------------------------------------
+
+(wiki):
+
+a Random Sequence is a special case of \emph{Stochastic Process}
+(\S\ref{sec:stochastic_process}) where the Index Set is some Subset of the
+Integers
+
+note that Axiomatic Probability Theory (\S\ref{sec:probability_axioms})
+avoids definition of a \emph{Random Sequence}
+
+paradigms:
+\begin{itemize}
+  \item \emph{Frequency / Measure-theoretic} approach -- (Mises-Church); the
+    Sets ``Coding'' Frequency-based Stochastic properties are special kinds of
+    Null Sets (\S\ref{sec:null_set}) (Martin-L\"of)
+  \item \emph{Complexity / Compressibility} approach -- (Kolmogorov-Chatin)
+    Algorithmic (Kolmogorov) Complexity (\S\ref{sec:algorithmic_complexity})
+  \item \emph{Predictability} approach -- (Schnorr) Constructive Martingales
+    (\S\ref{sec:martingale})
+\end{itemize}
+
+Bernoulli Sequence (\S\ref{sec:bernoulli_sequence})
+
+\emph{Subsequence Selection Criterion} -- \emph{Mises-Church Randomness}: any
+Recursive Function which having read the first $N$ elements of the Sequence
+decides if it wants to select element $N+1$; cf. Algorithmic Randomness
+(\S\ref{sec:algorithmic_randomness})
+
+\emph{Reference Class Problem}: Relative Frequencies must be ``Relativised'' to
+a ``Reference Class'' (other interpretations of Probability may have this
+problem as well)--
+
+solutions restrict to certain Sequences of Outcomes, e.g. (Infinite)
+``\emph{Collectives}'' (Von Mises57)--cf. Infinite Bernoulli Sequences --where a
+\emph{Place-selection} is an effective method of selecting indices of Members of
+a Sequence such that the selection or not of Index $i$ depends \emph{at most} on
+the first $i-1$ Outcomes (``attributes''), with the Axioms of \emph{Convergence}
+(the limiting Relative Frequency of any Outcome exists) and \emph{Randomness}
+(the limiting Relative Frequency of each Outcome in a Collective $\omega$ is the
+same in any Infinite Subsequence of $\omega$ determined by Place-selection; note
+that trivial Sequences such as $H,H,H,\ldots$ satisfy this ``Randomness'' Axiom;
+cf. the Principle of Maximum Entropy in Classical Probability), Algorithmic
+Randomness (\S\ref{sec:algorithmic_randomness});
+issues with limiting Relative Frequencies are that they violate Countable
+Additivity and the Domain of Definition is not a Set-field or a $\sigma$-algebra
+(de Finetti72)
 
 
 
@@ -3532,6 +3590,9 @@ Asymptotically Optimal (or ``Efficient'' \S\ref{sec:efficiency})
 the MLE Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
 (\S\ref{sec:bayes_estimator})
 
+for Bernoulli and Normal Distributions, Posterior Mean
+(\S\ref{sec:posterior_distribution}) is generally close to the MLE
+
 $\hat{\theta} \pm 2\hat{S_E}$ is an approximate 95\% Confidence Interval, where
 $S_E$ is the Standard Error
 
@@ -3572,7 +3633,7 @@ $\hat{\theta}_n$ is the \emph{Method of Moments Estimator}
 
 Bayesian Estimation
 
-Bayes Estimator (\S\ref{sec:bayes_estimator})
+cf. Bayes Estimator (\S\ref{sec:bayes_estimator})
 
 
 
@@ -3870,9 +3931,8 @@ in a \emph{Hypothesis} (\S\ref{sec:hypothesis}), i.e. a Conjecture
 (\S\ref{sec:population}).
 
 \fist In Bayesian Inference (\S\ref{sec:bayesian_inference}), a Hypothesis is
-assigned a Probability, while in Frequentist Inference
-(\S\ref{sec:frequentist_inference}), a Hypothesis is Tested without assigning a
-Probability.
+assigned a Probability, while in Frequentist Inference, a Hypothesis is Tested
+without assigning a Probability.
 
 Partitioning the Parameter Space (\S\ref{sec:parametric_model}) $\Theta$ into
 Disjoint Sets $\Theta_0$ and $\Theta_1$, the \emph{Null Hypothesis}
@@ -4172,6 +4232,8 @@ Frequency Interpretation
 differs from the Classical Interpretation in counting only the \emph{actual}
 Outcomes instead of the \emph{possible} Outcomes; Finite Frequentism (Venn)
 
+$f(x; \theta)$
+
 (Wasserman04 \S11.1)
 
 Frequentist postulates:
@@ -4184,6 +4246,9 @@ Frequentist postulates:
     Frequency properties
 \end{enumerate}
 
+cf. \emph{Bayesian Inference} (\S\ref{sec:bayesian_inference}) -- focus is on
+subjective ``degree of belief''; assigns Probabilities to Parameters (they are
+Random Variables)
 
 
 
@@ -4208,7 +4273,7 @@ problem as well)--
 
 solutions restrict to certain Sequences of Outcomes, e.g. (Infinite)
 ``\emph{Collectives}'' (Von Mises57)--cf. Infinite Bernoulli Sequences
-\S\ref{sec:bernoulli_sequence})--where a \emph{Place-selection} is an effective
+(\S\ref{sec:bernoulli_sequence})--where a \emph{Place-selection} is an effective
 method of selecting indices of Members of a Sequence such that the selection or
 not of Index $i$ depends \emph{at most} on the first $i-1$ Outcomes
 (``attributes''), with the Axioms of \emph{Convergence} (the limiting Relative
@@ -4301,6 +4366,8 @@ Interval
 of Probability as a ``reasonable'' \emph{Expectation} (\S\ref{sec:expecation})
 or ``degree of belief''
 
+$f(x | \theta)$
+
 Conditional Probabilities (\S\ref{sec:conditional_probability}), Bayes' Rule
 (\S\ref{sec:bayes_theorem})
 
@@ -4313,12 +4380,17 @@ Conditioning (\S\ref{sec:conditioning})
 
 \fist Subjective Logic (\S\ref{sec:subjective_logic})
 
+(wiki): every unique Bayesian ``Procedure'' (Decision Rule
+\S\ref{sec:decision_rule}) is Admissable (\S\ref{sec:admissable_decision}) and
+every Admissable Statistical Procedure is either a Bayesian Procedure or a Limit
+of Bayesian Procedures (Wald)
+
 \fist Aumann1987 - \emph{Correlated Equilibrium as an Expression of Bayesian
   Rationality} -- \emph{Correlated Equilibrium}
 (\S\ref{sec:correlated_equilibrium}) ``does away with'' the ``dichotomy usually
 perceived'' between the \emph{Bayesian} and \emph{Game-theoretic} world-views
 
-(Wasserman04 \S11.1)
+(Wasserman04, Ch.11)
 
 Bayesian postulates:
 \begin{enumerate}
@@ -4331,11 +4403,116 @@ Bayesian postulates:
     Estimates and Interval Estimates can be extracted from this Distribution
 \end{enumerate}
 
+cf. \emph{Frequentist Inference} (\S\ref{sec:frequentist_inference}) -- focus is
+on ``objective'' long-run Relative Frequencies, and Statistical Parameters are
+assumed to be fixed constants, not Random Variables
+
+\emph{Bayesian Method}:
+\begin{enumerate}
+  \item choose a \emph{Prior Distribution} (\S\ref{sec:prior_distribution}) for
+    Model Parameters $\theta$ defined by PDF (\S\ref{sec:pdf}) $f(\theta)$
+  \item choose a \emph{Statistical Model} (\S\ref{sec:statistical_model})
+    $f(x|\theta)$ reflecting the degree of ``belief'' about $x$ given $\theta$
+  \item Observe (\S\ref{sec:observation}) Data (\S\ref{sec:statistical_sample})
+    $X_1, \ldots, X_n$ and \emph{update} beliefs and calculate the
+    \emph{Posterior Distribution} (\S\ref{sec:posterior_distribution})
+    $f(\theta | X_1, \ldots, X_n)$
+\end{enumerate}
+
+for Discrete $\theta$ and single Discrete $X$:
+\[
+  P(\Theta = \theta | X = x) = \frac{
+    P(X = x|\Theta = \theta)P(\Theta = \theta)
+  }{
+    \sum_\theta P(X = x | \Theta = \theta) P(\Theta = \theta)
+  }
+\]
+(Bayes' Theorem \S\ref{sec:bayes_theorem})
+
+for Continuous Variables:
+\[
+  f(\theta | x) = \frac{
+    f(x|\theta)f(\theta)
+  }{
+    \int f(x|\theta)f(\theta) d\theta
+  }
+\]
+
+for $n$ IID Observations $X_1, \ldots, X_n$:
+\[
+  f(x_1, \ldots, x_n | \theta) =
+    \prod_{i=1}^n f(x_i | \theta) = \mathcal{L}_n(\theta)
+\]
+where $\mathcal{L}_n$ is the \emph{Likelihood Function}
+(\S\ref{sec:likelihood_function})
+
+for $x^n = (x_1, \ldots, x_n)$:
+\[
+  f(\theta|x^n) = \frac{\mathcal{L}_n(\theta)f(\theta)}{c_n}
+    \propto \mathcal{L}_n(\theta)f(\theta)
+\]
+where $cn = \int \mathcal{L}_n(\theta)f(\theta) d\theta$ is the
+\emph{Normalizing Constant}
+%FIXME: same concept as Normalizing Constant for continuous random variables ?
+
+i.e. \emph{Posterior is Proportional-to Likelihood times Prior}:
+\[
+  f(\theta | x^n) \propto \mathcal{L}(\theta)f(\theta)
+\]
+
+when the Prior and Posterior Distributions are in the same family, the Prior is
+said to be ``\emph{Conjugate}'' with respect to the Model
+
+
+
+\subsubsection{Prior Distribution}\label{sec:prior_distribution}
+
+$f(\theta)$
+
+or \emph{Prior Probability}
+
+\emph{Subjectivism}: Prior should reflect ``subjective opinion'' about $\theta$
+before the Data are collected
+
+\emph{Non-informative Prior} -- alternative to Subjective Prior, e.g. Flat
+Prior, Jeffrey's prior
+
+\emph{Proper Prior}
+
+\emph{Improper Prior} -- $f(\theta) d\theta = \infty$
+
+\emph{Flat Prior} -- $f(\theta) \propto c$ for some Constant $c$ (also an
+Improper Prior since $\int f(\theta) d\theta = \infty$); Flat Priors are not
+\emph{Transformation Invariant}: the notion of a Flat Prior is not well-defined
+because a Flat Prior on a Parameter does not imply a Flat Prior on a Transformed
+Parameter
+
+\emph{Jeffrey's Prior} -- uses Fisher Information (\S\ref{sec:fisher_metric});
+Transformation Invariant
+
+
+
+\subsubsection{Posterior Distribution}\label{sec:posterior_distribution}
+
+$f(\theta | x^n)$
+
+\emph{Posterior is Proportional-to Likelihood times Prior}:
+\[
+  f(\theta | x^n) \propto \mathcal{L}(\theta)f(\theta)
+\]
+
+Posterior Estimates:
+
+\emph{Posterior Mean}
+
+for Bernoulli and Normal Distributions, Posterior Mean is generally close to the
+MLE (Mean Likelihood Estimate \S\ref{sec:mle})
+
+\emph{Posterior Interval} (Credible Interval \S\ref{sec:credible_interval})
+
 
 
 \subsubsection{Conditioning}\label{sec:conditioning}
-
-%FIXME: move under bayesian inference?
 
 Subjective Probability
 (\url{https://plato.stanford.edu/entries/probability-interpret/#SubPro}),
@@ -4345,10 +4522,6 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 \S\ref{sec:condition_number})
 
 
-
-\subsubsection{Prior Distribution}\label{sec:prior_distribution}
-
-\subsubsection{Posterior Distribution}\label{sec:posterior_distribution}
 
 \subsubsection{Likelihood}\label{sec:likelihood}
 
@@ -4397,6 +4570,8 @@ knowing only $T(X^n)$ (Wasserman04 \S9.13.2)
 
 \subsubsection{Credible Interval}\label{sec:credible_interval}
 
+\emph{Posterior Interval} (\S\ref{sec:posterior_distribution})
+
 Interval Estimator (\S\ref{sec:interval_estimator})
 
 Prediction Interval (\S\ref{sec:prediction_interval})
@@ -4409,7 +4584,11 @@ cf. Confidence Interval (Frequentist Inference \S\ref{sec:confidence_interval})
 
 or \emph{Bayes Action}
 
-Maximum A Priori (MAP) Estimator (\S\ref{sec:map_estimator})
+Estimator (or Decision Rule (\S\ref{sec:decision_rule}) that minimizes
+(maximizes) Posterior Expected Value of a Loss (Utility) Function
+(\emph{Posterior Expected Loss/Utility})
+
+cf. Maximum A Priori (MAP) Estimator (\S\ref{sec:map_estimator})
 
 
 
@@ -4491,6 +4670,10 @@ TDA (R package)
 cf. \emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness}) --
 Universal Test, Universal Sequential Test (Martin-L\"of66)
 
+\emph{Subsequence Selection Criterion} (\S\ref{sec:random_sequence}) --
+\emph{Mises-Church Randomness}: any Recursive Function which having read the
+first $N$ elements of the Sequence decides if it wants to select element $N+1$
+
 cf. Quasi-random Sequences (\S\ref{sec:low_discrepancy})
 
 Tests (\S\ref{sec:hypothesis_testing}):
@@ -4542,6 +4725,9 @@ with no dependency on previous queries
 or \emph{Random Process}
 
 %FIXME: move section ???
+
+a \emph{Random Sequence} (\S\ref{sec:random_sequence}) is a special case of
+Stochastic Process where the Index Set is some Subset of the Integers
 
 \fist cf. Data Generating Process (\S\ref{sec:data_generating_process})
 
@@ -4774,9 +4960,19 @@ cf. \emph{Binomial Process} (Point Process \S\ref{sec:binomial_process})
 
 \paragraph{Bernoulli Sequence}\label{sec:bernoulli_sequence}\hfill
 
+Random Sequence (\S\ref{sec:random_sequence})
+
 \emph{Infinite Bernoulli Sequences} -- cf. \emph{Collectives} (Von Mises57); a
 solution to the ``Reference Class Problem'' of Frequentist Probability Theory;
 cf. (Martin-L\"of66)
+
+
+
+\subsubsection{Martingale}\label{sec:martingale}
+
+\begin{itemize}
+  \item Stopped Brownian Motion
+\end{itemize}
 
 
 
@@ -5362,6 +5558,8 @@ Riemannian Metric (\S\ref{sec:riemannian_metric}) for a Statistical Manifold
 Score Function (\S\ref{sec:score})
 
 Fisher Information Matrix
+
+Jeffrey's Prior (\S\ref{sec:prior_distribution})
 
 \fist \textbf{Fisher's Fundamental Theorem of Natural Selection},
 Quasi-linkage Equilibrium: approximation in the case of Weak Selection
