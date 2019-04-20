@@ -2749,6 +2749,10 @@ assumed that Observations are IID.
 
 \subsubsection{Stratified Random Sample}\label{sec:stratified_random_sample}
 
+cf. Benchmarking (``\emph{Post-stratification}'' \S\ref{sec:benchmarking})
+
+Horvitz-Thompson Estimator (\S\ref{sec:horvitz_thompson})
+
 
 
 % ------------------------------------------------------------------------------
@@ -2963,6 +2967,18 @@ Converges to the Mean (Expected Value \S\ref{sec:expected_value}) as the Sample
 Size gets larger
 
 Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
+
+
+
+\subparagraph{Weighted Arithmetic Mean}\label{sec:weighted_mean}\hfill
+
+\emph{Weight Function}
+
+\emph{Weighted Sum} or \emph{Weighted Average}
+
+\fist Benchmarking (\S\ref{sec:benchmarking})
+
+Simpson's Paradox
 
 
 
@@ -3492,6 +3508,8 @@ deals with ``\emph{Estimating}'' the values of Statistical Parameters
 an \emph{Estimator} (\S\ref{sec:estimator}) attempts to approximate unknown
 Statistical Parameters using ``measured data''
 
+\fist cf. Decision Theory (\S\ref{sec:decision_theory}) -- choosing Estimators
+
 \emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
 Parameters of a Statistical Model (\S\ref{sec:statistical_model}), i.e. the
 Estimation of the \emph{Regression Function} (\S\ref{sec:regression_function})
@@ -3511,6 +3529,8 @@ approaches:
 
 
 \subsubsection{Estimator}\label{sec:estimator}
+
+\fist Decision Rule (Decision Theory \S\ref{sec:decision_rule})
 
 (wiki):
 
@@ -3590,8 +3610,9 @@ Asymptotically Optimal (or ``Efficient'' \S\ref{sec:efficiency})
 the MLE Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
 (\S\ref{sec:bayes_estimator})
 
-for Bernoulli and Normal Distributions, Posterior Mean
-(\S\ref{sec:posterior_distribution}) is generally close to the MLE
+for Distributions satisfying ``Regularity Conditions'', e.g. Bernoulli and
+Normal Distributions, Posterior Mean (\S\ref{sec:posterior_distribution}) is
+generally close to the MLE
 
 $\hat{\theta} \pm 2\hat{S_E}$ is an approximate 95\% Confidence Interval, where
 $S_E$ is the Standard Error
@@ -3659,6 +3680,18 @@ Tolerance Interval (TODO)
 
 
 
+\paragraph{Horvitz-Thompson Estimator}\label{sec:horvitz_thompson}\hfill
+
+method for Estimating Total and Mean of a Superpopulation in a Stratified Sample
+(\S\ref{sec:stratified_sample})
+
+cannot be derived from a Bayesian or Likelihood (\S\ref{sec:likelihood}) point
+of view
+
+Survey Analysis, Missing Data
+
+
+
 \subsubsection{Deviation}\label{sec:deviation}
 
 \fist the Distribution of Deviations are used as measures of Statistical
@@ -3677,15 +3710,24 @@ Central Tendency (\S\ref{sec:central_tendency}) for Interval Measurement
 \emph{Statistical Error}
 
 \fist cf. \emph{Observational Error} (Measurement Error
-\S\ref{sec:observational_error})
+\S\ref{sec:observational_error}), \emph{Standard Error}
+  (\S\ref{sec:standard_error})
+
+
+
+\subparagraph{Mean Squared Error (MSE)}\label{sec:mse}\hfill
 
 Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
+
+\fist Decision Theory (\S\ref{sec:decision_theory}): when Loss Function
+(\S\ref{sec:objective_function}) is Squared Error, the Risk (Average Loss
+\S\ref{sec:risk}) is the MSE
 
 
 
 \subparagraph{Sampling Error}\label{sec:sampling_error}\hfill
 
-\subparagraph{Non-sampling Error}\label{sec:sampling_error}\hfill
+\subparagraph{Non-sampling Error}\label{sec:nonsampling_error}\hfill
 
 Coverage Errors
 
@@ -3732,11 +3774,24 @@ Sampling Distribution (\S\ref{sec:sampling_distribution})
 
 \fist Resampling (\S\ref{sec:resampling})
 
+\fist cf. \emph{Observational Error} (Measurement Error
+\S\ref{sec:observational_error}), \emph{Statistical Error} (\S\ref{sec:error})
+
 
 
 \subsubsection{Efficiency}\label{sec:efficiency}
 
 \paragraph{Asymptotic Relative Efficiency (ARE)}\label{sec:are}\hfill
+
+
+
+\subsubsection{Benchmarking}\label{sec:benchmarking}
+
+or \emph{Post-stratification} (cf. Stratified Sampling
+\S\ref{sec:stratified_sample})
+
+(wiki): use of ``auxiliary information'' to adjust Sampling Weights
+(\S\ref{sec:weighted_mean}) in an Estimation process
 
 
 
@@ -3860,70 +3915,12 @@ Set-membership approach to Estimation Theory (cf. Probabilistic approach)
 
 
 % ------------------------------------------------------------------------------
-\subsection{Asymptotic Theory}\label{sec:asymptotic_theory}
-% ------------------------------------------------------------------------------
-
-or \emph{Large Sample Theory}
-
-\fist cf. \emph{Exact Statistics} (\S\ref{sec:exact_statistics}) -- not based on
-Large Sample Theory
-
-\fist Asymptotic Distributions (\S\ref{sec:asymptotic_distribution})
-
-\fist cf. Asymptotic Analysis (\S\ref{sec:asymptotic_analysis})
-
-(wiki):
-
-framework for assessing properties of Estimators (\S\ref{sec:estimator}) and
-Statistical Tests (Hypothesis Testing \S\ref{sec:hypothesis_testing}) as Sample
-Size (\S\ref{sec:sample_size}) $n \rightarrow \infty$
-
-\fist Stochastic Convergence (\S\ref{sec:stochastic_convergence}) -- Convergence
-of Sequences (\S\ref{sec:convergent_sequence}) of Random Variables to Limit
-Random Variables
-
-Asymptotic Thoerems:
-\begin{itemize}
-  \item \emph{Law of Large Numbers} (\S\ref{sec:large_numbers}) --
-    for Random Variables $X_1, \ldots, X_n$, the Sample Mean
-    (\S\ref{sec:sample_mean}) $\overline{X}_n = \frac{1}{n}\sum_i X_i$ Converges
-    in Probability to $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
-    $\overline{X}_n$ is close to $\mu$ with high Probability
-  \item \emph{Central Limit Theorem} (\S\ref{sec:central_limit})
-    for a Sequence of Random Variables $X_i, \ldots, X_n$ with Sample Mean
-    $\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
-    Converges in Distribution to a Normal Distribution
-    (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
-    Mean has approximately a Normal Distribution for large $n$
-  \item ...
-\end{itemize}
-
-
-
-\subsubsection{Large Deviations Theory}\label{sec:large_deviations_theory}
-
-\paragraph{Rate Function}\label{sec:rate_function}\hfill
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Exact Statistics}\label{sec:exact_statistics}
-% ------------------------------------------------------------------------------
-
-not based on Large Sample Theory (Asymptotic Theory
-\S\ref{sec:asymptotic_theory})
-
-\fist Exact Test (\S\ref{sec:exact_test})
-
-Non-parametric
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
 % ------------------------------------------------------------------------------
 
 or \emph{Confirmatory Data Analysis}
+
+\url{https://github.com/puolival/multipy} -- Python library
 
 A \emph{Statistical Test} is a ``procedure'' with Samples as input and results
 in a \emph{Hypothesis} (\S\ref{sec:hypothesis}), i.e. a Conjecture
@@ -3936,10 +3933,11 @@ without assigning a Probability.
 
 Partitioning the Parameter Space (\S\ref{sec:parametric_model}) $\Theta$ into
 Disjoint Sets $\Theta_0$ and $\Theta_1$, the \emph{Null Hypothesis}
-(\S\ref{sec:null_hypothesis}), $H_0 : \theta \in \Theta_0$, represents any
-Hypothesis, and the \emph{Alternative Hypothesis}
-(\S\ref{sec:alternative_hypothesis}), $H_1 : \theta \in \Theta_1$, represents an
-Hypothesis that is accepted in the case that the Null Hypothesis is Rejected
+(\S\ref{sec:null_hypothesis}), $H_0 = \vdash \theta \in \Theta_0$, represents
+any Hypothesis, and the \emph{Alternative Hypothesis}
+(\S\ref{sec:alternative_hypothesis}), $H_1 = \vdash \theta \in \Theta_1$,
+represents an Hypothesis that is accepted in the case that the Null Hypothesis
+is Rejected
 
 \begin{enumerate}
   \item Sufficient Evidence: Reject $H_0$ in favor of $H_1$
@@ -3950,16 +3948,16 @@ Hypothesis that is accepted in the case that the Null Hypothesis is Rejected
 
 \emph{One-tail (One-sided) Test}:
 \[
-  H_0 : \theta \leq \theta_0 \quad\quad\quad H_1 : \theta > \theta_0
+  H_0 = \vdash \theta \leq \theta_0 \quad\quad H_1 = \vdash \theta > \theta_0
 \]
 or:
 \[
-  H_0 : \theta \geq \theta_0 \quad\quad\quad H_1 : \theta < \theta_0
+  H_0 = \vdash \theta \geq \theta_0 \quad\quad H_1 = \vdash \theta < \theta_0
 \]
 
 \emph{Two-tail (Two-sided) Test}:
 \[
-  H_0 : \theta = \theta_0 \quad\quad\quad H_1 : \theta \neq \theta_0
+  H_0 = \vdash \theta = \theta_0 \quad\quad H_1 = \vdash \theta \neq \theta_0
 \]
 
 Test on a single Mean
@@ -4000,17 +3998,32 @@ the Statistic is Significant
 \end{itemize}
 
 \emph{Neyman-Pearson Lemma} -- most Powerful Test for Simple Null Hypothesis
-$H_0 : \theta = \theta_0$ and Simple Alternative Hypothesis
-$H_1 : \theta = \theta_1$
+$H_0 = \vdash \theta = \theta_0$ and Simple Alternative Hypothesis
+$H_1 = \vdash \theta = \theta_1$
 
-\url{https://github.com/puolival/multipy} -- Python library
+\asterism
+
+\textbf{Bayesian Testing} (\S\ref{sec:bayesian_inference})
+
+(Wasserman04 \S11.8)
+
+places a Prior Probability Distribution (\S\ref{sec:prior_distribution}) on
+$H_0$ and on $\theta$ and then computing $P(H_0 | X^n)$; Priors cannot be
+Improper; a Prior-free bound on $P(H_0|X^n = x^n)$:
+\[
+  \frac{\mathcal{L}(\theta_0)}{\mathcal{L}(\theta_0) + \mathcal{L}(\hat\theta)
+    \leq P(H_0|X^n = x^n) \leq 1
+\]
+
+\emph{Lindley's Paradox} (\emph{Jeffreys-Lindley Paradox})
 
 
 
 \subsubsection{Hypothesis}\label{sec:hypothesis}
 
-A \emph{Statistical Hypothesis} is a Conjecture (\S\ref{sec:conjecture})
-concerning one or more Populations (\S\ref{sec:population}).
+A \emph{Statistical Hypothesis} is a Conjecture (\S\ref{sec:conjecture}) or
+Assertion (\S\ref{sec:assertion}) concerning one or more Populations
+(\S\ref{sec:population}).
 
 cf. Hypothesis (Antecedent \S\ref{sec:antecedent} of a Hypothetical Proposition
 \S\ref{sec:proposition})
@@ -4099,9 +4112,10 @@ Observed
 
 \textbf{Thm.} \emph{
   If the Test Statistic has a Continuous Distribution, then under
-  $H_0 : \theta = \theta_0$ the $p$-value has a $Uniform(0,1)$ Distribution and
-  therefore one Rejects $H_0$ when $p$-value is less than the Significance Level
-  $\alpha$, and the Probability of a Type I Error is $\alpha$.
+  $H_0 = \vdash \theta = \theta_0$ the $p$-value has a $Uniform(0,1)$
+  Distribution and therefore one Rejects $H_0$ when $p$-value is less than the
+  Significance Level $\alpha$, and the Probability of a Type I Error is
+  $\alpha$.
 }
 
 
@@ -4163,6 +4177,66 @@ Non-parametric method for testing whether two Distributions are ``the same''
 \subsubsection{Likelihood-Ratio (LR) Test}\label{sec:lr_test}
 
 used for comparing Fit (\S\ref{sec:fit}) of two Statistical Models
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Asymptotic Theory}\label{sec:asymptotic_theory}
+% ------------------------------------------------------------------------------
+
+or \emph{Large Sample Theory}
+
+\fist cf. \emph{Exact Statistics} (\S\ref{sec:exact_statistics}) -- not based on
+Large Sample Theory
+
+\fist Asymptotic Distributions (\S\ref{sec:asymptotic_distribution})
+
+\fist cf. Asymptotic Analysis (\S\ref{sec:asymptotic_analysis})
+
+(wiki):
+
+framework for assessing properties of Estimators (\S\ref{sec:estimator}) and
+Statistical Tests (Hypothesis Testing \S\ref{sec:hypothesis_testing}) as Sample
+Size (\S\ref{sec:sample_size}) $n \rightarrow \infty$
+
+\fist Stochastic Convergence (\S\ref{sec:stochastic_convergence}) -- Convergence
+of Sequences (\S\ref{sec:convergent_sequence}) of Random Variables to Limit
+Random Variables
+
+Asymptotic Thoerems:
+\begin{itemize}
+  \item \emph{Law of Large Numbers} (\S\ref{sec:large_numbers}) --
+    for Random Variables $X_1, \ldots, X_n$, the Sample Mean
+    (\S\ref{sec:sample_mean}) $\overline{X}_n = \frac{1}{n}\sum_i X_i$ Converges
+    in Probability to $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+    $\overline{X}_n$ is close to $\mu$ with high Probability
+  \item \emph{Central Limit Theorem} (\S\ref{sec:central_limit})
+    for a Sequence of Random Variables $X_i, \ldots, X_n$ with Sample Mean
+    $\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
+    Converges in Distribution to a Normal Distribution
+    (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+    Mean has approximately a Normal Distribution for large $n$
+  \item ...
+\end{itemize}
+
+
+
+\subsubsection{Large Deviations Theory}\label{sec:large_deviations_theory}
+
+\paragraph{Rate Function}\label{sec:rate_function}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Exact Statistics}\label{sec:exact_statistics}
+% ------------------------------------------------------------------------------
+
+not based on Large Sample Theory (Asymptotic Theory
+\S\ref{sec:asymptotic_theory})
+
+\fist Exact Test (\S\ref{sec:exact_test})
+
+Non-parametric
 
 
 
@@ -4407,6 +4481,10 @@ cf. \emph{Frequentist Inference} (\S\ref{sec:frequentist_inference}) -- focus is
 on ``objective'' long-run Relative Frequencies, and Statistical Parameters are
 assumed to be fixed constants, not Random Variables
 
+\fist Bayesian Methods are tied to the \emph{Likelihood Function}
+(\S\ref{sec:likelihood}) which does not yield accurate Inferances in
+High-dimensional and Non-parametric problems
+
 \emph{Bayesian Method}:
 \begin{enumerate}
   \item choose a \emph{Prior Distribution} (\S\ref{sec:prior_distribution}) for
@@ -4463,6 +4541,17 @@ i.e. \emph{Posterior is Proportional-to Likelihood times Prior}:
 when the Prior and Posterior Distributions are in the same family, the Prior is
 said to be ``\emph{Conjugate}'' with respect to the Model
 
+for multiple Parameters $\theta = (\theta_1, \ldots, \theta_p)$, the Posterior
+Density Function $f(\theta|x^n)$ is the same as above, and the \emph{Marginal
+  Posterior} for an individual Parameter $\theta_1$ is:
+\[
+  f(\theta_1 | x^n) =
+    \int\cdots\int f(\theta_1,\ldots,\theta_p | x^n) d\theta_2 \cdots d\theta_p
+\]
+Integral can be approximated by ``\emph{Simulation}''
+(\S\ref{sec:stochastic_simulation}), i.e. ``drawing Randomly'' from the
+Posterior (Wasserman04 11.7)
+
 
 
 \subsubsection{Prior Distribution}\label{sec:prior_distribution}
@@ -4470,6 +4559,10 @@ said to be ``\emph{Conjugate}'' with respect to the Model
 $f(\theta)$
 
 or \emph{Prior Probability}
+
+when the Prior and Posterior Distributions (\S\ref{sec:posterior_distribution})
+are in the same family, the Prior is said to be ``\emph{Conjugate}'' with
+respect to the Model
 
 \emph{Subjectivism}: Prior should reflect ``subjective opinion'' about $\theta$
 before the Data are collected
@@ -4490,25 +4583,47 @@ Parameter
 \emph{Jeffrey's Prior} -- uses Fisher Information (\S\ref{sec:fisher_metric});
 Transformation Invariant
 
+(wiki):
+
+\emph{Cromwell's Rule} -- Prior Probabilities of $0$ and $1$ should only be used
+for Statements that are Logically True or False, e.g. $2+2 = 4$
+
+\emph{Bernstein-von Mises Theorem} -- Posterior Distribution for unknown
+quantities in any problem is effectively Asymptotically Independent of the Prior
+Distribution, assuming it obeys \emph{Cromwell's Rule}, as the Sample Data
+(\S\ref{sec:statistical_sample}) grows large
+
+the effect of the Prior diminishes as $n$ (i.e. $(X_1, \ldots, X_n)$) increases
+
 
 
 \subsubsection{Posterior Distribution}\label{sec:posterior_distribution}
 
 $f(\theta | x^n)$
 
-\emph{Posterior is Proportional-to Likelihood times Prior}:
+\emph{Posterior is Proportional-to Likelihood times Prior}
+(\S\ref{sec:prior_distribution}):
 \[
   f(\theta | x^n) \propto \mathcal{L}(\theta)f(\theta)
 \]
 
 Posterior Estimates:
 
-\emph{Posterior Mean}
+\emph{Posterior Mean} (Point Estimate)
 
-for Bernoulli and Normal Distributions, Posterior Mean is generally close to the
-MLE (Mean Likelihood Estimate \S\ref{sec:mle})
+for Distributions satisfying ``Regularity Conditions'', e.g. Bernoulli and
+Normal Distributions, Posterior Mean is generally close to the MLE (Mean
+Likelihood Estimate \S\ref{sec:mle})
 
 \emph{Posterior Interval} (Credible Interval \S\ref{sec:credible_interval})
+
+(Wasserman04 \S11.4) Posteriors can be Approximated using ``\emph{Simulation}''
+(\S\ref{sec:stochastic_simulation})
+
+\emph{Bernstein-von Mises Theorem} -- Posterior Distribution for unknown
+quantities in any problem is effectively Asymptotically Independent of the Prior
+Distribution, assuming it obeys \emph{Cromwell's Rule}, as the Sample Data
+(\S\ref{sec:statistical_sample}) grows large
 
 
 
@@ -4524,6 +4639,9 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 
 
 \subsubsection{Likelihood}\label{sec:likelihood}
+
+\fist Bayesian Methods are tied to the Likelihood Function which does not yield
+accurate Inferances in High-dimensional and Non-parametric problems
 
 \emph{Likelihood Function} $\mathcal{L} : \Theta \rightarrow [0, \infty)$ -- the
   Joint Density (\S\ref{sec:joint_probability}) of Sample Data
@@ -4547,8 +4665,8 @@ cf. \emph{Probability} (\S\ref{sec:probability}) -- a Probability refers to
 variable Data for a fixed Hypothesis (\S\ref{sec:hypothesis_testing}), while a
 Likelihood refers to variable Hypotheses for fixed Data
 
-Maximum Likelihood Estimation (MLE \S\ref{sec:mle}) -- $\hat{\theta}$: the value
-of $\theta$ that Maximizes $\mathcal{L}(\theta)$
+\emph{Maximum Likelihood Estimation} (MLE \S\ref{sec:mle}) -- $\hat{\theta}$:
+the value of $\theta$ that Maximizes $\mathcal{L}(\theta)$
 
 Likelihood Interval
 
