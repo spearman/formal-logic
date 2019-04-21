@@ -3358,6 +3358,10 @@ Non-parametric
 (\S\ref{sec:statistical_functional}), Resampling Methods
 (\S\ref{sec:resampling})
 
+\emph{Stein's Paradox} -- when three or more Parameters are Estimated
+simultaneously, there exist combined Estimators more accurate on average (having
+lower Expected MSE) than any method handling the Parameters Separately
+
 
 
 \paragraph{Order Statistic}\label{sec:order_statistic}
@@ -3613,6 +3617,12 @@ the MLE Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
 for Distributions satisfying ``Regularity Conditions'', e.g. Bernoulli and
 Normal Distributions, Posterior Mean (\S\ref{sec:posterior_distribution}) is
 generally close to the MLE
+
+for Parametric Models satisfying ``Regularity Conditions'', MLE is approximately
+Minimax (\S\ref{sec:minimax})
+
+note that MLE is \emph{not} an optimal Estimator for high-dimensional problems,
+e.g. when there are as many Parameters as there are Observations
 
 $\hat{\theta} \pm 2\hat{S_E}$ is an approximate 95\% Confidence Interval, where
 $S_E$ is the Standard Error
@@ -4241,63 +4251,6 @@ Non-parametric
 
 
 % ------------------------------------------------------------------------------
-\subsection{Uncertainty Analysis}\label{sec:uncertainty_analysis}
-% ------------------------------------------------------------------------------
-
-\fist Decision Theory (\S\ref{sec:decision_theory})
-
-\fist Robust Statistics (\S\ref{sec:robust_statistic})
-
-
-
-\subsubsection{Uncertainty}\label{sec:uncertainty}
-
-cf. Probability (\S\ref{sec:probability})
-
-(\url{https://plato.stanford.edu/entries/logic-probability/}): Probabilistic
-Semantics (\S\ref{sec:probabilistic_semantics}) for Logical Consequence Relation
-yields \emph{Probability Preserving} (dually, \emph{Uncertainty Propagating})
-Deductive Validity (\S\ref{sec:validity}), rather than Truth Preserving
-(\S\ref{sec:truth_preservation})
-
-
-
-\paragraph{Propagation of Error}\label{sec:error_propagation}\hfill
-
-or \emph{Propagation of Uncertainty}
-
-\fist cf. Delta Method (\S\ref{sec:delta_method})
-
-
-
-\subsubsection{Sensitivity Analysis}\label{sec:sensitivity_analysis}
-
-or \emph{``What-if'' Analysis}
-
-cf. Hypothetical Propositions (\S\ref{sec:proposition})
-
-\fist Info-gap Decision Theory (\S\ref{sec:info_gap}): application of
-Sensitivity Analysis of the Stability Radius (\S\ref{sec:stability_radius}) type
-to Perturbations in the value of a given Estimate of a Parameter of interest
-(FIXME: clarify)
-
-
-
-\subsubsection{Evidince Theory}\label{sec:evidence_theory}
-
-or \emph{Dempster-Shafer Theory (DST)} or \emph{Theory of Belief Functions}
-
-Transferable Belief Model
-
-
-
-\subsubsection{Possibility Theory}\label{sec:possibility_theory}
-
-alternative to Probability Theory for dealing with certain types of Uncertainty
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Frequentist Inference}\label{sec:frequentist_inference}
 % ------------------------------------------------------------------------------
 
@@ -4615,6 +4568,9 @@ for Distributions satisfying ``Regularity Conditions'', e.g. Bernoulli and
 Normal Distributions, Posterior Mean is generally close to the MLE (Mean
 Likelihood Estimate \S\ref{sec:mle})
 
+Posterior Mean is Admissable (\S\ref{sec:admissable_rule}) for any Strictly
+Positive Prior
+
 \emph{Posterior Interval} (Credible Interval \S\ref{sec:credible_interval})
 
 (Wasserman04 \S11.4) Posteriors can be Approximated using ``\emph{Simulation}''
@@ -4707,6 +4663,11 @@ Estimator (or Decision Rule (\S\ref{sec:decision_rule}) that minimizes
 (\emph{Posterior Expected Loss/Utility})
 
 cf. Maximum A Priori (MAP) Estimator (\S\ref{sec:map_estimator})
+
+the Mean Likelihood Estimate (\S\ref{sec:mle}) approximates the Bayes Estimator
+
+Bayes Estimators with constant Risk Function (\S\ref{sec:risk_function}) are
+Minimax (\S\ref{sec:minimax})
 
 
 
@@ -5348,7 +5309,7 @@ to those Parameters
 \emph{Regression Function} -- the Function of the Independent Variables to be
 Estimated (\S\ref{sec:estimation_theory}):
 \[
-  r(x) = E(Y | X = x)
+  r(x) = E(Y | X = x) = \int y f(y|x) dy
 \]
 that is, the Expected Value of the Response Variable given that the Regression
 Variable takes a specific value, where $r \in \mathcal{F}$ is a Member of the
