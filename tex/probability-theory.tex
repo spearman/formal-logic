@@ -2172,7 +2172,7 @@ Variance $\sigma^2 = \alpha \beta^2$
 
 
 
-\paragraph{Exponential Distribution}\label{sec:exponential_squared}\hfill
+\paragraph{Exponential Distribution}\label{sec:exponential_distribution}\hfill
 
 a $Gamma(1,\beta)$ Distribution
 
@@ -2186,6 +2186,13 @@ Continuous Random Variable $X$ with parameter $\beta > 0$:
 \]
 
 models lifetimes of electronic components, wait times between rare events
+
+
+
+\subparagraph{Double Exponential Distribution}
+\label{sec:double_exponential}\hfill
+
+or \emph{Laplace Distribution}
 
 
 
@@ -2980,6 +2987,10 @@ Estimates the Population Covariance
 
 ANalysis Of VAriance (ANOVA)
 
+repeated Measures (Observations \S\ref{sec:observation})
+
+cf. Mixed Models (\S\ref{sec:mixed_model})
+
 Analysis of the the differences among ``group means'' (FIXME: clarify) in a
 Sample (\S\ref{sec:sample})
 
@@ -2987,6 +2998,8 @@ generalizes $t$-test (\S\ref{sec:t_test}) to more than two groups
 
 compare three or more ``group means'' for Significance
 (\S\ref{sec:statistical_significance})
+
+\fist Multivariate Analysis of Variance (MANOVA \S\ref{sec:manova})
 
 
 
@@ -3023,47 +3036,6 @@ equal to RSS + ESS
 
 
 \subsubsection{Partition of Sum of Squares}\label{sec:partition_squares}
-
-
-
-% ==============================================================================
-\section{Multivariate Statistics}\label{sec:multivariate_statistics}
-% ==============================================================================
-
-\emph{simultaneous} Observation (\S\ref{sec:observation}) and Analysis of more
-than one Outcome Variable (Random Vector \S\ref{sec:random_vector})
-
-\fist cf. Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimating
-(\S\ref{sec:estimation_theory}) the Relation between Variables in Multivariate
-Data; note that this is different from Multivariate Analysis in that only the
-Univariate Conditional Distribution of a single Outcome Variable is considered
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Multivariate Analysis}\label{sec:multivariate_analysis}
-% ------------------------------------------------------------------------------
-
-\subsubsection{Ordination}\label{sec:ordination}
-
-\paragraph{Principal Components Analysis}
-\label{sec:principal_components_analysis}\hfill
-
-\paragraph{Multidimensional Scaling}\label{sec:multidimensional_scaling}\hfill
-
-\paragraph{Correspondence Analysis}\label{sec:correspondence_analysis}\hfill
-
-\subparagraph{Detrended Correspondence Analysis}
-\label{sec:detrended_correspondence}\hfill
-
-\subparagraph{Canonical Correspondence Analysis}
-\label{sec:canonical_correspondence}\hfill
-
-
-
-\paragraph{Bray-Curtis Ordination}\label{sec:bray_curtis_ordination}\hfill
-
-\paragraph{Redundancy Analysis}\label{sec:redundancy_analysis}\hfill
 
 
 
@@ -3341,11 +3313,11 @@ the \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
     of interest
 \end{itemize}
 
-\emph{Estimation} (\S\ref{sec:estimation_theory}): Data $\rightarrow$ Parameters
+\fist a \emph{Regression Model} (\S\ref{sec:regression_model}) makes some
+assumption about the Relations (Dependences \S\ref{sec:dependence}) among
+Multivariate Data (\S\ref{sec:random_vector})
 
-\emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
-Parameters of a Statistical Model; cf. Regression Models
-(\S\ref{sec:regression_model})
+\emph{Estimation} (\S\ref{sec:estimation_theory}): Data $\rightarrow$ Parameters
 
 \emph{Prediction} (\S\ref{sec:prediction})
 
@@ -3504,6 +3476,25 @@ includes:
 when Observations come from an Exponential Family, under mild conditions the
 Least-squares Estimates (\S\ref{sec:least_squares}) and Maximum-Likelihood
 Estimates (\S\ref{sec:mle}) are identical
+
+
+
+\paragraph{Fixed Effects Model}\label{sec:fixed_effect}\hfill
+
+\paragraph{Random Effects Model}\label{sec:random_effect}\hfill
+
+\paragraph{Mixed Model}\label{sec:mixed_model}\hfill
+
+both Fixed Effects and Random Effects
+
+useful in settings where repeated Measurements (Observations
+\S\ref{sec:observation}) are made ont he same Statistical Units
+(\S\ref{sec:statistical_units}), i.e. a ``Longitudinal Study'', or where
+Measurements are made on \emph{clusters} of related Statistical Units
+
+cf. ANOVA (Variance Analysis \S\ref{sec:variance_analysis})
+
+BLUP (\S\ref{sec:blup})
 
 
 
@@ -4104,7 +4095,7 @@ $2$-norm Best Fit \fist cf. $1$-norm Best Fit (\S\ref{sec:1norm_best_fit}),
 Chebyshev Approximation ($\infty$-norm Best Fit
 \S\ref{sec:chebyshev_approximation})
 
-Regression Analysis (\S\ref{sec:regression_analysis})
+earliest form of Regression Analysis (\S\ref{sec:regression_analysis})
 
 cf. Squared Deviation from the Mean (SDM \S\ref{sec:sdm})
 
@@ -4116,18 +4107,44 @@ Estimates and Maximum-Likelihood Estimates (\S\ref{sec:mle}) are identical
 
 
 
-\paragraph{Ordinary Least Squares}\label{sec:ordinary_least_squares}\hfill
+\paragraph{Linear Estimator}\label{sec:linear_estimator}\hfill
 
-estimating the Unknown Parameters of a Linear Regression Model
-(\S\ref{sec:linear_regression})
+%FIXME
+
+\subparagraph{Best Linear Unbiased Estimator (BLUE)}\label{sec:blue}\hfill
+
+Estimating Fixed Effects (\S\ref{sec:fixed_effect})
+
+cf. Best Linear Unbiased Predictor (BLUP \S\ref{sec:blup})
+-- Predicting Random Effects (\S\ref{sec:random_effect})
+
+\textbf{Gauss-Markov Theorem} \emph{
+  In a Linear Model (\S\ref{sec:linear_regression}) where Errors are
+  Uncorrelated, have Mean Zero, and equal Variances, the Best Linear Unbiased
+  Estimator of the Coefficients is given by the Ordinary Least-Squares (OLS
+  \S\ref{sec:ols}) Estimator.
+}
 
 
 
-\subparagraph{Linear Least Squares}\label{sec:linear_least_squares}\hfill
+\paragraph{Linear Least Squares (LLS)}\label{sec:lls}\hfill
+
+Linear Regression (\S\ref{sec:linear_regression})
 
 Overdetermined Systems (\S\ref{sec:overdetermined_system})
 
 QR Decomposition (\S\ref{sec:qr_decomposition})
+
+
+
+\subparagraph{Ordinary Least Squares (OLS)}\label{sec:ols}\hfill
+
+\textbf{Gauss-Markov Theorem} \emph{
+  In a Linear Model (\S\ref{sec:linear_regression}) where Errors are
+  Uncorrelated, have Mean Zero, and equal Variances, the Best Linear Unbiased
+  Estimator (BLUE \S\ref{sec:blue}) of the Coefficients is given by the Ordinary
+  Least-Squares Estimator.
+}
 
 
 
@@ -4196,7 +4213,12 @@ and $\vec{rho}_N$ is independent of $\vec{x}$ so it is \emph{fixed}, so:
 
 
 
-\paragraph{Generalized Least Squares}\label{sec:generalized_least_squares}\hfill
+\paragraph{Generalized Least Squares (GLS)}\label{sec:gls}\hfill
+
+Linear Regression (\S\ref{sec:linear_regression}) technique when there is a
+degree of Correlation between Residuals
+
+
 
 \subparagraph{Weighted Least Squares}\label{sec:weighted_least_squares}\hfill
 
@@ -4406,6 +4428,7 @@ the \emph{Size} or \emph{Significance Level} of a Test:
 a Test has \emph{Level} $\alpha$ if its Size is less than or equal to $\alpha$
 
 \fist ANalaysis Of VAriance (ANOVA \S\ref{sec:variance_analysis}) -- compare
+
 three or more ``group means'' for Significance
 
 
@@ -5022,7 +5045,23 @@ Data (\S\ref{sec:sample})
 
 
 
-\subsubsection{Best Linear Unbiased Prediction (BLUP)}\label{sec:blup}
+\subsubsection{Linear Predictor}\label{sec:linear_predictor}
+
+\emph{Linear Predictor Function}
+
+\fist Linear Regression (\S\ref{sec:linear_regression}) -- models Relationships
+in Multivariate Data using Linear Predictor Functions with parameters Estimated
+from the Data
+
+
+
+\paragraph{Best Linear Unbiased Prediction (BLUP)}\label{sec:blup}\hfill
+
+Predicting Random Effects (\S\ref{sec:random_effect});
+cf. Mixed Models (\S\ref{sec:mixed_model})
+
+cf. Best Linear Unbiased Estimator (BLUE \S\ref{sec:blue}) -- Estimating
+Fixed Effects
 
 under ``suitable assumptions'' on the Priors, Gaussian Process Regression
 (Kriging \S\ref{sec:gaussian_process_regression}) gives the best BLUP of the
@@ -5053,10 +5092,82 @@ TDA (R package)
 
 
 % ==============================================================================
-\section{Statistical Learning Theory}\label{sec:statistical_learning_theory}
+\section{Multivariate Statistics}\label{sec:multivariate_statistics}
 % ==============================================================================
 
-%FIXME merge with inferential statistics ???
+\emph{simultaneous} Observation (\S\ref{sec:observation}) and Analysis of more
+than one Outcome Variable (\emph{Multivariate Random Variables} or \emph{Random
+  Vectors} \S\ref{sec:random_vector})
+
+\begin{itemize}
+  \item Multivariate Analysis (\S\ref{sec:multivariate_analysis})
+  \item Statistical Classification (\S\ref{sec:statistical_classification})
+    -- Discrete Response Variable
+  \item Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimating
+    (\S\ref{sec:estimation_theory}) the Relation between Variables in
+    Multivariate Data; note that this is different from Multivariate Analysis in
+    that only the Univariate Conditional Distribution of a single Outcome
+    Variable is considered; cf. Multivariate Regression
+    (\S\ref{sec:multivariate_regression})
+  \item Cluster Analysis (\S\ref{sec:cluster_analysis}) --
+    ``Unsupervised Learning''
+  \item Artificial Neural Networks (\S\ref{sec:ann}) -- extends Regression and
+    Clustering to Non-linear Multivariate Models
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Multivariate Analysis}\label{sec:multivariate_analysis}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Ordination}\label{sec:ordination}
+
+or \emph{Gradient Analysis}
+
+cf. Gradient (Vector Calculus \S\ref{sec:gradient})
+
+cf. Clustering (\S\ref{sec:cluster_analysis})
+
+
+
+\paragraph{Principal Components Analysis}\label{sec:pca}\hfill
+
+cf. Factor Analysis (\S\ref{sec:factor_analysis})
+
+
+
+\paragraph{Multidimensional Scaling}\label{sec:multidimensional_scaling}\hfill
+
+\paragraph{Correspondence Analysis}\label{sec:correspondence_analysis}\hfill
+
+\subparagraph{Detrended Correspondence Analysis}
+\label{sec:detrended_correspondence}\hfill
+
+\subparagraph{Canonical Correspondence Analysis}
+\label{sec:canonical_correspondence}\hfill
+
+
+
+\paragraph{Bray-Curtis Ordination}\label{sec:bray_curtis_ordination}\hfill
+
+\paragraph{Redundancy Analysis}\label{sec:redundancy_analysis}\hfill
+
+
+
+\subsubsection{Factor Analysis}\label{sec:factor_analysis}
+
+cf. PCA (\S\ref{sec:pca})
+
+
+
+\subsubsection{Multivariate Analysis of Variance (MANOVA)}\label{sec:manova}
+
+Variance Analysis (ANOVA \S\ref{sec:variance_analysis})
+
+
+
+\subsubsection{Discriminant Analysis}\label{sec:discriminant_analysis}
 
 
 
@@ -5114,12 +5225,13 @@ use of Statistical Inference (\S\ref{sec:statistical_inference})
 % ------------------------------------------------------------------------------
 
 \emph{Regression} (or \emph{Curve Estimation}) is the Estimation
-(\S\ref{sec:estimation_theory}) of \emph{Relations} (\S\ref{sec:dependence})
-in Multivariate Data (\S\ref{sec:random_vector})
+(\S\ref{sec:estimation_theory}) of \emph{Relations} (Dependencies
+\S\ref{sec:dependence}) in Multivariate Data (\S\ref{sec:random_vector}).
 
-note that Regression Analysis is different from Multivariate Analysis
-(\S\ref{sec:multivariate_statistics}) in that only the Univariate Conditional
-Distribution of a single Outcome Variable is considered
+Note that Regression Analysis is different from Multivariate Analysis
+(\S\ref{sec:multivariate_analysis}) in that only the Univariate Conditional
+Distribution of a single Outcome Variable is considered (cf. Multivariate
+Regression \S\ref{sec:multivariate_regression}).
 
 specifically, an Estimation of the \emph{Regression Function}
 $r(x) = E(Y | X = x)$.
@@ -5165,6 +5277,9 @@ Discrete--and Cluster Analysis (\S\ref{sec:cluster_analysis})
 cf. Numerical Analysis (\S\ref{sec:numerical_analysis}): Interpolation
 (\S\ref{sec:interpolation}), Extrapolation (TODO)
 
+\fist Artificial Neural Networks (ANNs \S\ref{sec:ann}) generalize Regression
+and Clustering (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
+
 \emph{Statistical Assumptions} (\S\ref{sec:statistical_assumption}):
 \begin{itemize}
   \item the Sample is ``representative'' of the Population for the Inference
@@ -5207,12 +5322,31 @@ Residual Sum of Squares (RSS \S\ref{sec:rss})
 
 
 
+\subsubsection{Regression Error}\label{sec:regression_error}
+
+\fist cf. Statistical Error (Estimators \S\ref{sec:error})
+
+Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
+
+
+
+\subsubsection{Regression Residual}\label{sec:regression_residual}
+
+\fist cf. Residual (Estimators \S\ref{sec:residual})
+
+Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
+
+
+
 \subsubsection{Regression Model}\label{sec:regression_model}
+
+a \emph{Statistical Model} (\S\ref{sec:statistical_model}) which makes some
+assumption about the Relations (Dependences \S\ref{sec:dependence}) among
+Multivariate Data (\S\ref{sec:random_vector})
 
 \emph{Regression Model}:
 \begin{itemize}
-  \item \emph{Unknown Parameters} ($\beta$) -- Statistical Parameters
-    (\S\ref{sec:statistical_parameter})
+  \item \emph{Unknown Parameters} ($\beta$)
   \item \emph{Independent Variables} ($X$) -- ``Regression Variable'',
     ``Regressor'', ``Covariate'', ``Explanatory Variable''
   \item \emph{Dependent Variable} ($Y$) -- ``Response Variable'',
@@ -5232,22 +5366,6 @@ accounts for Observational (Measurement) Error (\S\ref{sec:observational_error})
 
 
 
-\subsubsection{Regression Error}\label{sec:regression_error}
-
-\fist cf. Statistical Error (Estimators \S\ref{sec:error})
-
-Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
-
-
-
-\subsubsection{Regression Residual}\label{sec:regression_residual}
-
-\fist cf. Residual (Estimators \S\ref{sec:residual})
-
-Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
-
-
-
 \subsubsection{Non-parametric Regression}\label{sec:nonparametric_regression}
 
 Regression Function is chosen from an Infinite-dimensional Family of Functions
@@ -5258,35 +5376,124 @@ Regression Function is chosen from an Infinite-dimensional Family of Functions
 
 \emph{Linear Regression Model}
 
+Relationships are modeled using \emph{Linear Predictor Functions}
+(\S\ref{sec:linear_predictor}) which are Linear Functions of a Set of
+Coefficients and Explanatory (Independent) Variables:
+\[
+  Y_i = \beta_0 + \beta_1\psi_1(X_{i1}) + \cdots +
+    \beta_p\phi_p(X_{ip}) + \varepsilon_i
+\]
+for $i \in \{1, \ldots, n\}$
+
 cf. \emph{Correlation} (\S\ref{sec:correlation}) -- measure of how close two
 Random Variables are to having a \emph{Linear Relationship}
 
-Fit using:
+Fit using Estimators:
 \begin{itemize}
-  \item Linear Least Squares (\S\ref{sec:linear_least_squares}): if errors are
-    \emph{normally distributed}, Least Squares ($2$-norm Best Fit) should be
+  \item Linear Least Squares (\S\ref{sec:lls}): if Errors are
+    \emph{Normally Distributed}, Least Squares ($2$-norm Best Fit) should be
     used
+  \begin{itemize}
+    \item Ordinary Least Squares (\S\ref{sec:ols}): if Errors are
+      \emph{Normally Distributed}, Least Squares ($2$-norm Best Fit) should be
+      used
+  \end{itemize}
+  \item Generalized Least Squares (\S\ref{sec:gls}): if
+    there is a degree of Correlation between Residuals (Fitting Deviations
+    \S\ref{sec:residual})
   \item ...
 \end{itemize}
 
-Gradient Descent (\S\ref{sec:gradient_descent})
+\textbf{Gauss-Markov Theorem} \emph{
+  In a Linear Model (\S\ref{sec:linear_regression}) where Errors are
+  Uncorrelated, have Mean Zero, and equal Variances, the Best Linear Unbiased
+  Estimator (BLUE \S\ref{sec:blue}) of the Coefficients is given by the Ordinary
+  Least-Squares (OLS \S\ref{sec:ols}) Estimator.
+}
 
-cf. Convex Optimization (\S\ref{sec:convex_optimization}) -- for Linear
+\fist cf. Gradient Descent (\S\ref{sec:gradient_descent})
+
+\fist cf. Convex Optimization (\S\ref{sec:convex_optimization}) -- for Linear
 Regression, a Mean-Square Error Loss Function is always \emph{Convex} (example
 \url{https://towardsdatascience.com/introduction-to-machine-learning-algorithms-linear-regression-14c4e325882a}
 
-cf. Linear Programming (\S\ref{sec:linear_programming})
+\fist cf. Linear Programming (\S\ref{sec:linear_programming})
 -- article: \emph{Linear Programming for Linear Regression};
 \url{https://lazyprogrammer.me/linear-programming-for-linear-regression/}
 
-Simple Linear Regression -- single (One-dimensional) Regressor (Independent
-Variable)
+
+
+\paragraph{Simple Linear Regression}\label{sec:simple_linear_regression}\hfill
+
+single (One-dimensional) Regressor (Independent Variable)
 
 Regression Coefficients
 
 Error Term $\varepsilon$
 
-$Y = \beta_0 + \beta_1 X + \varepsilon$
+$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$
+
+for the $i$th Observation (\S\ref{sec:observation})
+
+assuming that $Y$ can be Approximated by a Linear Function of $X$ and the IID
+Distribution of the $\varepsilon_i$s is Normal with Mean Zero, the
+\emph{Regression Model} (\S\ref{sec:statistical_model}) has three Parameters--
+$\beta_0$, $\beta_1$, and the Variance $\sigma^2$ of $\varepsilon$:
+\[
+  \theta = (\beta_0, \beta_1, \sigma^2)
+\]
+and each possible value of $\theta$ determines a Distribution $P_\theta$ on the
+Sample Space (\S\ref{sec:sample_space}) $S$ of all possible $(Y, X)$ pairs
+
+
+
+\paragraph{Multivariate Regression}
+\label{sec:multivariate_regression}\hfill
+
+\emph{Multivariate Regression Model} or \emph{General Linear Model}
+
+\fist not to be confused with Generalized Linear Models
+(\S\ref{sec:generalized_linear_model})
+
+multiple Correlated Dependent Variables
+
+cf. Multivariate Statistics (\S\ref{sec:multivariate_statistics})
+
+cf. Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
+-- multiple Correlated Independent Variables
+
+\fist Artificial Neural Networks (ANNs \S\ref{sec:ann}) generalize Regression
+and Clustering (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
+
+
+
+\paragraph{Multiple Linear Regression}
+\label{sec:multiple_linear_regression}\hfill
+
+Multiple Regression (\S\ref{sec:multiple_regression})
+
+multiple Correlated Independent Variables
+
+(wiki) $p$ Independent Variables:
+\[
+  y_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip} +
+    \varepsilon_i
+\]
+where $x_{ij}$ is the $i$-th Observation (\S\ref{sec:observation}) of the $j$-th
+Independent Variable
+
+cf. Multivariate (Linear) Regression (General Linear Regression
+\S\ref{sec:multivariate_linear_regression}) -- multiple Correlated Dependent
+Variables
+
+
+
+\paragraph{Orthogonal Regression}\label{sec:orthogonal_regression}\hfill
+
+\subparagraph{Deming Regression}\label{sec:deming_regression}\hfill
+
+accounts for Error in $X$ and $Y$ Observations (cf. Simple Linear Regression
+which only accounts for Vertical Errors)
 
 
 
@@ -5297,13 +5504,6 @@ Error Distributions other than the Normal Distribution
 
 not to be confused with General Linear Models (Multivariate Regression Models
 \S\ref{sec:multivariate_regression})
-
-
-
-\subsubsection{Multivariate Regression}\label{sec:multivariate_regression}
-
-or \emph{General Linear Model}; not to be confused with Generalized Linear
-Models (\S\ref{sec:generalized_linear_model})
 
 
 
@@ -5324,6 +5524,17 @@ Statistical Classification (\S\ref{sec:statistical_classification})
 
 
 
+\subsubsection{Multiple Regression}\label{sec:multiple_regression}
+
+Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
+
+Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
+
+(wiki): uses Additive Logic (FIXME: xref ???); cf. Necessary Condition Analysis
+(NCA \S\ref{sec:nca}) -- uses Necessary Logic (\S\ref{sec:alethic_logic})
+
+
+
 \subsubsection{Gaussian Process Regression}
 \label{sec:gaussian_process_regression}
 
@@ -5336,15 +5547,13 @@ under ``suitable assumptions'' on the Priors, Kriging gives the \emph{Best
 
 
 
-\subsubsection{Multiple Regression}\label{sec:multiple_regression}
+\subsubsection{Necessary Condition Analysis (NCA)}\label{sec:nca}
 
-Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
+(wiki): uses Necessity Logic (\S\ref{sec:alethic_logic});
+cf. Multiple Regression (\S\ref{sec:multiple_regression}) -- uses Additive Logic
+(FIXME: xref ???)
 
 
-
-% ------------------------------------------------------------------------------
-\subsection{Necessary Condition Analysis (NCA)}\label{sec:nca}
-% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{Cluster Analysis}\label{sec:cluster_analysis}
@@ -5357,9 +5566,24 @@ Value), other examples are Statistical Classification
 (\S\ref{sec:statistical_classification}) and Regression Analysis
 (\S\ref{sec:regression_analysis})
 
+Artificial Neural Networks (ANNs \S\ref{sec:ann}) generalize Regression
+(\S\ref{sec:regression_analysis}) and Clustering to Non-linear Multivariate
+Models
+
 
 
 \subsubsection{Hierarchical Clustering}\label{sec:hierarchical_clustering}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Artificial Neural Network (ANN)}\label{sec:ann}
+% ------------------------------------------------------------------------------
+
+%FIXME: move section ?
+
+extends Regression (\S\ref{sec:regression_analysis}) and Clustering
+(\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
 
 
 
