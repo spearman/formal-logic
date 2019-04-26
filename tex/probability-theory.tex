@@ -130,6 +130,10 @@ Mathematical Formalization: Bernoulli Process (\S\ref{sec:bernoulli_process})
 Number of Successes in $n$ Bernoulli Trials is a \emph{Binomial Random
   Variable} (\S\ref{sec:binomial_random_variable})
 
+\fist Statistical Odds (\S\ref{sec:odds}) -- Ratio of the Probability that an
+Event will occur versus the Probability that it will not occur, i.e. a Binomial
+Trial
+
 
 
 % ------------------------------------------------------------------------------
@@ -587,6 +591,17 @@ is the Product of the individual Probability Distributions''
 
 
 % ------------------------------------------------------------------------------
+\subsection{Odds}\label{sec:odds}
+% ------------------------------------------------------------------------------
+
+an expression of Relative Probabilities: the Odds \emph{in favor} of an Event or
+Proposition is the Ratio of the Probability that the Event will occur to the
+Probability that it will not occur, i.e. a \emph{Binomial Trial}
+(Bernoulli Trial \S\ref{sec:binomial_trial})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Negative Probability}\label{sec:negative_probability}
 % ------------------------------------------------------------------------------
 
@@ -872,15 +887,19 @@ The \emph{Expected Value}, \emph{Expectation}, or \emph{Mean} (First Raw Moment
 of ``average'' where Probabilities are treated like ``frequencies''. (FIXME:
 clarify)
 
-\fist Sample Mean (\S\ref{sec:sample_mean}), Arithmetic Mean
-(\S\ref{sec:arithmetic_mean}) --
+as an Estimate (\S\ref{sec:estimation_theory}) of $X$, the Expected Value $E[X]$
+minimizes Squared Error (\S\ref{sec:error}); cf. the Median (\S\ref{sec:median})
+minimizes Absolute Error
+
+note that $E(X + Y) = E(X) + E(Y)$, but not for $m(X+Y)$
+
+\fist Sample Mean (Estimator \S\ref{sec:sample_mean}) -- minimizes Squares of
+the Residuals;
 by the Law of Large Numbers (\S\ref{sec:large_numbers}), the Arithmetic Mean
 Converges to the Expected Value as the Sample Size gets larger
 
 (Kolmogorov33) analogy between the \emph{Expectation} of a Random Variable, and
 \emph{Lebesgue Integration} (\S\ref{sec:lebesgue_integral})
-
-Law of Large Numbers (\S\ref{sec:large_numbers})
 
 For a Random Variable $X$ defined on Probability Space $(\Omega,\Sigma,P)$, the
 Expected Value $\mu_X = E[X]$ of $X$ is defined as the Lebesgue Integral:
@@ -1092,12 +1111,15 @@ Variable
 \subsection{Variance}\label{sec:variance}
 % ------------------------------------------------------------------------------
 
-the \emph{Variance} is the Expected Value of the Squared Deviation of a Random
-Variable
+the \emph{Variance} is the Expected Value of the Squared Deviation (Error
+\S\ref{sec:error}) of a Random Variable
 
 the \emph{Sum of Squared Deviations} (\S\ref{sec:sum_squared_deviation})
 Estimates (\S\ref{sec:estimation_theory}) the Variance when scaled for the
 number of \emph{Degrees of Freedom} (\S\ref{sec:statistical_freedom})
+
+\emph{Overfitting} (Multiple Regression \S\ref{sec:multiple_regression}) -- too
+many Covariates, high Variance
 
 \fist ANalaysis Of VAriance (ANOVA \S\ref{sec:variance_analysis}) --
 Variance is defined as either the Expected Value of the
@@ -1138,7 +1160,7 @@ $f(x,y)$ and $a$, $b$, $c$ are Constants, then:
   \sigma_{X Y}
 \]
 
-\fist Sample Variance (\S\ref{sec:sample_variance})
+\fist Estimator: Sample Variance (\S\ref{sec:sample_variance})
 
 \emph{Conditional Variance} $V(X|Y)$
 
@@ -1885,6 +1907,12 @@ or equivalently:
 \]
 for $x \in \{0, 1\}$
 
+\fist cf. Logistic Regression (\S\ref{sec:logistic_regression}) -- Model with
+Binary Data $Y_i$:
+\[
+  Y_i | X_i = x_i \sim Bernoulli(p_i)
+\]
+
 generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
 
 
@@ -2607,8 +2635,7 @@ or \emph{Statistical Parameter}
 (\S\ref{sec:probability_distribution}), i.e. a ``numerical characteristic'' of a
 \emph{Statistical Model} (\S\ref{sec:statistical_model})
 
-Parametric Models (\S\ref{sec:parametric_model}) have a Finite Set
-of Parameters
+Parametric Models (\S\ref{sec:parametric_model}) have a Finite Set of Parameters
 
 example: the Family of Normal Distributions (\S\ref{sec:normal_distribution})
 are Parameterized by the Mean and Standard Deviation
@@ -2943,40 +2970,6 @@ $T$ is called the \emph{Natural Sufficient Statistic}
 
 
 
-\subsubsection{Sample Mean}\label{sec:sample_mean}
-
-Estimates the Population Mean (Expectation \S\ref{sec:expected_value})
-
-for Random Variables (\S\ref{sec:random_variable}) $X_1, \ldots, X_n$:
-\[
-  \overline{X}_n = \frac{1}{n}\sum_i X_i
-\]
-
-\emph{Law of Large Numbers} (\S\ref{sec:large_numbers}): the Sample Mean
-$\overline{X}_n = \frac{1}{n}\sum_i X_i$ \emph{Converges in Probability}
-(\S\ref{sec:stochastic_convergence}) to the Expectation
-(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
-$\overline{X}_n$ is close to $\mu$ with high Probability
-
-\emph{Central Limit Theorem} (\S\ref{sec:central_limit}):
-$\sqrt{n}(\overline{X}_n - \mu)$ \emph{Converges in Distribution} to a Normal
-Distribution (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e.
-the Sample Mean has approximately a Normal Distribution for large $n$
-
-
-
-\subsubsection{Sample Variance}\label{sec:sample_variance}
-
-Estimates the Population Variance
-
-
-
-\subsubsection{Sample Covariance}\label{sec:sample_covariance}
-
-Estimates the Population Covariance
-
-
-
 \subsubsection{Degrees of Freedom}\label{sec:statistical_freedom}
 
 
@@ -3016,6 +3009,8 @@ cf. Least Squares (\S\ref{sec:least_squares}), Regression
 
 \subsubsection{Sum of Squared Deviation}\label{sec:sum_squared_deviation}
 
+\fist cf. Least Squares (\S\ref{sec:least_squares})
+
 unscaled measure of \emph{Dispersion} (Variability \S\ref{sec:dispersion})
 
 Estimates the Variance (\S\ref{sec:variance}) when scaled for the number of
@@ -3025,11 +3020,27 @@ Estimates the Variance (\S\ref{sec:variance}) when scaled for the number of
 
 \paragraph{Total Sum of Squares (TSS)}\label{sec:tss}\hfill
 
-equal to RSS + ESS
+equal to SSR + ESS
 
 
 
-\paragraph{Residual Sum of Squares (RSS)}\label{sec:rss}\hfill
+\paragraph{Sum of Squared Residuals (SSR)}\label{sec:ssr}\hfill
+
+Residuals (\S\ref{sec:residual})
+
+\fist a \emph{Least Square Estimate} (\S\ref{sec:least_squares}) is an
+approximate solution of an Overdetermined System that minimizes the Sum of
+Squared Residuals (SSR)
+
+the SSR is a measure of how well an Estimated Regression Function
+(\S\ref{sec:regression_analysis}) $\hat{r}(x)$ ``Fits'' the Data; Regression
+Parameters that minimize SSR are called \emph{Least Squares Estimates}
+
+\[
+  \sum_{i=1}^n \hat{\epsilon}_i^2
+\]
+
+
 
 \paragraph{Explained Sum of Squares (ESS)}\label{sec:ess}\hfill
 
@@ -3075,6 +3086,12 @@ various Summary Statistics can be computed by Statistical Functionals
 \paragraph{Median}\label{sec:median}\hfill
 
 Central Tendency for Ordinal Measurement (\S\ref{sec:measurement_level})
+
+as an Estimate (\S\ref{sec:estimation_theory}) for $X$, the Median $m[X]$
+minimizes Absolute Error (\S\ref{sec:error}); cf. the Mean (Expected Value
+\S\ref{sec:expected_value}) minimizes Squared Error
+
+note that $E(X + Y) = E(X) + E(Y)$, but not for $m(X+Y)$
 
 
 
@@ -3130,6 +3147,8 @@ or \emph{Variability}
 
 measured by Statistics of the Distribution of Deviations (\S\ref{sec:deviation})
 
+quantified by Standard Deviation (\S\ref{sec:standard_deviation})
+
 \fist Sum of Squared Deviations (\S\ref{sec:sum_squared_deviation}) -- unscaled
 measure of Dispersion
 
@@ -3137,6 +3156,35 @@ cf. \emph{Uncertainty}
 
 2018 - \emph{Uncertainty: a Tutorial} -
 \url{https://blog.evjang.com/2018/12/uncertainty.html}
+
+
+
+\paragraph{Standard Deviation}\label{sec:standard_deviation}\hfill
+
+$\sigma$
+
+Square Root of the Variance (\S\ref{sec:variance}) $\sqrt{V(X)}$
+
+Deviation (\S\ref{sec:deviation})
+
+the Standard Deviation of a Sampling Distribution
+(\S\ref{sec:sampling_distribution}) is called the \emph{Standard Error}
+(\S\ref{sec:standard_error})
+
+the Standard Error equals the Standard Deviation divided by the square root of
+the Sample Size, i.e. the Standard Error of the Mean is a measure of
+``Dispersion'' of Sample Means around the Population Mean
+
+cf. Confidence Interval (\S\ref{sec:confidence_interval})
+
+\emph{Uncorrected Standard Deviation}:
+\[
+  s_n = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \overline{x})^2}
+\]
+
+\emph{Corrected Standard Deviation}
+
+\emph{Unbiased Standard Deviation}
 
 
 
@@ -3152,27 +3200,6 @@ Unbiased Sample Variance:
   s^2 = \frac{n}{n-1}\sigma^2_y =
   \frac{1}{n-1} \sum_{i=1}^n (y_i - \overline{y})^2
 \]
-
-
-
-\paragraph{Standard Deviation}\label{sec:standard_deviation}\hfill
-
-Square Root of the Variance (\S\ref{sec:variance}) $\sqrt{V(X)}$
-
-Deviation (\S\ref{sec:deviation})
-
-the Standard Deviation of a Sampling Distribution
-(\S\ref{sec:sampling_distribution}) is called the \emph{Standard Error}
-(\S\ref{sec:standard_error})
-
-\emph{Uncorrected Standard Deviation}:
-\[
-  s_n = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \overline{x})^2}
-\]
-
-\emph{Corrected Standard Deviation}
-
-\emph{Unbiased Standard Deviation}
 
 
 
@@ -3395,6 +3422,14 @@ cf. Regression Analysis (\S\ref{sec:regression_analysis}), Curve Fitting
 (\S\ref{sec:curve_fitting})
 
 Likelihood-Ratio (LR) Test (\S\ref{sec:lr_test})
+
+
+
+\paragraph{Cross-validation}\label{sec:cross_validation}\hfill
+
+or \emph{Rotation Estimation} or \emph{Out-of-sample Testing}
+
+Predictive Models (\S\ref{sec:predictive_model})
 
 
 
@@ -3648,6 +3683,8 @@ Choice using an Optimality Critereon
 
 \paragraph{Akaike Information Criterion (AIC)}\label{sec:aic}\hfill
 
+Mallows's $C_p$
+
 \fist Information Theory (Part \ref{part:information_theory})
 
 
@@ -3749,6 +3786,40 @@ Bayesian Point Estimation:
 \end{itemize}
 
 (TODO: xrefs)
+
+
+
+\subparagraph{Sample Mean}\label{sec:sample_mean}
+
+Estimates the Population Mean (Expectation \S\ref{sec:expected_value})
+
+for Random Variables (\S\ref{sec:random_variable}) $X_1, \ldots, X_n$:
+\[
+  \overline{X}_n = \frac{1}{n}\sum_i X_i
+\]
+
+\emph{Law of Large Numbers} (\S\ref{sec:large_numbers}): the Sample Mean
+$\overline{X}_n = \frac{1}{n}\sum_i X_i$ \emph{Converges in Probability}
+(\S\ref{sec:stochastic_convergence}) to the Expectation
+(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+$\overline{X}_n$ is close to $\mu$ with high Probability
+
+\emph{Central Limit Theorem} (\S\ref{sec:central_limit}):
+$\sqrt{n}(\overline{X}_n - \mu)$ \emph{Converges in Distribution} to a Normal
+Distribution (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e.
+the Sample Mean has approximately a Normal Distribution for large $n$
+
+
+
+\subparagraph{Sample Variance}\label{sec:sample_variance}
+
+Estimates the Population Variance
+
+
+
+\subparagraph{Sample Covariance}\label{sec:sample_covariance}
+
+Estimates the Population Covariance
 
 
 
@@ -3874,8 +3945,9 @@ Probability to the true value
 
 \subsubsection{Deviation}\label{sec:deviation}
 
-\fist the Distribution of Deviations are used as measures of Statistical
-Dispersion (\S\ref{sec:statistical_dispersion})
+\emph{Statistical Dispersion} (``Variability'' \S\ref{sec:dispersion}) is
+measured by Statistics of the Distribution of Deviations,
+quantified by Standard Deviation (\S\ref{sec:standard_deviation})
 
 Central Tendency (\S\ref{sec:central_tendency}) for Interval Measurement
 (\S\ref{sec:measurement_level})
@@ -3891,11 +3963,41 @@ Central Tendency (\S\ref{sec:central_tendency}) for Interval Measurement
 
 \emph{Statistical Error} or \emph{Disturbance}
 
-the amount by which an Observation differs from its \emph{Expected Value}
+the amount by which an Observation differs from its (``true'')
+\emph{Expected Value} (\S\ref{sec:expected_value})
 
 \fist cf. \emph{Observational Error} (Measurement Error
 \S\ref{sec:observational_error}), \emph{Standard Error}
   (\S\ref{sec:standard_error})
+
+Absolute Error -- Median minimizes Absolute Error
+
+Squared Error -- Mean (Expected Value) minimizes Squared Error
+
+cf. \emph{Variance} (\S\ref{sec:variance}) -- Expected Squared Error
+
+\fist Regression Error (\S\ref{sec:regression_error})
+
+(wiki):
+
+example for Sample (\S\ref{sec:sample}) of IID Normally Distributed Random
+Variables, $X_1, \ldots, X_n \sim N(\mu, \sigma^2)$, the Sample Mean
+(\S\ref{sec:sample_mean}):
+\[
+  \overline{X} = \frac{X_1 + \cdots + X_n}{n}
+\]
+is a Random Variable with Normal Distribution:
+\[
+  \overline{X} = N(\mu, \frac{\sigma^2}{n})
+\]
+and the \emph{Statistical Errors} are:
+\[
+  e_i = X_i - \mu
+\]
+and the \emph{Residuals} (\S\ref{sec:residual}) are:
+\[
+  r_i = X_i - \overline{X}
+\]
 
 
 
@@ -3937,11 +4039,35 @@ consisting of analyzing whether Residuals of a constructed Statistical Model
 the Model Predictions (\S\ref{sec:prediction}) \emph{Fit}
 (\S\ref{sec:model_fit}) the original Data
 
+(wiki):
+
+example for Sample (\S\ref{sec:sample}) of IID Normally Distributed Random
+Variables, $X_1, \ldots, X_n \sim N(\mu, \sigma^2)$, the Sample Mean
+(\S\ref{sec:sample_mean}):
+\[
+  \overline{X} = \frac{X_1 + \cdots + X_n}{n}
+\]
+is a Random Variable with Normal Distribution:
+\[
+  \overline{X} = N(\mu, \frac{\sigma^2}{n})
+\]
+and the \emph{Statistical Errors} (\S\ref{sec:error}) are:
+\[
+  e_i = X_i - \mu
+\]
+and the \emph{Residuals} are:
+\[
+  r_i = X_i - \overline{X}
+\]
+
 
 
 \subsubsection{Bias}\label{sec:bias}
 
 cf. \emph{Systematic Error} (Statistical Bias \S\ref{sec:systematic_error})
+
+\emph{Underfitting} (Multiple Regression \S\ref{sec:multiple_regression}) -- too
+few Covariates, high Bias
 
 
 
@@ -3955,9 +4081,13 @@ Unbiased Estimator with Smallest Variance
 
 \subsubsection{Standard Error}\label{sec:standard_error}
 
-$S_E$
+the \emph{Standard Error} $S_E$ of a Statistic (Estimate of a Parameter) is the
+Standard Deviation (\S\ref{sec:standard_deviation}) of its Sampling Distribution
+(\S\ref{sec:sampling_distribution})
 
-Sampling Distribution (\S\ref{sec:sampling_distribution})
+the Standard Error equals the Standard Deviation divided by the square root of
+the Sample Size, i.e. the Standard Error of the Mean is a measure of
+``Dispersion'' of Sample Means around the Population Mean
 
 \fist Resampling (\S\ref{sec:resampling})
 
@@ -4091,11 +4221,19 @@ Parametric Bootstrap (Wasserman04 \S9.11)
 
 \subsubsection{Least Squares}\label{sec:least_squares}
 
+a \emph{Least Square Estimate} is an approximate solution of an Overdetermined
+System that minimizes the Sum of Squared Residuals (SSR \S\ref{sec:ssr})
+
 $2$-norm Best Fit \fist cf. $1$-norm Best Fit (\S\ref{sec:1norm_best_fit}),
 Chebyshev Approximation ($\infty$-norm Best Fit
 \S\ref{sec:chebyshev_approximation})
 
 earliest form of Regression Analysis (\S\ref{sec:regression_analysis})
+-- the Sum of Squared Residuals (SSR) gives a measure of how well
+an Estimated Regression Function $\hat{r}(x)$ ``Fits'' the Data, and the
+Regression Parameters that minimize SSR are called \emph{Least Squares
+  Estimates}; under assumption of Normality, the Least Squares
+Estimator is also the Maximum Likelihood Estimator (MLE \S\ref{sec:mle})
 
 cf. Squared Deviation from the Mean (SDM \S\ref{sec:sdm})
 
@@ -4103,7 +4241,7 @@ cf. Squared Deviation from the Mean (SDM \S\ref{sec:sdm})
 (\S\ref{sec:moments_method});
 when Observations come from an Exponential Family
 (\S\ref{sec:exponential_family}), under mild conditions the Least-squares
-Estimates and Maximum-Likelihood Estimates (\S\ref{sec:mle}) are identical
+Estimates and Maximum-Likelihood Estimates are identical
 
 
 
@@ -4134,6 +4272,8 @@ Linear Regression (\S\ref{sec:linear_regression})
 Overdetermined Systems (\S\ref{sec:overdetermined_system})
 
 QR Decomposition (\S\ref{sec:qr_decomposition})
+
+has a Closed-form solution
 
 
 
@@ -4227,6 +4367,14 @@ the Error is Constant accross Observations (\emph{Homoscedasticity}
 \S\ref{sec:homoscedasticity})
 
 
+
+\paragraph{Re-weighted Least Squares}\label{sec:reweighted_least_squares}\hfill
+
+Logistic Regression (\S\ref{sec:Logistic_regression})
+
+
+
+\paragraph{Polynomial Least Squares}\label{sec:polynomial_least_squares}\hfill
 
 \paragraph{Non-linear Least Squares}\label{sec:nonlinear_least_squares}\hfill
 
@@ -5016,6 +5164,14 @@ cf. ``Predictive Analytics''
 
 
 
+\subsubsection{Predictive Model}\label{sec:predictive_model}
+
+cf. Detection Theory (\emph{Signal Recovery}) %TODO
+
+Cross-validation (\S\ref{sec:cross_validation})
+
+
+
 \subsubsection{Prediction}\label{sec:prediction}
 
 \subsubsection{Prediction Interval}\label{sec:prediction_interval}\hfill
@@ -5256,8 +5412,8 @@ Estimated (\S\ref{sec:estimation_theory}):
   r(x) = E(Y | X = x) = \int y f(y|x) dy
 \]
 that is, the Expected Value of the Response Variable given that the Regression
-Variable takes a specific value, where $r \in \mathcal{F}$ is a Member of the
-Statistical (Regression) Model (\S\ref{sec:statistical_model}) being considered
+Variable takes a specific value, where $r \in \mathcal{F}$ is specified by
+choice of (Regression) Model Parameters (\S\ref{sec:statistical_model}) $\theta$
 
 \fist cf. Predictive Inference (\S\ref{sec:predictive_inference}),
 Prediction Interval (\S\ref{sec:prediction_interval})
@@ -5308,6 +5464,8 @@ the form:
   (Y_1,X_1), \ldots, (Y_n,X_n) \sim F_{X,Y}
 \]
 
+Estimate $\hat{r}(x)$
+
 \emph{Predicted (Fitted) Values}:
 \[
   \hat{Y}_i = \hat{r}(X_i)
@@ -5318,13 +5476,19 @@ the form:
   \hat{\epsilon}_i = Y_i - \hat{Y}_i
 \]
 
-Residual Sum of Squares (RSS \S\ref{sec:rss})
+the \emph{Residual Sum of Squares} (SSR \S\ref{sec:ssr}) is a measure of how
+well the Estimated Regression Function ``Fit'' the Data:
+\[
+  \sum_{i=1}^n \hat{\epsilon}_i^2
+\]
+the Regression Parameters that miminize SSR are caled \emph{Least Squares
+  Estimates} (\S\ref{sec:least_squares})
 
 
 
 \subsubsection{Regression Error}\label{sec:regression_error}
 
-\fist cf. Statistical Error (Estimators \S\ref{sec:error})
+\fist cf. Statistical Error (\S\ref{sec:error})
 
 Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
 
@@ -5332,9 +5496,7 @@ Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
 
 \subsubsection{Regression Residual}\label{sec:regression_residual}
 
-\fist cf. Residual (Estimators \S\ref{sec:residual})
-
-Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
+\fist cf. Residual (\S\ref{sec:residual})
 
 
 
@@ -5353,6 +5515,26 @@ Multivariate Data (\S\ref{sec:random_vector})
     ``Regressand'', ``Criterion'', ``Explained Variable''; variable whose values
     are to be ``explained'' in terms of the Independent Variable
 \end{itemize}
+
+the Regression Parameters that miminize Residual Sums of Squares (SSR
+\S\ref{sec:ssr}) are caled \emph{Least Squares Estimates}
+(\S\ref{sec:least_squares}); under assumption of Normality, the Least Squares
+Estimator is also the Maximum Likelihood Estimator (MLE \S\ref{sec:mle})
+
+(Wasserman04 \S13.6)
+
+Model Selection
+
+\emph{Prediction Risk}, \emph{Training Error}
+
+\emph{Mallows's $C_p$}, AIC (\S\ref{sec:aic})
+
+Leave-one-out Cross-validation (\S\ref{sec:cross_validation}),
+$k$-fold Cross-validation
+
+Bayesian Information Criterion (BIC) %TODO: xref
+
+Zheng-Loh Model Selection Method
 
 Linear Regression Models (\S\ref{sec:linear_regression})
 
@@ -5384,6 +5566,9 @@ Coefficients and Explanatory (Independent) Variables:
     \beta_p\phi_p(X_{ip}) + \varepsilon_i
 \]
 for $i \in \{1, \ldots, n\}$
+
+Assuming $\varpesilon_i | X_i \sim N(0, \sigma^2)$ is the same as Assuming
+$Y_i | X_i \sim N(\mu_i, \sigma^2)$
 
 cf. \emph{Correlation} (\S\ref{sec:correlation}) -- measure of how close two
 Random Variables are to having a \emph{Linear Relationship}
@@ -5445,6 +5630,10 @@ $\beta_0$, $\beta_1$, and the Variance $\sigma^2$ of $\varepsilon$:
 and each possible value of $\theta$ determines a Distribution $P_\theta$ on the
 Sample Space (\S\ref{sec:sample_space}) $S$ of all possible $(Y, X)$ pairs
 
+(Wasserman04 \S13.1)
+
+Least Squares Estimates (\S\ref{sec:least_squares}): TODO
+
 
 
 \paragraph{Multivariate Regression}
@@ -5505,30 +5694,101 @@ Error Distributions other than the Normal Distribution
 not to be confused with General Linear Models (Multivariate Regression Models
 \S\ref{sec:multivariate_regression})
 
+(wiki):
+
+Least-squares Estimate (\S\ref{sec:least_squares}) may be used to fit a
+Generalized Linear Model by iteratively applying the Local Quadratic
+Approximation (FIXME: explain)
 
 
-\subsubsection{Binomial Regression}\label{sec:binomial_regression}
+
+\subsubsection{Logistic Regression}\label{sec:logistic_regression}
+
+or \emph{Logit Regression}
+
+cf. Statistical Classification (\S\ref{sec:statistical_classification})
+
+\emph{Logistic Model}: uses a Logistic Function (\S\ref{sec:logistic_function})
+to Model a \emph{Binary Dependent Variable} $Y_i \in \{ 0, 1 \}$
+
+Logistic Function $e^x / (1 + e^x)$
+
+for a $k$-dimensional Covariate $X$:
+\[
+  p_i \equiv P(Y_i = 1 | X = x) = \frac{
+    e^{\sum_{j=1}^k \beta_j x_{ij}}
+  }{
+    1 + e^{\sum_{j=1}^k \beta_j x_{ij}}
+  }
+\]
+
+\[
+  logit(p_i) = \sum_{j=1}^k \beta_j x_{ij}
+\]
+where:
+\[
+  logit(p) = log\Big(\frac{p}{1-p}\Big)
+\]
+(FIXME: explain)
+
+\[
+  Y_i | X_i = x_i \sim Bernoulli(p_i)
+\]
+
+Conditional Likelihood:
+\[
+  \mathcal{L}(\beta) = \prod_{i=1}^n p_i(\beta)^{Y_i} (1 - p_i(\beta))^{1-Y_i}
+\]
+
+the Maximum Likelihood Estimate can be obtained by maximizing $\mathcal{L}(B)$
+numerically using Re-weighted Least Squares
+(\S\ref{sec:reweighted_least_squares}):
+
+choose starting $\hat{\beta}^0 = (\hat{\beta}_1^0, \ldots, \hat{\beta}_k^0)$
+and compute $p_i^0$ for $i = 1, \ldots, n$, and iterate from $s = 0$:
+\begin{enumerate}
+  \item set
+    \[
+      Z_i = logit(p_i^s) + \frac{Y_i - p_i^s}{p_i^s(1 - p_i^s)}
+    \]
+  \item let $W$ be a Diagonal Matrix with $(i,i)$ equal to $p_i^s(1 - p_i^s)$
+  \item set
+    \[
+      \hat{\beta}^s = (X^T W X)^{-1} X^T W Z
+    \]
+  corresponding to doing a Weighted Linear Regression of $Z$ on $X$
+\end{enumerate}
+
+
+
+\paragraph{Binomial Regression}\label{sec:binomial_regression}\hfill
 
 essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
 
 
 
-\paragraph{Logistic Regression}\label{sec:logistic_regression}\hfill
+\paragraph{Multinomial Regression}\label{sec:multinomial_regression}\hfill
 
-or \emph{Logit Regression}
+\paragraph{Ordinal Regression}\label{sec:ordinal_regression}\hfill
 
-Logistic Model (\S\ref{sec:logistic_model}) -- uses a Logistic Function
-(\S\ref{sec:logistic_function}) to Model a Binary Dependent Variable
-
-Statistical Classification (\S\ref{sec:statistical_classification})
+\emph{Ranking Learning}
 
 
+
+\subsubsection{Probit Regression}\label{sec:probit_regression}
 
 \subsubsection{Multiple Regression}\label{sec:multiple_regression}
 
 Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
 
 Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
+
+note that adding more Covariates, the Bias of the Predictions descreases and the
+Variance increases
+
+\emph{Underfitting} -- too few Covariates, high Bias
+
+\emph{Overfitting} -- too many Covariates, high Variance
 
 (wiki): uses Additive Logic (FIXME: xref ???); cf. Necessary Condition Analysis
 (NCA \S\ref{sec:nca}) -- uses Necessary Logic (\S\ref{sec:alethic_logic})
