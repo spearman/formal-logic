@@ -233,6 +233,9 @@ Mutually Exclusive States
 
 Independent if and only if $P(A \cap B) = P(A) P(B)$
 
+\fist two Events are Independent if and only if their Odds Ratio
+(\S\ref{sec:odds_ratio}) equals $1$
+
 in terms of Conditional Probability (\S\ref{sec:conditional_probability}), $A$
 and $B$ are Independent if and only if $P(A|B) = P(A)$ or $P(B|A) = P(B)$
 
@@ -566,11 +569,15 @@ Probabilistic Independence:
   P(X \in A, Y \in B) = P(X \in A) P(Y \in B)
 \]
 
-\fist cf. Independent Event (\S\ref{sec:independent_event})
+\fist cf. Independent Event (\S\ref{sec:independent_event}) --
+two Events are Independent if and only if their Odds Ratio
+(\S\ref{sec:odds_ratio}) equals $1$
 
 if $X$ and $Y$ are Independent and have Finite Second Moments, then they are
 Uncorrelated (\S\ref{sec:correlation}); not all Uncorrelated Variables are
 Independent
+
+Tests for Independence (Wasserman04, Ch.15) %TODO
 
 
 
@@ -582,7 +589,10 @@ note that two Events may be Independent, but not \emph{Conditionally}
 Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
 the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
 
-\fist Conditional Probability (\S\ref{sec:conditional_probability})
+\fist cf. Conditional Probability (\S\ref{sec:conditional_probability})
+
+\fist Bayesian Networks (\S\ref{sec:bayes_network}), Intervention Model
+(Causal Inference \S\ref{sec:intervention_model})
 
 \url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
 -- ``Conditional Independence happens when the Joint Probability Distribution
@@ -598,6 +608,24 @@ an expression of Relative Probabilities: the Odds \emph{in favor} of an Event or
 Proposition is the Ratio of the Probability that the Event will occur to the
 Probability that it will not occur, i.e. a \emph{Binomial Trial}
 (Bernoulli Trial \S\ref{sec:binomial_trial})
+
+
+
+\subsubsection{Odds Ratio}\label{sec:odds_ratio}
+
+Statistic (\S\ref{sec:statistic})
+
+quantifies strength of Association (Dependence \S\ref{sec:dependence}) between
+two Events
+
+\fist cf. Risk Ratio (\S\ref{sec:risk_ratio}), Risk Difference
+(\S\ref{sec:risk_difference})
+
+two Events are Independent if and only if their Odds Ratio equals $1$
+
+
+
+\subsubsection{Log Odds Ratio}\label{sec:log_odds}
 
 
 
@@ -1107,12 +1135,74 @@ Variable
 
 
 
+\subsubsection{Risk}\label{sec:risk}
+
+the Expected Value of an ``undesirable'' Outcome (\emph{Absolute Risk})
+
+
+
+\paragraph{Risk Ratio}\label{sec:risk_ratio}\hfill
+
+or \emph{Relative Risk}
+
+cf. Odds Ratio (\S\ref{sec:odds_ratio})
+
+
+
+\paragraph{Risk Difference}\label{sec:risk_difference}\hfill
+
+cf. Odds Ratio (\S\ref{sec:odds_ratio})
+
+
+
 % ------------------------------------------------------------------------------
-\subsection{Variance}\label{sec:variance}
+\subsection{Covariance}\label{sec:covariance}
 % ------------------------------------------------------------------------------
+
+$Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)]$
+
+$Cov(X,X)$ -- Variance (\S\ref{sec:variance})
+
+\fist cf. Causation (\S\ref{sec:causation})
+
+$n$ Discrete Samples:
+\[
+  \sigma_{X,Y} = Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)] =
+    \frac{1}{n} \sum_{i=1}^n (x_i - \mu_X) (y_i - \mu_Y)
+\]
+
+Continuous:
+\[
+  Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)] =
+  \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
+  (x - \mu_X) (y - \mu_Y) f(x,y) dx dy
+\]
+where $f(x,y)$ is the Joint Probability Distribution
+(\S\ref{sec:joint_probability}) of $X$, $Y$
+
+\fist Sample Covariance (\S\ref{sec:sample_covariance})
+
+\textbf{Thm.} \emph{Covariance Satisfies:
+  \[
+    Cov(X,Y) = E(XY) - E(X)E(Y)
+  \]
+}
+
+the Correlation (\S\ref{sec:correlation}) is defined in terms of the Covariance:
+\[
+  \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
+\]
+if $X$ and $Y$ are Independent (\S\ref{sec:dependence}), then
+$Cov(X,Y) = \rho = 0$
+
+
+
+\subsubsection{Variance}\label{sec:variance}
 
 the \emph{Variance} is the Expected Value of the Squared Deviation (Error
 \S\ref{sec:error}) of a Random Variable
+
+$\sigma_X^2 = Cov(X,X)$
 
 the \emph{Sum of Squared Deviations} (\S\ref{sec:sum_squared_deviation})
 Estimates (\S\ref{sec:estimation_theory}) the Variance when scaled for the
@@ -1168,6 +1258,16 @@ $V(Y) = E(V(Y|X)) + V(E(Y|X))$
 
 
 
+\subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
+
+or \emph{Variance-Covariance Matrix}
+
+Positive semi-definite (\S\ref{sec:positive_semidefinite})
+
+the Inverse of the Covariance Matrix is called the \emph{Precision Matrix}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Skewness}\label{sec:skewness}
 % ------------------------------------------------------------------------------
@@ -1191,56 +1291,18 @@ Fourth Central Moment (\S\ref{sec:moment})
 
 
 % ------------------------------------------------------------------------------
-\subsection{Covariance}\label{sec:covariance}
-% ------------------------------------------------------------------------------
-
-$X$, $Y$, Joint Probability Distribution
-(\S\ref{sec:joint_probability}) $f(x,y)$
-
-Discrete:
-\[
-  \sigma_{xy} = E [(x - \mu_X)(y - \mu_Y)] = \sum_x \sum_y (x - \mu_X)
-  (y - \mu_Y) f(x,y)
-\]
-
-Continuous:
-\[
-  \sigma_{xy} = E [(x - \mu_X)(y - \mu_Y)] =
-  \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
-  (x - \mu_X) (y - \mu_Y) f(x,y) dx dy
-\]
-
-\fist Sample Covariance (\S\ref{sec:sample_covariance})
-
-\textbf{Thm.} \emph{Covariance Satisfies:
-  \[
-    Cov(X,Y) = E(XY) - E(X)E(Y)
-  \]
-}
-
-if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$ where $\rho$ is the
-Correlation (\S\ref{sec:correlation})
-
-
-
-\subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
-
-or \emph{Variance-Covariance Matrix}
-
-Positive semi-definite (\S\ref{sec:positive_semidefinite})
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Dependence}\label{sec:dependence}
 % ------------------------------------------------------------------------------
 
-or \emph{Dependence}
+or \emph{Association}
 
 any ``\emph{Statistical Relationship}'' between two Random Variables
 (``Bivariate Data'')
 
-may or may not be Causal
+may or may not be Causal -- (wiki): the main difference between
+\emph{Causal Inference} (\S\ref{sec:causal_inference}) and an Inference of
+\emph{Association} is that the former analyzes the ``response'' of the ``effect
+variable'' when the Cause is changed
 
 Random Variables are \emph{Dependent} if they do not Satisfy the Property of
 \emph{Probabilistic Independence} (\S\ref{sec:independence})
@@ -1264,16 +1326,21 @@ measure of how close two Random Variables are to having a \emph{Linear
 
 \fist cf. Linear Regression (\S\ref{sec:linear_regression})
 
+\[
+  \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
+\]
+where $Cov(X,Y)$ is the Covariance (\S\ref{sec:covariance})
+
 if $X$ and $Y$ are Independent (\S\ref{sec:dependence}) and have Finite Second
 Moments, then they are Uncorrelated; not all Uncorrelated Variables are
 Independent
 
-if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$ where $Cov(X,Y)$ is
-the Covariance (\S\ref{sec:covariance})
+if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$
 
 \fist Correlation Coefficient (\S\ref{sec:correlation_coefficient})
 
 (wiki):
+
 
 
 
@@ -1854,32 +1921,23 @@ Discontinuities
 
 
 
-\subsubsection{Binomial Distribution}\label{sec:binomial_distribution}
+\subsubsection{Multinomial Distribution}\label{sec:multinomial_distribution}
 
-Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
-$p \in [0,1]$:
+$k$ Outcomes $E_1, E_2, \ldots, E_k$
+
+Probabilities $p_1, p_2, \ldots, p_k$
+
+Probability Distribution of $x_1, x_2, \ldots, x_k$ number of
+Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
 \[
-  X \sim B(n,p)
+  f(x_1, x_2, \ldots, x_k) = \binom{n}{x_1, x_2, \ldots, x_k} =
+  p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
 \]
-describes the Probability of getting exactly $x$ ``successes'' in $n$ ``trials''
-where the Probability of ``success'' is $p$:
-\[
-  P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
-\]
+and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
 
-Expected Value $E(X) = np$
-
-Binomial Random Variable (\S\ref{sec:binomial_random_variable})
-
-Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
-
-generalized as Multinomial Distributions (\S\ref{sec:multinomial_distribution})
-
-Mean $\mu = n p$
-
-Variance $\sigma^2 = n p q$
-
-Sample Proportion %FIXME
+for $X = (X_1, \ldots, X_k) \sim Multinomial(n, p)$ and
+$p = (p_1, \ldots, p_k)$, the Marginal Distribution
+(\S\ref{sec:marginal_distribution}) of $X_j$ is $Binomial (n, p_j)$
 
 
 
@@ -1917,13 +1975,42 @@ generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
 
 
 
-\paragraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
+\paragraph{Binomial Distribution}\label{sec:binomial_distribution}\hfill
+
+Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
+$p \in [0,1]$:
+\[
+  X \sim B(n,p)
+\]
+describes the Probability of getting exactly $x$ ``successes'' in $n$ ``trials''
+where the Probability of ``success'' is $p$:
+\[
+  P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
+\]
+
+Expected Value $E(X) = np$
+
+Binomial Random Variable (\S\ref{sec:binomial_random_variable})
+
+Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
+
+generalized as Multinomial Distributions (\S\ref{sec:multinomial_distribution})
+
+Mean $\mu = n p$
+
+Variance $\sigma^2 = n p q$
+
+Sample Proportion %FIXME
+
+
+
+\subparagraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
 
 $b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
 
 
 
-\paragraph{Normal Approximation}\label{sec:normal_approximation}\hfill
+\subparagraph{Normal Approximation}\label{sec:normal_approximation}\hfill
 
 For Binomial Random Variable $X$ with Mean $\mu = np$ and Variance
 $\sigma^2 = npq$, then:
@@ -1932,29 +2019,6 @@ $\sigma^2 = npq$, then:
 \]
 as $n \rightarrow \infty$ is the Standard Normal Distribution
 (\S\ref{sec:normal_distribution}) $n(Z;0,1)$
-
-
-
-\subsubsection{Multinomial Distribution}\label{sec:multinomial_distribution}
-
-generalization of Binomial Distribution (\S\ref{sec:binomial_distribution}) to
-Multivariate Distributions (\S\ref{sec:random_vector})
-
-$k$ Outcomes $E_1, E_2, \ldots, E_k$
-
-Probabilities $p_1, p_2, \ldots, p_k$
-
-Probability Distribution of $x_1, x_2, \ldots, x_k$ number of
-Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
-\[
-  f(x_1, x_2, \ldots, x_k) = \binom{n}{x_1, x_2, \ldots, x_k} =
-  p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
-\]
-and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
-
-for $X = (X_1, \ldots, X_k) \sim Multinomial(n, p)$ and
-$p = (p_1, \ldots, p_k)$, the Marginal Distribution
-(\S\ref{sec:marginal_distribution}) of $X_j$ is $Binomial (n, p_j)$
 
 
 
@@ -2834,6 +2898,9 @@ assumed that Observations are IID.
 
 \fist Monte Carlo Simulation (\S\ref{sec:monte_carlo})
 
+\fist Random Assignment (Counterfactual Causal Inference
+\S\ref{sec:counterfactual_model})
+
 
 
 \subsubsection{Simple Random Sample}\label{sec:simple_random_sample}
@@ -3593,9 +3660,10 @@ Logistic Regression (\S\ref{sec:logistic_regression})
 
 or \emph{Probabilistic Directed Acyclic Graphical Model}
 
-DAG (\S\ref{sec:dag}) -- dependency structure
+DAG (\S\ref{sec:dag}) -- Dependency structure
 
 representation of Probability Distributions based on \emph{Causal Dependencies}
+(\S\ref{sec:causal_graph})
 
 \emph{Causality} (Pearl 2009) -- counterfactual reasoning
 
@@ -4876,7 +4944,7 @@ Conditional Probabilities (\S\ref{sec:conditional_probability}), Bayes' Rule
 (\S\ref{sec:bayes_theorem})
 
 \fist Bayesian Network (Probabilistic Directed Acyclic Graphical Model
-\S\ref{sec:bayesian_network})
+\S\ref{sec:bayes_network})
 
 Subjective Probability %FIXME: section
 (\url{https://plato.stanford.edu/entries/probability-interpret/#SubPro}),
@@ -5229,7 +5297,155 @@ intermediate values
 \subsection{Causal Inference}\label{sec:causal_inference}
 % ------------------------------------------------------------------------------
 
-\url{http://www.inference.vc/untitled/}
+(wiki):
+
+identification of the Cause of an ``Effect'' by establishing \emph{Covariation}
+(\S\ref{sec:covariation}) of Cause and Effect, a \emph{Time-order Relation} with
+the Cause preceding the Effect, and the elimination of plausible alternative
+Causes
+
+the main difference between \emph{Causal Inference} and an Inference of
+\emph{Association} (Dependence \S\ref{sec:dependence}) is that the former
+analyzes the ``response'' of the ``effect variable'' when the Cause is changed.
+
+an example of ``Causal Reasoning'' (TODO: xref)
+
+\url{http://www.inference.vc/untitled/} - \emph{ML beyond Curve Fitting: An
+  Intro to Causal Inference and do-Calculus}
+
+(Wasserman04, Ch.16)
+
+
+
+\subsubsection{Causation}\label{sec:causation}
+
+%FIXME: move section?
+
+cf. Covariance (\S\ref{sec:covariance})
+
+
+
+\subsubsection{Causal Model}\label{sec:causal_model}
+
+%FIXME: move section?
+
+
+
+\paragraph{Counterfactual Model}\label{sec:counterfactual}\hfill
+
+(Wasserman04, \S16.1)
+
+\textbf{Binary Random Variable $X$}
+
+Outcome Variable $Y$
+
+introduce two new Random Variables $(C_0, C_1)$ called \emph{Potential Outcomes}
+where $C_0$ is the Outcome if $X = 0$ and $C_1$ is the Outcome if $X = 1$
+
+\emph{Consistency Relationship}:
+\[
+  Y = \begin{cases}
+    C_0 & \text{if} X = 0 \\
+    C_1 & \text{if} X = 1 \\
+  \end{cases}
+\]
+
+when $X = 0$, $C_1$ is a \emph{Counterfactual}, and vice versa when $X = 1$,
+$C_0$ is Counterfactual
+
+measuring ``\emph{Causal Effect}''
+
+\begin{itemize}
+  \item \emph{Average Causal Effect}:
+    \[
+      \theta = E[C_1] - E[C_0]
+    \]
+    i.e. $\theta$ is the Mean if every Observed $X = 1$, minus the Mean if every
+    Observed $X = 0$
+
+  \item for Binary $C_0$, $C_1$, the \emph{Causal Odds Ratio}:
+    \[
+      \frac{
+        \frac{P(C_1 = 1)}{P(C_1 = 0)}
+      }{
+        \frac{P(C_0 = 1)}{P(C_0 = 0)}
+      }
+    \]
+    and \emph{Causal Relative Risk}:
+    \[
+      \frac{P(C_1 = 1)}{P(C_0 = 1)}
+    \]
+\end{itemize}
+
+the \emph{Association}:
+\[
+  \alpha = E[Y | X = 1] - E[Y | X = 0]
+\]
+
+\textbf{Thm.} \emph{Association is not Causation, i.e. in general
+$\theta \neq \alpha$}
+
+this is because $(C_0, C_1)$ is not Independent of $X$
+
+instead by using \emph{Random Assignment} (cf. Random Sampling
+\S\ref{sec:random_sample}) of $X$ (FIXME: explain), $\theta = \alpha$, and any
+Consistent Estimator (\S\ref{sec:consistent_estimator}) of $\alpha$ is a
+Consistent Estimator of $\theta$
+
+\emph{Conditional Causal Effect}
+
+\textbf{Continuous $X$}
+
+$(C_0, C_1)$ is replaced by the \emph{Counterfactual Function} $C(x)$ is the
+Outcome for an Observed $x$
+
+Consistency Relation $Y \equiv C(X)$
+
+\emph{Causal Regression Function}:
+\[
+  \theta(x) = E(C(x))
+\]
+
+\emph{Association Regression Function}:
+\[
+  r(x) = E[Y | X = x]
+\]
+
+\textbf{Thm.} \emph{In general, $\theta(x) \neq r(x)$, but when $X$ is Randomly
+  Assigned, $\theta(x) = r(x)$}
+
+
+\textbf{Observational Study} -- a study in which $X$ is \emph{not} Randomly
+Assigned; \emph{Confounding Variables}, \emph{Adjusted Treatment Effect}
+
+
+
+\paragraph{Causal Graph}\label{sec:causal_graph}\hfill
+
+alternative to Counterfactuals for representing Causal Relations
+
+Bayesian Network (\S\ref{sec:bayes_network}) -- ``Dependency structure'';
+Probabilistic DAG (\S\ref{sec:dag})
+
+Conditional Independence (\S\ref{sec:conditional_independence}) -- for Random
+Variables $X$, $Y$, $Z$, given $Z$, $X$ and $Y$ are \emph{Conditionally
+  Independent}, $X \coprod Y | Z$ if for all $x,y,z$:
+\[
+  f_{X,Y|Z}(x,y|z) = f_{X|Z}(x|z) f_{Y|Z}(y|z)
+\]
+i.e. when $Z$ is known, $Y$ provides no extra information about $X$;
+equivalently:
+\[
+  f(x|y, z) = f(x|z)
+\]
+
+$X \coprod Y | Z \Rightarrow Y \coprod X | Z$
+
+in a Probabilistic DAG, each Vertex represents a Random Variable
+
+
+
+\subparagraph{Intervention Model}\label{sec:intervention_model}\hfill
 
 
 
@@ -5567,7 +5783,7 @@ Coefficients and Explanatory (Independent) Variables:
 \]
 for $i \in \{1, \ldots, n\}$
 
-Assuming $\varpesilon_i | X_i \sim N(0, \sigma^2)$ is the same as Assuming
+Assuming $\varepsilon_i | X_i \sim N(0, \sigma^2)$ is the same as Assuming
 $Y_i | X_i \sim N(\mu_i, \sigma^2)$
 
 cf. \emph{Correlation} (\S\ref{sec:correlation}) -- measure of how close two
