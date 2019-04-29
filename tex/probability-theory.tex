@@ -591,8 +591,13 @@ the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
 
 \fist cf. Conditional Probability (\S\ref{sec:conditional_probability})
 
-\fist Bayesian Networks (\S\ref{sec:bayes_network}), Intervention Model
-(Causal Inference \S\ref{sec:intervention_model})
+\fist Bayesian Networks (\S\ref{sec:bayes_network});
+Markov Condition (\S\ref{sec:markov_condition}) -- every Node is Conditionally
+Independent (\S\ref{sec:conditional_independence}) of its Non-descendents, given
+its Parents
+
+\fist Pairwise Markov Graph (\S\ref{sec:pairwise_markov_graph}) -- encodes a Set
+of Pairwise Conditional Independence Relations
 
 \url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
 -- ``Conditional Independence happens when the Joint Probability Distribution
@@ -3656,6 +3661,12 @@ Logistic Regression (\S\ref{sec:logistic_regression})
 
 \subsubsection{Graphical Model}\label{sec:graphical_model}
 
+\emph{Log-linear Model} (\S\ref{sec:log_linear}) -- Fitting a Graphical Model to
+Discrete Data \fist Pairwise Markov Graph (Undirected Graph
+\S\ref{sec:pairwise_markov_graph})
+
+
+
 \paragraph{Bayes Network}\label{sec:bayes_network}\hfill
 
 or \emph{Probabilistic Directed Acyclic Graphical Model}
@@ -3668,6 +3679,23 @@ representation of Probability Distributions based on \emph{Causal Dependencies}
 \emph{Causality} (Pearl 2009) -- counterfactual reasoning
 
 \url{https://golem.ph.utexas.edu/category/2018/07/bayesian_networks.html}
+
+
+
+\subparagraph{Markov Condition}\label{sec:markov_condition}\hfill
+
+every Node is Conditionally Independent (\S\ref{sec:conditional_independence})
+of its Non-descendents, given its Parents
+
+\emph{Causal Markov Condition}
+--
+Causal Graphs (\S\ref{sec:causal_graph})
+
+
+
+\subparagraph{Directional Separation}\label{sec:directional_separation}\hfill
+
+Directed Separation or $d$-separation
 
 
 
@@ -5134,6 +5162,9 @@ Subjective Probability
 (\url{https://plato.stanford.edu/entries/probability-interpret/#SubPro}),
 Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 
+\fist cf. Passive, Active Conditioning (Causal Inference
+\S\ref{sec:active_conditioning})
+
 \fist not to be confused with Condition Numbers (Numerical Analysis
 \S\ref{sec:condition_number})
 
@@ -5422,10 +5453,18 @@ Assigned; \emph{Confounding Variables}, \emph{Adjusted Treatment Effect}
 
 \paragraph{Causal Graph}\label{sec:causal_graph}\hfill
 
+or \emph{Causal Network}
+
+\fist Bayesian Network (\S\ref{sec:bayes_network}) -- ``Dependency structure'';
+Probabilistic DAG (\S\ref{sec:dag})
+
 alternative to Counterfactuals for representing Causal Relations
 
-Bayesian Network (\S\ref{sec:bayes_network}) -- ``Dependency structure'';
-Probabilistic DAG (\S\ref{sec:dag})
+finding the correct Causal Graph from Data of two Variables is impossible; for
+more Variables there are Large Sample methods under certain assumptions, but
+there is no way to know whether the Sample Size is large enough to be reliable
+
+(Wasserman04, Ch.17)
 
 Conditional Independence (\S\ref{sec:conditional_independence}) -- for Random
 Variables $X$, $Y$, $Z$, given $Z$, $X$ and $Y$ are \emph{Conditionally
@@ -5443,9 +5482,55 @@ $X \coprod Y | Z \Rightarrow Y \coprod X | Z$
 
 in a Probabilistic DAG, each Vertex represents a Random Variable
 
+a DAG $\mathcal{G}$ with Vertices $V = (X_1, \ldots, X_n)$ \emph{Represents} a
+Distribution $P$ for $V$ with PDF $f$ if:
+\[
+  f(v) = \prod_{i=1}^k f(x_i | \pi_i)
+\]
+where $\pi_i$ are the Parents of $X_i$; the Set of Distributions Represented by
+$\mathcal{G}$ is denoted $M(\mathcal{G})$
+
+Markov Condition (\S\ref{sec:markov_condition}) -- every Node is Conditionally
+Independent of its Non-descendents, given its Parents
+
+Directional Separation (\S\ref{sec:directional_separation})
+
+$\mathcal{I}(\mathcal{G})$ -- Independence Statements implied by $\mathcal{G}$
+
+two DAGs $\mathcal{G}_1$, $\mathcal{G}_2$ are Markov Equivalent if
+$\mathcal{I}(\mathcal{G}_1) = \mathcal{I}(\mathcal{G}_2)$
 
 
-\subparagraph{Intervention Model}\label{sec:intervention_model}\hfill
+
+\subparagraph{Active Conditioning}\label{sec:active_conditioning}\hfill
+
+(Wasserman04, \S17.08)
+
+\emph{Passive Conditioning} -- Conditioning by Observation
+
+\emph{Active Conditioning} -- Conditioning by Intervention
+
+
+
+\subparagraph{Structural Equation Modeling (SEM)}\label{sec:sem}\hfill
+
+%FIXME: move section ?
+
+Confirmatory Factor Analysis, Confirmatory Composite Analysis, Path Analysis,
+Partial Least Squares Path Modeling, Latent Growth Modeling
+
+
+
+\subparagraph{Pairwise Markov Graph}\label{sec:pairwise_markov_graph}\hfill
+
+(Wasserman04, \S18.2)
+
+Undirected Graph (\S\ref{sec:undirected_graph})
+
+encodes a Set of Pairwise Conditional Independence Relations
+(\S\ref{sec:independence})
+
+Global Markov Property
 
 
 
@@ -5915,6 +6000,16 @@ not to be confused with General Linear Models (Multivariate Regression Models
 Least-squares Estimate (\S\ref{sec:least_squares}) may be used to fit a
 Generalized Linear Model by iteratively applying the Local Quadratic
 Approximation (FIXME: explain)
+
+
+
+\subparagraph{Log-linear Model}\label{sec:log_linear}\hfill
+
+\emph{Poisson Regression}
+
+fitting Discrete Data to a Graphical Model (\S\ref{sec:graphical_model})
+
+Pairwise Markov Graph (\S\ref{sec:pairwise_markov_graph})
 
 
 
