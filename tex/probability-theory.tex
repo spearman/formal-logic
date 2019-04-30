@@ -596,7 +596,7 @@ Markov Condition (\S\ref{sec:markov_condition}) -- every Node is Conditionally
 Independent (\S\ref{sec:conditional_independence}) of its Non-descendents, given
 its Parents
 
-\fist Pairwise Markov Graph (\S\ref{sec:pairwise_markov_graph}) -- encodes a Set
+\fist Pairwise Markov Graph (\S\ref{sec:pairwise_markov}) -- encodes a Set
 of Pairwise Conditional Independence Relations
 
 \url{http://lesswrong.com/lw/pi/classical_configuration_spaces/}
@@ -1914,10 +1914,16 @@ Discontinuities
       \end{cases}
     \]
   \item \emph{Discrete Uniform Distribution} (\S\ref{sec:uniform_distribution})
-  \item \emph{Bernoulli Distribution} (\S\ref{sec:bernoulli_distribution}) --
-    $X \sim Bernoulli(p)$
-  \item \emph{Binomial Distribution} (\S\ref{sec:binomial_distribution}) --
-    $X \sim Binomial(n,p)$
+  \item \emph{Multinomial Distribution} (\S\ref{sec:multinomial_distribution})
+    -- $X \sim Multinomial_k(n,p)$
+  \begin{itemize}
+    \item \emph{Bernoulli Distribution} (\S\ref{sec:bernoulli_distribution}) --
+      $X \sim Bernoulli(p)$
+    \item \emph{Binomial Distribution} (\S\ref{sec:binomial_distribution}) --
+      $X \sim Binomial(n,p)$
+    \item \emph{Categorical Distribution} (\S\ref{sec:categorical_distribution})
+      -- $X \sim Categorical(k,p)$
+  \end{itemize}
   \item \emph{Geometric Distribution} (\S\ref{Sec:geometric_distribution}) --
     $X \sim Geom(p)$
   \item \emph{Poisson Distribution} (\S\ref{Sec:poisson_distribution}) --
@@ -1928,6 +1934,10 @@ Discontinuities
 
 \subsubsection{Multinomial Distribution}\label{sec:multinomial_distribution}
 
+$n$ Trials
+
+$k$ Outcomes or ``\emph{Categories}''
+
 $k$ Outcomes $E_1, E_2, \ldots, E_k$
 
 Probabilities $p_1, p_2, \ldots, p_k$
@@ -1936,19 +1946,28 @@ Probability Distribution of $x_1, x_2, \ldots, x_k$ number of
 Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
 \[
   f(x_1, x_2, \ldots, x_k) = \binom{n}{x_1, x_2, \ldots, x_k} =
-  p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
+    p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
 \]
 and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
 
-for $X = (X_1, \ldots, X_k) \sim Multinomial(n, p)$ and
+for $X = (X_1, \ldots, X_k) \sim Multinomial_k(n, p)$ and
 $p = (p_1, \ldots, p_k)$, the Marginal Distribution
 (\S\ref{sec:marginal_distribution}) of $X_j$ is $Binomial (n, p_j)$
+
+\begin{itemize}
+  \item Bernoulli Distribution (\S\ref{sec:bernoulli_distribution}) -- $k = 2$,
+    $n = 1$
+  \item Binomial Distribution (\S\ref{sec:binomial_distribution}) -- $k = 2$,
+    $n > 1$
+  \item Categorical Distribution (\S\ref{sec:categorical_distribution}) --
+    $k > 2$, $n = 1$
+\end{itemize}
 
 
 
 \paragraph{Bernoulli Distribution}\label{sec:bernoulli_distribution}\hfill
 
-$n = 1$
+$k = 2$, $n = 1$
 
 for a Random Variable $X$ representing a Binary Outcome:
 \begin{itemize}
@@ -1982,6 +2001,8 @@ generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
 
 \paragraph{Binomial Distribution}\label{sec:binomial_distribution}\hfill
 
+$k = 2$ , $n > 1$
+
 Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
 $p \in [0,1]$:
 \[
@@ -1998,8 +2019,6 @@ Expected Value $E(X) = np$
 Binomial Random Variable (\S\ref{sec:binomial_random_variable})
 
 Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
-
-generalized as Multinomial Distributions (\S\ref{sec:multinomial_distribution})
 
 Mean $\mu = n p$
 
@@ -2030,7 +2049,7 @@ as $n \rightarrow \infty$ is the Standard Normal Distribution
 \paragraph{Categorical Distribution}\label{sec:categorical_distribution}
 \hfill
 
-generalization of Bernoulli Distribution (\S\ref{sec:bernoulli_distribution})
+$k > 2$, $n = 1$
 
 
 
@@ -3661,9 +3680,11 @@ Logistic Regression (\S\ref{sec:logistic_regression})
 
 \subsubsection{Graphical Model}\label{sec:graphical_model}
 
-\emph{Log-linear Model} (\S\ref{sec:log_linear}) -- Fitting a Graphical Model to
-Discrete Data \fist Pairwise Markov Graph (Undirected Graph
-\S\ref{sec:pairwise_markov_graph})
+(Whittaker 1990 - \emph{Graphical Models in Applied Multivariate Statistics}
+
+\fist \emph{Log-linear Model} (Poisson Regression \S\ref{sec:log_linear}) --
+Fitting a Graphical Model to Discrete Data \fist Pairwise Markov Graph
+(Undirected Graph \S\ref{sec:pairwise_markov})
 
 
 
@@ -3779,9 +3800,22 @@ Choice using an Optimality Critereon
 
 \paragraph{Akaike Information Criterion (AIC)}\label{sec:aic}\hfill
 
+Likelihood minus number of Parameters
+
 Mallows's $C_p$
 
 \fist Information Theory (Part \ref{part:information_theory})
+
+
+
+\paragraph{Bayesian Information Criterion (BIC)}\label{sec:bic}\hfill
+
+Likelihood minus number of Parameters divided by two times the Log of Sample
+Size
+
+
+
+\paragraph{WAIC}\label{sec:waic}\hfill
 
 
 
@@ -4905,6 +4939,17 @@ invokes the Law of Large Numbers (\S\ref{sec:large_numbers}) to explain stable
 
 \subsubsection{Frequency Distribution}\label{sec:frequency_distribution}
 
+\paragraph{Contingency Table}\label{sec:contingency_table}\hfill
+
+or \emph{Cross Tabulation} or \emph{Crosstab}
+
+displays the Multivariate (\S\ref{sec:multivariate_statistics}) Frequency
+Distribution of Variables
+
+Log-linear Model (\S\ref{sec:log_linear})
+
+
+
 \subsubsection{Confidence Interval}\label{sec:confidence_interval}
 
 or \emph{Confidence Set} for Parameter Spaces of Dimension $2$ or greater
@@ -5521,7 +5566,7 @@ Partial Least Squares Path Modeling, Latent Growth Modeling
 
 
 
-\subparagraph{Pairwise Markov Graph}\label{sec:pairwise_markov_graph}\hfill
+\subparagraph{Pairwise Markov Graph}\label{sec:pairwise_markov}\hfill
 
 (Wasserman04, \S18.2)
 
@@ -6003,13 +6048,74 @@ Approximation (FIXME: explain)
 
 
 
+\subparagraph{Link Function}\label{sec:link_function}\hfill
+
 \subparagraph{Log-linear Model}\label{sec:log_linear}\hfill
 
 \emph{Poisson Regression}
 
+\emph{Contingency Tables} (\S\ref{sec:contingency_table})
+
+Natural Language Processing
+
+(Wasserman04, Ch.19)
+
+Multivariate Discrete Data --
 fitting Discrete Data to a Graphical Model (\S\ref{sec:graphical_model})
 
-Pairwise Markov Graph (\S\ref{sec:pairwise_markov_graph})
+Undirected Graphs \fist Pairwise Markov Graph (\S\ref{sec:pairwise_markov})
+
+Dicrete Random Vector $X = (X_1, \ldots, X_m)$ where each
+$X_j \in \{ 1, 2, \ldots, r_j \}$ for some $r_j$
+
+Probability Mass Function $f(x) = P(X = x) = P(X_1 = x_1, \ldots, X_m = x_m)$
+
+a Sample of $n$ Vectors is a Sample from a Multinomial Distribution
+(\S\ref{sec:multinomial_distribution}) with $N = r_1 r_2 \cdots r_m$ Categories
+where Data can be represented as ``counts'' in a
+$r_1 \times r_2 \times \cdots \times r_m$ table (FIXME: clarify)
+
+$p = (p_1, \ldots, p_N)$ -- Multinomial Parameter
+
+given a Vector $x = (x_1, \ldots, x_n)$ and Subset
+$A \subset \{ 1, \ldots, m \}$, let $x_A = (x_j : j \in A)$
+
+\textbf{Thm.} \emph{
+  The Joint Probability Function $f(x)$ of a Random Vector
+  $X = (X_1, \ldots, X_n)$ can be written as the \textbf{Log-linear Expansion}
+  of $f$:
+  \[
+    \log f(x) = \sum_A \psi_A(x)
+  \]
+  over all $A \in 2^{\{ 1, \ldots, m\}}$ where $\psi$ satisfies:
+  \begin{enumerate}
+    \item $\psi_{\varnothing}(x)$ is Constant
+    \item $\psi_A(x)$ is only a Function of $x_A$ and not any other $x_j$
+    \item if $i \in A$ and $x_i = 0$ then $\psi_A(x) = 0$
+  \end{enumerate}
+}
+
+Parameter Spaces (TODO)
+
+\textbf{Graphical Log-linear Model}
+
+if ``missing terms'' correspond only to Conditional Independence Constraints,
+not any other kinds of ``Constraints''
+(FIXME: explain)
+
+\textbf{Hierarchical Log-linear Model}
+
+\emph{Hierarchical} if $\psi_A = 0$ and $A \subset B$ implies $\psi_B = 0$
+
+Superset of Graphical Models
+
+Hierarchical Models can be written using \emph{Generators}
+
+\emph{Saturated Model}
+
+Submodel \emph{Deviance}
+
+\textbf{Negative Binomial Regression}
 
 
 
