@@ -1142,7 +1142,17 @@ Variable
 
 \subsubsection{Risk}\label{sec:risk}
 
-the Expected Value of an ``undesirable'' Outcome (\emph{Absolute Risk})
+the Expected Value of an ``undesirable'' Outcome (\emph{Absolute Risk}) or Loss
+Function (\S\ref{sec:objective_function})
+
+\emph{Risk Function}
+
+\begin{itemize}
+  \item Mean Integrated Squared Error (MISE \S\ref{sec:mise}) -- $L^2$ Risk
+    Function \fist Density Estimation (\S\ref{sec:density_estimation}):
+    $Risk = Bias^2 + Variance$
+  \item ...
+\end{itemize}
 
 
 
@@ -3522,6 +3532,11 @@ or \emph{Rotation Estimation} or \emph{Out-of-sample Testing}
 
 Predictive Models (\S\ref{sec:predictive_model})
 
+Cross-validation Estimation of Fit
+
+Cross-validation Estimator of Risk (Density Estimation
+\S\ref{sec:density_estimation})
+
 
 
 \subsubsection{Parametric Model}\label{sec:parametric_model}
@@ -4249,6 +4264,10 @@ an Unbiased Estimator for the CDF (\S\ref{sec:cdf}) associated with the
 Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
 (\S\ref{sec:sample})
 
+note that Estimating Non-parametric Density or Regression Functions requires
+making Smoothness assumptions, see Nonparametric Regression
+(\S\ref{sec:nonparametric_regression})
+
 \fist cf. Empirical Processes (\S\ref{sec:empirical_process})
 
 (Wasserman04 \S7.1)
@@ -4310,6 +4329,63 @@ the Plug-in Estimator for a Linear Functional (\S\ref{sec:linear_functional}):
 Sample Correlation
 
 Sample Quantile
+
+
+
+\subsubsection{Density Estimation}\label{sec:density_estimation}
+
+(Wasserman04, Ch.20)
+
+compared to Non-parametric Estimation of CDFs (via Empirical Distribution
+Functions \S\ref{sec:empirical_distribution}), Estimating Non-parametric Density
+or Regression Functions requires making Smoothness assumptions
+
+cf. Non-parametric Regression (\S\ref{sec:nonparametric_regression})
+
+Smoothing (Curve Estimation \S\ref{sec:curve_estimation})
+
+more Smoothing leads to larger Bias, less Smoothing leads to higher Variance;
+Optimal Smoothing leads to minimized Risk (Expected Loss \S\ref{sec:loss})
+
+$Risk = Bias^2 + Variance$
+
+Cross-validation Estimator (\S\ref{sec:cross_validation}) of Risk
+
+Confidence Band (\S\ref{sec:confidence_band})
+
+\emph{Curse of Dimensionality} -- Risk increases quickly with Dimension
+
+
+
+\paragraph{Mean Integrated Squared Error (MISE)}\label{sec:mise}\hfill
+
+Loss Function: \emph{Integrated Squared Error (ISE)}
+
+$L^2$ Risk Function (\S\ref{sec:risk_function})
+
+
+
+\paragraph{Histogram}\label{sec:histogram}\hfill
+
+\emph{Histogram Estimator}
+
+converges at rate $n^{-2/3}$;
+
+
+
+\paragraph{Kernel Density Estimation (KDE)}\label{sec:kde}\hfill
+
+cf. Kernel Regression (\S\ref{sec:kernel_regression})
+
+\emph{Kernel Function}
+
+\emph{Bandwidth}
+
+converges at a rate $n^{-4/5}$;
+under weak assumptions there does not exist a Non-parametric Estimator that
+converges faster than $n^{-4/5}$
+
+\emph{Stone's Theorem}
 
 
 
@@ -4983,6 +5059,12 @@ One-tail, Two-tail
 
 
 \paragraph{Confidence Band}\label{sec:confidence_band}\hfill
+
+represents Uncertainty in a Curve Estimate (cf. Smoothing \S\ref{sec:smoothing},
+Density Estimation \S\ref{sec:density_estimation}, Kernel Regression
+\S\ref{sec:kernel_regression})
+
+
 
 \paragraph{Hoeffding's Inequality}\label{sec:hoeffdings_inequality}\hfill
 
@@ -5743,7 +5825,8 @@ commonly this is an Estimate of the Conditional Expectation
 Independent Variable; also the Quantile (\S\ref{sec:quantile}) or other Location
 Parameter
 
-\fist cf. Curve Fitting (\S\ref{sec:curve_fitting})
+\fist cf. Curve Fitting (\S\ref{sec:curve_fitting}), Curve Estimation (Smoothing
+\S\ref{sec:smoothing})
 
 \emph{Regression Variable}, ``Regressor'', ``Predictor'', ``Feature'', or
 ``Explanatory Variable'' -- \emph{Independent Variable}
@@ -5897,6 +5980,34 @@ accounts for Observational (Measurement) Error (\S\ref{sec:observational_error})
 \subsubsection{Non-parametric Regression}\label{sec:nonparametric_regression}
 
 Regression Function is chosen from an Infinite-dimensional Family of Functions
+
+\fist cf. Density Estimation (\S\ref{sec:density_estimation})
+
+(Wasserman04, \S20.4)
+
+
+
+\paragraph{Kernel Regression}\label{sec:kernel_regression}\hfill
+
+cf. Kernel Density Estimation (KDE \S\ref{sec:kde})
+
+Kernel Function
+
+Nadaraya-Watson Kernel Estimator
+
+Kernel Smoother
+
+Confidence Bands (\S\ref{sec:confidence_band})
+
+
+
+\paragraph{Additive Regression}\label{sec:additive_regression}\hfill
+
+Additive Model (AM)
+
+not fully Non-parametric
+
+\emph{Backfitting} Algorithm
 
 
 
