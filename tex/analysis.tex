@@ -223,8 +223,14 @@ For Sequences $a_n \leq b_n \leq c_n$ and $\lim a_n = l$ and $\lim c_n
 \subsection{Bounded Sequence}\label{sec:bounded_sequence}
 % ------------------------------------------------------------------------------
 
+\emph{Bounded} if there exists a Number $M$ such that $|a_n| \leq M$ for all $n$
+
 If $a_n$ is Convergent (\S\ref{sec:convergent_sequence}) then it is
 Bounded.
+
+\fist cf. Bounded Function (\S\ref{sec:bounded_function})
+
+$\ell^\infty$ -- $\ell^p$-space (\S\ref{sec:lp_space}) of all Bounded Sequences
 
 
 
@@ -397,10 +403,21 @@ $S_n = \sum_{k=1}^n a_k$
 
 \subsubsection{Convergent Series}\label{sec:convergent_series}
 
+or \emph{Summable Series}
+
 Limit (\S\ref{sec:sequence_limit}) of Partial Sums $\{ S_1, S_2, S_3,
 \ldots \}$ Converges (\S\ref{sec:convergent_sequence})
 
 \fist Radius of Convergence (\S\ref{sec:radius_of_convergence})
+
+
+
+\paragraph{Absolutely Convergent}\label{sec:absolutely_convergent}\hfill
+
+the Sum of the Absolute Values of the Summands is Finite
+
+$\ell^1$ -- $\ell^p$-space (\S\ref{sec:lp_space}) of all Sequences with
+Absolutely Convergent Series
 
 
 
@@ -432,7 +449,7 @@ $\sum_{n \leq x} a_n f(n) = A(x)f(x) - \int_1^x A(t)f'(t) dt$
   \item Fourier Series (\S\ref{sec:fourier_series})
   \item Stirling Series
   \item Newtonian Series
-  \item Legendre Polynomials
+  \item Legendre Polynomials (\S\ref{sec:legendre_polynomial})
   \item Zernike Polynomials
 \end{itemize}
 
@@ -799,6 +816,8 @@ Unit Step Function (\S\ref{sec:unit_step_function})
 
 
 \subsubsection{Bounded Function}\label{sec:bounded_function}
+
+\fist cf. Bounded Sequence (\S\ref{sec:bounded_sequence})
 
 a Bounded Function on a Compact Interval $[a,b]$ is Riemann Integrable
 (\S\ref{sec:integrable_function}) if and only if it is Continuous
@@ -1943,8 +1962,10 @@ Linear Span (\S\ref{sec:linear_span})
 
 Vector Space (\S\ref{sec:vector_space}) whose Elements are Infinite Sequences
 (\S\ref{sec:sequence}) of Real or Complex Numbers, or equivalently a Function
-Space whose Elements are Functions from $\nats$ to the Field $K$ of Real or
-Complex Numbers
+Space (\S\ref{sec:function_space}) whose Elements are Functions from $\nats$ to
+the Field $K$ of Real or Complex Numbers
+
+\fist cf. $\ell^p$-spaces (\S\ref{sec:lp_space})
 
 
 
@@ -1963,13 +1984,52 @@ Topological Vector Space (\S\ref{sec:topological_vectorspace})
 any Separable (\S\ref{sec:separable_space}) Banach Space is an example of a
 Polish Space (\S\ref{sec:polish_space})
 
+a \emph{Banach Algebra} (\S\ref{sec:banach_algebra}) is an Associative Algebra
+(\S\ref{sec:associative_algebra}) over the Real or Complex Numbers (or over a
+Non-archimedean Complete Normed Field \S\ref{sec:nonarchimedean_field}) that is
+also a Banach Space
+
 
 
 \subsubsection{$L^p$ Space}\label{sec:lp_space}
 
 or \emph{Lebesgue Space}
 
-Function Space (\S\ref{sec:function_space})
+Function Space (\S\ref{sec:function_space}) generalizing the $p$-norm
+(\S\ref{sec:p_norm}) for Finite-dimensional Vector Spaces to
+Infinite-dimensional Vector Spaces
+
+$\reals^n$ with the $p$-norm is a Banach Space called the
+\emph{$L^p$-space over $\reals^n$}
+
+$\ell^p$-spaces -- Countably-infinitely many Components; cf. Sequence Spaces
+(\S\ref{sec:sequence_space})
+
+since the Series defined by the $p$-norm on an Infinite number of Components is
+not always Convergent, the Space $\ell^p$ is the Set of all Infinite Sequences
+for which the $p$-norm is Finite; as $p$ increases, the Set $\ell^p$ increases:
+\begin{itemize}
+  \item $\ell^1$ -- Space of Sequences with Absolutely Convergent Series
+    (\S\ref{sec:absolutely_convergent})
+  \item $\ell^2$ -- Space of Square-summable Sequences (TODO: xref)
+  \item $\ell^\infty$ -- Space of all Bounded Sequences
+    (\S\ref{sec:bounded_sequence})
+\end{itemize}
+
+$L^p$-spaces -- Uncountably-infinitely many Components; the Space of Functions
+for which the $p$-th Power of the Absolute Value is Lebesgue Integrable
+(\S\ref{sec:lebesgue_integrable}); Identifies Functions which are
+Almost-everywhere-equal
+
+\begin{itemize}
+  \item $L^2$ -- Space of Quadratically Integrable Functions (Square-integrable
+    Functions); the only Hilbert Space among $L^p$-spaces
+  \item $L^\infty$ -- an Element of $L^\infty$ defines a Bounded Linear Operator
+    (\S\ref{sec:bounded_linear_operator}) on any $L^p$-space by Multiplication;
+    the $L^\infty$-space of Complex-valued Functions is a Commutative
+    $C^*$-algebra (\S\ref{sec:cstar_algebra}) with pointwise Multiplication and
+    Conjugation
+\end{itemize}
 
 \fist Stochastic Convergence in the $L^r$-norm
 (\S\ref{sec:stochastic_convergence})
@@ -1992,6 +2052,7 @@ the Function itself and its Derivatives up to a given Order
 an Associative Algebra (\S\ref{sec:associative_algebra}) over the Real or
 Complex Numbers (or over a Non-archimedean Complete Normed Field
 \S\ref{sec:nonarchimedean_field}) that is also a Banach Space
+(\S\ref{sec:banach_space})
 
 \emph{Banach Rings} (FIXME: ???)
 
@@ -1999,7 +2060,7 @@ Complex Numbers (or over a Non-archimedean Complete Normed Field
 
 \subsubsection{C$^*$-algebra}\label{sec:cstar_algebra}
 
-A \emph{C$^*$-algebra} a Complex Algebra $A$ of Continuous Linear
+A \emph{C$^*$-algebra} is a Complex Algebra $A$ of Continuous Linear
 Operators (\S\ref{sec:continuous_linear}) on a Complex Hilbert Space
 (\S\ref{sec:hilbert_space}) with the additional Properties that $A$ is
 Topologically Closed in the Norm Topology of Operators and Closed
@@ -2017,6 +2078,9 @@ the Interpretation of Classical Logic by replacing Boolean Algebras
 
 the Uniform Closure of Complex Continuous Functions over a Compact Space is a
 C$^*$ Algebra
+
+the $L^\infty$-space (\S\ref{sec:lp_space}) of Complex-valued Functions is a
+Commutative $C^*$-algebra with pointwise Multiplication and Conjugation
 
 
 
@@ -2376,6 +2440,10 @@ cf. Curve Fitting (\S\ref{sec:curve_fitting})
 Non-parametric Regression (\S\ref{sec:nonparametric_regression}) -- Estimating
 Non-parametric Density or Regression Functions requires making Smoothness
 assumptions
+
+(Wasserman04, Ch.21)
+
+Orthogonal Functions (\S\ref{sec:orthogonal_functions})
 
 
 
@@ -4882,6 +4950,9 @@ $\mu$:
 \[
   \int 1_S d\mu = \mu(S)
 \]
+
+\fist $L^p$-spaces (\S\ref{sec:lp_space}) -- Space of Functions for which the
+$p$-th Power of the Absolute Value is Lebesgue Integrable
 
 \emph{Simple Functions} -- Finite Real-linear Combinations of Indicator
 Functions, can be used to approximate a Measurable Function by Partitioning the
