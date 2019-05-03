@@ -153,6 +153,10 @@ the ``Outcome'' of a \emph{Random Variable} (\S\ref{sec:random_variable}), i.e.
 the Member of the Random Variable's State Space corresponding to an Outcome
 which occurred in the Sample Space of a performed Experiment
 
+\fist note sometimes ``\emph{Outcome}'' is used to refer to a Response Variable
+(Regressor \S\ref{sec:regression_analysis}) or Classification Category
+(\S\ref{sec:classification}) to be Predicted
+
 
 
 % ------------------------------------------------------------------------------
@@ -328,7 +332,7 @@ two broad categories of \emph{Probability Interpretations}:
     \end{enumerate}
   \item \emph{Evidential Probabilities} -- \emph{Bayesian Probability};
     interpretation of Probability as ``reasonable'' \emph{Expectation}
-    (\S\ref{sec:expectation}) or ``degree of belief''; assigns Probability to
+    (\S\ref{sec:expected_value}) or ``degree of belief''; assigns Probability to
     Statements even when no Random Process (\S\ref{sec:stochastic_process}) is
     involved; assigns Probability to Hypotheses (\S\ref{sec:hypothesis}), unlike
     Frequentist Inference which Tests Hypotheses without assigning Probability
@@ -514,6 +518,8 @@ $P(A|B) = P(A)$
 
 \fist Conditional Independence (\S\ref{sec:conditional_independence})
 
+\fist Discriminative Models (Classification \S\ref{sec:discriminative_model})
+
 \fist Negative Probability (\S\ref{sec:negative_probability})
 
 (Witten18): Quantum Information Theory doesn't have a good analog to defining a
@@ -528,6 +534,8 @@ does have an analog of \emph{Strong Subadditivity of Entropy}
 % ------------------------------------------------------------------------------
 
 or \emph{Bayes Rule}
+
+\fist Bayes Classifier (\S\ref{sec:bayes_classifier})
 
 \url{https://arbital.com/p/bayes_rule/?l=1zq}
 
@@ -1170,6 +1178,12 @@ cf. Odds Ratio (\S\ref{sec:odds_ratio})
 
 
 
+\paragraph{Empirical Risk Minimization (ERM)}\label{sec:erm}\hfill
+
+Probability Inequalities (Classification Error \S\ref{sec:classification_error})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Covariance}\label{sec:covariance}
 % ------------------------------------------------------------------------------
@@ -1270,6 +1284,11 @@ $f(x,y)$ and $a$, $b$, $c$ are Constants, then:
 \emph{Conditional Variance} $V(X|Y)$
 
 $V(Y) = E(V(Y|X)) + V(E(Y|X))$
+
+Variance reduction methods:
+\begin{itemize}
+  \item Bootstrap Aggregation (Bagging \S\ref{sec:bootstrap_aggregation})
+\end{itemize}
 
 
 
@@ -1633,6 +1652,9 @@ $X_1, \ldots, X_n$ are then called a \emph{Random Sample of Size $n$ from $F$}
 (\S\ref{sec:random_sample})
 
 in Statistics it is commonly assumed that Observations are IID
+
+\fist cf. Stochastic Processes (\S\ref{sec:stochastic_process}) -- Sequences of
+not necessarily IID Random Variables
 
 
 
@@ -2402,6 +2424,8 @@ for Continuous $X$ with CDF $F_X$, $Y = F_X(X)$ is called a \emph{Probability
 
 $f(x,y,\ldots)$ for two or more Random Variables $X,Y,\ldots$
 
+\fist Generative Models (Classification \S\ref{sec:generative_model})
+
 Discrete Random Variables:
 \begin{enumerate}
   \item $f(x,y) \geq 0$
@@ -2701,6 +2725,7 @@ cf. Statistical Unit (\S\ref{sec:statistical_unit})
 \begin{itemize}
   \item Binary
   \item Categorical
+    \fist Statistical Classification (\S\ref{sec:classification})
   \item Ordinal
   \item Binomial
   \item Count
@@ -2784,7 +2809,7 @@ A \emph{Data Point} is an Observation (Random Variate \S\ref{sec:observation})
 of a Statistical Unit (\S\ref{sec:statistical_unit}) in a Statistical Sample.
 
 \fist cf. \emph{Data} (\S\ref{sec:data}), \emph{Data Generating Process}
-(\S\ref{sec:data_generating_process})
+(\S\ref{sec:data_generating_process}), \emph{Dataset} (\S\ref{sec:dataset})
 
 \fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
 
@@ -3348,7 +3373,7 @@ Inference \S\ref{sec:logical_inference}, Inference Rules
 
 \fist Probabilistic Classification (\S\ref{sec:probabilistic_classification}) --
 use of Statistical Inference to solve a Statistical Classification
-(\S\ref{sec:statistical_classification}) problem
+(\S\ref{sec:classification}) problem
 
 (wiki)
 
@@ -3441,15 +3466,20 @@ the \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
     of interest
 \end{itemize}
 
-\fist a \emph{Regression Model} (\S\ref{sec:regression_model}) makes some
-assumption about the Relations (Dependences \S\ref{sec:dependence}) among
-Multivariate Data (\S\ref{sec:random_vector})
-
-\emph{Estimation} (\S\ref{sec:estimation_theory}): Data $\rightarrow$ Parameters
+\emph{Parameter Estimation} (\S\ref{sec:estimation_theory}): Data $\rightarrow$
+Parameters
 
 \emph{Prediction} (\S\ref{sec:prediction})
 
 \emph{Hypothesis Testing} (\S\ref{sec:hypothesis_testing})
+
+\fist a \emph{Regression Model} (\S\ref{sec:regression_model}) makes some
+assumption about the Relations (Dependences \S\ref{sec:dependence}) among
+Multivariate Data (\S\ref{sec:random_vector})
+
+\fist \emph{Classification Model} (\S\ref{sec:classification_model})
+
+VC Dimension (Model Complexity \S\ref{sec:vc_dimension})
 
 (wiki):
 
@@ -3847,12 +3877,16 @@ Statistical Parameters using ``measured data''
 
 \fist cf. Decision Theory (\S\ref{sec:decision_theory}) -- choosing Estimators
 
-\emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
-Dependencies (\S\ref{sec:dependency}) in Multivariate Data
-(\S\ref{sec:random_vector}), i.e. the Estimation of the \emph{Regression
-  Function} (\S\ref{sec:regression_function}); commonly this is the Estimate of
-the Conditional Expectation (\S\ref{sec:conditional_expectation}) of a Dependent
-Variable given an Independent Variable
+\fist \emph{Supervised Learning}:
+\begin{itemize}
+  \item \emph{Classification} (\S\ref{sec:classification})
+  \item \emph{Regression} (\S\ref{sec:regression_analysis}) is the Estimation of
+    Dependencies (\S\ref{sec:dependency}) in Multivariate Data
+    (\S\ref{sec:random_vector}), i.e. the Estimation of the \emph{Regression
+      Function} (\S\ref{sec:regression_function}); commonly this is the Estimate
+    of the Conditional Expectation (\S\ref{sec:conditional_expectation}) of a
+    Dependent Variable given an Independent Variable
+\end{itemize}
 
 approaches:
 \begin{itemize}
@@ -4123,6 +4157,8 @@ cf. \emph{Variance} (\S\ref{sec:variance}) -- Expected Squared Error
 
 \fist Regression Error (\S\ref{sec:regression_error})
 
+\fist Classification Error (\S\ref{sec:classification_error})
+
 (wiki):
 
 example for Sample (\S\ref{sec:sample}) of IID Normally Distributed Random
@@ -4213,6 +4249,8 @@ cf. \emph{Systematic Error} (Statistical Bias \S\ref{sec:systematic_error})
 
 \emph{Underfitting} (Multiple Regression \S\ref{sec:multiple_regression}) -- too
 few Covariates, high Bias
+
+Boosting (\S\ref{sec:boosting}) -- Bias reduction
 
 
 
@@ -5078,6 +5116,9 @@ Density Estimation \S\ref{sec:density_estimation}, Kernel Regression
 used the analyze the number of required Samples needed to obtain a Confidence
 Interval
 
+\fist Probability Inequalities (Classification Error
+\S\ref{sec:classification_error})
+
 \textbf{Thm.} (Hoeffding's Inequality)
 
 \emph{
@@ -5097,8 +5138,8 @@ Interval
 % ------------------------------------------------------------------------------
 
 \emph{Evidential Probability} or \emph{Bayesian Probability} -- interpretation
-of Probability as a ``reasonable'' \emph{Expectation} (\S\ref{sec:expecation})
-or ``degree of belief''
+of Probability as a ``reasonable'' \emph{Expectation}
+(\S\ref{sec:expected_value}) or ``degree of belief''
 
 $f(x | \theta)$
 
@@ -5692,7 +5733,7 @@ than one Outcome Variable (\emph{Multivariate Random Variables} or \emph{Random
 
 \begin{itemize}
   \item Multivariate Analysis (\S\ref{sec:multivariate_analysis})
-  \item Statistical Classification (\S\ref{sec:statistical_classification})
+  \item Statistical Classification (\S\ref{sec:classification})
     -- Discrete Response Variable
   \item Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimating
     (\S\ref{sec:estimation_theory}) the Relation between Variables in
@@ -5763,37 +5804,122 @@ Variance Analysis (ANOVA \S\ref{sec:variance_analysis})
 
 
 % ------------------------------------------------------------------------------
-\subsection{Statistical Classification}\label{sec:statistical_classification}
+\subsection{Statistical Classification}\label{sec:classification}
 % ------------------------------------------------------------------------------
 
-or \emph{Supervised Learning}
+example of \emph{Pattern Recognition} (assignment of some Output Value to a
+given Input Value), other examples are Regression Analysis
+(\S\ref{sec:regression_analysis}) and Cluster Analysis (Unsupervised Learning
+\S\ref{sec:cluster_analysis})
 
-cf. Cluster Analysis (Unsupervised Learning \S\ref{sec:cluster_analysis})
+\emph{Supervised Learning} where the Response Variable is \emph{Discrete}; cf.
+\emph{Regression} where the Response Variable is Continuous
 
-(Wasserman04, Ch.22)
+cf. Parameter Estimation (\S\ref{sec:estimation_theory})
 
 (wiki):
 
-Statistical Inference where the Response Variable is \emph{Discrete}
+\emph{Features} (Properties of Observations \S\ref{sec:observation} or
+\emph{Instances} \S\ref{sec:feature_vector}) are \emph{Explanatory Variables}
+(Regressors \S\ref{sec:independent_variable}) and possible values of the
+Dependent Variable (\S\ref{sec:dependent_variable}) are prediction
+\emph{Categories} (or \emph{Classes}, i.e. Categorical Variables
+\S\ref{sec:statistical_data_type}), sometimes called \emph{Outcomes} (cf. Trial
+Outcomes \S\ref{sec:outcome})
 
 an Algorithm (\S\ref{sec:algorithm}) that implements Classification is called a
-\emph{Classifier}
+\emph{Classifier} (or \emph{Classification Rule})
+
+finding a Classifier is based on a \emph{Training Dataset} (\S\ref{sec:dataset})
 
 often done with Logistic Regression (\S\ref{sec:logistic_regression})
 
-\emph{Features} (Properties of Observations \S\ref{sec:observation} or
-\emph{Instances}) are \emph{Explanatory Variables} (Regressors
-\S\ref{sec:independent_variable}) and possible values of the Dependent Variable
-(\S\ref{sec:dependent_variable}) are prediction categories (or \emph{Classes})
-called \emph{Outcomes}
+\fist VC Dimension (\S\ref{sec:vc_dimension}) -- measure of the capacity
+(expressive power) of a Space of Functions that can be Learned by a
+Classification Algorithm
 
-example of Pattern Recognition (assignment of some Output Value to a given Input
-Value), other examples are Regression Analysis (\S\ref{sec:regression_analysis})
-and Cluster Analysis
+\fist Decision Trees (Decision Theory \S\ref{sec:decision_tree}) --
+``Hierarchical Axis-parallel Classifiers''; Partitioning of Covariate Space;
+paths from Root to Leaf represent Classification Rules
+
+(Wasserman04, Ch.22)
 
 
 
 \subsubsection{Feature Vector}\label{sec:feature_vector}
+
+Explanatory Variable (Regressor), ``Instance''
+
+
+
+\subsubsection{Classification Model}\label{sec:classification_model}
+
+\paragraph{Generative Model}\label{sec:generative_model}\hfill
+
+Statistical Model of the Joint Probability Distribution
+(\S\ref{sec:joint_probability}) $P(X,Y)$
+
+Generative methods of determining Parameters for a Linear Classifier
+(\S\ref{sec:linear_classifier}):
+\begin{itemize}
+  \item Linear Discriminant Analysis (LDA or Fisher's Linear Discriminant)
+  \item Naive Bayes Classifier (\S\ref{sec:naive_bayes})
+\end{itemize}
+
+
+
+\paragraph{Discriminative Model}\label{sec:discriminative_model}\hfill
+
+Statistical Model of the Conditional Probability
+(\S\ref{sec:conditional_probability}) $P(Y | X = x)$
+
+Discriminative methods of determining Parameters for a Linear Classifier
+(\S\ref{sec:linear_classifier}):
+\begin{itemize}
+  \item Logistic Regression (\S\ref{sec:logistic_regression})
+  \item Perceptron (TODO: xref)
+  \item Support Vector Machines (\S\ref{sec:svm})
+\end{itemize}
+
+
+
+\subsubsection{Classification Error}\label{sec:classification_error}
+
+(Wasserman04, \S22.8)
+
+Loss Functions for Classifiers:
+\begin{itemize}
+  \item True Error Rate
+  \item Empirical Error Rate (Training Error Rate)
+\end{itemize}
+
+note that the Training Error Rate is a bad Estimate because it is Biased
+downward
+
+Bias-Variance tradeoff
+
+Estimating the Error Rate:
+
+Cross-validation Estimate
+
+Probability Inequalities -- Confidence Interval \fist Hoeffding's Inequality
+(\S\ref{sec:hoeffdings_inequality}); Empirical Risk Minimization (ERM
+\S\ref{sec:erm})
+
+
+
+\subsubsection{Naive Bayes Classifier}\label{sec:naive_bayes}
+
+Generative Model (\S\ref{sec:generative_model}) for Linear Classification
+(\S\ref{sec:linear_classifier})
+
+assumes Components of $X$ are Independent
+
+useful when $x$ is High-dimensional and Discrete
+
+
+
+\subsubsection{Binary Classifier}\label{sec:binary_classifier}
 
 \subsubsection{Linear Classifier}\label{sec:linear_classifier}
 
@@ -5801,12 +5927,143 @@ a \emph{Linear Predictor Function} assigns a ``score'' to each possible category
 $k$ by taking the Dot Product of the Feature Vector with a Vector of
 \emph{Weights}
 
+methods for determining Parameters of a Linear Classifier
+
+Generative (\S\ref{sec:generative_model}) methods:
 \begin{itemize}
-\item Logistic Regression (\S\ref{sec:logistic_regression})
-\item Probit Regression (TODO: xref)
-\item Perceptron Algorithm
-\item ...
+  \item Linear Discriminant Analysis (LDA or Fisher's Linear Discriminant
+    \S\ref{sec:lda})
+  \item Naive Bayes Classifier (\S\ref{sec:naive_bayes})
 \end{itemize}
+
+Discriminative (\S\ref{sec:discriminative_model}) methods:
+(\S\ref{sec:linear_classifier}):
+\begin{itemize}
+  \item Logistic Regression (\S\ref{sec:logistic_regression})
+  \item Perceptron (TODO: xref)
+  \item Support Vector Machines (\S\ref{sec:svm})
+\end{itemize}
+
+Probit Regression (\S\ref{sec:probit_regression}) -- FIXME: Discrminative ???
+
+``Kernalization'' (Wasserman04, \S22.10) -- a Linear Classifier in a
+Higher-dimensional Space corresponds to a Non-linear Classifier in the original
+space; \emph{Mercer's Theorem}
+
+
+
+\paragraph{Linear Discriminant Analysis (LDA)}\label{sec:lda}\hfill
+
+\emph{Fisher's Linear Discriminant}
+
+cf. Logistic Regression (\S\ref{sec:logistic_regression}) -- in LDA, the Joint
+Distribution $f(x,y = f(x|y)f(y)$ is Estimated by maximizing the Likelihood; in
+Logistic Regression, only $f(y|x)$ is Estimated and the Conditional Likelihood
+is maximized, neglecting the Marginal Distribution $f(x)$
+
+
+
+\paragraph{Support Vector Machine (SVM)}\label{sec:svm}\hfill
+
+Discriminative Model (\S\ref{sec:discriminative_model})
+
+Support Vectors
+
+Maximum Margin Hyperplane
+
+Slack Variables
+
+Quadratic Programming (\S\ref{sec:quadratic_programming})
+
+
+
+\subsubsection{Quadratic Classifier}\label{sec:quadratic_classifier}
+
+Quadratic Disciminant Analysis (QDA)
+
+
+
+\subsubsection{k-nearest Neighbors (KNN) Classfier}\label{sec:knn_classifier}
+
+Non-parametric method
+
+Instance-based Learning or Lazy Learning
+
+
+
+\subsubsection{Ensemble Learning}\label{sec:ensemble_learning}
+
+use of multiple Learning Algorithms to obtain better Predictive performance
+
+
+
+\paragraph{Bayes Classifier}\label{sec:bayes_classifier}\hfill
+
+\emph{Bayes Optimal Classifier}
+
+\emph{Bayes Rule} (\S\ref{sec:bayes_rule})
+
+(Wasserman04, \S22.2)
+
+$h^*(x)$
+
+note the Bayes Classifier is not ``Bayesian'', i.e. it can be Estimated using
+either Frequentist or Bayesian methods
+
+\textbf{Thm.} \emph{Bayes Rule is Optimal, i.e. if $h$ is any other Classifier
+  then $L(h^*) \leq L(h)$ where $L$ is the True Error Rate Loss Function}
+
+approaches:
+\begin{itemize}
+  \item Empirical Risk Minimization (ERM \S\ref{sec:erm})
+  \item Regression
+  \item Density Estimation
+\end{itemize}
+
+Regression Function $r(x)$
+
+Bayes Classifier for $Y \in \mathcal{Y} = \{0, 1\}$:
+\[
+  h^*(x) = \begin{cases}
+    1 & \text{if} r(x) > 0.5 \\
+    0 & \text{otherwise} \\
+  \end{cases}
+\]
+
+
+
+\paragraph{Bootstrap Aggregation}\label{sec:bootstrap_aggregation}\hfill
+
+or \emph{Bagging}
+
+Variance reduction
+
+useful for highly Non-linear Classifiers (cf. Decision Trees
+\S\ref{sec:decision_tree})
+
+
+
+\subparagraph{Random Subspace Method}\label{sec:random_subspace_method}\hfill
+
+\emph{Feature Bagging} or \emph{Attribute Bagging}
+
+
+
+\paragraph{Boosting}\label{sec:boosting}\hfill
+
+Bias (\S\ref{sec:bias}) reduction
+
+emphasizes Mis-classifications in previous Models
+
+AdaBoost
+
+Gradient Boosting
+
+
+
+\paragraph{Stacked Generalization}\label{sec:stacked_generalization}\hfill
+
+or \emph{Stacking}
 
 
 
@@ -5830,7 +6087,12 @@ Note that Regression Analysis is different from Multivariate Analysis
 Distribution of a single Outcome Variable is considered (cf. Multivariate
 Regression \S\ref{sec:multivariate_regression}).
 
+\emph{Supervised Learning} where the Response Variable is \emph{Continuous}; cf.
+\emph{Classification} (\S\ref{sec:classification}) where the Response Variable
+is Discrete
+
 specifically, an Estimation of the \emph{Regression Function}
+
 $r(x) = E(Y | X = x)$.
 
 commonly this is an Estimate of the Conditional Expectation
@@ -5869,7 +6131,7 @@ cf. ``Predictive Analytics''
 
 example of \emph{Pattern Recognition} (assignment of some Output Value to a
 given Input Value), other examples are Statistical Classification
-(\S\ref{sec:statistical_classification})--when the Response Variable is
+(\S\ref{sec:classification})--when the Response Variable is
 Discrete--and Cluster Analysis (\S\ref{sec:cluster_analysis})
 
 cf. Numerical Analysis (\S\ref{sec:numerical_analysis}): Interpolation
@@ -6027,6 +6289,12 @@ Additive Model (AM)
 not fully Non-parametric
 
 \emph{Backfitting} Algorithm
+
+
+
+\paragraph{k-nearest Neighbors (KNN) Regression}\label{sec:knn_regression}
+
+Instance-based Learning or Lazy Learning
 
 
 
@@ -6253,7 +6521,14 @@ Submodel \emph{Deviance}
 
 or \emph{Logit Regression}
 
-cf. Statistical Classification (\S\ref{sec:statistical_classification})
+cf. Statistical Classification (\S\ref{sec:classification}) -- Logistic
+Regression as a Discriminative (\S\ref{sec:discriminative_model}) methods of
+determining Parameters for a Linear Classifier (\S\ref{sec:linear_classifier})
+
+\fist Linear Discriminant Analysis (LDA \S\ref{sec:lda}) -- in LDA, the Joint
+Distribution $f(x,y = f(x|y)f(y)$ is Estimated by maximizing the Likelihood; in
+Logistic Regression, only $f(y|x)$ is Estimated and the Conditional Likelihood
+is maximized, neglecting the Marginal Distribution $f(x)$
 
 \emph{Logistic Model}: uses a Logistic Function (\S\ref{sec:logistic_function})
 to Model a \emph{Binary Dependent Variable} $Y_i \in \{ 0, 1 \}$
@@ -6324,6 +6599,10 @@ essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
 
 \subsubsection{Probit Regression}\label{sec:probit_regression}
 
+Linear Classifier (\S\ref{sec:linear_classifier})
+
+
+
 \subsubsection{Multiple Regression}\label{sec:multiple_regression}
 
 Definite Quadratic Forms (\S\ref{sec:definite_quadratic})
@@ -6368,7 +6647,7 @@ cf. Multiple Regression (\S\ref{sec:multiple_regression}) -- uses Additive Logic
 
 Unsupervised Learning
 
-cf. Classification (Supervised Learning \S\ref{sec:statistical_classification})
+cf. Classification (Supervised Learning \S\ref{sec:classification})
 
 example of Pattern Recognition (assignment of some Output Value to a given Input
 Value), other examples are Statistical Classification and Regression Analysis
@@ -6393,6 +6672,15 @@ Models
 extends Regression (\S\ref{sec:regression_analysis}) and Clustering
 (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
 
+simplest Neural Network Regression Model:
+\[
+  Y = \beta_0 + \sum_{j=1}^p \beta_j \sigma (\alpha_0 + \alpha^T X)
+\]
+where $\sigma$ is a Smooth Function, often:
+\[
+  \sigma(v) = \frac{e^v}{1 + e^v}
+\]
+
 
 
 % ==============================================================================
@@ -6412,6 +6700,30 @@ extends Regression (\S\ref{sec:regression_analysis}) and Clustering
 % ------------------------------------------------------------------------------
 
 \emph{VC Theory}
+
+
+
+\subsubsection{Shattered Set}\label{sec:shattered_set}
+
+\emph{Shatter Coefficient}
+
+
+
+\subsubsection{VC Class}\label{sec:vc_class}
+
+\emph{Hypothesis Class}
+
+
+
+\paragraph{VC Dimension}\label{sec:vc_dimension}\hfill
+
+\emph{Model Complexity} (\S\ref{sec:statistical_model})
+
+measure of the capacity (expressive power) of a Space of Functions that can be
+Learned by a Statistical Classification Algorithm (\S\ref{sec:classification})
+
+defined as the Cardinality of the largest Set of Points that the Algorithm can
+\emph{Shatter} (\S\ref{sec:shattered_set})
 
 
 
@@ -6480,6 +6792,8 @@ or \emph{Random Process}
 
 a \emph{Random Sequence} (\S\ref{sec:random_sequence}) is a special case of
 Stochastic Process where the Index Set is some Subset of the Integers
+
+\fist not necessarily IID (\S\ref{sec:iid}) Sequences
 
 \fist cf. Data Generating Process (\S\ref{sec:data_generating_process})
 
