@@ -3108,6 +3108,8 @@ ANalysis Of VAriance (ANOVA)
 
 repeated Measures (Observations \S\ref{sec:observation})
 
+General Linear (Multivariate) Regression (\S\ref{sec:multivariate_regression})
+
 cf. Mixed Models (\S\ref{sec:mixed_model})
 
 Analysis of the the differences among ``group means'' (FIXME: clarify) in a
@@ -3766,6 +3768,10 @@ Directed Separation or $d$-separation
 
 
 \subparagraph{Multilevel Model}\label{sec:multilevel_model}\hfill
+
+Hierarchical Linear Models
+
+
 
 \subparagraph{Random Tree}\label{sec:random_tree}\hfill
 
@@ -5067,6 +5073,8 @@ or \emph{Cross Tabulation} or \emph{Crosstab}
 displays the Multivariate (\S\ref{sec:multivariate_statistics}) Frequency
 Distribution of Variables
 
+Two-way Tables
+
 Log-linear Model (\S\ref{sec:log_linear})
 
 
@@ -6306,7 +6314,7 @@ Relationships are modeled using \emph{Linear Predictor Functions}
 (\S\ref{sec:linear_predictor}) which are Linear Functions of a Set of
 Coefficients and Explanatory (Independent) Variables:
 \[
-  Y_i = \beta_0 + \beta_1\psi_1(X_{i1}) + \cdots +
+  Y_i = \beta_0 + \beta_1\phi_1(X_{i1}) + \cdots +
     \beta_p\phi_p(X_{ip}) + \varepsilon_i
 \]
 for $i \in \{1, \ldots, n\}$
@@ -6350,6 +6358,9 @@ Regression, a Mean-Square Error Loss Function is always \emph{Convex} (example
 -- article: \emph{Linear Programming for Linear Regression};
 \url{https://lazyprogrammer.me/linear-programming-for-linear-regression/}
 
+\fist Hierarchical Linear Models (Multilevel Models
+\S\ref{sec:multilevel_model})
+
 
 
 \paragraph{Simple Linear Regression}\label{sec:simple_linear_regression}\hfill
@@ -6380,30 +6391,13 @@ Least Squares Estimates (\S\ref{sec:least_squares}): TODO
 
 
 
-\paragraph{Multivariate Regression}
-\label{sec:multivariate_regression}\hfill
-
-\emph{Multivariate Regression Model} or \emph{General Linear Model}
-
-\fist not to be confused with Generalized Linear Models
-(\S\ref{sec:generalized_linear_model})
-
-multiple Correlated Dependent Variables
-
-cf. Multivariate Statistics (\S\ref{sec:multivariate_statistics})
-
-cf. Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
--- multiple Correlated Independent Variables
-
-\fist Artificial Neural Networks (ANNs \S\ref{sec:ann}) generalize Regression
-and Clustering (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
-
-
-
 \paragraph{Multiple Linear Regression}
 \label{sec:multiple_linear_regression}\hfill
 
 Multiple Regression (\S\ref{sec:multiple_regression})
+
+special case of General Linear (Multivariate) Regression
+(\S\ref{sec:multivariate_regression})
 
 multiple Correlated Independent Variables
 
@@ -6418,6 +6412,44 @@ Independent Variable
 cf. Multivariate (Linear) Regression (General Linear Regression
 \S\ref{sec:multivariate_linear_regression}) -- multiple Correlated Dependent
 Variables
+
+
+
+\paragraph{Multivariate Regression}
+\label{sec:multivariate_regression}\hfill
+
+\emph{Multivariate Regression Model} or \emph{General Linear Model}
+
+(wiki):
+
+$\mathbf{Y} = \mathbf{XB} + \mathbf{U}$
+
+$\mathbf{Y}$ -- Matrix of Multivariate Measurements: each column being a Set of
+Measurements on one of the Dependent Variables
+
+$\mathbf{X}$ -- Matrix of Observations of Independent Variables: each column
+being a Set of Observations of one of the Independent Variables
+
+$\mathbf{B}$ -- Matrix of Parameters to be Estimated
+
+$\mathbf{U}$ -- Matrix of Errors
+
+\begin{itemize}
+  \item Variance Analysis (ANOVA \S\ref{sec:variance_analysis})
+\end{itemize}
+
+\fist not to be confused with Generalized Linear Models
+(\S\ref{sec:generalized_linear_model})
+
+multiple Correlated Dependent Variables
+
+cf. Multivariate Statistics (\S\ref{sec:multivariate_statistics})
+
+cf. Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
+-- multiple Correlated Independent Variables
+
+\fist Artificial Neural Networks (ANNs \S\ref{sec:ann}) generalize Regression
+and Clustering (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
 
 
 
@@ -6443,6 +6475,9 @@ not to be confused with General Linear Models (Multivariate Regression Models
 Least-squares Estimate (\S\ref{sec:least_squares}) may be used to fit a
 Generalized Linear Model by iteratively applying the Local Quadratic
 Approximation (FIXME: explain)
+
+\fist a Logistic Regression Model (\S\ref{sec:logistic_regression}) can be
+formulated as a specific case of Generalized Linear Model
 
 
 
@@ -6521,6 +6556,9 @@ Submodel \emph{Deviance}
 
 or \emph{Logit Regression}
 
+can be formulated as a special case of Generalized Linear Models
+(\S\ref{sec:generalized_linear_model})
+
 cf. Statistical Classification (\S\ref{sec:classification}) -- Logistic
 Regression as a Discriminative (\S\ref{sec:discriminative_model}) methods of
 determining Parameters for a Linear Classifier (\S\ref{sec:linear_classifier})
@@ -6597,6 +6635,12 @@ essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
 
 
 
+\subparagraph{Ordered Logit}\label{sec:ordered_logit}\hfill
+
+\emph{Ordered Logistic Regression} or \emph{Proportional Odds Model}
+
+
+
 \subsubsection{Probit Regression}\label{sec:probit_regression}
 
 Linear Classifier (\S\ref{sec:linear_classifier})
@@ -6630,6 +6674,15 @@ under ``suitable assumptions'' on the Priors, Kriging gives the \emph{Best
   Linear Unbiased Prediction} (BLUP \S\ref{sec:blup}) of the intermediate values
 
 \fist Spatial Analysis (\S\ref{sec:spatial_analysis})
+
+
+
+\subsubsection{Nonlinear Regression}\label{sec:nonlinear_regression}
+
+Observational Data Modeled by a by a Non-linear Function of Model Parameters and
+one or more Independent Variables
+
+$Y = f(\vec{X}, \vec{b})$
 
 
 
