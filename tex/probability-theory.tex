@@ -235,13 +235,12 @@ Mutually Exclusive States
 
 \fist cf. Independence (\S\ref{sec:independence})
 
-Independent if and only if $P(A \cap B) = P(A) P(B)$
+Independent if and only if $P(A \cap B) = P(A) P(B)$, or in terms of Conditional
+Probability (\S\ref{sec:conditional_probability}), $A$ and $B$ are Independent
+if and only if $P(A|B) = P(A)$ or $P(B|A) = P(B)$
 
 \fist two Events are Independent if and only if their Odds Ratio
 (\S\ref{sec:odds_ratio}) equals $1$
-
-in terms of Conditional Probability (\S\ref{sec:conditional_probability}), $A$
-and $B$ are Independent if and only if $P(A|B) = P(A)$ or $P(B|A) = P(B)$
 
 an Event is Self-independent if and only if $P(A) = 0$ or $P(A) = 1$
 
@@ -570,6 +569,8 @@ where $A_i$ is the \emph{Prior Probability} of $A$ and $P(A_i|B)$ is the
 
 $P(A \cap B) = P(A)P(B)$
 
+for Dependent Events, $P(A) \neq P(A|B)$
+
 two Random Variables (\S\ref{sec:random_varible}) are \emph{Dependent}
 (\S\ref{sec:dependence}) if they do not Satisfy the Property of
 Probabilistic Independence:
@@ -584,6 +585,12 @@ two Events are Independent if and only if their Odds Ratio
 if $X$ and $Y$ are Independent and have Finite Second Moments, then they are
 Uncorrelated (\S\ref{sec:correlation}); not all Uncorrelated Variables are
 Independent
+
+for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
+$Var(X - Y) = Var(X) + Var(Y)$
+
+cf. Binomial Distribution (\S\ref{sec:binomial_distribution}) -- Sum of
+Independent Trials; Sampling 10\% Rule (TODO)
 
 Tests for Independence (Wasserman04, Ch.15) %TODO
 
@@ -874,6 +881,9 @@ An \emph{Observation} (\emph{Observed Value}, \emph{Measurement},
 \emph{Realization}, or \emph{Random Variate}) is the Element of a Random
 Variable's State Space corresponding to the actual Outcome (\S\ref{sec:outcome})
 resulting from performing an Experiment (\S\ref{sec:experiment}).
+
+in Statistics, it is commonly assumed that Observations are \emph{Independent
+  and Identifcally Distributed} (\emph{IID} \S\ref{sec:iid})
 
 \fist A \emph{Data Generating Process} (\S\ref{sec:data_generating_process})
 is a possibly unspecified \emph{Probabilistic (Statistical) Model}
@@ -1281,6 +1291,9 @@ $f(x,y)$ and $a$, $b$, $c$ are Constants, then:
 
 \fist Estimator: Sample Variance (\S\ref{sec:sample_variance})
 
+for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
+$Var(X - Y) = Var(X) + Var(Y)$
+
 \emph{Conditional Variance} $V(X|Y)$
 
 $V(Y) = E(V(Y|X)) + V(E(Y|X))$
@@ -1341,6 +1354,9 @@ variable'' when the Cause is changed
 Random Variables are \emph{Dependent} if they do not Satisfy the Property of
 \emph{Probabilistic Independence} (\S\ref{sec:independence})
 
+Stochastic Processes (\S\ref{sec:stochastic_process}): Sequences of Dependent
+Random Variables
+
 \fist Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimation
 (\S\ref{sec:estimation_theory}) of Relations in Multivariate Data
 (\S\ref{sec:random_vector})
@@ -1360,6 +1376,8 @@ measure of how close two Random Variables are to having a \emph{Linear
 
 \fist cf. Linear Regression (\S\ref{sec:linear_regression})
 
+cf. Observational Studies
+
 \[
   \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
 \]
@@ -1371,10 +1389,6 @@ Independent
 
 if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$
 
-\fist Correlation Coefficient (\S\ref{sec:correlation_coefficient})
-
-(wiki):
-
 
 
 
@@ -1383,6 +1397,17 @@ if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$
 \emph{Pearson Product-moment Correlation Coefficient}
 
 $\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
+
+Sample Correlation Coefficient $-1 \leq r \leq 1$:
+\[
+  r = \frac{1}{n-1} \sum_{i=1}^n
+    \Big(\frac{x_i - \overline{x}}{s_x}\Big)
+    \Big(\frac{y_i - \overline{y}}{s_y}\Big)
+\]
+where $s_x$ and $s_y$ are the Sample Standard Deviations of $x$ and $y$
+
+\fist cf. $r^2$ -- Coefficient of
+Determination (\S\ref{sec:determination_coefficient})
 
 
 
@@ -1497,11 +1522,26 @@ Random Variable
 
 \subsubsection{Binomial Random Variable}\label{sec:binomial_random_variable}
 
+number of ``Successes'' in $n$ Independent Trials with Constant Success
+Probability $p$
+
+can be viewed as a Sum of a ``Bernoulli'' Random Variables, i.e. the Sum of $n$
+Binomial Variables with $n = 1$
+
 Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
 
 Binomial Distribution (\S\ref{sec:binomial_distribution})
 
+cf. Binomial Coefficients (\S\ref{sec:binomial_coefficient})
+
+\fist cf. Geometric Distribution (\S\ref{sec:geometric_distribution}) -- number
+of Trials until first Success
+
 $X \sim B(n,p)$
+
+Expected Value $E(X) = np$
+
+Variance $\sigma^2 = np(1-p)$
 
 Probability Mass Function:
 \[
@@ -1572,6 +1612,9 @@ a Random Sequence is a special case of \emph{Stochastic Process}
 (\S\ref{sec:stochastic_process}) where the Index Set is some Subset of the
 Integers
 
+Stochastic Processes: Sequences of possibly \emph{Dependent}
+(\S\ref{sec:dependence}) Random Variables; cf. IID (\S\ref{sec:iid}) Sequences
+
 cf. Random Vector (\S\ref{sec:random_vector})
 
 note that Axiomatic Probability Theory (\S\ref{sec:probability_axioms})
@@ -1624,7 +1667,10 @@ or \emph{Random Vector}
 
 $X = (X_1, \ldots, X_n)$
 
-cf. \emph{Random Sequence} (\S\ref{sec:random_sequence})
+cf. Random Sequences (\S\ref{sec:random_sequence})
+
+\fist cf. Stochastic Processes (\S\ref{sec:stochastic_process}) -- Sequences of
+not necessarily IID (\S\ref{sec:iid}) Random Variables
 
 \fist Multivariate Statistics (\S\ref{sec:multivariate_statistics}) --
 \emph{simultaneous} Observation and Analysis of more than one Outcome Variable
@@ -1651,10 +1697,8 @@ and if $F$ has Density $f$, then:
 $X_1, \ldots, X_n$ are then called a \emph{Random Sample of Size $n$ from $F$}
 (\S\ref{sec:random_sample})
 
-in Statistics it is commonly assumed that Observations are IID
-
-\fist cf. Stochastic Processes (\S\ref{sec:stochastic_process}) -- Sequences of
-not necessarily IID Random Variables
+in Statistics it is commonly assumed that Observations (\S\ref{sec:observation})
+are IID
 
 
 
@@ -2008,6 +2052,14 @@ for a Random Variable $X$ representing a Binary Outcome:
 \end{itemize}
 for some $p \in [0,1]$
 
+Mean:
+\[
+  \mu = p
+\]
+Variance:
+\[
+  \sigma^2 = p(1-p)
+\]
 PMF:
 \[
   f(x) = p^x(1-p)^{1-x}
@@ -2033,28 +2085,39 @@ generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
 
 \paragraph{Binomial Distribution}\label{sec:binomial_distribution}\hfill
 
+Sum of Independent Trials; cf. Normal Distribution
+(\S\ref{sec:normal_distribution})
+
+Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
+
+Binomial Random Variable (\S\ref{sec:binomial_random_variable})
+
 $k = 2$ , $n > 1$
+
+cf. Binomial Coefficients (\S\ref{sec:binomial_coefficient})
+
+\fist cf. Geometric Distribution (\S\ref{sec:geometric_distribution}) -- number
+of Trials until first Success
+
+\fist Poisson Distribution (\S\ref{sec:poisson_distribution}) -- Limit of the
+Binomial Distribution as number of Trials $n \rightarrow \infty$
 
 Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
 $p \in [0,1]$:
 \[
   X \sim B(n,p)
 \]
-describes the Probability of getting exactly $x$ ``successes'' in $n$ ``trials''
-where the Probability of ``success'' is $p$:
+describes the Probability of getting exactly $x$ ``Successes'' in $n$ Trials
+where the Probability of Success is $p$:
 \[
   P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
 \]
 
 Expected Value $E(X) = np$
 
-Binomial Random Variable (\S\ref{sec:binomial_random_variable})
-
-Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
-
 Mean $\mu = n p$
 
-Variance $\sigma^2 = n p q$
+Variance $\sigma^2 = n p (1-p)$
 
 Sample Proportion %FIXME
 
@@ -2101,12 +2164,18 @@ often used as final layer of a Neural Network-based Classifier
 
 \subsubsection{Poisson Distribution}\label{sec:poisson_distribution}
 
-Poisson Process (\S\ref{sec:poisson_process})
-
 $P(x; \lambda t) = \frac{e^{-\lambda t} (\lambda t)^x}{x!}$
 where $\lambda$ is the average number of outcomes per unit time
 
+Expected Value is the Limit of the Binomial Distribution as number of Trials
+$n \rightarrow \infty$:
+\[
+  E(X) = \lambda = np
+\]
+
 models counts of rare events, e.g. radioactive decay, traffic accidents
+
+Poisson Process (\S\ref{sec:poisson_process})
 
 
 
@@ -2114,7 +2183,15 @@ models counts of rare events, e.g. radioactive decay, traffic accidents
 
 $P(X = k) = p(1-p)^{k-1}$ for $k \in \{1, 2, 3, \ldots\}$
 
-where $X$ is the number of Trials needed until the first Success
+where $X$ is the number of Independent Trials with Constant Probability of
+``Success'' until the first Success
+
+cf. Binomial Distribution (\S\ref{sec:binomial_distribution}) -- number of
+Successes after $n$ Trials
+
+cf. Geometric Series (\S\ref{sec:geometric_series})
+
+Expected Value $E(X) = 1 + (1-p) + (1-p)^2 + \cdots = \frac{1}{p}$
 
 
 
@@ -2202,6 +2279,9 @@ has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
   \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
 \]
 
+cf. Binomial Distribution (Discrete \S\ref{sec:binomial_distribution})
+-- Sum of Independent Trials
+
 a Normal Distribution corresponds to a $t$-distribution
 (\S\ref{sec:t_distribution}) with $\nu = \infty$ Degrees of Freedom
 
@@ -2223,6 +2303,9 @@ as a consequence of the Central Limit Theorem, Random Errors
 
 \fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
 Infinite-dimensional generalizations of Multivariate Normal Distributions
+
+\emph{Empirical Rule} 68-95-99.7 Rule -- 68\% within 1 Standard Deviation of the
+Mean, 95\% within 2 Standard Deviations, 99.7\% within 3 Standard Deviations
 
 2018 - Eric Jang
 - \emph{Normalizing Flows Tutorial}
@@ -2268,6 +2351,10 @@ $\nu$ -- Degrees of Freedom
 
 a Normal Distribution (\S\ref{sec:normal_distribution}) corresponds to a
 $t$-distribution with $\nu = \infty$ Degrees of Freedom
+
+Sampling Distribution (\S\ref{sec:sampling_distribution}) for low Sample Size
+
+$t$-statistic (\S\ref{sec:t_statistic})
 
 $t$-test (\S\ref{sec:t_test})
 
@@ -2441,6 +2528,18 @@ Continuous Random Variables:
   \item $P[(X,Y) \in B] = \iint\limits_B f(x,y) dA$
 \end{enumerate}
 
+(Wasserman04, \S23.1):
+
+for Random Variables $X_1, \ldots, X_n$, the Joint Density $f(x_1, \ldots, x_n)$
+is:
+\begin{flalign*}
+  f(x_1, \ldots, x_n)
+    & = f(x_1) f(x_2 | x_1) \cdots f(x_n | x_1, \ldots, x_{n-1}) \\
+    & = \prod_{i=1}^n f(x_i | x_1, \ldots, x_{i-1}) \\
+\end{flalign*}
+
+\asterism
+
 \fist \emph{Cross-variation Assumptions} -- Model-based Statistical Assumptions
 (\S\ref{sec:statistical_assumption}) involving Joint Probability Distributions
 of either Observations or Random Errors in a Model; simple Models may Assume
@@ -2534,6 +2633,8 @@ $f_Y(y) = \int f_{X,Y}(x,y) dx$
 
 ``the Distribution of a Sum of Independent Random Variables can be approximated
 by a Normal Distribution''
+
+\fist Sampling Distribution (\S\ref{sec:sampling_distribution})
 
 for a Sequence of Random Variables (\S\ref{sec:random_variable})
 $X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
@@ -2641,6 +2742,13 @@ Statistical Model (\S\ref{sec:statistical_model})
 Statistical Inference (\S\ref{sec:inferential_statistics})
 
 Statistical Learning Theory (\S\ref{sec:statistical_learning_theory})
+
+\emph{Statistical Studies}:
+\begin{itemize}
+  \item Sample Study -- Population Parameter Estimate (Statistic)
+  \item Observational Study -- Explanatory, Explained Variables (Correlation)
+  \item Experimental Study -- Control, Treatment (Causality)
+\end{itemize}
 
 
 
@@ -2791,7 +2899,14 @@ $\mu$, $\sigma$
 
 
 
-\subsubsection{Proportion}\label{sec:statistical_proportion}
+\subsubsection{Population Proportion}\label{sec:proportion}
+
+Population Parameter $p$ describing a percentage value associated with a
+Population
+
+\fist Confidence Interval (\S\ref{sec:confidence_interval})
+
+
 
 \paragraph{Lexis Ratio}\label{sec:lexis_ratio}\hfill
 
@@ -2816,6 +2931,9 @@ of a Statistical Unit (\S\ref{sec:statistical_unit}) in a Statistical Sample.
 \fist a Statistical Model (\S\ref{sec:statistical_model}) ``embodies'' the Set
 of Statistical Assumptions that concern the \emph{Generation}
 (\S\ref{sec:data_generating_process}) of Sample Data
+
+Binomial Distribution (\S\ref{sec:binomial_distribution}) -- Independence
+Assumption: Sampling 10\% Rule (TODO)
 
 
 
@@ -2974,6 +3092,10 @@ Horvitz-Thompson Estimator (\S\ref{sec:horvitz_thompson})
 
 
 
+\subsubsection{Cluster Sample}\label{sec:cluster_sample}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Non-random Sample}\label{sec:nonrandom_sample}
 % ------------------------------------------------------------------------------
@@ -2982,7 +3104,9 @@ Horvitz-Thompson Estimator (\S\ref{sec:horvitz_thompson})
 
 cf. Statistical Bias (\S\ref{sec:statistical_bias})
 
-\emph{Accidental Sample} (\emph{Convience Sample})
+Voluntary Sampling, Response Bias
+
+\emph{Accidental Sample} (\emph{Convenience Sample})
 
 \emph{Consecutive Sample}
 
@@ -2999,6 +3123,8 @@ cf. Statistical Bias (\S\ref{sec:statistical_bias})
 % ------------------------------------------------------------------------------
 \subsection{Statistic}\label{sec:statistic}
 % ------------------------------------------------------------------------------
+
+cf. Sample Study
 
 (wiki):
 
@@ -3021,6 +3147,8 @@ Statistic is a \emph{Sampling Distribution} (\S\ref{sec:sampling_distribution})
 a \emph{Statistic} is to a \emph{Sample} as a \emph{Parameter}
 (\S\ref{sec:population_parameter}) is to a Population (\S\ref{sec:population})
 
+Confidence Interval (\S\ref{sec:confidence_interval})
+
 \fist an \emph{Estimator} (\S\ref{sec:estimator}) is a Statistic used to
 Estimate a Population Parameter
 
@@ -3039,6 +3167,18 @@ $\overline{x}$, $\sigma^2$
     (\S\ref{sec:test_statistic}) used to Test a Hypothesis
 \end{itemize}
 
+\asterism
+
+\begin{itemize}
+  \item $z$-score (Standard Score or $z$-statistic \S\ref{sec:standard_score})
+    -- Estimation of Population Proportion (\S\ref{sec:proportion})
+  \item $t$-statistic (\S\ref{sec:t_statistic}) -- Estimation of Population Mean
+    (\S\ref{sec:expected_value}) from a Sampling Distribution where the Sample
+    Means of the Population Standard Deviation is unknown
+\end{itemize}
+
+\asterism
+
 (Wasserman04 \S9.13.2) a Statistic induces a \emph{Partition} on the Set of
 Outcomes (FIXME: clarify)
 
@@ -3048,10 +3188,15 @@ Outcomes (FIXME: clarify)
 
 Probability Distribution of a Statistic (\S\ref{sec:statistic})
 
+\fist Central Limit Theorem (\S\ref{sec:central_limit_theorem})
+
 Statistical Inference (\S\ref{sec:inferential_statistics})
 
 the Standard Deviation (\S\ref{sec:standard_deviation}) of a Sampling
 Distribution is called the \emph{Standard Error} (\S\ref{sec:standard_error})
+
+$t$-distribution (\S\ref{sec:t_distribution}) -- Sampling Distribution for small
+Sample Size
 
 (Wasserman04 \S6.3.1):
 the Distribution of a Point Estimator (\S\ref{sec:point_estimator})
@@ -3097,6 +3242,27 @@ $T$ is called the \emph{Natural Sufficient Statistic}
 
 
 \subsubsection{Degrees of Freedom}\label{sec:statistical_freedom}
+
+\subsubsection{$t$-statistic}\label{sec:t_statistic}
+
+$t$-distribution (\S\ref{sec:t_distribution})
+
+$t$-test (\S\ref{sec:t_test})
+
+cf. $z$-score (Standard Score \S\ref{sec:standard_score})
+
+conditions:
+\begin{itemize}
+  \item Sample is Random
+  \item Normal Condition -- $n \geq 30$, or else original Distribution is Normal
+    or Symmetric around Mean
+  \item Observations are Independent
+\end{itemize}
+
+Margin of Error (\S\ref{sec:margin_of_error})
+
+Degree of Freedom (\S\ref{sec:statistical_freedom}) -- Sample Size minus $1$;
+different $t$-distribution depending on the Sample Size
 
 
 
@@ -3150,9 +3316,22 @@ Estimates the Variance (\S\ref{sec:variance}) when scaled for the number of
 
 equal to SSR + ESS
 
+Determination Coefficient (\S\ref{sec:determination_coefficient}):
+\[
+  r^2 = 1 - \frac{
+    ESS_{\hat{y}}
+  }{
+    TSS_{\overline{y}}
+  }
+\]
+
 
 
 \paragraph{Sum of Squared Residuals (SSR)}\label{sec:ssr}\hfill
+
+or \emph{SSE} or \emph{SSR}
+
+$SSE = \sum(Y_i - \hat{Y_i})^2$
 
 Residuals (\S\ref{sec:residual})
 
@@ -3171,6 +3350,17 @@ Parameters that minimize SSR are called \emph{Least Squares Estimates}
 
 
 \paragraph{Explained Sum of Squares (ESS)}\label{sec:ess}\hfill
+
+Expected Deviation from Mean: $SSR = \sum(\hat{Y}_i - \overline{Y})^2$
+
+Determination Coefficient (\S\ref{sec:determination_coefficient}):
+\[
+  r^2 = 1 - \frac{
+    ESS_{\hat{y}}
+  }{
+    TSS_{\overline{y}}
+  }
+\]
 
 
 
@@ -3271,7 +3461,7 @@ Central Tendency for Ratio Measurement (\S\ref{sec:measurement_level})
 
 \subsubsection{Statistical Dispersion}\label{sec:dispersion}
 
-or \emph{Variability}
+\emph{Variability} or \emph{Spread}
 
 measured by Statistics of the Distribution of Deviations (\S\ref{sec:deviation})
 
@@ -3284,6 +3474,20 @@ cf. \emph{Uncertainty}
 
 2018 - \emph{Uncertainty: a Tutorial} -
 \url{https://blog.evjang.com/2018/12/uncertainty.html}
+
+
+
+\paragraph{Range}\label{sec:range}\hfill
+
+\subparagraph{Midrange}\label{sec:midrange}\hfill
+
+Average of Max and Min
+
+
+
+\paragraph{InterQuartile Range (IQR)}\label{sec:iqr}\hfill
+
+Outliers:  $Q1 - 1.5 \times IQR$, $Q3 + 1.5 \times IQR$
 
 
 
@@ -3313,6 +3517,27 @@ cf. Confidence Interval (\S\ref{sec:confidence_interval})
 \emph{Corrected Standard Deviation}
 
 \emph{Unbiased Standard Deviation}
+
+
+
+\subparagraph{Standard Score}\label{sec:standard_score}\hfill
+
+or \emph{$z$-score}
+
+cf. Standard Error (\S\ref{sec:standard_error})
+
+\fist Statistics (\S\ref{sec:statistic}) --
+Estimation of Standard Deviation of Population Proportion
+(\S\ref{sec:population_proportion}) from the Sample mean and Sample Standard
+Deviation
+
+cf. $t$-statistic (\S\ref{sec:t_statistic}) for Estimating Population Mean
+
+(wiki): signed fractional number of Standard Deviations by which an Observation
+or Data Point is \emph{above} the Mean:
+\[
+  z = \frac{x - \mu}{\sigma}
+\]
 
 
 
@@ -3905,6 +4130,19 @@ approaches:
 
 \fist cf. Approximation Theory (\S\ref{sec:approximation_theory})
 
+Sample Distribution (\S\ref{sec:sample_distribution})
+
+Confidence Interval (\S\ref{sec:confidence_interval}), Margin of Error
+(\S\ref{sec:margin_of_error})
+
+Estimating:
+\begin{itemize}
+  \item Population Proportion (\S\ref{sec:proportion}) -- $z$-score (Standard
+    Score \S\ref{sec:standard_score})
+  \item Population Mean (\S\ref{sec:expected_value})
+  \item ...
+\end{itemize}
+
 
 
 \subsubsection{Estimator}\label{sec:estimator}
@@ -3996,17 +4234,31 @@ the Sample Mean has approximately a Normal Distribution for large $n$
 
 
 
-\subparagraph{Sample Variance}\label{sec:sample_variance}
+\subparagraph{Sample Variance}\label{sec:sample_variance}\hfill
 
 Estimates the Population Variance
 
+$s^2_{n-1}$ -- Unbiased Sample Variance
 
 
-\subparagraph{Sample Covariance}\label{sec:sample_covariance}
+
+\subparagraph{Sample Covariance}\label{sec:sample_covariance}\hfill
 
 Estimates the Population Covariance
 
 
+
+\subparagraph{Sample Standard Deviation}
+\label{sec:sample_standard_deviation}\hfill
+
+$\sqrt{s^2_{n-1}}$ -- Biased
+
+\fist Root-Mean-Square Deviation (RMSD \S\ref{sec:rmsd}) -- Sample Standard
+Deviation of Regression Residuals
+
+
+
+\subparagraph{Sample Bias}\label{sec:sample_bias}\hfill
 
 \subparagraph{Maximum Likelihood Estimation}\label{sec:mle}\hfill
 
@@ -4138,11 +4390,18 @@ Central Tendency (\S\ref{sec:central_tendency}) for Interval Measurement
 (\S\ref{sec:measurement_level})
 %FIXME
 
+cf. Regression Error, Mean Square Deviation (MSD \S\ref{sec:regression_error})
+
 \fist Sum of Squared Deviations (\S\ref{sec:sum_squared_deviation})
 
 
 
 \paragraph{Absolute Deviation}\label{sec:absolute_deviation}\hfill
+
+Mean Absolute Deviation (MAD);
+cf. Mean Squared Deviation (Mean Square Error \S\ref{sec:mse})
+
+
 
 \paragraph{Error}\label{sec:error}\hfill
 
@@ -4160,6 +4419,8 @@ Absolute Error -- Median minimizes Absolute Error
 Squared Error -- Mean (Expected Value) minimizes Squared Error
 
 cf. \emph{Variance} (\S\ref{sec:variance}) -- Expected Squared Error
+
+cf. Residual (\S\ref{sec:residual})
 
 \fist Regression Error (\S\ref{sec:regression_error})
 
@@ -4192,6 +4453,8 @@ and the \emph{Residuals} (\S\ref{sec:residual}) are:
 
 Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
 
+cf. Mean Absolute Deviation (MAD)
+
 \fist Decision Theory (\S\ref{sec:decision_theory}): when Loss Function
 (\S\ref{sec:objective_function}) is Squared Error, the Risk (Average Loss
 \S\ref{sec:risk}) is the MSE
@@ -4213,7 +4476,10 @@ Response Errors
 or \emph{Fitting Deviation}
 
 the \emph{Residual} of an Observed Value is the difference between the Observed
-Value and the \emph{Estimated} (\S\ref{sec:estimation_theory}) Value
+Value and the \emph{Estimated} (\S\ref{sec:estimation_theory}, cf. Predicted,
+Expected) Value
+
+cf. Error (\S\ref{sec:error}), Sum of Squared Residuals (SSR \S\ref{sec:ssr})
 
 \fist Regression Residual (\S\ref{sec:regression_residual})
 
@@ -4225,6 +4491,8 @@ consisting of analyzing whether Residuals of a constructed Statistical Model
 (\S\ref{sec:statistical_randomness}), another method being analyzing how well
 the Model Predictions (\S\ref{sec:prediction}) \emph{Fit}
 (\S\ref{sec:model_fit}) the original Data
+
+$y - \hat{y}$
 
 (wiki):
 
@@ -4274,6 +4542,8 @@ the \emph{Standard Error} $S_E$ of a Statistic (Estimate of a Parameter) is the
 Standard Deviation (\S\ref{sec:standard_deviation}) of its Sampling Distribution
 (\S\ref{sec:sampling_distribution})
 
+cf. Standard Score (\S\ref{sec:standard_score})
+
 the Standard Error equals the Standard Deviation divided by the square root of
 the Sample Size, i.e. the Standard Error of the Mean is a measure of
 ``Dispersion'' of Sample Means around the Population Mean
@@ -4282,6 +4552,12 @@ the Sample Size, i.e. the Standard Error of the Mean is a measure of
 
 \fist cf. \emph{Observational Error} (Measurement Error
 \S\ref{sec:observational_error}), \emph{Statistical Error} (\S\ref{sec:error})
+
+
+
+\paragraph{Margin of Error}\label{sec:margin_of_error}\hfill
+
+\fist Confidence Interval (\S\ref{sec:confidence_interval})
 
 
 
@@ -4421,6 +4697,10 @@ $L^2$ Risk Function (\S\ref{sec:risk_function})
 \emph{Histogram Estimator}
 
 converges at rate $n^{-2/3}$;
+
+Frequency Histogram
+
+Relative Frequency Histogram (Percentages)
 
 
 
@@ -4836,6 +5116,8 @@ a Test has \emph{Level} $\alpha$ if its Size is less than or equal to $\alpha$
 
 three or more ``group means'' for Significance
 
+Exact Tests (\S\ref{sec:exact_test})
+
 
 
 \paragraph{$p$-value}\label{sec:p_value}\hfill
@@ -4888,7 +5170,8 @@ or \emph{Holm-Bonferroni Method}
 
 \emph{Student's $t$-test}
 
-\fist $t$-distribution (\S\ref{sec:t_distribution})
+\fist $t$-statistic (\S\ref{sec:t_statistic}),
+$t$-distribution (\S\ref{sec:t_distribution})
 
 essentially equal to Wald Test for moderately large $n$
 
@@ -4908,7 +5191,9 @@ Sample Theory (Asymptotic Theory \S\ref{sec:asymptotic_theory})
 
 \paragraph{Permutation Test}\label{sec:permutation_test}\hfill
 
-\fist Exact Test
+or \emph{Re-randomization Test}
+
+Significance Testing (\S\ref{sec:significance_test})
 
 Non-parametric method for testing whether two Distributions are ``the same''
 
@@ -5085,15 +5370,28 @@ or \emph{Confidence Set} for Parameter Spaces of Dimension $2$ or greater
 
 (wiki):
 
-for a Random Sample Vector (IID \S\ref{sec:iid}) $X$ from a Distribution with
-Parameters $\theta \in \Theta$, a \emph{Confidence Interval} for $\theta$ with
-\emph{Confidence Level} (or \emph{Confidence Coefficient}) $1 - \alpha$ is an
-Interval with Random Endpoints $(a(X), b(X))$, determined by the Random
-Variables $a(X)$ and $b(Y)$ such that:
+for a Random Sample (\S\ref{sec:sample}) Vector (IID \S\ref{sec:iid}) $X$ from a
+Distribution with Parameters $\theta \in \Theta$, a \emph{Confidence Interval}
+for $\theta$ with \emph{Confidence Level} (or \emph{Confidence Coefficient}) $1
+- \alpha$ is an Interval with Random Endpoints $(a(X), b(X))$, determined by the
+Random Variables $a(X)$ and $b(Y)$ such that:
 \[
   \forall \theta \in \Theta, P_\theta(a(X) < \theta < b(X)) = 1 - \alpha
 \]
 note that $\theta$ is a fixed ``true'' value (not a Random Variable)
+
+\fist Standard Score (\S\ref{sec:standard_score}), Margin of Error
+(\S\ref{sec:margin_of_error}), $t$-statistic (\S\ref{sec:t_statistic})
+
+assumptions:
+\begin{itemize}
+  \item Sample is Random
+  \item Normal Condition -- more than 10 ``Successes'' and Failures in a Sample
+  \item Independence Condition -- when Sampling without replacement, the Sample
+    Size $n$ should be less than 10\% of the Population size
+\end{itemize}
+
+Estimating a Population Proportion (\S\ref{sec:proportion})
 
 Confidence Limit
 
@@ -5444,6 +5742,8 @@ cf. ``Predictive Analytics''
 
 \fist cf. Regression Analysis (\S\ref{sec:regression_analysis})
 
+$\hat{y}$
+
 
 
 \subsubsection{Predictive Model}\label{sec:predictive_model}
@@ -5491,6 +5791,8 @@ Data (\S\ref{sec:sample})
 in Multivariate Data using Linear Predictor Functions with parameters Estimated
 from the Data
 
+\fist Linear Classifier (\S\ref{sec:linear_classifier})
+
 
 
 \paragraph{Best Linear Unbiased Prediction (BLUP)}\label{sec:blup}\hfill
@@ -5510,6 +5812,8 @@ intermediate values
 % ------------------------------------------------------------------------------
 \subsection{Causal Inference}\label{sec:causal_inference}
 % ------------------------------------------------------------------------------
+
+cf. Experimental Studies
 
 (wiki):
 
@@ -5885,7 +6189,7 @@ Discriminative methods of determining Parameters for a Linear Classifier
 (\S\ref{sec:linear_classifier}):
 \begin{itemize}
   \item Logistic Regression (\S\ref{sec:logistic_regression})
-  \item Perceptron (TODO: xref)
+  \item Perceptron (\S\ref{sec:perceptron})
   \item Support Vector Machines (\S\ref{sec:svm})
 \end{itemize}
 
@@ -5931,9 +6235,9 @@ useful when $x$ is High-dimensional and Discrete
 
 \subsubsection{Linear Classifier}\label{sec:linear_classifier}
 
-a \emph{Linear Predictor Function} assigns a ``score'' to each possible category
-$k$ by taking the Dot Product of the Feature Vector with a Vector of
-\emph{Weights}
+a \emph{Linear Predictor Function} (\S\ref{sec:linear_predictor}) assigns a
+``score'' to each possible category $k$ by taking the Dot Product of the Feature
+Vector with a Vector of \emph{Weights}
 
 methods for determining Parameters of a Linear Classifier
 
@@ -5948,7 +6252,7 @@ Discriminative (\S\ref{sec:discriminative_model}) methods:
 (\S\ref{sec:linear_classifier}):
 \begin{itemize}
   \item Logistic Regression (\S\ref{sec:logistic_regression})
-  \item Perceptron (TODO: xref)
+  \item Perceptron (\S\ref{sec:perceptron})
   \item Support Vector Machines (\S\ref{sec:svm})
 \end{itemize}
 
@@ -5982,6 +6286,14 @@ Maximum Margin Hyperplane
 Slack Variables
 
 Quadratic Programming (\S\ref{sec:quadratic_programming})
+
+
+
+\paragraph{Perceptron}\label{sec:perceptron}\hfill
+
+Discriminative Method (\S\ref{sec:discriminative_method})
+
+cf. Neural Networks (\S\ref{sec:ann})
 
 
 
@@ -6198,20 +6510,6 @@ the Regression Parameters that miminize SSR are caled \emph{Least Squares
 
 
 
-\subsubsection{Regression Error}\label{sec:regression_error}
-
-\fist cf. Statistical Error (\S\ref{sec:error})
-
-Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
-
-
-
-\subsubsection{Regression Residual}\label{sec:regression_residual}
-
-\fist cf. Residual (\S\ref{sec:residual})
-
-
-
 \subsubsection{Regression Model}\label{sec:regression_model}
 
 a \emph{Statistical Model} (\S\ref{sec:statistical_model}) which makes some
@@ -6257,6 +6555,101 @@ Linear Regression Models (\S\ref{sec:linear_regression})
 \paragraph{Measurement Error Model}\label{sec:measurement_error_model}\hfill
 
 accounts for Observational (Measurement) Error (\S\ref{sec:observational_error})
+
+
+
+\subsubsection{Regression Error}\label{sec:regression_error}
+
+\fist cf. Statistical Error (\S\ref{sec:error})
+
+Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
+
+Deviation from value Predicted by the ``\emph{true}'' Regression Function
+
+$\epsilon$
+
+
+
+\subsubsection{Regression Residual}\label{sec:regression_residual}
+
+Deviation from value Predicted by the Estimated Regression Function
+
+\fist cf. Residual (\S\ref{sec:residual})
+
+$y - \hat{y}$
+
+Residual Plot
+
+SSE -- Sum of Squared Residuals (SSR or RSS \S\ref{sec:ssr}); for a Simple
+Linear Model:
+\[
+  \sum_n (y_i - \beta_1 x_i + \beta_0)
+\]
+can be re-written as:
+\[
+  n (\overline{y^2} - 2 \beta_1 \overline{x y} - 2 \beta_0 \overline{y}
+    + \beta_1^2 \overline{x^2} + 2 \beta_1 \beta_0 \overline{x} + \beta_0^2)
+\]
+finding where the Partial Derivative with respect to $\beta_0$ and $\beta_1$ are
+both Zero gives the Least-squares Estimate (\S\ref{sec:least_squares}) of the
+Regression Function
+
+solving for $\beta_1$:
+\[
+  \beta_1 = \frac{
+    (\overline{x})\overline{y} - \overline{xy}
+  }{
+    (\overline{x})^2 \overline{x^2}
+  }
+\]
+or equivalently:
+\[
+  \beta_1 = \frac{
+    Cov(x,y)
+  }{
+    Var(x)
+  }
+\]
+and substituting to solve for $\beta_0$:
+\[
+  \beta_0 = \overline{y} - \frac{
+    \overline{x} Cov(x,y)
+  }{
+    Var(x)
+  }
+\]
+
+
+
+\paragraph{Root-Mean-Square Deviation (RMSD)}\label{sec:rmsd}\hfill
+
+or RMSE
+
+Sample Standard Deviation (\S\ref{sec:standard_deviation}) of Residuals
+
+
+
+\subsubsection{Determination Coefficient}\label{sec:determination_coefficient}
+
+``\emph{R-squared}''
+
+how much the variation in $y$ is ``explained'' by $x$
+
+$R^2 = SSR/SST$
+
+\[
+  r^2 = 1 - \frac{
+    ESS_{\hat{y}}
+  }{
+    TSS_{\overline{y}}
+  }
+\]
+
+ESS -- Explained Sum of Squares (\S\ref{sec:ess})
+
+TSS -- Total Sum of Squares (\S\ref{sec:tss})
+
+cf. $r$ -- Correlation Coefficient (\S\ref{sec:correlation_coefficient})
 
 
 
@@ -6317,7 +6710,8 @@ Coefficients and Explanatory (Independent) Variables:
   Y_i = \beta_0 + \beta_1\phi_1(X_{i1}) + \cdots +
     \beta_p\phi_p(X_{ip}) + \varepsilon_i
 \]
-for $i \in \{1, \ldots, n\}$
+for $i \in \{1, \ldots, n\}$ where $\phi$ are Basis Functions
+(\S\ref{sec:basis_function})
 
 Assuming $\varepsilon_i | X_i \sim N(0, \sigma^2)$ is the same as Assuming
 $Y_i | X_i \sim N(\mu_i, \sigma^2)$
@@ -6384,6 +6778,11 @@ $\beta_0$, $\beta_1$, and the Variance $\sigma^2$ of $\varepsilon$:
 \]
 and each possible value of $\theta$ determines a Distribution $P_\theta$ on the
 Sample Space (\S\ref{sec:sample_space}) $S$ of all possible $(Y, X)$ pairs
+
+<https://www.youtube.com/watch?v=FGesqq22TCM>: Equation for a Regression Line
+passing through the Sample Mean $(\overline{X}\overline{Y})$ with Slope
+$r(s_y/s_x)$ where $r$ is the Sample Correlation Coefficient, and $s_y$ and
+$s_x$ are Sample Standard Deviations
 
 (Wasserman04 \S13.1)
 
@@ -6725,6 +7124,9 @@ Models
 extends Regression (\S\ref{sec:regression_analysis}) and Clustering
 (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
 
+cf. Perceptron (\S\ref{sec:perceptron}) -- Binary Linear Classifier
+(\S\ref{sec:linear_classifier})
+
 simplest Neural Network Regression Model:
 \[
   Y = \beta_0 + \sum_{j=1}^p \beta_j \sigma (\alpha_0 + \alpha^T X)
@@ -6843,10 +7245,12 @@ or \emph{Random Process}
 
 %FIXME: move section ???
 
-a \emph{Random Sequence} (\S\ref{sec:random_sequence}) is a special case of
-Stochastic Process where the Index Set is some Subset of the Integers
+Sequences of \emph{Dependent} (\S\ref{sec:dependence}) Random Variables; cf. IID
+(\S\ref{sec:iid}) Sequences (often of \emph{Observations}
+\S\ref{sec:observation})
 
-\fist not necessarily IID (\S\ref{sec:iid}) Sequences
+\fist a \emph{Random Sequence} (\S\ref{sec:random_sequence}) is a special case
+of Stochastic Process where the Index Set is some Subset of the Integers
 
 \fist cf. Data Generating Process (\S\ref{sec:data_generating_process})
 
@@ -6874,6 +7278,20 @@ cf. Harmonic Functions (\S\ref{sec:harmonic_function})
 Equation in which one or more Terms is a Stochastic Process
 
 First-hitting-time Model
+
+Wasserman04, Ch.23:
+
+\emph{Stochastic Process} -- collection of Random Variables:
+\[
+  \{ X(t) : t \in T \}
+\]
+with Index Set $T$, taking values in the \emph{State Space} (cf. Dynamical
+Systems \S\ref{sec:dynamical_system}), $\mathcal{X}$
+
+\begin{itemize}
+  \item Markov Process (\S\ref{sec:markov_process}) -- Probability Distribution
+    of $X_i$ Depends only on $X_{i-1}$
+\end{itemize}
 
 
 
@@ -7039,6 +7457,8 @@ where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
 
 Memory-less
 
+cf. Markov Process (\S\ref{sec:markov_process})
+
 Poisson Distribution (\S\ref{sec:poisson_distribution})
 
 
@@ -7055,10 +7475,41 @@ cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
 
 (or \emph{Markov Chain})
 
-Markov Property (``Memorylessness'')
+(Wasserman04, \S23.2)
 
-can be seen as a special case of Petri Nets (\S\ref{sec:petri_net})
-where every Transition has a single Input and a single Output
+\emph{Markov Property} (``Memorylessness'') --
+Distribution of $X_i$ Depends only on $X_{i-1}$:
+\[
+  P(X_t = x | X_0, \ldots, X_{t-1}) = P(X_t = x | X_{t-1})
+\]
+for all $t$ and $x \in \mathcal{X}$
+
+cf. Poisson Process (\S\ref{sec:poisson_process})
+
+Density:
+\[
+  f(x_0, \ldots, x_t) = f(x_1)f(x_2|x_1)f(x_3|x_2) \cdots f(x_t|x_{t-1})
+\]
+
+\fist can be seen as a special case of Petri Nets (\S\ref{sec:petri_net}) where
+every Transition has a single Input and a single Output
+
+a Probability $p_{ij}$:
+\[
+  p_{ij} \equiv P(X_{n+1} = j | X_n = i)
+\]
+is called a \emph{Transition Probability}, and the Matrix $\mathbf{P}$ of
+Transition Probabilities is called the \emph{Transition Matrix};
+$p_{ij} \geq 0$, and each Row is a Probability Mass Function, since
+$\sum_i p_{ij} = 1$
+
+a Markov Process is \emph{Homogeneous} if Transition Probabilities $P(X_{n+1} =
+j | X_n = i)$ is Constant over Time, i.e.:
+\[
+  P(X_{n+1} = j | X_n = i) = P(X_1 = j| X_0 = i)
+\]
+
+$n$-step Transitions
 
 
 
