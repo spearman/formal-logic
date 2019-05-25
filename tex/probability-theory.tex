@@ -1156,6 +1156,11 @@ or \emph{Conditional Mean}
 the Conditional Expectation of a Dependent Variable given an Independent
 Variable
 
+\fist Probability Monads (\S\ref{sec:probability_monad}): Partial Evaluations
+(\S\ref{sec:partial_evaluation}) as Conditional Expectations
+(\url{https://golem.ph.utexas.edu/category/2019/05/partial_evaluations.html},
+Perrone 2018)
+
 
 
 \subsubsection{Risk}\label{sec:risk}
@@ -1508,6 +1513,9 @@ related to the CDF (\S\ref{sec:cdf}) $F_X$ of $X$ by:
 
 for a Probability Mass Function that is Symmetric around a certain point, that
 point is the Expected Value (\S\ref{sec:expected_value})
+
+\fist each Row in the Transition Matrix of a Markov Process
+(\S\ref{sec:markov_process}) represents a Probability Mass Function
 
 
 
@@ -2177,6 +2185,9 @@ models counts of rare events, e.g. radioactive decay, traffic accidents
 
 Poisson Process (\S\ref{sec:poisson_process})
 
+\fist Poisson Noise (Shot Noise): Statistical Fluctuations
+(\S\ref{sec:statistical_fluctuation})
+
 
 
 \subsubsection{Geometric Distribution}\label{sec:geometric_distribution}
@@ -2435,6 +2446,9 @@ or \emph{Laplace Distribution}
 
 Non-symmetric
 
+Sums of Squared IID Normally-distributed Random Variables, where the number of
+Variables is the ``Degrees of Freedom''
+
 \[
   f(x; v) =
   \begin{cases}
@@ -2445,7 +2459,29 @@ Non-symmetric
   \end{cases}
 \]
 
-\fist Pearson's Chi-squared Test (\S\ref{sec:pearsons_chi_squared})
+Goodness-of-fit (\S\ref{sec:model_fit})
+
+Chi-squared Statistic -- Randomness Condition, Large Counts Condition ($>5$
+expected), Independence Condition
+
+\fist Chi-squared Test (\S\ref{sec:chi_squared_test})
+
+
+
+\subparagraph{$F$-distribution}\label{sec:f_distribution}\hfill
+
+(Fisher)
+
+can be seen as a Ratio of Chi-squared Distributions with not necessarily the
+same DoFs
+
+$F$-statistic (\S\ref{sec:f_statistic})
+
+$F = \frac{\text{between-group variability}}{\text{within-group variability}}$
+
+$F = \frac{\frac{SSB}{DoF_B}}{\frac{SSW}{DoF_W}}$
+
+ANOVA (\S\ref{sec:variance_analysis})
 
 
 
@@ -2537,6 +2573,10 @@ is:
     & = f(x_1) f(x_2 | x_1) \cdots f(x_n | x_1, \ldots, x_{n-1}) \\
     & = \prod_{i=1}^n f(x_i | x_1, \ldots, x_{i-1}) \\
 \end{flalign*}
+for a Markov Process (\S\ref{sec:markov_process}), this simplifies to:
+\[
+  f(x_0, \ldots, x_t) = f(x_1)f(x_2|x_1)f(x_3|x_2) \cdots f(x_t|x_{t-1})
+\]
 
 \asterism
 
@@ -3068,7 +3108,10 @@ selected as part of the Sample.
 A Random Vector (Multivariate Random Variable \S\ref{sec:random_vector}) of IID
 (\S\ref{sec:iid}) Random Variables $X_1, \ldots, X_n \sim F$ is called a
 \emph{Random Sample of Size $n$ from $F$} -- in Statistics it is commonly
-assumed that Observations are IID.
+assumed that Observations are IID
+
+ a Random Sequence (\S\ref{sec:random_sequence}) of IID Observations is a
+ special case of a Stochastic Process (\S\ref{sec:stochastic_process})
 
 \fist cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
 \emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
@@ -3170,11 +3213,12 @@ $\overline{x}$, $\sigma^2$
 \asterism
 
 \begin{itemize}
-  \item $z$-score (Standard Score or $z$-statistic \S\ref{sec:standard_score})
+  \item $z$-score (Standard Score or $z$-statistic \S\ref{sec:z_statistic})
     -- Estimation of Population Proportion (\S\ref{sec:proportion})
   \item $t$-statistic (\S\ref{sec:t_statistic}) -- Estimation of Population Mean
     (\S\ref{sec:expected_value}) from a Sampling Distribution where the Sample
-    Means of the Population Standard Deviation is unknown
+    Means of the Population Standard Deviation is unknown, or for other
+    Parameters or when $n$ is too small
 \end{itemize}
 
 \asterism
@@ -3189,6 +3233,13 @@ Outcomes (FIXME: clarify)
 Probability Distribution of a Statistic (\S\ref{sec:statistic})
 
 \fist Central Limit Theorem (\S\ref{sec:central_limit_theorem})
+
+Conditions for Normal (\S\ref{sec:sampling_distribution}) Sampling Distribution:
+\begin{enumerate}
+  \item Randomness Condition
+  \item Normality Condition
+  \item Independence Condition
+\end{enumerate}
 
 Statistical Inference (\S\ref{sec:inferential_statistics})
 
@@ -3243,13 +3294,23 @@ $T$ is called the \emph{Natural Sufficient Statistic}
 
 \subsubsection{Degrees of Freedom}\label{sec:statistical_freedom}
 
+\subsubsection{$z$-statistic}\label{sec:z_statistic}
+
+Standard Score ($z$-score \S\ref{sec:standard_score})
+
+cf. $t$-statistic (\S\ref{sec:t_statistic})
+
+
+
 \subsubsection{$t$-statistic}\label{sec:t_statistic}
 
 $t$-distribution (\S\ref{sec:t_distribution})
 
 $t$-test (\S\ref{sec:t_test})
 
-cf. $z$-score (Standard Score \S\ref{sec:standard_score})
+cf. $z$-statistic (\S\ref{sec:z_statistic})
+
+can be used for small $n$ ($t$-distribution has fatter tails)
 
 conditions:
 \begin{itemize}
@@ -3263,6 +3324,19 @@ Margin of Error (\S\ref{sec:margin_of_error})
 
 Degree of Freedom (\S\ref{sec:statistical_freedom}) -- Sample Size minus $1$;
 different $t$-distribution depending on the Sample Size
+
+
+
+\subsubsection{$F$-statistic}\label{sec:f_statistic}
+
+(Fisher)
+
+$F$-distribution (\S\ref{sec:f_distribution}) -- can be seen as a Ratio of
+$\chi^2$-distributions with differing DoF
+
+ANOVA (\S\ref{sec:variance_analysis})
+
+$F = \frac{\text{between-group variability}}{\text{within-group variability}}$
 
 
 
@@ -3280,6 +3354,9 @@ cf. Mixed Models (\S\ref{sec:mixed_model})
 
 Analysis of the the differences among ``group means'' (FIXME: clarify) in a
 Sample (\S\ref{sec:sample})
+
+$F$-statistic (\S\ref{sec:f_statistic}):
+$F = \frac{\text{between-group variability}}{\text{within-group variability}}$
 
 generalizes $t$-test (\S\ref{sec:t_test}) to more than two groups
 
@@ -3314,7 +3391,27 @@ Estimates the Variance (\S\ref{sec:variance}) when scaled for the number of
 
 \paragraph{Total Sum of Squares (TSS)}\label{sec:tss}\hfill
 
+or \emph{SST}
+
+\[
+  TSS = \sum_{i=1}^n (y_i - \overline{y})^2
+\]
+
+the numerator when calculating the Variance
+
 equal to SSR + ESS
+
+SSW -- Sum of Squares \emph{Within} a Sample
+
+SSB -- Sum of Squares \emph{Between} Samples
+
+$SST = SSW + SSB$
+
+ANOVA (\S\ref{sec:variance_analysis}) --
+$F$-statistic (\S\ref{sec:f_statistic}):
+$F = \frac{\text{between-group variability}}{\text{within-group variability}}$
+
+$F = \frac{\frac{SSB}{DoF_B}}{\frac{SSW}{DoF_W}}$
 
 Determination Coefficient (\S\ref{sec:determination_coefficient}):
 \[
@@ -3509,6 +3606,9 @@ the Sample Size, i.e. the Standard Error of the Mean is a measure of
 
 cf. Confidence Interval (\S\ref{sec:confidence_interval})
 
+$S$ -- Standard Deviation of Regression Residuals
+(\S\ref{sec:regression_residual})
+
 \emph{Uncorrected Standard Deviation}:
 \[
   s_n = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \overline{x})^2}
@@ -3524,20 +3624,25 @@ cf. Confidence Interval (\S\ref{sec:confidence_interval})
 
 or \emph{$z$-score}
 
-cf. Standard Error (\S\ref{sec:standard_error})
+$z$-statistic (\S\ref{sec:z_statistic}) -- used for Estimating Population
+Proportion (\S\ref{sec:population_proportion})
 
-\fist Statistics (\S\ref{sec:statistic}) --
-Estimation of Standard Deviation of Population Proportion
-(\S\ref{sec:population_proportion}) from the Sample mean and Sample Standard
-Deviation
-
-cf. $t$-statistic (\S\ref{sec:t_statistic}) for Estimating Population Mean
+cf. $t$-statistic (\S\ref{sec:t_statistic}) -- used for Estimating Population
+Mean and other Parameters, and for small $n$
 
 (wiki): signed fractional number of Standard Deviations by which an Observation
 or Data Point is \emph{above} the Mean:
 \[
   z = \frac{x - \mu}{\sigma}
 \]
+
+$z$-statistic for a Proportion Statistic $\hat{p}$ with Sample Size $n$:
+\[
+  z = \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}}
+\]
+where the Denominator is the Standard Deviation of the Sampling Distribution of
+the Sample Proportion (i.e. the Standard Error of the Statistic
+\S\ref{sec:standard_error})
 
 
 
@@ -3773,6 +3878,9 @@ can be based on two types of Sample Data (\S\ref{sec:sample}):
 
 measures the discrepancy between Observed (\S\ref{sec:observation}) values and
 Predicted (\S\ref{sec:prediction}) values under the Statistical Model
+
+$\chi^2$ Distributions (\S\ref{sec:chi_squared});
+Chi Squared Test (\S\ref{sec:chi_squared_test})
 
 \fist analysis of Residuals (Fitting Deviation \S\ref{sec:residual})
 
@@ -4231,6 +4339,8 @@ $\overline{X}_n$ is close to $\mu$ with high Probability
 $\sqrt{n}(\overline{X}_n - \mu)$ \emph{Converges in Distribution} to a Normal
 Distribution (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e.
 the Sample Mean has approximately a Normal Distribution for large $n$
+
+the \emph{Grand Mean} is the Mean of multiple Sample Means
 
 
 
@@ -4702,6 +4812,10 @@ Frequency Histogram
 
 Relative Frequency Histogram (Percentages)
 
+Equilibria of Markov Processes (\S\ref{sec:markov_process}) -- a Markov Process
+is said to enter an ``Equilibrium'' if the Histogram of states Converges over
+time
+
 
 
 \paragraph{Kernel Density Estimation (KDE)}\label{sec:kde}\hfill
@@ -4987,26 +5101,33 @@ Type II Error: Non-Rejection of $H_0$ when it is False
 
 $\beta$: Probability of committing a Type II Error
 
+\begin{align*}
+  P(\hat{\theta} | H_0) < \alpha & \Rightarrow \text{reject } H_0 \\
+  P(\hat{\theta} | H_0) \geq \alpha & \Rightarrow \text{fail to reject } H_0 \\
+\end{align*}
+
 (Wasserman04, Ch.10)
 
-the \emph{Power Function} of a Test with Rejection Region $R$:
-\[
-  \beta(\theta) = P_\theta(X \in R)
-\]
-
-\emph{Power} $1 - \beta$: Probability of Rejecting $H_0$ given that a
-specific alternative is True
-
-the \emph{Size} or \emph{Significance Level} (\S\ref{sec:significance_testing})
-of a Test:
+the \emph{Size} or \emph{Significance Level}
+(\S\ref{sec:statistical_significance}) of a Test:
 \[
   \alpha = \sup_{\theta \in \Theta_0} \beta(\theta)
 \]
+is the Probability of making a Type I Error
 
 a Test has \emph{Level} $\alpha$ if its Size is less than or equal to $\alpha$
 
 $p$-value: lowest Level of Significance at which the observed Value of
 the Statistic is Significant
+
+\emph{Power} (\S\ref{sec:statistical_power}) $1 - \beta$: Probability of
+Rejecting $H_0$ given that a specific alternative is True (Probability of
+\emph{not} making a Type II Error)
+
+the \emph{Power Function} of a Test with Rejection Region $R$:
+\[
+  \beta(\theta) = P_\theta(X \in R)
+\]
 
 \begin{itemize}
   \item Test for Statistical Randomness (\S\ref{sec:statistical_randomness})
@@ -5078,6 +5199,7 @@ Statistic (\S\ref{sec:statistic}), $T$
 (Wasserman04, Ch.10)
 
 \begin{itemize}
+  \item $z$-statistic
   \item $t$-statistic
   \item $F$-test
   \item ...
@@ -5109,8 +5231,12 @@ the \emph{Size} or \emph{Significance Level} of a Test:
 \[
   \alpha = \sup_{\theta \in \Theta_0} \beta(\theta)
 \]
+is the Probability of making a Type I Error
 
 a Test has \emph{Level} $\alpha$ if its Size is less than or equal to $\alpha$
+
+increasing $\alpha$ increases Power (\S\ref{sec:statistical_power}), but
+increases the Probability of a Type I Error
 
 \fist ANalaysis Of VAriance (ANOVA \S\ref{sec:variance_analysis}) -- compare
 
@@ -5122,8 +5248,11 @@ Exact Tests (\S\ref{sec:exact_test})
 
 \paragraph{$p$-value}\label{sec:p_value}\hfill
 
-$p$-value: lowest Level of Significance at which the Observed value of
-the Statistic is Significant
+lowest Level of Significance at which the Observed value of the Statistic is
+Significant:
+\[
+  P(\hat{\theta} | H_0)
+\]
 
 (Wasserman04 \S10.2):
 
@@ -5138,6 +5267,22 @@ Observed
   Significance Level $\alpha$, and the Probability of a Type I Error is
   $\alpha$.
 }
+
+
+
+\paragraph{Statistical Power}\label{sec:statistical_power}\hfill
+
+Probability that the Test rejects the Null Hypothesis when the Alternative
+Hypothesis is True, or equivalently, the Probability of \emph{not} making a Type
+II Error
+
+increasing $\alpha$ increases Power, but increases the Probability of a Type I
+Error
+
+increasing Sample Size will also increase Power
+
+if the underlying Data has a lower Variability or if the true Parameter is far
+from $H_0$, this also increases Power
 
 
 
@@ -5164,9 +5309,7 @@ or \emph{Holm-Bonferroni Method}
 
 \subsubsection{Wald Test}\label{sec:wald_test}
 
-
-
-\paragraph{$t$-test}\label{sec:t_test}\hfill
+\subsubsection{$t$-test}\label{sec:t_test}
 
 \emph{Student's $t$-test}
 
@@ -5180,7 +5323,22 @@ generalization of $t$-test to more than two groups
 
 
 
-\subsubsection{Pearson's Chi-squared Test}\label{sec:pearsons_chi_squared}
+\subsubsection{Chi-squared Test}\label{sec:chi_squared_test}
+
+$\chi^2$ Distribution (\S\ref{sec:chi_squared})
+
+Chi-squared Statistic -- Randomness Condition, Large Counts Condition ($>5$
+expected), Independence Condition
+
+Goodness-of-fit (\S\ref{sec:model_fit})
+
+Test for Homogeneity, Association (or Independence)
+
+
+
+\paragraph{Pearson's Chi-squared Test}\label{sec:pearsons_chi_squared}\hfill
+
+
 
 \subsubsection{Exact Test}\label{sec:exact_test}
 
@@ -5359,6 +5517,9 @@ displays the Multivariate (\S\ref{sec:multivariate_statistics}) Frequency
 Distribution of Variables
 
 Two-way Tables
+
+Chi-squared Test (\S\ref{sec:chi_squared_test}) -- Degrees of Freedom =
+(rows - 1)(columns - 1)
 
 Log-linear Model (\S\ref{sec:log_linear})
 
@@ -6480,6 +6641,8 @@ be Unbiased (\S\ref{sec:unbiased_estimate}), Consistent
 (\S\ref{sec:efficient_estimate}) in the Class of \emph{Linear Unbiased
   Estimators} (TODO: xref)
 
+\asterism
+
 (Wasserman04, Ch.13)
 
 Estimate the Regression Function $r(x)$ from Sample Data (\S\ref{sec:sample}) of
@@ -6577,6 +6740,8 @@ Deviation from value Predicted by the Estimated Regression Function
 \fist cf. Residual (\S\ref{sec:residual})
 
 $y - \hat{y}$
+
+$S$ -- Standard Deviation (\S\ref{sec:standard_deviation}) of Residuals
 
 Residual Plot
 
@@ -6783,6 +6948,27 @@ Sample Space (\S\ref{sec:sample_space}) $S$ of all possible $(Y, X)$ pairs
 passing through the Sample Mean $(\overline{X}\overline{Y})$ with Slope
 $r(s_y/s_x)$ where $r$ is the Sample Correlation Coefficient, and $s_y$ and
 $s_x$ are Sample Standard Deviations
+
+\asterism
+
+\url{https://www.youtube.com/watch?v=8w6EPyEqE9M} (Khan)
+
+Standard Error of Estimated Parameters (Coefficients); Estimate of the Standard
+Deviation of the Sampling Distribution of the Slope; Confidence Interval
+(\S\ref{sec:confidence_interval})-- DoF for a Slope Coefficient in a Linear
+Model is the number of Sample Points minus 2
+
+$z$-statistic (\S\ref{sec:z_statistic}):
+\[
+  z = \frac{b - \beta_0}{\sigma_b}
+\]
+
+$t$-statistic (\S\ref{sec:t_statistic}):
+\[
+  t = \frac{b - \beta_0}{SE_b}
+\]
+
+\asterism
 
 (Wasserman04 \S13.1)
 
@@ -7243,14 +7429,14 @@ with no dependency on previous queries
 
 or \emph{Random Process}
 
-%FIXME: move section ???
-
 Sequences of \emph{Dependent} (\S\ref{sec:dependence}) Random Variables; cf. IID
 (\S\ref{sec:iid}) Sequences (often of \emph{Observations}
 \S\ref{sec:observation})
 
 \fist a \emph{Random Sequence} (\S\ref{sec:random_sequence}) is a special case
-of Stochastic Process where the Index Set is some Subset of the Integers
+of Stochastic Process where the Index Set is some Subset of the Integers; a
+Sequence of IID Observations is a special case (cf. Random Sample
+\S\ref{sec:random_sample})
 
 \fist cf. Data Generating Process (\S\ref{sec:data_generating_process})
 
@@ -7291,7 +7477,32 @@ Systems \S\ref{sec:dynamical_system}), $\mathcal{X}$
 \begin{itemize}
   \item Markov Process (\S\ref{sec:markov_process}) -- Probability Distribution
     of $X_i$ Depends only on $X_{i-1}$
+  \item Random Field (\S\ref{sec:random_field}) -- $T$ allowed to be any
+    Topological Space
 \end{itemize}
+
+the Joint Probability Density Function (\S\ref{sec:joint_probability}) of
+$X_1, \ldots, X_n$ Random Variables can be written as:
+\begin{flalign*}
+  f(x_1, \ldots, x_n)
+    & = f(x_1) f(x_2 | x_1) \cdots f(x_n | x_1, \ldots, x_{n-1}) \\
+    & = \prod_{i=1}^n f(x_i | x_1, \ldots, x_{i-1}) \\
+\end{flalign*}
+for a Markov Process, this simplifies to:
+\[
+  f(x_0, \ldots, x_t) = f(x_1)f(x_2|x_1)f(x_3|x_2) \cdots f(x_t|x_{t-1})
+\]
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Statistical Fluctuation}\label{sec:statistical_fluctuation}
+% ------------------------------------------------------------------------------
+
+Statistical Mechanics \& Thermodynamics; e.g. Shot (Poisson
+\S\ref{sec:poisson_process}) Noise in electronics and optical devices--
+originates from discrete nature of electric charge and particle nature of light,
+resp.
 
 
 
@@ -7358,10 +7569,6 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 
 
 % ------------------------------------------------------------------------------
-\subsection{Statistical Fluctuation}\label{sec:statistical_fluctuation}
-% ------------------------------------------------------------------------------
-
-% ------------------------------------------------------------------------------
 \subsection{Random Measure}\label{sec:random_measure}
 % ------------------------------------------------------------------------------
 
@@ -7390,6 +7597,269 @@ the CDF (\S\ref{sec:cdf}) associated with the Empirical Measure of a Sample
 
 
 
+\subsubsection{Point Process}\label{sec:point_process}
+
+a \emph{Point Process} (or \emph{Point Field}) is a Random Measure
+(\S\ref{sec:random_measure}) of the form:
+\[
+  \mu = \sum_{n=1}^N \delta_{X_n}
+\]
+where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Counting Process}\label{sec:counting_process}
+% ------------------------------------------------------------------------------
+
+a Stochastic Process with values that are Non-negative, Non-decreasing Integers
+
+
+
+\subsubsection{Poisson Process}\label{sec:poisson_process}
+
+Memory-less
+
+cf. Markov Process (\S\ref{sec:markov_process})
+
+Poisson Distribution (\S\ref{sec:poisson_distribution})
+
+
+
+\subsubsection{Binomial Process}\label{sec:binomial_process}
+
+cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
+
+
+
+\subsubsection{Renewal Theory}\label{sec:renewal_theory}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Markov Process}\label{sec:markov_process}
+% ------------------------------------------------------------------------------
+
+(or \emph{Markov Chain})
+
+\fist Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc})
+
+(Wasserman04, \S23.2)
+
+\emph{Markov Property} (``Memorylessness'') --
+Distribution of $X_i$ Depends only on $X_{i-1}$:
+\[
+  P(X_t = x | X_0, \ldots, X_{t-1}) = P(X_t = x | X_{t-1})
+\]
+for all $t$ and $x \in \mathcal{X}$
+
+Density:
+\[
+  f(x_0, \ldots, x_t) = f(x_1)f(x_2|x_1)f(x_3|x_2) \cdots f(x_t|x_{t-1})
+\]
+
+a Markov Process can be represented as the DAG:
+\[
+  X_0 \longrightarrow X_1 \longrightarrow \cdots \longrightarrow X_n
+    \longrightarrow \cdots
+\]
+where each Random Variable has a single parent (the previous Observation)
+
+cf. Poisson Process (\S\ref{sec:poisson_process})
+
+\fist can be seen as a special case of Petri Nets (\S\ref{sec:petri_net}) where
+every Transition has a single Input and a single Output
+
+``Equilibria'' -- a Discrete Markov Process where the Histogram (Density
+Estimate) of States Converges is said to reach an ``Equilibrium''
+
+a Markov Process is \emph{Homogeneous} if Transition Probabilities
+$P(X_{n+1} = j | X_n = i)$ are Constant over time, i.e.:
+\[
+  P(X_{n+1} = j | X_n = i) = P(X_1 = j| X_0 = i)
+\]
+
+a Probability $p_{ij}$:
+\[
+  p_{ij} \equiv P(X_{n+1} = j | X_n = i)
+\]
+is called a \emph{Transition Probability}, and the Square Matrix $\mathbf{P}$ of
+Transition Probabilities is called the \emph{Transition Matrix} (or
+\emph{Stochastic Matrix});
+$p_{ij} \geq 0$, and each Row is a Probability Mass Function (\S\ref{sec:pmf}),
+since $\sum_i p_{ij} = 1$
+
+an \emph{$n$-step Transition Probability}:
+\[
+  p_{ij}(n) = P(X_{m+n} = j | X_m = i)
+\]
+is the Probability of going from State $i$ to State $j$ in $n$ steps
+
+for Homogeneous Markov Processes:
+
+$\mathbf{P}^n$ -- $n$-step Transition Matrix, i.e. $\mathbf{P}$
+
+\emph{Chapman-Kolmogorov Equations}:
+\[
+  p_{ij}(m + n) = \sum_k p_{ik}(m) p_{kj}(n)
+\]
+which is the same as Multiplication of the $m$- and $n$-step Transition
+Matrices:
+\[
+  \mathbf{P}^{m+n} = \mathbf{P}^m \mathbf{P}^n
+\]
+
+the Marginal Probability that Markov Process is in State $i$ at Time $n$:
+\[
+  \mu_n(i) = P(X_n = i)
+\]
+
+let $\mu_n = [\mu_n(1), \ldots, \mu_n(N)]$ be a Row Vector (``Distribution'')
+
+$\mu_0$ is the \emph{Initial Distribution}
+
+to \emph{Simulate} (\S\ref{sec:stochastic_simulation}) a Markov Process, only
+$\mu_0$ and $\mathbf{P}$ are needed:
+\begin{enumerate}
+  \item ``draw'' $X_0 \sim \mu_0$; therefore $P(X_0 = i) = \mu_0(i)$
+  \item when the Outcome of (1.) is $i$, drawing $X_1 \sim \mathbf{P}$ gives
+    $P(X_1 = j | X_0 = i) = p_{ij}$
+  \item when the Outcome of (2.) is $j$, drawing $X_2 \sim \mathbf{P}$ gives
+    $P(X_2 = k | X_1 = j) = p_{jk}$
+  \item and so on...
+\end{enumerate}
+
+$\mu_n$ gives the Histogram of collecting all Outcomes at Time $n$
+
+(Lemma) the Marginal Probabilities are given by $\mu_n = \mu_0 \mathbf{P}^n$
+
+$j$ is \emph{Accessible} from $i$, $i \rightarrow j$, if $p_{ij}(n) > 0$ for
+some $n$; if $i \rightarrow j$ and $j \rightarrow i$, then $i$ and $j$
+\emph{Communicate}, $i \leftrightarrow j$
+
+(Thm.) the Communication Relation Satisfies:
+\begin{itemize}
+  \item $i \leftrightarrow i$
+  \item $i \leftrightarrow j \Longrightarrow j \leftrightarrow i$
+  \item $i \leftrightarrow j \wedge j \leftrightarrow k \Longrightarrow
+    i \leftrightarrow k$
+  \item the State Space $\mathcal{X}$ can be written as a Disjoint Union of
+    Communication Classes $\mathcal{X}_1 \cup \mathcal{X}_2 \cup \cdots$
+    generated by the Communication Relation in which any two States $i$ and $j$
+    Communicate with eachother if and only if they are in the same Class
+\end{itemize}
+
+if all States Communicate, the Markof Process is called \emph{Irreducible}
+
+a Set of States is \emph{Closed} if once entered, the Process never leaves; a
+Closed Set of States consisting of a single State is called an \emph{Absorbing
+  State}
+
+if in a State $i$, the Process will eventually return to State $i$ with
+Probability $1$:
+\[
+  \exists n \geq 1 . P(X_n = i | X_0 = i) = 1
+\]
+then State $i$ is called \emph{Recurrent} or \emph{Persistent}, otherwise $i$ is
+\emph{Transient}
+
+(Thm.) a State $i$ is Recurrent if and only if:
+\[
+  \sum_n p_{ii}(n) = \infty
+\]
+a State $i$ is Transient if and only if:
+\[
+  \sum_n p_{ii} < \infty
+\]
+
+(Thm.)
+\begin{itemize}
+  \item if State $i$ is Recurrent and $i \leftrightarrow j$ then $j$ is
+    Recurrent
+  \item if State $i$ is Transient and $i \leftrightarrow j$ then $j$ is
+    Transient
+  \item a Finite Markov Process must have at least one Recurrent State
+  \item the States of a Finite, Irreducible Markov Process are all Recurrent
+\end{itemize}
+
+\emph{Decomposition Theorem}:
+the State Space $\mathcal{X}$ can be written as the Disjoint Union:
+\[
+  \mathcal{X} = \mathcal{X}_T \cup \mathcal{X}_1 \cup \mathcal{X}_2 \cup \cdots
+\]
+where $\mathcal{X}_T$ are the Transient States and each $\mathcal{X}_i$ is a
+Closed, Irreducible Set of Recurrent States
+
+\emph{Recurrence Time}
+
+\emph{Mean Recurrence Time}
+
+a Recurrent State is \emph{Null} if the Mean Recurrence Time is Infinite;
+otherwise it is \emph{Positive} (or \emph{Non-null})
+
+(Lemma) if a Sate is Null and Recurrent, then $p_{ii}^n \rightarrow 0$
+
+(Lemma) in a Finite State Markov Process, all Recurrent States are Positive
+
+State $i$ has \emph{Period} $d$ if any return to State $i$ \emph{must} occur in
+Multiples of $d$ time steps; $d$ is the largest Integer such that
+$p_{ii}(n) = 0$ whenever $n$ is not Divisible by $d$ ($\neg d | n$), i.e.
+$d = gcd\{n : p_{ii}(n) > 0 \}$
+
+State $i$ is \emph{Periodic} if $d(i) > 1$ and \emph{Aperiodic} if $d(i) = 1$
+
+an Irreducible Markov Process needs only one Aperiodic State to imply all States
+are Aperiodic
+
+every State of a Bipartite Graph (\S\ref{sec:bipartite_graph}) has an Even
+Period
+
+(Lemma) if a State $i$ has Period $d$ and $i \leftrightarrow j$, then $j$ has
+Period $d$
+
+a State is \emph{Ergodic} (cf. Ergodic Theory \S\ref{sec:ergodic_theory}) if it
+is:
+\begin{itemize}
+  \item Recurrent -- will eventually be returned to
+  \item Positive -- has a Finite Mean Recurrence Time
+  \item Aperiodic -- the GCD of the number of steps of any return is $1$
+\end{itemize}
+a Markov Process is Ergodic if all its States are Ergodic
+
+a Distribution $\pi = [\pi_i : i \in \mathcal{X}]$ is \emph{Stationary} (or
+\emph{Invariant}) if $\pi = \pi \mathbf{P}$; i.e. if the Process ever ``has
+Distribution'' (FIXME: clarify) $\pi$, then it will continue to have
+Distribution $\pi$ forever
+
+a Markov Process has \emph{Limiting Distribution} $\pi$ if:
+\[
+  P^n \rightarrow \begin{bmatrix}
+    \pi \\
+    \pi \\
+    \vdots \\
+    \pi \\
+  \end{bmatrix}
+\]
+for some $\pi$, i.e. $\pi_j = \lim_{n\rightarrow\infty} \mathbf{P}_{ij}^n$
+exists and is independent of $i$
+
+\textbf{Thm.} (Convergence) \emph{
+  An Irreducible, Ergodic Markov Process has a
+  unique Stationary Distribution $\pi$, and a Limiting Distribution equal to
+  $\pi$, and for any Bounded Function $g$, with Probability $1$:
+\[
+  \lim_{N\rightarrow\infty} \frac{1}{N} \sum_{n=1}^N g(X_n)
+    \rightarrow E_\pi(g) \equiv \sum_j g(j) \pi_j
+\]
+}
+
+note that a Markov Process having a Stationary Distribution does not imply
+Convergence
+
+\emph{Detailed Balance}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Random Walk}\label{sec:random_walk}
 % ------------------------------------------------------------------------------
@@ -7406,7 +7876,13 @@ cf. Law of Large Numbers (\S\ref{sec:large_numbers})
 \subsection{Random Field}\label{sec:random_field}
 % ------------------------------------------------------------------------------
 
-(wiki): for a Probability Space $(\Omega, \mathcal{F}, P)$, an \emph{$X$-valued
+(wiki):
+
+a Stochastic Process where the underlying Index Set does not need to be a Real
+of Integer Valued ``Time'', but can be any Topological Space
+(\S\ref{sec:topological_space})
+
+for a Probability Space $(\Omega, \mathcal{F}, P)$, an \emph{$X$-valued
   Random Field}, $F$, is a collection of $X$-valued Random Variables indexed by
 elements in a Topological Space $T$:
 \[
@@ -7437,79 +7913,6 @@ Machine Learning: Sequence MOdelling
 (GRF)
 
 a 1D GRF is a Gaussian Process (\S\ref{sec:gaussian_process})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Point Process}\label{sec:point_process}
-% ------------------------------------------------------------------------------
-
-a \emph{Point Process} is a Random Measure (\S\ref{sec:random_measure}) of the
-form:
-\[
-  \mu = \sum_{n=1}^N \delta_{X_n}
-\]
-where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
-
-
-
-\subsubsection{Poisson Process}\label{sec:poisson_process}
-
-Memory-less
-
-cf. Markov Process (\S\ref{sec:markov_process})
-
-Poisson Distribution (\S\ref{sec:poisson_distribution})
-
-
-
-\subsubsection{Binomial Process}\label{sec:binomial_process}
-
-cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Markov Process}\label{sec:markov_process}
-% ------------------------------------------------------------------------------
-
-(or \emph{Markov Chain})
-
-(Wasserman04, \S23.2)
-
-\emph{Markov Property} (``Memorylessness'') --
-Distribution of $X_i$ Depends only on $X_{i-1}$:
-\[
-  P(X_t = x | X_0, \ldots, X_{t-1}) = P(X_t = x | X_{t-1})
-\]
-for all $t$ and $x \in \mathcal{X}$
-
-cf. Poisson Process (\S\ref{sec:poisson_process})
-
-Density:
-\[
-  f(x_0, \ldots, x_t) = f(x_1)f(x_2|x_1)f(x_3|x_2) \cdots f(x_t|x_{t-1})
-\]
-
-\fist can be seen as a special case of Petri Nets (\S\ref{sec:petri_net}) where
-every Transition has a single Input and a single Output
-
-a Probability $p_{ij}$:
-\[
-  p_{ij} \equiv P(X_{n+1} = j | X_n = i)
-\]
-is called a \emph{Transition Probability}, and the Matrix $\mathbf{P}$ of
-Transition Probabilities is called the \emph{Transition Matrix};
-$p_{ij} \geq 0$, and each Row is a Probability Mass Function, since
-$\sum_i p_{ij} = 1$
-
-a Markov Process is \emph{Homogeneous} if Transition Probabilities $P(X_{n+1} =
-j | X_n = i)$ is Constant over Time, i.e.:
-\[
-  P(X_{n+1} = j | X_n = i) = P(X_1 = j| X_0 = i)
-\]
-
-$n$-step Transitions
 
 
 
@@ -7625,6 +8028,10 @@ where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
 
 \subsubsection{Monte Carlo Simulation}\label{sec:monte_carlo}
 
+\paragraph{Markov Chain Monte Carlo (MCMC)}\label{sec:mcmc}\hfill
+
+Markov Processes (\S\ref{sec:markov_process})
+
 
 
 % ------------------------------------------------------------------------------
@@ -7640,6 +8047,12 @@ Probability Distribution is called the ``Giry Monad'' (TODO)
 
 assigns to a Space of Outcomes $X$ a new Space $P X$ containing Random Outcomes
 of $X$
+
+\url{https://golem.ph.utexas.edu/category/2019/05/partial_evaluations.html}
+(Perrone 2018):
+
+Partial Evaluations (\S\ref{sec:partial_evaluation}) as Conditional Expectations
+(\S\ref{sec:conditional_expectation})
 
 
 
