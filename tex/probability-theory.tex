@@ -416,7 +416,7 @@ two broad categories of \emph{Probability Interpretations}:
     a ``physical'' tendency or disposition of a given ``physical situation'' to
     yield an Outcome of a certain kind, or to yield long-run Relative Frequency
     of such an Outcome; motivated by ``single-case'' Probability attributions
-    (e.g. atom decay); distinction between \emph{long-run} and
+    (e.g. radioactive decay); distinction between \emph{long-run} and
     \emph{single-case} Propensities (Gillies00); \emph{Humphreys' Paradox}:
     Propensities as measures of ``causal tendencies'' violates Bayes' Theorem
     which allows the reversal of a Conditional Probability-- cf. alternative
@@ -2107,9 +2107,6 @@ cf. Binomial Coefficients (\S\ref{sec:binomial_coefficient})
 \fist cf. Geometric Distribution (\S\ref{sec:geometric_distribution}) -- number
 of Trials until first Success
 
-\fist Poisson Distribution (\S\ref{sec:poisson_distribution}) -- Limit of the
-Binomial Distribution as number of Trials $n \rightarrow \infty$
-
 Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
 $p \in [0,1]$:
 \[
@@ -2120,6 +2117,9 @@ where the Probability of Success is $p$:
 \[
   P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
 \]
+
+\fist Poisson Distribution (\S\ref{sec:poisson_distribution}) -- Limit of the
+Binomial Distribution as number of Trials $n \rightarrow \infty$
 
 Expected Value $E(X) = np$
 
@@ -2177,16 +2177,30 @@ where $\lambda$ is the average number of outcomes per unit time
 
 Expected Value is the Limit of the Binomial Distribution as number of Trials
 $n \rightarrow \infty$:
-\[
-  E(X) = \lambda = np
-\]
+\begin{flalign*}
+  E(X) & = \lambda \\
+  V(X) & = \lambda \\
+  P(X = k) & = \lim_{n\rightarrow\infty}
+               \binom{n}{k}(\frac{\lambda}{n})^k(1-\frac{\lambda}{n})^{n-k} \\
+           & = \frac{\lambda^k e^{-\lambda}}{k!} \\
+\end{flalign*}
 
-models counts of rare events, e.g. radioactive decay, traffic accidents
+models counts of rare events, e.g. radioactive decay, traffic accidents (cf.
+Propensity Interpretation of Probability)
 
-Poisson Process (\S\ref{sec:poisson_process})
+cf. Poisson Processes (\S\ref{sec:poisson_process})
 
 \fist Poisson Noise (Shot Noise): Statistical Fluctuations
 (\S\ref{sec:statistical_fluctuation})
+
+for Independent Random Variables $X \sim Poisson(\lambda)$ and
+$Y \sim Poisson(\nu)$:
+\[
+  X + Y \sim Poisson(\lambda + \nu)
+\]
+
+if $N \sim Poisson(\lambda)$ and $Y | N = n \sim Binomial(n,p)$, then the
+Marginal Distribution of $Y$ is $Y \sim Poisson(\lamda p)$ (Wasserman04 \S 23.3)
 
 
 
@@ -7569,76 +7583,18 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 
 
 % ------------------------------------------------------------------------------
-\subsection{Random Measure}\label{sec:random_measure}
+\subsection{Random Walk}\label{sec:random_walk}
 % ------------------------------------------------------------------------------
 
-a Measure-valued Random Element (\S\ref{sec:random_variable})
+\subsubsection{Law of Iterated Logarithm}\label{sec:iterated_logarithm}
 
-definition as Transition Kernels
+describes magnitude of Fluctuations of a Random Walk
 
-\begin{itemize}
-  \item $P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$ --
-    Empirical Measure (\S\ref{sec:empirical_measure})
-  \item $\mu = \sum_{n=1}^N \delta_{X_n}$ -- Point Process
-    (\S\ref{sec:point_process})
-\end{itemize}
+cf. Law of Large Numbers (\S\ref{sec:large_numbers})
 
 
 
-\subsubsection{Empirical Measure}\label{sec:empirical_measure}
-
-$P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$
-
-where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
-
-the CDF (\S\ref{sec:cdf}) associated with the Empirical Measure of a Sample
-(\S\ref{sec:sample}) is the \emph{Empirical Distribution Function}
-(\S\ref{sec:empirical_distribution})
-
-
-
-\subsubsection{Point Process}\label{sec:point_process}
-
-a \emph{Point Process} (or \emph{Point Field}) is a Random Measure
-(\S\ref{sec:random_measure}) of the form:
-\[
-  \mu = \sum_{n=1}^N \delta_{X_n}
-\]
-where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Counting Process}\label{sec:counting_process}
-% ------------------------------------------------------------------------------
-
-a Stochastic Process with values that are Non-negative, Non-decreasing Integers
-
-
-
-\subsubsection{Poisson Process}\label{sec:poisson_process}
-
-Memory-less
-
-cf. Markov Process (\S\ref{sec:markov_process})
-
-Poisson Distribution (\S\ref{sec:poisson_distribution})
-
-
-
-\subsubsection{Binomial Process}\label{sec:binomial_process}
-
-cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
-
-
-
-\subsubsection{Renewal Theory}\label{sec:renewal_theory}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Markov Process}\label{sec:markov_process}
-% ------------------------------------------------------------------------------
+\subsubsection{Markov Process}\label{sec:markov_process}
 
 (or \emph{Markov Chain})
 
@@ -7860,15 +7816,119 @@ Convergence
 
 
 
+\paragraph{Branching Process}\label{sec:branching_process}\hfill
+
+
+
 % ------------------------------------------------------------------------------
-\subsection{Random Walk}\label{sec:random_walk}
+\subsection{Random Measure}\label{sec:random_measure}
 % ------------------------------------------------------------------------------
 
-\subsubsection{Law of Iterated Logarithm}\label{sec:iterated_logarithm}
+a Measure-valued Random Element (\S\ref{sec:random_variable})
 
-describes magnitude of Fluctuations of a Random Walk
+definition as Transition Kernels
 
-cf. Law of Large Numbers (\S\ref{sec:large_numbers})
+\begin{itemize}
+  \item $P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$ --
+    Empirical Measure (\S\ref{sec:empirical_measure})
+  \item $\mu = \sum_{n=1}^N \delta_{X_n}$ -- Point Process
+    (\S\ref{sec:point_process})
+\end{itemize}
+
+
+
+\subsubsection{Empirical Measure}\label{sec:empirical_measure}
+
+$P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$
+
+where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
+
+the CDF (\S\ref{sec:cdf}) associated with the Empirical Measure of a Sample
+(\S\ref{sec:sample}) is the \emph{Empirical Distribution Function}
+(\S\ref{sec:empirical_distribution})
+
+
+
+\subsubsection{Point Process}\label{sec:point_process}
+
+a \emph{Point Process} (or \emph{Point Field}) is a Random Measure
+(\S\ref{sec:random_measure}) of the form:
+\[
+  \mu = \sum_{n=1}^N \delta_{X_n}
+\]
+where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
+
+a Point Process is a Random Element (\S\ref{sec:random_variable}) whose values
+are ``Point Patterns'' or \emph{Locally-finite Counting Measures}
+(\S\ref{sec:counting_measure}) on a Set $S$
+
+for most purposes, ``Point Patterns'' can be thought of as Countable Subsets of
+$S$ that have no Limit Points (FIXME: clarify)
+
+Poisson Point Process (\S\ref{sec:poisson_process}) -- spatial generalization of
+Poisson Process
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Counting Process}\label{sec:counting_process}
+% ------------------------------------------------------------------------------
+
+a Stochastic Process with values that are Non-negative, Non-decreasing Integers
+
+
+
+\subsubsection{Poisson Process}\label{sec:poisson_process}
+
+Counting occurrences of ``Events'' over time (e.g. traffic accidents,
+radioactive decay; cf. Propensity Interpretation of Probability)
+
+Memory-less
+
+Properties of a Poisson Process on the Real Line: the number of Points
+(``Events'') in Disjoint Intervals are Independent and have a Poisson
+Distribution (\S\ref{sec:poisson_distribution})
+
+cf. Markov Process (\S\ref{sec:markov_process})
+
+Queueing Theory (\S\ref{sec:queueing_theory})
+
+Poisson Point Process (\S\ref{sec:point_process}) -- spatial generalization of
+Poisson Process
+
+(Wasserman04 \S 23.3)
+
+\emph{Intensity Function} $\lambda(t)$
+
+\emph{Homogenous Poisson Process}, \emph{Rate} $\lambda \equiv \lambda(t)$
+
+\emph{Waiting Times} $W_n$, \emph{Interrarival (Sojourn) Times} $S_n$
+
+(Thm.) Interrarival Times are IID Random Variables with Exponential Distribution
+with Mean $1/\lambda$, i.e. PDF for $s \geq 0$:
+\[
+  f(s) = \lambda e^{-\lambda s}
+\]
+and the Waiting Time $W_n \sim Gamma(n, 1/\lambda)$, i.e. has PDF:
+\[
+  f(w) = \frac{1}{\Gamma(n)}\lambda^n w^{n-1} e^{-\lambda t}
+\]
+and therefore:
+\begin{flalign*}
+  E(W_n) & = \frac{n}{\lambda} \\
+  V(W_n) & = \frac{n}{\lambda^2} \\
+\end{flalign*}
+
+
+
+
+\subsubsection{Binomial Process}\label{sec:binomial_process}
+
+cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
+
+
+
+\subsubsection{Renewal Theory}\label{sec:renewal_theory}
 
 
 
