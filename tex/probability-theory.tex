@@ -128,7 +128,7 @@ Mathematical Formalization: Bernoulli Process (\S\ref{sec:bernoulli_process})
 \end{enumerate}
 
 Number of Successes in $n$ Bernoulli Trials is a \emph{Binomial Random
-  Variable} (\S\ref{sec:binomial_random_variable})
+  Variable} (\S\ref{sec:binomial_variable})
 
 \fist Statistical Odds (\S\ref{sec:odds}) -- Ratio of the Probability that an
 Event will occur versus the Probability that it will not occur, i.e. a Binomial
@@ -1528,7 +1528,7 @@ Random Variable
 
 
 
-\subsubsection{Binomial Random Variable}\label{sec:binomial_random_variable}
+\subsubsection{Binomial Random Variable}\label{sec:binomial_variable}
 
 number of ``Successes'' in $n$ Independent Trials with Constant Success
 Probability $p$
@@ -2098,7 +2098,7 @@ Sum of Independent Trials; cf. Normal Distribution
 
 Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
 
-Binomial Random Variable (\S\ref{sec:binomial_random_variable})
+Binomial Random Variable (\S\ref{sec:binomial_variable})
 
 $k = 2$ , $n > 1$
 
@@ -2347,6 +2347,8 @@ Mean, 95\% within 2 Standard Deviations, 99.7\% within 3 Standard Deviations
   \]
 }
 
+
+
 \paragraph{Standard Normal Distribution}\label{sec:standard_normal}\hfill
 
 Mean $\mu = 0$
@@ -2409,6 +2411,8 @@ $X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
 
 
 
+\subsubsection{Inverse Gaussian Distribution}\label{sec:inverse_gaussian}
+
 \subsubsection{Log-normal Distribution}\label{sec:lognormal_distribution}
 
 \subsubsection{Gamma Distribution}\label{sec:gamma_distribution}
@@ -2420,9 +2424,9 @@ Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
 \[
   f(x; \alpha, \beta) =
   \begin{cases}
-  \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}
-        & \quad x > 0 \\
-  0     & \quad\text{else} \\
+    \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}
+      & \quad x > 0 \\
+    0 & \quad\text{else} \\
   \end{cases}
 \]
 
@@ -4116,7 +4120,9 @@ Directed Separation or $d$-separation
 
 \subparagraph{Multilevel Model}\label{sec:multilevel_model}\hfill
 
-Hierarchical Linear Models
+or \emph{Hierarchical Linear Models}
+
+Gibbs Sampling (\S\ref{sec:mcmc})
 
 
 
@@ -5057,6 +5063,41 @@ Set-membership approach to Estimation Theory (cf. Probabilistic approach)
 
 
 
+\subsubsection{Importance Sampling}\label{sec:importance_sampling}
+
+Umbrella Sampling (Physics)
+
+\fist Independence Metropolis-Hastings (Markov Chain Monte Carlo Method
+\S\ref{sec:mcmc})
+
+(Wasserman04 \S24.3)
+
+can be used to reduce Variance in Monte Carlo Methods (\S\ref{sec:monte_carlo})
+
+Sampling from a known Distribution $g$:
+\[
+  E_g(Y) = \int \frac{h(x)f(x)}{g(x)} g(x) dx
+\]
+where $Y = h(X)f(X)/g(X)$
+
+Simulating $X_1, \ldots, X_n \sim g$ Estimates $E_g(Y)$ by:
+\[
+  \hat{E_g(Y)} = \frac{1}{N}\sum_i Y_i
+\]
+Converges with appropriate choice of $g$ such that the Variance is not Infinite
+(FIXME: clarify)
+
+(Thm.) The choice of $g$ that minimizes the Variance of $\hat{E_g(Y)}$ is:
+\[
+  g^*(x) = \frac{|h(x)| f(x)}{\int|h(s)| f(s) ds}
+\]
+
+this may not be useful if it is not known how to sample from $f$
+
+in practice, $g$ should be a tick-tailed Distribution similar to $f|h|$
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Hypothesis Testing}\label{sec:hypothesis_testing}
 % ------------------------------------------------------------------------------
@@ -5789,9 +5830,25 @@ $f(\theta | x^n)$
   f(\theta | x^n) \propto \mathcal{L}(\theta)f(\theta)
 \]
 
+(Wasserman04 \S24.1):
+\[
+  f(\theta | X^n) = \frac{
+    \mathcal{L}(\theta) f(\theta)
+  }{
+    \int \mathcal{L}(\theta) f(\theta) d\theta
+  }
+\]
+where the Denominator is the \emph{Normalizing Constant}
+
+Marginal Posterior Density -- may require computing high-dimensional Integrals
+
 Posterior Estimates:
 
 \emph{Posterior Mean} (Point Estimate)
+
+\[
+  \overline{\theta} = \int \theta f(\theta | X^n) d\theta
+\]
 
 for Distributions satisfying ``Regularity Conditions'', e.g. Bernoulli and
 Normal Distributions, Posterior Mean is generally close to the MLE (Mean
@@ -5827,6 +5884,13 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 
 
 \subsubsection{Likelihood}\label{sec:likelihood}
+
+(Fisher)
+
+whereas Probability is some Area under a given PDF, the \emph{Likelihood} is the
+Density of some PDF at a given Observation value, that is, the Joint Probability
+Distribution of Observed Data expressed as a Function of Statistical Parameters
+(FIXME: Clarify)
 
 \fist Bayesian Methods are tied to the Likelihood Function which does not yield
 accurate Inferances in High-dimensional and Non-parametric problems
@@ -7598,8 +7662,6 @@ cf. Law of Large Numbers (\S\ref{sec:large_numbers})
 
 (or \emph{Markov Chain})
 
-\fist Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc})
-
 (Wasserman04, \S23.2)
 
 \emph{Markov Property} (``Memorylessness'') --
@@ -7813,6 +7875,9 @@ note that a Markov Process having a Stationary Distribution does not imply
 Convergence
 
 \emph{Detailed Balance}
+
+\fist Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc}) -- Estimate the Integral
+$\int h(x) f(x) dx$ using a Markov Chain with Stationary Distribution $f$
 
 
 
@@ -8086,11 +8151,39 @@ where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
 \subsection{Stochastic Simulation}\label{sec:stochastic_simulation}
 % ------------------------------------------------------------------------------
 
+approximation of Integrals (\S\ref{sec:numerical_integration})
+
+approximation of Posteriors (\S\ref{sec:posterior_distribution}) in Bayesian
+Inference (\S\ref{sec:bayesian_inference})
+
+
+
 \subsubsection{Monte Carlo Simulation}\label{sec:monte_carlo}
+
+Monte Carlo Integration (\S\ref{sec:monte_carlo_integration}) -- Monte Carlo
+Method applied to Numerical Integration
+
+Importance Sampling (\S\ref{sec:importance_sampling}) can be used to reduce
+Variance
+
+
 
 \paragraph{Markov Chain Monte Carlo (MCMC)}\label{sec:mcmc}\hfill
 
 Markov Processes (\S\ref{sec:markov_process})
+
+(Wasserman04 \S24.4)
+
+Estimate the Integral $\int h(x) f(x) dx$ using a Markov Chain with Stationary
+Distribution $f$
+
+\emph{Random-walk Metropolis-Hastings}
+
+\emph{Independence Metropolis-Hastings} -- Importance-sampling
+(\S\ref{sec:importance_sampling})
+
+\emph{Gibbs Sampling} -- higher Dimensions; Multilevel Models
+(\S\ref{sec:multilevel_model})
 
 
 
