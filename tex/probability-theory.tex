@@ -91,10 +91,9 @@ after conducting many Trials of the same Experiment, the \emph{Relative
   Frequency} (Empirical Probability \S\ref{sec:relative_frequency}) of the
 various Outcomes and Events can be assessed
 
-\fist cf. Experimental Unit (Unit of Observational
-\S\ref{sec:observational_unit}) -- one Member of a Set of objects that are
-initially equivalent until each object is subjected to an ``Exprimental
-Treatment''
+\fist cf. Experimental Unit (Unit of Observation \S\ref{sec:observational_unit})
+-- one Member of a Set of objects that are initially equivalent until each
+object is subjected to an ``Exprimental Treatment''
 
 \fist cf. Data Collection (Data Generating Process
 \S\ref{sec:data_generating_process})
@@ -204,6 +203,13 @@ if an actual Outcome is inside an Event (Subset), the Event is said to have
 and the Probability of an Event
 
 (FIXME: cf. Observation \S\ref{sec:observation})
+
+The \emph{Information Content} (\emph{Self-information} or \emph{Surprisal}
+\S\ref{sec:information_content}) of a Sampled (\S\ref{sec:sample}) Random
+Variable or Signal (\S\ref{sec:signal}) is the amount of Information
+(\S\ref{sec:information}) ``gained'' by the Sample; this Information Content is
+a Random Variable defined for any Event regardless of whether a Random Variable
+is being measured or not. (wiki)
 
 
 
@@ -583,8 +589,8 @@ two Events are Independent if and only if their Odds Ratio
 (\S\ref{sec:odds_ratio}) equals $1$
 
 if $X$ and $Y$ are Independent and have Finite Second Moments, then they are
-Uncorrelated (\S\ref{sec:correlation}); not all Uncorrelated Variables are
-Independent
+Uncorrelated (\S\ref{sec:statistical_correlation}); not all Uncorrelated
+Variables are Independent
 
 for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
 $Var(X - Y) = Var(X) + Var(Y)$
@@ -624,6 +630,18 @@ is the Product of the individual Probability Distributions''
 \subsection{Odds}\label{sec:odds}
 % ------------------------------------------------------------------------------
 
+for Probability $p$, the Odds are:
+\[
+  \frac{p}{1-p}
+\]
+
+\fist Logit (Log-odds \S\ref{sec:logit}):
+\[
+  ln \frac{p}{1-p}
+\]
+is the Inverse of the Logistic Function (\S\ref{sec:logistic_function}); the
+Logistic Function can be used to convert a Log-odds into a Probability
+
 an expression of Relative Probabilities: the Odds \emph{in favor} of an Event or
 Proposition is the Ratio of the Probability that the Event will occur to the
 Probability that it will not occur, i.e. a \emph{Binomial Trial}
@@ -646,6 +664,8 @@ two Events are Independent if and only if their Odds Ratio equals $1$
 
 
 \subsubsection{Log Odds Ratio}\label{sec:log_odds}
+
+Logit (Log-odds \S\ref{sec:logit})
 
 
 
@@ -754,6 +774,13 @@ other types of Random Elements:
   \item Random Measure (\S\ref{sec:random_measure})
   \item ...
 \end{itemize}
+
+The \emph{Information Content} (\emph{Self-information} or \emph{Surprisal}
+\S\ref{sec:information_content}) of a Sampled (\S\ref{sec:sample}) Random
+Variable or Signal (\S\ref{sec:signal}) is the amount of Information
+(\S\ref{sec:information}) ``gained'' by the Sample; this Information Content is
+a Random Variable defined for any Event (\S\ref{sec:probability_event})
+regardless of whether a Random Variable is being measured or not. (wiki)
 
 \fist cf. \emph{Statistical Unit} (\S\ref{sec:statistical_unit}) -- one Member
 of a Set of entities being analyzed, providing the ``material source'' for an
@@ -1232,7 +1259,8 @@ where $f(x,y)$ is the Joint Probability Distribution
   \]
 }
 
-the Correlation (\S\ref{sec:correlation}) is defined in terms of the Covariance:
+the Correlation (\S\ref{sec:statistical_correlation}) is defined in terms of the
+Covariance:
 \[
   \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
 \]
@@ -1434,6 +1462,9 @@ the Natural Logarithm of the Moment-generating Function
 cf. Characteristic Function (\S\ref{sec:characteristic_function}) --
 if a Random Variable has a Moment-generating Function then the Characteristic
 Function can be extended to the Complex Plane
+
+every Distribution with a Moment-generating Function is a member of a Natural
+Exponential Family (\S\ref{sec:nautral_exponential_family})
 
 
 
@@ -2200,7 +2231,7 @@ $Y \sim Poisson(\nu)$:
 \]
 
 if $N \sim Poisson(\lambda)$ and $Y | N = n \sim Binomial(n,p)$, then the
-Marginal Distribution of $Y$ is $Y \sim Poisson(\lamda p)$ (Wasserman04 \S 23.3)
+Marginal Distribution of $Y$ is $Y \sim Poisson(\lambda p)$ (Wasserman04 \S 23.3)
 
 
 
@@ -2298,6 +2329,9 @@ has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
 \subsubsection{Normal Distribution}\label{sec:normal_distribution}
 
 (or \emph{Gaussian Distribution})
+
+member of the family of Tweedie (\S\ref{sec:tweedie_distribution}) Exponential
+Dispersion Models (\S\ref{sec:exponential_dispersion})
 
 \[
   n (x; \mu, \sigma) =
@@ -2526,6 +2560,19 @@ prototypical Power Law Distribution
 
 
 
+\subsubsection{Phse-type Distribution}\label{sec:phasetype_distribution}
+
+\begin{itemize}
+  \item Degenerate Distribution (TODO) -- 0
+    Phases
+  \item Exponential Distribution (\S\ref{sec:exponential_distribution}) -- 1
+    Phase
+  \item Erlang Distribution (TODO) -- 2 or more identical Phases in sequence
+  \item ...
+\end{itemize}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Symmetric Probability Distribution}
 \label{sec:symmetric_probability}
@@ -2745,6 +2792,9 @@ Power Law manifestations attributed to ``Self-organized Criticality''
 (SOC \S\ref{sec:soc})
 
 Pink ($1/f$) Noise
+
+Normal Distribution (\S\ref{sec:normal_distribution}) is a member of the family
+of Tweedie Exponential Dispersion Models (\S\ref{sec:exponential_dispersion})
 
 \fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
 Sequential (Time Series) data attributed to ``convergence effects'' related to
@@ -2980,6 +3030,13 @@ Population, selected by a definite procedure (\emph{Sampling Procedure}
 
 A \emph{Data Point} is an Observation (Random Variate \S\ref{sec:observation})
 of a Statistical Unit (\S\ref{sec:statistical_unit}) in a Statistical Sample.
+
+The \emph{Information Content} (\emph{Self-information} or \emph{Surprisal}
+\S\ref{sec:information_content}) of a Sampled Random Variable or Signal
+(\S\ref{sec:signal}) is the amount of Information (\S\ref{sec:information})
+``gained'' by the Sample; this Information Content is a Random Variable defined
+for any Event (\S\ref{sec:probability_event}) regardless of whether a Random
+Variable is being measured or not. (wiki)
 
 \fist cf. \emph{Data} (\S\ref{sec:data}), \emph{Data Generating Process}
 (\S\ref{sec:data_generating_process}), \emph{Dataset} (\S\ref{sec:dataset})
@@ -4003,6 +4060,31 @@ Estimates (\S\ref{sec:mle}) are identical
 
 
 
+\subparagraph{Natural Exponential Family}
+\label{sec:natural_exponential_family}\hfill
+
+every Distribution with a Moment-generating Function
+(\S\ref{sec:moment_generating_function}) is a member of a Natural
+Exponential Family
+
+Generalized Linear Models (\S\ref{sec:glm})
+
+
+
+\subparagraph{Exponential Dispersion Model}
+\label{sec:exponential_dispersion}\hfill
+
+generalization of Natural Exponential Family
+
+includes:
+\begin{itemize}
+  \item Tweedie Distribution (\S\ref{sec:tweedie_distribution})
+\end{itemize}
+
+Generalized Linear Models (\S\ref{sec:glm})
+
+
+
 \paragraph{Fixed Effects Model}\label{sec:fixed_effect}\hfill
 
 \paragraph{Random Effects Model}\label{sec:random_effect}\hfill
@@ -4071,6 +4153,8 @@ or \emph{Logit Model}
 
 uses a Logistic Function (\S\ref{sec:logistic_function}) to Model a Binary
 Dependent Variable
+
+Logit (\S\ref{sec:logit}) -- inverse of Logistic Function
 
 Logistic Regression (\S\ref{sec:logistic_regression})
 
@@ -4407,6 +4491,9 @@ when Observations come from an Exponential Family
 (\S\ref{sec:exponential_family}), under mild conditions the Least-squares
 Estimates (\S\ref{sec:least_squares}) and Maximum-Likelihood Estimates are
 identical
+
+whereas Least-squares is used to measure Fit of Linear Regression, MLE is used
+to measure Fit in Logistic Regression (\S\ref{sec:logistic_regression})
 
 the MLE Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
 (\S\ref{sec:bayes_estimator})
@@ -4940,11 +5027,14 @@ cf. Best Linear Unbiased Predictor (BLUP \S\ref{sec:blup})
 
 Linear Regression (\S\ref{sec:linear_regression})
 
-Overdetermined Systems (\S\ref{sec:overdetermined_system})
+Overdetermined Systems (\S\ref{sec:overdetermined_system}); cf. ``Least Norm''
+solution for Underdetermined Systems (TODO: xref)
 
 QR Decomposition (\S\ref{sec:qr_decomposition})
 
 has a Closed-form solution
+
+UC Math 352, Lecture 7. - \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
 
 
 
@@ -5015,7 +5105,7 @@ splitting $\vec{\rho}$ into:
 $\hat{rho}$ can be made Zero by solving $\hat{R}\vec{x} - \hat{Q}^T\vec{b}$ for
 $\vec{x}$, which is an Upper Triangular Matrix that can be solved efficiently:
 \[
-  \vec{x} = \hat{R}^{-1}\hat{Q}^T\vec{b}
+  \hat{\vec{x}} = \hat{R}^{-1}\hat{Q}^T\vec{b}
 \]
 and $\vec{rho}_N$ is independent of $\vec{x}$ so it is \emph{fixed}, so:
 \[
@@ -5031,7 +5121,7 @@ degree of Correlation between Residuals
 
 
 
-\subparagraph{Weighted Least Squares}\label{sec:weighted_least_squares}\hfill
+\subparagraph{Weighted Least Squares (WLS)}\label{sec:wls}\hfill
 
 can be used in Regression Analysis to drop the Assumption that the Variance of
 the Error is Constant accross Observations (\emph{Homoscedasticity}
@@ -5671,6 +5761,8 @@ Conditional Probabilities (\S\ref{sec:conditional_probability}), Bayes' Rule
 \fist Bayesian Network (Probabilistic Directed Acyclic Graphical Model
 \S\ref{sec:bayes_network})
 
+\fist Dirichlet Processes (\S\ref{sec:dirichlet_process})
+
 Subjective Probability %FIXME: section
 (\url{https://plato.stanford.edu/entries/probability-interpret/#SubPro}),
 Conditioning (\S\ref{sec:conditioning})
@@ -6030,6 +6122,10 @@ Data (\S\ref{sec:sample})
 in Multivariate Data using Linear Predictor Functions with parameters Estimated
 from the Data
 
+\fist Generalized Linear Model (\S\ref{sec:glm}) -- Linear Predictor is one
+component of a GLM along with a family of Exponential Distributions and a Link
+Function
+
 \fist Linear Classifier (\S\ref{sec:linear_classifier})
 
 
@@ -6303,6 +6399,16 @@ than one Outcome Variable (\emph{Multivariate Random Variables} or \emph{Random
 % ------------------------------------------------------------------------------
 \subsection{Multivariate Analysis}\label{sec:multivariate_analysis}
 % ------------------------------------------------------------------------------
+
+\subsubsection{Interaction}\label{sec:interaction}
+
+\emph{Interaction Variable}
+
+product of two or more Explanatory Variables
+
+cf. Basis Functions (\S\ref{sec:basis_function})
+
+
 
 \subsubsection{Ordination}\label{sec:ordination}
 
@@ -6659,6 +6765,9 @@ commonly this is an Estimate of the Conditional Expectation
 Independent Variable; also the Quantile (\S\ref{sec:quantile}) or other Location
 Parameter
 
+Interaction Variables (\S\ref{sec:interaction}), Basis Functions
+(\S\ref{sec:basis_function})
+
 \fist cf. Curve Fitting (\S\ref{sec:curve_fitting}), Curve Estimation (Smoothing
 \S\ref{sec:smoothing})
 
@@ -6708,10 +6817,10 @@ and Clustering (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
   \item the Regressors are Measured (Observed) with no Error (cf. Measurement
     Error Models \S\ref{sec:measurement_error_model})
   \item the Regressors are Linearly Independent
-  \item the Errors are Uncorrelated (\S\ref{sec:correlation})
+  \item the Errors are Uncorrelated (\S\ref{sec:statistical_correlation})
   \item (\emph{Homoscedasticity} \S\ref{sec:homoscedasticity}) the Variance of
     the Error is Constant accross Observations (cf. Weighted Least Squares
-    \S\ref{sec:weighted_least_squares})
+    \S\ref{sec:wls})
 \end{itemize}
 at are sufficient for the Least-squares Estimator (\S\ref{sec:least_squares}) to
 be Unbiased (\S\ref{sec:unbiased_estimate}), Consistent
@@ -6826,20 +6935,21 @@ Residual Plot
 SSE -- Sum of Squared Residuals (SSR or RSS \S\ref{sec:ssr}); for a Simple
 Linear Model:
 \[
-  \sum_n (y_i - \beta_1 x_i + \beta_0)
+  \sum_n (y_i - \hat{\beta_1} x_i + \hat{\beta_0})
 \]
 can be re-written as:
 \[
-  n (\overline{y^2} - 2 \beta_1 \overline{x y} - 2 \beta_0 \overline{y}
-    + \beta_1^2 \overline{x^2} + 2 \beta_1 \beta_0 \overline{x} + \beta_0^2)
+  n (\overline{y^2} - 2 \hat{\beta_1} \overline{x y}
+    - 2 \hat{\beta_0} \overline{y} + \hat{\beta_1}^2 \overline{x^2}
+    + 2 \hat{\beta_1} \hat{\beta_0} \overline{x} + \hat{\beta_0}^2)
 \]
-finding where the Partial Derivative with respect to $\beta_0$ and $\beta_1$ are
-both Zero gives the Least-squares Estimate (\S\ref{sec:least_squares}) of the
-Regression Function
+finding where the Partial Derivative with respect to $\hat{\beta_0}$ and
+$\hat{\beta_1}$ are both Zero gives the Least-squares Estimate
+(\S\ref{sec:least_squares}) of the Regression Function
 
-solving for $\beta_1$:
+solving for $\hat{\beta_1}$:
 \[
-  \beta_1 = \frac{
+  \hat{\beta_1} = \frac{
     (\overline{x})\overline{y} - \overline{xy}
   }{
     (\overline{x})^2 \overline{x^2}
@@ -6847,15 +6957,15 @@ solving for $\beta_1$:
 \]
 or equivalently:
 \[
-  \beta_1 = \frac{
+  \hat{\beta_1} = \frac{
     Cov(x,y)
   }{
     Var(x)
   }
 \]
-and substituting to solve for $\beta_0$:
+and substituting to solve for $\hat{\beta_0}$:
 \[
-  \beta_0 = \overline{y} - \frac{
+  \hat{\beta_0} = \overline{y} - \frac{
     \overline{x} Cov(x,y)
   }{
     Var(x)
@@ -6959,19 +7069,26 @@ for $i \in \{1, \ldots, n\}$ where $\phi$ are Basis Functions
 Assuming $\varepsilon_i | X_i \sim N(0, \sigma^2)$ is the same as Assuming
 $Y_i | X_i \sim N(\mu_i, \sigma^2)$
 
-cf. \emph{Correlation} (\S\ref{sec:correlation}) -- measure of how close two
-Random Variables are to having a \emph{Linear Relationship}
+cf. \emph{Correlation} (\S\ref{sec:statistical_correlation}) -- measure of how
+close two Random Variables are to having a \emph{Linear Relationship}
+
+\begin{itemize}
+  \item Simple Linear Regression (\S\ref{sec:simple_linear_regression})
+  \item Multivariate (``General'') Linear Regression
+    (\S\ref{sec:multivariate_linear_regression})
+  \item Generalized Linear Models (GLMs \S\ref{sec:glm})
+\end{itemize}
 
 Fit using Estimators:
 \begin{itemize}
   \item Linear Least Squares (\S\ref{sec:lls}): if Errors are
     \emph{Normally Distributed}, Least Squares ($2$-norm Best Fit) should be
     used
-  \begin{itemize}
-    \item Ordinary Least Squares (\S\ref{sec:ols}): if Errors are
-      \emph{Normally Distributed}, Least Squares ($2$-norm Best Fit) should be
-      used
-  \end{itemize}
+    \begin{itemize}
+      \item Ordinary Least Squares (\S\ref{sec:ols}): if Errors are
+        \emph{Normally Distributed}, Least Squares ($2$-norm Best Fit) should be
+        used
+    \end{itemize}
   \item Generalized Least Squares (\S\ref{sec:gls}): if
     there is a degree of Correlation between Residuals (Fitting Deviations
     \S\ref{sec:residual})
@@ -6979,13 +7096,44 @@ Fit using Estimators:
 \end{itemize}
 
 \textbf{Gauss-Markov Theorem} \emph{
-  In a Linear Model (\S\ref{sec:linear_regression}) where Errors are
-  Uncorrelated, have Mean Zero, and equal Variances, the Best Linear Unbiased
-  Estimator (BLUE \S\ref{sec:blue}) of the Coefficients is given by the Ordinary
-  Least-Squares (OLS \S\ref{sec:ols}) Estimator.
+  In a Linear Model where Errors are Uncorrelated, have Mean Zero, and equal
+  Variances, the Best Linear Unbiased Estimator (BLUE \S\ref{sec:blue}) of the
+  Coefficients is given by the OLS Estimator.
 }
 
-\fist cf. Gradient Descent (\S\ref{sec:gradient_descent})
+OLS can be solved by:
+\begin{itemize}
+  \item in the case of a Simple Linear Regression Model
+    (\S\ref{sec:simple_linear_regression}):
+    \begin{flalign*}
+      \hat{\beta_1} & = \frac{
+        \overline{X} \overline{Y} - \overline{XY}
+      }{
+        (\overline{X})^2 - \overline{X^2}
+      } \\
+      \hat{\beta_0} & = \overline{Y} - \hat{\beta_1} \overline{X} \\
+    \end{flalign*}
+    or equivalently:
+    \begin{flalign*}
+      \hat{\beta_1} & = \frac{Cov(X,Y)}{Var(X)} \\
+      \hat{\beta_0} & = \overline{Y} - \frac{\overline{X} Cov(X, Y)}{Var(X)} \\
+    \end{flalign*}
+    (\url{https://www.youtube.com/watch?v=8RSTQl0bQuw})
+  \item in the general case $\vec{y} = \mathbf{X}\vec{\beta}$, solving the
+    Normal Equation (\S\ref{sec:normal_equation})
+    $(\mathbf{X}^T\mathbf{X})\vec{\beta} = \mathbf{X}^T\vec{\beta}$:
+    \[
+      \hat{\vec{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\vec{y}
+    \]
+    note that this solution is \emph{Ill-conditioned}
+  \item the standard method uses QR-factorization (\S\ref{sec:qr_factorization})
+    $\mathbf{X} = QR$ ($Q$ is Square, Orthogonal) to avoid the Ill-conditioning
+    in the Normal Equation:
+    \[
+      \hat{\vec{\beta}} = \hat{R}^{-1}\hat{Q}^T\vec{y}
+    \]
+  \item Gradient Descent (\S\ref{sec:gradient_descent}) ... TODO
+\end{itemize}
 
 \fist cf. Convex Optimization (\S\ref{sec:convex_optimization}) -- for Linear
 Regression, a Mean-Square Error Loss Function is always \emph{Convex} (example
@@ -7022,10 +7170,25 @@ $\beta_0$, $\beta_1$, and the Variance $\sigma^2$ of $\varepsilon$:
 and each possible value of $\theta$ determines a Distribution $P_\theta$ on the
 Sample Space (\S\ref{sec:sample_space}) $S$ of all possible $(Y, X)$ pairs
 
-<https://www.youtube.com/watch?v=FGesqq22TCM>: Equation for a Regression Line
-passing through the Sample Mean $(\overline{X}\overline{Y})$ with Slope
+\url{https://www.youtube.com/watch?v=FGesqq22TCM}: Equation for a Regression
+Line passing through the Sample Mean $(\overline{X}\overline{Y})$ with Slope
 $r(s_y/s_x)$ where $r$ is the Sample Correlation Coefficient, and $s_y$ and
 $s_x$ are Sample Standard Deviations
+
+\url{https://www.youtube.com/watch?v=8RSTQl0bQuw}:
+\begin{flalign*}
+  \hat{\beta_1} & = \frac{
+    \overline{X} \overline{Y} - \overline{XY}
+  }{
+    (\overline{X})^2 - \overline{X^2}
+  } \\
+  \hat{\beta_0} & = \overline{Y} - \hat{\beta_1} \overline{X} \\
+\end{flalign*}
+or equivalently:
+\begin{flalign*}
+  \hat{\beta_1} & = \frac{Cov(X,Y)}{Var(X)} \\
+  \hat{\beta_0} & = \overline{Y} - \frac{\overline{X} Cov(X, Y)}{Var(X)} \\
+\end{flalign*}
 
 \asterism
 
@@ -7083,6 +7246,20 @@ Variables
 
 \emph{Multivariate Regression Model} or \emph{General Linear Model}
 
+multiple Correlated Dependent Variables
+
+cf. Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
+-- multiple Correlated Independent Variables
+
+\fist not to be confused with Generalized Linear Models (GLMs \S\ref{sec:glm}):
+here ``General'' just means a Multivariate Regressor as opposed to Univariate
+Regressor; GLMs are a generalization of Linear Models (General or otherwise)
+that allows the the Range of the Regressand to be Categorical (Discrete)--as
+opposed to Continuous--and for the Variance of the Regressand to depend on the
+Mean (Expected Value)
+
+cf. Multivariate Statistics (\S\ref{sec:multivariate_statistics})
+
 (wiki):
 
 $\mathbf{Y} = \mathbf{XB} + \mathbf{U}$
@@ -7101,16 +7278,6 @@ $\mathbf{U}$ -- Matrix of Errors
   \item Variance Analysis (ANOVA \S\ref{sec:variance_analysis})
 \end{itemize}
 
-\fist not to be confused with Generalized Linear Models
-(\S\ref{sec:generalized_linear_model})
-
-multiple Correlated Dependent Variables
-
-cf. Multivariate Statistics (\S\ref{sec:multivariate_statistics})
-
-cf. Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
--- multiple Correlated Independent Variables
-
 \fist Artificial Neural Networks (ANNs \S\ref{sec:ann}) generalize Regression
 and Clustering (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
 
@@ -7125,30 +7292,167 @@ which only accounts for Vertical Errors)
 
 
 
-\paragraph{Generalized Linear Model}\label{sec:generalized_linear_model}\hfill
+\subsubsection{Polynomial Regression}\label{sec:polynomial_regression}
 
-generalization of ordinary Linear Regression allowing Response Variables to have
-Error Distributions other than the Normal Distribution
+Regression Analysis using Basis Functions (\S\ref{sec:basis_function})
 
-not to be confused with General Linear Models (Multivariate Regression Models
-\S\ref{sec:multivariate_regression})
+
+
+\subsubsection{Segmented Regression}\label{sec:segmented_regression}
+
+\subsubsection{Generalized Linear Model (GLM)}\label{sec:glm}
+
+generalization of Simple and Multivariate Linear Regression to Models where:
+\begin{enumerate}
+  \item Regressands can be Categorical (Discrete) Variables
+  \item the Variance of Regressands can depend on the Mean (Expected Value)
+  \item Error Distributions other than the Normal Distribution
+\end{enumerate}
+
+not to be confused with ``General'' (Multivariate) Linear Models''
+(\S\ref{sec:multivariate_regression}): special case of GLM where the
+Distribution of Residuals follow a Conditionally Normal Distribution
+(FIXME: and response variables are continuous, and variance is constant ???)
 
 (wiki):
+
+three components of a GLM:
+\begin{enumerate}
+  \item a Linear Predictor (\S\ref{sec:linear_predictor})
+    $\eta = \mathbf{X\beta}$
+  \item a \emph{Link Function} (\S\ref{sec:link_function}) $g$ such that:
+    \[
+      E(\mathbf{Y}|\mathbf{X}) = \mu = g^{-1}(\eta)
+    \]
+  \item Variance Function $V$ (usually ``follows from an Exponential Family of
+    Distributions''):
+    \[
+      Var(Y) = V(\mu)
+    \]
+\end{enumerate}
+(TODO: clarify variance function )
+
+Natural Exponential Families (\S\ref{sec:natural_exponential_family})
+
+Exponential Dispersion Model (\S\ref{sec:exponential_dispersion})
 
 Least-squares Estimate (\S\ref{sec:least_squares}) may be used to fit a
 Generalized Linear Model by iteratively applying the Local Quadratic
 Approximation (FIXME: explain)
 
-\fist a Logistic Regression Model (\S\ref{sec:logistic_regression}) can be
-formulated as a specific case of Generalized Linear Model
+\begin{itemize}
+  \item Binomial Regression (\S\ref{sec:binomial_regression})
+  \item Log-linear (Poisson) Regression (\S\ref{sec:log_linear})
+  \item Linear Regression (\S\ref{sec:linear_regression})
+  \item ...
+\end{itemize}
 
 
 
-\subparagraph{Link Function}\label{sec:link_function}\hfill
+\paragraph{Link Function}\label{sec:link_function}\hfill
 
-\subparagraph{Log-linear Model}\label{sec:log_linear}\hfill
+\paragraph{Binomial Regression}\label{sec:binomial_regression}\hfill
 
-\emph{Poisson Regression}
+essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
+
+
+
+\subparagraph{Binary Regression}\label{sec:binary_regression}
+
+Models:
+\begin{itemize}
+  \item Logistic (Logit) Regression (\S\ref{sec:logistic_regression})
+  \item Probit Regression (\S\ref{sec:probit_regression})
+\end{itemize}
+
+
+
+\paragraph{Multinomial Regression}\label{sec:multinomial_regression}\hfill
+
+\paragraph{Logistic Regression}\label{sec:logistic_regression}
+
+or \emph{Logit Regression}
+
+Binary Regression (\S\ref{sec:binary_regression})
+
+can be formulated as a special case of Generalized Linear Models
+(\S\ref{sec:glm})
+
+cf. Statistical Classification (\S\ref{sec:classification}) -- Logistic
+Regression as a Discriminative (\S\ref{sec:discriminative_model}) methods of
+determining Parameters for a Linear Classifier (\S\ref{sec:linear_classifier})
+
+\fist Linear Discriminant Analysis (LDA \S\ref{sec:lda}) -- in LDA, the Joint
+Distribution $f(x,y = f(x|y)f(y)$ is Estimated by maximizing the Likelihood; in
+Logistic Regression, only $f(y|x)$ is Estimated and the Conditional Likelihood
+is maximized, neglecting the Marginal Distribution $f(x)$
+
+\emph{Logistic Model}: uses a Logistic Function (\S\ref{sec:logistic_function})
+to Model a \emph{Binary Dependent Variable} $Y_i \in \{ 0, 1 \}$
+
+Logistic Function $e^x / (1 + e^x)$
+
+for a $k$-dimensional Covariate $X$:
+\[
+  p_i \equiv P(Y_i = 1 | X = x) = \frac{
+    e^{\sum_{j=1}^k \beta_j x_{ij}}
+  }{
+    1 + e^{\sum_{j=1}^k \beta_j x_{ij}}
+  }
+\]
+
+\[
+  logit(p_i) = \sum_{j=1}^k \beta_j x_{ij}
+\]
+where:
+\[
+  logit(p) = log\Big(\frac{p}{1-p}\Big)
+\]
+(FIXME: explain)
+
+\[
+  Y_i | X_i = x_i \sim Bernoulli(p_i)
+\]
+
+Conditional Likelihood:
+\[
+  \mathcal{L}(\beta) = \prod_{i=1}^n p_i(\beta)^{Y_i} (1 - p_i(\beta))^{1-Y_i}
+\]
+
+the Maximum Likelihood Estimate (MLE \S\ref{sec:mle}) can be obtained by
+maximizing $\mathcal{L}(B)$ numerically using Re-weighted Least Squares
+(\S\ref{sec:reweighted_least_squares}):
+
+choose starting $\hat{\beta}^0 = (\hat{\beta}_1^0, \ldots, \hat{\beta}_k^0)$
+and compute $p_i^0$ for $i = 1, \ldots, n$, and iterate from $s = 0$:
+\begin{enumerate}
+  \item set
+    \[
+      Z_i = logit(p_i^s) + \frac{Y_i - p_i^s}{p_i^s(1 - p_i^s)}
+    \]
+  \item let $W$ be a Diagonal Matrix with $(i,i)$ equal to $p_i^s(1 - p_i^s)$
+  \item set
+    \[
+      \hat{\beta}^s = (X^T W X)^{-1} X^T W Z
+    \]
+  corresponding to doing a Weighted Linear Regression of $Z$ on $X$
+\end{enumerate}
+
+
+
+\paragraph{Probit Regression}\label{sec:probit_regression}
+
+Binary Regression (\S\ref{sec:binary_regression})
+
+Linear Classifier (\S\ref{sec:linear_classifier})
+
+
+
+\paragraph{Log-linear Model}\label{sec:log_linear}\hfill
+
+or \emph{Poisson Regression}
+
+count data
 
 \emph{Contingency Tables} (\S\ref{sec:contingency_table})
 
@@ -7215,83 +7519,6 @@ Submodel \emph{Deviance}
 
 
 
-\subsubsection{Logistic Regression}\label{sec:logistic_regression}
-
-or \emph{Logit Regression}
-
-can be formulated as a special case of Generalized Linear Models
-(\S\ref{sec:generalized_linear_model})
-
-cf. Statistical Classification (\S\ref{sec:classification}) -- Logistic
-Regression as a Discriminative (\S\ref{sec:discriminative_model}) methods of
-determining Parameters for a Linear Classifier (\S\ref{sec:linear_classifier})
-
-\fist Linear Discriminant Analysis (LDA \S\ref{sec:lda}) -- in LDA, the Joint
-Distribution $f(x,y = f(x|y)f(y)$ is Estimated by maximizing the Likelihood; in
-Logistic Regression, only $f(y|x)$ is Estimated and the Conditional Likelihood
-is maximized, neglecting the Marginal Distribution $f(x)$
-
-\emph{Logistic Model}: uses a Logistic Function (\S\ref{sec:logistic_function})
-to Model a \emph{Binary Dependent Variable} $Y_i \in \{ 0, 1 \}$
-
-Logistic Function $e^x / (1 + e^x)$
-
-for a $k$-dimensional Covariate $X$:
-\[
-  p_i \equiv P(Y_i = 1 | X = x) = \frac{
-    e^{\sum_{j=1}^k \beta_j x_{ij}}
-  }{
-    1 + e^{\sum_{j=1}^k \beta_j x_{ij}}
-  }
-\]
-
-\[
-  logit(p_i) = \sum_{j=1}^k \beta_j x_{ij}
-\]
-where:
-\[
-  logit(p) = log\Big(\frac{p}{1-p}\Big)
-\]
-(FIXME: explain)
-
-\[
-  Y_i | X_i = x_i \sim Bernoulli(p_i)
-\]
-
-Conditional Likelihood:
-\[
-  \mathcal{L}(\beta) = \prod_{i=1}^n p_i(\beta)^{Y_i} (1 - p_i(\beta))^{1-Y_i}
-\]
-
-the Maximum Likelihood Estimate can be obtained by maximizing $\mathcal{L}(B)$
-numerically using Re-weighted Least Squares
-(\S\ref{sec:reweighted_least_squares}):
-
-choose starting $\hat{\beta}^0 = (\hat{\beta}_1^0, \ldots, \hat{\beta}_k^0)$
-and compute $p_i^0$ for $i = 1, \ldots, n$, and iterate from $s = 0$:
-\begin{enumerate}
-  \item set
-    \[
-      Z_i = logit(p_i^s) + \frac{Y_i - p_i^s}{p_i^s(1 - p_i^s)}
-    \]
-  \item let $W$ be a Diagonal Matrix with $(i,i)$ equal to $p_i^s(1 - p_i^s)$
-  \item set
-    \[
-      \hat{\beta}^s = (X^T W X)^{-1} X^T W Z
-    \]
-  corresponding to doing a Weighted Linear Regression of $Z$ on $X$
-\end{enumerate}
-
-
-
-\paragraph{Binomial Regression}\label{sec:binomial_regression}\hfill
-
-essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
-
-
-
-\paragraph{Multinomial Regression}\label{sec:multinomial_regression}\hfill
-
 \paragraph{Ordinal Regression}\label{sec:ordinal_regression}\hfill
 
 \emph{Ranking Learning}
@@ -7301,12 +7528,6 @@ essentially the same as Binary Choice Models (\S\ref{sec:binary_choice_model})
 \subparagraph{Ordered Logit}\label{sec:ordered_logit}\hfill
 
 \emph{Ordered Logistic Regression} or \emph{Proportional Odds Model}
-
-
-
-\subsubsection{Probit Regression}\label{sec:probit_regression}
-
-Linear Classifier (\S\ref{sec:linear_classifier})
 
 
 
@@ -7643,6 +7864,101 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 \end{itemize}
 
 \emph{Slutsky's Theorem}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Discrete-time Stochastic Process}\label{sec:discretetime_stochastic}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Bernoulli Process}\label{sec:bernoulli_process}
+
+Mathematical Formalization of \emph{Binomial (Bernoulli) Trials}
+(\S\ref{sec:binomial_trial})
+
+Binary Entropy (\S\ref{sec:binary_entropy}) -- Entropy of a Bernoulli Process
+with Probabilty $p$
+
+Stochastic Computing
+
+cf. \emph{Binomial Process} (Point Process \S\ref{sec:binomial_process})
+
+
+
+\paragraph{Bernoulli Sequence}\label{sec:bernoulli_sequence}\hfill
+
+Random Sequence (\S\ref{sec:random_sequence})
+
+\emph{Infinite Bernoulli Sequences} -- cf. \emph{Collectives} (Von Mises57); a
+solution to the ``Reference Class Problem'' of Frequentist Probability Theory;
+cf. (Martin-L\"of66)
+
+
+
+\subsubsection{Martingale}\label{sec:martingale}
+
+\begin{itemize}
+  \item Stopped Brownian Motion
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Continuous-time Stochastic Process}\label{sec:continuous_stochastic}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Gaussian Process}\label{sec:gaussian_process}
+
+a 1D Gaussian Random Field (\S\ref{sec:gaussian_random_field})
+
+can be seen as the Infinite-dimensional generalization of Multivariate Normal
+Distributions (\S\ref{sec:normal_distribution})
+
+the Distribution of a Gaussian Process is the Joint Distribution of infinitely
+many Random Variables, i.e. it is a Distribution over Functions with a
+Continuous Domain
+
+Machine Learning: Lazy Learning (1D Gaussian Distributions)
+
+Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
+
+
+
+\paragraph{Fractional Brownian Motion}\label{sec:fractional_brownian}\hfill
+
+(\emph{fBm})
+
+$H \in (0,1) \subset \reals$ -- Hurst index
+
+$H = 1/2$ -- Wiener Process (Brownian Motion \S\ref{sec:wiener_process})
+
+for $H > 1/2$, increments of the process are Positively Correlated, and exhibits
+Long-range dependence
+
+for $H < 1/2$, increments of the process are Negatively Correlated
+
+Hausdorff and Box Dimension of $2 - H$
+
+\fist Multifractals (\S\ref{sec:multifractal_system}): generalized framework of
+Fractional Brownian Motions
+
+
+
+\subparagraph{Wiener Process}\label{sec:wiener_process}\hfill
+
+or \emph{Brownian Motion}
+
+$H = 1/2$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Stationary Process}\label{sec:stationary_process}
+% ------------------------------------------------------------------------------
+
+Stochastic Process for which the Unconditional Joint Probability Distribution
+(\S\ref{sec:joint_probability}) does not change when shiften in Time (TODO:
+xref)
 
 
 
@@ -8042,98 +8358,6 @@ a 1D GRF is a Gaussian Process (\S\ref{sec:gaussian_process})
 
 
 % ------------------------------------------------------------------------------
-\subsection{Discrete-time Stochastic Process}\label{sec:discretetime_stochastic}
-% ------------------------------------------------------------------------------
-
-\subsubsection{Bernoulli Process}\label{sec:bernoulli_process}
-
-Mathematical Formalization of \emph{Binomial (Bernoulli) Trials}
-(\S\ref{sec:binomial_trial})
-
-Stochastic Computing
-
-cf. \emph{Binomial Process} (Point Process \S\ref{sec:binomial_process})
-
-
-
-\paragraph{Bernoulli Sequence}\label{sec:bernoulli_sequence}\hfill
-
-Random Sequence (\S\ref{sec:random_sequence})
-
-\emph{Infinite Bernoulli Sequences} -- cf. \emph{Collectives} (Von Mises57); a
-solution to the ``Reference Class Problem'' of Frequentist Probability Theory;
-cf. (Martin-L\"of66)
-
-
-
-\subsubsection{Martingale}\label{sec:martingale}
-
-\begin{itemize}
-  \item Stopped Brownian Motion
-\end{itemize}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Continuous-time Stochastic Process}\label{sec:continuous_stochastic}
-% ------------------------------------------------------------------------------
-
-\subsubsection{Gaussian Process}\label{sec:gaussian_process}
-
-a 1D Gaussian Random Field (\S\ref{sec:gaussian_random_field})
-
-can be seen as the Infinite-dimensional generalization of Multivariate Normal
-Distributions (\S\ref{sec:normal_distribution})
-
-the Distribution of a Gaussian Process is the Joint Distribution of infinitely
-many Random Variables, i.e. it is a Distribution over Functions with a
-Continuous Domain
-
-Machine Learning: Lazy Learning (1D Gaussian Distributions)
-
-Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
-
-
-
-\paragraph{Fractional Brownian Motion}\label{sec:fractional_brownian}\hfill
-
-(\emph{fBm})
-
-$H \in (0,1) \subset \reals$ -- Hurst index
-
-$H = 1/2$ -- Wiener Process (Brownian Motion \S\ref{sec:wiener_process})
-
-for $H > 1/2$, increments of the process are Positively Correlated, and exhibits
-Long-range dependence
-
-for $H < 1/2$, increments of the process are Negatively Correlated
-
-Hausdorff and Box Dimension of $2 - H$
-
-\fist Multifractals (\S\ref{sec:multifractal_system}): generalized framework of
-Fractional Brownian Motions
-
-
-
-\subparagraph{Wiener Process}\label{sec:wiener_process}\hfill
-
-or \emph{Brownian Motion}
-
-$H = 1/2$
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Stationary Process}\label{sec:stationary_process}
-% ------------------------------------------------------------------------------
-
-Stochastic Process for which the Unconditional Joint Probability Distribution
-(\S\ref{sec:joint_probability}) does not change when shiften in Time (TODO:
-xref)
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Empirical Process}\label{sec:empirical_process}
 % ------------------------------------------------------------------------------
 
@@ -8144,6 +8368,14 @@ Empirical Distribution Function (\S\ref{sec:empirical_distribution}):
 $P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$
 
 where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Dirichlet Process}\label{sec:dirichlet_process}
+% ------------------------------------------------------------------------------
+
+Bayesian Inference (\S\ref{sec:bayesian_inference})
 
 
 
