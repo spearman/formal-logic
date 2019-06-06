@@ -208,8 +208,9 @@ The \emph{Information Content} (\emph{Self-information} or \emph{Surprisal}
 \S\ref{sec:information_content}) of a Sampled (\S\ref{sec:sample}) Random
 Variable or Signal (\S\ref{sec:signal}) is the amount of Information
 (\S\ref{sec:information}) ``gained'' by the Sample; this Information Content is
-a Random Variable defined for any Event regardless of whether a Random Variable
-is being measured or not. (wiki)
+a Random Variable defined for any Event as the Negative Log-probability
+(\S\ref{sec:log_probability}) of the Vent, regardless of whether a Random
+Variable is being measured or not. (wiki)
 
 
 
@@ -504,6 +505,23 @@ where terms such that $P(B_n) = 0$ are omitted from the summation.
 
 
 % ------------------------------------------------------------------------------
+\subsection{Log-probability}\label{sec:log_probability}
+% ------------------------------------------------------------------------------
+
+the \emph{Negative} of the Log Probability is the \emph{Information Content}
+(\S\ref{sec:information_content}) of an Event (\S\ref{sec:probability_event})
+
+cf. Log-likelihood (\S\ref{sec:log_likelihood})
+
+(wiki): viewing Data as ``evidence'', Log-likelihood is the ``weight'' of
+evidence or providing ``\emph{support}'' for a particular Model; the support of
+a Model given an Event is the Negative of the Surprisal (Information Content),
+i.e. the Log-probability, of the Event given the Model: a Model is supported by
+an Event to the extent that the Event is ``\emph{unsurprising}'' given the Model
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Conditional Probability}\label{sec:conditional_probability}
 % ------------------------------------------------------------------------------
 
@@ -635,6 +653,8 @@ for Probability $p$, the Odds are:
   \frac{p}{1-p}
 \]
 
+the Odds can range in $[0, \infty)$
+
 \fist Logit (Log-odds \S\ref{sec:logit}):
 \[
   ln \frac{p}{1-p}
@@ -661,11 +681,21 @@ two Events
 
 two Events are Independent if and only if their Odds Ratio equals $1$
 
+\url{https://www.youtube.com/watch?v=ckkiG-SDuV8}:
+
+in Logistic Regression (\S\ref{sec:logistic_regression}), the Odds Ratio for an
+Independent Variable represents how the Odds change with a 1 unit increase in
+the Independent Variable, holding all other variables constant
 
 
-\subsubsection{Log Odds Ratio}\label{sec:log_odds}
+
+\subsubsection{Log Odds}\label{sec:log_odds}
 
 Logit (Log-odds \S\ref{sec:logit})
+
+\[
+  \ln \Big(\frac{p}{1 - p}\Big)
+\]
 
 
 
@@ -779,8 +809,12 @@ The \emph{Information Content} (\emph{Self-information} or \emph{Surprisal}
 \S\ref{sec:information_content}) of a Sampled (\S\ref{sec:sample}) Random
 Variable or Signal (\S\ref{sec:signal}) is the amount of Information
 (\S\ref{sec:information}) ``gained'' by the Sample; this Information Content is
-a Random Variable defined for any Event (\S\ref{sec:probability_event})
+a Random Variable defined for any Event (\S\ref{sec:probability_event}) as the
+Negative Log-probability (\S\ref{sec:log_probability}) of the Event,
 regardless of whether a Random Variable is being measured or not. (wiki)
+
+the Entropy of a Random Variable is the Expected Value of its Information
+Content
 
 \fist cf. \emph{Statistical Unit} (\S\ref{sec:statistical_unit}) -- one Member
 of a Set of entities being analyzed, providing the ``material source'' for an
@@ -869,7 +903,7 @@ a Random Variable is defined as a Measurable Map
 where $(\Omega,\mathbb{P})$ is a Probability Space and $E$ is an arbitrary
 Measurable Space
 
-***
+\asterism
 
 MIT 6.041SC Lec. 5 - \url{https://www.youtube.com/watch?v=3MOahpLxj6A}:
 
@@ -1187,6 +1221,14 @@ Variable
 (\S\ref{sec:partial_evaluation}) as Conditional Expectations
 (\url{https://golem.ph.utexas.edu/category/2019/05/partial_evaluations.html},
 Perrone 2018)
+
+
+
+\paragraph{Law of Total Expectation}\label{sec:total_expectation}\hfill
+
+$E(X) = E(E(X | Y))$
+
+MIT 6.041SC, Lec. 6
 
 
 
@@ -1526,12 +1568,12 @@ Constant (\S\ref{sec:step_function})
 for a Discrete Random Variable $X$, the \emph{Probability Mass Function} is
 defined as:
 \[
-  f_X(x) = P(X = x)
+  p_X(x) = P(X = x)
 \]
 and has the Properties:
 \begin{enumerate}
-  \item $f_X(x) \geq 0$
-  \item $\sum_x f_X(x) = 1$
+  \item $p_X(x) \geq 0$
+  \item $\sum_x p_X(x) = 1$
 \end{enumerate}
 
 characterizes a Discrete Probability Distribution
@@ -1539,7 +1581,7 @@ characterizes a Discrete Probability Distribution
 
 related to the CDF (\S\ref{sec:cdf}) $F_X$ of $X$ by:
 \[
-  F_X(x) = P(X \leq x) = \sum_{x_i \leq x} f_X(x_i)
+  F_X(x) = P(X \leq x) = \sum_{x_i \leq x} p_X(x_i)
 \]
 
 for a Probability Mass Function that is Symmetric around a certain point, that
@@ -1617,6 +1659,10 @@ i.e. the CDF of a Continuous Random Variable gives the Area under the PDF from
 $-\infty$ to $x$, and $f_X(x) = F'_X(x)$ at all Points $x$ at which $F_X$ is
 Differentiable
 
+\emph{Probability Densities} represent \emph{rates} at which Probabilities
+``accumulate'' (cf. Discrete \emph{Probability Masses} (\S\ref{sec:pmf}) which
+are actual Probabilities); cf. \emph{Likelihood} (\S\ref{sec:likelihood})
+
 characterizes a Continuous Probability Distribution
 (\S\ref{sec:continuous_probability})
 
@@ -1640,6 +1686,10 @@ total Probability $1$
 %FIXME: same concept as Normalizing Constant for bayesian inference ?
 
 
+
+% ------------------------------------------------------------------------------
+\subsection{Mixed Random Variable}\label{sec:mixed_random_variable}
+% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{Random Sequence}\label{sec:random_sequence}
@@ -1745,6 +1795,12 @@ are IID
 
 an Assumption in Regression Analysis (\S\ref{sec:regression_analysis}): Error is
 Constant accross Observations
+
+
+
+\subsubsection{Heteroscedasticity}\label{sec:heteroscedasticity}
+
+Weighted Least Squares (WLS \S\ref{sec:wls})
 
 
 
@@ -1880,6 +1936,10 @@ Fourth and higher-order Cumulants are not equal to Central Moments
 % ------------------------------------------------------------------------------
 \subsection{Cumulative Distribution Function (CDF)}\label{sec:cdf}
 % ------------------------------------------------------------------------------
+
+MIT 6.041SC, Lec.8
+
+CDF applies equally well to Discrete and Continuous Random Variables
 
 (wiki):
 
@@ -2113,10 +2173,13 @@ or equivalently:
 for $x \in \{0, 1\}$
 
 \fist cf. Logistic Regression (\S\ref{sec:logistic_regression}) -- Model with
-Binary Data $Y_i$:
+Binary Data $Y_i$, the Conditional Distribution $y | x$ is Bernoulli
+Distributed:
 \[
   Y_i | X_i = x_i \sim Bernoulli(p_i)
 \]
+(cf. Linear Regression where the Conditional Distribution is Normally
+Distributed)
 
 generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
 
@@ -2231,7 +2294,8 @@ $Y \sim Poisson(\nu)$:
 \]
 
 if $N \sim Poisson(\lambda)$ and $Y | N = n \sim Binomial(n,p)$, then the
-Marginal Distribution of $Y$ is $Y \sim Poisson(\lambda p)$ (Wasserman04 \S 23.3)
+Marginal Distribution of $Y$ is $Y \sim Poisson(\lambda p)$
+(Wasserman04 \S 23.3)
 
 
 
@@ -2365,6 +2429,21 @@ Infinite-dimensional generalizations of Multivariate Normal Distributions
 
 \emph{Empirical Rule} 68-95-99.7 Rule -- 68\% within 1 Standard Deviation of the
 Mean, 95\% within 2 Standard Deviations, 99.7\% within 3 Standard Deviations
+
+MIT 6.041SC, Lec.8
+
+Linear Functions of Normal Variables are Normal--
+for $X \sim N(\mu, \sigma^2)$ and $Y = aX + b$:
+\[
+  Y \sim N(a \mu + b, a^2 \sigma^2)
+\]
+
+\emph{Standardizing} -- for $X \sim N(\mu, \sigma^2)$:
+\[
+  \frac{X - \mu}{\sigma} \sim N(0, 1)
+\]
+where $(X - \mu)/\sigma$ is the \emph{Standard Score}
+($z$-score \S\ref{sec:standard_score})
 
 2018 - Eric Jang
 - \emph{Normalizing Flows Tutorial}
@@ -2518,6 +2597,8 @@ expected), Independence Condition
 
 \fist Chi-squared Test (\S\ref{sec:chi_squared_test})
 
+Logistic Regression
+
 
 
 \subparagraph{$F$-distribution}\label{sec:f_distribution}\hfill
@@ -2529,11 +2610,13 @@ same DoFs
 
 $F$-statistic (\S\ref{sec:f_statistic})
 
+$F$-test (\S\ref{sec:f_test})
+
 $F = \frac{\text{between-group variability}}{\text{within-group variability}}$
 
 $F = \frac{\frac{SSB}{DoF_B}}{\frac{SSW}{DoF_W}}$
 
-ANOVA (\S\ref{sec:variance_analysis})
+ANOVA (\S\ref{sec:variance_analysis}), Linear Regression
 
 
 
@@ -3035,8 +3118,9 @@ The \emph{Information Content} (\emph{Self-information} or \emph{Surprisal}
 \S\ref{sec:information_content}) of a Sampled Random Variable or Signal
 (\S\ref{sec:signal}) is the amount of Information (\S\ref{sec:information})
 ``gained'' by the Sample; this Information Content is a Random Variable defined
-for any Event (\S\ref{sec:probability_event}) regardless of whether a Random
-Variable is being measured or not. (wiki)
+for any Event (\S\ref{sec:probability_event}) as the Negative Log-probability
+(\S\ref{sec:log_probability}), regardless of whether a Random Variable is being
+measured or not. (wiki)
 
 \fist cf. \emph{Data} (\S\ref{sec:data}), \emph{Data Generating Process}
 (\S\ref{sec:data_generating_process}), \emph{Dataset} (\S\ref{sec:dataset})
@@ -3409,9 +3493,13 @@ different $t$-distribution depending on the Sample Size
 $F$-distribution (\S\ref{sec:f_distribution}) -- can be seen as a Ratio of
 $\chi^2$-distributions with differing DoF
 
+$F$-test (\S\ref{sec:f_test})
+
 ANOVA (\S\ref{sec:variance_analysis})
 
 $F = \frac{\text{between-group variability}}{\text{within-group variability}}$
+
+Linear Regression
 
 
 
@@ -3718,6 +3806,15 @@ $z$-statistic for a Proportion Statistic $\hat{p}$ with Sample Size $n$:
 where the Denominator is the Standard Deviation of the Sampling Distribution of
 the Sample Proportion (i.e. the Standard Error of the Statistic
 \S\ref{sec:standard_error})
+
+MIT 6.041SC, Lec.8
+
+\emph{Standardizing} a Normal Random Variable (\S\ref{sec:normal_distribution})
+-- for $X \sim N(\mu, \sigma^2)$:
+\[
+  \frac{X - \mu}{\sigma} \sim N(0, 1)
+\]
+where $(X - \mu)/\sigma$ is the Standard Score
 
 
 
@@ -4026,6 +4123,10 @@ Parameter Estimation:
 
 ``Parameters of Interest'', ``Nuisance Parameters''
 
+\emph{Estimating Parameters in Chaotic Systems} -
+\url{http://idontgetoutmuch.org/estimating-chaotic.htm} \fist Chaotic Systems
+(\S\ref{sec:chaos_theory})
+
 
 
 \paragraph{Exponential Family}\label{sec:exponential_family}\hfill
@@ -4151,8 +4252,8 @@ essentially the same as Binomial Regression
 
 or \emph{Logit Model}
 
-uses a Logistic Function (\S\ref{sec:logistic_function}) to Model a Binary
-Dependent Variable
+Non-linear Model using a Logistic Function (\S\ref{sec:logistic_function}) to
+Model a Binary Dependent Variable
 
 Logit (\S\ref{sec:logit}) -- inverse of Logistic Function
 
@@ -4355,6 +4456,16 @@ Estimating:
   \item ...
 \end{itemize}
 
+\emph{Estimating Parameters in Chaotic Systems} -
+\url{http://idontgetoutmuch.org/estimating-chaotic.htm} \fist Chaotic Systems
+(\S\ref{sec:chaos_theory})
+
+\asterism
+
+\emph{Optimizer's Curse} -
+\url{https://confusopoly.com/2019/04/03/the-optimizers-curse-wrong-way-reductions/}
+-- TODO
+
 
 
 \subsubsection{Estimator}\label{sec:estimator}
@@ -4493,7 +4604,8 @@ Estimates (\S\ref{sec:least_squares}) and Maximum-Likelihood Estimates are
 identical
 
 whereas Least-squares is used to measure Fit of Linear Regression, MLE is used
-to measure Fit in Logistic Regression (\S\ref{sec:logistic_regression})
+to measure Fit in Logistic Regression (\S\ref{sec:logistic_regression}) \fist
+Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls})
 
 the MLE Approximates (\S\ref{sec:approximation_theory}) the Bayes Estimator
 (\S\ref{sec:bayes_estimator})
@@ -5007,6 +5119,14 @@ Estimates and Maximum-Likelihood Estimates are identical
 
 %FIXME
 
+
+
+\subsubsection{Least Absolute Deviations (LAD)}\label{sec:lad}
+
+cf. Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls})
+
+
+
 \subparagraph{Best Linear Unbiased Estimator (BLUE)}\label{sec:blue}\hfill
 
 Estimating Fixed Effects (\S\ref{sec:fixed_effect})
@@ -5067,8 +5187,8 @@ Project $\vec{b}$ onto the Column Space of $A$
   \vec{x} = (A^TA)^{-1}A^T\vec{b}
 \]
 
-solve by Cholesky Factorization (\S\ref{sec:cholesky_decomposition}) ... TODO
-\url{https://www.youtube.com/watch?v=VJ-04jOfu-E}
+solve by \emph{Cholesky Factorization} (\S\ref{sec:cholesky_decomposition}) ...
+TODO \url{https://www.youtube.com/watch?v=VJ-04jOfu-E}
 
 
 
@@ -5116,6 +5236,12 @@ and $\vec{rho}_N$ is independent of $\vec{x}$ so it is \emph{fixed}, so:
 
 \paragraph{Generalized Least Squares (GLS)}\label{sec:gls}\hfill
 
+\begin{itemize}
+  \item Heteroscedastic (\S\ref{sec:heteroscedasticity}) Errors -- Weighted
+    Least Squares (WLS \S\ref{sec:wls})
+  \item Correlation between Errors
+\end{itemize}
+
 Linear Regression (\S\ref{sec:linear_regression}) technique when there is a
 degree of Correlation between Residuals
 
@@ -5124,14 +5250,53 @@ degree of Correlation between Residuals
 \subparagraph{Weighted Least Squares (WLS)}\label{sec:wls}\hfill
 
 can be used in Regression Analysis to drop the Assumption that the Variance of
-the Error is Constant accross Observations (\emph{Homoscedasticity}
-\S\ref{sec:homoscedasticity})
+the Error is Constant accross Observations (\emph{Heteroscedasticity}
+\S\ref{sec:heteroscedasticity})
+
+\fist Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls}) -- for
+$L^p$-norm Linear Regression, IRLS at step $k+1$ involves solving WLS
 
 
 
-\paragraph{Re-weighted Least Squares}\label{sec:reweighted_least_squares}\hfill
+\paragraph{Iteratively Re-weighted Least Squares (IRLS)}\label{sec:irls}\hfill
 
-Logistic Regression (\S\ref{sec:Logistic_regression})
+Iterative Method (\S\ref{sec:iterative_method})
+
+equivalent to \emph{minimizing} the \emph{Log-likelihood}
+(\S\ref{sec:log_likelihood}) of a Bernoulli Process using Newton's Method
+(\S\ref{sec:newtons_method})
+
+for $L^p$-norm Linear Regression, IRLS at step $k+1$ involves solving Weighted
+Least Squares (WLS \S\ref{sec:wls})
+
+Least Absolute Deviations (LAD \S\ref{sec:lad}) -- $L^1$-norm Linear Regression
+
+(wiki) --
+Maximum Likelihood Estimation (MLE \S\ref{sec:mle}) in Logistic Regression
+(\S\ref{sec:logistic_regression}):
+
+Parameters $\vec{\beta}^T = [\beta_0, \beta_1, \ldots]$
+
+Independent Variables $\vec{x}_i^T = [1, x_{i1}, x_{i2}, \ldots]$
+
+Expected Value of the Bernoulli Distribution
+$\mu_{y_i | \vec{x}_i} = 1 / (1 + e^{-\vec{\beta}^T \vec{x_i}})$
+
+Iteratively solving for the $(k+1)$th Estimate given the $k$th Estimate of
+$\vec{\beta}$:
+\[
+  \vec{\beta}_{k+1} = (\mathbf{X}^T \mathbf{S}_k \mathbf{X})^{-1} \mathbf{X}^T
+    (\mathbf{S}_k \mathbf{X} \vec{\beta}_k + \vec{y} - \vec{\mu}_k)
+\]
+where:
+\begin{itemize}
+  \item $\mathbf{S} = diag(\mu_i - \mu_i^2)$ is a
+    \emph{Diagonal Weighted Matrix}
+  \item $\vec{\mu} = [\mu_1, \ldots, \mu_n]$ is the Vector of Expected Values
+  \item $\mathbf{X} = [\vec{1}, \vec{x}_1, \vec{x}_2, \ldots]$ is the Regressor
+    (Design) Matrix
+  \item $\vec{y}_i^T = [y_1, y_2, \ldots]$ is the Vector of Response Variables
+\end{itemize}
 
 
 
@@ -5468,6 +5633,15 @@ generalization of $t$-test to more than two groups
 
 
 
+\subsubsection{$F$-test}\label{sec:f_test}
+
+\fist $F$-statistic (\S\ref{sec:f_statistic}),
+$F$-distribution (\S\ref{sec:f_distribution})
+
+Linear Regression
+
+
+
 \subsubsection{Chi-squared Test}\label{sec:chi_squared_test}
 
 $\chi^2$ Distribution (\S\ref{sec:chi_squared})
@@ -5478,6 +5652,8 @@ expected), Independence Condition
 Goodness-of-fit (\S\ref{sec:model_fit})
 
 Test for Homogeneity, Association (or Independence)
+
+Logistic Regression
 
 
 
@@ -6022,9 +6198,29 @@ knowing only $T(X^n)$ (Wasserman04 \S9.13.2)
 
 
 
-\paragraph{Score}\label{sec:score}\hfill
+\paragraph{Log-likelihood}\label{sec:log_likelihood}\hfill
 
-\emph{Score Function} is the Derivative of the Log Likelihood Function
+$\ell$
+
+(wiki): viewing Data as ``evidence'', Log-likelihood is the ``weight'' of
+evidence or providing ``\emph{support}'' for a particular Model; the support of
+a Model given an Event is the Negative of the Surprisal (Information Content
+\S\ref{sec:information_content}), i.e. the Log-probability
+(\S\ref{sec:log_probability}), of the Event given the Model: a Model is
+supported by an Event to the extent that the Event is ``\emph{unsurprising}''
+given the Model
+
+Iteratively Re-weighted Least Squares (\S\ref{sec:irls}) -- equivalent to
+\emph{minimizing} the Log-likelihood of a Bernoulli Process
+(\S\ref{sec:bernoulli_process}) using Newton's Method
+(\S\ref{sec:newtons_method}); used for MLE in Logistic Regression
+(\S\ref{sec:logistic_regression})
+
+
+
+\subparagraph{Score}\label{sec:score}\hfill
+
+\emph{Score Function} is the Derivative of the Log-likelihood Function
 
 \fist Fisher Information (\S\ref{sec:fisher_metric})
 
@@ -7004,6 +7200,9 @@ TSS -- Total Sum of Squares (\S\ref{sec:tss})
 
 cf. $r$ -- Correlation Coefficient (\S\ref{sec:correlation_coefficient})
 
+measure of Goodness-of-fit (\S\ref{sec:model_fit}) in Logistic Regression
+(\S\ref{sec:logistic_regression})
+
 
 
 \subsubsection{Non-parametric Regression}\label{sec:nonparametric_regression}
@@ -7125,7 +7324,8 @@ OLS can be solved by:
     \[
       \hat{\vec{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\vec{y}
     \]
-    note that this solution is \emph{Ill-conditioned}
+    note that solution using Cholesky Factorization
+    (\S\ref{sec:cholesky_decomposition}) is \emph{Ill-conditioned}
   \item the standard method uses QR-factorization (\S\ref{sec:qr_factorization})
     $\mathbf{X} = QR$ ($Q$ is Square, Orthogonal) to avoid the Ill-conditioning
     in the Normal Equation:
@@ -7220,12 +7420,12 @@ Least Squares Estimates (\S\ref{sec:least_squares}): TODO
 \paragraph{Multiple Linear Regression}
 \label{sec:multiple_linear_regression}\hfill
 
-Multiple Regression (\S\ref{sec:multiple_regression})
+Multiple Regression (\S\ref{sec:multiple_regression}) --
+multiple Correlated \emph{Independent Variables}
 
-special case of General Linear (Multivariate) Regression
-(\S\ref{sec:multivariate_regression})
-
-multiple Correlated Independent Variables
+cf. Multivariate (General Linear) Regression
+(\S\ref{sec:multivariate_linear_regression}) -- multiple Correlated
+\emph{Dependent Variables}
 
 (wiki) $p$ Independent Variables:
 \[
@@ -7235,10 +7435,6 @@ multiple Correlated Independent Variables
 where $x_{ij}$ is the $i$-th Observation (\S\ref{sec:observation}) of the $j$-th
 Independent Variable
 
-cf. Multivariate (Linear) Regression (General Linear Regression
-\S\ref{sec:multivariate_linear_regression}) -- multiple Correlated Dependent
-Variables
-
 
 
 \paragraph{Multivariate Regression}
@@ -7246,10 +7442,10 @@ Variables
 
 \emph{Multivariate Regression Model} or \emph{General Linear Model}
 
-multiple Correlated Dependent Variables
+multiple Correlated \emph{Dependent Variables}
 
 cf. Multiple Linear Regression (\S\ref{sec:multiple_linear_regression})
--- multiple Correlated Independent Variables
+-- multiple Correlated \emph{Independent Variables}
 
 \fist not to be confused with Generalized Linear Models (GLMs \S\ref{sec:glm}):
 here ``General'' just means a Multivariate Regressor as opposed to Univariate
@@ -7280,6 +7476,49 @@ $\mathbf{U}$ -- Matrix of Errors
 
 \fist Artificial Neural Networks (ANNs \S\ref{sec:ann}) generalize Regression
 and Clustering (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
+
+\asterism
+
+\emph{Regression and Automated Differentiation} -
+\url{https://idontgetoutmuch.wordpress.com/2013/04/26/regression-and-automated-differentiation-4/}
+-- Automatic Differentiation (\S\ref{sec:automatic_differentiation})
+
+Model:
+\[
+  y_i = \vec{\theta}^T \vec{x}_i + e_i
+\]
+where $i \in \{1, \ldots, n\}$ for $n$ Observations, and $\vec{\theta}$ and
+$\vec{x}$ are both Column Vectors of length $m$ (FIXME: is this really
+multivariate or should it be multiple regression instead ???)
+
+Maximize the Likelihood (\S\ref{sec:likelihood}) with respect to $\vec{\theta}$:
+\[
+  \mathcal{L}(\vec{\theta}; \mathbf{X}, \vec{y}) =
+    \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma}}
+      e^\frac{-(y_i - \vec{\theta}^T \vec{x}_i)^2}{2\sigma^2}
+\]
+use Log-likelihood (\S\ref{sec:log_likelihood}) $\log \mathcal{L}(\vec{\theta})
+= \lambda(\vec{\theta})$ instead since $\log$ is Monotonic; Maximizing the
+Likelihood is the same a Minimizing the (Biased) Variance Estimate:
+\[
+  \frac{1}{n} \sum_{i=1}^n (y_i - \vec{\theta}^T\vec{x}_i)^2
+\]
+define a Cost Function (\S\ref{sec:objective_function}):
+\[
+  \mathcal{J}(\vec{\theta}) =
+    \frac{1}{2n} \sum_{i=1}^n (y_i - \vec{\theta}^T \vec{x}_i)^2
+\]
+(FIXME: this is sum of squared deviations ???)
+Minimize Cost Function using \emph{Gradient Descent}
+(\S\ref{sec:gradient_descent}):
+\[
+  \vec{\theta}_{k+1} = \vec{\theta}_k - \gamma \nabla \mathcal{J}(\vec{\theta})
+\]
+where $\vec{\theta}_k$ is the $k$th Estimate of $\vec{\theta}$, and $\gamma$ is
+a \emph{Learning Rate}
+
+for large numbers of Observations, see Stochastic Gradient Descent (SGD
+\S\ref{sec:sgd})
 
 
 
@@ -7367,13 +7606,13 @@ Models:
 
 
 
-\paragraph{Multinomial Regression}\label{sec:multinomial_regression}\hfill
-
-\paragraph{Logistic Regression}\label{sec:logistic_regression}
+\paragraph{Logistic Regression}\label{sec:logistic_regression}\hfill
 
 or \emph{Logit Regression}
 
 Binary Regression (\S\ref{sec:binary_regression})
+
+Non-linear Model
 
 can be formulated as a special case of Generalized Linear Models
 (\S\ref{sec:glm})
@@ -7420,8 +7659,8 @@ Conditional Likelihood:
 \]
 
 the Maximum Likelihood Estimate (MLE \S\ref{sec:mle}) can be obtained by
-maximizing $\mathcal{L}(B)$ numerically using Re-weighted Least Squares
-(\S\ref{sec:reweighted_least_squares}):
+maximizing $\mathcal{L}(B)$ numerically using Iteratively Re-weighted Least
+Squares (\S\ref{sec:irls}):
 
 choose starting $\hat{\beta}^0 = (\hat{\beta}_1^0, \ldots, \hat{\beta}_k^0)$
 and compute $p_i^0$ for $i = 1, \ldots, n$, and iterate from $s = 0$:
@@ -7438,6 +7677,208 @@ and compute $p_i^0$ for $i = 1, \ldots, n$, and iterate from $s = 0$:
   corresponding to doing a Weighted Linear Regression of $Z$ on $X$
 \end{enumerate}
 
+(wiki): Logistic Regression Predicts the \emph{Probability} of particular
+Outcomes rather than the Outcomes themselves
+
+Logistic Regression Models violate the Assumptions in Linear Regression Models
+in that the Residuals cannot be Normally Distributed; in a Logistic Model, the
+Conditional Distribution $y | x$ is a Bernoulli Distribution
+(\S\ref{sec:bernoulli_distribution}), whereas in Linear Regression the
+Conditional Distribution is Normally Distributed
+
+\emph{Binary Logistic Regression} -- Models \emph{Probability} of output in
+terms of input, and does \emph{not} perform Statistical Classification, although
+it can be \emph{used} to make a Binary Classifier by choosing a ``cutoff'' value
+and Classifying inputs with Probability greater than the cutoff as one class and
+below as the other class
+
+the Model ``Coefficients'' (FIXME: clarify) are generally not Estimated by a
+Closed-form Expression (unlike Linear Least Squares in Linear Regression),
+instead they are Estimated using \emph{Maximum Likelihood Estimation} (MLE
+\S\ref{sec:mle}) by an \emph{Iterative Process} (\S\ref{sec:iterative_method})
+
+see also:
+\begin{itemize}
+  \item Multinomial Logistic Regression (\S\ref{sec:multinomial_regression})
+  \item Ordered Logistic Regression (Ordered Logit \S\ref{sec:ordered_logit})
+\end{itemize}
+
+\asterism
+
+\url{https://www.youtube.com/watch?v=ckkiG-SDuV8}:
+
+in Logistic Regression, the Odds Ratio (\S\ref{sec:odds_ratio}) for an
+Independent Variable represents how the Odds change with a 1 unit increase in
+the Independent Variable, holding all other variables constant
+
+\url{https://www.youtube.com/watch?v=NmjT1_nClzg}:
+
+the Dependent Variable in Logistic Regression follows a \emph{Bernoulli
+  Distribution} (\S\ref{sec:bernoulli_distribution}):
+\[
+  Y | X = x \sim Bernoulli(p)
+\]
+in Logistic Regression, the unknown Parameter $p$ is Estimated for a given
+Linear Combination of Independent Variables
+
+the \emph{Logit} (Inverse Logistic Function \S\ref{sec:logit}) or \emph{Log
+  Odds}--the Natural Log of the Odds (\S\ref{sec:odds})--links the Linear
+Combination of Independent Variables, with Domain $(-\infty, \infty)$, to the
+Bernoulli Parameter $p$, with Domain $[0, 1]$:
+\[
+  logit(p) = \ln odds = \ln \Big(\frac{p}{1 - p}\Big) = \ln p - \ln (1 - p)
+\]
+
+the Standard Logistic Function (\S\ref{sec:logistic_function}), $\sigma(t)$,
+that is the Inverse Logit, or \emph{Mean Function}:
+\[
+  \mu_{y | x} = p(x) = \sigma(t) = logit^{-1}(t) = \frac{1}{1 + e^{-t}}
+\]
+gives the \emph{Probability} of the Dependent (Bernoulli) Random Variable being
+$1$ \emph{given} some Linear Combination $t = \beta_0 + \beta_1 x$ of
+Independent Variable $x$
+
+now the Logit of $p(x)$ is expressible as a Linear Function of the Dependent
+Variable $x$:
+\[
+  logit(p(x)) = \ln \Big(\frac{p(x)}{1 - p(x)}\Big) = \beta_0 + \beta_1 x
+\]
+
+note that Response Variables $Y_i$ are \emph{not Identically Distributed} as
+$P(Y_i = 1 | X)$ differs for each $X_i$, although they \emph{are Independent}
+for a given Design Matrix $\mathbf{X}$ and shared Parameters $\vec{\beta}$
+(wiki)
+
+this is derived by expressing the Log Odds as a Linear Function of the
+Independent Variables and solving for $\hat{p}$:
+\begin{flalign*}
+  \ln \Big(\frac{\hat{p}}{1 - \hat{p}}\Big) & = \beta_0 + \beta_1 x \\
+  \frac{\hat{p}}{1 - \hat{p}}               & = e^{\beta_0 + \beta_1 x} \\
+  \hat{p} & = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}} \\
+          & = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x)}} \\
+\end{flalign*}
+
+Regression Coefficients for Logistic Regression are calculated using Maximum
+Likelihood Estimation (MLE \S\ref{sec:mle})
+
+Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls})
+
+Parameters $\vec{\beta}^T = [\beta_0, \beta_1, \ldots]$
+
+Independent Variables $\vec{x}_i^T = [1, x_{i1}, x_{i2}, \ldots]$
+
+Expected Value of the Bernoulli Distribution
+$\mu_{y_i | \vec{x}_i} = 1 / (1 + e^{-\vec{\beta}^T \vec{x_i}})$
+
+Iteratively solving for the $(k+1)$th Estimate given the $k$th Estimate of
+$\vec{\beta}$:
+\[
+  \vec{\beta}_{k+1} = (\mathbf{X}^T \mathbf{S}_k \mathbf{X})^{-1} \mathbf{X}^T
+    (\mathbf{S}_k \mathbf{X} \vec{\beta}_k + \vec{y} - \vec{\mu}_k)
+\]
+where:
+\begin{itemize}
+  \item $\mathbf{S} = diag(\mu_i - \mu_i^2)$ is a
+    \emph{Diagonal Weighted Matrix}
+  \item $\vec{\mu} = [\mu_1, \ldots, \mu_n]$ is the Vector of Expected Values
+  \item $\mathbf{X} = [\vec{1}, \vec{x}_1, \vec{x}_2, \ldots]$ is the Regressor
+    (Design) Matrix
+  \item $\vec{y}_i^T = [y_1, y_2, \ldots]$ is the Vector of Response Variables
+\end{itemize}
+
+Goodness-of-fit (\S\ref{sec:model_fit}) measured using Coefficient of
+Determination $R^2$ (\S\ref{sec:determination_coefficient})
+
+Deviance Table, $\chi$-square (cf. ANOVA Table, $f$-test in Linear Regression)
+
+\url{https://www.youtube.com/watch?v=hWLdFMccpTY}:
+
+Gradient of Negative Log-likelihood (\S\ref{sec:log_likelihood}):
+$\nabla_{\vec{\beta}} -\ell = \mathbf{X}^T (\vec{\mu} - \vec{y})$
+
+Hessian:
+$\nabla_{\vec{\beta}}^2 -\ell = \mathbf{X}^T \mathbf{S} \mathbf{X}$
+
+since the above Hessian is Positive Semi-definite, $-\ell$ is Convex
+
+IRLS: update equation for Newton's Method takes the form of a solution for a WLS
+(\S\ref{sec:wls}) problem
+
+\asterism
+
+\emph{Neural Networks} (\S\ref{sec:ann}) can be viewed as a generalization of
+Logistic Regression
+(\url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/})
+
+\emph{Logistic Regression and Automated Differentiation} -
+\url{https://idontgetoutmuch.wordpress.com/2013/04/30/logistic-regression-and-automated-differentiation-3/}
+-- Automatic Differentiation (\S\ref{sec:automatic_differentiation})
+
+\begin{flalign*}
+  P(y = 1 | \vec{x}; \vec{\theta}) & = h_{\vec{\theta}}(\vec{x}) \\
+  P(y = 0 | \vec{x}; \vec{\theta}) & = 1 - h_{\vec{\theta}}(\vec{x}) \\
+\end{flalign*}
+where $\vec{x}$ and $\vec{\theta}$ are Vectors of length $m$, and:
+\[
+  h_{\vec{\theta}}(\vec{x}) = g(\vec{\theta}^T \vec{x})
+\]
+where $g$ is a Function such as the Logistic Function
+(\S\ref{sec:logistic_function}) $g(x) = 1/(1 + e^{-x})$ or Hyperbolic Tangent
+(\S\ref{sec:hyperbolic_function}) $g(x) = tanh x$
+
+rewriting as a Conditional Distribution:
+\[
+  p(y | \vec{x}; \vec{\theta}) =
+    (h_{\vec{\theta}}(\vec{x}))^y (1 - h_{\vec{\theta}}(\vec{x}))^{1-y}
+\]
+
+in order to find the value of $\vec{\theta}$ that ``gives the maximum
+Probability'' to the Observations, Maximize the Likelihood
+(\S\ref{sec:likelihood}):
+\begin{flalign*}
+  \mathcal{L}(\vec{\theta})
+    & = \prod_{i=1}^n p(y_i | \vec{x}_i; \vec{\theta}) \\
+    & = \prod_{i=1}^n (h_{\vec{\theta}}\vec{x}_i)^{y_i}
+          (1 - h_{\vec{\theta}}\vec{x}_i)^{1-y_i} \\
+\end{flalign*}
+assuming $n$ Observations
+
+Maximize the Log-likelihood (\S\ref{sec:log_likelihood}) since $\log$ is
+Monotonic:
+\begin{flalign*}
+  \lambda (\vec{\theta})
+    & = \log \mathcal{L}(\vec{\theta}) \\
+    & = \sum_{i=1}^n y_i \log h_{\vec{\theta}} \vec{x}_i +
+          (1-y_i) \log (1 - h_{\vec{\theta}} \vec{x}_i) \\
+\end{flalign*}
+using Gradient Descent (\S\ref{sec:gradient_descent}):
+\[
+  \vec{\theta}_{k+1} = \vec{\theta}_k - \gamma \nabla \mathcal{J} (\vec{\theta})
+\]
+where $\theta_k$ is the $k$th Estimate of the Parameters $\theta$ and $\gamma$
+is a \emph{Learning Rate}
+
+when number of Observations is high, cheaper alternative is Stochastic Gradient
+Descent (SGD \S\ref{sec:sgd})
+
+when the Observations/Training Data (Dataset) are Linearly Separable, then the
+magnitude of the Parameters can grow without bound as the Parameterized Logistic
+Function tends to the Unit Step Function (\S\ref{sec:unit_step_function}), and
+there may be more than one separating Hyperplane-- to avoid this, instead
+Maximize a \emph{Penalized Log-likelihood Function}:
+\[
+  \lambda (\vec{\theta}) = \sum_{i=1}^n
+    y_i \log h_{\vec{\theta}} \vec{x}_i
+    + (1-y_i) \log (1 - h_{\vec{\theta}} \vec{x}_i)
+    - \frac{\delta}{2} \|\vec{\theta}\|^2
+\]
+(TODO: explain)
+
+
+
+\subparagraph{Multinomial Logistic Regression}
+\label{sec:multinomial_regression}\hfill
+
 
 
 \paragraph{Probit Regression}\label{sec:probit_regression}
@@ -7445,6 +7886,20 @@ and compute $p_i^0$ for $i = 1, \ldots, n$, and iterate from $s = 0$:
 Binary Regression (\S\ref{sec:binary_regression})
 
 Linear Classifier (\S\ref{sec:linear_classifier})
+
+Non-linear Model
+
+
+
+\paragraph{Ordinal Regression}\label{sec:ordinal_regression}\hfill
+
+\emph{Ranking Learning}
+
+
+
+\subparagraph{Ordered Logit}\label{sec:ordered_logit}\hfill
+
+\emph{Ordered Logistic Regression} or \emph{Proportional Odds Model}
 
 
 
@@ -7516,18 +7971,6 @@ Hierarchical Models can be written using \emph{Generators}
 Submodel \emph{Deviance}
 
 \textbf{Negative Binomial Regression}
-
-
-
-\paragraph{Ordinal Regression}\label{sec:ordinal_regression}\hfill
-
-\emph{Ranking Learning}
-
-
-
-\subparagraph{Ordered Logit}\label{sec:ordered_logit}\hfill
-
-\emph{Ordered Logistic Regression} or \emph{Proportional Odds Model}
 
 
 
@@ -7620,6 +8063,28 @@ where $\sigma$ is a Smooth Function, often:
 \[
   \sigma(v) = \frac{e^v}{1 + e^v}
 \]
+
+Stochastic Gradient Descent (SGD \S\ref{sec:sgd}) -- \emph{de facto} standard
+Algorithm for training ANNs
+
+\emph{Neural Networks and Automated Differentiation} -
+\url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
+
+Neural Networks can be viewed as a generalization of Logistic Regression
+(\S\ref{sec:logistic_regression})
+
+
+
+\subsubsection{Backpropagation}\label{sec:backpropagation}
+
+\emph{Neural Networks and Automated Differentiation} -
+\url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
+
+\emph{Backpropagation} -- Gradient Descent (\S\ref{sec:gradient_descent}) with
+Reverse-mode Automatic Differentiation (\S\ref{sec:automatic_differentiation})
+
+2013 - Buitl\'eir, Russell, Daly -
+\emph{A Functional Approach to Neural Networks}
 
 
 
@@ -7882,6 +8347,11 @@ with Probabilty $p$
 Stochastic Computing
 
 cf. \emph{Binomial Process} (Point Process \S\ref{sec:binomial_process})
+
+Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls}) -- equivalent to
+minimizing the Log-likelihood (\S\ref{sec:log_likelihood}) of a Bernoulli
+Distributed Process using Newton's Method (\S\ref{sec:newtons_method}); used for
+MLE in Logistic Regression (\S\ref{sec:logistic_regression})
 
 
 
@@ -8387,6 +8857,8 @@ approximation of Integrals (\S\ref{sec:numerical_integration})
 
 approximation of Posteriors (\S\ref{sec:posterior_distribution}) in Bayesian
 Inference (\S\ref{sec:bayesian_inference})
+
+cf. Stochastic Gradient Descent (SGD \S\ref{sec:sgd})
 
 
 
