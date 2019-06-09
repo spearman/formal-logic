@@ -689,12 +689,20 @@ the Independent Variable, holding all other variables constant
 
 
 
-\subsubsection{Log Odds}\label{sec:log_odds}
+\subsubsection{Log-odds}\label{sec:log_odds}
 
 Logit (Log-odds \S\ref{sec:logit})
 
 \[
   \ln \Big(\frac{p}{1 - p}\Big)
+\]
+
+(wiki) --
+the difference between the Log-odds of two Probabilities is the Logarithm
+of the Odds Ratio (\S\ref{sec:odds_ratio}), $R$:
+\[
+  logit(p_1) - logit(p_2) = \ln\Big(\frac{p_1/(1 - p_1)}{p_2/(1 - p_2)}\Big)
+    = \ln R
 \]
 
 
@@ -1269,8 +1277,42 @@ Probability Inequalities (Classification Error \S\ref{sec:classification_error})
 
 
 % ------------------------------------------------------------------------------
-\subsection{Covariance}\label{sec:covariance}
+\subsection{Dependence}\label{sec:dependence}
 % ------------------------------------------------------------------------------
+
+or \emph{Association}
+
+any ``\emph{Statistical Relationship}'' between two Random Variables
+(``Bivariate Data'')
+
+may or may not be Causal -- (wiki): the main difference between
+\emph{Causal Inference} (\S\ref{sec:causal_inference}) and an Inference of
+\emph{Association} is that the former analyzes the ``response'' of the ``effect
+variable'' when the Cause is changed
+
+Random Variables are \emph{Dependent} if they do not Satisfy the Property of
+\emph{Probabilistic Independence} (\S\ref{sec:independence})
+
+Stochastic Processes (\S\ref{sec:stochastic_process}): Sequences of Dependent
+Random Variables
+
+\fist Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimation
+(\S\ref{sec:estimation_theory}) of Relations in Multivariate Data
+(\S\ref{sec:random_vector})
+
+\fist a \emph{Structural Assumption} is a Model-baesd Statistical Assumption
+(\S\ref{sec:statistical_assumption}) about the Functional Dependence between
+Variables in a Statistical Model
+
+
+
+\subsubsection{Covariance}\label{sec:covariance}
+
+a measure of the ``Joint Variability'' of two Random Variables; the sign of the
+Covariance shows the tendency of a Linear Relation between the Variables, and
+the Normalized version of the Covariance is the \emph{Correlation Coefficient}
+(\S\ref{sec:correlation_coefficient}) which gives the magnitude of the Linear
+Relation
 
 $Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)]$
 
@@ -1380,74 +1422,14 @@ Variance reduction methods:
 
 
 
-\subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
-
-or \emph{Variance-Covariance Matrix}
-
-Positive semi-definite (\S\ref{sec:positive_semidefinite})
-
-the Inverse of the Covariance Matrix is called the \emph{Precision Matrix}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Skewness}\label{sec:skewness}
-% ------------------------------------------------------------------------------
-
-Asymmetry %FiXME
-
-``lopsided-ness''
-
-Third Central Moment (\S\ref{sec:moment})/Third Cumulant (\S\ref{sec:cumulant})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Kurtosis}\label{sec:kurtosis}
-% ------------------------------------------------------------------------------
-
-Fourth Central Moment (\S\ref{sec:moment})
-
- Measure of the ``heaviness'' of the tail of a Distribution
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Dependence}\label{sec:dependence}
-% ------------------------------------------------------------------------------
-
-or \emph{Association}
-
-any ``\emph{Statistical Relationship}'' between two Random Variables
-(``Bivariate Data'')
-
-may or may not be Causal -- (wiki): the main difference between
-\emph{Causal Inference} (\S\ref{sec:causal_inference}) and an Inference of
-\emph{Association} is that the former analyzes the ``response'' of the ``effect
-variable'' when the Cause is changed
-
-Random Variables are \emph{Dependent} if they do not Satisfy the Property of
-\emph{Probabilistic Independence} (\S\ref{sec:independence})
-
-Stochastic Processes (\S\ref{sec:stochastic_process}): Sequences of Dependent
-Random Variables
-
-\fist Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimation
-(\S\ref{sec:estimation_theory}) of Relations in Multivariate Data
-(\S\ref{sec:random_vector})
-
-\fist a \emph{Structural Assumption} is a Model-baesd Statistical Assumption
-(\S\ref{sec:statistical_assumption}) about the Functional Dependence between
-Variables in a Statistical Model
-
-
-
 \subsubsection{Correlation}\label{sec:statistical_correlation}
 
 $\rho$
 
 measure of how close two Random Variables are to having a \emph{Linear
   Relationship}
+
+Normalized Covariance (\S\ref{sec:covariance})
 
 \fist cf. Linear Regression (\S\ref{sec:linear_regression})
 
@@ -1483,6 +1465,19 @@ where $s_x$ and $s_y$ are the Sample Standard Deviations of $x$ and $y$
 
 \fist cf. $r^2$ -- Coefficient of
 Determination (\S\ref{sec:determination_coefficient})
+
+
+
+\subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
+
+\emph{Variance-Covariance Matrix} or \emph{Dispersion Matrix}
+
+Symmetric Matrix (\S\ref{sec:symmetric_matrix}) where the $i,j$th entry is the
+Covariance between the $i$th and $j$th entries of a Random Vector
+
+Positive Semi-definite (\S\ref{sec:positive_semidefinite})
+
+the Inverse of the Covariance Matrix is called the \emph{Precision Matrix}
 
 
 
@@ -1930,6 +1925,28 @@ Skewness (\S\ref{sec:skewness}) -- Third Cumulant; ``lopsided-ness''
 Fourth and higher-order Cumulants are not equal to Central Moments
 
 \fist Cumulant-generating Function (\S\ref{sec:cumulant_generating_function})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Skewness}\label{sec:skewness}
+% ------------------------------------------------------------------------------
+
+Asymmetry %FiXME
+
+``lopsided-ness''
+
+Third Central Moment (\S\ref{sec:moment})/Third Cumulant (\S\ref{sec:cumulant})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Kurtosis}\label{sec:kurtosis}
+% ------------------------------------------------------------------------------
+
+Fourth Central Moment (\S\ref{sec:moment})
+
+Measure of the ``heaviness'' of the tail of a Distribution
 
 
 
@@ -3382,6 +3399,13 @@ $\overline{x}$, $\sigma^2$
 
 \asterism
 
+\begin{itemize}
+  \item Signal Coherence (\S\ref{sec:signal_coherence})
+  \item ...
+\end{itemize}
+
+\asterism
+
 (Wasserman04 \S9.13.2) a Statistic induces a \emph{Partition} on the Set of
 Outcomes (FIXME: clarify)
 
@@ -3815,6 +3839,14 @@ MIT 6.041SC, Lec.8
   \frac{X - \mu}{\sigma} \sim N(0, 1)
 \]
 where $(X - \mu)/\sigma$ is the Standard Score
+
+
+
+\subparagraph{Mahalanobis Distance}\label{sec:mahalanobis_distance}\hfill
+
+Multi-dimensional generalization of Standard Deviation
+
+Generalized Least Squares (GLS \S\ref{sec:gls})
 
 
 
@@ -4633,6 +4665,10 @@ $\hat{\theta}$;
 often the Method of Moements (\S\ref{sec:moments_method}) is a good starting
 value of $\theta^0$
 
+(Wasserman04 \S13.2):
+ under assumption of Normality ($Y_i | X_i \sim N(\mu_i, \sigma^2)$), the Least
+ Squares Estimator (\S\ref{sec:least_squares}) is also the MLE
+
 
 
 \subparagraph{Method of Moments}\label{sec:moments_method}\hfill
@@ -5102,8 +5138,12 @@ earliest form of Regression Analysis (\S\ref{sec:regression_analysis})
 -- the Sum of Squared Residuals (SSR) gives a measure of how well
 an Estimated Regression Function $\hat{r}(x)$ ``Fits'' the Data, and the
 Regression Parameters that minimize SSR are called \emph{Least Squares
-  Estimates}; under assumption of Normality, the Least Squares
-Estimator is also the Maximum Likelihood Estimator (MLE \S\ref{sec:mle})
+  Estimates}
+
+(Wasserman04, \S13.2):
+ under assumption of Normality ($Y_i | X_i \sim N(\mu_i, \sigma^2)$), the Least
+ Squares Estimator is also the Maximum Likelihood Estimator (MLE
+ \S\ref{sec:mle})
 
 cf. Squared Deviation from the Mean (SDM \S\ref{sec:sdm})
 
@@ -5159,6 +5199,48 @@ UC Math 352, Lecture 7. - \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
 
 
 \subparagraph{Ordinary Least Squares (OLS)}\label{sec:ols}\hfill
+
+(MIT 18.086 2006, Lec.21)
+
+as an Optimization Problem:
+\begin{flalign*}
+  \vec{u}^* + \mathbf{X}\vec{\beta}^* & = \vec{y} \\
+  \mathbf{X}^T \vec{u}^*              & = 0 \\
+\end{flalign*}
+``Saddle-point System'', ``Kuhn-Tucker Equations'':
+\[
+  \begin{bmatrix}
+    \mathbf{I}   & \mathbf{X} \\
+    \mathbf{X}^T & \mathbf{0} \\
+  \end{bmatrix} \begin{bmatrix}
+    \vec{u}^*     \\
+    \vec{\beta}^* \\
+  \end{bmatrix} = \begin{bmatrix}
+    \vec{y} \\
+    \vec{0} \\
+  \end{bmatrix}
+\]
+
+because of the Constraint $\mathbf{X}^T \vec{u}^* = 0$, multiplying the first
+equation by $\mathbf{X}^T$ yields the Normal Equation
+(\S\ref{sec:normal_equation}):
+\[
+  \mathbf{X}\vec{\beta}^* = \vec{y}
+\]
+
+alternatively, by elimination on the System Equation:
+\[
+  \begin{bmatrix}
+    \mathbf{I} & \mathbf{X} \\
+    \mathbf{0} & -\mathbf{X}^T\mathbf{X} \\
+  \end{bmatrix} \begin{bmatrix}
+    \vec{u}^*     \\
+    \vec{\beta}^* \\
+  \end{bmatrix} = \begin{bmatrix}
+    \vec{y} \\
+    -\mathbf{X}^T \vec{y} \\
+  \end{bmatrix}
+\]
 
 \textbf{Gauss-Markov Theorem} \emph{
   In a Linear Model (\S\ref{sec:linear_regression}) where Errors are
@@ -5236,25 +5318,86 @@ and $\vec{rho}_N$ is independent of $\vec{x}$ so it is \emph{fixed}, so:
 
 \paragraph{Generalized Least Squares (GLS)}\label{sec:gls}\hfill
 
-\begin{itemize}
-  \item Heteroscedastic (\S\ref{sec:heteroscedasticity}) Errors -- Weighted
-    Least Squares (WLS \S\ref{sec:wls})
-  \item Correlation between Errors
-\end{itemize}
-
 Linear Regression (\S\ref{sec:linear_regression}) technique when there is a
 degree of Correlation between Residuals
+
+\begin{itemize}
+  \item Heteroscedastic (\S\ref{sec:heteroscedasticity}) Errors -- unequal
+    Variances (diagonal entries of the Covariance Matrix)
+    \begin{itemize}
+      \item Weighted Least Squares (WLS \S\ref{sec:wls})
+    \end{itemize}
+  \item Correlation between Errors -- off-diagonal entries of the Covariance
+    Matrix
+\end{itemize}
+
+(wiki):
+
+$\vec{y} = \mathbf{X}\vec{\beta} + \vec{\epsilon}$
+
+$E[\epsilon | \mathbf{X}] = 0$
+
+$cov[\epsilon | \mathbf{X}] = \mathbf{K}$
+
+Estimate $\vec{\beta}$ by minimizing the Squared Mahalanobis Length
+(\S\ref{sec:mahalanobis_distance}) of the Residual
+$\vec{y} - \mathbf{X}\hat{\beta}$:
+\begin{flalign*}
+  \hat{\beta}
+    & = argmin_{\vec{\beta}} (\vec{y} - \mathbf{X}\vec{\beta})^T
+      \mathbf{K}^{-1} (\vec{y} - \mathbf{X}\vec{\beta}) \\
+    & = (\mathbf{X}^T \mathbf{K}^{-1} \mathbf{X})^{-1}
+      \mathbf{X}^T \mathbf{K}^{-1} \vec{y} \\
+\end{flalign*}
+
+the GLS Estimator is Unbiased, Consistent, Efficient, and Asymptotically Normal
+with $E[\hat{\beta} | \mathbf{X}] = \vec{\beta}$ and
+$cov[\hat{\beta} | \mathbf{X}] = (\mathbf{X}^T \mathbf{K}^{-1} \mathbf{X})^{-1}$
+
+GLS is equivalent to applying OLS to Linearly Transformed version of the Data
+
+WLS is a special case where $\mathbf{K}$ is Diagonal
 
 
 
 \subparagraph{Weighted Least Squares (WLS)}\label{sec:wls}\hfill
 
-can be used in Regression Analysis to drop the Assumption that the Variance of
-the Error is Constant accross Observations (\emph{Heteroscedasticity}
-\S\ref{sec:heteroscedasticity})
+Variance of Errors are unequal accross Observations (\emph{Heteroscedasticity}
+\S\ref{sec:heteroscedasticity})-- Error Covariance Matrix
+(\S\ref{sec:covariance_matrix}) may be a Diagonal Matrix other than Identity
+Matrix
+
+(wiki):
+
+the ``weight'' for ``unit'' $i$ is proportional to the reciprocal of the
+Variance of the Response for unit $i$ (TODO: clarify)
+
+Normal Equations:
+\[
+  (diag(\vec{w})\mathbf{X})^T diag(\vec{w})\mathbf{X} \hat{\beta}
+    = (diag(\vec{w})\mathbf{X})^T (diag(\vec{w})\vec{y}
+\]
+
+TODO
+
+\[
+  \hat{\beta} = (\mathbf{X}^T \mathbf{W X})^{-1} \mathbf{X}^T \mathbf{W} \vec{y}
+\]
 
 \fist Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls}) -- for
 $L^p$-norm Linear Regression, IRLS at step $k+1$ involves solving WLS
+
+
+
+\subparagraph{Feasible Generalized Least Squares (FGLS)}\label{sec:fgls}\hfill
+
+unknown Error Covariance Matrix $\mathbf{K}$
+
+\begin{enumerate}
+  \item Estimate Model by OLS and use the Residuals to build a (Consistent)
+    Estimator of the Errors Covariance Matrix $\hat{\mathbf{K}}$
+  \item use $\hat{\mathbf{K}}$ to perform GLS
+\end{enumerate}
 
 
 
@@ -5302,7 +5445,28 @@ where:
 
 \paragraph{Polynomial Least Squares}\label{sec:polynomial_least_squares}\hfill
 
-\paragraph{Non-linear Least Squares}\label{sec:nonlinear_least_squares}\hfill
+\paragraph{Non-Linear Least Squares (NLLS)}\label{sec:nlls}\hfill
+
+examples:
+\begin{itemize}
+  \item Logistic Regression (\S\ref{sec:logistic_regression})
+  \item Probit Regression (\S\ref{sec:probit_regression})
+  \item Threshold Regression (TODO)
+  \item Smooth Regression (TODO)
+  \item Box-Cox Transformed Regression (TODO)
+\end{itemize}
+
+Normal Equations:
+\[
+  (\mathbf{J} \mathbf{W J}) \mathbf{Delta} \vec{\beta} =
+    \mathbf{J} \mathbf{W \Delta} \vec{y}
+\]
+
+\emph{Gauss-Newton Algorithm}
+
+QR methods
+
+Gradient methods
 
 
 
@@ -6372,6 +6536,10 @@ an example of ``Causal Reasoning'' (TODO: xref)
 
 cf. Covariance (\S\ref{sec:covariance})
 
+\fist (wiki): for Ergodic Signals with a Linear System Function, Signal
+Coherence (\S\ref{sec:signal_coherence}) can be used to Estimate the Causality
+between System input and output (FIXME: clarify)
+
 
 
 \subsubsection{Causal Model}\label{sec:causal_model}
@@ -6715,7 +6883,8 @@ Statistical Model of the Joint Probability Distribution
 Generative methods of determining Parameters for a Linear Classifier
 (\S\ref{sec:linear_classifier}):
 \begin{itemize}
-  \item Linear Discriminant Analysis (LDA or Fisher's Linear Discriminant)
+  \item Linear Discriminant Analysis (LDA or Fisher's Linear Discriminant
+    \S\ref{sec:lda})
   \item Naive Bayes Classifier (\S\ref{sec:naive_bayes})
 \end{itemize}
 
@@ -6790,7 +6959,6 @@ Generative (\S\ref{sec:generative_model}) methods:
 \end{itemize}
 
 Discriminative (\S\ref{sec:discriminative_model}) methods:
-(\S\ref{sec:linear_classifier}):
 \begin{itemize}
   \item Logistic Regression (\S\ref{sec:logistic_regression})
   \item Perceptron (\S\ref{sec:perceptron})
@@ -6834,7 +7002,12 @@ Quadratic Programming (\S\ref{sec:quadratic_programming})
 
 Discriminative Method (\S\ref{sec:discriminative_method})
 
-cf. Neural Networks (\S\ref{sec:ann})
+\fist Neural Networks (\S\ref{sec:ann}) -- a Perceptron is an \emph{Artificial
+  Neuron} (\S\ref{sec:artificial_neuron}) using the Unit Step Function
+(\S\ref{sec:unit_step_function}) as the Activation Function
+
+\fist Single-layer Perceptron (\S\ref{sec:single_layer_preceptron})
+-- simplest Feed-forward Neural Network (\S\ref{sec:ffnn})
 
 
 
@@ -7073,9 +7246,13 @@ Multivariate Data (\S\ref{sec:random_vector})
 \end{itemize}
 
 the Regression Parameters that miminize Residual Sums of Squares (SSR
-\S\ref{sec:ssr}) are caled \emph{Least Squares Estimates}
-(\S\ref{sec:least_squares}); under assumption of Normality, the Least Squares
-Estimator is also the Maximum Likelihood Estimator (MLE \S\ref{sec:mle})
+\S\ref{sec:ssr}) are called \emph{Least Squares Estimates}
+(\S\ref{sec:least_squares})
+
+(Wasserman04 \S13.2):
+ under assumption of Normality ($Y_i | X_i \sim N(\mu_i, \sigma^2)$), the Least
+ Squares Estimator is also the Maximum Likelihood Estimator (MLE
+ \S\ref{sec:mle})
 
 (Wasserman04 \S13.6)
 
@@ -7614,11 +7791,13 @@ Binary Regression (\S\ref{sec:binary_regression})
 
 Non-linear Model
 
+Non-Linear Least Squares (NLLS \S\ref{sec:nlls})
+
 can be formulated as a special case of Generalized Linear Models
 (\S\ref{sec:glm})
 
 cf. Statistical Classification (\S\ref{sec:classification}) -- Logistic
-Regression as a Discriminative (\S\ref{sec:discriminative_model}) methods of
+Regression as a Discriminative (\S\ref{sec:discriminative_model}) method of
 determining Parameters for a Linear Classifier (\S\ref{sec:linear_classifier})
 
 \fist Linear Discriminant Analysis (LDA \S\ref{sec:lda}) -- in LDA, the Joint
@@ -7659,7 +7838,7 @@ Conditional Likelihood:
 \]
 
 the Maximum Likelihood Estimate (MLE \S\ref{sec:mle}) can be obtained by
-maximizing $\mathcal{L}(B)$ numerically using Iteratively Re-weighted Least
+maximizing $\mathcal{L}(\beta)$ numerically using Iteratively Re-weighted Least
 Squares (\S\ref{sec:irls}):
 
 choose starting $\hat{\beta}^0 = (\hat{\beta}_1^0, \ldots, \hat{\beta}_k^0)$
@@ -7889,6 +8068,8 @@ Linear Classifier (\S\ref{sec:linear_classifier})
 
 Non-linear Model
 
+Non-Linear Least Squares (NLLS \S\ref{sec:nlls})
+
 
 
 \paragraph{Ordinal Regression}\label{sec:ordinal_regression}\hfill
@@ -8053,7 +8234,9 @@ extends Regression (\S\ref{sec:regression_analysis}) and Clustering
 (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
 
 cf. Perceptron (\S\ref{sec:perceptron}) -- Binary Linear Classifier
-(\S\ref{sec:linear_classifier})
+(\S\ref{sec:linear_classifier}); an Artificial Neuron using the Unit Step
+Function (\S\ref{sec:unit_step_function}) as the Activation Function; simplest
+Feed-Forward Neural Network (FFNN \S\ref{sec:ffnn})
 
 simplest Neural Network Regression Model:
 \[
@@ -8085,6 +8268,57 @@ Reverse-mode Automatic Differentiation (\S\ref{sec:automatic_differentiation})
 
 2013 - Buitl\'eir, Russell, Daly -
 \emph{A Functional Approach to Neural Networks}
+
+
+
+\subsubsection{Artificial Neuron}\label{sec:artificial_neuron}
+
+the \emph{Nodes} of an ANN
+
+\begin{itemize}
+  \item Perceptron (\S\ref{sec:perceptron}) -- Neuron using the Unit Step
+    Function (\S\ref{sec:unit_step_function}) as the Activation Function
+  \item ...
+\end{itemize}
+
+
+
+\paragraph{Activation Function}\label{sec:activation_function}\hfill
+
+sometimes ``Transfer Function'', not to be confused with Transfer Function
+(Evolution Function \S\ref{sec:evolution_function}) of a Dynamical System
+
+defines the \emph{output} of a Node for a given input or set of inputs
+
+
+
+\subsubsection{Feed-Forward Neural Network (FFNN)}\label{sec:ffnn}
+
+\paragraph{Universal Approximation Theorem}
+\label{sec:universal_approximation}\hfill
+
+every Continuous Function mapping Intervals of Real Numbers to some output
+Interval of Real Numbers can be Approximated arbitrarily closely by a
+Multi-layer Perceptron with a single Hidden Layer
+
+when the Activation Function is Non-linear, a Two-layer Neural Network can be
+proven to be a Universal Function Approximator
+
+
+
+\paragraph{Single-layer Perceptron}\label{sec:single_layer_perceptron}\hfill
+
+cf. Perceptron (\S\ref{sec:perceptron}) -- Linear Classifier
+
+
+
+\paragraph{Multi-Layer Perceptron (MLP)}\label{sec:mlp}\hfill
+
+\paragraph{Convolutional Neural Network}\label{sec:cnn}\hfill
+
+
+
+\subsubsection{Recurrent Neural Network}\label{sec:rnn}
 
 
 
