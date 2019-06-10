@@ -998,6 +998,100 @@ possibly subject to constraints
 
 
 
+\subsubsection{Deviation}\label{sec:deviation}
+
+A \emph{Deviation} is a Signed Difference (\S\ref{sec:subtraction}) between an
+Observation and some other value, usually the Observed Random Variable's Mean
+(Expected Value \S\ref{sec:expected_value}).
+
+\begin{itemize}
+  \item an \emph{Error} (\S\ref{sec:error}) is a Deviation of an Observed value
+    and an ideal (possibly theoretical) ``true'' value, e.g. Deviation from a
+    Population Mean
+  \item a \emph{Residual} (\S\ref{sec:residual}) is a Deviation of an Observed
+    value from an \emph{Estimate} (\S\ref{sec:estimation_theory}) of a ``true''
+    value, e.g. Deviation from a Sample Mean
+\end{itemize}
+
+\emph{Statistical Dispersion} (or ``Variability'' \S\ref{sec:dispersion}) is
+measured by Population Parameters or Sample Statistics defined on the
+\emph{Distribution of Deviations}:
+\begin{itemize}
+  \item Variation Ratio (Qualitative Variation, Deviation from the Mode
+    \S\ref{sec:variation_ratio}) -- proportion of cases that are \emph{not} in
+    the Mode (\S\ref{sec:mode})
+  \item Mean Absolute Deviation (MAD \S\ref{sec:mad}) -- average of Absolute
+    Deviations (\S\ref{sec:absolute_deviation}); the Median (\S\ref{sec:median})
+    minimizes the MAD
+  \item Standard Deviation (\S\ref{sec:standard_deviation}) -- average of
+    Squared Deviations (\S\ref{sec:squared_deviation}); the Mean
+    (\S\ref{sec:mean}) minimizes the Standard Deviation
+  \item Maximum Absolute Deviation (\S\ref{sec:maximum_absolute_deviation}) --
+    maximum of Absolute Deviations around a point; the Mid-range
+    (\S\ref{sec:midrange}) minimizes the Maximum Absolute Deviation
+\end{itemize}
+
+see also:
+\begin{itemize}
+  \item Regression Error (\S\ref{sec:regression_error}) -- Deviation of a value
+    Predicted by an Estimated Regression Function from the value Predicted by
+    the ``true'' Prediction Function
+  \item Regression Residual (\S\ref{sec:regression_residual}) -- Deviation of an
+    Observed value from the value Predicted by an Estimated Regression Function
+  \item Mean Signed Deviation (\S\ref{sec:mean_signed_deviation}) -- Average
+    of Signed Error of the Estimated value (produced by an Estimator) from the
+    ``true''  value
+  \item Mean Squared Deviation (MSD \S\ref{sec:msd}) -- Average of the Squared
+    Error of the Estimated value (produced by an Estimator) from the ``true''
+    value; MSD is the Second Moment of the Error; for an Unbiased Estimator the
+    MSD is the Variance of the Estimator
+  \item Root-Mean-Square Deviation (RMSD \S\ref{sec:rmsd}) -- Square Root of the
+    MSD (cf. Standard Deviation)
+  \item Standard Error (\S\ref{sec:standard_error}) -- the Standard Deviation of
+    a Sampling Distribution
+  \item Mean Absolute Difference (\S\ref{sec:mean_absolute_difference}) --
+    Average Absolute Difference of two IID Random Variables
+  \item Mean Absolute Error (MAE \S\ref{sec:mae}) -- Average Absolute Difference
+    between two Continuous Random Variables, i.e. the Average Vertical or
+    Horizontal Difference between each Point (Pair) and the Identity Line
+\end{itemize}
+
+
+
+\paragraph{Absolute Deviation}\label{sec:absolute_deviation}\hfill
+
+Absolute Error, Absolute Residual
+
+\fist Mean Absolute Deviation (MAD \S\ref{sec:mad}) -- measure of Dispersion
+(\S\ref{sec:dispersion}) associated with the $L^1$ Metric (Taxicab Norm
+\S\ref{sec:p_norm}); corresponding Central Tendency
+(\S\ref{sec:central_tendency}) is the Median (\S\ref{sec:median})
+
+\fist Maximum Absolute Deviation (\S\ref{sec:maximum_absolute_deviation}) --
+measure of Dispersion associated with the $L^{\infty}$ Metric (Max Norm
+\S\ref{sec:p_norm}); corresponding Central Tendency is the Midrange
+(\S\ref{sec:midrange})
+
+
+
+\paragraph{Squared Deviation}\label{sec:squared_deviation}\hfill
+
+\fist Variance (\S\ref{sec:variance}) is the Expected Value of the Squared
+Deviation from the Mean (SDM \S\ref{sec:sdm})
+
+\begin{itemize}
+  \item Sum of Squared Deviations (\S\ref{sec:sum_squared_deviation})
+    \begin{itemize}
+      \item Total Sum of Squares (\S\ref{sec:tss})
+      \item Sum of Squared Residuals (\S\ref{sec:ssr})
+      \item Explained Sum of Squares (\S\ref{sec:ess})
+    \end{itemize}
+  \item Mean Squared Deviation (MSD \S\ref{sec:msd})
+  \item Squared Deviation from the Mean (\S\ref{sec:sdm})
+\end{itemize}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Expected Value}\label{sec:expected_value}
 % ------------------------------------------------------------------------------
@@ -1007,9 +1101,13 @@ The \emph{Expected Value}, \emph{Expectation}, or \emph{Mean} (First Raw Moment
 of ``average'' where Probabilities are treated like ``frequencies''. (FIXME:
 clarify)
 
+\fist Mean (\S\ref{sec:mean}) -- Central Tendency (\S\ref{sec:central_tendency})
+for Interval Measurement (\S\ref{sec:measurement_level}); associated with
+minimizing the Standard Deviation (\S\ref{sec:standard_deviation}); cf. the
+Median minimizes Absolute Deviation (\S\ref{sec:absolute_deviation})
+
 as an Estimate (\S\ref{sec:estimation_theory}) of $X$, the Expected Value $E[X]$
-minimizes Squared Error (\S\ref{sec:error}); cf. the Median (\S\ref{sec:median})
-minimizes Absolute Error
+minimizes Squared Error (\S\ref{sec:error})
 
 note that $E(X + Y) = E(X) + E(Y)$, but not for $m(X+Y)$
 
@@ -1277,211 +1375,6 @@ Probability Inequalities (Classification Error \S\ref{sec:classification_error})
 
 
 % ------------------------------------------------------------------------------
-\subsection{Dependence}\label{sec:dependence}
-% ------------------------------------------------------------------------------
-
-or \emph{Association}
-
-any ``\emph{Statistical Relationship}'' between two Random Variables
-(``Bivariate Data'')
-
-may or may not be Causal -- (wiki): the main difference between
-\emph{Causal Inference} (\S\ref{sec:causal_inference}) and an Inference of
-\emph{Association} is that the former analyzes the ``response'' of the ``effect
-variable'' when the Cause is changed
-
-Random Variables are \emph{Dependent} if they do not Satisfy the Property of
-\emph{Probabilistic Independence} (\S\ref{sec:independence})
-
-Stochastic Processes (\S\ref{sec:stochastic_process}): Sequences of Dependent
-Random Variables
-
-\fist Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimation
-(\S\ref{sec:estimation_theory}) of Relations in Multivariate Data
-(\S\ref{sec:random_vector})
-
-\fist a \emph{Structural Assumption} is a Model-baesd Statistical Assumption
-(\S\ref{sec:statistical_assumption}) about the Functional Dependence between
-Variables in a Statistical Model
-
-
-
-\subsubsection{Covariance}\label{sec:covariance}
-
-a measure of the ``Joint Variability'' of two Random Variables; the sign of the
-Covariance shows the tendency of a Linear Relation between the Variables, and
-the Normalized version of the Covariance is the \emph{Correlation Coefficient}
-(\S\ref{sec:correlation_coefficient}) which gives the magnitude of the Linear
-Relation
-
-$Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)]$
-
-$Cov(X,X)$ -- Variance (\S\ref{sec:variance})
-
-\fist cf. Causation (\S\ref{sec:causation})
-
-$n$ Discrete Samples:
-\[
-  \sigma_{X,Y} = Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)] =
-    \frac{1}{n} \sum_{i=1}^n (x_i - \mu_X) (y_i - \mu_Y)
-\]
-
-Continuous:
-\[
-  Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)] =
-  \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
-  (x - \mu_X) (y - \mu_Y) f(x,y) dx dy
-\]
-where $f(x,y)$ is the Joint Probability Distribution
-(\S\ref{sec:joint_probability}) of $X$, $Y$
-
-\fist Sample Covariance (\S\ref{sec:sample_covariance})
-
-\textbf{Thm.} \emph{Covariance Satisfies:
-  \[
-    Cov(X,Y) = E(XY) - E(X)E(Y)
-  \]
-}
-
-the Correlation (\S\ref{sec:statistical_correlation}) is defined in terms of the
-Covariance:
-\[
-  \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
-\]
-if $X$ and $Y$ are Independent (\S\ref{sec:dependence}), then
-$Cov(X,Y) = \rho = 0$
-
-
-
-\subsubsection{Variance}\label{sec:variance}
-
-the \emph{Variance} is the Expected Value of the Squared Deviation (Error
-\S\ref{sec:error}) of a Random Variable
-
-$\sigma_X^2 = Cov(X,X)$
-
-the \emph{Sum of Squared Deviations} (\S\ref{sec:sum_squared_deviation})
-Estimates (\S\ref{sec:estimation_theory}) the Variance when scaled for the
-number of \emph{Degrees of Freedom} (\S\ref{sec:statistical_freedom})
-
-\emph{Overfitting} (Multiple Regression \S\ref{sec:multiple_regression}) -- too
-many Covariates, high Variance
-
-\fist ANalaysis Of VAriance (ANOVA \S\ref{sec:variance_analysis}) --
-Variance is defined as either the Expected Value of the
-Squared Deviation from the Mean (SDM \S\ref{sec:sdm}), considering a theoretical
-Distribution, or its Sample Mean (\S\ref{sec:sample_mean})
-
-Second Central Moment (\S\ref{sec:moment})/Second Cumulant
-(\S\ref{sec:cumulant})
-
-Variances are always Non-negative
-
-the Variance of a Random Variable $X$ is equal to:
-\begin{align*}
-  \sigma^2 = V(X) & = E(X - E(X))^2   \\
-                  & = E(X^2) - E(X)^2 \\
-                  & = \int(x - E(X))^2 dF(x) \\
-\end{align*}
-assuming the Expected Value (\S\ref{sec:expected_value}) $E(\cdot)$ exists
-
-Discrete Random Variable $X$:
-\[
-  Var(X) = \sigma_X^2 = \sum_{i=1}^n f(x_i) (x_i - \mu)^2 = \sum_{i=1}^n
-  f(x_i) x_i^2 - \mu^2
-\]
-where $\mu = \sum_{i=1}^n f(x_i) x_i$
-
-Continuous Random Variable $X$:
-\[
-  Var(X) = \sigma_X^2 = \int (x - \mu)^2 f(x) dx = \int x^2 f(x) dx -
-  \mu^2
-\]
-where $\mu = \int x f(x) dx$
-
-For Random Variables $X$, $Y$ with Joint Probability Distribution
-$f(x,y)$ and $a$, $b$, $c$ are Constants, then:
-\[
-  \sigma^2_{a X + b Y + c} = a^2 \sigma^2_X + b^2 \sigma^2_Y + 2ab
-  \sigma_{X Y}
-\]
-
-\fist Estimator: Sample Variance (\S\ref{sec:sample_variance})
-
-for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
-$Var(X - Y) = Var(X) + Var(Y)$
-
-\emph{Conditional Variance} $V(X|Y)$
-
-$V(Y) = E(V(Y|X)) + V(E(Y|X))$
-
-Variance reduction methods:
-\begin{itemize}
-  \item Bootstrap Aggregation (Bagging \S\ref{sec:bootstrap_aggregation})
-\end{itemize}
-
-
-
-\subsubsection{Correlation}\label{sec:statistical_correlation}
-
-$\rho$
-
-measure of how close two Random Variables are to having a \emph{Linear
-  Relationship}
-
-Normalized Covariance (\S\ref{sec:covariance})
-
-\fist cf. Linear Regression (\S\ref{sec:linear_regression})
-
-cf. Observational Studies
-
-\[
-  \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
-\]
-where $Cov(X,Y)$ is the Covariance (\S\ref{sec:covariance})
-
-if $X$ and $Y$ are Independent (\S\ref{sec:dependence}) and have Finite Second
-Moments, then they are Uncorrelated; not all Uncorrelated Variables are
-Independent
-
-if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$
-
-
-
-
-\paragraph{Correlation Coefficient}\label{sec:correlation_coefficient}\hfill
-
-\emph{Pearson Product-moment Correlation Coefficient}
-
-$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
-
-Sample Correlation Coefficient $-1 \leq r \leq 1$:
-\[
-  r = \frac{1}{n-1} \sum_{i=1}^n
-    \Big(\frac{x_i - \overline{x}}{s_x}\Big)
-    \Big(\frac{y_i - \overline{y}}{s_y}\Big)
-\]
-where $s_x$ and $s_y$ are the Sample Standard Deviations of $x$ and $y$
-
-\fist cf. $r^2$ -- Coefficient of
-Determination (\S\ref{sec:determination_coefficient})
-
-
-
-\subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
-
-\emph{Variance-Covariance Matrix} or \emph{Dispersion Matrix}
-
-Symmetric Matrix (\S\ref{sec:symmetric_matrix}) where the $i,j$th entry is the
-Covariance between the $i$th and $j$th entries of a Random Vector
-
-Positive Semi-definite (\S\ref{sec:positive_semidefinite})
-
-the Inverse of the Covariance Matrix is called the \emph{Precision Matrix}
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Moment-generating Function}\label{sec:moment_generating_function}
 % ------------------------------------------------------------------------------
 
@@ -1679,6 +1572,27 @@ used to reduce any Probability Function to a Probability Density Function with
 total Probability $1$
 
 %FIXME: same concept as Normalizing Constant for bayesian inference ?
+
+
+
+\subsubsection{Mean Absolute Error (MAE)}\label{sec:mae}
+
+Average Absolute Difference between two Continous Random Variables, e.g.:
+\begin{itemize}
+  \item between \emph{Predicted} and \emph{Observed} (cf. Residual
+    \S\ref{sec:residual})
+  \item between \emph{Initial} and \emph{Subsequent Observations}
+  \item between \emph{measurement techniques}
+\end{itemize}
+
+Expected Value of the Absolute Difference of two Continuous Random Variables
+
+measures the Vertical or Horizontal Distance from the Identity Line
+
+\fist not to be confused with \emph{Mean Absolute Deviation} (MAD
+\S\ref{sec:mad})-- Average of Deviations around a central point, or \emph{Mean
+  Absolute Difference} (\S\ref{sec:mean_absolute_difference})-- Average Absolute
+Difference of two IID Random Variables
 
 
 
@@ -1907,6 +1821,12 @@ Fourth and higher-order Cumulants are not equal to Central Moments
 \fist Method of Moments (\S\ref{sec:moments_method}) -- Estimator of Statistical
 Model Parameters
 
+\fist Mean Squared Deviation or Mean Squared Error (MSE \S\ref{sec:msd}) of an
+Estimator (\S\ref{sec:estimator}) is the Average of the Squared Error of the
+Estimated value (produced by an Estimator) from the ``true'' value; MSD is
+the Second Moment of the Error; for an Unbiased Estimator the MSD is the
+Variance of the Estimator
+
 
 
 % ------------------------------------------------------------------------------
@@ -1925,28 +1845,6 @@ Skewness (\S\ref{sec:skewness}) -- Third Cumulant; ``lopsided-ness''
 Fourth and higher-order Cumulants are not equal to Central Moments
 
 \fist Cumulant-generating Function (\S\ref{sec:cumulant_generating_function})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Skewness}\label{sec:skewness}
-% ------------------------------------------------------------------------------
-
-Asymmetry %FiXME
-
-``lopsided-ness''
-
-Third Central Moment (\S\ref{sec:moment})/Third Cumulant (\S\ref{sec:cumulant})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Kurtosis}\label{sec:kurtosis}
-% ------------------------------------------------------------------------------
-
-Fourth Central Moment (\S\ref{sec:moment})
-
-Measure of the ``heaviness'' of the tail of a Distribution
 
 
 
@@ -3021,7 +2919,8 @@ respect to the ``real'' Data Generating Process
 % ------------------------------------------------------------------------------
 
 \begin{itemize}
-  \item \emph{Nominal} -- Central Tendency: Mode (\S\ref{sec:mode})
+  \item \emph{Nominal} -- Dispersion: Variation Ratio
+    (\S\ref{sec:variation_ratio}); Central Tendency: Mode (\S\ref{sec:mode})
   \item \emph{Ordinal} -- Central Tendency: Median (\S\ref{sec:median})
   \item \emph{Interval} -- Central Tendency: Mean (\S\ref{sec:arithmetic_mean}),
     Deviation (\S\ref{sec:deviation})
@@ -3243,7 +3142,7 @@ cf. Experiment (\S\ref{sec:experiment})
 between an Observed Value (Random Variate \S\ref{sec:observation}) of a
 ``quantity'' and its ``true'' Value
 
-cf. \emph{Statistical Error} (\S\ref{sec:statistical_error})
+cf. \emph{Statistical Error} (\S\ref{sec:error})
 
 
 
@@ -3263,6 +3162,12 @@ Random Errors
 
 
 
+\subparagraph{Precision}\label{sec:precision}\hfill
+
+cf. Accuracy (Systematic Errors \S\ref{sec:accuracy})
+
+
+
 \paragraph{Systematic Error}\label{sec:systmatic_error}\hfill
 
 or \emph{Statistical Bias}
@@ -3270,6 +3175,14 @@ or \emph{Statistical Bias}
 cf. \emph{Sampling Bias} (\S\ref{sec:nonrandom_sample})
 
 inaccuracy inherent to Observation (Measurement) process
+
+
+
+\subparagraph{Accuracy}\label{sec:accuracy}\hfill
+
+cf. Precision (Random Errors \S\ref{sec:precision})
+
+\fist Root-Mean-Square Deviation (RMSD \S\ref{sec:rmsd})
 
 
 
@@ -3528,6 +3441,74 @@ Linear Regression
 
 
 % ------------------------------------------------------------------------------
+\subsection{Error}\label{sec:error}
+% ------------------------------------------------------------------------------
+
+\emph{Statistical Error} or \emph{Disturbance}
+
+Deviation (Signed Difference \S\ref{sec:deviation}) of an Observation
+(\S\ref{sec:observation}) \emph{or} of an Estimate
+(\S\ref{sec:estimation_theory}) from an ideal (possibly theoretical) ``true''
+value, usually the Observed (Estimated) Random Variable's Expected Value
+(\S\ref{sec:expected_value})
+
+\fist cf. \emph{Observational Error} (Measurement Error
+\S\ref{sec:observational_error}), \emph{Standard Error}
+  (\S\ref{sec:standard_error})
+
+Absolute Error -- Median minimizes Absolute Error
+
+Squared Error -- Mean (Expected Value) minimizes Squared Error
+
+cf. \emph{Variance} (\S\ref{sec:variance}) -- Expected Squared Error
+
+\fist Mean Squared Deviation or Mean Squared Error (MSE \S\ref{sec:msd}) of an
+Estimator (\S\ref{sec:estimator}) is the Average of the Squared Error of the
+Estimated value (produced by an Estimator) from the ``true'' value; MSD is
+the Second Moment of the Error; for an Unbiased Estimator the MSD is the
+Variance of the Estimator
+
+cf. Residual (\S\ref{sec:residual}) -- Deviation of an Observed Value from an
+\emph{Estimated} (\S\ref{sec:estimation_theory}) Expected Value
+
+\fist Regression Error (\S\ref{sec:regression_error})
+
+\fist Classification Error (\S\ref{sec:classification_error})
+
+(wiki):
+
+example for Sample (\S\ref{sec:sample}) of IID Normally Distributed Random
+Variables, $X_1, \ldots, X_n \sim N(\mu, \sigma^2)$, the Sample Mean
+(\S\ref{sec:sample_mean}):
+\[
+  \overline{X} = \frac{X_1 + \cdots + X_n}{n}
+\]
+is a Random Variable with Normal Distribution:
+\[
+  \overline{X} = N(\mu, \frac{\sigma^2}{n})
+\]
+and the \emph{Statistical Errors} are:
+\[
+  e_i = X_i - \mu
+\]
+and the \emph{Residuals} (\S\ref{sec:residual}) are:
+\[
+  r_i = X_i - \overline{X}
+\]
+
+
+
+\subsubsection{Sampling Error}\label{sec:sampling_error}
+
+\subsubsection{Non-sampling Error}\label{sec:nonsampling_error}
+
+Coverage Errors
+
+Response Errors
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Variance Analysis}\label{sec:variance_analysis}
 % ------------------------------------------------------------------------------
 
@@ -3556,9 +3537,21 @@ compare three or more ``group means'' for Significance
 
 \subsubsection{Squared Deviation from Mean (SDM)}\label{sec:sdm}
 
-Variance (\S\ref{sec:variance}) is defined as either the Expected Value of the
-SDM, considering a theoretical Distribution, or its Sample Mean
-(\S\ref{sec:sample_mean})
+\fist Squared Deviation (\S\ref{sec:squared_deviation})
+
+cf. Mean Squared Deviation (MSD \S\ref{sec:msd}), Sum of Squared
+Deviations (\S\ref{sec:sum_squared_deviation})
+
+\emph{Variance} (\S\ref{sec:variance}) is defined as either:
+\begin{itemize}
+  \item the \emph{Expected Value of the SDM} when considering a
+    \emph{theoretical Distribution}
+\end{itemize}
+or:
+\begin{itemize}
+  \item the Sample Mean (\S\ref{sec:sample_mean}) of some Data
+    (\S\ref{sec:sample})
+\end{itemize}
 
 cf. Least Squares (\S\ref{sec:least_squares}), Regression
 (\S\ref{sec:regression_analysis})
@@ -3566,6 +3559,11 @@ cf. Least Squares (\S\ref{sec:least_squares}), Regression
 
 
 \subsubsection{Sum of Squared Deviation}\label{sec:sum_squared_deviation}
+
+\fist Squared Deviation (\S\ref{sec:squared_deviation})
+
+cf. Mean Squared Deviation (MSD \S\ref{sec:msd}), Sum of Squared
+Deviations (\S\ref{sec:sum_squared_deviation})
 
 \fist cf. Least Squares (\S\ref{sec:least_squares})
 
@@ -3650,11 +3648,15 @@ Determination Coefficient (\S\ref{sec:determination_coefficient}):
 
 \subsubsection{Partition of Sum of Squares}\label{sec:partition_squares}
 
+TODO
+
 
 
 % ==============================================================================
 \section{Descriptive Statistics}\label{sec:descriptive_statistics}
 % ==============================================================================
+
+\emph{Descriptive Measures}
 
 Summary of Data: Mean, Median, Mode, Standard Deviation
 
@@ -3668,6 +3670,16 @@ Descriptive Statistics are often Non-parametric
 % ------------------------------------------------------------------------------
 \subsection{Summary Statistics}\label{sec:summary_statistics}
 % ------------------------------------------------------------------------------
+
+% FIXME: many of the below concepts apply to *population parameters* as well as
+% *sample statistics*; can they be distinguished/moved elsewhere ???
+
+\begin{itemize}
+  \item Dispersion (\S\ref{sec:dispersion})
+  \item Central Tendency (\S\ref{sec:central_tendency})
+  \item Shape (\S\ref{sec:distribution_shape})
+  \item Dependence (\S\ref{sec:dependence})
+\end{itemize}
 
 various Summary Statistics can be computed by Statistical Functionals
 (\S\ref{sec:statistical_functional}), i.e. Functions of the CDF
@@ -3683,73 +3695,44 @@ various Summary Statistics can be computed by Statistical Functionals
 
 
 
-\subsubsection{Central Tendency}\label{sec:central_tendency}
-
-\paragraph{Median}\label{sec:median}\hfill
-
-Central Tendency for Ordinal Measurement (\S\ref{sec:measurement_level})
-
-as an Estimate (\S\ref{sec:estimation_theory}) for $X$, the Median $m[X]$
-minimizes Absolute Error (\S\ref{sec:error}); cf. the Mean (Expected Value
-\S\ref{sec:expected_value}) minimizes Squared Error
-
-note that $E(X + Y) = E(X) + E(Y)$, but not for $m(X+Y)$
-
-
-
-\paragraph{Mode}\label{sec:mode}\hfill
-
-cf. \emph{Unimodality}
-
-Central Tendency for Nominal Measurement (\S\ref{sec:measurement_level})
-
-
-
-\paragraph{Arithmetic Mean}\label{sec:arithmetic_mean}\hfill
-
-\emph{Arithmetic Mean} $\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i$
-
-by the Law of Large Numbers (\S\ref{sec:large_numbers}), the Arithmetic Mean
-Converges to the Mean (Expected Value \S\ref{sec:expected_value}) as the Sample
-Size gets larger
-
-Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
-
-
-
-\subparagraph{Weighted Arithmetic Mean}\label{sec:weighted_mean}\hfill
-
-\emph{Weight Function}
-
-\emph{Weighted Sum} or \emph{Weighted Average}
-
-\fist Benchmarking (\S\ref{sec:benchmarking})
-
-Simpson's Paradox
-
-
-
-\paragraph{Geometric Mean}\label{sec:geometric_mean}\hfill
-
-using the Product of Values instead of Sum as in Arithmetic Mean
-
-Central Tendency for Ratio Measurement (\S\ref{sec:measurement_level})
-
-
-
-\paragraph{Trimmed Mean}\label{sec:trimmed_mean}\hfill
-
-\paragraph{Sample Median}\label{sec:median}\hfill
-
-
-
 \subsubsection{Statistical Dispersion}\label{sec:dispersion}
 
 \emph{Variability} or \emph{Spread}
 
-measured by Statistics of the Distribution of Deviations (\S\ref{sec:deviation})
+Estimated by Statistics on the Distribution of Deviations
+(\S\ref{sec:deviation})
 
 quantified by Standard Deviation (\S\ref{sec:standard_deviation})
+
+\fist Scale Parameter (\S\ref{sec:scale_parameter})
+
+\begin{itemize}
+  \item Range (\S\ref{sec:range}) -- difference between largest and smallest
+    values
+  \item InterQuartile Range (IQR \S\ref{sec:iqr}) -- difference between 75th and
+    25th Percentiles
+  \item ... TODO
+\end{itemize}
+
+(wiki): ``Dispersion precedes Location'' --
+
+given a measure of Statistical Dispersion, measures of Central Tendency
+(\S\ref{sec:central_tendency}) can be characterized as \emph{Minimizing
+  Variation} (\S\ref{sec:calculus_of_variations}) such that the Center is
+minimal among all possible choices of Center (may or may not be unique); in the
+sense of $L^p$-norms (\S\ref{sec:p_norm}):
+\begin{tabular}{l l l}
+  $L^p$ & Dispersion & Central Tendency
+  $L^0$ & Variation Ratio (Qualitative Variation \S\ref{sec:variation_ratio})
+    & Mode (\S\ref{sec:mode}) \\
+  $L^1$ & Mean Absolute Deviation (\S\ref{sec:mad})
+    & Median (\S\ref{sec:median}),
+      Geometric Median (\S\ref{sec:geometric_median}) \\
+  $L^2$ & Standard Deviation (\S\ref{sec:standard_deviation})
+    & Mean (\S\ref{sec:mean}) \\
+  $L^\infty$ & Maximum Deviation (\S\ref{sec:maximum_deviation})
+    & Mid-range (\S\ref{sec:midrange})
+\end{tabular}
 
 \fist Sum of Squared Deviations (\S\ref{sec:sum_squared_deviation}) -- unscaled
 measure of Dispersion
@@ -3763,15 +3746,73 @@ cf. \emph{Uncertainty}
 
 \paragraph{Range}\label{sec:range}\hfill
 
-\subparagraph{Midrange}\label{sec:midrange}\hfill
-
-Average of Max and Min
-
-
-
-\paragraph{InterQuartile Range (IQR)}\label{sec:iqr}\hfill
+\subparagraph{InterQuartile Range (IQR)}\label{sec:iqr}\hfill
 
 Outliers:  $Q1 - 1.5 \times IQR$, $Q3 + 1.5 \times IQR$
+
+
+
+\paragraph{Qualitative Variation}\label{sec:qualitative_variation}\hfill
+
+measure of Statistical Dispersion for {Nominal Distributions} (Measurement Level
+\S\ref{sec:measurement_level})
+
+Deviation from the Mode (\S\ref{sec:mode})
+
+
+
+\subparagraph{Variation Ratio}\label{sec:variation_ratio}\hfill
+
+Dispersion associated with the $L^0$ Metric (Counting ``Norm''-- not really a
+Norm \S\ref{sec:p_norm}); the corresponding Central Tendency is the \emph{Mode}
+(\S\ref{sec:mode})
+
+equal to the overall proportion of cases that are \emph{not} in the Mode:
+\[
+  v \defeq 1 - \frac{n_{\text{mode}}}{N}
+\]
+where $n_{\text{mode}}$ are the number of cases in the Mode and $N$ is the total
+number of cases
+
+
+
+\paragraph{Mean Absolute Deviation (MAD)}\label{sec:mad}\hfill
+
+or \emph{Average of Absolute Deviations} (\S\ref{sec:absolute_deviation}), i.e.
+Errors or Residuals, to a central point
+
+Dispersion measure associated with the $L^1$ Metric (Taxicab Norm
+\S\ref{sec:p_norm}); the corresponding Central Tendency which minimizes the MAD
+is the \emph{Median} (\S\ref{sec:median}) or \emph{Geometric Median}
+(\S\ref{sec:geometric_median})
+
+\fist not to be confused with \emph{Mean Absolute Error} (MAE \S\ref{sec:mae})
+-- Average difference between two Continuous Random Variables,
+or \emph{Mean Absolute Difference} (\S\ref{sec:mean_absolute_difference}) --
+Average Absolute Difference between two IID Random Variables
+
+cf. Mean Squared Deviation (MSD \S\ref{sec:msd})
+
+
+
+\subparagraph{Mean Absolute Difference}
+\label{sec:mean_absolute_difference}\hfill
+
+\emph{Absolute Mean Difference} or \emph{Gini Mean Difference (GMD)}
+
+$MD$
+
+Average Absolute Difference (\S\ref{sec:absolute_difference}) between two IID
+Random Variables, i.e. the Expected Value of the Absolute Difference of two IID
+Random Variables
+
+
+
+\subparagraph{Relative Mean Absolute Difference}
+\label{sec:relative_mean_absolute_difference}\hfill
+
+Mean Absolute Difference divided by the Arithmetic Mean
+(\S\ref{sec:arithmetic_mean})
 
 
 
@@ -3779,9 +3820,16 @@ Outliers:  $Q1 - 1.5 \times IQR$, $Q3 + 1.5 \times IQR$
 
 $\sigma$
 
-Square Root of the Variance (\S\ref{sec:variance}) $\sqrt{V(X)}$
+Dispersion measure associated with the $L^2$ Metric (Euclidean Norm
+\S\ref{sec:p_norm}); the corresponding Central Tendency which minimizes the
+Standard Deviation is the \emph{Mean} (\S\ref{sec:mean})
 
 Deviation (\S\ref{sec:deviation})
+
+Square Root of the Variance (\S\ref{sec:variance}) $\sqrt{V(X)}$
+
+cf. Root Mean Squared Deviation (RMSD \S\ref{sec:rmsd}) -- Square Root of the
+Mean Squared Deviation (MSD \S\ref{sec:msd})
 
 the Standard Deviation of a Sampling Distribution
 (\S\ref{sec:sampling_distribution}) is called the \emph{Standard Error}
@@ -3850,7 +3898,86 @@ Generalized Least Squares (GLS \S\ref{sec:gls})
 
 
 
-\paragraph{Sample Variance}\label{sec:variability}\hfill
+\subparagraph{Variance}\label{sec:variance}\hfill
+
+the \emph{Variance} is the Expected Value of the Squared Deviation
+(\S\ref{sec:sdm}) of a Random Variable
+
+$\sigma_X^2 = Cov(X,X)$ (\S\ref{sec:covariance})
+
+this is either equal to the Expected Value of the Square Deviation from the
+Mean of a theoretical Distribution, or as the Squared Deviations from the Sample
+Mean (Sample Variance \S\ref{sec:sample_variance})
+
+the \emph{Sum of Squared Deviations} (\S\ref{sec:sum_squared_deviation})
+Estimates (\S\ref{sec:estimation_theory}) the Variance when scaled for the
+number of \emph{Degrees of Freedom} (\S\ref{sec:statistical_freedom})
+
+\fist Mean Squared Deviation or Mean Squared Error (MSE \S\ref{sec:msd}) of an
+Estimator (\S\ref{sec:estimator}) is the Average of the Squared Error of the
+Estimated value (produced by an Estimator) from the ``true'' value; MSD is
+the Second Moment of the Error; for an Unbiased Estimator the MSD is the
+Variance of the Estimator
+
+\emph{Overfitting} (Multiple Regression \S\ref{sec:multiple_regression}) -- too
+many Covariates, high Variance
+
+\fist ANalaysis Of VAriance (ANOVA \S\ref{sec:variance_analysis}) --
+Variance is defined as either the Expected Value of the
+Squared Deviation from the Mean (SDM \S\ref{sec:sdm}), considering a theoretical
+Distribution, or its Sample Mean (\S\ref{sec:sample_mean})
+
+Second Central Moment (\S\ref{sec:moment})/Second Cumulant
+(\S\ref{sec:cumulant})
+
+Variances are always Non-negative
+
+the Variance of a Random Variable $X$ is equal to:
+\begin{align*}
+  \sigma^2 = V(X) & = E(X - E(X))^2   \\
+                  & = E(X^2) - E(X)^2 \\
+                  & = \int(x - E(X))^2 dF(x) \\
+\end{align*}
+assuming the Expected Value (\S\ref{sec:expected_value}) $E(\cdot)$ exists
+
+Discrete Random Variable $X$:
+\[
+  Var(X) = \sigma_X^2 = \sum_{i=1}^n f(x_i) (x_i - \mu)^2 = \sum_{i=1}^n
+  f(x_i) x_i^2 - \mu^2
+\]
+where $\mu = \sum_{i=1}^n f(x_i) x_i$
+
+Continuous Random Variable $X$:
+\[
+  Var(X) = \sigma_X^2 = \int (x - \mu)^2 f(x) dx = \int x^2 f(x) dx -
+  \mu^2
+\]
+where $\mu = \int x f(x) dx$
+
+For Random Variables $X$, $Y$ with Joint Probability Distribution
+$f(x,y)$ and $a$, $b$, $c$ are Constants, then:
+\[
+  \sigma^2_{a X + b Y + c} = a^2 \sigma^2_X + b^2 \sigma^2_Y + 2ab
+  \sigma_{X Y}
+\]
+
+\fist Estimator: Sample Variance (\S\ref{sec:sample_variance})
+
+for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
+$Var(X - Y) = Var(X) + Var(Y)$
+
+\emph{Conditional Variance} $V(X|Y)$
+
+$V(Y) = E(V(Y|X)) + V(E(Y|X))$
+
+Variance reduction methods:
+\begin{itemize}
+  \item Bootstrap Aggregation (Bagging \S\ref{sec:bootstrap_aggregation})
+\end{itemize}
+
+
+
+\subparagraph{Sample Variance}\label{sec:sample_variance}\hfill
 
 $s^2$
 
@@ -3865,8 +3992,7 @@ Unbiased Sample Variance:
 
 
 
-\subparagraph{Chebyshev's Inequality}\label{sec:chebyshevs_inequality}
-\hfill
+\subparagraph{Chebyshev's Inequality}\label{sec:chebyshevs_inequality}\hfill
 
 Probability that a Random Variable $X$ will assume Value within $k$ Standard
 Deviations
@@ -3876,6 +4002,298 @@ $\mu$ and Finite Non-zero Variance $\sigma^2$, for any $k \in \reals : k > 0$:
 \[
   P(k\sigma \leq |X - \mu|) \leq \frac{1}{k^2}
 \]
+
+
+
+\paragraph{Maximum Absolute Deviation}
+\label{sec:maximum_absolute_deviation}\hfill
+
+Dispersion measure associated with the $L^\infty$ Metric (Max Norm
+\S\ref{sec:p_norm}); the corresponding Central Tendency which minimizes the
+Maximum Absolute Deviation is the \emph{Midpoint} (\S\ref{sec:midpoint})
+
+
+
+\subsubsection{Central Tendency}\label{sec:central_tendency}
+
+or \emph{Location} or ``\emph{Average}''
+
+(wiki): ``Dispersion precedes Location'' --
+
+given a measure of Statistical Dispersion (\S\ref{sec:dispersion}), measures of
+Central Tendency can be characterized as \emph{Minimizing Variation}
+(\S\ref{sec:calculus_of_variations}) such that the Center is minimal among all
+possible choices of Center (may or may not be unique); in the sense of
+$L^p$-norms (\S\ref{sec:p_norm}):
+\begin{tabular}{l l l}
+  $L^p$ & Dispersion & Central Tendency
+  $L^0$ & Variation Ratio (Qualitative Variation \S\ref{sec:variation_ratio})
+    & Mode (\S\ref{sec:mode}) \\
+  $L^1$ & Mean Absolute Deviation (\S\ref{sec:mad})
+    & Median (\S\ref{sec:median}),
+      Geometric Median (\S\ref{sec:geometric_median}) \\
+  $L^2$ & Standard Deviation (\S\ref{sec:standard_deviation})
+    & Mean (\S\ref{sec:mean}) \\
+  $L^\infty$ & Maximum Deviation (\S\ref{sec:maximum_deviation})
+    & Mid-range (\S\ref{sec:midrange})
+\end{tabular}
+
+
+
+\paragraph{Mode}\label{sec:mode}\hfill
+
+Central Tendency for Nominal Measurement (\S\ref{sec:measurement_level})
+
+\fist Variation Ratio (Qualitative Variation, Deviation from the Mode
+\S\ref{sec:variation_ratio}) -- the Dispersion measure associated with the $L^0$
+Metric (Counting ``Norm''-- not really a Norm \S\ref{sec:p_norm}) for which the
+Mode is the corresponding Central Tendency
+
+cf. \emph{Unimodality}, \emph{Multimodality} -- Global/Local Maxima
+
+
+
+\paragraph{Median}\label{sec:median}\hfill
+
+Central Tendency for Ordinal Measurement (\S\ref{sec:measurement_level})
+
+\fist Mean Absolute Deviation (MAD \S\ref{sec:mad}) -- Dispersion measure
+associated with the $L^1$ Metric (Taxicab Norm \S\ref{sec:p_norm}) for which the
+Median is the corresponding measure of Central Tendency
+
+i.e. as an Estimate (\S\ref{sec:estimation_theory}) for $X$, the Median $m[X]$
+minimizes Absolute Deviation (Absolute Errors or Absolute Residuals)
+
+cf. the \emph{Mean} (Expected Value \S\ref{sec:mean}) minimizes Squared Error
+
+note that $E(X + Y) = E(X) + E(Y)$, but not for $m(X+Y)$
+
+
+
+\subparagraph{Geometric Median}\label{sec:geometric_median}\hfill
+
+\subparagraph{Sample Median}\label{sec:sample_median}\hfill
+
+
+
+\paragraph{Mean}\label{sec:mean}\hfill
+
+Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
+
+\fist Expected Value (\S\ref{sec:expected_value})
+
+
+
+\subparagraph{Arithmetic Mean}\label{sec:arithmetic_mean}\hfill
+
+\emph{Arithmetic Mean} $\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i$
+
+by the Law of Large Numbers (\S\ref{sec:large_numbers}), the Arithmetic Mean
+Converges to the Mean (Expected Value \S\ref{sec:expected_value}) as the Sample
+Size gets larger
+
+Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
+
+\begin{itemize}
+  \item Relative Mean Absolute Difference
+    (\S\ref{sec:relative_mean_absolute_difference}) -- Mean Absolute Difference
+    divided by the Arithmetic Mean
+\end{itemize}
+
+
+
+\subparagraph{Weighted Arithmetic Mean}\label{sec:weighted_mean}\hfill
+
+\emph{Weight Function}
+
+\emph{Weighted Sum} or \emph{Weighted Average}
+
+\fist Benchmarking (\S\ref{sec:benchmarking})
+
+Simpson's Paradox
+
+
+
+\subparagraph{Geometric Mean}\label{sec:geometric_mean}\hfill
+
+using the Product of Values instead of Sum as in Arithmetic Mean
+
+Central Tendency for Ratio Measurement (\S\ref{sec:measurement_level})
+
+
+
+\paragraph{Trimmed Mean}\label{sec:trimmed_mean}\hfill
+
+
+
+\paragraph{Midrange}\label{sec:midrange}\hfill
+
+Average of Max and Min (Range \S\ref{sec:range})
+
+Central Tendency minimizing the Maximum Absolute Deviation
+(\S\ref{sec:maximum_absolute_deviation})
+
+
+
+\subparagraph{Midhinge}\label{sec:midhinge}\hfill
+
+Average of First and Third Quartiles; minimizes Median Absolute Deviation and
+Maximum Absolute Deviation of the Distribution of the 2nd and 3rd Quartiles
+
+Trimmed $L^\infty$ Norm Statistic
+
+
+
+\subsubsection{Shape}\label{sec:distribution_shape}
+
+\paragraph{Skewness}\label{sec:skewness}\hfill
+
+Asymmetry %FiXME
+
+``lopsided-ness''
+
+Third Central Moment (\S\ref{sec:moment})/Third Cumulant (\S\ref{sec:cumulant})
+
+
+
+\paragraph{Kurtosis}\label{sec:kurtosis}\hfill
+
+Fourth Central Moment (\S\ref{sec:moment})
+
+Measure of the ``heaviness'' of the tail of a Distribution
+
+
+
+\subsubsection{Dependence}\label{sec:dependence}
+
+or \emph{Association}
+
+any ``\emph{Statistical Relationship}'' between two Random Variables
+(``Bivariate Data'')
+
+may or may not be Causal -- (wiki): the main difference between
+\emph{Causal Inference} (\S\ref{sec:causal_inference}) and an Inference of
+\emph{Association} is that the former analyzes the ``response'' of the ``effect
+variable'' when the Cause is changed
+
+Random Variables are \emph{Dependent} if they do not Satisfy the Property of
+\emph{Probabilistic Independence} (\S\ref{sec:independence})
+
+Stochastic Processes (\S\ref{sec:stochastic_process}): Sequences of Dependent
+Random Variables
+
+\fist Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimation
+(\S\ref{sec:estimation_theory}) of Relations in Multivariate Data
+(\S\ref{sec:random_vector})
+
+\fist a \emph{Structural Assumption} is a Model-baesd Statistical Assumption
+(\S\ref{sec:statistical_assumption}) about the Functional Dependence between
+Variables in a Statistical Model
+
+
+
+\paragraph{Covariance}\label{sec:covariance}\hfill
+
+a measure of the ``Joint Variability'' of two Random Variables; the sign of the
+Covariance shows the tendency of a Linear Relation between the Variables, and
+the Normalized version of the Covariance is the \emph{Correlation Coefficient}
+(\S\ref{sec:correlation_coefficient}) which gives the magnitude of the Linear
+Relation
+
+$Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)]$
+
+$Cov(X,X)$ -- Variance (\S\ref{sec:variance})
+
+\fist cf. Causation (\S\ref{sec:causation})
+
+$n$ Discrete Samples:
+\[
+  \sigma_{X,Y} = Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)] =
+    \frac{1}{n} \sum_{i=1}^n (x_i - \mu_X) (y_i - \mu_Y)
+\]
+
+Continuous:
+\[
+  Cov(X,Y) = E [(X - \mu_X)(Y - \mu_Y)] =
+  \int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^{\infty}
+  (x - \mu_X) (y - \mu_Y) f(x,y) dx dy
+\]
+where $f(x,y)$ is the Joint Probability Distribution
+(\S\ref{sec:joint_probability}) of $X$, $Y$
+
+\fist Sample Covariance (\S\ref{sec:sample_covariance})
+
+\textbf{Thm.} \emph{Covariance Satisfies:
+  \[
+    Cov(X,Y) = E(XY) - E(X)E(Y)
+  \]
+}
+
+the Correlation (\S\ref{sec:statistical_correlation}) is defined in terms of the
+Covariance:
+\[
+  \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
+\]
+if $X$ and $Y$ are Independent (\S\ref{sec:dependence}), then
+$Cov(X,Y) = \rho = 0$
+
+
+
+\subsubsection{Correlation}\label{sec:statistical_correlation}
+
+$\rho$
+
+measure of how close two Random Variables are to having a \emph{Linear
+  Relationship}
+
+Normalized Covariance (\S\ref{sec:covariance})
+
+\fist cf. Linear Regression (\S\ref{sec:linear_regression})
+
+cf. Observational Studies
+
+\[
+  \rho_{X,Y} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
+\]
+where $Cov(X,Y)$ is the Covariance (\S\ref{sec:covariance})
+
+if $X$ and $Y$ are Independent (\S\ref{sec:dependence}) and have Finite Second
+Moments, then they are Uncorrelated; not all Uncorrelated Variables are
+Independent
+
+if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$
+
+
+
+\paragraph{Correlation Coefficient}\label{sec:correlation_coefficient}\hfill
+
+\emph{Pearson Product-moment Correlation Coefficient}
+
+$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
+
+Sample Correlation Coefficient $-1 \leq r \leq 1$:
+\[
+  r = \frac{1}{n-1} \sum_{i=1}^n
+    \Big(\frac{x_i - \overline{x}}{s_x}\Big)
+    \Big(\frac{y_i - \overline{y}}{s_y}\Big)
+\]
+where $s_x$ and $s_y$ are the Sample Standard Deviations of $x$ and $y$
+
+\fist cf. $r^2$ -- Coefficient of
+Determination (\S\ref{sec:determination_coefficient})
+
+
+
+\subsubsection{Covariance Matrix}\label{sec:covariance_matrix}
+
+\emph{Variance-Covariance Matrix} or \emph{Dispersion Matrix}
+
+Symmetric Matrix (\S\ref{sec:symmetric_matrix}) where the $i,j$th entry is the
+Covariance between the $i$th and $j$th entries of a Random Vector
+
+Positive Semi-definite (\S\ref{sec:positive_semidefinite})
+
+the Inverse of the Covariance Matrix is called the \emph{Precision Matrix}
 
 
 
@@ -4215,6 +4633,13 @@ includes:
 \end{itemize}
 
 Generalized Linear Models (\S\ref{sec:glm})
+
+
+
+\paragraph{Scale Parameter}\label{sec:scale_parameter}\hfill
+
+Parameter determining the Dispersion (\S\ref{sec:dispersion}) of a Parametric
+Family
 
 
 
@@ -4745,80 +5170,30 @@ Probability to the true value
 
 
 
-\subsubsection{Deviation}\label{sec:deviation}
+\subsubsection{Mean Signed Deviation}\label{sec:mean_signed_deviation}
 
-\emph{Statistical Dispersion} (``Variability'' \S\ref{sec:dispersion}) is
-measured by Statistics of the Distribution of Deviations,
-quantified by Standard Deviation (\S\ref{sec:standard_deviation})
+or \emph{Mean Signed Difference} or \emph{Mean Signed Error}
 
-Central Tendency (\S\ref{sec:central_tendency}) for Interval Measurement
-(\S\ref{sec:measurement_level})
-%FIXME
-
-cf. Regression Error, Mean Square Deviation (MSD \S\ref{sec:regression_error})
-
-\fist Sum of Squared Deviations (\S\ref{sec:sum_squared_deviation})
+Average (Expected Value) of Estimation Error
 
 
 
-\paragraph{Absolute Deviation}\label{sec:absolute_deviation}\hfill
+\subsubsection{Mean Squared Deviation (MSD)}\label{sec:msd}
 
-Mean Absolute Deviation (MAD);
-cf. Mean Squared Deviation (Mean Square Error \S\ref{sec:mse})
+or \emph{Mean Squared Error (MSE)}
 
+Average of the Squared Error of the Estimated value (produced by an Estimator)
+from the ``true'' value; MSD is the Second Moment of the Error; for an Unbiased
+Estimator the MSD is the \emph{Variance} (\S\ref{sec:variance}) of the Estimator
 
+Expected Value of the Squared Errors
 
-\paragraph{Error}\label{sec:error}\hfill
+Squared Deviation (\S\ref{sec:squared_deviation})
 
-\emph{Statistical Error} or \emph{Disturbance}
+cf. Mean Absolute Deviation (MAD \S\ref{sec:mad})
 
-the amount by which an Observation differs from its (``true'')
-\emph{Expected Value} (\S\ref{sec:expected_value})
-
-\fist cf. \emph{Observational Error} (Measurement Error
-\S\ref{sec:observational_error}), \emph{Standard Error}
-  (\S\ref{sec:standard_error})
-
-Absolute Error -- Median minimizes Absolute Error
-
-Squared Error -- Mean (Expected Value) minimizes Squared Error
-
-cf. \emph{Variance} (\S\ref{sec:variance}) -- Expected Squared Error
-
-cf. Residual (\S\ref{sec:residual})
-
-\fist Regression Error (\S\ref{sec:regression_error})
-
-\fist Classification Error (\S\ref{sec:classification_error})
-
-(wiki):
-
-example for Sample (\S\ref{sec:sample}) of IID Normally Distributed Random
-Variables, $X_1, \ldots, X_n \sim N(\mu, \sigma^2)$, the Sample Mean
-(\S\ref{sec:sample_mean}):
-\[
-  \overline{X} = \frac{X_1 + \cdots + X_n}{n}
-\]
-is a Random Variable with Normal Distribution:
-\[
-  \overline{X} = N(\mu, \frac{\sigma^2}{n})
-\]
-and the \emph{Statistical Errors} are:
-\[
-  e_i = X_i - \mu
-\]
-and the \emph{Residuals} (\S\ref{sec:residual}) are:
-\[
-  r_i = X_i - \overline{X}
-\]
-
-
-
-\subparagraph{Mean Squared Error (MSE)}\label{sec:mse}\hfill
-
-Mean Squared Error (MSE) or Mean Squared Deviation (MSD)
-
-cf. Mean Absolute Deviation (MAD)
+cf. Square Deviation from the Mean (SDM \S\ref{sec:sdm}), Sum of Squared
+Deviations (\S\ref{sec:sum_squared_deviation})
 
 \fist Decision Theory (\S\ref{sec:decision_theory}): when Loss Function
 (\S\ref{sec:objective_function}) is Squared Error, the Risk (Average Loss
@@ -4826,23 +5201,24 @@ cf. Mean Absolute Deviation (MAD)
 
 
 
-\subparagraph{Sampling Error}\label{sec:sampling_error}\hfill
+\paragraph{Root-Mean-Square Deviation (RMSD)}\label{sec:rmsd}\hfill
 
-\subparagraph{Non-sampling Error}\label{sec:nonsampling_error}\hfill
+or RMSE
 
-Coverage Errors
+Square Root of the MSD (cf. Standard Deviation \S\ref{sec:standard_deviation})
 
-Response Errors
+Sample Standard Deviation (\S\ref{sec:standard_deviation}) of Residuals
+
+measure of Accuracy (\S\ref{sec:accuracy})
 
 
 
-\paragraph{Residual}\label{sec:residual}\hfill
+\subsubsection{Residual}\label{sec:residual}
 
 or \emph{Fitting Deviation}
 
-the \emph{Residual} of an Observed Value is the difference between the Observed
-Value and the \emph{Estimated} (\S\ref{sec:estimation_theory}, cf. Predicted,
-Expected) Value
+Deviation (Signed Difference \S\ref{sec:deviation}) of an Observed Value
+(\S\ref{sec:observation}) from an Estimate of the ``true'' value
 
 cf. Error (\S\ref{sec:error}), Sum of Squared Residuals (SSR \S\ref{sec:ssr})
 
@@ -7301,12 +7677,20 @@ Deviation from value Predicted by the Estimated Regression Function
 
 $y - \hat{y}$
 
+the Vector of Regression Residuals $\hat{e}$ can be expressed in terms of the
+Influence Matrix (\S\ref{sec:influence_matrix}), $\hat{y} = \mathbf{H}\vec{y}$:
+\[
+  \hat{e} = \vec{y} - \hat{y} = \vec{y} - \mathbf{H}\vec{y} =
+    (\mathbf{I} - \mathbf{H})\vec{y}
+\]
+where $(\mathbf{I} - \mathbf{H})$ is the \emph{Residual Maker Matrix}
+
 $S$ -- Standard Deviation (\S\ref{sec:standard_deviation}) of Residuals
 
 Residual Plot
 
 SSE -- Sum of Squared Residuals (SSR or RSS \S\ref{sec:ssr}); for a Simple
-Linear Model:
+Linear Model (\S\ref{sec:simple_linear_regression}):
 \[
   \sum_n (y_i - \hat{\beta_1} x_i + \hat{\beta_0})
 \]
@@ -7347,14 +7731,6 @@ and substituting to solve for $\hat{\beta_0}$:
 
 
 
-\paragraph{Root-Mean-Square Deviation (RMSD)}\label{sec:rmsd}\hfill
-
-or RMSE
-
-Sample Standard Deviation (\S\ref{sec:standard_deviation}) of Residuals
-
-
-
 \subsubsection{Determination Coefficient}\label{sec:determination_coefficient}
 
 ``\emph{R-squared}''
@@ -7379,6 +7755,38 @@ cf. $r$ -- Correlation Coefficient (\S\ref{sec:correlation_coefficient})
 
 measure of Goodness-of-fit (\S\ref{sec:model_fit}) in Logistic Regression
 (\S\ref{sec:logistic_regression})
+
+
+
+\subsubsection{Influence Matrix}\label{sec:influence_matrix}
+
+or \emph{Hat Matrix} or \emph{Projection Matrix} (cf.
+Linear Projection \S\ref{sec:projection})
+
+(wiki):
+
+relates the Vector of Observed Response Values $\vec{y}$ to the Vector of Fitted
+Values $\hat{y}$:
+\[
+  \hat{y} = \mathbf{H}\vec{y}
+\]
+
+the Vector of Regression Residuals (\S\ref{sec:regression_residual}) $\hat{e}$
+can be expressed in terms of the Influence Matrix:
+\[
+  \hat{e} = \vec{y} - \hat{y} = \vec{y} - \mathbf{H}\vec{y} =
+    (\mathbf{I} - \mathbf{H})\vec{y}
+\]
+where $(\mathbf{I} - \mathbf{H})$ is the \emph{Residual Maker Matrix}
+
+\begin{itemize}
+  \item $\mathbf{H} \equiv \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$
+    -- OLS (\S\ref{sec:ols})
+  \item $\mathbf{H} \equiv \mathbf{X}
+    (\mathbf{X}^T\mathbf{\Psi}^{-1}\mathbf{X})^{-1}
+    \mathbf{X}^T\mathbf{\Psi}^{-1}$
+    -- GLS (\S\ref{sec:gls})
+\end{itemize}
 
 
 
@@ -8230,13 +8638,10 @@ Models
 
 %FIXME: move section ?
 
+or \emph{Connectionist System}
+
 extends Regression (\S\ref{sec:regression_analysis}) and Clustering
 (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
-
-cf. Perceptron (\S\ref{sec:perceptron}) -- Binary Linear Classifier
-(\S\ref{sec:linear_classifier}); an Artificial Neuron using the Unit Step
-Function (\S\ref{sec:unit_step_function}) as the Activation Function; simplest
-Feed-Forward Neural Network (FFNN \S\ref{sec:ffnn})
 
 simplest Neural Network Regression Model:
 \[
@@ -8275,6 +8680,31 @@ Reverse-mode Automatic Differentiation (\S\ref{sec:automatic_differentiation})
 
 the \emph{Nodes} of an ANN
 
+receives one or more \emph{Inputs} (cf. Synapse), individually \emph{Weights}
+each Input, and passes the \emph{Sum} of Weighted Inputs through a (usually
+Non-linear) \emph{Activation Function} (\S\ref{sec:activation_function}) to
+produce an \emph{Output} (cf. Axon)
+
+\begin{itemize}
+  \item $\{ x_0, x_1, \ldots, x_n \}$ -- Inputs
+  \item $\{ w_0, w_1, \ldots, w_n \}$ -- Weights
+\end{itemize}
+
+usually Input $x_0$ is assigned the value $1$, so that $w_0 = b$ is a
+\emph{Bias}
+
+the \emph{Output}, $y$:
+\[
+  y = \varphi \Big( \sum_{i=0}^n w_i x_i \Big)
+\]
+where $\varphi$ is the \emph{Activation Function}
+(\S\ref{sec:activation_function})
+
+the Output may either be propagated to the Input of the next Layer, or exit the
+Network as part of an Output Vector
+
+a Neuron has no ``learning process'' (FIXME: clarify)
+
 \begin{itemize}
   \item Perceptron (\S\ref{sec:perceptron}) -- Neuron using the Unit Step
     Function (\S\ref{sec:unit_step_function}) as the Activation Function
@@ -8285,10 +8715,19 @@ the \emph{Nodes} of an ANN
 
 \paragraph{Activation Function}\label{sec:activation_function}\hfill
 
-sometimes ``Transfer Function'', not to be confused with Transfer Function
-(Evolution Function \S\ref{sec:evolution_function}) of a Dynamical System
+sometimes ``Transfer Function'', not to be confused with the Transfer Function
+(\S\ref{sec:transfer_function}) of a Control System (\S\ref{sec:control_system})
+or the Transfer Function (Evolution Function \S\ref{sec:evolution_function}) of
+a Dynamical System
 
-defines the \emph{output} of a Node for a given input or set of inputs
+defines the \emph{Output} of a Node for a given Input or Set of Inputs
+
+
+
+\subsubsection{Layer}\label{sec:ann_layer}
+
+a \emph{Layer} is a Set of Nodes that have the same distance from ``the Inputs''
+(FIXME: clarify)
 
 
 
@@ -8297,7 +8736,7 @@ defines the \emph{output} of a Node for a given input or set of inputs
 \paragraph{Universal Approximation Theorem}
 \label{sec:universal_approximation}\hfill
 
-every Continuous Function mapping Intervals of Real Numbers to some output
+every Continuous Function mapping Intervals of Real Numbers to some Output
 Interval of Real Numbers can be Approximated arbitrarily closely by a
 Multi-layer Perceptron with a single Hidden Layer
 
@@ -8308,7 +8747,10 @@ proven to be a Universal Function Approximator
 
 \paragraph{Single-layer Perceptron}\label{sec:single_layer_perceptron}\hfill
 
-cf. Perceptron (\S\ref{sec:perceptron}) -- Linear Classifier
+cf. Perceptron (\S\ref{sec:perceptron}) -- Binary Linear Classifier
+(\S\ref{sec:linear_classifier}); an Artificial Neuron using the Unit Step
+Function (\S\ref{sec:unit_step_function}) as the Activation Function; simplest
+FFNN
 
 
 
