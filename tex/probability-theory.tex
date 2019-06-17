@@ -2170,8 +2170,8 @@ $k > 2$, $n = 1$
 
 or \emph{Normalized Exponential Function}
 
-generalization of Logistic Function (\S\ref{sec:softmax}); the Logistic Function
-is the Derivative of Softplus --TODO
+generalization of Logistic Function (\S\ref{sec:logistic_function}); the
+Logistic Function is the Derivative of Softplus --TODO
 
 output can be used to represent a Categorical Distribution
 
@@ -3039,7 +3039,8 @@ for any Event (\S\ref{sec:probability_event}) as the Negative Log-probability
 measured or not. (wiki)
 
 \fist cf. \emph{Data} (\S\ref{sec:data}), \emph{Data Generating Process}
-(\S\ref{sec:data_generating_process}), \emph{Dataset} (\S\ref{sec:dataset})
+(\S\ref{sec:data_generating_process}), \emph{Dataset} (\S\ref{sec:dataset}),
+\emph{Training Set} (\S\ref{sec:training_set})
 
 \fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
 
@@ -5055,6 +5056,9 @@ Asymptotically Optimal (or ``Efficient'' \S\ref{sec:efficiency})
 
 \fist Delta Method (\S\ref{sec:delta_method})
 
+cf. Backpropagation (\S\ref{sec:backpropagation}): the process of ``Training'' a
+Regression Model (\S\ref{sec:regression_analysis})
+
 when Observations come from an Exponential Family
 (\S\ref{sec:exponential_family}), under mild conditions the Least-squares
 Estimates (\S\ref{sec:least_squares}) and Maximum-Likelihood Estimates are
@@ -5394,6 +5398,9 @@ Sample Quantile
 
 
 \subsubsection{Density Estimation}\label{sec:density_estimation}
+
+a form of Unsupervised Learning (cf. Cluster Analysis
+\S\ref{sec:cluster_analysis})
 
 (Wasserman04, Ch.20)
 
@@ -5823,6 +5830,8 @@ where:
 
 \paragraph{Non-Linear Least Squares (NLLS)}\label{sec:nlls}\hfill
 
+Non-linear Regression (\S\ref{sec:nonlinear_regression})
+
 examples:
 \begin{itemize}
   \item Logistic Regression (\S\ref{sec:logistic_regression})
@@ -5834,11 +5843,15 @@ examples:
 
 Normal Equations:
 \[
-  (\mathbf{J} \mathbf{W J}) \mathbf{Delta} \vec{\beta} =
-    \mathbf{J} \mathbf{W \Delta} \vec{y}
+  (\mathbf{J} \mathbf{W J}) \Delta \vec{\beta} =
+    \mathbf{J} \mathbf{W} \Delta \vec{y}
 \]
 
-\emph{Gauss-Newton Algorithm}
+
+
+\subparagraph{Gauss-Newton Algorithm}\label{sec:gauss_newton}\hfill
+
+cf. Backpropagation (\S\ref{sec:backpropagation})
 
 QR methods
 
@@ -6756,6 +6769,9 @@ Iteratively Re-weighted Least Squares (\S\ref{sec:irls}) -- equivalent to
 (\S\ref{sec:newtons_method}); used for MLE in Logistic Regression
 (\S\ref{sec:logistic_regression})
 
+\fist Cross-entropy Error Function -- minimizing \emph{Negative Log-likelihood}
+is the same as minimizing Cross Entropy (\S\ref{sec:cross_entropy})
+
 
 
 \subparagraph{Score}\label{sec:score}\hfill
@@ -7200,6 +7216,20 @@ Variance Analysis (ANOVA \S\ref{sec:variance_analysis})
 
 
 
+% ==============================================================================
+\section{Statistical Learning Theory}\label{sec:statistical_learning_theory}
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+\subsection{Training Set}\label{sec:training_set}
+% ------------------------------------------------------------------------------
+
+cf. Statistical Sample (\S\ref{sec:sample}), Dataset (\S\ref{sec:dataset})
+
+\fist Learning Process (\S\ref{sec:learning_process})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Statistical Classification}\label{sec:classification}
 % ------------------------------------------------------------------------------
@@ -7360,6 +7390,10 @@ is maximized, neglecting the Marginal Distribution $f(x)$
 
 
 
+\subparagraph{Discriminant Function}\label{sec:discriminant_function}\hfill
+
+
+
 \paragraph{Support Vector Machine (SVM)}\label{sec:svm}\hfill
 
 Discriminative Model (\S\ref{sec:discriminative_model})
@@ -7382,8 +7416,10 @@ Discriminative Method (\S\ref{sec:discriminative_method})
   Neuron} (\S\ref{sec:artificial_neuron}) using the Unit Step Function
 (\S\ref{sec:unit_step_function}) as the Activation Function
 
-\fist Single-layer Perceptron (\S\ref{sec:single_layer_preceptron})
+\fist Single-layer Perceptron (\S\ref{sec:single_layer_perceptron})
 -- simplest Feed-forward Neural Network (\S\ref{sec:ffnn})
+
+\fist Threshold Logic Unit (TLU \S\ref{sec:tlu})
 
 
 
@@ -8393,6 +8429,30 @@ IRLS: update equation for Newton's Method takes the form of a solution for a WLS
 
 \asterism
 
+2019 - Khan - PUCIT CS667 - Advanced Machine Learning --
+Newton-Raphson (Newton's Method \S\ref{sec:newtons_method}) update for
+minimizing a Function $f(\vec{w})$:
+\[
+  \vec{w}^{k+1} = \vec{w}^k - \mathsf{H}^{-1}\nabla_{\vec{w}} f(\vec{w})
+\]
+where $\mathsf{H}$ is the Hessian Matrix of Second Derivatives:
+\[
+  \frac{\partial^2 f}{\partial{w_i} \partial{w_j}}
+\]
+
+Cost Function (TODO)
+
+\emph{Logistic Loss}: Negative Log-likelihood Function, Cross-entropy Error
+Function (TODO)
+
+Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls})
+
+\asterism
+
+with the Logistic (Sigmoid) Activation Function
+(\S\ref{sec:activation_function}), a Single-layer Neural Network
+(\S\ref{sec:ffnn}) is identical to a Logistic Regression Model
+
 \emph{Neural Networks} (\S\ref{sec:ann}) can be viewed as a generalization of
 Logistic Regression
 (\url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/})
@@ -8600,6 +8660,8 @@ one or more Independent Variables
 
 $Y = f(\vec{X}, \vec{b})$
 
+Non-Linear Least Squares (NLLS \S\ref{sec:nlls})
+
 
 
 \subsubsection{Necessary Condition Analysis (NCA)}\label{sec:nca}
@@ -8618,6 +8680,8 @@ Unsupervised Learning
 
 cf. Classification (Supervised Learning \S\ref{sec:classification})
 
+cf. Density Estimation (\S\ref{sec:density_estimation})
+
 example of Pattern Recognition (assignment of some Output Value to a given Input
 Value), other examples are Statistical Classification and Regression Analysis
 (\S\ref{sec:regression_analysis})
@@ -8629,6 +8693,12 @@ Models
 
 
 \subsubsection{Hierarchical Clustering}\label{sec:hierarchical_clustering}
+
+\subsubsection{Dimensionality Reduction}\label{sec:dimensionality_reduction}
+
+Feature Selection
+
+Feature Extraction
 
 
 
@@ -8643,17 +8713,27 @@ or \emph{Connectionist System}
 extends Regression (\S\ref{sec:regression_analysis}) and Clustering
 (\S\ref{sec:cluster_analysis}) to Non-linear Multivariate Models
 
+(Wasserman04, \S22.11) --
 simplest Neural Network Regression Model:
 \[
   Y = \beta_0 + \sum_{j=1}^p \beta_j \sigma (\alpha_0 + \alpha^T X)
 \]
 where $\sigma$ is a Smooth Function, often:
 \[
-  \sigma(v) = \frac{e^v}{1 + e^v}
+  \sigma(v) = \frac{1}{1 + e^{-v}}
 \]
 
 Stochastic Gradient Descent (SGD \S\ref{sec:sgd}) -- \emph{de facto} standard
 Algorithm for training ANNs
+
+(wiki) applications:
+\begin{itemize}
+  \item Function Approximation, Regression Analysis
+  \item Classification, Pattern Recognition
+  \item Cluster Analysis, Filtering, Compression
+  \item Non-linear System (\S\ref{sec:nonlinear_equation_system})
+    Identification and Control
+\end{itemize}
 
 \emph{Neural Networks and Automated Differentiation} -
 \url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
@@ -8661,18 +8741,12 @@ Algorithm for training ANNs
 Neural Networks can be viewed as a generalization of Logistic Regression
 (\S\ref{sec:logistic_regression})
 
+\asterism
 
+\url{http://www.cs.stir.ac.uk/courses/ITNP4B/lectures/} -- slides
 
-\subsubsection{Backpropagation}\label{sec:backpropagation}
-
-\emph{Neural Networks and Automated Differentiation} -
-\url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
-
-\emph{Backpropagation} -- Gradient Descent (\S\ref{sec:gradient_descent}) with
-Reverse-mode Automatic Differentiation (\S\ref{sec:automatic_differentiation})
-
-2013 - Buitl\'eir, Russell, Daly -
-\emph{A Functional Approach to Neural Networks}
+ANNs can be represented as \emph{Weighted Directed Graphs}
+(\emph{Directed Networks} \S\ref{sec:directed_network})
 
 
 
@@ -8706,6 +8780,7 @@ Network as part of an Output Vector
 a Neuron has no ``learning process'' (FIXME: clarify)
 
 \begin{itemize}
+  \item Threshold Logic Unit (TLU \S\ref{sec:tlu})
   \item Perceptron (\S\ref{sec:perceptron}) -- Neuron using the Unit Step
     Function (\S\ref{sec:unit_step_function}) as the Activation Function
   \item ...
@@ -8722,6 +8797,50 @@ a Dynamical System
 
 defines the \emph{Output} of a Node for a given Input or Set of Inputs
 
+the Activation Function is applied to the Dot Product (Weighted Sum)
+$\vec{w}^T \vec{x}$, called the \emph{Activation}
+
+(wiki): any Multi-Layer Peceptron (MLP \S\ref{sec:mlp}) Network using a Linear
+Activation Function has an equivalent \emph{Single-layer} Network; i.e. to gain
+advantages from multiple Layers requires a \emph{Non-linear} Activation Function
+
+\emph{Universal Approximation Theorem} (\S\ref{sec:universal_approximation}):
+when the Activation Function is Non-linear, a Two-layer Neural Network can be
+proven to be a Universal Function Approximator
+
+\begin{itemize}
+  \item Identity
+  \item Binary Step
+  \item Logistic (Sigmoid)
+  \item Tanh
+  \item Arctan
+  \item Arsinh
+  \item Softsign (ElliotSig)
+  \item Inverse Square Root Unit (ISRU)
+  \item SQuare Non-Linearity (SQNL)
+  \item Rectified Linear Unit (ReLU)
+  \item Exponential Linear Unit (ELU)
+  \item Adaptive Piecewise Linear (APL)
+  \item SoftPlus
+  \item Bent Identity
+  \item Sigmoid Linear (SiL)
+  \item SoftExponential
+  \item Soft Clipping
+  \item Sinusoid
+  \item Sinc
+\end{itemize}
+
+with the Logistic (Sigmoid) Activation Function, a Single-layer Neural Network
+is identical to a Logistic Regression Model (\S\ref{sec:logistic_regression})
+
+
+
+\paragraph{Threshold Logic Unit (TLU)}\label{sec:tlu}\hfill
+
+McCulloch-Pitts Neuron
+
+cf. Perceptron (\S\ref{sec:preceptron})
+
 
 
 \subsubsection{Layer}\label{sec:ann_layer}
@@ -8729,9 +8848,105 @@ defines the \emph{Output} of a Node for a given Input or Set of Inputs
 a \emph{Layer} is a Set of Nodes that have the same distance from ``the Inputs''
 (FIXME: clarify)
 
+\emph{Input Layer} or \emph{Visible Layer} -- Input Variables: by convention
+this ``Layer'' is \emph{not counted}, e.g. a Single-layer Perceptron has Input
+Variables and an Output Layer only, an MLP with a single Hidden Layer is a
+2-layer MLP
+
+\emph{Output Layer} -- Layer of Nodes (Neurons) that produce Output Variables
+
+\emph{Hidden Layer}
+
+\begin{itemize}
+  \item Single-layer Perceptron (\S\ref{sec:single_layer_perceptron})
+  \item Multi-Layer Perceptron (MLP \S\ref{sec:mlp})
+\end{itemize}
+
+notation for the number of Layers (from Input to Output): 2/8/1 --
+(\url{https://machinelearningmastery.com/how-to-configure-the-number-of-layers-and-nodes-in-a-neural-network/})
+
+\emph{Fully-connected Layer} -- every Node in one Layer is connected to every
+Node in the next layer
+
+
+
+\subsubsection{Learning Process}\label{sec:learning_process}
+
+\emph{Learning Rule} or \emph{Learning Process} -- Algorithm by which the Weight
+and Bias levels of a Network are repeatedly updated to improve the Network's
+``performance''
+
+\begin{itemize}
+  \item Unsupervised Learning -- Dentity Estimation
+    (\S\ref{sec:density_estimation}), Cluster Analysis
+    (\S\ref{sec:cluster_analysis})
+  \item Supervised Learning -- Classification (\S\ref{sec:classification}),
+    Regression Analysis (\S\ref{sec:regression_analysis})
+  \item Reinforcement Learning (\S\ref{sec:reinforcement_learning})
+\end{itemize}
+
+Training Set (\S\ref{sec:training_set})
+
+Online methods:
+\begin{itemize}
+  \item Stochastic Gradient Descent (\S\ref{sec:sgd})
+\end{itemize}
+
+Batch methods:
+\begin{itemize}
+  \item Conjugate Gradient Descent (\S\ref{sec:conjugate_gradient_method})
+\end{itemize}
+
+
+
+\paragraph{Backpropagation}\label{sec:backpropagation}\hfill
+
+process of ``Training'' a Regression Model (\S\ref{sec:regression_analysis});
+cf. Maximum Likelihood Estimation (MLE \S\ref{sec:mle})
+
+cf. Gauss-Newton Algorithm (Non-linear Least Squares \S\ref{sec:nlls})
+
+\emph{Neural Networks and Automated Differentiation} -
+\url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
+
+\emph{Backpropagation} -- Gradient Descent (\S\ref{sec:gradient_descent}) with
+Reverse-mode Automatic Differentiation (\S\ref{sec:automatic_differentiation})
+
+(wiki): requires Derivatives of Activation Functions, which can be computed
+using Automatic Differentiation
+
+Backpropagation computes the Gradients, while Stochastic Gradient Descent
+(\S\ref{sec:sgd}) uses the Gradients for ``Training'' the Model via Optimization
+
+2013 - Buitl\'eir, Russell, Daly -
+\emph{A Functional Approach to Neural Networks}
+
+2019 - Kahn - PUCIT CS667:
+
+application of the Multivariate Chain Rule (\S\ref{sec:chain_rule})
+
+Backpropagation algorithm:
+\begin{enumerate}
+  \item Forward propagate input to compute Activations and Outputs for every
+    Layer
+  \item Evaluate the Error for every Neuron in the Output Layer
+  \item Evaluate the Error for every Neuron in every Hidden Layer via
+    \emph{Backpropagation}
+  \item Compute Derivative of each Weight $\partial f / \partial w$ via the
+    Error and the Input
+  \item Update each Weight via \emph{Gradient Descent}
+\end{enumerate}
+
 
 
 \subsubsection{Feed-Forward Neural Network (FFNN)}\label{sec:ffnn}
+
+no Cycles between Nodes (Neurons)
+
+with the Logistic (Sigmoid) Activation Function, a Single-layer Neural Network
+is identical to a Logistic Regression Model (\S\ref{sec:logistic_regression})
+
+
 
 \paragraph{Universal Approximation Theorem}
 \label{sec:universal_approximation}\hfill
@@ -8747,20 +8962,52 @@ proven to be a Universal Function Approximator
 
 \paragraph{Single-layer Perceptron}\label{sec:single_layer_perceptron}\hfill
 
+simplest Feed-Forward Neural Network
+
 cf. Perceptron (\S\ref{sec:perceptron}) -- Binary Linear Classifier
 (\S\ref{sec:linear_classifier}); an Artificial Neuron using the Unit Step
 Function (\S\ref{sec:unit_step_function}) as the Activation Function; simplest
 FFNN
 
+Perceptron Learning Algorithm does not terminate if the ``Learning Set'' is not
+Linearly Separable, e.g. a Boolean Exclusive-OR problem
+
 
 
 \paragraph{Multi-Layer Perceptron (MLP)}\label{sec:mlp}\hfill
 
-\paragraph{Convolutional Neural Network}\label{sec:cnn}\hfill
+(wiki): any MLP using a Linear Activation Function has an equivalent
+\emph{Single-layer} Network; i.e. to gain advantages from multiple Layers
+requires a \emph{Non-linear} Activation Function
+
+\fist Convolutional Nueral Network (CNN \S\ref{sec:cnn}) -- ``Regularized''
+versions of MLP
 
 
 
-\subsubsection{Recurrent Neural Network}\label{sec:rnn}
+\subsubsection{Deep Neural Network (DNN)}\label{sec:dnn}
+
+\emph{Shift-invariant Neural Networks}
+
+\emph{Deep Learning} or \emph{Hierarchical Learning}
+
+reduces the number of connections by reducing the number of free Parameters
+
+connectivity pattern between Neurons inspried by organization of Visual Cortex
+
+Cross-correlation (\S\ref{sec:cross_correlation})
+
+
+
+\paragraph{Convolutional Neural Network (CNN)}\label{sec:cnn}\hfill
+
+``Regularized'' versions of Multi-layer Perceptrons (\S\ref{sec:mlp})
+
+
+
+\paragraph{Recurrent Neural Network (RNN)}\label{sec:rnn}\hfill
+
+can be used to learn \emph{Sequential} mappings
 
 
 
@@ -9650,6 +9897,15 @@ of a Physical System
 % ------------------------------------------------------------------------------
 \subsection{Integral Geometry}\label{sec:integral_geometry}
 % ------------------------------------------------------------------------------
+
+Theory of Measures (\S\ref{sec:measure}) on ``Geometrical Space'' Invariant
+under Symmetry Group (\S\ref{sec:symmetry_group}) of that Space
+
+Integral Transforms (\S\ref{sec:integral_transform}) as Equivariant
+Transformations from the Function Space of one Geometrical Space to another
+(e.g. Radon Transform)
+
+
 
 % ------------------------------------------------------------------------------
 \subsection{Stochastic Geometry}\label{sec:stochastic_geometry}

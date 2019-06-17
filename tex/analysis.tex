@@ -1709,6 +1709,8 @@ $\csc\theta = \frac{1}{\sin\theta}$
 
 $\cot\theta = \frac{\cos\theta}{\sin\theta}$
 
+$\mathrm{sinc} x = \frac{\sin x}{x}$
+
 Integrals:
 
 $\int_0^{2\pi} \sin(mt)dt = 0$ for any Integer $m$
@@ -2157,6 +2159,8 @@ for Discrete Real-valued Functions, Convolution and Cross-correlation differ
 only in Time Reversal of one of the Functions
 
 \fist Fourier Analysis (\S\ref{sec:fourier_analysis})
+
+\fist Convolutional Neural Networks (CNNs \S\ref{sec:cnn})
 
 
 
@@ -3115,14 +3119,17 @@ Reverse-mode Automatic Differentiation
 
 
 
-\paragraph{Stochastic Gradient Descent}
-\label{sec:stochastic_gradient_descent}\hfill
+\paragraph{Stochastic Gradient Descent (SGD)}\label{sec:sgd}\hfill
 
 used in Multiple Linear Regression (\S\ref{sec:multiple_linear_regression}) with
 a large number of Observations
 
 \emph{de facto} standard Algorithm for training Artifician Neural Networks
 (\S\ref{sec:ann})
+
+(wiki): \emph{Backpropagation} (\S\ref{sec:backpropagation}) computes the
+Gradients, while Stochastic Gradient Descent uses the Gradients for ``Training''
+the Model via Optimization
 
 
 
@@ -3134,7 +3141,11 @@ a large number of Observations
 
 \subsubsection{Conjugate Gradient Method}\label{sec:conjugate_gradient_method}
 
-applicable to large Sparse Systems
+applicable to large Sparse Systems, Unconstrained Optimization
+(\S\ref{sec:unconstrained_optimization})
+
+\fist cf. Batch methods for Training Neural Networks (Learning Process
+\S\ref{sec:learning_process})
 
 
 
@@ -3288,7 +3299,7 @@ method of computing Fixed Points (\S\ref{sec:fixed_point}) of Iterated Functions
 
 or \emph{Newton-Raphson Method}
 
-\fist Gauss-Newton Algorithm (Non-Linear Least Squares \S\ref{sec:nlls})
+\fist Gauss-Newton Algorithm (Non-Linear Least Squares \S\ref{sec:gauss_newton})
 
 \fist Iteratively Re-weighted Least Squares (IRLS \S\ref{sec:irls}) --
 equivalent to minimizing Log-likelihood (\S\ref{sec:log_likelihood}) of a
@@ -3316,6 +3327,16 @@ compared to the Iterative Method (\S\ref{sec:iterative_rootfinding}), the Fixed
 Points will always be \emph{Attractive}
 %FIXME: is this considered an iterative rootfinding ?
 
+Khan - CS667 - Advanced Machine Learning --
+Newton-Raphson (\S\ref{sec:newtons_method}) update for minimizing a Function
+$f(\vec{w})$:
+\[
+  \vec{w}^{k+1} = \vec{w}^k - \mathsf{H}^{-1}\nabla_{\vec{w}} f(\vec{w})
+\]
+where $\mathsf{H}$ is the Hessian Matrix of Second Derivatives:
+\[
+  \frac{\partial^2 f}{\partial{w_i} \partial{w_j}}
+\]
 
 
 \paragraph{Line Search}\label{sec:line_search}\hfill
@@ -4610,7 +4631,9 @@ and if $z = f(y)$ and $y = g(x)$ then:
 \fist cf. \emph{Substitution Rule} (\S\ref{sec:substitution_rule}) for
 Integration
 
-Multivariable Chain Rule
+Multivariable Chain Rule -- ; cf. Automatic Differentiation
+(\S\ref{sec:automatic_differentiation}), Backpropagation
+(\S\ref{sec:backpropagation})
 
 (nlab):
 
@@ -5212,6 +5235,12 @@ Inverse Transform:
 
 a \emph{Symmetric Kernel} is one that is unchanged when permuting the two
 Variables
+
+\fist Integral Geometry (\S\ref{sec:integral_geometry}): Theory of Measures
+(\S\ref{sec:measure}) on ``Geometrical Space'' Invariant under Symmetry Group
+(\S\ref{sec:symmetry_group}) of that Space; Integral Transforms as Equivariant
+Transformations from the Function Space of one Geometrical Space to another
+(e.g. Radon Transformation)
 
 
 
