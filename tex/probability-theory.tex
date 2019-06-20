@@ -1079,6 +1079,9 @@ measure of Dispersion associated with the $L^{\infty}$ Metric (Max Norm
 \fist Variance (\S\ref{sec:variance}) is the Expected Value of the Squared
 Deviation from the Mean (SDM \S\ref{sec:sdm})
 
+\fist Loss Function for Regression (\S\ref{sec:regression_analysis}); cf.
+Categorical Cross-entropy Loss Function for Classification
+
 \begin{itemize}
   \item Sum of Squared Deviations (\S\ref{sec:sum_squared_deviation})
     \begin{itemize}
@@ -2992,6 +2995,8 @@ Estimate a Population Parameter:
   \item ...
 \end{itemize}
 
+\fist Hyperparameters (Learning Algorithms \S\ref{sec:hyperparameter})
+
 $\mu$, $\sigma$
 
 \begin{itemize}
@@ -3040,7 +3045,7 @@ measured or not. (wiki)
 
 \fist cf. \emph{Data} (\S\ref{sec:data}), \emph{Data Generating Process}
 (\S\ref{sec:data_generating_process}), \emph{Dataset} (\S\ref{sec:dataset}),
-\emph{Training Set} (\S\ref{sec:training_set})
+\emph{Training Set} (\S\ref{sec:training_dataset})
 
 \fist cf. Frequency Distribution (\S\ref{sec:frequency_distribution})
 
@@ -4510,6 +4515,10 @@ Chi Squared Test (\S\ref{sec:chi_squared_test})
 cf. Regression Analysis (\S\ref{sec:regression_analysis}), Curve Fitting
 (\S\ref{sec:curve_fitting})
 
+\fist cf. Learning Algorithms (\S\ref{sec:learning_algorithm});
+Parameter Estimation (\S\ref{sec:estimation_theory}), Feature Selection
+(\S\ref{sec:feature_selection})
+
 Likelihood-Ratio (LR) Test (\S\ref{sec:lr_test})
 
 
@@ -4837,6 +4846,8 @@ Active Inference (Friston)
 
 
 \subsubsection{Model Selection}\label{sec:model_selection}
+
+\paragraph{Features Selection}\label{sec:feature_selection}\hfill
 
 \paragraph{Optimality Criterion}\label{sec:optimality_criterion}\hfill
 
@@ -7221,12 +7232,58 @@ Variance Analysis (ANOVA \S\ref{sec:variance_analysis})
 % ==============================================================================
 
 % ------------------------------------------------------------------------------
-\subsection{Training Set}\label{sec:training_set}
+\subsection{Learning Algorithm}\label{sec:learning_algorithm}
 % ------------------------------------------------------------------------------
+
+(wiki)
+
+Model Fitting (\S\ref{sec:model_fit}):
+\begin{itemize}
+  \item Parameter Estimation (\S\ref{sec:estimation_theory})
+  \item Feature Selection (\S\ref{sec:feature_selection})
+\end{itemize}
+
+a Model (\S\ref{sec:statistical_model}), e.g. Naive Bayes Classifier
+(\S\ref{sec:naive_bayes}), ANN (\S\ref{sec:ann}), is ``Trained'' on a Training
+Dataset (\S\ref{sec:training_dataset}) using a \emph{Supervised Learning Method}
+(cf. Statistical Classification \S\ref{sec:classification}):
+\begin{itemize}
+  \item Gradient Descent (\S\ref{sec:gradient_descent})
+  \item Stochastic Gradient Descent (SGD \S\ref{sec:sgd})
+  \item ...
+\end{itemize}
+
+\fist cf. Learning Process (ANNs \S\ref{sec:learning_process})
+
+
+
+\subsubsection{Hyperparameter}\label{sec:hyperparameter}
+
+Parameters set before Learning Algorithm begins
+
+
+
+\subsubsection{Training Dataset}\label{sec:training_dataset}
+
+examples used to initially \emph{Fit} the Parameters of a Statistical Model
 
 cf. Statistical Sample (\S\ref{sec:sample}), Dataset (\S\ref{sec:dataset})
 
-\fist Learning Process (\S\ref{sec:learning_process})
+
+
+\subsubsection{Validation Dataset}\label{sec:validation_dataset}
+
+Fitted Model is used to \emph{Predict} Responses for Observations in the
+Validation Dataset
+
+tuning Hyperparameters (\S\ref{sec:hyperparameter})
+
+
+
+\subsubsection{Test Dataset}\label{sec:test_dataset}
+
+used to provide an Unbiased evaluation of the final Model Fit on the Training
+Dataset
 
 
 
@@ -7234,15 +7291,16 @@ cf. Statistical Sample (\S\ref{sec:sample}), Dataset (\S\ref{sec:dataset})
 \subsection{Statistical Classification}\label{sec:classification}
 % ------------------------------------------------------------------------------
 
+\emph{Supervised Learning} where the Response Variable is \emph{Discrete}; cf.
+\emph{Regression} where the Response Variable is Continuous
+
+cf. Parameter Estimation (\S\ref{sec:estimation_theory}), Feature Selection
+(\S\ref{sec:feature_selectioN})
+
 example of \emph{Pattern Recognition} (assignment of some Output Value to a
 given Input Value), other examples are Regression Analysis
 (\S\ref{sec:regression_analysis}) and Cluster Analysis (Unsupervised Learning
 \S\ref{sec:cluster_analysis})
-
-\emph{Supervised Learning} where the Response Variable is \emph{Discrete}; cf.
-\emph{Regression} where the Response Variable is Continuous
-
-cf. Parameter Estimation (\S\ref{sec:estimation_theory})
 
 (wiki):
 
@@ -7257,9 +7315,13 @@ Outcomes \S\ref{sec:outcome})
 an Algorithm (\S\ref{sec:algorithm}) that implements Classification is called a
 \emph{Classifier} (or \emph{Classification Rule})
 
-finding a Classifier is based on a \emph{Training Dataset} (\S\ref{sec:dataset})
+finding a Classifier is based on a \emph{Training Dataset}
+(\S\ref{sec:training_dataset}) --FIXME: clarify
 
 often done with Logistic Regression (\S\ref{sec:logistic_regression})
+
+\emph{Categorical Cross-entropy} (\S\ref{sec:cross_entropy}) -- Loss Function
+for Classification (cf. Squared Error Loss Function for Regression)
 
 \fist VC Dimension (\S\ref{sec:vc_dimension}) -- measure of the capacity
 (expressive power) of a Space of Functions that can be Learned by a
@@ -7349,6 +7411,11 @@ useful when $x$ is High-dimensional and Discrete
 
 \subsubsection{Binary Classifier}\label{sec:binary_classifier}
 
+Perceptron (\S\ref{sec:perceptron}) -- also a Linear Classifier
+(\S\ref{sec:linear_classifier})
+
+
+
 \subsubsection{Linear Classifier}\label{sec:linear_classifier}
 
 a \emph{Linear Predictor Function} (\S\ref{sec:linear_predictor}) assigns a
@@ -7367,7 +7434,8 @@ Generative (\S\ref{sec:generative_model}) methods:
 Discriminative (\S\ref{sec:discriminative_model}) methods:
 \begin{itemize}
   \item Logistic Regression (\S\ref{sec:logistic_regression})
-  \item Perceptron (\S\ref{sec:perceptron})
+  \item Perceptron (\S\ref{sec:perceptron}) -- also a Binary Classifier
+    (\S\ref{sec:binary_classifier})
   \item Support Vector Machines (\S\ref{sec:svm})
 \end{itemize}
 
@@ -7411,6 +7479,9 @@ Quadratic Programming (\S\ref{sec:quadratic_programming})
 \paragraph{Perceptron}\label{sec:perceptron}\hfill
 
 Discriminative Method (\S\ref{sec:discriminative_method})
+
+Binary (\S\ref{sec:binary_classifier}) Linear Classifier
+(\S\ref{sec:linear_classifier})
 
 \fist Neural Networks (\S\ref{sec:ann}) -- a Perceptron is an \emph{Artificial
   Neuron} (\S\ref{sec:artificial_neuron}) using the Unit Step Function
@@ -7582,6 +7653,9 @@ example of \emph{Pattern Recognition} (assignment of some Output Value to a
 given Input Value), other examples are Statistical Classification
 (\S\ref{sec:classification})--when the Response Variable is
 Discrete--and Cluster Analysis (\S\ref{sec:cluster_analysis})
+
+\emph{Squared Error} (\S\ref{sec:squared_deviation}) -- Loss Function for
+Regression (cf. Categorical Cross-entropy Loss Function for Classification)
 
 cf. Numerical Analysis (\S\ref{sec:numerical_analysis}): Interpolation
 (\S\ref{sec:interpolation}), Extrapolation (TODO)
@@ -7863,6 +7937,13 @@ Additive Model (AM)
 not fully Non-parametric
 
 \emph{Backfitting} Algorithm
+
+
+
+\subparagraph{Generalized Additive Model (GAM)}\label{sec:gam}\hfill
+
+Generalized Linear Model (\S\ref{sec:glm}) where the Linear Predictor depends
+Linearly on unknown Smooth Functions of Predictor Variables
 
 
 
@@ -8173,6 +8254,9 @@ not to be confused with ``General'' (Multivariate) Linear Models''
 (\S\ref{sec:multivariate_regression}): special case of GLM where the
 Distribution of Residuals follow a Conditionally Normal Distribution
 (FIXME: and response variables are continuous, and variance is constant ???)
+
+\fist Generalized Additive Model (GAM \S\ref{sec:gam}) -- GLM where the Linear
+Predictor depends Linearly on unknown Smooth Functions of Predictor Variables
 
 (wiki):
 
@@ -8800,7 +8884,13 @@ defines the \emph{Output} of a Node for a given Input or Set of Inputs
 the Activation Function is applied to the Dot Product (Weighted Sum)
 $\vec{w}^T \vec{x}$, called the \emph{Activation}
 
-(wiki): any Multi-Layer Peceptron (MLP \S\ref{sec:mlp}) Network using a Linear
+(wiki):
+
+Training by Backpropagation (\S\ref{sec:backpropagation}) requires Derivatives
+of Activation Functions, which can be computed using Automatic Differentiation
+(\S\ref{sec:automatic_differentiation})
+
+any Multi-Layer Peceptron (MLP \S\ref{sec:mlp}) Network using a Linear
 Activation Function has an equivalent \emph{Single-layer} Network; i.e. to gain
 advantages from multiple Layers requires a \emph{Non-linear} Activation Function
 
@@ -8885,7 +8975,8 @@ and Bias levels of a Network are repeatedly updated to improve the Network's
   \item Reinforcement Learning (\S\ref{sec:reinforcement_learning})
 \end{itemize}
 
-Training Set (\S\ref{sec:training_set})
+\fist cf. Learning Algorithm (\S\ref{sec:learning_algorithm}),
+Training Set (\S\ref{sec:training_dataset})
 
 Online methods:
 \begin{itemize}
@@ -8901,10 +8992,13 @@ Batch methods:
 
 \paragraph{Backpropagation}\label{sec:backpropagation}\hfill
 
+1982 - Werbos -
+\emph{Applications of Advances in Nonlinear Sensitivity Analysis}
+
 process of ``Training'' a Regression Model (\S\ref{sec:regression_analysis});
 cf. Maximum Likelihood Estimation (MLE \S\ref{sec:mle})
 
-cf. Gauss-Newton Algorithm (Non-linear Least Squares \S\ref{sec:nlls})
+cf. Gauss-Newton Algorithm (Non-linear Least Squares \S\ref{sec:gauss_newton})
 
 \emph{Neural Networks and Automated Differentiation} -
 \url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
@@ -8916,7 +9010,30 @@ Reverse-mode Automatic Differentiation (\S\ref{sec:automatic_differentiation})
 using Automatic Differentiation
 
 Backpropagation computes the Gradients, while Stochastic Gradient Descent
-(\S\ref{sec:sgd}) uses the Gradients for ``Training'' the Model via Optimization
+(\S\ref{sec:sgd}) \emph{uses} the Gradients for ``Training'' the Model via
+Optimization
+
+Loss Functions -- Squared Error (Regression), Cross-entropy (Classification)
+
+Gradient Descent requires computing the Derivative for the \emph{Loss Function}
+with respect to the Weights in the Network
+
+Assumptions on the Loss Function, $L$, for use in Backpropagation:
+\begin{enumerate}
+  \item can be written as an Average $L = \frac{1}{n} \sum_x L_x$ over Loss
+    Functions $F_x$ for $n$ individual Training examples, $x$-- this is required
+    because Backpropagation calculates the Gradient of the Loss Function for a
+    \emph{single} Training example, which needs to be generalized to the
+    \emph{overall} Loss Function
+  \item can be written as a Function of the \emph{Outputs} from the Neural
+    Network
+\end{enumerate}
+
+Backpropagation is not guaranteed to find the Global Minimum of the Loss
+Function, only a Local Minimum
+
+does not require Normalization of Input Vectors, although Normalization could
+improve performance
 
 2013 - Buitl\'eir, Russell, Daly -
 \emph{A Functional Approach to Neural Networks}
