@@ -222,9 +222,27 @@ For $k$ such that $k$ is not a Power of $2$, then $2^k+1$ is Composite
 
 
 
+\paragraph{Euclid's Theorem}\label{sec:euclids_theorem}\hfill
+
 \paragraph{Coprime}\label{sec:coprime}\hfill
 
 Two Integers are \emph{Coprime} if $gcd (a,b) = 1$.
+
+
+
+\subparagraph{Dirichlet's Theorem}\label{sec:dirichlets_theorem}\hfill
+
+for any two positive Coprime Integers $a$ and $d$ there are Infinitely many
+Primes of the form $a + nd$ where $n$ is also a Positive Integer, i.e. there are
+Infinitely many Primes that are Congruent to $a \mod d$
+
+equivalently, the Arithmetic Progression (Sequence
+\S\ref{sec:arithmetic_sequence}) $a, a + d, a + 2d, a + 3d, \ldots$ for Coprime
+$a$ and $d$ contains Infinitely many Prime Numbers; stronger forms of the
+Theorem state that for any such Arithmetic Progression, the Sum of the
+Reciprocals of the Prime Numbers in the Progression Diverges and that different
+such Arithmetic Progressions with the same Modulus have approximately the same
+proportions of Primes
 
 
 
@@ -542,9 +560,16 @@ Implies that there is exactly one Positive Solution for $\sqrt{x}, x
 
 \subsubsection{Perfect Square}\label{sec:perfect_square}
 
-Square of two Natural Numbers
+an Element of an Algebraic Structure which is equal to the Square of another
+Element; a \emph{Square Number} is a Perfect Square Integer--
+all other Square Roots are Irrational (\S\ref{sec:irrational})
 
-All other Square Roots are Irrational (\S\ref{sec:irrational})
+\fist Quadratic Residue (\S\ref{sec:quadratic_residue}) -- an Integer $q$ is a
+\emph{Quadratic Residue Modulo $n$} if it is Congruent to a Perfect Square
+Modulo $n$, i.e. if:
+\[
+  \exists x . x^2 \equiv q (\mod n)
+\]
 
 
 
@@ -1404,8 +1429,7 @@ cf. Additivity (Set Functions \S\ref{sec:additivity})
 
 
 
-\subsubsection{Multiplicative Function}
-\label{sec:multiplicative_function}
+\subsubsection{Multiplicative Function}\label{sec:multiplicative_function}
 
 For Coprime $a,b \in \mathbb{Z}$:
 \[
@@ -1437,7 +1461,25 @@ Examples:
 
 \paragraph{Legendre Symbol}\label{sec:legendre_symbol}\hfill
 
-Dirichlet Character (\S\ref{sec:dirichlet_character})
+\[
+  \Big(\frac{a}{p}\Big) = \begin{cases}
+    1  & \text{if }a\text{ is a Quadratic Residue Modulo }p\text{ and }
+          a \not\nequiv 0 (\mod p) \\
+    -1 & \text{if }a\text{ is a Non-quadratic Residue Modulo }p \\
+    0  & \text{if }a \equiv 0 (\mod p) \\
+  \end{cases}
+\]
+
+original explicit formula:
+\[
+  \Big(\frac{a}{p}\Big) \equiv a^{\frac{p-1}{2}}
+\]
+
+is a Primitive Dirichlet Character (\S\ref{sec:dirichlet_character}) Modulo $p$
+
+\emph{Legendre Sequence} -- Periodic Sequences in the table of values
+
+\fist Law of Quadratic Reciprocity (\S\ref{sec:quadratic_reciprocity})
 
 
 
@@ -1595,7 +1637,7 @@ Cancellation: If $ac \equiv bc \mod n$ then $a \equiv b
 
 
 
-\paragraph{Chinese Remainder Theorem}\label{sec:chinese_remainder}\hfill
+\paragraph{Chinese Remainder Theorem (CRT)}\label{sec:crt}\hfill
 
 \paragraph{Simultaneous Congruence}\label{sec:simultaneous_congruence}\hfill
 
@@ -1628,7 +1670,36 @@ $\equiv 0 \mod n$
 
 \paragraph{Quadratic Residue}\label{sec:quadratic_residue}\hfill
 
+an Integer $q$ is a \emph{Quadratic Residue Modulo $n$} if it is Congruent to
+a Perfect Square Modulo $n$, i.e. if:
+\[
+  \exists x . x^2 \equiv q (\mod n)
+\]
+
+(wiki):
+
+using Dirichlet's Theorem (\S\ref{sec:dirichlets_theorem}), the Law of Quadratic
+Reciprocity (\S\ref{sec:quadratic_reciprocity}), and the Chinese Remainder
+Theorem (CRT \S\ref{sec:crt}), it can be shown that for any $M > 0$, there exist
+Primes $p$ such that the numbers $1, 2, \ldots, M$ are \emph{all} Residues
+Modulo $p$
+
+used in Cocks's Encryption Scheme for ID-Based Encryption (IBE)
+
+
+
 \subparagraph{Quadratic Reciprocity}\label{sec:quadratic_reciprocity}\hfill
+
+\emph{Law of Quadratic Reciprocity}
+
+gives conditions for the solvability of Quadratic Equations
+(\S\ref{sec:quadratic_equation}) Modulo Prime Numbers
+
+defined in terms of Legendre Symbols (\S\ref{sec:legendre_symbol}):
+\[
+  \Big(\frac{p}{q}\Big) \Big(\frac{q}{p}\Big) =
+    (-1)^{\frac{p-1}{2}\frac{p-1}{2}}
+\]
 
 
 
@@ -1785,6 +1856,13 @@ $e^a = \lim_{n \rightarrow \infty} (1 + \frac{a}{n})^n$
 % ------------------------------------------------------------------------------
 
 \subsubsection{Dirichlet Character}\label{sec:dirichlet_character}
+
+\begin{itemize}
+  \item Legendre Symbol (\S\ref{sec:legendre_symbol}) -- a Primitive Dirichlet
+    Character Modulo $p$
+\end{itemize}
+
+
 
 \subsubsection{Dirichlet $L$-Series}\label{sec:l_series}
 
