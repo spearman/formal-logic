@@ -1196,6 +1196,61 @@ G\"odel's Theorems
 
 
 
+% ------------------------------------------------------------------------------
+\subsection{Interactive Proof System}\label{sec:interactive_proof}
+% ------------------------------------------------------------------------------
+
+\fist Complexity Theory (\S\ref{sec:complexity_theory})
+
+(wiki)
+
+an Abstract Machine (\S\ref{sec:abstract_machine}) that models Computation as
+the exchange of messages between two parties
+
+$V$ -- Verifier
+
+$P$ -- Prover
+
+Verifier and Prover interact by exchanging messages to determine whether a given
+String belongs to a Language (\S\ref{sec:formal_language}) or not
+
+Prover has unlimited computational resources but is not a trusted party
+
+Verifier is a trusted party but has bounded computational power
+
+messages are exchanged until the Verifier has an answer and is ``convinced''
+that it is correct
+
+requirements:
+\begin{enumerate}
+  \item Completeness -- if the Statement is True, the Verifier can be convinced
+    by an untrusted Prover
+  \item Soundness -- if the Statement is False, then no Prover can convince the
+    Verifier that it is True, except with some small Probability
+\end{enumerate}
+(FIXME: clarify ``Statement'' vs. String ???)
+
+Complexity Class (\S\ref{sec:complexity_class}) $\mathsf{NP}$ -- can be viewed
+as an Interactive Proof System (\S\ref{sec:interactive_proof}) where the
+Verifier is a Deterministic, Polynomial-time ($\mathsf{P}$) Machine and the
+Prover has arbitrary computational power and the \emph{Protocol} is:
+\begin{itemize}
+  \item the Prover looks at Input and Computes the solution using arbitrary
+    computational power and returns a Polynomial-size ``Proof Certificate''
+  \item the Verifier Validates (accepts or rejects) the Certificate in
+    Polynomial Time
+\end{itemize}
+when a Valid Proof Certificate exists, the Prover is always able to make the
+Verifier accept by giving that Certificate, and when there is no Valid
+Certificate, the Input is not in the Language and no Prover can convince the
+Verifier since any Proof Certificate will be rejected
+
+
+
+\subsubsection{Zero-knowledge Proof}\label{sec:zero_knowledge_proof}
+
+
+
 % ==============================================================================
 \section{Recurison Scheme}\label{sec:recursion_scheme}
 % ==============================================================================
@@ -1743,6 +1798,10 @@ Light Affine Lambda Calculus corresponds to the Complexity Class PTIME
 
 Natural Proofs %FIXME
 
+\fist Interactive Proof System (\S\ref{sec:interactive_proof}) -- an Abstract
+Machine (\S\ref{sec:abstract_machine}) that models Computation as the exchange
+of Messages between two parties
+
 1997 - Bernstein, Vazirani - \emph{Quantum Complexity Theory}
 
 \asterism
@@ -1948,6 +2007,11 @@ different Circuit for every $n$ is allowed
 $TALLY$ -- Complexity Class of Unary (Tally) Languages
 
 TODO: xrefs
+
+$\mathsf{NP}$ -- can be viewed as an Interactive Proof System
+(\S\ref{sec:interactive_proof}) where the Verifier is a Deterministic,
+Polynomial-time ($\mathsf{P}$) Machine and the Prover has arbitrary
+computational power
 
 
 
