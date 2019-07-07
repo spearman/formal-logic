@@ -1559,6 +1559,10 @@ Identity Element. A Loop with the Associative Property is a Group
 \section{Group Theory}\label{sec:group_theory}
 % ==============================================================================
 
+Macauley - Clemson University Math 4120: \emph{Visual Group Theory} - Youtube
+playlist:
+\url{https://www.youtube.com/watch?v=UwTQdOop-nU&list=PLwV-9DG53NDxU337smpTwm6sef4x-SCLv}
+
 \fist See also Groupoids (\S\ref{sec:groupoid})
 
 \fist Lie Groups (\S\ref{sec:lie_group}): Manifolds with Group Structure
@@ -1600,29 +1604,29 @@ A \emph{Group} is a Monoid (\S\ref{sec:monoid}) with an Inverse for every
 Element. That is, a Group is a Set $G$, and a Binary \emph{Group Operation},
 $\cdot$, expressed as a Tuple, $(G,\cdot)$, satisfying four \emph{Group Axioms}:
 \begin{enumerate}
-    \item Closure: $\forall a,b \in G, a \cdot b \in G$
-    \item Associativity: $\forall a,b,c \in G, (a \cdot b) \cdot c = a
-      \cdot (b \cdot c)$
-    \item Identity Element: $\exists! e \in G : \forall a \in G,
-      e \cdot a = a \cdot e = a$
-    \item Inverse elements: $\forall a \in G, \exists b \in G :
-      a \cdot b = b \cdot a = e$
+  \item Closure: $\forall a,b \in G, a \cdot b \in G$
+  \item Associativity: $\forall a,b,c \in G, (a \cdot b) \cdot c = a
+    \cdot (b \cdot c)$
+  \item Identity Element: $\exists! e \in G : \forall a \in G,
+    e \cdot a = a \cdot e = a$
+  \item Inverse elements: $\forall a \in G, \exists b \in G :
+    a \cdot b = b \cdot a = e$
 \end{enumerate}
 The Identity Element is the only Element with the unique Property:
 \[
-    e \cdot e = e
+  e \cdot e = e
 \]
 
 The Signature (\S\ref{sec:signature}) for Groups is $\{\cdot, 1, ^{-1}\}$.
-
-\fist Group Presentation (\S\ref{sec:group_presentation})
 
 The number of Elements in a Group $\mathrm{G}$ is known as its \emph{Order} and
 may be denoted $|\mathrm{G}|$.
 
 an Integer $k$ that solves the Equation $b^k = a$ for an Element $a$ of a Group
-$G$ is a \emph{Discrete Logarithm} (\S\ref{sec:discrete_logarithm}): $k = \log_b
-a$
+$G$ is a \emph{Discrete Logarithm} (\S\ref{sec:discrete_logarithm}):
+$k = \log_b a$
+
+\fist Group Presentation (\S\ref{sec:group_presentation})
 
 \fist an \emph{Algebraic Group} (or \emph{Group Variety}
 \S\ref{sec:algebraic_group}) is a Group that is an Algebraic Variety such that
@@ -1652,26 +1656,48 @@ be seen as a Groupoid with a single Object
 
 
 
-\subsubsection{Trivial Group}\label{sec:trivial_group}
+\subsubsection{Group Generator}\label{sec:group_generator}
 
-A \emph{Trivial Group} is a Group $\{e\}$ with only an Identity
-Element and no others. The Trivial Group may be denoted $0$ when
-Group Operation is thought of as addition or as $1$ when Group
-Operation is thought of as multiplication.
+a \emph{Generating Set} of a Group is a Subset such that every Element of the
+Group can be expressed as a combination (under the Group Operation) of Finitely
+many Elements of the Subset and their Inverses
 
-Given any Group $G$ with Identity Element $e$, the Trivial Group
-$\{e\}$ is a Subgroup (\S\ref{sec:subgroup}) of $G$, called the
-\emph{Trivial Subgroup}:
+Cyclic Subgroup (\S\ref{sec:cyclic_subgroup})
+
+\begin{itemize}
+  \item Roots of Unity (\S\ref{sec:unity_root}) -- the $n$th Roots of Unity form
+    an irreducible Representation (\S\ref{sec:group_representation}) of any
+    Cyclic Group of Order $n$
+  \item Primitive Element (\S\ref{sec:primitive_element}) -- a Generator of the
+    Multiplicative Group of a Finite Field (\S\ref{sec:finite_field})
+  \item ...
+\end{itemize}
+
+
+
+\subsubsection{Group Word}\label{sec:group_word}
+
+For a Group $G$ and a Subset of $G$, $S$, a \emph{Word} in $S$ is any Expression
+of the form:
 \[
-    \{e\} \leq G
+    s_1^{\varepsilon_1}s_2^{\varepsilon_2} \cdots s_n^{\varepsilon_n}
 \]
+where $s_1,\ldots,s_n \in S$ and $\varepsilon_i \in \{-1, 1\}$ and $n$ is the
+\emph{Length} of the Word. The \emph{Empty Word} is used as the Identity Element
+in the Free Group of Words (\S\ref{sec:free_group}).
 
-All Trivial Groups are Isomorphic to each other, so \emph{the} Trivial
-Group may be spoken of. The Trivial Group is the Zero Object in the
-Category of Groups.
 
-The Trivial Group is a Cyclic Group (\S\ref{sec:cyclic_group}) of
-Order 1 and may be denoted $Z_1$ in this context.
+
+\paragraph{Reduction}\label{sec:word_reduction}\hfill
+
+If an Element appears in a Word next to its Inverse, a \emph{Reduction} may be
+applied which removes those Elements from the Word due to the Group Axioms which
+imply that the resulting Word is equivalent. A \emph{Reduced Word} contains no
+such redundant pairs.
+
+A Word is \emph{Cyclically Reduced} if and only if every Cyclic Permutation
+(\S\ref{sec:cyclic_permutation}) of the Word is Reduced (that is, it is Reduced
+and the first and last Element are not Inverses).
 
 
 
@@ -1685,43 +1711,10 @@ Periodic Group (\S\ref{sec:periodic_group})
 
 
 
-\subsubsection{Group Generator}\label{sec:group_generator}
-
-Cyclic Subgroup (\S\ref{sec:cyclic_subgroup})
-
-
-
-\subsubsection{Group Word}\label{sec:group_word}
-
-For a Group $G$ and a Subset of $G$, $S$, a \emph{Word} in $S$ is any
-Expression of the form:
-\[
-    s_1^{\varepsilon_1}s_2^{\varepsilon_2} \cdots s_n^{\varepsilon_n}
-\]
-where $s_1,\ldots,s_n \in S$ and $\varepsilon_i \in \{-1, 1\}$ and $n$
-is the \emph{Length} of the Word. The \emph{Empty Word} is used as the
-Identity Element in the Free Group of Words (\S\ref{sec:free_group}).
-
-
-
-\paragraph{Reduction}\label{sec:word_reduction}\hfill
-
-If an Element appears in a Word next to its Inverse, a
-\emph{Reduction} may be applied which removes those Elements from the
-Word due to the Group Axioms which imply that the resulting Word is
-equivalent. A \emph{Reduced Word} contains no such redundant pairs.
-
-A Word is \emph{Cyclically Reduced} if and only if every Cyclic
-Permutation (\S\ref{sec:cyclic_permutation}) of the Word is Reduced
-(that is, it is Reduced and the first and last Element are not
-Inverses).
-
-
-
 \subsubsection{Center}\label{sec:group_center}
 
-The \emph{Center} of a Group $G$, denoted $Z(G)$, is a Normal Subgroup
-of $G$ defined as:
+The \emph{Center} of a Group $G$, denoted $Z(G)$, is a Normal Subgroup of $G$
+defined as:
 \[
     Z(G) = \{ z \in G | \forall g \in G, zg = gz \}
 \]
@@ -1732,8 +1725,7 @@ For a Symmetric Group (\S\ref{sec:symmetric_group}) $S_n$:
     Z(S_n) = \{e\}
 \]
 
-For a General Linear Group (\S\ref{sec:general_linear_group})
-$GL_n(R)$:
+For a General Linear Group (\S\ref{sec:general_linear_group}) $GL_n(R)$:
 \[
     Z(GL_n(R)) = \{\lambda \mathrm{I}\}
 \]
@@ -1756,13 +1748,13 @@ Commutator Subgroup (\S\ref{sec:commutator_subgroup})
 
 \subsubsection{Conjugacy Class}\label{sec:conjugacy_class}
 
-Two Elements $a$ and $b$ of a Group $G$ are \emph{Conjugates} if there
-is an Element $g \in G$ such that:
+Two Elements $a$ and $b$ of a Group $G$ are \emph{Conjugates} if there is an
+Element $g \in G$ such that:
 \[
     gag^{-1} = b
 \]
-which reads ``Conjugation of $a$ by $g$ results in $b$.'' Conjugation
-is Invariant if and only if the Elements are Commutative:
+which reads ``Conjugation of $a$ by $g$ results in $b$.'' Conjugation is
+Invariant if and only if the Elements are Commutative:
 \[
     gag^{-1} = a \Leftrightarrow ag = ga
 \]
@@ -1776,8 +1768,8 @@ A \emph{Conjugacy Class} for an Element $a$ is defined as:
 
 \subsubsection{Cayley Graph}\label{sec:cayley_graph}
 
-the Cayley Graph for a Cyclic Group (\S\ref{sec:cyclic_group}) is a
-Directed Cycle Graph (\S\ref{sec:directed_cycle})
+the Cayley Graph for a Cyclic Group (\S\ref{sec:cyclic_group}) is a Directed
+Cycle Graph (\S\ref{sec:directed_cycle})
 
 
 
@@ -2038,10 +2030,32 @@ are Isomorphic, given by the Direct Sum (\S\ref{sec:direct_sum})
 
 
 % ------------------------------------------------------------------------------
+\subsection{Trivial Group}\label{sec:trivial_group}
+% ------------------------------------------------------------------------------
+
+A \emph{Trivial Group} is a Group $\{e\}$ with only an Identity Element and no
+others. The Trivial Group may be denoted $0$ when Group Operation is thought of
+as addition or as $1$ when Group Operation is thought of as multiplication.
+
+Given any Group $G$ with Identity Element $e$, the Trivial Group $\{e\}$ is a
+Subgroup (\S\ref{sec:subgroup}) of $G$, called the \emph{Trivial Subgroup}:
+\[
+    \{e\} \leq G
+\]
+
+All Trivial Groups are Isomorphic to each other, so \emph{the} Trivial Group may
+be spoken of. The Trivial Group is the Zero Object in the Category of Groups.
+
+The Trivial Group is a Cyclic Group (\S\ref{sec:cyclic_group}) of Order 1 and
+may be denoted $Z_1$ in this context.
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Commutative Group}\label{sec:commutative_group}
 % ------------------------------------------------------------------------------
 
-\emph{Abelian Group} also \emph{Commutative Group}
+or \emph{Abelian Group}
 
 In Abelian Groups, the Coproduct is Isomorphic to the Product:
 \[
@@ -2063,6 +2077,11 @@ Field with a Scalar Multiplication Operation
 
 \fist a Free Abelian Group (\S\ref{sec:free_commutative_group}) is exactly a
 Free Module over the Ring $\ints$ of Integers
+
+\begin{itemize}
+  \item Elliptic Curves (\S\ref{sec:elliptic_curve})
+  \item ...
+\end{itemize}
 
 
 
@@ -3156,6 +3175,9 @@ other \emph{Pseudo-rings} that may lack a Multiplicative Identity.
 A \emph{Rng} (\S\ref{sec:rng}) is a Pseudo-ring that satisfies all
 Ring axioms except a Multiplicative Identity.
 
+a Non-trivial Commutative Ring such that every Non-zero element has a
+Multiplicative Inverse is a \emph{Field} (\S\ref{sec:field})
+
 \begin{itemize}
   \item $\ints$ Integers (\S\ref{sec:integer})
   \item Holonomic Functions (\S\ref{sec:holonomic_function})
@@ -3397,6 +3419,10 @@ a Biring (\S\ref{sec:biring}) is both a Ring and a Coring
 \subsection{Finite Ring}\label{sec:finite_ring}
 % ------------------------------------------------------------------------------
 
+any Finite Simple Ring (\S\ref{sec:simple_ring}) is Isomorphic to the Ring
+$M_n(GF(q))$ of $n \times n$ Matrices (\S\ref{sec:matrix_ring}) over a Finite
+Field of Order $q$
+
 every Finite Field (\S\ref{sec:finite_field}) is an example of a Finite Ring
 
 
@@ -3409,6 +3435,10 @@ A \emph{Simple Ring} is a Nonzero Ring that has no Two-sided Ideal
 (\S\ref{sec:ring_ideal}) besides the Zero Ideal and itself.
 
 can always be considered as a \emph{Simple Algebra} (\S\ref{sec:simple_algebra})
+
+any Finite (\S\ref{sec:finite_ring}) Simple Ring is Isomorphic to the Ring
+$M_n(GF(q))$ of $n \times n$ Matrices (\S\ref{sec:matrix_ring}) over a Finite
+Field of Order $q$
 
 examples:
 \begin{itemize}
@@ -3440,6 +3470,10 @@ the equivalently for exchange of ``Left'' and ``Right''
 
 Matrix Ring $M_n(D)$ over a Division Ring (\S\ref{sec:division_ring}) $D$ is an
 Artinian (Semi-)simple Ring (\S\ref{sec:artinian_ring})
+
+any Finite (\S\ref{sec:finite_ring}) Simple Ring (\S\ref{sec:simple_ring}) is
+Isomorphic to the Ring $M_n(GF(q))$ of $n \times n$ Matrices over a Finite Field
+(\S\ref{sec:finite_field}) of Order $q$
 
 
 
@@ -3738,14 +3772,22 @@ Domain Ring
 
 a Commutative Domain
 
-An \emph{Integral Domain}, $R$, is a Non-zero Commutative Ring where
-if $ab = 0$ in $R$, then either $a = 0$ or $b = 0$ in $R$.
+An \emph{Integral Domain}, $R$, is a Non-zero Commutative Ring where if $ab = 0$
+in $R$, then either $a = 0$ or $b = 0$ in $R$, i.e. every Non-zero Element $a$
+has the \emph{Cancellation Property} that $ab = ac$ implies $b = c$.
+
 Equivalently, the product of any two non-zero elements is non-zero.
 
-All Finite Integral Domains are \emph{Finite Fields}
-(\S\ref{sec:finite_field}).
+generalization of the Ring of Integers
+
+All Finite Integral Domains are \emph{Finite Fields} (\S\ref{sec:finite_field}).
 
 Principal Ideal Domain
+
+\begin{itemize}
+  \item Gaussian Integers (\S\ref{sec:gaussian_integer})
+  \item ...
+\end{itemize}
 
 
 
@@ -3869,10 +3911,10 @@ Graded Vector Space (\S\ref{sec:graded_vectorspace})
 \subsection{Field}\label{sec:field}
 % ------------------------------------------------------------------------------
 
-A \emph{Field} is a Nonzero Commutative Ring
-(\S\ref{sec:commutative_ring}) with a Multiplicative Inverse for every
-Nonzero Element or equivalently a Ring whose Nonzero Elements form an
-Abelian Group (\S\ref{sec:commutative_group}) under Multiplication.
+A \emph{Field} is a Nonzero Commutative Ring (\S\ref{sec:commutative_ring}) with
+a Multiplicative Inverse for every Nonzero Element or equivalently a Ring whose
+Nonzero Elements form an Abelian Group (\S\ref{sec:commutative_group}) under
+Multiplication.
 
 since a Field is a Commutative Ring in which there are no Non-trivial Proper
 Ideals, any Field is a \emph{Dedekind Domain} (\S\ref{sec:dedekind_domain})
@@ -3880,10 +3922,21 @@ Ideals, any Field is a \emph{Dedekind Domain} (\S\ref{sec:dedekind_domain})
 cf. Division Algebras (\S\ref{sec:division_algebra}) which are not required to
 be Commutative
 
+\emph{Field Axioms}:
+\begin{itemize}
+  \item \emph{Associativity}
+  \item \emph{Commutativity}
+  \item \emph{Additive Identity}
+  \item \emph{Multiplicative Identity}
+  \item \emph{Additive Inverse}
+  \item \emph{Multiplicative Inverse}
+  \item \emph{Distributivity}
+\end{itemize}
+
 Functions in a Function Space (\S\ref{sec:function_space}) $X
 \rightarrow F$ into a Field $F$ have a Vector (\S\ref{sec:vector})
 structure with two Pointwise Addition Operators and Scalar
-Multiplication.
+Multiplication
 
 \url{https://johncarlosbaez.wordpress.com/2018/03/03/nonstandard-integers-as-complex-numbers/}:
 
@@ -3896,6 +3949,9 @@ that of the Continuum is \emph{Isomorphic} to some Sub-field of the Complex
 Numbers
 
 the only Ideals (\S\ref{sec:ring_ideal}) of a Field $F$ are $F$ and $\{0\}$
+
+\fist $\mathbb{F}_1$ -- ``Field of Characteristic $1$''; $\mathbb{F}_1$-geometry
+(\S\ref{sec:f1_geometry})
 
 
 
@@ -4017,9 +4073,63 @@ All Finite Fields of a given Order are \emph{Isomorphic}.
 
 Every Finite Field is an example of a Finite Ring (\S\ref{sec:finite_ring}).
 
+any Finite Simple Ring (\S\ref{sec:simple_ring}) is Isomorphic to the Ring
+$M_n(GF(q))$ of $n \times n$ Matrices (\S\ref{sec:matrix_ring}) over a Finite
+Field of Order $q$
+
+All Finite Integral Domains (\S\ref{sec:integral_domain}) are Finite Fields
+
+no Finite Field is Algebraically Closed
+
 Weil Conjectures (\S\ref{sec:weil_conjectures}): Propositions on the Generating
 Functions (\S\ref{sec:generating_function}) derived from counting the number of
-Points on Algebraic Varieties over Finite Fields (\S\ref{sec:finite_field})
+Points on Algebraic Varieties (\S\ref{sec:algebraic_variety}) over Finite Fields
+
+\begin{itemize}
+  \item $GF(2)$ -- Binary Field (\S\ref{sec:binary_field})
+  \item $GF(3)$
+  \item $GF(4)$
+  \item ...
+\end{itemize}
+
+\fist $\mathbb{F}_1$ -- ``Field of Characteristic $1$''; $\mathbb{F}_1$-geometry
+(\S\ref{sec:f1_geometry})
+
+
+
+\paragraph{Primitive Element}\label{sec:primitive_element}\hfill
+
+a (Group) Generator (\S\ref{sec:group_generator}) of the Multiplicative Group of
+the Field
+
+the number of Primitive Elements of a Finite Field $GF(q)$ is $\varphi(q - 1)$
+where $\varphi$ is Euler's Totient Function (\S\ref{sec:eulers_totient})-- only
+for $q=2,3$ is the Primitive Element unique
+
+implies that $x^q = x$ for every $x$ in $GF(q)$; when $q$ is Prime this is
+Fermat's Little Theorem
+
+if $a$ is a Primitive Element in $GF(q)$, then for any Non-zero Element $x$ in
+$F$, there is a unique Integer $n$ with $0 \leq n \leq q - 2$ such that
+$x = a^n$ where $n$ is called the \emph{Discrete Logarithm}
+(\S\ref{sec:discrete_logarithm}) of $x$ to the Base $a$
+
+
+
+\paragraph{Binary Field}\label{sec:binary_field}\hfill
+
+$GF(2)$
+
+$0$, $1$
+
+$+$ -- Logical XOR
+
+$\times$ -- Logical AND
+
+Characteristic $2$
+
+Vector Spaces over $GF(2)$ -- Bit Strings (``Machine Words''); \fist Nimbers
+(\S\ref{sec:nimber})
 
 
 
@@ -4079,6 +4189,21 @@ e.g. $p$-adic Numbers (\S\ref{sec:padic_number})
 \subsection{Field Extension}\label{sec:field_extension}
 % ------------------------------------------------------------------------------
 
+$L/K$ -- ``$L$ over $K$''; a Pair of a Subfield $K$ and an Extension Field $L$
+
+\emph{note}: the notation $L/K$ is purely formal and \emph{does not} imply
+Quotient or any other kind of Division
+
+given a Field Extension $L/K$, $L$ is a $K$-vector Space
+(\S\ref{sec:vector_space}) of Dimension $[L:K]$ called the \emph{Degree} of
+the Extension
+
+the Degree of an Extension is $1$ if and only if the two Fields are equal
+(Trivial Extension)
+
+Extensions of Degree $2$ are called \emph{Quadratic Extensions} and Extensions
+of Degree $3$ are called \emph{Cubic Extensions}
+
 if $D$ is Connected, the Meromorphic Functions
 (\S\ref{sec:meromorphic_function}) on $D$ form a Field Extension of the Complex
 Numbers
@@ -4090,7 +4215,14 @@ Numbers
 \subsubsection{Extension Field}\label{sec:extension_field}
 
 $\reals$ is an Extension Field of $\rats$
+
 $\comps$ is an Extension Field of $\reals$
+
+
+
+\subsubsection{Tower}\label{sec:tower}
+
+example $\rats \subseteq \reals \subseteq \comps$
 
 
 

@@ -7501,12 +7501,16 @@ Perceptron (\S\ref{sec:perceptron}) Model where the Separating Hyperplanes are
 chosen to have the largest distance to the nearest Training-data Point of any
 Class (\emph{Functional Margin})
 
-\fist Neural Networks (\S\ref{sec:ann}) -- a Perceptron is an \emph{Artificial
-  Neuron} (\S\ref{sec:artificial_neuron}) using the Unit Step Function
+\fist Neural Networks (\S\ref{sec:ann}) -- a Perceptron (or \emph{Linear
+  Threshold Unit}) is an \emph{Artificial Neuron}
+(\S\ref{sec:artificial_neuron}) using the Unit Step Function
 (\S\ref{sec:unit_step_function}) as the Activation Function
 
 \fist Single-layer Perceptron (\S\ref{sec:single_layer_perceptron})
 -- simplest Feed-forward Neural Network (\S\ref{sec:ffnn})
+
+\emph{Delta Rule} -- special case of Backpropagation
+(\S\ref{sec:backpropagation}) for training a Single-layer Neural network
 
 \fist Threshold Logic Unit (TLU \S\ref{sec:tlu})
 
@@ -8904,8 +8908,9 @@ a Neuron has no ``learning process'' (FIXME: clarify)
 
 \begin{itemize}
   \item Threshold Logic Unit (TLU \S\ref{sec:tlu})
-  \item Perceptron (\S\ref{sec:perceptron}) -- Neuron using the Unit Step
-    Function (\S\ref{sec:unit_step_function}) as the Activation Function
+  \item Perceptron (\S\ref{sec:perceptron}) or ``\emph{Linear Threshold Unit}''
+    -- Neuron using the Unit Step Function (\S\ref{sec:unit_step_function}) as
+    the Activation Function
   \item ...
 \end{itemize}
 
@@ -9034,16 +9039,24 @@ Batch methods:
 1982 - Werbos -
 \emph{Applications of Advances in Nonlinear Sensitivity Analysis}
 
+2017 - Fong, Spivak, Tuy\'eras - \emph{Backprop as Functor: A compositional
+  perspective on supervised learning}
+
 process of ``Training'' a Regression Model (\S\ref{sec:regression_analysis});
 cf. Maximum Likelihood Estimation (MLE \S\ref{sec:mle})
 
 cf. Gauss-Newton Algorithm (Non-linear Least Squares \S\ref{sec:gauss_newton})
+
+cf. \emph{Least Mean Squares} (LMS \S\ref{sec:lms})
 
 \emph{Neural Networks and Automated Differentiation} -
 \url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
 
 \emph{Backpropagation} -- Gradient Descent (\S\ref{sec:gradient_descent}) with
 Reverse-mode Automatic Differentiation (\S\ref{sec:automatic_differentiation})
+
+\emph{Delta Rule} -- special case of Backpropagation for updating the Weights of
+Input to Neurons in a Single-layer Neural Network
 
 (wiki): requires Derivatives of Activation Functions, which can be computed
 using Automatic Differentiation
@@ -9127,6 +9140,19 @@ FFNN
 
 Perceptron Learning Algorithm does not terminate if the ``Learning Set'' is not
 Linearly Separable, e.g. a Boolean Exclusive-OR problem
+
+(wiki):
+
+\emph{Delta Rule} -- special case of Backpropagation for Single-layer Neural
+Networks; for a Neuron $j$ with Activation Function $\phi(x)$, the Delta Rule
+for $j$'s $i$th Weight $w_{ji}$ is given by:
+\[
+  \Delta w_{ji} = r(t_j - y_j) \phi'(h_j) x_i
+\]
+where $r$ is the constant Learning Rate, $\phi'$ is the Derivative of the
+Activation Function, $x_i$ is the $i$th Input, $t_j$ is $j$'s target Output,
+$y_j$ is $j$'s actual Output, and $h_j$ is the Weighted Sum of $j$'s Inputs (the
+``Induced Local Field'')
 
 
 
