@@ -32,6 +32,11 @@ Algebra: Composition, ``Reductionist''
 
 Coalgebra: Decomposition, ``Black-boxes''
 
+\fist Representation Theory (\S\ref{sec:representation_theory}) -- (wiki): study
+of Abstract Algebraic Structures by \emph{Representing} their Elements as Linear
+Transformations (\S\ref{sec:linear_transformation}) of Vector Spaces
+(\S\ref{sec:vector_space}), and Modules over those Abstract Algebraic Structures
+
 \iffalse
 
 1 Set X:
@@ -223,21 +228,15 @@ two main Category Theoretic formulations of Universal Algebra:
 
 \emph{Generators} (\S\ref{sec:generator})
 
-\emph{Relations}
+\emph{Relations} (\S\ref{sec:relation})
 
-\emph{Finitely Presented}
-
-(\S\ref{sec:string_rewriting})
-
-\emph{Semigroup Presentation}
-
-Category Presentation (\S\ref{sec:category_presentation})
-
-$T$-algebra Presentation (\S\ref{sec:t_algebra_presentation})
+String Rewriting (\S\ref{sec:string_rewriting}) %FIXME: ???
 
 \emph{Presented by Generators and Relations}: obtained from a Structure Freely
 Generated (???) by a Set of Generators and imposed Relations among the
 Generators.
+
+\emph{Finitely Presented} (\S\ref{sec:finite_presentation})
 
 Free Algebra (\S\ref{sec:free_algebra})
 
@@ -250,6 +249,16 @@ Free Category (\S\ref{sec:free_category})
 Free Functor (\S\ref{sec:free_functor})
 
 Free Object (\S\ref{sec:free_object})
+
+\begin{itemize}
+  \item Semigroup Presentation (TODO)
+  \item Monoid Presentation (\S\ref{sec:monoid_presentation})
+  \item Group Presentation (\S\ref{sec:group_presentation})
+  \item Module Presentation (\S\ref{sec:module_presentation})
+  \item Category Presentation (\S\ref{sec:category_presentation})
+  \item $T$-algebra Presentation (\S\ref{sec:t_algebra_presentation})
+  \item ...
+\end{itemize}
 
 \asterism
 
@@ -306,11 +315,20 @@ Thm. \emph{In a Category of Algebras $\cat{C}$ (e.g. Models of a
 
 \subsubsection{Absolute Presentation}\label{sec:absolute_presentation}
 
+\subsubsection{Monoid Presentation}\label{sec:monoid_presentation}
+
+A \emph{Monoid Presentation} is a description of a Monoid in terms of a Set
+$\Sigma$ of Generators and a Set of Relations on the Free Monoid $\Sigma*$.
+
+
+
 \subsubsection{Group Presentation}\label{sec:group_presentation}
 
-A \emph{Group Presentation} is the definition of a Group $G$ by a Set $S$ of
-Generators (\S\ref{sec:free_group}) and a Set $R$ of Relations between the Words
-in $S$ that represent the same Element of $G$:
+(wiki)
+
+A \emph{Group Presentation} is the definition of a Group (\S\ref{sec:group}) $G$
+by a Set $S$ of Generators (\S\ref{sec:free_group}) and a Set $R$ of Relations
+between the Words in $S$ that represent the same Element of $G$:
 \[
   \langle S | R \rangle
 \]
@@ -318,12 +336,23 @@ The Group $G$ has this Presentation if it is Isomorphic to the Quotient
 (\S\ref{sec:quotient_group}) of a Free Group on $S$. The Set of Relations $R$ is
 said to \emph{Define} $G$ if every Relation in $G$ follows from those in $R$.
 
+multiple (Directed) Paths between two Elements in the Cayley Diagram
+(\S\ref{sec:cayley_graph}) of a Group indicates a Relation in the Group
+
+example -- the Finite Cyclic Group (\S\ref{sec:cyclic_group}) of Order $n$ has
+Presentation:
+\[
+  \langle{a | a^n = 1}\rangle
+\]
+where $1$ is the Group Identity
 
 
-\subsubsection{Monoid Presentation}\label{sec:monoid_presentation}
 
-A \emph{Monoid Presentation} is a description of a Monoid in terms of a Set
-$\Sigma$ of Generators and a Set of Relations on the Free Monoid $\Sigma*$.
+\subsubsection{Module Presentation}\label{sec:module_presentation}
+
+or \emph{Free Presentation} of a Module $M$ over a Commutative Ring $R$
+
+Generating Set (\S\ref{sec:generating_set})
 
 
 
@@ -1561,7 +1590,7 @@ Identity Element. A Loop with the Associative Property is a Group
 
 Macauley - Clemson University Math 4120: \emph{Visual Group Theory} - Youtube
 playlist:
-\url{https://www.youtube.com/watch?v=UwTQdOop-nU&list=PLwV-9DG53NDxU337smpTwm6sef4x-SCLv}
+\url{https://www.youtube.com/playlist?list=PLwV-9DG53NDxU337smpTwm6sef4x-SCLv}
 
 \fist See also Groupoids (\S\ref{sec:groupoid})
 
@@ -1601,8 +1630,9 @@ Topological \& Lie Groups:
 % ------------------------------------------------------------------------------
 
 A \emph{Group} is a Monoid (\S\ref{sec:monoid}) with an Inverse for every
-Element. That is, a Group is a Set $G$, and a Binary \emph{Group Operation},
-$\cdot$, expressed as a Tuple, $(G,\cdot)$, satisfying four \emph{Group Axioms}:
+Element. That is, a Group is a Set $G$, and a Binary \emph{Group Operation} (or
+\emph{Group Law}), $\cdot$, expressed as a Tuple, $(G,\cdot)$, satisfying four
+\emph{Group Axioms}:
 \begin{enumerate}
   \item Closure: $\forall a,b \in G, a \cdot b \in G$
   \item Associativity: $\forall a,b,c \in G, (a \cdot b) \cdot c = a
@@ -1622,24 +1652,34 @@ The Signature (\S\ref{sec:signature}) for Groups is $\{\cdot, 1, ^{-1}\}$.
 The number of Elements in a Group $\mathrm{G}$ is known as its \emph{Order} and
 may be denoted $|\mathrm{G}|$.
 
-an Integer $k$ that solves the Equation $b^k = a$ for an Element $a$ of a Group
-$G$ is a \emph{Discrete Logarithm} (\S\ref{sec:discrete_logarithm}):
-$k = \log_b a$
+a Generating Set (\S\ref{sec:group_generator}) is a Subset of the Elements such
+that every Element of the Group can be written as a Product of Powers of the
+Generators
 
-\fist Group Presentation (\S\ref{sec:group_presentation})
+\fist cf. Group Presentation (\S\ref{sec:group_presentation})
+
+An Integer $k$ that solves the Equation $b^k = a$ for an Element $a$ of a Group
+$G$ is a \emph{Discrete Logarithm} (\S\ref{sec:discrete_logarithm}):
+\[
+  k = \log_b a
+\]
+
+\emph{Cayley's Theorem} (\S\ref{sec:cayleys_theorem}): every Group is Isomorphic
+to the Permutation Group (\S\ref{sec:permutation_group}) of some Set
+
+(wiki): a Group Action (\S\ref{sec:group_action}) is a formal way to interpret
+the Elements of a Group as corresponding to some ``structure preserving''
+Transformations of some ``Space''
+
+every Group can be realized as the Fundamental Group
+(\S\ref{sec:fundamental_group}) of some Space (\S\ref{sec:space})
+
+\fist Homogeneous Space (\S\ref{sec:homogeneous_space})
 
 \fist an \emph{Algebraic Group} (or \emph{Group Variety}
 \S\ref{sec:algebraic_group}) is a Group that is an Algebraic Variety such that
 the Multiplication and Inversion Operations are given by Regular Maps
 (\S\ref{sec:regular_map}) on the Variety
-
-Every Group can be realized as the Fundamental Group
-(\S\ref{sec:fundamental_group}) of some Space (\S\ref{sec:space})
-
-\emph{Cayley's Theorem} (\S\ref{sec:cayleys_theorem}): every Group is Isomorphic
-to the Permutation Group (\S\ref{sec:permutation_group}) of some Set
-
-\fist Homogeneous Space (\S\ref{sec:homogeneous_space})
 
 A Group, $G$, within a Category, $\mathbf{C}$, may be viewed as a Subset of the
 Hom-set of an Object, $X$:
@@ -1658,12 +1698,29 @@ be seen as a Groupoid with a single Object
 
 \subsubsection{Group Generator}\label{sec:group_generator}
 
-a \emph{Generating Set} of a Group is a Subset such that every Element of the
-Group can be expressed as a combination (under the Group Operation) of Finitely
-many Elements of the Subset and their Inverses
+a \emph{Generating Set} of a Group is a Subset $S \subseteq G$ such that every
+Element of the Group can be expressed as a combination (under the Group
+Operation) of Finitely many Elements of the Subset and their Inverses, i.e. can
+be \emph{Generated} by $S$, denoted:
+\[
+  \langle{S}\rangle = G
+\]
+
+\fist cf. Group Presentation by Generators and Relations
+(\S\ref{sec:group_presentation})
+
+cf. Generating Set of a Module (\S\ref{sec:generating_set})
+
+\begin{itemize}
+  \item when $S = \varnothing$, $\langle{S}\rangle = \{ e \}$, the Trivial Group
+    (\S\ref{sec:trivial_group})
+  \item when $S = \{ a \}$ is a Singleton, $\langle{a}\rangle$ is the Cyclic
+    Subgroup (\S\ref{sec:cyclic_group}) of the Powers of $a$
+\end{itemize}
 
 Cyclic Subgroup (\S\ref{sec:cyclic_subgroup})
 
+see also:
 \begin{itemize}
   \item Roots of Unity (\S\ref{sec:unity_root}) -- the $n$th Roots of Unity form
     an irreducible Representation (\S\ref{sec:group_representation}) of any
@@ -1672,6 +1729,12 @@ Cyclic Subgroup (\S\ref{sec:cyclic_subgroup})
     Multiplicative Group of a Finite Field (\S\ref{sec:finite_field})
   \item ...
 \end{itemize}
+
+
+
+\subsubsection{Group Rank}\label{sec:group_rank}
+
+the Cardinality of the smallest Generating Set
 
 
 
@@ -1768,8 +1831,21 @@ A \emph{Conjugacy Class} for an Element $a$ is defined as:
 
 \subsubsection{Cayley Graph}\label{sec:cayley_graph}
 
+a \emph{Cayley Graph} is a Colored (\S\ref{sec:colored_graph}) Directed Graph
+(\S\ref{sec:directed_graph}) where the Nodes are Elements of the Group and
+Colored Edges according to the Generators of the Group
+
+multiple (Directed) Paths between two Elements in the Cayley Diagram of a Group
+indicates a Relation in the Group Presentation (\S\ref{sec:group_presentation})
+
 the Cayley Graph for a Cyclic Group (\S\ref{sec:cyclic_group}) is a Directed
 Cycle Graph (\S\ref{sec:directed_cycle})
+
+
+
+\subsubsection{Cycle Graph}\label{sec:group_cycle_graph}
+
+cf. Cycle Graph (Graph Theory \S\ref{sec:cycle_graph})
 
 
 
@@ -1955,7 +2031,11 @@ invariant under Conjugation (\S\ref{sec:conjugacy_class}) by the Elements of
 $G$, $gHg^{-1} = H$ and is denoted $H \triangleleft G$. $H$ is a Normal Subgroup
 of $G$ if and only if $\forall g \in G, gH = Hg$.
 
-In an Abelian Group, all Subgroups are Normal Subgroups.
+In an Commutative Group (\S\ref{sec:commutative_group}), all Subgroups are
+Normal Subgroups.
+
+A (Nontrivial) Group for which only the Trivial Group and the entire Group are
+Normal Subgroups is called a \emph{Simple Group} (\S\ref{sec:simple_group}).
 
 
 
@@ -2042,12 +2122,74 @@ Subgroup (\S\ref{sec:subgroup}) of $G$, called the \emph{Trivial Subgroup}:
 \[
     \{e\} \leq G
 \]
+The Trivial Group is the Group Generated by the Empty Set:
+\[
+  \langle{\varnothing}\rangle = \{ e \}
+\]
 
 All Trivial Groups are Isomorphic to each other, so \emph{the} Trivial Group may
 be spoken of. The Trivial Group is the Zero Object in the Category of Groups.
 
 The Trivial Group is a Cyclic Group (\S\ref{sec:cyclic_group}) of Order 1 and
 may be denoted $Z_1$ in this context.
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Cyclic Group}\label{sec:cyclic_group}
+% ------------------------------------------------------------------------------
+
+A Commutative Group (\S\ref{sec:commutative_group}) $G$ is \emph{Cyclic} when
+there exists an element $g \in G$ such that:
+\[
+    G = \langle{g}\rangle = \{ g^n | n \in \mathbb{Z} \}
+\]
+
+A Finite Cyclic Group of Order $n$ has Presentation
+(\S\ref{sec:group_presentation}):
+\[
+  \langle{a | a^n = 1}\rangle
+\]
+Every Finite Cyclic Group of Order $n$ is Isomorphic to the Additive Group
+$\mathbb{Z}/n\mathbb{Z}$ of the Integers Modulo $n$. The Abstract Finite Cyclic
+Group of Order $n$ is denoted $C_n$ or $Z_n$.
+
+Every Infinite Cyclic (or \emph{Monogenous}) Group is Isomorphic to the Additive
+Group $(\mathbb{Z}, +)$ of the Integers.
+
+Any Cyclic Group $G$ of Prime Order $p$ is a Commutative Simple Group
+(\S\ref{sec:simple_group}) and is Generated by \emph{any} $g \in G : g \neq e$.
+
+The Infinite Class of Cyclic Groups of Prime Order is one of the possible
+Classes in the classification of Finite Simple Groups
+(\S\ref{sec:finite_simple_group}).
+
+The Cayley Graph (\S\ref{sec:cayley_graph}) for a Finite Cyclic Group is a
+Directed Cycle Graph (\S\ref{sec:directed_cycle}).
+
+Finite Cyclic Groups $G = \{ e, g, g^2, \ldots, g^{n-1} \}$:
+\begin{itemize}
+  \item Order 1: Trivial Group (\S\ref{sec:trivial_group})
+  \item ...
+\end{itemize}
+
+Infinite Cyclic (Monogenous) Groups
+$G = \{ \ldots, g^{-1}, g^{-1}, e, g, g^2, \ldots \}$:
+\begin{itemize}
+  \item $\ints$ (\S\ref{sec:integer})
+  \item Frieze Group (\S\ref{sec:frieze_group})
+  \item ...
+\end{itemize}
+
+
+
+\subsubsection{Primary Cyclic Group}\label{sec:primary_cyclic_group}
+
+$\ints/p^k \ints$ for Prime Power $p^k$
+
+\emph{Fundamental Theorem of Commutative Groups}: every Finitely Generated
+Commutative Group is a Finite Direct Product of Primary Cyclic and Infinite
+Cyclic Groups
 
 
 
@@ -2079,9 +2221,14 @@ Field with a Scalar Multiplication Operation
 Free Module over the Ring $\ints$ of Integers
 
 \begin{itemize}
+  \item Cyclic Groups (\S\ref{sec:cyclic_group})
   \item Elliptic Curves (\S\ref{sec:elliptic_curve})
   \item ...
 \end{itemize}
+
+\emph{Fundamental Theorem of Commutative Groups}: every Finitely Generated
+Commutative Group is a Finite Direct Product of Primary Cyclic and Infinite
+Cyclic Groups
 
 
 
@@ -2123,38 +2270,6 @@ Circle Group (\S\ref{sec:circle_group})
 
 
 \subsubsection{Divisible Group}\label{sec:divisible_group}
-
-\subsubsection{Cyclic Group}\label{sec:cyclic_group}
-
-A Group $G$ is \emph{Cyclic} when there exists an element $g \in G$ such that:
-\[
-    G = \langle g \rangle = \{ g^n | n \in \mathbb{Z} \}
-\]
-Any Group $G$ of Prime Order is Cyclic is an Abelian Simple Group
-(\S\ref{sec:simple_group}) and is Generated by any $g \in G : g \neq
-e$.
-
-Every Finite Cyclic Group of Order $n$ is Isomorphic
-(\S\ref{sec:group_isomorphism}) to the Additive Group $\mathbb{Z}/n\mathbb{Z}$
-of the Integers Modulo $n$. The Infinite Class of Cyclic Groups of Prime Order
-is one of the possible Classes for the Classification of Finite Simple Groups
-(\S\ref{sec:finite_simple_group}).
-
-Every Infinite Cyclic Group is Isomorphic to the Additive Group $(\mathbb{Z},
-+)$ of the Integers.
-
-the Cayley Graph (\S\ref{sec:cayley_graph}) for a Cyclic Group is a
-Directed Cycle Graph (\S\ref{sec:directed_cycle})
-
-
-
-\paragraph{Finite Cyclic}\label{sec:finite_cyclic}\hfill
-
-\paragraph{Infinite Cyclic}\label{sec:infinite_cyclic}\hfill
-
-Frieze Group (\S\ref{sec:frieze_group})
-
-
 
 \subsubsection{Circle Group}\label{sec:circle_group}
 
@@ -2276,6 +2391,8 @@ Any Finite Non-abelian Group is of Even Order.
 
 All Finite Groups are Periodic Groups
 
+most Finite Groups are of Order $2^n$ (a Finite $2$-group)
+
 
 
 \subsubsection{Group Exponent}\label{sec:group_exponent}
@@ -2286,11 +2403,10 @@ All Finite Groups are Periodic Groups
 \subsection{Free Group}\label{sec:free_group}
 % ------------------------------------------------------------------------------
 
-The \emph{Free Group}, $F_S$, over a Set, $S$, called the \emph{Free
-  Generating Set}, consists of all Reduced Words
-(\S\ref{sec:group_word}) in $S$ as Elements and Concatenation of Words
-(with Reduction) as the Group Operation. As a Group Presentation
-(\S\ref{sec:group_presentation}):
+The \emph{Free Group}, $F_S$, over a Set, $S$, called the \emph{Free Generating
+  Set}, consists of all Reduced Words (\S\ref{sec:group_word}) in $S$ as
+Elements and Concatenation of Words (with Reduction) as the Group Operation. As
+a Group Presentation (\S\ref{sec:group_presentation}):
 \[
     F_S = \langle S, \rangle
 \]
@@ -2812,6 +2928,9 @@ a Symmetry Group that is a Discrete Isometry Group
 
 \emph{Dihedral Group}
 
+$D_1$ is Isomorphic to the Cyclic Group of Order $2$, $C_2$
+
+
 
 \subparagraph{Klein 4-group}\label{sec:klein_4group}\hfill
 
@@ -2843,7 +2962,7 @@ Unit Cell
 
 \subparagraph{Frieze Group}\label{sec:frieze_group}\hfill
 
-Infinite Cyclic Group (\S\ref{sec:infinite_cyclic})
+Infinite Cyclic Group (\S\ref{sec:cyclic_group})
 
 Discrete Subgroup (\S\ref{sec:discrete_group}) of the Isometry Group
 (\S\ref{sec:isometry_group}) of the Euclidean Plane
@@ -3084,8 +3203,10 @@ Diffeomorphisms (\S\ref{sec:diffeomorphism}), respectively
 
 \subsubsection{Group Representation}\label{sec:group_representation}
 
-Linear Transformations (\S\ref{sec:linear_transformation}) of Vector Spaces
-(\S\ref{sec:vector_space})
+\fist Representation Theory (\S\ref{sec:representation_theory}) -- (wiki): study
+of Abstract Algebraic Structures by \emph{Representing} their Elements as Linear
+Transformations (\S\ref{sec:linear_transformation}) of Vector Spaces
+(\S\ref{sec:vector_space}), and Modules over those Abstract Algebraic Structures
 
 
 
@@ -3249,6 +3370,8 @@ Types (\S\ref{sec:dependent_linear})
     becomes a kind of Semi-ring, $\cat{FinSet}\llbracket{X}\rrbracket$, the
     Ring of Hurwitz Series (TODO: xref) with Coefficients in $\cat{FinSet}$, and
     the Ring of Hurwitz Series over $\ints$
+  \item Tropical Semiring $(\reals \cup -\infty, \oplus, \bigodot)$ (Tropical
+    Geometry \S\ref{sec:tropical_geometry})
   \item ...
 \end{itemize}
 

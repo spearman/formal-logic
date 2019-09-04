@@ -655,6 +655,8 @@ Dirichlet Series (\S\ref{sec:dirichlet_series})
 
 
 
+\subsubsection{Formal Laurent Series}\label{sec:formal_laurent}
+
 \subsubsection{Generating Function}\label{sec:generating_function}
 
 or \emph{Generating Series}
@@ -1620,6 +1622,10 @@ of the Variety (FIXME: clarify)
 the Twisted Cubic (\S\ref{sec:twisted_cubic}) is the simplest example of a
 Projective Variety that is not Linear or a Hypersurface
 
+\begin{itemize}
+  \item Elliptic Curve (\S\ref{sec:elliptic_curve})
+\end{itemize}
+
 
 
 \subsubsection{Weighted Projective Space}\label{sec:weighted_projective_space}
@@ -1863,15 +1869,16 @@ by an Equation of the form:
 \]
 (``Weierstrass Equation'' \S\ref{sec:weierstrass_elliptic})
 
-formally a Smooth (Non-singular), Projective, Algebraic Curve of Genus
-(\S\ref{sec:scheme_genus}) $1$ with a given Rational Point
-(\S\ref{sec:rational_point}), $O$, on it
+formally a Smooth (Non-singular), Projective (\S\ref{sec:projective_variety}),
+Algebraic Curve of Genus (\S\ref{sec:scheme_genus}) $1$ with a given Rational
+Point (\S\ref{sec:rational_point}), $O$, on it
 
-an Elliptic Curve is also naturally a \emph{(Commutative) Group}: an Elliptic
-Curve is an Abelian Variety (\S\ref{sec:abelian_variety}) with Multiplication
-defined Algebraically with respect to which it is a Commutative Group and the
-specified Point $O$ (taken to be the Curve's ``Point at Infinity'' in the
-Projective Plane) serves as the Identity Element
+an Elliptic Curve is also naturally a \emph{(Commutative) Group} with the Group
+Operation defined geometrically: an Elliptic Curve is an Abelian Variety
+(\S\ref{sec:abelian_variety}) with Multiplication defined Algebraically with
+respect to which it is a Commutative Group and the specified Point $O$ (taken to
+be the Curve's ``Point at Infinity'' in the Projective Plane) serves as the
+Identity Element
 
 Elliptic Curves are examples of Algebraic Groups (\S\ref{sec:algebraic_group})
 
@@ -1881,6 +1888,68 @@ Elliptic Curves are examples of Algebraic Groups (\S\ref{sec:algebraic_group})
 the Discrete Logarithm Problem (\S\ref{sec:discrete_logarithm}) on Elliptic
 Curves or more general Abelian Varieties (\S\ref{sec:abelian_variety}) over
 Finite Fields (\S\ref{sec:finite_field})
+
+\asterism
+
+2006 - Silverman - \emph{An Introduction to the Theory of Elliptic Curves} -
+\url{https://www.math.brown.edu/~jhs/Presentations/WyomingEllipticCurve.pdf}
+(slides)
+
+Elliptic Curves over Finite Fields are Finite Groups
+
+ECDLP (Elliptic Curve Discrete Logarithm Problem)
+
+require that the Discriminant $\Delta = 4a^3 + 27b^2$ is \emph{Non-zero}, or
+equivalently that $x^3 + ax + b$ has \emph{distinct Roots}, ensuring that the
+Curve is Non-singular
+
+add Point $I$ ``at Infinity'' as an Additive Identity for the (Commutative)
+Group Operation $+$:
+\begin{itemize}
+  \item $P + I = I + P = P$
+  \item $P + (-P) = I$
+  \item $P + (Q + R) = (P + Q) + R$
+  \item $P + Q = Q + P$
+\end{itemize}
+
+\textbf{Thm.} (Poincare) \emph{For a Field $K$ and an Elliptic Curve
+  $E : y^2 = x^3 + ax + b$ with $a, b \in K$, the Set of Points of $E$ with
+  Coordinates in $K$, $E(K) = \{ (x,y) \in E : x, y \in K \} \cup \{ I \}$,
+  is a Subgroup of all the Points of $E$}
+
+i.e.: if $a$ and $b$ are in Field $K$, and $P_1$ and $P_2$ have Coordinates in
+$K$, then $P_1 + P_2$ also has Coordinates in $K$
+
+\textbf{Thm.} \emph{Over a Finite Field $\mathbb{F}_p$, the Group of Points
+  $E(\mathbb{F}_p)$ are always either a Cyclic Group or the Product of two
+  Cyclic Groups}
+
+Analytically, $E(\reals)$ is Isomorphic to the Circle Group $S^1$ or two copies
+of the Circle Group $S^1 \times C_2$ (FIXME: clarify)
+
+the Points of $E(\comps)$ forms a Torus $S^1 \times S^1$
+
+\textbf{Thm.} (Mordell 1922) \emph{$E(\rats)$ is a Finitely Generated
+  Commutative Group.}
+
+\textbf{Conjecture} \emph{There exist Elliptic Curve Groups $E(\rats)$ of
+  arbitrarily large Rank.}
+
+since $\ints$ is not a Field, $E(\ints)$ is \emph{not} a Subgroup of $E(\rats)$
+
+\textbf{Thm.} (Siegel 1928) \emph{For an Elliptic Curve $E : y^2 = x^3 + ax + b$
+  with $a, b \in \ints$, $E$ has only Finitely many Points $P = (x,y)$ with
+  Integer Coordinates $x,y \in \ints$.}
+
+i.e.: $E(\ints)$ is a Finite Set
+
+$E(\mathbb{F}_p)$ is a Finite Group with no more than $2p + 1$ Points (Elements)
+
+there are approximately $2p$ different Elliptic Curves defined over
+$\mathbb{F}_p$
+
+\emph{SEA (Schoof-Elkies-Atkin) Algorithm} -- find the Order of or number of
+Points on an Elliptic Curve over a Finite Field
 
 
 
@@ -2396,6 +2465,14 @@ cf. Formal Derivative (\S\ref{sec:formal_derivative})
 
 
 
+% ------------------------------------------------------------------------------
+\subsection{Functorial Geometry}\label{sec:functorial_geometry}
+% ------------------------------------------------------------------------------
+
+\fist Coordinate-free Geomtry (\S\ref{sec:coordinate_free})
+
+
+
 % ==============================================================================
 \section{Arithmetic Geometry}\label{sec:arithmetic_geometry}
 % ==============================================================================
@@ -2695,6 +2772,16 @@ note that every Ring is a Monoid when omitting its Addition
 piece-wise Linear or ``skeletonized'' Algebraic Geometry
 
 \fist $\mathbb{F}_1$-geometry
+
+2019 - Morrison - \emph{Tropical Geometry}
+
+Max-plus Arithmetic (Tropical Mathematics): redefines rules of Arithmetic by
+replacing Addition with taking a Maximum, and replacing Multiplication by
+Addition
+
+Tropical Semirings (\S\ref{sec:semiring})
+
+Max-linear Algebra
 
 
 

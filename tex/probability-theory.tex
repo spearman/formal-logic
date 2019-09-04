@@ -2871,7 +2871,7 @@ totality of Observations (\S\ref{sec:observation})
 
 Value of a Random Variable $X$ having some Probability Distribution $f(x)$
 
-Paired Observation (Dependent) (???)
+Paired Observation (Dependent), Unpaired Observation (Independent) (TODO: xref)
 
 (wiki):
 
@@ -4268,6 +4268,16 @@ Moments, then they are Uncorrelated; not all Uncorrelated Variables are
 Independent
 
 if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$
+
+\url{https://terrytao.wordpress.com/2014/06/05/when-is-correlation-transitive/}:
+given two Unit Vectors $v$, $w$ in a Real Inner Product Space
+(\S\ref{sec:inner_product}), the \emph{Correlation} between the Vectors is the
+Inner Product $\langle{v,w}\rangle$; the Correlation of two non-constant
+Square-integrable Real-valued Random Variables $X$ and $Y$ is the same as the
+Correlation between two Unit Vectors $v$, $w$ in the Hilbert Space $L^2(\Omega)$
+of Square-integrable Random Variables, where $v$ is the Normalization of $X$
+defined by subtracting the Mean (Expected Value) $E[X]$ and dividing by the
+Standard Deviation of $X$, and similarly for $w$ and $Y$
 
 
 
@@ -8875,6 +8885,43 @@ Neural Networks can be viewed as a generalization of Logistic Regression
 ANNs can be represented as \emph{Weighted Directed Graphs}
 (\emph{Directed Networks} \S\ref{sec:directed_network})
 
+\asterism
+
+2019 - Gavranovi\'c - \emph{Learning Functors using Gradient Descent} -
+\url{https://www.youtube.com/watch?v=PRt7Fu_-xr0}:
+
+Unsupervised Learning
+
+CycleGAN
+
+a ``\emph{Schema}'' is a Quotient Category $\cat{Free}(G)/\sim$
+
+Neural Networks as \emph{Parameterized Morphisms}, i.e. Morphisms in the
+Category $\cat{Para}(\cat{Euc})$ where $\cat{Euc}$ is the Category of Euclidean
+Spaces
+\[
+  \cat{Para} : (\mathcal{V}, I, \otimes)
+    \rightarrow (\cat{Para}(\mathcal{V}), I, \otimes)
+\]
+mapping between Small Symmetric Monoidal Categories
+
+$(\cat{Euc}, 1, \times)$
+
+(TODO: xref parameterized category)
+
+a \emph{Neural Network Architecture} is a Functor
+$Arch : \cat{Free}(G) \rightarrow \cat{Para}(\cat{Euc})$
+
+a \emph{Model} is a Functor $Model : \cat{Free}(G) \rightarrow \cat{Euc}$
+
+given an Architecture $Arch$ and a Parameter $p \in \mathcal{P}(Arch)$, a Model
+$Model_p : \cat{Free}(G) \rightarrow \cat{Euc}$ \emph{generalizes} the notion of
+a Model in Machine Learning, allowing it to be used for inference and evaluated
+
+Adversarial Loss, Path-equivalence Loss
+
+a \emph{Task} is a Schema + a Dataset
+
 
 
 \subsubsection{Artificial Neuron}\label{sec:artificial_neuron}
@@ -9105,6 +9152,65 @@ Backpropagation algorithm:
     Error and the Input
   \item Update each Weight via \emph{Gradient Descent}
 \end{enumerate}
+
+\asterism
+
+2019 - Fong, Johnson - \emph{Functorial Backpropagation and Symmetric Lenses} -
+\url{https://www.youtube.com/watch?v=s0WTRHe-4ZI}
+
+\fist Lenses (\S\ref{sec:lens})
+
+$A$ -- Input
+
+$B$ -- Output
+
+$P$ -- Parameters
+
+``\emph{Learners}'':
+
+$I : A \times P \rightarrow B$ -- \emph{Implement}
+
+$U : A \times P \times B \rightarrow P$ -- \emph{Update}
+
+$r : A \times P \times B \rightarrow A$ -- \emph{Request}
+
+when the Parameters are the Identity, $1$:
+
+$I : A \times 1 \rightarrow B$
+
+$U : A \times 1 \times B \rightarrow 1$
+
+$r : A \times 1 \times B \rightarrow A$
+
+then this is a a \emph{Set-based} ("\emph{Bare}") \emph{Lens}:
+
+$get : A \rightarrow B$ (Implement)
+
+$put : A \times B \rightarrow A$ (Request)
+
+alternatively, adding parentheses:
+
+$I : (A \times P) \rightarrow B$
+
+$U : (A \times P) \times B \rightarrow P$
+
+$r : (A \times P) \times B \rightarrow A$
+
+gives a Lens:
+
+$get : (A \times P) \rightarrow B$ (Implement)
+
+$put : (A \times P) \times B \rightarrow (A \times P)$ (Request $\times$ Update)
+
+(note that in this case, $put$ is composed of both Request and Update)
+
+"\emph{Lenses are Learners}"
+
+Composition of Learners
+
+\emph{Symmetric Lenses}
+
+... TODO
 
 
 

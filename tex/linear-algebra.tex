@@ -12,6 +12,8 @@
 \fist Linear Equations (\S\ref{sec:linear_equation}), Systems of Linear
 Equations (\S\ref{sec:linear_equation_system})
 
+\fist Max-linear Algebra (Tropical Geometry \S\ref{sec:tropical_geometry})
+
 \begin{itemize}
   \item $R$-modules (Module over a Commutative Ring \S\ref{sec:module}) -- an
     Abelian Group (\S\ref{sec:commutative_group}):
@@ -77,6 +79,7 @@ A Module Homomorphism is called a \emph{Linear Map} (or \emph{Linear
   Transformation} \S\ref{sec:linear_transformation})
 
 (wiki): related to Matrices by a Canonical Isomorphism of Abelian Groups (TODO)
+
 and viewing $R$ as a Right $R$-module, a Ring Isomorphism:
 \[
   End_R(R^n) \simeq M_n(R)
@@ -111,6 +114,9 @@ useful to study a Ring by the Category of Modules over a Ring; two Rings are
 Morita Equivalent (\S\ref{sec:morita_equivalence}) if their Module Categories
 are Equivalent
 
+\fist Module Presentation (\S\ref{sec:module_presentation}) -- Free Presentation
+of a Module $M$ over a Commutative Ring $R$
+
 
 
 % ------------------------------------------------------------------------------
@@ -125,6 +131,8 @@ said to \emph{Generate} $M$
 
 if $R$ is a Field, then a Generating Set is the same thing as a Basis
 (\S\ref{sec:basis})
+
+cf. Generating Set of a Group (\S\ref{sec:group_generator})
 
 
 
@@ -887,6 +895,11 @@ a Euclidean Vector Space with the Group Operation of Vector Addition is an
 example of a Non-compact (\S\ref{sec:compact_space}) Lie Group
 (\S\ref{sec:lie_group})
 
+2019 - Greco, Liang, Moortgat, Palmigiano - \emph{Vector Spaces as Kripke
+  Frames}: a Sound Semantics for Associative, Commutative, Unital Lambek
+Calculus (\S\ref{sec:lambek_grammar}) can be based on Vector Spaces by
+interpreting Fusion as the Tensor Product of Vector Spaces
+
 
 
 % ------------------------------------------------------------------------------
@@ -1491,14 +1504,6 @@ an Inner Product on a Real Vector Space is a Positive-definite
 (\S\ref{sec:symmetric_bilinear}) and a Positive-definite Hermitian Form
 (\S\ref{sec:hermitian_form})
 
-A \emph{Hilbert Space} (\S\ref{sec:hilbert_space}) is an Inner Product Space
-that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
-
-\fist Sliding Inner-product (Cross-correlation \S\ref{sec:cross_correlation})
-
-\fist Gramian Matrix (\S\ref{sec:gramian_matrix}): Hermitian Matrix of Inner
-Products
-
 Inner Product of Euclidean Vectors (\S\ref{sec:euclidean_vector}) is Positive
 Definite (\S\ref{sec:positive_definite}):
 \begin{align*}
@@ -1508,6 +1513,31 @@ Definite (\S\ref{sec:positive_definite}):
 
 the Dot Product of a Vector with itself gives the Squared Length or
 \emph{Quadrance} (\S\ref{sec:quadrance}) of a Vector
+
+$L^2$ Inner Product for Functions on an Interval $[a, b]$:
+\[
+  \langle{f(x), g(x)}\rangle_2 \defeq \int_a^b f(x) \overline{g(x)} dx
+\]
+(\url{https://www.youtube.com/watch?v=7ICYxBuS2iw})
+
+A \emph{Hilbert Space} (\S\ref{sec:hilbert_space}) is an Inner Product Space
+that is also a Complete Metric Space (\S\ref{sec:complete_metric_space}).
+
+\fist Sliding Inner-product (Cross-correlation \S\ref{sec:cross_correlation})
+
+\fist Gramian Matrix (\S\ref{sec:gramian_matrix}): Hermitian Matrix of Inner
+Products
+
+\emph{Correlation} (\S\ref{sec:statistical_correlation}) --
+\url{https://terrytao.wordpress.com/2014/06/05/when-is-correlation-transitive/}:
+given two Unit Vectors $v$, $w$ in a Real Inner Product Space, the
+\emph{Correlation} between the Vectors is the Inner Product
+$\langle{v,w}\rangle$; the Correlation of two non-constant Square-integrable
+Real-valued Random Variables $X$ and $Y$ is the same as the Correlation between
+two Unit Vectors $v$, $w$ in the Hilbert Space $L^2(\Omega)$ of
+Square-integrable Random Variables, where $v$ is the Normalization of $X$
+defined by subtracting the Mean (Expected Value) $E[X]$ and dividing by the
+Standard Deviation of $X$, and similarly for $w$ and $Y$
 
 
 
@@ -1668,10 +1698,17 @@ Closed Category except it is lacking Identities
 
 Tensor Product (\S\ref{sec:tensor_product}) of two Vectors
 
-$\vec{v}\vec{u}^T$
+of a $n$-dimensional Vector $\vec{v}$ and an $m$-dimensional Vector $\vec{u}$ is
+given by the Matrix Multiplication:
+\[
+  \vec{v}\vec{u}^T
+\]
+of an $n \times 1$ Column Vector with a $1 \times m$ Row Vector, resulting in a
+$n \times m$ Matrix
 
 the Outer Product of two Nonzero Vectors is always a Matrix of Rank 1
-(\S\ref{sec:rank})
+(\S\ref{sec:rank}), i.e. the Dimension of the Subspace ``Spanned'' by the Matrix
+is $1$-dimensional
 
 \fist Orthogonal Projection (\S\ref{sec:orthogonal_projection})
 
@@ -2041,6 +2078,9 @@ Factorization (\S\ref{sec:qr_decomposition}) with $r_{jj} > 0$
 
 for an $m \times n$ Matrix $A$, the Rank of $A$ plus the Nullity of $A$ is
 equal to $n$
+
+\fist the Rank (\S\ref{sec:rank}) of an Undirected Graph is the Rank of the
+Graph's Adjacency Matrix
 
 
 
@@ -4610,15 +4650,18 @@ $\mathsf{C}\ell_4(\comps)$
 \section{Representation Theory}\label{sec:representation_theory}
 % ==============================================================================
 
+(wiki): study of Abstract Algebraic Structures (Part \ref{sec:abstract_algebra})
+by \emph{Representing} their Elements as Linear Transformations
+(\S\ref{sec:linear_transformation}) of Vector Spaces (\S\ref{sec:vector_space}),
+and Modules over those Abstract Algebraic Structures
+
 %FIXME: this section was moved from category theory
 
-Given a Functor $R$ from a Group $G$ to a general Category
-$\cat{C}$:
+Given a Functor $R$ from a Group $G$ to a general Category $\cat{C}$:
 \[
     R : G \rightarrow \cat{C}
 \]
-Such a Functor $R$ is termed a \emph{Representation} of $G$ in
-$\cat{C}$.
+Such a Functor $R$ is termed a \emph{Representation} of $G$ in $\cat{C}$.
 
 Frobenius Algebra (\S\ref{sec:frobenius_algebra})
 
@@ -4647,8 +4690,10 @@ Elements of an Abstract Algebraic Structure are \emph{Represented} as Linear
 Transformations of Vector Spaces
 
 \begin{itemize}
+  \item Group Representations (\S\ref{sec:group_representation})
   \item Modules (\S\ref{sec:module}) can be seen as Representations of Rings
     (\S\ref{sec:ring})
+  \item ...
 \end{itemize}
 
 
