@@ -4253,6 +4253,9 @@ measure of how close two Random Variables are to having a \emph{Linear
 
 Normalized Covariance (\S\ref{sec:covariance})
 
+\fist cf. Cross-correlation (\S\ref{sec:cross_correlation}), Autocorrelation
+(\S\ref{sec:autocorrelation})
+
 \fist cf. Linear Regression (\S\ref{sec:linear_regression})
 
 cf. Observational Studies
@@ -7543,6 +7546,8 @@ Non-parametric method
 
 Instance-based Learning or Lazy Learning
 
+cf. kNN Regression (\S\ref{sec:knn_regression})
+
 
 
 \subsubsection{Multiclass Classification}\label{sec:multiclass}
@@ -8002,6 +8007,8 @@ Linearly on unknown Smooth Functions of Predictor Variables
 \paragraph{k-nearest Neighbors (KNN) Regression}\label{sec:knn_regression}
 
 Instance-based Learning or Lazy Learning
+
+cf. kNN Classification (\S\ref{sec:knn_classifier})
 
 
 
@@ -8838,6 +8845,12 @@ Feature Extraction
 
 
 
+\subsubsection{Autoencoder}\label{sec:autoencoder}
+
+\paragraph{Contractive Autoencoder}\label{sec:contractive_autoencoder}\hfill
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Artificial Neural Network (ANN)}\label{sec:ann}
 % ------------------------------------------------------------------------------
@@ -9088,6 +9101,11 @@ Batch methods:
 2017 - Fong, Spivak, Tuy\'eras - \emph{Backprop as Functor: A compositional
   perspective on supervised learning}
 
+Haskell -- $\mathtt{Numeric.Backprop}$ ($\mathtt{backprop}$ library)
+
+2018 - Le - \emph{A Purely Functional Typed Approach to Trainable Models} -
+\url{https://blog.jle.im/entry/purely-functional-typed-models-1.html}
+
 process of ``Training'' a Regression Model (\S\ref{sec:regression_analysis});
 cf. Maximum Likelihood Estimation (MLE \S\ref{sec:mle})
 
@@ -9286,17 +9304,114 @@ Cross-correlation (\S\ref{sec:cross_correlation})
 
 ReLU activation
 
+\asterism
+
+2014 - Olah - \emph{Neural Networks, Manifolds, and Topology} -
+\url{http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/} --
+
+to understand behavior of DNNs, start with low-dimensional DNNs
+
+lower-bounds on the complexity of a Neural Network capable of Classifying
+certain Datasets
+
+each Layer transforms the Datainto a new \emph{Representation}, and the
+final Representation is a \emph{Line} (Hyperplane) through the Data
+
+e.g. a tanh (Sigmoid) Layer consists of an Affine Transformation (Linear
+Transformation by the Weight Matrix and a Translation by the Bias) and
+point-wise application of tanh
+
+similarly for other ``standard'' Layers: Affine Transformation + pointwise
+application of Monotone Activation Function
+
+each such transformation deforms space but does not ``cut'', ``break'', or
+``fold'' it, i.e. it preserves \emph{Topological Invariants} (cf. Homeomorphisms
+or ``Bicontinuous Transformations'' \S\ref{sec:homeomorphism}), e.g. a Connected
+Set will be Connected after transformation and vice-versa
+
+\emph{Theorem}: a tanh Layer with a $N \times N$ Non-singular (Invertible)
+Weights Matrix is a Homeomorphism
+
+note tanh and sigmoid (logit) are Continuous Functions, but ReLU is \emph{not}
+
+Manifold (\S\ref{sec:manifold})
+
+\emph{Manifold Hypothesis}: TODO
+
+all $n$-dimensional Manifolds can be Untangled in $2n + 2$ Dimensions
+
+a Neural Net may attempt to stretch tangled portions as thinly as possible to
+pull the Manifolds apart, resulting in a local minimum; \emph{Contractive
+  Penalties}, i.e. penalizing the derivatives of layers at data points may be
+used to mitigate this (cf. Contractive Autoencoders
+\S\ref{sec:contractive_autoencoder})
+
+\asterism
+
+2015 - Olah - \emph{Neural Networks, Types, and Functional Programming}
+- \url{http://colah.github.io/posts/2015-09-NN-Types-FP/} --
+three perspectives on Deep Learning:
+\begin{enumerate}
+  \item Neuroscience, Biology
+  \item Representations, Transformations (``Manifold Hypothesis'')
+  \item Probability, finding Latent Variables
+\end{enumerate}
+extending (2.) to Deep Learning as a connection between \emph{Optimization} and
+\emph{Functional Programming} where \emph{Representations} correspond to
+\emph{Types}
+
+re-use of Functions (Abstraction)
+
+re-use of Nuerons: \emph{Weight Sharing} or ``\emph{Weight Tying}''-- CNNs, RNNs
+
+Neural Network ``patterns'' are Higher-order Functions:
+\begin{itemize}
+  \item Encoding RNNs are \emph{Folds}
+  \item Generative RNNs are \emph{Unfolds}
+  \item (general) RNNs are \emph{Accumulating Maps}
+  \item Bidirectional RNNs are a \emph{Zip} of a Left- and a Right-accumulating
+    Map
+  \item a Conv Layer is a \emph{Window Map} (Function applied to ``window''
+    around every element)
+  \item Recursive Neural Networks (TreeNets) are \emph{Catamorphisms}
+    (\S\ref{sec:catamorphism})
+  \item reverse TreeNets are \emph{Anamorphisms}
+  \item a Learned Vector is a \emph{Constant}
+  \item an Embedding Layer is \emph{List Indexing}
+\end{itemize}
+
 
 
 \paragraph{Convolutional Neural Network (CNN)}\label{sec:cnn}\hfill
 
 ``Regularized'' versions of Multi-layer Perceptrons (\S\ref{sec:mlp})
 
+``Convolution Layers'' don't actually do a Convolution
+(\S\ref{sec:convolution}):
+rather a \emph{Cross-correlation} (or ``Sliding Dot-product''
+\S\ref{sec:cross_correlation})
+
+\emph{Weight Sharing} or ``\emph{Weight Tying}''
+
+1989 - LeCun, Boser, Denker, Henderson, Howard, Hubbard, Jackel -
+  \emph{Backpropagation Applied to Handwritten Zip Code Recognition}
+
+2014 - Olah - \emph{Conv Nets: A Modular Perspective} -
+  \url{http://colah.github.io/posts/2014-07-Conv-Nets-Modular/}
+
 
 
 \paragraph{Recurrent Neural Network (RNN)}\label{sec:rnn}\hfill
 
-can be used to learn \emph{Sequential} mappings
+\emph{Stateful}; can be used to learn \emph{Sequential} mappings
+
+\emph{Weight Sharing} or ``\emph{Weight Tying}''
+
+
+
+\paragraph{Recursive Neural Network}\label{sec:recursive_nn}\hfill
+
+or \emph{TreeNet}
 
 
 
