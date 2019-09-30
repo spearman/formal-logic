@@ -7316,6 +7316,8 @@ given Input Value), other examples are Regression Analysis
 (\S\ref{sec:regression_analysis}) and Cluster Analysis (Unsupervised Learning
 \S\ref{sec:cluster_analysis})
 
+Loss (\S\ref{sec:objective_function}) -- Regularization Term (TODO)
+
 (wiki):
 
 \emph{Features} (Properties of Observations \S\ref{sec:observation} or
@@ -8847,6 +8849,20 @@ Feature Extraction
 
 \subsubsection{Autoencoder}\label{sec:autoencoder}
 
+(wiki): a type of ANN (\S\ref{sec:ann}) used to learn efficient Encoding
+(\S\ref{sec:encoding}) in an Unsupervised manner
+
+2018 - Le -
+\emph{A Purely Functional Typed Approach to Trainable Models (Part 3)} -
+\url{https://blog.jle.im/entry/purely-functional-typed-models-3.html}
+--
+an Autoencoder is a type of Model that Composes a Function that ``compresses''
+information with a Function that ``decompresses'' it, where \emph{Training} an
+Autoencoder involves Training the \emph{Composition} of the two Functions to
+produce the \emph{Identity Function}
+
+
+
 \paragraph{Contractive Autoencoder}\label{sec:contractive_autoencoder}\hfill
 
 
@@ -9238,6 +9254,10 @@ no Cycles between Nodes (Neurons)
 with the Logistic (Sigmoid) Activation Function, a Single-layer Neural Network
 is identical to a Logistic Regression Model (\S\ref{sec:logistic_regression})
 
+\url{https://blog.jle.im/entry/purely-functional-typed-models-3.html}: a
+Feed-forward Layer can be turned into a Recurrent Layer (\S\ref{sec:rnn}) or an
+Autoregressive Model (\S\ref{sec:autoregressive_model})
+
 
 
 \paragraph{Universal Approximation Theorem}
@@ -9407,8 +9427,49 @@ rather a \emph{Cross-correlation} (or ``Sliding Dot-product''
 
 \emph{Weight Sharing} or ``\emph{Weight Tying}''
 
+2015 - Karpathy - \emph{The Unreasonable Effectiveness of Recurrent Neural
+  Networks} -
+\url{http://karpathy.github.io/2015/05/21/rnn-effectiveness/}
+
+RNNs are Turing Complete (Siegelmann 1995)
+
+training Feed-forward or Convolution Nets is \emph{Optimization over
+  Functions}, training Recurrent Nets is \emph{Optimization over Programs}
+
+compared to standard Feed-forward or Convolutional Networks, a Recurrent Network
+does \emph{not} require mapping \emph{fixed-size} input Vector to a fixed-size
+Output Vector using a fixed amount of computational steps (e.g. the number of
+Layers)-- they can operate over \emph{Sequences} of Vectors in both the input
+and the Output
+\begin{itemize}
+  \item One-to-one: Feed-forward/Convolution (e.g. image classification)
+  \item One-to-many: Sequence output (e.g. image captioning)
+  \item Many-to-one: Sequence input (e.g. sentiment analysis)
+  \item Many-to-many: Sequence input and Sequence output (e.g. machine
+    translation)
+  \item Synced many-to-many: ``synced'' Sequence input and output (e.g. video
+    classification with label for each frame)
+\end{itemize}
+there are no pre-specified constraints on the \emph{lengths} of Sequences
+because the \emph{Recurrent Transformation} is fixed and can be applied an
+arbitrary number of times
+
+2018 - Le -
+\emph{A Purely Functional Typed Approach to Trainable Models (Part 2)} -
+\url{https://blog.jle.im/entry/purely-functional-typed-models-2.html}
+
 \fist Autoregressive Models (Time Series Analysis
 \S\ref{sec:autoregressive_model})
+
+2018 - Le -
+\emph{A Purely Functional Typed Approach to Trainable Models (Part 3)} -
+\url{https://blog.jle.im/entry/purely-functional-typed-models-3.html}
+-- a general Autoregressive Model $AR(p)$ of any Order $p$ can be defined as a
+\emph{Lagged} Fully Connected Layer
+
+
+
+\subparagraph{Long Short-Term Memory (LSTM)}\label{sec:lstm}\hfill
 
 
 
