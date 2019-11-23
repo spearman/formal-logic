@@ -60,6 +60,10 @@ $\cat{Prob}$ and those Morphisms are \emph{Random Variables}
 \emph{Field of Probabilities} (\emph{$\sigma$-algebra}
 (\S\ref{sec:sigma_algebra})
 
+\asterism
+
+2003 - Jaynes - \emph{Probability Theory: The Logic of Science}
+
 
 
 % ==============================================================================
@@ -1831,6 +1835,14 @@ Variance of the Estimator
 
 
 
+\subsubsection{Standardized Moment}\label{sec:standardized_moment}
+
+a \emph{Normalized} Moment, usually by division by an expression of the Standard
+Deviation rendering the Moment \emph{Scale Invariant}
+(\S\ref{sec:scale_invariance})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Cumulant}\label{sec:cumulant}
 % ------------------------------------------------------------------------------
@@ -2557,6 +2569,8 @@ Scale Invariance (\S\ref{sec:scale_invariance})
 \paragraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
 
 prototypical Power Law Distribution
+
+Scale Invariance (\S\ref{sec:scale_invariance})
 
 
 
@@ -7372,6 +7386,10 @@ Generative methods of determining Parameters for a Linear Classifier
   \item Naive Bayes Classifier (\S\ref{sec:naive_bayes})
 \end{itemize}
 
+\fist Generative Adversarial Network (GAN \S\ref{sec:gan}): combines a
+Generative Network (Model) with a Discriminative Network (Model
+\S\ref{sec:discriminative_model})
+
 
 
 \paragraph{Discriminative Model}\label{sec:discriminative_model}\hfill
@@ -9247,6 +9265,15 @@ Composition of Learners
 
 
 
+\subparagraph{BackPropagation Through Time (BPTT)}\label{sec:bptt}\hfill
+
+RNNs (\S\ref{sec:rnn})
+
+2014 - Gibiansky - \emph{Recurrent Neural Networks} -
+\url{http://andrew.gibiansky.com/blog/machine-learning/recurrent-neural-networks/}
+
+
+
 \subsubsection{Feed-Forward Neural Network (FFNN)}\label{sec:ffnn}
 
 no Cycles between Nodes (Neurons)
@@ -9402,7 +9429,7 @@ Neural Network ``patterns'' are Higher-order Functions:
 
 
 
-\paragraph{Convolutional Neural Network (CNN)}\label{sec:cnn}\hfill
+\subsubsection{Convolutional Neural Network (CNN)}\label{sec:cnn}
 
 ``Regularized'' versions of Multi-layer Perceptrons (\S\ref{sec:mlp})
 
@@ -9421,11 +9448,24 @@ rather a \emph{Cross-correlation} (or ``Sliding Dot-product''
 
 
 
+\subsubsection{Recursive Neural Network}\label{sec:recursive_nn}
+
+or \emph{TreeNet}
+
+
+
 \paragraph{Recurrent Neural Network (RNN)}\label{sec:rnn}\hfill
+
+special case of Recursive Neural Network with structure of a \emph{linear chain}
+(FIXME: clarify)
 
 \emph{Stateful}; can be used to learn \emph{Sequential} mappings
 
 \emph{Weight Sharing} or ``\emph{Weight Tying}''
+
+BackPropagation Through Time (BPTT \S\ref{sec:bptt})
+
+\asterism
 
 2015 - Karpathy - \emph{The Unreasonable Effectiveness of Recurrent Neural
   Networks} -
@@ -9454,6 +9494,23 @@ there are no pre-specified constraints on the \emph{lengths} of Sequences
 because the \emph{Recurrent Transformation} is fixed and can be applied an
 arbitrary number of times
 
+\asterism
+
+2011 - Sutskever, Martens, Hinton -
+  \emph{Generating Text with Recurrent Neural Networks}
+
+Hessian-Free (HF) Optimization (Truncated Newton Method
+\S\ref{sec:truncated_newton})
+
+Multiplicative RNN (\S\ref{sec:mrnn})
+
+``Vanishing/Exploding Gradients Problem''
+
+an RNN can be viewed as a \emph{very} Deep Neural Network with \emph{Weight
+  Sharing} accross Time
+
+\asterism
+
 2018 - Le -
 \emph{A Purely Functional Typed Approach to Trainable Models (Part 2)} -
 \url{https://blog.jle.im/entry/purely-functional-typed-models-2.html}
@@ -9469,13 +9526,66 @@ arbitrary number of times
 
 
 
+\subparagraph{Simple Recurrent Neural Network (SRNN)}\label{sec:srnn}\hfill
+
+\textbf{Elman Network}
+
+\url{https://www.youtube.com/watch?v=e2sGq_vI41s}:
+
+Temporal XOR:
+$0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0$
+
+
+\textbf{Jordan Network}
+
+
+
+\subparagraph{Multiplicative Recurrent Neural Network (MRNN)}\label{sec:mrnn}
+\hfill
+
+2014 - Gibiansky - \emph{Recurrent Neural Networks} -
+\url{http://andrew.gibiansky.com/blog/machine-learning/recurrent-neural-networks/}
+
+
+
 \subparagraph{Long Short-Term Memory (LSTM)}\label{sec:lstm}\hfill
 
 
 
-\paragraph{Recursive Neural Network}\label{sec:recursive_nn}\hfill
+\subsubsection{Generative Adversarial Network (GAN)}\label{sec:gan}
 
-or \emph{TreeNet}
+(wiki):
+
+a pair of Neural Networks contest with each other in a Game (\S\ref{sec:game})
+
+originally proposed as a form of Generative Model
+(\S\ref{sec:generative_model}) for Unsupervised Learning (cf. Cluster Analysis,
+Density Estimation),
+also applied to Semi- and Fully-supervised Learning, and Reinforcement Learning
+
+\emph{Generative Network} (cf. Generative Model) -- generates ``candidates'';
+typically a ``Deconvolutional'' Network
+
+\emph{Generative Model} (cf. Discriminative Model
+\S\ref{sec:discriminative_model}) -- ``evaluates'' candidates; typically a
+Convolutional Network
+
+given a Training Set, the GAN is to \emph{learn} to generate new Data with the
+same \emph{Statistics} as the Training Set
+
+the Generative Network's Objective is to increase the Loss of the Discriminator
+Network by producing novel candidates that the Discriminator accepts as part of
+the ``true'' Data Distribution
+
+the Discriminator is Trained by being presented with Samples from the Training
+Dataset
+
+the Generator typically seeded with randomized Input Sampled from a predefined
+``Latent Space'' (e.g. a Multivariate Normal Distribution)
+
+candidates synthesized by the Generator are evaluated by the Discriminator, and
+the Generator is Trained based on whether it succeeds in ``fooling'' the
+Discriminator
 
 
 
@@ -9603,8 +9713,12 @@ Sequence of IID Observations is a special case (cf. Random Sample
 Determinstic Process exhibiting Statistical Randomness
 (\S\ref{sec:statistical_randomness})
 
-\fist Stochastic Calculus (\S\ref{sec:stochastic_calculus}):
+\fist Stochastic Calculus (\S\ref{sec:stochastic_calculus}) -- consistent theory
+of Integration defined for Integrals of Stochastic Processes with respect to
+Stochastic Processes:
 \begin{itemize}
+  \item Stochastic Differential Equation (\S\ref{sec:sde}) -- Differential
+    Equation in which one or more Terms is a Stochastic Process
   \item Predictable Process (\S\ref{sec:predictable_process}) -- Process whose
     value is knowable at a prior time; smallest Class of Processes that is
     Closed under taking limits of Sequences (FIXME: clarify)
@@ -9731,6 +9845,12 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 \subsection{Discrete-time Stochastic Process}\label{sec:discretetime_stochastic}
 % ------------------------------------------------------------------------------
 
+\begin{itemize}
+  \item Discrete-time Martingale (\S\ref{sec:martingale})
+\end{itemize}
+
+
+
 \subsubsection{Bernoulli Process}\label{sec:bernoulli_process}
 
 Mathematical Formalization of \emph{Binomial (Bernoulli) Trials}
@@ -9757,14 +9877,6 @@ Random Sequence (\S\ref{sec:random_sequence})
 \emph{Infinite Bernoulli Sequences} -- cf. \emph{Collectives} (Von Mises57); a
 solution to the ``Reference Class Problem'' of Frequentist Probability Theory;
 cf. (Martin-L\"of66)
-
-
-
-\subsubsection{Martingale}\label{sec:martingale}
-
-\begin{itemize}
-  \item Stopped Brownian Motion
-\end{itemize}
 
 
 
@@ -9814,6 +9926,8 @@ Fractional Brownian Motions
 or \emph{Brownian Motion}
 
 $H = 1/2$
+
+Semimartingale (\S\ref{sec:semimartingale})
 
 
 
@@ -10086,6 +10200,38 @@ $\int h(x) f(x) dx$ using a Markov Chain with Stationary Distribution $f$
 
 
 % ------------------------------------------------------------------------------
+\subsection{Martingale}\label{sec:martingale}
+% ------------------------------------------------------------------------------
+
+may be Discrete-time or Continuous-time
+
+
+
+\subsubsection{Stopped Brownian Motion}\label{sec:stopped_brownian_motion}
+
+\subsubsection{Local Martingale}\label{sec:local_martingale}
+
+\subsubsection{Semimartingale}\label{sec:semimartingale}
+
+(wiki): can be decomposed as the sum of a Local Martingale and an Adaptive
+Finite-variation Process (\S\ref{sec:adaptive_process})
+
+class of Semimartingales includes Wiener Processes (Brownian Motion
+\S\ref{sec:wiener_process}) and Poisson Processes
+(\S\ref{sec:poisson_process})
+
+largest class of Processes for which the It\^o Integral
+(\S\ref{sec:ito_integral}) and Stratanovich Integral can be defined
+
+
+
+\paragraph{Submartingale}\label{sec:submartingale}\hfill
+
+\paragraph{Supermartingale}\label{sec:supermartingale}\hfill
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Random Measure}\label{sec:random_measure}
 % ------------------------------------------------------------------------------
 
@@ -10149,6 +10295,8 @@ Counting occurrences of ``Events'' over time (e.g. traffic accidents,
 radioactive decay; cf. Propensity Interpretation of Probability)
 
 Memory-less
+
+Semimartingale (\S\ref{sec:semimartingale})
 
 Properties of a Poisson Process on the Real Line: the number of Points
 (``Events'') in Disjoint Intervals are Independent and have a Poisson
