@@ -1306,7 +1306,7 @@ or \emph{Argand Plane}
 \emph{Fundamental Theorem of Algebra link between ``Algebra'' and
   ``Geometry''}: a Monic Polynomial (Univariate with Complex Coefficients
 \S\ref{sec:monic_polynomial}), an Algebraic Object, is determined by the Set of
-its Roots (\S\ref{sec:function_root}), a Geometric Object, in the Complex
+its Roots (\S\ref{sec:root}), a Geometric Object, in the Complex
 Plane.
 
 
@@ -1526,19 +1526,11 @@ Automorphic Form (\S\ref{sec:automorphic_form})
 
 \emph{Radical}
 
-\emph{$n$th-root}
+\emph{$n$th-root}; cf. Root of a Function (\S\ref{sec:root})
 
 Algebraic Expressions (\S\ref{sec:algebraic_expression})
 
-
-
-\subsubsection{Root of Unity}\label{sec:unity_root}
-
-a Complex Number that gives $1$ when raised to some Positive Integer Power $n$
-
-the Center (\S\ref{sec:group_center}) of $SL(n,F)$ is the Set of all Scalar
-Matrices (\S\ref{sec:scalar_matrix}) with Unit Determinant and is Isomorphic to
-the Group of $n$th Roots of Unity of the Field $F$
+Root of Unity (\S\ref{sec:root_of_unity})
 
 
 
@@ -1725,6 +1717,15 @@ unique Probability Measure (\S\ref{sec:probability_measure})
 \fist Convolution (\S\ref{sec:convolution}), Cross-correlation
 (\S\ref{sec:cross_correlation})
 
+Periodic, Continuous -- Fourier Series (\S\ref{sec:fourier_series})
+
+Periodic, Discrete -- Discrete Fourier Transform (\S\ref{sec:dft})
+
+Aperiodic, Continuous -- Fourier Transform
+  (\S\ref{sec:continuous_fourier_transform})
+
+Aperiodic, Discrete -- Discrete-time Fourier Transform (\S\ref{sec:dtft})
+
 
 
 \subsubsection{Periodic Function}\label{sec:periodic_function}
@@ -1844,6 +1845,8 @@ e.g. Elliptic Functions (\S\ref{sec:elliptic_function})
 
 \subsubsection{Fourier Series}\label{sec:fourier_series}
 
+Fourier Analysis of a Periodic, Continuous Function
+
 representation of an arbitrary Periodic Function by a Series of weighted $cos$
 and $sin$ (\S\ref{sec:trigonometric_function}) Terms
 
@@ -1852,6 +1855,14 @@ and $sin$ (\S\ref{sec:trigonometric_function}) Terms
 \fist cf. \emph{Fourier Transform} (\S\ref{sec:fourier_transform}) removes the
 requirement of Fourier Series of being restricted to expressing functions on
 Finite Intervals to being able to express functions on Infinite Intervals
+
+DFT (\S\ref{sec:dft}): ``\emph{Discrete-time Fourier Series}''; Fourier Series
+of a Periodic, Discrete Signal
+
+DTFT (\S\ref{sec:dtft}): Fourier Transform of an Aperiodic, Discrete Signal;
+computed from a Sequence of Real or Complex Numbers, which produces a Periodic
+Function of a Frequency Variable $\omega$
+
 
 (wiki):
 
@@ -4153,6 +4164,9 @@ an Implicit Equation relating the $x$ and $y$ Coordinate Variables:
   F(x,y) = 0
 \]
 
+a Solution of an Implicit Equation is a \emph{Root} (\S\ref{sec:root}) of the
+Function
+
 
 
 \subparagraph{Implicit Function}\label{sec:implicit_function}\hfill
@@ -5434,9 +5448,30 @@ a \emph{Discrete, Periodic Signal} has a \emph{Periodic and Discrete Frequency
 \subparagraph{Continuous Fourier Trasform}
 \label{sec:continuous_fourier_transform}\hfill
 
-\subparagraph{Discrete Fourier Trasform (DFT)}\label{sec:dft}\hfill
+Fourier Analysis of an Aperiodic, Continuous Function
+
+
 
 \subparagraph{Discrete-Time Fourier Trasform (DTFT)}\label{sec:dtft}\hfill
+
+Fourier Analysis of an Aperiodic, Discrete Signal
+
+the DTFT of a Sequence of Real or Complex Numbers is a Fourier Series
+(\S\ref{sec:fourier_series}) which produces a Periodic Function of a Frequency
+Variable $\omega$
+
+
+
+\subparagraph{Discrete Fourier Trasform (DFT)}\label{sec:dft}\hfill
+
+or \emph{Discrete-time Fourier Series (DTFS)}
+
+Fourier Analysis of a Periodic, Discrete Signal
+
+converts a \emph{Finite} Sequence of Samples into a Finite Sequence of Samples
+of the DTFT of the same length as the original Sequence
+
+as a (Complex) Orthogonal Matrix (TODO)
 
 
 
@@ -7746,13 +7781,17 @@ Partial Derivative of a Multivariable Vector-valued Function (TODO)
 
 
 
-\subsubsection{Root}\label{sec:function_root}
+\subsubsection{Root}\label{sec:root}
 
 A \emph{Root} (or \emph{Zero}) of a Vector-valued Function (including Real- or
 Complex-valued Functions) $f$ is an Element $x$ of the Domain of $f$ for which
 $f(x)$ is \emph{Zero}.
 
-\fist Root (Equations \S\ref{sec:equation_root})
+\fist cf. ``Root'' is sometimes used to mean a \emph{Solution} of an Equation,
+most accurately when it is the Solution of an Implicit Equation
+(\S\ref{sec:implicit_equation}) $f(x) = 0$
+
+\fist cf. $n$th-root or \emph{Radical} (\S\ref{sec:radical})
 
 \fist Root-finding Algorithms (Numerical Analysis \S\ref{sec:root_finding}) for
 Solving Non-linear Equations:
@@ -7761,8 +7800,14 @@ Solving Non-linear Equations:
   \item Linearization (\S\ref{sec:linearization})
 \end{itemize}
 
-Any Polynomial (\S\ref{sec:polynomial}) with Odd Degree has at least
-one Real Root.
+any Polynomial (\S\ref{sec:polynomial}) with Odd Degree has at least one Real
+Root
+
+for Polynomials of Degree $1$ through $4$, there are Closed-form solutions which
+produce all Roots
+
+$5$th-degree and higher-degree Polynomials do not have a general Algebraic
+Solution (\S\ref{sec:algebraic_expression}); \emph{Abel-Ruffini Theorem}
 
 (wiki):
 
@@ -7770,10 +7815,17 @@ The Fundamental Theorem of Algebra (\S\ref{sec:fundamental_algebra_theorem})
 states that every Polynomial of Degree $n$ has $n$ Complex Roots, counted with
 their Multiplicities (??? FIXME).
 
-\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial (one
-Variable with Complex Coefficients \S\ref{sec:monic_polynomial}), an Algebraic
-Object, is determined by the Set of its Roots, a Geometric Object, in the
-Complex Plane (\S\ref{sec:complex_plane}).
+\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial
+(Univariate with Leading Coefficient equal to $1$ \S\ref{sec:monic_polynomial}),
+an Algebraic Object, is determined by the Set of its Roots, a Geometric Object,
+in the Complex Plane (\S\ref{sec:complex_plane}).
+
+\asterism
+
+\begin{itemize}
+  \item the Golden Ration $\varphi$ is a Root of the Polynomial $x^2 - x - 1$
+  \item ...
+\end{itemize}
 
 \asterism
 
@@ -8250,19 +8302,42 @@ Minimum are met at the Point
 
 or \emph{Tensor Analysis}
 
+youtube playlists:
+
+\emph{Tensors for Beginners} -
+\url{https://www.youtube.com/playlist?list=PLJHszsWbB6hrkmmq57lX8BV-o-YIOFsiG}
+
+``Coordinate Definition'':
+
+a \emph{Tensor} is an object that is \emph{Invariant} under change of
+Coordinates, and has Components that change in in a ``special, predictable'' way
+under a change of Coordinates
+
+``Abstract Definition'':
+
+a Tensor is a collection of \emph{Vectors} and \emph{Covectors} combined using
+\emph{Tensor Product}
+
+\emph{Tensor Calculus} -
+\url{https://www.youtube.com/playlist?list=PLJHszsWbB6hpk5h8lSfBkVrpjsqvUGTCx}
+
 
 
 % ------------------------------------------------------------------------------
 \subsection{Tensor}\label{sec:linear_tensor}
 % ------------------------------------------------------------------------------
 
+a Tensor is a collection of \emph{Vectors} (\S\ref{sec:vector}) and
+\emph{Covectors} (Linear Forms \S\ref{sec:linear_form}) combined using
+\emph{Tensor Product}
+
+\fist Tensor (Abstract Algebra \S\ref{sec:tensor})
+
 wikipedia: Geometric Objects (???) that describe Linear Relations
 between Scalars, Vectors and other Tensors; Linear Relations such as
 Dot Product, Cross Product, Linear Maps
 
 %FIXME: merge with sec:tensor ???
-
-\fist Tensor (Abstract Algebra \S\ref{sec:tensor})
 
 \fist Metric Tensor (\S\ref{sec:metric_tensor})
 

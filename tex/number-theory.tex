@@ -146,6 +146,9 @@ Greatest Common Divisor (GCD)
 
 $gcd(0,n) = n$
 
+\emph{Euclidean Algorithm} (cf. Extended Euclidean Algorithm for finding Modular
+Multiplicative Inverses)
+
 \emph{Linear Combination Theorem}: The GCD of two non-zero Integers
 $a$ and $b$ is equal to the smallest possible Positive Linear
 Combination (\S\ref{sec:linear_combination}) of $a$ and $b$.
@@ -231,7 +234,11 @@ For $k$ such that $k$ is not a Power of $2$, then $2^k+1$ is Composite
 
 \paragraph{Coprime}\label{sec:coprime}\hfill
 
-Two Integers are \emph{Coprime} if $gcd (a,b) = 1$.
+Two Integers are \emph{Coprime} (or \emph{Relatively Prime}) if $gcd (a,b) = 1$.
+
+\fist an Integer $a$ has a Modular Multiplicative Inverse
+(\S\ref{sec:modular_inverse}) with respect to a Modulus $n$ if and only if
+$gcd (a, n) = 1$, and it is unique
 
 
 
@@ -375,7 +382,7 @@ Every Composite Number is a Kn\"odel Number by setting $n$ to $m -
 \subparagraph{Carmichael Number}\label{sec:carmichael_number}\hfill
 
 Composite Number $n$ satisfying $b^{n-1} \equiv 1 \mod n$ for all
-Integers $1 < b < n$ Relatively Prime to $n$
+Integers $1 < b < n$ Relatively Prime (Coprime) to $n$
 
 Subset $K_1$ of Kn\"odel Numbers
 
@@ -459,10 +466,18 @@ and Denominator are Coprime by:
 
 Rational Numbers are Dense (\S\ref{sec:density}) in Real Numbers
 
+the Rational Numbers are an example of a Module (over the Integers) that does
+not have a Basis
+
 Field of Rational Numbers \fist Arithmetic (Algebraic) Geometry
 (\S\ref{sec:arithmetic_geometry}): study of Zero Sets (\S\ref{sec:zero_set}) of
 Systems of Polynomial Equations (\S\ref{sec:polynomial_equation_system}) over
 the Rationals
+
+\fist cf. the \emph{Prime Field} (\S\ref{sec:prime_field}) is the minimal
+Subfield of any Field $F$ that is the smallest Subfield containing $1_F$ and is
+Isomorphic to either the Rational Number Field $\rats$ or to a Finite Field
+$F_p$ of Prime Order $p$
 
 \emph{Artin-Schreier Theorem} (\S\ref{sec:artin_schreier}):
 an Ordered Field (\S\ref{sec:ordered_field}) $F$ has an Algebraic Extension
@@ -871,6 +886,17 @@ the Complex Conjugate of the Complex Product $x^*y$ is equal to the Complex
 Product $y^*x$
 
 the addition of Complex Conjugates $z + z^*$ results in a Real Number
+
+
+
+\subsubsection{de Moivre Number}\label{sec:demoivre_number}
+
+a Complex Root of Unity (\S\ref{sec:root_of_unity}):
+a Complex Number that gives $1$ when raised to some Positive Integer Power $n$
+
+the Center (\S\ref{sec:group_center}) of $SL(n,F)$ is the Set of all Scalar
+Matrices (\S\ref{sec:scalar_matrix}) with Unit Determinant and is Isomorphic to
+the Group of $n$th Roots of Unity of the Field $F$
 
 
 
@@ -1328,6 +1354,8 @@ Algebraic Closure of $\rats_p$ is Isomorphic to the Complex Numbers
 
 Non-archimedean Field (\S\ref{sec:nonarchimedean_field})
 
+Local Arithmetic Dynamics (\S\ref{sec:local_arithmetic_dynamics})
+
 \emph{Cantor Set} (\S\ref{sec:cantor_set})
 
 
@@ -1348,8 +1376,9 @@ allows Positive Integer Exponents, and Algebraic Expressions
 Root) Exponents, however they do not include Transcendental Numbers
 (\S\ref{sec:transcendental}).
 
-\fist cf. Arithmetic (Algebraic) Geometry
-(\S\ref{sec:arithmetic_geometry})
+\fist Arithmetic (Algebraic) Geometry (\S\ref{sec:arithmetic_geometry})
+
+\fist Arithmetic Dynamics (\S\ref{sec:arithmetic_dynamics})
 
 \fist Max-plus Arithmetic (Tropical Mathematics \S\ref{sec:tropical_geometry}):
 replaces Addition with taking a Maximum, and replaces Multiplication by Addition
@@ -1376,6 +1405,19 @@ Factorials
 
 
 \subsubsection{Arithmetic Operation}\label{sec:arithmetic_operation}
+
+\emph{Hyperoperation Sequence}:
+\begin{itemize}
+  \item $0$ -- Successor
+  \item $1$ -- Addition
+  \item $2$ -- Multiplication
+  \item $3$ -- Exponentiation
+  \item $4$ -- Tetration
+  \item $5$ -- Pentation
+  \item ...
+\end{itemize}
+
+
 
 \paragraph{Addition}\label{sec:addition}\hfill
 
@@ -1410,6 +1452,8 @@ $L^1$ Metric (Taxicab Norm \S\ref{sec:p_norm})
 \paragraph{Multiplication}\label{sec:addition}\hfill
 
 \paragraph{Division}\label{sec:addition}\hfill
+
+Euclidean Division Theorem
 
 
 
@@ -1471,6 +1515,12 @@ Examples:
 
 
 \paragraph{Legendre Symbol}\label{sec:legendre_symbol}\hfill
+
+Odd Prime $p$ (i.e. Prime $p \neq 2$)
+
+an Integer $a$ is either a Quadratic Residue $a \equiv x^2 \mod p$ of some
+Square Number $x^2$, Congruent to Zero, $a \equiv 0 \mod p$, or otherwise is
+a Non-quadratic Residue $a \mod p$
 
 \[
   \Big(\frac{a}{p}\Big) = \begin{cases}
@@ -1607,7 +1657,8 @@ Peano Arithmetic without Induction
 \subsection{Modular Arithmetic}\label{sec:modular_arithmetic}
 % ------------------------------------------------------------------------------
 
-Partition of $\mathbb{Z}$ into $\mathbb{Z}/n$ by $n \in \mathbb{N}$.
+Partition of $\mathbb{Z}$ into $\mathbb{Z}/n$ by \emph{Modulus} $n \in
+\mathbb{N}$.
 
 For Prime $p \in \primes$ (``Freshman's Dream''):
 \[
@@ -1622,7 +1673,8 @@ $a \equiv b \mod n$ \emph{Congruent modulo $n$}
 
 For two Integers $a,b \in \mathbb{Z}$, $a$ and $b$ are in the same
 Quotient Set or \emph{Residue} (\S\ref{sec:residue}) if and only if
-$(a - b)|n$, denoted $a \equiv b \mod n$.
+$(a - b)|n$, denoted $a \equiv b \mod n$, i.e. the Difference between $a$ and
+$b$ is exactly Divisible by $n$
 
 \begin{enumerate}
 
@@ -1684,10 +1736,37 @@ $\equiv 0 \mod n$
 
 
 
+\paragraph{Residue Class}\label{sec:residue_class}\hfill
+
+a \emph{Residue Class} or \emph{Congruence Class} is an Equivalence Class formed
+by the Congruence Relation \emph{Congruence Modulo $n$}
+
+\fist the Elements of a Quotient Ring (\S\ref{sec:quotient_ring}) $R / I$ for a
+Two-sided Ideal $I$ are Residue Classes:
+\[
+  a \mod I = [a] = \overline{a} = a + I \defeq \{ a + x : x \in I \}
+\]
+for all $a \in R$
+
+(wiki):
+
+Arithmetic on Residue Classes: first perform Integer Arithmetic on the
+representatives of each Class, deterimining a Residue Class from which the
+computed representative is then the output of the Modular Operation; e.g. for
+$N = 17$, the output of $\overline{7} + \overline{15}$ is computed by finding
+the Integer Sum $7 + 15 = 22$ and then determining $22 \mod 17$ is the
+representative $5$:
+$\overline{7} + \overline{15} \equiv \overline{5} \mod 17$
+
+\fist see Montgomery Multiplication (\S\ref{sec:montgomery_multiplication}) for
+a fast Modular Multiplication algorithm
+
+
+
 \paragraph{Quadratic Residue}\label{sec:quadratic_residue}\hfill
 
 an Integer $q$ is a \emph{Quadratic Residue Modulo $n$} if it is Congruent to
-a Perfect Square Modulo $n$, i.e. if:
+a perfect Square Modulo $n$, i.e. if:
 \[
   \exists x . x^2 \equiv q (\mod n)
 \]
@@ -1725,10 +1804,38 @@ defined in terms of Legendre Symbols (\S\ref{sec:legendre_symbol}):
 
 
 
+\subsubsection{Modular Multiplicative Inverse}\label{sec:modular_inverse}
+
+a Modular Multiplicative Inverse of Integer $a$ is an Integer $x$ such that
+$ax \equiv 1 (\mod n)$
+
+such a Modular Inverse exists if and only if $a$ and $n$ are Coprime:
+$gcd(a,n)=1$; note that this means that the Integers Modulo any Prime $p$ forms
+a \emph{Finite Field} (\S\ref{sec:finite_field})
+
+if such an Inverse $x$ exists for $a$, there are an Infinite number of such
+Inverses in the Congruence Class $\overline{x}$ with respect to the Modulus $n$,
+and any Element of $\overline{a}$ will be an Inverse for any $\overline{x}$, but
+the Congruence Class itself will be the unqiue Modular Multiplicative Inverse--
+there is at most one Congruence Class of solutions to $ax \equiv 1 (\mod n)$
+
+\emph{Extended Euclidean Algorithm} (cf. Euclidean Algorithm for finding GCD)
+
+
+
 \subsubsection{Linear Congruence}\label{sec:linear_congruence}
 
-$ax \equiv b \mod n$ has solutions if and only if $d = gcd(a,n) | b$.
-If $d|b$ then there are exactly $d$ solutions in a given CSR $\mod n$.
+if $x$ is a solution then the Elements of the Congruence Class $\overline{x}$
+are solutions
+
+may have zero, one or several solutions (in distinct Congruence Classes)
+
+$ax \equiv b \mod n$ has solutions if and only if $d = gcd(a,n) | b$
+
+when $b = 1$, $x$ is a Modular Multiplicative Inverse, so $a$ has a Modular
+Inverse if and only if $a$ and $m$ are Coprime, i.e. $gcd(a,m) = 1$
+
+If $d|b$ then there are exactly $d$ solutions in a given CSR $\mod n$
 
 
 
@@ -1778,11 +1885,83 @@ For Prime $p$, $p$ has $\varphi(p-1)$ Primitive Roots.
 
 Index (Discrete Logarithm) %FIXME xref
 
+\fist Primitive Root of Unity (\S\ref{sec:root_of_unity}) -- an $n$th Root of
+Unity that is \emph{not} the $k$th Root of Unity for some smaller $k < n$
+
 
 
 \subsubsection{Montgomery Multiplication}\label{sec:montgomery_multiplication}
 
 method for fast Modular Multiplication
+
+(wiki)
+
+classical modular multiplication: compute $ab$, perform division by $N$ and
+subtract multiples of $N$ to cancel out high bits until remainder is less than
+$N$
+
+\emph{Montgomery Reduction} (or ``REDC''): \emph{add} multiples of $N$ to cancel
+out \emph{low} bits until result is a multiple of a ``convenient'' power-of-two
+constant $R > N$, then discard low bits producing a result less than $2N$, and
+then perform a final conditional subtraction to reduce to less than $N$, giving
+the desired product divided by $R$
+
+for representatives of Residue Classes $a, b \in [0, N - 1]$:
+\begin{itemize}
+  \item the Sum $a + b \in [0, 2N -2]$
+  \item the Difference $a - b \in [-N + 1, N - 1]$
+  \item the Product $ab \in [0, N^2 - 2N + 1]$
+\end{itemize}
+
+the representative $ab \in [0, N-1]$ can be expressed by applying the Euclidean
+Division Theorem:
+\[
+  ab = qN + r
+\]
+where $q$ is the Quotient $\lfloor{(ab) / N}\rfloor$ and $r \in [0, N-1]$ is the
+Remainder; $r$ can be determined by computing $q$, then Subtracting $qN$ from
+$ab$
+
+normally computing $q$ requires Division, which is expensive, so Montgomery
+Form can be used express the Elements of the Ring in which Modular Products can
+be computed without ``expensive'' Divisions
+
+Divisions \emph{are still necessary}, but they can be done with respect to a
+\emph{different} Divisior, $R$, which can be chosen to be a Power-of-two, so
+that Division can be replaced by \emph{bit-shifting}, \emph{or} chosen to be a
+whole number of ``machine words'' for which Division can be replaed by
+``omitting words'' (TODO: clarify)
+
+the ``Auxiliary Modulus'' $R$ must be a positive Integer such that
+$gcd(N, R) = 1$, i.e. $N$ and $R$ are Co-prime, and for computational purposes,
+it is necessary that Division and Reduction Modulo $R$ are inexpensive and that
+$R > N$
+
+the \emph{Montgomery Form} of the Residue Class $\overline{a}$ with respect to
+$R$ is $aR \mod N$, i.e. the representative of Residue Class $\overline{aR}$
+
+by the Distributive Law:
+\[
+  aR + bR = (a + b) R
+\] \[
+  aR - bR = (a - b) R
+\]
+(since $R$ and $N$ are Coprime, Multiplication by $R$ is an Isomorphism on the
+Additive Group $\ints / N \ints$)
+
+Multiplication of Montgomery Forms:
+\[
+  (aR \mod N) (bR \mod N) \mod N = (abR)R \mod N
+\]
+
+the intermediate product $(aR \mod N) (bR \mod N)$ is \emph{not} divisible by
+$R$
+
+since $R$ and $N$ are Coprime, there is an $R'$ whose Residue Class is the
+Modular Multiplicative Inverse (\S\ref{sec:modular_inverse}):
+\[
+  R R' \equiv 1 (\mod N)
+\]
 
 
 
@@ -1794,9 +1973,8 @@ Peano Arithmetic with Intuitionistic Logic
 
 G\"odel's \emph{Dialectica Interpretation}
 
-Proof Interpretation of Heyting Arithmetic into a Finite-type
-Extension of Primitive Recursive Arithmetic
-(System T \S\ref{sec:system_t}))
+Proof Interpretation of Heyting Arithmetic into a Finite-type Extension of
+Primitive Recursive Arithmetic (System T \S\ref{sec:system_t}))
 
 
 

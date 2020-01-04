@@ -1254,6 +1254,11 @@ a Category (\S\ref{sec:category}) can be seen as a Monoid with \emph{Type
 \fist cf. \emph{Monoidal Categories} (\S\ref{sec:monoidal_category}),
 Monoidal Adjunctions (\S\ref{sec:monoidal_adjunction})
 
+the Formula that picks out ``Single-threadedness'' in $\pi$-calculus
+(\S\ref{sec:pi_calculus}) is the same Formula that for a Monoid picks out
+``Primality'' (RCast 34
+\url{https://soundcloud.com/rchain-cooperative/rcast-34-deep-dive-into-tla})
+
 
 
 % ------------------------------------------------------------------------------
@@ -1722,8 +1727,8 @@ Cyclic Subgroup (\S\ref{sec:cyclic_subgroup})
 
 see also:
 \begin{itemize}
-  \item Roots of Unity (\S\ref{sec:unity_root}) -- the $n$th Roots of Unity form
-    an irreducible Representation (\S\ref{sec:group_representation}) of any
+  \item Roots of Unity (\S\ref{sec:root_of_unity}) -- the $n$th Roots of Unity
+    form an irreducible Representation (\S\ref{sec:group_representation}) of any
     Cyclic Group of Order $n$
   \item Primitive Element (\S\ref{sec:primitive_element}) -- a Generator of the
     Multiplicative Group of a Finite Field (\S\ref{sec:finite_field})
@@ -1806,6 +1811,14 @@ Characteristic Subgroup (\S\ref{sec:characteristic_subgroup})
 Commutator (\S\ref{sec:commutator})
 
 Commutator Subgroup (\S\ref{sec:commutator_subgroup})
+
+
+
+\subsubsection{Torsion Element}\label{sec:torsion_element}
+
+$g \in G$ is a \emph{Torsion Element} if $g^m = e$ for some $m$
+
+cf. Torsion (Modules \S\ref{sec:torsion})
 
 
 
@@ -2199,7 +2212,7 @@ Cyclic Groups
 
 or \emph{Abelian Group}
 
-In Abelian Groups, the Coproduct is Isomorphic to the Product:
+in Commutative Groups, the Coproduct is Isomorphic to the Product:
 \[
   A + B \cong A \times B
 \]
@@ -2211,18 +2224,26 @@ Spectrum (Homotopical Algebra \S\ref{sec:topological_spectrum})
 (the \emph{Gradation} or \emph{Grading}) of Abelian Groups $R_i$ such that
 $R_iR_j \subseteq R_{i+j}$
 
-\fist Modules (\S\ref{sec:module}) -- an Abelian Group and a Scalar Ring with a
-Scalar Multiplication Operation
+\fist Modules (\S\ref{sec:module}) -- a Commutative Group and a Scalar Ring with
+a Scalar Multiplication Operation
 
-\fist Vector Spaces (\S\ref{sec:vector_space}) -- an Abelian Group and a Scalar
-Field with a Scalar Multiplication Operation
+\fist Vector Spaces (\S\ref{sec:vector_space}) -- a Commutative Group and a
+Scalar Field with a Scalar Multiplication Operation
 
 \fist a Free Abelian Group (\S\ref{sec:free_commutative_group}) is exactly a
 Free Module over the Ring $\ints$ of Integers
 
+(wiki) every Commutative Group is a \emph{Module} over the Ring of Integers
+$\ints$ in a unique way, where multiplication by $n \in \ints$ is defined as $n$
+Additions of the Elements of the Group:
+\[
+  n x = x + x + \cdots + x
+\]
+
 \begin{itemize}
   \item Cyclic Groups (\S\ref{sec:cyclic_group})
-  \item Elliptic Curves (\S\ref{sec:elliptic_curve})
+  \item Elliptic Curves (\S\ref{sec:elliptic_curve}) as (Projective) Abelian
+    Varieties -- are also Algebraic Groups (\S\ref{sec:algebraic_group})
   \item ...
 \end{itemize}
 
@@ -2253,6 +2274,12 @@ Group $\ints^n$ and which Spans the Real Vector Space $\reals^n$
 
 
 \subparagraph{Integer Lattice}\label{sec:integer_lattice}\hfill
+
+or \emph{Cubic Lattice}
+
+$\ints^n$
+
+Lattice in $\reals^n$ with Points as $n$-tuples of Integers
 
 
 
@@ -2831,8 +2858,8 @@ entries
 
 $SZ(n,F)$ -- the Center (\S\ref{sec:group_center}) of $SL(n,F)$ is the Set of
 all Scalar Matrices (\S\ref{sec:scalar_matrix}) with Unit Determinant and is
-Isomorphic to the Group of $n$th Roots of Unity (\S\ref{sec:unity_root}) of the
-Field $F$
+Isomorphic to the Group of $n$th Roots of Unity (\S\ref{sec:root_of_unity})
+of the Field $F$
 
 
 
@@ -3400,6 +3427,8 @@ Identity ($0$), otherwise if the Additive Identity is \emph{never} reached by
 Summing the Multiplicative Identity, the Ring is said to have
 \emph{Characteristic Zero}
 
+for any Ordered Field (e.g. $\rats$, $\reals$), the Characteristic is $0$
+
 \fist $\mathbb{F}_1$ -- ``Field of Characteristic $1$''; $\mathbb{F}_1$-geometry
 (\S\ref{sec:f1_geometry})
 
@@ -3423,6 +3452,23 @@ Module Categories are Equivalent
 
 
 % ------------------------------------------------------------------------------
+\subsection{Zero Divisor}\label{sec:zero_divisor}
+% ------------------------------------------------------------------------------
+
+Element $a$ of a Ring $R$ is a \emph{Left Zero Divisor} if
+$\exists x \neq 0 \in R. ax = 0$
+
+Element $a$ of a Ring $R$ is a \emph{Right Zero Divisor} if
+$\exists y \neq 0 \in R. ya = 0$
+
+a Zero Divisor that is not itself Zero is called a \emph{Non-zero Zero Divisor}
+or \emph{Non-trivial Zero Divisor}
+
+an Element that is \emph{not} a Zero Divisor is called a \emph{Regular Element}
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Ring Ideal}\label{sec:ring_ideal}
 % ------------------------------------------------------------------------------
 
@@ -3435,6 +3481,20 @@ Decomposition of an Integer into Prime Numbers in Algebra
 
 there is a Bijection between the Ideals and the Congruence Relations
 (\S\ref{sec:congruence_relation}) on a Ring
+
+a Left Ideal $(I, +)$ is a (``Additive'') Subgroup of $(R, +)$ with the
+\emph{(Left) Absorption Property}:
+\[
+  \forall r \in R, x \in I, \exists rx \in I
+\]
+
+Right Ideal
+
+Left Ideal
+
+Two-sided Ideal
+
+Quotient Ring (\S\ref{sec:quotient_ring}) $R / I$ -- Two-sided Ideal $I$
 
 \fist cf. Order Ideal (\S\ref{sec:order_ideal})
 
@@ -3451,12 +3511,6 @@ Polynomial Rings (\S\ref{sec:polynomial_ring}) and Algebraic Sets
 a Ring in which there is no Strictly Increasing Infinite Chain
 (\S\ref{sec:chain}) of Left Ideals is called a Noetherian Ring
 (\S\ref{sec:noetherian_ring})
-
-Right Ideal
-
-Left Ideal
-
-Two-sided Ideal
 
 \fist a Weyl Algebra (\S\ref{sec:weyl_algebra}) is Isomorphic to the Quotient
 of the Free Algebra (\S\ref{sec:free_algebra}) on two Generators, $X$ and $Y$,
@@ -3804,7 +3858,7 @@ $R[x_1, x_2]$ is Isomorphic to $R[x_1][x_2]$
 Polynomial Ring in $n$ Variables $R[x_1, \ldots, x_n]$
 
 an Algebraically Closed Field (\S\ref{sec:algebraically_closed}) $F$ contains a
-Root (\S\ref{sec:function_root}) for every Non-constant Polynomial in the Ring
+Root (\S\ref{sec:root}) for every Non-constant Polynomial in the Ring
 of Polynomials $F[x]$ in the Variable $x$ with Coefficients in $F$
 
 an Affine Algebraic Set (Affine Variety \S\ref{sec:affine_variety}) is the
@@ -3961,6 +4015,20 @@ two-way correspondence between Abstract Projective Geometries
 \subsection{Quotient Ring}\label{sec:quotient_ring}
 % ------------------------------------------------------------------------------
 
+\emph{Factor Ring}, \emph{Difference Ring}, or \emph{Residue Class Ring}
+
+Ring $R$, Two-sided Ideal $I$ (\S\ref{sec:ring_ideal})
+
+\emph{Quotient Ring} $R / I$ has Elements as the \emph{Cosets} of $I$ in $R$,
+i.e. the Equivalence Classes:
+\[
+  [a] = a + I \defeq \{ a + x : x \in I \}
+\]
+for $a \in R$ where the Equivalence Class $[a]$ may be written $a \mod I$ and is
+called the \emph{Residue Class} (\S\ref{sec:residue_class}) of $a$ Modulo $I$
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Local Ring}\label{sec:local_ring}
 % ------------------------------------------------------------------------------
@@ -4056,6 +4124,10 @@ be Commutative
   \item \emph{Distributivity}
 \end{itemize}
 
+the Field Axioms imply that a Field is a Commutative Group under Addition, and
+that the Non-zero Elements of a Field form a Commutative Group under
+Multiplication
+
 Functions in a Function Space (\S\ref{sec:function_space}) $X
 \rightarrow F$ into a Field $F$ have a Vector (\S\ref{sec:vector})
 structure with two Pointwise Addition Operators and Scalar
@@ -4075,6 +4147,33 @@ the only Ideals (\S\ref{sec:ring_ideal}) of a Field $F$ are $F$ and $\{0\}$
 
 \fist $\mathbb{F}_1$ -- ``Field of Characteristic $1$''; $\mathbb{F}_1$-geometry
 (\S\ref{sec:f1_geometry})
+
+
+
+\subsubsection{Root of Unity}\label{sec:root_of_unity}
+
+for Fields of Characteristic Zero, they are Complex Numbers that are also
+Algebraic Integers
+
+for Fields of Positive Characteristic, Roots of Unity belong to a Finite Field,
+and conversely every Non-zero Element of a Finite Field is a Root of Unity
+
+cf. de Moivre Number (\S\ref{sec:demoivre_number}): a Complex Root of Unity
+
+a \emph{Primitive Root of Unity} is an $n$th Root of Unity that is \emph{not}
+the $k$th Root of Unity for some smaller $k < n$
+
+if $n$ is Prime, then \emph{all} $n$-th Roots of Unity (except $1$) are
+Primitive
+
+for a Finite Field (\S\ref{sec:finite_field}), $GF(q)$, every Non-zero Element
+is a $(q-1)$th Root of Unity:
+\[
+  \forall x \in GF(q). x^{q-1} = 1
+\]
+and a Primitive $(q-1)$th Root of Unity is called a \emph{Primitive Element}
+(\S\ref{sec:primitive_element}) and is a Generator for the Multiplicative Group
+of the Field
 
 
 
@@ -4159,7 +4258,7 @@ $\algs$ of Real Algebraic Numbers (\S\ref{sec:algebraic_number})
 (wiki):
 
 an \emph{Algebraically Closed Field} $F$ contains a Root
-(\S\ref{sec:function_root}) for every Non-constant Polynomial in the Ring of
+(\S\ref{sec:root}) for every Non-constant Polynomial in the Ring of
 Polynomials (\S\ref{sec:polynomial_ring}) $F[x]$ in the Variable $x$ with
 Coefficients in $F$
 
@@ -4194,7 +4293,19 @@ A Finite Field of Order $q$ exists if and only if $q$ is a Prime Power
 (\S\ref{sec:prime_power}) $p^k$ for some Prime $p$ and Positive Integer $k$.
 All Finite Fields of a given Order are \emph{Isomorphic}.
 
-Integers Modulo a Prime have Multiplicative Inverses
+Integers Modulo a Prime $p$ have Modular Multiplicative Inverses
+(\S\ref{sec:modular_inverse}), and therefore form a Finite Field of Prime Order,
+denoted $F_p$ or $GF(p)$
+
+\fist cf. the \emph{Prime Field} (\S\ref{sec:prime_field}) is the minimal
+Subfield of any Field $F$ that is the smallest Subfield containing $1_F$ and is
+Isomorphic to either the Rational Number Field $\rats$ or to a Finite Field
+$F_p$ of Prime Order $p$
+
+the \emph{Characteristic} $p$ of a Finite Field $F$ is the least Integer $n$
+such that $n \cdot 1 = 0$, and defining Multiplication of Elements of $F$ by
+$GF(p)$ makes $F$ into a $GF(p)$-vector Space and it follows that the number of
+Elements of $F$ is $p^k$ for some $k$
 
 Every Finite Field is an example of a Finite Ring (\S\ref{sec:finite_ring}).
 
@@ -4220,12 +4331,23 @@ Points on Algebraic Varieties (\S\ref{sec:algebraic_variety}) over Finite Fields
 \fist $\mathbb{F}_1$ -- ``Field of Characteristic $1$''; $\mathbb{F}_1$-geometry
 (\S\ref{sec:f1_geometry})
 
+\fist Arithmetic Cryptography (\S\ref{sec:arithmetic_cryptography}) --
+Cryptographic Systems based on Discrete Logarithm Problem
+(\S\ref{sec:discrete_logarithm}) on Abelian Varieties
+(\S\ref{sec:abelian_variety}) over Finite Fields (\S\ref{sec:finite_field});
+e.g. Elliptic Curves (\S\ref{sec:elliptic_curve}) over Finite Fields
+
 
 
 \paragraph{Primitive Element}\label{sec:primitive_element}\hfill
 
-a (Group) Generator (\S\ref{sec:group_generator}) of the Multiplicative Group of
-the Field
+a \emph{Primitive Element} of a Finite Field $GF(q)$ is a Primitive $(q-1)$th
+Root of Unity (\S\ref{sec:root_of_unity}), i.e. an Element $g$ such that:
+\[
+  g^(q-1) = 1 \wedge (\forall k < q-2. g^k \neq 1)
+\]
+and is a (Group) Generator (\S\ref{sec:group_generator}) of the Multiplicative
+Group of a Finite Field
 
 the number of Primitive Elements of a Finite Field $GF(q)$ is $\varphi(q - 1)$
 where $\varphi$ is Euler's Totient Function (\S\ref{sec:eulers_totient})-- only
@@ -4308,6 +4430,8 @@ e.g. $p$-adic Numbers (\S\ref{sec:padic_number})
 \fist Non-archimedean Analytic Geometry
 (\S\ref{sec:nonarchimedean_analytic_geometry})
 
+\fist Local Arithmetic Dynamics (\S\ref{sec:local_arithmetic_dynamics})
+
 
 
 % ------------------------------------------------------------------------------
@@ -4336,6 +4460,14 @@ Numbers
 
 
 \subsubsection{Subfield}\label{sec:subfield}
+
+\paragraph{Prime Field}\label{sec:prime_field}\hfill
+
+the \emph{Prime Field} is the minimal Subfield of any Field $F$ that is the
+smallest Subfield containing $1_F$ and is Isomorphic to either the Rational
+Number Field $\rats$ or to a Finite Field $F_p$ of Prime Order $p$
+
+
 
 \subsubsection{Extension Field}\label{sec:extension_field}
 

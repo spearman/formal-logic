@@ -2691,9 +2691,11 @@ cf. Linear-Quadratic Regulator (LQR \S\ref{sec:lqr})
 
 
 % ------------------------------------------------------------------------------
-\subsection{Conditional Distribution}
-\label{sec:conditional_distribution}
+\subsection{Conditional Distribution}\label{sec:conditional_distribution}
 % ------------------------------------------------------------------------------
+
+cf. \emph{Discriminative Models} (Classification
+\S\ref{sec:discriminative_model})
 
 for Discrete Random Variables $X$, $Y$:
 
@@ -2719,8 +2721,8 @@ and:
 
 cf. \emph{Borel-Kolmogorov Paradox} -- the concept of a Conditional Probability
 with regard to an isolated given Hypothesis whose Probability equals $0$ is
-inadmissable (Kolmogorov33); Conditional Probability Density Functions need not
-be Invariant under Coordinate Transformations
+``\emph{inadmissable}'' (Kolmogorov33); Conditional Probability Density
+Functions need not be Invariant under Coordinate Transformations
 
 
 
@@ -7363,6 +7365,30 @@ Classification Algorithm
 ``Hierarchical Axis-parallel Classifiers''; Partitioning of Covariate Space;
 paths from Root to Leaf represent Classification Rules
 
+Classification Models (increasingly indirect):
+\begin{itemize}
+  \item Distribution-free Model (cf. Non-parametric Model
+    \S\ref{sec:nonparametric_model}, Descriptive Statistics
+    \S\ref{sec:descriptive_statistics}) -- compute a Label directly from an
+    Observation, without using a Probability Distribution
+  \item Discriminative Models (\S\ref{sec:discriminative_model}) -- tries to
+    Model the Conditional Distribution $P(Y|X = x)$ by depending on
+    \emph{Observed Data}-- Estimation of the Probability of a Label given an
+    Observation; makes fewer assumptions about Distributions and relies
+    more on \emph{Data quality}
+  \item Generative Models (\S\ref{sec:generative_model}) -- Model of the
+    Joint Probability Distribution on $X \times Y$; Estimation of the Joint
+    Distribution, which can then be used to compute the Conditional Probability
+    for Classification purposes
+\end{itemize}
+
+(symmetric):
+\begin{itemize}
+  \item Generative Model -- Model of the Observable given the Label $P(X|Y = y)$
+  \item Discriminative Model -- Model of the Label given the Observation
+    $P(Y|X = x)$
+\end{itemize}
+
 (Wasserman04, Ch.22)
 
 
@@ -7380,6 +7406,10 @@ Explanatory Variable (Regressor), ``Instance''
 Statistical Model of the Joint Probability Distribution
 (\S\ref{sec:joint_probability}) $P(X,Y)$
 
+an alternative definition is that a Generative Model is a Model of the
+Conditional Probability of the Observable given a Label: $P(X|Y = y)$
+(cf. Discriminative Model \S\ref{sec:discriminative_model} $P(Y|X = x)$)
+
 Generative methods of determining Parameters for a Linear Classifier
 (\S\ref{sec:linear_classifier}):
 \begin{itemize}
@@ -7389,12 +7419,13 @@ Generative methods of determining Parameters for a Linear Classifier
 \end{itemize}
 
 \fist Generative Adversarial Network (GAN \S\ref{sec:gan}): combines a
-Generative Network (Model) with a Discriminative Network (Model
-\S\ref{sec:discriminative_model})
+Generative Network with a Discriminative Network
 
 
 
 \paragraph{Discriminative Model}\label{sec:discriminative_model}\hfill
+
+or \emph{Conditional Model}
 
 Statistical Model of the Conditional Probability
 (\S\ref{sec:conditional_probability}) $P(Y | X = x)$
@@ -9646,7 +9677,7 @@ Universal Test, Universal Sequential Test (Martin-L\"of66)
 \emph{Mises-Church Randomness}: any Recursive Function which having read the
 first $N$ elements of the Sequence decides if it wants to select element $N+1$
 
-cf. Quasi-random Sequences (\S\ref{sec:low_discrepancy})
+cf. Quasi-random (Low-discrepancy) Sequences (\S\ref{sec:low_discrepancy})
 
 Tests (\S\ref{sec:hypothesis_testing}):
 \begin{itemize}
@@ -9680,6 +9711,8 @@ Deterministic System (\S\ref{sec:deterministic_system}) exhibiting Statistical
 Randomness
 
 cf. \emph{Stochastic Process} (\S\ref{sec:stochastic_process})
+
+cf. Quasi-random (Low Discrepancy) Sequences (\S\ref{sec:low_discrepancy})
 
 \emph{Hash Functions} can create ``Random Numbers'' solely based on an Input
 with no dependency on previous queries
@@ -9901,6 +9934,8 @@ Machine Learning: Lazy Learning (1D Gaussian Distributions)
 
 Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
 
+\fist Gauss-Markov Process (\S\ref{sec:gauss_markov_process})
+
 
 
 \paragraph{Fractional Brownian Motion}\label{sec:fractional_brownian}\hfill
@@ -9959,6 +9994,12 @@ GBM is Path Continuous
 Stochastic Process for which the Unconditional Joint Probability Distribution
 (\S\ref{sec:joint_probability}) does not change when shiften in Time (TODO:
 xref)
+
+\begin{itemize}
+  \item Ornstein-Uhlenbeck Process (\S\ref{sec:ornstein_uhlenbeck}) -- a
+    Stationary Gauss-Markov Process (\S\ref{sec:gauss_markov_process})
+  \item ...
+\end{itemize}
 
 
 
@@ -10198,6 +10239,18 @@ $\int h(x) f(x) dx$ using a Markov Chain with Stationary Distribution $f$
 
 
 \paragraph{Branching Process}\label{sec:branching_process}\hfill
+
+\paragraph{Gauss-Markov Process}\label{sec:gauss_markov_process}\hfill
+
+Gaussian Process (\S\ref{sec:gaussian_process})
+
+
+
+\paragraph{Ornstein-Uhlenbeck Process}\label{sec:ornstein_uhlenbeck}\hfill
+
+a Stationary Gauss-Markov Process
+
+or \emph{Damped Random Walk}
 
 
 
