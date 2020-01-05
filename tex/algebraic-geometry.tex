@@ -68,12 +68,38 @@ equal footing'' in contrast to Scheme Theory
 \section{Polynomial}\label{sec:polynomial}
 % ==============================================================================
 
-A \emph{Polynomial Expression} is an Expression containing Variables (or
-\emph{Indeterminates}) and Coefficients with only Arithmetic Operations
-(\S\ref{sec:arithmetic}) and Positive Integer Exponents
-(\S\ref{sec:exponentiation}) where the \emph{Degree} (\S\ref{sec:degree}) of
-the Polynomial is the largest such Exponent of any one Term with Nonzero
-Coefficient.
+(wiki):
+
+A \emph{Polynomial Expression}, $p$, is an Expression:
+\[
+  P = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x^1 + a_0 x^0
+\]
+containing \emph{Indeterminates} (Formal Symbols), $x, y, z, \ldots$, and
+Coefficients, $a_0, \ldots, a_n \in R$, taken from a Ring (\S\ref{sec:ring})
+$R$, with only Arithmetic Operations (\S\ref{sec:arithmetic}) and Positive
+Integer Exponents (\S\ref{sec:exponentiation}).
+
+Since the $x^i$ in this Formal Expression are placeholders, a Polynomial
+Expression is an \emph{encoding} of the Sequence $(a_0, a_1, \ldots)$ where $a_i
+= 0$ for all $i > n$, the largest Exponent or \emph{Degree} (\S\ref{sec:degree})
+of the Polynomial.
+
+The Set of all Polynomials with Coefficients in Ring $R$ itself forms a Ring,
+$R[x]$, called the \emph{Ring of Polynomials} or \emph{Free Commutative Algebra}
+over $R$ (\S\ref{sec:polynomial_ring}).
+
+$R[x]$ can be seen as arising from adding a new element $x$ to $R$ and
+extending $R$ with all Powers of $x$ and their Linear Combinations, so that $x$
+Satisfies only the required Relations and Commutes with all Elements of $R$ ($xr
+= rx$).
+
+for Commutative $R$, each Polynomial $P \in R[x]$ is associated to a
+\emph{Polynomial Function} (\S\ref{sec:polynomial_function}), $f(r)$ with Domain
+and Codomain $R$, obtained by the Substitution of $r$ for $x$ in $P$
+
+note that over some Rings, different Polynomial Expressions may give rise to the
+\emph{same} Polynomial Function (cf. Fermat's Little Theorem), but this is not
+the case for $R$ the Real or Complex numbers
 
 \fist Arithmetic Circuits (\S\ref{sec:arithmetic_circuit}): standard model for
 computing Polynomials in Computational Complexity Theory
@@ -109,7 +135,7 @@ Polynomials
 
 an Algebraically Closed Field (\S\ref{sec:algebraically_closed}) $F$ contains a
 Root (\S\ref{sec:root}) for every Non-constant Polynomial in the Ring
-of Polynomials (\S\ref{sec:polynomial_ring}) $F[x]$ in the Variable $x$ with
+of Polynomials $F[x]$ in the Variable $x$ with
 Coefficients in $F$
 
 the Set of Complex Numbers is the Quotient Ring of the Polynomial Ring in the
@@ -213,6 +239,10 @@ Solution (\S\ref{sec:algebraic_expression}); \emph{Abel-Ruffini Theorem}
 Theorem: two \emph{different} Polynomials of Degree at most $n$ can coincide in
 at most $n$ Points
 
+by the Fundamental Theorem of Algebra, a Univariate Polynomial is Absolutely
+Irreducible (i.e. Irreducible \S\ref{sec:irreducible_polynomial} in any Field
+containing the Coefficients) if and only if its Degree is $1$
+
 \emph{Genus-Degree Formula}
 
 relates Degree $d$ of an Irreducible (Algebraic) Plane Curve with its Arithmetic
@@ -279,6 +309,10 @@ Binomial Coefficients (\S\ref{sec:binomial_coefficient})
 
 Polynomial with a single Indeterminate
 
+by the Fundamental Theorem of Algebra, a Univariate Polynomial is Absolutely
+Irreducible (i.e. Irreducible \S\ref{sec:irreducible_polynomial} in any Field
+containing the Coefficients) if and only if its Degree is $1$
+
 
 
 \paragraph{Monic Polynomial}\label{sec:monic_polynomial}\hfill
@@ -338,14 +372,46 @@ or $-\infty$
 
 
 % ------------------------------------------------------------------------------
+\subsection{Polynomial Factorization}\label{sec:polynomial_factorization}
+% ------------------------------------------------------------------------------
+
+cf. Integer Factorization (\S\ref{sec:integer_factorization})
+
+
+
+\subsubsection{Irreducible Polynomial}\label{sec:irreducible_polynomial}
+
+or \emph{Prime Polynomial}
+
+(wiki):
+
+a Non-constant Polynomial that cannot be Factored into the Product of two
+Non-constant Polynomials
+
+depends on the nature of the \emph{Coefficients} that are accepted for the
+possible Factors
+
+\emph{Absolutely Irreducible} -- Irreducible over \emph{any} Field containing
+the Coefficients (i.e. over the Algebraic Closure of the Ground Field)
+
+by the Fundamental Theorem of Algebra
+
+\fist a Quadric (\S\ref{sec:quadric}) is a Hypersurface of Dimension $d$ in a
+$d+1$-dimensional Space defined as the Zero Set (Function Root
+\S\ref{sec:root}) of an Irreducible Polynomial of Degree $2$ in $d+1$
+Variables
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Polynomial Function}\label{sec:polynomial_function}
 % ------------------------------------------------------------------------------
 
-Function defined by Evaluating a Polynomial Expression
-(\S\ref{sec:polynomial_expression})
-
-the Variables of a Polynomial Function are the Indeterminates
-(\S\ref{sec:indeterminate}) of the defining Polynomial Expression
+\emph{Polynomial Function} $f(r)$ defined by Evaluating a Polynomial Expression
+(\S\ref{sec:polynomial_expression}) $P \in R[x]$, i.e. by Substituting $r$ for
+$x$ in $P$ so that the \emph{Variables} of the Polynomial Function are the
+\emph{Indeterminates} (\S\ref{sec:indeterminate}) of the defining Polynomial
+Expression
 
 Degree $0$ or $1$ is a \emph{Linear Function} (\S\ref{sec:linear_function})
 
@@ -593,28 +659,6 @@ a Positive-definite Symmetric Bilinear
 
 
 % ------------------------------------------------------------------------------
-\subsection{Irreducible Polynomial}\label{sec:irreducible_polynomial}
-% ------------------------------------------------------------------------------
-
-(wiki):
-
-a non-constant Polynomial that cannot be ``factored'' into the Product of two
-non-constant Polynomials
-
-depends on the nature of the \emph{Coefficients} that are accepted for the
-possible factors
-
-\emph{Absolutely Irreducible} -- Irreducible over any Field containing the
-Coefficients (i.e. over the Algebraic Closure of the Ground Field)
-
-\fist a Quadric (\S\ref{sec:quadric}) is a Hypersurface of Dimension $d$ in a
-$d+1$-dimensional Space defined as the Zero Set (Function Root
-\S\ref{sec:root}) of an Irreducible Polynomial of Degree $2$ in $d+1$
-Variables
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Taylor Polynomial}\label{sec:taylor_polynomial}
 % ------------------------------------------------------------------------------
 
@@ -845,20 +889,34 @@ conditions for the solvability of Quadratic Equations Modulo Prime Numbers
 \label{sec:fundamental_algebra_theorem}
 % ------------------------------------------------------------------------------
 
-states that the Field of Complex Numbers is Algebraically Closed
-(\S\ref{sec:algebraically_closed})
-
 (wiki):
 
-\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial
-(Univariate with Complex Coefficients \S\ref{sec:monic_polynomial}), an
-Algebraic Object, is determined by the Set of its Roots
-(\S\ref{sec:root}), a Geometric Object, in the Complex Plane
-(\S\ref{sec:complex_plane}).
+``\emph{Every Non-constant Univariate Polynomial with Complex Coefficients
+has at least one Complex Root.}''
+
+equivalently, by definition, the Field of Complex Numbers is
+\emph{Algebraically Closed} (\S\ref{sec:algebraically_closed})
+
+restatement:
+
+``\emph{Every Non-zero Univariate Degree $n$ Polynomial with Complex
+Coefficients has exactly $n$ Complex Roots, counted with Multiplicity.}''
+
+Proof is not purely Algebraic since any Proof must use the Analytic Completeness
+of the Reals
+
+\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial (Univariate
+with Complex Coefficients \S\ref{sec:monic_polynomial}), an Algebraic Object, is
+determined by the Set of its Roots (\S\ref{sec:root}), a Geometric Object, in
+the Complex Plane (\S\ref{sec:complex_plane}).
 
 \emph{Hilbert's Nullstellensatz}: fundamental correspondence between Ideals
 (\S\ref{sec:ring_ideal}) of Polynomial Rings (\S\ref{sec:polynomial_ring}) and
 Algebraic Sets (\S\ref{sec:algebraic_set})
+
+by the Fundamental Theorem of Algebra, a Univariate Polynomial is Absolutely
+Irreducible (i.e. Irreducible \S\ref{sec:irreducible_polynomial} in any Field
+containing the Coefficients) if and only if its Degree is $1$
 
 
 
