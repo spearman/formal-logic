@@ -124,6 +124,10 @@ Roots).
 \fist an \emph{Algebraic Curve} (\S\ref{sec:algebraic_curve}) is an Implicit
 Curve defined by an Equation $F(x,y) = 0$ such that $F(x,y)$ is a Polynomial
 
+\fist Trigonometric Polynomial (\S\ref{sec:trigonometric_polynomial}): a Finite
+Linear Combination of $sin(nx)$ and $cos(nx)$ Functions with $n$ taking on
+values of one or more Natural Numbers
+
 The Funadmental Theorem of Algebra (\S\ref{sec:fundamental_algebra_theorem})
 states that every Polynomial of Degree $n$ has $n$ Complex Roots
 (\S\ref{sec:root}), counted with their Multiplicities (??? FIXME).
@@ -319,10 +323,10 @@ containing the Coefficients) if and only if its Degree is $1$
 
 Univariate Polynomial with Leading Coefficient equal to $1$
 
-\emph{Fundamental Theorem of Algebra link between ``Algebra'' and
-  ``Geometry''}: a Monic Polynomial, an Algebraic Object, is determined by the
-Set of its Roots (\S\ref{sec:root}), a Geometric Object, in the
-Complex Plane (\S\ref{sec:complex_plane}).
+\emph{Fundamental Theorem of Algebra link between ``Algebra'' and ``Geometry''}:
+a Monic Polynomial, an Algebraic Object, is determined by the Set of its Roots
+(\S\ref{sec:root}), a Geometric Object, in the Complex Plane
+(\S\ref{sec:complex_plane})
 
 
 
@@ -377,6 +381,52 @@ or $-\infty$
 
 cf. Integer Factorization (\S\ref{sec:integer_factorization})
 
+expression of a Polynomial as the Product of Irreducible Polynomials
+
+a Polynomial Ring (\S\ref{sec:polynomial_ring}) is a Unique Factorization Domain
+(\S\ref{sec:factorial_ring})
+
+(wiki)
+
+the Fundamental Theorem of Algebra implies:
+\begin{itemize}
+  \item Polynomials with Integer Coefficients over $\comps$ can be Factored into
+    Linear or Constant Irreducible Factors (i.e. Polynomials of Degree at most
+    $1$)
+  \item Polynomials with Integer Coefficients over $\reals$ can be Factored into
+    Irreducible Factors of Degree at most $2$
+  \item Polynomials with Integer Coefficients over $\rats$ there are Irreducible
+    Factors of any Degree
+\end{itemize}
+
+known Factorization Algorithms exist for Coefficients in Prime Fields (the
+Rational Number Field, Finite Fields of Prime Order, and their Finitely
+Generated Field Extensions), and Integer Coefficients
+
+Square-free Factorization
+
+a Polynomial has a Square Root if and only if all Exponents of the Square-free
+Decomposition are Even, then the Square Root is obtained by dividing the
+Exponents by $2$
+
+Factorization over Finite Fields
+
+an Irreducible Polynomial $f \in F_q[x]$ with Degree $n > 1$ defines a Field
+Extension of Degree $n$ with Elements that are the Polynomials of Degree
+\emph{lower} than $n$ and which is Isomorphic to the Field with $q^n$ Elements
+
+the number of Irreducible Monic Polynomials of Degree $n$ over $F_q$ is the
+number of Apriodic Necklaces (TODO: xref)
+
+Berlekamp's Algorithm -- Exponential in the size of ground Field
+
+Cantor-Zassenhaus -- Randomized Algorithm of Polynomial Time Complexity
+
+Shoup's Algorithm -- Deterministic Algorithm with Polynomial Average Complexity
+
+existence of a Determinstic Algorithm with Polynomial worst-case Complexity is
+an open problem
+
 
 
 \subsubsection{Irreducible Polynomial}\label{sec:irreducible_polynomial}
@@ -395,6 +445,9 @@ possible Factors
 the Coefficients (i.e. over the Algebraic Closure of the Ground Field)
 
 by the Fundamental Theorem of Algebra
+(\S\ref{sec:fundamental_algebra_theorem}), a Univariate Polynomial is Absolutely
+Irreducible if and only if its Degree is $1$; a with multiple Indeterminates
+there are Irreducible Polynomials of every Degree
 
 \fist a Quadric (\S\ref{sec:quadric}) is a Hypersurface of Dimension $d$ in a
 $d+1$-dimensional Space defined as the Zero Set (Function Root
@@ -905,18 +958,20 @@ Coefficients has exactly $n$ Complex Roots, counted with Multiplicity.}''
 Proof is not purely Algebraic since any Proof must use the Analytic Completeness
 of the Reals
 
-\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial (Univariate
-with Complex Coefficients \S\ref{sec:monic_polynomial}), an Algebraic Object, is
-determined by the Set of its Roots (\S\ref{sec:root}), a Geometric Object, in
-the Complex Plane (\S\ref{sec:complex_plane}).
+by the Fundamental Theorem of Algebra, an Univariate Polynomial is Absolutely
+Irreducible (i.e. Irreducible \S\ref{sec:irreducible_polynomial} in any Field
+containing the Coefficients) if and only if its Degree is $1$, i.e. Linear
+
+by the Fundamental Theorem of Algebra, an Univariate Monic Polynomial
+(Leading Coefficient equal to $1$ \S\ref{sec:monic_polynomial}) with Complex
+Coefficients is determined by the Set of its \emph{Roots} in the Complex Plane
+
+\emph{Link between ``Algebra'' and ``Geometry''}: a Monic Polynomial, an
+Algebraic Object, is determined by the Set of its Roots, a Geometric Object
 
 \emph{Hilbert's Nullstellensatz}: fundamental correspondence between Ideals
 (\S\ref{sec:ring_ideal}) of Polynomial Rings (\S\ref{sec:polynomial_ring}) and
 Algebraic Sets (\S\ref{sec:algebraic_set})
-
-by the Fundamental Theorem of Algebra, a Univariate Polynomial is Absolutely
-Irreducible (i.e. Irreducible \S\ref{sec:irreducible_polynomial} in any Field
-containing the Coefficients) if and only if its Degree is $1$
 
 
 
@@ -1105,8 +1160,7 @@ a Finite Set of Equations (\S\ref{sec:equation}) for which a ``common
 solution'' is desired (FIXME: clarify)
 
 \begin{itemize}
-  \item System of Polynomial Equations
-    (\S\ref{sec:polynomial_equation_system})
+  \item System of Polynomial Equations (\S\ref{sec:polynomial_equation_system})
   \begin{itemize}
     \item System of Linear Equations (\S\ref{sec:linear_equation_system})
   \end{itemize}
@@ -1293,8 +1347,8 @@ An \emph{Algebraic Variety} (\S\ref{sec:algebraic_variety}) can be defined as
 the Solution Set of a System of Polynomial Equations
 (\S\ref{sec:polynomial_equation_system})
 
-Solution Sets are called Algebraic Sets (\S\ref{sec:algebraic_set}) if there
-are no Inequalities.
+Solution Sets are called \emph{Algebraic Sets} (\S\ref{sec:algebraic_set}) if
+there are no Inequalities. (FIXME: clarify)
 
 Solution Sets over the Reals and with Inequalities are called Semialgebraic
 Sets (\S\ref{sec:semialgebraic_set}).
@@ -1570,7 +1624,8 @@ Complex Numbers.
 \fist an \emph{Algebraic Manifold} (\S\ref{sec:algebraic_manifold}) is an
 Algebraic Variety which is also an $m$-dimensional Manifold, i.e. every
 sufficiently small Local Patch is Isomorphic to $k^m$ or equivalently the
-Variety is \emph{Smooth} (free from Singular Points)
+Variety is \emph{Smooth} (free from Singular Points); cf. Smooth Schemes
+(\S\ref{sec:smooth_scheme})
 
 cf. Analytic Manifolds (\S\ref{sec:analytic_manifold})
 
@@ -1640,6 +1695,8 @@ or \emph{Non-singular}
 
 \emph{no} Singular Points
 
+special case of Smooth Scheme (\S\ref{sec:smooth_scheme})
+
 
 
 % ------------------------------------------------------------------------------
@@ -1697,6 +1754,14 @@ Projective Variety that is not Linear or a Hypersurface
 
 
 % ------------------------------------------------------------------------------
+\subsection{Rational Variety}\label{sec:rational_variety}
+% ------------------------------------------------------------------------------
+
+Unirational
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Irreducible Algebraic Variety}
 \label{sec:irreducible_algebraic_variety}
 % ------------------------------------------------------------------------------
@@ -1707,21 +1772,13 @@ not the Union of two smaller Sets that are Closed in the Zariski Topology
 
 
 % ------------------------------------------------------------------------------
-\subsection{Rational Variety}\label{sec:rational_variety}
-% ------------------------------------------------------------------------------
-
-Unirational
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Algebraic Set}\label{sec:algebraic_set}
 % ------------------------------------------------------------------------------
 
 a Non-irreducible Algebraic Variety
 
 Solution Sets (\S\ref{sec:solution_set}) are called Algebraic Sets if there are
-no Inequalities.
+no Inequalities. (FIXME: clarify)
 
 Solution Sets over the Reals and with Inequalities are called Semialgebraic
 Sets (\S\ref{sec:semialgebraic_set}).
@@ -2399,8 +2456,8 @@ are to Finitely Generated, Nilpotent-free Rings over Algebraically Closed Field
 $K$
 
 an Affine Scheme is a Locally Ringed Space (\S\ref{sec:locally_ringed_space}) in
-form form of the Spectrum (\S\ref{sec:ring_spectrum}) $\Spec(R)$ of a
-Commutative Ring $R$
+the form of the Spectrum (\S\ref{sec:ring_spectrum}) $\Spec(R)$ of a Commutative
+Ring $R$
 
 a Point $[p]$ of $\Spec(R)$ is a Prime Ideal (\S\ref{sec:prime_ideal}) of $R$
 corresponding to the Prime $p$ of $R$
@@ -2478,6 +2535,15 @@ if a Curve is Non-singular, the Geometric Genus and Arithmetic Genus are equal
 
 a Simplicial Scheme is a Simplicial Object (\S\ref{sec:simplicial_object}) on a
 Site (\S\ref{sec:site}), i.e. a Simplicial Object in the Category of Schemes
+
+
+
+\subsubsection{Smooth Scheme}\label{sec:smooth_scheme}
+
+a Scheme over a Field that is well approximated by \emph{Affine Space}
+(\S\ref{sec:affine_space}) near any Point
+
+Smooth Variety (\S\ref{sec:smooth_variety})
 
 
 
