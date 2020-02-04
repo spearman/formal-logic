@@ -1528,6 +1528,9 @@ Automorphic Form (\S\ref{sec:automorphic_form})
 
 \emph{$n$th-root}; cf. Root of a Function (\S\ref{sec:root})
 
+cf. \emph{Radical of a (Positive) Integer} (\S\ref{sec:integer_radical}):
+Product of the distinct Prime Divisors of $n$
+
 Algebraic Expressions (\S\ref{sec:algebraic_expression})
 
 Root of Unity (\S\ref{sec:root_of_unity})
@@ -1550,6 +1553,16 @@ Isomorphism:
   \item Riemann Sphere
   \item Unit Disk or Hyperbolic Semiplane
 \end{itemize}
+
+\emph{Uniformization Theorem}: every Simply Connected
+(\S\ref{sec:simply_connected}) Riemann Surface is Conformally Equivalent to
+either the Open Unit Disk (Hyperbolic Geometry), the Complex Plane (Euclidean
+Geometry), or the Riemann Sphere (Spherical Geometry)
+
+Uniformization Theorem is a generalization of the Riemann Mapping Theorem (TODO)
+
+\fist cf. \emph{Thurston's Geometrization Conjecture}: analog for Closed
+3-manifolds
 
 
 
@@ -2072,48 +2085,6 @@ Wiener Integral; assigned to a class of Brownian Motion Paths
 
 
 % ------------------------------------------------------------------------------
-\subsection{Adjoint Operator}\label{sec:adjoint_operator}
-% ------------------------------------------------------------------------------
-
-The \emph{Adjoint Operator} (\emph{Hermitian Adjoint}, \emph{Hermitian
-  Conjugate}, or \emph{Hermitian Transpose}) of a Linear Operator $A : H_1
-\rightarrow H_2$ between Hilbert Spaces (\S\ref{sec:hilbert_space}) is the
-Linear Operator $A^\dag : H_2 \rightarrow H_1$ satisfying:
-\[
-  \langle{Ah_1,Ah_2}\rangle_{H_2} = \langle{h_1,A^{\dag}h_2}\rangle_{H_1}
-\]
-where $\langle\cdot,\cdot\rangle_{H_i}$ is the Inner Product Space in Hilbert
-Space $H_i$.
-
-%FIXME: not required to be an endomorphism (operator) ???
-
-Bounded Linear Operator (\S\ref{sec:bounded_linear_operator})
-
-Complex Hilbert Space (\S\ref{sec:hilbert_space})
-
-
-
-\subsubsection{Self-adjoint Operator}\label{sec:self_adjoint_operator}
-
-A \emph{Self-adjoint Operator} on a Finite-dimensional Complex Vector Space $V$
-with Inner Product $\langle{\cdot, \cdot}\rangle$ is a Linear Map $A$ that is
-its own Adjoint:
-\[
-  \langle{Av,w}\rangle = \langle{v,Aw}\rangle
-\]
-For Finite-dimensional $V$ with given Orthonormal Basis is equivalent to the
-condition that Matrix $A$ is Hermitian (\S\ref{sec:hermitian_matrix}), i.e. $A$
-is Equal to its Conjugate Transpose: $A = A^H$
-
-A Linear Operator $A$ on a Hilbert Space (\S\ref{sec:hilbert_space}) is
-\emph{Self-adjoint} if it is equal to its Hermitian Adjoint.
-
-A Projection is Orthogonal (\S\ref{sec:orthogonal_projection}) if and only if
-it is Self-adjoint.
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Closed Linear Span}\label{sec:closed_linear_span}
 % ------------------------------------------------------------------------------
 
@@ -2217,58 +2188,6 @@ the Function itself and its Derivatives up to a given Order
 
 
 % ------------------------------------------------------------------------------
-\subsection{Banach Algebra}\label{sec:banach_algebra}
-% ------------------------------------------------------------------------------
-
-an Associative Algebra (\S\ref{sec:associative_algebra}) over the Real or
-Complex Numbers (or over a Non-archimedean Complete Normed Field
-\S\ref{sec:nonarchimedean_field}) that is also a Banach Space
-(\S\ref{sec:banach_space})
-
-\emph{Banach Rings} (FIXME: ???)
-
-
-
-\subsubsection{C$^*$-algebra}\label{sec:cstar_algebra}
-
-A \emph{C$^*$-algebra} is a Complex Algebra $A$ of Continuous Linear
-Operators (\S\ref{sec:continuous_linear}) on a Complex Hilbert Space
-(\S\ref{sec:hilbert_space}) with the additional Properties that $A$ is
-Topologically Closed in the Norm Topology of Operators and Closed
-under the Operation of taking Adjoints of Operators
-
-Involutive Algebra (\S\ref{sec:involutive_algebra})
-
-Involution Semigroup (\S\ref{sec:involution_semigroup})
-
-(wiki):
-
-Linear Logic (\S\ref{sec:linear_logic}) can be seen as the refining
-the Interpretation of Classical Logic by replacing Boolean Algebras
-(\S\ref{sec:boolean_algebra}) by C$^*$-algebras
-
-the Uniform Closure of Complex Continuous Functions over a Compact Space is a
-C$^*$ Algebra
-
-the $L^\infty$-space (\S\ref{sec:lp_space}) of Complex-valued Functions is a
-Commutative $C^*$-algebra with pointwise Multiplication and Conjugation
-
-
-
-\paragraph{Dual C$^*$-algebra}\label{sec:cstar_dual}\hfill
-
-or \emph{Dual} or \emph{Spectrum} of a C$^*$-algebra is the Set of Unitary
-Equivalence Classes of Irreducible $*$-representations of $A$ (FIXME: clarify)
-
-cf. Ring Spectrum (\S\ref{sec:ring_spectrum})
-
-
-
-\paragraph{von Neumann Algebra}\label{sec:vonneumann_algebra}\hfill
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Cross-correlation}\label{sec:cross_correlation}
 % ------------------------------------------------------------------------------
 
@@ -2347,6 +2266,25 @@ rather than a Convolution
 
 
 
+\subsubsection{Deconvolution}\label{sec:deconvolution}
+
+find the solution of a ``Convolution Equation'' $f * g = h$ where $h$ is a
+recorded Signal and $f$ is a Signal to be recovered, but has been
+\emph{Convolved} with some other Signal $g$ (e.g. the Transfer Function of an
+instrument or driving force applied to a physical system)
+
+usually performed by computing the Fourier Transform
+(\S\ref{sec:fourier_transform}) of $h$ and Transfer Function $g$ and applying
+Deconvolution in the Frequency Domain which in the absence of noise is:
+\[
+  F = H / G
+\]
+where $F, G, H$ are the Fourier Transforms of $f, g, h$, respectively, and then
+taking the Inverse Fourier Transform of $F$ to find the estimated Deconvolved
+Signal $f$
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Coherence Space}\label{sec:coherence_space}
 % ------------------------------------------------------------------------------
@@ -2361,6 +2299,120 @@ Multiplicative, Additive Linear Logic (\S\ref{sec:multiplicative_linear_logic})
 %TODO: move section ???
 
 
+
+% ------------------------------------------------------------------------------
+\subsection{Operator Theory}\label{sec:operator_theory}
+% ------------------------------------------------------------------------------
+
+study of Linear Operators (\S\ref{sec:linear_operator}) on Function Spaces
+(\S\ref{sec:function_space})
+
+
+
+\subsubsection{Positive-definite Kernel}\label{sec:pd_kernel}
+
+generalization of Positive-definite Function or Positive-definite Matrix
+
+Kernel Function \fist Kernel Methods (Linear Classification
+\S\ref{sec:kernel_method})
+
+
+
+\subsubsection{Adjoint Operator}\label{sec:adjoint_operator}
+
+The \emph{Adjoint Operator} (\emph{Hermitian Adjoint}, \emph{Hermitian
+  Conjugate}, or \emph{Hermitian Transpose}) of a Linear Operator $A : H_1
+\rightarrow H_2$ between Hilbert Spaces (\S\ref{sec:hilbert_space}) is the
+Linear Operator $A^\dag : H_2 \rightarrow H_1$ satisfying:
+\[
+  \langle{Ah_1,Ah_2}\rangle_{H_2} = \langle{h_1,A^{\dag}h_2}\rangle_{H_1}
+\]
+where $\langle\cdot,\cdot\rangle_{H_i}$ is the Inner Product Space in Hilbert
+Space $H_i$.
+
+%FIXME: not required to be an endomorphism (operator) ???
+
+Bounded Linear Operator (\S\ref{sec:bounded_linear_operator})
+
+Complex Hilbert Space (\S\ref{sec:hilbert_space})
+
+
+
+\paragraph{Self-adjoint Operator}\label{sec:self_adjoint_operator}\hfill
+
+A \emph{Self-adjoint Operator} on a Finite-dimensional Complex Vector Space $V$
+with Inner Product $\langle{\cdot, \cdot}\rangle$ is a Linear Map $A$ that is
+its own Adjoint:
+\[
+  \langle{Av,w}\rangle = \langle{v,Aw}\rangle
+\]
+For Finite-dimensional $V$ with given Orthonormal Basis is equivalent to the
+condition that Matrix $A$ is Hermitian (\S\ref{sec:hermitian_matrix}), i.e. $A$
+is Equal to its Conjugate Transpose: $A = A^H$
+
+A Linear Operator $A$ on a Hilbert Space (\S\ref{sec:hilbert_space}) is
+\emph{Self-adjoint} if it is equal to its Hermitian Adjoint.
+
+A Projection is Orthogonal (\S\ref{sec:orthogonal_projection}) if and only if
+it is Self-adjoint.
+
+
+
+\subsubsection{Operator Algebra}\label{sec:operator_algebra}
+
+\subsubsection{Banach Algebra}\label{sec:banach_algebra}
+
+an Associative Algebra (\S\ref{sec:associative_algebra}) over the Real or
+Complex Numbers (or over a Non-archimedean Complete Normed Field
+\S\ref{sec:nonarchimedean_field}) that is also a Banach Space
+(\S\ref{sec:banach_space})
+
+\emph{Banach Rings} (FIXME: ???)
+
+
+
+\paragraph{C$^*$-algebra}\label{sec:cstar_algebra}\hfill
+
+A \emph{C$^*$-algebra} is a Complex Algebra $A$ of Continuous Linear
+Operators (\S\ref{sec:continuous_linear}) on a Complex Hilbert Space
+(\S\ref{sec:hilbert_space}) with the additional Properties that $A$ is
+Topologically Closed in the Norm Topology of Operators and Closed
+under the Operation of taking Adjoints of Operators
+
+Involutive Algebra (\S\ref{sec:involutive_algebra})
+
+Involution Semigroup (\S\ref{sec:involution_semigroup})
+
+(wiki):
+
+Linear Logic (\S\ref{sec:linear_logic}) can be seen as the refining
+the Interpretation of Classical Logic by replacing Boolean Algebras
+(\S\ref{sec:boolean_algebra}) by C$^*$-algebras
+
+the Uniform Closure of Complex Continuous Functions over a Compact Space is a
+C$^*$ Algebra
+
+the $L^\infty$-space (\S\ref{sec:lp_space}) of Complex-valued Functions is a
+Commutative $C^*$-algebra with pointwise Multiplication and Conjugation
+
+
+
+\subparagraph{Dual C$^*$-algebra}\label{sec:cstar_dual}\hfill
+
+or \emph{Dual} or \emph{Spectrum} of a C$^*$-algebra is the Set of Unitary
+Equivalence Classes of Irreducible $*$-representations of $A$ (FIXME: clarify)
+
+cf. Ring Spectrum (\S\ref{sec:ring_spectrum})
+
+
+
+\subparagraph{von Neumann Algebra}\label{sec:vonneumann_algebra}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Functional Calculus}\label{sec:functional_calculus}
+% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{Spectral Theory}\label{sec:spectral_theory}
@@ -5453,7 +5505,8 @@ functions on Infinite Intervals
 
 \fist Frequency Domain (\S\ref{sec:frequency_domain})
 
-\fist Signal Processing (\S\ref{sec:signal_processing})
+\fist Signal Processing (\S\ref{sec:signal_processing}); Deconvolution
+(\S\ref{sec:deconvolution})
 
 \fist Wavelet Transform (Image Processing \S\ref{sec:wavelet_transform})
 

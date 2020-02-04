@@ -1889,7 +1889,7 @@ a Random Variable can be defined such that the Function is a CDF of that Random
 Variable
 
 a Random Variable $X$ with CDF $F$ is indicated by the notation $X \sim F$, but
-note that this does not mean ``apprximate equality''
+note that this does \emph{not} mean ``approximate equality''
 
 the CDF $F_X$ of a Discrete Random Variable can be related to its Probability
 Mass Function (\S\ref{sec:pmf}) $f_X$ by:
@@ -7428,6 +7428,8 @@ Classification Models (increasingly indirect):
 
 Explanatory Variable (Regressor), ``Instance''
 
+\emph{Feature Space}
+
 
 
 \subsubsection{Classification Model}\label{sec:classification_model}
@@ -7566,7 +7568,22 @@ is maximized, neglecting the Marginal Distribution $f(x)$
 
 
 
-\paragraph{Support Vector Machine (SVM)}\label{sec:svm}\hfill
+\paragraph{Kernel Method}\label{sec:kernel_method}\hfill
+
+\emph{the Kernel Trick}: using \emph{Kernel Functions} (\S\ref{sec:pd_kernel})
+enables Kernel Methods to operate in a high-dimensional \emph{Implicit Feature
+  Space} without having to compute the \emph{Coordinate} of the Data in that
+Space, instead by computing the Inner Products between the \emph{Images} of all
+\emph{pairs} of Data in the Feature Space (\S\ref{sec:feature_vector})
+
+(Jacot, Gabriel, Hongler 2018): at initialization, ANNs (\S\ref{sec:ann}) are
+equivalent to Gaussian Processes (\S\ref{sec:gaussian_process}) in the
+``Infinite-width Limit'', connecting them to Kernel Methods, and the
+\emph{evolution} of an ANN during Training can also be described by a Kernel
+
+
+
+\subparagraph{Support Vector Machine (SVM)}\label{sec:svm}\hfill
 
 or \emph{Perceptron of Optimal Stability}
 
@@ -8976,6 +8993,12 @@ where $\sigma$ is a Smooth Function, often:
 Stochastic Gradient Descent (SGD \S\ref{sec:sgd}) -- \emph{de facto} standard
 Algorithm for training ANNs
 
+(Jacot, Gabriel, Hongler 2018): at initialization, ANNs (\S\ref{sec:ann}) are
+equivalent to Gaussian Processes (\S\ref{sec:gaussian_process}) in the
+``Infinite-width'' limit, connecting them to \emph{Kernel Methods}
+(\S\ref{sec:kernel_method}), and the \emph{evolution} of an ANN during Training
+can also be described by a Kernel
+
 (wiki) applications:
 \begin{itemize}
   \item Function Approximation, Regression Analysis
@@ -9135,6 +9158,8 @@ McCulloch-Pitts Neuron
 
 cf. Perceptron (\S\ref{sec:preceptron})
 
+Nuerons in Hopfield Networks (\S\ref{sec:hopfield_network})
+
 
 
 \subsubsection{Layer}\label{sec:ann_layer}
@@ -9160,7 +9185,8 @@ notation for the number of Layers (from Input to Output): 2/8/1 --
 (\url{https://machinelearningmastery.com/how-to-configure-the-number-of-layers-and-nodes-in-a-neural-network/})
 
 \emph{Fully-connected Layer} -- every Node in one Layer is connected to every
-Node in the next layer
+Node in the next layer; cf. Multi-layer Perceptron (\S\ref{sec:mlp}), Restricted
+Boltzmann Machine (\S\ref{sec:rbm})
 
 
 
@@ -9399,6 +9425,8 @@ $y_j$ is $j$'s actual Output, and $h_j$ is the Weighted Sum of $j$'s Inputs (the
 \emph{Single-layer} Network; i.e. to gain advantages from multiple Layers
 requires a \emph{Non-linear} Activation Function
 
+cf. Restricted Boltzmann Machine (RBM \S\ref{sec:boltzmann_machine})
+
 \fist Convolutional Nueral Network (CNN \S\ref{sec:cnn}) -- ``Regularized''
 versions of MLP
 
@@ -9518,6 +9546,38 @@ rather a \emph{Cross-correlation} (or ``Sliding Dot-product''
 \subsubsection{Recursive Neural Network}\label{sec:recursive_nn}
 
 or \emph{TreeNet}
+
+
+
+\paragraph{Hopfield Network}\label{sec:hopfield_network}\hfill
+
+(wiki)
+
+\emph{Complete Undirected Graph} (\S\ref{sec:complete_graph}):
+\[
+  G = \langle{V, f}\rangle
+\]
+where $V$ is a Set of Threshold Logic Units (a.k.a. McCulloch-Pitts Neurons
+\S\ref{sec:tlu}) and $f : V^2 \rightarrow \reals$ is a Function linking pairs of
+Units to a \emph{Connectivity Weight} with restrictions:
+
+$w_{ii} = 0$ -- no Unit is connected to itself
+
+$w_{ij} = w_{ji}$ -- connections are \emph{Symmetric}; this guarantees the
+``Energy Function'' decreases monotonically while following the Activation rules
+
+
+
+\subparagraph{Boltzmann Machine}\label{sec:boltzmann_machine}\hfill
+
+uses \emph{Annealed Gibbs Sampling} instead of Gradient Descent
+
+Restricted Boltzmann Machine (RBM) -- no \emph{intralayer} connections between
+Units; cf. Multi-layer Perceptron (\S\ref{sec:mlp})
+
+Deep Boltzmann Machine (DBM)
+
+Semi-restricted Boltzmann Machine (SRBM)
 
 
 
@@ -9662,6 +9722,34 @@ the Generator typically seeded with randomized Input Sampled from a predefined
 candidates synthesized by the Generator are evaluated by the Discriminator, and
 the Generator is Trained based on whether it succeeds in ``fooling'' the
 Discriminator
+
+2014 - Goodfellow, et al. - \emph{Generative Adversarial Nets}:
+
+Generative Model $G$ captures Data Distribution
+
+Discriminative Model $D$ Estimates Probability that a Sample came from Training
+Data rather than $G$
+
+Training $G$ to \emph{Maximize} the Probability that $D$ makes a mistake
+
+framework corresponds to a \emph{Minimax Two-player Game} (\S\ref{sec:minimax})
+
+in the space of arbitrary Functions $G$ and $D$, a \emph{unique solution} exists
+with $G$ recovering the Training Data Distribution and $D$ equal to $0.5$
+everywhere
+
+when $G$ and $D$ are Multilayer Perceptrons, the system can be trained with
+Backpropagation
+
+Noise-contrastive Estimation (Gutmann, Hyvarinen 2010) --
+\emph{Discriminative} Training critereon used to Fit a \emph{Generative} Model
+
+GANs: instead of Fitting a \emph{seperate} Discriminative Model, the Generative
+Model itself is used to \emph{Discriminate Generated Data} from Samples of a
+fixed Noise Distribution
+
+cf. Generative Stochstaic Network (GSN), Denoising Auto-encoders --
+(Bengio, et. al)
 
 
 
@@ -9969,11 +10057,14 @@ a 1D Gaussian Random Field (\S\ref{sec:gaussian_random_field})
 can be seen as the Infinite-dimensional generalization of Multivariate Normal
 Distributions (\S\ref{sec:normal_distribution})
 
-the Distribution of a Gaussian Process is the Joint Distribution of infinitely
-many Random Variables, i.e. it is a Distribution over Functions with a
-Continuous Domain
+the Distribution of a Gaussian Process is the Joint Distribution of
+\emph{Infinitely many} Random Variables, i.e. it is a Distribution over
+Functions with a Continuous Domain
 
 Machine Learning: Lazy Learning (1D Gaussian Distributions)
+
+(Jacot, Gabriel, Hongler 2018): at initialization, ANNs (\S\ref{sec:ann}) are
+equivalent to Gaussian Processes in the ``Infinite-width'' limit
 
 Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
 
@@ -10664,6 +10755,8 @@ Harper09 - \emph{Information Geometry and Evolutionary Game Theory}
 
 application of Differential Geometry
 (\S\ref{sec:differential_geometry}) techniques to Probability Theory
+
+2018 - Nielsen - \emph{An elementary introduction to information geometry}
 
 
 
