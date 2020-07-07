@@ -896,6 +896,9 @@ An algebraic description is as follows:
 where $f : \Sigma^* \rightarrow M$ is a Monoid Homomorphism of Finite Monoid
 (\S\ref{sec:monoid}) $M$ and $N \subseteq M$.
 
+\fist $\omega$-regular Languages (\S\ref{sec:omega_regular}) -- $\omega$-Kleene
+Closure of the Regular Langauges
+
 
 
 \subsubsection{Regular Expression}\label{sec:regular_expression}
@@ -2914,7 +2917,18 @@ Prefixes, Limits
 
 Distance, Metric Space %FIXME
 
-(Dube 1993) TODO
+(Dube 1993) constructing an $\omega$-language from the Set of Contractive Affine
+Transformations $\Sigma$ of an IFS (\S\ref{sec:ifs}) on a Metric Space $(X, d)$
+yields a Surjective mapping $\phi : \Sigma^\omega \rightarrow X$, assigning an
+``\emph{Address}'' $\sigma \in \Sigma^\omega$ to each Point in the Attractor,
+$A \subseteq X$, of the IFS, $\forall x \in X$:
+\[
+  \phi(\sigma) =
+    \lim_{i \rightarrow \infty} \sigma_1(\sigma_2(\ldots(\sigma_i(x))\ldots)) =
+    a \in A
+\]
+that is, from the \emph{Contractivity} of the $\sigma_i$ Transformations, the
+Limit $a$ is \emph{independent} of $x$
 
 
 
@@ -2922,10 +2936,20 @@ Distance, Metric Space %FIXME
 \subsection{$\omega$-regular language}\label{sec:omega_regular}
 % ------------------------------------------------------------------------------
 
-Recognized by B\"uchi Automata (\S\ref{sec:buchi_automaton})
+$\omega$-Kleene Closure of the Regular Languages (\S\ref{sec:regular_language})
+
+Recognized by the following classes of $\omega$-automata
+(\S\ref{sec:omega_automaton}):
+\begin{itemize}
+  \item B\"uchi Automata
+  \item Rabin Automata
+  \item Streett Automata
+  \item Parity Automata
+  \item Muller Automata
+\end{itemize}
 
 precisely the $\omega$-languages definable a particular Monadic Second-order
-Logic called $\mathsf{S2S}$
+Logic called $\mathsf{S1S}$
 
 
 
@@ -2933,17 +2957,30 @@ Logic called $\mathsf{S2S}$
 \section{$\omega$-automaton}\label{sec:omega_automaton}
 % ==============================================================================
 
-variant of Finite Automaton (\S\ref{sec:finite_automaton}) that runs
-on Infinite (rather than Finite) Input Strings (Words)
+or \emph{Stream Automaton}
 
-not expected to Terminate: different ``Acceptance Conditions''
-required %FIXME
+variant of Finite Automaton (\S\ref{sec:finite_automaton}) that runs on Infinite
+(rather than Finite) Input Strings (Words)
+
+the following classes of Automata recognize the same class of
+$\omega$-languages, that is the $\omega$-regular Languages
+
+not expected to Terminate-- different ``Acceptance Conditions'' required:
+\begin{itemize}
+  \item \emph{B\"uchi Condition} ($\omega$-regular Languages
+    \S\ref{sec:buchi_automaton}) -- Terminates if a Final State is visited
+    Infinitely often
+  \item \emph{Rabin Condition}
+  \item \emph{Streett Condition} -- Negation of the Rabin Condition
+  \item \emph{Parity Condition}
+  \item \emph{Muller Condition}
+\end{itemize}
 
 may be Deterministic or Non-deterministic
 
-all except B\"uchi Automata recognize precisely the Regular
-$\omega$-languages and differ only in Acceptance Conditions; some may
-be more succinct in their representations of a given $\omega$-language
+all except B\"uchi Automata recognize precisely the Regular $\omega$-languages
+and differ only in Acceptance Conditions; some may be more succinct in their
+representations of a given $\omega$-language
 
 
 
@@ -2951,13 +2988,20 @@ be more succinct in their representations of a given $\omega$-language
 \subsection{B\"uchi Automaton}\label{sec:buchi_automaton}
 % ------------------------------------------------------------------------------
 
-Recognizer for Subset of $\omega$-regular Languages
-(\S\ref{sec:omega_regular}); strictly weaker than other
-$\omega$-automata
+Recognizer for Subset of $\omega$-regular Languages (\S\ref{sec:omega_regular});
+strictly weaker than other $\omega$-automata
+
+\emph{B\"uchi Condition}: Terminates if a Final State is visited Infinitely
+often
 
 used in Model Checking (\S\ref{sec:model_checking}, Kripke Structures
-\S\ref{sec:kripke_structure}) as an Automata-theoretic version of a
-Formula in Linear Temporal Logic (\S\ref{sec:linear_temporal})
+\S\ref{sec:kripke_structure}) as an Automata-theoretic version of a Formula in
+Linear Temporal Logic (\S\ref{sec:linear_temporal})
+
+every B\"uchi Automaton can be regarded as a Muller Automaton
+(\S\ref{sec:muller_automaton})
+
+class of Deterministic B\"uchi Automata is strictly weaker (TODO: explain)
 
 
 
@@ -2976,6 +3020,9 @@ Formula in Linear Temporal Logic (\S\ref{sec:linear_temporal})
 % ------------------------------------------------------------------------------
 \subsection{Muller Automaton}\label{sec:muller_automaton}
 % ------------------------------------------------------------------------------
+
+every B\"uchi Automaton (\S\ref{sec:buchi_automaton}) can be regarded as a
+Muller Automaton
 
 
 

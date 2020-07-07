@@ -88,6 +88,105 @@ Coefficients defines a unique Fractal Set which is the Fixed Point
 Affine Transformations and then taking the Union; Approximation (Fixed-point
 Iteration ???)
 
+note: allowing for Transformations other than Affine Transformations allows IFSs
+to generate Julia Sets (\S\ref{sec:julia_set})
+
+constructing an $\omega$-language (\S\ref{sec:omega_language}) from the Set of
+Contractive Affine Transformations $\Sigma$ of an IFS on a Metric Space $(X, d)$
+yields a Surjective mapping $\phi : \Sigma^\omega \rightarrow X$, assigning an
+``\emph{Address}'' $\sigma \in \Sigma^\omega$ to each Point in the Attractor,
+$A \subseteq X$, of the IFS, $\forall x \in X$:
+\[
+  \phi(\sigma) =
+    \lim_{i \rightarrow \infty} \sigma_1(\sigma_2(\ldots(\sigma_i(x))\ldots)) =
+    a \in A
+\]
+that is, from the \emph{Contractivity} of the $\sigma_i$ Transformations, the
+Limit $a$ is \emph{independent} of $x$
+
+Determinstic Iterative Algorithm for describing $A$:
+
+initialize a Set $S_1 = \{ B \}$ of Subsets of $X$ with $B \subseteq X$ and
+Iteratively apply all $N$ Transformations to each Subset in $S_n$, taking the
+Union of the results to be $S_{n+1}$
+
+cf. Fixed-point Iteration \S\ref{sec:fixedpoint_iteration}; in this case the
+output of each iteration is $N$ Subsets instead of a single Value
+
+equivalently:
+\[
+  A = \bigcap_{n=1}^{\infty} S_n
+\]
+
+at the $n$-th step, $S_n$ will contain the result of all possible Sequences of
+Transformations of length $n$ on the starting Set $B$, i.e.:
+\[
+  w_{i_1}(w_{i_2}(\ldots(w_{i_n}(B))\ldots))
+\]
+for all Sequencces $i_1, i_2, \ldots, i_n$
+
+\emph{Geometric Model of Computation}
+
+\textbf{Lemma 1} \emph{
+ For an IFS $\{\reals^2; w_1, w_2, \ldots, w_N\}$ consisting of Affine
+ Transformations with Rational Coefficients, and $L$ a Line Segment with
+ Rational Endpoints, there is a (Semi)-procedure that Terminates if and only if
+ the Attractor $A$ of the IFS does not Intersect $L$.
+}
+
+\textbf{Proof} Due to the Contractivity of the Transformations, if at any step
+$n$, $L$ does not Intersect, then $L$ will not Intersect on step $n+1$, and so
+the Attractor does not Intersect $L$. Conversely, if the Attractor does not
+Intersect $L$, then at some step $n$ the intermediate Subsets do not Intersect.
+If at any step of running the Deterministic Algorithm on the IFS, none of the
+Subsets Intersect $L$, then the Semi-procedure Terminates.
+
+since the Procedure Halts (Accepts) when an Input does not Intersect, the
+Attractor represents a graphical ``encoding'' of the Strings \emph{not} in the
+Language
+
+cf. other graphical Models of Computation: any Turing Machine can be represented
+as a Set of Wang Dominoes that Tile the Plane if and only if the Turing Machine
+does not Halt, however in this case the Tiles are more like ``Symbols'' and does
+not define in the limiting case a unqiue pattern encoding information about the
+behavior of the Machine on all Inputs
+
+one-to-one correspondence between Concatenation of Strings and application of
+corresponding Affine Transformations (TODO)
+
+\textbf{Thm. 3, Thm. 4} -- Implies it is Undecidable to test if the Intersection
+of the Attractors of two IFSs is empty
+
+an IFS is called \emph{Totally Disconnected} if and only if every Point in $A$
+has a \emph{unique} Address, i.e.
+$\forall i, j \in \{1, 2, \ldots, N\}, i \neq j, w_i(A) \cap w_j(A) = \varnothing$
+
+note that being Totally Disconnected is a Property of the IFS, \emph{not} the
+Attractor
+
+if an IFS with two Affine Transformations is Totally Disconnected, then its
+Attractor is also Totally Disconnected and is therefore a Cantor Set, and if the
+IFS is \emph{not} Totally Disconnected, then its Attractor is a Connected Set
+
+a Julie Aset is defined by an IFS with two Transformations that are not Affine
+and is therefore either a Conator Set or Connected
+
+an IFS with more than two Transformations might have an Attractor that is
+neither a Cantor Set nor Connected
+
+\textbf{Lemma 4} \emph{There exists a Semi-procedure that will Terminate if and
+  only if a given IFS is Totally Disconnected}
+
+\textbf{Proof} An IFS is Totally Disconnected if and only if during the
+Deterministic Algorithm there is an $i$ such that all the Subsets obtained by
+applying all possible Sequences of Transformations of length $i$ are mutually
+Disjoint
+
+\textbf{Thm. 5} \emph{It is Undecidable to test if a given IFS is Totally
+  Disconnected}
+-- i.e. there does not exist a Semi-procedure which Terminates if a given IFS is
+\emph{not} Totally Disconnected
+
 
 
 % ------------------------------------------------------------------------------
@@ -95,13 +194,26 @@ Iteration ???)
 % ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
+\subsection{Recurrent Iterated Function System (RIFS)}\label{sec:rifs}
+% ------------------------------------------------------------------------------
+
+1989 - Barnsley, Elton, Hardin - \emph{Recurrent Iterated Function Systems}
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Mutually Recusrive Function System (MRFS)}\label{sec:mrfs}
 % ------------------------------------------------------------------------------
 
-cf. Mutually Recursive Type (\S\ref{sec:mutually_recursive})
+equivalent to RIFS
 
-defines a ``richer class'' of Fractals and are useful in image compression (Dube
-1993)
+Projective IFS
+
+defines a ``richer class'' of Fractals and are useful in image compression; the
+problem of testing Membership of a given Rational Point in the Attractor of a
+given MRFS is Undecidable (Dube 1993)
+
+cf. Mutually Recursive Type (\S\ref{sec:mutually_recursive})
 
 
 
