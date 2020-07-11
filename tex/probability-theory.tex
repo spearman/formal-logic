@@ -100,6 +100,18 @@ object is subjected to an ``Exprimental Treatment''
 
 \fist cf. Replication (Sampling \S\ref{sec:replication})
 
+\asterism
+
+
+McCullagh02:
+
+each \emph{Statistical Experiment} or ``Observational Study'' is built from:
+\begin{enumerate}
+  \item a Set $U$ of \emph{Statistical Units} (\S\ref{sec:statistical_unit})
+  \item a \emph{Covariate Space} $\Omega$
+  \item a \emph{Response Scale} $V$
+\end{enumerate}
+
 
 
 % ------------------------------------------------------------------------------
@@ -304,11 +316,11 @@ Corollary: for Disjoint $A_1, A_2, \ldots$:
 $P(A_1 \cap A_2 \cap \ldots \cap A_k) = P(A_1) P(A_2 | A_1) P(A_3 |
 A_1 \cap A_2) \ldots P(A_k | A_1 \cap A_2 \cap \ldots \cap A_{k-1})$
 
-\textbf{(Thm.) Continuity of Probabilities} \emph{If $A_n \rightarrow A$, then:}
+\textbf{(Thm.) Continuity of Probabilities} \emph{If $A_n \to A$, then:}
 \[
-  P(A_n) \rightarrow P(A)
+  P(A_n) \to P(A)
 \]
-\emph{as $n \rightarrow \infty$}.
+\emph{as $n \to \infty$}.
 
 cf. \emph{Probability Measure} (\S\ref{sec:probability_measure}),
 \emph{Probability Measure Function} (\S\ref{sec:probability_measure_function})
@@ -799,7 +811,7 @@ A general \emph{Random Element} is a Measurable Function
 mapping Outcomes (\S\ref{sec:outcome}) in the Sample Space to some other Set of
 Values called the \emph{State Space}:
 \[
-  X : \Omega \rightarrow E
+  X : \Omega \to E
 \]
 The Type (\S\ref{sec:datatype}) of a State Space is called a \emph{Statistical
   Data Type} (\S\ref{sec:statistical_data_type}).
@@ -909,7 +921,7 @@ $\cat{Prob}$ and these Morphisms are \emph{Random Variables}
 a Random Variable is defined as a Measurable Map
 (\S\ref{sec:measurable_function}):
 \[
-  X : \Omega \rightarrow E
+  X : \Omega \to E
 \]
 where $(\Omega,\mathbb{P})$ is a Probability Space and $E$ is an arbitrary
 Measurable Space
@@ -1285,7 +1297,7 @@ the Sample Mean (\S\ref{sec:sample_mean})
 $\overline{X}_n = \frac{1}{n}\sum_i X_i$ of a Sequence of Random Variables
 $X_1, \ldots, X_n$ \emph{Converges in Probability}
 (\S\ref{sec:stochastic_convergence}) to the Expectation
-(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \to \infty$, i.e.
 $\overline{X}_n$ is close to $\mu$ with high Probability
 
 \textbf{Thm.} (Weak Law of Large Numbers) \emph{If $X_1, \ldots, X_n$ are IID
@@ -1419,8 +1431,8 @@ Natural Logarithm of the Moment-generating Function
 
 for a Scalar Random Variable $X$, the \emph{Characteristic Function} is the
 Expected Value of $e^{itX}$ where $i$ is the Imaginary Unit and $t \in \reals$
-is the Argument of the ``Characteristic Function'' $\varphi_X : \reals
-\rightarrow \comps$:
+is the Argument of the ``Characteristic Function''
+$\varphi_X : \reals \to \comps$:
 \[
   \varphi_X(t) = E[e^{itX}] = \int_\reals e^{itx} dF_X(x)
 \]
@@ -1731,8 +1743,12 @@ the Pushforward Measure (\S\ref{sec:pushforward_measure}) of a Random Variable
 
 cf. Probability Measure (\S\ref{sec:probability_measure})
 
+a Probability Distribution is given by its Continuous Distribution Function
+(\S\ref{sec:cdf}), which is a Right-continuous Function; the Cardinality of the
+Set of all such Functions is equal to the Cardinality of the Reals, $|\reals|$
+
 \emph{Probability Distribution Function} of a Random Variable $X$ often means
-the Cumulative Distribution Function (\S\ref{sec:cdf}) $F_X$, but can also refer
+the CDF $F_X$, but can also refer
 to:
 \begin{itemize}
   \item Probability Mass Function (\S\ref{sec:pmf}) -- Discrete Probability
@@ -1885,7 +1901,7 @@ every CDF is Non-decreasing and Right-continuous
 
 special case of Distribution Function (Measure Theory
 \S\ref{sec:distribution_function}) with the boundary conditions
-$\lim_t\rightarrow\infty F_X(t) = 0$ and $\lim_{t\rightarrow\infty}F_X(t) = 1$
+$\lim_t\to\infty F_X(t) = 0$ and $\lim_{t\to\infty}F_X(t) = 1$
 
 every Function with these four Properties is a CDF, i.e. for every such Function
 a Random Variable can be defined such that the Function is a CDF of that Random
@@ -2145,7 +2161,7 @@ where the Probability of Success is $p$:
 \]
 
 \fist Poisson Distribution (\S\ref{sec:poisson_distribution}) -- Limit of the
-Binomial Distribution as number of Trials $n \rightarrow \infty$
+Binomial Distribution as number of Trials $n \to \infty$
 
 Expected Value $E(X) = np$
 
@@ -2170,7 +2186,7 @@ $\sigma^2 = npq$, then:
 \[
   Z = \frac{X - np}{\sqrt{npq}}
 \]
-as $n \rightarrow \infty$ is the Standard Normal Distribution
+as $n \to \infty$ is the Standard Normal Distribution
 (\S\ref{sec:normal_distribution}) $n(Z;0,1)$
 
 
@@ -2202,11 +2218,11 @@ $P(x; \lambda t) = \frac{e^{-\lambda t} (\lambda t)^x}{x!}$
 where $\lambda$ is the average number of outcomes per unit time
 
 Expected Value is the Limit of the Binomial Distribution as number of Trials
-$n \rightarrow \infty$:
+$n \to \infty$:
 \begin{flalign*}
   E(X) & = \lambda \\
   V(X) & = \lambda \\
-  P(X = k) & = \lim_{n\rightarrow\infty}
+  P(X = k) & = \lim_{n\to\infty}
                \binom{n}{k}(\frac{\lambda}{n})^k(1-\frac{\lambda}{n})^{n-k} \\
            & = \frac{\lambda^k e^{-\lambda}}{k!} \\
 \end{flalign*}
@@ -2350,7 +2366,7 @@ for a Sequence of Random Variables (\S\ref{sec:random_variable})
 $X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
 $\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
 \emph{Converges in Distribution} to a Normal Distribution
-(\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+(\S\ref{sec:normal_distribution}) as $n \to \infty$, i.e. the Sample
 Mean has approximately a Normal Distribution for large $n$
 
 as a consequence of the Central Limit Theorem, Random Errors
@@ -2440,7 +2456,7 @@ $\nu = 1$
 
 Expected Value (\S\ref{sec:expected_value}) and Variance (\S\ref{sec:variance})
 are undefined; the ``average'' of $n$ Independent Cauchy Random Variables with
-$x_0 = 0$ \emph{does not} Converge to $0$ as $n \rightarrow \infty$ with
+$x_0 = 0$ \emph{does not} Converge to $0$ as $n \to \infty$ with
 Probability $1$-- ``it'' stays a Cauchy Distribution of the same size; however
 $0$ is the Median and Mode (FIXME: clarify)
 --\url{https://stats.stackexchange.com/questions/36027/why-does-the-cauchy-distribution-have-no-mean}
@@ -2785,18 +2801,18 @@ for a Sequence of Random Variables (\S\ref{sec:random_variable})
 $X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
 $\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
 \emph{Converges in Distribution} to a Normal Distribution
-(\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+(\S\ref{sec:normal_distribution}) as $n \to \infty$, i.e. the Sample
 Mean has approximately a Normal Distribution for large $n$
 
 \textbf{Thm.} (Central Limit Theorem) \emph{For IID (\S\ref{sec:iid}) Random
   Variables $X_1, \ldots, X_n$ with Mean $\mu$ and Variance $\sigma^2$, then:
   \[
     Z_n \equiv \frac{\overline{X}_n - \mu}{\sqrt{V(\overline{X}_n)}} =
-      \frac{\sqrt{n}(\overline{X}_n - \mu)}{\sigma} \rightarrow Z \sim N(0,1)
+      \frac{\sqrt{n}(\overline{X}_n - \mu)}{\sigma} \to Z \sim N(0,1)
   \]
   i.e:
   \[
-    \lim_{n\rightarrow\infty} P(Z_n \leq z) = \Phi(z) =
+    \lim_{n\to\infty} P(Z_n \leq z) = \Phi(z) =
       \int_{-\infty}^z \frac{1}{\sqrt{2\pi}}e^{-x^2/2} dx
   \]
 }
@@ -3171,7 +3187,7 @@ a Statistical Sample
 
 \fist Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory}):
 evaluates properties of Estimators (\S\ref{sec:estimator}) and Statistical Tests
-(\S\ref{sec:hypothesis_testing}) as Sample Size $n \rightarrow \infty$
+(\S\ref{sec:hypothesis_testing}) as Sample Size $n \to \infty$
 
 
 
@@ -4507,7 +4523,7 @@ the \emph{Generation} (\S\ref{sec:data_generating_process}) of Sample Data
     of interest
 \end{itemize}
 
-\emph{Parameter Estimation} (\S\ref{sec:estimation_theory}): Data $\rightarrow$
+\emph{Parameter Estimation} (\S\ref{sec:estimation_theory}): Data $\to$
 Parameters
 
 \emph{Prediction} (\S\ref{sec:prediction})
@@ -4570,7 +4586,7 @@ subjects, or ``time points''
 certain Parameter Functions are ``natural'' and others are not; Inference is
 only \emph{meaningful} for ``natural'' Parameters
 
-to a Statistical Model as a Function $P : \Theta \rightarrow \mathcal{P}(S)$
+to a Statistical Model as a Function $P : \Theta \to \mathcal{P}(S)$
 from Parameters to Distributions on $S$, there is an associated Set of
 Distributions $P \Theta \subset \mathcal{P}(S)$
 
@@ -4579,7 +4595,85 @@ a Bayesian Model adds a Prior Distribution on $\Theta$
 a Parameterization is \emph{Identifiable} if distinct Parameter values yield
 distinct Distributions, i.e. $P_\theta = P_\theta' \implies \theta = \theta'$;
 it follows that a Parameterization is Identifiable if and only if
-$P : \Theta \rightarrow \mathcal{P}(S)$ is Injective
+$P : \Theta \to \mathcal{P}(S)$ is Injective
+
+each \emph{Statistical Experiment} or ``Observational Study'' (cf. Experiment
+\S\ref{sec:experiment}) is built from:
+\begin{enumerate}
+  \item a Set $U$ of \emph{Statistical Units} (\S\ref{sec:statistical_unit})
+  \item a \emph{Covariate Space} $\Omega$
+  \item a \emph{Response Scale} $V$
+\end{enumerate}
+
+the ``\emph{Design}'' is a Function $x : U \to \Omega$ that associates
+with each Statistical Unit $i \in U$ a Point $x_i$ in the Covariate Space
+
+the Set $D = \Omega^U$ of all Design Functions is the \emph{Design Space}
+
+the \emph{Response} is a Function $y : U \to V$ associating a Response Value
+$y_i \in V$ to each Statistical Unit $i$
+
+the Set $S = V^U$ of all Response Functions is called the \emph{Sample Space}
+(\S\ref{sec:sample_space})
+
+a \emph{Statistical Model} consists of a Design $x : U \to \Omega$, a Sample
+Space $S = V^U$, and a Family of \emph{Distributions} on $S$
+
+a Parameterized Model $P : \Theta \to \mathcal{P}(S)$ associates to each
+Parameter Value $\theta$ a Distribution $P\theta$ on $S$
+
+the Parameterized Model additionally depends on the Design, so to each Design
+$x : U \to \Omega$ there corresponds a map $P_x : \Theta \to \mathcal{P}(S)$
+such that $P_x\theta$ is a Probability Distribution on $S$
+
+for Statistical Inference to be valid, the \emph{dependence} of $P_x$ on
+$x \in D$ cannot be \emph{arbitrary}
+
+before a Model can be discussed, it is necessary to establish a
+``\emph{Inferential Universe}'' of Statistical Units
+
+the purpose of such a trial is to draw conclusions regarding Covariate values
+for comparable but otherwise unobserved Units; it should also be possible to
+draw conclusions about Subsets of Covariate values
+
+universe of interchangeable \emph{Response Scales}, e.g. mph, km/s, m/s, with
+Transformations between them and for Multivariate Response Scales it should be
+possible to make Inferential Statements about each in Isolation
+
+every ``logically defensible'' Statistical Model has a ``natural'' extension
+from the Set of Observed Units, Observed Covariates, or Observed Responses to
+Unobserved Units, Unobserved Covariates, or Unobserved Responses
+
+the ``logic'' of every Statistical Model is founded on \emph{Categories of
+  Morphisms} of the relevant spaces
+
+\emph{Category of Statistical Designs}
+
+$\cat{U}$ -- Category of Statistical Units; Objects are all possible Sets of
+Statistical Units, possibly with temporal, spatial, or other structure;
+Morphisms are structure-preserving maps $\varphi : U \to U'$, including all
+insertion maps such that $\varphi u = u$ whenever $U \subset U'$; in typical
+Regression problems, $\cat{u}$ is identified with the generic Category of
+Injective maps on Finite Sets, i.e. maps preserving distinctness of Units
+
+$\cat{V}$ -- Category of Response Scales; e.g. for temperature Response, there
+would be one Object for each scale $\degree C$, $\degree F$, $\degree K$; for
+each Ordered Pair of Response Scales $(V, V')$ there is a Surjective Morphism
+$V \rightarrow V'$
+
+$\cat{\Omega}$ -- Category of Covariate Spaces; Morphisms are ordinarily
+Injective maps between Covariates Spaces; when there are different measurement
+scales for a Quantitative Covariate, the Objects of $\cat{\Omega}$ are some or
+all Subsets of each measurement scale, and Morphisms are generated by
+composition of Subset Insertion maps and measurement-scale Transformations; for
+Un-ordered Qualitative Covariates, $\cat{\Omega}$ may be identified with the
+Category of Injective maps on Finite Sets; for Ordered Qualitative Covariates,
+$\cat{\Omega}$ may be identified with the Subcategory of Order-preserving
+Injective maps; in ``Factorial Designs'' where the Design has several
+``factors'', then $\cat{\Omega}$ is a Category where each Object is a Product
+Set $\Omega = \Omega_1 \times \cdots \times \Omega_k$ and the Category of
+Morphisms is usually the Product Category with one component Category for each
+factor
 
 
 
@@ -4637,6 +4731,16 @@ Cross-validation Estimation of Fit
 
 Cross-validation Estimator of Risk (Density Estimation
 \S\ref{sec:density_estimation})
+
+
+
+\subparagraph{Exhaustive Cross-validation}
+\label{sec:exhaustive_cross_validation}\hfill
+
+\subparagraph{Non-exhaustive Cross-validation}
+\label{sec:exhaustive_cross_validation}\hfill
+
+$k$-fold Cross-validation -- may be a source of lookahead bias ?
 
 
 
@@ -5157,12 +5261,12 @@ for Random Variables (\S\ref{sec:random_variable}) $X_1, \ldots, X_n$:
 \emph{Law of Large Numbers} (\S\ref{sec:large_numbers}): the Sample Mean
 $\overline{X}_n = \frac{1}{n}\sum_i X_i$ \emph{Converges in Probability}
 (\S\ref{sec:stochastic_convergence}) to the Expectation
-(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+(\S\ref{sec:expected_value}) $\mu = E(X_i)$ as $n \to \infty$, i.e.
 $\overline{X}_n$ is close to $\mu$ with high Probability
 
 \emph{Central Limit Theorem} (\S\ref{sec:central_limit}):
 $\sqrt{n}(\overline{X}_n - \mu)$ \emph{Converges in Distribution} to a Normal
-Distribution (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e.
+Distribution (\S\ref{sec:normal_distribution}) as $n \to \infty$, i.e.
 the Sample Mean has approximately a Normal Distribution for large $n$
 
 the \emph{Grand Mean} is the Mean of multiple Sample Means
@@ -5509,7 +5613,7 @@ where:
   \begin{align*}
     E(\hat{F}_n(x)) & = F(x)                     \\
     V(\hat{F}_n(x)) & = \frac{F(x)(1 - F(x))}{n} \\
-    MSE & = \frac{F(x)(1-F(x))}{n} \rightarrow 0 \\
+    MSE & = \frac{F(x)(1-F(x))}{n} \to 0 \\
     \hat{F}_n(x) & \xrightarrow{P} F(x)          \\
   \end{align*}
 }
@@ -6410,7 +6514,7 @@ Large Sample Theory
 
 framework for assessing properties of Estimators (\S\ref{sec:estimator}) and
 Statistical Tests (Hypothesis Testing \S\ref{sec:hypothesis_testing}) as Sample
-Size (\S\ref{sec:sample_size}) $n \rightarrow \infty$
+Size (\S\ref{sec:sample_size}) $n \to \infty$
 
 \fist Stochastic Convergence (\S\ref{sec:stochastic_convergence}) -- Convergence
 of Sequences (\S\ref{sec:convergent_sequence}) of Random Variables to Limit
@@ -6421,13 +6525,13 @@ Asymptotic Thoerems:
   \item \emph{Law of Large Numbers} (\S\ref{sec:large_numbers}) --
     for Random Variables $X_1, \ldots, X_n$, the Sample Mean
     (\S\ref{sec:sample_mean}) $\overline{X}_n = \frac{1}{n}\sum_i X_i$ Converges
-    in Probability to $\mu = E(X_i)$ as $n \rightarrow \infty$, i.e.
+    in Probability to $\mu = E(X_i)$ as $n \to \infty$, i.e.
     $\overline{X}_n$ is close to $\mu$ with high Probability
   \item \emph{Central Limit Theorem} (\S\ref{sec:central_limit})
     for a Sequence of Random Variables $X_i, \ldots, X_n$ with Sample Mean
     $\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
     Converges in Distribution to a Normal Distribution
-    (\S\ref{sec:normal_distribution}) as $n \rightarrow \infty$, i.e. the Sample
+    (\S\ref{sec:normal_distribution}) as $n \to \infty$, i.e. the Sample
     Mean has approximately a Normal Distribution for large $n$
   \item ...
 \end{itemize}
@@ -6868,7 +6972,7 @@ Distribution of Observed Data expressed as a Function of Statistical Parameters
 \fist Bayesian Methods are tied to the Likelihood Function which does not yield
 accurate Inferances in High-dimensional and Non-parametric problems
 
-\emph{Likelihood Function} $\mathcal{L} : \Theta \rightarrow [0, \infty)$ -- the
+\emph{Likelihood Function} $\mathcal{L} : \Theta \to [0, \infty)$ -- the
   Joint Density (\S\ref{sec:joint_probability}) of Sample Data
   (\S\ref{sec:sample}):
 \[
@@ -9135,7 +9239,7 @@ Category $\cat{Para}(\cat{Euc})$ where $\cat{Euc}$ is the Category of Euclidean
 Spaces
 \[
   \cat{Para} : (\mathcal{V}, I, \otimes)
-    \rightarrow (\cat{Para}(\mathcal{V}), I, \otimes)
+    \to (\cat{Para}(\mathcal{V}), I, \otimes)
 \]
 mapping between Small Symmetric Monoidal Categories
 
@@ -9144,12 +9248,12 @@ $(\cat{Euc}, 1, \times)$
 (TODO: xref parameterized category)
 
 a \emph{Neural Network Architecture} is a Functor
-$Arch : \cat{Free}(G) \rightarrow \cat{Para}(\cat{Euc})$
+$Arch : \cat{Free}(G) \to \cat{Para}(\cat{Euc})$
 
-a \emph{Model} is a Functor $Model : \cat{Free}(G) \rightarrow \cat{Euc}$
+a \emph{Model} is a Functor $Model : \cat{Free}(G) \to \cat{Euc}$
 
 given an Architecture $Arch$ and a Parameter $p \in \mathcal{P}(Arch)$, a Model
-$Model_p : \cat{Free}(G) \rightarrow \cat{Euc}$ \emph{generalizes} the notion of
+$Model_p : \cat{Free}(G) \to \cat{Euc}$ \emph{generalizes} the notion of
 a Model in Machine Learning, allowing it to be used for inference and evaluated
 
 Adversarial Loss, Path-equivalence Loss
@@ -9420,39 +9524,39 @@ $P$ -- Parameters
 
 ``\emph{Learners}'':
 
-$I : A \times P \rightarrow B$ -- \emph{Implement}
+$I : A \times P \to B$ -- \emph{Implement}
 
-$U : A \times P \times B \rightarrow P$ -- \emph{Update}
+$U : A \times P \times B \to P$ -- \emph{Update}
 
-$r : A \times P \times B \rightarrow A$ -- \emph{Request}
+$r : A \times P \times B \to A$ -- \emph{Request}
 
 when the Parameters are the Identity, $1$:
 
-$I : A \times 1 \rightarrow B$
+$I : A \times 1 \to B$
 
-$U : A \times 1 \times B \rightarrow 1$
+$U : A \times 1 \times B \to 1$
 
-$r : A \times 1 \times B \rightarrow A$
+$r : A \times 1 \times B \to A$
 
 then this is a a \emph{Set-based} ("\emph{Bare}") \emph{Lens}:
 
-$get : A \rightarrow B$ (Implement)
+$get : A \to B$ (Implement)
 
-$put : A \times B \rightarrow A$ (Request)
+$put : A \times B \to A$ (Request)
 
 alternatively, adding parentheses:
 
-$I : (A \times P) \rightarrow B$
+$I : (A \times P) \to B$
 
-$U : (A \times P) \times B \rightarrow P$
+$U : (A \times P) \times B \to P$
 
-$r : (A \times P) \times B \rightarrow A$
+$r : (A \times P) \times B \to A$
 
 gives a Lens:
 
-$get : (A \times P) \rightarrow B$ (Implement)
+$get : (A \times P) \to B$ (Implement)
 
-$put : (A \times P) \times B \rightarrow (A \times P)$ (Request $\times$ Update)
+$put : (A \times P) \times B \to (A \times P)$ (Request $\times$ Update)
 
 (note that in this case, $put$ is composed of both Request and Update)
 
@@ -9666,7 +9770,7 @@ or \emph{TreeNet}
   G = \langle{V, f}\rangle
 \]
 where $V$ is a Set of Threshold Logic Units (a.k.a. McCulloch-Pitts Neurons
-\S\ref{sec:tlu}) and $f : V^2 \rightarrow \reals$ is a Function linking pairs of
+\S\ref{sec:tlu}) and $f : V^2 \to \reals$ is a Function linking pairs of
 Units to a \emph{Connectivity Weight} with restrictions:
 
 $w_{ii} = 0$ -- no Unit is connected to itself
@@ -10073,17 +10177,17 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
   \item \emph{Convergence in Distribution} (\emph{Weak Convergence}) --
     $X_n \rightsquigarrow X$ if for all $x$ at which $F_X$ is Continuous:
     \[
-      \lim_{n\rightarrow\infty} F_{X_n}(x) = F_X(x)
+      \lim_{n\to\infty} F_{X_n}(x) = F_X(x)
     \]
   \item \emph{Convergence in Probability} -- $X_n \xrightarrow{P} X$ if for
     every $\epsilon > 0$:
     \[
-      \lim_{n\rightarrow\infty}P(|X_n - X| > \epsilon) = 0
+      \lim_{n\to\infty}P(|X_n - X| > \epsilon) = 0
     \]
   \item \emph{Almost Sure (Everywhere) Convergence} (\emph{Strong Convergence})
     -- $X_n \xrightarrow{as} X$ if:
     \[
-      P(\lim_{n\rightarrow\infty}X_n = X) = 1
+      P(\lim_{n\to\infty}X_n = X) = 1
     \]
   \item \emph{Sure (Everywhere) Convergence} (\emph{Pointwise Convergence})
   \item \emph{Convergence in the $r$th Mean} or \emph{$L^r$-norm}
@@ -10092,11 +10196,11 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
       \item \emph{Convergence in Quadratic Mean ($L^2$)} --
         $X_n \xrightarrow{qm} X$ if:
         \[
-          \lim_{n\rightarrow\infty} E(X_n - X)^2 = 0
+          \lim_{n\to\infty} E(X_n - X)^2 = 0
         \]
       \item \emph{Convergence in $L^1$} -- $X_n \xrightarrow{L^1} X$ if:
         \[
-          \lim_{n\rightarrow\infty} E(|X_n - X|) = 0
+          \lim_{n\to\infty} E(|X_n - X|) = 0
         \]
     \end{itemize}
 \end{itemize}
@@ -10350,8 +10454,8 @@ $\mu_n$ gives the Histogram of collecting all Outcomes at Time $n$
 
 (Lemma) the Marginal Probabilities are given by $\mu_n = \mu_0 \mathbf{P}^n$
 
-$j$ is \emph{Accessible} from $i$, $i \rightarrow j$, if $p_{ij}(n) > 0$ for
-some $n$; if $i \rightarrow j$ and $j \rightarrow i$, then $i$ and $j$
+$j$ is \emph{Accessible} from $i$, $i \to j$, if $p_{ij}(n) > 0$ for
+some $n$; if $i \to j$ and $j \to i$, then $i$ and $j$
 \emph{Communicate}, $i \leftrightarrow j$
 
 (Thm.) the Communication Relation Satisfies:
@@ -10414,7 +10518,7 @@ Closed, Irreducible Set of Recurrent States
 a Recurrent State is \emph{Null} if the Mean Recurrence Time is Infinite;
 otherwise it is \emph{Positive} (or \emph{Non-null})
 
-(Lemma) if a Sate is Null and Recurrent, then $p_{ii}^n \rightarrow 0$
+(Lemma) if a Sate is Null and Recurrent, then $p_{ii}^n \to 0$
 
 (Lemma) in a Finite State Markov Process, all Recurrent States are Positive
 
@@ -10450,14 +10554,14 @@ Distribution $\pi$ forever
 
 a Markov Process has \emph{Limiting Distribution} $\pi$ if:
 \[
-  P^n \rightarrow \begin{bmatrix}
+  P^n \to \begin{bmatrix}
     \pi \\
     \pi \\
     \vdots \\
     \pi \\
   \end{bmatrix}
 \]
-for some $\pi$, i.e. $\pi_j = \lim_{n\rightarrow\infty} \mathbf{P}_{ij}^n$
+for some $\pi$, i.e. $\pi_j = \lim_{n\to\infty} \mathbf{P}_{ij}^n$
 exists and is independent of $i$
 
 \textbf{Thm.} (Convergence) \emph{
@@ -10465,8 +10569,8 @@ exists and is independent of $i$
   unique Stationary Distribution $\pi$, and a Limiting Distribution equal to
   $\pi$, and for any Bounded Function $g$, with Probability $1$:
 \[
-  \lim_{N\rightarrow\infty} \frac{1}{N} \sum_{n=1}^N g(X_n)
-    \rightarrow E_\pi(g) \equiv \sum_j g(j) \pi_j
+  \lim_{N\to\infty} \frac{1}{N} \sum_{n=1}^N g(X_n) \to E_\pi(g)
+    \equiv \sum_j g(j) \pi_j
 \]
 }
 
