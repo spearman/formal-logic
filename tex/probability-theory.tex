@@ -4801,12 +4801,48 @@ Distribution with independent components
 
 ``general construction'':
 
-for each fixed $V$, the Parameter $(\Theta, *)$ is a Contravaraint Functor
-$\cat{O} \to \cat{K}$, where $\cat{K}$ is usually the Category of Surjective
-Linear Transformations on Vector Spaces, associating each Covariate Set $\Omega$
-with a Parameter Set $\Theta_\Omega$, and each Injective Covariate Morphism
+for each fixed $V$, the Parameter $(\Theta, *)$ is a Contravariant Functor
+$\cat{O} \to \cat{K}$, associating each Covariate Set $\Omega$ with a Parameter
+Set $\Theta_\Omega$, and each Injective Covariate Morphism
 $\varphi_c : \Omega \to \Omega'$ with a Surjective Parameter map
-$\varphi_c^* : \Theta_{\Omega'} \to \Theta_\Omega$
+$\varphi_c^* : \Theta_{\Omega'} \to \Theta_\Omega$; when $\cat{K}$ is the
+Category of Surjective Linear Transformations on Vector Spaces, $\Theta$ is
+called a \emph{Representation} (\S\ref{sec:representation}) of $\cat{O}$
+
+a \emph{Statistical Model} is then a Functor on the Design Category $\cat{D}$
+associating with each Design Object $\psi : U \to \Omega$ a \emph{Model Object}
+that is a map $P_\psi : \Theta_\Omega \to \mathcal{P}(S)$ such that
+$P_\psi\theta$ is a Probability Distribution on $S$, and to each Morphism
+$(\varphi_d,\varphi_c) : \psi \to \psi'$ in $\cat{D}$ is associated a map
+$(\varphi^\dagger_d, \varphi^*_c) : P_{\psi'} \to P_\psi$ (FIXME: what category
+is this Functor *into* ???); the Set of Distributions generated is
+$\mathcal{F}_\psi = P_\psi \Theta_\Omega$
+
+as a result of this definition:
+\begin{enumerate}
+  \item the Sample-space Transformation
+    $\varphi^*_d : S' \to S$ also carries each Distribution $F$ on $S'$ to a
+    transformed Distribution $\varphi^\dagger_d F = F \circ \varphi^{*-1}_d$
+    on $S$,
+  \item by Commutativity,
+    \[
+      P_\psi\varphi^*_c =
+        \varphi^\dagger_d P_{\psi'} : \Theta_{\Omega'} \to \mathcal{P}(S)
+    \]
+    that is,
+    \[
+      \theta \in \Theta_{\Omega'}, P_\psi \varphi_c^* \theta =
+        \varphi^\dagger_d P_{\psi'} \theta
+    \]
+\end{enumerate}
+(1) ensures that the Family of Distributions on $S$ is ``\emph{suitably
+embedded}'' in the Family of Distributions on $S'$-- the maps
+$\varphi^*_d : S' \to S$ that define the embedding depend on the Category of
+Morphisms on Units; for $\varphi_c$ equal to the Identity on $\Omega$, and
+therefore $\varphi_c^*$ equal to the Identity on $\Theta_\Omega$, the
+``consistency condition'' (2) asserts taht the Distribution $P_\psi\theta$ on
+$S$ is \emph{the same} as the Marginal Distribution of $P_{\psi'}\theta$ on $S'$
+by the embedding map $\varphi_d^* : S' \to S$
 
 
 
