@@ -779,9 +779,10 @@ Value $1$ to the entire Measure Space (making it a Probability Space).
 
 cf. \emph{Probability} (\S\ref{sec:probability})
 
-\fist a \emph{Probability Distribution} (\S\ref{sec:probability_distribution})
-is the Pushforward Measure (\S\ref{sec:pushforward_measure}) of a Random
-Variable (\S\ref{sec:random_variable})
+\fist any \emph{Probability Distribution} (\S\ref{sec:probability_distribution})
+defines a Probability Measure as the Pushforward Measure
+(\S\ref{sec:pushforward_measure}) of a Random Variable
+(\S\ref{sec:random_variable})
 
 \emph{Choquet Simplex} (\S\ref{sec:choquet_theory}) -- any Point in a Choquet
 Simplex is represented by a unique Probability Measure
@@ -1738,10 +1739,10 @@ Weighted Least Squares (WLS \S\ref{sec:wls})
 \section{Probability Distribution}\label{sec:probability_distribution}
 % ==============================================================================
 
-the Pushforward Measure (\S\ref{sec:pushforward_measure}) of a Random Variable
+any Probability Distribution defines a Probability Measure
+(\S\ref{sec:probability_measure}) as the Pushforward Measure
+(\S\ref{sec:pushforward_measure}) of a Random Variable
 (\S\ref{sec:random_variable})
-
-cf. Probability Measure (\S\ref{sec:probability_measure})
 
 a Probability Distribution is given by its Continuous Distribution Function
 (\S\ref{sec:cdf}), which is a Right-continuous Function; the Cardinality of the
@@ -2195,6 +2196,8 @@ as $n \to \infty$ is the Standard Normal Distribution
 \hfill
 
 $k > 2$, $n = 1$
+
+Standard (Probability) Simplex (\S\ref{sec:simplex})
 
 
 
@@ -4748,18 +4751,20 @@ $\varphi_c \circ x = x' \circ \varphi_d$
 for each Injective Morphism $\varphi : U \rightarrowtail U'$ in $\cat{U}$, there
 is a corresponding ``Coordinate Projection Map'', $\varphi^* : V^{U'} \to V^{U}$
 
+\emph{Sample Space Category} $\cat{S}$
+
 for $f \in V^{U'}$, the Pullback Map defined by Function Composition
 $\varphi^* (f) = f \circ \varphi$ is a $V$-valued Function on $U$; therefore
-$(V, *)$ is a \emph{Functor} on $\cat{U}$ associating each $U$ with the Sample
-Space $V^U$ and with each Morphism $\varphi : U \to U'$ the map
+$(V, *)$ is a \emph{Functor} on $\cat{U} \to \cat{S}$ associating each $U$ with
+the Sample Space $V^U$ and with each Morphism $\varphi : U \to U'$ the map
 $varphi^* : V^{U'} \to V^U$ by Function Composition; by Functoriality of
 $(V, *)$, the Identity $U \to U$ is mapped to the Identity $V^U \to V^U$ and the
 Composite map $\psi\varphi : U \to U''$ to the Composite
 $\varphi^*\psi^* : V^{U''} \to V^U$
 
-\emph{Sample Space Category} $\cat{S}$ -- Objects $V^U$ (with $V \in \cat{V}$ and
-$U \in \cat{U}$) and Morphisms $V^{U'} \to V'^{U}$ are Compositions
-$\gamma_U(\varphi^*_V) = \varphi^*_{V'}(\gamma_{U'})$ where $\gamma : V \to V'$
+in $\cat{S}$ Objects $V^U$ (with $V \in \cat{V}$
+and $U \in \cat{U}$) and Morphisms $V^{U'} \to V'^{U}$ are Compositions
+$\gamma_U(\varphi_V^*) = \varphi_{V'}^*(\gamma_{U'})$ where $\gamma : V \to V'$
 is a Morphism of the Codomain and $\varphi^*$ is a  Functional Composition with
 the Domain Morphism $\varphi : U \to U'$, i.e. the Category of Morphisms on
 Sample Spaces is built from a Category of Injective Morphisms on Units and a
@@ -4809,40 +4814,190 @@ $\varphi_c^* : \Theta_{\Omega'} \to \Theta_\Omega$; when $\cat{K}$ is the
 Category of Surjective Linear Transformations on Vector Spaces, $\Theta$ is
 called a \emph{Representation} (\S\ref{sec:representation}) of $\cat{O}$
 
-a \emph{Statistical Model} is then a Functor on the Design Category $\cat{D}$
-associating with each Design Object $\psi : U \to \Omega$ a \emph{Model Object}
-that is a map $P_\psi : \Theta_\Omega \to \mathcal{P}(S)$ such that
-$P_\psi\theta$ is a Probability Distribution on $S$, and to each Morphism
-$(\varphi_d,\varphi_c) : \psi \to \psi'$ in $\cat{D}$ is associated a map
-$(\varphi^\dagger_d, \varphi^*_c) : P_{\psi'} \to P_\psi$ (FIXME: what category
-is this Functor *into* ???); the Set of Distributions generated is
-$\mathcal{F}_\psi = P_\psi \Theta_\Omega$
+\emph{Model Category} $\cat{M}$
+
+\emph{Distribution Category} $\cat{F}$
+
+a \emph{Statistical Model} is then a Functor on the Design Category
+$\cat{D} \to \cat{M}$ associating with each Design Object $\psi : U \to \Omega$
+a \emph{Model Object} that is a map $P_\psi : \Theta_\Omega \to \mathcal{P}(S)$
+such that $P_\psi\theta$ is a Probability Distribution on $S$, and to each
+Morphism $(\varphi_d,\varphi_c) : \psi \to \psi'$ in $\cat{D}$ is associated a
+map $(\varphi_d^\dagger, \varphi_c^*) : P_{\psi'} \to P_\psi$; the Set of
+Distributions generated is $\mathcal{F}_\psi = P_\psi \Theta_\Omega$
 
 as a result of this definition:
 \begin{enumerate}
   \item the Sample-space Transformation
-    $\varphi^*_d : S' \to S$ also carries each Distribution $F$ on $S'$ to a
-    transformed Distribution $\varphi^\dagger_d F = F \circ \varphi^{*-1}_d$
+    $\varphi_d^* : S' \to S$ also carries each Distribution $F$ on $S'$ to a
+    transformed Distribution $\varphi_d^\dagger F = F \circ \varphi^{*-1}_d$
     on $S$,
   \item by Commutativity,
     \[
-      P_\psi\varphi^*_c =
-        \varphi^\dagger_d P_{\psi'} : \Theta_{\Omega'} \to \mathcal{P}(S)
+      P_\psi\varphi_c^* =
+        \varphi_d^\dagger P_{\psi'} : \Theta_{\Omega'} \to \mathcal{P}(S)
     \]
     that is,
     \[
       \theta \in \Theta_{\Omega'}, P_\psi \varphi_c^* \theta =
-        \varphi^\dagger_d P_{\psi'} \theta
+        \varphi_d^\dagger P_{\psi'} \theta
     \]
 \end{enumerate}
 (1) ensures that the Family of Distributions on $S$ is ``\emph{suitably
 embedded}'' in the Family of Distributions on $S'$-- the maps
-$\varphi^*_d : S' \to S$ that define the embedding depend on the Category of
+$\varphi_d^* : S' \to S$ that define the embedding depend on the Category of
 Morphisms on Units; for $\varphi_c$ equal to the Identity on $\Omega$, and
 therefore $\varphi_c^*$ equal to the Identity on $\Theta_\Omega$, the
-``consistency condition'' (2) asserts taht the Distribution $P_\psi\theta$ on
+``consistency condition'' (2) asserts that the Distribution $P_\psi\theta$ on
 $S$ is \emph{the same} as the Marginal Distribution of $P_{\psi'}\theta$ on $S'$
-by the embedding map $\varphi_d^* : S' \to S$
+by the embedding map $\varphi_d^* : S' \to S$ (FIXME: clarify)
+
+the association $U \mapsto V^U$, $\varphi_d \mapsto \varphi_d^*$ determines the
+``structure'' of the Sample Spaces as a Functor $\cat{U} \to \cat{S}$ (FIXME:
+this is the same functor as $(V, *)$ ???), and therefore as a Functor on
+$\cat{D}$ (FIXME: explain)
+
+the Set of Morphisms of Sample Spaces is a Category Isomorphic to
+$\cat{U}^{op}$, and likewise the association $U \mapsto \mathcal{P}(V^U)$,
+$\varphi_d \mapsto \varphi_d^\dagger$ is a Functor $\cat{U} \to \cat{F}$,
+with Image Isomorphic to $\cat{U}^{op}$
+
+the mapping $S \to \mathcal{P}(S)$, $\varphi_d^* \mapsto \varphi_d^\dagger$ is
+an Isomorphism $\cat{S} \cong \cat{F}$
+
+the Parameter $\Theta$ is a Functor on $\cat{O}$ and therefore on $\cat{D}$
+(FIXME: explain)
+
+therefore the Model $P : \Theta \to \mathcal{P}(S)$ is a \emph{Natural
+  Transformation} of Functors $\cat{D}$ (FIXME: is this
+$(\Theta, *) \implies (V, *)$ ???)
+
+the Set of Models $\Theta \to \mathcal{P}(S)$ is Convex
+
+``\emph{sense}'' of a Model, ``\emph{meaning}'' of a Parameter
+
+the definition of $\varphi_d^\dagger$ and Commutativity condition (2) above
+ensures that the \emph{meaning} of the Parameter is \emph{retained} for families
+on different Sample Spaces and different Designs
+
+Parameter Sets $\Theta_\Omega$, maps $P$ and $\varphi_c^*$ are not otherwise
+prescribed allowing variation in construction of specific Models
+
+Vector Space $Vect(S)$ of Formal Linear Combinations
+$\alpha_1 s_1 + \alpha_2 s_2 + \cdots$ of Elements of $S$; restricting to Formal
+Convex Combinations in which $\alpha_i \geq 0$ and $\Sigma \alpha_i = 1$ obtains
+the Subset $\mathcal{P}(S) \subset Vect(S)$ of Probability Distributions on $S$
+
+if $S$ is Coutnable, then each Formal Convex Combination can be interpreted as
+an ``\emph{Operation}'' in which an Element fo $S$ is chosen according to the
+Probability Distribution; then each Function $h : S \to T$ determines a Linear
+Transformation $h^* : Vect(S) \to Vect(t)$ where:
+\[
+  h^*(\alpha_1 s_1 + \alpha_2 s_2 + \cdots) =
+    \alpha_1 h(s_1) + \alpha_2 h(s_2) + \cdots
+\]
+given $h : S \to T$, Formal Linearity determines
+$h : \mathcal{P}(S) \to \mathcal{P}(T)$
+
+to each Model Object $P_\psi : \Theta_\Omega \to \mathcal{P}(S)$ there
+corresponds a map
+$P_\psi : \mathcal{P}(\Theta_\Omega) \to \mathcal{P}(\Theta_\Omega \times S)$
+assocaiating each Prior Distribution $F$ on $\Theta_\Omega$ a Joint Distribution
+$P_\psi F$ on $\Theta \times S$ by Formal Convex Combinations, and the Marginal
+Distribution on $S$ is obtained by Integration over $\Theta_\Omega$, i.e. by
+treating the Formal Lineawr Combination $F$ as an ``actual'' Lineawr Combination
+
+\emph{Hierarchical Models} -- ``chain'' $\Theta^1, \Theta^2, \ldots, \Theta^k$
+of Parameter Functors with a ``chain'' of Natural Transformations:
+\[
+  P_1:\Theta^1 \to \mathcal{P}(\Theta^2),
+  P_2:\Theta^2 \to \mathcal{P}(\Theta^3), \ldots,
+  P_k:\Theta^k \to \mathcal{P}(S)
+\]
+and by the compositional operation above:
+\[
+  (P_k P_{k-1} \cdots P_1):
+    \Theta^1 \to \mathcal{P}(\Theta^2 \times \cdots \times \Theta^k \times S)
+\]
+this is not a Statistical Model according to the definition, but it can be
+converted into one by the Natural Transformation of \emph{Integration} in which
+Formal Linear Combination $P_{k-1} \cdots P_1$ is interpreted as an ``actual''
+Linear Combination:
+\[
+  \Theta^1 \xrightarrow{P_k \cdots P_1}
+    \mathcal{P}(\Theta^2 \times \cdots ;\times \Theta^k \times S) \to
+    \mathcal{P}(S)
+\]
+(FIXME: clarify)
+
+a \emph{Bayesian Model} (Bayes Network \S\ref{sec:bayes_network}) is a
+Hierarchical Model in which $k > 1$ and $\Theta^1 = \{0\}$ is the Trivial
+Functor, a one-point Set with Identity Map (FIXME: clarify)
+
+\url{https://statmodeling.stat.columbia.edu/2019/05/21/neural-nets-vs-statistical-models/}
+-- some comments on Hierarchical Models as related to Neural Networks:
+\begin{quote}
+  Neural nets are a special case of Statistical Models, typically Bayesian
+  Hierarchical Logistic Regression with latent Parameters. But Neural Nets are
+  typically Estimated in a different way: the resulting Posterior Distributions
+  will generally be Multimodal, so rather than try the hopeless task of
+  traversing the whole Posterior Distribution, we’ll use various approximate
+  methods, which then are evaluated using predictive accuracy.
+\end{quote}
+
+\emph{Submodels}
+
+\emph{Subparameters} -- the notion that only certain Fuctions on Parameters
+``make sense'' is understood and formalized to some extent by Dimensional
+Analysis in Physics
+
+a \emph{Natural Subparameter} is a Natural Transformation $g : \Theta \to \Xi$
+of Functors on $\cat{D}$
+
+Complementary Subparameters
+
+Identifiable Subparameters
+
+\emph{Response-scale Morphisms} -- $\gamma : V \to V'$
+
+for each Response Scale $V \in \cat{V}$, the Sample Space is a Contravariant
+Functor on $\cat{U}$ and the Model is a Contravariant Functor on the Design
+Category; to each $\gamma : V \to V'$ in $\cat{V}$ there corresponds a Natural
+Transformation of Sample Spaces (TODO: commutative diagram)
+
+$\cat{S}$ is built up from a Category of Injective Morphisms on Units and a
+Category of Morphisms on Response Scales, and $\cat{S}$ is Isomorphic to the
+Product Category $\cat{V} \times \cat{U}^{op}$
+
+the ``logical structure'' of a Statistical Model is given by the following
+Functor ``sequences'':
+\begin{flalign*}
+  & \cat{V} \times \cat{D}^{op} \to \cat{V} \times \cat{U}^{op}
+      \cong \cat{S} \cong \mathcal{P}(S) \\
+  & \cat{V} \times \cat{D}^{op} \to \cat{V} \times \cat{O}^{op}
+      \xrightarrow{\Theta} \cat{K} \\
+  & P : \Theta \to \mathcal{P}(S)
+\end{flalign*}
+
+a Model is a Natural Transforamtion $P : \Theta \to \mathcal{P}(S)$ associating
+each pair $(V, \psi : U \to \Omega)$ a map
+$P_\psi : \Theta \to \mathcal{P}(V^U)$ satisfying Property (1) above
+
+``in the absence of Covariate effects'' (FIXME: does this just mean keeping a
+fixed covariate set ???), the Commutative Diagram of a Statistical Model takes
+a form in which the Model $P : \Theta \to \mathcal{P}(S)$ is indexed by Sample
+Spaces $S, S', \ldots$; the Parameter Space $(\Theta, \dagger)$ is a Covariant
+Functor on $\cat{V}$ associating each Response Scale $V$ with a Parameter Set
+$\Theta_V$ and with each Morphism $\gamma : V \to V'$ a Parameter Morphism
+$\gamma^\dagger : \Theta_V \to \Theta_V'$; also to each Morphism of Sample
+Spaces $\gamma \varphi^* : V^{U'}\to V^{U}$, the Transformation on the Model is
+described by a Commutative Diagram (TODO); implies
+$P : \Theta \to \mathcal{P}(S)$ is a Natural Transformation of Functors
+
+the statement that a Statistical Model is a Natural Transformation of Functors
+is a consistency condition ensuring that different ways of computing the
+Probability of equivalent Events gives \emph{the same answer}, and as a
+consequence, equivalent Events determine the same Likelihood
 
 
 
@@ -5123,12 +5278,29 @@ Fitting a Graphical Model to Discrete Data \fist Pairwise Markov Graph
 
 \paragraph{Bayes Network}\label{sec:bayes_network}\hfill
 
-or \emph{Probabilistic Directed Acyclic Graphical Model}
+\emph{Bayesian Model} or \emph{Probabilistic Directed Acyclic Graphical Model}
 
 DAG (\S\ref{sec:dag}) -- Dependency structure
 
 representation of Probability Distributions based on \emph{Causal Dependencies}
 (\S\ref{sec:causal_graph})
+
+\emph{Hierarchical Bayes Model}
+
+McCullagh02: a \emph{Bayesian Model} is a Hierarchical Model
+$\Theta^1, \Theta^2, \ldots, \Theta^k$ in which $k > 1$ and $\Theta^1 = \{0\}$
+is the Trivial Functor, a one-point Set with Identity Map
+
+\url{https://statmodeling.stat.columbia.edu/2019/05/21/neural-nets-vs-statistical-models/}
+-- some comments on Hierarchical Models as related to Neural Networks:
+\begin{quote}
+  Neural nets are a special case of Statistical Models, typically Bayesian
+  Hierarchical Logistic Regression with latent Parameters. But Neural Nets are
+  typically Estimated in a different way: the resulting Posterior Distributions
+  will generally be Multimodal, so rather than try the hopeless task of
+  traversing the whole Posterior Distribution, we’ll use various approximate
+  methods, which then are evaluated using predictive accuracy.
+\end{quote}
 
 \emph{Causality} (Pearl 2009) -- counterfactual reasoning
 
@@ -9380,6 +9552,17 @@ can also be described by a Kernel
   \item Non-linear System (\S\ref{sec:nonlinear_equation_system})
     Identification and Control
 \end{itemize}
+
+\url{https://statmodeling.stat.columbia.edu/2019/05/21/neural-nets-vs-statistical-models/}
+-- some comments on Hierarchical Models as related to Neural Networks:
+\begin{quote}
+  Neural nets are a special case of Statistical Models, typically Bayesian
+  Hierarchical Logistic Regression with latent Parameters. But Neural Nets are
+  typically Estimated in a different way: the resulting Posterior Distributions
+  will generally be Multimodal, so rather than try the hopeless task of
+  traversing the whole Posterior Distribution, we’ll use various approximate
+  methods, which then are evaluated using predictive accuracy.
+\end{quote}
 
 \emph{Neural Networks and Automated Differentiation} -
 \url{https://idontgetoutmuch.wordpress.com/2013/05/31/neural-networks-and-automated-differentiation-3/}
