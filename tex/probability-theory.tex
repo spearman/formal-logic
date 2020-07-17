@@ -2434,6 +2434,13 @@ Multivariate Random Variable (\S\ref{sec:random_vector})
 
 
 
+\paragraph{Elliptical Distribution}\label{sec:elliptical_distribution}
+\hfill
+
+generalization of Multivariate Normal Distribution
+
+
+
 \subsubsection{$t$-distribution}\label{sec:t_distribution}
 
 (or \emph{Student's $t$-distribution})
@@ -2661,6 +2668,14 @@ for Continuous $X$ with CDF $F_X$, $Y = F_X(X)$ is called a \emph{Probability
 
 
 
+\subsubsection{Tukey Lambda Distribution}\label{sec:tukey_lambda_distribution}
+
+\paragraph{Logistic Distribution}\label{sec:logistic_distribution}\hfill
+
+\fist Logistic Regression (\S\ref{sec:logistic_regression})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Joint Probability Distribution}\label{sec:joint_probability}
 % ------------------------------------------------------------------------------
@@ -2859,6 +2874,23 @@ of Tweedie Exponential Dispersion Models (\S\ref{sec:exponential_dispersion})
 Sequential (Time Series) data attributed to ``convergence effects'' related to
 the Central Limit Theorem (\S\ref{sec:central_limit}) that have Foci of
 Convergence in the family of Tweedie Exponential Dispersion Models
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Location-scale Family}\label{sec:location_scale}
+% ------------------------------------------------------------------------------
+
+\begin{itemize}
+  \item Uniform Continuous and Discrete Distributions
+  \item Normal Distributions
+  \item Elliptical Distributions
+  \item Cauchy Distributions
+  \item Logistic Distributions
+  \item Double Exponential (Laplace) Distributions
+  \item Student's $t$-distributions
+  \item Generalized Extreme Value (GEV) Distributions
+\end{itemize}
 
 
 
@@ -4783,7 +4815,8 @@ together with a \emph{Design Pullback} map $\psi^*$
 
 (TODO: commutative diagrams)
 
-a Subrepresentation $\Theta$ in the standard Representation $V^{\Omega}$ is a
+a Subrepresentation $\Theta$ in the standard Representation (FIXME: clarify
+``standard representation'') $V^{\Omega}$ is a
 Sequence of Subspaces $\{ \Theta_\Omega \subset V^\Omega \}$ Indexed by the
 Objects in $\cat{O}$ such that for each map $\varphi_c : \Omega \to \Omega'$ in
 $\cat{O}$, the Linear Transformation $\varphi_c^* : V^{\Omega'} \to V^\Omega$
@@ -4828,11 +4861,11 @@ Distributions generated is $\mathcal{F}_\psi = P_\psi \Theta_\Omega$
 
 as a result of this definition:
 \begin{enumerate}
-  \item the Sample-space Transformation
+  \item (\emph{Commutativity Condition}) the Sample-space Transformation
     $\varphi_d^* : S' \to S$ also carries each Distribution $F$ on $S'$ to a
-    transformed Distribution $\varphi_d^\dagger F = F \circ \varphi^{*-1}_d$
-    on $S$,
-  \item by Commutativity,
+    transformed Distribution $\varphi_d^\dagger F = F \circ \varphi^{*-1}_d$ on
+    $S$,
+  \item (\emph{Consistency Condition}) by Commutativity,
     \[
       P_\psi\varphi_c^* =
         \varphi_d^\dagger P_{\psi'} : \Theta_{\Omega'} \to \mathcal{P}(S)
@@ -4843,14 +4876,17 @@ as a result of this definition:
         \varphi_d^\dagger P_{\psi'} \theta
     \]
 \end{enumerate}
-(1) ensures that the Family of Distributions on $S$ is ``\emph{suitably
+(1.) ensures that the Family of Distributions on $S$ is ``\emph{suitably
 embedded}'' in the Family of Distributions on $S'$-- the maps
 $\varphi_d^* : S' \to S$ that define the embedding depend on the Category of
 Morphisms on Units; for $\varphi_c$ equal to the Identity on $\Omega$, and
 therefore $\varphi_c^*$ equal to the Identity on $\Theta_\Omega$, the
-``consistency condition'' (2) asserts that the Distribution $P_\psi\theta$ on
+Consistency Condition (2.) asserts that the Distribution $P_\psi\theta$ on
 $S$ is \emph{the same} as the Marginal Distribution of $P_{\psi'}\theta$ on $S'$
 by the embedding map $\varphi_d^* : S' \to S$ (FIXME: clarify)
+
+these statements ensure that a Statistical model is a Natural Transformation
+$P : \Theta \to \mathcal{P}(S)$
 
 the association $U \mapsto V^U$, $\varphi_d \mapsto \varphi_d^*$ determines the
 ``structure'' of the Sample Spaces as a Functor $\cat{U} \to \cat{S}$ (FIXME:
@@ -4876,7 +4912,7 @@ the Set of Models $\Theta \to \mathcal{P}(S)$ is Convex
 
 ``\emph{sense}'' of a Model, ``\emph{meaning}'' of a Parameter
 
-the definition of $\varphi_d^\dagger$ and Commutativity condition (2) above
+the definition of $\varphi_d^\dagger$ and Consistency Condition (2.) above
 ensures that the \emph{meaning} of the Parameter is \emph{retained} for families
 on different Sample Spaces and different Designs
 
@@ -4981,7 +5017,7 @@ Functor ``sequences'':
 
 a Model is a Natural Transforamtion $P : \Theta \to \mathcal{P}(S)$ associating
 each pair $(V, \psi : U \to \Omega)$ a map
-$P_\psi : \Theta \to \mathcal{P}(V^U)$ satisfying Property (1) above
+$P_\psi : \Theta \to \mathcal{P}(V^U)$ satisfying Property (1.) above
 
 ``in the absence of Covariate effects'' (FIXME: does this just mean keeping a
 fixed covariate set ???), the Commutative Diagram of a Statistical Model takes
@@ -4995,9 +5031,82 @@ described by a Commutative Diagram (TODO); implies
 $P : \Theta \to \mathcal{P}(S)$ is a Natural Transformation of Functors
 
 the statement that a Statistical Model is a Natural Transformation of Functors
-is a consistency condition ensuring that different ways of computing the
+is a Consistency Condition ensuring that different ways of computing the
 Probability of equivalent Events gives \emph{the same answer}, and as a
 consequence, equivalent Events determine the same Likelihood
+
+\emph{Kolmogorov Consistency} (\S\ref{sec:kolmogorov_extension}) -- Insertion
+Maps, $\cat{O} = \{ 0 \}$, $V = \reals$; the Consistency Condition (2.) above
+is equivalent to the statement taht the Kolmogorov Existence Condition for a
+Stochastic Process is satisfied at \emph{each Parameter Point}
+
+\emph{Interference} -- Insertion Maps, $V = \reals$,
+$\varphi_c = id_\Omega : \Omega \to \Omega$;
+$P_\psi(E; \theta) = P_\psi'(E'; \theta)$;
+assumption of \emph{Lack of Interference}; if $\cat{O}$ includes Insertion Maps,
+then $\varphi_c : \Omega \to \Omega$ need not be the Identity Map, in which case
+the Commutativity Condition (1.) above implies that Lack of Interference holds
+for each family $P_\psi : \Theta_\Omega \to \mathcal{P}(\reals^U)$ and also for
+$\Omega \neq \Omega'$ the Distributions in each family are related ``in a
+natural way''; for each $\theta'$ such that $\varphi_c^* \theta' = \theta$,
+$P_\psi(E; \theta) = P_{\psi'}(E'; \theta')$
+
+\emph{(Infinite) Exchangeability} (\S\ref{sec:infinitely_exchangeable}) --
+$\cat{U} = \cat{FinSet}_\rightarrowtail$ Category of Injective Maps on Finite
+Sets, $V = \reals$, $\cat{O} = \{ 0 \}$; to each Injective Map
+$\varphi : U \rightarrowtail U'$ in $\cat{FinSet}_\rightarrowtail$ the standard
+(Contravariant) Representation associates the Surjective Linear Map
+$\varphi^* : \reals^{U'} \twoheadrightarrow \reals^{U}$; for $U = U'$,
+$\varphi^*$ Permutes Coordinates, or more generally $\varphi^*$ is a
+Coordinate-projection Map; the Commutativity Condition (1.) is the statement
+that for each $P_U\theta$ on $\reals^U$, $\theta \in \Theta$, the Distribution
+$P_U \theta$ is Invariant under Coordinate Permutation, and for each Injection
+$\varphi : U \rightarrowtail U'$, the Coordinate-projection map $\varphi^*$
+carries the Distribution $P_U'\theta$ on $\reals^{U'}$ to $P_U\theta$ on
+$\reals^U$-- i.e. for each $\theta \in \Theta$ there corresponds a Sequence
+$\{ P_U\theta \}$ that is the Distribution of an \emph{Infinitely} Exchangeable
+Sequence of Random Variables, and the Set
+$Inv_{\cat{FinSet}_\rightarrowtail}(\reals^U)$ of all Natural Transformations
+$\{0\} \to \mathcal{P}(\reals^U)$ is the Set of all Infinitely Exchangeable
+Probability Models on the standard Representation
+
+\emph{Partial Exchangeability} -- $\cat{FinSet}_\rightarrowtail^2$, assume
+$\Theta = \{0\}$ (TODO: more preliminaries); by the Commutativity Condition
+(1.), for each rectangular index array
+$\{1, \ldots, m\} \times \{1, \ldots n\}$, there corresponds a Distribution
+$P_{mn}$ on $\reals^{mn}$ such that for $m' \geq m$ and $n' \geq n$, $P_{mn}$ is
+the Marginal Distribution of $P_{m'n'}$ under all Coordinate-projection Maps
+$(\varphi_1, \varphi_2)^*$ in the standard Representation and $P_{mn}$ is
+Invariant under row Permutation and column Permutation; i.e. $P$ is the
+Distribution of an Infinite Partially Exchangeable Array (Aldous81); conversely
+each Infinite Partially Exchangeable Array of Random Variables has a
+Distribution corresponding to a $\cat{FinSet}_\rightarrowtail^2$-invariant
+Distribution and a Model is therefore a Set of such Distributions indexed by
+$\Theta$; the Set $Inv_{\cat{FinSet}_\rightarrowtail^2}(S)$ of all
+$\cat{FinSet}_\rightarrowtail^2$-natural Transformations
+$\{0\} \to \mathcal{P}(S)$ is the Set of all Invariant Probability Models on the
+standard $\cat{FinSet}_\rightarrowtail^2$-representation
+
+\emph{Completely Randomized Design} -- $\cat{U} = \cat{FinSet}_\rightarrowtail$
+Implies that the Units are Infinitely Exchangeable; ... MORE
+
+\emph{Block Designs}
+
+\emph{Causality}, \emph{Non-specific Effects} -- Random Effects Models
+(\S\ref{sec:random_effect}); Non-specific Factors (Blocks, temporal structure,
+spatial structure) for which no ``level-specific'' Inferences are ``required''
+can be best regarded as a \emph{Property} defining the structure of the Unit;
+Specific Factors (Treatment, Variety, Age, etc.) for which ``level-specific''
+Features may be ``required'' must be regarded as Objects in $\cat{O}$;
+``level-specific'' Effects may be ascribed to Specific Factors (``intrinsic'' or
+not), but \emph{Causal} Effects are not ``ordinarily'' ascribed to ``intrinsic''
+Factors (FIXME: clarify); Causal mechanisms are necessarily \emph{context
+  dependent} in ways that Categories and Morphisms are not; a given Model
+arising in different fields may be capable of numerous ``mechanistic''
+interpretations, and Models exist for which \emph{no} mechanistic interpretation
+is ``readily'' available or else are in conflict with accepted ``scientific''
+laws, but such alternative Models are \emph{necessary} in order to test
+scientific laws
 
 
 
@@ -5188,6 +5297,10 @@ Family
 \paragraph{Fixed Effects Model}\label{sec:fixed_effect}\hfill
 
 \paragraph{Random Effects Model}\label{sec:random_effect}\hfill
+
+(McCullagh02)
+
+
 
 \paragraph{Mixed Model}\label{sec:mixed_model}\hfill
 
@@ -8951,6 +9064,8 @@ Regression Analysis using Basis Functions (\S\ref{sec:basis_function})
 
 \subsubsection{Generalized Linear Model (GLM)}\label{sec:glm}
 
+1983 - McCullagh, Nelder - \emph{Generalized Linear Models}
+
 generalization of Simple and Multivariate Linear Regression to Models where:
 \begin{enumerate}
   \item Regressands can be Categorical (Discrete) Variables
@@ -9022,6 +9137,8 @@ Models:
 \paragraph{Logistic Regression}\label{sec:logistic_regression}\hfill
 
 or \emph{Logit Regression}
+
+\fist Logistic Distribution (\S\ref{sec:logistic_distribution})
 
 Binary Regression (\S\ref{sec:binary_regression})
 
@@ -10424,6 +10541,43 @@ with no dependency on previous queries
 
 
 
+% ------------------------------------------------------------------------------
+\subsection{Exchangeable Sequence}\label{sec:exchangeable_sequence}
+% ------------------------------------------------------------------------------
+
+an \emph{Exchangeable (Interchangeable) Sequence of Random Variables} is a
+Finite or Infinite Sequence $X_1, X_2, X_3, \ldots$ such that the Joint
+Probability Distribution is equal under any Finite Permutation of terms
+
+equivalent to the concept of ``\emph{Statistical Process Control (SPC)}''
+(Quality Control)
+
+Representation Theorem
+
+
+
+\subsubsection{Infinitely Exchangeable Sequence}
+\label{sec:infinitely_exchangeable}
+
+an Infinitely Exchangeable Sequence is Strictly Stationary
+(\S\ref{sec:stationary_process})
+
+Predictive Inference, Bayesian Statistics (Finetti) --TODO: xref
+
+(McCullagh02)
+
+
+
+\subsubsection{Partially Exchangeable Array}}
+\label{sec:partially_exchangeable}
+
+1981 - Aldous -
+\emph{Representaions for Partially Exchangeable Arrays of Random Variables}
+
+(McCullagh02)
+
+
+
 % ==============================================================================
 \section{Stochastic Process}\label{sec:stochastic_process}
 % ==============================================================================
@@ -10469,9 +10623,6 @@ cf. Harmonic Functions (\S\ref{sec:harmonic_function})
 Equation in which one or more Terms is a Stochastic Process
 
 First-hitting-time Model
-
-Daniell-Kolmogorov Extension Theorem -- a suitably ``consistent'' collection of
-Finite-dimensional Distributions will define a Stochastic Process
 
 1984 - Kingman - \emph{Present Position and Potential Developments: Some
   Personal Views: Probability and Random Processes}
@@ -10522,6 +10673,16 @@ for a Markov Process, this simplifies to:
 \[
   f(x_0, \ldots, x_t) = f(x_1)f(x_2|x_1)f(x_3|x_2) \cdots f(x_t|x_{t-1})
 \]
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Daniell-Kolmogorov Extension}\label{sec:kolmogorov_extension}
+% ------------------------------------------------------------------------------
+
+\emph{Daniell-Kolmogorov Extension Theorem} (or \emph{Kolmogorov Consistency
+  Theorem}) -- a suitably ``consistent'' collection of Finite-dimensional
+Distributions will define a Stochastic Process
 
 
 
@@ -10717,8 +10878,11 @@ GBM is Path Continuous
 % ------------------------------------------------------------------------------
 
 Stochastic Process for which the Unconditional Joint Probability Distribution
-(\S\ref{sec:joint_probability}) does not change when shiften in Time (TODO:
+(\S\ref{sec:joint_probability}) does not change when shifted in Time (TODO:
 xref)
+
+\fist an Infinitely Exchangeable Sequence of Random Variables
+(\S\ref{sec:infintely_exchangeable}) is Strictly Stationary (wiki)
 
 \begin{itemize}
   \item Ornstein-Uhlenbeck Process (\S\ref{sec:ornstein_uhlenbeck}) -- a
