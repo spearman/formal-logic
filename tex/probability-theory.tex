@@ -160,9 +160,10 @@ if an actual Outcome is inside an Event, the Event is said to have
 ``\emph{occurred}''
 
 \fist cf. \emph{Observation} (or \emph{Realization} \S\ref{src:observation}):
-the ``Outcome'' of a \emph{Random Variable} (\S\ref{sec:random_variable}), i.e.
-the Member of the Random Variable's State Space corresponding to an Outcome
-which occurred in the Sample Space of a performed Experiment
+the ``Outcome'' of a \emph{Random Variable} (\S\ref{sec:random_variable}) or
+\emph{Random Process} (\S\ref{sec:stochastic_process}), i.e. the Member of the
+Random Variable's State Space corresponding to an Outcome which occurred in the
+Sample Space of a performed Experiment
 
 \fist note sometimes ``\emph{Outcome}'' is used to refer to a Response Variable
 (Regressor \S\ref{sec:regression_analysis}) or Classification Category
@@ -278,6 +279,24 @@ $P(A \cap B | C) = P(A|C)P(B|C)$
 note that two Events may be Independent, but not \emph{Conditionally}
 Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
 the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Experimental Design}\label{sec:experimental_design}
+% ------------------------------------------------------------------------------
+
+%FIXME: move this section ???
+
+Fisher 1926, 1935
+
+\emph{Design of Experiments}
+
+Treatment Effects
+
+Variety Effects
+
+Block Effects
 
 
 
@@ -3789,6 +3808,22 @@ TODO
 
 
 
+\subsubsection{Contrast}\label{sec:contrast}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Spatial Analysis}\label{sec:spatial_analysis}
+% ------------------------------------------------------------------------------
+
+Random Fields (\S\ref{sec:random_field})
+
+
+
+\subsubsection{Variogram}\label{sec:variogram}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Extreme Value Analysis (EVA)}\label{sec:eva}
 % ------------------------------------------------------------------------------
@@ -3877,6 +3912,9 @@ quantified by Standard Deviation (\S\ref{sec:standard_deviation})
   \item ... TODO
 \end{itemize}
 
+Overdispersion (\S\ref{sec:overdispersion}) -- presence of greater Dispersion
+than would be expected based on a given Statistical Model
+
 (wiki): ``Dispersion precedes Location'' --
 
 given a measure of Statistical Dispersion, measures of Central Tendency
@@ -3917,10 +3955,16 @@ Outliers:  $Q1 - 1.5 \times IQR$, $Q3 + 1.5 \times IQR$
 
 \paragraph{Qualitative Variation}\label{sec:qualitative_variation}\hfill
 
-measure of Statistical Dispersion for {Nominal Distributions} (Measurement Level
-\S\ref{sec:measurement_level})
+measure of Statistical Dispersion for \emph{Nominal Distributions}
+(Measurement Level \S\ref{sec:measurement_level})
 
 Deviation from the Mode (\S\ref{sec:mode})
+
+
+
+\subparagraph{Coefficient of Variation}\label{sec:variation_coefficient}\hfill
+
+or \emph{Relative Standard Deviation (RSD)}
 
 
 
@@ -4003,6 +4047,9 @@ the Sample Size, i.e. the Standard Error of the Mean is a measure of
 ``Dispersion'' of Sample Means around the Population Mean
 
 cf. Confidence Interval (\S\ref{sec:confidence_interval})
+
+see also: Relative Standard Deviation (Coefficient of Variation
+\S\ref{sec:variation_coefficient})
 
 $S$ -- Standard Deviation of Regression Residuals
 (\S\ref{sec:regression_residual})
@@ -4822,12 +4869,12 @@ Objects in $\cat{O}$ such that for each map $\varphi_c : \Omega \to \Omega'$ in
 $\cat{O}$, the Linear Transformation $\varphi_c^* : V^{\Omega'} \to V^\Omega$
 also satisfies $\varphi_c^* \Theta_{\Omega'} = \Theta_\Omega$
 
-in the usual complete formulation, the Parameter Space is extended to $\Theta
-\times \reals^+$ by the inclusion of a Dispersion Parameter $\sigma^2$ and for
-the Design $\psi : U \to \Omega$, the Sample Space is $V^U$, and the full
-Normal-theory Linear Model is the Set of Normal Distributions with Mean Vector
-in the Subspace $\psi^*\Theta_\Omega$, and the Variance Matrix is ``Proportional
-to the Identity'' (FIXME: clarify)
+in the usual complete formulation, the Parameter Space is extended to
+$\Theta \times \reals^+$ by the inclusion of a Dispersion Parameter $\sigma^2$
+and for the Design $\psi : U \to \Omega$, the Sample Space is $V^U$, and the
+full Normal-theory Linear Model is the Set of Normal Distributions with Mean
+Vector in the Subspace $\psi^*\Theta_\Omega$, and the Variance Matrix is
+``Proportional to the Identity'' (FIXME: clarify)
 
 the skeletal description is shared by Non-normal Linear Models, certain
 Non-linear Models, and all Generalized Linear Models by modification of the step
@@ -5100,13 +5147,161 @@ Specific Factors (Treatment, Variety, Age, etc.) for which ``level-specific''
 Features may be ``required'' must be regarded as Objects in $\cat{O}$;
 ``level-specific'' Effects may be ascribed to Specific Factors (``intrinsic'' or
 not), but \emph{Causal} Effects are not ``ordinarily'' ascribed to ``intrinsic''
-Factors (FIXME: clarify); Causal mechanisms are necessarily \emph{context
-  dependent} in ways that Categories and Morphisms are not; a given Model
-arising in different fields may be capable of numerous ``mechanistic''
-interpretations, and Models exist for which \emph{no} mechanistic interpretation
-is ``readily'' available or else are in conflict with accepted ``scientific''
-laws, but such alternative Models are \emph{necessary} in order to test
-scientific laws
+Factors (FIXME: clarify);
+Causal mechanisms are necessarily \emph{context dependent} in ways that
+Categories and Morphisms are not;
+a given Model arising in different fields may be capable of numerous
+``mechanistic'' interpretations, and Models exist for which \emph{no}
+mechanistic interpretation is ``readily'' available or else are in conflict
+with accepted ``scientific'' laws, but such alternative Models are
+\emph{necessary} in order to test scientific laws
+
+\emph{Location-scale Models} -- Models with IID Scalar Responses are determined
+by their $1$-dimensional Marginal Distributions on the Response Scale (ignores
+$\cat{U}$ and $\cat{O}$); \emph{Transformations} of the Response Scale, i.e.
+Morphisms in $\cat{V}$; (MORE: preliminaries); in an example Location-scale
+Model $(\theta_1, \theta_2) \mapsto N(\theta_1, \theta_2^2)$, $\theta_1$ and
+$\theta_2$ are Natural Subparameters, but the Coefficient of Variation
+(\S\ref{sec:variation_coefficient}) $\tau = \theta_1 / \theta_2$ is not
+a Natural Subparameter because
+$(\theta_1, \theta_2) \mapsto \theta_1 / \theta_2$ is not Natural for the
+Category of Location-scale Transformations, \emph{but} for the Subcategory
+$(0, b)$ of Component-wise Non-zero Scalar Multiplication, the Coefficient of
+Variation \emph{is} a Natural Subparameter with induced Transformation
+$\tau \mapsto sign(b) \tau$
+
+\emph{Regression}, \emph{Correlation} -- $\sigma^2_\psi$ is not Invariant under
+selection of Units so the Correlation Coefficient $\rho$ is not a Natural
+Transformation-- any Inferential statement about $\rho$ must be interpreted
+relative to a ``suitable'' Model and Categor for which $\rho$ \emph{is} a
+Natural Tranformation of Functors, e.g. by regarding $(y, x)$ as a
+\emph{Bivariate} Response on the Units, then $\Omega = \{ 0 \}$ and $\rho$ is a
+Natural Subparameter
+
+\emph{Splines}, \emph{Curve Estimation}
+
+\emph{Contingency-table Models} (\S\ref{sec:contingency_table})
+
+\emph{Embeddability}, \emph{Stochastic Processes}
+
+in particular applications, the Category of Morphisms on Samples Spaces should
+be established at the outset and must not be determined by the chosen
+Family of Distributions, but by the ``\emph{context}''
+
+\emph{Box-Cox Model}
+
+\emph{Extensive Response Variables}
+
+\emph{Spatial Aggregation}, \emph{Measure Processes} -- Borel Measure Space on a
+fixed Domain $D$ in the Plane; Process as Random Variable $Y$ or Probability
+Model $P$ satisfying Kolmogorov Consistency Condition; \emph{Point Process} is a
+Process for which each ``Outcome'' is a Countable Set of Points in $D$, i.e. a
+Point Process is a Non-negative Integer-valued Random Measure such that with
+Probability $1$, $Y$ has Countable Support and no ``Multiple Points'' (FIXME:
+xref)
+
+\emph{Domain Morphisms} -- an \emph{Invariant Probability Model} is a Natural
+Transformation $\{0\} \to \mathcal{P}(S)$ associating each Object $D$ with a
+Process $P_D$ on $Meas(D)$ such for that each Domain Morphism
+$\varphi : D \to D'$, the Sample Space map $\varphi^* : S_{D'} \to S_D$
+satisfies $P_D = P_{D'} \circ \varphi^{*-1}$, e.g. the Poisson Process with
+constant Unit Intensity Function is Invariant under Translation and Rotation of
+Domains; for many Categories of Domain Morphisms, Invariant Processes do not
+exist, e.g. there are no non-trivial Processes that are Invariant under
+Translation and Scalar Multiplication, however the \emph{family} of Poisson
+Processes with constant Intensity Function is closed under Similarity
+Transformation, and likewise the family of Stationary Gaussian Processes with
+constant Intensity and Isotropic Covariance Density
+
+a Statistical Model $P : \Xi \to \mathcal{P}(S)$ is a Natural Transformation of
+Functors on $\cat{D}$, e.g. for $\cat{D}$ the Group of Similarity
+Transformations acting on $\reals^2$ one may take $\Xi_D = \reals^+$ and
+$\varphi'$ are equal to the Jacobian of $\varphi$; if $P_D \xi$ is the
+Homogeneous Poisson Process on $D$ with Intensity $\xi$, ``the Diagram
+Commutes'' (FIXME: clarify)
+
+generally for $\Xi_D$ the Set of Non-negative Measures on $D$, for each
+$\varphi : D \to D'$, the induced map $\varphi'$ on Measures is given by
+$(\varphi' \mu)(A) = \mu(\varphi A)$ for $\mu \in \Xi_D'$ and $A \subset D$; if
+$\mu$ is Non-atomic, so is $\varphi' \mu$, and the Set of Non-atomic Measures is
+a Sub-functor of $\Xi$; if $P_{D'}\mu$ is a Poisson Process on $D'$ with
+Non-atomic Mean Measure $\mu$, the induced Process
+$\varphi^\dagger P_{D'}\mu$ on $D$ is Poisson with Non-atomic Mean Measure
+$\varphi'\mu$, and ``the Diagram Commutes'' (FIXME: clarify); an arbitrary
+Measure $\mu$ with Atoms gives rise to a Process in which multiple Events occur
+with non-zero Probability at a single Point; although $P_D\mu$ is a Poisson
+Process it is not a Point Process according to the usual definition; further
+Sub-models exist if $\cat{D}$ is restricted to Continuous Maps
+
+\emph{Covariate Effects in Spatial Processes}
+
+\emph{Conformal Models} -- a \emph{Conformal Model} is a Natural Transforations
+of Functors in which $\cat{D}$ is the Category of Conformal Maps acting on
+Domains in the Plane (preserves local Euclidean structure); if
+$\varphi : D \to D'$ is Conformal, then $\log J : D \to reals$ is Harmonic
+(where $J(x) = |\partial\varphi(x) / \partial x|$ is the Jacobian of $\varphi$
+
+\emph{Conformal Models with Covariates}
+
+\emph{Lattice Approximation}
+
+Br{\o}ns - \emph{Discussion} -- the Category of Designs $\cat{D}$ constructed by
+McCullagh is the Comma Category:
+\[
+  \cat{D} = (U_\cat{U} \downarrow U_\cat{O})
+\]
+of $\cat{V}$-valued Functors, and the Category of Sample Spaces:
+\[
+  \cat{S} = \cat{V} \times \cat{U}^{op}
+\]
+and the ``basic Category'' (FIXME: model category ???) is the Product Category:
+\[
+  \cat{V} \times \cat{D}^{op}
+\]
+both $\cat{D}$ and $\cat{S}$ can be derived from the ``basic Category''
+
+$\mathcal{P} : \cat{MeasSet} \to \cat{Set}$
+
+$\Theta : \cat{O}^{op} \to \cat{K}$
+
+Model as a Natural Transformation $P$:
+\[
+  P : U_\cat{K} \circ \Theta \circ \pi_{\cat{D}^{op}} \circ \pi_{\cat{U}^{op}}
+    \to \mathcal{P} \circ \Theta \circ (1_{\cat{V}} \times \pi_{\cat{U}^{op}}
+    : \cat{V} \times \cat{D}^{op} \to \cat{Set}
+\]
+(MORE: details)
+
+simplest Parameterized Statistical Models are triples $(\Theta, S, P)$
+consisting of a Parameter Set, Sample Space, and map
+$P : \Theta \to \mathcal{P}(S)$
+
+defining an Arrow (Morphism) between these Models as a pair $(\phi, t)$ of map
+$\phi : \Theta \to \Theta'$ and Measurable map $t : S \to \S'$ such that
+$\mathcal{P}(t) \circ P = P' \circ \theta$ Commutes, creating a Category
+$\cat{StatMod}$ of Statistical Models which is the Comma Category
+$(1_\cat{Set} \downarrow \mathcal{P})$
+
+the Natural Transformation:
+\[
+  P : 1_{\cat{Set}} \circ U_\cat{K} \circ \Theta \circ \pi_{\cat{D}^{op}}
+      \circ \pi_{\cat{U}^{op}}
+    \to \mathcal{P} \circ \Theta \circ (1_{\cat{V}} \times \pi_{\cat{U}^{op}})
+    : \cat{V} \to \cat{D}^{op} \to \cat{Set}
+\]
+is equivalent to a Functor:
+\[
+  P : \cat{V} \times \cat{D}^{op} \to (1_\cat{Set} \downarrow \mathcal{P})
+\]
+or a ``Diagram'' over the ``basic Category'' in $\cat{StatMod}$
+
+the Diagrams in $\cat{StatMod}$ should be over Monoidal Categories and should be
+Monoidal Functors, etc. (TODO: more details)
+
+\emph{Rejoinder} -- \emph{Extension and Embedding} Self-consistency forces the
+condition that $P_m\theta$ be the Marginal Distribution of $P_n\theta$ when $m$
+isa  Subobject of $n$, but some systems are excepted from this condition, e.g.
+``a Subset of a litter of pigs does not constitute a litter'' (Besag)
 
 
 
@@ -5174,6 +5369,14 @@ Cross-validation Estimator of Risk (Density Estimation
 \label{sec:exhaustive_cross_validation}\hfill
 
 $k$-fold Cross-validation -- may be a source of lookahead bias ?
+
+
+
+\paragraph{Overdispersion}\label{sec:overdispersion}\hfill
+
+%FIXME: move this section ???
+
+Dispersion (\S\ref{sec:dispersion})
 
 
 
@@ -5298,6 +5501,9 @@ Family
 
 \paragraph{Random Effects Model}\label{sec:random_effect}\hfill
 
+type of Hierarchical Linear Model (Multilevel Model
+\S\ref{sec:multilevel_model})
+
 (McCullagh02)
 
 
@@ -5389,9 +5595,16 @@ Fitting a Graphical Model to Discrete Data \fist Pairwise Markov Graph
 
 \paragraph{Markov Blanket}\label{sec:markov_blanket}\hfill
 
+Markov Random Fields (\S\ref{sec:markov_random_field})
+
+
+
 \paragraph{Bayes Network}\label{sec:bayes_network}\hfill
 
 \emph{Bayesian Model} or \emph{Probabilistic Directed Acyclic Graphical Model}
+(\S\ref{sec:graphical_model})
+
+Bayesian Statistics (\S\ref{sec:bayesian_inference})
 
 DAG (\S\ref{sec:dag}) -- Dependency structure
 
@@ -5443,6 +5656,8 @@ Directed Separation or $d$-separation
 or \emph{Hierarchical Linear Models}
 
 Gibbs Sampling (\S\ref{sec:mcmc})
+
+Random Effects Models (\S\ref{sec:random_effect})
 
 
 
@@ -7100,12 +7315,16 @@ or \emph{Cross Tabulation} or \emph{Crosstab}
 displays the Multivariate (\S\ref{sec:multivariate_statistics}) Frequency
 Distribution of Variables
 
+``\emph{Levels}''
+
 Two-way Tables
 
 Chi-squared Test (\S\ref{sec:chi_squared_test}) -- Degrees of Freedom =
 (rows - 1)(columns - 1)
 
 Log-linear Model (\S\ref{sec:log_linear})
+
+(McCullagh02 \S 6.4)
 
 
 
@@ -7187,6 +7406,8 @@ Interval
 % ------------------------------------------------------------------------------
 \subsection{Bayesian Inference}\label{sec:bayesian_inference}
 % ------------------------------------------------------------------------------
+
+\emph{Bayesian Statistics}
 
 \emph{Evidential Probability} or \emph{Bayesian Probability} -- interpretation
 of Probability as a ``reasonable'' \emph{Expectation}
@@ -7627,6 +7848,21 @@ an example of ``Causal Reasoning'' (TODO: xref)
 
 \url{http://www.inference.vc/untitled/} - \emph{ML beyond Curve Fitting: An
   Intro to Causal Inference and do-Calculus}
+
+\emph{Categorical Semantics for Causal Structure} -
+\url{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html}
+- $*$-autonomous (\S\ref{sec:star_autonomous}) extension of a given Compact
+Closed Category
+
+(McCullagh02):
+
+Causal mechanisms are necessarily \emph{context dependent} in ways that
+Categories and Morphisms are not;
+a given Model arising in different fields may be capable of numerous
+``mechanistic'' interpretations, and Models exist for which \emph{no}
+mechanistic interpretation is ``readily'' available or else are in conflict
+with accepted ``scientific'' laws, but such alternative Models are
+\emph{necessary} in order to test scientific laws
 
 (Wasserman04, Ch.16)
 
@@ -8686,7 +8922,7 @@ measure of Goodness-of-fit (\S\ref{sec:model_fit}) in Logistic Regression
 \subsubsection{Influence Matrix}\label{sec:influence_matrix}
 
 or \emph{Hat Matrix} or \emph{Projection Matrix} (cf.
-Linear Projection \S\ref{sec:projection})
+Linear Projection \S\ref{sec:linear_projection})
 
 (wiki):
 
@@ -10568,7 +10804,7 @@ Predictive Inference, Bayesian Statistics (Finetti) --TODO: xref
 
 
 
-\subsubsection{Partially Exchangeable Array}}
+\subsubsection{Partially Exchangeable Array}
 \label{sec:partially_exchangeable}
 
 1981 - Aldous -
@@ -10584,9 +10820,19 @@ Predictive Inference, Bayesian Statistics (Finetti) --TODO: xref
 
 or \emph{Random Process}
 
-Sequences of \emph{Dependent} (\S\ref{sec:dependence}) Random Variables; cf. IID
-(\S\ref{sec:iid}) Sequences (often of \emph{Observations}
+Indexed collection of \emph{Dependent} (\S\ref{sec:dependence}) Random
+Variables; cf. IID (\S\ref{sec:iid}) Sequences (often of \emph{Observations}
 \S\ref{sec:observation})
+
+alternatively: a Probability Distribution over a ``Space of Paths'' (MIT
+18.s096) --FIXME: is this a special case ???
+
+the \emph{Outcome} of a Stochastic Process is a particular Path or
+``\emph{Sample Function}'' (or ``\emph{Realization}'')
+
+a Process in which each Point is Stochastically Independent
+(\S\ref{sec:independence}) is called a \emph{Completely Random Process} (e.g. a
+Poisson Process \S\ref{sec:poisson_process})
 
 \fist a \emph{Random Sequence} (\S\ref{sec:random_sequence}) is a special case
 of Stochastic Process where the Index Set is some Subset of the Integers; a
@@ -10870,6 +11116,15 @@ GBM is Path Continuous
 \emph{Local Volatility} -- treat Volatility as a Function of Price and Time
 
 \emph{Stochastic Volatility} -- allow Volatility to be Stochastic
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Stopped Process}\label{sec:stopped_process}
+% ------------------------------------------------------------------------------
+
+(wiki) Stochastic Process that assumes the same Value after a prescribed,
+possibly Random, time
 
 
 
@@ -11206,9 +11461,17 @@ the CDF (\S\ref{sec:cdf}) associated with the Empirical Measure of a Sample
 
 
 
+\subsubsection{Intensity Measure}\label{sec:intensity_measure}
+
+(wiki) Non-random Measure defined as the Expectation Value (FIXME: expected
+value ???) of the Random Measure of a Set, corresponding to the Average Volume
+the Random Measure assigns to the Set
+
+
+
 \subsubsection{Point Process}\label{sec:point_process}
 
-a \emph{Point Process} (or \emph{Point Field}) is a Random Measure
+a \emph{Point Process} (or \emph{(Random) Point Field}) is a Random Measure
 (\S\ref{sec:random_measure}) of the form:
 \[
   \mu = \sum_{n=1}^N \delta_{X_n}
@@ -11241,6 +11504,8 @@ Counting occurrences of ``Events'' over time (e.g. traffic accidents,
 radioactive decay; cf. Propensity Interpretation of Probability)
 
 Memory-less
+
+Completely Random Process
 
 Semimartingale (\S\ref{sec:semimartingale})
 
@@ -11311,11 +11576,15 @@ where each $F_t$ is an $X$-valued Random Variable
 
 Tensor-valued Random Fields
 
+\fist Spatial Analysis (\S\ref{sec:spatial_analysis})
+
 
 
 \subsubsection{Markov Random Field}\label{sec:markov_random_field}
 
 (MRF)
+
+Graphical Model (\S\ref{sec:graphical_model})
 
 
 
