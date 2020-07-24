@@ -656,8 +656,14 @@ passing through them
 % ------------------------------------------------------------------------------
 
 (or \emph{Affine Map} or \emph{Affinity}) is a Function between Affine Spaces
-which preserves Points, Straight Lines, and Planes, and Sets of Parallel Lines
-remain Parallel
+which preserves:
+\begin{itemize}
+  \item Co-linearity between Points
+  \item Parallelism between Lines
+  \item Convexity of Sets
+  \item Ratios of Lengths
+  \item Barycenters of weighted collections of Points
+\end{itemize}
 
 preserves Ratios of Distances betwen Points lying on a Straight Line
 
@@ -685,15 +691,30 @@ Affine Transformations on the Affine Space underlying the Vector Space $F^n$
 
 Affine Transformations:
 \begin{itemize}
-\item Translation (\S\ref{sec:translation})
-\item Rotation (\S\ref{sec:rotation})
-\item Reflection (\S\ref{sec:reflection})
-\item Scaling
-\item Homothety (Homogeneous Dilation or Central Similarity)
-\item Similarity Transformation (???)
-\item Shear Mapping (???)
+  \item Rigid Transformation (\S\ref{sec:rigid_transformation}) --
+    Angle-preserving, Distance Preserving
+    \begin{itemize}
+      \item Translation (\S\ref{sec:translation})
+      \item Rotation (\S\ref{sec:rotation})
+      \item Reflection (\S\ref{sec:reflection})
+    \end{itemize}
+  \end{itemize}
+  \item Homothety (Homogeneous Dilation or Central Similarity
+    \S\ref{sec:homothety}) -- Preserves Lines and Parallelism
+    \begin{itemize}
+      \item Uniform Scaling (Linear Homothety \S\ref{sec:uniform_scaling})
+    \end{itemize}
+  \item Anisotropic Scaling (\S\ref{sec:anisotropic_scaling})
+    \begin{itemize}
+      \item Directional Scaling (\S\ref{sec:directional_scaling}) -- Stretching
+    \end{itemize}
+  \item Shear Transformation (Transvection \S\ref{sec:transvection}) --
+    Measure-preserving, Co-linearity Preserving
 \end{itemize}
 and combinations of the above in any combination and sequence
+
+the Invertible Affine Transformations form the Affine Group
+(\S\ref{sec:affine_group})
 
 cf. Affine Logic (\S\ref{sec:affine_logic})
 
@@ -702,26 +723,19 @@ Affine Transformations
 
 
 
-\subsubsection{Homothety}\label{sec:homothety}
+\subsubsection{Shear Transformation}\label{sec:shear_transformation}
 
-%FIXME: move ???
+%FIXME: move this section ???
 
-\emph{Scale Transformation} \fist Scaling (\S\ref{sec:scaling})
+or \emph{Transvection}
 
-Linear Transformation (\S\ref{sec:linear_transformation}) of an Affine Space
-determined by a Homothety Center Point $S$ and a Nonzero Scalar $\lambda$
-called the \emph{Ratio} fixing $S$ and sending any Point $M$ to a Point $N$
-such that $\vec{SN}$ is on the same Line as $\vec{SM}$ but \emph{Scaled} by a
-factor of $\lambda$:
-\[
-  M \mapsto S + \lambda\vec{SM}
-\]
 
-\fist Projective Geometry (\S\ref{sec:projective_geometry}): a Homothety is a
-Similarity Transformation (\S\ref{sec:similarity_transformation}) that leaves
-the Line at Infinity Pointwise Invariant
 
-\fist Scale Invariance (\S\ref{sec:scale_invariance})
+\subsubsection{Self-affinity}\label{sec:self_affinity}
+
+Symmetry under Affine Transformation
+
+cf. Self-similarity (\S\ref{sec:self_similarity})
 
 
 
@@ -803,31 +817,37 @@ $\reals^n$ is the Topology ``generated'' by those Balls
 \subsection{Rigid Transformation}\label{sec:rigid_transformation}
 % ------------------------------------------------------------------------------
 
-A \emph{Rigid Transformation} or \emph{Euclidean Isometry} is an Isometry
-(\S\ref{sec:isometry}) associated with the Euclidean Distance Metric of a
-Euclidean Space.
+A \emph{Rigid Transformation} (or \emph{Euclidean Isometry}) is an Isometry
+(Equi-affine Similarity \S\ref{sec:isometry}) associated with the Euclidean
+Distance Metric of a Euclidean Space, i.e. a \emph{Distance-preserving
+  Transformation}.
 
 The Euclidean Group (\S\ref{sec:euclidean_group}) $\mathrm{ISO}(n)$ is the
 Symmetry Group of $n$-dimensional Euclidean Space with Rigid Transformations as
 its Elements.
 
-cf. Affine Transformations (\S\ref{sec:affine_transformation}), Affine Group
-(\S\ref{sec:affine_group})
+a Rigid Transformation is a Similarity Transformation
+(\S\ref{sec:similarity_transformation}) where the Scaling Factor $r = 1$
+
+cf. Affine Transformations (\S\ref{sec:affine_transformation})
+
+\fist a Rigid Motion (\S\ref{sec:rigid_motion}) is a Positive Affine
+Transformation
 
 
 
 \subsubsection{Translation}\label{sec:translation}
 
-Affine Transformation (\S\ref{sec:affine_transformation})
-
 \fist Periodic Functions (\S\ref{sec:periodic_function}) are Functions with
 Graphs that exhibit Translational Symmetry (\S\ref{sec:symmetry_group})
+
+Group of Dilations (\S\ref{sec:dilation}) -- Translations
+(\S\ref{sec:translation}) and Hometheties of an Affine Space (i.e. Affine
+Transformations where the Image of every Line is Parallel to that Line)
 
 
 
 \subsubsection{Rotation}\label{sec:rotation}
-
-Affine Transformation (\S\ref{sec:affine_transformation})
 
 Discrete Rotational Symmetry (\S\ref{sec:discrete_symmetry})
 
@@ -835,11 +855,7 @@ Discrete Rotational Symmetry (\S\ref{sec:discrete_symmetry})
 
 \subsubsection{Reflection}\label{sec:reflection}
 
-Affine Transformation (\S\ref{sec:affine_transformation})
-
 Discrete Symmetry (\S\ref{sec:discrete_symmetry})
-
-Isometry (\S\ref{sec:isometry})
 
 Reflection Groups (\S\ref{sec:reflection_group}) are Discrete Groups Generated
 by a Set of Reflections of a Finite-dimensional Euclidean Space
@@ -870,11 +886,78 @@ additionally allows for Scaling (\S\ref{sec:scaling})
 
 
 % ------------------------------------------------------------------------------
+\subsection{Homothety}\label{sec:homothety}
+% ------------------------------------------------------------------------------
+
+\emph{Homothetic Transformation} or \emph{Homogeneous Dilation}
+
+Affine Transformation (\S\ref{sec:affine_transformation}) determined by a
+Homothety Center Point $S$ and a Nonzero Scalar $\lambda$ called the
+\emph{Ratio} fixing $S$ and sending any Point $M$ to a Point $N$ such that
+$\vec{SN}$ is on the same Line as $\vec{SM}$ but \emph{Scaled} by a factor of
+$\lambda$:
+\[
+  M \mapsto S + \lambda\vec{SM}
+\]
+
+Group of Dilations (\S\ref{sec:dilation}) -- Translations
+(\S\ref{sec:translation}) and Hometheties of an Affine Space (i.e. Affine
+Transformations where the Image of every Line is Parallel to that Line)
+
+\fist Projective Geometry (\S\ref{sec:projective_geometry}): a Homothety is a
+Similarity Transformation (\S\ref{sec:similarity_transformation}) that leaves
+the Line at Infinity Pointwise Invariant
+
+\fist Scale Invariance (\S\ref{sec:scale_invariance})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Scaling}\label{sec:scaling}
+% ------------------------------------------------------------------------------
+
+a \emph{Linear Homothety}
+
+see also:
+\begin{itemize}
+  \item Scale Analysis (Approximation Theory \S\ref{sec:scale_analysis})
+  \item Scale Invariance (\S\ref{sec:scale_invariance})
+  \item Statistical Scale Analysis (\S\ref{sec:statistical_scale})
+  \item Multidimensional Scaling (\S\ref{sec:multidimensional_scaling})
+\end{itemize}
+
+
+
+\subsubsection{Uniform Scaling}\label{sec:uniform_scaling}
+
+special case of Homothety (\S\ref{sec:homothety})
+
+
+
+\subsubsection{Anisotropic Scaling}\label{sec:anisotropic_scaling}
+
+\paragraph{Directional Scaling}\label{sec:directional_scaling}\hfill
+
+or \emph{Stretching}
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Similarity Transformation}\label{sec:similarity_transformation}
 % ------------------------------------------------------------------------------
 
 two geometric objects are \emph{Similar} if they have the same ``Shape'' under
-Rigid Transformations (\S\ref{sec:rigid_transformation}) and Scaling
+Rigid Transformations (Euclidean Isometry \S\ref{sec:rigid_transformation}) and
+Uniform Scaling (Linear Homothety \S\ref{sec:scaling})
+
+in Euclidean Geometry, a Similarity Transformation (or \emph{Similitude}) is a
+Bijection on the Space to itself that multiplies all Distances by the same
+positive Real Number $r$:
+\[
+  d(f(x), f(y)) = r d(x, y)
+\]
+where $d$ is the Euclidean Distance; when $r = 1$ the Similarity is a
+Rigid Transformation
 
 in Projective Geometry (\S\ref{sec:projective_geometry}) a Similarity
 Transformation fixes a given Elliptic Involution (FIXME: clarify)
@@ -886,10 +969,11 @@ Transformation that leaves the Line at Infinity Pointwise Invariant
 
 
 
-\subsubsection{Scaling}\label{sec:scaling}
+\subsubsection{Self-similarity}\label{sec:self_similarity}
 
-Linear Transformation (\S\ref{sec:linear_transformation}), special case of a
-Homothetic Transformation (\S\ref{sec:homothety})
+Symmetry under Similarity Transformation
+
+cf. Self-affinity (\S\ref{sec:self_affinity})
 
 
 
@@ -2051,7 +2135,8 @@ all Inertial Frames (\S\ref{sec:inertial_frame})
 
 \subsubsection{Scale Invariance}\label{sec:scale_invariance}
 
-\emph{Dilation}: Scale Transformation (Homothety \S\ref{sec:homothety})
+Scaling Transformation (\S\ref{sec:scaling}), Homothety (Homogeneous Dilation
+\S\ref{sec:homothety})
 
 ``Universality'', ``Self-similarity'' (cf. Holography)
 
