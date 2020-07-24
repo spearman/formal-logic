@@ -2029,689 +2029,6 @@ where $\hat{F}_n$ is the Empirical Distribution Function
 
 
 % ------------------------------------------------------------------------------
-\subsection{Discrete Probability Distribution}
-\label{sec:discrete_probability}
-% ------------------------------------------------------------------------------
-
-Probability Distribution of a Discrete Random Variable
-(\S\ref{sec:discrete_random_variable})
-
-characterized by a Probability Mass Function (\S\ref{sec:pmf})
-
-Cumulative Distribution Function (\S\ref{sec:cdf}) increases only by Jump
-Discontinuities
-
-\begin{itemize}
-  \item \emph{Point Mass Distribution} -- $X \sim \delta_a$ has CDF:
-    \[
-      F_X(x) = \begin{cases}
-        0 & x <    a \\
-        1 & x \geq a \\
-      \end{cases}
-    \]
-    and PMF:
-    \[
-      f_X(x) = \begin{cases}
-        1 & x = a \\
-        0 & \text{otherwise} \\
-      \end{cases}
-    \]
-  \item \emph{Discrete Uniform Distribution} (\S\ref{sec:uniform_distribution})
-  \item \emph{Multinomial Distribution} (\S\ref{sec:multinomial_distribution})
-    -- $X \sim Multinomial_k(n,p)$
-  \begin{itemize}
-    \item \emph{Bernoulli Distribution} (\S\ref{sec:bernoulli_distribution}) --
-      $X \sim Bernoulli(p)$
-    \item \emph{Binomial Distribution} (\S\ref{sec:binomial_distribution}) --
-      $X \sim Binomial(n,p)$
-    \item \emph{Categorical Distribution} (\S\ref{sec:categorical_distribution})
-      -- $X \sim Categorical(k,p)$
-  \end{itemize}
-  \item \emph{Geometric Distribution} (\S\ref{Sec:geometric_distribution}) --
-    $X \sim Geom(p)$
-  \item \emph{Poisson Distribution} (\S\ref{Sec:poisson_distribution}) --
-    $X \sim Poisson(\lambda)$
-\end{itemize}
-
-
-
-\subsubsection{Multinomial Distribution}\label{sec:multinomial_distribution}
-
-$n$ Trials
-
-$k$ Outcomes or ``\emph{Categories}''
-
-$k$ Outcomes $E_1, E_2, \ldots, E_k$
-
-Probabilities $p_1, p_2, \ldots, p_k$
-
-Probability Distribution of $x_1, x_2, \ldots, x_k$ number of
-Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
-\[
-  f(x_1, x_2, \ldots, x_k) = \binom{n}{x_1, x_2, \ldots, x_k} =
-    p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
-\]
-and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
-
-for $X = (X_1, \ldots, X_k) \sim Multinomial_k(n, p)$ and
-$p = (p_1, \ldots, p_k)$, the Marginal Distribution
-(\S\ref{sec:marginal_distribution}) of $X_j$ is $Binomial (n, p_j)$
-
-\begin{itemize}
-  \item Bernoulli Distribution (\S\ref{sec:bernoulli_distribution}) -- $k = 2$,
-    $n = 1$
-  \item Binomial Distribution (\S\ref{sec:binomial_distribution}) -- $k = 2$,
-    $n > 1$
-  \item Categorical Distribution (\S\ref{sec:categorical_distribution}) --
-    $k > 2$, $n = 1$
-\end{itemize}
-
-
-
-\paragraph{Bernoulli Distribution}\label{sec:bernoulli_distribution}\hfill
-
-$k = 2$, $n = 1$
-
-for a Random Variable $X$ representing a Binary Outcome:
-\begin{itemize}
-  \item $P(X=1) = p$
-  \item $P(X=0) = 1-p$
-\end{itemize}
-for some $p \in [0,1]$
-
-Mean:
-\[
-  \mu = p
-\]
-Variance:
-\[
-  \sigma^2 = p(1-p)
-\]
-PMF:
-\[
-  f(x) = p^x(1-p)^{1-x}
-\]
-or equivalently:
-\[
-  f(x) = \begin{cases}
-    p   & x = 1 \\
-    1-p & x = 0 \\
-  \end{cases}
-\]
-for $x \in \{0, 1\}$
-
-\fist cf. Logistic Regression (\S\ref{sec:logistic_regression}) -- Model with
-Binary Data $Y_i$, the Conditional Distribution $y | x$ is Bernoulli
-Distributed:
-\[
-  Y_i | X_i = x_i \sim Bernoulli(p_i)
-\]
-(cf. Linear Regression where the Conditional Distribution is Normally
-Distributed)
-
-generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
-
-
-
-\paragraph{Binomial Distribution}\label{sec:binomial_distribution}\hfill
-
-Sum of Independent Trials; cf. Normal Distribution
-(\S\ref{sec:normal_distribution})
-
-Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
-
-Binomial Random Variable (\S\ref{sec:binomial_variable})
-
-$k = 2$ , $n > 1$
-
-cf. Binomial Coefficients (\S\ref{sec:binomial_coefficient})
-
-\fist cf. Geometric Distribution (\S\ref{sec:geometric_distribution}) -- number
-of Trials until first Success
-
-Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
-$p \in [0,1]$:
-\[
-  X \sim B(n,p)
-\]
-describes the Probability of getting exactly $x$ ``Successes'' in $n$ Trials
-where the Probability of Success is $p$:
-\[
-  P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
-\]
-
-\fist Poisson Distribution (\S\ref{sec:poisson_distribution}) -- Limit of the
-Binomial Distribution as number of Trials $n \to \infty$
-
-Expected Value $E(X) = np$
-
-Mean $\mu = n p$
-
-Variance $\sigma^2 = n p (1-p)$
-
-Sample Proportion %FIXME
-
-
-
-\subparagraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
-
-$b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
-
-
-
-\subparagraph{Normal Approximation}\label{sec:normal_approximation}\hfill
-
-For Binomial Random Variable $X$ with Mean $\mu = np$ and Variance
-$\sigma^2 = npq$, then:
-\[
-  Z = \frac{X - np}{\sqrt{npq}}
-\]
-as $n \to \infty$ is the Standard Normal Distribution
-(\S\ref{sec:normal_distribution}) $n(Z;0,1)$
-
-
-
-\paragraph{Categorical Distribution}\label{sec:categorical_distribution}
-\hfill
-
-$k > 2$, $n = 1$
-
-Standard (Probability) Simplex (\S\ref{sec:simplex})
-
-
-
-\paragraph{Softmax Function}\label{sec:softmax}
-\hfill
-
-or \emph{Normalized Exponential Function}
-
-generalization of Logistic Function (\S\ref{sec:logistic_function}); the
-Logistic Function is the Derivative of Softplus --TODO
-
-output can be used to represent a Categorical Distribution
-
-often used as final layer of a Neural Network-based Classifier
-
-
-
-\subsubsection{Poisson Distribution}\label{sec:poisson_distribution}
-
-$P(x; \lambda t) = \frac{e^{-\lambda t} (\lambda t)^x}{x!}$
-where $\lambda$ is the average number of outcomes per unit time
-
-Expected Value is the Limit of the Binomial Distribution as number of Trials
-$n \to \infty$:
-\begin{flalign*}
-  E(X) & = \lambda \\
-  V(X) & = \lambda \\
-  P(X = k) & = \lim_{n\to\infty}
-               \binom{n}{k}(\frac{\lambda}{n})^k(1-\frac{\lambda}{n})^{n-k} \\
-           & = \frac{\lambda^k e^{-\lambda}}{k!} \\
-\end{flalign*}
-
-models counts of rare events, e.g. radioactive decay, traffic accidents (cf.
-Propensity Interpretation of Probability)
-
-cf. Poisson Processes (\S\ref{sec:poisson_process})
-
-\fist Poisson Noise (Shot Noise): Statistical Fluctuations
-(\S\ref{sec:statistical_fluctuation})
-
-for Independent Random Variables $X \sim Poisson(\lambda)$ and
-$Y \sim Poisson(\nu)$:
-\[
-  X + Y \sim Poisson(\lambda + \nu)
-\]
-
-if $N \sim Poisson(\lambda)$ and $Y | N = n \sim Binomial(n,p)$, then the
-Marginal Distribution of $Y$ is $Y \sim Poisson(\lambda p)$
-(Wasserman04 \S 23.3)
-
-
-
-\subsubsection{Geometric Distribution}\label{sec:geometric_distribution}
-
-$P(X = k) = p(1-p)^{k-1}$ for $k \in \{1, 2, 3, \ldots\}$
-
-where $X$ is the number of Independent Trials with Constant Probability of
-``Success'' until the first Success
-
-cf. Binomial Distribution (\S\ref{sec:binomial_distribution}) -- number of
-Successes after $n$ Trials
-
-cf. Geometric Series (\S\ref{sec:geometric_series})
-
-Expected Value $E(X) = 1 + (1-p) + (1-p)^2 + \cdots = \frac{1}{p}$
-
-
-
-\subsubsection{Hypergeometric Distribution}
-\label{sec:hypergeometric_distribution}
-
-$h(x; N, n, k) = \frac{\binom{k}{x} \binom{N-k}{n-x}}{\binom{N}{n}}$
-
-Mean $\mu = \frac{nk}{N}$
-
-Variance $\sigma^2 = \frac{N-n}{N-1} n \frac{k}{N}(1 - \frac{k}{N})$
-
-
-
-\paragraph{Multivariate Hypergeometric Distribution}
-\label{sec:multivariate_hypergeometric}\hfill
-
-
-
-\subsubsection{Parabolic Fractal Distribution}
-\label{sec:parabolic_fractal_distribution}
-
-\subsubsection{Discrete Power Law Distribution}
-\label{sec:discrete_power_law}
-
-\fist Continuous Power Law Distributions (\S\ref{sec:continuous_power_law})
-
-Slowly Varying Function (\S\ref{sec:slowly_varying})
-
-
-
-\paragraph{Zipf Distribution}\label{sec:zipf_distribution}\hfill
-
-\paragraph{Zeta Distribution}\label{sec:zeta_distribution}\hfill
-
-Normalization of the Zipf Distribution
-
-
-
-\paragraph{Yule-Simon Distribution}
-\label{sec:yule_simon_distribution}\hfill
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Continuous Probability Distribution}
-\label{sec:continuous_probability}
-% ------------------------------------------------------------------------------
-
-Probability Distribution of a Continuous Random Variable
-(\S\ref{sec:continuous_random_variable})
-
-characterized by a Probability Density Function
-(\S\ref{sec:probability_density})
-
-has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
-
-\fist Discrete Power Law Distributions
-(\S\ref{sec:discrete_power_law})
-
-\begin{itemize}
-  \item \emph{Uniform Distribution} (\S\ref{sec:uniform_distribution}) --
-    $X \sim Uniform(a,b)$
-  \item \emph{Normal (Gaussian) Distribution} (\S\ref{sec:normal_distribution})
-    -- $X \sim N(\mu, \sigma^2)$
-  \item \emph{Exponential Distribution} (\S\ref{sec:exponential_distribution})
-    -- $X \sim Exp(\beta) = Gamma(1, \beta)$
-  \item \emph{Gamma Distribution} (\S\ref{sec:gamma_distribution})
-    -- $X \sim Gamma(\alpha, \beta)$
-  \item \emph{Beta Distribution} (\S\ref{sec:beta_distribution})
-    -- $X \sim Beta(\alpha, \beta)$
-  \item \emph{$t$-distribution} (\S\ref{sec:t_distribution})
-    -- $X \sim t_\nu$
-  \item \emph{Cauchy-Lorenz Distribution} (\S\ref{sec:cauchy_distribution})
-    -- $X \sim t_\nu=1$
-  \item \emph{$\chi^2$-distribution} (\S\ref{sec:chi_squared})
-    -- $X \sim \chi^2_p$
-\end{itemize}
-
-
-
-\subsubsection{$t$-distribution}\label{sec:t_distribution}
-
-(or \emph{Student's $t$-distribution})
-
-$\nu$ -- Degrees of Freedom
-
-
-\begin{itemize}
-  \item $\nu = 1$ -- Cauchy Distribution (\S\ref{sec:cauchy_distribution})
-  \item $\nu = \infty$ -- Normal Distribution (\S\ref{sec:normal_distribution})
-\end{itemize}
-
-Sampling Distribution (\S\ref{sec:sampling_distribution}) for low Sample Size
-
-$t$-statistic (\S\ref{sec:t_statistic})
-
-$t$-test (\S\ref{sec:t_test})
-
-
-
-\paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
-
-or \emph{Cauchy-Lorentz Distribution}
-
-$\nu = 1$
-
-Expected Value (\S\ref{sec:expected_value}) and Variance (\S\ref{sec:variance})
-are \emph{undefined}
-
-the ``average'' of $n$ Independent Cauchy Random Variables with $x_0 = 0$
-\emph{does not} Converge to $0$ as $n \to \infty$ with Probability $1$-- ``it''
-stays a Cauchy Distribution of the same size; however $0$ is the \emph{Median}
-and \emph{Mode} (FIXME: clarify)
---\url{https://stats.stackexchange.com/questions/36027/why-does-the-cauchy-distribution-have-no-mean}
-
-\url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
-the Cauchy Distribution is a ``disguised'' form of the Uniform Distribution on a
-Circle
-
-has no Moment-generating Function (\S\ref{sec:moment_generating_function})
-
-the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
-$X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
-
-
-
-\paragraph{Normal Distribution}\label{sec:normal_distribution}\hfill
-
-(or \emph{Gaussian Distribution})
-
-member of the family of Tweedie (\S\ref{sec:tweedie_distribution}) Exponential
-Dispersion Models (\S\ref{sec:exponential_dispersion})
-
-\[
-  n (x; \mu, \sigma) =
-  \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
-\]
-
-cf. Binomial Distribution (Discrete \S\ref{sec:binomial_distribution})
--- Sum of Independent Trials
-
-a Normal Distribution corresponds to a $t$-distribution
-(\S\ref{sec:t_distribution}) with $\nu = \infty$ Degrees of Freedom
-
-the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
-$X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
-
-\emph{Central Limit Thoerem} (\S\ref{sec:central_limit_theorem}) -- ``the
-Distribution of a Sum of Independent Random Variables can be approximated by a
-Normal Distribution'';
-for a Sequence of Random Variables (\S\ref{sec:random_variable})
-$X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
-$\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
-\emph{Converges in Distribution} to a Normal Distribution
-(\S\ref{sec:normal_distribution}) as $n \to \infty$, i.e. the Sample
-Mean has approximately a Normal Distribution for large $n$
-
-as a consequence of the Central Limit Theorem, Random Errors
-(\S\ref{sec:random_error}) tend to be Normally Distributed
-
-\fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
-Infinite-dimensional generalizations of Multivariate Normal Distributions
-
-\emph{Empirical Rule} 68-95-99.7 Rule -- 68\% within 1 Standard Deviation of the
-Mean, 95\% within 2 Standard Deviations, 99.7\% within 3 Standard Deviations
-
-MIT 6.041SC, Lec.8
-
-Linear Functions of Normal Variables are Normal--
-for $X \sim N(\mu, \sigma^2)$ and $Y = aX + b$:
-\[
-  Y \sim N(a \mu + b, a^2 \sigma^2)
-\]
-
-\emph{Standardizing} -- for $X \sim N(\mu, \sigma^2)$:
-\[
-  \frac{X - \mu}{\sigma} \sim N(0, 1)
-\]
-where $(X - \mu)/\sigma$ is the \emph{Standard Score}
-($z$-score \S\ref{sec:standard_score})
-
-2018 - Eric Jang
-- \emph{Normalizing Flows Tutorial}
-- \url{https://blog.evjang.com/2018/01/nf1.html}
-
-
-
-\subparagraph{Mill's Inequality}\label{sec:mills_inequality}\hfill
-
-\textbf{Thm.} (Mill's Inequality) \emph{
-  For $Z \sim N(0,1)$:
-  \[
-    P(|Z| > t) \leq \sqrt{\frac{2}{\pi}}\frac{e^{-t^2/2}}{t}
-  \]
-}
-
-
-
-\subparagraph{Standard Normal Distribution}\label{sec:standard_normal}\hfill
-
-Mean $\mu = 0$
-
-Variance $\sigma^2 = 1$
-
-by convention Standard Normal Random Variables are denoted by $Z$, PDF by
-$\phi(z)$ and CDF by $\Phi(z)$
-
-there is no Closed-form Expression (\S\ref{sec:closed_form_expression}) for
-$\Phi$ (requires use of the Error Function \S\ref{sec:error_function})
-
-
-
-\subparagraph{Multivariate Normal Distribution}\label{sec:multivariate_normal}
-\hfill
-
-Multivariate Random Variable (\S\ref{sec:random_vector})
-
-
-
-\subparagraph{Elliptical Distribution}\label{sec:elliptical_distribution}
-\hfill
-
-generalization of Multivariate Normal Distribution
-
-
-
-\subsubsection{Inverse Gaussian Distribution}\label{sec:inverse_gaussian}
-
-\subsubsection{Log-normal Distribution}\label{sec:lognormal_distribution}
-
-\subsubsection{Gamma Distribution}\label{sec:gamma_distribution}
-
-Gamma Function (\S\ref{sec:gamma_function})
-
-Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
-> 0$:
-\[
-  f(x; \alpha, \beta) =
-  \begin{cases}
-    \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}
-      & \quad x > 0 \\
-    0 & \quad\text{else} \\
-  \end{cases}
-\]
-
-Mean $\mu = \alpha \beta$
-
-Variance $\sigma^2 = \alpha \beta^2$
-
-
-
-\paragraph{Exponential Distribution}\label{sec:exponential_distribution}\hfill
-
-a $Gamma(1,\beta)$ Distribution
-
-Continuous Random Variable $X$ with parameter $\beta > 0$:
-\[
-  f(x; \beta) =
-  \begin{cases}
-  \frac{1}{\beta} e^{\sfrac{-x}{\beta}}     & \quad x > 0 \\
-  0     & \quad\text{else} \\
-  \end{cases}
-\]
-
-models lifetimes of electronic components, wait times between rare events
-
-
-
-\subparagraph{Double Exponential Distribution}
-\label{sec:double_exponential}\hfill
-
-or \emph{Laplace Distribution}
-
-
-
-\paragraph{$\chi^2$ Distribution}\label{sec:chi_squared}\hfill
-
-Non-symmetric
-
-Sums of Squared IID Normally-distributed Random Variables, where the number of
-Variables is the ``Degrees of Freedom''
-
-\[
-  f(x; v) =
-  \begin{cases}
-    \frac{1}{2^{\sfrac{v}{2}}\Gamma(\sfrac{v}{2})}
-      x^{\sfrac{v}{2-1}} e^{\sfrac{-x}{2}}
-          & \quad x > 0 \\
-    0     & \quad\text{else} \\
-  \end{cases}
-\]
-
-Goodness-of-fit (\S\ref{sec:model_fit})
-
-Chi-squared Statistic -- Randomness Condition, Large Counts Condition ($>5$
-expected), Independence Condition
-
-\fist Chi-squared Test (\S\ref{sec:chi_squared_test})
-
-Logistic Regression
-
-
-
-\subparagraph{$F$-distribution}\label{sec:f_distribution}\hfill
-
-(Fisher)
-
-can be seen as a Ratio of Chi-squared Distributions with not necessarily the
-same DoFs
-
-$F$-statistic (\S\ref{sec:f_statistic})
-
-$F$-test (\S\ref{sec:f_test})
-
-$F = \frac{\text{between-group variability}}{\text{within-group variability}}$
-
-$F = \frac{\frac{SSB}{DoF_B}}{\frac{SSW}{DoF_W}}$
-
-ANOVA (\S\ref{sec:variance_analysis}), Linear Regression
-
-
-
-\paragraph{Wishart Distribution}\label{sec:wishart_distribution}\hfill
-
-
-
-\subsubsection{Inverse Gamma Distribution}\label{sec:inverse_gamma}
-
-\paragraph{L\'evy Distribution}\label{sec:levy_distribution}\hfill
-
-
-
-\subsubsection{Beta Distribution}\label{sec:beta_distribution}
-
-Gamma Function (\S\ref{sec:gamma_function})
-
-
-
-\subsubsection{Continuous Power Law Distribution}
-\label{sec:continuous_power_law}
-
-Scale Invariance (\S\ref{sec:scale_invariance})
-
-Slowly Varying Function (\S\ref{sec:slowly_varying})
-
-
-
-\paragraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
-
-prototypical Power Law Distribution
-
-Scale Invariance (\S\ref{sec:scale_invariance})
-
-
-
-\subsubsection{Phase-type Distribution}\label{sec:phasetype_distribution}
-
-\begin{itemize}
-  \item Degenerate Distribution (TODO) -- 0
-    Phases
-  \item Exponential Distribution (\S\ref{sec:exponential_distribution}) -- 1
-    Phase
-  \item Erlang Distribution (TODO) -- 2 or more identical Phases in sequence
-  \item ...
-\end{itemize}
-
-
-
-\subsubsection{Generalized Extreme Value (GEV) Distribution}\label{sec:gev}
-
-Extreme Value Theory (\S\ref{sec:eva})
-
-by the Extreme Value Theorem, the GEV Distribution is the only \emph{possible}
-Limit Distribution of Normalized Maxima of a Sequence of IID Random Variables,
-but such a Limit Distribution does not necessarily exist, requiring
-\emph{Regularity Conditions} on the Tail of the Distribution
-
-
-
-\paragraph{Gumbel Distribution}\label{sec:gumbel_distribution}\hfill
-
-\paragraph{Fr\'echet Distribution}\label{sec:frechet_distribution}\hfill
-
-\paragraph{Weibull Distribution}\label{sec:weibull_distribution}\hfill
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Symmetric Probability Distribution}
-\label{sec:symmetric_probability}
-% ------------------------------------------------------------------------------
-
-\subsubsection{Uniform Distribution}\label{sec:uniform_distribution}
-
-for a Finite Sample Space $\Omega$:
-\[
-  P(A) = \frac{\|A\|}{\|\Omega\|}
-\]
-
-a Uniform Distribution is defined by a rectangle formed on the interval Interval
-$[min,max]$ such that the area is $1$
-
-$Uniform(0,1)$ -- \emph{Standard Uniform Distribution}
-
-\url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
-the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) is a ``disguised''
-form of the Uniform Distribution on a Circle
-
-
-
-\paragraph{Probability Integral Transform}
-\label{sec:probability_integral_transform}\hfill
-
-for Continuous $X$ with CDF $F_X$, $Y = F_X(X)$ is called a \emph{Probability
-  Integral Transform} and has a Standard Uniform Distribution
-
-\emph{Universal Random Number Generator} (Wasserman04 Ch.2 Exercise 15) -- TODO
-
-
-
-\subsubsection{Tukey Lambda Distribution}\label{sec:tukey_lambda_distribution}
-
-\paragraph{Logistic Distribution}\label{sec:logistic_distribution}\hfill
-
-\fist Logistic Regression (\S\ref{sec:logistic_regression})
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Joint Probability Distribution}\label{sec:joint_probability}
 % ------------------------------------------------------------------------------
 
@@ -2890,25 +2207,43 @@ Exponential Dispersion Models (Probability Distributions
 
 
 % ------------------------------------------------------------------------------
-\subsection{Tweedie Distribution}\label{sec:tweedie_distribution}
+\subsection{Symmetric Probability Distribution}
+\label{sec:symmetric_probability}
 % ------------------------------------------------------------------------------
 
-(wiki): \emph{Tweedie Convergence Theorem}: describes the Convergence of certain
-Statistical Processes towards the Family of Statistical Models known as
-\emph{Tweedie Distributions}; Variance-to-Mean Power Law (TODO: xref); cf.
-Taylor's Power Law, \emph{Fluctuation Scaling}; alternative paradigm to explain
-Power Law manifestations attributed to ``Self-organized Criticality''
-(SOC \S\ref{sec:soc})
+\subsubsection{Uniform Distribution}\label{sec:uniform_distribution}
 
-Pink ($1/f$) Noise
+for a Finite Sample Space $\Omega$:
+\[
+  P(A) = \frac{\|A\|}{\|\Omega\|}
+\]
 
-Normal Distribution (\S\ref{sec:normal_distribution}) is a member of the family
-of Tweedie Exponential Dispersion Models (\S\ref{sec:exponential_dispersion})
+a Uniform Distribution is defined by a rectangle formed on the interval Interval
+$[min,max]$ such that the area is $1$
 
-\fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
-Sequential (Time Series) data attributed to ``convergence effects'' related to
-the Central Limit Theorem (\S\ref{sec:central_limit}) that have Foci of
-Convergence in the family of Tweedie Exponential Dispersion Models
+$Uniform(0,1)$ -- \emph{Standard Uniform Distribution}
+
+\url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
+the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) is a ``disguised''
+form of the Uniform Distribution on a Circle
+
+
+
+\paragraph{Probability Integral Transform}
+\label{sec:probability_integral_transform}\hfill
+
+for Continuous $X$ with CDF $F_X$, $Y = F_X(X)$ is called a \emph{Probability
+  Integral Transform} and has a Standard Uniform Distribution
+
+\emph{Universal Random Number Generator} (Wasserman04 Ch.2 Exercise 15) -- TODO
+
+
+
+\subsubsection{Tukey Lambda Distribution}\label{sec:tukey_lambda_distribution}
+
+\paragraph{Logistic Distribution}\label{sec:logistic_distribution}\hfill
+
+\fist Logistic Regression (\S\ref{sec:logistic_regression})
 
 
 
@@ -2928,6 +2263,45 @@ Convergence in the family of Tweedie Exponential Dispersion Models
 \end{itemize}
 
 \fist cf. Scale Parameter (\S\ref{sec:scale_parameter})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Memoryless Distribution}\label{sec:memoryless_distribution}
+% ------------------------------------------------------------------------------
+
+cf. Long-range Dependence (\S\ref{sec:long_range_dependence})
+
+\begin{enumerate}
+  \item Geometric Distributions (Discrete \S\ref{sec:geometric_distribution})
+  \item Exponential Distributions (Continuous
+    \S\ref{sec:exponential_distribution})
+\end{enumerate}
+
+cf. Markov Property
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Tweedie Distribution}\label{sec:tweedie_distribution}
+% ------------------------------------------------------------------------------
+
+(wiki): \emph{Tweedie Convergence Theorem}: describes the Convergence of certain
+Statistical Processes towards the Family of Statistical Models known as
+\emph{Tweedie Distributions}; Variance-to-Mean Power Law (TODO: xref); cf.
+Taylor's Power Law, \emph{Fluctuation Scaling}; alternative paradigm to explain
+Power Law manifestations attributed to ``Self-organized Criticality''
+(SOC \S\ref{sec:soc})
+
+Pink ($1/f$) Noise
+
+Normal Distribution (\S\ref{sec:normal_distribution}) is a member of the family
+of Tweedie Exponential Dispersion Models (\S\ref{sec:exponential_dispersion})
+
+\fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
+Sequential (Time Series) data attributed to ``convergence effects'' related to
+the Central Limit Theorem (\S\ref{sec:central_limit}) that have Foci of
+Convergence in the family of Tweedie Exponential Dispersion Models
 
 
 
@@ -2953,6 +2327,776 @@ Schr\"odinger formulation uses Position \emph{or} Momentum representations)
 \fist Time-Frequency Analysis (\S\ref{sec:time_frequency_analysis}): analysis
 of Signals with Time-varying Statistics (cf. Entropy \S\ref{sec:entropy}), e.g.
 Transient Signals (\S\ref{sec:transient})
+
+
+
+% ==============================================================================
+\section{Discrete Probability Distribution}\label{sec:discrete_probability}
+% ==============================================================================
+
+Probability Distribution of a Discrete Random Variable
+(\S\ref{sec:discrete_random_variable})
+
+characterized by a Probability Mass Function (\S\ref{sec:pmf})
+
+Cumulative Distribution Function (\S\ref{sec:cdf}) increases only by Jump
+Discontinuities
+
+\begin{itemize}
+  \item \emph{Point Mass Distribution} -- $X \sim \delta_a$ has CDF:
+    \[
+      F_X(x) = \begin{cases}
+        0 & x <    a \\
+        1 & x \geq a \\
+      \end{cases}
+    \]
+    and PMF:
+    \[
+      f_X(x) = \begin{cases}
+        1 & x = a \\
+        0 & \text{otherwise} \\
+      \end{cases}
+    \]
+  \item \emph{Discrete Uniform Distribution} (\S\ref{sec:uniform_distribution})
+  \item \emph{Multinomial Distribution} (\S\ref{sec:multinomial_distribution})
+    -- $X \sim Multinomial_k(n,p)$
+  \begin{itemize}
+    \item \emph{Bernoulli Distribution} (\S\ref{sec:bernoulli_distribution}) --
+      $X \sim Bernoulli(p)$
+    \item \emph{Binomial Distribution} (\S\ref{sec:binomial_distribution}) --
+      $X \sim Binomial(n,p)$
+    \item \emph{Categorical Distribution} (\S\ref{sec:categorical_distribution})
+      -- $X \sim Categorical(k,p)$
+  \end{itemize}
+  \item \emph{Geometric Distribution} (\S\ref{Sec:geometric_distribution}) --
+    $X \sim Geom(p)$
+  \item \emph{Poisson Distribution} (\S\ref{Sec:poisson_distribution}) --
+    $X \sim Poisson(\lambda)$
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Multinomial Distribution}\label{sec:multinomial_distribution}
+% ------------------------------------------------------------------------------
+
+$n$ Trials
+
+$k$ Outcomes or ``\emph{Categories}''
+
+$k$ Outcomes $E_1, E_2, \ldots, E_k$
+
+Probabilities $p_1, p_2, \ldots, p_k$
+
+Probability Distribution of $x_1, x_2, \ldots, x_k$ number of
+Occurences for $E_1, E_2, \ldots, E_k$ in $n$ Independent Trials:
+\[
+  f(x_1, x_2, \ldots, x_k) = \binom{n}{x_1, x_2, \ldots, x_k} =
+    p_1^{x_1} p_2^{x_2} \cdots p_k^{x_k}
+\]
+and $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k {p_i} = 1$
+
+for $X = (X_1, \ldots, X_k) \sim Multinomial_k(n, p)$ and
+$p = (p_1, \ldots, p_k)$, the Marginal Distribution
+(\S\ref{sec:marginal_distribution}) of $X_j$ is $Binomial (n, p_j)$
+
+\begin{itemize}
+  \item Bernoulli Distribution (\S\ref{sec:bernoulli_distribution}) -- $k = 2$,
+    $n = 1$
+  \item Binomial Distribution (\S\ref{sec:binomial_distribution}) -- $k = 2$,
+    $n > 1$
+  \item Categorical Distribution (\S\ref{sec:categorical_distribution}) --
+    $k > 2$, $n = 1$
+\end{itemize}
+
+
+
+\subsubsection{Bernoulli Distribution}\label{sec:bernoulli_distribution}
+
+$k = 2$, $n = 1$
+
+for a Random Variable $X$ representing a Binary Outcome:
+\begin{itemize}
+  \item $P(X=1) = p$
+  \item $P(X=0) = 1-p$
+\end{itemize}
+for some $p \in [0,1]$
+
+Mean:
+\[
+  \mu = p
+\]
+Variance:
+\[
+  \sigma^2 = p(1-p)
+\]
+PMF:
+\[
+  f(x) = p^x(1-p)^{1-x}
+\]
+or equivalently:
+\[
+  f(x) = \begin{cases}
+    p   & x = 1 \\
+    1-p & x = 0 \\
+  \end{cases}
+\]
+for $x \in \{0, 1\}$
+
+\fist cf. Logistic Regression (\S\ref{sec:logistic_regression}) -- Model with
+Binary Data $Y_i$, the Conditional Distribution $y | x$ is Bernoulli
+Distributed:
+\[
+  Y_i | X_i = x_i \sim Bernoulli(p_i)
+\]
+(cf. Linear Regression where the Conditional Distribution is Normally
+Distributed)
+
+generalization: Categorical Distribution (\S\ref{sec:categorical_distribution})
+
+
+
+\subsubsection{Binomial Distribution}\label{sec:binomial_distribution}
+
+Sum of Independent Trials; cf. Normal Distribution
+(\S\ref{sec:normal_distribution})
+
+Binomial (Bernoulli) Trial (\S\ref{sec:binomial_trial})
+
+Binomial Random Variable (\S\ref{sec:binomial_variable})
+
+$k = 2$ , $n > 1$
+
+cf. Binomial Coefficients (\S\ref{sec:binomial_coefficient})
+
+\fist cf. Geometric Distribution (\S\ref{sec:geometric_distribution}) -- number
+of Trials until first Success
+
+Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
+$p \in [0,1]$:
+\[
+  X \sim B(n,p)
+\]
+describes the Probability of getting exactly $x$ ``Successes'' in $n$ Trials
+where the Probability of Success is $p$:
+\[
+  P(x,n,p) = \binom{n}{x}p^x(1-p)^{n-x}
+\]
+
+\fist Poisson Distribution (\S\ref{sec:poisson_distribution}) -- Limit of the
+Binomial Distribution as number of Trials $n \to \infty$
+
+Expected Value $E(X) = np$
+
+Mean $\mu = n p$
+
+Variance $\sigma^2 = n p (1-p)$
+
+Sample Proportion %FIXME
+
+
+
+\paragraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
+
+$b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
+
+
+
+\paragraph{Normal Approximation}\label{sec:normal_approximation}\hfill
+
+For Binomial Random Variable $X$ with Mean $\mu = np$ and Variance
+$\sigma^2 = npq$, then:
+\[
+  Z = \frac{X - np}{\sqrt{npq}}
+\]
+as $n \to \infty$ is the Standard Normal Distribution
+(\S\ref{sec:normal_distribution}) $n(Z;0,1)$
+
+
+
+\subsubsection{Categorical Distribution}\label{sec:categorical_distribution}
+
+$k > 2$, $n = 1$
+
+Standard (Probability) Simplex (\S\ref{sec:simplex})
+
+
+
+\subsubsection{Softmax Function}\label{sec:softmax}
+
+or \emph{Normalized Exponential Function}
+
+generalization of Logistic Function (\S\ref{sec:logistic_function}); the
+Logistic Function is the Derivative of Softplus --TODO
+
+output can be used to represent a Categorical Distribution
+
+often used as final layer of a Neural Network-based Classifier
+
+
+% ------------------------------------------------------------------------------
+\subsection{Poisson Distribution}\label{sec:poisson_distribution}
+% ------------------------------------------------------------------------------
+
+$P(x; \lambda t) = \frac{e^{-\lambda t} (\lambda t)^x}{x!}$
+where $\lambda$ is the average number of outcomes per unit time
+
+Expected Value is the Limit of the Binomial Distribution as number of Trials
+$n \to \infty$:
+\begin{flalign*}
+  E(X) & = \lambda \\
+  V(X) & = \lambda \\
+  P(X = k) & = \lim_{n\to\infty}
+               \binom{n}{k}(\frac{\lambda}{n})^k(1-\frac{\lambda}{n})^{n-k} \\
+           & = \frac{\lambda^k e^{-\lambda}}{k!} \\
+\end{flalign*}
+
+models counts of rare events, e.g. radioactive decay, traffic accidents (cf.
+Propensity Interpretation of Probability)
+
+cf. Poisson Processes (\S\ref{sec:poisson_process})
+
+\fist Poisson Noise (Shot Noise): Statistical Fluctuations
+(\S\ref{sec:statistical_fluctuation})
+
+for Independent Random Variables $X \sim Poisson(\lambda)$ and
+$Y \sim Poisson(\nu)$:
+\[
+  X + Y \sim Poisson(\lambda + \nu)
+\]
+
+if $N \sim Poisson(\lambda)$ and $Y | N = n \sim Binomial(n,p)$, then the
+Marginal Distribution of $Y$ is $Y \sim Poisson(\lambda p)$
+(Wasserman04 \S 23.3)
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Geometric Distribution}\label{sec:geometric_distribution}
+% ------------------------------------------------------------------------------
+
+$P(X = k) = p(1-p)^{k-1}$ for $k \in \{1, 2, 3, \ldots\}$
+
+where $X$ is the number of Independent Trials with Constant Probability of
+``Success'' until the first Success
+
+\emph{Memoryless} (\S\ref{sec:memoryless_distribution})
+
+\fist Continuous analogue: Exponetial Distribution
+(\S\ref{sec:exponential_distribution})
+
+cf. Binomial Distribution (\S\ref{sec:binomial_distribution}) -- number of
+Successes after $n$ Trials
+
+cf. Geometric Series (\S\ref{sec:geometric_series})
+
+Expected Value $E(X) = 1 + (1-p) + (1-p)^2 + \cdots = \frac{1}{p}$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Hypergeometric Distribution}
+\label{sec:hypergeometric_distribution}
+% ------------------------------------------------------------------------------
+
+$h(x; N, n, k) = \frac{\binom{k}{x} \binom{N-k}{n-x}}{\binom{N}{n}}$
+
+Mean $\mu = \frac{nk}{N}$
+
+Variance $\sigma^2 = \frac{N-n}{N-1} n \frac{k}{N}(1 - \frac{k}{N})$
+
+
+
+\subsubsection{Multivariate Hypergeometric Distribution}
+\label{sec:multivariate_hypergeometric}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Parabolic Fractal Distribution}
+\label{sec:parabolic_fractal_distribution}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Discrete Power Law Distribution}\label{sec:discrete_power_law}
+% ------------------------------------------------------------------------------
+
+\fist Continuous Power Law Distributions (\S\ref{sec:continuous_power_law})
+
+Slowly Varying Function (\S\ref{sec:slowly_varying})
+
+
+
+\subsubsection{Zipf Distribution}\label{sec:zipf_distribution}
+
+\subsubsection{Zeta Distribution}\label{sec:zeta_distribution}
+
+Normalization of the Zipf Distribution
+
+
+
+\subsubsection{Yule-Simon Distribution}\label{sec:yule_simon_distribution}
+
+
+
+% ==============================================================================
+\section{Continuous Probability Distribution}\label{sec:continuous_probability}
+% ==============================================================================
+
+Probability Distribution of a Continuous Random Variable
+(\S\ref{sec:continuous_random_variable})
+
+characterized by a Probability Density Function
+(\S\ref{sec:probability_density})
+
+has a Continuous Cumulative Distribution Function (\S\ref{sec:cdf})
+
+\fist Discrete Power Law Distributions
+(\S\ref{sec:discrete_power_law})
+
+\begin{itemize}
+  \item \emph{Uniform Distribution} (\S\ref{sec:uniform_distribution}) --
+    $X \sim Uniform(a,b)$
+  \item \emph{Normal (Gaussian) Distribution} (\S\ref{sec:normal_distribution})
+    -- $X \sim N(\mu, \sigma^2)$
+  \item \emph{Exponential Distribution} (\S\ref{sec:exponential_distribution})
+    -- $X \sim Exp(\beta) = Gamma(1, \beta)$
+  \item \emph{Gamma Distribution} (\S\ref{sec:gamma_distribution})
+    -- $X \sim Gamma(\alpha, \beta)$
+  \item \emph{Beta Distribution} (\S\ref{sec:beta_distribution})
+    -- $X \sim Beta(\alpha, \beta)$
+  \item \emph{$t$-distribution} (\S\ref{sec:t_distribution})
+    -- $X \sim t_\nu$
+  \item \emph{Cauchy-Lorenz Distribution} (\S\ref{sec:cauchy_distribution})
+    -- $X \sim t_\nu=1$
+  \item \emph{$\chi^2$-distribution} (\S\ref{sec:chi_squared})
+    -- $X \sim \chi^2_p$
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Generalized Hyperbolic Distribution}
+\label{sec:generalized_hyperbolic}
+% ------------------------------------------------------------------------------
+
+closed under Affine Transformations (\S\ref{sec:affine_transformation})
+
+
+
+\subsubsection{$t$-distribution}\label{sec:t_distribution}
+
+(or \emph{Student's $t$-distribution})
+
+$\nu$ -- Degrees of Freedom
+
+\begin{itemize}
+  \item $\nu = 1$ -- Cauchy Distribution (\S\ref{sec:cauchy_distribution})
+  \item $\nu = \infty$ -- Normal Distribution (\S\ref{sec:normal_distribution})
+\end{itemize}
+
+Sampling Distribution (\S\ref{sec:sampling_distribution}) for low Sample Size
+
+\item Fat-tailed Distribution (\S\ref{sec:fat_tailed})
+
+$t$-statistic (\S\ref{sec:t_statistic})
+
+$t$-test (\S\ref{sec:t_test})
+
+
+
+\paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
+
+or \emph{Cauchy-Lorentz Distribution}
+
+$\nu = 1$
+
+Expected Value (\S\ref{sec:expected_value}) and Variance (\S\ref{sec:variance})
+are \emph{undefined}
+
+the ``average'' of $n$ Independent Cauchy Random Variables with $x_0 = 0$
+\emph{does not} Converge to $0$ as $n \to \infty$ with Probability $1$-- ``it''
+stays a Cauchy Distribution of the same size; however $0$ is the \emph{Median}
+and \emph{Mode} (FIXME: clarify)
+--\url{https://stats.stackexchange.com/questions/36027/why-does-the-cauchy-distribution-have-no-mean}
+
+\url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
+the Cauchy Distribution is a ``disguised'' form of the Uniform Distribution on a
+Circle
+
+has no Moment-generating Function (\S\ref{sec:moment_generating_function})
+
+the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
+$X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
+
+
+
+\paragraph{Normal Distribution}\label{sec:normal_distribution}\hfill
+
+(or \emph{Gaussian Distribution})
+
+member of the family of Tweedie (\S\ref{sec:tweedie_distribution}) Exponential
+Dispersion Models (\S\ref{sec:exponential_dispersion})
+
+\[
+  n (x; \mu, \sigma) =
+  \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
+\]
+
+cf. Binomial Distribution (Discrete \S\ref{sec:binomial_distribution})
+-- Sum of Independent Trials
+
+a Normal Distribution corresponds to a $t$-distribution
+(\S\ref{sec:t_distribution}) with $\nu = \infty$ Degrees of Freedom
+
+the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
+$X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
+
+\emph{Central Limit Thoerem} (\S\ref{sec:central_limit_theorem}) -- ``the
+Distribution of a Sum of Independent Random Variables can be approximated by a
+Normal Distribution'';
+for a Sequence of Random Variables (\S\ref{sec:random_variable})
+$X_i, \ldots, X_n$ with Sample Mean (\S\ref{sec:sample_mean})
+$\overline{X}_n$, $\sqrt{n}(\overline{X}_n - \mu)$
+\emph{Converges in Distribution} to a Normal Distribution
+(\S\ref{sec:normal_distribution}) as $n \to \infty$, i.e. the Sample
+Mean has approximately a Normal Distribution for large $n$
+
+as a consequence of the Central Limit Theorem, Random Errors
+(\S\ref{sec:random_error}) tend to be Normally Distributed
+
+cf. Heavy-tailed Distributions (\S\ref{sec:heavy_tailed}) --
+Distributions with Tails ``heavier'' than the Normal Distribution
+
+cf. Sub-gaussian Distributions (Short-tailed Distributions
+\S\ref{sec:sub_gaussian}) -- Tails ``lighter'' than the Normal Distribution
+
+\fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
+Infinite-dimensional generalizations of Multivariate Normal Distributions
+
+\emph{Empirical Rule} 68-95-99.7 Rule -- 68\% within 1 Standard Deviation of the
+Mean, 95\% within 2 Standard Deviations, 99.7\% within 3 Standard Deviations
+
+MIT 6.041SC, Lec.8
+
+Linear Functions of Normal Variables are Normal--
+for $X \sim N(\mu, \sigma^2)$ and $Y = aX + b$:
+\[
+  Y \sim N(a \mu + b, a^2 \sigma^2)
+\]
+
+\emph{Standardizing} -- for $X \sim N(\mu, \sigma^2)$:
+\[
+  \frac{X - \mu}{\sigma} \sim N(0, 1)
+\]
+where $(X - \mu)/\sigma$ is the \emph{Standard Score}
+($z$-score \S\ref{sec:standard_score})
+
+2018 - Eric Jang
+- \emph{Normalizing Flows Tutorial}
+- \url{https://blog.evjang.com/2018/01/nf1.html}
+
+
+
+\subparagraph{Mill's Inequality}\label{sec:mills_inequality}\hfill
+
+\textbf{Thm.} (Mill's Inequality) \emph{
+  For $Z \sim N(0,1)$:
+  \[
+    P(|Z| > t) \leq \sqrt{\frac{2}{\pi}}\frac{e^{-t^2/2}}{t}
+  \]
+}
+
+
+
+\subparagraph{Standard Normal Distribution}\label{sec:standard_normal}\hfill
+
+Mean $\mu = 0$
+
+Variance $\sigma^2 = 1$
+
+by convention Standard Normal Random Variables are denoted by $Z$, PDF by
+$\phi(z)$ and CDF by $\Phi(z)$
+
+there is no Closed-form Expression (\S\ref{sec:closed_form_expression}) for
+$\Phi$ (requires use of the Error Function \S\ref{sec:error_function})
+
+
+
+\subparagraph{Multivariate Normal Distribution}\label{sec:multivariate_normal}
+\hfill
+
+Multivariate Random Variable (\S\ref{sec:random_vector})
+
+
+
+\subparagraph{Elliptical Distribution}\label{sec:elliptical_distribution}
+\hfill
+
+generalization of Multivariate Normal Distribution
+
+
+
+\subsubsection{Hyperbolic Distribution}\label{sec:hyperbolic_distribution}
+
+\subsubsection{Laplace Distribution}\label{sec:laplace_distribution}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Inverse Gaussian Distribution}\label{sec:inverse_gaussian}
+% ------------------------------------------------------------------------------
+
+(or \emph{Wald Distribution})
+
+
+
+\subsubsection{Generalized Inverse Gaussian Distribution}
+\label{sec:generalized_inverse_gaussian}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Gamma Distribution}\label{sec:gamma_distribution}
+% ------------------------------------------------------------------------------
+
+Gamma Function (\S\ref{sec:gamma_function})
+
+Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
+> 0$:
+\[
+  f(x; \alpha, \beta) =
+  \begin{cases}
+    \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{\sfrac{-x}{\beta}}
+      & \quad x > 0 \\
+    0 & \quad\text{else} \\
+  \end{cases}
+\]
+
+Mean $\mu = \alpha \beta$
+
+Variance $\sigma^2 = \alpha \beta^2$
+
+
+
+\subsubsection{Exponential Distribution}\label{sec:exponential_distribution}
+
+a $Gamma(1, \beta)$ Distribution
+
+Probability Distribution of the Time between Events in a Poisson Point Process
+(\S\ref{sec:point_poisson})
+
+Continuous Random Variable $X$ with parameter $\beta > 0$:
+\[
+  f(x; \beta) =
+  \begin{cases}
+  \frac{1}{\beta} e^{\sfrac{-x}{\beta}}     & \quad x > 0 \\
+  0     & \quad\text{else} \\
+  \end{cases}
+\]
+
+\emph{Memoryless} (\S\ref{sec:memoryless_distribution})
+
+models lifetimes of electronic components, wait times between rare events
+
+\fist Discrete analogue: Geometric Distribution
+(\S\ref{sec:geometric_distribution})
+
+cf. \emph{Fat-tailed Distributions} (\S\ref{sec:fat_tailed}) -- Tails are
+\emph{not} Exponentially Bounded
+
+
+
+\paragraph{Double Exponential Distribution}\label{sec:double_exponential}\hfill
+
+or \emph{Laplace Distribution}
+
+
+
+\subsubsection{$\chi^2$ Distribution}\label{sec:chi_squared}
+
+Non-symmetric
+
+Sums of Squared IID Normally-distributed Random Variables, where the number of
+Variables is the ``Degrees of Freedom''
+
+\[
+  f(x; v) =
+  \begin{cases}
+    \frac{1}{2^{\sfrac{v}{2}}\Gamma(\sfrac{v}{2})}
+      x^{\sfrac{v}{2-1}} e^{\sfrac{-x}{2}}
+          & \quad x > 0 \\
+    0     & \quad\text{else} \\
+  \end{cases}
+\]
+
+Goodness-of-fit (\S\ref{sec:model_fit})
+
+Chi-squared Statistic -- Randomness Condition, Large Counts Condition ($>5$
+expected), Independence Condition
+
+\fist Chi-squared Test (\S\ref{sec:chi_squared_test})
+
+Logistic Regression
+
+
+
+\paragraph{$F$-distribution}\label{sec:f_distribution}\hfill
+
+(Fisher)
+
+can be seen as a Ratio of Chi-squared Distributions with not necessarily the
+same DoFs
+
+$F$-statistic (\S\ref{sec:f_statistic})
+
+$F$-test (\S\ref{sec:f_test})
+
+$F = \frac{\text{between-group variability}}{\text{within-group variability}}$
+
+$F = \frac{\frac{SSB}{DoF_B}}{\frac{SSW}{DoF_W}}$
+
+ANOVA (\S\ref{sec:variance_analysis}), Linear Regression
+
+
+
+\subsubsection{Wishart Distribution}\label{sec:wishart_distribution}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Fat-tailed Distribution}\label{sec:fat_tailed}
+% ------------------------------------------------------------------------------
+
+Tails are \emph{not} Exponentially Bounded (cf. Exponential Distributions
+\S\ref{sec:exponential_distribution})
+
+\fist Self-similar Processes (\S\ref{sec:self_similar}), Long-range Dependence
+(\S\ref{sec:long_range_dependence}), Power Law Distributions
+(\S\ref{sec:power_law})
+
+\begin{itemize}
+  \item Cauchy Distribution (\S\ref{sec:cauchy_distribution})
+  \item ...
+\end{itemize}
+
+
+
+\subsubsection{Heavy-tailed Distribution}\label{sec:heavy_tailed}
+
+Tails that are ``heavier'' than the Normal Distribution
+(\S\ref{sec:normal_distribution})
+
+Leptokurtic (Positive Kurtosis)
+
+
+
+\subsubsection{Long-tailed Distribution}\label{sec:long_tailed}
+
+\subsubsection{Subexponential Distribution}
+\label{sec:subexponential_distribution}
+
+\subsubsection{Continuous Power Law Distribution}
+\label{sec:continuous_power_law}
+
+Scale Invariance (\S\ref{sec:scale_invariance})
+
+Slowly Varying Function (\S\ref{sec:slowly_varying})
+
+
+
+\paragraph{Pareto Distribution}\label{sec:pareto_distribution}\hfill
+
+prototypical Power Law Distribution
+
+Scale Invariance (\S\ref{sec:scale_invariance})
+
+
+
+\subsubsection{Log-normal Distribution}\label{sec:lognormal_distribution}
+
+\subsubsection{Inverse Gamma Distribution}\label{sec:inverse_gamma}
+
+%FIXME: are all inverse gamma distributions fat-tailed ???
+
+
+
+\paragraph{L\'evy Distribution}\label{sec:levy_distribution}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Stable Distribution}\label{sec:stable_distribution}
+% ------------------------------------------------------------------------------
+
+\emph{L\'evy Alpha-stable Distribution} or \emph{Stable Paretian Distribution}
+
+all Stable Distributions except the Normal Distribution are Fat-tailed
+Distributions (\S\ref{sec:fat_tailed}) with undefined Variance
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Dirichlet Distribution}\label{sec:dirichlet_distribution}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Beta Distribution}\label{sec:beta_distribution}
+
+Gamma Function (\S\ref{sec:gamma_function})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Phase-type Distribution}\label{sec:phasetype_distribution}
+% ------------------------------------------------------------------------------
+
+\begin{itemize}
+  \item Degenerate Distribution (TODO) -- 0
+    Phases
+  \item Exponential Distribution (\S\ref{sec:exponential_distribution}) -- 1
+    Phase
+  \item Erlang Distribution (TODO) -- 2 or more identical Phases in sequence
+  \item ...
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Generalized Extreme Value (GEV) Distribution}\label{sec:gev}
+% ------------------------------------------------------------------------------
+
+Extreme Value Theory (\S\ref{sec:eva})
+
+by the Extreme Value Theorem, the GEV Distribution is the only \emph{possible}
+Limit Distribution of Normalized Maxima of a Sequence of IID Random Variables,
+but such a Limit Distribution does not necessarily exist, requiring
+\emph{Regularity Conditions} on the Tail of the Distribution
+
+
+
+\subsubsection{Gumbel Distribution}\label{sec:gumbel_distribution}
+
+\subsubsection{Fr\'echet Distribution}\label{sec:frechet_distribution}
+
+\subsubsection{Weibull Distribution}\label{sec:weibull_distribution}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Sub-gaussian Distribution}\label{sec:sub_gaussian}
+% ------------------------------------------------------------------------------
+
+or \emph{Short-tailed Distribution}
+
+``Platykurtic'' (Negative Kurtosis)
+
+cf. Heavy-tailed Distribution (\S\ref{sec:heavy_tailed})
+
+Uniform Distribution
+
+Raised Cosine Distribution
+
+Sub-gaussian Distributions
 
 
 
@@ -4420,7 +4564,12 @@ Third Central Moment (\S\ref{sec:moment})/Third Cumulant (\S\ref{sec:cumulant})
 
 Fourth Central Moment (\S\ref{sec:moment})
 
-Measure of the ``heaviness'' of the tail of a Distribution
+Measure of the ``heaviness'' of the tail of a Distribution:
+
+\begin{itemize}
+  \item Leptokurtic -- ``Heavy-tailed'' (\S\ref{sec:heavy_tailed})
+  \item Platykurtic -- ``Thin-tailed'' (Sub-gaussian \S\ref{sec:sub_gaussian})
+\end{itemize}
 
 
 
@@ -4554,6 +4703,17 @@ where $s_x$ and $s_y$ are the Sample Standard Deviations of $x$ and $y$
 
 \fist cf. $r^2$ -- Coefficient of
 Determination (\S\ref{sec:determination_coefficient})
+
+
+
+\paragraph{Long-range Dependence}\label{sec:long_range_dependence}\hfill
+
+\emph{Long Memory} or \emph{Long-range Persistence}
+
+when Dependence decays more slowly than Exponential Decay
+(\S\ref{sec:exponential_decay})
+
+cf. ``Memoryless-ness'' (\S\ref{sec:memoryless_distribution})
 
 
 
@@ -5844,6 +6004,8 @@ Scale Analysis (\S\ref{sec:statistical_scale}), Scale Invariance
   \item Discrete Power Law Distribution (\S\ref{sec:discrete_power_law})
   \item Continuous Power Law Distribution (\S\ref{sec:continuous_power_law})
 \end{itemize}
+
+\fist Fat-tailed Distributions (\S\ref{sec:fat_tailed})
 
 
 
@@ -11122,6 +11284,21 @@ cf. (Martin-L\"of66)
 
 
 
+\subsubsection{Markov Chain}\label{sec:markov_chain}
+
+\fist (Continuous-time) Markov Process (\S\ref{sec:markov_process})
+
+Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc})
+
+
+
+\paragraph{Markov Property}\label{sec:markov_property}\hfill
+
+``\emph{Memoryless-ness}'' (cf. Long Memory or Long-range Dependence
+\S\ref{sec:long_range_dependence})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Continuous-time Stochastic Process}\label{sec:continuous_stochastic}
 % ------------------------------------------------------------------------------
@@ -11231,6 +11408,18 @@ xref)
 
 
 % ------------------------------------------------------------------------------
+\subsection{Self-similar Process}\label{sec:self_similar}
+% ------------------------------------------------------------------------------
+
+Self-similarity (\S\ref{sec:self_similarity})
+
+sometimes described using Fat-tailed Distributions (\S\ref{sec:fat_tailed})
+
+Long-range Dependence (\S\ref{sec:long_range_dependence})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Random Walk}\label{sec:random_walk}
 % ------------------------------------------------------------------------------
 
@@ -11244,12 +11433,14 @@ cf. Law of Large Numbers (\S\ref{sec:large_numbers})
 
 \subsubsection{Markov Process}\label{sec:markov_process}
 
-(or \emph{Markov Chain})
+\fist (Discrete-time) Markov Chain (\S\ref{sec:markov_chain})
+
+%FIXME: does the following only apply to markov chains ???
 
 (Wasserman04, \S23.2)
 
-\emph{Markov Property} (``Memorylessness'') --
-Distribution of $X_i$ Depends only on $X_{i-1}$:
+\emph{Markov Property} (``Memorylessness'' \S\ref{sec:memoryless_distribution})
+-- Distribution of $X_i$ Depends only on $X_{i-1}$:
 \[
   P(X_t = x | X_0, \ldots, X_{t-1}) = P(X_t = x | X_{t-1})
 \]
@@ -11467,6 +11658,21 @@ $\int h(x) f(x) dx$ using a Markov Chain with Stationary Distribution $f$
 
 
 
+\paragraph{Birth-death Process}\label{sec:birth_death}\hfill
+
+\subparagraph{Birth Process}\label{sec:birth_process}\hfill
+
+(or \emph{Pure Birth Process})
+
+Zero Deaths
+
+equivalent to a Poisson (Point) Process (\S\ref{sec:point_poisson}) on the Real
+Line
+
+
+
+\paragraph{Markov Arrival Process}\label{sec:markov_arrival_process}\hfill
+
 \paragraph{Branching Process}\label{sec:branching_process}\hfill
 
 \paragraph{Gauss-Markov Process}\label{sec:gauss_markov_process}\hfill
@@ -11512,6 +11718,77 @@ largest class of Processes for which the It\^o Integral
 \paragraph{Submartingale}\label{sec:submartingale}\hfill
 
 \paragraph{Supermartingale}\label{sec:supermartingale}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Counting Process}\label{sec:counting_process}
+% ------------------------------------------------------------------------------
+
+a Stochastic Process with values that are Non-negative, Non-decreasing Integers
+
+
+
+\subsubsection{Poisson Process}\label{sec:poisson_process}
+
+Counting occurrences of ``Events'' over time (e.g. traffic accidents,
+radioactive decay; cf. Propensity Interpretation of Probability)
+
+the Probability Distribution of the time Interval between Events is the
+Exponential Distribution (\S\ref{sec:exponential_distribution})
+
+Memoryless
+
+Completely Random Process
+
+Semimartingale (\S\ref{sec:semimartingale})
+
+Properties of a Poisson Process on the Real Line: the number of Points
+(``Events'') in Disjoint Intervals are Independent and have a Poisson
+Distribution (\S\ref{sec:poisson_distribution})
+
+cf. Markov Process (\S\ref{sec:markov_process})
+
+Queueing Theory (\S\ref{sec:queueing_theory})
+
+Poisson Point Process (\S\ref{sec:point_poisson}) -- spatial generalization of
+Poisson Process to the Real Line
+
+Spatial Poisson Process (\S\ref{sec:spatial_poisson}) -- to the Real Plane
+
+(Wasserman04 \S 23.3)
+
+\emph{Intensity Function} $\lambda(t)$
+
+\emph{Homogenous Poisson Process}, \emph{Rate} $\lambda \equiv \lambda(t)$
+
+\emph{Waiting Times} $W_n$, \emph{Interrarival (Sojourn) Times} $S_n$
+
+(Thm.) Interrarival Times are IID Random Variables with Exponential Distribution
+with Mean $1/\lambda$, i.e. PDF for $s \geq 0$:
+\[
+  f(s) = \lambda e^{-\lambda s}
+\]
+and the Waiting Time $W_n \sim Gamma(n, 1/\lambda)$, i.e. has PDF:
+\[
+  f(w) = \frac{1}{\Gamma(n)}\lambda^n w^{n-1} e^{-\lambda t}
+\]
+and therefore:
+\begin{flalign*}
+  E(W_n) & = \frac{n}{\lambda} \\
+  V(W_n) & = \frac{n}{\lambda^2} \\
+\end{flalign*}
+
+
+
+
+\subsubsection{Binomial Process}\label{sec:binomial_process}
+
+cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
+
+
+
+\subsubsection{Renewal Theory}\label{sec:renewal_theory}
 
 
 
@@ -11568,74 +11845,21 @@ are ``Point Patterns'' or \emph{Locally-finite Counting Measures}
 for most purposes, ``Point Patterns'' can be thought of as Countable Subsets of
 $S$ that have no Limit Points (FIXME: clarify)
 
-Poisson Point Process (\S\ref{sec:poisson_process}) -- spatial generalization of
-Poisson Process
+
+
+\paragraph{Poisson Point Process}\label{sec:point_poisson}\hfill
+
+``spatial'' Poisson Process (\S\ref{sec:poisson_process}) on the Real Line
+
+equivalent to a Birth Process (\S\ref{sec:birth_process})
+
+cf. Spatial Poisson Process (\S\ref{sec:spatial_poisson})
 
 
 
-% ------------------------------------------------------------------------------
-\subsection{Counting Process}\label{sec:counting_process}
-% ------------------------------------------------------------------------------
+\paragraph{Spatial Poisson Process}\label{sec:spatial_poisson}\hfill
 
-a Stochastic Process with values that are Non-negative, Non-decreasing Integers
-
-
-
-\subsubsection{Poisson Process}\label{sec:poisson_process}
-
-Counting occurrences of ``Events'' over time (e.g. traffic accidents,
-radioactive decay; cf. Propensity Interpretation of Probability)
-
-Memory-less
-
-Completely Random Process
-
-Semimartingale (\S\ref{sec:semimartingale})
-
-Properties of a Poisson Process on the Real Line: the number of Points
-(``Events'') in Disjoint Intervals are Independent and have a Poisson
-Distribution (\S\ref{sec:poisson_distribution})
-
-cf. Markov Process (\S\ref{sec:markov_process})
-
-Queueing Theory (\S\ref{sec:queueing_theory})
-
-Poisson Point Process (\S\ref{sec:point_process}) -- spatial generalization of
-Poisson Process
-
-(Wasserman04 \S 23.3)
-
-\emph{Intensity Function} $\lambda(t)$
-
-\emph{Homogenous Poisson Process}, \emph{Rate} $\lambda \equiv \lambda(t)$
-
-\emph{Waiting Times} $W_n$, \emph{Interrarival (Sojourn) Times} $S_n$
-
-(Thm.) Interrarival Times are IID Random Variables with Exponential Distribution
-with Mean $1/\lambda$, i.e. PDF for $s \geq 0$:
-\[
-  f(s) = \lambda e^{-\lambda s}
-\]
-and the Waiting Time $W_n \sim Gamma(n, 1/\lambda)$, i.e. has PDF:
-\[
-  f(w) = \frac{1}{\Gamma(n)}\lambda^n w^{n-1} e^{-\lambda t}
-\]
-and therefore:
-\begin{flalign*}
-  E(W_n) & = \frac{n}{\lambda} \\
-  V(W_n) & = \frac{n}{\lambda^2} \\
-\end{flalign*}
-
-
-
-
-\subsubsection{Binomial Process}\label{sec:binomial_process}
-
-cf. \emph{Bernoulli Process} (\S\ref{sec:bernoulli_process})
-
-
-
-\subsubsection{Renewal Theory}\label{sec:renewal_theory}
+Poisson Process (\S\ref{sec:poisson_process}) generalized to the Real Plane
 
 
 
@@ -11734,7 +11958,7 @@ Variance
 
 \paragraph{Markov Chain Monte Carlo (MCMC)}\label{sec:mcmc}\hfill
 
-Markov Processes (\S\ref{sec:markov_process})
+Markov Chain (\S\ref{sec:markov_chain})
 
 (Wasserman04 \S24.4)
 
