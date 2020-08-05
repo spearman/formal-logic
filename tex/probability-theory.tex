@@ -233,6 +233,8 @@ or \emph{Atomic Event} or \emph{Simple Event} is an Event which contains only a
 \emph{single Outcome} in the Sample Space, i.e. it is a Singleton Subset of the
 Sample Space
 
+cf. Atom (\S\ref{sec:atom})
+
 the Unitarity Axiom (\S\ref{sec:probability_axioms}) states that the
 Probability that at least one of the Elementary Events in the Entire Sample
 Space will Occur is $1$
@@ -1040,6 +1042,9 @@ Observation and some other value, usually the Observed Random Variable's Mean
 (Expected Value \S\ref{sec:expected_value}).
 
 \begin{itemize}
+  \item the \emph{Sampling Deviation} (\S\ref{sec:sampling_deviation}) is the
+    difference between an Estimate on a Sample (Statistic) and the Expected
+    Value of the Estimator
   \item an \emph{Error} (\S\ref{sec:error}) is a Deviation of an Observed value
     and an ideal (possibly theoretical) ``true'' value, e.g. Deviation from a
     Population Mean
@@ -1763,7 +1768,7 @@ any Probability Distribution defines a Probability Measure
 (\S\ref{sec:pushforward_measure}) of a Random Variable
 (\S\ref{sec:random_variable})
 
-a Probability Distribution is given by its Continuous Distribution Function
+a Probability Distribution is given by its Cumulative Distribution Function
 (\S\ref{sec:cdf}), which is a Right-continuous Function; the Cardinality of the
 Set of all such Functions is equal to the Cardinality of the Reals, $|\reals|$
 
@@ -1827,77 +1832,6 @@ is the Density Matrix of \emph{some} Pure State on some ``Bipartite'' System
 $AB$; there is no ``classical analog'' for Purification, i.e. there is no way to
 make Probability Distribution ``pure'' (one outcome with Probability $1$) by
 adding more Variables
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Moment}\label{sec:moment}
-% ------------------------------------------------------------------------------
-
-the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k) = \int x^k dF(x)$
-assuming that $E(|X|^k) < \infty$, where $F$ is the CDF (\S\ref{sec:cdf}) of $X$
-
-the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample}) $X_1, \ldots,
-X_n$ is:
-\[
-  \frac{1}{n}\sum_{i=1}^n X^k_{i}
-\]
-
-\fist Cumulants (\S\ref{sec:cumulant}) -- Moments determine Cumulants and vice
-versa
-
-\textbf{Thm.} \emph{If $j < k$ and the $k$th Moment Exists, then the $j$th
-  moment exists.}
-
-Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment; Sample
-Mean (\S\ref{sec:sample_mean})
-
-Variance (\S\ref{sec:variance}) -- Second Central Moment
-
-Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
-
-Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
-``heaviness'' of the tail of a Distribution
-
-Fourth and higher-order Cumulants are not equal to Central Moments
-
-\fist Moment-generating Function (\S\ref{sec:moment_generating_function})
-
-\fist Method of Moments (\S\ref{sec:moments_method}) -- Estimator of Statistical
-Model Parameters
-
-\fist Mean Squared Deviation or Mean Squared Error (MSE \S\ref{sec:msd}) of an
-Estimator (\S\ref{sec:estimator}) is the Average of the Squared Error of the
-Estimated value (produced by an Estimator) from the ``true'' value; MSD is
-the Second Moment of the Error; for an Unbiased Estimator the MSD is the
-Variance of the Estimator
-
-
-
-\subsubsection{Standardized Moment}\label{sec:standardized_moment}
-
-a \emph{Normalized} Moment, usually by division by an expression of the Standard
-Deviation rendering the Moment \emph{Scale Invariant}
-(\S\ref{sec:scale_invariance})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Cumulant}\label{sec:cumulant}
-% ------------------------------------------------------------------------------
-
-\fist Moments (\S\ref{sec:moment}) -- Cumulants determine Moments and vice
-versa
-
-Mean (Expected Value \S\ref{sec:expected_value}) -- First Cumulant
-
-Variance (\S\ref{sec:variance}) -- Second Cumulant
-
-Skewness (\S\ref{sec:skewness}) -- Third Cumulant; ``lopsided-ness''
-
-Fourth and higher-order Cumulants are not equal to Central Moments
-
-\fist Cumulant-generating Function (\S\ref{sec:cumulant_generating_function})
 
 
 
@@ -2025,6 +1959,95 @@ the Plug-in Estimator (\S\ref{sec:plugin_principle}) for a Linear Functional:
 \]
 where $\hat{F}_n$ is the Empirical Distribution Function
 (\S\ref{sec:empirical_distribution})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Moment}\label{sec:moment}
+% ------------------------------------------------------------------------------
+
+the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k) = \int x^k dF(x)$
+assuming that $E(|X|^k) < \infty$, where $F$ is the CDF (\S\ref{sec:cdf}) of $X$
+
+the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample}) $X_1, \ldots,
+X_n$ is:
+\[
+  \frac{1}{n}\sum_{i=1}^n X^k_{i}
+\]
+
+\fist Cumulants (\S\ref{sec:cumulant}) -- Moments determine Cumulants and vice
+versa
+
+\textbf{Thm.} \emph{If $j < k$ and the $k$th Moment Exists, then the $j$th
+  moment exists.}
+
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment; Sample
+Mean (\S\ref{sec:sample_mean})
+
+Variance (\S\ref{sec:variance}) -- Second Central Moment
+
+Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
+
+Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
+``heaviness'' of the tail of a Distribution
+
+Fourth and higher-order Cumulants are not equal to Central Moments
+
+\emph{Hausdorff Moment Problem}: for a Probability Distribution on a Bounded
+Interval, the collection of all Moments (of all Orders from $0$ to $\infty$)
+\emph{uniquely} determines the Distribution
+
+\emph{Stieltjes Moment Problem}, \emph{Hamburger Moment Problem}: there may be
+infinitely many Distributions on an Unbounded Interval for a given Sequence of
+Moments; under some conditions the Distribution may be uniquely determined
+
+\fist Moment-generating Function (\S\ref{sec:moment_generating_function})
+
+\fist Method of Moments (\S\ref{sec:moments_method}) -- Estimator of Statistical
+Model Parameters
+
+\fist Mean Squared Deviation or Mean Squared Error (MSE \S\ref{sec:msd}) of an
+Estimator (\S\ref{sec:estimator}) is the Average of the Squared Error of the
+Estimated value (produced by an Estimator) from the ``true'' value; MSD is
+the Second Moment of the Error; for an Unbiased Estimator the MSD is the
+Variance of the Estimator
+
+
+
+\subsubsection{Standardized Moment}\label{sec:standardized_moment}
+
+a \emph{Normalized} Moment, usually by division by an expression of the Standard
+Deviation rendering the Moment \emph{Scale Invariant}
+(\S\ref{sec:scale_invariance})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Cumulant}\label{sec:cumulant}
+% ------------------------------------------------------------------------------
+
+\fist Moments (\S\ref{sec:moment}) -- Cumulants determine Moments and vice
+versa
+
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Cumulant
+
+Variance (\S\ref{sec:variance}) -- Second Cumulant
+
+Skewness (\S\ref{sec:skewness}) -- Third Cumulant; ``lopsided-ness''
+
+Fourth and higher-order Cumulants are not equal to Central Moments
+
+when two or more Random Variables are Statistically Independent, the $n$th-order
+Cumulant of their sum is the sum of their $n$th-order Cumulants
+
+the Normal Distribution is the only Distribution with the property that the
+third and higher-order Cumulants are Zero
+
+\fist Cumulant-generating Function (\S\ref{sec:cumulant_generating_function})
+
+cf. ``Extensive Quantities'' -- Quantities that are proportional to Volume or
+size of a given System (i.e. the sum of quantities associated with Independent
+regions)
 
 
 
@@ -2266,7 +2289,9 @@ for Continuous $X$ with CDF $F_X$, $Y = F_X(X)$ is called a \emph{Probability
   \item Generalized Extreme Value (GEV) Distributions
 \end{itemize}
 
-\fist cf. Scale Parameter (\S\ref{sec:scale_parameter})
+
+\fist cf. Location Parameter (\S\ref{sec:location_parameter}), Scale Parameter
+(\S\ref{sec:scale_parameter})
 
 
 
@@ -3055,6 +3080,15 @@ Distributions (\S\ref{sec:fat_tailed}) with undefined Variance
 \subsection{Dirichlet Distribution}\label{sec:dirichlet_distribution}
 % ------------------------------------------------------------------------------
 
+or \emph{Multivariate Beta Distribution (MBD)}
+
+commonly used as Prior Distributions (\S\ref{sec:prior_distribution}) in
+Bayesian Statistics
+
+
+
+\subsubsection{Symmetric Dirichlet Distribution}\label{sec:symmetric_dirichlet}
+
 \subsubsection{Beta Distribution}\label{sec:beta_distribution}
 
 Gamma Function (\S\ref{sec:gamma_function})
@@ -3216,7 +3250,8 @@ respect to the ``real'' Data Generating Process
   \item \emph{Interval} -- Central Tendency: Mean (\S\ref{sec:arithmetic_mean}),
     Deviation (\S\ref{sec:deviation})
   \item \emph{Ratio} -- Central Tendency: Geometric Mean
-    (\S\ref{sec:geometric_mean}), Variation Coefficient (TODO)
+    (\S\ref{sec:geometric_mean}), Variation Coefficient (TODO);
+    cf. Normalization Ratios (\S\ref{sec:normalizing_ratio})
 \end{itemize}
 
 
@@ -3288,14 +3323,12 @@ Estimate a Population Parameter:
 $\mu$, $\sigma$
 
 \begin{itemize}
-  \item Location Parameter -- Quantile
-  \item Dispersion Parameter
-  \item Scale Parameter
-  \item Shape Parameter
-  \item Concentration Parameter
-  \item Regression Coefficient
+  \item Dispersion (Scale) Parameter (\S\ref{sec:scale_parameter})
+  \item Location Parameter (\S\ref{sec:location_parameter}) -- Quantile
+  \item Shape Parameter (\S\ref{sec:shape_parameter})
+  \item Concentration Parameter (\S\ref{sec:concentration_parameter})
+  \item Regression Coefficient (\S\ref{sec:correlation_coefficient})
 \end{itemize}
-(TODO: xrefs
 
 
 
@@ -3501,7 +3534,7 @@ cf. Accuracy (Systematic Errors \S\ref{sec:accuracy})
 
 
 
-\paragraph{Systematic Error}\label{sec:systmatic_error}\hfill
+\paragraph{Systematic Error}\label{sec:systematic_error}\hfill
 
 or \emph{Statistical Bias}
 
@@ -3516,6 +3549,27 @@ inaccuracy inherent to Observation (Measurement) process
 cf. Precision (Random Errors \S\ref{sec:precision})
 
 \fist Root-Mean-Square Deviation (RMSD \S\ref{sec:rmsd})
+
+
+
+\subparagraph{Specification Error}\label{sec:specification_error}\hfill
+
+%FIXME: does this belong under its own heading ?
+
+error due to the choice of Independent Variables in the Model Specification
+(\S\ref{sec:model_specification})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Pseudo-random Number Sampling}\label{sec:pseudorandom_sampling}
+% ------------------------------------------------------------------------------
+
+or \emph{Non-uniform Pseudo-random Variate Generation}
+
+Monte-carlo Simulation (\S\ref{sec:monte_carlo})
+
+cf. Pseudo-random Process (\S\ref{sec:pseudorandom_process})
 
 
 
@@ -3546,6 +3600,10 @@ assumed that Observations are IID
 
 
 \subsubsection{Simple Random Sample}\label{sec:simple_random_sample}
+
+every individual in the Population equally likely to be included
+
+
 
 \subsubsection{Systematic Sample}\label{sec:systematic_sample}
 
@@ -3630,6 +3688,21 @@ $\overline{x}$, $\sigma^2$
     describe Population Parameter
   \item Hypothesis Testing (\S\ref{sec:hypothesis_testing}) -- Test Statistic
     (\S\ref{sec:test_statistic}) used to Test a Hypothesis
+\end{itemize}
+
+Low-order Statistics -- Functions of the First or Second Power of a Sample (cf.
+Location \S\ref{sec:location_parameter}, Scale \S\ref{sec:scale_parameter}
+Parameters):
+\begin{itemize}
+  \item Mean (\S\ref{sec:sample_mean}) -- First Raw Moment
+  \item Variance (\S\ref{sec:sample_variance}) -- Second Central Moment
+\end{itemize}
+
+Higher-Order Statistics (HOS) -- Functions of Third or higher Power of a Sample
+(cf. Shape Parameters \S\ref{sec:shape_parameter}):
+\begin{itemize}
+  \item Skewness (\S\ref{sec:skewness}) -- Third Standardized Moment
+  \item Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Standardized Moment
 \end{itemize}
 
 \asterism
@@ -3842,6 +3915,20 @@ Response Errors
 
 
 % ------------------------------------------------------------------------------
+\subsection{Kernel}\label{sec:distribution_kernel}
+% ------------------------------------------------------------------------------
+
+Window Function (\S\ref{sec:window_function})
+
+\fist Integral Kernel (\S\ref{sec:integral_kernel})
+
+Normalized, Symmetric
+
+\fist Kernel Density Estimation (\S\ref{sec:kde})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Variance Analysis}\label{sec:variance_analysis}
 % ------------------------------------------------------------------------------
 
@@ -3882,7 +3969,7 @@ Deviations (\S\ref{sec:sum_squared_deviation})
 \end{itemize}
 or:
 \begin{itemize}
-  \item the Sample Mean (\S\ref{sec:sample_mean}) of some Data
+  \item the Sample Variance (\S\ref{sec:sample_variance}) of some Data
     (\S\ref{sec:sample})
 \end{itemize}
 
@@ -4119,7 +4206,7 @@ than would be expected based on a given Statistical Model
 
 given a measure of Statistical Dispersion, measures of Central Tendency
 (\S\ref{sec:central_tendency}) can be characterized as \emph{Minimizing
-  Variation} (\S\ref{sec:calculus_of_variations}) such that the Center is
+  Variation} (\S\ref{sec:variational_calculus}) such that the Center is
 minimal among all possible choices of Center (may or may not be unique); in the
 sense of $L^p$-norms (\S\ref{sec:p_norm}):
 \begin{tabular}{l l l}
@@ -4441,11 +4528,13 @@ Maximum Absolute Deviation is the \emph{Midpoint} (\S\ref{sec:midpoint})
 
 or \emph{Location} or ``\emph{Average}''
 
+\fist Location Parameter (\S\ref{sec:location_parameter})
+
 (wiki): ``Dispersion precedes Location'' --
 
 given a measure of Statistical Dispersion (\S\ref{sec:dispersion}), measures of
 Central Tendency can be characterized as \emph{Minimizing Variation}
-(\S\ref{sec:calculus_of_variations}) such that the Center is minimal among all
+(\S\ref{sec:variational_calculus}) such that the Center is minimal among all
 possible choices of Center (may or may not be unique); in the sense of
 $L^p$-norms (\S\ref{sec:p_norm}):
 \begin{tabular}{l l l}
@@ -4569,6 +4658,11 @@ Trimmed $L^\infty$ Norm Statistic
 
 \subsubsection{Shape}\label{sec:distribution_shape}
 
+\fist Shape Parameter (\S\ref{sec:shape_parameter}) -- any Parameter of a
+Probability Distribution that is not a Location or Scale (Dispersion) Parameter
+
+
+
 \paragraph{Skewness}\label{sec:skewness}\hfill
 
 Asymmetry %FiXME
@@ -4576,6 +4670,8 @@ Asymmetry %FiXME
 ``lopsided-ness''
 
 Third Central Moment (\S\ref{sec:moment})/Third Cumulant (\S\ref{sec:cumulant})
+
+cf. Gyration
 
 
 
@@ -4736,6 +4832,29 @@ when Dependence decays more slowly than Exponential Decay
 (\S\ref{sec:exponential_decay})
 
 cf. ``Memoryless-ness'' (\S\ref{sec:memoryless_distribution})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Normalizing Ratio}\label{sec:normalizing_ratio}
+% ------------------------------------------------------------------------------
+
+Non-dimensional (\emph{Scale Invariant} \S\ref{sec:scale_invariance}) Ratios of
+Errors, Residuals, Means, and Standard Deviations
+
+only makes sense at the Ratio Measurement Level (\S\ref{sec:measurement_level})
+
+Standard Score
+
+Student's $t$-statistic
+
+Studentized Residual
+
+Standardized Moment
+
+Coefficient of Variation
+
+Min-max Feature Scaling (\S\ref{sec:minmax_normalization})
 
 
 
@@ -5032,7 +5151,8 @@ $X_t$
 Functions; e.g. yield, count, time interval; Mean is of interest, but Log
 or other Non-linear Transformations are generally not of interest;
 (Kingman 1984): cf. Point Process as the Number of Points in an Interval
-$X_t - X_s$ or Subset of a Multi-dimensional Space
+$X_t - X_s$ or Subset of a Multi-dimensional Space; cf. Cumulants
+(\S\ref{sec:cumulant})
 
 \emph{Statistical Model}:
 \begin{enumerate}
@@ -5526,6 +5646,12 @@ isa  Subobject of $n$, but some systems are excepted from this condition, e.g.
 
 
 
+\subsubsection{Model Specification}\label{sec:model_specification}
+
+\fist Specification Error (\S\ref{sec:specification_error})
+
+
+
 \subsubsection{Model Validation}\label{sec:model_validation}
 
 (wiki):
@@ -5720,6 +5846,31 @@ Parametric Family
 
 
 
+\paragraph{Location Parameter}\label{sec:location_parameter}\hfill
+
+cf. Central Tendency (\S\ref{sec:central_tendency})
+
+
+
+\paragraph{Shape Parameter}\label{sec:shape_parameter}\hfill
+
+any Parameter that is not a Location or Scale Parameter
+
+\fist Shape (\S\ref{sec:distribution_shape})
+
+Estimated in terms of higher Moments: Skewness (3rd Moment
+\S\ref{sec:skewness}), Kurtosis (4th Moment \S\ref{sec:kurtosis})
+
+
+
+\paragraph{Concentration Parameter}\label{sec:concentration_parameter}\hfill
+
+tendency towards a Uniform Distribution (\S\ref{sec:uniform_distribution})
+
+Dirichlet Distribution (\S\ref{sec:dirichlet_distribution})
+
+
+
 \paragraph{Fixed Effects Model}\label{sec:fixed_effect}\hfill
 
 \paragraph{Random Effects Model}\label{sec:random_effect}\hfill
@@ -5762,11 +5913,15 @@ Non-parametric (\S\ref{sec:nonparametric_statistics})
 \fist Non-parametric Inference: Statistical Functionals
 (\S\ref{sec:statistical_functional}), Resampling Methods
 (\S\ref{sec:resampling}), Non-parametric Regression
-(\S\ref{sec:nonparametric_regression})
+(\S\ref{sec:nonparametric_regression}), Distribution-free Inference
+(\S\ref{sec:distribution_free})
 
 \emph{Stein's Paradox} -- when three or more Parameters are Estimated
 simultaneously, there exist combined Estimators more accurate on average (having
 lower Expected MSE) than any method handling the Parameters Separately
+
+Histogram (\S\ref{sec:histogram}), Kernel Density Estimation (\S\ref{sec:kde}),
+Support Vector Machine
 
 
 
@@ -6123,6 +6278,13 @@ Sufficient Statistic (\S\ref{sec:sufficient_statistic}) is sub-optimal
 
 
 
+\paragraph{Sampling Deviation}\label{sec:sampling_deviation}\hfill
+
+difference between Estimate on a given Sample and the Expected Value of the
+Estimator
+
+
+
 \paragraph{Delta Method}\label{sec:delta_method}\hfill
 
 (wiki): concerns the approximate Probability Distribution for a Function of an
@@ -6269,7 +6431,7 @@ $S_E$ is the Standard Error
 \end{itemize}
 produce a Sequence of values $\theta^0, \theta^1, \ldots$ that Converge to MLE
 $\hat{\theta}$;
-often the Method of Moements (\S\ref{sec:moments_method}) is a good starting
+often the Method of Moments (\S\ref{sec:moments_method}) is a good starting
 value of $\theta^0$
 
 (Wasserman04 \S13.2):
@@ -6628,6 +6790,10 @@ $L^2$ Risk Function (\S\ref{sec:risk_function})
 
 \emph{Histogram Estimator}
 
+Non-parametric (\S\ref{sec:nonparametric_model})
+
+simplistic Kernel Density Estimation (\S\ref{sec:kde})
+
 converges at rate $n^{-2/3}$;
 
 Frequency Histogram
@@ -6642,9 +6808,13 @@ time
 
 \paragraph{Kernel Density Estimation (KDE)}\label{sec:kde}\hfill
 
+cf. Histogram (\S\ref{sec:histogram})
+
 cf. Kernel Regression (\S\ref{sec:kernel_regression})
 
-\emph{Kernel Function}
+Non-parametric Model (\S\ref{sec:nonparametric_model})
+
+\emph{Kernel Function} (\S\ref{sec:distribution_kernel})
 
 \emph{Bandwidth}
 
@@ -7798,6 +7968,9 @@ when the Prior and Posterior Distributions (\S\ref{sec:posterior_distribution})
 are in the same family, the Prior is said to be ``\emph{Conjugate}'' with
 respect to the Model
 
+commonly used Prior Distribution: Multivariate Beta Distribution (Dirichlet
+Distribution \S\ref{sec:dirichlet_distirbution})
+
 \emph{Subjectivism}: Prior should reflect ``subjective opinion'' about $\theta$
 before the Data are collected
 
@@ -8318,6 +8491,16 @@ Global Markov Property
 
 
 % ------------------------------------------------------------------------------
+\subsection{Distribution-free Inference}\label{sec:distribution_free}
+% ------------------------------------------------------------------------------
+
+Distribution-free Methods
+
+Ordinal Data
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Fiducial Inference}\label{sec:fiducial_inference}
 % ------------------------------------------------------------------------------
 
@@ -8446,6 +8629,8 @@ includes both Descriptive and Inferential Statistics
 Nonparametric Regression (\S\ref{sec:nonparametric_regression})
 
 Nonparametric Models (\S\ref{sec:nonparametric_model})
+
+Nonparametric Inference (\S\ref{sec:nonparametric_inference})
 
 Order Statistics (\S\ref{sec:order_statistic})
 
@@ -8592,6 +8777,16 @@ Classification Models (increasingly indirect):
 Explanatory Variable (Regressor), ``Instance''
 
 \emph{Feature Space}
+
+
+
+\subsubsection{Feature Scaling}\label{sec:feature_scaling}
+
+\subsubsection{Min-max Normalization}\label{sec:minmax_normalization}
+
+\emph{Min-max Scaling} or \emph{Rescaling}
+
+\fist cf. Normalizing Ratio (\S\ref{sec:normalizing_ratio})
 
 
 
@@ -11011,6 +11206,29 @@ Tests (\S\ref{sec:hypothesis_testing}):
   \item ...
 \end{itemize}
 
+(Mandelbrot 1997)
+
+problem of determinism in physics in the face of randomness is mitigated by lack
+of information (e.g. state of individual atoms in a gas)
+
+problem of causality and rationality in finance are exaggerated due to more or
+less ``perfect'' information of markets
+
+from ``more'' to ``less'' random: a fair coin, a biased coin, a coin with
+``memory''
+
+``mild'' randomness: statistics ordinarily deal with observations that fluctuate
+around a ``normal'' state; cf. the edge of a razor blade is jagged on close
+inspection but has a higly representative ``trend'' when viewed at larger scales
+
+``wild'' randomness: ``non-averaging'' change; cf. a coastline reveals
+irregularity at every scale
+
+``at random'': not fully predictable or controllable
+
+*ex-post* vs. *ex-ante*: after the fact reasonable causes may be attributed to
+some features, but before the fact the ``situation is much different''
+
 
 
 % ------------------------------------------------------------------------------
@@ -11039,6 +11257,8 @@ cf. Quasi-random (Low Discrepancy) Sequences (\S\ref{sec:low_discrepancy})
 
 \emph{Hash Functions} can create ``Random Numbers'' solely based on an Input
 with no dependency on previous queries
+
+\fist Pseudo-random Number Sampling (\S\ref{sec:pseudorandom_sampling})
 
 2015 -
 \url{http://blog.runevision.com/2015/01/primer-on-repeatable-random-numbers.html}
@@ -12001,7 +12221,11 @@ where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
 \subsection{Dirichlet Process}\label{sec:dirichlet_process}
 % ------------------------------------------------------------------------------
 
+a Probabilty Distribution with Range over a Set of Probability Distributions
+
 Bayesian Inference (\S\ref{sec:bayesian_inference})
+
+Concentration Parameter (\S\ref{sec:concentration_parameter})
 
 
 
@@ -12046,6 +12270,8 @@ Method applied to Numerical Integration
 
 Importance Sampling (\S\ref{sec:importance_sampling}) can be used to reduce
 Variance
+
+Pseudo-random Number Sampling (\S\ref{sec:pseudorandom_sampling})
 
 
 
