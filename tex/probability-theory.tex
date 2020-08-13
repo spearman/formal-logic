@@ -1657,7 +1657,11 @@ a Random Sequence is a special case of \emph{Stochastic Process}
 Integers
 
 Stochastic Processes: Sequences of possibly \emph{Dependent}
-(\S\ref{sec:dependence}) Random Variables; cf. IID (\S\ref{sec:iid}) Sequences
+(\S\ref{sec:dependence}) Random Variables:
+\begin{itemize}
+  \item Martingales (\S\ref{sec:martingale})
+\end{itemize}
+cf. IID Sequences (\S\ref{sec:iid})
 
 cf. Random Vector (\S\ref{sec:random_vector})
 
@@ -2225,6 +2229,9 @@ as a consequence of the Central Limit Theorem, Random Errors
 Distributions; cf. Universality Class (Renormalization
 (\S\ref{sec:universality_class})
 
+\fist Mean-Field Theory (MFT \S\ref{sec:mft}) -- Limit Theorems generalize the
+Central Limit Theorem for Empirical Measures (\S\ref{sec:empirical_measure})
+
 \fist origin of ``Multifractality'' (\S\ref{sec:multifractal_system}) in
 Sequential (Time Series) data attributed to ``convergence effects'' related to
 the Central Limit Theorem that have Foci of Convergence in the family of Tweedie
@@ -2769,6 +2776,9 @@ has no Moment-generating Function (\S\ref{sec:moment_generating_function})
 the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
 $X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
 
+Cauchy Flight (\S\ref{sec:cauchy_flight}) -- Random Walk with step lengths
+distributed according to a Cauchy Distribution
+
 
 
 \paragraph{Normal Distribution}\label{sec:normal_distribution}\hfill
@@ -2813,6 +2823,9 @@ cf. Sub-gaussian Distributions (Short-tailed Distributions
 
 \fist Gaussian Processes (\S\ref{sec:gaussian_process}) can be seen as
 Infinite-dimensional generalizations of Multivariate Normal Distributions
+
+\fist Gaussian Random Walk (\S\ref{sec:gaussian_random_walk}): Random Walk in
+which the step size varies according to a Normal Distribution
 
 \emph{Empirical Rule} 68-95-99.7 Rule -- 68\% within 1 Standard Deviation of the
 Mean, 95\% within 2 Standard Deviations, 99.7\% within 3 Standard Deviations
@@ -2981,6 +2994,21 @@ Logistic Regression
 
 
 
+\paragraph{$\chi$ Distribution}\label{sec:chi_distribution}\hfill
+
+Distribution of Positive Square Roots of a Chi-squared Distributed Random
+Variable
+
+
+
+\subparagraph{Rayleigh Distribution}\label{sec:rayleigh_distribution}\hfill
+
+Chi Distribution with $2$ Degrees of Freedom
+
+Asymptotic Function for Two-dimensional Random Walk (\S\ref{sec:random_walk})
+
+
+
 \paragraph{$F$-distribution}\label{sec:f_distribution}\hfill
 
 (Fisher)
@@ -3062,6 +3090,9 @@ Scale Invariance (\S\ref{sec:scale_invariance})
 
 
 \paragraph{L\'evy Distribution}\label{sec:levy_distribution}\hfill
+
+L\'evy Flight (\S\ref{sec:levy_flight}) -- Random Walk with step length varying
+according to a L\'evy Distribution
 
 
 
@@ -4080,7 +4111,7 @@ TODO
 \subsection{Scale Analysis}\label{sec:statistical_scale}
 % ------------------------------------------------------------------------------
 
-Scale Paramter (\S\ref{sec:scale_parameter})
+Scale Parameter (\S\ref{sec:scale_parameter})
 
 Scale Estimator (\S\ref{sec:scale_estimator})
 
@@ -5843,6 +5874,8 @@ Parameter determining the \emph{Dispersion} (\S\ref{sec:dispersion}) of a
 Parametric Family
 
 \fist (Statistical) Scale Analysis (\S\ref{sec:statistical_scale})
+
+\fist Scaling Limit (\S\ref{sec:scaling_limit})
 
 
 
@@ -10953,6 +10986,15 @@ $w_{ii} = 0$ -- no Unit is connected to itself
 $w_{ij} = w_{ji}$ -- connections are \emph{Symmetric}; this guarantees the
 ``Energy Function'' decreases monotonically while following the Activation rules
 
+\asterism
+
+2020 - Ramsauer, et al. - \emph{Hopfield Networks is All You Need}:
+
+\emph{``Transformer Attention'' mechanism} -- Update Rule of a Hopfield Network
+with Continuous States
+
+\url{https://github.com/ml-jku/hopfield-layers}
+
 
 
 \subparagraph{Boltzmann Machine}\label{sec:boltzmann_machine}\hfill
@@ -11311,26 +11353,30 @@ Predictive Inference, Bayesian Statistics (Finetti) --TODO: xref
 \section{Stochastic Process}\label{sec:stochastic_process}
 % ==============================================================================
 
-or \emph{Random Process}
+A \emph{Stochastic Process} (or \emph{Random Process}) is an Indexed Family of
+possibly \emph{Dependent} (\S\ref{sec:dependence}) Random Variables
+(\S\ref{sec:random_variable}) $\{ X_t : t \in T \}$ with a common State Space,
+$V$. An \emph{Outcome} for a Stochastic Process is a particular \emph{Path} or
+``\emph{Sample Function}'' (or ``\emph{Realization}''), assigning a Point in
+State Space $X_t(\omega) = x_t \in V$ to each Random Variable in the Family;
+that is, a Stochastic Process is a Random Variable taking values in a Space of
+\emph{Functions} from the Index Set to Points in the underlying State Space.
+Equivalently, a Stochastic Process defines a Probability Distribution over a
+``Space of Paths'' (MIT 18.s096).
 
-Indexed collection of \emph{Dependent} (\S\ref{sec:dependence}) Random
-Variables; cf. IID (\S\ref{sec:iid}) Sequences (often of \emph{Observations}
-\S\ref{sec:observation})
-
-alternatively: a Probability Distribution over a ``Space of Paths'' (MIT
-18.s096) --FIXME: is this a special case ???
-
-the \emph{Outcome} of a Stochastic Process is a particular Path or
-``\emph{Sample Function}'' (or ``\emph{Realization}'')
-
-a Process in which each Point is Stochastically Independent
-(\S\ref{sec:independence}) is called a \emph{Completely Random Process} (e.g. a
-Poisson Process \S\ref{sec:poisson_process})
+A Process in which each Point is Stochastically Independent
+(\S\ref{sec:independence}) is called a \emph{Completely Random Process} (e.g.
+Bernoulli Process \S\ref{sec:bernoulli_process}, Poisson Process
+\S\ref{sec:poisson_process}).
 
 \fist a \emph{Random Sequence} (\S\ref{sec:random_sequence}) is a special case
-of Stochastic Process where the Index Set is some Subset of the Integers; a
-Sequence of IID Observations is a special case (cf. Random Sample
+of Completely Random Process where the Index Set is some Subset of the Integers
+(e.g. a Sequence of IID Observations; cf. Random Sample
 \S\ref{sec:random_sample})
+
+\fist a \emph{Pseudorandom Process} (\S\ref{sec:pseudorandom_process}) is a
+Determinstic Process exhibiting Statistical Randomness
+(\S\ref{sec:statistical_randomness})
 
 \fist cf. Data Generating Process (\S\ref{sec:data_generating_process})
 
@@ -11339,13 +11385,9 @@ Signals as Stochastic Processes;
 note that a Signal may have a ``White'' Frequency Spectrum but still be Serially
 Dependent (Mandelbrot97)
 
-\fist a \emph{Pseudorandom Process} (\S\ref{sec:pseudorandom_process}) is a
-Determinstic Process exhibiting Statistical Randomness
-(\S\ref{sec:statistical_randomness})
-
 \fist Stochastic Calculus (\S\ref{sec:stochastic_calculus}) -- consistent theory
 of Integration defined for Integrals of Stochastic Processes with respect to
-Stochastic Processes:
+other Stochastic Processes:
 \begin{itemize}
   \item Stochastic Differential Equation (\S\ref{sec:sde}) -- Differential
     Equation in which one or more Terms is a Stochastic Process
@@ -11365,10 +11407,15 @@ cf. Harmonic Functions (\S\ref{sec:harmonic_function})
 \fist cf. Non-deterministic Dynamical Systems
 (\S\ref{sec:nondeterministic_dynamical_system})
 
-\fist Stochastic Differential Equations (SDEs \S\ref{sec:sde}) -- a Differential
-Equation in which one or more Terms is a Stochastic Process
-
 First-hitting-time Model
+
+classifications:
+
+\begin{itemize}
+  \item State Space
+  \item Index Set -- Cardinality: Discrete, Continuous
+  \item Dependence
+\end{itemize}
 
 1984 - Kingman - \emph{Present Position and Potential Developments: Some
   Personal Views: Probability and Random Processes}
@@ -11559,6 +11606,16 @@ Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc})
 
 
 
+\subsubsection{Scaling Limit}\label{sec:scaling_limit}
+
+cf. Scale Parameter (\S\ref{sec:scale_parameter})
+
+\emph{Donsker's Theorem} -- a Discrete Random Walk
+(\S\ref{sec:simple_random_walk}) converges to true Brownian Motion (Wiener
+Process \S\ref{sec:wiener_process}) in the Scaling Limit
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Continuous-time Stochastic Process}\label{sec:continuous_stochastic}
 % ------------------------------------------------------------------------------
@@ -11566,6 +11623,8 @@ Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc})
 \subsubsection{Gaussian Process}\label{sec:gaussian_process}
 
 a 1D Gaussian Random Field (\S\ref{sec:gaussian_random_field})
+
+cf. Gaussian Random Walk (\S\ref{sec:gaussian_random_walk})
 
 can be seen as the Infinite-dimensional generalization of Multivariate Normal
 Distributions (\S\ref{sec:normal_distribution})
@@ -11582,6 +11641,8 @@ equivalent to Gaussian Processes in the ``Infinite-width'' limit
 Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
 
 \fist Gauss-Markov Process (\S\ref{sec:gauss_markov_process})
+
+\fist Donsker's Theorem (\S\ref{sec:donskers_theorem})
 
 
 
@@ -11612,11 +11673,32 @@ Variation of Exchange Rates
 
 \subparagraph{Wiener Process}\label{sec:wiener_process}\hfill
 
-or \emph{Brownian Motion}
+Model of \emph{Brownian Motion} (or \emph{Pedesis})
 
 $H = 1/2$
 
 Semimartingale (\S\ref{sec:semimartingale})
+
+\emph{Donsker's Theorem} (\S\ref{sec:donskers_theorem}) -- a Discrete Random
+Walk (\S\ref{sec:simple_random_walk}) converges to true Brownian Motion in the
+Scaling Limit (\S\ref{sec:scaling_limit})
+
+\emph{Green's Function} (\S\ref{sec:greens_function}) -- Diffusion Equation
+(\S\ref{sec:diffusion_equation})
+
+
+
+\subparagraph{Brownian Bridge}\label{sec:brownian_bridge}\hfill
+
+Continuous-time Stochastic Process $B(t)$ with Probability Distribution equal to
+the Conditional Probability Distribution of a Wiener Process $W(t)$, with the
+condition (when Standardized) that $W(T) = 0$:
+\[
+  B_t := (W_t | W_T = 0), t \in [0,T]
+\]
+
+\fist Donsker's Theorem (\S\ref{sec:donskers_theorem}), Skorokhod Space
+(\S\ref{sec:skorokhod_space})
 
 
 
@@ -11636,6 +11718,21 @@ GBM is Path Continuous
 \emph{Local Volatility} -- treat Volatility as a Function of Price and Time
 
 \emph{Stochastic Volatility} -- allow Volatility to be Stochastic
+
+
+
+\paragraph{L\'evy Process}\label{sec:levy_process}\hfill
+
+\fist cf. L\'evy Flight (\S\ref{sec:levy_flight})
+
+Wiener Process (\S\ref{sec:wiener_process}), Poisson Process
+(\S\ref{sec:poisson_process})
+
+
+
+\subparagraph{Cauchy Process}\label{sec:levy_process}\hfill
+
+\fist cf. Cauchy Flight (\S\ref{sec:cauchy_flight})
 
 
 
@@ -11706,6 +11803,84 @@ Long-range Dependence (\S\ref{sec:long_range_dependence})
 \subsection{Random Walk}\label{sec:random_walk}
 % ------------------------------------------------------------------------------
 
+%FIXME: move this section ???
+
+an ``unbiased'' Random Walk is an example of a Martingale
+(\S\ref{sec:martingale})
+
+
+
+\subsubsection{Lattice Random Walk}\label{sec:lattice_random_walk}
+
+Random Walk on a Lattice Graph (\S\ref{sec:lattice_graph}), Paths are Lattice
+Paths (\S\ref{sec:lattice_path})
+
+\fist Mean-Field Theory (MFT \S\ref{sec:mft})
+
+
+
+\paragraph{Simple Random Walk}\label{sec:simple_random_walk}\hfill
+
+Independent Random Variables $Z_1, Z_2, \ldots$ with State Space $\{1, -1\}$ and
+(Binomial) Probability $0.5$ for either value (i.e. each has Mean $0$ and
+Variance $1$)
+
+$\{ S_n \}$ where $S_0 = 0$ and $S_n = \sum_{j=1}^n Z_j$ --
+\emph{Simple Random Walk} on $\ints$
+
+$E(S_n) = \sum_{j=1}^n E(Z_j) = 0$
+
+$E(S_n^2) = n$
+
+the Expected Distance after $n$ steps, $|S_n|$, is:
+\[
+  E(|S_n|) = \frac{(n - (n+1)\mod{2})!!}{(n - 1 - (n+1)\mod{2})!!}
+\]
+where $!!$ is Semifactorial (\S\ref{sec:semifactorial}); this Distance is
+related to $\sqrt{n}$, as suggested by the Expected Square Distance being equal
+to $n$, by the ratio
+$\lim_{n\to\infty} \frac{E(|S_n|)}{\sqrt{n}} = \sqrt{2/\pi}$
+
+in Dimensions $1$ and $2$, the Probability of returning to the Origin is $1$,
+but in Dimensions $3$ is is $0.34$, and decreases as the Dimension increases
+
+two Random Walks in Dimensions $4$ or less will almost surely have Infinitely
+many Intersections, but for Dimensions $5$ or higher they will almost surely
+Intersect only Finitely often
+
+Asymptotic Function for a Two-dimensional Random Walk as the number of steps
+increases is given by the Rayleigh Distribution
+(\S\ref{sec:rayleigh_distribution})
+
+\emph{Gambler's Ruin} -- the Random Walk will cross Zero an Infinite number of
+times
+
+\emph{Donsker's Theorem} -- a Simple Random Walk converges to true Brownian
+Motion (Wiener Process \S\ref{sec:wiener_process}) in the Scaling Limit
+(\S\ref{sec:scaling_limit})
+
+
+
+\subparagraph{Simple Bordered Random Walk}\label{sec:simple_bordered_walk}\hfill
+
+Simple Random Walk on a Finite State Space -- Transition Probabilities depend on
+the State (Transitions on Border States are limited)
+
+
+
+\subsubsection{Gaussian Random Walk}\label{sec:gaussian_random_walk}
+
+or \emph{Rayleigh Flight}
+
+Random Walk with step size varying according to a Normal Distribution
+(\S\ref{sec:normal_distribution})
+
+Model of Financial Markets
+
+Anomalous Diffusion
+
+
+
 \subsubsection{Law of Iterated Logarithm}\label{sec:iterated_logarithm}
 
 describes magnitude of Fluctuations of a Random Walk
@@ -11716,7 +11891,12 @@ cf. Law of Large Numbers (\S\ref{sec:large_numbers})
 
 \subsubsection{Markov Process}\label{sec:markov_process}
 
+%FIXME: move this section ???
+
 \fist (Discrete-time) Markov Chain (\S\ref{sec:markov_chain})
+
+\fist Markov Population Model (Population Continuous-time Markov Chain
+\S\ref{sec:markov_population})
 
 a State in a Markov Process is \emph{Ergodic} (\S\ref{sec:ergodic_process}) if
 it is:
@@ -11981,11 +12161,37 @@ or \emph{Damped Random Walk}
 
 
 
+\paragraph{L\'evy Flight}\label{sec:levy_flight}\hfill
+
+Random Walk with step lengths distributed according to a L\'evy Distribution
+(\S\ref{sec:levy_distribution})
+
+\fist L\'evy Process (\S\ref{sec:levy_process})
+
+
+
+\subparagraph{Cauchy Flight}\label{sec:cauchy_flight}\hfill
+
+Random Walk with step lengths distributed according to a Cauchy Distribution
+(\S\ref{sec:cauchy_distribution})
+
+\fist Cauchy Process (\S\ref{sec:cauchy_process})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Martingale}\label{sec:martingale}
 % ------------------------------------------------------------------------------
 
+a Random Sequence in which the Conditional Expectation of each successive Value
+in the Sequence
+
 may be Discrete-time or Continuous-time
+
+an unbiased Random Walk (\S\ref{sec:random_walk}) is an example of a Martingale
+
+\fist cf. Potential Theory (Potential Theory \S\ref{sec:potential_theory});
+(Harmonic Functions \S\ref{sec:harmonic_function})
 
 
 
@@ -12039,7 +12245,8 @@ Properties of a Poisson Process on the Real Line: the number of Points
 (``Events'') in Disjoint Intervals are Independent and have a Poisson
 Distribution (\S\ref{sec:poisson_distribution})
 
-cf. Markov Process (\S\ref{sec:markov_process})
+cf. Markov Process (\S\ref{sec:markov_process}), L\'evy Process
+(\S\ref{sec:levy_process})
 
 Queueing Theory (\S\ref{sec:queueing_theory})
 
@@ -12110,6 +12317,11 @@ where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
 the CDF (\S\ref{sec:cdf}) associated with the Empirical Measure of a Sample
 (\S\ref{sec:sample}) is the \emph{Empirical Distribution Function}
 (\S\ref{sec:empirical_distribution})
+
+cf. Empirical Processes (\S\ref{sec:empirical_process})
+
+\fist Mean-Field Theory (MFT \S\ref{sec:mft}) -- Limit Theorems generalize the
+Central Limit Theorem for Empirical Measures
 
 
 
@@ -12214,6 +12426,26 @@ Empirical Distribution Function (\S\ref{sec:empirical_distribution}):
 $P_n(A) = \frac{1}{n}\sum_{i=1}^n \delta_{X_i}(A)$
 
 where $\delta$ is the Dirac Measure (\S\ref{sec:dirac_measure})
+
+\fist Mean-Field Theory (MFT \S\ref{sec:mft}) -- Limit Theorems generalize the
+Central Limit Theorem for Empirical Measures (\S\ref{sec:empirical_measure})
+
+
+
+\subsubsection{Markov Population Model}\label{sec:markov_population}
+
+\emph{Population Continuous-time Markov Chain}
+
+
+
+\subsubsection{Donsker's Theorem}\label{sec:donskers_theorem}
+
+a Discrete Random Walk (\S\ref{sec:simple_random_walk}) converges to true
+Brownian Motion (Wiener Process \S\ref{sec:wiener_process}) in the Scaling Limit
+(\S\ref{sec:scaling_limit})
+
+\fist Brownian Bridge (\S\ref{sec:brownian_bridge}), Skorokhod Space
+(\S\ref{sec:skorokhod_space})
 
 
 
@@ -12361,6 +12593,26 @@ of a Physical System
 
 
 \subsubsection{Thermodynamic Ensemble}\label{sec:thermodynamic_ensemble}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Mean-Field Theory (MFT)}\label{sec:mft}
+% ------------------------------------------------------------------------------
+
+no long-range Correlation
+
+\fist Empirical Processes (\S\ref{sec:empirical_process}); Limit Theorems
+generalize the Central Limit Theorem for Empirical Measures
+(\S\ref{sec:empirical_measure})
+
+
+
+\subsubsection{Landau Theory}\label{sec:landau_theory}
+
+general theory of Second-order (i.e. \emph{Continuous}) Phase Transitions
+
+appearance of Fractals in some Scale-free Properties
 
 
 
