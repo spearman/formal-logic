@@ -1853,7 +1853,7 @@ the \emph{Cumulative Distribution Function (CDF)} of a Real-valued Random
 Variable $X$ evaluated at $x$ is equal to the Probability that $X$ will take a
 value less than or equal to $x$:
 \[
-  \forall x \in \reals, F_X(x) = P(X \leq x)
+  \forall x \in \reals, F_X(x) = \prob(X \leq x)
 \]
 every CDF is Non-decreasing and Right-continuous
 
@@ -1894,6 +1894,14 @@ and equals the Derivative of $F_X$ almost everywhere
 (\S\ref{sec:empirical_distribution}) -- an Unbiased Estimator for $F$ defined as
 the CDF of the Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
 (\S\ref{sec:sample})
+
+
+
+\subsubsection{Survival Function}\label{sec:survival_function}
+
+$\prob(X > x)$
+
+$\bar{F}(\cdot)$
 
 
 
@@ -2744,7 +2752,7 @@ $\nu$ -- Degrees of Freedom
 
 Sampling Distribution (\S\ref{sec:sampling_distribution}) for low Sample Size
 
-\item Fat-tailed Distribution (\S\ref{sec:fat_tailed})
+Fat-tailed Distribution (\S\ref{sec:fat_tailed})
 
 $t$-statistic (\S\ref{sec:t_statistic})
 
@@ -3057,6 +3065,13 @@ Tails are \emph{not} Exponentially Bounded (cf. Exponential Distributions
   \item Cauchy Distribution (\S\ref{sec:cauchy_distribution})
   \item ...
 \end{itemize}
+
+(Taleb 2020):
+
+``Thick-tailed Distributions'' -- higher Kurtosis than Gaussian
+
+``Fat-tailed Distributions'' -- ``extreme'' Thick Tails, or membership of a
+Power-law Class
 
 
 
@@ -6239,6 +6254,10 @@ Scale Analysis (\S\ref{sec:statistical_scale}), Scale Invariance
 
 \fist Fat-tailed Distributions (\S\ref{sec:fat_tailed})
 
+\fist Regularly Varying Function (\S\ref{sec:regularly_varying}) -- Function of
+a Real Variable with behavior at Infinity similar to the behavior of a Power Law
+Function (cf. Polynomial \S\ref{sec:polynomial_function})
+
 
 
 % ------------------------------------------------------------------------------
@@ -6842,6 +6861,8 @@ simplistic Kernel Density Estimation (\S\ref{sec:kde})
 converges at rate $n^{-2/3}$;
 
 Frequency Histogram
+
+\fist Periodogram (Spectral Density Estimation \S\ref{sec:periodogram})
 
 Relative Frequency Histogram (Percentages)
 
@@ -9405,6 +9426,15 @@ and substituting to solve for $\hat{\beta_0}$:
 
 
 
+\subsubsection{Fraction of Variance Unexplained (FVU)}\label{sec:fvu}
+
+Fraction of Variance of the Regressand (Dependent Variable) $Y$ which cannot be
+explained (i.e. not correctly Predicted) by the Explanatory Variables $X$
+
+``Statistical Noise'' (cf. Noise Signal \S\ref{sec:noise})
+
+
+
 \subsubsection{Determination Coefficient}\label{sec:determination_coefficient}
 
 ``\emph{R-squared}''
@@ -10376,7 +10406,20 @@ produce the \emph{Identity Function}
 
 
 
-\paragraph{Contractive Autoencoder}\label{sec:contractive_autoencoder}\hfill
+\paragraph{Regularized Autoencoder}\label{sec:regularized_autoencoder}\hfill
+
+\subparagraph{Sparse Autoencoder}\label{sec:sparse_autoencoder}\hfill
+
+\subparagraph{Denoising Autoencoder}\label{sec:denoising_autoencoder}\hfill
+
+\subparagraph{Contractive Autoencoder}\label{sec:contractive_autoencoder}\hfill
+
+
+
+\paragraph{Variational Autoencoder}\label{sec:variational_autoencoder}\hfill
+
+2018 - Pascual - \emph{PixelCNN, WaveNet & Variational Autoencoders} -
+\url{https://www.youtube.com/watch?v=FeJT8ejgsL0}
 
 
 
@@ -11392,6 +11435,9 @@ Determinstic Process exhibiting Statistical Randomness
 
 \fist cf. Data Generating Process (\S\ref{sec:data_generating_process})
 
+\fist \emph{Noise Signal} (\S\ref{sec:noise}) -- a Signal produced by a
+Stochastic Process
+
 \fist Statistical Signal Processing (\S\ref{sec:statistical_signal}) -- treats
 Signals as Stochastic Processes;
 note that a Signal may have a ``White'' Frequency Spectrum but still be Serially
@@ -11691,12 +11737,33 @@ $H = 1/2$
 
 Semimartingale (\S\ref{sec:semimartingale})
 
+given a Wiener Process $W_t$ and Harmonic Function
+(\S\ref{sec:harmonic_function}) $f$, the Process $f(W_t)$ is also a Martingale
+
 \emph{Donsker's Theorem} (\S\ref{sec:donskers_theorem}) -- a Discrete Random
 Walk (\S\ref{sec:simple_random_walk}) converges to true Brownian Motion in the
 Scaling Limit (\S\ref{sec:scaling_limit})
 
 \emph{Green's Function} (\S\ref{sec:greens_function}) -- Diffusion Equation
 (\S\ref{sec:diffusion_equation})
+
+(Mandelbrot97):
+
+Invariance Properties:
+\begin{itemize}
+  \item Stationarity (\S\ref{sec:stationary_process})
+  \item Scaling (\S\ref{sec:scale_invariance})
+\end{itemize}
+
+other Properties:
+\begin{itemize}
+  \item Statistical Independence
+  \item Continuous, No-where Differentiable
+  \item changes over equally spaced Time increments are Independent Gaussian
+    Variables
+  \item absence of ``clustering'' of large changes in Time
+  \item absence of cyclic behavior
+\end{itemize}
 
 
 
@@ -12228,6 +12295,9 @@ an unbiased Random Walk (\S\ref{sec:random_walk}) is an example of a Martingale
 \fist cf. Potential Theory (Potential Theory \S\ref{sec:potential_theory});
 (Harmonic Functions \S\ref{sec:harmonic_function})
 
+given a Wiener Process (\S\ref{sec:wiener_process}) $W_t$ and Harmonic Function
+$f$, the Process $f(W_t)$ is also a Martingale
+
 
 
 \subsubsection{Stopped Brownian Motion}\label{sec:stopped_brownian_motion}
@@ -12237,7 +12307,7 @@ an unbiased Random Walk (\S\ref{sec:random_walk}) is an example of a Martingale
 \subsubsection{Semimartingale}\label{sec:semimartingale}
 
 (wiki): can be decomposed as the sum of a Local Martingale and an Adaptive
-Finite-variation Process (\S\ref{sec:adaptive_process})
+Finite-variation Process (\S\ref{sec:adapted_process})
 
 class of Semimartingales includes Wiener Processes (Brownian Motion
 \S\ref{sec:wiener_process}) and Poisson Processes
@@ -12251,6 +12321,8 @@ largest class of Processes for which the It\^o Integral
 \paragraph{Submartingale}\label{sec:submartingale}\hfill
 
 \paragraph{Supermartingale}\label{sec:supermartingale}\hfill
+
+Doob's Convergence Theorems
 
 
 
