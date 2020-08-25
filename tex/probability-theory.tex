@@ -1464,8 +1464,14 @@ $\varphi_X : \reals \to \comps$:
 where $F_X$ is the Cumulative Distribution Function (\S\ref{sec:cdf}) of $X$ and
 the Integral is a Riemann-Sieltjes Integral (TODO: xref)
 
-like the Cumulative Distribution Function, completely determines the behavior
-and properties of the Probability Distribution
+like the Cumulative Distribution Function, the Characteristic Function
+completely determines the behavior and properties of the Probability
+Distribution
+
+if the Random Variable admits a Probability Density Function then the
+Characteristic Function is the \emph{Fourier Transform}
+(\S\ref{sec:fourier_transform}) of the Probability Density Function and vice
+versa
 
 cf. Moment-generating Function (\S\ref{sec:moment_generating_function}) --
 the Characteristic Function always exists even when the Moment-generating
@@ -1473,14 +1479,16 @@ Function and Probability Density Function (\S\ref{sec:pdf}) do not exist;
 if a Random Variable has a Moment-generating Function then the Characteristic
 Function can be extended to the Complex Plane
 
-if the Random Variable admits a Probability Density Function then the
-Characteristic Function is the Fourier Transform (\S\ref{sec:fourier_transform})
-of the Probability Density Function and vice versa
-
 \fist cf. Indicator Functions (\S\ref{sec:indicator_function})
 
 cf. Characteristic Function Form Games
 (\S\ref{sec:characteristic_function_form})
+
+\begin{itemize}
+  \item the Characteristic Function of a (L\'evy) Symmetric $\alpha$-stable
+    Distribution (\S\ref{sec:symmetric_alpha_stable}) is a Stretched Exponential
+    Function (\S\ref{sec:stretched_exponential})
+\end{itemize}
 
 
 
@@ -1786,6 +1794,9 @@ to:
     Distributions (\S\ref{sec:continuous_probability})
 \end{itemize}
 
+the \emph{Support} (\S\ref{sec:distribution_support}) of a Probability
+Distribution is the smallest Closed Set whose Complement has Probability $0$
+
 \fist cf. Probability Measure Function
 (\S\ref{sec:probability_measure_function}), Distribution Function (Measure
 Theory \S\ref{sec:distribution_function}), Distribution (Analysis
@@ -1897,11 +1908,20 @@ the CDF of the Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
 
 
 
-\subsubsection{Survival Function}\label{sec:survival_function}
+\subsubsection{Complementary Cumulative Distribution Function}
+\label{sec:complementary_cumulative}
+
+or \emph{Tail Distribution}
 
 $\prob(X > x)$
 
 $\bar{F}(\cdot)$
+
+
+
+\paragraph{Survival Function}\label{sec:survival_function}\hfill
+
+$\bar{F}_X(x) = P(X > x) = 1 - F_X(x)$
 
 
 
@@ -2064,6 +2084,22 @@ regions)
 
 
 % ------------------------------------------------------------------------------
+\subsection{Degenerate Distribution}\label{sec:degenerate_distribution}
+% ------------------------------------------------------------------------------
+
+(wiki):
+
+a \emph{Degenerate Distribution} is a Probability Distribution in a Space with
+Support (\S\ref{sec:support}) only on a Space of lower Dimension
+
+for a Univariate Distribution, it is a \emph{Deterministic Distribution} that
+takes only a single value (FIXME: clarify)
+
+Infinitely Divisible (\S\ref{sec:infinitely_divisible})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Joint Probability Distribution}\label{sec:joint_probability}
 % ------------------------------------------------------------------------------
 
@@ -2186,6 +2222,29 @@ Marginal Probability Density Functions:
 $f_X(x) = \int f_{X,Y}(x,y) dy$
 
 $f_Y(y) = \int f_{X,Y}(x,y) dx$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Product Distribution}\label{sec:product_distribution}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Infinitely Divisible Distribution}
+\label{sec:infinitely_divisible}
+% ------------------------------------------------------------------------------
+
+can be expressed as the Probability Distribution as the Sum of an arbitrary
+number of IID Random Variables
+
+\begin{itemize}
+  \item Stable Distributions (\S\ref{sec:stable_distribution})
+  \item Degenerate Distribution (\S\ref{sec:degenerate_distribution})
+  \item $t$-distribution (\S\ref{sec:t_distribution})
+  \item Poisson Distribution (\S\ref{sec:poisson_distribution})
+  \item Negative Binomial Distribution (\S\ref{sec:negative_binomial})
+  \item Gamma Distribution (\S\ref{sec:gamma_distribution})
+\end{itemize}
 
 
 
@@ -2327,13 +2386,31 @@ cf. Markov Property
 
 
 % ------------------------------------------------------------------------------
-\subsection{Mixture Distribution}\label{sec:mixture_distribution}
+\subsection{Compound Probability Distribution}
+\label{sec:compound_probability}
 % ------------------------------------------------------------------------------
 
-\subsubsection{Compound Probability Distribution}
-\label{sec:compound_probability}
+or \emph{Contagious Distribution}
 
 cf. Doubly Stochastic Model (\S\ref{sec:doubly_stochastic})
+
+
+
+\subsubsection{Mixture Distribution}\label{sec:mixture_distribution}
+
+a Distribution realized by randomly selecting a Random Variable from a
+collection of other Random Variables and then taking the Realization of the
+selected Random Variable
+
+a standard Cauchy Random Variable (\S\ref{sec:cauchy_distribution}) can be
+viewed as a Mixture of Gaussian Random Variables with Zero Mean and Variance
+drawn from a standard L\'evy Distribution (\S\ref{sec:levy_distribution})
+
+
+
+\paragraph{Scale Mixture}\label{sec:scale_mixture}\hfill
+
+selection Parameter is a Scale Parameter
 
 
 
@@ -2524,9 +2601,6 @@ $k = 2$ , $n > 1$
 
 cf. Binomial Coefficients (\S\ref{sec:binomial_coefficient})
 
-\fist cf. Geometric Distribution (\S\ref{sec:geometric_distribution}) -- number
-of Trials until first Success
-
 Random Variable $X$ with Binomial Distribution where $n \in \nats$ and
 $p \in [0,1]$:
 \[
@@ -2554,6 +2628,26 @@ Sample Proportion %FIXME
 \paragraph{Negative Binomial Distribution}\label{sec:negative_binomial}\hfill
 
 $b^*(x; k,p) = \binom{x-1}{k-1} p^k 2^{k-k}$
+
+Infinitely Divisible (\S\ref{sec:infinitely_divisible})
+
+
+
+\subparagraph{Geometric Distribution}\label{sec:geometric_distribution}\hfill
+
+$P(X = k) = p(1-p)^{k-1}$ for $k \in \{1, 2, 3, \ldots\}$
+
+where $X$ is the number of Independent Trials with Constant Probability of
+``Success'' until the first Success
+
+\emph{Memoryless} (\S\ref{sec:memoryless_distribution})
+
+\fist Continuous analogue: Exponetial Distribution
+(\S\ref{sec:exponential_distribution})
+
+cf. Geometric Series (\S\ref{sec:geometric_series})
+
+Expected Value $E(X) = 1 + (1-p) + (1-p)^2 + \cdots = \frac{1}{p}$
 
 
 
@@ -2609,6 +2703,8 @@ $n \to \infty$:
 models counts of rare events, e.g. radioactive decay, traffic accidents (cf.
 Propensity Interpretation of Probability)
 
+Infinitely Divisible (\S\ref{sec:infinitely_divisible})
+
 cf. Poisson Processes (\S\ref{sec:poisson_process})
 
 \fist Poisson Noise (Shot Noise): Statistical Fluctuations
@@ -2623,29 +2719,6 @@ $Y \sim Poisson(\nu)$:
 if $N \sim Poisson(\lambda)$ and $Y | N = n \sim Binomial(n,p)$, then the
 Marginal Distribution of $Y$ is $Y \sim Poisson(\lambda p)$
 (Wasserman04 \S 23.3)
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Geometric Distribution}\label{sec:geometric_distribution}
-% ------------------------------------------------------------------------------
-
-$P(X = k) = p(1-p)^{k-1}$ for $k \in \{1, 2, 3, \ldots\}$
-
-where $X$ is the number of Independent Trials with Constant Probability of
-``Success'' until the first Success
-
-\emph{Memoryless} (\S\ref{sec:memoryless_distribution})
-
-\fist Continuous analogue: Exponetial Distribution
-(\S\ref{sec:exponential_distribution})
-
-cf. Binomial Distribution (\S\ref{sec:binomial_distribution}) -- number of
-Successes after $n$ Trials
-
-cf. Geometric Series (\S\ref{sec:geometric_series})
-
-Expected Value $E(X) = 1 + (1-p) + (1-p)^2 + \cdots = \frac{1}{p}$
 
 
 
@@ -2758,6 +2831,8 @@ $t$-statistic (\S\ref{sec:t_statistic})
 
 $t$-test (\S\ref{sec:t_test})
 
+Infinitely Divisible (\S\ref{sec:infinitely_divisible})
+
 
 
 \paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
@@ -2768,6 +2843,15 @@ $\nu = 1$
 
 Expected Value (\S\ref{sec:expected_value}) and Variance (\S\ref{sec:variance})
 are \emph{undefined}
+
+a Stable Distribution (\S\ref{sec:stable_distribution}): a Linear Combination of
+two Independent Cauchy-distributed Random Variables is also a Cauchy
+Distribution
+
+a standard Cauchy Random Variable can be viewed as a Mixture
+(\S\ref{sec:mixture_distribution}) of Gaussian Random Variables with Zero Mean
+and Variance drawn from a standard L\'evy Distribution
+(\S\ref{sec:levy_distribution})
 
 the ``average'' of $n$ Independent Cauchy Random Variables with $x_0 = 0$
 \emph{does not} Converge to $0$ as $n \to \infty$ with Probability $1$-- ``it''
@@ -2796,6 +2880,10 @@ distributed according to a Cauchy Distribution
 member of the family of Tweedie (\S\ref{sec:tweedie_distribution}) Exponential
 Dispersion Models (\S\ref{sec:exponential_dispersion})
 
+a Stable Distribution (\S\ref{sec:stable_distribution}): a Linear Combination of
+two Independent Normally-distributed Random Variables is also a Normal
+Distribution
+
 \[
   n (x; \mu, \sigma) =
   \frac{1}{\sqrt{2\pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}
@@ -2809,6 +2897,10 @@ a Normal Distribution corresponds to a $t$-distribution
 
 the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
 $X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
+(\S\ref{sec:cauchy_distribution})
+
+\fist a Generalized Normal Distribution adds a Shape Parameter
+(\S\ref{sec:shape_parameter}) to the Normal Distribution
 
 \emph{Central Limit Thoerem} (\S\ref{sec:central_limit_theorem}) -- ``the
 Distribution of a Sum of Independent Random Variables can be approximated by a
@@ -2900,7 +2992,24 @@ generalization of Multivariate Normal Distribution
 
 \subsubsection{Hyperbolic Distribution}\label{sec:hyperbolic_distribution}
 
-\subsubsection{Laplace Distribution}\label{sec:laplace_distribution}
+\subsubsection{Generalized Normal Distribution}\label{sec:generalized_normal}
+
+adds a Shape Parameter (\S\ref{sec:shape_parameter}) to the Normal Distribution
+(\S\ref{sec:normal_distribution})
+
+
+
+\paragraph{Exponential Power Distribution}\label{sec:exponential_power}\hfill
+
+or \emph{Generalized Error Distribution}
+
+
+
+\subparagraph{Laplace Distribution}\label{sec:laplace_distribution}\hfill
+
+
+
+\paragraph{Log-normal Distribution}\label{sec:lognormal_distribution}\hfill
 
 
 
@@ -2937,6 +3046,8 @@ Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
 Mean $\mu = \alpha \beta$
 
 Variance $\sigma^2 = \alpha \beta^2$
+
+Infinitely Divisible (\S\ref{sec:infinitely_divisible})
 
 
 
@@ -3063,6 +3174,7 @@ Tails are \emph{not} Exponentially Bounded (cf. Exponential Distributions
 
 \begin{itemize}
   \item Cauchy Distribution (\S\ref{sec:cauchy_distribution})
+  \item Log-normal Distribution (\S\ref{sec:lognormal_distribution})
   \item ...
 \end{itemize}
 
@@ -3106,8 +3218,6 @@ Scale Invariance (\S\ref{sec:scale_invariance})
 
 
 
-\subsubsection{Log-normal Distribution}\label{sec:lognormal_distribution}
-
 \subsubsection{Inverse Gamma Distribution}\label{sec:inverse_gamma}
 
 %FIXME: are all inverse gamma distributions fat-tailed ???
@@ -3119,16 +3229,76 @@ Scale Invariance (\S\ref{sec:scale_invariance})
 L\'evy Flight (\S\ref{sec:levy_flight}) -- Random Walk with step length varying
 according to a L\'evy Distribution
 
+a Stable Distribution (\S\ref{sec:stable_distribution}): a Linear Combination of
+two Independent L\'evy-distributed Random Variables is also a L\'evy
+Distribution
+
+a standard Cauchy Random Variable (\S\ref{sec:cauchy_distribution}) can be
+viewed as a Mixture (\S\ref{sec:mixture_distribution}) of Gaussian Random
+Variables with Zero Mean and Variance drawn from a standard L\'evy Distribution
+
 
 
 % ------------------------------------------------------------------------------
 \subsection{Stable Distribution}\label{sec:stable_distribution}
 % ------------------------------------------------------------------------------
 
-\emph{L\'evy Alpha-stable Distribution} or \emph{Stable Paretian Distribution}
+A \emph{Stable Distribution} (or \emph{L\'evy Alpha-stable Distribution} or
+\emph{Stable Paretian Distribution}) has the Property that a Linear Combination
+of two Independent Random Variables within the Distribution has the same
+Distribution up to Location and Scale Parameters.
 
-all Stable Distributions except the Normal Distribution are Fat-tailed
-Distributions (\S\ref{sec:fat_tailed}) with undefined Variance
+\emph{Stability Parameter} -- $\alpha \in (0, 2]$
+
+\emph{Skewness Parameter} -- $\beta \in [-1, 1]$; note that the actual Skewness
+of the resulting Distribution is not well defined for $\alpha < 2$
+
+\emph{Scale Parameter} -- $c = (0, \infty)$
+
+\emph{Location Parameter} -- $\mu \in (-\infty, \infty)$
+
+\begin{itemize}
+  \item Normal Distribution (\S\ref{sec:normal_distribution}) -- $\alpha = 2$
+    ($\beta$ has no effect); has Variance $\sigma^2 = 2c^2$ and Mean $\mu$
+  \item Cauchy Distribution (\S\ref{sec:cauchy_distribution}) --
+    $\alpha = 1, \beta = 0$
+  \item L\'evy Distribution (\S\ref{sec:levy_distribution}) --
+    $\alpha = 1/2, \beta = 1$
+\end{itemize}
+
+a standard Cauchy Random Variable can be viewed as a Mixture
+(\S\ref{sec:mixture_distribution}) of Gaussian Random Variables with Zero Mean
+and Variance drawn from a standard L\'evy Distribution
+
+Stable Distributions are Infinitely Divisible (\S\ref{sec:infinitely_divisible})
+
+Stable Distributions are Closed under Convolution (FIXME: clarify)
+
+All Stable Distributions except the Normal Distribution (i.e. $\alpha < 2$ are
+Fat-tailed Distributions (\S\ref{sec:fat_tailed}) with undefined (Infinite)
+Variance
+
+any Non-degenerate Stable Distribution has a Smooth (Infinitely Differentiable)
+Probability Density Function
+
+
+
+\subsubsection{Symmetric $\alpha$-stable Distribution}
+\label{sec:symmetric_alpha_stable}
+
+the Characteristic Function of a (L\'evy) Symmetric $\alpha$-stable Distribution
+is a Stretched Exponential Function (\S\ref{sec:stretched_exponential})
+
+
+
+\subsubsection{One-sided Stable Distribution}\label{sec:onesided_stable}
+
+$\beta = 1$
+
+$\alpha < 1$
+
+the Stable Count Distribution (\S\ref{sec:stable_count}) is the Conjugate Prior
+(\S\ref{sec:conjugate_prior}) of a One-sided Stable Distribution
 
 
 
@@ -3184,6 +3354,12 @@ but such a Limit Distribution does not necessarily exist, requiring
 \subsubsection{Fr\'echet Distribution}\label{sec:frechet_distribution}
 
 \subsubsection{Weibull Distribution}\label{sec:weibull_distribution}
+
+the Complementary Cumulative (\S\ref{sec:complementary_cumulative}) Weibull
+Distribution is given by a Stretched Exponential
+(\S\ref{sec:stretched_exponential})
+
+first applied to describe a Particle Size Distribution
 
 
 
@@ -6260,6 +6436,18 @@ Function (cf. Polynomial \S\ref{sec:polynomial_function})
 
 
 
+\subsubsection{Stretched Exponential Function}\label{sec:stretched_exponential}
+
+$f_\beta(t) = e^{-t^\beta}$
+
+Complementary Cumulative (\S\ref{sec:complementary_cumulative}) Weibull
+Distribution (\S\ref{sec:weibull_distribution})
+
+the Characteristic Function of a (L\'evy) Symmetric $\alpha$-stable Distribution
+(\S\ref{sec:symmetric_alpha_stable}) is a Stretched Exponential Function
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Estimation Theory}\label{sec:estimation_theory}
 % ------------------------------------------------------------------------------
@@ -8067,6 +8255,25 @@ Distribution, assuming it obeys \emph{Cromwell's Rule}, as the Sample Data
 (\S\ref{sec:statistical_sample}) grows large
 
 the effect of the Prior diminishes as $n$ (i.e. $(X_1, \ldots, X_n)$) increases
+
+
+
+\paragraph{Cojugate Prior}\label{sec:conjugate_prior}\hfill
+
+(wiki):
+
+when Prior and Posterior are in the same Family of Probability Distributions,
+then they are called \emph{Conjugate Distributions} and the Prior is called the
+\emph{Cojugate Prior}
+
+
+
+\subparagraph{Stable Count Distribution}\label{sec:stable_count}\hfill
+
+the Conjugate Prior of a One-sided Stable Distribution
+(\S\ref{sec:onesided_stable})
+
+related to ``VIX Distribution''
 
 
 
