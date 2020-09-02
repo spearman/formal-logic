@@ -63,6 +63,100 @@ Ordinary Least Squares (OLS \S\ref{sec:ols}):
 
 
 
+% ------------------------------------------------------------------------------
+\subsection{Objective Function}\label{sec:objective_function}
+% ------------------------------------------------------------------------------
+
+%FIXME: xref utility function game theory ???
+
+\emph{Cost Function} (or \emph{Loss Function})
+
+\emph{Reward Function} (or \emph{Utility Function})
+
+Squared Error, Cross-entropy (\S\ref{sec:cross_entropy})
+
+\fist cf. Decision Theory (\S\ref{sec:decision_theory}) -- choice of Estimator
+(\S\ref{sec:estimator}) or Decision Rule (\S\ref{sec:decision_rule}) based on
+minimizing Loss; Risk (Average Loss \S\ref{sec:risk})
+
+\fist Optimality Criterion (\S\ref{sec:optimality_criterion}), Model Selection
+(\S\ref{sec:model_selection})
+
+\fist \emph{Bayes Estimator} (\S\ref{sec:bayes_estimator}) -- Estimator or
+Decision Rule that minimizes (maximizes) Posterior Expected Value of a Loss
+(Utility) Function (\emph{Posterior Expected Loss/Utility})
+
+\fist \emph{Risk} (\S\ref{sec:risk}) -- Expected Value of Loss Function
+
+2018 - \url{https://blog.evjang.com/2018/04/aesthetic-lr.html} - \emph{Aesthetically
+  Pleasing Learning Rates}:
+
+``The optimal learning rate is commensurate with the scale of the smoothness of
+the gradient of the loss function (or in fancy words, the 'Lipschitz constant'
+of a function). The smoother the function, the larger the learning rate we are
+allowed to take without the optimization 'blowing up'.''
+
+\fist Lipschitz Continuity (\S\ref{sec:real_continuous})
+
+Auto-correlated Noise seems to be beneficial for State-dependent Exploration
+
+``waving'' Learning Rates up and down are good for Deep Learning
+
+Pixel Values from natural images have both of the above properties
+
+
+
+\subsubsection{Regularization}\label{sec:regularization}
+
+process of adding information to solve an Ill-posed Problem (FIXME: clarify) or
+to prevent Overfitting
+
+\begin{itemize}
+  \item Regularizer (Statistical Classification \S\ref{sec:regularizer})
+  \item Tikhonov Regularization (Linear Regression
+    \S\ref{sec:tikhonov_regularization})
+  \item Convolutional Neural Network (\S\ref{sec:cnn}) -- ``Regularized''
+    version of Multi-layer Perceptron
+  \item Regularized Autoencoder (\S\ref{sec:regularized_autoencoder})
+\end{itemize}
+
+\fist Inverse Problems (\S\ref{sec:inverse_problem}) -- typically need to be
+reduced from Infinite-dimensional to Finite-dimensional form, requiring
+Regularization to introduce Assumptions on the Solution and prevent Overfitting;
+many instances of Regularized Inverse Problems can be interpreted as special
+cases of Bayesian Inference (\S\ref{sec:bayesian_inference})
+
+
+
+\paragraph{Early Stopping}\label{sec:regularization}\hfill
+
+Regularization in \emph{Time}
+
+
+
+\subsubsection{Local Optimality Condition}\label{sec:local_optimality}
+
+%FIXME: move this section ???
+
+\fist multivariable generalization of Second Derivative Test
+(\S\ref{sec:second_derivative_test})
+
+for a Function $f$, Local Minima are identified by \emph{Local Optimality
+  Conditions} at a Point $\vec{x}^*$:
+\begin{align*}
+  \nabla f(\vec{x}^*) & =    \vec{0} \\
+  H(f(\vec{x}^*))     & \geq \vec{0} \\
+\end{align*}
+where $\nabla f(\vec{x}^*)$ is the Gradient (\S\ref{sec:gradient}) of $f$ at
+$\vec{x}^*$ and $H(f(\vec{x}^*)) \geq \vec{0}$ the Hessian Matrix
+(\S\ref{sec:hessian_matrix}) of Second-order Partial Derivatives is Positive
+Definite or Positive Semi-definite
+
+if $f$ is a Convex Function (\S\ref{sec:convex_function}), then $x^*$ is
+guaranteed ot be a Global Minimum
+
+
+
 % ==============================================================================
 \section{Unconstrained Optimization}\label{sec:unconstrained_optimization}
 % ==============================================================================
@@ -149,74 +243,6 @@ Programming; lemma for Karush-Kuhn-Tucker Conditions
 First-order necessary condition for a solution in Nonlinear Programming,
 provided some Regularity Conditions (\S\ref{sec:constraint_qualification});
 allowing Inequality Constraints generalizes the method of Lagrange Multipliers
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Objective Function}\label{sec:objective_function}
-% ------------------------------------------------------------------------------
-
-%FIXME: xref utility function game theory ???
-
-\emph{Cost Function} (or \emph{Loss Function})
-
-\emph{Reward Function} (or \emph{Utility Function})
-
-Squared Error, Cross-entropy (\S\ref{sec:cross_entropy})
-
-Regularization Term (Classification \S\ref{sec:classification}) -- TODO
-
-\fist cf. Decision Theory (\S\ref{sec:decision_theory}) -- choice of Estimator
-(\S\ref{sec:estimator}) or Decision Rule (\S\ref{sec:decision_rule}) based on
-minimizing Loss; Risk (Average Loss \S\ref{sec:risk})
-
-\fist Optimality Criterion (\S\ref{sec:optimality_criterion}), Model Selection
-(\S\ref{sec:model_selection})
-
-\fist \emph{Bayes Estimator} (\S\ref{sec:bayes_estimator}) -- Estimator or
-Decision Rule that minimizes (maximizes) Posterior Expected Value of a Loss
-(Utility) Function (\emph{Posterior Expected Loss/Utility})
-
-\fist \emph{Risk} (\S\ref{sec:risk}) -- Expected Value of Loss Function
-
-2018 - \url{https://blog.evjang.com/2018/04/aesthetic-lr.html} - \emph{Aesthetically
-  Pleasing Learning Rates}:
-
-``The optimal learning rate is commensurate with the scale of the smoothness of
-the gradient of the loss function (or in fancy words, the 'Lipschitz constant'
-of a function). The smoother the function, the larger the learning rate we are
-allowed to take without the optimization 'blowing up'.''
-
-\fist Lipschitz Continuity (\S\ref{sec:real_continuous})
-
-Auto-correlated Noise seems to be beneficial for State-dependent Exploration
-
-``waving'' Learning Rates up and down are good for Deep Learning
-
-Pixel Values from natural images have both of the above properties
-
-
-
-\subsubsection{Local Optimality Condition}\label{sec:local_optimality}
-
-%FIXME: move this section ???
-
-\fist multivariable generalization of Second Derivative Test
-(\S\ref{sec:second_derivative_test})
-
-for a Function $f$, Local Minima are identified by \emph{Local Optimality
-  Conditions} at a Point $\vec{x}^*$:
-\begin{align*}
-  \nabla f(\vec{x}^*) & =    \vec{0} \\
-  H(f(\vec{x}^*))     & \geq \vec{0} \\
-\end{align*}
-where $\nabla f(\vec{x}^*)$ is the Gradient (\S\ref{sec:gradient}) of $f$ at
-$\vec{x}^*$ and $H(f(\vec{x}^*)) \geq \vec{0}$ the Hessian Matrix
-(\S\ref{sec:hessian_matrix}) of Second-order Partial Derivatives is Positive
-Definite or Positive Semi-definite
-
-if $f$ is a Convex Function (\S\ref{sec:convex_function}), then $x^*$ is
-guaranteed ot be a Global Minimum
 
 
 

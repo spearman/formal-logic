@@ -29,7 +29,8 @@ Minimax (\S\ref{sec:minimax}), are \emph{Robust} (\S\ref{sec:robust_statistics})
 in that they don't make such Assumptions (FIXME: clarify)
 
 2018 - \emph{A Categorical Look at Random Variables} -
-\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html} (article):
+\url{https://golem.ph.utexas.edu/category/2018/09/a_categorical_look_at_random_v.html}
+(article):
 
 $\cat{Prob}$ -- Category with Objects as Probability Spaces
 (\S\ref{sec:probability_space}) and Morphisms are ``Almost-everywhere-equality
@@ -571,6 +572,12 @@ has a Non-zero (Positive) Probability
 
 $A$ and $B$ are Independent (\S\ref{sec:independent_event}) if and only if
 $P(A|B) = P(A)$
+
+General Product Rule (\S\ref{sec:general_product_rule}) -- calculate any member
+of the Joint Distribution (\S\ref{sec:joint_probability}) of a Set of Random
+Variables using only Conditional Probabilities
+
+\fist Conditioning (\S\ref{sec:conditioning})
 
 \fist Conditional Independence (\S\ref{sec:conditional_independence})
 
@@ -1362,6 +1369,8 @@ manifestation of invariant \emph{single-case} Probabilities
 
 or \emph{Conditional Mean}
 
+\fist Conditioning (\S\ref{sec:conditioning})
+
 \fist Regression Analysis (\S\ref{sec:regression_analysis}) commonly Estimates
 the Conditional Expectation of a Dependent Variable given an Independent
 Variable
@@ -1925,6 +1934,33 @@ $\bar{F}_X(x) = P(X > x) = 1 - F_X(x)$
 
 
 
+\paragraph{Scaling Distribution}\label{sec:scaling_distribution}\hfill
+
+cf. Scale Parameter (\S\ref{sec:scale_parameter})
+
+Mandelbrot97:
+
+\emph{Scaling under Conditioning} of a Positive Random Variable
+$\prob(U > 0) = 1$
+
+$\bar{F}_U(u) = c u^{-\alpha} = \frac{u}{\tilde{u}}^{-\alpha}$
+
+the sole response to \emph{Conditioning} (\S\ref{sec:conditioning}) by $w$ is
+change of \emph{Scale} from $\tilde{u}$ to $w$
+
+is the \emph{only} Distribution that is Scaling under this particular
+Conditioning
+
+by Logarithmic Transformation $V = \ln U$, the Invariance Property (FIXME:
+clarify) reduces to an Invariance Property of the Exponential Distribution
+$\bar{F}_V(v) = e^{-\alpha(v - \tilde{v})}$, that Conditioning by $w$ is a
+change of \emph{Location} rather than Scale
+
+from an Exponentially Distributed (\S\ref{sec:exponential_distribution}) $V$, a
+Scaling $U$ is obtained by $U = e^V$
+
+
+
 \subsubsection{Quantile Function}\label{sec:quantile_function}
 
 \emph{Inverse CDF} $F^{-1}$
@@ -1991,6 +2027,11 @@ the Plug-in Estimator (\S\ref{sec:plugin_principle}) for a Linear Functional:
 \]
 where $\hat{F}_n$ is the Empirical Distribution Function
 (\S\ref{sec:empirical_distribution})
+
+
+
+\subsubsection{Cumulative Frequency Analysis}
+\label{sec:cumulative_frequency_analysis}
 
 
 
@@ -2154,6 +2195,36 @@ Process whose Unconditional Joint Probability Distribution is unchanged in Time
 
 
 
+\subsubsection{General Product Rule}\label{sec:general_product_rule}
+
+or \emph{Probability Chain Rule}
+
+calculate any member of the Joint Distribution of a Set of Random Variables
+using only Conditional Probabilities (\S\ref{sec:conditional_probability})
+
+for two Random Events $A, B$:
+\[
+  \prob(A \cap B) = \prob(B | A) \prob(A)
+\]
+for $n$ Events $A_1, \ldots, A_n$:
+\[
+  \prob(A_n \cap \cdots \cap A_1) =
+    \prod_{k=1}^n \prob\Big(A_k | \bigcap_{j=1}^{k-1} A_j \Big)
+\]
+
+for two Random Variables $X, Y$:
+\[
+  \prob(X, Y) = \prob(X | Y) \prob(Y)
+\]
+
+for $n$ Random Variables $X_1, \ldots, X_n$:
+\[
+  \prob\Big(\bigcap_{k=1}^n X_k\Big) =
+    \prod_{k=1}^n \prob\Big(X_k | \bigcap_{j=1}^{k-1} X_j\Big)
+\]
+
+
+
 \subsubsection{Bivariate Distribution}\label{sec:bivariate_distribution}
 
 $P(X = x, Y = y)$
@@ -2200,6 +2271,8 @@ and:
   P(X \in A| Y = y) = \int_A f_{X|Y}(x|y) dx
 \]
 
+\fist Conditioning (\S\ref{sec:conditioning})
+
 cf. \emph{Borel-Kolmogorov Paradox} -- the concept of a Conditional Probability
 with regard to an isolated given Hypothesis whose Probability equals $0$ is
 ``\emph{inadmissable}'' (Kolmogorov33); Conditional Probability Density
@@ -2228,6 +2301,25 @@ $f_Y(y) = \int f_{X,Y}(x,y) dx$
 % ------------------------------------------------------------------------------
 \subsection{Product Distribution}\label{sec:product_distribution}
 % ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
+\subsection{Quotient Distribution}\label{sec:quotient_distribution}
+% ------------------------------------------------------------------------------
+
+or \emph{Ratio Distribution}
+
+\begin{itemize}
+  \item Cauchy Distribution (Normal Ratio Distribution
+    \S\ref{sec:cauchy_distribution}) -- Ratio of two Normally Distributed Random
+    Variables
+  \item $t$-distribution (\S\ref{sec:t_distribution}) -- Gaussian Random
+    Variable Divided by an Independent $\chi$-distributed
+    (\S\ref{sec:chi_distribution}) Random Variable
+  \item $F$-distribution (\S\ref{sec:f_distribution}) -- Ratio of two
+    Independent $\chi$-squared (\S\ref{sec:chi_squared}) Random Variables
+\end{itemize}
+
+
 
 % ------------------------------------------------------------------------------
 \subsection{Infinitely Divisible Distribution}
@@ -2818,6 +2910,9 @@ closed under Affine Transformations (\S\ref{sec:affine_transformation})
 
 $\nu$ -- Degrees of Freedom
 
+a Quotient Distribution (\S\ref{sec:quotient_distribution}) of a Gaussian Random
+Variable and a Chi-distributed (\S\ref{sec:chi_distribution}) Random Variable
+
 \begin{itemize}
   \item $\nu = 1$ -- Cauchy Distribution (\S\ref{sec:cauchy_distribution})
   \item $\nu = \infty$ -- Normal Distribution (\S\ref{sec:normal_distribution})
@@ -2837,9 +2932,12 @@ Infinitely Divisible (\S\ref{sec:infinitely_divisible})
 
 \paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
 
-or \emph{Cauchy-Lorentz Distribution}
+\emph{Cauchy-Lorentz Distribution} or \emph{Normal Ratio Distribution}
 
 $\nu = 1$
+
+the Ratio (Quotient Distribution \S\ref{sec:quotient_distribution}) $X_1/X_2$ of
+two Normally Distributed Independent Random Variables $X_1, X_2 \sim N(0,1)$
 
 Expected Value (\S\ref{sec:expected_value}) and Variance (\S\ref{sec:variance})
 are \emph{undefined}
@@ -2864,9 +2962,6 @@ the Cauchy Distribution is a ``disguised'' form of the Uniform Distribution on a
 Circle
 
 has no Moment-generating Function (\S\ref{sec:moment_generating_function})
-
-the Ratio $X_1/X_2$ of two Normally Distributed Independent Random Variables
-$X_1, X_2 \sim N(0,1)$ is a Cauchy Distribution
 
 Cauchy Flight (\S\ref{sec:cauchy_flight}) -- Random Walk with step lengths
 distributed according to a Cauchy Distribution
@@ -3077,6 +3172,9 @@ models lifetimes of electronic components, wait times between rare events
 cf. \emph{Fat-tailed Distributions} (\S\ref{sec:fat_tailed}) -- Tails are
 \emph{not} Exponentially Bounded
 
+from an Exponentially Distributed $V$, a Scaling
+(\S\ref{sec:scaling_distribution}) $U$ is obtained by $U = e^V$ (Mandelbrot97)
+
 
 
 \paragraph{Double Exponential Distribution}\label{sec:double_exponential}\hfill
@@ -3111,12 +3209,20 @@ expected), Independence Condition
 
 Logistic Regression
 
+the $F$-distribution (\S\ref{sec:f_distribution}) is a Quotient Distribution
+(\S\ref{sec:quotient_distribution}) defined as the Ratio of two Independent
+$\chi$-squared Distributed Random Variables
+
 
 
 \paragraph{$\chi$ Distribution}\label{sec:chi_distribution}\hfill
 
 Distribution of Positive Square Roots of a Chi-squared Distributed Random
 Variable
+
+the $t$-distribution (\S\ref{sec:t_distribution}) is a Quotient Distribution
+(\S\ref{sec:quotient_distribution}) defined as the Ratio of a Gaussian Random
+Variable and an Independent $\chi$-distributed Random Variable
 
 
 
@@ -3131,6 +3237,9 @@ Asymptotic Function for Two-dimensional Random Walk (\S\ref{sec:random_walk})
 \paragraph{$F$-distribution}\label{sec:f_distribution}\hfill
 
 (Fisher)
+
+a Quotient Distribution (\S\ref{sec:quotient_distribution}) defined as the Ratio
+of two Independent $\chi$-squared Distributed Random Variables
 
 can be seen as a Ratio of Chi-squared Distributions with not necessarily the
 same DoFs
@@ -6078,6 +6187,8 @@ Parametric Family
 
 \fist Scaling Limit (\S\ref{sec:scaling_limit})
 
+\fist Scaling Distribution (\S\ref{sec:scaling_distribution})
+
 
 
 \paragraph{Location Parameter}\label{sec:location_parameter}\hfill
@@ -8117,6 +8228,9 @@ Conditioning (\S\ref{sec:conditioning})
 every Admissable Statistical Procedure is either a Bayesian Procedure or a Limit
 of Bayesian Procedures (Wald)
 
+many instances of Regularized Inverse Problems (\S\ref{sec:inverse_problem}) can
+be interpreted as special cases of Bayesian Inference
+
 \fist Aumann1987 - \emph{Correlated Equilibrium as an Expression of Bayesian
   Rationality} -- \emph{Correlated Equilibrium}
 (\S\ref{sec:correlated_equilibrium}) ``does away with'' the ``dichotomy usually
@@ -8337,6 +8451,17 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 
 \fist not to be confused with Condition Numbers (Numerical Analysis
 \S\ref{sec:condition_number})
+
+\begin{itemize}
+  \item Conditional Probability (\S\ref{sec:conditional_probability})
+  \item Conditional Expectation (\S\ref{sec:conditional_expectation})
+  \item Conditional Distribution (\S\ref{sec:conditional_distribution})
+\end{itemize}
+
+\fist Conditional Independence (\S\ref{sec:conditional_independence})
+
+\fist Scaling under Conditioning (Scaling Distribution
+\S\ref{sec:scaling_distribution})
 
 
 
@@ -8986,7 +9111,7 @@ given Input Value), other examples are Regression Analysis
 (\S\ref{sec:regression_analysis}) and Cluster Analysis (Unsupervised Learning
 \S\ref{sec:cluster_analysis})
 
-Loss (\S\ref{sec:objective_function}) -- Regularization Term (TODO)
+Loss (\S\ref{sec:objective_function})
 
 (wiki):
 
@@ -9063,11 +9188,25 @@ Explanatory Variable (Regressor), ``Instance''
 
 
 
+\subsubsection{Regulizer}\label{sec:regulizer}
+
+(wiki): Empirical Learning of Classifiers is always an \emph{Underdetermined
+  Problem} because it attempts to Infer a Function of \emph{any} given $x$ from
+only a limited number of examples $x_1, x_2, \ldots, x_n$; \emph{Regularization}
+(\S\ref{sec:regularization}) can be used to Learn simpler Models and avoid
+Overfitting
+
+
+
+\subsubsection{Generalization}\label{sec:generalization}
+
+%FIXME
+
 \subsubsection{Classification Model}\label{sec:classification_model}
 
 \paragraph{Generative Model}\label{sec:generative_model}\hfill
 
-Statistical Model of the Joint Probability Distribution
+Statistical Model of the \emph{Joint Probability Distribution}
 (\S\ref{sec:joint_probability}) $P(X,Y)$
 
 an alternative definition is that a Generative Model is a Model of the
@@ -9088,13 +9227,30 @@ Model (\S\ref{sec:statistical_language_model})
 \fist Generative Adversarial Network (GAN \S\ref{sec:gan}): combines a
 Generative Network with a Discriminative Network
 
+2017 - Pascual - \emph{PixelCNN, WaveNet \& Variational Autoencoders} -
+\url{https://www.youtube.com/watch?v=FeJT8ejgsL0}
+
+Model the Probability Density Fucntion:
+\begin{itemize}
+  \item Explicitly
+    \begin{itemize}
+      \item ``Tractable'' Density -- PixelRNN, PixelCNN, WaveNet
+      \item Approximate Density -- Variational Auto-encoders
+        (\S\ref{sec:variational_autoencoder})
+    \end{itemize}
+  \item Implicitly
+    \begin{itemize}
+      \item Generative Adversarial Networks
+    \end{itemize}
+\end{itemize}
+
 
 
 \paragraph{Discriminative Model}\label{sec:discriminative_model}\hfill
 
 or \emph{Conditional Model}
 
-Statistical Model of the Conditional Probability
+Statistical Model of the \emph{Conditional Probability}
 (\S\ref{sec:conditional_probability}) $P(Y | X = x)$
 
 Discriminative methods of determining Parameters for a Linear Classifier
@@ -10536,6 +10692,25 @@ Variance increases
 
 
 
+\paragraph{Multi-collinearity}\label{sec:multicollinearity}\hfill
+
+Ridge Regression (\S\ref{sec:ridge_regression})
+
+
+
+\subsubsection{Tikhonov Regularization}\label{sec:tikhonov_regularization}\hfill
+
+Regularization (\S\ref{sec:regularization})
+
+
+
+\paragraph{Ridge Regression}\label{sec:ridge_regression}\hfill
+
+particular type of Tikhonov Regularization (\S\ref{sec:tikhonov_regularization})
+useful to mitigate Multicollinearity (\S\ref{sec:multicollinearity})
+
+
+
 \subsubsection{Gaussian Process Regression}
 \label{sec:gaussian_process_regression}
 
@@ -10615,6 +10790,10 @@ produce the \emph{Identity Function}
 
 \paragraph{Regularized Autoencoder}\label{sec:regularized_autoencoder}\hfill
 
+\fist Regularization (\S\ref{sec:regularization})
+
+
+
 \subparagraph{Sparse Autoencoder}\label{sec:sparse_autoencoder}\hfill
 
 \subparagraph{Denoising Autoencoder}\label{sec:denoising_autoencoder}\hfill
@@ -10625,8 +10804,10 @@ produce the \emph{Identity Function}
 
 \paragraph{Variational Autoencoder}\label{sec:variational_autoencoder}\hfill
 
-2018 - Pascual - \emph{PixelCNN, WaveNet & Variational Autoencoders} -
+2017 - Pascual - \emph{PixelCNN, WaveNet \& Variational Autoencoders} -
 \url{https://www.youtube.com/watch?v=FeJT8ejgsL0}
+
+allows Autoencoder to be used in Generative Models (\S\ref{sec:generative_model}
 
 
 
@@ -11110,7 +11291,7 @@ requires a \emph{Non-linear} Activation Function
 cf. Restricted Boltzmann Machine (RBM \S\ref{sec:boltzmann_machine})
 
 \fist Convolutional Nueral Network (CNN \S\ref{sec:cnn}) -- ``Regularized''
-versions of MLP
+versions of MLP \fist Regularization (\S\ref{sec:regularization})
 
 
 
@@ -11209,6 +11390,7 @@ Neural Network ``patterns'' are Higher-order Functions:
 \subsubsection{Convolutional Neural Network (CNN)}\label{sec:cnn}
 
 ``Regularized'' versions of Multi-layer Perceptrons (\S\ref{sec:mlp})
+\fist Regularization (\S\ref{sec:regularization})
 
 ``Convolution Layers'' don't actually do a Convolution
 (\S\ref{sec:convolution}):
@@ -11222,6 +11404,13 @@ rather a \emph{Cross-correlation} (or ``Sliding Dot-product''
 
 2014 - Olah - \emph{Conv Nets: A Modular Perspective} -
   \url{http://colah.github.io/posts/2014-07-Conv-Nets-Modular/}
+
+2014 - Olah - \emph{Understanding Convolutions} -
+  \url{http://colah.github.io/posts/2014-07-Understanding-Convolutions/}
+
+
+
+\paragraph{Time Delay Neural Network}\label{sec:tdnn}\hfill
 
 
 
@@ -11441,6 +11630,11 @@ fixed Noise Distribution
 
 cf. Generative Stochstaic Network (GSN), Denoising Auto-encoders --
 (Bengio, et. al)
+
+\asterism
+
+2017 - Pascual - UPC2017 \emph{Generative Adversarial Networks} -
+\url{https://www.youtube.com/watch?v=a1aM0yUJXUI}
 
 
 
@@ -12048,9 +12242,34 @@ xref)
   \item ...
 \end{itemize}
 
-\fist Time-series Analysis (\S\ref{sec:time_series})
+if a Stochastic Process has a Unit Root (\S\ref{sec:unit_root}), i.e. if $1$ is
+a Root of the Process's Characteristic Equation (FIXME: characteristic function
+???), then the Process is Non-stationary, but does not necessarily have a
+``trend''
+
+\fist Stationarity assumption underlies many procedures in Time-series Analysis
+(\S\ref{sec:time_series})
 
 \fist Statistical Signal Processing (\S\ref{sec:statistical_signal})
+
+
+
+\subsubsection{Trend-stationary Process}\label{sec:trend_stationary}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Unit Root Process}\label{sec:unit_root_process}
+% ------------------------------------------------------------------------------
+
+if a Stochastic Process has a Unit Root (\S\ref{sec:unit_root}), i.e. if $1$ is
+a Root of the Process's Characteristic Equation (FIXME: characteristic function
+???), then the Process is Non-stationary, but does not necessarily have a
+``trend''
+
+
+
+\subsubsection{Difference Stationary Process}\label{sec:difference_stationary}
 
 
 

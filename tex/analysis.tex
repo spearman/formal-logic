@@ -2489,6 +2489,24 @@ actually is, uniquely
 
 or \emph{Sliding Dot Product}
 
+\[
+  (f \star g)(t) \defeq
+    \int_{-\infty}{\infty}f^*(\tau) g(t + \tau) d\tau
+\]
+where $f^*(\tau)$ is the Complex Conjugate of $f(\tau)$
+
+for $f$ and $g$ Continuous, Periodic Functions of Period $T$:
+\[
+  (f \star g)(t) \defeq
+    \int_{t_0}^{t_0 + T} f^*(\tau) g(t + \tau) d\tau
+\]
+over any Interval $[t_0, T]$
+
+when the ``pulse'' $g$ is an Even function, Convolution is equal to Correlation
+
+Convolution is the same as Cross-correlation with the ``pulse'' Function $g$
+``mirrored''
+
 Similarity Measure (\S\ref{sec:similarity_measure}) of two Series as a Function
 of the Displacement of one relative to the other
 
@@ -2497,10 +2515,16 @@ of the Displacement of one relative to the other
 for Continuous Signals the Cross-correlation Operator is the Adjoint Operator
 of the Convolution (\S\ref{sec:convolution}) Operator
 
-for Discrete Real-valued Functions, Convolution and Cross-correlation differ
-only in Time Reversal of one of the Functions
+for Discrete Real-valued Functions, Convolution (\S\ref{sec:convolution}) and
+Cross-correlation differ only in \emph{Time Reversal} of one of the Functions
 
 \fist Fourier Analysis (\S\ref{sec:fourier_analysis})
+
+the Cross-correlation $f \star g$ of Independent Random Variables $X$ and $Y$
+with respective Probability Density Functions $f$ and $g$ is the Probability
+Density of the \emph{Difference} $Y - X$; cf. the \emph{Convolution} $f * g$,
+i.e. the Cross-correlation of $f(t)$ and $g(-t)$, gives the Probability Density
+Function of the \emph{Sum} $X + Y$
 
 Convolutional Neural Networks (CNNs \S\ref{sec:cnn}): ``Convolutional'' Layers
 actually perform Cross-correlation (not Convolution)
@@ -2509,7 +2533,7 @@ actually perform Cross-correlation (not Convolution)
 
 \subsubsection{Autocorrelation}\label{sec:autocorrelation}
 
-or \emph{Serial Correlation}
+or \emph{Serial Correlation} is the Cross-correlation of a Signal with itself
 
 \fist the Autocorrelation Function of an Autoregressive Model
 (\S\ref{sec:autoregressive_model}) is a Sum of decaying Exponentials
@@ -2520,7 +2544,21 @@ or \emph{Serial Correlation}
 \subsection{Convolution}\label{sec:convolution}
 % ------------------------------------------------------------------------------
 
-$(f * g)(t) = \int_0^t f(t-\tau) g(\tau) d\tau$
+\[
+  (f * g)(t) \defeq \int_{-\infty}^\infty f(\tau) g(t - \tau) d\tau
+\]
+
+for $f, g : [0, \infty) \to \reals$:
+\[
+  (f * g)(t) = \int_0^t f(\tau) g(t - \tau) d\tau
+\]
+
+when the ``pulse'' $g$ is an Even function, Convolution is equal to Correlation
+
+Convolution is the same as Cross-correlation with the ``pulse'' Function $g$
+``mirrored''
+
+%FIXME: periodic functions ???
 
 (wiki): a \emph{Convolution} is an Operation on two Functions giving a modified
 Function giving the Integral of the Pointwise Multiplication of the two
@@ -2535,11 +2573,23 @@ for Continuous Signals the Cross-correlation Operator is the Adjoint Operator of
 the Convolution Operator
 
 for Discrete Real-valued Functions, Convolution and Cross-correlation differ
-only in Time Reversal of one of the Functions
+only in \emph{Time Reversal} of one of the Functions
+
+the Convolution $f * g$ of of Independent Random Variables $X$ and $Y$ with
+respective Probability Density Functions $f$ and $g$ is the Probability Density
+of the \emph{Sum} $X + Y$
+
+cf. the Cross-correlation $f \star g$, i.e. the Convolution of $f(t)$ and
+$g(-t)$, gives the Probability Density Function of the \emph{Difference} $Y - X$
 
 Image Processing
 
 \fist Fourier Analysis (\S\ref{sec:fourier_analysis})
+
+\url{http://colah.github.io/posts/2014-07-Understanding-Convolutions/} --; cf.
+Path Integrals
+
+\asterism
 
 Laplace Transform (\S\ref{sec:laplace_transform}) -- \emph{Convolution Theorem}:
 
@@ -2568,6 +2618,8 @@ find the solution of a ``Convolution Equation'' $f * g = h$ where $h$ is a
 recorded Signal and $f$ is a Signal to be recovered, but has been
 \emph{Convolved} with some other Signal $g$ (e.g. the Transfer Function of an
 instrument or driving force applied to a physical system)
+
+\fist Linear Inverse Problem (\S\ref{sec:linear_inverse_problem})
 
 usually performed by computing the Fourier Transform
 (\S\ref{sec:fourier_transform}) of $h$ and Transfer Function $g$ and applying
@@ -2868,6 +2920,45 @@ Center (may or may not be unique); in the sense of $L^p$-norms
 \subsubsection{Total Variation}\label{sec:total_variation}
 
 \subsubsection{Bounded Variation}\label{sec:bounded_variation}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Inverse Problem}\label{sec:inverse_problem}
+% ------------------------------------------------------------------------------
+
+%FIXME: move to systems theory ???
+
+(wiki):
+
+\emph{Forward Problem}: Forward Operator $F(p)$ -- determine the State of a
+System from Parameters that describe it and \emph{apply} the ``Observation
+Operator'' to the Estimated State of the System to predict the ``behavior''
+
+Inverse Problems are often formualted in Infinite-dimensional Spaces, but
+limitations to a Finite number of Measurements and recoving only a Finite number
+of unknown Parameters leads to recasting the Problems in ``Discrete'' form, in
+which case the Inverse Problem is typically Ill-conditioned
+(\S\ref{sec:condition_number}) and \emph{Regularization}
+(\S\ref{sec:regularization}) may be used to introduce Assumptions on the
+Solution and prevent Overfitting
+
+many instances of Regularized Inverse Problems can be interpreted as special
+cases of Bayesian Inference (\S\ref{sec:bayesian_inference})
+
+
+
+\subsubsection{Linear Inverse Problem}\label{sec:linear_inverse_problem}
+
+$F$ is a Matrix characterizing the Forward Map
+
+represented by a mapping between Metric Spaces (\S\ref{sec:metric_space})
+
+Deconvolution (\S\ref{sec:deconvolution})
+
+
+
+\subsubsection{Non-linear Inverse Problem}\label{sec:nonlinear_inverse_problem}
 
 
 
@@ -4065,7 +4156,14 @@ for $R_\infty$, then $g_\infty(x)$ (or $g(x)$) gives the Functional Equation
 
 
 
-\paragraph{Regularization}\label{sec:regularization}\hfill
+\paragraph{Regulator}\label{sec:regulator}\hfill
+
+parameter introduced to make Singularities Finite
+
+``Regularization'' in Physics
+
+not to be confused with Regularization (Ill-posed Optimization Problems
+\S\ref{sec:regularization})
 
 
 
