@@ -691,6 +691,10 @@ $\sum u_n$ Converges.
 \section{Continued Fraction}\label{sec:continued_fraction}
 % ==============================================================================
 
+cf. Co-algebras (\S\ref{sec:coalgebra})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Infinite Continued Fraction}\label{sec:infinite_continued_fraction}
 % ------------------------------------------------------------------------------
@@ -811,6 +815,12 @@ Finite Sequence (\S\ref{sec:sequence}) $(x_i) = \{ x_0, x_1, \ldots,
 x_n \}$
 
 $a = x_0 < x_1 < x_2 < \ldots < x_n = b$
+
+
+
+\paragraph{Mesh}\label{sec:mesh}\hfill
+
+or \emph{Norm} of a Partition is the length of the longest Sub-interval
 
 
 
@@ -2666,6 +2676,10 @@ setting'' they can represent Integration over a Submanifold, generalizing the
 Dirac Delta Function (\S\ref{sec:dirac_delta}), or more generally Directional
 Derivatives of Delta Functions spread out along Subsets of $M$
 
+\begin{itemize}
+  \item Nuclear Space (\S\ref{sec:nuclear_space})
+\end{itemize}
+
 
 
 \subsubsection{Schwartz Function}\label{sec:schwartz_function}
@@ -2920,6 +2934,9 @@ Center (may or may not be unique); in the sense of $L^p$-norms
 \subsubsection{Total Variation}\label{sec:total_variation}
 
 \subsubsection{Bounded Variation}\label{sec:bounded_variation}
+
+a Real Function of Bounded Variation can be used as an Integrator for
+Riemann-Stieltjes Integration (\S\ref{sec:riemann_stieltjes})
 
 
 
@@ -5790,6 +5807,10 @@ terms of Integrals
 Richardson's Theorem (\S\ref{sec:richardsons_theorem}) makes a statement on the
 solvability of the ``Integration Problem'' for a certain class of Expressions
 
+in Classical Mechanics, the Integral of Position with respect to Time is called
+\emph{Absement} (or \emph{Absition}); a measure of ``sustained Displacement''
+from an Initial Position
+
 
 
 % ------------------------------------------------------------------------------
@@ -5917,7 +5938,36 @@ denoted by $\int_a^b f$
 
 \paragraph{Riemann-Stieltjes Integral}\label{sec:riemann_stieltjes}\hfill
 
+generalization of Riemann Integral
+
+\emph{Riemann-Stieltjes Integral} of a Real-valued Function of a Real Variable,
+$f$ (the Integrand), on the Interval $[a,b]$ with respect to another
+Real-to-real Function $g$ (the Integrator):
+\[
+  \int_{x=a}^b f(x) \diffy{g(x)}
+\]
+is defined by a Sequence of Partitions (\S\ref{sec:interval_partition}):
+\[
+  P = \{ a = x_0 < x_1 < \cdots < x_n = b \}
+\]
+as the Mesh (\S\ref{sec:mesh}), i.e. Length (Norm) of the longest Sub-interval
+of the Parition, approaches $0$ in the Approximating Sum:
+\[
+  S(P, f, g) = \sum_{i=0}^{n-1} f(c_i) \big(g(x_{i+1}) - g(x_i)\big)
+\]
+where $c_i$ is in the $i$th Sub-interval $[x_i, x_{i+1}]$
+
+if $f$ is Continuous, and $g$ is of Bounded Variation
+(\S\ref{sec:bounded_variation}) on $[a, b]$ then the Riemann-Stieltjes Integral
+exists
+
 \fist Lebesgue-Stieltjes Integral (Radon Integral \S\ref{sec:radon_integral})
+generalizes the Riemann-Stieltjes Integral as the Lebesgue Integral generalizes
+the Riemann Integral
+
+\fist It\^o Integral (\S\ref{sec:ito_integral}) generalizes the
+Riemann-Stieltjes Integral for Integrands and Integrators that are Stochastic
+Processes
 
 
 
@@ -5966,6 +6016,8 @@ Radon Measures on Locally Compact Spaces
 
 \emph{Lebesgue-Stieltjes Integral} or \emph{Lebesgue-Radon Integral}
 
+generalizes Riemann-Stieltjes Integral (\S\ref{sec:riemann_stieltjes})
+
 Potential Theory (\S\ref{sec:potential_theory})
 
 
@@ -5989,6 +6041,14 @@ TODO
 \fist Product Rule (\S\ref{sec:product_rule})
 
 $\int{uv'} = uv - \int{u'v}$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Improper Integral}\label{sec:improper_integral}
+% ------------------------------------------------------------------------------
+
+Limit of Definite Integral as an endpoint approaches a Limit
 
 
 
@@ -8403,6 +8463,28 @@ constructs; generalization of Automatic Differentiation
 \subsection{Fractional Calculus}\label{sec:fractional_calculus}
 % ------------------------------------------------------------------------------
 
+Real or Fractional Powers of the Differentiation Operator $D^\alpha$
+
+
+
+\subsubsection{Differintegral}\label{sec:differintegral}
+
+$\diffint^q$
+
+Fractional Derivative -- $q > 0$
+
+Fractional Integral -- $q < 0$
+
+
+
+\subsubsection{Weyl Integral}\label{sec:weyl_integral}
+
+Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
+
+
+
+\subsubsection{Riemann-Liouville Integral}\label{sec:riemann_liouville}
+
 
 
 % ==============================================================================
@@ -9366,6 +9448,34 @@ Stratonovich Integral can be defined
 
 
 \subsubsection{It\^o Integral}\label{sec:ito_integral}
+
+generalizes the Riemann-Stieltjes Integral (\S\ref{sec:riemann_stieltjes}) for
+Integrands and Integrators that are Stochastic Processes
+
+\[
+  Y_t = \int_0^t H_s \diffy{X_x}
+\]
+where $H$ is a Locally Square-integrable Process (FIXME: xref) Adapted
+(\S\ref{sec:adapted_process}) to the Filtration
+(\S\ref{sec:stochastic_filtration}) ``generated'' by $X$ which is a
+Semi-martingale (\S\ref{sec:semimartingale}), e.g. a Brownian Motion (Wiener
+Process)
+
+the Integral from $0$ to any particular $t$ is a Random Variable defined as the
+Limite of a certain Sequence of Random Variables
+
+relies on $H$ being \emph{Adapted}, roughly, that the value of $H$ at Time $t$
+can only depend on the ``information'' available up until $t$ (FIXME: clarify)
+
+Mathematical Finance: the Integrand is the the amount of the asset held, and the
+Integrator represents the movement of the prices, and the Integral is the total
+portfolio value including cash and the value of assets held, at any given
+moment; when the prices of financial assets can be modeled by stochastic
+processes, then the It\^o Stochastic Integral represents the ``payoff'' of a
+continuous-time trading strategy consisting of \emph{holding} an amount $H_t$ of
+the asset at Time $t$
+
+
 
 \subsubsection{Stratonovich Integral}\label{sec:stratonovich_integral}
 

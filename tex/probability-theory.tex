@@ -6293,7 +6293,7 @@ essentially the same as Binomial Regression
 
 
 
-\subsubsection{Logistic Model}\label{sec:discrete_uniform_law}
+\subsubsection{Logistic Model}\label{sec:logistic_model}
 
 or \emph{Logit Model}
 
@@ -11820,6 +11820,9 @@ that is, a Stochastic Process is a Random Variable taking values in a Space of
 Equivalently, a Stochastic Process defines a Probability Distribution over a
 ``Space of Paths'' (MIT 18.s096).
 
+the induced Measure on the Space of Paths is called the ''\emph{Law}'' of the
+Stochastic Process (\S\ref{sec:process_law})
+
 A Process in which each Point is Stochastically Independent
 (\S\ref{sec:independence}) is called a \emph{Completely Random Process} (e.g.
 Bernoulli Process \S\ref{sec:bernoulli_process}, Poisson Process
@@ -11929,6 +11932,18 @@ for a Markov Process, this simplifies to:
 
 
 % ------------------------------------------------------------------------------
+\subsection{Stochastic Process Law}\label{sec:process_law}
+% ------------------------------------------------------------------------------
+
+the ``\emph{Law}'' or \emph{Probability Law} of a Stochastic Process is the
+Measure that the Process induces on the Space of Paths
+
+the Probability Law of a Wiener Process is the Wiener Measure on the Space of
+Continuous Functions with $g(0) = 0$
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Daniell-Kolmogorov Extension}\label{sec:kolmogorov_extension}
 % ------------------------------------------------------------------------------
 
@@ -12008,6 +12023,16 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 \end{itemize}
 
 \emph{Slutsky's Theorem}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Filtration}\label{sec:stochastic_filtration}
+% ------------------------------------------------------------------------------
+
+cf. Filtration (Abstract Algebra \S\ref{sec:filtration})
+
+Filtered Probability Space
 
 
 
@@ -12111,7 +12136,7 @@ Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
 
 Mandelbrot, van Ness 1968 -- Model for prices that are ``Dependence-dominated''
 
-$H \in (0,1) \subset \reals$ -- Hurst index
+$H \in (0,1) \subset \reals$ -- ``Hurst index''
 
 $H = 1/2$ -- Wiener Process (Brownian Motion \S\ref{sec:wiener_process})
 
@@ -12128,6 +12153,19 @@ Fractional Brownian Motions
 (Mandelbrot96) Fractional Brownian Motion of Multifractal Time -- Model of
 Variation of Exchange Rates
 
+Weyl Integral (\S\ref{sec:weyl_integral}) with respect to White Noise Measure
+(TODO: xref Bochner-Minlos Theorem for Nuclear Spaces)
+
+Fractional Brownian Motion can be viewed as White Noise Filtered by
+$s^{-H-\frac{1}{2}}$ (corresponding to Fractional Integration
+\S\ref{sec:differintegral})
+
+
+
+\subparagraph{Fractional Gaussian Noise}\label{sec:fractional_gaussian}\hfill
+
+Increment Process $X(t) = B_H(t+1) - B_H(t)$
+
 
 
 \subparagraph{Wiener Process}\label{sec:wiener_process}\hfill
@@ -12140,6 +12178,10 @@ Semimartingale (\S\ref{sec:semimartingale})
 
 given a Wiener Process $W_t$ and Harmonic Function
 (\S\ref{sec:harmonic_function}) $f$, the Process $f(W_t)$ is also a Martingale
+
+(wiki):
+can be viewed as White Noise Filtered by $s^{-1}$ (i.e. Integrated)
+--FIXME: clarify
 
 \emph{Donsker's Theorem} (\S\ref{sec:donskers_theorem}) -- a Discrete Random
 Walk (\S\ref{sec:simple_random_walk}) converges to true Brownian Motion in the
@@ -12255,6 +12297,14 @@ a Root of the Process's Characteristic Equation (FIXME: characteristic function
 
 
 \subsubsection{Trend-stationary Process}\label{sec:trend_stationary}
+
+\subsubsection{Covariance-stationary Process}\label{sec:covariance_stationary}
+
+or \emph{Weak-Sense Stationary} or \emph{Wide-Sense Stationary} (WSS)
+
+\fist Order of Integration (Time Series \S\ref{sec:order_of_integration}) --
+minimum number of ``differences'' required to obtain a Covariance-stationary
+Series (\S\ref{sec:covariance_stationary})
 
 
 
@@ -13277,3 +13327,15 @@ Quantum Probability as Probability Theory \emph{Internal} to the Bohr Topos
 or \emph{Non-commutative Probability Space}
 
 e.g. Quantized Phase Space
+
+
+
+% ==============================================================================
+\section{Possibility Theory}\label{sec:possibility_theory}
+% ==============================================================================
+
+Possibility Measure
+
+Necessity Measure
+
+cf. Alethic Logic (\S\ref{sec:alethic_logic})
