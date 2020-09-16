@@ -2069,6 +2069,14 @@ has a pattern of recurrence with a component of unpredictability
 
 
 
+\subsubsection{Sinc Function}\label{sec:sinc_function}
+
+$sinc x = \frac{sin x}{x}$
+
+Sinc Filter (\S\ref{sec:sinc_filter})
+
+
+
 \subsubsection{Fourier Series}\label{sec:fourier_series}
 
 Fourier Analysis of a Periodic, Continuous Function
@@ -2193,24 +2201,35 @@ Topological Vector Space (\S\ref{sec:topological_vectorspace})
 \subsection{Functional}\label{sec:functional}
 % ------------------------------------------------------------------------------
 
-a mapping from a Space $X$ into the Real Numbers or sometimes into the Complex
-Numbers for the purpose of establishing a Calculus-like structure on $X$
+(wiki): a mapping from a Function Space (\S\ref{sec:function_space}) $X$ into
+the Real Numbers or sometimes into the Complex Numbers for the purpose of
+establishing a Calculus-like structure on $X$
 
 \fist cf. ``Functional'' used to mean a Higher-order Function
 (\S\ref{sec:higherorder_function})
 
-\fist cf. Linear Functional (Linear Form \S\ref{sec:linear_form})
+the Real- or Complex-valued Function $x_0 \mapsto f(x_0)$ is Dual to the
+\emph{Functional} $f \mapsto f(x_0)$
 
-the \emph{Action} (\S\ref{sec:trajectory_action}) of a Physical System with
-Equations of Motion is a Functional taking the Trajectory of the System and
-producing a Real Number; the Hamilton's Principle Function $S$ in the
-Hamilton-Jacobi Equation (\S\ref{sec:hamilton_jacobi}) is equal to the
-\emph{Classical Action})
+if $f$ is a Linear Function from a Vector Space to the underlying Scalar Field,
+then both of the above Dual Linear Maps are called \emph{Linear Functionals}
+(Linear Forms \S\ref{sec:linear_form})
 
 \begin{itemize}
-  \item Current (Differential Topology \S\ref{sec:current}) -- Functional on the
-    Space of Compactly Supported Differential $k$-forms
+  \item Definite Integrals (\S\ref{sec:integral}):
+    \[
+      f \mapsto \int_\Omega H(f(x), f'(x), \ldots) \mu(\diffy{x})
+    \]
+    with Real-valued $H$ define a \emph{class} of Functionals
+  \item Linear Functional ($1$-form) $\vec{y} \mapsto \vec{x} \cdot \vec{y}$
+  \item \emph{Current} (Differential Topology \S\ref{sec:current}) -- Functional
+    on the Space of Compactly Supported Differential $k$-forms
     (\S\ref{sec:differential_form}) on a Smooth Manifold
+  \item \emph{Action} (\S\ref{sec:trajectory_action}) of a Physical System
+    with Equations of Motion -- Functional taking the Trajectory of the System
+    and producing a Real Number; the Hamilton's Principle Function $S$ in the
+    Hamilton-Jacobi Equation (\S\ref{sec:hamilton_jacobi}) is equal to the
+    \emph{Classical Action})
   \item ...
 \end{itemize}
 
@@ -2599,7 +2618,28 @@ of the \emph{Sum} $X + Y$
 cf. the Cross-correlation $f \star g$, i.e. the Convolution of $f(t)$ and
 $g(-t)$, gives the Probability Density Function of the \emph{Difference} $Y - X$
 
+Probability -- the Probability Distribution of the Sum of two Independent Random
+Variables is the Convolution of their individual Distributions; Kernel Density
+Estimation (\S\ref{sec:kde})-- Estimation of a Distribution by Convolution with
+a ``Kernel'' (\S\ref{sec:distribution_kernel})
+
+Statistics -- Weighted Moving Average (\S\ref{sec:weighted_moving_average}) is a
+Convolution
+
+Signal Processing -- the Convolution of an Input Signal and an Impulse Response
+gives the Output of a Linear Time-Invariant System (\S\ref{sec:lti})
+
 Image Processing
+
+Convolution Kernel
+
+Optics -- an out-of-focus photograph is a Convolution of the ``sharp image''
+with a ``lens function'' (bokeh)
+
+Acoustics -- Convolution Reverb; Impulse Response (\S\ref{sec:impulse_response})
+can be recorded from the Reverberation caused by an ideal Impulse
+(\S\ref{sec:impulse}) is played in an acoustic space or hardware reverberation
+unit
 
 \fist Fourier Analysis (\S\ref{sec:fourier_analysis})
 
@@ -4386,7 +4426,7 @@ cf. Support of a Probability Distribution (\S\ref{sec:probability_distribution})
 
 $\delta$
 
-\emph{Unit Impulse Symbol}
+\emph{Unit Impulse Symbol} (\S\ref{sec:impulse})
 
 \emph{heuristic} characterization: can be thought of as a Function on the Real
 Line that is Zero everywhere except at the origin where it is Infinite and
@@ -4401,6 +4441,9 @@ can also be defined as the \emph{Dirac Measure} (\S\ref{sec:dirac_measure})
 
 \fist Functional Integration (\S\ref{sec:functional_integration})
 
+the Anti-derivative of the Dirac Delta is the Unit Step Function
+(\S\ref{sec:unit_step_function})
+
 cf. \emph{Kronecker Delta} -- ``Dirac Distribution''; Discrete-time Unit Impulse
 
 
@@ -4408,6 +4451,12 @@ cf. \emph{Kronecker Delta} -- ``Dirac Distribution''; Discrete-time Unit Impulse
 \paragraph{Tempered Distribution}\label{sec:tempered_distribution}\hfill
 
 \fist Schwartz Space (\S\ref{sec:schwartz_space})
+
+
+
+\subparagraph{Dirac Comb}\label{sec:dirac_comb}\hfill
+
+Impulse Train (Sampling Function \S\ref{sec:impulse_train})
 
 
 
@@ -5926,9 +5975,13 @@ denoted by $\int_a^b f$
 
 
 
-\paragraph{Riemann-Stieltjes Integral}\label{sec:riemann_stieltjes}\hfill
+\subsubsection{Riemann-Stieltjes Integral}\label{sec:riemann_stieltjes}
 
-generalization of Riemann Integral
+generalization of Riemann Integral (\S\ref{sec:riemann_integral}), precursor to
+Lebesgue Integral (\S\ref{sec:lebesgue_integral})-- if Improper
+(\S\ref{sec:improper}) Riemann-Stieltjes Integrals are allowed, then the
+Lebesgue Integral is not strictly more general than the Riemann-Stieltjes
+Integral
 
 \emph{Riemann-Stieltjes Integral} of a Real-valued Function of a Real Variable,
 $f$ (the Integrand), on the Interval $[a,b]$ with respect to another
@@ -5959,12 +6012,22 @@ the Riemann Integral
 Riemann-Stieltjes Integral for Integrands and Integrators that are Stochastic
 Processes
 
+in the Law of the Unconscious Statistician (\S\ref{sec:lotus}), the Expectation
+of a Function $g(X)$ of a Real-valued Random Variable $X$ with known Probability
+Distribution (where the Distribution of $g(X)$ is unknown) can be computed from
+the CDF $F_X$ using a Riemann-Stieltjes Integral:
+\[
+  \expect(g(X)) = \int_{-\infty}^\infty g(x) \diffy{F_X(x)}
+\]
+
 
 
 \subsubsection{Lebesgue Integral}\label{sec:lebesgue_integral}
 
-Measurable Functions (\S\ref{sec:measurable_function}),
-Lebesgue Measure (\S\ref{sec:lebesgue_measure})
+$\int_A f(x) \diffy{\mu}$
+
+Measurable Functions (\S\ref{sec:measurable_function}), Lebesgue Measure
+(\S\ref{sec:lebesgue_measure})
 
 assigning the value to the Integral of an (\S\ref{sec:indicator_function}) $1_S$
 of a Measurable Set $S$ consistent with a given Measure (\S\ref{sec:measure})
@@ -5989,8 +6052,14 @@ Supremum of approximations by Simple Functions, and the Integral of a (not
 necessarily Positive) Measurable Function is the difference of two Integrals of
 Non-negative Measurable Functions
 
-Daniell Integral -- approach to defining a Lebesgue Integral without relying on
-the ``full machinery'' of Measure Theory
+cf. Riemann-Stieltjes Integral (\S\ref{sec:riemann_stieltjes}) -- precursor to
+Lebesgue Integral; if Improper (\S\ref{sec:improper}) Riemann-Stieltjes
+Integrals are allowed, then the Lebesgue Integral is not strictly more general
+than the Riemann-Stieltjes Integral
+
+\fist Radon (Lebesgue-Stieltjes) Integral (\S\ref{sec:radon_integral}) --
+ordinary Lebesgue Integral with respect to the Lebesgue-Stieltjes Measure
+(\S\ref{sec:lebesgue_stieltjes})
 
 definition by Real-valued Compactly Supported Continuous Functions of $\reals$,
 Radon Measures on Locally Compact Spaces
@@ -6002,11 +6071,26 @@ Radon Measures on Locally Compact Spaces
 
 
 
-\paragraph{Radon Integral}\label{sec:radon_integral}\hfill
+\paragraph{Daniell Integral}\label{sec:daniell_integral}\hfill
+
+approach to defining a Lebesgue Integral without relying on the ``full
+machinery'' of Measure Theory
+
+
+
+\subsubsection{Radon Integral}\label{sec:radon_integral}
 
 \emph{Lebesgue-Stieltjes Integral} or \emph{Lebesgue-Radon Integral}
 
-generalizes Riemann-Stieltjes Integral (\S\ref{sec:riemann_stieltjes})
+generalizes Riemann-Stieltjes Integral (\S\ref{sec:riemann_stieltjes}) and
+Lebesgue Integral (\S\ref{sec:lebesgue_integral})
+
+is an ordinary Lebesgue Integral with respect to the \emph{Lebesgue-Stieltjes
+  Measure} (\S\ref{sec:lebesgue_stieltjes}) which can be associated to any
+Function of Bounded Variation on the Real Line
+
+can also be defined in terms of the Daniell integral
+(\S\ref{sec:daniell_integral})
 
 Potential Theory (\S\ref{sec:potential_theory})
 
@@ -6041,6 +6125,10 @@ $\int{uv'} = uv - \int{u'v}$
 Limit of Definite Integral as an endpoint approaches a Limit
 
 
+
+% ------------------------------------------------------------------------------
+\subsection{Leaky Integral}\label{sec:leaky_integral}
+% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{Integrable Function}\label{sec:integrable_function}

@@ -657,6 +657,9 @@ Variables are Independent
 for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
 $Var(X - Y) = Var(X) + Var(Y)$
 
+the Probability Distribution of the Sum of two Independent Random Variables is
+the Convolution (\S\ref{sec:convolution}) of their individual Distributions
+
 cf. Binomial Distribution (\S\ref{sec:binomial_distribution}) -- Sum of
 Independent Trials; Sampling 10\% Rule (TODO)
 
@@ -1393,6 +1396,30 @@ Perrone 2018)
 $E(X) = E(E(X | Y))$
 
 MIT 6.041SC, Lec. 6
+
+
+
+\subsubsection{Law Of The Unconscious Statistician (LOTUS)}\label{sec:lotus}
+
+calculation of the Expected Value of Function $g(X)$ of a Random Variable $X$
+with a known Probability Distribution, but where the Probability Distribution of
+$g(X)$ is unknown
+
+Discrete PMF $f_X$:
+\[
+  \expect(g(X)) = \sum_x g(x) f_X(x)
+\]
+
+Continuous PDF $f_X$:
+\[
+  \expect(g(X)) = \int_{-\infty}^\infty g(x) f_X(x) \diffy{x}
+\]
+
+Continuous CDF $F_X$ (Real-valued $X$):
+\[
+  \expect(g(X)) = \int_{-\infty}^\infty g(x) \diffy{F_X(x)}
+\]
+(Riemann-Stieltjes Integral \S\ref{sec:riemann_stieltjes})
 
 
 
@@ -2220,6 +2247,9 @@ cf. Linear-Quadratic Regulator (LQR \S\ref{sec:lqr})
 \subsection{Conditional Distribution}\label{sec:conditional_distribution}
 % ------------------------------------------------------------------------------
 
+cf. ``Unconditional Distribution'' (Marginal Distribution
+\S\ref{sec:marginal_distribution})
+
 cf. \emph{Discriminative Models} (Classification
 \S\ref{sec:discriminative_model})
 
@@ -2257,6 +2287,8 @@ Functions need not be Invariant under Coordinate Transformations
 % ------------------------------------------------------------------------------
 \subsection{Marginal Distribution}\label{sec:marginal_distribution}
 % ------------------------------------------------------------------------------
+
+``Un-conditional Distribution''
 
 Marginal Probability Mass Functions:
 
@@ -6317,6 +6349,12 @@ Logistic Regression (\S\ref{sec:logistic_regression})
 Fitting a Graphical Model to Discrete Data \fist Pairwise Markov Graph
 (Undirected Graph \S\ref{sec:pairwise_markov})
 
+\begin{itemize}
+  \item Variational AutoEncoders (VAEs \S\ref{sec:vae}) -- Directed
+    Probabilistic Graphical Models (DPGM) with Posterior Distribution
+    Approximated by a Neural Network
+\end{itemize}
+
 
 
 \paragraph{Markov Blanket}\label{sec:markov_blanket}\hfill
@@ -6454,11 +6492,13 @@ Binomial Probabilities \fist Binomial Distribution
 
 \subsubsection{Continuous Uniform Law}\label{sec:continuous_uniform_law}
 
-\subsubsection{Variational Bayesian Method}
-\label{sec:variational_bayesian_method}
+\subsubsection{Variational Bayesian Method}\label{sec:variational_bayesian}
 
 Free Energy Principle -- implicit Minimization of Variational Free Energy;
 Active Inference (Friston)
+
+Variational AutoEncoders (VAEs \S\ref{sec:vae}) -- uses a Stochastic Gradient
+Variational Bayes (SGVB) Estimator for the training algorithm
 
 
 
@@ -7133,6 +7173,8 @@ Sample Quantile
 a form of Unsupervised Learning (cf. Cluster Analysis
 \S\ref{sec:cluster_analysis})
 
+\fist cf. Generative Models (\S\ref{sec:generative_model})
+
 (Wasserman04, Ch.20)
 
 compared to Non-parametric Estimation of CDFs (via Empirical Distribution
@@ -7195,13 +7237,15 @@ time
 
 \paragraph{Kernel Density Estimation (KDE)}\label{sec:kde}\hfill
 
+Estimation of Distribution from Sample Points by Convolution
+(\S\ref{sec:convolution}) with a \emph{Kernel Function}
+(\S\ref{sec:distribution_kernel})
+
 cf. Histogram (\S\ref{sec:histogram})
 
 cf. Kernel Regression (\S\ref{sec:kernel_regression})
 
 Non-parametric Model (\S\ref{sec:nonparametric_model})
-
-\emph{Kernel Function} (\S\ref{sec:distribution_kernel})
 
 \emph{Bandwidth}
 
@@ -8616,6 +8660,7 @@ dual of Linear Quadratic Regulation (LQR \S\ref{sec:lqr})
 \fist Kalman Filters (\S\ref{sec:kalman_filter})
 
 
+
 % ------------------------------------------------------------------------------
 \subsection{Predictive Inference}\label{sec:predictive_inference}
 % ------------------------------------------------------------------------------
@@ -9000,7 +9045,9 @@ cf. Clustering (\S\ref{sec:cluster_analysis})
 
 
 
-\paragraph{Principal Components Analysis}\label{sec:pca}\hfill
+\paragraph{Principal Components Analysis (PCA)}\label{sec:pca}\hfill
+
+Dimensionality Reduction (\S\ref{sec:dimensionality_reduction})
 
 cf. Factor Analysis (\S\ref{sec:factor_analysis})
 
@@ -9273,14 +9320,60 @@ Model the Probability Density Fucntion:
   \item Explicitly
     \begin{itemize}
       \item ``Tractable'' Density -- PixelRNN, PixelCNN, WaveNet
-      \item Approximate Density -- Variational Auto-encoders
-        (\S\ref{sec:variational_autoencoder})
+      \item Approximate Density -- Variational Auto-encoders (VAEs
+        \S\ref{sec:vae})
     \end{itemize}
   \item Implicitly
     \begin{itemize}
       \item Generative Adversarial Networks
     \end{itemize}
 \end{itemize}
+
+2017 - Yeung - Stanford CS231n - \emph{Lecture 13: Generative Models} -
+\url{https://www.youtube.com/watch?v=5WoItGTWV54}
+
+cf. Unsupervised Learning (Cluster Analysis \S\ref{sec:cluster_analysis})
+
+Density Estimation (\S\ref{sec:density_estimation}) -- learn $p_{model}(x)$
+similar to $p_{data}(x)$
+
+\emph{Explicit Density Estimation} -- explicitly ``\emph{define and solve for}''
+$p_{model}(x)$
+
+\emph{Implicit Density Estimation} -- \emph{learn} a model that can sample from
+$p_{model}(x)$ without explicitly defining it (FIXME: clarify)
+
+\begin{itemize}
+  \item Explicit Density
+  \begin{itemize}
+    \item Tractable Density
+      \begin{itemize}
+        \item Fully-visible Belief Nets -- PixelRNN/CNN, NADE, MADE
+        \item Change-of-variables Models (Non-linear ICA --FIXME: ???)
+      \end{itemize}
+    \item Approximate Density
+    \begin{itemize}
+      \item Markov Chain -- Boltzmann Machine (Energy-based Model
+        \S\ref{sec:ebm})
+      \item Variational -- Variational AutoEncoder (\S\ref{sec:vae})
+    \end{itemize}
+  \end{itemize}
+  \item Implicit Density
+  \begin{itemize}
+    \item Markov Chain -- Generative Stochastic Network (GSN \S\ref{sec:gsn})
+    \item Direct -- Generative Adversarial Network (GAN \S\ref{sec:gan})
+  \end{itemize}
+\end{itemize}
+
+
+
+\subparagraph{Energy-Based Model (EBM)}\label{sec:ebm}\hfill
+
+Boltzmann Machine (\S\ref{sec:boltzmann_machine})
+
+
+
+\subparagraph{Stochastic Block Model}\label{sec:stochastic_block_model}\hfill
 
 
 
@@ -9720,6 +9813,8 @@ Multivariate Data (\S\ref{sec:random_vector})
 the Regression Parameters that miminize Residual Sums of Squares (SSR
 \S\ref{sec:ssr}) are called \emph{Least Squares Estimates}
 (\S\ref{sec:least_squares})
+
+cf. Autoregressive Models (\S\ref{sec:autoregressive_model})
 
 (Wasserman04 \S13.2):
  under assumption of Normality ($Y_i | X_i \sim N(\mu_i, \sigma^2)$), the Least
@@ -10784,11 +10879,11 @@ cf. Multiple Regression (\S\ref{sec:multiple_regression}) -- uses Additive Logic
 \subsection{Cluster Analysis}\label{sec:cluster_analysis}
 % ------------------------------------------------------------------------------
 
-Unsupervised Learning
+\emph{Unsupervised Learning}
 
 cf. Classification (Supervised Learning \S\ref{sec:classification})
 
-cf. Density Estimation (\S\ref{sec:density_estimation})
+see also Density Estimation (\S\ref{sec:density_estimation})
 
 example of Pattern Recognition (assignment of some Output Value to a given Input
 Value), other examples are Statistical Classification and Regression Analysis
@@ -10808,9 +10903,13 @@ Feature Selection
 
 Feature Extraction
 
+Principal Component Analysis (PCA \S\ref{sec:pca})
+
 
 
 \subsubsection{Autoencoder}\label{sec:autoencoder}
+
+\emph{Feature Learning}
 
 (wiki): a type of ANN (\S\ref{sec:ann}) used to learn efficient Encoding
 (\S\ref{sec:encoding}) in an Unsupervised manner
@@ -10840,7 +10939,22 @@ produce the \emph{Identity Function}
 
 
 
-\paragraph{Variational Autoencoder}\label{sec:variational_autoencoder}\hfill
+\paragraph{Variational AutoEncoder (VAE)}\label{sec:vae}\hfill
+
+(wiki): VAEs are Directed Probabilistic Graphical Models (DPGM
+\S\ref{sec:graphical_model}) with Posterior Distribution Approximated by a
+Neural Network, forming an ``Autoencoder-like'' architecture
+
+VAEs make strong assumptions about the Distribution of Latent Variables, using a
+Variational Bayesian (\S\ref{sec:variational_bayesian}) approach for Latent
+Representation Learning; uses a Stochastic Gradient Variational Bayes (SGVB)
+Estimator for the training algorithm
+
+assumes Data is Generated by a Graphical Model $p_\theta(\vec{x} | \vec{h})$ and
+Encoder is learning an Approximation $q_\phi(\vec{h} | \vec{x})$ to the
+Posterior Distribution $p_\theta(\vec{h} | \vec{x})$, where $\phi$ are the
+Parameters of the Encoder (Discriminative Model) and $\theta$ are the Parameters
+of the Decoder (Generative Model)
 
 2017 - Pascual - \emph{PixelCNN, WaveNet \& Variational Autoencoders} -
 \url{https://www.youtube.com/watch?v=FeJT8ejgsL0}
@@ -11437,6 +11551,11 @@ rather a \emph{Cross-correlation} (or ``Sliding Dot-product''
 
 \emph{Weight Sharing} or ``\emph{Weight Tying}''
 
+application of multiple ``cascaded'' ``Convolution'' Kernels
+
+``Neocognition'', Spatial Averaging (Fukushima 1980), ``Cresceptron'', Max
+Pooling (Weng et al.)
+
 1989 - LeCun, Boser, Denker, Henderson, Howard, Hubbard, Jackel -
   \emph{Backpropagation Applied to Handwritten Zip Code Recognition}
 
@@ -11446,9 +11565,13 @@ rather a \emph{Cross-correlation} (or ``Sliding Dot-product''
 2014 - Olah - \emph{Understanding Convolutions} -
   \url{http://colah.github.io/posts/2014-07-Understanding-Convolutions/}
 
+Dilated (Atrous) Convolution
+
 
 
 \paragraph{Time Delay Neural Network}\label{sec:tdnn}\hfill
+
+first CNN (1987)
 
 
 
@@ -11488,7 +11611,13 @@ with Continuous States
 
 \subparagraph{Boltzmann Machine}\label{sec:boltzmann_machine}\hfill
 
+a \emph{Markov Random Field} (\S\ref{sec:markov_random_field})
+
 uses \emph{Annealed Gibbs Sampling} instead of Gradient Descent
+
+``\emph{Energy-based Models}'' (\S\ref{sec:ebm}) -- Botlzmann Distribution from
+Statistical Mechanics is used in Sampling Function (Impulse Train
+\S\ref{sec:impulse_train})
 
 Restricted Boltzmann Machine (RBM) -- no \emph{intralayer} connections between
 Units; cf. Multi-layer Perceptron (\S\ref{sec:mlp})
@@ -11496,6 +11625,8 @@ Units; cf. Multi-layer Perceptron (\S\ref{sec:mlp})
 Deep Boltzmann Machine (DBM)
 
 Semi-restricted Boltzmann Machine (SRBM)
+
+Generative Models with Explicit, Approximate Density
 
 
 
@@ -11601,12 +11732,32 @@ $0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0$
 
 
 
+\subsubsection{Residual neural network (ResNet)}\label{sec:resnet}
+
+\emph{Skip Connections}
+
+use with deep CNNs to allow more layers
+
+cf. ``pyramidal cells'' in biology
+
+
+
 \subsubsection{Transformer}\label{sec:transformer}
 
 chain of Encoders and chain of Decoders
 
 GPT-2: Unsupervised (Generative) Transformer Language Model
 (\S\ref{sec:statistical_language_model})
+
+
+
+\subsubsection{Generative Stochastic Network (GSN)}\label{sec:gsn}
+
+2014 - Bengio, Thiboudeau-Laufer, Alain, Yosinski -
+\emph{Deep generative stochastic networks}
+
+2013 - Bengio, Yao, Alain, Vincent -
+\emph{Generalized denoising auto-encoders as generative models}
 
 
 
@@ -11677,6 +11828,43 @@ cf. Generative Stochstaic Network (GSN), Denoising Auto-encoders --
 
 2017 - Pascual - UPC2017 \emph{Generative Adversarial Networks} -
 \url{https://www.youtube.com/watch?v=a1aM0yUJXUI}
+
+2017 - Yeung - CS231n - \emph{Lecture 13: Generative Models} -
+\url{https://www.youtube.com/watch?v=5WoItGTWV54}
+
+Minimax Game
+
+Objective Function:
+\[
+  \min_{\theta_g} \max_{\theta_d} \Big(
+    \expect_{x \sim p_{data}} \log D_{\theta_d}(x) +
+    \expect_{z \sim p(z)} \log (1 - D_{\theta_d}(G_{\theta_g}(z)))
+  \Big)
+\]
+where $D_{\theta_d}(x)$ is the Discriminator Output Likelihood in $(0, 1)$ for
+``real'' Data $x$, and $D_{\theta_d}(G_{\theta_g}(z))$ is the Discriminator
+Output Likelihood in $(0, 1)$ for the ``fake'' Data $G(z)$ produced by the
+Generator
+
+\emph{Gradient Ascent} on Discriminator:
+\[
+  \max_{\theta_d} \Big(
+    \expect_{x \sim p_{data}} \log D_{\theta_d}(x) +
+    \expect_{z \sim p(z)} \log (1 - D_{\theta_d}(G_{\theta_g}(z)))
+  \Big)
+\]
+\emph{Gradient Descent} on Generator:
+\[
+  \min_{\theta_g} \expect_{z \sim p(z)} \log (1 - D_{\theta_d}(G_{\theta_g}(z)))
+\]
+note that the Optimization Objective for the Generator of \emph{minimizing} the
+Likelihood of the Discriminator being correct has a flat Gradient when the Loss
+is high, and a steep Gradient when the Loss is already low, so it is better to
+train by Gradient Ascent to \emph{maximize} the Likelihood of the Discriminator
+being wrong:
+\[
+  \max_{\theta_g} \expect_{z \sim p(z)} \log (D_{\theta_d}(G_{\theta_g}(z)))
+\]
 
 
 
@@ -12115,7 +12303,12 @@ Autoregressive Models (\S\ref{sec:autoregressive_model})
 
 \begin{itemize}
   \item Discrete-time Martingale (\S\ref{sec:martingale})
+  \item Discrete-time Autoregressive Process (\S\ref{sec:autoregressive_model})
+  \item Discrete-time Moving Average Process (\S\ref{sec:moving_average_model})
 \end{itemize}
+
+\fist Time Series (\S\ref{sec:time_series})
+
 
 
 
@@ -12145,6 +12338,14 @@ Random Sequence (\S\ref{sec:random_sequence})
 \emph{Infinite Bernoulli Sequences} -- cf. \emph{Collectives} (Von Mises57); a
 solution to the ``Reference Class Problem'' of Frequentist Probability Theory;
 cf. (Martin-L\"of66)
+
+
+
+\paragraph{Bernoulli Scheme}\label{sec:bernoulli_scheme}\hfill
+
+or \emph{Bernoulli Shift}
+
+more than two possible outcomes
 
 
 
@@ -12374,9 +12575,10 @@ associated Probability Distributions (FIXME: clarify() are Stable Distributions
 \subsection{Stationary Process}\label{sec:stationary_process}
 % ------------------------------------------------------------------------------
 
-Stochastic Process for which the Unconditional Joint Probability Distribution
+Stochastic Process for which the Unconditional (i.e. no reference to any
+particular starting value) Joint Probability Distribution
 (\S\ref{sec:joint_probability}) does not change when shifted in Time (TODO:
-xref)
+clarify)
 
 \fist an Infinitely Exchangeable Sequence of Random Variables
 (\S\ref{sec:infinitely_exchangeable}) is Strictly Stationary (wiki)
@@ -12389,7 +12591,7 @@ xref)
 
 if a Stochastic Process has a Unit Root (\S\ref{sec:unit_root}), i.e. if $1$ is
 a Root of the Process's Characteristic Equation (FIXME: characteristic function
-???), then the Process is Non-stationary, but does not necessarily have a
+???), then the Process is Non-stationary, \emph{but} does not necessarily have a
 ``trend''
 
 \fist Stationarity assumption underlies many procedures in Time-series Analysis
@@ -12410,6 +12612,10 @@ minimum number of ``differences'' required to obtain a Covariance-stationary
 Series (\S\ref{sec:covariance_stationary})
 
 
+
+% ------------------------------------------------------------------------------
+\subsection{Cyclostationary Process}\label{sec:cyclostationary_process}
+% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{Unit Root Process}\label{sec:unit_root}
@@ -13083,6 +13289,8 @@ Tensor-valued Random Fields
 (MRF)
 
 Graphical Model (\S\ref{sec:graphical_model})
+
+Boltzmann Machines (\S\ref{sec:boltzmann_machine})
 
 
 

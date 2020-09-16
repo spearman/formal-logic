@@ -453,6 +453,29 @@ Occam's Razor, Epicurus' Principle
 \section{Signal Processing}\label{sec:signal_processing}
 % ==============================================================================
 
+``Signals and Systems'' -- electrical engineering; Input Signals and Output
+Signals and ``mathematical representations'' (Systems) between them
+
+\fist cf. Dynamical Systems (\S\ref{sec:dynamical_system}), Open Systems
+(\S\ref{sec:open_system})
+
+%FIXME: move the following to dynamical systems ???
+
+Discrete-time Systems -- Excitation (Input), Response (Output)
+(\S\ref{sec:impulse_response})
+
+Relaxed System -- Initial Condition $f(t_0-1) = 0$
+
+Static Discrete-time System -- Response depends at most on the current (not
+future or past) Input
+
+Dynamic Discrete-time System -- current Response can depend on past or future
+Input
+
+Continuous-time Systems
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Signal}\label{sec:signal}
 % ------------------------------------------------------------------------------
@@ -487,6 +510,10 @@ for any Event regardless of whether a Random Variable is being measured or not.
 \subsubsection{Continuous Signal}\label{sec:continuous_signal}
 
 \subsubsection{Discrete Signal}\label{sec:discrete_signal}
+
+\fist Time Series (\S\ref{sec:time_series})
+
+
 
 \subsubsection{Sampling Frequency}\label{sec:sampling_frequency}
 
@@ -605,6 +632,8 @@ Convolution (\S\ref{sec:convolution}) into Multiplication
 \fist Frequency Domain Analysis (Statistical Signal Processing
 \S\ref{sec:spectrum_analysis})
 
+\fist Frequency Response (\S\ref{sec:frequency_response})
+
 
 
 \subsubsection{Frequency Spectrum}\label{sec:frequency_spectrum}
@@ -666,8 +695,159 @@ viewed as White Noise Filtered by $s^{-H-\frac{1}{2}}$
 
 
 % ------------------------------------------------------------------------------
+\subsection{Impulse Response}\label{sec:impulse_response}
+% ------------------------------------------------------------------------------
+
+%FIXME: move to dynamical systems, filters ???
+
+\emph{Impulse Response Function (IRF)} $h(t)$ -- cf. \emph{Transfer Function}
+$H(s)$
+
+Green's Function (\S\ref{sec:greens_function})
+
+for a Linear Time-Invariant (LTI) System (\S\ref{sec:lti_system}), the IRF and
+the Transfer Function both fully define the Input/Output characteristics of the
+LTI System
+
+the Convolution (\S\ref{sec:convolution}) of an Input Signal with an Impulse
+Response gives the Output of an LTI System
+
+the Impulse Response is equivalent to the Inverse Laplace Transform
+(\S\ref{sec:laplace_transform}) of a Dynamical System's Transfer Function
+(Evolution Function \S\ref{sec:evolution_function})
+
+Acoustics -- Convolution Reverb; Impulse Response can be recorded from the
+Reverberation caused by an ideal Impulse (\S\ref{sec:impulse}) is played in an
+acoustic space or hardware reverberation unit
+
+
+
+\subsubsection{Impulse}\label{sec:impulse}
+
+Unit Impulse (Dirac Delta \S\ref{sec:dirac_delta})
+
+
+
+\paragraph{Impulse Train}\label{sec:impulse_train}\hfill
+
+Sampling Function (Dirac Comb \S\ref{sec:dirac_comb})
+
+Boltzmann Machines (\S\ref{sec:boltzmann_machine}) use a Boltzmann Distribution
+in their Sampling Function
+
+
+
+\subsubsection{Linear Response Function}\label{sec:linear_response}
+
+\subsubsection{Finite Impulse Response}\label{sec:fir}
+
+\subsubsection{Infinite Impulse Response}\label{sec:iir}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Phase Response}\label{sec:phase_response}
+% ------------------------------------------------------------------------------
+
+Linear Phase Filter (\S\ref{sec:linear_phase}) -- Phase Response is a Linear
+Function of Frequency-- all Frequency Components of the Input Signal are shifted
+in Time by the same constant amount (that is the Derivative of a Linear
+Function), viz. the Group Delay (\S\ref{sec:group_delay})
+
+
+
+\subsubsection{Group Delay}\label{sec:group_delay}
+
+measure of Time Distortion computed by Differentiating the Phase Response with
+respect to Frequency
+
+Linear Phase Filter (\S\ref{sec:linear_phase}) -- Phase Response is a Linear
+Function of Frequency-- all Frequency Components of the Input Signal are shifted
+in Time by the same constant amount (that is the Derivative of a Linear
+Function), viz. the Group Delay
+
+
+
+\subsubsection{Phase Delay}\label{sec:phase_delay}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Frequency Response}\label{sec:frequency_response}
+% ------------------------------------------------------------------------------
+
+\fist Frequency Domain Analysis (\S\ref{sec:spectrum_analysis})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Filter}\label{sec:signal_filter}
 % ------------------------------------------------------------------------------
+
+Time-invariant Systems (\S\ref{sec:tiv_system})
+
+Time-variant Systems (\S\ref{sec:time_variant_system})
+
+Discrete-time (Sampled):
+\begin{itemize}
+  \item Finite Impulse Response (FIR \S\ref{sec:fir})
+  \item Infinite Impulse Response (IIR \S\ref{sec:iir})
+\end{itemize}
+
+Continuous-time:
+\begin{itemize}
+  \item Passive Filter (\S\ref{sec:passive_filter})
+  \item Active Filter (\S\ref{sec:active_filter})
+\end{itemize}
+
+
+
+\subsubsection{Passive Filter}\label{sec:passive_filter}
+
+\subsubsection{Active Filter}\label{sec:active_filter}
+
+\subsubsection{Linear Filter}\label{sec:linear_filter}
+
+Linear Continuous-time Filter -- generally designed to \emph{remove} certain
+Frequencies
+
+Network Synthesis Filters:
+\begin{itemize}
+  \item Chebyshev Filter
+  \item Elliptic Filter
+  \item Butterworth Filter
+  \item Bessel Filter
+\end{itemize}
+
+Image Parameter Filters (``Wave Filters''):
+\begin{itemize}
+  \item Constant $k$ Filter
+  \item $m$-derived Filter
+\end{itemize}
+
+
+
+\subsubsection{Non-linear Filter}\label{sec:nonlinear_filter}
+
+\subsubsection{Causal Filter}\label{sec:causal_filter}
+
+Output does not depend on Future Input
+
+
+
+\subsubsection{Linear Phase Filter}\label{sec:linear_phase}
+
+Phase Response (\S\ref{sec:phase_response}) is a Linear Function of Frequency
+
+
+
+\paragraph{Sinc Filter}\label{sec:sinc_filter}\hfill
+
+Frequency Response is a Rectangular Function
+
+Sinc Function (\S\ref{sec:sinc_function})
+
+
 
 \subsubsection{Adaptive Filter}\label{sec:adaptive_filter}
 
@@ -680,6 +860,30 @@ Optimization
 Stochastic Gradient Descent (SGD \S\ref{sec:sgd}) method
 
 cf. Backpropagation (\S\ref{sec:backpropagation})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Moving Average}\label{sec:moving_average}
+% ------------------------------------------------------------------------------
+
+Moving-average Model (\S\ref{sec:moving_average_model})
+
+a type of Finite Impulse Response (\S\ref{sec:fir}) Filter (\S\ref{sec:filter})
+
+
+
+\subsubsection{Simple Moving Average (SMA)}\label{sec:sma}
+
+\subsubsection{Cumulative Moving Average (CMA)}\label{sec:cma}
+
+\subsubsection{Weighted Moving Average (WMA)}\label{sec:wma}
+
+Convolution (\S\ref{sec:convolution})
+
+
+
+\paragraph{Exponentially Weighted Moving Average (EWMA)}\label{sec:ewma}\hfill
 
 
 
@@ -784,6 +988,8 @@ Point Spread Function -- Convolution by a Gaussian ``spreading'' function
 techniques for characterizing and manipulting Signals with Statistics (cf.
 Entropy \S\ref{sec:entropy}) that vary in Time, e.g. \emph{Transient Signals}
 
+Non-stationary Signals
+
 \fist Quasiprobability Distributions
 (\S\ref{sec:quasiprobability_distribution})
 
@@ -791,24 +997,6 @@ Entropy \S\ref{sec:entropy}) that vary in Time, e.g. \emph{Transient Signals}
 
 \subsection{Time-Frequency Representation}
 \label{sec:time_frequency_representation}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Impulse Response}\label{sec:impulse_response}
-% ------------------------------------------------------------------------------
-
-Green's Function (\S\ref{sec:greens_function})
-
-Linear Time-Invariant (LTI) System (\S\ref{sec:lti_system})
-
-the Impulse Response is equivalent to the Inverse Laplace Transform
-(\S\ref{sec:laplace_transform}) of a Dynamical System's Transfer Function
-(Evolution Function \S\ref{sec:evolution_function})
-
-
-
-\subsubsection{Linear Response Function}\label{sec:linear_response}
 
 
 
@@ -842,6 +1030,8 @@ or \emph{Spectral Density Estimation (SDE)} or \emph{Frequency Domain Analysis}
 Periodic Functions (\S\ref{sec:periodic_function})
 
 Fourier Analysis (\S\ref{sec:fourier_analysis})
+
+\fist Frequency Response (\S\ref{sec:frequency_response})
 
 note that a Signal may have a ``White'' Frequency Spectrum but still be Serially
 Dependent (Mandelbrot97)
@@ -878,6 +1068,214 @@ given \emph{assumptions} about the number fo the Components
 \paragraph{Power Spectral Density (PSD)}\label{sec:psd}\hfill
 
 or \emph{Power Spectral Density (PSD)}
+
+
+
+% ==============================================================================
+\section{Time Series Analysis}\label{sec:time_series_analysis}
+% ==============================================================================
+
+%FIXME: should this section be re-categorized ???
+
+Ergodic Processes (\S\ref{sec:ergodic_process})
+
+\fist cf. Statistical Signal Processing (\S\ref{sec:statistical_signal})
+
+\fist Markov Models (\S\ref{sec:markov_model})
+
+Stationary Processes (\S\ref{sec:stationary_process}) -- Stationarity assumption
+underlies many procedures in Time-series Analysis
+
+if a Stochastic Process has a Unit Root (\S\ref{sec:unit_root}), i.e. if $1$ is
+a Root of the Process's Characteristic Equation (FIXME: characteristic function
+???), then the Process is Non-stationary, but does not necessarily have a
+``trend''
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Time Series}\label{sec:time_series}
+% -----------------------------------------------------------------------------
+
+Discrete-time Signal (\S\ref{sec:discrete_signal})
+
+Mandelbrot97:
+
+%FIXME: move these notes ???
+
+Model for ``Tail-driven'' variability
+
+Time Series $Z(t)$
+
+$L(t, T) = \ln Z(t+T) - \ln Z(t)$ -- assumed to follow an \emph{L-stable
+  Distribution}
+
+when successive $L(t, T)$ are Independent, $\ln Z(t)$ is said to follow an
+\emph{L-Stable Motion (LSM)} --FIXME: does ``successive'' mean for fixed $T$ and
+successive $t$ ???
+
+Exponent $\alpha \in [0, 2]$ -- in the case of ``Price Series'', usually
+$\alpha \in [1, 2]$, but not for certain prices or certain forms of income
+
+Wiener (Brownian) Motion (\S\ref{sec:wiener_process}) is L-Stable Motion with
+$\alpha = 2$
+
+generalized for $\alpha > 2$
+
+Model for ``Dependence-driven'' variability
+
+
+
+\subsubsection{Order of Integration}\label{sec:order_of_integration}
+
+Summary Statistic reporting the minimum number of ``differences'' required to
+obtain a Covariance-stationary Series (\S\ref{sec:covariance_stationary})
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Lag Operator}\label{sec:lag_operator}
+% -----------------------------------------------------------------------------
+
+or \emph{Backshift Operator}
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Lag Polynomial}\label{sec:lag_polynomial}
+% -----------------------------------------------------------------------------
+
+a Polynomial of Lag Operators
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Integrated Model}\label{sec:integrated_model}
+% -----------------------------------------------------------------------------
+
+cf. ARIMA
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Moving-average Model}\label{sec:moving_average_model}
+% -----------------------------------------------------------------------------
+
+Moving Average (\S\ref{sec:moving_average})
+
+cf. ARMA, ARIMA
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Autoregressive Model}\label{sec:autoregressive_model}
+% -----------------------------------------------------------------------------
+
+cf. ARMA, ARIMA
+
+cf. Regression Models (\S\ref{sec:regression_model})
+
+$AR(p)$ of Order $p$
+
+$X_t = c + \sum_{i=1}^p \varphi_i X_{t-i} + \varepsilon_t$
+
+where $\varphi_1, \ldots, \varphi_p$ are \emph{Parameters} of the Model, $c$ is
+Constant, and $\varepsilon_t$ is White Noise
+
+can be viewed as the output of an All-pole Infinite Impulse Response Filter with
+White Noise input
+
+the Autocorrelation Function (\S\ref{sec:autocorrelation_function}) of an
+$AR(p)$ Process is a Sum of decaying Exponentials:
+\[
+  \rho(\tau) = \sum_{k=1}^p a_k y_k^{-|\tau|}
+\]
+where $y_k$ are the roots of the Polynomial:
+\[
+  \phi(B) = 1 - \sum_{k=1}^p \varphi_k B^k
+\]
+where $B$ is the \emph{Backshift (Lag) Operator} (\S\ref{sec:lag_operator}),
+$\phi$ is the Function defining the Autoregression, and $\varphi_k$ are the
+Coefficients in the Autoregression;
+each Real Root contributes a component to the Autocorrelation Function that
+decays Exponentially, and each pair of Complex Conjugate Roots contributes an
+Exponentially Damped Oscillation
+
+\fist cf. Recurrent Neural Networks (RNNs \S\ref{sec:rnn})
+
+2018 - Le -
+\emph{A Purely Functional Typed Approach to Trainable Models (Part 2)} -
+\url{https://blog.jle.im/entry/purely-functional-typed-models-2.html}
+-- $AR(2)$ as a stateful model
+
+2018 - Le -
+\emph{A Purely Functional Typed Approach to Trainable Models (Part 3)} -
+\url{https://blog.jle.im/entry/purely-functional-typed-models-3.html}
+-- a general Autoregressive Model $AR(p)$ of any Order $p$ can be defined as a
+\emph{Lagged} Fully Connected Layer
+
+
+
+
+\subsubsection{Vector AutoRegression (VAR)}\label{sec:var}
+
+used to capture Linear Interdependencies among multiple Time Series
+
+
+
+\subsubsection{Non-linear Autoregressive Exogenous Model (NARX)}\label{sec:narx}
+
+\subsubsection{AutoRegressive Conditional Heteroskedasticity (ARCH)}
+\label{sec:arch}
+
+\subsubsection{Generalized AutoRegressive Conditional Heteroskedasticity (GARCH)}
+\label{sec:garch}
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{AutoRegressive Moving Average (ARMA)}\label{sec:arma}
+% -----------------------------------------------------------------------------
+
+% -----------------------------------------------------------------------------
+\subsection{AutoRegressive Integrated Moving Average (ARIMA)}\label{sec:arima}
+% -----------------------------------------------------------------------------
+
+\subsubsection{AutoRegressive Fractionally Integrated Moving Average (ARFIMA)}
+\label{sec:arfima}
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Doubly Stochastic Model}\label{sec:doubly_stochastic}
+% -----------------------------------------------------------------------------
+
+cf. Compound Probability Distribution (\S\ref{sec:compound_probability})
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Model-free Analysis}\label{sec:model_free_analysis}
+% -----------------------------------------------------------------------------
+
+Wavelet Transform (\S\ref{sec:wavelet_transform}) methods: Locally Stationary
+Wavelets, Wavelet Decomposed Neural Networks
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Multiresolution Model}\label{sec:multiresolution_model}
+% -----------------------------------------------------------------------------
+
+\subsubsection{Markov Switching MultiFractal (MSMF)}\label{sec:msmf}
+
+%FIXME: move this section ???
+
+a Stochastic Volatility Model
+
+\fist Multifractals (\S\ref{sec:multifractal_system})
+
+\fist Markov Models (\S\ref{sec:markov_model})
 
 
 
