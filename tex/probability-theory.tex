@@ -1762,6 +1762,12 @@ $X_1, \ldots, X_n$ are then called a \emph{Random Sample of Size $n$ from $F$}
 in Statistics it is commonly assumed that Observations (\S\ref{sec:observation})
 are IID
 
+(wiki):
+
+in Signal Processing (\S\ref{sec:signal_processing}) terms, \emph{Identically
+  Distributed} implies that the ``Signal Level must be Balanced'' (FIXME:
+xref/clarify) and \emph{Independent} implies a White Noise Spectrum (flat)
+
 
 
 \subsubsection{Homoscedasticity}\label{sec:homoscedasticity}
@@ -4602,6 +4608,14 @@ Outliers:  $Q1 - 1.5 \times IQR$, $Q3 + 1.5 \times IQR$
 
 
 
+\subparagraph{Rescaled Range}\label{sec:rescaled_range}\hfill
+
+\fist the Hurst Exponent (``Index of Long-range Dependence''
+\S\ref{sec:hurst_exponent}) is defined in terms of the Asymptotic behavior of
+the Rescaled Range as a function of the ``time span'' of a Time Series
+
+
+
 \paragraph{Covariance Matrix}\label{sec:covariance_matrix}\hfill
 
 \emph{Variance-Covariance Matrix} or \emph{Dispersion Matrix}
@@ -5116,30 +5130,7 @@ Covariance:
 if $X$ and $Y$ are Independent (\S\ref{sec:dependence}), then
 $Cov(X,Y) = \rho = 0$
 
-
-
-\subparagraph{Covariance Function}\label{sec:covariance_function}\hfill
-
-(or \emph{``Kernel''}, not to be confused with Window Functions
-\S\ref{sec:distribution_kernel} in Kernel Density Estimation)
-
-(wiki): the Covariance Function $C(x y)$ describes the ``Spatial or Temporal''
-Covariance of a Random Variable Process (\S\ref{sec:stochastic_process}) or
-Field (\S\ref{sec:random_field}) $Z(x)$ on a Domain $D$ at two
-``\emph{locations}'' $x$ and $y$:
-\[
-  C(x, y) := Cov(Z(x), Z(y)) = E[(Z(x) - E(Z(x))) (Z(y) - E(Z(y)))]
-\]
-the Covariance Function is called \emph{Autocovariance}
-(\S\ref{sec:autocovariance}) in:
-\begin{itemize}
-  \item Time Series (\S\ref{sec:time_series}) -- $x$ and $y$ are locations in
-    Time
-  \item Multivariate Random Fields (\S\ref{sec:multivariate_random_field})
-\end{itemize}
-
-\fist Cross-covariance (\S\ref{sec:cross_covariance}) -- Covariance between two
-different Random Variables at different locations
+\fist Covariance Function (Stochastic Processes \S\ref{sec:covariance_function})
 
 
 
@@ -5187,7 +5178,8 @@ Standard Deviation of $X$, and similarly for $w$ and $Y$
 
 \subparagraph{Correlation Coefficient}\label{sec:correlation_coefficient}\hfill
 
-\emph{Pearson Product-moment Correlation Coefficient}
+\emph{Bivariate Correlation} or \emph{Pearson Product-moment Correlation
+  Coefficient}
 
 $\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
 
@@ -5211,7 +5203,50 @@ Determination (\S\ref{sec:determination_coefficient})
 when Dependence decays more slowly than Exponential Decay
 (\S\ref{sec:exponential_decay})
 
+Spatial (\S\ref{sec:spatial_analysis}) and Time Series
+(\S\ref{sec:time_series_analysis}) Data
+
 cf. ``Memoryless-ness'' (\S\ref{sec:memoryless_distribution})
+
+
+
+\subparagraph{Index of Long-range Dependence}\label{sec:hurst_exponent}\hfill
+
+or \emph{Hurst Exponent}
+
+$H$
+
+a measure of Long-term Memory in Time Series (\S\ref{sec:time_series})
+
+relates to the Autocorrelations (\S\ref{sec:autocorrelation}) of Time Series and
+the ``rate'' at which the Autocorrelations decrease as the lag between pairs of
+values increases
+
+defined in terms of the Asymptotic behavior of the Rescaled Range
+(\S\ref{sec:rescaled_range}) as a function of the ``time span'' of a Time
+Series:
+\[
+  \expect\big(\frac{R(n)}{S(n)}\big) = Cn^H
+\]
+as the time span $n \to \infty$ where $C$ is a Constant and $R(n)$ is the Range
+of the first $n$ Cumulative Deviations from the Mean (FIXME: clarify) and $S(n)$
+is their Standard Deviation
+
+Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
+
+cf. Fractal Dimension (\S\ref{sec:fractal_dimension}) -- Hurst Exponent
+represents structure over asymptotically longer periods, Fractal Dimension
+represents structure over asymptotically shorter periods
+
+
+
+\subparagraph{Generalized Index of Long-range Dependence}
+\label{sec:generalized_hurst}\hfill
+
+$H(q)$
+
+when $H(q)$ is a Non-linear Function of $q$, the Time Series is a Multifractal
+System (\S\ref{sec:multifractal_system})
 
 
 
@@ -9074,6 +9109,10 @@ cf. Scale Analysis (\S\ref{sec:statistical_scale})
 \subparagraph{Detrended Correspondence Analysis}
 \label{sec:detrended_correspondence}\hfill
 
+\fist cf. Detrended Fluctuation Analysis (\S\ref{sec:detrended_fluctuation})
+
+
+
 \subparagraph{Canonical Correspondence Analysis}
 \label{sec:canonical_correspondence}\hfill
 
@@ -9488,11 +9527,12 @@ is maximized, neglecting the Marginal Distribution $f(x)$
 
 \paragraph{Kernel Method}\label{sec:kernel_method}\hfill
 
-\emph{the Kernel Trick}: using \emph{Kernel Functions} (\S\ref{sec:pd_kernel})
-enables Kernel Methods to operate in a high-dimensional \emph{Implicit Feature
-  Space} without having to compute the \emph{Coordinate} of the Data in that
-Space, instead by computing the Inner Products between the \emph{Images} of all
-\emph{pairs} of Data in the Feature Space (\S\ref{sec:feature_vector})
+\emph{the Kernel Trick}: using \emph{Kernel Functions} (Positive-definite
+Kernels \S\ref{sec:pd_kernel}) enables Kernel Methods to operate in a
+high-dimensional \emph{Implicit Feature Space} without having to compute the
+\emph{Coordinate} of the Data in that Space, instead by computing the Inner
+Products between the \emph{Images} of all \emph{pairs} of Data in the Feature
+Space (\S\ref{sec:feature_vector})
 
 (Jacot, Gabriel, Hongler 2018): at initialization, ANNs (\S\ref{sec:ann}) are
 equivalent to Gaussian Processes (\S\ref{sec:gaussian_process}) in the
@@ -11565,6 +11605,9 @@ Pooling (Weng et al.)
 2014 - Olah - \emph{Understanding Convolutions} -
   \url{http://colah.github.io/posts/2014-07-Understanding-Convolutions/}
 
+2016 - Radford, Metz, Chintala - \emph{Unsupervised Representation Learning with
+  Deep Convolutional Generative Adversarial Networks}
+
 Dilated (Atrous) Convolution
 
 
@@ -11823,6 +11866,9 @@ fixed Noise Distribution
 
 cf. Generative Stochstaic Network (GSN), Denoising Auto-encoders --
 (Bengio, et. al)
+
+2016 - Radford, Metz, Chintala - \emph{Unsupervised Representation Learning with
+  Deep Convolutional Generative Adversarial Networks}
 
 \asterism
 
@@ -12194,6 +12240,74 @@ resp.
 
 
 
+\subsubsection{Detrended Fluctuation Analysis}\label{sec:detrended_fluctuation}
+
+Peng et al. 1994
+
+Statistical Self-affinity (\S\ref{sec:self_affinity}) of a Signal
+(\S\ref{sec:signal}) or Time Series (\S\ref{sec:time_series})
+
+\fist cf. Detrended Correlation Analysis (\S\ref{sec:detrended_correspondence})
+
+Long-range Dependence Processes (\S\ref{sec:long_range_dependence})
+
+Autocorrelation (\S\ref{sec:autocorrelation})
+
+Pink ($1/f$) Noise (\S\ref{sec:pink_noise})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Covariance Function}\label{sec:covariance_function}\hfill
+% ------------------------------------------------------------------------------
+
+(or \emph{``Kernel''}, not to be confused with Window Functions
+\S\ref{sec:distribution_kernel} in Kernel Density Estimation)
+
+(wiki): the Covariance Function $C(x, y)$ describes the ``Spatial or Temporal''
+Covariance (\S\ref{sec:covariance}) of a Random Variable Process or Field
+(\S\ref{sec:random_field}) $Z(x)$ on a Domain $D$ at two ``\emph{locations}''
+$x$ and $y$:
+\[
+  C(x, y) := Cov(Z(x), Z(y)) = E[(Z(x) - E(Z(x))) \cdot (Z(y) - E(Z(y)))]
+\]
+
+the Covariance Function is called \emph{Autocovariance}
+(\S\ref{sec:autocovariance}) in:
+\begin{itemize}
+  \item Time Series (\S\ref{sec:time_series}) -- $x$ and $y$ are locations in
+    Time
+  \item Multivariate Random Fields (\S\ref{sec:multivariate_random_field})
+\end{itemize}
+
+Cross-covariance (\S\ref{sec:cross_covariance}) is the Covariance between two
+different Random Variables at different locations
+
+
+
+\subsubsection{Autocovariance}\label{sec:autocovariance}
+
+cf. Autocorrelation (\S\ref{sec:autocorrelation})
+%FIXME: move section?
+
+
+
+\subsubsection{Cross-covariance}\label{sec:cross_covariance}
+
+cf. Cross-correlation (\S\ref{sec:cross_correlation})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Autocorrelation Function}\label{sec:autocorrelation_function}
+% ------------------------------------------------------------------------------
+
+Autocorrelation (\S\ref{sec:autocorrelation})
+
+Autoregressive Models (\S\ref{sec:autoregressive_model})
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Stochastic Convergence}\label{sec:stochastic_convergence}
 % ------------------------------------------------------------------------------
@@ -12263,37 +12377,6 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 cf. Filtration (Abstract Algebra \S\ref{sec:filtration})
 
 Filtered Probability Space
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Autocovariance}\label{sec:autocovariance}
-% ------------------------------------------------------------------------------
-
-cf. Autocorrelation (\S\ref{sec:autocorrelation})
-%FIXME: move section?
-
-\fist Covariance Function (\S\ref{sec:covariance_function})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Cross-covariance}\label{sec:cross_covariance}
-% ------------------------------------------------------------------------------
-
-cf. Cross-correlation (\S\ref{sec:cross_correlation})
-
-\fist Covariance Function (\S\ref{sec:covariance_function})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Autocorrelation Function}\label{sec:autocorrelation_function}
-% ------------------------------------------------------------------------------
-
-Autocorrelation (\S\ref{sec:autocorrelation})
-
-Autoregressive Models (\S\ref{sec:autoregressive_model})
 
 
 
@@ -12414,11 +12497,20 @@ Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
 
 \paragraph{Fractional Brownian Motion}\label{sec:fractional_brownian}\hfill
 
+Integral of Gaussian Processes
+
 (\emph{fBm})
+
+Covariance Function:
+\[
+  \expect\big(B_H(t) B_H(s)\big) =
+    \frac{1}{2} (|t|^{2H} + |s|^{2H} - |t - s|^{2H})
+\]
 
 Mandelbrot, van Ness 1968 -- Model for prices that are ``Dependence-dominated''
 
-$H \in (0,1) \subset \reals$ -- ``Hurst index''
+$H \in (0,1) \subset \reals$ -- \emph{Hurst Exponent} (``Hurst Index''
+\S\ref{sec:hurst_exponent})
 
 $H = 1/2$ -- Wiener Process (Brownian Motion \S\ref{sec:wiener_process})
 
@@ -12435,12 +12527,19 @@ Fractional Brownian Motions
 (Mandelbrot96) Fractional Brownian Motion of Multifractal Time -- Model of
 Variation of Exchange Rates
 
+(wiki):
+
 Weyl Integral (\S\ref{sec:weyl_integral}) with respect to White Noise Measure
 (TODO: xref Bochner-Minlos Theorem for Nuclear Spaces)
 
 Fractional Brownian Motion can be viewed as White Noise Filtered by
 $s^{-H-\frac{1}{2}}$ (corresponding to Fractional Integration
 \S\ref{sec:differintegral})
+
+\emph{Simulation}
+
+1997 - Dietrich, Newsam - \emph{Fast and Exact Simulation of Stationary Gausian
+  Processes Through Circulant Embedding of the Covariance Matrix}
 
 
 
@@ -12498,6 +12597,8 @@ other Properties:
 
 \subparagraph{Brownian Bridge}\label{sec:brownian_bridge}\hfill
 
+(wiki):
+
 Continuous-time Stochastic Process $B(t)$ with Probability Distribution equal to
 the Conditional Probability Distribution of a Wiener Process $W(t)$, with the
 condition (when Standardized) that $W(T) = 0$:
@@ -12529,7 +12630,7 @@ GBM is Path Continuous
 
 
 
-\paragraph{L\'evy Process}\label{sec:levy_process}\hfill
+\subsubsection{L\'evy Process}\label{sec:levy_process}
 
 \fist cf. L\'evy Flight (\S\ref{sec:levy_flight})
 
@@ -12538,7 +12639,7 @@ Wiener Process (\S\ref{sec:wiener_process}), Poisson Process
 
 
 
-\subparagraph{Cauchy Process}\label{sec:cauchy_process}\hfill
+\paragraph{Cauchy Process}\label{sec:cauchy_process}\hfill
 
 \fist cf. Cauchy Flight (\S\ref{sec:cauchy_flight})
 

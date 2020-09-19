@@ -512,17 +512,62 @@ than $1$
 
 \paragraph{Hypergeometric Function}\label{sec:hypergeometric_function}\hfill
 
+defined by the (Hypergeometric) Power Series (\S\ref{sec:power_series}):
+\[
+  _2F_1 (a, b; c; z) = \sum_{n=0}^\infty \frac{(a)_n (b)_n z^n}{(c)_n n!}
+\]
+for $|z| < 1$ and $(q)_n$ is the Rising Factorial (\S\ref{sec:factorial_power});
+undefined or Infinite if $c$ is a Non-positive Integer
+
+if either $a$ or $b$ is a Non-positive Integer the Series ``terminates'' (FIXME:
+clarify) and the Function reduces to a Polynomial:
+\[
+  _2F_1 (-m, b; c; z) = \sum_{n=0}^m (-1)^n \binom{m}{n} \frac{(b)_n}{(c)_n} z^n
+\]
+
+\fist Generalized Hypergeometric Series
+(\S\ref{sec:generalized_hypergeometric_function})
+$_pF_q$
+
 is a Solution of a Second-order Linear ODE
 (\S\ref{sec:linear_differential_equation})
-
-Hypergeometric Series (\S\ref{sec:hypergeometric_series})
 
 Strict Subset of the Holonomic Functions (\S\ref{sec:holonomic_function})
 
 
 
+\subparagraph{Beta Function}\label{sec:beta_function}\hfill
+
+Euler Integral (\S\ref{sec:hypergeometric_integral})
+
+relation to the Gamma Function (\S\ref{sec:gamma_function}):
+\[
+  B(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x + y)}
+\]
+
+
+
+\subparagraph{Hypergeometric Integral}\label{sec:hypergeometric_integral}\hfill
+
+Integral (\S\ref{sec:integral})
+
+Euler Hypergeometric Integral:
+\[
+  B(b, c-b) _2F_1 (a, b; c; z) =
+    \int_0^1 x^{b-1}(1-x)^{c-b-1}(1 - zx)^{-a} \diffy{x}
+\]
+where $B$ is the Beta Function (\S\ref{sec:beta_function}) and $\Re(c) > \Re(b)
+> 0$ and $z \in [1, \infty)$; used in methods of generating Fractional Brownian
+  Motion (\S\ref{sec:fractional_brownian})
+
+Barnes Hypergeometric Integral
+
+
+
 \subparagraph{Generalized Hypergeometric Function}
 \label{sec:generalized_hypergeometric_function}\hfill
+
+$_pF_q$
 
 
 
@@ -571,6 +616,10 @@ the Space of Power Series is Isomorphic to $\reals^\infty$
 
 an \emph{Analytic Function} (\S\ref{sec:analytic_function}) is a Function that
 can be expressed as a Convergent Power Series
+
+\begin{itemize}
+  \item Hypergeometric Functions (\S\ref{sec:hypergeometric_function})
+\end{itemize}
 
 
 
@@ -1557,6 +1606,11 @@ appears in definitions of $t$-distributions (\S\ref{sec:t_distribution}), Gamma
 Distributions (\S\ref{sec:gamma_distribution}), Beta Distributions
 (\S\ref{sec:beta_distribution})
 
+cf. Beta Function (\S\ref{sec:beta_function}):
+\[
+  B(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x + y)}
+\]
+
 
 
 % ------------------------------------------------------------------------------
@@ -1700,11 +1754,17 @@ an example of an Algebraic Manifold (\S\ref{sec:algebraic_manifold})
 \subsection{Countour Integration}\label{sec:contour_integration}
 % ------------------------------------------------------------------------------
 
+cf. Contour (\S\ref{sec:contour})
+
 Residue Calculus (Meromorphic Functions \S\ref{sec:meromorphic_residue}) -- a
 Residue is a Complex Number proportional to the Countour Integral of a
 Meromorphic Function along a path enclosing one of its Singularities
 
 \emph{Residue Theorem}
+
+
+
+\subsubsection{Pochhammer Contour}\label{sec:pochhammer_contour}
 
 
 
@@ -2539,7 +2599,8 @@ Convolution is the same as Cross-correlation with the ``pulse'' Function $g$
 Similarity Measure (\S\ref{sec:similarity_measure}) of two Series as a Function
 of the Displacement of one relative to the other
 
-\fist cf. Correlation (Statistics \S\ref{sec:statistical_correlation})
+\fist cf. Correlation (Statistics \S\ref{sec:statistical_correlation}),
+Cross-correlograms (\S\ref{sec:correlogram})
 
 for Continuous Signals the Cross-correlation Operator is the Adjoint Operator
 of the Convolution (\S\ref{sec:convolution}) Operator
@@ -2573,6 +2634,12 @@ Exponentials
 
 \fist Autocovariance (\S\ref{sec:autocovariance})
 %FIXME: move section here ???
+
+Autocorrelograms (\S\ref{sec:correlogram})
+
+Hurst Exponent (Long-range Dependence \S\ref{sec:hurst_exponent}) -- relates to
+the rate at which the Autocorrelations of a Time Series decrease as the lag
+between pairs of values increases
 
 
 
@@ -2745,6 +2812,8 @@ study of Linear Operators (\S\ref{sec:linear_operator}) on Function Spaces
 \subsubsection{Positive-definite Kernel}\label{sec:pd_kernel}
 
 generalization of Positive-definite Function or Positive-definite Matrix
+
+\fist Integral Kernel (\S\ref{sec:integral_kernel})
 
 Kernel Function \fist Kernel Methods (Linear Classification
 \S\ref{sec:kernel_method})
@@ -3299,6 +3368,8 @@ classical Finite Difference Approximation
 \subsection{Numerical Integration}\label{sec:numerical_integration}
 % ------------------------------------------------------------------------------
 
+or \emph{Quadrature}
+
 methods for obtaining Numerical approximations to the solutions of
 Time-dependent Ordinary (\S\ref{sec:differential_equation}) and Partial
 (\S\ref{sec:pde}) Differential Equations
@@ -3326,6 +3397,8 @@ Integration (\S\ref{sec:verlet_integration})
 Higher-order Methods
 
 
+
+\subsubsection{Gaussian Quadrature}\label{sec:gaussian_quadrature}
 
 \subsubsection{Explicit Integration Methods}\label{sec:explicit_integration}
 
@@ -5887,6 +5960,8 @@ Calculus
 Integrals -- Numerical Integration (\emph{Quadrature}
 \S\ref{sec:numerical_integration})
 
+\fist Hypergeometric Integral (\S\ref{sec:hypergeometric_integral})
+
 \fist It\^o Integral (Stochastic Calculus \S\ref{sec:ito_integral})
 
 is a Linear Operator (\S\ref{sec:linear_operator}) --FIXME: clarify
@@ -6241,11 +6316,20 @@ Variables
 Transformations from the Function Space of one Geometrical Space to another
 (e.g. Radon Transformation)
 
+\begin{itemize}
+  \item Fourier Transform (\S\ref{sec:fourier_transform})
+  \item Laplace Transform (\S\ref{sec:laplace_transform})
+  \item Legendre Transform (\S\ref{sec:legendre_transform})
+  \item ... MORE
+\end{itemize}
+
 
 
 \paragraph{Integral Kernel}\label{sec:integral_kernel}\hfill
 
 or \emph{Kernel Function} or \emph{Nucleus}
+
+\fist Positive-definite Kernel (\S\ref{sec:pd_kernel})
 
 \fist Kernel (Statistics \S\ref{sec:distribution_kernel})
 
@@ -6615,6 +6699,8 @@ $f : \reals \rightarrow \reals^n$
 % ------------------------------------------------------------------------------
 
 Contour Map
+
+cf. Contour Integration (\S\ref{sec:contour_integration})
 
 
 

@@ -503,6 +503,11 @@ Variable or Signal is the amount of Information (\S\ref{sec:information})
 for any Event regardless of whether a Random Variable is being measured or not.
 (wiki)
 
+Independend & Identically Distributed (IID \S\ref{sec:iid}) Signals --
+\emph{Identically Distributed} implies that the ``Signal Level must be
+Balanced'' (FIXME: xref/clarify) and \emph{Independent} implies a White Noise
+Spectrum (flat)
+
 
 
 \subsubsection{Transient}\label{sec:transient}
@@ -674,11 +679,41 @@ Statistical Independence
 
 (wiki):
 
+White Noise Vectors -- the Covariance Matrix $R$ of the Components of a White
+Noise Vector $\{ w_t \}$ of length $n$ is an $n \times n$ Diagonal Matrix where
+each Diagonal Element $R_{ii}$ is the Variance of the Component $w_i$, and the
+Correlation Matrix must ben the $n \times n $ Identity Matrix
+
+the Power Spectrum of a White Noise Vector is the Expected Value of the Squared
+Modulus (Absolute Value) of each Coefficients of the Fourier Transform $W$:
+\[
+  \expect(|W_i|^2)
+\]
+for Non-Gaussian White Noise Vectors, the Fourier Coefficients $W_i$ will not be
+completely Independent of each other
+
 Brownian Motion (Wiener Process \S\ref{sec:wiener_process}) can be viewed as
 White Noise Filtered by $s^{-1}$
 
 Fractional Brownian Motion (\S\ref{sec:fractional_brownian_motion}) can be
-viewed as White Noise Filtered by $s^{-H-\frac{1}{2}}$
+viewed as White Noise Filtered by $s^{-H-\frac{1}{2}}$;
+Weyl Integral (\S\ref{sec:weyl_integral}) with respect to White Noise Measure
+(TODO: xref Bochner-Minlos Theorem for Nuclear Spaces)
+
+
+
+\paragraph{Gaussian White Noise}\label{sec:gaussian_white_noise}\hfill
+
+any Orthogonal Transformation of a Gaussian White Noise Vector results in a
+Gaussian White Noise Vector
+
+under most types of Discrete Fourier Transform (FFT, Hartley), the Transform of
+$\{ w_t \}$ will be a Gaussian White Noise Vector, i.e. the $n$ Fourier
+Coefficients will be Independent Gaussian Variables with zero Mean and the same
+Variance $\sigma^2$
+
+the Power Spectrum of a Gaussian White Noise Vector is constant $P_i = \sigma^2$
+for all $i$ where $i$ are the $n$ Fourier Coefficients
 
 
 
@@ -843,9 +878,11 @@ Phase Response (\S\ref{sec:phase_response}) is a Linear Function of Frequency
 
 \paragraph{Sinc Filter}\label{sec:sinc_filter}\hfill
 
-Frequency Response is a Rectangular Function
+\emph{Ideal Low-pass Filter}
 
-Sinc Function (\S\ref{sec:sinc_function})
+Frequency Response is a Rectangular Function and is a ``Brick-wall Filter''
+
+Time-domain Impulse Response is the Sinc Function (\S\ref{sec:sinc_function})
 
 
 
@@ -1146,6 +1183,16 @@ or \emph{Backshift Operator}
 % -----------------------------------------------------------------------------
 
 a Polynomial of Lag Operators
+
+
+
+% -----------------------------------------------------------------------------
+\subsection{Correlogram}\label{sec:correlogram}
+% -----------------------------------------------------------------------------
+
+Cross-correlogram (\S\ref{sec:cross_correlation})
+
+Autocorrelogram (\S\ref{sec:autocorrelation})
 
 
 
