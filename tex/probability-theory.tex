@@ -589,6 +589,8 @@ Variables using only Conditional Probabilities
 
 \fist Negative Probability (\S\ref{sec:negative_probability})
 
+\fist Conditional Event Algebra (\S\ref{sec:conditional_event_algebra})
+
 (Witten18): Quantum Information Theory doesn't have a good analog to defining a
 Conditional Probability Distribution as in Classical Information Theory, but
 does have an analog of \emph{Strong Subadditivity of Entropy}
@@ -1767,6 +1769,13 @@ are IID
 in Signal Processing (\S\ref{sec:signal_processing}) terms, \emph{Identically
   Distributed} implies that the ``Signal Level must be Balanced'' (FIXME:
 xref/clarify) and \emph{Independent} implies a White Noise Spectrum (flat)
+
+a Sequence of IID Random Variables can be seen as a Discrete-time L\'evy Process
+(\S\ref{sec:levy_process}): a Stochastic Process with Independent, Identically
+Distributed displacements in pairaise Disjoint Time Intervals
+
+many L\'evy Processes can be seen as \emph{Limits} of IID Variables (e.g. Wiener
+Process as the Limit of the Simple Random Walk)
 
 
 
@@ -6388,6 +6397,8 @@ Fitting a Graphical Model to Discrete Data \fist Pairwise Markov Graph
   \item Variational AutoEncoders (VAEs \S\ref{sec:vae}) -- Directed
     Probabilistic Graphical Models (DPGM) with Posterior Distribution
     Approximated by a Neural Network
+  \item Deep Belief Networks (DBNs \S\ref{sec:dbn}) -- Generative Models
+    composed from Unsupervised Networks (RBMs or Autoencoders)
 \end{itemize}
 
 
@@ -7271,6 +7282,10 @@ time
 
 
 \paragraph{Kernel Density Estimation (KDE)}\label{sec:kde}\hfill
+
+\emph{Parzen-Rozenblatt Window Method} (Signal Processing)
+
+Non-parametric Estimation of the PDF of a Random Variable
 
 Estimation of Distribution from Sample Points by Convolution
 (\S\ref{sec:convolution}) with a \emph{Kernel Function}
@@ -9158,6 +9173,8 @@ Order Statistics (\S\ref{sec:order_statistic})
 
 Rank Statistics (\S\ref{sec:rank_statistic})
 
+Kernel Density Estimation (\S\ref{sec:kde})
+
 
 
 % ==============================================================================
@@ -9199,6 +9216,8 @@ Parameters set before Learning Algorithm begins
 \subsubsection{Training Dataset}\label{sec:training_dataset}
 
 examples used to initially \emph{Fit} the Parameters of a Statistical Model
+
+\emph{Ground Truth} (FIXME)
 
 cf. Statistical Sample (\S\ref{sec:sample}), Dataset (\S\ref{sec:dataset})
 
@@ -9409,6 +9428,12 @@ $p_{model}(x)$ without explicitly defining it (FIXME: clarify)
 \subparagraph{Energy-Based Model (EBM)}\label{sec:ebm}\hfill
 
 Boltzmann Machine (\S\ref{sec:boltzmann_machine})
+
+
+
+\subparagraph{Deep Belief Network (DBN)}\label{sec:dbn}\hfill
+
+composed from Unsupervised Networks (RBMs, Autoencoders)
 
 
 
@@ -10879,8 +10904,10 @@ Regularization (\S\ref{sec:regularization})
 
 \paragraph{Ridge Regression}\label{sec:ridge_regression}\hfill
 
-particular type of Tikhonov Regularization (\S\ref{sec:tikhonov_regularization})
-useful to mitigate Multicollinearity (\S\ref{sec:multicollinearity})
+or \emph{Weight Decay}
+
+particular type of Tikhonov Regularization useful to mitigate Multicollinearity
+(\S\ref{sec:multicollinearity})
 
 
 
@@ -11605,10 +11632,17 @@ Pooling (Weng et al.)
 2014 - Olah - \emph{Understanding Convolutions} -
   \url{http://colah.github.io/posts/2014-07-Understanding-Convolutions/}
 
+2015 - Springenberg, Dosovitskiy, Brox, Riedmiller -
+\emph{Striving for Simplicity: The All Convolutional Net}
+-- Model without Max Pooling (including Deconvolutional Layers)
+
 2016 - Radford, Metz, Chintala - \emph{Unsupervised Representation Learning with
-  Deep Convolutional Generative Adversarial Networks}
+  Deep Convolutional Generative Adversarial Networks} -- DCGANs
+(\S\ref{sec:gan})
 
 Dilated (Atrous) Convolution
+
+Pooling -- ``$p$-norm Subsampling'' (\S\ref{sec:downsampling})
 
 
 
@@ -11671,9 +11705,15 @@ Semi-restricted Boltzmann Machine (SRBM)
 
 Generative Models with Explicit, Approximate Density
 
+Deep Belief Network (DBN \S\ref{sec:dbn})
+
 
 
 \subparagraph{Restricted Boltzmann Machine (RBM)}\label{sec:rbm}\hfill
+
+Contrastive Divergence training
+
+Encoder/Decoders share weights
 
 
 
@@ -11796,11 +11836,14 @@ GPT-2: Unsupervised (Generative) Transformer Language Model
 
 \subsubsection{Generative Stochastic Network (GSN)}\label{sec:gsn}
 
-2014 - Bengio, Thiboudeau-Laufer, Alain, Yosinski -
-\emph{Deep generative stochastic networks}
-
 2013 - Bengio, Yao, Alain, Vincent -
 \emph{Generalized denoising auto-encoders as generative models}
+
+2014 - Bengio, Thibodeau-Laufer, Yosinski -
+\emph{Deep generative stochastic networks trainable by backprop}
+
+2014 - Bengio, Thiboudeau-Laufer, Alain, Yosinski -
+\emph{Deep generative stochastic networks}
 
 
 
@@ -11868,7 +11911,7 @@ cf. Generative Stochstaic Network (GSN), Denoising Auto-encoders --
 (Bengio, et. al)
 
 2016 - Radford, Metz, Chintala - \emph{Unsupervised Representation Learning with
-  Deep Convolutional Generative Adversarial Networks}
+  Deep Convolutional Generative Adversarial Networks} -- DCGANs
 
 \asterism
 
@@ -12632,10 +12675,22 @@ GBM is Path Continuous
 
 \subsubsection{L\'evy Process}\label{sec:levy_process}
 
+Independent, Stationary Increments: displacements in pairwise Disjoint Time
+Intervals are Independent, and Identically Distributed
+
+&#x261e; a Sequence of IID (\S\ref{iid}) Random Variables can be seen as a
+Discrete-time L\'evy Process; many L\'evy Processes can be seen as \emph{Limits}
+of IID Variables (e.g. Wiener Process as the Limit of the Simple Random Walk)
+
 \fist cf. L\'evy Flight (\S\ref{sec:levy_flight})
 
-Wiener Process (\S\ref{sec:wiener_process}), Poisson Process
-(\S\ref{sec:poisson_process})
+\begin{itemize}
+  \item Wiener Process (\S\ref{sec:wiener_process})
+  \item Poisson Process (\S\ref{sec:poisson_process})
+\end{itemize}
+
+aside from ``Brownian Motion with Drift'', all other proper (Non-deterministic)
+L\'evy Processes have \emph{Discontinuous Paths}
 
 
 
@@ -13412,6 +13467,14 @@ a 1D GRF is a Gaussian Process (\S\ref{sec:gaussian_process})
 
 
 \subsubsection{Brownian Map}\label{sec:brownian_map}
+
+\url{https://johncarlosbaez.wordpress.com/2020/09/19/the-brownian-map/}
+
+Causal Dynamical Triangulations -- approach to Quantum Gravity
+
+\url{http://www.normalesup.org/~bettinel/simul.html}
+
+
 
 \subsubsection{Multivariate Random Field}\label{sec:multivariate_random_field}
 
