@@ -1777,6 +1777,11 @@ Distributed displacements in pairaise Disjoint Time Intervals
 many L\'evy Processes can be seen as \emph{Limits} of IID Variables (e.g. Wiener
 Process as the Limit of the Simple Random Walk)
 
+Stable Probability Distributions (\S\ref{sec:stable_distribution}) are
+``Attractors'' for ``properly normed'' Sums of IID Random Variables-- Central
+Limit Theorem (\S\ref{sec:central_limit_theorem}): the Normal Distribution is
+the ``properly normed'' Sum of a Set of Random Variables with Finite Variance
+
 
 
 \subsubsection{Homoscedasticity}\label{sec:homoscedasticity}
@@ -1970,6 +1975,9 @@ change of \emph{Location} rather than Scale
 
 from an Exponentially Distributed (\S\ref{sec:exponential_distribution}) $V$, a
 Scaling $U$ is obtained by $U = e^V$
+
+\fist $L$-Stable Motion (LSM \S\ref{sec:lsm}) -- Integration of a Difference
+Stationary Process of Independent and Scaling Random Variables
 
 
 
@@ -2395,6 +2403,9 @@ Mean has approximately a Normal Distribution for large $n$
       \int_{-\infty}^z \frac{1}{\sqrt{2\pi}}e^{-x^2/2} dx
   \]
 }
+
+\fist if the Random Variables do not have Finite Variance then the Limit may be
+a Stable Distribution (\S\ref{sec:stable_distribution}) that is not Normal
 
 \emph{Berry-Ess\'een Inequality}
 
@@ -3411,7 +3422,13 @@ any Non-degenerate Stable Distribution has a Smooth (Infinitely Differentiable)
 Probability Density Function
 
 a Stable Process (\S\ref{sec:stable_process}) is a Stochastic Process for which
-associated Probability Distributions (FIXME: clarify) are Stable Distributions
+associated Probability Distributions (FIXME: clarify) are Stable Distributions;
+cf. $L$-Stable Motion (LSM \S\ref{sec:lsm})
+
+Stable Probability Distributions are ``Attractors'' for ``properly normed'' Sums
+of IID Random Variables (\S\ref{sec:iid})-- Central Limit Theorem
+(\S\ref{sec:central_limit_theorem}): the Normal Distribution is the ``properly
+normed'' Sum of a Set of Random Variables with Finite Variance
 
 
 
@@ -3959,7 +3976,8 @@ assumed that Observations are IID
 \fist cf. \emph{Statistical Randomness} (\S\ref{sec:statistical_randomness}),
 \emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness})
 
-\fist Monte Carlo Simulation (\S\ref{sec:monte_carlo})
+\fist Monte Carlo Simulation (\S\ref{sec:monte_carlo}) -- Computational
+Algorithms using repeated Random Sampling
 
 \fist Random Assignment (Counterfactual Causal Inference
 \S\ref{sec:counterfactual})
@@ -4623,6 +4641,22 @@ Outliers:  $Q1 - 1.5 \times IQR$, $Q3 + 1.5 \times IQR$
 \S\ref{sec:hurst_exponent}) is defined in terms of the Asymptotic behavior of
 the Rescaled Range as a function of the ``time span'' of a Time Series
 
+\emph{R/S Analysis}
+
+Estimation of Hurst Exponent
+
+Range $R(n)$
+
+Standard Deviation $S(n)$
+
+Rescaled Range $R(n) / S(n)$
+
+(Mandelbrot97)
+
+robust with respect to Infinite Variance
+
+cf. ``Market Efficiency''-- Dependence ($J > 0.5$) implies exogenous factors
+
 
 
 \paragraph{Covariance Matrix}\label{sec:covariance_matrix}\hfill
@@ -5215,6 +5249,8 @@ when Dependence decays more slowly than Exponential Decay
 Spatial (\S\ref{sec:spatial_analysis}) and Time Series
 (\S\ref{sec:time_series_analysis}) Data
 
+\fist Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
+
 cf. ``Memoryless-ness'' (\S\ref{sec:memoryless_distribution})
 
 
@@ -5246,6 +5282,20 @@ Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
 cf. Fractal Dimension (\S\ref{sec:fractal_dimension}) -- Hurst Exponent
 represents structure over asymptotically longer periods, Fractal Dimension
 represents structure over asymptotically shorter periods
+
+Rescaled Range (R/S) Analysis -- Estimation of Hurst Exponent
+
+Range $R(n)$
+
+Standard Deviation $S(n)$
+
+Rescaled Range $R(n) / S(n)$
+
+(Mandelbrot97)
+
+robust with respect to Infinite Variance
+
+cf. ``Market Efficiency''-- Dependence ($J > 0.5$) implies exogenous factors
 
 
 
@@ -6961,6 +7011,8 @@ Likelihood Intervals (TODO)
 Fiducial Intervals (TODO)
 
 Tolerance Interval (TODO)
+
+Stochastic Asset/Investment Models
 
 
 
@@ -8715,7 +8767,7 @@ dual of Linear Quadratic Regulation (LQR \S\ref{sec:lqr})
 \subsection{Predictive Inference}\label{sec:predictive_inference}
 % ------------------------------------------------------------------------------
 
-cf. ``Predictive Analytics''
+cf. Predictive Analytics (\S\ref{sec:predictive_analytics})
 
 \fist cf. Regression Analysis (\S\ref{sec:regression_analysis})
 
@@ -8725,9 +8777,18 @@ $\hat{y}$
 
 \subsubsection{Predictive Model}\label{sec:predictive_model}
 
+\emph{Predictive Modeling}
+
 cf. Detection Theory (\emph{Signal Recovery}) %TODO
 
+Classification (\S\ref{sec:classification})
+
 Cross-validation (\S\ref{sec:cross_validation})
+
+Algorithmic Trading, Backtesting
+
+cf. Scenario Analysis (\S\ref{sec:scenario_analysis}): based on
+\emph{hypothetical} Data, not historical Data
 
 
 
@@ -9101,6 +9162,8 @@ Dimensionality Reduction (\S\ref{sec:dimensionality_reduction})
 
 cf. Factor Analysis (\S\ref{sec:factor_analysis})
 
+cf. Dynamic Mode Decomposition (\S\ref{sec:dmd})
+
 
 
 \paragraph{Multidimensional Scaling}\label{sec:multidimensional_scaling}\hfill
@@ -9249,8 +9312,10 @@ Dataset
 cf. Parameter Estimation (\S\ref{sec:estimation_theory}), Feature Selection
 (\S\ref{sec:feature_selection})
 
-example of \emph{Pattern Recognition} (assignment of some Output Value to a
-given Input Value), other examples are Regression Analysis
+\fist Predictive Modeling (\S\ref{sec:predictive_modeling})
+
+Classification is an example of \emph{Pattern Recognition} (assignment of some
+Output Value to a given Input Value), other examples are Regression Analysis
 (\S\ref{sec:regression_analysis}) and Cluster Analysis (Unsupervised Learning
 \S\ref{sec:cluster_analysis})
 
@@ -10964,6 +11029,14 @@ Models
 
 \subsubsection{Hierarchical Clustering}\label{sec:hierarchical_clustering}
 
+\subsubsection{Competitive Learning}\label{sec:competitive_learning}
+
+\emph{Hebbian Learning}, \emph{Errorless Learning}
+
+Self-Organizing Feature Maps (\S\ref{sec:sofm})
+
+
+
 \subsubsection{Dimensionality Reduction}\label{sec:dimensionality_reduction}
 
 Feature Selection
@@ -10971,6 +11044,24 @@ Feature Selection
 Feature Extraction
 
 Principal Component Analysis (PCA \S\ref{sec:pca})
+
+
+
+\paragraph{Dynamic Mode Decomposition (DMD)}\label{sec:dmd}\hfill
+
+Composition Operator (Koopman Operator \S\ref{sec:composition_operator})
+
+cf. PCA (\S\ref{sec:pca})
+
+\fist Reservoir Computing (\S\ref{sec:reservoir_computing})
+
+
+
+\paragraph{Self-Organizing Feature Map (SOFM)}\label{sec:sofm}\hfill
+
+ANNs (\S\ref{sec:ann}) using \emph{Competitive Learning}
+(\S\ref{sec:competitive_learning}) instead of Error-correction Learning
+(Backpropagation)
 
 
 
@@ -11054,6 +11145,9 @@ where $\sigma$ is a Smooth Function, often:
 Stochastic Gradient Descent (SGD \S\ref{sec:sgd}) -- \emph{de facto} standard
 Algorithm for training ANNs
 
+\fist cf. Self-Organizing Feature Maps (\S\ref{sec:sofm}) -- ANNs trained using
+(Unsupervised) Competitive Learning (\S\ref{sec:competitive_learning})
+
 (Jacot, Gabriel, Hongler 2018): at initialization, ANNs (\S\ref{sec:ann}) are
 equivalent to Gaussian Processes (\S\ref{sec:gaussian_process}) in the
 ``Infinite-width'' limit, connecting them to \emph{Kernel Methods}
@@ -11085,6 +11179,9 @@ can also be described by a Kernel
 
 Neural Networks can be viewed as a generalization of Logistic Regression
 (\S\ref{sec:logistic_regression})
+
+2018 - Penkovsky - \emph{10 Days of Grad: Deep Learning From First Principals} -
+\url{https://penkovsky.com/neural-networks/}
 
 \asterism
 
@@ -11303,6 +11400,9 @@ Batch methods:
 
 
 \paragraph{Backpropagation}\label{sec:backpropagation}\hfill
+
+\emph{Error-correction Learning} -- cf. Competitive Learning
+(\S\ref{sec:competitive_learning})
 
 1982 - Werbos -
 \emph{Applications of Advances in Nonlinear Sensitivity Analysis}
@@ -11728,6 +11828,13 @@ special case of Recursive Neural Network with structure of a \emph{linear chain}
 
 BackPropagation Through Time (BPTT \S\ref{sec:bptt})
 
+RNNs having internal State makes them equivalent to general computations rather
+than one-way mappings (cf. Feed-forward Neural Networks and similar)
+--\url{https://penkovsky.com/neural-networks/day1/#fn:fn-6}
+
+1999 - Tino, Dorffner - \emph{Recurrent Neural Networks with Iterated Function
+  System Dynamics} -- IFS (\S\ref{sec:ifs})
+
 \asterism
 
 2015 - Karpathy - \emph{The Unreasonable Effectiveness of Recurrent Neural
@@ -11815,7 +11922,41 @@ $0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0$
 
 
 
-\subsubsection{Residual neural network (ResNet)}\label{sec:resnet}
+\paragraph{Reservoir Computing}\label{sec:reservoir_computing}\hfill
+
+2017 - Penkovsky - \emph{Theory and Modeling of Complex Nonlinear Delay Dynamics
+  Applied to Neuromorphic Computing}
+
+\emph{Time-delay Systems} (Delay Differential Equations
+\S\ref{sec:time_delay_system})
+
+2020 - Chen, Nurdin, Yamamoto - \emph{Temporal Information Processing on Noisy
+  Quantum Computers}
+
+2020 - Bollt - \emph{On Explaining the Surprising Success of Reservoir Computing
+  Forecaster of Chaos?} - \url{https://www.youtube.com/watch?v=GOeAcJvdoOU}:
+
+\begin{itemize}
+  \item Universal Machine Learning
+  \item Vector Auto-regressive Modelling (\S\ref{sec:var})
+  \item Dynamic Mode Decomposition (DMD \S\ref{sec:dmd})
+\end{itemize}
+
+Delay Embedding Theorem (\S\ref{sec:delay_embedding}) -- classical approach to
+predicting Chaotic behavior
+
+
+
+\subparagraph{Echo State Network (ESN)}\label{sec:esn}\hfill
+
+\subparagraph{Liquid-State Machine (LSM)}\label{sec:liquid_state}\hfill
+
+\subparagraph{Fractal Prediction Machine}
+\label{sec:fractal_prediction_machine}\hfill
+
+
+
+\subsubsection{Residual Neural Network (ResNet)}\label{sec:resnet}
 
 \emph{Skip Connections}
 
@@ -12488,6 +12629,9 @@ Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc})
 ``\emph{Memoryless-ness}'' (cf. Long Memory or Long-range Dependence
 \S\ref{sec:long_range_dependence})
 
+Mandelbrot97: a High-dimensional Process could be Markovian, while having
+low-dimensional projections that need not be Markovian
+
 
 
 \subsubsection{Scaling Limit}\label{sec:scaling_limit}
@@ -12540,7 +12684,7 @@ Gaussain Process Regression (Kriging \S\ref{sec:gaussian_process_regression})
 
 \paragraph{Fractional Brownian Motion}\label{sec:fractional_brownian}\hfill
 
-Integral of Gaussian Processes
+Integral of Gaussian Processes (Fractional Gaussian Noise)
 
 (\emph{fBm})
 
@@ -12558,7 +12702,7 @@ $H \in (0,1) \subset \reals$ -- \emph{Hurst Exponent} (``Hurst Index''
 $H = 1/2$ -- Wiener Process (Brownian Motion \S\ref{sec:wiener_process})
 
 for $H > 1/2$, increments of the process are Positively Correlated, and exhibits
-Long-range dependence
+Long-range Dependence (\S\ref{sec:long_range_dependence})
 
 for $H < 1/2$, increments of the process are Negatively Correlated
 
@@ -12567,8 +12711,14 @@ Hausdorff and Box Dimension of $2 - H$
 \fist Multifractals (\S\ref{sec:multifractal_system}): generalized framework of
 Fractional Brownian Motions
 
+cf. Fractional L\'evy Flight (\S\ref{sec:fractional_levy}) -- Non-gaussian
+increments
+
 (Mandelbrot96) Fractional Brownian Motion of Multifractal Time -- Model of
 Variation of Exchange Rates
+
+(Mandelbrot97) Models of Price Variation: $L$-Stable Motion (Infinite Variance,
+``Tail-driven Variability'' \S\ref{sec:lsm}) + FBM (Long-range Dependence)
 
 (wiki):
 
@@ -12755,6 +12905,12 @@ a Root of the Process's Characteristic Equation (FIXME: characteristic function
 
 \fist Statistical Signal Processing (\S\ref{sec:statistical_signal})
 
+the \emph{Wold Decomposition Theorem} (\S\ref{sec:wold_decomposition}) for
+Isometric Linear Operators on a given Hilbert Space implies that any Stationary
+Discrete-time Stochastic Process can be \emph{Decomposed} into a pair of
+Uncorrelated Processes where one is \emph{Deterministic} and the other is a
+\emph{Moving Average Process}
+
 
 
 \subsubsection{Trend-stationary Process}\label{sec:trend_stationary}
@@ -12766,6 +12922,38 @@ or \emph{Weak-Sense Stationary} or \emph{Wide-Sense Stationary} (WSS)
 \fist Order of Integration (Time Series \S\ref{sec:order_of_integration}) --
 minimum number of ``differences'' required to obtain a Covariance-stationary
 Series (\S\ref{sec:covariance_stationary})
+
+
+
+\subsubsection{Difference Stationary Process}\label{sec:difference_stationary}
+
+Unit Root Process (\S\ref{sec:unit_root})
+
+
+
+\paragraph{$L$-Stable Motion (LSM)}\label{sec:lsm}\hfill
+
+%FIXME: putting this here under the assumption that "difference stationary"
+% means that the distributions of the incremental process random variables are
+% stationary
+
+Mandelbrot97:
+
+(Mandelbrot 1963)
+
+allows for Non-gaussian (Long-tailed) Stable Distributions (Infinite Variance);
+note all Stable Distributions besides the Normal Distribution have Infinite
+Variance
+
+Integration of a Difference Stationary Process of Random Variables that are
+also required to be \emph{Independent} (i.e. flat Frequency Spectrum) and
+\emph{Scaling} (\S\ref{sec:scaling_distribution})
+
+$\ln Z(t)$ is an \emph{$L$-Stable Motion} if successive
+$L(t, T) = \ln Z(t + T) - \ln Z(t)$ are Independent
+
+Models of Price Variation: LSM (Infinite Variance, ``Tail-driven Variability'';
+Stationary, Scaling) + FBM (Long-range Dependence \S\ref{sec:fbm})
 
 
 
@@ -12784,9 +12972,7 @@ necessarily have a ``trend''
 
 \fist not to be confused with Root of Unity (\S\ref{sec:root_of_unity})
 
-
-
-\subsubsection{Difference Stationary Process}\label{sec:difference_stationary}
+Difference Stationary Processes (\S\ref{sec:difference_stationary})
 
 
 
@@ -13214,6 +13400,14 @@ Random Walk with step lengths distributed according to a L\'evy Distribution
 
 
 
+\subparagraph{Fractional L\'evy Flight}\label{sec:fractional_levy}\hfill
+
+Dependence
+
+\fist cf. Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
+
+
+
 \subparagraph{Cauchy Flight}\label{sec:cauchy_flight}\hfill
 
 Random Walk with step lengths distributed according to a Cauchy Distribution
@@ -13566,6 +13760,11 @@ cf. Stochastic Gradient Descent (SGD \S\ref{sec:sgd})
 
 
 \subsubsection{Monte Carlo Simulation}\label{sec:monte_carlo}
+
+Computational Algorithms based on repeated Random Sampling
+(\S\ref{sec:random_sample})
+
+cf. ``Historical Simulation''
 
 Monte Carlo Integration (\S\ref{sec:monte_carlo_integration}) -- Monte Carlo
 Method applied to Numerical Integration
