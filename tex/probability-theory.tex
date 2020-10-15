@@ -706,7 +706,7 @@ the Odds can range in $[0, \infty)$
 
 \fist Logit (Log-odds \S\ref{sec:logit}):
 \[
-  ln \frac{p}{1-p}
+  \ln \frac{p}{1-p}
 \]
 is the Inverse of the Logistic Function (\S\ref{sec:logistic_function}); the
 Logistic Function can be used to convert a Log-odds into a Probability
@@ -753,6 +753,13 @@ of the Odds Ratio (\S\ref{sec:odds_ratio}), $R$:
   logit(p_1) - logit(p_2) = \ln\Big(\frac{p_1/(1 - p_1)}{p_2/(1 - p_2)}\Big)
     = \ln R
 \]
+
+
+
+\subsubsection{Coherent Odds}\label{sec:coherent_odds}
+
+``Dutch Book'' or ``Lock'' is a Set of Odds which are \emph{not} Coherent, i.e.
+``Skewed''
 
 
 
@@ -942,6 +949,14 @@ and the PDF can be defined as $f_Y(y) = F_Y'(y)$
 for Continuous $X$ with CDF $F_X$, $Y = F_X(X)$ is called a \emph{Probability
   Integral Transform} (\S\ref{sec:probability_integral_transform}) and has a
 Standard Uniform Distribution
+
+Laplace Transform (\S\ref{sec:laplace_transform}) of a Random Variable $X$ with
+PDF $f$:
+\[
+  \mathcal{L}\{f\}(s) = \expect(e^{-sX}))
+\]
+and replacing $s$ by $-t$ gives the Moment-generating Function
+(\S\ref{sec:moment_generating_function}) of $X$
 
 \asterism
 
@@ -1147,6 +1162,39 @@ Categorical Cross-entropy Loss Function for Classification
     \end{itemize}
   \item Mean Squared Deviation (MSD \S\ref{sec:msd})
   \item Squared Deviation from the Mean (\S\ref{sec:sdm})
+\end{itemize}
+
+
+
+\subsubsection{Observational Transformation}
+\label{sec:observational_transformation}
+
+(Mandelbrot97, Ch.3)
+
+Mandelbrot 1963
+
+\begin{itemize}
+  \item Linear Aggregation -- simple addition of quantities in their ``common
+    natural scale''; Central Limit Theorem (\S\ref{sec:central_limit}); cf.
+    Autoregressive (\S\ref{sec:autoregressive_model}) schemes, Stable
+    Distributions (\S\ref{sec:stable_distribution})
+  \item Weighted Mixture -- Data Randomly Sampled from among a Set of possible
+    basic Distributions
+  \item Maximizing Choice -- selection of largest or smallest quantity in a Set
+  \item ...
+\end{itemize}
+
+Invariances with respect to Observational Transformations
+
+cf.:
+\begin{itemize}
+  \item Stable Distributions (\S\ref{sec:stable_distribution})
+  \item Weak Scaling Distributions (\S\ref{sec:scaling_distribution}) --
+    Invariance up to Scale holds \emph{Asymptotically} under Linear Aggregation,
+    Weighted Mixture, and Maximizing Choice, as long as the ``parts'' themselves
+    are Asymptotically Scaling
+  \item Exponential Distributions (\S\ref{sec:exponential_distributions}) --
+    Invariant under change of Location
 \end{itemize}
 
 
@@ -1447,6 +1495,13 @@ Function can be extended to the Complex Plane
 every Distribution with a Moment-generating Function is a member of a Natural
 Exponential Family (\S\ref{sec:nautral_exponential_family})
 
+Laplace Transform (\S\ref{sec:laplace_transform}) of a Random Variable $X$ with
+PDF $f$:
+\[
+  \mathcal{L}\{f\}(s) = \expect(e^{-sX}))
+\]
+and replacing $s$ by $-t$ gives the Moment-generating Function of $X$
+
 
 
 % ------------------------------------------------------------------------------
@@ -1625,6 +1680,14 @@ Probability Density Function and vice versa
 Complex Number with Modulus Squared representing a Probability Density
 
 \fist Kullback-Leibler Divergence (\S\ref{sec:kullback_leibler})
+
+Laplace Transform (\S\ref{sec:laplace_transform}) of a Random Variable $X$ with
+PDF $f$:
+\[
+  \mathcal{L}\{f\}(s) = \expect(e^{-sX}))
+\]
+and replacing $s$ by $-t$ gives the Moment-generating Function
+(\S\ref{sec:moment_generating_function}) of $X$
 
 
 
@@ -1957,6 +2020,11 @@ $\bar{F}_X(x) = P(X > x) = 1 - F_X(x)$
 
 cf. Scale Parameter (\S\ref{sec:scale_parameter})
 
+cf. Power-law (\S\ref{sec:power_law})
+
+--FIXME: should this be considered equivalent to the Pareto Distribution
+(\S\ref{sec:pareto_distribution}) with scale parameter $x_m = 1$ ???
+
 Mandelbrot97:
 
 Ch.1
@@ -2011,11 +2079,105 @@ interval $T$ will be concentrated in smaller sub-intervals, and so-on when
 considering each sub-interval in isolation, leading to Discontinuities as the
 overall change becomes concentrated in smaller and smaller intervals
 
+Lindy Effect: does not hold for Non-scaling Distributions
+
+Ch.3
+
+Mandelbrot 1963
+
+\begin{quote}
+  ... when the ``spontaneous activity'' of a system is governed by a Scaling
+  rather than a Gaussian Process, the ``Causally Structural'' features of the
+  system are more likely to be obscured by Noise. ... Scaling Noise generates a
+  variety of ``patterns''; everyone agrees on their Form, but they have no
+  Predictive value. ...
+\end{quote}
+
+\emph{Weak (Asymptotic) Scaling}
+
+for $N$ Independent Random Variables $U_n(1 \leq n \leq N)$ with Weak Scaling
+Distributions with the same Exponent $\alpha$:
+\[
+  \prob(U_n > u) \sim C_n u^{-\alpha}
+\]
+as $u \to \infty$
+
+Invariance under Observational Transformation
+(\S\ref{sec:observational_transformation}) -- Invariance up to Scale holds
+\emph{Asymptotically} under Linear Aggregation, Weighted Mixture, and Maximizing
+Choice, as long as the ``parts'' themselves are Asymptotically Scaling
+
+under Infinite Aggregation, Scaling holds only for $\alpha < 2$
+
+\begin{quote}
+  ... one must rather say: ``It is true that incomes (or firm sizes) follow the
+  scaling distribution; it is not true that the Distributions of income are very
+  sensitive to the methods of reporting and of observation.''
+\end{quote}
+
+for $U_W$ a Weighted Mixture of the $U_n$ and $p_n$ denoting $\prob(U_W = U_n)$,
+then $U_W$ is Asymptotically Scaling with Scale Parameter $C_W$ equal to the
+Weighted Average $C_W = \sum p_n C_n$ separate Scale Coefficients $C_n$ and:
+\[
+  \prob(U_W > u) = C_W u^{-\alpha}
+\]
+
+if $U_M$ is the largest of the Realized $U_n$ (i.e. Maximizing Choice), then
+$U_M$ is Asymptotically Scaling with Scale Parameter $C_M = \sum C_n$, and:
+\[
+  \prob(U_M < u) = \prod \prob(U_n \leq u)
+\]
+and:
+\[
+  \prob(U_M > u) \sim C_M u^{-a}
+\]
+
+for $U_A$ the Sum of the individual $U_n$ (i.e. Linear Aggregation), $U_A$ is
+Asymptotically Scaling with Scaling Parameter is again the Sum $C_A = \sum C_n$,
+implying that the Sum of the $U_n$ behaves like the largest $U_n$ as
+$u \to \infty$
+
+the Probability Densities of the following three ``Invariant Families'' of
+Distributions differ through most of the Range of $u$, however for $0 < \alpha <
+2$, their Asymptotic behavior coincides
+
+Maximization -- the CDF of a Fr\'echet Distribution
+(\S\ref{sec:frechet_distribution}) with $m = 0$ and $s = 1$:
+\[
+  F_M(u) = e^{-x^{-\alpha}}
+\]
+is Weakly Scaling
+
+Mixing -- $F_W(u) = 1 - Cu^{-\alpha}$ is the ``Analytical Form'' of the Scaling
+Distribution ``extended'' down to $u = 0$; has Infinite Probability unless $U$
+is restricted to an Interval $0 < a \leq u \leq b$
+
+Aggregation -- leads to Random Variables that are ``positive'' members of the
+family of $L$-stable Distributions (``Scaling Sum Distribution'', i.e. with
+$\alpha < 1$; only the L\'evy Distribution (\S\ref{sec:levy_distribution}) has
+Density Function $dF_A(u)$ with Closed Analytic Form; $L$-stable Distributions
+are the only Non-Gaussian Limits of Linearly Weighted Sums of Random Variables
+
+\begin{quote}
+  There are many reasons for believing that many scaling phenomena are related
+  to ``accumulative'' processes similar to those encountered in coin-tossing.
+\end{quote}
+
+Ch.4
+
+Limits of Limit Theorems in Probability Theory as \emph{Fixed
+  Points} of Renormalization (\S\ref{sec:renormalization})
+
+Ch.5
+
+(Mandelbrot97E) Randomness: ``mild'' (Gaussian), ``slow'' (Log-normal), ``wild''
+(Scaling with Infinite Variance, i.e. $\alpha < 2$)
+
 
 
 \subparagraph{Multiscaling}\label{sec:multiscaling}\hfill
 
-(Mandelbrot97)
+(Mandelbrot97E)
 
 model of price variation
 
@@ -2438,6 +2600,10 @@ number of IID Random Variables
 
 \fist cf. Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory})
 
+(Mandelbrot63) Limits of Limit Theorems in Probability Theory as \emph{Fixed
+  Points} of Renormalization (\S\ref{sec:renormalization}); cf. Scaling
+Distributions (\S\ref{sec:scaling_distribution})
+
 
 
 \subsubsection{Central Limit Theorem}\label{sec:central_limit}
@@ -2469,6 +2635,10 @@ Mean has approximately a Normal Distribution for large $n$
 
 \fist if the Random Variables do not have Finite Variance then the Limit may be
 a Stable Distribution (\S\ref{sec:stable_distribution}) that is not Normal
+
+(Mandelbrot63) Linear Aggregation (\S\ref{sec:observational_transformation});
+cf. Stable Distributions, Autoregressive Models
+(\S\ref{sec:autoregressive_model})
 
 \emph{Berry-Ess\'een Inequality}
 
@@ -2553,6 +2723,26 @@ for Continuous $X$ with CDF $F_X$, $Y = F_X(X)$ is called a \emph{Probability
 
 \fist cf. Location Parameter (\S\ref{sec:location_parameter}), Scale Parameter
 (\S\ref{sec:scale_parameter})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Maximum Entropy Probability Distribution}\label{sec:maximum_entropy}
+% ------------------------------------------------------------------------------
+
+Entropy (\S\ref{sec:entropy})
+
+(wiki):
+
+\emph{Maximum Entropy Principle}: the \emph{Maximum Entropy Distribution} for a
+certain Class of Probability Distributions minimizes the amount of Prior
+Information (\S\ref{sec:prior_distribution}) built into the Distribution
+
+\begin{itemize}
+  \item the Log-normal Distribution (\S\ref{sec:lognormal_distribution}) is the
+    Maximum Entropy Probability Distribution for a Random Variable $X$ for which
+    the Mean and Variance of $\ln X$ are specified
+\end{itemize}
 
 
 
@@ -2887,6 +3077,10 @@ $n \to \infty$:
            & = \frac{\lambda^k e^{-\lambda}}{k!} \\
 \end{flalign*}
 
+events occur with a Constant known \emph{Mean Rate}, Independently of the time
+since the last event; cf. Exponential Distribution
+(\S\ref{sec:exponential_distribution})
+
 models counts of rare events, e.g. radioactive decay, traffic accidents (cf.
 Propensity Interpretation of Probability)
 
@@ -3081,6 +3275,8 @@ Distribution
 cf. Binomial Distribution (Discrete \S\ref{sec:binomial_distribution})
 -- Sum of Independent Trials
 
+\emph{Additive Phenomena}; cf. \emph{Multiplicative Phenomena} (Log-normal)
+
 a Normal Distribution corresponds to a $t$-distribution
 (\S\ref{sec:t_distribution}) with $\nu = \infty$ Degrees of Freedom
 
@@ -3119,6 +3315,9 @@ Infinite-dimensional generalizations of Multivariate Normal Distributions
 
 \fist Gaussian Random Walk (\S\ref{sec:gaussian_random_walk}): Random Walk in
 which the step size varies according to a Normal Distribution
+
+(Mandelbrot97E) Randomness: ``mild'' (Gaussian), ``slow'' (Log-normal), ``wild''
+(Scaling with Infinite Variance, i.e. $\alpha < 2$)
 
 \emph{Empirical Rule} 68-95-99.7 Rule -- 68\% within 1 Standard Deviation of the
 Mean, 95\% within 2 Standard Deviations, 99.7\% within 3 Standard Deviations
@@ -3169,6 +3368,8 @@ $\Phi$ (requires use of the Error Function \S\ref{sec:error_function})
 
 
 
+\subparagraph{Truncated Normal Distribution}\label{sec:truncated_normal}\hfill
+
 \subparagraph{Multivariate Normal Distribution}\label{sec:multivariate_normal}
 \hfill
 
@@ -3180,6 +3381,12 @@ Multivariate Random Variable (\S\ref{sec:random_vector})
 \hfill
 
 generalization of Multivariate Normal Distribution
+
+
+
+\paragraph{Folded Normal Distribution}\label{sec:folded_normal}\hfill
+
+\subparagraph{Half-normal Distribution}\label{sec:half_normal}\hfill
 
 
 
@@ -3209,6 +3416,23 @@ or \emph{Galton Distribution}
 if $X$ is Normally Distributed (\S\ref{sec:normal_distribution}), then the
 Process $Y = e^X$ has a \emph{Log-normal} Distribution, i.e. $\ln Y = X$ is
 Normally Distributed
+
+\emph{Multiplicative Phenomena}; cf. \emph{Additive Phenomena} (Gaussian)
+
+the Log-normal Distribution is the Maximum Entropy Probability Distribution
+(\S\ref{sec:maximum_entropy}) for a Random Variable $X$ for which the Mean and
+Variance of $\ln X$ are specified
+
+assumed by Black-Scholes Model as changes in prices, rates, indices etc.; cf.
+Log-L\'evy Distribution (\S\ref{sec:log_levy})
+
+(Mandelbrot97E) Randomness: ``mild'' (Gaussian), ``slow'' (Log-normal), ``wild''
+(Scaling with Infinite Variance, i.e. $\alpha < 2$)
+
+\begin{quote}
+  Slow randomness is a complex intermediate state between two states of greater
+  simplicity.
+\end{quote}
 
 
 
@@ -3266,9 +3490,9 @@ Continuous Random Variable $X$ with parameter $\beta > 0$:
   \end{cases}
 \]
 
-\emph{Memoryless} (\S\ref{sec:memoryless_distribution})
-
 models lifetimes of electronic components, wait times between rare events
+
+\emph{Memoryless} (\S\ref{sec:memoryless_distribution})
 
 \fist Discrete analogue: Geometric Distribution
 (\S\ref{sec:geometric_distribution})
@@ -3276,8 +3500,15 @@ models lifetimes of electronic components, wait times between rare events
 cf. \emph{Fat-tailed Distributions} (\S\ref{sec:fat_tailed}) -- Tails are
 \emph{not} Exponentially Bounded
 
+(Mandelbrot97E)
+
+Invariant under change of \emph{Location}; the time since the last event has no
+effect on the expected wait time until the next event (cf. Poisson Distribution
+\S\ref{sec:poisson_distribution})
+
 from an Exponentially Distributed $V$, a Scaling
-(\S\ref{sec:scaling_distribution}) $U$ is obtained by $U = e^V$ (Mandelbrot97)
+(\S\ref{sec:scaling_distribution}) $U$ is obtained by $U = e^V$, is Invariant
+under change of \emph{Scale}
 
 
 
@@ -3451,6 +3682,11 @@ Delta (\S\ref{sec:dirac_delta})
 the step lengths in a L\'evy Staircase (\S\ref{sec:levy_staircase}) are
 distributed according to a Pareto Distribution with Scale $x_m = 1$
 
+--FIXME: is the Pareto Distribution with scale parameter $x_m = 1$ the same
+thing as a Scaling Distribution (\S\ref{sec:scaling_distribution}) ???
+
+Mandelbrot 1963
+
 
 
 \subsubsection{Inverse Gamma Distribution}\label{sec:inverse_gamma}
@@ -3471,6 +3707,18 @@ Distribution
 a standard Cauchy Random Variable (\S\ref{sec:cauchy_distribution}) can be
 viewed as a Mixture (\S\ref{sec:mixture_distribution}) of Gaussian Random
 Variables with Zero Mean and Variance drawn from a standard L\'evy Distribution
+
+a Cauchy Process (\S\ref{sec:cauchy_process}) can be seen as a Brownian Motion
+Subordinated (\S\ref{sec:subordination}) to a Process associated with a L\'evy
+Distribution
+
+
+
+\subparagraph{Log-L\'evy Distribution}\label{sec:log_levy}\hfill
+
+Finance: Distribution of changes in rates, prices, indices, etc. (Mandelbrot);
+cf. Black-Scholes changes are assumed to be Log-normal
+(\S\ref{sec:lognormal_distribution})
 
 
 
@@ -3501,6 +3749,7 @@ of the resulting Distribution is not well defined for $\alpha < 2$
     $\alpha = 1/2, \beta = 1$
 \end{itemize}
 
+
 a standard Cauchy Random Variable can be viewed as a Mixture
 (\S\ref{sec:mixture_distribution}) of Gaussian Random Variables with Zero Mean
 and Variance drawn from a standard L\'evy Distribution
@@ -3515,6 +3764,16 @@ Variance
 
 any Non-degenerate Stable Distribution has a Smooth (Infinitely Differentiable)
 Probability Density Function
+
+``$L$-stable Distribution'', ``Scaling Sum Distribution'' (Mandelbrot 1963)
+%FIXME: is l-stable distribution synonymous with stable distribution ???
+
+$L$-stable Distributions are the only Non-Gaussian Limits of Linearly Weighted
+Sums of Random Variables
+
+(Mandelbrot63) Invariance under Linear Aggregation
+(S\ref{sec:observational_transformation}), Central Limite Theorem; cf.
+Autoregressive Models (\S\ref{sec:autoregressive_model})
 
 a Stable Process (\S\ref{sec:stable_process}) is a Stochastic Process for which
 associated Probability Distributions (FIXME: clarify) are Stable Distributions;
@@ -3543,6 +3802,14 @@ $\alpha < 1$
 
 the Stable Count Distribution (\S\ref{sec:stable_count}) is the Conjugate Prior
 (\S\ref{sec:conjugate_prior}) of a One-sided Stable Distribution
+
+
+
+\subsubsection{Max-stable Distribution}\label{sec:max_stable}
+
+\emph{Maximum Stability Postulate}
+
+Fr\'echet Distribution (\S\ref{sec:frechet_distribution})
 
 
 
@@ -3596,6 +3863,16 @@ but such a Limit Distribution does not necessarily exist, requiring
 \subsubsection{Gumbel Distribution}\label{sec:gumbel_distribution}
 
 \subsubsection{Fr\'echet Distribution}\label{sec:frechet_distribution}
+
+Max-stable (\S\ref{sec:max_stable})
+
+the CDF with $m = 0$ and $s = 1$:
+\[
+  e^{-x^{-\alpha}}
+\]
+is Weakly Scaling (\S\ref{sec:scaling_distribution})
+
+
 
 \subsubsection{Weibull Distribution}\label{sec:weibull_distribution}
 
@@ -4766,7 +5043,7 @@ Standard Deviation $S(n)$
 
 Rescaled Range $R(n) / S(n)$
 
-(Mandelbrot97)
+(Mandelbrot97E)
 
 robust with respect to Infinite Variance
 
@@ -5228,7 +5505,7 @@ Stochastic Processes (\S\ref{sec:stochastic_process}): Sequences of Dependent
 Random Variables
 
 note that a Signal may have a ``White'' Frequency Spectrum but still be Serially
-Dependent (Mandelbrot97)
+Dependent (Mandelbrot97E)
 
 \fist Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimation
 (\S\ref{sec:estimation_theory}) of Relations in Multivariate Data
@@ -5366,7 +5643,15 @@ Spatial (\S\ref{sec:spatial_analysis}) and Time Series
 
 \fist Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
 
+\fist ARFIMA (\S\ref{sec:arfima})
+
 cf. ``Memoryless-ness'' (\S\ref{sec:memoryless_distribution})
+
+cf. Short-term Dependence: Markov Processes (\S\ref{sec:markov_process}), ARMA,
+ARCH
+
+(Mandelbrot97E) Wild Randomness (\S\ref{sec:statistical_randomness}) is
+characterized by presence of ``structure'' and Long-range Dependence
 
 
 
@@ -5406,7 +5691,7 @@ Standard Deviation $S(n)$
 
 Rescaled Range $R(n) / S(n)$
 
-(Mandelbrot97)
+(Mandelbrot97E)
 
 robust with respect to Infinite Variance
 
@@ -6296,6 +6581,40 @@ Cross-validation Estimation of Fit
 Cross-validation Estimator of Risk (Density Estimation
 \S\ref{sec:density_estimation})
 
+\emph{Holdout Dataset} -- Test Dataset that has not been used in Training
+
+(wiki):
+
+\begin{itemize}
+  \item Model with one or more Unknown Parameters
+  \item Dataset to which the Model can be "Fit" (Training Dataset)
+  \item when taking an Independent sample of Validation Data as a Test Dataset,
+    generally the Model does not Fit the Validation Dataset as well as the
+    Training Dataset, and Cross-validation is a way to \emph{Estimate} the size
+    of this effect
+\end{itemize}
+
+the \emph{In-sample Estimate} of Fit refers to the MSE of the Fit Model on the
+Training Dataset
+
+the \emph{Out-of-sample Estimate} of Fit refers to the MSE of the Fit Model on
+the Validation Dataset
+
+\begin{itemize}
+  \item for a Linear Regression Model, the Expected Value of the MSE for the
+    Training Dataset is $(n - p - 1) / (n + p + 1) < 1$ times the Expected Value
+    of the MSE for the Validation Dataset where $n$ is the number of Samples in
+    the Training Dataset and $p$ is the Dimensionality of the Covariate Vectors
+  \item if the MSE of the Model in the Validation Dataset \emph{exceeds} the
+    anticipated value then the Model has been \emph{Overfitted}
+  \item in other types of Regression (e.g. Logistic Regression) there is no
+    simple formula for the Expected Out-of-sample Fit, therefore
+    Cross-validation is a generally applicable way to numerically Predict the
+    performance of a Model on unavailable data
+\end{itemize}
+
+Holdout Method (TODO)
+
 
 
 \subparagraph{Exhaustive Cross-validation}
@@ -6305,6 +6624,14 @@ Cross-validation Estimator of Risk (Density Estimation
 \label{sec:nonexhaustive_cross_validation}\hfill
 
 $k$-fold Cross-validation -- may be a source of lookahead bias ?
+
+
+
+\subparagraph{Backtesting}\label{sec:backtesting}\hfill
+
+Cross-validation applied to previous time periods
+
+a type of \emph{Retrodiction} (\S\ref{sec:retrodiction})
 
 
 
@@ -6782,6 +7109,8 @@ $n$-gram Model
 
 (or \emph{Scaling Law}) Functional Relation (cf. Statistical Dependence
 \S\ref{sec:dependence}) as a Power Function (\S\ref{sec:power_function})
+
+cf. Scaling Distributions (\S\ref{sec:scaling_distribution})
 
 Scale Analysis (\S\ref{sec:statistical_scale}), Scale Invariance
 (\S\ref{sec:scale_invariance})
@@ -8672,6 +9001,10 @@ Distribution, assuming it obeys \emph{Cromwell's Rule}, as the Sample Data
 
 the effect of the Prior diminishes as $n$ (i.e. $(X_1, \ldots, X_n)$) increases
 
+\emph{Maximum Entropy Principle}: the \emph{Maximum Entropy Distribution}
+(\S\ref{sec:maximum_entropy}) for a certain Class of Probability Distributions
+minimizes the amount of Prior Information built into the Distribution
+
 
 
 \paragraph{Cojugate Prior}\label{sec:conjugate_prior}\hfill
@@ -8913,6 +9246,14 @@ cf. Scenario Analysis (\S\ref{sec:scenario_analysis}): based on
 
 \subsubsection{Prediction}\label{sec:prediction}
 
+\subsubsection{Retrodiction}\label{sec:retrodiction}
+
+\begin{itemize}
+  \item Backtesting (\S\ref{sec:backtesting})
+\end{itemize}
+
+
+
 \subsubsection{Prediction Interval}\label{sec:prediction_interval}\hfill
 
 Interval Estimate (\S\ref{sec:interval_estimator}) of where future Observations
@@ -9016,6 +9357,9 @@ with accepted ``scientific'' laws, but such alternative Models are
 %FIXME: move section?
 
 cf. Covariance (\S\ref{sec:covariance})
+
+Markov Process (\S\ref{sec:markov_process}) -- Probabilistic expression of
+``Direct Causality'' (Mandelbrot97E)
 
 \fist (wiki): for Ergodic Signals with a Linear System Function, Signal
 Coherence (\S\ref{sec:signal_coherence}) can be used to Estimate the Causality
@@ -12276,6 +12620,9 @@ defined as the Cardinality of the largest Set of Points that the Algorithm can
 cf. \emph{Algorithmic Randomness} (\S\ref{sec:algorithmic_randomness}) --
 Universal Test, Universal Sequential Test (Martin-L\"of66)
 
+cf. Statistical Fluctuation (\S\ref{sec:statistical_fluctuation})
+%FIXME: move fluctuation under this heading ???
+
 \emph{Subsequence Selection Criterion} (\S\ref{sec:random_sequence}) --
 \emph{Mises-Church Randomness}: any Recursive Function which having read the
 first $N$ elements of the Sequence decides if it wants to select element $N+1$
@@ -12291,7 +12638,7 @@ Tests (\S\ref{sec:hypothesis_testing}):
   \item ...
 \end{itemize}
 
-(Mandelbrot 1997)
+(Mandelbrot97E)
 
 problem of determinism in physics in the face of randomness is mitigated by lack
 of information (e.g. state of individual atoms in a gas)
@@ -12313,6 +12660,62 @@ irregularity at every scale
 
 *ex-post* vs. *ex-ante*: after the fact reasonable causes may be attributed to
 some features, but before the fact the ``situation is much different''
+
+``mild'' (Gaussian), ``slow'' (Log-normal), ``wild'' (Scaling with Infinite
+Variance, i.e. $\alpha < 2$)
+
+Slow Randomness is a complex intermediate state between two states of greater
+simplicity.
+
+Mild and Wild Randomness are defined by criterea that distinguish between
+``even'' (roughly equal) portioning of $N$ addends in a Sum $\sum_1^N U_n$ in
+the case of Mild Randomness, and ``concentrated'' portioning where one or a
+``few'' fo the addends predominate in the case of Wild Randomness
+
+Long-run ($N \to \infty$) -- Pre-Guassian (``even'' in the Long-run): $1 / N \to
+0$; ``Theory of Errors'', ``absence of Concentration in the Long-run'' (cf.
+Central Limit Theorem \S\ref{sec:central_limit})-- the assumption that Errors
+are Gaussian because they are the Observable Outcome of a large number of
+separate Additive contributions such that even the largest is negligible
+compared to the Sum both \emph{ex-ante} (in terms of Distributions) and
+\emph{ex-post} (in terms of Realized values)
+
+Short-run ($N=2$ or ``a few'') -- Mild ``tail-mixing'', Wild
+``tail-preserving'' (shorthand: $P_N \sim N P$); criterea:
+\begin{enumerate}
+  \item ``Concentration in Mode'' -- involves the Convexity of $\ln p(u)$ where
+    $p(u)$ is the PDF of the addends
+  \item ``Concentration in Probability'' -- involves a Limit Theorem
+\end{enumerate}
+
+concentration in the Long Run implies concentration in the Short Run, but not
+the other way around
+
+Middle-run ($N =$ ``many'') -- Slow (Pre-Gaussian but ``tail-preserving'');
+Short-run concentration and Long-run evenness; \emph{Pre-asymptotics}
+
+Mild Randomness is characterized by an absence of ``structure'' and by a ``local
+level'' of Statistical Dependence; cf. properties of a ``gas'' as a state of
+matter
+
+Wild Randomness is characterized by presence of ``structure'' and Long-range
+Dependence (\S\ref{sec:long_range_dependence}); cf. properties of ``solid''
+matter
+
+Law of Large Numbers:
+\[
+  \frac{1}{N} \sum_{n=1}^N U_n
+\]
+Limit is $\expect(U)$ as $N \to \infty$
+
+Central Limit Theorem:
+\[
+  A_N \sum_{n=1}^N U_n - N \expect{U}
+\]
+where $A_N \sim \frac{1}{\sqrt{N}}$, Limit is a Gaussian as $N \to \infty$; the
+Domain of ``Universality of Attraction'' to the Gaussian includes all $U$
+satisfying $\expect(U^2) < \infty$ and also some cases where $\expect(U^2)$
+Diverges ``slowly enough''
 
 
 
@@ -12432,7 +12835,7 @@ Stochastic Process
 \fist Statistical Signal Processing (\S\ref{sec:statistical_signal}) -- treats
 Signals as Stochastic Processes;
 note that a Signal may have a ``White'' Frequency Spectrum but still be Serially
-Dependent (Mandelbrot97)
+Dependent (Mandelbrot97E)
 
 \fist Stochastic Calculus (\S\ref{sec:stochastic_calculus}) -- consistent theory
 of Integration defined for Integrals of Stochastic Processes with respect to
@@ -12549,6 +12952,8 @@ Statistical Mechanics \& Thermodynamics; e.g. Shot (Poisson
 originates from discrete nature of electric charge and particle nature of light,
 resp.
 
+cf. Statistical Randomness (\S\ref{sec:statistical_randomness})
+
 
 
 \subsubsection{Detrended Fluctuation Analysis}\label{sec:detrended_fluctuation}
@@ -12620,6 +13025,10 @@ Autoregressive Models (\S\ref{sec:autoregressive_model})
 
 
 % ------------------------------------------------------------------------------
+\subsection{Stochastic Drift}\label{sec:stochastic_drift}
+% ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
 \subsection{Stochastic Convergence}\label{sec:stochastic_convergence}
 % ------------------------------------------------------------------------------
 
@@ -12678,6 +13087,16 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 \end{itemize}
 
 \emph{Slutsky's Theorem}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Subordination}\label{sec:subordination}
+% ------------------------------------------------------------------------------
+
+cf. Fractal Time (\S\ref{sec:fractal_time})
+
+%FIXME: riemann-stieltjes integral ???
 
 
 
@@ -12844,7 +13263,7 @@ increments
 (Mandelbrot96) Fractional Brownian Motion of Multifractal Time -- Model of
 Variation of Exchange Rates
 
-(Mandelbrot97) ``Unifractal'' Models of Price Variation: $L$-Stable Motion
+(Mandelbrot97E) ``Unifractal'' Models of Price Variation: $L$-Stable Motion
 (Infinite Variance, ``Tail-driven Variability'' \S\ref{sec:lsm}) + FBM
 (Long-range Dependence)
 
@@ -12899,6 +13318,8 @@ given a Wiener Process $W_t$ and Harmonic Function
 
 Stable Process (\S\ref{sec:stable_process})
 
+a Diffusion Process (\S\ref{sec:diffusion_process})
+
 (wiki):
 can be viewed as White Noise Filtered by $s^{-1}$ (i.e. Integrated)
 --FIXME: clarify
@@ -12910,7 +13331,7 @@ Scaling Limit (\S\ref{sec:scaling_limit})
 \emph{Green's Function} (\S\ref{sec:greens_function}) -- Diffusion Equation
 (\S\ref{sec:diffusion_equation})
 
-(Mandelbrot97):
+(Mandelbrot97E):
 
 Invariance Properties:
 \begin{itemize}
@@ -12994,6 +13415,9 @@ Stable (\S\ref{sec:stable_process})
 
 Pure Jump Process (\S\ref{sec:jump_process})
 
+can be seen as a Brownian Motion Subordinated (\S\ref{sec:subordination}) to a
+Process associated with a L\'evy Distribution (\S\ref{sec:levy_distribution})
+
 
 
 % ------------------------------------------------------------------------------
@@ -13001,7 +13425,17 @@ Pure Jump Process (\S\ref{sec:jump_process})
 % ------------------------------------------------------------------------------
 
 (wiki) Stochastic Process that assumes the same Value after a prescribed,
-possibly Random, time
+possibly Random, \emph{Stopping Time}
+
+Stopping Time
+
+
+
+\subsubsection{Localization}\label{sec:localization}
+
+\begin{itemize}
+  \item Local Martingale (\S\ref{sec:local_martingale})
+\end{itemize}
 
 
 
@@ -13034,6 +13468,8 @@ clarify)
 \begin{itemize}
   \item Ornstein-Uhlenbeck Process (\S\ref{sec:ornstein_uhlenbeck}) -- a
     Stationary Gauss-Markov Process (\S\ref{sec:gauss_markov_process})
+  \item AutoRegressive Moving Average (ARMA \S\ref{sec:arma}) -- Weakly
+    Stationary
   \item ...
 \end{itemize}
 
@@ -13084,14 +13520,18 @@ Mandelbrot97:
 (Mandelbrot 1963)
 
 allows for Non-gaussian (Long-tailed) Stable Distributions (Infinite Variance);
-note all Stable Distributions besides the Normal Distribution have Infinite
-Variance
+note all Stable Distributions (\S\ref{sec:stable_distribution}) besides the
+Normal Distribution have Infinite Variance
+
+%FIXME: is l-stable distribution synonymous with stable distribution ???
 
 Integration of a Difference Stationary Process of Random Variables that are
 also required to be \emph{Independent} (i.e. flat Frequency Spectrum) and
 \emph{Scaling} (\S\ref{sec:scaling_distribution}; i.e. the Distribution of
 changes over a short time interval resemble a scaled-down version of price
 changes over a long time interval)
+
+$\Lambda$ -- $L$-stable Distribution
 
 $\ln Z(t)$ is an \emph{$L$-Stable Motion} if successive
 $L(t, T) = \ln Z(t + T) - \ln Z(t)$ are Independent
@@ -13294,6 +13734,12 @@ cf. Law of Large Numbers (\S\ref{sec:large_numbers})
 \S\ref{sec:markov_population})
 
 \fist Markov Decision Process (\S\ref{sec:markov_decision})
+
+(Mandelbrot97E) Probabilistic expression of ``Direct Causality''
+(\S\ref{sec:causation})
+
+Short-term Dependency (\S\ref{sec:dependence}); cf. Long-range Dependence
+(\S\ref{sec:long_range_dependence})
 
 a State in a Markov Process is \emph{Ergodic} (\S\ref{sec:ergodic_process}) if
 it is:
@@ -13539,6 +13985,34 @@ Line
 
 
 
+\paragraph{Diffusion Process}\label{sec:diffusion_process}\hfill
+
+(wiki):
+
+a Continuous-time Markov Process with Continuous Sample Paths for which the
+Kolmogorov Forward Equation is the Fokker-Planck Equation (TODO: xrefs)
+
+solution to a Stochastic Differential Equation (\S\ref{sec:sde})
+
+cf. Diffusion Equation (\S\ref{sec:diffusion_equation})
+
+\begin{itemize}
+  \item Brownian Motion (Wiener Process \S\ref{sec:wiener_process})
+  \item Reflected Brownian Motion
+  \item Ornstein-Uhlenbeck Processes (\S\ref{sec:ornstein_uhlenbeck})
+\end{itemize}
+
+
+
+\subparagraph{It\^o Diffusion}\label{sec:ito_diffusion}\hfill
+
+Stochastic Drift (\S\ref{sec:stochastic_drift})
+
+\emph{Driftless Diffusion Process} -- ; is a Local Martingale
+(\S\ref{sec:local_martingale}) but not necessarily a Martingale
+
+
+
 \paragraph{Markov Arrival Process}\label{sec:markov_arrival_process}\hfill
 
 \paragraph{Branching Process}\label{sec:branching_process}\hfill
@@ -13549,11 +14023,19 @@ Gaussian Process (\S\ref{sec:gaussian_process})
 
 
 
-\paragraph{Ornstein-Uhlenbeck Process}\label{sec:ornstein_uhlenbeck}\hfill
+\subparagraph{Ornstein-Uhlenbeck Process}\label{sec:ornstein_uhlenbeck}\hfill
 
 a Stationary Gauss-Markov Process
 
 or \emph{Damped Random Walk}
+
+a Diffusion Process (\S\ref{sec:diffusion_process})
+
+
+
+\paragraph{Higher-order Markov Process}\label{sec:higher_order_markov}\hfill
+
+Memory $>1$
 
 
 
@@ -13604,7 +14086,22 @@ $f$, the Process $f(W_t)$ is also a Martingale
 
 \subsubsection{Stopped Brownian Motion}\label{sec:stopped_brownian_motion}
 
+\subsubsection{Bounded Martingale}\label{sec:bounded_martingale}
+
+2019 - Taleb - \emph{Election Predictions as Martingales: An Arbitrage Approach}
+
+
+
 \subsubsection{Local Martingale}\label{sec:local_martingale}
+
+cf. Localization (\S\ref{sec:process_localization})
+
+every Bounded Local Martingale is a Martingale, and every Martingale is a Local
+Martingale, but not every Local Martingale is a Martingale, e.g. a Driftless
+Diffusion Process (\S\ref{sec:ito_diffusion}) is a Local Martingale but not
+necessarily a Martingale
+
+
 
 \subsubsection{Semimartingale}\label{sec:semimartingale}
 
@@ -13975,6 +14472,12 @@ Distribution $f$
 
 \emph{Gibbs Sampling} -- higher Dimensions; Multilevel Models
 (\S\ref{sec:multilevel_model})
+
+
+
+\subparagraph{Hybrid Monte Carlo}\label{sec:hybrid_monte_carlo}\hfill
+
+or \emph{Hamiltonian Monte Carlo})
 
 
 
