@@ -2022,6 +2022,8 @@ cf. Scale Parameter (\S\ref{sec:scale_parameter})
 
 cf. Power-law (\S\ref{sec:power_law})
 
+%FIXME: wikipedia links scaling distribution to power law
+
 --FIXME: should this be considered equivalent to the Pareto Distribution
 (\S\ref{sec:pareto_distribution}) with scale parameter $x_m = 1$ ???
 
@@ -2170,8 +2172,24 @@ Limits of Limit Theorems in Probability Theory as \emph{Fixed
 
 Ch.5
 
-(Mandelbrot97E) Randomness: ``mild'' (Gaussian), ``slow'' (Log-normal), ``wild''
-(Scaling with Infinite Variance, i.e. $\alpha < 2$)
+(Mandelbrot97E) Randomness (\S\ref{sec:statistical_randomness}): ``mild''
+(Gaussian), ``slow'' (Log-normal), ``wild'' (Scaling with Infinite Variance,
+i.e. $\alpha < 2$)
+
+Scaling Variables with $\alpha < 2$ satisfy $\expect(U^2) < \infty$ but are
+\emph{not} Pre-Gaussian
+
+\emph{Tail Preservation Relation} -- $\overline{F}_N(u) \sim N \overline{F}(u)$
+
+for $U_n$ ($1 \leq n \leq N$) IID with Tail Probability $\overline{F}(u)$, and
+$\tilde{F}_N(u)$ the Tail Probability of $\tilde{U}_N = \max(U_n)$, then:
+\[
+  1 - \tilde{F}_N(u) = F(u)^N
+\]
+in the Tail where $\overline{F}(u) \ll 1$ and $\tilde{F}(u) \ll 1$, in
+\emph{all} cases: $\tilde{F}(u) \sim N \overline{F}$
+
+cf. Extreme Value Analysis (\S\ref{sec:eva})
 
 
 
@@ -3256,6 +3274,16 @@ distributed according to a Cauchy Distribution
 
 
 
+\subparagraph{Log-Cauchy Distribution}\label{sec:log_cauchy}\hfill
+
+Heavy-tailed (\S\ref{sec:heavy_tailed})
+
+``Extreme'' Randomness
+
+Logarithmically decaying Tail
+
+
+
 \paragraph{Normal Distribution}\label{sec:normal_distribution}\hfill
 
 (or \emph{Gaussian Distribution})
@@ -3638,9 +3666,16 @@ Tails that are ``heavier'' than the Normal Distribution
 
 Leptokurtic (Positive Kurtosis)
 
+Log-cauchy (\S\ref{sec:log_cauchy}) -- Logarithmically decaying Tail;
+``Extreme'' Randomness
+
 
 
 \subsubsection{Long-tailed Distribution}\label{sec:long_tailed}
+
+``Tail-preserving'' (Mandelbrot97E)
+
+
 
 \subsubsection{Subexponential Distribution}
 \label{sec:subexponential_distribution}
@@ -4916,6 +4951,19 @@ by the Extreme Value Theorem, the GEV Distribution is the only \emph{possible}
 Limit Distribution of Normalized Maxima of a Sequence of IID Random Variables,
 but such a Limit Distribution does not necessarily exist, requiring
 \emph{Regularity Conditions} on the Tail of the Distribution
+
+(Mandelbrot97E)
+
+\emph{Tail Preservation Relation} -- $\overline{F}_N(u) \sim N \overline{F}(u)$;
+cf. Lognormal Distributions, Scaling Distributions
+
+for $U_n$ ($1 \leq n \leq N$) IID with Tail Probability $\overline{F}(u)$, and
+$\tilde{F}_N(u)$ the Tail Probability of $\tilde{U}_N = \max(U_n)$, then:
+\[
+  1 - \tilde{F}_N(u) = F(u)^N
+\]
+in the Tail where $\overline{F}(u) \ll 1$ and $\tilde{F}(u) \ll 1$, in
+\emph{all} cases: $\tilde{F}(u) \sim N \overline{F}$
 
 
 
@@ -7111,6 +7159,8 @@ $n$-gram Model
 \S\ref{sec:dependence}) as a Power Function (\S\ref{sec:power_function})
 
 cf. Scaling Distributions (\S\ref{sec:scaling_distribution})
+
+%FIXME: wikipedia links scaling distribution to power law
 
 Scale Analysis (\S\ref{sec:statistical_scale}), Scale Invariance
 (\S\ref{sec:scale_invariance})
@@ -12640,10 +12690,12 @@ Tests (\S\ref{sec:hypothesis_testing}):
 
 (Mandelbrot97E)
 
-problem of determinism in physics in the face of randomness is mitigated by lack
+\emph{Seven States of Randomness}
+
+problem of Determinism in physics in the face of Randomness is mitigated by lack
 of information (e.g. state of individual atoms in a gas)
 
-problem of causality and rationality in finance are exaggerated due to more or
+problem of Causality and Rationality in finance are exaggerated due to more or
 less ``perfect'' information of markets
 
 from ``more'' to ``less'' random: a fair coin, a biased coin, a coin with
@@ -12665,12 +12717,19 @@ some features, but before the fact the ``situation is much different''
 Variance, i.e. $\alpha < 2$)
 
 Slow Randomness is a complex intermediate state between two states of greater
-simplicity.
+simplicity
 
 Mild and Wild Randomness are defined by criterea that distinguish between
 ``even'' (roughly equal) portioning of $N$ addends in a Sum $\sum_1^N U_n$ in
 the case of Mild Randomness, and ``concentrated'' portioning where one or a
 ``few'' fo the addends predominate in the case of Wild Randomness
+
+Mild (Gaussian) -- Short-run and Long-range even-ness, Tail-mixing
+
+Slow (Lognormal) -- Short-run Concentration and Long-range even-ness,
+Tail-preserving
+
+Wild (Scaling) -- Short-run and Long-run Concentration, Tail-preserving
 
 Long-run ($N \to \infty$) -- Pre-Guassian (``even'' in the Long-run): $1 / N \to
 0$; ``Theory of Errors'', ``absence of Concentration in the Long-run'' (cf.
@@ -12685,18 +12744,19 @@ Short-run ($N=2$ or ``a few'') -- Mild ``tail-mixing'', Wild
 \begin{enumerate}
   \item ``Concentration in Mode'' -- involves the Convexity of $\ln p(u)$ where
     $p(u)$ is the PDF of the addends
-  \item ``Concentration in Probability'' -- involves a Limit Theorem
+  \item ``Concentration in Probability'' -- Tail Preservation Relation
+    ($P_N \sim N P$); involves a Limit Theorem
 \end{enumerate}
 
-concentration in the Long Run implies concentration in the Short Run, but not
+Concentration in the Long Run implies Concentration in the Short Run, but not
 the other way around
 
 Middle-run ($N =$ ``many'') -- Slow (Pre-Gaussian but ``tail-preserving'');
-Short-run concentration and Long-run evenness; \emph{Pre-asymptotics}
+Short-run Concentration and Long-run evenness; \emph{Pre-asymptotics}
 
 Mild Randomness is characterized by an absence of ``structure'' and by a ``local
-level'' of Statistical Dependence; cf. properties of a ``gas'' as a state of
-matter
+level'' of Statistical Dependence; cf. properties of a gas (``Fickian'') as a
+state of matter
 
 Wild Randomness is characterized by presence of ``structure'' and Long-range
 Dependence (\S\ref{sec:long_range_dependence}); cf. properties of ``solid''
@@ -12712,10 +12772,63 @@ Central Limit Theorem:
 \[
   A_N \sum_{n=1}^N U_n - N \expect{U}
 \]
-where $A_N \sim \frac{1}{\sqrt{N}}$, Limit is a Gaussian as $N \to \infty$; the
-Domain of ``Universality of Attraction'' to the Gaussian includes all $U$
-satisfying $\expect(U^2) < \infty$ and also some cases where $\expect(U^2)$
-Diverges ``slowly enough''
+where $A_N \sim \frac{1}{\sqrt{N}}$ (FIXME: distributed as a distribution or is
+this a typo ???), Limit is a Gaussian as $N \to \infty$; the Domain of
+``Universality of Attraction'' to the Gaussian includes all $U$ satisfying
+$\expect(U^2) < \infty$ and also some cases where $\expect(U^2)$ Diverges
+``slowly enough''
+
+failure to be Pre-Gaussian occurs when:
+\begin{itemize}
+  \item Population Variance or Expected Value is Infinite
+  \item Dependence is Long-range or ``global'', not Short-range (Markovian)
+  \item total Probability must be taken as Infinite
+\end{itemize}
+
+Scaling (\S\ref{sec:scaling_distribution}) Variables with $\alpha < 2$ satisfy
+$\expect(U^2) < \infty$ but are \emph{not} Pre-Gaussian
+
+Domains of ``Universality of Attraction'' to Non-Gaussian Limits: each value
+$\alpha < 2$ defines its own Domain of Universality, and each Domain is
+extremely narrow compared to the Domain of the Gaussian and reduces to Variables
+for which:
+\[
+  \prob(U > u) \sim u^{-\alpha} L(u)
+\]
+where $L(u)$ is Logarithmic or slowly varying (i.e.
+$\lim_{h \to \infty} \frac{L(hu)}{L(u)} = 1$)
+
+if $U_n$ is in the Domain of Universality of $\alpha < 2$, the Limit is a Random
+Variable called \emph{$L$-stable} (\S\ref{sec:lsm})
+
+neglecting the slowly varying term $L(u)$:
+\[
+  N^{\frac{1}{\alpha}} \sum_{n=1}^N U_n - B_N
+\]
+where $B_N$ is $N \expect(U)$ when $1 < \alpha < 2$ and $0$ when
+$0 < \alpha < 1$; the Sum $U_N$ is Asymptotically of order
+$N^{\frac{1}{\alpha}}$
+(FIXME: explain)
+
+\emph{Tail Preservation Relation} -- $\overline{F}_N(u) \sim N \overline{F}(u)$
+
+for $U_n$ ($1 \leq n \leq N$) IID with Tail Probability $\overline{F}(u)$, and
+$\tilde{F}_N(u)$ the Tail Probability of $\tilde{U}_N = \max(U_n)$, then:
+\[
+  1 - \tilde{F}_N(u) = F(u)^N
+\]
+in the Tail where $\overline{F}(u) \ll 1$ and $\tilde{F}(u) \ll 1$, in
+\emph{all} cases: $\tilde{F}(u) \sim N \overline{F}$
+
+cf. Extreme Value Analysis (\S\ref{sec:eva})
+
+Doubling Convolution, Portioning Ratio
+
+Distributions with Uniform Convexity of $\ln p(u)$ show that the distinction
+between Mild and Long-tailed Randomness cannot be identified with the
+distinction between ``even'' and Concentrated Short-run portioning
+
+``Extreme'' Randomness -- Log-cauchy (\S\ref{sec:log_cauchy})
 
 
 
