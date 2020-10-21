@@ -2022,6 +2022,8 @@ cf. Scale Parameter (\S\ref{sec:scale_parameter})
 
 cf. Power-law (\S\ref{sec:power_law})
 
+cf. Scaling (Homothety \S\ref{sec:scaling})
+
 %FIXME: wikipedia links scaling distribution to power law
 
 --FIXME: should this be considered equivalent to the Pareto Distribution
@@ -2190,6 +2192,17 @@ in the Tail where $\overline{F}(u) \ll 1$ and $\tilde{F}(u) \ll 1$, in
 \emph{all} cases: $\tilde{F}(u) \sim N \overline{F}$
 
 cf. Extreme Value Analysis (\S\ref{sec:eva})
+
+Wild Randomness is characterized by the fact that the largest of many addends is
+of the same order of magnitude as their sum
+
+Ch.6
+
+Self-affinity (\S\ref{sec:self_affinity}): Linear Scaling behavior in the Graph
+(\S\ref{sec:relation_graph}) of a Function
+
+cf. Self-similarity (\S\ref{sec:self_similarity}) -- defined by an Isotropic
+Reduction (Homothety \S\ref{sec:homothety}), a Rotation, and a Translation
 
 
 
@@ -2679,6 +2692,12 @@ Sequential (Time Series) data attributed to ``convergence effects'' related to
 the Central Limit Theorem that have Foci of Convergence in the family of Tweedie
 Exponential Dispersion Models (Probability Distributions
 \S\ref{sec:tweedie_distribution})
+
+(Mandelbrot97E)
+
+the Domain of ``Universality of Attraction'' to the Gaussian includes \emph{all}
+$U$ satisfying $\expect(U^2) < \infty$ and also some cases where $\expect(U^2)$
+Diverges ``slowly enough''
 
 
 
@@ -5296,8 +5315,8 @@ Variance is defined as either the Expected Value of the
 Squared Deviation from the Mean (SDM \S\ref{sec:sdm}), considering a theoretical
 Distribution, or its Sample Mean (\S\ref{sec:sample_mean})
 
-Second Central Moment (\S\ref{sec:moment})/Second Cumulant
-(\S\ref{sec:cumulant})
+\emph{Mean Square} (\S\ref{sec:mean_square}) $\expect(X^2)$ -- Second Central
+Moment (\S\ref{sec:moment})/Second Cumulant (\S\ref{sec:cumulant})
 
 Variances are always Non-negative
 
@@ -5476,6 +5495,16 @@ Simpson's Paradox
 using the Product of Values instead of Sum as in Arithmetic Mean
 
 Central Tendency for Ratio Measurement (\S\ref{sec:measurement_level})
+
+
+
+\subparagraph{Mean Square}\label{sec:mean_square}\hfill
+
+Arithmetic Mean of the Squares of a Set of Numbers or Random Variable
+
+Second Moment (\S\ref{sec:variance}) $\expect(X^2)$ of a Random Variable
+
+\fist Mean Square Deviation (\S\ref{sec:msd})
 
 
 
@@ -5705,7 +5734,7 @@ characterized by presence of ``structure'' and Long-range Dependence
 
 \subparagraph{Index of Long-range Dependence}\label{sec:hurst_exponent}\hfill
 
-or \emph{Hurst Exponent}
+\emph{Rougness Exponent} or \emph{Hurst Exponent}
 
 $H$
 
@@ -5727,9 +5756,10 @@ is their Standard Deviation
 
 Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
 
-cf. Fractal Dimension (\S\ref{sec:fractal_dimension}) -- Hurst Exponent
+Fractal Co-dimension (\S\ref{sec:fractal_codimension}) -- Hurst Exponent
 represents structure over asymptotically longer periods, Fractal Dimension
-represents structure over asymptotically shorter periods
+(\S\ref{sec:fractal_dimension}) represents structure over asymptotically shorter
+periods
 
 Rescaled Range (R/S) Analysis -- Estimation of Hurst Exponent
 
@@ -12724,20 +12754,12 @@ Mild and Wild Randomness are defined by criterea that distinguish between
 the case of Mild Randomness, and ``concentrated'' portioning where one or a
 ``few'' fo the addends predominate in the case of Wild Randomness
 
-Mild (Gaussian) -- Short-run and Long-range even-ness, Tail-mixing
+Mild (Gaussian) -- Short-run and Long-run even-ness, Tail-mixing
 
-Slow (Lognormal) -- Short-run Concentration and Long-range even-ness,
+Slow (Lognormal) -- Short-run Concentration and Long-run even-ness,
 Tail-preserving
 
 Wild (Scaling) -- Short-run and Long-run Concentration, Tail-preserving
-
-Long-run ($N \to \infty$) -- Pre-Guassian (``even'' in the Long-run): $1 / N \to
-0$; ``Theory of Errors'', ``absence of Concentration in the Long-run'' (cf.
-Central Limit Theorem \S\ref{sec:central_limit})-- the assumption that Errors
-are Gaussian because they are the Observable Outcome of a large number of
-separate Additive contributions such that even the largest is negligible
-compared to the Sum both \emph{ex-ante} (in terms of Distributions) and
-\emph{ex-post} (in terms of Realized values)
 
 Short-run ($N=2$ or ``a few'') -- Mild ``tail-mixing'', Wild
 ``tail-preserving'' (shorthand: $P_N \sim N P$); criterea:
@@ -12762,6 +12784,19 @@ Wild Randomness is characterized by presence of ``structure'' and Long-range
 Dependence (\S\ref{sec:long_range_dependence}); cf. properties of ``solid''
 matter
 
+\begin{itemize}
+  \item Wild vs. Pre-Gaussian: classical Limit Theorems define
+    \emph{Concentration} in the Long-run
+\end{itemize}
+
+Long-run ($N \to \infty$) -- Pre-Guassian (``\emph{even}'' in the Long-run):
+$1 / N \to 0$; ``Theory of Errors'', ``absence of Concentration in the
+Long-run'' (cf. Central Limit Theorem \S\ref{sec:central_limit})-- the
+assumption that Errors are Gaussian because they are the Observable Outcome of a
+large number of separate Additive contributions such that the largest is
+negligible compared to the Sum both \emph{ex-ante} (in terms of Distributions)
+and \emph{ex-post} (in terms of Realized values)
+
 Law of Large Numbers:
 \[
   \frac{1}{N} \sum_{n=1}^N U_n
@@ -12770,13 +12805,13 @@ Limit is $\expect(U)$ as $N \to \infty$
 
 Central Limit Theorem:
 \[
-  A_N \sum_{n=1}^N U_n - N \expect{U}
+  \frac{1}{\sqrt{N}} \sum_{n=1}^N U_n - N \expect{U}
 \]
-where $A_N \sim \frac{1}{\sqrt{N}}$ (FIXME: distributed as a distribution or is
-this a typo ???), Limit is a Gaussian as $N \to \infty$; the Domain of
-``Universality of Attraction'' to the Gaussian includes all $U$ satisfying
-$\expect(U^2) < \infty$ and also some cases where $\expect(U^2)$ Diverges
-``slowly enough''
+(FIXME: the book writes $A_N \sim \frac{1}{\sqrt{N}}$, is this a typo for
+$A_N = ...$ ???)
+Limit is a Gaussian as $N \to \infty$; the Domain of ``Universality of
+Attraction'' to the Gaussian includes \emph{all} $U$ satisfying $\expect(U^2) <
+\infty$ and also some cases where $\expect(U^2)$ Diverges ``slowly enough''
 
 failure to be Pre-Gaussian occurs when:
 \begin{itemize}
@@ -12787,6 +12822,8 @@ failure to be Pre-Gaussian occurs when:
 
 Scaling (\S\ref{sec:scaling_distribution}) Variables with $\alpha < 2$ satisfy
 $\expect(U^2) < \infty$ but are \emph{not} Pre-Gaussian
+(FIXME: how does this comport with the universality of attraction to the
+gaussian above including all $U$ statisfying $\expect(U^2) < \infty$ ???)
 
 Domains of ``Universality of Attraction'' to Non-Gaussian Limits: each value
 $\alpha < 2$ defines its own Domain of Universality, and each Domain is
@@ -12798,19 +12835,28 @@ for which:
 where $L(u)$ is Logarithmic or slowly varying (i.e.
 $\lim_{h \to \infty} \frac{L(hu)}{L(u)} = 1$)
 
-if $U_n$ is in the Domain of Universality of $\alpha < 2$, the Limit is a Random
-Variable called \emph{$L$-stable} (\S\ref{sec:lsm})
-
-neglecting the slowly varying term $L(u)$:
+if $U_n$ is in the Domain of Universality of $\alpha < 2$, the Limit $\sum U_n$
+is a Random Variable called \emph{$L$-stable} (\S\ref{sec:lsm}), as
+$N \to \infty$:
 \[
-  N^{\frac{1}{\alpha}} \sum_{n=1}^N U_n - B_N
+  N^\frac{1}{\alpha} \sum_{n=1}^N U_n - N \expect{U}
 \]
-where $B_N$ is $N \expect(U)$ when $1 < \alpha < 2$ and $0$ when
-$0 < \alpha < 1$; the Sum $U_N$ is Asymptotically of order
-$N^{\frac{1}{\alpha}}$
-(FIXME: explain)
+when $1 < \alpha < 2$ and:
+\[
+  N^\frac{1}{\alpha} \sum_{n=1}^N U_n
+\]
+when $0 < \alpha < 1$
+
+\begin{itemize}
+  \item Mild vs. Long-tailed: Short-run Concentration, Convexity of $\ln p(u)$,
+    and Tail Preservation Relation
+\end{itemize}
+
+criterea: \emph{Concentration in Mode}, \emph{Concentration in Probability}
 
 \emph{Tail Preservation Relation} -- $\overline{F}_N(u) \sim N \overline{F}(u)$
+
+cf. Extreme Value Analysis (\S\ref{sec:eva})
 
 for $U_n$ ($1 \leq n \leq N$) IID with Tail Probability $\overline{F}(u)$, and
 $\tilde{F}_N(u)$ the Tail Probability of $\tilde{U}_N = \max(U_n)$, then:
@@ -12820,15 +12866,85 @@ $\tilde{F}_N(u)$ the Tail Probability of $\tilde{U}_N = \max(U_n)$, then:
 in the Tail where $\overline{F}(u) \ll 1$ and $\tilde{F}(u) \ll 1$, in
 \emph{all} cases: $\tilde{F}(u) \sim N \overline{F}$
 
-cf. Extreme Value Analysis (\S\ref{sec:eva})
+for $U', U'' \sim p(u)$, $U = U' + U''$ has PDF $p_2(u)$ given by the
+\emph{Doubling Convolution}:
+\[
+  p_2(x) = \int p(u) p(x - u) \diffy{u}
+\]
+and when $u$ is known, the Conditional PDF of $u'$ is given by the
+\emph{Portioning Ratio}:
+\[
+  \frac{p(u') p(u - u')}{p_2(u)}
+\]
+and the Conditional Expectation of $U'$ is always $\frac{u}{2}$, and the
+Conditional Expectation of $\min(u', u'')$ is not given by any ``mangeable
+expansion''
 
-Doubling Convolution, Portioning Ratio
+studying the Location of the most Probable values of $\min(u', u'')$ and
+$\max(u', u'')$, called ``\emph{Modes}'', leads to a criterion for defining the
+Concentration vs. even-ness in Mode based on the Convexity of $\ln p(u)$
+
+\emph{Concentration in Mode} -- sufficient criterion of even-ness or
+Concentration ``in Mode'': the Graph of $\ln p(u)$ is Cap- or Cup-convex for
+sufficiently large values of $u$
+
+when the Convexity $\ln p(u)$ is \emph{Uniform} for all $u$, the sign of:
+\[
+  \Delta(u) = 2 \ln p(\frac{u}{2}) - \ln p(0) - \ln p(u)
+\]
+is \emph{Independent} of $u$
+
+when the Graph of $\ln p(u)$ is Cap-convex, the Portioning Ratio is
+\emph{maximum} for $u' = \frac{u}{2}$ and Portioning is \emph{even} in terms of
+Mode
+
+when the Graph of $\ln p(u)$ is Cup-convex, the Portioning Ratio is
+\emph{minimum} for $u' = \frac{u}{2}$ and Portioning is \emph{Concentrated} in
+terms of Mode
+
+when $\ln p(u)$ is straight, the addends are Exponential and the Portioning
+Ratio is constant
 
 Distributions with Uniform Convexity of $\ln p(u)$ show that the distinction
 between Mild and Long-tailed Randomness cannot be identified with the
-distinction between ``even'' and Concentrated Short-run portioning
+distinction between ``even'' and Concentrated Short-run Portioning
 
-``Extreme'' Randomness -- Log-cauchy (\S\ref{sec:log_cauchy})
+when $\ln p(u)$ is of non-constant Convexity (e.g. as the Lognormal Distribution
+has $\ln p(u)$ equal to the Gaussian, which is a bell curve of mixed Convexity),
+so Portioning is even for $u$ near the Mode and Concentrated for large $u$;
+Cauchy Distribution is also mixed
+
+\fist Gamma Distribution shows the need for a criterion of ``Mildness'' that
+goes beyond the Convexity of $\ln p(u)$
+
+\emph{Concentration in Probability} -- criterion $p_2(u) \sim 2p(u)$ of Tail
+Preservation under Addition as defining Long-tailedness
+
+$P_N(u) = NP(u)$ expresses that the Tail behavior of $U$ is preseved under
+Finite Addition
+
+$N = 3$ -- taking $u'$, $u''$, and $u^0$ to be the distances from an interior
+Point to the sides of an Equilateral Triangle of height $u$, then $u = u' + u''
++ u^0$ and:
+\begin{itemize}
+  \item when the $U$ are Exponential, then the Conditional Distribution of
+    Points in the Triangle is Uniform
+  \item when $U$ is Mild, then the Conditional Distribution is concentrated near
+    the center
+  \item when $U$ is Short-run Concentrated, the Conditional Distribution
+    concentrates near the corners
+\end{itemize}
+the same distinction holds for $N = 4, 5, \ldots$
+
+``Extreme'' Randomness -- Tail Probability $P(u) = \frac{1}{\ln u}$
+Concentration Converges to $1$ as $N \to \infty$, i.e. whenever $P(u)$ is a
+``slowly varying function'' $\lim_{u\to\infty}\frac{P(hu)}{P(u)} \to 1$ for $h >
+0$; Log-cauchy (\S\ref{sec:log_cauchy})
+
+Seven States of Randomness
+
+alternative criteria: rate of increase as Function of $q$ of the Moment
+$\expect(U^q)$ or ``Scale Factor'' ($\expect(U^q)^\frac{1}{q}$)
 
 
 
@@ -13628,7 +13744,7 @@ Unit Root Process (\S\ref{sec:unit_root})
 % means that the distributions of the incremental process random variables are
 % stationary
 
-Mandelbrot97:
+Mandelbrot97E:
 
 (Mandelbrot 1963)
 
@@ -13660,6 +13776,22 @@ Function of Time $\theta(t)$ gives an approximation of Long-range Dependence
 with Long-tailed Variability; in order for ``Physical Time'' to be a
 Non-decreasing, Self-affine Function of ``Trading Time'', $t(\theta)$ is
 required to be a L\'evy Staircase (\S\ref{sec:levy_staircase})
+
+Ch.5
+
+\fist Seven States of Randomness (\S\ref{sec:statistical_randomness})
+
+Universality of Attraction to Non-Gaussian Limits -- if $U_n$ is in the Domain
+of Universality of $\alpha < 2$, the Limit $\sum U_n$ is a Random Variable
+called \emph{$L$-stable} as $N \to \infty$:
+\[
+  N^\frac{1}{\alpha} \sum_{n=1}^N U_n - N \expect{U}
+\]
+when $1 < \alpha < 2$ and:
+\[
+  N^\frac{1}{\alpha} \sum_{n=1}^N U_n
+\]
+when $0 < \alpha < 1$
 
 
 
