@@ -2223,13 +2223,16 @@ Histograms Tail
 
 ``Scale Factors'' $\sigma(q) = \Big(\expect(L^q(t, T))\Big)^{\frac{1}{q}}$
 
-\emph{Uniscaling} (Fractal) -- -- $q < \alpha$ are Powers of $T$ with Exponent
-\emph{independent} of $q$
+\emph{Uniscaling} (Fractal) -- $q < \alpha$ are Powers of $T$ with Exponent
+\emph{independent} of $q$ (FIXME: define $\alpha$); i.e. Scale Factors based on
+Moments (\S\ref{sec:moment}) satisfy:
+\[
+  \Big(E(B_H(t + T) - B_H(t)^q)\Big)^{\frac{1}{q}} = c T^H
+\]
+for all Powers $q > -1$ where $c$ is some Constant (Ch.6)
 
---FIXME: $\alpha$ ???
-
-\emph{Multiscaling} (Multifractal) -- the Exponents of the Scale Factors
-\emph{depend} on $q$
+\emph{Multiscaling} (Multifractal) -- the (Exponent of the) $q$th Scale Factor
+\emph{depends} on $q$
 
 \fist Conditional Stationarity (\S\ref{sec:conditional_stationarity})
 
@@ -3763,7 +3766,7 @@ viewed as a Mixture (\S\ref{sec:mixture_distribution}) of Gaussian Random
 Variables with Zero Mean and Variance drawn from a standard L\'evy Distribution
 
 a Cauchy Process (\S\ref{sec:cauchy_process}) can be seen as a Brownian Motion
-Subordinated (\S\ref{sec:subordination}) to a Process associated with a L\'evy
+Subordinated (\S\ref{sec:compound_process}) to a Process associated with a L\'evy
 Distribution
 
 
@@ -3802,7 +3805,6 @@ of the resulting Distribution is not well defined for $\alpha < 2$
   \item L\'evy Distribution (\S\ref{sec:levy_distribution}) --
     $\alpha = 1/2, \beta = 1$
 \end{itemize}
-
 
 a standard Cauchy Random Variable can be viewed as a Mixture
 (\S\ref{sec:mixture_distribution}) of Gaussian Random Variables with Zero Mean
@@ -5657,6 +5659,10 @@ Normalized \emph{Covariance} (\S\ref{sec:covariance})
 
 Correlation is Dimensionless, while Covariance is in units resulting from
 multiplying the two Variables
+
+completely Un-correlated Variables may be called \emph{Orthogonal}
+(\S\ref{sec:orthogonality}); cf. White Frequency Spectrum
+(\S\ref{sec:frequency_spectrum})
 
 \fist cf. Cross-correlation (\S\ref{sec:cross_correlation}), Autocorrelation
 (\S\ref{sec:autocorrelation})
@@ -13320,22 +13326,52 @@ with $F_{X_n}$ the CDF (\S\ref{sec:cdf}) of $X_n$ and $F_X$ the CDF of $X$:
 
 
 % ------------------------------------------------------------------------------
-\subsection{Subordination}\label{sec:subordination}
-% ------------------------------------------------------------------------------
-
-cf. Fractal Time (\S\ref{sec:fractal_time})
-
-%FIXME: riemann-stieltjes integral ???
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Filtration}\label{sec:stochastic_filtration}
 % ------------------------------------------------------------------------------
 
 cf. Filtration (Abstract Algebra \S\ref{sec:filtration})
 
 Filtered Probability Space
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Compound Process}\label{sec:compound_process}
+% ------------------------------------------------------------------------------
+
+or \emph{Seperable Process}
+
+Mandelbrot97E
+
+\emph{Directing Function} $\theta(t)$
+
+\emph{Compounding Function} (\emph{Directed Function}) $X(\theta)$
+
+\emph{Compound Process} $X(\theta(t))$
+
+%FIXME: riemann-stieltjes integral ???
+
+\emph{Spectra} (\S\ref{sec:frequency_spectrum}) of Compound Processes are only
+sensitive to the Spectrum of the Directed (Compounding) Function (and completely
+blind to properties of the Directing Function); e.g. the Directing Function
+(Increments) may be strongly Dependent, but \emph{Uncorrelated} (i.e. Spectrally
+White)
+
+Discontinous Compounding -- modifies both the Graph and Trail
+
+Subordination -- Discontinuous Compounding with a Directing Function with
+Non-negative Statistically Independent Increments;
+when the Directing Function is Self-affine, it must be an $L$-stable
+(\S\ref{sec:lsm}) Non-decreasing Function or ``Stable Subordinator''
+
+\fist cf. Subordination (Analysis \S\ref{sec:subordination})
+
+a Directing Function that is a Devil Staircase (\S\ref{sec:devil_staircase}) is
+called a \emph{Fractal Time} (\S\ref{sec:fractal_time})
+
+Continuous Compounding -- modifies the Graph of $X(t)$ but leaves the Trail
+(i.e. Path without the Time Axis) unchanged; \emph{Multifractal Time}
+(\S\ref{sec:multifractal_time})
 
 
 
@@ -13524,11 +13560,57 @@ Power Spectral Density (\S\ref{sec:psd})
 1997 - Dietrich, Newsam - \emph{Fast and Exact Simulation of Stationary Gausian
   Processes Through Circulant Embedding of the Covariance Matrix}
 
+Mandelbrot97E, Ch.6:
+
+Fractional Brownian Motion $B_H(t)$ is the Random Process with Gaussian
+Increments that satisfy the Diffusion Rule, $\forall t, T$:
+\[
+  \expect(B_H(t+T) - B_H(t)) = 0 \ \ \ \ \expect(B_H(t+T) - B_H(t))^2 = T^{2H}
+\]
+(``Fickian Diffusion'' when $H = \frac{1}{2}$)
+
+Cyclic but Non-periodic variability at all Time Scales
+
+\emph{Uniscaling} (\S\ref{sec:scaling_distribution}) -- above definition implies
+``Scale Factors'' based on Moments (\S\ref{sec:moment}) satisfy:
+\[
+  \Big(E(B_H(t + T) - B_H(t)^q)\Big)^{\frac{1}{q}} = c T^H
+\]
+for all Powers $q > -1$ where $c$ is some Constant, are \emph{independent} of
+$q$, i.e.:
+\[
+  \Delta B_H \sim \Delta t^H
+\]
+and:
+\[
+  \frac{\ln|\Delta B_H|}{\ln \Delta{t}} \sim H
+\]
+(note that $\Delta t$ and $\Delta B_H$ are increments over a non-vanishing
+Interval, i.e. not Infinitesimal, and so $H$ is a ``coarse'', not a ``local'',
+quantity)
+
+cf. \emph{Multiscaling} (\S\ref{sec:multiscaling}) -- the $q$th Scale Factor
+\emph{depends} on $q$
+
+the Past Average $\frac{B_H(0) - B_H(-T)}{T}$ and the Future Average
+$\frac{B_H(T) - B_H(0)}{T}$ are Gaussian Variables with Correlation:
+\[
+  C = 2^{2H-1} - 1
+\]
+independent of $T$, a fact that follows from \emph{Self-affine Scaling}
+(\S\ref{sec:self_affinity})
+
 
 
 \subparagraph{Fractional Gaussian Noise}\label{sec:fractional_gaussian}\hfill
 
 Increment Process $X(t) = B_H(t+1) - B_H(t)$
+
+Mandelbrot97E, Ch.6:
+
+Generalized Derivative $B'_H(t)$ as a ``continuing'' or ``humming'' form of
+$\frac{1}{f}$ Noise (\S\ref{sec:pink_noise}) with Spectral Density
+(\S\ref{sec:spectral_density}) Proportional to $f^{-2H+1}$
 
 
 
@@ -13577,6 +13659,16 @@ other Properties:
   \item absence of ``clustering'' of large changes in Time
   \item absence of cyclic behavior
 \end{itemize}
+
+Fickian Diffusion Rule for a Random Process $B(t)$ with Gaussian Increments $T$,
+$\forall t, T$:
+\[
+  \expect(B(t+T) - B(t)) = 0 \ \ \ \ \expect(B(t+T) - B(t))^2 = T
+\]
+``Fickian Variance'' is a consequence of Independence of Increments, and Fickian
+Variance guarantees the \emph{Orthogonality} (i.e. Un-correlatedness) of
+Increments, and adding the Gaussian assumption guarantees Independence (FIXME:
+clarify)
 
 
 
@@ -13644,7 +13736,7 @@ Stable (\S\ref{sec:stable_process})
 
 Pure Jump Process (\S\ref{sec:jump_process})
 
-can be seen as a Brownian Motion Subordinated (\S\ref{sec:subordination}) to a
+can be seen as a Brownian Motion Subordinated (\S\ref{sec:compound_process}) to a
 Process associated with a L\'evy Distribution (\S\ref{sec:levy_distribution})
 
 
@@ -13792,6 +13884,29 @@ when $1 < \alpha < 2$ and:
   N^\frac{1}{\alpha} \sum_{n=1}^N U_n
 \]
 when $0 < \alpha < 1$
+
+Ch.6
+
+the Sum of $N$ $L$-stable Variables is itself $L$-stable
+
+Gaussian is the Limit case $\alpha = 2$
+
+for a ``Weighted Index'' of Independent Variables $\sum W_g X_g$, when the
+Weights are not Random, the Variables $X$ and the Weighted Index are $L$-stable
+(FIXME: clarify)
+
+$L$-stable Variables are Fixed Points in the operation consisting of
+transforming Indpendent Random Variables by taking a Non-randomly Weighted
+Average
+
+Compound Processes (\S\ref{sec:compound_process}) -- when a Directing Function
+is Self-affine, it must be an $L$-stable Non-decreasing Function or ``Stable
+Subordinator''
+
+a Wiener Process (\S\ref{sec:wiener_process}) as a Directed Function of a
+Fractal Time (\S\ref{sec:fractal_time}) Directing Function yields an $L$-stable
+Motion with $\alpha$ ``fed in'' by the L\'evy Staircase
+(\S\ref{sec:levy_staircase})
 
 
 
