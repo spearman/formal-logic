@@ -30,157 +30,25 @@ see also:
 
 
 % ==============================================================================
-\section{Metric Space}\label{sec:metric_space}
+\section{Topology}\label{sec:topology}
 % ==============================================================================
 
-\fist Metric Geometry (\S\ref{sec:metric_geometry})
-
-A \emph{Metric Space} is a Set $M$ for which a \emph{Metric}
-(\S\ref{sec:metric}) is defined for all Elements of that Set.
-
-A Metric Space $M$ can then be defined as the pair:
-\[
-  (M,d)
-\]
-where $M$ is a Set of Elements and $d$ is a Distance Function.
-
-Subsets of a Metric Space may be \emph{Open} (\S\ref{sec:open_set}),
-\emph{Closed} (\S\ref{sec:closed_set}), both or neither.
-
-Abstract Axiomatic Structure needed to define a Theory of \emph{Differentiation}
-(\S\ref{sec:differential_calculus})
-
-cf. \emph{Measure Spaces} (\S\ref{sec:measure_space}) -- Abstract Axiomatic
-Structure needed to define a Theory of \emph{Integration}
-(\S\ref{sec:integral_calculus})
-
-Denotational Semantics (\S\ref{sec:denotational_semantics})
-
-Domain Theory (\S\ref{sec:domain_theory})
-
-(wiki): Linear Inverse Problems (Functional Analysis
-\S\ref{sec:linear_inverse_problem}) are represented by mappings between Metric
-Spaces
-
-any Normed Vector Space (\S\ref{sec:normed_vectorspace}) is a Metric Space by
-defining $d(x,y) = \|y-x\|$
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Metric}\label{sec:metric}
-% ------------------------------------------------------------------------------
-
-A \emph{Metric} is a \emph{Distance Function} defined between all
-Elements or Points of a Metric Space.
-
-cf. Norm (\S\ref{sec:norm}), $p$-norm (\S\ref{sec:p_norm})
-
-A Distance Function $d$ has the form:
-\[
-  d: M \times M \rightarrow \mathbb{R}^{+}
-\]
-with the following conditions:
+Given a Set $X$, a \emph{Topology} $\tau$ on $X$ is a Family
+(\S\ref{sec:family}) of Subsets of $X$--the Open Sets
+(\S\ref{sec:open_set})--with the Properties:
 \begin{enumerate}
-\item $d(x_1, x_2) \geq 0$ (\emph{Non-negativity} or \emph{Separation
-  Axiom})
-\item $d(x_1, x_2) = 0 \leftrightarrow x_1 = x_2$ (\emph{Identity of
-  Indiscernables} or \emph{Coincidence Axiom})
-\item $d(x_1, x_2) = d(x_2, x_1)$ (\emph{Symmetry})
-\item $d(x_1, x_3) \leq d(x_1, x_2) + d(x_2, x_3)$
-  (\emph{Subadditivity} or \emph{Triangle Inequality})
+  \item $\varnothing \in \tau$, $X \in \tau$
+  \item $A,B \in \tau \Rightarrow A \cap B \in \tau$
+  \item $\{A_i\}_{i \in I} \subseteq \tau \Rightarrow \bigcup_{i \in
+  I} A_i \in \tau$
 \end{enumerate}
-Two Metrics, $d_1$ and $d_2$, in a Metric Space, $M$, are
-\emph{Metrically Equivalent}, $d_1 \sim d_2$, if for Topologies
-$\tau_1$ Induced by $d_1$ and $\tau_2$ Induced by $d_2$, $\tau_1 =
-\tau_2$. A sufficient condition for Metric Equivalence is given by:
+The Topology $\tau$ is therefore a Subset of the Power Set of $X$:
 \[
-  \exists k_1, k_2 > 0 : \forall x \in M, \forall r > 0,
-  B^{d1}_{rk_1}(x) \subseteq B^{d2}_r (x) \subseteq B^{d1}_{rk_2}(x)
+  \tau \subseteq \pow(X)
 \]
 
-\emph{Euclidean Metric} ($2$-norm):
-\[
-  d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
-\]\[
-  (\mathbf{p},\mathbf{q}) \mapsto \sqrt{\sum_{i=1}^{n}(q_i - p_i)^2}
-\]
-
-\emph{Discrete Metric}:
-\[
-  d: X \times X \rightarrow \mathbb{R}^{+}
-\]\[
-  (\mathbf{p},\mathbf{q}) \mapsto \left\{
-  \begin{array}{l l}
-    0: \mathbf{p} = \mathbf{q}\\
-    1: \mathbf{p} \neq \mathbf{q}
-  \end{array}\right.
-\]
-
-\emph{Max Metric} ($\infty$-norm):
-\[
-  d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
-\]\[
-  (\mathbf{p},\mathbf{q}) \mapsto max_{1 \leq i \leq n}\{|q_i - p_i|\}
-\]
-
-\emph{Taxicab Metric} ($1$-norm):
-\[
-  d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
-\]\[
-  (\mathbf{p},\mathbf{q}) \mapsto \sum_{i=1}^{n}|q_i - p_i|
-\]
-
-\fist Hamming Distance (Hamming Spaces \S\ref{sec:hamming_distance})
-
-
-
-\subsubsection{Metric Derivative}\label{sec:metric_derivative}
-
-(wiki): generalized notion of ``speed'' (Absolute Velocity; cf. conventional
-Derivative \S\ref{sec:derivative}) from Vector Spaces, with both notion of
-Distance and Direction, to Metric Spaces, with only a notion of Distance but not
-Direction
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Ball}\label{sec:ball}
-% ------------------------------------------------------------------------------
-
-A Metric \emph{Ball} is defined for a Point $p$ in a Metric Space
-$(M,d)$ as the set of all Points (including $p$) within a given Radius
-$r > 0$ as determined by the Distance Function of the Metric Space:
-\[
-  B_r(p) = {x \in M | d(x,p) < r }
-\]
-The above is termed an \emph{Open Ball} because it does not include
-the points where $d(x,p) = r$. Such a Ball including these additional
-Points is called a \emph{Closed Ball}.
-
-a Subset of a Metric Space is \emph{Bounded} (\S\ref{sec:bounded_subset}) if it
-is contained in a Ball of Finite Radius
-
-
-
-\subsubsection{Unit Ball}\label{sec:unit_ball}
-
-Unit Sphere (\S\ref{sec:unit_sphere})
-
-
-
-\subsubsection{Open Ball}\label{sec:open_ball}
-
-Open $n$-ball $B^n$
-
-Homeomorphic to Cartesian Space (\S\ref{sec:cartesian_space})
-$\reals^n$
-
-
-
-\subsubsection{Closed Ball}\label{sec:closed_ball}
-
-Closed $n$-ball $D^n$
+\fist on Finite or Countably Infinite Sets, every \emph{$\sigma$-algebra}
+(\S\ref{sec:sigma_algebra}) is a Topology
 
 
 
@@ -339,502 +207,6 @@ Open Set by a Meagre Set (\S\ref{sec:meagre_set})
 
 
 % ------------------------------------------------------------------------------
-\subsection{Bounded Subset}\label{sec:bounded_subset}
-% ------------------------------------------------------------------------------
-
-a Subset of a Metric Space is \emph{Bounded} if it is contained in a Ball of
-Finite Radius
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Bounded Space}\label{sec:bounded_space}
-% ------------------------------------------------------------------------------
-
-a Space is Compact (\S\ref{sec:compact_space}) if it is Bounded
-(\S\ref{sec:bounded_space}) and Closed (\S\ref{sec:closed_set})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Extremum}\label{sec:extremum}
-% ------------------------------------------------------------------------------
-
-\fist Critical Points (Differentiable Functions \S\ref{sec:critical_point})
-
-
-
-\subsubsection{Maximum}\label{sec:maximum}
-
-Upper Bound (\S\ref{sec:upper_bound})
-
-Least Upper Bound (\S\ref{sec:least_upperbound})
-
-Local Maxima
-
-Second Derivative Test (\S\ref{sec:second_derivative_test})
-
-Multivariable -- Gradient (\S\ref{sec:gradient}) equal to the Zero Vector:
-$\nabla{f} = \vec{0}$
-
-\fist \emph{Saddle Points} (\S\ref{sec:saddle_point}) are specific to
-Multivariable Functions
-
-
-
-\paragraph{Argmax}\label{sec:argmax}\hfill
-
-
-
-\subsubsection{Minimum}\label{sec:minimum}
-
-Lower Bound (\S\ref{sec:lower_bound})
-
-Greatest Lower Bound (\S\ref{sec:greatest_lowerbound})
-
-Local Minima
-
-Second Derivative Test (\S\ref{sec:second_derivative_test})
-
-Multivariable -- Gradient (\S\ref{sec:gradient}) equal to the Zero Vector:
-$\nabla{f} = \vec{0}$
-
-\fist \emph{Saddle Points} (\S\ref{sec:saddle_point}) are specific to
-Multivariable Functions
-
-Convex Functions (\S\ref{sec:convex_function}) have the property that Local
-Minimum is necessarily a Global Minimum
-
-
-
-\paragraph{Argmin}\label{sec:argmin}\hfill
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Continuous Function}\label{sec:continuous_function}
-% ------------------------------------------------------------------------------
-
-A Function $f : X \rightarrow Y$ between Metric Spaces $(X,d)$ and $(Y,d')$ is
-\emph{Continuous} at a Point $c$ if:
-\[
-  \forall \epsilon > 0, \exists \delta > 0 :
-  f (B_{\delta}(c)) \subseteq B_{\epsilon}(f(c))
-\]
-$f$ is a \emph{Continuous Function} if it satisfies the above for all $c$. All
-Continuous Functions are Sequentially Continuous
-(\S\ref{sec:sequentially_continuous}).
-
-Alternatively, a Function $f: X \rightarrow Y$ is Continuous between Metric
-Spaces if and only if for all Open Sets $V \subseteq Y$, $f^{-1}(v)$ is an Open
-Set in $X$.
-
-\fist cf. Continuous Maps (\S\ref{sec:continuous_map}) between Topological
-Spaces
-
-\fist cf. \emph{Measurable Functions} (\S\ref{sec:measurable_function}) -- a
-Function between Measurable Spaces (\S\ref{sec:measurable_space}) is Measurable
-if the Preimage of any Measurable Set is Measurable
-
-a Continuous Function with a Continuous Inverse Function is called a
-\emph{Homeomorphism}
-
-Continuous Functions form the Differentiability Class
-(\S\ref{sec:differentiability_class}) $\mathcal{C}^0$
-
-Real-valued Continuous Function (\S\ref{sec:real_continuous})
-
-Continuously Differentiable (\S\ref{sec:continuously_differentiable})
-
-Local (Point)
-
-Continuous on Closed and Bounded implies Uniformly Continuous
-(\S\ref{sec:uniform_continuity})
-
-the Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
-treats of Real-valued Continuous Functions
-
-a Bounded Function (\S\ref{sec:bounded_function}) on a Compact Interval $[a,b]$
-is Riemann Integrable (\S\ref{sec:integrable_function}) if and only if it is
-Continuous ``Almost Everywhere'', i.e. Set of Points of Discontinuity has
-Lebesgue Measure Zero (\S\ref{sec:lebesgue_measure})
-
-an Open or Closed Continuous Surjective Map is necessarily a Quotient Map
-(\S\ref{sec:quotient_map})
-
-\emph{Weierstrass Approximation Theorem}
-(\S\ref{sec:weierstrass_approximation}): every Continuous Function defined on a
-Closed Interval can be Uniformly Approximated (\S\ref{sec:uniform_convergence})
-to arbitrary closeness by a \emph{Polynomial Function}
-(\S\ref{sec:polynomial_function})
-
-\emph{Stone-Weierstrass Theorem}: the Set of all Continuous Functions on a
-Closed Interval is the Uniform Closure (cf. Uniform Norm \S\ref{sec:p_norm}) of
-the Set of Polynomials on the Interval
-
-Continuous Functions $f : \reals^n \rightarrow \reals$ form a Filtration
-(\S\ref{sec:filtration}):
-\[
-  \cdots \subset C^n(\reals^k) \subset \cdots \subset C^1(R^k) \subset
-    C^0(\reals^k)
-\]
-
-
-
-\subsubsection{Uniform Continuity}\label{sec:uniform_continuity}
-
-Global (Set)
-
-\begin{itemize}
-  \item Singular Functions (\S\ref{sec:singular_function})
-    --FIXME: correct or only cantor function ???
-\end{itemize}
-
-
-
-\subsubsection{Absolute Continuity}\label{sec:absolute_continuity}
-
-\subsubsection{Lipschitz Continuity}\label{sec:lipschitz_continuity}
-
-\subsubsection{Baire Function}\label{sec:baire_function}
-
-a Baire Set (\S\ref{sec:baire_set}) is a Set whose Characteristic Function
-(Indicator Function \S\ref{sec:indicator_function}) is a Baire Function
-
-%FIXME: move section ?
-
-
-
-\subsubsection{Discontinuous Function}\label{sec:discontinuous_function}
-
-\paragraph{Discontinuity}\label{sec:discontinuity}\hfill
-
-\fist Singularity (\S\ref{sec:singularity})
-
-Type I: Jump Discontinuity, Removable Discontinuity
-
-Type II: Infinite Discontinuity, Essential Singularity
-
-
-
-\paragraph{Unit Step Function}\label{sec:unit_step_function}\hfill
-
-%FIXME: move this section ???
-
-or \emph{Heaviside Step Function}
-
-Anti-derivative of the Dirac Delta (Unit Impulse \S\ref{sec:dirac_delta})
-
-Step Function (\S\ref{sec:step_function})
-
-$u_c(t)$
-
-$H$
-
-\begin{itemize}
-  \item a Perceptron (\S\ref{sec:perceptron}) is an Artificial Neuron
-    (\S\ref{sec:ann}) using the Unit Step Function as the Activation Function
-\end{itemize}
-
-
-
-\paragraph{Rectangular Function}\label{sec:rectangular_function}\hfill
-
-%FIXME: move this section ???
-
-or \emph{Unit Pulse}
-
-cf. Dirac Delta Function (Unit Impulse Function \S\ref{sec:dirac_delta})
-
-the Fourier Transform of the Rectangular Function is the Sinc Function
-(\S\ref{sec:sinc_function})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Locally Invertible Map}\label{sec:locally_invertible}
-% ------------------------------------------------------------------------------
-
-Locally (\S\ref{sec:local_property})
-
-Invertible (\S\ref{sec:inverse_function})
-
-Curvilinear Coordinates (\S\ref{sec:curvilinear_coordinates}) can be derived
-from a Locally Invertible Transformation of a Set of Cartesian Coordinates; cf.
-Affine Coordinates (\S\ref{sec:affine_coordinates}) can be derived from a Linear
-Transformation (\S\ref{sec:linear_transformation}) of a Set of Cartesian
-Coordinates
-
---FIXME: is this equivalent to the condition that a transformation $F$ has
-components that are Invertible, Real-valued with Continuous $2$nd Partial
-Derivatives everywhere ???
-\url{https://www.youtube.com/watch?v=XtpVVcKXfnA}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Curve}\label{sec:curve}
-% ------------------------------------------------------------------------------
-
-A \emph{Curve} is a Topological Space that is locally Homeomorphic to a Line
-(\S\ref{sec:algebraic_line})
-
-\begin{itemize}
-  \item Simple Closed Curve (\S\ref{sec:simple_closed_curve})
-  \item Plane Curve (\S\ref{sec:plane_curve})
-  \item Space-filling Curve (\S\ref{sec:space_filling_curve})
-  \item Fractal Curve (\S\ref{sec:fractal_curve})
-  \item Differentiable Curve (\S\ref{sec:differentiable_curve})
-  \item Parametric Curve (\S\ref{sec:parametric_curve})
-  \item Integral Curve (\S\ref{sec:integral_curve})
-\end{itemize}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Isometry}\label{sec:isometry}
-% ------------------------------------------------------------------------------
-
-Distance-preserving Injective Map between Metric Spaces
-
-a Similarity Transform (\S\ref{sec:similarity_transformation}) with Scaling
-Factor $r = 1$ is a \emph{Euclidean Isometry} (or \emph{Rigid Transformation}
-\S\ref{sec:rigid_transformation})
-
-Isometries of Euclidean Space (\S\ref{sec:euclidean_space}):
-\begin{itemize}
-  \item Point Reflection (Central Inversion) -- an Affine Transformation
-  \item TODO
-  ...
-\end{itemize}
-
-Isometries in Hilbert Space (\S\ref{sec:hilbert_space}):
-\begin{itemize}
-  \item Unitary Transformations (\S\ref{sec:unitary_transformation})
-  \item ...
-\end{itemize}
-
-A \emph{Motion} (\S\ref{sec:motion}) is a Surjective Isometry of a Metric
-Space.
-
-Crystallographic Groups (\S\ref{sec:crystallographic_group}) are Cocompact
-(\S\ref{sec:cocompact_space}), Discrete Subgroups (\S\ref{sec:discrete_group})
-of the Isometries of some Euclidean Space (\S\ref{sec:euclidean_space})
-
-
-
-\subsubsection{Motion}\label{sec:motion}
-
-%FIXME: move to geometry ???
-
-A \emph{Motion} is a Surjective Isometry of a Metric Space.
-
-
-
-\subsubsection{Isometry Group}\label{sec:isometry_group}
-
-``Rigid Geometry''
-
-Automorphism Group (\S\ref{sec:automorphism_group}) $G$ of a Space $X$
-
-Symmetry Group (\S\ref{sec:symmetry_group}) of a Space is a Subgroup
-of the Isometry Group of a Space %FIXME: ???
-
-Set of all Endomorphic Bijective Isometries with Composition of
-Isometries as the Group Operation and the Identity Function as the
-Identity Element
-
-Every Isometry Group is a Subgroup (\S\ref{sec:subgroup}) of Isometries
-
-Euclidean Group (\S\ref{sec:euclidean_group}) $E(n)$ -- Group of all
-Isometries $ISO(n)$ of $n$-dimensional Euclidean Space
-(\S\ref{sec:euclidean_space})
-
-Frieze Groups (\S\ref{sec:frieze_group}) and Wallpaper Groups
-(\S\ref{sec:wallpaper_group}) are Discrete Subgroups
-(\S\ref{sec:discrete_group}) of the Isometry Group of the Euclidean Plane
-(\S\ref{sec:euclidean_plane})
-
-
-
-\paragraph{Discrete Isometry Group}\label{sec:discrete_isometry_group}\hfill
-
-cf. Discrete Group (\S\ref{sec:discrete_group})
-
-a Discrete Symmetry Group (\S\ref{sec:discrete_symmetry_group}) is a Symmetry
-Group that is a Discrete Isometry Group
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Dilation}\label{sec:dilation}
-% ------------------------------------------------------------------------------
-
-a Function $f$ from a Metric Space to itself that Satisfies:
-\[
-  d(f(x), f(y)) = rd(x, y)
-\]
-
-a \emph{Similarity} (\S\ref{sec:similarity_transformation}) is a Dilation of
-Euclidean Space
-
-the Group of Translations and Homotheties forms a \emph{Dilation Group}
-(\S\ref{sec:dilation_group})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Contraction Map}\label{sec:contraction_map}
-% ------------------------------------------------------------------------------
-
-Metric Space $(M,d)$
-
-\emph{Contraction Map} (or \emph{Contraction} or \emph{Contractor}) is a
-Function $f$ from $M$ to itself such that there is some Non-negative Real Number
-$0 \leq k < 1$ such that $\forall x,y \in M$:
-\[
-  d(f(x),f(y)) \leq k d(x,y)
-\]
-
-\fist an \emph{Iterated Function System} (IFS \S\ref{sec:ifs}) is a Finite Set
-of Contraction Mappings on a Complete Metric Space
-(\S\ref{sec:complete_metric_space})
-
-
-
-\subsubsection{Banach Fixed-point Theorem}\label{sec:banach_fixedpoint}
-
-\fist See application in the Topological Semantics
-(\S\ref{sec:topological_semantics}) of Programming Languages
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Complete Metric Space}\label{sec:complete_metric_space}
-% ------------------------------------------------------------------------------
-
-Metric Space $(M,d)$ is \emph{Complete} if every Cauchy Sequence
-(\S\ref{sec:cauchy_sequence}) of Elements in $M$ has a Limit in $M$
-
-Partial Traces (\S\ref{sec:partial_trace})
-
-a Complete Normed Vector Space (\S\ref{sec:normed_vectorspace}) is a Banach
-Space (\S\ref{sec:banach_space})
-
-a Complete Metric Space with an Inner Product (\S\ref{sec:inner_product}) is a
-Hilbert Space (\S\ref{sec:hilbert_space})
-
-a \emph{Polish Space} (\S\ref{sec:polish_space}) is a Space that is Homeomorphic
-to a Complete Metric Space
-
-\fist an \emph{Iterated Function System} (\S\ref{sec:ifs}) is a Finite Set of
-Contraction Mappings (\S\ref{sec:contraction_map}) on a Complete Metric Space
-
-\begin{itemize}
-  \item Banach Space -- a Complete Normed Vector Space
-    (\S\ref{sec:normed_vectorspace})
-  \item ...
-\end{itemize}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Compact Metric Space}\label{sec:compact_metric_space}
-% ------------------------------------------------------------------------------
-
-$2^{\aleph_0}$ is the largest number of Connected Components a Compact Metric
-Space can have
---\url{https://golem.ph.utexas.edu/category/2017/11/topology_puzzles.html}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Ultrametric Space}\label{sec:ultrametric_space}
-% ------------------------------------------------------------------------------
-
-Triangle Inequality (\S\ref{sec:triangle_inequality}) is replaced
-with:
-\[
-  d(x,z) \leq max\{d(x,y),d(y,z)\}
-\]
-
-Functional Reactive Programming (FRP) (\S\ref{sec:frp}): Decoupled
-Functions form Contraction Maps (\S\ref{sec:contraction_map}) in an
-Ultrametric Space of Functions
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Magnitude}\label{sec:magnitude}
-% ------------------------------------------------------------------------------
-
-2016 - Leinster - A Survey of Magnitude (n-Category Cafe) %FIXME
-
-general definition of the Magnitude of an Enriched Category %FIXME
-
-Lawvere: Metric Spaces are usefully viewed as a certain kind of
-Enriched Category
-
-Finite Metric Space $A$
-
-$Z_A$ -- Square Matrix whose Rows and Columns are Indexed by Points of
-$A$ with entries $Z_A(a,b) = e^{-d(a,b)}$
-
-for Invertible $Z_A$, the \emph{Magnitude} of $A$ is:
-\[
-  |A| = \sum_{a,b \in A} Z^{-1}_A (a,b)
-\]
-
-Magnitude is Well-defined for every Finite Subset of Euclidean Space;
-$Z_A$ is Positive Definite when $A \subseteq \reals^n$
-
-can be (canonically) extended from Finite Space to Compact Spaces as
-long as they are ``Positive Definite'', i.e. the Matrix $Z_A$ is
-Positive Definite for every Finite Subset $A$; this includes all
-Compact Subspaces of $\reals^n$
-
-
-
-\subsubsection{Magnitude Function}\label{sec:magnitude_function}
-
-Volume, Minkowski Dimension
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Metric Space Cardinality}\label{sec:metric_cardinality}
-% ------------------------------------------------------------------------------
-
-\url{https://golem.ph.utexas.edu/category/2008/11/entropy_diversity_and_cardinal_1.html}
-
-\emph{Weighing}
-
-
-
-% ==============================================================================
-\section{Topology}\label{sec:topology}
-% ==============================================================================
-
-Given a Set $X$, a \emph{Topology} $\tau$ on $X$ is a Family
-(\S\ref{sec:family}) of Subsets of $X$--the Open Sets
-(\S\ref{sec:open_set})--with the Properties:
-\begin{enumerate}
-  \item $\varnothing \in \tau$, $X \in \tau$
-  \item $A,B \in \tau \Rightarrow A \cap B \in \tau$
-  \item $\{A_i\}_{i \in I} \subseteq \tau \Rightarrow \bigcup_{i \in
-  I} A_i \in \tau$
-\end{enumerate}
-The Topology $\tau$ is therefore a Subset of the Power Set of $X$:
-\[
-  \tau \subseteq \pow(X)
-\]
-
-\fist on Finite or Countably Infinite Sets, every \emph{$\sigma$-algebra}
-(\S\ref{sec:sigma_algebra}) is a Topology
-
-
-
-% ------------------------------------------------------------------------------
 \subsection{Digraph Topology}\label{sec:digraph_topology}
 % ------------------------------------------------------------------------------
 
@@ -919,17 +291,18 @@ Real-valued Functions on $[0,1]$ with the Topology of Uniform Convergence
 \section{Topological Space}\label{sec:topological_space}
 % ==============================================================================
 
-A \emph{Topological Space} is a pair consisting of a Metric Space, $M$, and a
-Toplogy, $\tau$ on that Metric Space:
+A \emph{Topological Space} is a pair consisting of a Set, $X$, and a
+Toplogy, $\tau$ on that Set:
 \[
-  (M,\tau)
+  (X,\tau)
 \]
 
 roughly, a Topological Space is a \emph{Geometric Object}
 (\S\ref{sec:geometric_object})
 
-Every Metric Space gives a Topology, but Topologies may exist for which there is
-no definable Metric Space. See Metrizable Spaces (\S\ref{sec:metrizable_space}).
+Every Metric Space (\S\ref{sec:metric_space}) gives a Topology, but Topologies
+may exist for which there is no definable Metric Space. See Metrizable Spaces
+(\S\ref{sec:metrizable_space}).
 
 Given a Metric Space $M$, the following Topologies may be described:
 \begin{description}
@@ -2976,6 +2349,646 @@ $\xspace{T}_6$ -- Perfectly Normal
 % ------------------------------------------------------------------------------
 \subsection{Separable Space}\label{sec:separable_space}
 % ------------------------------------------------------------------------------
+
+
+
+% ==============================================================================
+\section{Metric Space}\label{sec:metric_space}
+% ==============================================================================
+
+\fist Metric Geometry (\S\ref{sec:metric_geometry})
+
+A \emph{Metric Space} is a Set $M$ for which a \emph{Metric}
+(\S\ref{sec:metric}) is defined for all Elements of that Set.
+
+A Metric Space $M$ can then be defined as the pair:
+\[
+  (M,d)
+\]
+where $M$ is a Set of Elements and $d$ is a Distance Function.
+
+Subsets of a Metric Space may be \emph{Open} (\S\ref{sec:open_set}),
+\emph{Closed} (\S\ref{sec:closed_set}), both or neither.
+
+Abstract Axiomatic Structure needed to define a Theory of \emph{Differentiation}
+(\S\ref{sec:differential_calculus})
+
+cf. \emph{Measure Spaces} (\S\ref{sec:measure_space}) -- Abstract Axiomatic
+Structure needed to define a Theory of \emph{Integration}
+(\S\ref{sec:integral_calculus})
+
+Denotational Semantics (\S\ref{sec:denotational_semantics})
+
+Domain Theory (\S\ref{sec:domain_theory})
+
+(wiki): Linear Inverse Problems (Functional Analysis
+\S\ref{sec:linear_inverse_problem}) are represented by mappings between Metric
+Spaces
+
+any Normed Vector Space (\S\ref{sec:normed_vectorspace}) is a Metric Space by
+defining $d(x,y) = \|y-x\|$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Metric}\label{sec:metric}
+% ------------------------------------------------------------------------------
+
+A \emph{Metric} is a \emph{Distance Function} defined between all
+Elements or Points of a Metric Space.
+
+cf. Norm (\S\ref{sec:norm}), $p$-norm (\S\ref{sec:p_norm})
+
+A Distance Function $d$ has the form:
+\[
+  d: M \times M \rightarrow \mathbb{R}^{+}
+\]
+with the following conditions:
+\begin{enumerate}
+\item $d(x_1, x_2) \geq 0$ (\emph{Non-negativity} or \emph{Separation
+  Axiom})
+\item $d(x_1, x_2) = 0 \leftrightarrow x_1 = x_2$ (\emph{Identity of
+  Indiscernables} or \emph{Coincidence Axiom})
+\item $d(x_1, x_2) = d(x_2, x_1)$ (\emph{Symmetry})
+\item $d(x_1, x_3) \leq d(x_1, x_2) + d(x_2, x_3)$
+  (\emph{Subadditivity} or \emph{Triangle Inequality})
+\end{enumerate}
+Two Metrics, $d_1$ and $d_2$, in a Metric Space, $M$, are
+\emph{Metrically Equivalent}, $d_1 \sim d_2$, if for Topologies
+$\tau_1$ Induced by $d_1$ and $\tau_2$ Induced by $d_2$, $\tau_1 =
+\tau_2$. A sufficient condition for Metric Equivalence is given by:
+\[
+  \exists k_1, k_2 > 0 : \forall x \in M, \forall r > 0,
+  B^{d1}_{rk_1}(x) \subseteq B^{d2}_r (x) \subseteq B^{d1}_{rk_2}(x)
+\]
+
+\emph{Euclidean Metric} ($2$-norm):
+\[
+  d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
+\]\[
+  (\mathbf{p},\mathbf{q}) \mapsto \sqrt{\sum_{i=1}^{n}(q_i - p_i)^2}
+\]
+
+\emph{Discrete Metric}:
+\[
+  d: X \times X \rightarrow \mathbb{R}^{+}
+\]\[
+  (\mathbf{p},\mathbf{q}) \mapsto \left\{
+  \begin{array}{l l}
+    0: \mathbf{p} = \mathbf{q}\\
+    1: \mathbf{p} \neq \mathbf{q}
+  \end{array}\right.
+\]
+
+\emph{Max Metric} ($\infty$-norm):
+\[
+  d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
+\]\[
+  (\mathbf{p},\mathbf{q}) \mapsto max_{1 \leq i \leq n}\{|q_i - p_i|\}
+\]
+
+\emph{Taxicab Metric} ($1$-norm):
+\[
+  d: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}
+\]\[
+  (\mathbf{p},\mathbf{q}) \mapsto \sum_{i=1}^{n}|q_i - p_i|
+\]
+
+\fist Hamming Distance (Hamming Spaces \S\ref{sec:hamming_distance})
+
+
+
+\subsubsection{Metric Derivative}\label{sec:metric_derivative}
+
+(wiki): generalized notion of ``speed'' (Absolute Velocity; cf. conventional
+Derivative \S\ref{sec:derivative}) from Vector Spaces, with both notion of
+Distance and Direction, to Metric Spaces, with only a notion of Distance but not
+Direction
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Ball}\label{sec:ball}
+% ------------------------------------------------------------------------------
+
+A Metric \emph{Ball} is defined for a Point $p$ in a Metric Space
+$(M,d)$ as the set of all Points (including $p$) within a given Radius
+$r > 0$ as determined by the Distance Function of the Metric Space:
+\[
+  B_r(p) = {x \in M | d(x,p) < r }
+\]
+The above is termed an \emph{Open Ball} because it does not include
+the points where $d(x,p) = r$. Such a Ball including these additional
+Points is called a \emph{Closed Ball}.
+
+a Subset of a Metric Space is \emph{Bounded} (\S\ref{sec:bounded_subset}) if it
+is contained in a Ball of Finite Radius
+
+
+
+\subsubsection{Unit Ball}\label{sec:unit_ball}
+
+Unit Sphere (\S\ref{sec:unit_sphere})
+
+
+
+\subsubsection{Open Ball}\label{sec:open_ball}
+
+Open $n$-ball $B^n$
+
+Homeomorphic to Cartesian Space (\S\ref{sec:cartesian_space})
+$\reals^n$
+
+
+
+\subsubsection{Closed Ball}\label{sec:closed_ball}
+
+Closed $n$-ball $D^n$
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Bounded Subset}\label{sec:bounded_subset}
+% ------------------------------------------------------------------------------
+
+a Subset of a Metric Space is \emph{Bounded} if it is contained in a Ball of
+Finite Radius
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Bounded Space}\label{sec:bounded_space}
+% ------------------------------------------------------------------------------
+
+a Space is Compact (\S\ref{sec:compact_space}) if it is Bounded
+(\S\ref{sec:bounded_space}) and Closed (\S\ref{sec:closed_set})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Extremum}\label{sec:extremum}
+% ------------------------------------------------------------------------------
+
+\fist Critical Points (Differentiable Functions \S\ref{sec:critical_point})
+
+
+
+\subsubsection{Maximum}\label{sec:maximum}
+
+Upper Bound (\S\ref{sec:upper_bound})
+
+Least Upper Bound (\S\ref{sec:least_upperbound})
+
+Local Maxima
+
+Second Derivative Test (\S\ref{sec:second_derivative_test})
+
+Multivariable -- Gradient (\S\ref{sec:gradient}) equal to the Zero Vector:
+$\nabla{f} = \vec{0}$
+
+\fist \emph{Saddle Points} (\S\ref{sec:saddle_point}) are specific to
+Multivariable Functions
+
+
+
+\paragraph{Argmax}\label{sec:argmax}\hfill
+
+
+
+\subsubsection{Minimum}\label{sec:minimum}
+
+Lower Bound (\S\ref{sec:lower_bound})
+
+Greatest Lower Bound (\S\ref{sec:greatest_lowerbound})
+
+Local Minima
+
+Second Derivative Test (\S\ref{sec:second_derivative_test})
+
+Multivariable -- Gradient (\S\ref{sec:gradient}) equal to the Zero Vector:
+$\nabla{f} = \vec{0}$
+
+\fist \emph{Saddle Points} (\S\ref{sec:saddle_point}) are specific to
+Multivariable Functions
+
+Convex Functions (\S\ref{sec:convex_function}) have the property that Local
+Minimum is necessarily a Global Minimum
+
+
+
+\paragraph{Argmin}\label{sec:argmin}\hfill
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Continuous Function}\label{sec:continuous_function}
+% ------------------------------------------------------------------------------
+
+A Function $f : X \rightarrow Y$ between Metric Spaces $(X,d)$ and $(Y,d')$ is
+\emph{Continuous} at a Point $c$ if:
+\[
+  \forall \epsilon > 0, \exists \delta > 0 :
+  f (B_{\delta}(c)) \subseteq B_{\epsilon}(f(c))
+\]
+$f$ is a \emph{Continuous Function} if it satisfies the above for all $c$. All
+Continuous Functions are Sequentially Continuous
+(\S\ref{sec:sequentially_continuous}).
+
+Alternatively, a Function $f: X \rightarrow Y$ is Continuous between Metric
+Spaces if and only if for all Open Sets $V \subseteq Y$, $f^{-1}(v)$ is an Open
+Set in $X$.
+
+\fist cf. Continuous Maps (\S\ref{sec:continuous_map}) between Topological
+Spaces
+
+\fist cf. \emph{Measurable Functions} (\S\ref{sec:measurable_function}) -- a
+Function between Measurable Spaces (\S\ref{sec:measurable_space}) is Measurable
+if the Preimage of any Measurable Set is Measurable
+
+a Continuous Function with a Continuous Inverse Function is called a
+\emph{Homeomorphism}
+
+Continuous Functions form the Differentiability Class
+(\S\ref{sec:differentiability_class}) $\mathcal{C}^0$
+
+Real-valued Continuous Function (\S\ref{sec:real_continuous})
+
+Continuously Differentiable (\S\ref{sec:continuously_differentiable})
+
+Local (Point)
+
+Continuous on Closed and Bounded implies Uniformly Continuous
+(\S\ref{sec:uniform_continuity})
+
+the Fundamental Theorem of Calculus (\S\ref{sec:fundamental_calculus_theorem})
+treats of Real-valued Continuous Functions
+
+a Bounded Function (\S\ref{sec:bounded_function}) on a Compact Interval $[a,b]$
+is Riemann Integrable (\S\ref{sec:integrable_function}) if and only if it is
+Continuous ``Almost Everywhere'', i.e. Set of Points of Discontinuity has
+Lebesgue Measure Zero (\S\ref{sec:lebesgue_measure})
+
+an Open or Closed Continuous Surjective Map is necessarily a Quotient Map
+(\S\ref{sec:quotient_map})
+
+\emph{Weierstrass Approximation Theorem}
+(\S\ref{sec:weierstrass_approximation}): every Continuous Function defined on a
+Closed Interval can be Uniformly Approximated (\S\ref{sec:uniform_convergence})
+to arbitrary closeness by a \emph{Polynomial Function}
+(\S\ref{sec:polynomial_function})
+
+\emph{Stone-Weierstrass Theorem}: the Set of all Continuous Functions on a
+Closed Interval is the Uniform Closure (cf. Uniform Norm \S\ref{sec:p_norm}) of
+the Set of Polynomials on the Interval
+
+Continuous Functions $f : \reals^n \rightarrow \reals$ form a Filtration
+(\S\ref{sec:filtration}):
+\[
+  \cdots \subset C^n(\reals^k) \subset \cdots \subset C^1(R^k) \subset
+    C^0(\reals^k)
+\]
+
+
+
+\subsubsection{Uniform Continuity}\label{sec:uniform_continuity}
+
+Global (Set)
+
+\begin{itemize}
+  \item Singular Functions (\S\ref{sec:singular_function})
+    --FIXME: correct or only cantor function ???
+\end{itemize}
+
+
+
+\subsubsection{$\alpha$-H\"older Continuity}\label{sec:holder_continuity}
+
+\emph{H\"older Condition}:
+\[
+  |f(x) - f(y)| \leq C \|x - y\|^\alpha
+\]
+
+\emph{H\"older Exponent}
+
+
+
+\subsubsection{Absolute Continuity}\label{sec:absolute_continuity}
+
+\subsubsection{Lipschitz Continuity}\label{sec:lipschitz_continuity}
+
+\subsubsection{Baire Function}\label{sec:baire_function}
+
+a Baire Set (\S\ref{sec:baire_set}) is a Set whose Characteristic Function
+(Indicator Function \S\ref{sec:indicator_function}) is a Baire Function
+
+%FIXME: move section ?
+
+
+
+\subsubsection{Discontinuous Function}\label{sec:discontinuous_function}
+
+\paragraph{Discontinuity}\label{sec:discontinuity}\hfill
+
+\fist Singularity (\S\ref{sec:singularity})
+
+Type I: Jump Discontinuity, Removable Discontinuity
+
+Type II: Infinite Discontinuity, Essential Singularity
+
+
+
+\paragraph{Unit Step Function}\label{sec:unit_step_function}\hfill
+
+%FIXME: move this section ???
+
+or \emph{Heaviside Step Function}
+
+Anti-derivative of the Dirac Delta (Unit Impulse \S\ref{sec:dirac_delta})
+
+Step Function (\S\ref{sec:step_function})
+
+$u_c(t)$
+
+$H$
+
+\begin{itemize}
+  \item a Perceptron (\S\ref{sec:perceptron}) is an Artificial Neuron
+    (\S\ref{sec:ann}) using the Unit Step Function as the Activation Function
+\end{itemize}
+
+
+
+\paragraph{Rectangular Function}\label{sec:rectangular_function}\hfill
+
+%FIXME: move this section ???
+
+or \emph{Unit Pulse}
+
+cf. Dirac Delta Function (Unit Impulse Function \S\ref{sec:dirac_delta})
+
+the Fourier Transform of the Rectangular Function is the Sinc Function
+(\S\ref{sec:sinc_function})
+
+
+
+\subsubsection{Topological Curve}\label{sec:topological_curve}
+
+A \emph{Topological Curve} is the Image of a Continuous Function from a Real
+Interval (\S\ref{sec:real_interval}) into a Topological Space
+
+a \emph{Curve} is a Topological Space that is locally Homeomorphic to a Line
+(\S\ref{sec:algebraic_line})
+
+\begin{itemize}
+  \item Simple Closed Curve (\S\ref{sec:simple_closed_curve})
+  \item Plane Curve (\S\ref{sec:plane_curve})
+  \item Space-filling Curve (\S\ref{sec:space_filling_curve})
+  \item Fractal Curve (\S\ref{sec:fractal_curve})
+  \item Differentiable Curve (\S\ref{sec:differentiable_curve})
+  \item Parametric Curve (\S\ref{sec:parametric_curve})
+  \item Integral Curve (\S\ref{sec:integral_curve})
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Locally Invertible Map}\label{sec:locally_invertible}
+% ------------------------------------------------------------------------------
+
+Locally (\S\ref{sec:local_property})
+
+Invertible (\S\ref{sec:inverse_function})
+
+Curvilinear Coordinates (\S\ref{sec:curvilinear_coordinates}) can be derived
+from a Locally Invertible Transformation of a Set of Cartesian Coordinates; cf.
+Affine Coordinates (\S\ref{sec:affine_coordinates}) can be derived from a Linear
+Transformation (\S\ref{sec:linear_transformation}) of a Set of Cartesian
+Coordinates
+
+--FIXME: is this equivalent to the condition that a transformation $F$ has
+components that are Invertible, Real-valued with Continuous $2$nd Partial
+Derivatives everywhere ???
+\url{https://www.youtube.com/watch?v=XtpVVcKXfnA}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Isometry}\label{sec:isometry}
+% ------------------------------------------------------------------------------
+
+Distance-preserving Injective Map between Metric Spaces
+
+a Similarity Transform (\S\ref{sec:similarity_transformation}) with Scaling
+Factor $r = 1$ is a \emph{Euclidean Isometry} (or \emph{Rigid Transformation}
+\S\ref{sec:rigid_transformation})
+
+Isometries of Euclidean Space (\S\ref{sec:euclidean_space}):
+\begin{itemize}
+  \item Point Reflection (Central Inversion) -- an Affine Transformation
+  \item TODO
+  ...
+\end{itemize}
+
+Isometries in Hilbert Space (\S\ref{sec:hilbert_space}):
+\begin{itemize}
+  \item Unitary Transformations (\S\ref{sec:unitary_transformation})
+  \item ...
+\end{itemize}
+
+A \emph{Motion} (\S\ref{sec:motion}) is a Surjective Isometry of a Metric
+Space.
+
+Crystallographic Groups (\S\ref{sec:crystallographic_group}) are Cocompact
+(\S\ref{sec:cocompact_space}), Discrete Subgroups (\S\ref{sec:discrete_group})
+of the Isometries of some Euclidean Space (\S\ref{sec:euclidean_space})
+
+
+
+\subsubsection{Motion}\label{sec:motion}
+
+%FIXME: move to geometry ???
+
+A \emph{Motion} is a Surjective Isometry of a Metric Space.
+
+
+
+\subsubsection{Isometry Group}\label{sec:isometry_group}
+
+``Rigid Geometry''
+
+Automorphism Group (\S\ref{sec:automorphism_group}) $G$ of a Space $X$
+
+Symmetry Group (\S\ref{sec:symmetry_group}) of a Space is a Subgroup
+of the Isometry Group of a Space %FIXME: ???
+
+Set of all Endomorphic Bijective Isometries with Composition of
+Isometries as the Group Operation and the Identity Function as the
+Identity Element
+
+Every Isometry Group is a Subgroup (\S\ref{sec:subgroup}) of Isometries
+
+Euclidean Group (\S\ref{sec:euclidean_group}) $E(n)$ -- Group of all
+Isometries $ISO(n)$ of $n$-dimensional Euclidean Space
+(\S\ref{sec:euclidean_space})
+
+Frieze Groups (\S\ref{sec:frieze_group}) and Wallpaper Groups
+(\S\ref{sec:wallpaper_group}) are Discrete Subgroups
+(\S\ref{sec:discrete_group}) of the Isometry Group of the Euclidean Plane
+(\S\ref{sec:euclidean_plane})
+
+
+
+\paragraph{Discrete Isometry Group}\label{sec:discrete_isometry_group}\hfill
+
+cf. Discrete Group (\S\ref{sec:discrete_group})
+
+a Discrete Symmetry Group (\S\ref{sec:discrete_symmetry_group}) is a Symmetry
+Group that is a Discrete Isometry Group
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Dilation}\label{sec:dilation}
+% ------------------------------------------------------------------------------
+
+a Function $f$ from a Metric Space to itself that Satisfies:
+\[
+  d(f(x), f(y)) = rd(x, y)
+\]
+
+a \emph{Similarity} (\S\ref{sec:similarity_transformation}) is a Dilation of
+Euclidean Space
+
+the Group of Translations and Homotheties forms a \emph{Dilation Group}
+(\S\ref{sec:dilation_group})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Contraction Map}\label{sec:contraction_map}
+% ------------------------------------------------------------------------------
+
+Metric Space $(M,d)$
+
+\emph{Contraction Map} (or \emph{Contraction} or \emph{Contractor}) is a
+Function $f$ from $M$ to itself such that there is some Non-negative Real Number
+$0 \leq k < 1$ such that $\forall x,y \in M$:
+\[
+  d(f(x),f(y)) \leq k d(x,y)
+\]
+
+\fist an \emph{Iterated Function System} (IFS \S\ref{sec:ifs}) is a Finite Set
+of Contraction Mappings on a Complete Metric Space
+(\S\ref{sec:complete_metric_space})
+
+
+
+\subsubsection{Banach Fixed-point Theorem}\label{sec:banach_fixedpoint}
+
+\fist See application in the Topological Semantics
+(\S\ref{sec:topological_semantics}) of Programming Languages
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Complete Metric Space}\label{sec:complete_metric_space}
+% ------------------------------------------------------------------------------
+
+Metric Space $(M,d)$ is \emph{Complete} if every Cauchy Sequence
+(\S\ref{sec:cauchy_sequence}) of Elements in $M$ has a Limit in $M$
+
+Partial Traces (\S\ref{sec:partial_trace})
+
+a Complete Normed Vector Space (\S\ref{sec:normed_vectorspace}) is a Banach
+Space (\S\ref{sec:banach_space})
+
+a Complete Metric Space with an Inner Product (\S\ref{sec:inner_product}) is a
+Hilbert Space (\S\ref{sec:hilbert_space})
+
+a \emph{Polish Space} (\S\ref{sec:polish_space}) is a Space that is Homeomorphic
+to a Complete Metric Space
+
+\fist an \emph{Iterated Function System} (\S\ref{sec:ifs}) is a Finite Set of
+Contraction Mappings (\S\ref{sec:contraction_map}) on a Complete Metric Space
+
+\begin{itemize}
+  \item Banach Space -- a Complete Normed Vector Space
+    (\S\ref{sec:normed_vectorspace})
+  \item ...
+\end{itemize}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Compact Metric Space}\label{sec:compact_metric_space}
+% ------------------------------------------------------------------------------
+
+$2^{\aleph_0}$ is the largest number of Connected Components a Compact Metric
+Space can have
+--\url{https://golem.ph.utexas.edu/category/2017/11/topology_puzzles.html}
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Ultrametric Space}\label{sec:ultrametric_space}
+% ------------------------------------------------------------------------------
+
+Triangle Inequality (\S\ref{sec:triangle_inequality}) is replaced
+with:
+\[
+  d(x,z) \leq max\{d(x,y),d(y,z)\}
+\]
+
+Functional Reactive Programming (FRP) (\S\ref{sec:frp}): Decoupled
+Functions form Contraction Maps (\S\ref{sec:contraction_map}) in an
+Ultrametric Space of Functions
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Magnitude}\label{sec:magnitude}
+% ------------------------------------------------------------------------------
+
+2016 - Leinster - A Survey of Magnitude (n-Category Cafe) %FIXME
+
+general definition of the Magnitude of an Enriched Category %FIXME
+
+Lawvere: Metric Spaces are usefully viewed as a certain kind of
+Enriched Category
+
+Finite Metric Space $A$
+
+$Z_A$ -- Square Matrix whose Rows and Columns are Indexed by Points of
+$A$ with entries $Z_A(a,b) = e^{-d(a,b)}$
+
+for Invertible $Z_A$, the \emph{Magnitude} of $A$ is:
+\[
+  |A| = \sum_{a,b \in A} Z^{-1}_A (a,b)
+\]
+
+Magnitude is Well-defined for every Finite Subset of Euclidean Space;
+$Z_A$ is Positive Definite when $A \subseteq \reals^n$
+
+can be (canonically) extended from Finite Space to Compact Spaces as
+long as they are ``Positive Definite'', i.e. the Matrix $Z_A$ is
+Positive Definite for every Finite Subset $A$; this includes all
+Compact Subspaces of $\reals^n$
+
+
+
+\subsubsection{Magnitude Function}\label{sec:magnitude_function}
+
+Volume, Minkowski Dimension
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Metric Space Cardinality}\label{sec:metric_cardinality}
+% ------------------------------------------------------------------------------
+
+\url{https://golem.ph.utexas.edu/category/2008/11/entropy_diversity_and_cardinal_1.html}
+
+\emph{Weighing}
 
 
 
