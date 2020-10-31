@@ -226,6 +226,10 @@ cf. Mutually Recursive Type (\S\ref{sec:mutually_recursive})
 (Lebesgue Covering Dimension \S\ref{sec:lebesgue_dimension}); note this
 requirement is not met by Fractal Space-filling Curves, e.g. the Hilbert Curve
 
+(Mandelbrot97E) Fractals are usually introduced by Additive Operations,
+Multifractals (\S\ref{sec:multifractal_system}) through Multiplicative
+Operations
+
 Complex Dynamics:
 \begin{itemize}
   \item Julia Sets (\S\ref{sec:julia_set})
@@ -283,6 +287,55 @@ Mandelbrot97E
   \item Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
   \item ...
 \end{itemize}
+
+Mandelbrot97E, Ch.6
+
+\emph{\S 4.2 Description of the grid-bound recursive constructions with
+  prescribed initiator and generator}
+
+Diagrams
+
+\emph{Level-0 Box} -- sides parallel to $t$ and $x$ Coordinate axes with width
+and height chosen to make the box a Square in the Affine Plane
+
+\emph{Initiator} -- an Ordered (Diagonal) Interval crossing a Level-0 Box
+from bottom left to top right
+
+\emph{String Generator} -- joins the bottom left of the Initiator to the top
+right with a Continuous Piecewise-linear Curve with \emph{Generator Base} $b$
+the number of Intervals in the Generator
+
+to ensure the Recursive construction yields the Graph of a Function of Time, the
+String Generator must be the Graph of a \emph{Generator Function} $x = G(t)$
+
+Intervals may be Discontinuous (``Axial''), Constant (Horizontal), or otherwise
+they are Diagonal and the Rectangle that it crosses diagonally from left to
+right defines a \emph{Level-1 Box}
+
+Recursive construction of a \emph{Self-affine Curve} joining the bottom left to
+top right using ``refinements'' within a prescribed ``Self-affine Grid'':
+\begin{itemize}
+  \item draw the Diagonal of the Initiator
+  \item replace the Diagonal by the Graph of Generator Function $G(t)$
+  \item replace each Diagonal Interval in the Generator with an Affine (Scaled
+    and possibly Reflected) Transformation of the Generator
+\end{itemize}
+
+as a Recursive construction of an Oscillating ($b \geq 3$) Generator proceeds,
+the increments $\Delta u$ over increasingly small Intervals $\Delta t$ tend to
+become Symmetrically Distributed, i.e. the Ratio of the number of Positive and
+Negative increments tends to $1$; Proof:
+\begin{quote}
+  after $k$ stages, each increment is the ``product'' of $k$ factors of the form
+  $sign(\Delta_i x)$, and $\prod sign(\Delta_i x)$ is Positive if
+  $\sum sign(\Delta_i x)$ is Even and Negative if $\sum sign(\Delta_i x)$ is
+  Odd; since the Distribution of $\sum sign(\Delta_i x)$ is Binomial and
+  ``smoothly varying'' (FIXME: clarify), the Even and Odd values are therefore
+  equally frequent Asymptotically
+\end{quote}
+
+Dependence Exponent (Hurst Exponent \S\ref{sec:hurst_exponent}) $H$ of the
+Diagonal Boxes of the Generator are Finite and Positive
 
 
 
@@ -530,6 +583,9 @@ Dimension (\S\ref{sec:fractal_dimension}) is not enough to describe its
 ``Dynamics'',  instead a (Continuous) \emph{Singularity Spectrum}
 (\S\ref{sec:singularity_spectrum}) is needed (FIXME: clarify)
 
+(Mandelbrot97E) Fractals (\S\ref{sec:fractal}) are usually introduced by
+Additive Operations, Multifractals through Multiplicative Operations
+
 origin of ``Multifractality'' in Sequential (Time Series) data attributed to
 ``convergence effects'' related to the Central Limit Theorem
 (\S\ref{sec:central_limit}) that have Foci of Convergence in the family of
@@ -574,7 +630,9 @@ number of Parameters
 Multifractal Time (\S\ref{sec:multifractal_time}), Multiscaling
 (\S\ref{sec:multiscaling})
 
-not every property of every Multifractal is Scaling
+not every property of every Multifractal is Scaling, i.e. the Critical Scaling
+Exponent $q_{crit}$ need not exist and therefore a Multifractal $\Delta M$ need
+not have a Scaling Tail
 
 
 
@@ -584,42 +642,14 @@ increments of a Multifractal Function
 
 intermittent aspects of Turbulence, Variability in Variance of price increments
 
+Multifractal Time (\S\ref{sec:multifractal_time})
+
+Compound Processes (\S\ref{sec:compound_process})
+
 Mandelbrot97E, Ch.6
 
 Limit Lognormal Multifractal Measure (Mandelbrot72) -- Homogeneous in Time,
 Singular (\S\ref{sec:singular_function})
-
-allows Concentration with or without Discontinuity
-
-``\emph{Multifractal Formalism}''
-
-\emph{Moment Exponent Function} $\tau_D(q)$ of the Directing Function
-
-the Moments of $\Delta M$ ``typically'' take the form:
-\[
-  \expect((\Delta M)^q) = \Delta t^{\tau_D(q) + 1}
-\]
-
-\emph{Moment-based Scaling Exponents}:
-\[
-  \Big(\expect(\Delta M)^q\Big)^\frac{1}{q} = \Delta t^{\sigma_D(q)}
-\]
-where:
-\[
-  \sigma_D(q) = \frac{1 + \tau_D(q)}{q}
-\]
-
-\emph{Uniscaling} -- when Multifractal Time reduces to ``Clock Time'',
-$\tau_D(q) + 1 = q$, implies Uniscaling
-
-\emph{Multiscaling} -- Multifractal Increments $\Delta M$ have more than one
-characteristic Exponent and therefore have a ``structure'' called
-\emph{Multiscaling}, which implies that the Tails of the Compound Process become
-shorter as $T$ increases
-
-\emph{Power Exponent Function} $\tau_C(q) = \tau_D(qH)$
-
-$f(\alpha)$ -- Singularity Spectra (\S\ref{sec:singularity_spectrum})
 
 
 
@@ -671,6 +701,117 @@ Continuous Compounding (\S\ref{sec:compound_process})
 LSM exhibits Concentration with Discontinuities, Compound FBM with Multifractal
 Time exhibits Concentration without Discontinuities
 
+Mandelbrot97E, Ch.6
+
+Mandelbrot72
+
+Multifractal Measure (\S\ref{sec:multifractal_measure})
+
+Limit Lognormal Multifractal Measure (Mandelbrot72) -- Homogeneous in Time,
+Singular (\S\ref{sec:singular_function})
+
+Compound Processes (\S\ref{sec:compound_process})
+
+allows Concentration with or without Discontinuity
+
+``\emph{Multifractal Formalism}''
+
+Multifractals are defined by a number of Scaling Relations and corresponding
+Exponents
+
+$\tau$ -- Function defined by list of ``Principal Exponents''; ``fundamental'',
+but does not uniquely describe a Multifractal
+
+\begin{itemize}
+  \item $\tau_D(q)$ -- \emph{Moment Exponent Function} of the Directing
+    Function:
+    \begin{itemize}
+      \item Uniscaling -- $\tau_D(q) = q - 1$ when Multifractal Time reduces to
+        Clock Time
+      \item Multiscaling -- in the ``cases considered'', $\tau_D(q)$ satisfies
+        two conditions:
+        \begin{enumerate}
+          \item $\tau_D(0) = -1$, i.e. $\expect((\Delta M)^0) = 1$
+          \item $\tau_D(1) = 0$, i.e. $\expect(\Delta M) = \Delta t$
+        \end{enumerate}
+    \end{itemize}
+  \item $\tau_C(q)$ -- \emph{Power Exponent Function} of the Compound Function:
+    $\tau_C(q) = \tau_D(qH)$
+\end{itemize}
+
+$f(\alpha)$ -- Singularity Spectra (\S\ref{sec:singularity_spectrum})
+
+$\tau'_D(1) = D_1$ -- Fractal Dimension of the Set of values of $\theta(t)$
+where the ``bulk'' of the variation of $\theta$ occurs
+
+the Moments of $\Delta M$ ``typically'' take the form:
+\[
+  \expect((\Delta M)^q) = \Delta t^{\tau_D(q) + 1}
+\]
+
+\emph{Moment-based Scaling Exponents} -- the $q$-th Root of the $q$-th Moment is
+a \emph{Scale Factor}:
+\[
+  \Big(\expect(\Delta M)^q\Big)^\frac{1}{q} = \Delta t^{\sigma_D(q)}
+\]
+where:
+\[
+  \sigma_D(q) = \frac{1 + \tau_D(q)}{q}
+\]
+
+\emph{Uniscaling} -- when Multifractal Time reduces to ``Clock Time'',
+$\tau_D(q) + 1 = q$, implies Uniscaling
+
+\emph{Multiscaling} -- Multifractal Increments $\Delta M$ have more than one
+characteristic Exponent and therefore have a ``structure'' called
+\emph{Multiscaling}, which implies that the Tails of the Compound Process become
+shorter as $T$ increases, i.e. the Exponent $\sigma_D(q) \to 0$ as
+$q \to \infty$ (FIXME: is this a typo for $\sigma_C(q)$ ???)
+
+not every property of every Multifractal is Scaling, i.e. the Critical Scaling
+Exponent $q_{crit}$ need not exist and therefore a Multifractal $\Delta M$ need
+not have a Scaling Tail
+
+$B_C = \tau_C(2) = \tau_D(2H)$ -- Spectral Exponent of the Increments of the
+Compound Process; the behavior of $\expect(\Delta X^2)$ for $\Delta t \to 0$
+determines the behavior of the Spectral Density $S$ of the Increments of $X$ as
+$f \to \infty$, in the ``$1/f$'' form:
+\[
+  S(f) \sim f^{-B_C}
+\]
+noting that when $H = \frac{1}{2}$, $B_C = \tau_D(1) = 0$, Spectral Analysis is
+blind to changes in the Directing Function, and for $H \neq \frac{1}{2}$,
+Compounding changes the Spectral Exponent (FIXME: clarify)
+
+\emph{Rectification} of the Increments consists taking the Power $\frac{1}{H}$,
+e.g. Squaring in the case of $H = \frac{1}{2}$
+
+$\tau_D(2)$ -- ``Correlation Dimension''
+
+the Spectrum reflects the ``form'' of Dependence, but only in a limited way and
+is distinct from the features of $\tau_D(q)$ that affect the shape of the Tails;
+in Multifractals, Scaling \emph{may} but need not be present in the Tails, but
+are \emph{always} present in the \emph{Dependence}; a FBM of a Multifractal Time
+follows the same Scaling rule of Long-run Statistical Dependence as found in FBM
+
+Sample Estimates of the $q$-th Moment by Partitioning an available Sample by
+Increments $\Delta t_i$
+
+for FBM $B_H(t)$, $\tau(q) = Hq - 1$, the Trail Dimension $D_T = \frac{1}{H}$,
+and the Box Dimension of the Graph $D_G = 1 - \tau_D(qH)$; for Unifractal FBM,
+the $D_T$ and $D_G$ are necessarily related by $H$:
+\[
+  H = \frac{1}{D_T} = 2 - D_G
+\]
+under a Multifractal Compounding, there is \emph{no} functional relation between
+$D_T$ and $D_G$
+
+(\S 3.14) the Asymptotic behavior of the $q$-th Moment Sample Estimates
+seperates the properties of the Compound Function $X(\theta)$ from the Directing
+Function $\theta(t)$; Estimation of $H$ and $\tau_C(q)$ ...
+
+(Fisher, Calvet, Mandelbrot 1997)
+
 
 
 % ------------------------------------------------------------------------------
@@ -681,6 +822,9 @@ Function used to describe the Fractal Dimension (\S\ref{sec:fractal_dimension})
 of a Subset of Points of a Function belonging to a ``group'' of Points that have
 the same H\"older Exponent (TODO: xref)
 
-``\emph{Multifractal Formalism}''
+``\emph{Multifractal Formalism}'' -- Compound Processes
+(\S\ref{sec:compound_process}), Multifractal Time
+(\S\ref{sec:multifractal_time}), Multifractal Measures
+(\S\ref{sec:multifractal_measure})
 
 Moment Exponent Functions $\tau(q)$
