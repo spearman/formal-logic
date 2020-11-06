@@ -2020,14 +2020,16 @@ $\bar{F}_X(x) = P(X > x) = 1 - F_X(x)$
 
 cf. Scale Parameter (\S\ref{sec:scale_parameter})
 
-cf. Power-law (\S\ref{sec:power_law})
+cf. Power-law (\S\ref{sec:power_law}), Rank-size Law (\S\ref{sec:ranksize_law})
 
 cf. Scaling (Homothety \S\ref{sec:scaling})
 
 %FIXME: wikipedia links scaling distribution to power law
 
---FIXME: should this be considered equivalent to the Pareto Distribution
-(\S\ref{sec:pareto_distribution}) with scale parameter $x_m = 1$ ???
+\begin{itemize}
+  \item Pareto Distribution (\S\ref{sec:pareto_distribution})
+  \item Zipf Distribution (\S\ref{sec:zipf_distribution})
+\end{itemize}
 
 Mandelbrot97:
 
@@ -2297,6 +2299,10 @@ Location Parameter
 \paragraph{Probit}\label{sec:probit}\hfill
 
 Quantile Function of the Normal Distribution
+
+
+
+\paragraph{Rank-size Distribution}\label{sec:rank_size}\hfill
 
 
 
@@ -3233,9 +3239,46 @@ Slowly Varying Function (\S\ref{sec:slowly_varying})
 
 \subsubsection{Zipf Distribution}\label{sec:zipf_distribution}
 
-\subsubsection{Zeta Distribution}\label{sec:zeta_distribution}
+Zipf Law (Rank-size Law \S\ref{sec:ranksize_law})
+
+the Log-log (Rank-frequency) Plot of the PMF of a Zipf-law Distribution is
+Linear
+
+can be derived from Pareto Distribution (\S\ref{sec:pareto_distribution})
+
+(Mandelbrot97E, Ch.7)
+
+Rank-size Relation $Q(r)$ with a suitable ``prefactor'' $\Phi$ such that:
+\[
+  Q(r) \sim \Phi r^\frac{-1}{\alpha}
+\]
+is valid over a ``Scaling Range'' of intermediate values of $r$, bounded by
+``crossovers'' $r_{min} \geq 1$ to $r_{max} \leq \infty$; when $\alpha < 1$, the
+Scaling Range can (not necessarily) extend to $r \to \infty$ without crossovers,
+but for $\alpha \geq 1$, the Scaling Range is necessarily bounded from above;
+when $\alpha = 1$, $Q$ varies in Inverse Proportion to $r$
+
+
+
+\paragraph{Zeta Distribution}\label{sec:zeta_distribution}\hfill
 
 Normalization of the Zipf Distribution
+
+PMF:
+\[
+  P(x = k) = \frac{1}{\zeta(s)} k^{-s}
+\]
+for $s > 1$ where $\zeta(s)$ is the Riemann Zeta Function
+(\S\ref{sec:riemann_zeta})
+
+CDF can be defined in terms of the Riemann Zeta Function and Generalized
+Harmonic Numbers (\S\ref{Sec:harmonic_number}) --TODO
+
+
+
+\paragraph{Pareto-Zipf Distribution}\label{sec:pareto_zipf}\hfill
+
+Zipf-Mandelbrot Law (Rank-size Law \S\ref{sec:ranksize_law})
 
 
 
@@ -3774,7 +3817,11 @@ Slowly Varying Function (\S\ref{sec:slowly_varying})
 
 prototypical Power Law (\S\ref{sec:power_law}) Distribution
 
+Scaling Distribution (\S\ref{sec:scaling_distribution}),
 Scale Invariance (\S\ref{sec:scale_invariance})
+
+cf. Zipf Distribution (Discrete \S\ref{sec:zipf_distribution}) -- can be derived
+from Pareto
 
 $x_m > 0$ -- Scale Parameter
 
@@ -4129,13 +4176,32 @@ respect to the ``real'' Data Generating Process
 
 
 % ------------------------------------------------------------------------------
+\subsection{Concrete Quantity}\label{sec:concrete_quantity}
+% ------------------------------------------------------------------------------
+
+(Mandelbrot97E, Ch.7):
+
+a Concrete Random Variable Measured on an ``extrinsic'' or ``physical'' Scale,
+e.g. Height, Population, etc.
+
+\emph{Ranking} (\S\ref{sec:rank_statistic}) of Random Variables can be done
+through the Cumulative Probability Distribution
+(\S\ref{sec:cumulative_distribution}) or Tail Distribution
+(\S\ref{sec:tail_distribution})
+
+cf. Rank-size Law (\S\ref{sec:ranksize_law})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Level of Measurement}\label{sec:measurement_level}
 % ------------------------------------------------------------------------------
 
 \begin{itemize}
   \item \emph{Nominal} -- Dispersion: Variation Ratio
     (\S\ref{sec:variation_ratio}); Central Tendency: Mode (\S\ref{sec:mode})
-  \item \emph{Ordinal} -- Central Tendency: Median (\S\ref{sec:median})
+  \item \emph{Ordinal} -- Central Tendency: Median (\S\ref{sec:median});
+    cf. Rank Statistic (\S\ref{sec:rank_statistic})
   \item \emph{Interval} -- Central Tendency: Mean (\S\ref{sec:arithmetic_mean}),
     Deviation (\S\ref{sec:deviation})
   \item \emph{Ratio} -- Central Tendency: Geometric Mean
@@ -6992,6 +7058,9 @@ Extreme Value Theory (\S\ref{sec:eva})
 
 \paragraph{Rank Statistic}\label{sec:rank_statistic}\hfill
 
+cf. Rank-size Law (\S\ref{sec:ranksize_law}), Concrete Quantities
+(\S\ref{Sec:concrete_quantity})
+
 
 
 \subsubsection{Semi-parametric Model}\label{sec:semiparametric_model}
@@ -7272,6 +7341,29 @@ Scale Analysis (\S\ref{sec:statistical_scale}), Scale Invariance
 \fist Regularly Varying Function (\S\ref{sec:regularly_varying}) -- Function of
 a Real Variable with behavior at Infinity similar to the behavior of a Power Law
 Function (cf. Polynomial \S\ref{sec:polynomial_function})
+
+
+
+\subsubsection{Rank-size Law}\label{sec:ranksize_law}
+
+Zipf Law (Zipf Distribution \S\ref{sec:zipf_distribution})
+
+Zipf-Mandelbrot Law (Pareto-Zipf Distribution \S\ref{sec:pareto_zipf})
+
+$Q(r)$ -- Size (Quantity) or Probability (Frequency) as a Function of Rank
+
+Positive Scaling (\S\ref{sec:scaling_distribution}): $Q$ is Proportional to the
+Inverse of $r$, i.e. $\log Q$ varies Linearly with $\log r$
+
+Dynamics of the Rank-size Plot as the Sample Size increases:
+\begin{itemize}
+  \item Firm Sizes -- the Rank-size Plot will grow by its Low-rank end as a new
+    larger Firm is encountered, and as the Sample Size increases the
+    straightness of the Rank-size Plot will eventually ``break down'' at the
+    High-rank end
+  \item Word Frequencies -- the most Probable Word will quickly be encountered
+    and the Rank-size Plot will grow at its High-rank end
+\end{itemize}
 
 
 
@@ -7910,7 +8002,7 @@ simplistic Kernel Density Estimation (\S\ref{sec:kde})
 
 converges at rate $n^{-2/3}$;
 
-Frequency Histogram
+Frequency Histogram (Frequency Distribution \S\ref{sec:frequency_distribution})
 
 \fist Periodogram (Spectral Density Estimation \S\ref{sec:periodogram})
 
@@ -8874,6 +8966,10 @@ invokes the Law of Large Numbers (\S\ref{sec:large_numbers}) to explain stable
 
 
 \subsubsection{Frequency Distribution}\label{sec:frequency_distribution}
+
+Frequency Histograms (\S\ref{sec:histogram})
+
+
 
 \paragraph{Contingency Table}\label{sec:contingency_table}\hfill
 
