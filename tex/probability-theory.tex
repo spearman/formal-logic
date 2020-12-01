@@ -2241,6 +2241,55 @@ size of the largest increases proportional to $N^{\frac{1}{\alpha}}$
 
 Relative Size (TODO) Factor $\Phi$ Independent of $N$
 
+Ch.8
+
+examples:
+
+\begin{itemize}
+  \item Cauchy Distribution (\S\ref{sec:cauchy_distribution}) -- Asymptotically
+    Scaling with $\alpha = 1$
+  \item Ratio of Exponential Variables $R = Y/X = \frac{1}{U} - 1$ with
+    Uniformly Distributed $U$, $R+1$ is Scaling with $\alpha = 1$
+  \item number of steps before a Simple Random Walk
+    (\S\ref{sec:simple_random_walk}) first reaches a prescribed height has Tail
+    Probability $\sim u^\frac{-1}{2}$ which is Asymptotically Scaling with
+    $\alpha = 1/2$
+  \item Distribution of ``returns to equilibrium'' in the game of tossing a fair
+    coin has a Scaling Distribution with $\alpha = \frac{1}{2}$ (FIXME: clarify)
+  \item ...
+\end{itemize}
+
+Ch.10
+
+\emph{Uniform Scaling Distribution} -- Tail Distribution:
+\[
+  P(u) = \begin{cases}
+    (\frac{u}{\tilde{u}})^{-\alpha} & \text{when } u > \tilde{u} \\
+    1                               & \text{when } u < \tilde{u} \\
+  \end{cases}
+\]
+and Density Function:
+\[
+  p(u) = \begin{cases}
+    \alpha(\tilde{u})^\alpha u^{-(\alpha+1)} & \text{when } u > \tilde{u} \\
+    0                                        & \text{when } u < \tilde{u} \\
+  \end{cases}
+\]
+where $\tilde{u}$ is a minimum ``scale factor'' and $\alpha$ is constrained to
+be $> 0$
+
+Stable Distributions (\S\ref{sec:stable_distribution}) -- for the Sum of two
+IID Scaling Variables:
+\[
+  \int_u^\infty p_2(x) dx = P_2(u) \sim 2 P(u)
+\]
+
+Sum of $N$ Asymptotic Scaling Variables:
+\[
+  P_N(u) \sim N P(u)
+\]
+$0 < \alpha < 2$
+
 
 
 \subparagraph{Multiscaling}\label{sec:multiscaling}\hfill
@@ -2406,8 +2455,8 @@ where $\hat{F}_n$ is the Empirical Distribution Function
 the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k) = \int x^k dF(x)$
 assuming that $E(|X|^k) < \infty$, where $F$ is the CDF (\S\ref{sec:cdf}) of $X$
 
-the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample}) $X_1, \ldots,
-X_n$ is:
+the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample})
+$X_1, \ldots, X_n$ is:
 \[
   \frac{1}{n}\sum_{i=1}^n X^k_{i}
 \]
@@ -2429,6 +2478,15 @@ Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
 ``heaviness'' of the tail of a Distribution
 
 Fourth and higher-order Cumulants are not equal to Central Moments
+
+cf. Moments of Mass (Physics):
+\begin{itemize}
+  \item Zeroth Moment -- Total Mass
+  \item First Moment -- Center of Mass
+  \item Second Moment -- Angular Mass/Rotational Inertia
+\end{itemize}
+also First Moments of Force (Torque), Momentum (Angular Momentum); generally
+involves product of a distance and a ``physical'' quantity
 
 \emph{Hausdorff Moment Problem}: for a Probability Distribution on a Bounded
 Interval, the collection of all Moments (of all Orders from $0$ to $\infty$)
@@ -3198,6 +3256,7 @@ output can be used to represent a Categorical Distribution
 often used as final layer of a Neural Network-based Classifier
 
 
+
 % ------------------------------------------------------------------------------
 \subsection{Poisson Distribution}\label{sec:poisson_distribution}
 % ------------------------------------------------------------------------------
@@ -3322,6 +3381,12 @@ Zipf-Mandelbrot Law (Rank-size Law \S\ref{sec:ranksize_law})
 
 
 \subsubsection{Yule-Simon Distribution}\label{sec:yule_simon_distribution}
+
+Urn Problem, Preferential Attachment
+
+arises as Compound Distribution in which the Parameter of a Geometric
+Distribution is treated as a funciton of a Random Variable having an Exponential
+Distribution
 
 
 
@@ -3613,13 +3678,83 @@ Variance of $\ln X$ are specified
 assumed by Black-Scholes Model as changes in prices, rates, indices etc.; cf.
 Log-L\'evy Distribution (\S\ref{sec:log_levy})
 
-(Mandelbrot97E) Randomness: ``mild'' (Gaussian), ``slow'' (Log-normal), ``wild''
-(Scaling with Infinite Variance, i.e. $\alpha < 2$)
+(Mandelbrot97E) Randomness (\S\ref{sec:statistical_randomness}): ``mild''
+(Gaussian), ``slow'' (Log-normal), ``wild'' (Scaling with Infinite Variance,
+i.e. $\alpha < 2$)
 
 \begin{quote}
   Slow randomness is a complex intermediate state between two states of greater
   simplicity.
 \end{quote}
+
+Mandelbrot97E, Ch.9
+
+``slow'' Randomness: short-run ``Concentrated'' and long-run ``even''; cf.
+liquid phase state of matter vs. gas (``mild'' Gaussian or ``Fickian'') and
+solid (sudden discontinuities of ``wild'' Randomness);
+very \emph{Skew} Lognormals resemble a ``glass'' (very viscous liquid)
+
+``Delocalized Moments''
+
+Population Moments overly depend on \emph{exact} Lognormality; Small-sample
+Sequential Moments \emph{oscillate} to excess as Sample size increases; a
+non-negligible ``Concentration Rate'' can only represent a ``transient'' that
+vanishes for large Samples (FIXME: clarify)
+
+``Concentration Ratios'' (FIXME: ???)
+
+$\Lambda = e^V$ where $V = \log \Lambda$ is Gaussian
+
+\begin{itemize}
+  \item when $G$ is an acceptable Gaussian ``approximation'' of $Z$, the Moments
+    of $e^G$ may be drastically different from the Moments of $e^Z$
+\end{itemize}
+
+Transformations of Distributions (e.g. Bernoulli $B$ defined by the sum of $K$
+Binomial Variables Bounded by max $b$, Poisson $P$, Gamma $\Gamma$ defined by
+the sum of $\gamma$ Exponentials) into ``near'' Gaussianity $G$ is weak: the
+``approximations'' $e^P$, $e^B$, $e^\Gamma$ depend on the Moment $q$ in ways
+that vary with the approximation and do not match the ``patterns'' that are
+characteristic of $e^G$:
+\begin{itemize}
+  \item $\Big(\expect(e^G)^q\Big)^\frac{1}{q}$ (Lognormal) -- Finite for all $q$
+    and increasese Exponentially
+  \item $\Big(\expect(e^B)^q\Big)^\frac{1}{q}$ (LogBernoulli) -- Bounded, mildly
+    Random
+  \item $\Big(\expect(e^P)^q\Big)^\frac{1}{q}$ (LogPoisson) -- Finite but
+    increases more rapidly than Exponential
+  \item $\Big(\expect(e^\Gamma)^q\Big)^\frac{1}{q}$ (LogGamma) -- Infinite when
+    $q > \alpha$
+\end{itemize}
+
+\emph{Localized Moments} -- different Moments $U^q$ of the Lognormal are
+determined by different portions of the \emph{Density} $p(u)$; small changes in
+the Tail of $p(u)$ can strongly modify the Moments
+FIXME: also:
+\begin{quote}
+  The latter method shows that the opulation moments of the lognormal are
+  delocalized and overly dependent on separate intervals of rare values.
+\end{quote}
+FIXME: localized or delocalized ???
+
+FIXME2: is it the Population Moments are Localized and the Sample Moments are
+Delocalized ???
+
+\begin{quote}
+  ... Central Limit Theorem ... says \emph{nothing} of the tails.
+\end{quote}
+
+for a Set of $N = \max n$ Data and Integer $q$, the Sequential $q$th Sample
+Moment is defined by:
+\[
+  S_q(n) = \frac{1}{n} \sum_{m = 1}^n U_m^q
+\]
+TODO: xref ???
+
+for reasonable Sample Sizes, Convergence as $n \to \infty$ is erratic
+
+behavior of Sequential Moment of the Lognormal with increasing Sample size can
+be described by a representative ``effective'' Sequence of Scaling Distributions
 
 
 
@@ -3966,6 +4101,13 @@ Variance
 any Non-degenerate Stable Distribution has a Smooth (Infinitely Differentiable)
 Probability Density Function
 
+Stable Probability Distributions are ``Attractors'' for ``properly normed'' Sums
+of IID Random Variables (\S\ref{sec:iid})-- Central Limit Theorem
+(\S\ref{sec:central_limit_theorem}): the Normal Distribution is the ``properly
+normed'' Sum of a Set of Random Variables with Finite Variance
+
+Mandelbrot97E:
+
 ``$L$-stable Distribution'', ``Scaling Sum Distribution'' (Mandelbrot 1963)
 %FIXME: is l-stable distribution synonymous with stable distribution ???
 
@@ -3980,10 +4122,36 @@ a Stable Process (\S\ref{sec:stable_process}) is a Stochastic Process for which
 associated Probability Distributions (FIXME: clarify) are Stable Distributions;
 cf. $L$-Stable Motion (LSM \S\ref{sec:lsm})
 
-Stable Probability Distributions are ``Attractors'' for ``properly normed'' Sums
-of IID Random Variables (\S\ref{sec:iid})-- Central Limit Theorem
-(\S\ref{sec:central_limit_theorem}): the Normal Distribution is the ``properly
-normed'' Sum of a Set of Random Variables with Finite Variance
+Ch.6, Ch.10
+
+\begin{quote}
+  ... to increase the number of components of $U$, one must abandon at some
+  point the hypothesis that the components are independent. The larger the
+  number of components, the less independent they become.
+\end{quote}
+(FIXME: clarify)
+
+the behavior of the Sum of two Variables is determined mainly by the Convexity
+of $-\log p(u)$ and is sufficient to distinguish between Guassian and all other
+Stable Distributions
+
+for the Sum of two IID Scaling Variables (\S\ref{sec:scaling_distribution}):
+\[
+  \int_u^\infty p_2(x) dx = P_2(u) \sim 2 P(u)
+\]
+
+Sum of $N$ Asymptotic Scaling Variables:
+\[
+  P_N(u) \sim N P(u)
+\]
+
+Infinite Divisibility -- for Stable $U$:
+\[
+  U = \sum (A(N) U_i - \frac{B(N)}{N})
+\]
+of Independent $U_i$ for every $N$
+
+Ch.11
 
 
 
@@ -7580,6 +7748,13 @@ Distribution (\S\ref{sec:normal_distribution}) as $n \to \infty$, i.e.
 the Sample Mean has approximately a Normal Distribution for large $n$
 
 the \emph{Grand Mean} is the Mean of multiple Sample Means
+
+Mandelbrot97E, Ch.8, Appendix II:
+\begin{quote}
+  Traditionally, statistics has relied heavily on sample averages, but when the
+  population averages are infinite, the behavior of the sample averages is
+  extremely erratic, and any method that involves them must be avoided.
+\end{quote}
 
 
 
@@ -12539,7 +12714,7 @@ a \emph{Markov Random Field} (\S\ref{sec:markov_random_field})
 
 uses \emph{Annealed Gibbs Sampling} instead of Gradient Descent
 
-``\emph{Energy-based Models}'' (\S\ref{sec:ebm}) -- Botlzmann Distribution from
+``\emph{Energy-based Models}'' (\S\ref{sec:ebm}) -- Boltzmann Distribution from
 Statistical Mechanics is used in Sampling Function (Impulse Train
 \S\ref{sec:impulse_train})
 
@@ -13144,8 +13319,8 @@ the same distinction holds for $N = 4, 5, \ldots$
 
 ``Extreme'' Randomness -- Tail Probability $P(u) = \frac{1}{\ln u}$
 Concentration Converges to $1$ as $N \to \infty$, i.e. whenever $P(u)$ is a
-``slowly varying function'' $\lim_{u\to\infty}\frac{P(hu)}{P(u)} \to 1$ for $h >
-0$; Log-cauchy (\S\ref{sec:log_cauchy})
+``slowly varying function'' $\lim_{u\to\infty}\frac{P(hu)}{P(u)} \to 1$ for
+$h > 0$; Log-cauchy (\S\ref{sec:log_cauchy})
 
 Seven States of Randomness
 
@@ -13180,6 +13355,19 @@ $A(T)$ and Function $B(t)$ as $T \to \infty$:
     Gaussian
   \item Fickian Law of Diffusion -- when $A(T) = \sqrt(T)$
 \end{itemize}
+
+Ch.9
+
+very \emph{Skew} Lognormals resemble a ``glass'' (very viscous liquid)
+
+``Delocalized Moments''
+
+Population Moments overly depend on \emph{exact} Lognormality; Small-sample
+Sequential Moments \emph{oscillate} to excess as Sample size increases; a
+non-negligible ``Concentration Rate'' can only represent a ``transient'' that
+vanishes for large Samples (FIXME: clarify)
+
+``Concentration Ratios'' (FIXME: ???)
 
 
 
@@ -14034,8 +14222,8 @@ associated Probability Distributions (FIXME: clarify() are Stable Distributions
 
 Stochastic Process for which the Unconditional (i.e. no reference to any
 particular starting value) Joint Probability Distribution
-(\S\ref{sec:joint_probability}) does not change when shifted in Time (TODO:
-clarify)
+(\S\ref{sec:joint_probability}), and consequently Parameters such as Mean and
+Variance, do not change when shifted in Time (TODO: clarify)
 
 \fist an Infinitely Exchangeable Sequence of Random Variables
 (\S\ref{sec:infinitely_exchangeable}) is Strictly Stationary (wiki)
@@ -14051,7 +14239,11 @@ clarify)
 if a Stochastic Process has a Unit Root (\S\ref{sec:unit_root}), i.e. if $1$ is
 a Root of the Process's Characteristic Equation (FIXME: characteristic function
 ???), then the Process is Non-stationary, \emph{but} does not necessarily have a
-``trend''
+``trend''; a Stochasitc Process with a Unit Root, Stochastic ``shocks'' have
+permanent effects and the Process is not Mean-reverting
+
+in the case of a Deterministic Trend, the Process is called
+\emph{Trend-stationary} (\S\ref{sec:trend_stationary})
 
 \fist Stationarity assumption underlies many procedures in Time-series Analysis
 (\S\ref{sec:time_series})
@@ -14070,6 +14262,14 @@ Covariance-stationary (\S\ref{sec:covariance_stationary})
 
 
 \subsubsection{Trend-stationary Process}\label{sec:trend_stationary}
+
+Deterministic Trend; Stochastic ``shocks'' only have transitory effects and the
+Variable tends towards a Deterministically evolving (Non-constant) Mean
+
+cf. Unit Root Processes which are not Mean-reverting, but Stochastic ``shocks''
+have permanent effects
+
+
 
 \subsubsection{Covariance-stationary Process}\label{sec:covariance_stationary}
 
@@ -14201,6 +14401,8 @@ Discontinuity
 
 cf. \emph{Mesofractals} (\S\ref{sec:mesofractal})
 
+Ch.10
+
 
 
 \subsubsection{Conditional Stationarity}\label{sec:conditional_stationarity}
@@ -14325,6 +14527,20 @@ Infinite number of times
 \emph{Donsker's Theorem} -- a Simple Random Walk converges to true Brownian
 Motion (Wiener Process \S\ref{sec:wiener_process}) in the Scaling Limit
 (\S\ref{sec:scaling_limit})
+
+\asterism
+
+Mandelbrot97E, Ch.8, Appendix I
+
+Biased and Unbiased (``Symmetric'') Random Walks:
+\begin{itemize}
+  \item Unbiased $p = q = \frac{1}{2}$ -- Random Walk will surely return to
+    equilibrium and expected duration is Infinite
+  \item Biased $p > q$ -- Random Walk has Non-zero Probability of not returning
+    to equilibrium
+  \item Biased $p < q$ -- Random Walk would have a Finite expected duration for
+    return to equilibrium
+\end{itemize}
 
 
 
@@ -14636,6 +14852,26 @@ Zero Deaths
 equivalent to a Poisson (Point) Process (\S\ref{sec:point_poisson}) on the Real
 Line
 
+a Poisson Process is a Birth Process where the birth rates are constant
+
+
+
+\subparagraph{Simple Birth Process}\label{sec:simple_birth_process}\hfill
+
+or \emph{Yule Process}
+
+
+
+\paragraph{Birth-mutation Process}\label{sec:birth_mutation}\hfill
+
+Mandelbrot97E, Ch.8, Appendix II
+
+\begin{quote}
+  Traditionally, statistics has relied heavily on sample averages, but when the
+  population averages are infinite, the behavior of the sample averages is
+  extremely erratic, and any method that involves them must be avoided.
+\end{quote}
+
 
 
 \paragraph{Diffusion Process}\label{sec:diffusion_process}\hfill
@@ -14914,7 +15150,8 @@ $S$ that have no Limit Points (FIXME: clarify)
 
 ``spatial'' Poisson Process (\S\ref{sec:poisson_process}) on the Real Line
 
-equivalent to a Birth Process (\S\ref{sec:birth_process})
+equivalent to a Birth Process (\S\ref{sec:birth_process}) where birth rates are
+constant
 
 cf. Spatial Poisson Process (\S\ref{sec:spatial_poisson})
 
