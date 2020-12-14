@@ -606,6 +606,16 @@ or \emph{Bayes Rule}
 
 \fist Bayes Classifier (\S\ref{sec:bayes_classifier})
 
+2019 - Huscz\'ar -
+\emph{The Secular Bayesian: Using belief distributions without really believing} -
+\url{https://www.inference.vc/the-secular-bayesian-using-belief-distributions-without-really-believing/}
+
+\begin{quote}
+  If you use Bayes' rule, you assume that a joint distribution between model
+  parameters and data exist. This, however, only exists if your data and your
+  parameters both exist, in the same $\sigma$-algebra.
+\end{quote}
+
 \url{https://arbital.com/p/bayes_rule/?l=1zq}
 
 \emph{Bayesian Inference} (\S\ref{sec:bayesian_inference})
@@ -1474,10 +1484,104 @@ Continuous CDF $F_X$ (Real-valued $X$):
 
 
 % ------------------------------------------------------------------------------
+\subsection{Moment}\label{sec:moment}
+% ------------------------------------------------------------------------------
+
+the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k) = \int x^k dF(x)$
+assuming that $E(|X|^k) < \infty$, where $F$ is the CDF (\S\ref{sec:cdf}) of $X$
+
+the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample})
+$X_1, \ldots, X_n$ is:
+\[
+  \frac{1}{n}\sum_{i=1}^n X^k_{i}
+\]
+
+Moments determine Cumulants (\S\ref{sec:cumulant}) and vice versa
+
+\textbf{Thm.} \emph{If $j < k$ and the $k$th Moment Exists, then the $j$th
+  moment exists.}
+
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment; Sample
+Mean (\S\ref{sec:sample_mean})
+
+Variance (\S\ref{sec:variance}) -- Second Central Moment
+
+Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
+
+Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
+``heaviness'' of the tail of a Distribution
+
+Fourth and higher-order Cumulants are not equal to Central Moments
+
+cf. Moments of Mass (Physics):
+\begin{itemize}
+  \item Zeroth Moment -- Total Mass
+  \item First Moment -- Center of Mass
+  \item Second Moment -- Angular Mass/Rotational Inertia
+\end{itemize}
+also First Moments of Force (Torque), Momentum (Angular Momentum); generally
+involves product of a distance and a ``physical'' quantity
+
+\emph{Hausdorff Moment Problem}: for a Probability Distribution on a Bounded
+Interval, the collection of all Moments (of all Orders from $0$ to $\infty$)
+\emph{uniquely} determines the Distribution
+
+\emph{Stieltjes Moment Problem}, \emph{Hamburger Moment Problem}: there may be
+infinitely many Distributions on an Unbounded Interval for a given Sequence of
+Moments; under some conditions the Distribution may be uniquely determined
+
+\fist Moment-generating Function (\S\ref{sec:moment_generating_function})
+
+\fist Method of Moments (\S\ref{sec:moments_method}) -- Estimator of Statistical
+Model Parameters
+
+\fist Mean Squared Deviation or Mean Squared Error (MSE \S\ref{sec:msd}) of an
+Estimator (\S\ref{sec:estimator}) is the Average of the Squared Error of the
+Estimated value (produced by an Estimator) from the ``true'' value; MSD is
+the Second Moment of the Error; for an Unbiased Estimator the MSD is the
+Variance of the Estimator
+
+
+
+\subsubsection{Standardized Moment}\label{sec:standardized_moment}
+
+a \emph{Normalized} Moment, usually by division by an expression of the Standard
+Deviation rendering the Moment \emph{Scale Invariant}
+(\S\ref{sec:scale_invariance})
+
+
+
+\subsubsection{Cumulant}\label{sec:cumulant}
+
+Cumulants (\S\ref{sec:cumulant}) determine Moments and vice versa
+
+Mean (Expected Value \S\ref{sec:expected_value}) -- First Cumulant
+
+Variance (\S\ref{sec:variance}) -- Second Cumulant
+
+Skewness (\S\ref{sec:skewness}) -- Third Cumulant; ``lopsided-ness''
+
+Fourth and higher-order Cumulants are not equal to Central Moments
+
+when two or more Random Variables are Statistically Independent, the $n$th-order
+Cumulant of their sum is the sum of their $n$th-order Cumulants
+
+the Normal Distribution is the only Distribution with the property that the
+third and higher-order Cumulants are Zero
+
+\fist Cumulant-generating Function (\S\ref{sec:cumulant_generating_function})
+
+cf. ``Extensive Quantities'' -- Quantities that are proportional to Volume or
+size of a given System (i.e. the sum of quantities associated with Independent
+regions)
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Moment-generating Function}\label{sec:moment_generating_function}
 % ------------------------------------------------------------------------------
 
-$M_X(t) = E(e^{tX}) = \int e^{tx} dF(x)$ for $t \in \reals$
+$M_X(t) = \expect(e^{tX}) = \int e^{tx} dF(x)$ for $t \in \reals$
 
 the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) has no
 Moment-generating Function
@@ -1488,9 +1592,13 @@ the Natural Logarithm of the Moment-generating Function
 \fist Laplace Transform (\S\ref{sec:laplace_transform})
 %FIXME: explain relation
 
-cf. Characteristic Function (\S\ref{sec:characteristic_function}) --
-if a Random Variable has a Moment-generating Function then the Characteristic
-Function can be extended to the Complex Plane
+the Moment-generating Function of a Real-valued Distribution does not always
+exist
+
+cf. the Characteristic Function (\S\ref{sec:characteristic_function}) of a
+Real-valued Distribution always exists; if a Random Variable has a
+Moment-generating Function then the Characteristic Function can be extended to
+the Complex Plane
 
 every Distribution with a Moment-generating Function is a member of a Natural
 Exponential Family (\S\ref{sec:nautral_exponential_family})
@@ -1502,14 +1610,16 @@ PDF $f$:
 \]
 and replacing $s$ by $-t$ gives the Moment-generating Function of $X$
 
+``Partition Function'' (Physics)
 
 
-% ------------------------------------------------------------------------------
-\subsection{Cumulant-generating Function}
+
+\subsubsection{Cumulant-generating Function}
 \label{sec:cumulant_generating_function}
-% ------------------------------------------------------------------------------
 
 Natural Logarithm of the Moment-generating Function
+
+(Helmholtz) Free Energy (Physics)
 
 
 
@@ -2301,6 +2411,30 @@ Scaling with $\alpha < 1$
 
 cf. ``principle of proportionate effect''
 
+Ch.12
+
+Probability Isolines of Independent Gaussian Coordinates are characterized by
+Circles of the form $x^2 + y^2 = c$ for Constant $c$
+
+Probability Isolines of Independent Scaling Coordinates are characterized by
+Hyperbolas of the form $x y = c$ for Constant $c$
+
+Ch.13
+
+Uniform Scaling Distribution:
+\[
+  \prob{U > u} = P(u) = \begin{cases}
+    (\frac{u}{\tilde{u}})^{-\alpha} & \text{when } u > \tilde{u} \\
+    1                               & \text{when } u < \tilde{u} \\
+  \end{cases}
+\]
+
+Asymptotic Scaling Distribution:
+\[
+  \prob{U > u} = P(u) \propto u^{-\alpha}
+\]
+as $u \to \infty$
+
 
 
 \subparagraph{Multiscaling}\label{sec:multiscaling}\hfill
@@ -2456,104 +2590,6 @@ where $\hat{F}_n$ is the Empirical Distribution Function
 
 \subsubsection{Cumulative Frequency Analysis}
 \label{sec:cumulative_frequency_analysis}
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Moment}\label{sec:moment}
-% ------------------------------------------------------------------------------
-
-the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k) = \int x^k dF(x)$
-assuming that $E(|X|^k) < \infty$, where $F$ is the CDF (\S\ref{sec:cdf}) of $X$
-
-the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample})
-$X_1, \ldots, X_n$ is:
-\[
-  \frac{1}{n}\sum_{i=1}^n X^k_{i}
-\]
-
-\fist Cumulants (\S\ref{sec:cumulant}) -- Moments determine Cumulants and vice
-versa
-
-\textbf{Thm.} \emph{If $j < k$ and the $k$th Moment Exists, then the $j$th
-  moment exists.}
-
-Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment; Sample
-Mean (\S\ref{sec:sample_mean})
-
-Variance (\S\ref{sec:variance}) -- Second Central Moment
-
-Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
-
-Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
-``heaviness'' of the tail of a Distribution
-
-Fourth and higher-order Cumulants are not equal to Central Moments
-
-cf. Moments of Mass (Physics):
-\begin{itemize}
-  \item Zeroth Moment -- Total Mass
-  \item First Moment -- Center of Mass
-  \item Second Moment -- Angular Mass/Rotational Inertia
-\end{itemize}
-also First Moments of Force (Torque), Momentum (Angular Momentum); generally
-involves product of a distance and a ``physical'' quantity
-
-\emph{Hausdorff Moment Problem}: for a Probability Distribution on a Bounded
-Interval, the collection of all Moments (of all Orders from $0$ to $\infty$)
-\emph{uniquely} determines the Distribution
-
-\emph{Stieltjes Moment Problem}, \emph{Hamburger Moment Problem}: there may be
-infinitely many Distributions on an Unbounded Interval for a given Sequence of
-Moments; under some conditions the Distribution may be uniquely determined
-
-\fist Moment-generating Function (\S\ref{sec:moment_generating_function})
-
-\fist Method of Moments (\S\ref{sec:moments_method}) -- Estimator of Statistical
-Model Parameters
-
-\fist Mean Squared Deviation or Mean Squared Error (MSE \S\ref{sec:msd}) of an
-Estimator (\S\ref{sec:estimator}) is the Average of the Squared Error of the
-Estimated value (produced by an Estimator) from the ``true'' value; MSD is
-the Second Moment of the Error; for an Unbiased Estimator the MSD is the
-Variance of the Estimator
-
-
-
-\subsubsection{Standardized Moment}\label{sec:standardized_moment}
-
-a \emph{Normalized} Moment, usually by division by an expression of the Standard
-Deviation rendering the Moment \emph{Scale Invariant}
-(\S\ref{sec:scale_invariance})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Cumulant}\label{sec:cumulant}
-% ------------------------------------------------------------------------------
-
-\fist Moments (\S\ref{sec:moment}) -- Cumulants determine Moments and vice
-versa
-
-Mean (Expected Value \S\ref{sec:expected_value}) -- First Cumulant
-
-Variance (\S\ref{sec:variance}) -- Second Cumulant
-
-Skewness (\S\ref{sec:skewness}) -- Third Cumulant; ``lopsided-ness''
-
-Fourth and higher-order Cumulants are not equal to Central Moments
-
-when two or more Random Variables are Statistically Independent, the $n$th-order
-Cumulant of their sum is the sum of their $n$th-order Cumulants
-
-the Normal Distribution is the only Distribution with the property that the
-third and higher-order Cumulants are Zero
-
-\fist Cumulant-generating Function (\S\ref{sec:cumulant_generating_function})
-
-cf. ``Extensive Quantities'' -- Quantities that are proportional to Volume or
-size of a given System (i.e. the sum of quantities associated with Independent
-regions)
 
 
 
@@ -3973,7 +4009,10 @@ Power-law Class
 Tails that are ``heavier'' than the Normal Distribution
 (\S\ref{sec:normal_distribution})
 
-Leptokurtic (Positive Kurtosis)
+\emph{Leptokurtic} (Positive Kurtosis)
+
+Mandelbrot97E, Ch.14 -- Distrubtion of price changes is Leptokurtic
+(``excessively peaked'')
 
 Log-cauchy (\S\ref{sec:log_cauchy}) -- Logarithmically decaying Tail;
 ``Extreme'' Randomness
@@ -4192,6 +4231,11 @@ Stable Sequences not associated with Random Walks of $\ln Z(t)$
 
 --FIXME: the explanation of inverse Autoregressive case sounds somewhat like the
 graphs of Fractional Cauchy Motion with small $\alpha$
+
+Ch.14
+
+generalized model of price changes replaces the Gaussianity of the changes in
+$\ln Z(t)$ with any Stable Distribution
 
 
 
@@ -5934,8 +5978,9 @@ Fourth Central Moment (\S\ref{sec:moment})
 Measure of the ``heaviness'' of the tail of a Distribution:
 
 \begin{itemize}
-  \item Leptokurtic -- ``Heavy-tailed'' (\S\ref{sec:heavy_tailed})
-  \item Platykurtic -- ``Thin-tailed'' (Sub-gaussian \S\ref{sec:sub_gaussian})
+  \item \emph{Leptokurtic} -- ``Heavy-tailed'' (\S\ref{sec:heavy_tailed})
+  \item \emph{Platykurtic} -- ``Thin-tailed'' (Sub-gaussian
+    \S\ref{sec:sub_gaussian})
 \end{itemize}
 
 
