@@ -2435,6 +2435,11 @@ Asymptotic Scaling Distribution:
 \]
 as $u \to \infty$
 
+Ch.14
+
+(L\'evy) the Tails of all Non-Gaussian Stable Distributions
+(\S\ref{sec:stable_distribution}) follow an Asymptotic form of Scaling
+
 
 
 \subparagraph{Multiscaling}\label{sec:multiscaling}\hfill
@@ -4087,6 +4092,8 @@ Mandelbrot 1963
 L\'evy Flight (\S\ref{sec:levy_flight}) -- Random Walk with step length varying
 according to a L\'evy Distribution
 
+$\alpha = \frac{1}{2}, \beta = 1$
+
 a Stable Distribution (\S\ref{sec:stable_distribution}): a Linear Combination of
 two Independent L\'evy-distributed Random Variables is also a L\'evy
 Distribution
@@ -4096,8 +4103,8 @@ viewed as a Mixture (\S\ref{sec:mixture_distribution}) of Gaussian Random
 Variables with Zero Mean and Variance drawn from a standard L\'evy Distribution
 
 a Cauchy Process (\S\ref{sec:cauchy_process}) can be seen as a Brownian Motion
-Subordinated (\S\ref{sec:compound_process}) to a Process associated with a L\'evy
-Distribution
+Subordinated (\S\ref{sec:compound_process}) to a Process associated with a
+L\'evy Distribution
 
 
 
@@ -4236,6 +4243,66 @@ Ch.14
 
 generalized model of price changes replaces the Gaussianity of the changes in
 $\ln Z(t)$ with any Stable Distribution
+
+$L$-stable -- ``Stable Non-Gaussian''
+
+(L\'evy) the Tails of all Non-Gaussian Stable Distributions follow an Asymptotic
+form of Scaling (\S\ref{sec:scaling_distribution})
+
+for $U_n$ Non-stable, Asymptotically Scaling with $0 < \alpha < 2$, the Limit
+(FIXME: of ???) exists and follows an $L$-stable ``Law'' with the same value of
+$\alpha$
+
+there are Closed Expressions for only three cases of Stable Densities:
+\begin{enumerate}
+  \item Gaussian ($\alpha = 2, \beta = 0$)
+  \item Cauchy ($\alpha = 1, \beta = 0$)
+  \item L\'evy ($\alpha = \frac{1}{2}, \beta = 1$)
+\end{enumerate}
+for all other cases, it is only known that:
+\begin{itemize}
+  \item Densities are always Unimodal
+  \item Densities depend Continuously on the parameters
+  \item if $\beta > 0$ and the Mean is Finite ($1 < \alpha < 2$), then the Mean
+    is greater than the Median
+\end{itemize}
+
+Interpolating between $\alpha = 1$ and $\alpha = 2$: there is a smallest value
+$\tilde{\alpha}$ for which the Double Logarithmic Graph begins by
+``overshooting'' its Asymptote; if $\alpha < \tilde{\alpha}$, the Asymptotic
+Slope will be \emph{Underestimated} by the Slope of small Samples, and for
+$\alpha > \tilde{\alpha}$ it will be \emph{Overestimated}
+
+Joint Distributions, Conditional Distributions
+
+Ch.14 \S IV.B -- Sample Kurtosis fails as a measure of ``long-tailedness'' for
+$L$-stable Distributions
+
+Ch.14 \S V -- there is no Sufficient Statistic
+(\S\ref{sec:sufficient_statistic}) for the Estimation of ``Drift'', $\delta$,
+and the Maximum Likelihood Equation does not necessarily have a single Root
+
+Ch.14 \S V.G
+
+\begin{quote}
+  ...if the total change of $\ln Z(t)$ is neither very large nor very small,
+  there will be a large degree of arbitrariness in this distinction between
+  causal and random.
+\end{quote}
+
+the distinction between ``causal'' and ``random'' areas is sharp in the Gaussian
+case and very diffuse in the $L$-stable case
+
+Ch.14 \S VI.B -- Discontinuities of Continuous-time $L$-stable Processes;
+impossibility of enforcing a ``stop loss order'' of any kind
+
+Ch.14, Appendix V
+
+\begin{quote}
+  Changes of commodity and security prices are fitted excellently by the
+  $L$-stable probability distributions. Their parameter $\alpha$ is the
+  intrinsic measure of price volatility.
+\end{quote}
 
 
 
@@ -4397,6 +4464,10 @@ Statistical Model (\S\ref{sec:statistical_model})
 Statistical Inference (\S\ref{sec:inferential_statistics})
 
 Statistical Learning Theory (\S\ref{sec:statistical_learning_theory})
+
+Kolmogorov Structure Function (Algorithmic Information Theory
+\S\ref{sec:kolmogorov_structure}) -- Non-probabilistic approach to Statistics
+and Model Selection
 
 \emph{Statistical Studies}:
 \begin{itemize}
@@ -5019,6 +5090,8 @@ Uncertainty (\S\ref{sec:uncertainty_analysis})
 a \emph{Sufficient Statistic} is a Statistic that contains all the
 Information (\S\ref{sec:information}) in the Data
 
+\fist Algorithmic Sufficient Statistic (\S\ref{sec:sufficient_statistic})
+
 (Wasserman04 \S9.13.2):
 
 a Statistic if Sufficient if the Likelihood Function (\S\ref{sec:likelihood})
@@ -5040,6 +5113,9 @@ PDFs of the form:
   f(x; \theta) = h(x) e^{\eta(\theta)T(x) - B(\theta)}
 \]
 $T$ is called the \emph{Natural Sufficient Statistic}
+
+Mandelbrot97E, Ch.14 \S V.A -- Sufficient Statistics for the Estimation of
+``Drift''
 
 
 
@@ -5982,6 +6058,9 @@ Measure of the ``heaviness'' of the tail of a Distribution:
   \item \emph{Platykurtic} -- ``Thin-tailed'' (Sub-gaussian
     \S\ref{sec:sub_gaussian})
 \end{itemize}
+
+Mandelbrot97E Ch.14 \S IV.B -- Sample Kurtosis fails as a measure of
+``long-tailedness'' for $L$-stable Distributions
 
 
 
@@ -7548,6 +7627,12 @@ Variational Bayes (SGVB) Estimator for the training algorithm
 
 
 \subsubsection{Model Selection}\label{sec:model_selection}
+
+Kolmogorov Structure Function (Algorithmic Information Theory
+\S\ref{sec:kolmogorov_structure}) -- Non-probabilistic approach to Statistics
+and Model Selection
+
+
 
 \paragraph{Features Selection}\label{sec:feature_selection}\hfill
 
@@ -14266,8 +14351,8 @@ Stable (\S\ref{sec:stable_process})
 
 Pure Jump Process (\S\ref{sec:jump_process})
 
-can be seen as a Brownian Motion Subordinated (\S\ref{sec:compound_process}) to a
-Process associated with a L\'evy Distribution (\S\ref{sec:levy_distribution})
+can be seen as a Brownian Motion Subordinated (\S\ref{sec:compound_process}) to
+a Process associated with a L\'evy Distribution (\S\ref{sec:levy_distribution})
 
 
 
@@ -14431,6 +14516,25 @@ Covariance Function $C(h) = \expect(U(t) U(t + h))$ must be Finite for all $t$
 (FIXME: h ???) and the Fourier Transform of $C(h)$ is the Density of the
 Spectral Components in the ``Harmonic Decomposition'' (FIXME: ???) of $U(t)$
 into a Sum of Sine aned Cosine Components
+
+Ch.14 \S IV.C \emph{Method of spectral analysis of random time series}
+
+FIXME: is this also called a ``Second-order Process'' ???
+
+assuming $\expect(U) = 0$, the Sample Covariance
+(\S\ref{sec:sample_covariance}):
+\[
+  r(\tau) = \frac{\sum_{t = T^0 + 1}^{T^0 + N - \tau} u(t) u(t + \tau)}
+    {N - \tau}
+\]
+used to evaluate Population Covariance:
+\[
+  R(\tau) = \expect(U(t) U(t + \tau))
+\]
+where $R(\tau)$ is assumed to be Finite for all $\tau$, then the \emph{Fourier
+Transform} (\S\ref{sec:fourier_transform}) of $R(\tau)$ is the ``Spectral
+Density'' (\S\ref{sec:sde}) of the Process $U(t)$ and ``rules'' the ``Harmonic
+Decomposition'' of $U(t)$ into a Sum of Sine and Cosine terms
 
 
 
