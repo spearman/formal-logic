@@ -2523,6 +2523,8 @@ shorter as $T$ increases
 
 or \emph{Inverse CDF} $F^{-1}$
 
+``Fractile''
+
 $F^{-1}(0.25)$ -- \emph{First Quartile}
 
 $F^{-1}(0.5)$ -- \emph{Median} (or \emph{Second Quartile})
@@ -3701,6 +3703,12 @@ generalization of Multivariate Normal Distribution
 
 \subsubsection{Hyperbolic Distribution}\label{sec:hyperbolic_distribution}
 
+can be used to Approximate $L$-stable Distributions
+(\S\ref{sec:stable_distribution}) with Scale Exponent $\alpha$ near $1.7$
+(Mandelbrot97E, Ch.15 \S 5)
+
+
+
 \subsubsection{Generalized Normal Distribution}\label{sec:generalized_normal}
 
 adds a Shape Parameter (\S\ref{sec:shape_parameter}) to the Normal Distribution
@@ -4139,6 +4147,8 @@ of the resulting Distribution is not well defined for $\alpha < 2$
 
 \emph{Location Parameter} -- $\mu \in (-\infty, \infty)$
 
+``Stability'' -- Invariance of $\alpha$ and $\beta$ under Addition
+
 \begin{itemize}
   \item Normal Distribution (\S\ref{sec:normal_distribution}) -- $\alpha = 2$
     ($\beta$ has no effect); has Variance $\sigma^2 = 2c^2$ and Mean $\mu$
@@ -4160,6 +4170,8 @@ All Stable Distributions except the Normal Distribution (i.e. $\alpha < 2$ are
 Fat-tailed Distributions (\S\ref{sec:fat_tailed}) with undefined (Infinite)
 Variance
 
+for $\alpha \leq 1$, the Mean is undefined
+
 any Non-degenerate Stable Distribution has a Smooth (Infinitely Differentiable)
 Probability Density Function
 
@@ -4167,6 +4179,11 @@ Stable Probability Distributions are ``Attractors'' for ``properly normed'' Sums
 of IID Random Variables (\S\ref{sec:iid})-- Central Limit Theorem
 (\S\ref{sec:central_limit_theorem}): the Normal Distribution is the ``properly
 normed'' Sum of a Set of Random Variables with Finite Variance
+
+L\'evy 1925
+
+Gnedenko, Kolmogorov 1954 - \emph{Limit Distributions for Sums of Independent
+Random Variables}
 
 Mandelbrot97E:
 
@@ -4314,7 +4331,7 @@ Ch.15:
 $L$-stable Laws measure ``Volatility'' by a single Parameter $\alpha$ ranging
 between $2$ and $0$ where $\alpha = 2$ is the Gaussian
 
-Ch.15, \S 1.7 \emph{The behavior of the variance $L$-stable samples and cotton}:
+Ch.15 \S 1.7 \emph{The behavior of the variance $L$-stable samples and cotton}:
 
 $V(\alpha, N)$ -- Sample Variance of $N$ Independent Random Variables with
 common $L$-stable Distribution with Exponent $\alpha$
@@ -4336,6 +4353,53 @@ the values of $V(\alpha, N)$ will be less than $V(\alpha, N, q)$
 
 for Gaussian ($\alpha = 2$), one can use ``Spectral Methods'' and other
 Covariance-oriented approaches
+
+Ch.15 \S 5 \emph{Maximum likelihood estimation of $\alpha$ near $\alpha = 2$}
+
+near $\alpha = 1.7$, $L$-stable distributions can be Approximated by Hyperbolic
+Distributions (\S\ref{sec:hyperbolic_distribution})
+
+Approximation of values of $\alpha$ very near $2$ by representing an $L$-stable
+Density as the Sum of two ``manageable'' expressions for the central ``bell''
+and the tails
+
+Ch.16 (E.F. Fama)
+
+Characteristic Function of $L$-stable Family of Distributions:
+\begin{align*}
+  \ln f(t) & = \ln \int_{-\infty}^\infty e^{i\mu t} \diffy{P(U < u)} \\
+           & = i\mu t - c|t|^\alpha \left(
+              1 + i\beta\left(\frac{t}{|t|}\right)
+              \tan\left(\frac{\alpha\pi}{2}\right)
+           \right) \\
+\end{align*}
+
+$\mu$ -- Location Parameter
+
+$c$ -- Scale Parameter
+
+$\beta$ -- Skewness Parameter
+
+$\alpha$ -- Stability Parameter (``Characteristic Exponent'')
+
+the Sampling Error of a given Estimator of $\alpha$ cannot be given; attempt to
+``bracket'' the value of $\alpha$ using many different Estimators
+
+most important Properties of $L$-stable Distributions:
+\begin{enumerate}
+  \item Stability (Invariance of $\alpha$ and $\beta$ under Addition)
+  \item Asymptotic Scaling of Tails
+  \item Stable Distributions are the only possible Limit Distributions for Sums
+    of IID Random Variables (Gnedenko, Kolmogorov 1954 pp. 162-63)
+\end{enumerate}
+
+Asymptotically Scaling Varaiblesa re the only known Variables of Infinite
+Variance that Satisfy the Doeblin-Gnedenko conditions (necessary and sufficient
+conditions that the Limiting Distribution of Sums is $L$-stable)
+
+for $\alpha > 1$, Estimators involving only the First Powers fo $L$-stable
+Variables have Finite Expectation, e.g. concepts of ``variability'' such as
+Fractile (Quantile ???) Ranges, and Mean Absolute Deviation (\S\ref{sec:mad})
 
 
 
@@ -5692,6 +5756,10 @@ number of cases
 
 or \emph{Average of Absolute Deviations} (\S\ref{sec:absolute_deviation}), i.e.
 Errors or Residuals, to a central point
+
+in cases of Infinite Second Moment (i.e. Infinite Variance) but Finite First
+Moments, MAD can be used instead as a measure of ``variability'' (e.g. Stable
+Distributions with $1 < \alpha < 2$)
 
 Dispersion measure associated with the $L^1$ Metric (Taxicab Norm
 \S\ref{sec:p_norm}); the corresponding Central Tendency which minimizes the MAD
@@ -14563,7 +14631,8 @@ Mandelbrot97E, Ch.11 \S 1.2:
 
 FIXME: is this also called a ``Second-order Process'' ???
 --NOTE: Mandelbrot also refers to the second sample moment (variance) as
-``second-order statistics'' (Ch.15 \S 1.6)
+``second-order statistics'', which seems more like the definition of ``degree''
+of a polynomial (Ch.15 \S 1.6)
 
 Covariance Function $C(h) = \expect(U(t) U(t + h))$ must be Finite for all $t$
 (FIXME: h ???) and the Fourier Transform of $C(h)$ is the Density of the
@@ -14574,7 +14643,8 @@ Ch.14 \S IV.C \emph{Method of spectral analysis of random time series}
 
 FIXME: is this also called a ``Second-order Process'' ???
 --NOTE: Mandelbrot also refers to the second sample moment (variance) as
-``second-order statistics'' (Ch.15 \S 1.6)
+``second-order statistics'', which seems more like the definition of ``degree''
+of a polynomial (Ch.15 \S 1.6)
 
 assuming $\expect(U) = 0$, the Sample Covariance
 (\S\ref{sec:sample_covariance}):
