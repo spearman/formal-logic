@@ -682,6 +682,15 @@ investor can use knowledge of past data to increase expected profit; Dependence
 (of Price variation) \emph{does not} imply the converse: there are Processes
 with extreme Long-range Dependence for which the expected profit vanishes
 
+Mandelbrot97E, Ch.20:
+
+when $\expect(P(t + s) - P(t))^2$ is Finite for all $t$ and $s$ and $P(t)$ is a
+Martingale (\S\ref{sec:martingale_process}), and price increments are
+Uncorrelated and (``Orthogonal'' or ``Spectrally White'');
+if $P(t)$ is Gaussian, then Orthogonality becomes synonymous with Independence
+(\S\ref{sec:independence}) and a Gaussian Martingale can only be a Gaussian
+Random Walk (\S\ref{sec:gaussain_random_walk})
+
 
 
 \subsubsection{Conditional Independence}\label{sec:conditional_independence}
@@ -1594,7 +1603,7 @@ Moment-generating Function
 the Cumulant-generating Function (\S\ref{sec:cumulant_generating_function}) is
 the Natural Logarithm of the Moment-generating Function
 
-\fist Laplace Transform (\S\ref{sec:laplace_transform})
+\fist Bilateral Laplace Transform (\S\ref{sec:bilateral_laplace})
 %FIXME: explain relation
 
 the Moment-generating Function of a Real-valued Distribution does not always
@@ -1947,6 +1956,11 @@ are IID
 in Signal Processing (\S\ref{sec:signal_processing}) terms, \emph{Identically
   Distributed} implies that the ``Signal Level must be Balanced'' (FIXME:
 xref/clarify) and \emph{Independent} implies a White Noise Spectrum (flat)
+
+(Mandelbrot97E, Ch.19\S 1) Spectral ``whiteness'' expresses lack of Correlation,
+but it is \empy{not synonymous} with Independence, except in the atypical case
+when the Marginal Distribution and the Joint distributions at different times
+are Gaussian
 
 a Sequence of IID Random Variables can be seen as a Discrete-time L\'evy Process
 (\S\ref{sec:levy_process}): a Stochastic Process with Independent, Identically
@@ -4401,6 +4415,19 @@ for $\alpha > 1$, Estimators involving only the First Powers fo $L$-stable
 Variables have Finite Expectation, e.g. concepts of ``variability'' such as
 Fractile (Quantile ???) Ranges, and Mean Absolute Deviation (\S\ref{sec:mad})
 
+Ch.20
+
+arbitraging; ``cycles'' and ``perfect anticipation''
+
+under the Stationary Finite Variance model of ``unanticipated prices'', perfect
+Least Squares arbitraging leads to the absurd result of a Gaussian with
+Divergent Variance
+
+assuming a Scaling ``exogenous'' variable with Finite Variance (Mandelbrot97E,
+Ch.19), perfect Least Squares arbitraging is not ``Linear'' and $P(t)$ is
+well-defined and changes follow a non-degenerate Non-Gaussian Distribution with
+Infinite Variance (the $L$-stable Distributions; Mandelbrot97E, Ch.14)
+
 
 
 \subsubsection{Symmetric $\alpha$-stable Distribution}
@@ -5949,6 +5976,12 @@ $f(x,y)$ and $a$, $b$, $c$ are Constants, then:
 for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
 $Var(X - Y) = Var(X) + Var(Y)$
 
+Mandelbrot97E, Ch.17:
+\begin{quote}
+  ... when variance is infinite, one cannot use correlations to measure the
+  degree of dependence.
+\end{quote}
+
 \emph{Conditional Variance} $V(X|Y)$
 
 $V(Y) = E(V(Y|X)) + V(E(Y|X))$
@@ -6191,6 +6224,22 @@ investor can use knowledge of past data to increase expected profit; Dependence
 (of Price variation) \emph{does not} imply the converse: there are Processes
 with extreme Long-range Dependence for which the expected profit vanishes
 
+Mandelbrot97E, Ch.17:
+\begin{quote}
+  ... when variance is infinite, one cannot use correlations to measure the
+  degree of dependence.
+\end{quote}
+
+(Mandelbrot97E, Ch.19\S 1) if $Z(t)$ is a Martingale, its Derivative is
+Spectrally ``white'' in the sense that the Covariance $C(\tau)$ between $Z'(t)$
+and $Z'(t + \tau)$ vanishes if $\tau \neq 0$; it follows that the Expected Value
+of the Sample Spectral Density of $Z'(t)$ will be a Constant, Independent of
+Frequency; ``Spectral Methods'' are concerned with measuring Correlation rather
+than Statistical Dependence; Spectral ``whiteness'' expresses lack of
+Correlation, but it is not \empy{synonymous} with Independence, except in the
+atypical case when the Marginal Distribution and the Joint distributions at
+different times are Gaussian
+
 \fist Regression Analysis (\S\ref{sec:regression_analysis}) -- Estimation
 (\S\ref{sec:estimation_theory}) of Relations in Multivariate Data
 (\S\ref{sec:random_vector})
@@ -6265,10 +6314,19 @@ Normalized \emph{Covariance} (\S\ref{sec:covariance})
 Correlation is Dimensionless, while Covariance is in units resulting from
 multiplying the two Variables
 
-completely Un-correlated Variables may be called \emph{Orthogonal}
-(\S\ref{sec:orthogonality}); cf. White Frequency Spectrum
+(Mandelbrot97E, Ch.15) completely Un-correlated Variables may be called
+\emph{Orthogonal} (\S\ref{sec:orthogonality}); cf. White Frequency Spectrum
 (\S\ref{sec:frequency_spectrum}) -- absence of Correlation
-(Mandelbrot97E, Ch.15)
+
+(Mandelbrot97E, Ch.19\S 1) if $Z(t)$ is a Martingale, its Derivative is
+Spectrally ``white'' in the sense that the Covariance $C(\tau)$ between $Z'(t)$
+and $Z'(t + \tau)$ vanishes if $\tau \neq 0$; it follows that the Expected Value
+of the Sample Spectral Density of $Z'(t)$ will be a Constant, Independent of
+Frequency; ``Spectral Methods'' are concerned with measuring Correlation rather
+than Statistical Dependence; Spectral ``whiteness'' expresses lack of
+Correlation, but it is not \empy{synonymous} with Independence, except in the
+atypical case when the Marginal Distribution and the Joint distributions at
+different times are Gaussian
 
 \fist cf. Cross-correlation (\S\ref{sec:cross_correlation}), Autocorrelation
 (\S\ref{sec:autocorrelation})
@@ -6287,6 +6345,12 @@ Moments, then they are Uncorrelated; not all Uncorrelated Variables are
 Independent
 
 if $X$ and $Y$ are Independent, then $Cov(X,Y) = \rho = 0$
+
+Mandelbrot97E, Ch.17:
+\begin{quote}
+  ... when variance is infinite, one cannot use correlations to measure the
+  degree of dependence.
+\end{quote}
 
 \url{https://terrytao.wordpress.com/2014/06/05/when-is-correlation-transitive/}:
 given two Unit Vectors $v$, $w$ in a Real Inner Product Space
@@ -8645,6 +8709,9 @@ has a Closed-form solution
 
 UC Math 352, Lecture 7. - \url{https://www.youtube.com/watch?v=ZWGIchXVbho}
 
+Mandelbrot97E, Ch.20 -- Linear Least Square Extrapolation
+(\S\ref{sec:extrapolation})
+
 
 
 \subparagraph{Ordinary Least Squares (OLS)}\label{sec:ols}\hfill
@@ -9837,6 +9904,9 @@ Orthodox Bayesianism (\S\ref{sec:bayesian_inference})
 \fist Scaling under Conditioning (Scaling Distribution
 \S\ref{sec:scaling_distribution})
 
+2021 - Jacobs - \emph{Paradoxes of Probabilistic Programming and How to
+Condition on Events of Measure Zero with Infinitesimal Probabilities}
+
 
 
 \subsubsection{Likelihood}\label{sec:likelihood}
@@ -10052,6 +10122,8 @@ intermediate values
 
 \subsubsection{Forecasting}\label{sec:forecasting}
 
+cf. Extrapolation (\S\ref{sec:extrapolation})
+
 Time Series (\S\ref{sec:time_series}) Methods ... TODO
 
 (Mandelbrot97E, Ch.15 \S 1.6)
@@ -10059,6 +10131,12 @@ Time Series (\S\ref{sec:time_series}) Methods ... TODO
 Least-squares Forecasting
 
 Sums-of-absolute-deviations Forecasting
+
+Mandelbrot97E, Ch.19: ``Wild'' ``bubbles'' (in markets) appear when Forecasting
+is \emph{Non-linear}
+
+Mandelbrot97E, Ch.20 -- Extrapolation; Martingale (\S\ref{sec:martingale}):
+``fully arbitraged'' price
 
 
 
@@ -14835,6 +14913,9 @@ an ``unbiased'' Random Walk is an example of a Martingale
 
 cf. Ideal Chains in Polymer Science
 
+Mandelbrot97E, Ch.20: every Random Walk without ``drift'' is a Martingale
+(\S\ref{sec:martingale_process})
+
 
 
 \subsubsection{Lattice Random Walk}\label{sec:lattice_random_walk}
@@ -14940,6 +15021,15 @@ Random Walk with step size varying according to a Normal Distribution
 Model of Financial Markets
 
 Anomalous Diffusion
+
+Mandelbrot97E, Ch.20:
+
+when $\expect(P(t + s) - P(t))^2$ is Finite for all $t$ and $s$ and $P(t)$ is a
+Martingale (\S\ref{sec:martingale_process}), and price increments are
+Uncorrelated and (``Orthogonal'' or ``Spectrally White''); if $P(t)$ is
+Gaussian, then Orthogonality becomes synonymous with Independence
+(\S\ref{sec:independence}) and a Gaussian Martingale can only be a Gaussian
+Random Walk, i.e. every Random Walk without ``drift'' is a Martingale
 
 
 
@@ -15369,6 +15459,176 @@ largest class of Processes for which the It\^o Integral
 \paragraph{Supermartingale}\label{sec:supermartingale}\hfill
 
 Doob's Convergence Theorems
+
+
+
+\subsubsection{Martingale Process}\label{sec:martingale_process}
+
+%FIXME: merge with main article ???
+
+Mandelbrot97E, Ch.19:
+
+\begin{quote}
+  When prices do not follow a random walk, but the dependence cannot be used to
+  increase expected profits, probabilists say that prices follow a ``martingale
+  process''.
+\end{quote}
+
+$Z(t)$ is a Martingale Process if:
+\[
+  Z(t) = \expect(Z(t+T) | Z(t) \cup \{ Z(t_i) | i \in I \})
+\]
+where the Set of $t_i$ is an arbitrary Set of past instants; this demands
+Statistical Independence between ``future anticipations'' and \emph{all} past
+values of $Z$
+
+for a \emph{Non-linear} Function $F$ of $Z$, in general the Expectation
+$\expect(F(Z(t)))$ will \emph{not} equal the present value $F(Z(t))$
+
+``Unbiased-ness'' is linked to a choice of \emph{Scale} for $Z$ (TODO: clarify)
+
+``fundamental analysis'': price attempts to follow ``value'', i.e. the present
+price $Z(t)$ is a function of past prices \emph{and} of the past and present
+values of the ``exogenous trigger'' $Y(t)$ (FIXME: clarify) such that as $T$
+increases, $Y(T + t)$ Converges to $Z(t)$ in the Limit; then price and value
+will occaisionally coincide, price will be generated by a Martingale Stochastic
+Model in which present $Z(t)$ is an Unbiased Estimator of $Z(t + T)$, and for
+large enough values of $T$, $Z(t)$ is an Unbiased Estimator of $Y(t + T)$; if
+the Process ``generating'' $Y$ has other properties, the ``forecast future
+value'' $\expect(Y(t + \infty))$ need not be a Martingale-- therefore, since
+``forecasting'' the value leads to a Martingale in the price says something
+about the ``structure'' of the value as well as the ``structure'' of the market
+mechanism; if the ``forecasted value'' does not follow a Martingale, price
+\emph{could} follow a Martingale \emph{only if} it \emph{fails} to follow the
+forecasted value (FIXME: clarify)
+
+if $Z(t)$ is a Martingale, its Derivative is Spectrally ``white'' in the sense
+that the Covariance $C(\tau)$ between $Z'(t)$ and $Z'(t + \tau)$ vanishes if
+$\tau \neq 0$; it follows that the Expected Value of the Sample Spectral Density
+of $Z'(t)$ will be a Constant, Independent of Frequency;
+``Spectral Methods'' are concerned with measuring Correlation rather than
+Statistical Dependence; Spectral ``whiteness'' expresses lack of Correlation,
+but it is not \empy{synonymous} with Independence, except in the atypical case
+when the Marginal Distribution and the Joint distributions at different times
+are Gaussian
+
+Mandelbrot97E, Ch.20:
+
+Linear Least Square (\S\ref{sec:lls}) Extrapolation (\S\ref{sec:extrapolation})
+
+a Martingale represents a ``fully arbitraged'' price
+
+when there is no ``risk aversion'' and the interest rate is zero, an
+``arbitraged price'' must follow a Martingale Process
+
+``Martingale Model'': knowing the present price and/or any number of past
+prices, the Conditional Expectation of $P(t+s) - P(t)$ vanishes; this expresses
+that no ``policy'' exists for buying and selling that has an expected ``return''
+above the average return of the market
+
+process of ``arbitraging'':
+\begin{itemize}
+  \item start with a single well-defined price series $P_0(t)$, which is not
+    itself a Martingale, summarizing the ``interplay'' of supply, demand, etc.
+    in the \emph{absence} of arbitraging; increments of $P_0(t)$ are assumed to
+    follow a Stationary Finite-variance Process
+  \item assume the ``purpose'' of arbitraging is to replace $P_0(t)$ by a
+    \emph{different} Process $P(t)$ that is a Martingale \emph{and}
+    ``constrained'' not to ``drift'' away from $P_0(t)$ without bound;
+    the ``goal'' is to achieve the smallest possible Mean Square drift: the
+    Variance of $P(t) - P_0(t)$ must be \emph{Bounded} for all $t$ and as
+    ``small as possible''; $P(t)$ is assumed to be a ``Linear Martingale'',
+    i.e. related to $P_0(t)$ \emph{Linearly}
+\end{itemize}
+
+a necessary and sufficient condition for the \emph{existence} of the required
+$P(t)$ is that as $s$ increases, the ``strength'' of Statistical Dependence
+between $P_0(t)$ and $P_0(t+s)$ must \emph{decrease} ``rapidly'', in a sense
+(TODO); if an arbitraged price series $P(t)$ exists, its ``intertemporal
+variability'' \emph{depends} on the Process $P_0$ and may be either greater or
+smaller than the variability of $P_0(t)$
+
+in the majority of cases, arbitraging is ``destabilizing'', but under certain
+circumstances it may be ``stabilizing''; a ``market specialist'', in order to
+``insure the continuity of the market'' must \emph{stabilize} the variation of
+price, and in circumstances under which ``\emph{perfect}'' arbitraging would be
+destabilizing, the specialist \emph{prevents} arbitraging from working fully and
+prevents prices from following a Martingale
+
+when the Dependence of $P_0(t)$ decreases ``very slowly'', arbitraging is not
+possible (FIXME: clarify)
+
+\emph{imperfect} arbitraging \emph{never} leads to prices following a Martingale
+
+when $\expect(P(t + s) - P(t))^2$ is Finite for all $t$ and $s$ and $P(t)$ is a
+Martingale, and price increments are Uncorrelated and (``Orthogonal'' or
+``Spectrally White'')
+
+if $P(t)$ is Gaussian, then Orthogonality becomes synonymous with Independence
+(\S\ref{sec:independence}) and a ``Gaussian Martingale'' can only be a Gaussian
+Random Walk (\S\ref{sec:gaussian_random_walk}); i.e. every Random Walk without
+``drift'' is a Martingale
+
+``economic equilibrium''
+
+a fully specified model of ``competitive market'':
+\begin{enumerate}
+  \item assumption about the prices (determined by ``exogenous variables'') that
+    \emph{would have} prevailed in the absence of arbitraging
+  \item assumption about the chosen ``criterion'' of abitraging, i.e. assume
+    ``the'' Martingale is Linear and the Mean Square drift is minimized
+\end{enumerate}
+
+increments of a Martingale Process are Spectrally ``White'', so perfect
+``anticipation'' can be called ``Spectrally Whitening''; in general an
+improvement in the perfection of the ``anticipation'' leads to an increase in
+the \emph{Variance} of price changes, i.e. it is \emph{destabilizing}
+
+Infinite Variance, Global Dependence
+
+``cycles'' and ``perfect anticipation''
+
+under the Stationary Finite Variance model of ``unanticipated prices'', perfect
+Least Squares arbitraging leads to the absurd result of a Gaussian with
+Divergent Variance
+
+assuming a Scaling ``exogenous'' variable with Finite Variance (Mandelbrot97E,
+Ch.19), perfect Least Squares arbitraging is not ``Linear'' and $P(t)$ is
+well-defined and changes follow a non-degenerate Non-Gaussian Distribution with
+Infinite Variance (the $L$-stable Distributions \S\ref{sec:stable_distribution};
+Mandelbrot97E, Ch.14)
+
+Martingale Convergence Theorem (Doob 1953); a price that is necessarily positive
+and follows the Martingale Model ``almost surely'' ``Converges'', i.e. ceases to
+fluctuate; cf. ``finite-horizon commodity futures''
+
+relying on Log price: writing $p = e^{\ln p}$, the Exponential Function is
+\emph{Convex}, so when Log price is a Martingale, \emph{price itself increases
+on average}
+
+``\emph{Function of Causes}'':
+\[
+  C(t) = \Delta P_0(t) = P_0(t) - P_0(t - 1)
+\]
+summarizes all the ``effects'' of supply and demand and any thing else that can
+conceivably affect price, with the exception of ``arbitraging'' itself
+
+if successive ``causes'' are Independent, then the arbitraged price $P(t)$
+satisfies $P(t) = P_0(t)$ and $\Delta P(t) = C(t)$, and successive increments of
+$P(t)$ are Independent and $P(t)$ follows a Random Walk
+
+if successive causes of price change cannot be assumed Independent--i.e. at any
+moment ``something'' about the future development of $C(t)$ may be
+\emph{Extrapolated} from known past and present values--but an ``efficiently
+arbitraged'' market should \emph{eliminate} any possibility that a method of
+buying and selling based on extrapolation should be systematically advantageous
+
+under infinite horizon Least Squares anticipation in a ``finite Variance
+universe'', arbitraged prices ordinarily follow a Martingale with Finite
+Variance increments that are therefore Orthogonal (Uncorrelated); when caues are
+Gaussian, then the arbitraged prices follow a Guassian Random Walk without drift
+
+a Constant $P(t)$ ($\Lambda = 0$) is a degenerate Martingale
 
 
 
