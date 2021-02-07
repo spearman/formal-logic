@@ -1661,7 +1661,24 @@ Distribution
 if the Random Variable admits a Probability Density Function then the
 Characteristic Function is the \emph{Fourier Transform}
 (\S\ref{sec:fourier_transform}) of the Probability Density Function and vice
-versa
+versa:
+\[
+  \varphi_X(t) \equiv \int_{-\infty}^\infty e^{itx} p_X(x) \diffy{x}
+\]
+
+\url{https://www.youtube.com/watch?v=NJL-BX6HuxY}:
+
+for $t = 0$, this Integral is equal to the Integral of the Distrubution, which
+is $1$ by definition; the First Derivative at Zero is
+$\varphi'_X(0) = i \expect(X)$, i.e. the First Moment (Mean); the (Negative)
+Second Derivative at Zero is $-\varphi''_X(0) = Var(X) + \expect(X)^2$, i.e.
+Uncentered Second Moment (Second Moment plus an ``un-centering'' term); the
+Coefficients of the Taylor Series Expansion of the Characteristic Function are
+equal to the Un-centered Moments (TODO: xrefs)
+
+the Characteristic Function of the \emph{Sum} of Independent Random Variables is
+the \emph{Product} of their individual Characteristic Functions (Fourier
+Convolution Theorem)
 
 cf. Moment-generating Function (\S\ref{sec:moment_generating_function}) --
 the Characteristic Function always exists even when the Moment-generating
@@ -1673,6 +1690,16 @@ Function can be extended to the Complex Plane
 
 cf. Characteristic Function Form Games
 (\S\ref{sec:characteristic_function_form})
+
+the Characteristic Function of a Real-valued Random Variable \emph{always
+exists}, since it is an \emph{Integral} of a Bounded, Continuous Function over a
+Space (FIXME: clarify) with Finite Measure
+
+a Characteristic Function is Uniformly Continuous on the entire Space (FIXME:
+clarify)
+
+if the Distribution of Symmetric, then the Characteristic Function is
+Real-valued and Even
 
 \begin{itemize}
   \item the Characteristic Function of a (L\'evy) Symmetric $\alpha$-stable
@@ -1961,7 +1988,7 @@ in Signal Processing (\S\ref{sec:signal_processing}) terms, \emph{Identically
 xref/clarify) and \emph{Independent} implies a White Noise Spectrum (flat)
 
 (Mandelbrot97E, Ch.19\S 1) Spectral ``whiteness'' expresses lack of Correlation,
-but it is \empy{not synonymous} with Independence, except in the atypical case
+but it is \emph{not synonymous} with Independence, except in the atypical case
 when the Marginal Distribution and the Joint distributions at different times
 are Gaussian
 
@@ -3538,6 +3565,8 @@ $t$-test (\S\ref{sec:t_test})
 
 Infinitely Divisible (\S\ref{sec:infinitely_divisible})
 
+Power Law (\S\ref{sec:power_law})
+
 
 
 \paragraph{Cauchy Distribution}\label{sec:cauchy_distribution}\hfill
@@ -4062,6 +4091,8 @@ Mandelbrot97E, Ch.14 -- Distrubtion of price changes is Leptokurtic
 Log-cauchy (\S\ref{sec:log_cauchy}) -- Logarithmically decaying Tail;
 ``Extreme'' Randomness
 
+(Taleb2020 \S 2.2.21) Maximum Domain of Attraction (TODO)
+
 
 
 \subsubsection{Long-tailed Distribution}\label{sec:long_tailed}
@@ -4073,12 +4104,20 @@ Log-cauchy (\S\ref{sec:log_cauchy}) -- Logarithmically decaying Tail;
 \subsubsection{Subexponential Distribution}
 \label{sec:subexponential_distribution}
 
+defined in terms of Convolutions of Probability Distributions
+
+Taleb2020 \S 2.2.11
+
+
+
 \subsubsection{Continuous Power Law Distribution}
 \label{sec:continuous_power_law}
 
 Scale Invariance (\S\ref{sec:scale_invariance})
 
 Slowly Varying Function (\S\ref{sec:slowly_varying})
+
+$t$-distribution (\S\ref{sec:t_distribution})
 
 
 
@@ -4460,6 +4499,21 @@ volume'' (instead of the $L$-stable ``trading time'')
 as the ``Differencing Interval'' increases the Tails of the Distribution of
 price changes can become \emph{shorter} (cf. Multifractals
 \S\ref{sec:multifractal})
+
+\asterism
+
+Taleb2020 \S 2.2.8
+
+$X_S$ follows an $\alpha$-stable Distribution
+$X_S \sim S(\alpha_S, \beta, \mu, \sigma)$ if its Characteristic Function is of
+the form:
+\[
+  \chi(t) =
+    e^{(i\mu t
+      - |t\sigma|^{\alpha_S} (1 - i\beta \tan(\frac{\pi\alpha_S}{2}) sgn(t))
+    )}
+\]
+when $\alpha_S \neq 1 \wedge \alpha_S \in (0, 2]$ and $\beta \in [-1, 1]$
 
 
 
@@ -5833,6 +5887,8 @@ Average Absolute Difference between two IID Random Variables
 
 cf. Mean Squared Deviation (MSD \S\ref{sec:msd})
 
+Kappa Metric (\S\ref{sec:preasymptotics})
+
 
 
 \subparagraph{Mean Absolute Difference}
@@ -6269,7 +6325,7 @@ and $Z'(t + \tau)$ vanishes if $\tau \neq 0$; it follows that the Expected Value
 of the Sample Spectral Density of $Z'(t)$ will be a Constant, Independent of
 Frequency; ``Spectral Methods'' are concerned with measuring Correlation rather
 than Statistical Dependence; Spectral ``whiteness'' expresses lack of
-Correlation, but it is not \empy{synonymous} with Independence, except in the
+Correlation, but it is not \emph{synonymous} with Independence, except in the
 atypical case when the Marginal Distribution and the Joint distributions at
 different times are Gaussian
 
@@ -6360,7 +6416,7 @@ and $Z'(t + \tau)$ vanishes if $\tau \neq 0$; it follows that the Expected Value
 of the Sample Spectral Density of $Z'(t)$ will be a Constant, Independent of
 Frequency; ``Spectral Methods'' are concerned with measuring Correlation rather
 than Statistical Dependence; Spectral ``whiteness'' expresses lack of
-Correlation, but it is not \empy{synonymous} with Independence, except in the
+Correlation, but it is not \emph{synonymous} with Independence, except in the
 atypical case when the Marginal Distribution and the Joint distributions at
 different times are Gaussian
 
@@ -7932,6 +7988,8 @@ Scale Analysis (\S\ref{sec:statistical_scale}), Scale Invariance
 a Real Variable with behavior at Infinity similar to the behavior of a Power Law
 Function (cf. Polynomial \S\ref{sec:polynomial_function})
 
+$t$-distribution (\S\ref{sec:t_distribution})
+
 
 
 \subsubsection{Rank-size Law}\label{sec:ranksize_law}
@@ -9457,6 +9515,16 @@ Asymptotic Thoerems:
 \subsubsection{Large Deviations Theory}\label{sec:large_deviations_theory}
 
 \paragraph{Rate Function}\label{sec:rate_function}\hfill
+
+
+
+\subsection{Pre-asymptotics}\label{sec:preasymptotics}
+
+%FIXME: move/rename this section ???
+
+$1 < n < \infty$
+
+Kappa Metric -- Taleb 2018
 
 
 
@@ -15570,7 +15638,7 @@ $\tau \neq 0$; it follows that the Expected Value of the Sample Spectral Density
 of $Z'(t)$ will be a Constant, Independent of Frequency;
 ``Spectral Methods'' are concerned with measuring Correlation rather than
 Statistical Dependence; Spectral ``whiteness'' expresses lack of Correlation,
-but it is not \empy{synonymous} with Independence, except in the atypical case
+but it is not \emph{synonymous} with Independence, except in the atypical case
 when the Marginal Distribution and the Joint distributions at different times
 are Gaussian
 

@@ -498,117 +498,6 @@ Arithmetic Progression (Arithmetic Sequence
 
 
 % ------------------------------------------------------------------------------
-\subsection{Geometric Series}\label{sec:geometric_series}
-% ------------------------------------------------------------------------------
-
-Constant Ratio between successive Terms
-
-Terms form a Geometric Progression (Geometric Sequence
-\S\ref{sec:geometric_sequence})
-
-Sum Converges as long as Absolute Value of the Ratio of Terms is less
-than $1$
-
-
-
-\subsubsection{Hypergeometric Series}\label{sec:hypergeometric_series}
-
-\paragraph{Hypergeometric Function}\label{sec:hypergeometric_function}\hfill
-
-defined by the (Hypergeometric) Power Series (\S\ref{sec:power_series}):
-\[
-  _2F_1 (a, b; c; z) = \sum_{n=0}^\infty \frac{(a)_n (b)_n z^n}{(c)_n n!}
-\]
-for $|z| < 1$ and $(q)_n$ is the Rising Factorial (\S\ref{sec:factorial_power});
-undefined or Infinite if $c$ is a Non-positive Integer
-
-if either $a$ or $b$ is a Non-positive Integer the Series ``terminates'' (FIXME:
-clarify) and the Function reduces to a Polynomial:
-\[
-  _2F_1 (-m, b; c; z) = \sum_{n=0}^m (-1)^n \binom{m}{n} \frac{(b)_n}{(c)_n} z^n
-\]
-
-\fist Generalized Hypergeometric Series
-(\S\ref{sec:generalized_hypergeometric_function})
-$_pF_q$
-
-is a Solution of a Second-order Linear ODE
-(\S\ref{sec:linear_differential_equation})
-
-Strict Subset of the Holonomic Functions (\S\ref{sec:holonomic_function})
-
-
-
-\subparagraph{Beta Function}\label{sec:beta_function}\hfill
-
-Euler Integral (\S\ref{sec:hypergeometric_integral})
-
-relation to the Gamma Function (\S\ref{sec:gamma_function}):
-\[
-  B(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x + y)}
-\]
-
-
-
-\subparagraph{Hypergeometric Integral}\label{sec:hypergeometric_integral}\hfill
-
-Integral (\S\ref{sec:integral})
-
-Euler Hypergeometric Integral:
-\[
-  B(b, c-b) _2F_1 (a, b; c; z) =
-    \int_0^1 x^{b-1}(1-x)^{c-b-1}(1 - zx)^{-a} \diffy{x}
-\]
-where $B$ is the Beta Function (\S\ref{sec:beta_function}) and $\Re(c) > \Re(b)
-> 0$ and $z \in [1, \infty)$; used in methods of generating Fractional Brownian
-  Motion (\S\ref{sec:fractional_brownian})
-
-Barnes Hypergeometric Integral
-
-
-
-\subparagraph{Confluent Hypergeometric Function}
-\label{sec:confluent_hypergeometric}\hfill
-
-\subparagraph{Generalized Hypergeometric Function}
-\label{sec:generalized_hypergeometric_function}\hfill
-
-$_pF_q$
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Harmonic Series}\label{sec:harmonic_series}
-% ------------------------------------------------------------------------------
-
-cf. Partial Sums of the Harmonic Series are Harmonic Numbers
-(\S\ref{sec:harmonic_number})
-
-\fist Harmonic Analysis (\S\ref{sec:harmonic_analysis})
-
-\fist Harmonic Wave (\S\ref{sec:harmonic_wave})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Alternating Series}\label{sec:alternating_series}
-% ------------------------------------------------------------------------------
-
-\[
-  \sum_{n=0}^\infty (-1)^n a_n
-\]
-or:
-\[
-  \sum_{n=0}^\infty (-1)^{n-1} a_n
-\]
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Telescoping Series}\label{sec:telescoping_series}
-% ------------------------------------------------------------------------------
-
-% ------------------------------------------------------------------------------
 \subsection{Power Series}\label{sec:power_series}
 % ------------------------------------------------------------------------------
 
@@ -685,6 +574,171 @@ parameter
 
 \paragraph{Binomial Series}\label{sec:binomial_series}\hfill
 
+defined by the Hypergeometric Function (\S\ref{sec:generalized_hypergeometric})
+$_1F_0(a;;z) = (1 - z)^{-a}$
+
+
+
+\subsubsection{Geometric Series}\label{sec:geometric_series}
+
+Constant Ratio between successive Terms
+
+Terms form a Geometric Progression (Geometric Sequence
+\S\ref{sec:geometric_sequence})
+
+Sum Converges as long as Absolute Value of the Ratio of Terms is less
+than $1$
+
+defined by Hypergeometric Function $_1F_0(1;; z) = (1 - z)^{-1}$
+
+
+
+\subsubsection{Hypergeometric Series}\label{sec:hypergeometric_series}
+
+defined as the Power Series:
+\[
+  \beta_0 + \beta_1 z + \beta_2 z^2 + \cdots = \sum_{n\geq{0}} \beta_n z^n
+\]
+where the \emph{Ratio} of successive Coefficients is a \emph{Rational Function}
+of \emph{Polynomials}, $A(n)$ and $B(n)$, in $n$:
+\[
+  \frac{\beta_{n+1}}{\beta_n} = \frac{A(n)}{B(n)}
+\]
+
+Convergence Tests (TODO)
+
+
+
+\paragraph{Bilateral Hypergeometric Series}\label{sec:bilateral_hypergeometric}
+
+\paragraph{Generalized Hypergeometric Function}
+\label{sec:generalized_hypergeometric_function}\hfill
+
+\[
+  _pF_q(a_1, \ldots, a_p; b_1, \ldots, b_q; z) =
+    \sum_{n=0}^\infty
+      \frac{(a_1)_n \cdots (a_p)_n}{(b_1)_n \cdots (b_1)_n}
+      \frac{z^n}{n!}
+\]
+
+the order of the $a_j$ and $b_k$ parameters can be changed without changing the
+value of the Function
+
+when all the Terms are defined and there exists a Non-zero Radius of
+Convergence, then the Series defines an \emph{Analytic Function}
+
+\fist Exponential Generating Function (\S\ref{sec:generating_function})
+
+\begin{itemize}
+  \item $_0F_0(;; z) = e^z$ -- Exponential Function
+    (\S\ref{sec:exponential_function})
+  \item $_1F_0(1;; z) = (1-z)^{-1}$ -- Geometric Series
+     (\S\ref{sec:geometric_series})
+  \item $_1F_0(a;; z) = (1-z)^{-a}$ -- Binomial Series
+    (\S\ref{sec:binomial_series})
+  \item $_0F_1(; \frac{1}{2}; -\frac{z^2}{4}) = \cos z$
+  \item $_0F_1(; a; z)$ -- Confluent Hypergeometric Limit Functions
+  \item $_1F_1(a; b; z)$ -- Confluent Hypergeometric Functions of the First Kind
+    (\S\ref{sec:confluent_hypergeometric})
+  \item $_2F_0(a_1, a_2; ; z)$ -- Exponential Integral Function (TODO: xref)
+  \item $_2F_1(a, b; c; z)$ -- (Gaussian or ``ordinary'') Hypergeometric
+    Functions (\S\ref{sec:hypergeometric_function})
+  \item ... MORE
+\end{itemize}
+
+TODO: relation to ``Classical Orthogonal Polynomials''
+
+
+
+\paragraph{(Gaussian) Hypergeometric Function}
+\label{sec:hypergeometric_function}\hfill
+
+``Gaussian'' or ``Ordinary'' Hypergeometric Function
+
+a ``Special Function''
+
+defined by the (Hypergeometric) Power Series (\S\ref{sec:power_series}):
+\[
+  _2F_1 (a, b; c; z) = \sum_{n=0}^\infty \frac{(a)_n (b)_n z^n}{(c)_n n!}
+\]
+for $|z| < 1$ and $(q)_n$ is the Rising Factorial (\S\ref{sec:factorial_power});
+undefined or Infinite if $c$ is a Non-positive Integer
+
+if either $a$ or $b$ is a Non-positive Integer the Series ``terminates'' and the
+Function reduces to a Polynomial:
+\[
+  _2F_1 (-m, b; c; z) = \sum_{n=0}^m (-1)^n \binom{m}{n} \frac{(b)_n}{(c)_n} z^n
+\]
+(see this video \url{https://www.youtube.com/watch?v=_UhRTz3TgOE})
+
+the first Derivative of $F(a, b; c; z)$ with respect to $z$ is:
+\[
+  \frac{ab}{c}F(a+1, b+1; c+1; z)
+\]
+the $k$th Derivative:
+\[
+  \frac{(a)_k(b)_k}{(c)_k} F(a+k, b+k; c+k; z)
+\]
+
+\fist Generalized Hypergeometric Series
+(\S\ref{sec:generalized_hypergeometric_function})
+$_pF_q$
+
+is a Solution of a Second-order Linear ODE
+(\S\ref{sec:linear_differential_equation})
+
+Strict Subset of the Holonomic Functions (\S\ref{sec:holonomic_function})
+
+
+
+\subparagraph{Beta Function}\label{sec:beta_function}\hfill
+
+Euler Integral (\S\ref{sec:hypergeometric_integral})
+
+relation to the Gamma Function (\S\ref{sec:gamma_function}):
+\[
+  B(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x + y)}
+\]
+
+
+
+\subparagraph{Hypergeometric Integral}\label{sec:hypergeometric_integral}\hfill
+
+Integral (\S\ref{sec:integral})
+
+Euler Hypergeometric Integral:
+\[
+  B(b, c-b) _2F_1 (a, b; c; z) =
+    \int_0^1 x^{b-1}(1-x)^{c-b-1}(1 - zx)^{-a} \diffy{x}
+\]
+where $B$ is the Beta Function (\S\ref{sec:beta_function}) and
+$\Re(c) > \Re(b) > 0$ and $z \in [1, \infty)$; used in methods of generating
+  Fractional Brownian Motion (\S\ref{sec:fractional_brownian})
+
+Barnes Hypergeometric Integral
+
+
+
+\paragraph{Confluent Hypergeometric Function}
+\label{sec:confluent_hypergeometric}\hfill
+
+$_0F_1(; a; z)$ -- Confluent Hypergeometric Limit Functions
+
+$_1F_1(a; b; z)$ -- Confluent Hypergeometric Functions of the First Kind
+
+TODO: relation to Elementary Functions, Bessel Functions
+
+
+
+\subsubsection{Basic Hypergeometric Series}\label{sec:basic_hypergeometric}
+
+generalization of Generalized Hypergeometric Function
+
+
+
+\subsubsection{Elliptic Hypergeometric Series}
+\label{sec:elliptic_hypergeometric}
+
 
 
 % ------------------------------------------------------------------------------
@@ -703,6 +757,37 @@ are allowed to be Non-integers and ``vary continuously''
 (\url{https://golem.ph.utexas.edu/category/2019/07/what_is_the_laplace_transform.html})
 
 
+
+% ------------------------------------------------------------------------------
+\subsection{Harmonic Series}\label{sec:harmonic_series}
+% ------------------------------------------------------------------------------
+
+cf. Partial Sums of the Harmonic Series are Harmonic Numbers
+(\S\ref{sec:harmonic_number})
+
+\fist Harmonic Analysis (\S\ref{sec:harmonic_analysis})
+
+\fist Harmonic Wave (\S\ref{sec:harmonic_wave})
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Alternating Series}\label{sec:alternating_series}
+% ------------------------------------------------------------------------------
+
+\[
+  \sum_{n=0}^\infty (-1)^n a_n
+\]
+or:
+\[
+  \sum_{n=0}^\infty (-1)^{n-1} a_n
+\]
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Telescoping Series}\label{sec:telescoping_series}
+% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{General Dirichlet Series}\label{sec:general_dirichlet}
@@ -825,6 +910,7 @@ Exceptional Set (\S\ref{sec:exceptional}) fails to be ``well-behaved''
   \item Discontinuity (\S\ref{sec:discontinuity})
   \item Pole (Complex Analysis \S\ref{sec:complex_pole})
   \item Singular Points (Algebraic Varieties \S\ref{sec:singular_point})
+  \item Singular Points (Complex ODEs \S\ref{sec:complex_singular_point})
   \item ...
 \end{itemize}
 
@@ -1699,6 +1785,12 @@ for $\alpha > 0$
 \item $\Gamma(1) = 1$
 \item $\Gamma(\sfrac{1}{2}) = \sqrt{pi}$
 \end{enumerate}
+
+the $n$th Rising Factorial (\S\ref{sec:factorial_power}) of $x$ can be written
+in terms of the Gamma Function:
+\[
+  (x)_n = \frac{\Gamma(x+n)}{\Gamma(x)}
+\]
 
 appears in definitions of $t$-distributions (\S\ref{sec:t_distribution}), Gamma
 Distributions (\S\ref{sec:gamma_distribution}), Beta Distributions
@@ -6647,7 +6739,8 @@ in Real Space
 \begin{itemize}
   \item a Characteristic Function (\S\ref{sec:characteristic_function}) is the
     Fourier Transform of the Probability Density Function (\S\ref{sec:pdf}) of a
-    Random Variable (\S\ref{sec:random_variable}), and vice versa
+    Random Variable (\S\ref{sec:random_variable}), and vice versa;
+    \emph{Fourier Convolution Theorem} (TODO)
 \end{itemize}
 
 Mandelbrot97E, Ch.11 \S 1.2:
@@ -8138,6 +8231,8 @@ Solution.
 
 \paragraph{Exponential Decay}\label{sec:exponential_decay}\hfill
 
+%FIXME: ???
+
 \fist Long-range Dependency (\S\ref{sec:long_range_dependence}) -- Statistical
 Dependence that decays more slowly than Exponential Decay
 
@@ -8294,6 +8389,29 @@ to increment $\vec{x}$
 \end{itemize}
 
 Adaptive Stepsizing
+
+
+
+\paragraph{Ordinary Point}\label{sec:ordinary_point}\hfill
+
+Points of ODEs in the Complex Plane at which the Equations Coefficients are
+\emph{Analytic Functions}
+
+
+
+\paragraph{Singular Point}\label{sec:complex_singular_point}\hfill
+
+Points of ODEs in the Complex Plane at which some Coefficient has a Singularity
+
+\fist cf. Singular Points of Algebraic Varieties (\S\ref{sec:singular_point})
+
+\emph{Regular Singular Point} -- ``growth'' of Solutions is Bounded by an
+Algebraic Function
+
+\emph{Irregular Singular Point} -- ``full'' Solution Set requires Functions with
+higher growth rates
+
+cf. Hypergeometric Differential Equation (\S\ref{sec:hypergeometric_function})
 
 
 
