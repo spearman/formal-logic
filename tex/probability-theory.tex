@@ -69,6 +69,12 @@ $\cat{Prob}$ and those Morphisms are \emph{Random Variables}
 
 2003 - Jaynes - \emph{Probability Theory: The Logic of Science}
 
+\asterism
+
+1997 - Mandelbrot - \emph{Fractals and Scaling in Finance} (Mandelbrot97E)
+
+2020 - Taleb - \emph{Statistical Consequences of Fat Tails}
+
 
 
 % ==============================================================================
@@ -482,6 +488,17 @@ rather than Truth Preserving (\S\ref{sec:truth_preservation})
 \emph{Probability, Knowledge, and Meta-probability}:
 \url{https://www.lesswrong.com/posts/2xmKZu73gZLDEQw7c/probability-knowledge-and-meta-probability}
 
+\asterism
+
+\emph{Meta-probability} (FIXME: section ?)
+
+(Taleb2020) \emph{invisibility of the Generator}
+(\S\ref{sec:generating_process}): only Realizations of Probability Distributions
+can be observed, and a Probability Distribution cannot tell you if a Realization
+belongs to it; a \emph{Meta-probability Distribution} is needed to discuss
+``\emph{Tail Events}'' (i.e. the Conditional Probability for the Variable to
+belong to a \emph{certain} Distribution vs. others) --FIXME: clarify
+
 
 
 % ------------------------------------------------------------------------------
@@ -671,6 +688,14 @@ $Var(X - Y) = Var(X) + Var(Y)$
 
 the Probability Distribution of the Sum of two Independent Random Variables is
 the Convolution (\S\ref{sec:convolution}) of their individual Distributions
+
+the Cumulative Distribution of the Sum of two IID Random Variables is the
+Convolution of the \emph{Derivative} of the Cumulative Distribution by the
+Cumulative Distribution itself: $F' * F$
+
+the Characteristic Function (\S\ref{sec:characteristic_function}) of the Sum of
+Independent Random Variables is the Product of their individual Characteristic
+Functions (Fourier Convolution Theorem)
 
 cf. Binomial Distribution (\S\ref{sec:binomial_distribution}) -- Sum of
 Independent Trials; Sampling 10\% Rule (TODO)
@@ -871,6 +896,29 @@ Randomness (\S\ref{sec:statistical_randomness})
 defined between PDFs (\S\ref{sec:pdf})
 
 can be used to show Consistency of MLE (\S\ref{sec:mle})
+
+
+
+\subsubsection{Gibbs Measure}\label{sec:gibbs_measure}
+
+the Normalizing Constant is the Partition Function
+(\S\ref{sec:partition_function})
+
+\emph{Boltzmann Distribution} (Statistical Mechanics) -- the Normalizing
+Constant is the \emph{Canonical Partition Function}
+
+\emph{Gibbs Random Field}
+
+
+
+\paragraph{Fundamental Theorem of Random Fields}
+\label{sec:random_fields_theorem}\hfill
+
+\emph{Hammersley-Clifford Theorem}
+
+any Probability Measure that Satisfies the Markov Property
+(\S\ref{sec:markov_property}) is a Gibbs Measure for an appropriate choice of
+(locally defined) ``energy function'' (FIXME: objective function ???)
 
 
 
@@ -1617,6 +1665,11 @@ Real-valued Distribution always exists; if a Random Variable has a
 Moment-generating Function then the Characteristic Function can be extended to
 the Complex Plane
 
+the Characteristic Function is a Wick Rotation (TODO: xref) of the
+Moment-generating Function, when the latter exists; for Mean $0$, the
+Moment-generating Function and Characteristic Function are the same (TODO:
+verify)
+
 every Distribution with a Moment-generating Function is a member of a Natural
 Exponential Family (\S\ref{sec:nautral_exponential_family})
 
@@ -1685,6 +1738,11 @@ the Characteristic Function always exists even when the Moment-generating
 Function and Probability Density Function (\S\ref{sec:pdf}) do not exist;
 if a Random Variable has a Moment-generating Function then the Characteristic
 Function can be extended to the Complex Plane
+
+the Characteristic Function is a Wick Rotation (TODO: xref) of the
+Moment-generating Function, when the latter exists; for Mean $0$, the
+Moment-generating Function and Characteristic Function are the same (TODO:
+verify)
 
 \fist cf. Indicator Functions (\S\ref{sec:indicator_function})
 
@@ -1851,6 +1909,20 @@ used to reduce any Probability Function to a Probability Density Function with
 total Probability $1$
 
 %FIXME: same concept as Normalizing Constant for bayesian inference ?
+
+%FIXME: this applies to discrete random variables as well ?
+
+
+
+\subparagraph{Partition Function}\label{sec:partition_function}\hfill
+
+or \emph{Configuration Integral}
+
+\emph{Canonical Partition Function} (Boltzmann Distribution
+\S\ref{sec:gibbs_measure})
+
+Scalar Potential (\S\ref{sec:scalar_field}), Hamiltonian
+(\S\ref{sec:hamiltonian_system})
 
 
 
@@ -2152,6 +2224,10 @@ exists a Lebesgue-integrable Function $f_X(x)$ such that:
 for all Real Numbers $a, b$ and $f_X$ is the PDF of the Distribution of $X$
 and equals the Derivative of $F_X$ almost everywhere
 
+the Cumulative Distribution of the Sum of two IID Random Variables is the
+Convolution of the \emph{Derivative} of the Cumulative Distribution by the
+Cumulative Distribution itself: $F' * F$
+
 \fist \emph{Empirical Distribution Function}
 (\S\ref{sec:empirical_distribution}) -- an Unbiased Estimator for $F$ defined as
 the CDF of the Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
@@ -2160,7 +2236,7 @@ the CDF of the Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
 
 
 \subsubsection{Complementary Cumulative Distribution Function}
-\label{sec:complementary_cumulative}
+\label{sec:tail_distribution}
 
 or \emph{Tail Distribution}
 
@@ -2168,11 +2244,15 @@ $\prob(X > x)$
 
 $\bar{F}(\cdot)$
 
+\emph{Chernoff Bounds}
+
 
 
 \paragraph{Survival Function}\label{sec:survival_function}\hfill
 
 $\bar{F}_X(x) = P(X > x) = 1 - F_X(x)$
+
+cf. Exceedance Probability (\S\ref{sec:exceedance_probability})
 
 
 
@@ -2192,6 +2272,8 @@ cf. Scaling (Homothety \S\ref{sec:scaling})
   \item Pareto Distribution (\S\ref{sec:pareto_distribution})
   \item Zipf Distribution (\S\ref{sec:zipf_distribution})
 \end{itemize}
+
+``\emph{Calibration}'' -- Estimation of the Tail Exponent $\alpha$ (Taleb2020)
 
 Mandelbrot97:
 
@@ -2650,6 +2732,16 @@ where $\hat{F}_n$ is the Empirical Distribution Function
 \subsubsection{Cumulative Frequency Analysis}
 \label{sec:cumulative_frequency_analysis}
 
+\emph{Cumulative Frequency} -- \emph{Frequency of Non-exceedance}
+
+
+
+\paragraph{Exceedance Probability}\label{sec:exceedance_probability}\hfill
+
+\emph{Frequency of Exceedance}
+
+Extreme Value Theory (\S\ref{sec:eva})
+
 
 
 % ------------------------------------------------------------------------------
@@ -2969,6 +3061,11 @@ $[min,max]$ such that the area is $1$
 
 $Uniform(0,1)$ -- \emph{Standard Uniform Distribution}
 
+the Uniform Distribution is the Maximum Entropy Probability Distribution for a
+Random Variable under \emph{no constraint} other than that it is ``contained''
+in the Distribution's Support (FIXME: clarify importance of this last
+requirement)
+
 \url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
 the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) is a ``disguised''
 form of the Uniform Distribution on a Circle
@@ -3023,13 +3120,19 @@ Entropy (\S\ref{sec:entropy})
 (wiki):
 
 \emph{Maximum Entropy Principle}: the \emph{Maximum Entropy Distribution} for a
-certain Class of Probability Distributions minimizes the amount of Prior
-Information (\S\ref{sec:prior_distribution}) built into the Distribution
+certain Class of Probability Distributions minimizes the amount of ``Prior
+Information'' (\S\ref{sec:prior_distribution}) ``built in'' to the Distribution
+(FIXME: clarify)
 
 \begin{itemize}
+  \item the Uniform Distribution (\S\ref{sec:uniform_distribution}) is the
+    Maximum Entropy Probability Distribution for a Random Variable under
+    \emph{no constraint} other than that it is ``contained'' in the
+    Distribution's Support (FIXME: clarify importance of this last requirement)
   \item the Log-normal Distribution (\S\ref{sec:lognormal_distribution}) is the
     Maximum Entropy Probability Distribution for a Random Variable $X$ for which
     the Mean and Variance of $\ln X$ are specified
+  \item ...
 \end{itemize}
 
 
@@ -3743,6 +3846,10 @@ Multivariate Random Variable (\S\ref{sec:random_vector})
 
 generalization of Multivariate Normal Distribution
 
+\emph{Stochastic Correlation} -- effect of applying Stochastic Variance (cf.
+simulating Fat-tailed Distributions \S\ref{sec:fat_tailed}) to Elliptical
+Distribution (Taleb2020 \S 4.3.1)
+
 
 
 \paragraph{Folded Normal Distribution}\label{sec:folded_normal}\hfill
@@ -3785,6 +3892,8 @@ Process $Y = e^X$ has a \emph{Log-normal} Distribution, i.e. $\ln Y = X$ is
 Normally Distributed
 
 \emph{Multiplicative Phenomena}; cf. \emph{Additive Phenomena} (Gaussian)
+
+Sub-exponential Distribution (\S\ref{sec:subexponential_distribution})
 
 the Log-normal Distribution is the Maximum Entropy Probability Distribution
 (\S\ref{sec:maximum_entropy}) for a Random Variable $X$ for which the Mean and
@@ -3902,8 +4011,8 @@ Gamma Function (\S\ref{sec:gamma_function})
 
 a Tweedie Distribution (\S\ref{sec:tweedie_distribution})
 
-Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
-> 0$:
+Continuous Random Variable $X$ with parameters $\alpha > 0$ and
+$\beta > 0$:
 \[
   f(x; \alpha, \beta) =
   \begin{cases}
@@ -3916,6 +4025,8 @@ Continuous Random Variable $X$ with parameters $\alpha > 0$ and $\beta
 Mean $\mu = \alpha \beta$
 
 Variance $\sigma^2 = \alpha \beta^2$
+
+Sub-exponential Distributions (\S\ref{sec:subexponential_distribution})
 
 Infinitely Divisible (\S\ref{sec:infinitely_divisible})
 
@@ -4059,6 +4170,10 @@ Distribution of Walk Length of Random Self-avoiding Walks
 Tails are \emph{not} Exponentially Bounded (cf. Exponential Distributions
 \S\ref{sec:exponential_distribution})
 
+(FIXME: wikipedia defines heavy-tailed distributions as the general class of
+distributions not exponentially bounded, and divided into subclasses of
+fat-tailed, long-tailed, and subexponential)
+
 \fist Self-similar Processes (\S\ref{sec:self_similar}), Long-range Dependence
 (\S\ref{sec:long_range_dependence}), Power Law Distributions
 (\S\ref{sec:power_law})
@@ -4075,6 +4190,62 @@ Tails are \emph{not} Exponentially Bounded (cf. Exponential Distributions
 
 ``Fat-tailed Distributions'' -- ``extreme'' Thick Tails, or membership of a
 Power-law Class
+
+\emph{Asymmetry in Distributions}: it is easier for a Fat-tailed Distribution to
+appear as Thin-tailed, than it is for a Thin-tailed Distribution to appear
+Thick-tailed
+
+(Taleb2020) \emph{invisibility of the Generator}
+(\S\ref{sec:generating_process}): only Realizations of Probability Distributions
+can be observed, and a Probability Distribution cannot tell you if a Realization
+belongs to it; a \emph{Meta-probability Distribution} is needed to discuss
+``\emph{Tail Events}'' (i.e. the Conditional Probability for the Variable to
+belong to a \emph{certain} Distribution vs. others) --FIXME: clarify
+
+\emph{Negative Empiricism}: if you Observe a ``Distribution'' that has \emph{no}
+Randomness, it cannot be known to be not Random; Observing Randomness allows one
+to rule out degeneracy (\emph{via negativa})
+
+Asymmetry and \emph{Robustness}: what does not produce variability accross
+perturbation of Parameters of the Probability Distribution is \emph{Robust}; if
+there \emph{is} change, but with change with \emph{Asymmetry},i.e. either
+Concave or Convex response to perturbations, is \emph{Fragile} or
+\emph{Anti-fragile}, resp.
+
+Ch.4 -- heuristics to create ``mildly fat tails'' with Finite Moments:
+
+\begin{itemize}
+  \item Stochastic Variance -- ``stochasticizing'' either the Standard Deviation
+    or Variance of a Gaussian Distribution; this increases the Fourth Moment
+    while keeping the Second Moment (Expected or Mean Variance) unchanged; can
+    only raise Kurtosis to twice that of the Gaussian
+
+    ways of making $\sigma$ Stochastic:
+    \begin{itemize}
+      \item make $\sigma^2$ or possibly $\sigma$ \emph{Lognormal} -- does not
+        yield closed-form solutions but has Moments
+      \item make $\sigma^2$ or $\sigma$ follow a \emph{Gamma Distribution}
+        -- has closed-form solutions
+      \item make $\frac{1}{\sigma^2}$ Lognormal or Gamma Distributed
+    \end{itemize}
+
+    $p^\delta \defeq \frac{p(x, \sigma + \delta), p(x, \sigma - \delta)}{2}$
+    -- TODO: more details
+
+    \emph{Stochastic Correlation} -- effect of applying Stochastic Volatility to
+    Elliptical Distributions (\S\ref{sec:elliptical_distribution})
+  \item Skewed Variance -- allows larger Kurtosis while preserving Variance
+  \item Gamma Variance
+\end{itemize}
+
+for Thin-tailed Distributions (Finite Variance) with $\expect(x) = 0$, the
+ratio:
+\[
+  h = \frac{\sqrt{\expect(X^2)}}{\expect(|X|)}
+\]
+incrases with the Fat-tailedness
+
+Taleb2020, Ch.5: future Extremes will not be similar to past Extremes
 
 
 
@@ -4107,6 +4278,17 @@ Log-cauchy (\S\ref{sec:log_cauchy}) -- Logarithmically decaying Tail;
 defined in terms of Convolutions of Probability Distributions
 
 Taleb2020 \S 2.2.11
+
+Taleb2020, Ch.5:
+
+\begin{itemize}
+  \item ``border-line'' Exponential: Gamma Distribution
+    (\S\ref{sec:gamma_distribution})
+  \item Log-normal (\S\ref{sec:lognormal_distribution})
+\end{itemize}
+
+a Subexponential Distribution is the ``cutoff'' between ``Thin'' and ``Fat''
+Tails
 
 
 
@@ -4158,11 +4340,17 @@ thing as a Scaling Distribution (\S\ref{sec:scaling_distribution}) ???
 
 Mandelbrot 1963
 
+(Taleb2020 \S 3.8) the Tail Exponent of a Pareto Distribution is Inverse-gamma
+Distributed and of sufficiently low Variance for Estimation
+
 
 
 \subsubsection{Inverse Gamma Distribution}\label{sec:inverse_gamma}
 
 %FIXME: are all inverse gamma distributions fat-tailed ???
+
+(Taleb2020 \S 3.8) the Tail Exponent of a Pareto Distribution is Inverse-gamma
+Distributed and of sufficiently low Variance for Estimation
 
 
 
@@ -4607,7 +4795,7 @@ is Weakly Scaling (\S\ref{sec:scaling_distribution})
 
 \subsubsection{Weibull Distribution}\label{sec:weibull_distribution}
 
-the Complementary Cumulative (\S\ref{sec:complementary_cumulative}) Weibull
+the Complementary Cumulative (\S\ref{sec:tail_distribution}) Weibull
 Distribution is given by a Stretched Exponential
 (\S\ref{sec:stretched_exponential})
 
@@ -4745,6 +4933,13 @@ respect to the ``real'' Data Generating Process
 (\S\ref{sec:sampling})
 
 \fist cf. Stochastic Process (\S\ref{sec:stochastic_process})
+
+(Taleb2020) \emph{invisibility of the Generator}: only Realizations of
+Probability Distributions can be observed, and a Probability Distribution cannot
+tell you if a Realization belongs to it; a \emph{Meta-probability Distribution}
+is needed to discuss ``\emph{Tail Events}'' (i.e. the Conditional Probability
+for the Variable to belong to a \emph{certain} Distribution vs. others) --FIXME:
+clarify
 
 
 
@@ -5676,6 +5871,8 @@ Limit Distribution of Normalized Maxima of a Sequence of IID Random Variables,
 but such a Limit Distribution does not necessarily exist, requiring
 \emph{Regularity Conditions} on the Tail of the Distribution
 
+Exceedance Probability (\S\ref{sec:exceedance_probability})
+
 (Mandelbrot97E)
 
 \emph{Tail Preservation Relation} -- $\overline{F}_N(u) \sim N \overline{F}(u)$;
@@ -5889,6 +6086,15 @@ cf. Mean Squared Deviation (MSD \S\ref{sec:msd})
 
 Kappa Metric (\S\ref{sec:preasymptotics})
 
+Taleb2020 \S 4.4.3: in the presence of ``outliers'' of 5 Standard Deviations,
+MAD is five times more ``efficient'' than STD (\S\ref{sec:standard_deviation})
+\fist \emph{Asymptotic Relative Efficiency (ARE \S\ref{sec:are})}
+
+\S 4.4.5: MAD is more accurate in Sample measurements, and less volatile than
+STD since it is a ``natural'' weight
+
+whenever the Mean exists, the Mean Absolute Deviation exists
+
 
 
 \subparagraph{Mean Absolute Difference}
@@ -5924,8 +6130,10 @@ Deviation (\S\ref{sec:deviation})
 
 Square Root of the Variance (\S\ref{sec:variance}) $\sqrt{V(X)}$
 
-cf. Root Mean Squared Deviation (RMSD \S\ref{sec:rmsd}) -- Square Root of the
-Mean Squared Deviation (MSD \S\ref{sec:msd})
+cf. \emph{Root Mean Squared Deviation (RMSD \S\ref{sec:rmsd})} -- Square Root of
+the Mean Squared Deviation (MSD \S\ref{sec:msd})
+
+``Volatility''
 
 the Standard Deviation of a Sampling Distribution
 (\S\ref{sec:sampling_distribution}) is called the \emph{Standard Error}
@@ -5951,6 +6159,10 @@ $S$ -- Standard Deviation of Regression Residuals
 \emph{Corrected Standard Deviation}
 
 \emph{Unbiased Standard Deviation}
+
+Taleb2020 \S 4.4.3: in the presence of ``outliers'' of 5 Standard Deviations,
+MAD (\S\ref{sec:mean_absolute_deviation}) is five times more ``efficient'' than
+STD \fist \emph{Asymptotic Relative Efficiency (ARE \S\ref{sec:are})}
 
 
 
@@ -6178,6 +6390,13 @@ Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
 
 \fist Expected Value (\S\ref{sec:expected_value})
 
+\emph{Jensen's Inequality} -- the Convex Transformation
+(\S\ref{sec:convex_function}) of a Mean is less than or equal to the Mean
+applied \emph{after} Convex Transformation (opposite is true of Concave
+Transformations)
+
+whenever the Mean exists, the Mean Absolute Deviation (\S\ref{sec:mad}) exists
+
 
 
 \subparagraph{Arithmetic Mean}\label{sec:arithmetic_mean}\hfill
@@ -6217,6 +6436,8 @@ using the Product of Values instead of Sum as in Arithmetic Mean
 Central Tendency for Ratio Measurement (\S\ref{sec:measurement_level})
 
 
+
+\subparagraph{Arithmetic-geometric Mean}\label{sec:arithmetic_geometric}\hfill
 
 \subparagraph{Mean Square}\label{sec:mean_square}\hfill
 
@@ -7965,8 +8186,11 @@ $n$-gram Model
 \subsection{Power Law}\label{sec:power_law}
 % ------------------------------------------------------------------------------
 
-(or \emph{Scaling Law}) Functional Relation (cf. Statistical Dependence
-\S\ref{sec:dependence}) as a Power Function (\S\ref{sec:power_function})
+(or \emph{Scaling Law}) Functional Relation (cf.
+Statistical Dependence \S\ref{sec:dependence}) as a Power Function
+(\S\ref{sec:power_function})
+
+Regular Variation (Slowly Varying Functions \S\ref{sec:slowly_varying})
 
 cf. Scaling Distributions (\S\ref{sec:scaling_distribution})
 
@@ -8023,7 +8247,7 @@ Dynamics of the Rank-size Plot as the Sample Size increases:
 
 $f_\beta(t) = e^{-t^\beta}$
 
-Complementary Cumulative (\S\ref{sec:complementary_cumulative}) Weibull
+Complementary Cumulative (\S\ref{sec:tail_distribution}) Weibull
 Distribution (\S\ref{sec:weibull_distribution})
 
 the Characteristic Function of a (L\'evy) Symmetric $\alpha$-stable Distribution
@@ -8414,7 +8638,7 @@ or RMSE
 
 Square Root of the MSD (cf. Standard Deviation \S\ref{sec:standard_deviation})
 
-Sample Standard Deviation (\S\ref{sec:standard_deviation}) of Residuals
+\emph{Sample Standard Deviation} (\S\ref{sec:standard_deviation}) of Residuals
 
 measure of Accuracy (\S\ref{sec:accuracy})
 
@@ -8516,6 +8740,10 @@ the Sample Size, i.e. the Standard Error of the Mean is a measure of
 \subsubsection{Efficiency}\label{sec:efficiency}
 
 \paragraph{Asymptotic Relative Efficiency (ARE)}\label{sec:are}\hfill
+
+Taleb2020 \S 4.4.3: in the presence of ``outliers'' of 5 Standard Deviations,
+MAD (\S\ref{sec:mean_absolute_deviation}) is five times more ``efficient'' than
+STD (\S\ref{sec:standard_deviation})
 
 
 
@@ -8791,6 +9019,9 @@ cf. Best Linear Unbiased Predictor (BLUP \S\ref{sec:blup})
   \S\ref{sec:ols}) Estimator.
 }
 
+Gauss-Markov requires a Thin-tailed Distribution to allow the Line going
+through the Data Points to be unique (Taleb 2020 \S 3.3)
+
 
 
 \paragraph{Linear Least Squares (LLS)}\label{sec:lls}\hfill
@@ -8861,6 +9092,9 @@ alternatively, by elimination on the System Equation:
   Estimator (BLUE \S\ref{sec:blue}) of the Coefficients is given by the Ordinary
   Least-Squares Estimator.
 }
+
+Gauss-Markov requires a Thin-tailed Distribution to allow the Line going
+through the Data Points to be unique (Taleb 2020 \S 3.3)
 
 
 
@@ -9514,6 +9748,10 @@ Asymptotic Thoerems:
 
 \subsubsection{Large Deviations Theory}\label{sec:large_deviations_theory}
 
+``Large Deviation Theory fails to apply to Thick Tails'' (Taleb 2020 \S 3.3)
+
+
+
 \paragraph{Rate Function}\label{sec:rate_function}\hfill
 
 
@@ -9916,7 +10154,8 @@ the effect of the Prior diminishes as $n$ (i.e. $(X_1, \ldots, X_n)$) increases
 
 \emph{Maximum Entropy Principle}: the \emph{Maximum Entropy Distribution}
 (\S\ref{sec:maximum_entropy}) for a certain Class of Probability Distributions
-minimizes the amount of Prior Information built into the Distribution
+minimizes the amount of ``Prior Information'' ``built in'' to the Distribution
+(FIXME: clarify)
 
 
 
@@ -10244,6 +10483,9 @@ is \emph{Non-linear}
 
 Mandelbrot97E, Ch.20 -- Extrapolation; Martingale (\S\ref{sec:martingale}):
 ``fully arbitraged'' price
+
+``Forecasting in Frequency Space diverges from expected payoff''
+(Taleb 2020 \S 3.3)
 
 
 
@@ -11625,6 +11867,9 @@ Fit using Estimators:
   Coefficients is given by the OLS Estimator.
 }
 
+Gauss-Markov requires a Thin-tailed Distribution to allow the Line going
+through the Data Points to be unique (Taleb 2020 \S 3.3)
+
 OLS can be solved by:
 \begin{itemize}
   \item in the case of a Simple Linear Regression Model
@@ -12803,6 +13048,8 @@ Batch methods:
 \emph{Error-correction Learning} -- cf. Competitive Learning
 (\S\ref{sec:competitive_learning})
 
+a Dynamic Programming Algorithm (\S\ref{sec:dynamic_programming})
+
 1982 - Werbos -
 \emph{Applications of Advances in Nonlinear Sensitivity Analysis}
 
@@ -13191,9 +13438,9 @@ a \emph{Markov Random Field} (\S\ref{sec:markov_random_field})
 
 uses \emph{Annealed Gibbs Sampling} instead of Gradient Descent
 
-``\emph{Energy-based Models}'' (\S\ref{sec:ebm}) -- Boltzmann Distribution from
-Statistical Mechanics is used in Sampling Function (Impulse Train
-\S\ref{sec:impulse_train})
+``\emph{Energy-based Models}'' (\S\ref{sec:ebm}) -- Boltzmann Distribution
+(Gibbs Measure \S\ref{sec:gibbs_measure}) from Statistical Mechanics is used in
+Sampling Function (Impulse Train \S\ref{sec:impulse_train})
 
 Restricted Boltzmann Machine (RBM) -- no \emph{intralayer} connections between
 Units; cf. Multi-layer Perceptron (\S\ref{sec:mlp})
@@ -13573,6 +13820,12 @@ Tests (\S\ref{sec:hypothesis_testing}):
   \item Gap Test
   \item ...
 \end{itemize}
+
+(Taleb 2020):
+
+\emph{Negative Empiricism}: if you Observe a ``Distribution'' that has \emph{no}
+Randomness, it cannot be known to be not Random; Observing Randomness allows one
+to rule out degeneracy (\emph{via negativa})
 
 (Mandelbrot97E)
 
@@ -14369,6 +14622,11 @@ Markov Chain Monte Carlo (MCMC \S\ref{sec:mcmc})
 Mandelbrot97: a High-dimensional Process could be Markovian, while having
 low-dimensional projections that need not be Markovian
 
+\emph{Fundamental Theorem of Random Fields} (\S\ref{sec:random_fields_theorem})
+-- any Probability Measure that Satisfies the Markov Property is a Gibbs Measure
+(\S\ref{sec:gibbs_measure}) for an appropriate choice of (locally defined)
+``energy function'' (FIXME: objective function ???)
+
 
 
 \subsubsection{Scaling Limit}\label{sec:scaling_limit}
@@ -14641,7 +14899,8 @@ GBM is Path Continuous
 
 \emph{Local Volatility} -- treat Volatility as a Function of Price and Time
 
-\emph{Stochastic Volatility} -- allow Volatility to be Stochastic
+\emph{Stochastic Volatility} -- allow Volatility to be Stochastic;
+Taleb2020, Ch.4
 
 
 
@@ -15017,6 +15276,11 @@ a Markov Process is Ergodic if all its States are Ergodic
 \fist Time-series Analysis (\S\ref{sec:time_series_analysis})
 
 \fist cf. Ergodic Systems Theory (\S\ref{sec:ergodic_theory})
+
+\url{https://neurabites.com/ergodicity/} -- changes to the Space (Ensemble)
+Dimension or to the Time (Temporal) Dimension both converge to the same result
+
+cf. \emph{Absorption} -- opposite of Ergodicity
 
 
 
@@ -16266,6 +16530,9 @@ Jarzynski
 
 a Probability Distribution (\S\ref{sec:probability_distribution}) for the state
 of a Physical System
+
+(Taleb2020 \S 3.11) \emph{Ensemble Probability} -- Path Independence; cf.
+\emph{Time Probability} (Path Dependence)
 
 
 
