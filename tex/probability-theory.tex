@@ -668,6 +668,11 @@ $P(A \cap B) = P(A)P(B)$
 
 for Dependent Events, $P(A) \neq P(A|B)$
 
+in terms of PDFs:
+\[
+  \frac{f(x,y)}{f(x) f(y)} = 1
+\]
+
 two Random Variables (\S\ref{sec:random_variable}) are \emph{Dependent}
 (\S\ref{sec:dependence}) if they do not Satisfy the Property of
 Probabilistic Independence:
@@ -680,8 +685,11 @@ two Events are Independent if and only if their Odds Ratio
 (\S\ref{sec:odds_ratio}) equals $1$
 
 if $X$ and $Y$ are Independent and have Finite Second Moments, then they are
-Uncorrelated (\S\ref{sec:statistical_correlation}); not all Uncorrelated
-Variables are Independent
+Uncorrelated (\S\ref{sec:statistical_correlation}); \emph{not all Uncorrelated
+Variables are Independent}
+
+Taleb2020 \S 6.3.1: the Multivariate Stable Distribution with Correlation
+Coefficient set to $0$ is not Independent
 
 for Independent Random Variables, $Var(X + Y) = Var(X) + Var(Y)$ and
 $Var(X - Y) = Var(X) + Var(Y)$
@@ -1137,7 +1145,8 @@ difference between the Observed Value and the \emph{Estimated}
 Function) that has the ``best Fit'' to a Series of Data Points (Observations),
 possibly subject to constraints
 
-\fist cf. \emph{Observable} (\S\ref{sec:observable})
+\fist cf. \emph{Observability} (Control Theory \S\ref{sec:observability}),
+\emph{Quantum Observable} (\S\ref{sec:observable})
 
 
 
@@ -3850,6 +3859,13 @@ generalization of Multivariate Normal Distribution
 simulating Fat-tailed Distributions \S\ref{sec:fat_tailed}) to Elliptical
 Distribution (Taleb2020 \S 4.3.1)
 
+Taleb2020 \S 6.2:
+
+the class of Elliptical Distributions is closed under Linear Transformation
+
+L\'evy-Stable Distributions (\S\ref{sec:stable_distibution}) are Elliptical,
+``but only in the way they are defined'' (FIXME: clarify)
+
 
 
 \paragraph{Folded Normal Distribution}\label{sec:folded_normal}\hfill
@@ -4247,6 +4263,15 @@ incrases with the Fat-tailedness
 
 Taleb2020, Ch.5: future Extremes will not be similar to past Extremes
 
+the Tail Exponent of a Weighted Sum of Random Variables with different
+Asymptotic Tail Exponents will be that of the smallest Tail Exponent among them
+
+for a Random Variable $X$ with Tail Exponent $\alpha$, the Tail Exponent of
+$X^p$ is $\frac{\alpha}{p}$
+
+Ch. 6 -- building intuitions of Thick Tails from ``Convexity to Scale'' (FIXME:
+clarify ``convexity to scale'')
+
 
 
 \subsubsection{Heavy-tailed Distribution}\label{sec:heavy_tailed}
@@ -4342,6 +4367,14 @@ Mandelbrot 1963
 
 (Taleb2020 \S 3.8) the Tail Exponent of a Pareto Distribution is Inverse-gamma
 Distributed and of sufficiently low Variance for Estimation
+
+
+
+\subparagraph{Log-Pareto Distribution}\label{sec:log_pareto}\hfill
+
+``Super-fat Tails''
+
+Taleb2020 \S 5.4
 
 
 
@@ -4702,6 +4735,15 @@ the form:
     )}
 \]
 when $\alpha_S \neq 1 \wedge \alpha_S \in (0, 2]$ and $\beta \in [-1, 1]$
+
+Taleb2020 \S 6.2
+
+L\'evy-Stable Distributions are Elliptical
+(\S\ref{sec:elliptical_distribution}), ``but only in the way they are defined''
+(FIXME: clarify)
+
+\S 6.3.1: the Multivariate Stable Distribution with Correlation Coefficient set
+to $0$ is not Independent
 
 
 
@@ -6566,10 +6608,10 @@ Variables in a Statistical Model
 \paragraph{Covariance}\label{sec:covariance}\hfill
 
 a measure of the ``Joint Variability'' of two Random Variables; the sign of the
-Covariance shows the tendency of a Linear Relation between the Variables, and
-the Normalized version of the Covariance is the \emph{Correlation Coefficient}
-(\S\ref{sec:correlation_coefficient}) which gives the \emph{magnitude} of the
-Linear Relation
+Covariance shows the \emph{tendency} of a Linear Relation between the Variables,
+and the Normalized version of the Covariance is the \emph{Correlation
+Coefficient} (\S\ref{sec:correlation_coefficient}) which gives the
+\emph{magnitude} of the Linear Relation
 
 Correlation (\S\ref{sec:statistical_correlation}) is Dimensionless, while
 Covariance is in units resulting from multiplying the two Variables
@@ -10885,6 +10927,12 @@ Kernel Density Estimation (\S\ref{sec:kde})
 \section{Statistical Learning Theory}\label{sec:statistical_learning_theory}
 % ==============================================================================
 
+\emph{Machine Learning for Intelligent Systems} -
+\url{https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/} -
+Cornell CS4780
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Learning Algorithm}\label{sec:learning_algorithm}
 % ------------------------------------------------------------------------------
@@ -11532,6 +11580,8 @@ be Unbiased (\S\ref{sec:unbiased_estimate}), Consistent
 (\S\ref{sec:consistent_estimator}), and Efficient
 (\S\ref{sec:efficient_estimate}) in the Class of \emph{Linear Unbiased
   Estimators} (TODO: xref)
+
+\url{https://jeremykun.com/2021/03/29/regression-and-linear-combinations/}
 
 \asterism
 
@@ -15279,6 +15329,9 @@ a Markov Process is Ergodic if all its States are Ergodic
 
 \url{https://neurabites.com/ergodicity/} -- changes to the Space (Ensemble)
 Dimension or to the Time (Temporal) Dimension both converge to the same result
+
+a Process is \emph{Ergodic} if the ``Ensemble-average'' is equal to the
+``Time-average'' (FIXME: clarify)
 
 cf. \emph{Absorption} -- opposite of Ergodicity
 
