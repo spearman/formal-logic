@@ -14,6 +14,8 @@ Encyclopedia of Philosophy)
 \fist cf. Inductive Logic (\S\ref{sec:inductive_inference}) -- makes extensive
 use of Probabilistic notions
 
+cf. Probabilistic Combinatorics (\S\ref{sec:probabilistic_combinatorics})
+
 \emph{Bayesian Epistemology}: Probability as a formal representation of Belief
 (cf. Bayesian Inference \S\ref{sec:bayesian_inference})
 
@@ -1732,6 +1734,8 @@ Natural Logarithm of the Moment-generating Function
 
 (Helmholtz) Free Energy (Physics)
 
+Rate Function (Large Deviations \S\ref{sec:rate_function})
+
 
 
 % ------------------------------------------------------------------------------
@@ -1942,6 +1946,26 @@ PDF $f$:
 and replacing $s$ by $-t$ gives the Moment-generating Function
 (\S\ref{sec:moment_generating_function}) of $X$
 
+\asterism
+
+PDFs of some ``standard'' distributions:
+\begin{itemize}
+  \item $p_x = \frac{e^{-\frac{x^2}{2}}}{\sqrt{2 \pi}}$ -- Standard Normal
+    ($\mu = 0, \sigma = 1$); when $\sigma = \frac{1}{2 \pi}$, then
+    $p_x = e^{-\pi x^2}$
+  \item $p_x = \frac{1}{\pi (1 + x^2)}$ -- Standard Cauchy
+    ($x_0 = 0, \gamma = 1$)
+  \item $p_x = \frac{\sqrt{\frac{1}{2 \pi}}e^{-\frac{1}{2 x}}}{x^{\frac{3}{2}}}$
+    -- Standard L\'evy ($\mu = 0, c= 1$)
+  \item $p_x = \frac{1}{x^3}$ -- Standard Pareto ($x_m = 1, \alpha = 2$)
+  \item $p_x = e^{-x}$ -- Standard Exponential ($\lambda = 1$), Standard Weibull
+    ($\lambda = 1, k = 1$)
+  \item $p_x = e^{x - e^x}$ -- Standard Gumbel ($\mu = 0, \beta = 1$)
+  \item $p_x = \alpha x^{-1-\alpha} e^{-x^{-\alpha}}$ -- Standard Fr\'echet
+    ($s = 1, m = 0$)
+  \item ...
+\end{itemize}
+
 
 
 \paragraph{Normalizing Constant}\label{sec:normalizing_constant}\hfill
@@ -1985,6 +2009,9 @@ measures the Vertical or Horizontal Distance from the Identity Line
 \S\ref{sec:mad})-- Average of Deviations around a central point, or \emph{Mean
   Absolute Difference} (\S\ref{sec:mean_absolute_difference})-- Average Absolute
 Difference of two IID Random Variables
+
+cf. Mean Absolute Scaled Error (\S\ref{sec:mase}), Mean Absolute Percentage
+Error (\S\ref{sec:mape})
 
 
 
@@ -2143,6 +2170,10 @@ limiting Distribution of Eigenvalues of many Random Symmetric Matrices
 as the size of the Matrix approaches Infinity is the Semicircle Distribution
 (\S\ref{sec:semicircle_distribution})
 
+Wishart Distribution (\S\ref{sec:wishart_distribution})
+
+Marchenko-Pastur Distribution (\S\ref{sec:marchenko_pastur})
+
 
 
 % ==============================================================================
@@ -2279,6 +2310,9 @@ the Cumulative Distribution of the Sum of two IID Random Variables is the
 Convolution of the \emph{Derivative} of the Cumulative Distribution by the
 Cumulative Distribution itself: $F' * F$
 
+cf. Conditional Excess Distribution Function
+(\S\ref{sec:conditional_excess_distribution})
+
 \fist \emph{Empirical Distribution Function}
 (\S\ref{sec:empirical_distribution}) -- an Unbiased Estimator for $F$ defined as
 the CDF of the Empirical Measure (\S\ref{sec:empirical_measure}) of a Sample
@@ -2307,6 +2341,24 @@ cf. Exceedance Probability (\S\ref{sec:exceedance_probability})
 
 
 
+\subparagraph{Hazard Function}\label{sec:hazard_function}\hfill
+
+$h(x)$
+
+
+
+\subparagraph{Mills Ratio}\label{sec:mills_ratio}\hfill
+
+\[
+  \frac{\bar{F}(x)}{f(x)}
+\]
+
+\[
+  \frac{1}{h(x)}
+\]
+
+
+
 \paragraph{Scaling Distribution}\label{sec:scaling_distribution}\hfill
 
 \emph{Self-affine} (\S\ref{sec:self_affinity})
@@ -2324,7 +2376,15 @@ cf. Scaling (Homothety \S\ref{sec:scaling})
   \item Zipf Distribution (\S\ref{sec:zipf_distribution})
 \end{itemize}
 
-``\emph{Calibration}'' -- Estimation of the Tail Exponent $\alpha$ (Taleb2020)
+Taleb2020, \S C.:
+
+``\emph{Calibration}'' -- Estimation of the Tail Exponent $\alpha$
+
+$\alpha$ obeys an Inverse Gamma Distribution that converges ``rapidly'' to a
+Gaussian
+
+the Power Law Class of Distributions does not have Higher Moments $p > \alpha$
+and Distributions outside the class have all Moments (Taleb2020, Ch.10)
 
 Mandelbrot97:
 
@@ -2980,6 +3040,12 @@ $f_Y(y) = \int f_{X,Y}(x,y) dx$
 \subsection{Product Distribution}\label{sec:product_distribution}
 % ------------------------------------------------------------------------------
 
+\fist Meijer G-function (\S\ref{sec:g_function}) can be used to express the
+Distribution of the Product of $N$ Gaussian Random Variables; Fox H-function
+(\S\ref{sec:h_function}) can be used to express the CDF (Stojanac et al. 2017)
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Quotient Distribution}\label{sec:quotient_distribution}
 % ------------------------------------------------------------------------------
@@ -3116,6 +3182,9 @@ the Uniform Distribution is the Maximum Entropy Probability Distribution for a
 Random Variable under \emph{no constraint} other than that it is ``contained''
 in the Distribution's Support (FIXME: clarify importance of this last
 requirement)
+
+when $\alpha = \beta = 1$, the Beta Distribution (\S\ref{sec:beta_distribution})
+is a Uniform Distribution
 
 \url{https://stats.stackexchange.com/questions/232967/what-makes-the-mean-of-some-distributions-undefined/233950#233950}:
 the Cauchy Distribution (\S\ref{sec:cauchy_distribution}) is a ``disguised''
@@ -4221,6 +4290,8 @@ ANOVA (\S\ref{sec:variance_analysis}), Linear Regression
 
 \subsubsection{Wishart Distribution}\label{sec:wishart_distribution}
 
+Random Matrices (\S\ref{sec:random_matrix})
+
 
 
 % ------------------------------------------------------------------------------
@@ -4364,7 +4435,8 @@ Mandelbrot97E, Ch.14 -- Distrubtion of price changes is Leptokurtic
 Log-cauchy (\S\ref{sec:log_cauchy}) -- Logarithmically decaying Tail;
 ``Extreme'' Randomness
 
-(Taleb2020 \S 2.2.21) Maximum Domain of Attraction (TODO)
+(Taleb2020 \S 2.2.21) Maximum Domain of Attraction (TODO) \fist Extreme Value
+Theory (\S\ref{sec:eva})
 
 
 
@@ -4415,6 +4487,8 @@ Scale Invariance (\S\ref{sec:scale_invariance})
 cf. Zipf Distribution (Discrete \S\ref{sec:zipf_distribution}) -- can be derived
 from Pareto
 
+cf. Generalized Pareto (\S\ref{sec:generalized_pareto})
+
 $x_m > 0$ -- Scale Parameter
 
 $\alpha > 0$ -- Shape Parameter
@@ -4455,12 +4529,31 @@ Taleb2020 \S 5.4
 
 
 
+\subsubparagraph{Generalized Pareto Distribution}\label{sec:generalized_pareto}
+
+Extreme Value Theory (\S\ref{sec:eva})
+
+Threshold Exceedance
+
+cf. Generalized Extreme Value Distribution (\S\ref{sec:gev}),
+Conditional Excess Distribution Function
+(\S\ref{sec:conditional_excess_distribution}) --
+\emph{Pickands-Balkema-De Haan Theorem}
+
+
+
 \subsubsection{Inverse Gamma Distribution}\label{sec:inverse_gamma}
 
 %FIXME: are all inverse gamma distributions fat-tailed ???
 
-(Taleb2020 \S 3.8) the Tail Exponent of a Pareto Distribution is Inverse-gamma
-Distributed and of sufficiently low Variance for Estimation
+(Taleb2020 \S 3.8) the Tail Exponent of a Pareto (Power Law, Scaling)
+Distribution is Inverse-gamma Distributed and of sufficiently low Variance for
+Estimation
+
+\S C.
+
+``Calibration'': Scaling Parameter $\alpha$ obeys an Inverse Gamma Distribution
+that converges ``rapidly'' to a Gaussian (FIXME: clarify)
 
 
 
@@ -4870,6 +4963,8 @@ Bayesian Statistics
 
 Gamma Function (\S\ref{sec:gamma_function})
 
+when $\alpha = \beta = 1$, the Beta Distribution is a Uniform Distribution
+
 
 
 % ------------------------------------------------------------------------------
@@ -4891,6 +4986,14 @@ Gamma Function (\S\ref{sec:gamma_function})
 \subsection{Generalized Extreme Value (GEV) Distribution}\label{sec:gev}
 % ------------------------------------------------------------------------------
 
+$\mu \in \reals$ -- Location
+
+$\sigma > 0$ -- Scale
+
+$\xi \in \reals$ -- Shape (Extreme Value Index)
+
+$\xi = 0$ -- Gumbel
+
 Extreme Value Theory (\S\ref{sec:eva})
 
 by the Extreme Value Theorem, the GEV Distribution is the only \emph{possible}
@@ -4898,11 +5001,23 @@ Limit Distribution of Normalized Maxima of a Sequence of IID Random Variables,
 but such a Limit Distribution does not necessarily exist, requiring
 \emph{Regularity Conditions} on the Tail of the Distribution
 
+\emph{Fisher-Tippett-Gnedenko Theorem}
+
+cf. Generalized Pareto Distribution (\S\ref{sec:generalized_pareto})
+
+Stability Postulate
+
 
 
 \subsubsection{Gumbel Distribution}\label{sec:gumbel_distribution}
 
+$\xi = 0$
+
+
+
 \subsubsection{Fr\'echet Distribution}\label{sec:frechet_distribution}
+
+$\xi > 0$
 
 Max-stable (\S\ref{sec:max_stable})
 
@@ -4912,9 +5027,16 @@ the CDF with $m = 0$ and $s = 1$:
 \]
 is Weakly Scaling (\S\ref{sec:scaling_distribution})
 
+Taleb2020 \S 9.1.1:
+
+the Tail Exponent of the Maximum of IID Power Law Random Variables is the same
+as that of the Random Variables themselves
+
 
 
 \subsubsection{Weibull Distribution}\label{sec:weibull_distribution}
+
+$\xi < 0$
 
 the Complementary Cumulative (\S\ref{sec:tail_distribution}) Weibull
 Distribution is given by a Stretched Exponential
@@ -5974,25 +6096,34 @@ Kriging (Gaussian Process Regression \S\ref{sec:gaussian_process_regression})
 
 or \emph{Extreme Value Theory}
 
-Generalized Extreme Value (GEV \S\ref{sec:gev}) Distributions:
+Maximum Domain of Attraction (MDA)
 
-\begin{itemize}
-  \item Gumbel (\S\ref{sec:gumbel_distribution})
-  \item Fr\'echet (\S\ref{sec:frechet_distribution})
-  \item Weibull (\S\ref{sec:weibull_distribution})
-\end{itemize}
+Exceedance Probability (\S\ref{sec:exceedance_probability})
+
+Block Maxima, Threshold Exceedance (Peak-over-threshold)
 
 \textbf{Fisher-Tippett-Gnedenko Theorem} -- ``Extreme Value Theorem''; not to be
 confused with the \emph{Extreme Value Theorem} (Analysis
 \S\ref{sec:extreme_value}); Order Statistics (Non-parametric Statistics
 \S\ref{sec:order_statistic})
 
+Generalized Extreme Value (GEV \S\ref{sec:gev}) Distributions:
+\begin{itemize}
+  \item Gumbel (\S\ref{sec:gumbel_distribution}) -- MDA for Distributions with
+    Exponential Tails
+  \item Fr\'echet (\S\ref{sec:frechet_distribution}) -- MDA for Power-law
+    Distributed Variables
+  \item Weibull (\S\ref{sec:weibull_distribution}) -- MDA for Distributions with
+    Bounded Maximum (Finite Support on the right)
+\end{itemize}
+
 by the Extreme Value Theorem, the GEV Distribution is the only \emph{possible}
 Limit Distribution of Normalized Maxima of a Sequence of IID Random Variables,
 but such a Limit Distribution does not necessarily exist, requiring
 \emph{Regularity Conditions} on the Tail of the Distribution
 
-Exceedance Probability (\S\ref{sec:exceedance_probability})
+\emph{Pickands-Balkema-de Haan Theorem} -- Generalized Pareto
+(\S\ref{sec:generalized_pareto})
 
 (Mandelbrot97E)
 
@@ -6006,6 +6137,21 @@ $\tilde{F}_N(u)$ the Tail Probability of $\tilde{U}_N = \max(U_n)$, then:
 \]
 in the Tail where $\overline{F}(u) \ll 1$ and $\tilde{F}(u) \ll 1$, in
 \emph{all} cases: $\tilde{F}(u) \sim N \overline{F}$
+
+Taleb2020, Ch.9
+
+
+
+\subsubsection{Conditional Excess Distribution Function}
+\label{sec:conditional_excess_distribution}
+
+Conditional Expectation of Excess Deviation (Lindy)
+
+\emph{Pickands-Balkema-De Haan Theorem}
+
+Generalized Pareto Distribution (\S\ref{sec:generalized_pareto})
+
+Taleb2020 \S 9.1.3
 
 
 
@@ -6520,6 +6666,10 @@ whenever the Mean exists, the Mean Absolute Deviation (\S\ref{sec:mad}) exists
 
 
 
+\subparagraph{Generalized Mean}\label{sec:generalized_mean}\hfill
+
+%TODO: move this section ???
+
 \subparagraph{Arithmetic Mean}\label{sec:arithmetic_mean}\hfill
 
 \emph{Arithmetic Mean} $\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i$
@@ -6922,18 +7072,6 @@ Standardized Moment
 Coefficient of Variation
 
 Min-max Feature Scaling (\S\ref{sec:minmax_normalization})
-
-
-
-% ------------------------------------------------------------------------------
-\subsection{Earthmover Distance}\label{sec:earthmover_distance}
-% ------------------------------------------------------------------------------
-
-%FIXME: does this section belong here?
-
-a measure of ``nearness'' for Probability Distributions
-
-\url{https://jeremykun.com/2018/03/05/earthmover-distance/}
 
 
 
@@ -8337,6 +8475,17 @@ Function (cf. Polynomial \S\ref{sec:polynomial_function})
 
 $t$-distribution (\S\ref{sec:t_distribution})
 
+(Taleb2020, Ch.10):
+
+the Power Law Class of Distributions does not have Higher Moments $p > \alpha$
+and Distributions outside the class have all Moments
+
+if the Fourth Moment does not exist, the Second Moment of the Variance itself
+has Inifnite Variance; if there is an Infinite Third Moment, then the Observed
+Second Moment will fail to be informative and will ``almost never'' converge to
+its value (cf. when $\alpha$ is close to $1$, the Mean exists but will never be
+Observed)
+
 
 
 \subsubsection{Rank-size Law}\label{sec:ranksize_law}
@@ -8752,6 +8901,10 @@ Deviations (\S\ref{sec:sum_squared_deviation})
 \fist Decision Theory (\S\ref{sec:decision_theory}): when Loss Function
 (\S\ref{sec:objective_function}) is Squared Error, the Risk (Average Loss
 \S\ref{sec:risk}) is the MSE
+
+Brier Score -- always Thin-tailed, even when the Variable under measurement is
+Fat-tailed, which worsens the tractibility (Taleb 2020 \S 11.3), ignores Higher
+Moments (\S 11.4)
 
 
 
@@ -9871,11 +10024,29 @@ Asymptotic Thoerems:
 
 \subsubsection{Large Deviations Theory}\label{sec:large_deviations_theory}
 
+``Ruin Theory''
+
+\emph{Large Deviation Principle}
+
+Cram\'er Condition
+
+Chernoff's Inequality (Chernoff Bounds)
+
 ``Large Deviation Theory fails to apply to Thick Tails'' (Taleb 2020 \S 3.3)
+
+Taleb2020, \S B.
 
 
 
 \paragraph{Rate Function}\label{sec:rate_function}\hfill
+
+or \emph{Cram\'er Function}
+
+\[
+  I(x) = \sup_{\theta > 0} (\theta x - \ln \expect[e^{\theta X}])
+\]
+where $\ln \expect[e^{\theta X}]$ is the Cumulant Generating Function
+(\S\ref{sec:cumulant_generating_function})
 
 
 
@@ -10617,6 +10788,18 @@ Mandelbrot97E, Ch.20 -- Extrapolation; Martingale (\S\ref{sec:martingale}):
 
 ``Forecasting in Frequency Space diverges from expected payoff''
 (Taleb 2020 \S 3.3)
+
+
+
+\paragraph{Mean Absolute Scaled Error}\label{sec:mase}\hfill
+
+cf. Mean Absolute Error (\S\ref{sec:mae})
+
+
+
+\paragraph{Mean Absolute Percentage Error}\label{sec:mape}\hfill
+
+cf. Mean Absolute Error (\S\ref{sec:mae})
 
 
 
@@ -13085,7 +13268,8 @@ advantages from multiple Layers requires a \emph{Non-linear} Activation Function
 
 \emph{Universal Approximation Theorem} (\S\ref{sec:universal_approximation}):
 when the Activation Function is Non-linear, a Two-layer Neural Network can be
-proven to be a Universal Function Approximator
+proven to be a Universal Function Approximator \fist Compact Convergence
+(\S\ref{sec:compact_convergence})
 
 \begin{itemize}
   \item Identity
@@ -16729,6 +16913,8 @@ Two-dimensional Lattice Models:
 \emph{Measure} (\S\ref{sec:measure}) \fist Combinatorics (Part
 \ref{part:combinatorics}), Measure Theory (Part \ref{part:measure_theory})
 
+cf. Probabilistic Combinatorics (\S\ref{sec:probabilistic_combinatorics})
+
 
 
 % ------------------------------------------------------------------------------
@@ -16770,6 +16956,33 @@ application of Differential Geometry
 
 
 % ------------------------------------------------------------------------------
+\subsection{Statistical Distance}\label{sec:statistical_distance}
+% ------------------------------------------------------------------------------
+
+%FIXME: move to statistical inference ???
+
+\subsubsection{Statistical Divergence}\label{sec:statistical_divergence}
+
+\subsubsection{Earthmover Distance}\label{sec:earthmover_distance}
+
+\emph{Wasserstein Metric} or \emph{Kantrovich-Rubinstein Metric}
+
+a measure of ``nearness'' for Probability Distributions
+
+\url{https://jeremykun.com/2018/03/05/earthmover-distance/}
+
+
+
+\subsubsection{Information Radius}\label{sec:information_radius}
+
+\emph{Total Divergence to the Average} or \emph{Jensen-Shannon Divergence}
+
+cf. \emph{Relative Entropy} (Kullback-Leibler Divergence
+\S\ref{sec:relative_entropy})
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Statistical Manifold}\label{sec:statistical_manifold}
 % ------------------------------------------------------------------------------
 
@@ -16806,6 +17019,16 @@ and Weak Epistasis -- Evolutionary Optimization
 
 Wigner's Semicircle Distribution (\S\ref{sec:semicircle_distribution}) -- plays
 role analogous to Normal Distribution in Classical Probability Theory
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Free Poisson Distribution}\label{sec:free_poisson}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Marchenko-Pastur Distribution}\label{sec:marchenko_pastur}
+
+Random Matrices (\S\ref{sec:random_matrix})
 
 
 
