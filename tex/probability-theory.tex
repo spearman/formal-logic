@@ -1991,30 +1991,6 @@ Scalar Potential (\S\ref{sec:scalar_field}), Hamiltonian
 
 
 
-\subsubsection{Mean Absolute Error (MAE)}\label{sec:mae}
-
-Average Absolute Difference between two Continous Random Variables, e.g.:
-\begin{itemize}
-  \item between \emph{Predicted} and \emph{Observed} (cf. Residual
-    \S\ref{sec:residual})
-  \item between \emph{Initial} and \emph{Subsequent Observations}
-  \item between \emph{measurement techniques}
-\end{itemize}
-
-Expected Value of the Absolute Difference of two Continuous Random Variables
-
-measures the Vertical or Horizontal Distance from the Identity Line
-
-\fist not to be confused with \emph{Mean Absolute Deviation} (MAD
-\S\ref{sec:mad})-- Average of Deviations around a central point, or \emph{Mean
-  Absolute Difference} (\S\ref{sec:mean_absolute_difference})-- Average Absolute
-Difference of two IID Random Variables
-
-cf. Mean Absolute Scaled Error (\S\ref{sec:mase}), Mean Absolute Percentage
-Error (\S\ref{sec:mape})
-
-
-
 % ------------------------------------------------------------------------------
 \subsection{Mixed Random Variable}\label{sec:mixed_random_variable}
 % ------------------------------------------------------------------------------
@@ -3158,6 +3134,12 @@ Exponential Dispersion Models (Probability Distributions
 the Domain of ``Universality of Attraction'' to the Gaussian includes \emph{all}
 $U$ satisfying $\expect(U^2) < \infty$ and also some cases where $\expect(U^2)$
 Diverges ``slowly enough''
+
+
+
+\paragraph{Generalized Central Limit Theorem}\label{sec:gclt}\hfill
+
+Stable Distributions (\S\ref{sec:stable_distribution})
 
 
 
@@ -4332,6 +4314,11 @@ fat-tailed, long-tailed, and subexponential)
 ``Fat-tailed Distributions'' -- ``extreme'' Thick Tails, or membership of a
 Power-law Class
 
+synonymous with class of ``Regularly-varying Distributions''
+(\S\ref{sec:regularly_varying}); a Regularly-varying Random Variable of Order
+$\alpha$ is $\alpha$-stable with the same Tail Coefficient
+(Ch.13)
+
 \emph{Asymmetry in Distributions}: it is easier for a Fat-tailed Distribution to
 appear as Thin-tailed, than it is for a Thin-tailed Distribution to appear
 Thick-tailed
@@ -4636,6 +4623,8 @@ Stable Probability Distributions are ``Attractors'' for ``properly normed'' Sums
 of IID Random Variables (\S\ref{sec:iid})-- Central Limit Theorem
 (\S\ref{sec:central_limit_theorem}): the Normal Distribution is the ``properly
 normed'' Sum of a Set of Random Variables with Finite Variance
+
+Generalized Central Limit Theorem (\S\ref{sec:gclt})
 
 L\'evy 1925
 
@@ -4942,7 +4931,13 @@ the Stable Count Distribution (\S\ref{sec:stable_count}) is the Conjugate Prior
 
 \emph{Maximum Stability Postulate}
 
-Fr\'echet Distribution (\S\ref{sec:frechet_distribution})
+Maximum Domain of Attraction
+
+\fist Extreme Value Theory (\S\ref{sec:eva})
+
+Fr\'echet Distribution (\S\ref{sec:frechet_distribution}) -- the $\rho$
+Parameter of the corresponding Fr\'echet Distribution is related to $\alpha$ as
+$\alpha = \frac{1}{\rho}$
 
 
 
@@ -5407,6 +5402,10 @@ application of a Deterministic Transformation to each Data Point in a Dataset
 (\S\ref{sec:dataset})
 
 \fist cf. Database Transformation (\S\ref{sec:data_transformation})
+
+\begin{itemize}
+  \item Rank Statistic (\S\ref{sec:rank_statistic})
+\end{itemize}
 
 
 
@@ -6096,7 +6095,8 @@ Kriging (Gaussian Process Regression \S\ref{sec:gaussian_process_regression})
 
 or \emph{Extreme Value Theory}
 
-Maximum Domain of Attraction (MDA)
+Maximum Domain of Attraction (MDA) \fist Max-stable Distribution
+(\S\ref{sec:max_stable})
 
 Exceedance Probability (\S\ref{sec:exceedance_probability})
 
@@ -6364,16 +6364,41 @@ whenever the Mean exists, the Mean Absolute Deviation exists
 
 
 
-\subparagraph{Mean Absolute Difference}
+\paragraph{Mean Absolute Difference}
 \label{sec:mean_absolute_difference}\hfill
 
-\emph{Absolute Mean Difference} or \emph{Gini Mean Difference (GMD)}
+\emph{Average Absolute Difference}, \emph{Absolute Mean Difference}
 
 $MD$
 
 Average Absolute Difference (\S\ref{sec:absolute_difference}) between two IID
 Random Variables, i.e. the Expected Value of the Absolute Difference of two IID
 Random Variables
+
+called the \emph{Gini Mean Difference (GMD)} when used to define the Gini
+Coefficient (\S\ref{sec:gini_coefficient})
+
+
+
+\subparagraph{Mean Absolute Error (MAE)}\label{sec:mae}\hfill
+
+Average Absolute Difference between two Continous Random Variables, e.g.:
+\begin{itemize}
+  \item between \emph{Predicted} and \emph{Observed} (cf. Residual
+    \S\ref{sec:residual})
+  \item between \emph{Initial} and \emph{Subsequent Observations}
+  \item between \emph{measurement techniques}
+\end{itemize}
+
+Expected Value of the Absolute Difference of two Continuous Random Variables
+
+measures the Vertical or Horizontal Distance from the Identity Line
+
+\fist not to be confused with \emph{Mean Absolute Deviation} (MAD
+\S\ref{sec:mad})-- Average of Deviations around a central point
+
+cf. Mean Absolute Scaled Error (\S\ref{sec:mase}), Mean Absolute Percentage
+Error (\S\ref{sec:mape})
 
 
 
@@ -6580,6 +6605,17 @@ $\mu$ and Finite Non-zero Variance $\sigma^2$, for any $k \in \reals : k > 0$:
 Dispersion measure associated with the $L^\infty$ Metric (Max Norm
 \S\ref{sec:p_norm}); the corresponding Central Tendency which minimizes the
 Maximum Absolute Deviation is the \emph{Mid-range} (\S\ref{sec:midrange})
+
+
+
+\paragraph{Gini Coefficient}\label{sec:gini_coefficient}\hfill
+
+or \emph{Gini Index}
+
+defined in terms of the Mean Absolute Difference
+(\S\ref{sec:mean_absolute_difference}), a.k.a. Gini Mean Difference (GMD)
+
+Taleb2020, Ch.13
 
 
 
@@ -8174,11 +8210,15 @@ Support Vector Machine
 
 \paragraph{Order Statistic}\label{sec:order_statistic}\hfill
 
+\emph{$k$th-smallest Value}
+
 Extreme Value Theory (\S\ref{sec:eva})
 
 
 
 \paragraph{Rank Statistic}\label{sec:rank_statistic}\hfill
+
+Data Transformation (\S\ref{sec:data_transformation}) from values to ranks
 
 cf. Rank-size Law (\S\ref{sec:ranksize_law}), Concrete Quantities
 (\S\ref{Sec:concrete_quantity})
@@ -16952,6 +16992,10 @@ application of Differential Geometry
 (\S\ref{sec:differential_geometry}) techniques to Probability Theory
 
 2018 - Nielsen - \emph{An elementary introduction to information geometry}
+
+\url{https://johncarlosbaez.wordpress.com/2021/07/27/information-geometry-part-17/}
+
+Symplectic Geometry (\S\ref{sec:symplectic_geometry})
 
 
 
