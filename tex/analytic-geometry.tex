@@ -155,6 +155,8 @@ Coordinates; these can be converted into one another using the Metric Tensor
 
 (or \emph{Projective Coordinates})
 
+$[x, y, z]$
+
 Projective Geometry (\S\ref{sec:projective_geometry}), Projective Space
 (\S\ref{sec:projective_space}) -- Points (including Points at Infinity) can be
 represented using Finite Coordinates; allows for Affine Transformations
@@ -169,6 +171,12 @@ cf. Curvilinear Coordinates (\S\ref{sec:curvilinear_coordinates}) are always
 Inhomogeneous, i.e. Base Vectors change with Position
 
 \fist cf. Homogeneous Functions (\S\ref{sec:homogeneous_function})
+
+multiple Coordinates $[x, y, z]$ are associated with a single Point $(x, y)$:
+$[x, y, 1]$ and any Scalar Multiple $[zx, zy, z]$
+
+$[x, y]$ -- Projective Line; a Point $(x)$ is represented as $[x, 1]$, or any
+Scalar Multiple $[yx, y]$
 
 
 
@@ -441,10 +449,15 @@ a Hyperplane is an Affine Set (\S\ref{sec:affine_set}) and a Convex Set
 
 
 % ==============================================================================
+\section{Grassmannian Space}\label{sec:grassmannian_space}
+% ==============================================================================
+
+% ==============================================================================
 \section{Projective Space}\label{sec:projective_space}
 % ==============================================================================
 
 (wiki):
+
 an \emph{$n$-dimensional Projective Space} is the Set of $1$-dimensional Linear
 Subspaces (i.e. ``Vector Lines'' \S\ref{sec:linear_subspace}) in an
 $n+1$-dimensional Vector Space $V$; this can be seen as the Quotient Set of $V
@@ -502,13 +515,59 @@ to Lines
 
 
 % ------------------------------------------------------------------------------
+\subsection{Projectivization}\label{sec:projectivization}
+% ------------------------------------------------------------------------------
+
+associates to a Non-zero $n$-dimensional Vector Space $V$ an $n-1$-dimensional
+Projective Space $P(V)$ of the One-dimensional Subspaces of $V$
+
+any Subset $S \subseteq V$ closed under Scalar Multiplication defines a Subset
+of $P(V)$ called the \emph{Projectivization} of $S$
+
+\url{https://johncarlosbaez.wordpress.com/2018/12/27/geometric-quantization-part-3/}:
+
+Quantization (\S\ref{sec:geometric_quantization}) and Projectivization are
+Adjoint Functors
+
+
+
+% ------------------------------------------------------------------------------
+\subsection{Projective Completion}\label{sec:projective_completion}
+% ------------------------------------------------------------------------------
+
+Embedding of an $n$-dimensional Vector Space $V$ over Field $K$ into the
+$n$-dimensional Projective Space $P(V \oplus K)$, associating to every $v \in V$
+to the Line Spanned by the Vector $(v, 1) \in V \oplus K$
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Real Projective Space}\label{sec:real_projective_space}
 % ------------------------------------------------------------------------------
 
-Compact (\S\ref{sec:compact_space}) Smooth Manifold
-(\S\ref{sec:smooth_manifold})
+(wiki):
+
+the \emph{Real Projective Space}, $\proj_n(\reals)$ (or $\mathsf{RP}^n$) is the
+Compact (\S\ref{sec:compact_space}) $n$-dimensional Smooth Manifold
+(\S\ref{sec:smooth_manifold}) of \emph{Lines} passing through the Origin in
+$\reals^{n+1}$, formed by taking the Quotient (\S\ref{sec:quotient_space}) of
+$\reals^{n+1} \ \{0\}$ under the Equivalence Relation $x \sim \lambda x$ for all
+$\lambda \neq 0$
+
+since there is always a $\lambda$ such that $\lambda x$ has Norm one and there
+are precisely two such $\lambda$ (differing by sign), $\proj_n(\reals)$ can also
+be formed by identifying Antipodal Points of a Unit $n$-sphere, $S^n$, in
+$\reals^{n+1}$, and can be further restricted to the upper Hemisphere of $S^n$
+and only identify Antipodal Points on the Bounding Equator, which shows that
+$\proj_n(\reals)$ is also equivalent to the closed $n$-dimensional Disk, $D^n$,
+with Antipodal Points on the Boundary, $\partial D^n = S^{n-1}$ identified
+
+a special case $\mathsf{Gr}(1, \reals^{n+1})$ of a Grassmannian Space
+(\S\ref{sec:grassmannian_space})
 
 
+
+\subsubsection{Real Projective Line}\label{sec:real_projective_line}
 
 \subsubsection{Real Projective Plane}\label{sec:real_projective_plane}
 
@@ -533,6 +592,11 @@ explain)
 \end{itemize}
 
 
+
+% ------------------------------------------------------------------------------
+\subsection{Quaternionic Projective Space}
+\label{sec:quaternionic_projective_space}
+% ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
 \subsection{Grassmanian}\label{sec:grassmanian}
@@ -748,6 +812,8 @@ which preserves:
   \item Barycenters of weighted collections of Points
 \end{itemize}
 
+\fist Collination (\S\ref{sec:collineation})
+
 preserves Ratios of Distances betwen Points lying on a Straight Line
 
 does not necessarily preserve Angles between Lines or Distances between Points
@@ -768,7 +834,7 @@ the form:
   f(q) = aq + b, \;\;\; a,b,q \in \quats
 \]
 
-Affine Group (\S\ref{sec:affine_group}) $Aff(n,F)$ -- Extension of the General
+Affine Group $Aff(n,F)$ -- Extension of the General
 Linear Group $GL(n,F)$ by Group of Translations in $F^n$ is the Group of all
 Affine Transformations on the Affine Space underlying the Vector Space $F^n$
 
@@ -1980,7 +2046,21 @@ Submanifold (\S\ref{sec:lagrangian_submanifold})
 
 Darboux's Theorem (\S\ref{sec:darbouxs_theorem})
 
-\emph{Geometric Quantization}
+\url{https://johncarlosbaez.wordpress.com/2021/07/27/information-geometry-part-17/}
+
+Information Geometry (\S\ref{sec:information_geometry})
+
+\url{https://johncarlosbaez.wordpress.com/2021/08/05/information-geometry-part-18/}
+-- Momentum as Surprisal (\S\ref{sec:information_content})
+
+
+
+\subsubsection{Geometric Quantization}\label{sec:geometric_quantization}
+
+\url{https://johncarlosbaez.wordpress.com/2018/12/27/geometric-quantization-part-3/}:
+
+Quantization and Projectivization (\S\ref{sec:projectivization}) are Adjoint
+Functors
 
 1999 - Echeverria-Enriquez, Munoz-Lecanda, Roman-Roy, Victoria-Monge -
 \emph{Mathematical Foundations of Geometric Quantization}
