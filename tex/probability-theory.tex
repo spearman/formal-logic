@@ -1308,8 +1308,9 @@ cf.:
 
 The \emph{Expected Value}, \emph{Expectation}, or \emph{Mean} (First Raw Moment
 \S\ref{sec:moment}/Cumulant \S\ref{sec:cumulant}) of a Random Variable is a kind
-of ``average'' where Probabilities are treated like ``frequencies''. (FIXME:
-clarify)
+of ``average'' where Probabilities are treated like ``frequencies'', i.e. it is
+the Probability-weighted Average (\S\ref{sec:weighted_mean}) of a Probability
+Distribution.
 
 \fist Mean (\S\ref{sec:mean}) -- Central Tendency (\S\ref{sec:central_tendency})
 for Interval Measurement (\S\ref{sec:measurement_level}); associated with
@@ -1320,6 +1321,7 @@ as an Estimate (\S\ref{sec:estimation_theory}) of $X$, the Expected Value $E[X]$
 minimizes Squared Error (\S\ref{sec:error})
 
 note that $E(X + Y) = E(X) + E(Y)$, but not for $m(X+Y)$
+%FIXME: what is m ???
 
 \fist Sample Mean (Estimator \S\ref{sec:sample_mean}) -- minimizes Squares of
 the Residuals;
@@ -1595,8 +1597,9 @@ Continuous CDF $F_X$ (Real-valued $X$):
 \subsection{Moment}\label{sec:moment}
 % ------------------------------------------------------------------------------
 
-the \emph{$k^{th}$ Moment} of $X$ is defined as $E(X^k) = \int x^k dF(x)$
-assuming that $E(|X|^k) < \infty$, where $F$ is the CDF (\S\ref{sec:cdf}) of $X$
+the \emph{$k^{th}$ Raw Moment} of $X$ (about Zero) is defined as $E(X^k) = \int
+x^k dF(x)$ assuming that $E(|X|^k) < \infty$, where $F$ is the CDF
+(\S\ref{sec:cdf}) of $X$
 
 the \emph{$k^{th}$ Sample Moment} of a Sample (\S\ref{sec:sample})
 $X_1, \ldots, X_n$ is:
@@ -1612,12 +1615,17 @@ Moments determine Cumulants (\S\ref{sec:cumulant}) and vice versa
 Mean (Expected Value \S\ref{sec:expected_value}) -- First Raw Moment; Sample
 Mean (\S\ref{sec:sample_mean})
 
+the Moments about the Mean $\mu$ are called \emph{Central Moments}, describing
+the shape of the PDF independently of translation; Normalized Central Moments
+are called \emph{Standardized Central Moments}
+
 Variance (\S\ref{sec:variance}) -- Second Central Moment
 
-Skewness (\S\ref{sec:skewness}) -- Third Central Moment; ``lopsided-ness''
+Skewness (\S\ref{sec:skewness}) -- Third Standardized Central Moment;
+``lopsided-ness''
 
-Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Central Moment; Measure of the
-``heaviness'' of the tail of a Distribution
+Kurtosis (\S\ref{sec:kurtosis}) -- Fourth Standardized Central Moment; Measure
+of the ``heaviness'' of the tail of a Distribution
 
 Fourth and higher-order Cumulants are not equal to Central Moments
 
@@ -1824,6 +1832,26 @@ Real-valued and Even
   \item the Characteristic Function of a (L\'evy) Symmetric $\alpha$-stable
     Distribution (\S\ref{sec:symmetric_alpha_stable}) is a Stretched Exponential
     Function (\S\ref{sec:stretched_exponential})
+\end{itemize}
+
+
+
+\subsubsection{L\'evy Continuity Theorem}\label{sec:levy_continuity}
+
+for a Sequence of Random Variables $\{ X_n \}$ for $n \in [1, \infty)$, not
+necessarily sharing the same Probability Space (FIXME: distribution ???), if the
+Sequence of corresponding Characteristic Functions $\{ \chi_n \}$ Converge
+Pointwise (\S\ref{sec:pointwise_convergence}) to some Function $\chi$, then the
+following statements are equivalent:
+
+\begin{itemize}
+  \item $X_n$ Converges in Distribution to some Random Variable $X$, i.e. the
+    CDFs of the Random Varaibles Converge at every ``Continuity Point'' (FIXME:
+    ???) of the CDF of $X$ (FIXME: clarify)
+  \item $\{ X_n \}$ is \emph{Tight} (\S\ref{sec:tightness})
+  \item $\chi$ is a Characteristic Function of some Random Variable $X$
+  \item $\chi$ is a Continuous Function
+  \item $\chi$ is Continuous at $0$
 \end{itemize}
 
 
@@ -6757,8 +6785,6 @@ note that $E(X + Y) = E(X) + E(Y)$, but not for $m(X+Y)$
 
 Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
 
-\fist Expected Value (\S\ref{sec:expected_value})
-
 \emph{Jensen's Inequality} -- the Convex Transformation
 (\S\ref{sec:convex_function}) of a Mean is less than or equal to the Mean
 applied \emph{after} Convex Transformation (opposite is true of Concave
@@ -6799,6 +6825,9 @@ Central Tendency for Interval Measurement (\S\ref{sec:measurement_level})
 \fist Benchmarking (\S\ref{sec:benchmarking})
 
 Simpson's Paradox
+
+\fist Expected Value (\S\ref{sec:expected_value}) -- Weighted Mean generalized
+to Probability-weighted Mean of Probability Distributions
 
 
 
@@ -8592,6 +8621,8 @@ Second Moment will fail to be informative and will ``almost never'' converge to
 its value (cf. when $\alpha$ is close to $1$, the Mean exists but will never be
 Observed)
 
+Taleb2020, Ch.18: Power Law with Stochastic $\alpha$
+
 
 
 \subsubsection{Rank-size Law}\label{sec:ranksize_law}
@@ -9998,6 +10029,13 @@ Observed
   $\alpha$.
 }
 
+Taleb2020, Ch.19 -- exact (Meta-)Distribution for $p$-values accross
+``ensembles'' of Statistically identical phenomena, and the minimum $p$-value
+among $m$ independent tests; $p$-values are shown to be extremely Skewed and
+Volatile, regardless of the Sample Size $n$-- $n$ does not increase Significance
+since $p$-values are computed from Normalized variables; a high $n$ corresponds
+to an increased Convergence to the Gaussian
+
 
 
 \paragraph{Statistical Power}\label{sec:statistical_power}\hfill
@@ -10043,8 +10081,8 @@ or \emph{Holm-Bonferroni Method}
 
 \emph{Student's $t$-test}
 
-\fist $t$-statistic (\S\ref{sec:t_statistic}),
-$t$-distribution (\S\ref{sec:t_distribution})
+\fist $t$-statistic (\S\ref{sec:t_statistic}), $t$-distribution
+(\S\ref{sec:t_distribution})
 
 essentially equal to Wald Test for moderately large $n$
 
