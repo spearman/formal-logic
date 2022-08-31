@@ -942,7 +942,8 @@ Constant is the \emph{Canonical Partition Function}
 
 Log-linear Model, Boltzmann Machines (Machine Learning)
 
-\emph{Gibbs Random Field}
+\emph{Gibbs Random Field} (\S\ref{sec:gibbs_random_field});
+\emph{Hammersley-Clifford Theorem}
 
 
 
@@ -4576,6 +4577,9 @@ Mandelbrot 1963
 
 (Taleb2020 \S 3.8) the Tail Exponent of a Pareto Distribution is Inverse-gamma
 Distributed and of sufficiently low Variance for Estimation
+
+2022 - Chen, Embrechts, Wang - \emph{An unexpected stochastic dominance: Pareto
+distributions, catastrophes, and risk exchange}
 
 
 
@@ -8387,6 +8391,19 @@ Fitting a Graphical Model to Discrete Data \fist Pairwise Markov Graph
 
 
 
+\paragraph{Undirected Graphical Model}
+\label{sec:undirected_graphical_model}\hfill
+
+Edges represent \emph{Potential Functions} between Random Variables
+
+a Potential Function $\phi(x)$ is a Non-negative Function of $x$
+
+``Factors'' into Cliques
+
+\fist \emph{Markov Random Field} (\S\ref{sec:markov_random_field})
+
+
+
 \paragraph{Markov Blanket}\label{sec:markov_blanket}\hfill
 
 Markov Random Fields (\S\ref{sec:markov_random_field})
@@ -8401,6 +8418,9 @@ Markov Random Fields (\S\ref{sec:markov_random_field})
 Bayesian Statistics (\S\ref{sec:bayesian_inference})
 
 DAG (\S\ref{sec:dag}) -- Dependency structure
+
+cf. Markov Network (Markov Random Field or Undirected Graphical Model
+\S\ref{sec:markov_random_field}) is Undirected and may be Cyclic
 
 representation of Probability Distributions based on \emph{Causal Dependencies}
 (\S\ref{sec:causal_graph})
@@ -16942,13 +16962,42 @@ Tensor-valued Random Fields
 
 (MRF)
 
-Graphical Model (\S\ref{sec:graphical_model})
+\emph{Markov Network}
+
+\emph{Undirected Graphical Model} (\S\ref{sec:undirected_graphical_model})
 
 Boltzmann Machines (\S\ref{sec:boltzmann_machine})
 
+Markov Networks are Undirected and may be Cyclic;
+cf. Bayesian Networks (\S\ref{sec:bayesian_network}): Directed, Acyclic
+
+underlying Graph
+
+prototypical Markov Random Field: the \emph{Ising Model}
+
+any two Subsets separated by a Separating Subset are \emph{Conditionally
+Independent}
+
+Maximal Cliques $\{X_c\}_{c=1}^C$
+
+$p(X) = \frac{1}{Z}\prod_{c=1}^C \phi_C(X_c)$ where $Z$ is the Partition
+Function
+
+Pairwise Markov Random Field: Clique size $2$
 
 
-\subsubsection{Gibbs Random Field}\label{sec:gibbs_random_field}
+
+\paragraph{Gibbs Random Field}\label{sec:gibbs_random_field}\hfill
+
+Markov Random Field in which the Joint Probability Density of the Random
+Variables is Strictly Positive
+
+\emph{Hammersley-Clifford Theorem} -- when the Joint Probability Distribution of
+Random Variables of a Markov Random Field is Strictly Positive, it can be
+represented by a \emph{Gibbs Measure} (\S\ref{sec:gibbs_measure}) for an
+appropriate locally-defined ``energy function'' (FIXME: clarify)
+
+
 
 \subsubsection{Conditional Random Field}\label{sec:conditional_random_field}
 
@@ -17141,6 +17190,8 @@ of $X$
 
 Partial Evaluations (\S\ref{sec:partial_evaluation}) as Conditional Expectations
 (\S\ref{sec:conditional_expectation})
+
+\url{https://golem.ph.utexas.edu/category/2022/07/probability_monads_as_codensit.html}
 
 
 
