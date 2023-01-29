@@ -7730,6 +7730,13 @@ Algebraic Theory of Quantum Circuits -- $ZX$- and $ZW$-calculi
 Compact Closed Categories with Biproducts (\S\ref{sec:biproduct}) -- Categorical
 Semantics of Quantum Logic (Abramsky, Coecke 2004)
 
+\begin{itemize}
+  \item (Monoidal) Reverse Differential Categories
+    (\S\ref{sec:reverse_differential_category}) -- a Differential Category which
+    is also Self-dual Compact Closed
+  \item ...
+\end{itemize}
+
 
 
 \subsubsection{Non-symmetric Compact Closed Category}
@@ -8323,11 +8330,10 @@ Jacobian
 
 Additive Maps form a Subcategory in a Left-semi-additive Category
 
-\emph{Cartesian Differential Operator} $D_\times$
-
-$D_\times : \cat{X}(X,Y) \implies \cat{X}(X \times X \to Y)$
-
-(Note: the paper writes $D$ as an inference rule)
+\emph{Cartesian Differential Operator} $D_\times$ is a Family of Operators:
+\[
+  D_\times : \cat{X}(X,Y) \implies \cat{X}(X \times X \to Y)
+\]
 
 satisfying Axioms ... TODO
 
@@ -8379,14 +8385,56 @@ every Cartesian Differential Category gives rise to a Tangent Category
 \subsubsection{Reverse Differential Category}
 \label{sec:reverse_differential_category}
 
-2019 - Cruttwell et al. - \emph{Monoidal Reverse Differential Categories}
+2022 - Cruttwell et al. - \emph{Monoidal Reverse Differential Categories}
+
+a \emph{Monoidal Reverse Differential Category} is an Additive Symmetric
+Monoidal Category $\cat{X}$ such that $\cat{X}$ is a Self-dual Compact-closed
+Category equipped with a Co-algebra Modality $(!, \delta, \varepsilon, \Delta,
+e)$ and a Reverse Deriving Transformation which is a Family of Maps:
+\[
+  r_A : !A \otimes !A \to A
+\]
+with Axioms: ... TODO
+
+a Reverse Differential Category is exactly a Differential Category which is also
+Self-dual Compact Closed
+
+if $\cat{X}$ is a Reverse Differential Category, then $\cat{X}$ is a
+Differential Category where the Driving Transformation
+$d_A : !A \otimes A \to !A$ is defined as:
+\[
+  d_A \defeq (\cup_A \otimes 1_{!A}) \circ (r_A \otimes \sigma_{!A,A})
+    \circ (1_{!A} \otimes \cap_{!A} \otimes 1_A
+\]
+
+
+if $\cat{X}$ is a Differential Category which is also Self-dual Compact Closed,
+then $\cat{X}$ is a Reverse Differential Category with Reverse Deriving
+Transformation:
+\[
+  r_A \defeq (\cup_{!A} \otimes 1_A) \circ (d_A \otimes \sigma_{A,!A})
+    \circ (1_{!A} \otimes \cap_A \otimes 1_{!A})
+\]
+
+the Category $\cat{Rel}$ of Sets and Relations is a Reverse Derivative Category
+where the Reverse Deriving Transformation is the Relation that relates two Bags
+that differ by one Element to that said Element
+
+the Category $\cat{FinVec}_{\ints_2}^\mathcal{B}$ of Finite-dimensional Vector
+Spaces over Field $\ints_2$ with Objects are pairs $(V, B_V)$ of
+Finite-dimensional Vector Spaces over $\ints_2$ and a Basis of $V$, and
+Morphisms are arbitrary $\ints_2$-linear Maps between underlying Vector Spaces,
+is a Reverse Differential Category
+
+the Co-Kleisli Category of a Reverse Differential Category is a Cartesian
+Reverse Differential Category
 
 
 
 \paragraph{Cartesian Reverse Differential Category}
 \label{sec:cartesian_reverse_differential}\hfill
 
-2019 - Cockett et al. - \emph{Reverse Derivative Categories}
+2020 - Cockett et al. - \emph{Reverse Derivative Categories}
 
 a Category with a Reverse Derivative also has a Forward Derivative, but not vice
 versa
@@ -8399,7 +8447,7 @@ Reverse Differential Category
 a Cartesian Lef-additive Category $\cat{X}$ has Reverse Derivatives if there is
 a \emph{Reverse Differential Combinator} $R$:
 \[
-  R : \cat{X}(A,B) \implies \cat{X}(A \times B \to A)
+  R : \cat{X}(A,B) \implies \cat{X}(A \times B, A)
 \]
 satisfying Coherence conditions (Axioms): ... TODO
 
@@ -8428,6 +8476,9 @@ $f$ is Linear if and only if $f^{\dagger\dagger} = f$
 a Cartesian Reverse Differential Category is a Cartesian Differential Category
 for which the associated Linear Fibration is a Dagger Fibration in which each
 Fibre has $\dagger$-biproducts (TODO: clarify)
+
+2022 - Cruttwell et al. -
+\emph{Categorical Foundations of Gradient-based Learning}
 
 
 
