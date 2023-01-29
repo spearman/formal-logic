@@ -14,7 +14,8 @@ Encyclopedia of Philosophy)
 \fist cf. Inductive Logic (\S\ref{sec:inductive_inference}) -- makes extensive
 use of Probabilistic notions
 
-cf. Probabilistic Combinatorics (\S\ref{sec:probabilistic_combinatorics})
+cf. Probabilistic Combinatorics (\S\ref{sec:probabilistic_combinatorics}),
+Probabilistic Method (\S\ref{sec:probabilistic_method})
 
 \emph{Bayesian Epistemology}: Probability as a formal representation of Belief
 (cf. Bayesian Inference \S\ref{sec:bayesian_inference})
@@ -1545,16 +1546,7 @@ manifestation of invariant \emph{single-case} Probabilities
 
 \fist cf. Asymptotic Theory (Large Sample Theory \S\ref{sec:asymptotic_theory})
 
-
-
-\subsubsection{Markov's Inequality}\label{sec:markovs_inequality}
-
-\textbf{Thm.} (Markov's Inequality) \emph{
-  Given a Random Variable $X$ with Expectation $E(X)$, for any $t > 0$:
-  \[
-    P(X > t) \leq \frac{E(X)}{t}
-  \]
-}
+Markov's Inequality (\S\ref{sec:markovs_inequality})
 
 
 
@@ -2212,6 +2204,84 @@ Marchenko-Pastur Distribution (\S\ref{sec:marchenko_pastur})
 
 
 
+% ------------------------------------------------------------------------------
+\subsection{Concentration Inequality}\label{sec:concentration_inequality}
+% ------------------------------------------------------------------------------
+
+Probability Inequalities
+
+quantify how a Random Variable $X$ Deviates around its Mean $\mu$
+
+usual form:
+\[
+  \prob\{|X - \mu| > t\} \leq \varepsilon
+\]
+
+simplest Inequality: Chebyshev's Inequality (\S\ref{sec:chebyshevs_inequality})
+
+
+
+\subsubsection{Markov's Inequality}\label{sec:markovs_inequality}
+
+\textbf{Thm.} (Markov's Inequality) \emph{
+  Given a Random Variable $X$ with Expectation $E(X)$, for any $t > 0$:
+  \[
+    P(X \geq t) \leq \frac{E(X)}{t}
+  \]
+}
+
+Law of Large Numbers (\S\ref{sec:large_numbers})
+
+
+
+\paragraph{Chebyshev's Inequality}\label{sec:chebyshevs_inequality}\hfill
+
+Probability that a Random Variable $X$ will assume Value within $k$ Standard
+Deviations
+
+Random Variable $X$ with Finite Expected Value (\S\ref{sec:expected_value})
+$\mu$ and Finite Non-zero Variance $\sigma^2$, for any $k \in \reals : k > 0$:
+\[
+  P(k\sigma \leq |X - \mu|) \leq \frac{1}{k^2}
+\]
+
+
+
+\subsubsection{Hoeffding's Inequality}\label{sec:hoeffdings_inequality}
+
+used the analyze the number of required Samples needed to obtain a Confidence
+Interval (\S\ref{sec:confidence_interval})
+
+\fist Classification Error (\S\ref{sec:classification_error})
+
+\textbf{Thm.} (Hoeffding's Inequality)
+
+\emph{
+  For $Y_1, \ldots, Y_n$ Independent Observations (\S\ref{sec:observation}) such
+  that $E(Y_i) = 0$ and $a_i \leq Y_i \leq b_i$, given $\epsilon > 0$, for any
+  $t > 0$:
+  \[
+    P\Big(\sum_i Y_i \geq \epsilon\Big) \leq
+      e^{-t\epsilon} \prod_i e^{t^2(b_i - a_i)^2/8}
+  \]
+}
+
+
+
+\subsubsection{Chernoff's Inequality}\label{sec:chernoffs_inequality}
+
+\emph{Chernoff Bounds}
+
+Tail Distribution (\label{sec:tail_distribution})
+
+Large Deviations Theory (\S\ref{sec:large_deviations_theory})
+
+
+
+\subsubsection{Bernstein's Inequality}\label{sec:bernsteins_inequality}
+
+
+
 % ==============================================================================
 \section{Probability Distribution}\label{sec:probability_distribution}
 % ==============================================================================
@@ -2367,7 +2437,7 @@ $\prob(X > x)$
 
 $\bar{F}(\cdot)$
 
-\emph{Chernoff Bounds}
+\emph{Chernoff Bounds} (\S\ref{sec:chernoffs_inequality})
 
 
 
@@ -6716,18 +6786,8 @@ Variance reduction methods:
   \item Bootstrap Aggregation (Bagging \S\ref{sec:bootstrap_aggregation})
 \end{itemize}
 
-
-
-\subparagraph{Chebyshev's Inequality}\label{sec:chebyshevs_inequality}\hfill
-
-Probability that a Random Variable $X$ will assume Value within $k$ Standard
-Deviations
-
-Random Variable $X$ with Finite Expected Value (\S\ref{sec:expected_value})
-$\mu$ and Finite Non-zero Variance $\sigma^2$, for any $k \in \reals : k > 0$:
-\[
-  P(k\sigma \leq |X - \mu|) \leq \frac{1}{k^2}
-\]
+Chebyshev's Inequality (\S\ref{sec:chebyshevs_inequality}) -- Probability that a
+Random Variable $X$ will assume Value within $k$ Standard Deviations
 
 
 
@@ -8637,7 +8697,7 @@ GPT-2: Unsupervised (Generative) Transformer Language Model
 
 measure of how well Distribution or Model predicts a Sample
 
-%TODO: move section to informatio ntheory ?
+%TODO: move section to information theory ?
 
 
 
@@ -10280,7 +10340,7 @@ Approximation and Reinforcement Learning} - Borkar et al.
 
 Cram\'er Condition
 
-Chernoff's Inequality (Chernoff Bounds)
+Chernoff's Inequality (Chernoff Bounds \S\ref{sec:chernoffs_inequality})
 
 ``Large Deviation Theory fails to apply to Thick Tails'' (Taleb 2020 \S 3.3)
 
@@ -10504,27 +10564,8 @@ represents Uncertainty in a Curve Estimate (cf. Smoothing \S\ref{sec:smoothing},
 Density Estimation \S\ref{sec:density_estimation}, Kernel Regression
 \S\ref{sec:kernel_regression})
 
-
-
-\paragraph{Hoeffding's Inequality}\label{sec:hoeffdings_inequality}\hfill
-
-used the analyze the number of required Samples needed to obtain a Confidence
-Interval
-
-\fist Probability Inequalities (Classification Error
-\S\ref{sec:classification_error})
-
-\textbf{Thm.} (Hoeffding's Inequality)
-
-\emph{
-  For $Y_1, \ldots, Y_n$ Independent Observations (\S\ref{sec:observation}) such
-  that $E(Y_i) = 0$ and $a_i \leq Y_i \leq b_i$, given $\epsilon > 0$, for any
-  $t > 0$:
-  \[
-    P\Big(\sum_i Y_i \geq \epsilon\Big) \leq
-      e^{-t\epsilon} \prod_i e^{t^2(b_i - a_i)^2/8}
-  \]
-}
+Hoeffding's Inequality (\S\ref{sec:hoeffdings_inequality}) -- used to analyze
+the number of required Samples needed to obtain a Confidence Interval
 
 
 
@@ -11046,6 +11087,8 @@ Mandelbrot97E, Ch.20 -- Extrapolation; Martingale (\S\ref{sec:martingale}):
 
 ``Forecasting in Frequency Space diverges from expected payoff''
 (Taleb 2020 \S 3.3)
+
+\url{https://statmodeling.stat.columbia.edu/2022/11/23/time-series-forecasting-futile-but-necessary-an-example-using-electricity-prices/}
 
 
 
@@ -11827,9 +11870,9 @@ Estimating the Error Rate:
 
 Cross-validation Estimate
 
-Probability Inequalities -- Confidence Interval \fist Hoeffding's Inequality
-(\S\ref{sec:hoeffdings_inequality}); Empirical Risk Minimization (ERM
-\S\ref{sec:erm})
+Probability Inequalities (\S\ref{sec:concentration_inequality}) -- Confidence
+Interval \fist Hoeffding's Inequality (\S\ref{sec:hoeffdings_inequality});
+Empirical Risk Minimization (ERM \S\ref{sec:erm})
 
 
 
@@ -14482,6 +14525,9 @@ Mixture Model (\S\ref{sec:mixture_model})
 
 2022 - Vertechi, Bergomi -
 \emph{Machines of finite depth: towards a formalization of neural networks}
+
+2021 - Cruttwell et al. - \emph{Categorical Foundations of Gradient-based
+Learning}
 
 
 

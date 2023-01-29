@@ -110,10 +110,93 @@ allow Recursive Evaluation (generalized Folding).
 \subsubsection{Bidirectional Model Tranformation}
 \label{sec:bidirectional_model_transformation}
 
-\subsubsection{Lens}\label{sec:lens}
+\subsubsection{Optic}\label{sec:optic}
+
+%FIXME: move to category theory ???
+
+\url{https://golem.ph.utexas.edu/category/2020/01/profunctor_optics_the_categori.html}
+
+compositional representation of \emph{Bidirectional Data Accessors}
+
+originally called \emph{Accessors} or \emph{Generalized Functional References}
+
+\emph{Profunctor Encoding} -- \emph{Profunctor Optics}
+(\S\ref{sec:profunctor_optics})
+
+\emph{van Laarhoven Encoding} -- Haskell $\mathtt{lens}$ library
+
+%FIXME: move to profunctor subsection ?
+
+\url{https://ncatlab.org/nlab/show/optic+%28in+computer+science%29}
+
+\url{http://oleg.fi/gists/posts/2017-04-18-glassery.html}
+
+\url{https://golem.ph.utexas.edu/category/2020/01/profunctor_optics_the_categori.html}
+
+compositional representation of \emph{Bidirectional Data Accessors}
+
+\emph{Lens} (\S\ref{sec:lens}) -- Products; \emph{Note}: not the same as
+``Lenses'' (Anamorphism or \emph{Co-iteration} \S\ref{sec:anamorphism}) in
+Recursion Theory
+
+\emph{view}, \emph{update}
+
+``Generalized Functional References''
+
+\emph{Prism} -- Tagged Unions; Lenses in the \emph{Opposite} Category
+
+\emph{match}, \emph{build}
+
+\emph{Traversal} -- Containers
+
+\emph{extract}
+
+\emph{Setter}
+
+\emph{Grate}
+
+2018 - Riley - \emph{Categories of Optics}
+
+$\mathbf{Optic} : \mathbf{SymmMonCat} \rightarrow \mathbf{SymmMonCat}$
+
+for a Symmetric Monoidal Category $(\cat{C}, \otimes, I)$, given two Pairs of
+Objects of $\cat{C}$, $(S, S')$ and $(A, A')$, an \emph{Optic}
+$p : (S, S') \nrightarrow (A, A')$ is an Element of the Set:
+\[
+  \mathbf{Optic}_\cat{C} ((S, S'), (A, A')) \defeq
+    \int^{M\in\cat{C}} \cat{C}(S, M \otimes A) \times \cat{C}(M \otimes A', S')
+\]
+
+(Coend Calculus \S\ref{sec:coend})
+
+\asterism
+
+\url{https://www.youtube.com/watch?v=1NHBexWYgkU}
+
+an Optic is given by a choice of a Residual Object $M \in \cat{C}$, a Forward
+Map $f$ and a Backward Map $b$
+
+when $\cat{C}$ is Cartesian,
+$\mathbf{Optic}(\cat{C}) \simeq \mathbf{Lens}(\cat{C})$
+
+
+
+\paragraph{Parametric Optics}\label{sec:parametric_optics}\hfill
+
+\url{https://www.youtube.com/watch?v=1NHBexWYgkU} -- common structure behind
+Neural Networks, Loss Functions, and Optimizers
+
+nlab: Para Construction (\S\ref{sec:para_construction}) $Para(Optic(C))$
+recovers the Category of Neural Networks (Capucci et al. 2020)
+
+
+
+\paragraph{Lens}\label{sec:lens}\hfill
 
 2007 - Foster et al. - \emph{Combinators for bidirectional tree transformations:
 A linguistic approach to the view-update problem}
+
+2012 - Johnson et al. - \emph{Lenses, fibrations, and universal translations}
 
 nlab: ``well-behaved'' Lenses are equivalently Co-algebras of the Co-state
 Co-monad (O'Connor 2010, 2011)
@@ -130,41 +213,13 @@ Proofs of $\varphi$ to Proofs of $\psi$
 Laarhoven Function: $(X \rightarrow F X) \rightarrow F Y$ equivalent to Store
 Comonad
 
-\emph{Profunctor Optics} (\S\ref{sec:profunctor_optics}):
-
-%FIXME: move to profunctor subsection ?
-
-\url{https://ncatlab.org/nlab/show/optic+%28in+computer+science%29}
-
-\url{http://oleg.fi/gists/posts/2017-04-18-glassery.html}
-
-\url{https://golem.ph.utexas.edu/category/2020/01/profunctor_optics_the_categori.html}
-
-compositional representation of \emph{Bidirectional Data Accessors}
-
-\fist \emph{Lens} (\S\ref{sec:lens}) -- Products; \emph{Note}: not the same as
-``Lenses'' (Anamorphism or \emph{Co-iteration} \S\ref{sec:anamorphism}) in
-Recursion Theory
-
-\emph{view}, \emph{update}
-
-``Generalized Functional References''
-
-\emph{Prism} -- Tagged Unions; Lenses in the \emph{Opposite} Category
-
-\emph{match}, \emph{build}
-
-\emph{Traversal} -- Containers
-
-\emph{extract}
-
-\emph{Grate}
+Lenses in Compositional Game Theory (Ghani, Hedges 2018)
 
 
 
-\paragraph{Asymmetric Lens}\label{sec:asymmetric_lens}\hfill
+\subparagraph{Asymmetric Lens}\label{sec:asymmetric_lens}\hfill
 
-\paragraph{Symmetric Lens}\label{sec:symmetric_lens}\hfill
+\subparagraph{Symmetric Lens}\label{sec:symmetric_lens}\hfill
 
 2019 - Fong, Johnson - \emph{Functorial Backpropagation and Symmetric Lenses} -
 \url{https://www.youtube.com/watch?v=s0WTRHe-4ZI} -- ``Lenses are Learners'';
@@ -172,12 +227,12 @@ Recursion Theory
 
 
 
-\paragraph{Parametric Lens}\label{sec:parametric_lens}\hfill
+\subparagraph{Parametric Lens}\label{sec:parametric_lens}\hfill
 
 %FIXME: type of symmetric lens ?
 
-nlab: $Para(Optic(C))$ recovers the Category of Neural Networks (Capucci et al.
-2020)
+nlab: Para Construction (\S\ref{sec:para_construction}) $Para(Optic(C))$
+recovers the Category of Neural Networks (Capucci et al. 2020)
 
 2021 - Gavranovic, et al. - \emph{Categorical Foundations of Gradient-based
 Learning}
@@ -188,13 +243,14 @@ ways, i.e. ``computations'' are bi-directional
 
 
 
-\paragraph{Bare Lens}\label{sec:bare_lens}\hfill
+\subparagraph{Bare Lens}\label{sec:bare_lens}\hfill
 
 or \emph{Set-based Lens}
 
 
 
-\paragraph{Constant Complement Lens}\label{sec:constant_complement_lens}\hfill
+\subparagraph{Constant Complement Lens}
+\label{sec:constant_complement_lens}\hfill
 
 
 
