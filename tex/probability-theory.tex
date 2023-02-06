@@ -9161,6 +9161,8 @@ Average (Expected Value) of Estimation Error
 
 or \emph{Mean Squared Error (MSE)}
 
+(FIXME: synonymous with ``Quadratic Error'' ???)
+
 Average of the Squared Error of the Estimated value (produced by an Estimator)
 from the ``true'' value; MSD is the Second Moment of the Error; for an Unbiased
 Estimator the MSD is the \emph{Variance} (\S\ref{sec:variance}) of the Estimator
@@ -11513,7 +11515,7 @@ Kernel Density Estimation (\S\ref{sec:kde})
 Cornell CS4780
 
 \url{http://www.argmin.net/2018/01/29/taxonomy/} -- three kinds of Machine
-Learning:
+Learning (\S\ref{sec:machine_learning}):
 \begin{enumerate}
   \item Unsupervised Learning (Cluster Analysis \S\ref{sec:cluster_analysis})
     \fist Descriptive Analytics (\S\ref{sec:descriptive_analytics})
@@ -14066,6 +14068,12 @@ Neural Network ``patterns'' are Higher-order Functions:
 
 
 
+\paragraph{Deep Dreaming}\label{sec:deep_dreaming}\hfill
+
+\emph{Learning of Inputs}
+
+
+
 \paragraph{Hyperbolic Deep Neural Network}\label{sec:hyperbolic_dnn}\hfill
 
 2021 - Peng et al. - \emph{Hyperbolic Deep Neural Networks: A Survey}:
@@ -14491,6 +14499,11 @@ being wrong:
   \max_{\theta_g} \expect_{z \sim p(z)} \log (D_{\theta_d}(G_{\theta_g}(z)))
 \]
 
+2021 - Capucci et al. - \emph{Towards Foundations of Categorical Cybernetics} --
+Generative Adversarial Network as a Closed System; Game-theoretic behavior in
+terms of opposing Reparametrizations (Gradient Descent and Gradient Ascent); can
+be seen as Learning the Loss map
+
 
 
 \subsubsection{Mixture Density Network}\label{sec:mixture_density_network}
@@ -14519,15 +14532,250 @@ Mixture Model (\S\ref{sec:mixture_model})
 
 %FIXME: move section ???
 
-\url{https://www.youtube.com/watch?v=1NHBexWYgkU} - Gavranovic, Wilson, et al. -
-\emph{Categorical Foundations of Gradient-based Learning}
--- Supervised Learning (TODO)
+\url{http://www.argmin.net/2018/01/29/taxonomy/} -- three kinds of Machine
+Learning:
+\begin{enumerate}
+  \item Unsupervised Learning (Cluster Analysis \S\ref{sec:cluster_analysis})
+    \fist Descriptive Analytics (\S\ref{sec:descriptive_analytics})
+  \item Supervised Learning (Statistical Classification
+    \S\ref{sec:classification}, Regression Analysis
+    \S\ref{sec:regression_analysis}) \fist Predictive Analytics
+    (\S\ref{sec:predictive_analytics})
+  \item Reinforcement Learning (\S\ref{sec:reinforcement_learning})
+    \fist Prescriptive Analytics (\S\ref{sec:prescriptive_analytics})
+\end{enumerate}
+also Semi-supervised Learning, Active Learning
 
 2022 - Vertechi, Bergomi -
 \emph{Machines of finite depth: towards a formalization of neural networks}
 
 2021 - Cruttwell et al. - \emph{Categorical Foundations of Gradient-based
 Learning}
+
+Parametric Lens (\S\ref{sec:parametric_lens}): fundamental Semantic structure of
+Learning
+
+Parametric Lenses are Open Systems (\S\ref{sec:open_system}) which may be
+composed
+
+\begin{enumerate}
+  \item computation is \emph{Parameterized}: Para Functor
+    (\S\ref{sec:para_construction}) on a (Strict) Symmetric Monoidal Category
+    $\cat{C}$: $\mathbf{Para}(\cat{C})$
+  \item information flows \emph{Bidirectionally}: Lens Functor
+    (\S\ref{sec:lens}) on a Cartesian Category $\cat{C}$:
+    $\mathbf{Lens}(\cat{C})$
+  \item the basis of Parameter update via Gradient Descent is
+    \emph{Differentiation}: Cartesian Reverse Differentiation Category
+    (\S\ref{sec:cartesian_reverse_differential})
+\end{enumerate}
+
+Neural Network together with its Reverse Derivative Operator as a Parametric
+Lens, i.e. a Morphism in $\mathbf{Para}(\mathbf{Lens}(\cat{Smooth}))$
+
+the Parametric Lens that captures the Learning process is itself composed of
+Parametric Lenses:
+\begin{itemize}
+  \item Model
+  \item Optimizer
+  \item Loss
+  \item Learning Rate
+\end{itemize}
+
+Supervised Learning -- Approximate a Function $g : \reals^n \to \reals^m$ by
+building a Neural Network as a Smooth Map:
+\[
+  f : \reals^p \times \reals^n \to \reals^m
+\]
+where $\reals^p$ is the Set of possible Weights of the Neural Network
+
+$\mathbf{Para}(\cat{Smooth})$ is the Category of Neural Networks where a
+Morphism from $n$ to $m$ consists of a choice of $p$ and a Map
+$f : \reals^p \times \reals^n \to \reals^m$
+
+\emph{Reparametrization} of $(P,f) : A \to B$ in $\mathbf{Para}(\cat{C})$ by a
+Map $\alpha : Q \to P$ is the Map $(Q, f \circ (\alpha \otimes 1_A)) : A \to B$;
+Gradient Descent and its variants can be viewed as Reparametrizations
+
+$2$-categorical perspective: if $\cat{C}$ and $\cat{D}$ are Strict Symmetric
+Monoidal Categories and $F : \cat{C} \to \cat{D}$ is a Lax Symmetric Monoidal
+Functor, then there is an induced $2$-functor
+$\mathbf{Para}(F) : \mathbf{Para}(\cat{C}) \to \mathbf{Para}(\cat{D})$ which
+agrees with $F$ on Objects; $\mathbf{Para}(\cat{C})$ inherits the Symmetric
+Monoidal structure from $\cat{C}$ and the induced $2$-functor $\mathbf{Para}(F)$
+respects that structure, allowing composition of Neural Networks both in series
+and in parallel
+
+Category of Lenses $\mathbf{Lens}(\cat{C})$ for a Cartesian Category $\cat{C}$
+has Objects $(A,A')$ where $A$ and $A'$ are Objects in $\cat{C}$, and Morphisms
+$(f,f^*) : (A,A') \to (B,B')$ where $f : A \to B$ is the \emph{Get} (or
+\emph{Forward}) part of the Lens and $f^* : A \times B' \to A'$ is the
+\emph{Put} (or \emph{Backwards}) part of the Lens; $\mathbf{Lens}(\cat{C})$ is a
+Monoidal Category but in general is not itself Cartesian
+
+Supervised Learning -- since $\mathbf{Lens}(\cat{C})$ is Monoidal for a
+Cartesian Category $\cat{C}$, one can form the Category of Parametric Lenses
+$\mathbf{Para}(\mathbf{Lens}(\cat{C}))$ where:
+\begin{itemize}
+  \item Objects are pairs of Objects $(A,A')$ from $\cat{C}$
+  \item Morphisms from $(A,A')$ to $(B,B')$ are Parametric Lenses with a choice
+    of Parameter pair $(P,P')$ and a Lens:
+    \[
+      (f,f^*) : (A,A') \times (P,P') \to (B,B')
+    \]
+    so that $f : P \times A \to B$ and
+    $f^* : P \times A \times B' \to P' \times A'$
+\end{itemize}
+
+given a generic Morphism $f$ in $\mathbf{Para}(\mathbf{Lens}(\cat{C}))$, it is
+possible to ``Learn'' new values from $f$ by taking an Input $A$, a Parameter
+$P$, and a ``change'' $B'$, and outputting a change in $A$, a value of $B$, and
+a change $P'$ (TODO: clarify)
+
+Cartesian Reverse Differential Category is a Cartesian Left-additive Category
+$\cat{C}$ with a Reverse Differential Operation $R$ that provides for each Map
+$f : A \to B$ in $\cat{C}$ a Map $R[f] : A \times B \to A$ satisfying seven
+Axioms;
+for $f : A \to B$, the pair $(f,R[f])$ forms a Lens from $(A,A)$ to $(B,B)$ with
+$R[f]$ acting as Backwards (Put); note that $B$-values in the Domain and
+$A$-values in the Codomain of $R[f]$ do not play the same role as values of the
+same types in $f : A \to B$: in $R[f] : A \times B \to A$ they really take a
+Tangent Vector at $B$ and output a Tangent Vector at $A$ (TODO: clarify)
+
+in $\cat{Smooth}$, given a Smooth Map $f : \reals^n \to \reals^m$, the Map
+$R[f] : \reals^n \to \reals^m \to \reals^n$ sends a pair $(x,v)$ to
+$J[f]^T(x) \cdot v$-- the Transpose of the Jacobian of $f$ at $x$ in the
+direction $v$
+(TODO: review)
+
+if $\cat{C}$ is a Cartesian Reverse Differential Category, there is a Functor
+$\mathbf{R} : \cat{C} \to \mathbf{Lens}(\cat{C})$ which sends Objects $A$ to the
+pair $(A,A)$ and sends Maps $f : A \to B$ to the pair $(f, R[f])$;
+applied under $\mathbf{Para}(-)$ yields a Functor:
+\[
+  \mathbf{Para}(\mathbf{R}) :
+    \mathbf{Para}(\cat{C}) \to \mathbf{Para}(\mathbf{Lens}(\cat{C}))
+\]
+
+$f : P \times A \to B$
+
+$R[f] : P \times A \times B' \to P' \times A'$
+
+Neural Network together with its Reverse Derivative Operator as a Parametric
+Lens, i.e. a Morphism in $\mathbf{Para}(\mathbf{Lens}(\cat{Smooth}))$; these
+Morphisms take inputs $A$, $P$, and $B'$, and output $A'$, $P'$, and $B$, but to
+do Learning, one wants to input $A$, $P$, and $B$, and receive a new parameter
+in $P$, so additional components are required
+
+a \emph{Loss Map} in $\cat{Smooth}$ is of type $B \times B \to \reals$, which
+can be viewed as a Parameterized Map from $B$ to $\reals$ with Parameter Space
+$B$--note that allowing the Parameter Space to differ from the Input Space
+allows the Loss Map to be Learned, cf. Generative Adversarial Networks (Capucci
+et al. 2021)
+
+a Loss Map on $B$ consists of a $\mathbf{Para}(\cat{C})$ Map
+$(B,loss) : \mathbf{Para}(\cat{C})(B,L)$ for some Object $L$, which can be
+pre-composed with a Neural Network $(P,f) : A \to B$, and to which the Functor
+$\mathbf{Para}(\mathbf{R})$ can be applied; this allows input of $B$, but now
+requires Input of $L'$
+
+a \emph{Learning Rate} $\alpha$ on $L$ is a Lens $(L,L') \to (1,1)$ where $1$ is
+a Terminal Object in $\cat{C}$; viewed as a
+$\mathbf{Para}(\mathbf{Lens}(\cat{C}))$ Map, $\alpha$ has a trivial (Unit)
+Parameter Space; in standard Supervised Learning, $\alpha$ is simply a constant
+$-\epsilon$, i.e. $\alpha(l) = -\epsilon$ for any $l \in L$
+
+in any Cartesian Reverse Differential Category $\cat{C}$, a
+\emph{Gradient Update Map} is a Map $G$ in $\mathbf{Lens}(\cat{C})$ from
+$(P,P) \to (P,P')$ consisting of $(G,G^*) : (P,P) \to (P,P')$ where
+$G(p) = p$ and $G^*(p,p') = p + p'$
+
+a Stateful Optimizer consists of a choice of State Object $S$ and a Lens
+$U : (S \times P, S \times P) \to (P,P')$
+
+applying $\eta : (1,1) \to (A,A')$ with Parameter Space $(A,A')$ turns the $A$
+input and output into Parameters
+
+a Closed Parametric Lens is a Map in $\mathbf{Para}(\mathbf{Lens}(\cat{C}))$
+from $(1,1)$ to $(1,1)$ with type:
+\[
+  (A \times P \times B, A' \times P' \times B') \to (1,1)
+\]
+with Get as the Terminal Map and Put of the Type
+$A \times P \times B \to A' \times P' \times B'$,
+$put(a,p,b_t) = (a',p',b'_t)$ where:
+\begin{itemize}
+  \item $b_p = f(p,a)$
+  \item $(b'_t, b'_p) = R[loss](b_t,b_p,\alpha(loss(b_t,b_p)))$
+  \item $(p',a') = R[f](p,a,b'_p)$
+\end{itemize}
+(TODO: review)
+
+in standard Supervised Learning of Parameters, the ``backward'' wires $A'$ of
+inputs and $B'$ of outputs are \emph{discarded} (FIXME: in the string diagram it
+looks like the discarded $B'$ is a loss \emph{parameter}, not output)
+
+fixing a (potentially Stateful) Optimizer
+$(U,U^*) : (S \times P, S \times P) \to (P,P')$, the closed Parametric Lens
+is a Map in $\mathbf{Para}(\mathbf{Lens}(\cat{C}))$ from $(1,1)$ to $(1,1)$ with
+Parameter Space $(A \times S \times P \times B, S \times P)$ and Type
+$(A \times S \times P \times B, S \times P) \to (1,1)$ with Get as the Identity
+and Put with Type $A \times S \times P \times B \to S \timesP$,
+$put(a,s,p,b_t) = U^*(s,p,p')$ where:
+\begin{itemize}
+  \item $\bar{p} = U(s,p)$
+  \item $b_p = f(\bar{p}, a)$
+  \item $(b'_t,b'_p) = R[loss](b_t,b_p,\alpha(loss(b_t,b_p)))$
+  \item $(p',a') = R[f](\bar{p},a,b'_p)$
+\end{itemize}
+where $\bar{p}$ represents the Parameter supplied to the Network by the Stateful
+Gradient Update rule (in many cases equal to $p$), $b_p$ represents the
+Prediction of the Network (cf. $b_t$ the Ground Truth from the Dataset), and
+$b'_p$ and $b'_t$ represent changes on Predictions and True values,
+respectively, while $p'$ and $a'$ are changes on the Parameters and Inputs
+(TODO: review)
+
+for Stateless Optimizer (e.g. basic Gradient Descent), the Type reduces to
+$A \times P \times B \to P$ and implementation to
+$put(a,p,b_t) = p+p'$ where $(p'a') = R[f](p,a,\alpha \cdot (f(p,a) - b_t))$;
+since $\alpha$ is a Constanta nd due to the Linearity of the Reverse Derivative,
+$\alpha$ can be moved from the ``Costate'' into the Gradient Descent Lens,
+rewriting the update obtains a closed-form update step:
+\[
+  put(a,p,b_t) = p + \alpha \cdot (R[f](p,a,f(p,a) - b_t); \pi_0)
+\]
+where the choice of Negative \emph{Descent} is contained in the choice of a
+Negative Constant $\alpha$
+(FIXME: clarify the appearance of $; \pi_0$);
+this gives a variety of ``Regression Algorithms'' solved Iteratively by Gradient
+Descent, embedding some Parameterized Map
+$(\reals^p,f) : \mathbf{Para}(\cat{Smooth})(\reals^a,\reals^b)$ into the System
+which performs Regression on input data where $a$ denotes input to the Model and
+$b_t$ deontes the Ground Truth; if the corresponding Map $f$ is Linear and
+$b = 1$, then it recovers simple Linear Regression with Gradient Descent; if the
+Codomain is Multi-dimensional, then it recovers Multivariate Linear Regression
+
+Iterated Parameter updates on Training examples is modelled as composition of
+the Put map with itself, $(A \times put \times B)$ with Type
+$A \times A \times P \times B \times B \to P$, taking two input/output pairs and
+returning a new Parameter; this process can be Iterated any number of times;
+this can be simplified by recasting $put$ as a Parametric map, that is an
+Endomorphism $P \to P$ with Parameters $A \times B$:
+\[
+  (A \times B, put) : \mathbf{Para}(\cat{C})(P,P)
+\]
+which can be composed with itself; Parameter Iteration can be thought of as a
+Trajectory through Prameter Space, itself Parameterized by the Dataset;
+different Datasets will result in a different Path through the Parameter Space
+
+Deep Dreaming (Learning Inputs) (TODO)
+
+\url{https://www.youtube.com/watch?v=1NHBexWYgkU}
+-- Supervised Learning (TODO)
+
+2021 - Capucci et al. - \emph{Towards Foundations of Categorical Cybernetics} --
+Generative Adversarial Network as a Closed System; Game-theoretic behavior in
+terms of opposing Reparametrizations (Gradient Descent and Gradient Ascent)
 
 
 
