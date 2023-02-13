@@ -8582,6 +8582,37 @@ Mixture Density Network (\S\ref{sec:mixture_density_network})
 
 \emph{Latent Variable} (\emph{Hidden Variable})
 
+\begin{itemize}
+  \item Factor Analysis (\S\ref{sec:factor_analysis}): Continuous Latent
+    Variable, Continuous Observable Variable
+  \item Item Response Theory (\S\ref{sec:item_response_theory}): Continous
+    Latent Variable, Categorical Observable Variable
+  \item Latent Profile Analysis (\S\ref{sec:latent_profile_analysis}):
+    Categorical Latent Variable, Continuous Observable Variable
+  \item Latent Class Analysis (\S\ref{sec:latent_class_analysis}): Categorical
+    Latent Variable, Categorical Observable Variable
+\end{itemize}
+
+Diffusion Probabilistic Model (\S\ref{sec:diffusion_probabilistic_model})
+
+
+
+\paragraph{Item Response Theory}\label{sec:item_response_theory}\hfill
+
+Continous Latent Variable, Categorical Observable Variable
+
+
+
+\paragraph{Latent Profile Analysis}\label{sec:latent_profile_analysis}\hfill
+
+Categorical Latent Variable, Continuous Observable Variable
+
+
+
+\paragraph{Latent Class Analysis}\label{sec:latent_class_analysis}\hfill
+
+Categorical Latent Variable, Categorical Observable Variable
+
 
 
 \subsubsection{Discrete Uniform Law}\label{sec:discrete_uniform_law}
@@ -8633,11 +8664,23 @@ Binomial Probabilities \fist Binomial Distribution
 
 \subsubsection{Variational Bayesian Method}\label{sec:variational_bayesian}
 
+\emph{Variational Inference}
+
 Free Energy Principle -- implicit Minimization of Variational Free Energy;
 Active Inference (Friston)
 
 Variational AutoEncoders (VAEs \S\ref{sec:vae}) -- uses a Stochastic Gradient
 Variational Bayes (SGVB) Estimator for the training algorithm
+
+
+
+\paragraph{Expectation Maximization}\label{sec:expectation_maximization}\hfill
+
+Iterative Method to find the local Maximum Likelihood (\S\ref{sec:likelihood})
+or Maximum A Posteriori (MAP \S\ref{sec:map}) Estimates of Parameters in
+Statistical Models
+
+cf. minimizing KL-divergence (Maximizing Log-likelihood)
 
 
 
@@ -9095,6 +9138,8 @@ can be used to derive Least-squares (\S\ref{sec:least_squares}) Estimator
 Bayesian Estimation
 
 cf. Bayes Estimator (\S\ref{sec:bayes_estimator})
+
+Expectation Maximization (\S\ref{sec:expectation_maximization})
 
 
 
@@ -9935,6 +9980,12 @@ Converges with appropriate choice of $g$ such that the Variance is not Infinite
 this may not be useful if it is not known how to sample from $f$
 
 in practice, $g$ should be a tick-tailed Distribution similar to $f|h|$
+
+
+
+\paragraph{Annealed Importance Sampling}\label{sec:annealed_importance}\hfill
+
+\emph{Jarzynski Equality}
 
 
 
@@ -10895,6 +10946,10 @@ Likelihood-ratio Test
 (\S\ref{sec:sufficient_statistic}) if the Likelihood Function can be computed
 knowing only $T(X^n)$ (Wasserman04 \S9.13.2)
 
+Expectation-maximization Algorithm (\S\ref{sec:expecation_maximization}) --
+Iterative Method to find the local Maximum Likelihood or Maximum A Posteriori
+(MAP \S\ref{sec:map}) Estimates of Parameters in Statistical Models
+
 
 
 \paragraph{Log-likelihood}\label{sec:log_likelihood}\hfill
@@ -10925,14 +10980,6 @@ is the same as minimizing Cross Entropy (\S\ref{sec:cross_entropy})
 \emph{Score Function} is the Derivative of the Log-likelihood Function
 
 \fist Fisher Information (\S\ref{sec:fisher_metric})
-
-
-
-\paragraph{Expectation-maximization}\label{sec:expectation_maximization}\hfill
-
-%FIXME: move section ???
-
-cf. minimizing KL-divergence (maximizing log-likelihood)
 
 
 
@@ -11340,6 +11387,12 @@ Global Markov Property
 
 
 
+\subsubsection{Matching}\label{sec:statistical_matching}
+
+\paragraph{Propensity Score Matching}\label{sec:propensity_score_matching}\hfill
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Distribution-free Inference}\label{sec:distribution_free}
 % ------------------------------------------------------------------------------
@@ -11461,6 +11514,9 @@ cf. Scale Analysis (\S\ref{sec:statistical_scale})
 
 
 \subsubsection{Factor Analysis}\label{sec:factor_analysis}
+
+Latent Variable Models (\S\ref{sec:latent_variable_model}) where the Observable
+and Latent Variables are both Continuous
 
 cf. PCA (\S\ref{sec:pca})
 
@@ -11822,6 +11878,29 @@ composed from Unsupervised Networks (RBMs, Autoencoders)
 
 2015 - Sohl-Dickstein et al. -
 \emph{Deep Unsupervised Learning using Nonequilibrium Thermodynamics}
+
+inspired by Non-equilibrium Thermodynamics
+
+Langevin Dynamics--Stochastic realization of Fokker-Planck Equation--show how to
+define a Gaussian Diffusion Process which has any target Distribution as its
+Equilibrium
+
+2020 - Ho et al. - \emph{Denoising Diffusion Probabilistic Models}
+
+class of Latent Variable Models (\S\ref{sec:latent_variable_model})
+
+``Denoising Score Matching'' with Langevin Dynamics
+
+progressive lossy decompression scheme that can be interpreted as a
+generalization of Autoregressive Decoding (\S\ref{sec:autoregressive_model})
+
+a Diffusion Probabilistic Model is a Parameterized Markov Chain Trained using
+Variational Inference (\S\ref{sec:variational_bayesian}) to produce Samples
+matching the Data after a finite time
+
+certain Parametrization of Diffusion Models reveals an equivalence with
+Denoising Score Matching (TODO: xref) over multiple ``Noise Levels'' during
+Training, and with Annealed Langevin Dynamics during Sampling
 
 
 
@@ -13379,7 +13458,22 @@ Feature Selection
 
 Feature Extraction
 
+Feature Projection
+
 Principal Component Analysis (PCA \S\ref{sec:pca})
+
+
+
+\paragraph{Non-linear Dimensionality Reduction}
+\label{sec:nonlinear_dimensionality}\hfill
+
+or \emph{Manifold Learning}
+
+
+
+\subparagraph{Diffusion Map}\label{sec:diffusion_map}\hfill
+
+Diffusion Process (\S\ref{sec:diffusion_process})
 
 
 
@@ -16796,6 +16890,8 @@ solution to a Stochastic Differential Equation (\S\ref{sec:sde})
 
 cf. Diffusion Equation (\S\ref{sec:diffusion_equation})
 
+\fist Diffusion Map (\S\ref{sec:diffusion_map})
+
 \begin{itemize}
   \item Brownian Motion (Wiener Process \S\ref{sec:wiener_process})
   \item Reflected Brownian Motion
@@ -16803,6 +16899,10 @@ cf. Diffusion Equation (\S\ref{sec:diffusion_equation})
 \end{itemize}
 
 Jump Diffusion (\S\ref{sec:jump_diffusion})
+
+Langevin Dynamics--Stochastic realization of Fokker-Planck Equation--show how to
+define a Gaussian Diffusion Process which has any target Distribution as its
+Equilibrium (Sohl-Dickstein et al. 2015)
 
 
 
