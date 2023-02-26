@@ -745,6 +745,8 @@ a Process is called ``White'' if its Spectral Density
 
 $P(A \cap B | C) = P(A|C)P(B|C)$
 
+see also Conditional Dependence (\S\ref{sec:conditional_dependence})
+
 note that two Events may be Independent, but not \emph{Conditionally}
 Independent, i.e. the Intersection of each Independent Event $A$ and $B$ with
 the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
@@ -7202,6 +7204,14 @@ Determination (\S\ref{sec:determination_coefficient})
 
 
 
+\paragraph{Conditional Dependence}\label{sec:conditional_dependence}
+
+Graphical Models (\S\ref{sec:graphical_model})
+
+see also Conditional Independence (\S\ref{sec:conditional_independence})
+
+
+
 \paragraph{Long-range Dependence}\label{sec:long_range_dependence}\hfill
 
 \emph{Long Memory} or \emph{Long-range Persistence}
@@ -8449,7 +8459,10 @@ Logistic Regression (\S\ref{sec:logistic_regression})
 
 \subsubsection{Graphical Model}\label{sec:graphical_model}
 
-(Whittaker 1990 - \emph{Graphical Models in Applied Multivariate Statistics}
+a Graph expresses the Conditional Dependence
+(\S\ref{sec:conditional_dependence}) between Random Variables
+
+Whittaker 1990 - \emph{Graphical Models in Applied Multivariate Statistics}
 
 \fist \emph{Log-linear Model} (Poisson Regression \S\ref{sec:log_linear}) --
 Fitting a Graphical Model to Discrete Data \fist Pairwise Markov Graph
@@ -8595,6 +8608,34 @@ Mixture Density Network (\S\ref{sec:mixture_density_network})
 
 Diffusion Probabilistic Model (\S\ref{sec:diffusion_probabilistic_model})
 
+\url{https://www.youtube.com/watch?v=AX5v5med3Rw} - CS 182 Lec.17 --
+
+Decoder represents with Distribution over $z$:
+
+$p(x) = \sum_z p(x|z)p(z)$
+
+$p(x) = \int p(x|z)p(z) dz$
+
+$p(y|x) = \sum_zp(y|x,z)p(z)$
+
+Expectation Maximization (\S\ref{sec:expectation_maximization})
+
+Probabilistic Inference
+
+Flow-based Generative Models
+
+Normalizing Flow Models
+
+deterministic Decoder represents an Invertible Map $z$ to $x$:
+
+$x = f(z)$
+
+Change of Variables formula for $p(x)$:
+\[
+  p(x) = p(z)\|det(\frac{df(z)}{dz})\|^{-1}
+\]
+where $z = f^{-1}(x)$
+
 
 
 \paragraph{Item Response Theory}\label{sec:item_response_theory}\hfill
@@ -8672,15 +8713,108 @@ Active Inference (Friston)
 Variational AutoEncoders (VAEs \S\ref{sec:vae}) -- uses a Stochastic Gradient
 Variational Bayes (SGVB) Estimator for the training algorithm
 
+\url{https://www.youtube.com/watch?v=HxQ94L8n0vU} -
+\emph{Variational Inference, Evidence Lower Bound (ELBO): Intuition &
+Visualization}:
+
+example of observing a Dataset of e.g. images, and Infer a Latent Variable, e.g.
+camera angle
+
+describe Posterior in terms of Bayes' Rule $p(z|x) = \frac{p(x|z) p(z)}{p(x)}$
+where $x$ is the Observed Dataset where Marginal $p(x)$ is intractible; instead
+find $q(z) \cong p(z|x)$ for a $q$ from a family of simple Distributions;
+KL-divergence Loss
+
+\url{https://www.youtube.com/watch?v=h0UE8FzdE8U} -
+\emph{Variational Inference and Deep Learning: An Intuitive Introduction}
+
+``Log-likelihood Trick''
+
+want to Estimate a Distribution $p(x)$ that maximizes the Likelihood of the
+Samples from that Distribution
+
+if doing Gradient-based Optimization, want to be able to compute reasonable
+Estimates of the Gradients from a single example or small subset of examples
+
+Independence (of Likelihood) assumption over examples gives the Likelihood as a
+Product:
+
+$p(x) = \prod_i p(x_i)$
+
+but Gradient-based Optimization works well when Optimizing over \emph{Sums};
+e.g. SGD has a Convergence guarantee if the Learning Rate shrinks over the
+course of Training
+
+taking the $\log$ changes the Product into a Sum:
+
+$\log(p(x)) = \sum_i \log(p(x_i))$
+
+which does not change the Argmax of its input
+
+Log-likelihood has the effect of making the Loss much larger for examples with
+very low Likelihoods
+
+Variational Bound gives a framework for Training Models with Latent Variables
+
+Log-likelihood Trick makes it possible to look at a subset of the Dataset and
+make updates to the Parameters that tend to drive down the overall Error;
+Variational Bound makes it possible to do updates while only looking at a Subset
+of possible values of Latent Variables
+
+the Log-likelihood Trick allows to push up Likelihood; the Variational Method
+will push up a lower-bound that provides a guarantee on the value of the
+Likelihood; intuitively the Bound corresponds to the fact that a ``phenomenon''
+only needs to have a single ``good explanation'', but having a Model provide
+values of Latent Variables that serve as good explanations for the Data is
+sufficient, but not necessary
+
+\emph{Marginalization}-- rewrite Density $p(x)$ as the Joint Distribution
+between $x$ and $z$ with a Sum over all possible values of $z$:
+
+$p(x) = \sum_z p(x,z)$
+
+using Chain Rule of Probability to rewrite the Joint Distribution:
+
+$p(x) = \sum_z p(x|z)p(z)$
+
+if there was only one example in the Dataset, then the Variational Bound would
+not be needed since the Objective would already be an Expectation over a
+variable that can be sampled from (FIXME: ???)
+
+$\log(p(x)) = \sum_i \log(\sum_z p(x_i, z))$
+
+propose $q(z|x_i)$ for a Distribution of the Latent Variable that is particular
+to a specific example $x_i$
+
+$\log(p(x)) = \sum_i \log(\sum_z \frac{q(z|x_i)p(x_i,z)}{q(z|x_i)})$
+
+relying on Concavity of the Log-function:
+
+$\log(p(x)) \geq \sum_i \sum_z q(z|x_i) \log(\frac{p(x_i,z)}{q(z|x_i))}$
+
+... MORE
+
+Variational Autoencoder: $q(z|x)$ is the Encoder, $p(x|z)$ is the Decoder
+
+\emph{Variational Bound}
+
+Log-likelihood (\S\ref{sec:log_likelihood})
+
 
 
 \paragraph{Expectation Maximization}\label{sec:expectation_maximization}\hfill
 
 Iterative Method to find the local Maximum Likelihood (\S\ref{sec:likelihood})
 or Maximum A Posteriori (MAP \S\ref{sec:map}) Estimates of Parameters in
-Statistical Models
+Statistical Models where the Model depends on Latent Variables
+(\S\ref{sec:latent_variable_model})
 
 cf. minimizing KL-divergence (Maximizing Log-likelihood)
+
+alternates between performing an ``Expectation'' step, creating a Function for
+the Expectation of the Log-likelihood evaluated using the current Estimate of
+the Parameters, and a Maximization step, computing Parameters maximizing the
+Expected Log-likelihood found in the first step
 
 
 
@@ -10973,6 +11107,8 @@ Iteratively Re-weighted Least Squares (\S\ref{sec:irls}) -- equivalent to
 \fist Cross-entropy Error Function -- minimizing \emph{Negative Log-likelihood}
 is the same as minimizing Cross Entropy (\S\ref{sec:cross_entropy})
 
+Variational Bound (Variational Inference \S\ref{sec:variational_bayesian})
+
 
 
 \subparagraph{Score}\label{sec:score}\hfill
@@ -11475,6 +11611,10 @@ cf. Factor Analysis (\S\ref{sec:factor_analysis})
 
 cf. Dynamic Mode Decomposition (\S\ref{sec:dmd})
 
+equivalent to a Bottleneck Autoencoder (\S\ref{sec:autoencoder}) where the
+Encoder and Decoder are Linear Transformations
+(\url{https://www.youtube.com/watch?v=8VZAZKIovuI} - CS 182 Lec. 17)
+
 
 
 \paragraph{Multidimensional Scaling}\label{sec:multidimensional_scaling}\hfill
@@ -11622,7 +11762,7 @@ Parameters set before Learning Algorithm begins
 
 examples used to initially \emph{Fit} the Parameters of a Statistical Model
 
-\emph{Ground Truth} (FIXME)
+\emph{Ground Truth} (GT) *FIXME*
 
 cf. Statistical Sample (\S\ref{sec:sample}), Dataset (\S\ref{sec:dataset})
 
@@ -11873,8 +12013,13 @@ composed from Unsupervised Networks (RBMs, Autoencoders)
 
 
 
+\subparagraph{Stochastic Block Model}\label{sec:stochastic_block_model}\hfill
+
 \subparagraph{Diffusion Probabilistic Model}
 \label{sec:diffusion_probabilistic_model}\hfill
+
+decomposes image generation process into sequential application of Denoising
+Auto-encoders (\S\ref{sec:denoising_autoencoder})
 
 2015 - Sohl-Dickstein et al. -
 \emph{Deep Unsupervised Learning using Nonequilibrium Thermodynamics}
@@ -11902,6 +12047,68 @@ certain Parametrization of Diffusion Models reveals an equivalence with
 Denoising Score Matching (TODO: xref) over multiple ``Noise Levels'' during
 Training, and with Annealed Langevin Dynamics during Sampling
 
+\emph{Diffusion Probabilistic Model}:
+\[
+  p_\theta(x_0) \defeq \int p_\theta(x_{0:T}) dx_{1:T}
+\]
+where $x_1, \ldots, x_T$ are ``Latents'' (FIXME: ???) of the same Dimensionality
+as the Data $x_0 \sim q(x_0)$ (FIXME: q ???)
+
+the \emph{Reverse Process} is the Joint Distribution $p_\theta(x_{0:T})$ defined
+as a Markov Chain with learned Gaussian Transitions starting at
+$p(x_T) = N(x_T; 0, I)$:
+\[
+  p_\theta(x_{0:T}) \defeq p(x_T) \pi_{t=1}^T p_\theta(x_{t-1}|x_t)
+\]
+\[
+  p_\theta(x_{t-1}|x_t)
+    \defeq N(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+\]
+FIXME: mu ???
+
+what distinguishes Diffusion Models from other types of Latent Variable Models
+is the ``Approximate Posterior'' $q(x_{q:T}|x_0)$ called the \emph{Forward
+Process} (or \emph{Diffusion Process}) is fixed (FIXME: ???) to a Markov Chain
+that gradually adds Gaussian Noise to the data according to a \emph{Variance
+Schedule} $\beta_1, \ldots, \beta_T$:
+\[
+  q(x_{1:T}|x_0) \defeq \prod_{t=1}^T q(x_t|x_{t-1})
+\]
+\[
+  q(x_t|x_{t-1}) \defeq N(x_t; \sqrt{1-\beta_t} x_{t-1}, \beta_t I)
+\]
+(FIXME: clarify)
+
+Training performed by Optimizing the Variational Bound on Negative Log
+Likelihood (\S\ref{sec:log_likelihood})
+
+the Forward Process admits Sampling $x_t$ at an arbitrary timestep $t$ in closed
+form
+
+Training Algorithm, Sampling Algorithm
+
+Sending Algorithm, Receiving Algorithm
+
+Diffusion Models resemble Normalizing Flows and VAEs, but Diffusion Models are
+designed so that $q$ has no Parameters and the top-level Latent $x_T$ has nearly
+zero Mutual Information with Data $x_0$
+
+simplified Objective: a Weighted Variational Bound that emphasizes different
+aspects of reconstruction compared to the standard Variational Bound
+
+2021 - Dhariwal, Nichols - \emph{Diffusion Models Beat GANs on Image Synthesis}
+-- \emph{Classifier Guidance}
+
+2021 - Ho, Salimans - \emph{Classifier-free Diffusion Guidance}
+
+
+
+\subparagraph{Ablated Diffusion Model (ADM)}\label{sec:adm}\hfill
+
+2021 - Dhariwal, Nichols - \emph{Diffusion Models Beat GANs on Image Synthesis}
+
+\url{https://github.com/openai/guided-diffusion}
+
 
 
 \subparagraph{Latent Diffusion Model (LDM)}\label{sec:ldm}\hfill
@@ -11909,9 +12116,49 @@ Training, and with Annealed Langevin Dynamics during Sampling
 2022 - Rombach et al. -
 \emph{High-Resolution Image Synthesis with Latent Diffusion Models}
 
+Diffusion Models decompose image formation into sequential application of
+Denoising Autoencoders
+
+Diffusion Models operating directly in ``pixel space'' are expensive to Train
+and Inference is expensive due to ``sequential evaluations''
+
+instead, apply Diffusion Models in Latent Space of Pre-trained Autoencoders
+
+introducing Cross-attention Layers turns Diffusion Models into generators for
+general ``Conditioning Inputs'' such as text or bounding boxes, and
+high-resolution synthesis is possible using Convolutions
+
+being Likelihood-based Models, Diffusion Models do not exhibit the
+``mode-collapse'' and training instabilities of GANs, and by exploiting
+Parameter Sharing, they can model highly-complex Distributions without involving
+billions of Parameters as in Auto-regressive Models
+
+Learning in Likelihood-based Models can be roughly divided into two stages:
+first a ``Perceptual Compression'' stage that removes high-frequency details
+(but still Learns some semantic variation), and a second stage where the
+Generative Model Learns the Semantic and concpetual composition of the data
+(``Semantic Compression'')
+
+\emph{Perceptual Compression} -- Autoencoder Trained by combination of a
+Perceptual Loss (Zhang et al. 2018) and a Patch-based Adversarial Objective;
+ensures that reconstructions are confied to the ``Image Manifold'' by enforcing
+``local realism'' and avoids bluriness introduced by relying on pixel-space
+Losses such as $L_2$ or $L_1$ Objectives
+
+Time-conditional U-Net (\S\ref{sec:unet}) with Cross-attention mechanism
+
+Frech\'et Inception Distance (FID)
+
+Conditional Latent Diffusion -- Classifier-free Diffusion Guidance boosts sample
+quality
+
+LDM sequential sampling process is still slower than GAN
 
 
-\subparagraph{Stochastic Block Model}\label{sec:stochastic_block_model}\hfill
+
+\subparagraph{Retrieval-agumented Diffusion Model (RDM)}\label{sec:rdm}\hfill
+
+2022 - Blattmann et al. - \emph{Semi-Parametric Neural Image Synthesis}
 
 
 
@@ -13534,6 +13781,14 @@ information with a Function that ``decompresses'' it, where \emph{Training} an
 Autoencoder involves Training the \emph{Composition} of the two Functions to
 produce the \emph{Identity Function}
 
+\url{https://www.youtube.com/watch?v=8VZAZKIovuI} - CS 182 Lec. 17
+
+Bottleneck Autoencoder -- Hidden State is low-dimensional; if the Encoder and
+Decoder are Linear Transformations then it recovers Principle Component Analysis
+(\S\ref{sec:pca})
+
+Sparse Autoencoder
+
 
 
 \paragraph{Regularized Autoencoder}\label{sec:regularized_autoencoder}\hfill
@@ -13545,6 +13800,14 @@ produce the \emph{Identity Function}
 \subparagraph{Sparse Autoencoder}\label{sec:sparse_autoencoder}\hfill
 
 \subparagraph{Denoising Autoencoder}\label{sec:denoising_autoencoder}\hfill
+
+corrupt input with Noise so that the Autoencoder learns to distinguish Noise
+from Signal
+
+Diffusion Probabilistic Models (\S\ref{sec:diffusion_probabilistic_model}):
+uses sequential application of Denoising Auto-encoders for image generation
+
+
 
 \subparagraph{Contractive Autoencoder}\label{sec:contractive_autoencoder}\hfill
 
@@ -14230,9 +14493,20 @@ Pooling -- ``$p$-norm Subsampling'' (\S\ref{sec:downsampling})
 
 
 
-\paragraph{Time Delay Neural Network}\label{sec:tdnn}\hfill
+\paragraph{Time Delay Neural Network (TDNN)}\label{sec:tdnn}\hfill
 
 first CNN (1987)
+
+
+
+\paragraph{Fully Convolutional Network (FCN)}\label{sec:fcn}\hfill
+
+\subparagraph{U-Net}\label{sec:unet}\hfill
+
+2015 - Ronneberger et al. -
+\emph{U-Net: Convolutional Networks for Biomedical Image Segmentation}
+
+Time-conditional U-Net used in Latent Diffusion Models (\S\ref{sec:ldm})
 
 
 
@@ -14845,7 +15119,7 @@ this gives a variety of ``Regression Algorithms'' solved Iteratively by Gradient
 Descent, embedding some Parameterized Map
 $(\reals^p,f) : \mathbf{Para}(\cat{Smooth})(\reals^a,\reals^b)$ into the System
 which performs Regression on input data where $a$ denotes input to the Model and
-$b_t$ deontes the Ground Truth; if the corresponding Map $f$ is Linear and
+$b_t$ denotes the Ground Truth; if the corresponding Map $f$ is Linear and
 $b = 1$, then it recovers simple Linear Regression with Gradient Descent; if the
 Codomain is Multi-dimensional, then it recovers Multivariate Linear Regression
 
