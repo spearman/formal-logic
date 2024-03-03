@@ -1298,12 +1298,13 @@ Mutually Recursive Definition of a Tree (\S\ref{sec:tree_type})
 \subsection{Coinductive Type}\label{sec:coinductive_type}
 % ------------------------------------------------------------------------------
 
-\emph{Coinductive Type} (\emph{Codata}), Coinduction
-(\S\ref{sec:coinduction})
+\emph{Coinductive Type} (\emph{Codata}), Coinduction (\S\ref{sec:coinduction})
 
 Terminal Coalgebras (\S\ref{sec:terminal_coalgebra})
 
 Greatest Fixed-points (\S\ref{sec:least_fixedpoint})
+
+Calculus of (Co)inductive Constructions (\S\ref{sec:coinductive_calculus})
 
 
 
@@ -10121,14 +10122,42 @@ Strongly Normalizing due to Girard's Paradox
 
 \subsubsection{Calculus of Constructions}\label{sec:coc}
 
-$\lambda\Pi\omega$ -- Higher-order Dependently-typed
-$\lambda$-calculus
+$\lambda\Pi\omega$ -- Higher-order Dependently-typed $\lambda$-calculus
 
-Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+$\mathtt{Prop}$ is \emph{Impredicative} (\S\ref{sec:impredicative_definition});
+cf. Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type}) which is
+\emph{Predicative}
 
 Intuitionistic (\S\ref{sec:intuitionistic_logic}) Predicate Calculus
 (\S\ref{sec:predicate_logic})
 
+Coq, Lean
+
+\url{https://cstheory.stackexchange.com/questions/36043/impredicative-in-type-theory}:
+
+example of an Impredicative Definition that is \emph{Circular} but not known to
+be \emph{Contradictory} is that of the Natural Numbers in Set Theory:
+\[
+  \nats \defeq \cap\{ X | X \text{is an Inductive Set} \}
+\]
+where a Set is an Inductive Set if it contains $\varnothing$ and is Closed under
+the Set-theoretic Successor Operation; $\nats$ is itself Inductive
+
+an example of an Impredicative Definition that leads to an Inconsistency is that
+of the MLTT71 that included an Axiom that stipulates a Type of all Types which
+was shown to make the the Type Theory Inconsistent: in the Product Rule, one can
+Conclude either:
+\begin{enumerate}
+  \item $\Gamma \vdash \forall x : A.B : Type$
+  \item $\Gamma \vdash \forall x : A.B : BigType$
+\end{enumerate}
+(2.) is the \emph{Predicative} approach, resulting in a strictly
+\emph{Stratified Type Theory}, while (1.) is ``\emph{Impredicative}'', since
+$Type : BigType$, if $B : Type$, then $\forall X : Type.B : Type$ is an
+expression Quantifying over $Typ$ comprising the Product Type being defined as
+one of its Elements
+
+\asterism
 
 \textbf{Terms}
 
@@ -10182,19 +10211,34 @@ $(\Pi C:\Type).(\Pi (\Pi x:A).(\Pi b:B).C).C$
 
 
 
-\paragraph{Calculus of Inductive Constructions}\label{sec:cic}
+\paragraph{Calculus of Inductive Constructions}\label{sec:cic}\hfill
+
+adds Inductive Types (\S\ref{sec:inductive_type})
 
 nLab:
-
-Calculus of Co-inductive Constructions
 
 Pure Type System (\S\ref{sec:pts})
 
 Universes (\S\ref{sec:type_universe}): Cumulative Hierarchy
-(\S\ref{sec:cumulative_hierarchy}) of Predicative (???) Types of Types
-and Impredicative Type of Propositions %FIXME
+(\S\ref{sec:cumulative_hierarchy}) of Predicative (without self-referencing
+definitions) Types of Types \emph{and} Impredicative (with self-referencing
+definitions) Types of Propositions %FIXME
 
 Intensional Dependent Type Theory
+
+
+
+\subparagraph{Predicative Calculus of Inductive Constructions}
+\label{sec:pcic}\hfill
+
+removes some Impredicativity (\S\ref{sec:impredicative_definition})
+
+
+
+\paragraph{Calculus of (Co)inductive Constructions}
+\label{sec:coinductive_calculus}\hfill
+
+adds Co-induction (\S\ref{sec:coinductive_type})
 
 
 
@@ -12832,23 +12876,48 @@ a Datatype's Structure
 
 \cite{martinlof84}
 
-\emph{Intuitionistic Type Theory} (also \emph{Constructive Type
-  Theory} or \emph{(Dependent) Martin-L\"of Type Theory})
+\emph{Intuitionistic Type Theory} (also \emph{Constructive Type Theory} or
+\emph{(Dependent) Martin-L\"of Type Theory (MLTT)})
 
-Calculus of Constructions (\S\ref{sec:coc})
+\emph{Predicativity} (\S\ref{sec:predicative_definition}); cf. Calculus of
+Constructions (\S\ref{sec:coc}) which has Impredicative $\mathtt{Prop}$
 
-NuPrl -- Martin-L\"of Type Theory is expressive but Type-checking
-requires more Theorem Proving (Zhu-Xi05) %FIXME
+\url{https://cstheory.stackexchange.com/questions/36043/impredicative-in-type-theory}:
+
+example of an Impredicative Definition that is \emph{Circular} but not known to
+be \emph{Contradictory} is that of the Natural Numbers in Set Theory:
+\[
+  \nats \defeq \cap\{ X | X \text{is an Inductive Set} \}
+\]
+where a Set is an Inductive Set if it contains $\varnothing$ and is Closed under
+the Set-theoretic Successor Operation; $\nats$ is itself Inductive
+
+an example of an Impredicative Definition that leads to an Inconsistency is that
+of the MLTT71 that included an Axiom that stipulates a Type of all Types which
+was shown to make the the Type Theory Inconsistent: in the Product Rule, one can
+Conclude either:
+\begin{enumerate}
+  \item $\Gamma \vdash \forall x : A.B : Type$
+  \item $\Gamma \vdash \forall x : A.B : BigType$
+\end{enumerate}
+(2.) is the \emph{Predicative} approach, resulting in a strictly
+\emph{Stratified Type Theory}, while (1.) is ``\emph{Impredicative}'', since
+$Type : BigType$, if $B : Type$, then $\forall X : Type.B : Type$ is an
+expression Quantifying over $Typ$ comprising the Product Type being defined as
+one of its Elements
+
+\asterism
+
+NuPrl -- Martin-L\"of Type Theory is expressive but Type-checking requires more
+Theorem Proving (Zhu-Xi05) %FIXME
 
 Dependent Type Theory (\S\ref{sec:dependent_type_theory})
 
 Inductive Types (\S\ref{sec:inductive_type})
 
-Predicative (Parametric) Polymorphism
-(\S\ref{sec:predicative_polymorphism})
+Predicative (Parametric) Polymorphism (\S\ref{sec:predicative_polymorphism})
 
-Modelled by Locally Cartesian Closed Category
-(\S\ref{sec:locally_cartesian})
+Modelled by Locally Cartesian Closed Category (\S\ref{sec:locally_cartesian})
 
 Extensional Martin-L\"of Type Theory: Internal Language
 (\S\ref{sec:internal_logic}) for Cartesian Closed Quasi-categories
