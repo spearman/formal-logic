@@ -1409,8 +1409,7 @@ Monads ???
 
 \subsubsection{Generic Type}\label{sec:generic_type}
 
-\emph{Generic Type} (also \emph{Parameterized} or \emph{Parametric
-  Type})
+\emph{Generic Type} (also \emph{Parameterized} or \emph{Parametric Type})
 
 Weak form of Abstract Data Type
 
@@ -1520,13 +1519,12 @@ of a (Multi-parameter) Type Class
 
 
 % ------------------------------------------------------------------------------
-\subsection{Logically Qualified Data Type}
-\label{sec:logically_qualified}
+\subsection{Logically Qualified Data Type}\label{sec:logically_qualified}
 % ------------------------------------------------------------------------------
 
 \cite{rondon-kawaguchi-jhala08}
 
-\emph{Liquid Type}
+\emph{Liquid Type} or \emph{Pattern Type}
 
 Predicate Abstraction (\S\ref{sec:predicate_abstraction})
 
@@ -2823,15 +2821,16 @@ A \emph{Dependent Type} depends on a Term or another Type.
   x : A \vdash B(x):\mathrm{Types}
 \]
 
-a Dependent Type is actually a Kind (\S\ref{sec:kind}), i.e. its
-``members'' are Types
+a Dependent Type is actually a Kind (\S\ref{sec:kind}), i.e. its ``members'' are
+Types
 
-A Dependent Product Type (\S\ref{sec:pi_type}) is defined by
-a Dependent Function (\S\ref{sec:dependent_function}).
+A Dependent Product Type (\S\ref{sec:pi_type}) is defined by a Dependent
+Function (\S\ref{sec:dependent_function}).
 
 Logical Quantifiers (\S\ref{sec:quantifier})
 
-Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type})
+Intuitionistic Type Theory (\S\ref{sec:intuitionistic_type}), Unified Theory of
+Dependent Types (UTT \S\ref{sec:utt})
 
 Type Checking in a Dependent Type Theory is Undecidable -- Dowek05
 \emph{The undecidability of typability in the Lambda-Pi-calculus}
@@ -10122,6 +10121,8 @@ Strongly Normalizing due to Girard's Paradox
 
 \subsubsection{Calculus of Constructions}\label{sec:coc}
 
+1988 - Coquand, Huet - \emph{The Calculus of Constructions}
+
 $\lambda\Pi\omega$ -- Higher-order Dependently-typed $\lambda$-calculus
 
 $\mathtt{Prop}$ is \emph{Impredicative} (\S\ref{sec:impredicative_definition});
@@ -10132,6 +10133,11 @@ Intuitionistic (\S\ref{sec:intuitionistic_logic}) Predicate Calculus
 (\S\ref{sec:predicate_logic})
 
 Coq, Lean
+
+\url{https://cstheory.stackexchange.com/questions/7561/whats-the-relation-and-difference-between-calculus-of-inductive-constructions-a/30662}:
+
+Intuitionistic Type Theory is a System of Dependent Types, Universes, Inductive
+Families
 
 \url{https://cstheory.stackexchange.com/questions/36043/impredicative-in-type-theory}:
 
@@ -10152,10 +10158,14 @@ Conclude either:
   \item $\Gamma \vdash \forall x : A.B : BigType$
 \end{enumerate}
 (2.) is the \emph{Predicative} approach, resulting in a strictly
-\emph{Stratified Type Theory}, while (1.) is ``\emph{Impredicative}'', since
-$Type : BigType$, if $B : Type$, then $\forall X : Type.B : Type$ is an
-expression Quantifying over $Typ$ comprising the Product Type being defined as
-one of its Elements
+\emph{Stratified Type Theory} (effectively removing the Axiom of Reducibility),
+while (1.) is ``\emph{Impredicative}'', since $Type : BigType$, if $B : Type$,
+then $\forall X : Type.B : Type$ is an expression Quantifying over $Typ$
+comprising the Product Type being defined as one of its Elements; with (1.), one
+must renounce having ``\emph{Strong Elimination Rules}'' (TODO: clarify), i.e.
+in Coq you cannot extract anything from a Proposition other than a Proof of some
+other Proposition, and as a corollary you have no way to Prove that two Proofs
+of the same Proposition are different from each other
 
 \asterism
 
@@ -12882,6 +12892,11 @@ a Datatype's Structure
 \emph{Predicativity} (\S\ref{sec:predicative_definition}); cf. Calculus of
 Constructions (\S\ref{sec:coc}) which has Impredicative $\mathtt{Prop}$
 
+\url{https://cstheory.stackexchange.com/questions/7561/whats-the-relation-and-difference-between-calculus-of-inductive-constructions-a/30662}:
+
+Intuitionistic Type Theory is a System of Dependent Types, Universes, Inductive
+Families
+
 \url{https://cstheory.stackexchange.com/questions/36043/impredicative-in-type-theory}:
 
 example of an Impredicative Definition that is \emph{Circular} but not known to
@@ -12901,10 +12916,14 @@ Conclude either:
   \item $\Gamma \vdash \forall x : A.B : BigType$
 \end{enumerate}
 (2.) is the \emph{Predicative} approach, resulting in a strictly
-\emph{Stratified Type Theory}, while (1.) is ``\emph{Impredicative}'', since
-$Type : BigType$, if $B : Type$, then $\forall X : Type.B : Type$ is an
-expression Quantifying over $Typ$ comprising the Product Type being defined as
-one of its Elements
+\emph{Stratified Type Theory} (effectively removing the Axiom of Reducibility),
+while (1.) is ``\emph{Impredicative}'', since $Type : BigType$, if $B : Type$,
+then $\forall X : Type.B : Type$ is an expression Quantifying over $Typ$
+comprising the Product Type being defined as one of its Elements; with (1.), one
+must renounce having ``\emph{Strong Elimination Rules}'' (TODO: clarify), i.e.
+in Coq you cannot extract anything from a Proposition other than a Proof of some
+other Proposition, and as a corollary you have no way to Prove that two Proofs
+of the same Proposition are different from each other
 
 \asterism
 
@@ -13303,6 +13322,16 @@ $(\Pi a:A) B(a) \subset \pow \bigsqcup_{a \in A} (\Sigma a:A) B(a)$
 
 
 % ------------------------------------------------------------------------------
+\subsection{Unified Theory of Dependent Types (UTT)}\label{sec:utt}
+% ------------------------------------------------------------------------------
+
+Luo
+
+Agda
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Constructive Type}\label{sec:constructive_type}
 % ------------------------------------------------------------------------------
 
@@ -13529,10 +13558,16 @@ $\Psi ::= \varnothing | \Psi, s \;\mathsf{dim}$
 
 
 % ------------------------------------------------------------------------------
-\section{Simplicial Type Theory}\label{sec:simplicial_type_theory}
+\subsection{Simplicial Type Theory}\label{sec:simplicial_type_theory}
 % ------------------------------------------------------------------------------
 
 \url{https://golem.ph.utexas.edu/category/2017/05/a_type_theory_for_synthetic_ca.html}
+
+
+
+\subsubsection{Semi-simplicial Type}\label{sec:semi_simplicial}
+
+\url{https://golem.ph.utexas.edu/category/2024/03/semisimplicial_types_part_i_mo.html}
 
 
 
