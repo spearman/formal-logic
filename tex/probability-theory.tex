@@ -5332,6 +5332,12 @@ and Model Selection
 
 
 % ------------------------------------------------------------------------------
+\subsection{Statistical Validity}\label{sec:statistical_validity}
+% ------------------------------------------------------------------------------
+
+%TODO
+
+% ------------------------------------------------------------------------------
 \subsection{Population}\label{sec:population}
 % ------------------------------------------------------------------------------
 
@@ -7417,6 +7423,9 @@ is used (Model-based Inference or Design-based Inference):
 cf. Statistical Hypothesis (\S\ref{sec:hypothesis})
 
 \fist Assumption (Proof Theory \S\ref{sec:antecedent})
+
+\url{https://www.argmin.net/p/when-is-the-future-the-same-as-the} -- IID,
+Exchangeability
 
 
 
@@ -9615,9 +9624,16 @@ where:
 
 \emph{Glivenko-Cantelli Theorem}
 
-\emph{Dvoretsky-Kiefer-Wolfowitz (DKW) Inequality} -- can be used to construct a
-Non-parametric $1-\alpha$ Confidence Band (\S\ref{sec:confidence_band}) for $F$
-(TODO)
+
+
+\paragraph{Dvoretsky-Kiefer-Wolfowitz (DKW) Inequality}
+\label{sec:dkw_inequality}\hfill
+
+can be used to construct a Non-parametric $1-\alpha$ Confidence Band
+(\S\ref{sec:confidence_band}) for $F$ (TODO)
+
+\fist Prediction Intervals (\S\ref{sec:prediction_interval}) --
+\url{https://www.argmin.net/p/from-coin-tosses-to-option-pricing}
 
 
 
@@ -10812,8 +10828,6 @@ Estimating a Population Proportion (\S\ref{sec:proportion})
 
 Confidence Limit
 
-Prediction Interval (\S\ref{sec:prediction_interval})
-
 Interval Measurement (\S\ref{sec:measurement_level})
 
 Interval Estimate (\S\ref{sec:interval_estimator})
@@ -10823,6 +10837,17 @@ cf. Credible Intervals (Bayesian Inference \S\ref{sec:credible_interval})
 Hypothesis Testing (\S\ref{sec:hypothesis_testing})
 
 One-tail, Two-tail
+
+\url{https://www.argmin.net/p/randomly-revealing-hidden-truths} -- Confidence
+Intervals are measurements and the Interval provides a sense of the precision of
+the measurement
+
+\url{https://www.argmin.net/p/more-like-one-out-of-a-million} -- with Confidence
+Intervals there is always a chance that the measurement was wrong
+
+\url{https://www.argmin.net/p/from-coin-tosses-to-option-pricing} -- Prediction
+Intervals (\S\ref{sec:prediction_interval}) are Confidence Intervals on
+Probabilities
 
 
 
@@ -11305,6 +11330,20 @@ Bayesian: Credible Interval (\S\ref{sec:credible_interval})
 (\S\ref{sec:model_validation}) which is an analysis of whether a constructed
 Statistical Model (\S\ref{sec:statistical_model}) holds up when applied to new
 Data (\S\ref{sec:sample})
+
+\url{https://www.argmin.net/p/guess-and-check}
+
+\url{https://www.argmin.net/p/when-is-the-future-the-same-as-the} -- IID,
+Exchangeability Assumptions
+
+\url{https://www.argmin.net/p/from-coin-tosses-to-option-pricing} -- a
+Prediction Interval is a Set where a future Event is believed to occur with high
+Probability; Prediction Intervals are Confidence Intervals on Probabilities; DKW
+Theorem (\S\ref{sec:dkw_inequality})
+
+\url{https://www.argmin.net/p/from-intervals-to-bands} -- using a Calibration
+(Validation) Set to build Prediction Intervals for a Machine Learning Model;
+\fist Conformal Prediction (\S\ref{sec:conformal_prediction})
 
 
 
@@ -12140,6 +12179,8 @@ define a Gaussian Diffusion Process which has any target Distribution as its
 Equilibrium
 
 2020 - Ho et al. - \emph{Denoising Diffusion Probabilistic Models}
+
+DDPM
 
 class of Latent Variable Models (\S\ref{sec:latent_variable_model})
 
@@ -15294,6 +15335,32 @@ terms of opposing Reparametrizations (Gradient Descent and Gradient Ascent)
 
 
 
+\subsubsection{Conformal Prediction}\label{sec:conformal_prediction}
+
+(wiki):
+Machine Learning framework for Uncertainly Quantification
+(\S\ref{sec:uncertainty_quantification}) that produces Statistically Valid
+(\S\ref{sec:statistical_validity}) Prediction Intervals
+(\S\ref{sec:prediction_interval}) for any underlying Point Predictor only
+assuming the Exchangeability of the underlying Data
+
+\url{https://www.argmin.net/p/from-intervals-to-bands}
+
+\url{https://www.argmin.net/p/cover-songs}:
+
+\begin{enumerate}
+  \item start with any Prediciton Function and Calibration (Validation) Set of
+    size $n$
+  \item identify a heuristic notion of ``Uncertainty'' using the pre-trained
+    Model
+  \item define a Real-valued Score Function $s(x,y)$
+  \item find the smallest $q$ larger than $(1-\alpha)*F$ of the Scores on the
+    Calibration Set
+  \item for any $x$, return the Prediction Set $C(X) = \{ y : s(X,y) \leq q \}$
+\end{enumerate}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Vapnik-Chervonenkis Theory}\label{sec:vc_theory}
 % ------------------------------------------------------------------------------
@@ -15682,6 +15749,10 @@ equivalent to the concept of ``\emph{Statistical Process Control (SPC)}''
 (Quality Control)
 
 Representation Theorem
+
+\url{https://www.argmin.net/p/when-is-the-future-the-same-as-the} -- if a
+Sequence is Exchangeable, then each Event in the Sequence is Identically
+Distributed; less restrictive than IID: any IID Sequence is Exchangeable
 
 
 
