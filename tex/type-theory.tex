@@ -1126,6 +1126,9 @@ Choices, Multiple ``Classes'' of Data
 
 \emph{Inductive Type} (or \emph{Recursive Type})
 
+Recursive Sum Types
+(\url{https://lean-lang.org/functional_programming_in_lean/getting-to-know/datatypes-and-patterns.html})
+
 \fist Higher Inductive Types (\S\ref{sec:higher_inductive_type})
 
 W-type
@@ -1586,6 +1589,9 @@ Special case of Implicit Type Conversion
 % ==============================================================================
 
 \emph{Terms depending on Types}
+
+Datatypes and Definitions that take \emph{Types} as arguments
+(\url{https://lean-lang.org/functional_programming_in_lean/getting-to-know/polymorphism.html})
 
 Adding Polymorphic Types to Simply-typed $\lambda$-calculus
 ($\lambda\kern-5pt\rightarrow$ \S\ref{sec:simply_typed}) results in
@@ -2889,10 +2895,9 @@ $B : (\Pi X:\Type) A \rightarrow X$
 \subsection{Dependent Function}\label{sec:dependent_function}
 % ------------------------------------------------------------------------------
 
-A \emph{Dependent Function} is a Function from Terms to Types
-(Codomain varies depending on Argument). The Type of a Dependent
-Function is a \emph{Dependent Product Type}
-(\S\ref{sec:pi_type}).
+A \emph{Dependent Function} is a Function from Terms to Types (Codomain varies
+depending on Argument). The Type of a Dependent Function is a \emph{Dependent
+Product Type} (\S\ref{sec:pi_type}).
 
 Dependent Function Space: if $f:(\forall x: A).B$ then $f a : B[a/x]$
 
@@ -2951,10 +2956,10 @@ Analagous to Coproduct or Disjoint Union.
 \subsection{Dependent Product Type ($\Pi$-type)}\label{sec:pi_type}
 % ------------------------------------------------------------------------------
 
-The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or
-\emph{Dependent Function Type}) is the Type of a Dependent Function,
-i.e. a Dependent Function Space. By Curry-Howard, $\Pi$-types model
-Implication and Universal Quantification.
+The \emph{$\Pi$-type} (or \emph{Dependent Product Type} or \emph{Dependent
+Function Type}) is the Type of a Dependent Function, i.e. a Dependent Function
+Space. By Curry-Howard, $\Pi$-types model Implication and Universal
+Quantification.
 
 Dependent Product (\S\ref{sec:dependent_product})
 
@@ -2963,15 +2968,14 @@ For a Type $A : \class{U}$ in Type Universe
 \[
   B : A \rightarrow \class{U}
 \]
-can be defined by a Dependent Function which assigns a Type $B(a) :
-\class{U}$ to Each Term $a : A$. The Type of this Function is a
-Dependent Product Type:
+can be defined by a Dependent Function which assigns a Type $B(a) : \class{U}$
+to Each Term $a : A$. The Type of this Function is a Dependent Product Type:
 \[
   (\Pi x:A)B(x)
 \]
 
-If $B$ is Constant, then $(\Pi x:A)B$ is Judgementally Equal to the
-Function Type (\S\ref{sec:function_type}) $A \rightarrow B$:
+If $B$ is Constant, then $(\Pi x:A)B$ is Judgementally Equal to the Function
+Type (\S\ref{sec:function_type}) $A \rightarrow B$:
 \[
   (\Pi x:A)B \equiv A \rightarrow B
 \]
@@ -2994,8 +2998,8 @@ Example 2 $swap$:
 \]
 Type arguments may be written as subscripts: $id_A$, $swap_{A,B,C}$
 
-A Polymorphic Function returning elements of Type $C$ has Polymorphic
-Type (\S\ref{sec:polymorphic_type}):
+A Polymorphic Function returning elements of Type $C$ has Polymorphic Type
+(\S\ref{sec:polymorphic_type}):
 \[
   (\Pi A:\class{U}) A \rightarrow C
 \]
@@ -10133,6 +10137,8 @@ Intuitionistic (\S\ref{sec:intuitionistic_logic}) Predicate Calculus
 (\S\ref{sec:predicate_logic})
 
 Coq, Lean
+
+Propositinal Extensionality, Proof Irrelevance
 
 \url{https://cstheory.stackexchange.com/questions/7561/whats-the-relation-and-difference-between-calculus-of-inductive-constructions-a/30662}:
 
