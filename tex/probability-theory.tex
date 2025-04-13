@@ -523,6 +523,11 @@ belongs to it; a \emph{Meta-probability Distribution} is needed to discuss
 ``\emph{Tail Events}'' (i.e. the Conditional Probability for the Variable to
 belong to a \emph{certain} Distribution vs. others) --FIXME: clarify
 
+\asterism
+
+de Finetti - ``Operational Subjective'' conception of Probability
+(1937 \emph{La prevision: ses lois logiques, ses sources subjectives})
+
 
 
 % ------------------------------------------------------------------------------
@@ -940,17 +945,6 @@ the Finitely Additive Probability Measures on $X$
 
 \subsubsection{Probability Measure Function}
 \label{sec:probability_measure_function}
-
-\subsubsection{Kullback-Leibler Divergence}\label{sec:kullback_leibler}
-
-can be used to characterize Relative Entropy (\S\ref{sec:relative_entropy}),
-Randomness (\S\ref{sec:statistical_randomness})
-
-defined between PDFs (\S\ref{sec:pdf})
-
-can be used to show Consistency of MLE (\S\ref{sec:mle})
-
-
 
 \subsubsection{Gibbs Measure}\label{sec:gibbs_measure}
 
@@ -2262,6 +2256,9 @@ $\mu$ and Finite Non-zero Variance $\sigma^2$, for any $k \in \reals : k > 0$:
 
 
 \subsubsection{Hoeffding's Inequality}\label{sec:hoeffdings_inequality}
+
+Upper Bound on the Probability that the sum of Bounded Independent Random
+Variables deviates from its Expected Value more than a certain amount
 
 used the analyze the number of required Samples needed to obtain a Confidence
 Interval (\S\ref{sec:confidence_interval})
@@ -8181,6 +8178,9 @@ Likelihood-Ratio (LR) Test (\S\ref{sec:lr_test})
 
 or \emph{Rotation Estimation} or \emph{Out-of-sample Testing}
 
+1974 - Stone -
+\emph{Cross-Validatory Choice and Assessment of Statistical Predictions}
+
 Predictive Models (\S\ref{sec:predictive_model})
 
 Cross-validation Estimation of Fit
@@ -8188,7 +8188,8 @@ Cross-validation Estimation of Fit
 Cross-validation Estimator of Risk (Density Estimation
 \S\ref{sec:density_estimation})
 
-\emph{Holdout Dataset} -- Test Dataset that has not been used in Training
+\emph{Holdout Dataset} -- Test Dataset (\S\ref{sec:test_dataset}) that has not
+been used in Training
 
 (wiki):
 
@@ -8231,6 +8232,16 @@ Holdout Method (TODO)
 \label{sec:nonexhaustive_cross_validation}\hfill
 
 $k$-fold Cross-validation -- may be a source of lookahead bias ?
+
+\begin{itemize}
+  \item Holdout Method (\S\ref{sec:holdout_method})
+\end{itemize}
+
+
+
+\subparagraph{Holdout method}\label{sec:holdout_method}\hfill
+
+Test Dataset (\S\ref{sec:test_dataset})
 
 
 
@@ -11441,6 +11452,34 @@ cf. Mean Absolute Error (\S\ref{sec:mae})
 
 
 
+\paragraph{Scoring Rule}\label{sec:scoring_rule}\hfill
+
+\subparagraph{Proper Scoring Rule}\label{sec:proper_scoring}\hfill
+
+\textbf{Proper Scoring Rule}
+
+\textbf{Strictly Proper Scoring Rule}
+
+Brier Score -- for Unidimensional Predictions it is equivalent to the Mean
+Squared Error as applied to Predicted Probabilities
+
+\url{https://www.argmin.net/p/gambling-on-the-richter-scale}
+
+
+
+\subparagraph{Consistent Scoring Rule}\label{sec:consistent_scoring}\hfill
+
+
+
+\paragraph{Calibrated Probability Assessment}\label{sec:calibrated_probability}
+\hfill
+
+\fist cf. Calibration (\S\ref{sec:calibration})
+
+\url{https://www.argmin.net/p/i-think-its-gonna-rain}
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Causal Inference}\label{sec:causal_inference}
 % ------------------------------------------------------------------------------
@@ -11681,6 +11720,12 @@ Global Markov Property
 
 
 
+\paragraph{Neyman-Rubin Causal Model}\label{sec:neyman_rubin}\hfill
+
+Stable Unit Treatment Value Assumption (SUTVA)
+
+
+
 \subsubsection{Matching}\label{sec:statistical_matching}
 
 \paragraph{Propensity Score Matching}\label{sec:propensity_score_matching}\hfill
@@ -11871,6 +11916,8 @@ Kernel Density Estimation (\S\ref{sec:kde})
 \section{Statistical Learning Theory}\label{sec:statistical_learning_theory}
 % ==============================================================================
 
+%FIXME: merge with machine learning ?
+
 \emph{Machine Learning for Intelligent Systems} -
 \url{https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/} -
 Cornell CS4780
@@ -11950,9 +11997,25 @@ Distribution Shift
 used to provide an Unbiased evaluation of the final Model Fit on the Training
 Dataset
 
+Holdout Method (\S\ref{sec:holdout_method})
+
+\url{https://www.argmin.net/p/the-adaptivity-paradox}
+
+
+
+\subsubsection{Empirical Error}\label{sec:empirical_error}
+
+\emph{Empirical Risk}, \emph{Internal Error}, or \emph{Training Error}
+
+\emph{Generalization Gap} -- difference between Empirical Error and
+Generalization Error (\S\ref{sec:generalization_error})
+
 
 
 \subsubsection{Empirical Risk Minimization}\label{sec:empirical_risk}
+
+1962 - Highleyman -
+\emph{Linear Decision Functions, with Application to Pattern Recognition}
 
 \url{http://www.argmin.net/2021/10/13/prediction/} -- core Predictive Algorithm
 of Machine Learning
@@ -11971,16 +12034,41 @@ Statistical Validity
 
 \url{http://www.argmin.net/2021/11/04/perceptron/}
 
+cf. Domain Adaptation (\S\ref{sec:domain_adaptation})
+
+\url{https://www.argmin.net/p/adaptive-ingredients}
+
+\url{https://www.argmin.net/p/three-paths-to-generalization}
+
+\begin{itemize}
+  \item Uniform Convergence -- Union Bound suffers from Curse of Dimensionality
+  \item Sequential Prediction -- requires to prove a Sequential Prediction Bound
+  \item Leave-one-out Approximations -- Algorithms robust to dropping or
+    resampling a data point are called \emph{Stable}
+\end{itemize}
+
 
 
 \subsubsection{Generalization Error}\label{sec:generalization_error}
 
-or \emph{Out-of-sample Error} or \emph{Risk}
+\emph{Out-of-sample Error}, \emph{External Error}, or \emph{(Population) Risk}
 
 \fist cf. Risk (Game Theory \S\ref{sec:risk})
 
 cf. Empirical Risk (\S\ref{sec:empirical_risk})
 
+\emph{Generalization Gap} -- difference between Training Error (Empirical Error
+\S\ref{sec:empirical_error}) and Generalization Error
+
+
+
+\subsubsection{Generalization Bounds}\label{sec:generalization_bounds}
+
+\url{https://mostafa-samir.github.io/ml-theory-pt2/}
+
+\url{https://www.argmin.net/p/holding-out-for-an-explanation} -- with
+appropriate simplifying assumptions, Theorems for Generalization Bounds
+don't require a Test Set: the output of the Optimization Algorithm Generalizes
 
 
 % ------------------------------------------------------------------------------
@@ -12458,7 +12546,7 @@ equivalent to Gaussian Processes (\S\ref{sec:gaussian_process}) in the
 
 \subparagraph{Support Vector Machine (SVM)}\label{sec:svm}\hfill
 
-or \emph{Perceptron of Optimal Stability}
+\emph{Support Vector Network} or \emph{Perceptron of Optimal Stability}
 
 an extension of the Perceptron (\S\ref{sec:perceptron}) Model where the
 Separating Hyperplanes are chosen to have the largest distance to the nearest
@@ -12887,6 +12975,13 @@ and substituting to solve for $\hat{\beta_0}$:
     Var(x)
   }
 \]
+
+
+
+\subsubsection{Calibration}\label{sec:calibration}
+
+\fist cf. Calibrated Probability Assessment (Forecasting
+\S\ref{sec:calibrated_probability})
 
 
 
@@ -14013,6 +14108,16 @@ allows Autoencoder to be used in Generative Models (\S\ref{sec:generative_model}
 
 
 % ------------------------------------------------------------------------------
+\subsection{Transfer Learning}\label{sec:transfer_learning}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Domain Adaptation}\label{sec:domain_adaptation}
+
+\url{https://www.argmin.net/p/adaptive-ingredients}
+
+
+
+% ------------------------------------------------------------------------------
 \subsection{Artificial Neural Network (ANN)}\label{sec:ann}
 % ------------------------------------------------------------------------------
 
@@ -15091,6 +15196,8 @@ Sumio Watanabe
 
 %FIXME: move section ???
 
+cf. Statistical Learning Theory (\S\ref{sec:statistical_learning})
+
 \url{http://www.argmin.net/2018/01/29/taxonomy/} -- three kinds of Machine
 Learning:
 \begin{enumerate}
@@ -15105,11 +15212,20 @@ Learning:
 \end{enumerate}
 also Semi-supervised Learning, Active Learning
 
+2016 - Samir - \emph{Machine Learning Theory} -
+\url{https://mostafa-samir.github.io/ml-theory-pt1/},
+\url{https://mostafa-samir.github.io/ml-theory-pt2/},
+\url{https://mostafa-samir.github.io/ml-theory-pt3/}
+
 2022 - Vertechi, Bergomi -
 \emph{Machines of finite depth: towards a formalization of neural networks}
 
 2021 - Cruttwell et al. - \emph{Categorical Foundations of Gradient-based
 Learning}
+
+
+\url{https://mlstory.org/index.html} - Hardt, Recht -
+\emph{Patterns, Predictions, and Actions: A story about machine learning}
 
 Parametric Lens (\S\ref{sec:parametric_lens}): fundamental Semantic structure of
 Learning
@@ -15338,7 +15454,20 @@ terms of opposing Reparametrizations (Gradient Descent and Gradient Ascent)
 
 
 
+\subsubsection{Offline Learning}\label{sec:offline_learning}
+
+\paragraph{Batch Learning}\label{sec:batch_learning}\hfill
+
+
+
+\subsubsection{Online Learning}\label{sec:online_learning}
+
 \subsubsection{Overfitting}\label{sec:overfitting}
+
+"overfitting doesn't exist" --
+\url{https://www.argmin.net/p/thou-shalt-not-overfit}
+
+
 
 \subsubsection{Distribution Shift}\label{sec:distribution_shift}
 
@@ -15404,11 +15533,14 @@ assuming the Exchangeability of the underlying Data
 
 \emph{Model Complexity} (\S\ref{sec:statistical_model})
 
+(wiki):
+
 measure of the capacity (expressive power) of a Space of Functions that can be
 Learned by a Statistical Classification Algorithm (\S\ref{sec:classification})
 
 defined as the Cardinality of the largest Set of Points that the Algorithm can
-\emph{Shatter} (\S\ref{sec:shattered_set})
+\emph{Shatter} (\S\ref{sec:shattered_set}), i.e. the Algorithm can always learn
+a Perfect Classifier for labeling at least one configuration of the Data Points
 
 
 
@@ -18376,13 +18508,33 @@ Symplectic Geometry (\S\ref{sec:symplectic_geometry})
 
 \subsubsection{Statistical Divergence}\label{sec:statistical_divergence}
 
-\subsubsection{Earthmover Distance}\label{sec:earthmover_distance}
+\paragraph{Squared Euclidean Distance}\label{sec:squared_euclidean_distance}
+\hfill
+
+\paragraph{Kullback-Leibler Divergence}\label{sec:kullback_leibler}\hfill
+
+can be used to characterize Relative Entropy (\S\ref{sec:relative_entropy}),
+Randomness (\S\ref{sec:statistical_randomness})
+
+defined between PDFs (\S\ref{sec:pdf})
+
+can be used to show Consistency of MLE (\S\ref{sec:mle})
+
+
+
+\paragraph{Earthmover Distance}\label{sec:earthmover_distance}\hfill
 
 \emph{Wasserstein Metric} or \emph{Kantrovich-Rubinstein Metric}
 
 a measure of ``nearness'' for Probability Distributions
 
 \url{https://jeremykun.com/2018/03/05/earthmover-distance/}
+
+
+
+\paragraph{Bregman Divergence}\label{sec:bregman_divergence}\hfill
+
+or \emph{Bregman Divergence}
 
 
 
