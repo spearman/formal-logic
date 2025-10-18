@@ -319,6 +319,15 @@ the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
 
 
 
+\subsubsection{Union Bound}\label{sec:union_bound}
+
+\emph{Boole's Inequality}
+\[
+  \prob\big(\bigcup_i A_i\big) \leq \sum_i P(A_i)
+\]
+
+
+
 % ------------------------------------------------------------------------------
 \subsection{Experimental Design}\label{sec:experimental_design}
 % ------------------------------------------------------------------------------
@@ -670,6 +679,23 @@ or \emph{Bayes Rule}
   P(A|B) = \frac{P(A)P(B|A)}{P(B)}
 \]
 
+$A$ -- ``Hypothesis''; Latent Variable
+
+$B$ -- ``Evidence''; Observed Data
+
+$P(A)$ -- Prior: initial Probability that Hypothesis or Latent Variable is true
+
+$P(B)$ -- Marginal: Probability of seeing the Evidence or Observed Data
+
+$P(B|A)$ -- Likelihood: Probability of seeing Observed Data if Hypothesis is
+true
+
+$P(A|B)$ -- Posterior: Probability that Hypothesis is true given Evidence or
+Observed Data
+
+Note ``\emph{Evidence}'' (\S\ref{sec:evidence}) in Variational Inference may
+specifically refer to the Log of the Marginal $\log P(B)$
+
 for a Partition $A_1, \ldots, A_k$ of $\Omega$ such that $P(A_i) > 0$ for all
 $i$, if $P(B) > 0$ then for $i \in \{1, \ldots, k\}$:
 \[
@@ -770,7 +796,7 @@ the Conditioning Event $C$ may be Disjoint, making them \emph{Dependent}
 
 \fist cf. Conditional Probability (\S\ref{sec:conditional_probability})
 
-\fist Bayesian Networks (\S\ref{sec:bayes_network});
+\fist Bayesian Networks (\S\ref{sec:belief_network});
 Markov Condition (\S\ref{sec:markov_condition}) -- every Node is Conditionally
 Independent (\S\ref{sec:conditional_independence}) of its Non-descendents, given
 its Parents
@@ -7838,7 +7864,7 @@ Linear Combination:
 \]
 (FIXME: clarify)
 
-a \emph{Bayesian Model} (Bayes Network \S\ref{sec:bayes_network}) is a
+a \emph{Bayesian Model} (Bayes Network \S\ref{sec:belief_network}) is a
 Hierarchical Model in which $k > 1$ and $\Theta^1 = \{0\}$ is the Trivial
 Functor, a one-point Set with Identity Map (FIXME: clarify)
 
@@ -8612,10 +8638,10 @@ Markov Random Fields (\S\ref{sec:markov_random_field})
 
 
 
-\paragraph{Bayes Network}\label{sec:bayes_network}\hfill
+\paragraph{Belief Network}\label{sec:belief_network}\hfill
 
-\emph{Belief Network}, \emph{Bayesian Model} or
-\emph{Probabilistic Directed Acyclic Graphical Model}
+\emph{(Probabilistic) Directed Acyclic Graphical Model},
+\emph{Belief Network}, or \emph{Bayesian Model}
 
 Bayesian Statistics (\S\ref{sec:bayesian_inference})
 
@@ -8690,6 +8716,8 @@ Random Effects Models (\S\ref{sec:random_effect})
 
 %FIXME: move section ?
 
+\fist Latent Profile Analysis (\S\ref{sec:latent_profile_analysis})
+
 Mixture Distribution (\S\ref{sec:mixture_distribution})
 
 Mixture Density Network (\S\ref{sec:mixture_density_network})
@@ -8714,10 +8742,12 @@ Dirichlet Distribution (\S\ref{sec:dirichlet_distribution})
 \begin{itemize}
   \item Factor Analysis (\S\ref{sec:factor_analysis}): Continuous Latent
     Variable, Continuous Observable Variable
-  \item Item Response Theory (\S\ref{sec:item_response_theory}): Continous
-    Latent Variable, Categorical Observable Variable
+  \item Item Response Theory (Latent Trait Analysis
+    \S\ref{sec:item_response_theory}): Continous Latent Variable, Categorical
+    Observable Variable
   \item Latent Profile Analysis (\S\ref{sec:latent_profile_analysis}):
-    Categorical Latent Variable, Continuous Observable Variable
+    Categorical Latent Variable, Continuous Observable Variable; Mixture Models
+    (\S\ref{sec:mixture_model})
   \item Latent Class Analysis (\S\ref{sec:latent_class_analysis}): Categorical
     Latent Variable, Categorical Observable Variable
 \end{itemize}
@@ -8756,13 +8786,21 @@ where $z = f^{-1}(x)$
 
 \paragraph{Item Response Theory}\label{sec:item_response_theory}\hfill
 
+or \emph{Latent Trait Analysis}
+
 Continous Latent Variable, Categorical Observable Variable
+
+
+
+\subparagraph{Rasch Model}\label{sec:rasch_model}\hfill
 
 
 
 \paragraph{Latent Profile Analysis}\label{sec:latent_profile_analysis}\hfill
 
 Categorical Latent Variable, Continuous Observable Variable
+
+\fist Mixture Models (\S\ref{sec:mixture_model})
 
 
 
@@ -8819,9 +8857,12 @@ Binomial Probabilities \fist Binomial Distribution
 
 \subsubsection{Continuous Uniform Law}\label{sec:continuous_uniform_law}
 
-\subsubsection{Variational Bayesian Method}\label{sec:variational_bayesian}
+\subsubsection{Variational Inference}\label{sec:variational_inference}
 
-\emph{Variational Inference}
+\emph{Variational Bayesian Method}
+
+``Variational'', i.e. Optimization over Functions (cf. Variational Calculus
+\S\ref{sec:variational_calculus})
 
 Free Energy Principle -- implicit Minimization of Variational Free Energy;
 Active Inference (Friston)
@@ -8841,7 +8882,18 @@ camera angle
 describe Posterior in terms of Bayes' Rule $p(z|x) = \frac{p(x|z) p(z)}{p(x)}$
 where $x$ is the Observed Dataset where Marginal $p(x)$ is intractible; instead
 find $q(z) \cong p(z|x)$ for a $q$ from a family of simple Distributions;
-KL-divergence Loss
+Goodness of Fit: Minimize Relative Entropy (KL-divergence) Loss
+
+\emph{Evidence}: $\log p(x)$
+
+Minimizing the KL-divergence of the ``surrogate'':
+\[
+q^*(z) = \argmin_{q(z) \in Q}\big(KL(q(z) \| p(z|x))\big)
+\]
+is equivalent to Maximizing the ELBO $L(q)$ of the surrogate:
+\[
+q^*(z) = \argmax_{q(z) \in Q}\big(L(q)\big)
+\]
 
 \url{https://www.youtube.com/watch?v=h0UE8FzdE8U} -
 \emph{Variational Inference and Deep Learning: An Intuitive Introduction}
@@ -10985,7 +11037,7 @@ Conditional Probabilities (\S\ref{sec:conditional_probability}), Bayes' Rule
 (\S\ref{sec:bayes_theorem})
 
 \fist Bayesian Network (Probabilistic Directed Acyclic Graphical Model
-\S\ref{sec:bayes_network})
+\S\ref{sec:belief_network})
 
 \fist Dirichlet Processes (\S\ref{sec:dirichlet_process})
 
@@ -11316,7 +11368,7 @@ Iteratively Re-weighted Least Squares (\S\ref{sec:irls}) -- equivalent to
 \fist Cross-entropy Error Function -- minimizing \emph{Negative Log-likelihood}
 is the same as minimizing Cross Entropy (\S\ref{sec:cross_entropy})
 
-Variational Bound (Variational Inference \S\ref{sec:variational_bayesian})
+Variational Bound (Variational Inference \S\ref{sec:variational_inference})
 
 
 
@@ -11339,7 +11391,22 @@ the Probability of generating the Observed Sample from a Prior
 
 \subparagraph{Evidence Lower BOund (ELBO)}\label{sec:elbo}\hfill
 
-Variational Bayes (\S\ref{sec:variational_bayes})
+Variational Bayes (\S\ref{sec:variational_inference})
+
+\url{https://www.youtube.com/watch?v=HxQ94L8n0vU}:
+
+Relative Entropy (KL-divergence):
+\[
+  KL = - L(q) + \log p(x)
+\]
+where:
+\[
+  L(q) = \expect_{z ~ q(z)}[\log \frac{p(z,d)}{q(z)}]
+\]
+
+$\log p(x)$ is the Evidence and $L(q)$ is the ``ELBO'' because
+$L(q) < \log p(x)$
+
 
 
 
@@ -11716,7 +11783,7 @@ Assigned; \emph{Confounding Variables}, \emph{Adjusted Treatment Effect}
 
 or \emph{Causal Network}
 
-\fist Bayesian Network (\S\ref{sec:bayes_network}) -- ``Dependency structure'';
+\fist Bayesian Network (\S\ref{sec:belief_network}) -- ``Dependency structure'';
 Probabilistic DAG (\S\ref{sec:dag})
 
 alternative to Counterfactuals for representing Causal Relations
@@ -12116,7 +12183,8 @@ cf. Domain Adaptation (\S\ref{sec:domain_adaptation})
 \url{https://www.argmin.net/p/three-paths-to-generalization}
 
 \begin{itemize}
-  \item Uniform Convergence -- Union Bound suffers from Curse of Dimensionality
+  \item Uniform Convergence -- Union Bound (\S\ref{sec:union_bound}) suffers
+    from Curse of Dimensionality
   \item Sequential Prediction -- requires to prove a Sequential Prediction Bound
   \item Leave-one-out Approximations -- Algorithms robust to dropping or
     resampling a data point are called \emph{Stable}
@@ -12144,6 +12212,25 @@ cf. Empirical Risk (\S\ref{sec:empirical_risk})
 \url{https://www.argmin.net/p/holding-out-for-an-explanation} -- with
 appropriate simplifying assumptions, Theorems for Generalization Bounds
 don't require a Test Set: the output of the Optimization Algorithm Generalizes
+
+
+% ------------------------------------------------------------------------------
+\subsection{Supervised Learning}\label{sec:supervised_learning}
+% ------------------------------------------------------------------------------
+
+find an Optimal Prediction given a subset of Data
+
+cf. Decision Theory (\S\ref{sec:decision_theory}) -- says what the Optimal
+Predictions would be if all Data is available in advance
+
+(Statistical) Classification (\S\ref{sec:classification}) -- Discrete Response
+Variable
+
+Regression Analysis (\S\ref{sec:regression_analysis}) -- Continuous Response
+Variable
+
+cf. Unsupervised Learning (Cluster Analysis \S\ref{sec:cluster_analysis})
+
 
 
 % ------------------------------------------------------------------------------
@@ -12372,7 +12459,7 @@ progressive lossy decompression scheme that can be interpreted as a
 generalization of Autoregressive Decoding (\S\ref{sec:autoregressive_model})
 
 a Diffusion Probabilistic Model is a Parameterized Markov Chain Trained using
-Variational Inference (\S\ref{sec:variational_bayesian}) to produce Samples
+Variational Inference (\S\ref{sec:variational_inference}) to produce Samples
 matching the Data after a finite time
 
 certain Parametrization of Diffusion Models reveals an equivalence with
@@ -14172,7 +14259,7 @@ uses sequential application of Denoising Auto-encoders for image generation
 Neural Network, forming an ``Autoencoder-like'' architecture
 
 VAEs make strong assumptions about the Distribution of Latent Variables, using a
-Variational Bayesian (\S\ref{sec:variational_bayesian}) approach for Latent
+Variational Bayesian (\S\ref{sec:variational_inference}) approach for Latent
 Representation Learning; uses a Stochastic Gradient Variational Bayes (SGVB)
 Estimator for the training algorithm
 
