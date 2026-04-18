@@ -14596,6 +14596,10 @@ Haskell -- $\mathtt{Numeric.Backprop}$ ($\mathtt{backprop}$ library)
 2018 - Le - \emph{A Purely Functional Typed Approach to Trainable Models} -
 \url{https://blog.jle.im/entry/purely-functional-typed-models-1.html}
 
+2026 - Hedges - \emph{Autodiff through function types: Categorical semantics the
+ultimate backpropagator} -
+\url{https://cybercat.institute/2026/02/20/categorical-semantics-ultimate-backpropagator/}
+
 process of ``Training'' a Regression Model (\S\ref{sec:regression_analysis});
 cf. Maximum Likelihood Estimation (MLE \S\ref{sec:mle})
 
@@ -14812,6 +14816,22 @@ Algebras instead of Groups and with Continuous Maps instead of Linear Maps''}
 Cross-correlation (\S\ref{sec:cross_correlation})
 
 ReLU activation
+
+2026 - Hedges - \emph{Autodiff through function types: Categorical semantics the
+ultimate backpropagator} -
+\url{https://cybercat.institute/2026/02/20/categorical-semantics-ultimate-backpropagator/}:
+
+a Deep Learning architecture consists of a Lens of the shape $f : A \times P \to
+B$ where $P$ is the Parameter Space
+
+Training (ignoring Batching and other compilcations) consists of taking an
+example pair $(a,b)$ from the Dataset and the current parameters $p$ and using a
+Loss Function that takes the predicted output $f(a,p)$ and the target output $b$
+and gives a Gradient $b'$ which is injected into the Backwards Pass $f'(a,p,b')$
+giving an input Gradient $a'$ and a parameter Gradient $p'$; the parameter
+Gradient $p'$ is sent to an Optimizer; the most simple Optimizer, Gradient
+Descent, updates the current parameters $p$ to $p - \epsilon p'$ where
+$\epsilon$ is the Learning Rate
 
 \asterism
 

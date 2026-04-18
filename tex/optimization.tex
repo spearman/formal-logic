@@ -1330,6 +1330,38 @@ Differentiation
 2018 - Betancourt -
 \emph{A Geometric Theory of Higher-Order Automatic Differentiation}
 
+2026 - Hedges - \emph{Autodiff through function types: Categorical semantics the
+ultimate backpropagator} -
+\url{https://cybercat.institute/2026/02/20/categorical-semantics-ultimate-backpropagator/}:
+
+the Categorical Semantics of Types in a Differentiable Language are
+``\emph{Additive Containers}'' (Set-indexed Families of Commutative Monoids)
+
+the Semantics of a Type is (1) a Set of values that the Type can have in the
+Forward Pass, and (2) for each of those values, a Commutative Monoid of
+Derivatives it can have at that value in the Backward Pass
+
+the Semantics of a Function $A \to B$ is an \emph{Additive Lens} between the
+Additive Containers $(A,A')$ and $(B,B')$; this consists of (1) an ordinary
+FUnction between Sets $f : A \to B$ describing the Semantics of the Forward Pass
+and (2) an $A$-indexed Family of Monoid Homomorphisms $f'(x,-)$ from the
+Commutative Monoid $B'(f(x))$ to $A'(x)$, i.e. they are Dependent Lenses whose
+Backward Passes are Additive on their second input; the Chain Rule for Lens
+Composition exactly describes the Denotational Semantics of how the Forwards and
+Backwards Passes interact in Automatic Differntiation
+
+a Deep Learning (\S\ref{sec:deep_learning}) architecture consists of a Lens of
+the shape $f : A \times P \to B$ where $P$ is the Parameter Space
+
+Training (ignoring Batching and other compilcations) consists of taking an
+example pair $(a,b)$ from the Dataset and the current parameters $p$ and using a
+Loss Function that takes the predicted output $f(a,p)$ and the target output $b$
+and gives a Gradient $b'$ which is injected into the Backwards Pass $f'(a,p,b')$
+giving an input Gradient $a'$ and a parameter Gradient $p'$; the parameter
+Gradient $p'$ is sent to an Optimizer; the most simple Optimizer, Gradient
+Descent, updates the current parameters $p$ to $p - \epsilon p'$ where
+$\epsilon$ is the Learning Rate
+
 \asterism
 
 \url{http://www.columbia.edu/~ahd2125/post/2015/12/5/} (includes Rust
