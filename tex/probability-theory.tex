@@ -1808,10 +1808,17 @@ Rate Function (Large Deviations \S\ref{sec:rate_function})
 \subsection{Characteristic Function}\label{sec:characteristic_function}
 % ------------------------------------------------------------------------------
 
-for a Scalar Random Variable $X$, the \emph{Characteristic Function} is the
-Expected Value of $e^{itX}$ where $i$ is the Imaginary Unit and $t \in \reals$
-is the Argument of the ``Characteristic Function''
-$\varphi_X : \reals \to \comps$:
+if the Random Variable admits a Probability Density Function then the
+\emph{Characteristic Function} is the \emph{Fourier Transform}
+(\S\ref{sec:fourier_transform}) of the Probability Density Function and vice
+versa:
+\[
+  \varphi_X(t) \equiv \int_{-\infty}^\infty e^{itx} p_X(x) \diffy{x}
+\]
+
+for a Scalar Random Variable $X$, the Characteristic Function is the Expected
+Value of $e^{itX}$ where $i$ is the Imaginary Unit and $t \in \reals$ is the
+Argument of the ``Characteristic Function'' $\varphi_X : \reals \to \comps$:
 \[
   \varphi_X(t) = E[e^{itX}] = \int_\reals e^{itx} dF_X(x)
 \]
@@ -1821,14 +1828,6 @@ the Integral is a Riemann-Sieltjes Integral (TODO: xref)
 like the Cumulative Distribution Function, the Characteristic Function
 completely determines the behavior and properties of the Probability
 Distribution
-
-if the Random Variable admits a Probability Density Function then the
-Characteristic Function is the \emph{Fourier Transform}
-(\S\ref{sec:fourier_transform}) of the Probability Density Function and vice
-versa:
-\[
-  \varphi_X(t) \equiv \int_{-\infty}^\infty e^{itx} p_X(x) \diffy{x}
-\]
 
 \url{https://www.youtube.com/watch?v=NJL-BX6HuxY}:
 
@@ -2325,9 +2324,19 @@ Large Deviations Theory (\S\ref{sec:large_deviations_theory})
 \section{Probability Distribution}\label{sec:probability_distribution}
 % ==============================================================================
 
-any Probability Distribution defines a Probability Measure
-(\S\ref{sec:probability_measure}) as the Pushforward Measure
-(\S\ref{sec:pushforward_measure}) of a Random Variable
+a \emph{Probability Distribution} is an umbrella term that refers to a
+particular type of object that can be represented in multiple ways:
+\begin{enumerate}
+  \item through its Probability Measure (\S\ref{sec:probability_measure})
+  \item through its Cumulative Distribution Function (\S\ref{sec:cdf})
+  \item through its Probability Density Function (\S\ref{sec:pdf})
+  \item through its Characteristic Function
+    (\S\ref{sec:characteristic_function})
+\end{enumerate}
+(\url{https://stats.stackexchange.com/a/564371})
+
+any Probability Distribution defines a Probability Measure as the Pushforward
+Measure (\S\ref{sec:pushforward_measure}) of a Random Variable
 (\S\ref{sec:random_variable})
 
 a Probability Distribution is given by its Cumulative Distribution Function
@@ -2335,14 +2344,16 @@ a Probability Distribution is given by its Cumulative Distribution Function
 Set of all such Functions is equal to the Cardinality of the Reals, $|\reals|$
 
 \emph{Probability Distribution Function} of a Random Variable $X$ often means
-the CDF $F_X$, but can also refer
-to:
+the CDF $F_X$, but can also refer to:
 \begin{itemize}
   \item Probability Mass Function (\S\ref{sec:pmf}) -- Discrete Probability
     Distributions (\S\ref{sec:discrete_probability})
   \item Probability Density Function (\S\ref{sec:pdf}) -- Continuous Probability
     Distributions (\S\ref{sec:continuous_probability})
 \end{itemize}
+
+the Fourier Transform (with sign reversal) of the Probability Density Function
+is called the Distribution's \emph{Characteristic Function}
 
 the \emph{Support} (\S\ref{sec:distribution_support}) of a Probability
 Distribution is the smallest Closed Set whose Complement has Probability $0$
